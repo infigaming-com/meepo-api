@@ -335,7 +335,12 @@ service User {
 
 	rpc SetOperatorRegistrationFieldConfig(SetOperatorRegistrationFieldConfigRequest) returns (SetOperatorRegistrationFieldConfigResponse) {}
 
-	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {}
+	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/registration-field-config/get"
+			body: "*"
+		};
+	}
 
 	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
 		option (google.api.http) = {
@@ -1162,6 +1167,7 @@ message GetOverviewDashboardFromUserResponse {
 
 message DeleteRoleRequest {
 	int64 role_id = 1;
+	common.OperatorContext operator_context = 2;
 }
 
 message DeleteRoleResponse {}

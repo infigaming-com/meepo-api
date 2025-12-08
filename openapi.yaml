@@ -5633,6 +5633,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
+    /v1/user/operator/registration-field-config/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetOperatorRegistrationFieldConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigResponse'
     /v1/user/responsible-gambling/config/add:
         post:
             tags:
@@ -16487,6 +16505,13 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.user.service.v1.GetOperatorRegistrationFieldConfigRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.GetOperatorRegistrationFieldConfigResponse:
             type: object
             properties:

@@ -102,7 +102,7 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/register-limit-config/set", _BackofficeOperator_SetOperatorRegisterLimitConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/register-limit-config/get", _BackofficeOperator_GetOperatorRegisterLimitConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/registration-field-config/set", _BackofficeOperator_SetOperatorRegistrationFieldConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/operator/registration-field-config/get", _BackofficeOperator_GetOperatorRegistrationFieldConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/registration-field-config/get", _BackofficeOperator_GetOperatorRegistrationFieldConfig1_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -567,7 +567,7 @@ func _BackofficeOperator_SetOperatorRegistrationFieldConfig0_HTTP_Handler(srv Ba
 	}
 }
 
-func _BackofficeOperator_GetOperatorRegistrationFieldConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+func _BackofficeOperator_GetOperatorRegistrationFieldConfig1_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetOperatorRegistrationFieldConfigRequest
 		if err := ctx.Bind(&in); err != nil {

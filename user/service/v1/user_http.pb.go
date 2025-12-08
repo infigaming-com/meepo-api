@@ -28,6 +28,7 @@ const OperationUserDeleteResponsibleGamblingConfig = "/api.user.service.v1.User/
 const OperationUserGetClaimableVipRewards = "/api.user.service.v1.User/GetClaimableVipRewards"
 const OperationUserGetDailyLossbackStatus = "/api.user.service.v1.User/GetDailyLossbackStatus"
 const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOperatorAccountSettings"
+const OperationUserGetOperatorRegistrationFieldConfig = "/api.user.service.v1.User/GetOperatorRegistrationFieldConfig"
 const OperationUserGetOperatorVipSettings = "/api.user.service.v1.User/GetOperatorVipSettings"
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
@@ -58,6 +59,7 @@ type UserHTTPServer interface {
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
 	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
+	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*GetOperatorRegistrationFieldConfigResponse, error)
 	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
 	// GetUser Get user information by userId.
@@ -119,6 +121,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/get", _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/user/operator/registration-field-config/get", _User_GetOperatorRegistrationFieldConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/account/update", _User_CloseAccount0_HTTP_Handler(srv))
 	r.POST("/v1/user/vip/operator/settings/get", _User_GetOperatorVipSettings0_HTTP_Handler(srv))
 	r.POST("/v1/user/vip/level/get", _User_GetUserVipLevel0_HTTP_Handler(srv))
@@ -548,6 +551,28 @@ func _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(c
 	}
 }
 
+func _User_GetOperatorRegistrationFieldConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorRegistrationFieldConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetOperatorRegistrationFieldConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorRegistrationFieldConfig(ctx, req.(*GetOperatorRegistrationFieldConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetOperatorRegistrationFieldConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _User_CloseAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CloseAccountRequest
@@ -755,6 +780,7 @@ type UserHTTPClient interface {
 	GetClaimableVipRewards(ctx context.Context, req *GetClaimableVipRewardsRequest, opts ...http.CallOption) (rsp *v1.GetClaimableVipRewardsResponse, err error)
 	GetDailyLossbackStatus(ctx context.Context, req *GetDailyLossbackStatusRequest, opts ...http.CallOption) (rsp *v1.GetDailyLossbackStatusResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorAccountSettingsResponse, err error)
+	GetOperatorRegistrationFieldConfig(ctx context.Context, req *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *GetOperatorRegistrationFieldConfigResponse, err error)
 	GetOperatorVipSettings(ctx context.Context, req *GetOperatorVipSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorVipSettingsResponse, err error)
 	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
 	// GetUser Get user information by userId.
@@ -899,6 +925,19 @@ func (c *UserHTTPClientImpl) GetOperatorAccountSettings(ctx context.Context, in 
 	pattern := "/v1/user/operator/account-settings/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (*GetOperatorRegistrationFieldConfigResponse, error) {
+	var out GetOperatorRegistrationFieldConfigResponse
+	pattern := "/v1/user/operator/registration-field-config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetOperatorRegistrationFieldConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
