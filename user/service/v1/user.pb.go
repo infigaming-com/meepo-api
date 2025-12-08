@@ -13636,7 +13636,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xd7X\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\x91Y\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -13717,8 +13717,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aListRegisterLoginBlacklist\x126.api.user.service.v1.ListRegisterLoginBlacklistRequest\x1a7.api.user.service.v1.ListRegisterLoginBlacklistResponse\"\x00\x12\x9b\x01\n" +
 	"\x1eSetOperatorRegisterLimitConfig\x12:.api.user.service.v1.SetOperatorRegisterLimitConfigRequest\x1a;.api.user.service.v1.SetOperatorRegisterLimitConfigResponse\"\x00\x12\x9b\x01\n" +
 	"\x1eGetOperatorRegisterLimitConfig\x12:.api.user.service.v1.GetOperatorRegisterLimitConfigRequest\x1a;.api.user.service.v1.GetOperatorRegisterLimitConfigResponse\"\x00\x12\xa7\x01\n" +
-	"\"SetOperatorRegistrationFieldConfig\x12>.api.user.service.v1.SetOperatorRegistrationFieldConfigRequest\x1a?.api.user.service.v1.SetOperatorRegistrationFieldConfigResponse\"\x00\x12\xa7\x01\n" +
-	"\"GetOperatorRegistrationFieldConfig\x12>.api.user.service.v1.GetOperatorRegistrationFieldConfigRequest\x1a?.api.user.service.v1.GetOperatorRegistrationFieldConfigResponse\"\x00\x12\x87\x01\n" +
+	"\"SetOperatorRegistrationFieldConfig\x12>.api.user.service.v1.SetOperatorRegistrationFieldConfigRequest\x1a?.api.user.service.v1.SetOperatorRegistrationFieldConfigResponse\"\x00\x12\xe1\x01\n" +
+	"\"GetOperatorRegistrationFieldConfig\x12>.api.user.service.v1.GetOperatorRegistrationFieldConfigRequest\x1a?.api.user.service.v1.GetOperatorRegistrationFieldConfigResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/user/operator/registration-field-config/get\x12\x87\x01\n" +
 	"\fCloseAccount\x12(.api.user.service.v1.CloseAccountRequest\x1a).api.user.service.v1.CloseAccountResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/user/account/update\x12\xaf\x01\n" +
 	"\x16GetOperatorVipSettings\x122.api.user.service.v1.GetOperatorVipSettingsRequest\x1a2.api.vip.service.v1.GetOperatorVipSettingsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/user/vip/operator/settings/get\x12\x8e\x01\n" +
 	"\x0fGetUserVipLevel\x12+.api.user.service.v1.GetUserVipLevelRequest\x1a+.api.vip.service.v1.GetUserVipLevelResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/vip/level/get\x12\xab\x01\n" +

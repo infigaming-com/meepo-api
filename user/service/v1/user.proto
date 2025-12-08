@@ -335,7 +335,12 @@ service User {
 
 	rpc SetOperatorRegistrationFieldConfig(SetOperatorRegistrationFieldConfigRequest) returns (SetOperatorRegistrationFieldConfigResponse) {}
 
-	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {}
+	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/registration-field-config/get"
+			body: "*"
+		};
+	}
 
 	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
 		option (google.api.http) = {
