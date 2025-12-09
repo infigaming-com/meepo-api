@@ -2785,6 +2785,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/registration-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            description: GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+            operationId: BackofficeOperator_GetOperatorRegistrationConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegistrationConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegistrationConfigResponse'
     /v1/backoffice/operator/registration-config/set:
         post:
             tags:
@@ -9155,6 +9174,19 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorRegistrationConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetOperatorRegistrationConfigRequest is a combined request for getting both register limit config and registration field config
+        api.backoffice.service.v1.GetOperatorRegistrationConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRegistrationConfig'
         api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest:
             type: object
             properties:

@@ -184,6 +184,14 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	// GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+	rpc GetOperatorRegistrationConfig(GetOperatorRegistrationConfigRequest) returns (GetOperatorRegistrationConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/registration-config/get"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -411,3 +419,12 @@ message SetOperatorRegistrationConfigRequest {
 }
 
 message SetOperatorRegistrationConfigResponse {}
+
+// GetOperatorRegistrationConfigRequest is a combined request for getting both register limit config and registration field config
+message GetOperatorRegistrationConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message GetOperatorRegistrationConfigResponse {
+	map<string, OperatorRegistrationConfig> config = 1;
+}
