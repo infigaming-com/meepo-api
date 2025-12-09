@@ -2785,6 +2785,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/registration-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            description: SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+            operationId: BackofficeOperator_SetOperatorRegistrationConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegistrationConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegistrationConfigResponse'
     /v1/backoffice/operator/registration-field-config/get:
         post:
             tags:
@@ -13465,6 +13484,17 @@ components:
                     type: string
                 minLaunchBalance:
                     type: string
+        api.backoffice.service.v1.OperatorRegistrationConfig:
+            type: object
+            properties:
+                registrationLimitPerIp:
+                    type: integer
+                    format: int32
+                registration:
+                    $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+                login:
+                    $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+            description: OperatorRegistrationConfig is a combined config containing both limit and field settings
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
             properties:
@@ -13719,6 +13749,19 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.backoffice.service.v1.SetOperatorRegistrationConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRegistrationConfig'
+            description: SetOperatorRegistrationConfigRequest is a combined request for setting both register limit config and registration field config
+        api.backoffice.service.v1.SetOperatorRegistrationConfigResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest:
             type: object
             properties:

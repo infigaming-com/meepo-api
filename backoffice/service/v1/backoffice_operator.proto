@@ -176,6 +176,14 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	// SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+	rpc SetOperatorRegistrationConfig(SetOperatorRegistrationConfigRequest) returns (SetOperatorRegistrationConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/registration-config/set"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -389,3 +397,17 @@ message GetOperatorRegistrationFieldConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 }
 
+// OperatorRegistrationConfig is a combined config containing both limit and field settings
+message OperatorRegistrationConfig {
+	int32 registration_limit_per_ip = 1;
+	user.service.v1.RegistrationFieldSet registration = 2;
+	user.service.v1.RegistrationFieldSet login = 3;
+}
+
+// SetOperatorRegistrationConfigRequest is a combined request for setting both register limit config and registration field config
+message SetOperatorRegistrationConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	map<string, OperatorRegistrationConfig> config = 2;
+}
+
+message SetOperatorRegistrationConfigResponse {}
