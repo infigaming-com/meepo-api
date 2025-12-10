@@ -198,6 +198,362 @@ func (x *PreLaunchCheckResponse) GetThreshhold() string {
 	return ""
 }
 
+type NotificationChannelConfig struct {
+	state         protoimpl.MessageState                    `protogen:"open.v1"`
+	Telegram      *NotificationChannelConfig_TelegramConfig `protobuf:"bytes,1,opt,name=telegram,proto3" json:"telegram,omitempty"`
+	Slack         *NotificationChannelConfig_SlackConfig    `protobuf:"bytes,2,opt,name=slack,proto3" json:"slack,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NotificationChannelConfig) Reset() {
+	*x = NotificationChannelConfig{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NotificationChannelConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotificationChannelConfig) ProtoMessage() {}
+
+func (x *NotificationChannelConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotificationChannelConfig.ProtoReflect.Descriptor instead.
+func (*NotificationChannelConfig) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *NotificationChannelConfig) GetTelegram() *NotificationChannelConfig_TelegramConfig {
+	if x != nil {
+		return x.Telegram
+	}
+	return nil
+}
+
+func (x *NotificationChannelConfig) GetSlack() *NotificationChannelConfig_SlackConfig {
+	if x != nil {
+		return x.Slack
+	}
+	return nil
+}
+
+type UpdateOperatorNotificationChannelsRequest struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	OperatorId    int64                      `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	ChannelType   string                     `protobuf:"bytes,2,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
+	Config        *NotificationChannelConfig `protobuf:"bytes,3,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateOperatorNotificationChannelsRequest) Reset() {
+	*x = UpdateOperatorNotificationChannelsRequest{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOperatorNotificationChannelsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOperatorNotificationChannelsRequest) ProtoMessage() {}
+
+func (x *UpdateOperatorNotificationChannelsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOperatorNotificationChannelsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorNotificationChannelsRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateOperatorNotificationChannelsRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *UpdateOperatorNotificationChannelsRequest) GetChannelType() string {
+	if x != nil {
+		return x.ChannelType
+	}
+	return ""
+}
+
+func (x *UpdateOperatorNotificationChannelsRequest) GetConfig() *NotificationChannelConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+type UpdateOperatorNotificationChannelsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateOperatorNotificationChannelsResponse) Reset() {
+	*x = UpdateOperatorNotificationChannelsResponse{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOperatorNotificationChannelsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOperatorNotificationChannelsResponse) ProtoMessage() {}
+
+func (x *UpdateOperatorNotificationChannelsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOperatorNotificationChannelsResponse.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorNotificationChannelsResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{6}
+}
+
+type GetOperatorNotificationChannelsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	ChannelType   string                 `protobuf:"bytes,2,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorNotificationChannelsRequest) Reset() {
+	*x = GetOperatorNotificationChannelsRequest{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorNotificationChannelsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorNotificationChannelsRequest) ProtoMessage() {}
+
+func (x *GetOperatorNotificationChannelsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorNotificationChannelsRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorNotificationChannelsRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetOperatorNotificationChannelsRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *GetOperatorNotificationChannelsRequest) GetChannelType() string {
+	if x != nil {
+		return x.ChannelType
+	}
+	return ""
+}
+
+type GetOperatorNotificationChannelsResponse struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Config        *NotificationChannelConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorNotificationChannelsResponse) Reset() {
+	*x = GetOperatorNotificationChannelsResponse{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorNotificationChannelsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorNotificationChannelsResponse) ProtoMessage() {}
+
+func (x *GetOperatorNotificationChannelsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorNotificationChannelsResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorNotificationChannelsResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetOperatorNotificationChannelsResponse) GetConfig() *NotificationChannelConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+type NotificationChannelConfig_TelegramConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	BotToken      string                 `protobuf:"bytes,2,opt,name=bot_token,json=botToken,proto3" json:"bot_token,omitempty"`
+	ChatId        string                 `protobuf:"bytes,3,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NotificationChannelConfig_TelegramConfig) Reset() {
+	*x = NotificationChannelConfig_TelegramConfig{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NotificationChannelConfig_TelegramConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotificationChannelConfig_TelegramConfig) ProtoMessage() {}
+
+func (x *NotificationChannelConfig_TelegramConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotificationChannelConfig_TelegramConfig.ProtoReflect.Descriptor instead.
+func (*NotificationChannelConfig_TelegramConfig) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{4, 0}
+}
+
+func (x *NotificationChannelConfig_TelegramConfig) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *NotificationChannelConfig_TelegramConfig) GetBotToken() string {
+	if x != nil {
+		return x.BotToken
+	}
+	return ""
+}
+
+func (x *NotificationChannelConfig_TelegramConfig) GetChatId() string {
+	if x != nil {
+		return x.ChatId
+	}
+	return ""
+}
+
+type NotificationChannelConfig_SlackConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	WebhookUrl    string                 `protobuf:"bytes,2,opt,name=webhook_url,json=webhookUrl,proto3" json:"webhook_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NotificationChannelConfig_SlackConfig) Reset() {
+	*x = NotificationChannelConfig_SlackConfig{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NotificationChannelConfig_SlackConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotificationChannelConfig_SlackConfig) ProtoMessage() {}
+
+func (x *NotificationChannelConfig_SlackConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotificationChannelConfig_SlackConfig.ProtoReflect.Descriptor instead.
+func (*NotificationChannelConfig_SlackConfig) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{4, 1}
+}
+
+func (x *NotificationChannelConfig_SlackConfig) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *NotificationChannelConfig_SlackConfig) GetWebhookUrl() string {
+	if x != nil {
+		return x.WebhookUrl
+	}
+	return ""
+}
+
 var File_user_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_operator_proto_rawDesc = "" +
@@ -212,10 +568,35 @@ const file_user_service_v1_operator_proto_rawDesc = "" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x12\x1e\n" +
 	"\n" +
 	"threshhold\x18\x02 \x01(\tR\n" +
-	"threshhold2\xfa\x01\n" +
+	"threshhold\"\xf4\x02\n" +
+	"\x19NotificationChannelConfig\x12Y\n" +
+	"\btelegram\x18\x01 \x01(\v2=.api.user.service.v1.NotificationChannelConfig.TelegramConfigR\btelegram\x12P\n" +
+	"\x05slack\x18\x02 \x01(\v2:.api.user.service.v1.NotificationChannelConfig.SlackConfigR\x05slack\x1a`\n" +
+	"\x0eTelegramConfig\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1b\n" +
+	"\tbot_token\x18\x02 \x01(\tR\bbotToken\x12\x17\n" +
+	"\achat_id\x18\x03 \x01(\tR\x06chatId\x1aH\n" +
+	"\vSlackConfig\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
+	"\vwebhook_url\x18\x02 \x01(\tR\n" +
+	"webhookUrl\"\xb7\x01\n" +
+	")UpdateOperatorNotificationChannelsRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12!\n" +
+	"\fchannel_type\x18\x02 \x01(\tR\vchannelType\x12F\n" +
+	"\x06config\x18\x03 \x01(\v2..api.user.service.v1.NotificationChannelConfigR\x06config\",\n" +
+	"*UpdateOperatorNotificationChannelsResponse\"l\n" +
+	"&GetOperatorNotificationChannelsRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12!\n" +
+	"\fchannel_type\x18\x02 \x01(\tR\vchannelType\"q\n" +
+	"'GetOperatorNotificationChannelsResponse\x12F\n" +
+	"\x06config\x18\x01 \x01(\v2..api.user.service.v1.NotificationChannelConfigR\x06config2\xc5\x04\n" +
 	"\bOperator\x12\x80\x01\n" +
 	"\x15AddWhiteLabelOperator\x121.api.user.service.v1.AddWhiteLabelOperatorRequest\x1a2.api.user.service.v1.AddWhiteLabelOperatorResponse\"\x00\x12k\n" +
-	"\x0ePreLaunchCheck\x12*.api.user.service.v1.PreLaunchCheckRequest\x1a+.api.user.service.v1.PreLaunchCheckResponse\"\x00BO\n" +
+	"\x0ePreLaunchCheck\x12*.api.user.service.v1.PreLaunchCheckRequest\x1a+.api.user.service.v1.PreLaunchCheckResponse\"\x00\x12\xa7\x01\n" +
+	"\"UpdateOperatorNotificationChannels\x12>.api.user.service.v1.UpdateOperatorNotificationChannelsRequest\x1a?.api.user.service.v1.UpdateOperatorNotificationChannelsResponse\"\x00\x12\x9e\x01\n" +
+	"\x1fGetOperatorNotificationChannels\x12;.api.user.service.v1.GetOperatorNotificationChannelsRequest\x1a<.api.user.service.v1.GetOperatorNotificationChannelsResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -230,25 +611,40 @@ func file_user_service_v1_operator_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_operator_proto_rawDescData
 }
 
-var file_user_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_user_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_user_service_v1_operator_proto_goTypes = []any{
-	(*AddWhiteLabelOperatorRequest)(nil),  // 0: api.user.service.v1.AddWhiteLabelOperatorRequest
-	(*AddWhiteLabelOperatorResponse)(nil), // 1: api.user.service.v1.AddWhiteLabelOperatorResponse
-	(*PreLaunchCheckRequest)(nil),         // 2: api.user.service.v1.PreLaunchCheckRequest
-	(*PreLaunchCheckResponse)(nil),        // 3: api.user.service.v1.PreLaunchCheckResponse
-	(*common.OperatorContext)(nil),        // 4: api.common.OperatorContext
+	(*AddWhiteLabelOperatorRequest)(nil),               // 0: api.user.service.v1.AddWhiteLabelOperatorRequest
+	(*AddWhiteLabelOperatorResponse)(nil),              // 1: api.user.service.v1.AddWhiteLabelOperatorResponse
+	(*PreLaunchCheckRequest)(nil),                      // 2: api.user.service.v1.PreLaunchCheckRequest
+	(*PreLaunchCheckResponse)(nil),                     // 3: api.user.service.v1.PreLaunchCheckResponse
+	(*NotificationChannelConfig)(nil),                  // 4: api.user.service.v1.NotificationChannelConfig
+	(*UpdateOperatorNotificationChannelsRequest)(nil),  // 5: api.user.service.v1.UpdateOperatorNotificationChannelsRequest
+	(*UpdateOperatorNotificationChannelsResponse)(nil), // 6: api.user.service.v1.UpdateOperatorNotificationChannelsResponse
+	(*GetOperatorNotificationChannelsRequest)(nil),     // 7: api.user.service.v1.GetOperatorNotificationChannelsRequest
+	(*GetOperatorNotificationChannelsResponse)(nil),    // 8: api.user.service.v1.GetOperatorNotificationChannelsResponse
+	(*NotificationChannelConfig_TelegramConfig)(nil),   // 9: api.user.service.v1.NotificationChannelConfig.TelegramConfig
+	(*NotificationChannelConfig_SlackConfig)(nil),      // 10: api.user.service.v1.NotificationChannelConfig.SlackConfig
+	(*common.OperatorContext)(nil),                     // 11: api.common.OperatorContext
 }
 var file_user_service_v1_operator_proto_depIdxs = []int32{
-	4, // 0: api.user.service.v1.PreLaunchCheckRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0, // 1: api.user.service.v1.Operator.AddWhiteLabelOperator:input_type -> api.user.service.v1.AddWhiteLabelOperatorRequest
-	2, // 2: api.user.service.v1.Operator.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
-	1, // 3: api.user.service.v1.Operator.AddWhiteLabelOperator:output_type -> api.user.service.v1.AddWhiteLabelOperatorResponse
-	3, // 4: api.user.service.v1.Operator.PreLaunchCheck:output_type -> api.user.service.v1.PreLaunchCheckResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	11, // 0: api.user.service.v1.PreLaunchCheckRequest.target_operator_context:type_name -> api.common.OperatorContext
+	9,  // 1: api.user.service.v1.NotificationChannelConfig.telegram:type_name -> api.user.service.v1.NotificationChannelConfig.TelegramConfig
+	10, // 2: api.user.service.v1.NotificationChannelConfig.slack:type_name -> api.user.service.v1.NotificationChannelConfig.SlackConfig
+	4,  // 3: api.user.service.v1.UpdateOperatorNotificationChannelsRequest.config:type_name -> api.user.service.v1.NotificationChannelConfig
+	4,  // 4: api.user.service.v1.GetOperatorNotificationChannelsResponse.config:type_name -> api.user.service.v1.NotificationChannelConfig
+	0,  // 5: api.user.service.v1.Operator.AddWhiteLabelOperator:input_type -> api.user.service.v1.AddWhiteLabelOperatorRequest
+	2,  // 6: api.user.service.v1.Operator.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
+	5,  // 7: api.user.service.v1.Operator.UpdateOperatorNotificationChannels:input_type -> api.user.service.v1.UpdateOperatorNotificationChannelsRequest
+	7,  // 8: api.user.service.v1.Operator.GetOperatorNotificationChannels:input_type -> api.user.service.v1.GetOperatorNotificationChannelsRequest
+	1,  // 9: api.user.service.v1.Operator.AddWhiteLabelOperator:output_type -> api.user.service.v1.AddWhiteLabelOperatorResponse
+	3,  // 10: api.user.service.v1.Operator.PreLaunchCheck:output_type -> api.user.service.v1.PreLaunchCheckResponse
+	6,  // 11: api.user.service.v1.Operator.UpdateOperatorNotificationChannels:output_type -> api.user.service.v1.UpdateOperatorNotificationChannelsResponse
+	8,  // 12: api.user.service.v1.Operator.GetOperatorNotificationChannels:output_type -> api.user.service.v1.GetOperatorNotificationChannelsResponse
+	9,  // [9:13] is the sub-list for method output_type
+	5,  // [5:9] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_operator_proto_init() }
@@ -262,7 +658,7 @@ func file_user_service_v1_operator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_operator_proto_rawDesc), len(file_user_service_v1_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

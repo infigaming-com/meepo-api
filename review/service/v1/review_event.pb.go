@@ -117,6 +117,130 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_review_service_v1_review_event_proto_rawDescGZIP(), []int{1}
 }
 
+type WithdrawRequestEvent struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TicketId           int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId   int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName       string                 `protobuf:"bytes,6,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	TicketType         string                 `protobuf:"bytes,7,opt,name=ticket_type,json=ticketType,proto3" json:"ticket_type,omitempty"`
+	Currency           string                 `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawAmount     string                 `protobuf:"bytes,9,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
+	UserId             int64                  `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CreatedAt          int64                  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *WithdrawRequestEvent) Reset() {
+	*x = WithdrawRequestEvent{}
+	mi := &file_review_service_v1_review_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WithdrawRequestEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WithdrawRequestEvent) ProtoMessage() {}
+
+func (x *WithdrawRequestEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WithdrawRequestEvent.ProtoReflect.Descriptor instead.
+func (*WithdrawRequestEvent) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *WithdrawRequestEvent) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
+func (x *WithdrawRequestEvent) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *WithdrawRequestEvent) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *WithdrawRequestEvent) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *WithdrawRequestEvent) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *WithdrawRequestEvent) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *WithdrawRequestEvent) GetTicketType() string {
+	if x != nil {
+		return x.TicketType
+	}
+	return ""
+}
+
+func (x *WithdrawRequestEvent) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *WithdrawRequestEvent) GetWithdrawAmount() string {
+	if x != nil {
+		return x.WithdrawAmount
+	}
+	return ""
+}
+
+func (x *WithdrawRequestEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *WithdrawRequestEvent) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
 var File_review_service_v1_review_event_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_review_event_proto_rawDesc = "" +
@@ -128,7 +252,23 @@ const file_review_service_v1_review_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse2c\n" +
+	"\rEventResponse\"\xa7\x03\n" +
+	"\x14WithdrawRequestEvent\x12\x1b\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x03 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18\x06 \x01(\tR\foperatorName\x12\x1f\n" +
+	"\vticket_type\x18\a \x01(\tR\n" +
+	"ticketType\x12\x1a\n" +
+	"\bcurrency\x18\b \x01(\tR\bcurrency\x12'\n" +
+	"\x0fwithdraw_amount\x18\t \x01(\tR\x0ewithdrawAmount\x12\x17\n" +
+	"\auser_id\x18\n" +
+	" \x01(\x03R\x06userId\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\v \x01(\x03R\tcreatedAt2c\n" +
 	"\vReviewEvent\x12T\n" +
 	"\x05Event\x12#.api.review.service.v1.EventRequest\x1a$.api.review.service.v1.EventResponse\"\x00BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
@@ -145,10 +285,11 @@ func file_review_service_v1_review_event_proto_rawDescGZIP() []byte {
 	return file_review_service_v1_review_event_proto_rawDescData
 }
 
-var file_review_service_v1_review_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_review_service_v1_review_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_review_service_v1_review_event_proto_goTypes = []any{
-	(*EventRequest)(nil),  // 0: api.review.service.v1.EventRequest
-	(*EventResponse)(nil), // 1: api.review.service.v1.EventResponse
+	(*EventRequest)(nil),         // 0: api.review.service.v1.EventRequest
+	(*EventResponse)(nil),        // 1: api.review.service.v1.EventResponse
+	(*WithdrawRequestEvent)(nil), // 2: api.review.service.v1.WithdrawRequestEvent
 }
 var file_review_service_v1_review_event_proto_depIdxs = []int32{
 	0, // 0: api.review.service.v1.ReviewEvent.Event:input_type -> api.review.service.v1.EventRequest
@@ -171,7 +312,7 @@ func file_review_service_v1_review_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_review_service_v1_review_event_proto_rawDesc), len(file_review_service_v1_review_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
