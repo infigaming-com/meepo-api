@@ -204,6 +204,48 @@ service Game {
 	rpc GetDepositCreditsGGR(GetDepositCreditsGGRRequest) returns (GetDepositCreditsGGRResponse) {
 	}
 
+	// ============== Game Tags APIs ==============
+
+	// List tags visible to operator (with inheritance)
+	rpc BackofficeListGameTags(BackofficeListGameTagsRequest) returns (BackofficeListGameTagsResponse) {
+	}
+
+	// Create tag at operator's own level
+	rpc BackofficeCreateGameTag(BackofficeCreateGameTagRequest) returns (BackofficeCreateGameTagResponse) {
+	}
+
+	// Delete tag (own level or lower only)
+	rpc BackofficeDeleteGameTag(BackofficeDeleteGameTagRequest) returns (BackofficeDeleteGameTagResponse) {
+	}
+
+	// Add games to a tag
+	rpc BackofficeAddGamesToTag(BackofficeAddGamesToTagRequest) returns (BackofficeAddGamesToTagResponse) {
+	}
+
+	// Remove games from a tag
+	rpc BackofficeRemoveGamesFromTag(BackofficeRemoveGamesFromTagRequest) returns (BackofficeRemoveGamesFromTagResponse) {
+	}
+
+	// Add provider to tag (adds all its games)
+	rpc BackofficeAddProviderToTag(BackofficeAddProviderToTagRequest) returns (BackofficeAddProviderToTagResponse) {
+	}
+
+	// Remove provider from tag
+	rpc BackofficeRemoveProviderFromTag(BackofficeRemoveProviderFromTagRequest) returns (BackofficeRemoveProviderFromTagResponse) {
+	}
+
+	// Update game order inside a tag
+	rpc BackofficeUpdateGameOrderInTag(BackofficeUpdateGameOrderInTagRequest) returns (BackofficeUpdateGameOrderInTagResponse) {
+	}
+
+	// List providers under a tag
+	rpc BackofficeListProvidersUnderTag(BackofficeListProvidersUnderTagRequest) returns (BackofficeListProvidersUnderTagResponse) {
+	}
+
+	// List games under a tag (paginated)
+	rpc BackofficeListGamesUnderTag(BackofficeListGamesUnderTagRequest) returns (BackofficeListGamesUnderTagResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -1730,4 +1772,131 @@ message GetDepositCreditsGGRResponse {
 	}
 	
 	repeated DepositData deposit_data = 1; // 按存款记录分组的数据列表
+}
+
+// ============== Game Tags Messages ==============
+
+message BackofficeListGameTagsRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message BackofficeListGameTagsResponse {
+	message GameTag {
+		int64 tag_id = 1;
+		string name = 2;
+		string level = 3;  // "system" | "retailer" | "company" | "operator"
+		bool editable = 4; // Can current operator edit this tag?
+		int64 created_at = 5;
+	}
+	repeated GameTag tags = 1;
+}
+
+message BackofficeCreateGameTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	string name = 2;
+}
+
+message BackofficeCreateGameTagResponse {
+	int64 tag_id = 1;
+}
+
+message BackofficeDeleteGameTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+}
+
+message BackofficeDeleteGameTagResponse {}
+
+message BackofficeAddGamesToTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	repeated string game_ids = 3;
+}
+
+message BackofficeAddGamesToTagResponse {}
+
+message BackofficeRemoveGamesFromTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	repeated string game_ids = 3;
+}
+
+message BackofficeRemoveGamesFromTagResponse {}
+
+message BackofficeAddProviderToTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string provider_id = 3;
+}
+
+message BackofficeAddProviderToTagResponse {
+	int32 games_added = 1;
+}
+
+message BackofficeRemoveProviderFromTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string provider_id = 3;
+}
+
+message BackofficeRemoveProviderFromTagResponse {
+	int32 games_removed = 1;
+}
+
+message BackofficeUpdateGameOrderInTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string game_id = 3;
+	int32 order_index = 4;
+	bool sticky = 5;
+}
+
+message BackofficeUpdateGameOrderInTagResponse {}
+
+message BackofficeListProvidersUnderTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+}
+
+message BackofficeListProvidersUnderTagResponse {
+	message ProviderInfo {
+		string provider_id = 1;
+		string provider_name = 2;
+		int32 total_game_count = 3;
+		int32 games_in_tag_count = 4;
+	}
+	repeated ProviderInfo providers = 1;
+}
+
+message BackofficeListGamesUnderTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	optional string provider_id = 3;
+	optional string game_id = 4;
+	repeated string support_currencies = 5;
+	repeated string restricted_countries = 6;
+	optional string relation_filter = 7; // "all" | "in_tag" | "not_in_tag"
+	int32 page = 8;
+	int32 page_size = 9;
+}
+
+message BackofficeListGamesUnderTagResponse {
+	message GameInfo {
+		string game_id = 1;
+		string name = 2;
+		string provider_id = 3;
+		string provider_name = 4;
+		string category = 5;
+		string theme = 6;
+		repeated string support_currencies = 7;
+		repeated string restricted_countries = 8;
+		bool bonus_buy = 9;
+		bool in_tag = 10;      // Whether in this tag
+		int32 order_index = 11;
+		bool sticky = 12;
+	}
+	repeated GameInfo games = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
