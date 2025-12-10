@@ -748,6 +748,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+    /v1/backoffice/affiliate/commission/plan/list/affiliate:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateCommissionPlans
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateCommissionPlansRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
     /v1/backoffice/affiliate/commission/plan/list/all:
         post:
             tags:
@@ -7198,6 +7216,8 @@ components:
                     type: string
                 commissionPlanName:
                     type: string
+                commissionType:
+                    type: string
                 commissionSubtype:
                     type: string
                 reportingCurrency:
@@ -10370,6 +10390,15 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListAffiliateCommissionPlansRequest:
+            type: object
+            properties:
                 page:
                     type: integer
                     format: int32
