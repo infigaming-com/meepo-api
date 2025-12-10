@@ -172,12 +172,13 @@ type PaymentTransactionEvent struct {
 	OperatorContext   *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency          string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"` // payment currency
 	ReportingCurrency string                  `protobuf:"bytes,7,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	Amount            string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"` // cash amount of the currency
+	Amount            string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"` // user's cash amount for this payment transaction
 	Status            string                  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"` // payment status
 	CreatedAt         int64                   `protobuf:"varint,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	SettledAt         int64                   `protobuf:"varint,11,opt,name=settled_at,json=settledAt,proto3" json:"settled_at,omitempty"`
 	Extra             *structpb.Struct        `protobuf:"bytes,12,opt,name=extra,proto3" json:"extra,omitempty"`
 	ChannelInfo       *ChannelInfo            `protobuf:"bytes,13,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	OperatorAmount    string                  `protobuf:"bytes,14,opt,name=operator_amount,json=operatorAmount,proto3" json:"operator_amount,omitempty"` // operator's amount for this payment transaction
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -301,6 +302,13 @@ func (x *PaymentTransactionEvent) GetChannelInfo() *ChannelInfo {
 		return x.ChannelInfo
 	}
 	return nil
+}
+
+func (x *PaymentTransactionEvent) GetOperatorAmount() string {
+	if x != nil {
+		return x.OperatorAmount
+	}
+	return ""
 }
 
 type OperatorPaymentTransactionEvent struct {
@@ -472,7 +480,7 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse\"U\n" +
 	"\vChannelInfo\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xa8\x04\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x04\n" +
 	"\x17PaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
@@ -489,7 +497,8 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\n" +
 	"settled_at\x18\v \x01(\x03R\tsettledAt\x12-\n" +
 	"\x05extra\x18\f \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
-	"\fchannel_info\x18\r \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\"\xcf\x05\n" +
+	"\fchannel_info\x18\r \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\x12'\n" +
+	"\x0foperator_amount\x18\x0e \x01(\tR\x0eoperatorAmount\"\xcf\x05\n" +
 	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +

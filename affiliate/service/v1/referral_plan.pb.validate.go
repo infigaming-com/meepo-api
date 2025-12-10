@@ -1674,14 +1674,14 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 		// no validation rules for Tier
 	}
 
-	if m.RegistrationStartTime != nil {
+	if m.ConversionStartTime != nil {
 
 		if all {
-			switch v := interface{}(m.GetRegistrationStartTime()).(type) {
+			switch v := interface{}(m.GetConversionStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "RegistrationStartTime",
+						field:  "ConversionStartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1689,16 +1689,16 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "RegistrationStartTime",
+						field:  "ConversionStartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetRegistrationStartTime()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetConversionStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListUserReferralRewardsRequestValidationError{
-					field:  "RegistrationStartTime",
+					field:  "ConversionStartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1707,14 +1707,14 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 
 	}
 
-	if m.RegistrationEndTime != nil {
+	if m.ConversionEndTime != nil {
 
 		if all {
-			switch v := interface{}(m.GetRegistrationEndTime()).(type) {
+			switch v := interface{}(m.GetConversionEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "RegistrationEndTime",
+						field:  "ConversionEndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1722,16 +1722,16 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "RegistrationEndTime",
+						field:  "ConversionEndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetRegistrationEndTime()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetConversionEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListUserReferralRewardsRequestValidationError{
-					field:  "RegistrationEndTime",
+					field:  "ConversionEndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -2391,6 +2391,340 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ClaimUserReferralRewardsResponseValidationError{}
+
+// Validate checks the field values on GetUserLossRevenueShareStatsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetUserLossRevenueShareStatsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserLossRevenueShareStatsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserLossRevenueShareStatsRequestMultiError, or nil if none found.
+func (m *GetUserLossRevenueShareStatsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserLossRevenueShareStatsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	if m.ReferralCode != nil {
+		// no validation rules for ReferralCode
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.Tier != nil {
+		// no validation rules for Tier
+	}
+
+	if m.ConversionStartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetConversionStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserLossRevenueShareStatsRequestValidationError{
+						field:  "ConversionStartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserLossRevenueShareStatsRequestValidationError{
+						field:  "ConversionStartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetConversionStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserLossRevenueShareStatsRequestValidationError{
+					field:  "ConversionStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.ConversionEndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetConversionEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserLossRevenueShareStatsRequestValidationError{
+						field:  "ConversionEndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserLossRevenueShareStatsRequestValidationError{
+						field:  "ConversionEndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetConversionEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserLossRevenueShareStatsRequestValidationError{
+					field:  "ConversionEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetUserLossRevenueShareStatsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserLossRevenueShareStatsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserLossRevenueShareStatsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserLossRevenueShareStatsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserLossRevenueShareStatsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserLossRevenueShareStatsRequestMultiError) AllErrors() []error { return m }
+
+// GetUserLossRevenueShareStatsRequestValidationError is the validation error
+// returned by GetUserLossRevenueShareStatsRequest.Validate if the designated
+// constraints aren't met.
+type GetUserLossRevenueShareStatsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserLossRevenueShareStatsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserLossRevenueShareStatsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserLossRevenueShareStatsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserLossRevenueShareStatsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserLossRevenueShareStatsRequestValidationError) ErrorName() string {
+	return "GetUserLossRevenueShareStatsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserLossRevenueShareStatsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserLossRevenueShareStatsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserLossRevenueShareStatsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserLossRevenueShareStatsRequestValidationError{}
+
+// Validate checks the field values on GetUserLossRevenueShareStatsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetUserLossRevenueShareStatsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserLossRevenueShareStatsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserLossRevenueShareStatsResponseMultiError, or nil if none found.
+func (m *GetUserLossRevenueShareStatsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UnpaidRewardAmount
+
+	// no validation rules for UnclaimedRewardAmount
+
+	// no validation rules for ClaimedRewardAmount
+
+	// no validation rules for GgrAmountInPeriod
+
+	// no validation rules for NgrAmountInPeriod
+
+	for idx, item := range m.GetReferredStats() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserLossRevenueShareStatsResponseValidationError{
+						field:  fmt.Sprintf("ReferredStats[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserLossRevenueShareStatsResponseValidationError{
+						field:  fmt.Sprintf("ReferredStats[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserLossRevenueShareStatsResponseValidationError{
+					field:  fmt.Sprintf("ReferredStats[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetUserLossRevenueShareStatsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserLossRevenueShareStatsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserLossRevenueShareStatsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserLossRevenueShareStatsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserLossRevenueShareStatsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserLossRevenueShareStatsResponseMultiError) AllErrors() []error { return m }
+
+// GetUserLossRevenueShareStatsResponseValidationError is the validation error
+// returned by GetUserLossRevenueShareStatsResponse.Validate if the designated
+// constraints aren't met.
+type GetUserLossRevenueShareStatsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserLossRevenueShareStatsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserLossRevenueShareStatsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserLossRevenueShareStatsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserLossRevenueShareStatsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserLossRevenueShareStatsResponseValidationError) ErrorName() string {
+	return "GetUserLossRevenueShareStatsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserLossRevenueShareStatsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserLossRevenueShareStatsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserLossRevenueShareStatsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserLossRevenueShareStatsResponseValidationError{}
 
 // Validate checks the field values on ReferralPlan with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -4805,10 +5139,6 @@ func (m *GetUserReferralStatsResponse_ReferralProgress) validate(all bool) error
 
 	// no validation rules for WageringAmount
 
-	// no validation rules for GgrAmount
-
-	// no validation rules for NgrAmount
-
 	if len(errors) > 0 {
 		return GetUserReferralStatsResponse_ReferralProgressMultiError(errors)
 	}
@@ -4933,11 +5263,11 @@ func (m *ListUserReferralRewardsResponse_ReferralReward) validate(all bool) erro
 	// no validation rules for ClaimedRewardAmount
 
 	if all {
-		switch v := interface{}(m.GetRegistrationTime()).(type) {
+		switch v := interface{}(m.GetConversionTime()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, ListUserReferralRewardsResponse_ReferralRewardValidationError{
-					field:  "RegistrationTime",
+					field:  "ConversionTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -4945,16 +5275,16 @@ func (m *ListUserReferralRewardsResponse_ReferralReward) validate(all bool) erro
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, ListUserReferralRewardsResponse_ReferralRewardValidationError{
-					field:  "RegistrationTime",
+					field:  "ConversionTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetRegistrationTime()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetConversionTime()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return ListUserReferralRewardsResponse_ReferralRewardValidationError{
-				field:  "RegistrationTime",
+				field:  "ConversionTime",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -5045,3 +5375,157 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListUserReferralRewardsResponse_ReferralRewardValidationError{}
+
+// Validate checks the field values on
+// GetUserLossRevenueShareStatsResponse_ReferredStat with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetUserLossRevenueShareStatsResponse_ReferredStat) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserLossRevenueShareStatsResponse_ReferredStat with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetUserLossRevenueShareStatsResponse_ReferredStatMultiError, or nil if none found.
+func (m *GetUserLossRevenueShareStatsResponse_ReferredStat) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserLossRevenueShareStatsResponse_ReferredStat) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for UserName
+
+	// no validation rules for ReferralCode
+
+	// no validation rules for Tier
+
+	// no validation rules for NgrAmountInPeriod
+
+	// no validation rules for GgrAmountInPeriod
+
+	if all {
+		switch v := interface{}(m.GetConversionTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserLossRevenueShareStatsResponse_ReferredStatValidationError{
+					field:  "ConversionTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserLossRevenueShareStatsResponse_ReferredStatValidationError{
+					field:  "ConversionTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConversionTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserLossRevenueShareStatsResponse_ReferredStatValidationError{
+				field:  "ConversionTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetUserLossRevenueShareStatsResponse_ReferredStatMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserLossRevenueShareStatsResponse_ReferredStatMultiError is an error
+// wrapping multiple validation errors returned by
+// GetUserLossRevenueShareStatsResponse_ReferredStat.ValidateAll() if the
+// designated constraints aren't met.
+type GetUserLossRevenueShareStatsResponse_ReferredStatMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserLossRevenueShareStatsResponse_ReferredStatMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserLossRevenueShareStatsResponse_ReferredStatMultiError) AllErrors() []error { return m }
+
+// GetUserLossRevenueShareStatsResponse_ReferredStatValidationError is the
+// validation error returned by
+// GetUserLossRevenueShareStatsResponse_ReferredStat.Validate if the
+// designated constraints aren't met.
+type GetUserLossRevenueShareStatsResponse_ReferredStatValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserLossRevenueShareStatsResponse_ReferredStatValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetUserLossRevenueShareStatsResponse_ReferredStatValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetUserLossRevenueShareStatsResponse_ReferredStatValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetUserLossRevenueShareStatsResponse_ReferredStatValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserLossRevenueShareStatsResponse_ReferredStatValidationError) ErrorName() string {
+	return "GetUserLossRevenueShareStatsResponse_ReferredStatValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserLossRevenueShareStatsResponse_ReferredStatValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserLossRevenueShareStatsResponse_ReferredStat.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserLossRevenueShareStatsResponse_ReferredStatValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserLossRevenueShareStatsResponse_ReferredStatValidationError{}

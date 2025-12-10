@@ -948,8 +948,8 @@ message ListBottomOperatorBalancesResponse {
 }
 
 message OperatorTransferRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
+	api.common.OperatorContext source_operator_context = 1; // source operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator (company)
 	string currency = 3;
 	string reporting_currency = 4;
 	string target_currency = 5;
@@ -966,14 +966,15 @@ message OperatorTransferResponse {
 }
 
 message OperatorSwapRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
+	api.common.OperatorContext source_operator_context = 1; // source operator
+	api.common.OperatorContext target_operator_context = 2; // target operator
 	string currency = 3;
 	string reporting_currency = 4;
 	string target_currency = 5;
 	string target_reporting_currency = 6;
 	string transaction_type = 7;
 	string cash_amount = 8;
+	api.common.OperatorContext initiator_operator_context = 9; // initiator context (who initiates this swap)
 }
 
 message OperatorSwapResponse {

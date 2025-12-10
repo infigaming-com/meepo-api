@@ -1534,3 +1534,15 @@ func IsListTimeRangeDepositCreditsFailed(err error) bool {
 func ErrorListTimeRangeDepositCreditsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetOperatorDetailsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_DETAILS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorDetailsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_DETAILS_FAILED.String(), fmt.Sprintf(format, args...))
+}

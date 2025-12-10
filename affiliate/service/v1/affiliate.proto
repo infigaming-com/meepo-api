@@ -131,6 +131,13 @@ service Affiliate {
         };
     }
 
+    rpc GetUserLossRevenueShareStats(GetUserLossRevenueShareStatsRequest) returns (GetUserLossRevenueShareStatsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/loss/revenue/share/stats/get"
+            body: "*"
+        };
+    }
+
 }
 
 message ContactType {
@@ -190,6 +197,7 @@ message ListAffiliatesRequest {
     optional int32 page_size = 6;
     api.common.OperatorContext target_operator_context = 7;
     api.common.OperatorContext initiator_operator_context = 8;
+    optional bool pagination = 9; // if nil, pagination is true
 }
 
 message ListAffiliatesResponse {
@@ -323,7 +331,6 @@ message ChannelConfig {
         string bundle_id = 3;
     }
     message AgencyChannelConfig {
-        string campaign_name = 1;
     }
     message GoogleAdsChannelConfig {
         string customer_id = 1;
@@ -553,8 +560,10 @@ message ListPostbacksResponse {
     }
     repeated Postback postbacks = 1;
     int32 total = 2;
-    int32 page = 3;
-    int32 page_size = 4;
+    int32 total_active = 3;
+    int32 total_inactive = 4;
+    int32 page = 5;
+    int32 page_size = 6;
 }
 
 // -------------- Affiliate Domain --------------
