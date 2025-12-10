@@ -14529,6 +14529,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
@@ -14645,6 +14647,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateProviderResponse:
             type: object
             properties: {}
@@ -16160,6 +16164,10 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Operator context for hierarchical enabled status
         api.game.service.v1.ListProvidersResponse:
             type: object
             properties:
