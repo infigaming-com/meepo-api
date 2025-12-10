@@ -30,6 +30,7 @@ const OperationBackofficeOperatorDeleteRegisterLoginBlacklist = "/api.backoffice
 const OperationBackofficeOperatorGetCurrentOperatorDetails = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
 const OperationBackofficeOperatorGetOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorAccountSettings"
 const OperationBackofficeOperatorGetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
+const OperationBackofficeOperatorGetOperatorRegistrationConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationConfig"
 const OperationBackofficeOperatorGetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationFieldConfig"
 const OperationBackofficeOperatorListAllOperators = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
 const OperationBackofficeOperatorListBottomOperators = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
@@ -39,6 +40,7 @@ const OperationBackofficeOperatorListOperatorsByParentOperatorId = "/api.backoff
 const OperationBackofficeOperatorListRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
 const OperationBackofficeOperatorListRetailerOperators = "/api.backoffice.service.v1.BackofficeOperator/ListRetailerOperators"
 const OperationBackofficeOperatorSetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegisterLimitConfig"
+const OperationBackofficeOperatorSetOperatorRegistrationConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationConfig"
 const OperationBackofficeOperatorSetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationFieldConfig"
 const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
@@ -59,6 +61,8 @@ type BackofficeOperatorHTTPServer interface {
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error)
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
+	// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+	GetOperatorRegistrationConfig(context.Context, *GetOperatorRegistrationConfigRequest) (*GetOperatorRegistrationConfigResponse, error)
 	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*v1.GetOperatorRegistrationFieldConfigResponse, error)
 	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
@@ -73,6 +77,8 @@ type BackofficeOperatorHTTPServer interface {
 	// ListRetailerOperators ListRetailers returns a list of retailers by operator context in the middleware
 	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*v1.ListRetailerOperatorsResponse, error)
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
+	// SetOperatorRegistrationConfig SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+	SetOperatorRegistrationConfig(context.Context, *SetOperatorRegistrationConfigRequest) (*SetOperatorRegistrationConfigResponse, error)
 	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
@@ -103,6 +109,8 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/register-limit-config/get", _BackofficeOperator_GetOperatorRegisterLimitConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/registration-field-config/set", _BackofficeOperator_SetOperatorRegistrationFieldConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/registration-field-config/get", _BackofficeOperator_GetOperatorRegistrationFieldConfig1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/registration-config/set", _BackofficeOperator_SetOperatorRegistrationConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/registration-config/get", _BackofficeOperator_GetOperatorRegistrationConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -589,6 +597,50 @@ func _BackofficeOperator_GetOperatorRegistrationFieldConfig1_HTTP_Handler(srv Ba
 	}
 }
 
+func _BackofficeOperator_SetOperatorRegistrationConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetOperatorRegistrationConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorSetOperatorRegistrationConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetOperatorRegistrationConfig(ctx, req.(*SetOperatorRegistrationConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetOperatorRegistrationConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_GetOperatorRegistrationConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorRegistrationConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorGetOperatorRegistrationConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorRegistrationConfig(ctx, req.(*GetOperatorRegistrationConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetOperatorRegistrationConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
 	// AddOperatorBackofficeByoSubdomain AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
 	AddOperatorBackofficeByoSubdomain(ctx context.Context, req *AddOperatorBackofficeByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorBackofficeByoSubdomainResponse, err error)
@@ -605,6 +657,8 @@ type BackofficeOperatorHTTPClient interface {
 	GetCurrentOperatorDetails(ctx context.Context, req *GetCurrentOperatorDetailsRequest, opts ...http.CallOption) (rsp *GetCurrentOperatorDetailsResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAccountSettingsResponse, err error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, req *GetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorRegisterLimitConfigResponse, err error)
+	// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+	GetOperatorRegistrationConfig(ctx context.Context, req *GetOperatorRegistrationConfigRequest, opts ...http.CallOption) (rsp *GetOperatorRegistrationConfigResponse, err error)
 	GetOperatorRegistrationFieldConfig(ctx context.Context, req *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorRegistrationFieldConfigResponse, err error)
 	ListAllOperators(ctx context.Context, req *ListAllOperatorsRequest, opts ...http.CallOption) (rsp *ListAllOperatorsResponse, err error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
@@ -619,6 +673,8 @@ type BackofficeOperatorHTTPClient interface {
 	// ListRetailerOperators ListRetailers returns a list of retailers by operator context in the middleware
 	ListRetailerOperators(ctx context.Context, req *ListRetailerOperatorsRequest, opts ...http.CallOption) (rsp *v1.ListRetailerOperatorsResponse, err error)
 	SetOperatorRegisterLimitConfig(ctx context.Context, req *SetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegisterLimitConfigResponse, err error)
+	// SetOperatorRegistrationConfig SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+	SetOperatorRegistrationConfig(ctx context.Context, req *SetOperatorRegistrationConfigRequest, opts ...http.CallOption) (rsp *SetOperatorRegistrationConfigResponse, err error)
 	SetOperatorRegistrationFieldConfig(ctx context.Context, req *SetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegistrationFieldConfigResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
@@ -768,6 +824,20 @@ func (c *BackofficeOperatorHTTPClientImpl) GetOperatorRegisterLimitConfig(ctx co
 	return &out, nil
 }
 
+// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+func (c *BackofficeOperatorHTTPClientImpl) GetOperatorRegistrationConfig(ctx context.Context, in *GetOperatorRegistrationConfigRequest, opts ...http.CallOption) (*GetOperatorRegistrationConfigResponse, error) {
+	var out GetOperatorRegistrationConfigResponse
+	pattern := "/v1/backoffice/operator/registration-config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorRegistrationConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeOperatorHTTPClientImpl) GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (*v1.GetOperatorRegistrationFieldConfigResponse, error) {
 	var out v1.GetOperatorRegistrationFieldConfigResponse
 	pattern := "/v1/backoffice/operator/registration-field-config/get"
@@ -882,6 +952,20 @@ func (c *BackofficeOperatorHTTPClientImpl) SetOperatorRegisterLimitConfig(ctx co
 	pattern := "/v1/backoffice/operator/register-limit-config/set"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorSetOperatorRegisterLimitConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SetOperatorRegistrationConfig SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+func (c *BackofficeOperatorHTTPClientImpl) SetOperatorRegistrationConfig(ctx context.Context, in *SetOperatorRegistrationConfigRequest, opts ...http.CallOption) (*SetOperatorRegistrationConfigResponse, error) {
+	var out SetOperatorRegistrationConfigResponse
+	pattern := "/v1/backoffice/operator/registration-config/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorSetOperatorRegistrationConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
