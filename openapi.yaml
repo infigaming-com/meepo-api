@@ -6,6 +6,24 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/affiliate/user/loss/revenue/share/stats/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserLossRevenueShareStats
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse'
     /v1/affiliate/user/referral/code/create:
         post:
             tags:
@@ -6272,9 +6290,7 @@ components:
                     type: string
         api.affiliate.service.v1.ChannelConfig_AgencyChannelConfig:
             type: object
-            properties:
-                campaignName:
-                    type: string
+            properties: {}
         api.affiliate.service.v1.ChannelConfig_AppsflyerChannelConfig:
             type: object
             properties:
@@ -6705,6 +6721,64 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Custom referral plan (current operator's own config)
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                referralCode:
+                    type: string
+                userId:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                conversionStartTime:
+                    type: string
+                    format: date-time
+                conversionEndTime:
+                    type: string
+                    format: date-time
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse:
+            type: object
+            properties:
+                unpaidRewardAmount:
+                    type: string
+                unclaimedRewardAmount:
+                    type: string
+                claimedRewardAmount:
+                    type: string
+                ggrAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ngrAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
+                referredStats:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat:
+            type: object
+            properties:
+                userId:
+                    type: string
+                userName:
+                    type: string
+                referralCode:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                ngrAmountInPeriod:
+                    type: string
+                ggrAmountInPeriod:
+                    type: string
+                conversionTime:
+                    type: string
+                    format: date-time
         api.affiliate.service.v1.GetUserReferralPlanRequest:
             type: object
             properties:
@@ -6769,14 +6843,6 @@ components:
                     additionalProperties:
                         type: string
                 wageringAmount:
-                    type: object
-                    additionalProperties:
-                        type: string
-                ggrAmount:
-                    type: object
-                    additionalProperties:
-                        type: string
-                ngrAmount:
                     type: object
                     additionalProperties:
                         type: string
@@ -7175,6 +7241,12 @@ components:
                 total:
                     type: integer
                     format: int32
+                totalActive:
+                    type: integer
+                    format: int32
+                totalInactive:
+                    type: integer
+                    format: int32
                 page:
                     type: integer
                     format: int32
@@ -7230,10 +7302,10 @@ components:
                 tier:
                     type: integer
                     format: int32
-                registrationStartTime:
+                conversionStartTime:
                     type: string
                     format: date-time
-                registrationEndTime:
+                conversionEndTime:
                     type: string
                     format: date-time
                 page:
@@ -7276,7 +7348,7 @@ components:
                     type: string
                 claimedRewardAmount:
                     type: string
-                registrationTime:
+                conversionTime:
                     type: string
                     format: date-time
         api.affiliate.service.v1.ListUsersResponse:
@@ -10303,6 +10375,8 @@ components:
                     format: int32
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                pagination:
+                    type: boolean
         api.backoffice.service.v1.ListAllCommissionPlansRequest:
             type: object
             properties:
@@ -13468,7 +13542,7 @@ components:
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
             properties:
-                operatorContext:
+                sourceOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'

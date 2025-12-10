@@ -953,6 +953,10 @@ func (m *ListAffiliatesRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.Pagination != nil {
+		// no validation rules for Pagination
+	}
+
 	if len(errors) > 0 {
 		return ListAffiliatesRequestMultiError(errors)
 	}
@@ -5212,6 +5216,10 @@ func (m *ListPostbacksResponse) validate(all bool) error {
 
 	// no validation rules for Total
 
+	// no validation rules for TotalActive
+
+	// no validation rules for TotalInactive
+
 	// no validation rules for Page
 
 	// no validation rules for PageSize
@@ -8396,8 +8404,6 @@ func (m *ChannelConfig_AgencyChannelConfig) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for CampaignName
 
 	if len(errors) > 0 {
 		return ChannelConfig_AgencyChannelConfigMultiError(errors)
