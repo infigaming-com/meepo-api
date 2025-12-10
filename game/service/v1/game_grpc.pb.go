@@ -72,6 +72,16 @@ const (
 	Game_GetUserActiveDays_FullMethodName                 = "/api.game.service.v1.Game/GetUserActiveDays"
 	Game_ListUserTurnoverByGame_FullMethodName            = "/api.game.service.v1.Game/ListUserTurnoverByGame"
 	Game_GetDepositCreditsGGR_FullMethodName              = "/api.game.service.v1.Game/GetDepositCreditsGGR"
+	Game_BackofficeListGameTags_FullMethodName            = "/api.game.service.v1.Game/BackofficeListGameTags"
+	Game_BackofficeCreateGameTag_FullMethodName           = "/api.game.service.v1.Game/BackofficeCreateGameTag"
+	Game_BackofficeDeleteGameTag_FullMethodName           = "/api.game.service.v1.Game/BackofficeDeleteGameTag"
+	Game_BackofficeAddGamesToTag_FullMethodName           = "/api.game.service.v1.Game/BackofficeAddGamesToTag"
+	Game_BackofficeRemoveGamesFromTag_FullMethodName      = "/api.game.service.v1.Game/BackofficeRemoveGamesFromTag"
+	Game_BackofficeAddProviderToTag_FullMethodName        = "/api.game.service.v1.Game/BackofficeAddProviderToTag"
+	Game_BackofficeRemoveProviderFromTag_FullMethodName   = "/api.game.service.v1.Game/BackofficeRemoveProviderFromTag"
+	Game_BackofficeUpdateGameOrderInTag_FullMethodName    = "/api.game.service.v1.Game/BackofficeUpdateGameOrderInTag"
+	Game_BackofficeListProvidersUnderTag_FullMethodName   = "/api.game.service.v1.Game/BackofficeListProvidersUnderTag"
+	Game_BackofficeListGamesUnderTag_FullMethodName       = "/api.game.service.v1.Game/BackofficeListGamesUnderTag"
 )
 
 // GameClient is the client API for Game service.
@@ -135,6 +145,26 @@ type GameClient interface {
 	ListUserTurnoverByGame(ctx context.Context, in *ListUserTurnoverByGameRequest, opts ...grpc.CallOption) (*ListUserTurnoverByGameResponse, error)
 	// 获取指定时间范围内用户存款金额所产生的GGR
 	GetDepositCreditsGGR(ctx context.Context, in *GetDepositCreditsGGRRequest, opts ...grpc.CallOption) (*GetDepositCreditsGGRResponse, error)
+	// List tags visible to operator (with inheritance)
+	BackofficeListGameTags(ctx context.Context, in *BackofficeListGameTagsRequest, opts ...grpc.CallOption) (*BackofficeListGameTagsResponse, error)
+	// Create tag at operator's own level
+	BackofficeCreateGameTag(ctx context.Context, in *BackofficeCreateGameTagRequest, opts ...grpc.CallOption) (*BackofficeCreateGameTagResponse, error)
+	// Delete tag (own level or lower only)
+	BackofficeDeleteGameTag(ctx context.Context, in *BackofficeDeleteGameTagRequest, opts ...grpc.CallOption) (*BackofficeDeleteGameTagResponse, error)
+	// Add games to a tag
+	BackofficeAddGamesToTag(ctx context.Context, in *BackofficeAddGamesToTagRequest, opts ...grpc.CallOption) (*BackofficeAddGamesToTagResponse, error)
+	// Remove games from a tag
+	BackofficeRemoveGamesFromTag(ctx context.Context, in *BackofficeRemoveGamesFromTagRequest, opts ...grpc.CallOption) (*BackofficeRemoveGamesFromTagResponse, error)
+	// Add provider to tag (adds all its games)
+	BackofficeAddProviderToTag(ctx context.Context, in *BackofficeAddProviderToTagRequest, opts ...grpc.CallOption) (*BackofficeAddProviderToTagResponse, error)
+	// Remove provider from tag
+	BackofficeRemoveProviderFromTag(ctx context.Context, in *BackofficeRemoveProviderFromTagRequest, opts ...grpc.CallOption) (*BackofficeRemoveProviderFromTagResponse, error)
+	// Update game order inside a tag
+	BackofficeUpdateGameOrderInTag(ctx context.Context, in *BackofficeUpdateGameOrderInTagRequest, opts ...grpc.CallOption) (*BackofficeUpdateGameOrderInTagResponse, error)
+	// List providers under a tag
+	BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error)
+	// List games under a tag (paginated)
+	BackofficeListGamesUnderTag(ctx context.Context, in *BackofficeListGamesUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListGamesUnderTagResponse, error)
 }
 
 type gameClient struct {
@@ -675,6 +705,106 @@ func (c *gameClient) GetDepositCreditsGGR(ctx context.Context, in *GetDepositCre
 	return out, nil
 }
 
+func (c *gameClient) BackofficeListGameTags(ctx context.Context, in *BackofficeListGameTagsRequest, opts ...grpc.CallOption) (*BackofficeListGameTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeListGameTagsResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeListGameTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeCreateGameTag(ctx context.Context, in *BackofficeCreateGameTagRequest, opts ...grpc.CallOption) (*BackofficeCreateGameTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeCreateGameTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeCreateGameTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeDeleteGameTag(ctx context.Context, in *BackofficeDeleteGameTagRequest, opts ...grpc.CallOption) (*BackofficeDeleteGameTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeDeleteGameTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeDeleteGameTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeAddGamesToTag(ctx context.Context, in *BackofficeAddGamesToTagRequest, opts ...grpc.CallOption) (*BackofficeAddGamesToTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeAddGamesToTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeAddGamesToTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeRemoveGamesFromTag(ctx context.Context, in *BackofficeRemoveGamesFromTagRequest, opts ...grpc.CallOption) (*BackofficeRemoveGamesFromTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeRemoveGamesFromTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeRemoveGamesFromTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeAddProviderToTag(ctx context.Context, in *BackofficeAddProviderToTagRequest, opts ...grpc.CallOption) (*BackofficeAddProviderToTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeAddProviderToTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeAddProviderToTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeRemoveProviderFromTag(ctx context.Context, in *BackofficeRemoveProviderFromTagRequest, opts ...grpc.CallOption) (*BackofficeRemoveProviderFromTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeRemoveProviderFromTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeRemoveProviderFromTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeUpdateGameOrderInTag(ctx context.Context, in *BackofficeUpdateGameOrderInTagRequest, opts ...grpc.CallOption) (*BackofficeUpdateGameOrderInTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeUpdateGameOrderInTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeUpdateGameOrderInTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeListProvidersUnderTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeListProvidersUnderTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) BackofficeListGamesUnderTag(ctx context.Context, in *BackofficeListGamesUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListGamesUnderTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeListGamesUnderTagResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeListGamesUnderTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -736,6 +866,26 @@ type GameServer interface {
 	ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error)
 	// 获取指定时间范围内用户存款金额所产生的GGR
 	GetDepositCreditsGGR(context.Context, *GetDepositCreditsGGRRequest) (*GetDepositCreditsGGRResponse, error)
+	// List tags visible to operator (with inheritance)
+	BackofficeListGameTags(context.Context, *BackofficeListGameTagsRequest) (*BackofficeListGameTagsResponse, error)
+	// Create tag at operator's own level
+	BackofficeCreateGameTag(context.Context, *BackofficeCreateGameTagRequest) (*BackofficeCreateGameTagResponse, error)
+	// Delete tag (own level or lower only)
+	BackofficeDeleteGameTag(context.Context, *BackofficeDeleteGameTagRequest) (*BackofficeDeleteGameTagResponse, error)
+	// Add games to a tag
+	BackofficeAddGamesToTag(context.Context, *BackofficeAddGamesToTagRequest) (*BackofficeAddGamesToTagResponse, error)
+	// Remove games from a tag
+	BackofficeRemoveGamesFromTag(context.Context, *BackofficeRemoveGamesFromTagRequest) (*BackofficeRemoveGamesFromTagResponse, error)
+	// Add provider to tag (adds all its games)
+	BackofficeAddProviderToTag(context.Context, *BackofficeAddProviderToTagRequest) (*BackofficeAddProviderToTagResponse, error)
+	// Remove provider from tag
+	BackofficeRemoveProviderFromTag(context.Context, *BackofficeRemoveProviderFromTagRequest) (*BackofficeRemoveProviderFromTagResponse, error)
+	// Update game order inside a tag
+	BackofficeUpdateGameOrderInTag(context.Context, *BackofficeUpdateGameOrderInTagRequest) (*BackofficeUpdateGameOrderInTagResponse, error)
+	// List providers under a tag
+	BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error)
+	// List games under a tag (paginated)
+	BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -904,6 +1054,36 @@ func (UnimplementedGameServer) ListUserTurnoverByGame(context.Context, *ListUser
 }
 func (UnimplementedGameServer) GetDepositCreditsGGR(context.Context, *GetDepositCreditsGGRRequest) (*GetDepositCreditsGGRResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDepositCreditsGGR not implemented")
+}
+func (UnimplementedGameServer) BackofficeListGameTags(context.Context, *BackofficeListGameTagsRequest) (*BackofficeListGameTagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeListGameTags not implemented")
+}
+func (UnimplementedGameServer) BackofficeCreateGameTag(context.Context, *BackofficeCreateGameTagRequest) (*BackofficeCreateGameTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeCreateGameTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeDeleteGameTag(context.Context, *BackofficeDeleteGameTagRequest) (*BackofficeDeleteGameTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeDeleteGameTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeAddGamesToTag(context.Context, *BackofficeAddGamesToTagRequest) (*BackofficeAddGamesToTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeAddGamesToTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeRemoveGamesFromTag(context.Context, *BackofficeRemoveGamesFromTagRequest) (*BackofficeRemoveGamesFromTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeRemoveGamesFromTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeAddProviderToTag(context.Context, *BackofficeAddProviderToTagRequest) (*BackofficeAddProviderToTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeAddProviderToTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeRemoveProviderFromTag(context.Context, *BackofficeRemoveProviderFromTagRequest) (*BackofficeRemoveProviderFromTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeRemoveProviderFromTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeUpdateGameOrderInTag(context.Context, *BackofficeUpdateGameOrderInTagRequest) (*BackofficeUpdateGameOrderInTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeUpdateGameOrderInTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeListProvidersUnderTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeListGamesUnderTag not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1880,6 +2060,186 @@ func _Game_GetDepositCreditsGGR_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_BackofficeListGameTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeListGameTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeListGameTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeListGameTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeListGameTags(ctx, req.(*BackofficeListGameTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeCreateGameTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeCreateGameTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeCreateGameTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeCreateGameTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeCreateGameTag(ctx, req.(*BackofficeCreateGameTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeDeleteGameTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeDeleteGameTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeDeleteGameTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeDeleteGameTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeDeleteGameTag(ctx, req.(*BackofficeDeleteGameTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeAddGamesToTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeAddGamesToTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeAddGamesToTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeAddGamesToTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeAddGamesToTag(ctx, req.(*BackofficeAddGamesToTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeRemoveGamesFromTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeRemoveGamesFromTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeRemoveGamesFromTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeRemoveGamesFromTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeRemoveGamesFromTag(ctx, req.(*BackofficeRemoveGamesFromTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeAddProviderToTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeAddProviderToTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeAddProviderToTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeAddProviderToTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeAddProviderToTag(ctx, req.(*BackofficeAddProviderToTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeRemoveProviderFromTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeRemoveProviderFromTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeRemoveProviderFromTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeRemoveProviderFromTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeRemoveProviderFromTag(ctx, req.(*BackofficeRemoveProviderFromTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeUpdateGameOrderInTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeUpdateGameOrderInTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeUpdateGameOrderInTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeUpdateGameOrderInTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeUpdateGameOrderInTag(ctx, req.(*BackofficeUpdateGameOrderInTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeListProvidersUnderTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeListProvidersUnderTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeListProvidersUnderTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeListProvidersUnderTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeListProvidersUnderTag(ctx, req.(*BackofficeListProvidersUnderTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_BackofficeListGamesUnderTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeListGamesUnderTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeListGamesUnderTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeListGamesUnderTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeListGamesUnderTag(ctx, req.(*BackofficeListGamesUnderTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2098,6 +2458,46 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDepositCreditsGGR",
 			Handler:    _Game_GetDepositCreditsGGR_Handler,
+		},
+		{
+			MethodName: "BackofficeListGameTags",
+			Handler:    _Game_BackofficeListGameTags_Handler,
+		},
+		{
+			MethodName: "BackofficeCreateGameTag",
+			Handler:    _Game_BackofficeCreateGameTag_Handler,
+		},
+		{
+			MethodName: "BackofficeDeleteGameTag",
+			Handler:    _Game_BackofficeDeleteGameTag_Handler,
+		},
+		{
+			MethodName: "BackofficeAddGamesToTag",
+			Handler:    _Game_BackofficeAddGamesToTag_Handler,
+		},
+		{
+			MethodName: "BackofficeRemoveGamesFromTag",
+			Handler:    _Game_BackofficeRemoveGamesFromTag_Handler,
+		},
+		{
+			MethodName: "BackofficeAddProviderToTag",
+			Handler:    _Game_BackofficeAddProviderToTag_Handler,
+		},
+		{
+			MethodName: "BackofficeRemoveProviderFromTag",
+			Handler:    _Game_BackofficeRemoveProviderFromTag_Handler,
+		},
+		{
+			MethodName: "BackofficeUpdateGameOrderInTag",
+			Handler:    _Game_BackofficeUpdateGameOrderInTag_Handler,
+		},
+		{
+			MethodName: "BackofficeListProvidersUnderTag",
+			Handler:    _Game_BackofficeListProvidersUnderTag_Handler,
+		},
+		{
+			MethodName: "BackofficeListGamesUnderTag",
+			Handler:    _Game_BackofficeListGamesUnderTag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
