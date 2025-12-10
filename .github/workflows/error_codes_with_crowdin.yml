@@ -29,6 +29,8 @@ jobs:
 
       # 2. 从Crowdin下载最新翻译
       - name: 从Crowdin下载最新翻译
+        env:
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
         run: |
           # 安装Crowdin CLI
           curl -L https://artifacts.crowdin.com/repo/deb/crowdin3.deb -o crowdin.deb
@@ -49,6 +51,8 @@ jobs:
 
       # 5. 上传错误码JSON到Crowdin
       - name: 上传错误码JSON到Crowdin
+        env:
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
         run: |
           # 上传错误码JSON
           crowdin upload sources --no-progress
