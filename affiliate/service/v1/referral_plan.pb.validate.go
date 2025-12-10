@@ -2495,6 +2495,14 @@ func (m *GetUserLossRevenueShareStatsRequest) validate(all bool) error {
 
 	}
 
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
 	if len(errors) > 0 {
 		return GetUserLossRevenueShareStatsRequestMultiError(errors)
 	}
@@ -2643,6 +2651,12 @@ func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
 
 	if len(errors) > 0 {
 		return GetUserLossRevenueShareStatsResponseMultiError(errors)

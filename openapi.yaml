@@ -6777,6 +6777,12 @@ components:
                 conversionEndTime:
                     type: string
                     format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse:
             type: object
             properties:
@@ -6798,6 +6804,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat:
             type: object
             properties:

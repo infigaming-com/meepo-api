@@ -153,6 +153,8 @@ message GetUserLossRevenueShareStatsRequest {
     optional int32 tier = 5; // for filter referred stats, other fields remain the same
     optional google.protobuf.Timestamp conversion_start_time = 6;
     optional google.protobuf.Timestamp conversion_end_time = 7;
+    optional int32 page = 8;
+    optional int32 page_size = 9;
 }
 
 message GetUserLossRevenueShareStatsResponse {
@@ -171,6 +173,9 @@ message GetUserLossRevenueShareStatsResponse {
     map<int32, string> ggr_amount_in_period = 4; // map of tier number (1-10) to ggr amount in the period
     map<int32, string> ngr_amount_in_period = 5; // map of tier number (1-10) to ngr amount in the period
     repeated ReferredStat referred_stats = 6;
+    int32 total = 7; // for referred stats
+    int32 page = 8; // for referred stats
+    int32 page_size = 9; // for referred stats
 }
 
 // ------------------------------------------------------------------------------------------------
