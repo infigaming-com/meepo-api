@@ -61,7 +61,7 @@ type BackofficeAffiliateClient interface {
 	ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error)
 	DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...grpc.CallOption) (*v1.DeleteCommissionPlanResponse, error)
 	ListAllCommissionPlans(ctx context.Context, in *ListAllCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAllCommissionPlansResponse, error)
-	ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error)
+	ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error)
 	CreateAffiliate(ctx context.Context, in *CreateAffiliateRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateResponse, error)
 	UpdateAffiliate(ctx context.Context, in *UpdateAffiliateRequest, opts ...grpc.CallOption) (*v1.UpdateAffiliateResponse, error)
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*v1.ListAffiliatesResponse, error)
@@ -154,9 +154,9 @@ func (c *backofficeAffiliateClient) ListAllCommissionPlans(ctx context.Context, 
 	return out, nil
 }
 
-func (c *backofficeAffiliateClient) ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error) {
+func (c *backofficeAffiliateClient) ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.ListCommissionPlansResponse)
+	out := new(v1.ListAffiliateCommissionPlansResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAffiliateCommissionPlans_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -394,7 +394,7 @@ type BackofficeAffiliateServer interface {
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
 	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error)
-	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
+	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error)
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error)
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
@@ -445,7 +445,7 @@ func (UnimplementedBackofficeAffiliateServer) DeleteCommissionPlan(context.Conte
 func (UnimplementedBackofficeAffiliateServer) ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAllCommissionPlans not implemented")
 }
-func (UnimplementedBackofficeAffiliateServer) ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error) {
+func (UnimplementedBackofficeAffiliateServer) ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateCommissionPlans not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error) {

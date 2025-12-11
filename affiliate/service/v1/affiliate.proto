@@ -29,6 +29,8 @@ service Affiliate {
 
     rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (ListAllCommissionPlansResponse) {}
 
+    rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (ListAffiliateCommissionPlansResponse) {}
+
     // -------------- Affiliate --------------
 
     rpc CreateAffiliate(CreateAffiliateRequest) returns (CreateAffiliateResponse) {}

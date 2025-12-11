@@ -54,7 +54,7 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
-	rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (api.affiliate.service.v1.ListCommissionPlansResponse) {
+	rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (api.affiliate.service.v1.ListAffiliateCommissionPlansResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/list/affiliate"
 			body: "*"
