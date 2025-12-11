@@ -2391,15 +2391,15 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\f_plan_config\"\x89\x01\n" +
 	"\x16GetReferralPlanRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency2\xcc(\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency2\xd5(\n" +
 	"\x13BackofficeAffiliate\x12\xc2\x01\n" +
 	"\x14CreateCommissionPlan\x126.api.backoffice.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/create\x12\xc2\x01\n" +
 	"\x14UpdateCommissionPlan\x126.api.backoffice.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/update\x12\xb6\x01\n" +
 	"\x11GetCommissionPlan\x123.api.backoffice.service.v1.GetCommissionPlanRequest\x1a3.api.affiliate.service.v1.GetCommissionPlanResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/affiliate/commission/plan/get\x12\xbd\x01\n" +
 	"\x13ListCommissionPlans\x125.api.backoffice.service.v1.ListCommissionPlansRequest\x1a5.api.affiliate.service.v1.ListCommissionPlansResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/affiliate/commission/plan/list\x12\xc2\x01\n" +
 	"\x14DeleteCommissionPlan\x126.api.backoffice.service.v1.DeleteCommissionPlanRequest\x1a6.api.affiliate.service.v1.DeleteCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/delete\x12\xca\x01\n" +
-	"\x16ListAllCommissionPlans\x128.api.backoffice.service.v1.ListAllCommissionPlansRequest\x1a8.api.affiliate.service.v1.ListAllCommissionPlansResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/affiliate/commission/plan/list/all\x12\xd9\x01\n" +
-	"\x1cListAffiliateCommissionPlans\x12>.api.backoffice.service.v1.ListAffiliateCommissionPlansRequest\x1a5.api.affiliate.service.v1.ListCommissionPlansResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/affiliate/commission/plan/list/affiliate\x12\xa3\x01\n" +
+	"\x16ListAllCommissionPlans\x128.api.backoffice.service.v1.ListAllCommissionPlansRequest\x1a8.api.affiliate.service.v1.ListAllCommissionPlansResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/affiliate/commission/plan/list/all\x12\xe2\x01\n" +
+	"\x1cListAffiliateCommissionPlans\x12>.api.backoffice.service.v1.ListAffiliateCommissionPlansRequest\x1a>.api.affiliate.service.v1.ListAffiliateCommissionPlansResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/affiliate/commission/plan/list/affiliate\x12\xa3\x01\n" +
 	"\x0fCreateAffiliate\x121.api.backoffice.service.v1.CreateAffiliateRequest\x1a1.api.affiliate.service.v1.CreateAffiliateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/affiliate/create\x12\xa3\x01\n" +
 	"\x0fUpdateAffiliate\x121.api.backoffice.service.v1.UpdateAffiliateRequest\x1a1.api.affiliate.service.v1.UpdateAffiliateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/affiliate/update\x12\x9e\x01\n" +
 	"\x0eListAffiliates\x120.api.backoffice.service.v1.ListAffiliatesRequest\x1a0.api.affiliate.service.v1.ListAffiliatesResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/affiliate/list\x12\xa3\x01\n" +
@@ -2439,71 +2439,72 @@ func file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP() []byte {
 
 var file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_backoffice_service_v1_backoffic_affiliate_proto_goTypes = []any{
-	(*CreateCommissionPlanRequest)(nil),         // 0: api.backoffice.service.v1.CreateCommissionPlanRequest
-	(*UpdateCommissionPlanRequest)(nil),         // 1: api.backoffice.service.v1.UpdateCommissionPlanRequest
-	(*GetCommissionPlanRequest)(nil),            // 2: api.backoffice.service.v1.GetCommissionPlanRequest
-	(*ListCommissionPlansRequest)(nil),          // 3: api.backoffice.service.v1.ListCommissionPlansRequest
-	(*DeleteCommissionPlanRequest)(nil),         // 4: api.backoffice.service.v1.DeleteCommissionPlanRequest
-	(*ListAllCommissionPlansRequest)(nil),       // 5: api.backoffice.service.v1.ListAllCommissionPlansRequest
-	(*ListAffiliateCommissionPlansRequest)(nil), // 6: api.backoffice.service.v1.ListAffiliateCommissionPlansRequest
-	(*CreateAffiliateRequest)(nil),              // 7: api.backoffice.service.v1.CreateAffiliateRequest
-	(*UpdateAffiliateRequest)(nil),              // 8: api.backoffice.service.v1.UpdateAffiliateRequest
-	(*ListAffiliatesRequest)(nil),               // 9: api.backoffice.service.v1.ListAffiliatesRequest
-	(*DeleteAffiliateRequest)(nil),              // 10: api.backoffice.service.v1.DeleteAffiliateRequest
-	(*GetAffiliateDetailsRequest)(nil),          // 11: api.backoffice.service.v1.GetAffiliateDetailsRequest
-	(*CreateCampaignRequest)(nil),               // 12: api.backoffice.service.v1.CreateCampaignRequest
-	(*UpdateCampaignRequest)(nil),               // 13: api.backoffice.service.v1.UpdateCampaignRequest
-	(*ListCampaignsRequest)(nil),                // 14: api.backoffice.service.v1.ListCampaignsRequest
-	(*ListAffiliateCampaignsRequest)(nil),       // 15: api.backoffice.service.v1.ListAffiliateCampaignsRequest
-	(*DeleteCampaignRequest)(nil),               // 16: api.backoffice.service.v1.DeleteCampaignRequest
-	(*CreatePostbackRequest)(nil),               // 17: api.backoffice.service.v1.CreatePostbackRequest
-	(*UpdatePostbackRequest)(nil),               // 18: api.backoffice.service.v1.UpdatePostbackRequest
-	(*DeletePostbackRequest)(nil),               // 19: api.backoffice.service.v1.DeletePostbackRequest
-	(*ListPostbacksRequest)(nil),                // 20: api.backoffice.service.v1.ListPostbacksRequest
-	(*ListAffiliateDomainsRequest)(nil),         // 21: api.backoffice.service.v1.ListAffiliateDomainsRequest
-	(*SetAffiliateDomainRequest)(nil),           // 22: api.backoffice.service.v1.SetAffiliateDomainRequest
-	(*ListEventsRequest)(nil),                   // 23: api.backoffice.service.v1.ListEventsRequest
-	(*ListCommissionsRequest)(nil),              // 24: api.backoffice.service.v1.ListCommissionsRequest
-	(*ListAffiliateUsersRequest)(nil),           // 25: api.backoffice.service.v1.ListAffiliateUsersRequest
-	(*ListAffiliateBillsRequest)(nil),           // 26: api.backoffice.service.v1.ListAffiliateBillsRequest
-	(*SetReferralPlanRequest)(nil),              // 27: api.backoffice.service.v1.SetReferralPlanRequest
-	(*GetReferralPlanRequest)(nil),              // 28: api.backoffice.service.v1.GetReferralPlanRequest
-	(*CreateCampaignRequest_Campaign)(nil),      // 29: api.backoffice.service.v1.CreateCampaignRequest.Campaign
-	(*v1.CommissionPlanConfig)(nil),             // 30: api.affiliate.service.v1.CommissionPlanConfig
-	(*common.OperatorContext)(nil),              // 31: api.common.OperatorContext
-	(*v1.AffiliateInfo)(nil),                    // 32: api.affiliate.service.v1.AffiliateInfo
-	(*v1.Campaign)(nil),                         // 33: api.affiliate.service.v1.Campaign
-	(*common.OperatorContextFilters)(nil),       // 34: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),               // 35: google.protobuf.Timestamp
-	(*v1.ReferralPlanConfig)(nil),               // 36: api.affiliate.service.v1.ReferralPlanConfig
-	(*v1.ChannelConfig)(nil),                    // 37: api.affiliate.service.v1.ChannelConfig
-	(*v1.CreateCommissionPlanResponse)(nil),     // 38: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*v1.UpdateCommissionPlanResponse)(nil),     // 39: api.affiliate.service.v1.UpdateCommissionPlanResponse
-	(*v1.GetCommissionPlanResponse)(nil),        // 40: api.affiliate.service.v1.GetCommissionPlanResponse
-	(*v1.ListCommissionPlansResponse)(nil),      // 41: api.affiliate.service.v1.ListCommissionPlansResponse
-	(*v1.DeleteCommissionPlanResponse)(nil),     // 42: api.affiliate.service.v1.DeleteCommissionPlanResponse
-	(*v1.ListAllCommissionPlansResponse)(nil),   // 43: api.affiliate.service.v1.ListAllCommissionPlansResponse
-	(*v1.CreateAffiliateResponse)(nil),          // 44: api.affiliate.service.v1.CreateAffiliateResponse
-	(*v1.UpdateAffiliateResponse)(nil),          // 45: api.affiliate.service.v1.UpdateAffiliateResponse
-	(*v1.ListAffiliatesResponse)(nil),           // 46: api.affiliate.service.v1.ListAffiliatesResponse
-	(*v1.DeleteAffiliateResponse)(nil),          // 47: api.affiliate.service.v1.DeleteAffiliateResponse
-	(*v1.GetAffiliateDetailsResponse)(nil),      // 48: api.affiliate.service.v1.GetAffiliateDetailsResponse
-	(*v1.CreateCampaignResponse)(nil),           // 49: api.affiliate.service.v1.CreateCampaignResponse
-	(*v1.UpdateCampaignResponse)(nil),           // 50: api.affiliate.service.v1.UpdateCampaignResponse
-	(*v1.ListCampaignsResponse)(nil),            // 51: api.affiliate.service.v1.ListCampaignsResponse
-	(*v1.DeleteCampaignResponse)(nil),           // 52: api.affiliate.service.v1.DeleteCampaignResponse
-	(*v1.CreatePostbackResponse)(nil),           // 53: api.affiliate.service.v1.CreatePostbackResponse
-	(*v1.UpdatePostbackResponse)(nil),           // 54: api.affiliate.service.v1.UpdatePostbackResponse
-	(*v1.DeletePostbackResponse)(nil),           // 55: api.affiliate.service.v1.DeletePostbackResponse
-	(*v1.ListPostbacksResponse)(nil),            // 56: api.affiliate.service.v1.ListPostbacksResponse
-	(*v1.ListAffiliateDomainsResponse)(nil),     // 57: api.affiliate.service.v1.ListAffiliateDomainsResponse
-	(*v1.SetAffiliateDomainResponse)(nil),       // 58: api.affiliate.service.v1.SetAffiliateDomainResponse
-	(*v1.ListEventsResponse)(nil),               // 59: api.affiliate.service.v1.ListEventsResponse
-	(*v1.ListCommissionsResponse)(nil),          // 60: api.affiliate.service.v1.ListCommissionsResponse
-	(*v1.ListUsersResponse)(nil),                // 61: api.affiliate.service.v1.ListUsersResponse
-	(*v1.ListAffiliateBillsResponse)(nil),       // 62: api.affiliate.service.v1.ListAffiliateBillsResponse
-	(*v1.SetReferralPlanResponse)(nil),          // 63: api.affiliate.service.v1.SetReferralPlanResponse
-	(*v1.GetReferralPlanResponse)(nil),          // 64: api.affiliate.service.v1.GetReferralPlanResponse
+	(*CreateCommissionPlanRequest)(nil),             // 0: api.backoffice.service.v1.CreateCommissionPlanRequest
+	(*UpdateCommissionPlanRequest)(nil),             // 1: api.backoffice.service.v1.UpdateCommissionPlanRequest
+	(*GetCommissionPlanRequest)(nil),                // 2: api.backoffice.service.v1.GetCommissionPlanRequest
+	(*ListCommissionPlansRequest)(nil),              // 3: api.backoffice.service.v1.ListCommissionPlansRequest
+	(*DeleteCommissionPlanRequest)(nil),             // 4: api.backoffice.service.v1.DeleteCommissionPlanRequest
+	(*ListAllCommissionPlansRequest)(nil),           // 5: api.backoffice.service.v1.ListAllCommissionPlansRequest
+	(*ListAffiliateCommissionPlansRequest)(nil),     // 6: api.backoffice.service.v1.ListAffiliateCommissionPlansRequest
+	(*CreateAffiliateRequest)(nil),                  // 7: api.backoffice.service.v1.CreateAffiliateRequest
+	(*UpdateAffiliateRequest)(nil),                  // 8: api.backoffice.service.v1.UpdateAffiliateRequest
+	(*ListAffiliatesRequest)(nil),                   // 9: api.backoffice.service.v1.ListAffiliatesRequest
+	(*DeleteAffiliateRequest)(nil),                  // 10: api.backoffice.service.v1.DeleteAffiliateRequest
+	(*GetAffiliateDetailsRequest)(nil),              // 11: api.backoffice.service.v1.GetAffiliateDetailsRequest
+	(*CreateCampaignRequest)(nil),                   // 12: api.backoffice.service.v1.CreateCampaignRequest
+	(*UpdateCampaignRequest)(nil),                   // 13: api.backoffice.service.v1.UpdateCampaignRequest
+	(*ListCampaignsRequest)(nil),                    // 14: api.backoffice.service.v1.ListCampaignsRequest
+	(*ListAffiliateCampaignsRequest)(nil),           // 15: api.backoffice.service.v1.ListAffiliateCampaignsRequest
+	(*DeleteCampaignRequest)(nil),                   // 16: api.backoffice.service.v1.DeleteCampaignRequest
+	(*CreatePostbackRequest)(nil),                   // 17: api.backoffice.service.v1.CreatePostbackRequest
+	(*UpdatePostbackRequest)(nil),                   // 18: api.backoffice.service.v1.UpdatePostbackRequest
+	(*DeletePostbackRequest)(nil),                   // 19: api.backoffice.service.v1.DeletePostbackRequest
+	(*ListPostbacksRequest)(nil),                    // 20: api.backoffice.service.v1.ListPostbacksRequest
+	(*ListAffiliateDomainsRequest)(nil),             // 21: api.backoffice.service.v1.ListAffiliateDomainsRequest
+	(*SetAffiliateDomainRequest)(nil),               // 22: api.backoffice.service.v1.SetAffiliateDomainRequest
+	(*ListEventsRequest)(nil),                       // 23: api.backoffice.service.v1.ListEventsRequest
+	(*ListCommissionsRequest)(nil),                  // 24: api.backoffice.service.v1.ListCommissionsRequest
+	(*ListAffiliateUsersRequest)(nil),               // 25: api.backoffice.service.v1.ListAffiliateUsersRequest
+	(*ListAffiliateBillsRequest)(nil),               // 26: api.backoffice.service.v1.ListAffiliateBillsRequest
+	(*SetReferralPlanRequest)(nil),                  // 27: api.backoffice.service.v1.SetReferralPlanRequest
+	(*GetReferralPlanRequest)(nil),                  // 28: api.backoffice.service.v1.GetReferralPlanRequest
+	(*CreateCampaignRequest_Campaign)(nil),          // 29: api.backoffice.service.v1.CreateCampaignRequest.Campaign
+	(*v1.CommissionPlanConfig)(nil),                 // 30: api.affiliate.service.v1.CommissionPlanConfig
+	(*common.OperatorContext)(nil),                  // 31: api.common.OperatorContext
+	(*v1.AffiliateInfo)(nil),                        // 32: api.affiliate.service.v1.AffiliateInfo
+	(*v1.Campaign)(nil),                             // 33: api.affiliate.service.v1.Campaign
+	(*common.OperatorContextFilters)(nil),           // 34: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                   // 35: google.protobuf.Timestamp
+	(*v1.ReferralPlanConfig)(nil),                   // 36: api.affiliate.service.v1.ReferralPlanConfig
+	(*v1.ChannelConfig)(nil),                        // 37: api.affiliate.service.v1.ChannelConfig
+	(*v1.CreateCommissionPlanResponse)(nil),         // 38: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*v1.UpdateCommissionPlanResponse)(nil),         // 39: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*v1.GetCommissionPlanResponse)(nil),            // 40: api.affiliate.service.v1.GetCommissionPlanResponse
+	(*v1.ListCommissionPlansResponse)(nil),          // 41: api.affiliate.service.v1.ListCommissionPlansResponse
+	(*v1.DeleteCommissionPlanResponse)(nil),         // 42: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*v1.ListAllCommissionPlansResponse)(nil),       // 43: api.affiliate.service.v1.ListAllCommissionPlansResponse
+	(*v1.ListAffiliateCommissionPlansResponse)(nil), // 44: api.affiliate.service.v1.ListAffiliateCommissionPlansResponse
+	(*v1.CreateAffiliateResponse)(nil),              // 45: api.affiliate.service.v1.CreateAffiliateResponse
+	(*v1.UpdateAffiliateResponse)(nil),              // 46: api.affiliate.service.v1.UpdateAffiliateResponse
+	(*v1.ListAffiliatesResponse)(nil),               // 47: api.affiliate.service.v1.ListAffiliatesResponse
+	(*v1.DeleteAffiliateResponse)(nil),              // 48: api.affiliate.service.v1.DeleteAffiliateResponse
+	(*v1.GetAffiliateDetailsResponse)(nil),          // 49: api.affiliate.service.v1.GetAffiliateDetailsResponse
+	(*v1.CreateCampaignResponse)(nil),               // 50: api.affiliate.service.v1.CreateCampaignResponse
+	(*v1.UpdateCampaignResponse)(nil),               // 51: api.affiliate.service.v1.UpdateCampaignResponse
+	(*v1.ListCampaignsResponse)(nil),                // 52: api.affiliate.service.v1.ListCampaignsResponse
+	(*v1.DeleteCampaignResponse)(nil),               // 53: api.affiliate.service.v1.DeleteCampaignResponse
+	(*v1.CreatePostbackResponse)(nil),               // 54: api.affiliate.service.v1.CreatePostbackResponse
+	(*v1.UpdatePostbackResponse)(nil),               // 55: api.affiliate.service.v1.UpdatePostbackResponse
+	(*v1.DeletePostbackResponse)(nil),               // 56: api.affiliate.service.v1.DeletePostbackResponse
+	(*v1.ListPostbacksResponse)(nil),                // 57: api.affiliate.service.v1.ListPostbacksResponse
+	(*v1.ListAffiliateDomainsResponse)(nil),         // 58: api.affiliate.service.v1.ListAffiliateDomainsResponse
+	(*v1.SetAffiliateDomainResponse)(nil),           // 59: api.affiliate.service.v1.SetAffiliateDomainResponse
+	(*v1.ListEventsResponse)(nil),                   // 60: api.affiliate.service.v1.ListEventsResponse
+	(*v1.ListCommissionsResponse)(nil),              // 61: api.affiliate.service.v1.ListCommissionsResponse
+	(*v1.ListUsersResponse)(nil),                    // 62: api.affiliate.service.v1.ListUsersResponse
+	(*v1.ListAffiliateBillsResponse)(nil),           // 63: api.affiliate.service.v1.ListAffiliateBillsResponse
+	(*v1.SetReferralPlanResponse)(nil),              // 64: api.affiliate.service.v1.SetReferralPlanResponse
+	(*v1.GetReferralPlanResponse)(nil),              // 65: api.affiliate.service.v1.GetReferralPlanResponse
 }
 var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	30, // 0: api.backoffice.service.v1.CreateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.CommissionPlanConfig
@@ -2571,29 +2572,29 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	41, // 62: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
 	42, // 63: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
 	43, // 64: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
-	41, // 65: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	44, // 66: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	45, // 67: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	46, // 68: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	47, // 69: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	48, // 70: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateDetails:output_type -> api.affiliate.service.v1.GetAffiliateDetailsResponse
-	49, // 71: api.backoffice.service.v1.BackofficeAffiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
-	50, // 72: api.backoffice.service.v1.BackofficeAffiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
-	51, // 73: api.backoffice.service.v1.BackofficeAffiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	51, // 74: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	52, // 75: api.backoffice.service.v1.BackofficeAffiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
-	53, // 76: api.backoffice.service.v1.BackofficeAffiliate.CreatePostback:output_type -> api.affiliate.service.v1.CreatePostbackResponse
-	54, // 77: api.backoffice.service.v1.BackofficeAffiliate.UpdatePostback:output_type -> api.affiliate.service.v1.UpdatePostbackResponse
-	55, // 78: api.backoffice.service.v1.BackofficeAffiliate.DeletePostback:output_type -> api.affiliate.service.v1.DeletePostbackResponse
-	56, // 79: api.backoffice.service.v1.BackofficeAffiliate.ListPostbacks:output_type -> api.affiliate.service.v1.ListPostbacksResponse
-	57, // 80: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateDomains:output_type -> api.affiliate.service.v1.ListAffiliateDomainsResponse
-	58, // 81: api.backoffice.service.v1.BackofficeAffiliate.SetAffiliateDomain:output_type -> api.affiliate.service.v1.SetAffiliateDomainResponse
-	59, // 82: api.backoffice.service.v1.BackofficeAffiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
-	60, // 83: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
-	61, // 84: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
-	62, // 85: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
-	63, // 86: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
-	64, // 87: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
+	44, // 65: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCommissionPlans:output_type -> api.affiliate.service.v1.ListAffiliateCommissionPlansResponse
+	45, // 66: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	46, // 67: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	47, // 68: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	48, // 69: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	49, // 70: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateDetails:output_type -> api.affiliate.service.v1.GetAffiliateDetailsResponse
+	50, // 71: api.backoffice.service.v1.BackofficeAffiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
+	51, // 72: api.backoffice.service.v1.BackofficeAffiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
+	52, // 73: api.backoffice.service.v1.BackofficeAffiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	52, // 74: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	53, // 75: api.backoffice.service.v1.BackofficeAffiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
+	54, // 76: api.backoffice.service.v1.BackofficeAffiliate.CreatePostback:output_type -> api.affiliate.service.v1.CreatePostbackResponse
+	55, // 77: api.backoffice.service.v1.BackofficeAffiliate.UpdatePostback:output_type -> api.affiliate.service.v1.UpdatePostbackResponse
+	56, // 78: api.backoffice.service.v1.BackofficeAffiliate.DeletePostback:output_type -> api.affiliate.service.v1.DeletePostbackResponse
+	57, // 79: api.backoffice.service.v1.BackofficeAffiliate.ListPostbacks:output_type -> api.affiliate.service.v1.ListPostbacksResponse
+	58, // 80: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateDomains:output_type -> api.affiliate.service.v1.ListAffiliateDomainsResponse
+	59, // 81: api.backoffice.service.v1.BackofficeAffiliate.SetAffiliateDomain:output_type -> api.affiliate.service.v1.SetAffiliateDomainResponse
+	60, // 82: api.backoffice.service.v1.BackofficeAffiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
+	61, // 83: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
+	62, // 84: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
+	63, // 85: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
+	64, // 86: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
+	65, // 87: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
 	59, // [59:88] is the sub-list for method output_type
 	30, // [30:59] is the sub-list for method input_type
 	30, // [30:30] is the sub-list for extension type_name

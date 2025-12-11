@@ -765,7 +765,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateCommissionPlansResponse'
     /v1/backoffice/affiliate/commission/plan/list/all:
         post:
             tags:
@@ -7215,6 +7215,43 @@ components:
                     format: date-time
                 billDetail:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateBill_BillDetail'
+        api.affiliate.service.v1.ListAffiliateCommissionPlansResponse:
+            type: object
+            properties:
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                title:
+                    type: string
+                status:
+                    type: string
+                source:
+                    type: string
+                types:
+                    type: array
+                    items:
+                        type: string
+                baseCurrency:
+                    type: string
+                sourceOperatorName:
+                    type: string
+                planConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
         api.affiliate.service.v1.ListAffiliateDomainsResponse:
             type: object
             properties:

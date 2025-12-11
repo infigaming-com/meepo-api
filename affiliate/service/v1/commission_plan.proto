@@ -95,6 +95,23 @@ message ListAllCommissionPlansResponse {
     repeated CommissionPlan commission_plans = 1;
 }
 
+message ListAffiliateCommissionPlansResponse {
+    message AffiliateCommissionPlan {
+        int64 commission_plan_id = 1;
+        string title = 2;
+        string status = 3;
+        string source = 4; // system/retailer/company/operator
+        repeated string types = 5; // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
+        string base_currency = 6;
+        string source_operator_name = 7;
+        CommissionPlanConfig plan_config = 8;
+    }
+    repeated AffiliateCommissionPlan commission_plans = 1;
+    int32 total_count = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
 message CommissionPlanConfig {
     CPAConfig cpa = 1;
     RevShareConfig revshare = 2;
