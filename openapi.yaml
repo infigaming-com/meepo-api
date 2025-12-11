@@ -2921,6 +2921,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/notification-channels/get:
+        post:
+            tags:
+                - BackofficeOperator
+            description: GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+            operationId: BackofficeOperator_GetOperatorNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorNotificationChannelsResponse'
+    /v1/backoffice/operator/notification-channels/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+            operationId: BackofficeOperator_UpdateOperatorNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorNotificationChannelsResponse'
     /v1/backoffice/operator/register-limit-config/get:
         post:
             tags:
@@ -9615,6 +9653,13 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorNotificationChannelsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                channelType:
+                    type: string
         api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
             type: object
             properties:
@@ -14544,6 +14589,15 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorCurrencyConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
+        api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                channelType:
+                    type: string
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:
@@ -17085,6 +17139,11 @@ components:
                     type: string
                 clientIp:
                     type: string
+        api.user.service.v1.GetOperatorNotificationChannelsResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
         api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
             type: object
             properties:
@@ -17516,6 +17575,29 @@ components:
             type: object
             properties: {}
             description: LogoutResponse is an empty message for the logout operation.
+        api.user.service.v1.NotificationChannelConfig:
+            type: object
+            properties:
+                telegram:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig_TelegramConfig'
+                slack:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig_SlackConfig'
+        api.user.service.v1.NotificationChannelConfig_SlackConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                webhookUrl:
+                    type: string
+        api.user.service.v1.NotificationChannelConfig_TelegramConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                botToken:
+                    type: string
+                chatId:
+                    type: string
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
@@ -17938,6 +18020,9 @@ components:
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UpdateOperatorNotificationChannelsResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateOperatorStatusResponse:

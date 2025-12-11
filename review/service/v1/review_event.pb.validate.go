@@ -239,3 +239,127 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = EventResponseValidationError{}
+
+// Validate checks the field values on WithdrawRequestEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *WithdrawRequestEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WithdrawRequestEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// WithdrawRequestEventMultiError, or nil if none found.
+func (m *WithdrawRequestEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WithdrawRequestEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TicketId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for TicketType
+
+	// no validation rules for Currency
+
+	// no validation rules for WithdrawAmount
+
+	// no validation rules for UserId
+
+	// no validation rules for CreatedAt
+
+	if len(errors) > 0 {
+		return WithdrawRequestEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// WithdrawRequestEventMultiError is an error wrapping multiple validation
+// errors returned by WithdrawRequestEvent.ValidateAll() if the designated
+// constraints aren't met.
+type WithdrawRequestEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WithdrawRequestEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WithdrawRequestEventMultiError) AllErrors() []error { return m }
+
+// WithdrawRequestEventValidationError is the validation error returned by
+// WithdrawRequestEvent.Validate if the designated constraints aren't met.
+type WithdrawRequestEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WithdrawRequestEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WithdrawRequestEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WithdrawRequestEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WithdrawRequestEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WithdrawRequestEventValidationError) ErrorName() string {
+	return "WithdrawRequestEventValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e WithdrawRequestEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWithdrawRequestEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WithdrawRequestEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WithdrawRequestEventValidationError{}

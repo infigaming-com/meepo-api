@@ -13,6 +13,10 @@ service Operator {
 	rpc AddWhiteLabelOperator (AddWhiteLabelOperatorRequest) returns (AddWhiteLabelOperatorResponse) {}	
 
 	rpc PreLaunchCheck(PreLaunchCheckRequest) returns (PreLaunchCheckResponse) { }
+	
+	rpc UpdateOperatorNotificationChannels(UpdateOperatorNotificationChannelsRequest) returns (UpdateOperatorNotificationChannelsResponse) {}
+	
+	rpc GetOperatorNotificationChannels(GetOperatorNotificationChannelsRequest) returns (GetOperatorNotificationChannelsResponse) {}
 }
 
 message AddWhiteLabelOperatorRequest {
@@ -28,4 +32,37 @@ message PreLaunchCheckRequest {
 message PreLaunchCheckResponse {
 	string balance = 1;
 	string threshhold = 2;
+}
+
+message NotificationChannelConfig {
+	message TelegramConfig {
+		bool enabled = 1;
+		string bot_token = 2;
+		string chat_id = 3;
+	}
+	
+	message SlackConfig {
+		bool enabled = 1;
+		string webhook_url = 2;
+	}
+	
+	TelegramConfig telegram = 1;
+	SlackConfig slack = 2;
+}
+
+message UpdateOperatorNotificationChannelsRequest {
+	int64 operator_id = 1;
+	string channel_type = 2;
+	NotificationChannelConfig config = 3;
+}
+
+message UpdateOperatorNotificationChannelsResponse {}
+
+message GetOperatorNotificationChannelsRequest {
+	int64 operator_id = 1;
+	string channel_type = 2;
+}
+
+message GetOperatorNotificationChannelsResponse {
+	NotificationChannelConfig config = 1;
 }

@@ -4823,6 +4823,255 @@ var _ interface {
 	ErrorName() string
 } = GetOperatorRegistrationConfigResponseValidationError{}
 
+// Validate checks the field values on
+// UpdateOperatorNotificationChannelsRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *UpdateOperatorNotificationChannelsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// UpdateOperatorNotificationChannelsRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// UpdateOperatorNotificationChannelsRequestMultiError, or nil if none found.
+func (m *UpdateOperatorNotificationChannelsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOperatorNotificationChannelsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for ChannelType
+
+	if all {
+		switch v := interface{}(m.GetConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorNotificationChannelsRequestValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorNotificationChannelsRequestValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorNotificationChannelsRequestValidationError{
+				field:  "Config",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateOperatorNotificationChannelsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOperatorNotificationChannelsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// UpdateOperatorNotificationChannelsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateOperatorNotificationChannelsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOperatorNotificationChannelsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOperatorNotificationChannelsRequestMultiError) AllErrors() []error { return m }
+
+// UpdateOperatorNotificationChannelsRequestValidationError is the validation
+// error returned by UpdateOperatorNotificationChannelsRequest.Validate if the
+// designated constraints aren't met.
+type UpdateOperatorNotificationChannelsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOperatorNotificationChannelsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOperatorNotificationChannelsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOperatorNotificationChannelsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOperatorNotificationChannelsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOperatorNotificationChannelsRequestValidationError) ErrorName() string {
+	return "UpdateOperatorNotificationChannelsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOperatorNotificationChannelsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOperatorNotificationChannelsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOperatorNotificationChannelsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOperatorNotificationChannelsRequestValidationError{}
+
+// Validate checks the field values on GetOperatorNotificationChannelsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorNotificationChannelsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOperatorNotificationChannelsRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetOperatorNotificationChannelsRequestMultiError, or nil if none found.
+func (m *GetOperatorNotificationChannelsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorNotificationChannelsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for ChannelType
+
+	if len(errors) > 0 {
+		return GetOperatorNotificationChannelsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorNotificationChannelsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorNotificationChannelsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorNotificationChannelsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorNotificationChannelsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorNotificationChannelsRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorNotificationChannelsRequestValidationError is the validation
+// error returned by GetOperatorNotificationChannelsRequest.Validate if the
+// designated constraints aren't met.
+type GetOperatorNotificationChannelsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorNotificationChannelsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorNotificationChannelsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorNotificationChannelsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorNotificationChannelsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorNotificationChannelsRequestValidationError) ErrorName() string {
+	return "GetOperatorNotificationChannelsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorNotificationChannelsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorNotificationChannelsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorNotificationChannelsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorNotificationChannelsRequestValidationError{}
+
 // Validate checks the field values on ListAllOperatorsResponse_Operator with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are

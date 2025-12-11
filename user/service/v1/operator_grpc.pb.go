@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Operator_AddWhiteLabelOperator_FullMethodName = "/api.user.service.v1.Operator/AddWhiteLabelOperator"
-	Operator_PreLaunchCheck_FullMethodName        = "/api.user.service.v1.Operator/PreLaunchCheck"
+	Operator_AddWhiteLabelOperator_FullMethodName              = "/api.user.service.v1.Operator/AddWhiteLabelOperator"
+	Operator_PreLaunchCheck_FullMethodName                     = "/api.user.service.v1.Operator/PreLaunchCheck"
+	Operator_UpdateOperatorNotificationChannels_FullMethodName = "/api.user.service.v1.Operator/UpdateOperatorNotificationChannels"
+	Operator_GetOperatorNotificationChannels_FullMethodName    = "/api.user.service.v1.Operator/GetOperatorNotificationChannels"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -31,6 +33,8 @@ const (
 type OperatorClient interface {
 	AddWhiteLabelOperator(ctx context.Context, in *AddWhiteLabelOperatorRequest, opts ...grpc.CallOption) (*AddWhiteLabelOperatorResponse, error)
 	PreLaunchCheck(ctx context.Context, in *PreLaunchCheckRequest, opts ...grpc.CallOption) (*PreLaunchCheckResponse, error)
+	UpdateOperatorNotificationChannels(ctx context.Context, in *UpdateOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*UpdateOperatorNotificationChannelsResponse, error)
+	GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*GetOperatorNotificationChannelsResponse, error)
 }
 
 type operatorClient struct {
@@ -61,6 +65,26 @@ func (c *operatorClient) PreLaunchCheck(ctx context.Context, in *PreLaunchCheckR
 	return out, nil
 }
 
+func (c *operatorClient) UpdateOperatorNotificationChannels(ctx context.Context, in *UpdateOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*UpdateOperatorNotificationChannelsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorNotificationChannelsResponse)
+	err := c.cc.Invoke(ctx, Operator_UpdateOperatorNotificationChannels_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*GetOperatorNotificationChannelsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorNotificationChannelsResponse)
+	err := c.cc.Invoke(ctx, Operator_GetOperatorNotificationChannels_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -69,6 +93,8 @@ func (c *operatorClient) PreLaunchCheck(ctx context.Context, in *PreLaunchCheckR
 type OperatorServer interface {
 	AddWhiteLabelOperator(context.Context, *AddWhiteLabelOperatorRequest) (*AddWhiteLabelOperatorResponse, error)
 	PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*PreLaunchCheckResponse, error)
+	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*UpdateOperatorNotificationChannelsResponse, error)
+	GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*GetOperatorNotificationChannelsResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -84,6 +110,12 @@ func (UnimplementedOperatorServer) AddWhiteLabelOperator(context.Context, *AddWh
 }
 func (UnimplementedOperatorServer) PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*PreLaunchCheckResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PreLaunchCheck not implemented")
+}
+func (UnimplementedOperatorServer) UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*UpdateOperatorNotificationChannelsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorNotificationChannels not implemented")
+}
+func (UnimplementedOperatorServer) GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*GetOperatorNotificationChannelsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorNotificationChannels not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -142,6 +174,42 @@ func _Operator_PreLaunchCheck_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_UpdateOperatorNotificationChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorNotificationChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).UpdateOperatorNotificationChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_UpdateOperatorNotificationChannels_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).UpdateOperatorNotificationChannels(ctx, req.(*UpdateOperatorNotificationChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetOperatorNotificationChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorNotificationChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetOperatorNotificationChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetOperatorNotificationChannels_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetOperatorNotificationChannels(ctx, req.(*GetOperatorNotificationChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +224,14 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PreLaunchCheck",
 			Handler:    _Operator_PreLaunchCheck_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorNotificationChannels",
+			Handler:    _Operator_UpdateOperatorNotificationChannels_Handler,
+		},
+		{
+			MethodName: "GetOperatorNotificationChannels",
+			Handler:    _Operator_GetOperatorNotificationChannels_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
