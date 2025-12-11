@@ -571,6 +571,7 @@ message ListGamesResponse {
 message UpdateGameRequest {
 	string game_id = 1;
 	optional bool enabled = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message UpdateGameResponse {}
@@ -578,6 +579,7 @@ message UpdateGameResponse {}
 message UpdateProviderRequest {
 	string provider_id = 1;
 	optional bool enabled = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message UpdateProviderResponse {}
