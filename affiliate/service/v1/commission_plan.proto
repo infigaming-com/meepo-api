@@ -95,6 +95,13 @@ message ListAllCommissionPlansResponse {
     repeated CommissionPlan commission_plans = 1;
 }
 
+message ListAffiliateCommissionPlansRequest {
+    api.common.OperatorContext operator_context = 1;
+    int64 affiliate_id = 2;
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+}
+
 message ListAffiliateCommissionPlansResponse {
     message AffiliateCommissionPlan {
         int64 commission_plan_id = 1;
