@@ -54,6 +54,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (api.affiliate.service.v1.ListCommissionPlansResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/list/affiliate"
+			body: "*"
+		};
+	}
 
 	// -------------- Affiliate --------------
 
@@ -258,6 +264,11 @@ message ListAllCommissionPlansRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	repeated string countries = 2; // not supported yet
 	optional string status = 3;
+}
+
+message ListAffiliateCommissionPlansRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
 }
 
 // -------------- Affiliate --------------

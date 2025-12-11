@@ -10031,6 +10031,8 @@ func (m *ListCommissionsResponse_Commission) validate(all bool) error {
 
 	// no validation rules for CommissionPlanName
 
+	// no validation rules for CommissionType
+
 	// no validation rules for CommissionSubtype
 
 	// no validation rules for ReportingCurrency
