@@ -711,7 +711,12 @@ message ExportCustomerStrikeReportsRequest {
 
 // ============== Game Tags Messages ==============
 
-message BackofficeListGameTagsRequest {}
+message BackofficeListGameTagsRequest {
+	int32 page = 1;
+	int32 page_size = 2;
+	optional string name = 3;
+	optional bool enabled = 4;
+}
 
 message BackofficeListGameTagsResponse {
 	message GameTag {
@@ -722,6 +727,9 @@ message BackofficeListGameTagsResponse {
 		int64 created_at = 5;
 	}
 	repeated GameTag tags = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
 
 message BackofficeCreateGameTagRequest {

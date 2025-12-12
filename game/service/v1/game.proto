@@ -1784,6 +1784,10 @@ message GetDepositCreditsGGRResponse {
 
 message BackofficeListGameTagsRequest {
 	api.common.OperatorContext operator_context = 1;
+	optional string name = 2;    // Filter by name (fuzzy search)
+	optional bool enabled = 3;   // Filter by enabled status
+	int32 page = 4;              // Page number (default: 1)
+	int32 page_size = 5;         // Page size (default: 20)
 }
 
 message BackofficeListGameTagsResponse {
@@ -1795,6 +1799,9 @@ message BackofficeListGameTagsResponse {
 		int64 created_at = 5;
 	}
 	repeated GameTag tags = 1;
+	int32 total = 2;     // Total count of matching tags
+	int32 page = 3;      // Current page
+	int32 page_size = 4; // Page size
 }
 
 message BackofficeCreateGameTagRequest {

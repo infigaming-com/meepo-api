@@ -8309,7 +8309,17 @@ components:
             properties: {}
         api.backoffice.service.v1.BackofficeListGameTagsRequest:
             type: object
-            properties: {}
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.BackofficeListGameTagsResponse:
             type: object
             properties:
@@ -8317,6 +8327,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListGameTagsResponse_GameTag'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.BackofficeListGameTagsResponse_GameTag:
             type: object
             properties:
