@@ -17,3 +17,17 @@ message EventRequest {
 }
 
 message EventResponse {}
+
+message WithdrawRequestEvent {
+	int64 ticket_id = 1;
+	int64 operator_id = 2;
+	int64 company_operator_id = 3;
+	int64 retailer_operator_id = 4;
+	int64 system_operator_id = 5;
+	string operator_name = 6;
+	string ticket_type = 7;
+	string currency = 8;
+	string withdraw_amount = 9;
+	int64 user_id = 10;
+	int64 created_at = 11;
+}

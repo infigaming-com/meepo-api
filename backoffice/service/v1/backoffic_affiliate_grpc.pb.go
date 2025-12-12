@@ -20,34 +20,35 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeAffiliate_CreateCommissionPlan_FullMethodName   = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
-	BackofficeAffiliate_UpdateCommissionPlan_FullMethodName   = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCommissionPlan"
-	BackofficeAffiliate_GetCommissionPlan_FullMethodName      = "/api.backoffice.service.v1.BackofficeAffiliate/GetCommissionPlan"
-	BackofficeAffiliate_ListCommissionPlans_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissionPlans"
-	BackofficeAffiliate_DeleteCommissionPlan_FullMethodName   = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCommissionPlan"
-	BackofficeAffiliate_ListAllCommissionPlans_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/ListAllCommissionPlans"
-	BackofficeAffiliate_CreateAffiliate_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliate"
-	BackofficeAffiliate_UpdateAffiliate_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliate"
-	BackofficeAffiliate_ListAffiliates_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
-	BackofficeAffiliate_DeleteAffiliate_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
-	BackofficeAffiliate_GetAffiliateDetails_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
-	BackofficeAffiliate_CreateCampaign_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
-	BackofficeAffiliate_UpdateCampaign_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
-	BackofficeAffiliate_ListCampaigns_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
-	BackofficeAffiliate_ListAffiliateCampaigns_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
-	BackofficeAffiliate_DeleteCampaign_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCampaign"
-	BackofficeAffiliate_CreatePostback_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/CreatePostback"
-	BackofficeAffiliate_UpdatePostback_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/UpdatePostback"
-	BackofficeAffiliate_DeletePostback_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/DeletePostback"
-	BackofficeAffiliate_ListPostbacks_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbacks"
-	BackofficeAffiliate_ListAffiliateDomains_FullMethodName   = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateDomains"
-	BackofficeAffiliate_SetAffiliateDomain_FullMethodName     = "/api.backoffice.service.v1.BackofficeAffiliate/SetAffiliateDomain"
-	BackofficeAffiliate_ListEvents_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
-	BackofficeAffiliate_ListCommissions_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
-	BackofficeAffiliate_ListAffiliateUsers_FullMethodName     = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
-	BackofficeAffiliate_ListAffiliateBills_FullMethodName     = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
-	BackofficeAffiliate_SetReferralPlan_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
-	BackofficeAffiliate_GetReferralPlan_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
+	BackofficeAffiliate_CreateCommissionPlan_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
+	BackofficeAffiliate_UpdateCommissionPlan_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCommissionPlan"
+	BackofficeAffiliate_GetCommissionPlan_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/GetCommissionPlan"
+	BackofficeAffiliate_ListCommissionPlans_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissionPlans"
+	BackofficeAffiliate_DeleteCommissionPlan_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCommissionPlan"
+	BackofficeAffiliate_ListAllCommissionPlans_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/ListAllCommissionPlans"
+	BackofficeAffiliate_ListAffiliateCommissionPlans_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCommissionPlans"
+	BackofficeAffiliate_CreateAffiliate_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliate"
+	BackofficeAffiliate_UpdateAffiliate_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliate"
+	BackofficeAffiliate_ListAffiliates_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
+	BackofficeAffiliate_DeleteAffiliate_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
+	BackofficeAffiliate_GetAffiliateDetails_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
+	BackofficeAffiliate_CreateCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
+	BackofficeAffiliate_UpdateCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
+	BackofficeAffiliate_ListCampaigns_FullMethodName                = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
+	BackofficeAffiliate_ListAffiliateCampaigns_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
+	BackofficeAffiliate_DeleteCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCampaign"
+	BackofficeAffiliate_CreatePostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/CreatePostback"
+	BackofficeAffiliate_UpdatePostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/UpdatePostback"
+	BackofficeAffiliate_DeletePostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/DeletePostback"
+	BackofficeAffiliate_ListPostbacks_FullMethodName                = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbacks"
+	BackofficeAffiliate_ListAffiliateDomains_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateDomains"
+	BackofficeAffiliate_SetAffiliateDomain_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/SetAffiliateDomain"
+	BackofficeAffiliate_ListEvents_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
+	BackofficeAffiliate_ListCommissions_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
+	BackofficeAffiliate_ListAffiliateUsers_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
+	BackofficeAffiliate_ListAffiliateBills_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
+	BackofficeAffiliate_SetReferralPlan_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
+	BackofficeAffiliate_GetReferralPlan_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -60,6 +61,7 @@ type BackofficeAffiliateClient interface {
 	ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error)
 	DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...grpc.CallOption) (*v1.DeleteCommissionPlanResponse, error)
 	ListAllCommissionPlans(ctx context.Context, in *ListAllCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAllCommissionPlansResponse, error)
+	ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error)
 	CreateAffiliate(ctx context.Context, in *CreateAffiliateRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateResponse, error)
 	UpdateAffiliate(ctx context.Context, in *UpdateAffiliateRequest, opts ...grpc.CallOption) (*v1.UpdateAffiliateResponse, error)
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*v1.ListAffiliatesResponse, error)
@@ -146,6 +148,16 @@ func (c *backofficeAffiliateClient) ListAllCommissionPlans(ctx context.Context, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListAllCommissionPlansResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAllCommissionPlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListAffiliateCommissionPlansResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAffiliateCommissionPlans_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -382,6 +394,7 @@ type BackofficeAffiliateServer interface {
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
 	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error)
+	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error)
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error)
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
@@ -431,6 +444,9 @@ func (UnimplementedBackofficeAffiliateServer) DeleteCommissionPlan(context.Conte
 }
 func (UnimplementedBackofficeAffiliateServer) ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAllCommissionPlans not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateCommissionPlans not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateAffiliate not implemented")
@@ -623,6 +639,24 @@ func _BackofficeAffiliate_ListAllCommissionPlans_Handler(srv interface{}, ctx co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAffiliateServer).ListAllCommissionPlans(ctx, req.(*ListAllCommissionPlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListAffiliateCommissionPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateCommissionPlansRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListAffiliateCommissionPlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListAffiliateCommissionPlans_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListAffiliateCommissionPlans(ctx, req.(*ListAffiliateCommissionPlansRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1053,6 +1087,10 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAllCommissionPlans",
 			Handler:    _BackofficeAffiliate_ListAllCommissionPlans_Handler,
+		},
+		{
+			MethodName: "ListAffiliateCommissionPlans",
+			Handler:    _BackofficeAffiliate_ListAffiliateCommissionPlans_Handler,
 		},
 		{
 			MethodName: "CreateAffiliate",

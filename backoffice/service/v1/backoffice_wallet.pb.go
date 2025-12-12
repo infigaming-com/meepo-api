@@ -1362,7 +1362,7 @@ func (x *OperatorTransferResponse) GetTargetOperatorBalanceCurrency() string {
 
 type OperatorSwapRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	SourceOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=source_operator_context,json=sourceOperatorContext,proto3" json:"source_operator_context,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	TargetCurrency        string                  `protobuf:"bytes,4,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
@@ -1401,9 +1401,9 @@ func (*OperatorSwapRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *OperatorSwapRequest) GetOperatorContext() *common.OperatorContext {
+func (x *OperatorSwapRequest) GetSourceOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
+		return x.SourceOperatorContext
 	}
 	return nil
 }
@@ -4193,9 +4193,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\roperator_cash\x18\x01 \x01(\tR\foperatorCash\x12:\n" +
 	"\x19operator_balance_currency\x18\x02 \x01(\tR\x17operatorBalanceCurrency\x120\n" +
 	"\x14target_operator_cash\x18\x03 \x01(\tR\x12targetOperatorCash\x12G\n" +
-	" target_operator_balance_currency\x18\x04 \x01(\tR\x1dtargetOperatorBalanceCurrency\"\x98\x02\n" +
-	"\x13OperatorSwapRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
+	" target_operator_balance_currency\x18\x04 \x01(\tR\x1dtargetOperatorBalanceCurrency\"\xa5\x02\n" +
+	"\x13OperatorSwapRequest\x12S\n" +
+	"\x17source_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15sourceOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12'\n" +
 	"\x0ftarget_currency\x18\x04 \x01(\tR\x0etargetCurrency\x12\x1f\n" +
@@ -4603,7 +4603,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	57, // 9: api.backoffice.service.v1.ListOperatorBalancesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	54, // 10: api.backoffice.service.v1.GetExchangeRatesResponse.exchange_rates:type_name -> api.backoffice.service.v1.GetExchangeRatesResponse.ExchangeRatesEntry
 	56, // 11: api.backoffice.service.v1.OperatorTransferRequest.operator_context:type_name -> api.common.OperatorContext
-	56, // 12: api.backoffice.service.v1.OperatorSwapRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 12: api.backoffice.service.v1.OperatorSwapRequest.source_operator_context:type_name -> api.common.OperatorContext
 	56, // 13: api.backoffice.service.v1.OperatorSwapRequest.target_operator_context:type_name -> api.common.OperatorContext
 	56, // 14: api.backoffice.service.v1.OperatorBalanceFreezeRequest.operator_context:type_name -> api.common.OperatorContext
 	56, // 15: api.backoffice.service.v1.OperatorBalanceRollbackRequest.operator_context:type_name -> api.common.OperatorContext

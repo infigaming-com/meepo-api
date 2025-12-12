@@ -780,6 +780,119 @@ var _ interface {
 	ErrorName() string
 } = ListAllCommissionPlansRequestValidationError{}
 
+// Validate checks the field values on ListAffiliateCommissionPlansRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListAffiliateCommissionPlansRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAffiliateCommissionPlansRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListAffiliateCommissionPlansRequestMultiError, or nil if none found.
+func (m *ListAffiliateCommissionPlansRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAffiliateCommissionPlansRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListAffiliateCommissionPlansRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAffiliateCommissionPlansRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListAffiliateCommissionPlansRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListAffiliateCommissionPlansRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAffiliateCommissionPlansRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAffiliateCommissionPlansRequestMultiError) AllErrors() []error { return m }
+
+// ListAffiliateCommissionPlansRequestValidationError is the validation error
+// returned by ListAffiliateCommissionPlansRequest.Validate if the designated
+// constraints aren't met.
+type ListAffiliateCommissionPlansRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAffiliateCommissionPlansRequestValidationError) ErrorName() string {
+	return "ListAffiliateCommissionPlansRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAffiliateCommissionPlansRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAffiliateCommissionPlansRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAffiliateCommissionPlansRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAffiliateCommissionPlansRequestValidationError{}
+
 // Validate checks the field values on CreateAffiliateRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1132,6 +1245,10 @@ func (m *ListAffiliatesRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.Pagination != nil {
+		// no validation rules for Pagination
 	}
 
 	if len(errors) > 0 {

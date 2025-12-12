@@ -29,6 +29,7 @@ const OperationBackofficeOperatorDeleteOperatorByoSubdomain = "/api.backoffice.s
 const OperationBackofficeOperatorDeleteRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/DeleteRegisterLoginBlacklist"
 const OperationBackofficeOperatorGetCurrentOperatorDetails = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
 const OperationBackofficeOperatorGetOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorAccountSettings"
+const OperationBackofficeOperatorGetOperatorNotificationChannels = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorNotificationChannels"
 const OperationBackofficeOperatorGetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
 const OperationBackofficeOperatorGetOperatorRegistrationConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationConfig"
 const OperationBackofficeOperatorGetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationFieldConfig"
@@ -43,6 +44,7 @@ const OperationBackofficeOperatorSetOperatorRegisterLimitConfig = "/api.backoffi
 const OperationBackofficeOperatorSetOperatorRegistrationConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationConfig"
 const OperationBackofficeOperatorSetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationFieldConfig"
 const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
+const OperationBackofficeOperatorUpdateOperatorNotificationChannels = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorNotificationChannels"
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
 
 type BackofficeOperatorHTTPServer interface {
@@ -60,6 +62,8 @@ type BackofficeOperatorHTTPServer interface {
 	// GetCurrentOperatorDetails GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error)
+	// GetOperatorNotificationChannels GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+	GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*v1.GetOperatorNotificationChannelsResponse, error)
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
 	GetOperatorRegistrationConfig(context.Context, *GetOperatorRegistrationConfigRequest) (*GetOperatorRegistrationConfigResponse, error)
@@ -81,6 +85,8 @@ type BackofficeOperatorHTTPServer interface {
 	SetOperatorRegistrationConfig(context.Context, *SetOperatorRegistrationConfigRequest) (*SetOperatorRegistrationConfigResponse, error)
 	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
+	// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error)
 }
@@ -111,6 +117,8 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/registration-field-config/get", _BackofficeOperator_GetOperatorRegistrationFieldConfig1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/registration-config/set", _BackofficeOperator_SetOperatorRegistrationConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/registration-config/get", _BackofficeOperator_GetOperatorRegistrationConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/notification-channels/update", _BackofficeOperator_UpdateOperatorNotificationChannels0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/notification-channels/get", _BackofficeOperator_GetOperatorNotificationChannels0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -641,6 +649,50 @@ func _BackofficeOperator_GetOperatorRegistrationConfig0_HTTP_Handler(srv Backoff
 	}
 }
 
+func _BackofficeOperator_UpdateOperatorNotificationChannels0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateOperatorNotificationChannelsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorUpdateOperatorNotificationChannels)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateOperatorNotificationChannels(ctx, req.(*UpdateOperatorNotificationChannelsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdateOperatorNotificationChannelsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_GetOperatorNotificationChannels0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorNotificationChannelsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorGetOperatorNotificationChannels)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorNotificationChannels(ctx, req.(*GetOperatorNotificationChannelsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorNotificationChannelsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
 	// AddOperatorBackofficeByoSubdomain AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
 	AddOperatorBackofficeByoSubdomain(ctx context.Context, req *AddOperatorBackofficeByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorBackofficeByoSubdomainResponse, err error)
@@ -656,6 +708,8 @@ type BackofficeOperatorHTTPClient interface {
 	// GetCurrentOperatorDetails GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(ctx context.Context, req *GetCurrentOperatorDetailsRequest, opts ...http.CallOption) (rsp *GetCurrentOperatorDetailsResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAccountSettingsResponse, err error)
+	// GetOperatorNotificationChannels GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+	GetOperatorNotificationChannels(ctx context.Context, req *GetOperatorNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorNotificationChannelsResponse, err error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, req *GetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorRegisterLimitConfigResponse, err error)
 	// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
 	GetOperatorRegistrationConfig(ctx context.Context, req *GetOperatorRegistrationConfigRequest, opts ...http.CallOption) (rsp *GetOperatorRegistrationConfigResponse, err error)
@@ -677,6 +731,8 @@ type BackofficeOperatorHTTPClient interface {
 	SetOperatorRegistrationConfig(ctx context.Context, req *SetOperatorRegistrationConfigRequest, opts ...http.CallOption) (rsp *SetOperatorRegistrationConfigResponse, err error)
 	SetOperatorRegistrationFieldConfig(ctx context.Context, req *SetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegistrationFieldConfigResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
+	// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+	UpdateOperatorNotificationChannels(ctx context.Context, req *UpdateOperatorNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorNotificationChannelsResponse, err error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, req *UpdateOperatorStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorStatusResponse, err error)
 }
@@ -803,6 +859,20 @@ func (c *BackofficeOperatorHTTPClientImpl) GetOperatorAccountSettings(ctx contex
 	pattern := "/v1/backoffice/operator/account-settings/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetOperatorNotificationChannels GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+func (c *BackofficeOperatorHTTPClientImpl) GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...http.CallOption) (*v1.GetOperatorNotificationChannelsResponse, error) {
+	var out v1.GetOperatorNotificationChannelsResponse
+	pattern := "/v1/backoffice/operator/notification-channels/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorNotificationChannels))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -992,6 +1062,20 @@ func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorAccountSettings(ctx con
 	pattern := "/v1/backoffice/operator/account-settings/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorNotificationChannels(ctx context.Context, in *UpdateOperatorNotificationChannelsRequest, opts ...http.CallOption) (*v1.UpdateOperatorNotificationChannelsResponse, error) {
+	var out v1.UpdateOperatorNotificationChannelsResponse
+	pattern := "/v1/backoffice/operator/notification-channels/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorNotificationChannels))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

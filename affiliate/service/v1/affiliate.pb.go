@@ -490,6 +490,7 @@ type ListAffiliatesRequest struct {
 	PageSize                 *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,7,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	Pagination               *bool                   `protobuf:"varint,9,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if nil, pagination is true
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -578,6 +579,13 @@ func (x *ListAffiliatesRequest) GetInitiatorOperatorContext() *common.OperatorCo
 		return x.InitiatorOperatorContext
 	}
 	return nil
+}
+
+func (x *ListAffiliatesRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
 }
 
 type ListAffiliatesResponse struct {
@@ -2428,8 +2436,10 @@ type ListPostbacksResponse struct {
 	state         protoimpl.MessageState            `protogen:"open.v1"`
 	Postbacks     []*ListPostbacksResponse_Postback `protobuf:"bytes,1,rep,name=postbacks,proto3" json:"postbacks,omitempty"`
 	Total         int32                             `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int32                             `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                             `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalActive   int32                             `protobuf:"varint,3,opt,name=total_active,json=totalActive,proto3" json:"total_active,omitempty"`
+	TotalInactive int32                             `protobuf:"varint,4,opt,name=total_inactive,json=totalInactive,proto3" json:"total_inactive,omitempty"`
+	Page          int32                             `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                             `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2474,6 +2484,20 @@ func (x *ListPostbacksResponse) GetPostbacks() []*ListPostbacksResponse_Postback
 func (x *ListPostbacksResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
+	}
+	return 0
+}
+
+func (x *ListPostbacksResponse) GetTotalActive() int32 {
+	if x != nil {
+		return x.TotalActive
+	}
+	return 0
+}
+
+func (x *ListPostbacksResponse) GetTotalInactive() int32 {
+	if x != nil {
+		return x.TotalInactive
 	}
 	return 0
 }
@@ -4273,7 +4297,6 @@ func (x *ChannelConfig_AdjustChannelConfig) GetBundleId() string {
 
 type ChannelConfig_AgencyChannelConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CampaignName  string                 `protobuf:"bytes,1,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4306,13 +4329,6 @@ func (x *ChannelConfig_AgencyChannelConfig) ProtoReflect() protoreflect.Message 
 // Deprecated: Use ChannelConfig_AgencyChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_AgencyChannelConfig) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 5}
-}
-
-func (x *ChannelConfig_AgencyChannelConfig) GetCampaignName() string {
-	if x != nil {
-		return x.CampaignName
-	}
-	return ""
 }
 
 type ChannelConfig_GoogleAdsChannelConfig struct {
@@ -5280,21 +5296,22 @@ type ListCommissionsResponse_Commission struct {
 	Paid                          bool                   `protobuf:"varint,5,opt,name=paid,proto3" json:"paid,omitempty"`
 	CommissionPlanId              int64                  `protobuf:"varint,6,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
 	CommissionPlanName            string                 `protobuf:"bytes,7,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
-	CommissionSubtype             string                 `protobuf:"bytes,8,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // cpa/revshare/cpl/cpc/flat_fee
-	ReportingCurrency             string                 `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	RevenueUsd                    string                 `protobuf:"bytes,10,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`
-	RevenueReportingCurrency      string                 `protobuf:"bytes,11,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"`
-	CommissionUsd                 string                 `protobuf:"bytes,12,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
-	CommissionReportingCurrency   string                 `protobuf:"bytes,13,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
-	AdjustAmountUsd               string                 `protobuf:"bytes,14,opt,name=adjust_amount_usd,json=adjustAmountUsd,proto3" json:"adjust_amount_usd,omitempty"`
-	AdjustAmountReportingCurrency string                 `protobuf:"bytes,15,opt,name=adjust_amount_reporting_currency,json=adjustAmountReportingCurrency,proto3" json:"adjust_amount_reporting_currency,omitempty"`
-	AffiliateId                   int64                  `protobuf:"varint,16,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName                 string                 `protobuf:"bytes,17,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	UserId                        int64                  `protobuf:"varint,18,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RetailerOperatorName          string                 `protobuf:"bytes,19,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName           string                 `protobuf:"bytes,20,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName                  string                 `protobuf:"bytes,21,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	BillId                        int64                  `protobuf:"varint,22,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
+	CommissionType                string                 `protobuf:"bytes,8,opt,name=commission_type,json=commissionType,proto3" json:"commission_type,omitempty"`          // cpa/revshare/cpl/cpc/flat_fee
+	CommissionSubtype             string                 `protobuf:"bytes,9,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // flat/flat_by_countries/progressive/progressive_by_countries
+	ReportingCurrency             string                 `protobuf:"bytes,10,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	RevenueUsd                    string                 `protobuf:"bytes,11,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`
+	RevenueReportingCurrency      string                 `protobuf:"bytes,12,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"`
+	CommissionUsd                 string                 `protobuf:"bytes,13,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency   string                 `protobuf:"bytes,14,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	AdjustAmountUsd               string                 `protobuf:"bytes,15,opt,name=adjust_amount_usd,json=adjustAmountUsd,proto3" json:"adjust_amount_usd,omitempty"`
+	AdjustAmountReportingCurrency string                 `protobuf:"bytes,16,opt,name=adjust_amount_reporting_currency,json=adjustAmountReportingCurrency,proto3" json:"adjust_amount_reporting_currency,omitempty"`
+	AffiliateId                   int64                  `protobuf:"varint,17,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                 string                 `protobuf:"bytes,18,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	UserId                        int64                  `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RetailerOperatorName          string                 `protobuf:"bytes,20,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName           string                 `protobuf:"bytes,21,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName                  string                 `protobuf:"bytes,22,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	BillId                        int64                  `protobuf:"varint,23,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -5374,6 +5391,13 @@ func (x *ListCommissionsResponse_Commission) GetCommissionPlanId() int64 {
 func (x *ListCommissionsResponse_Commission) GetCommissionPlanName() string {
 	if x != nil {
 		return x.CommissionPlanName
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionType() string {
+	if x != nil {
+		return x.CommissionType
 	}
 	return ""
 }
@@ -6132,7 +6156,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\"\x19\n" +
-	"\x17UpdateAffiliateResponse\"\xa0\x03\n" +
+	"\x17UpdateAffiliateResponse\"\xd4\x03\n" +
 	"\x15ListAffiliatesRequest\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12,\n" +
 	"\x12traffic_source_ids\x18\x02 \x03(\tR\x10trafficSourceIds\x12!\n" +
@@ -6141,10 +6165,14 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x04page\x18\x05 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12S\n" +
 	"\x17target_operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\a\n" +
+	"\x1ainitiator_operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12#\n" +
+	"\n" +
+	"pagination\x18\t \x01(\bH\x02R\n" +
+	"pagination\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf9\a\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"\xf9\a\n" +
 	"\x16ListAffiliatesResponse\x12Z\n" +
 	"\n" +
 	"affiliates\x18\x01 \x03(\v2:.api.affiliate.service.v1.ListAffiliatesResponse.AffiliateR\n" +
@@ -6236,7 +6264,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11custom_parameters\x18\x02 \x03(\v2*.api.affiliate.service.v1.Params.ParameterR\x10customParameters\x1a5\n" +
 	"\tParameter\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xc2\r\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\x9d\r\n" +
 	"\rChannelConfig\x12z\n" +
 	"\x17facebook_channel_config\x18\x01 \x01(\v2=.api.affiliate.service.v1.ChannelConfig.FacebookChannelConfigH\x00R\x15facebookChannelConfig\x88\x01\x01\x12t\n" +
 	"\x15tiktok_channel_config\x18\x02 \x01(\v2;.api.affiliate.service.v1.ChannelConfig.TiktokChannelConfigH\x01R\x13tiktokChannelConfig\x88\x01\x01\x12n\n" +
@@ -6263,9 +6291,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x13AdjustChannelConfig\x12!\n" +
 	"\fapp_platform\x18\x01 \x01(\tR\vappPlatform\x12\x1b\n" +
 	"\tapp_token\x18\x02 \x01(\tR\bappToken\x12\x1b\n" +
-	"\tbundle_id\x18\x03 \x01(\tR\bbundleId\x1a:\n" +
-	"\x13AgencyChannelConfig\x12#\n" +
-	"\rcampaign_name\x18\x01 \x01(\tR\fcampaignName\x1af\n" +
+	"\tbundle_id\x18\x03 \x01(\tR\bbundleId\x1a\x15\n" +
+	"\x13AgencyChannelConfig\x1af\n" +
 	"\x16GoogleAdsChannelConfig\x12\x1f\n" +
 	"\vcustomer_id\x18\x01 \x01(\tR\n" +
 	"customerId\x12+\n" +
@@ -6470,12 +6497,14 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9b\a\n" +
+	"_page_size\"\xe5\a\n" +
 	"\x15ListPostbacksResponse\x12V\n" +
 	"\tpostbacks\x18\x01 \x03(\v28.api.affiliate.service.v1.ListPostbacksResponse.PostbackR\tpostbacks\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xe2\x05\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12!\n" +
+	"\ftotal_active\x18\x03 \x01(\x05R\vtotalActive\x12%\n" +
+	"\x0etotal_inactive\x18\x04 \x01(\x05R\rtotalInactive\x12\x12\n" +
+	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x1a\xe2\x05\n" +
 	"\bPostback\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
 	"postbackId\x12#\n" +
@@ -6568,7 +6597,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf0\t\n" +
+	"_page_size\"\x99\n" +
+	"\n" +
 	"\x17ListCommissionsResponse\x12^\n" +
 	"\vcommissions\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCommissionsResponse.CommissionR\vcommissions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
@@ -6576,7 +6606,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x0etotal_approved\x18\x04 \x01(\x05R\rtotalApproved\x12%\n" +
 	"\x0etotal_rejected\x18\x05 \x01(\x05R\rtotalRejected\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xba\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xe3\a\n" +
 	"\n" +
 	"Commission\x12#\n" +
 	"\rcommission_id\x18\x01 \x01(\x03R\fcommissionId\x12\x18\n" +
@@ -6586,24 +6616,25 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x12\n" +
 	"\x04paid\x18\x05 \x01(\bR\x04paid\x12,\n" +
 	"\x12commission_plan_id\x18\x06 \x01(\x03R\x10commissionPlanId\x120\n" +
-	"\x14commission_plan_name\x18\a \x01(\tR\x12commissionPlanName\x12-\n" +
-	"\x12commission_subtype\x18\b \x01(\tR\x11commissionSubtype\x12-\n" +
-	"\x12reporting_currency\x18\t \x01(\tR\x11reportingCurrency\x12\x1f\n" +
-	"\vrevenue_usd\x18\n" +
-	" \x01(\tR\n" +
+	"\x14commission_plan_name\x18\a \x01(\tR\x12commissionPlanName\x12'\n" +
+	"\x0fcommission_type\x18\b \x01(\tR\x0ecommissionType\x12-\n" +
+	"\x12commission_subtype\x18\t \x01(\tR\x11commissionSubtype\x12-\n" +
+	"\x12reporting_currency\x18\n" +
+	" \x01(\tR\x11reportingCurrency\x12\x1f\n" +
+	"\vrevenue_usd\x18\v \x01(\tR\n" +
 	"revenueUsd\x12<\n" +
-	"\x1arevenue_reporting_currency\x18\v \x01(\tR\x18revenueReportingCurrency\x12%\n" +
-	"\x0ecommission_usd\x18\f \x01(\tR\rcommissionUsd\x12B\n" +
-	"\x1dcommission_reporting_currency\x18\r \x01(\tR\x1bcommissionReportingCurrency\x12*\n" +
-	"\x11adjust_amount_usd\x18\x0e \x01(\tR\x0fadjustAmountUsd\x12G\n" +
-	" adjust_amount_reporting_currency\x18\x0f \x01(\tR\x1dadjustAmountReportingCurrency\x12!\n" +
-	"\faffiliate_id\x18\x10 \x01(\x03R\vaffiliateId\x12%\n" +
-	"\x0eaffiliate_name\x18\x11 \x01(\tR\raffiliateName\x12\x17\n" +
-	"\auser_id\x18\x12 \x01(\x03R\x06userId\x124\n" +
-	"\x16retailer_operator_name\x18\x13 \x01(\tR\x14retailerOperatorName\x122\n" +
-	"\x15company_operator_name\x18\x14 \x01(\tR\x13companyOperatorName\x12#\n" +
-	"\roperator_name\x18\x15 \x01(\tR\foperatorName\x12\x17\n" +
-	"\abill_id\x18\x16 \x01(\x03R\x06billId\"\xf0\x05\n" +
+	"\x1arevenue_reporting_currency\x18\f \x01(\tR\x18revenueReportingCurrency\x12%\n" +
+	"\x0ecommission_usd\x18\r \x01(\tR\rcommissionUsd\x12B\n" +
+	"\x1dcommission_reporting_currency\x18\x0e \x01(\tR\x1bcommissionReportingCurrency\x12*\n" +
+	"\x11adjust_amount_usd\x18\x0f \x01(\tR\x0fadjustAmountUsd\x12G\n" +
+	" adjust_amount_reporting_currency\x18\x10 \x01(\tR\x1dadjustAmountReportingCurrency\x12!\n" +
+	"\faffiliate_id\x18\x11 \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x12 \x01(\tR\raffiliateName\x12\x17\n" +
+	"\auser_id\x18\x13 \x01(\x03R\x06userId\x124\n" +
+	"\x16retailer_operator_name\x18\x14 \x01(\tR\x14retailerOperatorName\x122\n" +
+	"\x15company_operator_name\x18\x15 \x01(\tR\x13companyOperatorName\x12#\n" +
+	"\roperator_name\x18\x16 \x01(\tR\foperatorName\x12\x17\n" +
+	"\abill_id\x18\x17 \x01(\x03R\x06billId\"\xf0\x05\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12@\n" +
 	"\x0eftd_start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fftdStartTime\x12<\n" +
@@ -6720,14 +6751,15 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x18price_reporting_currency\x18\x06 \x01(\tR\x16priceReportingCurrency\x12\x1d\n" +
 	"\n" +
 	"amount_usd\x18\a \x01(\tR\tamountUsd\x12:\n" +
-	"\x19amount_reporting_currency\x18\b \x01(\tR\x17amountReportingCurrency2\xb5#\n" +
+	"\x19amount_reporting_currency\x18\b \x01(\tR\x17amountReportingCurrency2\xb3&\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +
 	"\x11GetCommissionPlan\x122.api.affiliate.service.v1.GetCommissionPlanRequest\x1a3.api.affiliate.service.v1.GetCommissionPlanResponse\"\x00\x12\x84\x01\n" +
 	"\x13ListCommissionPlans\x124.api.affiliate.service.v1.ListCommissionPlansRequest\x1a5.api.affiliate.service.v1.ListCommissionPlansResponse\"\x00\x12\x87\x01\n" +
 	"\x14DeleteCommissionPlan\x125.api.affiliate.service.v1.DeleteCommissionPlanRequest\x1a6.api.affiliate.service.v1.DeleteCommissionPlanResponse\"\x00\x12\x8d\x01\n" +
-	"\x16ListAllCommissionPlans\x127.api.affiliate.service.v1.ListAllCommissionPlansRequest\x1a8.api.affiliate.service.v1.ListAllCommissionPlansResponse\"\x00\x12x\n" +
+	"\x16ListAllCommissionPlans\x127.api.affiliate.service.v1.ListAllCommissionPlansRequest\x1a8.api.affiliate.service.v1.ListAllCommissionPlansResponse\"\x00\x12\x9f\x01\n" +
+	"\x1cListAffiliateCommissionPlans\x12=.api.affiliate.service.v1.ListAffiliateCommissionPlansRequest\x1a>.api.affiliate.service.v1.ListAffiliateCommissionPlansResponse\"\x00\x12x\n" +
 	"\x0fCreateAffiliate\x120.api.affiliate.service.v1.CreateAffiliateRequest\x1a1.api.affiliate.service.v1.CreateAffiliateResponse\"\x00\x12x\n" +
 	"\x0fUpdateAffiliate\x120.api.affiliate.service.v1.UpdateAffiliateRequest\x1a1.api.affiliate.service.v1.UpdateAffiliateResponse\"\x00\x12u\n" +
 	"\x0eListAffiliates\x12/.api.affiliate.service.v1.ListAffiliatesRequest\x1a0.api.affiliate.service.v1.ListAffiliatesResponse\"\x00\x12x\n" +
@@ -6755,7 +6787,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x16CreateUserReferralCode\x127.api.affiliate.service.v1.CreateUserReferralCodeRequest\x1a8.api.affiliate.service.v1.CreateUserReferralCodeResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/affiliate/user/referral/code/create\x12\xc3\x01\n" +
 	"\x17ListUserReferralRewards\x128.api.affiliate.service.v1.ListUserReferralRewardsRequest\x1a9.api.affiliate.service.v1.ListUserReferralRewardsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/affiliate/user/referral/rewards/list\x12\xbf\x01\n" +
 	"\x16GetUserReferralRewards\x127.api.affiliate.service.v1.GetUserReferralRewardsRequest\x1a8.api.affiliate.service.v1.GetUserReferralRewardsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/affiliate/user/referral/rewards/get\x12\xc7\x01\n" +
-	"\x18ClaimUserReferralRewards\x129.api.affiliate.service.v1.ClaimUserReferralRewardsRequest\x1a:.api.affiliate.service.v1.ClaimUserReferralRewardsResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/affiliate/user/referral/rewards/claimBY\n" +
+	"\x18ClaimUserReferralRewards\x129.api.affiliate.service.v1.ClaimUserReferralRewardsRequest\x1a:.api.affiliate.service.v1.ClaimUserReferralRewardsResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/affiliate/user/referral/rewards/claim\x12\xd9\x01\n" +
+	"\x1cGetUserLossRevenueShareStats\x12=.api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest\x1a>.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/affiliate/user/loss/revenue/share/stats/getBY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
@@ -6853,28 +6886,32 @@ var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*ListCommissionPlansRequest)(nil),                                   // 78: api.affiliate.service.v1.ListCommissionPlansRequest
 	(*DeleteCommissionPlanRequest)(nil),                                  // 79: api.affiliate.service.v1.DeleteCommissionPlanRequest
 	(*ListAllCommissionPlansRequest)(nil),                                // 80: api.affiliate.service.v1.ListAllCommissionPlansRequest
-	(*SetReferralPlanRequest)(nil),                                       // 81: api.affiliate.service.v1.SetReferralPlanRequest
-	(*GetReferralPlanRequest)(nil),                                       // 82: api.affiliate.service.v1.GetReferralPlanRequest
-	(*GetUserReferralPlanRequest)(nil),                                   // 83: api.affiliate.service.v1.GetUserReferralPlanRequest
-	(*GetUserReferralStatsRequest)(nil),                                  // 84: api.affiliate.service.v1.GetUserReferralStatsRequest
-	(*CreateUserReferralCodeRequest)(nil),                                // 85: api.affiliate.service.v1.CreateUserReferralCodeRequest
-	(*ListUserReferralRewardsRequest)(nil),                               // 86: api.affiliate.service.v1.ListUserReferralRewardsRequest
-	(*GetUserReferralRewardsRequest)(nil),                                // 87: api.affiliate.service.v1.GetUserReferralRewardsRequest
-	(*ClaimUserReferralRewardsRequest)(nil),                              // 88: api.affiliate.service.v1.ClaimUserReferralRewardsRequest
-	(*CreateCommissionPlanResponse)(nil),                                 // 89: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*UpdateCommissionPlanResponse)(nil),                                 // 90: api.affiliate.service.v1.UpdateCommissionPlanResponse
-	(*GetCommissionPlanResponse)(nil),                                    // 91: api.affiliate.service.v1.GetCommissionPlanResponse
-	(*ListCommissionPlansResponse)(nil),                                  // 92: api.affiliate.service.v1.ListCommissionPlansResponse
-	(*DeleteCommissionPlanResponse)(nil),                                 // 93: api.affiliate.service.v1.DeleteCommissionPlanResponse
-	(*ListAllCommissionPlansResponse)(nil),                               // 94: api.affiliate.service.v1.ListAllCommissionPlansResponse
-	(*SetReferralPlanResponse)(nil),                                      // 95: api.affiliate.service.v1.SetReferralPlanResponse
-	(*GetReferralPlanResponse)(nil),                                      // 96: api.affiliate.service.v1.GetReferralPlanResponse
-	(*GetUserReferralPlanResponse)(nil),                                  // 97: api.affiliate.service.v1.GetUserReferralPlanResponse
-	(*GetUserReferralStatsResponse)(nil),                                 // 98: api.affiliate.service.v1.GetUserReferralStatsResponse
-	(*CreateUserReferralCodeResponse)(nil),                               // 99: api.affiliate.service.v1.CreateUserReferralCodeResponse
-	(*ListUserReferralRewardsResponse)(nil),                              // 100: api.affiliate.service.v1.ListUserReferralRewardsResponse
-	(*GetUserReferralRewardsResponse)(nil),                               // 101: api.affiliate.service.v1.GetUserReferralRewardsResponse
-	(*ClaimUserReferralRewardsResponse)(nil),                             // 102: api.affiliate.service.v1.ClaimUserReferralRewardsResponse
+	(*ListAffiliateCommissionPlansRequest)(nil),                          // 81: api.affiliate.service.v1.ListAffiliateCommissionPlansRequest
+	(*SetReferralPlanRequest)(nil),                                       // 82: api.affiliate.service.v1.SetReferralPlanRequest
+	(*GetReferralPlanRequest)(nil),                                       // 83: api.affiliate.service.v1.GetReferralPlanRequest
+	(*GetUserReferralPlanRequest)(nil),                                   // 84: api.affiliate.service.v1.GetUserReferralPlanRequest
+	(*GetUserReferralStatsRequest)(nil),                                  // 85: api.affiliate.service.v1.GetUserReferralStatsRequest
+	(*CreateUserReferralCodeRequest)(nil),                                // 86: api.affiliate.service.v1.CreateUserReferralCodeRequest
+	(*ListUserReferralRewardsRequest)(nil),                               // 87: api.affiliate.service.v1.ListUserReferralRewardsRequest
+	(*GetUserReferralRewardsRequest)(nil),                                // 88: api.affiliate.service.v1.GetUserReferralRewardsRequest
+	(*ClaimUserReferralRewardsRequest)(nil),                              // 89: api.affiliate.service.v1.ClaimUserReferralRewardsRequest
+	(*GetUserLossRevenueShareStatsRequest)(nil),                          // 90: api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest
+	(*CreateCommissionPlanResponse)(nil),                                 // 91: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*UpdateCommissionPlanResponse)(nil),                                 // 92: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*GetCommissionPlanResponse)(nil),                                    // 93: api.affiliate.service.v1.GetCommissionPlanResponse
+	(*ListCommissionPlansResponse)(nil),                                  // 94: api.affiliate.service.v1.ListCommissionPlansResponse
+	(*DeleteCommissionPlanResponse)(nil),                                 // 95: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*ListAllCommissionPlansResponse)(nil),                               // 96: api.affiliate.service.v1.ListAllCommissionPlansResponse
+	(*ListAffiliateCommissionPlansResponse)(nil),                         // 97: api.affiliate.service.v1.ListAffiliateCommissionPlansResponse
+	(*SetReferralPlanResponse)(nil),                                      // 98: api.affiliate.service.v1.SetReferralPlanResponse
+	(*GetReferralPlanResponse)(nil),                                      // 99: api.affiliate.service.v1.GetReferralPlanResponse
+	(*GetUserReferralPlanResponse)(nil),                                  // 100: api.affiliate.service.v1.GetUserReferralPlanResponse
+	(*GetUserReferralStatsResponse)(nil),                                 // 101: api.affiliate.service.v1.GetUserReferralStatsResponse
+	(*CreateUserReferralCodeResponse)(nil),                               // 102: api.affiliate.service.v1.CreateUserReferralCodeResponse
+	(*ListUserReferralRewardsResponse)(nil),                              // 103: api.affiliate.service.v1.ListUserReferralRewardsResponse
+	(*GetUserReferralRewardsResponse)(nil),                               // 104: api.affiliate.service.v1.GetUserReferralRewardsResponse
+	(*ClaimUserReferralRewardsResponse)(nil),                             // 105: api.affiliate.service.v1.ClaimUserReferralRewardsResponse
+	(*GetUserLossRevenueShareStatsResponse)(nil),                         // 106: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse
 }
 var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	0,   // 0: api.affiliate.service.v1.AffiliateInfo.contact_types:type_name -> api.affiliate.service.v1.ContactType
@@ -6971,68 +7008,72 @@ var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	78,  // 91: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
 	79,  // 92: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
 	80,  // 93: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
-	2,   // 94: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
-	4,   // 95: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
-	6,   // 96: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
-	8,   // 97: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
-	10,  // 98: api.affiliate.service.v1.Affiliate.GetAffiliateDetails:input_type -> api.affiliate.service.v1.GetAffiliateDetailsRequest
-	17,  // 99: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
-	19,  // 100: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
-	21,  // 101: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
-	23,  // 102: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
-	27,  // 103: api.affiliate.service.v1.Affiliate.CreatePostback:input_type -> api.affiliate.service.v1.CreatePostbackRequest
-	29,  // 104: api.affiliate.service.v1.Affiliate.UpdatePostback:input_type -> api.affiliate.service.v1.UpdatePostbackRequest
-	31,  // 105: api.affiliate.service.v1.Affiliate.DeletePostback:input_type -> api.affiliate.service.v1.DeletePostbackRequest
-	33,  // 106: api.affiliate.service.v1.Affiliate.ListPostbacks:input_type -> api.affiliate.service.v1.ListPostbacksRequest
-	35,  // 107: api.affiliate.service.v1.Affiliate.ListAffiliateDomains:input_type -> api.affiliate.service.v1.ListAffiliateDomainsRequest
-	37,  // 108: api.affiliate.service.v1.Affiliate.SetAffiliateDomain:input_type -> api.affiliate.service.v1.SetAffiliateDomainRequest
-	25,  // 109: api.affiliate.service.v1.Affiliate.ListEvents:input_type -> api.affiliate.service.v1.ListEventsRequest
-	39,  // 110: api.affiliate.service.v1.Affiliate.ListCommissions:input_type -> api.affiliate.service.v1.ListCommissionsRequest
-	41,  // 111: api.affiliate.service.v1.Affiliate.ListUsers:input_type -> api.affiliate.service.v1.ListUsersRequest
-	43,  // 112: api.affiliate.service.v1.Affiliate.ListAffiliateBills:input_type -> api.affiliate.service.v1.ListAffiliateBillsRequest
-	81,  // 113: api.affiliate.service.v1.Affiliate.SetReferralPlan:input_type -> api.affiliate.service.v1.SetReferralPlanRequest
-	82,  // 114: api.affiliate.service.v1.Affiliate.GetReferralPlan:input_type -> api.affiliate.service.v1.GetReferralPlanRequest
-	83,  // 115: api.affiliate.service.v1.Affiliate.GetUserReferralPlan:input_type -> api.affiliate.service.v1.GetUserReferralPlanRequest
-	84,  // 116: api.affiliate.service.v1.Affiliate.GetUserReferralStats:input_type -> api.affiliate.service.v1.GetUserReferralStatsRequest
-	85,  // 117: api.affiliate.service.v1.Affiliate.CreateUserReferralCode:input_type -> api.affiliate.service.v1.CreateUserReferralCodeRequest
-	86,  // 118: api.affiliate.service.v1.Affiliate.ListUserReferralRewards:input_type -> api.affiliate.service.v1.ListUserReferralRewardsRequest
-	87,  // 119: api.affiliate.service.v1.Affiliate.GetUserReferralRewards:input_type -> api.affiliate.service.v1.GetUserReferralRewardsRequest
-	88,  // 120: api.affiliate.service.v1.Affiliate.ClaimUserReferralRewards:input_type -> api.affiliate.service.v1.ClaimUserReferralRewardsRequest
-	89,  // 121: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	90,  // 122: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	91,  // 123: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	92,  // 124: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	93,  // 125: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	94,  // 126: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
-	3,   // 127: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	5,   // 128: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	7,   // 129: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	9,   // 130: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	11,  // 131: api.affiliate.service.v1.Affiliate.GetAffiliateDetails:output_type -> api.affiliate.service.v1.GetAffiliateDetailsResponse
-	18,  // 132: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
-	20,  // 133: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
-	22,  // 134: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	24,  // 135: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
-	28,  // 136: api.affiliate.service.v1.Affiliate.CreatePostback:output_type -> api.affiliate.service.v1.CreatePostbackResponse
-	30,  // 137: api.affiliate.service.v1.Affiliate.UpdatePostback:output_type -> api.affiliate.service.v1.UpdatePostbackResponse
-	32,  // 138: api.affiliate.service.v1.Affiliate.DeletePostback:output_type -> api.affiliate.service.v1.DeletePostbackResponse
-	34,  // 139: api.affiliate.service.v1.Affiliate.ListPostbacks:output_type -> api.affiliate.service.v1.ListPostbacksResponse
-	36,  // 140: api.affiliate.service.v1.Affiliate.ListAffiliateDomains:output_type -> api.affiliate.service.v1.ListAffiliateDomainsResponse
-	38,  // 141: api.affiliate.service.v1.Affiliate.SetAffiliateDomain:output_type -> api.affiliate.service.v1.SetAffiliateDomainResponse
-	26,  // 142: api.affiliate.service.v1.Affiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
-	40,  // 143: api.affiliate.service.v1.Affiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
-	42,  // 144: api.affiliate.service.v1.Affiliate.ListUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
-	44,  // 145: api.affiliate.service.v1.Affiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
-	95,  // 146: api.affiliate.service.v1.Affiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
-	96,  // 147: api.affiliate.service.v1.Affiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
-	97,  // 148: api.affiliate.service.v1.Affiliate.GetUserReferralPlan:output_type -> api.affiliate.service.v1.GetUserReferralPlanResponse
-	98,  // 149: api.affiliate.service.v1.Affiliate.GetUserReferralStats:output_type -> api.affiliate.service.v1.GetUserReferralStatsResponse
-	99,  // 150: api.affiliate.service.v1.Affiliate.CreateUserReferralCode:output_type -> api.affiliate.service.v1.CreateUserReferralCodeResponse
-	100, // 151: api.affiliate.service.v1.Affiliate.ListUserReferralRewards:output_type -> api.affiliate.service.v1.ListUserReferralRewardsResponse
-	101, // 152: api.affiliate.service.v1.Affiliate.GetUserReferralRewards:output_type -> api.affiliate.service.v1.GetUserReferralRewardsResponse
-	102, // 153: api.affiliate.service.v1.Affiliate.ClaimUserReferralRewards:output_type -> api.affiliate.service.v1.ClaimUserReferralRewardsResponse
-	121, // [121:154] is the sub-list for method output_type
-	88,  // [88:121] is the sub-list for method input_type
+	81,  // 94: api.affiliate.service.v1.Affiliate.ListAffiliateCommissionPlans:input_type -> api.affiliate.service.v1.ListAffiliateCommissionPlansRequest
+	2,   // 95: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
+	4,   // 96: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
+	6,   // 97: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
+	8,   // 98: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
+	10,  // 99: api.affiliate.service.v1.Affiliate.GetAffiliateDetails:input_type -> api.affiliate.service.v1.GetAffiliateDetailsRequest
+	17,  // 100: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
+	19,  // 101: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
+	21,  // 102: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
+	23,  // 103: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
+	27,  // 104: api.affiliate.service.v1.Affiliate.CreatePostback:input_type -> api.affiliate.service.v1.CreatePostbackRequest
+	29,  // 105: api.affiliate.service.v1.Affiliate.UpdatePostback:input_type -> api.affiliate.service.v1.UpdatePostbackRequest
+	31,  // 106: api.affiliate.service.v1.Affiliate.DeletePostback:input_type -> api.affiliate.service.v1.DeletePostbackRequest
+	33,  // 107: api.affiliate.service.v1.Affiliate.ListPostbacks:input_type -> api.affiliate.service.v1.ListPostbacksRequest
+	35,  // 108: api.affiliate.service.v1.Affiliate.ListAffiliateDomains:input_type -> api.affiliate.service.v1.ListAffiliateDomainsRequest
+	37,  // 109: api.affiliate.service.v1.Affiliate.SetAffiliateDomain:input_type -> api.affiliate.service.v1.SetAffiliateDomainRequest
+	25,  // 110: api.affiliate.service.v1.Affiliate.ListEvents:input_type -> api.affiliate.service.v1.ListEventsRequest
+	39,  // 111: api.affiliate.service.v1.Affiliate.ListCommissions:input_type -> api.affiliate.service.v1.ListCommissionsRequest
+	41,  // 112: api.affiliate.service.v1.Affiliate.ListUsers:input_type -> api.affiliate.service.v1.ListUsersRequest
+	43,  // 113: api.affiliate.service.v1.Affiliate.ListAffiliateBills:input_type -> api.affiliate.service.v1.ListAffiliateBillsRequest
+	82,  // 114: api.affiliate.service.v1.Affiliate.SetReferralPlan:input_type -> api.affiliate.service.v1.SetReferralPlanRequest
+	83,  // 115: api.affiliate.service.v1.Affiliate.GetReferralPlan:input_type -> api.affiliate.service.v1.GetReferralPlanRequest
+	84,  // 116: api.affiliate.service.v1.Affiliate.GetUserReferralPlan:input_type -> api.affiliate.service.v1.GetUserReferralPlanRequest
+	85,  // 117: api.affiliate.service.v1.Affiliate.GetUserReferralStats:input_type -> api.affiliate.service.v1.GetUserReferralStatsRequest
+	86,  // 118: api.affiliate.service.v1.Affiliate.CreateUserReferralCode:input_type -> api.affiliate.service.v1.CreateUserReferralCodeRequest
+	87,  // 119: api.affiliate.service.v1.Affiliate.ListUserReferralRewards:input_type -> api.affiliate.service.v1.ListUserReferralRewardsRequest
+	88,  // 120: api.affiliate.service.v1.Affiliate.GetUserReferralRewards:input_type -> api.affiliate.service.v1.GetUserReferralRewardsRequest
+	89,  // 121: api.affiliate.service.v1.Affiliate.ClaimUserReferralRewards:input_type -> api.affiliate.service.v1.ClaimUserReferralRewardsRequest
+	90,  // 122: api.affiliate.service.v1.Affiliate.GetUserLossRevenueShareStats:input_type -> api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest
+	91,  // 123: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	92,  // 124: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	93,  // 125: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	94,  // 126: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	95,  // 127: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	96,  // 128: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	97,  // 129: api.affiliate.service.v1.Affiliate.ListAffiliateCommissionPlans:output_type -> api.affiliate.service.v1.ListAffiliateCommissionPlansResponse
+	3,   // 130: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	5,   // 131: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	7,   // 132: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	9,   // 133: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	11,  // 134: api.affiliate.service.v1.Affiliate.GetAffiliateDetails:output_type -> api.affiliate.service.v1.GetAffiliateDetailsResponse
+	18,  // 135: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
+	20,  // 136: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
+	22,  // 137: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	24,  // 138: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
+	28,  // 139: api.affiliate.service.v1.Affiliate.CreatePostback:output_type -> api.affiliate.service.v1.CreatePostbackResponse
+	30,  // 140: api.affiliate.service.v1.Affiliate.UpdatePostback:output_type -> api.affiliate.service.v1.UpdatePostbackResponse
+	32,  // 141: api.affiliate.service.v1.Affiliate.DeletePostback:output_type -> api.affiliate.service.v1.DeletePostbackResponse
+	34,  // 142: api.affiliate.service.v1.Affiliate.ListPostbacks:output_type -> api.affiliate.service.v1.ListPostbacksResponse
+	36,  // 143: api.affiliate.service.v1.Affiliate.ListAffiliateDomains:output_type -> api.affiliate.service.v1.ListAffiliateDomainsResponse
+	38,  // 144: api.affiliate.service.v1.Affiliate.SetAffiliateDomain:output_type -> api.affiliate.service.v1.SetAffiliateDomainResponse
+	26,  // 145: api.affiliate.service.v1.Affiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
+	40,  // 146: api.affiliate.service.v1.Affiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
+	42,  // 147: api.affiliate.service.v1.Affiliate.ListUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
+	44,  // 148: api.affiliate.service.v1.Affiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
+	98,  // 149: api.affiliate.service.v1.Affiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
+	99,  // 150: api.affiliate.service.v1.Affiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
+	100, // 151: api.affiliate.service.v1.Affiliate.GetUserReferralPlan:output_type -> api.affiliate.service.v1.GetUserReferralPlanResponse
+	101, // 152: api.affiliate.service.v1.Affiliate.GetUserReferralStats:output_type -> api.affiliate.service.v1.GetUserReferralStatsResponse
+	102, // 153: api.affiliate.service.v1.Affiliate.CreateUserReferralCode:output_type -> api.affiliate.service.v1.CreateUserReferralCodeResponse
+	103, // 154: api.affiliate.service.v1.Affiliate.ListUserReferralRewards:output_type -> api.affiliate.service.v1.ListUserReferralRewardsResponse
+	104, // 155: api.affiliate.service.v1.Affiliate.GetUserReferralRewards:output_type -> api.affiliate.service.v1.GetUserReferralRewardsResponse
+	105, // 156: api.affiliate.service.v1.Affiliate.ClaimUserReferralRewards:output_type -> api.affiliate.service.v1.ClaimUserReferralRewardsResponse
+	106, // 157: api.affiliate.service.v1.Affiliate.GetUserLossRevenueShareStats:output_type -> api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse
+	123, // [123:158] is the sub-list for method output_type
+	88,  // [88:123] is the sub-list for method input_type
 	88,  // [88:88] is the sub-list for extension type_name
 	88,  // [88:88] is the sub-list for extension extendee
 	0,   // [0:88] is the sub-list for field type_name

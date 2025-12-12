@@ -6,6 +6,24 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/affiliate/user/loss/revenue/share/stats/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserLossRevenueShareStats
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse'
     /v1/affiliate/user/referral/code/create:
         post:
             tags:
@@ -730,6 +748,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+    /v1/backoffice/affiliate/commission/plan/list/affiliate:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateCommissionPlans
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateCommissionPlansRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateCommissionPlansResponse'
     /v1/backoffice/affiliate/commission/plan/list/all:
         post:
             tags:
@@ -2885,6 +2921,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/notification-channels/get:
+        post:
+            tags:
+                - BackofficeOperator
+            description: GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+            operationId: BackofficeOperator_GetOperatorNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorNotificationChannelsResponse'
+    /v1/backoffice/operator/notification-channels/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+            operationId: BackofficeOperator_UpdateOperatorNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorNotificationChannelsResponse'
     /v1/backoffice/operator/register-limit-config/get:
         post:
             tags:
@@ -6500,9 +6574,7 @@ components:
                     type: string
         api.affiliate.service.v1.ChannelConfig_AgencyChannelConfig:
             type: object
-            properties:
-                campaignName:
-                    type: string
+            properties: {}
         api.affiliate.service.v1.ChannelConfig_AppsflyerChannelConfig:
             type: object
             properties:
@@ -6933,6 +7005,79 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Custom referral plan (current operator's own config)
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                referralCode:
+                    type: string
+                userId:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                conversionStartTime:
+                    type: string
+                    format: date-time
+                conversionEndTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse:
+            type: object
+            properties:
+                unpaidRewardAmount:
+                    type: string
+                unclaimedRewardAmount:
+                    type: string
+                claimedRewardAmount:
+                    type: string
+                ggrAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ngrAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
+                referredStats:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat:
+            type: object
+            properties:
+                userId:
+                    type: string
+                userName:
+                    type: string
+                referralCode:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                ngrAmountInPeriod:
+                    type: string
+                ggrAmountInPeriod:
+                    type: string
+                conversionTime:
+                    type: string
+                    format: date-time
         api.affiliate.service.v1.GetUserReferralPlanRequest:
             type: object
             properties:
@@ -6997,14 +7142,6 @@ components:
                     additionalProperties:
                         type: string
                 wageringAmount:
-                    type: object
-                    additionalProperties:
-                        type: string
-                ggrAmount:
-                    type: object
-                    additionalProperties:
-                        type: string
-                ngrAmount:
                     type: object
                     additionalProperties:
                         type: string
@@ -7078,6 +7215,43 @@ components:
                     format: date-time
                 billDetail:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateBill_BillDetail'
+        api.affiliate.service.v1.ListAffiliateCommissionPlansResponse:
+            type: object
+            properties:
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                title:
+                    type: string
+                status:
+                    type: string
+                source:
+                    type: string
+                types:
+                    type: array
+                    items:
+                        type: string
+                baseCurrency:
+                    type: string
+                sourceOperatorName:
+                    type: string
+                planConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
         api.affiliate.service.v1.ListAffiliateDomainsResponse:
             type: object
             properties:
@@ -7307,6 +7481,8 @@ components:
                     type: string
                 commissionPlanName:
                     type: string
+                commissionType:
+                    type: string
                 commissionSubtype:
                     type: string
                 reportingCurrency:
@@ -7403,6 +7579,12 @@ components:
                 total:
                     type: integer
                     format: int32
+                totalActive:
+                    type: integer
+                    format: int32
+                totalInactive:
+                    type: integer
+                    format: int32
                 page:
                     type: integer
                     format: int32
@@ -7458,10 +7640,10 @@ components:
                 tier:
                     type: integer
                     format: int32
-                registrationStartTime:
+                conversionStartTime:
                     type: string
                     format: date-time
-                registrationEndTime:
+                conversionEndTime:
                     type: string
                     format: date-time
                 page:
@@ -7504,7 +7686,7 @@ components:
                     type: string
                 claimedRewardAmount:
                     type: string
-                registrationTime:
+                conversionTime:
                     type: string
                     format: date-time
         api.affiliate.service.v1.ListUsersResponse:
@@ -9527,6 +9709,13 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorNotificationChannelsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                channelType:
+                    type: string
         api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
             type: object
             properties:
@@ -10702,6 +10891,15 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListAffiliateCommissionPlansRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliateDomainsRequest:
             type: object
             properties:
@@ -10767,6 +10965,8 @@ components:
                     format: int32
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                pagination:
+                    type: boolean
         api.backoffice.service.v1.ListAllCommissionPlansRequest:
             type: object
             properties:
@@ -13943,7 +14143,7 @@ components:
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
             properties:
-                operatorContext:
+                sourceOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
@@ -14414,6 +14614,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
@@ -14445,6 +14647,15 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorCurrencyConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
+        api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                channelType:
+                    type: string
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:
@@ -14521,6 +14732,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateProviderResponse:
             type: object
             properties: {}
@@ -16036,6 +16249,10 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Operator context for hierarchical enabled status
         api.game.service.v1.ListProvidersResponse:
             type: object
             properties:
@@ -16986,6 +17203,11 @@ components:
                     type: string
                 clientIp:
                     type: string
+        api.user.service.v1.GetOperatorNotificationChannelsResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
         api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
             type: object
             properties:
@@ -17417,6 +17639,29 @@ components:
             type: object
             properties: {}
             description: LogoutResponse is an empty message for the logout operation.
+        api.user.service.v1.NotificationChannelConfig:
+            type: object
+            properties:
+                telegram:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig_TelegramConfig'
+                slack:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig_SlackConfig'
+        api.user.service.v1.NotificationChannelConfig_SlackConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                webhookUrl:
+                    type: string
+        api.user.service.v1.NotificationChannelConfig_TelegramConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                botToken:
+                    type: string
+                chatId:
+                    type: string
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
@@ -17839,6 +18084,9 @@ components:
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UpdateOperatorNotificationChannelsResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateOperatorStatusResponse:

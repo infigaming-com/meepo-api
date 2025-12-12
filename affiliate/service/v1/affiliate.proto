@@ -29,6 +29,8 @@ service Affiliate {
 
     rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (ListAllCommissionPlansResponse) {}
 
+    rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (ListAffiliateCommissionPlansResponse) {}
+
     // -------------- Affiliate --------------
 
     rpc CreateAffiliate(CreateAffiliateRequest) returns (CreateAffiliateResponse) {}
@@ -131,6 +133,13 @@ service Affiliate {
         };
     }
 
+    rpc GetUserLossRevenueShareStats(GetUserLossRevenueShareStatsRequest) returns (GetUserLossRevenueShareStatsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/loss/revenue/share/stats/get"
+            body: "*"
+        };
+    }
+
 }
 
 message ContactType {
@@ -190,6 +199,7 @@ message ListAffiliatesRequest {
     optional int32 page_size = 6;
     api.common.OperatorContext target_operator_context = 7;
     api.common.OperatorContext initiator_operator_context = 8;
+    optional bool pagination = 9; // if nil, pagination is true
 }
 
 message ListAffiliatesResponse {
@@ -323,7 +333,6 @@ message ChannelConfig {
         string bundle_id = 3;
     }
     message AgencyChannelConfig {
-        string campaign_name = 1;
     }
     message GoogleAdsChannelConfig {
         string customer_id = 1;
@@ -553,8 +562,10 @@ message ListPostbacksResponse {
     }
     repeated Postback postbacks = 1;
     int32 total = 2;
-    int32 page = 3;
-    int32 page_size = 4;
+    int32 total_active = 3;
+    int32 total_inactive = 4;
+    int32 page = 5;
+    int32 page_size = 6;
 }
 
 // -------------- Affiliate Domain --------------
@@ -635,21 +646,22 @@ message ListCommissionsResponse {
         bool paid = 5;
         int64 commission_plan_id = 6;
         string commission_plan_name = 7;
-        string commission_subtype = 8; // cpa/revshare/cpl/cpc/flat_fee
-        string reporting_currency = 9;
-        string revenue_usd = 10;
-        string revenue_reporting_currency = 11;
-        string commission_usd = 12;
-        string commission_reporting_currency = 13;
-        string adjust_amount_usd = 14;
-        string adjust_amount_reporting_currency = 15;
-        int64 affiliate_id = 16;
-        string affiliate_name = 17;
-        int64 user_id = 18;
-        string retailer_operator_name = 19;
-        string company_operator_name = 20;
-        string operator_name = 21;
-        int64 bill_id = 22;
+        string commission_type = 8; // cpa/revshare/cpl/cpc/flat_fee 
+        string commission_subtype = 9; // flat/flat_by_countries/progressive/progressive_by_countries
+        string reporting_currency = 10;
+        string revenue_usd = 11;
+        string revenue_reporting_currency = 12;
+        string commission_usd = 13;
+        string commission_reporting_currency = 14;
+        string adjust_amount_usd = 15;
+        string adjust_amount_reporting_currency = 16;
+        int64 affiliate_id = 17;
+        string affiliate_name = 18;
+        int64 user_id = 19;
+        string retailer_operator_name = 20;
+        string company_operator_name = 21;
+        string operator_name = 22;
+        int64 bill_id = 23;
     }
     repeated Commission commissions = 1;
     int32 total = 2;

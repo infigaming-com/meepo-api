@@ -473,7 +473,7 @@ message OperatorTransferResponse {
 }
 
 message OperatorSwapRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext source_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
 	string currency = 3;
 	string target_currency = 4;

@@ -33,12 +33,13 @@ message PaymentTransactionEvent {
 	api.common.OperatorContext operator_context = 5;
 	string currency = 6; // payment currency
 	string reporting_currency = 7;
-	string amount = 8; // cash amount of the currency
+	string amount = 8; // user's cash amount for this payment transaction
 	string status = 9; // payment status
 	int64 created_at = 10;
 	int64 settled_at = 11;
 	google.protobuf.Struct extra = 12;
 	ChannelInfo channel_info = 13;
+	string operator_amount = 14; // operator's amount for this payment transaction
 }
 
 message OperatorPaymentTransactionEvent {

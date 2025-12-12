@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "user/service/v1/user.proto";
+import "user/service/v1/operator.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -189,6 +190,22 @@ service BackofficeOperator {
 	rpc GetOperatorRegistrationConfig(GetOperatorRegistrationConfigRequest) returns (GetOperatorRegistrationConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/registration-config/get"
+			body: "*"
+		};
+	}
+
+	// UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+	rpc UpdateOperatorNotificationChannels(UpdateOperatorNotificationChannelsRequest) returns (user.service.v1.UpdateOperatorNotificationChannelsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/notification-channels/update"
+			body: "*"
+		};
+	}
+
+	// GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+	rpc GetOperatorNotificationChannels(GetOperatorNotificationChannelsRequest) returns (user.service.v1.GetOperatorNotificationChannelsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/notification-channels/get"
 			body: "*"
 		};
 	}
@@ -427,4 +444,15 @@ message GetOperatorRegistrationConfigRequest {
 
 message GetOperatorRegistrationConfigResponse {
 	map<string, OperatorRegistrationConfig> config = 1;
+}
+
+message UpdateOperatorNotificationChannelsRequest {
+	int64 operator_id = 1;
+	string channel_type = 2;
+	api.user.service.v1.NotificationChannelConfig config = 3;
+}
+
+message GetOperatorNotificationChannelsRequest {
+	int64 operator_id = 1;
+	string channel_type = 2;
 }

@@ -322,6 +322,8 @@ message ListProvidersRequest {
 	optional bool pagination_enabled = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	// Operator context for hierarchical enabled status
+	api.common.OperatorContext operator_context = 8;
 }
 
 message ListProvidersResponse {
@@ -679,7 +681,9 @@ message BackofficeListGamesRequest {
 	optional string rtp_max = 12;
 	optional bool enabled = 13;
 	optional int32 page = 14;
-	optional int32 page_size = 15;	
+	optional int32 page_size = 15;
+	// Operator context for hierarchical enabled status
+	api.common.OperatorContext operator_context = 16;
 }
 
 message BackofficeListGamesResponse {
@@ -711,6 +715,7 @@ message BackofficeListGamesResponse {
 message UpdateGameRequest {
 	string game_id = 1;
 	optional bool enabled = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message UpdateGameResponse {
@@ -719,6 +724,7 @@ message UpdateGameResponse {
 message UpdateProviderRequest {
 	string provider_id = 1;
 	optional bool enabled = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message UpdateProviderResponse {

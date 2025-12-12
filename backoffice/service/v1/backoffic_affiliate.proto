@@ -54,6 +54,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (api.affiliate.service.v1.ListAffiliateCommissionPlansResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/list/affiliate"
+			body: "*"
+		};
+	}
 
 	// -------------- Affiliate --------------
 
@@ -260,6 +266,11 @@ message ListAllCommissionPlansRequest {
 	optional string status = 3;
 }
 
+message ListAffiliateCommissionPlansRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
 // -------------- Affiliate --------------
 
 message CreateAffiliateRequest {
@@ -280,6 +291,7 @@ message ListAffiliatesRequest {
     optional int32 page = 5;
     optional int32 page_size = 6;
 	api.common.OperatorContext target_operator_context = 7;
+	optional bool pagination = 8; // if nil, pagination is true
 }
 
 message DeleteAffiliateRequest {
