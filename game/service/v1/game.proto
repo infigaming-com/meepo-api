@@ -238,6 +238,10 @@ service Game {
 	rpc BackofficeUpdateGameOrderInTag(BackofficeUpdateGameOrderInTagRequest) returns (BackofficeUpdateGameOrderInTagResponse) {
 	}
 
+	// Batch update games in tag by filter (add or remove)
+	rpc BackofficeBatchUpdateTagGames(BackofficeBatchUpdateTagGamesRequest) returns (BackofficeBatchUpdateTagGamesResponse) {
+	}
+
 	// List providers under a tag
 	rpc BackofficeListProvidersUnderTag(BackofficeListProvidersUnderTagRequest) returns (BackofficeListProvidersUnderTagResponse) {
 	}
@@ -1791,12 +1795,23 @@ message BackofficeListGameTagsRequest {
 }
 
 message BackofficeListGameTagsResponse {
+	message CreatorInfo {
+		int64 operator_id = 1;
+		string operator_name = 2;
+	}
+	message ProviderInfo {
+		string provider_id = 1;
+		string provider_name = 2;
+	}
 	message GameTag {
 		int64 tag_id = 1;
 		string name = 2;
 		string level = 3;  // "system" | "retailer" | "company" | "operator"
 		bool editable = 4; // Can current operator edit this tag?
 		int64 created_at = 5;
+		CreatorInfo creator = 6;           // Creator operator info
+		repeated ProviderInfo providers = 7; // Providers in this tag
+		int32 games_count = 8;             // Number of games in this tag
 	}
 	repeated GameTag tags = 1;
 	int32 total = 2;     // Total count of matching tags
@@ -1865,6 +1880,21 @@ message BackofficeUpdateGameOrderInTagRequest {
 }
 
 message BackofficeUpdateGameOrderInTagResponse {}
+
+message BackofficeBatchUpdateTagGamesRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string action = 3;  // "add" or "remove"
+	// Filter conditions
+	repeated string provider_ids = 4;
+	repeated string categories = 5;
+	repeated string fee_groups = 6;
+	optional string game_id = 7;  // Fuzzy search by game ID
+}
+
+message BackofficeBatchUpdateTagGamesResponse {
+	int32 games_affected = 1;  // Number of games added or removed
+}
 
 message BackofficeListProvidersUnderTagRequest {
 	api.common.OperatorContext operator_context = 1;

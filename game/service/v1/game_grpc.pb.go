@@ -80,6 +80,7 @@ const (
 	Game_BackofficeAddProviderToTag_FullMethodName        = "/api.game.service.v1.Game/BackofficeAddProviderToTag"
 	Game_BackofficeRemoveProviderFromTag_FullMethodName   = "/api.game.service.v1.Game/BackofficeRemoveProviderFromTag"
 	Game_BackofficeUpdateGameOrderInTag_FullMethodName    = "/api.game.service.v1.Game/BackofficeUpdateGameOrderInTag"
+	Game_BackofficeBatchUpdateTagGames_FullMethodName     = "/api.game.service.v1.Game/BackofficeBatchUpdateTagGames"
 	Game_BackofficeListProvidersUnderTag_FullMethodName   = "/api.game.service.v1.Game/BackofficeListProvidersUnderTag"
 	Game_BackofficeListGamesUnderTag_FullMethodName       = "/api.game.service.v1.Game/BackofficeListGamesUnderTag"
 )
@@ -161,6 +162,8 @@ type GameClient interface {
 	BackofficeRemoveProviderFromTag(ctx context.Context, in *BackofficeRemoveProviderFromTagRequest, opts ...grpc.CallOption) (*BackofficeRemoveProviderFromTagResponse, error)
 	// Update game order inside a tag
 	BackofficeUpdateGameOrderInTag(ctx context.Context, in *BackofficeUpdateGameOrderInTagRequest, opts ...grpc.CallOption) (*BackofficeUpdateGameOrderInTagResponse, error)
+	// Batch update games in tag by filter (add or remove)
+	BackofficeBatchUpdateTagGames(ctx context.Context, in *BackofficeBatchUpdateTagGamesRequest, opts ...grpc.CallOption) (*BackofficeBatchUpdateTagGamesResponse, error)
 	// List providers under a tag
 	BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated)
@@ -785,6 +788,16 @@ func (c *gameClient) BackofficeUpdateGameOrderInTag(ctx context.Context, in *Bac
 	return out, nil
 }
 
+func (c *gameClient) BackofficeBatchUpdateTagGames(ctx context.Context, in *BackofficeBatchUpdateTagGamesRequest, opts ...grpc.CallOption) (*BackofficeBatchUpdateTagGamesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackofficeBatchUpdateTagGamesResponse)
+	err := c.cc.Invoke(ctx, Game_BackofficeBatchUpdateTagGames_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BackofficeListProvidersUnderTagResponse)
@@ -882,6 +895,8 @@ type GameServer interface {
 	BackofficeRemoveProviderFromTag(context.Context, *BackofficeRemoveProviderFromTagRequest) (*BackofficeRemoveProviderFromTagResponse, error)
 	// Update game order inside a tag
 	BackofficeUpdateGameOrderInTag(context.Context, *BackofficeUpdateGameOrderInTagRequest) (*BackofficeUpdateGameOrderInTagResponse, error)
+	// Batch update games in tag by filter (add or remove)
+	BackofficeBatchUpdateTagGames(context.Context, *BackofficeBatchUpdateTagGamesRequest) (*BackofficeBatchUpdateTagGamesResponse, error)
 	// List providers under a tag
 	BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated)
@@ -1078,6 +1093,9 @@ func (UnimplementedGameServer) BackofficeRemoveProviderFromTag(context.Context, 
 }
 func (UnimplementedGameServer) BackofficeUpdateGameOrderInTag(context.Context, *BackofficeUpdateGameOrderInTagRequest) (*BackofficeUpdateGameOrderInTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeUpdateGameOrderInTag not implemented")
+}
+func (UnimplementedGameServer) BackofficeBatchUpdateTagGames(context.Context, *BackofficeBatchUpdateTagGamesRequest) (*BackofficeBatchUpdateTagGamesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackofficeBatchUpdateTagGames not implemented")
 }
 func (UnimplementedGameServer) BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeListProvidersUnderTag not implemented")
@@ -2204,6 +2222,24 @@ func _Game_BackofficeUpdateGameOrderInTag_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_BackofficeBatchUpdateTagGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackofficeBatchUpdateTagGamesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).BackofficeBatchUpdateTagGames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_BackofficeBatchUpdateTagGames_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).BackofficeBatchUpdateTagGames(ctx, req.(*BackofficeBatchUpdateTagGamesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_BackofficeListProvidersUnderTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BackofficeListProvidersUnderTagRequest)
 	if err := dec(in); err != nil {
@@ -2490,6 +2526,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BackofficeUpdateGameOrderInTag",
 			Handler:    _Game_BackofficeUpdateGameOrderInTag_Handler,
+		},
+		{
+			MethodName: "BackofficeBatchUpdateTagGames",
+			Handler:    _Game_BackofficeBatchUpdateTagGames_Handler,
 		},
 		{
 			MethodName: "BackofficeListProvidersUnderTag",

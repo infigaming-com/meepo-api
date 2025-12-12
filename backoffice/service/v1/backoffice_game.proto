@@ -206,7 +206,7 @@ service BackofficeGame {
 	// ============== Game Tags APIs ==============
 
 	// List tags visible to operator (with inheritance from system → retailer → company → operator)
-	rpc BackofficeListGameTags(BackofficeListGameTagsRequest) returns (BackofficeListGameTagsResponse) {
+	rpc BackofficeListGameTags(BackofficeListGameTagsRequest) returns (game.service.v1.BackofficeListGameTagsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/tags/list-all"
 			body: "*"
@@ -265,6 +265,14 @@ service BackofficeGame {
 	rpc BackofficeUpdateGameOrderInTag(BackofficeUpdateGameOrderInTagRequest) returns (BackofficeUpdateGameOrderInTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/tags/games/order/update"
+			body: "*"
+		};
+	}
+
+	// Batch update games in tag by filter (add or remove)
+	rpc BackofficeBatchUpdateTagGames(game.service.v1.BackofficeBatchUpdateTagGamesRequest) returns (game.service.v1.BackofficeBatchUpdateTagGamesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/games/batch-update"
 			body: "*"
 		};
 	}
@@ -716,20 +724,6 @@ message BackofficeListGameTagsRequest {
 	int32 page_size = 2;
 	optional string name = 3;
 	optional bool enabled = 4;
-}
-
-message BackofficeListGameTagsResponse {
-	message GameTag {
-		int64 tag_id = 1;
-		string name = 2;
-		string level = 3;  // "system" | "retailer" | "company" | "operator"
-		bool editable = 4; // Can current operator edit this tag?
-		int64 created_at = 5;
-	}
-	repeated GameTag tags = 1;
-	int32 total = 2;
-	int32 page = 3;
-	int32 page_size = 4;
 }
 
 message BackofficeCreateGameTagRequest {

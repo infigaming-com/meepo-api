@@ -23,6 +23,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeGameAddGameBetDisplayConfig = "/api.backoffice.service.v1.BackofficeGame/AddGameBetDisplayConfig"
 const OperationBackofficeGameBackofficeAddGamesToTag = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddGamesToTag"
 const OperationBackofficeGameBackofficeAddProviderToTag = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddProviderToTag"
+const OperationBackofficeGameBackofficeBatchUpdateTagGames = "/api.backoffice.service.v1.BackofficeGame/BackofficeBatchUpdateTagGames"
 const OperationBackofficeGameBackofficeCreateGameTag = "/api.backoffice.service.v1.BackofficeGame/BackofficeCreateGameTag"
 const OperationBackofficeGameBackofficeDeleteGameTag = "/api.backoffice.service.v1.BackofficeGame/BackofficeDeleteGameTag"
 const OperationBackofficeGameBackofficeListGameTags = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGameTags"
@@ -66,12 +67,14 @@ type BackofficeGameHTTPServer interface {
 	BackofficeAddGamesToTag(context.Context, *BackofficeAddGamesToTagRequest) (*BackofficeAddGamesToTagResponse, error)
 	// BackofficeAddProviderToTag Add provider to tag (adds all its games)
 	BackofficeAddProviderToTag(context.Context, *BackofficeAddProviderToTagRequest) (*BackofficeAddProviderToTagResponse, error)
+	// BackofficeBatchUpdateTagGames Batch update games in tag by filter (add or remove)
+	BackofficeBatchUpdateTagGames(context.Context, *v1.BackofficeBatchUpdateTagGamesRequest) (*v1.BackofficeBatchUpdateTagGamesResponse, error)
 	// BackofficeCreateGameTag Create tag at operator's own level
 	BackofficeCreateGameTag(context.Context, *BackofficeCreateGameTagRequest) (*BackofficeCreateGameTagResponse, error)
 	// BackofficeDeleteGameTag Delete tag (own level or lower only)
 	BackofficeDeleteGameTag(context.Context, *BackofficeDeleteGameTagRequest) (*BackofficeDeleteGameTagResponse, error)
 	// BackofficeListGameTags List tags visible to operator (with inheritance from system → retailer → company → operator)
-	BackofficeListGameTags(context.Context, *BackofficeListGameTagsRequest) (*BackofficeListGameTagsResponse, error)
+	BackofficeListGameTags(context.Context, *BackofficeListGameTagsRequest) (*v1.BackofficeListGameTagsResponse, error)
 	// BackofficeListGamesUnderTag List games under a tag (paginated, with filters)
 	BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error)
 	// BackofficeListProvidersUnderTag List providers under a tag (no pagination)
@@ -157,6 +160,7 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/tags/providers/add", _BackofficeGame_BackofficeAddProviderToTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/providers/remove", _BackofficeGame_BackofficeRemoveProviderFromTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/games/order/update", _BackofficeGame_BackofficeUpdateGameOrderInTag0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/tags/games/batch-update", _BackofficeGame_BackofficeBatchUpdateTagGames0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/providers/list", _BackofficeGame_BackofficeListProvidersUnderTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/games/list", _BackofficeGame_BackofficeListGamesUnderTag0_HTTP_Handler(srv))
 }
@@ -816,7 +820,7 @@ func _BackofficeGame_BackofficeListGameTags0_HTTP_Handler(srv BackofficeGameHTTP
 		if err != nil {
 			return err
 		}
-		reply := out.(*BackofficeListGameTagsResponse)
+		reply := out.(*v1.BackofficeListGameTagsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -975,6 +979,28 @@ func _BackofficeGame_BackofficeUpdateGameOrderInTag0_HTTP_Handler(srv Backoffice
 	}
 }
 
+func _BackofficeGame_BackofficeBatchUpdateTagGames0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.BackofficeBatchUpdateTagGamesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameBackofficeBatchUpdateTagGames)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.BackofficeBatchUpdateTagGames(ctx, req.(*v1.BackofficeBatchUpdateTagGamesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.BackofficeBatchUpdateTagGamesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeGame_BackofficeListProvidersUnderTag0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeListProvidersUnderTagRequest
@@ -1025,12 +1051,14 @@ type BackofficeGameHTTPClient interface {
 	BackofficeAddGamesToTag(ctx context.Context, req *BackofficeAddGamesToTagRequest, opts ...http.CallOption) (rsp *BackofficeAddGamesToTagResponse, err error)
 	// BackofficeAddProviderToTag Add provider to tag (adds all its games)
 	BackofficeAddProviderToTag(ctx context.Context, req *BackofficeAddProviderToTagRequest, opts ...http.CallOption) (rsp *BackofficeAddProviderToTagResponse, err error)
+	// BackofficeBatchUpdateTagGames Batch update games in tag by filter (add or remove)
+	BackofficeBatchUpdateTagGames(ctx context.Context, req *v1.BackofficeBatchUpdateTagGamesRequest, opts ...http.CallOption) (rsp *v1.BackofficeBatchUpdateTagGamesResponse, err error)
 	// BackofficeCreateGameTag Create tag at operator's own level
 	BackofficeCreateGameTag(ctx context.Context, req *BackofficeCreateGameTagRequest, opts ...http.CallOption) (rsp *BackofficeCreateGameTagResponse, err error)
 	// BackofficeDeleteGameTag Delete tag (own level or lower only)
 	BackofficeDeleteGameTag(ctx context.Context, req *BackofficeDeleteGameTagRequest, opts ...http.CallOption) (rsp *BackofficeDeleteGameTagResponse, err error)
 	// BackofficeListGameTags List tags visible to operator (with inheritance from system → retailer → company → operator)
-	BackofficeListGameTags(ctx context.Context, req *BackofficeListGameTagsRequest, opts ...http.CallOption) (rsp *BackofficeListGameTagsResponse, err error)
+	BackofficeListGameTags(ctx context.Context, req *BackofficeListGameTagsRequest, opts ...http.CallOption) (rsp *v1.BackofficeListGameTagsResponse, err error)
 	// BackofficeListGamesUnderTag List games under a tag (paginated, with filters)
 	BackofficeListGamesUnderTag(ctx context.Context, req *BackofficeListGamesUnderTagRequest, opts ...http.CallOption) (rsp *BackofficeListGamesUnderTagResponse, err error)
 	// BackofficeListProvidersUnderTag List providers under a tag (no pagination)
@@ -1126,6 +1154,20 @@ func (c *BackofficeGameHTTPClientImpl) BackofficeAddProviderToTag(ctx context.Co
 	return &out, nil
 }
 
+// BackofficeBatchUpdateTagGames Batch update games in tag by filter (add or remove)
+func (c *BackofficeGameHTTPClientImpl) BackofficeBatchUpdateTagGames(ctx context.Context, in *v1.BackofficeBatchUpdateTagGamesRequest, opts ...http.CallOption) (*v1.BackofficeBatchUpdateTagGamesResponse, error) {
+	var out v1.BackofficeBatchUpdateTagGamesResponse
+	pattern := "/v1/backoffice/game/tags/games/batch-update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameBackofficeBatchUpdateTagGames))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // BackofficeCreateGameTag Create tag at operator's own level
 func (c *BackofficeGameHTTPClientImpl) BackofficeCreateGameTag(ctx context.Context, in *BackofficeCreateGameTagRequest, opts ...http.CallOption) (*BackofficeCreateGameTagResponse, error) {
 	var out BackofficeCreateGameTagResponse
@@ -1155,8 +1197,8 @@ func (c *BackofficeGameHTTPClientImpl) BackofficeDeleteGameTag(ctx context.Conte
 }
 
 // BackofficeListGameTags List tags visible to operator (with inheritance from system → retailer → company → operator)
-func (c *BackofficeGameHTTPClientImpl) BackofficeListGameTags(ctx context.Context, in *BackofficeListGameTagsRequest, opts ...http.CallOption) (*BackofficeListGameTagsResponse, error) {
-	var out BackofficeListGameTagsResponse
+func (c *BackofficeGameHTTPClientImpl) BackofficeListGameTags(ctx context.Context, in *BackofficeListGameTagsRequest, opts ...http.CallOption) (*v1.BackofficeListGameTagsResponse, error) {
+	var out v1.BackofficeListGameTagsResponse
 	pattern := "/v1/backoffice/game/tags/list-all"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameBackofficeListGameTags))
