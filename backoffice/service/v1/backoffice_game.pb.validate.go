@@ -6138,6 +6138,18 @@ func (m *BackofficeListGameTagsRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if m.Name != nil {
+		// no validation rules for Name
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
 	if len(errors) > 0 {
 		return BackofficeListGameTagsRequestMultiError(errors)
 	}
@@ -6274,6 +6286,12 @@ func (m *BackofficeListGameTagsResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
 
 	if len(errors) > 0 {
 		return BackofficeListGameTagsResponseMultiError(errors)

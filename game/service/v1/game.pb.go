@@ -9525,6 +9525,10 @@ func (x *GetDepositCreditsGGRResponse) GetDepositData() []*GetDepositCreditsGGRR
 type BackofficeListGameTagsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Name            *string                 `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`                    // Filter by name (fuzzy search)
+	Enabled         *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`             // Filter by enabled status
+	Page            int32                   `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`                         // Page number (default: 1)
+	PageSize        int32                   `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // Page size (default: 20)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -9566,9 +9570,40 @@ func (x *BackofficeListGameTagsRequest) GetOperatorContext() *common.OperatorCon
 	return nil
 }
 
+func (x *BackofficeListGameTagsRequest) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *BackofficeListGameTagsRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *BackofficeListGameTagsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type BackofficeListGameTagsResponse struct {
 	state         protoimpl.MessageState                    `protogen:"open.v1"`
 	Tags          []*BackofficeListGameTagsResponse_GameTag `protobuf:"bytes,1,rep,name=tags,proto3" json:"tags,omitempty"`
+	Total         int32                                     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`                       // Total count of matching tags
+	Page          int32                                     `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`                         // Current page
+	PageSize      int32                                     `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // Page size
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9608,6 +9643,27 @@ func (x *BackofficeListGameTagsResponse) GetTags() []*BackofficeListGameTagsResp
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *BackofficeListGameTagsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type BackofficeCreateGameTagRequest struct {
@@ -15775,11 +15831,21 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1ctotal_bet_reporting_currency\x18\x06 \x01(\tR\x19totalBetReportingCurrency\x12\"\n" +
 	"\rtotal_win_usd\x18\a \x01(\tR\vtotalWinUsd\x12?\n" +
 	"\x1ctotal_win_reporting_currency\x18\b \x01(\tR\x19totalWinReportingCurrency\x12W\n" +
-	"\tgame_data\x18\t \x03(\v2:.api.game.service.v1.GetDepositCreditsGGRResponse.GameDataR\bgameData\"g\n" +
+	"\tgame_data\x18\t \x03(\v2:.api.game.service.v1.GetDepositCreditsGGRResponse.GameDataR\bgameData\"\xe5\x01\n" +
 	"\x1dBackofficeListGameTagsRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf9\x01\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSizeB\a\n" +
+	"\x05_nameB\n" +
+	"\n" +
+	"\b_enabled\"\xc0\x02\n" +
 	"\x1eBackofficeListGameTagsResponse\x12O\n" +
-	"\x04tags\x18\x01 \x03(\v2;.api.game.service.v1.BackofficeListGameTagsResponse.GameTagR\x04tags\x1a\x85\x01\n" +
+	"\x04tags\x18\x01 \x03(\v2;.api.game.service.v1.BackofficeListGameTagsResponse.GameTagR\x04tags\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x85\x01\n" +
 	"\aGameTag\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -16464,6 +16530,7 @@ func file_game_service_v1_game_proto_init() {
 	file_game_service_v1_game_proto_msgTypes[96].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[98].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[117].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[119].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[137].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[139].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[143].OneofWrappers = []any{}

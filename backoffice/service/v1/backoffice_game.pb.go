@@ -3304,6 +3304,10 @@ func (x *ExportCustomerStrikeReportsRequest) GetOperatorContextFilters() *common
 
 type BackofficeListGameTagsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Name          *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3338,9 +3342,40 @@ func (*BackofficeListGameTagsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{41}
 }
 
+func (x *BackofficeListGameTagsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsRequest) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *BackofficeListGameTagsRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
 type BackofficeListGameTagsResponse struct {
 	state         protoimpl.MessageState                    `protogen:"open.v1"`
 	Tags          []*BackofficeListGameTagsResponse_GameTag `protobuf:"bytes,1,rep,name=tags,proto3" json:"tags,omitempty"`
+	Total         int32                                     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                                     `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                                     `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3380,6 +3415,27 @@ func (x *BackofficeListGameTagsResponse) GetTags() []*BackofficeListGameTagsResp
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *BackofficeListGameTagsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BackofficeListGameTagsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type BackofficeCreateGameTagRequest struct {
@@ -5880,10 +5936,20 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\ttime_zone\x18\x03 \x01(\tR\btimeZone\x12\\\n" +
 	"\x18operator_context_filters\x18\x04 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
-	"\b_user_id\"\x1f\n" +
-	"\x1dBackofficeListGameTagsRequest\"\xff\x01\n" +
+	"\b_user_id\"\x9d\x01\n" +
+	"\x1dBackofficeListGameTagsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x01R\aenabled\x88\x01\x01B\a\n" +
+	"\x05_nameB\n" +
+	"\n" +
+	"\b_enabled\"\xc6\x02\n" +
 	"\x1eBackofficeListGameTagsResponse\x12U\n" +
-	"\x04tags\x18\x01 \x03(\v2A.api.backoffice.service.v1.BackofficeListGameTagsResponse.GameTagR\x04tags\x1a\x85\x01\n" +
+	"\x04tags\x18\x01 \x03(\v2A.api.backoffice.service.v1.BackofficeListGameTagsResponse.GameTagR\x04tags\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x85\x01\n" +
 	"\aGameTag\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -6295,6 +6361,7 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[38].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[39].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[40].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[41].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[59].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[63].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[65].OneofWrappers = []any{}
