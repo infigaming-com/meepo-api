@@ -20,16 +20,24 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeDnsAddOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/AddOperatorApexDomain"
 const OperationBackofficeDnsAddOperatorByoDomain = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
+const OperationBackofficeDnsDeleteOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorApexDomain"
 const OperationBackofficeDnsDeleteOperatorByoDomain = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
+const OperationBackofficeDnsListOperatorApexDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorApexDomains"
 const OperationBackofficeDnsListOperatorByoDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
 const OperationBackofficeDnsListOperatorDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
+const OperationBackofficeDnsRefreshOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/RefreshOperatorApexDomain"
 
 type BackofficeDnsHTTPServer interface {
+	AddOperatorApexDomain(context.Context, *AddOperatorApexDomainRequest) (*v1.AddOperatorApexDomainResponse, error)
 	AddOperatorByoDomain(context.Context, *AddOperatorByoDomainRequest) (*v1.AddOperatorByoDomainResponse, error)
+	DeleteOperatorApexDomain(context.Context, *DeleteOperatorApexDomainRequest) (*v1.DeleteOperatorApexDomainResponse, error)
 	DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*v1.DeleteOperatorByoDomainResponse, error)
+	ListOperatorApexDomains(context.Context, *ListOperatorApexDomainsRequest) (*v1.ListOperatorApexDomainsResponse, error)
 	ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*v1.ListOperatorByoDomainsResponse, error)
 	ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*v1.ListOperatorDomainsResponse, error)
+	RefreshOperatorApexDomain(context.Context, *RefreshOperatorApexDomainRequest) (*v1.RefreshOperatorApexDomainResponse, error)
 }
 
 func RegisterBackofficeDnsHTTPServer(s *http.Server, srv BackofficeDnsHTTPServer) {
@@ -38,6 +46,10 @@ func RegisterBackofficeDnsHTTPServer(s *http.Server, srv BackofficeDnsHTTPServer
 	r.POST("/v1/backoffice/dns/byo-domains/list", _BackofficeDns_ListOperatorByoDomains0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/byo-domains/add", _BackofficeDns_AddOperatorByoDomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/byo-domains/delete", _BackofficeDns_DeleteOperatorByoDomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/apex-domains/list", _BackofficeDns_ListOperatorApexDomains0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/apex-domains/add", _BackofficeDns_AddOperatorApexDomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/apex-domains/delete", _BackofficeDns_DeleteOperatorApexDomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/apex-domains/refresh", _BackofficeDns_RefreshOperatorApexDomain0_HTTP_Handler(srv))
 }
 
 func _BackofficeDns_ListOperatorDomains0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
@@ -128,11 +140,103 @@ func _BackofficeDns_DeleteOperatorByoDomain0_HTTP_Handler(srv BackofficeDnsHTTPS
 	}
 }
 
+func _BackofficeDns_ListOperatorApexDomains0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOperatorApexDomainsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsListOperatorApexDomains)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOperatorApexDomains(ctx, req.(*ListOperatorApexDomainsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOperatorApexDomainsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_AddOperatorApexDomain0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddOperatorApexDomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsAddOperatorApexDomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddOperatorApexDomain(ctx, req.(*AddOperatorApexDomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.AddOperatorApexDomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_DeleteOperatorApexDomain0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteOperatorApexDomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsDeleteOperatorApexDomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteOperatorApexDomain(ctx, req.(*DeleteOperatorApexDomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteOperatorApexDomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_RefreshOperatorApexDomain0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RefreshOperatorApexDomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsRefreshOperatorApexDomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RefreshOperatorApexDomain(ctx, req.(*RefreshOperatorApexDomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.RefreshOperatorApexDomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeDnsHTTPClient interface {
+	AddOperatorApexDomain(ctx context.Context, req *AddOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.AddOperatorApexDomainResponse, err error)
 	AddOperatorByoDomain(ctx context.Context, req *AddOperatorByoDomainRequest, opts ...http.CallOption) (rsp *v1.AddOperatorByoDomainResponse, err error)
+	DeleteOperatorApexDomain(ctx context.Context, req *DeleteOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorApexDomainResponse, err error)
 	DeleteOperatorByoDomain(ctx context.Context, req *DeleteOperatorByoDomainRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorByoDomainResponse, err error)
+	ListOperatorApexDomains(ctx context.Context, req *ListOperatorApexDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorApexDomainsResponse, err error)
 	ListOperatorByoDomains(ctx context.Context, req *ListOperatorByoDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorByoDomainsResponse, err error)
 	ListOperatorDomains(ctx context.Context, req *ListOperatorDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorDomainsResponse, err error)
+	RefreshOperatorApexDomain(ctx context.Context, req *RefreshOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.RefreshOperatorApexDomainResponse, err error)
 }
 
 type BackofficeDnsHTTPClientImpl struct {
@@ -141,6 +245,19 @@ type BackofficeDnsHTTPClientImpl struct {
 
 func NewBackofficeDnsHTTPClient(client *http.Client) BackofficeDnsHTTPClient {
 	return &BackofficeDnsHTTPClientImpl{client}
+}
+
+func (c *BackofficeDnsHTTPClientImpl) AddOperatorApexDomain(ctx context.Context, in *AddOperatorApexDomainRequest, opts ...http.CallOption) (*v1.AddOperatorApexDomainResponse, error) {
+	var out v1.AddOperatorApexDomainResponse
+	pattern := "/v1/backoffice/dns/apex-domains/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsAddOperatorApexDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeDnsHTTPClientImpl) AddOperatorByoDomain(ctx context.Context, in *AddOperatorByoDomainRequest, opts ...http.CallOption) (*v1.AddOperatorByoDomainResponse, error) {
@@ -156,11 +273,37 @@ func (c *BackofficeDnsHTTPClientImpl) AddOperatorByoDomain(ctx context.Context, 
 	return &out, nil
 }
 
+func (c *BackofficeDnsHTTPClientImpl) DeleteOperatorApexDomain(ctx context.Context, in *DeleteOperatorApexDomainRequest, opts ...http.CallOption) (*v1.DeleteOperatorApexDomainResponse, error) {
+	var out v1.DeleteOperatorApexDomainResponse
+	pattern := "/v1/backoffice/dns/apex-domains/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsDeleteOperatorApexDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeDnsHTTPClientImpl) DeleteOperatorByoDomain(ctx context.Context, in *DeleteOperatorByoDomainRequest, opts ...http.CallOption) (*v1.DeleteOperatorByoDomainResponse, error) {
 	var out v1.DeleteOperatorByoDomainResponse
 	pattern := "/v1/backoffice/dns/byo-domains/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDnsDeleteOperatorByoDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeDnsHTTPClientImpl) ListOperatorApexDomains(ctx context.Context, in *ListOperatorApexDomainsRequest, opts ...http.CallOption) (*v1.ListOperatorApexDomainsResponse, error) {
+	var out v1.ListOperatorApexDomainsResponse
+	pattern := "/v1/backoffice/dns/apex-domains/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsListOperatorApexDomains))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -187,6 +330,19 @@ func (c *BackofficeDnsHTTPClientImpl) ListOperatorDomains(ctx context.Context, i
 	pattern := "/v1/backoffice/dns/domains/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDnsListOperatorDomains))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeDnsHTTPClientImpl) RefreshOperatorApexDomain(ctx context.Context, in *RefreshOperatorApexDomainRequest, opts ...http.CallOption) (*v1.RefreshOperatorApexDomainResponse, error) {
+	var out v1.RefreshOperatorApexDomainResponse
+	pattern := "/v1/backoffice/dns/apex-domains/refresh"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsRefreshOperatorApexDomain))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

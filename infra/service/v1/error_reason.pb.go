@@ -25,10 +25,19 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED              ErrorReason = 0
-	ErrorReason_ADD_BYO_DOMAIN_FAILED    ErrorReason = 140001
-	ErrorReason_GET_BYO_DOMAINS_FAILED   ErrorReason = 140002
-	ErrorReason_DELETE_BYO_DOMAIN_FAILED ErrorReason = 140003
+	ErrorReason_UNSPECIFIED                    ErrorReason = 0
+	ErrorReason_ADD_BYO_DOMAIN_FAILED          ErrorReason = 140001
+	ErrorReason_GET_BYO_DOMAINS_FAILED         ErrorReason = 140002
+	ErrorReason_DELETE_BYO_DOMAIN_FAILED       ErrorReason = 140003
+	ErrorReason_ADD_APEX_DOMAIN_FAILED         ErrorReason = 140004
+	ErrorReason_GET_APEX_DOMAINS_FAILED        ErrorReason = 140005
+	ErrorReason_DELETE_APEX_DOMAIN_FAILED      ErrorReason = 140006
+	ErrorReason_REFRESH_APEX_DOMAIN_FAILED     ErrorReason = 140007
+	ErrorReason_WWW_DOMAIN_NOT_ACTIVE          ErrorReason = 140008
+	ErrorReason_APEX_DOMAIN_LIMIT_EXCEEDED     ErrorReason = 140009
+	ErrorReason_CERTIFICATE_ISSUANCE_FAILED    ErrorReason = 140010
+	ErrorReason_NGINX_CONFIG_GENERATION_FAILED ErrorReason = 140011
+	ErrorReason_NGINX_RELOAD_FAILED            ErrorReason = 140012
 )
 
 // Enum value maps for ErrorReason.
@@ -38,12 +47,30 @@ var (
 		140001: "ADD_BYO_DOMAIN_FAILED",
 		140002: "GET_BYO_DOMAINS_FAILED",
 		140003: "DELETE_BYO_DOMAIN_FAILED",
+		140004: "ADD_APEX_DOMAIN_FAILED",
+		140005: "GET_APEX_DOMAINS_FAILED",
+		140006: "DELETE_APEX_DOMAIN_FAILED",
+		140007: "REFRESH_APEX_DOMAIN_FAILED",
+		140008: "WWW_DOMAIN_NOT_ACTIVE",
+		140009: "APEX_DOMAIN_LIMIT_EXCEEDED",
+		140010: "CERTIFICATE_ISSUANCE_FAILED",
+		140011: "NGINX_CONFIG_GENERATION_FAILED",
+		140012: "NGINX_RELOAD_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":              0,
-		"ADD_BYO_DOMAIN_FAILED":    140001,
-		"GET_BYO_DOMAINS_FAILED":   140002,
-		"DELETE_BYO_DOMAIN_FAILED": 140003,
+		"UNSPECIFIED":                    0,
+		"ADD_BYO_DOMAIN_FAILED":          140001,
+		"GET_BYO_DOMAINS_FAILED":         140002,
+		"DELETE_BYO_DOMAIN_FAILED":       140003,
+		"ADD_APEX_DOMAIN_FAILED":         140004,
+		"GET_APEX_DOMAINS_FAILED":        140005,
+		"DELETE_APEX_DOMAIN_FAILED":      140006,
+		"REFRESH_APEX_DOMAIN_FAILED":     140007,
+		"WWW_DOMAIN_NOT_ACTIVE":          140008,
+		"APEX_DOMAIN_LIMIT_EXCEEDED":     140009,
+		"CERTIFICATE_ISSUANCE_FAILED":    140010,
+		"NGINX_CONFIG_GENERATION_FAILED": 140011,
+		"NGINX_RELOAD_FAILED":            140012,
 	}
 )
 
@@ -78,12 +105,21 @@ var File_infra_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_infra_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"#infra/service/v1/error_reason.proto\x12\x14api.infra.service.v1\x1a\x13errors/errors.proto*\x7f\n" +
+	"#infra/service/v1/error_reason.proto\x12\x14api.infra.service.v1\x1a\x13errors/errors.proto*\xa2\x03\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x15ADD_BYO_DOMAIN_FAILED\x10\xe1\xc5\b\x12\x1c\n" +
 	"\x16GET_BYO_DOMAINS_FAILED\x10\xe2\xc5\b\x12\x1e\n" +
-	"\x18DELETE_BYO_DOMAIN_FAILED\x10\xe3\xc5\b\x1a\x04\xa0E\xf4\x03BQ\n" +
+	"\x18DELETE_BYO_DOMAIN_FAILED\x10\xe3\xc5\b\x12\x1c\n" +
+	"\x16ADD_APEX_DOMAIN_FAILED\x10\xe4\xc5\b\x12\x1d\n" +
+	"\x17GET_APEX_DOMAINS_FAILED\x10\xe5\xc5\b\x12\x1f\n" +
+	"\x19DELETE_APEX_DOMAIN_FAILED\x10\xe6\xc5\b\x12 \n" +
+	"\x1aREFRESH_APEX_DOMAIN_FAILED\x10\xe7\xc5\b\x12\x1b\n" +
+	"\x15WWW_DOMAIN_NOT_ACTIVE\x10\xe8\xc5\b\x12 \n" +
+	"\x1aAPEX_DOMAIN_LIMIT_EXCEEDED\x10\xe9\xc5\b\x12!\n" +
+	"\x1bCERTIFICATE_ISSUANCE_FAILED\x10\xea\xc5\b\x12$\n" +
+	"\x1eNGINX_CONFIG_GENERATION_FAILED\x10\xeb\xc5\b\x12\x19\n" +
+	"\x13NGINX_RELOAD_FAILED\x10\xec\xc5\b\x1a\x04\xa0E\xf4\x03BQ\n" +
 	"\x14api.infra.service.v1P\x01Z7github.com/infigaming-com/meepo-api/infra/service/v1;v1b\x06proto3"
 
 var (

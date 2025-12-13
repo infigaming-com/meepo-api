@@ -232,6 +232,206 @@ func (x *DeleteOperatorByoDomainRequest) GetByoDomain() string {
 	return ""
 }
 
+type ListOperatorApexDomainsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorApexDomainsRequest) Reset() {
+	*x = ListOperatorApexDomainsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorApexDomainsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorApexDomainsRequest) ProtoMessage() {}
+
+func (x *ListOperatorApexDomainsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorApexDomainsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorApexDomainsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListOperatorApexDomainsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorApexDomainsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorApexDomainsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+type AddOperatorApexDomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorApexDomainRequest) Reset() {
+	*x = AddOperatorApexDomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *AddOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AddOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+func (x *AddOperatorApexDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type DeleteOperatorApexDomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorApexDomainRequest) Reset() {
+	*x = DeleteOperatorApexDomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DeleteOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+type RefreshOperatorApexDomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshOperatorApexDomainRequest) Reset() {
+	*x = RefreshOperatorApexDomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *RefreshOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*RefreshOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *RefreshOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_dns_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
@@ -254,12 +454,34 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\x13acme_challenge_type\x18\x03 \x01(\tR\x11acmeChallengeType\"?\n" +
 	"\x1eDeleteOperatorByoDomainRequest\x12\x1d\n" +
 	"\n" +
-	"byo_domain\x18\x01 \x01(\tR\tbyoDomain2\xe8\x05\n" +
+	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\"\x9a\x01\n" +
+	"\x1eListOperatorApexDomainsRequest\x12\x17\n" +
+	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_sizeB\t\n" +
+	"\a_status\"W\n" +
+	"\x1cAddOperatorApexDomainRequest\x12\x1f\n" +
+	"\vapex_domain\x18\x01 \x01(\tR\n" +
+	"apexDomain\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"B\n" +
+	"\x1fDeleteOperatorApexDomainRequest\x12\x1f\n" +
+	"\vapex_domain\x18\x01 \x01(\tR\n" +
+	"apexDomain\"C\n" +
+	" RefreshOperatorApexDomainRequest\x12\x1f\n" +
+	"\vapex_domain\x18\x01 \x01(\tR\n" +
+	"apexDomain2\xe7\v\n" +
 	"\rBackofficeDns\x12\xaa\x01\n" +
 	"\x13ListOperatorDomains\x125.api.backoffice.service.v1.ListOperatorDomainsRequest\x1a0.api.user.service.v1.ListOperatorDomainsResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/dns/domains/list\x12\xb7\x01\n" +
 	"\x16ListOperatorByoDomains\x128.api.backoffice.service.v1.ListOperatorByoDomainsRequest\x1a3.api.user.service.v1.ListOperatorByoDomainsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/dns/byo-domains/list\x12\xb0\x01\n" +
 	"\x14AddOperatorByoDomain\x126.api.backoffice.service.v1.AddOperatorByoDomainRequest\x1a1.api.user.service.v1.AddOperatorByoDomainResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/dns/byo-domains/add\x12\xbc\x01\n" +
-	"\x17DeleteOperatorByoDomain\x129.api.backoffice.service.v1.DeleteOperatorByoDomainRequest\x1a4.api.user.service.v1.DeleteOperatorByoDomainResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/dns/byo-domains/deleteB[\n" +
+	"\x17DeleteOperatorByoDomain\x129.api.backoffice.service.v1.DeleteOperatorByoDomainRequest\x1a4.api.user.service.v1.DeleteOperatorByoDomainResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/dns/byo-domains/delete\x12\xbb\x01\n" +
+	"\x17ListOperatorApexDomains\x129.api.backoffice.service.v1.ListOperatorApexDomainsRequest\x1a4.api.user.service.v1.ListOperatorApexDomainsResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/dns/apex-domains/list\x12\xb4\x01\n" +
+	"\x15AddOperatorApexDomain\x127.api.backoffice.service.v1.AddOperatorApexDomainRequest\x1a2.api.user.service.v1.AddOperatorApexDomainResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/dns/apex-domains/add\x12\xc0\x01\n" +
+	"\x18DeleteOperatorApexDomain\x12:.api.backoffice.service.v1.DeleteOperatorApexDomainRequest\x1a5.api.user.service.v1.DeleteOperatorApexDomainResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/dns/apex-domains/delete\x12\xc4\x01\n" +
+	"\x19RefreshOperatorApexDomain\x12;.api.backoffice.service.v1.RefreshOperatorApexDomainRequest\x1a6.api.user.service.v1.RefreshOperatorApexDomainResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/dns/apex-domains/refreshB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -274,33 +496,49 @@ func file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_dns_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_backoffice_service_v1_backoffice_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_backoffice_service_v1_backoffice_dns_proto_goTypes = []any{
-	(*ListOperatorDomainsRequest)(nil),         // 0: api.backoffice.service.v1.ListOperatorDomainsRequest
-	(*ListOperatorByoDomainsRequest)(nil),      // 1: api.backoffice.service.v1.ListOperatorByoDomainsRequest
-	(*AddOperatorByoDomainRequest)(nil),        // 2: api.backoffice.service.v1.AddOperatorByoDomainRequest
-	(*DeleteOperatorByoDomainRequest)(nil),     // 3: api.backoffice.service.v1.DeleteOperatorByoDomainRequest
-	(*common.OperatorContextFilters)(nil),      // 4: api.common.OperatorContextFilters
-	(*v1.ListOperatorDomainsResponse)(nil),     // 5: api.user.service.v1.ListOperatorDomainsResponse
-	(*v1.ListOperatorByoDomainsResponse)(nil),  // 6: api.user.service.v1.ListOperatorByoDomainsResponse
-	(*v1.AddOperatorByoDomainResponse)(nil),    // 7: api.user.service.v1.AddOperatorByoDomainResponse
-	(*v1.DeleteOperatorByoDomainResponse)(nil), // 8: api.user.service.v1.DeleteOperatorByoDomainResponse
+	(*ListOperatorDomainsRequest)(nil),           // 0: api.backoffice.service.v1.ListOperatorDomainsRequest
+	(*ListOperatorByoDomainsRequest)(nil),        // 1: api.backoffice.service.v1.ListOperatorByoDomainsRequest
+	(*AddOperatorByoDomainRequest)(nil),          // 2: api.backoffice.service.v1.AddOperatorByoDomainRequest
+	(*DeleteOperatorByoDomainRequest)(nil),       // 3: api.backoffice.service.v1.DeleteOperatorByoDomainRequest
+	(*ListOperatorApexDomainsRequest)(nil),       // 4: api.backoffice.service.v1.ListOperatorApexDomainsRequest
+	(*AddOperatorApexDomainRequest)(nil),         // 5: api.backoffice.service.v1.AddOperatorApexDomainRequest
+	(*DeleteOperatorApexDomainRequest)(nil),      // 6: api.backoffice.service.v1.DeleteOperatorApexDomainRequest
+	(*RefreshOperatorApexDomainRequest)(nil),     // 7: api.backoffice.service.v1.RefreshOperatorApexDomainRequest
+	(*common.OperatorContextFilters)(nil),        // 8: api.common.OperatorContextFilters
+	(*v1.ListOperatorDomainsResponse)(nil),       // 9: api.user.service.v1.ListOperatorDomainsResponse
+	(*v1.ListOperatorByoDomainsResponse)(nil),    // 10: api.user.service.v1.ListOperatorByoDomainsResponse
+	(*v1.AddOperatorByoDomainResponse)(nil),      // 11: api.user.service.v1.AddOperatorByoDomainResponse
+	(*v1.DeleteOperatorByoDomainResponse)(nil),   // 12: api.user.service.v1.DeleteOperatorByoDomainResponse
+	(*v1.ListOperatorApexDomainsResponse)(nil),   // 13: api.user.service.v1.ListOperatorApexDomainsResponse
+	(*v1.AddOperatorApexDomainResponse)(nil),     // 14: api.user.service.v1.AddOperatorApexDomainResponse
+	(*v1.DeleteOperatorApexDomainResponse)(nil),  // 15: api.user.service.v1.DeleteOperatorApexDomainResponse
+	(*v1.RefreshOperatorApexDomainResponse)(nil), // 16: api.user.service.v1.RefreshOperatorApexDomainResponse
 }
 var file_backoffice_service_v1_backoffice_dns_proto_depIdxs = []int32{
-	4, // 0: api.backoffice.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	0, // 1: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
-	1, // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
-	2, // 3: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
-	3, // 4: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
-	5, // 5: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	6, // 6: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	7, // 7: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	8, // 8: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	8,  // 0: api.backoffice.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 1: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
+	1,  // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
+	2,  // 3: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
+	3,  // 4: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
+	4,  // 5: api.backoffice.service.v1.BackofficeDns.ListOperatorApexDomains:input_type -> api.backoffice.service.v1.ListOperatorApexDomainsRequest
+	5,  // 6: api.backoffice.service.v1.BackofficeDns.AddOperatorApexDomain:input_type -> api.backoffice.service.v1.AddOperatorApexDomainRequest
+	6,  // 7: api.backoffice.service.v1.BackofficeDns.DeleteOperatorApexDomain:input_type -> api.backoffice.service.v1.DeleteOperatorApexDomainRequest
+	7,  // 8: api.backoffice.service.v1.BackofficeDns.RefreshOperatorApexDomain:input_type -> api.backoffice.service.v1.RefreshOperatorApexDomainRequest
+	9,  // 9: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	10, // 10: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	11, // 11: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	12, // 12: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	13, // 13: api.backoffice.service.v1.BackofficeDns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
+	14, // 14: api.backoffice.service.v1.BackofficeDns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
+	15, // 15: api.backoffice.service.v1.BackofficeDns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
+	16, // 16: api.backoffice.service.v1.BackofficeDns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
+	9,  // [9:17] is the sub-list for method output_type
+	1,  // [1:9] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_dns_proto_init() }
@@ -310,13 +548,14 @@ func file_backoffice_service_v1_backoffice_dns_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_dns_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_dns_proto_msgTypes[1].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_dns_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_dns_proto_rawDesc), len(file_backoffice_service_v1_backoffice_dns_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
