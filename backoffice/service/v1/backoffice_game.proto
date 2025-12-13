@@ -724,6 +724,7 @@ message BackofficeListGameTagsRequest {
 	int32 page_size = 2;
 	optional string name = 3;
 	optional bool enabled = 4;
+	api.common.OperatorContext target_operator_context = 5;  // Target operator to query tags for
 }
 
 message BackofficeCreateGameTagRequest {

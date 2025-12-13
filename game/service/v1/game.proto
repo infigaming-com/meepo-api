@@ -1792,6 +1792,7 @@ message BackofficeListGameTagsRequest {
 	optional bool enabled = 3;   // Filter by enabled status
 	int32 page = 4;              // Page number (default: 1)
 	int32 page_size = 5;         // Page size (default: 20)
+	api.common.OperatorContext target_operator_context = 6;  // Target operator to query tags for
 }
 
 message BackofficeListGameTagsResponse {

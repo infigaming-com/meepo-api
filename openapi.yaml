@@ -8339,6 +8339,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.BackofficeListGamesUnderTagRequest:
             type: object
             properties:
