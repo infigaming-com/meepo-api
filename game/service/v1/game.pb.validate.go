@@ -17697,6 +17697,274 @@ var _ interface {
 	ErrorName() string
 } = BackofficeDeleteGameTagResponseValidationError{}
 
+// Validate checks the field values on BackofficeUpdateGameTagRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BackofficeUpdateGameTagRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackofficeUpdateGameTagRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BackofficeUpdateGameTagRequestMultiError, or nil if none found.
+func (m *BackofficeUpdateGameTagRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeUpdateGameTagRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BackofficeUpdateGameTagRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BackofficeUpdateGameTagRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BackofficeUpdateGameTagRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BackofficeUpdateGameTagRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BackofficeUpdateGameTagRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BackofficeUpdateGameTagRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for TagId
+
+	// no validation rules for Name
+
+	if len(errors) > 0 {
+		return BackofficeUpdateGameTagRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeUpdateGameTagRequestMultiError is an error wrapping multiple
+// validation errors returned by BackofficeUpdateGameTagRequest.ValidateAll()
+// if the designated constraints aren't met.
+type BackofficeUpdateGameTagRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeUpdateGameTagRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeUpdateGameTagRequestMultiError) AllErrors() []error { return m }
+
+// BackofficeUpdateGameTagRequestValidationError is the validation error
+// returned by BackofficeUpdateGameTagRequest.Validate if the designated
+// constraints aren't met.
+type BackofficeUpdateGameTagRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeUpdateGameTagRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeUpdateGameTagRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeUpdateGameTagRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeUpdateGameTagRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeUpdateGameTagRequestValidationError) ErrorName() string {
+	return "BackofficeUpdateGameTagRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeUpdateGameTagRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeUpdateGameTagRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeUpdateGameTagRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeUpdateGameTagRequestValidationError{}
+
+// Validate checks the field values on BackofficeUpdateGameTagResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BackofficeUpdateGameTagResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BackofficeUpdateGameTagResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BackofficeUpdateGameTagResponseMultiError, or nil if none found.
+func (m *BackofficeUpdateGameTagResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BackofficeUpdateGameTagResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return BackofficeUpdateGameTagResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BackofficeUpdateGameTagResponseMultiError is an error wrapping multiple
+// validation errors returned by BackofficeUpdateGameTagResponse.ValidateAll()
+// if the designated constraints aren't met.
+type BackofficeUpdateGameTagResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BackofficeUpdateGameTagResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BackofficeUpdateGameTagResponseMultiError) AllErrors() []error { return m }
+
+// BackofficeUpdateGameTagResponseValidationError is the validation error
+// returned by BackofficeUpdateGameTagResponse.Validate if the designated
+// constraints aren't met.
+type BackofficeUpdateGameTagResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BackofficeUpdateGameTagResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BackofficeUpdateGameTagResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BackofficeUpdateGameTagResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BackofficeUpdateGameTagResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BackofficeUpdateGameTagResponseValidationError) ErrorName() string {
+	return "BackofficeUpdateGameTagResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BackofficeUpdateGameTagResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBackofficeUpdateGameTagResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BackofficeUpdateGameTagResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BackofficeUpdateGameTagResponseValidationError{}
+
 // Validate checks the field values on BackofficeAddGamesToTagRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

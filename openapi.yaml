@@ -2605,6 +2605,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeRemoveProviderFromTagResponse'
+    /v1/backoffice/game/tags/update:
+        post:
+            tags:
+                - BackofficeGame
+            description: Update tag name
+            operationId: BackofficeGame_BackofficeUpdateGameTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameTagResponse'
     /v1/backoffice/game/themes/list:
         post:
             tags:
@@ -8477,6 +8496,18 @@ components:
                 sticky:
                     type: boolean
         api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.BackofficeUpdateGameTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                name:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.BackofficeUpdateGameTagResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.BankAccountListRequest:

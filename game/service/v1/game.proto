@@ -218,6 +218,10 @@ service Game {
 	rpc BackofficeDeleteGameTag(BackofficeDeleteGameTagRequest) returns (BackofficeDeleteGameTagResponse) {
 	}
 
+	// Update tag name
+	rpc BackofficeUpdateGameTag(BackofficeUpdateGameTagRequest) returns (BackofficeUpdateGameTagResponse) {
+	}
+
 	// Add games to a tag
 	rpc BackofficeAddGamesToTag(BackofficeAddGamesToTagRequest) returns (BackofficeAddGamesToTagResponse) {
 	}
@@ -1835,6 +1839,15 @@ message BackofficeDeleteGameTagRequest {
 }
 
 message BackofficeDeleteGameTagResponse {}
+
+message BackofficeUpdateGameTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 tag_id = 3;
+	string name = 4;
+}
+
+message BackofficeUpdateGameTagResponse {}
 
 message BackofficeAddGamesToTagRequest {
 	api.common.OperatorContext operator_context = 1;

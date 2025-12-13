@@ -229,6 +229,14 @@ service BackofficeGame {
 		};
 	}
 
+	// Update tag name
+	rpc BackofficeUpdateGameTag(BackofficeUpdateGameTagRequest) returns (BackofficeUpdateGameTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/update"
+			body: "*"
+		};
+	}
+
 	// Add games to a tag
 	rpc BackofficeAddGamesToTag(BackofficeAddGamesToTagRequest) returns (BackofficeAddGamesToTagResponse) {
 		option (google.api.http) = {
@@ -740,6 +748,14 @@ message BackofficeDeleteGameTagRequest {
 }
 
 message BackofficeDeleteGameTagResponse {}
+
+message BackofficeUpdateGameTagRequest {
+	int64 tag_id = 1;
+	string name = 2;
+	api.common.OperatorContext target_operator_context = 3;
+}
+
+message BackofficeUpdateGameTagResponse {}
 
 message BackofficeAddGamesToTagRequest {
 	int64 tag_id = 1;
