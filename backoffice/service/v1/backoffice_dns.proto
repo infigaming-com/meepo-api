@@ -38,6 +38,34 @@ service BackofficeDns {
 			body: "*"
 		};
 	}
+
+	rpc ListOperatorApexDomains(ListOperatorApexDomainsRequest) returns (user.service.v1.ListOperatorApexDomainsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/apex-domains/list"
+			body: "*"
+		};
+	}
+
+	rpc AddOperatorApexDomain(AddOperatorApexDomainRequest) returns (user.service.v1.AddOperatorApexDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/apex-domains/add"
+			body: "*"
+		};
+	}
+
+	rpc DeleteOperatorApexDomain(DeleteOperatorApexDomainRequest) returns (user.service.v1.DeleteOperatorApexDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/apex-domains/delete"
+			body: "*"
+		};
+	}
+
+	rpc RefreshOperatorApexDomain(RefreshOperatorApexDomainRequest) returns (user.service.v1.RefreshOperatorApexDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/apex-domains/refresh"
+			body: "*"
+		};
+	}
 }
 
 message ListOperatorDomainsRequest {
@@ -58,4 +86,23 @@ message AddOperatorByoDomainRequest {
 
 message DeleteOperatorByoDomainRequest {
 	string byo_domain = 1;
+}
+
+message ListOperatorApexDomainsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+	optional string status = 3;
+}
+
+message AddOperatorApexDomainRequest {
+	string apex_domain = 1;
+	string domain = 2;
+}
+
+message DeleteOperatorApexDomainRequest {
+	string apex_domain = 1;
+}
+
+message RefreshOperatorApexDomainRequest {
+	string apex_domain = 1;
 }

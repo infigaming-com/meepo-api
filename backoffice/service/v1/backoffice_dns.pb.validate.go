@@ -494,3 +494,437 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteOperatorByoDomainRequestValidationError{}
+
+// Validate checks the field values on ListOperatorApexDomainsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListOperatorApexDomainsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOperatorApexDomainsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOperatorApexDomainsRequestMultiError, or nil if none found.
+func (m *ListOperatorApexDomainsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorApexDomainsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if len(errors) > 0 {
+		return ListOperatorApexDomainsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorApexDomainsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListOperatorApexDomainsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListOperatorApexDomainsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorApexDomainsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorApexDomainsRequestMultiError) AllErrors() []error { return m }
+
+// ListOperatorApexDomainsRequestValidationError is the validation error
+// returned by ListOperatorApexDomainsRequest.Validate if the designated
+// constraints aren't met.
+type ListOperatorApexDomainsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorApexDomainsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorApexDomainsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorApexDomainsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorApexDomainsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorApexDomainsRequestValidationError) ErrorName() string {
+	return "ListOperatorApexDomainsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorApexDomainsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorApexDomainsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorApexDomainsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorApexDomainsRequestValidationError{}
+
+// Validate checks the field values on AddOperatorApexDomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddOperatorApexDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorApexDomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddOperatorApexDomainRequestMultiError, or nil if none found.
+func (m *AddOperatorApexDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorApexDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ApexDomain
+
+	// no validation rules for Domain
+
+	if len(errors) > 0 {
+		return AddOperatorApexDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorApexDomainRequestMultiError is an error wrapping multiple
+// validation errors returned by AddOperatorApexDomainRequest.ValidateAll() if
+// the designated constraints aren't met.
+type AddOperatorApexDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorApexDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorApexDomainRequestMultiError) AllErrors() []error { return m }
+
+// AddOperatorApexDomainRequestValidationError is the validation error returned
+// by AddOperatorApexDomainRequest.Validate if the designated constraints
+// aren't met.
+type AddOperatorApexDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorApexDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorApexDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorApexDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorApexDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorApexDomainRequestValidationError) ErrorName() string {
+	return "AddOperatorApexDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorApexDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorApexDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorApexDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorApexDomainRequestValidationError{}
+
+// Validate checks the field values on DeleteOperatorApexDomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteOperatorApexDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteOperatorApexDomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteOperatorApexDomainRequestMultiError, or nil if none found.
+func (m *DeleteOperatorApexDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorApexDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ApexDomain
+
+	if len(errors) > 0 {
+		return DeleteOperatorApexDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorApexDomainRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteOperatorApexDomainRequest.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteOperatorApexDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorApexDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorApexDomainRequestMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorApexDomainRequestValidationError is the validation error
+// returned by DeleteOperatorApexDomainRequest.Validate if the designated
+// constraints aren't met.
+type DeleteOperatorApexDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorApexDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorApexDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorApexDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorApexDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorApexDomainRequestValidationError) ErrorName() string {
+	return "DeleteOperatorApexDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorApexDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorApexDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorApexDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorApexDomainRequestValidationError{}
+
+// Validate checks the field values on RefreshOperatorApexDomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *RefreshOperatorApexDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RefreshOperatorApexDomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// RefreshOperatorApexDomainRequestMultiError, or nil if none found.
+func (m *RefreshOperatorApexDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RefreshOperatorApexDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ApexDomain
+
+	if len(errors) > 0 {
+		return RefreshOperatorApexDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RefreshOperatorApexDomainRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// RefreshOperatorApexDomainRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RefreshOperatorApexDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RefreshOperatorApexDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RefreshOperatorApexDomainRequestMultiError) AllErrors() []error { return m }
+
+// RefreshOperatorApexDomainRequestValidationError is the validation error
+// returned by RefreshOperatorApexDomainRequest.Validate if the designated
+// constraints aren't met.
+type RefreshOperatorApexDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RefreshOperatorApexDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RefreshOperatorApexDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RefreshOperatorApexDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RefreshOperatorApexDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RefreshOperatorApexDomainRequestValidationError) ErrorName() string {
+	return "RefreshOperatorApexDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RefreshOperatorApexDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRefreshOperatorApexDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RefreshOperatorApexDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RefreshOperatorApexDomainRequestValidationError{}
