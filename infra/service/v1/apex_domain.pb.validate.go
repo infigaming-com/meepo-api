@@ -403,6 +403,8 @@ func (m *AddApexDomainRequest) validate(all bool) error {
 
 	// no validation rules for Domain
 
+	// no validation rules for ByoDomainId
+
 	if len(errors) > 0 {
 		return AddApexDomainRequestMultiError(errors)
 	}

@@ -285,6 +285,7 @@ type AddApexDomainRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
 	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	ByoDomainId   string                 `protobuf:"bytes,3,opt,name=byo_domain_id,json=byoDomainId,proto3" json:"byo_domain_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -329,6 +330,13 @@ func (x *AddApexDomainRequest) GetApexDomain() string {
 func (x *AddApexDomainRequest) GetDomain() string {
 	if x != nil {
 		return x.Domain
+	}
+	return ""
+}
+
+func (x *AddApexDomainRequest) GetByoDomainId() string {
+	if x != nil {
+		return x.ByoDomainId
 	}
 	return ""
 }
@@ -734,11 +742,12 @@ const file_infra_service_v1_apex_domain_proto_rawDesc = "" +
 	"\aapex_ip\x18\x02 \x01(\tR\x06apexIp\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
-	"www_domain\x18\x04 \x01(\tR\twwwDomain\"O\n" +
+	"www_domain\x18\x04 \x01(\tR\twwwDomain\"s\n" +
 	"\x14AddApexDomainRequest\x12\x1f\n" +
 	"\vapex_domain\x18\x01 \x01(\tR\n" +
 	"apexDomain\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"^\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12\"\n" +
+	"\rbyo_domain_id\x18\x03 \x01(\tR\vbyoDomainId\"^\n" +
 	"\x15AddApexDomainResponse\x12E\n" +
 	"\vapex_domain\x18\x01 \x01(\v2$.api.infra.service.v1.ApexDomainInfoR\n" +
 	"apexDomain\"A\n" +
