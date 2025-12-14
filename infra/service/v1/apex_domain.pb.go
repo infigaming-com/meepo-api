@@ -157,6 +157,7 @@ type PrecheckApexDomainRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
 	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	ByoDomainId   string                 `protobuf:"bytes,3,opt,name=byo_domain_id,json=byoDomainId,proto3" json:"byo_domain_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -201,6 +202,13 @@ func (x *PrecheckApexDomainRequest) GetApexDomain() string {
 func (x *PrecheckApexDomainRequest) GetDomain() string {
 	if x != nil {
 		return x.Domain
+	}
+	return ""
+}
+
+func (x *PrecheckApexDomainRequest) GetByoDomainId() string {
+	if x != nil {
+		return x.ByoDomainId
 	}
 	return ""
 }
@@ -277,6 +285,7 @@ type AddApexDomainRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
 	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	ByoDomainId   string                 `protobuf:"bytes,3,opt,name=byo_domain_id,json=byoDomainId,proto3" json:"byo_domain_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -321,6 +330,13 @@ func (x *AddApexDomainRequest) GetApexDomain() string {
 func (x *AddApexDomainRequest) GetDomain() string {
 	if x != nil {
 		return x.Domain
+	}
+	return ""
+}
+
+func (x *AddApexDomainRequest) GetByoDomainId() string {
+	if x != nil {
+		return x.ByoDomainId
 	}
 	return ""
 }
@@ -715,21 +731,23 @@ const file_infra_service_v1_apex_domain_proto_rawDesc = "" +
 	"updated_at\x18\n" +
 	" \x01(\x03R\tupdatedAt\x126\n" +
 	"\x17provisioning_started_at\x18\v \x01(\x03R\x15provisioningStartedAt\x12:\n" +
-	"\x19provisioning_completed_at\x18\f \x01(\x03R\x17provisioningCompletedAt\"T\n" +
+	"\x19provisioning_completed_at\x18\f \x01(\x03R\x17provisioningCompletedAt\"x\n" +
 	"\x19PrecheckApexDomainRequest\x12\x1f\n" +
 	"\vapex_domain\x18\x01 \x01(\tR\n" +
 	"apexDomain\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"\x8a\x01\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12\"\n" +
+	"\rbyo_domain_id\x18\x03 \x01(\tR\vbyoDomainId\"\x8a\x01\n" +
 	"\x1aPrecheckApexDomainResponse\x12\x1a\n" +
 	"\bbindable\x18\x01 \x01(\bR\bbindable\x12\x17\n" +
 	"\aapex_ip\x18\x02 \x01(\tR\x06apexIp\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
-	"www_domain\x18\x04 \x01(\tR\twwwDomain\"O\n" +
+	"www_domain\x18\x04 \x01(\tR\twwwDomain\"s\n" +
 	"\x14AddApexDomainRequest\x12\x1f\n" +
 	"\vapex_domain\x18\x01 \x01(\tR\n" +
 	"apexDomain\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"^\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12\"\n" +
+	"\rbyo_domain_id\x18\x03 \x01(\tR\vbyoDomainId\"^\n" +
 	"\x15AddApexDomainResponse\x12E\n" +
 	"\vapex_domain\x18\x01 \x01(\v2$.api.infra.service.v1.ApexDomainInfoR\n" +
 	"apexDomain\"A\n" +

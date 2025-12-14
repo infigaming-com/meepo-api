@@ -185,6 +185,8 @@ func (m *PrecheckApexDomainRequest) validate(all bool) error {
 
 	// no validation rules for Domain
 
+	// no validation rules for ByoDomainId
+
 	if len(errors) > 0 {
 		return PrecheckApexDomainRequestMultiError(errors)
 	}
@@ -400,6 +402,8 @@ func (m *AddApexDomainRequest) validate(all bool) error {
 	// no validation rules for ApexDomain
 
 	// no validation rules for Domain
+
+	// no validation rules for ByoDomainId
 
 	if len(errors) > 0 {
 		return AddApexDomainRequestMultiError(errors)
