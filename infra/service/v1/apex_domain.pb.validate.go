@@ -77,6 +77,10 @@ func (m *ApexDomainInfo) validate(all bool) error {
 
 	// no validation rules for UpdatedAt
 
+	// no validation rules for ProvisioningStartedAt
+
+	// no validation rules for ProvisioningCompletedAt
+
 	if len(errors) > 0 {
 		return ApexDomainInfoMultiError(errors)
 	}
@@ -154,6 +158,222 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ApexDomainInfoValidationError{}
+
+// Validate checks the field values on PrecheckApexDomainRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PrecheckApexDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PrecheckApexDomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PrecheckApexDomainRequestMultiError, or nil if none found.
+func (m *PrecheckApexDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PrecheckApexDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ApexDomain
+
+	// no validation rules for Domain
+
+	if len(errors) > 0 {
+		return PrecheckApexDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PrecheckApexDomainRequestMultiError is an error wrapping multiple validation
+// errors returned by PrecheckApexDomainRequest.ValidateAll() if the
+// designated constraints aren't met.
+type PrecheckApexDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PrecheckApexDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PrecheckApexDomainRequestMultiError) AllErrors() []error { return m }
+
+// PrecheckApexDomainRequestValidationError is the validation error returned by
+// PrecheckApexDomainRequest.Validate if the designated constraints aren't met.
+type PrecheckApexDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PrecheckApexDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PrecheckApexDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PrecheckApexDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PrecheckApexDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PrecheckApexDomainRequestValidationError) ErrorName() string {
+	return "PrecheckApexDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PrecheckApexDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPrecheckApexDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PrecheckApexDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PrecheckApexDomainRequestValidationError{}
+
+// Validate checks the field values on PrecheckApexDomainResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PrecheckApexDomainResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PrecheckApexDomainResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PrecheckApexDomainResponseMultiError, or nil if none found.
+func (m *PrecheckApexDomainResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PrecheckApexDomainResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Bindable
+
+	// no validation rules for ApexIp
+
+	// no validation rules for Message
+
+	// no validation rules for WwwDomain
+
+	if len(errors) > 0 {
+		return PrecheckApexDomainResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PrecheckApexDomainResponseMultiError is an error wrapping multiple
+// validation errors returned by PrecheckApexDomainResponse.ValidateAll() if
+// the designated constraints aren't met.
+type PrecheckApexDomainResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PrecheckApexDomainResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PrecheckApexDomainResponseMultiError) AllErrors() []error { return m }
+
+// PrecheckApexDomainResponseValidationError is the validation error returned
+// by PrecheckApexDomainResponse.Validate if the designated constraints aren't met.
+type PrecheckApexDomainResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PrecheckApexDomainResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PrecheckApexDomainResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PrecheckApexDomainResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PrecheckApexDomainResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PrecheckApexDomainResponseValidationError) ErrorName() string {
+	return "PrecheckApexDomainResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PrecheckApexDomainResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPrecheckApexDomainResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PrecheckApexDomainResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PrecheckApexDomainResponseValidationError{}
 
 // Validate checks the field values on AddApexDomainRequest with the rules
 // defined in the proto definition for this message. If any rules are

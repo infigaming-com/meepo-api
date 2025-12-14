@@ -7,6 +7,7 @@ option java_multiple_files = true;
 option java_package = "api.infra.service.v1";
 
 service ApexDomain {
+    rpc PrecheckApexDomain(PrecheckApexDomainRequest) returns (PrecheckApexDomainResponse) {}
     rpc AddApexDomain(AddApexDomainRequest) returns (AddApexDomainResponse) {}
     rpc DeleteApexDomain(DeleteApexDomainRequest) returns (DeleteApexDomainResponse) {}
     rpc GetApexDomains(GetApexDomainsRequest) returns (GetApexDomainsResponse) {}
@@ -24,6 +25,20 @@ message ApexDomainInfo {
     int64 cert_expires_at = 8;
     int64 created_at = 9;
     int64 updated_at = 10;
+    int64 provisioning_started_at = 11;
+    int64 provisioning_completed_at = 12;
+}
+
+message PrecheckApexDomainRequest {
+    string apex_domain = 1;
+    string domain = 2;
+}
+
+message PrecheckApexDomainResponse {
+    bool bindable = 1;
+    string apex_ip = 2;
+    string message = 3;
+    string www_domain = 4;
 }
 
 message AddApexDomainRequest {

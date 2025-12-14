@@ -928,3 +928,112 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RefreshOperatorApexDomainRequestValidationError{}
+
+// Validate checks the field values on PrecheckOperatorApexDomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *PrecheckOperatorApexDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PrecheckOperatorApexDomainRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// PrecheckOperatorApexDomainRequestMultiError, or nil if none found.
+func (m *PrecheckOperatorApexDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PrecheckOperatorApexDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ApexDomain
+
+	// no validation rules for Domain
+
+	if len(errors) > 0 {
+		return PrecheckOperatorApexDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PrecheckOperatorApexDomainRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// PrecheckOperatorApexDomainRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PrecheckOperatorApexDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PrecheckOperatorApexDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PrecheckOperatorApexDomainRequestMultiError) AllErrors() []error { return m }
+
+// PrecheckOperatorApexDomainRequestValidationError is the validation error
+// returned by PrecheckOperatorApexDomainRequest.Validate if the designated
+// constraints aren't met.
+type PrecheckOperatorApexDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PrecheckOperatorApexDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PrecheckOperatorApexDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PrecheckOperatorApexDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PrecheckOperatorApexDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PrecheckOperatorApexDomainRequestValidationError) ErrorName() string {
+	return "PrecheckOperatorApexDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PrecheckOperatorApexDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPrecheckOperatorApexDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PrecheckOperatorApexDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PrecheckOperatorApexDomainRequestValidationError{}
