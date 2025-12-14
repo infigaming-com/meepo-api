@@ -22,19 +22,21 @@ const (
 )
 
 type ApexDomainInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ApexDomain    string                 `protobuf:"bytes,2,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
-	WwwDomain     string                 `protobuf:"bytes,3,opt,name=www_domain,json=wwwDomain,proto3" json:"www_domain,omitempty"`
-	Domain        string                 `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
-	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	ErrorReason   string                 `protobuf:"bytes,6,opt,name=error_reason,json=errorReason,proto3" json:"error_reason,omitempty"`
-	NginxIp       string                 `protobuf:"bytes,7,opt,name=nginx_ip,json=nginxIp,proto3" json:"nginx_ip,omitempty"`
-	CertExpiresAt int64                  `protobuf:"varint,8,opt,name=cert_expires_at,json=certExpiresAt,proto3" json:"cert_expires_at,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     int64                  `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Id                      string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ApexDomain              string                 `protobuf:"bytes,2,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	WwwDomain               string                 `protobuf:"bytes,3,opt,name=www_domain,json=wwwDomain,proto3" json:"www_domain,omitempty"`
+	Domain                  string                 `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
+	Status                  string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	ErrorReason             string                 `protobuf:"bytes,6,opt,name=error_reason,json=errorReason,proto3" json:"error_reason,omitempty"`
+	NginxIp                 string                 `protobuf:"bytes,7,opt,name=nginx_ip,json=nginxIp,proto3" json:"nginx_ip,omitempty"`
+	CertExpiresAt           int64                  `protobuf:"varint,8,opt,name=cert_expires_at,json=certExpiresAt,proto3" json:"cert_expires_at,omitempty"`
+	CreatedAt               int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt               int64                  `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ProvisioningStartedAt   int64                  `protobuf:"varint,11,opt,name=provisioning_started_at,json=provisioningStartedAt,proto3" json:"provisioning_started_at,omitempty"`
+	ProvisioningCompletedAt int64                  `protobuf:"varint,12,opt,name=provisioning_completed_at,json=provisioningCompletedAt,proto3" json:"provisioning_completed_at,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ApexDomainInfo) Reset() {
@@ -137,6 +139,140 @@ func (x *ApexDomainInfo) GetUpdatedAt() int64 {
 	return 0
 }
 
+func (x *ApexDomainInfo) GetProvisioningStartedAt() int64 {
+	if x != nil {
+		return x.ProvisioningStartedAt
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetProvisioningCompletedAt() int64 {
+	if x != nil {
+		return x.ProvisioningCompletedAt
+	}
+	return 0
+}
+
+type PrecheckApexDomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrecheckApexDomainRequest) Reset() {
+	*x = PrecheckApexDomainRequest{}
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrecheckApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrecheckApexDomainRequest) ProtoMessage() {}
+
+func (x *PrecheckApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrecheckApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*PrecheckApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PrecheckApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+func (x *PrecheckApexDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type PrecheckApexDomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Bindable      bool                   `protobuf:"varint,1,opt,name=bindable,proto3" json:"bindable,omitempty"`
+	ApexIp        string                 `protobuf:"bytes,2,opt,name=apex_ip,json=apexIp,proto3" json:"apex_ip,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	WwwDomain     string                 `protobuf:"bytes,4,opt,name=www_domain,json=wwwDomain,proto3" json:"www_domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrecheckApexDomainResponse) Reset() {
+	*x = PrecheckApexDomainResponse{}
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrecheckApexDomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrecheckApexDomainResponse) ProtoMessage() {}
+
+func (x *PrecheckApexDomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrecheckApexDomainResponse.ProtoReflect.Descriptor instead.
+func (*PrecheckApexDomainResponse) Descriptor() ([]byte, []int) {
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *PrecheckApexDomainResponse) GetBindable() bool {
+	if x != nil {
+		return x.Bindable
+	}
+	return false
+}
+
+func (x *PrecheckApexDomainResponse) GetApexIp() string {
+	if x != nil {
+		return x.ApexIp
+	}
+	return ""
+}
+
+func (x *PrecheckApexDomainResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *PrecheckApexDomainResponse) GetWwwDomain() string {
+	if x != nil {
+		return x.WwwDomain
+	}
+	return ""
+}
+
 type AddApexDomainRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ApexDomain    string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
@@ -147,7 +283,7 @@ type AddApexDomainRequest struct {
 
 func (x *AddApexDomainRequest) Reset() {
 	*x = AddApexDomainRequest{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[1]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -159,7 +295,7 @@ func (x *AddApexDomainRequest) String() string {
 func (*AddApexDomainRequest) ProtoMessage() {}
 
 func (x *AddApexDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[1]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -172,7 +308,7 @@ func (x *AddApexDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddApexDomainRequest.ProtoReflect.Descriptor instead.
 func (*AddApexDomainRequest) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{1}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AddApexDomainRequest) GetApexDomain() string {
@@ -198,7 +334,7 @@ type AddApexDomainResponse struct {
 
 func (x *AddApexDomainResponse) Reset() {
 	*x = AddApexDomainResponse{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[2]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -210,7 +346,7 @@ func (x *AddApexDomainResponse) String() string {
 func (*AddApexDomainResponse) ProtoMessage() {}
 
 func (x *AddApexDomainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[2]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -223,7 +359,7 @@ func (x *AddApexDomainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddApexDomainResponse.ProtoReflect.Descriptor instead.
 func (*AddApexDomainResponse) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{2}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *AddApexDomainResponse) GetApexDomain() *ApexDomainInfo {
@@ -243,7 +379,7 @@ type DeleteApexDomainRequest struct {
 
 func (x *DeleteApexDomainRequest) Reset() {
 	*x = DeleteApexDomainRequest{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[3]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -255,7 +391,7 @@ func (x *DeleteApexDomainRequest) String() string {
 func (*DeleteApexDomainRequest) ProtoMessage() {}
 
 func (x *DeleteApexDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[3]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -268,7 +404,7 @@ func (x *DeleteApexDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteApexDomainRequest.ProtoReflect.Descriptor instead.
 func (*DeleteApexDomainRequest) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{3}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteApexDomainRequest) GetDomain() string {
@@ -293,7 +429,7 @@ type DeleteApexDomainResponse struct {
 
 func (x *DeleteApexDomainResponse) Reset() {
 	*x = DeleteApexDomainResponse{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[4]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -305,7 +441,7 @@ func (x *DeleteApexDomainResponse) String() string {
 func (*DeleteApexDomainResponse) ProtoMessage() {}
 
 func (x *DeleteApexDomainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[4]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -318,7 +454,7 @@ func (x *DeleteApexDomainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteApexDomainResponse.ProtoReflect.Descriptor instead.
 func (*DeleteApexDomainResponse) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{4}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{6}
 }
 
 type GetApexDomainsRequest struct {
@@ -330,7 +466,7 @@ type GetApexDomainsRequest struct {
 
 func (x *GetApexDomainsRequest) Reset() {
 	*x = GetApexDomainsRequest{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[5]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -342,7 +478,7 @@ func (x *GetApexDomainsRequest) String() string {
 func (*GetApexDomainsRequest) ProtoMessage() {}
 
 func (x *GetApexDomainsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[5]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -355,7 +491,7 @@ func (x *GetApexDomainsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApexDomainsRequest.ProtoReflect.Descriptor instead.
 func (*GetApexDomainsRequest) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{5}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetApexDomainsRequest) GetDomains() []*GetApexDomainsRequest_Domain {
@@ -374,7 +510,7 @@ type GetApexDomainsResponse struct {
 
 func (x *GetApexDomainsResponse) Reset() {
 	*x = GetApexDomainsResponse{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[6]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -386,7 +522,7 @@ func (x *GetApexDomainsResponse) String() string {
 func (*GetApexDomainsResponse) ProtoMessage() {}
 
 func (x *GetApexDomainsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[6]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -399,7 +535,7 @@ func (x *GetApexDomainsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApexDomainsResponse.ProtoReflect.Descriptor instead.
 func (*GetApexDomainsResponse) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{6}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetApexDomainsResponse) GetApexDomains() []*ApexDomainInfo {
@@ -419,7 +555,7 @@ type RefreshApexDomainRequest struct {
 
 func (x *RefreshApexDomainRequest) Reset() {
 	*x = RefreshApexDomainRequest{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[7]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -431,7 +567,7 @@ func (x *RefreshApexDomainRequest) String() string {
 func (*RefreshApexDomainRequest) ProtoMessage() {}
 
 func (x *RefreshApexDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[7]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -444,7 +580,7 @@ func (x *RefreshApexDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshApexDomainRequest.ProtoReflect.Descriptor instead.
 func (*RefreshApexDomainRequest) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{7}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RefreshApexDomainRequest) GetDomain() string {
@@ -470,7 +606,7 @@ type RefreshApexDomainResponse struct {
 
 func (x *RefreshApexDomainResponse) Reset() {
 	*x = RefreshApexDomainResponse{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[8]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -482,7 +618,7 @@ func (x *RefreshApexDomainResponse) String() string {
 func (*RefreshApexDomainResponse) ProtoMessage() {}
 
 func (x *RefreshApexDomainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[8]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -495,7 +631,7 @@ func (x *RefreshApexDomainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshApexDomainResponse.ProtoReflect.Descriptor instead.
 func (*RefreshApexDomainResponse) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{8}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RefreshApexDomainResponse) GetApexDomain() *ApexDomainInfo {
@@ -515,7 +651,7 @@ type GetApexDomainsRequest_Domain struct {
 
 func (x *GetApexDomainsRequest_Domain) Reset() {
 	*x = GetApexDomainsRequest_Domain{}
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[9]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -527,7 +663,7 @@ func (x *GetApexDomainsRequest_Domain) String() string {
 func (*GetApexDomainsRequest_Domain) ProtoMessage() {}
 
 func (x *GetApexDomainsRequest_Domain) ProtoReflect() protoreflect.Message {
-	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[9]
+	mi := &file_infra_service_v1_apex_domain_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -540,7 +676,7 @@ func (x *GetApexDomainsRequest_Domain) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetApexDomainsRequest_Domain.ProtoReflect.Descriptor instead.
 func (*GetApexDomainsRequest_Domain) Descriptor() ([]byte, []int) {
-	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{5, 0}
+	return file_infra_service_v1_apex_domain_proto_rawDescGZIP(), []int{7, 0}
 }
 
 func (x *GetApexDomainsRequest_Domain) GetDomain() string {
@@ -561,7 +697,7 @@ var File_infra_service_v1_apex_domain_proto protoreflect.FileDescriptor
 
 const file_infra_service_v1_apex_domain_proto_rawDesc = "" +
 	"\n" +
-	"\"infra/service/v1/apex_domain.proto\x12\x14api.infra.service.v1\"\xb4\x02\n" +
+	"\"infra/service/v1/apex_domain.proto\x12\x14api.infra.service.v1\"\xa8\x03\n" +
 	"\x0eApexDomainInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vapex_domain\x18\x02 \x01(\tR\n" +
@@ -577,7 +713,19 @@ const file_infra_service_v1_apex_domain_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\x03R\tupdatedAt\"O\n" +
+	" \x01(\x03R\tupdatedAt\x126\n" +
+	"\x17provisioning_started_at\x18\v \x01(\x03R\x15provisioningStartedAt\x12:\n" +
+	"\x19provisioning_completed_at\x18\f \x01(\x03R\x17provisioningCompletedAt\"T\n" +
+	"\x19PrecheckApexDomainRequest\x12\x1f\n" +
+	"\vapex_domain\x18\x01 \x01(\tR\n" +
+	"apexDomain\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"\x8a\x01\n" +
+	"\x1aPrecheckApexDomainResponse\x12\x1a\n" +
+	"\bbindable\x18\x01 \x01(\bR\bbindable\x12\x17\n" +
+	"\aapex_ip\x18\x02 \x01(\tR\x06apexIp\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"www_domain\x18\x04 \x01(\tR\twwwDomain\"O\n" +
 	"\x14AddApexDomainRequest\x12\x1f\n" +
 	"\vapex_domain\x18\x01 \x01(\tR\n" +
 	"apexDomain\x12\x16\n" +
@@ -601,9 +749,10 @@ const file_infra_service_v1_apex_domain_proto_rawDesc = "" +
 	"\x02id\x18\x02 \x01(\tR\x02id\"b\n" +
 	"\x19RefreshApexDomainResponse\x12E\n" +
 	"\vapex_domain\x18\x01 \x01(\v2$.api.infra.service.v1.ApexDomainInfoR\n" +
-	"apexDomain2\xd4\x03\n" +
+	"apexDomain2\xcf\x04\n" +
 	"\n" +
-	"ApexDomain\x12j\n" +
+	"ApexDomain\x12y\n" +
+	"\x12PrecheckApexDomain\x12/.api.infra.service.v1.PrecheckApexDomainRequest\x1a0.api.infra.service.v1.PrecheckApexDomainResponse\"\x00\x12j\n" +
 	"\rAddApexDomain\x12*.api.infra.service.v1.AddApexDomainRequest\x1a+.api.infra.service.v1.AddApexDomainResponse\"\x00\x12s\n" +
 	"\x10DeleteApexDomain\x12-.api.infra.service.v1.DeleteApexDomainRequest\x1a..api.infra.service.v1.DeleteApexDomainResponse\"\x00\x12m\n" +
 	"\x0eGetApexDomains\x12+.api.infra.service.v1.GetApexDomainsRequest\x1a,.api.infra.service.v1.GetApexDomainsResponse\"\x00\x12v\n" +
@@ -622,37 +771,41 @@ func file_infra_service_v1_apex_domain_proto_rawDescGZIP() []byte {
 	return file_infra_service_v1_apex_domain_proto_rawDescData
 }
 
-var file_infra_service_v1_apex_domain_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_infra_service_v1_apex_domain_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_infra_service_v1_apex_domain_proto_goTypes = []any{
 	(*ApexDomainInfo)(nil),               // 0: api.infra.service.v1.ApexDomainInfo
-	(*AddApexDomainRequest)(nil),         // 1: api.infra.service.v1.AddApexDomainRequest
-	(*AddApexDomainResponse)(nil),        // 2: api.infra.service.v1.AddApexDomainResponse
-	(*DeleteApexDomainRequest)(nil),      // 3: api.infra.service.v1.DeleteApexDomainRequest
-	(*DeleteApexDomainResponse)(nil),     // 4: api.infra.service.v1.DeleteApexDomainResponse
-	(*GetApexDomainsRequest)(nil),        // 5: api.infra.service.v1.GetApexDomainsRequest
-	(*GetApexDomainsResponse)(nil),       // 6: api.infra.service.v1.GetApexDomainsResponse
-	(*RefreshApexDomainRequest)(nil),     // 7: api.infra.service.v1.RefreshApexDomainRequest
-	(*RefreshApexDomainResponse)(nil),    // 8: api.infra.service.v1.RefreshApexDomainResponse
-	(*GetApexDomainsRequest_Domain)(nil), // 9: api.infra.service.v1.GetApexDomainsRequest.Domain
+	(*PrecheckApexDomainRequest)(nil),    // 1: api.infra.service.v1.PrecheckApexDomainRequest
+	(*PrecheckApexDomainResponse)(nil),   // 2: api.infra.service.v1.PrecheckApexDomainResponse
+	(*AddApexDomainRequest)(nil),         // 3: api.infra.service.v1.AddApexDomainRequest
+	(*AddApexDomainResponse)(nil),        // 4: api.infra.service.v1.AddApexDomainResponse
+	(*DeleteApexDomainRequest)(nil),      // 5: api.infra.service.v1.DeleteApexDomainRequest
+	(*DeleteApexDomainResponse)(nil),     // 6: api.infra.service.v1.DeleteApexDomainResponse
+	(*GetApexDomainsRequest)(nil),        // 7: api.infra.service.v1.GetApexDomainsRequest
+	(*GetApexDomainsResponse)(nil),       // 8: api.infra.service.v1.GetApexDomainsResponse
+	(*RefreshApexDomainRequest)(nil),     // 9: api.infra.service.v1.RefreshApexDomainRequest
+	(*RefreshApexDomainResponse)(nil),    // 10: api.infra.service.v1.RefreshApexDomainResponse
+	(*GetApexDomainsRequest_Domain)(nil), // 11: api.infra.service.v1.GetApexDomainsRequest.Domain
 }
 var file_infra_service_v1_apex_domain_proto_depIdxs = []int32{
-	0, // 0: api.infra.service.v1.AddApexDomainResponse.apex_domain:type_name -> api.infra.service.v1.ApexDomainInfo
-	9, // 1: api.infra.service.v1.GetApexDomainsRequest.domains:type_name -> api.infra.service.v1.GetApexDomainsRequest.Domain
-	0, // 2: api.infra.service.v1.GetApexDomainsResponse.apex_domains:type_name -> api.infra.service.v1.ApexDomainInfo
-	0, // 3: api.infra.service.v1.RefreshApexDomainResponse.apex_domain:type_name -> api.infra.service.v1.ApexDomainInfo
-	1, // 4: api.infra.service.v1.ApexDomain.AddApexDomain:input_type -> api.infra.service.v1.AddApexDomainRequest
-	3, // 5: api.infra.service.v1.ApexDomain.DeleteApexDomain:input_type -> api.infra.service.v1.DeleteApexDomainRequest
-	5, // 6: api.infra.service.v1.ApexDomain.GetApexDomains:input_type -> api.infra.service.v1.GetApexDomainsRequest
-	7, // 7: api.infra.service.v1.ApexDomain.RefreshApexDomain:input_type -> api.infra.service.v1.RefreshApexDomainRequest
-	2, // 8: api.infra.service.v1.ApexDomain.AddApexDomain:output_type -> api.infra.service.v1.AddApexDomainResponse
-	4, // 9: api.infra.service.v1.ApexDomain.DeleteApexDomain:output_type -> api.infra.service.v1.DeleteApexDomainResponse
-	6, // 10: api.infra.service.v1.ApexDomain.GetApexDomains:output_type -> api.infra.service.v1.GetApexDomainsResponse
-	8, // 11: api.infra.service.v1.ApexDomain.RefreshApexDomain:output_type -> api.infra.service.v1.RefreshApexDomainResponse
-	8, // [8:12] is the sub-list for method output_type
-	4, // [4:8] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0,  // 0: api.infra.service.v1.AddApexDomainResponse.apex_domain:type_name -> api.infra.service.v1.ApexDomainInfo
+	11, // 1: api.infra.service.v1.GetApexDomainsRequest.domains:type_name -> api.infra.service.v1.GetApexDomainsRequest.Domain
+	0,  // 2: api.infra.service.v1.GetApexDomainsResponse.apex_domains:type_name -> api.infra.service.v1.ApexDomainInfo
+	0,  // 3: api.infra.service.v1.RefreshApexDomainResponse.apex_domain:type_name -> api.infra.service.v1.ApexDomainInfo
+	1,  // 4: api.infra.service.v1.ApexDomain.PrecheckApexDomain:input_type -> api.infra.service.v1.PrecheckApexDomainRequest
+	3,  // 5: api.infra.service.v1.ApexDomain.AddApexDomain:input_type -> api.infra.service.v1.AddApexDomainRequest
+	5,  // 6: api.infra.service.v1.ApexDomain.DeleteApexDomain:input_type -> api.infra.service.v1.DeleteApexDomainRequest
+	7,  // 7: api.infra.service.v1.ApexDomain.GetApexDomains:input_type -> api.infra.service.v1.GetApexDomainsRequest
+	9,  // 8: api.infra.service.v1.ApexDomain.RefreshApexDomain:input_type -> api.infra.service.v1.RefreshApexDomainRequest
+	2,  // 9: api.infra.service.v1.ApexDomain.PrecheckApexDomain:output_type -> api.infra.service.v1.PrecheckApexDomainResponse
+	4,  // 10: api.infra.service.v1.ApexDomain.AddApexDomain:output_type -> api.infra.service.v1.AddApexDomainResponse
+	6,  // 11: api.infra.service.v1.ApexDomain.DeleteApexDomain:output_type -> api.infra.service.v1.DeleteApexDomainResponse
+	8,  // 12: api.infra.service.v1.ApexDomain.GetApexDomains:output_type -> api.infra.service.v1.GetApexDomainsResponse
+	10, // 13: api.infra.service.v1.ApexDomain.RefreshApexDomain:output_type -> api.infra.service.v1.RefreshApexDomainResponse
+	9,  // [9:14] is the sub-list for method output_type
+	4,  // [4:9] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_infra_service_v1_apex_domain_proto_init() }
@@ -666,7 +819,7 @@ func file_infra_service_v1_apex_domain_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infra_service_v1_apex_domain_proto_rawDesc), len(file_infra_service_v1_apex_domain_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

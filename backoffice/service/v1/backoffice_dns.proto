@@ -39,6 +39,13 @@ service BackofficeDns {
 		};
 	}
 
+	rpc PrecheckOperatorApexDomain(PrecheckOperatorApexDomainRequest) returns (user.service.v1.PrecheckOperatorApexDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/apex-domains/precheck"
+			body: "*"
+		};
+	}
+
 	rpc ListOperatorApexDomains(ListOperatorApexDomainsRequest) returns (user.service.v1.ListOperatorApexDomainsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/dns/apex-domains/list"
@@ -105,4 +112,9 @@ message DeleteOperatorApexDomainRequest {
 
 message RefreshOperatorApexDomainRequest {
 	string apex_domain = 1;
+}
+
+message PrecheckOperatorApexDomainRequest {
+	string apex_domain = 1;
+	string domain = 2;
 }

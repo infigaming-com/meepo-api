@@ -26,6 +26,10 @@ service Dns {
 	rpc DeleteOperatorByoDomain(DeleteOperatorByoDomainRequest) returns (DeleteOperatorByoDomainResponse) {
 	}
 
+	// PrecheckOperatorApexDomain validates if an apex domain can be bound
+	rpc PrecheckOperatorApexDomain(PrecheckOperatorApexDomainRequest) returns (PrecheckOperatorApexDomainResponse) {
+	}
+
 	// ListOperatorApexDomains returns the list of apex domains
 	rpc ListOperatorApexDomains(ListOperatorApexDomainsRequest) returns (ListOperatorApexDomainsResponse) {
 	}
@@ -152,6 +156,8 @@ message ApexDomainInfo {
 	string target_system_operator_name = 15;
 	google.protobuf.Timestamp created_at = 16;
 	google.protobuf.Timestamp updated_at = 17;
+	int64 provisioning_started_at = 18;
+	int64 provisioning_completed_at = 19;
 }
 
 message ListOperatorApexDomainsRequest {
@@ -183,9 +189,9 @@ message AddOperatorApexDomainRequest {
 }
 
 message AddOperatorApexDomainResponse {
-	string status = 1;
-	string nginx_ip = 2;
-	repeated DnsInstruction dns_instructions = 3;
+	repeated DnsInstruction dns_instructions = 1;
+	string status = 2;
+	string message = 3;
 }
 
 message DeleteOperatorApexDomainRequest {
@@ -204,4 +210,19 @@ message RefreshOperatorApexDomainRequest {
 message RefreshOperatorApexDomainResponse {
 	string status = 1;
 	int64 cert_expires_at = 2;
+	string error_reason = 3;
+	string message = 4;
+}
+
+message PrecheckOperatorApexDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string apex_domain = 2;
+	string domain = 3;
+}
+
+message PrecheckOperatorApexDomainResponse {
+	bool bindable = 1;
+	string apex_ip = 2;
+	string message = 3;
+	string www_domain = 4;
 }

@@ -1415,6 +1415,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListOperatorApexDomainsResponse'
+    /v1/backoffice/dns/apex-domains/precheck:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_PrecheckOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PrecheckOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.PrecheckOperatorApexDomainResponse'
     /v1/backoffice/dns/apex-domains/refresh:
         post:
             tags:
@@ -14305,6 +14323,13 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
+        api.backoffice.service.v1.PrecheckOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                domain:
+                    type: string
         api.backoffice.service.v1.PurgeCloudflareCacheRequest:
             type: object
             properties:
@@ -17119,14 +17144,14 @@ components:
         api.user.service.v1.AddOperatorApexDomainResponse:
             type: object
             properties:
-                status:
-                    type: string
-                nginxIp:
-                    type: string
                 dnsInstructions:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.DnsInstruction'
+                status:
+                    type: string
+                message:
+                    type: string
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties:
@@ -17188,6 +17213,10 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                provisioningStartedAt:
+                    type: string
+                provisioningCompletedAt:
+                    type: string
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -18021,12 +18050,27 @@ components:
                     type: string
                 threshhold:
                     type: string
+        api.user.service.v1.PrecheckOperatorApexDomainResponse:
+            type: object
+            properties:
+                bindable:
+                    type: boolean
+                apexIp:
+                    type: string
+                message:
+                    type: string
+                wwwDomain:
+                    type: string
         api.user.service.v1.RefreshOperatorApexDomainResponse:
             type: object
             properties:
                 status:
                     type: string
                 certExpiresAt:
+                    type: string
+                errorReason:
+                    type: string
+                message:
                     type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object

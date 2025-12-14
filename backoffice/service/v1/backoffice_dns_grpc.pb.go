@@ -20,14 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeDns_ListOperatorDomains_FullMethodName       = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
-	BackofficeDns_ListOperatorByoDomains_FullMethodName    = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
-	BackofficeDns_AddOperatorByoDomain_FullMethodName      = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
-	BackofficeDns_DeleteOperatorByoDomain_FullMethodName   = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
-	BackofficeDns_ListOperatorApexDomains_FullMethodName   = "/api.backoffice.service.v1.BackofficeDns/ListOperatorApexDomains"
-	BackofficeDns_AddOperatorApexDomain_FullMethodName     = "/api.backoffice.service.v1.BackofficeDns/AddOperatorApexDomain"
-	BackofficeDns_DeleteOperatorApexDomain_FullMethodName  = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorApexDomain"
-	BackofficeDns_RefreshOperatorApexDomain_FullMethodName = "/api.backoffice.service.v1.BackofficeDns/RefreshOperatorApexDomain"
+	BackofficeDns_ListOperatorDomains_FullMethodName        = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
+	BackofficeDns_ListOperatorByoDomains_FullMethodName     = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
+	BackofficeDns_AddOperatorByoDomain_FullMethodName       = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
+	BackofficeDns_DeleteOperatorByoDomain_FullMethodName    = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
+	BackofficeDns_PrecheckOperatorApexDomain_FullMethodName = "/api.backoffice.service.v1.BackofficeDns/PrecheckOperatorApexDomain"
+	BackofficeDns_ListOperatorApexDomains_FullMethodName    = "/api.backoffice.service.v1.BackofficeDns/ListOperatorApexDomains"
+	BackofficeDns_AddOperatorApexDomain_FullMethodName      = "/api.backoffice.service.v1.BackofficeDns/AddOperatorApexDomain"
+	BackofficeDns_DeleteOperatorApexDomain_FullMethodName   = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorApexDomain"
+	BackofficeDns_RefreshOperatorApexDomain_FullMethodName  = "/api.backoffice.service.v1.BackofficeDns/RefreshOperatorApexDomain"
 )
 
 // BackofficeDnsClient is the client API for BackofficeDns service.
@@ -38,6 +39,7 @@ type BackofficeDnsClient interface {
 	ListOperatorByoDomains(ctx context.Context, in *ListOperatorByoDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorByoDomainsResponse, error)
 	AddOperatorByoDomain(ctx context.Context, in *AddOperatorByoDomainRequest, opts ...grpc.CallOption) (*v1.AddOperatorByoDomainResponse, error)
 	DeleteOperatorByoDomain(ctx context.Context, in *DeleteOperatorByoDomainRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorByoDomainResponse, error)
+	PrecheckOperatorApexDomain(ctx context.Context, in *PrecheckOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.PrecheckOperatorApexDomainResponse, error)
 	ListOperatorApexDomains(ctx context.Context, in *ListOperatorApexDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorApexDomainsResponse, error)
 	AddOperatorApexDomain(ctx context.Context, in *AddOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.AddOperatorApexDomainResponse, error)
 	DeleteOperatorApexDomain(ctx context.Context, in *DeleteOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorApexDomainResponse, error)
@@ -92,6 +94,16 @@ func (c *backofficeDnsClient) DeleteOperatorByoDomain(ctx context.Context, in *D
 	return out, nil
 }
 
+func (c *backofficeDnsClient) PrecheckOperatorApexDomain(ctx context.Context, in *PrecheckOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.PrecheckOperatorApexDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.PrecheckOperatorApexDomainResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_PrecheckOperatorApexDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeDnsClient) ListOperatorApexDomains(ctx context.Context, in *ListOperatorApexDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorApexDomainsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListOperatorApexDomainsResponse)
@@ -140,6 +152,7 @@ type BackofficeDnsServer interface {
 	ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*v1.ListOperatorByoDomainsResponse, error)
 	AddOperatorByoDomain(context.Context, *AddOperatorByoDomainRequest) (*v1.AddOperatorByoDomainResponse, error)
 	DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*v1.DeleteOperatorByoDomainResponse, error)
+	PrecheckOperatorApexDomain(context.Context, *PrecheckOperatorApexDomainRequest) (*v1.PrecheckOperatorApexDomainResponse, error)
 	ListOperatorApexDomains(context.Context, *ListOperatorApexDomainsRequest) (*v1.ListOperatorApexDomainsResponse, error)
 	AddOperatorApexDomain(context.Context, *AddOperatorApexDomainRequest) (*v1.AddOperatorApexDomainResponse, error)
 	DeleteOperatorApexDomain(context.Context, *DeleteOperatorApexDomainRequest) (*v1.DeleteOperatorApexDomainResponse, error)
@@ -165,6 +178,9 @@ func (UnimplementedBackofficeDnsServer) AddOperatorByoDomain(context.Context, *A
 }
 func (UnimplementedBackofficeDnsServer) DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*v1.DeleteOperatorByoDomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorByoDomain not implemented")
+}
+func (UnimplementedBackofficeDnsServer) PrecheckOperatorApexDomain(context.Context, *PrecheckOperatorApexDomainRequest) (*v1.PrecheckOperatorApexDomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrecheckOperatorApexDomain not implemented")
 }
 func (UnimplementedBackofficeDnsServer) ListOperatorApexDomains(context.Context, *ListOperatorApexDomainsRequest) (*v1.ListOperatorApexDomainsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorApexDomains not implemented")
@@ -271,6 +287,24 @@ func _BackofficeDns_DeleteOperatorByoDomain_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeDns_PrecheckOperatorApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrecheckOperatorApexDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).PrecheckOperatorApexDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_PrecheckOperatorApexDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).PrecheckOperatorApexDomain(ctx, req.(*PrecheckOperatorApexDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeDns_ListOperatorApexDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListOperatorApexDomainsRequest)
 	if err := dec(in); err != nil {
@@ -365,6 +399,10 @@ var BackofficeDns_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOperatorByoDomain",
 			Handler:    _BackofficeDns_DeleteOperatorByoDomain_Handler,
+		},
+		{
+			MethodName: "PrecheckOperatorApexDomain",
+			Handler:    _BackofficeDns_PrecheckOperatorApexDomain_Handler,
 		},
 		{
 			MethodName: "ListOperatorApexDomains",

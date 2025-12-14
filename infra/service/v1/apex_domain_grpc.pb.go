@@ -19,16 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ApexDomain_AddApexDomain_FullMethodName     = "/api.infra.service.v1.ApexDomain/AddApexDomain"
-	ApexDomain_DeleteApexDomain_FullMethodName  = "/api.infra.service.v1.ApexDomain/DeleteApexDomain"
-	ApexDomain_GetApexDomains_FullMethodName    = "/api.infra.service.v1.ApexDomain/GetApexDomains"
-	ApexDomain_RefreshApexDomain_FullMethodName = "/api.infra.service.v1.ApexDomain/RefreshApexDomain"
+	ApexDomain_PrecheckApexDomain_FullMethodName = "/api.infra.service.v1.ApexDomain/PrecheckApexDomain"
+	ApexDomain_AddApexDomain_FullMethodName      = "/api.infra.service.v1.ApexDomain/AddApexDomain"
+	ApexDomain_DeleteApexDomain_FullMethodName   = "/api.infra.service.v1.ApexDomain/DeleteApexDomain"
+	ApexDomain_GetApexDomains_FullMethodName     = "/api.infra.service.v1.ApexDomain/GetApexDomains"
+	ApexDomain_RefreshApexDomain_FullMethodName  = "/api.infra.service.v1.ApexDomain/RefreshApexDomain"
 )
 
 // ApexDomainClient is the client API for ApexDomain service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApexDomainClient interface {
+	PrecheckApexDomain(ctx context.Context, in *PrecheckApexDomainRequest, opts ...grpc.CallOption) (*PrecheckApexDomainResponse, error)
 	AddApexDomain(ctx context.Context, in *AddApexDomainRequest, opts ...grpc.CallOption) (*AddApexDomainResponse, error)
 	DeleteApexDomain(ctx context.Context, in *DeleteApexDomainRequest, opts ...grpc.CallOption) (*DeleteApexDomainResponse, error)
 	GetApexDomains(ctx context.Context, in *GetApexDomainsRequest, opts ...grpc.CallOption) (*GetApexDomainsResponse, error)
@@ -41,6 +43,16 @@ type apexDomainClient struct {
 
 func NewApexDomainClient(cc grpc.ClientConnInterface) ApexDomainClient {
 	return &apexDomainClient{cc}
+}
+
+func (c *apexDomainClient) PrecheckApexDomain(ctx context.Context, in *PrecheckApexDomainRequest, opts ...grpc.CallOption) (*PrecheckApexDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PrecheckApexDomainResponse)
+	err := c.cc.Invoke(ctx, ApexDomain_PrecheckApexDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *apexDomainClient) AddApexDomain(ctx context.Context, in *AddApexDomainRequest, opts ...grpc.CallOption) (*AddApexDomainResponse, error) {
@@ -87,6 +99,7 @@ func (c *apexDomainClient) RefreshApexDomain(ctx context.Context, in *RefreshApe
 // All implementations must embed UnimplementedApexDomainServer
 // for forward compatibility.
 type ApexDomainServer interface {
+	PrecheckApexDomain(context.Context, *PrecheckApexDomainRequest) (*PrecheckApexDomainResponse, error)
 	AddApexDomain(context.Context, *AddApexDomainRequest) (*AddApexDomainResponse, error)
 	DeleteApexDomain(context.Context, *DeleteApexDomainRequest) (*DeleteApexDomainResponse, error)
 	GetApexDomains(context.Context, *GetApexDomainsRequest) (*GetApexDomainsResponse, error)
@@ -101,6 +114,9 @@ type ApexDomainServer interface {
 // pointer dereference when methods are called.
 type UnimplementedApexDomainServer struct{}
 
+func (UnimplementedApexDomainServer) PrecheckApexDomain(context.Context, *PrecheckApexDomainRequest) (*PrecheckApexDomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrecheckApexDomain not implemented")
+}
 func (UnimplementedApexDomainServer) AddApexDomain(context.Context, *AddApexDomainRequest) (*AddApexDomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddApexDomain not implemented")
 }
@@ -132,6 +148,24 @@ func RegisterApexDomainServer(s grpc.ServiceRegistrar, srv ApexDomainServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ApexDomain_ServiceDesc, srv)
+}
+
+func _ApexDomain_PrecheckApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrecheckApexDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApexDomainServer).PrecheckApexDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApexDomain_PrecheckApexDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApexDomainServer).PrecheckApexDomain(ctx, req.(*PrecheckApexDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ApexDomain_AddApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -213,6 +247,10 @@ var ApexDomain_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.infra.service.v1.ApexDomain",
 	HandlerType: (*ApexDomainServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PrecheckApexDomain",
+			Handler:    _ApexDomain_PrecheckApexDomain_Handler,
+		},
 		{
 			MethodName: "AddApexDomain",
 			Handler:    _ApexDomain_AddApexDomain_Handler,
