@@ -15537,6 +15537,16 @@ components:
                         type: string
                 gameId:
                     type: string
+                theme:
+                    type: string
+                supportBonus:
+                    type: boolean
+                freeSpin:
+                    type: boolean
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
         api.game.service.v1.BackofficeBatchUpdateTagGamesResponse:
             type: object
             properties:
