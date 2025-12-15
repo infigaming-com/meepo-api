@@ -1904,6 +1904,11 @@ message BackofficeBatchUpdateTagGamesRequest {
 	repeated string categories = 5;
 	repeated string fee_groups = 6;
 	optional string game_id = 7;  // Fuzzy search by game ID
+	optional string theme = 8;
+	optional bool support_bonus = 9;
+	optional bool free_spin = 10;
+	optional string rtp_min = 11;
+	optional string rtp_max = 12;
 }
 
 message BackofficeBatchUpdateTagGamesResponse {
@@ -1935,6 +1940,11 @@ message BackofficeListGamesUnderTagRequest {
 	optional string relation_filter = 7; // "all" | "in_tag" | "not_in_tag"
 	int32 page = 8;
 	int32 page_size = 9;
+	optional string theme = 10;
+	optional bool support_bonus = 11;
+	optional bool free_spin = 12;
+	optional string rtp_min = 13;
+	optional string rtp_max = 14;
 }
 
 message BackofficeListGamesUnderTagResponse {
