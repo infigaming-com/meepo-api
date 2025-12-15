@@ -821,6 +821,11 @@ message BackofficeListGamesUnderTagRequest {
 	optional string relation_filter = 6; // "all" | "in_tag" | "not_in_tag"
 	int32 page = 7;
 	int32 page_size = 8;
+	optional string theme = 9;
+	optional bool support_bonus = 10;
+	optional bool free_spin = 11;
+	optional string rtp_min = 12;
+	optional string rtp_max = 13;
 }
 
 message BackofficeListGamesUnderTagResponse {
