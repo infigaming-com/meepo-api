@@ -25,6 +25,26 @@ service Dns {
 	// DeleteOperatorByoDomain deletes a binding between customer byo domain and meepo domain
 	rpc DeleteOperatorByoDomain(DeleteOperatorByoDomainRequest) returns (DeleteOperatorByoDomainResponse) {
 	}
+
+	// PrecheckOperatorApexDomain validates if an apex domain can be bound
+	rpc PrecheckOperatorApexDomain(PrecheckOperatorApexDomainRequest) returns (PrecheckOperatorApexDomainResponse) {
+	}
+
+	// ListOperatorApexDomains returns the list of apex domains
+	rpc ListOperatorApexDomains(ListOperatorApexDomainsRequest) returns (ListOperatorApexDomainsResponse) {
+	}
+
+	// AddOperatorApexDomain adds an apex/root domain redirect
+	rpc AddOperatorApexDomain(AddOperatorApexDomainRequest) returns (AddOperatorApexDomainResponse) {
+	}
+
+	// DeleteOperatorApexDomain deletes an apex domain redirect
+	rpc DeleteOperatorApexDomain(DeleteOperatorApexDomainRequest) returns (DeleteOperatorApexDomainResponse) {
+	}
+
+	// RefreshOperatorApexDomain manually refreshes certificate for apex domain
+	rpc RefreshOperatorApexDomain(RefreshOperatorApexDomainRequest) returns (RefreshOperatorApexDomainResponse) {
+	}
 }
 
 message DomainInfo {
@@ -116,4 +136,93 @@ message DeleteOperatorByoDomainRequest {
 }
 
 message DeleteOperatorByoDomainResponse {
+}
+
+message ApexDomainInfo {
+	string apex_domain = 1;
+	string www_domain = 2;
+	string domain = 3;
+	string status = 4;
+	string error_reason = 5;
+	string nginx_ip = 6;
+	int64 cert_expires_at = 7;
+	int64 target_operator_id = 8;
+	string target_operator_name = 9;
+	int64 target_company_operator_id = 10;
+	string target_company_operator_name = 11;
+	int64 target_retailer_operator_id = 12;
+	string target_retailer_operator_name = 13;
+	int64 target_system_operator_id = 14;
+	string target_system_operator_name = 15;
+	google.protobuf.Timestamp created_at = 16;
+	google.protobuf.Timestamp updated_at = 17;
+	int64 provisioning_started_at = 18;
+	int64 provisioning_completed_at = 19;
+}
+
+message ListOperatorApexDomainsRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string status = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	optional bool pagination = 5;
+}
+
+message ListOperatorApexDomainsResponse {
+	repeated ApexDomainInfo data = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+
+message DnsInstruction {
+	string type = 1;
+	string name = 2;
+	string value = 3;
+	string description = 4;
+}
+
+message AddOperatorApexDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string apex_domain = 2;
+	string domain = 3;
+}
+
+message AddOperatorApexDomainResponse {
+	repeated DnsInstruction dns_instructions = 1;
+	string status = 2;
+	string message = 3;
+}
+
+message DeleteOperatorApexDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string apex_domain = 2;
+}
+
+message DeleteOperatorApexDomainResponse {
+}
+
+message RefreshOperatorApexDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string apex_domain = 2;
+}
+
+message RefreshOperatorApexDomainResponse {
+	string status = 1;
+	int64 cert_expires_at = 2;
+	string error_reason = 3;
+	string message = 4;
+}
+
+message PrecheckOperatorApexDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string apex_domain = 2;
+	string domain = 3;
+}
+
+message PrecheckOperatorApexDomainResponse {
+	bool bindable = 1;
+	string apex_ip = 2;
+	string message = 3;
+	string www_domain = 4;
 }

@@ -19,10 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Dns_ListOperatorDomains_FullMethodName     = "/api.user.service.v1.Dns/ListOperatorDomains"
-	Dns_ListOperatorByoDomains_FullMethodName  = "/api.user.service.v1.Dns/ListOperatorByoDomains"
-	Dns_AddOperatorByoDomain_FullMethodName    = "/api.user.service.v1.Dns/AddOperatorByoDomain"
-	Dns_DeleteOperatorByoDomain_FullMethodName = "/api.user.service.v1.Dns/DeleteOperatorByoDomain"
+	Dns_ListOperatorDomains_FullMethodName        = "/api.user.service.v1.Dns/ListOperatorDomains"
+	Dns_ListOperatorByoDomains_FullMethodName     = "/api.user.service.v1.Dns/ListOperatorByoDomains"
+	Dns_AddOperatorByoDomain_FullMethodName       = "/api.user.service.v1.Dns/AddOperatorByoDomain"
+	Dns_DeleteOperatorByoDomain_FullMethodName    = "/api.user.service.v1.Dns/DeleteOperatorByoDomain"
+	Dns_PrecheckOperatorApexDomain_FullMethodName = "/api.user.service.v1.Dns/PrecheckOperatorApexDomain"
+	Dns_ListOperatorApexDomains_FullMethodName    = "/api.user.service.v1.Dns/ListOperatorApexDomains"
+	Dns_AddOperatorApexDomain_FullMethodName      = "/api.user.service.v1.Dns/AddOperatorApexDomain"
+	Dns_DeleteOperatorApexDomain_FullMethodName   = "/api.user.service.v1.Dns/DeleteOperatorApexDomain"
+	Dns_RefreshOperatorApexDomain_FullMethodName  = "/api.user.service.v1.Dns/RefreshOperatorApexDomain"
 )
 
 // DnsClient is the client API for Dns service.
@@ -38,6 +43,16 @@ type DnsClient interface {
 	AddOperatorByoDomain(ctx context.Context, in *AddOperatorByoDomainRequest, opts ...grpc.CallOption) (*AddOperatorByoDomainResponse, error)
 	// DeleteOperatorByoDomain deletes a binding between customer byo domain and meepo domain
 	DeleteOperatorByoDomain(ctx context.Context, in *DeleteOperatorByoDomainRequest, opts ...grpc.CallOption) (*DeleteOperatorByoDomainResponse, error)
+	// PrecheckOperatorApexDomain validates if an apex domain can be bound
+	PrecheckOperatorApexDomain(ctx context.Context, in *PrecheckOperatorApexDomainRequest, opts ...grpc.CallOption) (*PrecheckOperatorApexDomainResponse, error)
+	// ListOperatorApexDomains returns the list of apex domains
+	ListOperatorApexDomains(ctx context.Context, in *ListOperatorApexDomainsRequest, opts ...grpc.CallOption) (*ListOperatorApexDomainsResponse, error)
+	// AddOperatorApexDomain adds an apex/root domain redirect
+	AddOperatorApexDomain(ctx context.Context, in *AddOperatorApexDomainRequest, opts ...grpc.CallOption) (*AddOperatorApexDomainResponse, error)
+	// DeleteOperatorApexDomain deletes an apex domain redirect
+	DeleteOperatorApexDomain(ctx context.Context, in *DeleteOperatorApexDomainRequest, opts ...grpc.CallOption) (*DeleteOperatorApexDomainResponse, error)
+	// RefreshOperatorApexDomain manually refreshes certificate for apex domain
+	RefreshOperatorApexDomain(ctx context.Context, in *RefreshOperatorApexDomainRequest, opts ...grpc.CallOption) (*RefreshOperatorApexDomainResponse, error)
 }
 
 type dnsClient struct {
@@ -88,6 +103,56 @@ func (c *dnsClient) DeleteOperatorByoDomain(ctx context.Context, in *DeleteOpera
 	return out, nil
 }
 
+func (c *dnsClient) PrecheckOperatorApexDomain(ctx context.Context, in *PrecheckOperatorApexDomainRequest, opts ...grpc.CallOption) (*PrecheckOperatorApexDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PrecheckOperatorApexDomainResponse)
+	err := c.cc.Invoke(ctx, Dns_PrecheckOperatorApexDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dnsClient) ListOperatorApexDomains(ctx context.Context, in *ListOperatorApexDomainsRequest, opts ...grpc.CallOption) (*ListOperatorApexDomainsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorApexDomainsResponse)
+	err := c.cc.Invoke(ctx, Dns_ListOperatorApexDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dnsClient) AddOperatorApexDomain(ctx context.Context, in *AddOperatorApexDomainRequest, opts ...grpc.CallOption) (*AddOperatorApexDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOperatorApexDomainResponse)
+	err := c.cc.Invoke(ctx, Dns_AddOperatorApexDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dnsClient) DeleteOperatorApexDomain(ctx context.Context, in *DeleteOperatorApexDomainRequest, opts ...grpc.CallOption) (*DeleteOperatorApexDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOperatorApexDomainResponse)
+	err := c.cc.Invoke(ctx, Dns_DeleteOperatorApexDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dnsClient) RefreshOperatorApexDomain(ctx context.Context, in *RefreshOperatorApexDomainRequest, opts ...grpc.CallOption) (*RefreshOperatorApexDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RefreshOperatorApexDomainResponse)
+	err := c.cc.Invoke(ctx, Dns_RefreshOperatorApexDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DnsServer is the server API for Dns service.
 // All implementations must embed UnimplementedDnsServer
 // for forward compatibility.
@@ -101,6 +166,16 @@ type DnsServer interface {
 	AddOperatorByoDomain(context.Context, *AddOperatorByoDomainRequest) (*AddOperatorByoDomainResponse, error)
 	// DeleteOperatorByoDomain deletes a binding between customer byo domain and meepo domain
 	DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*DeleteOperatorByoDomainResponse, error)
+	// PrecheckOperatorApexDomain validates if an apex domain can be bound
+	PrecheckOperatorApexDomain(context.Context, *PrecheckOperatorApexDomainRequest) (*PrecheckOperatorApexDomainResponse, error)
+	// ListOperatorApexDomains returns the list of apex domains
+	ListOperatorApexDomains(context.Context, *ListOperatorApexDomainsRequest) (*ListOperatorApexDomainsResponse, error)
+	// AddOperatorApexDomain adds an apex/root domain redirect
+	AddOperatorApexDomain(context.Context, *AddOperatorApexDomainRequest) (*AddOperatorApexDomainResponse, error)
+	// DeleteOperatorApexDomain deletes an apex domain redirect
+	DeleteOperatorApexDomain(context.Context, *DeleteOperatorApexDomainRequest) (*DeleteOperatorApexDomainResponse, error)
+	// RefreshOperatorApexDomain manually refreshes certificate for apex domain
+	RefreshOperatorApexDomain(context.Context, *RefreshOperatorApexDomainRequest) (*RefreshOperatorApexDomainResponse, error)
 	mustEmbedUnimplementedDnsServer()
 }
 
@@ -122,6 +197,21 @@ func (UnimplementedDnsServer) AddOperatorByoDomain(context.Context, *AddOperator
 }
 func (UnimplementedDnsServer) DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*DeleteOperatorByoDomainResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteOperatorByoDomain not implemented")
+}
+func (UnimplementedDnsServer) PrecheckOperatorApexDomain(context.Context, *PrecheckOperatorApexDomainRequest) (*PrecheckOperatorApexDomainResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PrecheckOperatorApexDomain not implemented")
+}
+func (UnimplementedDnsServer) ListOperatorApexDomains(context.Context, *ListOperatorApexDomainsRequest) (*ListOperatorApexDomainsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorApexDomains not implemented")
+}
+func (UnimplementedDnsServer) AddOperatorApexDomain(context.Context, *AddOperatorApexDomainRequest) (*AddOperatorApexDomainResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddOperatorApexDomain not implemented")
+}
+func (UnimplementedDnsServer) DeleteOperatorApexDomain(context.Context, *DeleteOperatorApexDomainRequest) (*DeleteOperatorApexDomainResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteOperatorApexDomain not implemented")
+}
+func (UnimplementedDnsServer) RefreshOperatorApexDomain(context.Context, *RefreshOperatorApexDomainRequest) (*RefreshOperatorApexDomainResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RefreshOperatorApexDomain not implemented")
 }
 func (UnimplementedDnsServer) mustEmbedUnimplementedDnsServer() {}
 func (UnimplementedDnsServer) testEmbeddedByValue()             {}
@@ -216,6 +306,96 @@ func _Dns_DeleteOperatorByoDomain_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Dns_PrecheckOperatorApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrecheckOperatorApexDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsServer).PrecheckOperatorApexDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Dns_PrecheckOperatorApexDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsServer).PrecheckOperatorApexDomain(ctx, req.(*PrecheckOperatorApexDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Dns_ListOperatorApexDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorApexDomainsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsServer).ListOperatorApexDomains(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Dns_ListOperatorApexDomains_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsServer).ListOperatorApexDomains(ctx, req.(*ListOperatorApexDomainsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Dns_AddOperatorApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorApexDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsServer).AddOperatorApexDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Dns_AddOperatorApexDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsServer).AddOperatorApexDomain(ctx, req.(*AddOperatorApexDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Dns_DeleteOperatorApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorApexDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsServer).DeleteOperatorApexDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Dns_DeleteOperatorApexDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsServer).DeleteOperatorApexDomain(ctx, req.(*DeleteOperatorApexDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Dns_RefreshOperatorApexDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshOperatorApexDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsServer).RefreshOperatorApexDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Dns_RefreshOperatorApexDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsServer).RefreshOperatorApexDomain(ctx, req.(*RefreshOperatorApexDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Dns_ServiceDesc is the grpc.ServiceDesc for Dns service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -238,6 +418,26 @@ var Dns_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOperatorByoDomain",
 			Handler:    _Dns_DeleteOperatorByoDomain_Handler,
+		},
+		{
+			MethodName: "PrecheckOperatorApexDomain",
+			Handler:    _Dns_PrecheckOperatorApexDomain_Handler,
+		},
+		{
+			MethodName: "ListOperatorApexDomains",
+			Handler:    _Dns_ListOperatorApexDomains_Handler,
+		},
+		{
+			MethodName: "AddOperatorApexDomain",
+			Handler:    _Dns_AddOperatorApexDomain_Handler,
+		},
+		{
+			MethodName: "DeleteOperatorApexDomain",
+			Handler:    _Dns_DeleteOperatorApexDomain_Handler,
+		},
+		{
+			MethodName: "RefreshOperatorApexDomain",
+			Handler:    _Dns_RefreshOperatorApexDomain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

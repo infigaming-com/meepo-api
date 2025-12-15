@@ -58,3 +58,111 @@ func IsDeleteByoDomainFailed(err error) bool {
 func ErrorDeleteByoDomainFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_DELETE_BYO_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsAddApexDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_APEX_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddApexDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetApexDomainsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_APEX_DOMAINS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetApexDomainsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_APEX_DOMAINS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteApexDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_APEX_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteApexDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRefreshApexDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REFRESH_APEX_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorRefreshApexDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REFRESH_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWwwDomainNotActive(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WWW_DOMAIN_NOT_ACTIVE.String() && e.Code == 500
+}
+
+func ErrorWwwDomainNotActive(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WWW_DOMAIN_NOT_ACTIVE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsApexDomainLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_APEX_DOMAIN_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorApexDomainLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_APEX_DOMAIN_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCertificateIssuanceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CERTIFICATE_ISSUANCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCertificateIssuanceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CERTIFICATE_ISSUANCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNginxConfigGenerationFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NGINX_CONFIG_GENERATION_FAILED.String() && e.Code == 500
+}
+
+func ErrorNginxConfigGenerationFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NGINX_CONFIG_GENERATION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNginxReloadFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NGINX_RELOAD_FAILED.String() && e.Code == 500
+}
+
+func ErrorNginxReloadFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NGINX_RELOAD_FAILED.String(), fmt.Sprintf(format, args...))
+}

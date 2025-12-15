@@ -1361,6 +1361,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/dns/apex-domains/add:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_AddOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorApexDomainResponse'
+    /v1/backoffice/dns/apex-domains/delete:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_DeleteOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorApexDomainResponse'
+    /v1/backoffice/dns/apex-domains/list:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_ListOperatorApexDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorApexDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListOperatorApexDomainsResponse'
+    /v1/backoffice/dns/apex-domains/precheck:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_PrecheckOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PrecheckOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.PrecheckOperatorApexDomainResponse'
+    /v1/backoffice/dns/apex-domains/refresh:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_RefreshOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RefreshOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.RefreshOperatorApexDomainResponse'
     /v1/backoffice/dns/byo-domains/add:
         post:
             tags:
@@ -8180,6 +8270,13 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                domain:
+                    type: string
         api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
@@ -9027,6 +9124,11 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.DeleteOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
         api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
@@ -12218,6 +12320,17 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListOperatorApexDomainsRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
@@ -14233,6 +14346,13 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
+        api.backoffice.service.v1.PrecheckOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                domain:
+                    type: string
         api.backoffice.service.v1.PurgeCloudflareCacheRequest:
             type: object
             properties:
@@ -14250,6 +14370,11 @@ components:
                 message:
                     type: string
                 error:
+                    type: string
+        api.backoffice.service.v1.RefreshOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
                     type: string
         api.backoffice.service.v1.RegisterRequest:
             type: object
@@ -17121,6 +17246,17 @@ components:
                 reviewDuration:
                     type: integer
                     format: int32
+        api.user.service.v1.AddOperatorApexDomainResponse:
+            type: object
+            properties:
+                dnsInstructions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.DnsInstruction'
+                status:
+                    type: string
+                message:
+                    type: string
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties:
@@ -17143,6 +17279,49 @@ components:
         api.user.service.v1.AddResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.user.service.v1.ApexDomainInfo:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                wwwDomain:
+                    type: string
+                domain:
+                    type: string
+                status:
+                    type: string
+                errorReason:
+                    type: string
+                nginxIp:
+                    type: string
+                certExpiresAt:
+                    type: string
+                targetOperatorId:
+                    type: string
+                targetOperatorName:
+                    type: string
+                targetCompanyOperatorId:
+                    type: string
+                targetCompanyOperatorName:
+                    type: string
+                targetRetailerOperatorId:
+                    type: string
+                targetRetailerOperatorName:
+                    type: string
+                targetSystemOperatorId:
+                    type: string
+                targetSystemOperatorName:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                provisioningStartedAt:
+                    type: string
+                provisioningCompletedAt:
+                    type: string
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -17240,6 +17419,9 @@ components:
                         - VIP_REWARD_KIND_RAKEBACK_MONTHLY
                     type: string
                     format: enum
+        api.user.service.v1.DeleteOperatorApexDomainResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
@@ -17259,6 +17441,17 @@ components:
         api.user.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.user.service.v1.DnsInstruction:
+            type: object
+            properties:
+                type:
+                    type: string
+                name:
+                    type: string
+                value:
+                    type: string
+                description:
+                    type: string
         api.user.service.v1.DomainInfo:
             type: object
             properties:
@@ -17623,6 +17816,22 @@ components:
                 reportingCurrency:
                     type: string
             description: OperatorInfo is the simplified information of a company operator, used for list company operators
+        api.user.service.v1.ListOperatorApexDomainsResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ApexDomainInfo'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
         api.user.service.v1.ListOperatorByoDomainsResponse:
             type: object
             properties:
@@ -17945,6 +18154,28 @@ components:
                 balance:
                     type: string
                 threshhold:
+                    type: string
+        api.user.service.v1.PrecheckOperatorApexDomainResponse:
+            type: object
+            properties:
+                bindable:
+                    type: boolean
+                apexIp:
+                    type: string
+                message:
+                    type: string
+                wwwDomain:
+                    type: string
+        api.user.service.v1.RefreshOperatorApexDomainResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                certExpiresAt:
+                    type: string
+                errorReason:
+                    type: string
+                message:
                     type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
