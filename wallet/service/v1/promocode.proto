@@ -196,12 +196,13 @@ message PromoCodeCampaignListItem {
 	string reward_trigger = 4;           // instant | conditional
 	string status = 5;                   // active | paused | disabled
 	PromoCodeRewardConfigs reward_configs = 6;
-	int32 usage_count = 7;               // current usage count
-	int32 max_usage_limit = 8;           // max usage limit (for universal: total limit, for one_time: total codes generated)
-	google.protobuf.Timestamp created_at = 9;
-	google.protobuf.Timestamp start_time = 10;
-	google.protobuf.Timestamp end_time = 11;
-	google.protobuf.Timestamp updated_at = 12;
+	int32 usage_count = 7;               // current code usage count
+	int32 total_codes_generated = 8;     // total codes generated for campaign
+	int32 max_usage_limit = 9;           // max usage limit
+	google.protobuf.Timestamp created_at = 10;
+	google.protobuf.Timestamp start_time = 11;
+	google.protobuf.Timestamp end_time = 12;
+	google.protobuf.Timestamp updated_at = 13;
 }
 
 message ListPromoCodeCampaignsResponse {

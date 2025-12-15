@@ -1521,21 +1521,22 @@ func (x *ListPromoCodeCampaignsRequest) GetPageSize() int32 {
 }
 
 type PromoCodeCampaignListItem struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Id            int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CodeType      string                  `protobuf:"bytes,3,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`                // one_time | universal
-	RewardTrigger string                  `protobuf:"bytes,4,opt,name=reward_trigger,json=rewardTrigger,proto3" json:"reward_trigger,omitempty"` // instant | conditional
-	Status        string                  `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`                                    // active | paused | disabled
-	RewardConfigs *PromoCodeRewardConfigs `protobuf:"bytes,6,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
-	UsageCount    int32                   `protobuf:"varint,7,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`            // current usage count
-	MaxUsageLimit int32                   `protobuf:"varint,8,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"` // max usage limit (for universal: total limit, for one_time: total codes generated)
-	CreatedAt     *timestamppb.Timestamp  `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	StartTime     *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp  `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState  `protogen:"open.v1"`
+	Id                  int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CodeType            string                  `protobuf:"bytes,3,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"`                // one_time | universal
+	RewardTrigger       string                  `protobuf:"bytes,4,opt,name=reward_trigger,json=rewardTrigger,proto3" json:"reward_trigger,omitempty"` // instant | conditional
+	Status              string                  `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`                                    // active | paused | disabled
+	RewardConfigs       *PromoCodeRewardConfigs `protobuf:"bytes,6,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
+	UsageCount          int32                   `protobuf:"varint,7,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`                              // current code usage count
+	TotalCodesGenerated int32                   `protobuf:"varint,8,opt,name=total_codes_generated,json=totalCodesGenerated,proto3" json:"total_codes_generated,omitempty"` // total codes generated for campaign
+	MaxUsageLimit       int32                   `protobuf:"varint,9,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`                   // max usage limit
+	CreatedAt           *timestamppb.Timestamp  `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	StartTime           *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime             *timestamppb.Timestamp  `protobuf:"bytes,12,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	UpdatedAt           *timestamppb.Timestamp  `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *PromoCodeCampaignListItem) Reset() {
@@ -1613,6 +1614,13 @@ func (x *PromoCodeCampaignListItem) GetRewardConfigs() *PromoCodeRewardConfigs {
 func (x *PromoCodeCampaignListItem) GetUsageCount() int32 {
 	if x != nil {
 		return x.UsageCount
+	}
+	return 0
+}
+
+func (x *PromoCodeCampaignListItem) GetTotalCodesGenerated() int32 {
+	if x != nil {
+		return x.TotalCodesGenerated
 	}
 	return 0
 }
@@ -2324,7 +2332,7 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x12\n" +
 	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xa2\x04\n" +
+	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xd6\x04\n" +
 	"\x19PromoCodeCampaignListItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -2333,16 +2341,17 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12T\n" +
 	"\x0ereward_configs\x18\x06 \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\x12\x1f\n" +
 	"\vusage_count\x18\a \x01(\x05R\n" +
-	"usageCount\x12&\n" +
-	"\x0fmax_usage_limit\x18\b \x01(\x05R\rmaxUsageLimit\x129\n" +
+	"usageCount\x122\n" +
+	"\x15total_codes_generated\x18\b \x01(\x05R\x13totalCodesGenerated\x12&\n" +
+	"\x0fmax_usage_limit\x18\t \x01(\x05R\rmaxUsageLimit\x129\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"start_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x129\n" +
+	"start_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x129\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa4\x02\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa4\x02\n" +
 	"\x1eListPromoCodeCampaignsResponse\x12N\n" +
 	"\tcampaigns\x18\x01 \x03(\v20.api.wallet.service.v1.PromoCodeCampaignListItemR\tcampaigns\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12!\n" +

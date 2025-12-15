@@ -20262,6 +20262,9 @@ components:
                 usageCount:
                     type: integer
                     format: int32
+                totalCodesGenerated:
+                    type: integer
+                    format: int32
                 maxUsageLimit:
                     type: integer
                     format: int32

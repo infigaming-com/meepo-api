@@ -3366,6 +3366,8 @@ func (m *PromoCodeCampaignListItem) validate(all bool) error {
 
 	// no validation rules for UsageCount
 
+	// no validation rules for TotalCodesGenerated
+
 	// no validation rules for MaxUsageLimit
 
 	if all {
