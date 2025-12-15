@@ -1,0 +1,265 @@
+syntax = "proto3";
+
+package api.wallet.service.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/wallet/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.wallet.service.v1";
+
+// ============================================
+// Shared Reward Types
+// ============================================
+
+// Free spin config for deposit reward or promo code
+message FreeSpinConfig {
+	bool enabled = 1;
+	string reward_type = 2;              // cash | bonus (winning credit type)
+	string currency = 3;                 // play currency
+	string provider_id = 4;
+	string game_id = 5;
+	int32 level = 6;
+	int32 spin_count = 7;
+	int64 free_spin_validity = 8;        // ms, 0 = no expiration
+	int32 wagering_requirement = 9;
+	string max_withdrawal_multiplier = 10;
+	int64 reward_validity = 11;          // winning reward validity (ms)
+}
+
+// Free bet config for deposit reward or promo code
+message FreeBetConfig {
+	bool enabled = 1;
+	string reward_type = 2;              // cash | bonus (winning credit type)
+	google.protobuf.Struct template = 3; // bet template
+	int32 bet_count = 4;
+	int64 free_bet_validity = 5;         // ms, 0 = no expiration
+	int32 wagering_requirement = 6;
+	string max_withdrawal_multiplier = 7;
+	int64 reward_validity = 8;           // winning reward validity (ms)
+}
+
+// ============================================
+// Promo Code Campaign
+// ============================================
+
+// Bonus money config for promo code campaign
+message PromoCodeBonusMoneyConfig {
+	bool enabled = 1;
+	string reward_type = 2;              // cash | bonus
+	string amount = 3;                   // fixed amount
+	int32 wagering_requirement = 4;
+	string max_withdrawal_multiplier = 5;
+	int64 reward_validity = 6;           // ms, 0 = no expiration
+}
+
+// Campaign reward configs (all optional)
+message PromoCodeRewardConfigs {
+	PromoCodeBonusMoneyConfig bonus_money_config = 1;
+	repeated FreeSpinConfig free_spin_configs = 2;
+	repeated FreeBetConfig free_bet_configs = 3;
+}
+
+// Deposit condition for promo code campaign
+message DepositCondition {
+	int32 time_range_days = 1;           // 0 = no time range
+	bool reporting_currency_aggregate = 2;
+	string currency = 3;
+	string amount = 4;
+}
+
+// Registration time condition for promo code campaign
+message RegistrationTimeCondition {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+}
+
+// Invitation condition for promo code campaign
+message InvitationCondition {
+	int32 time_range_days = 1;           // 0 = no time range
+	int32 invitation_count = 2;
+}
+
+// Turnover condition for promo code campaign
+message TurnoverCondition {
+	int32 time_range_days = 1;           // 0 = no time range
+	bool reporting_currency_aggregate = 2;
+	string currency = 3;
+	string amount = 4;
+}
+
+// Referrer condition for promo code campaign
+message ReferrerCondition {
+	bool only_valid_allowed = 1;
+	repeated int64 referrer_ids = 2;
+}
+
+// Affiliate condition for promo code campaign
+message AffiliateCondition {
+	repeated int64 affiliate_ids = 1;
+}
+
+// Verification status condition for promo code campaign
+message VerificationStatusCondition {
+	bool email_verified = 1;
+	bool phone_verified = 2;
+}
+
+// Campaign conditions - all conditions must be satisfied to trigger the reward
+message PromoCodeConditions {
+	DepositCondition deposit_condition = 1;
+	RegistrationTimeCondition registration_time_condition = 2;
+	InvitationCondition invitation_condition = 3;
+	TurnoverCondition turnover_condition = 4;
+	ReferrerCondition referrer_condition = 5;
+	AffiliateCondition affiliate_condition = 6;
+	VerificationStatusCondition verification_status_condition = 7;
+}
+
+message PromoCodeCampaign {
+	int64 id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string name = 3;
+	string code_type = 4;                // one_time | universal
+	int32 max_usage_limit = 5;           // for universal code
+	google.protobuf.Timestamp start_time = 6;
+	google.protobuf.Timestamp end_time = 7;
+	string status = 8;                   // active | paused | disabled
+	PromoCodeConditions reward_conditions = 9;
+	PromoCodeRewardConfigs reward_configs = 10;
+	google.protobuf.Timestamp created_at = 11;
+	google.protobuf.Timestamp updated_at = 12;
+}
+
+// Create Campaign (status defaults to active)
+message CreatePromoCodeCampaignRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2; // target operator must be an operator, not other operator type
+	int64 create_user_id = 3;
+	string name = 4;
+	string code_type = 5;
+	int32 max_usage_limit = 6;
+	google.protobuf.Timestamp start_time = 7;
+	google.protobuf.Timestamp end_time = 8;
+	PromoCodeConditions reward_conditions = 9;
+	PromoCodeRewardConfigs reward_configs = 10;
+}
+
+message CreatePromoCodeCampaignResponse {
+}
+
+// Update Campaign - full update (cannot update status or code_type)
+message UpdatePromoCodeCampaignRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 campaign_id = 3;
+	string name = 4;
+	int32 max_usage_limit = 5;
+	google.protobuf.Timestamp start_time = 6;
+	google.protobuf.Timestamp end_time = 7;
+	PromoCodeConditions reward_conditions = 8;
+	PromoCodeRewardConfigs reward_configs = 9;
+}
+
+message UpdatePromoCodeCampaignResponse {
+}
+
+// Update Campaign Status (separate endpoint)
+message UpdatePromoCodeCampaignStatusRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 campaign_id = 3;
+	string status = 4;                   // active | paused | disabled
+}
+
+message UpdatePromoCodeCampaignStatusResponse {
+}
+
+// List Campaigns
+message ListPromoCodeCampaignsRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string status = 3;                   // active | paused | disabled
+	string code_type = 4;                // one_time | universal
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+	int32 page = 7;
+	int32 page_size = 8;
+}
+
+message PromoCodeCampaignListItem {
+	int64 id = 1;
+	string name = 2;
+	string code_type = 3;                // one_time | universal
+	string reward_trigger = 4;           // instant | conditional
+	string status = 5;                   // active | paused | disabled
+	PromoCodeRewardConfigs reward_configs = 6;
+	int32 usage_count = 7;               // current usage count
+	int32 max_usage_limit = 8;           // max usage limit (for universal: total limit, for one_time: total codes generated)
+	google.protobuf.Timestamp created_at = 9;
+	google.protobuf.Timestamp start_time = 10;
+	google.protobuf.Timestamp end_time = 11;
+	google.protobuf.Timestamp updated_at = 12;
+}
+
+message ListPromoCodeCampaignsResponse {
+	repeated PromoCodeCampaignListItem campaigns = 1;
+	int32 total = 2;
+	int32 active_count = 3;
+	int32 paused_count = 4;
+	int32 disabled_count = 5;
+	int32 page = 6;
+	int32 page_size = 7;
+}
+
+// List Campaign Details - codes (for one_time) or usages (for universal)
+message ListPromoCodeCampaignDetailsRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	int64 campaign_id = 2;
+	int64 user_id = 3;
+	string status = 4;
+	int32 page = 5;
+	int32 page_size = 6;
+}
+
+// Code item for one_time campaigns
+message PromoCodeListItem {
+	string code = 1;
+	string status = 2;                   // unused | used
+	int64 used_by_user_id = 3;
+	google.protobuf.Timestamp created_at = 4;
+	google.protobuf.Timestamp used_at = 5;
+}
+
+// Usage item for universal campaigns
+message PromoCodeUsageListItem {
+	string code = 1;
+	int64 user_id = 2;
+	google.protobuf.Timestamp created_at = 3;
+	google.protobuf.Timestamp used_at = 4;
+}
+
+message ListPromoCodeCampaignDetailsResponse {
+	string code_type = 1;                // one_time | universal (indicates which list is populated)
+	repeated PromoCodeListItem codes = 2;       // populated for one_time campaigns
+	repeated PromoCodeUsageListItem usages = 3; // populated for universal campaigns
+	int32 total = 4;
+	int32 page = 5;
+	int32 page_size = 6;
+}
+
+// Generate Codes for Campaign (one_time only)
+message GeneratePromoCodesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	int64 generated_by_user_id = 2;
+	int64 campaign_id = 3;
+	int32 code_length = 4;              // 8 | 10 | 12
+	string code_format = 5;              // alphanumeric | uppercase | numeric
+	int32 count = 6;                     // 1-10000
+}
+
+message GeneratePromoCodesResponse {
+	int32 generated_count = 1;
+}

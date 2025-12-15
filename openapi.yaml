@@ -5142,6 +5142,120 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorTransferResponse'
+    /v1/backoffice/wallet/promo-code/campaign/create:
+        post:
+            tags:
+                - BackofficeWallet
+            description: CreatePromoCodeCampaign creates a new promo code campaign
+            operationId: BackofficeWallet_CreatePromoCodeCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreatePromoCodeCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.CreatePromoCodeCampaignResponse'
+    /v1/backoffice/wallet/promo-code/campaign/details:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
+            operationId: BackofficeWallet_ListPromoCodeCampaignDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse'
+    /v1/backoffice/wallet/promo-code/campaign/status/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
+            operationId: BackofficeWallet_UpdatePromoCodeCampaignStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse'
+    /v1/backoffice/wallet/promo-code/campaign/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
+            operationId: BackofficeWallet_UpdatePromoCodeCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePromoCodeCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdatePromoCodeCampaignResponse'
+    /v1/backoffice/wallet/promo-code/campaigns/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListPromoCodeCampaigns lists all promo code campaigns
+            operationId: BackofficeWallet_ListPromoCodeCampaigns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPromoCodeCampaignsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListPromoCodeCampaignsResponse'
+    /v1/backoffice/wallet/promo-code/codes/generate:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GeneratePromoCodes generates codes for a one_time campaign
+            operationId: BackofficeWallet_GeneratePromoCodes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GeneratePromoCodesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GeneratePromoCodesResponse'
     /v1/backoffice/wallet/responsible-gambling/config/delete:
         post:
             tags:
@@ -8954,6 +9068,29 @@ components:
                     type: string
                 requestMethod:
                     type: string
+        api.backoffice.service.v1.CreatePromoCodeCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                name:
+                    type: string
+                codeType:
+                    type: string
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                rewardConditions:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+            description: Create Campaign (status defaults to active)
         api.backoffice.service.v1.CreateRoleRequest:
             type: object
             properties:
@@ -9498,6 +9635,20 @@ components:
         api.backoffice.service.v1.Generate2faResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.GeneratePromoCodesRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                codeLength:
+                    type: integer
+                    format: int32
+                codeFormat:
+                    type: string
+                count:
+                    type: integer
+                    format: int32
+            description: Generate Codes for Campaign (one_time only)
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
@@ -12675,6 +12826,44 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                userId:
+                    type: string
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: List Campaign Details - codes (for one_time) or usages (for universal)
+        api.backoffice.service.v1.ListPromoCodeCampaignsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                status:
+                    type: string
+                codeType:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: List Campaigns
         api.backoffice.service.v1.ListProviderRatesRequest:
             type: object
             properties:
@@ -14873,6 +15062,39 @@ components:
                     type: string
                 requestMethod:
                     type: string
+        api.backoffice.service.v1.UpdatePromoCodeCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                name:
+                    type: string
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                rewardConditions:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+            description: Update Campaign (cannot update status or code_type)
+        api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                status:
+                    type: string
+            description: Update Campaign Status
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -19204,6 +19426,14 @@ components:
         api.wallet.service.v1.AddResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.AffiliateCondition:
+            type: object
+            properties:
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+            description: Affiliate condition for promo code campaign
         api.wallet.service.v1.BonusTransferRequest:
             type: object
             properties:
@@ -19224,6 +19454,9 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.CreatePromoCodeCampaignResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.CreditResponse:
             type: object
             properties:
@@ -19295,6 +19528,19 @@ components:
         api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.DepositCondition:
+            type: object
+            properties:
+                timeRangeDays:
+                    type: integer
+                    format: int32
+                reportingCurrencyAggregate:
+                    type: boolean
+                currency:
+                    type: string
+                amount:
+                    type: string
+            description: Deposit condition for promo code campaign
         api.wallet.service.v1.DepositRewardConfig:
             type: object
             properties:
@@ -19346,6 +19592,63 @@ components:
                     type: string
                 thresholdAmount:
                     type: string
+        api.wallet.service.v1.FreeBetConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                template:
+                    type: object
+                betCount:
+                    type: integer
+                    format: int32
+                freeBetValidity:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+            description: Free bet config for deposit reward or promo code
+        api.wallet.service.v1.FreeSpinConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                currency:
+                    type: string
+                providerId:
+                    type: string
+                gameId:
+                    type: string
+                level:
+                    type: integer
+                    format: int32
+                spinCount:
+                    type: integer
+                    format: int32
+                freeSpinValidity:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+            description: Free spin config for deposit reward or promo code
+        api.wallet.service.v1.GeneratePromoCodesResponse:
+            type: object
+            properties:
+                generatedCount:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
@@ -19585,6 +19888,16 @@ components:
                     type: string
                 transferableBonus:
                     type: string
+        api.wallet.service.v1.InvitationCondition:
+            type: object
+            properties:
+                timeRangeDays:
+                    type: integer
+                    format: int32
+                invitationCount:
+                    type: integer
+                    format: int32
+            description: Invitation condition for promo code campaign
         api.wallet.service.v1.ListBottomOperatorBalancesResponse:
             type: object
             properties:
@@ -19812,6 +20125,53 @@ components:
                     type: string
                 turnoverThreshold:
                     type: string
+        api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse:
+            type: object
+            properties:
+                codeType:
+                    type: string
+                codes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeListItem'
+                usages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeUsageListItem'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.ListPromoCodeCampaignsResponse:
+            type: object
+            properties:
+                campaigns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeCampaignListItem'
+                total:
+                    type: integer
+                    format: int32
+                activeCount:
+                    type: integer
+                    format: int32
+                pausedCount:
+                    type: integer
+                    format: int32
+                disabledCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
             properties:
@@ -19867,6 +20227,138 @@ components:
                     type: string
                 wageringUnlockPriority:
                     type: string
+        api.wallet.service.v1.PromoCodeBonusMoneyConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                amount:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+            description: Bonus money config for promo code campaign
+        api.wallet.service.v1.PromoCodeCampaignListItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                codeType:
+                    type: string
+                rewardTrigger:
+                    type: string
+                status:
+                    type: string
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+                usageCount:
+                    type: integer
+                    format: int32
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                    format: date-time
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        api.wallet.service.v1.PromoCodeConditions:
+            type: object
+            properties:
+                depositCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DepositCondition'
+                registrationTimeCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.RegistrationTimeCondition'
+                invitationCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.InvitationCondition'
+                turnoverCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.TurnoverCondition'
+                referrerCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.ReferrerCondition'
+                affiliateCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.AffiliateCondition'
+                verificationStatusCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.VerificationStatusCondition'
+            description: Campaign conditions - all conditions must be satisfied to trigger the reward
+        api.wallet.service.v1.PromoCodeListItem:
+            type: object
+            properties:
+                code:
+                    type: string
+                status:
+                    type: string
+                usedByUserId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                usedAt:
+                    type: string
+                    format: date-time
+            description: Code item for one_time campaigns
+        api.wallet.service.v1.PromoCodeRewardConfigs:
+            type: object
+            properties:
+                bonusMoneyConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeBonusMoneyConfig'
+                freeSpinConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
+            description: Campaign reward configs (all optional)
+        api.wallet.service.v1.PromoCodeUsageListItem:
+            type: object
+            properties:
+                code:
+                    type: string
+                userId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                usedAt:
+                    type: string
+                    format: date-time
+            description: Usage item for universal campaigns
+        api.wallet.service.v1.ReferrerCondition:
+            type: object
+            properties:
+                onlyValidAllowed:
+                    type: boolean
+                referrerIds:
+                    type: array
+                    items:
+                        type: string
+            description: Referrer condition for promo code campaign
+        api.wallet.service.v1.RegistrationTimeCondition:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+            description: Registration time condition for promo code campaign
         api.wallet.service.v1.ResponsibleGamblingConfig:
             type: object
             properties:
@@ -19979,12 +20471,33 @@ components:
                     type: string
                 maxWithdrawalMultiplier:
                     type: string
+                freeSpinConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
             type: object
             properties: {}
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.TurnoverCondition:
+            type: object
+            properties:
+                timeRangeDays:
+                    type: integer
+                    format: int32
+                reportingCurrencyAggregate:
+                    type: boolean
+                currency:
+                    type: string
+                amount:
+                    type: string
+            description: Turnover condition for promo code campaign
         api.wallet.service.v1.UpdateDeductionOrderResponse:
             type: object
             properties: {}
@@ -19992,6 +20505,12 @@ components:
             type: object
             properties: {}
         api.wallet.service.v1.UpdateOperatorCurrencyResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdatePromoCodeCampaignResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UserBalanceDetail:
@@ -20038,6 +20557,14 @@ components:
                     type: string
                 maximumOperatorBonusWithdrawalAmount:
                     type: string
+        api.wallet.service.v1.VerificationStatusCondition:
+            type: object
+            properties:
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
+            description: Verification status condition for promo code campaign
         google.protobuf.ListValue:
             type: object
             properties:
