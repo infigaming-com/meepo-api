@@ -18519,6 +18519,8 @@ components:
                     type: string
                 affiliateId:
                     type: string
+                operatorUserId:
+                    type: string
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}

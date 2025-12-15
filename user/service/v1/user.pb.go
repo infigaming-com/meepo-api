@@ -3081,6 +3081,7 @@ type UpdateUserRequest struct {
 	CampaignUrl     *string                 `protobuf:"bytes,20,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
 	CampaignId      *int64                  `protobuf:"varint,21,opt,name=campaign_id,json=campaignId,proto3,oneof" json:"campaign_id,omitempty"`
 	AffiliateId     *int64                  `protobuf:"varint,22,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	OperatorUserId  int64                   `protobuf:"varint,23,opt,name=operator_user_id,json=operatorUserId,proto3" json:"operator_user_id,omitempty"` // 操作者的用户ID，用于验证角色分配权限
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3265,6 +3266,13 @@ func (x *UpdateUserRequest) GetCampaignId() int64 {
 func (x *UpdateUserRequest) GetAffiliateId() int64 {
 	if x != nil && x.AffiliateId != nil {
 		return *x.AffiliateId
+	}
+	return 0
+}
+
+func (x *UpdateUserRequest) GetOperatorUserId() int64 {
+	if x != nil {
+		return x.OperatorUserId
 	}
 	return 0
 }
@@ -3737,6 +3745,7 @@ type CreateUserRequest struct {
 	Mobile          *string                 `protobuf:"bytes,4,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	RoleId          int64                   `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	UserId          int64                   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // 操作者的用户ID，用于验证角色分配权限
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3809,6 +3818,13 @@ func (x *CreateUserRequest) GetOperatorContext() *common.OperatorContext {
 func (x *CreateUserRequest) GetRoleId() int64 {
 	if x != nil {
 		return x.RoleId
+	}
+	return 0
+}
+
+func (x *CreateUserRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
 	}
 	return 0
 }
@@ -12797,7 +12813,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\breviewer\x18\n" +
 	" \x01(\tR\breviewer\x12\x1f\n" +
 	"\vreview_time\x18\v \x01(\x05R\n" +
-	"reviewTime\"\xfb\b\n" +
+	"reviewTime\"\xa5\t\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -12823,7 +12839,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fcampaign_url\x18\x14 \x01(\tH\x11R\vcampaignUrl\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x15 \x01(\x03H\x12R\n" +
 	"campaignId\x88\x01\x01\x12&\n" +
-	"\faffiliate_id\x18\x16 \x01(\x03H\x13R\vaffiliateId\x88\x01\x01B\v\n" +
+	"\faffiliate_id\x18\x16 \x01(\x03H\x13R\vaffiliateId\x88\x01\x01\x12(\n" +
+	"\x10operator_user_id\x18\x17 \x01(\x03R\x0eoperatorUserIdB\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
@@ -12952,14 +12969,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aenabled\x18\x18 \x01(\bR\aenabled\x129\n" +
 	"\n" +
 	"created_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04role\x18\x1a \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\xfc\x01\n" +
+	"\x04role\x18\x1a \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\x95\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1f\n" +
 	"\bpassword\x18\x02 \x01(\tH\x00R\bpassword\x88\x01\x01\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1b\n" +
 	"\x06mobile\x18\x04 \x01(\tH\x01R\x06mobile\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
-	"\arole_id\x18\x06 \x01(\x03R\x06roleIdB\v\n" +
+	"\arole_id\x18\x06 \x01(\x03R\x06roleId\x12\x17\n" +
+	"\auser_id\x18\a \x01(\x03R\x06userIdB\v\n" +
 	"\t_passwordB\t\n" +
 	"\a_mobile\"_\n" +
 	"\x12CreateUserResponse\x12\x17\n" +
