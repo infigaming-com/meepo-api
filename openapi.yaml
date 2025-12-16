@@ -8596,6 +8596,16 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                theme:
+                    type: string
+                supportBonus:
+                    type: boolean
+                freeSpin:
+                    type: boolean
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
         api.backoffice.service.v1.BackofficeListGamesUnderTagResponse:
             type: object
             properties:
@@ -15759,6 +15769,16 @@ components:
                         type: string
                 gameId:
                     type: string
+                theme:
+                    type: string
+                supportBonus:
+                    type: boolean
+                freeSpin:
+                    type: boolean
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
         api.game.service.v1.BackofficeBatchUpdateTagGamesResponse:
             type: object
             properties:
@@ -18720,6 +18740,8 @@ components:
                 campaignId:
                     type: string
                 affiliateId:
+                    type: string
+                operatorUserId:
                     type: string
         api.user.service.v1.UpdateUserResponse:
             type: object

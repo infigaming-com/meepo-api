@@ -8337,6 +8337,26 @@ func (m *BackofficeListGamesUnderTagRequest) validate(all bool) error {
 		// no validation rules for RelationFilter
 	}
 
+	if m.Theme != nil {
+		// no validation rules for Theme
+	}
+
+	if m.SupportBonus != nil {
+		// no validation rules for SupportBonus
+	}
+
+	if m.FreeSpin != nil {
+		// no validation rules for FreeSpin
+	}
+
+	if m.RtpMin != nil {
+		// no validation rules for RtpMin
+	}
+
+	if m.RtpMax != nil {
+		// no validation rules for RtpMax
+	}
+
 	if len(errors) > 0 {
 		return BackofficeListGamesUnderTagRequestMultiError(errors)
 	}

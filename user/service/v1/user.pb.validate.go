@@ -5576,6 +5576,8 @@ func (m *UpdateUserRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for OperatorUserId
+
 	if m.Nickname != nil {
 		// no validation rules for Nickname
 	}
@@ -6610,6 +6612,8 @@ func (m *CreateUserRequest) validate(all bool) error {
 	}
 
 	// no validation rules for RoleId
+
+	// no validation rules for UserId
 
 	if m.Password != nil {
 		// no validation rules for Password

@@ -4228,6 +4228,11 @@ type BackofficeListGamesUnderTagRequest struct {
 	RelationFilter      *string                `protobuf:"bytes,6,opt,name=relation_filter,json=relationFilter,proto3,oneof" json:"relation_filter,omitempty"` // "all" | "in_tag" | "not_in_tag"
 	Page                int32                  `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize            int32                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Theme               *string                `protobuf:"bytes,9,opt,name=theme,proto3,oneof" json:"theme,omitempty"`
+	SupportBonus        *bool                  `protobuf:"varint,10,opt,name=support_bonus,json=supportBonus,proto3,oneof" json:"support_bonus,omitempty"`
+	FreeSpin            *bool                  `protobuf:"varint,11,opt,name=free_spin,json=freeSpin,proto3,oneof" json:"free_spin,omitempty"`
+	RtpMin              *string                `protobuf:"bytes,12,opt,name=rtp_min,json=rtpMin,proto3,oneof" json:"rtp_min,omitempty"`
+	RtpMax              *string                `protobuf:"bytes,13,opt,name=rtp_max,json=rtpMax,proto3,oneof" json:"rtp_max,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -4316,6 +4321,41 @@ func (x *BackofficeListGamesUnderTagRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *BackofficeListGamesUnderTagRequest) GetTheme() string {
+	if x != nil && x.Theme != nil {
+		return *x.Theme
+	}
+	return ""
+}
+
+func (x *BackofficeListGamesUnderTagRequest) GetSupportBonus() bool {
+	if x != nil && x.SupportBonus != nil {
+		return *x.SupportBonus
+	}
+	return false
+}
+
+func (x *BackofficeListGamesUnderTagRequest) GetFreeSpin() bool {
+	if x != nil && x.FreeSpin != nil {
+		return *x.FreeSpin
+	}
+	return false
+}
+
+func (x *BackofficeListGamesUnderTagRequest) GetRtpMin() string {
+	if x != nil && x.RtpMin != nil {
+		return *x.RtpMin
+	}
+	return ""
+}
+
+func (x *BackofficeListGamesUnderTagRequest) GetRtpMax() string {
+	if x != nil && x.RtpMax != nil {
+		return *x.RtpMax
+	}
+	return ""
 }
 
 type BackofficeListGamesUnderTagResponse struct {
@@ -5973,7 +6013,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"providerId\x12#\n" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12(\n" +
 	"\x10total_game_count\x18\x03 \x01(\x05R\x0etotalGameCount\x12+\n" +
-	"\x12games_in_tag_count\x18\x04 \x01(\x05R\x0fgamesInTagCount\"\xf0\x02\n" +
+	"\x12games_in_tag_count\x18\x04 \x01(\x05R\x0fgamesInTagCount\"\xd5\x04\n" +
 	"\"BackofficeListGamesUnderTagRequest\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12$\n" +
 	"\vprovider_id\x18\x02 \x01(\tH\x00R\n" +
@@ -5983,11 +6023,25 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x14restricted_countries\x18\x05 \x03(\tR\x13restrictedCountries\x12,\n" +
 	"\x0frelation_filter\x18\x06 \x01(\tH\x02R\x0erelationFilter\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\b \x01(\x05R\bpageSizeB\x0e\n" +
+	"\tpage_size\x18\b \x01(\x05R\bpageSize\x12\x19\n" +
+	"\x05theme\x18\t \x01(\tH\x03R\x05theme\x88\x01\x01\x12(\n" +
+	"\rsupport_bonus\x18\n" +
+	" \x01(\bH\x04R\fsupportBonus\x88\x01\x01\x12 \n" +
+	"\tfree_spin\x18\v \x01(\bH\x05R\bfreeSpin\x88\x01\x01\x12\x1c\n" +
+	"\artp_min\x18\f \x01(\tH\x06R\x06rtpMin\x88\x01\x01\x12\x1c\n" +
+	"\artp_max\x18\r \x01(\tH\aR\x06rtpMax\x88\x01\x01B\x0e\n" +
 	"\f_provider_idB\n" +
 	"\n" +
 	"\b_game_idB\x12\n" +
-	"\x10_relation_filter\"\xcc\x04\n" +
+	"\x10_relation_filterB\b\n" +
+	"\x06_themeB\x10\n" +
+	"\x0e_support_bonusB\f\n" +
+	"\n" +
+	"_free_spinB\n" +
+	"\n" +
+	"\b_rtp_minB\n" +
+	"\n" +
+	"\b_rtp_max\"\xcc\x04\n" +
 	"#BackofficeListGamesUnderTagResponse\x12]\n" +
 	"\x05games\x18\x01 \x03(\v2G.api.backoffice.service.v1.BackofficeListGamesUnderTagResponse.GameInfoR\x05games\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
