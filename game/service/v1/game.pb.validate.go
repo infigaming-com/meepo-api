@@ -788,7 +788,7 @@ func (m *GameFilter) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Tag
+	// no validation rules for TagId
 
 	// no validation rules for Name
 

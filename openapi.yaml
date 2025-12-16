@@ -16015,9 +16015,9 @@ components:
                     items:
                         type: string
                     description: 'provider id: provider list api'
-                tag:
+                tagId:
                     type: string
-                    description: 'tag: hot game, live casino, slots, etc..'
+                    description: 'tag_id: tag ID for filtering games'
                 name:
                     type: string
                     description: 'name: game name'
