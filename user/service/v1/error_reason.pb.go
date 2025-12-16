@@ -147,6 +147,7 @@ const (
 	ErrorReason_ADD_APEX_DOMAIN_FAILED                         ErrorReason = 10121
 	ErrorReason_DELETE_APEX_DOMAIN_FAILED                      ErrorReason = 10122
 	ErrorReason_REFRESH_APEX_DOMAIN_FAILED                     ErrorReason = 10123
+	ErrorReason_INVALID_EMAIL_ADDRESS                          ErrorReason = 10124
 )
 
 // Enum value maps for ErrorReason.
@@ -274,6 +275,7 @@ var (
 		10121: "ADD_APEX_DOMAIN_FAILED",
 		10122: "DELETE_APEX_DOMAIN_FAILED",
 		10123: "REFRESH_APEX_DOMAIN_FAILED",
+		10124: "INVALID_EMAIL_ADDRESS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -398,6 +400,7 @@ var (
 		"ADD_APEX_DOMAIN_FAILED":                         10121,
 		"DELETE_APEX_DOMAIN_FAILED":                      10122,
 		"REFRESH_APEX_DOMAIN_FAILED":                     10123,
+		"INVALID_EMAIL_ADDRESS":                          10124,
 	}
 )
 
@@ -432,7 +435,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa9 \n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc5 \n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -555,7 +558,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15APEX_DOMAIN_NOT_FOUND\x10\x88O\x12\x1b\n" +
 	"\x16ADD_APEX_DOMAIN_FAILED\x10\x89O\x12\x1e\n" +
 	"\x19DELETE_APEX_DOMAIN_FAILED\x10\x8aO\x12\x1f\n" +
-	"\x1aREFRESH_APEX_DOMAIN_FAILED\x10\x8bO\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1aREFRESH_APEX_DOMAIN_FAILED\x10\x8bO\x12\x1a\n" +
+	"\x15INVALID_EMAIL_ADDRESS\x10\x8cO\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

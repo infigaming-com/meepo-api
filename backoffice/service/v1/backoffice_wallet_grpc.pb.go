@@ -41,6 +41,12 @@ const (
 	BackofficeWallet_SetDepositRewardSequences_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 	BackofficeWallet_DeleteDepositRewardSequences_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
 	BackofficeWallet_GetDepositRewardConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
+	BackofficeWallet_CreatePromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/CreatePromoCodeCampaign"
+	BackofficeWallet_UpdatePromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaign"
+	BackofficeWallet_UpdatePromoCodeCampaignStatus_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaignStatus"
+	BackofficeWallet_ListPromoCodeCampaigns_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaigns"
+	BackofficeWallet_ListPromoCodeCampaignDetails_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaignDetails"
+	BackofficeWallet_GeneratePromoCodes_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GeneratePromoCodes"
 	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
 	BackofficeWallet_UpdateDeductionOrder_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
@@ -97,6 +103,18 @@ type BackofficeWalletClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetDepositRewardConfigResponse, error)
+	// CreatePromoCodeCampaign creates a new promo code campaign
+	CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.CreatePromoCodeCampaignResponse, error)
+	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
+	UpdatePromoCodeCampaign(ctx context.Context, in *UpdatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.UpdatePromoCodeCampaignResponse, error)
+	// UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
+	UpdatePromoCodeCampaignStatus(ctx context.Context, in *UpdatePromoCodeCampaignStatusRequest, opts ...grpc.CallOption) (*v1.UpdatePromoCodeCampaignStatusResponse, error)
+	// ListPromoCodeCampaigns lists all promo code campaigns
+	ListPromoCodeCampaigns(ctx context.Context, in *ListPromoCodeCampaignsRequest, opts ...grpc.CallOption) (*v1.ListPromoCodeCampaignsResponse, error)
+	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
+	ListPromoCodeCampaignDetails(ctx context.Context, in *ListPromoCodeCampaignDetailsRequest, opts ...grpc.CallOption) (*v1.ListPromoCodeCampaignDetailsResponse, error)
+	// GeneratePromoCodes generates codes for a one_time campaign
+	GeneratePromoCodes(ctx context.Context, in *GeneratePromoCodesRequest, opts ...grpc.CallOption) (*v1.GeneratePromoCodesResponse, error)
 	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -347,6 +365,66 @@ func (c *backofficeWalletClient) GetDepositRewardConfig(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficeWalletClient) CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.CreatePromoCodeCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreatePromoCodeCampaignResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_CreatePromoCodeCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) UpdatePromoCodeCampaign(ctx context.Context, in *UpdatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.UpdatePromoCodeCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdatePromoCodeCampaignResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdatePromoCodeCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) UpdatePromoCodeCampaignStatus(ctx context.Context, in *UpdatePromoCodeCampaignStatusRequest, opts ...grpc.CallOption) (*v1.UpdatePromoCodeCampaignStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdatePromoCodeCampaignStatusResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdatePromoCodeCampaignStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListPromoCodeCampaigns(ctx context.Context, in *ListPromoCodeCampaignsRequest, opts ...grpc.CallOption) (*v1.ListPromoCodeCampaignsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListPromoCodeCampaignsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListPromoCodeCampaigns_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListPromoCodeCampaignDetails(ctx context.Context, in *ListPromoCodeCampaignDetailsRequest, opts ...grpc.CallOption) (*v1.ListPromoCodeCampaignDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListPromoCodeCampaignDetailsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListPromoCodeCampaignDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GeneratePromoCodes(ctx context.Context, in *GeneratePromoCodesRequest, opts ...grpc.CallOption) (*v1.GeneratePromoCodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GeneratePromoCodesResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GeneratePromoCodes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeWalletClient) GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetGamificationCurrencyConfigResponse)
@@ -536,6 +614,18 @@ type BackofficeWalletServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
+	// CreatePromoCodeCampaign creates a new promo code campaign
+	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error)
+	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
+	UpdatePromoCodeCampaign(context.Context, *UpdatePromoCodeCampaignRequest) (*v1.UpdatePromoCodeCampaignResponse, error)
+	// UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
+	UpdatePromoCodeCampaignStatus(context.Context, *UpdatePromoCodeCampaignStatusRequest) (*v1.UpdatePromoCodeCampaignStatusResponse, error)
+	// ListPromoCodeCampaigns lists all promo code campaigns
+	ListPromoCodeCampaigns(context.Context, *ListPromoCodeCampaignsRequest) (*v1.ListPromoCodeCampaignsResponse, error)
+	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
+	ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*v1.ListPromoCodeCampaignDetailsResponse, error)
+	// GeneratePromoCodes generates codes for a one_time campaign
+	GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*v1.GeneratePromoCodesResponse, error)
 	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -638,6 +728,24 @@ func (UnimplementedBackofficeWalletServer) DeleteDepositRewardSequences(context.
 }
 func (UnimplementedBackofficeWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePromoCodeCampaign not implemented")
+}
+func (UnimplementedBackofficeWalletServer) UpdatePromoCodeCampaign(context.Context, *UpdatePromoCodeCampaignRequest) (*v1.UpdatePromoCodeCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdatePromoCodeCampaign not implemented")
+}
+func (UnimplementedBackofficeWalletServer) UpdatePromoCodeCampaignStatus(context.Context, *UpdatePromoCodeCampaignStatusRequest) (*v1.UpdatePromoCodeCampaignStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdatePromoCodeCampaignStatus not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListPromoCodeCampaigns(context.Context, *ListPromoCodeCampaignsRequest) (*v1.ListPromoCodeCampaignsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPromoCodeCampaigns not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*v1.ListPromoCodeCampaignDetailsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPromoCodeCampaignDetails not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*v1.GeneratePromoCodesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GeneratePromoCodes not implemented")
 }
 func (UnimplementedBackofficeWalletServer) GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGamificationCurrencyConfig not implemented")
@@ -1083,6 +1191,114 @@ func _BackofficeWallet_GetDepositRewardConfig_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_CreatePromoCodeCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePromoCodeCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).CreatePromoCodeCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_CreatePromoCodeCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).CreatePromoCodeCampaign(ctx, req.(*CreatePromoCodeCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_UpdatePromoCodeCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePromoCodeCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).UpdatePromoCodeCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_UpdatePromoCodeCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).UpdatePromoCodeCampaign(ctx, req.(*UpdatePromoCodeCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_UpdatePromoCodeCampaignStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePromoCodeCampaignStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).UpdatePromoCodeCampaignStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_UpdatePromoCodeCampaignStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).UpdatePromoCodeCampaignStatus(ctx, req.(*UpdatePromoCodeCampaignStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListPromoCodeCampaigns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPromoCodeCampaignsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListPromoCodeCampaigns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListPromoCodeCampaigns_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListPromoCodeCampaigns(ctx, req.(*ListPromoCodeCampaignsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListPromoCodeCampaignDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPromoCodeCampaignDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListPromoCodeCampaignDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListPromoCodeCampaignDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListPromoCodeCampaignDetails(ctx, req.(*ListPromoCodeCampaignDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GeneratePromoCodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GeneratePromoCodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GeneratePromoCodes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GeneratePromoCodes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GeneratePromoCodes(ctx, req.(*GeneratePromoCodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeWallet_GetGamificationCurrencyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGamificationCurrencyConfigRequest)
 	if err := dec(in); err != nil {
@@ -1443,6 +1659,30 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDepositRewardConfig",
 			Handler:    _BackofficeWallet_GetDepositRewardConfig_Handler,
+		},
+		{
+			MethodName: "CreatePromoCodeCampaign",
+			Handler:    _BackofficeWallet_CreatePromoCodeCampaign_Handler,
+		},
+		{
+			MethodName: "UpdatePromoCodeCampaign",
+			Handler:    _BackofficeWallet_UpdatePromoCodeCampaign_Handler,
+		},
+		{
+			MethodName: "UpdatePromoCodeCampaignStatus",
+			Handler:    _BackofficeWallet_UpdatePromoCodeCampaignStatus_Handler,
+		},
+		{
+			MethodName: "ListPromoCodeCampaigns",
+			Handler:    _BackofficeWallet_ListPromoCodeCampaigns_Handler,
+		},
+		{
+			MethodName: "ListPromoCodeCampaignDetails",
+			Handler:    _BackofficeWallet_ListPromoCodeCampaignDetails_Handler,
+		},
+		{
+			MethodName: "GeneratePromoCodes",
+			Handler:    _BackofficeWallet_GeneratePromoCodes_Handler,
 		},
 		{
 			MethodName: "GetGamificationCurrencyConfig",

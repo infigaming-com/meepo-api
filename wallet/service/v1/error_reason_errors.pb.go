@@ -1546,3 +1546,285 @@ func IsGetOperatorDetailsFailed(err error) bool {
 func ErrorGetOperatorDetailsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_DETAILS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Promo Code Campaign errors
+func IsPromoCodeCampaignNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NOT_FOUND.String() && e.Code == 500
+}
+
+// Promo Code Campaign errors
+func ErrorPromoCodeCampaignNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeCampaignNameExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS.String() && e.Code == 500
+}
+
+func ErrorPromoCodeCampaignNameExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeCampaignInvalidStatusTransition(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION.String() && e.Code == 500
+}
+
+func ErrorPromoCodeCampaignInvalidStatusTransition(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeCampaignNotActive(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NOT_ACTIVE.String() && e.Code == 500
+}
+
+func ErrorPromoCodeCampaignNotActive(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NOT_ACTIVE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeCampaignInvalidName(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_INVALID_NAME.String() && e.Code == 500
+}
+
+func ErrorPromoCodeCampaignInvalidName(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_INVALID_NAME.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreatePromoCodeCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_PROMO_CODE_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreatePromoCodeCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_PROMO_CODE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdatePromoCodeCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_PROMO_CODE_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdatePromoCodeCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_PROMO_CODE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListPromoCodeCampaignsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_PROMO_CODE_CAMPAIGNS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListPromoCodeCampaignsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_PROMO_CODE_CAMPAIGNS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetPromoCodeCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PROMO_CODE_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetPromoCodeCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PROMO_CODE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+// Promo Code errors
+func IsPromoCodeNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_NOT_FOUND.String() && e.Code == 500
+}
+
+// Promo Code errors
+func ErrorPromoCodeNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeAlreadyUsed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_ALREADY_USED.String() && e.Code == 500
+}
+
+func ErrorPromoCodeAlreadyUsed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_ALREADY_USED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeMaxUsageReached(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_MAX_USAGE_REACHED.String() && e.Code == 500
+}
+
+func ErrorPromoCodeMaxUsageReached(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_MAX_USAGE_REACHED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeUserAlreadyClaimed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED.String() && e.Code == 500
+}
+
+func ErrorPromoCodeUserAlreadyClaimed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGeneratePromoCodesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_PROMO_CODES_FAILED.String() && e.Code == 500
+}
+
+func ErrorGeneratePromoCodesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_PROMO_CODES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPromoCodeFormat(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_PROMO_CODE_FORMAT.String() && e.Code == 500
+}
+
+func ErrorInvalidPromoCodeFormat(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_PROMO_CODE_FORMAT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPromoCodeLength(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_PROMO_CODE_LENGTH.String() && e.Code == 500
+}
+
+func ErrorInvalidPromoCodeLength(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_PROMO_CODE_LENGTH.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPromoCodeCount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_PROMO_CODE_COUNT.String() && e.Code == 500
+}
+
+func ErrorInvalidPromoCodeCount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_PROMO_CODE_COUNT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetPromoCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PROMO_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetPromoCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PROMO_CODE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListPromoCodesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_PROMO_CODES_FAILED.String() && e.Code == 500
+}
+
+func ErrorListPromoCodesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_PROMO_CODES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreatePromoCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_PROMO_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreatePromoCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_PROMO_CODE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+// Promo Code Usage errors
+func IsCreatePromoCodeUsageFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_PROMO_CODE_USAGE_FAILED.String() && e.Code == 500
+}
+
+// Promo Code Usage errors
+func ErrorCreatePromoCodeUsageFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_PROMO_CODE_USAGE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetPromoCodeUsageFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PROMO_CODE_USAGE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetPromoCodeUsageFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PROMO_CODE_USAGE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListPromoCodeUsagesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_PROMO_CODE_USAGES_FAILED.String() && e.Code == 500
+}
+
+func ErrorListPromoCodeUsagesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_PROMO_CODE_USAGES_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -153,6 +153,32 @@ const (
 	ErrorReason_UPDATE_USER_DEPOSIT_STATS_FAILED                                ErrorReason = 30125
 	ErrorReason_LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED                          ErrorReason = 30126
 	ErrorReason_GET_OPERATOR_DETAILS_FAILED                                     ErrorReason = 30127
+	// Promo Code Campaign errors
+	ErrorReason_PROMO_CODE_CAMPAIGN_NOT_FOUND                 ErrorReason = 30128
+	ErrorReason_PROMO_CODE_CAMPAIGN_NAME_EXISTS               ErrorReason = 30129
+	ErrorReason_PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION ErrorReason = 30130
+	ErrorReason_PROMO_CODE_CAMPAIGN_NOT_ACTIVE                ErrorReason = 30131
+	ErrorReason_PROMO_CODE_CAMPAIGN_INVALID_NAME              ErrorReason = 30132
+	ErrorReason_CREATE_PROMO_CODE_CAMPAIGN_FAILED             ErrorReason = 30133
+	ErrorReason_UPDATE_PROMO_CODE_CAMPAIGN_FAILED             ErrorReason = 30134
+	ErrorReason_LIST_PROMO_CODE_CAMPAIGNS_FAILED              ErrorReason = 30135
+	ErrorReason_GET_PROMO_CODE_CAMPAIGN_FAILED                ErrorReason = 30136
+	// Promo Code errors
+	ErrorReason_PROMO_CODE_NOT_FOUND            ErrorReason = 30137
+	ErrorReason_PROMO_CODE_ALREADY_USED         ErrorReason = 30138
+	ErrorReason_PROMO_CODE_MAX_USAGE_REACHED    ErrorReason = 30139
+	ErrorReason_PROMO_CODE_USER_ALREADY_CLAIMED ErrorReason = 30140
+	ErrorReason_GENERATE_PROMO_CODES_FAILED     ErrorReason = 30141
+	ErrorReason_INVALID_PROMO_CODE_FORMAT       ErrorReason = 30142
+	ErrorReason_INVALID_PROMO_CODE_LENGTH       ErrorReason = 30143
+	ErrorReason_INVALID_PROMO_CODE_COUNT        ErrorReason = 30144
+	ErrorReason_GET_PROMO_CODE_FAILED           ErrorReason = 30145
+	ErrorReason_LIST_PROMO_CODES_FAILED         ErrorReason = 30146
+	ErrorReason_CREATE_PROMO_CODE_FAILED        ErrorReason = 30147
+	// Promo Code Usage errors
+	ErrorReason_CREATE_PROMO_CODE_USAGE_FAILED ErrorReason = 30148
+	ErrorReason_GET_PROMO_CODE_USAGE_FAILED    ErrorReason = 30149
+	ErrorReason_LIST_PROMO_CODE_USAGES_FAILED  ErrorReason = 30150
 )
 
 // Enum value maps for ErrorReason.
@@ -286,6 +312,29 @@ var (
 		30125: "UPDATE_USER_DEPOSIT_STATS_FAILED",
 		30126: "LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED",
 		30127: "GET_OPERATOR_DETAILS_FAILED",
+		30128: "PROMO_CODE_CAMPAIGN_NOT_FOUND",
+		30129: "PROMO_CODE_CAMPAIGN_NAME_EXISTS",
+		30130: "PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION",
+		30131: "PROMO_CODE_CAMPAIGN_NOT_ACTIVE",
+		30132: "PROMO_CODE_CAMPAIGN_INVALID_NAME",
+		30133: "CREATE_PROMO_CODE_CAMPAIGN_FAILED",
+		30134: "UPDATE_PROMO_CODE_CAMPAIGN_FAILED",
+		30135: "LIST_PROMO_CODE_CAMPAIGNS_FAILED",
+		30136: "GET_PROMO_CODE_CAMPAIGN_FAILED",
+		30137: "PROMO_CODE_NOT_FOUND",
+		30138: "PROMO_CODE_ALREADY_USED",
+		30139: "PROMO_CODE_MAX_USAGE_REACHED",
+		30140: "PROMO_CODE_USER_ALREADY_CLAIMED",
+		30141: "GENERATE_PROMO_CODES_FAILED",
+		30142: "INVALID_PROMO_CODE_FORMAT",
+		30143: "INVALID_PROMO_CODE_LENGTH",
+		30144: "INVALID_PROMO_CODE_COUNT",
+		30145: "GET_PROMO_CODE_FAILED",
+		30146: "LIST_PROMO_CODES_FAILED",
+		30147: "CREATE_PROMO_CODE_FAILED",
+		30148: "CREATE_PROMO_CODE_USAGE_FAILED",
+		30149: "GET_PROMO_CODE_USAGE_FAILED",
+		30150: "LIST_PROMO_CODE_USAGES_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -416,6 +465,29 @@ var (
 		"UPDATE_USER_DEPOSIT_STATS_FAILED":                                30125,
 		"LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED":                          30126,
 		"GET_OPERATOR_DETAILS_FAILED":                                     30127,
+		"PROMO_CODE_CAMPAIGN_NOT_FOUND":                                   30128,
+		"PROMO_CODE_CAMPAIGN_NAME_EXISTS":                                 30129,
+		"PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION":                   30130,
+		"PROMO_CODE_CAMPAIGN_NOT_ACTIVE":                                  30131,
+		"PROMO_CODE_CAMPAIGN_INVALID_NAME":                                30132,
+		"CREATE_PROMO_CODE_CAMPAIGN_FAILED":                               30133,
+		"UPDATE_PROMO_CODE_CAMPAIGN_FAILED":                               30134,
+		"LIST_PROMO_CODE_CAMPAIGNS_FAILED":                                30135,
+		"GET_PROMO_CODE_CAMPAIGN_FAILED":                                  30136,
+		"PROMO_CODE_NOT_FOUND":                                            30137,
+		"PROMO_CODE_ALREADY_USED":                                         30138,
+		"PROMO_CODE_MAX_USAGE_REACHED":                                    30139,
+		"PROMO_CODE_USER_ALREADY_CLAIMED":                                 30140,
+		"GENERATE_PROMO_CODES_FAILED":                                     30141,
+		"INVALID_PROMO_CODE_FORMAT":                                       30142,
+		"INVALID_PROMO_CODE_LENGTH":                                       30143,
+		"INVALID_PROMO_CODE_COUNT":                                        30144,
+		"GET_PROMO_CODE_FAILED":                                           30145,
+		"LIST_PROMO_CODES_FAILED":                                         30146,
+		"CREATE_PROMO_CODE_FAILED":                                        30147,
+		"CREATE_PROMO_CODE_USAGE_FAILED":                                  30148,
+		"GET_PROMO_CODE_USAGE_FAILED":                                     30149,
+		"LIST_PROMO_CODE_USAGES_FAILED":                                   30150,
 	}
 )
 
@@ -450,7 +522,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa0'\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xe4-\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -579,7 +651,30 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"'INVALID_FICA_THRESHOLD_TRANSACTION_TYPE\x10\xac\xeb\x01\x12&\n" +
 	" UPDATE_USER_DEPOSIT_STATS_FAILED\x10\xad\xeb\x01\x12,\n" +
 	"&LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED\x10\xae\xeb\x01\x12!\n" +
-	"\x1bGET_OPERATOR_DETAILS_FAILED\x10\xaf\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1bGET_OPERATOR_DETAILS_FAILED\x10\xaf\xeb\x01\x12#\n" +
+	"\x1dPROMO_CODE_CAMPAIGN_NOT_FOUND\x10\xb0\xeb\x01\x12%\n" +
+	"\x1fPROMO_CODE_CAMPAIGN_NAME_EXISTS\x10\xb1\xeb\x01\x123\n" +
+	"-PROMO_CODE_CAMPAIGN_INVALID_STATUS_TRANSITION\x10\xb2\xeb\x01\x12$\n" +
+	"\x1ePROMO_CODE_CAMPAIGN_NOT_ACTIVE\x10\xb3\xeb\x01\x12&\n" +
+	" PROMO_CODE_CAMPAIGN_INVALID_NAME\x10\xb4\xeb\x01\x12'\n" +
+	"!CREATE_PROMO_CODE_CAMPAIGN_FAILED\x10\xb5\xeb\x01\x12'\n" +
+	"!UPDATE_PROMO_CODE_CAMPAIGN_FAILED\x10\xb6\xeb\x01\x12&\n" +
+	" LIST_PROMO_CODE_CAMPAIGNS_FAILED\x10\xb7\xeb\x01\x12$\n" +
+	"\x1eGET_PROMO_CODE_CAMPAIGN_FAILED\x10\xb8\xeb\x01\x12\x1a\n" +
+	"\x14PROMO_CODE_NOT_FOUND\x10\xb9\xeb\x01\x12\x1d\n" +
+	"\x17PROMO_CODE_ALREADY_USED\x10\xba\xeb\x01\x12\"\n" +
+	"\x1cPROMO_CODE_MAX_USAGE_REACHED\x10\xbb\xeb\x01\x12%\n" +
+	"\x1fPROMO_CODE_USER_ALREADY_CLAIMED\x10\xbc\xeb\x01\x12!\n" +
+	"\x1bGENERATE_PROMO_CODES_FAILED\x10\xbd\xeb\x01\x12\x1f\n" +
+	"\x19INVALID_PROMO_CODE_FORMAT\x10\xbe\xeb\x01\x12\x1f\n" +
+	"\x19INVALID_PROMO_CODE_LENGTH\x10\xbf\xeb\x01\x12\x1e\n" +
+	"\x18INVALID_PROMO_CODE_COUNT\x10\xc0\xeb\x01\x12\x1b\n" +
+	"\x15GET_PROMO_CODE_FAILED\x10\xc1\xeb\x01\x12\x1d\n" +
+	"\x17LIST_PROMO_CODES_FAILED\x10\xc2\xeb\x01\x12\x1e\n" +
+	"\x18CREATE_PROMO_CODE_FAILED\x10\xc3\xeb\x01\x12$\n" +
+	"\x1eCREATE_PROMO_CODE_USAGE_FAILED\x10\xc4\xeb\x01\x12!\n" +
+	"\x1bGET_PROMO_CODE_USAGE_FAILED\x10\xc5\xeb\x01\x12#\n" +
+	"\x1dLIST_PROMO_CODE_USAGES_FAILED\x10\xc6\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

@@ -1476,3 +1476,15 @@ func IsRefreshApexDomainFailed(err error) bool {
 func ErrorRefreshApexDomainFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_REFRESH_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidEmailAddress(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_EMAIL_ADDRESS.String() && e.Code == 500
+}
+
+func ErrorInvalidEmailAddress(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_EMAIL_ADDRESS.String(), fmt.Sprintf(format, args...))
+}

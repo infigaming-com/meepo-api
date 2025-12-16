@@ -841,6 +841,7 @@ message UpdateUserRequest {
 	optional string campaign_url = 20;
 	optional int64 campaign_id = 21;
 	optional int64 affiliate_id = 22;
+	int64 operator_user_id = 23; // 操作者的用户ID，用于验证角色分配权限
 }
 
 message UpdateUserResponse {
@@ -940,6 +941,7 @@ message CreateUserRequest {
 	optional string mobile = 4;
 	api.common.OperatorContext operator_context = 5;
 	int64 role_id = 6;
+	int64 user_id = 7; // 操作者的用户ID，用于验证角色分配权限
 }
 
 message CreateUserResponse {
