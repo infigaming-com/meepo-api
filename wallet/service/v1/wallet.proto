@@ -5,6 +5,7 @@ package api.wallet.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "wallet/service/v1/promocode.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/wallet/service/v1;v1";
 option java_multiple_files = true;
@@ -140,6 +141,24 @@ service Wallet {
 
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
+
+	// CreatePromoCodeCampaign creates a new promo code campaign
+	rpc CreatePromoCodeCampaign(CreatePromoCodeCampaignRequest) returns (CreatePromoCodeCampaignResponse) {}
+
+	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
+	rpc UpdatePromoCodeCampaign(UpdatePromoCodeCampaignRequest) returns (UpdatePromoCodeCampaignResponse) {}
+
+	// UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
+	rpc UpdatePromoCodeCampaignStatus(UpdatePromoCodeCampaignStatusRequest) returns (UpdatePromoCodeCampaignStatusResponse) {}
+
+	// ListPromoCodeCampaigns lists all promo code campaigns
+	rpc ListPromoCodeCampaigns(ListPromoCodeCampaignsRequest) returns (ListPromoCodeCampaignsResponse) {}
+
+	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
+	rpc ListPromoCodeCampaignDetails(ListPromoCodeCampaignDetailsRequest) returns (ListPromoCodeCampaignDetailsResponse) {}
+
+	// GeneratePromoCodes generates codes for a one_time campaign
+	rpc GeneratePromoCodes(GeneratePromoCodesRequest) returns (GeneratePromoCodesResponse) {}
 
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
@@ -1166,6 +1185,8 @@ message RewardSequence {
 		string reward_percentage = 3;
 		string max_reward_amount = 4;
 		string max_withdrawal_multiplier = 5; // only available for bonus reward
+		repeated FreeSpinConfig free_spin_configs = 6;
+		repeated FreeBetConfig free_bet_configs = 7;
 	}
 	int32 serial_number = 1;
 	string name = 2;
