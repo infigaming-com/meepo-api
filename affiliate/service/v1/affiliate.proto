@@ -140,6 +140,12 @@ service Affiliate {
         };
     }
 
+    // -------------- Promo Code Condition --------------
+
+    // GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
+    // This is an internal API for wallet-service to validate promo code conditions
+    rpc GetUserPromoConditionInfo(GetUserPromoConditionInfoRequest) returns (GetUserPromoConditionInfoResponse) {}
+
 }
 
 message ContactType {
@@ -783,5 +789,24 @@ message ListAffiliateBillsResponse {
     int32 total = 2;
     int32 page = 3;
     int32 page_size = 4;
+}
+
+// -------------- Promo Code Condition --------------
+
+message GetUserPromoConditionInfoRequest {
+    int64 user_id = 1;
+    int32 invitation_time_range_days = 2;  // Time range in days for counting qualified referrals, 0 = no limit
+}
+
+message GetUserPromoConditionInfoResponse {
+    // Referrer info
+    int64 tier1_user_id = 1;               // Direct referrer user ID, 0 = no referrer
+    string tier1_referral_code = 2;        // Direct referrer's referral code
+
+    // Qualified referral count
+    int32 qualified_referral_count = 3;    // Count of tier1 referrals with has_met_conversion_conditions=true
+
+    // User's affiliate info
+    int64 affiliate_id = 4;                // User's affiliate_id, 0 = not an affiliate
 }
 

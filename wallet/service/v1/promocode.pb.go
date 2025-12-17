@@ -26,20 +26,12 @@ const (
 
 // Free spin config for deposit reward or promo code
 type FreeSpinConfig struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Enabled                 bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType              string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
-	Currency                string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                       // play currency
-	ProviderId              string                 `protobuf:"bytes,4,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	GameId                  string                 `protobuf:"bytes,5,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	Level                   int32                  `protobuf:"varint,6,opt,name=level,proto3" json:"level,omitempty"`
-	SpinCount               int32                  `protobuf:"varint,7,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
-	FreeSpinValidity        int64                  `protobuf:"varint,8,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
-	WageringRequirement     int32                  `protobuf:"varint,9,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,10,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,11,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Enabled       bool                             `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	RewardType    string                           `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
+	Rewards       []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,3,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FreeSpinConfig) Reset() {
@@ -86,82 +78,21 @@ func (x *FreeSpinConfig) GetRewardType() string {
 	return ""
 }
 
-func (x *FreeSpinConfig) GetCurrency() string {
+func (x *FreeSpinConfig) GetRewards() []*FreeSpinConfig_FreeSpinReward {
 	if x != nil {
-		return x.Currency
+		return x.Rewards
 	}
-	return ""
-}
-
-func (x *FreeSpinConfig) GetProviderId() string {
-	if x != nil {
-		return x.ProviderId
-	}
-	return ""
-}
-
-func (x *FreeSpinConfig) GetGameId() string {
-	if x != nil {
-		return x.GameId
-	}
-	return ""
-}
-
-func (x *FreeSpinConfig) GetLevel() int32 {
-	if x != nil {
-		return x.Level
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig) GetSpinCount() int32 {
-	if x != nil {
-		return x.SpinCount
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig) GetFreeSpinValidity() int64 {
-	if x != nil {
-		return x.FreeSpinValidity
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig) GetWageringRequirement() int32 {
-	if x != nil {
-		return x.WageringRequirement
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig) GetMaxWithdrawalMultiplier() string {
-	if x != nil {
-		return x.MaxWithdrawalMultiplier
-	}
-	return ""
-}
-
-func (x *FreeSpinConfig) GetRewardValidity() int64 {
-	if x != nil {
-		return x.RewardValidity
-	}
-	return 0
+	return nil
 }
 
 // Free bet config for deposit reward or promo code
 type FreeBetConfig struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Enabled                 bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType              string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
-	Template                *structpb.Struct       `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`                       // bet template
-	BetCount                int32                  `protobuf:"varint,4,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	FreeBetValidity         int64                  `protobuf:"varint,5,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
-	WageringRequirement     int32                  `protobuf:"varint,6,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,7,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,8,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Enabled       bool                           `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	RewardType    string                         `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
+	Rewards       []*FreeBetConfig_FreeBetReward `protobuf:"bytes,3,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FreeBetConfig) Reset() {
@@ -208,57 +139,23 @@ func (x *FreeBetConfig) GetRewardType() string {
 	return ""
 }
 
-func (x *FreeBetConfig) GetTemplate() *structpb.Struct {
+func (x *FreeBetConfig) GetRewards() []*FreeBetConfig_FreeBetReward {
 	if x != nil {
-		return x.Template
+		return x.Rewards
 	}
 	return nil
-}
-
-func (x *FreeBetConfig) GetBetCount() int32 {
-	if x != nil {
-		return x.BetCount
-	}
-	return 0
-}
-
-func (x *FreeBetConfig) GetFreeBetValidity() int64 {
-	if x != nil {
-		return x.FreeBetValidity
-	}
-	return 0
-}
-
-func (x *FreeBetConfig) GetWageringRequirement() int32 {
-	if x != nil {
-		return x.WageringRequirement
-	}
-	return 0
-}
-
-func (x *FreeBetConfig) GetMaxWithdrawalMultiplier() string {
-	if x != nil {
-		return x.MaxWithdrawalMultiplier
-	}
-	return ""
-}
-
-func (x *FreeBetConfig) GetRewardValidity() int64 {
-	if x != nil {
-		return x.RewardValidity
-	}
-	return 0
 }
 
 // Bonus money config for promo code campaign
 type PromoCodeBonusMoneyConfig struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
 	Enabled                 bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType              string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus
-	Amount                  string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`                           // fixed amount
-	WageringRequirement     int32                  `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // ms, 0 = no expiration
+	Currency                string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	RewardType              string                 `protobuf:"bytes,3,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus
+	Amount                  string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`                           // fixed amount
+	WageringRequirement     int32                  `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                 `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                  `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // ms, 0 = no expiration
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -300,6 +197,13 @@ func (x *PromoCodeBonusMoneyConfig) GetEnabled() bool {
 	return false
 }
 
+func (x *PromoCodeBonusMoneyConfig) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
 func (x *PromoCodeBonusMoneyConfig) GetRewardType() string {
 	if x != nil {
 		return x.RewardType
@@ -338,9 +242,9 @@ func (x *PromoCodeBonusMoneyConfig) GetRewardValidity() int64 {
 // Campaign reward configs (all optional)
 type PromoCodeRewardConfigs struct {
 	state            protoimpl.MessageState     `protogen:"open.v1"`
-	BonusMoneyConfig *PromoCodeBonusMoneyConfig `protobuf:"bytes,1,opt,name=bonus_money_config,json=bonusMoneyConfig,proto3" json:"bonus_money_config,omitempty"`
-	FreeSpinConfigs  []*FreeSpinConfig          `protobuf:"bytes,2,rep,name=free_spin_configs,json=freeSpinConfigs,proto3" json:"free_spin_configs,omitempty"`
-	FreeBetConfigs   []*FreeBetConfig           `protobuf:"bytes,3,rep,name=free_bet_configs,json=freeBetConfigs,proto3" json:"free_bet_configs,omitempty"`
+	BonusMoneyConfig *PromoCodeBonusMoneyConfig `protobuf:"bytes,1,opt,name=bonus_money_config,json=bonusMoneyConfig,proto3,oneof" json:"bonus_money_config,omitempty"`
+	FreeSpinConfig   *FreeSpinConfig            `protobuf:"bytes,2,opt,name=free_spin_config,json=freeSpinConfig,proto3,oneof" json:"free_spin_config,omitempty"`
+	FreeBetConfig    *FreeBetConfig             `protobuf:"bytes,3,opt,name=free_bet_config,json=freeBetConfig,proto3,oneof" json:"free_bet_config,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -382,16 +286,16 @@ func (x *PromoCodeRewardConfigs) GetBonusMoneyConfig() *PromoCodeBonusMoneyConfi
 	return nil
 }
 
-func (x *PromoCodeRewardConfigs) GetFreeSpinConfigs() []*FreeSpinConfig {
+func (x *PromoCodeRewardConfigs) GetFreeSpinConfig() *FreeSpinConfig {
 	if x != nil {
-		return x.FreeSpinConfigs
+		return x.FreeSpinConfig
 	}
 	return nil
 }
 
-func (x *PromoCodeRewardConfigs) GetFreeBetConfigs() []*FreeBetConfig {
+func (x *PromoCodeRewardConfigs) GetFreeBetConfig() *FreeBetConfig {
 	if x != nil {
-		return x.FreeBetConfigs
+		return x.FreeBetConfig
 	}
 	return nil
 }
@@ -2196,49 +2100,576 @@ func (x *GeneratePromoCodesResponse) GetGeneratedCount() int32 {
 	return 0
 }
 
+// GetPromoCodeInfo - Query promo code information
+type GetPromoCodeInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPromoCodeInfoRequest) Reset() {
+	*x = GetPromoCodeInfoRequest{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPromoCodeInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPromoCodeInfoRequest) ProtoMessage() {}
+
+func (x *GetPromoCodeInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPromoCodeInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetPromoCodeInfoRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GetPromoCodeInfoRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+type GetPromoCodeInfoResponse struct {
+	state             protoimpl.MessageState       `protogen:"open.v1"`
+	Code              string                       `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	CodeType          string                       `protobuf:"bytes,2,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"` // one_time | universal
+	CampaignName      string                       `protobuf:"bytes,3,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	CampaignStatus    string                       `protobuf:"bytes,4,opt,name=campaign_status,json=campaignStatus,proto3" json:"campaign_status,omitempty"` // active | paused | disabled
+	StartTime         *timestamppb.Timestamp       `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime           *timestamppb.Timestamp       `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	UsageCount        int32                        `protobuf:"varint,7,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`                          // this code's usage count
+	MaxUsageLimit     int32                        `protobuf:"varint,8,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`               // max usage limit (for universal)
+	AlreadyUsedByUser bool                         `protobuf:"varint,9,opt,name=already_used_by_user,json=alreadyUsedByUser,proto3" json:"already_used_by_user,omitempty"` // whether current user has already used this promo code campaign
+	RewardConfigs     *PromoCodeRewardConfigs      `protobuf:"bytes,10,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
+	RewardConditions  *PromoCodeConditions         `protobuf:"bytes,11,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
+	ConditionResults  []*ConditionValidationResult `protobuf:"bytes,12,rep,name=condition_results,json=conditionResults,proto3" json:"condition_results,omitempty"`
+	// Claimability status
+	Claimable         bool   `protobuf:"varint,13,opt,name=claimable,proto3" json:"claimable,omitempty"`                                         // whether the code can be claimed by this user
+	UnclaimableReason string `protobuf:"bytes,14,opt,name=unclaimable_reason,json=unclaimableReason,proto3" json:"unclaimable_reason,omitempty"` // reason why the code cannot be claimed (empty if claimable)
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetPromoCodeInfoResponse) Reset() {
+	*x = GetPromoCodeInfoResponse{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPromoCodeInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPromoCodeInfoResponse) ProtoMessage() {}
+
+func (x *GetPromoCodeInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPromoCodeInfoResponse.ProtoReflect.Descriptor instead.
+func (*GetPromoCodeInfoResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetPromoCodeInfoResponse) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *GetPromoCodeInfoResponse) GetCodeType() string {
+	if x != nil {
+		return x.CodeType
+	}
+	return ""
+}
+
+func (x *GetPromoCodeInfoResponse) GetCampaignName() string {
+	if x != nil {
+		return x.CampaignName
+	}
+	return ""
+}
+
+func (x *GetPromoCodeInfoResponse) GetCampaignStatus() string {
+	if x != nil {
+		return x.CampaignStatus
+	}
+	return ""
+}
+
+func (x *GetPromoCodeInfoResponse) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *GetPromoCodeInfoResponse) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *GetPromoCodeInfoResponse) GetUsageCount() int32 {
+	if x != nil {
+		return x.UsageCount
+	}
+	return 0
+}
+
+func (x *GetPromoCodeInfoResponse) GetMaxUsageLimit() int32 {
+	if x != nil {
+		return x.MaxUsageLimit
+	}
+	return 0
+}
+
+func (x *GetPromoCodeInfoResponse) GetAlreadyUsedByUser() bool {
+	if x != nil {
+		return x.AlreadyUsedByUser
+	}
+	return false
+}
+
+func (x *GetPromoCodeInfoResponse) GetRewardConfigs() *PromoCodeRewardConfigs {
+	if x != nil {
+		return x.RewardConfigs
+	}
+	return nil
+}
+
+func (x *GetPromoCodeInfoResponse) GetRewardConditions() *PromoCodeConditions {
+	if x != nil {
+		return x.RewardConditions
+	}
+	return nil
+}
+
+func (x *GetPromoCodeInfoResponse) GetConditionResults() []*ConditionValidationResult {
+	if x != nil {
+		return x.ConditionResults
+	}
+	return nil
+}
+
+func (x *GetPromoCodeInfoResponse) GetClaimable() bool {
+	if x != nil {
+		return x.Claimable
+	}
+	return false
+}
+
+func (x *GetPromoCodeInfoResponse) GetUnclaimableReason() string {
+	if x != nil {
+		return x.UnclaimableReason
+	}
+	return ""
+}
+
+// ClaimPromoCode - Claim promo code reward
+type ClaimPromoCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClaimPromoCodeRequest) Reset() {
+	*x = ClaimPromoCodeRequest{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClaimPromoCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClaimPromoCodeRequest) ProtoMessage() {}
+
+func (x *ClaimPromoCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClaimPromoCodeRequest.ProtoReflect.Descriptor instead.
+func (*ClaimPromoCodeRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ClaimPromoCodeRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+type ClaimPromoCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClaimPromoCodeResponse) Reset() {
+	*x = ClaimPromoCodeResponse{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClaimPromoCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClaimPromoCodeResponse) ProtoMessage() {}
+
+func (x *ClaimPromoCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClaimPromoCodeResponse.ProtoReflect.Descriptor instead.
+func (*ClaimPromoCodeResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{31}
+}
+
+// Condition validation result
+type ConditionValidationResult struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ConditionType string                 `protobuf:"bytes,1,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"` // deposit | registration_time | invitation | turnover | referrer | affiliate | verification_status
+	Satisfied     bool                   `protobuf:"varint,2,opt,name=satisfied,proto3" json:"satisfied,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConditionValidationResult) Reset() {
+	*x = ConditionValidationResult{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConditionValidationResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConditionValidationResult) ProtoMessage() {}
+
+func (x *ConditionValidationResult) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConditionValidationResult.ProtoReflect.Descriptor instead.
+func (*ConditionValidationResult) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ConditionValidationResult) GetConditionType() string {
+	if x != nil {
+		return x.ConditionType
+	}
+	return ""
+}
+
+func (x *ConditionValidationResult) GetSatisfied() bool {
+	if x != nil {
+		return x.Satisfied
+	}
+	return false
+}
+
+type FreeSpinConfig_FreeSpinReward struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Currency                string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"` // play currency
+	ProviderId              string                 `protobuf:"bytes,2,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	GameId                  string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	Level                   int32                  `protobuf:"varint,4,opt,name=level,proto3" json:"level,omitempty"`
+	SpinCount               int32                  `protobuf:"varint,5,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
+	FreeSpinValidity        int64                  `protobuf:"varint,6,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
+	WageringRequirement     int32                  `protobuf:"varint,7,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                 `protobuf:"bytes,8,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                  `protobuf:"varint,9,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) Reset() {
+	*x = FreeSpinConfig_FreeSpinReward{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FreeSpinConfig_FreeSpinReward) ProtoMessage() {}
+
+func (x *FreeSpinConfig_FreeSpinReward) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FreeSpinConfig_FreeSpinReward.ProtoReflect.Descriptor instead.
+func (*FreeSpinConfig_FreeSpinReward) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetProviderId() string {
+	if x != nil {
+		return x.ProviderId
+	}
+	return ""
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetSpinCount() int32 {
+	if x != nil {
+		return x.SpinCount
+	}
+	return 0
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetFreeSpinValidity() int64 {
+	if x != nil {
+		return x.FreeSpinValidity
+	}
+	return 0
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetWageringRequirement() int32 {
+	if x != nil {
+		return x.WageringRequirement
+	}
+	return 0
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetMaxWithdrawalMultiplier() string {
+	if x != nil {
+		return x.MaxWithdrawalMultiplier
+	}
+	return ""
+}
+
+func (x *FreeSpinConfig_FreeSpinReward) GetRewardValidity() int64 {
+	if x != nil {
+		return x.RewardValidity
+	}
+	return 0
+}
+
+type FreeBetConfig_FreeBetReward struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Template                *structpb.Struct       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"` // bet template
+	BetCount                int32                  `protobuf:"varint,2,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	FreeBetValidity         int64                  `protobuf:"varint,3,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
+	WageringRequirement     int32                  `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                 `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                  `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *FreeBetConfig_FreeBetReward) Reset() {
+	*x = FreeBetConfig_FreeBetReward{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FreeBetConfig_FreeBetReward) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FreeBetConfig_FreeBetReward) ProtoMessage() {}
+
+func (x *FreeBetConfig_FreeBetReward) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FreeBetConfig_FreeBetReward.ProtoReflect.Descriptor instead.
+func (*FreeBetConfig_FreeBetReward) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetTemplate() *structpb.Struct {
+	if x != nil {
+		return x.Template
+	}
+	return nil
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetBetCount() int32 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetFreeBetValidity() int64 {
+	if x != nil {
+		return x.FreeBetValidity
+	}
+	return 0
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetWageringRequirement() int32 {
+	if x != nil {
+		return x.WageringRequirement
+	}
+	return 0
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetMaxWithdrawalMultiplier() string {
+	if x != nil {
+		return x.MaxWithdrawalMultiplier
+	}
+	return ""
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetRewardValidity() int64 {
+	if x != nil {
+		return x.RewardValidity
+	}
+	return 0
+}
+
 var File_wallet_service_v1_promocode_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\n" +
-	"!wallet/service/v1/promocode.proto\x12\x15api.wallet.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"\x9c\x03\n" +
+	"!wallet/service/v1/promocode.proto\x12\x15api.wallet.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"\xff\x03\n" +
 	"\x0eFreeSpinConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
-	"rewardType\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1f\n" +
-	"\vprovider_id\x18\x04 \x01(\tR\n" +
+	"rewardType\x12N\n" +
+	"\arewards\x18\x03 \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x1a\xe1\x02\n" +
+	"\x0eFreeSpinReward\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1f\n" +
+	"\vprovider_id\x18\x02 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
-	"\agame_id\x18\x05 \x01(\tR\x06gameId\x12\x14\n" +
-	"\x05level\x18\x06 \x01(\x05R\x05level\x12\x1d\n" +
+	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x14\n" +
+	"\x05level\x18\x04 \x01(\x05R\x05level\x12\x1d\n" +
 	"\n" +
-	"spin_count\x18\a \x01(\x05R\tspinCount\x12,\n" +
-	"\x12free_spin_validity\x18\b \x01(\x03R\x10freeSpinValidity\x121\n" +
-	"\x14wagering_requirement\x18\t \x01(\x05R\x13wageringRequirement\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\n" +
-	" \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\v \x01(\x03R\x0erewardValidity\"\xe0\x02\n" +
+	"spin_count\x18\x05 \x01(\x05R\tspinCount\x12,\n" +
+	"\x12free_spin_validity\x18\x06 \x01(\x03R\x10freeSpinValidity\x121\n" +
+	"\x14wagering_requirement\x18\a \x01(\x05R\x13wageringRequirement\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\b \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
+	"\x0freward_validity\x18\t \x01(\x03R\x0erewardValidity\"\xc0\x03\n" +
 	"\rFreeBetConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
-	"rewardType\x123\n" +
-	"\btemplate\x18\x03 \x01(\v2\x17.google.protobuf.StructR\btemplate\x12\x1b\n" +
-	"\tbet_count\x18\x04 \x01(\x05R\bbetCount\x12*\n" +
-	"\x11free_bet_validity\x18\x05 \x01(\x03R\x0ffreeBetValidity\x121\n" +
-	"\x14wagering_requirement\x18\x06 \x01(\x05R\x13wageringRequirement\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\a \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\b \x01(\x03R\x0erewardValidity\"\x86\x02\n" +
-	"\x19PromoCodeBonusMoneyConfig\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
-	"\vreward_type\x18\x02 \x01(\tR\n" +
-	"rewardType\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\tR\x06amount\x121\n" +
+	"rewardType\x12L\n" +
+	"\arewards\x18\x03 \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1a\xa5\x02\n" +
+	"\rFreeBetReward\x123\n" +
+	"\btemplate\x18\x01 \x01(\v2\x17.google.protobuf.StructR\btemplate\x12\x1b\n" +
+	"\tbet_count\x18\x02 \x01(\x05R\bbetCount\x12*\n" +
+	"\x11free_bet_validity\x18\x03 \x01(\x03R\x0ffreeBetValidity\x121\n" +
 	"\x14wagering_requirement\x18\x04 \x01(\x05R\x13wageringRequirement\x12:\n" +
 	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\"\x9b\x02\n" +
-	"\x16PromoCodeRewardConfigs\x12^\n" +
-	"\x12bonus_money_config\x18\x01 \x01(\v20.api.wallet.service.v1.PromoCodeBonusMoneyConfigR\x10bonusMoneyConfig\x12Q\n" +
-	"\x11free_spin_configs\x18\x02 \x03(\v2%.api.wallet.service.v1.FreeSpinConfigR\x0ffreeSpinConfigs\x12N\n" +
-	"\x10free_bet_configs\x18\x03 \x03(\v2$.api.wallet.service.v1.FreeBetConfigR\x0efreeBetConfigs\"\xb0\x01\n" +
+	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\"\xa2\x02\n" +
+	"\x19PromoCodeBonusMoneyConfig\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
+	"\vreward_type\x18\x03 \x01(\tR\n" +
+	"rewardType\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\tR\x06amount\x121\n" +
+	"\x14wagering_requirement\x18\x05 \x01(\x05R\x13wageringRequirement\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\x06 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
+	"\x0freward_validity\x18\a \x01(\x03R\x0erewardValidity\"\xe6\x02\n" +
+	"\x16PromoCodeRewardConfigs\x12c\n" +
+	"\x12bonus_money_config\x18\x01 \x01(\v20.api.wallet.service.v1.PromoCodeBonusMoneyConfigH\x00R\x10bonusMoneyConfig\x88\x01\x01\x12T\n" +
+	"\x10free_spin_config\x18\x02 \x01(\v2%.api.wallet.service.v1.FreeSpinConfigH\x01R\x0efreeSpinConfig\x88\x01\x01\x12Q\n" +
+	"\x0ffree_bet_config\x18\x03 \x01(\v2$.api.wallet.service.v1.FreeBetConfigH\x02R\rfreeBetConfig\x88\x01\x01B\x15\n" +
+	"\x13_bonus_money_configB\x13\n" +
+	"\x11_free_spin_configB\x12\n" +
+	"\x10_free_bet_config\"\xb0\x01\n" +
 	"\x10DepositCondition\x12&\n" +
 	"\x0ftime_range_days\x18\x01 \x01(\x05R\rtimeRangeDays\x12@\n" +
 	"\x1creporting_currency_aggregate\x18\x02 \x01(\bR\x1areportingCurrencyAggregate\x12\x1a\n" +
@@ -2399,7 +2830,33 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"codeFormat\x12\x14\n" +
 	"\x05count\x18\x06 \x01(\x05R\x05count\"E\n" +
 	"\x1aGeneratePromoCodesResponse\x12'\n" +
-	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCountBS\n" +
+	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"-\n" +
+	"\x17GetPromoCodeInfoRequest\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\"\xe0\x05\n" +
+	"\x18GetPromoCodeInfoResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1b\n" +
+	"\tcode_type\x18\x02 \x01(\tR\bcodeType\x12#\n" +
+	"\rcampaign_name\x18\x03 \x01(\tR\fcampaignName\x12'\n" +
+	"\x0fcampaign_status\x18\x04 \x01(\tR\x0ecampaignStatus\x129\n" +
+	"\n" +
+	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1f\n" +
+	"\vusage_count\x18\a \x01(\x05R\n" +
+	"usageCount\x12&\n" +
+	"\x0fmax_usage_limit\x18\b \x01(\x05R\rmaxUsageLimit\x12/\n" +
+	"\x14already_used_by_user\x18\t \x01(\bR\x11alreadyUsedByUser\x12T\n" +
+	"\x0ereward_configs\x18\n" +
+	" \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\x12W\n" +
+	"\x11reward_conditions\x18\v \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\x12]\n" +
+	"\x11condition_results\x18\f \x03(\v20.api.wallet.service.v1.ConditionValidationResultR\x10conditionResults\x12\x1c\n" +
+	"\tclaimable\x18\r \x01(\bR\tclaimable\x12-\n" +
+	"\x12unclaimable_reason\x18\x0e \x01(\tR\x11unclaimableReason\"+\n" +
+	"\x15ClaimPromoCodeRequest\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\"\x18\n" +
+	"\x16ClaimPromoCodeResponse\"`\n" +
+	"\x19ConditionValidationResult\x12%\n" +
+	"\x0econdition_type\x18\x01 \x01(\tR\rconditionType\x12\x1c\n" +
+	"\tsatisfied\x18\x02 \x01(\bR\tsatisfiedBS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
@@ -2414,7 +2871,7 @@ func file_wallet_service_v1_promocode_proto_rawDescGZIP() []byte {
 	return file_wallet_service_v1_promocode_proto_rawDescData
 }
 
-var file_wallet_service_v1_promocode_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_wallet_service_v1_promocode_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_wallet_service_v1_promocode_proto_goTypes = []any{
 	(*FreeSpinConfig)(nil),                        // 0: api.wallet.service.v1.FreeSpinConfig
 	(*FreeBetConfig)(nil),                         // 1: api.wallet.service.v1.FreeBetConfig
@@ -2444,68 +2901,82 @@ var file_wallet_service_v1_promocode_proto_goTypes = []any{
 	(*ListPromoCodeCampaignDetailsResponse)(nil),  // 25: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
 	(*GeneratePromoCodesRequest)(nil),             // 26: api.wallet.service.v1.GeneratePromoCodesRequest
 	(*GeneratePromoCodesResponse)(nil),            // 27: api.wallet.service.v1.GeneratePromoCodesResponse
-	(*structpb.Struct)(nil),                       // 28: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),                 // 29: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),                // 30: api.common.OperatorContext
+	(*GetPromoCodeInfoRequest)(nil),               // 28: api.wallet.service.v1.GetPromoCodeInfoRequest
+	(*GetPromoCodeInfoResponse)(nil),              // 29: api.wallet.service.v1.GetPromoCodeInfoResponse
+	(*ClaimPromoCodeRequest)(nil),                 // 30: api.wallet.service.v1.ClaimPromoCodeRequest
+	(*ClaimPromoCodeResponse)(nil),                // 31: api.wallet.service.v1.ClaimPromoCodeResponse
+	(*ConditionValidationResult)(nil),             // 32: api.wallet.service.v1.ConditionValidationResult
+	(*FreeSpinConfig_FreeSpinReward)(nil),         // 33: api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
+	(*FreeBetConfig_FreeBetReward)(nil),           // 34: api.wallet.service.v1.FreeBetConfig.FreeBetReward
+	(*timestamppb.Timestamp)(nil),                 // 35: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),                // 36: api.common.OperatorContext
+	(*structpb.Struct)(nil),                       // 37: google.protobuf.Struct
 }
 var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
-	28, // 0: api.wallet.service.v1.FreeBetConfig.template:type_name -> google.protobuf.Struct
-	2,  // 1: api.wallet.service.v1.PromoCodeRewardConfigs.bonus_money_config:type_name -> api.wallet.service.v1.PromoCodeBonusMoneyConfig
-	0,  // 2: api.wallet.service.v1.PromoCodeRewardConfigs.free_spin_configs:type_name -> api.wallet.service.v1.FreeSpinConfig
-	1,  // 3: api.wallet.service.v1.PromoCodeRewardConfigs.free_bet_configs:type_name -> api.wallet.service.v1.FreeBetConfig
-	29, // 4: api.wallet.service.v1.RegistrationTimeCondition.start_time:type_name -> google.protobuf.Timestamp
-	29, // 5: api.wallet.service.v1.RegistrationTimeCondition.end_time:type_name -> google.protobuf.Timestamp
-	4,  // 6: api.wallet.service.v1.PromoCodeConditions.deposit_condition:type_name -> api.wallet.service.v1.DepositCondition
-	5,  // 7: api.wallet.service.v1.PromoCodeConditions.registration_time_condition:type_name -> api.wallet.service.v1.RegistrationTimeCondition
-	6,  // 8: api.wallet.service.v1.PromoCodeConditions.invitation_condition:type_name -> api.wallet.service.v1.InvitationCondition
-	7,  // 9: api.wallet.service.v1.PromoCodeConditions.turnover_condition:type_name -> api.wallet.service.v1.TurnoverCondition
-	8,  // 10: api.wallet.service.v1.PromoCodeConditions.referrer_condition:type_name -> api.wallet.service.v1.ReferrerCondition
-	9,  // 11: api.wallet.service.v1.PromoCodeConditions.affiliate_condition:type_name -> api.wallet.service.v1.AffiliateCondition
-	10, // 12: api.wallet.service.v1.PromoCodeConditions.verification_status_condition:type_name -> api.wallet.service.v1.VerificationStatusCondition
-	30, // 13: api.wallet.service.v1.PromoCodeCampaign.operator_context:type_name -> api.common.OperatorContext
-	29, // 14: api.wallet.service.v1.PromoCodeCampaign.start_time:type_name -> google.protobuf.Timestamp
-	29, // 15: api.wallet.service.v1.PromoCodeCampaign.end_time:type_name -> google.protobuf.Timestamp
-	11, // 16: api.wallet.service.v1.PromoCodeCampaign.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	3,  // 17: api.wallet.service.v1.PromoCodeCampaign.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	29, // 18: api.wallet.service.v1.PromoCodeCampaign.created_at:type_name -> google.protobuf.Timestamp
-	29, // 19: api.wallet.service.v1.PromoCodeCampaign.updated_at:type_name -> google.protobuf.Timestamp
-	30, // 20: api.wallet.service.v1.CreatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	30, // 21: api.wallet.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	29, // 22: api.wallet.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	29, // 23: api.wallet.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
-	11, // 24: api.wallet.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	3,  // 25: api.wallet.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	30, // 26: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	30, // 27: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	29, // 28: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	29, // 29: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
-	11, // 30: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	3,  // 31: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	30, // 32: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	30, // 33: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	30, // 34: api.wallet.service.v1.ListPromoCodeCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	30, // 35: api.wallet.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	29, // 36: api.wallet.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
-	29, // 37: api.wallet.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
-	3,  // 38: api.wallet.service.v1.PromoCodeCampaignListItem.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	29, // 39: api.wallet.service.v1.PromoCodeCampaignListItem.created_at:type_name -> google.protobuf.Timestamp
-	29, // 40: api.wallet.service.v1.PromoCodeCampaignListItem.start_time:type_name -> google.protobuf.Timestamp
-	29, // 41: api.wallet.service.v1.PromoCodeCampaignListItem.end_time:type_name -> google.protobuf.Timestamp
-	29, // 42: api.wallet.service.v1.PromoCodeCampaignListItem.updated_at:type_name -> google.protobuf.Timestamp
-	20, // 43: api.wallet.service.v1.ListPromoCodeCampaignsResponse.campaigns:type_name -> api.wallet.service.v1.PromoCodeCampaignListItem
-	30, // 44: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	29, // 45: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
-	29, // 46: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
-	29, // 47: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
-	29, // 48: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
-	23, // 49: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
-	24, // 50: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
-	30, // 51: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	52, // [52:52] is the sub-list for method output_type
-	52, // [52:52] is the sub-list for method input_type
-	52, // [52:52] is the sub-list for extension type_name
-	52, // [52:52] is the sub-list for extension extendee
-	0,  // [0:52] is the sub-list for field type_name
+	33, // 0: api.wallet.service.v1.FreeSpinConfig.rewards:type_name -> api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
+	34, // 1: api.wallet.service.v1.FreeBetConfig.rewards:type_name -> api.wallet.service.v1.FreeBetConfig.FreeBetReward
+	2,  // 2: api.wallet.service.v1.PromoCodeRewardConfigs.bonus_money_config:type_name -> api.wallet.service.v1.PromoCodeBonusMoneyConfig
+	0,  // 3: api.wallet.service.v1.PromoCodeRewardConfigs.free_spin_config:type_name -> api.wallet.service.v1.FreeSpinConfig
+	1,  // 4: api.wallet.service.v1.PromoCodeRewardConfigs.free_bet_config:type_name -> api.wallet.service.v1.FreeBetConfig
+	35, // 5: api.wallet.service.v1.RegistrationTimeCondition.start_time:type_name -> google.protobuf.Timestamp
+	35, // 6: api.wallet.service.v1.RegistrationTimeCondition.end_time:type_name -> google.protobuf.Timestamp
+	4,  // 7: api.wallet.service.v1.PromoCodeConditions.deposit_condition:type_name -> api.wallet.service.v1.DepositCondition
+	5,  // 8: api.wallet.service.v1.PromoCodeConditions.registration_time_condition:type_name -> api.wallet.service.v1.RegistrationTimeCondition
+	6,  // 9: api.wallet.service.v1.PromoCodeConditions.invitation_condition:type_name -> api.wallet.service.v1.InvitationCondition
+	7,  // 10: api.wallet.service.v1.PromoCodeConditions.turnover_condition:type_name -> api.wallet.service.v1.TurnoverCondition
+	8,  // 11: api.wallet.service.v1.PromoCodeConditions.referrer_condition:type_name -> api.wallet.service.v1.ReferrerCondition
+	9,  // 12: api.wallet.service.v1.PromoCodeConditions.affiliate_condition:type_name -> api.wallet.service.v1.AffiliateCondition
+	10, // 13: api.wallet.service.v1.PromoCodeConditions.verification_status_condition:type_name -> api.wallet.service.v1.VerificationStatusCondition
+	36, // 14: api.wallet.service.v1.PromoCodeCampaign.operator_context:type_name -> api.common.OperatorContext
+	35, // 15: api.wallet.service.v1.PromoCodeCampaign.start_time:type_name -> google.protobuf.Timestamp
+	35, // 16: api.wallet.service.v1.PromoCodeCampaign.end_time:type_name -> google.protobuf.Timestamp
+	11, // 17: api.wallet.service.v1.PromoCodeCampaign.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	3,  // 18: api.wallet.service.v1.PromoCodeCampaign.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	35, // 19: api.wallet.service.v1.PromoCodeCampaign.created_at:type_name -> google.protobuf.Timestamp
+	35, // 20: api.wallet.service.v1.PromoCodeCampaign.updated_at:type_name -> google.protobuf.Timestamp
+	36, // 21: api.wallet.service.v1.CreatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	36, // 22: api.wallet.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	35, // 23: api.wallet.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	35, // 24: api.wallet.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	11, // 25: api.wallet.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	3,  // 26: api.wallet.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	36, // 27: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	36, // 28: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	35, // 29: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	35, // 30: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	11, // 31: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	3,  // 32: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	36, // 33: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	36, // 34: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	36, // 35: api.wallet.service.v1.ListPromoCodeCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	36, // 36: api.wallet.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	35, // 37: api.wallet.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
+	35, // 38: api.wallet.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
+	3,  // 39: api.wallet.service.v1.PromoCodeCampaignListItem.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	35, // 40: api.wallet.service.v1.PromoCodeCampaignListItem.created_at:type_name -> google.protobuf.Timestamp
+	35, // 41: api.wallet.service.v1.PromoCodeCampaignListItem.start_time:type_name -> google.protobuf.Timestamp
+	35, // 42: api.wallet.service.v1.PromoCodeCampaignListItem.end_time:type_name -> google.protobuf.Timestamp
+	35, // 43: api.wallet.service.v1.PromoCodeCampaignListItem.updated_at:type_name -> google.protobuf.Timestamp
+	20, // 44: api.wallet.service.v1.ListPromoCodeCampaignsResponse.campaigns:type_name -> api.wallet.service.v1.PromoCodeCampaignListItem
+	36, // 45: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	35, // 46: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
+	35, // 47: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
+	35, // 48: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
+	35, // 49: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
+	23, // 50: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
+	24, // 51: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
+	36, // 52: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	35, // 53: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
+	35, // 54: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
+	3,  // 55: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	11, // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	32, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
+	37, // 58: api.wallet.service.v1.FreeBetConfig.FreeBetReward.template:type_name -> google.protobuf.Struct
+	59, // [59:59] is the sub-list for method output_type
+	59, // [59:59] is the sub-list for method input_type
+	59, // [59:59] is the sub-list for extension type_name
+	59, // [59:59] is the sub-list for extension extendee
+	0,  // [0:59] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_promocode_proto_init() }
@@ -2513,13 +2984,14 @@ func file_wallet_service_v1_promocode_proto_init() {
 	if File_wallet_service_v1_promocode_proto != nil {
 		return
 	}
+	file_wallet_service_v1_promocode_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_promocode_proto_rawDesc), len(file_wallet_service_v1_promocode_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   28,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

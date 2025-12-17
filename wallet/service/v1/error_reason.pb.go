@@ -179,6 +179,12 @@ const (
 	ErrorReason_CREATE_PROMO_CODE_USAGE_FAILED ErrorReason = 30148
 	ErrorReason_GET_PROMO_CODE_USAGE_FAILED    ErrorReason = 30149
 	ErrorReason_LIST_PROMO_CODE_USAGES_FAILED  ErrorReason = 30150
+	// GetPromoCodeInfo and ClaimPromoCode errors
+	ErrorReason_GET_PROMO_CODE_INFO_FAILED      ErrorReason = 30151
+	ErrorReason_CLAIM_PROMO_CODE_FAILED         ErrorReason = 30152
+	ErrorReason_PROMO_CODE_CONDITIONS_NOT_MET   ErrorReason = 30153
+	ErrorReason_PROMO_CODE_CAMPAIGN_EXPIRED     ErrorReason = 30154
+	ErrorReason_PROMO_CODE_CAMPAIGN_NOT_STARTED ErrorReason = 30155
 )
 
 // Enum value maps for ErrorReason.
@@ -335,6 +341,11 @@ var (
 		30148: "CREATE_PROMO_CODE_USAGE_FAILED",
 		30149: "GET_PROMO_CODE_USAGE_FAILED",
 		30150: "LIST_PROMO_CODE_USAGES_FAILED",
+		30151: "GET_PROMO_CODE_INFO_FAILED",
+		30152: "CLAIM_PROMO_CODE_FAILED",
+		30153: "PROMO_CODE_CONDITIONS_NOT_MET",
+		30154: "PROMO_CODE_CAMPAIGN_EXPIRED",
+		30155: "PROMO_CODE_CAMPAIGN_NOT_STARTED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -488,6 +499,11 @@ var (
 		"CREATE_PROMO_CODE_USAGE_FAILED":                                  30148,
 		"GET_PROMO_CODE_USAGE_FAILED":                                     30149,
 		"LIST_PROMO_CODE_USAGES_FAILED":                                   30150,
+		"GET_PROMO_CODE_INFO_FAILED":                                      30151,
+		"CLAIM_PROMO_CODE_FAILED":                                         30152,
+		"PROMO_CODE_CONDITIONS_NOT_MET":                                   30153,
+		"PROMO_CODE_CAMPAIGN_EXPIRED":                                     30154,
+		"PROMO_CODE_CAMPAIGN_NOT_STARTED":                                 30155,
 	}
 )
 
@@ -522,7 +538,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xe4-\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x94/\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -674,7 +690,12 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18CREATE_PROMO_CODE_FAILED\x10\xc3\xeb\x01\x12$\n" +
 	"\x1eCREATE_PROMO_CODE_USAGE_FAILED\x10\xc4\xeb\x01\x12!\n" +
 	"\x1bGET_PROMO_CODE_USAGE_FAILED\x10\xc5\xeb\x01\x12#\n" +
-	"\x1dLIST_PROMO_CODE_USAGES_FAILED\x10\xc6\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1dLIST_PROMO_CODE_USAGES_FAILED\x10\xc6\xeb\x01\x12 \n" +
+	"\x1aGET_PROMO_CODE_INFO_FAILED\x10\xc7\xeb\x01\x12\x1d\n" +
+	"\x17CLAIM_PROMO_CODE_FAILED\x10\xc8\xeb\x01\x12#\n" +
+	"\x1dPROMO_CODE_CONDITIONS_NOT_MET\x10\xc9\xeb\x01\x12!\n" +
+	"\x1bPROMO_CODE_CAMPAIGN_EXPIRED\x10\xca\xeb\x01\x12%\n" +
+	"\x1fPROMO_CODE_CAMPAIGN_NOT_STARTED\x10\xcb\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
