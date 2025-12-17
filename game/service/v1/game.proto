@@ -1961,6 +1961,8 @@ message BackofficeListGamesUnderTagResponse {
 		bool in_tag = 10;      // Whether in this tag
 		int32 order_index = 11;
 		bool sticky = 12;
+		bool free_spin = 13;   // has_freespins from game
+		string rtp = 14;       // payout from game
 	}
 	repeated GameInfo games = 1;
 	int32 total = 2;

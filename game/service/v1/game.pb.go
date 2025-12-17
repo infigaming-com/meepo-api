@@ -14771,6 +14771,8 @@ type BackofficeListGamesUnderTagResponse_GameInfo struct {
 	InTag               bool                   `protobuf:"varint,10,opt,name=in_tag,json=inTag,proto3" json:"in_tag,omitempty"` // Whether in this tag
 	OrderIndex          int32                  `protobuf:"varint,11,opt,name=order_index,json=orderIndex,proto3" json:"order_index,omitempty"`
 	Sticky              bool                   `protobuf:"varint,12,opt,name=sticky,proto3" json:"sticky,omitempty"`
+	FreeSpin            bool                   `protobuf:"varint,13,opt,name=free_spin,json=freeSpin,proto3" json:"free_spin,omitempty"` // has_freespins from game
+	Rtp                 string                 `protobuf:"bytes,14,opt,name=rtp,proto3" json:"rtp,omitempty"`                            // payout from game
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -14887,6 +14889,20 @@ func (x *BackofficeListGamesUnderTagResponse_GameInfo) GetSticky() bool {
 		return x.Sticky
 	}
 	return false
+}
+
+func (x *BackofficeListGamesUnderTagResponse_GameInfo) GetFreeSpin() bool {
+	if x != nil {
+		return x.FreeSpin
+	}
+	return false
+}
+
+func (x *BackofficeListGamesUnderTagResponse_GameInfo) GetRtp() string {
+	if x != nil {
+		return x.Rtp
+	}
+	return ""
 }
 
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
@@ -16477,12 +16493,12 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
 	"\b_rtp_minB\n" +
 	"\n" +
-	"\b_rtp_max\"\xc6\x04\n" +
+	"\b_rtp_max\"\xf5\x04\n" +
 	"#BackofficeListGamesUnderTagResponse\x12W\n" +
 	"\x05games\x18\x01 \x03(\v2A.api.game.service.v1.BackofficeListGamesUnderTagResponse.GameInfoR\x05games\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xfe\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xad\x03\n" +
 	"\bGameInfo\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
@@ -16498,7 +16514,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	" \x01(\bR\x05inTag\x12\x1f\n" +
 	"\vorder_index\x18\v \x01(\x05R\n" +
 	"orderIndex\x12\x16\n" +
-	"\x06sticky\x18\f \x01(\bR\x06sticky*_\n" +
+	"\x06sticky\x18\f \x01(\bR\x06sticky\x12\x1b\n" +
+	"\tfree_spin\x18\r \x01(\bR\bfreeSpin\x12\x10\n" +
+	"\x03rtp\x18\x0e \x01(\tR\x03rtp*_\n" +
 	"\x15TaxReportRecordStatus\x12!\n" +
 	"\x1dTaxReportRecordStatus_PENDING\x10\x00\x12#\n" +
 	"\x1fTaxReportRecordStatus_CONFIRMED\x10\x012\xb0@\n" +

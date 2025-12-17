@@ -5300,6 +5300,8 @@ type BackofficeListGamesUnderTagResponse_GameInfo struct {
 	InTag               bool                   `protobuf:"varint,10,opt,name=in_tag,json=inTag,proto3" json:"in_tag,omitempty"` // Whether in this tag
 	OrderIndex          int32                  `protobuf:"varint,11,opt,name=order_index,json=orderIndex,proto3" json:"order_index,omitempty"`
 	Sticky              bool                   `protobuf:"varint,12,opt,name=sticky,proto3" json:"sticky,omitempty"`
+	FreeSpin            bool                   `protobuf:"varint,13,opt,name=free_spin,json=freeSpin,proto3" json:"free_spin,omitempty"`
+	Rtp                 string                 `protobuf:"bytes,14,opt,name=rtp,proto3" json:"rtp,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -5416,6 +5418,20 @@ func (x *BackofficeListGamesUnderTagResponse_GameInfo) GetSticky() bool {
 		return x.Sticky
 	}
 	return false
+}
+
+func (x *BackofficeListGamesUnderTagResponse_GameInfo) GetFreeSpin() bool {
+	if x != nil {
+		return x.FreeSpin
+	}
+	return false
+}
+
+func (x *BackofficeListGamesUnderTagResponse_GameInfo) GetRtp() string {
+	if x != nil {
+		return x.Rtp
+	}
+	return ""
 }
 
 var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
@@ -6041,12 +6057,12 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\n" +
 	"\b_rtp_minB\n" +
 	"\n" +
-	"\b_rtp_max\"\xcc\x04\n" +
+	"\b_rtp_max\"\xfb\x04\n" +
 	"#BackofficeListGamesUnderTagResponse\x12]\n" +
 	"\x05games\x18\x01 \x03(\v2G.api.backoffice.service.v1.BackofficeListGamesUnderTagResponse.GameInfoR\x05games\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xfe\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xad\x03\n" +
 	"\bGameInfo\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
@@ -6062,7 +6078,9 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	" \x01(\bR\x05inTag\x12\x1f\n" +
 	"\vorder_index\x18\v \x01(\x05R\n" +
 	"orderIndex\x12\x16\n" +
-	"\x06sticky\x18\f \x01(\bR\x06sticky2\xff:\n" +
+	"\x06sticky\x18\f \x01(\bR\x06sticky\x12\x1b\n" +
+	"\tfree_spin\x18\r \x01(\bR\bfreeSpin\x12\x10\n" +
+	"\x03rtp\x18\x0e \x01(\tR\x03rtp2\xff:\n" +
 	"\x0eBackofficeGame\x12\xa1\x01\n" +
 	"\rListProviders\x12/.api.backoffice.service.v1.ListProvidersRequest\x1a0.api.backoffice.service.v1.ListProvidersResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/game/providers/list\x12\xcb\x01\n" +
 	"\x17ListProvidersWithDetail\x129.api.backoffice.service.v1.ListProvidersWithDetailRequest\x1a:.api.backoffice.service.v1.ListProvidersWithDetailResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/game/providers-with-detail/list\x12\xa5\x01\n" +

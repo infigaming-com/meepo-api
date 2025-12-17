@@ -10008,6 +10008,10 @@ func (m *BackofficeListGamesUnderTagResponse_GameInfo) validate(all bool) error 
 
 	// no validation rules for Sticky
 
+	// no validation rules for FreeSpin
+
+	// no validation rules for Rtp
+
 	if len(errors) > 0 {
 		return BackofficeListGamesUnderTagResponse_GameInfoMultiError(errors)
 	}
