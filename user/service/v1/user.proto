@@ -1037,7 +1037,7 @@ message GetUserProfileResponse {
 	}
 	string nickname = 1;
 	int64 user_id = 2;
-	int32 vip_level = 3; // Not available for now, only return 1
+	string vip_level = 3;
 	bool online = 4;
 	bool ban_withdraw = 5;
 	bool ban_game = 6;

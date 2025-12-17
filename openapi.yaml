@@ -17820,8 +17820,7 @@ components:
                 userId:
                     type: string
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 online:
                     type: boolean
                 banWithdraw:

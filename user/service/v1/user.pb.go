@@ -4259,7 +4259,7 @@ type GetUserProfileResponse struct {
 	state              protoimpl.MessageState                     `protogen:"open.v1"`
 	Nickname           string                                     `protobuf:"bytes,1,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"` // Not available for now, only return 1
+	VipLevel           string                                     `protobuf:"bytes,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`
 	BanWithdraw        bool                                       `protobuf:"varint,5,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame            bool                                       `protobuf:"varint,6,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
@@ -4336,11 +4336,11 @@ func (x *GetUserProfileResponse) GetUserId() int64 {
 	return 0
 }
 
-func (x *GetUserProfileResponse) GetVipLevel() int32 {
+func (x *GetUserProfileResponse) GetVipLevel() string {
 	if x != nil {
 		return x.VipLevel
 	}
-	return 0
+	return ""
 }
 
 func (x *GetUserProfileResponse) GetOnline() bool {
@@ -13020,7 +13020,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x16\n" +
+	"\tvip_level\x18\x03 \x01(\tR\bvipLevel\x12\x16\n" +
 	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
 	"\fban_withdraw\x18\x05 \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x06 \x01(\bR\abanGame\x12\x1b\n" +
