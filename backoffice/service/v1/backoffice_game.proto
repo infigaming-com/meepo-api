@@ -842,6 +842,8 @@ message BackofficeListGamesUnderTagResponse {
 		bool in_tag = 10;      // Whether in this tag
 		int32 order_index = 11;
 		bool sticky = 12;
+		bool free_spin = 13;
+		string rtp = 14;
 	}
 	repeated GameInfo games = 1;
 	int32 total = 2;
