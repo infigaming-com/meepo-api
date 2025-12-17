@@ -31,7 +31,7 @@ type ListUsersRequest struct {
 	Tags                  []string               `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"` // not available for now
 	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
 	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
-	VipLevel              *int32                 `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
+	VipLevel              *string                `protobuf:"bytes,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
 	Country               *string                `protobuf:"bytes,6,opt,name=country,proto3,oneof" json:"country,omitempty"`
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
@@ -113,11 +113,11 @@ func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListUsersRequest) GetVipLevel() int32 {
+func (x *ListUsersRequest) GetVipLevel() string {
 	if x != nil && x.VipLevel != nil {
 		return *x.VipLevel
 	}
-	return 0
+	return ""
 }
 
 func (x *ListUsersRequest) GetCountry() string {
@@ -2072,7 +2072,7 @@ type ListUsersResponse_User struct {
 	Username                  string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
 	Email                     string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile                    string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VipLevel                  int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	VipLevel                  string                 `protobuf:"bytes,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
 	KycLevel                  int32                  `protobuf:"varint,10,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
 	DepositUsd                string                 `protobuf:"bytes,11,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
 	WithdrawUsd               string                 `protobuf:"bytes,12,opt,name=withdraw_usd,json=withdrawUsd,proto3" json:"withdraw_usd,omitempty"`
@@ -2182,11 +2182,11 @@ func (x *ListUsersResponse_User) GetMobile() string {
 	return ""
 }
 
-func (x *ListUsersResponse_User) GetVipLevel() int32 {
+func (x *ListUsersResponse_User) GetVipLevel() string {
 	if x != nil {
 		return x.VipLevel
 	}
-	return 0
+	return ""
 }
 
 func (x *ListUsersResponse_User) GetKycLevel() int32 {
@@ -2441,7 +2441,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
 	"\x15registration_end_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
-	"\tvip_level\x18\x05 \x01(\x05H\x03R\bvipLevel\x88\x01\x01\x12\x1d\n" +
+	"\tvip_level\x18\x05 \x01(\tH\x03R\bvipLevel\x88\x01\x01\x12\x1d\n" +
 	"\acountry\x18\x06 \x01(\tH\x04R\acountry\x88\x01\x01\x12 \n" +
 	"\tkyc_level\x18\a \x01(\x05H\x05R\bkycLevel\x88\x01\x01\x12$\n" +
 	"\vdeposit_min\x18\b \x01(\tH\x06R\n" +
@@ -2502,7 +2502,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1b\n" +
-	"\tvip_level\x18\t \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tvip_level\x18\t \x01(\tR\bvipLevel\x12\x1b\n" +
 	"\tkyc_level\x18\n" +
 	" \x01(\x05R\bkycLevel\x12\x1f\n" +
 	"\vdeposit_usd\x18\v \x01(\tR\n" +

@@ -13782,8 +13782,7 @@ components:
                     type: string
                     format: date-time
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 country:
                     type: string
                 kycLevel:
@@ -13859,8 +13858,7 @@ components:
                 mobile:
                     type: string
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 kycLevel:
                     type: integer
                     format: int32
@@ -17820,8 +17818,7 @@ components:
                 userId:
                     type: string
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 online:
                     type: boolean
                 banWithdraw:

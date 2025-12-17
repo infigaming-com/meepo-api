@@ -54,6 +54,10 @@ service Vip {
   rpc ForceRunVipRewards(ForceRunVipRewardsRequest) returns (ForceRunVipRewardsResponse) {
   }
 
+  // 批量获取用户VIP会员信息
+  rpc BatchGetVipMembers(BatchGetVipMembersRequest) returns (BatchGetVipMembersResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -453,4 +457,20 @@ message ForceRunVipRewardsRequest {
 message ForceRunVipRewardsResponse {
   bool success = 1;
   string message = 2;
+}
+
+// 批量获取用户VIP会员信息请求
+message BatchGetVipMembersRequest {
+  repeated int64 user_ids = 1;
+}
+
+// 带等级名称的VIP会员信息
+message VipMemberWithLevelName {
+  VipMember vip_member = 1;
+  string current_level_name = 2;
+}
+
+// 批量获取用户VIP会员信息响应
+message BatchGetVipMembersResponse {
+  repeated VipMemberWithLevelName vip_members = 1;
 }
