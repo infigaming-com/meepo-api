@@ -35,6 +35,7 @@ const (
 	Vip_RequestDailyLossback_FullMethodName         = "/api.vip.service.v1.Vip/RequestDailyLossback"
 	Vip_GetDailyLossbackStatus_FullMethodName       = "/api.vip.service.v1.Vip/GetDailyLossbackStatus"
 	Vip_ForceRunVipRewards_FullMethodName           = "/api.vip.service.v1.Vip/ForceRunVipRewards"
+	Vip_BatchGetVipMembers_FullMethodName           = "/api.vip.service.v1.Vip/BatchGetVipMembers"
 )
 
 // VipClient is the client API for Vip service.
@@ -58,6 +59,8 @@ type VipClient interface {
 	GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*GetDailyLossbackStatusResponse, error)
 	// 强制执行 VIP 奖励发放（跳过时间检查）
 	ForceRunVipRewards(ctx context.Context, in *ForceRunVipRewardsRequest, opts ...grpc.CallOption) (*ForceRunVipRewardsResponse, error)
+	// 批量获取用户VIP会员信息
+	BatchGetVipMembers(ctx context.Context, in *BatchGetVipMembersRequest, opts ...grpc.CallOption) (*BatchGetVipMembersResponse, error)
 }
 
 type vipClient struct {
@@ -228,6 +231,16 @@ func (c *vipClient) ForceRunVipRewards(ctx context.Context, in *ForceRunVipRewar
 	return out, nil
 }
 
+func (c *vipClient) BatchGetVipMembers(ctx context.Context, in *BatchGetVipMembersRequest, opts ...grpc.CallOption) (*BatchGetVipMembersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetVipMembersResponse)
+	err := c.cc.Invoke(ctx, Vip_BatchGetVipMembers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VipServer is the server API for Vip service.
 // All implementations must embed UnimplementedVipServer
 // for forward compatibility.
@@ -249,6 +262,8 @@ type VipServer interface {
 	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*GetDailyLossbackStatusResponse, error)
 	// 强制执行 VIP 奖励发放（跳过时间检查）
 	ForceRunVipRewards(context.Context, *ForceRunVipRewardsRequest) (*ForceRunVipRewardsResponse, error)
+	// 批量获取用户VIP会员信息
+	BatchGetVipMembers(context.Context, *BatchGetVipMembersRequest) (*BatchGetVipMembersResponse, error)
 	mustEmbedUnimplementedVipServer()
 }
 
@@ -306,6 +321,9 @@ func (UnimplementedVipServer) GetDailyLossbackStatus(context.Context, *GetDailyL
 }
 func (UnimplementedVipServer) ForceRunVipRewards(context.Context, *ForceRunVipRewardsRequest) (*ForceRunVipRewardsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ForceRunVipRewards not implemented")
+}
+func (UnimplementedVipServer) BatchGetVipMembers(context.Context, *BatchGetVipMembersRequest) (*BatchGetVipMembersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGetVipMembers not implemented")
 }
 func (UnimplementedVipServer) mustEmbedUnimplementedVipServer() {}
 func (UnimplementedVipServer) testEmbeddedByValue()             {}
@@ -616,6 +634,24 @@ func _Vip_ForceRunVipRewards_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vip_BatchGetVipMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetVipMembersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VipServer).BatchGetVipMembers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vip_BatchGetVipMembers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VipServer).BatchGetVipMembers(ctx, req.(*BatchGetVipMembersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vip_ServiceDesc is the grpc.ServiceDesc for Vip service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -686,6 +722,10 @@ var Vip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ForceRunVipRewards",
 			Handler:    _Vip_ForceRunVipRewards_Handler,
+		},
+		{
+			MethodName: "BatchGetVipMembers",
+			Handler:    _Vip_BatchGetVipMembers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
