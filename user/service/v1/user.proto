@@ -902,7 +902,7 @@ message ListUsersResponse {
 		string username = 6;
 		string email = 7;
 		string mobile = 8;
-		int32 vip_level = 9;
+		string vip_level = 9;
 		int32 kyc_level = 10;
 		string deposit_usd = 11;
 		string withdraw_usd = 12;
