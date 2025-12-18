@@ -18,27 +18,34 @@ option java_package = "api.wallet.service.v1";
 message FreeSpinConfig {
 	bool enabled = 1;
 	string reward_type = 2;              // cash | bonus (winning credit type)
-	string currency = 3;                 // play currency
-	string provider_id = 4;
-	string game_id = 5;
-	int32 level = 6;
-	int32 spin_count = 7;
-	int64 free_spin_validity = 8;        // ms, 0 = no expiration
-	int32 wagering_requirement = 9;
-	string max_withdrawal_multiplier = 10;
-	int64 reward_validity = 11;          // winning reward validity (ms)
+	repeated FreeSpinReward rewards = 3;
+	message FreeSpinReward {
+		string currency = 1;                 // play currency
+		string provider_id = 2;
+		string game_id = 3;
+		int32 level = 4;
+		int32 spin_count = 5;
+		int64 free_spin_validity = 6;        // ms, 0 = no expiration
+		int32 wagering_requirement = 7;
+		string max_withdrawal_multiplier = 8;
+		int64 reward_validity = 9;          // winning reward validity (ms)
+	}
 }
 
 // Free bet config for deposit reward or promo code
 message FreeBetConfig {
 	bool enabled = 1;
 	string reward_type = 2;              // cash | bonus (winning credit type)
-	google.protobuf.Struct template = 3; // bet template
-	int32 bet_count = 4;
-	int64 free_bet_validity = 5;         // ms, 0 = no expiration
-	int32 wagering_requirement = 6;
-	string max_withdrawal_multiplier = 7;
-	int64 reward_validity = 8;           // winning reward validity (ms)
+	repeated FreeBetReward rewards = 3;
+	message FreeBetReward {
+		string currency = 1;                 // settlement currency
+		google.protobuf.Struct template = 2; // bet template
+		int32 bet_count = 3;
+		int64 free_bet_validity = 4;         // ms, 0 = no expiration
+		int32 wagering_requirement = 5;
+		string max_withdrawal_multiplier = 6;
+		int64 reward_validity = 7;           // winning reward validity (ms)
+	}
 }
 
 // ============================================
@@ -48,18 +55,19 @@ message FreeBetConfig {
 // Bonus money config for promo code campaign
 message PromoCodeBonusMoneyConfig {
 	bool enabled = 1;
-	string reward_type = 2;              // cash | bonus
-	string amount = 3;                   // fixed amount
-	int32 wagering_requirement = 4;
-	string max_withdrawal_multiplier = 5;
-	int64 reward_validity = 6;           // ms, 0 = no expiration
+	string currency = 2;
+	string reward_type = 3;              // cash | bonus
+	string amount = 4;                   // fixed amount
+	int32 wagering_requirement = 5;
+	string max_withdrawal_multiplier = 6;
+	int64 reward_validity = 7;           // ms, 0 = no expiration
 }
 
 // Campaign reward configs (all optional)
 message PromoCodeRewardConfigs {
-	PromoCodeBonusMoneyConfig bonus_money_config = 1;
-	repeated FreeSpinConfig free_spin_configs = 2;
-	repeated FreeBetConfig free_bet_configs = 3;
+	optional PromoCodeBonusMoneyConfig bonus_money_config = 1;
+	optional FreeSpinConfig free_spin_config = 2;
+	optional FreeBetConfig free_bet_config = 3;
 }
 
 // Deposit condition for promo code campaign
@@ -263,4 +271,46 @@ message GeneratePromoCodesRequest {
 
 message GeneratePromoCodesResponse {
 	int32 generated_count = 1;
+}
+
+// ============================================
+// User Promo Code APIs
+// ============================================
+
+// GetPromoCodeInfo - Query promo code information
+message GetPromoCodeInfoRequest {
+	string code = 1;
+}
+
+message GetPromoCodeInfoResponse {
+	string code = 1;
+	string code_type = 2;                        // one_time | universal
+	string campaign_name = 3;
+	string campaign_status = 4;                  // active | paused | disabled
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+	int32 usage_count = 7;                       // this code's usage count
+	int32 max_usage_limit = 8;                   // max usage limit (for universal)
+	bool already_used_by_user = 9;               // whether current user has already used this promo code campaign
+	PromoCodeRewardConfigs reward_configs = 10;
+	PromoCodeConditions reward_conditions = 11;
+	repeated ConditionValidationResult condition_results = 12;
+
+	// Claimability status
+	bool claimable = 13;                         // whether the code can be claimed by this user
+	string unclaimable_reason = 14;              // reason why the code cannot be claimed (empty if claimable)
+}
+
+// ClaimPromoCode - Claim promo code reward
+message ClaimPromoCodeRequest {
+	string code = 1;
+}
+
+message ClaimPromoCodeResponse {
+}
+
+// Condition validation result
+message ConditionValidationResult {
+	string condition_type = 1;                   // deposit | registration_time | invitation | turnover | referrer | affiliate | verification_status
+	bool satisfied = 2;
 }

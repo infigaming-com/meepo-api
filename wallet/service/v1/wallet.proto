@@ -160,6 +160,22 @@ service Wallet {
 	// GeneratePromoCodes generates codes for a one_time campaign
 	rpc GeneratePromoCodes(GeneratePromoCodesRequest) returns (GeneratePromoCodesResponse) {}
 
+	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
+	rpc GetPromoCodeInfo(GetPromoCodeInfoRequest) returns (GetPromoCodeInfoResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/promo-code/info"
+			body: "*"
+		};
+	}
+
+	// ClaimPromoCode claims promo code reward for the current user
+	rpc ClaimPromoCode(ClaimPromoCodeRequest) returns (ClaimPromoCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/promo-code/claim"
+			body: "*"
+		};
+	}
+
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
 		option (google.api.http) = {
@@ -1185,8 +1201,8 @@ message RewardSequence {
 		string reward_percentage = 3;
 		string max_reward_amount = 4;
 		string max_withdrawal_multiplier = 5; // only available for bonus reward
-		repeated FreeSpinConfig free_spin_configs = 6;
-		repeated FreeBetConfig free_bet_configs = 7;
+		optional FreeSpinConfig free_spin_config = 6;
+		optional FreeBetConfig free_bet_config = 7;
 	}
 	int32 serial_number = 1;
 	string name = 2;

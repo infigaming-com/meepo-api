@@ -6544,6 +6544,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse'
+    /v1/wallet/promo-code/claim:
+        post:
+            tags:
+                - Wallet
+            description: ClaimPromoCode claims promo code reward for the current user
+            operationId: Wallet_ClaimPromoCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.ClaimPromoCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ClaimPromoCodeResponse'
+    /v1/wallet/promo-code/info:
+        post:
+            tags:
+                - Wallet
+            description: GetPromoCodeInfo returns promo code information and validates conditions for the current user
+            operationId: Wallet_GetPromoCodeInfo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetPromoCodeInfoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetPromoCodeInfoResponse'
     /v1/wallet/responsible-gambling/config/add:
         post:
             tags:
@@ -19477,6 +19515,23 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.ClaimPromoCodeRequest:
+            type: object
+            properties:
+                code:
+                    type: string
+            description: ClaimPromoCode - Claim promo code reward
+        api.wallet.service.v1.ClaimPromoCodeResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.ConditionValidationResult:
+            type: object
+            properties:
+                conditionType:
+                    type: string
+                satisfied:
+                    type: boolean
+            description: Condition validation result
         api.wallet.service.v1.CreatePromoCodeCampaignResponse:
             type: object
             properties: {}
@@ -19622,6 +19677,16 @@ components:
                     type: boolean
                 rewardType:
                     type: string
+                rewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig_FreeBetReward'
+            description: Free bet config for deposit reward or promo code
+        api.wallet.service.v1.FreeBetConfig_FreeBetReward:
+            type: object
+            properties:
+                currency:
+                    type: string
                 template:
                     type: object
                 betCount:
@@ -19636,7 +19701,6 @@ components:
                     type: string
                 rewardValidity:
                     type: string
-            description: Free bet config for deposit reward or promo code
         api.wallet.service.v1.FreeSpinConfig:
             type: object
             properties:
@@ -19644,6 +19708,14 @@ components:
                     type: boolean
                 rewardType:
                     type: string
+                rewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig_FreeSpinReward'
+            description: Free spin config for deposit reward or promo code
+        api.wallet.service.v1.FreeSpinConfig_FreeSpinReward:
+            type: object
+            properties:
                 currency:
                     type: string
                 providerId:
@@ -19665,7 +19737,6 @@ components:
                     type: string
                 rewardValidity:
                     type: string
-            description: Free spin config for deposit reward or promo code
         api.wallet.service.v1.GeneratePromoCodesResponse:
             type: object
             properties:
@@ -19758,6 +19829,50 @@ components:
                 totalCashUsd:
                     type: string
                 totalCashReportingCurrency:
+                    type: string
+        api.wallet.service.v1.GetPromoCodeInfoRequest:
+            type: object
+            properties:
+                code:
+                    type: string
+            description: GetPromoCodeInfo - Query promo code information
+        api.wallet.service.v1.GetPromoCodeInfoResponse:
+            type: object
+            properties:
+                code:
+                    type: string
+                codeType:
+                    type: string
+                campaignName:
+                    type: string
+                campaignStatus:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                usageCount:
+                    type: integer
+                    format: int32
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                alreadyUsedByUser:
+                    type: boolean
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+                rewardConditions:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                conditionResults:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.ConditionValidationResult'
+                claimable:
+                    type: boolean
+                    description: Claimability status
+                unclaimableReason:
                     type: string
         api.wallet.service.v1.GetUserBalanceDetailsRequest:
             type: object
@@ -20255,6 +20370,8 @@ components:
             properties:
                 enabled:
                     type: boolean
+                currency:
+                    type: string
                 rewardType:
                     type: string
                 amount:
@@ -20342,14 +20459,10 @@ components:
             properties:
                 bonusMoneyConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeBonusMoneyConfig'
-                freeSpinConfigs:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
-                freeBetConfigs:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
+                freeSpinConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
             description: Campaign reward configs (all optional)
         api.wallet.service.v1.PromoCodeUsageListItem:
             type: object
@@ -20497,14 +20610,10 @@ components:
                     type: string
                 maxWithdrawalMultiplier:
                     type: string
-                freeSpinConfigs:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
-                freeBetConfigs:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
+                freeSpinConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
             type: object
             properties: {}

@@ -7069,6 +7069,228 @@ var _ interface {
 	ErrorName() string
 } = ListAffiliateBillsResponseValidationError{}
 
+// Validate checks the field values on GetUserPromoConditionInfoRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetUserPromoConditionInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserPromoConditionInfoRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserPromoConditionInfoRequestMultiError, or nil if none found.
+func (m *GetUserPromoConditionInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserPromoConditionInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for InvitationTimeRangeDays
+
+	if len(errors) > 0 {
+		return GetUserPromoConditionInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserPromoConditionInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserPromoConditionInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserPromoConditionInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserPromoConditionInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserPromoConditionInfoRequestMultiError) AllErrors() []error { return m }
+
+// GetUserPromoConditionInfoRequestValidationError is the validation error
+// returned by GetUserPromoConditionInfoRequest.Validate if the designated
+// constraints aren't met.
+type GetUserPromoConditionInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserPromoConditionInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserPromoConditionInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserPromoConditionInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserPromoConditionInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserPromoConditionInfoRequestValidationError) ErrorName() string {
+	return "GetUserPromoConditionInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserPromoConditionInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserPromoConditionInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserPromoConditionInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserPromoConditionInfoRequestValidationError{}
+
+// Validate checks the field values on GetUserPromoConditionInfoResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetUserPromoConditionInfoResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserPromoConditionInfoResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserPromoConditionInfoResponseMultiError, or nil if none found.
+func (m *GetUserPromoConditionInfoResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserPromoConditionInfoResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Tier1UserId
+
+	// no validation rules for Tier1ReferralCode
+
+	// no validation rules for QualifiedReferralCount
+
+	// no validation rules for AffiliateId
+
+	if len(errors) > 0 {
+		return GetUserPromoConditionInfoResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserPromoConditionInfoResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserPromoConditionInfoResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserPromoConditionInfoResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserPromoConditionInfoResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserPromoConditionInfoResponseMultiError) AllErrors() []error { return m }
+
+// GetUserPromoConditionInfoResponseValidationError is the validation error
+// returned by GetUserPromoConditionInfoResponse.Validate if the designated
+// constraints aren't met.
+type GetUserPromoConditionInfoResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserPromoConditionInfoResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserPromoConditionInfoResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserPromoConditionInfoResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserPromoConditionInfoResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserPromoConditionInfoResponseValidationError) ErrorName() string {
+	return "GetUserPromoConditionInfoResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserPromoConditionInfoResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserPromoConditionInfoResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserPromoConditionInfoResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserPromoConditionInfoResponseValidationError{}
+
 // Validate checks the field values on ListAffiliatesResponse_Affiliate with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are

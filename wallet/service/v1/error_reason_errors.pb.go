@@ -1828,3 +1828,65 @@ func IsListPromoCodeUsagesFailed(err error) bool {
 func ErrorListPromoCodeUsagesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_PROMO_CODE_USAGES_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// GetPromoCodeInfo and ClaimPromoCode errors
+func IsGetPromoCodeInfoFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_PROMO_CODE_INFO_FAILED.String() && e.Code == 500
+}
+
+// GetPromoCodeInfo and ClaimPromoCode errors
+func ErrorGetPromoCodeInfoFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_PROMO_CODE_INFO_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimPromoCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_PROMO_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorClaimPromoCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLAIM_PROMO_CODE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeConditionsNotMet(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CONDITIONS_NOT_MET.String() && e.Code == 500
+}
+
+func ErrorPromoCodeConditionsNotMet(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CONDITIONS_NOT_MET.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeCampaignExpired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_EXPIRED.String() && e.Code == 500
+}
+
+func ErrorPromoCodeCampaignExpired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_EXPIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPromoCodeCampaignNotStarted(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NOT_STARTED.String() && e.Code == 500
+}
+
+func ErrorPromoCodeCampaignNotStarted(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NOT_STARTED.String(), fmt.Sprintf(format, args...))
+}
