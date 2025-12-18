@@ -148,7 +148,7 @@ message ListUsersRequest {
 	repeated string tags = 2; // not available for now
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
-	optional int32 vip_level = 5;
+	optional string vip_level = 5;
 	optional string country = 6;
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
@@ -180,7 +180,7 @@ message ListUsersResponse {
 		string username = 6;
 		string email = 7;
 		string mobile = 8;
-		int32 vip_level = 9;
+		string vip_level = 9;
 		int32 kyc_level = 10;
 		string deposit_usd = 11;
 		string withdraw_usd = 12;

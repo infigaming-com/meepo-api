@@ -23,14 +23,18 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeAffiliateCreateAffiliate = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliate"
 const OperationBackofficeAffiliateCreateCampaign = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
 const OperationBackofficeAffiliateCreateCommissionPlan = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
+const OperationBackofficeAffiliateCreatePostback = "/api.backoffice.service.v1.BackofficeAffiliate/CreatePostback"
 const OperationBackofficeAffiliateDeleteAffiliate = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
 const OperationBackofficeAffiliateDeleteCampaign = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCampaign"
 const OperationBackofficeAffiliateDeleteCommissionPlan = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCommissionPlan"
+const OperationBackofficeAffiliateDeletePostback = "/api.backoffice.service.v1.BackofficeAffiliate/DeletePostback"
 const OperationBackofficeAffiliateGetAffiliateDetails = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
 const OperationBackofficeAffiliateGetCommissionPlan = "/api.backoffice.service.v1.BackofficeAffiliate/GetCommissionPlan"
 const OperationBackofficeAffiliateGetReferralPlan = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
 const OperationBackofficeAffiliateListAffiliateBills = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
 const OperationBackofficeAffiliateListAffiliateCampaigns = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
+const OperationBackofficeAffiliateListAffiliateCommissionPlans = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCommissionPlans"
+const OperationBackofficeAffiliateListAffiliateDomains = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateDomains"
 const OperationBackofficeAffiliateListAffiliateUsers = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
 const OperationBackofficeAffiliateListAffiliates = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
 const OperationBackofficeAffiliateListAllCommissionPlans = "/api.backoffice.service.v1.BackofficeAffiliate/ListAllCommissionPlans"
@@ -38,23 +42,30 @@ const OperationBackofficeAffiliateListCampaigns = "/api.backoffice.service.v1.Ba
 const OperationBackofficeAffiliateListCommissionPlans = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissionPlans"
 const OperationBackofficeAffiliateListCommissions = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
 const OperationBackofficeAffiliateListEvents = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
+const OperationBackofficeAffiliateListPostbacks = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbacks"
+const OperationBackofficeAffiliateSetAffiliateDomain = "/api.backoffice.service.v1.BackofficeAffiliate/SetAffiliateDomain"
 const OperationBackofficeAffiliateSetReferralPlan = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
 const OperationBackofficeAffiliateUpdateAffiliate = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliate"
 const OperationBackofficeAffiliateUpdateCampaign = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
 const OperationBackofficeAffiliateUpdateCommissionPlan = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCommissionPlan"
+const OperationBackofficeAffiliateUpdatePostback = "/api.backoffice.service.v1.BackofficeAffiliate/UpdatePostback"
 
 type BackofficeAffiliateHTTPServer interface {
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*v1.CreateCommissionPlanResponse, error)
+	CreatePostback(context.Context, *CreatePostbackRequest) (*v1.CreatePostbackResponse, error)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*v1.DeleteCampaignResponse, error)
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
+	DeletePostback(context.Context, *DeletePostbackRequest) (*v1.DeletePostbackResponse, error)
 	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error)
 	GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*v1.GetCommissionPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
 	ListAffiliateCampaigns(context.Context, *ListAffiliateCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error)
+	ListAffiliateDomains(context.Context, *ListAffiliateDomainsRequest) (*v1.ListAffiliateDomainsResponse, error)
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
 	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error)
@@ -62,10 +73,13 @@ type BackofficeAffiliateHTTPServer interface {
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
+	ListPostbacks(context.Context, *ListPostbacksRequest) (*v1.ListPostbacksResponse, error)
+	SetAffiliateDomain(context.Context, *SetAffiliateDomainRequest) (*v1.SetAffiliateDomainResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
 	UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*v1.UpdateCommissionPlanResponse, error)
+	UpdatePostback(context.Context, *UpdatePostbackRequest) (*v1.UpdatePostbackResponse, error)
 }
 
 func RegisterBackofficeAffiliateHTTPServer(s *http.Server, srv BackofficeAffiliateHTTPServer) {
@@ -76,6 +90,7 @@ func RegisterBackofficeAffiliateHTTPServer(s *http.Server, srv BackofficeAffilia
 	r.POST("/v1/backoffice/affiliate/commission/plan/list", _BackofficeAffiliate_ListCommissionPlans0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/commission/plan/delete", _BackofficeAffiliate_DeleteCommissionPlan0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/commission/plan/list/all", _BackofficeAffiliate_ListAllCommissionPlans0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/commission/plan/list/affiliate", _BackofficeAffiliate_ListAffiliateCommissionPlans0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/create", _BackofficeAffiliate_CreateAffiliate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/update", _BackofficeAffiliate_UpdateAffiliate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/list", _BackofficeAffiliate_ListAffiliates0_HTTP_Handler(srv))
@@ -86,6 +101,12 @@ func RegisterBackofficeAffiliateHTTPServer(s *http.Server, srv BackofficeAffilia
 	r.POST("/v1/backoffice/affiliate/campaign/list", _BackofficeAffiliate_ListCampaigns0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/campaign/list/by_affiliate", _BackofficeAffiliate_ListAffiliateCampaigns0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/campaign/delete", _BackofficeAffiliate_DeleteCampaign0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/postback/create", _BackofficeAffiliate_CreatePostback0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/postback/update", _BackofficeAffiliate_UpdatePostback0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/postback/delete", _BackofficeAffiliate_DeletePostback0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/postback/list", _BackofficeAffiliate_ListPostbacks0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/domain/list", _BackofficeAffiliate_ListAffiliateDomains0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/domain/set", _BackofficeAffiliate_SetAffiliateDomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/event/list", _BackofficeAffiliate_ListEvents0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/commission/list", _BackofficeAffiliate_ListCommissions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/user/list", _BackofficeAffiliate_ListAffiliateUsers0_HTTP_Handler(srv))
@@ -222,6 +243,28 @@ func _BackofficeAffiliate_ListAllCommissionPlans0_HTTP_Handler(srv BackofficeAff
 			return err
 		}
 		reply := out.(*v1.ListAllCommissionPlansResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_ListAffiliateCommissionPlans0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListAffiliateCommissionPlansRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateListAffiliateCommissionPlans)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListAffiliateCommissionPlans(ctx, req.(*ListAffiliateCommissionPlansRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListAffiliateCommissionPlansResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -446,6 +489,138 @@ func _BackofficeAffiliate_DeleteCampaign0_HTTP_Handler(srv BackofficeAffiliateHT
 	}
 }
 
+func _BackofficeAffiliate_CreatePostback0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreatePostbackRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateCreatePostback)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreatePostback(ctx, req.(*CreatePostbackRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.CreatePostbackResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_UpdatePostback0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdatePostbackRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateUpdatePostback)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdatePostback(ctx, req.(*UpdatePostbackRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdatePostbackResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_DeletePostback0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeletePostbackRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateDeletePostback)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeletePostback(ctx, req.(*DeletePostbackRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeletePostbackResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_ListPostbacks0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListPostbacksRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateListPostbacks)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListPostbacks(ctx, req.(*ListPostbacksRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListPostbacksResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_ListAffiliateDomains0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListAffiliateDomainsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateListAffiliateDomains)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListAffiliateDomains(ctx, req.(*ListAffiliateDomainsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListAffiliateDomainsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_SetAffiliateDomain0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetAffiliateDomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateSetAffiliateDomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetAffiliateDomain(ctx, req.(*SetAffiliateDomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetAffiliateDomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeAffiliate_ListEvents0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListEventsRequest
@@ -582,14 +757,18 @@ type BackofficeAffiliateHTTPClient interface {
 	CreateAffiliate(ctx context.Context, req *CreateAffiliateRequest, opts ...http.CallOption) (rsp *v1.CreateAffiliateResponse, err error)
 	CreateCampaign(ctx context.Context, req *CreateCampaignRequest, opts ...http.CallOption) (rsp *v1.CreateCampaignResponse, err error)
 	CreateCommissionPlan(ctx context.Context, req *CreateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.CreateCommissionPlanResponse, err error)
+	CreatePostback(ctx context.Context, req *CreatePostbackRequest, opts ...http.CallOption) (rsp *v1.CreatePostbackResponse, err error)
 	DeleteAffiliate(ctx context.Context, req *DeleteAffiliateRequest, opts ...http.CallOption) (rsp *v1.DeleteAffiliateResponse, err error)
 	DeleteCampaign(ctx context.Context, req *DeleteCampaignRequest, opts ...http.CallOption) (rsp *v1.DeleteCampaignResponse, err error)
 	DeleteCommissionPlan(ctx context.Context, req *DeleteCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.DeleteCommissionPlanResponse, err error)
+	DeletePostback(ctx context.Context, req *DeletePostbackRequest, opts ...http.CallOption) (rsp *v1.DeletePostbackResponse, err error)
 	GetAffiliateDetails(ctx context.Context, req *GetAffiliateDetailsRequest, opts ...http.CallOption) (rsp *v1.GetAffiliateDetailsResponse, err error)
 	GetCommissionPlan(ctx context.Context, req *GetCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.GetCommissionPlanResponse, err error)
 	GetReferralPlan(ctx context.Context, req *GetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.GetReferralPlanResponse, err error)
 	ListAffiliateBills(ctx context.Context, req *ListAffiliateBillsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateBillsResponse, err error)
 	ListAffiliateCampaigns(ctx context.Context, req *ListAffiliateCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListCampaignsResponse, err error)
+	ListAffiliateCommissionPlans(ctx context.Context, req *ListAffiliateCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateCommissionPlansResponse, err error)
+	ListAffiliateDomains(ctx context.Context, req *ListAffiliateDomainsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateDomainsResponse, err error)
 	ListAffiliateUsers(ctx context.Context, req *ListAffiliateUsersRequest, opts ...http.CallOption) (rsp *v1.ListUsersResponse, err error)
 	ListAffiliates(ctx context.Context, req *ListAffiliatesRequest, opts ...http.CallOption) (rsp *v1.ListAffiliatesResponse, err error)
 	ListAllCommissionPlans(ctx context.Context, req *ListAllCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListAllCommissionPlansResponse, err error)
@@ -597,10 +776,13 @@ type BackofficeAffiliateHTTPClient interface {
 	ListCommissionPlans(ctx context.Context, req *ListCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListCommissionPlansResponse, err error)
 	ListCommissions(ctx context.Context, req *ListCommissionsRequest, opts ...http.CallOption) (rsp *v1.ListCommissionsResponse, err error)
 	ListEvents(ctx context.Context, req *ListEventsRequest, opts ...http.CallOption) (rsp *v1.ListEventsResponse, err error)
+	ListPostbacks(ctx context.Context, req *ListPostbacksRequest, opts ...http.CallOption) (rsp *v1.ListPostbacksResponse, err error)
+	SetAffiliateDomain(ctx context.Context, req *SetAffiliateDomainRequest, opts ...http.CallOption) (rsp *v1.SetAffiliateDomainResponse, err error)
 	SetReferralPlan(ctx context.Context, req *SetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.SetReferralPlanResponse, err error)
 	UpdateAffiliate(ctx context.Context, req *UpdateAffiliateRequest, opts ...http.CallOption) (rsp *v1.UpdateAffiliateResponse, err error)
 	UpdateCampaign(ctx context.Context, req *UpdateCampaignRequest, opts ...http.CallOption) (rsp *v1.UpdateCampaignResponse, err error)
 	UpdateCommissionPlan(ctx context.Context, req *UpdateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.UpdateCommissionPlanResponse, err error)
+	UpdatePostback(ctx context.Context, req *UpdatePostbackRequest, opts ...http.CallOption) (rsp *v1.UpdatePostbackResponse, err error)
 }
 
 type BackofficeAffiliateHTTPClientImpl struct {
@@ -650,6 +832,19 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateCommissionPlan(ctx context.Con
 	return &out, nil
 }
 
+func (c *BackofficeAffiliateHTTPClientImpl) CreatePostback(ctx context.Context, in *CreatePostbackRequest, opts ...http.CallOption) (*v1.CreatePostbackResponse, error) {
+	var out v1.CreatePostbackResponse
+	pattern := "/v1/backoffice/affiliate/postback/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateCreatePostback))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeAffiliateHTTPClientImpl) DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...http.CallOption) (*v1.DeleteAffiliateResponse, error) {
 	var out v1.DeleteAffiliateResponse
 	pattern := "/v1/backoffice/affiliate/delete"
@@ -681,6 +876,19 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeleteCommissionPlan(ctx context.Con
 	pattern := "/v1/backoffice/affiliate/commission/plan/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAffiliateDeleteCommissionPlan))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) DeletePostback(ctx context.Context, in *DeletePostbackRequest, opts ...http.CallOption) (*v1.DeletePostbackResponse, error) {
+	var out v1.DeletePostbackResponse
+	pattern := "/v1/backoffice/affiliate/postback/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateDeletePostback))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -746,6 +954,32 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateCampaigns(ctx context.C
 	pattern := "/v1/backoffice/affiliate/campaign/list/by_affiliate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAffiliateListAffiliateCampaigns))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateCommissionPlans(ctx context.Context, in *ListAffiliateCommissionPlansRequest, opts ...http.CallOption) (*v1.ListAffiliateCommissionPlansResponse, error) {
+	var out v1.ListAffiliateCommissionPlansResponse
+	pattern := "/v1/backoffice/affiliate/commission/plan/list/affiliate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateListAffiliateCommissionPlans))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateDomains(ctx context.Context, in *ListAffiliateDomainsRequest, opts ...http.CallOption) (*v1.ListAffiliateDomainsResponse, error) {
+	var out v1.ListAffiliateDomainsResponse
+	pattern := "/v1/backoffice/affiliate/domain/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateListAffiliateDomains))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -845,6 +1079,32 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListEvents(ctx context.Context, in *
 	return &out, nil
 }
 
+func (c *BackofficeAffiliateHTTPClientImpl) ListPostbacks(ctx context.Context, in *ListPostbacksRequest, opts ...http.CallOption) (*v1.ListPostbacksResponse, error) {
+	var out v1.ListPostbacksResponse
+	pattern := "/v1/backoffice/affiliate/postback/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateListPostbacks))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) SetAffiliateDomain(ctx context.Context, in *SetAffiliateDomainRequest, opts ...http.CallOption) (*v1.SetAffiliateDomainResponse, error) {
+	var out v1.SetAffiliateDomainResponse
+	pattern := "/v1/backoffice/affiliate/domain/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateSetAffiliateDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeAffiliateHTTPClientImpl) SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...http.CallOption) (*v1.SetReferralPlanResponse, error) {
 	var out v1.SetReferralPlanResponse
 	pattern := "/v1/backoffice/referral/plan/set"
@@ -889,6 +1149,19 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateCommissionPlan(ctx context.Con
 	pattern := "/v1/backoffice/affiliate/commission/plan/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAffiliateUpdateCommissionPlan))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) UpdatePostback(ctx context.Context, in *UpdatePostbackRequest, opts ...http.CallOption) (*v1.UpdatePostbackResponse, error) {
+	var out v1.UpdatePostbackResponse
+	pattern := "/v1/backoffice/affiliate/postback/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateUpdatePostback))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

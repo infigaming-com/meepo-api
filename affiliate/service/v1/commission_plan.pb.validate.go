@@ -1835,6 +1835,295 @@ var _ interface {
 	ErrorName() string
 } = ListAllCommissionPlansResponseValidationError{}
 
+// Validate checks the field values on ListAffiliateCommissionPlansRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListAffiliateCommissionPlansRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAffiliateCommissionPlansRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListAffiliateCommissionPlansRequestMultiError, or nil if none found.
+func (m *ListAffiliateCommissionPlansRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAffiliateCommissionPlansRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAffiliateCommissionPlansRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAffiliateCommissionPlansRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAffiliateCommissionPlansRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for AffiliateId
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListAffiliateCommissionPlansRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAffiliateCommissionPlansRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListAffiliateCommissionPlansRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListAffiliateCommissionPlansRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAffiliateCommissionPlansRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAffiliateCommissionPlansRequestMultiError) AllErrors() []error { return m }
+
+// ListAffiliateCommissionPlansRequestValidationError is the validation error
+// returned by ListAffiliateCommissionPlansRequest.Validate if the designated
+// constraints aren't met.
+type ListAffiliateCommissionPlansRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAffiliateCommissionPlansRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAffiliateCommissionPlansRequestValidationError) ErrorName() string {
+	return "ListAffiliateCommissionPlansRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAffiliateCommissionPlansRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAffiliateCommissionPlansRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAffiliateCommissionPlansRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAffiliateCommissionPlansRequestValidationError{}
+
+// Validate checks the field values on ListAffiliateCommissionPlansResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListAffiliateCommissionPlansResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAffiliateCommissionPlansResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListAffiliateCommissionPlansResponseMultiError, or nil if none found.
+func (m *ListAffiliateCommissionPlansResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAffiliateCommissionPlansResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCommissionPlans() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListAffiliateCommissionPlansResponseValidationError{
+						field:  fmt.Sprintf("CommissionPlans[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListAffiliateCommissionPlansResponseValidationError{
+						field:  fmt.Sprintf("CommissionPlans[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListAffiliateCommissionPlansResponseValidationError{
+					field:  fmt.Sprintf("CommissionPlans[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListAffiliateCommissionPlansResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAffiliateCommissionPlansResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListAffiliateCommissionPlansResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListAffiliateCommissionPlansResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAffiliateCommissionPlansResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAffiliateCommissionPlansResponseMultiError) AllErrors() []error { return m }
+
+// ListAffiliateCommissionPlansResponseValidationError is the validation error
+// returned by ListAffiliateCommissionPlansResponse.Validate if the designated
+// constraints aren't met.
+type ListAffiliateCommissionPlansResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAffiliateCommissionPlansResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAffiliateCommissionPlansResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAffiliateCommissionPlansResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAffiliateCommissionPlansResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAffiliateCommissionPlansResponseValidationError) ErrorName() string {
+	return "ListAffiliateCommissionPlansResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAffiliateCommissionPlansResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAffiliateCommissionPlansResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAffiliateCommissionPlansResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAffiliateCommissionPlansResponseValidationError{}
+
 // Validate checks the field values on CommissionPlanConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5272,3 +5561,162 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = FlatFeeConfigValidationError{}
+
+// Validate checks the field values on
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanMultiError, or
+// nil if none found.
+func (m *ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CommissionPlanId
+
+	// no validation rules for Title
+
+	// no validation rules for Status
+
+	// no validation rules for Source
+
+	// no validation rules for BaseCurrency
+
+	// no validation rules for SourceOperatorName
+
+	if all {
+		switch v := interface{}(m.GetPlanConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError{
+					field:  "PlanConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError{
+					field:  "PlanConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPlanConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError{
+				field:  "PlanConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanMultiError is an
+// error wrapping multiple validation errors returned by
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan.ValidateAll()
+// if the designated constraints aren't met.
+type ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanMultiError) AllErrors() []error {
+	return m
+}
+
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError
+// is the validation error returned by
+// ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan.Validate if
+// the designated constraints aren't met.
+type ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError) ErrorName() string {
+	return "ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAffiliateCommissionPlansResponse_AffiliateCommissionPlan.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAffiliateCommissionPlansResponse_AffiliateCommissionPlanValidationError{}

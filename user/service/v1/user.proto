@@ -335,7 +335,12 @@ service User {
 
 	rpc SetOperatorRegistrationFieldConfig(SetOperatorRegistrationFieldConfigRequest) returns (SetOperatorRegistrationFieldConfigResponse) {}
 
-	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {}
+	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/registration-field-config/get"
+			body: "*"
+		};
+	}
 
 	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
 		option (google.api.http) = {
@@ -836,6 +841,7 @@ message UpdateUserRequest {
 	optional string campaign_url = 20;
 	optional int64 campaign_id = 21;
 	optional int64 affiliate_id = 22;
+	int64 operator_user_id = 23; // 操作者的用户ID，用于验证角色分配权限
 }
 
 message UpdateUserResponse {
@@ -896,7 +902,7 @@ message ListUsersResponse {
 		string username = 6;
 		string email = 7;
 		string mobile = 8;
-		int32 vip_level = 9;
+		string vip_level = 9;
 		int32 kyc_level = 10;
 		string deposit_usd = 11;
 		string withdraw_usd = 12;
@@ -935,6 +941,7 @@ message CreateUserRequest {
 	optional string mobile = 4;
 	api.common.OperatorContext operator_context = 5;
 	int64 role_id = 6;
+	int64 user_id = 7; // 操作者的用户ID，用于验证角色分配权限
 }
 
 message CreateUserResponse {
@@ -1030,7 +1037,7 @@ message GetUserProfileResponse {
 	}
 	string nickname = 1;
 	int64 user_id = 2;
-	int32 vip_level = 3; // Not available for now, only return 1
+	string vip_level = 3;
 	bool online = 4;
 	bool ban_withdraw = 5;
 	bool ban_game = 6;
@@ -1065,6 +1072,7 @@ message CreateRoleRequest {
 	string name = 1;
 	repeated Permission permissions = 2;
 	int64 user_id = 3;
+	common.OperatorContext operator_context = 4;
 }
 
 message Permission {
@@ -1077,6 +1085,7 @@ message CreateRoleResponse {}
 message ListRolesRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
+	common.OperatorContext operator_context = 3;
 }
 
 message Role {
@@ -1121,7 +1130,8 @@ message UpdateRoleRequest {
 	int64 role_id = 1;
 	string name = 2;
 	repeated Permission permissions = 3;
-	int64 current_role_id = 4;
+	common.OperatorContext operator_context = 4;
+	int64 user_id = 5;
 }
 
 message UpdateRoleResponse {}
@@ -1159,6 +1169,7 @@ message GetOverviewDashboardFromUserResponse {
 
 message DeleteRoleRequest {
 	int64 role_id = 1;
+	common.OperatorContext operator_context = 2;
 }
 
 message DeleteRoleResponse {}

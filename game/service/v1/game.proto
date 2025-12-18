@@ -230,6 +230,59 @@ service Game {
 			body: "*"
 		};
 	}
+	// 获取指定时间范围内用户存款金额所产生的GGR
+	rpc GetDepositCreditsGGR(GetDepositCreditsGGRRequest) returns (GetDepositCreditsGGRResponse) {
+	}
+
+	// ============== Game Tags APIs ==============
+
+	// List tags visible to operator (with inheritance)
+	rpc BackofficeListGameTags(BackofficeListGameTagsRequest) returns (BackofficeListGameTagsResponse) {
+	}
+
+	// Create tag at operator's own level
+	rpc BackofficeCreateGameTag(BackofficeCreateGameTagRequest) returns (BackofficeCreateGameTagResponse) {
+	}
+
+	// Delete tag (own level or lower only)
+	rpc BackofficeDeleteGameTag(BackofficeDeleteGameTagRequest) returns (BackofficeDeleteGameTagResponse) {
+	}
+
+	// Update tag name
+	rpc BackofficeUpdateGameTag(BackofficeUpdateGameTagRequest) returns (BackofficeUpdateGameTagResponse) {
+	}
+
+	// Add games to a tag
+	rpc BackofficeAddGamesToTag(BackofficeAddGamesToTagRequest) returns (BackofficeAddGamesToTagResponse) {
+	}
+
+	// Remove games from a tag
+	rpc BackofficeRemoveGamesFromTag(BackofficeRemoveGamesFromTagRequest) returns (BackofficeRemoveGamesFromTagResponse) {
+	}
+
+	// Add provider to tag (adds all its games)
+	rpc BackofficeAddProviderToTag(BackofficeAddProviderToTagRequest) returns (BackofficeAddProviderToTagResponse) {
+	}
+
+	// Remove provider from tag
+	rpc BackofficeRemoveProviderFromTag(BackofficeRemoveProviderFromTagRequest) returns (BackofficeRemoveProviderFromTagResponse) {
+	}
+
+	// Update game order inside a tag
+	rpc BackofficeUpdateGameOrderInTag(BackofficeUpdateGameOrderInTagRequest) returns (BackofficeUpdateGameOrderInTagResponse) {
+	}
+
+	// Batch update games in tag by filter (add or remove)
+	rpc BackofficeBatchUpdateTagGames(BackofficeBatchUpdateTagGamesRequest) returns (BackofficeBatchUpdateTagGamesResponse) {
+	}
+
+	// List providers under a tag
+	rpc BackofficeListProvidersUnderTag(BackofficeListProvidersUnderTagRequest) returns (BackofficeListProvidersUnderTagResponse) {
+	}
+
+	// List games under a tag (paginated)
+	rpc BackofficeListGamesUnderTag(BackofficeListGamesUnderTagRequest) returns (BackofficeListGamesUnderTagResponse) {
+	}
 
 }
 
@@ -273,8 +326,8 @@ message DeleteOperatorResponse {
 message GameFilter {
 	// provider id: provider list api
 	repeated string provider_ids = 1;
-	// tag: hot game, live casino, slots, etc..
-	string tag = 2;
+	// tag_id: tag ID for filtering games
+	int64 tag_id = 2;
 	// name: game name
 	string name = 3;
 }
@@ -307,6 +360,8 @@ message ListProvidersRequest {
 	optional bool pagination_enabled = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	// Operator context for hierarchical enabled status
+	api.common.OperatorContext operator_context = 8;
 }
 
 message ListProvidersResponse {
@@ -664,7 +719,9 @@ message BackofficeListGamesRequest {
 	optional string rtp_max = 12;
 	optional bool enabled = 13;
 	optional int32 page = 14;
-	optional int32 page_size = 15;	
+	optional int32 page_size = 15;
+	// Operator context for hierarchical enabled status
+	api.common.OperatorContext operator_context = 16;
 }
 
 message BackofficeListGamesResponse {
@@ -696,6 +753,7 @@ message BackofficeListGamesResponse {
 message UpdateGameRequest {
 	string game_id = 1;
 	optional bool enabled = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message UpdateGameResponse {
@@ -704,6 +762,7 @@ message UpdateGameResponse {
 message UpdateProviderRequest {
 	string provider_id = 1;
 	optional bool enabled = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message UpdateProviderResponse {
@@ -1910,4 +1969,227 @@ message GetPlayerFreebetsForFrontendRequest {
 message GetPlayerFreebetsForFrontendResponse {
 	repeated FreebetIssuedBonus bonuses = 1;
 	int32 total = 2;
+}
+
+// 获取指定时间范围内用户存款金额所产生的GGR请求
+message GetDepositCreditsGGRRequest {
+	int64 user_id = 1;
+	google.protobuf.Timestamp start_time = 2;
+	google.protobuf.Timestamp end_time = 3;
+	// 最小存款金额过滤，只有大于此金额的存款记录才会被计算
+	optional string min_deposit_amount = 4;
+	// operator context，用于 gRPC 调用
+	api.common.OperatorContext operator_context = 5;
+}
+
+// 获取指定时间范围内用户存款金额所产生的GGR响应
+message GetDepositCreditsGGRResponse {
+	// 按游戏类别分组的数据
+	message GameData {
+		string game_type = 1; // game category
+		string ggr_usd = 2;
+		string ggr_reporting_currency = 3;
+		string total_bet_usd = 4; // bet + debit 的 USD 总和
+		string total_bet_reporting_currency = 5; // bet + debit 的 reporting currency 总和
+		string total_win_usd = 6; // win + credit 的 USD 总和
+		string total_win_reporting_currency = 7; // win + credit 的 reporting currency 总和
+		string rtp = 8; // RTP (TotalWin / TotalBet * 100)
+	}
+	
+	// 按存款记录分组的数据
+	message DepositData {
+		int64 credit_id = 1; // 存款记录ID
+		string original_amount_reporting_currency = 2; // 原始存款金额 (reporting currency)
+		string total_ggr_usd = 3; // 该笔存款产生的总GGR (USD)
+		string total_ggr_reporting_currency = 4; // 该笔存款产生的总GGR (reporting currency)
+		string total_bet_usd = 5; // 该笔存款产生的总投注 (USD)
+		string total_bet_reporting_currency = 6; // 该笔存款产生的总投注 (reporting currency)
+		string total_win_usd = 7; // 该笔存款产生的总赢额 (USD)
+		string total_win_reporting_currency = 8; // 该笔存款产生的总赢额 (reporting currency)
+		repeated GameData game_data = 9; // 按游戏类别分组的详细数据
+	}
+	
+	repeated DepositData deposit_data = 1; // 按存款记录分组的数据列表
+}
+
+// ============== Game Tags Messages ==============
+
+message BackofficeListGameTagsRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string name = 2;    // Filter by name (fuzzy search)
+	optional bool enabled = 3;   // Filter by enabled status
+	int32 page = 4;              // Page number (default: 1)
+	int32 page_size = 5;         // Page size (default: 20)
+	api.common.OperatorContext target_operator_context = 6;  // Target operator to query tags for
+}
+
+message BackofficeListGameTagsResponse {
+	message CreatorInfo {
+		int64 operator_id = 1;
+		string operator_name = 2;
+	}
+	message ProviderInfo {
+		string provider_id = 1;
+		string provider_name = 2;
+	}
+	message GameTag {
+		int64 tag_id = 1;
+		string name = 2;
+		string level = 3;  // "system" | "retailer" | "company" | "operator"
+		bool editable = 4; // Can current operator edit this tag?
+		int64 created_at = 5;
+		CreatorInfo creator = 6;           // Creator operator info
+		repeated ProviderInfo providers = 7; // Providers in this tag
+		int32 games_count = 8;             // Number of games in this tag
+	}
+	repeated GameTag tags = 1;
+	int32 total = 2;     // Total count of matching tags
+	int32 page = 3;      // Current page
+	int32 page_size = 4; // Page size
+}
+
+message BackofficeCreateGameTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	string name = 2;
+}
+
+message BackofficeCreateGameTagResponse {
+	int64 tag_id = 1;
+}
+
+message BackofficeDeleteGameTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+}
+
+message BackofficeDeleteGameTagResponse {}
+
+message BackofficeUpdateGameTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 tag_id = 3;
+	string name = 4;
+}
+
+message BackofficeUpdateGameTagResponse {}
+
+message BackofficeAddGamesToTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	repeated string game_ids = 3;
+}
+
+message BackofficeAddGamesToTagResponse {}
+
+message BackofficeRemoveGamesFromTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	repeated string game_ids = 3;
+}
+
+message BackofficeRemoveGamesFromTagResponse {}
+
+message BackofficeAddProviderToTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string provider_id = 3;
+}
+
+message BackofficeAddProviderToTagResponse {
+	int32 games_added = 1;
+}
+
+message BackofficeRemoveProviderFromTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string provider_id = 3;
+}
+
+message BackofficeRemoveProviderFromTagResponse {
+	int32 games_removed = 1;
+}
+
+message BackofficeUpdateGameOrderInTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string game_id = 3;
+	int32 order_index = 4;
+	bool sticky = 5;
+}
+
+message BackofficeUpdateGameOrderInTagResponse {}
+
+message BackofficeBatchUpdateTagGamesRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string action = 3;  // "add" or "remove"
+	// Filter conditions
+	repeated string provider_ids = 4;
+	repeated string categories = 5;
+	repeated string fee_groups = 6;
+	optional string game_id = 7;  // Fuzzy search by game ID
+	optional string theme = 8;
+	optional bool support_bonus = 9;
+	optional bool free_spin = 10;
+	optional string rtp_min = 11;
+	optional string rtp_max = 12;
+}
+
+message BackofficeBatchUpdateTagGamesResponse {
+	int32 games_affected = 1;  // Number of games added or removed
+}
+
+message BackofficeListProvidersUnderTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+}
+
+message BackofficeListProvidersUnderTagResponse {
+	message ProviderInfo {
+		string provider_id = 1;
+		string provider_name = 2;
+		int32 total_game_count = 3;
+		int32 games_in_tag_count = 4;
+	}
+	repeated ProviderInfo providers = 1;
+}
+
+message BackofficeListGamesUnderTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	optional string provider_id = 3;
+	optional string game_id = 4;
+	repeated string support_currencies = 5;
+	repeated string restricted_countries = 6;
+	optional string relation_filter = 7; // "all" | "in_tag" | "not_in_tag"
+	int32 page = 8;
+	int32 page_size = 9;
+	optional string theme = 10;
+	optional bool support_bonus = 11;
+	optional bool free_spin = 12;
+	optional string rtp_min = 13;
+	optional string rtp_max = 14;
+}
+
+message BackofficeListGamesUnderTagResponse {
+	message GameInfo {
+		string game_id = 1;
+		string name = 2;
+		string provider_id = 3;
+		string provider_name = 4;
+		string category = 5;
+		string theme = 6;
+		repeated string support_currencies = 7;
+		repeated string restricted_countries = 8;
+		bool bonus_buy = 9;
+		bool in_tag = 10;      // Whether in this tag
+		int32 order_index = 11;
+		bool sticky = 12;
+		bool free_spin = 13;   // has_freespins from game
+		string rtp = 14;       // payout from game
+	}
+	repeated GameInfo games = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

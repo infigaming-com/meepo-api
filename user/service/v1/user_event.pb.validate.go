@@ -284,6 +284,8 @@ func (m *AddUserEvent) validate(all bool) error {
 
 	// no validation rules for RegisteredAt
 
+	// no validation rules for DefaultCurrency
+
 	if m.RegistrationUrl != nil {
 		// no validation rules for RegistrationUrl
 	}

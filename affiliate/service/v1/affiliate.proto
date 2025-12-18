@@ -29,6 +29,8 @@ service Affiliate {
 
     rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (ListAllCommissionPlansResponse) {}
 
+    rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (ListAffiliateCommissionPlansResponse) {}
+
     // -------------- Affiliate --------------
 
     rpc CreateAffiliate(CreateAffiliateRequest) returns (CreateAffiliateResponse) {}
@@ -50,6 +52,22 @@ service Affiliate {
     rpc ListCampaigns(ListCampaignsRequest) returns (ListCampaignsResponse) {}
 
     rpc DeleteCampaign(DeleteCampaignRequest) returns (DeleteCampaignResponse) {}
+
+    // -------------- Postback --------------
+
+    rpc CreatePostback(CreatePostbackRequest) returns (CreatePostbackResponse) {}
+
+    rpc UpdatePostback(UpdatePostbackRequest) returns (UpdatePostbackResponse) {}
+
+    rpc DeletePostback(DeletePostbackRequest) returns (DeletePostbackResponse) {}
+
+    rpc ListPostbacks(ListPostbacksRequest) returns (ListPostbacksResponse) {}
+
+     // -------------- Affiliate Domain --------------
+
+     rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (ListAffiliateDomainsResponse) {}
+
+     rpc SetAffiliateDomain(SetAffiliateDomainRequest) returns (SetAffiliateDomainResponse) {}
 
     // -------------- Event --------------
 
@@ -114,6 +132,14 @@ service Affiliate {
             body: "*"
         };
     }
+
+    rpc GetUserLossRevenueShareStats(GetUserLossRevenueShareStatsRequest) returns (GetUserLossRevenueShareStatsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/loss/revenue/share/stats/get"
+            body: "*"
+        };
+    }
+
 }
 
 message ContactType {
@@ -173,6 +199,7 @@ message ListAffiliatesRequest {
     optional int32 page_size = 6;
     api.common.OperatorContext target_operator_context = 7;
     api.common.OperatorContext initiator_operator_context = 8;
+    optional bool pagination = 9; // if nil, pagination is true
 }
 
 message ListAffiliatesResponse {
@@ -306,7 +333,6 @@ message ChannelConfig {
         string bundle_id = 3;
     }
     message AgencyChannelConfig {
-        string campaign_id = 1;
     }
     message GoogleAdsChannelConfig {
         string customer_id = 1;
@@ -457,6 +483,139 @@ message ListEventsResponse {
     int32 page_size = 4;
 }
 
+// -------------- Postback --------------
+
+message CreatePostbackRequest {
+    string postback_name = 1;
+    string status = 2; // active/inactive
+    repeated int64 campaign_ids = 3;
+    string action_type = 4; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    string postback_url = 5;
+    string request_method = 6; // GET/POST
+    int64 initiator_user_id = 7;
+    int32 initiator_user_role_id = 8;
+    api.common.OperatorContext initiator_operator_context = 9;
+}
+
+message CreatePostbackResponse {
+    int64 postback_id = 1;
+}
+
+message UpdatePostbackRequest {
+    int64 postback_id = 1;
+    string postback_name = 2;
+    string status = 3; // active/inactive
+    repeated int64 campaign_ids = 4;
+    string action_type = 5; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    string postback_url = 6;
+    string request_method = 7; // GET/POST
+    int64 initiator_user_id = 8;
+    int32 initiator_user_role_id = 9;
+    api.common.OperatorContext initiator_operator_context = 10;
+}
+
+message UpdatePostbackResponse {
+}
+
+message DeletePostbackRequest {
+    int64 postback_id = 1;
+    int64 initiator_user_id = 2;
+    int32 initiator_user_role_id = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message DeletePostbackResponse {
+}
+
+message ListPostbacksRequest {
+    optional int64 affiliate_id = 1;
+    optional string status = 2; // active/inactive
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    int64 initiator_user_id = 5;
+    int32 initiator_user_role_id = 6;
+    api.common.OperatorContext initiator_operator_context = 7;
+    api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ListPostbacksResponse {
+    message Postback {
+        message Campaign {
+            int64 campaign_id = 1;
+            string campaign_name = 2;
+        }
+        int64 postback_id = 1;
+        string postback_name = 2;
+        string status = 3; // active/inactive
+        int64 affiliate_id = 4;
+        string affiliate_name = 5;
+        int64 retailer_operator_id = 6;
+        string retailer_operator_name = 7;
+        int64 company_operator_id = 8;
+        string company_operator_name = 9;
+        int64 operator_id = 10;
+        string operator_name = 11;
+        repeated Campaign campaigns = 12;
+        string action_type = 13; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+        string postback_url = 14;
+        string request_method = 15; // GET/POST
+    }
+    repeated Postback postbacks = 1;
+    int32 total = 2;
+    int32 total_active = 3;
+    int32 total_inactive = 4;
+    int32 page = 5;
+    int32 page_size = 6;
+}
+
+// -------------- Affiliate Domain --------------
+
+
+
+// ListAffiliateDomains - returns domains based on initiator_role_id
+// For affiliate: returns only available domains (available_to_all and affiliate_ids are empty)
+// For operator: returns all domains with config details
+message ListAffiliateDomainsRequest {
+    int64 initiator_user_id = 1;
+    int64 initiator_role_id = 2;
+    api.common.OperatorContext initiator_operator_context = 3;
+    api.common.OperatorContext target_operator_context = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+}
+
+message ListAffiliateDomainsResponse {
+    message AffiliateDomain {
+        message Affiliate {
+            int64 affiliate_id = 1;
+            string affiliate_name = 2;
+            string affiliate_company_name = 3;
+        }
+        string domain = 1;
+        bool available_to_all = 2;          // only visible to operator
+        repeated Affiliate affiliates = 3;   // only visible to operator
+        int64 operator_id = 4;
+        int64 company_operator_id = 6;
+        int64 retailer_operator_id = 7;
+        string operator_name = 8;
+        string company_operator_name = 9;
+        string retailer_operator_name = 10;
+    }
+    repeated AffiliateDomain domains = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message SetAffiliateDomainRequest {
+    string domain = 1;
+    optional bool available_to_all = 2;
+    repeated int64 affiliate_ids = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message SetAffiliateDomainResponse {}
+
 // -------------- Commission --------------
 
 message ListCommissionsRequest {
@@ -487,21 +646,22 @@ message ListCommissionsResponse {
         bool paid = 5;
         int64 commission_plan_id = 6;
         string commission_plan_name = 7;
-        string commission_subtype = 8; // cpa/revshare/cpl/cpc/flat_fee
-        string reporting_currency = 9;
-        string revenue_usd = 10;
-        string revenue_reporting_currency = 11;
-        string commission_usd = 12;
-        string commission_reporting_currency = 13;
-        string adjust_amount_usd = 14;
-        string adjust_amount_reporting_currency = 15;
-        int64 affiliate_id = 16;
-        string affiliate_name = 17;
-        int64 user_id = 18;
-        string retailer_operator_name = 19;
-        string company_operator_name = 20;
-        string operator_name = 21;
-        int64 bill_id = 22;
+        string commission_type = 8; // cpa/revshare/cpl/cpc/flat_fee 
+        string commission_subtype = 9; // flat/flat_by_countries/progressive/progressive_by_countries
+        string reporting_currency = 10;
+        string revenue_usd = 11;
+        string revenue_reporting_currency = 12;
+        string commission_usd = 13;
+        string commission_reporting_currency = 14;
+        string adjust_amount_usd = 15;
+        string adjust_amount_reporting_currency = 16;
+        int64 affiliate_id = 17;
+        string affiliate_name = 18;
+        int64 user_id = 19;
+        string retailer_operator_name = 20;
+        string company_operator_name = 21;
+        string operator_name = 22;
+        int64 bill_id = 23;
     }
     repeated Commission commissions = 1;
     int32 total = 2;
@@ -624,3 +784,4 @@ message ListAffiliateBillsResponse {
     int32 page = 3;
     int32 page_size = 4;
 }
+

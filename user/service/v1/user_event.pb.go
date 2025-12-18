@@ -132,6 +132,7 @@ type AddUserEvent struct {
 	RegistrationUrl    *string                `protobuf:"bytes,10,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"` // combined both campaign url and referral code
 	Country            string                 `protobuf:"bytes,11,opt,name=country,proto3" json:"country,omitempty"`
 	RegisteredAt       int64                  `protobuf:"varint,12,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	DefaultCurrency    string                 `protobuf:"bytes,13,opt,name=default_currency,json=defaultCurrency,proto3" json:"default_currency,omitempty"` // passed from frontend, related to country
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -248,6 +249,13 @@ func (x *AddUserEvent) GetRegisteredAt() int64 {
 		return x.RegisteredAt
 	}
 	return 0
+}
+
+func (x *AddUserEvent) GetDefaultCurrency() string {
+	if x != nil {
+		return x.DefaultCurrency
+	}
+	return ""
 }
 
 // AddOperatorEvent is emitted when a operator is created.
@@ -370,7 +378,7 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse\"\xbf\x03\n" +
+	"\rEventResponse\"\xea\x03\n" +
 	"\fAddUserEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -385,7 +393,8 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x10registration_url\x18\n" +
 	" \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12\x18\n" +
 	"\acountry\x18\v \x01(\tR\acountry\x12#\n" +
-	"\rregistered_at\x18\f \x01(\x03R\fregisteredAtB\x13\n" +
+	"\rregistered_at\x18\f \x01(\x03R\fregisteredAt\x12)\n" +
+	"\x10default_currency\x18\r \x01(\tR\x0fdefaultCurrencyB\x13\n" +
 	"\x11_registration_url\"\x9b\x03\n" +
 	"\x10AddOperatorEvent\x12(\n" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +

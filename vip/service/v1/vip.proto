@@ -50,6 +50,14 @@ service Vip {
   rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (GetDailyLossbackStatusResponse) {
   }
 
+  // 强制执行 VIP 奖励发放（跳过时间检查）
+  rpc ForceRunVipRewards(ForceRunVipRewardsRequest) returns (ForceRunVipRewardsResponse) {
+  }
+
+  // 批量获取用户VIP会员信息
+  rpc BatchGetVipMembers(BatchGetVipMembersRequest) returns (BatchGetVipMembersResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -424,6 +432,7 @@ message DailyLossbackStatus {
   string time_window_start_hour = 9;
   string time_window_end_hour = 10;
   string time_zone = 11;
+  bool user_withdrawn_met = 12;
 }
 
 message GetDailyLossbackStatusRequest {
@@ -434,4 +443,34 @@ message GetDailyLossbackStatusRequest {
 
 message GetDailyLossbackStatusResponse {
   DailyLossbackStatus status = 1;
+}
+
+// 强制执行 VIP 奖励发放请求
+message ForceRunVipRewardsRequest {
+  api.common.OperatorContext operator_context = 1;
+  bool include_daily = 2;
+  bool include_weekly = 3;
+  bool include_monthly = 4;
+}
+
+// 强制执行 VIP 奖励发放响应
+message ForceRunVipRewardsResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// 批量获取用户VIP会员信息请求
+message BatchGetVipMembersRequest {
+  repeated int64 user_ids = 1;
+}
+
+// 带等级名称的VIP会员信息
+message VipMemberWithLevelName {
+  VipMember vip_member = 1;
+  string current_level_name = 2;
+}
+
+// 批量获取用户VIP会员信息响应
+message BatchGetVipMembersResponse {
+  repeated VipMemberWithLevelName vip_members = 1;
 }

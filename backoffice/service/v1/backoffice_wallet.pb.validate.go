@@ -2539,11 +2539,11 @@ func (m *OperatorSwapRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
+		switch v := interface{}(m.GetSourceOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, OperatorSwapRequestValidationError{
-					field:  "OperatorContext",
+					field:  "SourceOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -2551,16 +2551,16 @@ func (m *OperatorSwapRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, OperatorSwapRequestValidationError{
-					field:  "OperatorContext",
+					field:  "SourceOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetSourceOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return OperatorSwapRequestValidationError{
-				field:  "OperatorContext",
+				field:  "SourceOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -7542,6 +7542,1091 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ExportManualJournalEntriesRequestValidationError{}
+
+// Validate checks the field values on CreatePromoCodeCampaignRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreatePromoCodeCampaignRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreatePromoCodeCampaignRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreatePromoCodeCampaignRequestMultiError, or nil if none found.
+func (m *CreatePromoCodeCampaignRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreatePromoCodeCampaignRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePromoCodeCampaignRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for CodeType
+
+	// no validation rules for MaxUsageLimit
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePromoCodeCampaignRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePromoCodeCampaignRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRewardConditions()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConditions",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConditions",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRewardConditions()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePromoCodeCampaignRequestValidationError{
+				field:  "RewardConditions",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRewardConfigs()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRewardConfigs()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreatePromoCodeCampaignRequestValidationError{
+				field:  "RewardConfigs",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreatePromoCodeCampaignRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreatePromoCodeCampaignRequestMultiError is an error wrapping multiple
+// validation errors returned by CreatePromoCodeCampaignRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CreatePromoCodeCampaignRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreatePromoCodeCampaignRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreatePromoCodeCampaignRequestMultiError) AllErrors() []error { return m }
+
+// CreatePromoCodeCampaignRequestValidationError is the validation error
+// returned by CreatePromoCodeCampaignRequest.Validate if the designated
+// constraints aren't met.
+type CreatePromoCodeCampaignRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreatePromoCodeCampaignRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreatePromoCodeCampaignRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreatePromoCodeCampaignRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreatePromoCodeCampaignRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreatePromoCodeCampaignRequestValidationError) ErrorName() string {
+	return "CreatePromoCodeCampaignRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreatePromoCodeCampaignRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreatePromoCodeCampaignRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreatePromoCodeCampaignRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreatePromoCodeCampaignRequestValidationError{}
+
+// Validate checks the field values on UpdatePromoCodeCampaignRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdatePromoCodeCampaignRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdatePromoCodeCampaignRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdatePromoCodeCampaignRequestMultiError, or nil if none found.
+func (m *UpdatePromoCodeCampaignRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdatePromoCodeCampaignRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePromoCodeCampaignRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CampaignId
+
+	// no validation rules for Name
+
+	// no validation rules for MaxUsageLimit
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePromoCodeCampaignRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePromoCodeCampaignRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRewardConditions()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConditions",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConditions",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRewardConditions()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePromoCodeCampaignRequestValidationError{
+				field:  "RewardConditions",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRewardConfigs()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignRequestValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRewardConfigs()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePromoCodeCampaignRequestValidationError{
+				field:  "RewardConfigs",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdatePromoCodeCampaignRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdatePromoCodeCampaignRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdatePromoCodeCampaignRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UpdatePromoCodeCampaignRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdatePromoCodeCampaignRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdatePromoCodeCampaignRequestMultiError) AllErrors() []error { return m }
+
+// UpdatePromoCodeCampaignRequestValidationError is the validation error
+// returned by UpdatePromoCodeCampaignRequest.Validate if the designated
+// constraints aren't met.
+type UpdatePromoCodeCampaignRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdatePromoCodeCampaignRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdatePromoCodeCampaignRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdatePromoCodeCampaignRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdatePromoCodeCampaignRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdatePromoCodeCampaignRequestValidationError) ErrorName() string {
+	return "UpdatePromoCodeCampaignRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdatePromoCodeCampaignRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdatePromoCodeCampaignRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdatePromoCodeCampaignRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdatePromoCodeCampaignRequestValidationError{}
+
+// Validate checks the field values on UpdatePromoCodeCampaignStatusRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *UpdatePromoCodeCampaignStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdatePromoCodeCampaignStatusRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdatePromoCodeCampaignStatusRequestMultiError, or nil if none found.
+func (m *UpdatePromoCodeCampaignStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdatePromoCodeCampaignStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignStatusRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePromoCodeCampaignStatusRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePromoCodeCampaignStatusRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CampaignId
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return UpdatePromoCodeCampaignStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdatePromoCodeCampaignStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdatePromoCodeCampaignStatusRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdatePromoCodeCampaignStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdatePromoCodeCampaignStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdatePromoCodeCampaignStatusRequestMultiError) AllErrors() []error { return m }
+
+// UpdatePromoCodeCampaignStatusRequestValidationError is the validation error
+// returned by UpdatePromoCodeCampaignStatusRequest.Validate if the designated
+// constraints aren't met.
+type UpdatePromoCodeCampaignStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdatePromoCodeCampaignStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdatePromoCodeCampaignStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdatePromoCodeCampaignStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdatePromoCodeCampaignStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdatePromoCodeCampaignStatusRequestValidationError) ErrorName() string {
+	return "UpdatePromoCodeCampaignStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdatePromoCodeCampaignStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdatePromoCodeCampaignStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdatePromoCodeCampaignStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdatePromoCodeCampaignStatusRequestValidationError{}
+
+// Validate checks the field values on ListPromoCodeCampaignsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListPromoCodeCampaignsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListPromoCodeCampaignsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListPromoCodeCampaignsRequestMultiError, or nil if none found.
+func (m *ListPromoCodeCampaignsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListPromoCodeCampaignsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListPromoCodeCampaignsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListPromoCodeCampaignsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListPromoCodeCampaignsRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.CodeType != nil {
+		// no validation rules for CodeType
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListPromoCodeCampaignsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListPromoCodeCampaignsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListPromoCodeCampaignsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListPromoCodeCampaignsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListPromoCodeCampaignsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListPromoCodeCampaignsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListPromoCodeCampaignsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListPromoCodeCampaignsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListPromoCodeCampaignsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListPromoCodeCampaignsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListPromoCodeCampaignsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListPromoCodeCampaignsRequestMultiError) AllErrors() []error { return m }
+
+// ListPromoCodeCampaignsRequestValidationError is the validation error
+// returned by ListPromoCodeCampaignsRequest.Validate if the designated
+// constraints aren't met.
+type ListPromoCodeCampaignsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListPromoCodeCampaignsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListPromoCodeCampaignsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListPromoCodeCampaignsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListPromoCodeCampaignsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListPromoCodeCampaignsRequestValidationError) ErrorName() string {
+	return "ListPromoCodeCampaignsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListPromoCodeCampaignsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListPromoCodeCampaignsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListPromoCodeCampaignsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListPromoCodeCampaignsRequestValidationError{}
+
+// Validate checks the field values on ListPromoCodeCampaignDetailsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListPromoCodeCampaignDetailsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListPromoCodeCampaignDetailsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListPromoCodeCampaignDetailsRequestMultiError, or nil if none found.
+func (m *ListPromoCodeCampaignDetailsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListPromoCodeCampaignDetailsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	// no validation rules for UserId
+
+	// no validation rules for Status
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListPromoCodeCampaignDetailsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListPromoCodeCampaignDetailsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListPromoCodeCampaignDetailsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListPromoCodeCampaignDetailsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListPromoCodeCampaignDetailsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListPromoCodeCampaignDetailsRequestMultiError) AllErrors() []error { return m }
+
+// ListPromoCodeCampaignDetailsRequestValidationError is the validation error
+// returned by ListPromoCodeCampaignDetailsRequest.Validate if the designated
+// constraints aren't met.
+type ListPromoCodeCampaignDetailsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListPromoCodeCampaignDetailsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListPromoCodeCampaignDetailsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListPromoCodeCampaignDetailsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListPromoCodeCampaignDetailsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListPromoCodeCampaignDetailsRequestValidationError) ErrorName() string {
+	return "ListPromoCodeCampaignDetailsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListPromoCodeCampaignDetailsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListPromoCodeCampaignDetailsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListPromoCodeCampaignDetailsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListPromoCodeCampaignDetailsRequestValidationError{}
+
+// Validate checks the field values on GeneratePromoCodesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GeneratePromoCodesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GeneratePromoCodesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GeneratePromoCodesRequestMultiError, or nil if none found.
+func (m *GeneratePromoCodesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GeneratePromoCodesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	// no validation rules for CodeLength
+
+	// no validation rules for CodeFormat
+
+	// no validation rules for Count
+
+	if len(errors) > 0 {
+		return GeneratePromoCodesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GeneratePromoCodesRequestMultiError is an error wrapping multiple validation
+// errors returned by GeneratePromoCodesRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GeneratePromoCodesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GeneratePromoCodesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GeneratePromoCodesRequestMultiError) AllErrors() []error { return m }
+
+// GeneratePromoCodesRequestValidationError is the validation error returned by
+// GeneratePromoCodesRequest.Validate if the designated constraints aren't met.
+type GeneratePromoCodesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GeneratePromoCodesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GeneratePromoCodesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GeneratePromoCodesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GeneratePromoCodesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GeneratePromoCodesRequestValidationError) ErrorName() string {
+	return "GeneratePromoCodesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GeneratePromoCodesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGeneratePromoCodesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GeneratePromoCodesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GeneratePromoCodesRequestValidationError{}
 
 // Validate checks the field values on GetWalletCreditsResponse_Credit with the
 // rules defined in the proto definition for this message. If any rules are

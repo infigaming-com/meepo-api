@@ -515,6 +515,7 @@ type ListOperatorByoDomainsRequest struct {
 	ValidationStatus *string                 `protobuf:"bytes,4,opt,name=validation_status,json=validationStatus,proto3,oneof" json:"validation_status,omitempty"`
 	Page             *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize         *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Pagination       *bool                   `protobuf:"varint,7,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if nil, pagination is true
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -589,6 +590,13 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListOperatorByoDomainsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
 }
 
 type ListOperatorByoDomainsResponse struct {
@@ -875,6 +883,862 @@ func (*DeleteOperatorByoDomainResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{10}
 }
 
+type ApexDomainInfo struct {
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	ApexDomain                 string                 `protobuf:"bytes,1,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	WwwDomain                  string                 `protobuf:"bytes,2,opt,name=www_domain,json=wwwDomain,proto3" json:"www_domain,omitempty"`
+	Domain                     string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
+	Status                     string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	ErrorReason                string                 `protobuf:"bytes,5,opt,name=error_reason,json=errorReason,proto3" json:"error_reason,omitempty"`
+	NginxIp                    string                 `protobuf:"bytes,6,opt,name=nginx_ip,json=nginxIp,proto3" json:"nginx_ip,omitempty"`
+	CertExpiresAt              int64                  `protobuf:"varint,7,opt,name=cert_expires_at,json=certExpiresAt,proto3" json:"cert_expires_at,omitempty"`
+	TargetOperatorId           int64                  `protobuf:"varint,8,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
+	TargetOperatorName         string                 `protobuf:"bytes,9,opt,name=target_operator_name,json=targetOperatorName,proto3" json:"target_operator_name,omitempty"`
+	TargetCompanyOperatorId    int64                  `protobuf:"varint,10,opt,name=target_company_operator_id,json=targetCompanyOperatorId,proto3" json:"target_company_operator_id,omitempty"`
+	TargetCompanyOperatorName  string                 `protobuf:"bytes,11,opt,name=target_company_operator_name,json=targetCompanyOperatorName,proto3" json:"target_company_operator_name,omitempty"`
+	TargetRetailerOperatorId   int64                  `protobuf:"varint,12,opt,name=target_retailer_operator_id,json=targetRetailerOperatorId,proto3" json:"target_retailer_operator_id,omitempty"`
+	TargetRetailerOperatorName string                 `protobuf:"bytes,13,opt,name=target_retailer_operator_name,json=targetRetailerOperatorName,proto3" json:"target_retailer_operator_name,omitempty"`
+	TargetSystemOperatorId     int64                  `protobuf:"varint,14,opt,name=target_system_operator_id,json=targetSystemOperatorId,proto3" json:"target_system_operator_id,omitempty"`
+	TargetSystemOperatorName   string                 `protobuf:"bytes,15,opt,name=target_system_operator_name,json=targetSystemOperatorName,proto3" json:"target_system_operator_name,omitempty"`
+	CreatedAt                  *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                  *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ProvisioningStartedAt      int64                  `protobuf:"varint,18,opt,name=provisioning_started_at,json=provisioningStartedAt,proto3" json:"provisioning_started_at,omitempty"`
+	ProvisioningCompletedAt    int64                  `protobuf:"varint,19,opt,name=provisioning_completed_at,json=provisioningCompletedAt,proto3" json:"provisioning_completed_at,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *ApexDomainInfo) Reset() {
+	*x = ApexDomainInfo{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApexDomainInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApexDomainInfo) ProtoMessage() {}
+
+func (x *ApexDomainInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApexDomainInfo.ProtoReflect.Descriptor instead.
+func (*ApexDomainInfo) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ApexDomainInfo) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetWwwDomain() string {
+	if x != nil {
+		return x.WwwDomain
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetErrorReason() string {
+	if x != nil {
+		return x.ErrorReason
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetNginxIp() string {
+	if x != nil {
+		return x.NginxIp
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetCertExpiresAt() int64 {
+	if x != nil {
+		return x.CertExpiresAt
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetTargetOperatorId() int64 {
+	if x != nil {
+		return x.TargetOperatorId
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetTargetOperatorName() string {
+	if x != nil {
+		return x.TargetOperatorName
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetTargetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.TargetCompanyOperatorId
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetTargetCompanyOperatorName() string {
+	if x != nil {
+		return x.TargetCompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetTargetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.TargetRetailerOperatorId
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetTargetRetailerOperatorName() string {
+	if x != nil {
+		return x.TargetRetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetTargetSystemOperatorId() int64 {
+	if x != nil {
+		return x.TargetSystemOperatorId
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetTargetSystemOperatorName() string {
+	if x != nil {
+		return x.TargetSystemOperatorName
+	}
+	return ""
+}
+
+func (x *ApexDomainInfo) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ApexDomainInfo) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *ApexDomainInfo) GetProvisioningStartedAt() int64 {
+	if x != nil {
+		return x.ProvisioningStartedAt
+	}
+	return 0
+}
+
+func (x *ApexDomainInfo) GetProvisioningCompletedAt() int64 {
+	if x != nil {
+		return x.ProvisioningCompletedAt
+	}
+	return 0
+}
+
+type ListOperatorApexDomainsRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Status          *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Page            *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Pagination      *bool                   `protobuf:"varint,5,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListOperatorApexDomainsRequest) Reset() {
+	*x = ListOperatorApexDomainsRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorApexDomainsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorApexDomainsRequest) ProtoMessage() {}
+
+func (x *ListOperatorApexDomainsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorApexDomainsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorApexDomainsRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListOperatorApexDomainsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListOperatorApexDomainsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListOperatorApexDomainsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorApexDomainsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorApexDomainsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
+}
+
+type ListOperatorApexDomainsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*ApexDomainInfo      `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorApexDomainsResponse) Reset() {
+	*x = ListOperatorApexDomainsResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorApexDomainsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorApexDomainsResponse) ProtoMessage() {}
+
+func (x *ListOperatorApexDomainsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorApexDomainsResponse.ProtoReflect.Descriptor instead.
+func (*ListOperatorApexDomainsResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListOperatorApexDomainsResponse) GetData() []*ApexDomainInfo {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ListOperatorApexDomainsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorApexDomainsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorApexDomainsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type DnsInstruction struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Value         string                 `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DnsInstruction) Reset() {
+	*x = DnsInstruction{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DnsInstruction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DnsInstruction) ProtoMessage() {}
+
+func (x *DnsInstruction) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DnsInstruction.ProtoReflect.Descriptor instead.
+func (*DnsInstruction) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *DnsInstruction) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *DnsInstruction) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DnsInstruction) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *DnsInstruction) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type AddOperatorApexDomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ApexDomain      string                  `protobuf:"bytes,2,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	Domain          string                  `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *AddOperatorApexDomainRequest) Reset() {
+	*x = AddOperatorApexDomainRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *AddOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AddOperatorApexDomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *AddOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+func (x *AddOperatorApexDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type AddOperatorApexDomainResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	DnsInstructions []*DnsInstruction      `protobuf:"bytes,1,rep,name=dns_instructions,json=dnsInstructions,proto3" json:"dns_instructions,omitempty"`
+	Status          string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Message         string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *AddOperatorApexDomainResponse) Reset() {
+	*x = AddOperatorApexDomainResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorApexDomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorApexDomainResponse) ProtoMessage() {}
+
+func (x *AddOperatorApexDomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorApexDomainResponse.ProtoReflect.Descriptor instead.
+func (*AddOperatorApexDomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AddOperatorApexDomainResponse) GetDnsInstructions() []*DnsInstruction {
+	if x != nil {
+		return x.DnsInstructions
+	}
+	return nil
+}
+
+func (x *AddOperatorApexDomainResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *AddOperatorApexDomainResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type DeleteOperatorApexDomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ApexDomain      string                  `protobuf:"bytes,2,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorApexDomainRequest) Reset() {
+	*x = DeleteOperatorApexDomainRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *DeleteOperatorApexDomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+type DeleteOperatorApexDomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorApexDomainResponse) Reset() {
+	*x = DeleteOperatorApexDomainResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorApexDomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorApexDomainResponse) ProtoMessage() {}
+
+func (x *DeleteOperatorApexDomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorApexDomainResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorApexDomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{18}
+}
+
+type RefreshOperatorApexDomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ApexDomain      string                  `protobuf:"bytes,2,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *RefreshOperatorApexDomainRequest) Reset() {
+	*x = RefreshOperatorApexDomainRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *RefreshOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*RefreshOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *RefreshOperatorApexDomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *RefreshOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+type RefreshOperatorApexDomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	CertExpiresAt int64                  `protobuf:"varint,2,opt,name=cert_expires_at,json=certExpiresAt,proto3" json:"cert_expires_at,omitempty"`
+	ErrorReason   string                 `protobuf:"bytes,3,opt,name=error_reason,json=errorReason,proto3" json:"error_reason,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshOperatorApexDomainResponse) Reset() {
+	*x = RefreshOperatorApexDomainResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshOperatorApexDomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshOperatorApexDomainResponse) ProtoMessage() {}
+
+func (x *RefreshOperatorApexDomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshOperatorApexDomainResponse.ProtoReflect.Descriptor instead.
+func (*RefreshOperatorApexDomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *RefreshOperatorApexDomainResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *RefreshOperatorApexDomainResponse) GetCertExpiresAt() int64 {
+	if x != nil {
+		return x.CertExpiresAt
+	}
+	return 0
+}
+
+func (x *RefreshOperatorApexDomainResponse) GetErrorReason() string {
+	if x != nil {
+		return x.ErrorReason
+	}
+	return ""
+}
+
+func (x *RefreshOperatorApexDomainResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type PrecheckOperatorApexDomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ApexDomain      string                  `protobuf:"bytes,2,opt,name=apex_domain,json=apexDomain,proto3" json:"apex_domain,omitempty"`
+	Domain          string                  `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *PrecheckOperatorApexDomainRequest) Reset() {
+	*x = PrecheckOperatorApexDomainRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrecheckOperatorApexDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrecheckOperatorApexDomainRequest) ProtoMessage() {}
+
+func (x *PrecheckOperatorApexDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrecheckOperatorApexDomainRequest.ProtoReflect.Descriptor instead.
+func (*PrecheckOperatorApexDomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *PrecheckOperatorApexDomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *PrecheckOperatorApexDomainRequest) GetApexDomain() string {
+	if x != nil {
+		return x.ApexDomain
+	}
+	return ""
+}
+
+func (x *PrecheckOperatorApexDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type PrecheckOperatorApexDomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Bindable      bool                   `protobuf:"varint,1,opt,name=bindable,proto3" json:"bindable,omitempty"`
+	ApexIp        string                 `protobuf:"bytes,2,opt,name=apex_ip,json=apexIp,proto3" json:"apex_ip,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	WwwDomain     string                 `protobuf:"bytes,4,opt,name=www_domain,json=wwwDomain,proto3" json:"www_domain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrecheckOperatorApexDomainResponse) Reset() {
+	*x = PrecheckOperatorApexDomainResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrecheckOperatorApexDomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrecheckOperatorApexDomainResponse) ProtoMessage() {}
+
+func (x *PrecheckOperatorApexDomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrecheckOperatorApexDomainResponse.ProtoReflect.Descriptor instead.
+func (*PrecheckOperatorApexDomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *PrecheckOperatorApexDomainResponse) GetBindable() bool {
+	if x != nil {
+		return x.Bindable
+	}
+	return false
+}
+
+func (x *PrecheckOperatorApexDomainResponse) GetApexIp() string {
+	if x != nil {
+		return x.ApexIp
+	}
+	return ""
+}
+
+func (x *PrecheckOperatorApexDomainResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *PrecheckOperatorApexDomainResponse) GetWwwDomain() string {
+	if x != nil {
+		return x.WwwDomain
+	}
+	return ""
+}
+
 var File_user_service_v1_dns_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_dns_proto_rawDesc = "" +
@@ -930,7 +1794,7 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x17target_real_operator_id\x18\x10 \x01(\x03R\x14targetRealOperatorId\x120\n" +
 	"\x14target_operator_type\x18\x11 \x01(\tR\x12targetOperatorType\x129\n" +
 	"\n" +
-	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdf\x02\n" +
+	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x93\x03\n" +
 	"\x1dListOperatorByoDomainsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
 	"\vdomain_type\x18\x02 \x01(\tH\x00R\n" +
@@ -938,13 +1802,17 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x120\n" +
 	"\x11validation_status\x18\x04 \x01(\tH\x02R\x10validationStatus\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\x0e\n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\a \x01(\bH\x05R\n" +
+	"pagination\x88\x01\x01B\x0e\n" +
 	"\f_domain_typeB\t\n" +
 	"\a_statusB\x14\n" +
 	"\x12_validation_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9f\x01\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"\x9f\x01\n" +
 	"\x1eListOperatorByoDomainsResponse\x126\n" +
 	"\x04data\x18\x01 \x03(\v2\".api.user.service.v1.ByoDomainInfoR\x04data\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -964,12 +1832,99 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x02 \x01(\tR\tbyoDomain\"!\n" +
-	"\x1fDeleteOperatorByoDomainResponse2\x8f\x04\n" +
+	"\x1fDeleteOperatorByoDomainResponse\"\xaa\a\n" +
+	"\x0eApexDomainInfo\x12\x1f\n" +
+	"\vapex_domain\x18\x01 \x01(\tR\n" +
+	"apexDomain\x12\x1d\n" +
+	"\n" +
+	"www_domain\x18\x02 \x01(\tR\twwwDomain\x12\x16\n" +
+	"\x06domain\x18\x03 \x01(\tR\x06domain\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12!\n" +
+	"\ferror_reason\x18\x05 \x01(\tR\verrorReason\x12\x19\n" +
+	"\bnginx_ip\x18\x06 \x01(\tR\anginxIp\x12&\n" +
+	"\x0fcert_expires_at\x18\a \x01(\x03R\rcertExpiresAt\x12,\n" +
+	"\x12target_operator_id\x18\b \x01(\x03R\x10targetOperatorId\x120\n" +
+	"\x14target_operator_name\x18\t \x01(\tR\x12targetOperatorName\x12;\n" +
+	"\x1atarget_company_operator_id\x18\n" +
+	" \x01(\x03R\x17targetCompanyOperatorId\x12?\n" +
+	"\x1ctarget_company_operator_name\x18\v \x01(\tR\x19targetCompanyOperatorName\x12=\n" +
+	"\x1btarget_retailer_operator_id\x18\f \x01(\x03R\x18targetRetailerOperatorId\x12A\n" +
+	"\x1dtarget_retailer_operator_name\x18\r \x01(\tR\x1atargetRetailerOperatorName\x129\n" +
+	"\x19target_system_operator_id\x18\x0e \x01(\x03R\x16targetSystemOperatorId\x12=\n" +
+	"\x1btarget_system_operator_name\x18\x0f \x01(\tR\x18targetSystemOperatorName\x129\n" +
+	"\n" +
+	"created_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x126\n" +
+	"\x17provisioning_started_at\x18\x12 \x01(\x03R\x15provisioningStartedAt\x12:\n" +
+	"\x19provisioning_completed_at\x18\x13 \x01(\x03R\x17provisioningCompletedAt\"\x96\x02\n" +
+	"\x1eListOperatorApexDomainsRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
+	"\x06status\x18\x02 \x01(\tH\x00R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\x05 \x01(\bH\x03R\n" +
+	"pagination\x88\x01\x01B\t\n" +
+	"\a_statusB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"\xa1\x01\n" +
+	"\x1fListOperatorApexDomainsResponse\x127\n" +
+	"\x04data\x18\x01 \x03(\v2#.api.user.service.v1.ApexDomainInfoR\x04data\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"p\n" +
+	"\x0eDnsInstruction\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\"\x9f\x01\n" +
+	"\x1cAddOperatorApexDomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\vapex_domain\x18\x02 \x01(\tR\n" +
+	"apexDomain\x12\x16\n" +
+	"\x06domain\x18\x03 \x01(\tR\x06domain\"\xa1\x01\n" +
+	"\x1dAddOperatorApexDomainResponse\x12N\n" +
+	"\x10dns_instructions\x18\x01 \x03(\v2#.api.user.service.v1.DnsInstructionR\x0fdnsInstructions\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"\x8a\x01\n" +
+	"\x1fDeleteOperatorApexDomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\vapex_domain\x18\x02 \x01(\tR\n" +
+	"apexDomain\"\"\n" +
+	" DeleteOperatorApexDomainResponse\"\x8b\x01\n" +
+	" RefreshOperatorApexDomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\vapex_domain\x18\x02 \x01(\tR\n" +
+	"apexDomain\"\xa0\x01\n" +
+	"!RefreshOperatorApexDomainResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12&\n" +
+	"\x0fcert_expires_at\x18\x02 \x01(\x03R\rcertExpiresAt\x12!\n" +
+	"\ferror_reason\x18\x03 \x01(\tR\verrorReason\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"\xa4\x01\n" +
+	"!PrecheckOperatorApexDomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\vapex_domain\x18\x02 \x01(\tR\n" +
+	"apexDomain\x12\x16\n" +
+	"\x06domain\x18\x03 \x01(\tR\x06domain\"\x92\x01\n" +
+	"\"PrecheckOperatorApexDomainResponse\x12\x1a\n" +
+	"\bbindable\x18\x01 \x01(\bR\bbindable\x12\x17\n" +
+	"\aapex_ip\x18\x02 \x01(\tR\x06apexIp\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"www_domain\x18\x04 \x01(\tR\twwwDomain2\xc8\t\n" +
 	"\x03Dns\x12z\n" +
 	"\x13ListOperatorDomains\x12/.api.user.service.v1.ListOperatorDomainsRequest\x1a0.api.user.service.v1.ListOperatorDomainsResponse\"\x00\x12\x83\x01\n" +
 	"\x16ListOperatorByoDomains\x122.api.user.service.v1.ListOperatorByoDomainsRequest\x1a3.api.user.service.v1.ListOperatorByoDomainsResponse\"\x00\x12}\n" +
 	"\x14AddOperatorByoDomain\x120.api.user.service.v1.AddOperatorByoDomainRequest\x1a1.api.user.service.v1.AddOperatorByoDomainResponse\"\x00\x12\x86\x01\n" +
-	"\x17DeleteOperatorByoDomain\x123.api.user.service.v1.DeleteOperatorByoDomainRequest\x1a4.api.user.service.v1.DeleteOperatorByoDomainResponse\"\x00BO\n" +
+	"\x17DeleteOperatorByoDomain\x123.api.user.service.v1.DeleteOperatorByoDomainRequest\x1a4.api.user.service.v1.DeleteOperatorByoDomainResponse\"\x00\x12\x8f\x01\n" +
+	"\x1aPrecheckOperatorApexDomain\x126.api.user.service.v1.PrecheckOperatorApexDomainRequest\x1a7.api.user.service.v1.PrecheckOperatorApexDomainResponse\"\x00\x12\x86\x01\n" +
+	"\x17ListOperatorApexDomains\x123.api.user.service.v1.ListOperatorApexDomainsRequest\x1a4.api.user.service.v1.ListOperatorApexDomainsResponse\"\x00\x12\x80\x01\n" +
+	"\x15AddOperatorApexDomain\x121.api.user.service.v1.AddOperatorApexDomainRequest\x1a2.api.user.service.v1.AddOperatorApexDomainResponse\"\x00\x12\x89\x01\n" +
+	"\x18DeleteOperatorApexDomain\x124.api.user.service.v1.DeleteOperatorApexDomainRequest\x1a5.api.user.service.v1.DeleteOperatorApexDomainResponse\"\x00\x12\x8c\x01\n" +
+	"\x19RefreshOperatorApexDomain\x125.api.user.service.v1.RefreshOperatorApexDomainRequest\x1a6.api.user.service.v1.RefreshOperatorApexDomainResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -984,47 +1939,78 @@ func file_user_service_v1_dns_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_dns_proto_rawDescData
 }
 
-var file_user_service_v1_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_user_service_v1_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_user_service_v1_dns_proto_goTypes = []any{
-	(*DomainInfo)(nil),                      // 0: api.user.service.v1.DomainInfo
-	(*ListOperatorDomainsRequest)(nil),      // 1: api.user.service.v1.ListOperatorDomainsRequest
-	(*ListOperatorDomainsResponse)(nil),     // 2: api.user.service.v1.ListOperatorDomainsResponse
-	(*ValidationRecord)(nil),                // 3: api.user.service.v1.ValidationRecord
-	(*ByoDomainInfo)(nil),                   // 4: api.user.service.v1.ByoDomainInfo
-	(*ListOperatorByoDomainsRequest)(nil),   // 5: api.user.service.v1.ListOperatorByoDomainsRequest
-	(*ListOperatorByoDomainsResponse)(nil),  // 6: api.user.service.v1.ListOperatorByoDomainsResponse
-	(*AddOperatorByoDomainRequest)(nil),     // 7: api.user.service.v1.AddOperatorByoDomainRequest
-	(*AddOperatorByoDomainResponse)(nil),    // 8: api.user.service.v1.AddOperatorByoDomainResponse
-	(*DeleteOperatorByoDomainRequest)(nil),  // 9: api.user.service.v1.DeleteOperatorByoDomainRequest
-	(*DeleteOperatorByoDomainResponse)(nil), // 10: api.user.service.v1.DeleteOperatorByoDomainResponse
-	(*common.OperatorContext)(nil),          // 11: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),   // 12: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),           // 13: google.protobuf.Timestamp
+	(*DomainInfo)(nil),                         // 0: api.user.service.v1.DomainInfo
+	(*ListOperatorDomainsRequest)(nil),         // 1: api.user.service.v1.ListOperatorDomainsRequest
+	(*ListOperatorDomainsResponse)(nil),        // 2: api.user.service.v1.ListOperatorDomainsResponse
+	(*ValidationRecord)(nil),                   // 3: api.user.service.v1.ValidationRecord
+	(*ByoDomainInfo)(nil),                      // 4: api.user.service.v1.ByoDomainInfo
+	(*ListOperatorByoDomainsRequest)(nil),      // 5: api.user.service.v1.ListOperatorByoDomainsRequest
+	(*ListOperatorByoDomainsResponse)(nil),     // 6: api.user.service.v1.ListOperatorByoDomainsResponse
+	(*AddOperatorByoDomainRequest)(nil),        // 7: api.user.service.v1.AddOperatorByoDomainRequest
+	(*AddOperatorByoDomainResponse)(nil),       // 8: api.user.service.v1.AddOperatorByoDomainResponse
+	(*DeleteOperatorByoDomainRequest)(nil),     // 9: api.user.service.v1.DeleteOperatorByoDomainRequest
+	(*DeleteOperatorByoDomainResponse)(nil),    // 10: api.user.service.v1.DeleteOperatorByoDomainResponse
+	(*ApexDomainInfo)(nil),                     // 11: api.user.service.v1.ApexDomainInfo
+	(*ListOperatorApexDomainsRequest)(nil),     // 12: api.user.service.v1.ListOperatorApexDomainsRequest
+	(*ListOperatorApexDomainsResponse)(nil),    // 13: api.user.service.v1.ListOperatorApexDomainsResponse
+	(*DnsInstruction)(nil),                     // 14: api.user.service.v1.DnsInstruction
+	(*AddOperatorApexDomainRequest)(nil),       // 15: api.user.service.v1.AddOperatorApexDomainRequest
+	(*AddOperatorApexDomainResponse)(nil),      // 16: api.user.service.v1.AddOperatorApexDomainResponse
+	(*DeleteOperatorApexDomainRequest)(nil),    // 17: api.user.service.v1.DeleteOperatorApexDomainRequest
+	(*DeleteOperatorApexDomainResponse)(nil),   // 18: api.user.service.v1.DeleteOperatorApexDomainResponse
+	(*RefreshOperatorApexDomainRequest)(nil),   // 19: api.user.service.v1.RefreshOperatorApexDomainRequest
+	(*RefreshOperatorApexDomainResponse)(nil),  // 20: api.user.service.v1.RefreshOperatorApexDomainResponse
+	(*PrecheckOperatorApexDomainRequest)(nil),  // 21: api.user.service.v1.PrecheckOperatorApexDomainRequest
+	(*PrecheckOperatorApexDomainResponse)(nil), // 22: api.user.service.v1.PrecheckOperatorApexDomainResponse
+	(*common.OperatorContext)(nil),             // 23: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),      // 24: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),              // 25: google.protobuf.Timestamp
 }
 var file_user_service_v1_dns_proto_depIdxs = []int32{
-	11, // 0: api.user.service.v1.ListOperatorDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	12, // 1: api.user.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 0: api.user.service.v1.ListOperatorDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	24, // 1: api.user.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 2: api.user.service.v1.ListOperatorDomainsResponse.data:type_name -> api.user.service.v1.DomainInfo
 	3,  // 3: api.user.service.v1.ByoDomainInfo.validation_records:type_name -> api.user.service.v1.ValidationRecord
-	13, // 4: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
-	11, // 5: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	25, // 4: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	23, // 5: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 6: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
-	11, // 7: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 7: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 8: api.user.service.v1.AddOperatorByoDomainResponse.validation_records:type_name -> api.user.service.v1.ValidationRecord
-	11, // 9: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 10: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
-	5,  // 11: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	7,  // 12: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	9,  // 13: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	2,  // 14: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	6,  // 15: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	8,  // 16: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	10, // 17: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	14, // [14:18] is the sub-list for method output_type
-	10, // [10:14] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	23, // 9: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	25, // 10: api.user.service.v1.ApexDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	25, // 11: api.user.service.v1.ApexDomainInfo.updated_at:type_name -> google.protobuf.Timestamp
+	23, // 12: api.user.service.v1.ListOperatorApexDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	11, // 13: api.user.service.v1.ListOperatorApexDomainsResponse.data:type_name -> api.user.service.v1.ApexDomainInfo
+	23, // 14: api.user.service.v1.AddOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 15: api.user.service.v1.AddOperatorApexDomainResponse.dns_instructions:type_name -> api.user.service.v1.DnsInstruction
+	23, // 16: api.user.service.v1.DeleteOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 17: api.user.service.v1.RefreshOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 18: api.user.service.v1.PrecheckOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 19: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
+	5,  // 20: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	7,  // 21: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	9,  // 22: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	21, // 23: api.user.service.v1.Dns.PrecheckOperatorApexDomain:input_type -> api.user.service.v1.PrecheckOperatorApexDomainRequest
+	12, // 24: api.user.service.v1.Dns.ListOperatorApexDomains:input_type -> api.user.service.v1.ListOperatorApexDomainsRequest
+	15, // 25: api.user.service.v1.Dns.AddOperatorApexDomain:input_type -> api.user.service.v1.AddOperatorApexDomainRequest
+	17, // 26: api.user.service.v1.Dns.DeleteOperatorApexDomain:input_type -> api.user.service.v1.DeleteOperatorApexDomainRequest
+	19, // 27: api.user.service.v1.Dns.RefreshOperatorApexDomain:input_type -> api.user.service.v1.RefreshOperatorApexDomainRequest
+	2,  // 28: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	6,  // 29: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	8,  // 30: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	10, // 31: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	22, // 32: api.user.service.v1.Dns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
+	13, // 33: api.user.service.v1.Dns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
+	16, // 34: api.user.service.v1.Dns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
+	18, // 35: api.user.service.v1.Dns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
+	20, // 36: api.user.service.v1.Dns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
+	28, // [28:37] is the sub-list for method output_type
+	19, // [19:28] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }
@@ -1034,13 +2020,14 @@ func file_user_service_v1_dns_proto_init() {
 	}
 	file_user_service_v1_dns_proto_msgTypes[1].OneofWrappers = []any{}
 	file_user_service_v1_dns_proto_msgTypes[5].OneofWrappers = []any{}
+	file_user_service_v1_dns_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_dns_proto_rawDesc), len(file_user_service_v1_dns_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

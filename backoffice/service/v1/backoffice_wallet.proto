@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "wallet/service/v1/wallet.proto";
+import "wallet/service/v1/promocode.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -152,6 +153,54 @@ service BackofficeWallet {
 	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (wallet.service.v1.GetDepositRewardConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/deposit-reward/config/get"
+			body: "*"
+		};
+	}
+
+	// CreatePromoCodeCampaign creates a new promo code campaign
+	rpc CreatePromoCodeCampaign(CreatePromoCodeCampaignRequest) returns (wallet.service.v1.CreatePromoCodeCampaignResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/campaign/create"
+			body: "*"
+		};
+	}
+
+	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
+	rpc UpdatePromoCodeCampaign(UpdatePromoCodeCampaignRequest) returns (wallet.service.v1.UpdatePromoCodeCampaignResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/campaign/update"
+			body: "*"
+		};
+	}
+
+	// UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
+	rpc UpdatePromoCodeCampaignStatus(UpdatePromoCodeCampaignStatusRequest) returns (wallet.service.v1.UpdatePromoCodeCampaignStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/campaign/status/update"
+			body: "*"
+		};
+	}
+
+	// ListPromoCodeCampaigns lists all promo code campaigns
+	rpc ListPromoCodeCampaigns(ListPromoCodeCampaignsRequest) returns (wallet.service.v1.ListPromoCodeCampaignsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/campaigns/list"
+			body: "*"
+		};
+	}
+
+	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
+	rpc ListPromoCodeCampaignDetails(ListPromoCodeCampaignDetailsRequest) returns (wallet.service.v1.ListPromoCodeCampaignDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/campaign/details"
+			body: "*"
+		};
+	}
+
+	// GeneratePromoCodes generates codes for a one_time campaign
+	rpc GeneratePromoCodes(GeneratePromoCodesRequest) returns (wallet.service.v1.GeneratePromoCodesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/codes/generate"
 			body: "*"
 		};
 	}
@@ -473,7 +522,7 @@ message OperatorTransferResponse {
 }
 
 message OperatorSwapRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext source_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
 	string currency = 3;
 	string target_currency = 4;
@@ -722,4 +771,67 @@ message ExportManualJournalEntriesRequest {
 	string format = 5; // accepted values: csv, excel, pdf
 	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+// ============================================
+// Promo Code Campaign
+// ============================================
+
+// Create Campaign (status defaults to active)
+message CreatePromoCodeCampaignRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string name = 2;
+	string code_type = 3;
+	int32 max_usage_limit = 4;
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+	wallet.service.v1.PromoCodeConditions reward_conditions = 7;
+	wallet.service.v1.PromoCodeRewardConfigs reward_configs = 8;
+}
+
+// Update Campaign (cannot update status or code_type)
+message UpdatePromoCodeCampaignRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	int64 campaign_id = 2;
+	string name = 3;
+	int32 max_usage_limit = 4;
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+	wallet.service.v1.PromoCodeConditions reward_conditions = 7;
+	wallet.service.v1.PromoCodeRewardConfigs reward_configs = 8;
+}
+
+// Update Campaign Status
+message UpdatePromoCodeCampaignStatusRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	int64 campaign_id = 2;
+	string status = 3;                   // active | paused | disabled
+}
+
+// List Campaigns
+message ListPromoCodeCampaignsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	optional string status = 2;          // active | paused | disabled
+	optional string code_type = 3;       // one_time | universal
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+}
+
+// List Campaign Details - codes (for one_time) or usages (for universal)
+message ListPromoCodeCampaignDetailsRequest {
+	int64 campaign_id = 1;
+	int64 user_id = 2;
+	string status = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+
+// Generate Codes for Campaign (one_time only)
+message GeneratePromoCodesRequest {
+	int64 campaign_id = 1;
+	int32 code_length = 2;
+	string code_format = 3;
+	int32 count = 4;
 }

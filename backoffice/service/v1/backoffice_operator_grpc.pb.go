@@ -42,6 +42,10 @@ const (
 	BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
 	BackofficeOperator_SetOperatorRegistrationFieldConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationFieldConfig"
 	BackofficeOperator_GetOperatorRegistrationFieldConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationFieldConfig"
+	BackofficeOperator_SetOperatorRegistrationConfig_FullMethodName        = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationConfig"
+	BackofficeOperator_GetOperatorRegistrationConfig_FullMethodName        = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationConfig"
+	BackofficeOperator_UpdateOperatorNotificationChannels_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorNotificationChannels"
+	BackofficeOperator_GetOperatorNotificationChannels_FullMethodName      = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorNotificationChannels"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -81,6 +85,14 @@ type BackofficeOperatorClient interface {
 	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	SetOperatorRegistrationFieldConfig(ctx context.Context, in *SetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
 	GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegistrationFieldConfigResponse, error)
+	// SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+	SetOperatorRegistrationConfig(ctx context.Context, in *SetOperatorRegistrationConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegistrationConfigResponse, error)
+	// GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+	GetOperatorRegistrationConfig(ctx context.Context, in *GetOperatorRegistrationConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegistrationConfigResponse, error)
+	// UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+	UpdateOperatorNotificationChannels(ctx context.Context, in *UpdateOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorNotificationChannelsResponse, error)
+	// GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+	GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.GetOperatorNotificationChannelsResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -311,6 +323,46 @@ func (c *backofficeOperatorClient) GetOperatorRegistrationFieldConfig(ctx contex
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) SetOperatorRegistrationConfig(ctx context.Context, in *SetOperatorRegistrationConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegistrationConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorRegistrationConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_SetOperatorRegistrationConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) GetOperatorRegistrationConfig(ctx context.Context, in *GetOperatorRegistrationConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegistrationConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorRegistrationConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorRegistrationConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) UpdateOperatorNotificationChannels(ctx context.Context, in *UpdateOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorNotificationChannelsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorNotificationChannelsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_UpdateOperatorNotificationChannels_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.GetOperatorNotificationChannelsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorNotificationChannelsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorNotificationChannels_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -348,6 +400,14 @@ type BackofficeOperatorServer interface {
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
 	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*v1.GetOperatorRegistrationFieldConfigResponse, error)
+	// SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+	SetOperatorRegistrationConfig(context.Context, *SetOperatorRegistrationConfigRequest) (*SetOperatorRegistrationConfigResponse, error)
+	// GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+	GetOperatorRegistrationConfig(context.Context, *GetOperatorRegistrationConfigRequest) (*GetOperatorRegistrationConfigResponse, error)
+	// UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error)
+	// GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+	GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*v1.GetOperatorNotificationChannelsResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -423,6 +483,18 @@ func (UnimplementedBackofficeOperatorServer) SetOperatorRegistrationFieldConfig(
 }
 func (UnimplementedBackofficeOperatorServer) GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*v1.GetOperatorRegistrationFieldConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorRegistrationFieldConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) SetOperatorRegistrationConfig(context.Context, *SetOperatorRegistrationConfigRequest) (*SetOperatorRegistrationConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOperatorRegistrationConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetOperatorRegistrationConfig(context.Context, *GetOperatorRegistrationConfigRequest) (*GetOperatorRegistrationConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorRegistrationConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorNotificationChannels not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*v1.GetOperatorNotificationChannelsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorNotificationChannels not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -841,6 +913,78 @@ func _BackofficeOperator_GetOperatorRegistrationFieldConfig_Handler(srv interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_SetOperatorRegistrationConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegistrationConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).SetOperatorRegistrationConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_SetOperatorRegistrationConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).SetOperatorRegistrationConfig(ctx, req.(*SetOperatorRegistrationConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_GetOperatorRegistrationConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegistrationConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetOperatorRegistrationConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetOperatorRegistrationConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetOperatorRegistrationConfig(ctx, req.(*GetOperatorRegistrationConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_UpdateOperatorNotificationChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorNotificationChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).UpdateOperatorNotificationChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_UpdateOperatorNotificationChannels_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).UpdateOperatorNotificationChannels(ctx, req.(*UpdateOperatorNotificationChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_GetOperatorNotificationChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorNotificationChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetOperatorNotificationChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetOperatorNotificationChannels_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetOperatorNotificationChannels(ctx, req.(*GetOperatorNotificationChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -935,6 +1079,22 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorRegistrationFieldConfig",
 			Handler:    _BackofficeOperator_GetOperatorRegistrationFieldConfig_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegistrationConfig",
+			Handler:    _BackofficeOperator_SetOperatorRegistrationConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegistrationConfig",
+			Handler:    _BackofficeOperator_GetOperatorRegistrationConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorNotificationChannels",
+			Handler:    _BackofficeOperator_UpdateOperatorNotificationChannels_Handler,
+		},
+		{
+			MethodName: "GetOperatorNotificationChannels",
+			Handler:    _BackofficeOperator_GetOperatorNotificationChannels_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

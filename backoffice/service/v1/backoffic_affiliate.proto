@@ -54,6 +54,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc ListAffiliateCommissionPlans(ListAffiliateCommissionPlansRequest) returns (api.affiliate.service.v1.ListAffiliateCommissionPlansResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/list/affiliate"
+			body: "*"
+		};
+	}
 
 	// -------------- Affiliate --------------
 
@@ -117,6 +123,52 @@ service BackofficeAffiliate {
 	rpc DeleteCampaign(DeleteCampaignRequest) returns (api.affiliate.service.v1.DeleteCampaignResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/delete"
+			body: "*"
+		};
+	}
+
+	// -------------- Postback --------------
+
+	rpc CreatePostback(CreatePostbackRequest) returns (api.affiliate.service.v1.CreatePostbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdatePostback(UpdatePostbackRequest) returns (api.affiliate.service.v1.UpdatePostbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/update"
+			body: "*"
+		};
+	}
+
+	rpc DeletePostback(DeletePostbackRequest) returns (api.affiliate.service.v1.DeletePostbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/delete"
+			body: "*"
+		};
+	}
+
+	rpc ListPostbacks(ListPostbacksRequest) returns (api.affiliate.service.v1.ListPostbacksResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/list"
+			body: "*"
+		};
+	}
+
+	// -------------- Affiliate Domain --------------
+
+	rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (api.affiliate.service.v1.ListAffiliateDomainsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/domain/list"
+			body: "*"
+		};
+	}
+
+	rpc SetAffiliateDomain(SetAffiliateDomainRequest) returns (api.affiliate.service.v1.SetAffiliateDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/domain/set"
 			body: "*"
 		};
 	}
@@ -214,6 +266,11 @@ message ListAllCommissionPlansRequest {
 	optional string status = 3;
 }
 
+message ListAffiliateCommissionPlansRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
 // -------------- Affiliate --------------
 
 message CreateAffiliateRequest {
@@ -234,6 +291,7 @@ message ListAffiliatesRequest {
     optional int32 page = 5;
     optional int32 page_size = 6;
 	api.common.OperatorContext target_operator_context = 7;
+	optional bool pagination = 8; // if nil, pagination is true
 }
 
 message DeleteAffiliateRequest {
@@ -283,6 +341,53 @@ message ListAffiliateCampaignsRequest {
 
 message DeleteCampaignRequest {
 	int64 campaign_id = 1;
+}
+
+// -------------- Postback --------------
+
+message CreatePostbackRequest {
+    string postback_name = 1;
+    string status = 2; // active/inactive
+    repeated int64 campaign_ids = 3;
+    string action_type = 4; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    string postback_url = 5;
+    string request_method = 6; // GET/POST
+}
+
+message UpdatePostbackRequest {
+    int64 postback_id = 1;
+    string postback_name = 2;
+    string status = 3; // active/inactive
+    repeated int64 campaign_ids = 4;
+    string action_type = 5; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    string postback_url = 6;
+    string request_method = 7; // GET/POST
+}
+
+message DeletePostbackRequest {
+    int64 postback_id = 1;
+}
+
+message ListPostbacksRequest {
+    optional int64 affiliate_id = 1;
+	optional string status = 2; // active/inactive
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    api.common.OperatorContextFilters operator_context_filters = 5;
+}
+
+// -------------- Affiliate Domain --------------
+
+message ListAffiliateDomainsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message SetAffiliateDomainRequest {
+	string domain = 1;
+	optional bool available_to_all = 2;
+	repeated int64 affiliate_ids = 3;
 }
 
 // -------------- Event --------------

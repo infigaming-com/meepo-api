@@ -6,6 +6,24 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/affiliate/user/loss/revenue/share/stats/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserLossRevenueShareStats
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse'
     /v1/affiliate/user/referral/code/create:
         post:
             tags:
@@ -730,6 +748,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+    /v1/backoffice/affiliate/commission/plan/list/affiliate:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateCommissionPlans
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateCommissionPlansRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateCommissionPlansResponse'
     /v1/backoffice/affiliate/commission/plan/list/all:
         post:
             tags:
@@ -802,6 +838,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.DeleteAffiliateResponse'
+    /v1/backoffice/affiliate/domain/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateDomainsResponse'
+    /v1/backoffice/affiliate/domain/set:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_SetAffiliateDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetAffiliateDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.SetAffiliateDomainResponse'
     /v1/backoffice/affiliate/event/list:
         post:
             tags:
@@ -856,6 +928,78 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliatesResponse'
+    /v1/backoffice/affiliate/postback/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreatePostback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreatePostbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreatePostbackResponse'
+    /v1/backoffice/affiliate/postback/delete:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_DeletePostback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeletePostbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.DeletePostbackResponse'
+    /v1/backoffice/affiliate/postback/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListPostbacks
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPostbacksRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListPostbacksResponse'
+    /v1/backoffice/affiliate/postback/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdatePostback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePostbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdatePostbackResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -1217,6 +1361,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/dns/apex-domains/add:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_AddOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorApexDomainResponse'
+    /v1/backoffice/dns/apex-domains/delete:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_DeleteOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorApexDomainResponse'
+    /v1/backoffice/dns/apex-domains/list:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_ListOperatorApexDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorApexDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListOperatorApexDomainsResponse'
+    /v1/backoffice/dns/apex-domains/precheck:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_PrecheckOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PrecheckOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.PrecheckOperatorApexDomainResponse'
+    /v1/backoffice/dns/apex-domains/refresh:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_RefreshOperatorApexDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RefreshOperatorApexDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.RefreshOperatorApexDomainResponse'
     /v1/backoffice/dns/byo-domains/add:
         post:
             tags:
@@ -2118,6 +2352,116 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsResponse'
+    /v1/backoffice/game/freebets/issue:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_IssueFreebets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.IssueFreebetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.IssueFreebetsResponse'
+    /v1/backoffice/game/freebets/player/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetPlayerFreebets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerFreebetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetPlayerFreebetsResponse'
+    /v1/backoffice/game/freebets/templates/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: Freebets related APIs
+            operationId: BackofficeGame_ListFreebetTemplates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFreebetTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListFreebetTemplatesResponse'
+    /v1/backoffice/game/freespins/games/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListFreespinsGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFreespinsGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListFreespinsGamesResponse'
+    /v1/backoffice/game/freespins/issue:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_IssueFreespins
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.IssueFreespinsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.IssueFreespinsResponse'
+    /v1/backoffice/game/freespins/providers/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: Freespins related APIs
+            operationId: BackofficeGame_ListFreespinsProviders
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFreespinsProvidersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListFreespinsProvidersResponse'
     /v1/backoffice/game/list:
         post:
             tags:
@@ -2234,6 +2578,139 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.ExportSportEventsResponse'
+    /v1/backoffice/game/tags/create:
+        post:
+            tags:
+                - BackofficeGame
+            description: Create tag at operator's own level
+            operationId: BackofficeGame_BackofficeCreateGameTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeCreateGameTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeCreateGameTagResponse'
+    /v1/backoffice/game/tags/delete:
+        post:
+            tags:
+                - BackofficeGame
+            description: Delete tag (own level or lower only)
+            operationId: BackofficeGame_BackofficeDeleteGameTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeDeleteGameTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeDeleteGameTagResponse'
+    /v1/backoffice/game/tags/games/add:
+        post:
+            tags:
+                - BackofficeGame
+            description: Add games to a tag
+            operationId: BackofficeGame_BackofficeAddGamesToTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeAddGamesToTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeAddGamesToTagResponse'
+    /v1/backoffice/game/tags/games/batch-update:
+        post:
+            tags:
+                - BackofficeGame
+            description: Batch update games in tag by filter (add or remove)
+            operationId: BackofficeGame_BackofficeBatchUpdateTagGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.BackofficeBatchUpdateTagGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.BackofficeBatchUpdateTagGamesResponse'
+    /v1/backoffice/game/tags/games/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: List games under a tag (paginated, with filters)
+            operationId: BackofficeGame_BackofficeListGamesUnderTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListGamesUnderTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListGamesUnderTagResponse'
+    /v1/backoffice/game/tags/games/order/update:
+        post:
+            tags:
+                - BackofficeGame
+            description: Update game order inside a tag
+            operationId: BackofficeGame_BackofficeUpdateGameOrderInTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameOrderInTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse'
+    /v1/backoffice/game/tags/games/remove:
+        post:
+            tags:
+                - BackofficeGame
+            description: Remove games from a tag
+            operationId: BackofficeGame_BackofficeRemoveGamesFromTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeRemoveGamesFromTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeRemoveGamesFromTagResponse'
     /v1/backoffice/game/tags/list:
         post:
             tags:
@@ -2252,6 +2729,101 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsResponse'
+    /v1/backoffice/game/tags/list-all:
+        post:
+            tags:
+                - BackofficeGame
+            description: List tags visible to operator (with inheritance from system → retailer → company → operator)
+            operationId: BackofficeGame_BackofficeListGameTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListGameTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.BackofficeListGameTagsResponse'
+    /v1/backoffice/game/tags/providers/add:
+        post:
+            tags:
+                - BackofficeGame
+            description: Add provider to tag (adds all its games)
+            operationId: BackofficeGame_BackofficeAddProviderToTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeAddProviderToTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeAddProviderToTagResponse'
+    /v1/backoffice/game/tags/providers/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: List providers under a tag (no pagination)
+            operationId: BackofficeGame_BackofficeListProvidersUnderTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListProvidersUnderTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListProvidersUnderTagResponse'
+    /v1/backoffice/game/tags/providers/remove:
+        post:
+            tags:
+                - BackofficeGame
+            description: Remove provider from tag (removes provider and all its games)
+            operationId: BackofficeGame_BackofficeRemoveProviderFromTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeRemoveProviderFromTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeRemoveProviderFromTagResponse'
+    /v1/backoffice/game/tags/update:
+        post:
+            tags:
+                - BackofficeGame
+            description: Update tag name
+            operationId: BackofficeGame_BackofficeUpdateGameTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeUpdateGameTagResponse'
     /v1/backoffice/game/themes/list:
         post:
             tags:
@@ -2587,6 +3159,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/notification-channels/get:
+        post:
+            tags:
+                - BackofficeOperator
+            description: GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+            operationId: BackofficeOperator_GetOperatorNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorNotificationChannelsResponse'
+    /v1/backoffice/operator/notification-channels/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+            operationId: BackofficeOperator_UpdateOperatorNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorNotificationChannelsResponse'
     /v1/backoffice/operator/register-limit-config/get:
         post:
             tags:
@@ -2677,6 +3287,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/registration-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            description: GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+            operationId: BackofficeOperator_GetOperatorRegistrationConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegistrationConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegistrationConfigResponse'
+    /v1/backoffice/operator/registration-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            description: SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+            operationId: BackofficeOperator_SetOperatorRegistrationConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegistrationConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegistrationConfigResponse'
     /v1/backoffice/operator/registration-field-config/get:
         post:
             tags:
@@ -4604,6 +5252,120 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorTransferResponse'
+    /v1/backoffice/wallet/promo-code/campaign/create:
+        post:
+            tags:
+                - BackofficeWallet
+            description: CreatePromoCodeCampaign creates a new promo code campaign
+            operationId: BackofficeWallet_CreatePromoCodeCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreatePromoCodeCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.CreatePromoCodeCampaignResponse'
+    /v1/backoffice/wallet/promo-code/campaign/details:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
+            operationId: BackofficeWallet_ListPromoCodeCampaignDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse'
+    /v1/backoffice/wallet/promo-code/campaign/status/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
+            operationId: BackofficeWallet_UpdatePromoCodeCampaignStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse'
+    /v1/backoffice/wallet/promo-code/campaign/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
+            operationId: BackofficeWallet_UpdatePromoCodeCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePromoCodeCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdatePromoCodeCampaignResponse'
+    /v1/backoffice/wallet/promo-code/campaigns/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListPromoCodeCampaigns lists all promo code campaigns
+            operationId: BackofficeWallet_ListPromoCodeCampaigns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPromoCodeCampaignsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListPromoCodeCampaignsResponse'
+    /v1/backoffice/wallet/promo-code/codes/generate:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GeneratePromoCodes generates codes for a one_time campaign
+            operationId: BackofficeWallet_GeneratePromoCodes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GeneratePromoCodesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GeneratePromoCodesResponse'
     /v1/backoffice/wallet/responsible-gambling/config/delete:
         post:
             tags:
@@ -4768,6 +5530,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.CreateSessionResponse'
+    /v1/game/freebets/player:
+        post:
+            tags:
+                - Game
+            description: Frontend HTTP endpoint for player freebets
+            operationId: Game_GetPlayerFreebetsForFrontend
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.GetPlayerFreebetsForFrontendRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetPlayerFreebetsForFrontendResponse'
     /v1/game/get:
         post:
             tags:
@@ -5525,6 +6306,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
+    /v1/user/operator/registration-field-config/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetOperatorRegistrationFieldConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigResponse'
     /v1/user/responsible-gambling/config/add:
         post:
             tags:
@@ -5974,6 +6773,15 @@ components:
                     type: string
                 subAffiliateCommissionRate:
                     type: string
+        api.affiliate.service.v1.AffiliateDomain_Affiliate:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                affiliateCompanyName:
+                    type: string
         api.affiliate.service.v1.AffiliateInfo:
             type: object
             properties:
@@ -6137,9 +6945,7 @@ components:
                     type: string
         api.affiliate.service.v1.ChannelConfig_AgencyChannelConfig:
             type: object
-            properties:
-                campaignId:
-                    type: string
+            properties: {}
         api.affiliate.service.v1.ChannelConfig_AppsflyerChannelConfig:
             type: object
             properties:
@@ -6335,6 +7141,11 @@ components:
         api.affiliate.service.v1.CreateCommissionPlanResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.CreatePostbackResponse:
+            type: object
+            properties:
+                postbackId:
+                    type: string
         api.affiliate.service.v1.CreateUserReferralCodeRequest:
             type: object
             properties:
@@ -6352,6 +7163,9 @@ components:
             type: object
             properties: {}
         api.affiliate.service.v1.DeleteCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.DeletePostbackResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.DepositCashback:
@@ -6562,6 +7376,79 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Custom referral plan (current operator's own config)
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                referralCode:
+                    type: string
+                userId:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                conversionStartTime:
+                    type: string
+                    format: date-time
+                conversionEndTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse:
+            type: object
+            properties:
+                unpaidRewardAmount:
+                    type: string
+                unclaimedRewardAmount:
+                    type: string
+                claimedRewardAmount:
+                    type: string
+                ggrAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ngrAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
+                referredStats:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat:
+            type: object
+            properties:
+                userId:
+                    type: string
+                userName:
+                    type: string
+                referralCode:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                ngrAmountInPeriod:
+                    type: string
+                ggrAmountInPeriod:
+                    type: string
+                conversionTime:
+                    type: string
+                    format: date-time
         api.affiliate.service.v1.GetUserReferralPlanRequest:
             type: object
             properties:
@@ -6626,14 +7513,6 @@ components:
                     additionalProperties:
                         type: string
                 wageringAmount:
-                    type: object
-                    additionalProperties:
-                        type: string
-                ggrAmount:
-                    type: object
-                    additionalProperties:
-                        type: string
-                ngrAmount:
                     type: object
                     additionalProperties:
                         type: string
@@ -6707,6 +7586,82 @@ components:
                     format: date-time
                 billDetail:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateBill_BillDetail'
+        api.affiliate.service.v1.ListAffiliateCommissionPlansResponse:
+            type: object
+            properties:
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListAffiliateCommissionPlansResponse_AffiliateCommissionPlan:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                title:
+                    type: string
+                status:
+                    type: string
+                source:
+                    type: string
+                types:
+                    type: array
+                    items:
+                        type: string
+                baseCurrency:
+                    type: string
+                sourceOperatorName:
+                    type: string
+                planConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.ListAffiliateDomainsResponse:
+            type: object
+            properties:
+                domains:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateDomainsResponse_AffiliateDomain'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListAffiliateDomainsResponse_AffiliateDomain:
+            type: object
+            properties:
+                domain:
+                    type: string
+                availableToAll:
+                    type: boolean
+                affiliates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDomain_Affiliate'
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
         api.affiliate.service.v1.ListAffiliatesResponse:
             type: object
             properties:
@@ -6897,6 +7852,8 @@ components:
                     type: string
                 commissionPlanName:
                     type: string
+                commissionType:
+                    type: string
                 commissionSubtype:
                     type: string
                 reportingCurrency:
@@ -6983,6 +7940,63 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.affiliate.service.v1.ListPostbacksResponse:
+            type: object
+            properties:
+                postbacks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListPostbacksResponse_Postback'
+                total:
+                    type: integer
+                    format: int32
+                totalActive:
+                    type: integer
+                    format: int32
+                totalInactive:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListPostbacksResponse_Postback:
+            type: object
+            properties:
+                postbackId:
+                    type: string
+                postbackName:
+                    type: string
+                status:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                campaigns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.Postback_Campaign'
+                actionType:
+                    type: string
+                postbackUrl:
+                    type: string
+                requestMethod:
+                    type: string
         api.affiliate.service.v1.ListUserReferralRewardsRequest:
             type: object
             properties:
@@ -6997,10 +8011,10 @@ components:
                 tier:
                     type: integer
                     format: int32
-                registrationStartTime:
+                conversionStartTime:
                     type: string
                     format: date-time
-                registrationEndTime:
+                conversionEndTime:
                     type: string
                     format: date-time
                 page:
@@ -7037,9 +8051,13 @@ components:
                 tier:
                     type: integer
                     format: int32
-                rewardAmount:
+                unpaidRewardAmount:
                     type: string
-                registrationTime:
+                unclaimedRewardAmount:
+                    type: string
+                claimedRewardAmount:
+                    type: string
+                conversionTime:
                     type: string
                     format: date-time
         api.affiliate.service.v1.ListUsersResponse:
@@ -7177,6 +8195,13 @@ components:
                 name:
                     type: string
                 value:
+                    type: string
+        api.affiliate.service.v1.Postback_Campaign:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                campaignName:
                     type: string
         api.affiliate.service.v1.ProgressiveByCountriesCommission:
             type: object
@@ -7328,6 +8353,9 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesRateCommission'
                 qualification:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+        api.affiliate.service.v1.SetAffiliateDomainResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.SetReferralPlanResponse:
             type: object
             properties: {}
@@ -7338,6 +8366,9 @@ components:
             type: object
             properties: {}
         api.affiliate.service.v1.UpdateCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.UpdatePostbackResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.WageringCommission:
@@ -7482,6 +8513,13 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                domain:
+                    type: string
         api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
@@ -7604,6 +8642,228 @@ components:
                 audit:
                     type: string
                     description: audit a transaction "approved" or "delined"
+        api.backoffice.service.v1.BackofficeAddGamesToTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.BackofficeAddGamesToTagResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.BackofficeAddProviderToTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                providerId:
+                    type: string
+        api.backoffice.service.v1.BackofficeAddProviderToTagResponse:
+            type: object
+            properties:
+                gamesAdded:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeCreateGameTagRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+        api.backoffice.service.v1.BackofficeCreateGameTagResponse:
+            type: object
+            properties:
+                tagId:
+                    type: string
+        api.backoffice.service.v1.BackofficeDeleteGameTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+        api.backoffice.service.v1.BackofficeDeleteGameTagResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.BackofficeListGameTagsRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.BackofficeListGamesUnderTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                providerId:
+                    type: string
+                gameId:
+                    type: string
+                supportCurrencies:
+                    type: array
+                    items:
+                        type: string
+                restrictedCountries:
+                    type: array
+                    items:
+                        type: string
+                relationFilter:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                theme:
+                    type: string
+                supportBonus:
+                    type: boolean
+                freeSpin:
+                    type: boolean
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
+        api.backoffice.service.v1.BackofficeListGamesUnderTagResponse:
+            type: object
+            properties:
+                games:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListGamesUnderTagResponse_GameInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeListGamesUnderTagResponse_GameInfo:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                name:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                category:
+                    type: string
+                theme:
+                    type: string
+                supportCurrencies:
+                    type: array
+                    items:
+                        type: string
+                restrictedCountries:
+                    type: array
+                    items:
+                        type: string
+                bonusBuy:
+                    type: boolean
+                inTag:
+                    type: boolean
+                orderIndex:
+                    type: integer
+                    format: int32
+                sticky:
+                    type: boolean
+                freeSpin:
+                    type: boolean
+                rtp:
+                    type: string
+        api.backoffice.service.v1.BackofficeListProvidersUnderTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+        api.backoffice.service.v1.BackofficeListProvidersUnderTagResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.BackofficeListProvidersUnderTagResponse_ProviderInfo'
+        api.backoffice.service.v1.BackofficeListProvidersUnderTagResponse_ProviderInfo:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                totalGameCount:
+                    type: integer
+                    format: int32
+                gamesInTagCount:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeRemoveGamesFromTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.BackofficeRemoveGamesFromTagResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.BackofficeRemoveProviderFromTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                providerId:
+                    type: string
+        api.backoffice.service.v1.BackofficeRemoveProviderFromTagResponse:
+            type: object
+            properties:
+                gamesRemoved:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.BackofficeUpdateGameOrderInTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                gameId:
+                    type: string
+                orderIndex:
+                    type: integer
+                    format: int32
+                sticky:
+                    type: boolean
+        api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.BackofficeUpdateGameTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                name:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.BackofficeUpdateGameTagResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
@@ -7934,6 +9194,46 @@ components:
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
+        api.backoffice.service.v1.CreatePostbackRequest:
+            type: object
+            properties:
+                postbackName:
+                    type: string
+                status:
+                    type: string
+                campaignIds:
+                    type: array
+                    items:
+                        type: string
+                actionType:
+                    type: string
+                postbackUrl:
+                    type: string
+                requestMethod:
+                    type: string
+        api.backoffice.service.v1.CreatePromoCodeCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                name:
+                    type: string
+                codeType:
+                    type: string
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                rewardConditions:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+            description: Create Campaign (status defaults to active)
         api.backoffice.service.v1.CreateRoleRequest:
             type: object
             properties:
@@ -8104,6 +9404,11 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.DeleteOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
         api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
@@ -8129,6 +9434,11 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeletePostbackRequest:
+            type: object
+            properties:
+                postbackId:
+                    type: string
         api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
             type: object
             properties:
@@ -8468,6 +9778,20 @@ components:
         api.backoffice.service.v1.Generate2faResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.GeneratePromoCodesRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                codeLength:
+                    type: integer
+                    format: int32
+                codeFormat:
+                    type: string
+                count:
+                    type: integer
+                    format: int32
+            description: Generate Codes for Campaign (one_time only)
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
@@ -8804,6 +10128,13 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorNotificationChannelsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                channelType:
+                    type: string
         api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
             type: object
             properties:
@@ -8864,6 +10195,19 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorRegistrationConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetOperatorRegistrationConfigRequest is a combined request for getting both register limit config and registration field config
+        api.backoffice.service.v1.GetOperatorRegistrationConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRegistrationConfig'
         api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest:
             type: object
             properties:
@@ -9017,6 +10361,11 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.GetPlayerFreebetsRequest:
+            type: object
+            properties:
+                playerId:
+                    type: string
         api.backoffice.service.v1.GetPlayerGameSummaryRequest:
             type: object
             properties:
@@ -9966,6 +11315,26 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListAffiliateCommissionPlansRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListAffiliateDomainsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliateUsersRequest:
             type: object
             properties:
@@ -10020,6 +11389,8 @@ components:
                     format: int32
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                pagination:
+                    type: boolean
         api.backoffice.service.v1.ListAllCommissionPlansRequest:
             type: object
             properties:
@@ -10808,6 +12179,31 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListFreebetTemplatesRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListFreespinsGamesRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                providerId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListFreespinsProvidersRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.ListGameDataRequest:
             type: object
             properties:
@@ -11248,6 +12644,17 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListOperatorApexDomainsRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
@@ -11577,6 +12984,59 @@ components:
                     type: string
                 ggrReportingCurrency:
                     type: string
+        api.backoffice.service.v1.ListPostbacksRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                userId:
+                    type: string
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: List Campaign Details - codes (for one_time) or usages (for universal)
+        api.backoffice.service.v1.ListPromoCodeCampaignsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                status:
+                    type: string
+                codeType:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: List Campaigns
         api.backoffice.service.v1.ListProviderRatesRequest:
             type: object
             properties:
@@ -12481,8 +13941,7 @@ components:
                     type: string
                     format: date-time
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 country:
                     type: string
                 kycLevel:
@@ -12558,8 +14017,7 @@ components:
                 mobile:
                     type: string
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 kycLevel:
                     type: integer
                     format: int32
@@ -13167,10 +14625,21 @@ components:
                     type: string
                 minLaunchBalance:
                     type: string
+        api.backoffice.service.v1.OperatorRegistrationConfig:
+            type: object
+            properties:
+                registrationLimitPerIp:
+                    type: integer
+                    format: int32
+                registration:
+                    $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+                login:
+                    $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+            description: OperatorRegistrationConfig is a combined config containing both limit and field settings
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
             properties:
-                operatorContext:
+                sourceOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
@@ -13237,6 +14706,13 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
+        api.backoffice.service.v1.PrecheckOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                domain:
+                    type: string
         api.backoffice.service.v1.PurgeCloudflareCacheRequest:
             type: object
             properties:
@@ -13254,6 +14730,11 @@ components:
                 message:
                     type: string
                 error:
+                    type: string
+        api.backoffice.service.v1.RefreshOperatorApexDomainRequest:
+            type: object
+            properties:
+                apexDomain:
                     type: string
         api.backoffice.service.v1.RegisterRequest:
             type: object
@@ -13360,6 +14841,17 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SetAffiliateDomainRequest:
+            type: object
+            properties:
+                domain:
+                    type: string
+                availableToAll:
+                    type: boolean
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.SetDepositRewardSequencesRequest:
             type: object
             properties:
@@ -13410,6 +14902,19 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.backoffice.service.v1.SetOperatorRegistrationConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRegistrationConfig'
+            description: SetOperatorRegistrationConfigRequest is a combined request for setting both register limit config and registration field config
+        api.backoffice.service.v1.SetOperatorRegistrationConfigResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest:
             type: object
             properties:
@@ -13617,6 +15122,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
@@ -13648,6 +15155,15 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorCurrencyConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
+        api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                channelType:
+                    type: string
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:
@@ -13698,6 +15214,58 @@ components:
                 status:
                     type: boolean
                     description: status
+        api.backoffice.service.v1.UpdatePostbackRequest:
+            type: object
+            properties:
+                postbackId:
+                    type: string
+                postbackName:
+                    type: string
+                status:
+                    type: string
+                campaignIds:
+                    type: array
+                    items:
+                        type: string
+                actionType:
+                    type: string
+                postbackUrl:
+                    type: string
+                requestMethod:
+                    type: string
+        api.backoffice.service.v1.UpdatePromoCodeCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                name:
+                    type: string
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                rewardConditions:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+            description: Update Campaign (cannot update status or code_type)
+        api.backoffice.service.v1.UpdatePromoCodeCampaignStatusRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                status:
+                    type: string
+            description: Update Campaign Status
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -13705,6 +15273,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateProviderResponse:
             type: object
             properties: {}
@@ -14336,6 +15906,98 @@ components:
         api.game.service.v1.AddGameBetDisplayConfigResponse:
             type: object
             properties: {}
+        api.game.service.v1.BackofficeBatchUpdateTagGamesRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                tagId:
+                    type: string
+                action:
+                    type: string
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                    description: Filter conditions
+                categories:
+                    type: array
+                    items:
+                        type: string
+                feeGroups:
+                    type: array
+                    items:
+                        type: string
+                gameId:
+                    type: string
+                theme:
+                    type: string
+                supportBonus:
+                    type: boolean
+                freeSpin:
+                    type: boolean
+                rtpMin:
+                    type: string
+                rtpMax:
+                    type: string
+        api.game.service.v1.BackofficeBatchUpdateTagGamesResponse:
+            type: object
+            properties:
+                gamesAffected:
+                    type: integer
+                    format: int32
+        api.game.service.v1.BackofficeListGameTagsResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.BackofficeListGameTagsResponse_GameTag'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.BackofficeListGameTagsResponse_CreatorInfo:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+        api.game.service.v1.BackofficeListGameTagsResponse_GameTag:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                name:
+                    type: string
+                level:
+                    type: string
+                editable:
+                    type: boolean
+                createdAt:
+                    type: string
+                creator:
+                    $ref: '#/components/schemas/api.game.service.v1.BackofficeListGameTagsResponse_CreatorInfo'
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.BackofficeListGameTagsResponse_ProviderInfo'
+                gamesCount:
+                    type: integer
+                    format: int32
+        api.game.service.v1.BackofficeListGameTagsResponse_ProviderInfo:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
@@ -14506,6 +16168,172 @@ components:
             properties:
                 taskId:
                     type: string
+        api.game.service.v1.FreebetAssignmentResult:
+            type: object
+            properties:
+                playerId:
+                    type: string
+                bonus:
+                    $ref: '#/components/schemas/api.game.service.v1.FreebetIssuedBonus'
+                errorCode:
+                    type: string
+                errorMessage:
+                    type: string
+        api.game.service.v1.FreebetGrantingConfig:
+            type: object
+            properties:
+                isApiAmount:
+                    type: boolean
+                minSelections:
+                    type: integer
+                    format: int32
+                maxSelections:
+                    type: integer
+                    format: int32
+                minOdds:
+                    type: number
+                    format: double
+                maxOdds:
+                    type: number
+                    format: double
+        api.game.service.v1.FreebetIssueItem:
+            type: object
+            properties:
+                playerId:
+                    type: string
+                username:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                currency:
+                    type: string
+                forceActivate:
+                    type: boolean
+        api.game.service.v1.FreebetIssuedBonus:
+            type: object
+            properties:
+                bonusId:
+                    type: string
+                assignId:
+                    type: string
+                templateId:
+                    type: string
+                status:
+                    type: string
+                grantedAt:
+                    type: string
+                    format: date-time
+                activationDate:
+                    type: string
+                    format: date-time
+                expirationDate:
+                    type: string
+                    format: date-time
+                currency:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                maxCap:
+                    type: number
+                    format: double
+        api.game.service.v1.FreebetLocalizationEntry:
+            type: object
+            properties:
+                lang:
+                    type: string
+                externalName:
+                    type: string
+                externalTitle:
+                    type: string
+        api.game.service.v1.FreebetTemplate:
+            type: object
+            properties:
+                templateId:
+                    type: string
+                name:
+                    type: string
+                provider:
+                    type: string
+                status:
+                    type: string
+                validFrom:
+                    type: string
+                    format: date-time
+                validTo:
+                    type: string
+                    format: date-time
+                daysToUse:
+                    type: integer
+                    format: int32
+                timesAllowed:
+                    type: integer
+                    format: int32
+                isRiskFree:
+                    type: boolean
+                amounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetTemplateAmount'
+                grantingConfig:
+                    $ref: '#/components/schemas/api.game.service.v1.FreebetGrantingConfig'
+                localization:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetLocalizationEntry'
+        api.game.service.v1.FreebetTemplateAmount:
+            type: object
+            properties:
+                currency:
+                    type: string
+                amount:
+                    type: number
+                    format: double
+                maxCap:
+                    type: number
+                    format: double
+        api.game.service.v1.FreespinGame:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                betLevels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreespinGameBetLevel'
+        api.game.service.v1.FreespinGameBetLevel:
+            type: object
+            properties:
+                currency:
+                    type: string
+                betLevel:
+                    type: string
+        api.game.service.v1.FreespinUser:
+            type: object
+            properties:
+                walletUserId:
+                    type: string
+                userId:
+                    type: string
+                email:
+                    type: string
+                firstname:
+                    type: string
+                lastname:
+                    type: string
+                nickname:
+                    type: string
+                city:
+                    type: string
+                dateOfBirth:
+                    type: string
+                registeredAt:
+                    type: string
+                gender:
+                    type: string
+                country:
+                    type: string
         api.game.service.v1.GameFilter:
             type: object
             properties:
@@ -14514,9 +16342,9 @@ components:
                     items:
                         type: string
                     description: 'provider id: provider list api'
-                tag:
+                tagId:
                     type: string
-                    description: 'tag: hot game, live casino, slots, etc..'
+                    description: 'tag_id: tag ID for filtering games'
                 name:
                     type: string
                     description: 'name: game name'
@@ -14892,6 +16720,81 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.game.service.v1.GetPlayerFreebetsForFrontendRequest:
+            type: object
+            properties: {}
+        api.game.service.v1.GetPlayerFreebetsForFrontendResponse:
+            type: object
+            properties:
+                bonuses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetIssuedBonus'
+                total:
+                    type: integer
+                    format: int32
+        api.game.service.v1.GetPlayerFreebetsResponse:
+            type: object
+            properties:
+                bonuses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetIssuedBonus'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.IssueFreebetsRequest:
+            type: object
+            properties:
+                templateId:
+                    type: string
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetIssueItem'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.game.service.v1.IssueFreebetsResponse:
+            type: object
+            properties:
+                results:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetAssignmentResult'
+        api.game.service.v1.IssueFreespinsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                freespinId:
+                    type: string
+                user:
+                    $ref: '#/components/schemas/api.game.service.v1.FreespinUser'
+                requestId:
+                    type: string
+                games:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreespinGame'
+                quantity:
+                    type: string
+                startAt:
+                    type: string
+                expireAt:
+                    type: string
+                validUntil:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.game.service.v1.IssueFreespinsResponse:
+            type: object
+            properties: {}
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -15051,6 +16954,67 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.game.service.v1.ListFreebetTemplatesResponse:
+            type: object
+            properties:
+                templates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.FreebetTemplate'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListFreespinsGamesResponse:
+            type: object
+            properties:
+                games:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListFreespinsGamesResponse_Game'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListFreespinsGamesResponse_Game:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                hasFreespins:
+                    type: boolean
+        api.game.service.v1.ListFreespinsProvidersResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListFreespinsProvidersResponse_Provider'
+        api.game.service.v1.ListFreespinsProvidersResponse_Provider:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                freespinsSupported:
+                    type: boolean
         api.game.service.v1.ListGameBetDisplayConfigRequest:
             type: object
             properties:
@@ -15220,6 +17184,10 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Operator context for hierarchical enabled status
         api.game.service.v1.ListProvidersResponse:
             type: object
             properties:
@@ -15983,6 +17951,17 @@ components:
                 reviewDuration:
                     type: integer
                     format: int32
+        api.user.service.v1.AddOperatorApexDomainResponse:
+            type: object
+            properties:
+                dnsInstructions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.DnsInstruction'
+                status:
+                    type: string
+                message:
+                    type: string
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties:
@@ -16005,6 +17984,49 @@ components:
         api.user.service.v1.AddResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.user.service.v1.ApexDomainInfo:
+            type: object
+            properties:
+                apexDomain:
+                    type: string
+                wwwDomain:
+                    type: string
+                domain:
+                    type: string
+                status:
+                    type: string
+                errorReason:
+                    type: string
+                nginxIp:
+                    type: string
+                certExpiresAt:
+                    type: string
+                targetOperatorId:
+                    type: string
+                targetOperatorName:
+                    type: string
+                targetCompanyOperatorId:
+                    type: string
+                targetCompanyOperatorName:
+                    type: string
+                targetRetailerOperatorId:
+                    type: string
+                targetRetailerOperatorName:
+                    type: string
+                targetSystemOperatorId:
+                    type: string
+                targetSystemOperatorName:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                provisioningStartedAt:
+                    type: string
+                provisioningCompletedAt:
+                    type: string
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -16102,6 +18124,9 @@ components:
                         - VIP_REWARD_KIND_RAKEBACK_MONTHLY
                     type: string
                     format: enum
+        api.user.service.v1.DeleteOperatorApexDomainResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
@@ -16121,6 +18146,17 @@ components:
         api.user.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.user.service.v1.DnsInstruction:
+            type: object
+            properties:
+                type:
+                    type: string
+                name:
+                    type: string
+                value:
+                    type: string
+                description:
+                    type: string
         api.user.service.v1.DomainInfo:
             type: object
             properties:
@@ -16170,6 +18206,11 @@ components:
                     type: string
                 clientIp:
                     type: string
+        api.user.service.v1.GetOperatorNotificationChannelsResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
         api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
             type: object
             properties:
@@ -16177,6 +18218,13 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.user.service.v1.GetOperatorRegistrationFieldConfigRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.GetOperatorRegistrationFieldConfigResponse:
             type: object
             properties:
@@ -16231,8 +18279,7 @@ components:
                 userId:
                     type: string
                 vipLevel:
-                    type: integer
-                    format: int32
+                    type: string
                 online:
                     type: boolean
                 banWithdraw:
@@ -16473,6 +18520,22 @@ components:
                 reportingCurrency:
                     type: string
             description: OperatorInfo is the simplified information of a company operator, used for list company operators
+        api.user.service.v1.ListOperatorApexDomainsResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ApexDomainInfo'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
         api.user.service.v1.ListOperatorByoDomainsResponse:
             type: object
             properties:
@@ -16594,6 +18657,29 @@ components:
             type: object
             properties: {}
             description: LogoutResponse is an empty message for the logout operation.
+        api.user.service.v1.NotificationChannelConfig:
+            type: object
+            properties:
+                telegram:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig_TelegramConfig'
+                slack:
+                    $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig_SlackConfig'
+        api.user.service.v1.NotificationChannelConfig_SlackConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                webhookUrl:
+                    type: string
+        api.user.service.v1.NotificationChannelConfig_TelegramConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                botToken:
+                    type: string
+                chatId:
+                    type: string
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
@@ -16772,6 +18858,28 @@ components:
                 balance:
                     type: string
                 threshhold:
+                    type: string
+        api.user.service.v1.PrecheckOperatorApexDomainResponse:
+            type: object
+            properties:
+                bindable:
+                    type: boolean
+                apexIp:
+                    type: string
+                message:
+                    type: string
+                wwwDomain:
+                    type: string
+        api.user.service.v1.RefreshOperatorApexDomainResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                certExpiresAt:
+                    type: string
+                errorReason:
+                    type: string
+                message:
                     type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
@@ -17018,6 +19126,9 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateOperatorNotificationChannelsResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UpdateOperatorStatusResponse:
             type: object
             properties:
@@ -17091,6 +19202,8 @@ components:
                 campaignId:
                     type: string
                 affiliateId:
+                    type: string
+                operatorUserId:
                     type: string
         api.user.service.v1.UpdateUserResponse:
             type: object
@@ -17360,6 +19473,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                userWithdrawnMet:
+                    type: boolean
         api.vip.service.v1.GetClaimableVipRewardsResponse:
             type: object
             properties:
@@ -17795,6 +19910,14 @@ components:
         api.wallet.service.v1.AddResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.AffiliateCondition:
+            type: object
+            properties:
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+            description: Affiliate condition for promo code campaign
         api.wallet.service.v1.BonusTransferRequest:
             type: object
             properties:
@@ -17815,6 +19938,9 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.CreatePromoCodeCampaignResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.CreditResponse:
             type: object
             properties:
@@ -17886,6 +20012,19 @@ components:
         api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.DepositCondition:
+            type: object
+            properties:
+                timeRangeDays:
+                    type: integer
+                    format: int32
+                reportingCurrencyAggregate:
+                    type: boolean
+                currency:
+                    type: string
+                amount:
+                    type: string
+            description: Deposit condition for promo code campaign
         api.wallet.service.v1.DepositRewardConfig:
             type: object
             properties:
@@ -17937,6 +20076,63 @@ components:
                     type: string
                 thresholdAmount:
                     type: string
+        api.wallet.service.v1.FreeBetConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                template:
+                    type: object
+                betCount:
+                    type: integer
+                    format: int32
+                freeBetValidity:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+            description: Free bet config for deposit reward or promo code
+        api.wallet.service.v1.FreeSpinConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                currency:
+                    type: string
+                providerId:
+                    type: string
+                gameId:
+                    type: string
+                level:
+                    type: integer
+                    format: int32
+                spinCount:
+                    type: integer
+                    format: int32
+                freeSpinValidity:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+            description: Free spin config for deposit reward or promo code
+        api.wallet.service.v1.GeneratePromoCodesResponse:
+            type: object
+            properties:
+                generatedCount:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
@@ -18176,6 +20372,16 @@ components:
                     type: string
                 transferableBonus:
                     type: string
+        api.wallet.service.v1.InvitationCondition:
+            type: object
+            properties:
+                timeRangeDays:
+                    type: integer
+                    format: int32
+                invitationCount:
+                    type: integer
+                    format: int32
+            description: Invitation condition for promo code campaign
         api.wallet.service.v1.ListBottomOperatorBalancesResponse:
             type: object
             properties:
@@ -18403,6 +20609,53 @@ components:
                     type: string
                 turnoverThreshold:
                     type: string
+        api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse:
+            type: object
+            properties:
+                codeType:
+                    type: string
+                codes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeListItem'
+                usages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeUsageListItem'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.ListPromoCodeCampaignsResponse:
+            type: object
+            properties:
+                campaigns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeCampaignListItem'
+                total:
+                    type: integer
+                    format: int32
+                activeCount:
+                    type: integer
+                    format: int32
+                pausedCount:
+                    type: integer
+                    format: int32
+                disabledCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
             properties:
@@ -18458,6 +20711,141 @@ components:
                     type: string
                 wageringUnlockPriority:
                     type: string
+        api.wallet.service.v1.PromoCodeBonusMoneyConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                amount:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+            description: Bonus money config for promo code campaign
+        api.wallet.service.v1.PromoCodeCampaignListItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                codeType:
+                    type: string
+                rewardTrigger:
+                    type: string
+                status:
+                    type: string
+                rewardConfigs:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeRewardConfigs'
+                usageCount:
+                    type: integer
+                    format: int32
+                totalCodesGenerated:
+                    type: integer
+                    format: int32
+                maxUsageLimit:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                    format: date-time
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        api.wallet.service.v1.PromoCodeConditions:
+            type: object
+            properties:
+                depositCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DepositCondition'
+                registrationTimeCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.RegistrationTimeCondition'
+                invitationCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.InvitationCondition'
+                turnoverCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.TurnoverCondition'
+                referrerCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.ReferrerCondition'
+                affiliateCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.AffiliateCondition'
+                verificationStatusCondition:
+                    $ref: '#/components/schemas/api.wallet.service.v1.VerificationStatusCondition'
+            description: Campaign conditions - all conditions must be satisfied to trigger the reward
+        api.wallet.service.v1.PromoCodeListItem:
+            type: object
+            properties:
+                code:
+                    type: string
+                status:
+                    type: string
+                usedByUserId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                usedAt:
+                    type: string
+                    format: date-time
+            description: Code item for one_time campaigns
+        api.wallet.service.v1.PromoCodeRewardConfigs:
+            type: object
+            properties:
+                bonusMoneyConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeBonusMoneyConfig'
+                freeSpinConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
+            description: Campaign reward configs (all optional)
+        api.wallet.service.v1.PromoCodeUsageListItem:
+            type: object
+            properties:
+                code:
+                    type: string
+                userId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                usedAt:
+                    type: string
+                    format: date-time
+            description: Usage item for universal campaigns
+        api.wallet.service.v1.ReferrerCondition:
+            type: object
+            properties:
+                onlyValidAllowed:
+                    type: boolean
+                referrerIds:
+                    type: array
+                    items:
+                        type: string
+            description: Referrer condition for promo code campaign
+        api.wallet.service.v1.RegistrationTimeCondition:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+            description: Registration time condition for promo code campaign
         api.wallet.service.v1.ResponsibleGamblingConfig:
             type: object
             properties:
@@ -18570,12 +20958,33 @@ components:
                     type: string
                 maxWithdrawalMultiplier:
                     type: string
+                freeSpinConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
             type: object
             properties: {}
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.TurnoverCondition:
+            type: object
+            properties:
+                timeRangeDays:
+                    type: integer
+                    format: int32
+                reportingCurrencyAggregate:
+                    type: boolean
+                currency:
+                    type: string
+                amount:
+                    type: string
+            description: Turnover condition for promo code campaign
         api.wallet.service.v1.UpdateDeductionOrderResponse:
             type: object
             properties: {}
@@ -18583,6 +20992,12 @@ components:
             type: object
             properties: {}
         api.wallet.service.v1.UpdateOperatorCurrencyResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdatePromoCodeCampaignResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UserBalanceDetail:
@@ -18629,6 +21044,14 @@ components:
                     type: string
                 maximumOperatorBonusWithdrawalAmount:
                     type: string
+        api.wallet.service.v1.VerificationStatusCondition:
+            type: object
+            properties:
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
+            description: Verification status condition for promo code campaign
         google.protobuf.ListValue:
             type: object
             properties:

@@ -1404,3 +1404,87 @@ func IsDefaultCurrencyNotSupported(err error) bool {
 func ErrorDefaultCurrencyNotSupported(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_DEFAULT_CURRENCY_NOT_SUPPORTED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsApexDomainAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_APEX_DOMAIN_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorApexDomainAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_APEX_DOMAIN_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWwwDomainNotActive(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WWW_DOMAIN_NOT_ACTIVE.String() && e.Code == 500
+}
+
+func ErrorWwwDomainNotActive(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WWW_DOMAIN_NOT_ACTIVE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsApexDomainNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_APEX_DOMAIN_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorApexDomainNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_APEX_DOMAIN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddApexDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_APEX_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddApexDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteApexDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_APEX_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteApexDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRefreshApexDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REFRESH_APEX_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorRefreshApexDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REFRESH_APEX_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidEmailAddress(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_EMAIL_ADDRESS.String() && e.Code == 500
+}
+
+func ErrorInvalidEmailAddress(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_EMAIL_ADDRESS.String(), fmt.Sprintf(format, args...))
+}

@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "user/service/v1/user.proto";
+import "user/service/v1/operator.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -173,6 +174,38 @@ service BackofficeOperator {
 	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (user.service.v1.GetOperatorRegistrationFieldConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/registration-field-config/get"
+			body: "*"
+		};
+	}
+
+	// SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
+	rpc SetOperatorRegistrationConfig(SetOperatorRegistrationConfigRequest) returns (SetOperatorRegistrationConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/registration-config/set"
+			body: "*"
+		};
+	}
+
+	// GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
+	rpc GetOperatorRegistrationConfig(GetOperatorRegistrationConfigRequest) returns (GetOperatorRegistrationConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/registration-config/get"
+			body: "*"
+		};
+	}
+
+	// UpdateOperatorNotificationChannels updates notification channel configuration for an operator
+	rpc UpdateOperatorNotificationChannels(UpdateOperatorNotificationChannelsRequest) returns (user.service.v1.UpdateOperatorNotificationChannelsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/notification-channels/update"
+			body: "*"
+		};
+	}
+
+	// GetOperatorNotificationChannels retrieves notification channel configuration for an operator
+	rpc GetOperatorNotificationChannels(GetOperatorNotificationChannelsRequest) returns (user.service.v1.GetOperatorNotificationChannelsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/notification-channels/get"
 			body: "*"
 		};
 	}
@@ -389,3 +422,37 @@ message GetOperatorRegistrationFieldConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 }
 
+// OperatorRegistrationConfig is a combined config containing both limit and field settings
+message OperatorRegistrationConfig {
+	int32 registration_limit_per_ip = 1;
+	user.service.v1.RegistrationFieldSet registration = 2;
+	user.service.v1.RegistrationFieldSet login = 3;
+}
+
+// SetOperatorRegistrationConfigRequest is a combined request for setting both register limit config and registration field config
+message SetOperatorRegistrationConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	map<string, OperatorRegistrationConfig> config = 2;
+}
+
+message SetOperatorRegistrationConfigResponse {}
+
+// GetOperatorRegistrationConfigRequest is a combined request for getting both register limit config and registration field config
+message GetOperatorRegistrationConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message GetOperatorRegistrationConfigResponse {
+	map<string, OperatorRegistrationConfig> config = 1;
+}
+
+message UpdateOperatorNotificationChannelsRequest {
+	int64 operator_id = 1;
+	string channel_type = 2;
+	api.user.service.v1.NotificationChannelConfig config = 3;
+}
+
+message GetOperatorNotificationChannelsRequest {
+	int64 operator_id = 1;
+	string channel_type = 2;
+}

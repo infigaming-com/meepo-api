@@ -74,8 +74,6 @@ message GetUserReferralStatsResponse {
         map<int32, int32> conversion_count = 1; // map of tier number (1-10) to conversion count
         map<int32, string> deposit_amount = 2; // map of tier number (1-10) to deposit amount
         map<int32, string> wagering_amount = 3; // map of tier number (1-10) to wagering amount, focus on game bet and game bet rollback
-        map<int32, string> ggr_amount = 4; // map of tier number (1-10) to ggr, all of the game transactions
-        map<int32, string> ngr_amount = 5; // map of tier number (1-10) to ngr, all of the game transactions
     }
     // Referral codes created by the user
     repeated ReferralCode referral_codes = 1;
@@ -108,8 +106,8 @@ message ListUserReferralRewardsRequest {
     optional string referral_code = 3;
     optional int64 user_id = 4;
     optional int32 tier = 5;
-    optional google.protobuf.Timestamp registration_start_time = 6;
-    optional google.protobuf.Timestamp registration_end_time = 7;
+    optional google.protobuf.Timestamp conversion_start_time = 6;
+    optional google.protobuf.Timestamp conversion_end_time = 7;
     optional int32 page = 8;
     optional int32 page_size = 9;
 }
@@ -120,8 +118,10 @@ message ListUserReferralRewardsResponse {
         int64 user_id = 2;
         string referral_code = 3;
         int32 tier = 4;
-        string reward_amount = 5;
-        google.protobuf.Timestamp registration_time = 6;
+        string unpaid_reward_amount = 5;
+        string unclaimed_reward_amount = 6;
+        string claimed_reward_amount = 7;
+        google.protobuf.Timestamp conversion_time = 8;
     }
     repeated ReferralReward referral_rewards = 1;
     int32 total = 2;
@@ -144,6 +144,38 @@ message ClaimUserReferralRewardsRequest {
 }
 
 message ClaimUserReferralRewardsResponse {
+}
+
+message GetUserLossRevenueShareStatsRequest {
+    string currency = 1;
+    optional string referral_code = 3;
+    optional int64 user_id = 4;
+    optional int32 tier = 5; // for filter referred stats, other fields remain the same
+    optional google.protobuf.Timestamp conversion_start_time = 6;
+    optional google.protobuf.Timestamp conversion_end_time = 7;
+    optional int32 page = 8;
+    optional int32 page_size = 9;
+}
+
+message GetUserLossRevenueShareStatsResponse {
+    message ReferredStat {
+        int64 user_id = 1;
+        string user_name = 2;
+        string referral_code = 3;
+        int32 tier = 4;
+        string ngr_amount_in_period = 5;
+        string ggr_amount_in_period = 6;
+        google.protobuf.Timestamp conversion_time = 7;
+    }
+    string unpaid_reward_amount = 1; // now only calculate for user's tier 1
+    string unclaimed_reward_amount = 2;
+    string claimed_reward_amount = 3;
+    map<int32, string> ggr_amount_in_period = 4; // map of tier number (1-10) to ggr amount in the period
+    map<int32, string> ngr_amount_in_period = 5; // map of tier number (1-10) to ngr amount in the period
+    repeated ReferredStat referred_stats = 6;
+    int32 total = 7; // for referred stats
+    int32 page = 8; // for referred stats
+    int32 page_size = 9; // for referred stats
 }
 
 // ------------------------------------------------------------------------------------------------

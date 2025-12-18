@@ -83,6 +83,23 @@ const (
 	ErrorReason_GET_USER_REFERRAL_STATS_FAILED                      ErrorReason = 130055
 	ErrorReason_GET_USER_REFERRAL_REWARDS_FAILED                    ErrorReason = 130056
 	ErrorReason_CLAIM_USER_REFERRAL_REWARDS_FAILED                  ErrorReason = 130057
+	ErrorReason_POSTBACK_PERMISSION_DENIED                          ErrorReason = 130058
+	ErrorReason_POSTBACK_OWNERSHIP_DENIED                           ErrorReason = 130059
+	ErrorReason_POSTBACK_NOT_FOUND                                  ErrorReason = 130060
+	ErrorReason_INVALID_POSTBACK_NAME                               ErrorReason = 130061
+	ErrorReason_INVALID_POSTBACK_STATUS                             ErrorReason = 130062
+	ErrorReason_INVALID_POSTBACK_ACTION_TYPE                        ErrorReason = 130063
+	ErrorReason_INVALID_POSTBACK_URL                                ErrorReason = 130064
+	ErrorReason_INVALID_POSTBACK_REQUEST_METHOD                     ErrorReason = 130065
+	ErrorReason_INVALID_POSTBACK_CAMPAIGN_IDS                       ErrorReason = 130066
+	ErrorReason_CREATE_POSTBACK_FAILED                              ErrorReason = 130067
+	ErrorReason_UPDATE_POSTBACK_FAILED                              ErrorReason = 130068
+	ErrorReason_DELETE_POSTBACK_FAILED                              ErrorReason = 130069
+	ErrorReason_LIST_POSTBACKS_FAILED                               ErrorReason = 130070
+	ErrorReason_DOMAIN_NOT_FOUND                                    ErrorReason = 130071
+	ErrorReason_DOMAIN_NOT_AUTHORIZED                               ErrorReason = 130072
+	ErrorReason_LIST_AFFILIATE_DOMAINS_FAILED                       ErrorReason = 130073
+	ErrorReason_SET_AFFILIATE_DOMAIN_FAILED                         ErrorReason = 130074
 )
 
 // Enum value maps for ErrorReason.
@@ -146,6 +163,23 @@ var (
 		130055: "GET_USER_REFERRAL_STATS_FAILED",
 		130056: "GET_USER_REFERRAL_REWARDS_FAILED",
 		130057: "CLAIM_USER_REFERRAL_REWARDS_FAILED",
+		130058: "POSTBACK_PERMISSION_DENIED",
+		130059: "POSTBACK_OWNERSHIP_DENIED",
+		130060: "POSTBACK_NOT_FOUND",
+		130061: "INVALID_POSTBACK_NAME",
+		130062: "INVALID_POSTBACK_STATUS",
+		130063: "INVALID_POSTBACK_ACTION_TYPE",
+		130064: "INVALID_POSTBACK_URL",
+		130065: "INVALID_POSTBACK_REQUEST_METHOD",
+		130066: "INVALID_POSTBACK_CAMPAIGN_IDS",
+		130067: "CREATE_POSTBACK_FAILED",
+		130068: "UPDATE_POSTBACK_FAILED",
+		130069: "DELETE_POSTBACK_FAILED",
+		130070: "LIST_POSTBACKS_FAILED",
+		130071: "DOMAIN_NOT_FOUND",
+		130072: "DOMAIN_NOT_AUTHORIZED",
+		130073: "LIST_AFFILIATE_DOMAINS_FAILED",
+		130074: "SET_AFFILIATE_DOMAIN_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -206,6 +240,23 @@ var (
 		"GET_USER_REFERRAL_STATS_FAILED":                      130055,
 		"GET_USER_REFERRAL_REWARDS_FAILED":                    130056,
 		"CLAIM_USER_REFERRAL_REWARDS_FAILED":                  130057,
+		"POSTBACK_PERMISSION_DENIED":                          130058,
+		"POSTBACK_OWNERSHIP_DENIED":                           130059,
+		"POSTBACK_NOT_FOUND":                                  130060,
+		"INVALID_POSTBACK_NAME":                               130061,
+		"INVALID_POSTBACK_STATUS":                             130062,
+		"INVALID_POSTBACK_ACTION_TYPE":                        130063,
+		"INVALID_POSTBACK_URL":                                130064,
+		"INVALID_POSTBACK_REQUEST_METHOD":                     130065,
+		"INVALID_POSTBACK_CAMPAIGN_IDS":                       130066,
+		"CREATE_POSTBACK_FAILED":                              130067,
+		"UPDATE_POSTBACK_FAILED":                              130068,
+		"DELETE_POSTBACK_FAILED":                              130069,
+		"LIST_POSTBACKS_FAILED":                               130070,
+		"DOMAIN_NOT_FOUND":                                    130071,
+		"DOMAIN_NOT_AUTHORIZED":                               130072,
+		"LIST_AFFILIATE_DOMAINS_FAILED":                       130073,
+		"SET_AFFILIATE_DOMAIN_FAILED":                         130074,
 	}
 )
 
@@ -240,7 +291,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x83\x10\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x9c\x14\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -299,7 +350,24 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"!LIST_USER_REFERRAL_REWARDS_FAILED\x10\x86\xf8\a\x12$\n" +
 	"\x1eGET_USER_REFERRAL_STATS_FAILED\x10\x87\xf8\a\x12&\n" +
 	" GET_USER_REFERRAL_REWARDS_FAILED\x10\x88\xf8\a\x12(\n" +
-	"\"CLAIM_USER_REFERRAL_REWARDS_FAILED\x10\x89\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\"CLAIM_USER_REFERRAL_REWARDS_FAILED\x10\x89\xf8\a\x12 \n" +
+	"\x1aPOSTBACK_PERMISSION_DENIED\x10\x8a\xf8\a\x12\x1f\n" +
+	"\x19POSTBACK_OWNERSHIP_DENIED\x10\x8b\xf8\a\x12\x18\n" +
+	"\x12POSTBACK_NOT_FOUND\x10\x8c\xf8\a\x12\x1b\n" +
+	"\x15INVALID_POSTBACK_NAME\x10\x8d\xf8\a\x12\x1d\n" +
+	"\x17INVALID_POSTBACK_STATUS\x10\x8e\xf8\a\x12\"\n" +
+	"\x1cINVALID_POSTBACK_ACTION_TYPE\x10\x8f\xf8\a\x12\x1a\n" +
+	"\x14INVALID_POSTBACK_URL\x10\x90\xf8\a\x12%\n" +
+	"\x1fINVALID_POSTBACK_REQUEST_METHOD\x10\x91\xf8\a\x12#\n" +
+	"\x1dINVALID_POSTBACK_CAMPAIGN_IDS\x10\x92\xf8\a\x12\x1c\n" +
+	"\x16CREATE_POSTBACK_FAILED\x10\x93\xf8\a\x12\x1c\n" +
+	"\x16UPDATE_POSTBACK_FAILED\x10\x94\xf8\a\x12\x1c\n" +
+	"\x16DELETE_POSTBACK_FAILED\x10\x95\xf8\a\x12\x1b\n" +
+	"\x15LIST_POSTBACKS_FAILED\x10\x96\xf8\a\x12\x16\n" +
+	"\x10DOMAIN_NOT_FOUND\x10\x97\xf8\a\x12\x1b\n" +
+	"\x15DOMAIN_NOT_AUTHORIZED\x10\x98\xf8\a\x12#\n" +
+	"\x1dLIST_AFFILIATE_DOMAINS_FAILED\x10\x99\xf8\a\x12!\n" +
+	"\x1bSET_AFFILIATE_DOMAIN_FAILED\x10\x9a\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
