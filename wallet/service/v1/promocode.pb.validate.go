@@ -5459,6 +5459,8 @@ func (m *FreeBetConfig_FreeBetReward) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
 	if all {
 		switch v := interface{}(m.GetTemplate()).(type) {
 		case interface{ ValidateAll() error }:

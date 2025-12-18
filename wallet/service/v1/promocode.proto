@@ -38,12 +38,13 @@ message FreeBetConfig {
 	string reward_type = 2;              // cash | bonus (winning credit type)
 	repeated FreeBetReward rewards = 3;
 	message FreeBetReward {
-		google.protobuf.Struct template = 1; // bet template
-		int32 bet_count = 2;
-		int64 free_bet_validity = 3;         // ms, 0 = no expiration
-		int32 wagering_requirement = 4;
-		string max_withdrawal_multiplier = 5;
-		int64 reward_validity = 6;           // winning reward validity (ms)
+		string currency = 1;                 // settlement currency
+		google.protobuf.Struct template = 2; // bet template
+		int32 bet_count = 3;
+		int64 free_bet_validity = 4;         // ms, 0 = no expiration
+		int32 wagering_requirement = 5;
+		string max_withdrawal_multiplier = 6;
+		int64 reward_validity = 7;           // winning reward validity (ms)
 	}
 }
 

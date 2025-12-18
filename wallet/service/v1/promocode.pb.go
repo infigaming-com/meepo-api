@@ -2538,12 +2538,13 @@ func (x *FreeSpinConfig_FreeSpinReward) GetRewardValidity() int64 {
 
 type FreeBetConfig_FreeBetReward struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Template                *structpb.Struct       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"` // bet template
-	BetCount                int32                  `protobuf:"varint,2,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	FreeBetValidity         int64                  `protobuf:"varint,3,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
-	WageringRequirement     int32                  `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
+	Currency                string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"` // settlement currency
+	Template                *structpb.Struct       `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"` // bet template
+	BetCount                int32                  `protobuf:"varint,3,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	FreeBetValidity         int64                  `protobuf:"varint,4,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
+	WageringRequirement     int32                  `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                 `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                  `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -2576,6 +2577,13 @@ func (x *FreeBetConfig_FreeBetReward) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FreeBetConfig_FreeBetReward.ProtoReflect.Descriptor instead.
 func (*FreeBetConfig_FreeBetReward) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 func (x *FreeBetConfig_FreeBetReward) GetTemplate() *structpb.Struct {
@@ -2641,19 +2649,20 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\x12free_spin_validity\x18\x06 \x01(\x03R\x10freeSpinValidity\x121\n" +
 	"\x14wagering_requirement\x18\a \x01(\x05R\x13wageringRequirement\x12:\n" +
 	"\x19max_withdrawal_multiplier\x18\b \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\t \x01(\x03R\x0erewardValidity\"\xc0\x03\n" +
+	"\x0freward_validity\x18\t \x01(\x03R\x0erewardValidity\"\xdc\x03\n" +
 	"\rFreeBetConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
 	"rewardType\x12L\n" +
-	"\arewards\x18\x03 \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1a\xa5\x02\n" +
-	"\rFreeBetReward\x123\n" +
-	"\btemplate\x18\x01 \x01(\v2\x17.google.protobuf.StructR\btemplate\x12\x1b\n" +
-	"\tbet_count\x18\x02 \x01(\x05R\bbetCount\x12*\n" +
-	"\x11free_bet_validity\x18\x03 \x01(\x03R\x0ffreeBetValidity\x121\n" +
-	"\x14wagering_requirement\x18\x04 \x01(\x05R\x13wageringRequirement\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\"\xa2\x02\n" +
+	"\arewards\x18\x03 \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1a\xc1\x02\n" +
+	"\rFreeBetReward\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x123\n" +
+	"\btemplate\x18\x02 \x01(\v2\x17.google.protobuf.StructR\btemplate\x12\x1b\n" +
+	"\tbet_count\x18\x03 \x01(\x05R\bbetCount\x12*\n" +
+	"\x11free_bet_validity\x18\x04 \x01(\x03R\x0ffreeBetValidity\x121\n" +
+	"\x14wagering_requirement\x18\x05 \x01(\x05R\x13wageringRequirement\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\x06 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
+	"\x0freward_validity\x18\a \x01(\x03R\x0erewardValidity\"\xa2\x02\n" +
 	"\x19PromoCodeBonusMoneyConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
