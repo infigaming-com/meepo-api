@@ -66,6 +66,8 @@ const (
 	Wallet_ListPromoCodeCampaigns_FullMethodName              = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaigns"
 	Wallet_ListPromoCodeCampaignDetails_FullMethodName        = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaignDetails"
 	Wallet_GeneratePromoCodes_FullMethodName                  = "/api.wallet.service.v1.Wallet/GeneratePromoCodes"
+	Wallet_GetPromoCodeInfo_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
+	Wallet_ClaimPromoCode_FullMethodName                      = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
@@ -174,6 +176,10 @@ type WalletClient interface {
 	ListPromoCodeCampaignDetails(ctx context.Context, in *ListPromoCodeCampaignDetailsRequest, opts ...grpc.CallOption) (*ListPromoCodeCampaignDetailsResponse, error)
 	// GeneratePromoCodes generates codes for a one_time campaign
 	GeneratePromoCodes(ctx context.Context, in *GeneratePromoCodesRequest, opts ...grpc.CallOption) (*GeneratePromoCodesResponse, error)
+	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
+	GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...grpc.CallOption) (*GetPromoCodeInfoResponse, error)
+	// ClaimPromoCode claims promo code reward for the current user
+	ClaimPromoCode(ctx context.Context, in *ClaimPromoCodeRequest, opts ...grpc.CallOption) (*ClaimPromoCodeResponse, error)
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(ctx context.Context, in *GetUserDepositRewardSequenceRequest, opts ...grpc.CallOption) (*GetUserDepositRewardSequenceResponse, error)
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
@@ -693,6 +699,26 @@ func (c *walletClient) GeneratePromoCodes(ctx context.Context, in *GeneratePromo
 	return out, nil
 }
 
+func (c *walletClient) GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...grpc.CallOption) (*GetPromoCodeInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPromoCodeInfoResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetPromoCodeInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ClaimPromoCode(ctx context.Context, in *ClaimPromoCodeRequest, opts ...grpc.CallOption) (*ClaimPromoCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClaimPromoCodeResponse)
+	err := c.cc.Invoke(ctx, Wallet_ClaimPromoCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) GetUserDepositRewardSequence(ctx context.Context, in *GetUserDepositRewardSequenceRequest, opts ...grpc.CallOption) (*GetUserDepositRewardSequenceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserDepositRewardSequenceResponse)
@@ -997,6 +1023,10 @@ type WalletServer interface {
 	ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*ListPromoCodeCampaignDetailsResponse, error)
 	// GeneratePromoCodes generates codes for a one_time campaign
 	GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*GeneratePromoCodesResponse, error)
+	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
+	GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error)
+	// ClaimPromoCode claims promo code reward for the current user
+	ClaimPromoCode(context.Context, *ClaimPromoCodeRequest) (*ClaimPromoCodeResponse, error)
 	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error)
 	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
@@ -1186,6 +1216,12 @@ func (UnimplementedWalletServer) ListPromoCodeCampaignDetails(context.Context, *
 }
 func (UnimplementedWalletServer) GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*GeneratePromoCodesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GeneratePromoCodes not implemented")
+}
+func (UnimplementedWalletServer) GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPromoCodeInfo not implemented")
+}
+func (UnimplementedWalletServer) ClaimPromoCode(context.Context, *ClaimPromoCodeRequest) (*ClaimPromoCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClaimPromoCode not implemented")
 }
 func (UnimplementedWalletServer) GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserDepositRewardSequence not implemented")
@@ -2120,6 +2156,42 @@ func _Wallet_GeneratePromoCodes_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetPromoCodeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPromoCodeInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetPromoCodeInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetPromoCodeInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetPromoCodeInfo(ctx, req.(*GetPromoCodeInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ClaimPromoCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClaimPromoCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ClaimPromoCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ClaimPromoCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ClaimPromoCode(ctx, req.(*ClaimPromoCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_GetUserDepositRewardSequence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserDepositRewardSequenceRequest)
 	if err := dec(in); err != nil {
@@ -2710,6 +2782,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GeneratePromoCodes",
 			Handler:    _Wallet_GeneratePromoCodes_Handler,
+		},
+		{
+			MethodName: "GetPromoCodeInfo",
+			Handler:    _Wallet_GetPromoCodeInfo_Handler,
+		},
+		{
+			MethodName: "ClaimPromoCode",
+			Handler:    _Wallet_ClaimPromoCode_Handler,
 		},
 		{
 			MethodName: "GetUserDepositRewardSequence",

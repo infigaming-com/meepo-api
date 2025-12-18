@@ -21,9 +21,11 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationWalletAddResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
 const OperationWalletBonusTransfer = "/api.wallet.service.v1.Wallet/BonusTransfer"
+const OperationWalletClaimPromoCode = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 const OperationWalletDeleteResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
 const OperationWalletGetExchangeRatesWithBaseCurrency = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
+const OperationWalletGetPromoCodeInfo = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 const OperationWalletGetUserBalanceDetails = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
 const OperationWalletGetUserDepositRewardSequence = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
@@ -34,10 +36,14 @@ type WalletHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
 	// BonusTransfer BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
+	// ClaimPromoCode ClaimPromoCode claims promo code reward for the current user
+	ClaimPromoCode(context.Context, *ClaimPromoCodeRequest) (*ClaimPromoCodeResponse, error)
 	// DeleteResponsibleGamblingConfig DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
+	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
+	GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error)
 	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
 	GetUserBalanceDetails(context.Context, *GetUserBalanceDetailsRequest) (*GetUserBalanceDetailsResponse, error)
 	// GetUserBalances GetUserBalances returns the balances of all currencies of the user
@@ -54,6 +60,8 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/balance/details", _Wallet_GetUserBalanceDetails0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/exchange-rates/base-currency", _Wallet_GetExchangeRatesWithBaseCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/promo-code/info", _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/promo-code/claim", _Wallet_ClaimPromoCode0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/deposit-reward/user-sequence", _Wallet_GetUserDepositRewardSequence0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/bonus-transfer", _Wallet_BonusTransfer0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/config/add", _Wallet_AddResponsibleGamblingConfig1_HTTP_Handler(srv))
@@ -145,6 +153,50 @@ func _Wallet_GetCurrencies0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Con
 			return err
 		}
 		reply := out.(*GetCurrenciesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetPromoCodeInfoRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetPromoCodeInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetPromoCodeInfo(ctx, req.(*GetPromoCodeInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetPromoCodeInfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_ClaimPromoCode0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ClaimPromoCodeRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletClaimPromoCode)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ClaimPromoCode(ctx, req.(*ClaimPromoCodeRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ClaimPromoCodeResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -264,10 +316,14 @@ type WalletHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BonusTransfer BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(ctx context.Context, req *BonusTransferRequest, opts ...http.CallOption) (rsp *BonusTransferResponse, err error)
+	// ClaimPromoCode ClaimPromoCode claims promo code reward for the current user
+	ClaimPromoCode(ctx context.Context, req *ClaimPromoCodeRequest, opts ...http.CallOption) (rsp *ClaimPromoCodeResponse, err error)
 	// DeleteResponsibleGamblingConfig DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
 	GetExchangeRatesWithBaseCurrency(ctx context.Context, req *GetExchangeRatesWithBaseCurrencyRequest, opts ...http.CallOption) (rsp *GetExchangeRatesWithBaseCurrencyResponse, err error)
+	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
+	GetPromoCodeInfo(ctx context.Context, req *GetPromoCodeInfoRequest, opts ...http.CallOption) (rsp *GetPromoCodeInfoResponse, err error)
 	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
 	GetUserBalanceDetails(ctx context.Context, req *GetUserBalanceDetailsRequest, opts ...http.CallOption) (rsp *GetUserBalanceDetailsResponse, err error)
 	// GetUserBalances GetUserBalances returns the balances of all currencies of the user
@@ -314,6 +370,20 @@ func (c *WalletHTTPClientImpl) BonusTransfer(ctx context.Context, in *BonusTrans
 	return &out, nil
 }
 
+// ClaimPromoCode ClaimPromoCode claims promo code reward for the current user
+func (c *WalletHTTPClientImpl) ClaimPromoCode(ctx context.Context, in *ClaimPromoCodeRequest, opts ...http.CallOption) (*ClaimPromoCodeResponse, error) {
+	var out ClaimPromoCodeResponse
+	pattern := "/v1/wallet/promo-code/claim"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletClaimPromoCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // DeleteResponsibleGamblingConfig DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 func (c *WalletHTTPClientImpl) DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (*DeleteResponsibleGamblingConfigResponse, error) {
 	var out DeleteResponsibleGamblingConfigResponse
@@ -346,6 +416,20 @@ func (c *WalletHTTPClientImpl) GetExchangeRatesWithBaseCurrency(ctx context.Cont
 	pattern := "/v1/wallet/exchange-rates/base-currency"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetExchangeRatesWithBaseCurrency))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
+func (c *WalletHTTPClientImpl) GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...http.CallOption) (*GetPromoCodeInfoResponse, error) {
+	var out GetPromoCodeInfoResponse
+	pattern := "/v1/wallet/promo-code/info"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetPromoCodeInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

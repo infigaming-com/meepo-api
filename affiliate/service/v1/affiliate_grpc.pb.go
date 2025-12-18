@@ -54,6 +54,7 @@ const (
 	Affiliate_GetUserReferralRewards_FullMethodName       = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
 	Affiliate_ClaimUserReferralRewards_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
 	Affiliate_GetUserLossRevenueShareStats_FullMethodName = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
+	Affiliate_GetUserPromoConditionInfo_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -95,6 +96,9 @@ type AffiliateClient interface {
 	GetUserReferralRewards(ctx context.Context, in *GetUserReferralRewardsRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsResponse, error)
 	ClaimUserReferralRewards(ctx context.Context, in *ClaimUserReferralRewardsRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsResponse, error)
 	GetUserLossRevenueShareStats(ctx context.Context, in *GetUserLossRevenueShareStatsRequest, opts ...grpc.CallOption) (*GetUserLossRevenueShareStatsResponse, error)
+	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
+	// This is an internal API for wallet-service to validate promo code conditions
+	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
 }
 
 type affiliateClient struct {
@@ -455,6 +459,16 @@ func (c *affiliateClient) GetUserLossRevenueShareStats(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *affiliateClient) GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserPromoConditionInfoResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetUserPromoConditionInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -494,6 +508,9 @@ type AffiliateServer interface {
 	GetUserReferralRewards(context.Context, *GetUserReferralRewardsRequest) (*GetUserReferralRewardsResponse, error)
 	ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error)
 	GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error)
+	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
+	// This is an internal API for wallet-service to validate promo code conditions
+	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -608,6 +625,9 @@ func (UnimplementedAffiliateServer) ClaimUserReferralRewards(context.Context, *C
 }
 func (UnimplementedAffiliateServer) GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserLossRevenueShareStats not implemented")
+}
+func (UnimplementedAffiliateServer) GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserPromoConditionInfo not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1260,6 +1280,24 @@ func _Affiliate_GetUserLossRevenueShareStats_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetUserPromoConditionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserPromoConditionInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetUserPromoConditionInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetUserPromoConditionInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetUserPromoConditionInfo(ctx, req.(*GetUserPromoConditionInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1406,6 +1444,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserLossRevenueShareStats",
 			Handler:    _Affiliate_GetUserLossRevenueShareStats_Handler,
+		},
+		{
+			MethodName: "GetUserPromoConditionInfo",
+			Handler:    _Affiliate_GetUserPromoConditionInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
