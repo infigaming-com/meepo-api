@@ -414,6 +414,7 @@ message ListWalletBalanceTransactionsResponse {
 		string after_balance = 7;
 		string currency = 8;
 		int64 related_transaction_id = 9;
+		int64 external_transaction_id = 10;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;

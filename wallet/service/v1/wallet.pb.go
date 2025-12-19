@@ -11295,6 +11295,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	ProviderBonusAmount                  string `protobuf:"bytes,16,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
 	ProviderBonusAmountUsd               string `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
 	ProviderBonusAmountReportingCurrency string `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	ExternalTransactionId                int64  `protobuf:"varint,19,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
 }
@@ -11453,6 +11454,13 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetProviderBo
 		return x.ProviderBonusAmountReportingCurrency
 	}
 	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetExternalTransactionId() int64 {
+	if x != nil {
+		return x.ExternalTransactionId
+	}
+	return 0
 }
 
 type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
@@ -13901,12 +13909,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\x95\t\n" +
+	"\v_pagination\"\xcd\t\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x9f\a\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xd7\a\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -13928,7 +13936,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"(operator_bonus_amount_reporting_currency\x18\x0f \x01(\tR$operatorBonusAmountReportingCurrency\x122\n" +
 	"\x15provider_bonus_amount\x18\x10 \x01(\tR\x13providerBonusAmount\x129\n" +
 	"\x19provider_bonus_amount_usd\x18\x11 \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
-	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency\"\x9b\x01\n" +
+	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency\x126\n" +
+	"\x17external_transaction_id\x18\x13 \x01(\x03R\x15externalTransactionId\"\x9b\x01\n" +
 	"(GetWalletBalanceTransactionsByIdsRequest\x12'\n" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf8\x10\n" +
