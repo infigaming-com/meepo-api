@@ -42,12 +42,18 @@ const OperationBackofficeGameExportUnpaidBets = "/api.backoffice.service.v1.Back
 const OperationBackofficeGameGetBetById = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
 const OperationBackofficeGameGetGameTransactionById = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
 const OperationBackofficeGameGetGameTransactionsForBet = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
+const OperationBackofficeGameGetPlayerFreebets = "/api.backoffice.service.v1.BackofficeGame/GetPlayerFreebets"
 const OperationBackofficeGameGetUserBetsOverview = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
+const OperationBackofficeGameIssueFreebets = "/api.backoffice.service.v1.BackofficeGame/IssueFreebets"
+const OperationBackofficeGameIssueFreespins = "/api.backoffice.service.v1.BackofficeGame/IssueFreespins"
 const OperationBackofficeGameListBets = "/api.backoffice.service.v1.BackofficeGame/ListBets"
 const OperationBackofficeGameListCategories = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
 const OperationBackofficeGameListCurrencies = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
 const OperationBackofficeGameListCustomerStrikeReports = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
 const OperationBackofficeGameListFeeGroups = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
+const OperationBackofficeGameListFreebetTemplates = "/api.backoffice.service.v1.BackofficeGame/ListFreebetTemplates"
+const OperationBackofficeGameListFreespinsGames = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsGames"
+const OperationBackofficeGameListFreespinsProviders = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsProviders"
 const OperationBackofficeGameListGameBetDisplayConfig = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
 const OperationBackofficeGameListGames = "/api.backoffice.service.v1.BackofficeGame/ListGames"
 const OperationBackofficeGameListMultipleBets = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
@@ -97,12 +103,20 @@ type BackofficeGameHTTPServer interface {
 	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
+	GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*v1.GetPlayerFreebetsResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
+	IssueFreebets(context.Context, *v1.IssueFreebetsRequest) (*v1.IssueFreebetsResponse, error)
+	IssueFreespins(context.Context, *v1.IssueFreespinsRequest) (*v1.IssueFreespinsResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
 	ListFeeGroups(context.Context, *ListFeeGroupsRequest) (*ListFeeGroupsResponse, error)
+	// ListFreebetTemplates Freebets related APIs
+	ListFreebetTemplates(context.Context, *ListFreebetTemplatesRequest) (*v1.ListFreebetTemplatesResponse, error)
+	ListFreespinsGames(context.Context, *ListFreespinsGamesRequest) (*v1.ListFreespinsGamesResponse, error)
+	// ListFreespinsProviders Freespins related APIs
+	ListFreespinsProviders(context.Context, *ListFreespinsProvidersRequest) (*v1.ListFreespinsProvidersResponse, error)
 	ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*v1.ListMultipleBetsResponse, error)
@@ -155,9 +169,15 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/bet/dispaly/config/add", _BackofficeGame_AddGameBetDisplayConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bet/dispaly/config/update", _BackofficeGame_UpdateGameBetDisplayConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bet/dispaly/config/list", _BackofficeGame_ListGameBetDisplayConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/freespins/providers/list", _BackofficeGame_ListFreespinsProviders0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/freespins/games/list", _BackofficeGame_ListFreespinsGames0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/freespins/issue", _BackofficeGame_IssueFreespins0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/list-all", _BackofficeGame_BackofficeListGameTags0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/create", _BackofficeGame_BackofficeCreateGameTag0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/freebets/templates/list", _BackofficeGame_ListFreebetTemplates0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/freebets/issue", _BackofficeGame_IssueFreebets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/delete", _BackofficeGame_BackofficeDeleteGameTag0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/freebets/player/get", _BackofficeGame_GetPlayerFreebets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/update", _BackofficeGame_BackofficeUpdateGameTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/games/add", _BackofficeGame_BackofficeAddGamesToTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/games/remove", _BackofficeGame_BackofficeRemoveGamesFromTag0_HTTP_Handler(srv))
@@ -807,6 +827,72 @@ func _BackofficeGame_ListGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGameHT
 	}
 }
 
+func _BackofficeGame_ListFreespinsProviders0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListFreespinsProvidersRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameListFreespinsProviders)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListFreespinsProviders(ctx, req.(*ListFreespinsProvidersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListFreespinsProvidersResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGame_ListFreespinsGames0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListFreespinsGamesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameListFreespinsGames)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListFreespinsGames(ctx, req.(*ListFreespinsGamesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListFreespinsGamesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGame_IssueFreespins0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.IssueFreespinsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameIssueFreespins)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.IssueFreespins(ctx, req.(*v1.IssueFreespinsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.IssueFreespinsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeGame_BackofficeListGameTags0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeListGameTagsRequest
@@ -851,6 +937,50 @@ func _BackofficeGame_BackofficeCreateGameTag0_HTTP_Handler(srv BackofficeGameHTT
 	}
 }
 
+func _BackofficeGame_ListFreebetTemplates0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListFreebetTemplatesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameListFreebetTemplates)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListFreebetTemplates(ctx, req.(*ListFreebetTemplatesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListFreebetTemplatesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGame_IssueFreebets0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.IssueFreebetsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameIssueFreebets)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.IssueFreebets(ctx, req.(*v1.IssueFreebetsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.IssueFreebetsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeGame_BackofficeDeleteGameTag0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeDeleteGameTagRequest
@@ -869,6 +999,28 @@ func _BackofficeGame_BackofficeDeleteGameTag0_HTTP_Handler(srv BackofficeGameHTT
 			return err
 		}
 		reply := out.(*BackofficeDeleteGameTagResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGame_GetPlayerFreebets0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetPlayerFreebetsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameGetPlayerFreebets)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetPlayerFreebets(ctx, req.(*GetPlayerFreebetsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetPlayerFreebetsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1106,12 +1258,20 @@ type BackofficeGameHTTPClient interface {
 	GetBetById(ctx context.Context, req *GetBetByIdRequest, opts ...http.CallOption) (rsp *v1.GetBetByIdResponse, err error)
 	GetGameTransactionById(ctx context.Context, req *GetGameTransactionByIdRequest, opts ...http.CallOption) (rsp *v1.GetGameTransactionByIdResponse, err error)
 	GetGameTransactionsForBet(ctx context.Context, req *GetGameTransactionsForBetRequest, opts ...http.CallOption) (rsp *GetGameTransactionsForBetResponse, err error)
+	GetPlayerFreebets(ctx context.Context, req *GetPlayerFreebetsRequest, opts ...http.CallOption) (rsp *v1.GetPlayerFreebetsResponse, err error)
 	GetUserBetsOverview(ctx context.Context, req *GetUserBetsOverviewRequest, opts ...http.CallOption) (rsp *GetUserBetsOverviewResponse, err error)
+	IssueFreebets(ctx context.Context, req *v1.IssueFreebetsRequest, opts ...http.CallOption) (rsp *v1.IssueFreebetsResponse, err error)
+	IssueFreespins(ctx context.Context, req *v1.IssueFreespinsRequest, opts ...http.CallOption) (rsp *v1.IssueFreespinsResponse, err error)
 	ListBets(ctx context.Context, req *ListBetsRequest, opts ...http.CallOption) (rsp *ListBetsResponse, err error)
 	ListCategories(ctx context.Context, req *ListCategoriesRequest, opts ...http.CallOption) (rsp *ListCategoriesResponse, err error)
 	ListCurrencies(ctx context.Context, req *ListCurrenciesRequest, opts ...http.CallOption) (rsp *ListCurrenciesResponse, err error)
 	ListCustomerStrikeReports(ctx context.Context, req *ListCustomerStrikeReportsRequest, opts ...http.CallOption) (rsp *v1.ListCustomerStrikeReportsResponse, err error)
 	ListFeeGroups(ctx context.Context, req *ListFeeGroupsRequest, opts ...http.CallOption) (rsp *ListFeeGroupsResponse, err error)
+	// ListFreebetTemplates Freebets related APIs
+	ListFreebetTemplates(ctx context.Context, req *ListFreebetTemplatesRequest, opts ...http.CallOption) (rsp *v1.ListFreebetTemplatesResponse, err error)
+	ListFreespinsGames(ctx context.Context, req *ListFreespinsGamesRequest, opts ...http.CallOption) (rsp *v1.ListFreespinsGamesResponse, err error)
+	// ListFreespinsProviders Freespins related APIs
+	ListFreespinsProviders(ctx context.Context, req *ListFreespinsProvidersRequest, opts ...http.CallOption) (rsp *v1.ListFreespinsProvidersResponse, err error)
 	ListGameBetDisplayConfig(ctx context.Context, req *v1.ListGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.ListGameBetDisplayConfigResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
 	ListMultipleBets(ctx context.Context, req *ListMultipleBetsRequest, opts ...http.CallOption) (rsp *v1.ListMultipleBetsResponse, err error)
@@ -1439,11 +1599,50 @@ func (c *BackofficeGameHTTPClientImpl) GetGameTransactionsForBet(ctx context.Con
 	return &out, nil
 }
 
+func (c *BackofficeGameHTTPClientImpl) GetPlayerFreebets(ctx context.Context, in *GetPlayerFreebetsRequest, opts ...http.CallOption) (*v1.GetPlayerFreebetsResponse, error) {
+	var out v1.GetPlayerFreebetsResponse
+	pattern := "/v1/backoffice/game/freebets/player/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameGetPlayerFreebets))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeGameHTTPClientImpl) GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...http.CallOption) (*GetUserBetsOverviewResponse, error) {
 	var out GetUserBetsOverviewResponse
 	pattern := "/v1/backoffice/game/bets/overview/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetUserBetsOverview))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeGameHTTPClientImpl) IssueFreebets(ctx context.Context, in *v1.IssueFreebetsRequest, opts ...http.CallOption) (*v1.IssueFreebetsResponse, error) {
+	var out v1.IssueFreebetsResponse
+	pattern := "/v1/backoffice/game/freebets/issue"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameIssueFreebets))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeGameHTTPClientImpl) IssueFreespins(ctx context.Context, in *v1.IssueFreespinsRequest, opts ...http.CallOption) (*v1.IssueFreespinsResponse, error) {
+	var out v1.IssueFreespinsResponse
+	pattern := "/v1/backoffice/game/freespins/issue"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameIssueFreespins))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1509,6 +1708,47 @@ func (c *BackofficeGameHTTPClientImpl) ListFeeGroups(ctx context.Context, in *Li
 	pattern := "/v1/backoffice/game/fee-groups/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListFeeGroups))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListFreebetTemplates Freebets related APIs
+func (c *BackofficeGameHTTPClientImpl) ListFreebetTemplates(ctx context.Context, in *ListFreebetTemplatesRequest, opts ...http.CallOption) (*v1.ListFreebetTemplatesResponse, error) {
+	var out v1.ListFreebetTemplatesResponse
+	pattern := "/v1/backoffice/game/freebets/templates/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameListFreebetTemplates))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeGameHTTPClientImpl) ListFreespinsGames(ctx context.Context, in *ListFreespinsGamesRequest, opts ...http.CallOption) (*v1.ListFreespinsGamesResponse, error) {
+	var out v1.ListFreespinsGamesResponse
+	pattern := "/v1/backoffice/game/freespins/games/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameListFreespinsGames))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListFreespinsProviders Freespins related APIs
+func (c *BackofficeGameHTTPClientImpl) ListFreespinsProviders(ctx context.Context, in *ListFreespinsProvidersRequest, opts ...http.CallOption) (*v1.ListFreespinsProvidersResponse, error) {
+	var out v1.ListFreespinsProvidersResponse
+	pattern := "/v1/backoffice/game/freespins/providers/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameListFreespinsProviders))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

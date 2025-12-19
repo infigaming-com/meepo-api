@@ -49,9 +49,15 @@ const (
 	BackofficeGame_AddGameBetDisplayConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/AddGameBetDisplayConfig"
 	BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
 	BackofficeGame_ListGameBetDisplayConfig_FullMethodName        = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
+	BackofficeGame_ListFreespinsProviders_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsProviders"
+	BackofficeGame_ListFreespinsGames_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsGames"
+	BackofficeGame_IssueFreespins_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/IssueFreespins"
 	BackofficeGame_BackofficeListGameTags_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGameTags"
 	BackofficeGame_BackofficeCreateGameTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeCreateGameTag"
+	BackofficeGame_ListFreebetTemplates_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListFreebetTemplates"
+	BackofficeGame_IssueFreebets_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/IssueFreebets"
 	BackofficeGame_BackofficeDeleteGameTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeDeleteGameTag"
+	BackofficeGame_GetPlayerFreebets_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/GetPlayerFreebets"
 	BackofficeGame_BackofficeUpdateGameTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeUpdateGameTag"
 	BackofficeGame_BackofficeAddGamesToTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddGamesToTag"
 	BackofficeGame_BackofficeRemoveGamesFromTag_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/BackofficeRemoveGamesFromTag"
@@ -102,12 +108,20 @@ type BackofficeGameClient interface {
 	AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error)
 	UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
+	// Freespins related APIs
+	ListFreespinsProviders(ctx context.Context, in *ListFreespinsProvidersRequest, opts ...grpc.CallOption) (*v1.ListFreespinsProvidersResponse, error)
+	ListFreespinsGames(ctx context.Context, in *ListFreespinsGamesRequest, opts ...grpc.CallOption) (*v1.ListFreespinsGamesResponse, error)
+	IssueFreespins(ctx context.Context, in *v1.IssueFreespinsRequest, opts ...grpc.CallOption) (*v1.IssueFreespinsResponse, error)
 	// List tags visible to operator (with inheritance from system → retailer → company → operator)
 	BackofficeListGameTags(ctx context.Context, in *BackofficeListGameTagsRequest, opts ...grpc.CallOption) (*v1.BackofficeListGameTagsResponse, error)
 	// Create tag at operator's own level
 	BackofficeCreateGameTag(ctx context.Context, in *BackofficeCreateGameTagRequest, opts ...grpc.CallOption) (*BackofficeCreateGameTagResponse, error)
+	// Freebets related APIs
+	ListFreebetTemplates(ctx context.Context, in *ListFreebetTemplatesRequest, opts ...grpc.CallOption) (*v1.ListFreebetTemplatesResponse, error)
+	IssueFreebets(ctx context.Context, in *v1.IssueFreebetsRequest, opts ...grpc.CallOption) (*v1.IssueFreebetsResponse, error)
 	// Delete tag (own level or lower only)
 	BackofficeDeleteGameTag(ctx context.Context, in *BackofficeDeleteGameTagRequest, opts ...grpc.CallOption) (*BackofficeDeleteGameTagResponse, error)
+	GetPlayerFreebets(ctx context.Context, in *GetPlayerFreebetsRequest, opts ...grpc.CallOption) (*v1.GetPlayerFreebetsResponse, error)
 	// Update tag name
 	BackofficeUpdateGameTag(ctx context.Context, in *BackofficeUpdateGameTagRequest, opts ...grpc.CallOption) (*BackofficeUpdateGameTagResponse, error)
 	// Add games to a tag
@@ -426,6 +440,36 @@ func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficeGameClient) ListFreespinsProviders(ctx context.Context, in *ListFreespinsProvidersRequest, opts ...grpc.CallOption) (*v1.ListFreespinsProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListFreespinsProvidersResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListFreespinsProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListFreespinsGames(ctx context.Context, in *ListFreespinsGamesRequest, opts ...grpc.CallOption) (*v1.ListFreespinsGamesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListFreespinsGamesResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListFreespinsGames_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) IssueFreespins(ctx context.Context, in *v1.IssueFreespinsRequest, opts ...grpc.CallOption) (*v1.IssueFreespinsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.IssueFreespinsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_IssueFreespins_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeGameClient) BackofficeListGameTags(ctx context.Context, in *BackofficeListGameTagsRequest, opts ...grpc.CallOption) (*v1.BackofficeListGameTagsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.BackofficeListGameTagsResponse)
@@ -446,10 +490,40 @@ func (c *backofficeGameClient) BackofficeCreateGameTag(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeGameClient) ListFreebetTemplates(ctx context.Context, in *ListFreebetTemplatesRequest, opts ...grpc.CallOption) (*v1.ListFreebetTemplatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListFreebetTemplatesResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListFreebetTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) IssueFreebets(ctx context.Context, in *v1.IssueFreebetsRequest, opts ...grpc.CallOption) (*v1.IssueFreebetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.IssueFreebetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_IssueFreebets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeGameClient) BackofficeDeleteGameTag(ctx context.Context, in *BackofficeDeleteGameTagRequest, opts ...grpc.CallOption) (*BackofficeDeleteGameTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BackofficeDeleteGameTagResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_BackofficeDeleteGameTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) GetPlayerFreebets(ctx context.Context, in *GetPlayerFreebetsRequest, opts ...grpc.CallOption) (*v1.GetPlayerFreebetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetPlayerFreebetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_GetPlayerFreebets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -585,12 +659,20 @@ type BackofficeGameServer interface {
 	AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
 	UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
+	// Freespins related APIs
+	ListFreespinsProviders(context.Context, *ListFreespinsProvidersRequest) (*v1.ListFreespinsProvidersResponse, error)
+	ListFreespinsGames(context.Context, *ListFreespinsGamesRequest) (*v1.ListFreespinsGamesResponse, error)
+	IssueFreespins(context.Context, *v1.IssueFreespinsRequest) (*v1.IssueFreespinsResponse, error)
 	// List tags visible to operator (with inheritance from system → retailer → company → operator)
 	BackofficeListGameTags(context.Context, *BackofficeListGameTagsRequest) (*v1.BackofficeListGameTagsResponse, error)
 	// Create tag at operator's own level
 	BackofficeCreateGameTag(context.Context, *BackofficeCreateGameTagRequest) (*BackofficeCreateGameTagResponse, error)
+	// Freebets related APIs
+	ListFreebetTemplates(context.Context, *ListFreebetTemplatesRequest) (*v1.ListFreebetTemplatesResponse, error)
+	IssueFreebets(context.Context, *v1.IssueFreebetsRequest) (*v1.IssueFreebetsResponse, error)
 	// Delete tag (own level or lower only)
 	BackofficeDeleteGameTag(context.Context, *BackofficeDeleteGameTagRequest) (*BackofficeDeleteGameTagResponse, error)
+	GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*v1.GetPlayerFreebetsResponse, error)
 	// Update tag name
 	BackofficeUpdateGameTag(context.Context, *BackofficeUpdateGameTagRequest) (*BackofficeUpdateGameTagResponse, error)
 	// Add games to a tag
@@ -706,14 +788,32 @@ func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Cont
 func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
 }
+func (UnimplementedBackofficeGameServer) ListFreespinsProviders(context.Context, *ListFreespinsProvidersRequest) (*v1.ListFreespinsProvidersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFreespinsProviders not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListFreespinsGames(context.Context, *ListFreespinsGamesRequest) (*v1.ListFreespinsGamesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFreespinsGames not implemented")
+}
+func (UnimplementedBackofficeGameServer) IssueFreespins(context.Context, *v1.IssueFreespinsRequest) (*v1.IssueFreespinsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IssueFreespins not implemented")
+}
 func (UnimplementedBackofficeGameServer) BackofficeListGameTags(context.Context, *BackofficeListGameTagsRequest) (*v1.BackofficeListGameTagsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeListGameTags not implemented")
 }
 func (UnimplementedBackofficeGameServer) BackofficeCreateGameTag(context.Context, *BackofficeCreateGameTagRequest) (*BackofficeCreateGameTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeCreateGameTag not implemented")
 }
+func (UnimplementedBackofficeGameServer) ListFreebetTemplates(context.Context, *ListFreebetTemplatesRequest) (*v1.ListFreebetTemplatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFreebetTemplates not implemented")
+}
+func (UnimplementedBackofficeGameServer) IssueFreebets(context.Context, *v1.IssueFreebetsRequest) (*v1.IssueFreebetsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IssueFreebets not implemented")
+}
 func (UnimplementedBackofficeGameServer) BackofficeDeleteGameTag(context.Context, *BackofficeDeleteGameTagRequest) (*BackofficeDeleteGameTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeDeleteGameTag not implemented")
+}
+func (UnimplementedBackofficeGameServer) GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*v1.GetPlayerFreebetsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPlayerFreebets not implemented")
 }
 func (UnimplementedBackofficeGameServer) BackofficeUpdateGameTag(context.Context, *BackofficeUpdateGameTagRequest) (*BackofficeUpdateGameTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeUpdateGameTag not implemented")
@@ -1285,6 +1385,60 @@ func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ListFreespinsProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFreespinsProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListFreespinsProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListFreespinsProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListFreespinsProviders(ctx, req.(*ListFreespinsProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListFreespinsGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFreespinsGamesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListFreespinsGames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListFreespinsGames_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListFreespinsGames(ctx, req.(*ListFreespinsGamesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_IssueFreespins_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.IssueFreespinsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).IssueFreespins(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_IssueFreespins_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).IssueFreespins(ctx, req.(*v1.IssueFreespinsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeGame_BackofficeListGameTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BackofficeListGameTagsRequest)
 	if err := dec(in); err != nil {
@@ -1321,6 +1475,42 @@ func _BackofficeGame_BackofficeCreateGameTag_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ListFreebetTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFreebetTemplatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListFreebetTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListFreebetTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListFreebetTemplates(ctx, req.(*ListFreebetTemplatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_IssueFreebets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.IssueFreebetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).IssueFreebets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_IssueFreebets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).IssueFreebets(ctx, req.(*v1.IssueFreebetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeGame_BackofficeDeleteGameTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BackofficeDeleteGameTagRequest)
 	if err := dec(in); err != nil {
@@ -1335,6 +1525,24 @@ func _BackofficeGame_BackofficeDeleteGameTag_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeGameServer).BackofficeDeleteGameTag(ctx, req.(*BackofficeDeleteGameTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_GetPlayerFreebets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlayerFreebetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).GetPlayerFreebets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_GetPlayerFreebets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).GetPlayerFreebets(ctx, req.(*GetPlayerFreebetsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1625,6 +1833,18 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeGame_ListGameBetDisplayConfig_Handler,
 		},
 		{
+			MethodName: "ListFreespinsProviders",
+			Handler:    _BackofficeGame_ListFreespinsProviders_Handler,
+		},
+		{
+			MethodName: "ListFreespinsGames",
+			Handler:    _BackofficeGame_ListFreespinsGames_Handler,
+		},
+		{
+			MethodName: "IssueFreespins",
+			Handler:    _BackofficeGame_IssueFreespins_Handler,
+		},
+		{
 			MethodName: "BackofficeListGameTags",
 			Handler:    _BackofficeGame_BackofficeListGameTags_Handler,
 		},
@@ -1633,8 +1853,20 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeGame_BackofficeCreateGameTag_Handler,
 		},
 		{
+			MethodName: "ListFreebetTemplates",
+			Handler:    _BackofficeGame_ListFreebetTemplates_Handler,
+		},
+		{
+			MethodName: "IssueFreebets",
+			Handler:    _BackofficeGame_IssueFreebets_Handler,
+		},
+		{
 			MethodName: "BackofficeDeleteGameTag",
 			Handler:    _BackofficeGame_BackofficeDeleteGameTag_Handler,
+		},
+		{
+			MethodName: "GetPlayerFreebets",
+			Handler:    _BackofficeGame_GetPlayerFreebets_Handler,
 		},
 		{
 			MethodName: "BackofficeUpdateGameTag",

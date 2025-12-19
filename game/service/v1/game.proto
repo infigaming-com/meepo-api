@@ -200,6 +200,36 @@ service Game {
 	rpc ListUserTurnoverByGame(ListUserTurnoverByGameRequest) returns (ListUserTurnoverByGameResponse) {
 	}
 
+	// Freespins related APIs
+	rpc ListFreespinsProviders(ListFreespinsProvidersRequest) returns (ListFreespinsProvidersResponse) {
+	}
+
+	rpc ListFreespinsGames(ListFreespinsGamesRequest) returns (ListFreespinsGamesResponse) {
+	}
+
+	rpc IssueFreespins(IssueFreespinsRequest) returns (IssueFreespinsResponse) {
+	}
+
+	rpc CancelFreespins(CancelFreespinsRequest) returns (CancelFreespinsResponse) {
+	}
+
+	// Freebets related APIs
+	rpc ListFreebetTemplates(ListFreebetTemplatesRequest) returns (ListFreebetTemplatesResponse) {
+	}
+
+	rpc IssueFreebets(IssueFreebetsRequest) returns (IssueFreebetsResponse) {
+	}
+
+	rpc GetPlayerFreebets(GetPlayerFreebetsRequest) returns (GetPlayerFreebetsResponse) {
+	}
+
+	// Frontend HTTP endpoint for player freebets
+	rpc GetPlayerFreebetsForFrontend(GetPlayerFreebetsForFrontendRequest) returns (GetPlayerFreebetsForFrontendResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/freebets/player"
+			body: "*"
+		};
+	}
 	// 获取指定时间范围内用户存款金额所产生的GGR
 	rpc GetDepositCreditsGGR(GetDepositCreditsGGRRequest) returns (GetDepositCreditsGGRResponse) {
 	}
@@ -1745,6 +1775,200 @@ message ListUserTurnoverByGameResponse {
 	}
 
 	repeated Item items = 1;
+}
+
+// ========== Freespins Messages ==========
+
+message ListFreespinsProvidersRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message ListFreespinsProvidersResponse {
+	message Provider {
+		string provider_id = 1;
+		string provider_name = 2;
+		bool freespins_supported = 3;
+	}
+	repeated Provider providers = 1;
+}
+
+message ListFreespinsGamesRequest {
+	string currency = 1;
+	string provider_id = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListFreespinsGamesResponse {
+	message Game {
+		string game_id = 1;
+		string game_name = 2;
+		string provider_id = 3;
+		string provider_name = 4;
+		bool has_freespins = 5;
+	}
+	repeated Game games = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message FreespinGameBetLevel {
+	string currency = 1;
+	int64 bet_level = 2;
+}
+
+message FreespinGame {
+	string game_id = 1;
+	repeated FreespinGameBetLevel bet_levels = 2;
+}
+
+message FreespinUser {
+	string wallet_user_id = 1;
+	string user_id = 2;
+	string email = 3;
+	string firstname = 4;
+	string lastname = 5;
+	string nickname = 6;
+	string city = 7;
+	string date_of_birth = 8;
+	string registered_at = 9;
+	string gender = 10;
+	string country = 11;
+}
+
+message IssueFreespinsRequest {
+	string operator_id = 1;
+	string freespin_id = 2;
+	FreespinUser user = 3;
+	string request_id = 4;
+	repeated FreespinGame games = 5;
+	int64 quantity = 6;
+	int64 start_at = 7;
+	int64 expire_at = 8;
+	int64 valid_until = 9;
+	api.common.OperatorContext operator_context = 10;
+}
+
+message IssueFreespinsResponse {
+}
+
+message CancelFreespinsRequest {
+	string operator_id = 1;
+	string freespin_id = 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message CancelFreespinsResponse {
+}
+
+// ========== Freebets Messages ==========
+
+message ListFreebetTemplatesRequest {
+	int32 page = 1;
+	int32 page_size = 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message FreebetTemplateAmount {
+	string currency = 1;
+	double amount = 2;
+	optional double max_cap = 3;
+}
+
+message FreebetGrantingConfig {
+	optional bool is_api_amount = 1;
+	optional int32 min_selections = 2;
+	optional int32 max_selections = 3;
+	optional double min_odds = 4;
+	optional double max_odds = 5;
+}
+
+message FreebetLocalizationEntry {
+	string lang = 1;
+	string external_name = 2;
+	string external_title = 3;
+}
+
+message FreebetTemplate {
+	string template_id = 1;
+	string name = 2;
+	string provider = 3;
+	string status = 4;
+	optional google.protobuf.Timestamp valid_from = 5;
+	optional google.protobuf.Timestamp valid_to = 6;
+	optional int32 days_to_use = 7;
+	optional int32 times_allowed = 8;
+	optional bool is_risk_free = 9;
+	repeated FreebetTemplateAmount amounts = 10;
+	optional FreebetGrantingConfig granting_config = 11;
+	repeated FreebetLocalizationEntry localization = 12;
+}
+
+message ListFreebetTemplatesResponse {
+	repeated FreebetTemplate templates = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message FreebetIssueItem {
+	string player_id = 1;
+	string username = 2;
+	optional double amount = 3;
+	string currency = 4;
+	optional bool force_activate = 5;
+}
+
+message IssueFreebetsRequest {
+	string template_id = 1;
+	repeated FreebetIssueItem items = 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message FreebetIssuedBonus {
+	string bonus_id = 1;
+	string assign_id = 2;
+	string template_id = 3;
+	string status = 4;
+	optional google.protobuf.Timestamp granted_at = 5;
+	optional google.protobuf.Timestamp activation_date = 6;
+	optional google.protobuf.Timestamp expiration_date = 7;
+	string currency = 8;
+	optional double amount = 9;
+	optional double max_cap = 10;
+}
+
+message FreebetAssignmentResult {
+	string player_id = 1;
+	optional FreebetIssuedBonus bonus = 2;
+	optional string error_code = 3;
+	optional string error_message = 4;
+}
+
+message IssueFreebetsResponse {
+	repeated FreebetAssignmentResult results = 1;
+}
+
+message GetPlayerFreebetsRequest {
+	string player_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetPlayerFreebetsResponse {
+	repeated FreebetIssuedBonus bonuses = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message GetPlayerFreebetsForFrontendRequest {
+}
+
+message GetPlayerFreebetsForFrontendResponse {
+	repeated FreebetIssuedBonus bonuses = 1;
+	int32 total = 2;
 }
 
 // 获取指定时间范围内用户存款金额所产生的GGR请求
