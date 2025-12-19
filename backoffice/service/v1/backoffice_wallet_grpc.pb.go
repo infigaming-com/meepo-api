@@ -49,7 +49,7 @@ const (
 	BackofficeWallet_GeneratePromoCodes_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GeneratePromoCodes"
 	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
-	BackofficeWallet_UpdateDeductionOrder_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
+	BackofficeWallet_UpdateWalletConfig_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletConfig"
 	BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 	BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
 	BackofficeWallet_ListCustomerRecords_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
@@ -119,8 +119,8 @@ type BackofficeWalletClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyConfigResponse, error)
-	// UpdateDeductionOrder updates the deduction order config based on operator context
-	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*v1.UpdateDeductionOrderResponse, error)
+	// UpdateWalletConfig updates the wallet config based on operator context
+	UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*v1.UpdateWalletConfigResponse, error)
 	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteWalletResponsibleGamblingConfig(ctx context.Context, in *DeleteWalletResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
@@ -445,10 +445,10 @@ func (c *backofficeWalletClient) UpdateOperatorCurrencyConfig(ctx context.Contex
 	return out, nil
 }
 
-func (c *backofficeWalletClient) UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*v1.UpdateDeductionOrderResponse, error) {
+func (c *backofficeWalletClient) UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*v1.UpdateWalletConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateDeductionOrderResponse)
-	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateDeductionOrder_FullMethodName, in, out, cOpts...)
+	out := new(v1.UpdateWalletConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateWalletConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -630,8 +630,8 @@ type BackofficeWalletServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
-	// UpdateDeductionOrder updates the deduction order config based on operator context
-	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error)
+	// UpdateWalletConfig updates the wallet config based on operator context
+	UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*v1.UpdateWalletConfigResponse, error)
 	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
@@ -753,8 +753,8 @@ func (UnimplementedBackofficeWalletServer) GetGamificationCurrencyConfig(context
 func (UnimplementedBackofficeWalletServer) UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorCurrencyConfig not implemented")
 }
-func (UnimplementedBackofficeWalletServer) UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateDeductionOrder not implemented")
+func (UnimplementedBackofficeWalletServer) UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*v1.UpdateWalletConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateWalletConfig not implemented")
 }
 func (UnimplementedBackofficeWalletServer) DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteWalletResponsibleGamblingConfig not implemented")
@@ -1335,20 +1335,20 @@ func _BackofficeWallet_UpdateOperatorCurrencyConfig_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeWallet_UpdateDeductionOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateDeductionOrderRequest)
+func _BackofficeWallet_UpdateWalletConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWalletConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeWalletServer).UpdateDeductionOrder(ctx, in)
+		return srv.(BackofficeWalletServer).UpdateWalletConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeWallet_UpdateDeductionOrder_FullMethodName,
+		FullMethod: BackofficeWallet_UpdateWalletConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).UpdateDeductionOrder(ctx, req.(*UpdateDeductionOrderRequest))
+		return srv.(BackofficeWalletServer).UpdateWalletConfig(ctx, req.(*UpdateWalletConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1693,8 +1693,8 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeWallet_UpdateOperatorCurrencyConfig_Handler,
 		},
 		{
-			MethodName: "UpdateDeductionOrder",
-			Handler:    _BackofficeWallet_UpdateDeductionOrder_Handler,
+			MethodName: "UpdateWalletConfig",
+			Handler:    _BackofficeWallet_UpdateWalletConfig_Handler,
 		},
 		{
 			MethodName: "DeleteWalletResponsibleGamblingConfig",

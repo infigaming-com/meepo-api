@@ -5338,22 +5338,22 @@ var _ interface {
 	ErrorName() string
 } = UpdateOperatorCurrencyConfigRequestValidationError{}
 
-// Validate checks the field values on UpdateDeductionOrderRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on UpdateWalletConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateDeductionOrderRequest) Validate() error {
+func (m *UpdateWalletConfigRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateDeductionOrderRequest with the
+// ValidateAll checks the field values on UpdateWalletConfigRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// UpdateDeductionOrderRequestMultiError, or nil if none found.
-func (m *UpdateDeductionOrderRequest) ValidateAll() error {
+// UpdateWalletConfigRequestMultiError, or nil if none found.
+func (m *UpdateWalletConfigRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateDeductionOrderRequest) validate(all bool) error {
+func (m *UpdateWalletConfigRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5364,7 +5364,7 @@ func (m *UpdateDeductionOrderRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateDeductionOrderRequestValidationError{
+				errors = append(errors, UpdateWalletConfigRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5372,7 +5372,7 @@ func (m *UpdateDeductionOrderRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateDeductionOrderRequestValidationError{
+				errors = append(errors, UpdateWalletConfigRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5381,7 +5381,7 @@ func (m *UpdateDeductionOrderRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UpdateDeductionOrderRequestValidationError{
+			return UpdateWalletConfigRequestValidationError{
 				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5390,28 +5390,28 @@ func (m *UpdateDeductionOrderRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetDeductionOrder()).(type) {
+		switch v := interface{}(m.GetWalletConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateDeductionOrderRequestValidationError{
-					field:  "DeductionOrder",
+				errors = append(errors, UpdateWalletConfigRequestValidationError{
+					field:  "WalletConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateDeductionOrderRequestValidationError{
-					field:  "DeductionOrder",
+				errors = append(errors, UpdateWalletConfigRequestValidationError{
+					field:  "WalletConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetDeductionOrder()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetWalletConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UpdateDeductionOrderRequestValidationError{
-				field:  "DeductionOrder",
+			return UpdateWalletConfigRequestValidationError{
+				field:  "WalletConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -5419,19 +5419,19 @@ func (m *UpdateDeductionOrderRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return UpdateDeductionOrderRequestMultiError(errors)
+		return UpdateWalletConfigRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateDeductionOrderRequestMultiError is an error wrapping multiple
-// validation errors returned by UpdateDeductionOrderRequest.ValidateAll() if
-// the designated constraints aren't met.
-type UpdateDeductionOrderRequestMultiError []error
+// UpdateWalletConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateWalletConfigRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateWalletConfigRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateDeductionOrderRequestMultiError) Error() string {
+func (m UpdateWalletConfigRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5440,12 +5440,11 @@ func (m UpdateDeductionOrderRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateDeductionOrderRequestMultiError) AllErrors() []error { return m }
+func (m UpdateWalletConfigRequestMultiError) AllErrors() []error { return m }
 
-// UpdateDeductionOrderRequestValidationError is the validation error returned
-// by UpdateDeductionOrderRequest.Validate if the designated constraints
-// aren't met.
-type UpdateDeductionOrderRequestValidationError struct {
+// UpdateWalletConfigRequestValidationError is the validation error returned by
+// UpdateWalletConfigRequest.Validate if the designated constraints aren't met.
+type UpdateWalletConfigRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5453,24 +5452,24 @@ type UpdateDeductionOrderRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateDeductionOrderRequestValidationError) Field() string { return e.field }
+func (e UpdateWalletConfigRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateDeductionOrderRequestValidationError) Reason() string { return e.reason }
+func (e UpdateWalletConfigRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateDeductionOrderRequestValidationError) Cause() error { return e.cause }
+func (e UpdateWalletConfigRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateDeductionOrderRequestValidationError) Key() bool { return e.key }
+func (e UpdateWalletConfigRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateDeductionOrderRequestValidationError) ErrorName() string {
-	return "UpdateDeductionOrderRequestValidationError"
+func (e UpdateWalletConfigRequestValidationError) ErrorName() string {
+	return "UpdateWalletConfigRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateDeductionOrderRequestValidationError) Error() string {
+func (e UpdateWalletConfigRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5482,14 +5481,14 @@ func (e UpdateDeductionOrderRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateDeductionOrderRequest.%s: %s%s",
+		"invalid %sUpdateWalletConfigRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateDeductionOrderRequestValidationError{}
+var _ error = UpdateWalletConfigRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -5497,7 +5496,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateDeductionOrderRequestValidationError{}
+} = UpdateWalletConfigRequestValidationError{}
 
 // Validate checks the field values on
 // DeleteWalletResponsibleGamblingConfigRequest with the rules defined in the
