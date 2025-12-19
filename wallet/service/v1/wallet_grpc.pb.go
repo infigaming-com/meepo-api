@@ -89,6 +89,7 @@ const (
 	Wallet_ListTimeRangeDepositCredits_FullMethodName         = "/api.wallet.service.v1.Wallet/ListTimeRangeDepositCredits"
 	Wallet_ListUserOverview_FullMethodName                    = "/api.wallet.service.v1.Wallet/ListUserOverview"
 	Wallet_GetUserGameTransactionsSummary_FullMethodName      = "/api.wallet.service.v1.Wallet/GetUserGameTransactionsSummary"
+	Wallet_CreditFreespinWin_FullMethodName                   = "/api.wallet.service.v1.Wallet/CreditFreespinWin"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -216,6 +217,8 @@ type WalletClient interface {
 	ListUserOverview(ctx context.Context, in *ListUserOverviewRequest, opts ...grpc.CallOption) (*ListUserOverviewResponse, error)
 	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
 	GetUserGameTransactionsSummary(ctx context.Context, in *GetUserGameTransactionsSummaryRequest, opts ...grpc.CallOption) (*GetUserGameTransactionsSummaryResponse, error)
+	// CreditFreespinWin credits freespin win amount to user's wallet
+	CreditFreespinWin(ctx context.Context, in *CreditFreespinWinRequest, opts ...grpc.CallOption) (*CreditFreespinWinResponse, error)
 }
 
 type walletClient struct {
@@ -926,6 +929,16 @@ func (c *walletClient) GetUserGameTransactionsSummary(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *walletClient) CreditFreespinWin(ctx context.Context, in *CreditFreespinWinRequest, opts ...grpc.CallOption) (*CreditFreespinWinResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreditFreespinWinResponse)
+	err := c.cc.Invoke(ctx, Wallet_CreditFreespinWin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1051,6 +1064,8 @@ type WalletServer interface {
 	ListUserOverview(context.Context, *ListUserOverviewRequest) (*ListUserOverviewResponse, error)
 	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
 	GetUserGameTransactionsSummary(context.Context, *GetUserGameTransactionsSummaryRequest) (*GetUserGameTransactionsSummaryResponse, error)
+	// CreditFreespinWin credits freespin win amount to user's wallet
+	CreditFreespinWin(context.Context, *CreditFreespinWinRequest) (*CreditFreespinWinResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1270,6 +1285,9 @@ func (UnimplementedWalletServer) ListUserOverview(context.Context, *ListUserOver
 }
 func (UnimplementedWalletServer) GetUserGameTransactionsSummary(context.Context, *GetUserGameTransactionsSummaryRequest) (*GetUserGameTransactionsSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserGameTransactionsSummary not implemented")
+}
+func (UnimplementedWalletServer) CreditFreespinWin(context.Context, *CreditFreespinWinRequest) (*CreditFreespinWinResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreditFreespinWin not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2552,6 +2570,24 @@ func _Wallet_GetUserGameTransactionsSummary_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_CreditFreespinWin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreditFreespinWinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).CreditFreespinWin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_CreditFreespinWin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).CreditFreespinWin(ctx, req.(*CreditFreespinWinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2838,6 +2874,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserGameTransactionsSummary",
 			Handler:    _Wallet_GetUserGameTransactionsSummary_Handler,
+		},
+		{
+			MethodName: "CreditFreespinWin",
+			Handler:    _Wallet_CreditFreespinWin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
