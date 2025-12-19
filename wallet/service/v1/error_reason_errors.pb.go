@@ -1547,7 +1547,6 @@ func ErrorGetOperatorDetailsFailed(format string, args ...interface{}) *errors.E
 	return errors.New(500, ErrorReason_GET_OPERATOR_DETAILS_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-// Promo Code Campaign errors
 func IsPromoCodeCampaignNotFound(err error) bool {
 	if err == nil {
 		return false
@@ -1556,7 +1555,6 @@ func IsPromoCodeCampaignNotFound(err error) bool {
 	return e.Reason == ErrorReason_PROMO_CODE_CAMPAIGN_NOT_FOUND.String() && e.Code == 500
 }
 
-// Promo Code Campaign errors
 func ErrorPromoCodeCampaignNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
@@ -1657,7 +1655,6 @@ func ErrorGetPromoCodeCampaignFailed(format string, args ...interface{}) *errors
 	return errors.New(500, ErrorReason_GET_PROMO_CODE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-// Promo Code errors
 func IsPromoCodeNotFound(err error) bool {
 	if err == nil {
 		return false
@@ -1666,7 +1663,6 @@ func IsPromoCodeNotFound(err error) bool {
 	return e.Reason == ErrorReason_PROMO_CODE_NOT_FOUND.String() && e.Code == 500
 }
 
-// Promo Code errors
 func ErrorPromoCodeNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROMO_CODE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
@@ -1791,7 +1787,6 @@ func ErrorCreatePromoCodeFailed(format string, args ...interface{}) *errors.Erro
 	return errors.New(500, ErrorReason_CREATE_PROMO_CODE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-// Promo Code Usage errors
 func IsCreatePromoCodeUsageFailed(err error) bool {
 	if err == nil {
 		return false
@@ -1800,7 +1795,6 @@ func IsCreatePromoCodeUsageFailed(err error) bool {
 	return e.Reason == ErrorReason_CREATE_PROMO_CODE_USAGE_FAILED.String() && e.Code == 500
 }
 
-// Promo Code Usage errors
 func ErrorCreatePromoCodeUsageFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CREATE_PROMO_CODE_USAGE_FAILED.String(), fmt.Sprintf(format, args...))
 }
@@ -1829,7 +1823,6 @@ func ErrorListPromoCodeUsagesFailed(format string, args ...interface{}) *errors.
 	return errors.New(500, ErrorReason_LIST_PROMO_CODE_USAGES_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-// GetPromoCodeInfo and ClaimPromoCode errors
 func IsGetPromoCodeInfoFailed(err error) bool {
 	if err == nil {
 		return false
@@ -1838,7 +1831,6 @@ func IsGetPromoCodeInfoFailed(err error) bool {
 	return e.Reason == ErrorReason_GET_PROMO_CODE_INFO_FAILED.String() && e.Code == 500
 }
 
-// GetPromoCodeInfo and ClaimPromoCode errors
 func ErrorGetPromoCodeInfoFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_PROMO_CODE_INFO_FAILED.String(), fmt.Sprintf(format, args...))
 }
@@ -1889,4 +1881,64 @@ func IsPromoCodeCampaignNotStarted(err error) bool {
 
 func ErrorPromoCodeCampaignNotStarted(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROMO_CODE_CAMPAIGN_NOT_STARTED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorWalletConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_WALLET_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorWalletConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_WALLET_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorWalletConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_WALLET_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorWalletConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_WALLET_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorWalletConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_WALLET_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorWalletConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_WALLET_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateOperatorWalletConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_OPERATOR_WALLET_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateOperatorWalletConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_OPERATOR_WALLET_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorWalletConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_WALLET_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorWalletConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_WALLET_CONFIG.String(), fmt.Sprintf(format, args...))
 }

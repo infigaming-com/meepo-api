@@ -7435,29 +7435,30 @@ func (x *GetGamificationCurrencyConfigRequest) GetTargetOperatorContext() *commo
 	return nil
 }
 
-type DeductionOrder struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DeductionType string                 `protobuf:"bytes,1,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"` // cash_first, bonus_first, mixed
-	CashRatio     *string                `protobuf:"bytes,2,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
-	BonusRatio    *string                `protobuf:"bytes,3,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type WalletConfig struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	DeductionType          string                 `protobuf:"bytes,1,opt,name=deduction_type,json=deductionType,proto3" json:"deduction_type,omitempty"` // cash_first, bonus_first, mixed
+	CashRatio              *string                `protobuf:"bytes,2,opt,name=cash_ratio,json=cashRatio,proto3,oneof" json:"cash_ratio,omitempty"`
+	BonusRatio             *string                `protobuf:"bytes,3,opt,name=bonus_ratio,json=bonusRatio,proto3,oneof" json:"bonus_ratio,omitempty"`
+	ClearBonusOnWithdrawal *bool                  `protobuf:"varint,4,opt,name=clear_bonus_on_withdrawal,json=clearBonusOnWithdrawal,proto3,oneof" json:"clear_bonus_on_withdrawal,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
-func (x *DeductionOrder) Reset() {
-	*x = DeductionOrder{}
+func (x *WalletConfig) Reset() {
+	*x = WalletConfig{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeductionOrder) String() string {
+func (x *WalletConfig) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeductionOrder) ProtoMessage() {}
+func (*WalletConfig) ProtoMessage() {}
 
-func (x *DeductionOrder) ProtoReflect() protoreflect.Message {
+func (x *WalletConfig) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7469,30 +7470,37 @@ func (x *DeductionOrder) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeductionOrder.ProtoReflect.Descriptor instead.
-func (*DeductionOrder) Descriptor() ([]byte, []int) {
+// Deprecated: Use WalletConfig.ProtoReflect.Descriptor instead.
+func (*WalletConfig) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{90}
 }
 
-func (x *DeductionOrder) GetDeductionType() string {
+func (x *WalletConfig) GetDeductionType() string {
 	if x != nil {
 		return x.DeductionType
 	}
 	return ""
 }
 
-func (x *DeductionOrder) GetCashRatio() string {
+func (x *WalletConfig) GetCashRatio() string {
 	if x != nil && x.CashRatio != nil {
 		return *x.CashRatio
 	}
 	return ""
 }
 
-func (x *DeductionOrder) GetBonusRatio() string {
+func (x *WalletConfig) GetBonusRatio() string {
 	if x != nil && x.BonusRatio != nil {
 		return *x.BonusRatio
 	}
 	return ""
+}
+
+func (x *WalletConfig) GetClearBonusOnWithdrawal() bool {
+	if x != nil && x.ClearBonusOnWithdrawal != nil {
+		return *x.ClearBonusOnWithdrawal
+	}
+	return false
 }
 
 type OperatorCurrencyConfig struct {
@@ -7573,7 +7581,7 @@ func (x *OperatorCurrencyConfig) GetWageringUnlockPriority() string {
 
 type GetGamificationCurrencyConfigResponse struct {
 	state                   protoimpl.MessageState    `protogen:"open.v1"`
-	DeductionOrder          *DeductionOrder           `protobuf:"bytes,1,opt,name=deduction_order,json=deductionOrder,proto3" json:"deduction_order,omitempty"`
+	WalletConfig            *WalletConfig             `protobuf:"bytes,1,opt,name=wallet_config,json=walletConfig,proto3" json:"wallet_config,omitempty"`
 	OperatorCurrencyConfigs []*OperatorCurrencyConfig `protobuf:"bytes,2,rep,name=operator_currency_configs,json=operatorCurrencyConfigs,proto3" json:"operator_currency_configs,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
@@ -7609,9 +7617,9 @@ func (*GetGamificationCurrencyConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{92}
 }
 
-func (x *GetGamificationCurrencyConfigResponse) GetDeductionOrder() *DeductionOrder {
+func (x *GetGamificationCurrencyConfigResponse) GetWalletConfig() *WalletConfig {
 	if x != nil {
-		return x.DeductionOrder
+		return x.WalletConfig
 	}
 	return nil
 }
@@ -7719,29 +7727,29 @@ func (*UpdateOperatorCurrencyConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{94}
 }
 
-type UpdateDeductionOrderRequest struct {
+type UpdateWalletConfigRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	DeductionOrder           *DeductionOrder         `protobuf:"bytes,3,opt,name=deduction_order,json=deductionOrder,proto3" json:"deduction_order,omitempty"`
+	WalletConfig             *WalletConfig           `protobuf:"bytes,3,opt,name=wallet_config,json=walletConfig,proto3" json:"wallet_config,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *UpdateDeductionOrderRequest) Reset() {
-	*x = UpdateDeductionOrderRequest{}
+func (x *UpdateWalletConfigRequest) Reset() {
+	*x = UpdateWalletConfigRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateDeductionOrderRequest) String() string {
+func (x *UpdateWalletConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateDeductionOrderRequest) ProtoMessage() {}
+func (*UpdateWalletConfigRequest) ProtoMessage() {}
 
-func (x *UpdateDeductionOrderRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateWalletConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7753,52 +7761,52 @@ func (x *UpdateDeductionOrderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateDeductionOrderRequest.ProtoReflect.Descriptor instead.
-func (*UpdateDeductionOrderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateWalletConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateWalletConfigRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{95}
 }
 
-func (x *UpdateDeductionOrderRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *UpdateWalletConfigRequest) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-func (x *UpdateDeductionOrderRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *UpdateWalletConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *UpdateDeductionOrderRequest) GetDeductionOrder() *DeductionOrder {
+func (x *UpdateWalletConfigRequest) GetWalletConfig() *WalletConfig {
 	if x != nil {
-		return x.DeductionOrder
+		return x.WalletConfig
 	}
 	return nil
 }
 
-type UpdateDeductionOrderResponse struct {
+type UpdateWalletConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateDeductionOrderResponse) Reset() {
-	*x = UpdateDeductionOrderResponse{}
+func (x *UpdateWalletConfigResponse) Reset() {
+	*x = UpdateWalletConfigResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateDeductionOrderResponse) String() string {
+func (x *UpdateWalletConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateDeductionOrderResponse) ProtoMessage() {}
+func (*UpdateWalletConfigResponse) ProtoMessage() {}
 
-func (x *UpdateDeductionOrderResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateWalletConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7810,8 +7818,8 @@ func (x *UpdateDeductionOrderResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateDeductionOrderResponse.ProtoReflect.Descriptor instead.
-func (*UpdateDeductionOrderResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateWalletConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateWalletConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{96}
 }
 
@@ -11463,6 +11471,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	ProviderBonusAmount                  string `protobuf:"bytes,16,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
 	ProviderBonusAmountUsd               string `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
 	ProviderBonusAmountReportingCurrency string `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	ExternalTransactionId                int64  `protobuf:"varint,19,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
 }
@@ -11621,6 +11630,13 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetProviderBo
 		return x.ProviderBonusAmountReportingCurrency
 	}
 	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetExternalTransactionId() int64 {
+	if x != nil {
+		return x.ExternalTransactionId
+	}
+	return 0
 }
 
 type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
@@ -14069,12 +14085,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\x95\t\n" +
+	"\v_pagination\"\xcd\t\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x9f\a\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xd7\a\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -14096,7 +14112,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"(operator_bonus_amount_reporting_currency\x18\x0f \x01(\tR$operatorBonusAmountReportingCurrency\x122\n" +
 	"\x15provider_bonus_amount\x18\x10 \x01(\tR\x13providerBonusAmount\x129\n" +
 	"\x19provider_bonus_amount_usd\x18\x11 \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
-	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency\"\x9b\x01\n" +
+	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency\x126\n" +
+	"\x17external_transaction_id\x18\x13 \x01(\x03R\x15externalTransactionId\"\x9b\x01\n" +
 	"(GetWalletBalanceTransactionsByIdsRequest\x12'\n" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf8\x10\n" +
@@ -14730,15 +14747,17 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17current_reward_sequence\x18\x04 \x01(\v2%.api.wallet.service.v1.RewardSequenceR\x15currentRewardSequence\"\xd6\x01\n" +
 	"$GetGamificationCurrencyConfigRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xa0\x01\n" +
-	"\x0eDeductionOrder\x12%\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xfc\x01\n" +
+	"\fWalletConfig\x12%\n" +
 	"\x0ededuction_type\x18\x01 \x01(\tR\rdeductionType\x12\"\n" +
 	"\n" +
 	"cash_ratio\x18\x02 \x01(\tH\x00R\tcashRatio\x88\x01\x01\x12$\n" +
 	"\vbonus_ratio\x18\x03 \x01(\tH\x01R\n" +
-	"bonusRatio\x88\x01\x01B\r\n" +
+	"bonusRatio\x88\x01\x01\x12>\n" +
+	"\x19clear_bonus_on_withdrawal\x18\x04 \x01(\bH\x02R\x16clearBonusOnWithdrawal\x88\x01\x01B\r\n" +
 	"\v_cash_ratioB\x0e\n" +
-	"\f_bonus_ratio\"\xa3\x03\n" +
+	"\f_bonus_ratioB\x1c\n" +
+	"\x1a_clear_bonus_on_withdrawal\"\xa3\x03\n" +
 	"\x16OperatorCurrencyConfig\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12T\n" +
 	"$cash_withdrawal_wagering_requirement\x18\x02 \x01(\x05H\x00R!cashWithdrawalWageringRequirement\x88\x01\x01\x12(\n" +
@@ -14748,20 +14767,20 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"%_cash_withdrawal_wagering_requirementB\x10\n" +
 	"\x0e_bonus_enabledB\x1a\n" +
 	"\x18_maximum_bonus_bet_limitB\x1b\n" +
-	"\x19_wagering_unlock_priority\"\xe2\x01\n" +
-	"%GetGamificationCurrencyConfigResponse\x12N\n" +
-	"\x0fdeduction_order\x18\x01 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\x12i\n" +
+	"\x19_wagering_unlock_priority\"\xdc\x01\n" +
+	"%GetGamificationCurrencyConfigResponse\x12H\n" +
+	"\rwallet_config\x18\x01 \x01(\v2#.api.wallet.service.v1.WalletConfigR\fwalletConfig\x12i\n" +
 	"\x19operator_currency_configs\x18\x02 \x03(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x17operatorCurrencyConfigs\"\xbe\x02\n" +
 	"#UpdateOperatorCurrencyConfigRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12g\n" +
 	"\x18operator_currency_config\x18\x03 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"&\n" +
-	"$UpdateOperatorCurrencyConfigResponse\"\x9d\x02\n" +
-	"\x1bUpdateDeductionOrderRequest\x12Y\n" +
+	"$UpdateOperatorCurrencyConfigResponse\"\x95\x02\n" +
+	"\x19UpdateWalletConfigRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12N\n" +
-	"\x0fdeduction_order\x18\x03 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"\x1e\n" +
-	"\x1cUpdateDeductionOrderResponse\"z\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12H\n" +
+	"\rwallet_config\x18\x03 \x01(\v2#.api.wallet.service.v1.WalletConfigR\fwalletConfig\"\x1c\n" +
+	"\x1aUpdateWalletConfigResponse\"z\n" +
 	"\x14BonusTransferRequest\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
@@ -15214,7 +15233,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x18\n" +
 	"\abalance\x18\x02 \x01(\tR\abalance\x12\x14\n" +
 	"\x05bonus\x18\x03 \x01(\tR\x05bonus\x12\x1c\n" +
-	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp2\xc0N\n" +
+	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp2\xb9N\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -15269,8 +15288,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0eClaimPromoCode\x12,.api.wallet.service.v1.ClaimPromoCodeRequest\x1a-.api.wallet.service.v1.ClaimPromoCodeResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/wallet/promo-code/claim\x12\xcb\x01\n" +
 	"\x1cGetUserDepositRewardSequence\x12:.api.wallet.service.v1.GetUserDepositRewardSequenceRequest\x1a;.api.wallet.service.v1.GetUserDepositRewardSequenceResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/wallet/deposit-reward/user-sequence\x12\x9c\x01\n" +
 	"\x1dGetGamificationCurrencyConfig\x12;.api.wallet.service.v1.GetGamificationCurrencyConfigRequest\x1a<.api.wallet.service.v1.GetGamificationCurrencyConfigResponse\"\x00\x12\x99\x01\n" +
-	"\x1cUpdateOperatorCurrencyConfig\x12:.api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"\x00\x12\x81\x01\n" +
-	"\x14UpdateDeductionOrder\x122.api.wallet.service.v1.UpdateDeductionOrderRequest\x1a3.api.wallet.service.v1.UpdateDeductionOrderResponse\"\x00\x12\x90\x01\n" +
+	"\x1cUpdateOperatorCurrencyConfig\x12:.api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"\x00\x12{\n" +
+	"\x12UpdateWalletConfig\x120.api.wallet.service.v1.UpdateWalletConfigRequest\x1a1.api.wallet.service.v1.UpdateWalletConfigResponse\"\x00\x12\x90\x01\n" +
 	"\rBonusTransfer\x12+.api.wallet.service.v1.BonusTransferRequest\x1a,.api.wallet.service.v1.BonusTransferResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/wallet/bonus-transfer\x12\xce\x01\n" +
 	"\x1cAddResponsibleGamblingConfig\x12:.api.wallet.service.v1.AddResponsibleGamblingConfigRequest\x1a;.api.wallet.service.v1.AddResponsibleGamblingConfigResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/wallet/responsible-gambling/config/add\x12\xda\x01\n" +
 	"\x1fDeleteResponsibleGamblingConfig\x12=.api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest\x1a>.api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/wallet/responsible-gambling/config/delete\x12\xd6\x01\n" +
@@ -15395,13 +15414,13 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GetUserDepositRewardSequenceRequest)(nil),                          // 87: api.wallet.service.v1.GetUserDepositRewardSequenceRequest
 	(*GetUserDepositRewardSequenceResponse)(nil),                         // 88: api.wallet.service.v1.GetUserDepositRewardSequenceResponse
 	(*GetGamificationCurrencyConfigRequest)(nil),                         // 89: api.wallet.service.v1.GetGamificationCurrencyConfigRequest
-	(*DeductionOrder)(nil),                                               // 90: api.wallet.service.v1.DeductionOrder
+	(*WalletConfig)(nil),                                                 // 90: api.wallet.service.v1.WalletConfig
 	(*OperatorCurrencyConfig)(nil),                                       // 91: api.wallet.service.v1.OperatorCurrencyConfig
 	(*GetGamificationCurrencyConfigResponse)(nil),                        // 92: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	(*UpdateOperatorCurrencyConfigRequest)(nil),                          // 93: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
 	(*UpdateOperatorCurrencyConfigResponse)(nil),                         // 94: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	(*UpdateDeductionOrderRequest)(nil),                                  // 95: api.wallet.service.v1.UpdateDeductionOrderRequest
-	(*UpdateDeductionOrderResponse)(nil),                                 // 96: api.wallet.service.v1.UpdateDeductionOrderResponse
+	(*UpdateWalletConfigRequest)(nil),                                    // 95: api.wallet.service.v1.UpdateWalletConfigRequest
+	(*UpdateWalletConfigResponse)(nil),                                   // 96: api.wallet.service.v1.UpdateWalletConfigResponse
 	(*BonusTransferRequest)(nil),                                         // 97: api.wallet.service.v1.BonusTransferRequest
 	(*BonusTransferResponse)(nil),                                        // 98: api.wallet.service.v1.BonusTransferResponse
 	(*GetUserBalanceDetailsRequest)(nil),                                 // 99: api.wallet.service.v1.GetUserBalanceDetailsRequest
@@ -15601,14 +15620,14 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	79,  // 104: api.wallet.service.v1.GetUserDepositRewardSequenceResponse.current_reward_sequence:type_name -> api.wallet.service.v1.RewardSequence
 	166, // 105: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	166, // 106: api.wallet.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	90,  // 107: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.deduction_order:type_name -> api.wallet.service.v1.DeductionOrder
+	90,  // 107: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
 	91,  // 108: api.wallet.service.v1.GetGamificationCurrencyConfigResponse.operator_currency_configs:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
 	166, // 109: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	166, // 110: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	91,  // 111: api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
-	166, // 112: api.wallet.service.v1.UpdateDeductionOrderRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	166, // 113: api.wallet.service.v1.UpdateDeductionOrderRequest.target_operator_context:type_name -> api.common.OperatorContext
-	90,  // 114: api.wallet.service.v1.UpdateDeductionOrderRequest.deduction_order:type_name -> api.wallet.service.v1.DeductionOrder
+	166, // 112: api.wallet.service.v1.UpdateWalletConfigRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	166, // 113: api.wallet.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	90,  // 114: api.wallet.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
 	155, // 115: api.wallet.service.v1.UserBalanceDetail.credits:type_name -> api.wallet.service.v1.UserBalanceDetail.Credit
 	100, // 116: api.wallet.service.v1.GetUserBalanceDetailsResponse.detail:type_name -> api.wallet.service.v1.UserBalanceDetail
 	166, // 117: api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
@@ -15735,7 +15754,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	87,  // 238: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:input_type -> api.wallet.service.v1.GetUserDepositRewardSequenceRequest
 	89,  // 239: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:input_type -> api.wallet.service.v1.GetGamificationCurrencyConfigRequest
 	93,  // 240: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
-	95,  // 241: api.wallet.service.v1.Wallet.UpdateDeductionOrder:input_type -> api.wallet.service.v1.UpdateDeductionOrderRequest
+	95,  // 241: api.wallet.service.v1.Wallet.UpdateWalletConfig:input_type -> api.wallet.service.v1.UpdateWalletConfigRequest
 	97,  // 242: api.wallet.service.v1.Wallet.BonusTransfer:input_type -> api.wallet.service.v1.BonusTransferRequest
 	102, // 243: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:input_type -> api.wallet.service.v1.AddResponsibleGamblingConfigRequest
 	104, // 244: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:input_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest
@@ -15806,7 +15825,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	88,  // 309: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:output_type -> api.wallet.service.v1.GetUserDepositRewardSequenceResponse
 	92,  // 310: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	94,  // 311: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	96,  // 312: api.wallet.service.v1.Wallet.UpdateDeductionOrder:output_type -> api.wallet.service.v1.UpdateDeductionOrderResponse
+	96,  // 312: api.wallet.service.v1.Wallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
 	98,  // 313: api.wallet.service.v1.Wallet.BonusTransfer:output_type -> api.wallet.service.v1.BonusTransferResponse
 	103, // 314: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:output_type -> api.wallet.service.v1.AddResponsibleGamblingConfigResponse
 	105, // 315: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
