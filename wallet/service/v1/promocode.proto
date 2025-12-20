@@ -211,6 +211,7 @@ message PromoCodeCampaignListItem {
 	google.protobuf.Timestamp start_time = 11;
 	google.protobuf.Timestamp end_time = 12;
 	google.protobuf.Timestamp updated_at = 13;
+	PromoCodeConditions reward_conditions = 14;  // campaign reward conditions
 }
 
 message ListPromoCodeCampaignsResponse {
