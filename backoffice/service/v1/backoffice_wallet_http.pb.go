@@ -55,12 +55,12 @@ const OperationBackofficeWalletOperatorSwap = "/api.backoffice.service.v1.Backof
 const OperationBackofficeWalletOperatorTransfer = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
 const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
-const OperationBackofficeWalletUpdateDeductionOrder = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
 const OperationBackofficeWalletUpdateOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 const OperationBackofficeWalletUpdateOperatorCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
 const OperationBackofficeWalletUpdatePromoCodeCampaign = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaign"
 const OperationBackofficeWalletUpdatePromoCodeCampaignStatus = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaignStatus"
 const OperationBackofficeWalletUpdateWallet = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
+const OperationBackofficeWalletUpdateWalletConfig = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletConfig"
 const OperationBackofficeWalletUpdateWalletCurrency = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
 
 type BackofficeWalletHTTPServer interface {
@@ -129,8 +129,6 @@ type BackofficeWalletHTTPServer interface {
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error)
-	// UpdateDeductionOrder UpdateDeductionOrder updates the deduction order config based on operator context
-	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -140,6 +138,8 @@ type BackofficeWalletHTTPServer interface {
 	// UpdatePromoCodeCampaignStatus UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
 	UpdatePromoCodeCampaignStatus(context.Context, *UpdatePromoCodeCampaignStatusRequest) (*v1.UpdatePromoCodeCampaignStatusResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
+	// UpdateWalletConfig UpdateWalletConfig updates the wallet config based on operator context
+	UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*v1.UpdateWalletConfigResponse, error)
 	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error)
 }
 
@@ -174,7 +174,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/promo-code/codes/generate", _BackofficeWallet_GeneratePromoCodes0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/gamification/get", _BackofficeWallet_GetGamificationCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/currency/config/update", _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/deduction-order/update", _BackofficeWallet_UpdateDeductionOrder0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/config/update", _BackofficeWallet_UpdateWalletConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/responsible-gambling/config/delete", _BackofficeWallet_DeleteWalletResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/responsible-gambling/configs/list", _BackofficeWallet_ListWalletResponsibleGamblingConfigs0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/customer-records/list", _BackofficeWallet_ListCustomerRecords0_HTTP_Handler(srv))
@@ -827,24 +827,24 @@ func _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv Backoffice
 	}
 }
 
-func _BackofficeWallet_UpdateDeductionOrder0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_UpdateWalletConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in UpdateDeductionOrderRequest
+		var in UpdateWalletConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletUpdateDeductionOrder)
+		http.SetOperation(ctx, OperationBackofficeWalletUpdateWalletConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateDeductionOrder(ctx, req.(*UpdateDeductionOrderRequest))
+			return srv.UpdateWalletConfig(ctx, req.(*UpdateWalletConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.UpdateDeductionOrderResponse)
+		reply := out.(*v1.UpdateWalletConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1179,8 +1179,6 @@ type BackofficeWalletHTTPClient interface {
 	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(ctx context.Context, req *SetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.SetFICAThresholdConfigResponse, err error)
-	// UpdateDeductionOrder UpdateDeductionOrder updates the deduction order config based on operator context
-	UpdateDeductionOrder(ctx context.Context, req *UpdateDeductionOrderRequest, opts ...http.CallOption) (rsp *v1.UpdateDeductionOrderResponse, err error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
@@ -1190,6 +1188,8 @@ type BackofficeWalletHTTPClient interface {
 	// UpdatePromoCodeCampaignStatus UpdatePromoCodeCampaignStatus updates the status of a promo code campaign
 	UpdatePromoCodeCampaignStatus(ctx context.Context, req *UpdatePromoCodeCampaignStatusRequest, opts ...http.CallOption) (rsp *v1.UpdatePromoCodeCampaignStatusResponse, err error)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
+	// UpdateWalletConfig UpdateWalletConfig updates the wallet config based on operator context
+	UpdateWalletConfig(ctx context.Context, req *UpdateWalletConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateWalletConfigResponse, err error)
 	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorCurrencyResponse, err error)
 }
 
@@ -1686,20 +1686,6 @@ func (c *BackofficeWalletHTTPClientImpl) SetFICAThresholdConfig(ctx context.Cont
 	return &out, nil
 }
 
-// UpdateDeductionOrder UpdateDeductionOrder updates the deduction order config based on operator context
-func (c *BackofficeWalletHTTPClientImpl) UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...http.CallOption) (*v1.UpdateDeductionOrderResponse, error) {
-	var out v1.UpdateDeductionOrderResponse
-	pattern := "/v1/backoffice/wallet/deduction-order/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateDeductionOrder))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 // UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 func (c *BackofficeWalletHTTPClientImpl) UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...http.CallOption) (*UpdateOperatorBalanceResponse, error) {
 	var out UpdateOperatorBalanceResponse
@@ -1761,6 +1747,20 @@ func (c *BackofficeWalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *U
 	pattern := "/v1/backoffice/wallet/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateWallet))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UpdateWalletConfig UpdateWalletConfig updates the wallet config based on operator context
+func (c *BackofficeWalletHTTPClientImpl) UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...http.CallOption) (*v1.UpdateWalletConfigResponse, error) {
+	var out v1.UpdateWalletConfigResponse
+	pattern := "/v1/backoffice/wallet/config/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateWalletConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

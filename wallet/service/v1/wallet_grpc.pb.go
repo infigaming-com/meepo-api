@@ -71,7 +71,7 @@ const (
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
-	Wallet_UpdateDeductionOrder_FullMethodName                = "/api.wallet.service.v1.Wallet/UpdateDeductionOrder"
+	Wallet_UpdateWalletConfig_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateWalletConfig"
 	Wallet_BonusTransfer_FullMethodName                       = "/api.wallet.service.v1.Wallet/BonusTransfer"
 	Wallet_AddResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
 	Wallet_DeleteResponsibleGamblingConfig_FullMethodName     = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
@@ -187,8 +187,8 @@ type WalletClient interface {
 	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyConfigResponse, error)
-	// UpdateDeductionOrder updates the deduction order config based on operator context
-	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*UpdateDeductionOrderResponse, error)
+	// UpdateWalletConfig updates the wallet config based on operator context
+	UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*UpdateWalletConfigResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(ctx context.Context, in *BonusTransferRequest, opts ...grpc.CallOption) (*BonusTransferResponse, error)
 	// AddResponsibleGamblingConfig adds gambling config for a user's currency
@@ -752,10 +752,10 @@ func (c *walletClient) UpdateOperatorCurrencyConfig(ctx context.Context, in *Upd
 	return out, nil
 }
 
-func (c *walletClient) UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*UpdateDeductionOrderResponse, error) {
+func (c *walletClient) UpdateWalletConfig(ctx context.Context, in *UpdateWalletConfigRequest, opts ...grpc.CallOption) (*UpdateWalletConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateDeductionOrderResponse)
-	err := c.cc.Invoke(ctx, Wallet_UpdateDeductionOrder_FullMethodName, in, out, cOpts...)
+	out := new(UpdateWalletConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_UpdateWalletConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1046,8 +1046,8 @@ type WalletServer interface {
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*GetGamificationCurrencyConfigResponse, error)
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error)
-	// UpdateDeductionOrder updates the deduction order config based on operator context
-	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error)
+	// UpdateWalletConfig updates the wallet config based on operator context
+	UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*UpdateWalletConfigResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
 	// AddResponsibleGamblingConfig adds gambling config for a user's currency
@@ -1247,8 +1247,8 @@ func (UnimplementedWalletServer) GetGamificationCurrencyConfig(context.Context, 
 func (UnimplementedWalletServer) UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorCurrencyConfig not implemented")
 }
-func (UnimplementedWalletServer) UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateDeductionOrder not implemented")
+func (UnimplementedWalletServer) UpdateWalletConfig(context.Context, *UpdateWalletConfigRequest) (*UpdateWalletConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateWalletConfig not implemented")
 }
 func (UnimplementedWalletServer) BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BonusTransfer not implemented")
@@ -2264,20 +2264,20 @@ func _Wallet_UpdateOperatorCurrencyConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_UpdateDeductionOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateDeductionOrderRequest)
+func _Wallet_UpdateWalletConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWalletConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).UpdateDeductionOrder(ctx, in)
+		return srv.(WalletServer).UpdateWalletConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_UpdateDeductionOrder_FullMethodName,
+		FullMethod: Wallet_UpdateWalletConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).UpdateDeductionOrder(ctx, req.(*UpdateDeductionOrderRequest))
+		return srv.(WalletServer).UpdateWalletConfig(ctx, req.(*UpdateWalletConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2840,8 +2840,8 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_UpdateOperatorCurrencyConfig_Handler,
 		},
 		{
-			MethodName: "UpdateDeductionOrder",
-			Handler:    _Wallet_UpdateDeductionOrder_Handler,
+			MethodName: "UpdateWalletConfig",
+			Handler:    _Wallet_UpdateWalletConfig_Handler,
 		},
 		{
 			MethodName: "BonusTransfer",

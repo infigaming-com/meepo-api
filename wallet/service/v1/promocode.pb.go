@@ -1439,6 +1439,7 @@ type PromoCodeCampaignListItem struct {
 	StartTime           *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime             *timestamppb.Timestamp  `protobuf:"bytes,12,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	UpdatedAt           *timestamppb.Timestamp  `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	RewardConditions    *PromoCodeConditions    `protobuf:"bytes,14,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"` // campaign reward conditions
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1560,6 +1561,13 @@ func (x *PromoCodeCampaignListItem) GetEndTime() *timestamppb.Timestamp {
 func (x *PromoCodeCampaignListItem) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *PromoCodeCampaignListItem) GetRewardConditions() *PromoCodeConditions {
+	if x != nil {
+		return x.RewardConditions
 	}
 	return nil
 }
@@ -2772,7 +2780,7 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x12\n" +
 	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xd6\x04\n" +
+	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xaf\x05\n" +
 	"\x19PromoCodeCampaignListItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -2791,7 +2799,8 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"start_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa4\x02\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12W\n" +
+	"\x11reward_conditions\x18\x0e \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\"\xa4\x02\n" +
 	"\x1eListPromoCodeCampaignsResponse\x12N\n" +
 	"\tcampaigns\x18\x01 \x03(\v20.api.wallet.service.v1.PromoCodeCampaignListItemR\tcampaigns\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12!\n" +
@@ -2966,26 +2975,27 @@ var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
 	35, // 41: api.wallet.service.v1.PromoCodeCampaignListItem.start_time:type_name -> google.protobuf.Timestamp
 	35, // 42: api.wallet.service.v1.PromoCodeCampaignListItem.end_time:type_name -> google.protobuf.Timestamp
 	35, // 43: api.wallet.service.v1.PromoCodeCampaignListItem.updated_at:type_name -> google.protobuf.Timestamp
-	20, // 44: api.wallet.service.v1.ListPromoCodeCampaignsResponse.campaigns:type_name -> api.wallet.service.v1.PromoCodeCampaignListItem
-	36, // 45: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	35, // 46: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
-	35, // 47: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
-	35, // 48: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
-	35, // 49: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
-	23, // 50: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
-	24, // 51: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
-	36, // 52: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	35, // 53: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
-	35, // 54: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
-	3,  // 55: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	11, // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	32, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
-	37, // 58: api.wallet.service.v1.FreeBetConfig.FreeBetReward.template:type_name -> google.protobuf.Struct
-	59, // [59:59] is the sub-list for method output_type
-	59, // [59:59] is the sub-list for method input_type
-	59, // [59:59] is the sub-list for extension type_name
-	59, // [59:59] is the sub-list for extension extendee
-	0,  // [0:59] is the sub-list for field type_name
+	11, // 44: api.wallet.service.v1.PromoCodeCampaignListItem.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	20, // 45: api.wallet.service.v1.ListPromoCodeCampaignsResponse.campaigns:type_name -> api.wallet.service.v1.PromoCodeCampaignListItem
+	36, // 46: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	35, // 47: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
+	35, // 48: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
+	35, // 49: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
+	35, // 50: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
+	23, // 51: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
+	24, // 52: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
+	36, // 53: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	35, // 54: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
+	35, // 55: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
+	3,  // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	11, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	32, // 58: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
+	37, // 59: api.wallet.service.v1.FreeBetConfig.FreeBetReward.template:type_name -> google.protobuf.Struct
+	60, // [60:60] is the sub-list for method output_type
+	60, // [60:60] is the sub-list for method input_type
+	60, // [60:60] is the sub-list for extension type_name
+	60, // [60:60] is the sub-list for extension extendee
+	0,  // [0:60] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_promocode_proto_init() }

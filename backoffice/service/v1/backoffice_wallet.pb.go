@@ -2708,28 +2708,28 @@ func (x *UpdateOperatorCurrencyConfigRequest) GetOperatorCurrencyConfig() *v1.Op
 	return nil
 }
 
-type UpdateDeductionOrderRequest struct {
+type UpdateWalletConfigRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	DeductionOrder        *v1.DeductionOrder      `protobuf:"bytes,2,opt,name=deduction_order,json=deductionOrder,proto3" json:"deduction_order,omitempty"`
+	WalletConfig          *v1.WalletConfig        `protobuf:"bytes,2,opt,name=wallet_config,json=walletConfig,proto3" json:"wallet_config,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *UpdateDeductionOrderRequest) Reset() {
-	*x = UpdateDeductionOrderRequest{}
+func (x *UpdateWalletConfigRequest) Reset() {
+	*x = UpdateWalletConfigRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateDeductionOrderRequest) String() string {
+func (x *UpdateWalletConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateDeductionOrderRequest) ProtoMessage() {}
+func (*UpdateWalletConfigRequest) ProtoMessage() {}
 
-func (x *UpdateDeductionOrderRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateWalletConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2741,21 +2741,21 @@ func (x *UpdateDeductionOrderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateDeductionOrderRequest.ProtoReflect.Descriptor instead.
-func (*UpdateDeductionOrderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateWalletConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateWalletConfigRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{38}
 }
 
-func (x *UpdateDeductionOrderRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *UpdateWalletConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *UpdateDeductionOrderRequest) GetDeductionOrder() *v1.DeductionOrder {
+func (x *UpdateWalletConfigRequest) GetWalletConfig() *v1.WalletConfig {
 	if x != nil {
-		return x.DeductionOrder
+		return x.WalletConfig
 	}
 	return nil
 }
@@ -4362,15 +4362,16 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	TransactionType      string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	VipLevel             int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	ChangeBalance        string `protobuf:"bytes,5,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
-	BeforeBalance        string `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance         string `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Currency             string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
-	RelatedTransactionId int64  `protobuf:"varint,9,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	TransactionType       string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	VipLevel              int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	ChangeBalance         string `protobuf:"bytes,5,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
+	BeforeBalance         string `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	AfterBalance          string `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	Currency              string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	RelatedTransactionId  int64  `protobuf:"varint,9,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
+	ExternalTransactionId int64  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) Reset() {
@@ -4462,6 +4463,13 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetCurrency()
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetRelatedTransactionId() int64 {
 	if x != nil {
 		return x.RelatedTransactionId
+	}
+	return 0
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetExternalTransactionId() int64 {
+	if x != nil {
+		return x.ExternalTransactionId
 	}
 	return 0
 }
@@ -4573,12 +4581,12 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xfd\x04\n" +
+	"_page_size\"\xb5\x05\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x86\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2S.api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x83\x03\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xbb\x03\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -4589,7 +4597,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
 	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x1a\n" +
 	"\bcurrency\x18\b \x01(\tR\bcurrency\x124\n" +
-	"\x16related_transaction_id\x18\t \x01(\x03R\x14relatedTransactionId\"F\n" +
+	"\x16related_transaction_id\x18\t \x01(\x03R\x14relatedTransactionId\x126\n" +
+	"\x17external_transaction_id\x18\n" +
+	" \x01(\x03R\x15externalTransactionId\"F\n" +
 	"\"GetWalletCreditTransactionsRequest\x12 \n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\rtransactionId\"\xd4\x02\n" +
 	"#GetWalletCreditTransactionsResponse\x12\x81\x01\n" +
@@ -4816,10 +4826,10 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xe3\x01\n" +
 	"#UpdateOperatorCurrencyConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12g\n" +
-	"\x18operator_currency_config\x18\x02 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"\xc2\x01\n" +
-	"\x1bUpdateDeductionOrderRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12N\n" +
-	"\x0fdeduction_order\x18\x02 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"\x82\x01\n" +
+	"\x18operator_currency_config\x18\x02 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"\xba\x01\n" +
+	"\x19UpdateWalletConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12H\n" +
+	"\rwallet_config\x18\x02 \x01(\v2#.api.wallet.service.v1.WalletConfigR\fwalletConfig\"\x82\x01\n" +
 	",DeleteWalletResponsibleGamblingConfigRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -5009,7 +5019,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"codeLength\x12\x1f\n" +
 	"\vcode_format\x18\x03 \x01(\tR\n" +
 	"codeFormat\x12\x14\n" +
-	"\x05count\x18\x04 \x01(\x05R\x05count2\x89A\n" +
+	"\x05count\x18\x04 \x01(\x05R\x05count2\xfa@\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -5040,8 +5050,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x1cListPromoCodeCampaignDetails\x12>.api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest\x1a;.api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/promo-code/campaign/details\x12\xb9\x01\n" +
 	"\x12GeneratePromoCodes\x124.api.backoffice.service.v1.GeneratePromoCodesRequest\x1a1.api.wallet.service.v1.GeneratePromoCodesResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/wallet/promo-code/codes/generate\x12\xd1\x01\n" +
 	"\x1dGetGamificationCurrencyConfig\x12?.api.backoffice.service.v1.GetGamificationCurrencyConfigRequest\x1a<.api.wallet.service.v1.GetGamificationCurrencyConfigResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/wallet/gamification/get\x12\xd4\x01\n" +
-	"\x1cUpdateOperatorCurrencyConfig\x12>.api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/currency/config/update\x12\xbc\x01\n" +
-	"\x14UpdateDeductionOrder\x126.api.backoffice.service.v1.UpdateDeductionOrderRequest\x1a3.api.wallet.service.v1.UpdateDeductionOrderResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/deduction-order/update\x12\xf5\x01\n" +
+	"\x1cUpdateOperatorCurrencyConfig\x12>.api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/currency/config/update\x12\xad\x01\n" +
+	"\x12UpdateWalletConfig\x124.api.backoffice.service.v1.UpdateWalletConfigRequest\x1a1.api.wallet.service.v1.UpdateWalletConfigResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/config/update\x12\xf5\x01\n" +
 	"%DeleteWalletResponsibleGamblingConfig\x12G.api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest\x1a>.api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/responsible-gambling/config/delete\x12\xf1\x01\n" +
 	"$ListWalletResponsibleGamblingConfigs\x12F.api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest\x1a=.api.wallet.service.v1.ListResponsibleGamblingConfigsResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/wallet/responsible-gambling/configs/list\x12\xb8\x01\n" +
 	"\x13ListCustomerRecords\x125.api.backoffice.service.v1.ListCustomerRecordsRequest\x1a2.api.wallet.service.v1.ListCustomerRecordsResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/wallet/customer-records/list\x12\xc0\x01\n" +
@@ -5108,7 +5118,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetDepositRewardConfigRequest)(nil),                            // 35: api.backoffice.service.v1.GetDepositRewardConfigRequest
 	(*GetGamificationCurrencyConfigRequest)(nil),                     // 36: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
 	(*UpdateOperatorCurrencyConfigRequest)(nil),                      // 37: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
-	(*UpdateDeductionOrderRequest)(nil),                              // 38: api.backoffice.service.v1.UpdateDeductionOrderRequest
+	(*UpdateWalletConfigRequest)(nil),                                // 38: api.backoffice.service.v1.UpdateWalletConfigRequest
 	(*DeleteWalletResponsibleGamblingConfigRequest)(nil),             // 39: api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
 	(*ListWalletResponsibleGamblingConfigsRequest)(nil),              // 40: api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
 	(*ListCustomerRecordsRequest)(nil),                               // 41: api.backoffice.service.v1.ListCustomerRecordsRequest
@@ -5136,7 +5146,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*common.OperatorContextFilters)(nil),              // 63: api.common.OperatorContextFilters
 	(*v1.RewardSequence)(nil),                          // 64: api.wallet.service.v1.RewardSequence
 	(*v1.OperatorCurrencyConfig)(nil),                  // 65: api.wallet.service.v1.OperatorCurrencyConfig
-	(*v1.DeductionOrder)(nil),                          // 66: api.wallet.service.v1.DeductionOrder
+	(*v1.WalletConfig)(nil),                            // 66: api.wallet.service.v1.WalletConfig
 	(*v1.FICAThresholdConfig)(nil),                     // 67: api.wallet.service.v1.FICAThresholdConfig
 	(*v1.PromoCodeConditions)(nil),                     // 68: api.wallet.service.v1.PromoCodeConditions
 	(*v1.PromoCodeRewardConfigs)(nil),                  // 69: api.wallet.service.v1.PromoCodeRewardConfigs
@@ -5156,7 +5166,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*v1.GeneratePromoCodesResponse)(nil),              // 83: api.wallet.service.v1.GeneratePromoCodesResponse
 	(*v1.GetGamificationCurrencyConfigResponse)(nil),   // 84: api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	(*v1.UpdateOperatorCurrencyConfigResponse)(nil),    // 85: api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	(*v1.UpdateDeductionOrderResponse)(nil),            // 86: api.wallet.service.v1.UpdateDeductionOrderResponse
+	(*v1.UpdateWalletConfigResponse)(nil),              // 86: api.wallet.service.v1.UpdateWalletConfigResponse
 	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 87: api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
 	(*v1.ListResponsibleGamblingConfigsResponse)(nil),  // 88: api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
 	(*v1.ListCustomerRecordsResponse)(nil),             // 89: api.wallet.service.v1.ListCustomerRecordsResponse
@@ -5207,8 +5217,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	62,  // 33: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	62,  // 34: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	65,  // 35: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
-	62,  // 36: api.backoffice.service.v1.UpdateDeductionOrderRequest.target_operator_context:type_name -> api.common.OperatorContext
-	66,  // 37: api.backoffice.service.v1.UpdateDeductionOrderRequest.deduction_order:type_name -> api.wallet.service.v1.DeductionOrder
+	62,  // 36: api.backoffice.service.v1.UpdateWalletConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	66,  // 37: api.backoffice.service.v1.UpdateWalletConfigRequest.wallet_config:type_name -> api.wallet.service.v1.WalletConfig
 	61,  // 38: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
 	61,  // 39: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
 	63,  // 40: api.backoffice.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
@@ -5276,7 +5286,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	56,  // 102: api.backoffice.service.v1.BackofficeWallet.GeneratePromoCodes:input_type -> api.backoffice.service.v1.GeneratePromoCodesRequest
 	36,  // 103: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
 	37,  // 104: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
-	38,  // 105: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:input_type -> api.backoffice.service.v1.UpdateDeductionOrderRequest
+	38,  // 105: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:input_type -> api.backoffice.service.v1.UpdateWalletConfigRequest
 	39,  // 106: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
 	40,  // 107: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
 	41,  // 108: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
@@ -5318,7 +5328,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	83,  // 144: api.backoffice.service.v1.BackofficeWallet.GeneratePromoCodes:output_type -> api.wallet.service.v1.GeneratePromoCodesResponse
 	84,  // 145: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	85,  // 146: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	86,  // 147: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:output_type -> api.wallet.service.v1.UpdateDeductionOrderResponse
+	86,  // 147: api.backoffice.service.v1.BackofficeWallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
 	87,  // 148: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
 	88,  // 149: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
 	89,  // 150: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse

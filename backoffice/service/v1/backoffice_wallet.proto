@@ -221,10 +221,10 @@ service BackofficeWallet {
 		};
 	}
 
-	// UpdateDeductionOrder updates the deduction order config based on operator context
-	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (wallet.service.v1.UpdateDeductionOrderResponse) {
+	// UpdateWalletConfig updates the wallet config based on operator context
+	rpc UpdateWalletConfig(UpdateWalletConfigRequest) returns (wallet.service.v1.UpdateWalletConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/deduction-order/update"
+			post: "/v1/backoffice/wallet/config/update"
 			body: "*"
 		};
 	}
@@ -414,6 +414,7 @@ message ListWalletBalanceTransactionsResponse {
 		string after_balance = 7;
 		string currency = 8;
 		int64 related_transaction_id = 9;
+		int64 external_transaction_id = 10;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
@@ -661,9 +662,9 @@ message UpdateOperatorCurrencyConfigRequest {
 	wallet.service.v1.OperatorCurrencyConfig operator_currency_config = 2;
 }
 
-message UpdateDeductionOrderRequest {
+message UpdateWalletConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	wallet.service.v1.DeductionOrder deduction_order = 2;
+	wallet.service.v1.WalletConfig wallet_config = 2;
 }
 
 message DeleteWalletResponsibleGamblingConfigRequest {

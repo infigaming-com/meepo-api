@@ -190,8 +190,8 @@ service Wallet {
 	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
 	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (UpdateOperatorCurrencyConfigResponse) {}
 
-	// UpdateDeductionOrder updates the deduction order config based on operator context
-	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (UpdateDeductionOrderResponse) {}
+	// UpdateWalletConfig updates the wallet config based on operator context
+	rpc UpdateWalletConfig(UpdateWalletConfigRequest) returns (UpdateWalletConfigResponse) {}
 
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	rpc BonusTransfer(BonusTransferRequest) returns (BonusTransferResponse) {
@@ -629,6 +629,7 @@ message ListWalletBalanceTransactionsResponse {
 		string provider_bonus_amount = 16;
 		string provider_bonus_amount_usd = 17;
 		string provider_bonus_amount_reporting_currency = 18;
+		int64 external_transaction_id = 19;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
@@ -1290,10 +1291,11 @@ message GetGamificationCurrencyConfigRequest {
 	api.common.OperatorContext target_operator_context = 2;
 }
 
-message DeductionOrder {
+message WalletConfig {
 	string deduction_type = 1; // cash_first, bonus_first, mixed
 	optional string cash_ratio = 2;
 	optional string bonus_ratio = 3;
+	optional bool clear_bonus_on_withdrawal = 4;
 }
 
 message OperatorCurrencyConfig {
@@ -1305,7 +1307,7 @@ message OperatorCurrencyConfig {
 }
 
 message GetGamificationCurrencyConfigResponse {
-	DeductionOrder deduction_order = 1;
+	WalletConfig wallet_config = 1;
 	repeated OperatorCurrencyConfig operator_currency_configs = 2;
 }
 
@@ -1317,13 +1319,13 @@ message UpdateOperatorCurrencyConfigRequest {
 
 message UpdateOperatorCurrencyConfigResponse {}
 
-message UpdateDeductionOrderRequest {
+message UpdateWalletConfigRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
-	DeductionOrder deduction_order = 3;
+	WalletConfig wallet_config = 3;
 }
 
-message UpdateDeductionOrderResponse {}
+message UpdateWalletConfigResponse {}
 
 message BonusTransferRequest {
 	int64 credit_id = 1;

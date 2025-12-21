@@ -4650,6 +4650,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
+    /v1/backoffice/wallet/config/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdateWalletConfig updates the wallet config based on operator context
+            operationId: BackofficeWallet_UpdateWalletConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateWalletConfigResponse'
     /v1/backoffice/wallet/credit-transactions/get:
         post:
             tags:
@@ -4798,25 +4817,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListCustomerRecordsResponse'
-    /v1/backoffice/wallet/deduction-order/update:
-        post:
-            tags:
-                - BackofficeWallet
-            description: UpdateDeductionOrder updates the deduction order config based on operator context
-            operationId: BackofficeWallet_UpdateDeductionOrder
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateDeductionOrderRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateDeductionOrderResponse'
     /v1/backoffice/wallet/deposit-reward/config/get:
         post:
             tags:
@@ -14194,6 +14194,8 @@ components:
                     type: string
                 relatedTransactionId:
                     type: string
+                externalTransactionId:
+                    type: string
         api.backoffice.service.v1.ListWalletCurrenciesRequest:
             type: object
             properties:
@@ -15146,13 +15148,6 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
                 commissionPlanId:
                     type: string
-        api.backoffice.service.v1.UpdateDeductionOrderRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                deductionOrder:
-                    $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -15444,6 +15439,13 @@ components:
         api.backoffice.service.v1.UpdateVipSettingResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateWalletConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                walletConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.WalletConfig'
         api.backoffice.service.v1.UpdateWalletCurrencyRequest:
             type: object
             properties:
@@ -20036,15 +20038,6 @@ components:
             properties:
                 transactionId:
                     type: string
-        api.wallet.service.v1.DeductionOrder:
-            type: object
-            properties:
-                deductionType:
-                    type: string
-                cashRatio:
-                    type: string
-                bonusRatio:
-                    type: string
         api.wallet.service.v1.DeleteDepositRewardSequencesResponse:
             type: object
             properties: {}
@@ -20274,8 +20267,8 @@ components:
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
             type: object
             properties:
-                deductionOrder:
-                    $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
+                walletConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.WalletConfig'
                 operatorCurrencyConfigs:
                     type: array
                     items:
@@ -20881,6 +20874,8 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                rewardConditions:
+                    $ref: '#/components/schemas/api.wallet.service.v1.PromoCodeConditions'
         api.wallet.service.v1.PromoCodeConditions:
             type: object
             properties:
@@ -21094,9 +21089,6 @@ components:
                 amount:
                     type: string
             description: Turnover condition for promo code campaign
-        api.wallet.service.v1.UpdateDeductionOrderResponse:
-            type: object
-            properties: {}
         api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse:
             type: object
             properties: {}
@@ -21107,6 +21099,9 @@ components:
             type: object
             properties: {}
         api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdateWalletConfigResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UserBalanceDetail:
@@ -21161,6 +21156,17 @@ components:
                 phoneVerified:
                     type: boolean
             description: Verification status condition for promo code campaign
+        api.wallet.service.v1.WalletConfig:
+            type: object
+            properties:
+                deductionType:
+                    type: string
+                cashRatio:
+                    type: string
+                bonusRatio:
+                    type: string
+                clearBonusOnWithdrawal:
+                    type: boolean
         google.protobuf.ListValue:
             type: object
             properties:
