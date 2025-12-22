@@ -157,8 +157,13 @@ service Wallet {
 	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
 	rpc ListPromoCodeCampaignDetails(ListPromoCodeCampaignDetailsRequest) returns (ListPromoCodeCampaignDetailsResponse) {}
 
-	// GeneratePromoCodes generates codes for a one_time campaign
-	rpc GeneratePromoCodes(GeneratePromoCodesRequest) returns (GeneratePromoCodesResponse) {}
+	// GenerateOneTimePromoCodes generates codes for a one_time campaign
+	rpc GenerateOneTimePromoCodes(GenerateOneTimePromoCodesRequest) returns (GenerateOneTimePromoCodesResponse) {}
+
+	// GenerateUniversalPromoCodes generates codes for a universal campaign
+	rpc GenerateUniversalPromoCodes(GenerateUniversalPromoCodesRequest) returns (GenerateUniversalPromoCodesResponse) {}
+
+	rpc ListUniversalCodeUsages(ListUniversalCodeUsagesRequest) returns (ListUniversalCodeUsagesResponse) {}
 
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	rpc GetPromoCodeInfo(GetPromoCodeInfoRequest) returns (GetPromoCodeInfoResponse) {
@@ -262,6 +267,9 @@ service Wallet {
 
 	// CreditFreespinWin credits freespin win amount to user's wallet
 	rpc CreditFreespinWin(CreditFreespinWinRequest) returns (CreditFreespinWinResponse) {}
+
+	// CreditFreeBetWin credits freebet win amount to user's wallet
+	rpc CreditFreeBetWin(CreditFreeBetWinRequest) returns (CreditFreeBetWinResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1205,8 +1213,9 @@ message RewardSequence {
 		string reward_percentage = 3;
 		string max_reward_amount = 4;
 		string max_withdrawal_multiplier = 5; // only available for bonus reward
-		optional FreeSpinConfig free_spin_config = 6;
-		optional FreeBetConfig free_bet_config = 7;
+		bool reward_money_enabled = 6;
+		optional FreeSpinConfig free_spin_config = 7;
+		optional FreeBetConfig free_bet_config = 8;
 	}
 	int32 serial_number = 1;
 	string name = 2;
@@ -1775,6 +1784,27 @@ message CreditFreespinWinRequest {
 }
 
 message CreditFreespinWinResponse {
+	int64 transaction_id = 1;
+	string balance = 2;
+	string bonus = 3;
+	int64 timestamp = 4;
+}
+
+// ========== FreeBet Win Messages ==========
+
+message CreditFreeBetWinRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string amount = 3;
+	string freebet_id = 4;
+	string txn_id = 5;
+	string game_id = 6;
+	string round_id = 7;
+	int64 timestamp = 8;
+	api.common.OperatorContext operator_context = 9;
+}
+
+message CreditFreeBetWinResponse {
 	int64 transaction_id = 1;
 	string balance = 2;
 	string bonus = 3;

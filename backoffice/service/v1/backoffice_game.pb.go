@@ -6567,7 +6567,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10_masking_enabledB\x0f\n" +
 	"\r_masking_rule\"q\n" +
 	"\x1aListBetTickerConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xe7B\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xb3@\n" +
 	"\x0eBackofficeGame\x12\xa1\x01\n" +
 	"\rListProviders\x12/.api.backoffice.service.v1.ListProvidersRequest\x1a0.api.backoffice.service.v1.ListProvidersResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/game/providers/list\x12\xcb\x01\n" +
 	"\x17ListProvidersWithDetail\x129.api.backoffice.service.v1.ListProvidersWithDetailRequest\x1a:.api.backoffice.service.v1.ListProvidersWithDetailResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/game/providers-with-detail/list\x12\xa5\x01\n" +
@@ -6603,12 +6603,10 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x15UpdateBetTickerConfig\x127.api.backoffice.service.v1.UpdateBetTickerConfigRequest\x1a2.api.push.service.v1.UpdateBetTickerConfigResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/bet-ticker/config/update\x12\xb0\x01\n" +
 	"\x13ListBetTickerConfig\x125.api.backoffice.service.v1.ListBetTickerConfigRequest\x1a0.api.push.service.v1.ListBetTickerConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/bet-ticker/config/list\x12\xc0\x01\n" +
 	"\x16ListFreespinsProviders\x128.api.backoffice.service.v1.ListFreespinsProvidersRequest\x1a3.api.game.service.v1.ListFreespinsProvidersResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/game/freespins/providers/list\x12\xb0\x01\n" +
-	"\x12ListFreespinsGames\x124.api.backoffice.service.v1.ListFreespinsGamesRequest\x1a/.api.game.service.v1.ListFreespinsGamesResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/game/freespins/games/list\x12\x99\x01\n" +
-	"\x0eIssueFreespins\x12*.api.game.service.v1.IssueFreespinsRequest\x1a+.api.game.service.v1.IssueFreespinsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/game/freespins/issue\x12\xb5\x01\n" +
+	"\x12ListFreespinsGames\x124.api.backoffice.service.v1.ListFreespinsGamesRequest\x1a/.api.game.service.v1.ListFreespinsGamesResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/game/freespins/games/list\x12\xb5\x01\n" +
 	"\x16BackofficeListGameTags\x128.api.backoffice.service.v1.BackofficeListGameTagsRequest\x1a3.api.game.service.v1.BackofficeListGameTagsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/game/tags/list-all\x12\xbc\x01\n" +
 	"\x17BackofficeCreateGameTag\x129.api.backoffice.service.v1.BackofficeCreateGameTagRequest\x1a:.api.backoffice.service.v1.BackofficeCreateGameTagResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/game/tags/create\x12\xb9\x01\n" +
-	"\x14ListFreebetTemplates\x126.api.backoffice.service.v1.ListFreebetTemplatesRequest\x1a1.api.game.service.v1.ListFreebetTemplatesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/game/freebets/templates/list\x12\x95\x01\n" +
-	"\rIssueFreebets\x12).api.game.service.v1.IssueFreebetsRequest\x1a*.api.game.service.v1.IssueFreebetsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/game/freebets/issue\x12\xbc\x01\n" +
+	"\x14ListFreebetTemplates\x126.api.backoffice.service.v1.ListFreebetTemplatesRequest\x1a1.api.game.service.v1.ListFreebetTemplatesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/game/freebets/templates/list\x12\xbc\x01\n" +
 	"\x17BackofficeDeleteGameTag\x129.api.backoffice.service.v1.BackofficeDeleteGameTagRequest\x1a:.api.backoffice.service.v1.BackofficeDeleteGameTagResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/game/tags/delete\x12\xac\x01\n" +
 	"\x11GetPlayerFreebets\x123.api.backoffice.service.v1.GetPlayerFreebetsRequest\x1a..api.game.service.v1.GetPlayerFreebetsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/game/freebets/player/get\x12\xbc\x01\n" +
 	"\x17BackofficeUpdateGameTag\x129.api.backoffice.service.v1.BackofficeUpdateGameTagRequest\x1a:.api.backoffice.service.v1.BackofficeUpdateGameTagResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/game/tags/update\x12\xbf\x01\n" +
@@ -6722,32 +6720,28 @@ var file_backoffice_service_v1_backoffice_game_proto_goTypes = []any{
 	(*common.OperatorContextFilters)(nil),                            // 83: api.common.OperatorContextFilters
 	(*common.OperatorContext)(nil),                                   // 84: api.common.OperatorContext
 	(*v1.BettingFilterConfig)(nil),                                   // 85: api.push.service.v1.BettingFilterConfig
-	(*v11.IssueFreespinsRequest)(nil),                                // 86: api.game.service.v1.IssueFreespinsRequest
-	(*v11.IssueFreebetsRequest)(nil),                                 // 87: api.game.service.v1.IssueFreebetsRequest
-	(*v11.BackofficeBatchUpdateTagGamesRequest)(nil),                 // 88: api.game.service.v1.BackofficeBatchUpdateTagGamesRequest
-	(*v11.ExportBetsResponse)(nil),                                   // 89: api.game.service.v1.ExportBetsResponse
-	(*v11.GetBetByIdResponse)(nil),                                   // 90: api.game.service.v1.GetBetByIdResponse
-	(*v11.GetGameTransactionByIdResponse)(nil),                       // 91: api.game.service.v1.GetGameTransactionByIdResponse
-	(*v11.ListUnpaidBetsResponse)(nil),                               // 92: api.game.service.v1.ListUnpaidBetsResponse
-	(*v11.ExportUnpaidBetsResponse)(nil),                             // 93: api.game.service.v1.ExportUnpaidBetsResponse
-	(*v11.ListMultipleBetsResponse)(nil),                             // 94: api.game.service.v1.ListMultipleBetsResponse
-	(*v11.ExportMultipleBetsResponse)(nil),                           // 95: api.game.service.v1.ExportMultipleBetsResponse
-	(*v11.ListStakeVarianceBetsResponse)(nil),                        // 96: api.game.service.v1.ListStakeVarianceBetsResponse
-	(*v11.ExportStakeVarianceBetsResponse)(nil),                      // 97: api.game.service.v1.ExportStakeVarianceBetsResponse
-	(*v11.ListCustomerStrikeReportsResponse)(nil),                    // 98: api.game.service.v1.ListCustomerStrikeReportsResponse
-	(*v11.ExportCustomerStrikeReportsResponse)(nil),                  // 99: api.game.service.v1.ExportCustomerStrikeReportsResponse
-	(*v11.ExportSportEventsResponse)(nil),                            // 100: api.game.service.v1.ExportSportEventsResponse
-	(*v1.AddBetTickerConfigResponse)(nil),                            // 101: api.push.service.v1.AddBetTickerConfigResponse
-	(*v1.UpdateBetTickerConfigResponse)(nil),                         // 102: api.push.service.v1.UpdateBetTickerConfigResponse
-	(*v1.ListBetTickerConfigResponse)(nil),                           // 103: api.push.service.v1.ListBetTickerConfigResponse
-	(*v11.ListFreespinsProvidersResponse)(nil),                       // 104: api.game.service.v1.ListFreespinsProvidersResponse
-	(*v11.ListFreespinsGamesResponse)(nil),                           // 105: api.game.service.v1.ListFreespinsGamesResponse
-	(*v11.IssueFreespinsResponse)(nil),                               // 106: api.game.service.v1.IssueFreespinsResponse
-	(*v11.BackofficeListGameTagsResponse)(nil),                       // 107: api.game.service.v1.BackofficeListGameTagsResponse
-	(*v11.ListFreebetTemplatesResponse)(nil),                         // 108: api.game.service.v1.ListFreebetTemplatesResponse
-	(*v11.IssueFreebetsResponse)(nil),                                // 109: api.game.service.v1.IssueFreebetsResponse
-	(*v11.GetPlayerFreebetsResponse)(nil),                            // 110: api.game.service.v1.GetPlayerFreebetsResponse
-	(*v11.BackofficeBatchUpdateTagGamesResponse)(nil),                // 111: api.game.service.v1.BackofficeBatchUpdateTagGamesResponse
+	(*v11.BackofficeBatchUpdateTagGamesRequest)(nil),                 // 86: api.game.service.v1.BackofficeBatchUpdateTagGamesRequest
+	(*v11.ExportBetsResponse)(nil),                                   // 87: api.game.service.v1.ExportBetsResponse
+	(*v11.GetBetByIdResponse)(nil),                                   // 88: api.game.service.v1.GetBetByIdResponse
+	(*v11.GetGameTransactionByIdResponse)(nil),                       // 89: api.game.service.v1.GetGameTransactionByIdResponse
+	(*v11.ListUnpaidBetsResponse)(nil),                               // 90: api.game.service.v1.ListUnpaidBetsResponse
+	(*v11.ExportUnpaidBetsResponse)(nil),                             // 91: api.game.service.v1.ExportUnpaidBetsResponse
+	(*v11.ListMultipleBetsResponse)(nil),                             // 92: api.game.service.v1.ListMultipleBetsResponse
+	(*v11.ExportMultipleBetsResponse)(nil),                           // 93: api.game.service.v1.ExportMultipleBetsResponse
+	(*v11.ListStakeVarianceBetsResponse)(nil),                        // 94: api.game.service.v1.ListStakeVarianceBetsResponse
+	(*v11.ExportStakeVarianceBetsResponse)(nil),                      // 95: api.game.service.v1.ExportStakeVarianceBetsResponse
+	(*v11.ListCustomerStrikeReportsResponse)(nil),                    // 96: api.game.service.v1.ListCustomerStrikeReportsResponse
+	(*v11.ExportCustomerStrikeReportsResponse)(nil),                  // 97: api.game.service.v1.ExportCustomerStrikeReportsResponse
+	(*v11.ExportSportEventsResponse)(nil),                            // 98: api.game.service.v1.ExportSportEventsResponse
+	(*v1.AddBetTickerConfigResponse)(nil),                            // 99: api.push.service.v1.AddBetTickerConfigResponse
+	(*v1.UpdateBetTickerConfigResponse)(nil),                         // 100: api.push.service.v1.UpdateBetTickerConfigResponse
+	(*v1.ListBetTickerConfigResponse)(nil),                           // 101: api.push.service.v1.ListBetTickerConfigResponse
+	(*v11.ListFreespinsProvidersResponse)(nil),                       // 102: api.game.service.v1.ListFreespinsProvidersResponse
+	(*v11.ListFreespinsGamesResponse)(nil),                           // 103: api.game.service.v1.ListFreespinsGamesResponse
+	(*v11.BackofficeListGameTagsResponse)(nil),                       // 104: api.game.service.v1.BackofficeListGameTagsResponse
+	(*v11.ListFreebetTemplatesResponse)(nil),                         // 105: api.game.service.v1.ListFreebetTemplatesResponse
+	(*v11.GetPlayerFreebetsResponse)(nil),                            // 106: api.game.service.v1.GetPlayerFreebetsResponse
+	(*v11.BackofficeBatchUpdateTagGamesResponse)(nil),                // 107: api.game.service.v1.BackofficeBatchUpdateTagGamesResponse
 }
 var file_backoffice_service_v1_backoffice_game_proto_depIdxs = []int32{
 	69,  // 0: api.backoffice.service.v1.ListProvidersResponse.providers:type_name -> api.backoffice.service.v1.ListProvidersResponse.Provider
@@ -6841,71 +6835,67 @@ var file_backoffice_service_v1_backoffice_game_proto_depIdxs = []int32{
 	68,  // 88: api.backoffice.service.v1.BackofficeGame.ListBetTickerConfig:input_type -> api.backoffice.service.v1.ListBetTickerConfigRequest
 	41,  // 89: api.backoffice.service.v1.BackofficeGame.ListFreespinsProviders:input_type -> api.backoffice.service.v1.ListFreespinsProvidersRequest
 	42,  // 90: api.backoffice.service.v1.BackofficeGame.ListFreespinsGames:input_type -> api.backoffice.service.v1.ListFreespinsGamesRequest
-	86,  // 91: api.backoffice.service.v1.BackofficeGame.IssueFreespins:input_type -> api.game.service.v1.IssueFreespinsRequest
-	45,  // 92: api.backoffice.service.v1.BackofficeGame.BackofficeListGameTags:input_type -> api.backoffice.service.v1.BackofficeListGameTagsRequest
-	46,  // 93: api.backoffice.service.v1.BackofficeGame.BackofficeCreateGameTag:input_type -> api.backoffice.service.v1.BackofficeCreateGameTagRequest
-	43,  // 94: api.backoffice.service.v1.BackofficeGame.ListFreebetTemplates:input_type -> api.backoffice.service.v1.ListFreebetTemplatesRequest
-	87,  // 95: api.backoffice.service.v1.BackofficeGame.IssueFreebets:input_type -> api.game.service.v1.IssueFreebetsRequest
-	48,  // 96: api.backoffice.service.v1.BackofficeGame.BackofficeDeleteGameTag:input_type -> api.backoffice.service.v1.BackofficeDeleteGameTagRequest
-	44,  // 97: api.backoffice.service.v1.BackofficeGame.GetPlayerFreebets:input_type -> api.backoffice.service.v1.GetPlayerFreebetsRequest
-	50,  // 98: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameTag:input_type -> api.backoffice.service.v1.BackofficeUpdateGameTagRequest
-	52,  // 99: api.backoffice.service.v1.BackofficeGame.BackofficeAddGamesToTag:input_type -> api.backoffice.service.v1.BackofficeAddGamesToTagRequest
-	54,  // 100: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveGamesFromTag:input_type -> api.backoffice.service.v1.BackofficeRemoveGamesFromTagRequest
-	56,  // 101: api.backoffice.service.v1.BackofficeGame.BackofficeAddProviderToTag:input_type -> api.backoffice.service.v1.BackofficeAddProviderToTagRequest
-	58,  // 102: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveProviderFromTag:input_type -> api.backoffice.service.v1.BackofficeRemoveProviderFromTagRequest
-	60,  // 103: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameOrderInTag:input_type -> api.backoffice.service.v1.BackofficeUpdateGameOrderInTagRequest
-	88,  // 104: api.backoffice.service.v1.BackofficeGame.BackofficeBatchUpdateTagGames:input_type -> api.game.service.v1.BackofficeBatchUpdateTagGamesRequest
-	62,  // 105: api.backoffice.service.v1.BackofficeGame.BackofficeListProvidersUnderTag:input_type -> api.backoffice.service.v1.BackofficeListProvidersUnderTagRequest
-	64,  // 106: api.backoffice.service.v1.BackofficeGame.BackofficeListGamesUnderTag:input_type -> api.backoffice.service.v1.BackofficeListGamesUnderTagRequest
-	1,   // 107: api.backoffice.service.v1.BackofficeGame.ListProviders:output_type -> api.backoffice.service.v1.ListProvidersResponse
-	3,   // 108: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:output_type -> api.backoffice.service.v1.ListProvidersWithDetailResponse
-	5,   // 109: api.backoffice.service.v1.BackofficeGame.ListCategories:output_type -> api.backoffice.service.v1.ListCategoriesResponse
-	7,   // 110: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:output_type -> api.backoffice.service.v1.ListFeeGroupsResponse
-	9,   // 111: api.backoffice.service.v1.BackofficeGame.ListTags:output_type -> api.backoffice.service.v1.ListTagsResponse
-	11,  // 112: api.backoffice.service.v1.BackofficeGame.ListThemes:output_type -> api.backoffice.service.v1.ListThemesResponse
-	13,  // 113: api.backoffice.service.v1.BackofficeGame.ListCurrencies:output_type -> api.backoffice.service.v1.ListCurrenciesResponse
-	16,  // 114: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
-	89,  // 115: api.backoffice.service.v1.BackofficeGame.ExportBets:output_type -> api.game.service.v1.ExportBetsResponse
-	90,  // 116: api.backoffice.service.v1.BackofficeGame.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
-	20,  // 117: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
-	22,  // 118: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
-	24,  // 119: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
-	26,  // 120: api.backoffice.service.v1.BackofficeGame.UpdateGame:output_type -> api.backoffice.service.v1.UpdateGameResponse
-	28,  // 121: api.backoffice.service.v1.BackofficeGame.UpdateProvider:output_type -> api.backoffice.service.v1.UpdateProviderResponse
-	30,  // 122: api.backoffice.service.v1.BackofficeGame.ListProviderRates:output_type -> api.backoffice.service.v1.ListProviderRatesResponse
-	91,  // 123: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
-	92,  // 124: api.backoffice.service.v1.BackofficeGame.ListUnpaidBets:output_type -> api.game.service.v1.ListUnpaidBetsResponse
-	93,  // 125: api.backoffice.service.v1.BackofficeGame.ExportUnpaidBets:output_type -> api.game.service.v1.ExportUnpaidBetsResponse
-	94,  // 126: api.backoffice.service.v1.BackofficeGame.ListMultipleBets:output_type -> api.game.service.v1.ListMultipleBetsResponse
-	95,  // 127: api.backoffice.service.v1.BackofficeGame.ExportMultipleBets:output_type -> api.game.service.v1.ExportMultipleBetsResponse
-	96,  // 128: api.backoffice.service.v1.BackofficeGame.ListStakeVarianceBets:output_type -> api.game.service.v1.ListStakeVarianceBetsResponse
-	97,  // 129: api.backoffice.service.v1.BackofficeGame.ExportStakeVarianceBets:output_type -> api.game.service.v1.ExportStakeVarianceBetsResponse
-	98,  // 130: api.backoffice.service.v1.BackofficeGame.ListCustomerStrikeReports:output_type -> api.game.service.v1.ListCustomerStrikeReportsResponse
-	99,  // 131: api.backoffice.service.v1.BackofficeGame.ExportCustomerStrikeReports:output_type -> api.game.service.v1.ExportCustomerStrikeReportsResponse
-	100, // 132: api.backoffice.service.v1.BackofficeGame.ExportSportEvents:output_type -> api.game.service.v1.ExportSportEventsResponse
-	101, // 133: api.backoffice.service.v1.BackofficeGame.AddBetTickerConfig:output_type -> api.push.service.v1.AddBetTickerConfigResponse
-	102, // 134: api.backoffice.service.v1.BackofficeGame.UpdateBetTickerConfig:output_type -> api.push.service.v1.UpdateBetTickerConfigResponse
-	103, // 135: api.backoffice.service.v1.BackofficeGame.ListBetTickerConfig:output_type -> api.push.service.v1.ListBetTickerConfigResponse
-	104, // 136: api.backoffice.service.v1.BackofficeGame.ListFreespinsProviders:output_type -> api.game.service.v1.ListFreespinsProvidersResponse
-	105, // 137: api.backoffice.service.v1.BackofficeGame.ListFreespinsGames:output_type -> api.game.service.v1.ListFreespinsGamesResponse
-	106, // 138: api.backoffice.service.v1.BackofficeGame.IssueFreespins:output_type -> api.game.service.v1.IssueFreespinsResponse
-	107, // 139: api.backoffice.service.v1.BackofficeGame.BackofficeListGameTags:output_type -> api.game.service.v1.BackofficeListGameTagsResponse
-	47,  // 140: api.backoffice.service.v1.BackofficeGame.BackofficeCreateGameTag:output_type -> api.backoffice.service.v1.BackofficeCreateGameTagResponse
-	108, // 141: api.backoffice.service.v1.BackofficeGame.ListFreebetTemplates:output_type -> api.game.service.v1.ListFreebetTemplatesResponse
-	109, // 142: api.backoffice.service.v1.BackofficeGame.IssueFreebets:output_type -> api.game.service.v1.IssueFreebetsResponse
-	49,  // 143: api.backoffice.service.v1.BackofficeGame.BackofficeDeleteGameTag:output_type -> api.backoffice.service.v1.BackofficeDeleteGameTagResponse
-	110, // 144: api.backoffice.service.v1.BackofficeGame.GetPlayerFreebets:output_type -> api.game.service.v1.GetPlayerFreebetsResponse
-	51,  // 145: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameTag:output_type -> api.backoffice.service.v1.BackofficeUpdateGameTagResponse
-	53,  // 146: api.backoffice.service.v1.BackofficeGame.BackofficeAddGamesToTag:output_type -> api.backoffice.service.v1.BackofficeAddGamesToTagResponse
-	55,  // 147: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveGamesFromTag:output_type -> api.backoffice.service.v1.BackofficeRemoveGamesFromTagResponse
-	57,  // 148: api.backoffice.service.v1.BackofficeGame.BackofficeAddProviderToTag:output_type -> api.backoffice.service.v1.BackofficeAddProviderToTagResponse
-	59,  // 149: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveProviderFromTag:output_type -> api.backoffice.service.v1.BackofficeRemoveProviderFromTagResponse
-	61,  // 150: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameOrderInTag:output_type -> api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse
-	111, // 151: api.backoffice.service.v1.BackofficeGame.BackofficeBatchUpdateTagGames:output_type -> api.game.service.v1.BackofficeBatchUpdateTagGamesResponse
-	63,  // 152: api.backoffice.service.v1.BackofficeGame.BackofficeListProvidersUnderTag:output_type -> api.backoffice.service.v1.BackofficeListProvidersUnderTagResponse
-	65,  // 153: api.backoffice.service.v1.BackofficeGame.BackofficeListGamesUnderTag:output_type -> api.backoffice.service.v1.BackofficeListGamesUnderTagResponse
-	107, // [107:154] is the sub-list for method output_type
-	60,  // [60:107] is the sub-list for method input_type
+	45,  // 91: api.backoffice.service.v1.BackofficeGame.BackofficeListGameTags:input_type -> api.backoffice.service.v1.BackofficeListGameTagsRequest
+	46,  // 92: api.backoffice.service.v1.BackofficeGame.BackofficeCreateGameTag:input_type -> api.backoffice.service.v1.BackofficeCreateGameTagRequest
+	43,  // 93: api.backoffice.service.v1.BackofficeGame.ListFreebetTemplates:input_type -> api.backoffice.service.v1.ListFreebetTemplatesRequest
+	48,  // 94: api.backoffice.service.v1.BackofficeGame.BackofficeDeleteGameTag:input_type -> api.backoffice.service.v1.BackofficeDeleteGameTagRequest
+	44,  // 95: api.backoffice.service.v1.BackofficeGame.GetPlayerFreebets:input_type -> api.backoffice.service.v1.GetPlayerFreebetsRequest
+	50,  // 96: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameTag:input_type -> api.backoffice.service.v1.BackofficeUpdateGameTagRequest
+	52,  // 97: api.backoffice.service.v1.BackofficeGame.BackofficeAddGamesToTag:input_type -> api.backoffice.service.v1.BackofficeAddGamesToTagRequest
+	54,  // 98: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveGamesFromTag:input_type -> api.backoffice.service.v1.BackofficeRemoveGamesFromTagRequest
+	56,  // 99: api.backoffice.service.v1.BackofficeGame.BackofficeAddProviderToTag:input_type -> api.backoffice.service.v1.BackofficeAddProviderToTagRequest
+	58,  // 100: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveProviderFromTag:input_type -> api.backoffice.service.v1.BackofficeRemoveProviderFromTagRequest
+	60,  // 101: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameOrderInTag:input_type -> api.backoffice.service.v1.BackofficeUpdateGameOrderInTagRequest
+	86,  // 102: api.backoffice.service.v1.BackofficeGame.BackofficeBatchUpdateTagGames:input_type -> api.game.service.v1.BackofficeBatchUpdateTagGamesRequest
+	62,  // 103: api.backoffice.service.v1.BackofficeGame.BackofficeListProvidersUnderTag:input_type -> api.backoffice.service.v1.BackofficeListProvidersUnderTagRequest
+	64,  // 104: api.backoffice.service.v1.BackofficeGame.BackofficeListGamesUnderTag:input_type -> api.backoffice.service.v1.BackofficeListGamesUnderTagRequest
+	1,   // 105: api.backoffice.service.v1.BackofficeGame.ListProviders:output_type -> api.backoffice.service.v1.ListProvidersResponse
+	3,   // 106: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:output_type -> api.backoffice.service.v1.ListProvidersWithDetailResponse
+	5,   // 107: api.backoffice.service.v1.BackofficeGame.ListCategories:output_type -> api.backoffice.service.v1.ListCategoriesResponse
+	7,   // 108: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:output_type -> api.backoffice.service.v1.ListFeeGroupsResponse
+	9,   // 109: api.backoffice.service.v1.BackofficeGame.ListTags:output_type -> api.backoffice.service.v1.ListTagsResponse
+	11,  // 110: api.backoffice.service.v1.BackofficeGame.ListThemes:output_type -> api.backoffice.service.v1.ListThemesResponse
+	13,  // 111: api.backoffice.service.v1.BackofficeGame.ListCurrencies:output_type -> api.backoffice.service.v1.ListCurrenciesResponse
+	16,  // 112: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
+	87,  // 113: api.backoffice.service.v1.BackofficeGame.ExportBets:output_type -> api.game.service.v1.ExportBetsResponse
+	88,  // 114: api.backoffice.service.v1.BackofficeGame.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
+	20,  // 115: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
+	22,  // 116: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
+	24,  // 117: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
+	26,  // 118: api.backoffice.service.v1.BackofficeGame.UpdateGame:output_type -> api.backoffice.service.v1.UpdateGameResponse
+	28,  // 119: api.backoffice.service.v1.BackofficeGame.UpdateProvider:output_type -> api.backoffice.service.v1.UpdateProviderResponse
+	30,  // 120: api.backoffice.service.v1.BackofficeGame.ListProviderRates:output_type -> api.backoffice.service.v1.ListProviderRatesResponse
+	89,  // 121: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
+	90,  // 122: api.backoffice.service.v1.BackofficeGame.ListUnpaidBets:output_type -> api.game.service.v1.ListUnpaidBetsResponse
+	91,  // 123: api.backoffice.service.v1.BackofficeGame.ExportUnpaidBets:output_type -> api.game.service.v1.ExportUnpaidBetsResponse
+	92,  // 124: api.backoffice.service.v1.BackofficeGame.ListMultipleBets:output_type -> api.game.service.v1.ListMultipleBetsResponse
+	93,  // 125: api.backoffice.service.v1.BackofficeGame.ExportMultipleBets:output_type -> api.game.service.v1.ExportMultipleBetsResponse
+	94,  // 126: api.backoffice.service.v1.BackofficeGame.ListStakeVarianceBets:output_type -> api.game.service.v1.ListStakeVarianceBetsResponse
+	95,  // 127: api.backoffice.service.v1.BackofficeGame.ExportStakeVarianceBets:output_type -> api.game.service.v1.ExportStakeVarianceBetsResponse
+	96,  // 128: api.backoffice.service.v1.BackofficeGame.ListCustomerStrikeReports:output_type -> api.game.service.v1.ListCustomerStrikeReportsResponse
+	97,  // 129: api.backoffice.service.v1.BackofficeGame.ExportCustomerStrikeReports:output_type -> api.game.service.v1.ExportCustomerStrikeReportsResponse
+	98,  // 130: api.backoffice.service.v1.BackofficeGame.ExportSportEvents:output_type -> api.game.service.v1.ExportSportEventsResponse
+	99,  // 131: api.backoffice.service.v1.BackofficeGame.AddBetTickerConfig:output_type -> api.push.service.v1.AddBetTickerConfigResponse
+	100, // 132: api.backoffice.service.v1.BackofficeGame.UpdateBetTickerConfig:output_type -> api.push.service.v1.UpdateBetTickerConfigResponse
+	101, // 133: api.backoffice.service.v1.BackofficeGame.ListBetTickerConfig:output_type -> api.push.service.v1.ListBetTickerConfigResponse
+	102, // 134: api.backoffice.service.v1.BackofficeGame.ListFreespinsProviders:output_type -> api.game.service.v1.ListFreespinsProvidersResponse
+	103, // 135: api.backoffice.service.v1.BackofficeGame.ListFreespinsGames:output_type -> api.game.service.v1.ListFreespinsGamesResponse
+	104, // 136: api.backoffice.service.v1.BackofficeGame.BackofficeListGameTags:output_type -> api.game.service.v1.BackofficeListGameTagsResponse
+	47,  // 137: api.backoffice.service.v1.BackofficeGame.BackofficeCreateGameTag:output_type -> api.backoffice.service.v1.BackofficeCreateGameTagResponse
+	105, // 138: api.backoffice.service.v1.BackofficeGame.ListFreebetTemplates:output_type -> api.game.service.v1.ListFreebetTemplatesResponse
+	49,  // 139: api.backoffice.service.v1.BackofficeGame.BackofficeDeleteGameTag:output_type -> api.backoffice.service.v1.BackofficeDeleteGameTagResponse
+	106, // 140: api.backoffice.service.v1.BackofficeGame.GetPlayerFreebets:output_type -> api.game.service.v1.GetPlayerFreebetsResponse
+	51,  // 141: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameTag:output_type -> api.backoffice.service.v1.BackofficeUpdateGameTagResponse
+	53,  // 142: api.backoffice.service.v1.BackofficeGame.BackofficeAddGamesToTag:output_type -> api.backoffice.service.v1.BackofficeAddGamesToTagResponse
+	55,  // 143: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveGamesFromTag:output_type -> api.backoffice.service.v1.BackofficeRemoveGamesFromTagResponse
+	57,  // 144: api.backoffice.service.v1.BackofficeGame.BackofficeAddProviderToTag:output_type -> api.backoffice.service.v1.BackofficeAddProviderToTagResponse
+	59,  // 145: api.backoffice.service.v1.BackofficeGame.BackofficeRemoveProviderFromTag:output_type -> api.backoffice.service.v1.BackofficeRemoveProviderFromTagResponse
+	61,  // 146: api.backoffice.service.v1.BackofficeGame.BackofficeUpdateGameOrderInTag:output_type -> api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse
+	107, // 147: api.backoffice.service.v1.BackofficeGame.BackofficeBatchUpdateTagGames:output_type -> api.game.service.v1.BackofficeBatchUpdateTagGamesResponse
+	63,  // 148: api.backoffice.service.v1.BackofficeGame.BackofficeListProvidersUnderTag:output_type -> api.backoffice.service.v1.BackofficeListProvidersUnderTagResponse
+	65,  // 149: api.backoffice.service.v1.BackofficeGame.BackofficeListGamesUnderTag:output_type -> api.backoffice.service.v1.BackofficeListGamesUnderTagResponse
+	105, // [105:150] is the sub-list for method output_type
+	60,  // [60:105] is the sub-list for method input_type
 	60,  // [60:60] is the sub-list for extension type_name
 	60,  // [60:60] is the sub-list for extension extendee
 	0,   // [0:60] is the sub-list for field type_name
