@@ -1828,6 +1828,7 @@ type PromoCodeListItem struct {
 	UsedByUserId  int64                  `protobuf:"varint,3,opt,name=used_by_user_id,json=usedByUserId,proto3" json:"used_by_user_id,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1897,6 +1898,13 @@ func (x *PromoCodeListItem) GetUsedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *PromoCodeListItem) GetExpiredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiredAt
+	}
+	return nil
+}
+
 // Usage item for universal campaigns
 type PromoCodeUsageListItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1904,6 +1912,7 @@ type PromoCodeUsageListItem struct {
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1962,6 +1971,13 @@ func (x *PromoCodeUsageListItem) GetCreatedAt() *timestamppb.Timestamp {
 func (x *PromoCodeUsageListItem) GetUsedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UsedAt
+	}
+	return nil
+}
+
+func (x *PromoCodeUsageListItem) GetExpiredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiredAt
 	}
 	return nil
 }
@@ -2826,20 +2842,24 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\xd6\x01\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\x91\x02\n" +
 	"\x11PromoCodeListItem\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12%\n" +
 	"\x0fused_by_user_id\x18\x03 \x01(\x03R\fusedByUserId\x129\n" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x123\n" +
-	"\aused_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\"\xb5\x01\n" +
+	"\aused_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\x129\n" +
+	"\n" +
+	"expired_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\xf0\x01\n" +
 	"\x16PromoCodeUsageListItem\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x123\n" +
-	"\aused_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\"\x91\x02\n" +
+	"\aused_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\x129\n" +
+	"\n" +
+	"expired_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\x91\x02\n" +
 	"$ListPromoCodeCampaignDetailsResponse\x12\x1b\n" +
 	"\tcode_type\x18\x01 \x01(\tR\bcodeType\x12>\n" +
 	"\x05codes\x18\x02 \x03(\v2(.api.wallet.service.v1.PromoCodeListItemR\x05codes\x12E\n" +
@@ -2989,21 +3009,23 @@ var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
 	36, // 46: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	35, // 47: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
 	35, // 48: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
-	35, // 49: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
-	35, // 50: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
-	23, // 51: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
-	24, // 52: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
-	36, // 53: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	35, // 54: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
-	35, // 55: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
-	3,  // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	11, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	32, // 58: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
-	59, // [59:59] is the sub-list for method output_type
-	59, // [59:59] is the sub-list for method input_type
-	59, // [59:59] is the sub-list for extension type_name
-	59, // [59:59] is the sub-list for extension extendee
-	0,  // [0:59] is the sub-list for field type_name
+	35, // 49: api.wallet.service.v1.PromoCodeListItem.expired_at:type_name -> google.protobuf.Timestamp
+	35, // 50: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
+	35, // 51: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
+	35, // 52: api.wallet.service.v1.PromoCodeUsageListItem.expired_at:type_name -> google.protobuf.Timestamp
+	23, // 53: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
+	24, // 54: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
+	36, // 55: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	35, // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
+	35, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
+	3,  // 58: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	11, // 59: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	32, // 60: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
+	61, // [61:61] is the sub-list for method output_type
+	61, // [61:61] is the sub-list for method input_type
+	61, // [61:61] is the sub-list for extension type_name
+	61, // [61:61] is the sub-list for extension extendee
+	0,  // [0:61] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_promocode_proto_init() }

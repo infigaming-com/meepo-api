@@ -241,6 +241,7 @@ message PromoCodeListItem {
 	int64 used_by_user_id = 3;
 	google.protobuf.Timestamp created_at = 4;
 	google.protobuf.Timestamp used_at = 5;
+	google.protobuf.Timestamp expired_at = 6; // same as campaign end_time, used directly from campaign
 }
 
 // Usage item for universal campaigns
@@ -249,6 +250,7 @@ message PromoCodeUsageListItem {
 	int64 user_id = 2;
 	google.protobuf.Timestamp created_at = 3;
 	google.protobuf.Timestamp used_at = 4;
+	google.protobuf.Timestamp expired_at = 5; // same as campaign end_time, used directly from campaign
 }
 
 message ListPromoCodeCampaignDetailsResponse {

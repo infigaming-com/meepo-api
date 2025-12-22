@@ -4007,6 +4007,35 @@ func (m *PromoCodeListItem) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetExpiredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoCodeListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoCodeListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExpiredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoCodeListItemValidationError{
+				field:  "ExpiredAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return PromoCodeListItemMultiError(errors)
 	}
@@ -4165,6 +4194,35 @@ func (m *PromoCodeUsageListItem) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return PromoCodeUsageListItemValidationError{
 				field:  "UsedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetExpiredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoCodeUsageListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoCodeUsageListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExpiredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoCodeUsageListItemValidationError{
+				field:  "ExpiredAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

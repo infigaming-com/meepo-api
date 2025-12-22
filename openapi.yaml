@@ -20911,6 +20911,9 @@ components:
                 usedAt:
                     type: string
                     format: date-time
+                expiredAt:
+                    type: string
+                    format: date-time
             description: Code item for one_time campaigns
         api.wallet.service.v1.PromoCodeRewardConfigs:
             type: object
@@ -20933,6 +20936,9 @@ components:
                     type: string
                     format: date-time
                 usedAt:
+                    type: string
+                    format: date-time
+                expiredAt:
                     type: string
                     format: date-time
             description: Usage item for universal campaigns
