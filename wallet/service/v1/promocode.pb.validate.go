@@ -3949,6 +3949,10 @@ func (m *PromoCodeListItem) validate(all bool) error {
 
 	// no validation rules for UsedByUserId
 
+	// no validation rules for CountryCode
+
+	// no validation rules for VipLevel
+
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
@@ -4141,6 +4145,10 @@ func (m *PromoCodeUsageListItem) validate(all bool) error {
 	// no validation rules for Code
 
 	// no validation rules for UserId
+
+	// no validation rules for CountryCode
+
+	// no validation rules for VipLevel
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {

@@ -1826,9 +1826,11 @@ type PromoCodeListItem struct {
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // unused | used
 	UsedByUserId  int64                  `protobuf:"varint,3,opt,name=used_by_user_id,json=usedByUserId,proto3" json:"used_by_user_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
-	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
+	CountryCode   string                 `protobuf:"bytes,4,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	VipLevel      string                 `protobuf:"bytes,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1884,6 +1886,20 @@ func (x *PromoCodeListItem) GetUsedByUserId() int64 {
 	return 0
 }
 
+func (x *PromoCodeListItem) GetCountryCode() string {
+	if x != nil {
+		return x.CountryCode
+	}
+	return ""
+}
+
+func (x *PromoCodeListItem) GetVipLevel() string {
+	if x != nil {
+		return x.VipLevel
+	}
+	return ""
+}
+
 func (x *PromoCodeListItem) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -1910,9 +1926,11 @@ type PromoCodeUsageListItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
-	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
+	CountryCode   string                 `protobuf:"bytes,3,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	VipLevel      string                 `protobuf:"bytes,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // same as campaign end_time, used directly from campaign
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1959,6 +1977,20 @@ func (x *PromoCodeUsageListItem) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *PromoCodeUsageListItem) GetCountryCode() string {
+	if x != nil {
+		return x.CountryCode
+	}
+	return ""
+}
+
+func (x *PromoCodeUsageListItem) GetVipLevel() string {
+	if x != nil {
+		return x.VipLevel
+	}
+	return ""
 }
 
 func (x *PromoCodeUsageListItem) GetCreatedAt() *timestamppb.Timestamp {
@@ -2842,24 +2874,28 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\x91\x02\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\xd1\x02\n" +
 	"\x11PromoCodeListItem\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12%\n" +
-	"\x0fused_by_user_id\x18\x03 \x01(\x03R\fusedByUserId\x129\n" +
+	"\x0fused_by_user_id\x18\x03 \x01(\x03R\fusedByUserId\x12!\n" +
+	"\fcountry_code\x18\x04 \x01(\tR\vcountryCode\x12\x1b\n" +
+	"\tvip_level\x18\x05 \x01(\tR\bvipLevel\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x123\n" +
-	"\aused_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\x129\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x123\n" +
+	"\aused_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\x129\n" +
 	"\n" +
-	"expired_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\xf0\x01\n" +
+	"expired_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\xb0\x02\n" +
 	"\x16PromoCodeUsageListItem\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x129\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12!\n" +
+	"\fcountry_code\x18\x03 \x01(\tR\vcountryCode\x12\x1b\n" +
+	"\tvip_level\x18\x04 \x01(\tR\bvipLevel\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x123\n" +
-	"\aused_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\x129\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x123\n" +
+	"\aused_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06usedAt\x129\n" +
 	"\n" +
-	"expired_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\x91\x02\n" +
+	"expired_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\x91\x02\n" +
 	"$ListPromoCodeCampaignDetailsResponse\x12\x1b\n" +
 	"\tcode_type\x18\x01 \x01(\tR\bcodeType\x12>\n" +
 	"\x05codes\x18\x02 \x03(\v2(.api.wallet.service.v1.PromoCodeListItemR\x05codes\x12E\n" +

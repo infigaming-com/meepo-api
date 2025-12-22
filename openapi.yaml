@@ -20905,6 +20905,10 @@ components:
                     type: string
                 usedByUserId:
                     type: string
+                countryCode:
+                    type: string
+                vipLevel:
+                    type: string
                 createdAt:
                     type: string
                     format: date-time
@@ -20931,6 +20935,10 @@ components:
                 code:
                     type: string
                 userId:
+                    type: string
+                countryCode:
+                    type: string
+                vipLevel:
                     type: string
                 createdAt:
                     type: string
