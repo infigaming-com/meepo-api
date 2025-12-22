@@ -283,8 +283,9 @@ message GenerateOneTimePromoCodesResponse {
 // Generate Codes for Campaign (universal only)
 message GenerateUniversalPromoCodesRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
-	int64 campaign_id = 2;
-	repeated string codes = 3;
+	int64 generated_by_user_id = 2;
+	int64 campaign_id = 3;
+	repeated string codes = 4;
 }
 
 message GenerateUniversalPromoCodesResponse {

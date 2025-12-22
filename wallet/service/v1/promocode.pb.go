@@ -2231,8 +2231,9 @@ func (x *GenerateOneTimePromoCodesResponse) GetGeneratedCount() int32 {
 type GenerateUniversalPromoCodesRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	CampaignId               int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	Codes                    []string                `protobuf:"bytes,3,rep,name=codes,proto3" json:"codes,omitempty"`
+	GeneratedByUserId        int64                   `protobuf:"varint,2,opt,name=generated_by_user_id,json=generatedByUserId,proto3" json:"generated_by_user_id,omitempty"`
+	CampaignId               int64                   `protobuf:"varint,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	Codes                    []string                `protobuf:"bytes,4,rep,name=codes,proto3" json:"codes,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2272,6 +2273,13 @@ func (x *GenerateUniversalPromoCodesRequest) GetInitiatorOperatorContext() *comm
 		return x.InitiatorOperatorContext
 	}
 	return nil
+}
+
+func (x *GenerateUniversalPromoCodesRequest) GetGeneratedByUserId() int64 {
+	if x != nil {
+		return x.GeneratedByUserId
+	}
+	return 0
 }
 
 func (x *GenerateUniversalPromoCodesRequest) GetCampaignId() int64 {
@@ -3176,12 +3184,13 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"codeFormat\x12\x14\n" +
 	"\x05count\x18\x06 \x01(\x05R\x05count\"L\n" +
 	"!GenerateOneTimePromoCodesResponse\x12'\n" +
-	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"\xb6\x01\n" +
+	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"\xe7\x01\n" +
 	"\"GenerateUniversalPromoCodesRequest\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\x1f\n" +
-	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
+	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12/\n" +
+	"\x14generated_by_user_id\x18\x02 \x01(\x03R\x11generatedByUserId\x12\x1f\n" +
+	"\vcampaign_id\x18\x03 \x01(\x03R\n" +
 	"campaignId\x12\x14\n" +
-	"\x05codes\x18\x03 \x03(\tR\x05codes\"N\n" +
+	"\x05codes\x18\x04 \x03(\tR\x05codes\"N\n" +
 	"#GenerateUniversalPromoCodesResponse\x12'\n" +
 	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"\x9c\x01\n" +
 	"\x1eListUniversalCodeUsagesRequest\x12Y\n" +

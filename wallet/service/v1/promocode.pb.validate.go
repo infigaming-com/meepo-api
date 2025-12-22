@@ -4801,6 +4801,8 @@ func (m *GenerateUniversalPromoCodesRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for GeneratedByUserId
+
 	// no validation rules for CampaignId
 
 	if len(errors) > 0 {
