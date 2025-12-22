@@ -262,6 +262,9 @@ service Wallet {
 
 	// CreditFreespinWin credits freespin win amount to user's wallet
 	rpc CreditFreespinWin(CreditFreespinWinRequest) returns (CreditFreespinWinResponse) {}
+
+	// CreditFreeBetWin credits freebet win amount to user's wallet
+	rpc CreditFreeBetWin(CreditFreeBetWinRequest) returns (CreditFreeBetWinResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1775,6 +1778,27 @@ message CreditFreespinWinRequest {
 }
 
 message CreditFreespinWinResponse {
+	int64 transaction_id = 1;
+	string balance = 2;
+	string bonus = 3;
+	int64 timestamp = 4;
+}
+
+// ========== FreeBet Win Messages ==========
+
+message CreditFreeBetWinRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string amount = 3;
+	string freebet_id = 4;
+	string txn_id = 5;
+	string game_id = 6;
+	string round_id = 7;
+	int64 timestamp = 8;
+	api.common.OperatorContext operator_context = 9;
+}
+
+message CreditFreeBetWinResponse {
 	int64 transaction_id = 1;
 	string balance = 2;
 	string bonus = 3;
