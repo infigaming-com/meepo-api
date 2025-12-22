@@ -411,6 +411,402 @@ func (x *GetNotificationStatsResponse) GetOperatorStats() []*GetNotificationStat
 	return nil
 }
 
+type BettingFilterConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BetCategory   []string               `protobuf:"bytes,1,rep,name=bet_category,json=betCategory,proto3" json:"bet_category,omitempty"`
+	MiniOdds      float32                `protobuf:"fixed32,2,opt,name=mini_odds,json=miniOdds,proto3" json:"mini_odds,omitempty"`
+	Currencies    []string               `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Enable        bool                   `protobuf:"varint,4,opt,name=enable,proto3" json:"enable,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BettingFilterConfig) Reset() {
+	*x = BettingFilterConfig{}
+	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BettingFilterConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BettingFilterConfig) ProtoMessage() {}
+
+func (x *BettingFilterConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BettingFilterConfig.ProtoReflect.Descriptor instead.
+func (*BettingFilterConfig) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *BettingFilterConfig) GetBetCategory() []string {
+	if x != nil {
+		return x.BetCategory
+	}
+	return nil
+}
+
+func (x *BettingFilterConfig) GetMiniOdds() float32 {
+	if x != nil {
+		return x.MiniOdds
+	}
+	return 0
+}
+
+func (x *BettingFilterConfig) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+func (x *BettingFilterConfig) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+type AddBetTickerConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet        *BettingFilterConfig   `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
+	HighWins      *BettingFilterConfig   `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddBetTickerConfigRequest) Reset() {
+	*x = AddBetTickerConfigRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddBetTickerConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddBetTickerConfigRequest) ProtoMessage() {}
+
+func (x *AddBetTickerConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddBetTickerConfigRequest.ProtoReflect.Descriptor instead.
+func (*AddBetTickerConfigRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AddBetTickerConfigRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AddBetTickerConfigRequest) GetAllBet() *BettingFilterConfig {
+	if x != nil {
+		return x.AllBet
+	}
+	return nil
+}
+
+func (x *AddBetTickerConfigRequest) GetHighWins() *BettingFilterConfig {
+	if x != nil {
+		return x.HighWins
+	}
+	return nil
+}
+
+func (x *AddBetTickerConfigRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+type AddBetTickerConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddBetTickerConfigResponse) Reset() {
+	*x = AddBetTickerConfigResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddBetTickerConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddBetTickerConfigResponse) ProtoMessage() {}
+
+func (x *AddBetTickerConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddBetTickerConfigResponse.ProtoReflect.Descriptor instead.
+func (*AddBetTickerConfigResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{8}
+}
+
+type UpdateBetTickerConfigRequest struct {
+	state          protoimpl.MessageState               `protogen:"open.v1"`
+	List           []*UpdateBetTickerConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Enable         bool                                 `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
+	OperatorId     int64                                `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	MaskingEnabled *bool                                `protobuf:"varint,4,opt,name=masking_enabled,json=maskingEnabled,proto3,oneof" json:"masking_enabled,omitempty"`
+	MaskingRule    *string                              `protobuf:"bytes,5,opt,name=masking_rule,json=maskingRule,proto3,oneof" json:"masking_rule,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateBetTickerConfigRequest) Reset() {
+	*x = UpdateBetTickerConfigRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBetTickerConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBetTickerConfigRequest) ProtoMessage() {}
+
+func (x *UpdateBetTickerConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBetTickerConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateBetTickerConfigRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdateBetTickerConfigRequest) GetList() []*UpdateBetTickerConfigRequest_Item {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *UpdateBetTickerConfigRequest) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+func (x *UpdateBetTickerConfigRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *UpdateBetTickerConfigRequest) GetMaskingEnabled() bool {
+	if x != nil && x.MaskingEnabled != nil {
+		return *x.MaskingEnabled
+	}
+	return false
+}
+
+func (x *UpdateBetTickerConfigRequest) GetMaskingRule() string {
+	if x != nil && x.MaskingRule != nil {
+		return *x.MaskingRule
+	}
+	return ""
+}
+
+type UpdateBetTickerConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBetTickerConfigResponse) Reset() {
+	*x = UpdateBetTickerConfigResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBetTickerConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBetTickerConfigResponse) ProtoMessage() {}
+
+func (x *UpdateBetTickerConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBetTickerConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateBetTickerConfigResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{10}
+}
+
+type ListBetTickerConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBetTickerConfigRequest) Reset() {
+	*x = ListBetTickerConfigRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBetTickerConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBetTickerConfigRequest) ProtoMessage() {}
+
+func (x *ListBetTickerConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBetTickerConfigRequest.ProtoReflect.Descriptor instead.
+func (*ListBetTickerConfigRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListBetTickerConfigRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+type ListBetTickerConfigResponse struct {
+	state          protoimpl.MessageState              `protogen:"open.v1"`
+	List           []*ListBetTickerConfigResponse_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Enable         bool                                `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
+	MaskingEnabled bool                                `protobuf:"varint,3,opt,name=masking_enabled,json=maskingEnabled,proto3" json:"masking_enabled,omitempty"`
+	MaskingRule    string                              `protobuf:"bytes,4,opt,name=masking_rule,json=maskingRule,proto3" json:"masking_rule,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListBetTickerConfigResponse) Reset() {
+	*x = ListBetTickerConfigResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBetTickerConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBetTickerConfigResponse) ProtoMessage() {}
+
+func (x *ListBetTickerConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBetTickerConfigResponse.ProtoReflect.Descriptor instead.
+func (*ListBetTickerConfigResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListBetTickerConfigResponse) GetList() []*ListBetTickerConfigResponse_Item {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
+func (x *ListBetTickerConfigResponse) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+func (x *ListBetTickerConfigResponse) GetMaskingEnabled() bool {
+	if x != nil {
+		return x.MaskingEnabled
+	}
+	return false
+}
+
+func (x *ListBetTickerConfigResponse) GetMaskingRule() string {
+	if x != nil {
+		return x.MaskingRule
+	}
+	return ""
+}
+
 // Statistics for a single operator
 type GetNotificationStatsResponse_OperatorNotificationStats struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -424,7 +820,7 @@ type GetNotificationStatsResponse_OperatorNotificationStats struct {
 
 func (x *GetNotificationStatsResponse_OperatorNotificationStats) Reset() {
 	*x = GetNotificationStatsResponse_OperatorNotificationStats{}
-	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	mi := &file_push_service_v1_push_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -436,7 +832,7 @@ func (x *GetNotificationStatsResponse_OperatorNotificationStats) String() string
 func (*GetNotificationStatsResponse_OperatorNotificationStats) ProtoMessage() {}
 
 func (x *GetNotificationStatsResponse_OperatorNotificationStats) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	mi := &file_push_service_v1_push_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -480,6 +876,126 @@ func (x *GetNotificationStatsResponse_OperatorNotificationStats) GetCount() int3
 	return 0
 }
 
+type UpdateBetTickerConfigRequest_Item struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet        *BettingFilterConfig   `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3,oneof" json:"all_bet,omitempty"`
+	HighWins      *BettingFilterConfig   `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3,oneof" json:"high_wins,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBetTickerConfigRequest_Item) Reset() {
+	*x = UpdateBetTickerConfigRequest_Item{}
+	mi := &file_push_service_v1_push_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBetTickerConfigRequest_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBetTickerConfigRequest_Item) ProtoMessage() {}
+
+func (x *UpdateBetTickerConfigRequest_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBetTickerConfigRequest_Item.ProtoReflect.Descriptor instead.
+func (*UpdateBetTickerConfigRequest_Item) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *UpdateBetTickerConfigRequest_Item) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *UpdateBetTickerConfigRequest_Item) GetAllBet() *BettingFilterConfig {
+	if x != nil {
+		return x.AllBet
+	}
+	return nil
+}
+
+func (x *UpdateBetTickerConfigRequest_Item) GetHighWins() *BettingFilterConfig {
+	if x != nil {
+		return x.HighWins
+	}
+	return nil
+}
+
+type ListBetTickerConfigResponse_Item struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet        *BettingFilterConfig   `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
+	HighWins      *BettingFilterConfig   `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBetTickerConfigResponse_Item) Reset() {
+	*x = ListBetTickerConfigResponse_Item{}
+	mi := &file_push_service_v1_push_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBetTickerConfigResponse_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBetTickerConfigResponse_Item) ProtoMessage() {}
+
+func (x *ListBetTickerConfigResponse_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBetTickerConfigResponse_Item.ProtoReflect.Descriptor instead.
+func (*ListBetTickerConfigResponse_Item) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{12, 0}
+}
+
+func (x *ListBetTickerConfigResponse_Item) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *ListBetTickerConfigResponse_Item) GetAllBet() *BettingFilterConfig {
+	if x != nil {
+		return x.AllBet
+	}
+	return nil
+}
+
+func (x *ListBetTickerConfigResponse_Item) GetHighWins() *BettingFilterConfig {
+	if x != nil {
+		return x.HighWins
+	}
+	return nil
+}
+
 var File_push_service_v1_push_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_push_proto_rawDesc = "" +
@@ -521,10 +1037,57 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"operatorId\x12,\n" +
 	"\x11companyOperatorId\x18\x02 \x01(\x03R\x11companyOperatorId\x12.\n" +
 	"\x12retailerOperatorId\x18\x03 \x01(\x03R\x12retailerOperatorId\x12\x14\n" +
-	"\x05count\x18\x04 \x01(\x05R\x05count2\xe3\x01\n" +
+	"\x05count\x18\x04 \x01(\x05R\x05count\"\x8d\x01\n" +
+	"\x13BettingFilterConfig\x12!\n" +
+	"\fbet_category\x18\x01 \x03(\tR\vbetCategory\x12\x1b\n" +
+	"\tmini_odds\x18\x02 \x01(\x02R\bminiOdds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\x03 \x03(\tR\n" +
+	"currencies\x12\x16\n" +
+	"\x06enable\x18\x04 \x01(\bR\x06enable\"\xe0\x01\n" +
+	"\x19AddBetTickerConfigRequest\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12A\n" +
+	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\x06allBet\x12E\n" +
+	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\bhighWins\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x01(\x03R\n" +
+	"operatorId\"\x1c\n" +
+	"\x1aAddBetTickerConfigResponse\"\xef\x03\n" +
+	"\x1cUpdateBetTickerConfigRequest\x12J\n" +
+	"\x04list\x18\x01 \x03(\v26.api.push.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x16\n" +
+	"\x06enable\x18\x02 \x01(\bR\x06enable\x12\x1f\n" +
+	"\voperator_id\x18\x03 \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x0fmasking_enabled\x18\x04 \x01(\bH\x00R\x0emaskingEnabled\x88\x01\x01\x12&\n" +
+	"\fmasking_rule\x18\x05 \x01(\tH\x01R\vmaskingRule\x88\x01\x01\x1a\xce\x01\n" +
+	"\x04Item\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12F\n" +
+	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigH\x00R\x06allBet\x88\x01\x01\x12J\n" +
+	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigH\x01R\bhighWins\x88\x01\x01B\n" +
+	"\n" +
+	"\b_all_betB\f\n" +
+	"\n" +
+	"_high_winsB\x12\n" +
+	"\x10_masking_enabledB\x0f\n" +
+	"\r_masking_rule\"\x1f\n" +
+	"\x1dUpdateBetTickerConfigResponse\"=\n" +
+	"\x1aListBetTickerConfigRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\"\xf9\x02\n" +
+	"\x1bListBetTickerConfigResponse\x12I\n" +
+	"\x04list\x18\x01 \x03(\v25.api.push.service.v1.ListBetTickerConfigResponse.ItemR\x04list\x12\x16\n" +
+	"\x06enable\x18\x02 \x01(\bR\x06enable\x12'\n" +
+	"\x0fmasking_enabled\x18\x03 \x01(\bR\x0emaskingEnabled\x12!\n" +
+	"\fmasking_rule\x18\x04 \x01(\tR\vmaskingRule\x1a\xaa\x01\n" +
+	"\x04Item\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12A\n" +
+	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\x06allBet\x12E\n" +
+	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\bhighWins2\xdb\x04\n" +
 	"\x04Push\x12\\\n" +
 	"\tSendEmail\x12%.api.push.service.v1.SendEmailRequest\x1a&.api.push.service.v1.SendEmailResponse\"\x00\x12}\n" +
-	"\x14GetNotificationStats\x120.api.push.service.v1.GetNotificationStatsRequest\x1a1.api.push.service.v1.GetNotificationStatsResponse\"\x00BO\n" +
+	"\x14GetNotificationStats\x120.api.push.service.v1.GetNotificationStatsRequest\x1a1.api.push.service.v1.GetNotificationStatsResponse\"\x00\x12w\n" +
+	"\x12AddBetTickerConfig\x12..api.push.service.v1.AddBetTickerConfigRequest\x1a/.api.push.service.v1.AddBetTickerConfigResponse\"\x00\x12\x80\x01\n" +
+	"\x15UpdateBetTickerConfig\x121.api.push.service.v1.UpdateBetTickerConfigRequest\x1a2.api.push.service.v1.UpdateBetTickerConfigResponse\"\x00\x12z\n" +
+	"\x13ListBetTickerConfig\x12/.api.push.service.v1.ListBetTickerConfigRequest\x1a0.api.push.service.v1.ListBetTickerConfigResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
@@ -539,7 +1102,7 @@ func file_push_service_v1_push_proto_rawDescGZIP() []byte {
 	return file_push_service_v1_push_proto_rawDescData
 }
 
-var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_push_service_v1_push_proto_goTypes = []any{
 	(*EmailAttachment)(nil),                                        // 0: api.push.service.v1.EmailAttachment
 	(*SendEmailRequest)(nil),                                       // 1: api.push.service.v1.SendEmailRequest
@@ -547,21 +1110,44 @@ var file_push_service_v1_push_proto_goTypes = []any{
 	(*TimeRange)(nil),                                              // 3: api.push.service.v1.TimeRange
 	(*GetNotificationStatsRequest)(nil),                            // 4: api.push.service.v1.GetNotificationStatsRequest
 	(*GetNotificationStatsResponse)(nil),                           // 5: api.push.service.v1.GetNotificationStatsResponse
-	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 6: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	(*BettingFilterConfig)(nil),                                    // 6: api.push.service.v1.BettingFilterConfig
+	(*AddBetTickerConfigRequest)(nil),                              // 7: api.push.service.v1.AddBetTickerConfigRequest
+	(*AddBetTickerConfigResponse)(nil),                             // 8: api.push.service.v1.AddBetTickerConfigResponse
+	(*UpdateBetTickerConfigRequest)(nil),                           // 9: api.push.service.v1.UpdateBetTickerConfigRequest
+	(*UpdateBetTickerConfigResponse)(nil),                          // 10: api.push.service.v1.UpdateBetTickerConfigResponse
+	(*ListBetTickerConfigRequest)(nil),                             // 11: api.push.service.v1.ListBetTickerConfigRequest
+	(*ListBetTickerConfigResponse)(nil),                            // 12: api.push.service.v1.ListBetTickerConfigResponse
+	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 13: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	(*UpdateBetTickerConfigRequest_Item)(nil),                      // 14: api.push.service.v1.UpdateBetTickerConfigRequest.Item
+	(*ListBetTickerConfigResponse_Item)(nil),                       // 15: api.push.service.v1.ListBetTickerConfigResponse.Item
 }
 var file_push_service_v1_push_proto_depIdxs = []int32{
-	0, // 0: api.push.service.v1.SendEmailRequest.attachments:type_name -> api.push.service.v1.EmailAttachment
-	3, // 1: api.push.service.v1.GetNotificationStatsRequest.timeRange:type_name -> api.push.service.v1.TimeRange
-	6, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
-	1, // 3: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
-	4, // 4: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
-	2, // 5: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
-	5, // 6: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: api.push.service.v1.SendEmailRequest.attachments:type_name -> api.push.service.v1.EmailAttachment
+	3,  // 1: api.push.service.v1.GetNotificationStatsRequest.timeRange:type_name -> api.push.service.v1.TimeRange
+	13, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	6,  // 3: api.push.service.v1.AddBetTickerConfigRequest.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 4: api.push.service.v1.AddBetTickerConfigRequest.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
+	14, // 5: api.push.service.v1.UpdateBetTickerConfigRequest.list:type_name -> api.push.service.v1.UpdateBetTickerConfigRequest.Item
+	15, // 6: api.push.service.v1.ListBetTickerConfigResponse.list:type_name -> api.push.service.v1.ListBetTickerConfigResponse.Item
+	6,  // 7: api.push.service.v1.UpdateBetTickerConfigRequest.Item.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 8: api.push.service.v1.UpdateBetTickerConfigRequest.Item.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 9: api.push.service.v1.ListBetTickerConfigResponse.Item.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 10: api.push.service.v1.ListBetTickerConfigResponse.Item.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
+	1,  // 11: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
+	4,  // 12: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
+	7,  // 13: api.push.service.v1.Push.AddBetTickerConfig:input_type -> api.push.service.v1.AddBetTickerConfigRequest
+	9,  // 14: api.push.service.v1.Push.UpdateBetTickerConfig:input_type -> api.push.service.v1.UpdateBetTickerConfigRequest
+	11, // 15: api.push.service.v1.Push.ListBetTickerConfig:input_type -> api.push.service.v1.ListBetTickerConfigRequest
+	2,  // 16: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
+	5,  // 17: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
+	8,  // 18: api.push.service.v1.Push.AddBetTickerConfig:output_type -> api.push.service.v1.AddBetTickerConfigResponse
+	10, // 19: api.push.service.v1.Push.UpdateBetTickerConfig:output_type -> api.push.service.v1.UpdateBetTickerConfigResponse
+	12, // 20: api.push.service.v1.Push.ListBetTickerConfig:output_type -> api.push.service.v1.ListBetTickerConfigResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_proto_init() }
@@ -569,13 +1155,15 @@ func file_push_service_v1_push_proto_init() {
 	if File_push_service_v1_push_proto != nil {
 		return
 	}
+	file_push_service_v1_push_proto_msgTypes[9].OneofWrappers = []any{}
+	file_push_service_v1_push_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_proto_rawDesc), len(file_push_service_v1_push_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

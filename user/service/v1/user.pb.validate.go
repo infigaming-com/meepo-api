@@ -23308,6 +23308,823 @@ var _ interface {
 	ErrorName() string
 } = GetDailyLossbackStatusRequestValidationError{}
 
+// Validate checks the field values on UserPrivacySettings with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserPrivacySettings) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserPrivacySettings with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserPrivacySettingsMultiError, or nil if none found.
+func (m *UserPrivacySettings) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserPrivacySettings) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for InvisibleMode
+
+	// no validation rules for HideBettingRecords
+
+	if len(errors) > 0 {
+		return UserPrivacySettingsMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserPrivacySettingsMultiError is an error wrapping multiple validation
+// errors returned by UserPrivacySettings.ValidateAll() if the designated
+// constraints aren't met.
+type UserPrivacySettingsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserPrivacySettingsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserPrivacySettingsMultiError) AllErrors() []error { return m }
+
+// UserPrivacySettingsValidationError is the validation error returned by
+// UserPrivacySettings.Validate if the designated constraints aren't met.
+type UserPrivacySettingsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserPrivacySettingsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserPrivacySettingsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserPrivacySettingsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserPrivacySettingsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserPrivacySettingsValidationError) ErrorName() string {
+	return "UserPrivacySettingsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserPrivacySettingsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserPrivacySettings.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserPrivacySettingsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserPrivacySettingsValidationError{}
+
+// Validate checks the field values on GetUserPrivacySettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserPrivacySettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserPrivacySettingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserPrivacySettingsRequestMultiError, or nil if none found.
+func (m *GetUserPrivacySettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserPrivacySettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return GetUserPrivacySettingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserPrivacySettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetUserPrivacySettingsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserPrivacySettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserPrivacySettingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserPrivacySettingsRequestMultiError) AllErrors() []error { return m }
+
+// GetUserPrivacySettingsRequestValidationError is the validation error
+// returned by GetUserPrivacySettingsRequest.Validate if the designated
+// constraints aren't met.
+type GetUserPrivacySettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserPrivacySettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserPrivacySettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserPrivacySettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserPrivacySettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserPrivacySettingsRequestValidationError) ErrorName() string {
+	return "GetUserPrivacySettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserPrivacySettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserPrivacySettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserPrivacySettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserPrivacySettingsRequestValidationError{}
+
+// Validate checks the field values on GetUserPrivacySettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserPrivacySettingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserPrivacySettingsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserPrivacySettingsResponseMultiError, or nil if none found.
+func (m *GetUserPrivacySettingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserPrivacySettingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSettings()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserPrivacySettingsResponseValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserPrivacySettingsResponseValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettings()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserPrivacySettingsResponseValidationError{
+				field:  "Settings",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetUserPrivacySettingsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserPrivacySettingsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetUserPrivacySettingsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserPrivacySettingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserPrivacySettingsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserPrivacySettingsResponseMultiError) AllErrors() []error { return m }
+
+// GetUserPrivacySettingsResponseValidationError is the validation error
+// returned by GetUserPrivacySettingsResponse.Validate if the designated
+// constraints aren't met.
+type GetUserPrivacySettingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserPrivacySettingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserPrivacySettingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserPrivacySettingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserPrivacySettingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserPrivacySettingsResponseValidationError) ErrorName() string {
+	return "GetUserPrivacySettingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserPrivacySettingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserPrivacySettingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserPrivacySettingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserPrivacySettingsResponseValidationError{}
+
+// Validate checks the field values on UpdateUserPrivacySettingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateUserPrivacySettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateUserPrivacySettingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateUserPrivacySettingsRequestMultiError, or nil if none found.
+func (m *UpdateUserPrivacySettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateUserPrivacySettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if m.InvisibleMode != nil {
+		// no validation rules for InvisibleMode
+	}
+
+	if m.HideBettingRecords != nil {
+		// no validation rules for HideBettingRecords
+	}
+
+	if len(errors) > 0 {
+		return UpdateUserPrivacySettingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateUserPrivacySettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateUserPrivacySettingsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateUserPrivacySettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateUserPrivacySettingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateUserPrivacySettingsRequestMultiError) AllErrors() []error { return m }
+
+// UpdateUserPrivacySettingsRequestValidationError is the validation error
+// returned by UpdateUserPrivacySettingsRequest.Validate if the designated
+// constraints aren't met.
+type UpdateUserPrivacySettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateUserPrivacySettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateUserPrivacySettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateUserPrivacySettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateUserPrivacySettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateUserPrivacySettingsRequestValidationError) ErrorName() string {
+	return "UpdateUserPrivacySettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateUserPrivacySettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateUserPrivacySettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateUserPrivacySettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateUserPrivacySettingsRequestValidationError{}
+
+// Validate checks the field values on UpdateUserPrivacySettingsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateUserPrivacySettingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateUserPrivacySettingsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateUserPrivacySettingsResponseMultiError, or nil if none found.
+func (m *UpdateUserPrivacySettingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateUserPrivacySettingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateUserPrivacySettingsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateUserPrivacySettingsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateUserPrivacySettingsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateUserPrivacySettingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateUserPrivacySettingsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateUserPrivacySettingsResponseMultiError) AllErrors() []error { return m }
+
+// UpdateUserPrivacySettingsResponseValidationError is the validation error
+// returned by UpdateUserPrivacySettingsResponse.Validate if the designated
+// constraints aren't met.
+type UpdateUserPrivacySettingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateUserPrivacySettingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateUserPrivacySettingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateUserPrivacySettingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateUserPrivacySettingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateUserPrivacySettingsResponseValidationError) ErrorName() string {
+	return "UpdateUserPrivacySettingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateUserPrivacySettingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateUserPrivacySettingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateUserPrivacySettingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateUserPrivacySettingsResponseValidationError{}
+
+// Validate checks the field values on GetUsersPrivacySettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUsersPrivacySettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUsersPrivacySettingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUsersPrivacySettingsRequestMultiError, or nil if none found.
+func (m *GetUsersPrivacySettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUsersPrivacySettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetUsersPrivacySettingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUsersPrivacySettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetUsersPrivacySettingsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetUsersPrivacySettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUsersPrivacySettingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUsersPrivacySettingsRequestMultiError) AllErrors() []error { return m }
+
+// GetUsersPrivacySettingsRequestValidationError is the validation error
+// returned by GetUsersPrivacySettingsRequest.Validate if the designated
+// constraints aren't met.
+type GetUsersPrivacySettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUsersPrivacySettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUsersPrivacySettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUsersPrivacySettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUsersPrivacySettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUsersPrivacySettingsRequestValidationError) ErrorName() string {
+	return "GetUsersPrivacySettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUsersPrivacySettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUsersPrivacySettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUsersPrivacySettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUsersPrivacySettingsRequestValidationError{}
+
+// Validate checks the field values on GetUsersPrivacySettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUsersPrivacySettingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUsersPrivacySettingsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUsersPrivacySettingsResponseMultiError, or nil if none found.
+func (m *GetUsersPrivacySettingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUsersPrivacySettingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]int64, len(m.GetSettings()))
+		i := 0
+		for key := range m.GetSettings() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetSettings()[key]
+			_ = val
+
+			// no validation rules for Settings[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetUsersPrivacySettingsResponseValidationError{
+							field:  fmt.Sprintf("Settings[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetUsersPrivacySettingsResponseValidationError{
+							field:  fmt.Sprintf("Settings[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetUsersPrivacySettingsResponseValidationError{
+						field:  fmt.Sprintf("Settings[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetUsersPrivacySettingsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUsersPrivacySettingsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetUsersPrivacySettingsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetUsersPrivacySettingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUsersPrivacySettingsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUsersPrivacySettingsResponseMultiError) AllErrors() []error { return m }
+
+// GetUsersPrivacySettingsResponseValidationError is the validation error
+// returned by GetUsersPrivacySettingsResponse.Validate if the designated
+// constraints aren't met.
+type GetUsersPrivacySettingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUsersPrivacySettingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUsersPrivacySettingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUsersPrivacySettingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUsersPrivacySettingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUsersPrivacySettingsResponseValidationError) ErrorName() string {
+	return "GetUsersPrivacySettingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUsersPrivacySettingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUsersPrivacySettingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUsersPrivacySettingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUsersPrivacySettingsResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

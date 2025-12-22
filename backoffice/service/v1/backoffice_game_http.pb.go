@@ -11,6 +11,7 @@ import (
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
+	v11 "github.com/infigaming-com/meepo-api/push/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -67,7 +68,7 @@ const OperationBackofficeGameUpdateGameBetDisplayConfig = "/api.backoffice.servi
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
 type BackofficeGameHTTPServer interface {
-	AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
+	AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*v11.AddBetTickerConfigResponse, error)
 	// BackofficeAddGamesToTag Add games to a tag
 	BackofficeAddGamesToTag(context.Context, *BackofficeAddGamesToTagRequest) (*BackofficeAddGamesToTagResponse, error)
 	// BackofficeAddProviderToTag Add provider to tag (adds all its games)
@@ -113,7 +114,7 @@ type BackofficeGameHTTPServer interface {
 	ListFreespinsGames(context.Context, *ListFreespinsGamesRequest) (*v1.ListFreespinsGamesResponse, error)
 	// ListFreespinsProviders Freespins related APIs
 	ListFreespinsProviders(context.Context, *ListFreespinsProvidersRequest) (*v1.ListFreespinsProvidersResponse, error)
-	ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v11.ListBetTickerConfigResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*v1.ListMultipleBetsResponse, error)
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
@@ -130,7 +131,7 @@ type BackofficeGameHTTPServer interface {
 	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
 	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*v1.ListUnpaidBetsResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
-	UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v11.UpdateBetTickerConfigResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 }
 
@@ -757,7 +758,7 @@ func _BackofficeGame_ExportSportEvents0_HTTP_Handler(srv BackofficeGameHTTPServe
 
 func _BackofficeGame_AddGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.AddGameBetDisplayConfigRequest
+		var in AddGameBetDisplayConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -766,20 +767,20 @@ func _BackofficeGame_AddGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGameHTT
 		}
 		http.SetOperation(ctx, OperationBackofficeGameAddGameBetDisplayConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddGameBetDisplayConfig(ctx, req.(*v1.AddGameBetDisplayConfigRequest))
+			return srv.AddGameBetDisplayConfig(ctx, req.(*AddGameBetDisplayConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.AddGameBetDisplayConfigResponse)
+		reply := out.(*v11.AddBetTickerConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _BackofficeGame_UpdateGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.UpdateGameBetDisplayConfigRequest
+		var in UpdateGameBetDisplayConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -788,20 +789,20 @@ func _BackofficeGame_UpdateGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGame
 		}
 		http.SetOperation(ctx, OperationBackofficeGameUpdateGameBetDisplayConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateGameBetDisplayConfig(ctx, req.(*v1.UpdateGameBetDisplayConfigRequest))
+			return srv.UpdateGameBetDisplayConfig(ctx, req.(*UpdateGameBetDisplayConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.UpdateGameBetDisplayConfigResponse)
+		reply := out.(*v11.UpdateBetTickerConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _BackofficeGame_ListGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.ListGameBetDisplayConfigRequest
+		var in ListGameBetDisplayConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -810,13 +811,13 @@ func _BackofficeGame_ListGameBetDisplayConfig0_HTTP_Handler(srv BackofficeGameHT
 		}
 		http.SetOperation(ctx, OperationBackofficeGameListGameBetDisplayConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListGameBetDisplayConfig(ctx, req.(*v1.ListGameBetDisplayConfigRequest))
+			return srv.ListGameBetDisplayConfig(ctx, req.(*ListGameBetDisplayConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.ListGameBetDisplayConfigResponse)
+		reply := out.(*v11.ListBetTickerConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1174,7 +1175,7 @@ func _BackofficeGame_BackofficeListGamesUnderTag0_HTTP_Handler(srv BackofficeGam
 }
 
 type BackofficeGameHTTPClient interface {
-	AddGameBetDisplayConfig(ctx context.Context, req *v1.AddGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.AddGameBetDisplayConfigResponse, err error)
+	AddGameBetDisplayConfig(ctx context.Context, req *AddGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v11.AddBetTickerConfigResponse, err error)
 	// BackofficeAddGamesToTag Add games to a tag
 	BackofficeAddGamesToTag(ctx context.Context, req *BackofficeAddGamesToTagRequest, opts ...http.CallOption) (rsp *BackofficeAddGamesToTagResponse, err error)
 	// BackofficeAddProviderToTag Add provider to tag (adds all its games)
@@ -1220,7 +1221,7 @@ type BackofficeGameHTTPClient interface {
 	ListFreespinsGames(ctx context.Context, req *ListFreespinsGamesRequest, opts ...http.CallOption) (rsp *v1.ListFreespinsGamesResponse, err error)
 	// ListFreespinsProviders Freespins related APIs
 	ListFreespinsProviders(ctx context.Context, req *ListFreespinsProvidersRequest, opts ...http.CallOption) (rsp *v1.ListFreespinsProvidersResponse, err error)
-	ListGameBetDisplayConfig(ctx context.Context, req *v1.ListGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.ListGameBetDisplayConfigResponse, err error)
+	ListGameBetDisplayConfig(ctx context.Context, req *ListGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v11.ListBetTickerConfigResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
 	ListMultipleBets(ctx context.Context, req *ListMultipleBetsRequest, opts ...http.CallOption) (rsp *v1.ListMultipleBetsResponse, err error)
 	ListProviderRates(ctx context.Context, req *ListProviderRatesRequest, opts ...http.CallOption) (rsp *ListProviderRatesResponse, err error)
@@ -1237,7 +1238,7 @@ type BackofficeGameHTTPClient interface {
 	ListThemes(ctx context.Context, req *ListThemesRequest, opts ...http.CallOption) (rsp *ListThemesResponse, err error)
 	ListUnpaidBets(ctx context.Context, req *ListUnpaidBetsRequest, opts ...http.CallOption) (rsp *v1.ListUnpaidBetsResponse, err error)
 	UpdateGame(ctx context.Context, req *UpdateGameRequest, opts ...http.CallOption) (rsp *UpdateGameResponse, err error)
-	UpdateGameBetDisplayConfig(ctx context.Context, req *v1.UpdateGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateGameBetDisplayConfigResponse, err error)
+	UpdateGameBetDisplayConfig(ctx context.Context, req *UpdateGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v11.UpdateBetTickerConfigResponse, err error)
 	UpdateProvider(ctx context.Context, req *UpdateProviderRequest, opts ...http.CallOption) (rsp *UpdateProviderResponse, err error)
 }
 
@@ -1249,8 +1250,8 @@ func NewBackofficeGameHTTPClient(client *http.Client) BackofficeGameHTTPClient {
 	return &BackofficeGameHTTPClientImpl{client}
 }
 
-func (c *BackofficeGameHTTPClientImpl) AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...http.CallOption) (*v1.AddGameBetDisplayConfigResponse, error) {
-	var out v1.AddGameBetDisplayConfigResponse
+func (c *BackofficeGameHTTPClientImpl) AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...http.CallOption) (*v11.AddBetTickerConfigResponse, error) {
+	var out v11.AddBetTickerConfigResponse
 	pattern := "/v1/backoffice/game/bet/dispaly/config/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameAddGameBetDisplayConfig))
@@ -1679,8 +1680,8 @@ func (c *BackofficeGameHTTPClientImpl) ListFreespinsProviders(ctx context.Contex
 	return &out, nil
 }
 
-func (c *BackofficeGameHTTPClientImpl) ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...http.CallOption) (*v1.ListGameBetDisplayConfigResponse, error) {
-	var out v1.ListGameBetDisplayConfigResponse
+func (c *BackofficeGameHTTPClientImpl) ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...http.CallOption) (*v11.ListBetTickerConfigResponse, error) {
+	var out v11.ListBetTickerConfigResponse
 	pattern := "/v1/backoffice/game/bet/dispaly/config/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameListGameBetDisplayConfig))
@@ -1828,8 +1829,8 @@ func (c *BackofficeGameHTTPClientImpl) UpdateGame(ctx context.Context, in *Updat
 	return &out, nil
 }
 
-func (c *BackofficeGameHTTPClientImpl) UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...http.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error) {
-	var out v1.UpdateGameBetDisplayConfigResponse
+func (c *BackofficeGameHTTPClientImpl) UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...http.CallOption) (*v11.UpdateBetTickerConfigResponse, error) {
+	var out v11.UpdateBetTickerConfigResponse
 	pattern := "/v1/backoffice/game/bet/dispaly/config/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameUpdateGameBetDisplayConfig))

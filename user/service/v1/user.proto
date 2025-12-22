@@ -404,6 +404,23 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Privacy Settings APIs - Frontend
+	rpc GetUserPrivacySettings(GetUserPrivacySettingsRequest) returns (GetUserPrivacySettingsResponse) {
+		option (google.api.http) = {
+			get: "/v1/user/privacy-settings"
+		};
+	}
+
+	rpc UpdateUserPrivacySettings(UpdateUserPrivacySettingsRequest) returns (UpdateUserPrivacySettingsResponse) {
+		option (google.api.http) = {
+			put: "/v1/user/privacy-settings"
+			body: "*"
+		};
+	}
+
+	// Privacy Settings APIs - Internal (for push-service batch lookup)
+	rpc GetUsersPrivacySettings(GetUsersPrivacySettingsRequest) returns (GetUsersPrivacySettingsResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1805,4 +1822,36 @@ message RequestDailyLossbackRequest {
 }
 
 message GetDailyLossbackStatusRequest {
+}
+
+// Privacy Settings Messages
+message UserPrivacySettings {
+	int64 user_id = 1;
+	bool invisible_mode = 2;       // When true, username shown as "hidden" in bet ticker
+	bool hide_betting_records = 3; // When true, exclude from bet ticker entirely
+}
+
+message GetUserPrivacySettingsRequest {
+	int64 user_id = 1; // Optional, if not provided uses authenticated user
+}
+
+message GetUserPrivacySettingsResponse {
+	UserPrivacySettings settings = 1;
+}
+
+message UpdateUserPrivacySettingsRequest {
+	int64 user_id = 1; // Optional, if not provided uses authenticated user
+	optional bool invisible_mode = 2;
+	optional bool hide_betting_records = 3;
+}
+
+message UpdateUserPrivacySettingsResponse {}
+
+// Batch API for push-service internal use
+message GetUsersPrivacySettingsRequest {
+	repeated int64 user_ids = 1;
+}
+
+message GetUsersPrivacySettingsResponse {
+	map<int64, UserPrivacySettings> settings = 1; // user_id -> settings
 }

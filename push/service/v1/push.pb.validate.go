@@ -767,6 +767,877 @@ var _ interface {
 	ErrorName() string
 } = GetNotificationStatsResponseValidationError{}
 
+// Validate checks the field values on BettingFilterConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BettingFilterConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BettingFilterConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BettingFilterConfigMultiError, or nil if none found.
+func (m *BettingFilterConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BettingFilterConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MiniOdds
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return BettingFilterConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// BettingFilterConfigMultiError is an error wrapping multiple validation
+// errors returned by BettingFilterConfig.ValidateAll() if the designated
+// constraints aren't met.
+type BettingFilterConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BettingFilterConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BettingFilterConfigMultiError) AllErrors() []error { return m }
+
+// BettingFilterConfigValidationError is the validation error returned by
+// BettingFilterConfig.Validate if the designated constraints aren't met.
+type BettingFilterConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BettingFilterConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BettingFilterConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BettingFilterConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BettingFilterConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BettingFilterConfigValidationError) ErrorName() string {
+	return "BettingFilterConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BettingFilterConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBettingFilterConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BettingFilterConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BettingFilterConfigValidationError{}
+
+// Validate checks the field values on AddBetTickerConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddBetTickerConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddBetTickerConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddBetTickerConfigRequestMultiError, or nil if none found.
+func (m *AddBetTickerConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddBetTickerConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetAllBet()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddBetTickerConfigRequestValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddBetTickerConfigRequestValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAllBet()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddBetTickerConfigRequestValidationError{
+				field:  "AllBet",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHighWins()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddBetTickerConfigRequestValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddBetTickerConfigRequestValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHighWins()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddBetTickerConfigRequestValidationError{
+				field:  "HighWins",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for OperatorId
+
+	if len(errors) > 0 {
+		return AddBetTickerConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddBetTickerConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by AddBetTickerConfigRequest.ValidateAll() if the
+// designated constraints aren't met.
+type AddBetTickerConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddBetTickerConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddBetTickerConfigRequestMultiError) AllErrors() []error { return m }
+
+// AddBetTickerConfigRequestValidationError is the validation error returned by
+// AddBetTickerConfigRequest.Validate if the designated constraints aren't met.
+type AddBetTickerConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddBetTickerConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddBetTickerConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddBetTickerConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddBetTickerConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddBetTickerConfigRequestValidationError) ErrorName() string {
+	return "AddBetTickerConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddBetTickerConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddBetTickerConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddBetTickerConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddBetTickerConfigRequestValidationError{}
+
+// Validate checks the field values on AddBetTickerConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddBetTickerConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddBetTickerConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddBetTickerConfigResponseMultiError, or nil if none found.
+func (m *AddBetTickerConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddBetTickerConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AddBetTickerConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddBetTickerConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by AddBetTickerConfigResponse.ValidateAll() if
+// the designated constraints aren't met.
+type AddBetTickerConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddBetTickerConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddBetTickerConfigResponseMultiError) AllErrors() []error { return m }
+
+// AddBetTickerConfigResponseValidationError is the validation error returned
+// by AddBetTickerConfigResponse.Validate if the designated constraints aren't met.
+type AddBetTickerConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddBetTickerConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddBetTickerConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddBetTickerConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddBetTickerConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddBetTickerConfigResponseValidationError) ErrorName() string {
+	return "AddBetTickerConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddBetTickerConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddBetTickerConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddBetTickerConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddBetTickerConfigResponseValidationError{}
+
+// Validate checks the field values on UpdateBetTickerConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateBetTickerConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBetTickerConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateBetTickerConfigRequestMultiError, or nil if none found.
+func (m *UpdateBetTickerConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBetTickerConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateBetTickerConfigRequestValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateBetTickerConfigRequestValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateBetTickerConfigRequestValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Enable
+
+	// no validation rules for OperatorId
+
+	if m.MaskingEnabled != nil {
+		// no validation rules for MaskingEnabled
+	}
+
+	if m.MaskingRule != nil {
+		// no validation rules for MaskingRule
+	}
+
+	if len(errors) > 0 {
+		return UpdateBetTickerConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBetTickerConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateBetTickerConfigRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateBetTickerConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBetTickerConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBetTickerConfigRequestMultiError) AllErrors() []error { return m }
+
+// UpdateBetTickerConfigRequestValidationError is the validation error returned
+// by UpdateBetTickerConfigRequest.Validate if the designated constraints
+// aren't met.
+type UpdateBetTickerConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBetTickerConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBetTickerConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBetTickerConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBetTickerConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBetTickerConfigRequestValidationError) ErrorName() string {
+	return "UpdateBetTickerConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBetTickerConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBetTickerConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBetTickerConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBetTickerConfigRequestValidationError{}
+
+// Validate checks the field values on UpdateBetTickerConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateBetTickerConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBetTickerConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateBetTickerConfigResponseMultiError, or nil if none found.
+func (m *UpdateBetTickerConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBetTickerConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateBetTickerConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBetTickerConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateBetTickerConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateBetTickerConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBetTickerConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBetTickerConfigResponseMultiError) AllErrors() []error { return m }
+
+// UpdateBetTickerConfigResponseValidationError is the validation error
+// returned by UpdateBetTickerConfigResponse.Validate if the designated
+// constraints aren't met.
+type UpdateBetTickerConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBetTickerConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBetTickerConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBetTickerConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBetTickerConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBetTickerConfigResponseValidationError) ErrorName() string {
+	return "UpdateBetTickerConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBetTickerConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBetTickerConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBetTickerConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBetTickerConfigResponseValidationError{}
+
+// Validate checks the field values on ListBetTickerConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBetTickerConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBetTickerConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListBetTickerConfigRequestMultiError, or nil if none found.
+func (m *ListBetTickerConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBetTickerConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	if len(errors) > 0 {
+		return ListBetTickerConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBetTickerConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by ListBetTickerConfigRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListBetTickerConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBetTickerConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBetTickerConfigRequestMultiError) AllErrors() []error { return m }
+
+// ListBetTickerConfigRequestValidationError is the validation error returned
+// by ListBetTickerConfigRequest.Validate if the designated constraints aren't met.
+type ListBetTickerConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBetTickerConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBetTickerConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBetTickerConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBetTickerConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBetTickerConfigRequestValidationError) ErrorName() string {
+	return "ListBetTickerConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBetTickerConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBetTickerConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBetTickerConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBetTickerConfigRequestValidationError{}
+
+// Validate checks the field values on ListBetTickerConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBetTickerConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBetTickerConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListBetTickerConfigResponseMultiError, or nil if none found.
+func (m *ListBetTickerConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBetTickerConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListBetTickerConfigResponseValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListBetTickerConfigResponseValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListBetTickerConfigResponseValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Enable
+
+	// no validation rules for MaskingEnabled
+
+	// no validation rules for MaskingRule
+
+	if len(errors) > 0 {
+		return ListBetTickerConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBetTickerConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by ListBetTickerConfigResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListBetTickerConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBetTickerConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBetTickerConfigResponseMultiError) AllErrors() []error { return m }
+
+// ListBetTickerConfigResponseValidationError is the validation error returned
+// by ListBetTickerConfigResponse.Validate if the designated constraints
+// aren't met.
+type ListBetTickerConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBetTickerConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBetTickerConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBetTickerConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBetTickerConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBetTickerConfigResponseValidationError) ErrorName() string {
+	return "ListBetTickerConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBetTickerConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBetTickerConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBetTickerConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBetTickerConfigResponseValidationError{}
+
 // Validate checks the field values on
 // GetNotificationStatsResponse_OperatorNotificationStats with the rules
 // defined in the proto definition for this message. If any rules are
@@ -892,3 +1763,341 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetNotificationStatsResponse_OperatorNotificationStatsValidationError{}
+
+// Validate checks the field values on UpdateBetTickerConfigRequest_Item with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateBetTickerConfigRequest_Item) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBetTickerConfigRequest_Item
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateBetTickerConfigRequest_ItemMultiError, or nil if none found.
+func (m *UpdateBetTickerConfigRequest_Item) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBetTickerConfigRequest_Item) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	if m.AllBet != nil {
+
+		if all {
+			switch v := interface{}(m.GetAllBet()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateBetTickerConfigRequest_ItemValidationError{
+						field:  "AllBet",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateBetTickerConfigRequest_ItemValidationError{
+						field:  "AllBet",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAllBet()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateBetTickerConfigRequest_ItemValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.HighWins != nil {
+
+		if all {
+			switch v := interface{}(m.GetHighWins()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateBetTickerConfigRequest_ItemValidationError{
+						field:  "HighWins",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateBetTickerConfigRequest_ItemValidationError{
+						field:  "HighWins",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetHighWins()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateBetTickerConfigRequest_ItemValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UpdateBetTickerConfigRequest_ItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBetTickerConfigRequest_ItemMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateBetTickerConfigRequest_Item.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateBetTickerConfigRequest_ItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBetTickerConfigRequest_ItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBetTickerConfigRequest_ItemMultiError) AllErrors() []error { return m }
+
+// UpdateBetTickerConfigRequest_ItemValidationError is the validation error
+// returned by UpdateBetTickerConfigRequest_Item.Validate if the designated
+// constraints aren't met.
+type UpdateBetTickerConfigRequest_ItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBetTickerConfigRequest_ItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBetTickerConfigRequest_ItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBetTickerConfigRequest_ItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBetTickerConfigRequest_ItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBetTickerConfigRequest_ItemValidationError) ErrorName() string {
+	return "UpdateBetTickerConfigRequest_ItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBetTickerConfigRequest_ItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBetTickerConfigRequest_Item.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBetTickerConfigRequest_ItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBetTickerConfigRequest_ItemValidationError{}
+
+// Validate checks the field values on ListBetTickerConfigResponse_Item with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListBetTickerConfigResponse_Item) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBetTickerConfigResponse_Item with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListBetTickerConfigResponse_ItemMultiError, or nil if none found.
+func (m *ListBetTickerConfigResponse_Item) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBetTickerConfigResponse_Item) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetAllBet()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListBetTickerConfigResponse_ItemValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListBetTickerConfigResponse_ItemValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAllBet()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListBetTickerConfigResponse_ItemValidationError{
+				field:  "AllBet",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHighWins()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListBetTickerConfigResponse_ItemValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListBetTickerConfigResponse_ItemValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHighWins()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListBetTickerConfigResponse_ItemValidationError{
+				field:  "HighWins",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListBetTickerConfigResponse_ItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBetTickerConfigResponse_ItemMultiError is an error wrapping multiple
+// validation errors returned by
+// ListBetTickerConfigResponse_Item.ValidateAll() if the designated
+// constraints aren't met.
+type ListBetTickerConfigResponse_ItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBetTickerConfigResponse_ItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBetTickerConfigResponse_ItemMultiError) AllErrors() []error { return m }
+
+// ListBetTickerConfigResponse_ItemValidationError is the validation error
+// returned by ListBetTickerConfigResponse_Item.Validate if the designated
+// constraints aren't met.
+type ListBetTickerConfigResponse_ItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBetTickerConfigResponse_ItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBetTickerConfigResponse_ItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBetTickerConfigResponse_ItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBetTickerConfigResponse_ItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBetTickerConfigResponse_ItemValidationError) ErrorName() string {
+	return "ListBetTickerConfigResponse_ItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBetTickerConfigResponse_ItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBetTickerConfigResponse_Item.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBetTickerConfigResponse_ItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBetTickerConfigResponse_ItemValidationError{}
