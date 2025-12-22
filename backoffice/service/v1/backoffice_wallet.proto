@@ -841,8 +841,9 @@ message ListPromoCodeCampaignDetailsRequest {
 	int64 campaign_id = 1;
 	int64 user_id = 2;
 	string status = 3;
-	int32 page = 4;
-	int32 page_size = 5;
+	string code = 4;
+	int32 page = 5;
+	int32 page_size = 6;
 }
 
 // Generate Codes for Campaign (one_time only)

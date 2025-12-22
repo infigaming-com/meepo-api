@@ -8431,6 +8431,8 @@ func (m *ListPromoCodeCampaignDetailsRequest) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for Code
+
 	// no validation rules for Page
 
 	// no validation rules for PageSize

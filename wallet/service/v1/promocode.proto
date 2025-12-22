@@ -230,8 +230,9 @@ message ListPromoCodeCampaignDetailsRequest {
 	int64 campaign_id = 2;
 	int64 user_id = 3;
 	string status = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	string code = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 // Code item for one_time campaigns
