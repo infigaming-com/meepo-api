@@ -183,21 +183,21 @@ service BackofficeGame {
 		};
 	}
 
-	rpc AddGameBetDisplayConfig(game.service.v1.AddGameBetDisplayConfigRequest) returns (game.service.v1.AddGameBetDisplayConfigResponse) {
+	rpc AddGameBetDisplayConfig(AddGameBetDisplayConfigRequest) returns (api.push.service.v1.AddBetTickerConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bet/dispaly/config/add"
 			body: "*"
 		};
 	}
 
-	rpc UpdateGameBetDisplayConfig(game.service.v1.UpdateGameBetDisplayConfigRequest) returns (game.service.v1.UpdateGameBetDisplayConfigResponse) {
+	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (api.push.service.v1.UpdateBetTickerConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bet/dispaly/config/update"
 			body: "*"
 		};
 	}
 
-	rpc ListGameBetDisplayConfig(game.service.v1.ListGameBetDisplayConfigRequest) returns (game.service.v1.ListGameBetDisplayConfigResponse) {
+	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (api.push.service.v1.ListBetTickerConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bet/dispaly/config/list"
 			body: "*"
@@ -340,21 +340,6 @@ service BackofficeGame {
 	rpc BackofficeListGamesUnderTag(BackofficeListGamesUnderTagRequest) returns (BackofficeListGamesUnderTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/tags/games/list"
-			body: "*"
-		};
-	}
-
-	// Bet Ticker Masking Config APIs
-	rpc GetOperatorBetTickerMaskingConfig(GetOperatorBetTickerMaskingConfigRequest) returns (api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/game/bet-ticker/masking-config/get"
-			body: "*"
-		};
-	}
-
-	rpc UpdateOperatorBetTickerMaskingConfig(UpdateOperatorBetTickerMaskingConfigRequest) returns (api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/game/bet-ticker/masking-config/update"
 			body: "*"
 		};
 	}
@@ -931,14 +916,28 @@ message BackofficeListGamesUnderTagResponse {
 	int32 page_size = 4;
 }
 
-// ============== Bet Ticker Masking Config Messages ==============
+// ============== BetTicker Config Request Messages ==============
 
-message GetOperatorBetTickerMaskingConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
+message AddGameBetDisplayConfigRequest {
+	string country = 1;
+	api.push.service.v1.BettingFilterConfig all_bet = 2;
+	api.push.service.v1.BettingFilterConfig high_wins = 3;
+	api.common.OperatorContext target_operator_context = 4;
 }
 
-message UpdateOperatorBetTickerMaskingConfigRequest {
+message UpdateGameBetDisplayConfigRequest {
+	message Item {
+		string country = 1;
+		optional api.push.service.v1.BettingFilterConfig all_bet = 2;
+		optional api.push.service.v1.BettingFilterConfig high_wins = 3;
+	}
+	repeated Item list = 1;
+	bool enable = 2;
+	api.common.OperatorContext target_operator_context = 3;
+	optional bool masking_enabled = 4;
+	optional string masking_rule = 5;
+}
+
+message ListGameBetDisplayConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	bool masking_enabled = 2;
-	optional string masking_rule = 3;
 }

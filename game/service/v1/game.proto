@@ -187,12 +187,6 @@ service Game {
 	rpc CreateTaxReport(CreateTaxReportRequest) returns (CreateTaxReportResponse) {
 	}
 
-	rpc AddGameBetDisplayConfig(AddGameBetDisplayConfigRequest) returns (AddGameBetDisplayConfigResponse) { }
-
-	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (UpdateGameBetDisplayConfigResponse) { }
-
-	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (ListGameBetDisplayConfigResponse) { }
-
 	rpc GetGameInfo(GetGameInfoRequest) returns (GetGameInfoResponse) { }
 
 	rpc GetUserActiveDays(GetUserActiveDaysRequest) returns (GetUserActiveDaysResponse) { }
@@ -1685,51 +1679,6 @@ message CreateTaxReportRequest {
 }
 
 message CreateTaxReportResponse {
-}
-
-message BettingConfig {
-	repeated string bet_category = 1;
-	float mini_odds = 2;
-	repeated string currencies = 3;
-	bool enable = 4;
-}
-
-message AddGameBetDisplayConfigRequest {
-	string country = 1;
-	BettingConfig all_bet = 2;
-	BettingConfig high_wins = 3;
-	api.common.OperatorContext target_operator_context = 4;
-}
-
-message AddGameBetDisplayConfigResponse {
-}
-
-message UpdateGameBetDisplayConfigRequest {
-	message Item {
-		string country = 1;
-		optional BettingConfig all_bet = 2;
-		optional BettingConfig high_wins = 3;
-	}
-	repeated Item list = 1;
-	bool enable = 2;
-	api.common.OperatorContext target_operator_context = 3;
-}
-
-message UpdateGameBetDisplayConfigResponse {
-}
-
-message ListGameBetDisplayConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
-}
-
-message ListGameBetDisplayConfigResponse {
-	message Item {
-		string country = 1;
-		BettingConfig all_bet = 2;
-		BettingConfig high_wins = 3;
-	}
-	repeated Item list = 1;
-	bool enable = 2;
 }
 
 message GetGameInfoRequest {

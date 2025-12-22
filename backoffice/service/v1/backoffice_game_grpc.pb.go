@@ -21,55 +21,53 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeGame_ListProviders_FullMethodName                        = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
-	BackofficeGame_ListProvidersWithDetail_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
-	BackofficeGame_ListCategories_FullMethodName                       = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
-	BackofficeGame_ListFeeGroups_FullMethodName                        = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
-	BackofficeGame_ListTags_FullMethodName                             = "/api.backoffice.service.v1.BackofficeGame/ListTags"
-	BackofficeGame_ListThemes_FullMethodName                           = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
-	BackofficeGame_ListCurrencies_FullMethodName                       = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
-	BackofficeGame_ListBets_FullMethodName                             = "/api.backoffice.service.v1.BackofficeGame/ListBets"
-	BackofficeGame_ExportBets_FullMethodName                           = "/api.backoffice.service.v1.BackofficeGame/ExportBets"
-	BackofficeGame_GetBetById_FullMethodName                           = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
-	BackofficeGame_GetUserBetsOverview_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
-	BackofficeGame_GetGameTransactionsForBet_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
-	BackofficeGame_ListGames_FullMethodName                            = "/api.backoffice.service.v1.BackofficeGame/ListGames"
-	BackofficeGame_UpdateGame_FullMethodName                           = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
-	BackofficeGame_UpdateProvider_FullMethodName                       = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
-	BackofficeGame_ListProviderRates_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
-	BackofficeGame_GetGameTransactionById_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
-	BackofficeGame_ListUnpaidBets_FullMethodName                       = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
-	BackofficeGame_ExportUnpaidBets_FullMethodName                     = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
-	BackofficeGame_ListMultipleBets_FullMethodName                     = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
-	BackofficeGame_ExportMultipleBets_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/ExportMultipleBets"
-	BackofficeGame_ListStakeVarianceBets_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/ListStakeVarianceBets"
-	BackofficeGame_ExportStakeVarianceBets_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ExportStakeVarianceBets"
-	BackofficeGame_ListCustomerStrikeReports_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
-	BackofficeGame_ExportCustomerStrikeReports_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ExportCustomerStrikeReports"
-	BackofficeGame_ExportSportEvents_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ExportSportEvents"
-	BackofficeGame_AddGameBetDisplayConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/AddGameBetDisplayConfig"
-	BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
-	BackofficeGame_ListGameBetDisplayConfig_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
-	BackofficeGame_ListFreespinsProviders_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsProviders"
-	BackofficeGame_ListFreespinsGames_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsGames"
-	BackofficeGame_IssueFreespins_FullMethodName                       = "/api.backoffice.service.v1.BackofficeGame/IssueFreespins"
-	BackofficeGame_BackofficeListGameTags_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGameTags"
-	BackofficeGame_BackofficeCreateGameTag_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/BackofficeCreateGameTag"
-	BackofficeGame_ListFreebetTemplates_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/ListFreebetTemplates"
-	BackofficeGame_IssueFreebets_FullMethodName                        = "/api.backoffice.service.v1.BackofficeGame/IssueFreebets"
-	BackofficeGame_BackofficeDeleteGameTag_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/BackofficeDeleteGameTag"
-	BackofficeGame_GetPlayerFreebets_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/GetPlayerFreebets"
-	BackofficeGame_BackofficeUpdateGameTag_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/BackofficeUpdateGameTag"
-	BackofficeGame_BackofficeAddGamesToTag_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddGamesToTag"
-	BackofficeGame_BackofficeRemoveGamesFromTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeRemoveGamesFromTag"
-	BackofficeGame_BackofficeAddProviderToTag_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddProviderToTag"
-	BackofficeGame_BackofficeRemoveProviderFromTag_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/BackofficeRemoveProviderFromTag"
-	BackofficeGame_BackofficeUpdateGameOrderInTag_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/BackofficeUpdateGameOrderInTag"
-	BackofficeGame_BackofficeBatchUpdateTagGames_FullMethodName        = "/api.backoffice.service.v1.BackofficeGame/BackofficeBatchUpdateTagGames"
-	BackofficeGame_BackofficeListProvidersUnderTag_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/BackofficeListProvidersUnderTag"
-	BackofficeGame_BackofficeListGamesUnderTag_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGamesUnderTag"
-	BackofficeGame_GetOperatorBetTickerMaskingConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/GetOperatorBetTickerMaskingConfig"
-	BackofficeGame_UpdateOperatorBetTickerMaskingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/UpdateOperatorBetTickerMaskingConfig"
+	BackofficeGame_ListProviders_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
+	BackofficeGame_ListProvidersWithDetail_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
+	BackofficeGame_ListCategories_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
+	BackofficeGame_ListFeeGroups_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
+	BackofficeGame_ListTags_FullMethodName                        = "/api.backoffice.service.v1.BackofficeGame/ListTags"
+	BackofficeGame_ListThemes_FullMethodName                      = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
+	BackofficeGame_ListCurrencies_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
+	BackofficeGame_ListBets_FullMethodName                        = "/api.backoffice.service.v1.BackofficeGame/ListBets"
+	BackofficeGame_ExportBets_FullMethodName                      = "/api.backoffice.service.v1.BackofficeGame/ExportBets"
+	BackofficeGame_GetBetById_FullMethodName                      = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
+	BackofficeGame_GetUserBetsOverview_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
+	BackofficeGame_GetGameTransactionsForBet_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
+	BackofficeGame_ListGames_FullMethodName                       = "/api.backoffice.service.v1.BackofficeGame/ListGames"
+	BackofficeGame_UpdateGame_FullMethodName                      = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
+	BackofficeGame_UpdateProvider_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
+	BackofficeGame_ListProviderRates_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
+	BackofficeGame_GetGameTransactionById_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
+	BackofficeGame_ListUnpaidBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
+	BackofficeGame_ExportUnpaidBets_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
+	BackofficeGame_ListMultipleBets_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
+	BackofficeGame_ExportMultipleBets_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ExportMultipleBets"
+	BackofficeGame_ListStakeVarianceBets_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/ListStakeVarianceBets"
+	BackofficeGame_ExportStakeVarianceBets_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/ExportStakeVarianceBets"
+	BackofficeGame_ListCustomerStrikeReports_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
+	BackofficeGame_ExportCustomerStrikeReports_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ExportCustomerStrikeReports"
+	BackofficeGame_ExportSportEvents_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ExportSportEvents"
+	BackofficeGame_AddGameBetDisplayConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/AddGameBetDisplayConfig"
+	BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
+	BackofficeGame_ListGameBetDisplayConfig_FullMethodName        = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
+	BackofficeGame_ListFreespinsProviders_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsProviders"
+	BackofficeGame_ListFreespinsGames_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsGames"
+	BackofficeGame_IssueFreespins_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/IssueFreespins"
+	BackofficeGame_BackofficeListGameTags_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGameTags"
+	BackofficeGame_BackofficeCreateGameTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeCreateGameTag"
+	BackofficeGame_ListFreebetTemplates_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListFreebetTemplates"
+	BackofficeGame_IssueFreebets_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/IssueFreebets"
+	BackofficeGame_BackofficeDeleteGameTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeDeleteGameTag"
+	BackofficeGame_GetPlayerFreebets_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/GetPlayerFreebets"
+	BackofficeGame_BackofficeUpdateGameTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeUpdateGameTag"
+	BackofficeGame_BackofficeAddGamesToTag_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddGamesToTag"
+	BackofficeGame_BackofficeRemoveGamesFromTag_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/BackofficeRemoveGamesFromTag"
+	BackofficeGame_BackofficeAddProviderToTag_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddProviderToTag"
+	BackofficeGame_BackofficeRemoveProviderFromTag_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/BackofficeRemoveProviderFromTag"
+	BackofficeGame_BackofficeUpdateGameOrderInTag_FullMethodName  = "/api.backoffice.service.v1.BackofficeGame/BackofficeUpdateGameOrderInTag"
+	BackofficeGame_BackofficeBatchUpdateTagGames_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/BackofficeBatchUpdateTagGames"
+	BackofficeGame_BackofficeListProvidersUnderTag_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/BackofficeListProvidersUnderTag"
+	BackofficeGame_BackofficeListGamesUnderTag_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/BackofficeListGamesUnderTag"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
@@ -108,9 +106,9 @@ type BackofficeGameClient interface {
 	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error)
-	AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error)
-	UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error)
-	ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
+	AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v11.AddBetTickerConfigResponse, error)
+	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v11.UpdateBetTickerConfigResponse, error)
+	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v11.ListBetTickerConfigResponse, error)
 	// Freespins related APIs
 	ListFreespinsProviders(ctx context.Context, in *ListFreespinsProvidersRequest, opts ...grpc.CallOption) (*v1.ListFreespinsProvidersResponse, error)
 	ListFreespinsGames(ctx context.Context, in *ListFreespinsGamesRequest, opts ...grpc.CallOption) (*v1.ListFreespinsGamesResponse, error)
@@ -143,9 +141,6 @@ type BackofficeGameClient interface {
 	BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated, with filters)
 	BackofficeListGamesUnderTag(ctx context.Context, in *BackofficeListGamesUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListGamesUnderTagResponse, error)
-	// Bet Ticker Masking Config APIs
-	GetOperatorBetTickerMaskingConfig(ctx context.Context, in *GetOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*v11.GetOperatorBetTickerMaskingConfigResponse, error)
-	UpdateOperatorBetTickerMaskingConfig(ctx context.Context, in *UpdateOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*v11.UpdateOperatorBetTickerMaskingConfigResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -416,9 +411,9 @@ func (c *backofficeGameClient) ExportSportEvents(ctx context.Context, in *Export
 	return out, nil
 }
 
-func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error) {
+func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v11.AddBetTickerConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.AddGameBetDisplayConfigResponse)
+	out := new(v11.AddBetTickerConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_AddGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -426,9 +421,9 @@ func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error) {
+func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v11.UpdateBetTickerConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateGameBetDisplayConfigResponse)
+	out := new(v11.UpdateBetTickerConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -436,9 +431,9 @@ func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, i
 	return out, nil
 }
 
-func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error) {
+func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v11.ListBetTickerConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.ListGameBetDisplayConfigResponse)
+	out := new(v11.ListBetTickerConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_ListGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -626,26 +621,6 @@ func (c *backofficeGameClient) BackofficeListGamesUnderTag(ctx context.Context, 
 	return out, nil
 }
 
-func (c *backofficeGameClient) GetOperatorBetTickerMaskingConfig(ctx context.Context, in *GetOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*v11.GetOperatorBetTickerMaskingConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v11.GetOperatorBetTickerMaskingConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeGame_GetOperatorBetTickerMaskingConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeGameClient) UpdateOperatorBetTickerMaskingConfig(ctx context.Context, in *UpdateOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*v11.UpdateOperatorBetTickerMaskingConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v11.UpdateOperatorBetTickerMaskingConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeGame_UpdateOperatorBetTickerMaskingConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeGameServer is the server API for BackofficeGame service.
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
@@ -682,9 +657,9 @@ type BackofficeGameServer interface {
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error)
-	AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
-	UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
-	ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
+	AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*v11.AddBetTickerConfigResponse, error)
+	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v11.UpdateBetTickerConfigResponse, error)
+	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v11.ListBetTickerConfigResponse, error)
 	// Freespins related APIs
 	ListFreespinsProviders(context.Context, *ListFreespinsProvidersRequest) (*v1.ListFreespinsProvidersResponse, error)
 	ListFreespinsGames(context.Context, *ListFreespinsGamesRequest) (*v1.ListFreespinsGamesResponse, error)
@@ -717,9 +692,6 @@ type BackofficeGameServer interface {
 	BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated, with filters)
 	BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error)
-	// Bet Ticker Masking Config APIs
-	GetOperatorBetTickerMaskingConfig(context.Context, *GetOperatorBetTickerMaskingConfigRequest) (*v11.GetOperatorBetTickerMaskingConfigResponse, error)
-	UpdateOperatorBetTickerMaskingConfig(context.Context, *UpdateOperatorBetTickerMaskingConfigRequest) (*v11.UpdateOperatorBetTickerMaskingConfigResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -808,13 +780,13 @@ func (UnimplementedBackofficeGameServer) ExportCustomerStrikeReports(context.Con
 func (UnimplementedBackofficeGameServer) ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ExportSportEvents not implemented")
 }
-func (UnimplementedBackofficeGameServer) AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error) {
+func (UnimplementedBackofficeGameServer) AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*v11.AddBetTickerConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddGameBetDisplayConfig not implemented")
 }
-func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error) {
+func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v11.UpdateBetTickerConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateGameBetDisplayConfig not implemented")
 }
-func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error) {
+func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v11.ListBetTickerConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
 }
 func (UnimplementedBackofficeGameServer) ListFreespinsProviders(context.Context, *ListFreespinsProvidersRequest) (*v1.ListFreespinsProvidersResponse, error) {
@@ -870,12 +842,6 @@ func (UnimplementedBackofficeGameServer) BackofficeListProvidersUnderTag(context
 }
 func (UnimplementedBackofficeGameServer) BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeListGamesUnderTag not implemented")
-}
-func (UnimplementedBackofficeGameServer) GetOperatorBetTickerMaskingConfig(context.Context, *GetOperatorBetTickerMaskingConfigRequest) (*v11.GetOperatorBetTickerMaskingConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetOperatorBetTickerMaskingConfig not implemented")
-}
-func (UnimplementedBackofficeGameServer) UpdateOperatorBetTickerMaskingConfig(context.Context, *UpdateOperatorBetTickerMaskingConfigRequest) (*v11.UpdateOperatorBetTickerMaskingConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorBetTickerMaskingConfig not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -1367,7 +1333,7 @@ func _BackofficeGame_ExportSportEvents_Handler(srv interface{}, ctx context.Cont
 }
 
 func _BackofficeGame_AddGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.AddGameBetDisplayConfigRequest)
+	in := new(AddGameBetDisplayConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1379,13 +1345,13 @@ func _BackofficeGame_AddGameBetDisplayConfig_Handler(srv interface{}, ctx contex
 		FullMethod: BackofficeGame_AddGameBetDisplayConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).AddGameBetDisplayConfig(ctx, req.(*v1.AddGameBetDisplayConfigRequest))
+		return srv.(BackofficeGameServer).AddGameBetDisplayConfig(ctx, req.(*AddGameBetDisplayConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeGame_UpdateGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdateGameBetDisplayConfigRequest)
+	in := new(UpdateGameBetDisplayConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1397,13 +1363,13 @@ func _BackofficeGame_UpdateGameBetDisplayConfig_Handler(srv interface{}, ctx con
 		FullMethod: BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).UpdateGameBetDisplayConfig(ctx, req.(*v1.UpdateGameBetDisplayConfigRequest))
+		return srv.(BackofficeGameServer).UpdateGameBetDisplayConfig(ctx, req.(*UpdateGameBetDisplayConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListGameBetDisplayConfigRequest)
+	in := new(ListGameBetDisplayConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1415,7 +1381,7 @@ func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx conte
 		FullMethod: BackofficeGame_ListGameBetDisplayConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).ListGameBetDisplayConfig(ctx, req.(*v1.ListGameBetDisplayConfigRequest))
+		return srv.(BackofficeGameServer).ListGameBetDisplayConfig(ctx, req.(*ListGameBetDisplayConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1744,42 +1710,6 @@ func _BackofficeGame_BackofficeListGamesUnderTag_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeGame_GetOperatorBetTickerMaskingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorBetTickerMaskingConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeGameServer).GetOperatorBetTickerMaskingConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeGame_GetOperatorBetTickerMaskingConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).GetOperatorBetTickerMaskingConfig(ctx, req.(*GetOperatorBetTickerMaskingConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeGame_UpdateOperatorBetTickerMaskingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOperatorBetTickerMaskingConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeGameServer).UpdateOperatorBetTickerMaskingConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeGame_UpdateOperatorBetTickerMaskingConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).UpdateOperatorBetTickerMaskingConfig(ctx, req.(*UpdateOperatorBetTickerMaskingConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1974,14 +1904,6 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BackofficeListGamesUnderTag",
 			Handler:    _BackofficeGame_BackofficeListGamesUnderTag_Handler,
-		},
-		{
-			MethodName: "GetOperatorBetTickerMaskingConfig",
-			Handler:    _BackofficeGame_GetOperatorBetTickerMaskingConfig_Handler,
-		},
-		{
-			MethodName: "UpdateOperatorBetTickerMaskingConfig",
-			Handler:    _BackofficeGame_UpdateOperatorBetTickerMaskingConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
