@@ -549,7 +549,7 @@ message Action {
 message Transactions {
 	string txn_id = 1 [json_name="txn_id"];
 	string operator_txn_id = 2 [json_name="operator_txn_id"];
-	double processed_at = 3 [json_name="processed_at"];
+	string processed_at = 3 [json_name="processed_at"];
 	string bonus_amount = 4 [json_name="bonus_amount"];
 }
 
@@ -1839,25 +1839,22 @@ message FreespinUser {
 }
 
 message IssueFreespinsRequest {
-	string operator_id = 1;
-	string freespin_id = 2;
-	FreespinUser user = 3;
-	string request_id = 4;
-	repeated FreespinGame games = 5;
-	int64 quantity = 6;
-	int64 start_at = 7;
-	int64 expire_at = 8;
-	int64 valid_until = 9;
-	api.common.OperatorContext operator_context = 10;
+	int64 freespin_id = 1;
+	int64 user_id = 2;
+	int64 request_id = 3;
+	repeated FreespinGame games = 4;
+	int64 quantity = 5;
+	int64 start_at = 6;
+	int64 expire_at = 7;
+	api.common.OperatorContext operator_context = 8;
 }
 
 message IssueFreespinsResponse {
 }
 
 message CancelFreespinsRequest {
-	string operator_id = 1;
-	string freespin_id = 2;
-	api.common.OperatorContext operator_context = 3;
+	int64 freespin_id = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message CancelFreespinsResponse {
@@ -1873,16 +1870,16 @@ message ListFreebetTemplatesRequest {
 
 message FreebetTemplateAmount {
 	string currency = 1;
-	double amount = 2;
-	optional double max_cap = 3;
+	string amount = 2;
+	optional string max_cap = 3;
 }
 
 message FreebetGrantingConfig {
 	optional bool is_api_amount = 1;
 	optional int32 min_selections = 2;
 	optional int32 max_selections = 3;
-	optional double min_odds = 4;
-	optional double max_odds = 5;
+	optional string min_odds = 4;
+	optional string max_odds = 5;
 }
 
 message FreebetLocalizationEntry {
@@ -1913,18 +1910,11 @@ message ListFreebetTemplatesResponse {
 	int32 page_size = 4;
 }
 
-message FreebetIssueItem {
-	string player_id = 1;
-	string username = 2;
-	optional double amount = 3;
-	string currency = 4;
-	optional bool force_activate = 5;
-}
-
 message IssueFreebetsRequest {
 	string template_id = 1;
-	repeated FreebetIssueItem items = 2;
-	api.common.OperatorContext operator_context = 3;
+	string currency = 2;
+	int64 user_id = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message FreebetIssuedBonus {
@@ -1936,12 +1926,12 @@ message FreebetIssuedBonus {
 	optional google.protobuf.Timestamp activation_date = 6;
 	optional google.protobuf.Timestamp expiration_date = 7;
 	string currency = 8;
-	optional double amount = 9;
-	optional double max_cap = 10;
+	optional string amount = 9;
+	optional string max_cap = 10;
 }
 
 message FreebetAssignmentResult {
-	string player_id = 1;
+	int64 user_id = 1;
 	optional FreebetIssuedBonus bonus = 2;
 	optional string error_code = 3;
 	optional string error_message = 4;
@@ -1952,7 +1942,7 @@ message IssueFreebetsResponse {
 }
 
 message GetPlayerFreebetsRequest {
-	string player_id = 1;
+	int64 user_id = 1;
 	api.common.OperatorContext operator_context = 2;
 }
 

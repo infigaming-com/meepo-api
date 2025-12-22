@@ -2352,24 +2352,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsResponse'
-    /v1/backoffice/game/freebets/issue:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_IssueFreebets
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.IssueFreebetsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.IssueFreebetsResponse'
     /v1/backoffice/game/freebets/player/get:
         post:
             tags:
@@ -2425,24 +2407,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.ListFreespinsGamesResponse'
-    /v1/backoffice/game/freespins/issue:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_IssueFreespins
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.IssueFreespinsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.IssueFreespinsResponse'
     /v1/backoffice/game/freespins/providers/list:
         post:
             tags:
@@ -16208,17 +16172,6 @@ components:
             properties:
                 taskId:
                     type: string
-        api.game.service.v1.FreebetAssignmentResult:
-            type: object
-            properties:
-                playerId:
-                    type: string
-                bonus:
-                    $ref: '#/components/schemas/api.game.service.v1.FreebetIssuedBonus'
-                errorCode:
-                    type: string
-                errorMessage:
-                    type: string
         api.game.service.v1.FreebetGrantingConfig:
             type: object
             properties:
@@ -16231,25 +16184,9 @@ components:
                     type: integer
                     format: int32
                 minOdds:
-                    type: number
-                    format: double
+                    type: string
                 maxOdds:
-                    type: number
-                    format: double
-        api.game.service.v1.FreebetIssueItem:
-            type: object
-            properties:
-                playerId:
                     type: string
-                username:
-                    type: string
-                amount:
-                    type: number
-                    format: double
-                currency:
-                    type: string
-                forceActivate:
-                    type: boolean
         api.game.service.v1.FreebetIssuedBonus:
             type: object
             properties:
@@ -16273,11 +16210,9 @@ components:
                 currency:
                     type: string
                 amount:
-                    type: number
-                    format: double
+                    type: string
                 maxCap:
-                    type: number
-                    format: double
+                    type: string
         api.game.service.v1.FreebetLocalizationEntry:
             type: object
             properties:
@@ -16328,51 +16263,8 @@ components:
                 currency:
                     type: string
                 amount:
-                    type: number
-                    format: double
+                    type: string
                 maxCap:
-                    type: number
-                    format: double
-        api.game.service.v1.FreespinGame:
-            type: object
-            properties:
-                gameId:
-                    type: string
-                betLevels:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.FreespinGameBetLevel'
-        api.game.service.v1.FreespinGameBetLevel:
-            type: object
-            properties:
-                currency:
-                    type: string
-                betLevel:
-                    type: string
-        api.game.service.v1.FreespinUser:
-            type: object
-            properties:
-                walletUserId:
-                    type: string
-                userId:
-                    type: string
-                email:
-                    type: string
-                firstname:
-                    type: string
-                lastname:
-                    type: string
-                nickname:
-                    type: string
-                city:
-                    type: string
-                dateOfBirth:
-                    type: string
-                registeredAt:
-                    type: string
-                gender:
-                    type: string
-                country:
                     type: string
         api.game.service.v1.GameFilter:
             type: object
@@ -16789,52 +16681,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.game.service.v1.IssueFreebetsRequest:
-            type: object
-            properties:
-                templateId:
-                    type: string
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.FreebetIssueItem'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-        api.game.service.v1.IssueFreebetsResponse:
-            type: object
-            properties:
-                results:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.FreebetAssignmentResult'
-        api.game.service.v1.IssueFreespinsRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                freespinId:
-                    type: string
-                user:
-                    $ref: '#/components/schemas/api.game.service.v1.FreespinUser'
-                requestId:
-                    type: string
-                games:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.FreespinGame'
-                quantity:
-                    type: string
-                startAt:
-                    type: string
-                expireAt:
-                    type: string
-                validUntil:
-                    type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-        api.game.service.v1.IssueFreespinsResponse:
-            type: object
-            properties: {}
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -17521,8 +17367,7 @@ components:
                 operator_txn_id:
                     type: string
                 processed_at:
-                    type: number
-                    format: double
+                    type: string
                 bonus_amount:
                     type: string
         api.game.service.v1.UpdateGameBetDisplayConfigRequest:

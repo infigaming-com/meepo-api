@@ -44,8 +44,6 @@ const OperationBackofficeGameGetGameTransactionById = "/api.backoffice.service.v
 const OperationBackofficeGameGetGameTransactionsForBet = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
 const OperationBackofficeGameGetPlayerFreebets = "/api.backoffice.service.v1.BackofficeGame/GetPlayerFreebets"
 const OperationBackofficeGameGetUserBetsOverview = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
-const OperationBackofficeGameIssueFreebets = "/api.backoffice.service.v1.BackofficeGame/IssueFreebets"
-const OperationBackofficeGameIssueFreespins = "/api.backoffice.service.v1.BackofficeGame/IssueFreespins"
 const OperationBackofficeGameListBets = "/api.backoffice.service.v1.BackofficeGame/ListBets"
 const OperationBackofficeGameListCategories = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
 const OperationBackofficeGameListCurrencies = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
@@ -105,8 +103,6 @@ type BackofficeGameHTTPServer interface {
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
 	GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*v1.GetPlayerFreebetsResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
-	IssueFreebets(context.Context, *v1.IssueFreebetsRequest) (*v1.IssueFreebetsResponse, error)
-	IssueFreespins(context.Context, *v1.IssueFreespinsRequest) (*v1.IssueFreespinsResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
@@ -171,11 +167,9 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/bet/dispaly/config/list", _BackofficeGame_ListGameBetDisplayConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/freespins/providers/list", _BackofficeGame_ListFreespinsProviders0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/freespins/games/list", _BackofficeGame_ListFreespinsGames0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/game/freespins/issue", _BackofficeGame_IssueFreespins0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/list-all", _BackofficeGame_BackofficeListGameTags0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/create", _BackofficeGame_BackofficeCreateGameTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/freebets/templates/list", _BackofficeGame_ListFreebetTemplates0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/game/freebets/issue", _BackofficeGame_IssueFreebets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/delete", _BackofficeGame_BackofficeDeleteGameTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/freebets/player/get", _BackofficeGame_GetPlayerFreebets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/update", _BackofficeGame_BackofficeUpdateGameTag0_HTTP_Handler(srv))
@@ -871,28 +865,6 @@ func _BackofficeGame_ListFreespinsGames0_HTTP_Handler(srv BackofficeGameHTTPServ
 	}
 }
 
-func _BackofficeGame_IssueFreespins0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in v1.IssueFreespinsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGameIssueFreespins)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.IssueFreespins(ctx, req.(*v1.IssueFreespinsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.IssueFreespinsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _BackofficeGame_BackofficeListGameTags0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BackofficeListGameTagsRequest
@@ -955,28 +927,6 @@ func _BackofficeGame_ListFreebetTemplates0_HTTP_Handler(srv BackofficeGameHTTPSe
 			return err
 		}
 		reply := out.(*v1.ListFreebetTemplatesResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeGame_IssueFreebets0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in v1.IssueFreebetsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGameIssueFreebets)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.IssueFreebets(ctx, req.(*v1.IssueFreebetsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.IssueFreebetsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1260,8 +1210,6 @@ type BackofficeGameHTTPClient interface {
 	GetGameTransactionsForBet(ctx context.Context, req *GetGameTransactionsForBetRequest, opts ...http.CallOption) (rsp *GetGameTransactionsForBetResponse, err error)
 	GetPlayerFreebets(ctx context.Context, req *GetPlayerFreebetsRequest, opts ...http.CallOption) (rsp *v1.GetPlayerFreebetsResponse, err error)
 	GetUserBetsOverview(ctx context.Context, req *GetUserBetsOverviewRequest, opts ...http.CallOption) (rsp *GetUserBetsOverviewResponse, err error)
-	IssueFreebets(ctx context.Context, req *v1.IssueFreebetsRequest, opts ...http.CallOption) (rsp *v1.IssueFreebetsResponse, err error)
-	IssueFreespins(ctx context.Context, req *v1.IssueFreespinsRequest, opts ...http.CallOption) (rsp *v1.IssueFreespinsResponse, err error)
 	ListBets(ctx context.Context, req *ListBetsRequest, opts ...http.CallOption) (rsp *ListBetsResponse, err error)
 	ListCategories(ctx context.Context, req *ListCategoriesRequest, opts ...http.CallOption) (rsp *ListCategoriesResponse, err error)
 	ListCurrencies(ctx context.Context, req *ListCurrenciesRequest, opts ...http.CallOption) (rsp *ListCurrenciesResponse, err error)
@@ -1617,32 +1565,6 @@ func (c *BackofficeGameHTTPClientImpl) GetUserBetsOverview(ctx context.Context, 
 	pattern := "/v1/backoffice/game/bets/overview/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetUserBetsOverview))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeGameHTTPClientImpl) IssueFreebets(ctx context.Context, in *v1.IssueFreebetsRequest, opts ...http.CallOption) (*v1.IssueFreebetsResponse, error) {
-	var out v1.IssueFreebetsResponse
-	pattern := "/v1/backoffice/game/freebets/issue"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGameIssueFreebets))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeGameHTTPClientImpl) IssueFreespins(ctx context.Context, in *v1.IssueFreespinsRequest, opts ...http.CallOption) (*v1.IssueFreespinsResponse, error) {
-	var out v1.IssueFreespinsResponse
-	pattern := "/v1/backoffice/game/freespins/issue"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGameIssueFreespins))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
