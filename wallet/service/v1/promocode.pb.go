@@ -2099,7 +2099,7 @@ func (x *ListPromoCodeCampaignDetailsResponse) GetPageSize() int32 {
 }
 
 // Generate Codes for Campaign (one_time only)
-type GeneratePromoCodesRequest struct {
+type GenerateOneTimePromoCodesRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	GeneratedByUserId        int64                   `protobuf:"varint,2,opt,name=generated_by_user_id,json=generatedByUserId,proto3" json:"generated_by_user_id,omitempty"`
@@ -2111,20 +2111,20 @@ type GeneratePromoCodesRequest struct {
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *GeneratePromoCodesRequest) Reset() {
-	*x = GeneratePromoCodesRequest{}
+func (x *GenerateOneTimePromoCodesRequest) Reset() {
+	*x = GenerateOneTimePromoCodesRequest{}
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GeneratePromoCodesRequest) String() string {
+func (x *GenerateOneTimePromoCodesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GeneratePromoCodesRequest) ProtoMessage() {}
+func (*GenerateOneTimePromoCodesRequest) ProtoMessage() {}
 
-func (x *GeneratePromoCodesRequest) ProtoReflect() protoreflect.Message {
+func (x *GenerateOneTimePromoCodesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2136,74 +2136,74 @@ func (x *GeneratePromoCodesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GeneratePromoCodesRequest.ProtoReflect.Descriptor instead.
-func (*GeneratePromoCodesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GenerateOneTimePromoCodesRequest.ProtoReflect.Descriptor instead.
+func (*GenerateOneTimePromoCodesRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *GeneratePromoCodesRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *GenerateOneTimePromoCodesRequest) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-func (x *GeneratePromoCodesRequest) GetGeneratedByUserId() int64 {
+func (x *GenerateOneTimePromoCodesRequest) GetGeneratedByUserId() int64 {
 	if x != nil {
 		return x.GeneratedByUserId
 	}
 	return 0
 }
 
-func (x *GeneratePromoCodesRequest) GetCampaignId() int64 {
+func (x *GenerateOneTimePromoCodesRequest) GetCampaignId() int64 {
 	if x != nil {
 		return x.CampaignId
 	}
 	return 0
 }
 
-func (x *GeneratePromoCodesRequest) GetCodeLength() int32 {
+func (x *GenerateOneTimePromoCodesRequest) GetCodeLength() int32 {
 	if x != nil {
 		return x.CodeLength
 	}
 	return 0
 }
 
-func (x *GeneratePromoCodesRequest) GetCodeFormat() string {
+func (x *GenerateOneTimePromoCodesRequest) GetCodeFormat() string {
 	if x != nil {
 		return x.CodeFormat
 	}
 	return ""
 }
 
-func (x *GeneratePromoCodesRequest) GetCount() int32 {
+func (x *GenerateOneTimePromoCodesRequest) GetCount() int32 {
 	if x != nil {
 		return x.Count
 	}
 	return 0
 }
 
-type GeneratePromoCodesResponse struct {
+type GenerateOneTimePromoCodesResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	GeneratedCount int32                  `protobuf:"varint,1,opt,name=generated_count,json=generatedCount,proto3" json:"generated_count,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *GeneratePromoCodesResponse) Reset() {
-	*x = GeneratePromoCodesResponse{}
+func (x *GenerateOneTimePromoCodesResponse) Reset() {
+	*x = GenerateOneTimePromoCodesResponse{}
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GeneratePromoCodesResponse) String() string {
+func (x *GenerateOneTimePromoCodesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GeneratePromoCodesResponse) ProtoMessage() {}
+func (*GenerateOneTimePromoCodesResponse) ProtoMessage() {}
 
-func (x *GeneratePromoCodesResponse) ProtoReflect() protoreflect.Message {
+func (x *GenerateOneTimePromoCodesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_promocode_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2215,16 +2215,218 @@ func (x *GeneratePromoCodesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GeneratePromoCodesResponse.ProtoReflect.Descriptor instead.
-func (*GeneratePromoCodesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GenerateOneTimePromoCodesResponse.ProtoReflect.Descriptor instead.
+func (*GenerateOneTimePromoCodesResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *GeneratePromoCodesResponse) GetGeneratedCount() int32 {
+func (x *GenerateOneTimePromoCodesResponse) GetGeneratedCount() int32 {
 	if x != nil {
 		return x.GeneratedCount
 	}
 	return 0
+}
+
+// Generate Codes for Campaign (universal only)
+type GenerateUniversalPromoCodesRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	CampaignId               int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	Codes                    []string                `protobuf:"bytes,3,rep,name=codes,proto3" json:"codes,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GenerateUniversalPromoCodesRequest) Reset() {
+	*x = GenerateUniversalPromoCodesRequest{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateUniversalPromoCodesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateUniversalPromoCodesRequest) ProtoMessage() {}
+
+func (x *GenerateUniversalPromoCodesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateUniversalPromoCodesRequest.ProtoReflect.Descriptor instead.
+func (*GenerateUniversalPromoCodesRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GenerateUniversalPromoCodesRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *GenerateUniversalPromoCodesRequest) GetCampaignId() int64 {
+	if x != nil {
+		return x.CampaignId
+	}
+	return 0
+}
+
+func (x *GenerateUniversalPromoCodesRequest) GetCodes() []string {
+	if x != nil {
+		return x.Codes
+	}
+	return nil
+}
+
+type GenerateUniversalPromoCodesResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	GeneratedCount int32                  `protobuf:"varint,1,opt,name=generated_count,json=generatedCount,proto3" json:"generated_count,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GenerateUniversalPromoCodesResponse) Reset() {
+	*x = GenerateUniversalPromoCodesResponse{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateUniversalPromoCodesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateUniversalPromoCodesResponse) ProtoMessage() {}
+
+func (x *GenerateUniversalPromoCodesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateUniversalPromoCodesResponse.ProtoReflect.Descriptor instead.
+func (*GenerateUniversalPromoCodesResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GenerateUniversalPromoCodesResponse) GetGeneratedCount() int32 {
+	if x != nil {
+		return x.GeneratedCount
+	}
+	return 0
+}
+
+// List Universal Code Usages
+type ListUniversalCodeUsagesRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	CampaignId               int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *ListUniversalCodeUsagesRequest) Reset() {
+	*x = ListUniversalCodeUsagesRequest{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUniversalCodeUsagesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUniversalCodeUsagesRequest) ProtoMessage() {}
+
+func (x *ListUniversalCodeUsagesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUniversalCodeUsagesRequest.ProtoReflect.Descriptor instead.
+func (*ListUniversalCodeUsagesRequest) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ListUniversalCodeUsagesRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *ListUniversalCodeUsagesRequest) GetCampaignId() int64 {
+	if x != nil {
+		return x.CampaignId
+	}
+	return 0
+}
+
+type ListUniversalCodeUsagesResponse struct {
+	state         protoimpl.MessageState                                `protogen:"open.v1"`
+	Usages        []*ListUniversalCodeUsagesResponse_UniversalCodeUsage `protobuf:"bytes,1,rep,name=usages,proto3" json:"usages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUniversalCodeUsagesResponse) Reset() {
+	*x = ListUniversalCodeUsagesResponse{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUniversalCodeUsagesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUniversalCodeUsagesResponse) ProtoMessage() {}
+
+func (x *ListUniversalCodeUsagesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUniversalCodeUsagesResponse.ProtoReflect.Descriptor instead.
+func (*ListUniversalCodeUsagesResponse) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListUniversalCodeUsagesResponse) GetUsages() []*ListUniversalCodeUsagesResponse_UniversalCodeUsage {
+	if x != nil {
+		return x.Usages
+	}
+	return nil
 }
 
 // GetPromoCodeInfo - Query promo code information
@@ -2237,7 +2439,7 @@ type GetPromoCodeInfoRequest struct {
 
 func (x *GetPromoCodeInfoRequest) Reset() {
 	*x = GetPromoCodeInfoRequest{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[28]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2249,7 +2451,7 @@ func (x *GetPromoCodeInfoRequest) String() string {
 func (*GetPromoCodeInfoRequest) ProtoMessage() {}
 
 func (x *GetPromoCodeInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[28]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2262,7 +2464,7 @@ func (x *GetPromoCodeInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPromoCodeInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetPromoCodeInfoRequest) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{28}
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetPromoCodeInfoRequest) GetCode() string {
@@ -2295,7 +2497,7 @@ type GetPromoCodeInfoResponse struct {
 
 func (x *GetPromoCodeInfoResponse) Reset() {
 	*x = GetPromoCodeInfoResponse{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[29]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2307,7 +2509,7 @@ func (x *GetPromoCodeInfoResponse) String() string {
 func (*GetPromoCodeInfoResponse) ProtoMessage() {}
 
 func (x *GetPromoCodeInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[29]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2320,7 +2522,7 @@ func (x *GetPromoCodeInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPromoCodeInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetPromoCodeInfoResponse) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{29}
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetPromoCodeInfoResponse) GetCode() string {
@@ -2431,7 +2633,7 @@ type ClaimPromoCodeRequest struct {
 
 func (x *ClaimPromoCodeRequest) Reset() {
 	*x = ClaimPromoCodeRequest{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[30]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2443,7 +2645,7 @@ func (x *ClaimPromoCodeRequest) String() string {
 func (*ClaimPromoCodeRequest) ProtoMessage() {}
 
 func (x *ClaimPromoCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[30]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2456,7 +2658,7 @@ func (x *ClaimPromoCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClaimPromoCodeRequest.ProtoReflect.Descriptor instead.
 func (*ClaimPromoCodeRequest) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{30}
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ClaimPromoCodeRequest) GetCode() string {
@@ -2474,7 +2676,7 @@ type ClaimPromoCodeResponse struct {
 
 func (x *ClaimPromoCodeResponse) Reset() {
 	*x = ClaimPromoCodeResponse{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[31]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2486,7 +2688,7 @@ func (x *ClaimPromoCodeResponse) String() string {
 func (*ClaimPromoCodeResponse) ProtoMessage() {}
 
 func (x *ClaimPromoCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[31]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2499,7 +2701,7 @@ func (x *ClaimPromoCodeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClaimPromoCodeResponse.ProtoReflect.Descriptor instead.
 func (*ClaimPromoCodeResponse) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{31}
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{35}
 }
 
 // Condition validation result
@@ -2513,7 +2715,7 @@ type ConditionValidationResult struct {
 
 func (x *ConditionValidationResult) Reset() {
 	*x = ConditionValidationResult{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2525,7 +2727,7 @@ func (x *ConditionValidationResult) String() string {
 func (*ConditionValidationResult) ProtoMessage() {}
 
 func (x *ConditionValidationResult) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[32]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2538,7 +2740,7 @@ func (x *ConditionValidationResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConditionValidationResult.ProtoReflect.Descriptor instead.
 func (*ConditionValidationResult) Descriptor() ([]byte, []int) {
-	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{32}
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ConditionValidationResult) GetConditionType() string {
@@ -2568,7 +2770,7 @@ type FreeSpinConfig_FreeSpinReward struct {
 
 func (x *FreeSpinConfig_FreeSpinReward) Reset() {
 	*x = FreeSpinConfig_FreeSpinReward{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2580,7 +2782,7 @@ func (x *FreeSpinConfig_FreeSpinReward) String() string {
 func (*FreeSpinConfig_FreeSpinReward) ProtoMessage() {}
 
 func (x *FreeSpinConfig_FreeSpinReward) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[33]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2642,7 +2844,7 @@ type FreeBetConfig_FreeBetReward struct {
 
 func (x *FreeBetConfig_FreeBetReward) Reset() {
 	*x = FreeBetConfig_FreeBetReward{}
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[34]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2654,7 +2856,7 @@ func (x *FreeBetConfig_FreeBetReward) String() string {
 func (*FreeBetConfig_FreeBetReward) ProtoMessage() {}
 
 func (x *FreeBetConfig_FreeBetReward) ProtoReflect() protoreflect.Message {
-	mi := &file_wallet_service_v1_promocode_proto_msgTypes[34]
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2687,6 +2889,66 @@ func (x *FreeBetConfig_FreeBetReward) GetBetCount() int32 {
 func (x *FreeBetConfig_FreeBetReward) GetFreeBetValidity() int64 {
 	if x != nil {
 		return x.FreeBetValidity
+	}
+	return 0
+}
+
+type ListUniversalCodeUsagesResponse_UniversalCodeUsage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	UsedCount     int32                  `protobuf:"varint,2,opt,name=used_count,json=usedCount,proto3" json:"used_count,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUniversalCodeUsagesResponse_UniversalCodeUsage) Reset() {
+	*x = ListUniversalCodeUsagesResponse_UniversalCodeUsage{}
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUniversalCodeUsagesResponse_UniversalCodeUsage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUniversalCodeUsagesResponse_UniversalCodeUsage) ProtoMessage() {}
+
+func (x *ListUniversalCodeUsagesResponse_UniversalCodeUsage) ProtoReflect() protoreflect.Message {
+	mi := &file_wallet_service_v1_promocode_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUniversalCodeUsagesResponse_UniversalCodeUsage.ProtoReflect.Descriptor instead.
+func (*ListUniversalCodeUsagesResponse_UniversalCodeUsage) Descriptor() ([]byte, []int) {
+	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{31, 0}
+}
+
+func (x *ListUniversalCodeUsagesResponse_UniversalCodeUsage) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *ListUniversalCodeUsagesResponse_UniversalCodeUsage) GetUsedCount() int32 {
+	if x != nil {
+		return x.UsedCount
+	}
+	return 0
+}
+
+func (x *ListUniversalCodeUsagesResponse_UniversalCodeUsage) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
 	}
 	return 0
 }
@@ -2902,8 +3164,8 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\x06usages\x18\x03 \x03(\v2-.api.wallet.service.v1.PromoCodeUsageListItemR\x06usages\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\xa0\x02\n" +
-	"\x19GeneratePromoCodesRequest\x12Y\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\"\xa7\x02\n" +
+	" GenerateOneTimePromoCodesRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12/\n" +
 	"\x14generated_by_user_id\x18\x02 \x01(\x03R\x11generatedByUserId\x12\x1f\n" +
 	"\vcampaign_id\x18\x03 \x01(\x03R\n" +
@@ -2912,9 +3174,28 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"codeLength\x12\x1f\n" +
 	"\vcode_format\x18\x05 \x01(\tR\n" +
 	"codeFormat\x12\x14\n" +
-	"\x05count\x18\x06 \x01(\x05R\x05count\"E\n" +
-	"\x1aGeneratePromoCodesResponse\x12'\n" +
-	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"-\n" +
+	"\x05count\x18\x06 \x01(\x05R\x05count\"L\n" +
+	"!GenerateOneTimePromoCodesResponse\x12'\n" +
+	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"\xb6\x01\n" +
+	"\"GenerateUniversalPromoCodesRequest\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\x1f\n" +
+	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
+	"campaignId\x12\x14\n" +
+	"\x05codes\x18\x03 \x03(\tR\x05codes\"N\n" +
+	"#GenerateUniversalPromoCodesResponse\x12'\n" +
+	"\x0fgenerated_count\x18\x01 \x01(\x05R\x0egeneratedCount\"\x9c\x01\n" +
+	"\x1eListUniversalCodeUsagesRequest\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\x1f\n" +
+	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
+	"campaignId\"\xee\x01\n" +
+	"\x1fListUniversalCodeUsagesResponse\x12a\n" +
+	"\x06usages\x18\x01 \x03(\v2I.api.wallet.service.v1.ListUniversalCodeUsagesResponse.UniversalCodeUsageR\x06usages\x1ah\n" +
+	"\x12UniversalCodeUsage\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1d\n" +
+	"\n" +
+	"used_count\x18\x02 \x01(\x05R\tusedCount\x12\x1f\n" +
+	"\vtotal_count\x18\x03 \x01(\x05R\n" +
+	"totalCount\"-\n" +
 	"\x17GetPromoCodeInfoRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\"\xe0\x05\n" +
 	"\x18GetPromoCodeInfoResponse\x12\x12\n" +
@@ -2955,54 +3236,59 @@ func file_wallet_service_v1_promocode_proto_rawDescGZIP() []byte {
 	return file_wallet_service_v1_promocode_proto_rawDescData
 }
 
-var file_wallet_service_v1_promocode_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_wallet_service_v1_promocode_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_wallet_service_v1_promocode_proto_goTypes = []any{
-	(*FreeSpinConfig)(nil),                        // 0: api.wallet.service.v1.FreeSpinConfig
-	(*FreeBetConfig)(nil),                         // 1: api.wallet.service.v1.FreeBetConfig
-	(*PromoCodeBonusMoneyConfig)(nil),             // 2: api.wallet.service.v1.PromoCodeBonusMoneyConfig
-	(*PromoCodeRewardConfigs)(nil),                // 3: api.wallet.service.v1.PromoCodeRewardConfigs
-	(*DepositCondition)(nil),                      // 4: api.wallet.service.v1.DepositCondition
-	(*RegistrationTimeCondition)(nil),             // 5: api.wallet.service.v1.RegistrationTimeCondition
-	(*InvitationCondition)(nil),                   // 6: api.wallet.service.v1.InvitationCondition
-	(*TurnoverCondition)(nil),                     // 7: api.wallet.service.v1.TurnoverCondition
-	(*ReferrerCondition)(nil),                     // 8: api.wallet.service.v1.ReferrerCondition
-	(*AffiliateCondition)(nil),                    // 9: api.wallet.service.v1.AffiliateCondition
-	(*VerificationStatusCondition)(nil),           // 10: api.wallet.service.v1.VerificationStatusCondition
-	(*PromoCodeConditions)(nil),                   // 11: api.wallet.service.v1.PromoCodeConditions
-	(*PromoCodeCampaign)(nil),                     // 12: api.wallet.service.v1.PromoCodeCampaign
-	(*CreatePromoCodeCampaignRequest)(nil),        // 13: api.wallet.service.v1.CreatePromoCodeCampaignRequest
-	(*CreatePromoCodeCampaignResponse)(nil),       // 14: api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	(*UpdatePromoCodeCampaignRequest)(nil),        // 15: api.wallet.service.v1.UpdatePromoCodeCampaignRequest
-	(*UpdatePromoCodeCampaignResponse)(nil),       // 16: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	(*UpdatePromoCodeCampaignStatusRequest)(nil),  // 17: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
-	(*UpdatePromoCodeCampaignStatusResponse)(nil), // 18: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	(*ListPromoCodeCampaignsRequest)(nil),         // 19: api.wallet.service.v1.ListPromoCodeCampaignsRequest
-	(*PromoCodeCampaignListItem)(nil),             // 20: api.wallet.service.v1.PromoCodeCampaignListItem
-	(*ListPromoCodeCampaignsResponse)(nil),        // 21: api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	(*ListPromoCodeCampaignDetailsRequest)(nil),   // 22: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
-	(*PromoCodeListItem)(nil),                     // 23: api.wallet.service.v1.PromoCodeListItem
-	(*PromoCodeUsageListItem)(nil),                // 24: api.wallet.service.v1.PromoCodeUsageListItem
-	(*ListPromoCodeCampaignDetailsResponse)(nil),  // 25: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	(*GeneratePromoCodesRequest)(nil),             // 26: api.wallet.service.v1.GeneratePromoCodesRequest
-	(*GeneratePromoCodesResponse)(nil),            // 27: api.wallet.service.v1.GeneratePromoCodesResponse
-	(*GetPromoCodeInfoRequest)(nil),               // 28: api.wallet.service.v1.GetPromoCodeInfoRequest
-	(*GetPromoCodeInfoResponse)(nil),              // 29: api.wallet.service.v1.GetPromoCodeInfoResponse
-	(*ClaimPromoCodeRequest)(nil),                 // 30: api.wallet.service.v1.ClaimPromoCodeRequest
-	(*ClaimPromoCodeResponse)(nil),                // 31: api.wallet.service.v1.ClaimPromoCodeResponse
-	(*ConditionValidationResult)(nil),             // 32: api.wallet.service.v1.ConditionValidationResult
-	(*FreeSpinConfig_FreeSpinReward)(nil),         // 33: api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
-	(*FreeBetConfig_FreeBetReward)(nil),           // 34: api.wallet.service.v1.FreeBetConfig.FreeBetReward
-	(*timestamppb.Timestamp)(nil),                 // 35: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),                // 36: api.common.OperatorContext
+	(*FreeSpinConfig)(nil),                                     // 0: api.wallet.service.v1.FreeSpinConfig
+	(*FreeBetConfig)(nil),                                      // 1: api.wallet.service.v1.FreeBetConfig
+	(*PromoCodeBonusMoneyConfig)(nil),                          // 2: api.wallet.service.v1.PromoCodeBonusMoneyConfig
+	(*PromoCodeRewardConfigs)(nil),                             // 3: api.wallet.service.v1.PromoCodeRewardConfigs
+	(*DepositCondition)(nil),                                   // 4: api.wallet.service.v1.DepositCondition
+	(*RegistrationTimeCondition)(nil),                          // 5: api.wallet.service.v1.RegistrationTimeCondition
+	(*InvitationCondition)(nil),                                // 6: api.wallet.service.v1.InvitationCondition
+	(*TurnoverCondition)(nil),                                  // 7: api.wallet.service.v1.TurnoverCondition
+	(*ReferrerCondition)(nil),                                  // 8: api.wallet.service.v1.ReferrerCondition
+	(*AffiliateCondition)(nil),                                 // 9: api.wallet.service.v1.AffiliateCondition
+	(*VerificationStatusCondition)(nil),                        // 10: api.wallet.service.v1.VerificationStatusCondition
+	(*PromoCodeConditions)(nil),                                // 11: api.wallet.service.v1.PromoCodeConditions
+	(*PromoCodeCampaign)(nil),                                  // 12: api.wallet.service.v1.PromoCodeCampaign
+	(*CreatePromoCodeCampaignRequest)(nil),                     // 13: api.wallet.service.v1.CreatePromoCodeCampaignRequest
+	(*CreatePromoCodeCampaignResponse)(nil),                    // 14: api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	(*UpdatePromoCodeCampaignRequest)(nil),                     // 15: api.wallet.service.v1.UpdatePromoCodeCampaignRequest
+	(*UpdatePromoCodeCampaignResponse)(nil),                    // 16: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	(*UpdatePromoCodeCampaignStatusRequest)(nil),               // 17: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
+	(*UpdatePromoCodeCampaignStatusResponse)(nil),              // 18: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	(*ListPromoCodeCampaignsRequest)(nil),                      // 19: api.wallet.service.v1.ListPromoCodeCampaignsRequest
+	(*PromoCodeCampaignListItem)(nil),                          // 20: api.wallet.service.v1.PromoCodeCampaignListItem
+	(*ListPromoCodeCampaignsResponse)(nil),                     // 21: api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	(*ListPromoCodeCampaignDetailsRequest)(nil),                // 22: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
+	(*PromoCodeListItem)(nil),                                  // 23: api.wallet.service.v1.PromoCodeListItem
+	(*PromoCodeUsageListItem)(nil),                             // 24: api.wallet.service.v1.PromoCodeUsageListItem
+	(*ListPromoCodeCampaignDetailsResponse)(nil),               // 25: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	(*GenerateOneTimePromoCodesRequest)(nil),                   // 26: api.wallet.service.v1.GenerateOneTimePromoCodesRequest
+	(*GenerateOneTimePromoCodesResponse)(nil),                  // 27: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	(*GenerateUniversalPromoCodesRequest)(nil),                 // 28: api.wallet.service.v1.GenerateUniversalPromoCodesRequest
+	(*GenerateUniversalPromoCodesResponse)(nil),                // 29: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	(*ListUniversalCodeUsagesRequest)(nil),                     // 30: api.wallet.service.v1.ListUniversalCodeUsagesRequest
+	(*ListUniversalCodeUsagesResponse)(nil),                    // 31: api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	(*GetPromoCodeInfoRequest)(nil),                            // 32: api.wallet.service.v1.GetPromoCodeInfoRequest
+	(*GetPromoCodeInfoResponse)(nil),                           // 33: api.wallet.service.v1.GetPromoCodeInfoResponse
+	(*ClaimPromoCodeRequest)(nil),                              // 34: api.wallet.service.v1.ClaimPromoCodeRequest
+	(*ClaimPromoCodeResponse)(nil),                             // 35: api.wallet.service.v1.ClaimPromoCodeResponse
+	(*ConditionValidationResult)(nil),                          // 36: api.wallet.service.v1.ConditionValidationResult
+	(*FreeSpinConfig_FreeSpinReward)(nil),                      // 37: api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
+	(*FreeBetConfig_FreeBetReward)(nil),                        // 38: api.wallet.service.v1.FreeBetConfig.FreeBetReward
+	(*ListUniversalCodeUsagesResponse_UniversalCodeUsage)(nil), // 39: api.wallet.service.v1.ListUniversalCodeUsagesResponse.UniversalCodeUsage
+	(*timestamppb.Timestamp)(nil),                              // 40: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),                             // 41: api.common.OperatorContext
 }
 var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
-	33, // 0: api.wallet.service.v1.FreeSpinConfig.rewards:type_name -> api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
-	34, // 1: api.wallet.service.v1.FreeBetConfig.rewards:type_name -> api.wallet.service.v1.FreeBetConfig.FreeBetReward
+	37, // 0: api.wallet.service.v1.FreeSpinConfig.rewards:type_name -> api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
+	38, // 1: api.wallet.service.v1.FreeBetConfig.rewards:type_name -> api.wallet.service.v1.FreeBetConfig.FreeBetReward
 	2,  // 2: api.wallet.service.v1.PromoCodeRewardConfigs.bonus_money_config:type_name -> api.wallet.service.v1.PromoCodeBonusMoneyConfig
 	0,  // 3: api.wallet.service.v1.PromoCodeRewardConfigs.free_spin_config:type_name -> api.wallet.service.v1.FreeSpinConfig
 	1,  // 4: api.wallet.service.v1.PromoCodeRewardConfigs.free_bet_config:type_name -> api.wallet.service.v1.FreeBetConfig
-	35, // 5: api.wallet.service.v1.RegistrationTimeCondition.start_time:type_name -> google.protobuf.Timestamp
-	35, // 6: api.wallet.service.v1.RegistrationTimeCondition.end_time:type_name -> google.protobuf.Timestamp
+	40, // 5: api.wallet.service.v1.RegistrationTimeCondition.start_time:type_name -> google.protobuf.Timestamp
+	40, // 6: api.wallet.service.v1.RegistrationTimeCondition.end_time:type_name -> google.protobuf.Timestamp
 	4,  // 7: api.wallet.service.v1.PromoCodeConditions.deposit_condition:type_name -> api.wallet.service.v1.DepositCondition
 	5,  // 8: api.wallet.service.v1.PromoCodeConditions.registration_time_condition:type_name -> api.wallet.service.v1.RegistrationTimeCondition
 	6,  // 9: api.wallet.service.v1.PromoCodeConditions.invitation_condition:type_name -> api.wallet.service.v1.InvitationCondition
@@ -3010,58 +3296,61 @@ var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
 	8,  // 11: api.wallet.service.v1.PromoCodeConditions.referrer_condition:type_name -> api.wallet.service.v1.ReferrerCondition
 	9,  // 12: api.wallet.service.v1.PromoCodeConditions.affiliate_condition:type_name -> api.wallet.service.v1.AffiliateCondition
 	10, // 13: api.wallet.service.v1.PromoCodeConditions.verification_status_condition:type_name -> api.wallet.service.v1.VerificationStatusCondition
-	36, // 14: api.wallet.service.v1.PromoCodeCampaign.operator_context:type_name -> api.common.OperatorContext
-	35, // 15: api.wallet.service.v1.PromoCodeCampaign.start_time:type_name -> google.protobuf.Timestamp
-	35, // 16: api.wallet.service.v1.PromoCodeCampaign.end_time:type_name -> google.protobuf.Timestamp
+	41, // 14: api.wallet.service.v1.PromoCodeCampaign.operator_context:type_name -> api.common.OperatorContext
+	40, // 15: api.wallet.service.v1.PromoCodeCampaign.start_time:type_name -> google.protobuf.Timestamp
+	40, // 16: api.wallet.service.v1.PromoCodeCampaign.end_time:type_name -> google.protobuf.Timestamp
 	11, // 17: api.wallet.service.v1.PromoCodeCampaign.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
 	3,  // 18: api.wallet.service.v1.PromoCodeCampaign.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	35, // 19: api.wallet.service.v1.PromoCodeCampaign.created_at:type_name -> google.protobuf.Timestamp
-	35, // 20: api.wallet.service.v1.PromoCodeCampaign.updated_at:type_name -> google.protobuf.Timestamp
-	36, // 21: api.wallet.service.v1.CreatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	36, // 22: api.wallet.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	35, // 23: api.wallet.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	35, // 24: api.wallet.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	40, // 19: api.wallet.service.v1.PromoCodeCampaign.created_at:type_name -> google.protobuf.Timestamp
+	40, // 20: api.wallet.service.v1.PromoCodeCampaign.updated_at:type_name -> google.protobuf.Timestamp
+	41, // 21: api.wallet.service.v1.CreatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	41, // 22: api.wallet.service.v1.CreatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	40, // 23: api.wallet.service.v1.CreatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	40, // 24: api.wallet.service.v1.CreatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
 	11, // 25: api.wallet.service.v1.CreatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
 	3,  // 26: api.wallet.service.v1.CreatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	36, // 27: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	36, // 28: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	35, // 29: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
-	35, // 30: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
+	41, // 27: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	41, // 28: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	40, // 29: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.start_time:type_name -> google.protobuf.Timestamp
+	40, // 30: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.end_time:type_name -> google.protobuf.Timestamp
 	11, // 31: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
 	3,  // 32: api.wallet.service.v1.UpdatePromoCodeCampaignRequest.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	36, // 33: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	36, // 34: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 35: api.wallet.service.v1.ListPromoCodeCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	36, // 36: api.wallet.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	35, // 37: api.wallet.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
-	35, // 38: api.wallet.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
+	41, // 33: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	41, // 34: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	41, // 35: api.wallet.service.v1.ListPromoCodeCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	41, // 36: api.wallet.service.v1.ListPromoCodeCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	40, // 37: api.wallet.service.v1.ListPromoCodeCampaignsRequest.start_time:type_name -> google.protobuf.Timestamp
+	40, // 38: api.wallet.service.v1.ListPromoCodeCampaignsRequest.end_time:type_name -> google.protobuf.Timestamp
 	3,  // 39: api.wallet.service.v1.PromoCodeCampaignListItem.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	35, // 40: api.wallet.service.v1.PromoCodeCampaignListItem.created_at:type_name -> google.protobuf.Timestamp
-	35, // 41: api.wallet.service.v1.PromoCodeCampaignListItem.start_time:type_name -> google.protobuf.Timestamp
-	35, // 42: api.wallet.service.v1.PromoCodeCampaignListItem.end_time:type_name -> google.protobuf.Timestamp
-	35, // 43: api.wallet.service.v1.PromoCodeCampaignListItem.updated_at:type_name -> google.protobuf.Timestamp
+	40, // 40: api.wallet.service.v1.PromoCodeCampaignListItem.created_at:type_name -> google.protobuf.Timestamp
+	40, // 41: api.wallet.service.v1.PromoCodeCampaignListItem.start_time:type_name -> google.protobuf.Timestamp
+	40, // 42: api.wallet.service.v1.PromoCodeCampaignListItem.end_time:type_name -> google.protobuf.Timestamp
+	40, // 43: api.wallet.service.v1.PromoCodeCampaignListItem.updated_at:type_name -> google.protobuf.Timestamp
 	11, // 44: api.wallet.service.v1.PromoCodeCampaignListItem.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
 	20, // 45: api.wallet.service.v1.ListPromoCodeCampaignsResponse.campaigns:type_name -> api.wallet.service.v1.PromoCodeCampaignListItem
-	36, // 46: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	35, // 47: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
-	35, // 48: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
-	35, // 49: api.wallet.service.v1.PromoCodeListItem.expired_at:type_name -> google.protobuf.Timestamp
-	35, // 50: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
-	35, // 51: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
-	35, // 52: api.wallet.service.v1.PromoCodeUsageListItem.expired_at:type_name -> google.protobuf.Timestamp
+	41, // 46: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	40, // 47: api.wallet.service.v1.PromoCodeListItem.created_at:type_name -> google.protobuf.Timestamp
+	40, // 48: api.wallet.service.v1.PromoCodeListItem.used_at:type_name -> google.protobuf.Timestamp
+	40, // 49: api.wallet.service.v1.PromoCodeListItem.expired_at:type_name -> google.protobuf.Timestamp
+	40, // 50: api.wallet.service.v1.PromoCodeUsageListItem.created_at:type_name -> google.protobuf.Timestamp
+	40, // 51: api.wallet.service.v1.PromoCodeUsageListItem.used_at:type_name -> google.protobuf.Timestamp
+	40, // 52: api.wallet.service.v1.PromoCodeUsageListItem.expired_at:type_name -> google.protobuf.Timestamp
 	23, // 53: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.codes:type_name -> api.wallet.service.v1.PromoCodeListItem
 	24, // 54: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse.usages:type_name -> api.wallet.service.v1.PromoCodeUsageListItem
-	36, // 55: api.wallet.service.v1.GeneratePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	35, // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
-	35, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
-	3,  // 58: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
-	11, // 59: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
-	32, // 60: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
-	61, // [61:61] is the sub-list for method output_type
-	61, // [61:61] is the sub-list for method input_type
-	61, // [61:61] is the sub-list for extension type_name
-	61, // [61:61] is the sub-list for extension extendee
-	0,  // [0:61] is the sub-list for field type_name
+	41, // 55: api.wallet.service.v1.GenerateOneTimePromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	41, // 56: api.wallet.service.v1.GenerateUniversalPromoCodesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	41, // 57: api.wallet.service.v1.ListUniversalCodeUsagesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	39, // 58: api.wallet.service.v1.ListUniversalCodeUsagesResponse.usages:type_name -> api.wallet.service.v1.ListUniversalCodeUsagesResponse.UniversalCodeUsage
+	40, // 59: api.wallet.service.v1.GetPromoCodeInfoResponse.start_time:type_name -> google.protobuf.Timestamp
+	40, // 60: api.wallet.service.v1.GetPromoCodeInfoResponse.end_time:type_name -> google.protobuf.Timestamp
+	3,  // 61: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
+	11, // 62: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
+	36, // 63: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
+	64, // [64:64] is the sub-list for method output_type
+	64, // [64:64] is the sub-list for method input_type
+	64, // [64:64] is the sub-list for extension type_name
+	64, // [64:64] is the sub-list for extension extendee
+	0,  // [0:64] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_promocode_proto_init() }
@@ -3076,7 +3365,7 @@ func file_wallet_service_v1_promocode_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wallet_service_v1_promocode_proto_rawDesc), len(file_wallet_service_v1_promocode_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   35,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

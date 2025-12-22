@@ -15242,7 +15242,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x18\n" +
 	"\abalance\x18\x02 \x01(\tR\abalance\x12\x14\n" +
 	"\x05bonus\x18\x03 \x01(\tR\x05bonus\x12\x1c\n" +
-	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp2\xb9N\n" +
+	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp2\xf5P\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -15291,8 +15291,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17UpdatePromoCodeCampaign\x125.api.wallet.service.v1.UpdatePromoCodeCampaignRequest\x1a6.api.wallet.service.v1.UpdatePromoCodeCampaignResponse\"\x00\x12\x9c\x01\n" +
 	"\x1dUpdatePromoCodeCampaignStatus\x12;.api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest\x1a<.api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse\"\x00\x12\x87\x01\n" +
 	"\x16ListPromoCodeCampaigns\x124.api.wallet.service.v1.ListPromoCodeCampaignsRequest\x1a5.api.wallet.service.v1.ListPromoCodeCampaignsResponse\"\x00\x12\x99\x01\n" +
-	"\x1cListPromoCodeCampaignDetails\x12:.api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest\x1a;.api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse\"\x00\x12{\n" +
-	"\x12GeneratePromoCodes\x120.api.wallet.service.v1.GeneratePromoCodesRequest\x1a1.api.wallet.service.v1.GeneratePromoCodesResponse\"\x00\x12\x9a\x01\n" +
+	"\x1cListPromoCodeCampaignDetails\x12:.api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest\x1a;.api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse\"\x00\x12\x90\x01\n" +
+	"\x19GenerateOneTimePromoCodes\x127.api.wallet.service.v1.GenerateOneTimePromoCodesRequest\x1a8.api.wallet.service.v1.GenerateOneTimePromoCodesResponse\"\x00\x12\x96\x01\n" +
+	"\x1bGenerateUniversalPromoCodes\x129.api.wallet.service.v1.GenerateUniversalPromoCodesRequest\x1a:.api.wallet.service.v1.GenerateUniversalPromoCodesResponse\"\x00\x12\x8a\x01\n" +
+	"\x17ListUniversalCodeUsages\x125.api.wallet.service.v1.ListUniversalCodeUsagesRequest\x1a6.api.wallet.service.v1.ListUniversalCodeUsagesResponse\"\x00\x12\x9a\x01\n" +
 	"\x10GetPromoCodeInfo\x12..api.wallet.service.v1.GetPromoCodeInfoRequest\x1a/.api.wallet.service.v1.GetPromoCodeInfoResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/wallet/promo-code/info\x12\x95\x01\n" +
 	"\x0eClaimPromoCode\x12,.api.wallet.service.v1.ClaimPromoCodeRequest\x1a-.api.wallet.service.v1.ClaimPromoCodeResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/wallet/promo-code/claim\x12\xcb\x01\n" +
 	"\x1cGetUserDepositRewardSequence\x12:.api.wallet.service.v1.GetUserDepositRewardSequenceRequest\x1a;.api.wallet.service.v1.GetUserDepositRewardSequenceResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/wallet/deposit-reward/user-sequence\x12\x9c\x01\n" +
@@ -15509,17 +15511,21 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*UpdatePromoCodeCampaignStatusRequest)(nil),                // 173: api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
 	(*ListPromoCodeCampaignsRequest)(nil),                       // 174: api.wallet.service.v1.ListPromoCodeCampaignsRequest
 	(*ListPromoCodeCampaignDetailsRequest)(nil),                 // 175: api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
-	(*GeneratePromoCodesRequest)(nil),                           // 176: api.wallet.service.v1.GeneratePromoCodesRequest
-	(*GetPromoCodeInfoRequest)(nil),                             // 177: api.wallet.service.v1.GetPromoCodeInfoRequest
-	(*ClaimPromoCodeRequest)(nil),                               // 178: api.wallet.service.v1.ClaimPromoCodeRequest
-	(*CreatePromoCodeCampaignResponse)(nil),                     // 179: api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	(*UpdatePromoCodeCampaignResponse)(nil),                     // 180: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	(*UpdatePromoCodeCampaignStatusResponse)(nil),               // 181: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	(*ListPromoCodeCampaignsResponse)(nil),                      // 182: api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	(*ListPromoCodeCampaignDetailsResponse)(nil),                // 183: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	(*GeneratePromoCodesResponse)(nil),                          // 184: api.wallet.service.v1.GeneratePromoCodesResponse
-	(*GetPromoCodeInfoResponse)(nil),                            // 185: api.wallet.service.v1.GetPromoCodeInfoResponse
-	(*ClaimPromoCodeResponse)(nil),                              // 186: api.wallet.service.v1.ClaimPromoCodeResponse
+	(*GenerateOneTimePromoCodesRequest)(nil),                    // 176: api.wallet.service.v1.GenerateOneTimePromoCodesRequest
+	(*GenerateUniversalPromoCodesRequest)(nil),                  // 177: api.wallet.service.v1.GenerateUniversalPromoCodesRequest
+	(*ListUniversalCodeUsagesRequest)(nil),                      // 178: api.wallet.service.v1.ListUniversalCodeUsagesRequest
+	(*GetPromoCodeInfoRequest)(nil),                             // 179: api.wallet.service.v1.GetPromoCodeInfoRequest
+	(*ClaimPromoCodeRequest)(nil),                               // 180: api.wallet.service.v1.ClaimPromoCodeRequest
+	(*CreatePromoCodeCampaignResponse)(nil),                     // 181: api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	(*UpdatePromoCodeCampaignResponse)(nil),                     // 182: api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	(*UpdatePromoCodeCampaignStatusResponse)(nil),               // 183: api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	(*ListPromoCodeCampaignsResponse)(nil),                      // 184: api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	(*ListPromoCodeCampaignDetailsResponse)(nil),                // 185: api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	(*GenerateOneTimePromoCodesResponse)(nil),                   // 186: api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	(*GenerateUniversalPromoCodesResponse)(nil),                 // 187: api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	(*ListUniversalCodeUsagesResponse)(nil),                     // 188: api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	(*GetPromoCodeInfoResponse)(nil),                            // 189: api.wallet.service.v1.GetPromoCodeInfoResponse
+	(*ClaimPromoCodeResponse)(nil),                              // 190: api.wallet.service.v1.ClaimPromoCodeResponse
 }
 var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	139, // 0: api.wallet.service.v1.GetUserBalancesResponse.balances:type_name -> api.wallet.service.v1.GetUserBalancesResponse.Balance
@@ -15757,104 +15763,108 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	173, // 232: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:input_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusRequest
 	174, // 233: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:input_type -> api.wallet.service.v1.ListPromoCodeCampaignsRequest
 	175, // 234: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:input_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsRequest
-	176, // 235: api.wallet.service.v1.Wallet.GeneratePromoCodes:input_type -> api.wallet.service.v1.GeneratePromoCodesRequest
-	177, // 236: api.wallet.service.v1.Wallet.GetPromoCodeInfo:input_type -> api.wallet.service.v1.GetPromoCodeInfoRequest
-	178, // 237: api.wallet.service.v1.Wallet.ClaimPromoCode:input_type -> api.wallet.service.v1.ClaimPromoCodeRequest
-	87,  // 238: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:input_type -> api.wallet.service.v1.GetUserDepositRewardSequenceRequest
-	89,  // 239: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:input_type -> api.wallet.service.v1.GetGamificationCurrencyConfigRequest
-	93,  // 240: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
-	95,  // 241: api.wallet.service.v1.Wallet.UpdateWalletConfig:input_type -> api.wallet.service.v1.UpdateWalletConfigRequest
-	97,  // 242: api.wallet.service.v1.Wallet.BonusTransfer:input_type -> api.wallet.service.v1.BonusTransferRequest
-	102, // 243: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:input_type -> api.wallet.service.v1.AddResponsibleGamblingConfigRequest
-	104, // 244: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:input_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest
-	108, // 245: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:input_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsRequest
-	110, // 246: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:input_type -> api.wallet.service.v1.GetResponsibleGamblingConfigRequest
-	112, // 247: api.wallet.service.v1.Wallet.ListCustomerRecords:input_type -> api.wallet.service.v1.ListCustomerRecordsRequest
-	114, // 248: api.wallet.service.v1.Wallet.ExportCustomerRecords:input_type -> api.wallet.service.v1.ExportCustomerRecordsRequest
-	117, // 249: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:input_type -> api.wallet.service.v1.SetFICAThresholdConfigRequest
-	119, // 250: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:input_type -> api.wallet.service.v1.GetFICAThresholdConfigRequest
-	121, // 251: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:input_type -> api.wallet.service.v1.ListFICAThresholdTransactionsRequest
-	123, // 252: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:input_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsRequest
-	125, // 253: api.wallet.service.v1.Wallet.ListBalancesByUserIds:input_type -> api.wallet.service.v1.ListBalancesByUserIdsRequest
-	127, // 254: api.wallet.service.v1.Wallet.ListManualJournalEntries:input_type -> api.wallet.service.v1.ListManualJournalEntriesRequest
-	129, // 255: api.wallet.service.v1.Wallet.ExportManualJournalEntries:input_type -> api.wallet.service.v1.ExportManualJournalEntriesRequest
-	131, // 256: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:input_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsRequest
-	133, // 257: api.wallet.service.v1.Wallet.ListUserOverview:input_type -> api.wallet.service.v1.ListUserOverviewRequest
-	135, // 258: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:input_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryRequest
-	137, // 259: api.wallet.service.v1.Wallet.CreditFreespinWin:input_type -> api.wallet.service.v1.CreditFreespinWinRequest
-	1,   // 260: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
-	3,   // 261: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
-	101, // 262: api.wallet.service.v1.Wallet.GetUserBalanceDetails:output_type -> api.wallet.service.v1.GetUserBalanceDetailsResponse
-	5,   // 263: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	7,   // 264: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
-	10,  // 265: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
-	12,  // 266: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
-	15,  // 267: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
-	17,  // 268: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
-	19,  // 269: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
-	21,  // 270: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	23,  // 271: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
-	25,  // 272: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
-	27,  // 273: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
-	29,  // 274: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
-	31,  // 275: api.wallet.service.v1.Wallet.GetExchangeRatesWithBaseCurrency:output_type -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse
-	33,  // 276: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
-	35,  // 277: api.wallet.service.v1.Wallet.ListUserTransactionSummaries:output_type -> api.wallet.service.v1.ListUserTransactionSummariesResponse
-	37,  // 278: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
-	39,  // 279: api.wallet.service.v1.Wallet.GetOverviewDashboardFromWallet:output_type -> api.wallet.service.v1.GetOverviewDashboardFromWalletResponse
-	42,  // 280: api.wallet.service.v1.Wallet.AddCurrency:output_type -> api.wallet.service.v1.AddCurrencyResponse
-	44,  // 281: api.wallet.service.v1.Wallet.UpdateCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
-	46,  // 282: api.wallet.service.v1.Wallet.GetCurrencies:output_type -> api.wallet.service.v1.GetCurrenciesResponse
-	48,  // 283: api.wallet.service.v1.Wallet.ListCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
-	50,  // 284: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
-	52,  // 285: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
-	55,  // 286: api.wallet.service.v1.Wallet.ListBottomOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	57,  // 287: api.wallet.service.v1.Wallet.OperatorTransfer:output_type -> api.wallet.service.v1.OperatorTransferResponse
-	59,  // 288: api.wallet.service.v1.Wallet.OperatorSwap:output_type -> api.wallet.service.v1.OperatorSwapResponse
-	61,  // 289: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
-	63,  // 290: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
-	65,  // 291: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
-	67,  // 292: api.wallet.service.v1.Wallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
-	70,  // 293: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
-	72,  // 294: api.wallet.service.v1.Wallet.OperatorDebit:output_type -> api.wallet.service.v1.OperatorDebitResponse
-	74,  // 295: api.wallet.service.v1.Wallet.UpdateOperatorBalance:output_type -> api.wallet.service.v1.UpdateOperatorBalanceResponse
-	76,  // 296: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:output_type -> api.wallet.service.v1.GetOperatorTransactionSummaryResponse
-	78,  // 297: api.wallet.service.v1.Wallet.GetOperatorBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsResponse
-	82,  // 298: api.wallet.service.v1.Wallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
-	84,  // 299: api.wallet.service.v1.Wallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	86,  // 300: api.wallet.service.v1.Wallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
-	179, // 301: api.wallet.service.v1.Wallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
-	180, // 302: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
-	181, // 303: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
-	182, // 304: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
-	183, // 305: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
-	184, // 306: api.wallet.service.v1.Wallet.GeneratePromoCodes:output_type -> api.wallet.service.v1.GeneratePromoCodesResponse
-	185, // 307: api.wallet.service.v1.Wallet.GetPromoCodeInfo:output_type -> api.wallet.service.v1.GetPromoCodeInfoResponse
-	186, // 308: api.wallet.service.v1.Wallet.ClaimPromoCode:output_type -> api.wallet.service.v1.ClaimPromoCodeResponse
-	88,  // 309: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:output_type -> api.wallet.service.v1.GetUserDepositRewardSequenceResponse
-	92,  // 310: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	94,  // 311: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	96,  // 312: api.wallet.service.v1.Wallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
-	98,  // 313: api.wallet.service.v1.Wallet.BonusTransfer:output_type -> api.wallet.service.v1.BonusTransferResponse
-	103, // 314: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:output_type -> api.wallet.service.v1.AddResponsibleGamblingConfigResponse
-	105, // 315: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	109, // 316: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	111, // 317: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:output_type -> api.wallet.service.v1.GetResponsibleGamblingConfigResponse
-	113, // 318: api.wallet.service.v1.Wallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
-	115, // 319: api.wallet.service.v1.Wallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
-	118, // 320: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
-	120, // 321: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
-	122, // 322: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	124, // 323: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	126, // 324: api.wallet.service.v1.Wallet.ListBalancesByUserIds:output_type -> api.wallet.service.v1.ListBalancesByUserIdsResponse
-	128, // 325: api.wallet.service.v1.Wallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
-	130, // 326: api.wallet.service.v1.Wallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
-	132, // 327: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:output_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsResponse
-	134, // 328: api.wallet.service.v1.Wallet.ListUserOverview:output_type -> api.wallet.service.v1.ListUserOverviewResponse
-	136, // 329: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:output_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryResponse
-	138, // 330: api.wallet.service.v1.Wallet.CreditFreespinWin:output_type -> api.wallet.service.v1.CreditFreespinWinResponse
-	260, // [260:331] is the sub-list for method output_type
-	189, // [189:260] is the sub-list for method input_type
+	176, // 235: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:input_type -> api.wallet.service.v1.GenerateOneTimePromoCodesRequest
+	177, // 236: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:input_type -> api.wallet.service.v1.GenerateUniversalPromoCodesRequest
+	178, // 237: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:input_type -> api.wallet.service.v1.ListUniversalCodeUsagesRequest
+	179, // 238: api.wallet.service.v1.Wallet.GetPromoCodeInfo:input_type -> api.wallet.service.v1.GetPromoCodeInfoRequest
+	180, // 239: api.wallet.service.v1.Wallet.ClaimPromoCode:input_type -> api.wallet.service.v1.ClaimPromoCodeRequest
+	87,  // 240: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:input_type -> api.wallet.service.v1.GetUserDepositRewardSequenceRequest
+	89,  // 241: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:input_type -> api.wallet.service.v1.GetGamificationCurrencyConfigRequest
+	93,  // 242: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:input_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest
+	95,  // 243: api.wallet.service.v1.Wallet.UpdateWalletConfig:input_type -> api.wallet.service.v1.UpdateWalletConfigRequest
+	97,  // 244: api.wallet.service.v1.Wallet.BonusTransfer:input_type -> api.wallet.service.v1.BonusTransferRequest
+	102, // 245: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:input_type -> api.wallet.service.v1.AddResponsibleGamblingConfigRequest
+	104, // 246: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:input_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest
+	108, // 247: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:input_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsRequest
+	110, // 248: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:input_type -> api.wallet.service.v1.GetResponsibleGamblingConfigRequest
+	112, // 249: api.wallet.service.v1.Wallet.ListCustomerRecords:input_type -> api.wallet.service.v1.ListCustomerRecordsRequest
+	114, // 250: api.wallet.service.v1.Wallet.ExportCustomerRecords:input_type -> api.wallet.service.v1.ExportCustomerRecordsRequest
+	117, // 251: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:input_type -> api.wallet.service.v1.SetFICAThresholdConfigRequest
+	119, // 252: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:input_type -> api.wallet.service.v1.GetFICAThresholdConfigRequest
+	121, // 253: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:input_type -> api.wallet.service.v1.ListFICAThresholdTransactionsRequest
+	123, // 254: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:input_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsRequest
+	125, // 255: api.wallet.service.v1.Wallet.ListBalancesByUserIds:input_type -> api.wallet.service.v1.ListBalancesByUserIdsRequest
+	127, // 256: api.wallet.service.v1.Wallet.ListManualJournalEntries:input_type -> api.wallet.service.v1.ListManualJournalEntriesRequest
+	129, // 257: api.wallet.service.v1.Wallet.ExportManualJournalEntries:input_type -> api.wallet.service.v1.ExportManualJournalEntriesRequest
+	131, // 258: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:input_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsRequest
+	133, // 259: api.wallet.service.v1.Wallet.ListUserOverview:input_type -> api.wallet.service.v1.ListUserOverviewRequest
+	135, // 260: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:input_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryRequest
+	137, // 261: api.wallet.service.v1.Wallet.CreditFreespinWin:input_type -> api.wallet.service.v1.CreditFreespinWinRequest
+	1,   // 262: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
+	3,   // 263: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
+	101, // 264: api.wallet.service.v1.Wallet.GetUserBalanceDetails:output_type -> api.wallet.service.v1.GetUserBalanceDetailsResponse
+	5,   // 265: api.wallet.service.v1.Wallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
+	7,   // 266: api.wallet.service.v1.Wallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	10,  // 267: api.wallet.service.v1.Wallet.GameDebit:output_type -> api.wallet.service.v1.GameDebitResponse
+	12,  // 268: api.wallet.service.v1.Wallet.GameCredit:output_type -> api.wallet.service.v1.GameCreditResponse
+	15,  // 269: api.wallet.service.v1.Wallet.Freeze:output_type -> api.wallet.service.v1.FreezeResponse
+	17,  // 270: api.wallet.service.v1.Wallet.Settle:output_type -> api.wallet.service.v1.SettleResponse
+	19,  // 271: api.wallet.service.v1.Wallet.Rollback:output_type -> api.wallet.service.v1.RollbackResponse
+	21,  // 272: api.wallet.service.v1.Wallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	23,  // 273: api.wallet.service.v1.Wallet.ListWalletBalanceTransactions:output_type -> api.wallet.service.v1.ListWalletBalanceTransactionsResponse
+	25,  // 274: api.wallet.service.v1.Wallet.GetWalletBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse
+	27,  // 275: api.wallet.service.v1.Wallet.GetWalletCreditTransactions:output_type -> api.wallet.service.v1.GetWalletCreditTransactionsResponse
+	29,  // 276: api.wallet.service.v1.Wallet.GetExchangeRates:output_type -> api.wallet.service.v1.GetExchangeRatesResponse
+	31,  // 277: api.wallet.service.v1.Wallet.GetExchangeRatesWithBaseCurrency:output_type -> api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse
+	33,  // 278: api.wallet.service.v1.Wallet.GetUserTransactionSummary:output_type -> api.wallet.service.v1.GetUserTransactionSummaryResponse
+	35,  // 279: api.wallet.service.v1.Wallet.ListUserTransactionSummaries:output_type -> api.wallet.service.v1.ListUserTransactionSummariesResponse
+	37,  // 280: api.wallet.service.v1.Wallet.GetBackofficeUserOverviewFromWallet:output_type -> api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse
+	39,  // 281: api.wallet.service.v1.Wallet.GetOverviewDashboardFromWallet:output_type -> api.wallet.service.v1.GetOverviewDashboardFromWalletResponse
+	42,  // 282: api.wallet.service.v1.Wallet.AddCurrency:output_type -> api.wallet.service.v1.AddCurrencyResponse
+	44,  // 283: api.wallet.service.v1.Wallet.UpdateCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
+	46,  // 284: api.wallet.service.v1.Wallet.GetCurrencies:output_type -> api.wallet.service.v1.GetCurrenciesResponse
+	48,  // 285: api.wallet.service.v1.Wallet.ListCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
+	50,  // 286: api.wallet.service.v1.Wallet.UpdateOperatorCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
+	52,  // 287: api.wallet.service.v1.Wallet.UpdateUserCurrency:output_type -> api.wallet.service.v1.UpdateUserCurrencyResponse
+	55,  // 288: api.wallet.service.v1.Wallet.ListBottomOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	57,  // 289: api.wallet.service.v1.Wallet.OperatorTransfer:output_type -> api.wallet.service.v1.OperatorTransferResponse
+	59,  // 290: api.wallet.service.v1.Wallet.OperatorSwap:output_type -> api.wallet.service.v1.OperatorSwapResponse
+	61,  // 291: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
+	63,  // 292: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
+	65,  // 293: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
+	67,  // 294: api.wallet.service.v1.Wallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
+	70,  // 295: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
+	72,  // 296: api.wallet.service.v1.Wallet.OperatorDebit:output_type -> api.wallet.service.v1.OperatorDebitResponse
+	74,  // 297: api.wallet.service.v1.Wallet.UpdateOperatorBalance:output_type -> api.wallet.service.v1.UpdateOperatorBalanceResponse
+	76,  // 298: api.wallet.service.v1.Wallet.GetOperatorTransactionSummary:output_type -> api.wallet.service.v1.GetOperatorTransactionSummaryResponse
+	78,  // 299: api.wallet.service.v1.Wallet.GetOperatorBalanceTransactionsByIds:output_type -> api.wallet.service.v1.GetOperatorBalanceTransactionsByIdsResponse
+	82,  // 300: api.wallet.service.v1.Wallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
+	84,  // 301: api.wallet.service.v1.Wallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	86,  // 302: api.wallet.service.v1.Wallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
+	181, // 303: api.wallet.service.v1.Wallet.CreatePromoCodeCampaign:output_type -> api.wallet.service.v1.CreatePromoCodeCampaignResponse
+	182, // 304: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaign:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignResponse
+	183, // 305: api.wallet.service.v1.Wallet.UpdatePromoCodeCampaignStatus:output_type -> api.wallet.service.v1.UpdatePromoCodeCampaignStatusResponse
+	184, // 306: api.wallet.service.v1.Wallet.ListPromoCodeCampaigns:output_type -> api.wallet.service.v1.ListPromoCodeCampaignsResponse
+	185, // 307: api.wallet.service.v1.Wallet.ListPromoCodeCampaignDetails:output_type -> api.wallet.service.v1.ListPromoCodeCampaignDetailsResponse
+	186, // 308: api.wallet.service.v1.Wallet.GenerateOneTimePromoCodes:output_type -> api.wallet.service.v1.GenerateOneTimePromoCodesResponse
+	187, // 309: api.wallet.service.v1.Wallet.GenerateUniversalPromoCodes:output_type -> api.wallet.service.v1.GenerateUniversalPromoCodesResponse
+	188, // 310: api.wallet.service.v1.Wallet.ListUniversalCodeUsages:output_type -> api.wallet.service.v1.ListUniversalCodeUsagesResponse
+	189, // 311: api.wallet.service.v1.Wallet.GetPromoCodeInfo:output_type -> api.wallet.service.v1.GetPromoCodeInfoResponse
+	190, // 312: api.wallet.service.v1.Wallet.ClaimPromoCode:output_type -> api.wallet.service.v1.ClaimPromoCodeResponse
+	88,  // 313: api.wallet.service.v1.Wallet.GetUserDepositRewardSequence:output_type -> api.wallet.service.v1.GetUserDepositRewardSequenceResponse
+	92,  // 314: api.wallet.service.v1.Wallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	94,  // 315: api.wallet.service.v1.Wallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	96,  // 316: api.wallet.service.v1.Wallet.UpdateWalletConfig:output_type -> api.wallet.service.v1.UpdateWalletConfigResponse
+	98,  // 317: api.wallet.service.v1.Wallet.BonusTransfer:output_type -> api.wallet.service.v1.BonusTransferResponse
+	103, // 318: api.wallet.service.v1.Wallet.AddResponsibleGamblingConfig:output_type -> api.wallet.service.v1.AddResponsibleGamblingConfigResponse
+	105, // 319: api.wallet.service.v1.Wallet.DeleteResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	109, // 320: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	111, // 321: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:output_type -> api.wallet.service.v1.GetResponsibleGamblingConfigResponse
+	113, // 322: api.wallet.service.v1.Wallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
+	115, // 323: api.wallet.service.v1.Wallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
+	118, // 324: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
+	120, // 325: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
+	122, // 326: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	124, // 327: api.wallet.service.v1.Wallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	126, // 328: api.wallet.service.v1.Wallet.ListBalancesByUserIds:output_type -> api.wallet.service.v1.ListBalancesByUserIdsResponse
+	128, // 329: api.wallet.service.v1.Wallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
+	130, // 330: api.wallet.service.v1.Wallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
+	132, // 331: api.wallet.service.v1.Wallet.ListTimeRangeDepositCredits:output_type -> api.wallet.service.v1.ListTimeRangeDepositCreditsResponse
+	134, // 332: api.wallet.service.v1.Wallet.ListUserOverview:output_type -> api.wallet.service.v1.ListUserOverviewResponse
+	136, // 333: api.wallet.service.v1.Wallet.GetUserGameTransactionsSummary:output_type -> api.wallet.service.v1.GetUserGameTransactionsSummaryResponse
+	138, // 334: api.wallet.service.v1.Wallet.CreditFreespinWin:output_type -> api.wallet.service.v1.CreditFreespinWinResponse
+	262, // [262:335] is the sub-list for method output_type
+	189, // [189:262] is the sub-list for method input_type
 	189, // [189:189] is the sub-list for extension type_name
 	189, // [189:189] is the sub-list for extension extendee
 	0,   // [0:189] is the sub-list for field type_name

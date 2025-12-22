@@ -27,7 +27,8 @@ const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.bac
 const OperationBackofficeWalletExportCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
 const OperationBackofficeWalletExportFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 const OperationBackofficeWalletExportManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
-const OperationBackofficeWalletGeneratePromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GeneratePromoCodes"
+const OperationBackofficeWalletGenerateOneTimePromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GenerateOneTimePromoCodes"
+const OperationBackofficeWalletGenerateUniversalPromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GenerateUniversalPromoCodes"
 const OperationBackofficeWalletGetDepositRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
@@ -43,6 +44,7 @@ const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffic
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
 const OperationBackofficeWalletListPromoCodeCampaignDetails = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaignDetails"
 const OperationBackofficeWalletListPromoCodeCampaigns = "/api.backoffice.service.v1.BackofficeWallet/ListPromoCodeCampaigns"
+const OperationBackofficeWalletListUniversalCodeUsages = "/api.backoffice.service.v1.BackofficeWallet/ListUniversalCodeUsages"
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
 const OperationBackofficeWalletListWalletCurrencies = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
 const OperationBackofficeWalletListWalletResponsibleGamblingConfigs = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
@@ -77,8 +79,10 @@ type BackofficeWalletHTTPServer interface {
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	// ExportManualJournalEntries ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
-	// GeneratePromoCodes GeneratePromoCodes generates codes for a one_time campaign
-	GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*v1.GeneratePromoCodesResponse, error)
+	// GenerateOneTimePromoCodes GenerateOneTimePromoCodes generates codes for a one_time campaign
+	GenerateOneTimePromoCodes(context.Context, *GenerateOneTimePromoCodesRequest) (*v1.GenerateOneTimePromoCodesResponse, error)
+	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
+	GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*v1.GenerateUniversalPromoCodesResponse, error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -105,6 +109,8 @@ type BackofficeWalletHTTPServer interface {
 	ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*v1.ListPromoCodeCampaignDetailsResponse, error)
 	// ListPromoCodeCampaigns ListPromoCodeCampaigns lists all promo code campaigns
 	ListPromoCodeCampaigns(context.Context, *ListPromoCodeCampaignsRequest) (*v1.ListPromoCodeCampaignsResponse, error)
+	// ListUniversalCodeUsages ListUniversalCodeUsages lists the usages of a universal campaign
+	ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*v1.ListUniversalCodeUsagesResponse, error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
 	// ListWalletCurrencies ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
@@ -171,7 +177,9 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/status/update", _BackofficeWallet_UpdatePromoCodeCampaignStatus0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaigns/list", _BackofficeWallet_ListPromoCodeCampaigns0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/details", _BackofficeWallet_ListPromoCodeCampaignDetails0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/promo-code/codes/generate", _BackofficeWallet_GeneratePromoCodes0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/promo-code/one-time/codes/generate", _BackofficeWallet_GenerateOneTimePromoCodes0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/promo-code/universal/codes/generate", _BackofficeWallet_GenerateUniversalPromoCodes0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/promo-code/universal/usages/list", _BackofficeWallet_ListUniversalCodeUsages0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/gamification/get", _BackofficeWallet_GetGamificationCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/currency/config/update", _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/config/update", _BackofficeWallet_UpdateWalletConfig0_HTTP_Handler(srv))
@@ -761,24 +769,68 @@ func _BackofficeWallet_ListPromoCodeCampaignDetails0_HTTP_Handler(srv Backoffice
 	}
 }
 
-func _BackofficeWallet_GeneratePromoCodes0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_GenerateOneTimePromoCodes0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GeneratePromoCodesRequest
+		var in GenerateOneTimePromoCodesRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletGeneratePromoCodes)
+		http.SetOperation(ctx, OperationBackofficeWalletGenerateOneTimePromoCodes)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GeneratePromoCodes(ctx, req.(*GeneratePromoCodesRequest))
+			return srv.GenerateOneTimePromoCodes(ctx, req.(*GenerateOneTimePromoCodesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GeneratePromoCodesResponse)
+		reply := out.(*v1.GenerateOneTimePromoCodesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_GenerateUniversalPromoCodes0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GenerateUniversalPromoCodesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletGenerateUniversalPromoCodes)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GenerateUniversalPromoCodes(ctx, req.(*GenerateUniversalPromoCodesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GenerateUniversalPromoCodesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_ListUniversalCodeUsages0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListUniversalCodeUsagesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListUniversalCodeUsages)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListUniversalCodeUsages(ctx, req.(*ListUniversalCodeUsagesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListUniversalCodeUsagesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1127,8 +1179,10 @@ type BackofficeWalletHTTPClient interface {
 	ExportFICAThresholdTransactions(ctx context.Context, req *ExportFICAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ExportFICAThresholdTransactionsResponse, err error)
 	// ExportManualJournalEntries ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(ctx context.Context, req *ExportManualJournalEntriesRequest, opts ...http.CallOption) (rsp *v1.ExportManualJournalEntriesResponse, err error)
-	// GeneratePromoCodes GeneratePromoCodes generates codes for a one_time campaign
-	GeneratePromoCodes(ctx context.Context, req *GeneratePromoCodesRequest, opts ...http.CallOption) (rsp *v1.GeneratePromoCodesResponse, err error)
+	// GenerateOneTimePromoCodes GenerateOneTimePromoCodes generates codes for a one_time campaign
+	GenerateOneTimePromoCodes(ctx context.Context, req *GenerateOneTimePromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateOneTimePromoCodesResponse, err error)
+	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
+	GenerateUniversalPromoCodes(ctx context.Context, req *GenerateUniversalPromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateUniversalPromoCodesResponse, err error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
@@ -1155,6 +1209,8 @@ type BackofficeWalletHTTPClient interface {
 	ListPromoCodeCampaignDetails(ctx context.Context, req *ListPromoCodeCampaignDetailsRequest, opts ...http.CallOption) (rsp *v1.ListPromoCodeCampaignDetailsResponse, err error)
 	// ListPromoCodeCampaigns ListPromoCodeCampaigns lists all promo code campaigns
 	ListPromoCodeCampaigns(ctx context.Context, req *ListPromoCodeCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListPromoCodeCampaignsResponse, err error)
+	// ListUniversalCodeUsages ListUniversalCodeUsages lists the usages of a universal campaign
+	ListUniversalCodeUsages(ctx context.Context, req *ListUniversalCodeUsagesRequest, opts ...http.CallOption) (rsp *v1.ListUniversalCodeUsagesResponse, err error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	// ListWalletCurrencies ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
@@ -1298,12 +1354,26 @@ func (c *BackofficeWalletHTTPClientImpl) ExportManualJournalEntries(ctx context.
 	return &out, nil
 }
 
-// GeneratePromoCodes GeneratePromoCodes generates codes for a one_time campaign
-func (c *BackofficeWalletHTTPClientImpl) GeneratePromoCodes(ctx context.Context, in *GeneratePromoCodesRequest, opts ...http.CallOption) (*v1.GeneratePromoCodesResponse, error) {
-	var out v1.GeneratePromoCodesResponse
-	pattern := "/v1/backoffice/wallet/promo-code/codes/generate"
+// GenerateOneTimePromoCodes GenerateOneTimePromoCodes generates codes for a one_time campaign
+func (c *BackofficeWalletHTTPClientImpl) GenerateOneTimePromoCodes(ctx context.Context, in *GenerateOneTimePromoCodesRequest, opts ...http.CallOption) (*v1.GenerateOneTimePromoCodesResponse, error) {
+	var out v1.GenerateOneTimePromoCodesResponse
+	pattern := "/v1/backoffice/wallet/promo-code/one-time/codes/generate"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletGeneratePromoCodes))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGenerateOneTimePromoCodes))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
+func (c *BackofficeWalletHTTPClientImpl) GenerateUniversalPromoCodes(ctx context.Context, in *GenerateUniversalPromoCodesRequest, opts ...http.CallOption) (*v1.GenerateUniversalPromoCodesResponse, error) {
+	var out v1.GenerateUniversalPromoCodesResponse
+	pattern := "/v1/backoffice/wallet/promo-code/universal/codes/generate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletGenerateUniversalPromoCodes))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1510,6 +1580,20 @@ func (c *BackofficeWalletHTTPClientImpl) ListPromoCodeCampaigns(ctx context.Cont
 	pattern := "/v1/backoffice/wallet/promo-code/campaigns/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListPromoCodeCampaigns))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListUniversalCodeUsages ListUniversalCodeUsages lists the usages of a universal campaign
+func (c *BackofficeWalletHTTPClientImpl) ListUniversalCodeUsages(ctx context.Context, in *ListUniversalCodeUsagesRequest, opts ...http.CallOption) (*v1.ListUniversalCodeUsagesResponse, error) {
+	var out v1.ListUniversalCodeUsagesResponse
+	pattern := "/v1/backoffice/wallet/promo-code/universal/usages/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListUniversalCodeUsages))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

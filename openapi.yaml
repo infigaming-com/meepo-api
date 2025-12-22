@@ -5347,17 +5347,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListPromoCodeCampaignsResponse'
-    /v1/backoffice/wallet/promo-code/codes/generate:
+    /v1/backoffice/wallet/promo-code/one-time/codes/generate:
         post:
             tags:
                 - BackofficeWallet
-            description: GeneratePromoCodes generates codes for a one_time campaign
-            operationId: BackofficeWallet_GeneratePromoCodes
+            description: GenerateOneTimePromoCodes generates codes for a one_time campaign
+            operationId: BackofficeWallet_GenerateOneTimePromoCodes
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GeneratePromoCodesRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GenerateOneTimePromoCodesRequest'
                 required: true
             responses:
                 "200":
@@ -5365,7 +5365,45 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GeneratePromoCodesResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.GenerateOneTimePromoCodesResponse'
+    /v1/backoffice/wallet/promo-code/universal/codes/generate:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GenerateUniversalPromoCodes generates codes for a universal campaign
+            operationId: BackofficeWallet_GenerateUniversalPromoCodes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GenerateUniversalPromoCodesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GenerateUniversalPromoCodesResponse'
+    /v1/backoffice/wallet/promo-code/universal/usages/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListUniversalCodeUsages lists the usages of a universal campaign
+            operationId: BackofficeWallet_ListUniversalCodeUsages
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUniversalCodeUsagesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListUniversalCodeUsagesResponse'
     /v1/backoffice/wallet/responsible-gambling/config/delete:
         post:
             tags:
@@ -9816,7 +9854,7 @@ components:
         api.backoffice.service.v1.Generate2faResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.GeneratePromoCodesRequest:
+        api.backoffice.service.v1.GenerateOneTimePromoCodesRequest:
             type: object
             properties:
                 campaignId:
@@ -9830,6 +9868,16 @@ components:
                     type: integer
                     format: int32
             description: Generate Codes for Campaign (one_time only)
+        api.backoffice.service.v1.GenerateUniversalPromoCodesRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                codes:
+                    type: array
+                    items:
+                        type: string
+            description: Generate Codes for Campaign (universal only)
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
@@ -13920,6 +13968,12 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListUniversalCodeUsagesRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+            description: List Universal Code Usages
         api.backoffice.service.v1.ListUnpaidBetsRequest:
             type: object
             properties:
@@ -20193,7 +20247,13 @@ components:
                     format: int32
                 freeSpinValidity:
                     type: string
-        api.wallet.service.v1.GeneratePromoCodesResponse:
+        api.wallet.service.v1.GenerateOneTimePromoCodesResponse:
+            type: object
+            properties:
+                generatedCount:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.GenerateUniversalPromoCodesResponse:
             type: object
             properties:
                 generatedCount:
@@ -20784,6 +20844,24 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.ResponsibleGamblingStatus'
+        api.wallet.service.v1.ListUniversalCodeUsagesResponse:
+            type: object
+            properties:
+                usages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.ListUniversalCodeUsagesResponse_UniversalCodeUsage'
+        api.wallet.service.v1.ListUniversalCodeUsagesResponse_UniversalCodeUsage:
+            type: object
+            properties:
+                code:
+                    type: string
+                usedCount:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.OperatorBalance:
             type: object
             properties:

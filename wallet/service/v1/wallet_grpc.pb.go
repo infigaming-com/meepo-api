@@ -65,7 +65,9 @@ const (
 	Wallet_UpdatePromoCodeCampaignStatus_FullMethodName       = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaignStatus"
 	Wallet_ListPromoCodeCampaigns_FullMethodName              = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaigns"
 	Wallet_ListPromoCodeCampaignDetails_FullMethodName        = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaignDetails"
-	Wallet_GeneratePromoCodes_FullMethodName                  = "/api.wallet.service.v1.Wallet/GeneratePromoCodes"
+	Wallet_GenerateOneTimePromoCodes_FullMethodName           = "/api.wallet.service.v1.Wallet/GenerateOneTimePromoCodes"
+	Wallet_GenerateUniversalPromoCodes_FullMethodName         = "/api.wallet.service.v1.Wallet/GenerateUniversalPromoCodes"
+	Wallet_ListUniversalCodeUsages_FullMethodName             = "/api.wallet.service.v1.Wallet/ListUniversalCodeUsages"
 	Wallet_GetPromoCodeInfo_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
 	Wallet_ClaimPromoCode_FullMethodName                      = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
@@ -174,8 +176,11 @@ type WalletClient interface {
 	ListPromoCodeCampaigns(ctx context.Context, in *ListPromoCodeCampaignsRequest, opts ...grpc.CallOption) (*ListPromoCodeCampaignsResponse, error)
 	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
 	ListPromoCodeCampaignDetails(ctx context.Context, in *ListPromoCodeCampaignDetailsRequest, opts ...grpc.CallOption) (*ListPromoCodeCampaignDetailsResponse, error)
-	// GeneratePromoCodes generates codes for a one_time campaign
-	GeneratePromoCodes(ctx context.Context, in *GeneratePromoCodesRequest, opts ...grpc.CallOption) (*GeneratePromoCodesResponse, error)
+	// GenerateOneTimePromoCodes generates codes for a one_time campaign
+	GenerateOneTimePromoCodes(ctx context.Context, in *GenerateOneTimePromoCodesRequest, opts ...grpc.CallOption) (*GenerateOneTimePromoCodesResponse, error)
+	// GenerateUniversalPromoCodes generates codes for a universal campaign
+	GenerateUniversalPromoCodes(ctx context.Context, in *GenerateUniversalPromoCodesRequest, opts ...grpc.CallOption) (*GenerateUniversalPromoCodesResponse, error)
+	ListUniversalCodeUsages(ctx context.Context, in *ListUniversalCodeUsagesRequest, opts ...grpc.CallOption) (*ListUniversalCodeUsagesResponse, error)
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(ctx context.Context, in *GetPromoCodeInfoRequest, opts ...grpc.CallOption) (*GetPromoCodeInfoResponse, error)
 	// ClaimPromoCode claims promo code reward for the current user
@@ -689,10 +694,30 @@ func (c *walletClient) ListPromoCodeCampaignDetails(ctx context.Context, in *Lis
 	return out, nil
 }
 
-func (c *walletClient) GeneratePromoCodes(ctx context.Context, in *GeneratePromoCodesRequest, opts ...grpc.CallOption) (*GeneratePromoCodesResponse, error) {
+func (c *walletClient) GenerateOneTimePromoCodes(ctx context.Context, in *GenerateOneTimePromoCodesRequest, opts ...grpc.CallOption) (*GenerateOneTimePromoCodesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GeneratePromoCodesResponse)
-	err := c.cc.Invoke(ctx, Wallet_GeneratePromoCodes_FullMethodName, in, out, cOpts...)
+	out := new(GenerateOneTimePromoCodesResponse)
+	err := c.cc.Invoke(ctx, Wallet_GenerateOneTimePromoCodes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GenerateUniversalPromoCodes(ctx context.Context, in *GenerateUniversalPromoCodesRequest, opts ...grpc.CallOption) (*GenerateUniversalPromoCodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GenerateUniversalPromoCodesResponse)
+	err := c.cc.Invoke(ctx, Wallet_GenerateUniversalPromoCodes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListUniversalCodeUsages(ctx context.Context, in *ListUniversalCodeUsagesRequest, opts ...grpc.CallOption) (*ListUniversalCodeUsagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUniversalCodeUsagesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListUniversalCodeUsages_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1021,8 +1046,11 @@ type WalletServer interface {
 	ListPromoCodeCampaigns(context.Context, *ListPromoCodeCampaignsRequest) (*ListPromoCodeCampaignsResponse, error)
 	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
 	ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*ListPromoCodeCampaignDetailsResponse, error)
-	// GeneratePromoCodes generates codes for a one_time campaign
-	GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*GeneratePromoCodesResponse, error)
+	// GenerateOneTimePromoCodes generates codes for a one_time campaign
+	GenerateOneTimePromoCodes(context.Context, *GenerateOneTimePromoCodesRequest) (*GenerateOneTimePromoCodesResponse, error)
+	// GenerateUniversalPromoCodes generates codes for a universal campaign
+	GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*GenerateUniversalPromoCodesResponse, error)
+	ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*ListUniversalCodeUsagesResponse, error)
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error)
 	// ClaimPromoCode claims promo code reward for the current user
@@ -1214,8 +1242,14 @@ func (UnimplementedWalletServer) ListPromoCodeCampaigns(context.Context, *ListPr
 func (UnimplementedWalletServer) ListPromoCodeCampaignDetails(context.Context, *ListPromoCodeCampaignDetailsRequest) (*ListPromoCodeCampaignDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListPromoCodeCampaignDetails not implemented")
 }
-func (UnimplementedWalletServer) GeneratePromoCodes(context.Context, *GeneratePromoCodesRequest) (*GeneratePromoCodesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GeneratePromoCodes not implemented")
+func (UnimplementedWalletServer) GenerateOneTimePromoCodes(context.Context, *GenerateOneTimePromoCodesRequest) (*GenerateOneTimePromoCodesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GenerateOneTimePromoCodes not implemented")
+}
+func (UnimplementedWalletServer) GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*GenerateUniversalPromoCodesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GenerateUniversalPromoCodes not implemented")
+}
+func (UnimplementedWalletServer) ListUniversalCodeUsages(context.Context, *ListUniversalCodeUsagesRequest) (*ListUniversalCodeUsagesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUniversalCodeUsages not implemented")
 }
 func (UnimplementedWalletServer) GetPromoCodeInfo(context.Context, *GetPromoCodeInfoRequest) (*GetPromoCodeInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPromoCodeInfo not implemented")
@@ -2138,20 +2172,56 @@ func _Wallet_ListPromoCodeCampaignDetails_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_GeneratePromoCodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GeneratePromoCodesRequest)
+func _Wallet_GenerateOneTimePromoCodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateOneTimePromoCodesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).GeneratePromoCodes(ctx, in)
+		return srv.(WalletServer).GenerateOneTimePromoCodes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_GeneratePromoCodes_FullMethodName,
+		FullMethod: Wallet_GenerateOneTimePromoCodes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GeneratePromoCodes(ctx, req.(*GeneratePromoCodesRequest))
+		return srv.(WalletServer).GenerateOneTimePromoCodes(ctx, req.(*GenerateOneTimePromoCodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GenerateUniversalPromoCodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateUniversalPromoCodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GenerateUniversalPromoCodes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GenerateUniversalPromoCodes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GenerateUniversalPromoCodes(ctx, req.(*GenerateUniversalPromoCodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListUniversalCodeUsages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUniversalCodeUsagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListUniversalCodeUsages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListUniversalCodeUsages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListUniversalCodeUsages(ctx, req.(*ListUniversalCodeUsagesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2780,8 +2850,16 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_ListPromoCodeCampaignDetails_Handler,
 		},
 		{
-			MethodName: "GeneratePromoCodes",
-			Handler:    _Wallet_GeneratePromoCodes_Handler,
+			MethodName: "GenerateOneTimePromoCodes",
+			Handler:    _Wallet_GenerateOneTimePromoCodes_Handler,
+		},
+		{
+			MethodName: "GenerateUniversalPromoCodes",
+			Handler:    _Wallet_GenerateUniversalPromoCodes_Handler,
+		},
+		{
+			MethodName: "ListUniversalCodeUsages",
+			Handler:    _Wallet_ListUniversalCodeUsages_Handler,
 		},
 		{
 			MethodName: "GetPromoCodeInfo",

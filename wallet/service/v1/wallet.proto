@@ -157,8 +157,13 @@ service Wallet {
 	// ListPromoCodeCampaignDetails lists codes (for one_time) or usages (for universal) by campaign
 	rpc ListPromoCodeCampaignDetails(ListPromoCodeCampaignDetailsRequest) returns (ListPromoCodeCampaignDetailsResponse) {}
 
-	// GeneratePromoCodes generates codes for a one_time campaign
-	rpc GeneratePromoCodes(GeneratePromoCodesRequest) returns (GeneratePromoCodesResponse) {}
+	// GenerateOneTimePromoCodes generates codes for a one_time campaign
+	rpc GenerateOneTimePromoCodes(GenerateOneTimePromoCodesRequest) returns (GenerateOneTimePromoCodesResponse) {}
+
+	// GenerateUniversalPromoCodes generates codes for a universal campaign
+	rpc GenerateUniversalPromoCodes(GenerateUniversalPromoCodesRequest) returns (GenerateUniversalPromoCodesResponse) {}
+
+	rpc ListUniversalCodeUsages(ListUniversalCodeUsagesRequest) returns (ListUniversalCodeUsagesResponse) {}
 
 	// GetPromoCodeInfo returns promo code information and validates conditions for the current user
 	rpc GetPromoCodeInfo(GetPromoCodeInfoRequest) returns (GetPromoCodeInfoResponse) {

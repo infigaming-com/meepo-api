@@ -197,10 +197,26 @@ service BackofficeWallet {
 		};
 	}
 
-	// GeneratePromoCodes generates codes for a one_time campaign
-	rpc GeneratePromoCodes(GeneratePromoCodesRequest) returns (wallet.service.v1.GeneratePromoCodesResponse) {
+	// GenerateOneTimePromoCodes generates codes for a one_time campaign
+	rpc GenerateOneTimePromoCodes(GenerateOneTimePromoCodesRequest) returns (wallet.service.v1.GenerateOneTimePromoCodesResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/promo-code/codes/generate"
+			post: "/v1/backoffice/wallet/promo-code/one-time/codes/generate"
+			body: "*"
+		};
+	}
+
+	// GenerateUniversalPromoCodes generates codes for a universal campaign
+	rpc GenerateUniversalPromoCodes(GenerateUniversalPromoCodesRequest) returns (wallet.service.v1.GenerateUniversalPromoCodesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/universal/codes/generate"
+			body: "*"
+		};
+	}
+
+	// ListUniversalCodeUsages lists the usages of a universal campaign
+	rpc ListUniversalCodeUsages(ListUniversalCodeUsagesRequest) returns (wallet.service.v1.ListUniversalCodeUsagesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/promo-code/universal/usages/list"
 			body: "*"
 		};
 	}
@@ -830,9 +846,20 @@ message ListPromoCodeCampaignDetailsRequest {
 }
 
 // Generate Codes for Campaign (one_time only)
-message GeneratePromoCodesRequest {
+message GenerateOneTimePromoCodesRequest {
 	int64 campaign_id = 1;
 	int32 code_length = 2;
 	string code_format = 3;
 	int32 count = 4;
+}
+
+// Generate Codes for Campaign (universal only)
+message GenerateUniversalPromoCodesRequest {
+	int64 campaign_id = 1;
+	repeated string codes = 2;
+}
+
+// List Universal Code Usages
+message ListUniversalCodeUsagesRequest {
+	int64 campaign_id = 1;
 }

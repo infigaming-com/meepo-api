@@ -267,7 +267,7 @@ message ListPromoCodeCampaignDetailsResponse {
 }
 
 // Generate Codes for Campaign (one_time only)
-message GeneratePromoCodesRequest {
+message GenerateOneTimePromoCodesRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	int64 generated_by_user_id = 2;
 	int64 campaign_id = 3;
@@ -276,8 +276,34 @@ message GeneratePromoCodesRequest {
 	int32 count = 6;                     // 1-10000
 }
 
-message GeneratePromoCodesResponse {
+message GenerateOneTimePromoCodesResponse {
 	int32 generated_count = 1;
+}
+
+// Generate Codes for Campaign (universal only)
+message GenerateUniversalPromoCodesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	int64 campaign_id = 2;
+	repeated string codes = 3;
+}
+
+message GenerateUniversalPromoCodesResponse {
+	int32 generated_count = 1;
+}
+
+// List Universal Code Usages
+message ListUniversalCodeUsagesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	int64 campaign_id = 2;
+}
+
+message ListUniversalCodeUsagesResponse {
+	repeated UniversalCodeUsage usages = 1;
+	message UniversalCodeUsage {
+		string code = 1;
+		int32 used_count = 2;
+		int32 total_count = 3;
+	}
 }
 
 // ============================================
