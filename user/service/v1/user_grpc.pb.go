@@ -104,6 +104,9 @@ const (
 	User_ConfirmClaimVipReward_FullMethodName              = "/api.user.service.v1.User/ConfirmClaimVipReward"
 	User_RequestDailyLossback_FullMethodName               = "/api.user.service.v1.User/RequestDailyLossback"
 	User_GetDailyLossbackStatus_FullMethodName             = "/api.user.service.v1.User/GetDailyLossbackStatus"
+	User_GetUserPrivacySettings_FullMethodName             = "/api.user.service.v1.User/GetUserPrivacySettings"
+	User_UpdateUserPrivacySettings_FullMethodName          = "/api.user.service.v1.User/UpdateUserPrivacySettings"
+	User_GetUsersPrivacySettings_FullMethodName            = "/api.user.service.v1.User/GetUsersPrivacySettings"
 )
 
 // UserClient is the client API for User service.
@@ -246,6 +249,11 @@ type UserClient interface {
 	ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ConfirmClaimVipRewardResponse, error)
 	RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...grpc.CallOption) (*v1.RequestDailyLossbackResponse, error)
 	GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*v1.GetDailyLossbackStatusResponse, error)
+	// Privacy Settings APIs - Frontend
+	GetUserPrivacySettings(ctx context.Context, in *GetUserPrivacySettingsRequest, opts ...grpc.CallOption) (*GetUserPrivacySettingsResponse, error)
+	UpdateUserPrivacySettings(ctx context.Context, in *UpdateUserPrivacySettingsRequest, opts ...grpc.CallOption) (*UpdateUserPrivacySettingsResponse, error)
+	// Privacy Settings APIs - Internal (for push-service batch lookup)
+	GetUsersPrivacySettings(ctx context.Context, in *GetUsersPrivacySettingsRequest, opts ...grpc.CallOption) (*GetUsersPrivacySettingsResponse, error)
 }
 
 type userClient struct {
@@ -1096,6 +1104,36 @@ func (c *userClient) GetDailyLossbackStatus(ctx context.Context, in *GetDailyLos
 	return out, nil
 }
 
+func (c *userClient) GetUserPrivacySettings(ctx context.Context, in *GetUserPrivacySettingsRequest, opts ...grpc.CallOption) (*GetUserPrivacySettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserPrivacySettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetUserPrivacySettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateUserPrivacySettings(ctx context.Context, in *UpdateUserPrivacySettingsRequest, opts ...grpc.CallOption) (*UpdateUserPrivacySettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserPrivacySettingsResponse)
+	err := c.cc.Invoke(ctx, User_UpdateUserPrivacySettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUsersPrivacySettings(ctx context.Context, in *GetUsersPrivacySettingsRequest, opts ...grpc.CallOption) (*GetUsersPrivacySettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUsersPrivacySettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetUsersPrivacySettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1236,6 +1274,11 @@ type UserServer interface {
 	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
 	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
 	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error)
+	// Privacy Settings APIs - Frontend
+	GetUserPrivacySettings(context.Context, *GetUserPrivacySettingsRequest) (*GetUserPrivacySettingsResponse, error)
+	UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error)
+	// Privacy Settings APIs - Internal (for push-service batch lookup)
+	GetUsersPrivacySettings(context.Context, *GetUsersPrivacySettingsRequest) (*GetUsersPrivacySettingsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1497,6 +1540,15 @@ func (UnimplementedUserServer) RequestDailyLossback(context.Context, *RequestDai
 }
 func (UnimplementedUserServer) GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDailyLossbackStatus not implemented")
+}
+func (UnimplementedUserServer) GetUserPrivacySettings(context.Context, *GetUserPrivacySettingsRequest) (*GetUserPrivacySettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserPrivacySettings not implemented")
+}
+func (UnimplementedUserServer) UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateUserPrivacySettings not implemented")
+}
+func (UnimplementedUserServer) GetUsersPrivacySettings(context.Context, *GetUsersPrivacySettingsRequest) (*GetUsersPrivacySettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUsersPrivacySettings not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -3031,6 +3083,60 @@ func _User_GetDailyLossbackStatus_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetUserPrivacySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserPrivacySettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserPrivacySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserPrivacySettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserPrivacySettings(ctx, req.(*GetUserPrivacySettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateUserPrivacySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserPrivacySettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateUserPrivacySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateUserPrivacySettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateUserPrivacySettings(ctx, req.(*UpdateUserPrivacySettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUsersPrivacySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUsersPrivacySettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUsersPrivacySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUsersPrivacySettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUsersPrivacySettings(ctx, req.(*GetUsersPrivacySettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3373,6 +3479,18 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDailyLossbackStatus",
 			Handler:    _User_GetDailyLossbackStatus_Handler,
+		},
+		{
+			MethodName: "GetUserPrivacySettings",
+			Handler:    _User_GetUserPrivacySettings_Handler,
+		},
+		{
+			MethodName: "UpdateUserPrivacySettings",
+			Handler:    _User_UpdateUserPrivacySettings_Handler,
+		},
+		{
+			MethodName: "GetUsersPrivacySettings",
+			Handler:    _User_GetUsersPrivacySettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

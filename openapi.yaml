@@ -2019,7 +2019,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.game.service.v1.AddGameBetDisplayConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddGameBetDisplayConfigRequest'
                 required: true
             responses:
                 "200":
@@ -2027,7 +2027,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.game.service.v1.AddGameBetDisplayConfigResponse'
+                                $ref: '#/components/schemas/api.push.service.v1.AddBetTickerConfigResponse'
     /v1/backoffice/game/bet/dispaly/config/list:
         post:
             tags:
@@ -2037,7 +2037,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameBetDisplayConfigRequest'
                 required: true
             responses:
                 "200":
@@ -2045,7 +2045,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigResponse'
+                                $ref: '#/components/schemas/api.push.service.v1.ListBetTickerConfigResponse'
     /v1/backoffice/game/bet/dispaly/config/update:
         post:
             tags:
@@ -2055,7 +2055,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest'
                 required: true
             responses:
                 "200":
@@ -2063,7 +2063,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigResponse'
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateBetTickerConfigResponse'
     /v1/backoffice/game/bets/export:
         post:
             tags:
@@ -6326,6 +6326,41 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigResponse'
+    /v1/user/privacy-settings:
+        get:
+            tags:
+                - User
+            description: Privacy Settings APIs - Frontend
+            operationId: User_GetUserPrivacySettings
+            parameters:
+                - name: userId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetUserPrivacySettingsResponse'
+        put:
+            tags:
+                - User
+            operationId: User_UpdateUserPrivacySettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateUserPrivacySettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateUserPrivacySettingsResponse'
     /v1/user/responsible-gambling/config/add:
         post:
             tags:
@@ -8553,6 +8588,17 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.AddOperatorApexDomainRequest:
             type: object
             properties:
@@ -12254,6 +12300,11 @@ components:
         api.backoffice.service.v1.ListFreespinsProvidersRequest:
             type: object
             properties: {}
+        api.backoffice.service.v1.ListGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListGameDataRequest:
             type: object
             properties:
@@ -15168,6 +15219,30 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
                 commissionPlanId:
                     type: string
+        api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest_Item'
+                enable:
+                    type: boolean
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                maskingEnabled:
+                    type: boolean
+                maskingRule:
+                    type: string
+        api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest_Item:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -15952,20 +16027,6 @@ components:
                     type: boolean
                 extra:
                     type: string
-        api.game.service.v1.AddGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-        api.game.service.v1.AddGameBetDisplayConfigResponse:
-            type: object
-            properties: {}
         api.game.service.v1.BackofficeBatchUpdateTagGamesRequest:
             type: object
             properties:
@@ -16159,22 +16220,6 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
-        api.game.service.v1.BettingConfig:
-            type: object
-            properties:
-                betCategory:
-                    type: array
-                    items:
-                        type: string
-                miniOdds:
-                    type: number
-                    format: float
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                enable:
-                    type: boolean
         api.game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -16957,29 +17002,6 @@ components:
                     type: string
                 freespinsSupported:
                     type: boolean
-        api.game.service.v1.ListGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-        api.game.service.v1.ListGameBetDisplayConfigResponse:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigResponse_Item'
-                enable:
-                    type: boolean
-        api.game.service.v1.ListGameBetDisplayConfigResponse_Item:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -17426,29 +17448,6 @@ components:
                     type: string
                 bonus_amount:
                     type: string
-        api.game.service.v1.UpdateGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigRequest_Item'
-                enable:
-                    type: boolean
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-        api.game.service.v1.UpdateGameBetDisplayConfigRequest_Item:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-        api.game.service.v1.UpdateGameBetDisplayConfigResponse:
-            type: object
-            properties: {}
         api.game.service.v1.UrlInfo:
             type: object
             properties:
@@ -17461,6 +17460,50 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
+        api.push.service.v1.AddBetTickerConfigResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.BettingFilterConfig:
+            type: object
+            properties:
+                betCategory:
+                    type: array
+                    items:
+                        type: string
+                miniOdds:
+                    type: number
+                    format: float
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                enable:
+                    type: boolean
+        api.push.service.v1.ListBetTickerConfigResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.ListBetTickerConfigResponse_Item'
+                enable:
+                    type: boolean
+                maskingEnabled:
+                    type: boolean
+                maskingRule:
+                    type: string
+        api.push.service.v1.ListBetTickerConfigResponse_Item:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+        api.push.service.v1.UpdateBetTickerConfigResponse:
+            type: object
+            properties: {}
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -18212,6 +18255,11 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.UserAccountGameSettingsStatus'
                 paymentSettingsStatus:
                     $ref: '#/components/schemas/api.user.service.v1.UserAccountPaymentSettingsStatus'
+        api.user.service.v1.GetUserPrivacySettingsResponse:
+            type: object
+            properties:
+                settings:
+                    $ref: '#/components/schemas/api.user.service.v1.UserPrivacySettings'
         api.user.service.v1.GetUserProfileResponse:
             type: object
             properties:
@@ -19094,6 +19142,18 @@ components:
         api.user.service.v1.UpdateUserIdentityResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateUserPrivacySettingsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                invisibleMode:
+                    type: boolean
+                hideBettingRecords:
+                    type: boolean
+        api.user.service.v1.UpdateUserPrivacySettingsResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UpdateUserRequest:
             type: object
             properties:
@@ -19347,6 +19407,16 @@ components:
                     type: boolean
                     description: user phone verification status
             description: UserInfo contains basic user information.
+        api.user.service.v1.UserPrivacySettings:
+            type: object
+            properties:
+                userId:
+                    type: string
+                invisibleMode:
+                    type: boolean
+                hideBettingRecords:
+                    type: boolean
+            description: Privacy Settings Messages
         api.user.service.v1.ValidationRecord:
             type: object
             properties:

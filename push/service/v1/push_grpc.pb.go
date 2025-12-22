@@ -19,8 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Push_SendEmail_FullMethodName            = "/api.push.service.v1.Push/SendEmail"
-	Push_GetNotificationStats_FullMethodName = "/api.push.service.v1.Push/GetNotificationStats"
+	Push_SendEmail_FullMethodName             = "/api.push.service.v1.Push/SendEmail"
+	Push_GetNotificationStats_FullMethodName  = "/api.push.service.v1.Push/GetNotificationStats"
+	Push_AddBetTickerConfig_FullMethodName    = "/api.push.service.v1.Push/AddBetTickerConfig"
+	Push_UpdateBetTickerConfig_FullMethodName = "/api.push.service.v1.Push/UpdateBetTickerConfig"
+	Push_ListBetTickerConfig_FullMethodName   = "/api.push.service.v1.Push/ListBetTickerConfig"
 )
 
 // PushClient is the client API for Push service.
@@ -31,6 +34,10 @@ type PushClient interface {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(ctx context.Context, in *GetNotificationStatsRequest, opts ...grpc.CallOption) (*GetNotificationStatsResponse, error)
+	// BetTicker Config APIs
+	AddBetTickerConfig(ctx context.Context, in *AddBetTickerConfigRequest, opts ...grpc.CallOption) (*AddBetTickerConfigResponse, error)
+	UpdateBetTickerConfig(ctx context.Context, in *UpdateBetTickerConfigRequest, opts ...grpc.CallOption) (*UpdateBetTickerConfigResponse, error)
+	ListBetTickerConfig(ctx context.Context, in *ListBetTickerConfigRequest, opts ...grpc.CallOption) (*ListBetTickerConfigResponse, error)
 }
 
 type pushClient struct {
@@ -61,6 +68,36 @@ func (c *pushClient) GetNotificationStats(ctx context.Context, in *GetNotificati
 	return out, nil
 }
 
+func (c *pushClient) AddBetTickerConfig(ctx context.Context, in *AddBetTickerConfigRequest, opts ...grpc.CallOption) (*AddBetTickerConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddBetTickerConfigResponse)
+	err := c.cc.Invoke(ctx, Push_AddBetTickerConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) UpdateBetTickerConfig(ctx context.Context, in *UpdateBetTickerConfigRequest, opts ...grpc.CallOption) (*UpdateBetTickerConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateBetTickerConfigResponse)
+	err := c.cc.Invoke(ctx, Push_UpdateBetTickerConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) ListBetTickerConfig(ctx context.Context, in *ListBetTickerConfigRequest, opts ...grpc.CallOption) (*ListBetTickerConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBetTickerConfigResponse)
+	err := c.cc.Invoke(ctx, Push_ListBetTickerConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServer is the server API for Push service.
 // All implementations must embed UnimplementedPushServer
 // for forward compatibility.
@@ -69,6 +106,10 @@ type PushServer interface {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error)
+	// BetTicker Config APIs
+	AddBetTickerConfig(context.Context, *AddBetTickerConfigRequest) (*AddBetTickerConfigResponse, error)
+	UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*UpdateBetTickerConfigResponse, error)
+	ListBetTickerConfig(context.Context, *ListBetTickerConfigRequest) (*ListBetTickerConfigResponse, error)
 	mustEmbedUnimplementedPushServer()
 }
 
@@ -84,6 +125,15 @@ func (UnimplementedPushServer) SendEmail(context.Context, *SendEmailRequest) (*S
 }
 func (UnimplementedPushServer) GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetNotificationStats not implemented")
+}
+func (UnimplementedPushServer) AddBetTickerConfig(context.Context, *AddBetTickerConfigRequest) (*AddBetTickerConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddBetTickerConfig not implemented")
+}
+func (UnimplementedPushServer) UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*UpdateBetTickerConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateBetTickerConfig not implemented")
+}
+func (UnimplementedPushServer) ListBetTickerConfig(context.Context, *ListBetTickerConfigRequest) (*ListBetTickerConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListBetTickerConfig not implemented")
 }
 func (UnimplementedPushServer) mustEmbedUnimplementedPushServer() {}
 func (UnimplementedPushServer) testEmbeddedByValue()              {}
@@ -142,6 +192,60 @@ func _Push_GetNotificationStats_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Push_AddBetTickerConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddBetTickerConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).AddBetTickerConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_AddBetTickerConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).AddBetTickerConfig(ctx, req.(*AddBetTickerConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_UpdateBetTickerConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBetTickerConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).UpdateBetTickerConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_UpdateBetTickerConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).UpdateBetTickerConfig(ctx, req.(*UpdateBetTickerConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_ListBetTickerConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBetTickerConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).ListBetTickerConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_ListBetTickerConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).ListBetTickerConfig(ctx, req.(*ListBetTickerConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Push_ServiceDesc is the grpc.ServiceDesc for Push service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +260,18 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNotificationStats",
 			Handler:    _Push_GetNotificationStats_Handler,
+		},
+		{
+			MethodName: "AddBetTickerConfig",
+			Handler:    _Push_AddBetTickerConfig_Handler,
+		},
+		{
+			MethodName: "UpdateBetTickerConfig",
+			Handler:    _Push_UpdateBetTickerConfig_Handler,
+		},
+		{
+			MethodName: "ListBetTickerConfig",
+			Handler:    _Push_ListBetTickerConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
