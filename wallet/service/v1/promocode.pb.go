@@ -10,7 +10,6 @@ import (
 	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -26,12 +25,16 @@ const (
 
 // Free spin config for deposit reward or promo code
 type FreeSpinConfig struct {
-	state         protoimpl.MessageState           `protogen:"open.v1"`
-	Enabled       bool                             `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType    string                           `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
-	Rewards       []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,3,rep,name=rewards,proto3" json:"rewards,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState           `protogen:"open.v1"`
+	Enabled                 bool                             `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	RewardType              string                           `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
+	Currency                string                           `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                       // play currency
+	WageringRequirement     int32                            `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                           `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                            `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
+	Rewards                 []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,7,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *FreeSpinConfig) Reset() {
@@ -78,6 +81,34 @@ func (x *FreeSpinConfig) GetRewardType() string {
 	return ""
 }
 
+func (x *FreeSpinConfig) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *FreeSpinConfig) GetWageringRequirement() int32 {
+	if x != nil {
+		return x.WageringRequirement
+	}
+	return 0
+}
+
+func (x *FreeSpinConfig) GetMaxWithdrawalMultiplier() string {
+	if x != nil {
+		return x.MaxWithdrawalMultiplier
+	}
+	return ""
+}
+
+func (x *FreeSpinConfig) GetRewardValidity() int64 {
+	if x != nil {
+		return x.RewardValidity
+	}
+	return 0
+}
+
 func (x *FreeSpinConfig) GetRewards() []*FreeSpinConfig_FreeSpinReward {
 	if x != nil {
 		return x.Rewards
@@ -87,12 +118,16 @@ func (x *FreeSpinConfig) GetRewards() []*FreeSpinConfig_FreeSpinReward {
 
 // Free bet config for deposit reward or promo code
 type FreeBetConfig struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Enabled       bool                           `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType    string                         `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
-	Rewards       []*FreeBetConfig_FreeBetReward `protobuf:"bytes,3,rep,name=rewards,proto3" json:"rewards,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState         `protogen:"open.v1"`
+	Enabled                 bool                           `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	RewardType              string                         `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
+	Currency                string                         `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                       // settlement currency
+	WageringRequirement     int32                          `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                         `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                          `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
+	Rewards                 []*FreeBetConfig_FreeBetReward `protobuf:"bytes,7,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *FreeBetConfig) Reset() {
@@ -137,6 +172,34 @@ func (x *FreeBetConfig) GetRewardType() string {
 		return x.RewardType
 	}
 	return ""
+}
+
+func (x *FreeBetConfig) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *FreeBetConfig) GetWageringRequirement() int32 {
+	if x != nil {
+		return x.WageringRequirement
+	}
+	return 0
+}
+
+func (x *FreeBetConfig) GetMaxWithdrawalMultiplier() string {
+	if x != nil {
+		return x.MaxWithdrawalMultiplier
+	}
+	return ""
+}
+
+func (x *FreeBetConfig) GetRewardValidity() int64 {
+	if x != nil {
+		return x.RewardValidity
+	}
+	return 0
 }
 
 func (x *FreeBetConfig) GetRewards() []*FreeBetConfig_FreeBetReward {
@@ -1039,6 +1102,7 @@ func (x *CreatePromoCodeCampaignRequest) GetRewardConfigs() *PromoCodeRewardConf
 
 type CreatePromoCodeCampaignResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CampaignId    int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1071,6 +1135,13 @@ func (x *CreatePromoCodeCampaignResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreatePromoCodeCampaignResponse.ProtoReflect.Descriptor instead.
 func (*CreatePromoCodeCampaignResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *CreatePromoCodeCampaignResponse) GetCampaignId() int64 {
+	if x != nil {
+		return x.CampaignId
+	}
+	return 0
 }
 
 // Update Campaign - full update (cannot update status or code_type)
@@ -2437,18 +2508,14 @@ func (x *ConditionValidationResult) GetSatisfied() bool {
 }
 
 type FreeSpinConfig_FreeSpinReward struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Currency                string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"` // play currency
-	ProviderId              string                 `protobuf:"bytes,2,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	GameId                  string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	Level                   int32                  `protobuf:"varint,4,opt,name=level,proto3" json:"level,omitempty"`
-	SpinCount               int32                  `protobuf:"varint,5,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
-	FreeSpinValidity        int64                  `protobuf:"varint,6,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
-	WageringRequirement     int32                  `protobuf:"varint,7,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,8,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,9,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProviderId       string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	GameId           string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	Level            int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
+	SpinCount        int32                  `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
+	FreeSpinValidity int64                  `protobuf:"varint,5,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *FreeSpinConfig_FreeSpinReward) Reset() {
@@ -2479,13 +2546,6 @@ func (x *FreeSpinConfig_FreeSpinReward) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FreeSpinConfig_FreeSpinReward.ProtoReflect.Descriptor instead.
 func (*FreeSpinConfig_FreeSpinReward) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{0, 0}
-}
-
-func (x *FreeSpinConfig_FreeSpinReward) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
 }
 
 func (x *FreeSpinConfig_FreeSpinReward) GetProviderId() string {
@@ -2523,38 +2583,13 @@ func (x *FreeSpinConfig_FreeSpinReward) GetFreeSpinValidity() int64 {
 	return 0
 }
 
-func (x *FreeSpinConfig_FreeSpinReward) GetWageringRequirement() int32 {
-	if x != nil {
-		return x.WageringRequirement
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig_FreeSpinReward) GetMaxWithdrawalMultiplier() string {
-	if x != nil {
-		return x.MaxWithdrawalMultiplier
-	}
-	return ""
-}
-
-func (x *FreeSpinConfig_FreeSpinReward) GetRewardValidity() int64 {
-	if x != nil {
-		return x.RewardValidity
-	}
-	return 0
-}
-
 type FreeBetConfig_FreeBetReward struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Currency                string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"` // settlement currency
-	Template                *structpb.Struct       `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"` // bet template
-	BetCount                int32                  `protobuf:"varint,3,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	FreeBetValidity         int64                  `protobuf:"varint,4,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
-	WageringRequirement     int32                  `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                 `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                  `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TemplateId      string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	BetCount        int32                  `protobuf:"varint,2,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	FreeBetValidity int64                  `protobuf:"varint,3,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *FreeBetConfig_FreeBetReward) Reset() {
@@ -2587,18 +2622,11 @@ func (*FreeBetConfig_FreeBetReward) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_promocode_proto_rawDescGZIP(), []int{1, 0}
 }
 
-func (x *FreeBetConfig_FreeBetReward) GetCurrency() string {
+func (x *FreeBetConfig_FreeBetReward) GetTemplateId() string {
 	if x != nil {
-		return x.Currency
+		return x.TemplateId
 	}
 	return ""
-}
-
-func (x *FreeBetConfig_FreeBetReward) GetTemplate() *structpb.Struct {
-	if x != nil {
-		return x.Template
-	}
-	return nil
 }
 
 func (x *FreeBetConfig_FreeBetReward) GetBetCount() int32 {
@@ -2615,62 +2643,42 @@ func (x *FreeBetConfig_FreeBetReward) GetFreeBetValidity() int64 {
 	return 0
 }
 
-func (x *FreeBetConfig_FreeBetReward) GetWageringRequirement() int32 {
-	if x != nil {
-		return x.WageringRequirement
-	}
-	return 0
-}
-
-func (x *FreeBetConfig_FreeBetReward) GetMaxWithdrawalMultiplier() string {
-	if x != nil {
-		return x.MaxWithdrawalMultiplier
-	}
-	return ""
-}
-
-func (x *FreeBetConfig_FreeBetReward) GetRewardValidity() int64 {
-	if x != nil {
-		return x.RewardValidity
-	}
-	return 0
-}
-
 var File_wallet_service_v1_promocode_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\n" +
-	"!wallet/service/v1/promocode.proto\x12\x15api.wallet.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"\xff\x03\n" +
+	"!wallet/service/v1/promocode.proto\x12\x15api.wallet.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xff\x03\n" +
 	"\x0eFreeSpinConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
-	"rewardType\x12N\n" +
-	"\arewards\x18\x03 \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x1a\xe1\x02\n" +
-	"\x0eFreeSpinReward\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1f\n" +
-	"\vprovider_id\x18\x02 \x01(\tR\n" +
+	"rewardType\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x121\n" +
+	"\x14wagering_requirement\x18\x04 \x01(\x05R\x13wageringRequirement\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
+	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\x12N\n" +
+	"\arewards\x18\a \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x1a\xad\x01\n" +
+	"\x0eFreeSpinReward\x12\x1f\n" +
+	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
-	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x14\n" +
-	"\x05level\x18\x04 \x01(\x05R\x05level\x12\x1d\n" +
+	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12\x14\n" +
+	"\x05level\x18\x03 \x01(\x05R\x05level\x12\x1d\n" +
 	"\n" +
-	"spin_count\x18\x05 \x01(\x05R\tspinCount\x12,\n" +
-	"\x12free_spin_validity\x18\x06 \x01(\x03R\x10freeSpinValidity\x121\n" +
-	"\x14wagering_requirement\x18\a \x01(\x05R\x13wageringRequirement\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\b \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\t \x01(\x03R\x0erewardValidity\"\xdc\x03\n" +
+	"spin_count\x18\x04 \x01(\x05R\tspinCount\x12,\n" +
+	"\x12free_spin_validity\x18\x05 \x01(\x03R\x10freeSpinValidity\"\xc7\x03\n" +
 	"\rFreeBetConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
-	"rewardType\x12L\n" +
-	"\arewards\x18\x03 \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1a\xc1\x02\n" +
-	"\rFreeBetReward\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x123\n" +
-	"\btemplate\x18\x02 \x01(\v2\x17.google.protobuf.StructR\btemplate\x12\x1b\n" +
-	"\tbet_count\x18\x03 \x01(\x05R\bbetCount\x12*\n" +
-	"\x11free_bet_validity\x18\x04 \x01(\x03R\x0ffreeBetValidity\x121\n" +
-	"\x14wagering_requirement\x18\x05 \x01(\x05R\x13wageringRequirement\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\x06 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\a \x01(\x03R\x0erewardValidity\"\xa2\x02\n" +
+	"rewardType\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x121\n" +
+	"\x14wagering_requirement\x18\x04 \x01(\x05R\x13wageringRequirement\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
+	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\x12L\n" +
+	"\arewards\x18\a \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1ay\n" +
+	"\rFreeBetReward\x12\x1f\n" +
+	"\vtemplate_id\x18\x01 \x01(\tR\n" +
+	"templateId\x12\x1b\n" +
+	"\tbet_count\x18\x02 \x01(\x05R\bbetCount\x12*\n" +
+	"\x11free_bet_validity\x18\x03 \x01(\x03R\x0ffreeBetValidity\"\xa2\x02\n" +
 	"\x19PromoCodeBonusMoneyConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
@@ -2749,8 +2757,10 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12W\n" +
 	"\x11reward_conditions\x18\t \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\x12T\n" +
 	"\x0ereward_configs\x18\n" +
-	" \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\"!\n" +
-	"\x1fCreatePromoCodeCampaignResponse\"\xce\x04\n" +
+	" \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\"B\n" +
+	"\x1fCreatePromoCodeCampaignResponse\x12\x1f\n" +
+	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
+	"campaignId\"\xce\x04\n" +
 	"\x1eUpdatePromoCodeCampaignRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
@@ -2928,7 +2938,6 @@ var file_wallet_service_v1_promocode_proto_goTypes = []any{
 	(*FreeBetConfig_FreeBetReward)(nil),           // 34: api.wallet.service.v1.FreeBetConfig.FreeBetReward
 	(*timestamppb.Timestamp)(nil),                 // 35: google.protobuf.Timestamp
 	(*common.OperatorContext)(nil),                // 36: api.common.OperatorContext
-	(*structpb.Struct)(nil),                       // 37: google.protobuf.Struct
 }
 var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
 	33, // 0: api.wallet.service.v1.FreeSpinConfig.rewards:type_name -> api.wallet.service.v1.FreeSpinConfig.FreeSpinReward
@@ -2990,12 +2999,11 @@ var file_wallet_service_v1_promocode_proto_depIdxs = []int32{
 	3,  // 56: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_configs:type_name -> api.wallet.service.v1.PromoCodeRewardConfigs
 	11, // 57: api.wallet.service.v1.GetPromoCodeInfoResponse.reward_conditions:type_name -> api.wallet.service.v1.PromoCodeConditions
 	32, // 58: api.wallet.service.v1.GetPromoCodeInfoResponse.condition_results:type_name -> api.wallet.service.v1.ConditionValidationResult
-	37, // 59: api.wallet.service.v1.FreeBetConfig.FreeBetReward.template:type_name -> google.protobuf.Struct
-	60, // [60:60] is the sub-list for method output_type
-	60, // [60:60] is the sub-list for method input_type
-	60, // [60:60] is the sub-list for extension type_name
-	60, // [60:60] is the sub-list for extension extendee
-	0,  // [0:60] is the sub-list for field type_name
+	59, // [59:59] is the sub-list for method output_type
+	59, // [59:59] is the sub-list for method input_type
+	59, // [59:59] is the sub-list for extension type_name
+	59, // [59:59] is the sub-list for extension extendee
+	0,  // [0:59] is the sub-list for field type_name
 }
 
 func init() { file_wallet_service_v1_promocode_proto_init() }

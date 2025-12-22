@@ -19997,7 +19997,9 @@ components:
             description: Condition validation result
         api.wallet.service.v1.CreatePromoCodeCampaignResponse:
             type: object
-            properties: {}
+            properties:
+                campaignId:
+                    type: string
         api.wallet.service.v1.CreditResponse:
             type: object
             properties:
@@ -20131,22 +20133,7 @@ components:
                     type: boolean
                 rewardType:
                     type: string
-                rewards:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig_FreeBetReward'
-            description: Free bet config for deposit reward or promo code
-        api.wallet.service.v1.FreeBetConfig_FreeBetReward:
-            type: object
-            properties:
                 currency:
-                    type: string
-                template:
-                    type: object
-                betCount:
-                    type: integer
-                    format: int32
-                freeBetValidity:
                     type: string
                 wageringRequirement:
                     type: integer
@@ -20155,12 +20142,36 @@ components:
                     type: string
                 rewardValidity:
                     type: string
+                rewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig_FreeBetReward'
+            description: Free bet config for deposit reward or promo code
+        api.wallet.service.v1.FreeBetConfig_FreeBetReward:
+            type: object
+            properties:
+                templateId:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                freeBetValidity:
+                    type: string
         api.wallet.service.v1.FreeSpinConfig:
             type: object
             properties:
                 enabled:
                     type: boolean
                 rewardType:
+                    type: string
+                currency:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
                     type: string
                 rewards:
                     type: array
@@ -20170,8 +20181,6 @@ components:
         api.wallet.service.v1.FreeSpinConfig_FreeSpinReward:
             type: object
             properties:
-                currency:
-                    type: string
                 providerId:
                     type: string
                 gameId:
@@ -20183,13 +20192,6 @@ components:
                     type: integer
                     format: int32
                 freeSpinValidity:
-                    type: string
-                wageringRequirement:
-                    type: integer
-                    format: int32
-                maxWithdrawalMultiplier:
-                    type: string
-                rewardValidity:
                     type: string
         api.wallet.service.v1.GeneratePromoCodesResponse:
             type: object
@@ -21066,6 +21068,8 @@ components:
                     type: string
                 maxWithdrawalMultiplier:
                     type: string
+                rewardMoneyEnabled:
+                    type: boolean
                 freeSpinConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
                 freeBetConfig:

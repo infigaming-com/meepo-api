@@ -3,7 +3,6 @@ syntax = "proto3";
 package api.wallet.service.v1;
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/struct.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/wallet/service/v1;v1";
@@ -18,17 +17,17 @@ option java_package = "api.wallet.service.v1";
 message FreeSpinConfig {
 	bool enabled = 1;
 	string reward_type = 2;              // cash | bonus (winning credit type)
-	repeated FreeSpinReward rewards = 3;
+	string currency = 3;                 // play currency
+	int32 wagering_requirement = 4;
+	string max_withdrawal_multiplier = 5;
+	int64 reward_validity = 6;          // winning reward validity (ms)
+	repeated FreeSpinReward rewards = 7;
 	message FreeSpinReward {
-		string currency = 1;                 // play currency
-		string provider_id = 2;
-		string game_id = 3;
-		int32 level = 4;
-		int32 spin_count = 5;
-		int64 free_spin_validity = 6;        // ms, 0 = no expiration
-		int32 wagering_requirement = 7;
-		string max_withdrawal_multiplier = 8;
-		int64 reward_validity = 9;          // winning reward validity (ms)
+		string provider_id = 1;
+		string game_id = 2;
+		int32 level = 3;
+		int32 spin_count = 4;
+		int64 free_spin_validity = 5;        // ms, 0 = no expiration
 	}
 }
 
@@ -36,15 +35,15 @@ message FreeSpinConfig {
 message FreeBetConfig {
 	bool enabled = 1;
 	string reward_type = 2;              // cash | bonus (winning credit type)
-	repeated FreeBetReward rewards = 3;
+	string currency = 3;                 // settlement currency
+	int32 wagering_requirement = 4;
+	string max_withdrawal_multiplier = 5;
+	int64 reward_validity = 6;           // winning reward validity (ms)
+	repeated FreeBetReward rewards = 7;
 	message FreeBetReward {
-		string currency = 1;                 // settlement currency
-		google.protobuf.Struct template = 2; // bet template
-		int32 bet_count = 3;
-		int64 free_bet_validity = 4;         // ms, 0 = no expiration
-		int32 wagering_requirement = 5;
-		string max_withdrawal_multiplier = 6;
-		int64 reward_validity = 7;           // winning reward validity (ms)
+		string template_id = 1;
+		int32 bet_count = 2;
+		int64 free_bet_validity = 3;         // ms, 0 = no expiration
 	}
 }
 
@@ -156,6 +155,7 @@ message CreatePromoCodeCampaignRequest {
 }
 
 message CreatePromoCodeCampaignResponse {
+	int64 campaign_id = 1;
 }
 
 // Update Campaign - full update (cannot update status or code_type)

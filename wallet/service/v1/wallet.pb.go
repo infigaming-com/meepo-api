@@ -12518,8 +12518,9 @@ type RewardSequence_TierConfig struct {
 	RewardPercentage        string                 `protobuf:"bytes,3,opt,name=reward_percentage,json=rewardPercentage,proto3" json:"reward_percentage,omitempty"`
 	MaxRewardAmount         string                 `protobuf:"bytes,4,opt,name=max_reward_amount,json=maxRewardAmount,proto3" json:"max_reward_amount,omitempty"`
 	MaxWithdrawalMultiplier string                 `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"` // only available for bonus reward
-	FreeSpinConfig          *FreeSpinConfig        `protobuf:"bytes,6,opt,name=free_spin_config,json=freeSpinConfig,proto3,oneof" json:"free_spin_config,omitempty"`
-	FreeBetConfig           *FreeBetConfig         `protobuf:"bytes,7,opt,name=free_bet_config,json=freeBetConfig,proto3,oneof" json:"free_bet_config,omitempty"`
+	RewardMoneyEnabled      bool                   `protobuf:"varint,6,opt,name=reward_money_enabled,json=rewardMoneyEnabled,proto3" json:"reward_money_enabled,omitempty"`
+	FreeSpinConfig          *FreeSpinConfig        `protobuf:"bytes,7,opt,name=free_spin_config,json=freeSpinConfig,proto3,oneof" json:"free_spin_config,omitempty"`
+	FreeBetConfig           *FreeBetConfig         `protobuf:"bytes,8,opt,name=free_bet_config,json=freeBetConfig,proto3,oneof" json:"free_bet_config,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -12587,6 +12588,13 @@ func (x *RewardSequence_TierConfig) GetMaxWithdrawalMultiplier() string {
 		return x.MaxWithdrawalMultiplier
 	}
 	return ""
+}
+
+func (x *RewardSequence_TierConfig) GetRewardMoneyEnabled() bool {
+	if x != nil {
+		return x.RewardMoneyEnabled
+	}
+	return false
 }
 
 func (x *RewardSequence_TierConfig) GetFreeSpinConfig() *FreeSpinConfig {
@@ -14669,7 +14677,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x84\x01\n" +
 	"+GetOperatorBalanceTransactionsByIdsResponse\x12U\n" +
-	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\"\xf9\x06\n" +
+	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\"\xab\a\n" +
 	"\x0eRewardSequence\x12#\n" +
 	"\rserial_number\x18\x01 \x01(\x05R\fserialNumber\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
@@ -14681,16 +14689,17 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\ftier_configs\x18\a \x03(\v20.api.wallet.service.v1.RewardSequence.TierConfigR\vtierConfigs\x129\n" +
 	"\n" +
 	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x1a\xcf\x03\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x1a\x81\x04\n" +
 	"\n" +
 	"TierConfig\x12,\n" +
 	"\x12min_deposit_amount\x18\x01 \x01(\tR\x10minDepositAmount\x12,\n" +
 	"\x12max_deposit_amount\x18\x02 \x01(\tR\x10maxDepositAmount\x12+\n" +
 	"\x11reward_percentage\x18\x03 \x01(\tR\x10rewardPercentage\x12*\n" +
 	"\x11max_reward_amount\x18\x04 \x01(\tR\x0fmaxRewardAmount\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12T\n" +
-	"\x10free_spin_config\x18\x06 \x01(\v2%.api.wallet.service.v1.FreeSpinConfigH\x00R\x0efreeSpinConfig\x88\x01\x01\x12Q\n" +
-	"\x0ffree_bet_config\x18\a \x01(\v2$.api.wallet.service.v1.FreeBetConfigH\x01R\rfreeBetConfig\x88\x01\x01B\x13\n" +
+	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x120\n" +
+	"\x14reward_money_enabled\x18\x06 \x01(\bR\x12rewardMoneyEnabled\x12T\n" +
+	"\x10free_spin_config\x18\a \x01(\v2%.api.wallet.service.v1.FreeSpinConfigH\x00R\x0efreeSpinConfig\x88\x01\x01\x12Q\n" +
+	"\x0ffree_bet_config\x18\b \x01(\v2$.api.wallet.service.v1.FreeBetConfigH\x01R\rfreeBetConfig\x88\x01\x01B\x13\n" +
 	"\x11_free_spin_configB\x12\n" +
 	"\x10_free_bet_config\"\xb1\x03\n" +
 	"\x13DepositRewardConfig\x124\n" +

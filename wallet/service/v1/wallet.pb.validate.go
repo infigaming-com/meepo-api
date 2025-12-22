@@ -22841,6 +22841,8 @@ func (m *RewardSequence_TierConfig) validate(all bool) error {
 
 	// no validation rules for MaxWithdrawalMultiplier
 
+	// no validation rules for RewardMoneyEnabled
+
 	if m.FreeSpinConfig != nil {
 
 		if all {

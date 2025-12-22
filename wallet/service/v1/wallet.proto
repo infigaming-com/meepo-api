@@ -1205,8 +1205,9 @@ message RewardSequence {
 		string reward_percentage = 3;
 		string max_reward_amount = 4;
 		string max_withdrawal_multiplier = 5; // only available for bonus reward
-		optional FreeSpinConfig free_spin_config = 6;
-		optional FreeBetConfig free_bet_config = 7;
+		bool reward_money_enabled = 6;
+		optional FreeSpinConfig free_spin_config = 7;
+		optional FreeBetConfig free_bet_config = 8;
 	}
 	int32 serial_number = 1;
 	string name = 2;

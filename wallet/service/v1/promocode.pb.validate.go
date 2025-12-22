@@ -61,6 +61,14 @@ func (m *FreeSpinConfig) validate(all bool) error {
 
 	// no validation rules for RewardType
 
+	// no validation rules for Currency
+
+	// no validation rules for WageringRequirement
+
+	// no validation rules for MaxWithdrawalMultiplier
+
+	// no validation rules for RewardValidity
+
 	for idx, item := range m.GetRewards() {
 		_, _ = idx, item
 
@@ -198,6 +206,14 @@ func (m *FreeBetConfig) validate(all bool) error {
 	// no validation rules for Enabled
 
 	// no validation rules for RewardType
+
+	// no validation rules for Currency
+
+	// no validation rules for WageringRequirement
+
+	// no validation rules for MaxWithdrawalMultiplier
+
+	// no validation rules for RewardValidity
 
 	for idx, item := range m.GetRewards() {
 		_, _ = idx, item
@@ -2351,6 +2367,8 @@ func (m *CreatePromoCodeCampaignResponse) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for CampaignId
 
 	if len(errors) > 0 {
 		return CreatePromoCodeCampaignResponseMultiError(errors)
@@ -5367,8 +5385,6 @@ func (m *FreeSpinConfig_FreeSpinReward) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
-
 	// no validation rules for ProviderId
 
 	// no validation rules for GameId
@@ -5378,12 +5394,6 @@ func (m *FreeSpinConfig_FreeSpinReward) validate(all bool) error {
 	// no validation rules for SpinCount
 
 	// no validation rules for FreeSpinValidity
-
-	// no validation rules for WageringRequirement
-
-	// no validation rules for MaxWithdrawalMultiplier
-
-	// no validation rules for RewardValidity
 
 	if len(errors) > 0 {
 		return FreeSpinConfig_FreeSpinRewardMultiError(errors)
@@ -5488,46 +5498,11 @@ func (m *FreeBetConfig_FreeBetReward) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
-
-	if all {
-		switch v := interface{}(m.GetTemplate()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FreeBetConfig_FreeBetRewardValidationError{
-					field:  "Template",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, FreeBetConfig_FreeBetRewardValidationError{
-					field:  "Template",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return FreeBetConfig_FreeBetRewardValidationError{
-				field:  "Template",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for TemplateId
 
 	// no validation rules for BetCount
 
 	// no validation rules for FreeBetValidity
-
-	// no validation rules for WageringRequirement
-
-	// no validation rules for MaxWithdrawalMultiplier
-
-	// no validation rules for RewardValidity
 
 	if len(errors) > 0 {
 		return FreeBetConfig_FreeBetRewardMultiError(errors)
