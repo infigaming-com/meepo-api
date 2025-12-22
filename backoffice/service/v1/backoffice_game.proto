@@ -219,12 +219,6 @@ service BackofficeGame {
 		};
 	}
 
-	rpc IssueFreespins(game.service.v1.IssueFreespinsRequest) returns (game.service.v1.IssueFreespinsResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/game/freespins/issue"
-			body: "*"
-		};
-	}
 	// ============== Game Tags APIs ==============
 
 	// List tags visible to operator (with inheritance from system → retailer → company → operator)
@@ -251,12 +245,6 @@ service BackofficeGame {
 		};
 	}
 
-	rpc IssueFreebets(game.service.v1.IssueFreebetsRequest) returns (game.service.v1.IssueFreebetsResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/game/freebets/issue"
-			body: "*"
-		};
-	}
 	// Delete tag (own level or lower only)
 	rpc BackofficeDeleteGameTag(BackofficeDeleteGameTagRequest) returns (BackofficeDeleteGameTagResponse) {
 		option (google.api.http) = {
