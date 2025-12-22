@@ -10577,7 +10577,8 @@ type IssueFreebetsRequest struct {
 	TemplateId      string                  `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
 	Currency        string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	FreebetId       int64                   `protobuf:"varint,4,opt,name=freebet_id,json=freebetId,proto3" json:"freebet_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -10629,6 +10630,13 @@ func (x *IssueFreebetsRequest) GetCurrency() string {
 func (x *IssueFreebetsRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
+	}
+	return 0
+}
+
+func (x *IssueFreebetsRequest) GetFreebetId() int64 {
+	if x != nil {
+		return x.FreebetId
 	}
 	return 0
 }
@@ -18215,13 +18223,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\ttemplates\x18\x01 \x03(\v2$.api.game.service.v1.FreebetTemplateR\ttemplates\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xb4\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xd3\x01\n" +
 	"\x14IssueFreebetsRequest\x12\x1f\n" +
 	"\vtemplate_id\x18\x01 \x01(\tR\n" +
 	"templateId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xfe\x03\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\n" +
+	"freebet_id\x18\x04 \x01(\x03R\tfreebetId\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xfe\x03\n" +
 	"\x12FreebetIssuedBonus\x12\x19\n" +
 	"\bbonus_id\x18\x01 \x01(\tR\abonusId\x12\x1b\n" +
 	"\tassign_id\x18\x02 \x01(\tR\bassignId\x12\x1f\n" +
