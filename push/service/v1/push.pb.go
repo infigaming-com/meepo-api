@@ -411,6 +411,251 @@ func (x *GetNotificationStatsResponse) GetOperatorStats() []*GetNotificationStat
 	return nil
 }
 
+// Bet Ticker Masking Config Messages
+type OperatorBetTickerMaskingConfig struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId     int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	MaskingEnabled bool                   `protobuf:"varint,2,opt,name=masking_enabled,json=maskingEnabled,proto3" json:"masking_enabled,omitempty"` // When true, usernames are partially masked
+	MaskingRule    string                 `protobuf:"bytes,3,opt,name=masking_rule,json=maskingRule,proto3" json:"masking_rule,omitempty"`           // "default" = first2 + *** + last2
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *OperatorBetTickerMaskingConfig) Reset() {
+	*x = OperatorBetTickerMaskingConfig{}
+	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OperatorBetTickerMaskingConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OperatorBetTickerMaskingConfig) ProtoMessage() {}
+
+func (x *OperatorBetTickerMaskingConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OperatorBetTickerMaskingConfig.ProtoReflect.Descriptor instead.
+func (*OperatorBetTickerMaskingConfig) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *OperatorBetTickerMaskingConfig) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *OperatorBetTickerMaskingConfig) GetMaskingEnabled() bool {
+	if x != nil {
+		return x.MaskingEnabled
+	}
+	return false
+}
+
+func (x *OperatorBetTickerMaskingConfig) GetMaskingRule() string {
+	if x != nil {
+		return x.MaskingRule
+	}
+	return ""
+}
+
+type GetOperatorBetTickerMaskingConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorBetTickerMaskingConfigRequest) Reset() {
+	*x = GetOperatorBetTickerMaskingConfigRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorBetTickerMaskingConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorBetTickerMaskingConfigRequest) ProtoMessage() {}
+
+func (x *GetOperatorBetTickerMaskingConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorBetTickerMaskingConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorBetTickerMaskingConfigRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetOperatorBetTickerMaskingConfigRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+type GetOperatorBetTickerMaskingConfigResponse struct {
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	Config        *OperatorBetTickerMaskingConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorBetTickerMaskingConfigResponse) Reset() {
+	*x = GetOperatorBetTickerMaskingConfigResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorBetTickerMaskingConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorBetTickerMaskingConfigResponse) ProtoMessage() {}
+
+func (x *GetOperatorBetTickerMaskingConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorBetTickerMaskingConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorBetTickerMaskingConfigResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetOperatorBetTickerMaskingConfigResponse) GetConfig() *OperatorBetTickerMaskingConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+type UpdateOperatorBetTickerMaskingConfigRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId     int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	MaskingEnabled bool                   `protobuf:"varint,2,opt,name=masking_enabled,json=maskingEnabled,proto3" json:"masking_enabled,omitempty"`
+	MaskingRule    *string                `protobuf:"bytes,3,opt,name=masking_rule,json=maskingRule,proto3,oneof" json:"masking_rule,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigRequest) Reset() {
+	*x = UpdateOperatorBetTickerMaskingConfigRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOperatorBetTickerMaskingConfigRequest) ProtoMessage() {}
+
+func (x *UpdateOperatorBetTickerMaskingConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOperatorBetTickerMaskingConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorBetTickerMaskingConfigRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigRequest) GetMaskingEnabled() bool {
+	if x != nil {
+		return x.MaskingEnabled
+	}
+	return false
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigRequest) GetMaskingRule() string {
+	if x != nil && x.MaskingRule != nil {
+		return *x.MaskingRule
+	}
+	return ""
+}
+
+type UpdateOperatorBetTickerMaskingConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigResponse) Reset() {
+	*x = UpdateOperatorBetTickerMaskingConfigResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOperatorBetTickerMaskingConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOperatorBetTickerMaskingConfigResponse) ProtoMessage() {}
+
+func (x *UpdateOperatorBetTickerMaskingConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOperatorBetTickerMaskingConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorBetTickerMaskingConfigResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{10}
+}
+
 // Statistics for a single operator
 type GetNotificationStatsResponse_OperatorNotificationStats struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -424,7 +669,7 @@ type GetNotificationStatsResponse_OperatorNotificationStats struct {
 
 func (x *GetNotificationStatsResponse_OperatorNotificationStats) Reset() {
 	*x = GetNotificationStatsResponse_OperatorNotificationStats{}
-	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	mi := &file_push_service_v1_push_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -436,7 +681,7 @@ func (x *GetNotificationStatsResponse_OperatorNotificationStats) String() string
 func (*GetNotificationStatsResponse_OperatorNotificationStats) ProtoMessage() {}
 
 func (x *GetNotificationStatsResponse_OperatorNotificationStats) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_proto_msgTypes[6]
+	mi := &file_push_service_v1_push_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -521,10 +766,29 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"operatorId\x12,\n" +
 	"\x11companyOperatorId\x18\x02 \x01(\x03R\x11companyOperatorId\x12.\n" +
 	"\x12retailerOperatorId\x18\x03 \x01(\x03R\x12retailerOperatorId\x12\x14\n" +
-	"\x05count\x18\x04 \x01(\x05R\x05count2\xe3\x01\n" +
+	"\x05count\x18\x04 \x01(\x05R\x05count\"\x8d\x01\n" +
+	"\x1eOperatorBetTickerMaskingConfig\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12'\n" +
+	"\x0fmasking_enabled\x18\x02 \x01(\bR\x0emaskingEnabled\x12!\n" +
+	"\fmasking_rule\x18\x03 \x01(\tR\vmaskingRule\"K\n" +
+	"(GetOperatorBetTickerMaskingConfigRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\"x\n" +
+	")GetOperatorBetTickerMaskingConfigResponse\x12K\n" +
+	"\x06config\x18\x01 \x01(\v23.api.push.service.v1.OperatorBetTickerMaskingConfigR\x06config\"\xb0\x01\n" +
+	"+UpdateOperatorBetTickerMaskingConfigRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12'\n" +
+	"\x0fmasking_enabled\x18\x02 \x01(\bR\x0emaskingEnabled\x12&\n" +
+	"\fmasking_rule\x18\x03 \x01(\tH\x00R\vmaskingRule\x88\x01\x01B\x0f\n" +
+	"\r_masking_rule\".\n" +
+	",UpdateOperatorBetTickerMaskingConfigResponse2\xba\x04\n" +
 	"\x04Push\x12\\\n" +
 	"\tSendEmail\x12%.api.push.service.v1.SendEmailRequest\x1a&.api.push.service.v1.SendEmailResponse\"\x00\x12}\n" +
-	"\x14GetNotificationStats\x120.api.push.service.v1.GetNotificationStatsRequest\x1a1.api.push.service.v1.GetNotificationStatsResponse\"\x00BO\n" +
+	"\x14GetNotificationStats\x120.api.push.service.v1.GetNotificationStatsRequest\x1a1.api.push.service.v1.GetNotificationStatsResponse\"\x00\x12\xa4\x01\n" +
+	"!GetOperatorBetTickerMaskingConfig\x12=.api.push.service.v1.GetOperatorBetTickerMaskingConfigRequest\x1a>.api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse\"\x00\x12\xad\x01\n" +
+	"$UpdateOperatorBetTickerMaskingConfig\x12@.api.push.service.v1.UpdateOperatorBetTickerMaskingConfigRequest\x1aA.api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
@@ -539,7 +803,7 @@ func file_push_service_v1_push_proto_rawDescGZIP() []byte {
 	return file_push_service_v1_push_proto_rawDescData
 }
 
-var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_push_service_v1_push_proto_goTypes = []any{
 	(*EmailAttachment)(nil),                                        // 0: api.push.service.v1.EmailAttachment
 	(*SendEmailRequest)(nil),                                       // 1: api.push.service.v1.SendEmailRequest
@@ -547,21 +811,31 @@ var file_push_service_v1_push_proto_goTypes = []any{
 	(*TimeRange)(nil),                                              // 3: api.push.service.v1.TimeRange
 	(*GetNotificationStatsRequest)(nil),                            // 4: api.push.service.v1.GetNotificationStatsRequest
 	(*GetNotificationStatsResponse)(nil),                           // 5: api.push.service.v1.GetNotificationStatsResponse
-	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 6: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	(*OperatorBetTickerMaskingConfig)(nil),                         // 6: api.push.service.v1.OperatorBetTickerMaskingConfig
+	(*GetOperatorBetTickerMaskingConfigRequest)(nil),               // 7: api.push.service.v1.GetOperatorBetTickerMaskingConfigRequest
+	(*GetOperatorBetTickerMaskingConfigResponse)(nil),              // 8: api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse
+	(*UpdateOperatorBetTickerMaskingConfigRequest)(nil),            // 9: api.push.service.v1.UpdateOperatorBetTickerMaskingConfigRequest
+	(*UpdateOperatorBetTickerMaskingConfigResponse)(nil),           // 10: api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse
+	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 11: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
 }
 var file_push_service_v1_push_proto_depIdxs = []int32{
-	0, // 0: api.push.service.v1.SendEmailRequest.attachments:type_name -> api.push.service.v1.EmailAttachment
-	3, // 1: api.push.service.v1.GetNotificationStatsRequest.timeRange:type_name -> api.push.service.v1.TimeRange
-	6, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
-	1, // 3: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
-	4, // 4: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
-	2, // 5: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
-	5, // 6: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: api.push.service.v1.SendEmailRequest.attachments:type_name -> api.push.service.v1.EmailAttachment
+	3,  // 1: api.push.service.v1.GetNotificationStatsRequest.timeRange:type_name -> api.push.service.v1.TimeRange
+	11, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	6,  // 3: api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse.config:type_name -> api.push.service.v1.OperatorBetTickerMaskingConfig
+	1,  // 4: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
+	4,  // 5: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
+	7,  // 6: api.push.service.v1.Push.GetOperatorBetTickerMaskingConfig:input_type -> api.push.service.v1.GetOperatorBetTickerMaskingConfigRequest
+	9,  // 7: api.push.service.v1.Push.UpdateOperatorBetTickerMaskingConfig:input_type -> api.push.service.v1.UpdateOperatorBetTickerMaskingConfigRequest
+	2,  // 8: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
+	5,  // 9: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
+	8,  // 10: api.push.service.v1.Push.GetOperatorBetTickerMaskingConfig:output_type -> api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse
+	10, // 11: api.push.service.v1.Push.UpdateOperatorBetTickerMaskingConfig:output_type -> api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse
+	8,  // [8:12] is the sub-list for method output_type
+	4,  // [4:8] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_proto_init() }
@@ -569,13 +843,14 @@ func file_push_service_v1_push_proto_init() {
 	if File_push_service_v1_push_proto != nil {
 		return
 	}
+	file_push_service_v1_push_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_proto_rawDesc), len(file_push_service_v1_push_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

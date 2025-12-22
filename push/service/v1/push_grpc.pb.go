@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Push_SendEmail_FullMethodName            = "/api.push.service.v1.Push/SendEmail"
-	Push_GetNotificationStats_FullMethodName = "/api.push.service.v1.Push/GetNotificationStats"
+	Push_SendEmail_FullMethodName                            = "/api.push.service.v1.Push/SendEmail"
+	Push_GetNotificationStats_FullMethodName                 = "/api.push.service.v1.Push/GetNotificationStats"
+	Push_GetOperatorBetTickerMaskingConfig_FullMethodName    = "/api.push.service.v1.Push/GetOperatorBetTickerMaskingConfig"
+	Push_UpdateOperatorBetTickerMaskingConfig_FullMethodName = "/api.push.service.v1.Push/UpdateOperatorBetTickerMaskingConfig"
 )
 
 // PushClient is the client API for Push service.
@@ -31,6 +33,9 @@ type PushClient interface {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(ctx context.Context, in *GetNotificationStatsRequest, opts ...grpc.CallOption) (*GetNotificationStatsResponse, error)
+	// Bet Ticker Masking Config APIs - for backoffice
+	GetOperatorBetTickerMaskingConfig(ctx context.Context, in *GetOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*GetOperatorBetTickerMaskingConfigResponse, error)
+	UpdateOperatorBetTickerMaskingConfig(ctx context.Context, in *UpdateOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorBetTickerMaskingConfigResponse, error)
 }
 
 type pushClient struct {
@@ -61,6 +66,26 @@ func (c *pushClient) GetNotificationStats(ctx context.Context, in *GetNotificati
 	return out, nil
 }
 
+func (c *pushClient) GetOperatorBetTickerMaskingConfig(ctx context.Context, in *GetOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*GetOperatorBetTickerMaskingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorBetTickerMaskingConfigResponse)
+	err := c.cc.Invoke(ctx, Push_GetOperatorBetTickerMaskingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) UpdateOperatorBetTickerMaskingConfig(ctx context.Context, in *UpdateOperatorBetTickerMaskingConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorBetTickerMaskingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorBetTickerMaskingConfigResponse)
+	err := c.cc.Invoke(ctx, Push_UpdateOperatorBetTickerMaskingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServer is the server API for Push service.
 // All implementations must embed UnimplementedPushServer
 // for forward compatibility.
@@ -69,6 +94,9 @@ type PushServer interface {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error)
+	// Bet Ticker Masking Config APIs - for backoffice
+	GetOperatorBetTickerMaskingConfig(context.Context, *GetOperatorBetTickerMaskingConfigRequest) (*GetOperatorBetTickerMaskingConfigResponse, error)
+	UpdateOperatorBetTickerMaskingConfig(context.Context, *UpdateOperatorBetTickerMaskingConfigRequest) (*UpdateOperatorBetTickerMaskingConfigResponse, error)
 	mustEmbedUnimplementedPushServer()
 }
 
@@ -84,6 +112,12 @@ func (UnimplementedPushServer) SendEmail(context.Context, *SendEmailRequest) (*S
 }
 func (UnimplementedPushServer) GetNotificationStats(context.Context, *GetNotificationStatsRequest) (*GetNotificationStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetNotificationStats not implemented")
+}
+func (UnimplementedPushServer) GetOperatorBetTickerMaskingConfig(context.Context, *GetOperatorBetTickerMaskingConfigRequest) (*GetOperatorBetTickerMaskingConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorBetTickerMaskingConfig not implemented")
+}
+func (UnimplementedPushServer) UpdateOperatorBetTickerMaskingConfig(context.Context, *UpdateOperatorBetTickerMaskingConfigRequest) (*UpdateOperatorBetTickerMaskingConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorBetTickerMaskingConfig not implemented")
 }
 func (UnimplementedPushServer) mustEmbedUnimplementedPushServer() {}
 func (UnimplementedPushServer) testEmbeddedByValue()              {}
@@ -142,6 +176,42 @@ func _Push_GetNotificationStats_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Push_GetOperatorBetTickerMaskingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorBetTickerMaskingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).GetOperatorBetTickerMaskingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_GetOperatorBetTickerMaskingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).GetOperatorBetTickerMaskingConfig(ctx, req.(*GetOperatorBetTickerMaskingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_UpdateOperatorBetTickerMaskingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorBetTickerMaskingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).UpdateOperatorBetTickerMaskingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_UpdateOperatorBetTickerMaskingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).UpdateOperatorBetTickerMaskingConfig(ctx, req.(*UpdateOperatorBetTickerMaskingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Push_ServiceDesc is the grpc.ServiceDesc for Push service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +226,14 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNotificationStats",
 			Handler:    _Push_GetNotificationStats_Handler,
+		},
+		{
+			MethodName: "GetOperatorBetTickerMaskingConfig",
+			Handler:    _Push_GetOperatorBetTickerMaskingConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorBetTickerMaskingConfig",
+			Handler:    _Push_UpdateOperatorBetTickerMaskingConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

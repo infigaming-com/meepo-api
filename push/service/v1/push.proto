@@ -12,6 +12,10 @@ service Push {
 	// Get notification statistics for specified operators within a time range
 	// Returns notification counts grouped by operator ID
 	rpc GetNotificationStats(GetNotificationStatsRequest) returns (GetNotificationStatsResponse) {}
+
+	// Bet Ticker Masking Config APIs - for backoffice
+	rpc GetOperatorBetTickerMaskingConfig(GetOperatorBetTickerMaskingConfigRequest) returns (GetOperatorBetTickerMaskingConfigResponse) {}
+	rpc UpdateOperatorBetTickerMaskingConfig(UpdateOperatorBetTickerMaskingConfigRequest) returns (UpdateOperatorBetTickerMaskingConfigResponse) {}
 }
 
 message EmailAttachment {
@@ -66,3 +70,26 @@ message GetNotificationStatsResponse {
 	}
 	repeated OperatorNotificationStats operatorStats = 1;
 }
+
+// Bet Ticker Masking Config Messages
+message OperatorBetTickerMaskingConfig {
+	int64 operator_id = 1;
+	bool masking_enabled = 2;   // When true, usernames are partially masked
+	string masking_rule = 3;    // "default" = first2 + *** + last2
+}
+
+message GetOperatorBetTickerMaskingConfigRequest {
+	int64 operator_id = 1;
+}
+
+message GetOperatorBetTickerMaskingConfigResponse {
+	OperatorBetTickerMaskingConfig config = 1;
+}
+
+message UpdateOperatorBetTickerMaskingConfigRequest {
+	int64 operator_id = 1;
+	bool masking_enabled = 2;
+	optional string masking_rule = 3;
+}
+
+message UpdateOperatorBetTickerMaskingConfigResponse {}

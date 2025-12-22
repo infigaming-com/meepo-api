@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "game/service/v1/game.proto";
+import "push/service/v1/push.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -339,6 +340,21 @@ service BackofficeGame {
 	rpc BackofficeListGamesUnderTag(BackofficeListGamesUnderTagRequest) returns (BackofficeListGamesUnderTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/tags/games/list"
+			body: "*"
+		};
+	}
+
+	// Bet Ticker Masking Config APIs
+	rpc GetOperatorBetTickerMaskingConfig(GetOperatorBetTickerMaskingConfigRequest) returns (api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bet-ticker/masking-config/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorBetTickerMaskingConfig(UpdateOperatorBetTickerMaskingConfigRequest) returns (api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bet-ticker/masking-config/update"
 			body: "*"
 		};
 	}
@@ -913,4 +929,16 @@ message BackofficeListGamesUnderTagResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+// ============== Bet Ticker Masking Config Messages ==============
+
+message GetOperatorBetTickerMaskingConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message UpdateOperatorBetTickerMaskingConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	bool masking_enabled = 2;
+	optional string masking_rule = 3;
 }

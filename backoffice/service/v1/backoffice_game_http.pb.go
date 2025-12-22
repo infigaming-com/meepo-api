@@ -11,6 +11,7 @@ import (
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
+	v11 "github.com/infigaming-com/meepo-api/push/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -42,6 +43,7 @@ const OperationBackofficeGameExportUnpaidBets = "/api.backoffice.service.v1.Back
 const OperationBackofficeGameGetBetById = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
 const OperationBackofficeGameGetGameTransactionById = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
 const OperationBackofficeGameGetGameTransactionsForBet = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
+const OperationBackofficeGameGetOperatorBetTickerMaskingConfig = "/api.backoffice.service.v1.BackofficeGame/GetOperatorBetTickerMaskingConfig"
 const OperationBackofficeGameGetPlayerFreebets = "/api.backoffice.service.v1.BackofficeGame/GetPlayerFreebets"
 const OperationBackofficeGameGetUserBetsOverview = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
 const OperationBackofficeGameIssueFreebets = "/api.backoffice.service.v1.BackofficeGame/IssueFreebets"
@@ -66,6 +68,7 @@ const OperationBackofficeGameListThemes = "/api.backoffice.service.v1.Backoffice
 const OperationBackofficeGameListUnpaidBets = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
 const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
 const OperationBackofficeGameUpdateGameBetDisplayConfig = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
+const OperationBackofficeGameUpdateOperatorBetTickerMaskingConfig = "/api.backoffice.service.v1.BackofficeGame/UpdateOperatorBetTickerMaskingConfig"
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
 type BackofficeGameHTTPServer interface {
@@ -103,6 +106,8 @@ type BackofficeGameHTTPServer interface {
 	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
+	// GetOperatorBetTickerMaskingConfig Bet Ticker Masking Config APIs
+	GetOperatorBetTickerMaskingConfig(context.Context, *GetOperatorBetTickerMaskingConfigRequest) (*v11.GetOperatorBetTickerMaskingConfigResponse, error)
 	GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*v1.GetPlayerFreebetsResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	IssueFreebets(context.Context, *v1.IssueFreebetsRequest) (*v1.IssueFreebetsResponse, error)
@@ -135,6 +140,7 @@ type BackofficeGameHTTPServer interface {
 	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*v1.ListUnpaidBetsResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
+	UpdateOperatorBetTickerMaskingConfig(context.Context, *UpdateOperatorBetTickerMaskingConfigRequest) (*v11.UpdateOperatorBetTickerMaskingConfigResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 }
 
@@ -187,6 +193,8 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/tags/games/batch-update", _BackofficeGame_BackofficeBatchUpdateTagGames0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/providers/list", _BackofficeGame_BackofficeListProvidersUnderTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/games/list", _BackofficeGame_BackofficeListGamesUnderTag0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bet-ticker/masking-config/get", _BackofficeGame_GetOperatorBetTickerMaskingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bet-ticker/masking-config/update", _BackofficeGame_UpdateOperatorBetTickerMaskingConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeGame_ListProviders1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
@@ -1223,6 +1231,50 @@ func _BackofficeGame_BackofficeListGamesUnderTag0_HTTP_Handler(srv BackofficeGam
 	}
 }
 
+func _BackofficeGame_GetOperatorBetTickerMaskingConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorBetTickerMaskingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameGetOperatorBetTickerMaskingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorBetTickerMaskingConfig(ctx, req.(*GetOperatorBetTickerMaskingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v11.GetOperatorBetTickerMaskingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGame_UpdateOperatorBetTickerMaskingConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateOperatorBetTickerMaskingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameUpdateOperatorBetTickerMaskingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateOperatorBetTickerMaskingConfig(ctx, req.(*UpdateOperatorBetTickerMaskingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v11.UpdateOperatorBetTickerMaskingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeGameHTTPClient interface {
 	AddGameBetDisplayConfig(ctx context.Context, req *v1.AddGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.AddGameBetDisplayConfigResponse, err error)
 	// BackofficeAddGamesToTag Add games to a tag
@@ -1258,6 +1310,8 @@ type BackofficeGameHTTPClient interface {
 	GetBetById(ctx context.Context, req *GetBetByIdRequest, opts ...http.CallOption) (rsp *v1.GetBetByIdResponse, err error)
 	GetGameTransactionById(ctx context.Context, req *GetGameTransactionByIdRequest, opts ...http.CallOption) (rsp *v1.GetGameTransactionByIdResponse, err error)
 	GetGameTransactionsForBet(ctx context.Context, req *GetGameTransactionsForBetRequest, opts ...http.CallOption) (rsp *GetGameTransactionsForBetResponse, err error)
+	// GetOperatorBetTickerMaskingConfig Bet Ticker Masking Config APIs
+	GetOperatorBetTickerMaskingConfig(ctx context.Context, req *GetOperatorBetTickerMaskingConfigRequest, opts ...http.CallOption) (rsp *v11.GetOperatorBetTickerMaskingConfigResponse, err error)
 	GetPlayerFreebets(ctx context.Context, req *GetPlayerFreebetsRequest, opts ...http.CallOption) (rsp *v1.GetPlayerFreebetsResponse, err error)
 	GetUserBetsOverview(ctx context.Context, req *GetUserBetsOverviewRequest, opts ...http.CallOption) (rsp *GetUserBetsOverviewResponse, err error)
 	IssueFreebets(ctx context.Context, req *v1.IssueFreebetsRequest, opts ...http.CallOption) (rsp *v1.IssueFreebetsResponse, err error)
@@ -1290,6 +1344,7 @@ type BackofficeGameHTTPClient interface {
 	ListUnpaidBets(ctx context.Context, req *ListUnpaidBetsRequest, opts ...http.CallOption) (rsp *v1.ListUnpaidBetsResponse, err error)
 	UpdateGame(ctx context.Context, req *UpdateGameRequest, opts ...http.CallOption) (rsp *UpdateGameResponse, err error)
 	UpdateGameBetDisplayConfig(ctx context.Context, req *v1.UpdateGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateGameBetDisplayConfigResponse, err error)
+	UpdateOperatorBetTickerMaskingConfig(ctx context.Context, req *UpdateOperatorBetTickerMaskingConfigRequest, opts ...http.CallOption) (rsp *v11.UpdateOperatorBetTickerMaskingConfigResponse, err error)
 	UpdateProvider(ctx context.Context, req *UpdateProviderRequest, opts ...http.CallOption) (rsp *UpdateProviderResponse, err error)
 }
 
@@ -1591,6 +1646,20 @@ func (c *BackofficeGameHTTPClientImpl) GetGameTransactionsForBet(ctx context.Con
 	pattern := "/v1/backoffice/game/bets/transactions/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetGameTransactionsForBet))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetOperatorBetTickerMaskingConfig Bet Ticker Masking Config APIs
+func (c *BackofficeGameHTTPClientImpl) GetOperatorBetTickerMaskingConfig(ctx context.Context, in *GetOperatorBetTickerMaskingConfigRequest, opts ...http.CallOption) (*v11.GetOperatorBetTickerMaskingConfigResponse, error) {
+	var out v11.GetOperatorBetTickerMaskingConfigResponse
+	pattern := "/v1/backoffice/game/bet-ticker/masking-config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameGetOperatorBetTickerMaskingConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1911,6 +1980,19 @@ func (c *BackofficeGameHTTPClientImpl) UpdateGameBetDisplayConfig(ctx context.Co
 	pattern := "/v1/backoffice/game/bet/dispaly/config/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameUpdateGameBetDisplayConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeGameHTTPClientImpl) UpdateOperatorBetTickerMaskingConfig(ctx context.Context, in *UpdateOperatorBetTickerMaskingConfigRequest, opts ...http.CallOption) (*v11.UpdateOperatorBetTickerMaskingConfigResponse, error) {
+	var out v11.UpdateOperatorBetTickerMaskingConfigResponse
+	pattern := "/v1/backoffice/game/bet-ticker/masking-config/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameUpdateOperatorBetTickerMaskingConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

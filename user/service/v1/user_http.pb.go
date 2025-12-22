@@ -33,6 +33,7 @@ const OperationUserGetOperatorVipSettings = "/api.user.service.v1.User/GetOperat
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
+const OperationUserGetUserPrivacySettings = "/api.user.service.v1.User/GetUserPrivacySettings"
 const OperationUserGetUserTags = "/api.user.service.v1.User/GetUserTags"
 const OperationUserGetUserVipLevel = "/api.user.service.v1.User/GetUserVipLevel"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
@@ -47,6 +48,7 @@ const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEm
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
 const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
 const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIdentity"
+const OperationUserUpdateUserPrivacySettings = "/api.user.service.v1.User/UpdateUserPrivacySettings"
 const OperationUserUpdateVipRewardSlider = "/api.user.service.v1.User/UpdateVipRewardSlider"
 const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
@@ -66,6 +68,8 @@ type UserHTTPServer interface {
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error)
+	// GetUserPrivacySettings Privacy Settings APIs - Frontend
+	GetUserPrivacySettings(context.Context, *GetUserPrivacySettingsRequest) (*GetUserPrivacySettingsResponse, error)
 	// GetUserTags GetUserTags retrieves all active tags associated for the current user
 	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
@@ -96,6 +100,7 @@ type UserHTTPServer interface {
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
+	UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error)
 	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 }
@@ -131,6 +136,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/vip/reward/claim/confirm", _User_ConfirmClaimVipReward0_HTTP_Handler(srv))
 	r.POST("/v1/user/vip/daily-lossback/request", _User_RequestDailyLossback0_HTTP_Handler(srv))
 	r.POST("/v1/user/vip/daily-lossback/status/get", _User_GetDailyLossbackStatus0_HTTP_Handler(srv))
+	r.GET("/v1/user/privacy-settings", _User_GetUserPrivacySettings0_HTTP_Handler(srv))
+	r.PUT("/v1/user/privacy-settings", _User_UpdateUserPrivacySettings0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -771,6 +778,47 @@ func _User_GetDailyLossbackStatus0_HTTP_Handler(srv UserHTTPServer) func(ctx htt
 	}
 }
 
+func _User_GetUserPrivacySettings0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserPrivacySettingsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetUserPrivacySettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserPrivacySettings(ctx, req.(*GetUserPrivacySettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetUserPrivacySettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_UpdateUserPrivacySettings0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserPrivacySettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUpdateUserPrivacySettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUserPrivacySettings(ctx, req.(*UpdateUserPrivacySettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserPrivacySettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	ClaimVipReward(ctx context.Context, req *ClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ClaimVipRewardResponse, err error)
@@ -787,6 +835,8 @@ type UserHTTPClient interface {
 	// Returns basic user information for the specified user.
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	GetUserAccountSettingsStatus(ctx context.Context, req *GetUserAccountSettingsStatusRequest, opts ...http.CallOption) (rsp *GetUserAccountSettingsStatusResponse, err error)
+	// GetUserPrivacySettings Privacy Settings APIs - Frontend
+	GetUserPrivacySettings(ctx context.Context, req *GetUserPrivacySettingsRequest, opts ...http.CallOption) (rsp *GetUserPrivacySettingsResponse, err error)
 	// GetUserTags GetUserTags retrieves all active tags associated for the current user
 	// and also exists in the related operator's tag list.
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
@@ -817,6 +867,7 @@ type UserHTTPClient interface {
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 	UpdateUserIdentity(ctx context.Context, req *UpdateUserIdentityRequest, opts ...http.CallOption) (rsp *UpdateUserIdentityResponse, err error)
+	UpdateUserPrivacySettings(ctx context.Context, req *UpdateUserPrivacySettingsRequest, opts ...http.CallOption) (rsp *UpdateUserPrivacySettingsResponse, err error)
 	UpdateVipRewardSlider(ctx context.Context, req *UpdateVipRewardSliderRequest, opts ...http.CallOption) (rsp *v1.UpdateVipRewardSliderResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 }
@@ -994,6 +1045,20 @@ func (c *UserHTTPClientImpl) GetUserAccountSettingsStatus(ctx context.Context, i
 	opts = append(opts, http.Operation(OperationUserGetUserAccountSettingsStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetUserPrivacySettings Privacy Settings APIs - Frontend
+func (c *UserHTTPClientImpl) GetUserPrivacySettings(ctx context.Context, in *GetUserPrivacySettingsRequest, opts ...http.CallOption) (*GetUserPrivacySettingsResponse, error) {
+	var out GetUserPrivacySettingsResponse
+	pattern := "/v1/user/privacy-settings"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationUserGetUserPrivacySettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1192,6 +1257,19 @@ func (c *UserHTTPClientImpl) UpdateUserIdentity(ctx context.Context, in *UpdateU
 	opts = append(opts, http.Operation(OperationUserUpdateUserIdentity))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UpdateUserPrivacySettings(ctx context.Context, in *UpdateUserPrivacySettingsRequest, opts ...http.CallOption) (*UpdateUserPrivacySettingsResponse, error) {
+	var out UpdateUserPrivacySettingsResponse
+	pattern := "/v1/user/privacy-settings"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUpdateUserPrivacySettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

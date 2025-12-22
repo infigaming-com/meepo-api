@@ -2010,6 +2010,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListThirdPartyFeesResponse'
+    /v1/backoffice/game/bet-ticker/masking-config/get:
+        post:
+            tags:
+                - BackofficeGame
+            description: Bet Ticker Masking Config APIs
+            operationId: BackofficeGame_GetOperatorBetTickerMaskingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorBetTickerMaskingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse'
+    /v1/backoffice/game/bet-ticker/masking-config/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateOperatorBetTickerMaskingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorBetTickerMaskingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse'
     /v1/backoffice/game/bet/dispaly/config/add:
         post:
             tags:
@@ -6324,6 +6361,41 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigResponse'
+    /v1/user/privacy-settings:
+        get:
+            tags:
+                - User
+            description: Privacy Settings APIs - Frontend
+            operationId: User_GetUserPrivacySettings
+            parameters:
+                - name: userId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetUserPrivacySettingsResponse'
+        put:
+            tags:
+                - User
+            operationId: User_UpdateUserPrivacySettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateUserPrivacySettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateUserPrivacySettingsResponse'
     /v1/user/responsible-gambling/config/add:
         post:
             tags:
@@ -10165,6 +10237,11 @@ components:
             type: object
             properties:
                 operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorBetTickerMaskingConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorNotificationChannelsRequest:
             type: object
@@ -15181,6 +15258,15 @@ components:
             properties:
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.UpdateOperatorBetTickerMaskingConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                maskingEnabled:
+                    type: boolean
+                maskingRule:
+                    type: string
         api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest:
             type: object
             properties:
@@ -17560,6 +17646,24 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
+        api.push.service.v1.GetOperatorBetTickerMaskingConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.OperatorBetTickerMaskingConfig'
+        api.push.service.v1.OperatorBetTickerMaskingConfig:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                maskingEnabled:
+                    type: boolean
+                maskingRule:
+                    type: string
+            description: Bet Ticker Masking Config Messages
+        api.push.service.v1.UpdateOperatorBetTickerMaskingConfigResponse:
+            type: object
+            properties: {}
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -18311,6 +18415,11 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.UserAccountGameSettingsStatus'
                 paymentSettingsStatus:
                     $ref: '#/components/schemas/api.user.service.v1.UserAccountPaymentSettingsStatus'
+        api.user.service.v1.GetUserPrivacySettingsResponse:
+            type: object
+            properties:
+                settings:
+                    $ref: '#/components/schemas/api.user.service.v1.UserPrivacySettings'
         api.user.service.v1.GetUserProfileResponse:
             type: object
             properties:
@@ -19193,6 +19302,18 @@ components:
         api.user.service.v1.UpdateUserIdentityResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateUserPrivacySettingsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                invisibleMode:
+                    type: boolean
+                hideBettingRecords:
+                    type: boolean
+        api.user.service.v1.UpdateUserPrivacySettingsResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UpdateUserRequest:
             type: object
             properties:
@@ -19446,6 +19567,16 @@ components:
                     type: boolean
                     description: user phone verification status
             description: UserInfo contains basic user information.
+        api.user.service.v1.UserPrivacySettings:
+            type: object
+            properties:
+                userId:
+                    type: string
+                invisibleMode:
+                    type: boolean
+                hideBettingRecords:
+                    type: boolean
+            description: Privacy Settings Messages
         api.user.service.v1.ValidationRecord:
             type: object
             properties:
