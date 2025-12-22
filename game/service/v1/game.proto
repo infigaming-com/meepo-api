@@ -1841,7 +1841,7 @@ message FreespinUser {
 message IssueFreespinsRequest {
 	int64 freespin_id = 1;
 	int64 user_id = 2;
-	int64 request_id = 3;
+	optional int64 request_id = 3;
 	repeated FreespinGame games = 4;
 	int64 quantity = 5;
 	int64 start_at = 6;

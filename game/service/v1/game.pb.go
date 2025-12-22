@@ -9896,7 +9896,7 @@ type IssueFreespinsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	FreespinId      int64                   `protobuf:"varint,1,opt,name=freespin_id,json=freespinId,proto3" json:"freespin_id,omitempty"`
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RequestId       int64                   `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	RequestId       *int64                  `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3,oneof" json:"request_id,omitempty"`
 	Games           []*FreespinGame         `protobuf:"bytes,4,rep,name=games,proto3" json:"games,omitempty"`
 	Quantity        int64                   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	StartAt         int64                   `protobuf:"varint,6,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
@@ -9951,8 +9951,8 @@ func (x *IssueFreespinsRequest) GetUserId() int64 {
 }
 
 func (x *IssueFreespinsRequest) GetRequestId() int64 {
-	if x != nil {
-		return x.RequestId
+	if x != nil && x.RequestId != nil {
+		return *x.RequestId
 	}
 	return 0
 }
@@ -18144,18 +18144,19 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\rregistered_at\x18\t \x01(\tR\fregisteredAt\x12\x16\n" +
 	"\x06gender\x18\n" +
 	" \x01(\tR\x06gender\x12\x18\n" +
-	"\acountry\x18\v \x01(\tR\acountry\"\xc5\x02\n" +
+	"\acountry\x18\v \x01(\tR\acountry\"\xd9\x02\n" +
 	"\x15IssueFreespinsRequest\x12\x1f\n" +
 	"\vfreespin_id\x18\x01 \x01(\x03R\n" +
 	"freespinId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\"\n" +
 	"\n" +
-	"request_id\x18\x03 \x01(\x03R\trequestId\x127\n" +
+	"request_id\x18\x03 \x01(\x03H\x00R\trequestId\x88\x01\x01\x127\n" +
 	"\x05games\x18\x04 \x03(\v2!.api.game.service.v1.FreespinGameR\x05games\x12\x1a\n" +
 	"\bquantity\x18\x05 \x01(\x03R\bquantity\x12\x19\n" +
 	"\bstart_at\x18\x06 \x01(\x03R\astartAt\x12\x1b\n" +
 	"\texpire_at\x18\a \x01(\x03R\bexpireAt\x12F\n" +
-	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x18\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
+	"\v_request_id\"\x18\n" +
 	"\x16IssueFreespinsResponse\"\x81\x01\n" +
 	"\x16CancelFreespinsRequest\x12\x1f\n" +
 	"\vfreespin_id\x18\x01 \x01(\x03R\n" +
@@ -19152,6 +19153,7 @@ func file_game_service_v1_game_proto_init() {
 	file_game_service_v1_game_proto_msgTypes[96].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[98].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[119].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[124].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[129].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[130].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[132].OneofWrappers = []any{}

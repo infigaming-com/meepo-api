@@ -17514,8 +17514,6 @@ func (m *IssueFreespinsRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for RequestId
-
 	for idx, item := range m.GetGames() {
 		_, _ = idx, item
 
@@ -17583,6 +17581,10 @@ func (m *IssueFreespinsRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.RequestId != nil {
+		// no validation rules for RequestId
 	}
 
 	if len(errors) > 0 {
