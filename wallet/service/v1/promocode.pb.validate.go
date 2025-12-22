@@ -63,6 +63,8 @@ func (m *FreeSpinConfig) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for SpinCount
+
 	// no validation rules for WageringRequirement
 
 	// no validation rules for MaxWithdrawalMultiplier
@@ -5978,8 +5980,6 @@ func (m *FreeSpinConfig_FreeSpinReward) validate(all bool) error {
 	// no validation rules for GameId
 
 	// no validation rules for Level
-
-	// no validation rules for SpinCount
 
 	// no validation rules for FreeSpinValidity
 

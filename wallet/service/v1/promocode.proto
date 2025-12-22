@@ -18,16 +18,16 @@ message FreeSpinConfig {
 	bool enabled = 1;
 	string reward_type = 2;              // cash | bonus (winning credit type)
 	string currency = 3;                 // play currency
-	int32 wagering_requirement = 4;
-	string max_withdrawal_multiplier = 5;
-	int64 reward_validity = 6;          // winning reward validity (ms)
-	repeated FreeSpinReward rewards = 7;
+	int32 spin_count = 4;
+	int32 wagering_requirement = 5;
+	string max_withdrawal_multiplier = 6;
+	int64 reward_validity = 7;          // winning reward validity (ms)
+	repeated FreeSpinReward rewards = 8;
 	message FreeSpinReward {
 		string provider_id = 1;
 		string game_id = 2;
 		int32 level = 3;
-		int32 spin_count = 4;
-		int64 free_spin_validity = 5;        // ms, 0 = no expiration
+		int64 free_spin_validity = 4;        // ms, 0 = no expiration
 	}
 }
 

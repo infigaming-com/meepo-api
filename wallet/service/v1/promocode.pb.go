@@ -29,10 +29,11 @@ type FreeSpinConfig struct {
 	Enabled                 bool                             `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	RewardType              string                           `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // cash | bonus (winning credit type)
 	Currency                string                           `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                       // play currency
-	WageringRequirement     int32                            `protobuf:"varint,4,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
-	MaxWithdrawalMultiplier string                           `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
-	RewardValidity          int64                            `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
-	Rewards                 []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,7,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	SpinCount               int32                            `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
+	WageringRequirement     int32                            `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"`
+	MaxWithdrawalMultiplier string                           `protobuf:"bytes,6,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"`
+	RewardValidity          int64                            `protobuf:"varint,7,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"` // winning reward validity (ms)
+	Rewards                 []*FreeSpinConfig_FreeSpinReward `protobuf:"bytes,8,rep,name=rewards,proto3" json:"rewards,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -86,6 +87,13 @@ func (x *FreeSpinConfig) GetCurrency() string {
 		return x.Currency
 	}
 	return ""
+}
+
+func (x *FreeSpinConfig) GetSpinCount() int32 {
+	if x != nil {
+		return x.SpinCount
+	}
+	return 0
 }
 
 func (x *FreeSpinConfig) GetWageringRequirement() int32 {
@@ -2770,8 +2778,7 @@ type FreeSpinConfig_FreeSpinReward struct {
 	ProviderId       string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
 	GameId           string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	Level            int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
-	SpinCount        int32                  `protobuf:"varint,4,opt,name=spin_count,json=spinCount,proto3" json:"spin_count,omitempty"`
-	FreeSpinValidity int64                  `protobuf:"varint,5,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
+	FreeSpinValidity int64                  `protobuf:"varint,4,opt,name=free_spin_validity,json=freeSpinValidity,proto3" json:"free_spin_validity,omitempty"` // ms, 0 = no expiration
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2823,13 +2830,6 @@ func (x *FreeSpinConfig_FreeSpinReward) GetGameId() string {
 func (x *FreeSpinConfig_FreeSpinReward) GetLevel() int32 {
 	if x != nil {
 		return x.Level
-	}
-	return 0
-}
-
-func (x *FreeSpinConfig_FreeSpinReward) GetSpinCount() int32 {
-	if x != nil {
-		return x.SpinCount
 	}
 	return 0
 }
@@ -2970,19 +2970,19 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
 	"rewardType\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x121\n" +
-	"\x14wagering_requirement\x18\x04 \x01(\x05R\x13wageringRequirement\x12:\n" +
-	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
-	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\x12N\n" +
-	"\arewards\x18\a \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x1a\xad\x01\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1d\n" +
+	"\n" +
+	"spin_count\x18\x04 \x01(\x05R\tspinCount\x121\n" +
+	"\x14wagering_requirement\x18\x05 \x01(\x05R\x13wageringRequirement\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\x06 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
+	"\x0freward_validity\x18\a \x01(\x03R\x0erewardValidity\x12N\n" +
+	"\arewards\x18\b \x03(\v24.api.wallet.service.v1.FreeSpinConfig.FreeSpinRewardR\arewards\x1a\x8e\x01\n" +
 	"\x0eFreeSpinReward\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
 	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12\x14\n" +
-	"\x05level\x18\x03 \x01(\x05R\x05level\x12\x1d\n" +
-	"\n" +
-	"spin_count\x18\x04 \x01(\x05R\tspinCount\x12,\n" +
-	"\x12free_spin_validity\x18\x05 \x01(\x03R\x10freeSpinValidity\"\xc7\x03\n" +
+	"\x05level\x18\x03 \x01(\x05R\x05level\x12,\n" +
+	"\x12free_spin_validity\x18\x04 \x01(\x03R\x10freeSpinValidity\"\xc7\x03\n" +
 	"\rFreeBetConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
