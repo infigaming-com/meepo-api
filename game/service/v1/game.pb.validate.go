@@ -17510,40 +17510,9 @@ func (m *IssueFreespinsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OperatorId
-
 	// no validation rules for FreespinId
 
-	if all {
-		switch v := interface{}(m.GetUser()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, IssueFreespinsRequestValidationError{
-					field:  "User",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, IssueFreespinsRequestValidationError{
-					field:  "User",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUser()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return IssueFreespinsRequestValidationError{
-				field:  "User",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for RequestId
+	// no validation rules for UserId
 
 	for idx, item := range m.GetGames() {
 		_, _ = idx, item
@@ -17585,8 +17554,6 @@ func (m *IssueFreespinsRequest) validate(all bool) error {
 
 	// no validation rules for ExpireAt
 
-	// no validation rules for ValidUntil
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -17614,6 +17581,10 @@ func (m *IssueFreespinsRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.RequestId != nil {
+		// no validation rules for RequestId
 	}
 
 	if len(errors) > 0 {
@@ -17819,8 +17790,6 @@ func (m *CancelFreespinsRequest) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for OperatorId
 
 	// no validation rules for FreespinId
 
@@ -18941,120 +18910,6 @@ var _ interface {
 	ErrorName() string
 } = ListFreebetTemplatesResponseValidationError{}
 
-// Validate checks the field values on FreebetIssueItem with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *FreebetIssueItem) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on FreebetIssueItem with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// FreebetIssueItemMultiError, or nil if none found.
-func (m *FreebetIssueItem) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *FreebetIssueItem) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for PlayerId
-
-	// no validation rules for Username
-
-	// no validation rules for Currency
-
-	if m.Amount != nil {
-		// no validation rules for Amount
-	}
-
-	if m.ForceActivate != nil {
-		// no validation rules for ForceActivate
-	}
-
-	if len(errors) > 0 {
-		return FreebetIssueItemMultiError(errors)
-	}
-
-	return nil
-}
-
-// FreebetIssueItemMultiError is an error wrapping multiple validation errors
-// returned by FreebetIssueItem.ValidateAll() if the designated constraints
-// aren't met.
-type FreebetIssueItemMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m FreebetIssueItemMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m FreebetIssueItemMultiError) AllErrors() []error { return m }
-
-// FreebetIssueItemValidationError is the validation error returned by
-// FreebetIssueItem.Validate if the designated constraints aren't met.
-type FreebetIssueItemValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e FreebetIssueItemValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e FreebetIssueItemValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e FreebetIssueItemValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e FreebetIssueItemValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e FreebetIssueItemValidationError) ErrorName() string { return "FreebetIssueItemValidationError" }
-
-// Error satisfies the builtin error interface
-func (e FreebetIssueItemValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sFreebetIssueItem.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = FreebetIssueItemValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = FreebetIssueItemValidationError{}
-
 // Validate checks the field values on IssueFreebetsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -19079,39 +18934,9 @@ func (m *IssueFreebetsRequest) validate(all bool) error {
 
 	// no validation rules for TemplateId
 
-	for idx, item := range m.GetItems() {
-		_, _ = idx, item
+	// no validation rules for Currency
 
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, IssueFreebetsRequestValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, IssueFreebetsRequestValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return IssueFreebetsRequestValidationError{
-					field:  fmt.Sprintf("Items[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
+	// no validation rules for UserId
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -19463,7 +19288,7 @@ func (m *FreebetAssignmentResult) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for PlayerId
+	// no validation rules for UserId
 
 	if m.Bonus != nil {
 
@@ -19744,7 +19569,7 @@ func (m *GetPlayerFreebetsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for PlayerId
+	// no validation rules for UserId
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {

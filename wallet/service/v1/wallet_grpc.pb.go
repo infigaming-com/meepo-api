@@ -92,6 +92,7 @@ const (
 	Wallet_ListUserOverview_FullMethodName                    = "/api.wallet.service.v1.Wallet/ListUserOverview"
 	Wallet_GetUserGameTransactionsSummary_FullMethodName      = "/api.wallet.service.v1.Wallet/GetUserGameTransactionsSummary"
 	Wallet_CreditFreespinWin_FullMethodName                   = "/api.wallet.service.v1.Wallet/CreditFreespinWin"
+	Wallet_CreditFreeBetWin_FullMethodName                    = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -224,6 +225,8 @@ type WalletClient interface {
 	GetUserGameTransactionsSummary(ctx context.Context, in *GetUserGameTransactionsSummaryRequest, opts ...grpc.CallOption) (*GetUserGameTransactionsSummaryResponse, error)
 	// CreditFreespinWin credits freespin win amount to user's wallet
 	CreditFreespinWin(ctx context.Context, in *CreditFreespinWinRequest, opts ...grpc.CallOption) (*CreditFreespinWinResponse, error)
+	// CreditFreeBetWin credits freebet win amount to user's wallet
+	CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWinRequest, opts ...grpc.CallOption) (*CreditFreeBetWinResponse, error)
 }
 
 type walletClient struct {
@@ -964,6 +967,16 @@ func (c *walletClient) CreditFreespinWin(ctx context.Context, in *CreditFreespin
 	return out, nil
 }
 
+func (c *walletClient) CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWinRequest, opts ...grpc.CallOption) (*CreditFreeBetWinResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreditFreeBetWinResponse)
+	err := c.cc.Invoke(ctx, Wallet_CreditFreeBetWin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1094,6 +1107,8 @@ type WalletServer interface {
 	GetUserGameTransactionsSummary(context.Context, *GetUserGameTransactionsSummaryRequest) (*GetUserGameTransactionsSummaryResponse, error)
 	// CreditFreespinWin credits freespin win amount to user's wallet
 	CreditFreespinWin(context.Context, *CreditFreespinWinRequest) (*CreditFreespinWinResponse, error)
+	// CreditFreeBetWin credits freebet win amount to user's wallet
+	CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1322,6 +1337,9 @@ func (UnimplementedWalletServer) GetUserGameTransactionsSummary(context.Context,
 }
 func (UnimplementedWalletServer) CreditFreespinWin(context.Context, *CreditFreespinWinRequest) (*CreditFreespinWinResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreditFreespinWin not implemented")
+}
+func (UnimplementedWalletServer) CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreditFreeBetWin not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2658,6 +2676,24 @@ func _Wallet_CreditFreespinWin_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_CreditFreeBetWin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreditFreeBetWinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).CreditFreeBetWin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_CreditFreeBetWin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).CreditFreeBetWin(ctx, req.(*CreditFreeBetWinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2956,6 +2992,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreditFreespinWin",
 			Handler:    _Wallet_CreditFreespinWin_Handler,
+		},
+		{
+			MethodName: "CreditFreeBetWin",
+			Handler:    _Wallet_CreditFreeBetWin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

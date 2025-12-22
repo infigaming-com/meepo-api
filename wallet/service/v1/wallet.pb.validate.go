@@ -20938,6 +20938,263 @@ var _ interface {
 	ErrorName() string
 } = CreditFreespinWinResponseValidationError{}
 
+// Validate checks the field values on CreditFreeBetWinRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreditFreeBetWinRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreditFreeBetWinRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreditFreeBetWinRequestMultiError, or nil if none found.
+func (m *CreditFreeBetWinRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreditFreeBetWinRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for FreebetId
+
+	// no validation rules for TxnId
+
+	// no validation rules for GameId
+
+	// no validation rules for RoundId
+
+	// no validation rules for Timestamp
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreditFreeBetWinRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreditFreeBetWinRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreditFreeBetWinRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreditFreeBetWinRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreditFreeBetWinRequestMultiError is an error wrapping multiple validation
+// errors returned by CreditFreeBetWinRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreditFreeBetWinRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreditFreeBetWinRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreditFreeBetWinRequestMultiError) AllErrors() []error { return m }
+
+// CreditFreeBetWinRequestValidationError is the validation error returned by
+// CreditFreeBetWinRequest.Validate if the designated constraints aren't met.
+type CreditFreeBetWinRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreditFreeBetWinRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreditFreeBetWinRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreditFreeBetWinRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreditFreeBetWinRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreditFreeBetWinRequestValidationError) ErrorName() string {
+	return "CreditFreeBetWinRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreditFreeBetWinRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreditFreeBetWinRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreditFreeBetWinRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreditFreeBetWinRequestValidationError{}
+
+// Validate checks the field values on CreditFreeBetWinResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreditFreeBetWinResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreditFreeBetWinResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreditFreeBetWinResponseMultiError, or nil if none found.
+func (m *CreditFreeBetWinResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreditFreeBetWinResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Balance
+
+	// no validation rules for Bonus
+
+	// no validation rules for Timestamp
+
+	if len(errors) > 0 {
+		return CreditFreeBetWinResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreditFreeBetWinResponseMultiError is an error wrapping multiple validation
+// errors returned by CreditFreeBetWinResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreditFreeBetWinResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreditFreeBetWinResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreditFreeBetWinResponseMultiError) AllErrors() []error { return m }
+
+// CreditFreeBetWinResponseValidationError is the validation error returned by
+// CreditFreeBetWinResponse.Validate if the designated constraints aren't met.
+type CreditFreeBetWinResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreditFreeBetWinResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreditFreeBetWinResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreditFreeBetWinResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreditFreeBetWinResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreditFreeBetWinResponseValidationError) ErrorName() string {
+	return "CreditFreeBetWinResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreditFreeBetWinResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreditFreeBetWinResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreditFreeBetWinResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreditFreeBetWinResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
