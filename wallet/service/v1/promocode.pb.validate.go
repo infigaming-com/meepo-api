@@ -61,6 +61,14 @@ func (m *FreeSpinConfig) validate(all bool) error {
 
 	// no validation rules for RewardType
 
+	// no validation rules for Currency
+
+	// no validation rules for WageringRequirement
+
+	// no validation rules for MaxWithdrawalMultiplier
+
+	// no validation rules for RewardValidity
+
 	for idx, item := range m.GetRewards() {
 		_, _ = idx, item
 
@@ -198,6 +206,14 @@ func (m *FreeBetConfig) validate(all bool) error {
 	// no validation rules for Enabled
 
 	// no validation rules for RewardType
+
+	// no validation rules for Currency
+
+	// no validation rules for WageringRequirement
+
+	// no validation rules for MaxWithdrawalMultiplier
+
+	// no validation rules for RewardValidity
 
 	for idx, item := range m.GetRewards() {
 		_, _ = idx, item
@@ -2352,6 +2368,8 @@ func (m *CreatePromoCodeCampaignResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for CampaignId
+
 	if len(errors) > 0 {
 		return CreatePromoCodeCampaignResponseMultiError(errors)
 	}
@@ -3931,6 +3949,10 @@ func (m *PromoCodeListItem) validate(all bool) error {
 
 	// no validation rules for UsedByUserId
 
+	// no validation rules for CountryCode
+
+	// no validation rules for VipLevel
+
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
@@ -3983,6 +4005,35 @@ func (m *PromoCodeListItem) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return PromoCodeListItemValidationError{
 				field:  "UsedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetExpiredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoCodeListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoCodeListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExpiredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoCodeListItemValidationError{
+				field:  "ExpiredAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -4095,6 +4146,10 @@ func (m *PromoCodeUsageListItem) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	// no validation rules for CountryCode
+
+	// no validation rules for VipLevel
+
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
@@ -4147,6 +4202,35 @@ func (m *PromoCodeUsageListItem) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return PromoCodeUsageListItemValidationError{
 				field:  "UsedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetExpiredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoCodeUsageListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoCodeUsageListItemValidationError{
+					field:  "ExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExpiredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoCodeUsageListItemValidationError{
+				field:  "ExpiredAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -4414,22 +4498,23 @@ var _ interface {
 	ErrorName() string
 } = ListPromoCodeCampaignDetailsResponseValidationError{}
 
-// Validate checks the field values on GeneratePromoCodesRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GeneratePromoCodesRequest) Validate() error {
+// Validate checks the field values on GenerateOneTimePromoCodesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GenerateOneTimePromoCodesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GeneratePromoCodesRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GeneratePromoCodesRequestMultiError, or nil if none found.
-func (m *GeneratePromoCodesRequest) ValidateAll() error {
+// ValidateAll checks the field values on GenerateOneTimePromoCodesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GenerateOneTimePromoCodesRequestMultiError, or nil if none found.
+func (m *GenerateOneTimePromoCodesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GeneratePromoCodesRequest) validate(all bool) error {
+func (m *GenerateOneTimePromoCodesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4440,7 +4525,7 @@ func (m *GeneratePromoCodesRequest) validate(all bool) error {
 		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GeneratePromoCodesRequestValidationError{
+				errors = append(errors, GenerateOneTimePromoCodesRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4448,7 +4533,7 @@ func (m *GeneratePromoCodesRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GeneratePromoCodesRequestValidationError{
+				errors = append(errors, GenerateOneTimePromoCodesRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4457,7 +4542,7 @@ func (m *GeneratePromoCodesRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GeneratePromoCodesRequestValidationError{
+			return GenerateOneTimePromoCodesRequestValidationError{
 				field:  "InitiatorOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4476,19 +4561,20 @@ func (m *GeneratePromoCodesRequest) validate(all bool) error {
 	// no validation rules for Count
 
 	if len(errors) > 0 {
-		return GeneratePromoCodesRequestMultiError(errors)
+		return GenerateOneTimePromoCodesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GeneratePromoCodesRequestMultiError is an error wrapping multiple validation
-// errors returned by GeneratePromoCodesRequest.ValidateAll() if the
-// designated constraints aren't met.
-type GeneratePromoCodesRequestMultiError []error
+// GenerateOneTimePromoCodesRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GenerateOneTimePromoCodesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GenerateOneTimePromoCodesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GeneratePromoCodesRequestMultiError) Error() string {
+func (m GenerateOneTimePromoCodesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4497,11 +4583,12 @@ func (m GeneratePromoCodesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GeneratePromoCodesRequestMultiError) AllErrors() []error { return m }
+func (m GenerateOneTimePromoCodesRequestMultiError) AllErrors() []error { return m }
 
-// GeneratePromoCodesRequestValidationError is the validation error returned by
-// GeneratePromoCodesRequest.Validate if the designated constraints aren't met.
-type GeneratePromoCodesRequestValidationError struct {
+// GenerateOneTimePromoCodesRequestValidationError is the validation error
+// returned by GenerateOneTimePromoCodesRequest.Validate if the designated
+// constraints aren't met.
+type GenerateOneTimePromoCodesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4509,24 +4596,24 @@ type GeneratePromoCodesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GeneratePromoCodesRequestValidationError) Field() string { return e.field }
+func (e GenerateOneTimePromoCodesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GeneratePromoCodesRequestValidationError) Reason() string { return e.reason }
+func (e GenerateOneTimePromoCodesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GeneratePromoCodesRequestValidationError) Cause() error { return e.cause }
+func (e GenerateOneTimePromoCodesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GeneratePromoCodesRequestValidationError) Key() bool { return e.key }
+func (e GenerateOneTimePromoCodesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GeneratePromoCodesRequestValidationError) ErrorName() string {
-	return "GeneratePromoCodesRequestValidationError"
+func (e GenerateOneTimePromoCodesRequestValidationError) ErrorName() string {
+	return "GenerateOneTimePromoCodesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GeneratePromoCodesRequestValidationError) Error() string {
+func (e GenerateOneTimePromoCodesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4538,14 +4625,14 @@ func (e GeneratePromoCodesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGeneratePromoCodesRequest.%s: %s%s",
+		"invalid %sGenerateOneTimePromoCodesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GeneratePromoCodesRequestValidationError{}
+var _ error = GenerateOneTimePromoCodesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4553,24 +4640,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GeneratePromoCodesRequestValidationError{}
+} = GenerateOneTimePromoCodesRequestValidationError{}
 
-// Validate checks the field values on GeneratePromoCodesResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GeneratePromoCodesResponse) Validate() error {
+// Validate checks the field values on GenerateOneTimePromoCodesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GenerateOneTimePromoCodesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GeneratePromoCodesResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GeneratePromoCodesResponseMultiError, or nil if none found.
-func (m *GeneratePromoCodesResponse) ValidateAll() error {
+// ValidateAll checks the field values on GenerateOneTimePromoCodesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GenerateOneTimePromoCodesResponseMultiError, or nil if none found.
+func (m *GenerateOneTimePromoCodesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GeneratePromoCodesResponse) validate(all bool) error {
+func (m *GenerateOneTimePromoCodesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4580,19 +4668,20 @@ func (m *GeneratePromoCodesResponse) validate(all bool) error {
 	// no validation rules for GeneratedCount
 
 	if len(errors) > 0 {
-		return GeneratePromoCodesResponseMultiError(errors)
+		return GenerateOneTimePromoCodesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GeneratePromoCodesResponseMultiError is an error wrapping multiple
-// validation errors returned by GeneratePromoCodesResponse.ValidateAll() if
-// the designated constraints aren't met.
-type GeneratePromoCodesResponseMultiError []error
+// GenerateOneTimePromoCodesResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GenerateOneTimePromoCodesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GenerateOneTimePromoCodesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GeneratePromoCodesResponseMultiError) Error() string {
+func (m GenerateOneTimePromoCodesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4601,11 +4690,12 @@ func (m GeneratePromoCodesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GeneratePromoCodesResponseMultiError) AllErrors() []error { return m }
+func (m GenerateOneTimePromoCodesResponseMultiError) AllErrors() []error { return m }
 
-// GeneratePromoCodesResponseValidationError is the validation error returned
-// by GeneratePromoCodesResponse.Validate if the designated constraints aren't met.
-type GeneratePromoCodesResponseValidationError struct {
+// GenerateOneTimePromoCodesResponseValidationError is the validation error
+// returned by GenerateOneTimePromoCodesResponse.Validate if the designated
+// constraints aren't met.
+type GenerateOneTimePromoCodesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4613,24 +4703,24 @@ type GeneratePromoCodesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GeneratePromoCodesResponseValidationError) Field() string { return e.field }
+func (e GenerateOneTimePromoCodesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GeneratePromoCodesResponseValidationError) Reason() string { return e.reason }
+func (e GenerateOneTimePromoCodesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GeneratePromoCodesResponseValidationError) Cause() error { return e.cause }
+func (e GenerateOneTimePromoCodesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GeneratePromoCodesResponseValidationError) Key() bool { return e.key }
+func (e GenerateOneTimePromoCodesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GeneratePromoCodesResponseValidationError) ErrorName() string {
-	return "GeneratePromoCodesResponseValidationError"
+func (e GenerateOneTimePromoCodesResponseValidationError) ErrorName() string {
+	return "GenerateOneTimePromoCodesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GeneratePromoCodesResponseValidationError) Error() string {
+func (e GenerateOneTimePromoCodesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4642,14 +4732,14 @@ func (e GeneratePromoCodesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGeneratePromoCodesResponse.%s: %s%s",
+		"invalid %sGenerateOneTimePromoCodesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GeneratePromoCodesResponseValidationError{}
+var _ error = GenerateOneTimePromoCodesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -4657,7 +4747,523 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GeneratePromoCodesResponseValidationError{}
+} = GenerateOneTimePromoCodesResponseValidationError{}
+
+// Validate checks the field values on GenerateUniversalPromoCodesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GenerateUniversalPromoCodesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateUniversalPromoCodesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GenerateUniversalPromoCodesRequestMultiError, or nil if none found.
+func (m *GenerateUniversalPromoCodesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateUniversalPromoCodesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GenerateUniversalPromoCodesRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GenerateUniversalPromoCodesRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GenerateUniversalPromoCodesRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for GeneratedByUserId
+
+	// no validation rules for CampaignId
+
+	if len(errors) > 0 {
+		return GenerateUniversalPromoCodesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateUniversalPromoCodesRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GenerateUniversalPromoCodesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GenerateUniversalPromoCodesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateUniversalPromoCodesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateUniversalPromoCodesRequestMultiError) AllErrors() []error { return m }
+
+// GenerateUniversalPromoCodesRequestValidationError is the validation error
+// returned by GenerateUniversalPromoCodesRequest.Validate if the designated
+// constraints aren't met.
+type GenerateUniversalPromoCodesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateUniversalPromoCodesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateUniversalPromoCodesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateUniversalPromoCodesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateUniversalPromoCodesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateUniversalPromoCodesRequestValidationError) ErrorName() string {
+	return "GenerateUniversalPromoCodesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GenerateUniversalPromoCodesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateUniversalPromoCodesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateUniversalPromoCodesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateUniversalPromoCodesRequestValidationError{}
+
+// Validate checks the field values on GenerateUniversalPromoCodesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GenerateUniversalPromoCodesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GenerateUniversalPromoCodesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GenerateUniversalPromoCodesResponseMultiError, or nil if none found.
+func (m *GenerateUniversalPromoCodesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GenerateUniversalPromoCodesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GeneratedCount
+
+	if len(errors) > 0 {
+		return GenerateUniversalPromoCodesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GenerateUniversalPromoCodesResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GenerateUniversalPromoCodesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GenerateUniversalPromoCodesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GenerateUniversalPromoCodesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GenerateUniversalPromoCodesResponseMultiError) AllErrors() []error { return m }
+
+// GenerateUniversalPromoCodesResponseValidationError is the validation error
+// returned by GenerateUniversalPromoCodesResponse.Validate if the designated
+// constraints aren't met.
+type GenerateUniversalPromoCodesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GenerateUniversalPromoCodesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GenerateUniversalPromoCodesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GenerateUniversalPromoCodesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GenerateUniversalPromoCodesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GenerateUniversalPromoCodesResponseValidationError) ErrorName() string {
+	return "GenerateUniversalPromoCodesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GenerateUniversalPromoCodesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGenerateUniversalPromoCodesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GenerateUniversalPromoCodesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GenerateUniversalPromoCodesResponseValidationError{}
+
+// Validate checks the field values on ListUniversalCodeUsagesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUniversalCodeUsagesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUniversalCodeUsagesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListUniversalCodeUsagesRequestMultiError, or nil if none found.
+func (m *ListUniversalCodeUsagesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUniversalCodeUsagesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUniversalCodeUsagesRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUniversalCodeUsagesRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUniversalCodeUsagesRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CampaignId
+
+	if len(errors) > 0 {
+		return ListUniversalCodeUsagesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUniversalCodeUsagesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListUniversalCodeUsagesRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListUniversalCodeUsagesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUniversalCodeUsagesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUniversalCodeUsagesRequestMultiError) AllErrors() []error { return m }
+
+// ListUniversalCodeUsagesRequestValidationError is the validation error
+// returned by ListUniversalCodeUsagesRequest.Validate if the designated
+// constraints aren't met.
+type ListUniversalCodeUsagesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUniversalCodeUsagesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUniversalCodeUsagesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUniversalCodeUsagesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUniversalCodeUsagesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUniversalCodeUsagesRequestValidationError) ErrorName() string {
+	return "ListUniversalCodeUsagesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUniversalCodeUsagesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUniversalCodeUsagesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUniversalCodeUsagesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUniversalCodeUsagesRequestValidationError{}
+
+// Validate checks the field values on ListUniversalCodeUsagesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUniversalCodeUsagesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUniversalCodeUsagesResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListUniversalCodeUsagesResponseMultiError, or nil if none found.
+func (m *ListUniversalCodeUsagesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUniversalCodeUsagesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetUsages() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUniversalCodeUsagesResponseValidationError{
+						field:  fmt.Sprintf("Usages[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUniversalCodeUsagesResponseValidationError{
+						field:  fmt.Sprintf("Usages[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUniversalCodeUsagesResponseValidationError{
+					field:  fmt.Sprintf("Usages[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListUniversalCodeUsagesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUniversalCodeUsagesResponseMultiError is an error wrapping multiple
+// validation errors returned by ListUniversalCodeUsagesResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListUniversalCodeUsagesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUniversalCodeUsagesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUniversalCodeUsagesResponseMultiError) AllErrors() []error { return m }
+
+// ListUniversalCodeUsagesResponseValidationError is the validation error
+// returned by ListUniversalCodeUsagesResponse.Validate if the designated
+// constraints aren't met.
+type ListUniversalCodeUsagesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUniversalCodeUsagesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUniversalCodeUsagesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUniversalCodeUsagesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUniversalCodeUsagesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUniversalCodeUsagesResponseValidationError) ErrorName() string {
+	return "ListUniversalCodeUsagesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUniversalCodeUsagesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUniversalCodeUsagesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUniversalCodeUsagesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUniversalCodeUsagesResponseValidationError{}
 
 // Validate checks the field values on GetPromoCodeInfoRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -5367,8 +5973,6 @@ func (m *FreeSpinConfig_FreeSpinReward) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
-
 	// no validation rules for ProviderId
 
 	// no validation rules for GameId
@@ -5378,12 +5982,6 @@ func (m *FreeSpinConfig_FreeSpinReward) validate(all bool) error {
 	// no validation rules for SpinCount
 
 	// no validation rules for FreeSpinValidity
-
-	// no validation rules for WageringRequirement
-
-	// no validation rules for MaxWithdrawalMultiplier
-
-	// no validation rules for RewardValidity
 
 	if len(errors) > 0 {
 		return FreeSpinConfig_FreeSpinRewardMultiError(errors)
@@ -5488,46 +6086,11 @@ func (m *FreeBetConfig_FreeBetReward) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
-
-	if all {
-		switch v := interface{}(m.GetTemplate()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FreeBetConfig_FreeBetRewardValidationError{
-					field:  "Template",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, FreeBetConfig_FreeBetRewardValidationError{
-					field:  "Template",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return FreeBetConfig_FreeBetRewardValidationError{
-				field:  "Template",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for TemplateId
 
 	// no validation rules for BetCount
 
 	// no validation rules for FreeBetValidity
-
-	// no validation rules for WageringRequirement
-
-	// no validation rules for MaxWithdrawalMultiplier
-
-	// no validation rules for RewardValidity
 
 	if len(errors) > 0 {
 		return FreeBetConfig_FreeBetRewardMultiError(errors)
@@ -5609,3 +6172,123 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = FreeBetConfig_FreeBetRewardValidationError{}
+
+// Validate checks the field values on
+// ListUniversalCodeUsagesResponse_UniversalCodeUsage with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListUniversalCodeUsagesResponse_UniversalCodeUsage) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListUniversalCodeUsagesResponse_UniversalCodeUsage with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// ListUniversalCodeUsagesResponse_UniversalCodeUsageMultiError, or nil if
+// none found.
+func (m *ListUniversalCodeUsagesResponse_UniversalCodeUsage) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUniversalCodeUsagesResponse_UniversalCodeUsage) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Code
+
+	// no validation rules for UsedCount
+
+	// no validation rules for TotalCount
+
+	if len(errors) > 0 {
+		return ListUniversalCodeUsagesResponse_UniversalCodeUsageMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUniversalCodeUsagesResponse_UniversalCodeUsageMultiError is an error
+// wrapping multiple validation errors returned by
+// ListUniversalCodeUsagesResponse_UniversalCodeUsage.ValidateAll() if the
+// designated constraints aren't met.
+type ListUniversalCodeUsagesResponse_UniversalCodeUsageMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUniversalCodeUsagesResponse_UniversalCodeUsageMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUniversalCodeUsagesResponse_UniversalCodeUsageMultiError) AllErrors() []error { return m }
+
+// ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError is the
+// validation error returned by
+// ListUniversalCodeUsagesResponse_UniversalCodeUsage.Validate if the
+// designated constraints aren't met.
+type ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError) ErrorName() string {
+	return "ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUniversalCodeUsagesResponse_UniversalCodeUsage.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUniversalCodeUsagesResponse_UniversalCodeUsageValidationError{}
