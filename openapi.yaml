@@ -1252,6 +1252,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionResponse'
+    /v1/backoffice/bet-ticker/config/add:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_AddBetTickerConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddBetTickerConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.AddBetTickerConfigResponse'
+    /v1/backoffice/bet-ticker/config/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListBetTickerConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBetTickerConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListBetTickerConfigResponse'
+    /v1/backoffice/bet-ticker/config/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateBetTickerConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateBetTickerConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateBetTickerConfigResponse'
     /v1/backoffice/cloudflare/purge:
         post:
             tags:
@@ -2010,60 +2064,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListThirdPartyFeesResponse'
-    /v1/backoffice/game/bet/dispaly/config/add:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_AddGameBetDisplayConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddGameBetDisplayConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.push.service.v1.AddBetTickerConfigResponse'
-    /v1/backoffice/game/bet/dispaly/config/list:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_ListGameBetDisplayConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameBetDisplayConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.push.service.v1.ListBetTickerConfigResponse'
-    /v1/backoffice/game/bet/dispaly/config/update:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_UpdateGameBetDisplayConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.push.service.v1.UpdateBetTickerConfigResponse'
     /v1/backoffice/game/bets/export:
         post:
             tags:
@@ -8576,6 +8576,17 @@ components:
                     format: int32
                 bankInfo:
                     type: object
+        api.backoffice.service.v1.AddBetTickerConfigRequest:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -8588,17 +8599,6 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.AddOperatorApexDomainRequest:
             type: object
             properties:
@@ -11717,6 +11717,11 @@ components:
                     type: string
                 estNetCosts:
                     type: string
+        api.backoffice.service.v1.ListBetTickerConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -12300,11 +12305,6 @@ components:
         api.backoffice.service.v1.ListFreespinsProvidersRequest:
             type: object
             properties: {}
-        api.backoffice.service.v1.ListGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListGameDataRequest:
             type: object
             properties:
@@ -15197,6 +15197,30 @@ components:
                     type: boolean
                 bankInfo:
                     type: object
+        api.backoffice.service.v1.UpdateBetTickerConfigRequest:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.UpdateBetTickerConfigRequest_Item'
+                enable:
+                    type: boolean
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                maskingEnabled:
+                    type: boolean
+                maskingRule:
+                    type: string
+        api.backoffice.service.v1.UpdateBetTickerConfigRequest_Item:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
         api.backoffice.service.v1.UpdateCampaignRequest:
             type: object
             properties:
@@ -15219,30 +15243,6 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
                 commissionPlanId:
                     type: string
-        api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest_Item'
-                enable:
-                    type: boolean
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                maskingEnabled:
-                    type: boolean
-                maskingRule:
-                    type: string
-        api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest_Item:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:

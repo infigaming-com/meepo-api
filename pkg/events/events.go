@@ -216,27 +216,7 @@ type GameBetEvent struct {
 	CompanyOperatorID                    int64          `json:"company_operator_id"`
 	GameTransactionIDs                   []int64        `json:"game_transaction_ids"`
 	RTP                                  string         `json:"rtp"`
-}
-
-type GameBetEventBoardcastItem struct {
-	BetID        int64   `json:"bet_id"`
-	OperatorID   int64   `json:"operator_id"`
-	OperatorName string  `json:"operator_name"`
-	GameName     string  `json:"game_name"`
-	GameCategory string  `json:"game_category"`
-	Currency     string  `json:"currency"`
-	Status       string  `json:"status"`
-	BetAmount    string  `json:"bet_amount"`
-	WinAmount    string  `json:"win_amount"`
-	Turnover     string  `json:"turnover"`
-	WinCount     int32   `json:"win_count"`
-	WagerType    string  `json:"wager_type"`
-	SettleTime   int64   `json:"settle_time"`
-	CreatedAt    int64   `json:"created_at"`
-	UpdatedAt    int64   `json:"updated_at"`
-	BetOdds      float32 `json:"bet_odds"`
-	UserID       int64   `json:"user_id"`
-	UserName     string  `json:"user_name"`
+	UserName                             string         `json:"user_name"`
 }
 
 type WebsocketOperatorBoardcastEvent struct {

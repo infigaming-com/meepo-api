@@ -183,23 +183,23 @@ service BackofficeGame {
 		};
 	}
 
-	rpc AddGameBetDisplayConfig(AddGameBetDisplayConfigRequest) returns (api.push.service.v1.AddBetTickerConfigResponse) {
+	rpc AddBetTickerConfig(AddBetTickerConfigRequest) returns (api.push.service.v1.AddBetTickerConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/game/bet/dispaly/config/add"
+			post: "/v1/backoffice/bet-ticker/config/add"
 			body: "*"
 		};
 	}
 
-	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (api.push.service.v1.UpdateBetTickerConfigResponse) {
+	rpc UpdateBetTickerConfig(UpdateBetTickerConfigRequest) returns (api.push.service.v1.UpdateBetTickerConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/game/bet/dispaly/config/update"
+			post: "/v1/backoffice/bet-ticker/config/update"
 			body: "*"
 		};
 	}
 
-	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (api.push.service.v1.ListBetTickerConfigResponse) {
+	rpc ListBetTickerConfig(ListBetTickerConfigRequest) returns (api.push.service.v1.ListBetTickerConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/game/bet/dispaly/config/list"
+			post: "/v1/backoffice/bet-ticker/config/list"
 			body: "*"
 		};
 	}
@@ -906,14 +906,14 @@ message BackofficeListGamesUnderTagResponse {
 
 // ============== BetTicker Config Request Messages ==============
 
-message AddGameBetDisplayConfigRequest {
+message AddBetTickerConfigRequest {
 	string country = 1;
 	api.push.service.v1.BettingFilterConfig all_bet = 2;
 	api.push.service.v1.BettingFilterConfig high_wins = 3;
 	api.common.OperatorContext target_operator_context = 4;
 }
 
-message UpdateGameBetDisplayConfigRequest {
+message UpdateBetTickerConfigRequest {
 	message Item {
 		string country = 1;
 		optional api.push.service.v1.BettingFilterConfig all_bet = 2;
@@ -926,6 +926,6 @@ message UpdateGameBetDisplayConfigRequest {
 	optional string masking_rule = 5;
 }
 
-message ListGameBetDisplayConfigRequest {
+message ListBetTickerConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 }
