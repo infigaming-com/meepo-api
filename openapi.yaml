@@ -17445,7 +17445,8 @@ components:
                 operator_txn_id:
                     type: string
                 processed_at:
-                    type: string
+                    type: number
+                    format: double
                 bonus_amount:
                     type: string
         api.game.service.v1.UrlInfo:
