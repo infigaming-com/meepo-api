@@ -957,6 +957,14 @@ func (m *AddBetTickerConfigRequest) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
+	if m.MaskingEnabled != nil {
+		// no validation rules for MaskingEnabled
+	}
+
+	if m.MaskingRule != nil {
+		// no validation rules for MaskingRule
+	}
+
 	if len(errors) > 0 {
 		return AddBetTickerConfigRequestMultiError(errors)
 	}

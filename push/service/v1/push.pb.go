@@ -480,13 +480,15 @@ func (x *BettingFilterConfig) GetEnable() bool {
 }
 
 type AddBetTickerConfigRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
-	AllBet        *BettingFilterConfig   `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
-	HighWins      *BettingFilterConfig   `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
-	OperatorId    int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Country        string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet         *BettingFilterConfig   `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
+	HighWins       *BettingFilterConfig   `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
+	OperatorId     int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	MaskingEnabled *bool                  `protobuf:"varint,5,opt,name=masking_enabled,json=maskingEnabled,proto3,oneof" json:"masking_enabled,omitempty"`
+	MaskingRule    *string                `protobuf:"bytes,6,opt,name=masking_rule,json=maskingRule,proto3,oneof" json:"masking_rule,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AddBetTickerConfigRequest) Reset() {
@@ -545,6 +547,20 @@ func (x *AddBetTickerConfigRequest) GetOperatorId() int64 {
 		return x.OperatorId
 	}
 	return 0
+}
+
+func (x *AddBetTickerConfigRequest) GetMaskingEnabled() bool {
+	if x != nil && x.MaskingEnabled != nil {
+		return *x.MaskingEnabled
+	}
+	return false
+}
+
+func (x *AddBetTickerConfigRequest) GetMaskingRule() string {
+	if x != nil && x.MaskingRule != nil {
+		return *x.MaskingRule
+	}
+	return ""
 }
 
 type AddBetTickerConfigResponse struct {
@@ -1044,13 +1060,17 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\x03 \x03(\tR\n" +
 	"currencies\x12\x16\n" +
-	"\x06enable\x18\x04 \x01(\bR\x06enable\"\xe0\x01\n" +
+	"\x06enable\x18\x04 \x01(\bR\x06enable\"\xdb\x02\n" +
 	"\x19AddBetTickerConfigRequest\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12A\n" +
 	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\x06allBet\x12E\n" +
 	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\bhighWins\x12\x1f\n" +
 	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\"\x1c\n" +
+	"operatorId\x12,\n" +
+	"\x0fmasking_enabled\x18\x05 \x01(\bH\x00R\x0emaskingEnabled\x88\x01\x01\x12&\n" +
+	"\fmasking_rule\x18\x06 \x01(\tH\x01R\vmaskingRule\x88\x01\x01B\x12\n" +
+	"\x10_masking_enabledB\x0f\n" +
+	"\r_masking_rule\"\x1c\n" +
 	"\x1aAddBetTickerConfigResponse\"\xef\x03\n" +
 	"\x1cUpdateBetTickerConfigRequest\x12J\n" +
 	"\x04list\x18\x01 \x03(\v26.api.push.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x16\n" +
@@ -1155,6 +1175,7 @@ func file_push_service_v1_push_proto_init() {
 	if File_push_service_v1_push_proto != nil {
 		return
 	}
+	file_push_service_v1_push_proto_msgTypes[7].OneofWrappers = []any{}
 	file_push_service_v1_push_proto_msgTypes[9].OneofWrappers = []any{}
 	file_push_service_v1_push_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
