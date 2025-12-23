@@ -20277,6 +20277,8 @@ components:
                     type: string
                 codeType:
                     type: string
+                campaignId:
+                    type: string
                 campaignName:
                     type: string
                 campaignStatus:

@@ -5417,6 +5417,8 @@ func (m *GetPromoCodeInfoResponse) validate(all bool) error {
 
 	// no validation rules for CodeType
 
+	// no validation rules for CampaignId
+
 	// no validation rules for CampaignName
 
 	// no validation rules for CampaignStatus
