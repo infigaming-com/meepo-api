@@ -18,16 +18,16 @@ message FreeSpinConfig {
 	bool enabled = 1;
 	string reward_type = 2;              // cash | bonus (winning credit type)
 	string currency = 3;                 // play currency
-	int32 wagering_requirement = 4;
-	string max_withdrawal_multiplier = 5;
-	int64 reward_validity = 6;          // winning reward validity (ms)
-	repeated FreeSpinReward rewards = 7;
+	int32 spin_count = 4;
+	int32 wagering_requirement = 5;
+	string max_withdrawal_multiplier = 6;
+	int64 reward_validity = 7;          // winning reward validity (ms)
+	repeated FreeSpinReward rewards = 8;
 	message FreeSpinReward {
 		string provider_id = 1;
 		string game_id = 2;
 		int32 level = 3;
-		int32 spin_count = 4;
-		int64 free_spin_validity = 5;        // ms, 0 = no expiration
+		int64 free_spin_validity = 4;        // ms, 0 = no expiration
 	}
 }
 
@@ -189,12 +189,12 @@ message UpdatePromoCodeCampaignStatusResponse {
 message ListPromoCodeCampaignsRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
-	string status = 3;                   // active | paused | disabled
-	string code_type = 4;                // one_time | universal
+	optional string status = 3;                   // active | paused | disabled
+	optional string code_type = 4;                // one_time | universal
 	google.protobuf.Timestamp start_time = 5;
 	google.protobuf.Timestamp end_time = 6;
-	int32 page = 7;
-	int32 page_size = 8;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
 }
 
 message PromoCodeCampaignListItem {
@@ -228,10 +228,11 @@ message ListPromoCodeCampaignsResponse {
 message ListPromoCodeCampaignDetailsRequest {
 	api.common.OperatorContext initiator_operator_context = 1;
 	int64 campaign_id = 2;
-	int64 user_id = 3;
-	string status = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	optional int64 user_id = 3;
+	optional string status = 4;
+	optional string code = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 // Code item for one_time campaigns
@@ -319,20 +320,21 @@ message GetPromoCodeInfoRequest {
 message GetPromoCodeInfoResponse {
 	string code = 1;
 	string code_type = 2;                        // one_time | universal
-	string campaign_name = 3;
-	string campaign_status = 4;                  // active | paused | disabled
-	google.protobuf.Timestamp start_time = 5;
-	google.protobuf.Timestamp end_time = 6;
-	int32 usage_count = 7;                       // this code's usage count
-	int32 max_usage_limit = 8;                   // max usage limit (for universal)
-	bool already_used_by_user = 9;               // whether current user has already used this promo code campaign
-	PromoCodeRewardConfigs reward_configs = 10;
-	PromoCodeConditions reward_conditions = 11;
-	repeated ConditionValidationResult condition_results = 12;
+	int64 campaign_id = 3;
+	string campaign_name = 4;
+	string campaign_status = 5;                  // active | paused | disabled
+	google.protobuf.Timestamp start_time = 6;
+	google.protobuf.Timestamp end_time = 7;
+	int32 usage_count = 8;                       // this code's usage count
+	int32 max_usage_limit = 9;                   // max usage limit (for universal)
+	bool already_used_by_user = 10;               // whether current user has already used this promo code campaign
+	PromoCodeRewardConfigs reward_configs = 11;
+	PromoCodeConditions reward_conditions = 12;
+	repeated ConditionValidationResult condition_results = 13;
 
 	// Claimability status
-	bool claimable = 13;                         // whether the code can be claimed by this user
-	string unclaimable_reason = 14;              // reason why the code cannot be claimed (empty if claimable)
+	bool claimable = 14;                         // whether the code can be claimed by this user
+	string unclaimable_reason = 15;              // reason why the code cannot be claimed (empty if claimable)
 }
 
 // ClaimPromoCode - Claim promo code reward
