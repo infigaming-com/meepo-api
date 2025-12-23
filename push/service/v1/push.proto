@@ -86,6 +86,8 @@ message AddBetTickerConfigRequest {
 	BettingFilterConfig all_bet = 2;
 	BettingFilterConfig high_wins = 3;
 	int64 operator_id = 4;
+	optional bool masking_enabled = 5;
+	optional string masking_rule = 6;
 }
 
 message AddBetTickerConfigResponse {}
