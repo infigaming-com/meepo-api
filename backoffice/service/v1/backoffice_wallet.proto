@@ -839,11 +839,11 @@ message ListPromoCodeCampaignsRequest {
 // List Campaign Details - codes (for one_time) or usages (for universal)
 message ListPromoCodeCampaignDetailsRequest {
 	int64 campaign_id = 1;
-	int64 user_id = 2;
-	string status = 3;
-	string code = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	optional int64 user_id = 2;
+	optional string status = 3;
+	optional string code = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }
 
 // Generate Codes for Campaign (one_time only)

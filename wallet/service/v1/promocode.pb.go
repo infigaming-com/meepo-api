@@ -1407,12 +1407,12 @@ type ListPromoCodeCampaignsRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Status                   string                  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`                     // active | paused | disabled
-	CodeType                 string                  `protobuf:"bytes,4,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"` // one_time | universal
+	Status                   *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`                     // active | paused | disabled
+	CodeType                 *string                 `protobuf:"bytes,4,opt,name=code_type,json=codeType,proto3,oneof" json:"code_type,omitempty"` // one_time | universal
 	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Page                     int32                   `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize                 int32                   `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Page                     *int32                  `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                  `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1462,15 +1462,15 @@ func (x *ListPromoCodeCampaignsRequest) GetTargetOperatorContext() *common.Opera
 }
 
 func (x *ListPromoCodeCampaignsRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return ""
 }
 
 func (x *ListPromoCodeCampaignsRequest) GetCodeType() string {
-	if x != nil {
-		return x.CodeType
+	if x != nil && x.CodeType != nil {
+		return *x.CodeType
 	}
 	return ""
 }
@@ -1490,15 +1490,15 @@ func (x *ListPromoCodeCampaignsRequest) GetEndTime() *timestamppb.Timestamp {
 }
 
 func (x *ListPromoCodeCampaignsRequest) GetPage() int32 {
-	if x != nil {
-		return x.Page
+	if x != nil && x.Page != nil {
+		return *x.Page
 	}
 	return 0
 }
 
 func (x *ListPromoCodeCampaignsRequest) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
 	}
 	return 0
 }
@@ -1748,11 +1748,11 @@ type ListPromoCodeCampaignDetailsRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	CampaignId               int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	UserId                   int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Status                   string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Code                     string                  `protobuf:"bytes,5,opt,name=code,proto3" json:"code,omitempty"`
-	Page                     int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize                 int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId                   *int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Status                   *string                 `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Code                     *string                 `protobuf:"bytes,5,opt,name=code,proto3,oneof" json:"code,omitempty"`
+	Page                     *int32                  `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1802,36 +1802,36 @@ func (x *ListPromoCodeCampaignDetailsRequest) GetCampaignId() int64 {
 }
 
 func (x *ListPromoCodeCampaignDetailsRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
 func (x *ListPromoCodeCampaignDetailsRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return ""
 }
 
 func (x *ListPromoCodeCampaignDetailsRequest) GetCode() string {
-	if x != nil {
-		return x.Code
+	if x != nil && x.Code != nil {
+		return *x.Code
 	}
 	return ""
 }
 
 func (x *ListPromoCodeCampaignDetailsRequest) GetPage() int32 {
-	if x != nil {
-		return x.Page
+	if x != nil && x.Page != nil {
+		return *x.Page
 	}
 	return 0
 }
 
 func (x *ListPromoCodeCampaignDetailsRequest) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
 	}
 	return 0
 }
@@ -3106,17 +3106,23 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\vcampaign_id\x18\x03 \x01(\x03R\n" +
 	"campaignId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\"'\n" +
-	"%UpdatePromoCodeCampaignStatusResponse\"\xa7\x03\n" +
+	"%UpdatePromoCodeCampaignStatusResponse\"\xeb\x03\n" +
 	"\x1dListPromoCodeCampaignsRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1b\n" +
-	"\tcode_type\x18\x04 \x01(\tR\bcodeType\x129\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x00R\x06status\x88\x01\x01\x12 \n" +
+	"\tcode_type\x18\x04 \x01(\tH\x01R\bcodeType\x88\x01\x01\x129\n" +
 	"\n" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x12\n" +
-	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\b \x01(\x05R\bpageSize\"\xaf\x05\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x03R\bpageSize\x88\x01\x01B\t\n" +
+	"\a_statusB\f\n" +
+	"\n" +
+	"_code_typeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xaf\x05\n" +
 	"\x19PromoCodeCampaignListItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -3144,16 +3150,23 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\fpaused_count\x18\x04 \x01(\x05R\vpausedCount\x12%\n" +
 	"\x0edisabled_count\x18\x05 \x01(\x05R\rdisabledCount\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\x97\x02\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\xe7\x02\n" +
 	"#ListPromoCodeCampaignDetailsRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
-	"campaignId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12\x12\n" +
-	"\x04code\x18\x05 \x01(\tR\x04code\x12\x12\n" +
-	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\"\xd1\x02\n" +
+	"campaignId\x12\x1c\n" +
+	"\auser_id\x18\x03 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\tH\x01R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04code\x18\x05 \x01(\tH\x02R\x04code\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x04R\bpageSize\x88\x01\x01B\n" +
+	"\n" +
+	"\b_user_idB\t\n" +
+	"\a_statusB\a\n" +
+	"\x05_codeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xd1\x02\n" +
 	"\x11PromoCodeListItem\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12%\n" +
@@ -3377,6 +3390,8 @@ func file_wallet_service_v1_promocode_proto_init() {
 		return
 	}
 	file_wallet_service_v1_promocode_proto_msgTypes[3].OneofWrappers = []any{}
+	file_wallet_service_v1_promocode_proto_msgTypes[19].OneofWrappers = []any{}
+	file_wallet_service_v1_promocode_proto_msgTypes[22].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
