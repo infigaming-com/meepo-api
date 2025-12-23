@@ -270,6 +270,9 @@ service Wallet {
 
 	// CreditFreeBetWin credits freebet win amount to user's wallet
 	rpc CreditFreeBetWin(CreditFreeBetWinRequest) returns (CreditFreeBetWinResponse) {}
+
+	// GetAllUserBalanceAggregatedByOperator returns the aggregated balance of all users by an operator
+	rpc GetAllUserBalanceAggregatedByOperator(GetAllUserBalanceAggregatedByOperatorRequest) returns (GetAllUserBalanceAggregatedByOperatorResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1773,21 +1776,23 @@ message GetUserGameTransactionsSummaryResponse {
 
 message CreditFreespinWinRequest {
 	int64 user_id = 1;
-	string currency = 2;
-	string amount = 3;
-	string freespin_id = 4;
-	string txn_id = 5;
-	string game_id = 6;
-	string round_id = 7;
-	int64 timestamp = 8;
-	api.common.OperatorContext operator_context = 9;
+	string currency = 2; // game currency
+	string settlement_currency = 3; // player's wallet currency, not the free spin settlement currency
+	string amount = 4;
+	string freespin_id = 5;
+	string txn_id = 6;
+	string game_id = 7;
+	string round_id = 8;
+	int64 timestamp = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message CreditFreespinWinResponse {
 	int64 transaction_id = 1;
-	string balance = 2;
-	string bonus = 3;
-	int64 timestamp = 4;
+	string settlement_currency_cash = 2; // player's wallet currency's current balance cash
+	string settlement_currency_operator_bonus = 3;
+	string settlement_currency_provider_bonus = 4;
+	repeated AffectedCredit affected_credits = 5; // for free spin win's credit
 }
 
 // ========== FreeBet Win Messages ==========
@@ -1795,18 +1800,33 @@ message CreditFreespinWinResponse {
 message CreditFreeBetWinRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string amount = 3;
-	string freebet_id = 4;
-	string txn_id = 5;
-	string game_id = 6;
-	string round_id = 7;
-	int64 timestamp = 8;
-	api.common.OperatorContext operator_context = 9;
+	string settlement_currency = 3; // player's wallet currency, not the free bet settlement currency
+	string amount = 4;
+	string freebet_id = 5;
+	string txn_id = 6;
+	string game_id = 7;
+	string round_id = 8;
+	int64 timestamp = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message CreditFreeBetWinResponse {
 	int64 transaction_id = 1;
-	string balance = 2;
-	string bonus = 3;
-	int64 timestamp = 4;
+	string settlement_currency_cash = 2; // player's wallet currency's current balance cash
+	string settlement_currency_operator_bonus = 3; 
+	string settlement_currency_provider_bonus = 4;
+	repeated AffectedCredit affected_credits = 5; // for free bet win's credit
+}
+
+message GetAllUserBalanceAggregatedByOperatorRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetAllUserBalanceAggregatedByOperatorResponse {
+	string cash_usd = 1;
+	string cash_reporting_currency = 2;
+	string operator_bonus_usd = 3;
+	string operator_bonus_reporting_currency = 4;
+	string provider_bonus_usd = 5;
+	string provider_bonus_reporting_currency = 6;
 }
