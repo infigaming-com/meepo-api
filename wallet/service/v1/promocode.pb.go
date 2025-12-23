@@ -2502,19 +2502,20 @@ type GetPromoCodeInfoResponse struct {
 	state             protoimpl.MessageState       `protogen:"open.v1"`
 	Code              string                       `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	CodeType          string                       `protobuf:"bytes,2,opt,name=code_type,json=codeType,proto3" json:"code_type,omitempty"` // one_time | universal
-	CampaignName      string                       `protobuf:"bytes,3,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	CampaignStatus    string                       `protobuf:"bytes,4,opt,name=campaign_status,json=campaignStatus,proto3" json:"campaign_status,omitempty"` // active | paused | disabled
-	StartTime         *timestamppb.Timestamp       `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime           *timestamppb.Timestamp       `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	UsageCount        int32                        `protobuf:"varint,7,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`                          // this code's usage count
-	MaxUsageLimit     int32                        `protobuf:"varint,8,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`               // max usage limit (for universal)
-	AlreadyUsedByUser bool                         `protobuf:"varint,9,opt,name=already_used_by_user,json=alreadyUsedByUser,proto3" json:"already_used_by_user,omitempty"` // whether current user has already used this promo code campaign
-	RewardConfigs     *PromoCodeRewardConfigs      `protobuf:"bytes,10,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
-	RewardConditions  *PromoCodeConditions         `protobuf:"bytes,11,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
-	ConditionResults  []*ConditionValidationResult `protobuf:"bytes,12,rep,name=condition_results,json=conditionResults,proto3" json:"condition_results,omitempty"`
+	CampaignId        int64                        `protobuf:"varint,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	CampaignName      string                       `protobuf:"bytes,4,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	CampaignStatus    string                       `protobuf:"bytes,5,opt,name=campaign_status,json=campaignStatus,proto3" json:"campaign_status,omitempty"` // active | paused | disabled
+	StartTime         *timestamppb.Timestamp       `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime           *timestamppb.Timestamp       `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	UsageCount        int32                        `protobuf:"varint,8,opt,name=usage_count,json=usageCount,proto3" json:"usage_count,omitempty"`                           // this code's usage count
+	MaxUsageLimit     int32                        `protobuf:"varint,9,opt,name=max_usage_limit,json=maxUsageLimit,proto3" json:"max_usage_limit,omitempty"`                // max usage limit (for universal)
+	AlreadyUsedByUser bool                         `protobuf:"varint,10,opt,name=already_used_by_user,json=alreadyUsedByUser,proto3" json:"already_used_by_user,omitempty"` // whether current user has already used this promo code campaign
+	RewardConfigs     *PromoCodeRewardConfigs      `protobuf:"bytes,11,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
+	RewardConditions  *PromoCodeConditions         `protobuf:"bytes,12,opt,name=reward_conditions,json=rewardConditions,proto3" json:"reward_conditions,omitempty"`
+	ConditionResults  []*ConditionValidationResult `protobuf:"bytes,13,rep,name=condition_results,json=conditionResults,proto3" json:"condition_results,omitempty"`
 	// Claimability status
-	Claimable         bool   `protobuf:"varint,13,opt,name=claimable,proto3" json:"claimable,omitempty"`                                         // whether the code can be claimed by this user
-	UnclaimableReason string `protobuf:"bytes,14,opt,name=unclaimable_reason,json=unclaimableReason,proto3" json:"unclaimable_reason,omitempty"` // reason why the code cannot be claimed (empty if claimable)
+	Claimable         bool   `protobuf:"varint,14,opt,name=claimable,proto3" json:"claimable,omitempty"`                                         // whether the code can be claimed by this user
+	UnclaimableReason string `protobuf:"bytes,15,opt,name=unclaimable_reason,json=unclaimableReason,proto3" json:"unclaimable_reason,omitempty"` // reason why the code cannot be claimed (empty if claimable)
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -2561,6 +2562,13 @@ func (x *GetPromoCodeInfoResponse) GetCodeType() string {
 		return x.CodeType
 	}
 	return ""
+}
+
+func (x *GetPromoCodeInfoResponse) GetCampaignId() int64 {
+	if x != nil {
+		return x.CampaignId
+	}
+	return 0
 }
 
 func (x *GetPromoCodeInfoResponse) GetCampaignName() string {
@@ -3228,25 +3236,27 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"-\n" +
 	"\x17GetPromoCodeInfoRequest\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\"\xe0\x05\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\"\x81\x06\n" +
 	"\x18GetPromoCodeInfoResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1b\n" +
-	"\tcode_type\x18\x02 \x01(\tR\bcodeType\x12#\n" +
-	"\rcampaign_name\x18\x03 \x01(\tR\fcampaignName\x12'\n" +
-	"\x0fcampaign_status\x18\x04 \x01(\tR\x0ecampaignStatus\x129\n" +
+	"\tcode_type\x18\x02 \x01(\tR\bcodeType\x12\x1f\n" +
+	"\vcampaign_id\x18\x03 \x01(\x03R\n" +
+	"campaignId\x12#\n" +
+	"\rcampaign_name\x18\x04 \x01(\tR\fcampaignName\x12'\n" +
+	"\x0fcampaign_status\x18\x05 \x01(\tR\x0ecampaignStatus\x129\n" +
 	"\n" +
-	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1f\n" +
-	"\vusage_count\x18\a \x01(\x05R\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1f\n" +
+	"\vusage_count\x18\b \x01(\x05R\n" +
 	"usageCount\x12&\n" +
-	"\x0fmax_usage_limit\x18\b \x01(\x05R\rmaxUsageLimit\x12/\n" +
-	"\x14already_used_by_user\x18\t \x01(\bR\x11alreadyUsedByUser\x12T\n" +
-	"\x0ereward_configs\x18\n" +
-	" \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\x12W\n" +
-	"\x11reward_conditions\x18\v \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\x12]\n" +
-	"\x11condition_results\x18\f \x03(\v20.api.wallet.service.v1.ConditionValidationResultR\x10conditionResults\x12\x1c\n" +
-	"\tclaimable\x18\r \x01(\bR\tclaimable\x12-\n" +
-	"\x12unclaimable_reason\x18\x0e \x01(\tR\x11unclaimableReason\"+\n" +
+	"\x0fmax_usage_limit\x18\t \x01(\x05R\rmaxUsageLimit\x12/\n" +
+	"\x14already_used_by_user\x18\n" +
+	" \x01(\bR\x11alreadyUsedByUser\x12T\n" +
+	"\x0ereward_configs\x18\v \x01(\v2-.api.wallet.service.v1.PromoCodeRewardConfigsR\rrewardConfigs\x12W\n" +
+	"\x11reward_conditions\x18\f \x01(\v2*.api.wallet.service.v1.PromoCodeConditionsR\x10rewardConditions\x12]\n" +
+	"\x11condition_results\x18\r \x03(\v20.api.wallet.service.v1.ConditionValidationResultR\x10conditionResults\x12\x1c\n" +
+	"\tclaimable\x18\x0e \x01(\bR\tclaimable\x12-\n" +
+	"\x12unclaimable_reason\x18\x0f \x01(\tR\x11unclaimableReason\"+\n" +
 	"\x15ClaimPromoCodeRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\"\x18\n" +
 	"\x16ClaimPromoCodeResponse\"`\n" +
