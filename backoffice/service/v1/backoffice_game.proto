@@ -183,13 +183,6 @@ service BackofficeGame {
 		};
 	}
 
-	rpc AddBetTickerConfig(AddBetTickerConfigRequest) returns (api.push.service.v1.AddBetTickerConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/bet-ticker/config/add"
-			body: "*"
-		};
-	}
-
 	rpc UpdateBetTickerConfig(UpdateBetTickerConfigRequest) returns (api.push.service.v1.UpdateBetTickerConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/bet-ticker/config/update"
@@ -906,15 +899,6 @@ message BackofficeListGamesUnderTagResponse {
 
 // ============== BetTicker Config Request Messages ==============
 
-message AddBetTickerConfigRequest {
-	string country = 1;
-	api.push.service.v1.BettingFilterConfig all_bet = 2;
-	api.push.service.v1.BettingFilterConfig high_wins = 3;
-	api.common.OperatorContext target_operator_context = 4;
-	optional bool masking_enabled = 5;
-	optional string masking_rule = 6;
-}
-
 message UpdateBetTickerConfigRequest {
 	message Item {
 		string country = 1;
@@ -924,8 +908,6 @@ message UpdateBetTickerConfigRequest {
 	repeated Item list = 1;
 	bool enable = 2;
 	api.common.OperatorContext target_operator_context = 3;
-	optional bool masking_enabled = 4;
-	optional string masking_rule = 5;
 }
 
 message ListBetTickerConfigRequest {

@@ -47,7 +47,6 @@ const (
 	BackofficeGame_ListCustomerStrikeReports_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
 	BackofficeGame_ExportCustomerStrikeReports_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ExportCustomerStrikeReports"
 	BackofficeGame_ExportSportEvents_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ExportSportEvents"
-	BackofficeGame_AddBetTickerConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/AddBetTickerConfig"
 	BackofficeGame_UpdateBetTickerConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/UpdateBetTickerConfig"
 	BackofficeGame_ListBetTickerConfig_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListBetTickerConfig"
 	BackofficeGame_ListFreespinsProviders_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ListFreespinsProviders"
@@ -104,7 +103,6 @@ type BackofficeGameClient interface {
 	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error)
-	AddBetTickerConfig(ctx context.Context, in *AddBetTickerConfigRequest, opts ...grpc.CallOption) (*v11.AddBetTickerConfigResponse, error)
 	UpdateBetTickerConfig(ctx context.Context, in *UpdateBetTickerConfigRequest, opts ...grpc.CallOption) (*v11.UpdateBetTickerConfigResponse, error)
 	ListBetTickerConfig(ctx context.Context, in *ListBetTickerConfigRequest, opts ...grpc.CallOption) (*v11.ListBetTickerConfigResponse, error)
 	// Freespins related APIs
@@ -407,16 +405,6 @@ func (c *backofficeGameClient) ExportSportEvents(ctx context.Context, in *Export
 	return out, nil
 }
 
-func (c *backofficeGameClient) AddBetTickerConfig(ctx context.Context, in *AddBetTickerConfigRequest, opts ...grpc.CallOption) (*v11.AddBetTickerConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v11.AddBetTickerConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeGame_AddBetTickerConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *backofficeGameClient) UpdateBetTickerConfig(ctx context.Context, in *UpdateBetTickerConfigRequest, opts ...grpc.CallOption) (*v11.UpdateBetTickerConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v11.UpdateBetTickerConfigResponse)
@@ -633,7 +621,6 @@ type BackofficeGameServer interface {
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error)
-	AddBetTickerConfig(context.Context, *AddBetTickerConfigRequest) (*v11.AddBetTickerConfigResponse, error)
 	UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*v11.UpdateBetTickerConfigResponse, error)
 	ListBetTickerConfig(context.Context, *ListBetTickerConfigRequest) (*v11.ListBetTickerConfigResponse, error)
 	// Freespins related APIs
@@ -753,9 +740,6 @@ func (UnimplementedBackofficeGameServer) ExportCustomerStrikeReports(context.Con
 }
 func (UnimplementedBackofficeGameServer) ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ExportSportEvents not implemented")
-}
-func (UnimplementedBackofficeGameServer) AddBetTickerConfig(context.Context, *AddBetTickerConfigRequest) (*v11.AddBetTickerConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddBetTickerConfig not implemented")
 }
 func (UnimplementedBackofficeGameServer) UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*v11.UpdateBetTickerConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateBetTickerConfig not implemented")
@@ -1300,24 +1284,6 @@ func _BackofficeGame_ExportSportEvents_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeGame_AddBetTickerConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddBetTickerConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeGameServer).AddBetTickerConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeGame_AddBetTickerConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).AddBetTickerConfig(ctx, req.(*AddBetTickerConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackofficeGame_UpdateBetTickerConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateBetTickerConfigRequest)
 	if err := dec(in); err != nil {
@@ -1752,10 +1718,6 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportSportEvents",
 			Handler:    _BackofficeGame_ExportSportEvents_Handler,
-		},
-		{
-			MethodName: "AddBetTickerConfig",
-			Handler:    _BackofficeGame_AddBetTickerConfig_Handler,
 		},
 		{
 			MethodName: "UpdateBetTickerConfig",

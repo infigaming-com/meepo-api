@@ -14,7 +14,6 @@ service Push {
 	rpc GetNotificationStats(GetNotificationStatsRequest) returns (GetNotificationStatsResponse) {}
 
 	// BetTicker Config APIs
-	rpc AddBetTickerConfig(AddBetTickerConfigRequest) returns (AddBetTickerConfigResponse) {}
 	rpc UpdateBetTickerConfig(UpdateBetTickerConfigRequest) returns (UpdateBetTickerConfigResponse) {}
 	rpc ListBetTickerConfig(ListBetTickerConfigRequest) returns (ListBetTickerConfigResponse) {}
 }
@@ -79,18 +78,9 @@ message BettingFilterConfig {
 	float mini_odds = 2;
 	repeated string currencies = 3;
 	bool enable = 4;
-}
-
-message AddBetTickerConfigRequest {
-	string country = 1;
-	BettingFilterConfig all_bet = 2;
-	BettingFilterConfig high_wins = 3;
-	int64 operator_id = 4;
 	optional bool masking_enabled = 5;
 	optional string masking_rule = 6;
 }
-
-message AddBetTickerConfigResponse {}
 
 message UpdateBetTickerConfigRequest {
 	message Item {
@@ -101,8 +91,6 @@ message UpdateBetTickerConfigRequest {
 	repeated Item list = 1;
 	bool enable = 2;
 	int64 operator_id = 3;
-	optional bool masking_enabled = 4;
-	optional string masking_rule = 5;
 }
 
 message UpdateBetTickerConfigResponse {}
@@ -119,6 +107,4 @@ message ListBetTickerConfigResponse {
 	}
 	repeated Item list = 1;
 	bool enable = 2;
-	bool masking_enabled = 3;
-	string masking_rule = 4;
 }
