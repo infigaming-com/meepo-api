@@ -13109,6 +13109,8 @@ components:
                     type: string
                 status:
                     type: string
+                code:
+                    type: string
                 page:
                     type: integer
                     format: int32
@@ -17443,7 +17445,8 @@ components:
                 operator_txn_id:
                     type: string
                 processed_at:
-                    type: string
+                    type: number
+                    format: double
                 bonus_amount:
                     type: string
         api.game.service.v1.UrlInfo:
@@ -20135,6 +20138,9 @@ components:
                     type: string
                 currency:
                     type: string
+                spinCount:
+                    type: integer
+                    format: int32
                 wageringRequirement:
                     type: integer
                     format: int32
@@ -20155,9 +20161,6 @@ components:
                 gameId:
                     type: string
                 level:
-                    type: integer
-                    format: int32
-                spinCount:
                     type: integer
                     format: int32
                 freeSpinValidity:
@@ -20273,6 +20276,8 @@ components:
                 code:
                     type: string
                 codeType:
+                    type: string
+                campaignId:
                     type: string
                 campaignName:
                     type: string

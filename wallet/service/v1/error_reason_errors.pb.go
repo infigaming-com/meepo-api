@@ -1942,3 +1942,75 @@ func IsInvalidOperatorWalletConfig(err error) bool {
 func ErrorInvalidOperatorWalletConfig(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_WALLET_CONFIG.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetUserFreeSpinFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_FREE_SPIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserFreeSpinFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_FREE_SPIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserFreeBetFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_FREE_BET_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserFreeBetFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_FREE_BET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCreditBySourceFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CREDIT_BY_SOURCE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCreditBySourceFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CREDIT_BY_SOURCE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFreeRewardOwnershipMismatch(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FREE_REWARD_OWNERSHIP_MISMATCH.String() && e.Code == 500
+}
+
+func ErrorFreeRewardOwnershipMismatch(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FREE_REWARD_OWNERSHIP_MISMATCH.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreditFreeSpinWinFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREDIT_FREE_SPIN_WIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreditFreeSpinWinFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREDIT_FREE_SPIN_WIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreditFreeBetWinFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREDIT_FREE_BET_WIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreditFreeBetWinFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREDIT_FREE_BET_WIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
