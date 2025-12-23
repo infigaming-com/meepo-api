@@ -8427,13 +8427,25 @@ func (m *ListPromoCodeCampaignDetailsRequest) validate(all bool) error {
 
 	// no validation rules for CampaignId
 
-	// no validation rules for UserId
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
 
-	// no validation rules for Status
+	if m.Status != nil {
+		// no validation rules for Status
+	}
 
-	// no validation rules for Page
+	if m.Code != nil {
+		// no validation rules for Code
+	}
 
-	// no validation rules for PageSize
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
 		return ListPromoCodeCampaignDetailsRequestMultiError(errors)
