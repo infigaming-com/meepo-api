@@ -911,6 +911,8 @@ message AddBetTickerConfigRequest {
 	api.push.service.v1.BettingFilterConfig all_bet = 2;
 	api.push.service.v1.BettingFilterConfig high_wins = 3;
 	api.common.OperatorContext target_operator_context = 4;
+	optional bool masking_enabled = 5;
+	optional string masking_rule = 6;
 }
 
 message UpdateBetTickerConfigRequest {

@@ -4633,6 +4633,8 @@ type AddBetTickerConfigRequest struct {
 	AllBet                *v1.BettingFilterConfig `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
 	HighWins              *v1.BettingFilterConfig `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	MaskingEnabled        *bool                   `protobuf:"varint,5,opt,name=masking_enabled,json=maskingEnabled,proto3,oneof" json:"masking_enabled,omitempty"`
+	MaskingRule           *string                 `protobuf:"bytes,6,opt,name=masking_rule,json=maskingRule,proto3,oneof" json:"masking_rule,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -4693,6 +4695,20 @@ func (x *AddBetTickerConfigRequest) GetTargetOperatorContext() *common.OperatorC
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *AddBetTickerConfigRequest) GetMaskingEnabled() bool {
+	if x != nil && x.MaskingEnabled != nil {
+		return *x.MaskingEnabled
+	}
+	return false
+}
+
+func (x *AddBetTickerConfigRequest) GetMaskingRule() string {
+	if x != nil && x.MaskingRule != nil {
+		return *x.MaskingRule
+	}
+	return ""
 }
 
 type UpdateBetTickerConfigRequest struct {
@@ -6544,12 +6560,16 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"orderIndex\x12\x16\n" +
 	"\x06sticky\x18\f \x01(\bR\x06sticky\x12\x1b\n" +
 	"\tfree_spin\x18\r \x01(\bR\bfreeSpin\x12\x10\n" +
-	"\x03rtp\x18\x0e \x01(\tR\x03rtp\"\x94\x02\n" +
+	"\x03rtp\x18\x0e \x01(\tR\x03rtp\"\x8f\x03\n" +
 	"\x19AddBetTickerConfigRequest\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12A\n" +
 	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\x06allBet\x12E\n" +
 	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\bhighWins\x12S\n" +
-	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xa9\x04\n" +
+	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12,\n" +
+	"\x0fmasking_enabled\x18\x05 \x01(\bH\x00R\x0emaskingEnabled\x88\x01\x01\x12&\n" +
+	"\fmasking_rule\x18\x06 \x01(\tH\x01R\vmaskingRule\x88\x01\x01B\x12\n" +
+	"\x10_masking_enabledB\x0f\n" +
+	"\r_masking_rule\"\xa9\x04\n" +
 	"\x1cUpdateBetTickerConfigRequest\x12P\n" +
 	"\x04list\x18\x01 \x03(\v2<.api.backoffice.service.v1.UpdateBetTickerConfigRequest.ItemR\x04list\x12\x16\n" +
 	"\x06enable\x18\x02 \x01(\bR\x06enable\x12S\n" +
@@ -6937,6 +6957,7 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[42].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[45].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[64].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[66].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[67].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[71].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[73].OneofWrappers = []any{}
