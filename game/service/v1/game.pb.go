@@ -2289,7 +2289,7 @@ type Transactions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,proto3" json:"txn_id,omitempty"`
 	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,proto3" json:"operator_txn_id,omitempty"`
-	ProcessedAt   int64                  `protobuf:"varint,3,opt,name=processed_at,proto3" json:"processed_at,omitempty"`
+	ProcessedAt   float64                `protobuf:"fixed64,3,opt,name=processed_at,proto3" json:"processed_at,omitempty"`
 	BonusAmount   string                 `protobuf:"bytes,4,opt,name=bonus_amount,proto3" json:"bonus_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2339,7 +2339,7 @@ func (x *Transactions) GetOperatorTxnId() string {
 	return ""
 }
 
-func (x *Transactions) GetProcessedAt() int64 {
+func (x *Transactions) GetProcessedAt() float64 {
 	if x != nil {
 		return x.ProcessedAt
 	}
@@ -16443,7 +16443,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\fTransactions\x12\x16\n" +
 	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12(\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\x0foperator_txn_id\x12\"\n" +
-	"\fprocessed_at\x18\x03 \x01(\x03R\fprocessed_at\x12\"\n" +
+	"\fprocessed_at\x18\x03 \x01(\x01R\fprocessed_at\x12\"\n" +
 	"\fbonus_amount\x18\x04 \x01(\tR\fbonus_amount\"\xf2\x01\n" +
 	"\x0fRollbackRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
