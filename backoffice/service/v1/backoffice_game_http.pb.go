@@ -21,7 +21,6 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeGameAddBetTickerConfig = "/api.backoffice.service.v1.BackofficeGame/AddBetTickerConfig"
 const OperationBackofficeGameBackofficeAddGamesToTag = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddGamesToTag"
 const OperationBackofficeGameBackofficeAddProviderToTag = "/api.backoffice.service.v1.BackofficeGame/BackofficeAddProviderToTag"
 const OperationBackofficeGameBackofficeBatchUpdateTagGames = "/api.backoffice.service.v1.BackofficeGame/BackofficeBatchUpdateTagGames"
@@ -68,7 +67,6 @@ const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.Backoffice
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
 type BackofficeGameHTTPServer interface {
-	AddBetTickerConfig(context.Context, *AddBetTickerConfigRequest) (*v11.AddBetTickerConfigResponse, error)
 	// BackofficeAddGamesToTag Add games to a tag
 	BackofficeAddGamesToTag(context.Context, *BackofficeAddGamesToTagRequest) (*BackofficeAddGamesToTagResponse, error)
 	// BackofficeAddProviderToTag Add provider to tag (adds all its games)
@@ -163,7 +161,6 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/customer-strike-reports/list", _BackofficeGame_ListCustomerStrikeReports0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/customer-strike-reports/export", _BackofficeGame_ExportCustomerStrikeReports0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/sport-events/export", _BackofficeGame_ExportSportEvents0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/bet-ticker/config/add", _BackofficeGame_AddBetTickerConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bet-ticker/config/update", _BackofficeGame_UpdateBetTickerConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bet-ticker/config/list", _BackofficeGame_ListBetTickerConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/freespins/providers/list", _BackofficeGame_ListFreespinsProviders0_HTTP_Handler(srv))
@@ -756,28 +753,6 @@ func _BackofficeGame_ExportSportEvents0_HTTP_Handler(srv BackofficeGameHTTPServe
 	}
 }
 
-func _BackofficeGame_AddBetTickerConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddBetTickerConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGameAddBetTickerConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddBetTickerConfig(ctx, req.(*AddBetTickerConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v11.AddBetTickerConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _BackofficeGame_UpdateBetTickerConfig0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateBetTickerConfigRequest
@@ -1175,7 +1150,6 @@ func _BackofficeGame_BackofficeListGamesUnderTag0_HTTP_Handler(srv BackofficeGam
 }
 
 type BackofficeGameHTTPClient interface {
-	AddBetTickerConfig(ctx context.Context, req *AddBetTickerConfigRequest, opts ...http.CallOption) (rsp *v11.AddBetTickerConfigResponse, err error)
 	// BackofficeAddGamesToTag Add games to a tag
 	BackofficeAddGamesToTag(ctx context.Context, req *BackofficeAddGamesToTagRequest, opts ...http.CallOption) (rsp *BackofficeAddGamesToTagResponse, err error)
 	// BackofficeAddProviderToTag Add provider to tag (adds all its games)
@@ -1248,19 +1222,6 @@ type BackofficeGameHTTPClientImpl struct {
 
 func NewBackofficeGameHTTPClient(client *http.Client) BackofficeGameHTTPClient {
 	return &BackofficeGameHTTPClientImpl{client}
-}
-
-func (c *BackofficeGameHTTPClientImpl) AddBetTickerConfig(ctx context.Context, in *AddBetTickerConfigRequest, opts ...http.CallOption) (*v11.AddBetTickerConfigResponse, error) {
-	var out v11.AddBetTickerConfigResponse
-	pattern := "/v1/backoffice/bet-ticker/config/add"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGameAddBetTickerConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 // BackofficeAddGamesToTag Add games to a tag
