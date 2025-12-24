@@ -1559,6 +1559,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListOperatorDomainsResponse'
+    /v1/backoffice/email-domain/bind:
+        post:
+            tags:
+                - BackofficeEmailDomain
+            operationId: BackofficeEmailDomain_BindOperatorEmailDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BindOperatorEmailDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.BindOperatorEmailDomainResponse'
+    /v1/backoffice/email-domain/delete:
+        post:
+            tags:
+                - BackofficeEmailDomain
+            operationId: BackofficeEmailDomain_DeleteOperatorEmailDomainBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorEmailDomainBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorEmailDomainBindingResponse'
+    /v1/backoffice/email-domain/get:
+        post:
+            tags:
+                - BackofficeEmailDomain
+            operationId: BackofficeEmailDomain_GetOperatorEmailDomainBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorEmailDomainBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorEmailDomainBindingResponse'
+    /v1/backoffice/email-domain/list:
+        post:
+            tags:
+                - BackofficeEmailDomain
+            operationId: BackofficeEmailDomain_ListOperatorEmailDomainBindings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorEmailDomainBindingsResponse'
+    /v1/backoffice/email-domain/retry-verification:
+        post:
+            tags:
+                - BackofficeEmailDomain
+            operationId: BackofficeEmailDomain_RetryOperatorEmailDomainVerification
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RetryOperatorEmailDomainVerificationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.RetryOperatorEmailDomainVerificationResponse'
     /v1/backoffice/filestore/affiliate/registration-photo/upload:
         post:
             tags:
@@ -9024,6 +9114,18 @@ components:
         api.backoffice.service.v1.Bind2faResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.BindOperatorEmailDomainRequest:
+            type: object
+            properties:
+                domain:
+                    type: string
+                emailLocalPart:
+                    type: string
+        api.backoffice.service.v1.BindOperatorEmailDomainResponse:
+            type: object
+            properties:
+                binding:
+                    $ref: '#/components/schemas/api.infra.service.v1.EmailDomainBindingInfo'
         api.backoffice.service.v1.CancelTicketRequest:
             type: object
             properties:
@@ -9489,6 +9591,14 @@ components:
                 subdomain:
                     type: string
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.DeleteOperatorEmailDomainBindingRequest:
+            type: object
+            properties:
+                domain:
+                    type: string
+        api.backoffice.service.v1.DeleteOperatorEmailDomainBindingResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.DeletePostbackRequest:
@@ -10195,6 +10305,16 @@ components:
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorEmailDomainBindingRequest:
+            type: object
+            properties:
+                domain:
+                    type: string
+        api.backoffice.service.v1.GetOperatorEmailDomainBindingResponse:
+            type: object
+            properties:
+                binding:
+                    $ref: '#/components/schemas/api.infra.service.v1.EmailDomainBindingInfo'
         api.backoffice.service.v1.GetOperatorNotificationChannelsRequest:
             type: object
             properties:
@@ -12803,6 +12923,33 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 type:
                     type: string
+        api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest:
+            type: object
+            properties:
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListOperatorEmailDomainBindingsResponse:
+            type: object
+            properties:
+                bindings:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.infra.service.v1.EmailDomainBindingInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListOperatorRevenueShareRequest:
             type: object
             properties:
@@ -14856,6 +15003,16 @@ components:
         api.backoffice.service.v1.ResetPasswordWithCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.RetryOperatorEmailDomainVerificationRequest:
+            type: object
+            properties:
+                domain:
+                    type: string
+        api.backoffice.service.v1.RetryOperatorEmailDomainVerificationResponse:
+            type: object
+            properties:
+                binding:
+                    $ref: '#/components/schemas/api.infra.service.v1.EmailDomainBindingInfo'
         api.backoffice.service.v1.ReviewTicketRequest:
             type: object
             properties:
@@ -17428,6 +17585,65 @@ components:
                 lobbyUrl:
                     type: string
                     description: URL to redirect user to lobby.
+        api.infra.service.v1.DnsRecord:
+            type: object
+            properties:
+                recordType:
+                    type: string
+                name:
+                    type: string
+                value:
+                    type: string
+                valid:
+                    type: boolean
+                description:
+                    type: string
+        api.infra.service.v1.EmailDomainBindingInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                domain:
+                    type: string
+                emailLocalPart:
+                    type: string
+                sendingEmail:
+                    type: string
+                status:
+                    type: string
+                mailgunDomainState:
+                    type: string
+                dnsRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.infra.service.v1.DnsRecord'
+                spfValid:
+                    type: boolean
+                dkimValid:
+                    type: boolean
+                mxValid:
+                    type: boolean
+                errorReason:
+                    type: string
+                verificationAttempts:
+                    type: integer
+                    format: int32
+                lastVerificationAt:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                verificationDeadline:
+                    type: string
         api.push.service.v1.BettingFilterConfig:
             type: object
             properties:
@@ -22379,6 +22595,7 @@ tags:
     - name: BackofficeCompany
     - name: BackofficeDashboard
     - name: BackofficeDns
+    - name: BackofficeEmailDomain
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
