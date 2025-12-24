@@ -20,15 +20,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeDns_ListOperatorDomains_FullMethodName        = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
-	BackofficeDns_ListOperatorByoDomains_FullMethodName     = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
-	BackofficeDns_AddOperatorByoDomain_FullMethodName       = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
-	BackofficeDns_DeleteOperatorByoDomain_FullMethodName    = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
-	BackofficeDns_PrecheckOperatorApexDomain_FullMethodName = "/api.backoffice.service.v1.BackofficeDns/PrecheckOperatorApexDomain"
-	BackofficeDns_ListOperatorApexDomains_FullMethodName    = "/api.backoffice.service.v1.BackofficeDns/ListOperatorApexDomains"
-	BackofficeDns_AddOperatorApexDomain_FullMethodName      = "/api.backoffice.service.v1.BackofficeDns/AddOperatorApexDomain"
-	BackofficeDns_DeleteOperatorApexDomain_FullMethodName   = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorApexDomain"
-	BackofficeDns_RefreshOperatorApexDomain_FullMethodName  = "/api.backoffice.service.v1.BackofficeDns/RefreshOperatorApexDomain"
+	BackofficeDns_ListOperatorDomains_FullMethodName                  = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
+	BackofficeDns_ListOperatorByoDomains_FullMethodName               = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
+	BackofficeDns_AddOperatorByoDomain_FullMethodName                 = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
+	BackofficeDns_DeleteOperatorByoDomain_FullMethodName              = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
+	BackofficeDns_PrecheckOperatorApexDomain_FullMethodName           = "/api.backoffice.service.v1.BackofficeDns/PrecheckOperatorApexDomain"
+	BackofficeDns_ListOperatorApexDomains_FullMethodName              = "/api.backoffice.service.v1.BackofficeDns/ListOperatorApexDomains"
+	BackofficeDns_AddOperatorApexDomain_FullMethodName                = "/api.backoffice.service.v1.BackofficeDns/AddOperatorApexDomain"
+	BackofficeDns_DeleteOperatorApexDomain_FullMethodName             = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorApexDomain"
+	BackofficeDns_RefreshOperatorApexDomain_FullMethodName            = "/api.backoffice.service.v1.BackofficeDns/RefreshOperatorApexDomain"
+	BackofficeDns_BindOperatorEmailDomain_FullMethodName              = "/api.backoffice.service.v1.BackofficeDns/BindOperatorEmailDomain"
+	BackofficeDns_GetOperatorEmailDomainBinding_FullMethodName        = "/api.backoffice.service.v1.BackofficeDns/GetOperatorEmailDomainBinding"
+	BackofficeDns_DeleteOperatorEmailDomainBinding_FullMethodName     = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorEmailDomainBinding"
+	BackofficeDns_RetryOperatorEmailDomainVerification_FullMethodName = "/api.backoffice.service.v1.BackofficeDns/RetryOperatorEmailDomainVerification"
+	BackofficeDns_ListOperatorEmailDomainBindings_FullMethodName      = "/api.backoffice.service.v1.BackofficeDns/ListOperatorEmailDomainBindings"
 )
 
 // BackofficeDnsClient is the client API for BackofficeDns service.
@@ -44,6 +49,12 @@ type BackofficeDnsClient interface {
 	AddOperatorApexDomain(ctx context.Context, in *AddOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.AddOperatorApexDomainResponse, error)
 	DeleteOperatorApexDomain(ctx context.Context, in *DeleteOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorApexDomainResponse, error)
 	RefreshOperatorApexDomain(ctx context.Context, in *RefreshOperatorApexDomainRequest, opts ...grpc.CallOption) (*v1.RefreshOperatorApexDomainResponse, error)
+	// Email Domain Bindings (Mailgun)
+	BindOperatorEmailDomain(ctx context.Context, in *BindOperatorEmailDomainRequest, opts ...grpc.CallOption) (*v1.BindOperatorEmailDomainResponse, error)
+	GetOperatorEmailDomainBinding(ctx context.Context, in *GetOperatorEmailDomainBindingRequest, opts ...grpc.CallOption) (*v1.GetOperatorEmailDomainBindingResponse, error)
+	DeleteOperatorEmailDomainBinding(ctx context.Context, in *DeleteOperatorEmailDomainBindingRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorEmailDomainBindingResponse, error)
+	RetryOperatorEmailDomainVerification(ctx context.Context, in *RetryOperatorEmailDomainVerificationRequest, opts ...grpc.CallOption) (*v1.RetryOperatorEmailDomainVerificationResponse, error)
+	ListOperatorEmailDomainBindings(ctx context.Context, in *ListOperatorEmailDomainBindingsRequest, opts ...grpc.CallOption) (*v1.ListOperatorEmailDomainBindingsResponse, error)
 }
 
 type backofficeDnsClient struct {
@@ -144,6 +155,56 @@ func (c *backofficeDnsClient) RefreshOperatorApexDomain(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficeDnsClient) BindOperatorEmailDomain(ctx context.Context, in *BindOperatorEmailDomainRequest, opts ...grpc.CallOption) (*v1.BindOperatorEmailDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.BindOperatorEmailDomainResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_BindOperatorEmailDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeDnsClient) GetOperatorEmailDomainBinding(ctx context.Context, in *GetOperatorEmailDomainBindingRequest, opts ...grpc.CallOption) (*v1.GetOperatorEmailDomainBindingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorEmailDomainBindingResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_GetOperatorEmailDomainBinding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeDnsClient) DeleteOperatorEmailDomainBinding(ctx context.Context, in *DeleteOperatorEmailDomainBindingRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorEmailDomainBindingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteOperatorEmailDomainBindingResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_DeleteOperatorEmailDomainBinding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeDnsClient) RetryOperatorEmailDomainVerification(ctx context.Context, in *RetryOperatorEmailDomainVerificationRequest, opts ...grpc.CallOption) (*v1.RetryOperatorEmailDomainVerificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.RetryOperatorEmailDomainVerificationResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_RetryOperatorEmailDomainVerification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeDnsClient) ListOperatorEmailDomainBindings(ctx context.Context, in *ListOperatorEmailDomainBindingsRequest, opts ...grpc.CallOption) (*v1.ListOperatorEmailDomainBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListOperatorEmailDomainBindingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_ListOperatorEmailDomainBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeDnsServer is the server API for BackofficeDns service.
 // All implementations must embed UnimplementedBackofficeDnsServer
 // for forward compatibility.
@@ -157,6 +218,12 @@ type BackofficeDnsServer interface {
 	AddOperatorApexDomain(context.Context, *AddOperatorApexDomainRequest) (*v1.AddOperatorApexDomainResponse, error)
 	DeleteOperatorApexDomain(context.Context, *DeleteOperatorApexDomainRequest) (*v1.DeleteOperatorApexDomainResponse, error)
 	RefreshOperatorApexDomain(context.Context, *RefreshOperatorApexDomainRequest) (*v1.RefreshOperatorApexDomainResponse, error)
+	// Email Domain Bindings (Mailgun)
+	BindOperatorEmailDomain(context.Context, *BindOperatorEmailDomainRequest) (*v1.BindOperatorEmailDomainResponse, error)
+	GetOperatorEmailDomainBinding(context.Context, *GetOperatorEmailDomainBindingRequest) (*v1.GetOperatorEmailDomainBindingResponse, error)
+	DeleteOperatorEmailDomainBinding(context.Context, *DeleteOperatorEmailDomainBindingRequest) (*v1.DeleteOperatorEmailDomainBindingResponse, error)
+	RetryOperatorEmailDomainVerification(context.Context, *RetryOperatorEmailDomainVerificationRequest) (*v1.RetryOperatorEmailDomainVerificationResponse, error)
+	ListOperatorEmailDomainBindings(context.Context, *ListOperatorEmailDomainBindingsRequest) (*v1.ListOperatorEmailDomainBindingsResponse, error)
 	mustEmbedUnimplementedBackofficeDnsServer()
 }
 
@@ -193,6 +260,21 @@ func (UnimplementedBackofficeDnsServer) DeleteOperatorApexDomain(context.Context
 }
 func (UnimplementedBackofficeDnsServer) RefreshOperatorApexDomain(context.Context, *RefreshOperatorApexDomainRequest) (*v1.RefreshOperatorApexDomainResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RefreshOperatorApexDomain not implemented")
+}
+func (UnimplementedBackofficeDnsServer) BindOperatorEmailDomain(context.Context, *BindOperatorEmailDomainRequest) (*v1.BindOperatorEmailDomainResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BindOperatorEmailDomain not implemented")
+}
+func (UnimplementedBackofficeDnsServer) GetOperatorEmailDomainBinding(context.Context, *GetOperatorEmailDomainBindingRequest) (*v1.GetOperatorEmailDomainBindingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorEmailDomainBinding not implemented")
+}
+func (UnimplementedBackofficeDnsServer) DeleteOperatorEmailDomainBinding(context.Context, *DeleteOperatorEmailDomainBindingRequest) (*v1.DeleteOperatorEmailDomainBindingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteOperatorEmailDomainBinding not implemented")
+}
+func (UnimplementedBackofficeDnsServer) RetryOperatorEmailDomainVerification(context.Context, *RetryOperatorEmailDomainVerificationRequest) (*v1.RetryOperatorEmailDomainVerificationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RetryOperatorEmailDomainVerification not implemented")
+}
+func (UnimplementedBackofficeDnsServer) ListOperatorEmailDomainBindings(context.Context, *ListOperatorEmailDomainBindingsRequest) (*v1.ListOperatorEmailDomainBindingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperatorEmailDomainBindings not implemented")
 }
 func (UnimplementedBackofficeDnsServer) mustEmbedUnimplementedBackofficeDnsServer() {}
 func (UnimplementedBackofficeDnsServer) testEmbeddedByValue()                       {}
@@ -377,6 +459,96 @@ func _BackofficeDns_RefreshOperatorApexDomain_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeDns_BindOperatorEmailDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BindOperatorEmailDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).BindOperatorEmailDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_BindOperatorEmailDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).BindOperatorEmailDomain(ctx, req.(*BindOperatorEmailDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeDns_GetOperatorEmailDomainBinding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorEmailDomainBindingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).GetOperatorEmailDomainBinding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_GetOperatorEmailDomainBinding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).GetOperatorEmailDomainBinding(ctx, req.(*GetOperatorEmailDomainBindingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeDns_DeleteOperatorEmailDomainBinding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorEmailDomainBindingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).DeleteOperatorEmailDomainBinding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_DeleteOperatorEmailDomainBinding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).DeleteOperatorEmailDomainBinding(ctx, req.(*DeleteOperatorEmailDomainBindingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeDns_RetryOperatorEmailDomainVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RetryOperatorEmailDomainVerificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).RetryOperatorEmailDomainVerification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_RetryOperatorEmailDomainVerification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).RetryOperatorEmailDomainVerification(ctx, req.(*RetryOperatorEmailDomainVerificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeDns_ListOperatorEmailDomainBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorEmailDomainBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).ListOperatorEmailDomainBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_ListOperatorEmailDomainBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).ListOperatorEmailDomainBindings(ctx, req.(*ListOperatorEmailDomainBindingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeDns_ServiceDesc is the grpc.ServiceDesc for BackofficeDns service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -419,6 +591,26 @@ var BackofficeDns_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshOperatorApexDomain",
 			Handler:    _BackofficeDns_RefreshOperatorApexDomain_Handler,
+		},
+		{
+			MethodName: "BindOperatorEmailDomain",
+			Handler:    _BackofficeDns_BindOperatorEmailDomain_Handler,
+		},
+		{
+			MethodName: "GetOperatorEmailDomainBinding",
+			Handler:    _BackofficeDns_GetOperatorEmailDomainBinding_Handler,
+		},
+		{
+			MethodName: "DeleteOperatorEmailDomainBinding",
+			Handler:    _BackofficeDns_DeleteOperatorEmailDomainBinding_Handler,
+		},
+		{
+			MethodName: "RetryOperatorEmailDomainVerification",
+			Handler:    _BackofficeDns_RetryOperatorEmailDomainVerification_Handler,
+		},
+		{
+			MethodName: "ListOperatorEmailDomainBindings",
+			Handler:    _BackofficeDns_ListOperatorEmailDomainBindings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

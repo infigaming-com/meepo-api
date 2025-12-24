@@ -22,24 +22,35 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeDnsAddOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/AddOperatorApexDomain"
 const OperationBackofficeDnsAddOperatorByoDomain = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
+const OperationBackofficeDnsBindOperatorEmailDomain = "/api.backoffice.service.v1.BackofficeDns/BindOperatorEmailDomain"
 const OperationBackofficeDnsDeleteOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorApexDomain"
 const OperationBackofficeDnsDeleteOperatorByoDomain = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
+const OperationBackofficeDnsDeleteOperatorEmailDomainBinding = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorEmailDomainBinding"
+const OperationBackofficeDnsGetOperatorEmailDomainBinding = "/api.backoffice.service.v1.BackofficeDns/GetOperatorEmailDomainBinding"
 const OperationBackofficeDnsListOperatorApexDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorApexDomains"
 const OperationBackofficeDnsListOperatorByoDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
 const OperationBackofficeDnsListOperatorDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
+const OperationBackofficeDnsListOperatorEmailDomainBindings = "/api.backoffice.service.v1.BackofficeDns/ListOperatorEmailDomainBindings"
 const OperationBackofficeDnsPrecheckOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/PrecheckOperatorApexDomain"
 const OperationBackofficeDnsRefreshOperatorApexDomain = "/api.backoffice.service.v1.BackofficeDns/RefreshOperatorApexDomain"
+const OperationBackofficeDnsRetryOperatorEmailDomainVerification = "/api.backoffice.service.v1.BackofficeDns/RetryOperatorEmailDomainVerification"
 
 type BackofficeDnsHTTPServer interface {
 	AddOperatorApexDomain(context.Context, *AddOperatorApexDomainRequest) (*v1.AddOperatorApexDomainResponse, error)
 	AddOperatorByoDomain(context.Context, *AddOperatorByoDomainRequest) (*v1.AddOperatorByoDomainResponse, error)
+	// BindOperatorEmailDomain Email Domain Bindings (Mailgun)
+	BindOperatorEmailDomain(context.Context, *BindOperatorEmailDomainRequest) (*v1.BindOperatorEmailDomainResponse, error)
 	DeleteOperatorApexDomain(context.Context, *DeleteOperatorApexDomainRequest) (*v1.DeleteOperatorApexDomainResponse, error)
 	DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*v1.DeleteOperatorByoDomainResponse, error)
+	DeleteOperatorEmailDomainBinding(context.Context, *DeleteOperatorEmailDomainBindingRequest) (*v1.DeleteOperatorEmailDomainBindingResponse, error)
+	GetOperatorEmailDomainBinding(context.Context, *GetOperatorEmailDomainBindingRequest) (*v1.GetOperatorEmailDomainBindingResponse, error)
 	ListOperatorApexDomains(context.Context, *ListOperatorApexDomainsRequest) (*v1.ListOperatorApexDomainsResponse, error)
 	ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*v1.ListOperatorByoDomainsResponse, error)
 	ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*v1.ListOperatorDomainsResponse, error)
+	ListOperatorEmailDomainBindings(context.Context, *ListOperatorEmailDomainBindingsRequest) (*v1.ListOperatorEmailDomainBindingsResponse, error)
 	PrecheckOperatorApexDomain(context.Context, *PrecheckOperatorApexDomainRequest) (*v1.PrecheckOperatorApexDomainResponse, error)
 	RefreshOperatorApexDomain(context.Context, *RefreshOperatorApexDomainRequest) (*v1.RefreshOperatorApexDomainResponse, error)
+	RetryOperatorEmailDomainVerification(context.Context, *RetryOperatorEmailDomainVerificationRequest) (*v1.RetryOperatorEmailDomainVerificationResponse, error)
 }
 
 func RegisterBackofficeDnsHTTPServer(s *http.Server, srv BackofficeDnsHTTPServer) {
@@ -53,6 +64,11 @@ func RegisterBackofficeDnsHTTPServer(s *http.Server, srv BackofficeDnsHTTPServer
 	r.POST("/v1/backoffice/dns/apex-domains/add", _BackofficeDns_AddOperatorApexDomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/apex-domains/delete", _BackofficeDns_DeleteOperatorApexDomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/apex-domains/refresh", _BackofficeDns_RefreshOperatorApexDomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/email-domains/bind", _BackofficeDns_BindOperatorEmailDomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/email-domains/get", _BackofficeDns_GetOperatorEmailDomainBinding0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/email-domains/delete", _BackofficeDns_DeleteOperatorEmailDomainBinding0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/email-domains/retry-verification", _BackofficeDns_RetryOperatorEmailDomainVerification0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/dns/email-domains/list", _BackofficeDns_ListOperatorEmailDomainBindings0_HTTP_Handler(srv))
 }
 
 func _BackofficeDns_ListOperatorDomains0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
@@ -253,16 +269,132 @@ func _BackofficeDns_RefreshOperatorApexDomain0_HTTP_Handler(srv BackofficeDnsHTT
 	}
 }
 
+func _BackofficeDns_BindOperatorEmailDomain0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BindOperatorEmailDomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsBindOperatorEmailDomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.BindOperatorEmailDomain(ctx, req.(*BindOperatorEmailDomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.BindOperatorEmailDomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_GetOperatorEmailDomainBinding0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorEmailDomainBindingRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsGetOperatorEmailDomainBinding)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorEmailDomainBinding(ctx, req.(*GetOperatorEmailDomainBindingRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorEmailDomainBindingResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_DeleteOperatorEmailDomainBinding0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteOperatorEmailDomainBindingRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsDeleteOperatorEmailDomainBinding)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteOperatorEmailDomainBinding(ctx, req.(*DeleteOperatorEmailDomainBindingRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteOperatorEmailDomainBindingResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_RetryOperatorEmailDomainVerification0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RetryOperatorEmailDomainVerificationRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsRetryOperatorEmailDomainVerification)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RetryOperatorEmailDomainVerification(ctx, req.(*RetryOperatorEmailDomainVerificationRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.RetryOperatorEmailDomainVerificationResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeDns_ListOperatorEmailDomainBindings0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOperatorEmailDomainBindingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsListOperatorEmailDomainBindings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOperatorEmailDomainBindings(ctx, req.(*ListOperatorEmailDomainBindingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOperatorEmailDomainBindingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeDnsHTTPClient interface {
 	AddOperatorApexDomain(ctx context.Context, req *AddOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.AddOperatorApexDomainResponse, err error)
 	AddOperatorByoDomain(ctx context.Context, req *AddOperatorByoDomainRequest, opts ...http.CallOption) (rsp *v1.AddOperatorByoDomainResponse, err error)
+	// BindOperatorEmailDomain Email Domain Bindings (Mailgun)
+	BindOperatorEmailDomain(ctx context.Context, req *BindOperatorEmailDomainRequest, opts ...http.CallOption) (rsp *v1.BindOperatorEmailDomainResponse, err error)
 	DeleteOperatorApexDomain(ctx context.Context, req *DeleteOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorApexDomainResponse, err error)
 	DeleteOperatorByoDomain(ctx context.Context, req *DeleteOperatorByoDomainRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorByoDomainResponse, err error)
+	DeleteOperatorEmailDomainBinding(ctx context.Context, req *DeleteOperatorEmailDomainBindingRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorEmailDomainBindingResponse, err error)
+	GetOperatorEmailDomainBinding(ctx context.Context, req *GetOperatorEmailDomainBindingRequest, opts ...http.CallOption) (rsp *v1.GetOperatorEmailDomainBindingResponse, err error)
 	ListOperatorApexDomains(ctx context.Context, req *ListOperatorApexDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorApexDomainsResponse, err error)
 	ListOperatorByoDomains(ctx context.Context, req *ListOperatorByoDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorByoDomainsResponse, err error)
 	ListOperatorDomains(ctx context.Context, req *ListOperatorDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorDomainsResponse, err error)
+	ListOperatorEmailDomainBindings(ctx context.Context, req *ListOperatorEmailDomainBindingsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorEmailDomainBindingsResponse, err error)
 	PrecheckOperatorApexDomain(ctx context.Context, req *PrecheckOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.PrecheckOperatorApexDomainResponse, err error)
 	RefreshOperatorApexDomain(ctx context.Context, req *RefreshOperatorApexDomainRequest, opts ...http.CallOption) (rsp *v1.RefreshOperatorApexDomainResponse, err error)
+	RetryOperatorEmailDomainVerification(ctx context.Context, req *RetryOperatorEmailDomainVerificationRequest, opts ...http.CallOption) (rsp *v1.RetryOperatorEmailDomainVerificationResponse, err error)
 }
 
 type BackofficeDnsHTTPClientImpl struct {
@@ -299,6 +431,20 @@ func (c *BackofficeDnsHTTPClientImpl) AddOperatorByoDomain(ctx context.Context, 
 	return &out, nil
 }
 
+// BindOperatorEmailDomain Email Domain Bindings (Mailgun)
+func (c *BackofficeDnsHTTPClientImpl) BindOperatorEmailDomain(ctx context.Context, in *BindOperatorEmailDomainRequest, opts ...http.CallOption) (*v1.BindOperatorEmailDomainResponse, error) {
+	var out v1.BindOperatorEmailDomainResponse
+	pattern := "/v1/backoffice/dns/email-domains/bind"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsBindOperatorEmailDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeDnsHTTPClientImpl) DeleteOperatorApexDomain(ctx context.Context, in *DeleteOperatorApexDomainRequest, opts ...http.CallOption) (*v1.DeleteOperatorApexDomainResponse, error) {
 	var out v1.DeleteOperatorApexDomainResponse
 	pattern := "/v1/backoffice/dns/apex-domains/delete"
@@ -317,6 +463,32 @@ func (c *BackofficeDnsHTTPClientImpl) DeleteOperatorByoDomain(ctx context.Contex
 	pattern := "/v1/backoffice/dns/byo-domains/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDnsDeleteOperatorByoDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeDnsHTTPClientImpl) DeleteOperatorEmailDomainBinding(ctx context.Context, in *DeleteOperatorEmailDomainBindingRequest, opts ...http.CallOption) (*v1.DeleteOperatorEmailDomainBindingResponse, error) {
+	var out v1.DeleteOperatorEmailDomainBindingResponse
+	pattern := "/v1/backoffice/dns/email-domains/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsDeleteOperatorEmailDomainBinding))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeDnsHTTPClientImpl) GetOperatorEmailDomainBinding(ctx context.Context, in *GetOperatorEmailDomainBindingRequest, opts ...http.CallOption) (*v1.GetOperatorEmailDomainBindingResponse, error) {
+	var out v1.GetOperatorEmailDomainBindingResponse
+	pattern := "/v1/backoffice/dns/email-domains/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsGetOperatorEmailDomainBinding))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -364,6 +536,19 @@ func (c *BackofficeDnsHTTPClientImpl) ListOperatorDomains(ctx context.Context, i
 	return &out, nil
 }
 
+func (c *BackofficeDnsHTTPClientImpl) ListOperatorEmailDomainBindings(ctx context.Context, in *ListOperatorEmailDomainBindingsRequest, opts ...http.CallOption) (*v1.ListOperatorEmailDomainBindingsResponse, error) {
+	var out v1.ListOperatorEmailDomainBindingsResponse
+	pattern := "/v1/backoffice/dns/email-domains/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsListOperatorEmailDomainBindings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeDnsHTTPClientImpl) PrecheckOperatorApexDomain(ctx context.Context, in *PrecheckOperatorApexDomainRequest, opts ...http.CallOption) (*v1.PrecheckOperatorApexDomainResponse, error) {
 	var out v1.PrecheckOperatorApexDomainResponse
 	pattern := "/v1/backoffice/dns/apex-domains/precheck"
@@ -382,6 +567,19 @@ func (c *BackofficeDnsHTTPClientImpl) RefreshOperatorApexDomain(ctx context.Cont
 	pattern := "/v1/backoffice/dns/apex-domains/refresh"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDnsRefreshOperatorApexDomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeDnsHTTPClientImpl) RetryOperatorEmailDomainVerification(ctx context.Context, in *RetryOperatorEmailDomainVerificationRequest, opts ...http.CallOption) (*v1.RetryOperatorEmailDomainVerificationResponse, error) {
+	var out v1.RetryOperatorEmailDomainVerificationResponse
+	pattern := "/v1/backoffice/dns/email-domains/retry-verification"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsRetryOperatorEmailDomainVerification))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -3183,3 +3183,1704 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PrecheckOperatorApexDomainResponseValidationError{}
+
+// Validate checks the field values on EmailDomainDnsRecord with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EmailDomainDnsRecord) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EmailDomainDnsRecord with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EmailDomainDnsRecordMultiError, or nil if none found.
+func (m *EmailDomainDnsRecord) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EmailDomainDnsRecord) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RecordType
+
+	// no validation rules for Name
+
+	// no validation rules for Value
+
+	// no validation rules for Valid
+
+	// no validation rules for Description
+
+	if len(errors) > 0 {
+		return EmailDomainDnsRecordMultiError(errors)
+	}
+
+	return nil
+}
+
+// EmailDomainDnsRecordMultiError is an error wrapping multiple validation
+// errors returned by EmailDomainDnsRecord.ValidateAll() if the designated
+// constraints aren't met.
+type EmailDomainDnsRecordMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EmailDomainDnsRecordMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EmailDomainDnsRecordMultiError) AllErrors() []error { return m }
+
+// EmailDomainDnsRecordValidationError is the validation error returned by
+// EmailDomainDnsRecord.Validate if the designated constraints aren't met.
+type EmailDomainDnsRecordValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EmailDomainDnsRecordValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EmailDomainDnsRecordValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EmailDomainDnsRecordValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EmailDomainDnsRecordValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EmailDomainDnsRecordValidationError) ErrorName() string {
+	return "EmailDomainDnsRecordValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EmailDomainDnsRecordValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEmailDomainDnsRecord.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EmailDomainDnsRecordValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EmailDomainDnsRecordValidationError{}
+
+// Validate checks the field values on EmailDomainBindingInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EmailDomainBindingInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EmailDomainBindingInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EmailDomainBindingInfoMultiError, or nil if none found.
+func (m *EmailDomainBindingInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EmailDomainBindingInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Domain
+
+	// no validation rules for EmailLocalPart
+
+	// no validation rules for SendingEmail
+
+	// no validation rules for Status
+
+	// no validation rules for MailgunDomainState
+
+	for idx, item := range m.GetDnsRecords() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, EmailDomainBindingInfoValidationError{
+						field:  fmt.Sprintf("DnsRecords[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, EmailDomainBindingInfoValidationError{
+						field:  fmt.Sprintf("DnsRecords[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return EmailDomainBindingInfoValidationError{
+					field:  fmt.Sprintf("DnsRecords[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for SpfValid
+
+	// no validation rules for DkimValid
+
+	// no validation rules for MxValid
+
+	// no validation rules for ErrorReason
+
+	// no validation rules for VerificationAttempts
+
+	// no validation rules for LastVerificationAt
+
+	// no validation rules for VerificationDeadline
+
+	// no validation rules for TargetOperatorId
+
+	// no validation rules for TargetOperatorName
+
+	// no validation rules for TargetCompanyOperatorId
+
+	// no validation rules for TargetCompanyOperatorName
+
+	// no validation rules for TargetRetailerOperatorId
+
+	// no validation rules for TargetRetailerOperatorName
+
+	// no validation rules for TargetSystemOperatorId
+
+	// no validation rules for TargetSystemOperatorName
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EmailDomainBindingInfoValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EmailDomainBindingInfoValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EmailDomainBindingInfoValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EmailDomainBindingInfoValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EmailDomainBindingInfoValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EmailDomainBindingInfoValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return EmailDomainBindingInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// EmailDomainBindingInfoMultiError is an error wrapping multiple validation
+// errors returned by EmailDomainBindingInfo.ValidateAll() if the designated
+// constraints aren't met.
+type EmailDomainBindingInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EmailDomainBindingInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EmailDomainBindingInfoMultiError) AllErrors() []error { return m }
+
+// EmailDomainBindingInfoValidationError is the validation error returned by
+// EmailDomainBindingInfo.Validate if the designated constraints aren't met.
+type EmailDomainBindingInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EmailDomainBindingInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EmailDomainBindingInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EmailDomainBindingInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EmailDomainBindingInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EmailDomainBindingInfoValidationError) ErrorName() string {
+	return "EmailDomainBindingInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EmailDomainBindingInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEmailDomainBindingInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EmailDomainBindingInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EmailDomainBindingInfoValidationError{}
+
+// Validate checks the field values on BindOperatorEmailDomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BindOperatorEmailDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BindOperatorEmailDomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BindOperatorEmailDomainRequestMultiError, or nil if none found.
+func (m *BindOperatorEmailDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BindOperatorEmailDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BindOperatorEmailDomainRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BindOperatorEmailDomainRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BindOperatorEmailDomainRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Domain
+
+	// no validation rules for EmailLocalPart
+
+	if len(errors) > 0 {
+		return BindOperatorEmailDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BindOperatorEmailDomainRequestMultiError is an error wrapping multiple
+// validation errors returned by BindOperatorEmailDomainRequest.ValidateAll()
+// if the designated constraints aren't met.
+type BindOperatorEmailDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BindOperatorEmailDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BindOperatorEmailDomainRequestMultiError) AllErrors() []error { return m }
+
+// BindOperatorEmailDomainRequestValidationError is the validation error
+// returned by BindOperatorEmailDomainRequest.Validate if the designated
+// constraints aren't met.
+type BindOperatorEmailDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BindOperatorEmailDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BindOperatorEmailDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BindOperatorEmailDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BindOperatorEmailDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BindOperatorEmailDomainRequestValidationError) ErrorName() string {
+	return "BindOperatorEmailDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BindOperatorEmailDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBindOperatorEmailDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BindOperatorEmailDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BindOperatorEmailDomainRequestValidationError{}
+
+// Validate checks the field values on BindOperatorEmailDomainResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BindOperatorEmailDomainResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BindOperatorEmailDomainResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// BindOperatorEmailDomainResponseMultiError, or nil if none found.
+func (m *BindOperatorEmailDomainResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BindOperatorEmailDomainResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBinding()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BindOperatorEmailDomainResponseValidationError{
+					field:  "Binding",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BindOperatorEmailDomainResponseValidationError{
+					field:  "Binding",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBinding()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BindOperatorEmailDomainResponseValidationError{
+				field:  "Binding",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return BindOperatorEmailDomainResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BindOperatorEmailDomainResponseMultiError is an error wrapping multiple
+// validation errors returned by BindOperatorEmailDomainResponse.ValidateAll()
+// if the designated constraints aren't met.
+type BindOperatorEmailDomainResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BindOperatorEmailDomainResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BindOperatorEmailDomainResponseMultiError) AllErrors() []error { return m }
+
+// BindOperatorEmailDomainResponseValidationError is the validation error
+// returned by BindOperatorEmailDomainResponse.Validate if the designated
+// constraints aren't met.
+type BindOperatorEmailDomainResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BindOperatorEmailDomainResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BindOperatorEmailDomainResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BindOperatorEmailDomainResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BindOperatorEmailDomainResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BindOperatorEmailDomainResponseValidationError) ErrorName() string {
+	return "BindOperatorEmailDomainResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BindOperatorEmailDomainResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBindOperatorEmailDomainResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BindOperatorEmailDomainResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BindOperatorEmailDomainResponseValidationError{}
+
+// Validate checks the field values on GetOperatorEmailDomainBindingRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorEmailDomainBindingRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorEmailDomainBindingRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorEmailDomainBindingRequestMultiError, or nil if none found.
+func (m *GetOperatorEmailDomainBindingRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorEmailDomainBindingRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorEmailDomainBindingRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorEmailDomainBindingRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorEmailDomainBindingRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Domain != nil {
+		// no validation rules for Domain
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorEmailDomainBindingRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorEmailDomainBindingRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorEmailDomainBindingRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorEmailDomainBindingRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorEmailDomainBindingRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorEmailDomainBindingRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorEmailDomainBindingRequestValidationError is the validation error
+// returned by GetOperatorEmailDomainBindingRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorEmailDomainBindingRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorEmailDomainBindingRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorEmailDomainBindingRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorEmailDomainBindingRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorEmailDomainBindingRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorEmailDomainBindingRequestValidationError) ErrorName() string {
+	return "GetOperatorEmailDomainBindingRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorEmailDomainBindingRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorEmailDomainBindingRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorEmailDomainBindingRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorEmailDomainBindingRequestValidationError{}
+
+// Validate checks the field values on GetOperatorEmailDomainBindingResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorEmailDomainBindingResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorEmailDomainBindingResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorEmailDomainBindingResponseMultiError, or nil if none found.
+func (m *GetOperatorEmailDomainBindingResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorEmailDomainBindingResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBinding()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorEmailDomainBindingResponseValidationError{
+					field:  "Binding",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorEmailDomainBindingResponseValidationError{
+					field:  "Binding",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBinding()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorEmailDomainBindingResponseValidationError{
+				field:  "Binding",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorEmailDomainBindingResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorEmailDomainBindingResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorEmailDomainBindingResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorEmailDomainBindingResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorEmailDomainBindingResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorEmailDomainBindingResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorEmailDomainBindingResponseValidationError is the validation error
+// returned by GetOperatorEmailDomainBindingResponse.Validate if the
+// designated constraints aren't met.
+type GetOperatorEmailDomainBindingResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorEmailDomainBindingResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorEmailDomainBindingResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorEmailDomainBindingResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorEmailDomainBindingResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorEmailDomainBindingResponseValidationError) ErrorName() string {
+	return "GetOperatorEmailDomainBindingResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorEmailDomainBindingResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorEmailDomainBindingResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorEmailDomainBindingResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorEmailDomainBindingResponseValidationError{}
+
+// Validate checks the field values on DeleteOperatorEmailDomainBindingRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *DeleteOperatorEmailDomainBindingRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// DeleteOperatorEmailDomainBindingRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// DeleteOperatorEmailDomainBindingRequestMultiError, or nil if none found.
+func (m *DeleteOperatorEmailDomainBindingRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorEmailDomainBindingRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteOperatorEmailDomainBindingRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteOperatorEmailDomainBindingRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteOperatorEmailDomainBindingRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Domain
+
+	if len(errors) > 0 {
+		return DeleteOperatorEmailDomainBindingRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorEmailDomainBindingRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// DeleteOperatorEmailDomainBindingRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOperatorEmailDomainBindingRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorEmailDomainBindingRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorEmailDomainBindingRequestMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorEmailDomainBindingRequestValidationError is the validation
+// error returned by DeleteOperatorEmailDomainBindingRequest.Validate if the
+// designated constraints aren't met.
+type DeleteOperatorEmailDomainBindingRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorEmailDomainBindingRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorEmailDomainBindingRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorEmailDomainBindingRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorEmailDomainBindingRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorEmailDomainBindingRequestValidationError) ErrorName() string {
+	return "DeleteOperatorEmailDomainBindingRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorEmailDomainBindingRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorEmailDomainBindingRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorEmailDomainBindingRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorEmailDomainBindingRequestValidationError{}
+
+// Validate checks the field values on DeleteOperatorEmailDomainBindingResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *DeleteOperatorEmailDomainBindingResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// DeleteOperatorEmailDomainBindingResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// DeleteOperatorEmailDomainBindingResponseMultiError, or nil if none found.
+func (m *DeleteOperatorEmailDomainBindingResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorEmailDomainBindingResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteOperatorEmailDomainBindingResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorEmailDomainBindingResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// DeleteOperatorEmailDomainBindingResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOperatorEmailDomainBindingResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorEmailDomainBindingResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorEmailDomainBindingResponseMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorEmailDomainBindingResponseValidationError is the validation
+// error returned by DeleteOperatorEmailDomainBindingResponse.Validate if the
+// designated constraints aren't met.
+type DeleteOperatorEmailDomainBindingResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorEmailDomainBindingResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorEmailDomainBindingResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorEmailDomainBindingResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorEmailDomainBindingResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorEmailDomainBindingResponseValidationError) ErrorName() string {
+	return "DeleteOperatorEmailDomainBindingResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorEmailDomainBindingResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorEmailDomainBindingResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorEmailDomainBindingResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorEmailDomainBindingResponseValidationError{}
+
+// Validate checks the field values on
+// RetryOperatorEmailDomainVerificationRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *RetryOperatorEmailDomainVerificationRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// RetryOperatorEmailDomainVerificationRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// RetryOperatorEmailDomainVerificationRequestMultiError, or nil if none found.
+func (m *RetryOperatorEmailDomainVerificationRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RetryOperatorEmailDomainVerificationRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RetryOperatorEmailDomainVerificationRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RetryOperatorEmailDomainVerificationRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RetryOperatorEmailDomainVerificationRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Domain
+
+	if len(errors) > 0 {
+		return RetryOperatorEmailDomainVerificationRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RetryOperatorEmailDomainVerificationRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// RetryOperatorEmailDomainVerificationRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RetryOperatorEmailDomainVerificationRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RetryOperatorEmailDomainVerificationRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RetryOperatorEmailDomainVerificationRequestMultiError) AllErrors() []error { return m }
+
+// RetryOperatorEmailDomainVerificationRequestValidationError is the validation
+// error returned by RetryOperatorEmailDomainVerificationRequest.Validate if
+// the designated constraints aren't met.
+type RetryOperatorEmailDomainVerificationRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RetryOperatorEmailDomainVerificationRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RetryOperatorEmailDomainVerificationRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RetryOperatorEmailDomainVerificationRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RetryOperatorEmailDomainVerificationRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RetryOperatorEmailDomainVerificationRequestValidationError) ErrorName() string {
+	return "RetryOperatorEmailDomainVerificationRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RetryOperatorEmailDomainVerificationRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRetryOperatorEmailDomainVerificationRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RetryOperatorEmailDomainVerificationRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RetryOperatorEmailDomainVerificationRequestValidationError{}
+
+// Validate checks the field values on
+// RetryOperatorEmailDomainVerificationResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *RetryOperatorEmailDomainVerificationResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// RetryOperatorEmailDomainVerificationResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// RetryOperatorEmailDomainVerificationResponseMultiError, or nil if none found.
+func (m *RetryOperatorEmailDomainVerificationResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RetryOperatorEmailDomainVerificationResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBinding()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RetryOperatorEmailDomainVerificationResponseValidationError{
+					field:  "Binding",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RetryOperatorEmailDomainVerificationResponseValidationError{
+					field:  "Binding",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBinding()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RetryOperatorEmailDomainVerificationResponseValidationError{
+				field:  "Binding",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RetryOperatorEmailDomainVerificationResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RetryOperatorEmailDomainVerificationResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// RetryOperatorEmailDomainVerificationResponse.ValidateAll() if the
+// designated constraints aren't met.
+type RetryOperatorEmailDomainVerificationResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RetryOperatorEmailDomainVerificationResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RetryOperatorEmailDomainVerificationResponseMultiError) AllErrors() []error { return m }
+
+// RetryOperatorEmailDomainVerificationResponseValidationError is the
+// validation error returned by
+// RetryOperatorEmailDomainVerificationResponse.Validate if the designated
+// constraints aren't met.
+type RetryOperatorEmailDomainVerificationResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RetryOperatorEmailDomainVerificationResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RetryOperatorEmailDomainVerificationResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RetryOperatorEmailDomainVerificationResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RetryOperatorEmailDomainVerificationResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RetryOperatorEmailDomainVerificationResponseValidationError) ErrorName() string {
+	return "RetryOperatorEmailDomainVerificationResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RetryOperatorEmailDomainVerificationResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRetryOperatorEmailDomainVerificationResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RetryOperatorEmailDomainVerificationResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RetryOperatorEmailDomainVerificationResponseValidationError{}
+
+// Validate checks the field values on ListOperatorEmailDomainBindingsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListOperatorEmailDomainBindingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListOperatorEmailDomainBindingsRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListOperatorEmailDomainBindingsRequestMultiError, or nil if none found.
+func (m *ListOperatorEmailDomainBindingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorEmailDomainBindingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorEmailDomainBindingsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorEmailDomainBindingsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorEmailDomainBindingsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.Pagination != nil {
+		// no validation rules for Pagination
+	}
+
+	if len(errors) > 0 {
+		return ListOperatorEmailDomainBindingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorEmailDomainBindingsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListOperatorEmailDomainBindingsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListOperatorEmailDomainBindingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorEmailDomainBindingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorEmailDomainBindingsRequestMultiError) AllErrors() []error { return m }
+
+// ListOperatorEmailDomainBindingsRequestValidationError is the validation
+// error returned by ListOperatorEmailDomainBindingsRequest.Validate if the
+// designated constraints aren't met.
+type ListOperatorEmailDomainBindingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorEmailDomainBindingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorEmailDomainBindingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorEmailDomainBindingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorEmailDomainBindingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorEmailDomainBindingsRequestValidationError) ErrorName() string {
+	return "ListOperatorEmailDomainBindingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorEmailDomainBindingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorEmailDomainBindingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorEmailDomainBindingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorEmailDomainBindingsRequestValidationError{}
+
+// Validate checks the field values on ListOperatorEmailDomainBindingsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListOperatorEmailDomainBindingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListOperatorEmailDomainBindingsResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListOperatorEmailDomainBindingsResponseMultiError, or nil if none found.
+func (m *ListOperatorEmailDomainBindingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOperatorEmailDomainBindingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOperatorEmailDomainBindingsResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOperatorEmailDomainBindingsResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOperatorEmailDomainBindingsResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListOperatorEmailDomainBindingsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOperatorEmailDomainBindingsResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListOperatorEmailDomainBindingsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListOperatorEmailDomainBindingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOperatorEmailDomainBindingsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOperatorEmailDomainBindingsResponseMultiError) AllErrors() []error { return m }
+
+// ListOperatorEmailDomainBindingsResponseValidationError is the validation
+// error returned by ListOperatorEmailDomainBindingsResponse.Validate if the
+// designated constraints aren't met.
+type ListOperatorEmailDomainBindingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOperatorEmailDomainBindingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOperatorEmailDomainBindingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOperatorEmailDomainBindingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOperatorEmailDomainBindingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOperatorEmailDomainBindingsResponseValidationError) ErrorName() string {
+	return "ListOperatorEmailDomainBindingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOperatorEmailDomainBindingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOperatorEmailDomainBindingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOperatorEmailDomainBindingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOperatorEmailDomainBindingsResponseValidationError{}

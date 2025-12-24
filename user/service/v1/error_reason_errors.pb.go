@@ -1488,3 +1488,53 @@ func IsInvalidEmailAddress(err error) bool {
 func ErrorInvalidEmailAddress(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_EMAIL_ADDRESS.String(), fmt.Sprintf(format, args...))
 }
+
+// Email Domain Binding Errors
+func IsEmailDomainAlreadyBound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_ALREADY_BOUND.String() && e.Code == 500
+}
+
+// Email Domain Binding Errors
+func ErrorEmailDomainAlreadyBound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_ALREADY_BOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainBindingNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_BINDING_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorEmailDomainBindingNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_BINDING_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainVerificationFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_VERIFICATION_FAILED.String() && e.Code == 500
+}
+
+func ErrorEmailDomainVerificationFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_VERIFICATION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_INVALID.String() && e.Code == 500
+}
+
+func ErrorEmailDomainInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_INVALID.String(), fmt.Sprintf(format, args...))
+}

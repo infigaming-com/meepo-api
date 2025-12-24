@@ -378,10 +378,16 @@ func (x *BindEmailDomainRequest) GetEmailLocalPart() string {
 }
 
 type BindEmailDomainResponse struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Binding       *EmailDomainBindingInfo `protobuf:"bytes,1,opt,name=binding,proto3" json:"binding,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	MailgunDomainId    string                 `protobuf:"bytes,1,opt,name=mailgun_domain_id,json=mailgunDomainId,proto3" json:"mailgun_domain_id,omitempty"`          // Domain name in Mailgun
+	Status             string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                                                     // pending, verifying, active
+	MailgunDomainState string                 `protobuf:"bytes,3,opt,name=mailgun_domain_state,json=mailgunDomainState,proto3" json:"mailgun_domain_state,omitempty"` // unverified, active, disabled
+	DnsRecords         []*DnsRecord           `protobuf:"bytes,4,rep,name=dns_records,json=dnsRecords,proto3" json:"dns_records,omitempty"`                           // Required DNS records to configure
+	SpfValid           bool                   `protobuf:"varint,5,opt,name=spf_valid,json=spfValid,proto3" json:"spf_valid,omitempty"`
+	DkimValid          bool                   `protobuf:"varint,6,opt,name=dkim_valid,json=dkimValid,proto3" json:"dkim_valid,omitempty"`
+	MxValid            bool                   `protobuf:"varint,7,opt,name=mx_valid,json=mxValid,proto3" json:"mx_valid,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BindEmailDomainResponse) Reset() {
@@ -414,11 +420,53 @@ func (*BindEmailDomainResponse) Descriptor() ([]byte, []int) {
 	return file_infra_service_v1_email_domain_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *BindEmailDomainResponse) GetBinding() *EmailDomainBindingInfo {
+func (x *BindEmailDomainResponse) GetMailgunDomainId() string {
 	if x != nil {
-		return x.Binding
+		return x.MailgunDomainId
+	}
+	return ""
+}
+
+func (x *BindEmailDomainResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *BindEmailDomainResponse) GetMailgunDomainState() string {
+	if x != nil {
+		return x.MailgunDomainState
+	}
+	return ""
+}
+
+func (x *BindEmailDomainResponse) GetDnsRecords() []*DnsRecord {
+	if x != nil {
+		return x.DnsRecords
 	}
 	return nil
+}
+
+func (x *BindEmailDomainResponse) GetSpfValid() bool {
+	if x != nil {
+		return x.SpfValid
+	}
+	return false
+}
+
+func (x *BindEmailDomainResponse) GetDkimValid() bool {
+	if x != nil {
+		return x.DkimValid
+	}
+	return false
+}
+
+func (x *BindEmailDomainResponse) GetMxValid() bool {
+	if x != nil {
+		return x.MxValid
+	}
+	return false
 }
 
 type GetEmailDomainBindingRequest struct {
@@ -951,9 +999,17 @@ const file_infra_service_v1_email_domain_proto_rawDesc = "" +
 	"\x14retailer_operator_id\x18\x03 \x01(\x03R\x12retailerOperatorId\x12,\n" +
 	"\x12system_operator_id\x18\x04 \x01(\x03R\x10systemOperatorId\x12\x16\n" +
 	"\x06domain\x18\x05 \x01(\tR\x06domain\x12(\n" +
-	"\x10email_local_part\x18\x06 \x01(\tR\x0eemailLocalPart\"a\n" +
-	"\x17BindEmailDomainResponse\x12F\n" +
-	"\abinding\x18\x01 \x01(\v2,.api.infra.service.v1.EmailDomainBindingInfoR\abinding\"W\n" +
+	"\x10email_local_part\x18\x06 \x01(\tR\x0eemailLocalPart\"\xa8\x02\n" +
+	"\x17BindEmailDomainResponse\x12*\n" +
+	"\x11mailgun_domain_id\x18\x01 \x01(\tR\x0fmailgunDomainId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x120\n" +
+	"\x14mailgun_domain_state\x18\x03 \x01(\tR\x12mailgunDomainState\x12@\n" +
+	"\vdns_records\x18\x04 \x03(\v2\x1f.api.infra.service.v1.DnsRecordR\n" +
+	"dnsRecords\x12\x1b\n" +
+	"\tspf_valid\x18\x05 \x01(\bR\bspfValid\x12\x1d\n" +
+	"\n" +
+	"dkim_valid\x18\x06 \x01(\bR\tdkimValid\x12\x19\n" +
+	"\bmx_valid\x18\a \x01(\bR\amxValid\"W\n" +
 	"\x1cGetEmailDomainBindingRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x16\n" +
@@ -1029,7 +1085,7 @@ var file_infra_service_v1_email_domain_proto_goTypes = []any{
 }
 var file_infra_service_v1_email_domain_proto_depIdxs = []int32{
 	0,  // 0: api.infra.service.v1.EmailDomainBindingInfo.dns_records:type_name -> api.infra.service.v1.DnsRecord
-	1,  // 1: api.infra.service.v1.BindEmailDomainResponse.binding:type_name -> api.infra.service.v1.EmailDomainBindingInfo
+	0,  // 1: api.infra.service.v1.BindEmailDomainResponse.dns_records:type_name -> api.infra.service.v1.DnsRecord
 	1,  // 2: api.infra.service.v1.GetEmailDomainBindingResponse.binding:type_name -> api.infra.service.v1.EmailDomainBindingInfo
 	1,  // 3: api.infra.service.v1.RetryEmailDomainVerificationResponse.binding:type_name -> api.infra.service.v1.EmailDomainBindingInfo
 	12, // 4: api.infra.service.v1.ListEmailDomainBindingsRequest.operator_filters:type_name -> api.infra.service.v1.ListEmailDomainBindingsRequest.OperatorFilter
