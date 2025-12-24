@@ -19,81 +19,81 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Wallet_GetUserBalances_FullMethodName                       = "/api.wallet.service.v1.Wallet/GetUserBalances"
-	Wallet_GetUserBalance_FullMethodName                        = "/api.wallet.service.v1.Wallet/GetUserBalance"
-	Wallet_GetUserBalanceDetails_FullMethodName                 = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
-	Wallet_Credit_FullMethodName                                = "/api.wallet.service.v1.Wallet/Credit"
-	Wallet_Debit_FullMethodName                                 = "/api.wallet.service.v1.Wallet/Debit"
-	Wallet_GameDebit_FullMethodName                             = "/api.wallet.service.v1.Wallet/GameDebit"
-	Wallet_GameCredit_FullMethodName                            = "/api.wallet.service.v1.Wallet/GameCredit"
-	Wallet_Freeze_FullMethodName                                = "/api.wallet.service.v1.Wallet/Freeze"
-	Wallet_Settle_FullMethodName                                = "/api.wallet.service.v1.Wallet/Settle"
-	Wallet_Rollback_FullMethodName                              = "/api.wallet.service.v1.Wallet/Rollback"
-	Wallet_GetWallets_FullMethodName                            = "/api.wallet.service.v1.Wallet/GetWallets"
-	Wallet_ListWalletBalanceTransactions_FullMethodName         = "/api.wallet.service.v1.Wallet/ListWalletBalanceTransactions"
-	Wallet_GetWalletBalanceTransactionsByIds_FullMethodName     = "/api.wallet.service.v1.Wallet/GetWalletBalanceTransactionsByIds"
-	Wallet_GetWalletCreditTransactions_FullMethodName           = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
-	Wallet_GetExchangeRates_FullMethodName                      = "/api.wallet.service.v1.Wallet/GetExchangeRates"
-	Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName      = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
-	Wallet_GetUserTransactionSummary_FullMethodName             = "/api.wallet.service.v1.Wallet/GetUserTransactionSummary"
-	Wallet_ListUserTransactionSummaries_FullMethodName          = "/api.wallet.service.v1.Wallet/ListUserTransactionSummaries"
-	Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName   = "/api.wallet.service.v1.Wallet/GetBackofficeUserOverviewFromWallet"
-	Wallet_GetOverviewDashboardFromWallet_FullMethodName        = "/api.wallet.service.v1.Wallet/GetOverviewDashboardFromWallet"
-	Wallet_AddCurrency_FullMethodName                           = "/api.wallet.service.v1.Wallet/AddCurrency"
-	Wallet_UpdateCurrency_FullMethodName                        = "/api.wallet.service.v1.Wallet/UpdateCurrency"
-	Wallet_GetCurrencies_FullMethodName                         = "/api.wallet.service.v1.Wallet/GetCurrencies"
-	Wallet_ListCurrencies_FullMethodName                        = "/api.wallet.service.v1.Wallet/ListCurrencies"
-	Wallet_UpdateOperatorCurrency_FullMethodName                = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
-	Wallet_UpdateUserCurrency_FullMethodName                    = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
-	Wallet_ListBottomOperatorBalances_FullMethodName            = "/api.wallet.service.v1.Wallet/ListBottomOperatorBalances"
-	Wallet_OperatorTransfer_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorTransfer"
-	Wallet_OperatorSwap_FullMethodName                          = "/api.wallet.service.v1.Wallet/OperatorSwap"
-	Wallet_OperatorFreeze_FullMethodName                        = "/api.wallet.service.v1.Wallet/OperatorFreeze"
-	Wallet_OperatorRollback_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorRollback"
-	Wallet_OperatorSettle_FullMethodName                        = "/api.wallet.service.v1.Wallet/OperatorSettle"
-	Wallet_GetOperatorBalance_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetOperatorBalance"
-	Wallet_ListOperatorBalanceTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListOperatorBalanceTransactions"
-	Wallet_OperatorDebit_FullMethodName                         = "/api.wallet.service.v1.Wallet/OperatorDebit"
-	Wallet_UpdateOperatorBalance_FullMethodName                 = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
-	Wallet_GetOperatorTransactionSummary_FullMethodName         = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
-	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName   = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
-	Wallet_SetDepositRewardSequences_FullMethodName             = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
-	Wallet_DeleteDepositRewardSequences_FullMethodName          = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
-	Wallet_GetDepositRewardConfig_FullMethodName                = "/api.wallet.service.v1.Wallet/GetDepositRewardConfig"
-	Wallet_CreatePromoCodeCampaign_FullMethodName               = "/api.wallet.service.v1.Wallet/CreatePromoCodeCampaign"
-	Wallet_UpdatePromoCodeCampaign_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaign"
-	Wallet_UpdatePromoCodeCampaignStatus_FullMethodName         = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaignStatus"
-	Wallet_ListPromoCodeCampaigns_FullMethodName                = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaigns"
-	Wallet_ListPromoCodeCampaignDetails_FullMethodName          = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaignDetails"
-	Wallet_GenerateOneTimePromoCodes_FullMethodName             = "/api.wallet.service.v1.Wallet/GenerateOneTimePromoCodes"
-	Wallet_GenerateUniversalPromoCodes_FullMethodName           = "/api.wallet.service.v1.Wallet/GenerateUniversalPromoCodes"
-	Wallet_ListUniversalCodeUsages_FullMethodName               = "/api.wallet.service.v1.Wallet/ListUniversalCodeUsages"
-	Wallet_GetPromoCodeInfo_FullMethodName                      = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
-	Wallet_ClaimPromoCode_FullMethodName                        = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
-	Wallet_GetUserDepositRewardSequence_FullMethodName          = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
-	Wallet_GetGamificationCurrencyConfig_FullMethodName         = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
-	Wallet_UpdateOperatorCurrencyConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
-	Wallet_UpdateWalletConfig_FullMethodName                    = "/api.wallet.service.v1.Wallet/UpdateWalletConfig"
-	Wallet_BonusTransfer_FullMethodName                         = "/api.wallet.service.v1.Wallet/BonusTransfer"
-	Wallet_AddResponsibleGamblingConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
-	Wallet_DeleteResponsibleGamblingConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
-	Wallet_ListResponsibleGamblingConfigs_FullMethodName        = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
-	Wallet_GetResponsibleGamblingConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/GetResponsibleGamblingConfig"
-	Wallet_ListCustomerRecords_FullMethodName                   = "/api.wallet.service.v1.Wallet/ListCustomerRecords"
-	Wallet_ExportCustomerRecords_FullMethodName                 = "/api.wallet.service.v1.Wallet/ExportCustomerRecords"
-	Wallet_SetFICAThresholdConfig_FullMethodName                = "/api.wallet.service.v1.Wallet/SetFICAThresholdConfig"
-	Wallet_GetFICAThresholdConfig_FullMethodName                = "/api.wallet.service.v1.Wallet/GetFICAThresholdConfig"
-	Wallet_ListFICAThresholdTransactions_FullMethodName         = "/api.wallet.service.v1.Wallet/ListFICAThresholdTransactions"
-	Wallet_ExportFICAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ExportFICAThresholdTransactions"
-	Wallet_ListBalancesByUserIds_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListBalancesByUserIds"
-	Wallet_ListManualJournalEntries_FullMethodName              = "/api.wallet.service.v1.Wallet/ListManualJournalEntries"
-	Wallet_ExportManualJournalEntries_FullMethodName            = "/api.wallet.service.v1.Wallet/ExportManualJournalEntries"
-	Wallet_ListTimeRangeDepositCredits_FullMethodName           = "/api.wallet.service.v1.Wallet/ListTimeRangeDepositCredits"
-	Wallet_ListUserOverview_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListUserOverview"
-	Wallet_GetUserGameTransactionsSummary_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserGameTransactionsSummary"
-	Wallet_CreditFreespinWin_FullMethodName                     = "/api.wallet.service.v1.Wallet/CreditFreespinWin"
-	Wallet_CreditFreeBetWin_FullMethodName                      = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
-	Wallet_GetAllUserBalanceAggregatedByOperator_FullMethodName = "/api.wallet.service.v1.Wallet/GetAllUserBalanceAggregatedByOperator"
+	Wallet_GetUserBalances_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetUserBalances"
+	Wallet_GetUserBalance_FullMethodName                      = "/api.wallet.service.v1.Wallet/GetUserBalance"
+	Wallet_GetUserBalanceDetails_FullMethodName               = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
+	Wallet_Credit_FullMethodName                              = "/api.wallet.service.v1.Wallet/Credit"
+	Wallet_Debit_FullMethodName                               = "/api.wallet.service.v1.Wallet/Debit"
+	Wallet_GameDebit_FullMethodName                           = "/api.wallet.service.v1.Wallet/GameDebit"
+	Wallet_GameCredit_FullMethodName                          = "/api.wallet.service.v1.Wallet/GameCredit"
+	Wallet_Freeze_FullMethodName                              = "/api.wallet.service.v1.Wallet/Freeze"
+	Wallet_Settle_FullMethodName                              = "/api.wallet.service.v1.Wallet/Settle"
+	Wallet_Rollback_FullMethodName                            = "/api.wallet.service.v1.Wallet/Rollback"
+	Wallet_GetWallets_FullMethodName                          = "/api.wallet.service.v1.Wallet/GetWallets"
+	Wallet_ListWalletBalanceTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListWalletBalanceTransactions"
+	Wallet_GetWalletBalanceTransactionsByIds_FullMethodName   = "/api.wallet.service.v1.Wallet/GetWalletBalanceTransactionsByIds"
+	Wallet_GetWalletCreditTransactions_FullMethodName         = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
+	Wallet_GetExchangeRates_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetExchangeRates"
+	Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName    = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
+	Wallet_GetUserTransactionSummary_FullMethodName           = "/api.wallet.service.v1.Wallet/GetUserTransactionSummary"
+	Wallet_ListUserTransactionSummaries_FullMethodName        = "/api.wallet.service.v1.Wallet/ListUserTransactionSummaries"
+	Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName = "/api.wallet.service.v1.Wallet/GetBackofficeUserOverviewFromWallet"
+	Wallet_GetOverviewDashboardFromWallet_FullMethodName      = "/api.wallet.service.v1.Wallet/GetOverviewDashboardFromWallet"
+	Wallet_AddCurrency_FullMethodName                         = "/api.wallet.service.v1.Wallet/AddCurrency"
+	Wallet_UpdateCurrency_FullMethodName                      = "/api.wallet.service.v1.Wallet/UpdateCurrency"
+	Wallet_GetCurrencies_FullMethodName                       = "/api.wallet.service.v1.Wallet/GetCurrencies"
+	Wallet_ListCurrencies_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListCurrencies"
+	Wallet_UpdateOperatorCurrency_FullMethodName              = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
+	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
+	Wallet_ListBottomOperatorBalances_FullMethodName          = "/api.wallet.service.v1.Wallet/ListBottomOperatorBalances"
+	Wallet_OperatorTransfer_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorTransfer"
+	Wallet_OperatorSwap_FullMethodName                        = "/api.wallet.service.v1.Wallet/OperatorSwap"
+	Wallet_OperatorFreeze_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorFreeze"
+	Wallet_OperatorRollback_FullMethodName                    = "/api.wallet.service.v1.Wallet/OperatorRollback"
+	Wallet_OperatorSettle_FullMethodName                      = "/api.wallet.service.v1.Wallet/OperatorSettle"
+	Wallet_GetOperatorBalance_FullMethodName                  = "/api.wallet.service.v1.Wallet/GetOperatorBalance"
+	Wallet_ListOperatorBalanceTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ListOperatorBalanceTransactions"
+	Wallet_OperatorDebit_FullMethodName                       = "/api.wallet.service.v1.Wallet/OperatorDebit"
+	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
+	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
+	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
+	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
+	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
+	Wallet_GetDepositRewardConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetDepositRewardConfig"
+	Wallet_CreatePromoCodeCampaign_FullMethodName             = "/api.wallet.service.v1.Wallet/CreatePromoCodeCampaign"
+	Wallet_UpdatePromoCodeCampaign_FullMethodName             = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaign"
+	Wallet_UpdatePromoCodeCampaignStatus_FullMethodName       = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaignStatus"
+	Wallet_ListPromoCodeCampaigns_FullMethodName              = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaigns"
+	Wallet_ListPromoCodeCampaignDetails_FullMethodName        = "/api.wallet.service.v1.Wallet/ListPromoCodeCampaignDetails"
+	Wallet_GenerateOneTimePromoCodes_FullMethodName           = "/api.wallet.service.v1.Wallet/GenerateOneTimePromoCodes"
+	Wallet_GenerateUniversalPromoCodes_FullMethodName         = "/api.wallet.service.v1.Wallet/GenerateUniversalPromoCodes"
+	Wallet_ListUniversalCodeUsages_FullMethodName             = "/api.wallet.service.v1.Wallet/ListUniversalCodeUsages"
+	Wallet_GetPromoCodeInfo_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
+	Wallet_ClaimPromoCode_FullMethodName                      = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
+	Wallet_GetUserDepositRewardSequence_FullMethodName        = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
+	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
+	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
+	Wallet_UpdateWalletConfig_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateWalletConfig"
+	Wallet_BonusTransfer_FullMethodName                       = "/api.wallet.service.v1.Wallet/BonusTransfer"
+	Wallet_AddResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
+	Wallet_DeleteResponsibleGamblingConfig_FullMethodName     = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
+	Wallet_ListResponsibleGamblingConfigs_FullMethodName      = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
+	Wallet_GetResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/GetResponsibleGamblingConfig"
+	Wallet_ListCustomerRecords_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListCustomerRecords"
+	Wallet_ExportCustomerRecords_FullMethodName               = "/api.wallet.service.v1.Wallet/ExportCustomerRecords"
+	Wallet_SetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/SetFICAThresholdConfig"
+	Wallet_GetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetFICAThresholdConfig"
+	Wallet_ListFICAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListFICAThresholdTransactions"
+	Wallet_ExportFICAThresholdTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ExportFICAThresholdTransactions"
+	Wallet_ListBalancesByUserIds_FullMethodName               = "/api.wallet.service.v1.Wallet/ListBalancesByUserIds"
+	Wallet_ListManualJournalEntries_FullMethodName            = "/api.wallet.service.v1.Wallet/ListManualJournalEntries"
+	Wallet_ExportManualJournalEntries_FullMethodName          = "/api.wallet.service.v1.Wallet/ExportManualJournalEntries"
+	Wallet_ListTimeRangeDepositCredits_FullMethodName         = "/api.wallet.service.v1.Wallet/ListTimeRangeDepositCredits"
+	Wallet_ListUserOverview_FullMethodName                    = "/api.wallet.service.v1.Wallet/ListUserOverview"
+	Wallet_GetUserGameTransactionsSummary_FullMethodName      = "/api.wallet.service.v1.Wallet/GetUserGameTransactionsSummary"
+	Wallet_CreditFreespinWin_FullMethodName                   = "/api.wallet.service.v1.Wallet/CreditFreespinWin"
+	Wallet_CreditFreeBetWin_FullMethodName                    = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
+	Wallet_GetOperatorUserFinancialSummary_FullMethodName     = "/api.wallet.service.v1.Wallet/GetOperatorUserFinancialSummary"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -228,8 +228,8 @@ type WalletClient interface {
 	CreditFreespinWin(ctx context.Context, in *CreditFreespinWinRequest, opts ...grpc.CallOption) (*CreditFreespinWinResponse, error)
 	// CreditFreeBetWin credits freebet win amount to user's wallet
 	CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWinRequest, opts ...grpc.CallOption) (*CreditFreeBetWinResponse, error)
-	// GetAllUserBalanceAggregatedByOperator returns the aggregated balance of all users by an operator
-	GetAllUserBalanceAggregatedByOperator(ctx context.Context, in *GetAllUserBalanceAggregatedByOperatorRequest, opts ...grpc.CallOption) (*GetAllUserBalanceAggregatedByOperatorResponse, error)
+	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
+	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
 }
 
 type walletClient struct {
@@ -980,10 +980,10 @@ func (c *walletClient) CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWi
 	return out, nil
 }
 
-func (c *walletClient) GetAllUserBalanceAggregatedByOperator(ctx context.Context, in *GetAllUserBalanceAggregatedByOperatorRequest, opts ...grpc.CallOption) (*GetAllUserBalanceAggregatedByOperatorResponse, error) {
+func (c *walletClient) GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAllUserBalanceAggregatedByOperatorResponse)
-	err := c.cc.Invoke(ctx, Wallet_GetAllUserBalanceAggregatedByOperator_FullMethodName, in, out, cOpts...)
+	out := new(GetOperatorUserFinancialSummaryResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorUserFinancialSummary_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1122,8 +1122,8 @@ type WalletServer interface {
 	CreditFreespinWin(context.Context, *CreditFreespinWinRequest) (*CreditFreespinWinResponse, error)
 	// CreditFreeBetWin credits freebet win amount to user's wallet
 	CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error)
-	// GetAllUserBalanceAggregatedByOperator returns the aggregated balance of all users by an operator
-	GetAllUserBalanceAggregatedByOperator(context.Context, *GetAllUserBalanceAggregatedByOperatorRequest) (*GetAllUserBalanceAggregatedByOperatorResponse, error)
+	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
+	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1356,8 +1356,8 @@ func (UnimplementedWalletServer) CreditFreespinWin(context.Context, *CreditFrees
 func (UnimplementedWalletServer) CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreditFreeBetWin not implemented")
 }
-func (UnimplementedWalletServer) GetAllUserBalanceAggregatedByOperator(context.Context, *GetAllUserBalanceAggregatedByOperatorRequest) (*GetAllUserBalanceAggregatedByOperatorResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAllUserBalanceAggregatedByOperator not implemented")
+func (UnimplementedWalletServer) GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorUserFinancialSummary not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2712,20 +2712,20 @@ func _Wallet_CreditFreeBetWin_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wallet_GetAllUserBalanceAggregatedByOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllUserBalanceAggregatedByOperatorRequest)
+func _Wallet_GetOperatorUserFinancialSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorUserFinancialSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WalletServer).GetAllUserBalanceAggregatedByOperator(ctx, in)
+		return srv.(WalletServer).GetOperatorUserFinancialSummary(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Wallet_GetAllUserBalanceAggregatedByOperator_FullMethodName,
+		FullMethod: Wallet_GetOperatorUserFinancialSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GetAllUserBalanceAggregatedByOperator(ctx, req.(*GetAllUserBalanceAggregatedByOperatorRequest))
+		return srv.(WalletServer).GetOperatorUserFinancialSummary(ctx, req.(*GetOperatorUserFinancialSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3034,8 +3034,8 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Wallet_CreditFreeBetWin_Handler,
 		},
 		{
-			MethodName: "GetAllUserBalanceAggregatedByOperator",
-			Handler:    _Wallet_GetAllUserBalanceAggregatedByOperator_Handler,
+			MethodName: "GetOperatorUserFinancialSummary",
+			Handler:    _Wallet_GetOperatorUserFinancialSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -271,8 +271,8 @@ service Wallet {
 	// CreditFreeBetWin credits freebet win amount to user's wallet
 	rpc CreditFreeBetWin(CreditFreeBetWinRequest) returns (CreditFreeBetWinResponse) {}
 
-	// GetAllUserBalanceAggregatedByOperator returns the aggregated balance of all users by an operator
-	rpc GetAllUserBalanceAggregatedByOperator(GetAllUserBalanceAggregatedByOperatorRequest) returns (GetAllUserBalanceAggregatedByOperatorResponse) {}
+	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
+	rpc GetOperatorUserFinancialSummary(GetOperatorUserFinancialSummaryRequest) returns (GetOperatorUserFinancialSummaryResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1818,15 +1818,26 @@ message CreditFreeBetWinResponse {
 	repeated AffectedCredit affected_credits = 5; // for free bet win's credit
 }
 
-message GetAllUserBalanceAggregatedByOperatorRequest {
+message GetOperatorUserFinancialSummaryRequest {
 	api.common.OperatorContext operator_context = 1;
+	bool include_transaction_stats = 2;
+	google.protobuf.Timestamp start_time = 3; // affected if include_transaction_stats is true
+	google.protobuf.Timestamp end_time = 4; // affected if include_transaction_stats is true
 }
 
-message GetAllUserBalanceAggregatedByOperatorResponse {
+message TransactionStats {
+	string total_deposit_usd = 1;
+	string total_deposit_reporting_currency = 2;
+	string total_withdrawal_usd = 3;
+	string total_withdrawal_reporting_currency = 4;
+}
+
+message GetOperatorUserFinancialSummaryResponse {
 	string cash_usd = 1;
 	string cash_reporting_currency = 2;
 	string operator_bonus_usd = 3;
 	string operator_bonus_reporting_currency = 4;
 	string provider_bonus_usd = 5;
 	string provider_bonus_reporting_currency = 6;
+	TransactionStats transaction_stats = 7;
 }
