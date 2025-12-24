@@ -18022,6 +18022,8 @@ func (m *IssueFreebetsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Amount
+
 	if len(errors) > 0 {
 		return IssueFreebetsRequestMultiError(errors)
 	}

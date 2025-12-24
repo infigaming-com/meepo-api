@@ -6110,9 +6110,13 @@ func (m *FreeBetConfig_FreeBetReward) validate(all bool) error {
 
 	// no validation rules for TemplateId
 
-	// no validation rules for BetCount
+	// no validation rules for Amount
 
 	// no validation rules for FreeBetValidity
+
+	if m.Extra != nil {
+		// no validation rules for Extra
+	}
 
 	if len(errors) > 0 {
 		return FreeBetConfig_FreeBetRewardMultiError(errors)

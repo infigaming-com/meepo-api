@@ -20316,11 +20316,13 @@ components:
             properties:
                 templateId:
                     type: string
-                betCount:
-                    type: integer
-                    format: int32
+                amount:
+                    type: string
                 freeBetValidity:
                     type: string
+                extra:
+                    type: string
+                    format: bytes
         api.wallet.service.v1.FreeSpinConfig:
             type: object
             properties:

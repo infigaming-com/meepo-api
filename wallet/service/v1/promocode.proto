@@ -42,8 +42,9 @@ message FreeBetConfig {
 	repeated FreeBetReward rewards = 7;
 	message FreeBetReward {
 		string template_id = 1;
-		int32 bet_count = 2;
+		string amount = 2;                   // free bet amount (decimal string)
 		int64 free_bet_validity = 3;         // ms, 0 = no expiration
+		optional bytes extra = 4;            // extra data (JSON), optional
 	}
 }
 

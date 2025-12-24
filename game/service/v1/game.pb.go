@@ -10215,6 +10215,7 @@ type IssueFreebetsRequest struct {
 	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	FreebetId       int64                   `protobuf:"varint,4,opt,name=freebet_id,json=freebetId,proto3" json:"freebet_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Amount          string                  `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"` // free bet amount (decimal string)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -10282,6 +10283,13 @@ func (x *IssueFreebetsRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *IssueFreebetsRequest) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
 }
 
 type FreebetIssuedBonus struct {
@@ -17704,7 +17712,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\ttemplates\x18\x01 \x03(\v2$.api.game.service.v1.FreebetTemplateR\ttemplates\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xd3\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xeb\x01\n" +
 	"\x14IssueFreebetsRequest\x12\x1f\n" +
 	"\vtemplate_id\x18\x01 \x01(\tR\n" +
 	"templateId\x12\x1a\n" +
@@ -17712,7 +17720,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
 	"freebet_id\x18\x04 \x01(\x03R\tfreebetId\x12F\n" +
-	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xfe\x03\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x16\n" +
+	"\x06amount\x18\x06 \x01(\tR\x06amount\"\xfe\x03\n" +
 	"\x12FreebetIssuedBonus\x12\x19\n" +
 	"\bbonus_id\x18\x01 \x01(\tR\abonusId\x12\x1b\n" +
 	"\tassign_id\x18\x02 \x01(\tR\bassignId\x12\x1f\n" +
