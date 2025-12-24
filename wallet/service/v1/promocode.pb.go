@@ -2860,8 +2860,9 @@ func (x *FreeSpinConfig_FreeSpinReward) GetFreeSpinValidity() int64 {
 type FreeBetConfig_FreeBetReward struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	TemplateId      string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	BetCount        int32                  `protobuf:"varint,2,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	Amount          string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`                                             // free bet amount (decimal string)
 	FreeBetValidity int64                  `protobuf:"varint,3,opt,name=free_bet_validity,json=freeBetValidity,proto3" json:"free_bet_validity,omitempty"` // ms, 0 = no expiration
+	Extra           []byte                 `protobuf:"bytes,4,opt,name=extra,proto3,oneof" json:"extra,omitempty"`                                         // extra data (JSON), optional
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2903,11 +2904,11 @@ func (x *FreeBetConfig_FreeBetReward) GetTemplateId() string {
 	return ""
 }
 
-func (x *FreeBetConfig_FreeBetReward) GetBetCount() int32 {
+func (x *FreeBetConfig_FreeBetReward) GetAmount() string {
 	if x != nil {
-		return x.BetCount
+		return x.Amount
 	}
-	return 0
+	return ""
 }
 
 func (x *FreeBetConfig_FreeBetReward) GetFreeBetValidity() int64 {
@@ -2915,6 +2916,13 @@ func (x *FreeBetConfig_FreeBetReward) GetFreeBetValidity() int64 {
 		return x.FreeBetValidity
 	}
 	return 0
+}
+
+func (x *FreeBetConfig_FreeBetReward) GetExtra() []byte {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
 }
 
 type ListUniversalCodeUsagesResponse_UniversalCodeUsage struct {
@@ -2998,7 +3006,7 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"providerId\x12\x17\n" +
 	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12\x14\n" +
 	"\x05level\x18\x03 \x01(\x05R\x05level\x12,\n" +
-	"\x12free_spin_validity\x18\x04 \x01(\x03R\x10freeSpinValidity\"\xc7\x03\n" +
+	"\x12free_spin_validity\x18\x04 \x01(\x03R\x10freeSpinValidity\"\xe8\x03\n" +
 	"\rFreeBetConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
@@ -3007,12 +3015,14 @@ const file_wallet_service_v1_promocode_proto_rawDesc = "" +
 	"\x14wagering_requirement\x18\x04 \x01(\x05R\x13wageringRequirement\x12:\n" +
 	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\x12'\n" +
 	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\x12L\n" +
-	"\arewards\x18\a \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1ay\n" +
+	"\arewards\x18\a \x03(\v22.api.wallet.service.v1.FreeBetConfig.FreeBetRewardR\arewards\x1a\x99\x01\n" +
 	"\rFreeBetReward\x12\x1f\n" +
 	"\vtemplate_id\x18\x01 \x01(\tR\n" +
-	"templateId\x12\x1b\n" +
-	"\tbet_count\x18\x02 \x01(\x05R\bbetCount\x12*\n" +
-	"\x11free_bet_validity\x18\x03 \x01(\x03R\x0ffreeBetValidity\"\xa2\x02\n" +
+	"templateId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12*\n" +
+	"\x11free_bet_validity\x18\x03 \x01(\x03R\x0ffreeBetValidity\x12\x19\n" +
+	"\x05extra\x18\x04 \x01(\fH\x00R\x05extra\x88\x01\x01B\b\n" +
+	"\x06_extra\"\xa2\x02\n" +
 	"\x19PromoCodeBonusMoneyConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
@@ -3402,6 +3412,7 @@ func file_wallet_service_v1_promocode_proto_init() {
 	file_wallet_service_v1_promocode_proto_msgTypes[3].OneofWrappers = []any{}
 	file_wallet_service_v1_promocode_proto_msgTypes[19].OneofWrappers = []any{}
 	file_wallet_service_v1_promocode_proto_msgTypes[22].OneofWrappers = []any{}
+	file_wallet_service_v1_promocode_proto_msgTypes[38].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

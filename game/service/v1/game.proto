@@ -1865,6 +1865,7 @@ message IssueFreebetsRequest {
 	int64 user_id = 3;
 	int64 freebet_id = 4;
 	api.common.OperatorContext operator_context = 5;
+	string amount = 6;                   // free bet amount (decimal string)
 }
 
 message FreebetIssuedBonus {
