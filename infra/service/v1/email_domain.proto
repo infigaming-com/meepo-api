@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package api.infra.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/infra/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.infra.service.v1";
+
+service EmailDomain {
+    // Bind a sending email domain for an operator
+    rpc BindEmailDomain(BindEmailDomainRequest) returns (BindEmailDomainResponse) {}
+    
+    // Get email domain binding status (reads from local DB)
+    rpc GetEmailDomainBinding(GetEmailDomainBindingRequest) returns (GetEmailDomainBindingResponse) {}
+    
+    // Manually trigger verification retry
+    rpc RetryEmailDomainVerification(RetryEmailDomainVerificationRequest) returns (RetryEmailDomainVerificationResponse) {}
+    
+    // Delete email domain binding
+    rpc DeleteEmailDomainBinding(DeleteEmailDomainBindingRequest) returns (DeleteEmailDomainBindingResponse) {}
+    
+    // List email domain bindings for operator(s)
+    rpc ListEmailDomainBindings(ListEmailDomainBindingsRequest) returns (ListEmailDomainBindingsResponse) {}
+}
+
+message DnsRecord {
+    string record_type = 1;  // TXT, CNAME, MX
+    string name = 2;         // DNS record name (e.g., "k1._domainkey.abc.com")
+    string value = 3;        // DNS record value
+    bool valid = 4;          // Whether this record is verified
+    string description = 5;  // Human-readable description
+}
+
+message EmailDomainBindingInfo {
+    string id = 1;
+    int64 operator_id = 2;
+    int64 company_operator_id = 3;
+    int64 retailer_operator_id = 4;
+    int64 system_operator_id = 5;
+    string domain = 6;                     // e.g., "abc.com"
+    string email_local_part = 7;           // e.g., "support"
+    string sending_email = 8;              // e.g., "support@abc.com"
+    string status = 9;                     // pending, verifying, active, failed, expired
+    string mailgun_domain_state = 10;      // unverified, active, disabled
+    repeated DnsRecord dns_records = 11;   // Required DNS records
+    bool spf_valid = 12;
+    bool dkim_valid = 13;
+    bool mx_valid = 14;
+    string error_reason = 15;
+    int32 verification_attempts = 16;
+    int64 last_verification_at = 17;
+    int64 created_at = 18;
+    int64 updated_at = 19;
+    int64 verification_deadline = 20;      // Auto-abandon after this timestamp
+}
+
+message BindEmailDomainRequest {
+    int64 operator_id = 1;
+    int64 company_operator_id = 2;
+    int64 retailer_operator_id = 3;
+    int64 system_operator_id = 4;
+    string domain = 5;               // e.g., "abc.com"
+    string email_local_part = 6;     // e.g., "support"
+}
+
+message BindEmailDomainResponse {
+    EmailDomainBindingInfo binding = 1;
+}
+
+message GetEmailDomainBindingRequest {
+    int64 operator_id = 1;
+    string domain = 2;  // Optional, if empty returns the operator's binding
+}
+
+message GetEmailDomainBindingResponse {
+    EmailDomainBindingInfo binding = 1;
+}
+
+message RetryEmailDomainVerificationRequest {
+    int64 operator_id = 1;
+    string domain = 2;
+}
+
+message RetryEmailDomainVerificationResponse {
+    EmailDomainBindingInfo binding = 1;
+}
+
+message DeleteEmailDomainBindingRequest {
+    int64 operator_id = 1;
+    string domain = 2;
+}
+
+message DeleteEmailDomainBindingResponse {}
+
+message ListEmailDomainBindingsRequest {
+    message OperatorFilter {
+        int64 operator_id = 1;
+        int64 company_operator_id = 2;
+        int64 retailer_operator_id = 3;
+        int64 system_operator_id = 4;
+    }
+    repeated OperatorFilter operator_filters = 1;
+    optional string status = 2;
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+}
+
+message ListEmailDomainBindingsResponse {
+    repeated EmailDomainBindingInfo bindings = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}

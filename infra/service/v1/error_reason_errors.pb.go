@@ -166,3 +166,161 @@ func IsNginxReloadFailed(err error) bool {
 func ErrorNginxReloadFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_NGINX_RELOAD_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Email Domain errors (140100-140199)
+func IsBindEmailDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BIND_EMAIL_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+// Email Domain errors (140100-140199)
+func ErrorBindEmailDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BIND_EMAIL_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetEmailDomainBindingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_EMAIL_DOMAIN_BINDING_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetEmailDomainBindingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_EMAIL_DOMAIN_BINDING_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteEmailDomainBindingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_EMAIL_DOMAIN_BINDING_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteEmailDomainBindingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_EMAIL_DOMAIN_BINDING_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRetryEmailDomainVerificationFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_RETRY_EMAIL_DOMAIN_VERIFICATION_FAILED.String() && e.Code == 500
+}
+
+func ErrorRetryEmailDomainVerificationFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_RETRY_EMAIL_DOMAIN_VERIFICATION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListEmailDomainBindingsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_EMAIL_DOMAIN_BINDINGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListEmailDomainBindingsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_EMAIL_DOMAIN_BINDINGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainAlreadyBound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_ALREADY_BOUND.String() && e.Code == 500
+}
+
+func ErrorEmailDomainAlreadyBound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_ALREADY_BOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorAlreadyHasEmailDomain(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_ALREADY_HAS_EMAIL_DOMAIN.String() && e.Code == 500
+}
+
+func ErrorOperatorAlreadyHasEmailDomain(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_ALREADY_HAS_EMAIL_DOMAIN.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorEmailDomainNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidEmailDomain(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_EMAIL_DOMAIN.String() && e.Code == 500
+}
+
+func ErrorInvalidEmailDomain(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_EMAIL_DOMAIN.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidEmailLocalPart(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_EMAIL_LOCAL_PART.String() && e.Code == 500
+}
+
+func ErrorInvalidEmailLocalPart(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_EMAIL_LOCAL_PART.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMailgunApiFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MAILGUN_API_FAILED.String() && e.Code == 500
+}
+
+func ErrorMailgunApiFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_MAILGUN_API_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainVerificationExpired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_VERIFICATION_EXPIRED.String() && e.Code == 500
+}
+
+func ErrorEmailDomainVerificationExpired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_VERIFICATION_EXPIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailDomainVerificationMaxAttempts(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_DOMAIN_VERIFICATION_MAX_ATTEMPTS.String() && e.Code == 500
+}
+
+func ErrorEmailDomainVerificationMaxAttempts(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_DOMAIN_VERIFICATION_MAX_ATTEMPTS.String(), fmt.Sprintf(format, args...))
+}

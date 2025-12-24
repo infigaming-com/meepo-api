@@ -38,6 +38,20 @@ const (
 	ErrorReason_CERTIFICATE_ISSUANCE_FAILED    ErrorReason = 140010
 	ErrorReason_NGINX_CONFIG_GENERATION_FAILED ErrorReason = 140011
 	ErrorReason_NGINX_RELOAD_FAILED            ErrorReason = 140012
+	// Email Domain errors (140100-140199)
+	ErrorReason_BIND_EMAIL_DOMAIN_FAILED               ErrorReason = 140100
+	ErrorReason_GET_EMAIL_DOMAIN_BINDING_FAILED        ErrorReason = 140101
+	ErrorReason_DELETE_EMAIL_DOMAIN_BINDING_FAILED     ErrorReason = 140102
+	ErrorReason_RETRY_EMAIL_DOMAIN_VERIFICATION_FAILED ErrorReason = 140103
+	ErrorReason_LIST_EMAIL_DOMAIN_BINDINGS_FAILED      ErrorReason = 140104
+	ErrorReason_EMAIL_DOMAIN_ALREADY_BOUND             ErrorReason = 140105
+	ErrorReason_OPERATOR_ALREADY_HAS_EMAIL_DOMAIN      ErrorReason = 140106
+	ErrorReason_EMAIL_DOMAIN_NOT_FOUND                 ErrorReason = 140107
+	ErrorReason_INVALID_EMAIL_DOMAIN                   ErrorReason = 140108
+	ErrorReason_INVALID_EMAIL_LOCAL_PART               ErrorReason = 140109
+	ErrorReason_MAILGUN_API_FAILED                     ErrorReason = 140110
+	ErrorReason_EMAIL_DOMAIN_VERIFICATION_EXPIRED      ErrorReason = 140111
+	ErrorReason_EMAIL_DOMAIN_VERIFICATION_MAX_ATTEMPTS ErrorReason = 140112
 )
 
 // Enum value maps for ErrorReason.
@@ -56,21 +70,47 @@ var (
 		140010: "CERTIFICATE_ISSUANCE_FAILED",
 		140011: "NGINX_CONFIG_GENERATION_FAILED",
 		140012: "NGINX_RELOAD_FAILED",
+		140100: "BIND_EMAIL_DOMAIN_FAILED",
+		140101: "GET_EMAIL_DOMAIN_BINDING_FAILED",
+		140102: "DELETE_EMAIL_DOMAIN_BINDING_FAILED",
+		140103: "RETRY_EMAIL_DOMAIN_VERIFICATION_FAILED",
+		140104: "LIST_EMAIL_DOMAIN_BINDINGS_FAILED",
+		140105: "EMAIL_DOMAIN_ALREADY_BOUND",
+		140106: "OPERATOR_ALREADY_HAS_EMAIL_DOMAIN",
+		140107: "EMAIL_DOMAIN_NOT_FOUND",
+		140108: "INVALID_EMAIL_DOMAIN",
+		140109: "INVALID_EMAIL_LOCAL_PART",
+		140110: "MAILGUN_API_FAILED",
+		140111: "EMAIL_DOMAIN_VERIFICATION_EXPIRED",
+		140112: "EMAIL_DOMAIN_VERIFICATION_MAX_ATTEMPTS",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                    0,
-		"ADD_BYO_DOMAIN_FAILED":          140001,
-		"GET_BYO_DOMAINS_FAILED":         140002,
-		"DELETE_BYO_DOMAIN_FAILED":       140003,
-		"ADD_APEX_DOMAIN_FAILED":         140004,
-		"GET_APEX_DOMAINS_FAILED":        140005,
-		"DELETE_APEX_DOMAIN_FAILED":      140006,
-		"REFRESH_APEX_DOMAIN_FAILED":     140007,
-		"WWW_DOMAIN_NOT_ACTIVE":          140008,
-		"APEX_DOMAIN_LIMIT_EXCEEDED":     140009,
-		"CERTIFICATE_ISSUANCE_FAILED":    140010,
-		"NGINX_CONFIG_GENERATION_FAILED": 140011,
-		"NGINX_RELOAD_FAILED":            140012,
+		"UNSPECIFIED":                            0,
+		"ADD_BYO_DOMAIN_FAILED":                  140001,
+		"GET_BYO_DOMAINS_FAILED":                 140002,
+		"DELETE_BYO_DOMAIN_FAILED":               140003,
+		"ADD_APEX_DOMAIN_FAILED":                 140004,
+		"GET_APEX_DOMAINS_FAILED":                140005,
+		"DELETE_APEX_DOMAIN_FAILED":              140006,
+		"REFRESH_APEX_DOMAIN_FAILED":             140007,
+		"WWW_DOMAIN_NOT_ACTIVE":                  140008,
+		"APEX_DOMAIN_LIMIT_EXCEEDED":             140009,
+		"CERTIFICATE_ISSUANCE_FAILED":            140010,
+		"NGINX_CONFIG_GENERATION_FAILED":         140011,
+		"NGINX_RELOAD_FAILED":                    140012,
+		"BIND_EMAIL_DOMAIN_FAILED":               140100,
+		"GET_EMAIL_DOMAIN_BINDING_FAILED":        140101,
+		"DELETE_EMAIL_DOMAIN_BINDING_FAILED":     140102,
+		"RETRY_EMAIL_DOMAIN_VERIFICATION_FAILED": 140103,
+		"LIST_EMAIL_DOMAIN_BINDINGS_FAILED":      140104,
+		"EMAIL_DOMAIN_ALREADY_BOUND":             140105,
+		"OPERATOR_ALREADY_HAS_EMAIL_DOMAIN":      140106,
+		"EMAIL_DOMAIN_NOT_FOUND":                 140107,
+		"INVALID_EMAIL_DOMAIN":                   140108,
+		"INVALID_EMAIL_LOCAL_PART":               140109,
+		"MAILGUN_API_FAILED":                     140110,
+		"EMAIL_DOMAIN_VERIFICATION_EXPIRED":      140111,
+		"EMAIL_DOMAIN_VERIFICATION_MAX_ATTEMPTS": 140112,
 	}
 )
 
@@ -105,7 +145,7 @@ var File_infra_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_infra_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"#infra/service/v1/error_reason.proto\x12\x14api.infra.service.v1\x1a\x13errors/errors.proto*\xa2\x03\n" +
+	"#infra/service/v1/error_reason.proto\x12\x14api.infra.service.v1\x1a\x13errors/errors.proto*\x80\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x15ADD_BYO_DOMAIN_FAILED\x10\xe1\xc5\b\x12\x1c\n" +
@@ -119,7 +159,20 @@ const file_infra_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aAPEX_DOMAIN_LIMIT_EXCEEDED\x10\xe9\xc5\b\x12!\n" +
 	"\x1bCERTIFICATE_ISSUANCE_FAILED\x10\xea\xc5\b\x12$\n" +
 	"\x1eNGINX_CONFIG_GENERATION_FAILED\x10\xeb\xc5\b\x12\x19\n" +
-	"\x13NGINX_RELOAD_FAILED\x10\xec\xc5\b\x1a\x04\xa0E\xf4\x03BQ\n" +
+	"\x13NGINX_RELOAD_FAILED\x10\xec\xc5\b\x12\x1e\n" +
+	"\x18BIND_EMAIL_DOMAIN_FAILED\x10\xc4\xc6\b\x12%\n" +
+	"\x1fGET_EMAIL_DOMAIN_BINDING_FAILED\x10\xc5\xc6\b\x12(\n" +
+	"\"DELETE_EMAIL_DOMAIN_BINDING_FAILED\x10\xc6\xc6\b\x12,\n" +
+	"&RETRY_EMAIL_DOMAIN_VERIFICATION_FAILED\x10\xc7\xc6\b\x12'\n" +
+	"!LIST_EMAIL_DOMAIN_BINDINGS_FAILED\x10\xc8\xc6\b\x12 \n" +
+	"\x1aEMAIL_DOMAIN_ALREADY_BOUND\x10\xc9\xc6\b\x12'\n" +
+	"!OPERATOR_ALREADY_HAS_EMAIL_DOMAIN\x10\xca\xc6\b\x12\x1c\n" +
+	"\x16EMAIL_DOMAIN_NOT_FOUND\x10\xcb\xc6\b\x12\x1a\n" +
+	"\x14INVALID_EMAIL_DOMAIN\x10\xcc\xc6\b\x12\x1e\n" +
+	"\x18INVALID_EMAIL_LOCAL_PART\x10\xcd\xc6\b\x12\x18\n" +
+	"\x12MAILGUN_API_FAILED\x10\xce\xc6\b\x12'\n" +
+	"!EMAIL_DOMAIN_VERIFICATION_EXPIRED\x10\xcf\xc6\b\x12,\n" +
+	"&EMAIL_DOMAIN_VERIFICATION_MAX_ATTEMPTS\x10\xd0\xc6\b\x1a\x04\xa0E\xf4\x03BQ\n" +
 	"\x14api.infra.service.v1P\x01Z7github.com/infigaming-com/meepo-api/infra/service/v1;v1b\x06proto3"
 
 var (
