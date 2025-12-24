@@ -45,6 +45,26 @@ service Dns {
 	// RefreshOperatorApexDomain manually refreshes certificate for apex domain
 	rpc RefreshOperatorApexDomain(RefreshOperatorApexDomainRequest) returns (RefreshOperatorApexDomainResponse) {
 	}
+
+	// BindOperatorEmailDomain binds a sending email domain for an operator via Mailgun
+	rpc BindOperatorEmailDomain(BindOperatorEmailDomainRequest) returns (BindOperatorEmailDomainResponse) {
+	}
+
+	// GetOperatorEmailDomainBinding gets the email domain binding for an operator
+	rpc GetOperatorEmailDomainBinding(GetOperatorEmailDomainBindingRequest) returns (GetOperatorEmailDomainBindingResponse) {
+	}
+
+	// DeleteOperatorEmailDomainBinding deletes an email domain binding
+	rpc DeleteOperatorEmailDomainBinding(DeleteOperatorEmailDomainBindingRequest) returns (DeleteOperatorEmailDomainBindingResponse) {
+	}
+
+	// RetryOperatorEmailDomainVerification retries verification for an email domain
+	rpc RetryOperatorEmailDomainVerification(RetryOperatorEmailDomainVerificationRequest) returns (RetryOperatorEmailDomainVerificationResponse) {
+	}
+
+	// ListOperatorEmailDomainBindings lists email domain bindings
+	rpc ListOperatorEmailDomainBindings(ListOperatorEmailDomainBindingsRequest) returns (ListOperatorEmailDomainBindingsResponse) {
+	}
 }
 
 message DomainInfo {
@@ -225,4 +245,92 @@ message PrecheckOperatorApexDomainResponse {
 	string apex_ip = 2;
 	string message = 3;
 	string www_domain = 4;
+}
+
+// Email Domain Binding Messages
+
+message EmailDomainDnsRecord {
+	string record_type = 1;  // TXT, CNAME, MX
+	string name = 2;         // DNS record name
+	string value = 3;        // DNS record value
+	bool valid = 4;          // Whether this record is verified
+	string description = 5;  // Human-readable description
+}
+
+message EmailDomainBindingInfo {
+	string id = 1;
+	string domain = 2;                          // e.g., "abc.com"
+	string email_local_part = 3;                // e.g., "support"
+	string sending_email = 4;                   // e.g., "support@abc.com"
+	string status = 5;                          // pending, verifying, active, failed, expired
+	string mailgun_domain_state = 6;            // unverified, active, disabled
+	repeated EmailDomainDnsRecord dns_records = 7;
+	bool spf_valid = 8;
+	bool dkim_valid = 9;
+	bool mx_valid = 10;
+	string error_reason = 11;
+	int32 verification_attempts = 12;
+	int64 last_verification_at = 13;
+	int64 verification_deadline = 14;
+	int64 target_operator_id = 15;
+	string target_operator_name = 16;
+	int64 target_company_operator_id = 17;
+	string target_company_operator_name = 18;
+	int64 target_retailer_operator_id = 19;
+	string target_retailer_operator_name = 20;
+	int64 target_system_operator_id = 21;
+	string target_system_operator_name = 22;
+	google.protobuf.Timestamp created_at = 23;
+	google.protobuf.Timestamp updated_at = 24;
+}
+
+message BindOperatorEmailDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string domain = 2;               // e.g., "abc.com"
+	string email_local_part = 3;     // e.g., "support"
+}
+
+message BindOperatorEmailDomainResponse {
+	EmailDomainBindingInfo binding = 1;
+}
+
+message GetOperatorEmailDomainBindingRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string domain = 2;  // If empty, returns the operator's binding
+}
+
+message GetOperatorEmailDomainBindingResponse {
+	EmailDomainBindingInfo binding = 1;
+}
+
+message DeleteOperatorEmailDomainBindingRequest {
+	api.common.OperatorContext operator_context = 1;
+	string domain = 2;
+}
+
+message DeleteOperatorEmailDomainBindingResponse {
+}
+
+message RetryOperatorEmailDomainVerificationRequest {
+	api.common.OperatorContext operator_context = 1;
+	string domain = 2;
+}
+
+message RetryOperatorEmailDomainVerificationResponse {
+	EmailDomainBindingInfo binding = 1;
+}
+
+message ListOperatorEmailDomainBindingsRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string status = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	optional bool pagination = 5;
+}
+
+message ListOperatorEmailDomainBindingsResponse {
+	repeated EmailDomainBindingInfo data = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
 }

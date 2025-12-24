@@ -73,6 +73,42 @@ service BackofficeDns {
 			body: "*"
 		};
 	}
+
+	// Email Domain Bindings (Mailgun)
+	rpc BindOperatorEmailDomain(BindOperatorEmailDomainRequest) returns (user.service.v1.BindOperatorEmailDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/email-domains/bind"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorEmailDomainBinding(GetOperatorEmailDomainBindingRequest) returns (user.service.v1.GetOperatorEmailDomainBindingResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/email-domains/get"
+			body: "*"
+		};
+	}
+
+	rpc DeleteOperatorEmailDomainBinding(DeleteOperatorEmailDomainBindingRequest) returns (user.service.v1.DeleteOperatorEmailDomainBindingResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/email-domains/delete"
+			body: "*"
+		};
+	}
+
+	rpc RetryOperatorEmailDomainVerification(RetryOperatorEmailDomainVerificationRequest) returns (user.service.v1.RetryOperatorEmailDomainVerificationResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/email-domains/retry-verification"
+			body: "*"
+		};
+	}
+
+	rpc ListOperatorEmailDomainBindings(ListOperatorEmailDomainBindingsRequest) returns (user.service.v1.ListOperatorEmailDomainBindingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/email-domains/list"
+			body: "*"
+		};
+	}
 }
 
 message ListOperatorDomainsRequest {
@@ -117,4 +153,28 @@ message RefreshOperatorApexDomainRequest {
 message PrecheckOperatorApexDomainRequest {
 	string apex_domain = 1;
 	string domain = 2;
+}
+
+// Email Domain Binding Messages
+message BindOperatorEmailDomainRequest {
+	string domain = 1;               // e.g., "abc.com"
+	string email_local_part = 2;     // e.g., "support"
+}
+
+message GetOperatorEmailDomainBindingRequest {
+	optional string domain = 1;  // If empty, returns the operator's binding
+}
+
+message DeleteOperatorEmailDomainBindingRequest {
+	string domain = 1;
+}
+
+message RetryOperatorEmailDomainVerificationRequest {
+	string domain = 1;
+}
+
+message ListOperatorEmailDomainBindingsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+	optional string status = 3;
 }

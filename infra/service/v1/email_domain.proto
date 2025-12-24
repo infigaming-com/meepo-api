@@ -64,7 +64,13 @@ message BindEmailDomainRequest {
 }
 
 message BindEmailDomainResponse {
-    EmailDomainBindingInfo binding = 1;
+    string mailgun_domain_id = 1;      // Domain name in Mailgun
+    string status = 2;                 // pending, verifying, active
+    string mailgun_domain_state = 3;   // unverified, active, disabled
+    repeated DnsRecord dns_records = 4; // Required DNS records to configure
+    bool spf_valid = 5;
+    bool dkim_valid = 6;
+    bool mx_valid = 7;
 }
 
 message GetEmailDomainBindingRequest {

@@ -1739,6 +1739,838 @@ func (x *PrecheckOperatorApexDomainResponse) GetWwwDomain() string {
 	return ""
 }
 
+type EmailDomainDnsRecord struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RecordType    string                 `protobuf:"bytes,1,opt,name=record_type,json=recordType,proto3" json:"record_type,omitempty"` // TXT, CNAME, MX
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                               // DNS record name
+	Value         string                 `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`                             // DNS record value
+	Valid         bool                   `protobuf:"varint,4,opt,name=valid,proto3" json:"valid,omitempty"`                            // Whether this record is verified
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`                 // Human-readable description
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmailDomainDnsRecord) Reset() {
+	*x = EmailDomainDnsRecord{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmailDomainDnsRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmailDomainDnsRecord) ProtoMessage() {}
+
+func (x *EmailDomainDnsRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmailDomainDnsRecord.ProtoReflect.Descriptor instead.
+func (*EmailDomainDnsRecord) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *EmailDomainDnsRecord) GetRecordType() string {
+	if x != nil {
+		return x.RecordType
+	}
+	return ""
+}
+
+func (x *EmailDomainDnsRecord) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *EmailDomainDnsRecord) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *EmailDomainDnsRecord) GetValid() bool {
+	if x != nil {
+		return x.Valid
+	}
+	return false
+}
+
+func (x *EmailDomainDnsRecord) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type EmailDomainBindingInfo struct {
+	state                      protoimpl.MessageState  `protogen:"open.v1"`
+	Id                         string                  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Domain                     string                  `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`                                                     // e.g., "abc.com"
+	EmailLocalPart             string                  `protobuf:"bytes,3,opt,name=email_local_part,json=emailLocalPart,proto3" json:"email_local_part,omitempty"`             // e.g., "support"
+	SendingEmail               string                  `protobuf:"bytes,4,opt,name=sending_email,json=sendingEmail,proto3" json:"sending_email,omitempty"`                     // e.g., "support@abc.com"
+	Status                     string                  `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`                                                     // pending, verifying, active, failed, expired
+	MailgunDomainState         string                  `protobuf:"bytes,6,opt,name=mailgun_domain_state,json=mailgunDomainState,proto3" json:"mailgun_domain_state,omitempty"` // unverified, active, disabled
+	DnsRecords                 []*EmailDomainDnsRecord `protobuf:"bytes,7,rep,name=dns_records,json=dnsRecords,proto3" json:"dns_records,omitempty"`
+	SpfValid                   bool                    `protobuf:"varint,8,opt,name=spf_valid,json=spfValid,proto3" json:"spf_valid,omitempty"`
+	DkimValid                  bool                    `protobuf:"varint,9,opt,name=dkim_valid,json=dkimValid,proto3" json:"dkim_valid,omitempty"`
+	MxValid                    bool                    `protobuf:"varint,10,opt,name=mx_valid,json=mxValid,proto3" json:"mx_valid,omitempty"`
+	ErrorReason                string                  `protobuf:"bytes,11,opt,name=error_reason,json=errorReason,proto3" json:"error_reason,omitempty"`
+	VerificationAttempts       int32                   `protobuf:"varint,12,opt,name=verification_attempts,json=verificationAttempts,proto3" json:"verification_attempts,omitempty"`
+	LastVerificationAt         int64                   `protobuf:"varint,13,opt,name=last_verification_at,json=lastVerificationAt,proto3" json:"last_verification_at,omitempty"`
+	VerificationDeadline       int64                   `protobuf:"varint,14,opt,name=verification_deadline,json=verificationDeadline,proto3" json:"verification_deadline,omitempty"`
+	TargetOperatorId           int64                   `protobuf:"varint,15,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
+	TargetOperatorName         string                  `protobuf:"bytes,16,opt,name=target_operator_name,json=targetOperatorName,proto3" json:"target_operator_name,omitempty"`
+	TargetCompanyOperatorId    int64                   `protobuf:"varint,17,opt,name=target_company_operator_id,json=targetCompanyOperatorId,proto3" json:"target_company_operator_id,omitempty"`
+	TargetCompanyOperatorName  string                  `protobuf:"bytes,18,opt,name=target_company_operator_name,json=targetCompanyOperatorName,proto3" json:"target_company_operator_name,omitempty"`
+	TargetRetailerOperatorId   int64                   `protobuf:"varint,19,opt,name=target_retailer_operator_id,json=targetRetailerOperatorId,proto3" json:"target_retailer_operator_id,omitempty"`
+	TargetRetailerOperatorName string                  `protobuf:"bytes,20,opt,name=target_retailer_operator_name,json=targetRetailerOperatorName,proto3" json:"target_retailer_operator_name,omitempty"`
+	TargetSystemOperatorId     int64                   `protobuf:"varint,21,opt,name=target_system_operator_id,json=targetSystemOperatorId,proto3" json:"target_system_operator_id,omitempty"`
+	TargetSystemOperatorName   string                  `protobuf:"bytes,22,opt,name=target_system_operator_name,json=targetSystemOperatorName,proto3" json:"target_system_operator_name,omitempty"`
+	CreatedAt                  *timestamppb.Timestamp  `protobuf:"bytes,23,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                  *timestamppb.Timestamp  `protobuf:"bytes,24,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *EmailDomainBindingInfo) Reset() {
+	*x = EmailDomainBindingInfo{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmailDomainBindingInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmailDomainBindingInfo) ProtoMessage() {}
+
+func (x *EmailDomainBindingInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmailDomainBindingInfo.ProtoReflect.Descriptor instead.
+func (*EmailDomainBindingInfo) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *EmailDomainBindingInfo) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetEmailLocalPart() string {
+	if x != nil {
+		return x.EmailLocalPart
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetSendingEmail() string {
+	if x != nil {
+		return x.SendingEmail
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetMailgunDomainState() string {
+	if x != nil {
+		return x.MailgunDomainState
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetDnsRecords() []*EmailDomainDnsRecord {
+	if x != nil {
+		return x.DnsRecords
+	}
+	return nil
+}
+
+func (x *EmailDomainBindingInfo) GetSpfValid() bool {
+	if x != nil {
+		return x.SpfValid
+	}
+	return false
+}
+
+func (x *EmailDomainBindingInfo) GetDkimValid() bool {
+	if x != nil {
+		return x.DkimValid
+	}
+	return false
+}
+
+func (x *EmailDomainBindingInfo) GetMxValid() bool {
+	if x != nil {
+		return x.MxValid
+	}
+	return false
+}
+
+func (x *EmailDomainBindingInfo) GetErrorReason() string {
+	if x != nil {
+		return x.ErrorReason
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetVerificationAttempts() int32 {
+	if x != nil {
+		return x.VerificationAttempts
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetLastVerificationAt() int64 {
+	if x != nil {
+		return x.LastVerificationAt
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetVerificationDeadline() int64 {
+	if x != nil {
+		return x.VerificationDeadline
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetTargetOperatorId() int64 {
+	if x != nil {
+		return x.TargetOperatorId
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetTargetOperatorName() string {
+	if x != nil {
+		return x.TargetOperatorName
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetTargetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.TargetCompanyOperatorId
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetTargetCompanyOperatorName() string {
+	if x != nil {
+		return x.TargetCompanyOperatorName
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetTargetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.TargetRetailerOperatorId
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetTargetRetailerOperatorName() string {
+	if x != nil {
+		return x.TargetRetailerOperatorName
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetTargetSystemOperatorId() int64 {
+	if x != nil {
+		return x.TargetSystemOperatorId
+	}
+	return 0
+}
+
+func (x *EmailDomainBindingInfo) GetTargetSystemOperatorName() string {
+	if x != nil {
+		return x.TargetSystemOperatorName
+	}
+	return ""
+}
+
+func (x *EmailDomainBindingInfo) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *EmailDomainBindingInfo) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type BindOperatorEmailDomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Domain          string                  `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`                                         // e.g., "abc.com"
+	EmailLocalPart  string                  `protobuf:"bytes,3,opt,name=email_local_part,json=emailLocalPart,proto3" json:"email_local_part,omitempty"` // e.g., "support"
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *BindOperatorEmailDomainRequest) Reset() {
+	*x = BindOperatorEmailDomainRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BindOperatorEmailDomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindOperatorEmailDomainRequest) ProtoMessage() {}
+
+func (x *BindOperatorEmailDomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindOperatorEmailDomainRequest.ProtoReflect.Descriptor instead.
+func (*BindOperatorEmailDomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *BindOperatorEmailDomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *BindOperatorEmailDomainRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *BindOperatorEmailDomainRequest) GetEmailLocalPart() string {
+	if x != nil {
+		return x.EmailLocalPart
+	}
+	return ""
+}
+
+type BindOperatorEmailDomainResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Binding       *EmailDomainBindingInfo `protobuf:"bytes,1,opt,name=binding,proto3" json:"binding,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BindOperatorEmailDomainResponse) Reset() {
+	*x = BindOperatorEmailDomainResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BindOperatorEmailDomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BindOperatorEmailDomainResponse) ProtoMessage() {}
+
+func (x *BindOperatorEmailDomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BindOperatorEmailDomainResponse.ProtoReflect.Descriptor instead.
+func (*BindOperatorEmailDomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *BindOperatorEmailDomainResponse) GetBinding() *EmailDomainBindingInfo {
+	if x != nil {
+		return x.Binding
+	}
+	return nil
+}
+
+type GetOperatorEmailDomainBindingRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Domain          *string                 `protobuf:"bytes,2,opt,name=domain,proto3,oneof" json:"domain,omitempty"` // If empty, returns the operator's binding
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetOperatorEmailDomainBindingRequest) Reset() {
+	*x = GetOperatorEmailDomainBindingRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorEmailDomainBindingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorEmailDomainBindingRequest) ProtoMessage() {}
+
+func (x *GetOperatorEmailDomainBindingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorEmailDomainBindingRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorEmailDomainBindingRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetOperatorEmailDomainBindingRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *GetOperatorEmailDomainBindingRequest) GetDomain() string {
+	if x != nil && x.Domain != nil {
+		return *x.Domain
+	}
+	return ""
+}
+
+type GetOperatorEmailDomainBindingResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Binding       *EmailDomainBindingInfo `protobuf:"bytes,1,opt,name=binding,proto3" json:"binding,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOperatorEmailDomainBindingResponse) Reset() {
+	*x = GetOperatorEmailDomainBindingResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorEmailDomainBindingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorEmailDomainBindingResponse) ProtoMessage() {}
+
+func (x *GetOperatorEmailDomainBindingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorEmailDomainBindingResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorEmailDomainBindingResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GetOperatorEmailDomainBindingResponse) GetBinding() *EmailDomainBindingInfo {
+	if x != nil {
+		return x.Binding
+	}
+	return nil
+}
+
+type DeleteOperatorEmailDomainBindingRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Domain          string                  `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorEmailDomainBindingRequest) Reset() {
+	*x = DeleteOperatorEmailDomainBindingRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorEmailDomainBindingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorEmailDomainBindingRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorEmailDomainBindingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorEmailDomainBindingRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorEmailDomainBindingRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *DeleteOperatorEmailDomainBindingRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteOperatorEmailDomainBindingRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type DeleteOperatorEmailDomainBindingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorEmailDomainBindingResponse) Reset() {
+	*x = DeleteOperatorEmailDomainBindingResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorEmailDomainBindingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorEmailDomainBindingResponse) ProtoMessage() {}
+
+func (x *DeleteOperatorEmailDomainBindingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorEmailDomainBindingResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorEmailDomainBindingResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{30}
+}
+
+type RetryOperatorEmailDomainVerificationRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Domain          string                  `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *RetryOperatorEmailDomainVerificationRequest) Reset() {
+	*x = RetryOperatorEmailDomainVerificationRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RetryOperatorEmailDomainVerificationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetryOperatorEmailDomainVerificationRequest) ProtoMessage() {}
+
+func (x *RetryOperatorEmailDomainVerificationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetryOperatorEmailDomainVerificationRequest.ProtoReflect.Descriptor instead.
+func (*RetryOperatorEmailDomainVerificationRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *RetryOperatorEmailDomainVerificationRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *RetryOperatorEmailDomainVerificationRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+type RetryOperatorEmailDomainVerificationResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Binding       *EmailDomainBindingInfo `protobuf:"bytes,1,opt,name=binding,proto3" json:"binding,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RetryOperatorEmailDomainVerificationResponse) Reset() {
+	*x = RetryOperatorEmailDomainVerificationResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RetryOperatorEmailDomainVerificationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetryOperatorEmailDomainVerificationResponse) ProtoMessage() {}
+
+func (x *RetryOperatorEmailDomainVerificationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetryOperatorEmailDomainVerificationResponse.ProtoReflect.Descriptor instead.
+func (*RetryOperatorEmailDomainVerificationResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *RetryOperatorEmailDomainVerificationResponse) GetBinding() *EmailDomainBindingInfo {
+	if x != nil {
+		return x.Binding
+	}
+	return nil
+}
+
+type ListOperatorEmailDomainBindingsRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Status          *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Page            *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Pagination      *bool                   `protobuf:"varint,5,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) Reset() {
+	*x = ListOperatorEmailDomainBindingsRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorEmailDomainBindingsRequest) ProtoMessage() {}
+
+func (x *ListOperatorEmailDomainBindingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorEmailDomainBindingsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorEmailDomainBindingsRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
+}
+
+type ListOperatorEmailDomainBindingsResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Data          []*EmailDomainBindingInfo `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Page          int32                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorEmailDomainBindingsResponse) Reset() {
+	*x = ListOperatorEmailDomainBindingsResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorEmailDomainBindingsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorEmailDomainBindingsResponse) ProtoMessage() {}
+
+func (x *ListOperatorEmailDomainBindingsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorEmailDomainBindingsResponse.ProtoReflect.Descriptor instead.
+func (*ListOperatorEmailDomainBindingsResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *ListOperatorEmailDomainBindingsResponse) GetData() []*EmailDomainBindingInfo {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ListOperatorEmailDomainBindingsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorEmailDomainBindingsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorEmailDomainBindingsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_user_service_v1_dns_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_dns_proto_rawDesc = "" +
@@ -1914,7 +2746,83 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\aapex_ip\x18\x02 \x01(\tR\x06apexIp\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
 	"\n" +
-	"www_domain\x18\x04 \x01(\tR\twwwDomain2\xc8\t\n" +
+	"www_domain\x18\x04 \x01(\tR\twwwDomain\"\x99\x01\n" +
+	"\x14EmailDomainDnsRecord\x12\x1f\n" +
+	"\vrecord_type\x18\x01 \x01(\tR\n" +
+	"recordType\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value\x12\x14\n" +
+	"\x05valid\x18\x04 \x01(\bR\x05valid\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\"\x8b\t\n" +
+	"\x16EmailDomainBindingInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12(\n" +
+	"\x10email_local_part\x18\x03 \x01(\tR\x0eemailLocalPart\x12#\n" +
+	"\rsending_email\x18\x04 \x01(\tR\fsendingEmail\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x120\n" +
+	"\x14mailgun_domain_state\x18\x06 \x01(\tR\x12mailgunDomainState\x12J\n" +
+	"\vdns_records\x18\a \x03(\v2).api.user.service.v1.EmailDomainDnsRecordR\n" +
+	"dnsRecords\x12\x1b\n" +
+	"\tspf_valid\x18\b \x01(\bR\bspfValid\x12\x1d\n" +
+	"\n" +
+	"dkim_valid\x18\t \x01(\bR\tdkimValid\x12\x19\n" +
+	"\bmx_valid\x18\n" +
+	" \x01(\bR\amxValid\x12!\n" +
+	"\ferror_reason\x18\v \x01(\tR\verrorReason\x123\n" +
+	"\x15verification_attempts\x18\f \x01(\x05R\x14verificationAttempts\x120\n" +
+	"\x14last_verification_at\x18\r \x01(\x03R\x12lastVerificationAt\x123\n" +
+	"\x15verification_deadline\x18\x0e \x01(\x03R\x14verificationDeadline\x12,\n" +
+	"\x12target_operator_id\x18\x0f \x01(\x03R\x10targetOperatorId\x120\n" +
+	"\x14target_operator_name\x18\x10 \x01(\tR\x12targetOperatorName\x12;\n" +
+	"\x1atarget_company_operator_id\x18\x11 \x01(\x03R\x17targetCompanyOperatorId\x12?\n" +
+	"\x1ctarget_company_operator_name\x18\x12 \x01(\tR\x19targetCompanyOperatorName\x12=\n" +
+	"\x1btarget_retailer_operator_id\x18\x13 \x01(\x03R\x18targetRetailerOperatorId\x12A\n" +
+	"\x1dtarget_retailer_operator_name\x18\x14 \x01(\tR\x1atargetRetailerOperatorName\x129\n" +
+	"\x19target_system_operator_id\x18\x15 \x01(\x03R\x16targetSystemOperatorId\x12=\n" +
+	"\x1btarget_system_operator_name\x18\x16 \x01(\tR\x18targetSystemOperatorName\x129\n" +
+	"\n" +
+	"created_at\x18\x17 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x18 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xaa\x01\n" +
+	"\x1eBindOperatorEmailDomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12(\n" +
+	"\x10email_local_part\x18\x03 \x01(\tR\x0eemailLocalPart\"h\n" +
+	"\x1fBindOperatorEmailDomainResponse\x12E\n" +
+	"\abinding\x18\x01 \x01(\v2+.api.user.service.v1.EmailDomainBindingInfoR\abinding\"\x96\x01\n" +
+	"$GetOperatorEmailDomainBindingRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
+	"\x06domain\x18\x02 \x01(\tH\x00R\x06domain\x88\x01\x01B\t\n" +
+	"\a_domain\"n\n" +
+	"%GetOperatorEmailDomainBindingResponse\x12E\n" +
+	"\abinding\x18\x01 \x01(\v2+.api.user.service.v1.EmailDomainBindingInfoR\abinding\"\x89\x01\n" +
+	"'DeleteOperatorEmailDomainBindingRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"*\n" +
+	"(DeleteOperatorEmailDomainBindingResponse\"\x8d\x01\n" +
+	"+RetryOperatorEmailDomainVerificationRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"u\n" +
+	",RetryOperatorEmailDomainVerificationResponse\x12E\n" +
+	"\abinding\x18\x01 \x01(\v2+.api.user.service.v1.EmailDomainBindingInfoR\abinding\"\x9e\x02\n" +
+	"&ListOperatorEmailDomainBindingsRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
+	"\x06status\x18\x02 \x01(\tH\x00R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\x05 \x01(\bH\x03R\n" +
+	"pagination\x88\x01\x01B\t\n" +
+	"\a_statusB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"\xb1\x01\n" +
+	"'ListOperatorEmailDomainBindingsResponse\x12?\n" +
+	"\x04data\x18\x01 \x03(\v2+.api.user.service.v1.EmailDomainBindingInfoR\x04data\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total2\xe1\x0f\n" +
 	"\x03Dns\x12z\n" +
 	"\x13ListOperatorDomains\x12/.api.user.service.v1.ListOperatorDomainsRequest\x1a0.api.user.service.v1.ListOperatorDomainsResponse\"\x00\x12\x83\x01\n" +
 	"\x16ListOperatorByoDomains\x122.api.user.service.v1.ListOperatorByoDomainsRequest\x1a3.api.user.service.v1.ListOperatorByoDomainsResponse\"\x00\x12}\n" +
@@ -1924,7 +2832,12 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x17ListOperatorApexDomains\x123.api.user.service.v1.ListOperatorApexDomainsRequest\x1a4.api.user.service.v1.ListOperatorApexDomainsResponse\"\x00\x12\x80\x01\n" +
 	"\x15AddOperatorApexDomain\x121.api.user.service.v1.AddOperatorApexDomainRequest\x1a2.api.user.service.v1.AddOperatorApexDomainResponse\"\x00\x12\x89\x01\n" +
 	"\x18DeleteOperatorApexDomain\x124.api.user.service.v1.DeleteOperatorApexDomainRequest\x1a5.api.user.service.v1.DeleteOperatorApexDomainResponse\"\x00\x12\x8c\x01\n" +
-	"\x19RefreshOperatorApexDomain\x125.api.user.service.v1.RefreshOperatorApexDomainRequest\x1a6.api.user.service.v1.RefreshOperatorApexDomainResponse\"\x00BO\n" +
+	"\x19RefreshOperatorApexDomain\x125.api.user.service.v1.RefreshOperatorApexDomainRequest\x1a6.api.user.service.v1.RefreshOperatorApexDomainResponse\"\x00\x12\x86\x01\n" +
+	"\x17BindOperatorEmailDomain\x123.api.user.service.v1.BindOperatorEmailDomainRequest\x1a4.api.user.service.v1.BindOperatorEmailDomainResponse\"\x00\x12\x98\x01\n" +
+	"\x1dGetOperatorEmailDomainBinding\x129.api.user.service.v1.GetOperatorEmailDomainBindingRequest\x1a:.api.user.service.v1.GetOperatorEmailDomainBindingResponse\"\x00\x12\xa1\x01\n" +
+	" DeleteOperatorEmailDomainBinding\x12<.api.user.service.v1.DeleteOperatorEmailDomainBindingRequest\x1a=.api.user.service.v1.DeleteOperatorEmailDomainBindingResponse\"\x00\x12\xad\x01\n" +
+	"$RetryOperatorEmailDomainVerification\x12@.api.user.service.v1.RetryOperatorEmailDomainVerificationRequest\x1aA.api.user.service.v1.RetryOperatorEmailDomainVerificationResponse\"\x00\x12\x9e\x01\n" +
+	"\x1fListOperatorEmailDomainBindings\x12;.api.user.service.v1.ListOperatorEmailDomainBindingsRequest\x1a<.api.user.service.v1.ListOperatorEmailDomainBindingsResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -1939,78 +2852,112 @@ func file_user_service_v1_dns_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_dns_proto_rawDescData
 }
 
-var file_user_service_v1_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_user_service_v1_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_user_service_v1_dns_proto_goTypes = []any{
-	(*DomainInfo)(nil),                         // 0: api.user.service.v1.DomainInfo
-	(*ListOperatorDomainsRequest)(nil),         // 1: api.user.service.v1.ListOperatorDomainsRequest
-	(*ListOperatorDomainsResponse)(nil),        // 2: api.user.service.v1.ListOperatorDomainsResponse
-	(*ValidationRecord)(nil),                   // 3: api.user.service.v1.ValidationRecord
-	(*ByoDomainInfo)(nil),                      // 4: api.user.service.v1.ByoDomainInfo
-	(*ListOperatorByoDomainsRequest)(nil),      // 5: api.user.service.v1.ListOperatorByoDomainsRequest
-	(*ListOperatorByoDomainsResponse)(nil),     // 6: api.user.service.v1.ListOperatorByoDomainsResponse
-	(*AddOperatorByoDomainRequest)(nil),        // 7: api.user.service.v1.AddOperatorByoDomainRequest
-	(*AddOperatorByoDomainResponse)(nil),       // 8: api.user.service.v1.AddOperatorByoDomainResponse
-	(*DeleteOperatorByoDomainRequest)(nil),     // 9: api.user.service.v1.DeleteOperatorByoDomainRequest
-	(*DeleteOperatorByoDomainResponse)(nil),    // 10: api.user.service.v1.DeleteOperatorByoDomainResponse
-	(*ApexDomainInfo)(nil),                     // 11: api.user.service.v1.ApexDomainInfo
-	(*ListOperatorApexDomainsRequest)(nil),     // 12: api.user.service.v1.ListOperatorApexDomainsRequest
-	(*ListOperatorApexDomainsResponse)(nil),    // 13: api.user.service.v1.ListOperatorApexDomainsResponse
-	(*DnsInstruction)(nil),                     // 14: api.user.service.v1.DnsInstruction
-	(*AddOperatorApexDomainRequest)(nil),       // 15: api.user.service.v1.AddOperatorApexDomainRequest
-	(*AddOperatorApexDomainResponse)(nil),      // 16: api.user.service.v1.AddOperatorApexDomainResponse
-	(*DeleteOperatorApexDomainRequest)(nil),    // 17: api.user.service.v1.DeleteOperatorApexDomainRequest
-	(*DeleteOperatorApexDomainResponse)(nil),   // 18: api.user.service.v1.DeleteOperatorApexDomainResponse
-	(*RefreshOperatorApexDomainRequest)(nil),   // 19: api.user.service.v1.RefreshOperatorApexDomainRequest
-	(*RefreshOperatorApexDomainResponse)(nil),  // 20: api.user.service.v1.RefreshOperatorApexDomainResponse
-	(*PrecheckOperatorApexDomainRequest)(nil),  // 21: api.user.service.v1.PrecheckOperatorApexDomainRequest
-	(*PrecheckOperatorApexDomainResponse)(nil), // 22: api.user.service.v1.PrecheckOperatorApexDomainResponse
-	(*common.OperatorContext)(nil),             // 23: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),      // 24: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),              // 25: google.protobuf.Timestamp
+	(*DomainInfo)(nil),                                   // 0: api.user.service.v1.DomainInfo
+	(*ListOperatorDomainsRequest)(nil),                   // 1: api.user.service.v1.ListOperatorDomainsRequest
+	(*ListOperatorDomainsResponse)(nil),                  // 2: api.user.service.v1.ListOperatorDomainsResponse
+	(*ValidationRecord)(nil),                             // 3: api.user.service.v1.ValidationRecord
+	(*ByoDomainInfo)(nil),                                // 4: api.user.service.v1.ByoDomainInfo
+	(*ListOperatorByoDomainsRequest)(nil),                // 5: api.user.service.v1.ListOperatorByoDomainsRequest
+	(*ListOperatorByoDomainsResponse)(nil),               // 6: api.user.service.v1.ListOperatorByoDomainsResponse
+	(*AddOperatorByoDomainRequest)(nil),                  // 7: api.user.service.v1.AddOperatorByoDomainRequest
+	(*AddOperatorByoDomainResponse)(nil),                 // 8: api.user.service.v1.AddOperatorByoDomainResponse
+	(*DeleteOperatorByoDomainRequest)(nil),               // 9: api.user.service.v1.DeleteOperatorByoDomainRequest
+	(*DeleteOperatorByoDomainResponse)(nil),              // 10: api.user.service.v1.DeleteOperatorByoDomainResponse
+	(*ApexDomainInfo)(nil),                               // 11: api.user.service.v1.ApexDomainInfo
+	(*ListOperatorApexDomainsRequest)(nil),               // 12: api.user.service.v1.ListOperatorApexDomainsRequest
+	(*ListOperatorApexDomainsResponse)(nil),              // 13: api.user.service.v1.ListOperatorApexDomainsResponse
+	(*DnsInstruction)(nil),                               // 14: api.user.service.v1.DnsInstruction
+	(*AddOperatorApexDomainRequest)(nil),                 // 15: api.user.service.v1.AddOperatorApexDomainRequest
+	(*AddOperatorApexDomainResponse)(nil),                // 16: api.user.service.v1.AddOperatorApexDomainResponse
+	(*DeleteOperatorApexDomainRequest)(nil),              // 17: api.user.service.v1.DeleteOperatorApexDomainRequest
+	(*DeleteOperatorApexDomainResponse)(nil),             // 18: api.user.service.v1.DeleteOperatorApexDomainResponse
+	(*RefreshOperatorApexDomainRequest)(nil),             // 19: api.user.service.v1.RefreshOperatorApexDomainRequest
+	(*RefreshOperatorApexDomainResponse)(nil),            // 20: api.user.service.v1.RefreshOperatorApexDomainResponse
+	(*PrecheckOperatorApexDomainRequest)(nil),            // 21: api.user.service.v1.PrecheckOperatorApexDomainRequest
+	(*PrecheckOperatorApexDomainResponse)(nil),           // 22: api.user.service.v1.PrecheckOperatorApexDomainResponse
+	(*EmailDomainDnsRecord)(nil),                         // 23: api.user.service.v1.EmailDomainDnsRecord
+	(*EmailDomainBindingInfo)(nil),                       // 24: api.user.service.v1.EmailDomainBindingInfo
+	(*BindOperatorEmailDomainRequest)(nil),               // 25: api.user.service.v1.BindOperatorEmailDomainRequest
+	(*BindOperatorEmailDomainResponse)(nil),              // 26: api.user.service.v1.BindOperatorEmailDomainResponse
+	(*GetOperatorEmailDomainBindingRequest)(nil),         // 27: api.user.service.v1.GetOperatorEmailDomainBindingRequest
+	(*GetOperatorEmailDomainBindingResponse)(nil),        // 28: api.user.service.v1.GetOperatorEmailDomainBindingResponse
+	(*DeleteOperatorEmailDomainBindingRequest)(nil),      // 29: api.user.service.v1.DeleteOperatorEmailDomainBindingRequest
+	(*DeleteOperatorEmailDomainBindingResponse)(nil),     // 30: api.user.service.v1.DeleteOperatorEmailDomainBindingResponse
+	(*RetryOperatorEmailDomainVerificationRequest)(nil),  // 31: api.user.service.v1.RetryOperatorEmailDomainVerificationRequest
+	(*RetryOperatorEmailDomainVerificationResponse)(nil), // 32: api.user.service.v1.RetryOperatorEmailDomainVerificationResponse
+	(*ListOperatorEmailDomainBindingsRequest)(nil),       // 33: api.user.service.v1.ListOperatorEmailDomainBindingsRequest
+	(*ListOperatorEmailDomainBindingsResponse)(nil),      // 34: api.user.service.v1.ListOperatorEmailDomainBindingsResponse
+	(*common.OperatorContext)(nil),                       // 35: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),                // 36: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                        // 37: google.protobuf.Timestamp
 }
 var file_user_service_v1_dns_proto_depIdxs = []int32{
-	23, // 0: api.user.service.v1.ListOperatorDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	24, // 1: api.user.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	35, // 0: api.user.service.v1.ListOperatorDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 1: api.user.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 2: api.user.service.v1.ListOperatorDomainsResponse.data:type_name -> api.user.service.v1.DomainInfo
 	3,  // 3: api.user.service.v1.ByoDomainInfo.validation_records:type_name -> api.user.service.v1.ValidationRecord
-	25, // 4: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
-	23, // 5: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	37, // 4: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	35, // 5: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 6: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
-	23, // 7: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 7: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 8: api.user.service.v1.AddOperatorByoDomainResponse.validation_records:type_name -> api.user.service.v1.ValidationRecord
-	23, // 9: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	25, // 10: api.user.service.v1.ApexDomainInfo.created_at:type_name -> google.protobuf.Timestamp
-	25, // 11: api.user.service.v1.ApexDomainInfo.updated_at:type_name -> google.protobuf.Timestamp
-	23, // 12: api.user.service.v1.ListOperatorApexDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 9: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	37, // 10: api.user.service.v1.ApexDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	37, // 11: api.user.service.v1.ApexDomainInfo.updated_at:type_name -> google.protobuf.Timestamp
+	35, // 12: api.user.service.v1.ListOperatorApexDomainsRequest.operator_context:type_name -> api.common.OperatorContext
 	11, // 13: api.user.service.v1.ListOperatorApexDomainsResponse.data:type_name -> api.user.service.v1.ApexDomainInfo
-	23, // 14: api.user.service.v1.AddOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 14: api.user.service.v1.AddOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
 	14, // 15: api.user.service.v1.AddOperatorApexDomainResponse.dns_instructions:type_name -> api.user.service.v1.DnsInstruction
-	23, // 16: api.user.service.v1.DeleteOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	23, // 17: api.user.service.v1.RefreshOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	23, // 18: api.user.service.v1.PrecheckOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 19: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
-	5,  // 20: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	7,  // 21: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	9,  // 22: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	21, // 23: api.user.service.v1.Dns.PrecheckOperatorApexDomain:input_type -> api.user.service.v1.PrecheckOperatorApexDomainRequest
-	12, // 24: api.user.service.v1.Dns.ListOperatorApexDomains:input_type -> api.user.service.v1.ListOperatorApexDomainsRequest
-	15, // 25: api.user.service.v1.Dns.AddOperatorApexDomain:input_type -> api.user.service.v1.AddOperatorApexDomainRequest
-	17, // 26: api.user.service.v1.Dns.DeleteOperatorApexDomain:input_type -> api.user.service.v1.DeleteOperatorApexDomainRequest
-	19, // 27: api.user.service.v1.Dns.RefreshOperatorApexDomain:input_type -> api.user.service.v1.RefreshOperatorApexDomainRequest
-	2,  // 28: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	6,  // 29: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	8,  // 30: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	10, // 31: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	22, // 32: api.user.service.v1.Dns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
-	13, // 33: api.user.service.v1.Dns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
-	16, // 34: api.user.service.v1.Dns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
-	18, // 35: api.user.service.v1.Dns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
-	20, // 36: api.user.service.v1.Dns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
-	28, // [28:37] is the sub-list for method output_type
-	19, // [19:28] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	35, // 16: api.user.service.v1.DeleteOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 17: api.user.service.v1.RefreshOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 18: api.user.service.v1.PrecheckOperatorApexDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 19: api.user.service.v1.EmailDomainBindingInfo.dns_records:type_name -> api.user.service.v1.EmailDomainDnsRecord
+	37, // 20: api.user.service.v1.EmailDomainBindingInfo.created_at:type_name -> google.protobuf.Timestamp
+	37, // 21: api.user.service.v1.EmailDomainBindingInfo.updated_at:type_name -> google.protobuf.Timestamp
+	35, // 22: api.user.service.v1.BindOperatorEmailDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	24, // 23: api.user.service.v1.BindOperatorEmailDomainResponse.binding:type_name -> api.user.service.v1.EmailDomainBindingInfo
+	35, // 24: api.user.service.v1.GetOperatorEmailDomainBindingRequest.operator_context:type_name -> api.common.OperatorContext
+	24, // 25: api.user.service.v1.GetOperatorEmailDomainBindingResponse.binding:type_name -> api.user.service.v1.EmailDomainBindingInfo
+	35, // 26: api.user.service.v1.DeleteOperatorEmailDomainBindingRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 27: api.user.service.v1.RetryOperatorEmailDomainVerificationRequest.operator_context:type_name -> api.common.OperatorContext
+	24, // 28: api.user.service.v1.RetryOperatorEmailDomainVerificationResponse.binding:type_name -> api.user.service.v1.EmailDomainBindingInfo
+	35, // 29: api.user.service.v1.ListOperatorEmailDomainBindingsRequest.operator_context:type_name -> api.common.OperatorContext
+	24, // 30: api.user.service.v1.ListOperatorEmailDomainBindingsResponse.data:type_name -> api.user.service.v1.EmailDomainBindingInfo
+	1,  // 31: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
+	5,  // 32: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	7,  // 33: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	9,  // 34: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	21, // 35: api.user.service.v1.Dns.PrecheckOperatorApexDomain:input_type -> api.user.service.v1.PrecheckOperatorApexDomainRequest
+	12, // 36: api.user.service.v1.Dns.ListOperatorApexDomains:input_type -> api.user.service.v1.ListOperatorApexDomainsRequest
+	15, // 37: api.user.service.v1.Dns.AddOperatorApexDomain:input_type -> api.user.service.v1.AddOperatorApexDomainRequest
+	17, // 38: api.user.service.v1.Dns.DeleteOperatorApexDomain:input_type -> api.user.service.v1.DeleteOperatorApexDomainRequest
+	19, // 39: api.user.service.v1.Dns.RefreshOperatorApexDomain:input_type -> api.user.service.v1.RefreshOperatorApexDomainRequest
+	25, // 40: api.user.service.v1.Dns.BindOperatorEmailDomain:input_type -> api.user.service.v1.BindOperatorEmailDomainRequest
+	27, // 41: api.user.service.v1.Dns.GetOperatorEmailDomainBinding:input_type -> api.user.service.v1.GetOperatorEmailDomainBindingRequest
+	29, // 42: api.user.service.v1.Dns.DeleteOperatorEmailDomainBinding:input_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingRequest
+	31, // 43: api.user.service.v1.Dns.RetryOperatorEmailDomainVerification:input_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationRequest
+	33, // 44: api.user.service.v1.Dns.ListOperatorEmailDomainBindings:input_type -> api.user.service.v1.ListOperatorEmailDomainBindingsRequest
+	2,  // 45: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	6,  // 46: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	8,  // 47: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	10, // 48: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	22, // 49: api.user.service.v1.Dns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
+	13, // 50: api.user.service.v1.Dns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
+	16, // 51: api.user.service.v1.Dns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
+	18, // 52: api.user.service.v1.Dns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
+	20, // 53: api.user.service.v1.Dns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
+	26, // 54: api.user.service.v1.Dns.BindOperatorEmailDomain:output_type -> api.user.service.v1.BindOperatorEmailDomainResponse
+	28, // 55: api.user.service.v1.Dns.GetOperatorEmailDomainBinding:output_type -> api.user.service.v1.GetOperatorEmailDomainBindingResponse
+	30, // 56: api.user.service.v1.Dns.DeleteOperatorEmailDomainBinding:output_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingResponse
+	32, // 57: api.user.service.v1.Dns.RetryOperatorEmailDomainVerification:output_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationResponse
+	34, // 58: api.user.service.v1.Dns.ListOperatorEmailDomainBindings:output_type -> api.user.service.v1.ListOperatorEmailDomainBindingsResponse
+	45, // [45:59] is the sub-list for method output_type
+	31, // [31:45] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }
@@ -2021,13 +2968,15 @@ func file_user_service_v1_dns_proto_init() {
 	file_user_service_v1_dns_proto_msgTypes[1].OneofWrappers = []any{}
 	file_user_service_v1_dns_proto_msgTypes[5].OneofWrappers = []any{}
 	file_user_service_v1_dns_proto_msgTypes[12].OneofWrappers = []any{}
+	file_user_service_v1_dns_proto_msgTypes[27].OneofWrappers = []any{}
+	file_user_service_v1_dns_proto_msgTypes[33].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_dns_proto_rawDesc), len(file_user_service_v1_dns_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
