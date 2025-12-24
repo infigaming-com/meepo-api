@@ -19599,6 +19599,10 @@ components:
                 phoneVerified:
                     type: boolean
                     description: user phone verification status
+                registeredAt:
+                    type: string
+                    description: user registered at
+                    format: date-time
             description: UserInfo contains basic user information.
         api.user.service.v1.UserPrivacySettings:
             type: object

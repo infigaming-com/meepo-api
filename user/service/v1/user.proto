@@ -477,6 +477,8 @@ message UserInfo {
 	bool email_verified = 25;
 	// user phone verification status
 	bool phone_verified = 26;
+	// user registered at
+	google.protobuf.Timestamp registered_at = 27;
 }
 
 // AuthType defines the type of authentication method.
