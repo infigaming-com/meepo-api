@@ -9529,17 +9529,18 @@ func (x *FreespinUser) GetCountry() string {
 }
 
 type IssueFreespinsRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	FreespinId      int64                   `protobuf:"varint,1,opt,name=freespin_id,json=freespinId,proto3" json:"freespin_id,omitempty"`
-	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RequestId       *int64                  `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3,oneof" json:"request_id,omitempty"`
-	Games           []*FreespinGame         `protobuf:"bytes,4,rep,name=games,proto3" json:"games,omitempty"`
-	Quantity        int64                   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	StartAt         int64                   `protobuf:"varint,6,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	ExpireAt        int64                   `protobuf:"varint,7,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	FreespinId         int64                   `protobuf:"varint,1,opt,name=freespin_id,json=freespinId,proto3" json:"freespin_id,omitempty"`
+	UserId             int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RequestId          *int64                  `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3,oneof" json:"request_id,omitempty"`
+	Games              []*FreespinGame         `protobuf:"bytes,4,rep,name=games,proto3" json:"games,omitempty"`
+	Quantity           int64                   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	StartAt            int64                   `protobuf:"varint,6,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
+	ExpireAt           int64                   `protobuf:"varint,7,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	SettlementCurrency string                  `protobuf:"bytes,9,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *IssueFreespinsRequest) Reset() {
@@ -9626,6 +9627,13 @@ func (x *IssueFreespinsRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *IssueFreespinsRequest) GetSettlementCurrency() string {
+	if x != nil {
+		return x.SettlementCurrency
+	}
+	return ""
 }
 
 type IssueFreespinsResponse struct {
@@ -17641,7 +17649,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\rregistered_at\x18\t \x01(\tR\fregisteredAt\x12\x16\n" +
 	"\x06gender\x18\n" +
 	" \x01(\tR\x06gender\x12\x18\n" +
-	"\acountry\x18\v \x01(\tR\acountry\"\xd9\x02\n" +
+	"\acountry\x18\v \x01(\tR\acountry\"\x8a\x03\n" +
 	"\x15IssueFreespinsRequest\x12\x1f\n" +
 	"\vfreespin_id\x18\x01 \x01(\x03R\n" +
 	"freespinId\x12\x17\n" +
@@ -17652,7 +17660,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bquantity\x18\x05 \x01(\x03R\bquantity\x12\x19\n" +
 	"\bstart_at\x18\x06 \x01(\x03R\astartAt\x12\x1b\n" +
 	"\texpire_at\x18\a \x01(\x03R\bexpireAt\x12F\n" +
-	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
+	"\x13settlement_currency\x18\t \x01(\tR\x12settlementCurrencyB\r\n" +
 	"\v_request_id\"\x18\n" +
 	"\x16IssueFreespinsResponse\"\x81\x01\n" +
 	"\x16CancelFreespinsRequest\x12\x1f\n" +
