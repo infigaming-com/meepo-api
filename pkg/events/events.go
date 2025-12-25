@@ -64,12 +64,13 @@ type ClientOnlineStatusEvent struct {
 	OperatorId int64 `json:"operatorId"`
 }
 
-// ClientConnectedEvent is sent when a client connects to Centrifugo (both anonymous and authenticated)
+// ClientConnectedEvent is sent for user online/offline status changes
 type ClientConnectedEvent struct {
 	ClientId   int64 `json:"clientId"`
 	OperatorId int64 `json:"operatorId"`
 	UserId     int64 `json:"userId"`    // 0 for anonymous users
 	Anonymous  bool  `json:"anonymous"`
+	Online     bool  `json:"online"`    // true=online, false=offline
 }
 
 type UserOnlineStatusEvent struct {
