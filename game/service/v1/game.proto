@@ -1796,6 +1796,7 @@ message IssueFreespinsRequest {
 	int64 start_at = 6;
 	int64 expire_at = 7;
 	api.common.OperatorContext operator_context = 8;
+	string settlement_currency = 9;
 }
 
 message IssueFreespinsResponse {
