@@ -10880,10 +10880,13 @@ func (x *CreditFreespinWinRequest) GetOperatorContext() *common.OperatorContext 
 type CreditFreespinWinResponse struct {
 	state                           protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId                   int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	SettlementCurrencyCash          string                 `protobuf:"bytes,2,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"` // player's wallet currency's current balance cash
-	SettlementCurrencyOperatorBonus string                 `protobuf:"bytes,3,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
-	SettlementCurrencyProviderBonus string                 `protobuf:"bytes,4,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
-	AffectedCredits                 []*AffectedCredit      `protobuf:"bytes,5,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"` // for free spin win's credit
+	CurrenyCash                     string                 `protobuf:"bytes,2,opt,name=curreny_cash,json=currenyCash,proto3" json:"curreny_cash,omitempty"` // current balance cash converted to game currency's amount
+	CurrenyOperatorBonus            string                 `protobuf:"bytes,3,opt,name=curreny_operator_bonus,json=currenyOperatorBonus,proto3" json:"curreny_operator_bonus,omitempty"`
+	CurrenyProviderBonus            string                 `protobuf:"bytes,4,opt,name=curreny_provider_bonus,json=currenyProviderBonus,proto3" json:"curreny_provider_bonus,omitempty"`
+	SettlementCurrencyCash          string                 `protobuf:"bytes,5,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"` // player's wallet currency's current balance cash
+	SettlementCurrencyOperatorBonus string                 `protobuf:"bytes,6,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
+	SettlementCurrencyProviderBonus string                 `protobuf:"bytes,7,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
+	AffectedCredits                 []*AffectedCredit      `protobuf:"bytes,8,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"` // for free spin win's credit
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
@@ -10923,6 +10926,27 @@ func (x *CreditFreespinWinResponse) GetTransactionId() int64 {
 		return x.TransactionId
 	}
 	return 0
+}
+
+func (x *CreditFreespinWinResponse) GetCurrenyCash() string {
+	if x != nil {
+		return x.CurrenyCash
+	}
+	return ""
+}
+
+func (x *CreditFreespinWinResponse) GetCurrenyOperatorBonus() string {
+	if x != nil {
+		return x.CurrenyOperatorBonus
+	}
+	return ""
+}
+
+func (x *CreditFreespinWinResponse) GetCurrenyProviderBonus() string {
+	if x != nil {
+		return x.CurrenyProviderBonus
+	}
+	return ""
 }
 
 func (x *CreditFreespinWinResponse) GetSettlementCurrencyCash() string {
@@ -11072,10 +11096,13 @@ func (x *CreditFreeBetWinRequest) GetOperatorContext() *common.OperatorContext {
 type CreditFreeBetWinResponse struct {
 	state                           protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId                   int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	SettlementCurrencyCash          string                 `protobuf:"bytes,2,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"` // player's wallet currency's current balance cash
-	SettlementCurrencyOperatorBonus string                 `protobuf:"bytes,3,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
-	SettlementCurrencyProviderBonus string                 `protobuf:"bytes,4,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
-	AffectedCredits                 []*AffectedCredit      `protobuf:"bytes,5,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"` // for free bet win's credit
+	CurrenyCash                     string                 `protobuf:"bytes,2,opt,name=curreny_cash,json=currenyCash,proto3" json:"curreny_cash,omitempty"` // current balance cash converted to game currency's amount
+	CurrenyOperatorBonus            string                 `protobuf:"bytes,3,opt,name=curreny_operator_bonus,json=currenyOperatorBonus,proto3" json:"curreny_operator_bonus,omitempty"`
+	CurrenyProviderBonus            string                 `protobuf:"bytes,4,opt,name=curreny_provider_bonus,json=currenyProviderBonus,proto3" json:"curreny_provider_bonus,omitempty"`
+	SettlementCurrencyCash          string                 `protobuf:"bytes,5,opt,name=settlement_currency_cash,json=settlementCurrencyCash,proto3" json:"settlement_currency_cash,omitempty"` // player's wallet currency's current balance cash
+	SettlementCurrencyOperatorBonus string                 `protobuf:"bytes,6,opt,name=settlement_currency_operator_bonus,json=settlementCurrencyOperatorBonus,proto3" json:"settlement_currency_operator_bonus,omitempty"`
+	SettlementCurrencyProviderBonus string                 `protobuf:"bytes,7,opt,name=settlement_currency_provider_bonus,json=settlementCurrencyProviderBonus,proto3" json:"settlement_currency_provider_bonus,omitempty"`
+	AffectedCredits                 []*AffectedCredit      `protobuf:"bytes,8,rep,name=affected_credits,json=affectedCredits,proto3" json:"affected_credits,omitempty"` // for free bet win's credit
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
@@ -11115,6 +11142,27 @@ func (x *CreditFreeBetWinResponse) GetTransactionId() int64 {
 		return x.TransactionId
 	}
 	return 0
+}
+
+func (x *CreditFreeBetWinResponse) GetCurrenyCash() string {
+	if x != nil {
+		return x.CurrenyCash
+	}
+	return ""
+}
+
+func (x *CreditFreeBetWinResponse) GetCurrenyOperatorBonus() string {
+	if x != nil {
+		return x.CurrenyOperatorBonus
+	}
+	return ""
+}
+
+func (x *CreditFreeBetWinResponse) GetCurrenyProviderBonus() string {
+	if x != nil {
+		return x.CurrenyProviderBonus
+	}
+	return ""
 }
 
 func (x *CreditFreeBetWinResponse) GetSettlementCurrencyCash() string {
@@ -15675,13 +15723,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bround_id\x18\b \x01(\tR\aroundId\x12\x1c\n" +
 	"\ttimestamp\x18\t \x01(\x03R\ttimestamp\x12F\n" +
 	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe8\x02\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf7\x03\n" +
 	"\x19CreditFreespinWinResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x128\n" +
-	"\x18settlement_currency_cash\x18\x02 \x01(\tR\x16settlementCurrencyCash\x12K\n" +
-	"\"settlement_currency_operator_bonus\x18\x03 \x01(\tR\x1fsettlementCurrencyOperatorBonus\x12K\n" +
-	"\"settlement_currency_provider_bonus\x18\x04 \x01(\tR\x1fsettlementCurrencyProviderBonus\x12P\n" +
-	"\x10affected_credits\x18\x05 \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\xe7\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12!\n" +
+	"\fcurreny_cash\x18\x02 \x01(\tR\vcurrenyCash\x124\n" +
+	"\x16curreny_operator_bonus\x18\x03 \x01(\tR\x14currenyOperatorBonus\x124\n" +
+	"\x16curreny_provider_bonus\x18\x04 \x01(\tR\x14currenyProviderBonus\x128\n" +
+	"\x18settlement_currency_cash\x18\x05 \x01(\tR\x16settlementCurrencyCash\x12K\n" +
+	"\"settlement_currency_operator_bonus\x18\x06 \x01(\tR\x1fsettlementCurrencyOperatorBonus\x12K\n" +
+	"\"settlement_currency_provider_bonus\x18\a \x01(\tR\x1fsettlementCurrencyProviderBonus\x12P\n" +
+	"\x10affected_credits\x18\b \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\xe7\x02\n" +
 	"\x17CreditFreeBetWinRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -15694,13 +15745,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bround_id\x18\b \x01(\tR\aroundId\x12\x1c\n" +
 	"\ttimestamp\x18\t \x01(\x03R\ttimestamp\x12F\n" +
 	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe7\x02\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf6\x03\n" +
 	"\x18CreditFreeBetWinResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x128\n" +
-	"\x18settlement_currency_cash\x18\x02 \x01(\tR\x16settlementCurrencyCash\x12K\n" +
-	"\"settlement_currency_operator_bonus\x18\x03 \x01(\tR\x1fsettlementCurrencyOperatorBonus\x12K\n" +
-	"\"settlement_currency_provider_bonus\x18\x04 \x01(\tR\x1fsettlementCurrencyProviderBonus\x12P\n" +
-	"\x10affected_credits\x18\x05 \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\x9e\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12!\n" +
+	"\fcurreny_cash\x18\x02 \x01(\tR\vcurrenyCash\x124\n" +
+	"\x16curreny_operator_bonus\x18\x03 \x01(\tR\x14currenyOperatorBonus\x124\n" +
+	"\x16curreny_provider_bonus\x18\x04 \x01(\tR\x14currenyProviderBonus\x128\n" +
+	"\x18settlement_currency_cash\x18\x05 \x01(\tR\x16settlementCurrencyCash\x12K\n" +
+	"\"settlement_currency_operator_bonus\x18\x06 \x01(\tR\x1fsettlementCurrencyOperatorBonus\x12K\n" +
+	"\"settlement_currency_provider_bonus\x18\a \x01(\tR\x1fsettlementCurrencyProviderBonus\x12P\n" +
+	"\x10affected_credits\x18\b \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\x9e\x02\n" +
 	"&GetOperatorUserFinancialSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12:\n" +
 	"\x19include_transaction_stats\x18\x02 \x01(\bR\x17includeTransactionStats\x129\n" +
