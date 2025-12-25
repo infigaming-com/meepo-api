@@ -1789,9 +1789,9 @@ message CreditFreespinWinRequest {
 
 message CreditFreespinWinResponse {
 	int64 transaction_id = 1;
-	string curreny_cash = 2; // current balance cash converted to game currency's amount
-	string curreny_operator_bonus = 3;
-	string curreny_provider_bonus = 4;
+	string currency_cash = 2; // current balance cash converted to game currency's amount
+	string currency_operator_bonus = 3;
+	string currency_provider_bonus = 4;
 	string settlement_currency_cash = 5; // player's wallet currency's current balance cash
 	string settlement_currency_operator_bonus = 6;
 	string settlement_currency_provider_bonus = 7;
@@ -1815,9 +1815,9 @@ message CreditFreeBetWinRequest {
 
 message CreditFreeBetWinResponse {
 	int64 transaction_id = 1;
-	string curreny_cash = 2; // current balance cash converted to game currency's amount
-	string curreny_operator_bonus = 3;
-	string curreny_provider_bonus = 4;
+	string currency_cash = 2; // current balance cash converted to game currency's amount
+	string currency_operator_bonus = 3;
+	string currency_provider_bonus = 4;
 	string settlement_currency_cash = 5; // player's wallet currency's current balance cash
 	string settlement_currency_operator_bonus = 6; 
 	string settlement_currency_provider_bonus = 7;

@@ -20854,11 +20854,11 @@ func (m *CreditFreespinWinResponse) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for CurrenyCash
+	// no validation rules for CurrencyCash
 
-	// no validation rules for CurrenyOperatorBonus
+	// no validation rules for CurrencyOperatorBonus
 
-	// no validation rules for CurrenyProviderBonus
+	// no validation rules for CurrencyProviderBonus
 
 	// no validation rules for SettlementCurrencyCash
 
@@ -21153,11 +21153,11 @@ func (m *CreditFreeBetWinResponse) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for CurrenyCash
+	// no validation rules for CurrencyCash
 
-	// no validation rules for CurrenyOperatorBonus
+	// no validation rules for CurrencyOperatorBonus
 
-	// no validation rules for CurrenyProviderBonus
+	// no validation rules for CurrencyProviderBonus
 
 	// no validation rules for SettlementCurrencyCash
 
