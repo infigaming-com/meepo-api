@@ -19604,6 +19604,10 @@ components:
                 phoneVerified:
                     type: boolean
                     description: user phone verification status
+                registeredAt:
+                    type: string
+                    description: user registered at
+                    format: date-time
             description: UserInfo contains basic user information.
         api.user.service.v1.UserPrivacySettings:
             type: object
@@ -20321,11 +20325,13 @@ components:
             properties:
                 templateId:
                     type: string
-                betCount:
-                    type: integer
-                    format: int32
+                amount:
+                    type: string
                 freeBetValidity:
                     type: string
+                extra:
+                    type: string
+                    format: bytes
         api.wallet.service.v1.FreeSpinConfig:
             type: object
             properties:

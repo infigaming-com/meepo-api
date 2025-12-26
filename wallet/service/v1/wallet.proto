@@ -1789,10 +1789,13 @@ message CreditFreespinWinRequest {
 
 message CreditFreespinWinResponse {
 	int64 transaction_id = 1;
-	string settlement_currency_cash = 2; // player's wallet currency's current balance cash
-	string settlement_currency_operator_bonus = 3;
-	string settlement_currency_provider_bonus = 4;
-	repeated AffectedCredit affected_credits = 5; // for free spin win's credit
+	string currency_cash = 2; // current balance cash converted to game currency's amount
+	string currency_operator_bonus = 3;
+	string currency_provider_bonus = 4;
+	string settlement_currency_cash = 5; // player's wallet currency's current balance cash
+	string settlement_currency_operator_bonus = 6;
+	string settlement_currency_provider_bonus = 7;
+	repeated AffectedCredit affected_credits = 8; // for free spin win's credit
 }
 
 // ========== FreeBet Win Messages ==========
@@ -1812,10 +1815,13 @@ message CreditFreeBetWinRequest {
 
 message CreditFreeBetWinResponse {
 	int64 transaction_id = 1;
-	string settlement_currency_cash = 2; // player's wallet currency's current balance cash
-	string settlement_currency_operator_bonus = 3; 
-	string settlement_currency_provider_bonus = 4;
-	repeated AffectedCredit affected_credits = 5; // for free bet win's credit
+	string currency_cash = 2; // current balance cash converted to game currency's amount
+	string currency_operator_bonus = 3;
+	string currency_provider_bonus = 4;
+	string settlement_currency_cash = 5; // player's wallet currency's current balance cash
+	string settlement_currency_operator_bonus = 6; 
+	string settlement_currency_provider_bonus = 7;
+	repeated AffectedCredit affected_credits = 8; // for free bet win's credit
 }
 
 message GetOperatorUserFinancialSummaryRequest {

@@ -16636,6 +16636,8 @@ func (m *IssueFreespinsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SettlementCurrency
+
 	if m.RequestId != nil {
 		// no validation rules for RequestId
 	}
@@ -18021,6 +18023,8 @@ func (m *IssueFreebetsRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for Amount
 
 	if len(errors) > 0 {
 		return IssueFreebetsRequestMultiError(errors)
