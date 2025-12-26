@@ -100,6 +100,7 @@ const (
 	ErrorReason_DOMAIN_NOT_AUTHORIZED                               ErrorReason = 130072
 	ErrorReason_LIST_AFFILIATE_DOMAINS_FAILED                       ErrorReason = 130073
 	ErrorReason_SET_AFFILIATE_DOMAIN_FAILED                         ErrorReason = 130074
+	ErrorReason_LIST_POSTBACK_LOGS_FAILED                           ErrorReason = 130075
 )
 
 // Enum value maps for ErrorReason.
@@ -180,6 +181,7 @@ var (
 		130072: "DOMAIN_NOT_AUTHORIZED",
 		130073: "LIST_AFFILIATE_DOMAINS_FAILED",
 		130074: "SET_AFFILIATE_DOMAIN_FAILED",
+		130075: "LIST_POSTBACK_LOGS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -257,6 +259,7 @@ var (
 		"DOMAIN_NOT_AUTHORIZED":                               130072,
 		"LIST_AFFILIATE_DOMAINS_FAILED":                       130073,
 		"SET_AFFILIATE_DOMAIN_FAILED":                         130074,
+		"LIST_POSTBACK_LOGS_FAILED":                           130075,
 	}
 )
 
@@ -291,7 +294,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x9c\x14\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xbd\x14\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -367,7 +370,8 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10DOMAIN_NOT_FOUND\x10\x97\xf8\a\x12\x1b\n" +
 	"\x15DOMAIN_NOT_AUTHORIZED\x10\x98\xf8\a\x12#\n" +
 	"\x1dLIST_AFFILIATE_DOMAINS_FAILED\x10\x99\xf8\a\x12!\n" +
-	"\x1bSET_AFFILIATE_DOMAIN_FAILED\x10\x9a\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x1bSET_AFFILIATE_DOMAIN_FAILED\x10\x9a\xf8\a\x12\x1f\n" +
+	"\x19LIST_POSTBACK_LOGS_FAILED\x10\x9b\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

@@ -39,6 +39,7 @@ const (
 	Affiliate_UpdatePostback_FullMethodName               = "/api.affiliate.service.v1.Affiliate/UpdatePostback"
 	Affiliate_DeletePostback_FullMethodName               = "/api.affiliate.service.v1.Affiliate/DeletePostback"
 	Affiliate_ListPostbacks_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListPostbacks"
+	Affiliate_ListPostbackLogs_FullMethodName             = "/api.affiliate.service.v1.Affiliate/ListPostbackLogs"
 	Affiliate_ListAffiliateDomains_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAffiliateDomains"
 	Affiliate_SetAffiliateDomain_FullMethodName           = "/api.affiliate.service.v1.Affiliate/SetAffiliateDomain"
 	Affiliate_ListEvents_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/ListEvents"
@@ -81,6 +82,7 @@ type AffiliateClient interface {
 	UpdatePostback(ctx context.Context, in *UpdatePostbackRequest, opts ...grpc.CallOption) (*UpdatePostbackResponse, error)
 	DeletePostback(ctx context.Context, in *DeletePostbackRequest, opts ...grpc.CallOption) (*DeletePostbackResponse, error)
 	ListPostbacks(ctx context.Context, in *ListPostbacksRequest, opts ...grpc.CallOption) (*ListPostbacksResponse, error)
+	ListPostbackLogs(ctx context.Context, in *ListPostbackLogsRequest, opts ...grpc.CallOption) (*ListPostbackLogsResponse, error)
 	ListAffiliateDomains(ctx context.Context, in *ListAffiliateDomainsRequest, opts ...grpc.CallOption) (*ListAffiliateDomainsResponse, error)
 	SetAffiliateDomain(ctx context.Context, in *SetAffiliateDomainRequest, opts ...grpc.CallOption) (*SetAffiliateDomainResponse, error)
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
@@ -309,6 +311,16 @@ func (c *affiliateClient) ListPostbacks(ctx context.Context, in *ListPostbacksRe
 	return out, nil
 }
 
+func (c *affiliateClient) ListPostbackLogs(ctx context.Context, in *ListPostbackLogsRequest, opts ...grpc.CallOption) (*ListPostbackLogsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPostbackLogsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListPostbackLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) ListAffiliateDomains(ctx context.Context, in *ListAffiliateDomainsRequest, opts ...grpc.CallOption) (*ListAffiliateDomainsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAffiliateDomainsResponse)
@@ -493,6 +505,7 @@ type AffiliateServer interface {
 	UpdatePostback(context.Context, *UpdatePostbackRequest) (*UpdatePostbackResponse, error)
 	DeletePostback(context.Context, *DeletePostbackRequest) (*DeletePostbackResponse, error)
 	ListPostbacks(context.Context, *ListPostbacksRequest) (*ListPostbacksResponse, error)
+	ListPostbackLogs(context.Context, *ListPostbackLogsRequest) (*ListPostbackLogsResponse, error)
 	ListAffiliateDomains(context.Context, *ListAffiliateDomainsRequest) (*ListAffiliateDomainsResponse, error)
 	SetAffiliateDomain(context.Context, *SetAffiliateDomainRequest) (*SetAffiliateDomainResponse, error)
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
@@ -580,6 +593,9 @@ func (UnimplementedAffiliateServer) DeletePostback(context.Context, *DeletePostb
 }
 func (UnimplementedAffiliateServer) ListPostbacks(context.Context, *ListPostbacksRequest) (*ListPostbacksResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListPostbacks not implemented")
+}
+func (UnimplementedAffiliateServer) ListPostbackLogs(context.Context, *ListPostbackLogsRequest) (*ListPostbackLogsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPostbackLogs not implemented")
 }
 func (UnimplementedAffiliateServer) ListAffiliateDomains(context.Context, *ListAffiliateDomainsRequest) (*ListAffiliateDomainsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateDomains not implemented")
@@ -1010,6 +1026,24 @@ func _Affiliate_ListPostbacks_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ListPostbackLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPostbackLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListPostbackLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListPostbackLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListPostbackLogs(ctx, req.(*ListPostbackLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_ListAffiliateDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAffiliateDomainsRequest)
 	if err := dec(in); err != nil {
@@ -1384,6 +1418,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPostbacks",
 			Handler:    _Affiliate_ListPostbacks_Handler,
+		},
+		{
+			MethodName: "ListPostbackLogs",
+			Handler:    _Affiliate_ListPostbackLogs_Handler,
 		},
 		{
 			MethodName: "ListAffiliateDomains",
