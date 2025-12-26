@@ -1383,6 +1383,7 @@ message GetUserAccountSettingsStatusResponse {
 message OperatorConfig {
 	optional string swap_fee_percentage = 1;
 	optional OperatorAccountSettings account_settings = 2;
+	optional int32 max_house_edge = 3;  // max house edge, default value 4
 }
 
 message OperatorDetails {
@@ -1440,6 +1441,7 @@ message ListOperatorsByParentOperatorIdRequest {
 	optional string status = 2;
 	optional int32 page = 3;
 	optional int32 page_size = 4;
+	optional api.common.OperatorContextFilters operator_context_filters = 5;
 }
 
 message ListOperatorsByParentOperatorIdResponse {
