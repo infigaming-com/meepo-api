@@ -20,14 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeReview_CreateOperatorWithdraw_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/CreateOperatorWithdraw"
-	BackofficeReview_ListTickets_FullMethodName            = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
-	BackofficeReview_ListOperatorTickets_FullMethodName    = "/api.backoffice.service.v1.BackofficeReview/ListOperatorTickets"
-	BackofficeReview_GetTicket_FullMethodName              = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
-	BackofficeReview_GetOperatorTicket_FullMethodName      = "/api.backoffice.service.v1.BackofficeReview/GetOperatorTicket"
-	BackofficeReview_ReviewTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
-	BackofficeReview_AddComment_FullMethodName             = "/api.backoffice.service.v1.BackofficeReview/AddComment"
-	BackofficeReview_CancelTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
+	BackofficeReview_CreateOperatorWithdraw_FullMethodName  = "/api.backoffice.service.v1.BackofficeReview/CreateOperatorWithdraw"
+	BackofficeReview_CreateAffiliateWithdraw_FullMethodName = "/api.backoffice.service.v1.BackofficeReview/CreateAffiliateWithdraw"
+	BackofficeReview_ListTickets_FullMethodName             = "/api.backoffice.service.v1.BackofficeReview/ListTickets"
+	BackofficeReview_ListOperatorTickets_FullMethodName     = "/api.backoffice.service.v1.BackofficeReview/ListOperatorTickets"
+	BackofficeReview_GetTicket_FullMethodName               = "/api.backoffice.service.v1.BackofficeReview/GetTicket"
+	BackofficeReview_GetOperatorTicket_FullMethodName       = "/api.backoffice.service.v1.BackofficeReview/GetOperatorTicket"
+	BackofficeReview_ReviewTicket_FullMethodName            = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
+	BackofficeReview_AddComment_FullMethodName              = "/api.backoffice.service.v1.BackofficeReview/AddComment"
+	BackofficeReview_CancelTicket_FullMethodName            = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
 )
 
 // BackofficeReviewClient is the client API for BackofficeReview service.
@@ -35,6 +36,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeReviewClient interface {
 	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
+	CreateAffiliateWithdraw(ctx context.Context, in *CreateAffiliateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error)
 	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*v1.GetTicketResponse, error)
@@ -56,6 +58,16 @@ func (c *backofficeReviewClient) CreateOperatorWithdraw(ctx context.Context, in 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWithdrawResponse)
 	err := c.cc.Invoke(ctx, BackofficeReview_CreateOperatorWithdraw_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReviewClient) CreateAffiliateWithdraw(ctx context.Context, in *CreateAffiliateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWithdrawResponse)
+	err := c.cc.Invoke(ctx, BackofficeReview_CreateAffiliateWithdraw_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,6 +149,7 @@ func (c *backofficeReviewClient) CancelTicket(ctx context.Context, in *CancelTic
 // for forward compatibility.
 type BackofficeReviewServer interface {
 	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
+	CreateAffiliateWithdraw(context.Context, *CreateAffiliateWithdrawRequest) (*CreateWithdrawResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*v1.ListTicketsResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*v1.ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error)
@@ -156,6 +169,9 @@ type UnimplementedBackofficeReviewServer struct{}
 
 func (UnimplementedBackofficeReviewServer) CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOperatorWithdraw not implemented")
+}
+func (UnimplementedBackofficeReviewServer) CreateAffiliateWithdraw(context.Context, *CreateAffiliateWithdrawRequest) (*CreateWithdrawResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAffiliateWithdraw not implemented")
 }
 func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*v1.ListTicketsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListTickets not implemented")
@@ -213,6 +229,24 @@ func _BackofficeReview_CreateOperatorWithdraw_Handler(srv interface{}, ctx conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeReviewServer).CreateOperatorWithdraw(ctx, req.(*CreateOperatorWithdrawRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeReview_CreateAffiliateWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAffiliateWithdrawRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReviewServer).CreateAffiliateWithdraw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReview_CreateAffiliateWithdraw_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReviewServer).CreateAffiliateWithdraw(ctx, req.(*CreateAffiliateWithdrawRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -353,6 +387,10 @@ var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateOperatorWithdraw",
 			Handler:    _BackofficeReview_CreateOperatorWithdraw_Handler,
+		},
+		{
+			MethodName: "CreateAffiliateWithdraw",
+			Handler:    _BackofficeReview_CreateAffiliateWithdraw_Handler,
 		},
 		{
 			MethodName: "ListTickets",

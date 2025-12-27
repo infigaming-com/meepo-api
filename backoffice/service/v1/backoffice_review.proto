@@ -20,6 +20,13 @@ service BackofficeReview {
 		};
 	}
 
+	rpc CreateAffiliateWithdraw(CreateAffiliateWithdrawRequest) returns (CreateWithdrawResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/review/affiliate/withdraw"
+			body: "*"
+		};
+	}
+
 	rpc ListTickets(ListTicketsRequest) returns (review.service.v1.ListTicketsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/review/tickets/list"
@@ -72,6 +79,11 @@ service BackofficeReview {
 
 message CreateOperatorWithdrawRequest {
 	google.protobuf.Struct request = 2;  // JSON data for REST API
+}
+
+message CreateAffiliateWithdrawRequest {
+	int64 affiliate_user_id = 1;  // The affiliate's user ID
+	google.protobuf.Struct request = 2;  // JSON data for payment details
 }
 
 message CreateWithdrawResponse {

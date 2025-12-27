@@ -4032,6 +4032,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
+    /v1/backoffice/review/affiliate/withdraw:
+        post:
+            tags:
+                - BackofficeReview
+            operationId: BackofficeReview_CreateAffiliateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateAffiliateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateWithdrawResponse'
     /v1/backoffice/review/operator/tickets/get:
         post:
             tags:
@@ -9253,6 +9271,13 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.CreateAffiliateWithdrawRequest:
+            type: object
+            properties:
+                affiliateUserId:
+                    type: string
+                request:
+                    type: object
         api.backoffice.service.v1.CreateCampaignRequest:
             type: object
             properties:
