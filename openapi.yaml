@@ -13038,6 +13038,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse:
             type: object
             properties:
@@ -18938,6 +18940,9 @@ components:
                     type: string
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
+                maxHouseEdge:
+                    type: integer
+                    format: int32
         api.user.service.v1.OperatorDetails:
             type: object
             properties:
