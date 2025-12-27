@@ -37,6 +37,15 @@ const (
 	ErrorReason_CLOUDFLARE_CONFIG_UNAVAILABLE      ErrorReason = 61002
 	ErrorReason_CLOUDFLARE_OPERATOR_NOT_FOUND      ErrorReason = 61003
 	ErrorReason_CLOUDFLARE_PURGE_FAILED            ErrorReason = 61004
+	// 2FA related errors
+	ErrorReason_MFA_NOT_ENABLED             ErrorReason = 62001
+	ErrorReason_MFA_ALREADY_ENABLED         ErrorReason = 62002
+	ErrorReason_INVALID_2FA_CODE            ErrorReason = 62003
+	ErrorReason_TEMP_TOKEN_EXPIRED          ErrorReason = 62004
+	ErrorReason_TEMP_TOKEN_INVALID          ErrorReason = 62005
+	ErrorReason_MFA_REQUIRED                ErrorReason = 62006
+	ErrorReason_PERMISSION_DENIED_RESET_2FA ErrorReason = 62007
+	ErrorReason_MFA_RATE_LIMITED            ErrorReason = 62008
 )
 
 // Enum value maps for ErrorReason.
@@ -54,6 +63,14 @@ var (
 		61002: "CLOUDFLARE_CONFIG_UNAVAILABLE",
 		61003: "CLOUDFLARE_OPERATOR_NOT_FOUND",
 		61004: "CLOUDFLARE_PURGE_FAILED",
+		62001: "MFA_NOT_ENABLED",
+		62002: "MFA_ALREADY_ENABLED",
+		62003: "INVALID_2FA_CODE",
+		62004: "TEMP_TOKEN_EXPIRED",
+		62005: "TEMP_TOKEN_INVALID",
+		62006: "MFA_REQUIRED",
+		62007: "PERMISSION_DENIED_RESET_2FA",
+		62008: "MFA_RATE_LIMITED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                        0,
@@ -68,6 +85,14 @@ var (
 		"CLOUDFLARE_CONFIG_UNAVAILABLE":      61002,
 		"CLOUDFLARE_OPERATOR_NOT_FOUND":      61003,
 		"CLOUDFLARE_PURGE_FAILED":            61004,
+		"MFA_NOT_ENABLED":                    62001,
+		"MFA_ALREADY_ENABLED":                62002,
+		"INVALID_2FA_CODE":                   62003,
+		"TEMP_TOKEN_EXPIRED":                 62004,
+		"TEMP_TOKEN_INVALID":                 62005,
+		"MFA_REQUIRED":                       62006,
+		"PERMISSION_DENIED_RESET_2FA":        62007,
+		"MFA_RATE_LIMITED":                   62008,
 	}
 )
 
@@ -102,7 +127,7 @@ var File_backoffice_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"(backoffice/service/v1/error_reason.proto\x12\x19api.backoffice.service.v1\x1a\x13errors/errors.proto*\xaa\x03\n" +
+	"(backoffice/service/v1/error_reason.proto\x12\x19api.backoffice.service.v1\x1a\x13errors/errors.proto*\xa7\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12 \n" +
 	"\x1aCALL_WALLET_SERVICE_FAILED\x10\xe0\xd4\x03\x12'\n" +
@@ -115,7 +140,15 @@ const file_backoffice_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cCLOUDFLARE_PERMISSION_DENIED\x10\xc9\xdc\x03\x12#\n" +
 	"\x1dCLOUDFLARE_CONFIG_UNAVAILABLE\x10\xca\xdc\x03\x12#\n" +
 	"\x1dCLOUDFLARE_OPERATOR_NOT_FOUND\x10\xcb\xdc\x03\x12\x1d\n" +
-	"\x17CLOUDFLARE_PURGE_FAILED\x10\xcc\xdc\x03\x1a\x04\xa0E\xf4\x03B[\n" +
+	"\x17CLOUDFLARE_PURGE_FAILED\x10\xcc\xdc\x03\x12\x1b\n" +
+	"\x0fMFA_NOT_ENABLED\x10\xb1\xe4\x03\x1a\x04\xa8E\x90\x03\x12\x1f\n" +
+	"\x13MFA_ALREADY_ENABLED\x10\xb2\xe4\x03\x1a\x04\xa8E\x90\x03\x12\x1c\n" +
+	"\x10INVALID_2FA_CODE\x10\xb3\xe4\x03\x1a\x04\xa8E\x91\x03\x12\x1e\n" +
+	"\x12TEMP_TOKEN_EXPIRED\x10\xb4\xe4\x03\x1a\x04\xa8E\x91\x03\x12\x1e\n" +
+	"\x12TEMP_TOKEN_INVALID\x10\xb5\xe4\x03\x1a\x04\xa8E\x91\x03\x12\x18\n" +
+	"\fMFA_REQUIRED\x10\xb6\xe4\x03\x1a\x04\xa8E\x93\x03\x12'\n" +
+	"\x1bPERMISSION_DENIED_RESET_2FA\x10\xb7\xe4\x03\x1a\x04\xa8E\x93\x03\x12\x1c\n" +
+	"\x10MFA_RATE_LIMITED\x10\xb8\xe4\x03\x1a\x04\xa8E\xad\x03\x1a\x04\xa0E\xf4\x03B[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

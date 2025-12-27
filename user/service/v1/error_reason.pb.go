@@ -153,6 +153,18 @@ const (
 	ErrorReason_EMAIL_DOMAIN_BINDING_NOT_FOUND   ErrorReason = 10126
 	ErrorReason_EMAIL_DOMAIN_VERIFICATION_FAILED ErrorReason = 10127
 	ErrorReason_EMAIL_DOMAIN_INVALID             ErrorReason = 10128
+	// 2FA (Two-Factor Authentication) Errors
+	ErrorReason_MFA_NOT_ENABLED             ErrorReason = 10200
+	ErrorReason_MFA_ALREADY_ENABLED         ErrorReason = 10201
+	ErrorReason_INVALID_2FA_CODE            ErrorReason = 10202
+	ErrorReason_TEMP_TOKEN_EXPIRED          ErrorReason = 10203
+	ErrorReason_TEMP_TOKEN_INVALID          ErrorReason = 10204
+	ErrorReason_MFA_REQUIRED                ErrorReason = 10205
+	ErrorReason_PERMISSION_DENIED_RESET_2FA ErrorReason = 10206
+	ErrorReason_MFA_RATE_LIMITED            ErrorReason = 10207
+	ErrorReason_GENERATE_2FA_SECRET_FAILED  ErrorReason = 10208
+	ErrorReason_BIND_2FA_FAILED             ErrorReason = 10209
+	ErrorReason_INVALID_USER_ROLE_FOR_2FA   ErrorReason = 10210
 )
 
 // Enum value maps for ErrorReason.
@@ -285,6 +297,17 @@ var (
 		10126: "EMAIL_DOMAIN_BINDING_NOT_FOUND",
 		10127: "EMAIL_DOMAIN_VERIFICATION_FAILED",
 		10128: "EMAIL_DOMAIN_INVALID",
+		10200: "MFA_NOT_ENABLED",
+		10201: "MFA_ALREADY_ENABLED",
+		10202: "INVALID_2FA_CODE",
+		10203: "TEMP_TOKEN_EXPIRED",
+		10204: "TEMP_TOKEN_INVALID",
+		10205: "MFA_REQUIRED",
+		10206: "PERMISSION_DENIED_RESET_2FA",
+		10207: "MFA_RATE_LIMITED",
+		10208: "GENERATE_2FA_SECRET_FAILED",
+		10209: "BIND_2FA_FAILED",
+		10210: "INVALID_USER_ROLE_FOR_2FA",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -414,6 +437,17 @@ var (
 		"EMAIL_DOMAIN_BINDING_NOT_FOUND":                 10126,
 		"EMAIL_DOMAIN_VERIFICATION_FAILED":               10127,
 		"EMAIL_DOMAIN_INVALID":                           10128,
+		"MFA_NOT_ENABLED":                                10200,
+		"MFA_ALREADY_ENABLED":                            10201,
+		"INVALID_2FA_CODE":                               10202,
+		"TEMP_TOKEN_EXPIRED":                             10203,
+		"TEMP_TOKEN_INVALID":                             10204,
+		"MFA_REQUIRED":                                   10205,
+		"PERMISSION_DENIED_RESET_2FA":                    10206,
+		"MFA_RATE_LIMITED":                               10207,
+		"GENERATE_2FA_SECRET_FAILED":                     10208,
+		"BIND_2FA_FAILED":                                10209,
+		"INVALID_USER_ROLE_FOR_2FA":                      10210,
 	}
 )
 
@@ -448,7 +482,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xcd!\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x9f$\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -576,7 +610,18 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aEMAIL_DOMAIN_ALREADY_BOUND\x10\x8dO\x12#\n" +
 	"\x1eEMAIL_DOMAIN_BINDING_NOT_FOUND\x10\x8eO\x12%\n" +
 	" EMAIL_DOMAIN_VERIFICATION_FAILED\x10\x8fO\x12\x19\n" +
-	"\x14EMAIL_DOMAIN_INVALID\x10\x90O\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x14EMAIL_DOMAIN_INVALID\x10\x90O\x12\x1a\n" +
+	"\x0fMFA_NOT_ENABLED\x10\xd8O\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
+	"\x13MFA_ALREADY_ENABLED\x10\xd9O\x1a\x04\xa8E\x90\x03\x12\x1b\n" +
+	"\x10INVALID_2FA_CODE\x10\xdaO\x1a\x04\xa8E\x91\x03\x12\x1d\n" +
+	"\x12TEMP_TOKEN_EXPIRED\x10\xdbO\x1a\x04\xa8E\x91\x03\x12\x1d\n" +
+	"\x12TEMP_TOKEN_INVALID\x10\xdcO\x1a\x04\xa8E\x91\x03\x12\x17\n" +
+	"\fMFA_REQUIRED\x10\xddO\x1a\x04\xa8E\x93\x03\x12&\n" +
+	"\x1bPERMISSION_DENIED_RESET_2FA\x10\xdeO\x1a\x04\xa8E\x93\x03\x12\x1b\n" +
+	"\x10MFA_RATE_LIMITED\x10\xdfO\x1a\x04\xa8E\xad\x03\x12\x1f\n" +
+	"\x1aGENERATE_2FA_SECRET_FAILED\x10\xe0O\x12\x14\n" +
+	"\x0fBIND_2FA_FAILED\x10\xe1O\x12$\n" +
+	"\x19INVALID_USER_ROLE_FOR_2FA\x10\xe2O\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

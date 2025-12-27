@@ -1538,3 +1538,137 @@ func IsEmailDomainInvalid(err error) bool {
 func ErrorEmailDomainInvalid(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_EMAIL_DOMAIN_INVALID.String(), fmt.Sprintf(format, args...))
 }
+
+// 2FA (Two-Factor Authentication) Errors
+func IsMfaNotEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_NOT_ENABLED.String() && e.Code == 400
+}
+
+// 2FA (Two-Factor Authentication) Errors
+func ErrorMfaNotEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_MFA_NOT_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMfaAlreadyEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_ALREADY_ENABLED.String() && e.Code == 400
+}
+
+func ErrorMfaAlreadyEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_MFA_ALREADY_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalid2FaCode(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_2FA_CODE.String() && e.Code == 401
+}
+
+func ErrorInvalid2FaCode(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_INVALID_2FA_CODE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTempTokenExpired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TEMP_TOKEN_EXPIRED.String() && e.Code == 401
+}
+
+func ErrorTempTokenExpired(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_TEMP_TOKEN_EXPIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTempTokenInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TEMP_TOKEN_INVALID.String() && e.Code == 401
+}
+
+func ErrorTempTokenInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_TEMP_TOKEN_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMfaRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_REQUIRED.String() && e.Code == 403
+}
+
+func ErrorMfaRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_MFA_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPermissionDeniedReset2Fa(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PERMISSION_DENIED_RESET_2FA.String() && e.Code == 403
+}
+
+func ErrorPermissionDeniedReset2Fa(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_PERMISSION_DENIED_RESET_2FA.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMfaRateLimited(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_RATE_LIMITED.String() && e.Code == 429
+}
+
+func ErrorMfaRateLimited(format string, args ...interface{}) *errors.Error {
+	return errors.New(429, ErrorReason_MFA_RATE_LIMITED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGenerate2FaSecretFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GENERATE_2FA_SECRET_FAILED.String() && e.Code == 500
+}
+
+func ErrorGenerate2FaSecretFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GENERATE_2FA_SECRET_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBind2FaFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BIND_2FA_FAILED.String() && e.Code == 500
+}
+
+func ErrorBind2FaFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BIND_2FA_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidUserRoleFor2Fa(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_USER_ROLE_FOR_2FA.String() && e.Code == 400
+}
+
+func ErrorInvalidUserRoleFor2Fa(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_USER_ROLE_FOR_2FA.String(), fmt.Sprintf(format, args...))
+}

@@ -154,3 +154,101 @@ func IsCloudflarePurgeFailed(err error) bool {
 func ErrorCloudflarePurgeFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CLOUDFLARE_PURGE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// 2FA related errors
+func IsMfaNotEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_NOT_ENABLED.String() && e.Code == 400
+}
+
+// 2FA related errors
+func ErrorMfaNotEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_MFA_NOT_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMfaAlreadyEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_ALREADY_ENABLED.String() && e.Code == 400
+}
+
+func ErrorMfaAlreadyEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_MFA_ALREADY_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalid2FaCode(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_2FA_CODE.String() && e.Code == 401
+}
+
+func ErrorInvalid2FaCode(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_INVALID_2FA_CODE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTempTokenExpired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TEMP_TOKEN_EXPIRED.String() && e.Code == 401
+}
+
+func ErrorTempTokenExpired(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_TEMP_TOKEN_EXPIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTempTokenInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TEMP_TOKEN_INVALID.String() && e.Code == 401
+}
+
+func ErrorTempTokenInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_TEMP_TOKEN_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMfaRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_REQUIRED.String() && e.Code == 403
+}
+
+func ErrorMfaRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_MFA_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPermissionDeniedReset2Fa(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PERMISSION_DENIED_RESET_2FA.String() && e.Code == 403
+}
+
+func ErrorPermissionDeniedReset2Fa(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_PERMISSION_DENIED_RESET_2FA.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMfaRateLimited(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MFA_RATE_LIMITED.String() && e.Code == 429
+}
+
+func ErrorMfaRateLimited(format string, args ...interface{}) *errors.Error {
+	return errors.New(429, ErrorReason_MFA_RATE_LIMITED.String(), fmt.Sprintf(format, args...))
+}

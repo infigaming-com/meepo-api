@@ -140,4 +140,17 @@ enum ErrorReason {
   EMAIL_DOMAIN_BINDING_NOT_FOUND = 10126;
   EMAIL_DOMAIN_VERIFICATION_FAILED = 10127;
   EMAIL_DOMAIN_INVALID = 10128;
+
+  // 2FA (Two-Factor Authentication) Errors
+  MFA_NOT_ENABLED = 10200 [(errors.code) = 400];
+  MFA_ALREADY_ENABLED = 10201 [(errors.code) = 400];
+  INVALID_2FA_CODE = 10202 [(errors.code) = 401];
+  TEMP_TOKEN_EXPIRED = 10203 [(errors.code) = 401];
+  TEMP_TOKEN_INVALID = 10204 [(errors.code) = 401];
+  MFA_REQUIRED = 10205 [(errors.code) = 403];
+  PERMISSION_DENIED_RESET_2FA = 10206 [(errors.code) = 403];
+  MFA_RATE_LIMITED = 10207 [(errors.code) = 429];
+  GENERATE_2FA_SECRET_FAILED = 10208;
+  BIND_2FA_FAILED = 10209;
+  INVALID_USER_ROLE_FOR_2FA = 10210 [(errors.code) = 400];
 }
