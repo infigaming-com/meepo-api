@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: meepo-gateway
-    namespace: meepo-gateway
+    namespace: meepo
   hostnames:
   - "apiport.xyz"
   rules:
