@@ -107,6 +107,12 @@ const (
 	User_GetUserPrivacySettings_FullMethodName             = "/api.user.service.v1.User/GetUserPrivacySettings"
 	User_UpdateUserPrivacySettings_FullMethodName          = "/api.user.service.v1.User/UpdateUserPrivacySettings"
 	User_GetUsersPrivacySettings_FullMethodName            = "/api.user.service.v1.User/GetUsersPrivacySettings"
+	User_Generate2FaSecret_FullMethodName                  = "/api.user.service.v1.User/Generate2faSecret"
+	User_Bind2FaSecret_FullMethodName                      = "/api.user.service.v1.User/Bind2faSecret"
+	User_Verify2FaCode_FullMethodName                      = "/api.user.service.v1.User/Verify2faCode"
+	User_Reset2Fa_FullMethodName                           = "/api.user.service.v1.User/Reset2fa"
+	User_Get2FaStatus_FullMethodName                       = "/api.user.service.v1.User/Get2faStatus"
+	User_LoginWithInfoAnd2Fa_FullMethodName                = "/api.user.service.v1.User/LoginWithInfoAnd2fa"
 )
 
 // UserClient is the client API for User service.
@@ -254,6 +260,19 @@ type UserClient interface {
 	UpdateUserPrivacySettings(ctx context.Context, in *UpdateUserPrivacySettingsRequest, opts ...grpc.CallOption) (*UpdateUserPrivacySettingsResponse, error)
 	// Privacy Settings APIs - Internal (for push-service batch lookup)
 	GetUsersPrivacySettings(ctx context.Context, in *GetUsersPrivacySettingsRequest, opts ...grpc.CallOption) (*GetUsersPrivacySettingsResponse, error)
+	// ============ 2FA (Two-Factor Authentication) APIs ============
+	// Generate a new 2FA secret for a user (internal gRPC only)
+	Generate2FaSecret(ctx context.Context, in *Generate2FaSecretRequest, opts ...grpc.CallOption) (*Generate2FaSecretResponse, error)
+	// Bind 2FA to a user's account after verifying TOTP code (internal gRPC only)
+	Bind2FaSecret(ctx context.Context, in *Bind2FaSecretRequest, opts ...grpc.CallOption) (*Bind2FaSecretResponse, error)
+	// Verify a 2FA code for a user (internal gRPC only)
+	Verify2FaCode(ctx context.Context, in *Verify2FaCodeRequest, opts ...grpc.CallOption) (*Verify2FaCodeResponse, error)
+	// Reset 2FA for a user (internal gRPC only)
+	Reset2Fa(ctx context.Context, in *Reset2FaRequest, opts ...grpc.CallOption) (*Reset2FaResponse, error)
+	// Get 2FA status for a user (internal gRPC only)
+	Get2FaStatus(ctx context.Context, in *Get2FaStatusRequest, opts ...grpc.CallOption) (*Get2FaStatusResponse, error)
+	// Backoffice login with 2FA support (internal gRPC only)
+	LoginWithInfoAnd2Fa(ctx context.Context, in *LoginWithInfoAnd2FaRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
 }
 
 type userClient struct {
@@ -1134,6 +1153,66 @@ func (c *userClient) GetUsersPrivacySettings(ctx context.Context, in *GetUsersPr
 	return out, nil
 }
 
+func (c *userClient) Generate2FaSecret(ctx context.Context, in *Generate2FaSecretRequest, opts ...grpc.CallOption) (*Generate2FaSecretResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Generate2FaSecretResponse)
+	err := c.cc.Invoke(ctx, User_Generate2FaSecret_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) Bind2FaSecret(ctx context.Context, in *Bind2FaSecretRequest, opts ...grpc.CallOption) (*Bind2FaSecretResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Bind2FaSecretResponse)
+	err := c.cc.Invoke(ctx, User_Bind2FaSecret_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) Verify2FaCode(ctx context.Context, in *Verify2FaCodeRequest, opts ...grpc.CallOption) (*Verify2FaCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Verify2FaCodeResponse)
+	err := c.cc.Invoke(ctx, User_Verify2FaCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) Reset2Fa(ctx context.Context, in *Reset2FaRequest, opts ...grpc.CallOption) (*Reset2FaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Reset2FaResponse)
+	err := c.cc.Invoke(ctx, User_Reset2Fa_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) Get2FaStatus(ctx context.Context, in *Get2FaStatusRequest, opts ...grpc.CallOption) (*Get2FaStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Get2FaStatusResponse)
+	err := c.cc.Invoke(ctx, User_Get2FaStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) LoginWithInfoAnd2Fa(ctx context.Context, in *LoginWithInfoAnd2FaRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginWithInfoAnd2FaResponse)
+	err := c.cc.Invoke(ctx, User_LoginWithInfoAnd2Fa_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1279,6 +1358,19 @@ type UserServer interface {
 	UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error)
 	// Privacy Settings APIs - Internal (for push-service batch lookup)
 	GetUsersPrivacySettings(context.Context, *GetUsersPrivacySettingsRequest) (*GetUsersPrivacySettingsResponse, error)
+	// ============ 2FA (Two-Factor Authentication) APIs ============
+	// Generate a new 2FA secret for a user (internal gRPC only)
+	Generate2FaSecret(context.Context, *Generate2FaSecretRequest) (*Generate2FaSecretResponse, error)
+	// Bind 2FA to a user's account after verifying TOTP code (internal gRPC only)
+	Bind2FaSecret(context.Context, *Bind2FaSecretRequest) (*Bind2FaSecretResponse, error)
+	// Verify a 2FA code for a user (internal gRPC only)
+	Verify2FaCode(context.Context, *Verify2FaCodeRequest) (*Verify2FaCodeResponse, error)
+	// Reset 2FA for a user (internal gRPC only)
+	Reset2Fa(context.Context, *Reset2FaRequest) (*Reset2FaResponse, error)
+	// Get 2FA status for a user (internal gRPC only)
+	Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error)
+	// Backoffice login with 2FA support (internal gRPC only)
+	LoginWithInfoAnd2Fa(context.Context, *LoginWithInfoAnd2FaRequest) (*LoginWithInfoAnd2FaResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1549,6 +1641,24 @@ func (UnimplementedUserServer) UpdateUserPrivacySettings(context.Context, *Updat
 }
 func (UnimplementedUserServer) GetUsersPrivacySettings(context.Context, *GetUsersPrivacySettingsRequest) (*GetUsersPrivacySettingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUsersPrivacySettings not implemented")
+}
+func (UnimplementedUserServer) Generate2FaSecret(context.Context, *Generate2FaSecretRequest) (*Generate2FaSecretResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Generate2FaSecret not implemented")
+}
+func (UnimplementedUserServer) Bind2FaSecret(context.Context, *Bind2FaSecretRequest) (*Bind2FaSecretResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Bind2FaSecret not implemented")
+}
+func (UnimplementedUserServer) Verify2FaCode(context.Context, *Verify2FaCodeRequest) (*Verify2FaCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Verify2FaCode not implemented")
+}
+func (UnimplementedUserServer) Reset2Fa(context.Context, *Reset2FaRequest) (*Reset2FaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Reset2Fa not implemented")
+}
+func (UnimplementedUserServer) Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get2FaStatus not implemented")
+}
+func (UnimplementedUserServer) LoginWithInfoAnd2Fa(context.Context, *LoginWithInfoAnd2FaRequest) (*LoginWithInfoAnd2FaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LoginWithInfoAnd2Fa not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -3137,6 +3247,114 @@ func _User_GetUsersPrivacySettings_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_Generate2FaSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Generate2FaSecretRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Generate2FaSecret(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Generate2FaSecret_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Generate2FaSecret(ctx, req.(*Generate2FaSecretRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_Bind2FaSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Bind2FaSecretRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Bind2FaSecret(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Bind2FaSecret_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Bind2FaSecret(ctx, req.(*Bind2FaSecretRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_Verify2FaCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Verify2FaCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Verify2FaCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Verify2FaCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Verify2FaCode(ctx, req.(*Verify2FaCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_Reset2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Reset2FaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Reset2Fa(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Reset2Fa_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Reset2Fa(ctx, req.(*Reset2FaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_Get2FaStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Get2FaStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Get2FaStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Get2FaStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Get2FaStatus(ctx, req.(*Get2FaStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_LoginWithInfoAnd2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithInfoAnd2FaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).LoginWithInfoAnd2Fa(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_LoginWithInfoAnd2Fa_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).LoginWithInfoAnd2Fa(ctx, req.(*LoginWithInfoAnd2FaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3491,6 +3709,30 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUsersPrivacySettings",
 			Handler:    _User_GetUsersPrivacySettings_Handler,
+		},
+		{
+			MethodName: "Generate2faSecret",
+			Handler:    _User_Generate2FaSecret_Handler,
+		},
+		{
+			MethodName: "Bind2faSecret",
+			Handler:    _User_Bind2FaSecret_Handler,
+		},
+		{
+			MethodName: "Verify2faCode",
+			Handler:    _User_Verify2FaCode_Handler,
+		},
+		{
+			MethodName: "Reset2fa",
+			Handler:    _User_Reset2Fa_Handler,
+		},
+		{
+			MethodName: "Get2faStatus",
+			Handler:    _User_Get2FaStatus_Handler,
+		},
+		{
+			MethodName: "LoginWithInfoAnd2fa",
+			Handler:    _User_LoginWithInfoAnd2Fa_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1721,6 +1721,8 @@ func (m *Generate2FaRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for TempToken
+
 	if len(errors) > 0 {
 		return Generate2FaRequestMultiError(errors)
 	}
@@ -1822,6 +1824,12 @@ func (m *Generate2FaResponse) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for Secret
+
+	// no validation rules for QrCodeUrl
+
+	// no validation rules for Issuer
 
 	if len(errors) > 0 {
 		return Generate2FaResponseMultiError(errors)
@@ -1925,7 +1933,11 @@ func (m *Bind2FaRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Token
+	// no validation rules for TempToken
+
+	// no validation rules for TotpCode
+
+	// no validation rules for Secret
 
 	if len(errors) > 0 {
 		return Bind2FaRequestMultiError(errors)
@@ -2027,6 +2039,8 @@ func (m *Bind2FaResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Token
+
 	if len(errors) > 0 {
 		return Bind2FaResponseMultiError(errors)
 	}
@@ -2127,7 +2141,7 @@ func (m *Unbind2FaRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Token
+	// no validation rules for TotpCode
 
 	if len(errors) > 0 {
 		return Unbind2FaRequestMultiError(errors)
@@ -2308,6 +2322,628 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = Unbind2FaResponseValidationError{}
+
+// Validate checks the field values on Verify2FaRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *Verify2FaRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Verify2FaRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Verify2FaRequestMultiError, or nil if none found.
+func (m *Verify2FaRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Verify2FaRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TempToken
+
+	// no validation rules for TotpCode
+
+	if len(errors) > 0 {
+		return Verify2FaRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// Verify2FaRequestMultiError is an error wrapping multiple validation errors
+// returned by Verify2FaRequest.ValidateAll() if the designated constraints
+// aren't met.
+type Verify2FaRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Verify2FaRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Verify2FaRequestMultiError) AllErrors() []error { return m }
+
+// Verify2FaRequestValidationError is the validation error returned by
+// Verify2FaRequest.Validate if the designated constraints aren't met.
+type Verify2FaRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Verify2FaRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Verify2FaRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Verify2FaRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Verify2FaRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Verify2FaRequestValidationError) ErrorName() string { return "Verify2FaRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e Verify2FaRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerify2FaRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Verify2FaRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Verify2FaRequestValidationError{}
+
+// Validate checks the field values on Verify2FaResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *Verify2FaResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Verify2FaResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Verify2FaResponseMultiError, or nil if none found.
+func (m *Verify2FaResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Verify2FaResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Token
+
+	if len(errors) > 0 {
+		return Verify2FaResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// Verify2FaResponseMultiError is an error wrapping multiple validation errors
+// returned by Verify2FaResponse.ValidateAll() if the designated constraints
+// aren't met.
+type Verify2FaResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Verify2FaResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Verify2FaResponseMultiError) AllErrors() []error { return m }
+
+// Verify2FaResponseValidationError is the validation error returned by
+// Verify2FaResponse.Validate if the designated constraints aren't met.
+type Verify2FaResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Verify2FaResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Verify2FaResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Verify2FaResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Verify2FaResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Verify2FaResponseValidationError) ErrorName() string {
+	return "Verify2FaResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Verify2FaResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerify2FaResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Verify2FaResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Verify2FaResponseValidationError{}
+
+// Validate checks the field values on AdminReset2FaRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminReset2FaRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminReset2FaRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminReset2FaRequestMultiError, or nil if none found.
+func (m *AdminReset2FaRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminReset2FaRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TargetUserId
+
+	if len(errors) > 0 {
+		return AdminReset2FaRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminReset2FaRequestMultiError is an error wrapping multiple validation
+// errors returned by AdminReset2FaRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AdminReset2FaRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminReset2FaRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminReset2FaRequestMultiError) AllErrors() []error { return m }
+
+// AdminReset2FaRequestValidationError is the validation error returned by
+// AdminReset2FaRequest.Validate if the designated constraints aren't met.
+type AdminReset2FaRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminReset2FaRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminReset2FaRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminReset2FaRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminReset2FaRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminReset2FaRequestValidationError) ErrorName() string {
+	return "AdminReset2FaRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminReset2FaRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminReset2FaRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminReset2FaRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminReset2FaRequestValidationError{}
+
+// Validate checks the field values on AdminReset2FaResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminReset2FaResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminReset2FaResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminReset2FaResponseMultiError, or nil if none found.
+func (m *AdminReset2FaResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminReset2FaResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AdminReset2FaResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminReset2FaResponseMultiError is an error wrapping multiple validation
+// errors returned by AdminReset2FaResponse.ValidateAll() if the designated
+// constraints aren't met.
+type AdminReset2FaResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminReset2FaResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminReset2FaResponseMultiError) AllErrors() []error { return m }
+
+// AdminReset2FaResponseValidationError is the validation error returned by
+// AdminReset2FaResponse.Validate if the designated constraints aren't met.
+type AdminReset2FaResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminReset2FaResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminReset2FaResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminReset2FaResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminReset2FaResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminReset2FaResponseValidationError) ErrorName() string {
+	return "AdminReset2FaResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminReset2FaResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminReset2FaResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminReset2FaResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminReset2FaResponseValidationError{}
+
+// Validate checks the field values on Get2FaStatusRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *Get2FaStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Get2FaStatusRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Get2FaStatusRequestMultiError, or nil if none found.
+func (m *Get2FaStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Get2FaStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return Get2FaStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// Get2FaStatusRequestMultiError is an error wrapping multiple validation
+// errors returned by Get2FaStatusRequest.ValidateAll() if the designated
+// constraints aren't met.
+type Get2FaStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Get2FaStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Get2FaStatusRequestMultiError) AllErrors() []error { return m }
+
+// Get2FaStatusRequestValidationError is the validation error returned by
+// Get2FaStatusRequest.Validate if the designated constraints aren't met.
+type Get2FaStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Get2FaStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Get2FaStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Get2FaStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Get2FaStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Get2FaStatusRequestValidationError) ErrorName() string {
+	return "Get2FaStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Get2FaStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGet2FaStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Get2FaStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Get2FaStatusRequestValidationError{}
+
+// Validate checks the field values on Get2FaStatusResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *Get2FaStatusResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Get2FaStatusResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Get2FaStatusResponseMultiError, or nil if none found.
+func (m *Get2FaStatusResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Get2FaStatusResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Enabled
+
+	// no validation rules for LastResetAt
+
+	if len(errors) > 0 {
+		return Get2FaStatusResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// Get2FaStatusResponseMultiError is an error wrapping multiple validation
+// errors returned by Get2FaStatusResponse.ValidateAll() if the designated
+// constraints aren't met.
+type Get2FaStatusResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Get2FaStatusResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Get2FaStatusResponseMultiError) AllErrors() []error { return m }
+
+// Get2FaStatusResponseValidationError is the validation error returned by
+// Get2FaStatusResponse.Validate if the designated constraints aren't met.
+type Get2FaStatusResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Get2FaStatusResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Get2FaStatusResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Get2FaStatusResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Get2FaStatusResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Get2FaStatusResponseValidationError) ErrorName() string {
+	return "Get2FaStatusResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Get2FaStatusResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGet2FaStatusResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Get2FaStatusResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Get2FaStatusResponseValidationError{}
 
 // Validate checks the field values on UpdateAccountRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -2549,6 +3185,8 @@ func (m *LoginRequest) validate(all bool) error {
 
 	// no validation rules for Password
 
+	// no validation rules for TotpCode
+
 	if len(errors) > 0 {
 		return LoginRequestMultiError(errors)
 	}
@@ -2649,6 +3287,12 @@ func (m *LoginResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Token
+
+	// no validation rules for Require_2Fa
+
+	// no validation rules for TwofaBound
+
+	// no validation rules for TempToken
 
 	if len(errors) > 0 {
 		return LoginResponseMultiError(errors)

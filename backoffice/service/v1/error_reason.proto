@@ -23,4 +23,13 @@ enum ErrorReason {
   CLOUDFLARE_CONFIG_UNAVAILABLE = 61002;
   CLOUDFLARE_OPERATOR_NOT_FOUND = 61003;
   CLOUDFLARE_PURGE_FAILED = 61004;
+  // 2FA related errors
+  MFA_NOT_ENABLED = 62001 [(errors.code) = 400];
+  MFA_ALREADY_ENABLED = 62002 [(errors.code) = 400];
+  INVALID_2FA_CODE = 62003 [(errors.code) = 401];
+  TEMP_TOKEN_EXPIRED = 62004 [(errors.code) = 401];
+  TEMP_TOKEN_INVALID = 62005 [(errors.code) = 401];
+  MFA_REQUIRED = 62006 [(errors.code) = 403];
+  PERMISSION_DENIED_RESET_2FA = 62007 [(errors.code) = 403];
+  MFA_RATE_LIMITED = 62008 [(errors.code) = 429];
 }

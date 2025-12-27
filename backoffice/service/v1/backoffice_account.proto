@@ -83,6 +83,27 @@ service BackofficeAccount {
             body: "*"
         };
     }
+    // Verify 2FA code during login flow
+    rpc Verify2fa(Verify2faRequest) returns (Verify2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/verify"
+            body: "*"
+        };
+    }
+    // Admin reset another user's 2FA
+    rpc AdminReset2fa(AdminReset2faRequest) returns (AdminReset2faResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/admin-reset"
+            body: "*"
+        };
+    }
+    // Get 2FA status for current user
+    rpc Get2faStatus(Get2faStatusRequest) returns (Get2faStatusResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/2fa/status"
+            body: "*"
+        };
+    }
     rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/accounts/update"
@@ -220,21 +241,66 @@ message ResetPasswordWithCodeRequest {
 
 message ResetPasswordWithCodeResponse {}
 
-message Generate2faRequest {}
+// Generate2faRequest - request to generate a new 2FA secret
+// Requires temp_token from login response when 2FA is not yet bound
+message Generate2faRequest {
+	string temp_token = 1;  // Temporary token from login response
+}
 
-message Generate2faResponse {}
+// Generate2faResponse - returns the 2FA secret and QR code URL
+message Generate2faResponse {
+	string secret = 1;       // Base32 encoded TOTP secret
+	string qr_code_url = 2;  // otpauth:// URL for QR code generation
+	string issuer = 3;       // Issuer name (e.g., "Meepo Backoffice")
+}
 
+// Bind2faRequest - binds 2FA to the user's account
 message Bind2faRequest {
-	string token = 1;
+	string temp_token = 1;   // Temporary token from login response
+	string totp_code = 2;    // 6-digit TOTP code from authenticator app
+	string secret = 3;       // The secret that was generated (for verification)
 }
 
-message Bind2faResponse {}
+// Bind2faResponse - returns full access token after successful binding
+message Bind2faResponse {
+	string token = 1;        // Full access token
+}
 
+// Unbind2faRequest - unbinds 2FA from current user's account (self-reset)
 message Unbind2faRequest {
-	string token = 1;
+	string totp_code = 1;    // Current 2FA code to verify ownership
 }
 
+// Unbind2faResponse - empty response on success
 message Unbind2faResponse {}
+
+// Verify2faRequest - verifies 2FA code during login
+message Verify2faRequest {
+	string temp_token = 1;   // Temporary token from login response
+	string totp_code = 2;    // 6-digit TOTP code
+}
+
+// Verify2faResponse - returns full access token after successful verification
+message Verify2faResponse {
+	string token = 1;        // Full access token
+}
+
+// AdminReset2faRequest - admin resets another user's 2FA
+message AdminReset2faRequest {
+	int64 target_user_id = 1;  // User ID whose 2FA should be reset
+}
+
+// AdminReset2faResponse - empty response on success
+message AdminReset2faResponse {}
+
+// Get2faStatusRequest - get 2FA status for current user
+message Get2faStatusRequest {}
+
+// Get2faStatusResponse - returns 2FA status
+message Get2faStatusResponse {
+	bool enabled = 1;           // Whether 2FA is enabled
+	int64 last_reset_at = 2;    // Timestamp of last 2FA reset (0 if never reset)
+}
 
 message UpdateAccountRequest {
 	int64 user_id = 1;
@@ -247,10 +313,14 @@ message UpdateAccountResponse {}
 message LoginRequest {
 	string email = 1;
 	string password = 2;
+	string totp_code = 3;  // Optional: 2FA code if user has 2FA enabled
 }
 
 message LoginResponse {
-	string token = 1;
+	string token = 1;           // Full access token (only set when 2FA not required or verified)
+	bool require_2fa = 2;       // True if user is backoffice and needs 2FA
+	bool twofa_bound = 3;       // True if user has already bound 2FA
+	string temp_token = 4;      // Temporary token for 2FA binding/verification (when require_2fa=true)
 }
 
 message RegisterRequest {

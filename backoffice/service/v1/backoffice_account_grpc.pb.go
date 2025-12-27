@@ -30,6 +30,9 @@ const (
 	BackofficeAccount_Generate2Fa_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
 	BackofficeAccount_Bind2Fa_FullMethodName                      = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 	BackofficeAccount_Unbind2Fa_FullMethodName                    = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
+	BackofficeAccount_Verify2Fa_FullMethodName                    = "/api.backoffice.service.v1.BackofficeAccount/Verify2fa"
+	BackofficeAccount_AdminReset2Fa_FullMethodName                = "/api.backoffice.service.v1.BackofficeAccount/AdminReset2fa"
+	BackofficeAccount_Get2FaStatus_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAccount/Get2faStatus"
 	BackofficeAccount_UpdateAccount_FullMethodName                = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
 	BackofficeAccount_Login_FullMethodName                        = "/api.backoffice.service.v1.BackofficeAccount/Login"
 	BackofficeAccount_Register_FullMethodName                     = "/api.backoffice.service.v1.BackofficeAccount/Register"
@@ -62,6 +65,12 @@ type BackofficeAccountClient interface {
 	Generate2Fa(ctx context.Context, in *Generate2FaRequest, opts ...grpc.CallOption) (*Generate2FaResponse, error)
 	Bind2Fa(ctx context.Context, in *Bind2FaRequest, opts ...grpc.CallOption) (*Bind2FaResponse, error)
 	Unbind2Fa(ctx context.Context, in *Unbind2FaRequest, opts ...grpc.CallOption) (*Unbind2FaResponse, error)
+	// Verify 2FA code during login flow
+	Verify2Fa(ctx context.Context, in *Verify2FaRequest, opts ...grpc.CallOption) (*Verify2FaResponse, error)
+	// Admin reset another user's 2FA
+	AdminReset2Fa(ctx context.Context, in *AdminReset2FaRequest, opts ...grpc.CallOption) (*AdminReset2FaResponse, error)
+	// Get 2FA status for current user
+	Get2FaStatus(ctx context.Context, in *Get2FaStatusRequest, opts ...grpc.CallOption) (*Get2FaStatusResponse, error)
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
@@ -192,6 +201,36 @@ func (c *backofficeAccountClient) Unbind2Fa(ctx context.Context, in *Unbind2FaRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Unbind2FaResponse)
 	err := c.cc.Invoke(ctx, BackofficeAccount_Unbind2Fa_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) Verify2Fa(ctx context.Context, in *Verify2FaRequest, opts ...grpc.CallOption) (*Verify2FaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Verify2FaResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_Verify2Fa_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) AdminReset2Fa(ctx context.Context, in *AdminReset2FaRequest, opts ...grpc.CallOption) (*AdminReset2FaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdminReset2FaResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_AdminReset2Fa_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) Get2FaStatus(ctx context.Context, in *Get2FaStatusRequest, opts ...grpc.CallOption) (*Get2FaStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Get2FaStatusResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_Get2FaStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -345,6 +384,12 @@ type BackofficeAccountServer interface {
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
+	// Verify 2FA code during login flow
+	Verify2Fa(context.Context, *Verify2FaRequest) (*Verify2FaResponse, error)
+	// Admin reset another user's 2FA
+	AdminReset2Fa(context.Context, *AdminReset2FaRequest) (*AdminReset2FaResponse, error)
+	// Get 2FA status for current user
+	Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
@@ -403,6 +448,15 @@ func (UnimplementedBackofficeAccountServer) Bind2Fa(context.Context, *Bind2FaReq
 }
 func (UnimplementedBackofficeAccountServer) Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Unbind2Fa not implemented")
+}
+func (UnimplementedBackofficeAccountServer) Verify2Fa(context.Context, *Verify2FaRequest) (*Verify2FaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Verify2Fa not implemented")
+}
+func (UnimplementedBackofficeAccountServer) AdminReset2Fa(context.Context, *AdminReset2FaRequest) (*AdminReset2FaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdminReset2Fa not implemented")
+}
+func (UnimplementedBackofficeAccountServer) Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get2FaStatus not implemented")
 }
 func (UnimplementedBackofficeAccountServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAccount not implemented")
@@ -658,6 +712,60 @@ func _BackofficeAccount_Unbind2Fa_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAccountServer).Unbind2Fa(ctx, req.(*Unbind2FaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_Verify2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Verify2FaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).Verify2Fa(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_Verify2Fa_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).Verify2Fa(ctx, req.(*Verify2FaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_AdminReset2Fa_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminReset2FaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).AdminReset2Fa(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_AdminReset2Fa_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).AdminReset2Fa(ctx, req.(*AdminReset2FaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_Get2FaStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Get2FaStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).Get2FaStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_Get2FaStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).Get2FaStatus(ctx, req.(*Get2FaStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -946,6 +1054,18 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Unbind2fa",
 			Handler:    _BackofficeAccount_Unbind2Fa_Handler,
+		},
+		{
+			MethodName: "Verify2fa",
+			Handler:    _BackofficeAccount_Verify2Fa_Handler,
+		},
+		{
+			MethodName: "AdminReset2fa",
+			Handler:    _BackofficeAccount_AdminReset2Fa_Handler,
+		},
+		{
+			MethodName: "Get2faStatus",
+			Handler:    _BackofficeAccount_Get2FaStatus_Handler,
 		},
 		{
 			MethodName: "UpdateAccount",

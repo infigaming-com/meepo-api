@@ -132,6 +132,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse'
+    /v1/backoffice/accounts/2fa/admin-reset:
+        post:
+            tags:
+                - BackofficeAccount
+            description: Admin reset another user's 2FA
+            operationId: BackofficeAccount_AdminReset2Fa
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AdminReset2faRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AdminReset2faResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -168,6 +187,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.Generate2faResponse'
+    /v1/backoffice/accounts/2fa/status:
+        post:
+            tags:
+                - BackofficeAccount
+            description: Get 2FA status for current user
+            operationId: BackofficeAccount_Get2FaStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.Get2faStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.Get2faStatusResponse'
     /v1/backoffice/accounts/2fa/unbind:
         post:
             tags:
@@ -186,6 +224,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.Unbind2faResponse'
+    /v1/backoffice/accounts/2fa/verify:
+        post:
+            tags:
+                - BackofficeAccount
+            description: Verify 2FA code during login flow
+            operationId: BackofficeAccount_Verify2Fa
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.Verify2faRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.Verify2faResponse'
     /v1/backoffice/accounts/add:
         post:
             tags:
@@ -8744,6 +8801,16 @@ components:
         api.backoffice.service.v1.AddWalletCurrencyResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.AdminReset2faRequest:
+            type: object
+            properties:
+                targetUserId:
+                    type: string
+            description: AdminReset2faRequest - admin resets another user's 2FA
+        api.backoffice.service.v1.AdminReset2faResponse:
+            type: object
+            properties: {}
+            description: AdminReset2faResponse - empty response on success
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -9110,11 +9177,19 @@ components:
         api.backoffice.service.v1.Bind2faRequest:
             type: object
             properties:
-                token:
+                tempToken:
                     type: string
+                totpCode:
+                    type: string
+                secret:
+                    type: string
+            description: Bind2faRequest - binds 2FA to the user's account
         api.backoffice.service.v1.Bind2faResponse:
             type: object
-            properties: {}
+            properties:
+                token:
+                    type: string
+            description: Bind2faResponse - returns full access token after successful binding
         api.backoffice.service.v1.BindOperatorEmailDomainRequest:
             type: object
             properties:
@@ -9935,10 +10010,22 @@ components:
                     type: string
         api.backoffice.service.v1.Generate2faRequest:
             type: object
-            properties: {}
+            properties:
+                tempToken:
+                    type: string
+            description: |-
+                Generate2faRequest - request to generate a new 2FA secret
+                 Requires temp_token from login response when 2FA is not yet bound
         api.backoffice.service.v1.Generate2faResponse:
             type: object
-            properties: {}
+            properties:
+                secret:
+                    type: string
+                qrCodeUrl:
+                    type: string
+                issuer:
+                    type: string
+            description: Generate2faResponse - returns the 2FA secret and QR code URL
         api.backoffice.service.v1.GenerateOneTimePromoCodesRequest:
             type: object
             properties:
@@ -9963,6 +10050,18 @@ components:
                     items:
                         type: string
             description: Generate Codes for Campaign (universal only)
+        api.backoffice.service.v1.Get2faStatusRequest:
+            type: object
+            properties: {}
+            description: Get2faStatusRequest - get 2FA status for current user
+        api.backoffice.service.v1.Get2faStatusResponse:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                lastResetAt:
+                    type: string
+            description: Get2faStatusResponse - returns 2FA status
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
@@ -14612,10 +14711,18 @@ components:
                     type: string
                 password:
                     type: string
+                totpCode:
+                    type: string
         api.backoffice.service.v1.LoginResponse:
             type: object
             properties:
                 token:
+                    type: string
+                require2fa:
+                    type: boolean
+                twofaBound:
+                    type: boolean
+                tempToken:
                     type: string
         api.backoffice.service.v1.ManualCreditRequest:
             type: object
@@ -15234,11 +15341,13 @@ components:
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
-                token:
+                totpCode:
                     type: string
+            description: Unbind2faRequest - unbinds 2FA from current user's account (self-reset)
         api.backoffice.service.v1.Unbind2faResponse:
             type: object
             properties: {}
+            description: Unbind2faResponse - empty response on success
         api.backoffice.service.v1.UpdateAccountRequest:
             type: object
             properties:
@@ -15768,6 +15877,20 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.Verify2faRequest:
+            type: object
+            properties:
+                tempToken:
+                    type: string
+                totpCode:
+                    type: string
+            description: Verify2faRequest - verifies 2FA code during login
+        api.backoffice.service.v1.Verify2faResponse:
+            type: object
+            properties:
+                token:
+                    type: string
+            description: Verify2faResponse - returns full access token after successful verification
         api.backoffice.service.v1.VerifyEmailRequest:
             type: object
             properties:

@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeAccountAccountInfo = "/api.backoffice.service.v1.BackofficeAccount/AccountInfo"
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
+const OperationBackofficeAccountAdminReset2fa = "/api.backoffice.service.v1.BackofficeAccount/AdminReset2fa"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 const OperationBackofficeAccountCheckEmailExists = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
 const OperationBackofficeAccountCheckOperatorKeyExists = "/api.backoffice.service.v1.BackofficeAccount/CheckOperatorKeyExists"
@@ -28,6 +29,7 @@ const OperationBackofficeAccountCheckSubdomainExists = "/api.backoffice.service.
 const OperationBackofficeAccountCreateRole = "/api.backoffice.service.v1.BackofficeAccount/CreateRole"
 const OperationBackofficeAccountDeleteRole = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
 const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
+const OperationBackofficeAccountGet2faStatus = "/api.backoffice.service.v1.BackofficeAccount/Get2faStatus"
 const OperationBackofficeAccountListAccounts = "/api.backoffice.service.v1.BackofficeAccount/ListAccounts"
 const OperationBackofficeAccountListRoles = "/api.backoffice.service.v1.BackofficeAccount/ListRoles"
 const OperationBackofficeAccountLogin = "/api.backoffice.service.v1.BackofficeAccount/Login"
@@ -41,12 +43,15 @@ const OperationBackofficeAccountSendRegisterVerificationCode = "/api.backoffice.
 const OperationBackofficeAccountUnbind2fa = "/api.backoffice.service.v1.BackofficeAccount/Unbind2fa"
 const OperationBackofficeAccountUpdateAccount = "/api.backoffice.service.v1.BackofficeAccount/UpdateAccount"
 const OperationBackofficeAccountUpdateRole = "/api.backoffice.service.v1.BackofficeAccount/UpdateRole"
+const OperationBackofficeAccountVerify2fa = "/api.backoffice.service.v1.BackofficeAccount/Verify2fa"
 const OperationBackofficeAccountVerifyEmail = "/api.backoffice.service.v1.BackofficeAccount/VerifyEmail"
 const OperationBackofficeAccountVerifyMobile = "/api.backoffice.service.v1.BackofficeAccount/VerifyMobile"
 
 type BackofficeAccountHTTPServer interface {
 	AccountInfo(context.Context, *AccountInfoRequest) (*AccountInfoResponse, error)
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
+	// AdminReset2Fa Admin reset another user's 2FA
+	AdminReset2Fa(context.Context, *AdminReset2FaRequest) (*AdminReset2FaResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	// CheckEmailExists CheckEmailExists checks if the email exists in the user table.
 	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
@@ -57,6 +62,8 @@ type BackofficeAccountHTTPServer interface {
 	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
 	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
+	// Get2FaStatus Get 2FA status for current user
+	Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error)
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
@@ -72,6 +79,8 @@ type BackofficeAccountHTTPServer interface {
 	Unbind2Fa(context.Context, *Unbind2FaRequest) (*Unbind2FaResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
 	UpdateRole(context.Context, *UpdateRoleRequest) (*UpdateRoleResponse, error)
+	// Verify2Fa Verify 2FA code during login flow
+	Verify2Fa(context.Context, *Verify2FaRequest) (*Verify2FaResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	VerifyMobile(context.Context, *VerifyMobileRequest) (*VerifyMobileResponse, error)
 }
@@ -89,6 +98,9 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/2fa/generate", _BackofficeAccount_Generate2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/2fa/bind", _BackofficeAccount_Bind2Fa0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/2fa/unbind", _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/2fa/verify", _BackofficeAccount_Verify2Fa0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/2fa/admin-reset", _BackofficeAccount_AdminReset2Fa0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/2fa/status", _BackofficeAccount_Get2FaStatus0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/update", _BackofficeAccount_UpdateAccount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/login", _BackofficeAccount_Login1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/register", _BackofficeAccount_Register1_HTTP_Handler(srv))
@@ -342,6 +354,72 @@ func _BackofficeAccount_Unbind2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer)
 			return err
 		}
 		reply := out.(*Unbind2FaResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_Verify2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in Verify2FaRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountVerify2fa)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Verify2Fa(ctx, req.(*Verify2FaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*Verify2FaResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_AdminReset2Fa0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AdminReset2FaRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountAdminReset2fa)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AdminReset2Fa(ctx, req.(*AdminReset2FaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AdminReset2FaResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_Get2FaStatus0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in Get2FaStatusRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountGet2faStatus)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Get2FaStatus(ctx, req.(*Get2FaStatusRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*Get2FaStatusResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -635,6 +713,8 @@ func _BackofficeAccount_CheckOperatorKeyExists0_HTTP_Handler(srv BackofficeAccou
 type BackofficeAccountHTTPClient interface {
 	AccountInfo(ctx context.Context, req *AccountInfoRequest, opts ...http.CallOption) (rsp *AccountInfoResponse, err error)
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
+	// AdminReset2Fa Admin reset another user's 2FA
+	AdminReset2Fa(ctx context.Context, req *AdminReset2FaRequest, opts ...http.CallOption) (rsp *AdminReset2FaResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	// CheckEmailExists CheckEmailExists checks if the email exists in the user table.
 	CheckEmailExists(ctx context.Context, req *CheckEmailExistsRequest, opts ...http.CallOption) (rsp *CheckEmailExistsResponse, err error)
@@ -645,6 +725,8 @@ type BackofficeAccountHTTPClient interface {
 	CreateRole(ctx context.Context, req *CreateRoleRequest, opts ...http.CallOption) (rsp *CreateRoleResponse, err error)
 	DeleteRole(ctx context.Context, req *DeleteRoleRequest, opts ...http.CallOption) (rsp *DeleteRoleResponse, err error)
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
+	// Get2FaStatus Get 2FA status for current user
+	Get2FaStatus(ctx context.Context, req *Get2FaStatusRequest, opts ...http.CallOption) (rsp *Get2FaStatusResponse, err error)
 	ListAccounts(ctx context.Context, req *ListAccountsRequest, opts ...http.CallOption) (rsp *ListAccountsResponse, err error)
 	ListRoles(ctx context.Context, req *ListRolesRequest, opts ...http.CallOption) (rsp *ListRolesResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
@@ -660,6 +742,8 @@ type BackofficeAccountHTTPClient interface {
 	Unbind2Fa(ctx context.Context, req *Unbind2FaRequest, opts ...http.CallOption) (rsp *Unbind2FaResponse, err error)
 	UpdateAccount(ctx context.Context, req *UpdateAccountRequest, opts ...http.CallOption) (rsp *UpdateAccountResponse, err error)
 	UpdateRole(ctx context.Context, req *UpdateRoleRequest, opts ...http.CallOption) (rsp *UpdateRoleResponse, err error)
+	// Verify2Fa Verify 2FA code during login flow
+	Verify2Fa(ctx context.Context, req *Verify2FaRequest, opts ...http.CallOption) (rsp *Verify2FaResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 	VerifyMobile(ctx context.Context, req *VerifyMobileRequest, opts ...http.CallOption) (rsp *VerifyMobileResponse, err error)
 }
@@ -690,6 +774,20 @@ func (c *BackofficeAccountHTTPClientImpl) AddAccount(ctx context.Context, in *Ad
 	pattern := "/v1/backoffice/accounts/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountAddAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// AdminReset2Fa Admin reset another user's 2FA
+func (c *BackofficeAccountHTTPClientImpl) AdminReset2Fa(ctx context.Context, in *AdminReset2FaRequest, opts ...http.CallOption) (*AdminReset2FaResponse, error) {
+	var out AdminReset2FaResponse
+	pattern := "/v1/backoffice/accounts/2fa/admin-reset"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountAdminReset2fa))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -784,6 +882,20 @@ func (c *BackofficeAccountHTTPClientImpl) Generate2Fa(ctx context.Context, in *G
 	pattern := "/v1/backoffice/accounts/2fa/generate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountGenerate2fa))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// Get2FaStatus Get 2FA status for current user
+func (c *BackofficeAccountHTTPClientImpl) Get2FaStatus(ctx context.Context, in *Get2FaStatusRequest, opts ...http.CallOption) (*Get2FaStatusResponse, error) {
+	var out Get2FaStatusResponse
+	pattern := "/v1/backoffice/accounts/2fa/status"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountGet2faStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -955,6 +1067,20 @@ func (c *BackofficeAccountHTTPClientImpl) UpdateRole(ctx context.Context, in *Up
 	pattern := "/v1/backoffice/accounts/role/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountUpdateRole))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// Verify2Fa Verify 2FA code during login flow
+func (c *BackofficeAccountHTTPClientImpl) Verify2Fa(ctx context.Context, in *Verify2FaRequest, opts ...http.CallOption) (*Verify2FaResponse, error) {
+	var out Verify2FaResponse
+	pattern := "/v1/backoffice/accounts/2fa/verify"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountVerify2fa))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -421,6 +421,25 @@ service User {
 
 	// Privacy Settings APIs - Internal (for push-service batch lookup)
 	rpc GetUsersPrivacySettings(GetUsersPrivacySettingsRequest) returns (GetUsersPrivacySettingsResponse) {}
+
+	// ============ 2FA (Two-Factor Authentication) APIs ============
+	// Generate a new 2FA secret for a user (internal gRPC only)
+	rpc Generate2faSecret(Generate2faSecretRequest) returns (Generate2faSecretResponse) {}
+
+	// Bind 2FA to a user's account after verifying TOTP code (internal gRPC only)
+	rpc Bind2faSecret(Bind2faSecretRequest) returns (Bind2faSecretResponse) {}
+
+	// Verify a 2FA code for a user (internal gRPC only)
+	rpc Verify2faCode(Verify2faCodeRequest) returns (Verify2faCodeResponse) {}
+
+	// Reset 2FA for a user (internal gRPC only)
+	rpc Reset2fa(Reset2faRequest) returns (Reset2faResponse) {}
+
+	// Get 2FA status for a user (internal gRPC only)
+	rpc Get2faStatus(Get2faStatusRequest) returns (Get2faStatusResponse) {}
+
+	// Backoffice login with 2FA support (internal gRPC only)
+	rpc LoginWithInfoAnd2fa(LoginWithInfoAnd2faRequest) returns (LoginWithInfoAnd2faResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1858,4 +1877,96 @@ message GetUsersPrivacySettingsRequest {
 
 message GetUsersPrivacySettingsResponse {
 	map<int64, UserPrivacySettings> settings = 1; // user_id -> settings
+}
+
+// ============ 2FA (Two-Factor Authentication) Messages ============
+
+// Generate2faSecretRequest - request to generate a new 2FA secret
+message Generate2faSecretRequest {
+	int64 user_id = 1;
+	string email = 2;  // User's email for QR code label
+}
+
+// Generate2faSecretResponse - returns the generated secret and QR URL
+message Generate2faSecretResponse {
+	string secret = 1;       // Base32 encoded TOTP secret
+	string qr_code_url = 2;  // otpauth:// URL for QR code generation
+	string issuer = 3;       // Issuer name
+}
+
+// Bind2faSecretRequest - binds 2FA after verifying the code
+message Bind2faSecretRequest {
+	int64 user_id = 1;
+	string secret = 2;       // The secret to bind
+	string totp_code = 3;    // 6-digit TOTP code to verify
+}
+
+// Bind2faSecretResponse - empty on success
+message Bind2faSecretResponse {}
+
+// Verify2faCodeRequest - verifies a 2FA code
+message Verify2faCodeRequest {
+	int64 user_id = 1;
+	string totp_code = 2;    // 6-digit TOTP code
+}
+
+// Verify2faCodeResponse - returns whether the code is valid
+message Verify2faCodeResponse {
+	bool valid = 1;
+}
+
+// Reset2faRequest - resets 2FA for a user
+message Reset2faRequest {
+	int64 user_id = 1;           // Target user to reset
+	int64 operator_user_id = 2;  // User performing the reset (for admin reset)
+	bool is_self_reset = 3;      // True if user is resetting their own 2FA
+	string totp_code = 4;        // Required for self-reset
+}
+
+// Reset2faResponse - empty on success
+message Reset2faResponse {}
+
+// Get2faStatusRequest - get 2FA status for a user
+message Get2faStatusRequest {
+	int64 user_id = 1;
+}
+
+// Get2faStatusResponse - returns 2FA status
+message Get2faStatusResponse {
+	bool enabled = 1;           // Whether 2FA is enabled
+	int64 last_reset_at = 2;    // Timestamp of last 2FA reset (0 if never)
+}
+
+// LoginWithInfoAnd2faRequest - backoffice login request with 2FA support
+message LoginWithInfoAnd2faRequest {
+	// The type of identity provider to use for login.
+	PasswordProvider password_provider = 1;
+	// The identity (username, email, or mobile) to login with.
+	string auth_id = 2;
+	// The password for the account.
+	string password = 3;
+	// The operator context to login with.
+	api.common.OperatorContext operator_context = 4;
+	// Http request info.
+	HttpRequestInfo http_request_info = 5;
+	// Optional 2FA code (if user has 2FA enabled)
+	string totp_code = 6;
+}
+
+// LoginWithInfoAnd2faResponse - backoffice login response with 2FA status
+message LoginWithInfoAnd2faResponse {
+	// Full access token (only set when login complete)
+	string access_token = 1;
+	// Refresh token
+	string refresh_token = 2;
+	// Token expiry in seconds
+	int64 expires_in = 3;
+	// User info (only set when login complete)
+	UserInfo user_info = 4;
+	// Whether 2FA is required for this user
+	bool require_2fa = 5;
+	// Whether user has 2FA bound
+	bool twofa_bound = 6;
+	// Temporary token for 2FA flow (when require_2fa=true and full login not complete)
+	string temp_token = 7;
 }
