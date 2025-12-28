@@ -1039,6 +1039,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListPostbacksResponse'
+    /v1/backoffice/affiliate/postback/log/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListPostbackLogs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPostbackLogsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListPostbackLogsResponse'
     /v1/backoffice/affiliate/postback/update:
         post:
             tags:
@@ -8163,6 +8181,70 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.affiliate.service.v1.ListPostbackLogsResponse:
+            type: object
+            properties:
+                logs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListPostbackLogsResponse_PostbackLog'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListPostbackLogsResponse_PostbackLog:
+            type: object
+            properties:
+                logId:
+                    type: string
+                postbackId:
+                    type: string
+                postbackName:
+                    type: string
+                postbackUrl:
+                    type: string
+                actionType:
+                    type: string
+                requestMethod:
+                    type: string
+                httpStatusCode:
+                    type: integer
+                    format: int32
+                reason:
+                    type: string
+                success:
+                    type: boolean
+                attemptNumber:
+                    type: integer
+                    format: int32
+                eventId:
+                    type: string
+                userId:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.affiliate.service.v1.ListPostbacksResponse:
             type: object
             properties:
@@ -13302,6 +13384,25 @@ components:
                     type: string
                 ggrReportingCurrency:
                     type: string
+        api.backoffice.service.v1.ListPostbackLogsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListPostbacksRequest:
             type: object
             properties:
