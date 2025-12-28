@@ -157,6 +157,13 @@ service BackofficeAffiliate {
 		};
 	}
 
+	rpc ListPostbackLogs(ListPostbackLogsRequest) returns (api.affiliate.service.v1.ListPostbackLogsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/log/list"
+			body: "*"
+		};
+	}
+
 	// -------------- Affiliate Domain --------------
 
 	rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (api.affiliate.service.v1.ListAffiliateDomainsResponse) {
@@ -374,6 +381,15 @@ message ListPostbacksRequest {
     optional int32 page = 3;
     optional int32 page_size = 4;
     api.common.OperatorContextFilters operator_context_filters = 5;
+}
+
+message ListPostbackLogsRequest {
+    optional int64 affiliate_id = 1;
+    google.protobuf.Timestamp start_time = 2;
+    google.protobuf.Timestamp end_time = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+    api.common.OperatorContextFilters operator_context_filters = 6;
 }
 
 // -------------- Affiliate Domain --------------
