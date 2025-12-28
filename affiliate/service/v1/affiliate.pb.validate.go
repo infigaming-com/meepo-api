@@ -7593,6 +7593,8 @@ func (m *GetUserPromoConditionInfoResponse) validate(all bool) error {
 
 	// no validation rules for AffiliateId
 
+	// no validation rules for HasMetConversionConditions
+
 	if len(errors) > 0 {
 		return GetUserPromoConditionInfoResponseMultiError(errors)
 	}
