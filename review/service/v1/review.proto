@@ -33,6 +33,7 @@ service Review {
 
 message CreateWithdrawRequest {
 	google.protobuf.Struct request = 1;  // JSON data for REST API
+	api.common.OperatorContext operator_context = 2;
 }
 
 message CreateOperatorWithdrawRequest {

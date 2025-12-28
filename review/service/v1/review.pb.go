@@ -26,10 +26,11 @@ const (
 )
 
 type CreateWithdrawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Request       *structpb.Struct       `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"` // JSON data for REST API
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Request         *structpb.Struct        `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"` // JSON data for REST API
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateWithdrawRequest) Reset() {
@@ -65,6 +66,13 @@ func (*CreateWithdrawRequest) Descriptor() ([]byte, []int) {
 func (x *CreateWithdrawRequest) GetRequest() *structpb.Struct {
 	if x != nil {
 		return x.Request
+	}
+	return nil
+}
+
+func (x *CreateWithdrawRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -2759,9 +2767,10 @@ var File_review_service_v1_review_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
-	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"J\n" +
+	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x92\x01\n" +
 	"\x15CreateWithdrawRequest\x121\n" +
-	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"\xbe\x01\n" +
+	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xbe\x01\n" +
 	"\x1dCreateOperatorWithdrawRequest\x12\"\n" +
 	"\radmin_user_id\x18\x01 \x01(\x03R\vadminUserId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x121\n" +
@@ -3112,65 +3121,66 @@ var file_review_service_v1_review_proto_goTypes = []any{
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
 	29, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
-	30, // 1: api.review.service.v1.CreateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	29, // 2: api.review.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
-	30, // 3: api.review.service.v1.ReviewTicketRequest.operator_context:type_name -> api.common.OperatorContext
-	30, // 4: api.review.service.v1.ListTicketsRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 5: api.review.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 6: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	32, // 7: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	30, // 8: api.review.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 9: api.review.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 10: api.review.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	32, // 11: api.review.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	16, // 12: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
-	30, // 13: api.review.service.v1.GetTicketRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 14: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
-	18, // 15: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
-	19, // 16: api.review.service.v1.GetTicketResponse.user_info:type_name -> api.review.service.v1.GetTicketResponse.UserInfo
-	20, // 17: api.review.service.v1.GetTicketResponse.payment_transaction_info:type_name -> api.review.service.v1.GetTicketResponse.PaymentTransactionInfo
-	21, // 18: api.review.service.v1.GetTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetTicketResponse.WalletTransactionInfo
-	22, // 19: api.review.service.v1.GetTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetTicketResponse.WalletTransactionSummary
-	30, // 20: api.review.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
-	23, // 21: api.review.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.review.service.v1.GetOperatorTicketResponse.Ticket
-	24, // 22: api.review.service.v1.GetOperatorTicketResponse.comments:type_name -> api.review.service.v1.GetOperatorTicketResponse.Comment
-	25, // 23: api.review.service.v1.GetOperatorTicketResponse.payment_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo
-	26, // 24: api.review.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
-	27, // 25: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
-	28, // 26: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
-	32, // 27: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	32, // 28: api.review.service.v1.GetTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	32, // 29: api.review.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	29, // 30: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.extra:type_name -> google.protobuf.Struct
-	33, // 31: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.schema:type_name -> google.protobuf.ListValue
-	32, // 32: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	32, // 33: api.review.service.v1.GetTicketResponse.WalletTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	32, // 34: api.review.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	32, // 35: api.review.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	32, // 36: api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 37: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	1,  // 38: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateOperatorWithdrawRequest
-	3,  // 39: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	5,  // 40: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	7,  // 41: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
-	9,  // 42: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	10, // 43: api.review.service.v1.Review.ListOperatorTickets:input_type -> api.review.service.v1.ListOperatorTicketsRequest
-	12, // 44: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	14, // 45: api.review.service.v1.Review.GetOperatorTicket:input_type -> api.review.service.v1.GetOperatorTicketRequest
-	2,  // 46: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	2,  // 47: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	4,  // 48: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	6,  // 49: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	8,  // 50: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
-	11, // 51: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	11, // 52: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	13, // 53: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	15, // 54: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
-	46, // [46:55] is the sub-list for method output_type
-	37, // [37:46] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	30, // 1: api.review.service.v1.CreateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	30, // 2: api.review.service.v1.CreateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	29, // 3: api.review.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
+	30, // 4: api.review.service.v1.ReviewTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	30, // 5: api.review.service.v1.ListTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	31, // 6: api.review.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 7: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	32, // 8: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	30, // 9: api.review.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	31, // 10: api.review.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 11: api.review.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	32, // 12: api.review.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	16, // 13: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
+	30, // 14: api.review.service.v1.GetTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 15: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
+	18, // 16: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
+	19, // 17: api.review.service.v1.GetTicketResponse.user_info:type_name -> api.review.service.v1.GetTicketResponse.UserInfo
+	20, // 18: api.review.service.v1.GetTicketResponse.payment_transaction_info:type_name -> api.review.service.v1.GetTicketResponse.PaymentTransactionInfo
+	21, // 19: api.review.service.v1.GetTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetTicketResponse.WalletTransactionInfo
+	22, // 20: api.review.service.v1.GetTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetTicketResponse.WalletTransactionSummary
+	30, // 21: api.review.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 22: api.review.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.review.service.v1.GetOperatorTicketResponse.Ticket
+	24, // 23: api.review.service.v1.GetOperatorTicketResponse.comments:type_name -> api.review.service.v1.GetOperatorTicketResponse.Comment
+	25, // 24: api.review.service.v1.GetOperatorTicketResponse.payment_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo
+	26, // 25: api.review.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
+	27, // 26: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
+	28, // 27: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
+	32, // 28: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	32, // 29: api.review.service.v1.GetTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	32, // 30: api.review.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	29, // 31: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.extra:type_name -> google.protobuf.Struct
+	33, // 32: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.schema:type_name -> google.protobuf.ListValue
+	32, // 33: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	32, // 34: api.review.service.v1.GetTicketResponse.WalletTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	32, // 35: api.review.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	32, // 36: api.review.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	32, // 37: api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 38: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	1,  // 39: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateOperatorWithdrawRequest
+	3,  // 40: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	5,  // 41: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	7,  // 42: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
+	9,  // 43: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	10, // 44: api.review.service.v1.Review.ListOperatorTickets:input_type -> api.review.service.v1.ListOperatorTicketsRequest
+	12, // 45: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	14, // 46: api.review.service.v1.Review.GetOperatorTicket:input_type -> api.review.service.v1.GetOperatorTicketRequest
+	2,  // 47: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	2,  // 48: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	4,  // 49: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	6,  // 50: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	8,  // 51: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
+	11, // 52: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	11, // 53: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	13, // 54: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	15, // 55: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
+	47, // [47:56] is the sub-list for method output_type
+	38, // [38:47] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_review_service_v1_review_proto_init() }

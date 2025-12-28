@@ -17850,6 +17850,8 @@ components:
             properties:
                 request:
                     type: object
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.review.service.v1.CreateWithdrawResponse:
             type: object
             properties:
