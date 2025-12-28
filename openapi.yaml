@@ -16337,6 +16337,21 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
+        api.common.UserInfo:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                roleId:
+                    type: string
         api.game.service.v1.Action:
             type: object
             properties:
@@ -17852,6 +17867,8 @@ components:
                     type: object
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                userInfo:
+                    $ref: '#/components/schemas/api.common.UserInfo'
         api.review.service.v1.CreateWithdrawResponse:
             type: object
             properties:
