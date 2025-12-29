@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package api.crm.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/crm/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.crm.service.v1";
+
+// CRM event service for internal event handling
+service CRMEvent {
+  rpc Event (EventRequest) returns (EventResponse) {}
+}
+
+message EventRequest {
+  string subscription_id = 1;
+  bytes event_data = 2;
+  string message_id = 3;
+}
+
+message EventResponse {}
+
+// SegmentMembershipChangedEvent is emitted when a user enters or leaves a segment
+message SegmentMembershipChangedEvent {
+  int64 segment_id = 1;
+  string segment_key = 2;
+  int64 user_id = 3;
+  api.common.OperatorContext operator_context = 4;
+  string action = 5; // "entered" or "left"
+  int64 timestamp = 6;
+}
+
+// SegmentCalculationCompletedEvent is emitted when batch calculation finishes
+message SegmentCalculationCompletedEvent {
+  int64 segment_id = 1;
+  string segment_key = 2;
+  api.common.OperatorContext operator_context = 3;
+  int64 users_matched = 4;
+  int64 users_added = 5;
+  int64 users_removed = 6;
+  int64 duration_ms = 7;
+  int64 timestamp = 8;
+}
