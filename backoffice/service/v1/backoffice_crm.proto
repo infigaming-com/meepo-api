@@ -1,0 +1,179 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "common/common.proto";
+import "crm/service/v1/crm.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// CRM segment management service for backoffice
+service BackofficeCrm {
+  // Segment CRUD operations
+  rpc CreateSegment(CreateSegmentRequest) returns (api.crm.service.v1.CreateSegmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateSegment(UpdateSegmentRequest) returns (api.crm.service.v1.UpdateSegmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/update"
+      body: "*"
+    };
+  }
+
+  rpc GetSegment(GetSegmentRequest) returns (api.crm.service.v1.GetSegmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/get"
+      body: "*"
+    };
+  }
+
+  rpc ListSegments(ListSegmentsRequest) returns (api.crm.service.v1.ListSegmentsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/list"
+      body: "*"
+    };
+  }
+
+  rpc DeleteSegment(DeleteSegmentRequest) returns (api.crm.service.v1.DeleteSegmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/delete"
+      body: "*"
+    };
+  }
+
+  // Segment calculation
+  rpc CalculateSegment(CalculateSegmentRequest) returns (api.crm.service.v1.CalculateSegmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/calculate"
+      body: "*"
+    };
+  }
+
+  rpc GetSegmentUsers(GetSegmentUsersRequest) returns (api.crm.service.v1.GetSegmentUsersResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/users"
+      body: "*"
+    };
+  }
+
+  rpc GetUserSegments(GetUserSegmentsRequest) returns (api.crm.service.v1.GetUserSegmentsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/user/segments"
+      body: "*"
+    };
+  }
+
+  // Segment override (for inheritance control)
+  rpc SetSegmentOverride(SetSegmentOverrideRequest) returns (api.crm.service.v1.SetSegmentOverrideResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/override/set"
+      body: "*"
+    };
+  }
+
+  rpc GetSegmentOverride(GetSegmentOverrideRequest) returns (api.crm.service.v1.GetSegmentOverrideResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/override/get"
+      body: "*"
+    };
+  }
+
+  // Schema API for frontend query builder
+  rpc GetSegmentFieldSchema(GetSegmentFieldSchemaRequest) returns (api.crm.service.v1.GetSegmentFieldSchemaResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/schema"
+      body: "*"
+    };
+  }
+}
+
+// CreateSegment
+message CreateSegmentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string segment_key = 2;
+  string name = 3;
+  string description = 4;
+  api.crm.service.v1.SegmentType type = 5;
+  google.protobuf.Struct rules = 6;
+  bool enabled = 7;
+}
+
+// UpdateSegment
+message UpdateSegmentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string name = 3;
+  optional string description = 4;
+  optional google.protobuf.Struct rules = 5;
+  optional bool enabled = 6;
+}
+
+// GetSegment
+message GetSegmentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ListSegments
+message ListSegmentsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional api.crm.service.v1.SegmentType type = 2;
+  optional bool enabled = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+  bool include_inherited = 6;
+}
+
+// DeleteSegment
+message DeleteSegmentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// CalculateSegment
+message CalculateSegmentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// GetSegmentUsers
+message GetSegmentUsersRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 segment_id = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  bool only_current_members = 5;
+}
+
+// GetUserSegments
+message GetUserSegmentsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 user_id = 2;
+  bool only_current_memberships = 3;
+}
+
+// SetSegmentOverride
+message SetSegmentOverrideRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 segment_id = 2;
+  bool disabled = 3;
+}
+
+// GetSegmentOverride
+message GetSegmentOverrideRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 segment_id = 2;
+}
+
+// GetSegmentFieldSchema
+message GetSegmentFieldSchemaRequest {
+  api.crm.service.v1.SegmentType type = 1;
+}
