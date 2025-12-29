@@ -482,3 +482,144 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AddOperatorEventValidationError{}
+
+// Validate checks the field values on UserStatusUpdateEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserStatusUpdateEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserStatusUpdateEvent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserStatusUpdateEventMultiError, or nil if none found.
+func (m *UserStatusUpdateEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserStatusUpdateEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserStatusUpdateEventValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserStatusUpdateEventValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserStatusUpdateEventValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Field
+
+	// no validation rules for OldValue
+
+	// no validation rules for NewValue
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return UserStatusUpdateEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserStatusUpdateEventMultiError is an error wrapping multiple validation
+// errors returned by UserStatusUpdateEvent.ValidateAll() if the designated
+// constraints aren't met.
+type UserStatusUpdateEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserStatusUpdateEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserStatusUpdateEventMultiError) AllErrors() []error { return m }
+
+// UserStatusUpdateEventValidationError is the validation error returned by
+// UserStatusUpdateEvent.Validate if the designated constraints aren't met.
+type UserStatusUpdateEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserStatusUpdateEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserStatusUpdateEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserStatusUpdateEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserStatusUpdateEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserStatusUpdateEventValidationError) ErrorName() string {
+	return "UserStatusUpdateEventValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserStatusUpdateEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserStatusUpdateEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserStatusUpdateEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserStatusUpdateEventValidationError{}
