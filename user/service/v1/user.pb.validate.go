@@ -25555,6 +25555,222 @@ var _ interface {
 	ErrorName() string
 } = LoginWithInfoAnd2FaResponseValidationError{}
 
+// Validate checks the field values on Bind2FaWithTempTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *Bind2FaWithTempTokenRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Bind2FaWithTempTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Bind2FaWithTempTokenRequestMultiError, or nil if none found.
+func (m *Bind2FaWithTempTokenRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Bind2FaWithTempTokenRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TempToken
+
+	// no validation rules for Secret
+
+	// no validation rules for TotpCode
+
+	if len(errors) > 0 {
+		return Bind2FaWithTempTokenRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// Bind2FaWithTempTokenRequestMultiError is an error wrapping multiple
+// validation errors returned by Bind2FaWithTempTokenRequest.ValidateAll() if
+// the designated constraints aren't met.
+type Bind2FaWithTempTokenRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Bind2FaWithTempTokenRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Bind2FaWithTempTokenRequestMultiError) AllErrors() []error { return m }
+
+// Bind2FaWithTempTokenRequestValidationError is the validation error returned
+// by Bind2FaWithTempTokenRequest.Validate if the designated constraints
+// aren't met.
+type Bind2FaWithTempTokenRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Bind2FaWithTempTokenRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Bind2FaWithTempTokenRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Bind2FaWithTempTokenRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Bind2FaWithTempTokenRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Bind2FaWithTempTokenRequestValidationError) ErrorName() string {
+	return "Bind2FaWithTempTokenRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Bind2FaWithTempTokenRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBind2FaWithTempTokenRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Bind2FaWithTempTokenRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Bind2FaWithTempTokenRequestValidationError{}
+
+// Validate checks the field values on Verify2FaWithTempTokenRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *Verify2FaWithTempTokenRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Verify2FaWithTempTokenRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// Verify2FaWithTempTokenRequestMultiError, or nil if none found.
+func (m *Verify2FaWithTempTokenRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Verify2FaWithTempTokenRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TempToken
+
+	// no validation rules for TotpCode
+
+	if len(errors) > 0 {
+		return Verify2FaWithTempTokenRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// Verify2FaWithTempTokenRequestMultiError is an error wrapping multiple
+// validation errors returned by Verify2FaWithTempTokenRequest.ValidateAll()
+// if the designated constraints aren't met.
+type Verify2FaWithTempTokenRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Verify2FaWithTempTokenRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Verify2FaWithTempTokenRequestMultiError) AllErrors() []error { return m }
+
+// Verify2FaWithTempTokenRequestValidationError is the validation error
+// returned by Verify2FaWithTempTokenRequest.Validate if the designated
+// constraints aren't met.
+type Verify2FaWithTempTokenRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Verify2FaWithTempTokenRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Verify2FaWithTempTokenRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Verify2FaWithTempTokenRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Verify2FaWithTempTokenRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Verify2FaWithTempTokenRequestValidationError) ErrorName() string {
+	return "Verify2FaWithTempTokenRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e Verify2FaWithTempTokenRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerify2FaWithTempTokenRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Verify2FaWithTempTokenRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Verify2FaWithTempTokenRequestValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

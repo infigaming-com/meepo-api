@@ -440,6 +440,10 @@ service User {
 
 	// Backoffice login with 2FA support (internal gRPC only)
 	rpc LoginWithInfoAnd2fa(LoginWithInfoAnd2faRequest) returns (LoginWithInfoAnd2faResponse) {}
+	// Bind 2FA using temp token and return full login response (internal gRPC only)
+	rpc Bind2FaWithTempToken(Bind2FaWithTempTokenRequest) returns (LoginWithInfoAnd2faResponse) {}
+	// Verify 2FA using temp token and return full login response (internal gRPC only)
+	rpc Verify2FaWithTempToken(Verify2FaWithTempTokenRequest) returns (LoginWithInfoAnd2faResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1969,4 +1973,17 @@ message LoginWithInfoAnd2faResponse {
 	bool twofa_bound = 6;
 	// Temporary token for 2FA flow (when require_2fa=true and full login not complete)
 	string temp_token = 7;
+}
+
+// Bind2FaWithTempTokenRequest - bind 2FA using temp token
+message Bind2FaWithTempTokenRequest {
+	string temp_token = 1;  // Temporary token from login response
+	string secret = 2;      // The 2FA secret to bind
+	string totp_code = 3;   // 6-digit TOTP code to verify
+}
+
+// Verify2FaWithTempTokenRequest - verify 2FA using temp token
+message Verify2FaWithTempTokenRequest {
+	string temp_token = 1;  // Temporary token from login response
+	string totp_code = 2;   // 6-digit TOTP code to verify
 }
