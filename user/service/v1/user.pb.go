@@ -12018,6 +12018,120 @@ func (x *LoginWithInfoAnd2FaResponse) GetTempToken() string {
 	return ""
 }
 
+// Bind2FaWithTempTokenRequest - bind 2FA using temp token
+type Bind2FaWithTempTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TempToken     string                 `protobuf:"bytes,1,opt,name=temp_token,json=tempToken,proto3" json:"temp_token,omitempty"` // Temporary token from login response
+	Secret        string                 `protobuf:"bytes,2,opt,name=secret,proto3" json:"secret,omitempty"`                        // The 2FA secret to bind
+	TotpCode      string                 `protobuf:"bytes,3,opt,name=totp_code,json=totpCode,proto3" json:"totp_code,omitempty"`    // 6-digit TOTP code to verify
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Bind2FaWithTempTokenRequest) Reset() {
+	*x = Bind2FaWithTempTokenRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[196]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Bind2FaWithTempTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Bind2FaWithTempTokenRequest) ProtoMessage() {}
+
+func (x *Bind2FaWithTempTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[196]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Bind2FaWithTempTokenRequest.ProtoReflect.Descriptor instead.
+func (*Bind2FaWithTempTokenRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{196}
+}
+
+func (x *Bind2FaWithTempTokenRequest) GetTempToken() string {
+	if x != nil {
+		return x.TempToken
+	}
+	return ""
+}
+
+func (x *Bind2FaWithTempTokenRequest) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+func (x *Bind2FaWithTempTokenRequest) GetTotpCode() string {
+	if x != nil {
+		return x.TotpCode
+	}
+	return ""
+}
+
+// Verify2FaWithTempTokenRequest - verify 2FA using temp token
+type Verify2FaWithTempTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TempToken     string                 `protobuf:"bytes,1,opt,name=temp_token,json=tempToken,proto3" json:"temp_token,omitempty"` // Temporary token from login response
+	TotpCode      string                 `protobuf:"bytes,2,opt,name=totp_code,json=totpCode,proto3" json:"totp_code,omitempty"`    // 6-digit TOTP code to verify
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Verify2FaWithTempTokenRequest) Reset() {
+	*x = Verify2FaWithTempTokenRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[197]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Verify2FaWithTempTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Verify2FaWithTempTokenRequest) ProtoMessage() {}
+
+func (x *Verify2FaWithTempTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[197]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Verify2FaWithTempTokenRequest.ProtoReflect.Descriptor instead.
+func (*Verify2FaWithTempTokenRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{197}
+}
+
+func (x *Verify2FaWithTempTokenRequest) GetTempToken() string {
+	if x != nil {
+		return x.TempToken
+	}
+	return ""
+}
+
+func (x *Verify2FaWithTempTokenRequest) GetTotpCode() string {
+	if x != nil {
+		return x.TotpCode
+	}
+	return ""
+}
+
 type ListUsersResponse_User struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
 	OperatorName              string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
@@ -12057,7 +12171,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_user_service_v1_user_proto_msgTypes[196]
+	mi := &file_user_service_v1_user_proto_msgTypes[198]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12069,7 +12183,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[196]
+	mi := &file_user_service_v1_user_proto_msgTypes[198]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12280,7 +12394,7 @@ type GetCommentsByUserIdResponse_Comment struct {
 
 func (x *GetCommentsByUserIdResponse_Comment) Reset() {
 	*x = GetCommentsByUserIdResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[197]
+	mi := &file_user_service_v1_user_proto_msgTypes[199]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12292,7 +12406,7 @@ func (x *GetCommentsByUserIdResponse_Comment) String() string {
 func (*GetCommentsByUserIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[197]
+	mi := &file_user_service_v1_user_proto_msgTypes[199]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12354,7 +12468,7 @@ type GetUserProfileResponse_IpInfo struct {
 
 func (x *GetUserProfileResponse_IpInfo) Reset() {
 	*x = GetUserProfileResponse_IpInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[198]
+	mi := &file_user_service_v1_user_proto_msgTypes[200]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12366,7 +12480,7 @@ func (x *GetUserProfileResponse_IpInfo) String() string {
 func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[198]
+	mi := &file_user_service_v1_user_proto_msgTypes[200]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12421,7 +12535,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[199]
+	mi := &file_user_service_v1_user_proto_msgTypes[201]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12433,7 +12547,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[199]
+	mi := &file_user_service_v1_user_proto_msgTypes[201]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12536,7 +12650,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[200]
+	mi := &file_user_service_v1_user_proto_msgTypes[202]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12548,7 +12662,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[200]
+	mi := &file_user_service_v1_user_proto_msgTypes[202]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12640,7 +12754,7 @@ type GetUserProfileResponse_Comment struct {
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[201]
+	mi := &file_user_service_v1_user_proto_msgTypes[203]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12652,7 +12766,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[201]
+	mi := &file_user_service_v1_user_proto_msgTypes[203]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12716,7 +12830,7 @@ type GetUserProfileResponse_ChangeRecord struct {
 
 func (x *GetUserProfileResponse_ChangeRecord) Reset() {
 	*x = GetUserProfileResponse_ChangeRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[202]
+	mi := &file_user_service_v1_user_proto_msgTypes[204]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12728,7 +12842,7 @@ func (x *GetUserProfileResponse_ChangeRecord) String() string {
 func (*GetUserProfileResponse_ChangeRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_ChangeRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[202]
+	mi := &file_user_service_v1_user_proto_msgTypes[204]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12789,7 +12903,7 @@ type GetOverviewDashboardFromUserResponse_RegisteredUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_RegisteredUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[203]
+	mi := &file_user_service_v1_user_proto_msgTypes[205]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12801,7 +12915,7 @@ func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[203]
+	mi := &file_user_service_v1_user_proto_msgTypes[205]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12841,7 +12955,7 @@ type GetOverviewDashboardFromUserResponse_FirstDepositUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_FirstDepositUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[204]
+	mi := &file_user_service_v1_user_proto_msgTypes[206]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12853,7 +12967,7 @@ func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) String() string
 func (*GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[204]
+	mi := &file_user_service_v1_user_proto_msgTypes[206]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12893,7 +13007,7 @@ type GetOverviewDashboardFromUserResponse_ActiveUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_ActiveUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[205]
+	mi := &file_user_service_v1_user_proto_msgTypes[207]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12905,7 +13019,7 @@ func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[205]
+	mi := &file_user_service_v1_user_proto_msgTypes[207]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12946,7 +13060,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[206]
+	mi := &file_user_service_v1_user_proto_msgTypes[208]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12958,7 +13072,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[206]
+	mi := &file_user_service_v1_user_proto_msgTypes[208]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13006,7 +13120,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[207]
+	mi := &file_user_service_v1_user_proto_msgTypes[209]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13018,7 +13132,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[207]
+	mi := &file_user_service_v1_user_proto_msgTypes[209]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13069,7 +13183,7 @@ type ListAllOperatorsResponse_Operator struct {
 
 func (x *ListAllOperatorsResponse_Operator) Reset() {
 	*x = ListAllOperatorsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[208]
+	mi := &file_user_service_v1_user_proto_msgTypes[210]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13081,7 +13195,7 @@ func (x *ListAllOperatorsResponse_Operator) String() string {
 func (*ListAllOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListAllOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[208]
+	mi := &file_user_service_v1_user_proto_msgTypes[210]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13156,7 +13270,7 @@ type ListRetailerOperatorsResponse_OperatorInfo struct {
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListRetailerOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[209]
+	mi := &file_user_service_v1_user_proto_msgTypes[211]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13168,7 +13282,7 @@ func (x *ListRetailerOperatorsResponse_OperatorInfo) String() string {
 func (*ListRetailerOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[209]
+	mi := &file_user_service_v1_user_proto_msgTypes[211]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13256,7 +13370,7 @@ type ListCompanyOperatorsResponse_OperatorInfo struct {
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListCompanyOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[210]
+	mi := &file_user_service_v1_user_proto_msgTypes[212]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13268,7 +13382,7 @@ func (x *ListCompanyOperatorsResponse_OperatorInfo) String() string {
 func (*ListCompanyOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[210]
+	mi := &file_user_service_v1_user_proto_msgTypes[212]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13350,7 +13464,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListBottomOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[211]
+	mi := &file_user_service_v1_user_proto_msgTypes[213]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13362,7 +13476,7 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) String() string {
 func (*ListBottomOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[211]
+	mi := &file_user_service_v1_user_proto_msgTypes[213]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13444,7 +13558,7 @@ type ResponsibleGamblingConfig_SelfExclusion struct {
 
 func (x *ResponsibleGamblingConfig_SelfExclusion) Reset() {
 	*x = ResponsibleGamblingConfig_SelfExclusion{}
-	mi := &file_user_service_v1_user_proto_msgTypes[212]
+	mi := &file_user_service_v1_user_proto_msgTypes[214]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13456,7 +13570,7 @@ func (x *ResponsibleGamblingConfig_SelfExclusion) String() string {
 func (*ResponsibleGamblingConfig_SelfExclusion) ProtoMessage() {}
 
 func (x *ResponsibleGamblingConfig_SelfExclusion) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[212]
+	mi := &file_user_service_v1_user_proto_msgTypes[214]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13496,7 +13610,7 @@ type ResponsibleGamblingConfig_BreakInPlay struct {
 
 func (x *ResponsibleGamblingConfig_BreakInPlay) Reset() {
 	*x = ResponsibleGamblingConfig_BreakInPlay{}
-	mi := &file_user_service_v1_user_proto_msgTypes[213]
+	mi := &file_user_service_v1_user_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13508,7 +13622,7 @@ func (x *ResponsibleGamblingConfig_BreakInPlay) String() string {
 func (*ResponsibleGamblingConfig_BreakInPlay) ProtoMessage() {}
 
 func (x *ResponsibleGamblingConfig_BreakInPlay) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[213]
+	mi := &file_user_service_v1_user_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13549,7 +13663,7 @@ type ResponsibleGamblingConfig_TimeLimits struct {
 
 func (x *ResponsibleGamblingConfig_TimeLimits) Reset() {
 	*x = ResponsibleGamblingConfig_TimeLimits{}
-	mi := &file_user_service_v1_user_proto_msgTypes[214]
+	mi := &file_user_service_v1_user_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13561,7 +13675,7 @@ func (x *ResponsibleGamblingConfig_TimeLimits) String() string {
 func (*ResponsibleGamblingConfig_TimeLimits) ProtoMessage() {}
 
 func (x *ResponsibleGamblingConfig_TimeLimits) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[214]
+	mi := &file_user_service_v1_user_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13609,7 +13723,7 @@ type ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist struct {
 
 func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) Reset() {
 	*x = ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist{}
-	mi := &file_user_service_v1_user_proto_msgTypes[215]
+	mi := &file_user_service_v1_user_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13621,7 +13735,7 @@ func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) String() str
 func (*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) ProtoMessage() {}
 
 func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[215]
+	mi := &file_user_service_v1_user_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14772,7 +14886,16 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\vtwofa_bound\x18\x06 \x01(\bR\n" +
 	"twofaBound\x12\x1d\n" +
 	"\n" +
-	"temp_token\x18\a \x01(\tR\ttempToken*j\n" +
+	"temp_token\x18\a \x01(\tR\ttempToken\"q\n" +
+	"\x1bBind2FaWithTempTokenRequest\x12\x1d\n" +
+	"\n" +
+	"temp_token\x18\x01 \x01(\tR\ttempToken\x12\x16\n" +
+	"\x06secret\x18\x02 \x01(\tR\x06secret\x12\x1b\n" +
+	"\ttotp_code\x18\x03 \x01(\tR\btotpCode\"[\n" +
+	"\x1dVerify2FaWithTempTokenRequest\x12\x1d\n" +
+	"\n" +
+	"temp_token\x18\x01 \x01(\tR\ttempToken\x12\x1b\n" +
+	"\ttotp_code\x18\x02 \x01(\tR\btotpCode*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -14792,7 +14915,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xfca\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xfdc\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -14892,7 +15015,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\rVerify2faCode\x12).api.user.service.v1.Verify2faCodeRequest\x1a*.api.user.service.v1.Verify2faCodeResponse\"\x00\x12Y\n" +
 	"\bReset2fa\x12$.api.user.service.v1.Reset2faRequest\x1a%.api.user.service.v1.Reset2faResponse\"\x00\x12e\n" +
 	"\fGet2faStatus\x12(.api.user.service.v1.Get2faStatusRequest\x1a).api.user.service.v1.Get2faStatusResponse\"\x00\x12z\n" +
-	"\x13LoginWithInfoAnd2fa\x12/.api.user.service.v1.LoginWithInfoAnd2faRequest\x1a0.api.user.service.v1.LoginWithInfoAnd2faResponse\"\x00BO\n" +
+	"\x13LoginWithInfoAnd2fa\x12/.api.user.service.v1.LoginWithInfoAnd2faRequest\x1a0.api.user.service.v1.LoginWithInfoAnd2faResponse\"\x00\x12|\n" +
+	"\x14Bind2FaWithTempToken\x120.api.user.service.v1.Bind2FaWithTempTokenRequest\x1a0.api.user.service.v1.LoginWithInfoAnd2faResponse\"\x00\x12\x80\x01\n" +
+	"\x16Verify2FaWithTempToken\x122.api.user.service.v1.Verify2FaWithTempTokenRequest\x1a0.api.user.service.v1.LoginWithInfoAnd2faResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -14908,7 +15033,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 221)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 223)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                                                     // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                                             // 1: api.user.service.v1.PasswordProvider
@@ -15110,215 +15235,217 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*Get2FaStatusResponse)(nil),                                      // 197: api.user.service.v1.Get2faStatusResponse
 	(*LoginWithInfoAnd2FaRequest)(nil),                                // 198: api.user.service.v1.LoginWithInfoAnd2faRequest
 	(*LoginWithInfoAnd2FaResponse)(nil),                               // 199: api.user.service.v1.LoginWithInfoAnd2faResponse
-	(*ListUsersResponse_User)(nil),                                    // 200: api.user.service.v1.ListUsersResponse.User
-	(*GetCommentsByUserIdResponse_Comment)(nil),                       // 201: api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	(*GetUserProfileResponse_IpInfo)(nil),                             // 202: api.user.service.v1.GetUserProfileResponse.IpInfo
-	(*GetUserProfileResponse_RegistrationRecord)(nil),                 // 203: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),                        // 204: api.user.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),                            // 205: api.user.service.v1.GetUserProfileResponse.Comment
-	(*GetUserProfileResponse_ChangeRecord)(nil),                       // 206: api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),      // 207: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil),    // 208: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),          // 209: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	(*GetOperatorResponse_Operator)(nil),                              // 210: api.user.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),                        // 211: api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	(*ListAllOperatorsResponse_Operator)(nil),                         // 212: api.user.service.v1.ListAllOperatorsResponse.Operator
-	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),                // 213: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),                 // 214: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	(*ListBottomOperatorsResponse_OperatorInfo)(nil),                  // 215: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	(*ResponsibleGamblingConfig_SelfExclusion)(nil),                   // 216: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
-	(*ResponsibleGamblingConfig_BreakInPlay)(nil),                     // 217: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
-	(*ResponsibleGamblingConfig_TimeLimits)(nil),                      // 218: api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
-	(*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist)(nil), // 219: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
-	nil,                                   // 220: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
-	nil,                                   // 221: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
-	nil,                                   // 222: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
-	nil,                                   // 223: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
-	nil,                                   // 224: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
-	(*timestamppb.Timestamp)(nil),         // 225: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),        // 226: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil), // 227: api.common.OperatorContextFilters
-	(v1.VipRewardKind)(0),                 // 228: api.vip.service.v1.VipRewardKind
-	(*v1.GetOperatorVipSettingsResponse)(nil), // 229: api.vip.service.v1.GetOperatorVipSettingsResponse
-	(*v1.GetUserVipLevelResponse)(nil),        // 230: api.vip.service.v1.GetUserVipLevelResponse
-	(*v1.UpdateVipRewardSliderResponse)(nil),  // 231: api.vip.service.v1.UpdateVipRewardSliderResponse
-	(*v1.GetClaimableVipRewardsResponse)(nil), // 232: api.vip.service.v1.GetClaimableVipRewardsResponse
-	(*v1.ClaimVipRewardResponse)(nil),         // 233: api.vip.service.v1.ClaimVipRewardResponse
-	(*v1.ConfirmClaimVipRewardResponse)(nil),  // 234: api.vip.service.v1.ConfirmClaimVipRewardResponse
-	(*v1.RequestDailyLossbackResponse)(nil),   // 235: api.vip.service.v1.RequestDailyLossbackResponse
-	(*v1.GetDailyLossbackStatusResponse)(nil), // 236: api.vip.service.v1.GetDailyLossbackStatusResponse
+	(*Bind2FaWithTempTokenRequest)(nil),                               // 200: api.user.service.v1.Bind2FaWithTempTokenRequest
+	(*Verify2FaWithTempTokenRequest)(nil),                             // 201: api.user.service.v1.Verify2FaWithTempTokenRequest
+	(*ListUsersResponse_User)(nil),                                    // 202: api.user.service.v1.ListUsersResponse.User
+	(*GetCommentsByUserIdResponse_Comment)(nil),                       // 203: api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	(*GetUserProfileResponse_IpInfo)(nil),                             // 204: api.user.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil),                 // 205: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),                        // 206: api.user.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),                            // 207: api.user.service.v1.GetUserProfileResponse.Comment
+	(*GetUserProfileResponse_ChangeRecord)(nil),                       // 208: api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),      // 209: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil),    // 210: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),          // 211: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	(*GetOperatorResponse_Operator)(nil),                              // 212: api.user.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),                        // 213: api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	(*ListAllOperatorsResponse_Operator)(nil),                         // 214: api.user.service.v1.ListAllOperatorsResponse.Operator
+	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),                // 215: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),                 // 216: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	(*ListBottomOperatorsResponse_OperatorInfo)(nil),                  // 217: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	(*ResponsibleGamblingConfig_SelfExclusion)(nil),                   // 218: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
+	(*ResponsibleGamblingConfig_BreakInPlay)(nil),                     // 219: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
+	(*ResponsibleGamblingConfig_TimeLimits)(nil),                      // 220: api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
+	(*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist)(nil), // 221: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
+	nil,                                   // 222: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	nil,                                   // 223: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
+	nil,                                   // 224: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
+	nil,                                   // 225: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
+	nil,                                   // 226: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
+	(*timestamppb.Timestamp)(nil),         // 227: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),        // 228: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil), // 229: api.common.OperatorContextFilters
+	(v1.VipRewardKind)(0),                 // 230: api.vip.service.v1.VipRewardKind
+	(*v1.GetOperatorVipSettingsResponse)(nil), // 231: api.vip.service.v1.GetOperatorVipSettingsResponse
+	(*v1.GetUserVipLevelResponse)(nil),        // 232: api.vip.service.v1.GetUserVipLevelResponse
+	(*v1.UpdateVipRewardSliderResponse)(nil),  // 233: api.vip.service.v1.UpdateVipRewardSliderResponse
+	(*v1.GetClaimableVipRewardsResponse)(nil), // 234: api.vip.service.v1.GetClaimableVipRewardsResponse
+	(*v1.ClaimVipRewardResponse)(nil),         // 235: api.vip.service.v1.ClaimVipRewardResponse
+	(*v1.ConfirmClaimVipRewardResponse)(nil),  // 236: api.vip.service.v1.ConfirmClaimVipRewardResponse
+	(*v1.RequestDailyLossbackResponse)(nil),   // 237: api.vip.service.v1.RequestDailyLossbackResponse
+	(*v1.GetDailyLossbackStatusResponse)(nil), // 238: api.vip.service.v1.GetDailyLossbackStatusResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	49,  // 0: api.user.service.v1.UserInfo.user_identity:type_name -> api.user.service.v1.UserIdentity
-	225, // 1: api.user.service.v1.UserInfo.dob:type_name -> google.protobuf.Timestamp
-	225, // 2: api.user.service.v1.UserInfo.registered_at:type_name -> google.protobuf.Timestamp
+	227, // 1: api.user.service.v1.UserInfo.dob:type_name -> google.protobuf.Timestamp
+	227, // 2: api.user.service.v1.UserInfo.registered_at:type_name -> google.protobuf.Timestamp
 	1,   // 3: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	225, // 4: api.user.service.v1.RegisterRequest.dob:type_name -> google.protobuf.Timestamp
+	227, // 4: api.user.service.v1.RegisterRequest.dob:type_name -> google.protobuf.Timestamp
 	1,   // 5: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	1,   // 6: api.user.service.v1.LoginWithInfoRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	226, // 7: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 7: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
 	7,   // 8: api.user.service.v1.LoginWithInfoRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
 	2,   // 9: api.user.service.v1.OAuthRequest.oauth_provider:type_name -> api.user.service.v1.OAuthProvider
 	4,   // 10: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 11: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 12: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	226, // 13: api.user.service.v1.SetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 14: api.user.service.v1.SetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 15: api.user.service.v1.GetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 16: api.user.service.v1.GetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 17: api.user.service.v1.GetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 18: api.user.service.v1.SetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 19: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 20: api.user.service.v1.SendPasswordResetCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 21: api.user.service.v1.ResetPasswordWithCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	225, // 22: api.user.service.v1.UserIdentity.created_at:type_name -> google.protobuf.Timestamp
-	225, // 23: api.user.service.v1.UserIdentity.audited_at:type_name -> google.protobuf.Timestamp
+	228, // 13: api.user.service.v1.SetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 14: api.user.service.v1.SetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 15: api.user.service.v1.GetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 16: api.user.service.v1.GetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 17: api.user.service.v1.GetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 18: api.user.service.v1.SetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 19: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 20: api.user.service.v1.SendPasswordResetCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 21: api.user.service.v1.ResetPasswordWithCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	227, // 22: api.user.service.v1.UserIdentity.created_at:type_name -> google.protobuf.Timestamp
+	227, // 23: api.user.service.v1.UserIdentity.audited_at:type_name -> google.protobuf.Timestamp
 	48,  // 24: api.user.service.v1.UpdateUserRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
-	225, // 25: api.user.service.v1.UpdateUserRequest.dob:type_name -> google.protobuf.Timestamp
-	226, // 26: api.user.service.v1.UpdateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	225, // 27: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	225, // 28: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	226, // 29: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
-	227, // 30: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	200, // 31: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	226, // 32: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 33: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 34: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
-	201, // 35: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	226, // 36: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
-	203, // 37: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	204, // 38: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
-	205, // 39: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
-	225, // 40: api.user.service.v1.GetUserProfileResponse.dob:type_name -> google.protobuf.Timestamp
+	227, // 25: api.user.service.v1.UpdateUserRequest.dob:type_name -> google.protobuf.Timestamp
+	228, // 26: api.user.service.v1.UpdateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	227, // 27: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	227, // 28: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	228, // 29: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	229, // 30: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	202, // 31: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	228, // 32: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 33: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 34: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
+	203, // 35: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	228, // 36: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
+	205, // 37: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	206, // 38: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
+	207, // 39: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
+	227, // 40: api.user.service.v1.GetUserProfileResponse.dob:type_name -> google.protobuf.Timestamp
 	49,  // 41: api.user.service.v1.GetUserProfileResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
-	206, // 42: api.user.service.v1.GetUserProfileResponse.emailChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	206, // 43: api.user.service.v1.GetUserProfileResponse.phoneChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	208, // 42: api.user.service.v1.GetUserProfileResponse.emailChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	208, // 43: api.user.service.v1.GetUserProfileResponse.phoneChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
 	67,  // 44: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	226, // 45: api.user.service.v1.CreateRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 46: api.user.service.v1.ListRolesRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 45: api.user.service.v1.CreateRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 46: api.user.service.v1.ListRolesRequest.operator_context:type_name -> api.common.OperatorContext
 	67,  // 47: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
 	70,  // 48: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
 	67,  // 49: api.user.service.v1.UpdateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	226, // 50: api.user.service.v1.UpdateRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 50: api.user.service.v1.UpdateRoleRequest.operator_context:type_name -> api.common.OperatorContext
 	70,  // 51: api.user.service.v1.GetRoleResponse.role:type_name -> api.user.service.v1.Role
-	226, // 52: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
-	227, // 53: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	207, // 54: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	208, // 55: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	209, // 56: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	226, // 57: api.user.service.v1.DeleteRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 58: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
-	226, // 59: api.user.service.v1.GetOperatorInfoByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	228, // 52: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
+	229, // 53: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	209, // 54: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	210, // 55: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	211, // 56: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	228, // 57: api.user.service.v1.DeleteRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 58: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	228, // 59: api.user.service.v1.GetOperatorInfoByOriginResponse.operator_context:type_name -> api.common.OperatorContext
 	116, // 60: api.user.service.v1.GetOperatorInfoByOriginResponse.operatorDetail:type_name -> api.user.service.v1.OperatorDetails
 	116, // 61: api.user.service.v1.GetOperatorInfoByOriginResponse.systemOperatorDetail:type_name -> api.user.service.v1.OperatorDetails
-	210, // 62: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
-	211, // 63: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	226, // 64: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	212, // 65: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
-	226, // 66: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
+	212, // 62: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
+	213, // 63: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	228, // 64: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	214, // 65: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
+	228, // 66: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
 	106, // 67: api.user.service.v1.OperatorAccountSettings.password_settings:type_name -> api.user.service.v1.OperatorAccountPasswordSettings
 	107, // 68: api.user.service.v1.OperatorAccountSettings.security_settings:type_name -> api.user.service.v1.OperatorAccountSecuritySettings
 	108, // 69: api.user.service.v1.OperatorAccountSettings.game_settings:type_name -> api.user.service.v1.OperatorAccountGameSettings
 	109, // 70: api.user.service.v1.OperatorAccountSettings.payment_settings:type_name -> api.user.service.v1.OperatorAccountPaymentSettings
-	226, // 71: api.user.service.v1.GetUserAccountSettingsStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 71: api.user.service.v1.GetUserAccountSettingsStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	112, // 72: api.user.service.v1.GetUserAccountSettingsStatusResponse.game_settings_status:type_name -> api.user.service.v1.UserAccountGameSettingsStatus
 	113, // 73: api.user.service.v1.GetUserAccountSettingsStatusResponse.payment_settings_status:type_name -> api.user.service.v1.UserAccountPaymentSettingsStatus
 	110, // 74: api.user.service.v1.OperatorConfig.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
 	115, // 75: api.user.service.v1.OperatorDetails.config:type_name -> api.user.service.v1.OperatorConfig
 	116, // 76: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	227, // 77: api.user.service.v1.ListOperatorsByParentOperatorIdRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	229, // 77: api.user.service.v1.ListOperatorsByParentOperatorIdRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	116, // 78: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	226, // 79: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	213, // 80: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	226, // 81: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	214, // 82: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	226, // 83: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	215, // 84: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	226, // 85: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	225, // 86: api.user.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
-	225, // 87: api.user.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
-	226, // 88: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 89: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 79: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	215, // 80: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	228, // 81: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	216, // 82: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	228, // 83: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	217, // 84: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	228, // 85: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	227, // 86: api.user.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
+	227, // 87: api.user.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
+	228, // 88: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 89: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
 	4,   // 90: api.user.service.v1.ListAllUsersResponse.users:type_name -> api.user.service.v1.UserInfo
-	226, // 91: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 91: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
 	116, // 92: api.user.service.v1.ListOperatorsByAdminEmailResponse.retailer_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	116, // 93: api.user.service.v1.ListOperatorsByAdminEmailResponse.company_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	116, // 94: api.user.service.v1.ListOperatorsByAdminEmailResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	116, // 95: api.user.service.v1.ListOperatorDetailsResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	116, // 96: api.user.service.v1.GetOperatorDetailsByUserIdResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	226, // 97: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 98: api.user.service.v1.GetOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	228, // 97: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 98: api.user.service.v1.GetOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	110, // 99: api.user.service.v1.GetOperatorAccountSettingsResponse.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	226, // 100: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 101: api.user.service.v1.UpdateOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	228, // 100: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 101: api.user.service.v1.UpdateOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	110, // 102: api.user.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	216, // 103: api.user.service.v1.ResponsibleGamblingConfig.self_exclusion:type_name -> api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
-	217, // 104: api.user.service.v1.ResponsibleGamblingConfig.break_in_play:type_name -> api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
-	218, // 105: api.user.service.v1.ResponsibleGamblingConfig.time_limits:type_name -> api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
+	218, // 103: api.user.service.v1.ResponsibleGamblingConfig.self_exclusion:type_name -> api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
+	219, // 104: api.user.service.v1.ResponsibleGamblingConfig.break_in_play:type_name -> api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
+	220, // 105: api.user.service.v1.ResponsibleGamblingConfig.time_limits:type_name -> api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
 	141, // 106: api.user.service.v1.AddResponsibleGamblingConfigRequest.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
-	226, // 107: api.user.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 108: api.user.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	225, // 109: api.user.service.v1.ResponsibleGamblingStatus.time_limits_next_inactive_time:type_name -> google.protobuf.Timestamp
-	225, // 110: api.user.service.v1.ResponsibleGamblingDeleteSchedule.self_exclusion_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	225, // 111: api.user.service.v1.ResponsibleGamblingDeleteSchedule.break_in_play_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	225, // 112: api.user.service.v1.ResponsibleGamblingDeleteSchedule.time_limits_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	228, // 107: api.user.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 108: api.user.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	227, // 109: api.user.service.v1.ResponsibleGamblingStatus.time_limits_next_inactive_time:type_name -> google.protobuf.Timestamp
+	227, // 110: api.user.service.v1.ResponsibleGamblingDeleteSchedule.self_exclusion_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	227, // 111: api.user.service.v1.ResponsibleGamblingDeleteSchedule.break_in_play_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	227, // 112: api.user.service.v1.ResponsibleGamblingDeleteSchedule.time_limits_delete_schedule_time:type_name -> google.protobuf.Timestamp
 	141, // 113: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
 	147, // 114: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_status:type_name -> api.user.service.v1.ResponsibleGamblingStatus
 	148, // 115: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_delete_schedule:type_name -> api.user.service.v1.ResponsibleGamblingDeleteSchedule
-	226, // 116: api.user.service.v1.UserIdentityAuditRequest.operator_context:type_name -> api.common.OperatorContext
-	225, // 117: api.user.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
-	225, // 118: api.user.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
-	227, // 119: api.user.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	226, // 120: api.user.service.v1.UserIdentityListRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 116: api.user.service.v1.UserIdentityAuditRequest.operator_context:type_name -> api.common.OperatorContext
+	227, // 117: api.user.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
+	227, // 118: api.user.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
+	229, // 119: api.user.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	228, // 120: api.user.service.v1.UserIdentityListRequest.operator_context:type_name -> api.common.OperatorContext
 	49,  // 121: api.user.service.v1.UserIdentityListResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
-	226, // 122: api.user.service.v1.AddRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 123: api.user.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	226, // 124: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 125: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	226, // 126: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 127: api.user.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	219, // 128: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
+	228, // 122: api.user.service.v1.AddRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 123: api.user.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	228, // 124: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 125: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	228, // 126: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 127: api.user.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	221, // 128: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
 	161, // 129: api.user.service.v1.RegistrationFieldPolicy.registration:type_name -> api.user.service.v1.RegistrationFieldSet
 	161, // 130: api.user.service.v1.RegistrationFieldPolicy.login:type_name -> api.user.service.v1.RegistrationFieldSet
-	226, // 131: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 132: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	220, // 133: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
-	226, // 134: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 135: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	221, // 136: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
-	226, // 137: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 138: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	222, // 139: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
-	226, // 140: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	226, // 141: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	223, // 142: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
-	228, // 143: api.user.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	228, // 144: api.user.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	228, // 131: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 132: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	222, // 133: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	228, // 134: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 135: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	223, // 136: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
+	228, // 137: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 138: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	224, // 139: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
+	228, // 140: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 141: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	225, // 142: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
+	230, // 143: api.user.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	230, // 144: api.user.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
 	181, // 145: api.user.service.v1.GetUserPrivacySettingsResponse.settings:type_name -> api.user.service.v1.UserPrivacySettings
-	224, // 146: api.user.service.v1.GetUsersPrivacySettingsResponse.settings:type_name -> api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
+	226, // 146: api.user.service.v1.GetUsersPrivacySettingsResponse.settings:type_name -> api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
 	1,   // 147: api.user.service.v1.LoginWithInfoAnd2faRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	226, // 148: api.user.service.v1.LoginWithInfoAnd2faRequest.operator_context:type_name -> api.common.OperatorContext
+	228, // 148: api.user.service.v1.LoginWithInfoAnd2faRequest.operator_context:type_name -> api.common.OperatorContext
 	7,   // 149: api.user.service.v1.LoginWithInfoAnd2faRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
 	4,   // 150: api.user.service.v1.LoginWithInfoAnd2faResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	225, // 151: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	225, // 152: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	225, // 153: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
+	227, // 151: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	227, // 152: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	227, // 153: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
 	70,  // 154: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
-	225, // 155: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	202, // 156: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	225, // 157: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	202, // 158: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	225, // 159: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	225, // 160: api.user.service.v1.GetUserProfileResponse.ChangeRecord.changed_at:type_name -> google.protobuf.Timestamp
-	226, // 161: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	226, // 162: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	226, // 163: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	226, // 164: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	225, // 165: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.start_time:type_name -> google.protobuf.Timestamp
-	225, // 166: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.end_time:type_name -> google.protobuf.Timestamp
-	225, // 167: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.start_time:type_name -> google.protobuf.Timestamp
-	225, // 168: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.end_time:type_name -> google.protobuf.Timestamp
-	225, // 169: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist.created_at:type_name -> google.protobuf.Timestamp
+	227, // 155: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	204, // 156: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	227, // 157: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	204, // 158: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	227, // 159: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	227, // 160: api.user.service.v1.GetUserProfileResponse.ChangeRecord.changed_at:type_name -> google.protobuf.Timestamp
+	228, // 161: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	228, // 162: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	228, // 163: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	228, // 164: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	227, // 165: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.start_time:type_name -> google.protobuf.Timestamp
+	227, // 166: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.end_time:type_name -> google.protobuf.Timestamp
+	227, // 167: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.start_time:type_name -> google.protobuf.Timestamp
+	227, // 168: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.end_time:type_name -> google.protobuf.Timestamp
+	227, // 169: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist.created_at:type_name -> google.protobuf.Timestamp
 	160, // 170: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
 	160, // 171: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
 	162, // 172: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
@@ -15417,101 +15544,105 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	194, // 265: api.user.service.v1.User.Reset2fa:input_type -> api.user.service.v1.Reset2faRequest
 	196, // 266: api.user.service.v1.User.Get2faStatus:input_type -> api.user.service.v1.Get2faStatusRequest
 	198, // 267: api.user.service.v1.User.LoginWithInfoAnd2fa:input_type -> api.user.service.v1.LoginWithInfoAnd2faRequest
-	12,  // 268: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	12,  // 269: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	12,  // 270: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
-	12,  // 271: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	12,  // 272: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	13,  // 273: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	15,  // 274: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	17,  // 275: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	19,  // 276: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	21,  // 277: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	23,  // 278: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	25,  // 279: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
-	27,  // 280: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
-	29,  // 281: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
-	31,  // 282: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	33,  // 283: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	35,  // 284: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
-	37,  // 285: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
-	39,  // 286: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	41,  // 287: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	43,  // 288: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
-	45,  // 289: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
-	47,  // 290: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
-	51,  // 291: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	53,  // 292: api.user.service.v1.User.UpdateUserIdentity:output_type -> api.user.service.v1.UpdateUserIdentityResponse
-	55,  // 293: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
-	57,  // 294: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
-	59,  // 295: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
-	61,  // 296: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
-	63,  // 297: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
-	65,  // 298: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
-	68,  // 299: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
-	71,  // 300: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
-	73,  // 301: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
-	75,  // 302: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
-	77,  // 303: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
-	81,  // 304: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
-	79,  // 305: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
-	83,  // 306: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
-	85,  // 307: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
-	87,  // 308: api.user.service.v1.User.GetOperatorInfoByOrigin:output_type -> api.user.service.v1.GetOperatorInfoByOriginResponse
-	89,  // 309: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
-	91,  // 310: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
-	93,  // 311: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
-	95,  // 312: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
-	97,  // 313: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
-	99,  // 314: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
-	101, // 315: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
-	103, // 316: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
-	105, // 317: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
-	118, // 318: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
-	120, // 319: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
-	122, // 320: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
-	124, // 321: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
-	126, // 322: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
-	128, // 323: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
-	130, // 324: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
-	132, // 325: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	134, // 326: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
-	136, // 327: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
-	138, // 328: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
-	140, // 329: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	114, // 330: api.user.service.v1.User.GetUserAccountSettingsStatus:output_type -> api.user.service.v1.GetUserAccountSettingsStatusResponse
-	143, // 331: api.user.service.v1.User.AddResponsibleGamblingConfig:output_type -> api.user.service.v1.AddResponsibleGamblingConfigResponse
-	145, // 332: api.user.service.v1.User.DeleteResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	149, // 333: api.user.service.v1.User.GetResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
-	151, // 334: api.user.service.v1.User.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
-	153, // 335: api.user.service.v1.User.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
-	155, // 336: api.user.service.v1.User.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
-	157, // 337: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	159, // 338: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
-	164, // 339: api.user.service.v1.User.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
-	166, // 340: api.user.service.v1.User.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
-	168, // 341: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
-	170, // 342: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
-	172, // 343: api.user.service.v1.User.CloseAccount:output_type -> api.user.service.v1.CloseAccountResponse
-	229, // 344: api.user.service.v1.User.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
-	230, // 345: api.user.service.v1.User.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
-	231, // 346: api.user.service.v1.User.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
-	232, // 347: api.user.service.v1.User.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
-	233, // 348: api.user.service.v1.User.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
-	234, // 349: api.user.service.v1.User.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
-	235, // 350: api.user.service.v1.User.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
-	236, // 351: api.user.service.v1.User.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
-	183, // 352: api.user.service.v1.User.GetUserPrivacySettings:output_type -> api.user.service.v1.GetUserPrivacySettingsResponse
-	185, // 353: api.user.service.v1.User.UpdateUserPrivacySettings:output_type -> api.user.service.v1.UpdateUserPrivacySettingsResponse
-	187, // 354: api.user.service.v1.User.GetUsersPrivacySettings:output_type -> api.user.service.v1.GetUsersPrivacySettingsResponse
-	189, // 355: api.user.service.v1.User.Generate2faSecret:output_type -> api.user.service.v1.Generate2faSecretResponse
-	191, // 356: api.user.service.v1.User.Bind2faSecret:output_type -> api.user.service.v1.Bind2faSecretResponse
-	193, // 357: api.user.service.v1.User.Verify2faCode:output_type -> api.user.service.v1.Verify2faCodeResponse
-	195, // 358: api.user.service.v1.User.Reset2fa:output_type -> api.user.service.v1.Reset2faResponse
-	197, // 359: api.user.service.v1.User.Get2faStatus:output_type -> api.user.service.v1.Get2faStatusResponse
-	199, // 360: api.user.service.v1.User.LoginWithInfoAnd2fa:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	268, // [268:361] is the sub-list for method output_type
-	175, // [175:268] is the sub-list for method input_type
+	200, // 268: api.user.service.v1.User.Bind2FaWithTempToken:input_type -> api.user.service.v1.Bind2FaWithTempTokenRequest
+	201, // 269: api.user.service.v1.User.Verify2FaWithTempToken:input_type -> api.user.service.v1.Verify2FaWithTempTokenRequest
+	12,  // 270: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	12,  // 271: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	12,  // 272: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
+	12,  // 273: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	12,  // 274: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	13,  // 275: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	15,  // 276: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	17,  // 277: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	19,  // 278: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	21,  // 279: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	23,  // 280: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	25,  // 281: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
+	27,  // 282: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
+	29,  // 283: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
+	31,  // 284: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	33,  // 285: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	35,  // 286: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
+	37,  // 287: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
+	39,  // 288: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	41,  // 289: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	43,  // 290: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
+	45,  // 291: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
+	47,  // 292: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
+	51,  // 293: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	53,  // 294: api.user.service.v1.User.UpdateUserIdentity:output_type -> api.user.service.v1.UpdateUserIdentityResponse
+	55,  // 295: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	57,  // 296: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
+	59,  // 297: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
+	61,  // 298: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
+	63,  // 299: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
+	65,  // 300: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	68,  // 301: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
+	71,  // 302: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
+	73,  // 303: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
+	75,  // 304: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
+	77,  // 305: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
+	81,  // 306: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
+	79,  // 307: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
+	83,  // 308: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
+	85,  // 309: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
+	87,  // 310: api.user.service.v1.User.GetOperatorInfoByOrigin:output_type -> api.user.service.v1.GetOperatorInfoByOriginResponse
+	89,  // 311: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
+	91,  // 312: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
+	93,  // 313: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
+	95,  // 314: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
+	97,  // 315: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
+	99,  // 316: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
+	101, // 317: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
+	103, // 318: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
+	105, // 319: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
+	118, // 320: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
+	120, // 321: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
+	122, // 322: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
+	124, // 323: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
+	126, // 324: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
+	128, // 325: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
+	130, // 326: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
+	132, // 327: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	134, // 328: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
+	136, // 329: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
+	138, // 330: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
+	140, // 331: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	114, // 332: api.user.service.v1.User.GetUserAccountSettingsStatus:output_type -> api.user.service.v1.GetUserAccountSettingsStatusResponse
+	143, // 333: api.user.service.v1.User.AddResponsibleGamblingConfig:output_type -> api.user.service.v1.AddResponsibleGamblingConfigResponse
+	145, // 334: api.user.service.v1.User.DeleteResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	149, // 335: api.user.service.v1.User.GetResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
+	151, // 336: api.user.service.v1.User.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
+	153, // 337: api.user.service.v1.User.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
+	155, // 338: api.user.service.v1.User.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
+	157, // 339: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	159, // 340: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
+	164, // 341: api.user.service.v1.User.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	166, // 342: api.user.service.v1.User.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
+	168, // 343: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
+	170, // 344: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
+	172, // 345: api.user.service.v1.User.CloseAccount:output_type -> api.user.service.v1.CloseAccountResponse
+	231, // 346: api.user.service.v1.User.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
+	232, // 347: api.user.service.v1.User.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
+	233, // 348: api.user.service.v1.User.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
+	234, // 349: api.user.service.v1.User.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
+	235, // 350: api.user.service.v1.User.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
+	236, // 351: api.user.service.v1.User.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
+	237, // 352: api.user.service.v1.User.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
+	238, // 353: api.user.service.v1.User.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
+	183, // 354: api.user.service.v1.User.GetUserPrivacySettings:output_type -> api.user.service.v1.GetUserPrivacySettingsResponse
+	185, // 355: api.user.service.v1.User.UpdateUserPrivacySettings:output_type -> api.user.service.v1.UpdateUserPrivacySettingsResponse
+	187, // 356: api.user.service.v1.User.GetUsersPrivacySettings:output_type -> api.user.service.v1.GetUsersPrivacySettingsResponse
+	189, // 357: api.user.service.v1.User.Generate2faSecret:output_type -> api.user.service.v1.Generate2faSecretResponse
+	191, // 358: api.user.service.v1.User.Bind2faSecret:output_type -> api.user.service.v1.Bind2faSecretResponse
+	193, // 359: api.user.service.v1.User.Verify2faCode:output_type -> api.user.service.v1.Verify2faCodeResponse
+	195, // 360: api.user.service.v1.User.Reset2fa:output_type -> api.user.service.v1.Reset2faResponse
+	197, // 361: api.user.service.v1.User.Get2faStatus:output_type -> api.user.service.v1.Get2faStatusResponse
+	199, // 362: api.user.service.v1.User.LoginWithInfoAnd2fa:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	199, // 363: api.user.service.v1.User.Bind2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	199, // 364: api.user.service.v1.User.Verify2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	270, // [270:365] is the sub-list for method output_type
+	175, // [175:270] is the sub-list for method input_type
 	175, // [175:175] is the sub-list for extension type_name
 	175, // [175:175] is the sub-list for extension extendee
 	0,   // [0:175] is the sub-list for field type_name
@@ -15549,7 +15680,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   221,
+			NumMessages:   223,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

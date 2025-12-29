@@ -113,6 +113,8 @@ const (
 	User_Reset2Fa_FullMethodName                           = "/api.user.service.v1.User/Reset2fa"
 	User_Get2FaStatus_FullMethodName                       = "/api.user.service.v1.User/Get2faStatus"
 	User_LoginWithInfoAnd2Fa_FullMethodName                = "/api.user.service.v1.User/LoginWithInfoAnd2fa"
+	User_Bind2FaWithTempToken_FullMethodName               = "/api.user.service.v1.User/Bind2FaWithTempToken"
+	User_Verify2FaWithTempToken_FullMethodName             = "/api.user.service.v1.User/Verify2FaWithTempToken"
 )
 
 // UserClient is the client API for User service.
@@ -273,6 +275,10 @@ type UserClient interface {
 	Get2FaStatus(ctx context.Context, in *Get2FaStatusRequest, opts ...grpc.CallOption) (*Get2FaStatusResponse, error)
 	// Backoffice login with 2FA support (internal gRPC only)
 	LoginWithInfoAnd2Fa(ctx context.Context, in *LoginWithInfoAnd2FaRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
+	// Bind 2FA using temp token and return full login response (internal gRPC only)
+	Bind2FaWithTempToken(ctx context.Context, in *Bind2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
+	// Verify 2FA using temp token and return full login response (internal gRPC only)
+	Verify2FaWithTempToken(ctx context.Context, in *Verify2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
 }
 
 type userClient struct {
@@ -1213,6 +1219,26 @@ func (c *userClient) LoginWithInfoAnd2Fa(ctx context.Context, in *LoginWithInfoA
 	return out, nil
 }
 
+func (c *userClient) Bind2FaWithTempToken(ctx context.Context, in *Bind2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginWithInfoAnd2FaResponse)
+	err := c.cc.Invoke(ctx, User_Bind2FaWithTempToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) Verify2FaWithTempToken(ctx context.Context, in *Verify2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginWithInfoAnd2FaResponse)
+	err := c.cc.Invoke(ctx, User_Verify2FaWithTempToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1371,6 +1397,10 @@ type UserServer interface {
 	Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error)
 	// Backoffice login with 2FA support (internal gRPC only)
 	LoginWithInfoAnd2Fa(context.Context, *LoginWithInfoAnd2FaRequest) (*LoginWithInfoAnd2FaResponse, error)
+	// Bind 2FA using temp token and return full login response (internal gRPC only)
+	Bind2FaWithTempToken(context.Context, *Bind2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error)
+	// Verify 2FA using temp token and return full login response (internal gRPC only)
+	Verify2FaWithTempToken(context.Context, *Verify2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1659,6 +1689,12 @@ func (UnimplementedUserServer) Get2FaStatus(context.Context, *Get2FaStatusReques
 }
 func (UnimplementedUserServer) LoginWithInfoAnd2Fa(context.Context, *LoginWithInfoAnd2FaRequest) (*LoginWithInfoAnd2FaResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LoginWithInfoAnd2Fa not implemented")
+}
+func (UnimplementedUserServer) Bind2FaWithTempToken(context.Context, *Bind2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Bind2FaWithTempToken not implemented")
+}
+func (UnimplementedUserServer) Verify2FaWithTempToken(context.Context, *Verify2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Verify2FaWithTempToken not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -3355,6 +3391,42 @@ func _User_LoginWithInfoAnd2Fa_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_Bind2FaWithTempToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Bind2FaWithTempTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Bind2FaWithTempToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Bind2FaWithTempToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Bind2FaWithTempToken(ctx, req.(*Bind2FaWithTempTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_Verify2FaWithTempToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Verify2FaWithTempTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).Verify2FaWithTempToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_Verify2FaWithTempToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).Verify2FaWithTempToken(ctx, req.(*Verify2FaWithTempTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3733,6 +3805,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LoginWithInfoAnd2fa",
 			Handler:    _User_LoginWithInfoAnd2Fa_Handler,
+		},
+		{
+			MethodName: "Bind2FaWithTempToken",
+			Handler:    _User_Bind2FaWithTempToken_Handler,
+		},
+		{
+			MethodName: "Verify2FaWithTempToken",
+			Handler:    _User_Verify2FaWithTempToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

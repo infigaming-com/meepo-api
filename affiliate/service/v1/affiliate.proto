@@ -854,5 +854,8 @@ message GetUserPromoConditionInfoResponse {
 
     // User's affiliate info
     int64 affiliate_id = 4;                // User's affiliate_id, 0 = not an affiliate
+
+    // Conversion conditions
+    bool has_met_conversion_conditions = 5; // true if user has met conversion conditions
 }
 

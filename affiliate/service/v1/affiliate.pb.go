@@ -3651,9 +3651,11 @@ type GetUserPromoConditionInfoResponse struct {
 	// Qualified referral count
 	QualifiedReferralCount int32 `protobuf:"varint,3,opt,name=qualified_referral_count,json=qualifiedReferralCount,proto3" json:"qualified_referral_count,omitempty"` // Count of tier1 referrals with has_met_conversion_conditions=true
 	// User's affiliate info
-	AffiliateId   int64 `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate_id, 0 = not an affiliate
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	AffiliateId int64 `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate_id, 0 = not an affiliate
+	// Conversion conditions
+	HasMetConversionConditions bool `protobuf:"varint,5,opt,name=has_met_conversion_conditions,json=hasMetConversionConditions,proto3" json:"has_met_conversion_conditions,omitempty"` // true if user has met conversion conditions
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetUserPromoConditionInfoResponse) Reset() {
@@ -3712,6 +3714,13 @@ func (x *GetUserPromoConditionInfoResponse) GetAffiliateId() int64 {
 		return x.AffiliateId
 	}
 	return 0
+}
+
+func (x *GetUserPromoConditionInfoResponse) GetHasMetConversionConditions() bool {
+	if x != nil {
+		return x.HasMetConversionConditions
+	}
+	return false
 }
 
 type ListAffiliatesResponse_Affiliate struct {
@@ -7306,12 +7315,13 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x19amount_reporting_currency\x18\b \x01(\tR\x17amountReportingCurrency\"x\n" +
 	" GetUserPromoConditionInfoRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12;\n" +
-	"\x1ainvitation_time_range_days\x18\x02 \x01(\x05R\x17invitationTimeRangeDays\"\xd4\x01\n" +
+	"\x1ainvitation_time_range_days\x18\x02 \x01(\x05R\x17invitationTimeRangeDays\"\x97\x02\n" +
 	"!GetUserPromoConditionInfoResponse\x12\"\n" +
 	"\rtier1_user_id\x18\x01 \x01(\x03R\vtier1UserId\x12.\n" +
 	"\x13tier1_referral_code\x18\x02 \x01(\tR\x11tier1ReferralCode\x128\n" +
 	"\x18qualified_referral_count\x18\x03 \x01(\x05R\x16qualifiedReferralCount\x12!\n" +
-	"\faffiliate_id\x18\x04 \x01(\x03R\vaffiliateId2\xc9(\n" +
+	"\faffiliate_id\x18\x04 \x01(\x03R\vaffiliateId\x12A\n" +
+	"\x1dhas_met_conversion_conditions\x18\x05 \x01(\bR\x1ahasMetConversionConditions2\xc9(\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +

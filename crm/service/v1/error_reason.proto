@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package api.crm.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/crm/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.crm.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+  
+  ERROR_REASON_UNSPECIFIED = 0;
+  
+  // Segment errors
+  SEGMENT_NOT_FOUND = 1 [(errors.code) = 404];
+  SEGMENT_KEY_ALREADY_EXISTS = 2 [(errors.code) = 409];
+  SEGMENT_INVALID_RULES = 3 [(errors.code) = 400];
+  SEGMENT_LIMIT_EXCEEDED = 4 [(errors.code) = 429];
+  SEGMENT_PERMISSION_DENIED = 5 [(errors.code) = 403];
+  SEGMENT_CANNOT_DELETE_INHERITED = 6 [(errors.code) = 400];
+  
+  // Field/operator errors
+  FIELD_NOT_FOUND = 10 [(errors.code) = 400];
+  OPERATOR_NOT_SUPPORTED = 11 [(errors.code) = 400];
+  VALUE_INVALID = 12 [(errors.code) = 400];
+  
+  // User aggregate errors
+  USER_AGGREGATE_NOT_FOUND = 20 [(errors.code) = 404];
+  
+  // Context errors
+  OPERATOR_CONTEXT_NOT_FOUND = 30 [(errors.code) = 400];
+  OPERATOR_CONTEXT_PERMISSION_DENIED = 31 [(errors.code) = 403];
+  
+  // Calculation errors
+  CALCULATION_IN_PROGRESS = 40 [(errors.code) = 409];
+  CALCULATION_FAILED = 41 [(errors.code) = 500];
+}

@@ -1,0 +1,242 @@
+syntax = "proto3";
+
+package api.crm.service.v1;
+
+import "common/common.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/crm/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.crm.service.v1";
+
+// CRM service provides segment management and user segmentation functionality.
+service CRM {
+  // Segment CRUD operations
+  rpc CreateSegment(CreateSegmentRequest) returns (CreateSegmentResponse);
+  rpc UpdateSegment(UpdateSegmentRequest) returns (UpdateSegmentResponse);
+  rpc GetSegment(GetSegmentRequest) returns (GetSegmentResponse);
+  rpc ListSegments(ListSegmentsRequest) returns (ListSegmentsResponse);
+  rpc DeleteSegment(DeleteSegmentRequest) returns (DeleteSegmentResponse);
+  
+  // Segment calculation
+  rpc CalculateSegment(CalculateSegmentRequest) returns (CalculateSegmentResponse);
+  rpc GetSegmentUsers(GetSegmentUsersRequest) returns (GetSegmentUsersResponse);
+  rpc GetUserSegments(GetUserSegmentsRequest) returns (GetUserSegmentsResponse);
+  
+  // Segment override (for inheritance control)
+  rpc SetSegmentOverride(SetSegmentOverrideRequest) returns (SetSegmentOverrideResponse);
+  rpc GetSegmentOverride(GetSegmentOverrideRequest) returns (GetSegmentOverrideResponse);
+  
+  // Schema API for frontend
+  rpc GetSegmentFieldSchema(GetSegmentFieldSchemaRequest) returns (GetSegmentFieldSchemaResponse);
+}
+
+// Segment types
+enum SegmentType {
+  SEGMENT_TYPE_UNSPECIFIED = 0;
+  SEGMENT_TYPE_USER_STATE = 1;
+  SEGMENT_TYPE_BEHAVIORAL = 2;
+  SEGMENT_TYPE_IMPORTED = 3;
+  SEGMENT_TYPE_RFM = 4;
+}
+
+// Segment owner level in hierarchy
+enum OwnerLevel {
+  OWNER_LEVEL_UNSPECIFIED = 0;
+  OWNER_LEVEL_SYSTEM = 1;
+  OWNER_LEVEL_RETAILER = 2;
+  OWNER_LEVEL_COMPANY = 3;
+  OWNER_LEVEL_OPERATOR = 4;
+}
+
+// Field types for schema
+enum FieldType {
+  FIELD_TYPE_UNSPECIFIED = 0;
+  FIELD_TYPE_BOOLEAN = 1;
+  FIELD_TYPE_NUMERIC = 2;
+  FIELD_TYPE_DATE = 3;
+  FIELD_TYPE_STRING = 4;
+}
+
+// Segment definition
+message Segment {
+  int64 id = 1;
+  string segment_key = 2;
+  string name = 3;
+  string description = 4;
+  SegmentType type = 5;
+  
+  // Ownership hierarchy
+  int64 owner_operator_id = 6;
+  int64 owner_company_operator_id = 7;
+  int64 owner_retailer_operator_id = 8;
+  int64 owner_system_operator_id = 9;
+  OwnerLevel owner_level = 10;
+  
+  // Rules as JSON structure
+  google.protobuf.Struct rules = 11;
+  
+  bool enabled = 12;
+  
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+  google.protobuf.Timestamp last_calculated_at = 15;
+  
+  // Computed fields
+  int64 user_count = 16;
+}
+
+// Segment user membership
+message SegmentUser {
+  int64 segment_id = 1;
+  int64 user_id = 2;
+  int64 operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 retailer_operator_id = 5;
+  int64 system_operator_id = 6;
+  google.protobuf.Timestamp entered_at = 7;
+  google.protobuf.Timestamp left_at = 8;
+  bool is_member = 9;
+}
+
+// CreateSegment
+message CreateSegmentRequest {
+  string segment_key = 1;
+  string name = 2;
+  string description = 3;
+  SegmentType type = 4;
+  google.protobuf.Struct rules = 5;
+  bool enabled = 6;
+  api.common.OperatorContext operator_context = 7;
+}
+
+message CreateSegmentResponse {
+  Segment segment = 1;
+}
+
+// UpdateSegment
+message UpdateSegmentRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string description = 3;
+  optional google.protobuf.Struct rules = 4;
+  optional bool enabled = 5;
+  api.common.OperatorContext operator_context = 6;
+}
+
+message UpdateSegmentResponse {
+  Segment segment = 1;
+}
+
+// GetSegment
+message GetSegmentRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetSegmentResponse {
+  Segment segment = 1;
+}
+
+// ListSegments
+message ListSegmentsRequest {
+  api.common.OperatorContext operator_context = 1;
+  optional SegmentType type = 2;
+  optional bool enabled = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+  bool include_inherited = 6;
+}
+
+message ListSegmentsResponse {
+  repeated Segment segments = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// DeleteSegment
+message DeleteSegmentRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message DeleteSegmentResponse {}
+
+// CalculateSegment - triggers batch calculation
+message CalculateSegmentRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message CalculateSegmentResponse {
+  int64 users_matched = 1;
+  int64 users_added = 2;
+  int64 users_removed = 3;
+}
+
+// GetSegmentUsers
+message GetSegmentUsersRequest {
+  int64 segment_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  bool only_current_members = 5;
+}
+
+message GetSegmentUsersResponse {
+  repeated SegmentUser users = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// GetUserSegments
+message GetUserSegmentsRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  bool only_current_memberships = 3;
+}
+
+message GetUserSegmentsResponse {
+  repeated Segment segments = 1;
+}
+
+// SetSegmentOverride - allows lower levels to disable inherited segments
+message SetSegmentOverrideRequest {
+  int64 segment_id = 1;
+  bool disabled = 2;
+  api.common.OperatorContext operator_context = 3;
+}
+
+message SetSegmentOverrideResponse {}
+
+// GetSegmentOverride
+message GetSegmentOverrideRequest {
+  int64 segment_id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetSegmentOverrideResponse {
+  bool disabled = 1;
+  bool has_override = 2;
+}
+
+// Field schema for frontend query builder
+message FieldSchema {
+  string field = 1;
+  string label = 2;
+  FieldType type = 3;
+  repeated string operators = 4;
+  google.protobuf.Struct value_schema = 5;
+}
+
+// GetSegmentFieldSchema
+message GetSegmentFieldSchemaRequest {
+  SegmentType type = 1;
+}
+
+message GetSegmentFieldSchemaResponse {
+  repeated FieldSchema fields = 1;
+}
