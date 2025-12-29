@@ -2117,6 +2117,10 @@ func (m *FreezeResponse) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
+	// no validation rules for OperatorFreezeAmount
+
+	// no validation rules for OperatorFreezeCurrency
+
 	if len(errors) > 0 {
 		return FreezeResponseMultiError(errors)
 	}
