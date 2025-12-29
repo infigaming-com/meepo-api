@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api.vip.service.v1;
 
+import "common/common.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/vip/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.vip.service.v1";
@@ -18,3 +20,12 @@ message EventRequest {
 }
 
 message EventResponse {}
+
+// VipUpdateEvent is emitted when a user's VIP level changes.
+message VipUpdateEvent {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	int32 old_vip_level = 3;
+	int32 new_vip_level = 4;
+	int64 updated_at = 5;
+}
