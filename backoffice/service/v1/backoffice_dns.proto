@@ -174,7 +174,8 @@ message RetryOperatorEmailDomainVerificationRequest {
 }
 
 message ListOperatorEmailDomainBindingsRequest {
-	optional int32 page = 1;
-	optional int32 page_size = 2;
-	optional string status = 3;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	optional string status = 4;
 }

@@ -670,12 +670,13 @@ func (x *RetryOperatorEmailDomainVerificationRequest) GetDomain() string {
 }
 
 type ListOperatorEmailDomainBindingsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Page                   *int32                         `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Status                 *string                        `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOperatorEmailDomainBindingsRequest) Reset() {
@@ -706,6 +707,13 @@ func (x *ListOperatorEmailDomainBindingsRequest) ProtoReflect() protoreflect.Mes
 // Deprecated: Use ListOperatorEmailDomainBindingsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorEmailDomainBindingsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 func (x *ListOperatorEmailDomainBindingsRequest) GetPage() int32 {
@@ -783,11 +791,12 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"'DeleteOperatorEmailDomainBindingRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"E\n" +
 	"+RetryOperatorEmailDomainVerificationRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xa2\x01\n" +
-	"&ListOperatorEmailDomainBindingsRequest\x12\x17\n" +
-	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x03 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"\x80\x02\n" +
+	"&ListOperatorEmailDomainBindingsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
+	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\t\n" +
@@ -855,39 +864,40 @@ var file_backoffice_service_v1_backoffice_dns_proto_goTypes = []any{
 }
 var file_backoffice_service_v1_backoffice_dns_proto_depIdxs = []int32{
 	14, // 0: api.backoffice.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	0,  // 1: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
-	1,  // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
-	2,  // 3: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
-	3,  // 4: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
-	8,  // 5: api.backoffice.service.v1.BackofficeDns.PrecheckOperatorApexDomain:input_type -> api.backoffice.service.v1.PrecheckOperatorApexDomainRequest
-	4,  // 6: api.backoffice.service.v1.BackofficeDns.ListOperatorApexDomains:input_type -> api.backoffice.service.v1.ListOperatorApexDomainsRequest
-	5,  // 7: api.backoffice.service.v1.BackofficeDns.AddOperatorApexDomain:input_type -> api.backoffice.service.v1.AddOperatorApexDomainRequest
-	6,  // 8: api.backoffice.service.v1.BackofficeDns.DeleteOperatorApexDomain:input_type -> api.backoffice.service.v1.DeleteOperatorApexDomainRequest
-	7,  // 9: api.backoffice.service.v1.BackofficeDns.RefreshOperatorApexDomain:input_type -> api.backoffice.service.v1.RefreshOperatorApexDomainRequest
-	9,  // 10: api.backoffice.service.v1.BackofficeDns.BindOperatorEmailDomain:input_type -> api.backoffice.service.v1.BindOperatorEmailDomainRequest
-	10, // 11: api.backoffice.service.v1.BackofficeDns.GetOperatorEmailDomainBinding:input_type -> api.backoffice.service.v1.GetOperatorEmailDomainBindingRequest
-	11, // 12: api.backoffice.service.v1.BackofficeDns.DeleteOperatorEmailDomainBinding:input_type -> api.backoffice.service.v1.DeleteOperatorEmailDomainBindingRequest
-	12, // 13: api.backoffice.service.v1.BackofficeDns.RetryOperatorEmailDomainVerification:input_type -> api.backoffice.service.v1.RetryOperatorEmailDomainVerificationRequest
-	13, // 14: api.backoffice.service.v1.BackofficeDns.ListOperatorEmailDomainBindings:input_type -> api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest
-	15, // 15: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	16, // 16: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	17, // 17: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	18, // 18: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	19, // 19: api.backoffice.service.v1.BackofficeDns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
-	20, // 20: api.backoffice.service.v1.BackofficeDns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
-	21, // 21: api.backoffice.service.v1.BackofficeDns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
-	22, // 22: api.backoffice.service.v1.BackofficeDns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
-	23, // 23: api.backoffice.service.v1.BackofficeDns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
-	24, // 24: api.backoffice.service.v1.BackofficeDns.BindOperatorEmailDomain:output_type -> api.user.service.v1.BindOperatorEmailDomainResponse
-	25, // 25: api.backoffice.service.v1.BackofficeDns.GetOperatorEmailDomainBinding:output_type -> api.user.service.v1.GetOperatorEmailDomainBindingResponse
-	26, // 26: api.backoffice.service.v1.BackofficeDns.DeleteOperatorEmailDomainBinding:output_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingResponse
-	27, // 27: api.backoffice.service.v1.BackofficeDns.RetryOperatorEmailDomainVerification:output_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationResponse
-	28, // 28: api.backoffice.service.v1.BackofficeDns.ListOperatorEmailDomainBindings:output_type -> api.user.service.v1.ListOperatorEmailDomainBindingsResponse
-	15, // [15:29] is the sub-list for method output_type
-	1,  // [1:15] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	14, // 1: api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
+	1,  // 3: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
+	2,  // 4: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
+	3,  // 5: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
+	8,  // 6: api.backoffice.service.v1.BackofficeDns.PrecheckOperatorApexDomain:input_type -> api.backoffice.service.v1.PrecheckOperatorApexDomainRequest
+	4,  // 7: api.backoffice.service.v1.BackofficeDns.ListOperatorApexDomains:input_type -> api.backoffice.service.v1.ListOperatorApexDomainsRequest
+	5,  // 8: api.backoffice.service.v1.BackofficeDns.AddOperatorApexDomain:input_type -> api.backoffice.service.v1.AddOperatorApexDomainRequest
+	6,  // 9: api.backoffice.service.v1.BackofficeDns.DeleteOperatorApexDomain:input_type -> api.backoffice.service.v1.DeleteOperatorApexDomainRequest
+	7,  // 10: api.backoffice.service.v1.BackofficeDns.RefreshOperatorApexDomain:input_type -> api.backoffice.service.v1.RefreshOperatorApexDomainRequest
+	9,  // 11: api.backoffice.service.v1.BackofficeDns.BindOperatorEmailDomain:input_type -> api.backoffice.service.v1.BindOperatorEmailDomainRequest
+	10, // 12: api.backoffice.service.v1.BackofficeDns.GetOperatorEmailDomainBinding:input_type -> api.backoffice.service.v1.GetOperatorEmailDomainBindingRequest
+	11, // 13: api.backoffice.service.v1.BackofficeDns.DeleteOperatorEmailDomainBinding:input_type -> api.backoffice.service.v1.DeleteOperatorEmailDomainBindingRequest
+	12, // 14: api.backoffice.service.v1.BackofficeDns.RetryOperatorEmailDomainVerification:input_type -> api.backoffice.service.v1.RetryOperatorEmailDomainVerificationRequest
+	13, // 15: api.backoffice.service.v1.BackofficeDns.ListOperatorEmailDomainBindings:input_type -> api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest
+	15, // 16: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	16, // 17: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	17, // 18: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	18, // 19: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	19, // 20: api.backoffice.service.v1.BackofficeDns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
+	20, // 21: api.backoffice.service.v1.BackofficeDns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
+	21, // 22: api.backoffice.service.v1.BackofficeDns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
+	22, // 23: api.backoffice.service.v1.BackofficeDns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
+	23, // 24: api.backoffice.service.v1.BackofficeDns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
+	24, // 25: api.backoffice.service.v1.BackofficeDns.BindOperatorEmailDomain:output_type -> api.user.service.v1.BindOperatorEmailDomainResponse
+	25, // 26: api.backoffice.service.v1.BackofficeDns.GetOperatorEmailDomainBinding:output_type -> api.user.service.v1.GetOperatorEmailDomainBindingResponse
+	26, // 27: api.backoffice.service.v1.BackofficeDns.DeleteOperatorEmailDomainBinding:output_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingResponse
+	27, // 28: api.backoffice.service.v1.BackofficeDns.RetryOperatorEmailDomainVerification:output_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationResponse
+	28, // 29: api.backoffice.service.v1.BackofficeDns.ListOperatorEmailDomainBindings:output_type -> api.user.service.v1.ListOperatorEmailDomainBindingsResponse
+	16, // [16:30] is the sub-list for method output_type
+	2,  // [2:16] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_dns_proto_init() }

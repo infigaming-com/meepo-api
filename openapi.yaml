@@ -13419,6 +13419,8 @@ components:
         api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 page:
                     type: integer
                     format: int32
