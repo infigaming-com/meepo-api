@@ -5304,6 +5304,390 @@ var _ interface {
 	ErrorName() string
 } = ListPostbacksResponseValidationError{}
 
+// Validate checks the field values on ListPostbackLogsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListPostbackLogsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListPostbackLogsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListPostbackLogsRequestMultiError, or nil if none found.
+func (m *ListPostbackLogsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListPostbackLogsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for InitiatorUserRoleId
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListPostbackLogsRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListPostbackLogsRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListPostbackLogsRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListPostbackLogsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListPostbackLogsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListPostbackLogsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListPostbackLogsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListPostbackLogsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListPostbackLogsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListPostbackLogsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListPostbackLogsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListPostbackLogsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListPostbackLogsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListPostbackLogsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListPostbackLogsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListPostbackLogsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListPostbackLogsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListPostbackLogsRequestMultiError) AllErrors() []error { return m }
+
+// ListPostbackLogsRequestValidationError is the validation error returned by
+// ListPostbackLogsRequest.Validate if the designated constraints aren't met.
+type ListPostbackLogsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListPostbackLogsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListPostbackLogsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListPostbackLogsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListPostbackLogsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListPostbackLogsRequestValidationError) ErrorName() string {
+	return "ListPostbackLogsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListPostbackLogsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListPostbackLogsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListPostbackLogsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListPostbackLogsRequestValidationError{}
+
+// Validate checks the field values on ListPostbackLogsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListPostbackLogsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListPostbackLogsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListPostbackLogsResponseMultiError, or nil if none found.
+func (m *ListPostbackLogsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListPostbackLogsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetLogs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListPostbackLogsResponseValidationError{
+						field:  fmt.Sprintf("Logs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListPostbackLogsResponseValidationError{
+						field:  fmt.Sprintf("Logs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListPostbackLogsResponseValidationError{
+					field:  fmt.Sprintf("Logs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListPostbackLogsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListPostbackLogsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListPostbackLogsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListPostbackLogsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListPostbackLogsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListPostbackLogsResponseMultiError) AllErrors() []error { return m }
+
+// ListPostbackLogsResponseValidationError is the validation error returned by
+// ListPostbackLogsResponse.Validate if the designated constraints aren't met.
+type ListPostbackLogsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListPostbackLogsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListPostbackLogsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListPostbackLogsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListPostbackLogsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListPostbackLogsResponseValidationError) ErrorName() string {
+	return "ListPostbackLogsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListPostbackLogsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListPostbackLogsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListPostbackLogsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListPostbackLogsResponseValidationError{}
+
 // Validate checks the field values on ListAffiliateDomainsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -7208,6 +7592,8 @@ func (m *GetUserPromoConditionInfoResponse) validate(all bool) error {
 	// no validation rules for QualifiedReferralCount
 
 	// no validation rules for AffiliateId
+
+	// no validation rules for HasMetConversionConditions
 
 	if len(errors) > 0 {
 		return GetUserPromoConditionInfoResponseMultiError(errors)
@@ -9907,6 +10293,180 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListPostbacksResponse_Postback_CampaignValidationError{}
+
+// Validate checks the field values on ListPostbackLogsResponse_PostbackLog
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListPostbackLogsResponse_PostbackLog) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListPostbackLogsResponse_PostbackLog
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListPostbackLogsResponse_PostbackLogMultiError, or nil if none found.
+func (m *ListPostbackLogsResponse_PostbackLog) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListPostbackLogsResponse_PostbackLog) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for LogId
+
+	// no validation rules for PostbackId
+
+	// no validation rules for PostbackName
+
+	// no validation rules for PostbackUrl
+
+	// no validation rules for ActionType
+
+	// no validation rules for RequestMethod
+
+	// no validation rules for HttpStatusCode
+
+	// no validation rules for Reason
+
+	// no validation rules for Success
+
+	// no validation rules for AttemptNumber
+
+	// no validation rules for EventId
+
+	// no validation rules for UserId
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for AffiliateName
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListPostbackLogsResponse_PostbackLogValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListPostbackLogsResponse_PostbackLogValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListPostbackLogsResponse_PostbackLogValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListPostbackLogsResponse_PostbackLogMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListPostbackLogsResponse_PostbackLogMultiError is an error wrapping multiple
+// validation errors returned by
+// ListPostbackLogsResponse_PostbackLog.ValidateAll() if the designated
+// constraints aren't met.
+type ListPostbackLogsResponse_PostbackLogMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListPostbackLogsResponse_PostbackLogMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListPostbackLogsResponse_PostbackLogMultiError) AllErrors() []error { return m }
+
+// ListPostbackLogsResponse_PostbackLogValidationError is the validation error
+// returned by ListPostbackLogsResponse_PostbackLog.Validate if the designated
+// constraints aren't met.
+type ListPostbackLogsResponse_PostbackLogValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListPostbackLogsResponse_PostbackLogValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListPostbackLogsResponse_PostbackLogValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListPostbackLogsResponse_PostbackLogValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListPostbackLogsResponse_PostbackLogValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListPostbackLogsResponse_PostbackLogValidationError) ErrorName() string {
+	return "ListPostbackLogsResponse_PostbackLogValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListPostbackLogsResponse_PostbackLogValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListPostbackLogsResponse_PostbackLog.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListPostbackLogsResponse_PostbackLogValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListPostbackLogsResponse_PostbackLogValidationError{}
 
 // Validate checks the field values on
 // ListAffiliateDomainsResponse_AffiliateDomain with the rules defined in the

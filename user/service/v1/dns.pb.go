@@ -2428,14 +2428,15 @@ func (x *RetryOperatorEmailDomainVerificationResponse) GetBinding() *EmailDomain
 }
 
 type ListOperatorEmailDomainBindingsRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Status          *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	Page            *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize        *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	Pagination      *bool                   `protobuf:"varint,5,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Status                 *string                        `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Page                   *int32                         `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Pagination             *bool                          `protobuf:"varint,6,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOperatorEmailDomainBindingsRequest) Reset() {
@@ -2471,6 +2472,13 @@ func (*ListOperatorEmailDomainBindingsRequest) Descriptor() ([]byte, []int) {
 func (x *ListOperatorEmailDomainBindingsRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListOperatorEmailDomainBindingsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -2804,14 +2812,15 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x16\n" +
 	"\x06domain\x18\x02 \x01(\tR\x06domain\"u\n" +
 	",RetryOperatorEmailDomainVerificationResponse\x12E\n" +
-	"\abinding\x18\x01 \x01(\v2+.api.user.service.v1.EmailDomainBindingInfoR\abinding\"\x9e\x02\n" +
+	"\abinding\x18\x01 \x01(\v2+.api.user.service.v1.EmailDomainBindingInfoR\abinding\"\xfc\x02\n" +
 	"&ListOperatorEmailDomainBindingsRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
-	"\x06status\x18\x02 \x01(\tH\x00R\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x03 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12#\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x00R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12#\n" +
 	"\n" +
-	"pagination\x18\x05 \x01(\bH\x03R\n" +
+	"pagination\x18\x06 \x01(\bH\x03R\n" +
 	"pagination\x88\x01\x01B\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
@@ -2924,40 +2933,41 @@ var file_user_service_v1_dns_proto_depIdxs = []int32{
 	35, // 27: api.user.service.v1.RetryOperatorEmailDomainVerificationRequest.operator_context:type_name -> api.common.OperatorContext
 	24, // 28: api.user.service.v1.RetryOperatorEmailDomainVerificationResponse.binding:type_name -> api.user.service.v1.EmailDomainBindingInfo
 	35, // 29: api.user.service.v1.ListOperatorEmailDomainBindingsRequest.operator_context:type_name -> api.common.OperatorContext
-	24, // 30: api.user.service.v1.ListOperatorEmailDomainBindingsResponse.data:type_name -> api.user.service.v1.EmailDomainBindingInfo
-	1,  // 31: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
-	5,  // 32: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	7,  // 33: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	9,  // 34: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	21, // 35: api.user.service.v1.Dns.PrecheckOperatorApexDomain:input_type -> api.user.service.v1.PrecheckOperatorApexDomainRequest
-	12, // 36: api.user.service.v1.Dns.ListOperatorApexDomains:input_type -> api.user.service.v1.ListOperatorApexDomainsRequest
-	15, // 37: api.user.service.v1.Dns.AddOperatorApexDomain:input_type -> api.user.service.v1.AddOperatorApexDomainRequest
-	17, // 38: api.user.service.v1.Dns.DeleteOperatorApexDomain:input_type -> api.user.service.v1.DeleteOperatorApexDomainRequest
-	19, // 39: api.user.service.v1.Dns.RefreshOperatorApexDomain:input_type -> api.user.service.v1.RefreshOperatorApexDomainRequest
-	25, // 40: api.user.service.v1.Dns.BindOperatorEmailDomain:input_type -> api.user.service.v1.BindOperatorEmailDomainRequest
-	27, // 41: api.user.service.v1.Dns.GetOperatorEmailDomainBinding:input_type -> api.user.service.v1.GetOperatorEmailDomainBindingRequest
-	29, // 42: api.user.service.v1.Dns.DeleteOperatorEmailDomainBinding:input_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingRequest
-	31, // 43: api.user.service.v1.Dns.RetryOperatorEmailDomainVerification:input_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationRequest
-	33, // 44: api.user.service.v1.Dns.ListOperatorEmailDomainBindings:input_type -> api.user.service.v1.ListOperatorEmailDomainBindingsRequest
-	2,  // 45: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	6,  // 46: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	8,  // 47: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	10, // 48: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	22, // 49: api.user.service.v1.Dns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
-	13, // 50: api.user.service.v1.Dns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
-	16, // 51: api.user.service.v1.Dns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
-	18, // 52: api.user.service.v1.Dns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
-	20, // 53: api.user.service.v1.Dns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
-	26, // 54: api.user.service.v1.Dns.BindOperatorEmailDomain:output_type -> api.user.service.v1.BindOperatorEmailDomainResponse
-	28, // 55: api.user.service.v1.Dns.GetOperatorEmailDomainBinding:output_type -> api.user.service.v1.GetOperatorEmailDomainBindingResponse
-	30, // 56: api.user.service.v1.Dns.DeleteOperatorEmailDomainBinding:output_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingResponse
-	32, // 57: api.user.service.v1.Dns.RetryOperatorEmailDomainVerification:output_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationResponse
-	34, // 58: api.user.service.v1.Dns.ListOperatorEmailDomainBindings:output_type -> api.user.service.v1.ListOperatorEmailDomainBindingsResponse
-	45, // [45:59] is the sub-list for method output_type
-	31, // [31:45] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	36, // 30: api.user.service.v1.ListOperatorEmailDomainBindingsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	24, // 31: api.user.service.v1.ListOperatorEmailDomainBindingsResponse.data:type_name -> api.user.service.v1.EmailDomainBindingInfo
+	1,  // 32: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
+	5,  // 33: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	7,  // 34: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	9,  // 35: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	21, // 36: api.user.service.v1.Dns.PrecheckOperatorApexDomain:input_type -> api.user.service.v1.PrecheckOperatorApexDomainRequest
+	12, // 37: api.user.service.v1.Dns.ListOperatorApexDomains:input_type -> api.user.service.v1.ListOperatorApexDomainsRequest
+	15, // 38: api.user.service.v1.Dns.AddOperatorApexDomain:input_type -> api.user.service.v1.AddOperatorApexDomainRequest
+	17, // 39: api.user.service.v1.Dns.DeleteOperatorApexDomain:input_type -> api.user.service.v1.DeleteOperatorApexDomainRequest
+	19, // 40: api.user.service.v1.Dns.RefreshOperatorApexDomain:input_type -> api.user.service.v1.RefreshOperatorApexDomainRequest
+	25, // 41: api.user.service.v1.Dns.BindOperatorEmailDomain:input_type -> api.user.service.v1.BindOperatorEmailDomainRequest
+	27, // 42: api.user.service.v1.Dns.GetOperatorEmailDomainBinding:input_type -> api.user.service.v1.GetOperatorEmailDomainBindingRequest
+	29, // 43: api.user.service.v1.Dns.DeleteOperatorEmailDomainBinding:input_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingRequest
+	31, // 44: api.user.service.v1.Dns.RetryOperatorEmailDomainVerification:input_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationRequest
+	33, // 45: api.user.service.v1.Dns.ListOperatorEmailDomainBindings:input_type -> api.user.service.v1.ListOperatorEmailDomainBindingsRequest
+	2,  // 46: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	6,  // 47: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	8,  // 48: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	10, // 49: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	22, // 50: api.user.service.v1.Dns.PrecheckOperatorApexDomain:output_type -> api.user.service.v1.PrecheckOperatorApexDomainResponse
+	13, // 51: api.user.service.v1.Dns.ListOperatorApexDomains:output_type -> api.user.service.v1.ListOperatorApexDomainsResponse
+	16, // 52: api.user.service.v1.Dns.AddOperatorApexDomain:output_type -> api.user.service.v1.AddOperatorApexDomainResponse
+	18, // 53: api.user.service.v1.Dns.DeleteOperatorApexDomain:output_type -> api.user.service.v1.DeleteOperatorApexDomainResponse
+	20, // 54: api.user.service.v1.Dns.RefreshOperatorApexDomain:output_type -> api.user.service.v1.RefreshOperatorApexDomainResponse
+	26, // 55: api.user.service.v1.Dns.BindOperatorEmailDomain:output_type -> api.user.service.v1.BindOperatorEmailDomainResponse
+	28, // 56: api.user.service.v1.Dns.GetOperatorEmailDomainBinding:output_type -> api.user.service.v1.GetOperatorEmailDomainBindingResponse
+	30, // 57: api.user.service.v1.Dns.DeleteOperatorEmailDomainBinding:output_type -> api.user.service.v1.DeleteOperatorEmailDomainBindingResponse
+	32, // 58: api.user.service.v1.Dns.RetryOperatorEmailDomainVerification:output_type -> api.user.service.v1.RetryOperatorEmailDomainVerificationResponse
+	34, // 59: api.user.service.v1.Dns.ListOperatorEmailDomainBindings:output_type -> api.user.service.v1.ListOperatorEmailDomainBindingsResponse
+	46, // [46:60] is the sub-list for method output_type
+	32, // [32:46] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }

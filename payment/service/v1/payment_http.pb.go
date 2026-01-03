@@ -23,6 +23,7 @@ const OperationPaymentAddUserBankCard = "/payment.service.v1.Payment/AddUserBank
 const OperationPaymentBuyCryptoViaFiat = "/payment.service.v1.Payment/BuyCryptoViaFiat"
 const OperationPaymentBuyCryptoViaFiatCurrentList = "/payment.service.v1.Payment/BuyCryptoViaFiatCurrentList"
 const OperationPaymentBuyCryptoViaFiatPriceQuery = "/payment.service.v1.Payment/BuyCryptoViaFiatPriceQuery"
+const OperationPaymentDeleteSavedPaymentInfo = "/payment.service.v1.Payment/DeleteSavedPaymentInfo"
 const OperationPaymentDeleteUsesrBankCard = "/payment.service.v1.Payment/DeleteUsesrBankCard"
 const OperationPaymentDepositCallback = "/payment.service.v1.Payment/DepositCallback"
 const OperationPaymentGetAddress = "/payment.service.v1.Payment/GetAddress"
@@ -31,6 +32,7 @@ const OperationPaymentGetPaymentChannelPage = "/payment.service.v1.Payment/GetPa
 const OperationPaymentGetTransactionPage = "/payment.service.v1.Payment/GetTransactionPage"
 const OperationPaymentGetUserBankCardList = "/payment.service.v1.Payment/GetUserBankCardList"
 const OperationPaymentInitiateDeposit = "/payment.service.v1.Payment/InitiateDeposit"
+const OperationPaymentListSavedPaymentInfo = "/payment.service.v1.Payment/ListSavedPaymentInfo"
 const OperationPaymentOperatorDepositCallback = "/payment.service.v1.Payment/OperatorDepositCallback"
 const OperationPaymentOperatorWithdrawCallback = "/payment.service.v1.Payment/OperatorWithdrawCallback"
 const OperationPaymentUpdateUserBankCard = "/payment.service.v1.Payment/UpdateUserBankCard"
@@ -41,6 +43,9 @@ type PaymentHTTPServer interface {
 	BuyCryptoViaFiat(context.Context, *BuyCryptoViaFiatRequest) (*BuyCryptoViaFiatResponse, error)
 	BuyCryptoViaFiatCurrentList(context.Context, *BuyCryptoViaFiatCurrentListRequest) (*BuyCryptoViaFiatCurrentListResponse, error)
 	BuyCryptoViaFiatPriceQuery(context.Context, *BuyCryptoViaFiatPriceQueryRequest) (*BuyCryptoViaFiatPriceQueryResponse, error)
+	// DeleteSavedPaymentInfo Delete saved payment info
+	// Removes a saved payment information record
+	DeleteSavedPaymentInfo(context.Context, *DeleteSavedPaymentInfoRequest) (*DeleteSavedPaymentInfoResponse, error)
 	DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error)
 	// DepositCallback Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
@@ -62,6 +67,9 @@ type PaymentHTTPServer interface {
 	// Starts a new deposit process and returns payment information
 	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
 	InitiateDeposit(context.Context, *InitiateDepositRequest) (*InitiateDepositResponse, error)
+	// ListSavedPaymentInfo List saved payment info
+	// Retrieves saved payment information for the current user
+	ListSavedPaymentInfo(context.Context, *ListSavedPaymentInfoRequest) (*ListSavedPaymentInfoResponse, error)
 	// OperatorDepositCallback Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
 	// This endpoint is called by payment providers to notify of completed or failed deposits
@@ -98,6 +106,8 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/buycrypto/currency/list", _Payment_BuyCryptoViaFiatCurrentList0_HTTP_Handler(srv))
 	r.POST("/v1/payment/buycrypto/price/get", _Payment_BuyCryptoViaFiatPriceQuery0_HTTP_Handler(srv))
 	r.POST("/v1/payment/buycrypto/add", _Payment_BuyCryptoViaFiat0_HTTP_Handler(srv))
+	r.GET("/v1/payment/saved-info", _Payment_ListSavedPaymentInfo0_HTTP_Handler(srv))
+	r.DELETE("/v1/payment/saved-info/{id}", _Payment_DeleteSavedPaymentInfo0_HTTP_Handler(srv))
 }
 
 func _Payment_GetAddress0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -452,11 +462,55 @@ func _Payment_BuyCryptoViaFiat0_HTTP_Handler(srv PaymentHTTPServer) func(ctx htt
 	}
 }
 
+func _Payment_ListSavedPaymentInfo0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListSavedPaymentInfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentListSavedPaymentInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListSavedPaymentInfo(ctx, req.(*ListSavedPaymentInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListSavedPaymentInfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_DeleteSavedPaymentInfo0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteSavedPaymentInfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentDeleteSavedPaymentInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteSavedPaymentInfo(ctx, req.(*DeleteSavedPaymentInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteSavedPaymentInfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
 	AddUserBankCard(ctx context.Context, req *AddBankCardRequest, opts ...http.CallOption) (rsp *AddBankCardResponse, err error)
 	BuyCryptoViaFiat(ctx context.Context, req *BuyCryptoViaFiatRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatResponse, err error)
 	BuyCryptoViaFiatCurrentList(ctx context.Context, req *BuyCryptoViaFiatCurrentListRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatCurrentListResponse, err error)
 	BuyCryptoViaFiatPriceQuery(ctx context.Context, req *BuyCryptoViaFiatPriceQueryRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatPriceQueryResponse, err error)
+	// DeleteSavedPaymentInfo Delete saved payment info
+	// Removes a saved payment information record
+	DeleteSavedPaymentInfo(ctx context.Context, req *DeleteSavedPaymentInfoRequest, opts ...http.CallOption) (rsp *DeleteSavedPaymentInfoResponse, err error)
 	DeleteUsesrBankCard(ctx context.Context, req *DeleteBankCardRequest, opts ...http.CallOption) (rsp *DeleteBankCardResponse, err error)
 	// DepositCallback Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
@@ -478,6 +532,9 @@ type PaymentHTTPClient interface {
 	// Starts a new deposit process and returns payment information
 	// Error code: INITIATE_DEPOSIT_FAILED(50004) - Failed to initiate deposit transaction
 	InitiateDeposit(ctx context.Context, req *InitiateDepositRequest, opts ...http.CallOption) (rsp *InitiateDepositResponse, err error)
+	// ListSavedPaymentInfo List saved payment info
+	// Retrieves saved payment information for the current user
+	ListSavedPaymentInfo(ctx context.Context, req *ListSavedPaymentInfoRequest, opts ...http.CallOption) (rsp *ListSavedPaymentInfoResponse, err error)
 	// OperatorDepositCallback Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
 	// This endpoint is called by payment providers to notify of completed or failed deposits
@@ -550,6 +607,21 @@ func (c *PaymentHTTPClientImpl) BuyCryptoViaFiatPriceQuery(ctx context.Context, 
 	opts = append(opts, http.Operation(OperationPaymentBuyCryptoViaFiatPriceQuery))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// DeleteSavedPaymentInfo Delete saved payment info
+// Removes a saved payment information record
+func (c *PaymentHTTPClientImpl) DeleteSavedPaymentInfo(ctx context.Context, in *DeleteSavedPaymentInfoRequest, opts ...http.CallOption) (*DeleteSavedPaymentInfoResponse, error) {
+	var out DeleteSavedPaymentInfoResponse
+	pattern := "/v1/payment/saved-info/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPaymentDeleteSavedPaymentInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -667,6 +739,21 @@ func (c *PaymentHTTPClientImpl) InitiateDeposit(ctx context.Context, in *Initiat
 	opts = append(opts, http.Operation(OperationPaymentInitiateDeposit))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListSavedPaymentInfo List saved payment info
+// Retrieves saved payment information for the current user
+func (c *PaymentHTTPClientImpl) ListSavedPaymentInfo(ctx context.Context, in *ListSavedPaymentInfoRequest, opts ...http.CallOption) (*ListSavedPaymentInfoResponse, error) {
+	var out ListSavedPaymentInfoResponse
+	pattern := "/v1/payment/saved-info"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPaymentListSavedPaymentInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

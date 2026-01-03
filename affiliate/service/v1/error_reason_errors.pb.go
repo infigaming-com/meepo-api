@@ -910,3 +910,27 @@ func IsSetAffiliateDomainFailed(err error) bool {
 func ErrorSetAffiliateDomainFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SET_AFFILIATE_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsListPostbackLogsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_POSTBACK_LOGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListPostbackLogsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_POSTBACK_LOGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserPromoConditionInfoFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_PROMO_CONDITION_INFO_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserPromoConditionInfoFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_PROMO_CONDITION_INFO_FAILED.String(), fmt.Sprintf(format, args...))
+}

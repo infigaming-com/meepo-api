@@ -63,6 +63,8 @@ service Affiliate {
 
     rpc ListPostbacks(ListPostbacksRequest) returns (ListPostbacksResponse) {}
 
+    rpc ListPostbackLogs(ListPostbackLogsRequest) returns (ListPostbackLogsResponse) {}
+
      // -------------- Affiliate Domain --------------
 
      rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (ListAffiliateDomainsResponse) {}
@@ -574,6 +576,50 @@ message ListPostbacksResponse {
     int32 page_size = 6;
 }
 
+// -------------- Postback Logs --------------
+
+message ListPostbackLogsRequest {
+    optional int64 affiliate_id = 1;
+    optional google.protobuf.Timestamp start_time = 2;
+    optional google.protobuf.Timestamp end_time = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+    int64 initiator_user_id = 6;
+    int32 initiator_user_role_id = 7;
+    api.common.OperatorContext initiator_operator_context = 8;
+    api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+message ListPostbackLogsResponse {
+    message PostbackLog {
+        int64 log_id = 1;
+        int64 postback_id = 2;
+        string postback_name = 3;
+        string postback_url = 4;           // Final URL after macro replacement
+        string action_type = 5;            // User action: register, deposit, etc.
+        string request_method = 6;         // GET/POST
+        int32 http_status_code = 7;        // HTTP response status code
+        string reason = 8;                 // Success or error message
+        bool success = 9;                  // true if HTTP 2xx
+        int32 attempt_number = 10;         // 1, 2, or 3
+        int64 event_id = 11;               // Related event ID
+        int64 user_id = 12;                // User that triggered the event
+        int64 affiliate_id = 13;
+        string affiliate_name = 14;
+        int64 retailer_operator_id = 15;
+        string retailer_operator_name = 16;
+        int64 company_operator_id = 17;
+        string company_operator_name = 18;
+        int64 operator_id = 19;
+        string operator_name = 20;
+        google.protobuf.Timestamp created_at = 21;
+    }
+    repeated PostbackLog logs = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
 // -------------- Affiliate Domain --------------
 
 
@@ -808,5 +854,8 @@ message GetUserPromoConditionInfoResponse {
 
     // User's affiliate info
     int64 affiliate_id = 4;                // User's affiliate_id, 0 = not an affiliate
+
+    // Conversion conditions
+    bool has_met_conversion_conditions = 5; // true if user has met conversion conditions
 }
 

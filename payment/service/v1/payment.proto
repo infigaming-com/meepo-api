@@ -310,6 +310,8 @@ message InitiateDepositRequest {
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
   google.protobuf.Struct extra = 4;
+  // Save this deposit info for later reuse
+  bool save_for_later_use = 5 [json_name="saveForLaterUse"];
 }
 
 // Response for deposit initiation
@@ -406,6 +408,8 @@ message InitiateWithdrawRequest {
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
   google.protobuf.Struct extra = 7;
+  // Save this withdrawal info for later reuse
+  bool save_for_later_use = 8 [json_name="saveForLaterUse"];
 }
 
 // Response for withdrawal initiation
@@ -986,6 +990,38 @@ message GetResponsibleGamblingStatusResponse {
 	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
 }
 
+// Saved payment info item
+// Represents a saved payment information record
+message SavedPaymentInfoItem {
+	int64 id = 1;
+	string channel_id = 2 [json_name="channelId"];
+	string type = 3;  // 'payin' or 'payout'
+	google.protobuf.Struct schema_data = 4 [json_name="schemaData"];
+	string last_used_amount = 5 [json_name="lastUsedAmount"];
+	string last_used_currency = 6 [json_name="lastUsedCurrency"];
+	google.protobuf.Timestamp created_at = 7 [json_name="createdAt"];
+	google.protobuf.Timestamp updated_at = 8 [json_name="updatedAt"];
+}
+
+// Request to list saved payment info
+message ListSavedPaymentInfoRequest {
+	optional string channel_id = 1 [json_name="channelId"];
+	optional string type = 2;  // 'payin', 'payout', or empty for all
+}
+
+// Response for listing saved payment info
+message ListSavedPaymentInfoResponse {
+	repeated SavedPaymentInfoItem items = 1;
+}
+
+// Request to delete saved payment info
+message DeleteSavedPaymentInfoRequest {
+	int64 id = 1;
+}
+
+// Response for deleting saved payment info
+message DeleteSavedPaymentInfoResponse {}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -1188,4 +1224,20 @@ service Payment {
 
   
 	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {}
+
+	// List saved payment info
+	// Retrieves saved payment information for the current user
+	rpc ListSavedPaymentInfo(ListSavedPaymentInfoRequest) returns (ListSavedPaymentInfoResponse) {
+		option (google.api.http) = {
+			get: "/v1/payment/saved-info"
+		};
+	}
+
+	// Delete saved payment info
+	// Removes a saved payment information record
+	rpc DeleteSavedPaymentInfo(DeleteSavedPaymentInfoRequest) returns (DeleteSavedPaymentInfoResponse) {
+		option (google.api.http) = {
+			delete: "/v1/payment/saved-info/{id}"
+		};
+	}
 }

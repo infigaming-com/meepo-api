@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -117,18 +118,102 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_event_proto_rawDescGZIP(), []int{1}
 }
 
+// VipUpdateEvent is emitted when a user's VIP level changes.
+type VipUpdateEvent struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OldVipLevel     int32                   `protobuf:"varint,3,opt,name=old_vip_level,json=oldVipLevel,proto3" json:"old_vip_level,omitempty"`
+	NewVipLevel     int32                   `protobuf:"varint,4,opt,name=new_vip_level,json=newVipLevel,proto3" json:"new_vip_level,omitempty"`
+	UpdatedAt       int64                   `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *VipUpdateEvent) Reset() {
+	*x = VipUpdateEvent{}
+	mi := &file_vip_service_v1_vip_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VipUpdateEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VipUpdateEvent) ProtoMessage() {}
+
+func (x *VipUpdateEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_vip_service_v1_vip_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VipUpdateEvent.ProtoReflect.Descriptor instead.
+func (*VipUpdateEvent) Descriptor() ([]byte, []int) {
+	return file_vip_service_v1_vip_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *VipUpdateEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *VipUpdateEvent) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *VipUpdateEvent) GetOldVipLevel() int32 {
+	if x != nil {
+		return x.OldVipLevel
+	}
+	return 0
+}
+
+func (x *VipUpdateEvent) GetNewVipLevel() int32 {
+	if x != nil {
+		return x.NewVipLevel
+	}
+	return 0
+}
+
+func (x *VipUpdateEvent) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
 var File_vip_service_v1_vip_event_proto protoreflect.FileDescriptor
 
 const file_vip_service_v1_vip_event_proto_rawDesc = "" +
 	"\n" +
-	"\x1evip/service/v1/vip_event.proto\x12\x12api.vip.service.v1\"u\n" +
+	"\x1evip/service/v1/vip_event.proto\x12\x12api.vip.service.v1\x1a\x13common/common.proto\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse2Z\n" +
+	"\rEventResponse\"\xd8\x01\n" +
+	"\x0eVipUpdateEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\"\n" +
+	"\rold_vip_level\x18\x03 \x01(\x05R\voldVipLevel\x12\"\n" +
+	"\rnew_vip_level\x18\x04 \x01(\x05R\vnewVipLevel\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x05 \x01(\x03R\tupdatedAt2Z\n" +
 	"\bVipEvent\x12N\n" +
 	"\x05Event\x12 .api.vip.service.v1.EventRequest\x1a!.api.vip.service.v1.EventResponse\"\x00BM\n" +
 	"\x12api.vip.service.v1P\x01Z5github.com/infigaming-com/meepo-api/vip/service/v1;v1b\x06proto3"
@@ -145,19 +230,22 @@ func file_vip_service_v1_vip_event_proto_rawDescGZIP() []byte {
 	return file_vip_service_v1_vip_event_proto_rawDescData
 }
 
-var file_vip_service_v1_vip_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_vip_service_v1_vip_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_vip_service_v1_vip_event_proto_goTypes = []any{
-	(*EventRequest)(nil),  // 0: api.vip.service.v1.EventRequest
-	(*EventResponse)(nil), // 1: api.vip.service.v1.EventResponse
+	(*EventRequest)(nil),           // 0: api.vip.service.v1.EventRequest
+	(*EventResponse)(nil),          // 1: api.vip.service.v1.EventResponse
+	(*VipUpdateEvent)(nil),         // 2: api.vip.service.v1.VipUpdateEvent
+	(*common.OperatorContext)(nil), // 3: api.common.OperatorContext
 }
 var file_vip_service_v1_vip_event_proto_depIdxs = []int32{
-	0, // 0: api.vip.service.v1.VipEvent.Event:input_type -> api.vip.service.v1.EventRequest
-	1, // 1: api.vip.service.v1.VipEvent.Event:output_type -> api.vip.service.v1.EventResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: api.vip.service.v1.VipUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 1: api.vip.service.v1.VipEvent.Event:input_type -> api.vip.service.v1.EventRequest
+	1, // 2: api.vip.service.v1.VipEvent.Event:output_type -> api.vip.service.v1.EventResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_vip_service_v1_vip_event_proto_init() }
@@ -171,7 +259,7 @@ func file_vip_service_v1_vip_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vip_service_v1_vip_event_proto_rawDesc), len(file_vip_service_v1_vip_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
