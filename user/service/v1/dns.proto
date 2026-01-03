@@ -322,10 +322,11 @@ message RetryOperatorEmailDomainVerificationResponse {
 
 message ListOperatorEmailDomainBindingsRequest {
 	api.common.OperatorContext operator_context = 1;
-	optional string status = 2;
-	optional int32 page = 3;
-	optional int32 page_size = 4;
-	optional bool pagination = 5;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	optional string status = 3;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+	optional bool pagination = 6;
 }
 
 message ListOperatorEmailDomainBindingsResponse {
