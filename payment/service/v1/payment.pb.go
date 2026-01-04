@@ -2215,8 +2215,10 @@ type InitiateWithdrawRequest struct {
 	Extra *structpb.Struct `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
 	// Save this withdrawal info for later reuse
 	SaveForLaterUse bool `protobuf:"varint,8,opt,name=save_for_later_use,json=saveForLaterUse,proto3" json:"save_for_later_use,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Name for saved payment info (required when save_for_later_use is true)
+	SavedInfoName string `protobuf:"bytes,9,opt,name=saved_info_name,json=savedInfoName,proto3" json:"saved_info_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *InitiateWithdrawRequest) Reset() {
@@ -2303,6 +2305,13 @@ func (x *InitiateWithdrawRequest) GetSaveForLaterUse() bool {
 		return x.SaveForLaterUse
 	}
 	return false
+}
+
+func (x *InitiateWithdrawRequest) GetSavedInfoName() string {
+	if x != nil {
+		return x.SavedInfoName
+	}
+	return ""
 }
 
 // Response for withdrawal initiation
@@ -5753,12 +5762,13 @@ type SavedPaymentInfoItem struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	ChannelId        string                 `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Type             string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // 'payin' or 'payout'
-	SchemaData       *structpb.Struct       `protobuf:"bytes,4,opt,name=schema_data,json=schemaData,proto3" json:"schema_data,omitempty"`
-	LastUsedAmount   string                 `protobuf:"bytes,5,opt,name=last_used_amount,json=lastUsedAmount,proto3" json:"last_used_amount,omitempty"`
-	LastUsedCurrency string                 `protobuf:"bytes,6,opt,name=last_used_currency,json=lastUsedCurrency,proto3" json:"last_used_currency,omitempty"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"` // User-defined name for identification
+	Type             string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"` // 'payin' or 'payout'
+	SchemaData       *structpb.Struct       `protobuf:"bytes,5,opt,name=schema_data,json=schemaData,proto3" json:"schema_data,omitempty"`
+	LastUsedAmount   string                 `protobuf:"bytes,6,opt,name=last_used_amount,json=lastUsedAmount,proto3" json:"last_used_amount,omitempty"`
+	LastUsedCurrency string                 `protobuf:"bytes,7,opt,name=last_used_currency,json=lastUsedCurrency,proto3" json:"last_used_currency,omitempty"`
+	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -5803,6 +5813,13 @@ func (x *SavedPaymentInfoItem) GetId() int64 {
 func (x *SavedPaymentInfoItem) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
+	}
+	return ""
+}
+
+func (x *SavedPaymentInfoItem) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -6440,7 +6457,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x03 \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\x04 \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x05 \x01(\tR\aaddress\"\xd8\x02\n" +
+	"\aaddress\x18\x05 \x01(\tR\aaddress\"\x80\x03\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
@@ -6450,7 +6467,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"channel_id\x18\x05 \x01(\tR\tchannelId\x12F\n" +
 	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
 	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\x12+\n" +
-	"\x12save_for_later_use\x18\b \x01(\bR\x0fsaveForLaterUse\"\xd8\x01\n" +
+	"\x12save_for_later_use\x18\b \x01(\bR\x0fsaveForLaterUse\x12&\n" +
+	"\x0fsaved_info_name\x18\t \x01(\tR\rsavedInfoName\"\xd8\x01\n" +
 	"\x18InitiateWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +
@@ -6772,20 +6790,21 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x19ResponsibleGamblingStatus\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
 	"\x10withdrawal_usage\x18\x02 \x01(\tR\x0fwithdrawalUsage\x12#\n" +
-	"\rdeposit_usage\x18\x03 \x01(\tR\fdepositUsage\"\xe1\x02\n" +
+	"\rdeposit_usage\x18\x03 \x01(\tR\fdepositUsage\"\xf5\x02\n" +
 	"\x14SavedPaymentInfoItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x128\n" +
-	"\vschema_data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x128\n" +
+	"\vschema_data\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"schemaData\x12(\n" +
-	"\x10last_used_amount\x18\x05 \x01(\tR\x0elastUsedAmount\x12,\n" +
-	"\x12last_used_currency\x18\x06 \x01(\tR\x10lastUsedCurrency\x129\n" +
+	"\x10last_used_amount\x18\x06 \x01(\tR\x0elastUsedAmount\x12,\n" +
+	"\x12last_used_currency\x18\a \x01(\tR\x10lastUsedCurrency\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"r\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"r\n" +
 	"\x1bListSavedPaymentInfoRequest\x12\"\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tH\x00R\tchannelId\x88\x01\x01\x12\x17\n" +

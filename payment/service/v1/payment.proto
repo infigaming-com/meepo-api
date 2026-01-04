@@ -410,6 +410,8 @@ message InitiateWithdrawRequest {
   google.protobuf.Struct extra = 7;
   // Save this withdrawal info for later reuse
   bool save_for_later_use = 8 [json_name="saveForLaterUse"];
+  // Name for saved payment info (required when save_for_later_use is true)
+  string saved_info_name = 9 [json_name="savedInfoName"];
 }
 
 // Response for withdrawal initiation
@@ -995,12 +997,13 @@ message GetResponsibleGamblingStatusResponse {
 message SavedPaymentInfoItem {
 	int64 id = 1;
 	string channel_id = 2 [json_name="channelId"];
-	string type = 3;  // 'payin' or 'payout'
-	google.protobuf.Struct schema_data = 4 [json_name="schemaData"];
-	string last_used_amount = 5 [json_name="lastUsedAmount"];
-	string last_used_currency = 6 [json_name="lastUsedCurrency"];
-	google.protobuf.Timestamp created_at = 7 [json_name="createdAt"];
-	google.protobuf.Timestamp updated_at = 8 [json_name="updatedAt"];
+	string name = 3;  // User-defined name for identification
+	string type = 4;  // 'payin' or 'payout'
+	google.protobuf.Struct schema_data = 5 [json_name="schemaData"];
+	string last_used_amount = 6 [json_name="lastUsedAmount"];
+	string last_used_currency = 7 [json_name="lastUsedCurrency"];
+	google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+	google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
 }
 
 // Request to list saved payment info

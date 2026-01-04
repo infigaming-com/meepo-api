@@ -23075,6 +23075,8 @@ components:
                     type: string
                 channelId:
                     type: string
+                name:
+                    type: string
                 type:
                     type: string
                 schemaData:

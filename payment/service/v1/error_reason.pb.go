@@ -45,6 +45,8 @@ const (
 	ErrorReason_DELETE_SAVED_PAYMENT_INFO_FAILED ErrorReason = 50016
 	ErrorReason_SAVED_PAYMENT_INFO_NOT_FOUND     ErrorReason = 50017
 	ErrorReason_USER_INFO_NOT_FOUND              ErrorReason = 50018
+	ErrorReason_SAVED_INFO_NAME_REQUIRED         ErrorReason = 50019
+	ErrorReason_SAVED_INFO_NAME_TOO_LONG         ErrorReason = 50020
 )
 
 // Enum value maps for ErrorReason.
@@ -69,6 +71,8 @@ var (
 		50016: "DELETE_SAVED_PAYMENT_INFO_FAILED",
 		50017: "SAVED_PAYMENT_INFO_NOT_FOUND",
 		50018: "USER_INFO_NOT_FOUND",
+		50019: "SAVED_INFO_NAME_REQUIRED",
+		50020: "SAVED_INFO_NAME_TOO_LONG",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                      0,
@@ -90,6 +94,8 @@ var (
 		"DELETE_SAVED_PAYMENT_INFO_FAILED": 50016,
 		"SAVED_PAYMENT_INFO_NOT_FOUND":     50017,
 		"USER_INFO_NOT_FOUND":              50018,
+		"SAVED_INFO_NAME_REQUIRED":         50019,
+		"SAVED_INFO_NAME_TOO_LONG":         50020,
 	}
 )
 
@@ -124,7 +130,7 @@ var File_payment_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\x93\x05\n" +
+	"%payment/service/v1/error_reason.proto\x12\x16api.payment.service.v1\x1a\x13errors/errors.proto*\xd3\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12$\n" +
 	"\x1eGET_PAYMENT_METHOD_LIST_FAILED\x10ц\x03\x12#\n" +
@@ -144,7 +150,9 @@ const file_payment_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eLIST_SAVED_PAYMENT_INFO_FAILED\x10߆\x03\x12&\n" +
 	" DELETE_SAVED_PAYMENT_INFO_FAILED\x10\xe0\x86\x03\x12\"\n" +
 	"\x1cSAVED_PAYMENT_INFO_NOT_FOUND\x10\xe1\x86\x03\x12\x19\n" +
-	"\x13USER_INFO_NOT_FOUND\x10\xe2\x86\x03\x1a\x04\xa0E\xf4\x03BU\n" +
+	"\x13USER_INFO_NOT_FOUND\x10\xe2\x86\x03\x12\x1e\n" +
+	"\x18SAVED_INFO_NAME_REQUIRED\x10\xe3\x86\x03\x12\x1e\n" +
+	"\x18SAVED_INFO_NAME_TOO_LONG\x10\xe4\x86\x03\x1a\x04\xa0E\xf4\x03BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (

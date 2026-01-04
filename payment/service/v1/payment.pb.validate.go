@@ -2872,6 +2872,8 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for SaveForLaterUse
 
+	// no validation rules for SavedInfoName
+
 	if len(errors) > 0 {
 		return InitiateWithdrawRequestMultiError(errors)
 	}
@@ -8701,6 +8703,8 @@ func (m *SavedPaymentInfoItem) validate(all bool) error {
 	// no validation rules for Id
 
 	// no validation rules for ChannelId
+
+	// no validation rules for Name
 
 	// no validation rules for Type
 
