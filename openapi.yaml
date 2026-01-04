@@ -14987,11 +14987,17 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                changeBalance:
+                beforeCashBalance:
                     type: string
-                beforeBalance:
+                afterCashBalance:
                     type: string
-                afterBalance:
+                cashAmountChanged:
+                    type: string
+                beforeOperatorBonusBalance:
+                    type: string
+                afterOperatorBonusBalance:
+                    type: string
+                operatorBonusAmountChanged:
                     type: string
                 currency:
                     type: string
