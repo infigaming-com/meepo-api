@@ -19,6 +19,10 @@ service Review {
 			body: "*"
 		};
 	}
+
+	rpc CreateAffiliateWithdraw(CreateAffiliateWithdrawRequest) returns (CreateWithdrawResponse) {
+	}
+
 	rpc CreateOperatorWithdraw(CreateOperatorWithdrawRequest) returns (CreateWithdrawResponse) {}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
@@ -33,6 +37,12 @@ service Review {
 
 message CreateWithdrawRequest {
 	google.protobuf.Struct request = 1;  // JSON data for REST API
+}
+
+message CreateAffiliateWithdrawRequest {
+	google.protobuf.Struct request = 1;  // JSON data for REST API
+	api.common.OperatorContext operator_context = 2;
+	api.common.UserInfo user_info = 3;  // UserInfo for RPC calls (optional, for backward compatibility)
 }
 
 message CreateOperatorWithdrawRequest {
@@ -226,12 +236,19 @@ message GetTicketResponse {
 		int32 total_withdraw_count = 10;
 		int32 today_withdraw_count = 11;
 	}
+	message RequestInfo {
+		string channel_id = 1;
+		string amount = 2;
+		string currency = 3;
+		string raw_request = 4;
+	}
 	Ticket ticket = 1;
 	repeated Comment comments = 2;
 	UserInfo user_info = 3;
 	PaymentTransactionInfo payment_transaction_info = 4;
 	WalletTransactionInfo wallet_transaction_info = 5;
 	WalletTransactionSummary wallet_transaction_summary = 6;
+	RequestInfo request_info = 7;
 }
 
 message GetOperatorTicketRequest {
