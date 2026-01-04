@@ -22380,6 +22380,18 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for ExternalTransactionId
 
+	// no validation rules for BeforeCashBalance
+
+	// no validation rules for AfterCashBalance
+
+	// no validation rules for BeforeOperatorBonusBalance
+
+	// no validation rules for AfterOperatorBonusBalance
+
+	// no validation rules for BeforeProviderBonusBalance
+
+	// no validation rules for AfterProviderBonusBalance
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsResponse_BalanceTransactionMultiError(errors)
 	}
