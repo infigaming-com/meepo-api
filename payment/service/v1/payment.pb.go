@@ -1794,7 +1794,9 @@ type InitiateDepositRequest struct {
 	// Save this deposit info for later reuse
 	SaveForLaterUse bool `protobuf:"varint,5,opt,name=save_for_later_use,json=saveForLaterUse,proto3" json:"save_for_later_use,omitempty"`
 	// Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
-	SkipBonus     bool `protobuf:"varint,6,opt,name=skip_bonus,json=skipBonus,proto3" json:"skip_bonus,omitempty"`
+	SkipBonus bool `protobuf:"varint,6,opt,name=skip_bonus,json=skipBonus,proto3" json:"skip_bonus,omitempty"`
+	// Name for saved payment info (required when save_for_later_use is true)
+	SavedInfoName string `protobuf:"bytes,7,opt,name=saved_info_name,json=savedInfoName,proto3" json:"saved_info_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1869,6 +1871,13 @@ func (x *InitiateDepositRequest) GetSkipBonus() bool {
 		return x.SkipBonus
 	}
 	return false
+}
+
+func (x *InitiateDepositRequest) GetSavedInfoName() string {
+	if x != nil {
+		return x.SavedInfoName
+	}
+	return ""
 }
 
 // Response for deposit initiation
@@ -6610,7 +6619,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x16retailer_operator_name\x18+ \x01(\tR\x14retailerOperatorName\x120\n" +
 	"\x14system_operator_name\x18, \x01(\tR\x12systemOperatorName\x12#\n" +
 	"\roperator_type\x18- \x01(\tR\foperatorType\x12\x15\n" +
-	"\x06psp_id\x18. \x01(\tR\x05pspId\"\xe6\x01\n" +
+	"\x06psp_id\x18. \x01(\tR\x05pspId\"\x8e\x02\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -6619,7 +6628,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\x12+\n" +
 	"\x12save_for_later_use\x18\x05 \x01(\bR\x0fsaveForLaterUse\x12\x1d\n" +
 	"\n" +
-	"skip_bonus\x18\x06 \x01(\bR\tskipBonus\"\xa8\x02\n" +
+	"skip_bonus\x18\x06 \x01(\bR\tskipBonus\x12&\n" +
+	"\x0fsaved_info_name\x18\a \x01(\tR\rsavedInfoName\"\xa8\x02\n" +
 	"\x17InitiateDepositResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1a\n" +

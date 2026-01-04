@@ -22882,6 +22882,9 @@ components:
                 skipBonus:
                     type: boolean
                     description: Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
+                savedInfoName:
+                    type: string
+                    description: Name for saved payment info (required when save_for_later_use is true)
             description: |-
                 Request to initiate a deposit
                  Used to start a deposit transaction

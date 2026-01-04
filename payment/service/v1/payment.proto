@@ -314,6 +314,8 @@ message InitiateDepositRequest {
   bool save_for_later_use = 5 [json_name="saveForLaterUse"];
   // Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
   bool skip_bonus = 6 [json_name="skipBonus"];
+  // Name for saved payment info (required when save_for_later_use is true)
+  string saved_info_name = 7 [json_name="savedInfoName"];
 }
 
 // Response for deposit initiation
