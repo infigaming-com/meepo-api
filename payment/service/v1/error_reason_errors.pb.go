@@ -240,3 +240,27 @@ func IsUserInfoNotFound(err error) bool {
 func ErrorUserInfoNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_INFO_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsSavedInfoNameRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SAVED_INFO_NAME_REQUIRED.String() && e.Code == 500
+}
+
+func ErrorSavedInfoNameRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SAVED_INFO_NAME_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSavedInfoNameTooLong(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SAVED_INFO_NAME_TOO_LONG.String() && e.Code == 500
+}
+
+func ErrorSavedInfoNameTooLong(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SAVED_INFO_NAME_TOO_LONG.String(), fmt.Sprintf(format, args...))
+}
