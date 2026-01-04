@@ -204,8 +204,9 @@ message DnsInstruction {
 
 message AddOperatorApexDomainRequest {
 	api.common.OperatorContext operator_context = 1;
-	string apex_domain = 2;
-	string domain = 3;
+	optional api.common.OperatorContext target_operator_context = 2;
+	string apex_domain = 3;
+	string domain = 4;
 }
 
 message AddOperatorApexDomainResponse {
@@ -236,8 +237,9 @@ message RefreshOperatorApexDomainResponse {
 
 message PrecheckOperatorApexDomainRequest {
 	api.common.OperatorContext operator_context = 1;
-	string apex_domain = 2;
-	string domain = 3;
+	optional api.common.OperatorContext target_operator_context = 2;
+	string apex_domain = 3;
+	string domain = 4;
 }
 
 message PrecheckOperatorApexDomainResponse {
@@ -286,8 +288,9 @@ message EmailDomainBindingInfo {
 
 message BindOperatorEmailDomainRequest {
 	api.common.OperatorContext operator_context = 1;
-	string domain = 2;               // e.g., "abc.com"
-	string email_local_part = 3;     // e.g., "support"
+	optional api.common.OperatorContext target_operator_context = 2;
+	string domain = 3;               // e.g., "abc.com"
+	string email_local_part = 4;     // e.g., "support"
 }
 
 message BindOperatorEmailDomainResponse {
