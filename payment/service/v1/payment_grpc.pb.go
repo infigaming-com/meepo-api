@@ -52,6 +52,8 @@ const (
 	Payment_GetResponsibleGamblingStatus_FullMethodName     = "/payment.service.v1.Payment/GetResponsibleGamblingStatus"
 	Payment_ListSavedPaymentInfo_FullMethodName             = "/payment.service.v1.Payment/ListSavedPaymentInfo"
 	Payment_DeleteSavedPaymentInfo_FullMethodName           = "/payment.service.v1.Payment/DeleteSavedPaymentInfo"
+	Payment_SetCryptoBonusPreference_FullMethodName         = "/payment.service.v1.Payment/SetCryptoBonusPreference"
+	Payment_GetCryptoBonusPreference_FullMethodName         = "/payment.service.v1.Payment/GetCryptoBonusPreference"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -147,6 +149,13 @@ type PaymentClient interface {
 	// Delete saved payment info
 	// Removes a saved payment information record
 	DeleteSavedPaymentInfo(ctx context.Context, in *DeleteSavedPaymentInfoRequest, opts ...grpc.CallOption) (*DeleteSavedPaymentInfoResponse, error)
+	// Set crypto bonus preference
+	// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+	// This preference is applied when async crypto deposits arrive via blockchain callback
+	SetCryptoBonusPreference(ctx context.Context, in *SetCryptoBonusPreferenceRequest, opts ...grpc.CallOption) (*SetCryptoBonusPreferenceResponse, error)
+	// Get crypto bonus preference
+	// Retrieves the user's skip bonus preference for a specific crypto currency
+	GetCryptoBonusPreference(ctx context.Context, in *GetCryptoBonusPreferenceRequest, opts ...grpc.CallOption) (*GetCryptoBonusPreferenceResponse, error)
 }
 
 type paymentClient struct {
@@ -487,6 +496,26 @@ func (c *paymentClient) DeleteSavedPaymentInfo(ctx context.Context, in *DeleteSa
 	return out, nil
 }
 
+func (c *paymentClient) SetCryptoBonusPreference(ctx context.Context, in *SetCryptoBonusPreferenceRequest, opts ...grpc.CallOption) (*SetCryptoBonusPreferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetCryptoBonusPreferenceResponse)
+	err := c.cc.Invoke(ctx, Payment_SetCryptoBonusPreference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetCryptoBonusPreference(ctx context.Context, in *GetCryptoBonusPreferenceRequest, opts ...grpc.CallOption) (*GetCryptoBonusPreferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCryptoBonusPreferenceResponse)
+	err := c.cc.Invoke(ctx, Payment_GetCryptoBonusPreference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -580,6 +609,13 @@ type PaymentServer interface {
 	// Delete saved payment info
 	// Removes a saved payment information record
 	DeleteSavedPaymentInfo(context.Context, *DeleteSavedPaymentInfoRequest) (*DeleteSavedPaymentInfoResponse, error)
+	// Set crypto bonus preference
+	// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+	// This preference is applied when async crypto deposits arrive via blockchain callback
+	SetCryptoBonusPreference(context.Context, *SetCryptoBonusPreferenceRequest) (*SetCryptoBonusPreferenceResponse, error)
+	// Get crypto bonus preference
+	// Retrieves the user's skip bonus preference for a specific crypto currency
+	GetCryptoBonusPreference(context.Context, *GetCryptoBonusPreferenceRequest) (*GetCryptoBonusPreferenceResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -688,6 +724,12 @@ func (UnimplementedPaymentServer) ListSavedPaymentInfo(context.Context, *ListSav
 }
 func (UnimplementedPaymentServer) DeleteSavedPaymentInfo(context.Context, *DeleteSavedPaymentInfoRequest) (*DeleteSavedPaymentInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSavedPaymentInfo not implemented")
+}
+func (UnimplementedPaymentServer) SetCryptoBonusPreference(context.Context, *SetCryptoBonusPreferenceRequest) (*SetCryptoBonusPreferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetCryptoBonusPreference not implemented")
+}
+func (UnimplementedPaymentServer) GetCryptoBonusPreference(context.Context, *GetCryptoBonusPreferenceRequest) (*GetCryptoBonusPreferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCryptoBonusPreference not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -1304,6 +1346,42 @@ func _Payment_DeleteSavedPaymentInfo_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_SetCryptoBonusPreference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCryptoBonusPreferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).SetCryptoBonusPreference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_SetCryptoBonusPreference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).SetCryptoBonusPreference(ctx, req.(*SetCryptoBonusPreferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetCryptoBonusPreference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCryptoBonusPreferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetCryptoBonusPreference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetCryptoBonusPreference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetCryptoBonusPreference(ctx, req.(*GetCryptoBonusPreferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1442,6 +1520,14 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSavedPaymentInfo",
 			Handler:    _Payment_DeleteSavedPaymentInfo_Handler,
+		},
+		{
+			MethodName: "SetCryptoBonusPreference",
+			Handler:    _Payment_SetCryptoBonusPreference_Handler,
+		},
+		{
+			MethodName: "GetCryptoBonusPreference",
+			Handler:    _Payment_GetCryptoBonusPreference_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

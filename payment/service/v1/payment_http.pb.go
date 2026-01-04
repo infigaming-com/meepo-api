@@ -28,6 +28,7 @@ const OperationPaymentDeleteUsesrBankCard = "/payment.service.v1.Payment/DeleteU
 const OperationPaymentDepositCallback = "/payment.service.v1.Payment/DepositCallback"
 const OperationPaymentGetAddress = "/payment.service.v1.Payment/GetAddress"
 const OperationPaymentGetBankSchema = "/payment.service.v1.Payment/GetBankSchema"
+const OperationPaymentGetCryptoBonusPreference = "/payment.service.v1.Payment/GetCryptoBonusPreference"
 const OperationPaymentGetPaymentChannelPage = "/payment.service.v1.Payment/GetPaymentChannelPage"
 const OperationPaymentGetTransactionPage = "/payment.service.v1.Payment/GetTransactionPage"
 const OperationPaymentGetUserBankCardList = "/payment.service.v1.Payment/GetUserBankCardList"
@@ -35,6 +36,7 @@ const OperationPaymentInitiateDeposit = "/payment.service.v1.Payment/InitiateDep
 const OperationPaymentListSavedPaymentInfo = "/payment.service.v1.Payment/ListSavedPaymentInfo"
 const OperationPaymentOperatorDepositCallback = "/payment.service.v1.Payment/OperatorDepositCallback"
 const OperationPaymentOperatorWithdrawCallback = "/payment.service.v1.Payment/OperatorWithdrawCallback"
+const OperationPaymentSetCryptoBonusPreference = "/payment.service.v1.Payment/SetCryptoBonusPreference"
 const OperationPaymentUpdateUserBankCard = "/payment.service.v1.Payment/UpdateUserBankCard"
 const OperationPaymentWithdrawCallback = "/payment.service.v1.Payment/WithdrawCallback"
 
@@ -54,6 +56,9 @@ type PaymentHTTPServer interface {
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
 	GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error)
+	// GetCryptoBonusPreference Get crypto bonus preference
+	// Retrieves the user's skip bonus preference for a specific crypto currency
+	GetCryptoBonusPreference(context.Context, *GetCryptoBonusPreferenceRequest) (*GetCryptoBonusPreferenceResponse, error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
@@ -80,6 +85,10 @@ type PaymentHTTPServer interface {
 	// This endpoint is called by payment providers to notify of completed or failed withdrawals
 	// Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
 	OperatorWithdrawCallback(context.Context, *WithdrawCallbackRequest) (*WithdrawCallbackResponse, error)
+	// SetCryptoBonusPreference Set crypto bonus preference
+	// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+	// This preference is applied when async crypto deposits arrive via blockchain callback
+	SetCryptoBonusPreference(context.Context, *SetCryptoBonusPreferenceRequest) (*SetCryptoBonusPreferenceResponse, error)
 	UpdateUserBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error)
 	// WithdrawCallback Withdraw callback
 	// Handles callbacks from payment gateways for withdrawal status updates
@@ -108,6 +117,8 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/buycrypto/add", _Payment_BuyCryptoViaFiat0_HTTP_Handler(srv))
 	r.GET("/v1/payment/saved-info", _Payment_ListSavedPaymentInfo0_HTTP_Handler(srv))
 	r.DELETE("/v1/payment/saved-info/{id}", _Payment_DeleteSavedPaymentInfo0_HTTP_Handler(srv))
+	r.POST("/v1/payment/crypto-bonus-preference", _Payment_SetCryptoBonusPreference0_HTTP_Handler(srv))
+	r.GET("/v1/payment/crypto-bonus-preference/{currency}", _Payment_GetCryptoBonusPreference0_HTTP_Handler(srv))
 }
 
 func _Payment_GetAddress0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -503,6 +514,50 @@ func _Payment_DeleteSavedPaymentInfo0_HTTP_Handler(srv PaymentHTTPServer) func(c
 	}
 }
 
+func _Payment_SetCryptoBonusPreference0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetCryptoBonusPreferenceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentSetCryptoBonusPreference)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetCryptoBonusPreference(ctx, req.(*SetCryptoBonusPreferenceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetCryptoBonusPreferenceResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Payment_GetCryptoBonusPreference0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetCryptoBonusPreferenceRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentGetCryptoBonusPreference)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetCryptoBonusPreference(ctx, req.(*GetCryptoBonusPreferenceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetCryptoBonusPreferenceResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PaymentHTTPClient interface {
 	AddUserBankCard(ctx context.Context, req *AddBankCardRequest, opts ...http.CallOption) (rsp *AddBankCardResponse, err error)
 	BuyCryptoViaFiat(ctx context.Context, req *BuyCryptoViaFiatRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatResponse, err error)
@@ -519,6 +574,9 @@ type PaymentHTTPClient interface {
 	DepositCallback(ctx context.Context, req *DepositCallbackRequest, opts ...http.CallOption) (rsp *DepositCallbackResponse, err error)
 	GetAddress(ctx context.Context, req *GetAddressRequest, opts ...http.CallOption) (rsp *GetAddressResponse, err error)
 	GetBankSchema(ctx context.Context, req *GetBankSchemaRequest, opts ...http.CallOption) (rsp *GetBankSchemaResponse, err error)
+	// GetCryptoBonusPreference Get crypto bonus preference
+	// Retrieves the user's skip bonus preference for a specific crypto currency
+	GetCryptoBonusPreference(ctx context.Context, req *GetCryptoBonusPreferenceRequest, opts ...http.CallOption) (rsp *GetCryptoBonusPreferenceResponse, err error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
@@ -545,6 +603,10 @@ type PaymentHTTPClient interface {
 	// This endpoint is called by payment providers to notify of completed or failed withdrawals
 	// Error code: WITHDRAW_CALLBACK_FAILED(50007) - Failed to process withdrawal callback
 	OperatorWithdrawCallback(ctx context.Context, req *WithdrawCallbackRequest, opts ...http.CallOption) (rsp *WithdrawCallbackResponse, err error)
+	// SetCryptoBonusPreference Set crypto bonus preference
+	// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+	// This preference is applied when async crypto deposits arrive via blockchain callback
+	SetCryptoBonusPreference(ctx context.Context, req *SetCryptoBonusPreferenceRequest, opts ...http.CallOption) (rsp *SetCryptoBonusPreferenceResponse, err error)
 	UpdateUserBankCard(ctx context.Context, req *UpdateBankCardRequest, opts ...http.CallOption) (rsp *UpdateBankCardResponse, err error)
 	// WithdrawCallback Withdraw callback
 	// Handles callbacks from payment gateways for withdrawal status updates
@@ -684,6 +746,21 @@ func (c *PaymentHTTPClientImpl) GetBankSchema(ctx context.Context, in *GetBankSc
 	return &out, nil
 }
 
+// GetCryptoBonusPreference Get crypto bonus preference
+// Retrieves the user's skip bonus preference for a specific crypto currency
+func (c *PaymentHTTPClientImpl) GetCryptoBonusPreference(ctx context.Context, in *GetCryptoBonusPreferenceRequest, opts ...http.CallOption) (*GetCryptoBonusPreferenceResponse, error) {
+	var out GetCryptoBonusPreferenceResponse
+	pattern := "/v1/payment/crypto-bonus-preference/{currency}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPaymentGetCryptoBonusPreference))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // GetPaymentChannelPage Get payment channel page with pagination and filters
 // Retrieves a paginated list of payment channels with optional filtering
 // Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
@@ -786,6 +863,22 @@ func (c *PaymentHTTPClientImpl) OperatorWithdrawCallback(ctx context.Context, in
 	pattern := "/v1/payment/operator/withdraw/callback"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentOperatorWithdrawCallback))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SetCryptoBonusPreference Set crypto bonus preference
+// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+// This preference is applied when async crypto deposits arrive via blockchain callback
+func (c *PaymentHTTPClientImpl) SetCryptoBonusPreference(ctx context.Context, in *SetCryptoBonusPreferenceRequest, opts ...http.CallOption) (*SetCryptoBonusPreferenceResponse, error) {
+	var out SetCryptoBonusPreferenceResponse
+	pattern := "/v1/payment/crypto-bonus-preference"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentSetCryptoBonusPreference))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

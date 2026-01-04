@@ -6211,6 +6211,50 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
+    /v1/payment/crypto-bonus-preference:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Set crypto bonus preference
+                 Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+                 This preference is applied when async crypto deposits arrive via blockchain callback
+            operationId: Payment_SetCryptoBonusPreference
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.SetCryptoBonusPreferenceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.SetCryptoBonusPreferenceResponse'
+    /v1/payment/crypto-bonus-preference/{currency}:
+        get:
+            tags:
+                - Payment
+            description: |-
+                Get crypto bonus preference
+                 Retrieves the user's skip bonus preference for a specific crypto currency
+            operationId: Payment_GetCryptoBonusPreference
+            parameters:
+                - name: currency
+                  in: path
+                  description: Crypto currency code (e.g., BTC, ETH, USDT)
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetCryptoBonusPreferenceResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -22490,6 +22534,13 @@ components:
             properties:
                 schema:
                     $ref: '#/components/schemas/google.protobuf.ListValue'
+        payment.service.v1.GetCryptoBonusPreferenceResponse:
+            type: object
+            properties:
+                skipBonus:
+                    type: boolean
+                    description: Whether bonus is skipped for deposits of this currency (true = skip, false = receive bonus)
+            description: Response for getting crypto bonus preference
         payment.service.v1.GetOperatorAddressResponse:
             type: object
             properties:
@@ -22816,6 +22867,9 @@ components:
                 saveForLaterUse:
                     type: boolean
                     description: Save this deposit info for later reuse
+                skipBonus:
+                    type: boolean
+                    description: Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
             description: |-
                 Request to initiate a deposit
                  Used to start a deposit transaction
@@ -23105,6 +23159,22 @@ components:
             description: |-
                 Saved payment info item
                  Represents a saved payment information record
+        payment.service.v1.SetCryptoBonusPreferenceRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Crypto currency code (e.g., BTC, ETH, USDT)
+                skipBonus:
+                    type: boolean
+                    description: Whether to skip bonus for deposits of this currency (true = skip, false = receive bonus)
+            description: |-
+                Request to set crypto bonus preference
+                 Used to set whether user wants to skip bonus for future crypto deposits of a specific currency
+        payment.service.v1.SetCryptoBonusPreferenceResponse:
+            type: object
+            properties: {}
+            description: Response for setting crypto bonus preference
         payment.service.v1.TransactionDetail:
             type: object
             properties:
