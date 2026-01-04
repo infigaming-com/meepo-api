@@ -8664,6 +8664,8 @@ components:
         api.backoffice.service.v1.AddOperatorApexDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 apexDomain:
                     type: string
                 domain:
@@ -9118,6 +9120,8 @@ components:
         api.backoffice.service.v1.BindOperatorEmailDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 domain:
                     type: string
                 emailLocalPart:
@@ -14913,6 +14917,8 @@ components:
         api.backoffice.service.v1.PrecheckOperatorApexDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 apexDomain:
                     type: string
                 domain:
