@@ -18658,8 +18658,6 @@ components:
                     $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionInfo'
                 walletTransactionSummary:
                     $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionSummary'
-                requestInfo:
-                    $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_RequestInfo'
         api.review.service.v1.GetTicketResponse_Comment:
             type: object
             properties:
@@ -18702,14 +18700,7 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-        api.review.service.v1.GetTicketResponse_RequestInfo:
-            type: object
-            properties:
                 channelId:
-                    type: string
-                amount:
-                    type: string
-                currency:
                     type: string
                 rawRequest:
                     type: string

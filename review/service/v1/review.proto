@@ -209,6 +209,8 @@ message GetTicketResponse {
 		google.protobuf.Struct extra = 10;
 		google.protobuf.ListValue schema = 11;
 		google.protobuf.Timestamp created_at = 12;
+		string channel_id = 13;
+		string raw_request = 14;
 	}
 	message WalletTransactionInfo{
 		int64 transaction_id = 1;
@@ -236,19 +238,12 @@ message GetTicketResponse {
 		int32 total_withdraw_count = 10;
 		int32 today_withdraw_count = 11;
 	}
-	message RequestInfo {
-		string channel_id = 1;
-		string amount = 2;
-		string currency = 3;
-		string raw_request = 4;
-	}
 	Ticket ticket = 1;
 	repeated Comment comments = 2;
 	UserInfo user_info = 3;
 	PaymentTransactionInfo payment_transaction_info = 4;
 	WalletTransactionInfo wallet_transaction_info = 5;
 	WalletTransactionSummary wallet_transaction_summary = 6;
-	RequestInfo request_info = 7;
 }
 
 message GetOperatorTicketRequest {
