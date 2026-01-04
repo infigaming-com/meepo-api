@@ -179,6 +179,7 @@ type PaymentTransactionEvent struct {
 	Extra             *structpb.Struct        `protobuf:"bytes,12,opt,name=extra,proto3" json:"extra,omitempty"`
 	ChannelInfo       *ChannelInfo            `protobuf:"bytes,13,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
 	OperatorAmount    string                  `protobuf:"bytes,14,opt,name=operator_amount,json=operatorAmount,proto3" json:"operator_amount,omitempty"` // operator's amount for this payment transaction
+	SkipBonus         bool                    `protobuf:"varint,15,opt,name=skip_bonus,json=skipBonus,proto3" json:"skip_bonus,omitempty"`               // whether to skip bonus for this deposit (true = skip, false = receive bonus)
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -309,6 +310,13 @@ func (x *PaymentTransactionEvent) GetOperatorAmount() string {
 		return x.OperatorAmount
 	}
 	return ""
+}
+
+func (x *PaymentTransactionEvent) GetSkipBonus() bool {
+	if x != nil {
+		return x.SkipBonus
+	}
+	return false
 }
 
 type OperatorPaymentTransactionEvent struct {
@@ -480,7 +488,7 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse\"U\n" +
 	"\vChannelInfo\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x04\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf0\x04\n" +
 	"\x17PaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
@@ -498,7 +506,9 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"settled_at\x18\v \x01(\x03R\tsettledAt\x12-\n" +
 	"\x05extra\x18\f \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
 	"\fchannel_info\x18\r \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\x12'\n" +
-	"\x0foperator_amount\x18\x0e \x01(\tR\x0eoperatorAmount\"\xcf\x05\n" +
+	"\x0foperator_amount\x18\x0e \x01(\tR\x0eoperatorAmount\x12\x1d\n" +
+	"\n" +
+	"skip_bonus\x18\x0f \x01(\bR\tskipBonus\"\xcf\x05\n" +
 	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +

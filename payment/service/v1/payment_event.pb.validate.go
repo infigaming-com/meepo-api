@@ -499,6 +499,8 @@ func (m *PaymentTransactionEvent) validate(all bool) error {
 
 	// no validation rules for OperatorAmount
 
+	// no validation rules for SkipBonus
+
 	if len(errors) > 0 {
 		return PaymentTransactionEventMultiError(errors)
 	}

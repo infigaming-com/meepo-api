@@ -312,6 +312,8 @@ message InitiateDepositRequest {
   google.protobuf.Struct extra = 4;
   // Save this deposit info for later reuse
   bool save_for_later_use = 5 [json_name="saveForLaterUse"];
+  // Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
+  bool skip_bonus = 6 [json_name="skipBonus"];
 }
 
 // Response for deposit initiation
@@ -1022,6 +1024,30 @@ message DeleteSavedPaymentInfoRequest {
 // Response for deleting saved payment info
 message DeleteSavedPaymentInfoResponse {}
 
+// Request to set crypto bonus preference
+// Used to set whether user wants to skip bonus for future crypto deposits of a specific currency
+message SetCryptoBonusPreferenceRequest {
+  // Crypto currency code (e.g., BTC, ETH, USDT)
+  string currency = 1;
+  // Whether to skip bonus for deposits of this currency (true = skip, false = receive bonus)
+  bool skip_bonus = 2 [json_name="skipBonus"];
+}
+
+// Response for setting crypto bonus preference
+message SetCryptoBonusPreferenceResponse {}
+
+// Request to get crypto bonus preference
+message GetCryptoBonusPreferenceRequest {
+  // Crypto currency code (e.g., BTC, ETH, USDT)
+  string currency = 1;
+}
+
+// Response for getting crypto bonus preference
+message GetCryptoBonusPreferenceResponse {
+  // Whether bonus is skipped for deposits of this currency (true = skip, false = receive bonus)
+  bool skip_bonus = 1 [json_name="skipBonus"];
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -1238,6 +1264,24 @@ service Payment {
 	rpc DeleteSavedPaymentInfo(DeleteSavedPaymentInfoRequest) returns (DeleteSavedPaymentInfoResponse) {
 		option (google.api.http) = {
 			delete: "/v1/payment/saved-info/{id}"
+		};
+	}
+
+	// Set crypto bonus preference
+	// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+	// This preference is applied when async crypto deposits arrive via blockchain callback
+	rpc SetCryptoBonusPreference(SetCryptoBonusPreferenceRequest) returns (SetCryptoBonusPreferenceResponse) {
+		option (google.api.http) = {
+			post: "/v1/payment/crypto-bonus-preference"
+			body: "*"
+		};
+	}
+
+	// Get crypto bonus preference
+	// Retrieves the user's skip bonus preference for a specific crypto currency
+	rpc GetCryptoBonusPreference(GetCryptoBonusPreferenceRequest) returns (GetCryptoBonusPreferenceResponse) {
+		option (google.api.http) = {
+			get: "/v1/payment/crypto-bonus-preference/{currency}"
 		};
 	}
 }
