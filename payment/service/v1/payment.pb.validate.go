@@ -1942,6 +1942,10 @@ func (m *InitiateDepositRequest) validate(all bool) error {
 
 	// no validation rules for SaveForLaterUse
 
+	// no validation rules for SkipBonus
+
+	// no validation rules for SavedInfoName
+
 	if len(errors) > 0 {
 		return InitiateDepositRequestMultiError(errors)
 	}
