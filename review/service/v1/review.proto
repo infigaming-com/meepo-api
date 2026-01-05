@@ -244,6 +244,7 @@ message GetTicketResponse {
 	PaymentTransactionInfo payment_transaction_info = 4;
 	WalletTransactionInfo wallet_transaction_info = 5;
 	WalletTransactionSummary wallet_transaction_summary = 6;
+	WalletTransactionInfo operator_wallet_transaction_info = 7;
 }
 
 message GetOperatorTicketRequest {
