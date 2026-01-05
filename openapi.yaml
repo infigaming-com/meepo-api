@@ -18658,6 +18658,8 @@ components:
                     $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionInfo'
                 walletTransactionSummary:
                     $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionSummary'
+                operatorWalletTransactionInfo:
+                    $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionInfo'
         api.review.service.v1.GetTicketResponse_Comment:
             type: object
             properties:
