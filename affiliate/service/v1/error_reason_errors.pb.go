@@ -934,3 +934,15 @@ func IsGetUserPromoConditionInfoFailed(err error) bool {
 func ErrorGetUserPromoConditionInfoFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_USER_PROMO_CONDITION_INFO_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsProcessUserBonusToCashFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_BONUS_TO_CASH_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserBonusToCashFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_BONUS_TO_CASH_FAILED.String(), fmt.Sprintf(format, args...))
+}
