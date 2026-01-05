@@ -473,6 +473,7 @@ message FreezeResponse {
 	int64 transaction_id = 1;
 	string operator_freeze_amount = 2; // amount of the operator's freeze
 	string operator_freeze_currency = 3;
+	int64 operator_freeze_transaction_id = 4;
 }
 
 message SettleRequest {

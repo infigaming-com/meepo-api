@@ -1485,12 +1485,13 @@ func (x *FreezeRequest) GetChannelInfo() *ChannelInfo {
 }
 
 type FreezeResponse struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId          int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OperatorFreezeAmount   string                 `protobuf:"bytes,2,opt,name=operator_freeze_amount,json=operatorFreezeAmount,proto3" json:"operator_freeze_amount,omitempty"` // amount of the operator's freeze
-	OperatorFreezeCurrency string                 `protobuf:"bytes,3,opt,name=operator_freeze_currency,json=operatorFreezeCurrency,proto3" json:"operator_freeze_currency,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId               int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OperatorFreezeAmount        string                 `protobuf:"bytes,2,opt,name=operator_freeze_amount,json=operatorFreezeAmount,proto3" json:"operator_freeze_amount,omitempty"` // amount of the operator's freeze
+	OperatorFreezeCurrency      string                 `protobuf:"bytes,3,opt,name=operator_freeze_currency,json=operatorFreezeCurrency,proto3" json:"operator_freeze_currency,omitempty"`
+	OperatorFreezeTransactionId int64                  `protobuf:"varint,4,opt,name=operator_freeze_transaction_id,json=operatorFreezeTransactionId,proto3" json:"operator_freeze_transaction_id,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *FreezeResponse) Reset() {
@@ -1542,6 +1543,13 @@ func (x *FreezeResponse) GetOperatorFreezeCurrency() string {
 		return x.OperatorFreezeCurrency
 	}
 	return ""
+}
+
+func (x *FreezeResponse) GetOperatorFreezeTransactionId() int64 {
+	if x != nil {
+		return x.OperatorFreezeTransactionId
+	}
+	return 0
 }
 
 type SettleRequest struct {
@@ -14533,11 +14541,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
 	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12E\n" +
-	"\fchannel_info\x18\b \x01(\v2\".api.wallet.service.v1.ChannelInfoR\vchannelInfo\"\xa7\x01\n" +
+	"\fchannel_info\x18\b \x01(\v2\".api.wallet.service.v1.ChannelInfoR\vchannelInfo\"\xec\x01\n" +
 	"\x0eFreezeResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x124\n" +
 	"\x16operator_freeze_amount\x18\x02 \x01(\tR\x14operatorFreezeAmount\x128\n" +
-	"\x18operator_freeze_currency\x18\x03 \x01(\tR\x16operatorFreezeCurrency\"\xe0\x01\n" +
+	"\x18operator_freeze_currency\x18\x03 \x01(\tR\x16operatorFreezeCurrency\x12C\n" +
+	"\x1eoperator_freeze_transaction_id\x18\x04 \x01(\x03R\x1boperatorFreezeTransactionId\"\xe0\x01\n" +
 	"\rSettleRequest\x12)\n" +
 	"\x10transaction_type\x18\x01 \x01(\tR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x126\n" +
