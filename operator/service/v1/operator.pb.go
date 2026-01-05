@@ -3343,6 +3343,155 @@ func (x *ListBalancesSummaryResponse) GetPageSize() int32 {
 	return 0
 }
 
+// RecalculateDailyRevenueSharesRequest is the request for recalculating daily revenue shares
+type RecalculateDailyRevenueSharesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Time range for recalculation (required)
+	StartTime int64 `protobuf:"varint,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"` // Unix timestamp in milliseconds
+	EndTime   int64 `protobuf:"varint,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`       // Unix timestamp in milliseconds
+	// Optional filters - if not provided, all records in the period will be recalculated
+	ProviderId *string `protobuf:"bytes,3,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"` // Filter by provider ID
+	FeeGroup   *string `protobuf:"bytes,4,opt,name=fee_group,json=feeGroup,proto3,oneof" json:"fee_group,omitempty"`       // Filter by fee group
+	Currency   *string `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`                       // Filter by currency
+	// Operator context for filtering (optional)
+	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) Reset() {
+	*x = RecalculateDailyRevenueSharesRequest{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecalculateDailyRevenueSharesRequest) ProtoMessage() {}
+
+func (x *RecalculateDailyRevenueSharesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecalculateDailyRevenueSharesRequest.ProtoReflect.Descriptor instead.
+func (*RecalculateDailyRevenueSharesRequest) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) GetProviderId() string {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return ""
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) GetFeeGroup() string {
+	if x != nil && x.FeeGroup != nil {
+		return *x.FeeGroup
+	}
+	return ""
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *RecalculateDailyRevenueSharesRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+// RecalculateDailyRevenueSharesResponse is the response for recalculating daily revenue shares
+type RecalculateDailyRevenueSharesResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	TotalRecords   int32                  `protobuf:"varint,1,opt,name=total_records,json=totalRecords,proto3" json:"total_records,omitempty"`       // Total records found for recalculation
+	RecordsUpdated int32                  `protobuf:"varint,2,opt,name=records_updated,json=recordsUpdated,proto3" json:"records_updated,omitempty"` // Number of records successfully updated
+	RecordsFailed  int32                  `protobuf:"varint,3,opt,name=records_failed,json=recordsFailed,proto3" json:"records_failed,omitempty"`    // Number of records failed to update
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *RecalculateDailyRevenueSharesResponse) Reset() {
+	*x = RecalculateDailyRevenueSharesResponse{}
+	mi := &file_operator_service_v1_operator_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecalculateDailyRevenueSharesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecalculateDailyRevenueSharesResponse) ProtoMessage() {}
+
+func (x *RecalculateDailyRevenueSharesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_operator_service_v1_operator_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecalculateDailyRevenueSharesResponse.ProtoReflect.Descriptor instead.
+func (*RecalculateDailyRevenueSharesResponse) Descriptor() ([]byte, []int) {
+	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *RecalculateDailyRevenueSharesResponse) GetTotalRecords() int32 {
+	if x != nil {
+		return x.TotalRecords
+	}
+	return 0
+}
+
+func (x *RecalculateDailyRevenueSharesResponse) GetRecordsUpdated() int32 {
+	if x != nil {
+		return x.RecordsUpdated
+	}
+	return 0
+}
+
+func (x *RecalculateDailyRevenueSharesResponse) GetRecordsFailed() int32 {
+	if x != nil {
+		return x.RecordsFailed
+	}
+	return 0
+}
+
 type GetOperatorResponse_Operator struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
@@ -3354,7 +3503,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[54]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3366,7 +3515,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[54]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3414,7 +3563,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[55]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3426,7 +3575,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[55]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3474,7 +3623,7 @@ type ListOperatorsResponse_Operator struct {
 
 func (x *ListOperatorsResponse_Operator) Reset() {
 	*x = ListOperatorsResponse_Operator{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[56]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3486,7 +3635,7 @@ func (x *ListOperatorsResponse_Operator) String() string {
 func (*ListOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[56]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3552,7 +3701,7 @@ type ListInvoicesResponse_Invoice struct {
 
 func (x *ListInvoicesResponse_Invoice) Reset() {
 	*x = ListInvoicesResponse_Invoice{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[57]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3564,7 +3713,7 @@ func (x *ListInvoicesResponse_Invoice) String() string {
 func (*ListInvoicesResponse_Invoice) ProtoMessage() {}
 
 func (x *ListInvoicesResponse_Invoice) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[57]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3713,7 +3862,7 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) Reset() {
 	*x = GetInvoiceDetailResponse_InvoiceDetail{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[58]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3725,7 +3874,7 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) String() string {
 func (*GetInvoiceDetailResponse_InvoiceDetail) ProtoMessage() {}
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[58]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3907,7 +4056,7 @@ type ListOperatorRevenueShareResponse_RevenueShareItem struct {
 
 func (x *ListOperatorRevenueShareResponse_RevenueShareItem) Reset() {
 	*x = ListOperatorRevenueShareResponse_RevenueShareItem{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[59]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3919,7 +4068,7 @@ func (x *ListOperatorRevenueShareResponse_RevenueShareItem) String() string {
 func (*ListOperatorRevenueShareResponse_RevenueShareItem) ProtoMessage() {}
 
 func (x *ListOperatorRevenueShareResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[59]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4056,7 +4205,7 @@ type ListThirdPartyFeesResponse_ThirdPartyFeeItem struct {
 
 func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) Reset() {
 	*x = ListThirdPartyFeesResponse_ThirdPartyFeeItem{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[60]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4068,7 +4217,7 @@ func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) String() string {
 func (*ListThirdPartyFeesResponse_ThirdPartyFeeItem) ProtoMessage() {}
 
 func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[60]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4158,7 +4307,7 @@ type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 
 func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) Reset() {
 	*x = ListMonthlyRevenueShareResponse_RevenueShareItem{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[61]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4170,7 +4319,7 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) String() string {
 func (*ListMonthlyRevenueShareResponse_RevenueShareItem) ProtoMessage() {}
 
 func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[61]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4339,7 +4488,7 @@ type ListMonthlyRevenueShareResponse_Summary struct {
 
 func (x *ListMonthlyRevenueShareResponse_Summary) Reset() {
 	*x = ListMonthlyRevenueShareResponse_Summary{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[62]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4351,7 +4500,7 @@ func (x *ListMonthlyRevenueShareResponse_Summary) String() string {
 func (*ListMonthlyRevenueShareResponse_Summary) ProtoMessage() {}
 
 func (x *ListMonthlyRevenueShareResponse_Summary) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[62]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4406,7 +4555,7 @@ type ListAdjustmentConfigsResponse_AdjustmentConfig struct {
 
 func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) Reset() {
 	*x = ListAdjustmentConfigsResponse_AdjustmentConfig{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[63]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4418,7 +4567,7 @@ func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) String() string {
 func (*ListAdjustmentConfigsResponse_AdjustmentConfig) ProtoMessage() {}
 
 func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[63]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4471,7 +4620,7 @@ type ListAdjustmentsResponse_AdjustmentItem struct {
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) Reset() {
 	*x = ListAdjustmentsResponse_AdjustmentItem{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[64]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4483,7 +4632,7 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) String() string {
 func (*ListAdjustmentsResponse_AdjustmentItem) ProtoMessage() {}
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[64]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4555,7 +4704,7 @@ type ListBillingPeriodsResponse_BillingPeriod struct {
 
 func (x *ListBillingPeriodsResponse_BillingPeriod) Reset() {
 	*x = ListBillingPeriodsResponse_BillingPeriod{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[65]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4567,7 +4716,7 @@ func (x *ListBillingPeriodsResponse_BillingPeriod) String() string {
 func (*ListBillingPeriodsResponse_BillingPeriod) ProtoMessage() {}
 
 func (x *ListBillingPeriodsResponse_BillingPeriod) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[65]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4658,7 +4807,7 @@ type ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem struct {
 
 func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) Reset() {
 	*x = ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[66]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4670,7 +4819,7 @@ func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) String() stri
 func (*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) ProtoMessage() {}
 
 func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[66]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4856,7 +5005,7 @@ type ListBalancesSummaryResponse_BalanceSummary struct {
 
 func (x *ListBalancesSummaryResponse_BalanceSummary) Reset() {
 	*x = ListBalancesSummaryResponse_BalanceSummary{}
-	mi := &file_operator_service_v1_operator_proto_msgTypes[67]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4868,7 +5017,7 @@ func (x *ListBalancesSummaryResponse_BalanceSummary) String() string {
 func (*ListBalancesSummaryResponse_BalanceSummary) ProtoMessage() {}
 
 func (x *ListBalancesSummaryResponse_BalanceSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_operator_service_v1_operator_proto_msgTypes[67]
+	mi := &file_operator_service_v1_operator_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5460,7 +5609,24 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0eest_net_profit\x18\x0f \x01(\tR\festNetProfit\x120\n" +
 	"\x14revenue_share_system\x18\x10 \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\x11 \x01(\tR\x14revenueShareOperator\x12\"\n" +
-	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts2\xb7\x1b\n" +
+	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts\"\xbc\x02\n" +
+	"$RecalculateDailyRevenueSharesRequest\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x01 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\x02 \x01(\x03R\aendTime\x12$\n" +
+	"\vprovider_id\x18\x03 \x01(\tH\x00R\n" +
+	"providerId\x88\x01\x01\x12 \n" +
+	"\tfee_group\x18\x04 \x01(\tH\x01R\bfeeGroup\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x0e\n" +
+	"\f_provider_idB\f\n" +
+	"\n" +
+	"_fee_groupB\v\n" +
+	"\t_currency\"\x9c\x01\n" +
+	"%RecalculateDailyRevenueSharesResponse\x12#\n" +
+	"\rtotal_records\x18\x01 \x01(\x05R\ftotalRecords\x12'\n" +
+	"\x0frecords_updated\x18\x02 \x01(\x05R\x0erecordsUpdated\x12%\n" +
+	"\x0erecords_failed\x18\x03 \x01(\x05R\rrecordsFailed2\xda\x1c\n" +
 	"\bOperator\x12j\n" +
 	"\vAddOperator\x12+.api.operator.service.v1.AddOperatorRequest\x1a,.api.operator.service.v1.AddOperatorResponse\"\x00\x12s\n" +
 	"\x0eUpdateOperator\x12..api.operator.service.v1.UpdateOperatorRequest\x1a/.api.operator.service.v1.UpdateOperatorResponse\"\x00\x12j\n" +
@@ -5488,7 +5654,8 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x12GetBalancesSummary\x122.api.operator.service.v1.GetBalancesSummaryRequest\x1a3.api.operator.service.v1.GetBalancesSummaryResponse\"\x00\x12\x7f\n" +
 	"\x12ListBillingPeriods\x122.api.operator.service.v1.ListBillingPeriodsRequest\x1a3.api.operator.service.v1.ListBillingPeriodsResponse\"\x00\x12\xa6\x01\n" +
 	"\x1fListBalanceMonthlyRevenueShares\x12?.api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest\x1a@.api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse\"\x00\x12\x82\x01\n" +
-	"\x13ListBalancesSummary\x123.api.operator.service.v1.ListBalancesSummaryRequest\x1a4.api.operator.service.v1.ListBalancesSummaryResponse\"\x00BW\n" +
+	"\x13ListBalancesSummary\x123.api.operator.service.v1.ListBalancesSummaryRequest\x1a4.api.operator.service.v1.ListBalancesSummaryResponse\"\x00\x12\xa0\x01\n" +
+	"\x1dRecalculateDailyRevenueShares\x12=.api.operator.service.v1.RecalculateDailyRevenueSharesRequest\x1a>.api.operator.service.v1.RecalculateDailyRevenueSharesResponse\"\x00BW\n" +
 	"\x17api.operator.service.v1P\x01Z:github.com/infigaming-com/meepo-api/operator/service/v1;v1b\x06proto3"
 
 var (
@@ -5504,7 +5671,7 @@ func file_operator_service_v1_operator_proto_rawDescGZIP() []byte {
 }
 
 var file_operator_service_v1_operator_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 68)
+var file_operator_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
 var file_operator_service_v1_operator_proto_goTypes = []any{
 	(ListInvoicesRequest_PaymentStatus)(0),                           // 0: api.operator.service.v1.ListInvoicesRequest.PaymentStatus
 	(ListInvoicesResponse_Invoice_PaymentStatus)(0),                  // 1: api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
@@ -5564,119 +5731,124 @@ var file_operator_service_v1_operator_proto_goTypes = []any{
 	(*ListBalanceMonthlyRevenueSharesResponse)(nil),                  // 55: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse
 	(*ListBalancesSummaryRequest)(nil),                               // 56: api.operator.service.v1.ListBalancesSummaryRequest
 	(*ListBalancesSummaryResponse)(nil),                              // 57: api.operator.service.v1.ListBalancesSummaryResponse
-	(*GetOperatorResponse_Operator)(nil),                             // 58: api.operator.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),                       // 59: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
-	(*ListOperatorsResponse_Operator)(nil),                           // 60: api.operator.service.v1.ListOperatorsResponse.Operator
-	(*ListInvoicesResponse_Invoice)(nil),                             // 61: api.operator.service.v1.ListInvoicesResponse.Invoice
-	(*GetInvoiceDetailResponse_InvoiceDetail)(nil),                   // 62: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
-	(*ListOperatorRevenueShareResponse_RevenueShareItem)(nil),        // 63: api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
-	(*ListThirdPartyFeesResponse_ThirdPartyFeeItem)(nil),             // 64: api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
-	(*ListMonthlyRevenueShareResponse_RevenueShareItem)(nil),         // 65: api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
-	(*ListMonthlyRevenueShareResponse_Summary)(nil),                  // 66: api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
-	(*ListAdjustmentConfigsResponse_AdjustmentConfig)(nil),           // 67: api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
-	(*ListAdjustmentsResponse_AdjustmentItem)(nil),                   // 68: api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	(*ListBillingPeriodsResponse_BillingPeriod)(nil),                 // 69: api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriod
-	(*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem)(nil), // 70: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
-	(*ListBalancesSummaryResponse_BalanceSummary)(nil),               // 71: api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
-	(*common.OperatorContextFilters)(nil),                            // 72: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                                   // 73: api.common.OperatorContext
+	(*RecalculateDailyRevenueSharesRequest)(nil),                     // 58: api.operator.service.v1.RecalculateDailyRevenueSharesRequest
+	(*RecalculateDailyRevenueSharesResponse)(nil),                    // 59: api.operator.service.v1.RecalculateDailyRevenueSharesResponse
+	(*GetOperatorResponse_Operator)(nil),                             // 60: api.operator.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),                       // 61: api.operator.service.v1.GetOperatorsByIdsResponse.Operator
+	(*ListOperatorsResponse_Operator)(nil),                           // 62: api.operator.service.v1.ListOperatorsResponse.Operator
+	(*ListInvoicesResponse_Invoice)(nil),                             // 63: api.operator.service.v1.ListInvoicesResponse.Invoice
+	(*GetInvoiceDetailResponse_InvoiceDetail)(nil),                   // 64: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	(*ListOperatorRevenueShareResponse_RevenueShareItem)(nil),        // 65: api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	(*ListThirdPartyFeesResponse_ThirdPartyFeeItem)(nil),             // 66: api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	(*ListMonthlyRevenueShareResponse_RevenueShareItem)(nil),         // 67: api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	(*ListMonthlyRevenueShareResponse_Summary)(nil),                  // 68: api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
+	(*ListAdjustmentConfigsResponse_AdjustmentConfig)(nil),           // 69: api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	(*ListAdjustmentsResponse_AdjustmentItem)(nil),                   // 70: api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
+	(*ListBillingPeriodsResponse_BillingPeriod)(nil),                 // 71: api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriod
+	(*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem)(nil), // 72: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
+	(*ListBalancesSummaryResponse_BalanceSummary)(nil),               // 73: api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
+	(*common.OperatorContextFilters)(nil),                            // 74: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                                   // 75: api.common.OperatorContext
 }
 var file_operator_service_v1_operator_proto_depIdxs = []int32{
-	58, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
-	59, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
-	60, // 2: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
-	72, // 3: api.operator.service.v1.ListInvoicesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 4: api.operator.service.v1.ListInvoicesRequest.operator_context:type_name -> api.common.OperatorContext
+	60, // 0: api.operator.service.v1.GetOperatorResponse.operator:type_name -> api.operator.service.v1.GetOperatorResponse.Operator
+	61, // 1: api.operator.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.operator.service.v1.GetOperatorsByIdsResponse.Operator
+	62, // 2: api.operator.service.v1.ListOperatorsResponse.operators:type_name -> api.operator.service.v1.ListOperatorsResponse.Operator
+	74, // 3: api.operator.service.v1.ListInvoicesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 4: api.operator.service.v1.ListInvoicesRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 5: api.operator.service.v1.ListInvoicesRequest.payment_status:type_name -> api.operator.service.v1.ListInvoicesRequest.PaymentStatus
-	61, // 6: api.operator.service.v1.ListInvoicesResponse.invoices:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice
-	62, // 7: api.operator.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
-	72, // 8: api.operator.service.v1.ListOperatorRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 9: api.operator.service.v1.ListOperatorRevenueShareRequest.operator_context:type_name -> api.common.OperatorContext
-	63, // 10: api.operator.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
-	72, // 11: api.operator.service.v1.ListThirdPartyFeesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 12: api.operator.service.v1.ListThirdPartyFeesRequest.operator_context:type_name -> api.common.OperatorContext
-	64, // 13: api.operator.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
-	72, // 14: api.operator.service.v1.ListMonthlyRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 15: api.operator.service.v1.ListMonthlyRevenueShareRequest.operator_context:type_name -> api.common.OperatorContext
-	65, // 16: api.operator.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
-	66, // 17: api.operator.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
-	67, // 18: api.operator.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
-	72, // 19: api.operator.service.v1.ListAdjustmentsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 20: api.operator.service.v1.ListAdjustmentsRequest.operator_context:type_name -> api.common.OperatorContext
-	68, // 21: api.operator.service.v1.ListAdjustmentsResponse.items:type_name -> api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	73, // 22: api.operator.service.v1.GetBalanceSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	72, // 23: api.operator.service.v1.GetBalanceSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 24: api.operator.service.v1.GetBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	72, // 25: api.operator.service.v1.GetBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	69, // 26: api.operator.service.v1.ListBillingPeriodsResponse.billing_periods:type_name -> api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriod
-	72, // 27: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 28: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
+	63, // 6: api.operator.service.v1.ListInvoicesResponse.invoices:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice
+	64, // 7: api.operator.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	74, // 8: api.operator.service.v1.ListOperatorRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 9: api.operator.service.v1.ListOperatorRevenueShareRequest.operator_context:type_name -> api.common.OperatorContext
+	65, // 10: api.operator.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.operator.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	74, // 11: api.operator.service.v1.ListThirdPartyFeesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 12: api.operator.service.v1.ListThirdPartyFeesRequest.operator_context:type_name -> api.common.OperatorContext
+	66, // 13: api.operator.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.operator.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	74, // 14: api.operator.service.v1.ListMonthlyRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 15: api.operator.service.v1.ListMonthlyRevenueShareRequest.operator_context:type_name -> api.common.OperatorContext
+	67, // 16: api.operator.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	68, // 17: api.operator.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.operator.service.v1.ListMonthlyRevenueShareResponse.Summary
+	69, // 18: api.operator.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.operator.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	74, // 19: api.operator.service.v1.ListAdjustmentsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 20: api.operator.service.v1.ListAdjustmentsRequest.operator_context:type_name -> api.common.OperatorContext
+	70, // 21: api.operator.service.v1.ListAdjustmentsResponse.items:type_name -> api.operator.service.v1.ListAdjustmentsResponse.AdjustmentItem
+	75, // 22: api.operator.service.v1.GetBalanceSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	74, // 23: api.operator.service.v1.GetBalanceSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 24: api.operator.service.v1.GetBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	74, // 25: api.operator.service.v1.GetBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	71, // 26: api.operator.service.v1.ListBillingPeriodsResponse.billing_periods:type_name -> api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriod
+	74, // 27: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 28: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 29: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.type:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.Type
-	70, // 30: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.items:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
-	72, // 31: api.operator.service.v1.ListBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	73, // 32: api.operator.service.v1.ListBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	71, // 33: api.operator.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
-	1,  // 34: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
-	2,  // 35: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
-	4,  // 36: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	6,  // 37: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	8,  // 38: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
-	10, // 39: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
-	12, // 40: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
-	14, // 41: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
-	16, // 42: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
-	18, // 43: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
-	20, // 44: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
-	22, // 45: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
-	24, // 46: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
-	26, // 47: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
-	28, // 48: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
-	40, // 49: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
-	30, // 50: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
-	32, // 51: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
-	34, // 52: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
-	42, // 53: api.operator.service.v1.Operator.CreateAdjustmentConfig:input_type -> api.operator.service.v1.CreateAdjustmentConfigRequest
-	36, // 54: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
-	38, // 55: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
-	44, // 56: api.operator.service.v1.Operator.SendInvoices:input_type -> api.operator.service.v1.SendInvoicesRequest
-	46, // 57: api.operator.service.v1.Operator.GetInvoiceSummary:input_type -> api.operator.service.v1.GetInvoiceSummaryRequest
-	48, // 58: api.operator.service.v1.Operator.GetBalanceSummary:input_type -> api.operator.service.v1.GetBalanceSummaryRequest
-	50, // 59: api.operator.service.v1.Operator.GetBalancesSummary:input_type -> api.operator.service.v1.GetBalancesSummaryRequest
-	52, // 60: api.operator.service.v1.Operator.ListBillingPeriods:input_type -> api.operator.service.v1.ListBillingPeriodsRequest
-	54, // 61: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:input_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest
-	56, // 62: api.operator.service.v1.Operator.ListBalancesSummary:input_type -> api.operator.service.v1.ListBalancesSummaryRequest
-	5,  // 63: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	7,  // 64: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	9,  // 65: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
-	11, // 66: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
-	13, // 67: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
-	15, // 68: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
-	17, // 69: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
-	19, // 70: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
-	21, // 71: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
-	23, // 72: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
-	25, // 73: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
-	27, // 74: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
-	29, // 75: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
-	41, // 76: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
-	31, // 77: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
-	33, // 78: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
-	35, // 79: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
-	43, // 80: api.operator.service.v1.Operator.CreateAdjustmentConfig:output_type -> api.operator.service.v1.CreateAdjustmentConfigResponse
-	37, // 81: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
-	39, // 82: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
-	45, // 83: api.operator.service.v1.Operator.SendInvoices:output_type -> api.operator.service.v1.SendInvoicesResponse
-	47, // 84: api.operator.service.v1.Operator.GetInvoiceSummary:output_type -> api.operator.service.v1.GetInvoiceSummaryResponse
-	49, // 85: api.operator.service.v1.Operator.GetBalanceSummary:output_type -> api.operator.service.v1.GetBalanceSummaryResponse
-	51, // 86: api.operator.service.v1.Operator.GetBalancesSummary:output_type -> api.operator.service.v1.GetBalancesSummaryResponse
-	53, // 87: api.operator.service.v1.Operator.ListBillingPeriods:output_type -> api.operator.service.v1.ListBillingPeriodsResponse
-	55, // 88: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:output_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse
-	57, // 89: api.operator.service.v1.Operator.ListBalancesSummary:output_type -> api.operator.service.v1.ListBalancesSummaryResponse
-	63, // [63:90] is the sub-list for method output_type
-	36, // [36:63] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	72, // 30: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.items:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
+	74, // 31: api.operator.service.v1.ListBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	75, // 32: api.operator.service.v1.ListBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	73, // 33: api.operator.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
+	75, // 34: api.operator.service.v1.RecalculateDailyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 35: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
+	2,  // 36: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
+	4,  // 37: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	6,  // 38: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	8,  // 39: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
+	10, // 40: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
+	12, // 41: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
+	14, // 42: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
+	16, // 43: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
+	18, // 44: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
+	20, // 45: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
+	22, // 46: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
+	24, // 47: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
+	26, // 48: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
+	28, // 49: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
+	40, // 50: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
+	30, // 51: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
+	32, // 52: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
+	34, // 53: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
+	42, // 54: api.operator.service.v1.Operator.CreateAdjustmentConfig:input_type -> api.operator.service.v1.CreateAdjustmentConfigRequest
+	36, // 55: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
+	38, // 56: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
+	44, // 57: api.operator.service.v1.Operator.SendInvoices:input_type -> api.operator.service.v1.SendInvoicesRequest
+	46, // 58: api.operator.service.v1.Operator.GetInvoiceSummary:input_type -> api.operator.service.v1.GetInvoiceSummaryRequest
+	48, // 59: api.operator.service.v1.Operator.GetBalanceSummary:input_type -> api.operator.service.v1.GetBalanceSummaryRequest
+	50, // 60: api.operator.service.v1.Operator.GetBalancesSummary:input_type -> api.operator.service.v1.GetBalancesSummaryRequest
+	52, // 61: api.operator.service.v1.Operator.ListBillingPeriods:input_type -> api.operator.service.v1.ListBillingPeriodsRequest
+	54, // 62: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:input_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest
+	56, // 63: api.operator.service.v1.Operator.ListBalancesSummary:input_type -> api.operator.service.v1.ListBalancesSummaryRequest
+	58, // 64: api.operator.service.v1.Operator.RecalculateDailyRevenueShares:input_type -> api.operator.service.v1.RecalculateDailyRevenueSharesRequest
+	5,  // 65: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	7,  // 66: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	9,  // 67: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
+	11, // 68: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
+	13, // 69: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
+	15, // 70: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
+	17, // 71: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
+	19, // 72: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
+	21, // 73: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
+	23, // 74: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
+	25, // 75: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
+	27, // 76: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
+	29, // 77: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
+	41, // 78: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
+	31, // 79: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
+	33, // 80: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
+	35, // 81: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
+	43, // 82: api.operator.service.v1.Operator.CreateAdjustmentConfig:output_type -> api.operator.service.v1.CreateAdjustmentConfigResponse
+	37, // 83: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
+	39, // 84: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
+	45, // 85: api.operator.service.v1.Operator.SendInvoices:output_type -> api.operator.service.v1.SendInvoicesResponse
+	47, // 86: api.operator.service.v1.Operator.GetInvoiceSummary:output_type -> api.operator.service.v1.GetInvoiceSummaryResponse
+	49, // 87: api.operator.service.v1.Operator.GetBalanceSummary:output_type -> api.operator.service.v1.GetBalanceSummaryResponse
+	51, // 88: api.operator.service.v1.Operator.GetBalancesSummary:output_type -> api.operator.service.v1.GetBalancesSummaryResponse
+	53, // 89: api.operator.service.v1.Operator.ListBillingPeriods:output_type -> api.operator.service.v1.ListBillingPeriodsResponse
+	55, // 90: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:output_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse
+	57, // 91: api.operator.service.v1.Operator.ListBalancesSummary:output_type -> api.operator.service.v1.ListBalancesSummaryResponse
+	59, // 92: api.operator.service.v1.Operator.RecalculateDailyRevenueShares:output_type -> api.operator.service.v1.RecalculateDailyRevenueSharesResponse
+	65, // [65:93] is the sub-list for method output_type
+	37, // [37:65] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }
@@ -5695,13 +5867,14 @@ func file_operator_service_v1_operator_proto_init() {
 	file_operator_service_v1_operator_proto_msgTypes[48].OneofWrappers = []any{}
 	file_operator_service_v1_operator_proto_msgTypes[50].OneofWrappers = []any{}
 	file_operator_service_v1_operator_proto_msgTypes[52].OneofWrappers = []any{}
+	file_operator_service_v1_operator_proto_msgTypes[54].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_operator_service_v1_operator_proto_rawDesc), len(file_operator_service_v1_operator_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   68,
+			NumMessages:   70,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
