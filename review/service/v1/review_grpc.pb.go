@@ -19,15 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Review_CreateWithdraw_FullMethodName         = "/api.review.service.v1.Review/CreateWithdraw"
-	Review_CreateOperatorWithdraw_FullMethodName = "/api.review.service.v1.Review/CreateOperatorWithdraw"
-	Review_ReviewTicket_FullMethodName           = "/api.review.service.v1.Review/ReviewTicket"
-	Review_AddComment_FullMethodName             = "/api.review.service.v1.Review/AddComment"
-	Review_CancelTicket_FullMethodName           = "/api.review.service.v1.Review/CancelTicket"
-	Review_ListTickets_FullMethodName            = "/api.review.service.v1.Review/ListTickets"
-	Review_ListOperatorTickets_FullMethodName    = "/api.review.service.v1.Review/ListOperatorTickets"
-	Review_GetTicket_FullMethodName              = "/api.review.service.v1.Review/GetTicket"
-	Review_GetOperatorTicket_FullMethodName      = "/api.review.service.v1.Review/GetOperatorTicket"
+	Review_CreateWithdraw_FullMethodName          = "/api.review.service.v1.Review/CreateWithdraw"
+	Review_CreateAffiliateWithdraw_FullMethodName = "/api.review.service.v1.Review/CreateAffiliateWithdraw"
+	Review_CreateOperatorWithdraw_FullMethodName  = "/api.review.service.v1.Review/CreateOperatorWithdraw"
+	Review_ReviewTicket_FullMethodName            = "/api.review.service.v1.Review/ReviewTicket"
+	Review_AddComment_FullMethodName              = "/api.review.service.v1.Review/AddComment"
+	Review_CancelTicket_FullMethodName            = "/api.review.service.v1.Review/CancelTicket"
+	Review_ListTickets_FullMethodName             = "/api.review.service.v1.Review/ListTickets"
+	Review_ListOperatorTickets_FullMethodName     = "/api.review.service.v1.Review/ListOperatorTickets"
+	Review_GetTicket_FullMethodName               = "/api.review.service.v1.Review/GetTicket"
+	Review_GetOperatorTicket_FullMethodName       = "/api.review.service.v1.Review/GetOperatorTicket"
 )
 
 // ReviewClient is the client API for Review service.
@@ -37,6 +38,7 @@ const (
 // Review service provides review functionality.
 type ReviewClient interface {
 	CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
+	CreateAffiliateWithdraw(ctx context.Context, in *CreateAffiliateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
@@ -61,6 +63,16 @@ func (c *reviewClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWithdrawResponse)
 	err := c.cc.Invoke(ctx, Review_CreateWithdraw_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *reviewClient) CreateAffiliateWithdraw(ctx context.Context, in *CreateAffiliateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWithdrawResponse)
+	err := c.cc.Invoke(ctx, Review_CreateAffiliateWithdraw_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -154,6 +166,7 @@ func (c *reviewClient) GetOperatorTicket(ctx context.Context, in *GetOperatorTic
 // Review service provides review functionality.
 type ReviewServer interface {
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
+	CreateAffiliateWithdraw(context.Context, *CreateAffiliateWithdrawRequest) (*CreateWithdrawResponse, error)
 	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
@@ -176,6 +189,9 @@ type UnimplementedReviewServer struct{}
 
 func (UnimplementedReviewServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateWithdraw not implemented")
+}
+func (UnimplementedReviewServer) CreateAffiliateWithdraw(context.Context, *CreateAffiliateWithdrawRequest) (*CreateWithdrawResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAffiliateWithdraw not implemented")
 }
 func (UnimplementedReviewServer) CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOperatorWithdraw not implemented")
@@ -236,6 +252,24 @@ func _Review_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ReviewServer).CreateWithdraw(ctx, req.(*CreateWithdrawRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Review_CreateAffiliateWithdraw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAffiliateWithdrawRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServer).CreateAffiliateWithdraw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Review_CreateAffiliateWithdraw_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServer).CreateAffiliateWithdraw(ctx, req.(*CreateAffiliateWithdrawRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -394,6 +428,10 @@ var Review_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateWithdraw",
 			Handler:    _Review_CreateWithdraw_Handler,
+		},
+		{
+			MethodName: "CreateAffiliateWithdraw",
+			Handler:    _Review_CreateAffiliateWithdraw_Handler,
 		},
 		{
 			MethodName: "CreateOperatorWithdraw",

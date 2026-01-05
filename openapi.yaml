@@ -1400,6 +1400,208 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CreateCompanyResponse'
+    /v1/backoffice/crm/segment/calculate:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment calculation
+            operationId: BackofficeCrm_CalculateSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CalculateSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.CalculateSegmentResponse'
+    /v1/backoffice/crm/segment/create:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment CRUD operations
+            operationId: BackofficeCrm_CreateSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.CreateSegmentResponse'
+    /v1/backoffice/crm/segment/delete:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_DeleteSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.DeleteSegmentResponse'
+    /v1/backoffice/crm/segment/get:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentResponse'
+    /v1/backoffice/crm/segment/list:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_ListSegments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSegmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.ListSegmentsResponse'
+    /v1/backoffice/crm/segment/override/get:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegmentOverride
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentOverrideRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentOverrideResponse'
+    /v1/backoffice/crm/segment/override/set:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment override (for inheritance control)
+            operationId: BackofficeCrm_SetSegmentOverride
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetSegmentOverrideRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.SetSegmentOverrideResponse'
+    /v1/backoffice/crm/segment/schema:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Schema API for frontend query builder
+            operationId: BackofficeCrm_GetSegmentFieldSchema
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentFieldSchemaRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentFieldSchemaResponse'
+    /v1/backoffice/crm/segment/update:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_UpdateSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateSegmentResponse'
+    /v1/backoffice/crm/segment/users:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegmentUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentUsersResponse'
+    /v1/backoffice/crm/user/segments:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetUserSegments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserSegmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetUserSegmentsResponse'
     /v1/backoffice/dashboard/get:
         post:
             tags:
@@ -6009,6 +6211,50 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
+    /v1/payment/crypto-bonus-preference:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Set crypto bonus preference
+                 Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+                 This preference is applied when async crypto deposits arrive via blockchain callback
+            operationId: Payment_SetCryptoBonusPreference
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.SetCryptoBonusPreferenceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.SetCryptoBonusPreferenceResponse'
+    /v1/payment/crypto-bonus-preference/{currency}:
+        get:
+            tags:
+                - Payment
+            description: |-
+                Get crypto bonus preference
+                 Retrieves the user's skip bonus preference for a specific crypto currency
+            operationId: Payment_GetCryptoBonusPreference
+            parameters:
+                - name: currency
+                  in: path
+                  description: Crypto currency code (e.g., BTC, ETH, USDT)
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetCryptoBonusPreferenceResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -6100,6 +6346,51 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/payment/saved-info:
+        get:
+            tags:
+                - Payment
+            description: |-
+                List saved payment info
+                 Retrieves saved payment information for the current user
+            operationId: Payment_ListSavedPaymentInfo
+            parameters:
+                - name: channelId
+                  in: query
+                  schema:
+                    type: string
+                - name: type
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.ListSavedPaymentInfoResponse'
+    /v1/payment/saved-info/{id}:
+        delete:
+            tags:
+                - Payment
+            description: |-
+                Delete saved payment info
+                 Removes a saved payment information record
+            operationId: Payment_DeleteSavedPaymentInfo
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DeleteSavedPaymentInfoResponse'
     /v1/payment/transaction/page:
         post:
             tags:
@@ -8821,6 +9112,8 @@ components:
         api.backoffice.service.v1.AddOperatorApexDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 apexDomain:
                     type: string
                 domain:
@@ -9293,11 +9586,21 @@ components:
         api.backoffice.service.v1.BindOperatorEmailDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 domain:
                     type: string
                 emailLocalPart:
                     type: string
             description: Email Domain Binding Messages
+        api.backoffice.service.v1.CalculateSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: CalculateSegment
         api.backoffice.service.v1.CancelTicketRequest:
             type: object
             properties:
@@ -9584,6 +9887,31 @@ components:
         api.backoffice.service.v1.CreateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+                rules:
+                    type: object
+                enabled:
+                    type: boolean
+            description: CreateSegment
         api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -9801,6 +10129,14 @@ components:
         api.backoffice.service.v1.DeleteRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: DeleteSegment
         api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -10814,6 +11150,51 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
+        api.backoffice.service.v1.GetSegmentFieldSchemaRequest:
+            type: object
+            properties:
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+            description: GetSegmentFieldSchema
+        api.backoffice.service.v1.GetSegmentOverrideRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentId:
+                    type: string
+            description: GetSegmentOverride
+        api.backoffice.service.v1.GetSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: GetSegment
+        api.backoffice.service.v1.GetSegmentUsersRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                onlyCurrentMembers:
+                    type: boolean
+            description: GetSegmentUsers
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
@@ -11343,6 +11724,16 @@ components:
             properties:
                 userId:
                     type: string
+        api.backoffice.service.v1.GetUserSegmentsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                userId:
+                    type: string
+                onlyCurrentMemberships:
+                    type: boolean
+            description: GetUserSegments
         api.backoffice.service.v1.GetUserTagsRequest:
             type: object
             properties:
@@ -13121,6 +13512,8 @@ components:
         api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 page:
                     type: integer
                     format: int32
@@ -13821,6 +14214,31 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListSegmentsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                includeInherited:
+                    type: boolean
+            description: ListSegments
         api.backoffice.service.v1.ListSevRequest:
             type: object
             properties:
@@ -14573,11 +14991,17 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                changeBalance:
+                beforeCashBalance:
                     type: string
-                beforeBalance:
+                afterCashBalance:
                     type: string
-                afterBalance:
+                cashAmountChanged:
+                    type: string
+                beforeOperatorBonusBalance:
+                    type: string
+                afterOperatorBonusBalance:
+                    type: string
+                operatorBonusAmountChanged:
                     type: string
                 currency:
                     type: string
@@ -15146,6 +15570,8 @@ components:
         api.backoffice.service.v1.PrecheckOperatorApexDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 apexDomain:
                     type: string
                 domain:
@@ -15412,6 +15838,16 @@ components:
                     format: int32
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlanConfig'
+        api.backoffice.service.v1.SetSegmentOverrideRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentId:
+                    type: string
+                disabled:
+                    type: boolean
+            description: SetSegmentOverride
         api.backoffice.service.v1.SetUserTagsRequest:
             type: object
             properties:
@@ -15749,6 +16185,22 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                rules:
+                    type: object
+                enabled:
+                    type: boolean
+            description: UpdateSegment
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -16337,6 +16789,190 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
+        api.crm.service.v1.CalculateSegmentResponse:
+            type: object
+            properties:
+                usersMatched:
+                    type: string
+                usersAdded:
+                    type: string
+                usersRemoved:
+                    type: string
+        api.crm.service.v1.CreateSegmentResponse:
+            type: object
+            properties:
+                segment:
+                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.DeleteSegmentResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.FieldSchema:
+            type: object
+            properties:
+                field:
+                    type: string
+                label:
+                    type: string
+                type:
+                    enum:
+                        - FIELD_TYPE_UNSPECIFIED
+                        - FIELD_TYPE_BOOLEAN
+                        - FIELD_TYPE_NUMERIC
+                        - FIELD_TYPE_DATE
+                        - FIELD_TYPE_STRING
+                    type: string
+                    format: enum
+                operators:
+                    type: array
+                    items:
+                        type: string
+                valueSchema:
+                    type: object
+            description: Field schema for frontend query builder
+        api.crm.service.v1.GetSegmentFieldSchemaResponse:
+            type: object
+            properties:
+                fields:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.FieldSchema'
+        api.crm.service.v1.GetSegmentOverrideResponse:
+            type: object
+            properties:
+                disabled:
+                    type: boolean
+                hasOverride:
+                    type: boolean
+        api.crm.service.v1.GetSegmentResponse:
+            type: object
+            properties:
+                segment:
+                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.GetSegmentUsersResponse:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.SegmentUser'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.crm.service.v1.GetUserSegmentsResponse:
+            type: object
+            properties:
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.ListSegmentsResponse:
+            type: object
+            properties:
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.crm.service.v1.Segment:
+            type: object
+            properties:
+                id:
+                    type: string
+                segmentKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+                ownerOperatorId:
+                    type: string
+                    description: Ownership hierarchy
+                ownerCompanyOperatorId:
+                    type: string
+                ownerRetailerOperatorId:
+                    type: string
+                ownerSystemOperatorId:
+                    type: string
+                ownerLevel:
+                    enum:
+                        - OWNER_LEVEL_UNSPECIFIED
+                        - OWNER_LEVEL_SYSTEM
+                        - OWNER_LEVEL_RETAILER
+                        - OWNER_LEVEL_COMPANY
+                        - OWNER_LEVEL_OPERATOR
+                    type: string
+                    format: enum
+                rules:
+                    type: object
+                    description: Rules as JSON structure
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                lastCalculatedAt:
+                    type: string
+                    format: date-time
+                userCount:
+                    type: string
+                    description: Computed fields
+            description: Segment definition
+        api.crm.service.v1.SegmentUser:
+            type: object
+            properties:
+                segmentId:
+                    type: string
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                enteredAt:
+                    type: string
+                    format: date-time
+                leftAt:
+                    type: string
+                    format: date-time
+                isMember:
+                    type: boolean
+            description: Segment user membership
+        api.crm.service.v1.SetSegmentOverrideResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.UpdateSegmentResponse:
+            type: object
+            properties:
+                segment:
+                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
         api.game.service.v1.Action:
             type: object
             properties:
@@ -18064,6 +18700,10 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                channelId:
+                    type: string
+                rawRequest:
+                    type: string
         api.review.service.v1.GetTicketResponse_Ticket:
             type: object
             properties:
@@ -21779,6 +22419,10 @@ components:
         payment.service.v1.DeleteBankCardResponse:
             type: object
             properties: {}
+        payment.service.v1.DeleteSavedPaymentInfoResponse:
+            type: object
+            properties: {}
+            description: Response for deleting saved payment info
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
@@ -21893,6 +22537,13 @@ components:
             properties:
                 schema:
                     $ref: '#/components/schemas/google.protobuf.ListValue'
+        payment.service.v1.GetCryptoBonusPreferenceResponse:
+            type: object
+            properties:
+                skipBonus:
+                    type: boolean
+                    description: Whether bonus is skipped for deposits of this currency (true = skip, false = receive bonus)
+            description: Response for getting crypto bonus preference
         payment.service.v1.GetOperatorAddressResponse:
             type: object
             properties:
@@ -22216,6 +22867,15 @@ components:
                     description: |-
                         Additional information needed for the deposit
                          May include clientOrderId, productId, userInfo, etc.
+                saveForLaterUse:
+                    type: boolean
+                    description: Save this deposit info for later reuse
+                skipBonus:
+                    type: boolean
+                    description: Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
+                savedInfoName:
+                    type: string
+                    description: Name for saved payment info (required when save_for_later_use is true)
             description: |-
                 Request to initiate a deposit
                  Used to start a deposit transaction
@@ -22250,6 +22910,14 @@ components:
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
+        payment.service.v1.ListSavedPaymentInfoResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.SavedPaymentInfoItem'
+            description: Response for listing saved payment info
         payment.service.v1.PaymentChannelInfo:
             type: object
             properties:
@@ -22473,6 +23141,48 @@ components:
             description: |-
                 Details of a single payment method
                  Contains information about a specific payment method including its ID, currency, and required fields schema
+        payment.service.v1.SavedPaymentInfoItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                channelId:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+                schemaData:
+                    type: object
+                lastUsedAmount:
+                    type: string
+                lastUsedCurrency:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: |-
+                Saved payment info item
+                 Represents a saved payment information record
+        payment.service.v1.SetCryptoBonusPreferenceRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Crypto currency code (e.g., BTC, ETH, USDT)
+                skipBonus:
+                    type: boolean
+                    description: Whether to skip bonus for deposits of this currency (true = skip, false = receive bonus)
+            description: |-
+                Request to set crypto bonus preference
+                 Used to set whether user wants to skip bonus for future crypto deposits of a specific currency
+        payment.service.v1.SetCryptoBonusPreferenceResponse:
+            type: object
+            properties: {}
+            description: Response for setting crypto bonus preference
         payment.service.v1.TransactionDetail:
             type: object
             properties:
@@ -22865,6 +23575,8 @@ tags:
          Provides methods for backoffice bcpay management
     - name: BackofficeCloudflare
     - name: BackofficeCompany
+    - name: BackofficeCrm
+      description: CRM segment management service for backoffice
     - name: BackofficeDashboard
     - name: BackofficeDns
     - name: BackofficeFileStore

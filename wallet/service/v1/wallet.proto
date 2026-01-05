@@ -641,6 +641,12 @@ message ListWalletBalanceTransactionsResponse {
 		string provider_bonus_amount_usd = 17;
 		string provider_bonus_amount_reporting_currency = 18;
 		int64 external_transaction_id = 19;
+		string before_cash_balance = 20;
+		string after_cash_balance = 21;
+		string before_operator_bonus_balance = 22;
+		string after_operator_bonus_balance = 23;
+		string before_provider_bonus_balance = 24;
+		string after_provider_bonus_balance = 25;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;

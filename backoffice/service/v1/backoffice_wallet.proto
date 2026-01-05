@@ -425,12 +425,15 @@ message ListWalletBalanceTransactionsResponse {
 		//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 		string transaction_type = 3;
 		int32 vip_level = 4;
-		string change_balance = 5;
-		string before_balance = 6;
-		string after_balance = 7;
-		string currency = 8;
-		int64 related_transaction_id = 9;
-		int64 external_transaction_id = 10;
+		string before_cash_balance = 5;
+		string after_cash_balance = 6;
+		string cash_amount_changed = 7;
+		string before_operator_bonus_balance = 8;
+		string after_operator_bonus_balance = 9;
+		string operator_bonus_amount_changed = 10;
+		string currency = 11;
+		int64 related_transaction_id = 12;
+		int64 external_transaction_id = 13;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;

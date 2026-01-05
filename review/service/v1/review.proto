@@ -19,6 +19,10 @@ service Review {
 			body: "*"
 		};
 	}
+
+	rpc CreateAffiliateWithdraw(CreateAffiliateWithdrawRequest) returns (CreateWithdrawResponse) {
+	}
+
 	rpc CreateOperatorWithdraw(CreateOperatorWithdrawRequest) returns (CreateWithdrawResponse) {}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
@@ -33,6 +37,12 @@ service Review {
 
 message CreateWithdrawRequest {
 	google.protobuf.Struct request = 1;  // JSON data for REST API
+}
+
+message CreateAffiliateWithdrawRequest {
+	google.protobuf.Struct request = 1;  // JSON data for REST API
+	api.common.OperatorContext operator_context = 2;
+	api.common.UserInfo user_info = 3;  // UserInfo for RPC calls (optional, for backward compatibility)
 }
 
 message CreateOperatorWithdrawRequest {
@@ -199,6 +209,8 @@ message GetTicketResponse {
 		google.protobuf.Struct extra = 10;
 		google.protobuf.ListValue schema = 11;
 		google.protobuf.Timestamp created_at = 12;
+		string channel_id = 13;
+		string raw_request = 14;
 	}
 	message WalletTransactionInfo{
 		int64 transaction_id = 1;

@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -367,11 +368,97 @@ func (x *AddOperatorEvent) GetSupportingCurrencies() []string {
 	return nil
 }
 
+// UserStatusUpdateEvent is emitted when user status fields are updated.
+// Fields: login_banned, withdraw_banned, game_banned, locked, kyc_level
+type UserStatusUpdateEvent struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Field           string                  `protobuf:"bytes,3,opt,name=field,proto3" json:"field,omitempty"` // field name that was updated
+	OldValue        string                  `protobuf:"bytes,4,opt,name=old_value,json=oldValue,proto3" json:"old_value,omitempty"`
+	NewValue        string                  `protobuf:"bytes,5,opt,name=new_value,json=newValue,proto3" json:"new_value,omitempty"`
+	UpdatedAt       int64                   `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UserStatusUpdateEvent) Reset() {
+	*x = UserStatusUpdateEvent{}
+	mi := &file_user_service_v1_user_event_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserStatusUpdateEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserStatusUpdateEvent) ProtoMessage() {}
+
+func (x *UserStatusUpdateEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_event_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserStatusUpdateEvent.ProtoReflect.Descriptor instead.
+func (*UserStatusUpdateEvent) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_event_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UserStatusUpdateEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserStatusUpdateEvent) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *UserStatusUpdateEvent) GetField() string {
+	if x != nil {
+		return x.Field
+	}
+	return ""
+}
+
+func (x *UserStatusUpdateEvent) GetOldValue() string {
+	if x != nil {
+		return x.OldValue
+	}
+	return ""
+}
+
+func (x *UserStatusUpdateEvent) GetNewValue() string {
+	if x != nil {
+		return x.NewValue
+	}
+	return ""
+}
+
+func (x *UserStatusUpdateEvent) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
 var File_user_service_v1_user_event_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\n" +
-	" user/service/v1/user_event.proto\x12\x13api.user.service.v1\"u\n" +
+	" user/service/v1/user_event.proto\x12\x13api.user.service.v1\x1a\x13common/common.proto\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
@@ -406,7 +493,15 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\roperator_type\x18\x06 \x01(\tR\foperatorType\x12#\n" +
 	"\roperator_name\x18\a \x01(\tR\foperatorName\x12-\n" +
 	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x123\n" +
-	"\x15supporting_currencies\x18\t \x03(\tR\x14supportingCurrencies2]\n" +
+	"\x15supporting_currencies\x18\t \x03(\tR\x14supportingCurrencies\"\xe7\x01\n" +
+	"\x15UserStatusUpdateEvent\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x14\n" +
+	"\x05field\x18\x03 \x01(\tR\x05field\x12\x1b\n" +
+	"\told_value\x18\x04 \x01(\tR\boldValue\x12\x1b\n" +
+	"\tnew_value\x18\x05 \x01(\tR\bnewValue\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\x03R\tupdatedAt2]\n" +
 	"\tUserEvent\x12P\n" +
 	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
@@ -423,21 +518,24 @@ func file_user_service_v1_user_event_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_user_event_proto_rawDescData
 }
 
-var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_user_service_v1_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_user_service_v1_user_event_proto_goTypes = []any{
-	(*EventRequest)(nil),     // 0: api.user.service.v1.EventRequest
-	(*EventResponse)(nil),    // 1: api.user.service.v1.EventResponse
-	(*AddUserEvent)(nil),     // 2: api.user.service.v1.AddUserEvent
-	(*AddOperatorEvent)(nil), // 3: api.user.service.v1.AddOperatorEvent
+	(*EventRequest)(nil),           // 0: api.user.service.v1.EventRequest
+	(*EventResponse)(nil),          // 1: api.user.service.v1.EventResponse
+	(*AddUserEvent)(nil),           // 2: api.user.service.v1.AddUserEvent
+	(*AddOperatorEvent)(nil),       // 3: api.user.service.v1.AddOperatorEvent
+	(*UserStatusUpdateEvent)(nil),  // 4: api.user.service.v1.UserStatusUpdateEvent
+	(*common.OperatorContext)(nil), // 5: api.common.OperatorContext
 }
 var file_user_service_v1_user_event_proto_depIdxs = []int32{
-	0, // 0: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
-	1, // 1: api.user.service.v1.UserEvent.Event:output_type -> api.user.service.v1.EventResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	5, // 0: api.user.service.v1.UserStatusUpdateEvent.operator_context:type_name -> api.common.OperatorContext
+	0, // 1: api.user.service.v1.UserEvent.Event:input_type -> api.user.service.v1.EventRequest
+	1, // 2: api.user.service.v1.UserEvent.Event:output_type -> api.user.service.v1.EventResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_user_event_proto_init() }
@@ -452,7 +550,7 @@ func file_user_service_v1_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_event_proto_rawDesc), len(file_user_service_v1_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

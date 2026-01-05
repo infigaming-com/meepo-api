@@ -11980,6 +11980,12 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	ProviderBonusAmountUsd               string `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
 	ProviderBonusAmountReportingCurrency string `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
 	ExternalTransactionId                int64  `protobuf:"varint,19,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	BeforeCashBalance                    string `protobuf:"bytes,20,opt,name=before_cash_balance,json=beforeCashBalance,proto3" json:"before_cash_balance,omitempty"`
+	AfterCashBalance                     string `protobuf:"bytes,21,opt,name=after_cash_balance,json=afterCashBalance,proto3" json:"after_cash_balance,omitempty"`
+	BeforeOperatorBonusBalance           string `protobuf:"bytes,22,opt,name=before_operator_bonus_balance,json=beforeOperatorBonusBalance,proto3" json:"before_operator_bonus_balance,omitempty"`
+	AfterOperatorBonusBalance            string `protobuf:"bytes,23,opt,name=after_operator_bonus_balance,json=afterOperatorBonusBalance,proto3" json:"after_operator_bonus_balance,omitempty"`
+	BeforeProviderBonusBalance           string `protobuf:"bytes,24,opt,name=before_provider_bonus_balance,json=beforeProviderBonusBalance,proto3" json:"before_provider_bonus_balance,omitempty"`
+	AfterProviderBonusBalance            string `protobuf:"bytes,25,opt,name=after_provider_bonus_balance,json=afterProviderBonusBalance,proto3" json:"after_provider_bonus_balance,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
 }
@@ -12145,6 +12151,48 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetExternalTr
 		return x.ExternalTransactionId
 	}
 	return 0
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetBeforeCashBalance() string {
+	if x != nil {
+		return x.BeforeCashBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetAfterCashBalance() string {
+	if x != nil {
+		return x.AfterCashBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetBeforeOperatorBonusBalance() string {
+	if x != nil {
+		return x.BeforeOperatorBonusBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetAfterOperatorBonusBalance() string {
+	if x != nil {
+		return x.AfterOperatorBonusBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetBeforeProviderBonusBalance() string {
+	if x != nil {
+		return x.BeforeProviderBonusBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetAfterProviderBonusBalance() string {
+	if x != nil {
+		return x.AfterProviderBonusBalance
+	}
+	return ""
 }
 
 type GetWalletBalanceTransactionsByIdsResponse_BalanceTransaction struct {
@@ -14604,12 +14652,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\xcd\t\n" +
+	"\v_pagination\"\xb3\f\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xd7\a\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xbd\n" +
+	"\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -14632,7 +14681,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x15provider_bonus_amount\x18\x10 \x01(\tR\x13providerBonusAmount\x129\n" +
 	"\x19provider_bonus_amount_usd\x18\x11 \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
 	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency\x126\n" +
-	"\x17external_transaction_id\x18\x13 \x01(\x03R\x15externalTransactionId\"\x9b\x01\n" +
+	"\x17external_transaction_id\x18\x13 \x01(\x03R\x15externalTransactionId\x12.\n" +
+	"\x13before_cash_balance\x18\x14 \x01(\tR\x11beforeCashBalance\x12,\n" +
+	"\x12after_cash_balance\x18\x15 \x01(\tR\x10afterCashBalance\x12A\n" +
+	"\x1dbefore_operator_bonus_balance\x18\x16 \x01(\tR\x1abeforeOperatorBonusBalance\x12?\n" +
+	"\x1cafter_operator_bonus_balance\x18\x17 \x01(\tR\x19afterOperatorBonusBalance\x12A\n" +
+	"\x1dbefore_provider_bonus_balance\x18\x18 \x01(\tR\x1abeforeProviderBonusBalance\x12?\n" +
+	"\x1cafter_provider_bonus_balance\x18\x19 \x01(\tR\x19afterProviderBonusBalance\"\x9b\x01\n" +
 	"(GetWalletBalanceTransactionsByIdsRequest\x12'\n" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf8\x10\n" +
