@@ -2085,10 +2085,12 @@ type LossRevenueShare struct {
 	BasedOn           string                 `protobuf:"bytes,2,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`                               // ggr/ngr
 	NegativeCarryover string                 `protobuf:"bytes,3,opt,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"` // discard/carry_to_next_period
 	// Map of tier number (1-10) to tier rewards
-	TierRewards   map[int32]*LossRevenueShareTierRewards `protobuf:"bytes,4,rep,name=tier_rewards,json=tierRewards,proto3" json:"tier_rewards,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Period        string                                 `protobuf:"bytes,5,opt,name=period,proto3" json:"period,omitempty"` // weekly/monthly
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TierRewards        map[int32]*LossRevenueShareTierRewards `protobuf:"bytes,4,rep,name=tier_rewards,json=tierRewards,proto3" json:"tier_rewards,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Period             string                                 `protobuf:"bytes,5,opt,name=period,proto3" json:"period,omitempty"` // weekly/monthly
+	PaymentChannelRate string                                 `protobuf:"bytes,6,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`
+	ThirdPartyGameRate string                                 `protobuf:"bytes,7,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *LossRevenueShare) Reset() {
@@ -2152,6 +2154,20 @@ func (x *LossRevenueShare) GetTierRewards() map[int32]*LossRevenueShareTierRewar
 func (x *LossRevenueShare) GetPeriod() string {
 	if x != nil {
 		return x.Period
+	}
+	return ""
+}
+
+func (x *LossRevenueShare) GetPaymentChannelRate() string {
+	if x != nil {
+		return x.PaymentChannelRate
+	}
+	return ""
+}
+
+func (x *LossRevenueShare) GetThirdPartyGameRate() string {
+	if x != nil {
+		return x.ThirdPartyGameRate
 	}
 	return ""
 }
@@ -2835,13 +2851,15 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12\x13\n" +
 	"\x02to\x18\x02 \x01(\tH\x00R\x02to\x88\x01\x01\x12\x12\n" +
 	"\x04rate\x18\x03 \x01(\tR\x04rateB\x05\n" +
-	"\x03_to\"\xe5\x02\n" +
+	"\x03_to\"\xca\x03\n" +
 	"\x10LossRevenueShare\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x19\n" +
 	"\bbased_on\x18\x02 \x01(\tR\abasedOn\x12-\n" +
 	"\x12negative_carryover\x18\x03 \x01(\tR\x11negativeCarryover\x12^\n" +
 	"\ftier_rewards\x18\x04 \x03(\v2;.api.affiliate.service.v1.LossRevenueShare.TierRewardsEntryR\vtierRewards\x12\x16\n" +
-	"\x06period\x18\x05 \x01(\tR\x06period\x1au\n" +
+	"\x06period\x18\x05 \x01(\tR\x06period\x120\n" +
+	"\x14payment_channel_rate\x18\x06 \x01(\tR\x12paymentChannelRate\x121\n" +
+	"\x15third_party_game_rate\x18\a \x01(\tR\x12thirdPartyGameRate\x1au\n" +
 	"\x10TierRewardsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12K\n" +
 	"\x05value\x18\x02 \x01(\v25.api.affiliate.service.v1.LossRevenueShareTierRewardsR\x05value:\x028\x01\"m\n" +

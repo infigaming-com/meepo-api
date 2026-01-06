@@ -8758,6 +8758,10 @@ components:
                     description: Map of tier number (1-10) to tier rewards
                 period:
                     type: string
+                paymentChannelRate:
+                    type: string
+                thirdPartyGameRate:
+                    type: string
         api.affiliate.service.v1.LossRevenueShareTierReward:
             type: object
             properties:

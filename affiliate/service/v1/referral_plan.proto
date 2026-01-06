@@ -294,6 +294,8 @@ message LossRevenueShare {
     // Map of tier number (1-10) to tier rewards
     map<int32, LossRevenueShareTierRewards> tier_rewards = 4;
     string period = 5; // weekly/monthly
+    string payment_channel_rate = 6; // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 7; // represent as a percentage, e.g. "35" for 35%
 }
 
 message LossRevenueShareTierRewards {

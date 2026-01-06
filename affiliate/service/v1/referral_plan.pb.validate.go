@@ -4681,6 +4681,10 @@ func (m *LossRevenueShare) validate(all bool) error {
 
 	// no validation rules for Period
 
+	// no validation rules for PaymentChannelRate
+
+	// no validation rules for ThirdPartyGameRate
+
 	if len(errors) > 0 {
 		return LossRevenueShareMultiError(errors)
 	}
