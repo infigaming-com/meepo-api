@@ -3346,17 +3346,16 @@ func (x *ListBalancesSummaryResponse) GetPageSize() int32 {
 // RecalculateDailyRevenueSharesRequest is the request for recalculating daily revenue shares
 type RecalculateDailyRevenueSharesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Time range for recalculation (required)
-	StartTime int64 `protobuf:"varint,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"` // Unix timestamp in milliseconds
-	EndTime   int64 `protobuf:"varint,2,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`       // Unix timestamp in milliseconds
-	// Optional filters - if not provided, all records in the period will be recalculated
-	ProviderId *string `protobuf:"bytes,3,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"` // Filter by provider ID
-	FeeGroup   *string `protobuf:"bytes,4,opt,name=fee_group,json=feeGroup,proto3,oneof" json:"fee_group,omitempty"`       // Filter by fee group
-	Currency   *string `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`                       // Filter by currency
-	// Operator context for filtering (optional)
-	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Billing period key (required) - e.g. "2026-01"
+	PeriodKey string `protobuf:"bytes,1,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`
+	// Operator context for filtering (optional) - if not provided, all operators in the period will be recalculated
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Optional filters
+	ProviderId    *string `protobuf:"bytes,3,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"` // Filter by provider ID
+	FeeGroup      *string `protobuf:"bytes,4,opt,name=fee_group,json=feeGroup,proto3,oneof" json:"fee_group,omitempty"`       // Filter by fee group
+	Currency      *string `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`                       // Filter by currency
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RecalculateDailyRevenueSharesRequest) Reset() {
@@ -3389,18 +3388,18 @@ func (*RecalculateDailyRevenueSharesRequest) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{54}
 }
 
-func (x *RecalculateDailyRevenueSharesRequest) GetStartTime() int64 {
+func (x *RecalculateDailyRevenueSharesRequest) GetPeriodKey() string {
 	if x != nil {
-		return x.StartTime
+		return x.PeriodKey
 	}
-	return 0
+	return ""
 }
 
-func (x *RecalculateDailyRevenueSharesRequest) GetEndTime() int64 {
+func (x *RecalculateDailyRevenueSharesRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.EndTime
+		return x.OperatorContext
 	}
-	return 0
+	return nil
 }
 
 func (x *RecalculateDailyRevenueSharesRequest) GetProviderId() string {
@@ -3422,13 +3421,6 @@ func (x *RecalculateDailyRevenueSharesRequest) GetCurrency() string {
 		return *x.Currency
 	}
 	return ""
-}
-
-func (x *RecalculateDailyRevenueSharesRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
 }
 
 // RecalculateDailyRevenueSharesResponse is the response for recalculating daily revenue shares
@@ -5609,16 +5601,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0eest_net_profit\x18\x0f \x01(\tR\festNetProfit\x120\n" +
 	"\x14revenue_share_system\x18\x10 \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\x11 \x01(\tR\x14revenueShareOperator\x12\"\n" +
-	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts\"\xbc\x02\n" +
+	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts\"\xa1\x02\n" +
 	"$RecalculateDailyRevenueSharesRequest\x12\x1d\n" +
 	"\n" +
-	"start_time\x18\x01 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x02 \x01(\x03R\aendTime\x12$\n" +
+	"period_key\x18\x01 \x01(\tR\tperiodKey\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
 	"\vprovider_id\x18\x03 \x01(\tH\x00R\n" +
 	"providerId\x88\x01\x01\x12 \n" +
 	"\tfee_group\x18\x04 \x01(\tH\x01R\bfeeGroup\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x0e\n" +
+	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01B\x0e\n" +
 	"\f_provider_idB\f\n" +
 	"\n" +
 	"_fee_groupB\v\n" +

@@ -704,17 +704,16 @@ message ListBalancesSummaryResponse {
 
 // RecalculateDailyRevenueSharesRequest is the request for recalculating daily revenue shares
 message RecalculateDailyRevenueSharesRequest {
-	// Time range for recalculation (required)
-	int64 start_time = 1; // Unix timestamp in milliseconds
-	int64 end_time = 2; // Unix timestamp in milliseconds
+	// Billing period key (required) - e.g. "2026-01"
+	string period_key = 1;
 	
-	// Optional filters - if not provided, all records in the period will be recalculated
+	// Operator context for filtering (optional) - if not provided, all operators in the period will be recalculated
+	api.common.OperatorContext operator_context = 2;
+	
+	// Optional filters
 	optional string provider_id = 3; // Filter by provider ID
-	optional string fee_group = 4; // Filter by fee group
-	optional string currency = 5; // Filter by currency
-	
-	// Operator context for filtering (optional)
-	api.common.OperatorContext operator_context = 6;
+	optional string fee_group = 4;   // Filter by fee group
+	optional string currency = 5;    // Filter by currency
 }
 
 // RecalculateDailyRevenueSharesResponse is the response for recalculating daily revenue shares

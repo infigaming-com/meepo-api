@@ -6863,9 +6863,7 @@ func (m *RecalculateDailyRevenueSharesRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for StartTime
-
-	// no validation rules for EndTime
+	// no validation rules for PeriodKey
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
