@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package api.report.service.v1;
+
+import "google/api/annotations.proto";
+import "backoffice/service/v1/backoffice_dashboard.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/report/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.report.service.v1";
+
+// DashboardService provides dashboard analytics via ClickHouse.
+// This service is the ONLY service allowed to query ClickHouse directly for dashboard data.
+service DashboardService {
+  // Overview dashboard with today/yesterday comparison
+  rpc GetOverviewDashboard(api.backoffice.service.v1.GetOverviewDashboardRequest) returns (api.backoffice.service.v1.GetOverviewDashboardResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/dashboard/overview/get"
+      body: "*"
+    };
+  }
+
+  // Time-ranged dashboard (this month/week/custom days)
+  rpc GetTimeRangedDashboard(api.backoffice.service.v1.GetTimeRangedDashboardRequest) returns (api.backoffice.service.v1.GetTimeRangedDashboardResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/dashboard/time-ranged/get"
+      body: "*"
+    };
+  }
+
+  // Top users dashboard (deposits/withdrawals)
+  rpc GetTopUsersDashboard(api.backoffice.service.v1.GetTopUsersDashboardRequest) returns (api.backoffice.service.v1.GetTopUsersDashboardResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/dashboard/top-users/get"
+      body: "*"
+    };
+  }
+
+  // Top operators dashboard (GGR/NGR/deposits-withdrawals)
+  rpc GetTopOperatorsDashboard(api.backoffice.service.v1.GetTopOperatorsDashboardRequest) returns (api.backoffice.service.v1.GetTopOperatorsDashboardResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/dashboard/top-operators/get"
+      body: "*"
+    };
+  }
+}

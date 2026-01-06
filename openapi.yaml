@@ -6436,6 +6436,360 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/report/customer-record/get:
+        post:
+            tags:
+                - ReportService
+            description: Customer record detail
+            operationId: ReportService_CustomerRecordReportDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse'
+    /v1/report/dashboard/overview/get:
+        post:
+            tags:
+                - DashboardService
+            description: Overview dashboard with today/yesterday comparison
+            operationId: DashboardService_GetOverviewDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse'
+    /v1/report/dashboard/time-ranged/get:
+        post:
+            tags:
+                - DashboardService
+            description: Time-ranged dashboard (this month/week/custom days)
+            operationId: DashboardService_GetTimeRangedDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardResponse'
+    /v1/report/dashboard/top-operators/get:
+        post:
+            tags:
+                - DashboardService
+            description: Top operators dashboard (GGR/NGR/deposits-withdrawals)
+            operationId: DashboardService_GetTopOperatorsDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse'
+    /v1/report/dashboard/top-users/get:
+        post:
+            tags:
+                - DashboardService
+            description: Top users dashboard (deposits/withdrawals)
+            operationId: DashboardService_GetTopUsersDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/report/deposit-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListDepositDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse'
+    /v1/report/deposit-summaries/get:
+        post:
+            tags:
+                - ReportService
+            description: Deposit reports
+            operationId: ReportService_GetDepositSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse'
+    /v1/report/deposit-vtg-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListDepositVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
+    /v1/report/game-data/get:
+        post:
+            tags:
+                - ReportService
+            description: Game data reports
+            operationId: ReportService_GetGameDataSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryResponse'
+    /v1/report/game-data/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataResponse'
+    /v1/report/player-game-data/get:
+        post:
+            tags:
+                - ReportService
+            description: Player game data reports
+            operationId: ReportService_GetPlayerGameDataSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryResponse'
+    /v1/report/player-game-data/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListPlayerGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse'
+    /v1/report/register-retention/list:
+        post:
+            tags:
+                - ReportService
+            description: Retention reports
+            operationId: ReportService_ListRegisterRetention
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
+    /v1/report/sport-events/list:
+        post:
+            tags:
+                - ReportService
+            description: Sport events (may need different implementation)
+            operationId: ReportService_ListSportEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsResponse'
+    /v1/report/summary/get:
+        post:
+            tags:
+                - ReportService
+            description: Summary reports
+            operationId: ReportService_GetSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
+    /v1/report/summary/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
+    /v1/report/withdraw-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListWithdrawDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse'
+    /v1/report/withdraw-summaries/get:
+        post:
+            tags:
+                - ReportService
+            description: Withdrawal reports
+            operationId: ReportService_GetWithdrawSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse'
+    /v1/report/withdraw-vtg-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListWithdrawVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -23598,11 +23952,19 @@ tags:
     - name: BackofficeWallet
     - name: Bcpay
       description: User service provides authentication and user management functionality.
+    - name: DashboardService
+      description: |-
+        DashboardService provides dashboard analytics via ClickHouse.
+         This service is the ONLY service allowed to query ClickHouse directly for dashboard data.
     - name: Game
     - name: Payment
       description: |-
         Payment Service
          Provides methods for managing payment methods, channels, and transactions
+    - name: ReportService
+      description: |-
+        ReportService provides analytics and reporting functionality via ClickHouse.
+         This service is the ONLY service allowed to query ClickHouse directly.
     - name: Review
       description: Review service provides review functionality.
     - name: User
