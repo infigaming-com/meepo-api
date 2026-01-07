@@ -278,6 +278,10 @@ service Game {
 	rpc BackofficeListGamesUnderTag(BackofficeListGamesUnderTagRequest) returns (BackofficeListGamesUnderTagResponse) {
 	}
 
+	// Get provider statistics (aggregated bet/payout data)
+	rpc GetProviderStats(GetProviderStatsRequest) returns (GetProviderStatsResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -2134,4 +2138,47 @@ message BackofficeListGamesUnderTagResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+// ============== Provider Stats Messages ==============
+
+message GetProviderStatsRequest {
+	api.common.OperatorContext operator_context = 1;
+	string provider_id = 2;
+	string currency = 3;
+	string fee_group = 4;
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+}
+
+message GetProviderStatsResponse {
+	// Basic betting statistics
+	string total_bet = 1;                              // Total bet amount (native currency)
+	string total_payout = 2;                           // Total payout amount (native currency)
+	int64 bets_count = 3;                              // Number of bets
+	
+	// USD amounts
+	string total_bet_usd = 4;
+	string total_payout_usd = 5;
+	
+	// Reporting Currency amounts
+	string total_bet_reporting_currency = 6;
+	string total_payout_reporting_currency = 7;
+	
+	// Cash amounts (from affected_credits, excluding bonus)
+	string total_bet_cash_usd = 8;
+	string total_payout_cash_usd = 9;
+	string total_bet_cash_reporting_currency = 10;
+	string total_payout_cash_reporting_currency = 11;
+	
+	// GGR = total_bet - total_payout
+	string ggr = 12;                                   // GGR (native currency)
+	string ggr_usd = 13;
+	string ggr_reporting_currency = 14;
+	
+	// NGR (considers rollback and adjust)
+	// NGR = (bet + debit + win_rollback + credit_rollback) - (win + credit + debit_rollback + bet_rollback) + adjust
+	string ngr = 15;                                   // NGR (native currency)
+	string ngr_usd = 16;
+	string ngr_reporting_currency = 17;
 }

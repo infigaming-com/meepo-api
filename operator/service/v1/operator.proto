@@ -92,6 +92,11 @@ service Operator {
 
 	rpc ListBalancesSummary(ListBalancesSummaryRequest) returns (ListBalancesSummaryResponse) {
 	}
+
+	// RecalculateDailyRevenueShares recalculates operator_daily_revenue_shares records
+	// by fetching existing records from database and calling game service's GetProviderStats API
+	rpc RecalculateDailyRevenueShares(RecalculateDailyRevenueSharesRequest) returns (RecalculateDailyRevenueSharesResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -695,4 +700,25 @@ message ListBalancesSummaryResponse {
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
-}	
+}
+
+// RecalculateDailyRevenueSharesRequest is the request for recalculating daily revenue shares
+message RecalculateDailyRevenueSharesRequest {
+	// Billing period key (required) - e.g. "2026-01"
+	string period_key = 1;
+	
+	// Operator context for filtering (optional) - if not provided, all operators in the period will be recalculated
+	api.common.OperatorContext operator_context = 2;
+	
+	// Optional filters
+	optional string provider_id = 3; // Filter by provider ID
+	optional string fee_group = 4;   // Filter by fee group
+	optional string currency = 5;    // Filter by currency
+}
+
+// RecalculateDailyRevenueSharesResponse is the response for recalculating daily revenue shares
+message RecalculateDailyRevenueSharesResponse {
+	int32 total_records = 1; // Total records found for recalculation
+	int32 records_updated = 2; // Number of records successfully updated
+	int32 records_failed = 3; // Number of records failed to update
+}
