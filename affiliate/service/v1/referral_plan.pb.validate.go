@@ -2622,6 +2622,8 @@ func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
 
 	// no validation rules for NgrAmountInPeriod
 
+	// no validation rules for Bonus2CashAmountInPeriod
+
 	for idx, item := range m.GetReferredStats() {
 		_, _ = idx, item
 

@@ -8344,6 +8344,10 @@ components:
                     type: object
                     additionalProperties:
                         type: string
+                bonus2cashAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
                 referredStats:
                     type: array
                     items:
