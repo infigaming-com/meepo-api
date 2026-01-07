@@ -49,6 +49,7 @@ const (
 	Operator_ListBillingPeriods_FullMethodName              = "/api.operator.service.v1.Operator/ListBillingPeriods"
 	Operator_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.operator.service.v1.Operator/ListBalanceMonthlyRevenueShares"
 	Operator_ListBalancesSummary_FullMethodName             = "/api.operator.service.v1.Operator/ListBalancesSummary"
+	Operator_DeleteAdjustment_FullMethodName                = "/api.operator.service.v1.Operator/DeleteAdjustment"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -90,6 +91,7 @@ type OperatorClient interface {
 	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
 	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
+	DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error)
 }
 
 type operatorClient struct {
@@ -400,6 +402,16 @@ func (c *operatorClient) ListBalancesSummary(ctx context.Context, in *ListBalanc
 	return out, nil
 }
 
+func (c *operatorClient) DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAdjustmentResponse)
+	err := c.cc.Invoke(ctx, Operator_DeleteAdjustment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -439,6 +451,7 @@ type OperatorServer interface {
 	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
 	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
+	DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -538,6 +551,9 @@ func (UnimplementedOperatorServer) ListBalanceMonthlyRevenueShares(context.Conte
 }
 func (UnimplementedOperatorServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
+}
+func (UnimplementedOperatorServer) DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdjustment not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -1100,6 +1116,24 @@ func _Operator_ListBalancesSummary_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_DeleteAdjustment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAdjustmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).DeleteAdjustment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_DeleteAdjustment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).DeleteAdjustment(ctx, req.(*DeleteAdjustmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1226,6 +1260,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBalancesSummary",
 			Handler:    _Operator_ListBalancesSummary_Handler,
+		},
+		{
+			MethodName: "DeleteAdjustment",
+			Handler:    _Operator_DeleteAdjustment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -37,6 +37,7 @@ const (
 	BackofficeFinance_ListBillingPeriods_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
 	BackofficeFinance_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.backoffice.service.v1.BackofficeFinance/ListBalanceMonthlyRevenueShares"
 	BackofficeFinance_ListBalancesSummary_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListBalancesSummary"
+	BackofficeFinance_DeleteAdjustment_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustment"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -61,6 +62,7 @@ type BackofficeFinanceClient interface {
 	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
 	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
+	DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -251,6 +253,16 @@ func (c *backofficeFinanceClient) ListBalancesSummary(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAdjustmentResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_DeleteAdjustment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -273,6 +285,7 @@ type BackofficeFinanceServer interface {
 	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
 	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
+	DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -336,6 +349,9 @@ func (UnimplementedBackofficeFinanceServer) ListBalanceMonthlyRevenueShares(cont
 }
 func (UnimplementedBackofficeFinanceServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdjustment not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -682,6 +698,24 @@ func _BackofficeFinance_ListBalancesSummary_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_DeleteAdjustment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAdjustmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).DeleteAdjustment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_DeleteAdjustment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).DeleteAdjustment(ctx, req.(*DeleteAdjustmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -760,6 +794,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBalancesSummary",
 			Handler:    _BackofficeFinance_ListBalancesSummary_Handler,
+		},
+		{
+			MethodName: "DeleteAdjustment",
+			Handler:    _BackofficeFinance_DeleteAdjustment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

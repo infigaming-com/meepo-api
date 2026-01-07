@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeFinanceAddAdjustment = "/api.backoffice.service.v1.BackofficeFinance/AddAdjustment"
 const OperationBackofficeFinanceCreateAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
+const OperationBackofficeFinanceDeleteAdjustment = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustment"
 const OperationBackofficeFinanceDeleteAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
 const OperationBackofficeFinanceGetBalanceSummary = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
 const OperationBackofficeFinanceGetBalancesSummary = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
@@ -41,6 +42,7 @@ const OperationBackofficeFinanceUpdateAdjustmentConfig = "/api.backoffice.servic
 type BackofficeFinanceHTTPServer interface {
 	AddAdjustment(context.Context, *AddAdjustmentRequest) (*AddAdjustmentResponse, error)
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
+	DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
 	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
@@ -79,6 +81,7 @@ func RegisterBackofficeFinanceHTTPServer(s *http.Server, srv BackofficeFinanceHT
 	r.POST("/v1/backoffice/finance/billing-periods/list", _BackofficeFinance_ListBillingPeriods0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balance/monthly-revenue-shares/list", _BackofficeFinance_ListBalanceMonthlyRevenueShares0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balances/summary/list", _BackofficeFinance_ListBalancesSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/adjustment/delete", _BackofficeFinance_DeleteAdjustment0_HTTP_Handler(srv))
 }
 
 func _BackofficeFinance_ListInvoices0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
@@ -477,9 +480,32 @@ func _BackofficeFinance_ListBalancesSummary0_HTTP_Handler(srv BackofficeFinanceH
 	}
 }
 
+func _BackofficeFinance_DeleteAdjustment0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteAdjustmentRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceDeleteAdjustment)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteAdjustment(ctx, req.(*DeleteAdjustmentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteAdjustmentResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeFinanceHTTPClient interface {
 	AddAdjustment(ctx context.Context, req *AddAdjustmentRequest, opts ...http.CallOption) (rsp *AddAdjustmentResponse, err error)
 	CreateAdjustmentConfig(ctx context.Context, req *CreateAdjustmentConfigRequest, opts ...http.CallOption) (rsp *CreateAdjustmentConfigResponse, err error)
+	DeleteAdjustment(ctx context.Context, req *DeleteAdjustmentRequest, opts ...http.CallOption) (rsp *DeleteAdjustmentResponse, err error)
 	DeleteAdjustmentConfig(ctx context.Context, req *DeleteAdjustmentConfigRequest, opts ...http.CallOption) (rsp *DeleteAdjustmentConfigResponse, err error)
 	GetBalanceSummary(ctx context.Context, req *GetBalanceSummaryRequest, opts ...http.CallOption) (rsp *GetBalanceSummaryResponse, err error)
 	GetBalancesSummary(ctx context.Context, req *GetBalancesSummaryRequest, opts ...http.CallOption) (rsp *GetBalancesSummaryResponse, err error)
@@ -524,6 +550,19 @@ func (c *BackofficeFinanceHTTPClientImpl) CreateAdjustmentConfig(ctx context.Con
 	pattern := "/v1/backoffice/finance/adjustment-configs/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFinanceCreateAdjustmentConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...http.CallOption) (*DeleteAdjustmentResponse, error) {
+	var out DeleteAdjustmentResponse
+	pattern := "/v1/backoffice/finance/adjustment/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceDeleteAdjustment))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

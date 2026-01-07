@@ -207,7 +207,7 @@ func (x ListBalanceMonthlyRevenueSharesRequest_Type) Number() protoreflect.EnumN
 
 // Deprecated: Use ListBalanceMonthlyRevenueSharesRequest_Type.Descriptor instead.
 func (ListBalanceMonthlyRevenueSharesRequest_Type) EnumDescriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{32, 0}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{34, 0}
 }
 
 type ListInvoicesRequest struct {
@@ -1634,6 +1634,86 @@ func (*CreateAdjustmentConfigResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{21}
 }
 
+type DeleteAdjustmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Adjustment ID to delete
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAdjustmentRequest) Reset() {
+	*x = DeleteAdjustmentRequest{}
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAdjustmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAdjustmentRequest) ProtoMessage() {}
+
+func (x *DeleteAdjustmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAdjustmentRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAdjustmentRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *DeleteAdjustmentRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteAdjustmentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAdjustmentResponse) Reset() {
+	*x = DeleteAdjustmentResponse{}
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAdjustmentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAdjustmentResponse) ProtoMessage() {}
+
+func (x *DeleteAdjustmentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAdjustmentResponse.ProtoReflect.Descriptor instead.
+func (*DeleteAdjustmentResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{23}
+}
+
 type SendInvoicesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PeriodKey     string                 `protobuf:"bytes,1,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`
@@ -1643,7 +1723,7 @@ type SendInvoicesRequest struct {
 
 func (x *SendInvoicesRequest) Reset() {
 	*x = SendInvoicesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1655,7 +1735,7 @@ func (x *SendInvoicesRequest) String() string {
 func (*SendInvoicesRequest) ProtoMessage() {}
 
 func (x *SendInvoicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1668,7 +1748,7 @@ func (x *SendInvoicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendInvoicesRequest.ProtoReflect.Descriptor instead.
 func (*SendInvoicesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{22}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *SendInvoicesRequest) GetPeriodKey() string {
@@ -1686,7 +1766,7 @@ type SendInvoicesResponse struct {
 
 func (x *SendInvoicesResponse) Reset() {
 	*x = SendInvoicesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1698,7 +1778,7 @@ func (x *SendInvoicesResponse) String() string {
 func (*SendInvoicesResponse) ProtoMessage() {}
 
 func (x *SendInvoicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1711,7 +1791,7 @@ func (x *SendInvoicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendInvoicesResponse.ProtoReflect.Descriptor instead.
 func (*SendInvoicesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{23}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{25}
 }
 
 type GetInvoiceSummaryRequest struct {
@@ -1722,7 +1802,7 @@ type GetInvoiceSummaryRequest struct {
 
 func (x *GetInvoiceSummaryRequest) Reset() {
 	*x = GetInvoiceSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1734,7 +1814,7 @@ func (x *GetInvoiceSummaryRequest) String() string {
 func (*GetInvoiceSummaryRequest) ProtoMessage() {}
 
 func (x *GetInvoiceSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1747,7 +1827,7 @@ func (x *GetInvoiceSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetInvoiceSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetInvoiceSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{24}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{26}
 }
 
 type GetInvoiceSummaryResponse struct {
@@ -1761,7 +1841,7 @@ type GetInvoiceSummaryResponse struct {
 
 func (x *GetInvoiceSummaryResponse) Reset() {
 	*x = GetInvoiceSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1773,7 +1853,7 @@ func (x *GetInvoiceSummaryResponse) String() string {
 func (*GetInvoiceSummaryResponse) ProtoMessage() {}
 
 func (x *GetInvoiceSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1786,7 +1866,7 @@ func (x *GetInvoiceSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetInvoiceSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetInvoiceSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{25}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetInvoiceSummaryResponse) GetTotalIncome() string {
@@ -1819,7 +1899,7 @@ type GetBalanceSummaryRequest struct {
 
 func (x *GetBalanceSummaryRequest) Reset() {
 	*x = GetBalanceSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1831,7 +1911,7 @@ func (x *GetBalanceSummaryRequest) String() string {
 func (*GetBalanceSummaryRequest) ProtoMessage() {}
 
 func (x *GetBalanceSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1844,7 +1924,7 @@ func (x *GetBalanceSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBalanceSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetBalanceSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{26}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetBalanceSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -1865,7 +1945,7 @@ type GetBalanceSummaryResponse struct {
 
 func (x *GetBalanceSummaryResponse) Reset() {
 	*x = GetBalanceSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1877,7 +1957,7 @@ func (x *GetBalanceSummaryResponse) String() string {
 func (*GetBalanceSummaryResponse) ProtoMessage() {}
 
 func (x *GetBalanceSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1890,7 +1970,7 @@ func (x *GetBalanceSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBalanceSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetBalanceSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{27}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetBalanceSummaryResponse) GetBalance() string {
@@ -1923,7 +2003,7 @@ type GetBalancesSummaryRequest struct {
 
 func (x *GetBalancesSummaryRequest) Reset() {
 	*x = GetBalancesSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1935,7 +2015,7 @@ func (x *GetBalancesSummaryRequest) String() string {
 func (*GetBalancesSummaryRequest) ProtoMessage() {}
 
 func (x *GetBalancesSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1948,7 +2028,7 @@ func (x *GetBalancesSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBalancesSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetBalancesSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{28}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetBalancesSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -1977,7 +2057,7 @@ type GetBalancesSummaryResponse struct {
 
 func (x *GetBalancesSummaryResponse) Reset() {
 	*x = GetBalancesSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1989,7 +2069,7 @@ func (x *GetBalancesSummaryResponse) String() string {
 func (*GetBalancesSummaryResponse) ProtoMessage() {}
 
 func (x *GetBalancesSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2002,7 +2082,7 @@ func (x *GetBalancesSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBalancesSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetBalancesSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{29}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetBalancesSummaryResponse) GetDeposits() string {
@@ -2092,7 +2172,7 @@ type ListBillingPeriodsRequest struct {
 
 func (x *ListBillingPeriodsRequest) Reset() {
 	*x = ListBillingPeriodsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2104,7 +2184,7 @@ func (x *ListBillingPeriodsRequest) String() string {
 func (*ListBillingPeriodsRequest) ProtoMessage() {}
 
 func (x *ListBillingPeriodsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2117,7 +2197,7 @@ func (x *ListBillingPeriodsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBillingPeriodsRequest.ProtoReflect.Descriptor instead.
 func (*ListBillingPeriodsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{30}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListBillingPeriodsRequest) GetPage() int32 {
@@ -2146,7 +2226,7 @@ type ListBillingPeriodsResponse struct {
 
 func (x *ListBillingPeriodsResponse) Reset() {
 	*x = ListBillingPeriodsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2158,7 +2238,7 @@ func (x *ListBillingPeriodsResponse) String() string {
 func (*ListBillingPeriodsResponse) ProtoMessage() {}
 
 func (x *ListBillingPeriodsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2171,7 +2251,7 @@ func (x *ListBillingPeriodsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBillingPeriodsResponse.ProtoReflect.Descriptor instead.
 func (*ListBillingPeriodsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{31}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListBillingPeriodsResponse) GetBillingPeriods() []*ListBillingPeriodsResponse_BillingPeriod {
@@ -2214,7 +2294,7 @@ type ListBalanceMonthlyRevenueSharesRequest struct {
 
 func (x *ListBalanceMonthlyRevenueSharesRequest) Reset() {
 	*x = ListBalanceMonthlyRevenueSharesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2226,7 +2306,7 @@ func (x *ListBalanceMonthlyRevenueSharesRequest) String() string {
 func (*ListBalanceMonthlyRevenueSharesRequest) ProtoMessage() {}
 
 func (x *ListBalanceMonthlyRevenueSharesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2239,7 +2319,7 @@ func (x *ListBalanceMonthlyRevenueSharesRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListBalanceMonthlyRevenueSharesRequest.ProtoReflect.Descriptor instead.
 func (*ListBalanceMonthlyRevenueSharesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{32}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListBalanceMonthlyRevenueSharesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -2283,7 +2363,7 @@ type ListBalanceMonthlyRevenueSharesResponse struct {
 
 func (x *ListBalanceMonthlyRevenueSharesResponse) Reset() {
 	*x = ListBalanceMonthlyRevenueSharesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2295,7 +2375,7 @@ func (x *ListBalanceMonthlyRevenueSharesResponse) String() string {
 func (*ListBalanceMonthlyRevenueSharesResponse) ProtoMessage() {}
 
 func (x *ListBalanceMonthlyRevenueSharesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2308,7 +2388,7 @@ func (x *ListBalanceMonthlyRevenueSharesResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListBalanceMonthlyRevenueSharesResponse.ProtoReflect.Descriptor instead.
 func (*ListBalanceMonthlyRevenueSharesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{33}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListBalanceMonthlyRevenueSharesResponse) GetItems() []*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem {
@@ -2350,7 +2430,7 @@ type ListBalancesSummaryRequest struct {
 
 func (x *ListBalancesSummaryRequest) Reset() {
 	*x = ListBalancesSummaryRequest{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2362,7 +2442,7 @@ func (x *ListBalancesSummaryRequest) String() string {
 func (*ListBalancesSummaryRequest) ProtoMessage() {}
 
 func (x *ListBalancesSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2375,7 +2455,7 @@ func (x *ListBalancesSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBalancesSummaryRequest.ProtoReflect.Descriptor instead.
 func (*ListBalancesSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{34}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListBalancesSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -2411,7 +2491,7 @@ type ListBalancesSummaryResponse struct {
 
 func (x *ListBalancesSummaryResponse) Reset() {
 	*x = ListBalancesSummaryResponse{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2423,7 +2503,7 @@ func (x *ListBalancesSummaryResponse) String() string {
 func (*ListBalancesSummaryResponse) ProtoMessage() {}
 
 func (x *ListBalancesSummaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2436,7 +2516,7 @@ func (x *ListBalancesSummaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBalancesSummaryResponse.ProtoReflect.Descriptor instead.
 func (*ListBalancesSummaryResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{35}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListBalancesSummaryResponse) GetBalances() []*ListBalancesSummaryResponse_BalanceSummary {
@@ -2496,7 +2576,7 @@ type ListInvoicesResponse_Invoice struct {
 
 func (x *ListInvoicesResponse_Invoice) Reset() {
 	*x = ListInvoicesResponse_Invoice{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2508,7 +2588,7 @@ func (x *ListInvoicesResponse_Invoice) String() string {
 func (*ListInvoicesResponse_Invoice) ProtoMessage() {}
 
 func (x *ListInvoicesResponse_Invoice) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2657,7 +2737,7 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) Reset() {
 	*x = GetInvoiceDetailResponse_InvoiceDetail{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2669,7 +2749,7 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) String() string {
 func (*GetInvoiceDetailResponse_InvoiceDetail) ProtoMessage() {}
 
 func (x *GetInvoiceDetailResponse_InvoiceDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2851,7 +2931,7 @@ type ListOperatorRevenueShareResponse_RevenueShareItem struct {
 
 func (x *ListOperatorRevenueShareResponse_RevenueShareItem) Reset() {
 	*x = ListOperatorRevenueShareResponse_RevenueShareItem{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2863,7 +2943,7 @@ func (x *ListOperatorRevenueShareResponse_RevenueShareItem) String() string {
 func (*ListOperatorRevenueShareResponse_RevenueShareItem) ProtoMessage() {}
 
 func (x *ListOperatorRevenueShareResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2994,13 +3074,14 @@ type ListThirdPartyFeesResponse_ThirdPartyFeeItem struct {
 	Quantity      string `protobuf:"bytes,4,opt,name=quantity,proto3" json:"quantity,omitempty"`       // Quantity as string to preserve formatting
 	Amount        string `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`           // Amount as string to preserve precision
 	Description   string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // Description of the fee
+	Id            int64  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) Reset() {
 	*x = ListThirdPartyFeesResponse_ThirdPartyFeeItem{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3012,7 +3093,7 @@ func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) String() string {
 func (*ListThirdPartyFeesResponse_ThirdPartyFeeItem) ProtoMessage() {}
 
 func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3070,6 +3151,13 @@ func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetDescription() string {
 	return ""
 }
 
+func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
@@ -3096,13 +3184,14 @@ type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 	RevenueShareSystem   string `protobuf:"bytes,18,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`       // Revenue Share System
 	RevenueShareOperator string `protobuf:"bytes,19,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"` // Revenue Share Operator
 	EstCosts             string `protobuf:"bytes,20,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
+	Id                   int64  `protobuf:"varint,21,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) Reset() {
 	*x = ListMonthlyRevenueShareResponse_RevenueShareItem{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3114,7 +3203,7 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) String() string {
 func (*ListMonthlyRevenueShareResponse_RevenueShareItem) ProtoMessage() {}
 
 func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3270,6 +3359,13 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetEstCosts() string 
 	return ""
 }
 
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 // Summary totals
 type ListMonthlyRevenueShareResponse_Summary struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
@@ -3283,7 +3379,7 @@ type ListMonthlyRevenueShareResponse_Summary struct {
 
 func (x *ListMonthlyRevenueShareResponse_Summary) Reset() {
 	*x = ListMonthlyRevenueShareResponse_Summary{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3295,7 +3391,7 @@ func (x *ListMonthlyRevenueShareResponse_Summary) String() string {
 func (*ListMonthlyRevenueShareResponse_Summary) ProtoMessage() {}
 
 func (x *ListMonthlyRevenueShareResponse_Summary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3350,7 +3446,7 @@ type ListAdjustmentConfigsResponse_AdjustmentConfig struct {
 
 func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) Reset() {
 	*x = ListAdjustmentConfigsResponse_AdjustmentConfig{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3362,7 +3458,7 @@ func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) String() string {
 func (*ListAdjustmentConfigsResponse_AdjustmentConfig) ProtoMessage() {}
 
 func (x *ListAdjustmentConfigsResponse_AdjustmentConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3409,13 +3505,14 @@ type ListAdjustmentsResponse_AdjustmentItem struct {
 	// Amount information
 	Amount        string `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`           // Amount as string to preserve precision
 	Description   string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // Description of the adjustment
+	Id            int64  `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) Reset() {
 	*x = ListAdjustmentsResponse_AdjustmentItem{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3427,7 +3524,7 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) String() string {
 func (*ListAdjustmentsResponse_AdjustmentItem) ProtoMessage() {}
 
 func (x *ListAdjustmentsResponse_AdjustmentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3485,6 +3582,13 @@ func (x *ListAdjustmentsResponse_AdjustmentItem) GetDescription() string {
 	return ""
 }
 
+func (x *ListAdjustmentsResponse_AdjustmentItem) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 type ListBillingPeriodsResponse_BillingPeriod struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	StartTime     string                 `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
@@ -3499,7 +3603,7 @@ type ListBillingPeriodsResponse_BillingPeriod struct {
 
 func (x *ListBillingPeriodsResponse_BillingPeriod) Reset() {
 	*x = ListBillingPeriodsResponse_BillingPeriod{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3511,7 +3615,7 @@ func (x *ListBillingPeriodsResponse_BillingPeriod) String() string {
 func (*ListBillingPeriodsResponse_BillingPeriod) ProtoMessage() {}
 
 func (x *ListBillingPeriodsResponse_BillingPeriod) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3524,7 +3628,7 @@ func (x *ListBillingPeriodsResponse_BillingPeriod) ProtoReflect() protoreflect.M
 
 // Deprecated: Use ListBillingPeriodsResponse_BillingPeriod.ProtoReflect.Descriptor instead.
 func (*ListBillingPeriodsResponse_BillingPeriod) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{31, 0}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{33, 0}
 }
 
 func (x *ListBillingPeriodsResponse_BillingPeriod) GetStartTime() string {
@@ -3602,7 +3706,7 @@ type ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem struct {
 
 func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) Reset() {
 	*x = ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3614,7 +3718,7 @@ func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) String() stri
 func (*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) ProtoMessage() {}
 
 func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3627,7 +3731,7 @@ func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) ProtoReflect(
 
 // Deprecated: Use ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem.ProtoReflect.Descriptor instead.
 func (*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{33, 0}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{35, 0}
 }
 
 func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetOperatorId() int64 {
@@ -3800,7 +3904,7 @@ type ListBalancesSummaryResponse_BalanceSummary struct {
 
 func (x *ListBalancesSummaryResponse_BalanceSummary) Reset() {
 	*x = ListBalancesSummaryResponse_BalanceSummary{}
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3812,7 +3916,7 @@ func (x *ListBalancesSummaryResponse_BalanceSummary) String() string {
 func (*ListBalancesSummaryResponse_BalanceSummary) ProtoMessage() {}
 
 func (x *ListBalancesSummaryResponse_BalanceSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_finance_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3825,7 +3929,7 @@ func (x *ListBalancesSummaryResponse_BalanceSummary) ProtoReflect() protoreflect
 
 // Deprecated: Use ListBalancesSummaryResponse_BalanceSummary.ProtoReflect.Descriptor instead.
 func (*ListBalancesSummaryResponse_BalanceSummary) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{35, 0}
+	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{37, 0}
 }
 
 func (x *ListBalancesSummaryResponse_BalanceSummary) GetRetailerOperatorId() int64 {
@@ -4074,14 +4178,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xb5\x03\n" +
+	"\v_period_key\"\xc5\x03\n" +
 	"\x1aListThirdPartyFeesResponse\x12]\n" +
 	"\x05items\x18\x01 \x03(\v2G.api.backoffice.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItemR\x05items\x12\x1a\n" +
 	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xc9\x01\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xd9\x01\n" +
 	"\x11ThirdPartyFeeItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -4089,7 +4193,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\aservice\x18\x03 \x01(\tR\aservice\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\tR\bquantity\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\tR\x06amount\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\"\xb6\x02\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x0e\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"\xb6\x02\n" +
 	"\x1eListMonthlyRevenueShareRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\"\n" +
 	"\n" +
@@ -4102,14 +4207,15 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xfd\t\n" +
+	"\v_period_key\"\x8d\n" +
+	"\n" +
 	"\x1fListMonthlyRevenueShareResponse\x12a\n" +
 	"\x05items\x18\x01 \x03(\v2K.api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItemR\x05items\x12\\\n" +
 	"\asummary\x18\x02 \x01(\v2B.api.backoffice.service.v1.ListMonthlyRevenueShareResponse.SummaryR\asummary\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xf8\x05\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\x88\x06\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -4133,7 +4239,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x120\n" +
 	"\x14revenue_share_system\x18\x12 \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\x13 \x01(\tR\x14revenueShareOperator\x12\x1b\n" +
-	"\test_costs\x18\x14 \x01(\tR\bestCosts\x1a\xcb\x01\n" +
+	"\test_costs\x18\x14 \x01(\tR\bestCosts\x12\x0e\n" +
+	"\x02id\x18\x15 \x01(\x03R\x02id\x1a\xcb\x01\n" +
 	"\aSummary\x12\x1a\n" +
 	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12;\n" +
 	"\x1arevenue_share_system_total\x18\x02 \x01(\tR\x17revenueShareSystemTotal\x12?\n" +
@@ -4191,14 +4298,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xa3\x03\n" +
+	"\v_period_key\"\xb3\x03\n" +
 	"\x17ListAdjustmentsResponse\x12W\n" +
 	"\x05items\x18\x01 \x03(\v2A.api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItemR\x05items\x12\x1a\n" +
 	"\bsubtotal\x18\x02 \x01(\tR\bsubtotal\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xc0\x01\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xd0\x01\n" +
 	"\x0eAdjustmentItem\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -4206,11 +4313,15 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\roperator_name\x18\x03 \x01(\tR\foperatorName\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\tR\x06amount\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\"U\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x0e\n" +
+	"\x02id\x18\a \x01(\x03R\x02id\"U\n" +
 	"\x1dCreateAdjustmentConfigRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\" \n" +
-	"\x1eCreateAdjustmentConfigResponse\"4\n" +
+	"\x1eCreateAdjustmentConfigResponse\")\n" +
+	"\x17DeleteAdjustmentRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1a\n" +
+	"\x18DeleteAdjustmentResponse\"4\n" +
 	"\x13SendInvoicesRequest\x12\x1d\n" +
 	"\n" +
 	"period_key\x18\x01 \x01(\tR\tperiodKey\"\x16\n" +
@@ -4333,7 +4444,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x0eest_net_profit\x18\x0f \x01(\tR\festNetProfit\x120\n" +
 	"\x14revenue_share_system\x18\x10 \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\x11 \x01(\tR\x14revenueShareOperator\x12\"\n" +
-	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts2\xf9\x1a\n" +
+	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts2\xac\x1c\n" +
 	"\x11BackofficeFinance\x12\xa0\x01\n" +
 	"\fListInvoices\x12..api.backoffice.service.v1.ListInvoicesRequest\x1a/.api.backoffice.service.v1.ListInvoicesResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/finance/invoices/list\x12\xad\x01\n" +
 	"\x10GetInvoiceDetail\x122.api.backoffice.service.v1.GetInvoiceDetailRequest\x1a3.api.backoffice.service.v1.GetInvoiceDetailResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/finance/invoice/detail\x12\xca\x01\n" +
@@ -4352,7 +4463,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x12GetBalancesSummary\x124.api.backoffice.service.v1.GetBalancesSummaryRequest\x1a5.api.backoffice.service.v1.GetBalancesSummaryResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/finance/balances/summary\x12\xb9\x01\n" +
 	"\x12ListBillingPeriods\x124.api.backoffice.service.v1.ListBillingPeriodsRequest\x1a5.api.backoffice.service.v1.ListBillingPeriodsResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/finance/billing-periods/list\x12\xef\x01\n" +
 	"\x1fListBalanceMonthlyRevenueShares\x12A.api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest\x1aB.api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse\"E\x82\xd3\xe4\x93\x02?:\x01*\":/v1/backoffice/finance/balance/monthly-revenue-shares/list\x12\xbd\x01\n" +
-	"\x13ListBalancesSummary\x125.api.backoffice.service.v1.ListBalancesSummaryRequest\x1a6.api.backoffice.service.v1.ListBalancesSummaryResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/finance/balances/summary/listB[\n" +
+	"\x13ListBalancesSummary\x125.api.backoffice.service.v1.ListBalancesSummaryRequest\x1a6.api.backoffice.service.v1.ListBalancesSummaryResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/finance/balances/summary/list\x12\xb0\x01\n" +
+	"\x10DeleteAdjustment\x122.api.backoffice.service.v1.DeleteAdjustmentRequest\x1a3.api.backoffice.service.v1.DeleteAdjustmentResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/finance/adjustment/deleteB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -4368,7 +4480,7 @@ func file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP() []byte {
 }
 
 var file_backoffice_service_v1_backoffice_finance_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_backoffice_service_v1_backoffice_finance_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
+var file_backoffice_service_v1_backoffice_finance_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
 var file_backoffice_service_v1_backoffice_finance_proto_goTypes = []any{
 	(ListInvoicesRequest_PaymentStatus)(0),                           // 0: api.backoffice.service.v1.ListInvoicesRequest.PaymentStatus
 	(ListInvoicesResponse_Invoice_PaymentStatus)(0),                  // 1: api.backoffice.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
@@ -4396,56 +4508,58 @@ var file_backoffice_service_v1_backoffice_finance_proto_goTypes = []any{
 	(*ListAdjustmentsResponse)(nil),                                  // 23: api.backoffice.service.v1.ListAdjustmentsResponse
 	(*CreateAdjustmentConfigRequest)(nil),                            // 24: api.backoffice.service.v1.CreateAdjustmentConfigRequest
 	(*CreateAdjustmentConfigResponse)(nil),                           // 25: api.backoffice.service.v1.CreateAdjustmentConfigResponse
-	(*SendInvoicesRequest)(nil),                                      // 26: api.backoffice.service.v1.SendInvoicesRequest
-	(*SendInvoicesResponse)(nil),                                     // 27: api.backoffice.service.v1.SendInvoicesResponse
-	(*GetInvoiceSummaryRequest)(nil),                                 // 28: api.backoffice.service.v1.GetInvoiceSummaryRequest
-	(*GetInvoiceSummaryResponse)(nil),                                // 29: api.backoffice.service.v1.GetInvoiceSummaryResponse
-	(*GetBalanceSummaryRequest)(nil),                                 // 30: api.backoffice.service.v1.GetBalanceSummaryRequest
-	(*GetBalanceSummaryResponse)(nil),                                // 31: api.backoffice.service.v1.GetBalanceSummaryResponse
-	(*GetBalancesSummaryRequest)(nil),                                // 32: api.backoffice.service.v1.GetBalancesSummaryRequest
-	(*GetBalancesSummaryResponse)(nil),                               // 33: api.backoffice.service.v1.GetBalancesSummaryResponse
-	(*ListBillingPeriodsRequest)(nil),                                // 34: api.backoffice.service.v1.ListBillingPeriodsRequest
-	(*ListBillingPeriodsResponse)(nil),                               // 35: api.backoffice.service.v1.ListBillingPeriodsResponse
-	(*ListBalanceMonthlyRevenueSharesRequest)(nil),                   // 36: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest
-	(*ListBalanceMonthlyRevenueSharesResponse)(nil),                  // 37: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse
-	(*ListBalancesSummaryRequest)(nil),                               // 38: api.backoffice.service.v1.ListBalancesSummaryRequest
-	(*ListBalancesSummaryResponse)(nil),                              // 39: api.backoffice.service.v1.ListBalancesSummaryResponse
-	(*ListInvoicesResponse_Invoice)(nil),                             // 40: api.backoffice.service.v1.ListInvoicesResponse.Invoice
-	(*GetInvoiceDetailResponse_InvoiceDetail)(nil),                   // 41: api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetail
-	(*ListOperatorRevenueShareResponse_RevenueShareItem)(nil),        // 42: api.backoffice.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
-	(*ListThirdPartyFeesResponse_ThirdPartyFeeItem)(nil),             // 43: api.backoffice.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
-	(*ListMonthlyRevenueShareResponse_RevenueShareItem)(nil),         // 44: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
-	(*ListMonthlyRevenueShareResponse_Summary)(nil),                  // 45: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.Summary
-	(*ListAdjustmentConfigsResponse_AdjustmentConfig)(nil),           // 46: api.backoffice.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
-	(*ListAdjustmentsResponse_AdjustmentItem)(nil),                   // 47: api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	(*ListBillingPeriodsResponse_BillingPeriod)(nil),                 // 48: api.backoffice.service.v1.ListBillingPeriodsResponse.BillingPeriod
-	(*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem)(nil), // 49: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
-	(*ListBalancesSummaryResponse_BalanceSummary)(nil),               // 50: api.backoffice.service.v1.ListBalancesSummaryResponse.BalanceSummary
-	(*common.OperatorContextFilters)(nil),                            // 51: api.common.OperatorContextFilters
+	(*DeleteAdjustmentRequest)(nil),                                  // 26: api.backoffice.service.v1.DeleteAdjustmentRequest
+	(*DeleteAdjustmentResponse)(nil),                                 // 27: api.backoffice.service.v1.DeleteAdjustmentResponse
+	(*SendInvoicesRequest)(nil),                                      // 28: api.backoffice.service.v1.SendInvoicesRequest
+	(*SendInvoicesResponse)(nil),                                     // 29: api.backoffice.service.v1.SendInvoicesResponse
+	(*GetInvoiceSummaryRequest)(nil),                                 // 30: api.backoffice.service.v1.GetInvoiceSummaryRequest
+	(*GetInvoiceSummaryResponse)(nil),                                // 31: api.backoffice.service.v1.GetInvoiceSummaryResponse
+	(*GetBalanceSummaryRequest)(nil),                                 // 32: api.backoffice.service.v1.GetBalanceSummaryRequest
+	(*GetBalanceSummaryResponse)(nil),                                // 33: api.backoffice.service.v1.GetBalanceSummaryResponse
+	(*GetBalancesSummaryRequest)(nil),                                // 34: api.backoffice.service.v1.GetBalancesSummaryRequest
+	(*GetBalancesSummaryResponse)(nil),                               // 35: api.backoffice.service.v1.GetBalancesSummaryResponse
+	(*ListBillingPeriodsRequest)(nil),                                // 36: api.backoffice.service.v1.ListBillingPeriodsRequest
+	(*ListBillingPeriodsResponse)(nil),                               // 37: api.backoffice.service.v1.ListBillingPeriodsResponse
+	(*ListBalanceMonthlyRevenueSharesRequest)(nil),                   // 38: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest
+	(*ListBalanceMonthlyRevenueSharesResponse)(nil),                  // 39: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse
+	(*ListBalancesSummaryRequest)(nil),                               // 40: api.backoffice.service.v1.ListBalancesSummaryRequest
+	(*ListBalancesSummaryResponse)(nil),                              // 41: api.backoffice.service.v1.ListBalancesSummaryResponse
+	(*ListInvoicesResponse_Invoice)(nil),                             // 42: api.backoffice.service.v1.ListInvoicesResponse.Invoice
+	(*GetInvoiceDetailResponse_InvoiceDetail)(nil),                   // 43: api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	(*ListOperatorRevenueShareResponse_RevenueShareItem)(nil),        // 44: api.backoffice.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	(*ListThirdPartyFeesResponse_ThirdPartyFeeItem)(nil),             // 45: api.backoffice.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	(*ListMonthlyRevenueShareResponse_RevenueShareItem)(nil),         // 46: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	(*ListMonthlyRevenueShareResponse_Summary)(nil),                  // 47: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.Summary
+	(*ListAdjustmentConfigsResponse_AdjustmentConfig)(nil),           // 48: api.backoffice.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	(*ListAdjustmentsResponse_AdjustmentItem)(nil),                   // 49: api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItem
+	(*ListBillingPeriodsResponse_BillingPeriod)(nil),                 // 50: api.backoffice.service.v1.ListBillingPeriodsResponse.BillingPeriod
+	(*ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem)(nil), // 51: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
+	(*ListBalancesSummaryResponse_BalanceSummary)(nil),               // 52: api.backoffice.service.v1.ListBalancesSummaryResponse.BalanceSummary
+	(*common.OperatorContextFilters)(nil),                            // 53: api.common.OperatorContextFilters
 }
 var file_backoffice_service_v1_backoffice_finance_proto_depIdxs = []int32{
-	51, // 0: api.backoffice.service.v1.ListInvoicesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	53, // 0: api.backoffice.service.v1.ListInvoicesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 1: api.backoffice.service.v1.ListInvoicesRequest.payment_status:type_name -> api.backoffice.service.v1.ListInvoicesRequest.PaymentStatus
-	40, // 2: api.backoffice.service.v1.ListInvoicesResponse.invoices:type_name -> api.backoffice.service.v1.ListInvoicesResponse.Invoice
-	41, // 3: api.backoffice.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetail
-	51, // 4: api.backoffice.service.v1.ListOperatorRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	42, // 5: api.backoffice.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.backoffice.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
-	51, // 6: api.backoffice.service.v1.ListThirdPartyFeesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	43, // 7: api.backoffice.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.backoffice.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
-	51, // 8: api.backoffice.service.v1.ListMonthlyRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	44, // 9: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
-	45, // 10: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.backoffice.service.v1.ListMonthlyRevenueShareResponse.Summary
-	46, // 11: api.backoffice.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.backoffice.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
-	51, // 12: api.backoffice.service.v1.ListAdjustmentsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	47, // 13: api.backoffice.service.v1.ListAdjustmentsResponse.items:type_name -> api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItem
-	51, // 14: api.backoffice.service.v1.GetBalanceSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	51, // 15: api.backoffice.service.v1.GetBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 16: api.backoffice.service.v1.ListBillingPeriodsResponse.billing_periods:type_name -> api.backoffice.service.v1.ListBillingPeriodsResponse.BillingPeriod
-	51, // 17: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 2: api.backoffice.service.v1.ListInvoicesResponse.invoices:type_name -> api.backoffice.service.v1.ListInvoicesResponse.Invoice
+	43, // 3: api.backoffice.service.v1.GetInvoiceDetailResponse.invoice:type_name -> api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetail
+	53, // 4: api.backoffice.service.v1.ListOperatorRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	44, // 5: api.backoffice.service.v1.ListOperatorRevenueShareResponse.items:type_name -> api.backoffice.service.v1.ListOperatorRevenueShareResponse.RevenueShareItem
+	53, // 6: api.backoffice.service.v1.ListThirdPartyFeesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	45, // 7: api.backoffice.service.v1.ListThirdPartyFeesResponse.items:type_name -> api.backoffice.service.v1.ListThirdPartyFeesResponse.ThirdPartyFeeItem
+	53, // 8: api.backoffice.service.v1.ListMonthlyRevenueShareRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	46, // 9: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.items:type_name -> api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItem
+	47, // 10: api.backoffice.service.v1.ListMonthlyRevenueShareResponse.summary:type_name -> api.backoffice.service.v1.ListMonthlyRevenueShareResponse.Summary
+	48, // 11: api.backoffice.service.v1.ListAdjustmentConfigsResponse.configs:type_name -> api.backoffice.service.v1.ListAdjustmentConfigsResponse.AdjustmentConfig
+	53, // 12: api.backoffice.service.v1.ListAdjustmentsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	49, // 13: api.backoffice.service.v1.ListAdjustmentsResponse.items:type_name -> api.backoffice.service.v1.ListAdjustmentsResponse.AdjustmentItem
+	53, // 14: api.backoffice.service.v1.GetBalanceSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	53, // 15: api.backoffice.service.v1.GetBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	50, // 16: api.backoffice.service.v1.ListBillingPeriodsResponse.billing_periods:type_name -> api.backoffice.service.v1.ListBillingPeriodsResponse.BillingPeriod
+	53, // 17: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	3,  // 18: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest.type:type_name -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest.Type
-	49, // 19: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.items:type_name -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
-	51, // 20: api.backoffice.service.v1.ListBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	50, // 21: api.backoffice.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.backoffice.service.v1.ListBalancesSummaryResponse.BalanceSummary
+	51, // 19: api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.items:type_name -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
+	53, // 20: api.backoffice.service.v1.ListBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 21: api.backoffice.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.backoffice.service.v1.ListBalancesSummaryResponse.BalanceSummary
 	1,  // 22: api.backoffice.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.backoffice.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
 	2,  // 23: api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.backoffice.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
 	4,  // 24: api.backoffice.service.v1.BackofficeFinance.ListInvoices:input_type -> api.backoffice.service.v1.ListInvoicesRequest
@@ -4459,33 +4573,35 @@ var file_backoffice_service_v1_backoffice_finance_proto_depIdxs = []int32{
 	24, // 32: api.backoffice.service.v1.BackofficeFinance.CreateAdjustmentConfig:input_type -> api.backoffice.service.v1.CreateAdjustmentConfigRequest
 	18, // 33: api.backoffice.service.v1.BackofficeFinance.UpdateAdjustmentConfig:input_type -> api.backoffice.service.v1.UpdateAdjustmentConfigRequest
 	20, // 34: api.backoffice.service.v1.BackofficeFinance.DeleteAdjustmentConfig:input_type -> api.backoffice.service.v1.DeleteAdjustmentConfigRequest
-	26, // 35: api.backoffice.service.v1.BackofficeFinance.SendInvoices:input_type -> api.backoffice.service.v1.SendInvoicesRequest
-	28, // 36: api.backoffice.service.v1.BackofficeFinance.GetInvoiceSummary:input_type -> api.backoffice.service.v1.GetInvoiceSummaryRequest
-	30, // 37: api.backoffice.service.v1.BackofficeFinance.GetBalanceSummary:input_type -> api.backoffice.service.v1.GetBalanceSummaryRequest
-	32, // 38: api.backoffice.service.v1.BackofficeFinance.GetBalancesSummary:input_type -> api.backoffice.service.v1.GetBalancesSummaryRequest
-	34, // 39: api.backoffice.service.v1.BackofficeFinance.ListBillingPeriods:input_type -> api.backoffice.service.v1.ListBillingPeriodsRequest
-	36, // 40: api.backoffice.service.v1.BackofficeFinance.ListBalanceMonthlyRevenueShares:input_type -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest
-	38, // 41: api.backoffice.service.v1.BackofficeFinance.ListBalancesSummary:input_type -> api.backoffice.service.v1.ListBalancesSummaryRequest
-	5,  // 42: api.backoffice.service.v1.BackofficeFinance.ListInvoices:output_type -> api.backoffice.service.v1.ListInvoicesResponse
-	7,  // 43: api.backoffice.service.v1.BackofficeFinance.GetInvoiceDetail:output_type -> api.backoffice.service.v1.GetInvoiceDetailResponse
-	9,  // 44: api.backoffice.service.v1.BackofficeFinance.ListOperatorRevenueShare:output_type -> api.backoffice.service.v1.ListOperatorRevenueShareResponse
-	11, // 45: api.backoffice.service.v1.BackofficeFinance.ListThirdPartyFees:output_type -> api.backoffice.service.v1.ListThirdPartyFeesResponse
-	23, // 46: api.backoffice.service.v1.BackofficeFinance.ListAdjustments:output_type -> api.backoffice.service.v1.ListAdjustmentsResponse
-	13, // 47: api.backoffice.service.v1.BackofficeFinance.ListMonthlyRevenueShare:output_type -> api.backoffice.service.v1.ListMonthlyRevenueShareResponse
-	15, // 48: api.backoffice.service.v1.BackofficeFinance.AddAdjustment:output_type -> api.backoffice.service.v1.AddAdjustmentResponse
-	17, // 49: api.backoffice.service.v1.BackofficeFinance.ListAdjustmentConfigs:output_type -> api.backoffice.service.v1.ListAdjustmentConfigsResponse
-	25, // 50: api.backoffice.service.v1.BackofficeFinance.CreateAdjustmentConfig:output_type -> api.backoffice.service.v1.CreateAdjustmentConfigResponse
-	19, // 51: api.backoffice.service.v1.BackofficeFinance.UpdateAdjustmentConfig:output_type -> api.backoffice.service.v1.UpdateAdjustmentConfigResponse
-	21, // 52: api.backoffice.service.v1.BackofficeFinance.DeleteAdjustmentConfig:output_type -> api.backoffice.service.v1.DeleteAdjustmentConfigResponse
-	27, // 53: api.backoffice.service.v1.BackofficeFinance.SendInvoices:output_type -> api.backoffice.service.v1.SendInvoicesResponse
-	29, // 54: api.backoffice.service.v1.BackofficeFinance.GetInvoiceSummary:output_type -> api.backoffice.service.v1.GetInvoiceSummaryResponse
-	31, // 55: api.backoffice.service.v1.BackofficeFinance.GetBalanceSummary:output_type -> api.backoffice.service.v1.GetBalanceSummaryResponse
-	33, // 56: api.backoffice.service.v1.BackofficeFinance.GetBalancesSummary:output_type -> api.backoffice.service.v1.GetBalancesSummaryResponse
-	35, // 57: api.backoffice.service.v1.BackofficeFinance.ListBillingPeriods:output_type -> api.backoffice.service.v1.ListBillingPeriodsResponse
-	37, // 58: api.backoffice.service.v1.BackofficeFinance.ListBalanceMonthlyRevenueShares:output_type -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse
-	39, // 59: api.backoffice.service.v1.BackofficeFinance.ListBalancesSummary:output_type -> api.backoffice.service.v1.ListBalancesSummaryResponse
-	42, // [42:60] is the sub-list for method output_type
-	24, // [24:42] is the sub-list for method input_type
+	28, // 35: api.backoffice.service.v1.BackofficeFinance.SendInvoices:input_type -> api.backoffice.service.v1.SendInvoicesRequest
+	30, // 36: api.backoffice.service.v1.BackofficeFinance.GetInvoiceSummary:input_type -> api.backoffice.service.v1.GetInvoiceSummaryRequest
+	32, // 37: api.backoffice.service.v1.BackofficeFinance.GetBalanceSummary:input_type -> api.backoffice.service.v1.GetBalanceSummaryRequest
+	34, // 38: api.backoffice.service.v1.BackofficeFinance.GetBalancesSummary:input_type -> api.backoffice.service.v1.GetBalancesSummaryRequest
+	36, // 39: api.backoffice.service.v1.BackofficeFinance.ListBillingPeriods:input_type -> api.backoffice.service.v1.ListBillingPeriodsRequest
+	38, // 40: api.backoffice.service.v1.BackofficeFinance.ListBalanceMonthlyRevenueShares:input_type -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest
+	40, // 41: api.backoffice.service.v1.BackofficeFinance.ListBalancesSummary:input_type -> api.backoffice.service.v1.ListBalancesSummaryRequest
+	26, // 42: api.backoffice.service.v1.BackofficeFinance.DeleteAdjustment:input_type -> api.backoffice.service.v1.DeleteAdjustmentRequest
+	5,  // 43: api.backoffice.service.v1.BackofficeFinance.ListInvoices:output_type -> api.backoffice.service.v1.ListInvoicesResponse
+	7,  // 44: api.backoffice.service.v1.BackofficeFinance.GetInvoiceDetail:output_type -> api.backoffice.service.v1.GetInvoiceDetailResponse
+	9,  // 45: api.backoffice.service.v1.BackofficeFinance.ListOperatorRevenueShare:output_type -> api.backoffice.service.v1.ListOperatorRevenueShareResponse
+	11, // 46: api.backoffice.service.v1.BackofficeFinance.ListThirdPartyFees:output_type -> api.backoffice.service.v1.ListThirdPartyFeesResponse
+	23, // 47: api.backoffice.service.v1.BackofficeFinance.ListAdjustments:output_type -> api.backoffice.service.v1.ListAdjustmentsResponse
+	13, // 48: api.backoffice.service.v1.BackofficeFinance.ListMonthlyRevenueShare:output_type -> api.backoffice.service.v1.ListMonthlyRevenueShareResponse
+	15, // 49: api.backoffice.service.v1.BackofficeFinance.AddAdjustment:output_type -> api.backoffice.service.v1.AddAdjustmentResponse
+	17, // 50: api.backoffice.service.v1.BackofficeFinance.ListAdjustmentConfigs:output_type -> api.backoffice.service.v1.ListAdjustmentConfigsResponse
+	25, // 51: api.backoffice.service.v1.BackofficeFinance.CreateAdjustmentConfig:output_type -> api.backoffice.service.v1.CreateAdjustmentConfigResponse
+	19, // 52: api.backoffice.service.v1.BackofficeFinance.UpdateAdjustmentConfig:output_type -> api.backoffice.service.v1.UpdateAdjustmentConfigResponse
+	21, // 53: api.backoffice.service.v1.BackofficeFinance.DeleteAdjustmentConfig:output_type -> api.backoffice.service.v1.DeleteAdjustmentConfigResponse
+	29, // 54: api.backoffice.service.v1.BackofficeFinance.SendInvoices:output_type -> api.backoffice.service.v1.SendInvoicesResponse
+	31, // 55: api.backoffice.service.v1.BackofficeFinance.GetInvoiceSummary:output_type -> api.backoffice.service.v1.GetInvoiceSummaryResponse
+	33, // 56: api.backoffice.service.v1.BackofficeFinance.GetBalanceSummary:output_type -> api.backoffice.service.v1.GetBalanceSummaryResponse
+	35, // 57: api.backoffice.service.v1.BackofficeFinance.GetBalancesSummary:output_type -> api.backoffice.service.v1.GetBalancesSummaryResponse
+	37, // 58: api.backoffice.service.v1.BackofficeFinance.ListBillingPeriods:output_type -> api.backoffice.service.v1.ListBillingPeriodsResponse
+	39, // 59: api.backoffice.service.v1.BackofficeFinance.ListBalanceMonthlyRevenueShares:output_type -> api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse
+	41, // 60: api.backoffice.service.v1.BackofficeFinance.ListBalancesSummary:output_type -> api.backoffice.service.v1.ListBalancesSummaryResponse
+	27, // 61: api.backoffice.service.v1.BackofficeFinance.DeleteAdjustment:output_type -> api.backoffice.service.v1.DeleteAdjustmentResponse
+	43, // [43:62] is the sub-list for method output_type
+	24, // [24:43] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
 	24, // [24:24] is the sub-list for extension extendee
 	0,  // [0:24] is the sub-list for field type_name
@@ -4503,15 +4619,15 @@ func file_backoffice_service_v1_backoffice_finance_proto_init() {
 	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[12].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[14].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[18].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[30].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[34].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[32].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_finance_proto_msgTypes[36].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_finance_proto_rawDesc), len(file_backoffice_service_v1_backoffice_finance_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   47,
+			NumMessages:   49,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

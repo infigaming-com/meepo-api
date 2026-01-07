@@ -911,6 +911,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddAdjustmentResponse'
+    /v1/backoffice/finance/adjustment/delete:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_DeleteAdjustment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAdjustmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAdjustmentResponse'
     /v1/backoffice/finance/adjustments/list:
         post:
             tags:
@@ -4399,6 +4417,14 @@ components:
         api.backoffice.service.v1.DeleteAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteAdjustmentRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.backoffice.service.v1.DeleteAdjustmentResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteDepositRewardSequencesRequest:
             type: object
             properties:
@@ -5957,6 +5983,8 @@ components:
                     description: Amount information
                 description:
                     type: string
+                id:
+                    type: string
         api.backoffice.service.v1.ListAllOperatorsRequest:
             type: object
             properties:
@@ -6995,6 +7023,8 @@ components:
                     type: string
                 estCosts:
                     type: string
+                id:
+                    type: string
         api.backoffice.service.v1.ListMonthlyRevenueShareResponse_Summary:
             type: object
             properties:
@@ -7973,6 +8003,8 @@ components:
                 amount:
                     type: string
                 description:
+                    type: string
+                id:
                     type: string
         api.backoffice.service.v1.ListTicketsRequest:
             type: object
