@@ -2656,6 +2656,8 @@ func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for TeamSize
+
 	// no validation rules for Total
 
 	// no validation rules for Page

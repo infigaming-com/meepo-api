@@ -1194,9 +1194,10 @@ type GetUserLossRevenueShareStatsResponse struct {
 	GgrAmountInPeriod     map[int32]string                                     `protobuf:"bytes,4,rep,name=ggr_amount_in_period,json=ggrAmountInPeriod,proto3" json:"ggr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to ggr amount in the period
 	NgrAmountInPeriod     map[int32]string                                     `protobuf:"bytes,5,rep,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to ngr amount in the period
 	ReferredStats         []*GetUserLossRevenueShareStatsResponse_ReferredStat `protobuf:"bytes,6,rep,name=referred_stats,json=referredStats,proto3" json:"referred_stats,omitempty"`
-	Total                 int32                                                `protobuf:"varint,7,opt,name=total,proto3" json:"total,omitempty"`                       // for referred stats
-	Page                  int32                                                `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`                         // for referred stats
-	PageSize              int32                                                `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // for referred stats
+	TeamSize              int32                                                `protobuf:"varint,7,opt,name=team_size,json=teamSize,proto3" json:"team_size,omitempty"`  // number of users in the team
+	Total                 int32                                                `protobuf:"varint,8,opt,name=total,proto3" json:"total,omitempty"`                        // for referred stats
+	Page                  int32                                                `protobuf:"varint,9,opt,name=page,proto3" json:"page,omitempty"`                          // for referred stats
+	PageSize              int32                                                `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // for referred stats
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1271,6 +1272,13 @@ func (x *GetUserLossRevenueShareStatsResponse) GetReferredStats() []*GetUserLoss
 		return x.ReferredStats
 	}
 	return nil
+}
+
+func (x *GetUserLossRevenueShareStatsResponse) GetTeamSize() int32 {
+	if x != nil {
+		return x.TeamSize
+	}
+	return 0
 }
 
 func (x *GetUserLossRevenueShareStatsResponse) GetTotal() int32 {
@@ -2765,17 +2773,19 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x14_conversion_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc4\b\n" +
+	"_page_size\"\xe1\b\n" +
 	"$GetUserLossRevenueShareStatsResponse\x120\n" +
 	"\x14unpaid_reward_amount\x18\x01 \x01(\tR\x12unpaidRewardAmount\x126\n" +
 	"\x17unclaimed_reward_amount\x18\x02 \x01(\tR\x15unclaimedRewardAmount\x122\n" +
 	"\x15claimed_reward_amount\x18\x03 \x01(\tR\x13claimedRewardAmount\x12\x86\x01\n" +
 	"\x14ggr_amount_in_period\x18\x04 \x03(\v2U.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.GgrAmountInPeriodEntryR\x11ggrAmountInPeriod\x12\x86\x01\n" +
 	"\x14ngr_amount_in_period\x18\x05 \x03(\v2U.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.NgrAmountInPeriodEntryR\x11ngrAmountInPeriod\x12r\n" +
-	"\x0ereferred_stats\x18\x06 \x03(\v2K.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStatR\rreferredStats\x12\x14\n" +
-	"\x05total\x18\a \x01(\x05R\x05total\x12\x12\n" +
-	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize\x1a\xa4\x02\n" +
+	"\x0ereferred_stats\x18\x06 \x03(\v2K.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStatR\rreferredStats\x12\x1b\n" +
+	"\tteam_size\x18\a \x01(\x05R\bteamSize\x12\x14\n" +
+	"\x05total\x18\b \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\t \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\n" +
+	" \x01(\x05R\bpageSize\x1a\xa4\x02\n" +
 	"\fReferredStat\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12#\n" +

@@ -103,6 +103,11 @@ const (
 	ErrorReason_LIST_POSTBACK_LOGS_FAILED                           ErrorReason = 130075
 	ErrorReason_GET_USER_PROMO_CONDITION_INFO_FAILED                ErrorReason = 130076
 	ErrorReason_PROCESS_USER_BONUS_TO_CASH_FAILED                   ErrorReason = 130077
+	ErrorReason_GET_OPERATOR_SETTINGS_FAILED                        ErrorReason = 130078
+	ErrorReason_GET_OPERATOR_SETTINGS_PERMISSION_DENIED             ErrorReason = 130079
+	ErrorReason_UPDATE_OPERATOR_SETTINGS_FAILED                     ErrorReason = 130080
+	ErrorReason_UPDATE_OPERATOR_SETTINGS_PERMISSION_DENIED          ErrorReason = 130081
+	ErrorReason_INVALID_OPERATOR_SETTINGS                           ErrorReason = 130082
 )
 
 // Enum value maps for ErrorReason.
@@ -186,6 +191,11 @@ var (
 		130075: "LIST_POSTBACK_LOGS_FAILED",
 		130076: "GET_USER_PROMO_CONDITION_INFO_FAILED",
 		130077: "PROCESS_USER_BONUS_TO_CASH_FAILED",
+		130078: "GET_OPERATOR_SETTINGS_FAILED",
+		130079: "GET_OPERATOR_SETTINGS_PERMISSION_DENIED",
+		130080: "UPDATE_OPERATOR_SETTINGS_FAILED",
+		130081: "UPDATE_OPERATOR_SETTINGS_PERMISSION_DENIED",
+		130082: "INVALID_OPERATOR_SETTINGS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -266,6 +276,11 @@ var (
 		"LIST_POSTBACK_LOGS_FAILED":                           130075,
 		"GET_USER_PROMO_CONDITION_INFO_FAILED":                130076,
 		"PROCESS_USER_BONUS_TO_CASH_FAILED":                   130077,
+		"GET_OPERATOR_SETTINGS_FAILED":                        130078,
+		"GET_OPERATOR_SETTINGS_PERMISSION_DENIED":             130079,
+		"UPDATE_OPERATOR_SETTINGS_FAILED":                     130080,
+		"UPDATE_OPERATOR_SETTINGS_PERMISSION_DENIED":          130081,
+		"INVALID_OPERATOR_SETTINGS":                           130082,
 	}
 )
 
@@ -300,7 +315,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x92\x15\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xdf\x16\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -379,7 +394,12 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1bSET_AFFILIATE_DOMAIN_FAILED\x10\x9a\xf8\a\x12\x1f\n" +
 	"\x19LIST_POSTBACK_LOGS_FAILED\x10\x9b\xf8\a\x12*\n" +
 	"$GET_USER_PROMO_CONDITION_INFO_FAILED\x10\x9c\xf8\a\x12'\n" +
-	"!PROCESS_USER_BONUS_TO_CASH_FAILED\x10\x9d\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"!PROCESS_USER_BONUS_TO_CASH_FAILED\x10\x9d\xf8\a\x12\"\n" +
+	"\x1cGET_OPERATOR_SETTINGS_FAILED\x10\x9e\xf8\a\x12-\n" +
+	"'GET_OPERATOR_SETTINGS_PERMISSION_DENIED\x10\x9f\xf8\a\x12%\n" +
+	"\x1fUPDATE_OPERATOR_SETTINGS_FAILED\x10\xa0\xf8\a\x120\n" +
+	"*UPDATE_OPERATOR_SETTINGS_PERMISSION_DENIED\x10\xa1\xf8\a\x12\x1f\n" +
+	"\x19INVALID_OPERATOR_SETTINGS\x10\xa2\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

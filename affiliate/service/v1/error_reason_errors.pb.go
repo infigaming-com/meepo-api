@@ -946,3 +946,63 @@ func IsProcessUserBonusToCashFailed(err error) bool {
 func ErrorProcessUserBonusToCashFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_USER_BONUS_TO_CASH_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetOperatorSettingsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_SETTINGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorSettingsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_SETTINGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorSettingsPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_SETTINGS_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorSettingsPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_SETTINGS_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorSettingsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_SETTINGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorSettingsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_SETTINGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorSettingsPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_SETTINGS_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorSettingsPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_SETTINGS_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorSettings(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_SETTINGS.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorSettings(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_SETTINGS.String(), fmt.Sprintf(format, args...))
+}

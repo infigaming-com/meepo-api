@@ -8348,6 +8348,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
+                teamSize:
+                    type: integer
+                    format: int32
                 total:
                     type: integer
                     format: int32
