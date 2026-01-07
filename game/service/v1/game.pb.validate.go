@@ -22601,6 +22601,337 @@ var _ interface {
 	ErrorName() string
 } = BackofficeListGamesUnderTagResponseValidationError{}
 
+// Validate checks the field values on GetProviderStatsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetProviderStatsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetProviderStatsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetProviderStatsRequestMultiError, or nil if none found.
+func (m *GetProviderStatsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetProviderStatsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetProviderStatsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetProviderStatsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetProviderStatsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ProviderId
+
+	// no validation rules for Currency
+
+	// no validation rules for FeeGroup
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetProviderStatsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetProviderStatsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetProviderStatsRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetProviderStatsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetProviderStatsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetProviderStatsRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetProviderStatsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetProviderStatsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetProviderStatsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetProviderStatsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetProviderStatsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetProviderStatsRequestMultiError) AllErrors() []error { return m }
+
+// GetProviderStatsRequestValidationError is the validation error returned by
+// GetProviderStatsRequest.Validate if the designated constraints aren't met.
+type GetProviderStatsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetProviderStatsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetProviderStatsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetProviderStatsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetProviderStatsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetProviderStatsRequestValidationError) ErrorName() string {
+	return "GetProviderStatsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetProviderStatsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetProviderStatsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetProviderStatsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetProviderStatsRequestValidationError{}
+
+// Validate checks the field values on GetProviderStatsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetProviderStatsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetProviderStatsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetProviderStatsResponseMultiError, or nil if none found.
+func (m *GetProviderStatsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetProviderStatsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalBet
+
+	// no validation rules for TotalPayout
+
+	// no validation rules for BetsCount
+
+	// no validation rules for TotalBetUsd
+
+	// no validation rules for TotalPayoutUsd
+
+	// no validation rules for TotalBetReportingCurrency
+
+	// no validation rules for TotalPayoutReportingCurrency
+
+	// no validation rules for TotalBetCashUsd
+
+	// no validation rules for TotalPayoutCashUsd
+
+	// no validation rules for TotalBetCashReportingCurrency
+
+	// no validation rules for TotalPayoutCashReportingCurrency
+
+	// no validation rules for Ggr
+
+	// no validation rules for GgrUsd
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for Ngr
+
+	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
+
+	if len(errors) > 0 {
+		return GetProviderStatsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetProviderStatsResponseMultiError is an error wrapping multiple validation
+// errors returned by GetProviderStatsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetProviderStatsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetProviderStatsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetProviderStatsResponseMultiError) AllErrors() []error { return m }
+
+// GetProviderStatsResponseValidationError is the validation error returned by
+// GetProviderStatsResponse.Validate if the designated constraints aren't met.
+type GetProviderStatsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetProviderStatsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetProviderStatsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetProviderStatsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetProviderStatsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetProviderStatsResponseValidationError) ErrorName() string {
+	return "GetProviderStatsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetProviderStatsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetProviderStatsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetProviderStatsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetProviderStatsResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
