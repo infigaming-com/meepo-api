@@ -56,6 +56,8 @@ const (
 	Affiliate_ClaimUserReferralRewards_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
 	Affiliate_GetUserLossRevenueShareStats_FullMethodName = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
 	Affiliate_GetUserPromoConditionInfo_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
+	Affiliate_GetOperatorSettings_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
+	Affiliate_UpdateOperatorSettings_FullMethodName       = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -101,6 +103,8 @@ type AffiliateClient interface {
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
+	GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*GetOperatorSettingsResponse, error)
+	UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorSettingsResponse, error)
 }
 
 type affiliateClient struct {
@@ -481,6 +485,26 @@ func (c *affiliateClient) GetUserPromoConditionInfo(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *affiliateClient) GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*GetOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_UpdateOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -524,6 +548,8 @@ type AffiliateServer interface {
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
+	GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*GetOperatorSettingsResponse, error)
+	UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -644,6 +670,12 @@ func (UnimplementedAffiliateServer) GetUserLossRevenueShareStats(context.Context
 }
 func (UnimplementedAffiliateServer) GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserPromoConditionInfo not implemented")
+}
+func (UnimplementedAffiliateServer) GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*GetOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorSettings not implemented")
+}
+func (UnimplementedAffiliateServer) UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorSettings not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1332,6 +1364,42 @@ func _Affiliate_GetUserPromoConditionInfo_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetOperatorSettings(ctx, req.(*GetOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_UpdateOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).UpdateOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_UpdateOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).UpdateOperatorSettings(ctx, req.(*UpdateOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1486,6 +1554,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserPromoConditionInfo",
 			Handler:    _Affiliate_GetUserPromoConditionInfo_Handler,
+		},
+		{
+			MethodName: "GetOperatorSettings",
+			Handler:    _Affiliate_GetOperatorSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorSettings",
+			Handler:    _Affiliate_UpdateOperatorSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

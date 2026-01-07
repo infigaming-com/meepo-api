@@ -30,10 +30,12 @@ type SetReferralPlanRequest struct {
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	InitiatorUserId          int64                   `protobuf:"varint,3,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	Currency                 string                  `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	FollowParent             *bool                   `protobuf:"varint,5,opt,name=follow_parent,json=followParent,proto3,oneof" json:"follow_parent,omitempty"` // if target operator follows parent's (or system's) referral plan
-	Enabled                  *bool                   `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                               // target operator's referral plan's enabled
-	MaxTier                  *int32                  `protobuf:"varint,7,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`                // target operator's referral plan's max_tier
-	PlanConfig               *ReferralPlanConfig     `protobuf:"bytes,8,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`        // target operator's referral plan's plan_config
+	FollowParent             *bool                   `protobuf:"varint,5,opt,name=follow_parent,json=followParent,proto3,oneof" json:"follow_parent,omitempty"`                 // if target operator follows parent's (or system's) referral plan
+	Enabled                  *bool                   `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                                               // target operator's referral plan's enabled
+	MaxTier                  *int32                  `protobuf:"varint,7,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`                                // target operator's referral plan's max_tier
+	PlanConfig               *ReferralPlanConfig     `protobuf:"bytes,8,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`                        // target operator's referral plan's plan_config
+	PaymentChannelRate       string                  `protobuf:"bytes,9,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`    // represent as a percentage, e.g. "35" for 35%
+	ThirdPartyGameRate       string                  `protobuf:"bytes,10,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -122,6 +124,20 @@ func (x *SetReferralPlanRequest) GetPlanConfig() *ReferralPlanConfig {
 		return x.PlanConfig
 	}
 	return nil
+}
+
+func (x *SetReferralPlanRequest) GetPaymentChannelRate() string {
+	if x != nil {
+		return x.PaymentChannelRate
+	}
+	return ""
+}
+
+func (x *SetReferralPlanRequest) GetThirdPartyGameRate() string {
+	if x != nil {
+		return x.ThirdPartyGameRate
+	}
+	return ""
 }
 
 type SetReferralPlanResponse struct {
@@ -1178,9 +1194,10 @@ type GetUserLossRevenueShareStatsResponse struct {
 	GgrAmountInPeriod     map[int32]string                                     `protobuf:"bytes,4,rep,name=ggr_amount_in_period,json=ggrAmountInPeriod,proto3" json:"ggr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to ggr amount in the period
 	NgrAmountInPeriod     map[int32]string                                     `protobuf:"bytes,5,rep,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to ngr amount in the period
 	ReferredStats         []*GetUserLossRevenueShareStatsResponse_ReferredStat `protobuf:"bytes,6,rep,name=referred_stats,json=referredStats,proto3" json:"referred_stats,omitempty"`
-	Total                 int32                                                `protobuf:"varint,7,opt,name=total,proto3" json:"total,omitempty"`                       // for referred stats
-	Page                  int32                                                `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`                         // for referred stats
-	PageSize              int32                                                `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // for referred stats
+	TeamSize              int32                                                `protobuf:"varint,7,opt,name=team_size,json=teamSize,proto3" json:"team_size,omitempty"`  // number of users in the team
+	Total                 int32                                                `protobuf:"varint,8,opt,name=total,proto3" json:"total,omitempty"`                        // for referred stats
+	Page                  int32                                                `protobuf:"varint,9,opt,name=page,proto3" json:"page,omitempty"`                          // for referred stats
+	PageSize              int32                                                `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // for referred stats
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1257,6 +1274,13 @@ func (x *GetUserLossRevenueShareStatsResponse) GetReferredStats() []*GetUserLoss
 	return nil
 }
 
+func (x *GetUserLossRevenueShareStatsResponse) GetTeamSize() int32 {
+	if x != nil {
+		return x.TeamSize
+	}
+	return 0
+}
+
 func (x *GetUserLossRevenueShareStatsResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
@@ -1280,12 +1304,14 @@ func (x *GetUserLossRevenueShareStatsResponse) GetPageSize() int32 {
 
 // Complete referral plan configuration
 type ReferralPlan struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	MaxTier       int32                  `protobuf:"varint,2,opt,name=max_tier,json=maxTier,proto3" json:"max_tier,omitempty"`
-	PlanConfig    *ReferralPlanConfig    `protobuf:"bytes,3,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Enabled            bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	MaxTier            int32                  `protobuf:"varint,2,opt,name=max_tier,json=maxTier,proto3" json:"max_tier,omitempty"`
+	PlanConfig         *ReferralPlanConfig    `protobuf:"bytes,3,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
+	PaymentChannelRate string                 `protobuf:"bytes,4,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
+	ThirdPartyGameRate string                 `protobuf:"bytes,5,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ReferralPlan) Reset() {
@@ -1337,6 +1363,20 @@ func (x *ReferralPlan) GetPlanConfig() *ReferralPlanConfig {
 		return x.PlanConfig
 	}
 	return nil
+}
+
+func (x *ReferralPlan) GetPaymentChannelRate() string {
+	if x != nil {
+		return x.PaymentChannelRate
+	}
+	return ""
+}
+
+func (x *ReferralPlan) GetThirdPartyGameRate() string {
+	if x != nil {
+		return x.ThirdPartyGameRate
+	}
+	return ""
 }
 
 // Referral plan configuration
@@ -2592,7 +2632,7 @@ var File_affiliate_service_v1_referral_plan_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\n" +
-	"(affiliate/service/v1/referral_plan.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x04\n" +
+	"(affiliate/service/v1/referral_plan.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xed\x04\n" +
 	"\x16SetReferralPlanRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12*\n" +
@@ -2602,7 +2642,10 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\aenabled\x18\x06 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1e\n" +
 	"\bmax_tier\x18\a \x01(\x05H\x02R\amaxTier\x88\x01\x01\x12R\n" +
 	"\vplan_config\x18\b \x01(\v2,.api.affiliate.service.v1.ReferralPlanConfigH\x03R\n" +
-	"planConfig\x88\x01\x01B\x10\n" +
+	"planConfig\x88\x01\x01\x120\n" +
+	"\x14payment_channel_rate\x18\t \x01(\tR\x12paymentChannelRate\x121\n" +
+	"\x15third_party_game_rate\x18\n" +
+	" \x01(\tR\x12thirdPartyGameRateB\x10\n" +
 	"\x0e_follow_parentB\n" +
 	"\n" +
 	"\b_enabledB\v\n" +
@@ -2730,17 +2773,19 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x14_conversion_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc4\b\n" +
+	"_page_size\"\xe1\b\n" +
 	"$GetUserLossRevenueShareStatsResponse\x120\n" +
 	"\x14unpaid_reward_amount\x18\x01 \x01(\tR\x12unpaidRewardAmount\x126\n" +
 	"\x17unclaimed_reward_amount\x18\x02 \x01(\tR\x15unclaimedRewardAmount\x122\n" +
 	"\x15claimed_reward_amount\x18\x03 \x01(\tR\x13claimedRewardAmount\x12\x86\x01\n" +
 	"\x14ggr_amount_in_period\x18\x04 \x03(\v2U.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.GgrAmountInPeriodEntryR\x11ggrAmountInPeriod\x12\x86\x01\n" +
 	"\x14ngr_amount_in_period\x18\x05 \x03(\v2U.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.NgrAmountInPeriodEntryR\x11ngrAmountInPeriod\x12r\n" +
-	"\x0ereferred_stats\x18\x06 \x03(\v2K.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStatR\rreferredStats\x12\x14\n" +
-	"\x05total\x18\a \x01(\x05R\x05total\x12\x12\n" +
-	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize\x1a\xa4\x02\n" +
+	"\x0ereferred_stats\x18\x06 \x03(\v2K.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStatR\rreferredStats\x12\x1b\n" +
+	"\tteam_size\x18\a \x01(\x05R\bteamSize\x12\x14\n" +
+	"\x05total\x18\b \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\t \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\n" +
+	" \x01(\x05R\bpageSize\x1a\xa4\x02\n" +
 	"\fReferredStat\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12#\n" +
@@ -2754,12 +2799,14 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aD\n" +
 	"\x16NgrAmountInPeriodEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x92\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf7\x01\n" +
 	"\fReferralPlan\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x19\n" +
 	"\bmax_tier\x18\x02 \x01(\x05R\amaxTier\x12M\n" +
 	"\vplan_config\x18\x03 \x01(\v2,.api.affiliate.service.v1.ReferralPlanConfigR\n" +
-	"planConfig\"\xd6\x05\n" +
+	"planConfig\x120\n" +
+	"\x14payment_channel_rate\x18\x04 \x01(\tR\x12paymentChannelRate\x121\n" +
+	"\x15third_party_game_rate\x18\x05 \x01(\tR\x12thirdPartyGameRate\"\xd6\x05\n" +
 	"\x12ReferralPlanConfig\x12h\n" +
 	"\x15conversion_conditions\x18\x01 \x01(\v2..api.affiliate.service.v1.ConversionConditionsH\x00R\x14conversionConditions\x88\x01\x01\x12\\\n" +
 	"\x11conversion_reward\x18\x02 \x01(\v2*.api.affiliate.service.v1.ConversionRewardH\x01R\x10conversionReward\x88\x01\x01\x12S\n" +

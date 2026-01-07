@@ -48,6 +48,8 @@ const (
 	BackofficeAffiliate_ListCommissions_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
 	BackofficeAffiliate_ListAffiliateUsers_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
 	BackofficeAffiliate_ListAffiliateBills_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
+	BackofficeAffiliate_GetOperatorSettings_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/GetOperatorSettings"
+	BackofficeAffiliate_UpdateOperatorSettings_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateOperatorSettings"
 	BackofficeAffiliate_SetReferralPlan_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
 	BackofficeAffiliate_GetReferralPlan_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
 )
@@ -84,6 +86,8 @@ type BackofficeAffiliateClient interface {
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(ctx context.Context, in *ListAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ListUsersResponse, error)
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error)
+	GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorSettingsResponse, error)
+	UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*v1.GetReferralPlanResponse, error)
 }
@@ -376,6 +380,26 @@ func (c *backofficeAffiliateClient) ListAffiliateBills(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_UpdateOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeAffiliateClient) SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*v1.SetReferralPlanResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.SetReferralPlanResponse)
@@ -428,6 +452,8 @@ type BackofficeAffiliateServer interface {
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
+	GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error)
+	UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
@@ -523,6 +549,12 @@ func (UnimplementedBackofficeAffiliateServer) ListAffiliateUsers(context.Context
 }
 func (UnimplementedBackofficeAffiliateServer) ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateBills not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorSettings not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorSettings not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetReferralPlan not implemented")
@@ -1055,6 +1087,42 @@ func _BackofficeAffiliate_ListAffiliateBills_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_GetOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetOperatorSettings(ctx, req.(*GetOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_UpdateOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).UpdateOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_UpdateOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).UpdateOperatorSettings(ctx, req.(*UpdateOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeAffiliate_SetReferralPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetReferralPlanRequest)
 	if err := dec(in); err != nil {
@@ -1209,6 +1277,14 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAffiliateBills",
 			Handler:    _BackofficeAffiliate_ListAffiliateBills_Handler,
+		},
+		{
+			MethodName: "GetOperatorSettings",
+			Handler:    _BackofficeAffiliate_GetOperatorSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorSettings",
+			Handler:    _BackofficeAffiliate_UpdateOperatorSettings_Handler,
 		},
 		{
 			MethodName: "SetReferralPlan",
