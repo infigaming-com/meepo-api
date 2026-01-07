@@ -216,6 +216,22 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// -------------- Settings --------------
+
+	rpc GetOperatorSettings(GetOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/operator/settings/get"
+			body: "*"
+		};
+	}
+	
+	rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/operator/settings/update"
+			body: "*"
+		};
+	}
+
 	// -------------- Referral Plan --------------
 
 	rpc SetReferralPlan(SetReferralPlanRequest) returns (api.affiliate.service.v1.SetReferralPlanResponse) {
@@ -462,6 +478,17 @@ message ListAffiliateBillsRequest {
     optional int32 page = 5;
     optional int32 page_size = 6;
     api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+// -------------- Settings --------------
+
+message GetOperatorSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message UpdateOperatorSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	api.affiliate.service.v1.OperatorSettings operator_settings = 2;
 }
 
 // -------------- Referral Plan --------------

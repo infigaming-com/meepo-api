@@ -985,6 +985,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliatesResponse'
+    /v1/backoffice/affiliate/operator/settings/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetOperatorSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetOperatorSettingsResponse'
+    /v1/backoffice/affiliate/operator/settings/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateOperatorSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdateOperatorSettingsResponse'
     /v1/backoffice/affiliate/postback/create:
         post:
             tags:
@@ -8237,6 +8273,11 @@ components:
                     type: string
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.GetOperatorSettingsResponse:
+            type: object
+            properties:
+                operatorSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.OperatorSettings'
         api.affiliate.service.v1.GetReferralPlanResponse:
             type: object
             properties:
@@ -9112,10 +9153,6 @@ components:
                     description: Map of tier number (1-10) to tier rewards
                 period:
                     type: string
-                paymentChannelRate:
-                    type: string
-                thirdPartyGameRate:
-                    type: string
         api.affiliate.service.v1.LossRevenueShareTierReward:
             type: object
             properties:
@@ -9132,6 +9169,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.LossRevenueShareTierReward'
+        api.affiliate.service.v1.OperatorSettings:
+            type: object
+            properties:
+                paymentChannelRate:
+                    type: string
+                thirdPartyGameRate:
+                    type: string
         api.affiliate.service.v1.Params:
             type: object
             properties:
@@ -9269,6 +9313,10 @@ components:
                     format: int32
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlanConfig'
+                paymentChannelRate:
+                    type: string
+                thirdPartyGameRate:
+                    type: string
             description: Complete referral plan configuration
         api.affiliate.service.v1.ReferralPlanConfig:
             type: object
@@ -9320,6 +9368,9 @@ components:
             type: object
             properties: {}
         api.affiliate.service.v1.UpdateCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.UpdateOperatorSettingsResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.UpdatePostbackResponse:
@@ -11285,6 +11336,11 @@ components:
                     additionalProperties:
                         $ref: '#/components/schemas/api.backoffice.service.v1.OperatorRegistrationConfig'
         api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorSettingsRequest:
             type: object
             properties:
                 targetOperatorContext:
@@ -16415,6 +16471,13 @@ components:
                     type: string
                 config:
                     $ref: '#/components/schemas/api.user.service.v1.NotificationChannelConfig'
+        api.backoffice.service.v1.UpdateOperatorSettingsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.OperatorSettings'
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:

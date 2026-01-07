@@ -119,6 +119,10 @@ func (m *SetReferralPlanRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for PaymentChannelRate
+
+	// no validation rules for ThirdPartyGameRate
+
 	if m.FollowParent != nil {
 		// no validation rules for FollowParent
 	}
@@ -2795,6 +2799,10 @@ func (m *ReferralPlan) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for PaymentChannelRate
+
+	// no validation rules for ThirdPartyGameRate
+
 	if len(errors) > 0 {
 		return ReferralPlanMultiError(errors)
 	}
@@ -4680,10 +4688,6 @@ func (m *LossRevenueShare) validate(all bool) error {
 	}
 
 	// no validation rules for Period
-
-	// no validation rules for PaymentChannelRate
-
-	// no validation rules for ThirdPartyGameRate
 
 	if len(errors) > 0 {
 		return LossRevenueShareMultiError(errors)

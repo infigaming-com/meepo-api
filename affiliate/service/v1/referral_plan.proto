@@ -20,6 +20,8 @@ message SetReferralPlanRequest {
     optional bool enabled = 6; // target operator's referral plan's enabled
     optional int32 max_tier = 7; // target operator's referral plan's max_tier
     optional ReferralPlanConfig plan_config = 8; // target operator's referral plan's plan_config
+    string payment_channel_rate = 9; // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 10; // represent as a percentage, e.g. "35" for 35%
 }
 
 message SetReferralPlanResponse {}
@@ -187,6 +189,8 @@ message ReferralPlan {
     bool enabled = 1;
     int32 max_tier = 2;
     ReferralPlanConfig plan_config = 3;
+    string payment_channel_rate = 4; // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 5; // represent as a percentage, e.g. "35" for 35%
 }
 
 // Referral plan configuration
@@ -294,8 +298,6 @@ message LossRevenueShare {
     // Map of tier number (1-10) to tier rewards
     map<int32, LossRevenueShareTierRewards> tier_rewards = 4;
     string period = 5; // weekly/monthly
-    string payment_channel_rate = 6; // represent as a percentage, e.g. "35" for 35%
-    string third_party_game_rate = 7; // represent as a percentage, e.g. "35" for 35%
 }
 
 message LossRevenueShareTierRewards {

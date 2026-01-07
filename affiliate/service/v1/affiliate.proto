@@ -148,6 +148,13 @@ service Affiliate {
     // This is an internal API for wallet-service to validate promo code conditions
     rpc GetUserPromoConditionInfo(GetUserPromoConditionInfoRequest) returns (GetUserPromoConditionInfoResponse) {}
 
+
+    // -------------- Settings --------------
+
+    rpc GetOperatorSettings(GetOperatorSettingsRequest) returns (GetOperatorSettingsResponse) {}
+
+    rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (UpdateOperatorSettingsResponse) {}
+
 }
 
 message ContactType {
@@ -859,3 +866,28 @@ message GetUserPromoConditionInfoResponse {
     bool has_met_conversion_conditions = 5; // true if user has met conversion conditions
 }
 
+
+// -------------- Settings --------------
+
+message GetOperatorSettingsRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+}
+
+message OperatorSettings {
+    string payment_channel_rate = 1; // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 2; // represent as a percentage, e.g. "35" for 35%
+}
+
+message GetOperatorSettingsResponse {
+    OperatorSettings operator_settings = 1;
+}
+
+message UpdateOperatorSettingsRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    OperatorSettings operator_settings = 3;
+}
+
+message UpdateOperatorSettingsResponse {
+}
