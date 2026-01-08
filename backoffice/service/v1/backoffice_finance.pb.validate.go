@@ -3310,6 +3310,8 @@ func (m *GetInvoiceSummaryRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for PeriodKey
+
 	if len(errors) > 0 {
 		return GetInvoiceSummaryRequestMultiError(errors)
 	}

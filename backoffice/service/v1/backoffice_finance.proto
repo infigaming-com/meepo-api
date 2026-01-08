@@ -540,6 +540,7 @@ message SendInvoicesResponse {
 }
 
 message GetInvoiceSummaryRequest {
+	string period_key = 1;
 }
 
 message GetInvoiceSummaryResponse {
