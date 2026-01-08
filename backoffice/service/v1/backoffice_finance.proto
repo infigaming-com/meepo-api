@@ -317,6 +317,7 @@ message ListOperatorRevenueShareResponse {
 		string amount = 13; // Revenue share amount in original currency
 		string fx_rate = 14; // Foreign exchange rate
 		string amount_usd = 15; // Revenue share amount in USD
+		int64 id = 16;
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -352,6 +353,7 @@ message ListThirdPartyFeesResponse {
 		string quantity = 4; // Quantity as string to preserve formatting
 		string amount = 5; // Amount as string to preserve precision
 		string description = 6; // Description of the fee
+		int64 id = 7;
 	}
 	
 	repeated ThirdPartyFeeItem items = 1;
@@ -404,6 +406,7 @@ message ListMonthlyRevenueShareResponse {
 		string revenue_share_system = 18; // Revenue Share System
 		string revenue_share_operator = 19; // Revenue Share Operator
 		string est_costs = 20; // Est. Costs
+		int64 id = 21;
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -500,6 +503,7 @@ message ListAdjustmentsResponse {
 		// Amount information
 		string amount = 5; // Amount as string to preserve precision
 		string description = 6; // Description of the adjustment
+		int64 id = 7;
 	}
 	
 	repeated AdjustmentItem items = 1;
@@ -521,6 +525,13 @@ message CreateAdjustmentConfigRequest {
 message CreateAdjustmentConfigResponse {
 }
 
+message DeleteAdjustmentRequest {
+	int64 id = 1; // Adjustment ID to delete
+}
+
+message DeleteAdjustmentResponse {
+}
+
 message SendInvoicesRequest {
 	string period_key = 1;
 }
@@ -529,6 +540,7 @@ message SendInvoicesResponse {
 }
 
 message GetInvoiceSummaryRequest {
+	string period_key = 1;
 }
 
 message GetInvoiceSummaryResponse {
