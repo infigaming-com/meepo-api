@@ -2876,6 +2876,212 @@ var _ interface {
 	ErrorName() string
 } = CreateAdjustmentConfigResponseValidationError{}
 
+// Validate checks the field values on DeleteAdjustmentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAdjustmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAdjustmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAdjustmentRequestMultiError, or nil if none found.
+func (m *DeleteAdjustmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAdjustmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteAdjustmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteAdjustmentRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteAdjustmentRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteAdjustmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAdjustmentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAdjustmentRequestMultiError) AllErrors() []error { return m }
+
+// DeleteAdjustmentRequestValidationError is the validation error returned by
+// DeleteAdjustmentRequest.Validate if the designated constraints aren't met.
+type DeleteAdjustmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAdjustmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAdjustmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAdjustmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAdjustmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAdjustmentRequestValidationError) ErrorName() string {
+	return "DeleteAdjustmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAdjustmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAdjustmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAdjustmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAdjustmentRequestValidationError{}
+
+// Validate checks the field values on DeleteAdjustmentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAdjustmentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAdjustmentResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAdjustmentResponseMultiError, or nil if none found.
+func (m *DeleteAdjustmentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAdjustmentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteAdjustmentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteAdjustmentResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteAdjustmentResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteAdjustmentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAdjustmentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAdjustmentResponseMultiError) AllErrors() []error { return m }
+
+// DeleteAdjustmentResponseValidationError is the validation error returned by
+// DeleteAdjustmentResponse.Validate if the designated constraints aren't met.
+type DeleteAdjustmentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAdjustmentResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAdjustmentResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAdjustmentResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAdjustmentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAdjustmentResponseValidationError) ErrorName() string {
+	return "DeleteAdjustmentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAdjustmentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAdjustmentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAdjustmentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAdjustmentResponseValidationError{}
+
 // Validate checks the field values on SendInvoicesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5944,6 +6150,8 @@ func (m *ListOperatorRevenueShareResponse_RevenueShareItem) validate(all bool) e
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for Id
+
 	if len(errors) > 0 {
 		return ListOperatorRevenueShareResponse_RevenueShareItemMultiError(errors)
 	}
@@ -6068,6 +6276,8 @@ func (m *ListThirdPartyFeesResponse_ThirdPartyFeeItem) validate(all bool) error 
 	// no validation rules for Amount
 
 	// no validation rules for Description
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListThirdPartyFeesResponse_ThirdPartyFeeItemMultiError(errors)
@@ -6215,6 +6425,8 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 	// no validation rules for RevenueShareOperator
 
 	// no validation rules for EstCosts
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareResponse_RevenueShareItemMultiError(errors)
@@ -6569,6 +6781,8 @@ func (m *ListAdjustmentsResponse_AdjustmentItem) validate(all bool) error {
 	// no validation rules for Amount
 
 	// no validation rules for Description
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListAdjustmentsResponse_AdjustmentItemMultiError(errors)
