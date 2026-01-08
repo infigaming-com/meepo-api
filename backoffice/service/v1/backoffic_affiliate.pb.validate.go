@@ -4005,22 +4005,23 @@ var _ interface {
 	ErrorName() string
 } = ListAffiliateBillsRequestValidationError{}
 
-// Validate checks the field values on GetOperatorSettingsRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetOperatorSettingsRequest) Validate() error {
+// Validate checks the field values on GetAffiliateOperatorSettingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAffiliateOperatorSettingsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetOperatorSettingsRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetOperatorSettingsRequestMultiError, or nil if none found.
-func (m *GetOperatorSettingsRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetAffiliateOperatorSettingsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAffiliateOperatorSettingsRequestMultiError, or nil if none found.
+func (m *GetAffiliateOperatorSettingsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetOperatorSettingsRequest) validate(all bool) error {
+func (m *GetAffiliateOperatorSettingsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4031,7 +4032,7 @@ func (m *GetOperatorSettingsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetOperatorSettingsRequestValidationError{
+				errors = append(errors, GetAffiliateOperatorSettingsRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4039,7 +4040,7 @@ func (m *GetOperatorSettingsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetOperatorSettingsRequestValidationError{
+				errors = append(errors, GetAffiliateOperatorSettingsRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4048,7 +4049,7 @@ func (m *GetOperatorSettingsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetOperatorSettingsRequestValidationError{
+			return GetAffiliateOperatorSettingsRequestValidationError{
 				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4057,19 +4058,20 @@ func (m *GetOperatorSettingsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetOperatorSettingsRequestMultiError(errors)
+		return GetAffiliateOperatorSettingsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetOperatorSettingsRequestMultiError is an error wrapping multiple
-// validation errors returned by GetOperatorSettingsRequest.ValidateAll() if
-// the designated constraints aren't met.
-type GetOperatorSettingsRequestMultiError []error
+// GetAffiliateOperatorSettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAffiliateOperatorSettingsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAffiliateOperatorSettingsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetOperatorSettingsRequestMultiError) Error() string {
+func (m GetAffiliateOperatorSettingsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4078,11 +4080,12 @@ func (m GetOperatorSettingsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetOperatorSettingsRequestMultiError) AllErrors() []error { return m }
+func (m GetAffiliateOperatorSettingsRequestMultiError) AllErrors() []error { return m }
 
-// GetOperatorSettingsRequestValidationError is the validation error returned
-// by GetOperatorSettingsRequest.Validate if the designated constraints aren't met.
-type GetOperatorSettingsRequestValidationError struct {
+// GetAffiliateOperatorSettingsRequestValidationError is the validation error
+// returned by GetAffiliateOperatorSettingsRequest.Validate if the designated
+// constraints aren't met.
+type GetAffiliateOperatorSettingsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4090,24 +4093,24 @@ type GetOperatorSettingsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetOperatorSettingsRequestValidationError) Field() string { return e.field }
+func (e GetAffiliateOperatorSettingsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetOperatorSettingsRequestValidationError) Reason() string { return e.reason }
+func (e GetAffiliateOperatorSettingsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetOperatorSettingsRequestValidationError) Cause() error { return e.cause }
+func (e GetAffiliateOperatorSettingsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetOperatorSettingsRequestValidationError) Key() bool { return e.key }
+func (e GetAffiliateOperatorSettingsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetOperatorSettingsRequestValidationError) ErrorName() string {
-	return "GetOperatorSettingsRequestValidationError"
+func (e GetAffiliateOperatorSettingsRequestValidationError) ErrorName() string {
+	return "GetAffiliateOperatorSettingsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetOperatorSettingsRequestValidationError) Error() string {
+func (e GetAffiliateOperatorSettingsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4119,14 +4122,14 @@ func (e GetOperatorSettingsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetOperatorSettingsRequest.%s: %s%s",
+		"invalid %sGetAffiliateOperatorSettingsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetOperatorSettingsRequestValidationError{}
+var _ error = GetAffiliateOperatorSettingsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4134,24 +4137,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetOperatorSettingsRequestValidationError{}
+} = GetAffiliateOperatorSettingsRequestValidationError{}
 
-// Validate checks the field values on UpdateOperatorSettingsRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateOperatorSettingsRequest) Validate() error {
+// Validate checks the field values on UpdateAffiliateOperatorSettingsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *UpdateAffiliateOperatorSettingsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateOperatorSettingsRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// UpdateOperatorSettingsRequestMultiError, or nil if none found.
-func (m *UpdateOperatorSettingsRequest) ValidateAll() error {
+// ValidateAll checks the field values on
+// UpdateAffiliateOperatorSettingsRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// UpdateAffiliateOperatorSettingsRequestMultiError, or nil if none found.
+func (m *UpdateAffiliateOperatorSettingsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
+func (m *UpdateAffiliateOperatorSettingsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4162,7 +4167,7 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateOperatorSettingsRequestValidationError{
+				errors = append(errors, UpdateAffiliateOperatorSettingsRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4170,7 +4175,7 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateOperatorSettingsRequestValidationError{
+				errors = append(errors, UpdateAffiliateOperatorSettingsRequestValidationError{
 					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4179,7 +4184,7 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UpdateOperatorSettingsRequestValidationError{
+			return UpdateAffiliateOperatorSettingsRequestValidationError{
 				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4191,7 +4196,7 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorSettings()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateOperatorSettingsRequestValidationError{
+				errors = append(errors, UpdateAffiliateOperatorSettingsRequestValidationError{
 					field:  "OperatorSettings",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4199,7 +4204,7 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateOperatorSettingsRequestValidationError{
+				errors = append(errors, UpdateAffiliateOperatorSettingsRequestValidationError{
 					field:  "OperatorSettings",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4208,7 +4213,7 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorSettings()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UpdateOperatorSettingsRequestValidationError{
+			return UpdateAffiliateOperatorSettingsRequestValidationError{
 				field:  "OperatorSettings",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4217,19 +4222,20 @@ func (m *UpdateOperatorSettingsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return UpdateOperatorSettingsRequestMultiError(errors)
+		return UpdateAffiliateOperatorSettingsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateOperatorSettingsRequestMultiError is an error wrapping multiple
-// validation errors returned by UpdateOperatorSettingsRequest.ValidateAll()
-// if the designated constraints aren't met.
-type UpdateOperatorSettingsRequestMultiError []error
+// UpdateAffiliateOperatorSettingsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// UpdateAffiliateOperatorSettingsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAffiliateOperatorSettingsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateOperatorSettingsRequestMultiError) Error() string {
+func (m UpdateAffiliateOperatorSettingsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4238,12 +4244,12 @@ func (m UpdateOperatorSettingsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateOperatorSettingsRequestMultiError) AllErrors() []error { return m }
+func (m UpdateAffiliateOperatorSettingsRequestMultiError) AllErrors() []error { return m }
 
-// UpdateOperatorSettingsRequestValidationError is the validation error
-// returned by UpdateOperatorSettingsRequest.Validate if the designated
-// constraints aren't met.
-type UpdateOperatorSettingsRequestValidationError struct {
+// UpdateAffiliateOperatorSettingsRequestValidationError is the validation
+// error returned by UpdateAffiliateOperatorSettingsRequest.Validate if the
+// designated constraints aren't met.
+type UpdateAffiliateOperatorSettingsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4251,24 +4257,24 @@ type UpdateOperatorSettingsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateOperatorSettingsRequestValidationError) Field() string { return e.field }
+func (e UpdateAffiliateOperatorSettingsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateOperatorSettingsRequestValidationError) Reason() string { return e.reason }
+func (e UpdateAffiliateOperatorSettingsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateOperatorSettingsRequestValidationError) Cause() error { return e.cause }
+func (e UpdateAffiliateOperatorSettingsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateOperatorSettingsRequestValidationError) Key() bool { return e.key }
+func (e UpdateAffiliateOperatorSettingsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateOperatorSettingsRequestValidationError) ErrorName() string {
-	return "UpdateOperatorSettingsRequestValidationError"
+func (e UpdateAffiliateOperatorSettingsRequestValidationError) ErrorName() string {
+	return "UpdateAffiliateOperatorSettingsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateOperatorSettingsRequestValidationError) Error() string {
+func (e UpdateAffiliateOperatorSettingsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4280,14 +4286,14 @@ func (e UpdateOperatorSettingsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateOperatorSettingsRequest.%s: %s%s",
+		"invalid %sUpdateAffiliateOperatorSettingsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateOperatorSettingsRequestValidationError{}
+var _ error = UpdateAffiliateOperatorSettingsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4295,7 +4301,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateOperatorSettingsRequestValidationError{}
+} = UpdateAffiliateOperatorSettingsRequestValidationError{}
 
 // Validate checks the field values on SetReferralPlanRequest with the rules
 // defined in the proto definition for this message. If any rules are

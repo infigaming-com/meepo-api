@@ -218,14 +218,14 @@ service BackofficeAffiliate {
 
 	// -------------- Settings --------------
 
-	rpc GetOperatorSettings(GetOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
+	rpc GetAffiliateOperatorSettings(GetAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/operator/settings/get"
 			body: "*"
 		};
 	}
 	
-	rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
+	rpc UpdateAffiliateOperatorSettings(UpdateAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/operator/settings/update"
 			body: "*"
@@ -482,11 +482,11 @@ message ListAffiliateBillsRequest {
 
 // -------------- Settings --------------
 
-message GetOperatorSettingsRequest {
+message GetAffiliateOperatorSettingsRequest {
 	api.common.OperatorContext target_operator_context = 1;
 }
 
-message UpdateOperatorSettingsRequest {
+message UpdateAffiliateOperatorSettingsRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	api.affiliate.service.v1.OperatorSettings operator_settings = 2;
 }
