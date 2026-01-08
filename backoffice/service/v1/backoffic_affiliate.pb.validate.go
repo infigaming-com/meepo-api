@@ -4350,10 +4350,6 @@ func (m *SetReferralPlanRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for PaymentChannelRate
-
-	// no validation rules for ThirdPartyGameRate
-
 	if m.FollowParent != nil {
 		// no validation rules for FollowParent
 	}
@@ -4397,6 +4393,14 @@ func (m *SetReferralPlanRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.PaymentChannelRate != nil {
+		// no validation rules for PaymentChannelRate
+	}
+
+	if m.ThirdPartyGameRate != nil {
+		// no validation rules for ThirdPartyGameRate
 	}
 
 	if len(errors) > 0 {

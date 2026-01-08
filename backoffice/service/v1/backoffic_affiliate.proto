@@ -500,8 +500,8 @@ message SetReferralPlanRequest {
 	optional bool enabled = 4;
 	optional int32 max_tier = 5;
 	optional api.affiliate.service.v1.ReferralPlanConfig plan_config = 6;
-	string payment_channel_rate = 9; // represent as a percentage, e.g. "35" for 35%
-    string third_party_game_rate = 10; // represent as a percentage, e.g. "35" for 35%
+	optional string payment_channel_rate = 7; // represent as a percentage, e.g. "35" for 35%
+    optional string third_party_game_rate = 8; // represent as a percentage, e.g. "35" for 35%
 }
 
 message GetReferralPlanRequest {
