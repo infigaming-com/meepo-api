@@ -13225,6 +13225,8 @@ func (m *OperatorAccountGameSettings) validate(all bool) error {
 
 	// no validation rules for MinGameKycLevel
 
+	// no validation rules for NoGameWithZeroBalance
+
 	if len(errors) > 0 {
 		return OperatorAccountGameSettingsMultiError(errors)
 	}

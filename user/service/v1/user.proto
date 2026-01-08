@@ -1365,6 +1365,7 @@ message OperatorAccountSecuritySettings {
 message OperatorAccountGameSettings {
 	bool no_game_without_deposit = 1;
 	int32 min_game_kyc_level = 2;
+	bool no_game_with_zero_balance = 3;
 }
 
 message OperatorAccountPaymentSettings {

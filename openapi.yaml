@@ -20216,6 +20216,8 @@ components:
                 minGameKycLevel:
                     type: integer
                     format: int32
+                noGameWithZeroBalance:
+                    type: boolean
         api.user.service.v1.OperatorAccountPasswordSettings:
             type: object
             properties:

@@ -6749,11 +6749,12 @@ func (x *OperatorAccountSecuritySettings) GetPasswordHistoryLimits() int32 {
 }
 
 type OperatorAccountGameSettings struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	NoGameWithoutDeposit bool                   `protobuf:"varint,1,opt,name=no_game_without_deposit,json=noGameWithoutDeposit,proto3" json:"no_game_without_deposit,omitempty"`
-	MinGameKycLevel      int32                  `protobuf:"varint,2,opt,name=min_game_kyc_level,json=minGameKycLevel,proto3" json:"min_game_kyc_level,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	NoGameWithoutDeposit  bool                   `protobuf:"varint,1,opt,name=no_game_without_deposit,json=noGameWithoutDeposit,proto3" json:"no_game_without_deposit,omitempty"`
+	MinGameKycLevel       int32                  `protobuf:"varint,2,opt,name=min_game_kyc_level,json=minGameKycLevel,proto3" json:"min_game_kyc_level,omitempty"`
+	NoGameWithZeroBalance bool                   `protobuf:"varint,3,opt,name=no_game_with_zero_balance,json=noGameWithZeroBalance,proto3" json:"no_game_with_zero_balance,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorAccountGameSettings) Reset() {
@@ -6798,6 +6799,13 @@ func (x *OperatorAccountGameSettings) GetMinGameKycLevel() int32 {
 		return x.MinGameKycLevel
 	}
 	return 0
+}
+
+func (x *OperatorAccountGameSettings) GetNoGameWithZeroBalance() bool {
+	if x != nil {
+		return x.NoGameWithZeroBalance
+	}
+	return false
 }
 
 type OperatorAccountPaymentSettings struct {
@@ -14449,10 +14457,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1fOperatorAccountSecuritySettings\x120\n" +
 	"\x14max_password_retries\x18\x01 \x01(\x05R\x12maxPasswordRetries\x120\n" +
 	"\x14password_expiry_days\x18\x02 \x01(\x05R\x12passwordExpiryDays\x126\n" +
-	"\x17password_history_limits\x18\x03 \x01(\x05R\x15passwordHistoryLimits\"\x81\x01\n" +
+	"\x17password_history_limits\x18\x03 \x01(\x05R\x15passwordHistoryLimits\"\xbb\x01\n" +
 	"\x1bOperatorAccountGameSettings\x125\n" +
 	"\x17no_game_without_deposit\x18\x01 \x01(\bR\x14noGameWithoutDeposit\x12+\n" +
-	"\x12min_game_kyc_level\x18\x02 \x01(\x05R\x0fminGameKycLevel\"\x88\x01\n" +
+	"\x12min_game_kyc_level\x18\x02 \x01(\x05R\x0fminGameKycLevel\x128\n" +
+	"\x19no_game_with_zero_balance\x18\x03 \x01(\bR\x15noGameWithZeroBalance\"\x88\x01\n" +
 	"\x1eOperatorAccountPaymentSettings\x121\n" +
 	"\x15min_deposit_kyc_level\x18\x01 \x01(\x05R\x12minDepositKycLevel\x123\n" +
 	"\x16min_withdraw_kyc_level\x18\x02 \x01(\x05R\x13minWithdrawKycLevel\"\x96\x03\n" +
