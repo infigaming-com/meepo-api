@@ -2121,6 +2121,8 @@ type SetReferralPlanRequest struct {
 	Enabled               *bool                   `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	MaxTier               *int32                  `protobuf:"varint,5,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`
 	PlanConfig            *v1.ReferralPlanConfig  `protobuf:"bytes,6,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`
+	PaymentChannelRate    string                  `protobuf:"bytes,9,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`    // represent as a percentage, e.g. "35" for 35%
+	ThirdPartyGameRate    string                  `protobuf:"bytes,10,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2195,6 +2197,20 @@ func (x *SetReferralPlanRequest) GetPlanConfig() *v1.ReferralPlanConfig {
 		return x.PlanConfig
 	}
 	return nil
+}
+
+func (x *SetReferralPlanRequest) GetPaymentChannelRate() string {
+	if x != nil {
+		return x.PaymentChannelRate
+	}
+	return ""
+}
+
+func (x *SetReferralPlanRequest) GetThirdPartyGameRate() string {
+	if x != nil {
+		return x.ThirdPartyGameRate
+	}
+	return ""
 }
 
 type GetReferralPlanRequest struct {
@@ -2572,7 +2588,7 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xcd\x01\n" +
 	"\x1dUpdateOperatorSettingsRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12W\n" +
-	"\x11operator_settings\x18\x02 \x01(\v2*.api.affiliate.service.v1.OperatorSettingsR\x10operatorSettings\"\x81\x03\n" +
+	"\x11operator_settings\x18\x02 \x01(\v2*.api.affiliate.service.v1.OperatorSettingsR\x10operatorSettings\"\xe6\x03\n" +
 	"\x16SetReferralPlanRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12(\n" +
@@ -2580,7 +2596,10 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\aenabled\x18\x04 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1e\n" +
 	"\bmax_tier\x18\x05 \x01(\x05H\x02R\amaxTier\x88\x01\x01\x12R\n" +
 	"\vplan_config\x18\x06 \x01(\v2,.api.affiliate.service.v1.ReferralPlanConfigH\x03R\n" +
-	"planConfig\x88\x01\x01B\x10\n" +
+	"planConfig\x88\x01\x01\x120\n" +
+	"\x14payment_channel_rate\x18\t \x01(\tR\x12paymentChannelRate\x121\n" +
+	"\x15third_party_game_rate\x18\n" +
+	" \x01(\tR\x12thirdPartyGameRateB\x10\n" +
 	"\x0e_follow_parentB\n" +
 	"\n" +
 	"\b_enabledB\v\n" +

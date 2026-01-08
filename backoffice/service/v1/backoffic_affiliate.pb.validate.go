@@ -4350,6 +4350,10 @@ func (m *SetReferralPlanRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for PaymentChannelRate
+
+	// no validation rules for ThirdPartyGameRate
+
 	if m.FollowParent != nil {
 		// no validation rules for FollowParent
 	}
