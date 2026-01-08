@@ -218,14 +218,14 @@ service BackofficeAffiliate {
 
 	// -------------- Settings --------------
 
-	rpc GetOperatorSettings(GetOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
+	rpc GetAffiliateOperatorSettings(GetAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/operator/settings/get"
 			body: "*"
 		};
 	}
 	
-	rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
+	rpc UpdateAffiliateOperatorSettings(UpdateAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/operator/settings/update"
 			body: "*"
@@ -482,11 +482,11 @@ message ListAffiliateBillsRequest {
 
 // -------------- Settings --------------
 
-message GetOperatorSettingsRequest {
+message GetAffiliateOperatorSettingsRequest {
 	api.common.OperatorContext target_operator_context = 1;
 }
 
-message UpdateOperatorSettingsRequest {
+message UpdateAffiliateOperatorSettingsRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	api.affiliate.service.v1.OperatorSettings operator_settings = 2;
 }
@@ -500,8 +500,8 @@ message SetReferralPlanRequest {
 	optional bool enabled = 4;
 	optional int32 max_tier = 5;
 	optional api.affiliate.service.v1.ReferralPlanConfig plan_config = 6;
-	string payment_channel_rate = 9; // represent as a percentage, e.g. "35" for 35%
-    string third_party_game_rate = 10; // represent as a percentage, e.g. "35" for 35%
+	optional string payment_channel_rate = 7; // represent as a percentage, e.g. "35" for 35%
+    optional string third_party_game_rate = 8; // represent as a percentage, e.g. "35" for 35%
 }
 
 message GetReferralPlanRequest {

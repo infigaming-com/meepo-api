@@ -2017,27 +2017,27 @@ func (x *ListAffiliateBillsRequest) GetOperatorContextFilters() *common.Operator
 	return nil
 }
 
-type GetOperatorSettingsRequest struct {
+type GetAffiliateOperatorSettingsRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *GetOperatorSettingsRequest) Reset() {
-	*x = GetOperatorSettingsRequest{}
+func (x *GetAffiliateOperatorSettingsRequest) Reset() {
+	*x = GetAffiliateOperatorSettingsRequest{}
 	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorSettingsRequest) String() string {
+func (x *GetAffiliateOperatorSettingsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorSettingsRequest) ProtoMessage() {}
+func (*GetAffiliateOperatorSettingsRequest) ProtoMessage() {}
 
-func (x *GetOperatorSettingsRequest) ProtoReflect() protoreflect.Message {
+func (x *GetAffiliateOperatorSettingsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2049,19 +2049,19 @@ func (x *GetOperatorSettingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorSettingsRequest.ProtoReflect.Descriptor instead.
-func (*GetOperatorSettingsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAffiliateOperatorSettingsRequest.ProtoReflect.Descriptor instead.
+func (*GetAffiliateOperatorSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *GetOperatorSettingsRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *GetAffiliateOperatorSettingsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-type UpdateOperatorSettingsRequest struct {
+type UpdateAffiliateOperatorSettingsRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	OperatorSettings      *v1.OperatorSettings    `protobuf:"bytes,2,opt,name=operator_settings,json=operatorSettings,proto3" json:"operator_settings,omitempty"`
@@ -2069,20 +2069,20 @@ type UpdateOperatorSettingsRequest struct {
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *UpdateOperatorSettingsRequest) Reset() {
-	*x = UpdateOperatorSettingsRequest{}
+func (x *UpdateAffiliateOperatorSettingsRequest) Reset() {
+	*x = UpdateAffiliateOperatorSettingsRequest{}
 	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateOperatorSettingsRequest) String() string {
+func (x *UpdateAffiliateOperatorSettingsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateOperatorSettingsRequest) ProtoMessage() {}
+func (*UpdateAffiliateOperatorSettingsRequest) ProtoMessage() {}
 
-func (x *UpdateOperatorSettingsRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateAffiliateOperatorSettingsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2094,19 +2094,19 @@ func (x *UpdateOperatorSettingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOperatorSettingsRequest.ProtoReflect.Descriptor instead.
-func (*UpdateOperatorSettingsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateAffiliateOperatorSettingsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAffiliateOperatorSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *UpdateOperatorSettingsRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *UpdateAffiliateOperatorSettingsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *UpdateOperatorSettingsRequest) GetOperatorSettings() *v1.OperatorSettings {
+func (x *UpdateAffiliateOperatorSettingsRequest) GetOperatorSettings() *v1.OperatorSettings {
 	if x != nil {
 		return x.OperatorSettings
 	}
@@ -2121,8 +2121,8 @@ type SetReferralPlanRequest struct {
 	Enabled               *bool                   `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	MaxTier               *int32                  `protobuf:"varint,5,opt,name=max_tier,json=maxTier,proto3,oneof" json:"max_tier,omitempty"`
 	PlanConfig            *v1.ReferralPlanConfig  `protobuf:"bytes,6,opt,name=plan_config,json=planConfig,proto3,oneof" json:"plan_config,omitempty"`
-	PaymentChannelRate    string                  `protobuf:"bytes,9,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`    // represent as a percentage, e.g. "35" for 35%
-	ThirdPartyGameRate    string                  `protobuf:"bytes,10,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
+	PaymentChannelRate    *string                 `protobuf:"bytes,7,opt,name=payment_channel_rate,json=paymentChannelRate,proto3,oneof" json:"payment_channel_rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
+	ThirdPartyGameRate    *string                 `protobuf:"bytes,8,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3,oneof" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2200,15 +2200,15 @@ func (x *SetReferralPlanRequest) GetPlanConfig() *v1.ReferralPlanConfig {
 }
 
 func (x *SetReferralPlanRequest) GetPaymentChannelRate() string {
-	if x != nil {
-		return x.PaymentChannelRate
+	if x != nil && x.PaymentChannelRate != nil {
+		return *x.PaymentChannelRate
 	}
 	return ""
 }
 
 func (x *SetReferralPlanRequest) GetThirdPartyGameRate() string {
-	if x != nil {
-		return x.ThirdPartyGameRate
+	if x != nil && x.ThirdPartyGameRate != nil {
+		return *x.ThirdPartyGameRate
 	}
 	return ""
 }
@@ -2583,12 +2583,12 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\b_bill_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"q\n" +
-	"\x1aGetOperatorSettingsRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xcd\x01\n" +
-	"\x1dUpdateOperatorSettingsRequest\x12S\n" +
+	"_page_size\"z\n" +
+	"#GetAffiliateOperatorSettingsRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xd6\x01\n" +
+	"&UpdateAffiliateOperatorSettingsRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12W\n" +
-	"\x11operator_settings\x18\x02 \x01(\v2*.api.affiliate.service.v1.OperatorSettingsR\x10operatorSettings\"\xe6\x03\n" +
+	"\x11operator_settings\x18\x02 \x01(\v2*.api.affiliate.service.v1.OperatorSettingsR\x10operatorSettings\"\xa3\x04\n" +
 	"\x16SetReferralPlanRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12(\n" +
@@ -2596,18 +2596,19 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\aenabled\x18\x04 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1e\n" +
 	"\bmax_tier\x18\x05 \x01(\x05H\x02R\amaxTier\x88\x01\x01\x12R\n" +
 	"\vplan_config\x18\x06 \x01(\v2,.api.affiliate.service.v1.ReferralPlanConfigH\x03R\n" +
-	"planConfig\x88\x01\x01\x120\n" +
-	"\x14payment_channel_rate\x18\t \x01(\tR\x12paymentChannelRate\x121\n" +
-	"\x15third_party_game_rate\x18\n" +
-	" \x01(\tR\x12thirdPartyGameRateB\x10\n" +
+	"planConfig\x88\x01\x01\x125\n" +
+	"\x14payment_channel_rate\x18\a \x01(\tH\x04R\x12paymentChannelRate\x88\x01\x01\x126\n" +
+	"\x15third_party_game_rate\x18\b \x01(\tH\x05R\x12thirdPartyGameRate\x88\x01\x01B\x10\n" +
 	"\x0e_follow_parentB\n" +
 	"\n" +
 	"\b_enabledB\v\n" +
 	"\t_max_tierB\x0e\n" +
-	"\f_plan_config\"\x89\x01\n" +
+	"\f_plan_configB\x17\n" +
+	"\x15_payment_channel_rateB\x18\n" +
+	"\x16_third_party_game_rate\"\x89\x01\n" +
 	"\x16GetReferralPlanRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency2\x97-\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency2\xbb-\n" +
 	"\x13BackofficeAffiliate\x12\xc2\x01\n" +
 	"\x14CreateCommissionPlan\x126.api.backoffice.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/create\x12\xc2\x01\n" +
 	"\x14UpdateCommissionPlan\x126.api.backoffice.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/update\x12\xb6\x01\n" +
@@ -2637,9 +2638,9 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"ListEvents\x12,.api.backoffice.service.v1.ListEventsRequest\x1a,.api.affiliate.service.v1.ListEventsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/affiliate/event/list\x12\xac\x01\n" +
 	"\x0fListCommissions\x121.api.backoffice.service.v1.ListCommissionsRequest\x1a1.api.affiliate.service.v1.ListCommissionsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/affiliate/commission/list\x12\xa6\x01\n" +
 	"\x12ListAffiliateUsers\x124.api.backoffice.service.v1.ListAffiliateUsersRequest\x1a+.api.affiliate.service.v1.ListUsersResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/affiliate/user/list\x12\xaf\x01\n" +
-	"\x12ListAffiliateBills\x124.api.backoffice.service.v1.ListAffiliateBillsRequest\x1a4.api.affiliate.service.v1.ListAffiliateBillsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/affiliate/bill/list\x12\xbe\x01\n" +
-	"\x13GetOperatorSettings\x125.api.backoffice.service.v1.GetOperatorSettingsRequest\x1a5.api.affiliate.service.v1.GetOperatorSettingsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/affiliate/operator/settings/get\x12\xca\x01\n" +
-	"\x16UpdateOperatorSettings\x128.api.backoffice.service.v1.UpdateOperatorSettingsRequest\x1a8.api.affiliate.service.v1.UpdateOperatorSettingsResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/affiliate/operator/settings/update\x12\xa4\x01\n" +
+	"\x12ListAffiliateBills\x124.api.backoffice.service.v1.ListAffiliateBillsRequest\x1a4.api.affiliate.service.v1.ListAffiliateBillsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/affiliate/bill/list\x12\xd0\x01\n" +
+	"\x1cGetAffiliateOperatorSettings\x12>.api.backoffice.service.v1.GetAffiliateOperatorSettingsRequest\x1a5.api.affiliate.service.v1.GetOperatorSettingsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/affiliate/operator/settings/get\x12\xdc\x01\n" +
+	"\x1fUpdateAffiliateOperatorSettings\x12A.api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest\x1a8.api.affiliate.service.v1.UpdateOperatorSettingsResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/affiliate/operator/settings/update\x12\xa4\x01\n" +
 	"\x0fSetReferralPlan\x121.api.backoffice.service.v1.SetReferralPlanRequest\x1a1.api.affiliate.service.v1.SetReferralPlanResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/referral/plan/set\x12\xa4\x01\n" +
 	"\x0fGetReferralPlan\x121.api.backoffice.service.v1.GetReferralPlanRequest\x1a1.api.affiliate.service.v1.GetReferralPlanResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/referral/plan/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -2686,8 +2687,8 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_goTypes = []any{
 	(*ListCommissionsRequest)(nil),                  // 25: api.backoffice.service.v1.ListCommissionsRequest
 	(*ListAffiliateUsersRequest)(nil),               // 26: api.backoffice.service.v1.ListAffiliateUsersRequest
 	(*ListAffiliateBillsRequest)(nil),               // 27: api.backoffice.service.v1.ListAffiliateBillsRequest
-	(*GetOperatorSettingsRequest)(nil),              // 28: api.backoffice.service.v1.GetOperatorSettingsRequest
-	(*UpdateOperatorSettingsRequest)(nil),           // 29: api.backoffice.service.v1.UpdateOperatorSettingsRequest
+	(*GetAffiliateOperatorSettingsRequest)(nil),     // 28: api.backoffice.service.v1.GetAffiliateOperatorSettingsRequest
+	(*UpdateAffiliateOperatorSettingsRequest)(nil),  // 29: api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest
 	(*SetReferralPlanRequest)(nil),                  // 30: api.backoffice.service.v1.SetReferralPlanRequest
 	(*GetReferralPlanRequest)(nil),                  // 31: api.backoffice.service.v1.GetReferralPlanRequest
 	(*CreateCampaignRequest_Campaign)(nil),          // 32: api.backoffice.service.v1.CreateCampaignRequest.Campaign
@@ -2762,9 +2763,9 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	38, // 26: api.backoffice.service.v1.ListAffiliateBillsRequest.updated_at_start_time:type_name -> google.protobuf.Timestamp
 	38, // 27: api.backoffice.service.v1.ListAffiliateBillsRequest.updated_at_end_time:type_name -> google.protobuf.Timestamp
 	37, // 28: api.backoffice.service.v1.ListAffiliateBillsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 29: api.backoffice.service.v1.GetOperatorSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	34, // 30: api.backoffice.service.v1.UpdateOperatorSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	39, // 31: api.backoffice.service.v1.UpdateOperatorSettingsRequest.operator_settings:type_name -> api.affiliate.service.v1.OperatorSettings
+	34, // 29: api.backoffice.service.v1.GetAffiliateOperatorSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	34, // 30: api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 31: api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest.operator_settings:type_name -> api.affiliate.service.v1.OperatorSettings
 	34, // 32: api.backoffice.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
 	40, // 33: api.backoffice.service.v1.SetReferralPlanRequest.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
 	34, // 34: api.backoffice.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
@@ -2797,8 +2798,8 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	25, // 61: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:input_type -> api.backoffice.service.v1.ListCommissionsRequest
 	26, // 62: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:input_type -> api.backoffice.service.v1.ListAffiliateUsersRequest
 	27, // 63: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:input_type -> api.backoffice.service.v1.ListAffiliateBillsRequest
-	28, // 64: api.backoffice.service.v1.BackofficeAffiliate.GetOperatorSettings:input_type -> api.backoffice.service.v1.GetOperatorSettingsRequest
-	29, // 65: api.backoffice.service.v1.BackofficeAffiliate.UpdateOperatorSettings:input_type -> api.backoffice.service.v1.UpdateOperatorSettingsRequest
+	28, // 64: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateOperatorSettings:input_type -> api.backoffice.service.v1.GetAffiliateOperatorSettingsRequest
+	29, // 65: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliateOperatorSettings:input_type -> api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest
 	30, // 66: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:input_type -> api.backoffice.service.v1.SetReferralPlanRequest
 	31, // 67: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:input_type -> api.backoffice.service.v1.GetReferralPlanRequest
 	42, // 68: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
@@ -2829,8 +2830,8 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	66, // 93: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
 	67, // 94: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
 	68, // 95: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
-	69, // 96: api.backoffice.service.v1.BackofficeAffiliate.GetOperatorSettings:output_type -> api.affiliate.service.v1.GetOperatorSettingsResponse
-	70, // 97: api.backoffice.service.v1.BackofficeAffiliate.UpdateOperatorSettings:output_type -> api.affiliate.service.v1.UpdateOperatorSettingsResponse
+	69, // 96: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateOperatorSettings:output_type -> api.affiliate.service.v1.GetOperatorSettingsResponse
+	70, // 97: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliateOperatorSettings:output_type -> api.affiliate.service.v1.UpdateOperatorSettingsResponse
 	71, // 98: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
 	72, // 99: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
 	68, // [68:100] is the sub-list for method output_type
