@@ -1844,6 +1844,7 @@ func (*SendInvoicesResponse) Descriptor() ([]byte, []int) {
 
 type GetInvoiceSummaryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	PeriodKey     string                 `protobuf:"bytes,1,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1876,6 +1877,13 @@ func (x *GetInvoiceSummaryRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetInvoiceSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetInvoiceSummaryRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_finance_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetInvoiceSummaryRequest) GetPeriodKey() string {
+	if x != nil {
+		return x.PeriodKey
+	}
+	return ""
 }
 
 type GetInvoiceSummaryResponse struct {
@@ -5115,8 +5123,10 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x13SendInvoicesRequest\x12\x1d\n" +
 	"\n" +
 	"period_key\x18\x01 \x01(\tR\tperiodKey\"\x16\n" +
-	"\x14SendInvoicesResponse\"\x1a\n" +
-	"\x18GetInvoiceSummaryRequest\"\x8a\x01\n" +
+	"\x14SendInvoicesResponse\"9\n" +
+	"\x18GetInvoiceSummaryRequest\x12\x1d\n" +
+	"\n" +
+	"period_key\x18\x01 \x01(\tR\tperiodKey\"\x8a\x01\n" +
 	"\x19GetInvoiceSummaryResponse\x12!\n" +
 	"\ftotal_income\x18\x01 \x01(\tR\vtotalIncome\x12#\n" +
 	"\rtotal_outcome\x18\x02 \x01(\tR\ftotalOutcome\x12%\n" +
