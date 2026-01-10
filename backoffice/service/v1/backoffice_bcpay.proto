@@ -101,8 +101,7 @@ message BankAccountListRequest {
   int32 page_size = 2;
 	optional string currency = 3;
 	optional string bank_account = 4;
-	optional string bank_account_firstname = 5;
-	optional string bank_account_lastname = 6;
+	optional string beneficiary_name = 5;
 	optional string card_id = 7;
 	optional bool enabled = 8;
 }
@@ -139,12 +138,10 @@ message TransactionListRequest {
 	// status "pending" "approved" "declined"
 	optional string status = 4;
 	optional int64 transaction_id = 5;
-	optional string deposit_bank_account_firstname = 6;
-	optional string deposit_bank_account_lastname = 7;
+	optional string deposit_beneficiary_name = 6;
 	optional int64 user_id = 8;
 	optional string user_name = 9;
-	optional string user_bank_account_firstname = 10;
-	optional string user_bank_account_lastname = 11;
+	optional string user_beneficiary_name = 10;
 }
 
 message AuditTransactionRequest {

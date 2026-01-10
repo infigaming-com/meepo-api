@@ -73,9 +73,7 @@ func (m *CreateDepositRequest) validate(all bool) error {
 
 	// no validation rules for BankAccount
 
-	// no validation rules for BankAccountFirstname
-
-	// no validation rules for BankAccountLastname
+	// no validation rules for BeneficiaryName
 
 	// no validation rules for BankIban
 
@@ -311,9 +309,7 @@ func (m *CreateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for BankAccount
 
-	// no validation rules for BankAccountFirstname
-
-	// no validation rules for BankAccountLastname
+	// no validation rules for BeneficiaryName
 
 	// no validation rules for BankIban
 
@@ -1242,9 +1238,7 @@ func (m *DepositBankAccount) validate(all bool) error {
 
 	// no validation rules for BankAccount
 
-	// no validation rules for BankFirstName
-
-	// no validation rules for BankLastName
+	// no validation rules for BeneficiaryName
 
 	// no validation rules for Iban
 
@@ -1411,12 +1405,8 @@ func (m *BankAccountListRequest) validate(all bool) error {
 		// no validation rules for BankAccount
 	}
 
-	if m.BankAccountFirstname != nil {
-		// no validation rules for BankAccountFirstname
-	}
-
-	if m.BankAccountLastname != nil {
-		// no validation rules for BankAccountLastname
+	if m.BeneficiaryName != nil {
+		// no validation rules for BeneficiaryName
 	}
 
 	if m.CardId != nil {
@@ -2494,12 +2484,8 @@ func (m *TransactionListRequest) validate(all bool) error {
 		// no validation rules for TransactionId
 	}
 
-	if m.DepositBankAccountFirstname != nil {
-		// no validation rules for DepositBankAccountFirstname
-	}
-
-	if m.DepositBankAccountLastname != nil {
-		// no validation rules for DepositBankAccountLastname
+	if m.DepositBeneficiaryName != nil {
+		// no validation rules for DepositBeneficiaryName
 	}
 
 	if m.UserId != nil {
@@ -2510,12 +2496,8 @@ func (m *TransactionListRequest) validate(all bool) error {
 		// no validation rules for UserName
 	}
 
-	if m.UserBankAccountFirstname != nil {
-		// no validation rules for UserBankAccountFirstname
-	}
-
-	if m.UserBankAccountLastname != nil {
-		// no validation rules for UserBankAccountLastname
+	if m.UserBeneficiaryName != nil {
+		// no validation rules for UserBeneficiaryName
 	}
 
 	if len(errors) > 0 {
@@ -2630,15 +2612,11 @@ func (m *Transaction) validate(all bool) error {
 
 	// no validation rules for DepositBankAccount
 
-	// no validation rules for DepositBankAccountFirstName
-
-	// no validation rules for DepositBankAccountLastName
+	// no validation rules for DepositBeneficiaryName
 
 	// no validation rules for UserBankAccount
 
-	// no validation rules for UserBankAccountFirstName
-
-	// no validation rules for UserBankAccountLastName
+	// no validation rules for UserBeneficiaryName
 
 	// no validation rules for Type
 
