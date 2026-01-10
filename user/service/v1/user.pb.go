@@ -561,8 +561,10 @@ type RegisterRequest struct {
 	EmailVerificationCode *string `protobuf:"bytes,14,opt,name=email_verification_code,json=emailVerificationCode,proto3,oneof" json:"email_verification_code,omitempty"`
 	// Phone verification code for verification-required operators
 	PhoneVerificationCode *string `protobuf:"bytes,15,opt,name=phone_verification_code,json=phoneVerificationCode,proto3,oneof" json:"phone_verification_code,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Nickname
+	Nickname      *string `protobuf:"bytes,16,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RegisterRequest) Reset() {
@@ -696,6 +698,13 @@ func (x *RegisterRequest) GetEmailVerificationCode() string {
 func (x *RegisterRequest) GetPhoneVerificationCode() string {
 	if x != nil && x.PhoneVerificationCode != nil {
 		return *x.PhoneVerificationCode
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetNickname() string {
+	if x != nil && x.Nickname != nil {
+		return *x.Nickname
 	}
 	return ""
 }
@@ -10029,6 +10038,7 @@ type RegistrationFieldSet struct {
 	PhoneVerification bool                   `protobuf:"varint,6,opt,name=phone_verification,json=phoneVerification,proto3" json:"phone_verification,omitempty"`
 	Birthday          bool                   `protobuf:"varint,7,opt,name=birthday,proto3" json:"birthday,omitempty"`
 	IdType            bool                   `protobuf:"varint,8,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Nickname          bool                   `protobuf:"varint,9,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -10115,6 +10125,13 @@ func (x *RegistrationFieldSet) GetBirthday() bool {
 func (x *RegistrationFieldSet) GetIdType() bool {
 	if x != nil {
 		return x.IdType
+	}
+	return false
+}
+
+func (x *RegistrationFieldSet) GetNickname() bool {
+	if x != nil {
+		return x.Nickname
 	}
 	return false
 }
@@ -13806,7 +13823,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10default_currency\x18\x18 \x01(\tR\x0fdefaultCurrency\x12%\n" +
 	"\x0eemail_verified\x18\x19 \x01(\bR\remailVerified\x12%\n" +
 	"\x0ephone_verified\x18\x1a \x01(\bR\rphoneVerified\x12?\n" +
-	"\rregistered_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\"\xbf\x06\n" +
+	"\rregistered_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\"\xed\x06\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
@@ -13824,7 +13841,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10default_currency\x18\r \x01(\tH\tR\x0fdefaultCurrency\x88\x01\x01\x12;\n" +
 	"\x17email_verification_code\x18\x0e \x01(\tH\n" +
 	"R\x15emailVerificationCode\x88\x01\x01\x12;\n" +
-	"\x17phone_verification_code\x18\x0f \x01(\tH\vR\x15phoneVerificationCode\x88\x01\x01B\x06\n" +
+	"\x17phone_verification_code\x18\x0f \x01(\tH\vR\x15phoneVerificationCode\x88\x01\x01\x12\x1f\n" +
+	"\bnickname\x18\x10 \x01(\tH\fR\bnickname\x88\x01\x01B\x06\n" +
 	"\x04_dobB\f\n" +
 	"\n" +
 	"_id_numberB\n" +
@@ -13840,7 +13858,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\b_addressB\x13\n" +
 	"\x11_default_currencyB\x1a\n" +
 	"\x18_email_verification_codeB\x1a\n" +
-	"\x18_phone_verification_code\"\x97\x01\n" +
+	"\x18_phone_verification_codeB\v\n" +
+	"\t_nickname\"\x97\x01\n" +
 	"\fLoginRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
@@ -14753,7 +14772,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n" +
 	"\x06source\x18\x03 \x01(\tR\x06source\"X\n" +
 	"\x1bOperatorRegisterLimitConfig\x129\n" +
-	"\x19registration_limit_per_ip\x18\x01 \x01(\x05R\x16registrationLimitPerIp\"\x83\x02\n" +
+	"\x19registration_limit_per_ip\x18\x01 \x01(\x05R\x16registrationLimitPerIp\"\x9f\x02\n" +
 	"\x14RegistrationFieldSet\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\bR\x05email\x12\x14\n" +
 	"\x05phone\x18\x02 \x01(\bR\x05phone\x12\x12\n" +
@@ -14762,7 +14781,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12email_verification\x18\x05 \x01(\bR\x11emailVerification\x12-\n" +
 	"\x12phone_verification\x18\x06 \x01(\bR\x11phoneVerification\x12\x1a\n" +
 	"\bbirthday\x18\a \x01(\bR\bbirthday\x12\x17\n" +
-	"\aid_type\x18\b \x01(\bR\x06idType\"\xa9\x01\n" +
+	"\aid_type\x18\b \x01(\bR\x06idType\x12\x1a\n" +
+	"\bnickname\x18\t \x01(\bR\bnickname\"\xa9\x01\n" +
 	"\x17RegistrationFieldPolicy\x12M\n" +
 	"\fregistration\x18\x01 \x01(\v2).api.user.service.v1.RegistrationFieldSetR\fregistration\x12?\n" +
 	"\x05login\x18\x02 \x01(\v2).api.user.service.v1.RegistrationFieldSetR\x05login\"\x91\x03\n" +
