@@ -383,6 +383,10 @@ func (m *RegisterRequest) validate(all bool) error {
 		// no validation rules for PhoneVerificationCode
 	}
 
+	if m.Nickname != nil {
+		// no validation rules for Nickname
+	}
+
 	if len(errors) > 0 {
 		return RegisterRequestMultiError(errors)
 	}
@@ -20829,6 +20833,8 @@ func (m *RegistrationFieldSet) validate(all bool) error {
 	// no validation rules for Birthday
 
 	// no validation rules for IdType
+
+	// no validation rules for Nickname
 
 	if len(errors) > 0 {
 		return RegistrationFieldSetMultiError(errors)

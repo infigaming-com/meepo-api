@@ -572,6 +572,8 @@ message RegisterRequest {
 	optional string email_verification_code = 14;
 	// Phone verification code for verification-required operators
 	optional string phone_verification_code = 15;
+	// Nickname
+	optional string nickname = 16;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -1769,6 +1771,7 @@ message RegistrationFieldSet {
 	bool phone_verification = 6;
 	bool birthday = 7;
 	bool id_type = 8;
+	bool nickname = 9;
 }
 
 message RegistrationFieldPolicy {

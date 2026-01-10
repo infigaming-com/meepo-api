@@ -20471,6 +20471,9 @@ components:
                 phoneVerificationCode:
                     type: string
                     description: Phone verification code for verification-required operators
+                nickname:
+                    type: string
+                    description: Nickname
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.RegistrationFieldPolicy:
             type: object
@@ -20497,6 +20500,8 @@ components:
                 birthday:
                     type: boolean
                 idType:
+                    type: boolean
+                nickname:
                     type: boolean
         api.user.service.v1.RequestDailyLossbackRequest:
             type: object
