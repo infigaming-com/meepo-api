@@ -17096,6 +17096,8 @@ components:
                     type: boolean
                 currentAmount:
                     type: string
+                bankName:
+                    type: string
         api.bcpay.service.v1.GetBankSchemaRequest:
             type: object
             properties:

@@ -715,6 +715,7 @@ type DepositBankAccount struct {
 	Priority          int32                  `protobuf:"varint,13,opt,name=priority,proto3" json:"priority,omitempty"`
 	Enable            bool                   `protobuf:"varint,14,opt,name=enable,proto3" json:"enable,omitempty"`
 	CurrentAmount     string                 `protobuf:"bytes,15,opt,name=current_amount,json=currentAmount,proto3" json:"current_amount,omitempty"`
+	BankName          string                 `protobuf:"bytes,16,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -850,6 +851,13 @@ func (x *DepositBankAccount) GetEnable() bool {
 func (x *DepositBankAccount) GetCurrentAmount() string {
 	if x != nil {
 		return x.CurrentAmount
+	}
+	return ""
+}
+
+func (x *DepositBankAccount) GetBankName() string {
+	if x != nil {
+		return x.BankName
 	}
 	return ""
 }
@@ -2134,7 +2142,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\"K\n" +
 	"\x15GetBankSchemaResponse\x122\n" +
-	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\"\x83\x04\n" +
+	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\"\xa0\x04\n" +
 	"\x12DepositBankAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -2153,7 +2161,8 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x13current_trans_times\x18\f \x01(\x05R\x11currentTransTimes\x12\x1a\n" +
 	"\bpriority\x18\r \x01(\x05R\bpriority\x12\x16\n" +
 	"\x06enable\x18\x0e \x01(\bR\x06enable\x12%\n" +
-	"\x0ecurrent_amount\x18\x0f \x01(\tR\rcurrentAmount\"\xf6\x03\n" +
+	"\x0ecurrent_amount\x18\x0f \x01(\tR\rcurrentAmount\x12\x1b\n" +
+	"\tbank_name\x18\x10 \x01(\tR\bbankName\"\xf6\x03\n" +
 	"\x16BankAccountListRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +

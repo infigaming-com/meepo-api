@@ -138,6 +138,7 @@ message DepositBankAccount {
 	int32 priority = 13;
 	bool enable = 14;
 	string current_amount = 15;
+	string bank_name = 16;
 }
 
 message BankAccountListRequest {
