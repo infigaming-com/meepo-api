@@ -4748,8 +4748,6 @@ func (m *ListSummariesResponse_List) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Country
 
 	// no validation rules for Visits
@@ -4878,6 +4876,12 @@ func (m *ListSummariesResponse_List) validate(all bool) error {
 
 	// no validation rules for NgrReportingCurrency
 
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
 	if len(errors) > 0 {
 		return ListSummariesResponse_ListMultiError(errors)
 	}
@@ -4988,8 +4992,6 @@ func (m *ListGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Provider
 
 	// no validation rules for GameType
@@ -5029,6 +5031,12 @@ func (m *ListGameDataResponse_List) validate(all bool) error {
 	// no validation rules for WinAmountReportingCurrency
 
 	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListGameDataResponse_ListMultiError(errors)
@@ -5140,8 +5148,6 @@ func (m *ListPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Provider
 
 	// no validation rules for GameType
@@ -5177,6 +5183,12 @@ func (m *ListPlayerGameDataResponse_List) validate(all bool) error {
 	// no validation rules for WinAmountReportingCurrency
 
 	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListPlayerGameDataResponse_ListMultiError(errors)
@@ -5406,8 +5418,6 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
@@ -5461,6 +5471,12 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 	// no validation rules for SuccessRate
 
 	// no validation rules for AmountProportion
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListDepositDetailsResponse_DetailMultiError(errors)
@@ -5692,8 +5708,6 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Currency
 
 	// no validation rules for ReportingCurrency
@@ -5755,6 +5769,12 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
 
 	// no validation rules for AmountProportion
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListWithdrawDetailsResponse_DetailMultiError(errors)
@@ -5869,8 +5889,6 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for RegUsers
 
 	// no validation rules for PaidUsers
@@ -5978,6 +5996,12 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 	// no validation rules for D120PaidAmtUsd
 
 	// no validation rules for D120PaidAmtReportingCurrency
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListRegisterRetentionResponse_ListMultiError(errors)
@@ -6092,8 +6116,6 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
@@ -6141,6 +6163,12 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 	// no validation rules for AverageFtdAmountUsdForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListDepositVtgDetailsResponse_DetailMultiError(errors)
@@ -6255,8 +6283,6 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for Currency
 
 	// no validation rules for WithdrawAmount
@@ -6310,6 +6336,12 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 	// no validation rules for DepositMinusWithdrawAmountUsd
 
 	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return ListWithdrawVtgDetailsResponse_DetailMultiError(errors)

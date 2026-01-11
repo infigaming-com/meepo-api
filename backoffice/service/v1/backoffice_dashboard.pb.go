@@ -1492,9 +1492,12 @@ type GetTopUsersDashboardResponse_User struct {
 	OperatorName            string                 `protobuf:"bytes,8,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	CompanyOperatorName     string                 `protobuf:"bytes,9,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	RetailerOperatorName    string                 `protobuf:"bytes,10,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName      string                 `protobuf:"bytes,11,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// system_operator_name removed - field 11 deprecated
+	OperatorId         uint64 `protobuf:"varint,12,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  uint64 `protobuf:"varint,13,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId uint64 `protobuf:"varint,14,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetTopUsersDashboardResponse_User) Reset() {
@@ -1597,22 +1600,39 @@ func (x *GetTopUsersDashboardResponse_User) GetRetailerOperatorName() string {
 	return ""
 }
 
-func (x *GetTopUsersDashboardResponse_User) GetSystemOperatorName() string {
+func (x *GetTopUsersDashboardResponse_User) GetOperatorId() uint64 {
 	if x != nil {
-		return x.SystemOperatorName
+		return x.OperatorId
 	}
-	return ""
+	return 0
+}
+
+func (x *GetTopUsersDashboardResponse_User) GetCompanyOperatorId() uint64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *GetTopUsersDashboardResponse_User) GetRetailerOperatorId() uint64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
 }
 
 type GetTopOperatorsDashboardResponse_OperatorData struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Rank                    int32                  `protobuf:"varint,1,opt,name=rank,proto3" json:"rank,omitempty"`
-	OperatorName            string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName     string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName    string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName      string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	AmountUsd               string                 `protobuf:"bytes,6,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"` // USD
-	AmountReportingCurrency string                 `protobuf:"bytes,7,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Rank                 int32                  `protobuf:"varint,1,opt,name=rank,proto3" json:"rank,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	// system_operator_name removed - field 5 deprecated
+	AmountUsd               string `protobuf:"bytes,6,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"` // USD
+	AmountReportingCurrency string `protobuf:"bytes,7,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	OperatorId              uint64 `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId       uint64 `protobuf:"varint,9,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId      uint64 `protobuf:"varint,10,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -1675,13 +1695,6 @@ func (x *GetTopOperatorsDashboardResponse_OperatorData) GetRetailerOperatorName(
 	return ""
 }
 
-func (x *GetTopOperatorsDashboardResponse_OperatorData) GetSystemOperatorName() string {
-	if x != nil {
-		return x.SystemOperatorName
-	}
-	return ""
-}
-
 func (x *GetTopOperatorsDashboardResponse_OperatorData) GetAmountUsd() string {
 	if x != nil {
 		return x.AmountUsd
@@ -1694,6 +1707,27 @@ func (x *GetTopOperatorsDashboardResponse_OperatorData) GetAmountReportingCurren
 		return x.AmountReportingCurrency
 	}
 	return ""
+}
+
+func (x *GetTopOperatorsDashboardResponse_OperatorData) GetOperatorId() uint64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *GetTopOperatorsDashboardResponse_OperatorData) GetCompanyOperatorId() uint64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *GetTopOperatorsDashboardResponse_OperatorData) GetRetailerOperatorId() uint64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
 }
 
 var File_backoffice_service_v1_backoffice_dashboard_proto protoreflect.FileDescriptor
@@ -1785,10 +1819,10 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\x1bTIME_RANGE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15TIME_RANGE_TYPE_TODAY\x10\x01\x12\x1d\n" +
 	"\x19TIME_RANGE_TYPE_THIS_WEEK\x10\x02\x12\x1e\n" +
-	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\x99\x05\n" +
+	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xea\x05\n" +
 	"\x1cGetTopUsersDashboardResponse\x12h\n" +
 	"\x11top_deposit_users\x18\x01 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x0ftopDepositUsers\x12n\n" +
-	"\x14top_withdrawal_users\x18\x02 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x12topWithdrawalUsers\x1a\x9e\x03\n" +
+	"\x14top_withdrawal_users\x18\x02 \x03(\v2<.api.backoffice.service.v1.GetTopUsersDashboardResponse.UserR\x12topWithdrawalUsers\x1a\xef\x03\n" +
 	"\x04User\x12\x12\n" +
 	"\x04rank\x18\x01 \x01(\x05R\x04rank\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
@@ -1801,8 +1835,11 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\roperator_name\x18\b \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\t \x01(\tR\x13companyOperatorName\x124\n" +
 	"\x16retailer_operator_name\x18\n" +
-	" \x01(\tR\x14retailerOperatorName\x120\n" +
-	"\x14system_operator_name\x18\v \x01(\tR\x12systemOperatorName\"\xfe\x02\n" +
+	" \x01(\tR\x14retailerOperatorName\x12\x1f\n" +
+	"\voperator_id\x18\f \x01(\x04R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\r \x01(\x04R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x0e \x01(\x04R\x12retailerOperatorId\"\xfe\x02\n" +
 	"\x1fGetTopOperatorsDashboardRequest\x12p\n" +
 	"\x0ftime_range_type\x18\x01 \x01(\x0e2H.api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x8a\x01\n" +
@@ -1810,7 +1847,7 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	"\x1bTIME_RANGE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15TIME_RANGE_TYPE_TODAY\x10\x01\x12\x1d\n" +
 	"\x19TIME_RANGE_TYPE_THIS_WEEK\x10\x02\x12\x1e\n" +
-	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xdc\f\n" +
+	"\x1aTIME_RANGE_TYPE_THIS_MONTH\x10\x03\"\xad\r\n" +
 	" GetTopOperatorsDashboardResponse\x12t\n" +
 	"\x11top_ggr_operators\x18\x01 \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x0ftopGgrOperators\x12t\n" +
 	"\x11top_ngr_operators\x18\x02 \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x0ftopNgrOperators\x12\x98\x01\n" +
@@ -1820,16 +1857,20 @@ const file_backoffice_service_v1_backoffice_dashboard_proto_rawDesc = "" +
 	",top_deposit_minus_withdraw_company_operators\x18\x06 \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR'topDepositMinusWithdrawCompanyOperators\x12\x85\x01\n" +
 	"\x1atop_ggr_retailer_operators\x18\a \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x17topGgrRetailerOperators\x12\x85\x01\n" +
 	"\x1atop_ngr_retailer_operators\x18\b \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR\x17topNgrRetailerOperators\x12\xa9\x01\n" +
-	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1a\xbe\x02\n" +
+	"-top_deposit_minus_withdraw_retailer_operators\x18\t \x03(\v2H.api.backoffice.service.v1.GetTopOperatorsDashboardResponse.OperatorDataR(topDepositMinusWithdrawRetailerOperators\x1a\x8f\x03\n" +
 	"\fOperatorData\x12\x12\n" +
 	"\x04rank\x18\x01 \x01(\x05R\x04rank\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x03 \x01(\tR\x13companyOperatorName\x124\n" +
-	"\x16retailer_operator_name\x18\x04 \x01(\tR\x14retailerOperatorName\x120\n" +
-	"\x14system_operator_name\x18\x05 \x01(\tR\x12systemOperatorName\x12\x1d\n" +
+	"\x16retailer_operator_name\x18\x04 \x01(\tR\x14retailerOperatorName\x12\x1d\n" +
 	"\n" +
 	"amount_usd\x18\x06 \x01(\tR\tamountUsd\x12:\n" +
-	"\x19amount_reporting_currency\x18\a \x01(\tR\x17amountReportingCurrency2\x97\x06\n" +
+	"\x19amount_reporting_currency\x18\a \x01(\tR\x17amountReportingCurrency\x12\x1f\n" +
+	"\voperator_id\x18\b \x01(\x04R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\t \x01(\x04R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\n" +
+	" \x01(\x04R\x12retailerOperatorId2\x97\x06\n" +
 	"\x13BackofficeDashboard\x12\xb0\x01\n" +
 	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/dashboard/get\x12\xc2\x01\n" +
 	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/dashboard/time-ranged/get\x12\xba\x01\n" +

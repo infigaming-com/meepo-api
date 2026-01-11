@@ -158,7 +158,10 @@ message GetTopUsersDashboardResponse {
 		string operator_name = 8;
 		string company_operator_name = 9;
 		string retailer_operator_name = 10;
-		string system_operator_name = 11;
+		// system_operator_name removed - field 11 deprecated
+		uint64 operator_id = 12;
+		uint64 company_operator_id = 13;
+		uint64 retailer_operator_id = 14;
 	}
 	repeated User top_deposit_users = 1;
 	repeated User top_withdrawal_users = 2;
@@ -181,9 +184,12 @@ message GetTopOperatorsDashboardResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string amount_usd = 6; // USD
 		string amount_reporting_currency = 7;
+		uint64 operator_id = 8;
+		uint64 company_operator_id = 9;
+		uint64 retailer_operator_id = 10;
 	}
 	repeated OperatorData top_ggr_operators = 1;
 	repeated OperatorData top_ngr_operators = 2; // Now only returns the same rank as ggr

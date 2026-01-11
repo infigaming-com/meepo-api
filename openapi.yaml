@@ -11824,11 +11824,16 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 amountUsd:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 amountReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.GetTopUsersDashboardRequest:
             type: object
@@ -11879,7 +11884,12 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
+                operatorId:
+                    type: string
+                    description: system_operator_name removed - field 11 deprecated
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.GetTransactionPageRequest:
             type: object
@@ -13150,10 +13160,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 depositAmount:
                     type: string
                 depositAmountUsd:
@@ -13212,6 +13221,12 @@ components:
                     type: string
                 amountProportion:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
         api.backoffice.service.v1.ListDepositVtgDetailsRequest:
             type: object
             properties:
@@ -13256,10 +13271,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 depositAmount:
                     type: string
                 depositAmountUsd:
@@ -13310,6 +13324,12 @@ components:
                 averageFtdAmountUsdForNonSameDayRegistredUsers:
                     type: string
                 averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListEventsRequest:
             type: object
@@ -13465,10 +13485,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 provider:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 gameType:
                     type: string
                 gameName:
@@ -13508,6 +13527,12 @@ components:
                 winAmountReportingCurrency:
                     type: string
                 ggrReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListGamesRequest:
             type: object
@@ -14165,10 +14190,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 provider:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 gameType:
                     type: string
                 gameId:
@@ -14203,6 +14227,12 @@ components:
                 winAmountReportingCurrency:
                     type: string
                 ggrReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListPostbackLogsRequest:
             type: object
@@ -14447,10 +14477,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 regUsers:
                     type: integer
+                    description: system_operator_name removed - field 5 deprecated
                     format: int32
                 paidUsers:
                     type: integer
@@ -14585,6 +14614,12 @@ components:
                 d120PaidAmtUsd:
                     type: string
                 d120PaidAmtReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListReportExportRequest:
             type: object
@@ -14834,10 +14869,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 country:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 visits:
                     type: integer
                     format: int32
@@ -14972,6 +15006,12 @@ components:
                 ggrReportingCurrency:
                     type: string
                 ngrReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListTagsRequest:
             type: object
@@ -15508,10 +15548,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 reportingCurrency:
                     type: string
                 withdrawAmount:
@@ -15578,6 +15617,12 @@ components:
                     type: string
                 amountProportion:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
         api.backoffice.service.v1.ListWithdrawVtgDetailsRequest:
             type: object
             properties:
@@ -15622,10 +15667,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 withdrawAmount:
                     type: string
                 withdrawAmountUsd:
@@ -15682,6 +15726,12 @@ components:
                 depositMinusWithdrawAmountUsd:
                     type: string
                 depositMinusWithdrawAmountReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.LoginRequest:
             type: object
