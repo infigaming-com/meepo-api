@@ -17001,8 +17001,6 @@ components:
                     type: string
                 bankAccount:
                     type: string
-                bankAccountName:
-                    type: string
                 bankIban:
                     type: string
                 beneficiaryName:

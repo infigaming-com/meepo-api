@@ -185,8 +185,6 @@ func (m *CreateDepositResponse) validate(all bool) error {
 
 	// no validation rules for BankAccount
 
-	// no validation rules for BankAccountName
-
 	// no validation rules for BankIban
 
 	// no validation rules for BeneficiaryName
