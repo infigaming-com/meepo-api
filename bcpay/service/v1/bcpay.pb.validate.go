@@ -189,6 +189,8 @@ func (m *CreateDepositResponse) validate(all bool) error {
 
 	// no validation rules for BankIban
 
+	// no validation rules for BeneficiaryName
+
 	if len(errors) > 0 {
 		return CreateDepositResponseMultiError(errors)
 	}

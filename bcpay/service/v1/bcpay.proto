@@ -66,8 +66,9 @@ message CreateDepositResponse {
 	string transactionID = 1;
 	string deposit_reference = 2;
 	string bank_account = 3;
-	string bank_account_name = 4;
+	string bank_account_name = 4; // Deprecated: use beneficiary_name instead
 	string bank_iban = 5;
+	string beneficiary_name = 6;
 }
 
 message CreateWithdrawRequest {

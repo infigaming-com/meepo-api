@@ -147,8 +147,9 @@ type CreateDepositResponse struct {
 	TransactionID    string `protobuf:"bytes,1,opt,name=transactionID,proto3" json:"transactionID,omitempty"`
 	DepositReference string `protobuf:"bytes,2,opt,name=deposit_reference,json=depositReference,proto3" json:"deposit_reference,omitempty"`
 	BankAccount      string `protobuf:"bytes,3,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccountName  string `protobuf:"bytes,4,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
+	BankAccountName  string `protobuf:"bytes,4,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"` // Deprecated: use beneficiary_name instead
 	BankIban         string `protobuf:"bytes,5,opt,name=bank_iban,json=bankIban,proto3" json:"bank_iban,omitempty"`
+	BeneficiaryName  string `protobuf:"bytes,6,opt,name=beneficiary_name,json=beneficiaryName,proto3" json:"beneficiary_name,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -214,6 +215,13 @@ func (x *CreateDepositResponse) GetBankAccountName() string {
 func (x *CreateDepositResponse) GetBankIban() string {
 	if x != nil {
 		return x.BankIban
+	}
+	return ""
+}
+
+func (x *CreateDepositResponse) GetBeneficiaryName() string {
+	if x != nil {
+		return x.BeneficiaryName
 	}
 	return ""
 }
@@ -2035,13 +2043,14 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x06amount\x18\a \x01(\tR\x06amount\x12!\n" +
 	"\fbank_account\x18\b \x01(\tR\vbankAccount\x12)\n" +
 	"\x10beneficiary_name\x18\t \x01(\tR\x0fbeneficiaryName\x12\x1b\n" +
-	"\tbank_iban\x18\v \x01(\tR\bbankIban\"\xd6\x01\n" +
+	"\tbank_iban\x18\v \x01(\tR\bbankIban\"\x81\x02\n" +
 	"\x15CreateDepositResponse\x12$\n" +
 	"\rtransactionID\x18\x01 \x01(\tR\rtransactionID\x12+\n" +
 	"\x11deposit_reference\x18\x02 \x01(\tR\x10depositReference\x12!\n" +
 	"\fbank_account\x18\x03 \x01(\tR\vbankAccount\x12*\n" +
 	"\x11bank_account_name\x18\x04 \x01(\tR\x0fbankAccountName\x12\x1b\n" +
-	"\tbank_iban\x18\x05 \x01(\tR\bbankIban\"\xf1\x02\n" +
+	"\tbank_iban\x18\x05 \x01(\tR\bbankIban\x12)\n" +
+	"\x10beneficiary_name\x18\x06 \x01(\tR\x0fbeneficiaryName\"\xf1\x02\n" +
 	"\x15CreateWithdrawRequest\x12*\n" +
 	"\x11operator_order_no\x18\x01 \x01(\tR\x0foperatorOrderNo\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
