@@ -17007,6 +17007,8 @@ components:
                     type: string
                 beneficiaryName:
                     type: string
+                bankName:
+                    type: string
         api.bcpay.service.v1.CreateMerchantResponse:
             type: object
             properties:

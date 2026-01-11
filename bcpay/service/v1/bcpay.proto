@@ -69,6 +69,7 @@ message CreateDepositResponse {
 	string bank_account_name = 4; // Deprecated: use beneficiary_name instead
 	string bank_iban = 5;
 	string beneficiary_name = 6;
+	string bank_name = 7;
 }
 
 message CreateWithdrawRequest {
