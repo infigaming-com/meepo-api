@@ -27,7 +27,6 @@ require (
 	github.com/go-playground/form/v4 v4.2.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
-	github.com/shopspring/decimal v1.4.0
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
