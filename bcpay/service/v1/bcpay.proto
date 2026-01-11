@@ -83,6 +83,7 @@ message CreateWithdrawRequest {
 	string user_name  = 8;
 	string bank_account = 9;
 	string beneficiary_name = 10;
+	string bank_name = 11;
 	string bank_iban = 12;
 }
 

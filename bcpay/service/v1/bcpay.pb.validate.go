@@ -313,6 +313,8 @@ func (m *CreateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for BeneficiaryName
 
+	// no validation rules for BankName
+
 	// no validation rules for BankIban
 
 	if len(errors) > 0 {

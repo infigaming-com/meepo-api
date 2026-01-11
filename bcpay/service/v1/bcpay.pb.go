@@ -238,6 +238,7 @@ type CreateWithdrawRequest struct {
 	UserName        string                 `protobuf:"bytes,8,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	BankAccount     string                 `protobuf:"bytes,9,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
 	BeneficiaryName string                 `protobuf:"bytes,10,opt,name=beneficiary_name,json=beneficiaryName,proto3" json:"beneficiary_name,omitempty"`
+	BankName        string                 `protobuf:"bytes,11,opt,name=bank_name,json=bankName,proto3" json:"bank_name,omitempty"`
 	BankIban        string                 `protobuf:"bytes,12,opt,name=bank_iban,json=bankIban,proto3" json:"bank_iban,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -339,6 +340,13 @@ func (x *CreateWithdrawRequest) GetBankAccount() string {
 func (x *CreateWithdrawRequest) GetBeneficiaryName() string {
 	if x != nil {
 		return x.BeneficiaryName
+	}
+	return ""
+}
+
+func (x *CreateWithdrawRequest) GetBankName() string {
+	if x != nil {
+		return x.BankName
 	}
 	return ""
 }
@@ -2050,7 +2058,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\fbank_account\x18\x03 \x01(\tR\vbankAccount\x12\x1b\n" +
 	"\tbank_iban\x18\x05 \x01(\tR\bbankIban\x12)\n" +
 	"\x10beneficiary_name\x18\x06 \x01(\tR\x0fbeneficiaryName\x12\x1b\n" +
-	"\tbank_name\x18\a \x01(\tR\bbankNameJ\x04\b\x04\x10\x05\"\xf1\x02\n" +
+	"\tbank_name\x18\a \x01(\tR\bbankNameJ\x04\b\x04\x10\x05\"\x8e\x03\n" +
 	"\x15CreateWithdrawRequest\x12*\n" +
 	"\x11operator_order_no\x18\x01 \x01(\tR\x0foperatorOrderNo\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -2064,6 +2072,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\fbank_account\x18\t \x01(\tR\vbankAccount\x12)\n" +
 	"\x10beneficiary_name\x18\n" +
 	" \x01(\tR\x0fbeneficiaryName\x12\x1b\n" +
+	"\tbank_name\x18\v \x01(\tR\bbankName\x12\x1b\n" +
 	"\tbank_iban\x18\f \x01(\tR\bbankIban\"?\n" +
 	"\x16CreateWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\"\\\n" +

@@ -17037,6 +17037,8 @@ components:
                     type: string
                 beneficiaryName:
                     type: string
+                bankName:
+                    type: string
                 bankIban:
                     type: string
         api.bcpay.service.v1.CreateWithdrawResponse:
