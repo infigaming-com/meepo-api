@@ -2618,6 +2618,8 @@ func (m *Transaction) validate(all bool) error {
 
 	// no validation rules for DepositBeneficiaryName
 
+	// no validation rules for DepositBankName
+
 	// no validation rules for UserBankAccount
 
 	// no validation rules for UserBeneficiaryName
@@ -2724,6 +2726,10 @@ func (m *Transaction) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for DepositReference
+
+	// no validation rules for UserBankName
 
 	if len(errors) > 0 {
 		return TransactionMultiError(errors)

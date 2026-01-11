@@ -228,6 +228,7 @@ message Transaction {
 	string user_name = 4;
 	string deposit_bank_account = 5;
 	string deposit_beneficiary_name = 6;
+	string deposit_bank_name = 7;
 	string user_bank_account = 8;
 	string user_beneficiary_name = 9;
 	string type = 11;
@@ -242,6 +243,8 @@ message Transaction {
  	string audit_note = 19;
 	google.protobuf.Timestamp create_time = 20;
 	google.protobuf.Timestamp update_time = 21;
+	string deposit_reference = 22;
+	string user_bank_name = 23;
 }
 
 message TransactionListResponse {

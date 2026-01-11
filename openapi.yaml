@@ -17124,6 +17124,8 @@ components:
                     type: string
                 depositBeneficiaryName:
                     type: string
+                depositBankName:
+                    type: string
                 userBankAccount:
                     type: string
                 userBeneficiaryName:
@@ -17154,6 +17156,10 @@ components:
                 updateTime:
                     type: string
                     format: date-time
+                depositReference:
+                    type: string
+                userBankName:
+                    type: string
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:

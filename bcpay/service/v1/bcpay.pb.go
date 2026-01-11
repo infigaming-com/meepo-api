@@ -1547,6 +1547,7 @@ type Transaction struct {
 	UserName               string                 `protobuf:"bytes,4,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	DepositBankAccount     string                 `protobuf:"bytes,5,opt,name=deposit_bank_account,json=depositBankAccount,proto3" json:"deposit_bank_account,omitempty"`
 	DepositBeneficiaryName string                 `protobuf:"bytes,6,opt,name=deposit_beneficiary_name,json=depositBeneficiaryName,proto3" json:"deposit_beneficiary_name,omitempty"`
+	DepositBankName        string                 `protobuf:"bytes,7,opt,name=deposit_bank_name,json=depositBankName,proto3" json:"deposit_bank_name,omitempty"`
 	UserBankAccount        string                 `protobuf:"bytes,8,opt,name=user_bank_account,json=userBankAccount,proto3" json:"user_bank_account,omitempty"`
 	UserBeneficiaryName    string                 `protobuf:"bytes,9,opt,name=user_beneficiary_name,json=userBeneficiaryName,proto3" json:"user_beneficiary_name,omitempty"`
 	Type                   string                 `protobuf:"bytes,11,opt,name=type,proto3" json:"type,omitempty"`
@@ -1556,13 +1557,15 @@ type Transaction struct {
 	Country                string                 `protobuf:"bytes,15,opt,name=country,proto3" json:"country,omitempty"`
 	Status                 string                 `protobuf:"bytes,16,opt,name=status,proto3" json:"status,omitempty"`
 	// audit a transaction "approve" or "decline"
-	Auditor       string                 `protobuf:"bytes,17,opt,name=auditor,proto3" json:"auditor,omitempty"`
-	AuditTime     *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=audit_time,json=auditTime,proto3" json:"audit_time,omitempty"`
-	AuditNote     string                 `protobuf:"bytes,19,opt,name=audit_note,json=auditNote,proto3" json:"audit_note,omitempty"`
-	CreateTime    *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime    *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Auditor          string                 `protobuf:"bytes,17,opt,name=auditor,proto3" json:"auditor,omitempty"`
+	AuditTime        *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=audit_time,json=auditTime,proto3" json:"audit_time,omitempty"`
+	AuditNote        string                 `protobuf:"bytes,19,opt,name=audit_note,json=auditNote,proto3" json:"audit_note,omitempty"`
+	CreateTime       *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime       *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	DepositReference string                 `protobuf:"bytes,22,opt,name=deposit_reference,json=depositReference,proto3" json:"deposit_reference,omitempty"`
+	UserBankName     string                 `protobuf:"bytes,23,opt,name=user_bank_name,json=userBankName,proto3" json:"user_bank_name,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Transaction) Reset() {
@@ -1633,6 +1636,13 @@ func (x *Transaction) GetDepositBankAccount() string {
 func (x *Transaction) GetDepositBeneficiaryName() string {
 	if x != nil {
 		return x.DepositBeneficiaryName
+	}
+	return ""
+}
+
+func (x *Transaction) GetDepositBankName() string {
+	if x != nil {
+		return x.DepositBankName
 	}
 	return ""
 }
@@ -1726,6 +1736,20 @@ func (x *Transaction) GetUpdateTime() *timestamppb.Timestamp {
 		return x.UpdateTime
 	}
 	return nil
+}
+
+func (x *Transaction) GetDepositReference() string {
+	if x != nil {
+		return x.DepositReference
+	}
+	return ""
+}
+
+func (x *Transaction) GetUserBankName() string {
+	if x != nil {
+		return x.UserBankName
+	}
+	return ""
 }
 
 type TransactionListResponse struct {
@@ -2196,7 +2220,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\b_user_idB\f\n" +
 	"\n" +
 	"_user_nameB\x18\n" +
-	"\x16_user_beneficiary_name\"\xc1\x05\n" +
+	"\x16_user_beneficiary_name\"\xc0\x06\n" +
 	"\vTransaction\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -2205,6 +2229,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\tuser_name\x18\x04 \x01(\tR\buserName\x120\n" +
 	"\x14deposit_bank_account\x18\x05 \x01(\tR\x12depositBankAccount\x128\n" +
 	"\x18deposit_beneficiary_name\x18\x06 \x01(\tR\x16depositBeneficiaryName\x12*\n" +
+	"\x11deposit_bank_name\x18\a \x01(\tR\x0fdepositBankName\x12*\n" +
 	"\x11user_bank_account\x18\b \x01(\tR\x0fuserBankAccount\x122\n" +
 	"\x15user_beneficiary_name\x18\t \x01(\tR\x13userBeneficiaryName\x12\x12\n" +
 	"\x04type\x18\v \x01(\tR\x04type\x12\x17\n" +
@@ -2221,7 +2246,9 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\vcreate_time\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"createTime\x12;\n" +
 	"\vupdate_time\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"updateTime\"\xc0\x02\n" +
+	"updateTime\x12+\n" +
+	"\x11deposit_reference\x18\x16 \x01(\tR\x10depositReference\x12$\n" +
+	"\x0euser_bank_name\x18\x17 \x01(\tR\fuserBankName\"\xc0\x02\n" +
 	"\x17TransactionListResponse\x12C\n" +
 	"\vtransaction\x18\x01 \x03(\v2!.api.bcpay.service.v1.TransactionR\vtransaction\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
