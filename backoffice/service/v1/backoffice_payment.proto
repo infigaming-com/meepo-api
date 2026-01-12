@@ -260,7 +260,7 @@ message GetOperatorPaymentChannelPageRequest {
   // Optional sort direction
   payment.service.v1.Sort sort = 11;
   // Status ture or false
-  optional bool enabled = 12;
+  optional bool enable = 12;
   // ID of the Operator connect with this channel
   api.common.OperatorContext target_operator_context = 13;
 }

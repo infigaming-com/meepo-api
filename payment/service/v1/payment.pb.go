@@ -3913,7 +3913,7 @@ type GetOperatorPaymentChannelPageRequest struct {
 	// Optional sort direction
 	Sort Sort `protobuf:"varint,11,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	// Status ture or false
-	Enabled *bool `protobuf:"varint,12,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Enable *bool `protobuf:"varint,12,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
 	// ID of the Operator connect with this channel
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,13,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	// ID of the Operator connect with this channel
@@ -4031,9 +4031,9 @@ func (x *GetOperatorPaymentChannelPageRequest) GetSort() Sort {
 	return Sort_DESC
 }
 
-func (x *GetOperatorPaymentChannelPageRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
+func (x *GetOperatorPaymentChannelPageRequest) GetEnable() bool {
+	if x != nil && x.Enable != nil {
+		return *x.Enable
 	}
 	return false
 }
@@ -6832,7 +6832,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" \x01(\tR\acountry\x12\x16\n" +
 	"\x06source\x18\v \x01(\tR\x06source\x12\x18\n" +
 	"\aenabled\x18\f \x01(\bR\aenabled\x12,\n" +
-	"\x04sort\x18\r \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xa7\x05\n" +
+	"\x04sort\x18\r \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xa4\x05\n" +
 	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
@@ -6845,13 +6845,12 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\acountry\x18\t \x01(\tR\acountry\x12\x16\n" +
 	"\x06source\x18\n" +
 	" \x01(\tR\x06source\x12,\n" +
-	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
-	"\aenabled\x18\f \x01(\bH\x00R\aenabled\x88\x01\x01\x12\\\n" +
+	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1b\n" +
+	"\x06enable\x18\f \x01(\bH\x00R\x06enable\x88\x01\x01\x12\\\n" +
 	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x0f \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\n" +
-	"\n" +
-	"\b_enabled\"\xc3\x02\n" +
+	"\x17target_operator_context\x18\x0f \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\t\n" +
+	"\a_enable\"\xc3\x02\n" +
 	"\x1dGetPaymentChannelPageResponse\x12Q\n" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

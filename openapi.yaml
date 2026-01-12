@@ -11321,7 +11321,7 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
-                enabled:
+                enable:
                     type: boolean
                     description: Status ture or false
                 targetOperatorContext:
