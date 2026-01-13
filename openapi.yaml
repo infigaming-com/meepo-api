@@ -6491,6 +6491,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse'
+    /v1/report/dashboard/affiliate/get:
+        post:
+            tags:
+                - DashboardService
+            description: Affiliate dashboard with aggregated metrics, balance, and product stats
+            operationId: DashboardService_GetAffiliateDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetAffiliateDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.report.service.v1.GetAffiliateDashboardResponse'
+    /v1/report/dashboard/affiliate/trend/get:
+        post:
+            tags:
+                - DashboardService
+            description: Affiliate trend data (time series)
+            operationId: DashboardService_GetAffiliateTrend
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetAffiliateTrendRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.report.service.v1.GetAffiliateTrendResponse'
     /v1/report/dashboard/overview/get:
         post:
             tags:
@@ -18969,6 +19007,148 @@ components:
         api.push.service.v1.UpdateBetTickerConfigResponse:
             type: object
             properties: {}
+        api.report.service.v1.GetAffiliateDashboardRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                productStatsLimit:
+                    type: integer
+                    format: int32
+                initiatorOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetAffiliateDashboardResponse:
+            type: object
+            properties:
+                registrations:
+                    type: string
+                    description: User Conversion metrics
+                ftdUsers:
+                    type: string
+                repeatDepositors:
+                    type: string
+                activeUsers:
+                    type: string
+                depositsUsd:
+                    type: string
+                    description: Financial metrics
+                withdrawalsUsd:
+                    type: string
+                pendingWithdrawalsUsd:
+                    type: string
+                ggrUsd:
+                    type: string
+                    description: Gaming metrics
+                ngrUsd:
+                    type: string
+                betCount:
+                    type: string
+                betAmountUsd:
+                    type: string
+                averageBetUsd:
+                    type: string
+                    description: Calculated metrics
+                regToFtdRate:
+                    type: string
+                ftdToActiveRate:
+                    type: string
+                balances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.report.service.v1.GetAffiliateDashboardResponse_CurrencyBalance'
+                    description: Balance by currency
+                totalAccountsWithBalance:
+                    type: string
+                products:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.report.service.v1.GetAffiliateDashboardResponse_ProductStats'
+                    description: Product stats
+        api.report.service.v1.GetAffiliateDashboardResponse_CurrencyBalance:
+            type: object
+            properties:
+                currency:
+                    type: string
+                accountsCount:
+                    type: string
+                totalBalance:
+                    type: string
+            description: Nested types
+        api.report.service.v1.GetAffiliateDashboardResponse_ProductStats:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                providerName:
+                    type: string
+                category:
+                    type: string
+                activeUsers:
+                    type: string
+                ggrUsd:
+                    type: string
+                ngrUsd:
+                    type: string
+                betCount:
+                    type: string
+                betAmountUsd:
+                    type: string
+        api.report.service.v1.GetAffiliateTrendRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                groupBy:
+                    type: string
+                initiatorOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetAffiliateTrendResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.report.service.v1.GetAffiliateTrendResponse_TrendData'
+        api.report.service.v1.GetAffiliateTrendResponse_TrendData:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                registrations:
+                    type: string
+                ftdUsers:
+                    type: string
+                repeatDepositors:
+                    type: string
+                activeUsers:
+                    type: string
+                depositsUsd:
+                    type: string
+                withdrawalsUsd:
+                    type: string
+                ggrUsd:
+                    type: string
+                ngrUsd:
+                    type: string
+                betCount:
+                    type: string
+                betAmountUsd:
+                    type: string
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:

@@ -8,10 +8,13 @@ package v1
 
 import (
 	v1 "github.com/infigaming-com/meepo-api/backoffice/service/v1"
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,42 +25,810 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetAffiliateDashboardRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	AffiliateId              int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	ProductStatsLimit        *int32                  `protobuf:"varint,4,opt,name=product_stats_limit,json=productStatsLimit,proto3,oneof" json:"product_stats_limit,omitempty"` // limit for product stats, default 50
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GetAffiliateDashboardRequest) Reset() {
+	*x = GetAffiliateDashboardRequest{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateDashboardRequest) ProtoMessage() {}
+
+func (x *GetAffiliateDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetAffiliateDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetAffiliateDashboardRequest) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *GetAffiliateDashboardRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *GetAffiliateDashboardRequest) GetProductStatsLimit() int32 {
+	if x != nil && x.ProductStatsLimit != nil {
+		return *x.ProductStatsLimit
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+type GetAffiliateDashboardResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// User Conversion metrics
+	Registrations    int64 `protobuf:"varint,1,opt,name=registrations,proto3" json:"registrations,omitempty"`
+	FtdUsers         int64 `protobuf:"varint,2,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatDepositors int64 `protobuf:"varint,3,opt,name=repeat_depositors,json=repeatDepositors,proto3" json:"repeat_depositors,omitempty"`
+	ActiveUsers      int64 `protobuf:"varint,4,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	// Financial metrics
+	DepositsUsd           string `protobuf:"bytes,5,opt,name=deposits_usd,json=depositsUsd,proto3" json:"deposits_usd,omitempty"`
+	WithdrawalsUsd        string `protobuf:"bytes,6,opt,name=withdrawals_usd,json=withdrawalsUsd,proto3" json:"withdrawals_usd,omitempty"`
+	PendingWithdrawalsUsd string `protobuf:"bytes,7,opt,name=pending_withdrawals_usd,json=pendingWithdrawalsUsd,proto3" json:"pending_withdrawals_usd,omitempty"`
+	// Gaming metrics
+	GgrUsd       string `protobuf:"bytes,8,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd       string `protobuf:"bytes,9,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	BetCount     int64  `protobuf:"varint,10,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd string `protobuf:"bytes,11,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	// Calculated metrics
+	AverageBetUsd   string `protobuf:"bytes,12,opt,name=average_bet_usd,json=averageBetUsd,proto3" json:"average_bet_usd,omitempty"`
+	RegToFtdRate    string `protobuf:"bytes,13,opt,name=reg_to_ftd_rate,json=regToFtdRate,proto3" json:"reg_to_ftd_rate,omitempty"`
+	FtdToActiveRate string `protobuf:"bytes,14,opt,name=ftd_to_active_rate,json=ftdToActiveRate,proto3" json:"ftd_to_active_rate,omitempty"`
+	// Balance by currency
+	Balances                 []*GetAffiliateDashboardResponse_CurrencyBalance `protobuf:"bytes,15,rep,name=balances,proto3" json:"balances,omitempty"`
+	TotalAccountsWithBalance int64                                            `protobuf:"varint,16,opt,name=total_accounts_with_balance,json=totalAccountsWithBalance,proto3" json:"total_accounts_with_balance,omitempty"`
+	// Product stats
+	Products      []*GetAffiliateDashboardResponse_ProductStats `protobuf:"bytes,17,rep,name=products,proto3" json:"products,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliateDashboardResponse) Reset() {
+	*x = GetAffiliateDashboardResponse{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateDashboardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateDashboardResponse) ProtoMessage() {}
+
+func (x *GetAffiliateDashboardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateDashboardResponse.ProtoReflect.Descriptor instead.
+func (*GetAffiliateDashboardResponse) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetAffiliateDashboardResponse) GetRegistrations() int64 {
+	if x != nil {
+		return x.Registrations
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse) GetFtdUsers() int64 {
+	if x != nil {
+		return x.FtdUsers
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse) GetRepeatDepositors() int64 {
+	if x != nil {
+		return x.RepeatDepositors
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse) GetActiveUsers() int64 {
+	if x != nil {
+		return x.ActiveUsers
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse) GetDepositsUsd() string {
+	if x != nil {
+		return x.DepositsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetWithdrawalsUsd() string {
+	if x != nil {
+		return x.WithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetPendingWithdrawalsUsd() string {
+	if x != nil {
+		return x.PendingWithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetBetCount() int64 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse) GetBetAmountUsd() string {
+	if x != nil {
+		return x.BetAmountUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetAverageBetUsd() string {
+	if x != nil {
+		return x.AverageBetUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetRegToFtdRate() string {
+	if x != nil {
+		return x.RegToFtdRate
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetFtdToActiveRate() string {
+	if x != nil {
+		return x.FtdToActiveRate
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetBalances() []*GetAffiliateDashboardResponse_CurrencyBalance {
+	if x != nil {
+		return x.Balances
+	}
+	return nil
+}
+
+func (x *GetAffiliateDashboardResponse) GetTotalAccountsWithBalance() int64 {
+	if x != nil {
+		return x.TotalAccountsWithBalance
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse) GetProducts() []*GetAffiliateDashboardResponse_ProductStats {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
+type GetAffiliateTrendRequest struct {
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	AffiliateId              int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	GroupBy                  string                  `protobuf:"bytes,4,opt,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"` // "day", "week", "month"
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GetAffiliateTrendRequest) Reset() {
+	*x = GetAffiliateTrendRequest{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateTrendRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateTrendRequest) ProtoMessage() {}
+
+func (x *GetAffiliateTrendRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateTrendRequest.ProtoReflect.Descriptor instead.
+func (*GetAffiliateTrendRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetAffiliateTrendRequest) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *GetAffiliateTrendRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *GetAffiliateTrendRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *GetAffiliateTrendRequest) GetGroupBy() string {
+	if x != nil {
+		return x.GroupBy
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+type GetAffiliateTrendResponse struct {
+	state         protoimpl.MessageState                 `protogen:"open.v1"`
+	Data          []*GetAffiliateTrendResponse_TrendData `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliateTrendResponse) Reset() {
+	*x = GetAffiliateTrendResponse{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateTrendResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateTrendResponse) ProtoMessage() {}
+
+func (x *GetAffiliateTrendResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateTrendResponse.ProtoReflect.Descriptor instead.
+func (*GetAffiliateTrendResponse) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetAffiliateTrendResponse) GetData() []*GetAffiliateTrendResponse_TrendData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+// Nested types
+type GetAffiliateDashboardResponse_CurrencyBalance struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	AccountsCount int64                  `protobuf:"varint,2,opt,name=accounts_count,json=accountsCount,proto3" json:"accounts_count,omitempty"`
+	TotalBalance  string                 `protobuf:"bytes,3,opt,name=total_balance,json=totalBalance,proto3" json:"total_balance,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliateDashboardResponse_CurrencyBalance) Reset() {
+	*x = GetAffiliateDashboardResponse_CurrencyBalance{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateDashboardResponse_CurrencyBalance) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateDashboardResponse_CurrencyBalance) ProtoMessage() {}
+
+func (x *GetAffiliateDashboardResponse_CurrencyBalance) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateDashboardResponse_CurrencyBalance.ProtoReflect.Descriptor instead.
+func (*GetAffiliateDashboardResponse_CurrencyBalance) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *GetAffiliateDashboardResponse_CurrencyBalance) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_CurrencyBalance) GetAccountsCount() int64 {
+	if x != nil {
+		return x.AccountsCount
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse_CurrencyBalance) GetTotalBalance() string {
+	if x != nil {
+		return x.TotalBalance
+	}
+	return ""
+}
+
+type GetAffiliateDashboardResponse_ProductStats struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GameId        string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	GameName      string                 `protobuf:"bytes,2,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
+	ProviderName  string                 `protobuf:"bytes,3,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
+	ActiveUsers   int64                  `protobuf:"varint,5,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	GgrUsd        string                 `protobuf:"bytes,6,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd        string                 `protobuf:"bytes,7,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	BetCount      int64                  `protobuf:"varint,8,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd  string                 `protobuf:"bytes,9,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) Reset() {
+	*x = GetAffiliateDashboardResponse_ProductStats{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateDashboardResponse_ProductStats) ProtoMessage() {}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateDashboardResponse_ProductStats.ProtoReflect.Descriptor instead.
+func (*GetAffiliateDashboardResponse_ProductStats) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1, 1}
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetGameName() string {
+	if x != nil {
+		return x.GameName
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetProviderName() string {
+	if x != nil {
+		return x.ProviderName
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetActiveUsers() int64 {
+	if x != nil {
+		return x.ActiveUsers
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetBetCount() int64 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetBetAmountUsd() string {
+	if x != nil {
+		return x.BetAmountUsd
+	}
+	return ""
+}
+
+type GetAffiliateTrendResponse_TrendData struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Date             *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Registrations    int64                  `protobuf:"varint,2,opt,name=registrations,proto3" json:"registrations,omitempty"`
+	FtdUsers         int64                  `protobuf:"varint,3,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatDepositors int64                  `protobuf:"varint,4,opt,name=repeat_depositors,json=repeatDepositors,proto3" json:"repeat_depositors,omitempty"`
+	ActiveUsers      int64                  `protobuf:"varint,5,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	DepositsUsd      string                 `protobuf:"bytes,6,opt,name=deposits_usd,json=depositsUsd,proto3" json:"deposits_usd,omitempty"`
+	WithdrawalsUsd   string                 `protobuf:"bytes,7,opt,name=withdrawals_usd,json=withdrawalsUsd,proto3" json:"withdrawals_usd,omitempty"`
+	GgrUsd           string                 `protobuf:"bytes,8,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd           string                 `protobuf:"bytes,9,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	BetCount         int64                  `protobuf:"varint,10,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd     string                 `protobuf:"bytes,11,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) Reset() {
+	*x = GetAffiliateTrendResponse_TrendData{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateTrendResponse_TrendData) ProtoMessage() {}
+
+func (x *GetAffiliateTrendResponse_TrendData) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateTrendResponse_TrendData.ProtoReflect.Descriptor instead.
+func (*GetAffiliateTrendResponse_TrendData) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Date
+	}
+	return nil
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetRegistrations() int64 {
+	if x != nil {
+		return x.Registrations
+	}
+	return 0
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetFtdUsers() int64 {
+	if x != nil {
+		return x.FtdUsers
+	}
+	return 0
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetRepeatDepositors() int64 {
+	if x != nil {
+		return x.RepeatDepositors
+	}
+	return 0
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetActiveUsers() int64 {
+	if x != nil {
+		return x.ActiveUsers
+	}
+	return 0
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetDepositsUsd() string {
+	if x != nil {
+		return x.DepositsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetWithdrawalsUsd() string {
+	if x != nil {
+		return x.WithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetBetCount() int64 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetBetAmountUsd() string {
+	if x != nil {
+		return x.BetAmountUsd
+	}
+	return ""
+}
+
 var File_report_service_v1_dashboard_proto protoreflect.FileDescriptor
 
 const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"!report/service/v1/dashboard.proto\x12\x15api.report.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a0backoffice/service/v1/backoffice_dashboard.proto2\x8d\x06\n" +
+	"!report/service/v1/dashboard.proto\x12\x15api.report.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a0backoffice/service/v1/backoffice_dashboard.proto\x1a\x13common/common.proto\"\xdb\x02\n" +
+	"\x1cGetAffiliateDashboardRequest\x12!\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
+	"\n" +
+	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x123\n" +
+	"\x13product_stats_limit\x18\x04 \x01(\x05H\x00R\x11productStatsLimit\x88\x01\x01\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x16\n" +
+	"\x14_product_stats_limit\"\xc2\t\n" +
+	"\x1dGetAffiliateDashboardResponse\x12$\n" +
+	"\rregistrations\x18\x01 \x01(\x03R\rregistrations\x12\x1b\n" +
+	"\tftd_users\x18\x02 \x01(\x03R\bftdUsers\x12+\n" +
+	"\x11repeat_depositors\x18\x03 \x01(\x03R\x10repeatDepositors\x12!\n" +
+	"\factive_users\x18\x04 \x01(\x03R\vactiveUsers\x12!\n" +
+	"\fdeposits_usd\x18\x05 \x01(\tR\vdepositsUsd\x12'\n" +
+	"\x0fwithdrawals_usd\x18\x06 \x01(\tR\x0ewithdrawalsUsd\x126\n" +
+	"\x17pending_withdrawals_usd\x18\a \x01(\tR\x15pendingWithdrawalsUsd\x12\x17\n" +
+	"\aggr_usd\x18\b \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\t \x01(\tR\x06ngrUsd\x12\x1b\n" +
+	"\tbet_count\x18\n" +
+	" \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd\x12&\n" +
+	"\x0faverage_bet_usd\x18\f \x01(\tR\raverageBetUsd\x12%\n" +
+	"\x0freg_to_ftd_rate\x18\r \x01(\tR\fregToFtdRate\x12+\n" +
+	"\x12ftd_to_active_rate\x18\x0e \x01(\tR\x0fftdToActiveRate\x12`\n" +
+	"\bbalances\x18\x0f \x03(\v2D.api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalanceR\bbalances\x12=\n" +
+	"\x1btotal_accounts_with_balance\x18\x10 \x01(\x03R\x18totalAccountsWithBalance\x12]\n" +
+	"\bproducts\x18\x11 \x03(\v2A.api.report.service.v1.GetAffiliateDashboardResponse.ProductStatsR\bproducts\x1ay\n" +
+	"\x0fCurrencyBalance\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12%\n" +
+	"\x0eaccounts_count\x18\x02 \x01(\x03R\raccountsCount\x12#\n" +
+	"\rtotal_balance\x18\x03 \x01(\tR\ftotalBalance\x1a\x9d\x02\n" +
+	"\fProductStats\x12\x17\n" +
+	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1b\n" +
+	"\tgame_name\x18\x02 \x01(\tR\bgameName\x12#\n" +
+	"\rprovider_name\x18\x03 \x01(\tR\fproviderName\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12!\n" +
+	"\factive_users\x18\x05 \x01(\x03R\vactiveUsers\x12\x17\n" +
+	"\aggr_usd\x18\x06 \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\a \x01(\tR\x06ngrUsd\x12\x1b\n" +
+	"\tbet_count\x18\b \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\t \x01(\tR\fbetAmountUsd\"\xa5\x02\n" +
+	"\x18GetAffiliateTrendRequest\x12!\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
+	"\n" +
+	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x19\n" +
+	"\bgroup_by\x18\x04 \x01(\tR\agroupBy\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\xfd\x03\n" +
+	"\x19GetAffiliateTrendResponse\x12N\n" +
+	"\x04data\x18\x01 \x03(\v2:.api.report.service.v1.GetAffiliateTrendResponse.TrendDataR\x04data\x1a\x8f\x03\n" +
+	"\tTrendData\x12.\n" +
+	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12$\n" +
+	"\rregistrations\x18\x02 \x01(\x03R\rregistrations\x12\x1b\n" +
+	"\tftd_users\x18\x03 \x01(\x03R\bftdUsers\x12+\n" +
+	"\x11repeat_depositors\x18\x04 \x01(\x03R\x10repeatDepositors\x12!\n" +
+	"\factive_users\x18\x05 \x01(\x03R\vactiveUsers\x12!\n" +
+	"\fdeposits_usd\x18\x06 \x01(\tR\vdepositsUsd\x12'\n" +
+	"\x0fwithdrawals_usd\x18\a \x01(\tR\x0ewithdrawalsUsd\x12\x17\n" +
+	"\aggr_usd\x18\b \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\t \x01(\tR\x06ngrUsd\x12\x1b\n" +
+	"\tbet_count\x18\n" +
+	" \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd2\xef\b\n" +
 	"\x10DashboardService\x12\xb5\x01\n" +
 	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/report/dashboard/overview/get\x12\xbe\x01\n" +
 	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/dashboard/time-ranged/get\x12\xb6\x01\n" +
 	"\x14GetTopUsersDashboard\x126.api.backoffice.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/top-users/get\x12\xc6\x01\n" +
-	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/report/dashboard/top-operators/getBS\n" +
+	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/report/dashboard/top-operators/get\x12\xb1\x01\n" +
+	"\x15GetAffiliateDashboard\x123.api.report.service.v1.GetAffiliateDashboardRequest\x1a4.api.report.service.v1.GetAffiliateDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/affiliate/get\x12\xab\x01\n" +
+	"\x11GetAffiliateTrend\x12/.api.report.service.v1.GetAffiliateTrendRequest\x1a0.api.report.service.v1.GetAffiliateTrendResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/report/dashboard/affiliate/trend/getBS\n" +
 	"\x15api.report.service.v1P\x01Z8github.com/infigaming-com/meepo-api/report/service/v1;v1b\x06proto3"
 
+var (
+	file_report_service_v1_dashboard_proto_rawDescOnce sync.Once
+	file_report_service_v1_dashboard_proto_rawDescData []byte
+)
+
+func file_report_service_v1_dashboard_proto_rawDescGZIP() []byte {
+	file_report_service_v1_dashboard_proto_rawDescOnce.Do(func() {
+		file_report_service_v1_dashboard_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_report_service_v1_dashboard_proto_rawDesc), len(file_report_service_v1_dashboard_proto_rawDesc)))
+	})
+	return file_report_service_v1_dashboard_proto_rawDescData
+}
+
+var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_report_service_v1_dashboard_proto_goTypes = []any{
-	(*v1.GetOverviewDashboardRequest)(nil),      // 0: api.backoffice.service.v1.GetOverviewDashboardRequest
-	(*v1.GetTimeRangedDashboardRequest)(nil),    // 1: api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	(*v1.GetTopUsersDashboardRequest)(nil),      // 2: api.backoffice.service.v1.GetTopUsersDashboardRequest
-	(*v1.GetTopOperatorsDashboardRequest)(nil),  // 3: api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	(*v1.GetOverviewDashboardResponse)(nil),     // 4: api.backoffice.service.v1.GetOverviewDashboardResponse
-	(*v1.GetTimeRangedDashboardResponse)(nil),   // 5: api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	(*v1.GetTopUsersDashboardResponse)(nil),     // 6: api.backoffice.service.v1.GetTopUsersDashboardResponse
-	(*v1.GetTopOperatorsDashboardResponse)(nil), // 7: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	(*GetAffiliateDashboardRequest)(nil),                  // 0: api.report.service.v1.GetAffiliateDashboardRequest
+	(*GetAffiliateDashboardResponse)(nil),                 // 1: api.report.service.v1.GetAffiliateDashboardResponse
+	(*GetAffiliateTrendRequest)(nil),                      // 2: api.report.service.v1.GetAffiliateTrendRequest
+	(*GetAffiliateTrendResponse)(nil),                     // 3: api.report.service.v1.GetAffiliateTrendResponse
+	(*GetAffiliateDashboardResponse_CurrencyBalance)(nil), // 4: api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
+	(*GetAffiliateDashboardResponse_ProductStats)(nil),    // 5: api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
+	(*GetAffiliateTrendResponse_TrendData)(nil),           // 6: api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	(*timestamppb.Timestamp)(nil),                         // 7: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),                        // 8: api.common.OperatorContext
+	(*v1.GetOverviewDashboardRequest)(nil),                // 9: api.backoffice.service.v1.GetOverviewDashboardRequest
+	(*v1.GetTimeRangedDashboardRequest)(nil),              // 10: api.backoffice.service.v1.GetTimeRangedDashboardRequest
+	(*v1.GetTopUsersDashboardRequest)(nil),                // 11: api.backoffice.service.v1.GetTopUsersDashboardRequest
+	(*v1.GetTopOperatorsDashboardRequest)(nil),            // 12: api.backoffice.service.v1.GetTopOperatorsDashboardRequest
+	(*v1.GetOverviewDashboardResponse)(nil),               // 13: api.backoffice.service.v1.GetOverviewDashboardResponse
+	(*v1.GetTimeRangedDashboardResponse)(nil),             // 14: api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	(*v1.GetTopUsersDashboardResponse)(nil),               // 15: api.backoffice.service.v1.GetTopUsersDashboardResponse
+	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 16: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
 }
 var file_report_service_v1_dashboard_proto_depIdxs = []int32{
-	0, // 0: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
-	1, // 1: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	2, // 2: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.backoffice.service.v1.GetTopUsersDashboardRequest
-	3, // 3: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	4, // 4: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	5, // 5: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	6, // 6: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
-	7, // 7: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	7,  // 0: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
+	7,  // 1: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
+	8,  // 2: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	4,  // 3: api.report.service.v1.GetAffiliateDashboardResponse.balances:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
+	5,  // 4: api.report.service.v1.GetAffiliateDashboardResponse.products:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
+	7,  // 5: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
+	7,  // 6: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
+	8,  // 7: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	6,  // 8: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	7,  // 9: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
+	9,  // 10: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
+	10, // 11: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
+	11, // 12: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.backoffice.service.v1.GetTopUsersDashboardRequest
+	12, // 13: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
+	0,  // 14: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
+	2,  // 15: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
+	13, // 16: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	14, // 17: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	15, // 18: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
+	16, // 19: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	1,  // 20: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
+	3,  // 21: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
+	16, // [16:22] is the sub-list for method output_type
+	10, // [10:16] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_dashboard_proto_init() }
@@ -65,18 +836,20 @@ func file_report_service_v1_dashboard_proto_init() {
 	if File_report_service_v1_dashboard_proto != nil {
 		return
 	}
+	file_report_service_v1_dashboard_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_service_v1_dashboard_proto_rawDesc), len(file_report_service_v1_dashboard_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_report_service_v1_dashboard_proto_goTypes,
 		DependencyIndexes: file_report_service_v1_dashboard_proto_depIdxs,
+		MessageInfos:      file_report_service_v1_dashboard_proto_msgTypes,
 	}.Build()
 	File_report_service_v1_dashboard_proto = out.File
 	file_report_service_v1_dashboard_proto_goTypes = nil
