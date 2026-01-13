@@ -395,6 +395,7 @@ message ListPlayerGameDataResponse {
 message GetDepositSummariesRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;
 	repeated string currencies = 5;
 }
 
@@ -465,6 +466,7 @@ message ListDepositDetailsResponse {
 message GetWithdrawSummariesRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;
 	repeated string currencies = 5;
 }
 

@@ -11007,6 +11007,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
@@ -12325,6 +12327,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
