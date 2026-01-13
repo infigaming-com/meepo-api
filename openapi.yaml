@@ -6501,7 +6501,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetOverviewDashboardRequest'
                 required: true
             responses:
                 "200":
@@ -6520,7 +6520,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetTimeRangedDashboardRequest'
                 required: true
             responses:
                 "200":
@@ -6539,7 +6539,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetTopOperatorsDashboardRequest'
                 required: true
             responses:
                 "200":
@@ -6558,7 +6558,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetTopUsersDashboardRequest'
                 required: true
             responses:
                 "200":
@@ -6576,7 +6576,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListDepositDetailsRequest'
                 required: true
             responses:
                 "200":
@@ -6595,7 +6595,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetDepositSummariesRequest'
                 required: true
             responses:
                 "200":
@@ -6613,7 +6613,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListDepositVtgDetailsRequest'
                 required: true
             responses:
                 "200":
@@ -6632,7 +6632,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetGameSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -6650,7 +6650,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -6669,7 +6669,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetPlayerGameSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -6687,7 +6687,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListPlayerGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -6706,7 +6706,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListRegisterRetentionRequest'
                 required: true
             responses:
                 "200":
@@ -6744,7 +6744,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetSummaryRequest'
                 required: true
             responses:
                 "200":
@@ -6762,7 +6762,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListSummariesRequest'
                 required: true
             responses:
                 "200":
@@ -6780,7 +6780,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListWithdrawDetailsRequest'
                 required: true
             responses:
                 "200":
@@ -6799,7 +6799,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.GetWithdrawSummariesRequest'
                 required: true
             responses:
                 "200":
@@ -6817,7 +6817,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsRequest'
+                            $ref: '#/components/schemas/api.report.service.v1.ListWithdrawVtgDetailsRequest'
                 required: true
             responses:
                 "200":
@@ -11007,12 +11007,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
         api.backoffice.service.v1.GetDepositSummariesResponse:
             type: object
             properties:
@@ -11080,8 +11079,6 @@ components:
                     type: array
                     items:
                         type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetGameSummaryResponse:
             type: object
             properties:
@@ -11395,8 +11392,6 @@ components:
             properties:
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
             description: System related messages
         api.backoffice.service.v1.GetOverviewDashboardResponse:
             type: object
@@ -11546,8 +11541,6 @@ components:
                     type: array
                     items:
                         type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetPlayerGameSummaryResponse:
             type: object
             properties:
@@ -11631,12 +11624,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 affiliateCodes:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 referralCodes:
                     type: array
                     items:
@@ -11734,8 +11726,6 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse:
             type: object
             properties:
@@ -11785,8 +11775,6 @@ components:
                     format: enum
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse:
             type: object
             properties:
@@ -11862,8 +11850,6 @@ components:
                     format: enum
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetTopUsersDashboardResponse:
             type: object
             properties:
@@ -12327,12 +12313,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
         api.backoffice.service.v1.GetWithdrawSummariesResponse:
             type: object
             properties:
@@ -13141,12 +13126,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 page:
                     type: integer
                     format: int32
@@ -13264,8 +13248,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListDepositVtgDetailsResponse:
             type: object
             properties:
@@ -13480,8 +13462,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListGameDataResponse:
             type: object
             properties:
@@ -14187,8 +14167,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListPlayerGameDataResponse:
             type: object
             properties:
@@ -14476,8 +14454,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListRegisterRetentionResponse:
             type: object
             properties:
@@ -14852,12 +14828,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 affiliateCodes:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 referralCodes:
                     type: array
                     items:
@@ -15541,12 +15516,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 page:
                     type: integer
                     format: int32
@@ -15672,8 +15646,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListWithdrawVtgDetailsResponse:
             type: object
             properties:
@@ -19003,6 +18975,370 @@ components:
         api.push.service.v1.UpdateBetTickerConfigResponse:
             type: object
             properties: {}
+        api.report.service.v1.GetDepositSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.report.service.v1.GetGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetOverviewDashboardRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetPlayerGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                affiliateCodes:
+                    type: array
+                    items:
+                        type: string
+                referralCodes:
+                    type: array
+                    items:
+                        type: string
+                registrationCountries:
+                    type: array
+                    items:
+                        type: string
+        api.report.service.v1.GetTimeRangedDashboardRequest:
+            type: object
+            properties:
+                timeRangeType:
+                    enum:
+                        - TIME_RANGE_TYPE_UNSPECIFIED
+                        - TIME_RANGE_TYPE_THIS_MONTH
+                        - TIME_RANGE_TYPE_THIS_WEEK
+                        - TIME_RANGE_TYPE_CUSTOM_DAYS
+                    type: string
+                    format: enum
+                customDays:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetTopOperatorsDashboardRequest:
+            type: object
+            properties:
+                timeRangeType:
+                    enum:
+                        - TIME_RANGE_TYPE_UNSPECIFIED
+                        - TIME_RANGE_TYPE_TODAY
+                        - TIME_RANGE_TYPE_THIS_WEEK
+                        - TIME_RANGE_TYPE_THIS_MONTH
+                    type: string
+                    format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetTopUsersDashboardRequest:
+            type: object
+            properties:
+                timeRangeType:
+                    enum:
+                        - TIME_RANGE_TYPE_UNSPECIFIED
+                        - TIME_RANGE_TYPE_TODAY
+                        - TIME_RANGE_TYPE_THIS_WEEK
+                        - TIME_RANGE_TYPE_THIS_MONTH
+                    type: string
+                    format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetWithdrawSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.report.service.v1.ListDepositDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.report.service.v1.ListDepositVtgDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListPlayerGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListRegisterRetentionRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                affiliateCodes:
+                    type: array
+                    items:
+                        type: string
+                referralCodes:
+                    type: array
+                    items:
+                        type: string
+                registrationCountries:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.report.service.v1.ListWithdrawDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.report.service.v1.ListWithdrawVtgDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:

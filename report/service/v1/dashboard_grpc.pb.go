@@ -34,13 +34,13 @@ const (
 // This service is the ONLY service allowed to query ClickHouse directly for dashboard data.
 type DashboardServiceClient interface {
 	// Overview dashboard with today/yesterday comparison
-	GetOverviewDashboard(ctx context.Context, in *v1.GetOverviewDashboardRequest, opts ...grpc.CallOption) (*v1.GetOverviewDashboardResponse, error)
+	GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...grpc.CallOption) (*v1.GetOverviewDashboardResponse, error)
 	// Time-ranged dashboard (this month/week/custom days)
-	GetTimeRangedDashboard(ctx context.Context, in *v1.GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*v1.GetTimeRangedDashboardResponse, error)
+	GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*v1.GetTimeRangedDashboardResponse, error)
 	// Top users dashboard (deposits/withdrawals)
-	GetTopUsersDashboard(ctx context.Context, in *v1.GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopUsersDashboardResponse, error)
+	GetTopUsersDashboard(ctx context.Context, in *GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopUsersDashboardResponse, error)
 	// Top operators dashboard (GGR/NGR/deposits-withdrawals)
-	GetTopOperatorsDashboard(ctx context.Context, in *v1.GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopOperatorsDashboardResponse, error)
+	GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopOperatorsDashboardResponse, error)
 }
 
 type dashboardServiceClient struct {
@@ -51,7 +51,7 @@ func NewDashboardServiceClient(cc grpc.ClientConnInterface) DashboardServiceClie
 	return &dashboardServiceClient{cc}
 }
 
-func (c *dashboardServiceClient) GetOverviewDashboard(ctx context.Context, in *v1.GetOverviewDashboardRequest, opts ...grpc.CallOption) (*v1.GetOverviewDashboardResponse, error) {
+func (c *dashboardServiceClient) GetOverviewDashboard(ctx context.Context, in *GetOverviewDashboardRequest, opts ...grpc.CallOption) (*v1.GetOverviewDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetOverviewDashboardResponse)
 	err := c.cc.Invoke(ctx, DashboardService_GetOverviewDashboard_FullMethodName, in, out, cOpts...)
@@ -61,7 +61,7 @@ func (c *dashboardServiceClient) GetOverviewDashboard(ctx context.Context, in *v
 	return out, nil
 }
 
-func (c *dashboardServiceClient) GetTimeRangedDashboard(ctx context.Context, in *v1.GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*v1.GetTimeRangedDashboardResponse, error) {
+func (c *dashboardServiceClient) GetTimeRangedDashboard(ctx context.Context, in *GetTimeRangedDashboardRequest, opts ...grpc.CallOption) (*v1.GetTimeRangedDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetTimeRangedDashboardResponse)
 	err := c.cc.Invoke(ctx, DashboardService_GetTimeRangedDashboard_FullMethodName, in, out, cOpts...)
@@ -71,7 +71,7 @@ func (c *dashboardServiceClient) GetTimeRangedDashboard(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *dashboardServiceClient) GetTopUsersDashboard(ctx context.Context, in *v1.GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopUsersDashboardResponse, error) {
+func (c *dashboardServiceClient) GetTopUsersDashboard(ctx context.Context, in *GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopUsersDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetTopUsersDashboardResponse)
 	err := c.cc.Invoke(ctx, DashboardService_GetTopUsersDashboard_FullMethodName, in, out, cOpts...)
@@ -81,7 +81,7 @@ func (c *dashboardServiceClient) GetTopUsersDashboard(ctx context.Context, in *v
 	return out, nil
 }
 
-func (c *dashboardServiceClient) GetTopOperatorsDashboard(ctx context.Context, in *v1.GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopOperatorsDashboardResponse, error) {
+func (c *dashboardServiceClient) GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopOperatorsDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetTopOperatorsDashboardResponse)
 	err := c.cc.Invoke(ctx, DashboardService_GetTopOperatorsDashboard_FullMethodName, in, out, cOpts...)
@@ -99,13 +99,13 @@ func (c *dashboardServiceClient) GetTopOperatorsDashboard(ctx context.Context, i
 // This service is the ONLY service allowed to query ClickHouse directly for dashboard data.
 type DashboardServiceServer interface {
 	// Overview dashboard with today/yesterday comparison
-	GetOverviewDashboard(context.Context, *v1.GetOverviewDashboardRequest) (*v1.GetOverviewDashboardResponse, error)
+	GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*v1.GetOverviewDashboardResponse, error)
 	// Time-ranged dashboard (this month/week/custom days)
-	GetTimeRangedDashboard(context.Context, *v1.GetTimeRangedDashboardRequest) (*v1.GetTimeRangedDashboardResponse, error)
+	GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*v1.GetTimeRangedDashboardResponse, error)
 	// Top users dashboard (deposits/withdrawals)
-	GetTopUsersDashboard(context.Context, *v1.GetTopUsersDashboardRequest) (*v1.GetTopUsersDashboardResponse, error)
+	GetTopUsersDashboard(context.Context, *GetTopUsersDashboardRequest) (*v1.GetTopUsersDashboardResponse, error)
 	// Top operators dashboard (GGR/NGR/deposits-withdrawals)
-	GetTopOperatorsDashboard(context.Context, *v1.GetTopOperatorsDashboardRequest) (*v1.GetTopOperatorsDashboardResponse, error)
+	GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*v1.GetTopOperatorsDashboardResponse, error)
 	mustEmbedUnimplementedDashboardServiceServer()
 }
 
@@ -116,16 +116,16 @@ type DashboardServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDashboardServiceServer struct{}
 
-func (UnimplementedDashboardServiceServer) GetOverviewDashboard(context.Context, *v1.GetOverviewDashboardRequest) (*v1.GetOverviewDashboardResponse, error) {
+func (UnimplementedDashboardServiceServer) GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*v1.GetOverviewDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOverviewDashboard not implemented")
 }
-func (UnimplementedDashboardServiceServer) GetTimeRangedDashboard(context.Context, *v1.GetTimeRangedDashboardRequest) (*v1.GetTimeRangedDashboardResponse, error) {
+func (UnimplementedDashboardServiceServer) GetTimeRangedDashboard(context.Context, *GetTimeRangedDashboardRequest) (*v1.GetTimeRangedDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTimeRangedDashboard not implemented")
 }
-func (UnimplementedDashboardServiceServer) GetTopUsersDashboard(context.Context, *v1.GetTopUsersDashboardRequest) (*v1.GetTopUsersDashboardResponse, error) {
+func (UnimplementedDashboardServiceServer) GetTopUsersDashboard(context.Context, *GetTopUsersDashboardRequest) (*v1.GetTopUsersDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTopUsersDashboard not implemented")
 }
-func (UnimplementedDashboardServiceServer) GetTopOperatorsDashboard(context.Context, *v1.GetTopOperatorsDashboardRequest) (*v1.GetTopOperatorsDashboardResponse, error) {
+func (UnimplementedDashboardServiceServer) GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*v1.GetTopOperatorsDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTopOperatorsDashboard not implemented")
 }
 func (UnimplementedDashboardServiceServer) mustEmbedUnimplementedDashboardServiceServer() {}
@@ -150,7 +150,7 @@ func RegisterDashboardServiceServer(s grpc.ServiceRegistrar, srv DashboardServic
 }
 
 func _DashboardService_GetOverviewDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetOverviewDashboardRequest)
+	in := new(GetOverviewDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -162,13 +162,13 @@ func _DashboardService_GetOverviewDashboard_Handler(srv interface{}, ctx context
 		FullMethod: DashboardService_GetOverviewDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DashboardServiceServer).GetOverviewDashboard(ctx, req.(*v1.GetOverviewDashboardRequest))
+		return srv.(DashboardServiceServer).GetOverviewDashboard(ctx, req.(*GetOverviewDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DashboardService_GetTimeRangedDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetTimeRangedDashboardRequest)
+	in := new(GetTimeRangedDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -180,13 +180,13 @@ func _DashboardService_GetTimeRangedDashboard_Handler(srv interface{}, ctx conte
 		FullMethod: DashboardService_GetTimeRangedDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DashboardServiceServer).GetTimeRangedDashboard(ctx, req.(*v1.GetTimeRangedDashboardRequest))
+		return srv.(DashboardServiceServer).GetTimeRangedDashboard(ctx, req.(*GetTimeRangedDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DashboardService_GetTopUsersDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetTopUsersDashboardRequest)
+	in := new(GetTopUsersDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -198,13 +198,13 @@ func _DashboardService_GetTopUsersDashboard_Handler(srv interface{}, ctx context
 		FullMethod: DashboardService_GetTopUsersDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DashboardServiceServer).GetTopUsersDashboard(ctx, req.(*v1.GetTopUsersDashboardRequest))
+		return srv.(DashboardServiceServer).GetTopUsersDashboard(ctx, req.(*GetTopUsersDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _DashboardService_GetTopOperatorsDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetTopOperatorsDashboardRequest)
+	in := new(GetTopOperatorsDashboardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -216,7 +216,7 @@ func _DashboardService_GetTopOperatorsDashboard_Handler(srv interface{}, ctx con
 		FullMethod: DashboardService_GetTopOperatorsDashboard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DashboardServiceServer).GetTopOperatorsDashboard(ctx, req.(*v1.GetTopOperatorsDashboardRequest))
+		return srv.(DashboardServiceServer).GetTopOperatorsDashboard(ctx, req.(*GetTopOperatorsDashboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
