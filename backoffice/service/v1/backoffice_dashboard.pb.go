@@ -182,7 +182,7 @@ func (GetTopOperatorsDashboardRequest_TimeRangeType) EnumDescriptor() ([]byte, [
 // System related messages
 type GetOverviewDashboardRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"` // operator_context removed - field 2 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -320,7 +320,7 @@ type GetTimeRangedDashboardRequest struct {
 	state                  protoimpl.MessageState                      `protogen:"open.v1"`
 	TimeRangeType          GetTimeRangedDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTimeRangedDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
 	CustomDays             int32                                       `protobuf:"varint,2,opt,name=custom_days,json=customDays,proto3" json:"custom_days,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters              `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters              `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"` // operator_context removed - field 4 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -439,7 +439,7 @@ func (x *GetTimeRangedDashboardResponse) GetActiveUsersData() []*GetTimeRangedDa
 type GetTopUsersDashboardRequest struct {
 	state                  protoimpl.MessageState                    `protogen:"open.v1"`
 	TimeRangeType          GetTopUsersDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTopUsersDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters            `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters            `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"` // operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -543,7 +543,7 @@ func (x *GetTopUsersDashboardResponse) GetTopWithdrawalUsers() []*GetTopUsersDas
 type GetTopOperatorsDashboardRequest struct {
 	state                  protoimpl.MessageState                        `protogen:"open.v1"`
 	TimeRangeType          GetTopOperatorsDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTopOperatorsDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters                `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters                `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"` // operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }

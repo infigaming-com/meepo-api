@@ -25,6 +25,246 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetOverviewDashboardRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Internal only - injected by backoffice-service
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *GetOverviewDashboardRequest) Reset() {
+	*x = GetOverviewDashboardRequest{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOverviewDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOverviewDashboardRequest) ProtoMessage() {}
+
+func (x *GetOverviewDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOverviewDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetOverviewDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetOverviewDashboardRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetOverviewDashboardRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetTimeRangedDashboardRequest struct {
+	state                  protoimpl.MessageState                         `protogen:"open.v1"`
+	TimeRangeType          v1.GetTimeRangedDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTimeRangedDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
+	CustomDays             int32                                          `protobuf:"varint,2,opt,name=custom_days,json=customDays,proto3" json:"custom_days,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters                 `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext                        `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Internal only
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *GetTimeRangedDashboardRequest) Reset() {
+	*x = GetTimeRangedDashboardRequest{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTimeRangedDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTimeRangedDashboardRequest) ProtoMessage() {}
+
+func (x *GetTimeRangedDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTimeRangedDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetTimeRangedDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetTimeRangedDashboardRequest) GetTimeRangeType() v1.GetTimeRangedDashboardRequest_TimeRangeType {
+	if x != nil {
+		return x.TimeRangeType
+	}
+	return v1.GetTimeRangedDashboardRequest_TimeRangeType(0)
+}
+
+func (x *GetTimeRangedDashboardRequest) GetCustomDays() int32 {
+	if x != nil {
+		return x.CustomDays
+	}
+	return 0
+}
+
+func (x *GetTimeRangedDashboardRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetTimeRangedDashboardRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetTopUsersDashboardRequest struct {
+	state                  protoimpl.MessageState                       `protogen:"open.v1"`
+	TimeRangeType          v1.GetTopUsersDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTopUsersDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters               `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext                      `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Internal only
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *GetTopUsersDashboardRequest) Reset() {
+	*x = GetTopUsersDashboardRequest{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTopUsersDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTopUsersDashboardRequest) ProtoMessage() {}
+
+func (x *GetTopUsersDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTopUsersDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetTopUsersDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetTopUsersDashboardRequest) GetTimeRangeType() v1.GetTopUsersDashboardRequest_TimeRangeType {
+	if x != nil {
+		return x.TimeRangeType
+	}
+	return v1.GetTopUsersDashboardRequest_TimeRangeType(0)
+}
+
+func (x *GetTopUsersDashboardRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetTopUsersDashboardRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetTopOperatorsDashboardRequest struct {
+	state                  protoimpl.MessageState                           `protogen:"open.v1"`
+	TimeRangeType          v1.GetTopOperatorsDashboardRequest_TimeRangeType `protobuf:"varint,1,opt,name=time_range_type,json=timeRangeType,proto3,enum=api.backoffice.service.v1.GetTopOperatorsDashboardRequest_TimeRangeType" json:"time_range_type,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters                   `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext                          `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Internal only
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *GetTopOperatorsDashboardRequest) Reset() {
+	*x = GetTopOperatorsDashboardRequest{}
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTopOperatorsDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTopOperatorsDashboardRequest) ProtoMessage() {}
+
+func (x *GetTopOperatorsDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTopOperatorsDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetTopOperatorsDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetTopOperatorsDashboardRequest) GetTimeRangeType() v1.GetTopOperatorsDashboardRequest_TimeRangeType {
+	if x != nil {
+		return x.TimeRangeType
+	}
+	return v1.GetTopOperatorsDashboardRequest_TimeRangeType(0)
+}
+
+func (x *GetTopOperatorsDashboardRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetTopOperatorsDashboardRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 type GetAffiliateDashboardRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	AffiliateId              int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
@@ -38,7 +278,7 @@ type GetAffiliateDashboardRequest struct {
 
 func (x *GetAffiliateDashboardRequest) Reset() {
 	*x = GetAffiliateDashboardRequest{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[0]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -50,7 +290,7 @@ func (x *GetAffiliateDashboardRequest) String() string {
 func (*GetAffiliateDashboardRequest) ProtoMessage() {}
 
 func (x *GetAffiliateDashboardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[0]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +303,7 @@ func (x *GetAffiliateDashboardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAffiliateDashboardRequest.ProtoReflect.Descriptor instead.
 func (*GetAffiliateDashboardRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{0}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetAffiliateDashboardRequest) GetAffiliateId() int64 {
@@ -132,7 +372,7 @@ type GetAffiliateDashboardResponse struct {
 
 func (x *GetAffiliateDashboardResponse) Reset() {
 	*x = GetAffiliateDashboardResponse{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[1]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -144,7 +384,7 @@ func (x *GetAffiliateDashboardResponse) String() string {
 func (*GetAffiliateDashboardResponse) ProtoMessage() {}
 
 func (x *GetAffiliateDashboardResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[1]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -157,7 +397,7 @@ func (x *GetAffiliateDashboardResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAffiliateDashboardResponse.ProtoReflect.Descriptor instead.
 func (*GetAffiliateDashboardResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetAffiliateDashboardResponse) GetRegistrations() int64 {
@@ -292,7 +532,7 @@ type GetAffiliateTrendRequest struct {
 
 func (x *GetAffiliateTrendRequest) Reset() {
 	*x = GetAffiliateTrendRequest{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[2]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +544,7 @@ func (x *GetAffiliateTrendRequest) String() string {
 func (*GetAffiliateTrendRequest) ProtoMessage() {}
 
 func (x *GetAffiliateTrendRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[2]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +557,7 @@ func (x *GetAffiliateTrendRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAffiliateTrendRequest.ProtoReflect.Descriptor instead.
 func (*GetAffiliateTrendRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{2}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetAffiliateTrendRequest) GetAffiliateId() int64 {
@@ -364,7 +604,7 @@ type GetAffiliateTrendResponse struct {
 
 func (x *GetAffiliateTrendResponse) Reset() {
 	*x = GetAffiliateTrendResponse{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[3]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -376,7 +616,7 @@ func (x *GetAffiliateTrendResponse) String() string {
 func (*GetAffiliateTrendResponse) ProtoMessage() {}
 
 func (x *GetAffiliateTrendResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[3]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +629,7 @@ func (x *GetAffiliateTrendResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAffiliateTrendResponse.ProtoReflect.Descriptor instead.
 func (*GetAffiliateTrendResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{3}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetAffiliateTrendResponse) GetData() []*GetAffiliateTrendResponse_TrendData {
@@ -411,7 +651,7 @@ type GetAffiliateDashboardResponse_CurrencyBalance struct {
 
 func (x *GetAffiliateDashboardResponse_CurrencyBalance) Reset() {
 	*x = GetAffiliateDashboardResponse_CurrencyBalance{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[4]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -423,7 +663,7 @@ func (x *GetAffiliateDashboardResponse_CurrencyBalance) String() string {
 func (*GetAffiliateDashboardResponse_CurrencyBalance) ProtoMessage() {}
 
 func (x *GetAffiliateDashboardResponse_CurrencyBalance) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[4]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,7 +676,7 @@ func (x *GetAffiliateDashboardResponse_CurrencyBalance) ProtoReflect() protorefl
 
 // Deprecated: Use GetAffiliateDashboardResponse_CurrencyBalance.ProtoReflect.Descriptor instead.
 func (*GetAffiliateDashboardResponse_CurrencyBalance) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1, 0}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{5, 0}
 }
 
 func (x *GetAffiliateDashboardResponse_CurrencyBalance) GetCurrency() string {
@@ -477,7 +717,7 @@ type GetAffiliateDashboardResponse_ProductStats struct {
 
 func (x *GetAffiliateDashboardResponse_ProductStats) Reset() {
 	*x = GetAffiliateDashboardResponse_ProductStats{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[5]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -489,7 +729,7 @@ func (x *GetAffiliateDashboardResponse_ProductStats) String() string {
 func (*GetAffiliateDashboardResponse_ProductStats) ProtoMessage() {}
 
 func (x *GetAffiliateDashboardResponse_ProductStats) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[5]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -502,7 +742,7 @@ func (x *GetAffiliateDashboardResponse_ProductStats) ProtoReflect() protoreflect
 
 // Deprecated: Use GetAffiliateDashboardResponse_ProductStats.ProtoReflect.Descriptor instead.
 func (*GetAffiliateDashboardResponse_ProductStats) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{1, 1}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{5, 1}
 }
 
 func (x *GetAffiliateDashboardResponse_ProductStats) GetGameId() string {
@@ -587,7 +827,7 @@ type GetAffiliateTrendResponse_TrendData struct {
 
 func (x *GetAffiliateTrendResponse_TrendData) Reset() {
 	*x = GetAffiliateTrendResponse_TrendData{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[6]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -599,7 +839,7 @@ func (x *GetAffiliateTrendResponse_TrendData) String() string {
 func (*GetAffiliateTrendResponse_TrendData) ProtoMessage() {}
 
 func (x *GetAffiliateTrendResponse_TrendData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[6]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -612,7 +852,7 @@ func (x *GetAffiliateTrendResponse_TrendData) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetAffiliateTrendResponse_TrendData.ProtoReflect.Descriptor instead.
 func (*GetAffiliateTrendResponse_TrendData) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{3, 0}
+	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{7, 0}
 }
 
 func (x *GetAffiliateTrendResponse_TrendData) GetDate() *timestamppb.Timestamp {
@@ -696,7 +936,24 @@ var File_report_service_v1_dashboard_proto protoreflect.FileDescriptor
 
 const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"!report/service/v1/dashboard.proto\x12\x15api.report.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a0backoffice/service/v1/backoffice_dashboard.proto\x1a\x13common/common.proto\"\xdb\x02\n" +
+	"!report/service/v1/dashboard.proto\x12\x15api.report.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a0backoffice/service/v1/backoffice_dashboard.proto\"\xc3\x01\n" +
+	"\x1bGetOverviewDashboardRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd6\x02\n" +
+	"\x1dGetTimeRangedDashboardRequest\x12n\n" +
+	"\x0ftime_range_type\x18\x01 \x01(\x0e2F.api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\x1f\n" +
+	"\vcustom_days\x18\x02 \x01(\x05R\n" +
+	"customDays\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xb1\x02\n" +
+	"\x1bGetTopUsersDashboardRequest\x12l\n" +
+	"\x0ftime_range_type\x18\x01 \x01(\x0e2D.api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xb9\x02\n" +
+	"\x1fGetTopOperatorsDashboardRequest\x12p\n" +
+	"\x0ftime_range_type\x18\x01 \x01(\x0e2H.api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xdb\x02\n" +
 	"\x1cGetAffiliateDashboardRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
 	"\n" +
@@ -759,12 +1016,12 @@ const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\angr_usd\x18\t \x01(\tR\x06ngrUsd\x12\x1b\n" +
 	"\tbet_count\x18\n" +
 	" \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd2\xef\b\n" +
-	"\x10DashboardService\x12\xb5\x01\n" +
-	"\x14GetOverviewDashboard\x126.api.backoffice.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/report/dashboard/overview/get\x12\xbe\x01\n" +
-	"\x16GetTimeRangedDashboard\x128.api.backoffice.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/dashboard/time-ranged/get\x12\xb6\x01\n" +
-	"\x14GetTopUsersDashboard\x126.api.backoffice.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/top-users/get\x12\xc6\x01\n" +
-	"\x18GetTopOperatorsDashboard\x12:.api.backoffice.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/report/dashboard/top-operators/get\x12\xb1\x01\n" +
+	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd2\xdf\b\n" +
+	"\x10DashboardService\x12\xb1\x01\n" +
+	"\x14GetOverviewDashboard\x122.api.report.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/report/dashboard/overview/get\x12\xba\x01\n" +
+	"\x16GetTimeRangedDashboard\x124.api.report.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/dashboard/time-ranged/get\x12\xb2\x01\n" +
+	"\x14GetTopUsersDashboard\x122.api.report.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/top-users/get\x12\xc2\x01\n" +
+	"\x18GetTopOperatorsDashboard\x126.api.report.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/report/dashboard/top-operators/get\x12\xb1\x01\n" +
 	"\x15GetAffiliateDashboard\x123.api.report.service.v1.GetAffiliateDashboardRequest\x1a4.api.report.service.v1.GetAffiliateDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/affiliate/get\x12\xab\x01\n" +
 	"\x11GetAffiliateTrend\x12/.api.report.service.v1.GetAffiliateTrendRequest\x1a0.api.report.service.v1.GetAffiliateTrendResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/report/dashboard/affiliate/trend/getBS\n" +
 	"\x15api.report.service.v1P\x01Z8github.com/infigaming-com/meepo-api/report/service/v1;v1b\x06proto3"
@@ -781,54 +1038,69 @@ func file_report_service_v1_dashboard_proto_rawDescGZIP() []byte {
 	return file_report_service_v1_dashboard_proto_rawDescData
 }
 
-var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_report_service_v1_dashboard_proto_goTypes = []any{
-	(*GetAffiliateDashboardRequest)(nil),                  // 0: api.report.service.v1.GetAffiliateDashboardRequest
-	(*GetAffiliateDashboardResponse)(nil),                 // 1: api.report.service.v1.GetAffiliateDashboardResponse
-	(*GetAffiliateTrendRequest)(nil),                      // 2: api.report.service.v1.GetAffiliateTrendRequest
-	(*GetAffiliateTrendResponse)(nil),                     // 3: api.report.service.v1.GetAffiliateTrendResponse
-	(*GetAffiliateDashboardResponse_CurrencyBalance)(nil), // 4: api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
-	(*GetAffiliateDashboardResponse_ProductStats)(nil),    // 5: api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
-	(*GetAffiliateTrendResponse_TrendData)(nil),           // 6: api.report.service.v1.GetAffiliateTrendResponse.TrendData
-	(*timestamppb.Timestamp)(nil),                         // 7: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),                        // 8: api.common.OperatorContext
-	(*v1.GetOverviewDashboardRequest)(nil),                // 9: api.backoffice.service.v1.GetOverviewDashboardRequest
-	(*v1.GetTimeRangedDashboardRequest)(nil),              // 10: api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	(*v1.GetTopUsersDashboardRequest)(nil),                // 11: api.backoffice.service.v1.GetTopUsersDashboardRequest
-	(*v1.GetTopOperatorsDashboardRequest)(nil),            // 12: api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	(*v1.GetOverviewDashboardResponse)(nil),               // 13: api.backoffice.service.v1.GetOverviewDashboardResponse
-	(*v1.GetTimeRangedDashboardResponse)(nil),             // 14: api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	(*v1.GetTopUsersDashboardResponse)(nil),               // 15: api.backoffice.service.v1.GetTopUsersDashboardResponse
-	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 16: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	(*GetOverviewDashboardRequest)(nil),                   // 0: api.report.service.v1.GetOverviewDashboardRequest
+	(*GetTimeRangedDashboardRequest)(nil),                 // 1: api.report.service.v1.GetTimeRangedDashboardRequest
+	(*GetTopUsersDashboardRequest)(nil),                   // 2: api.report.service.v1.GetTopUsersDashboardRequest
+	(*GetTopOperatorsDashboardRequest)(nil),               // 3: api.report.service.v1.GetTopOperatorsDashboardRequest
+	(*GetAffiliateDashboardRequest)(nil),                  // 4: api.report.service.v1.GetAffiliateDashboardRequest
+	(*GetAffiliateDashboardResponse)(nil),                 // 5: api.report.service.v1.GetAffiliateDashboardResponse
+	(*GetAffiliateTrendRequest)(nil),                      // 6: api.report.service.v1.GetAffiliateTrendRequest
+	(*GetAffiliateTrendResponse)(nil),                     // 7: api.report.service.v1.GetAffiliateTrendResponse
+	(*GetAffiliateDashboardResponse_CurrencyBalance)(nil), // 8: api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
+	(*GetAffiliateDashboardResponse_ProductStats)(nil),    // 9: api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
+	(*GetAffiliateTrendResponse_TrendData)(nil),           // 10: api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	(*common.OperatorContextFilters)(nil),                 // 11: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                        // 12: api.common.OperatorContext
+	(v1.GetTimeRangedDashboardRequest_TimeRangeType)(0),   // 13: api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	(v1.GetTopUsersDashboardRequest_TimeRangeType)(0),     // 14: api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	(v1.GetTopOperatorsDashboardRequest_TimeRangeType)(0), // 15: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	(*timestamppb.Timestamp)(nil),                         // 16: google.protobuf.Timestamp
+	(*v1.GetOverviewDashboardResponse)(nil),               // 17: api.backoffice.service.v1.GetOverviewDashboardResponse
+	(*v1.GetTimeRangedDashboardResponse)(nil),             // 18: api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	(*v1.GetTopUsersDashboardResponse)(nil),               // 19: api.backoffice.service.v1.GetTopUsersDashboardResponse
+	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 20: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
 }
 var file_report_service_v1_dashboard_proto_depIdxs = []int32{
-	7,  // 0: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
-	7,  // 1: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
-	8,  // 2: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	4,  // 3: api.report.service.v1.GetAffiliateDashboardResponse.balances:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
-	5,  // 4: api.report.service.v1.GetAffiliateDashboardResponse.products:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
-	7,  // 5: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
-	7,  // 6: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
-	8,  // 7: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	6,  // 8: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
-	7,  // 9: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
-	9,  // 10: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.backoffice.service.v1.GetOverviewDashboardRequest
-	10, // 11: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.backoffice.service.v1.GetTimeRangedDashboardRequest
-	11, // 12: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.backoffice.service.v1.GetTopUsersDashboardRequest
-	12, // 13: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest
-	0,  // 14: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
-	2,  // 15: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
-	13, // 16: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	14, // 17: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	15, // 18: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
-	16, // 19: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	1,  // 20: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
-	3,  // 21: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
-	16, // [16:22] is the sub-list for method output_type
-	10, // [10:16] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	11, // 0: api.report.service.v1.GetOverviewDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	12, // 1: api.report.service.v1.GetOverviewDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	13, // 2: api.report.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	11, // 3: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	12, // 4: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 5: api.report.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	11, // 6: api.report.service.v1.GetTopUsersDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	12, // 7: api.report.service.v1.GetTopUsersDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 8: api.report.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	11, // 9: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	12, // 10: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	16, // 11: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
+	16, // 12: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
+	12, // 13: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	8,  // 14: api.report.service.v1.GetAffiliateDashboardResponse.balances:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
+	9,  // 15: api.report.service.v1.GetAffiliateDashboardResponse.products:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
+	16, // 16: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
+	16, // 17: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
+	12, // 18: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	10, // 19: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	16, // 20: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
+	0,  // 21: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.report.service.v1.GetOverviewDashboardRequest
+	1,  // 22: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.report.service.v1.GetTimeRangedDashboardRequest
+	2,  // 23: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.report.service.v1.GetTopUsersDashboardRequest
+	3,  // 24: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.report.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 25: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
+	6,  // 26: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
+	17, // 27: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	18, // 28: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	19, // 29: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
+	20, // 30: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	5,  // 31: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
+	7,  // 32: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
+	27, // [27:33] is the sub-list for method output_type
+	21, // [21:27] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_dashboard_proto_init() }
@@ -836,14 +1108,14 @@ func file_report_service_v1_dashboard_proto_init() {
 	if File_report_service_v1_dashboard_proto != nil {
 		return
 	}
-	file_report_service_v1_dashboard_proto_msgTypes[0].OneofWrappers = []any{}
+	file_report_service_v1_dashboard_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_service_v1_dashboard_proto_rawDesc), len(file_report_service_v1_dashboard_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

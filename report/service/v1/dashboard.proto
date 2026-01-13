@@ -4,18 +4,45 @@ package api.report.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-import "backoffice/service/v1/backoffice_dashboard.proto";
 import "common/common.proto";
+import "backoffice/service/v1/backoffice_dashboard.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/report/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.report.service.v1";
 
+// Internal Request messages for gRPC communication between services
+// These messages include operator_context field which MUST NOT be exposed to frontend
+
+message GetOverviewDashboardRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;  // Internal only - injected by backoffice-service
+}
+
+message GetTimeRangedDashboardRequest {
+	api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType time_range_type = 1;
+	int32 custom_days = 2;
+	api.common.OperatorContextFilters operator_context_filters = 3;
+	api.common.OperatorContext operator_context = 4;  // Internal only
+}
+
+message GetTopUsersDashboardRequest {
+	api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType time_range_type = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;  // Internal only
+}
+
+message GetTopOperatorsDashboardRequest {
+	api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType time_range_type = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;  // Internal only
+}
+
 // DashboardService provides dashboard analytics via ClickHouse.
 // This service is the ONLY service allowed to query ClickHouse directly for dashboard data.
 service DashboardService {
   // Overview dashboard with today/yesterday comparison
-  rpc GetOverviewDashboard(api.backoffice.service.v1.GetOverviewDashboardRequest) returns (api.backoffice.service.v1.GetOverviewDashboardResponse) {
+  rpc GetOverviewDashboard(GetOverviewDashboardRequest) returns (api.backoffice.service.v1.GetOverviewDashboardResponse) {
     option (google.api.http) = {
       post: "/v1/report/dashboard/overview/get"
       body: "*"
@@ -23,7 +50,7 @@ service DashboardService {
   }
 
   // Time-ranged dashboard (this month/week/custom days)
-  rpc GetTimeRangedDashboard(api.backoffice.service.v1.GetTimeRangedDashboardRequest) returns (api.backoffice.service.v1.GetTimeRangedDashboardResponse) {
+  rpc GetTimeRangedDashboard(GetTimeRangedDashboardRequest) returns (api.backoffice.service.v1.GetTimeRangedDashboardResponse) {
     option (google.api.http) = {
       post: "/v1/report/dashboard/time-ranged/get"
       body: "*"
@@ -31,7 +58,7 @@ service DashboardService {
   }
 
   // Top users dashboard (deposits/withdrawals)
-  rpc GetTopUsersDashboard(api.backoffice.service.v1.GetTopUsersDashboardRequest) returns (api.backoffice.service.v1.GetTopUsersDashboardResponse) {
+  rpc GetTopUsersDashboard(GetTopUsersDashboardRequest) returns (api.backoffice.service.v1.GetTopUsersDashboardResponse) {
     option (google.api.http) = {
       post: "/v1/report/dashboard/top-users/get"
       body: "*"
@@ -39,7 +66,7 @@ service DashboardService {
   }
 
   // Top operators dashboard (GGR/NGR/deposits-withdrawals)
-  rpc GetTopOperatorsDashboard(api.backoffice.service.v1.GetTopOperatorsDashboardRequest) returns (api.backoffice.service.v1.GetTopOperatorsDashboardResponse) {
+  rpc GetTopOperatorsDashboard(GetTopOperatorsDashboardRequest) returns (api.backoffice.service.v1.GetTopOperatorsDashboardResponse) {
     option (google.api.http) = {
       post: "/v1/report/dashboard/top-operators/get"
       body: "*"

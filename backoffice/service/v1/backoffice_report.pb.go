@@ -88,11 +88,12 @@ type GetSummaryRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	AffiliateCodes         []string                       `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes          []string                       `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries  []string                       `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	AffiliateCodes        []string `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes         []string `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries []string `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetSummaryRequest) Reset() {
@@ -408,13 +409,14 @@ type ListSummariesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	AffiliateCodes         []string                       `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes          []string                       `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries  []string                       `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	AffiliateCodes        []string `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes         []string `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries []string `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	Page                  *int32   `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32   `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListSummariesRequest) Reset() {
@@ -572,7 +574,7 @@ type GetGameSummaryRequest struct {
 	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameNames              []string                       `protobuf:"bytes,5,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"` // operator_context removed - field 8 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -782,7 +784,7 @@ type ListGameDataRequest struct {
 	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                   int32                          `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize               int32                          `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 10 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -958,7 +960,7 @@ type GetPlayerGameSummaryRequest struct {
 	GameNames              []string                       `protobuf:"bytes,6,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds                []string                       `protobuf:"bytes,7,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"` // operator_context removed - field 10 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1184,7 +1186,7 @@ type ListPlayerGameDataRequest struct {
 	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	Page                   int32                          `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize               int32                          `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 12 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1368,9 +1370,10 @@ type GetDepositSummariesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetDepositSummariesRequest) Reset() {
@@ -1472,11 +1475,12 @@ type ListDepositDetailsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page          *int32   `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListDepositDetailsRequest) Reset() {
@@ -1616,9 +1620,10 @@ type GetWithdrawSummariesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetWithdrawSummariesRequest) Reset() {
@@ -1720,11 +1725,12 @@ type ListWithdrawDetailsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page          *int32   `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListWithdrawDetailsRequest) Reset() {
@@ -1865,7 +1871,7 @@ type ListRegisterRetentionRequest struct {
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Page                   int32                          `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize               int32                          `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 5 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2002,7 +2008,7 @@ type ListDepositVtgDetailsRequest struct {
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                   int32                          `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 6 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2146,7 +2152,7 @@ type ListWithdrawVtgDetailsRequest struct {
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                   int32                          `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 6 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
