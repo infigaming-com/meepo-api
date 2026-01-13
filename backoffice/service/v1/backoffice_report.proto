@@ -115,6 +115,7 @@ message TimeRange{
 message GetSummaryRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
@@ -152,6 +153,7 @@ message GetSummaryResponse {
 message ListSummariesRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
@@ -248,6 +250,7 @@ message GetGameSummaryRequest {
 	repeated string game_names = 5;
 	repeated string game_ids = 6;
 	repeated string currencies = 7;
+	api.common.OperatorContext operator_context = 8;
 }
 
 message GetGameSummaryResponse {
@@ -273,6 +276,7 @@ message ListGameDataRequest {
 	repeated string currencies = 7;
 	int32 page = 8;
 	int32 page_size = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message ListGameDataResponse {
@@ -322,6 +326,7 @@ message GetPlayerGameSummaryRequest {
 	repeated string game_ids = 7;
 	repeated string currencies = 8;
 	repeated int64 user_ids = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message GetPlayerGameSummaryResponse {
@@ -349,6 +354,7 @@ message ListPlayerGameDataRequest {
 	repeated int64 user_ids = 9;
 	int32 page = 10;
 	int32 page_size = 11;
+	api.common.OperatorContext operator_context = 12;
 }
 
 message ListPlayerGameDataResponse {
@@ -406,6 +412,7 @@ message GetDepositSummariesResponse {
 message ListDepositDetailsRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;
 	repeated string currencies = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
@@ -475,6 +482,7 @@ message GetWithdrawSummariesResponse {
 message ListWithdrawDetailsRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	api.common.OperatorContext operator_context = 3;
 	repeated string currencies = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
@@ -533,6 +541,7 @@ message ListRegisterRetentionRequest {
 	api.common.OperatorContextFilters operator_context_filters = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+	api.common.OperatorContext operator_context = 5;
 }
 
 message ListRegisterRetentionResponse {
@@ -612,6 +621,7 @@ message ListDepositVtgDetailsRequest {
 	repeated string currencies = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message ListDepositVtgDetailsResponse {
@@ -661,6 +671,7 @@ message ListWithdrawVtgDetailsRequest {
 	repeated string currencies = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message ListWithdrawVtgDetailsResponse {
