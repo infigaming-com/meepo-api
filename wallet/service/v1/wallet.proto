@@ -1742,6 +1742,8 @@ message ListUserOverviewResponse {
 		int64 user_id = 1;
 		string ngr_usd = 2; // cash bet - cash win
 		string ngr_reporting_currency = 3;
+		string bonus2cash_usd = 4;
+		string bonus2cash_reporting_currency = 5;
 	}
 	repeated UserOverview user_overviews = 1;
 }

@@ -25022,6 +25022,10 @@ func (m *ListUserOverviewResponse_UserOverview) validate(all bool) error {
 
 	// no validation rules for NgrReportingCurrency
 
+	// no validation rules for Bonus2CashUsd
+
+	// no validation rules for Bonus2CashReportingCurrency
+
 	if len(errors) > 0 {
 		return ListUserOverviewResponse_UserOverviewMultiError(errors)
 	}

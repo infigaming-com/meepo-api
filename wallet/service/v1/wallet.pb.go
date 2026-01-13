@@ -14328,12 +14328,14 @@ func (x *ListTimeRangeDepositCreditsResponse_Credit) GetOriginalProviderBonusRep
 }
 
 type ListUserOverviewResponse_UserOverview struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	UserId               int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	NgrUsd               string                 `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"` // cash bet - cash win
-	NgrReportingCurrency string                 `protobuf:"bytes,3,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	UserId                      int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	NgrUsd                      string                 `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"` // cash bet - cash win
+	NgrReportingCurrency        string                 `protobuf:"bytes,3,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	Bonus2CashUsd               string                 `protobuf:"bytes,4,opt,name=bonus2cash_usd,json=bonus2cashUsd,proto3" json:"bonus2cash_usd,omitempty"`
+	Bonus2CashReportingCurrency string                 `protobuf:"bytes,5,opt,name=bonus2cash_reporting_currency,json=bonus2cashReportingCurrency,proto3" json:"bonus2cash_reporting_currency,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ListUserOverviewResponse_UserOverview) Reset() {
@@ -14383,6 +14385,20 @@ func (x *ListUserOverviewResponse_UserOverview) GetNgrUsd() string {
 func (x *ListUserOverviewResponse_UserOverview) GetNgrReportingCurrency() string {
 	if x != nil {
 		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUserOverviewResponse_UserOverview) GetBonus2CashUsd() string {
+	if x != nil {
+		return x.Bonus2CashUsd
+	}
+	return ""
+}
+
+func (x *ListUserOverviewResponse_UserOverview) GetBonus2CashReportingCurrency() string {
+	if x != nil {
+		return x.Bonus2CashReportingCurrency
 	}
 	return ""
 }
@@ -15754,13 +15770,15 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x19\n" +
 	"\buser_ids\x18\x03 \x03(\x03R\auserIdsB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xf7\x01\n" +
+	"\t_end_time\"\xe3\x02\n" +
 	"\x18ListUserOverviewResponse\x12c\n" +
-	"\x0euser_overviews\x18\x01 \x03(\v2<.api.wallet.service.v1.ListUserOverviewResponse.UserOverviewR\ruserOverviews\x1av\n" +
+	"\x0euser_overviews\x18\x01 \x03(\v2<.api.wallet.service.v1.ListUserOverviewResponse.UserOverviewR\ruserOverviews\x1a\xe1\x01\n" +
 	"\fUserOverview\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
 	"\angr_usd\x18\x02 \x01(\tR\x06ngrUsd\x124\n" +
-	"\x16ngr_reporting_currency\x18\x03 \x01(\tR\x14ngrReportingCurrency\"\xab\x01\n" +
+	"\x16ngr_reporting_currency\x18\x03 \x01(\tR\x14ngrReportingCurrency\x12%\n" +
+	"\x0ebonus2cash_usd\x18\x04 \x01(\tR\rbonus2cashUsd\x12B\n" +
+	"\x1dbonus2cash_reporting_currency\x18\x05 \x01(\tR\x1bbonus2cashReportingCurrency\"\xab\x01\n" +
 	"%GetUserGameTransactionsSummaryRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x128\n" +
 	"\x18external_transaction_ids\x18\x02 \x03(\x03R\x16externalTransactionIds\x12/\n" +
