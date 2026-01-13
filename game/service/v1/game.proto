@@ -2059,8 +2059,9 @@ message BackofficeUpdateGameOrderInTagRequest {
 	api.common.OperatorContext operator_context = 1;
 	int64 tag_id = 2;
 	string game_id = 3;
-	int32 order_index = 4;
+	int32 origin_order_index = 4;  // 原位置
 	bool sticky = 5;
+	int32 current_order_index = 6;  // 目标位置
 }
 
 message BackofficeUpdateGameOrderInTagResponse {}

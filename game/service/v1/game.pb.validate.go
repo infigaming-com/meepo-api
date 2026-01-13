@@ -21546,9 +21546,11 @@ func (m *BackofficeUpdateGameOrderInTagRequest) validate(all bool) error {
 
 	// no validation rules for GameId
 
-	// no validation rules for OrderIndex
+	// no validation rules for OriginOrderIndex
 
 	// no validation rules for Sticky
+
+	// no validation rules for CurrentOrderIndex
 
 	if len(errors) > 0 {
 		return BackofficeUpdateGameOrderInTagRequestMultiError(errors)

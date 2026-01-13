@@ -838,8 +838,9 @@ message BackofficeRemoveProviderFromTagResponse {
 message BackofficeUpdateGameOrderInTagRequest {
 	int64 tag_id = 1;
 	string game_id = 2;
-	int32 order_index = 3;
+	int32 origin_order_index = 3;  // 原位置
 	bool sticky = 4;
+	int32 current_order_index = 5;  // 目标位置
 }
 
 message BackofficeUpdateGameOrderInTagResponse {}

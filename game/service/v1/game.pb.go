@@ -11701,14 +11701,15 @@ func (x *BackofficeRemoveProviderFromTagResponse) GetGamesRemoved() int32 {
 }
 
 type BackofficeUpdateGameOrderInTagRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	TagId           int64                   `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
-	GameId          string                  `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	OrderIndex      int32                   `protobuf:"varint,4,opt,name=order_index,json=orderIndex,proto3" json:"order_index,omitempty"`
-	Sticky          bool                    `protobuf:"varint,5,opt,name=sticky,proto3" json:"sticky,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state             protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TagId             int64                   `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+	GameId            string                  `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	OriginOrderIndex  int32                   `protobuf:"varint,4,opt,name=origin_order_index,json=originOrderIndex,proto3" json:"origin_order_index,omitempty"` // 原位置
+	Sticky            bool                    `protobuf:"varint,5,opt,name=sticky,proto3" json:"sticky,omitempty"`
+	CurrentOrderIndex int32                   `protobuf:"varint,6,opt,name=current_order_index,json=currentOrderIndex,proto3" json:"current_order_index,omitempty"` // 目标位置
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *BackofficeUpdateGameOrderInTagRequest) Reset() {
@@ -11762,9 +11763,9 @@ func (x *BackofficeUpdateGameOrderInTagRequest) GetGameId() string {
 	return ""
 }
 
-func (x *BackofficeUpdateGameOrderInTagRequest) GetOrderIndex() int32 {
+func (x *BackofficeUpdateGameOrderInTagRequest) GetOriginOrderIndex() int32 {
 	if x != nil {
-		return x.OrderIndex
+		return x.OriginOrderIndex
 	}
 	return 0
 }
@@ -11774,6 +11775,13 @@ func (x *BackofficeUpdateGameOrderInTagRequest) GetSticky() bool {
 		return x.Sticky
 	}
 	return false
+}
+
+func (x *BackofficeUpdateGameOrderInTagRequest) GetCurrentOrderIndex() int32 {
+	if x != nil {
+		return x.CurrentOrderIndex
+	}
+	return 0
 }
 
 type BackofficeUpdateGameOrderInTagResponse struct {
@@ -18139,14 +18147,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vprovider_id\x18\x03 \x01(\tR\n" +
 	"providerId\"N\n" +
 	"'BackofficeRemoveProviderFromTagResponse\x12#\n" +
-	"\rgames_removed\x18\x01 \x01(\x05R\fgamesRemoved\"\xd8\x01\n" +
+	"\rgames_removed\x18\x01 \x01(\x05R\fgamesRemoved\"\x95\x02\n" +
 	"%BackofficeUpdateGameOrderInTagRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x15\n" +
 	"\x06tag_id\x18\x02 \x01(\x03R\x05tagId\x12\x17\n" +
-	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x1f\n" +
-	"\vorder_index\x18\x04 \x01(\x05R\n" +
-	"orderIndex\x12\x16\n" +
-	"\x06sticky\x18\x05 \x01(\bR\x06sticky\"(\n" +
+	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12,\n" +
+	"\x12origin_order_index\x18\x04 \x01(\x05R\x10originOrderIndex\x12\x16\n" +
+	"\x06sticky\x18\x05 \x01(\bR\x06sticky\x12.\n" +
+	"\x13current_order_index\x18\x06 \x01(\x05R\x11currentOrderIndex\"(\n" +
 	"&BackofficeUpdateGameOrderInTagResponse\"\x8e\x04\n" +
 	"$BackofficeBatchUpdateTagGamesRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x15\n" +

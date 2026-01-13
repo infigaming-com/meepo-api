@@ -9868,11 +9868,14 @@ components:
                     type: string
                 gameId:
                     type: string
-                orderIndex:
+                originOrderIndex:
                     type: integer
                     format: int32
                 sticky:
                     type: boolean
+                currentOrderIndex:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse:
             type: object
             properties: {}
