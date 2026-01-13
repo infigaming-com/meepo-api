@@ -88,12 +88,12 @@ type GetSummaryRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	AffiliateCodes         []string                       `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes          []string                       `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries  []string                       `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	AffiliateCodes        []string `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes         []string `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries []string `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetSummaryRequest) Reset() {
@@ -136,13 +136,6 @@ func (x *GetSummaryRequest) GetTimeRange() *TimeRange {
 func (x *GetSummaryRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
-	}
-	return nil
-}
-
-func (x *GetSummaryRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -416,14 +409,14 @@ type ListSummariesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	AffiliateCodes         []string                       `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
-	ReferralCodes          []string                       `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
-	RegistrationCountries  []string                       `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
-	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	AffiliateCodes        []string `protobuf:"bytes,5,rep,name=affiliate_codes,json=affiliateCodes,proto3" json:"affiliate_codes,omitempty"`
+	ReferralCodes         []string `protobuf:"bytes,6,rep,name=referral_codes,json=referralCodes,proto3" json:"referral_codes,omitempty"`
+	RegistrationCountries []string `protobuf:"bytes,7,rep,name=registration_countries,json=registrationCountries,proto3" json:"registration_countries,omitempty"`
+	Page                  *int32   `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32   `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListSummariesRequest) Reset() {
@@ -466,13 +459,6 @@ func (x *ListSummariesRequest) GetTimeRange() *TimeRange {
 func (x *ListSummariesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
-	}
-	return nil
-}
-
-func (x *ListSummariesRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -588,8 +574,7 @@ type GetGameSummaryRequest struct {
 	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
 	GameNames              []string                       `protobuf:"bytes,5,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"` // operator_context removed - field 8 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -669,13 +654,6 @@ func (x *GetGameSummaryRequest) GetGameIds() []string {
 func (x *GetGameSummaryRequest) GetCurrencies() []string {
 	if x != nil {
 		return x.Currencies
-	}
-	return nil
-}
-
-func (x *GetGameSummaryRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -806,8 +784,7 @@ type ListGameDataRequest struct {
 	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                   int32                          `protobuf:"varint,8,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	PageSize               int32                          `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 10 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -905,13 +882,6 @@ func (x *ListGameDataRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListGameDataRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
 type ListGameDataResponse struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
 	List          []*ListGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
@@ -990,8 +960,7 @@ type GetPlayerGameSummaryRequest struct {
 	GameNames              []string                       `protobuf:"bytes,6,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
 	GameIds                []string                       `protobuf:"bytes,7,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"` // operator_context removed - field 10 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1085,13 +1054,6 @@ func (x *GetPlayerGameSummaryRequest) GetCurrencies() []string {
 func (x *GetPlayerGameSummaryRequest) GetUserIds() []int64 {
 	if x != nil {
 		return x.UserIds
-	}
-	return nil
-}
-
-func (x *GetPlayerGameSummaryRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -1224,8 +1186,7 @@ type ListPlayerGameDataRequest struct {
 	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	UserIds                []int64                        `protobuf:"varint,9,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	Page                   int32                          `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,12,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	PageSize               int32                          `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 12 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1337,13 +1298,6 @@ func (x *ListPlayerGameDataRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListPlayerGameDataRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
 type ListPlayerGameDataResponse struct {
 	state         protoimpl.MessageState             `protogen:"open.v1"`
 	List          []*ListPlayerGameDataResponse_List `protobuf:"bytes,7,rep,name=list,proto3" json:"list,omitempty"`
@@ -1416,10 +1370,10 @@ type GetDepositSummariesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetDepositSummariesRequest) Reset() {
@@ -1462,13 +1416,6 @@ func (x *GetDepositSummariesRequest) GetTimeRange() *TimeRange {
 func (x *GetDepositSummariesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
-	}
-	return nil
-}
-
-func (x *GetDepositSummariesRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -1528,12 +1475,12 @@ type ListDepositDetailsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page          *int32   `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListDepositDetailsRequest) Reset() {
@@ -1576,13 +1523,6 @@ func (x *ListDepositDetailsRequest) GetTimeRange() *TimeRange {
 func (x *ListDepositDetailsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
-	}
-	return nil
-}
-
-func (x *ListDepositDetailsRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -1680,10 +1620,10 @@ type GetWithdrawSummariesRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetWithdrawSummariesRequest) Reset() {
@@ -1726,13 +1666,6 @@ func (x *GetWithdrawSummariesRequest) GetTimeRange() *TimeRange {
 func (x *GetWithdrawSummariesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
-	}
-	return nil
-}
-
-func (x *GetWithdrawSummariesRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -1792,12 +1725,12 @@ type ListWithdrawDetailsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currencies             []string                       `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
+	Currencies    []string `protobuf:"bytes,5,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Page          *int32   `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListWithdrawDetailsRequest) Reset() {
@@ -1840,13 +1773,6 @@ func (x *ListWithdrawDetailsRequest) GetTimeRange() *TimeRange {
 func (x *ListWithdrawDetailsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
-	}
-	return nil
-}
-
-func (x *ListWithdrawDetailsRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -1945,8 +1871,7 @@ type ListRegisterRetentionRequest struct {
 	TimeRange              *TimeRange                     `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Page                   int32                          `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	PageSize               int32                          `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 5 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2007,13 +1932,6 @@ func (x *ListRegisterRetentionRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
-}
-
-func (x *ListRegisterRetentionRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
 }
 
 type ListRegisterRetentionResponse struct {
@@ -2090,8 +2008,7 @@ type ListDepositVtgDetailsRequest struct {
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                   int32                          `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 6 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2159,13 +2076,6 @@ func (x *ListDepositVtgDetailsRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
-}
-
-func (x *ListDepositVtgDetailsRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
 }
 
 type ListDepositVtgDetailsResponse struct {
@@ -2242,8 +2152,7 @@ type ListWithdrawVtgDetailsRequest struct {
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Currencies             []string                       `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	Page                   int32                          `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	PageSize               int32                          `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // operator_context removed - field 6 deprecated (security: must not be exposed to frontend)
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2311,13 +2220,6 @@ func (x *ListWithdrawVtgDetailsRequest) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
-}
-
-func (x *ListWithdrawVtgDetailsRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
 }
 
 type ListWithdrawVtgDetailsResponse struct {
@@ -6317,12 +6219,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\tH\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
 	"\bend_time\x18\x03 \x01(\tH\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x85\x03\n" +
+	"\t_end_time\"\xbd\x02\n" +
 	"\x11GetSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12'\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12'\n" +
 	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
 	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
 	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\"\xbf\n" +
@@ -6354,12 +6255,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x16ggr_reporting_currency\x18\x17 \x01(\tR\x14ggrReportingCurrency\x124\n" +
 	"\x16ngr_reporting_currency\x18\x18 \x01(\tR\x14ngrReportingCurrency\x126\n" +
 	"\x17arpu_reporting_currency\x18\x19 \x01(\tR\x15arpuReportingCurrency\x128\n" +
-	"\x18arppu_reporting_currency\x18\x1a \x01(\tR\x16arppuReportingCurrency\"\xda\x03\n" +
+	"\x18arppu_reporting_currency\x18\x1a \x01(\tR\x16arppuReportingCurrency\"\x92\x03\n" +
 	"\x14ListSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12'\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12'\n" +
 	"\x0faffiliate_codes\x18\x05 \x03(\tR\x0eaffiliateCodes\x12%\n" +
 	"\x0ereferral_codes\x18\x06 \x03(\tR\rreferralCodes\x125\n" +
 	"\x16registration_countries\x18\a \x03(\tR\x15registrationCountries\x12\x17\n" +
@@ -6446,7 +6346,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18F \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18G \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18H \x01(\x04R\x12retailerOperatorId\"\xa8\x03\n" +
+	"\x14retailer_operator_id\x18H \x01(\x04R\x12retailerOperatorId\"\xe0\x02\n" +
 	"\x15GetGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6458,8 +6358,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bgame_ids\x18\x06 \x03(\tR\agameIds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\a \x03(\tR\n" +
-	"currencies\x12F\n" +
-	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xfe\x03\n" +
+	"currencies\"\xfe\x03\n" +
 	"\x16GetGameSummaryResponse\x12!\n" +
 	"\fturnover_usd\x18\x01 \x01(\tR\vturnoverUsd\x12$\n" +
 	"\x0ewin_amount_usd\x18\x02 \x01(\tR\fwinAmountUsd\x12\x17\n" +
@@ -6471,7 +6370,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x1dwin_amount_reporting_currency\x18\b \x01(\tR\x1awinAmountReportingCurrency\x124\n" +
 	"\x16ggr_reporting_currency\x18\t \x01(\tR\x14ggrReportingCurrency\x12P\n" +
 	"%average_bet_amount_reporting_currency\x18\n" +
-	" \x01(\tR!averageBetAmountReportingCurrency\"\xd7\x03\n" +
+	" \x01(\tR!averageBetAmountReportingCurrency\"\x8f\x03\n" +
 	"\x13ListGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6485,9 +6384,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\a \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xcb\t\n" +
+	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\xcb\t\n" +
 	"\x14ListGameDataResponse\x12H\n" +
 	"\x04list\x18\a \x03(\v24.api.backoffice.service.v1.ListGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
@@ -6524,7 +6421,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18\x1a \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x1b \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x1c \x01(\x04R\x12retailerOperatorId\"\xe6\x03\n" +
+	"\x14retailer_operator_id\x18\x1c \x01(\x04R\x12retailerOperatorId\"\x9e\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6538,9 +6435,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\b \x03(\tR\n" +
 	"currencies\x12\x19\n" +
-	"\buser_ids\x18\t \x03(\x03R\auserIds\x12F\n" +
-	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x84\x04\n" +
+	"\buser_ids\x18\t \x03(\x03R\auserIds\"\x84\x04\n" +
 	"\x1cGetPlayerGameSummaryResponse\x12!\n" +
 	"\fturnover_usd\x18\x01 \x01(\tR\vturnoverUsd\x12$\n" +
 	"\x0ewin_amount_usd\x18\x02 \x01(\tR\fwinAmountUsd\x12\x17\n" +
@@ -6552,7 +6447,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x1dwin_amount_reporting_currency\x18\b \x01(\tR\x1awinAmountReportingCurrency\x124\n" +
 	"\x16ggr_reporting_currency\x18\t \x01(\tR\x14ggrReportingCurrency\x12P\n" +
 	"%average_bet_amount_reporting_currency\x18\n" +
-	" \x01(\tR!averageBetAmountReportingCurrency\"\x95\x04\n" +
+	" \x01(\tR!averageBetAmountReportingCurrency\"\xcd\x03\n" +
 	"\x19ListPlayerGameDataRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6569,8 +6464,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\buser_ids\x18\t \x03(\x03R\auserIds\x12\x12\n" +
 	"\x04page\x18\n" +
 	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf5\b\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\"\xf5\b\n" +
 	"\x1aListPlayerGameDataResponse\x12N\n" +
 	"\x04list\x18\a \x03(\v2:.api.backoffice.service.v1.ListPlayerGameDataResponse.ListR\x04list\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
@@ -6605,12 +6499,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18\x18 \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x19 \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\x1a \x01(\x04R\x12retailerOperatorId\"\xa7\x02\n" +
+	"\x14retailer_operator_id\x18\x1a \x01(\x04R\x12retailerOperatorId\"\xdf\x01\n" +
 	"\x1aGetDepositSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1e\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\"\xff\x02\n" +
@@ -6621,12 +6514,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x120\n" +
 	"\x14deposit_success_rate\x18\x03 \x01(\tR\x12depositSuccessRate\x12,\n" +
 	"\x12deposit_amount_usd\x18\x04 \x01(\tR\x10depositAmountUsd\x12I\n" +
-	"!deposit_amount_reporting_currency\x18\x05 \x01(\tR\x1edepositAmountReportingCurrency\"\xf8\x02\n" +
+	"!deposit_amount_reporting_currency\x18\x05 \x01(\tR\x1edepositAmountReportingCurrency\"\xb0\x02\n" +
 	"\x19ListDepositDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1e\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12\x17\n" +
@@ -6678,12 +6570,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18! \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\" \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18# \x01(\x04R\x12retailerOperatorId\"\xa8\x02\n" +
+	"\x14retailer_operator_id\x18# \x01(\x04R\x12retailerOperatorId\"\xe0\x01\n" +
 	"\x1bGetWithdrawSummariesRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1e\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\"\x8b\x03\n" +
@@ -6694,12 +6585,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x122\n" +
 	"\x15withdraw_success_rate\x18\x03 \x01(\tR\x13withdrawSuccessRate\x12.\n" +
 	"\x13withdraw_amount_usd\x18\x04 \x01(\tR\x11withdrawAmountUsd\x12K\n" +
-	"\"withdraw_amount_reporting_currency\x18\x05 \x01(\tR\x1fwithdrawAmountReportingCurrency\"\xf9\x02\n" +
+	"\"withdraw_amount_reporting_currency\x18\x05 \x01(\tR\x1fwithdrawAmountReportingCurrency\"\xb1\x02\n" +
 	"\x1aListWithdrawDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1e\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
 	"currencies\x12\x17\n" +
@@ -6755,14 +6645,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18% \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18& \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18' \x01(\x04R\x12retailerOperatorId\"\xba\x02\n" +
+	"\x14retailer_operator_id\x18' \x01(\x04R\x12retailerOperatorId\"\xf2\x01\n" +
 	"\x1cListRegisterRetentionRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xa0\x17\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xa0\x17\n" +
 	"\x1dListRegisterRetentionResponse\x12W\n" +
 	"\adetails\x18\x01 \x03(\v2=.api.backoffice.service.v1.ListRegisterRetentionResponse.ListR\adetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -6832,7 +6721,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18< \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18= \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18> \x01(\x04R\x12retailerOperatorId\"\xda\x02\n" +
+	"\x14retailer_operator_id\x18> \x01(\x04R\x12retailerOperatorId\"\x92\x02\n" +
 	"\x1cListDepositVtgDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6841,8 +6730,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\x03 \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe4\x10\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xe4\x10\n" +
 	"\x1dListDepositVtgDetailsResponse\x12d\n" +
 	"\rdaily_details\x18\x01 \x03(\v2?.api.backoffice.service.v1.ListDepositVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -6882,7 +6770,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\voperator_id\x18\x1e \x01(\x04R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x1f \x01(\x04R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18  \x01(\x04R\x12retailerOperatorId\"\xdb\x02\n" +
+	"\x14retailer_operator_id\x18  \x01(\x04R\x12retailerOperatorId\"\x93\x02\n" +
 	"\x1dListWithdrawVtgDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6891,8 +6779,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\x03 \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xea\x12\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xea\x12\n" +
 	"\x1eListWithdrawVtgDetailsResponse\x12e\n" +
 	"\rdaily_details\x18\x01 \x03(\v2@.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -7128,103 +7015,89 @@ var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
 	(*CustomerRecordReportDetailResponse_EventSettlementInformation)(nil),              // 45: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
 	(*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults)(nil), // 46: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
 	(*common.OperatorContextFilters)(nil),                                              // 47: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                                                     // 48: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                                                      // 49: google.protobuf.Timestamp
+	(*timestamppb.Timestamp)(nil),                                                      // 48: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
 	47, // 1: api.backoffice.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 2: api.backoffice.service.v1.GetSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 3: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 4: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 5: api.backoffice.service.v1.ListSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 6: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
-	0,  // 7: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 8: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 9: api.backoffice.service.v1.GetGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 10: api.backoffice.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 11: api.backoffice.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 12: api.backoffice.service.v1.ListGameDataRequest.operator_context:type_name -> api.common.OperatorContext
-	32, // 13: api.backoffice.service.v1.ListGameDataResponse.list:type_name -> api.backoffice.service.v1.ListGameDataResponse.List
-	0,  // 14: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 15: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 16: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 17: api.backoffice.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 18: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 19: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context:type_name -> api.common.OperatorContext
-	33, // 20: api.backoffice.service.v1.ListPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.ListPlayerGameDataResponse.List
-	0,  // 21: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 22: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 23: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	34, // 24: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	0,  // 25: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 26: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 27: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	35, // 28: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	0,  // 29: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 30: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 31: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	36, // 32: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	0,  // 33: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 34: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 35: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 36: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	0,  // 37: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 38: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 39: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 40: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	0,  // 41: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 42: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 43: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	39, // 44: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	0,  // 45: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 46: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 47: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	40, // 48: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	41, // 49: api.backoffice.service.v1.ListSportEventsResponse.events:type_name -> api.backoffice.service.v1.ListSportEventsResponse.SportEvent
-	42, // 50: api.backoffice.service.v1.CustomerRecordReportDetailResponse.user_detail:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
-	43, // 51: api.backoffice.service.v1.CustomerRecordReportDetailResponse.payment_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
-	44, // 52: api.backoffice.service.v1.CustomerRecordReportDetailResponse.game_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
-	45, // 53: api.backoffice.service.v1.CustomerRecordReportDetailResponse.event_settlement_information:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
-	49, // 54: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
-	49, // 55: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction.settlement_time:type_name -> google.protobuf.Timestamp
-	46, // 56: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
-	49, // 57: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults.event_start_time:type_name -> google.protobuf.Timestamp
-	1,  // 58: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 59: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 60: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 61: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
-	9,  // 62: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 63: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
-	13, // 64: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 65: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 66: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 67: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 68: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 69: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 70: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	27, // 71: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	29, // 72: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	2,  // 73: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 74: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 75: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 76: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	10, // 77: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 78: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	14, // 79: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 80: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 81: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 82: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 83: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 84: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 85: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	28, // 86: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	30, // 87: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	73, // [73:88] is the sub-list for method output_type
-	58, // [58:73] is the sub-list for method input_type
-	58, // [58:58] is the sub-list for extension type_name
-	58, // [58:58] is the sub-list for extension extendee
-	0,  // [0:58] is the sub-list for field type_name
+	0,  // 2: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 3: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	31, // 4: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
+	0,  // 5: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 6: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 7: api.backoffice.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 8: api.backoffice.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 9: api.backoffice.service.v1.ListGameDataResponse.list:type_name -> api.backoffice.service.v1.ListGameDataResponse.List
+	0,  // 10: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 11: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 12: api.backoffice.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 13: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	33, // 14: api.backoffice.service.v1.ListPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.ListPlayerGameDataResponse.List
+	0,  // 15: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 16: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 17: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	0,  // 18: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 19: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	35, // 20: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	0,  // 21: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 22: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	36, // 23: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	0,  // 24: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 25: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	37, // 26: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	0,  // 27: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 28: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	38, // 29: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	0,  // 30: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 31: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	39, // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	0,  // 33: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	47, // 34: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 35: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	41, // 36: api.backoffice.service.v1.ListSportEventsResponse.events:type_name -> api.backoffice.service.v1.ListSportEventsResponse.SportEvent
+	42, // 37: api.backoffice.service.v1.CustomerRecordReportDetailResponse.user_detail:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
+	43, // 38: api.backoffice.service.v1.CustomerRecordReportDetailResponse.payment_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
+	44, // 39: api.backoffice.service.v1.CustomerRecordReportDetailResponse.game_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
+	45, // 40: api.backoffice.service.v1.CustomerRecordReportDetailResponse.event_settlement_information:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
+	48, // 41: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
+	48, // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction.settlement_time:type_name -> google.protobuf.Timestamp
+	46, // 43: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
+	48, // 44: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults.event_start_time:type_name -> google.protobuf.Timestamp
+	1,  // 45: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 46: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 47: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 48: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
+	9,  // 49: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 50: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
+	13, // 51: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 52: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 53: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 54: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 55: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 56: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 57: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	27, // 58: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	29, // 59: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	2,  // 60: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 61: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 62: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 63: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	10, // 64: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 65: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	14, // 66: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 67: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 68: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 69: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 70: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 71: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 72: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	28, // 73: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	30, // 74: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	60, // [60:75] is the sub-list for method output_type
+	45, // [45:60] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }

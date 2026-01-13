@@ -39,7 +39,7 @@ service BackofficeDashboard {
 // System related messages
 message GetOverviewDashboardRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
-	api.common.OperatorContext operator_context = 2;
+	// operator_context removed - field 2 deprecated (security: must not be exposed to frontend)
 }
 
 message GetOverviewDashboardResponse {
@@ -101,7 +101,7 @@ message GetTimeRangedDashboardRequest {
 	TimeRangeType time_range_type = 1;
 	int32 custom_days = 2;
 	api.common.OperatorContextFilters operator_context_filters = 3;
-	api.common.OperatorContext operator_context = 4;
+	// operator_context removed - field 4 deprecated (security: must not be exposed to frontend)
 }
 
 message GetTimeRangedDashboardResponse {
@@ -146,7 +146,7 @@ message GetTopUsersDashboardRequest {
 	}
 	TimeRangeType time_range_type = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
-	api.common.OperatorContext operator_context = 3;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 }
 
 message GetTopUsersDashboardResponse {
@@ -179,7 +179,7 @@ message GetTopOperatorsDashboardRequest {
 	}
 	TimeRangeType time_range_type = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
-	api.common.OperatorContext operator_context = 3;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 }
 
 message GetTopOperatorsDashboardResponse {

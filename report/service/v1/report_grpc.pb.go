@@ -45,24 +45,24 @@ const (
 // This service is the ONLY service allowed to query ClickHouse directly.
 type ReportServiceClient interface {
 	// Summary reports
-	GetSummary(ctx context.Context, in *v1.GetSummaryRequest, opts ...grpc.CallOption) (*v1.GetSummaryResponse, error)
-	ListSummaries(ctx context.Context, in *v1.ListSummariesRequest, opts ...grpc.CallOption) (*v1.ListSummariesResponse, error)
+	GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*v1.GetSummaryResponse, error)
+	ListSummaries(ctx context.Context, in *ListSummariesRequest, opts ...grpc.CallOption) (*v1.ListSummariesResponse, error)
 	// Game data reports
-	GetGameDataSummary(ctx context.Context, in *v1.GetGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetGameSummaryResponse, error)
-	ListGameData(ctx context.Context, in *v1.ListGameDataRequest, opts ...grpc.CallOption) (*v1.ListGameDataResponse, error)
+	GetGameDataSummary(ctx context.Context, in *GetGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetGameSummaryResponse, error)
+	ListGameData(ctx context.Context, in *ListGameDataRequest, opts ...grpc.CallOption) (*v1.ListGameDataResponse, error)
 	// Player game data reports
-	GetPlayerGameDataSummary(ctx context.Context, in *v1.GetPlayerGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetPlayerGameSummaryResponse, error)
-	ListPlayerGameData(ctx context.Context, in *v1.ListPlayerGameDataRequest, opts ...grpc.CallOption) (*v1.ListPlayerGameDataResponse, error)
+	GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetPlayerGameSummaryResponse, error)
+	ListPlayerGameData(ctx context.Context, in *ListPlayerGameDataRequest, opts ...grpc.CallOption) (*v1.ListPlayerGameDataResponse, error)
 	// Retention reports
-	ListRegisterRetention(ctx context.Context, in *v1.ListRegisterRetentionRequest, opts ...grpc.CallOption) (*v1.ListRegisterRetentionResponse, error)
+	ListRegisterRetention(ctx context.Context, in *ListRegisterRetentionRequest, opts ...grpc.CallOption) (*v1.ListRegisterRetentionResponse, error)
 	// Deposit reports
-	GetDepositSummaries(ctx context.Context, in *v1.GetDepositSummariesRequest, opts ...grpc.CallOption) (*v1.GetDepositSummariesResponse, error)
-	ListDepositDetails(ctx context.Context, in *v1.ListDepositDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositDetailsResponse, error)
-	ListDepositVtgDetails(ctx context.Context, in *v1.ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositVtgDetailsResponse, error)
+	GetDepositSummaries(ctx context.Context, in *GetDepositSummariesRequest, opts ...grpc.CallOption) (*v1.GetDepositSummariesResponse, error)
+	ListDepositDetails(ctx context.Context, in *ListDepositDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositDetailsResponse, error)
+	ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositVtgDetailsResponse, error)
 	// Withdrawal reports
-	GetWithdrawSummaries(ctx context.Context, in *v1.GetWithdrawSummariesRequest, opts ...grpc.CallOption) (*v1.GetWithdrawSummariesResponse, error)
-	ListWithdrawDetails(ctx context.Context, in *v1.ListWithdrawDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawDetailsResponse, error)
-	ListWithdrawVtgDetails(ctx context.Context, in *v1.ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawVtgDetailsResponse, error)
+	GetWithdrawSummaries(ctx context.Context, in *GetWithdrawSummariesRequest, opts ...grpc.CallOption) (*v1.GetWithdrawSummariesResponse, error)
+	ListWithdrawDetails(ctx context.Context, in *ListWithdrawDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawDetailsResponse, error)
+	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawVtgDetailsResponse, error)
 	// Sport events (may need different implementation)
 	ListSportEvents(ctx context.Context, in *v1.ListSportEventsRequest, opts ...grpc.CallOption) (*v1.ListSportEventsResponse, error)
 	// Customer record detail
@@ -77,7 +77,7 @@ func NewReportServiceClient(cc grpc.ClientConnInterface) ReportServiceClient {
 	return &reportServiceClient{cc}
 }
 
-func (c *reportServiceClient) GetSummary(ctx context.Context, in *v1.GetSummaryRequest, opts ...grpc.CallOption) (*v1.GetSummaryResponse, error) {
+func (c *reportServiceClient) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*v1.GetSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetSummaryResponse)
 	err := c.cc.Invoke(ctx, ReportService_GetSummary_FullMethodName, in, out, cOpts...)
@@ -87,7 +87,7 @@ func (c *reportServiceClient) GetSummary(ctx context.Context, in *v1.GetSummaryR
 	return out, nil
 }
 
-func (c *reportServiceClient) ListSummaries(ctx context.Context, in *v1.ListSummariesRequest, opts ...grpc.CallOption) (*v1.ListSummariesResponse, error) {
+func (c *reportServiceClient) ListSummaries(ctx context.Context, in *ListSummariesRequest, opts ...grpc.CallOption) (*v1.ListSummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListSummariesResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListSummaries_FullMethodName, in, out, cOpts...)
@@ -97,7 +97,7 @@ func (c *reportServiceClient) ListSummaries(ctx context.Context, in *v1.ListSumm
 	return out, nil
 }
 
-func (c *reportServiceClient) GetGameDataSummary(ctx context.Context, in *v1.GetGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetGameSummaryResponse, error) {
+func (c *reportServiceClient) GetGameDataSummary(ctx context.Context, in *GetGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetGameSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetGameSummaryResponse)
 	err := c.cc.Invoke(ctx, ReportService_GetGameDataSummary_FullMethodName, in, out, cOpts...)
@@ -107,7 +107,7 @@ func (c *reportServiceClient) GetGameDataSummary(ctx context.Context, in *v1.Get
 	return out, nil
 }
 
-func (c *reportServiceClient) ListGameData(ctx context.Context, in *v1.ListGameDataRequest, opts ...grpc.CallOption) (*v1.ListGameDataResponse, error) {
+func (c *reportServiceClient) ListGameData(ctx context.Context, in *ListGameDataRequest, opts ...grpc.CallOption) (*v1.ListGameDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListGameDataResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListGameData_FullMethodName, in, out, cOpts...)
@@ -117,7 +117,7 @@ func (c *reportServiceClient) ListGameData(ctx context.Context, in *v1.ListGameD
 	return out, nil
 }
 
-func (c *reportServiceClient) GetPlayerGameDataSummary(ctx context.Context, in *v1.GetPlayerGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetPlayerGameSummaryResponse, error) {
+func (c *reportServiceClient) GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameSummaryRequest, opts ...grpc.CallOption) (*v1.GetPlayerGameSummaryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetPlayerGameSummaryResponse)
 	err := c.cc.Invoke(ctx, ReportService_GetPlayerGameDataSummary_FullMethodName, in, out, cOpts...)
@@ -127,7 +127,7 @@ func (c *reportServiceClient) GetPlayerGameDataSummary(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *reportServiceClient) ListPlayerGameData(ctx context.Context, in *v1.ListPlayerGameDataRequest, opts ...grpc.CallOption) (*v1.ListPlayerGameDataResponse, error) {
+func (c *reportServiceClient) ListPlayerGameData(ctx context.Context, in *ListPlayerGameDataRequest, opts ...grpc.CallOption) (*v1.ListPlayerGameDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListPlayerGameDataResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListPlayerGameData_FullMethodName, in, out, cOpts...)
@@ -137,7 +137,7 @@ func (c *reportServiceClient) ListPlayerGameData(ctx context.Context, in *v1.Lis
 	return out, nil
 }
 
-func (c *reportServiceClient) ListRegisterRetention(ctx context.Context, in *v1.ListRegisterRetentionRequest, opts ...grpc.CallOption) (*v1.ListRegisterRetentionResponse, error) {
+func (c *reportServiceClient) ListRegisterRetention(ctx context.Context, in *ListRegisterRetentionRequest, opts ...grpc.CallOption) (*v1.ListRegisterRetentionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListRegisterRetentionResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListRegisterRetention_FullMethodName, in, out, cOpts...)
@@ -147,7 +147,7 @@ func (c *reportServiceClient) ListRegisterRetention(ctx context.Context, in *v1.
 	return out, nil
 }
 
-func (c *reportServiceClient) GetDepositSummaries(ctx context.Context, in *v1.GetDepositSummariesRequest, opts ...grpc.CallOption) (*v1.GetDepositSummariesResponse, error) {
+func (c *reportServiceClient) GetDepositSummaries(ctx context.Context, in *GetDepositSummariesRequest, opts ...grpc.CallOption) (*v1.GetDepositSummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetDepositSummariesResponse)
 	err := c.cc.Invoke(ctx, ReportService_GetDepositSummaries_FullMethodName, in, out, cOpts...)
@@ -157,7 +157,7 @@ func (c *reportServiceClient) GetDepositSummaries(ctx context.Context, in *v1.Ge
 	return out, nil
 }
 
-func (c *reportServiceClient) ListDepositDetails(ctx context.Context, in *v1.ListDepositDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositDetailsResponse, error) {
+func (c *reportServiceClient) ListDepositDetails(ctx context.Context, in *ListDepositDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListDepositDetailsResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListDepositDetails_FullMethodName, in, out, cOpts...)
@@ -167,7 +167,7 @@ func (c *reportServiceClient) ListDepositDetails(ctx context.Context, in *v1.Lis
 	return out, nil
 }
 
-func (c *reportServiceClient) ListDepositVtgDetails(ctx context.Context, in *v1.ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositVtgDetailsResponse, error) {
+func (c *reportServiceClient) ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListDepositVtgDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListDepositVtgDetailsResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListDepositVtgDetails_FullMethodName, in, out, cOpts...)
@@ -177,7 +177,7 @@ func (c *reportServiceClient) ListDepositVtgDetails(ctx context.Context, in *v1.
 	return out, nil
 }
 
-func (c *reportServiceClient) GetWithdrawSummaries(ctx context.Context, in *v1.GetWithdrawSummariesRequest, opts ...grpc.CallOption) (*v1.GetWithdrawSummariesResponse, error) {
+func (c *reportServiceClient) GetWithdrawSummaries(ctx context.Context, in *GetWithdrawSummariesRequest, opts ...grpc.CallOption) (*v1.GetWithdrawSummariesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetWithdrawSummariesResponse)
 	err := c.cc.Invoke(ctx, ReportService_GetWithdrawSummaries_FullMethodName, in, out, cOpts...)
@@ -187,7 +187,7 @@ func (c *reportServiceClient) GetWithdrawSummaries(ctx context.Context, in *v1.G
 	return out, nil
 }
 
-func (c *reportServiceClient) ListWithdrawDetails(ctx context.Context, in *v1.ListWithdrawDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawDetailsResponse, error) {
+func (c *reportServiceClient) ListWithdrawDetails(ctx context.Context, in *ListWithdrawDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListWithdrawDetailsResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListWithdrawDetails_FullMethodName, in, out, cOpts...)
@@ -197,7 +197,7 @@ func (c *reportServiceClient) ListWithdrawDetails(ctx context.Context, in *v1.Li
 	return out, nil
 }
 
-func (c *reportServiceClient) ListWithdrawVtgDetails(ctx context.Context, in *v1.ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawVtgDetailsResponse, error) {
+func (c *reportServiceClient) ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*v1.ListWithdrawVtgDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListWithdrawVtgDetailsResponse)
 	err := c.cc.Invoke(ctx, ReportService_ListWithdrawVtgDetails_FullMethodName, in, out, cOpts...)
@@ -235,24 +235,24 @@ func (c *reportServiceClient) CustomerRecordReportDetail(ctx context.Context, in
 // This service is the ONLY service allowed to query ClickHouse directly.
 type ReportServiceServer interface {
 	// Summary reports
-	GetSummary(context.Context, *v1.GetSummaryRequest) (*v1.GetSummaryResponse, error)
-	ListSummaries(context.Context, *v1.ListSummariesRequest) (*v1.ListSummariesResponse, error)
+	GetSummary(context.Context, *GetSummaryRequest) (*v1.GetSummaryResponse, error)
+	ListSummaries(context.Context, *ListSummariesRequest) (*v1.ListSummariesResponse, error)
 	// Game data reports
-	GetGameDataSummary(context.Context, *v1.GetGameSummaryRequest) (*v1.GetGameSummaryResponse, error)
-	ListGameData(context.Context, *v1.ListGameDataRequest) (*v1.ListGameDataResponse, error)
+	GetGameDataSummary(context.Context, *GetGameSummaryRequest) (*v1.GetGameSummaryResponse, error)
+	ListGameData(context.Context, *ListGameDataRequest) (*v1.ListGameDataResponse, error)
 	// Player game data reports
-	GetPlayerGameDataSummary(context.Context, *v1.GetPlayerGameSummaryRequest) (*v1.GetPlayerGameSummaryResponse, error)
-	ListPlayerGameData(context.Context, *v1.ListPlayerGameDataRequest) (*v1.ListPlayerGameDataResponse, error)
+	GetPlayerGameDataSummary(context.Context, *GetPlayerGameSummaryRequest) (*v1.GetPlayerGameSummaryResponse, error)
+	ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*v1.ListPlayerGameDataResponse, error)
 	// Retention reports
-	ListRegisterRetention(context.Context, *v1.ListRegisterRetentionRequest) (*v1.ListRegisterRetentionResponse, error)
+	ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*v1.ListRegisterRetentionResponse, error)
 	// Deposit reports
-	GetDepositSummaries(context.Context, *v1.GetDepositSummariesRequest) (*v1.GetDepositSummariesResponse, error)
-	ListDepositDetails(context.Context, *v1.ListDepositDetailsRequest) (*v1.ListDepositDetailsResponse, error)
-	ListDepositVtgDetails(context.Context, *v1.ListDepositVtgDetailsRequest) (*v1.ListDepositVtgDetailsResponse, error)
+	GetDepositSummaries(context.Context, *GetDepositSummariesRequest) (*v1.GetDepositSummariesResponse, error)
+	ListDepositDetails(context.Context, *ListDepositDetailsRequest) (*v1.ListDepositDetailsResponse, error)
+	ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*v1.ListDepositVtgDetailsResponse, error)
 	// Withdrawal reports
-	GetWithdrawSummaries(context.Context, *v1.GetWithdrawSummariesRequest) (*v1.GetWithdrawSummariesResponse, error)
-	ListWithdrawDetails(context.Context, *v1.ListWithdrawDetailsRequest) (*v1.ListWithdrawDetailsResponse, error)
-	ListWithdrawVtgDetails(context.Context, *v1.ListWithdrawVtgDetailsRequest) (*v1.ListWithdrawVtgDetailsResponse, error)
+	GetWithdrawSummaries(context.Context, *GetWithdrawSummariesRequest) (*v1.GetWithdrawSummariesResponse, error)
+	ListWithdrawDetails(context.Context, *ListWithdrawDetailsRequest) (*v1.ListWithdrawDetailsResponse, error)
+	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*v1.ListWithdrawVtgDetailsResponse, error)
 	// Sport events (may need different implementation)
 	ListSportEvents(context.Context, *v1.ListSportEventsRequest) (*v1.ListSportEventsResponse, error)
 	// Customer record detail
@@ -267,43 +267,43 @@ type ReportServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedReportServiceServer struct{}
 
-func (UnimplementedReportServiceServer) GetSummary(context.Context, *v1.GetSummaryRequest) (*v1.GetSummaryResponse, error) {
+func (UnimplementedReportServiceServer) GetSummary(context.Context, *GetSummaryRequest) (*v1.GetSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSummary not implemented")
 }
-func (UnimplementedReportServiceServer) ListSummaries(context.Context, *v1.ListSummariesRequest) (*v1.ListSummariesResponse, error) {
+func (UnimplementedReportServiceServer) ListSummaries(context.Context, *ListSummariesRequest) (*v1.ListSummariesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListSummaries not implemented")
 }
-func (UnimplementedReportServiceServer) GetGameDataSummary(context.Context, *v1.GetGameSummaryRequest) (*v1.GetGameSummaryResponse, error) {
+func (UnimplementedReportServiceServer) GetGameDataSummary(context.Context, *GetGameSummaryRequest) (*v1.GetGameSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGameDataSummary not implemented")
 }
-func (UnimplementedReportServiceServer) ListGameData(context.Context, *v1.ListGameDataRequest) (*v1.ListGameDataResponse, error) {
+func (UnimplementedReportServiceServer) ListGameData(context.Context, *ListGameDataRequest) (*v1.ListGameDataResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListGameData not implemented")
 }
-func (UnimplementedReportServiceServer) GetPlayerGameDataSummary(context.Context, *v1.GetPlayerGameSummaryRequest) (*v1.GetPlayerGameSummaryResponse, error) {
+func (UnimplementedReportServiceServer) GetPlayerGameDataSummary(context.Context, *GetPlayerGameSummaryRequest) (*v1.GetPlayerGameSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPlayerGameDataSummary not implemented")
 }
-func (UnimplementedReportServiceServer) ListPlayerGameData(context.Context, *v1.ListPlayerGameDataRequest) (*v1.ListPlayerGameDataResponse, error) {
+func (UnimplementedReportServiceServer) ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*v1.ListPlayerGameDataResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListPlayerGameData not implemented")
 }
-func (UnimplementedReportServiceServer) ListRegisterRetention(context.Context, *v1.ListRegisterRetentionRequest) (*v1.ListRegisterRetentionResponse, error) {
+func (UnimplementedReportServiceServer) ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*v1.ListRegisterRetentionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRegisterRetention not implemented")
 }
-func (UnimplementedReportServiceServer) GetDepositSummaries(context.Context, *v1.GetDepositSummariesRequest) (*v1.GetDepositSummariesResponse, error) {
+func (UnimplementedReportServiceServer) GetDepositSummaries(context.Context, *GetDepositSummariesRequest) (*v1.GetDepositSummariesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDepositSummaries not implemented")
 }
-func (UnimplementedReportServiceServer) ListDepositDetails(context.Context, *v1.ListDepositDetailsRequest) (*v1.ListDepositDetailsResponse, error) {
+func (UnimplementedReportServiceServer) ListDepositDetails(context.Context, *ListDepositDetailsRequest) (*v1.ListDepositDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListDepositDetails not implemented")
 }
-func (UnimplementedReportServiceServer) ListDepositVtgDetails(context.Context, *v1.ListDepositVtgDetailsRequest) (*v1.ListDepositVtgDetailsResponse, error) {
+func (UnimplementedReportServiceServer) ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*v1.ListDepositVtgDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListDepositVtgDetails not implemented")
 }
-func (UnimplementedReportServiceServer) GetWithdrawSummaries(context.Context, *v1.GetWithdrawSummariesRequest) (*v1.GetWithdrawSummariesResponse, error) {
+func (UnimplementedReportServiceServer) GetWithdrawSummaries(context.Context, *GetWithdrawSummariesRequest) (*v1.GetWithdrawSummariesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetWithdrawSummaries not implemented")
 }
-func (UnimplementedReportServiceServer) ListWithdrawDetails(context.Context, *v1.ListWithdrawDetailsRequest) (*v1.ListWithdrawDetailsResponse, error) {
+func (UnimplementedReportServiceServer) ListWithdrawDetails(context.Context, *ListWithdrawDetailsRequest) (*v1.ListWithdrawDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListWithdrawDetails not implemented")
 }
-func (UnimplementedReportServiceServer) ListWithdrawVtgDetails(context.Context, *v1.ListWithdrawVtgDetailsRequest) (*v1.ListWithdrawVtgDetailsResponse, error) {
+func (UnimplementedReportServiceServer) ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*v1.ListWithdrawVtgDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListWithdrawVtgDetails not implemented")
 }
 func (UnimplementedReportServiceServer) ListSportEvents(context.Context, *v1.ListSportEventsRequest) (*v1.ListSportEventsResponse, error) {
@@ -334,7 +334,7 @@ func RegisterReportServiceServer(s grpc.ServiceRegistrar, srv ReportServiceServe
 }
 
 func _ReportService_GetSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetSummaryRequest)
+	in := new(GetSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -346,13 +346,13 @@ func _ReportService_GetSummary_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: ReportService_GetSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetSummary(ctx, req.(*v1.GetSummaryRequest))
+		return srv.(ReportServiceServer).GetSummary(ctx, req.(*GetSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListSummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListSummariesRequest)
+	in := new(ListSummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -364,13 +364,13 @@ func _ReportService_ListSummaries_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: ReportService_ListSummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListSummaries(ctx, req.(*v1.ListSummariesRequest))
+		return srv.(ReportServiceServer).ListSummaries(ctx, req.(*ListSummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_GetGameDataSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetGameSummaryRequest)
+	in := new(GetGameSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -382,13 +382,13 @@ func _ReportService_GetGameDataSummary_Handler(srv interface{}, ctx context.Cont
 		FullMethod: ReportService_GetGameDataSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetGameDataSummary(ctx, req.(*v1.GetGameSummaryRequest))
+		return srv.(ReportServiceServer).GetGameDataSummary(ctx, req.(*GetGameSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListGameData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListGameDataRequest)
+	in := new(ListGameDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -400,13 +400,13 @@ func _ReportService_ListGameData_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: ReportService_ListGameData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListGameData(ctx, req.(*v1.ListGameDataRequest))
+		return srv.(ReportServiceServer).ListGameData(ctx, req.(*ListGameDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_GetPlayerGameDataSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetPlayerGameSummaryRequest)
+	in := new(GetPlayerGameSummaryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -418,13 +418,13 @@ func _ReportService_GetPlayerGameDataSummary_Handler(srv interface{}, ctx contex
 		FullMethod: ReportService_GetPlayerGameDataSummary_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetPlayerGameDataSummary(ctx, req.(*v1.GetPlayerGameSummaryRequest))
+		return srv.(ReportServiceServer).GetPlayerGameDataSummary(ctx, req.(*GetPlayerGameSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListPlayerGameData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListPlayerGameDataRequest)
+	in := new(ListPlayerGameDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -436,13 +436,13 @@ func _ReportService_ListPlayerGameData_Handler(srv interface{}, ctx context.Cont
 		FullMethod: ReportService_ListPlayerGameData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListPlayerGameData(ctx, req.(*v1.ListPlayerGameDataRequest))
+		return srv.(ReportServiceServer).ListPlayerGameData(ctx, req.(*ListPlayerGameDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListRegisterRetention_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListRegisterRetentionRequest)
+	in := new(ListRegisterRetentionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -454,13 +454,13 @@ func _ReportService_ListRegisterRetention_Handler(srv interface{}, ctx context.C
 		FullMethod: ReportService_ListRegisterRetention_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListRegisterRetention(ctx, req.(*v1.ListRegisterRetentionRequest))
+		return srv.(ReportServiceServer).ListRegisterRetention(ctx, req.(*ListRegisterRetentionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_GetDepositSummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetDepositSummariesRequest)
+	in := new(GetDepositSummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -472,13 +472,13 @@ func _ReportService_GetDepositSummaries_Handler(srv interface{}, ctx context.Con
 		FullMethod: ReportService_GetDepositSummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetDepositSummaries(ctx, req.(*v1.GetDepositSummariesRequest))
+		return srv.(ReportServiceServer).GetDepositSummaries(ctx, req.(*GetDepositSummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListDepositDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListDepositDetailsRequest)
+	in := new(ListDepositDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -490,13 +490,13 @@ func _ReportService_ListDepositDetails_Handler(srv interface{}, ctx context.Cont
 		FullMethod: ReportService_ListDepositDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListDepositDetails(ctx, req.(*v1.ListDepositDetailsRequest))
+		return srv.(ReportServiceServer).ListDepositDetails(ctx, req.(*ListDepositDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListDepositVtgDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListDepositVtgDetailsRequest)
+	in := new(ListDepositVtgDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -508,13 +508,13 @@ func _ReportService_ListDepositVtgDetails_Handler(srv interface{}, ctx context.C
 		FullMethod: ReportService_ListDepositVtgDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListDepositVtgDetails(ctx, req.(*v1.ListDepositVtgDetailsRequest))
+		return srv.(ReportServiceServer).ListDepositVtgDetails(ctx, req.(*ListDepositVtgDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_GetWithdrawSummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetWithdrawSummariesRequest)
+	in := new(GetWithdrawSummariesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -526,13 +526,13 @@ func _ReportService_GetWithdrawSummaries_Handler(srv interface{}, ctx context.Co
 		FullMethod: ReportService_GetWithdrawSummaries_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetWithdrawSummaries(ctx, req.(*v1.GetWithdrawSummariesRequest))
+		return srv.(ReportServiceServer).GetWithdrawSummaries(ctx, req.(*GetWithdrawSummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListWithdrawDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListWithdrawDetailsRequest)
+	in := new(ListWithdrawDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -544,13 +544,13 @@ func _ReportService_ListWithdrawDetails_Handler(srv interface{}, ctx context.Con
 		FullMethod: ReportService_ListWithdrawDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListWithdrawDetails(ctx, req.(*v1.ListWithdrawDetailsRequest))
+		return srv.(ReportServiceServer).ListWithdrawDetails(ctx, req.(*ListWithdrawDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ReportService_ListWithdrawVtgDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListWithdrawVtgDetailsRequest)
+	in := new(ListWithdrawVtgDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -562,7 +562,7 @@ func _ReportService_ListWithdrawVtgDetails_Handler(srv interface{}, ctx context.
 		FullMethod: ReportService_ListWithdrawVtgDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListWithdrawVtgDetails(ctx, req.(*v1.ListWithdrawVtgDetailsRequest))
+		return srv.(ReportServiceServer).ListWithdrawVtgDetails(ctx, req.(*ListWithdrawVtgDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
