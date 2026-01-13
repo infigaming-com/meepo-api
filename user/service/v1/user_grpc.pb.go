@@ -82,6 +82,8 @@ const (
 	User_GetOperatorDetailsByUserId_FullMethodName         = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
 	User_GetOperatorAccountSettings_FullMethodName         = "/api.user.service.v1.User/GetOperatorAccountSettings"
 	User_UpdateOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
+	User_SetOperatorMaxHouseEdge_FullMethodName            = "/api.user.service.v1.User/SetOperatorMaxHouseEdge"
+	User_GetOperatorMaxHouseEdge_FullMethodName            = "/api.user.service.v1.User/GetOperatorMaxHouseEdge"
 	User_GetUserAccountSettingsStatus_FullMethodName       = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
 	User_AddResponsibleGamblingConfig_FullMethodName       = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
 	User_DeleteResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
@@ -235,6 +237,8 @@ type UserClient interface {
 	GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error)
 	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error)
 	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error)
+	SetOperatorMaxHouseEdge(ctx context.Context, in *SetOperatorMaxHouseEdgeRequest, opts ...grpc.CallOption) (*SetOperatorMaxHouseEdgeResponse, error)
+	GetOperatorMaxHouseEdge(ctx context.Context, in *GetOperatorMaxHouseEdgeRequest, opts ...grpc.CallOption) (*GetOperatorMaxHouseEdgeResponse, error)
 	GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsStatusResponse, error)
 	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
@@ -909,6 +913,26 @@ func (c *userClient) UpdateOperatorAccountSettings(ctx context.Context, in *Upda
 	return out, nil
 }
 
+func (c *userClient) SetOperatorMaxHouseEdge(ctx context.Context, in *SetOperatorMaxHouseEdgeRequest, opts ...grpc.CallOption) (*SetOperatorMaxHouseEdgeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorMaxHouseEdgeResponse)
+	err := c.cc.Invoke(ctx, User_SetOperatorMaxHouseEdge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorMaxHouseEdge(ctx context.Context, in *GetOperatorMaxHouseEdgeRequest, opts ...grpc.CallOption) (*GetOperatorMaxHouseEdgeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorMaxHouseEdgeResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorMaxHouseEdge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserAccountSettingsStatusResponse)
@@ -1357,6 +1381,8 @@ type UserServer interface {
 	GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error)
+	SetOperatorMaxHouseEdge(context.Context, *SetOperatorMaxHouseEdgeRequest) (*SetOperatorMaxHouseEdgeResponse, error)
+	GetOperatorMaxHouseEdge(context.Context, *GetOperatorMaxHouseEdgeRequest) (*GetOperatorMaxHouseEdgeResponse, error)
 	GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error)
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
@@ -1596,6 +1622,12 @@ func (UnimplementedUserServer) GetOperatorAccountSettings(context.Context, *GetO
 }
 func (UnimplementedUserServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) SetOperatorMaxHouseEdge(context.Context, *SetOperatorMaxHouseEdgeRequest) (*SetOperatorMaxHouseEdgeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOperatorMaxHouseEdge not implemented")
+}
+func (UnimplementedUserServer) GetOperatorMaxHouseEdge(context.Context, *GetOperatorMaxHouseEdgeRequest) (*GetOperatorMaxHouseEdgeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorMaxHouseEdge not implemented")
 }
 func (UnimplementedUserServer) GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserAccountSettingsStatus not implemented")
@@ -2833,6 +2865,42 @@ func _User_UpdateOperatorAccountSettings_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SetOperatorMaxHouseEdge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorMaxHouseEdgeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOperatorMaxHouseEdge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOperatorMaxHouseEdge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOperatorMaxHouseEdge(ctx, req.(*SetOperatorMaxHouseEdgeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorMaxHouseEdge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorMaxHouseEdgeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorMaxHouseEdge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorMaxHouseEdge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorMaxHouseEdge(ctx, req.(*GetOperatorMaxHouseEdgeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetUserAccountSettingsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserAccountSettingsStatusRequest)
 	if err := dec(in); err != nil {
@@ -3681,6 +3749,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorAccountSettings",
 			Handler:    _User_UpdateOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "SetOperatorMaxHouseEdge",
+			Handler:    _User_SetOperatorMaxHouseEdge_Handler,
+		},
+		{
+			MethodName: "GetOperatorMaxHouseEdge",
+			Handler:    _User_GetOperatorMaxHouseEdge_Handler,
 		},
 		{
 			MethodName: "GetUserAccountSettingsStatus",

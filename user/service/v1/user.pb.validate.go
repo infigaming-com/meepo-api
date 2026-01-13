@@ -17856,6 +17856,538 @@ var _ interface {
 	ErrorName() string
 } = UpdateOperatorAccountSettingsResponseValidationError{}
 
+// Validate checks the field values on SetOperatorMaxHouseEdgeRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetOperatorMaxHouseEdgeRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetOperatorMaxHouseEdgeRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetOperatorMaxHouseEdgeRequestMultiError, or nil if none found.
+func (m *SetOperatorMaxHouseEdgeRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorMaxHouseEdgeRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorMaxHouseEdgeRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorMaxHouseEdgeRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for MaxHouseEdge
+
+	if len(errors) > 0 {
+		return SetOperatorMaxHouseEdgeRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorMaxHouseEdgeRequestMultiError is an error wrapping multiple
+// validation errors returned by SetOperatorMaxHouseEdgeRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SetOperatorMaxHouseEdgeRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorMaxHouseEdgeRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorMaxHouseEdgeRequestMultiError) AllErrors() []error { return m }
+
+// SetOperatorMaxHouseEdgeRequestValidationError is the validation error
+// returned by SetOperatorMaxHouseEdgeRequest.Validate if the designated
+// constraints aren't met.
+type SetOperatorMaxHouseEdgeRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorMaxHouseEdgeRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorMaxHouseEdgeRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorMaxHouseEdgeRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorMaxHouseEdgeRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorMaxHouseEdgeRequestValidationError) ErrorName() string {
+	return "SetOperatorMaxHouseEdgeRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorMaxHouseEdgeRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorMaxHouseEdgeRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorMaxHouseEdgeRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorMaxHouseEdgeRequestValidationError{}
+
+// Validate checks the field values on SetOperatorMaxHouseEdgeResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetOperatorMaxHouseEdgeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetOperatorMaxHouseEdgeResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetOperatorMaxHouseEdgeResponseMultiError, or nil if none found.
+func (m *SetOperatorMaxHouseEdgeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorMaxHouseEdgeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetOperatorMaxHouseEdgeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorMaxHouseEdgeResponseMultiError is an error wrapping multiple
+// validation errors returned by SetOperatorMaxHouseEdgeResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SetOperatorMaxHouseEdgeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorMaxHouseEdgeResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorMaxHouseEdgeResponseMultiError) AllErrors() []error { return m }
+
+// SetOperatorMaxHouseEdgeResponseValidationError is the validation error
+// returned by SetOperatorMaxHouseEdgeResponse.Validate if the designated
+// constraints aren't met.
+type SetOperatorMaxHouseEdgeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorMaxHouseEdgeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorMaxHouseEdgeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorMaxHouseEdgeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorMaxHouseEdgeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorMaxHouseEdgeResponseValidationError) ErrorName() string {
+	return "SetOperatorMaxHouseEdgeResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorMaxHouseEdgeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorMaxHouseEdgeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorMaxHouseEdgeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorMaxHouseEdgeResponseValidationError{}
+
+// Validate checks the field values on GetOperatorMaxHouseEdgeRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorMaxHouseEdgeRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorMaxHouseEdgeRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetOperatorMaxHouseEdgeRequestMultiError, or nil if none found.
+func (m *GetOperatorMaxHouseEdgeRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorMaxHouseEdgeRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorMaxHouseEdgeRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorMaxHouseEdgeRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorMaxHouseEdgeRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorMaxHouseEdgeRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorMaxHouseEdgeRequestMultiError is an error wrapping multiple
+// validation errors returned by GetOperatorMaxHouseEdgeRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetOperatorMaxHouseEdgeRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorMaxHouseEdgeRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorMaxHouseEdgeRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorMaxHouseEdgeRequestValidationError is the validation error
+// returned by GetOperatorMaxHouseEdgeRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorMaxHouseEdgeRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorMaxHouseEdgeRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorMaxHouseEdgeRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorMaxHouseEdgeRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorMaxHouseEdgeRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorMaxHouseEdgeRequestValidationError) ErrorName() string {
+	return "GetOperatorMaxHouseEdgeRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorMaxHouseEdgeRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorMaxHouseEdgeRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorMaxHouseEdgeRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorMaxHouseEdgeRequestValidationError{}
+
+// Validate checks the field values on GetOperatorMaxHouseEdgeResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorMaxHouseEdgeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorMaxHouseEdgeResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetOperatorMaxHouseEdgeResponseMultiError, or nil if none found.
+func (m *GetOperatorMaxHouseEdgeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorMaxHouseEdgeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MaxHouseEdge
+
+	if len(errors) > 0 {
+		return GetOperatorMaxHouseEdgeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorMaxHouseEdgeResponseMultiError is an error wrapping multiple
+// validation errors returned by GetOperatorMaxHouseEdgeResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetOperatorMaxHouseEdgeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorMaxHouseEdgeResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorMaxHouseEdgeResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorMaxHouseEdgeResponseValidationError is the validation error
+// returned by GetOperatorMaxHouseEdgeResponse.Validate if the designated
+// constraints aren't met.
+type GetOperatorMaxHouseEdgeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorMaxHouseEdgeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorMaxHouseEdgeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorMaxHouseEdgeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorMaxHouseEdgeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorMaxHouseEdgeResponseValidationError) ErrorName() string {
+	return "GetOperatorMaxHouseEdgeResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorMaxHouseEdgeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorMaxHouseEdgeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorMaxHouseEdgeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorMaxHouseEdgeResponseValidationError{}
+
 // Validate checks the field values on ResponsibleGamblingConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
