@@ -291,6 +291,12 @@ service User {
 	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
 	}
 
+	rpc SetOperatorMaxHouseEdge(SetOperatorMaxHouseEdgeRequest) returns (SetOperatorMaxHouseEdgeResponse) {
+	}
+
+	rpc GetOperatorMaxHouseEdge(GetOperatorMaxHouseEdgeRequest) returns (GetOperatorMaxHouseEdgeResponse) {
+	}
+
 	rpc GetUserAccountSettingsStatus(GetUserAccountSettingsStatusRequest) returns (GetUserAccountSettingsStatusResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/account-settings/status/get"
@@ -1620,6 +1626,24 @@ message UpdateOperatorAccountSettingsRequest {
 }
 
 message UpdateOperatorAccountSettingsResponse {
+}
+
+message SetOperatorMaxHouseEdgeRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int32 max_house_edge = 3;
+}
+
+message SetOperatorMaxHouseEdgeResponse {
+}
+
+message GetOperatorMaxHouseEdgeRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetOperatorMaxHouseEdgeResponse {
+	int32 max_house_edge = 1;
 }
 
 message ResponsibleGamblingConfig {
