@@ -11078,6 +11078,8 @@ components:
                     type: array
                     items:
                         type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetGameSummaryResponse:
             type: object
             properties:
@@ -11391,6 +11393,8 @@ components:
             properties:
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
             description: System related messages
         api.backoffice.service.v1.GetOverviewDashboardResponse:
             type: object
@@ -11540,6 +11544,8 @@ components:
                     type: array
                     items:
                         type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetPlayerGameSummaryResponse:
             type: object
             properties:
@@ -11623,6 +11629,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 affiliateCodes:
                     type: array
                     items:
@@ -11724,6 +11732,8 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetTimeRangedDashboardResponse:
             type: object
             properties:
@@ -11773,6 +11783,8 @@ components:
                     format: enum
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetTopOperatorsDashboardResponse:
             type: object
             properties:
@@ -11848,6 +11860,8 @@ components:
                     format: enum
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetTopUsersDashboardResponse:
             type: object
             properties:
@@ -13123,6 +13137,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
@@ -13244,6 +13260,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListDepositVtgDetailsResponse:
             type: object
             properties:
@@ -13458,6 +13476,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListGameDataResponse:
             type: object
             properties:
@@ -14163,6 +14183,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListPlayerGameDataResponse:
             type: object
             properties:
@@ -14450,6 +14472,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListRegisterRetentionResponse:
             type: object
             properties:
@@ -14824,6 +14848,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 affiliateCodes:
                     type: array
                     items:
@@ -15511,6 +15537,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currencies:
                     type: array
                     items:
@@ -15640,6 +15668,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListWithdrawVtgDetailsResponse:
             type: object
             properties:
