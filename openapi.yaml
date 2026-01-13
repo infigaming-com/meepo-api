@@ -9759,6 +9759,8 @@ components:
                     type: string
                 rtpMax:
                     type: string
+                gameIdExactMatch:
+                    type: boolean
         api.backoffice.service.v1.BackofficeListGamesUnderTagResponse:
             type: object
             properties:
@@ -13586,6 +13588,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                gameIdExactMatch:
+                    type: boolean
         api.backoffice.service.v1.ListGamesResponse:
             type: object
             properties:

@@ -5827,6 +5827,8 @@ func (m *BackofficeListGamesRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for GameIdExactMatch
+
 	if m.GameId != nil {
 		// no validation rules for GameId
 	}
@@ -22343,6 +22345,8 @@ func (m *BackofficeListGamesUnderTagRequest) validate(all bool) error {
 	// no validation rules for Page
 
 	// no validation rules for PageSize
+
+	// no validation rules for GameIdExactMatch
 
 	if m.ProviderId != nil {
 		// no validation rules for ProviderId

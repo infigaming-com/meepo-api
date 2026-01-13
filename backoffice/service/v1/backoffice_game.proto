@@ -581,6 +581,7 @@ message ListGamesRequest {
 	optional bool enabled = 13;
 	optional int32 page = 14;
 	optional int32 page_size = 15;
+	bool game_id_exact_match = 16; // true: exact match, false: fuzzy search (default)
 }
 
 message ListGamesResponse {
@@ -873,6 +874,7 @@ message BackofficeListGamesUnderTagRequest {
 	optional bool free_spin = 11;
 	optional string rtp_min = 12;
 	optional string rtp_max = 13;
+	bool game_id_exact_match = 14; // true: exact match, false: fuzzy search (default)
 }
 
 message BackofficeListGamesUnderTagResponse {
