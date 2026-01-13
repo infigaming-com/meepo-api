@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package api.jackpot.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/jackpot/service/v1;v1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service PoolService {
+  rpc GetPoolConfig(GetPoolConfigRequest) returns (GetPoolConfigResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/pools/{pool_id}"
+    };
+  }
+
+  rpc ListPoolConfigs(ListPoolConfigsRequest) returns (ListPoolConfigsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/pools"
+    };
+  }
+}
+
+message GetPoolConfigRequest {
+  string pool_id = 1 [json_name = "poolId"];
+}
+
+message GetPoolConfigResponse {
+  PoolConfig config = 1;
+}
+
+message ListPoolConfigsRequest {
+  optional string site_id = 1 [json_name = "siteId"];
+  optional string pool_type = 2 [json_name = "poolType"];
+  optional string period = 3;
+  optional bool enabled = 4;
+  optional int32 page = 5;
+  optional int32 page_size = 6 [json_name = "pageSize"];
+}
+
+message ListPoolConfigsResponse {
+  repeated PoolConfig items = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 page_size = 4 [json_name = "pageSize"];
+}
+
+message PoolConfig {
+  string pool_id = 1 [json_name = "pool_id"];
+  optional string site_id = 2 [json_name = "site_id"];
+  string pool_type = 3 [json_name = "pool_type"];
+  string period = 4;
+  bool enabled = 5;
+  string currency = 6;
+  string floor_amount = 7 [json_name = "floor_amount"];
+  string contribution_rate = 8 [json_name = "contribution_rate"];
+  string accumulation_mode = 9 [json_name = "accumulation_mode"];
+  optional google.protobuf.Struct game_config = 10 [json_name = "game_config"];
+  int64 created_at = 11 [json_name = "created_at"];
+  int64 updated_at = 12 [json_name = "updated_at"];
+}

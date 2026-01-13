@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package api.jackpot.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/jackpot/service/v1;v1";
+
+import "google/api/annotations.proto";
+
+service PayoutService {
+  rpc GetPayout(GetPayoutRequest) returns (GetPayoutResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/payouts/{payout_id}"
+    };
+  }
+
+  rpc ListPayoutsByUserID(ListPayoutsByUserIDRequest) returns (ListPayoutsByUserIDResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/payouts"
+    };
+  }
+
+  rpc ListPayoutsByDrawID(ListPayoutsByDrawIDRequest) returns (ListPayoutsByDrawIDResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/payouts/draw/{draw_id}"
+    };
+  }
+}
+
+message GetPayoutRequest {
+  int64 payout_id = 1 [json_name = "payoutId"];
+}
+
+message GetPayoutResponse {
+  Payout payout = 1;
+}
+
+message ListPayoutsByUserIDRequest {
+  string user_id = 1 [json_name = "userId"];
+  optional string status = 2;
+  optional string start_time = 3 [json_name = "startTime"];
+  optional string end_time = 4 [json_name = "endTime"];
+  optional int32 page = 5;
+  optional int32 page_size = 6 [json_name = "pageSize"];
+}
+
+message ListPayoutsByUserIDResponse {
+  repeated Payout items = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 page_size = 4 [json_name = "pageSize"];
+}
+
+message ListPayoutsByDrawIDRequest {
+  int64 draw_id = 1 [json_name = "drawId"];
+}
+
+message ListPayoutsByDrawIDResponse {
+  repeated Payout items = 1;
+}
+
+message Payout {
+  int64 payout_id = 1 [json_name = "payout_id"];
+  int64 draw_id = 2 [json_name = "draw_id"];
+  int64 ticket_id = 3 [json_name = "ticket_id"];
+  string user_id = 4 [json_name = "user_id"];
+  string pool_id = 5 [json_name = "pool_id"];
+  string amount_usd = 6 [json_name = "amount_usd"];
+  int32 matched_count = 7 [json_name = "matched_count"];
+  string status = 8;
+  optional string failure_reason = 9 [json_name = "failure_reason"];
+  int64 created_at = 10 [json_name = "created_at"];
+  int64 updated_at = 11 [json_name = "updated_at"];
+}

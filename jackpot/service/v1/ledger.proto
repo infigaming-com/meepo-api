@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package api.jackpot.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/jackpot/service/v1;v1";
+
+import "google/api/annotations.proto";
+
+service LedgerService {
+  rpc GetPoolBalance(GetPoolBalanceRequest) returns (GetPoolBalanceResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/pools/{pool_id}/balance"
+    };
+  }
+}
+
+message GetPoolBalanceRequest {
+  string pool_id = 1 [json_name = "poolId"];
+}
+
+message GetPoolBalanceResponse {
+  PoolBalance balance = 1;
+}
+
+message PoolBalance {
+  string pool_id = 1 [json_name = "pool_id"];
+  string balance_usd = 2 [json_name = "balance_usd"];
+  int64 last_updated = 3 [json_name = "last_updated"];
+}
