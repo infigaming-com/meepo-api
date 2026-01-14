@@ -1884,6 +1884,7 @@ type ListGamesRequest struct {
 	Enabled             *bool                  `protobuf:"varint,13,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	Page                *int32                 `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize            *int32                 `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	GameIdExactMatch    bool                   `protobuf:"varint,16,opt,name=game_id_exact_match,json=gameIdExactMatch,proto3" json:"game_id_exact_match,omitempty"` // true: exact match, false: fuzzy search (default)
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2021,6 +2022,13 @@ func (x *ListGamesRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListGamesRequest) GetGameIdExactMatch() bool {
+	if x != nil {
+		return x.GameIdExactMatch
+	}
+	return false
 }
 
 type ListGamesResponse struct {
@@ -4228,13 +4236,14 @@ func (x *BackofficeRemoveProviderFromTagResponse) GetGamesRemoved() int32 {
 }
 
 type BackofficeUpdateGameOrderInTagRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TagId         int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
-	GameId        string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	OrderIndex    int32                  `protobuf:"varint,3,opt,name=order_index,json=orderIndex,proto3" json:"order_index,omitempty"`
-	Sticky        bool                   `protobuf:"varint,4,opt,name=sticky,proto3" json:"sticky,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	TagId             int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+	GameId            string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	OriginOrderIndex  int32                  `protobuf:"varint,3,opt,name=origin_order_index,json=originOrderIndex,proto3" json:"origin_order_index,omitempty"` // 原位置
+	Sticky            bool                   `protobuf:"varint,4,opt,name=sticky,proto3" json:"sticky,omitempty"`
+	CurrentOrderIndex int32                  `protobuf:"varint,5,opt,name=current_order_index,json=currentOrderIndex,proto3" json:"current_order_index,omitempty"` // 目标位置
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *BackofficeUpdateGameOrderInTagRequest) Reset() {
@@ -4281,9 +4290,9 @@ func (x *BackofficeUpdateGameOrderInTagRequest) GetGameId() string {
 	return ""
 }
 
-func (x *BackofficeUpdateGameOrderInTagRequest) GetOrderIndex() int32 {
+func (x *BackofficeUpdateGameOrderInTagRequest) GetOriginOrderIndex() int32 {
 	if x != nil {
-		return x.OrderIndex
+		return x.OriginOrderIndex
 	}
 	return 0
 }
@@ -4293,6 +4302,13 @@ func (x *BackofficeUpdateGameOrderInTagRequest) GetSticky() bool {
 		return x.Sticky
 	}
 	return false
+}
+
+func (x *BackofficeUpdateGameOrderInTagRequest) GetCurrentOrderIndex() int32 {
+	if x != nil {
+		return x.CurrentOrderIndex
+	}
+	return 0
 }
 
 type BackofficeUpdateGameOrderInTagResponse struct {
@@ -4434,6 +4450,7 @@ type BackofficeListGamesUnderTagRequest struct {
 	FreeSpin            *bool                  `protobuf:"varint,11,opt,name=free_spin,json=freeSpin,proto3,oneof" json:"free_spin,omitempty"`
 	RtpMin              *string                `protobuf:"bytes,12,opt,name=rtp_min,json=rtpMin,proto3,oneof" json:"rtp_min,omitempty"`
 	RtpMax              *string                `protobuf:"bytes,13,opt,name=rtp_max,json=rtpMax,proto3,oneof" json:"rtp_max,omitempty"`
+	GameIdExactMatch    bool                   `protobuf:"varint,14,opt,name=game_id_exact_match,json=gameIdExactMatch,proto3" json:"game_id_exact_match,omitempty"` // true: exact match, false: fuzzy search (default)
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -4557,6 +4574,13 @@ func (x *BackofficeListGamesUnderTagRequest) GetRtpMax() string {
 		return *x.RtpMax
 	}
 	return ""
+}
+
+func (x *BackofficeListGamesUnderTagRequest) GetGameIdExactMatch() bool {
+	if x != nil {
+		return x.GameIdExactMatch
+	}
+	return false
 }
 
 type BackofficeListGamesUnderTagResponse struct {
@@ -6092,7 +6116,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x10valid_bet_amount\x18\f \x01(\tR\x0evalidBetAmount\x1ay\n" +
 	"\x06Amount\x12,\n" +
 	"\x12amount_in_currency\x18\x01 \x01(\tR\x10amountInCurrency\x12A\n" +
-	"\x1damount_in_settlement_currency\x18\x02 \x01(\tR\x1aamountInSettlementCurrency\"\x89\x05\n" +
+	"\x1damount_in_settlement_currency\x18\x02 \x01(\tR\x1aamountInSettlementCurrency\"\xb8\x05\n" +
 	"\x10ListGamesRequest\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x1e\n" +
 	"\n" +
@@ -6112,7 +6136,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\artp_max\x18\f \x01(\tH\x04R\x06rtpMax\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\r \x01(\bH\x05R\aenabled\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x0e \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x0f \x01(\x05H\aR\bpageSize\x88\x01\x01B\n" +
+	"\tpage_size\x18\x0f \x01(\x05H\aR\bpageSize\x88\x01\x01\x12-\n" +
+	"\x13game_id_exact_match\x18\x10 \x01(\bR\x10gameIdExactMatchB\n" +
 	"\n" +
 	"\b_game_idB\x14\n" +
 	"\x12_support_bonus_buyB\x10\n" +
@@ -6392,13 +6417,13 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\vprovider_id\x18\x02 \x01(\tR\n" +
 	"providerId\"N\n" +
 	"'BackofficeRemoveProviderFromTagResponse\x12#\n" +
-	"\rgames_removed\x18\x01 \x01(\x05R\fgamesRemoved\"\x90\x01\n" +
+	"\rgames_removed\x18\x01 \x01(\x05R\fgamesRemoved\"\xcd\x01\n" +
 	"%BackofficeUpdateGameOrderInTagRequest\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12\x17\n" +
-	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12\x1f\n" +
-	"\vorder_index\x18\x03 \x01(\x05R\n" +
-	"orderIndex\x12\x16\n" +
-	"\x06sticky\x18\x04 \x01(\bR\x06sticky\"(\n" +
+	"\agame_id\x18\x02 \x01(\tR\x06gameId\x12,\n" +
+	"\x12origin_order_index\x18\x03 \x01(\x05R\x10originOrderIndex\x12\x16\n" +
+	"\x06sticky\x18\x04 \x01(\bR\x06sticky\x12.\n" +
+	"\x13current_order_index\x18\x05 \x01(\x05R\x11currentOrderIndex\"(\n" +
 	"&BackofficeUpdateGameOrderInTagResponse\"?\n" +
 	"&BackofficeListProvidersUnderTagRequest\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\"\xc6\x02\n" +
@@ -6409,7 +6434,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"providerId\x12#\n" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12(\n" +
 	"\x10total_game_count\x18\x03 \x01(\x05R\x0etotalGameCount\x12+\n" +
-	"\x12games_in_tag_count\x18\x04 \x01(\x05R\x0fgamesInTagCount\"\xd5\x04\n" +
+	"\x12games_in_tag_count\x18\x04 \x01(\x05R\x0fgamesInTagCount\"\x84\x05\n" +
 	"\"BackofficeListGamesUnderTagRequest\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12$\n" +
 	"\vprovider_id\x18\x02 \x01(\tH\x00R\n" +
@@ -6425,7 +6450,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	" \x01(\bH\x04R\fsupportBonus\x88\x01\x01\x12 \n" +
 	"\tfree_spin\x18\v \x01(\bH\x05R\bfreeSpin\x88\x01\x01\x12\x1c\n" +
 	"\artp_min\x18\f \x01(\tH\x06R\x06rtpMin\x88\x01\x01\x12\x1c\n" +
-	"\artp_max\x18\r \x01(\tH\aR\x06rtpMax\x88\x01\x01B\x0e\n" +
+	"\artp_max\x18\r \x01(\tH\aR\x06rtpMax\x88\x01\x01\x12-\n" +
+	"\x13game_id_exact_match\x18\x0e \x01(\bR\x10gameIdExactMatchB\x0e\n" +
 	"\f_provider_idB\n" +
 	"\n" +
 	"\b_game_idB\x12\n" +
