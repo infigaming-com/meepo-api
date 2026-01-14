@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package api.jackpot.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/jackpot/service/v1;v1";
+
+import "google/api/annotations.proto";
+
+service SeedService {
+  rpc GetServerSeed(GetServerSeedRequest) returns (GetServerSeedResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/pools/seeds"
+      body: "*"
+    };
+  }
+}
+
+message GetServerSeedRequest {
+  string pool_id = 1 [json_name = "poolId"];
+}
+
+message GetServerSeedResponse {
+  ServerSeed seed = 1;
+}
+
+message ServerSeed {
+  string pool_id = 1 [json_name = "pool_id"];
+  string draw_period = 2 [json_name = "draw_period"];
+  string seed_hash = 3 [json_name = "seed_hash"];
+  optional string server_seed = 4 [json_name = "server_seed"];
+  int64 created_at = 5 [json_name = "created_at"];
+  optional int64 revealed_at = 6 [json_name = "revealed_at"];
+}
