@@ -270,7 +270,7 @@ type GetAffiliateDashboardRequest struct {
 	AffiliateId              int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	ProductStatsLimit        *int32                  `protobuf:"varint,4,opt,name=product_stats_limit,json=productStatsLimit,proto3,oneof" json:"product_stats_limit,omitempty"` // limit for product stats, default 50
+	GameStatsLimit           *int32                  `protobuf:"varint,4,opt,name=game_stats_limit,json=gameStatsLimit,proto3,oneof" json:"game_stats_limit,omitempty"` // limit for game stats, group by provider,default 10
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
@@ -327,9 +327,9 @@ func (x *GetAffiliateDashboardRequest) GetEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetAffiliateDashboardRequest) GetProductStatsLimit() int32 {
-	if x != nil && x.ProductStatsLimit != nil {
-		return *x.ProductStatsLimit
+func (x *GetAffiliateDashboardRequest) GetGameStatsLimit() int32 {
+	if x != nil && x.GameStatsLimit != nil {
+		return *x.GameStatsLimit
 	}
 	return 0
 }
@@ -365,7 +365,7 @@ type GetAffiliateDashboardResponse struct {
 	Balances                 []*GetAffiliateDashboardResponse_CurrencyBalance `protobuf:"bytes,15,rep,name=balances,proto3" json:"balances,omitempty"`
 	TotalAccountsWithBalance int64                                            `protobuf:"varint,16,opt,name=total_accounts_with_balance,json=totalAccountsWithBalance,proto3" json:"total_accounts_with_balance,omitempty"`
 	// Product stats
-	Products      []*GetAffiliateDashboardResponse_ProductStats `protobuf:"bytes,17,rep,name=products,proto3" json:"products,omitempty"`
+	Products      map[string]*GetAffiliateDashboardResponse_ProductStats `protobuf:"bytes,17,rep,name=products,proto3" json:"products,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // key is provider id
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -512,7 +512,7 @@ func (x *GetAffiliateDashboardResponse) GetTotalAccountsWithBalance() int64 {
 	return 0
 }
 
-func (x *GetAffiliateDashboardResponse) GetProducts() []*GetAffiliateDashboardResponse_ProductStats {
+func (x *GetAffiliateDashboardResponse) GetProducts() map[string]*GetAffiliateDashboardResponse_ProductStats {
 	if x != nil {
 		return x.Products
 	}
@@ -704,13 +704,14 @@ type GetAffiliateDashboardResponse_ProductStats struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GameId        string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	GameName      string                 `protobuf:"bytes,2,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	ProviderName  string                 `protobuf:"bytes,3,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
-	ActiveUsers   int64                  `protobuf:"varint,5,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	GgrUsd        string                 `protobuf:"bytes,6,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	NgrUsd        string                 `protobuf:"bytes,7,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	BetCount      int64                  `protobuf:"varint,8,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd  string                 `protobuf:"bytes,9,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	ProviderId    string                 `protobuf:"bytes,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"` // Provider ID for grouping
+	ProviderName  string                 `protobuf:"bytes,4,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	Category      string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	ActiveUsers   int64                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	GgrUsd        string                 `protobuf:"bytes,7,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd        string                 `protobuf:"bytes,8,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	BetCount      int64                  `protobuf:"varint,9,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd  string                 `protobuf:"bytes,10,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -755,6 +756,13 @@ func (x *GetAffiliateDashboardResponse_ProductStats) GetGameId() string {
 func (x *GetAffiliateDashboardResponse_ProductStats) GetGameName() string {
 	if x != nil {
 		return x.GameName
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse_ProductStats) GetProviderId() string {
+	if x != nil {
+		return x.ProviderId
 	}
 	return ""
 }
@@ -827,7 +835,7 @@ type GetAffiliateTrendResponse_TrendData struct {
 
 func (x *GetAffiliateTrendResponse_TrendData) Reset() {
 	*x = GetAffiliateTrendResponse_TrendData{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[10]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -839,7 +847,7 @@ func (x *GetAffiliateTrendResponse_TrendData) String() string {
 func (*GetAffiliateTrendResponse_TrendData) ProtoMessage() {}
 
 func (x *GetAffiliateTrendResponse_TrendData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[10]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -953,15 +961,16 @@ const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\x1fGetTopOperatorsDashboardRequest\x12p\n" +
 	"\x0ftime_range_type\x18\x01 \x01(\x0e2H.api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xdb\x02\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd2\x02\n" +
 	"\x1cGetAffiliateDashboardRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x123\n" +
-	"\x13product_stats_limit\x18\x04 \x01(\x05H\x00R\x11productStatsLimit\x88\x01\x01\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x16\n" +
-	"\x14_product_stats_limit\"\xc2\t\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12-\n" +
+	"\x10game_stats_limit\x18\x04 \x01(\x05H\x00R\x0egameStatsLimit\x88\x01\x01\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x13\n" +
+	"\x11_game_stats_limit\"\xe4\n" +
+	"\n" +
 	"\x1dGetAffiliateDashboardResponse\x12$\n" +
 	"\rregistrations\x18\x01 \x01(\x03R\rregistrations\x12\x1b\n" +
 	"\tftd_users\x18\x02 \x01(\x03R\bftdUsers\x12+\n" +
@@ -979,22 +988,28 @@ const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\x0freg_to_ftd_rate\x18\r \x01(\tR\fregToFtdRate\x12+\n" +
 	"\x12ftd_to_active_rate\x18\x0e \x01(\tR\x0fftdToActiveRate\x12`\n" +
 	"\bbalances\x18\x0f \x03(\v2D.api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalanceR\bbalances\x12=\n" +
-	"\x1btotal_accounts_with_balance\x18\x10 \x01(\x03R\x18totalAccountsWithBalance\x12]\n" +
-	"\bproducts\x18\x11 \x03(\v2A.api.report.service.v1.GetAffiliateDashboardResponse.ProductStatsR\bproducts\x1ay\n" +
+	"\x1btotal_accounts_with_balance\x18\x10 \x01(\x03R\x18totalAccountsWithBalance\x12^\n" +
+	"\bproducts\x18\x11 \x03(\v2B.api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntryR\bproducts\x1ay\n" +
 	"\x0fCurrencyBalance\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12%\n" +
 	"\x0eaccounts_count\x18\x02 \x01(\x03R\raccountsCount\x12#\n" +
-	"\rtotal_balance\x18\x03 \x01(\tR\ftotalBalance\x1a\x9d\x02\n" +
+	"\rtotal_balance\x18\x03 \x01(\tR\ftotalBalance\x1a\xbe\x02\n" +
 	"\fProductStats\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1b\n" +
-	"\tgame_name\x18\x02 \x01(\tR\bgameName\x12#\n" +
-	"\rprovider_name\x18\x03 \x01(\tR\fproviderName\x12\x1a\n" +
-	"\bcategory\x18\x04 \x01(\tR\bcategory\x12!\n" +
-	"\factive_users\x18\x05 \x01(\x03R\vactiveUsers\x12\x17\n" +
-	"\aggr_usd\x18\x06 \x01(\tR\x06ggrUsd\x12\x17\n" +
-	"\angr_usd\x18\a \x01(\tR\x06ngrUsd\x12\x1b\n" +
-	"\tbet_count\x18\b \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\t \x01(\tR\fbetAmountUsd\"\xa5\x02\n" +
+	"\tgame_name\x18\x02 \x01(\tR\bgameName\x12\x1f\n" +
+	"\vprovider_id\x18\x03 \x01(\tR\n" +
+	"providerId\x12#\n" +
+	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\x12\x1a\n" +
+	"\bcategory\x18\x05 \x01(\tR\bcategory\x12!\n" +
+	"\factive_users\x18\x06 \x01(\x03R\vactiveUsers\x12\x17\n" +
+	"\aggr_usd\x18\a \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\b \x01(\tR\x06ngrUsd\x12\x1b\n" +
+	"\tbet_count\x18\t \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\n" +
+	" \x01(\tR\fbetAmountUsd\x1a~\n" +
+	"\rProductsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
+	"\x05value\x18\x02 \x01(\v2A.api.report.service.v1.GetAffiliateDashboardResponse.ProductStatsR\x05value:\x028\x01\"\xa5\x02\n" +
 	"\x18GetAffiliateTrendRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
 	"\n" +
@@ -1016,14 +1031,14 @@ const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\angr_usd\x18\t \x01(\tR\x06ngrUsd\x12\x1b\n" +
 	"\tbet_count\x18\n" +
 	" \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd2\xdf\b\n" +
+	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd2\xfe\a\n" +
 	"\x10DashboardService\x12\xb1\x01\n" +
 	"\x14GetOverviewDashboard\x122.api.report.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/report/dashboard/overview/get\x12\xba\x01\n" +
 	"\x16GetTimeRangedDashboard\x124.api.report.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/dashboard/time-ranged/get\x12\xb2\x01\n" +
 	"\x14GetTopUsersDashboard\x122.api.report.service.v1.GetTopUsersDashboardRequest\x1a7.api.backoffice.service.v1.GetTopUsersDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/top-users/get\x12\xc2\x01\n" +
-	"\x18GetTopOperatorsDashboard\x126.api.report.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/report/dashboard/top-operators/get\x12\xb1\x01\n" +
-	"\x15GetAffiliateDashboard\x123.api.report.service.v1.GetAffiliateDashboardRequest\x1a4.api.report.service.v1.GetAffiliateDashboardResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/report/dashboard/affiliate/get\x12\xab\x01\n" +
-	"\x11GetAffiliateTrend\x12/.api.report.service.v1.GetAffiliateTrendRequest\x1a0.api.report.service.v1.GetAffiliateTrendResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/report/dashboard/affiliate/trend/getBS\n" +
+	"\x18GetTopOperatorsDashboard\x126.api.report.service.v1.GetTopOperatorsDashboardRequest\x1a;.api.backoffice.service.v1.GetTopOperatorsDashboardResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/report/dashboard/top-operators/get\x12\x84\x01\n" +
+	"\x15GetAffiliateDashboard\x123.api.report.service.v1.GetAffiliateDashboardRequest\x1a4.api.report.service.v1.GetAffiliateDashboardResponse\"\x00\x12x\n" +
+	"\x11GetAffiliateTrend\x12/.api.report.service.v1.GetAffiliateTrendRequest\x1a0.api.report.service.v1.GetAffiliateTrendResponse\"\x00BS\n" +
 	"\x15api.report.service.v1P\x01Z8github.com/infigaming-com/meepo-api/report/service/v1;v1b\x06proto3"
 
 var (
@@ -1038,7 +1053,7 @@ func file_report_service_v1_dashboard_proto_rawDescGZIP() []byte {
 	return file_report_service_v1_dashboard_proto_rawDescData
 }
 
-var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_report_service_v1_dashboard_proto_goTypes = []any{
 	(*GetOverviewDashboardRequest)(nil),                   // 0: api.report.service.v1.GetOverviewDashboardRequest
 	(*GetTimeRangedDashboardRequest)(nil),                 // 1: api.report.service.v1.GetTimeRangedDashboardRequest
@@ -1050,57 +1065,59 @@ var file_report_service_v1_dashboard_proto_goTypes = []any{
 	(*GetAffiliateTrendResponse)(nil),                     // 7: api.report.service.v1.GetAffiliateTrendResponse
 	(*GetAffiliateDashboardResponse_CurrencyBalance)(nil), // 8: api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
 	(*GetAffiliateDashboardResponse_ProductStats)(nil),    // 9: api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
-	(*GetAffiliateTrendResponse_TrendData)(nil),           // 10: api.report.service.v1.GetAffiliateTrendResponse.TrendData
-	(*common.OperatorContextFilters)(nil),                 // 11: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                        // 12: api.common.OperatorContext
-	(v1.GetTimeRangedDashboardRequest_TimeRangeType)(0),   // 13: api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	(v1.GetTopUsersDashboardRequest_TimeRangeType)(0),     // 14: api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
-	(v1.GetTopOperatorsDashboardRequest_TimeRangeType)(0), // 15: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
-	(*timestamppb.Timestamp)(nil),                         // 16: google.protobuf.Timestamp
-	(*v1.GetOverviewDashboardResponse)(nil),               // 17: api.backoffice.service.v1.GetOverviewDashboardResponse
-	(*v1.GetTimeRangedDashboardResponse)(nil),             // 18: api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	(*v1.GetTopUsersDashboardResponse)(nil),               // 19: api.backoffice.service.v1.GetTopUsersDashboardResponse
-	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 20: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	nil, // 10: api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntry
+	(*GetAffiliateTrendResponse_TrendData)(nil),           // 11: api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	(*common.OperatorContextFilters)(nil),                 // 12: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                        // 13: api.common.OperatorContext
+	(v1.GetTimeRangedDashboardRequest_TimeRangeType)(0),   // 14: api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	(v1.GetTopUsersDashboardRequest_TimeRangeType)(0),     // 15: api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	(v1.GetTopOperatorsDashboardRequest_TimeRangeType)(0), // 16: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	(*timestamppb.Timestamp)(nil),                         // 17: google.protobuf.Timestamp
+	(*v1.GetOverviewDashboardResponse)(nil),               // 18: api.backoffice.service.v1.GetOverviewDashboardResponse
+	(*v1.GetTimeRangedDashboardResponse)(nil),             // 19: api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	(*v1.GetTopUsersDashboardResponse)(nil),               // 20: api.backoffice.service.v1.GetTopUsersDashboardResponse
+	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 21: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
 }
 var file_report_service_v1_dashboard_proto_depIdxs = []int32{
-	11, // 0: api.report.service.v1.GetOverviewDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	12, // 1: api.report.service.v1.GetOverviewDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	13, // 2: api.report.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	11, // 3: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	12, // 4: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	14, // 5: api.report.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
-	11, // 6: api.report.service.v1.GetTopUsersDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	12, // 7: api.report.service.v1.GetTopUsersDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	15, // 8: api.report.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
-	11, // 9: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	12, // 10: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	16, // 11: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
-	16, // 12: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
-	12, // 13: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	12, // 0: api.report.service.v1.GetOverviewDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	13, // 1: api.report.service.v1.GetOverviewDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 2: api.report.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	12, // 3: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	13, // 4: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 5: api.report.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	12, // 6: api.report.service.v1.GetTopUsersDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	13, // 7: api.report.service.v1.GetTopUsersDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	16, // 8: api.report.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	12, // 9: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	13, // 10: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 11: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
+	17, // 12: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
+	13, // 13: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	8,  // 14: api.report.service.v1.GetAffiliateDashboardResponse.balances:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
-	9,  // 15: api.report.service.v1.GetAffiliateDashboardResponse.products:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
-	16, // 16: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
-	16, // 17: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
-	12, // 18: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	10, // 19: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
-	16, // 20: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
-	0,  // 21: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.report.service.v1.GetOverviewDashboardRequest
-	1,  // 22: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.report.service.v1.GetTimeRangedDashboardRequest
-	2,  // 23: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.report.service.v1.GetTopUsersDashboardRequest
-	3,  // 24: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.report.service.v1.GetTopOperatorsDashboardRequest
-	4,  // 25: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
-	6,  // 26: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
-	17, // 27: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	18, // 28: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	19, // 29: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
-	20, // 30: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	5,  // 31: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
-	7,  // 32: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
-	27, // [27:33] is the sub-list for method output_type
-	21, // [21:27] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	10, // 15: api.report.service.v1.GetAffiliateDashboardResponse.products:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntry
+	17, // 16: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
+	17, // 17: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
+	13, // 18: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	11, // 19: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	9,  // 20: api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntry.value:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
+	17, // 21: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
+	0,  // 22: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.report.service.v1.GetOverviewDashboardRequest
+	1,  // 23: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.report.service.v1.GetTimeRangedDashboardRequest
+	2,  // 24: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.report.service.v1.GetTopUsersDashboardRequest
+	3,  // 25: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.report.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 26: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
+	6,  // 27: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
+	18, // 28: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	19, // 29: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	20, // 30: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
+	21, // 31: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	5,  // 32: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
+	7,  // 33: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
+	28, // [28:34] is the sub-list for method output_type
+	22, // [22:28] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_dashboard_proto_init() }
@@ -1115,7 +1132,7 @@ func file_report_service_v1_dashboard_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_service_v1_dashboard_proto_rawDesc), len(file_report_service_v1_dashboard_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

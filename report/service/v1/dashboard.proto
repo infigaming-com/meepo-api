@@ -79,20 +79,10 @@ service DashboardService {
   // ============================================================================
 
   // Affiliate dashboard with aggregated metrics, balance, and product stats
-  rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (GetAffiliateDashboardResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/dashboard/affiliate/get"
-      body: "*"
-    };
-  }
+  rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (GetAffiliateDashboardResponse) {}
 
   // Affiliate trend data (time series)
-  rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (GetAffiliateTrendResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/dashboard/affiliate/trend/get"
-      body: "*"
-    };
-  }
+  rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (GetAffiliateTrendResponse) {}
 }
 
 // ============================================================================
@@ -103,7 +93,7 @@ message GetAffiliateDashboardRequest {
   int64 affiliate_id = 1;
   google.protobuf.Timestamp start_time = 2;
   google.protobuf.Timestamp end_time = 3;
-  optional int32 product_stats_limit = 4;  // limit for product stats, default 50
+  optional int32 game_stats_limit = 4;  // limit for game stats, group by provider,default 10
   api.common.OperatorContext initiator_operator_context = 5;
 }
 
@@ -118,13 +108,14 @@ message GetAffiliateDashboardResponse {
   message ProductStats {
     string game_id = 1;
     string game_name = 2;
-    string provider_name = 3;
-    string category = 4;
-    int64 active_users = 5;
-    string ggr_usd = 6;
-    string ngr_usd = 7;
-    int64 bet_count = 8;
-    string bet_amount_usd = 9;
+    string provider_id = 3;    // Provider ID for grouping
+    string provider_name = 4;
+    string category = 5;
+    int64 active_users = 6;
+    string ggr_usd = 7;
+    string ngr_usd = 8;
+    int64 bet_count = 9;
+    string bet_amount_usd = 10;
   }
 
   // User Conversion metrics
@@ -154,7 +145,7 @@ message GetAffiliateDashboardResponse {
   int64 total_accounts_with_balance = 16;
 
   // Product stats
-  repeated ProductStats products = 17;
+  map<string, ProductStats> products = 17; // key is provider id
 }
 
 message GetAffiliateTrendRequest {

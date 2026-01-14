@@ -802,8 +802,8 @@ func (m *GetAffiliateDashboardRequest) validate(all bool) error {
 		}
 	}
 
-	if m.ProductStatsLimit != nil {
-		// no validation rules for ProductStatsLimit
+	if m.GameStatsLimit != nil {
+		// no validation rules for GameStatsLimit
 	}
 
 	if len(errors) > 0 {
@@ -973,38 +973,50 @@ func (m *GetAffiliateDashboardResponse) validate(all bool) error {
 
 	// no validation rules for TotalAccountsWithBalance
 
-	for idx, item := range m.GetProducts() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetAffiliateDashboardResponseValidationError{
-						field:  fmt.Sprintf("Products[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GetAffiliateDashboardResponseValidationError{
-						field:  fmt.Sprintf("Products[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetAffiliateDashboardResponseValidationError{
-					field:  fmt.Sprintf("Products[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
+	{
+		sorted_keys := make([]string, len(m.GetProducts()))
+		i := 0
+		for key := range m.GetProducts() {
+			sorted_keys[i] = key
+			i++
 		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetProducts()[key]
+			_ = val
 
+			// no validation rules for Products[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetAffiliateDashboardResponseValidationError{
+							field:  fmt.Sprintf("Products[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetAffiliateDashboardResponseValidationError{
+							field:  fmt.Sprintf("Products[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetAffiliateDashboardResponseValidationError{
+						field:  fmt.Sprintf("Products[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
 	}
 
 	if len(errors) > 0 {
@@ -1559,6 +1571,8 @@ func (m *GetAffiliateDashboardResponse_ProductStats) validate(all bool) error {
 	// no validation rules for GameId
 
 	// no validation rules for GameName
+
+	// no validation rules for ProviderId
 
 	// no validation rules for ProviderName
 

@@ -20,18 +20,12 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationDashboardServiceGetAffiliateDashboard = "/api.report.service.v1.DashboardService/GetAffiliateDashboard"
-const OperationDashboardServiceGetAffiliateTrend = "/api.report.service.v1.DashboardService/GetAffiliateTrend"
 const OperationDashboardServiceGetOverviewDashboard = "/api.report.service.v1.DashboardService/GetOverviewDashboard"
 const OperationDashboardServiceGetTimeRangedDashboard = "/api.report.service.v1.DashboardService/GetTimeRangedDashboard"
 const OperationDashboardServiceGetTopOperatorsDashboard = "/api.report.service.v1.DashboardService/GetTopOperatorsDashboard"
 const OperationDashboardServiceGetTopUsersDashboard = "/api.report.service.v1.DashboardService/GetTopUsersDashboard"
 
 type DashboardServiceHTTPServer interface {
-	// GetAffiliateDashboard Affiliate dashboard with aggregated metrics, balance, and product stats
-	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error)
-	// GetAffiliateTrend Affiliate trend data (time series)
-	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error)
 	// GetOverviewDashboard Overview dashboard with today/yesterday comparison
 	GetOverviewDashboard(context.Context, *GetOverviewDashboardRequest) (*v1.GetOverviewDashboardResponse, error)
 	// GetTimeRangedDashboard Time-ranged dashboard (this month/week/custom days)
@@ -48,8 +42,6 @@ func RegisterDashboardServiceHTTPServer(s *http.Server, srv DashboardServiceHTTP
 	r.POST("/v1/report/dashboard/time-ranged/get", _DashboardService_GetTimeRangedDashboard1_HTTP_Handler(srv))
 	r.POST("/v1/report/dashboard/top-users/get", _DashboardService_GetTopUsersDashboard1_HTTP_Handler(srv))
 	r.POST("/v1/report/dashboard/top-operators/get", _DashboardService_GetTopOperatorsDashboard1_HTTP_Handler(srv))
-	r.POST("/v1/report/dashboard/affiliate/get", _DashboardService_GetAffiliateDashboard0_HTTP_Handler(srv))
-	r.POST("/v1/report/dashboard/affiliate/trend/get", _DashboardService_GetAffiliateTrend0_HTTP_Handler(srv))
 }
 
 func _DashboardService_GetOverviewDashboard1_HTTP_Handler(srv DashboardServiceHTTPServer) func(ctx http.Context) error {
@@ -140,55 +132,7 @@ func _DashboardService_GetTopOperatorsDashboard1_HTTP_Handler(srv DashboardServi
 	}
 }
 
-func _DashboardService_GetAffiliateDashboard0_HTTP_Handler(srv DashboardServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetAffiliateDashboardRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationDashboardServiceGetAffiliateDashboard)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAffiliateDashboard(ctx, req.(*GetAffiliateDashboardRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetAffiliateDashboardResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _DashboardService_GetAffiliateTrend0_HTTP_Handler(srv DashboardServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetAffiliateTrendRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationDashboardServiceGetAffiliateTrend)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetAffiliateTrendResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type DashboardServiceHTTPClient interface {
-	// GetAffiliateDashboard Affiliate dashboard with aggregated metrics, balance, and product stats
-	GetAffiliateDashboard(ctx context.Context, req *GetAffiliateDashboardRequest, opts ...http.CallOption) (rsp *GetAffiliateDashboardResponse, err error)
-	// GetAffiliateTrend Affiliate trend data (time series)
-	GetAffiliateTrend(ctx context.Context, req *GetAffiliateTrendRequest, opts ...http.CallOption) (rsp *GetAffiliateTrendResponse, err error)
 	// GetOverviewDashboard Overview dashboard with today/yesterday comparison
 	GetOverviewDashboard(ctx context.Context, req *GetOverviewDashboardRequest, opts ...http.CallOption) (rsp *v1.GetOverviewDashboardResponse, err error)
 	// GetTimeRangedDashboard Time-ranged dashboard (this month/week/custom days)
@@ -205,34 +149,6 @@ type DashboardServiceHTTPClientImpl struct {
 
 func NewDashboardServiceHTTPClient(client *http.Client) DashboardServiceHTTPClient {
 	return &DashboardServiceHTTPClientImpl{client}
-}
-
-// GetAffiliateDashboard Affiliate dashboard with aggregated metrics, balance, and product stats
-func (c *DashboardServiceHTTPClientImpl) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...http.CallOption) (*GetAffiliateDashboardResponse, error) {
-	var out GetAffiliateDashboardResponse
-	pattern := "/v1/report/dashboard/affiliate/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationDashboardServiceGetAffiliateDashboard))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// GetAffiliateTrend Affiliate trend data (time series)
-func (c *DashboardServiceHTTPClientImpl) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...http.CallOption) (*GetAffiliateTrendResponse, error) {
-	var out GetAffiliateTrendResponse
-	pattern := "/v1/report/dashboard/affiliate/trend/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationDashboardServiceGetAffiliateTrend))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 // GetOverviewDashboard Overview dashboard with today/yesterday comparison
