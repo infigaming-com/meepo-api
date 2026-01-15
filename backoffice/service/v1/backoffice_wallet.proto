@@ -768,9 +768,8 @@ message ManualDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	string transaction_type = 3; // manual_debit_cash, manual_debit_bonus
-	int64 transaction_id = 4;
-	string amount = 5;
-	string comment = 6;
+	string amount = 4;
+	string comment = 5;
 }
 
 message ListManualJournalEntriesRequest {
