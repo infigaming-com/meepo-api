@@ -188,6 +188,22 @@ service BackofficeAccount {
 			body: "*"
 		};
 	}
+
+    // GetAccountDetail retrieves detailed information about a backoffice account
+    rpc GetAccountDetail(GetAccountDetailRequest) returns (GetAccountDetailResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/detail"
+            body: "*"
+        };
+    }
+
+    // AdminResetPassword allows admin to reset another user's password without verification code
+    rpc AdminResetPassword(AdminResetPasswordRequest) returns (AdminResetPasswordResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/accounts/password/admin-reset"
+            body: "*"
+        };
+    }
 }
 
 // Account related messages
@@ -306,6 +322,10 @@ message UpdateAccountRequest {
 	int64 user_id = 1;
 	optional bool enabled = 2;
 	optional int64 role_id = 3;
+	optional string username = 4;
+	optional string email = 5;
+	optional string mobile = 6;
+	optional bool locked = 7;
 }
 
 message UpdateAccountResponse {}
@@ -455,3 +475,34 @@ message CheckOperatorKeyExistsRequest {
 message CheckOperatorKeyExistsResponse {
 	bool exists = 1;
 }
+
+// GetAccountDetailRequest - request to get detailed account information
+message GetAccountDetailRequest {
+	int64 user_id = 1;
+}
+
+// GetAccountDetailResponse - detailed account information
+message GetAccountDetailResponse {
+	int64 user_id = 1;
+	string username = 2;
+	string email = 3;
+	string mobile = 4;
+	int64 role_id = 5;
+	string role_name = 6;
+	bool locked = 7;
+	bool enabled = 8;
+	bool mfa_enabled = 9;
+	int64 mfa_reset_at = 10;
+	int64 created_at = 11;
+	int64 updated_at = 12;
+	api.common.OperatorContext operator_context = 13;
+}
+
+// AdminResetPasswordRequest - admin resets another user's password
+message AdminResetPasswordRequest {
+	int64 user_id = 1;         // Target user's ID
+	string new_password = 2;   // New password to set
+}
+
+// AdminResetPasswordResponse - empty response on success
+message AdminResetPasswordResponse {}

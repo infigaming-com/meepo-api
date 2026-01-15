@@ -261,6 +261,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddAccountResponse'
+    /v1/backoffice/accounts/detail:
+        post:
+            tags:
+                - BackofficeAccount
+            description: GetAccountDetail retrieves detailed information about a backoffice account
+            operationId: BackofficeAccount_GetAccountDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAccountDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetAccountDetailResponse'
     /v1/backoffice/accounts/email/check_exists:
         post:
             tags:
@@ -406,6 +425,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.VerifyMobileResponse'
+    /v1/backoffice/accounts/password/admin-reset:
+        post:
+            tags:
+                - BackofficeAccount
+            description: AdminResetPassword allows admin to reset another user's password without verification code
+            operationId: BackofficeAccount_AdminResetPassword
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AdminResetPasswordRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AdminResetPasswordResponse'
     /v1/backoffice/accounts/password/reset:
         post:
             tags:
@@ -9620,6 +9658,18 @@ components:
             type: object
             properties: {}
             description: AdminReset2faResponse - empty response on success
+        api.backoffice.service.v1.AdminResetPasswordRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                newPassword:
+                    type: string
+            description: AdminResetPasswordRequest - admin resets another user's password
+        api.backoffice.service.v1.AdminResetPasswordResponse:
+            type: object
+            properties: {}
+            description: AdminResetPasswordResponse - empty response on success
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -10924,6 +10974,42 @@ components:
                 lastResetAt:
                     type: string
             description: Get2faStatusResponse - returns 2FA status
+        api.backoffice.service.v1.GetAccountDetailRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+            description: GetAccountDetailRequest - request to get detailed account information
+        api.backoffice.service.v1.GetAccountDetailResponse:
+            type: object
+            properties:
+                userId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                roleId:
+                    type: string
+                roleName:
+                    type: string
+                locked:
+                    type: boolean
+                enabled:
+                    type: boolean
+                mfaEnabled:
+                    type: boolean
+                mfaResetAt:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetAccountDetailResponse - detailed account information
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
@@ -16411,6 +16497,14 @@ components:
                     type: boolean
                 roleId:
                     type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                locked:
+                    type: boolean
         api.backoffice.service.v1.UpdateAccountResponse:
             type: object
             properties: {}
@@ -21166,6 +21260,8 @@ components:
                 affiliateId:
                     type: string
                 operatorUserId:
+                    type: string
+                username:
                     type: string
         api.user.service.v1.UpdateUserResponse:
             type: object

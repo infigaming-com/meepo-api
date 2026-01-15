@@ -117,6 +117,9 @@ const (
 	User_LoginWithInfoAnd2Fa_FullMethodName                = "/api.user.service.v1.User/LoginWithInfoAnd2fa"
 	User_Bind2FaWithTempToken_FullMethodName               = "/api.user.service.v1.User/Bind2FaWithTempToken"
 	User_Verify2FaWithTempToken_FullMethodName             = "/api.user.service.v1.User/Verify2FaWithTempToken"
+	User_GetBackofficeAccountDetail_FullMethodName         = "/api.user.service.v1.User/GetBackofficeAccountDetail"
+	User_UpdateBackofficeAccount_FullMethodName            = "/api.user.service.v1.User/UpdateBackofficeAccount"
+	User_AdminResetPassword_FullMethodName                 = "/api.user.service.v1.User/AdminResetPassword"
 )
 
 // UserClient is the client API for User service.
@@ -283,6 +286,13 @@ type UserClient interface {
 	Bind2FaWithTempToken(ctx context.Context, in *Bind2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
 	// Verify 2FA using temp token and return full login response (internal gRPC only)
 	Verify2FaWithTempToken(ctx context.Context, in *Verify2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
+	// ============ Backoffice Account Management APIs ============
+	// Get backoffice account details (internal gRPC only)
+	GetBackofficeAccountDetail(ctx context.Context, in *GetBackofficeAccountDetailRequest, opts ...grpc.CallOption) (*GetBackofficeAccountDetailResponse, error)
+	// Update backoffice account (internal gRPC only)
+	UpdateBackofficeAccount(ctx context.Context, in *UpdateBackofficeAccountRequest, opts ...grpc.CallOption) (*UpdateBackofficeAccountResponse, error)
+	// Admin reset password for backoffice account (internal gRPC only)
+	AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error)
 }
 
 type userClient struct {
@@ -1263,6 +1273,36 @@ func (c *userClient) Verify2FaWithTempToken(ctx context.Context, in *Verify2FaWi
 	return out, nil
 }
 
+func (c *userClient) GetBackofficeAccountDetail(ctx context.Context, in *GetBackofficeAccountDetailRequest, opts ...grpc.CallOption) (*GetBackofficeAccountDetailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackofficeAccountDetailResponse)
+	err := c.cc.Invoke(ctx, User_GetBackofficeAccountDetail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateBackofficeAccount(ctx context.Context, in *UpdateBackofficeAccountRequest, opts ...grpc.CallOption) (*UpdateBackofficeAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateBackofficeAccountResponse)
+	err := c.cc.Invoke(ctx, User_UpdateBackofficeAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdminResetPasswordResponse)
+	err := c.cc.Invoke(ctx, User_AdminResetPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1427,6 +1467,13 @@ type UserServer interface {
 	Bind2FaWithTempToken(context.Context, *Bind2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error)
 	// Verify 2FA using temp token and return full login response (internal gRPC only)
 	Verify2FaWithTempToken(context.Context, *Verify2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error)
+	// ============ Backoffice Account Management APIs ============
+	// Get backoffice account details (internal gRPC only)
+	GetBackofficeAccountDetail(context.Context, *GetBackofficeAccountDetailRequest) (*GetBackofficeAccountDetailResponse, error)
+	// Update backoffice account (internal gRPC only)
+	UpdateBackofficeAccount(context.Context, *UpdateBackofficeAccountRequest) (*UpdateBackofficeAccountResponse, error)
+	// Admin reset password for backoffice account (internal gRPC only)
+	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1727,6 +1774,15 @@ func (UnimplementedUserServer) Bind2FaWithTempToken(context.Context, *Bind2FaWit
 }
 func (UnimplementedUserServer) Verify2FaWithTempToken(context.Context, *Verify2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Verify2FaWithTempToken not implemented")
+}
+func (UnimplementedUserServer) GetBackofficeAccountDetail(context.Context, *GetBackofficeAccountDetailRequest) (*GetBackofficeAccountDetailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBackofficeAccountDetail not implemented")
+}
+func (UnimplementedUserServer) UpdateBackofficeAccount(context.Context, *UpdateBackofficeAccountRequest) (*UpdateBackofficeAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateBackofficeAccount not implemented")
+}
+func (UnimplementedUserServer) AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdminResetPassword not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -3495,6 +3551,60 @@ func _User_Verify2FaWithTempToken_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetBackofficeAccountDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackofficeAccountDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetBackofficeAccountDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetBackofficeAccountDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetBackofficeAccountDetail(ctx, req.(*GetBackofficeAccountDetailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateBackofficeAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBackofficeAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateBackofficeAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateBackofficeAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateBackofficeAccount(ctx, req.(*UpdateBackofficeAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AdminResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminResetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AdminResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AdminResetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AdminResetPassword(ctx, req.(*AdminResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3889,6 +3999,18 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Verify2FaWithTempToken",
 			Handler:    _User_Verify2FaWithTempToken_Handler,
+		},
+		{
+			MethodName: "GetBackofficeAccountDetail",
+			Handler:    _User_GetBackofficeAccountDetail_Handler,
+		},
+		{
+			MethodName: "UpdateBackofficeAccount",
+			Handler:    _User_UpdateBackofficeAccount_Handler,
+		},
+		{
+			MethodName: "AdminResetPassword",
+			Handler:    _User_AdminResetPassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
