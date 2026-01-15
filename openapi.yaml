@@ -15796,8 +15796,6 @@ components:
                     type: string
                 transactionType:
                     type: string
-                transactionId:
-                    type: string
                 amount:
                     type: string
                 comment:

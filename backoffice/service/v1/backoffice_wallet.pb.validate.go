@@ -7030,8 +7030,6 @@ func (m *ManualDebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
-	// no validation rules for TransactionId
-
 	// no validation rules for Amount
 
 	// no validation rules for Comment
