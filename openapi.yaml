@@ -1167,6 +1167,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdateAffiliateResponse'
+    /v1/backoffice/affiliate/user/export:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ExportAffiliateUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportAffiliateUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ExportUsersResponse'
     /v1/backoffice/affiliate/user/list:
         post:
             tags:
@@ -8187,6 +8205,11 @@ components:
                     type: string
                 commissionPlanName:
                     type: string
+        api.affiliate.service.v1.ExportUsersResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.affiliate.service.v1.FlatByCountriesCommission:
             type: object
             properties:
@@ -9128,6 +9151,10 @@ components:
                 reportingCurrency:
                     type: string
                 campaignUrl:
+                    type: string
+                campaignId:
+                    type: string
+                campaignName:
                     type: string
                 registeredAt:
                     type: string
@@ -10652,6 +10679,33 @@ components:
                 venueTournament:
                     type: string
                 settlementDetails:
+                    type: string
+        api.backoffice.service.v1.ExportAffiliateUsersRequest:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                ftdStartTime:
+                    type: string
+                    format: date-time
+                ftdEndTime:
+                    type: string
+                    format: date-time
+                affiliateId:
+                    type: string
+                registrationStartTime:
+                    type: string
+                    format: date-time
+                registrationEndTime:
+                    type: string
+                    format: date-time
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                format:
+                    type: string
+                timeZone:
                     type: string
         api.backoffice.service.v1.ExportBetsRequest:
             type: object
@@ -15881,8 +15935,6 @@ components:
                 currency:
                     type: string
                 transactionType:
-                    type: string
-                transactionId:
                     type: string
                 amount:
                     type: string

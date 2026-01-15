@@ -47,6 +47,7 @@ const (
 	BackofficeAffiliate_ListEvents_FullMethodName                      = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
 	BackofficeAffiliate_ListCommissions_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
 	BackofficeAffiliate_ListAffiliateUsers_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
+	BackofficeAffiliate_ExportAffiliateUsers_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/ExportAffiliateUsers"
 	BackofficeAffiliate_ListAffiliateBills_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
 	BackofficeAffiliate_GetAffiliateOperatorSettings_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateOperatorSettings"
 	BackofficeAffiliate_UpdateAffiliateOperatorSettings_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliateOperatorSettings"
@@ -85,6 +86,7 @@ type BackofficeAffiliateClient interface {
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*v1.ListEventsResponse, error)
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(ctx context.Context, in *ListAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ListUsersResponse, error)
+	ExportAffiliateUsers(ctx context.Context, in *ExportAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ExportUsersResponse, error)
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error)
 	GetAffiliateOperatorSettings(ctx context.Context, in *GetAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorSettingsResponse, error)
 	UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error)
@@ -370,6 +372,16 @@ func (c *backofficeAffiliateClient) ListAffiliateUsers(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) ExportAffiliateUsers(ctx context.Context, in *ExportAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportUsersResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ExportAffiliateUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeAffiliateClient) ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListAffiliateBillsResponse)
@@ -451,6 +463,7 @@ type BackofficeAffiliateServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
+	ExportAffiliateUsers(context.Context, *ExportAffiliateUsersRequest) (*v1.ExportUsersResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
 	GetAffiliateOperatorSettings(context.Context, *GetAffiliateOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error)
 	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
@@ -546,6 +559,9 @@ func (UnimplementedBackofficeAffiliateServer) ListCommissions(context.Context, *
 }
 func (UnimplementedBackofficeAffiliateServer) ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateUsers not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ExportAffiliateUsers(context.Context, *ExportAffiliateUsersRequest) (*v1.ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportAffiliateUsers not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateBills not implemented")
@@ -1069,6 +1085,24 @@ func _BackofficeAffiliate_ListAffiliateUsers_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_ExportAffiliateUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportAffiliateUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ExportAffiliateUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ExportAffiliateUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ExportAffiliateUsers(ctx, req.(*ExportAffiliateUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeAffiliate_ListAffiliateBills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAffiliateBillsRequest)
 	if err := dec(in); err != nil {
@@ -1273,6 +1307,10 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAffiliateUsers",
 			Handler:    _BackofficeAffiliate_ListAffiliateUsers_Handler,
+		},
+		{
+			MethodName: "ExportAffiliateUsers",
+			Handler:    _BackofficeAffiliate_ExportAffiliateUsers_Handler,
 		},
 		{
 			MethodName: "ListAffiliateBills",

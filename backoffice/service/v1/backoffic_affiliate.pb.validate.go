@@ -3800,6 +3800,262 @@ var _ interface {
 	ErrorName() string
 } = ListAffiliateUsersRequestValidationError{}
 
+// Validate checks the field values on ExportAffiliateUsersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportAffiliateUsersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportAffiliateUsersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportAffiliateUsersRequestMultiError, or nil if none found.
+func (m *ExportAffiliateUsersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportAffiliateUsersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFtdStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "FtdStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "FtdStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportAffiliateUsersRequestValidationError{
+				field:  "FtdStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetFtdEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "FtdEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "FtdEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportAffiliateUsersRequestValidationError{
+				field:  "FtdEndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRegistrationStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "RegistrationStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "RegistrationStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegistrationStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportAffiliateUsersRequestValidationError{
+				field:  "RegistrationStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRegistrationEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "RegistrationEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "RegistrationEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegistrationEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportAffiliateUsersRequestValidationError{
+				field:  "RegistrationEndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportAffiliateUsersRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportAffiliateUsersRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
+	}
+
+	if len(errors) > 0 {
+		return ExportAffiliateUsersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportAffiliateUsersRequestMultiError is an error wrapping multiple
+// validation errors returned by ExportAffiliateUsersRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ExportAffiliateUsersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportAffiliateUsersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportAffiliateUsersRequestMultiError) AllErrors() []error { return m }
+
+// ExportAffiliateUsersRequestValidationError is the validation error returned
+// by ExportAffiliateUsersRequest.Validate if the designated constraints
+// aren't met.
+type ExportAffiliateUsersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportAffiliateUsersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportAffiliateUsersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportAffiliateUsersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportAffiliateUsersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportAffiliateUsersRequestValidationError) ErrorName() string {
+	return "ExportAffiliateUsersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportAffiliateUsersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportAffiliateUsersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportAffiliateUsersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportAffiliateUsersRequestValidationError{}
+
 // Validate checks the field values on ListAffiliateBillsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

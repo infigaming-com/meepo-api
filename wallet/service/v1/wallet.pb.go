@@ -440,9 +440,10 @@ type DebitRequest struct {
 	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	ReportingCurrency string                 `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// Valid debit transaction types:
-	//   - "payment_withdraw"   - Payment withdraw transaction
+	//   - "manual_debit_cash"   - Manual debit cash transaction
+	//   - "manual_debit_bonus"  - Manual debit bonus transaction
 	TransactionType string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId   int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionId   *int64                  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
 	Amount          string                  `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	InitiatorUserId int64                   `protobuf:"varint,8,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
@@ -510,8 +511,8 @@ func (x *DebitRequest) GetTransactionType() string {
 }
 
 func (x *DebitRequest) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
+	if x != nil && x.TransactionId != nil {
+		return *x.TransactionId
 	}
 	return 0
 }
@@ -14447,17 +14448,18 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ainitiator_operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x1a\n" +
 	"\x18_external_transaction_id\"7\n" +
 	"\x0eCreditResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xea\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\x82\x03\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
 	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
-	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x16\n" +
+	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12*\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03H\x00R\rtransactionId\x88\x01\x01\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\tR\x06amount\x12F\n" +
 	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\b \x01(\x03R\x0finitiatorUserId\x12\x18\n" +
-	"\acomment\x18\t \x01(\tR\acomment\"6\n" +
+	"\acomment\x18\t \x01(\tR\acommentB\x11\n" +
+	"\x0f_transaction_id\"6\n" +
 	"\rDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xdc\x03\n" +
 	"\x10GameDebitRequest\x12\x17\n" +
@@ -16526,6 +16528,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	}
 	file_wallet_service_v1_promocode_proto_init()
 	file_wallet_service_v1_wallet_proto_msgTypes[4].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[6].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[8].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[11].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[22].OneofWrappers = []any{}

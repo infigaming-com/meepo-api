@@ -809,8 +809,6 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
-	// no validation rules for TransactionId
-
 	// no validation rules for Amount
 
 	if all {
@@ -845,6 +843,10 @@ func (m *DebitRequest) validate(all bool) error {
 	// no validation rules for InitiatorUserId
 
 	// no validation rules for Comment
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
 
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)

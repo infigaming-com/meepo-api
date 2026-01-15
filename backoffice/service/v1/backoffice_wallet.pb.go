@@ -3483,9 +3483,8 @@ type ManualDebitRequest struct {
 	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	TransactionType string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // manual_debit_cash, manual_debit_bonus
-	TransactionId   int64                  `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount          string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	Comment         string                 `protobuf:"bytes,6,opt,name=comment,proto3" json:"comment,omitempty"`
+	Amount          string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Comment         string                 `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3539,13 +3538,6 @@ func (x *ManualDebitRequest) GetTransactionType() string {
 		return x.TransactionType
 	}
 	return ""
-}
-
-func (x *ManualDebitRequest) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
-	}
-	return 0
 }
 
 func (x *ManualDebitRequest) GetAmount() string {
@@ -5056,14 +5048,13 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x15operator_bonus_amount\x18\x06 \x01(\tR\x13operatorBonusAmount\x12I\n" +
 	"!operator_bonus_turnover_threshold\x18\a \x01(\tR\x1eoperatorBonusTurnoverThreshold\x12A\n" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
-	"\acomment\x18\t \x01(\tR\acomment\"\xcd\x01\n" +
+	"\acomment\x18\t \x01(\tR\acomment\"\xa6\x01\n" +
 	"\x12ManualDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
-	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\tR\x06amount\x12\x18\n" +
-	"\acomment\x18\x06 \x01(\tR\acomment\"\xc1\x03\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\tR\x06amount\x12\x18\n" +
+	"\acomment\x18\x05 \x01(\tR\acomment\"\xc1\x03\n" +
 	"\x1fListManualJournalEntriesRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
