@@ -21,6 +21,7 @@ const (
 	REPORT_EXPORT_TYPE_TAX_REPORTS                 = "tax_reports"
 	REPORT_EXPORT_TYPE_MANUAL_JOURNAL_ENTRIES      = "manual_journal_entries"
 	REPORT_EXPORT_TYPE_GAME_BETS                   = "game_bets"
+	REPORT_EXPORT_TYPE_AFFILIATE_USERS             = "affiliate_users"
 )
 
 type ReportExportPayload struct {

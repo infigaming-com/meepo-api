@@ -207,6 +207,13 @@ service BackofficeAffiliate {
 		};
 	}
 
+	rpc ExportAffiliateUsers(ExportAffiliateUsersRequest) returns (api.affiliate.service.v1.ExportUsersResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/user/export"
+			body: "*"
+		};
+	}
+
 	// -------------- Affiliate Bill --------------
 
 	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
@@ -466,6 +473,18 @@ message ListAffiliateUsersRequest {
 	optional int32 page = 7;
 	optional int32 page_size = 8;
 	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+message ExportAffiliateUsersRequest {
+	repeated string countries = 1;
+	google.protobuf.Timestamp ftd_start_time = 2;
+	google.protobuf.Timestamp ftd_end_time = 3;
+	optional int64 affiliate_id = 4;
+	google.protobuf.Timestamp registration_start_time = 5;
+	google.protobuf.Timestamp registration_end_time = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+	string format = 8; // accepted values: csv, excel, pdf
+    string time_zone = 9; // e.g. UTC+0, UTC+8, etc.
 }
 
 // -------------- Affiliate Bill --------------
