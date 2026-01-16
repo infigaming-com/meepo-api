@@ -919,19 +919,33 @@ func (m *GetAffiliateDashboardResponse) validate(all bool) error {
 
 	// no validation rules for DepositsUsd
 
+	// no validation rules for DepositsReportingCurrency
+
 	// no validation rules for WithdrawalsUsd
+
+	// no validation rules for WithdrawalsReportingCurrency
 
 	// no validation rules for PendingWithdrawalsUsd
 
+	// no validation rules for PendingWithdrawalsReportingCurrency
+
 	// no validation rules for GgrUsd
 
+	// no validation rules for GgrReportingCurrency
+
 	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
 
 	// no validation rules for BetCount
 
 	// no validation rules for BetAmountUsd
 
+	// no validation rules for BetAmountReportingCurrency
+
 	// no validation rules for AverageBetUsd
+
+	// no validation rules for AverageBetReportingCurrency
 
 	// no validation rules for RegToFtdRate
 
@@ -972,52 +986,6 @@ func (m *GetAffiliateDashboardResponse) validate(all bool) error {
 	}
 
 	// no validation rules for TotalAccountsWithBalance
-
-	{
-		sorted_keys := make([]string, len(m.GetProducts()))
-		i := 0
-		for key := range m.GetProducts() {
-			sorted_keys[i] = key
-			i++
-		}
-		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
-		for _, key := range sorted_keys {
-			val := m.GetProducts()[key]
-			_ = val
-
-			// no validation rules for Products[key]
-
-			if all {
-				switch v := interface{}(val).(type) {
-				case interface{ ValidateAll() error }:
-					if err := v.ValidateAll(); err != nil {
-						errors = append(errors, GetAffiliateDashboardResponseValidationError{
-							field:  fmt.Sprintf("Products[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				case interface{ Validate() error }:
-					if err := v.Validate(); err != nil {
-						errors = append(errors, GetAffiliateDashboardResponseValidationError{
-							field:  fmt.Sprintf("Products[%v]", key),
-							reason: "embedded message failed validation",
-							cause:  err,
-						})
-					}
-				}
-			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
-				if err := v.Validate(); err != nil {
-					return GetAffiliateDashboardResponseValidationError{
-						field:  fmt.Sprintf("Products[%v]", key),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
-			}
-
-		}
-	}
 
 	if len(errors) > 0 {
 		return GetAffiliateDashboardResponseMultiError(errors)
@@ -1544,132 +1512,6 @@ var _ interface {
 	ErrorName() string
 } = GetAffiliateDashboardResponse_CurrencyBalanceValidationError{}
 
-// Validate checks the field values on
-// GetAffiliateDashboardResponse_ProductStats with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *GetAffiliateDashboardResponse_ProductStats) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// GetAffiliateDashboardResponse_ProductStats with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// GetAffiliateDashboardResponse_ProductStatsMultiError, or nil if none found.
-func (m *GetAffiliateDashboardResponse_ProductStats) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetAffiliateDashboardResponse_ProductStats) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for GameId
-
-	// no validation rules for GameName
-
-	// no validation rules for ProviderId
-
-	// no validation rules for ProviderName
-
-	// no validation rules for Category
-
-	// no validation rules for ActiveUsers
-
-	// no validation rules for GgrUsd
-
-	// no validation rules for NgrUsd
-
-	// no validation rules for BetCount
-
-	// no validation rules for BetAmountUsd
-
-	if len(errors) > 0 {
-		return GetAffiliateDashboardResponse_ProductStatsMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetAffiliateDashboardResponse_ProductStatsMultiError is an error wrapping
-// multiple validation errors returned by
-// GetAffiliateDashboardResponse_ProductStats.ValidateAll() if the designated
-// constraints aren't met.
-type GetAffiliateDashboardResponse_ProductStatsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetAffiliateDashboardResponse_ProductStatsMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetAffiliateDashboardResponse_ProductStatsMultiError) AllErrors() []error { return m }
-
-// GetAffiliateDashboardResponse_ProductStatsValidationError is the validation
-// error returned by GetAffiliateDashboardResponse_ProductStats.Validate if
-// the designated constraints aren't met.
-type GetAffiliateDashboardResponse_ProductStatsValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetAffiliateDashboardResponse_ProductStatsValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetAffiliateDashboardResponse_ProductStatsValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetAffiliateDashboardResponse_ProductStatsValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetAffiliateDashboardResponse_ProductStatsValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetAffiliateDashboardResponse_ProductStatsValidationError) ErrorName() string {
-	return "GetAffiliateDashboardResponse_ProductStatsValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetAffiliateDashboardResponse_ProductStatsValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetAffiliateDashboardResponse_ProductStats.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetAffiliateDashboardResponse_ProductStatsValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetAffiliateDashboardResponse_ProductStatsValidationError{}
-
 // Validate checks the field values on GetAffiliateTrendResponse_TrendData with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -1732,15 +1574,25 @@ func (m *GetAffiliateTrendResponse_TrendData) validate(all bool) error {
 
 	// no validation rules for DepositsUsd
 
+	// no validation rules for DepositsReportingCurrency
+
 	// no validation rules for WithdrawalsUsd
+
+	// no validation rules for WithdrawalsReportingCurrency
 
 	// no validation rules for GgrUsd
 
+	// no validation rules for GgrReportingCurrency
+
 	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
 
 	// no validation rules for BetCount
 
 	// no validation rules for BetAmountUsd
+
+	// no validation rules for BetAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetAffiliateTrendResponse_TrendDataMultiError(errors)

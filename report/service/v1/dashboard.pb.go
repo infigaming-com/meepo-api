@@ -349,25 +349,30 @@ type GetAffiliateDashboardResponse struct {
 	RepeatDepositors int64 `protobuf:"varint,3,opt,name=repeat_depositors,json=repeatDepositors,proto3" json:"repeat_depositors,omitempty"`
 	ActiveUsers      int64 `protobuf:"varint,4,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
 	// Financial metrics
-	DepositsUsd           string `protobuf:"bytes,5,opt,name=deposits_usd,json=depositsUsd,proto3" json:"deposits_usd,omitempty"`
-	WithdrawalsUsd        string `protobuf:"bytes,6,opt,name=withdrawals_usd,json=withdrawalsUsd,proto3" json:"withdrawals_usd,omitempty"`
-	PendingWithdrawalsUsd string `protobuf:"bytes,7,opt,name=pending_withdrawals_usd,json=pendingWithdrawalsUsd,proto3" json:"pending_withdrawals_usd,omitempty"`
+	DepositsUsd                         string `protobuf:"bytes,5,opt,name=deposits_usd,json=depositsUsd,proto3" json:"deposits_usd,omitempty"`
+	DepositsReportingCurrency           string `protobuf:"bytes,6,opt,name=deposits_reporting_currency,json=depositsReportingCurrency,proto3" json:"deposits_reporting_currency,omitempty"`
+	WithdrawalsUsd                      string `protobuf:"bytes,7,opt,name=withdrawals_usd,json=withdrawalsUsd,proto3" json:"withdrawals_usd,omitempty"`
+	WithdrawalsReportingCurrency        string `protobuf:"bytes,8,opt,name=withdrawals_reporting_currency,json=withdrawalsReportingCurrency,proto3" json:"withdrawals_reporting_currency,omitempty"`
+	PendingWithdrawalsUsd               string `protobuf:"bytes,9,opt,name=pending_withdrawals_usd,json=pendingWithdrawalsUsd,proto3" json:"pending_withdrawals_usd,omitempty"`
+	PendingWithdrawalsReportingCurrency string `protobuf:"bytes,10,opt,name=pending_withdrawals_reporting_currency,json=pendingWithdrawalsReportingCurrency,proto3" json:"pending_withdrawals_reporting_currency,omitempty"`
 	// Gaming metrics
-	GgrUsd       string `protobuf:"bytes,8,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	NgrUsd       string `protobuf:"bytes,9,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	BetCount     int64  `protobuf:"varint,10,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd string `protobuf:"bytes,11,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	GgrUsd                     string `protobuf:"bytes,11,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency       string `protobuf:"bytes,12,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrUsd                     string `protobuf:"bytes,13,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency       string `protobuf:"bytes,14,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	BetCount                   int64  `protobuf:"varint,15,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd               string `protobuf:"bytes,16,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency string `protobuf:"bytes,17,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
 	// Calculated metrics
-	AverageBetUsd   string `protobuf:"bytes,12,opt,name=average_bet_usd,json=averageBetUsd,proto3" json:"average_bet_usd,omitempty"`
-	RegToFtdRate    string `protobuf:"bytes,13,opt,name=reg_to_ftd_rate,json=regToFtdRate,proto3" json:"reg_to_ftd_rate,omitempty"`
-	FtdToActiveRate string `protobuf:"bytes,14,opt,name=ftd_to_active_rate,json=ftdToActiveRate,proto3" json:"ftd_to_active_rate,omitempty"`
+	AverageBetUsd               string `protobuf:"bytes,18,opt,name=average_bet_usd,json=averageBetUsd,proto3" json:"average_bet_usd,omitempty"`
+	AverageBetReportingCurrency string `protobuf:"bytes,19,opt,name=average_bet_reporting_currency,json=averageBetReportingCurrency,proto3" json:"average_bet_reporting_currency,omitempty"`
+	RegToFtdRate                string `protobuf:"bytes,20,opt,name=reg_to_ftd_rate,json=regToFtdRate,proto3" json:"reg_to_ftd_rate,omitempty"`
+	FtdToActiveRate             string `protobuf:"bytes,21,opt,name=ftd_to_active_rate,json=ftdToActiveRate,proto3" json:"ftd_to_active_rate,omitempty"`
 	// Balance by currency
-	Balances                 []*GetAffiliateDashboardResponse_CurrencyBalance `protobuf:"bytes,15,rep,name=balances,proto3" json:"balances,omitempty"`
-	TotalAccountsWithBalance int64                                            `protobuf:"varint,16,opt,name=total_accounts_with_balance,json=totalAccountsWithBalance,proto3" json:"total_accounts_with_balance,omitempty"`
-	// Product stats
-	Products      map[string]*GetAffiliateDashboardResponse_ProductStats `protobuf:"bytes,17,rep,name=products,proto3" json:"products,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // key is provider id
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Balances                 []*GetAffiliateDashboardResponse_CurrencyBalance `protobuf:"bytes,22,rep,name=balances,proto3" json:"balances,omitempty"`
+	TotalAccountsWithBalance int64                                            `protobuf:"varint,23,opt,name=total_accounts_with_balance,json=totalAccountsWithBalance,proto3" json:"total_accounts_with_balance,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *GetAffiliateDashboardResponse) Reset() {
@@ -435,9 +440,23 @@ func (x *GetAffiliateDashboardResponse) GetDepositsUsd() string {
 	return ""
 }
 
+func (x *GetAffiliateDashboardResponse) GetDepositsReportingCurrency() string {
+	if x != nil {
+		return x.DepositsReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetAffiliateDashboardResponse) GetWithdrawalsUsd() string {
 	if x != nil {
 		return x.WithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetWithdrawalsReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalsReportingCurrency
 	}
 	return ""
 }
@@ -449,6 +468,13 @@ func (x *GetAffiliateDashboardResponse) GetPendingWithdrawalsUsd() string {
 	return ""
 }
 
+func (x *GetAffiliateDashboardResponse) GetPendingWithdrawalsReportingCurrency() string {
+	if x != nil {
+		return x.PendingWithdrawalsReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetAffiliateDashboardResponse) GetGgrUsd() string {
 	if x != nil {
 		return x.GgrUsd
@@ -456,9 +482,23 @@ func (x *GetAffiliateDashboardResponse) GetGgrUsd() string {
 	return ""
 }
 
+func (x *GetAffiliateDashboardResponse) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetAffiliateDashboardResponse) GetNgrUsd() string {
 	if x != nil {
 		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
 	}
 	return ""
 }
@@ -477,9 +517,23 @@ func (x *GetAffiliateDashboardResponse) GetBetAmountUsd() string {
 	return ""
 }
 
+func (x *GetAffiliateDashboardResponse) GetBetAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetAmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetAffiliateDashboardResponse) GetAverageBetUsd() string {
 	if x != nil {
 		return x.AverageBetUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateDashboardResponse) GetAverageBetReportingCurrency() string {
+	if x != nil {
+		return x.AverageBetReportingCurrency
 	}
 	return ""
 }
@@ -510,13 +564,6 @@ func (x *GetAffiliateDashboardResponse) GetTotalAccountsWithBalance() int64 {
 		return x.TotalAccountsWithBalance
 	}
 	return 0
-}
-
-func (x *GetAffiliateDashboardResponse) GetProducts() map[string]*GetAffiliateDashboardResponse_ProductStats {
-	if x != nil {
-		return x.Products
-	}
-	return nil
 }
 
 type GetAffiliateTrendRequest struct {
@@ -700,142 +747,31 @@ func (x *GetAffiliateDashboardResponse_CurrencyBalance) GetTotalBalance() string
 	return ""
 }
 
-type GetAffiliateDashboardResponse_ProductStats struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	GameId        string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	GameName      string                 `protobuf:"bytes,2,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
-	ProviderId    string                 `protobuf:"bytes,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"` // Provider ID for grouping
-	ProviderName  string                 `protobuf:"bytes,4,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	Category      string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
-	ActiveUsers   int64                  `protobuf:"varint,6,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	GgrUsd        string                 `protobuf:"bytes,7,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	NgrUsd        string                 `protobuf:"bytes,8,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	BetCount      int64                  `protobuf:"varint,9,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd  string                 `protobuf:"bytes,10,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) Reset() {
-	*x = GetAffiliateDashboardResponse_ProductStats{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetAffiliateDashboardResponse_ProductStats) ProtoMessage() {}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetAffiliateDashboardResponse_ProductStats.ProtoReflect.Descriptor instead.
-func (*GetAffiliateDashboardResponse_ProductStats) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_dashboard_proto_rawDescGZIP(), []int{5, 1}
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetGameId() string {
-	if x != nil {
-		return x.GameId
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetGameName() string {
-	if x != nil {
-		return x.GameName
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetProviderId() string {
-	if x != nil {
-		return x.ProviderId
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetProviderName() string {
-	if x != nil {
-		return x.ProviderName
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetCategory() string {
-	if x != nil {
-		return x.Category
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetActiveUsers() int64 {
-	if x != nil {
-		return x.ActiveUsers
-	}
-	return 0
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetGgrUsd() string {
-	if x != nil {
-		return x.GgrUsd
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetNgrUsd() string {
-	if x != nil {
-		return x.NgrUsd
-	}
-	return ""
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetBetCount() int64 {
-	if x != nil {
-		return x.BetCount
-	}
-	return 0
-}
-
-func (x *GetAffiliateDashboardResponse_ProductStats) GetBetAmountUsd() string {
-	if x != nil {
-		return x.BetAmountUsd
-	}
-	return ""
-}
-
 type GetAffiliateTrendResponse_TrendData struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Date             *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Registrations    int64                  `protobuf:"varint,2,opt,name=registrations,proto3" json:"registrations,omitempty"`
-	FtdUsers         int64                  `protobuf:"varint,3,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	RepeatDepositors int64                  `protobuf:"varint,4,opt,name=repeat_depositors,json=repeatDepositors,proto3" json:"repeat_depositors,omitempty"`
-	ActiveUsers      int64                  `protobuf:"varint,5,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	DepositsUsd      string                 `protobuf:"bytes,6,opt,name=deposits_usd,json=depositsUsd,proto3" json:"deposits_usd,omitempty"`
-	WithdrawalsUsd   string                 `protobuf:"bytes,7,opt,name=withdrawals_usd,json=withdrawalsUsd,proto3" json:"withdrawals_usd,omitempty"`
-	GgrUsd           string                 `protobuf:"bytes,8,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	NgrUsd           string                 `protobuf:"bytes,9,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	BetCount         int64                  `protobuf:"varint,10,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd     string                 `protobuf:"bytes,11,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	Date                         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Registrations                int64                  `protobuf:"varint,2,opt,name=registrations,proto3" json:"registrations,omitempty"`
+	FtdUsers                     int64                  `protobuf:"varint,3,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatDepositors             int64                  `protobuf:"varint,4,opt,name=repeat_depositors,json=repeatDepositors,proto3" json:"repeat_depositors,omitempty"`
+	ActiveUsers                  int64                  `protobuf:"varint,5,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	DepositsUsd                  string                 `protobuf:"bytes,6,opt,name=deposits_usd,json=depositsUsd,proto3" json:"deposits_usd,omitempty"`
+	DepositsReportingCurrency    string                 `protobuf:"bytes,7,opt,name=deposits_reporting_currency,json=depositsReportingCurrency,proto3" json:"deposits_reporting_currency,omitempty"`
+	WithdrawalsUsd               string                 `protobuf:"bytes,8,opt,name=withdrawals_usd,json=withdrawalsUsd,proto3" json:"withdrawals_usd,omitempty"`
+	WithdrawalsReportingCurrency string                 `protobuf:"bytes,9,opt,name=withdrawals_reporting_currency,json=withdrawalsReportingCurrency,proto3" json:"withdrawals_reporting_currency,omitempty"`
+	GgrUsd                       string                 `protobuf:"bytes,10,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency         string                 `protobuf:"bytes,11,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrUsd                       string                 `protobuf:"bytes,12,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency         string                 `protobuf:"bytes,13,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	BetCount                     int64                  `protobuf:"varint,14,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd                 string                 `protobuf:"bytes,15,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency   string                 `protobuf:"bytes,16,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *GetAffiliateTrendResponse_TrendData) Reset() {
 	*x = GetAffiliateTrendResponse_TrendData{}
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[11]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +783,7 @@ func (x *GetAffiliateTrendResponse_TrendData) String() string {
 func (*GetAffiliateTrendResponse_TrendData) ProtoMessage() {}
 
 func (x *GetAffiliateTrendResponse_TrendData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_dashboard_proto_msgTypes[11]
+	mi := &file_report_service_v1_dashboard_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -905,9 +841,23 @@ func (x *GetAffiliateTrendResponse_TrendData) GetDepositsUsd() string {
 	return ""
 }
 
+func (x *GetAffiliateTrendResponse_TrendData) GetDepositsReportingCurrency() string {
+	if x != nil {
+		return x.DepositsReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetAffiliateTrendResponse_TrendData) GetWithdrawalsUsd() string {
 	if x != nil {
 		return x.WithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetWithdrawalsReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalsReportingCurrency
 	}
 	return ""
 }
@@ -919,9 +869,23 @@ func (x *GetAffiliateTrendResponse_TrendData) GetGgrUsd() string {
 	return ""
 }
 
+func (x *GetAffiliateTrendResponse_TrendData) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetAffiliateTrendResponse_TrendData) GetNgrUsd() string {
 	if x != nil {
 		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
 	}
 	return ""
 }
@@ -936,6 +900,13 @@ func (x *GetAffiliateTrendResponse_TrendData) GetBetCount() int64 {
 func (x *GetAffiliateTrendResponse_TrendData) GetBetAmountUsd() string {
 	if x != nil {
 		return x.BetAmountUsd
+	}
+	return ""
+}
+
+func (x *GetAffiliateTrendResponse_TrendData) GetBetAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetAmountReportingCurrency
 	}
 	return ""
 }
@@ -969,69 +940,64 @@ const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12-\n" +
 	"\x10game_stats_limit\x18\x04 \x01(\x05H\x00R\x0egameStatsLimit\x88\x01\x01\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x13\n" +
-	"\x11_game_stats_limit\"\xe4\n" +
+	"\x11_game_stats_limit\"\x92\n" +
 	"\n" +
 	"\x1dGetAffiliateDashboardResponse\x12$\n" +
 	"\rregistrations\x18\x01 \x01(\x03R\rregistrations\x12\x1b\n" +
 	"\tftd_users\x18\x02 \x01(\x03R\bftdUsers\x12+\n" +
 	"\x11repeat_depositors\x18\x03 \x01(\x03R\x10repeatDepositors\x12!\n" +
 	"\factive_users\x18\x04 \x01(\x03R\vactiveUsers\x12!\n" +
-	"\fdeposits_usd\x18\x05 \x01(\tR\vdepositsUsd\x12'\n" +
-	"\x0fwithdrawals_usd\x18\x06 \x01(\tR\x0ewithdrawalsUsd\x126\n" +
-	"\x17pending_withdrawals_usd\x18\a \x01(\tR\x15pendingWithdrawalsUsd\x12\x17\n" +
-	"\aggr_usd\x18\b \x01(\tR\x06ggrUsd\x12\x17\n" +
-	"\angr_usd\x18\t \x01(\tR\x06ngrUsd\x12\x1b\n" +
-	"\tbet_count\x18\n" +
-	" \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd\x12&\n" +
-	"\x0faverage_bet_usd\x18\f \x01(\tR\raverageBetUsd\x12%\n" +
-	"\x0freg_to_ftd_rate\x18\r \x01(\tR\fregToFtdRate\x12+\n" +
-	"\x12ftd_to_active_rate\x18\x0e \x01(\tR\x0fftdToActiveRate\x12`\n" +
-	"\bbalances\x18\x0f \x03(\v2D.api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalanceR\bbalances\x12=\n" +
-	"\x1btotal_accounts_with_balance\x18\x10 \x01(\x03R\x18totalAccountsWithBalance\x12^\n" +
-	"\bproducts\x18\x11 \x03(\v2B.api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntryR\bproducts\x1ay\n" +
+	"\fdeposits_usd\x18\x05 \x01(\tR\vdepositsUsd\x12>\n" +
+	"\x1bdeposits_reporting_currency\x18\x06 \x01(\tR\x19depositsReportingCurrency\x12'\n" +
+	"\x0fwithdrawals_usd\x18\a \x01(\tR\x0ewithdrawalsUsd\x12D\n" +
+	"\x1ewithdrawals_reporting_currency\x18\b \x01(\tR\x1cwithdrawalsReportingCurrency\x126\n" +
+	"\x17pending_withdrawals_usd\x18\t \x01(\tR\x15pendingWithdrawalsUsd\x12S\n" +
+	"&pending_withdrawals_reporting_currency\x18\n" +
+	" \x01(\tR#pendingWithdrawalsReportingCurrency\x12\x17\n" +
+	"\aggr_usd\x18\v \x01(\tR\x06ggrUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\f \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
+	"\angr_usd\x18\r \x01(\tR\x06ngrUsd\x124\n" +
+	"\x16ngr_reporting_currency\x18\x0e \x01(\tR\x14ngrReportingCurrency\x12\x1b\n" +
+	"\tbet_count\x18\x0f \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\x10 \x01(\tR\fbetAmountUsd\x12A\n" +
+	"\x1dbet_amount_reporting_currency\x18\x11 \x01(\tR\x1abetAmountReportingCurrency\x12&\n" +
+	"\x0faverage_bet_usd\x18\x12 \x01(\tR\raverageBetUsd\x12C\n" +
+	"\x1eaverage_bet_reporting_currency\x18\x13 \x01(\tR\x1baverageBetReportingCurrency\x12%\n" +
+	"\x0freg_to_ftd_rate\x18\x14 \x01(\tR\fregToFtdRate\x12+\n" +
+	"\x12ftd_to_active_rate\x18\x15 \x01(\tR\x0fftdToActiveRate\x12`\n" +
+	"\bbalances\x18\x16 \x03(\v2D.api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalanceR\bbalances\x12=\n" +
+	"\x1btotal_accounts_with_balance\x18\x17 \x01(\x03R\x18totalAccountsWithBalance\x1ay\n" +
 	"\x0fCurrencyBalance\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12%\n" +
 	"\x0eaccounts_count\x18\x02 \x01(\x03R\raccountsCount\x12#\n" +
-	"\rtotal_balance\x18\x03 \x01(\tR\ftotalBalance\x1a\xbe\x02\n" +
-	"\fProductStats\x12\x17\n" +
-	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1b\n" +
-	"\tgame_name\x18\x02 \x01(\tR\bgameName\x12\x1f\n" +
-	"\vprovider_id\x18\x03 \x01(\tR\n" +
-	"providerId\x12#\n" +
-	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12!\n" +
-	"\factive_users\x18\x06 \x01(\x03R\vactiveUsers\x12\x17\n" +
-	"\aggr_usd\x18\a \x01(\tR\x06ggrUsd\x12\x17\n" +
-	"\angr_usd\x18\b \x01(\tR\x06ngrUsd\x12\x1b\n" +
-	"\tbet_count\x18\t \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\n" +
-	" \x01(\tR\fbetAmountUsd\x1a~\n" +
-	"\rProductsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
-	"\x05value\x18\x02 \x01(\v2A.api.report.service.v1.GetAffiliateDashboardResponse.ProductStatsR\x05value:\x028\x01\"\xa5\x02\n" +
+	"\rtotal_balance\x18\x03 \x01(\tR\ftotalBalance\"\xa5\x02\n" +
 	"\x18GetAffiliateTrendRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x19\n" +
 	"\bgroup_by\x18\x04 \x01(\tR\agroupBy\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\xfd\x03\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\xb2\x06\n" +
 	"\x19GetAffiliateTrendResponse\x12N\n" +
-	"\x04data\x18\x01 \x03(\v2:.api.report.service.v1.GetAffiliateTrendResponse.TrendDataR\x04data\x1a\x8f\x03\n" +
+	"\x04data\x18\x01 \x03(\v2:.api.report.service.v1.GetAffiliateTrendResponse.TrendDataR\x04data\x1a\xc4\x05\n" +
 	"\tTrendData\x12.\n" +
 	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12$\n" +
 	"\rregistrations\x18\x02 \x01(\x03R\rregistrations\x12\x1b\n" +
 	"\tftd_users\x18\x03 \x01(\x03R\bftdUsers\x12+\n" +
 	"\x11repeat_depositors\x18\x04 \x01(\x03R\x10repeatDepositors\x12!\n" +
 	"\factive_users\x18\x05 \x01(\x03R\vactiveUsers\x12!\n" +
-	"\fdeposits_usd\x18\x06 \x01(\tR\vdepositsUsd\x12'\n" +
-	"\x0fwithdrawals_usd\x18\a \x01(\tR\x0ewithdrawalsUsd\x12\x17\n" +
-	"\aggr_usd\x18\b \x01(\tR\x06ggrUsd\x12\x17\n" +
-	"\angr_usd\x18\t \x01(\tR\x06ngrUsd\x12\x1b\n" +
-	"\tbet_count\x18\n" +
-	" \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\v \x01(\tR\fbetAmountUsd2\xfe\a\n" +
+	"\fdeposits_usd\x18\x06 \x01(\tR\vdepositsUsd\x12>\n" +
+	"\x1bdeposits_reporting_currency\x18\a \x01(\tR\x19depositsReportingCurrency\x12'\n" +
+	"\x0fwithdrawals_usd\x18\b \x01(\tR\x0ewithdrawalsUsd\x12D\n" +
+	"\x1ewithdrawals_reporting_currency\x18\t \x01(\tR\x1cwithdrawalsReportingCurrency\x12\x17\n" +
+	"\aggr_usd\x18\n" +
+	" \x01(\tR\x06ggrUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\v \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
+	"\angr_usd\x18\f \x01(\tR\x06ngrUsd\x124\n" +
+	"\x16ngr_reporting_currency\x18\r \x01(\tR\x14ngrReportingCurrency\x12\x1b\n" +
+	"\tbet_count\x18\x0e \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\x0f \x01(\tR\fbetAmountUsd\x12A\n" +
+	"\x1dbet_amount_reporting_currency\x18\x10 \x01(\tR\x1abetAmountReportingCurrency2\xfe\a\n" +
 	"\x10DashboardService\x12\xb1\x01\n" +
 	"\x14GetOverviewDashboard\x122.api.report.service.v1.GetOverviewDashboardRequest\x1a7.api.backoffice.service.v1.GetOverviewDashboardResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/report/dashboard/overview/get\x12\xba\x01\n" +
 	"\x16GetTimeRangedDashboard\x124.api.report.service.v1.GetTimeRangedDashboardRequest\x1a9.api.backoffice.service.v1.GetTimeRangedDashboardResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/dashboard/time-ranged/get\x12\xb2\x01\n" +
@@ -1053,7 +1019,7 @@ func file_report_service_v1_dashboard_proto_rawDescGZIP() []byte {
 	return file_report_service_v1_dashboard_proto_rawDescData
 }
 
-var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_report_service_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_report_service_v1_dashboard_proto_goTypes = []any{
 	(*GetOverviewDashboardRequest)(nil),                   // 0: api.report.service.v1.GetOverviewDashboardRequest
 	(*GetTimeRangedDashboardRequest)(nil),                 // 1: api.report.service.v1.GetTimeRangedDashboardRequest
@@ -1064,60 +1030,56 @@ var file_report_service_v1_dashboard_proto_goTypes = []any{
 	(*GetAffiliateTrendRequest)(nil),                      // 6: api.report.service.v1.GetAffiliateTrendRequest
 	(*GetAffiliateTrendResponse)(nil),                     // 7: api.report.service.v1.GetAffiliateTrendResponse
 	(*GetAffiliateDashboardResponse_CurrencyBalance)(nil), // 8: api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
-	(*GetAffiliateDashboardResponse_ProductStats)(nil),    // 9: api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
-	nil, // 10: api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntry
-	(*GetAffiliateTrendResponse_TrendData)(nil),           // 11: api.report.service.v1.GetAffiliateTrendResponse.TrendData
-	(*common.OperatorContextFilters)(nil),                 // 12: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                        // 13: api.common.OperatorContext
-	(v1.GetTimeRangedDashboardRequest_TimeRangeType)(0),   // 14: api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	(v1.GetTopUsersDashboardRequest_TimeRangeType)(0),     // 15: api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
-	(v1.GetTopOperatorsDashboardRequest_TimeRangeType)(0), // 16: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
-	(*timestamppb.Timestamp)(nil),                         // 17: google.protobuf.Timestamp
-	(*v1.GetOverviewDashboardResponse)(nil),               // 18: api.backoffice.service.v1.GetOverviewDashboardResponse
-	(*v1.GetTimeRangedDashboardResponse)(nil),             // 19: api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	(*v1.GetTopUsersDashboardResponse)(nil),               // 20: api.backoffice.service.v1.GetTopUsersDashboardResponse
-	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 21: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	(*GetAffiliateTrendResponse_TrendData)(nil),           // 9: api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	(*common.OperatorContextFilters)(nil),                 // 10: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                        // 11: api.common.OperatorContext
+	(v1.GetTimeRangedDashboardRequest_TimeRangeType)(0),   // 12: api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	(v1.GetTopUsersDashboardRequest_TimeRangeType)(0),     // 13: api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	(v1.GetTopOperatorsDashboardRequest_TimeRangeType)(0), // 14: api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	(*timestamppb.Timestamp)(nil),                         // 15: google.protobuf.Timestamp
+	(*v1.GetOverviewDashboardResponse)(nil),               // 16: api.backoffice.service.v1.GetOverviewDashboardResponse
+	(*v1.GetTimeRangedDashboardResponse)(nil),             // 17: api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	(*v1.GetTopUsersDashboardResponse)(nil),               // 18: api.backoffice.service.v1.GetTopUsersDashboardResponse
+	(*v1.GetTopOperatorsDashboardResponse)(nil),           // 19: api.backoffice.service.v1.GetTopOperatorsDashboardResponse
 }
 var file_report_service_v1_dashboard_proto_depIdxs = []int32{
-	12, // 0: api.report.service.v1.GetOverviewDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	13, // 1: api.report.service.v1.GetOverviewDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	14, // 2: api.report.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
-	12, // 3: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	13, // 4: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	15, // 5: api.report.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
-	12, // 6: api.report.service.v1.GetTopUsersDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	13, // 7: api.report.service.v1.GetTopUsersDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	16, // 8: api.report.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
-	12, // 9: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	13, // 10: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 11: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
-	17, // 12: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
-	13, // 13: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	10, // 0: api.report.service.v1.GetOverviewDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	11, // 1: api.report.service.v1.GetOverviewDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	12, // 2: api.report.service.v1.GetTimeRangedDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTimeRangedDashboardRequest.TimeRangeType
+	10, // 3: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	11, // 4: api.report.service.v1.GetTimeRangedDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	13, // 5: api.report.service.v1.GetTopUsersDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopUsersDashboardRequest.TimeRangeType
+	10, // 6: api.report.service.v1.GetTopUsersDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	11, // 7: api.report.service.v1.GetTopUsersDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 8: api.report.service.v1.GetTopOperatorsDashboardRequest.time_range_type:type_name -> api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeType
+	10, // 9: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	11, // 10: api.report.service.v1.GetTopOperatorsDashboardRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 11: api.report.service.v1.GetAffiliateDashboardRequest.start_time:type_name -> google.protobuf.Timestamp
+	15, // 12: api.report.service.v1.GetAffiliateDashboardRequest.end_time:type_name -> google.protobuf.Timestamp
+	11, // 13: api.report.service.v1.GetAffiliateDashboardRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	8,  // 14: api.report.service.v1.GetAffiliateDashboardResponse.balances:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.CurrencyBalance
-	10, // 15: api.report.service.v1.GetAffiliateDashboardResponse.products:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntry
-	17, // 16: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
-	17, // 17: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
-	13, // 18: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	11, // 19: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
-	9,  // 20: api.report.service.v1.GetAffiliateDashboardResponse.ProductsEntry.value:type_name -> api.report.service.v1.GetAffiliateDashboardResponse.ProductStats
-	17, // 21: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
-	0,  // 22: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.report.service.v1.GetOverviewDashboardRequest
-	1,  // 23: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.report.service.v1.GetTimeRangedDashboardRequest
-	2,  // 24: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.report.service.v1.GetTopUsersDashboardRequest
-	3,  // 25: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.report.service.v1.GetTopOperatorsDashboardRequest
-	4,  // 26: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
-	6,  // 27: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
-	18, // 28: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
-	19, // 29: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
-	20, // 30: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
-	21, // 31: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
-	5,  // 32: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
-	7,  // 33: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
-	28, // [28:34] is the sub-list for method output_type
-	22, // [22:28] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	15, // 15: api.report.service.v1.GetAffiliateTrendRequest.start_time:type_name -> google.protobuf.Timestamp
+	15, // 16: api.report.service.v1.GetAffiliateTrendRequest.end_time:type_name -> google.protobuf.Timestamp
+	11, // 17: api.report.service.v1.GetAffiliateTrendRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	9,  // 18: api.report.service.v1.GetAffiliateTrendResponse.data:type_name -> api.report.service.v1.GetAffiliateTrendResponse.TrendData
+	15, // 19: api.report.service.v1.GetAffiliateTrendResponse.TrendData.date:type_name -> google.protobuf.Timestamp
+	0,  // 20: api.report.service.v1.DashboardService.GetOverviewDashboard:input_type -> api.report.service.v1.GetOverviewDashboardRequest
+	1,  // 21: api.report.service.v1.DashboardService.GetTimeRangedDashboard:input_type -> api.report.service.v1.GetTimeRangedDashboardRequest
+	2,  // 22: api.report.service.v1.DashboardService.GetTopUsersDashboard:input_type -> api.report.service.v1.GetTopUsersDashboardRequest
+	3,  // 23: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:input_type -> api.report.service.v1.GetTopOperatorsDashboardRequest
+	4,  // 24: api.report.service.v1.DashboardService.GetAffiliateDashboard:input_type -> api.report.service.v1.GetAffiliateDashboardRequest
+	6,  // 25: api.report.service.v1.DashboardService.GetAffiliateTrend:input_type -> api.report.service.v1.GetAffiliateTrendRequest
+	16, // 26: api.report.service.v1.DashboardService.GetOverviewDashboard:output_type -> api.backoffice.service.v1.GetOverviewDashboardResponse
+	17, // 27: api.report.service.v1.DashboardService.GetTimeRangedDashboard:output_type -> api.backoffice.service.v1.GetTimeRangedDashboardResponse
+	18, // 28: api.report.service.v1.DashboardService.GetTopUsersDashboard:output_type -> api.backoffice.service.v1.GetTopUsersDashboardResponse
+	19, // 29: api.report.service.v1.DashboardService.GetTopOperatorsDashboard:output_type -> api.backoffice.service.v1.GetTopOperatorsDashboardResponse
+	5,  // 30: api.report.service.v1.DashboardService.GetAffiliateDashboard:output_type -> api.report.service.v1.GetAffiliateDashboardResponse
+	7,  // 31: api.report.service.v1.DashboardService.GetAffiliateTrend:output_type -> api.report.service.v1.GetAffiliateTrendResponse
+	26, // [26:32] is the sub-list for method output_type
+	20, // [20:26] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_dashboard_proto_init() }
@@ -1132,7 +1094,7 @@ func file_report_service_v1_dashboard_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_service_v1_dashboard_proto_rawDesc), len(file_report_service_v1_dashboard_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
