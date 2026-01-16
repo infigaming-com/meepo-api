@@ -45,6 +45,7 @@ const (
 	Affiliate_ListEvents_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/ListEvents"
 	Affiliate_ListCommissions_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListCommissions"
 	Affiliate_ListUsers_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/ListUsers"
+	Affiliate_ExportUsers_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ExportUsers"
 	Affiliate_ListAffiliateBills_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
 	Affiliate_SetReferralPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
 	Affiliate_GetReferralPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
@@ -90,6 +91,7 @@ type AffiliateClient interface {
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*ListCommissionsResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error)
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*GetReferralPlanResponse, error)
@@ -375,6 +377,16 @@ func (c *affiliateClient) ListUsers(ctx context.Context, in *ListUsersRequest, o
 	return out, nil
 }
 
+func (c *affiliateClient) ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUsersResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ExportUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*ListAffiliateBillsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAffiliateBillsResponse)
@@ -535,6 +547,7 @@ type AffiliateServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*ListCommissionsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*GetReferralPlanResponse, error)
@@ -637,6 +650,9 @@ func (UnimplementedAffiliateServer) ListCommissions(context.Context, *ListCommis
 }
 func (UnimplementedAffiliateServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedAffiliateServer) ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportUsers not implemented")
 }
 func (UnimplementedAffiliateServer) ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*ListAffiliateBillsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateBills not implemented")
@@ -1166,6 +1182,24 @@ func _Affiliate_ListUsers_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ExportUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ExportUsers(ctx, req.(*ExportUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_ListAffiliateBills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAffiliateBillsRequest)
 	if err := dec(in); err != nil {
@@ -1510,6 +1544,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUsers",
 			Handler:    _Affiliate_ListUsers_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _Affiliate_ExportUsers_Handler,
 		},
 		{
 			MethodName: "ListAffiliateBills",

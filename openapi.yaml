@@ -1129,6 +1129,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdateAffiliateResponse'
+    /v1/backoffice/affiliate/user/export:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ExportAffiliateUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportAffiliateUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ExportUsersResponse'
     /v1/backoffice/affiliate/user/list:
         post:
             tags:
@@ -8149,6 +8167,11 @@ components:
                     type: string
                 commissionPlanName:
                     type: string
+        api.affiliate.service.v1.ExportUsersResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.affiliate.service.v1.FlatByCountriesCommission:
             type: object
             properties:
@@ -9091,6 +9114,10 @@ components:
                     type: string
                 campaignUrl:
                     type: string
+                campaignId:
+                    type: string
+                campaignName:
+                    type: string
                 registeredAt:
                     type: string
                     format: date-time
@@ -9759,6 +9786,8 @@ components:
                     type: string
                 rtpMax:
                     type: string
+                gameIdExactMatch:
+                    type: boolean
         api.backoffice.service.v1.BackofficeListGamesUnderTagResponse:
             type: object
             properties:
@@ -9868,11 +9897,14 @@ components:
                     type: string
                 gameId:
                     type: string
-                orderIndex:
+                originOrderIndex:
                     type: integer
                     format: int32
                 sticky:
                     type: boolean
+                currentOrderIndex:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse:
             type: object
             properties: {}
@@ -10597,6 +10629,33 @@ components:
                 venueTournament:
                     type: string
                 settlementDetails:
+                    type: string
+        api.backoffice.service.v1.ExportAffiliateUsersRequest:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                ftdStartTime:
+                    type: string
+                    format: date-time
+                ftdEndTime:
+                    type: string
+                    format: date-time
+                affiliateId:
+                    type: string
+                registrationStartTime:
+                    type: string
+                    format: date-time
+                registrationEndTime:
+                    type: string
+                    format: date-time
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                format:
+                    type: string
+                timeZone:
                     type: string
         api.backoffice.service.v1.ExportBetsRequest:
             type: object
@@ -13587,6 +13646,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                gameIdExactMatch:
+                    type: boolean
         api.backoffice.service.v1.ListGamesResponse:
             type: object
             properties:
@@ -15788,8 +15849,6 @@ components:
                 currency:
                     type: string
                 transactionType:
-                    type: string
-                transactionId:
                     type: string
                 amount:
                     type: string

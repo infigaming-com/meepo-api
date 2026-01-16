@@ -3326,6 +3326,8 @@ func (m *ListGamesRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for GameIdExactMatch
+
 	if m.GameId != nil {
 		// no validation rules for GameId
 	}
@@ -8284,9 +8286,11 @@ func (m *BackofficeUpdateGameOrderInTagRequest) validate(all bool) error {
 
 	// no validation rules for GameId
 
-	// no validation rules for OrderIndex
+	// no validation rules for OriginOrderIndex
 
 	// no validation rules for Sticky
+
+	// no validation rules for CurrentOrderIndex
 
 	if len(errors) > 0 {
 		return BackofficeUpdateGameOrderInTagRequestMultiError(errors)
@@ -8752,6 +8756,8 @@ func (m *BackofficeListGamesUnderTagRequest) validate(all bool) error {
 	// no validation rules for Page
 
 	// no validation rules for PageSize
+
+	// no validation rules for GameIdExactMatch
 
 	if m.ProviderId != nil {
 		// no validation rules for ProviderId

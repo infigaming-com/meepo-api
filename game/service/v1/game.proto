@@ -720,6 +720,7 @@ message BackofficeListGamesRequest {
 	optional int32 page_size = 15;
 	// Operator context for hierarchical enabled status
 	api.common.OperatorContext operator_context = 16;
+	bool game_id_exact_match = 17; // true: exact match, false: fuzzy search (default)
 }
 
 message BackofficeListGamesResponse {
@@ -2059,8 +2060,9 @@ message BackofficeUpdateGameOrderInTagRequest {
 	api.common.OperatorContext operator_context = 1;
 	int64 tag_id = 2;
 	string game_id = 3;
-	int32 order_index = 4;
+	int32 origin_order_index = 4;  // 原位置
 	bool sticky = 5;
+	int32 current_order_index = 6;  // 目标位置
 }
 
 message BackofficeUpdateGameOrderInTagResponse {}
@@ -2115,6 +2117,7 @@ message BackofficeListGamesUnderTagRequest {
 	optional bool free_spin = 12;
 	optional string rtp_min = 13;
 	optional string rtp_max = 14;
+	bool game_id_exact_match = 15; // true: exact match, false: fuzzy search (default)
 }
 
 message BackofficeListGamesUnderTagResponse {
