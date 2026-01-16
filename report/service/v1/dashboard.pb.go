@@ -270,8 +270,7 @@ type GetAffiliateDashboardRequest struct {
 	AffiliateId              int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	StartTime                *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime                  *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	GameStatsLimit           *int32                  `protobuf:"varint,4,opt,name=game_stats_limit,json=gameStatsLimit,proto3,oneof" json:"game_stats_limit,omitempty"` // limit for game stats, group by provider,default 10
-	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -325,13 +324,6 @@ func (x *GetAffiliateDashboardRequest) GetEndTime() *timestamppb.Timestamp {
 		return x.EndTime
 	}
 	return nil
-}
-
-func (x *GetAffiliateDashboardRequest) GetGameStatsLimit() int32 {
-	if x != nil && x.GameStatsLimit != nil {
-		return *x.GameStatsLimit
-	}
-	return 0
 }
 
 func (x *GetAffiliateDashboardRequest) GetInitiatorOperatorContext() *common.OperatorContext {
@@ -932,15 +924,13 @@ const file_report_service_v1_dashboard_proto_rawDesc = "" +
 	"\x1fGetTopOperatorsDashboardRequest\x12p\n" +
 	"\x0ftime_range_type\x18\x01 \x01(\x0e2H.api.backoffice.service.v1.GetTopOperatorsDashboardRequest.TimeRangeTypeR\rtimeRangeType\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd2\x02\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x8e\x02\n" +
 	"\x1cGetAffiliateDashboardRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12-\n" +
-	"\x10game_stats_limit\x18\x04 \x01(\x05H\x00R\x0egameStatsLimit\x88\x01\x01\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x13\n" +
-	"\x11_game_stats_limit\"\x92\n" +
+	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\x92\n" +
 	"\n" +
 	"\x1dGetAffiliateDashboardResponse\x12$\n" +
 	"\rregistrations\x18\x01 \x01(\x03R\rregistrations\x12\x1b\n" +
@@ -1087,7 +1077,6 @@ func file_report_service_v1_dashboard_proto_init() {
 	if File_report_service_v1_dashboard_proto != nil {
 		return
 	}
-	file_report_service_v1_dashboard_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -802,10 +802,6 @@ func (m *GetAffiliateDashboardRequest) validate(all bool) error {
 		}
 	}
 
-	if m.GameStatsLimit != nil {
-		// no validation rules for GameStatsLimit
-	}
-
 	if len(errors) > 0 {
 		return GetAffiliateDashboardRequestMultiError(errors)
 	}

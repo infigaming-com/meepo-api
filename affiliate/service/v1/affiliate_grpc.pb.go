@@ -59,6 +59,8 @@ const (
 	Affiliate_GetUserPromoConditionInfo_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
 	Affiliate_GetOperatorSettings_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
 	Affiliate_UpdateOperatorSettings_FullMethodName       = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
+	Affiliate_GetAffiliateDashboard_FullMethodName        = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
+	Affiliate_GetAffiliateTrend_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -107,6 +109,10 @@ type AffiliateClient interface {
 	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
 	GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*GetOperatorSettingsResponse, error)
 	UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorSettingsResponse, error)
+	// GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
+	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error)
+	// GetAffiliateTrend returns time series data for trend visualization
+	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error)
 }
 
 type affiliateClient struct {
@@ -517,6 +523,26 @@ func (c *affiliateClient) UpdateOperatorSettings(ctx context.Context, in *Update
 	return out, nil
 }
 
+func (c *affiliateClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateDashboardResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetAffiliateDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateTrendResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetAffiliateTrend_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -563,6 +589,10 @@ type AffiliateServer interface {
 	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
 	GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*GetOperatorSettingsResponse, error)
 	UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error)
+	// GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
+	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error)
+	// GetAffiliateTrend returns time series data for trend visualization
+	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -692,6 +722,12 @@ func (UnimplementedAffiliateServer) GetOperatorSettings(context.Context, *GetOpe
 }
 func (UnimplementedAffiliateServer) UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorSettings not implemented")
+}
+func (UnimplementedAffiliateServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
+}
+func (UnimplementedAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1434,6 +1470,42 @@ func _Affiliate_UpdateOperatorSettings_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetAffiliateDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetAffiliateDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetAffiliateDashboard(ctx, req.(*GetAffiliateDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetAffiliateTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetAffiliateTrend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1600,6 +1672,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorSettings",
 			Handler:    _Affiliate_UpdateOperatorSettings_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDashboard",
+			Handler:    _Affiliate_GetAffiliateDashboard_Handler,
+		},
+		{
+			MethodName: "GetAffiliateTrend",
+			Handler:    _Affiliate_GetAffiliateTrend_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

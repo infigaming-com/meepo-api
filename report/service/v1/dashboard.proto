@@ -93,8 +93,7 @@ message GetAffiliateDashboardRequest {
   int64 affiliate_id = 1;
   google.protobuf.Timestamp start_time = 2;
   google.protobuf.Timestamp end_time = 3;
-  optional int32 game_stats_limit = 4;  // limit for game stats, group by provider,default 10
-  api.common.OperatorContext initiator_operator_context = 5;
+  api.common.OperatorContext initiator_operator_context = 4;
 }
 
 message GetAffiliateDashboardResponse {
