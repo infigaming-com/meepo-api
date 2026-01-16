@@ -24,6 +24,8 @@ const (
 	DashboardService_GetTimeRangedDashboard_FullMethodName   = "/api.report.service.v1.DashboardService/GetTimeRangedDashboard"
 	DashboardService_GetTopUsersDashboard_FullMethodName     = "/api.report.service.v1.DashboardService/GetTopUsersDashboard"
 	DashboardService_GetTopOperatorsDashboard_FullMethodName = "/api.report.service.v1.DashboardService/GetTopOperatorsDashboard"
+	DashboardService_GetAffiliateDashboard_FullMethodName    = "/api.report.service.v1.DashboardService/GetAffiliateDashboard"
+	DashboardService_GetAffiliateTrend_FullMethodName        = "/api.report.service.v1.DashboardService/GetAffiliateTrend"
 )
 
 // DashboardServiceClient is the client API for DashboardService service.
@@ -41,6 +43,10 @@ type DashboardServiceClient interface {
 	GetTopUsersDashboard(ctx context.Context, in *GetTopUsersDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopUsersDashboardResponse, error)
 	// Top operators dashboard (GGR/NGR/deposits-withdrawals)
 	GetTopOperatorsDashboard(ctx context.Context, in *GetTopOperatorsDashboardRequest, opts ...grpc.CallOption) (*v1.GetTopOperatorsDashboardResponse, error)
+	// Affiliate dashboard with aggregated metrics, balance, and product stats
+	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error)
+	// Affiliate trend data (time series)
+	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error)
 }
 
 type dashboardServiceClient struct {
@@ -91,6 +97,26 @@ func (c *dashboardServiceClient) GetTopOperatorsDashboard(ctx context.Context, i
 	return out, nil
 }
 
+func (c *dashboardServiceClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateDashboardResponse)
+	err := c.cc.Invoke(ctx, DashboardService_GetAffiliateDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dashboardServiceClient) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateTrendResponse)
+	err := c.cc.Invoke(ctx, DashboardService_GetAffiliateTrend_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DashboardServiceServer is the server API for DashboardService service.
 // All implementations must embed UnimplementedDashboardServiceServer
 // for forward compatibility.
@@ -106,6 +132,10 @@ type DashboardServiceServer interface {
 	GetTopUsersDashboard(context.Context, *GetTopUsersDashboardRequest) (*v1.GetTopUsersDashboardResponse, error)
 	// Top operators dashboard (GGR/NGR/deposits-withdrawals)
 	GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*v1.GetTopOperatorsDashboardResponse, error)
+	// Affiliate dashboard with aggregated metrics, balance, and product stats
+	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error)
+	// Affiliate trend data (time series)
+	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error)
 	mustEmbedUnimplementedDashboardServiceServer()
 }
 
@@ -127,6 +157,12 @@ func (UnimplementedDashboardServiceServer) GetTopUsersDashboard(context.Context,
 }
 func (UnimplementedDashboardServiceServer) GetTopOperatorsDashboard(context.Context, *GetTopOperatorsDashboardRequest) (*v1.GetTopOperatorsDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTopOperatorsDashboard not implemented")
+}
+func (UnimplementedDashboardServiceServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
+}
+func (UnimplementedDashboardServiceServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
 }
 func (UnimplementedDashboardServiceServer) mustEmbedUnimplementedDashboardServiceServer() {}
 func (UnimplementedDashboardServiceServer) testEmbeddedByValue()                          {}
@@ -221,6 +257,42 @@ func _DashboardService_GetTopOperatorsDashboard_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DashboardService_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DashboardServiceServer).GetAffiliateDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DashboardService_GetAffiliateDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DashboardServiceServer).GetAffiliateDashboard(ctx, req.(*GetAffiliateDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DashboardService_GetAffiliateTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DashboardServiceServer).GetAffiliateTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DashboardService_GetAffiliateTrend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DashboardServiceServer).GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DashboardService_ServiceDesc is the grpc.ServiceDesc for DashboardService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -243,6 +315,14 @@ var DashboardService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTopOperatorsDashboard",
 			Handler:    _DashboardService_GetTopOperatorsDashboard_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDashboard",
+			Handler:    _DashboardService_GetAffiliateDashboard_Handler,
+		},
+		{
+			MethodName: "GetAffiliateTrend",
+			Handler:    _DashboardService_GetAffiliateTrend_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

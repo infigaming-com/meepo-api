@@ -877,6 +877,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.CreateAffiliateResponse'
+    /v1/backoffice/affiliate/dashboard/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliateDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateDashboardResponse'
+    /v1/backoffice/affiliate/dashboard/trend/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliateTrend
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateTrendRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateTrendResponse'
     /v1/backoffice/affiliate/delete:
         post:
             tags:
@@ -8096,6 +8132,74 @@ components:
             properties:
                 referralCode:
                     type: string
+        api.affiliate.service.v1.DashboardMetrics:
+            type: object
+            properties:
+                registrations:
+                    type: string
+                    description: User Conversion
+                ftdUsers:
+                    type: string
+                repeatDepositors:
+                    type: string
+                activeUsers:
+                    type: string
+                regToFtdRate:
+                    type: string
+                ftdToActiveRate:
+                    type: string
+                depositsUsd:
+                    type: string
+                    description: Deposits
+                depositsReportingCurrency:
+                    type: string
+                withdrawalsUsd:
+                    type: string
+                    description: Withdrawals
+                withdrawalsReportingCurrency:
+                    type: string
+                pendingWithdrawalsUsd:
+                    type: string
+                    description: Pending Withdrawals
+                pendingWithdrawalsReportingCurrency:
+                    type: string
+                accountsWithBalance:
+                    type: string
+                    description: Balance
+                totalBalanceUsd:
+                    type: string
+                totalBalanceReportingCurrency:
+                    type: string
+                ggrUsd:
+                    type: string
+                    description: GGR
+                ggrReportingCurrency:
+                    type: string
+                ngrUsd:
+                    type: string
+                    description: NGR
+                ngrReportingCurrency:
+                    type: string
+                betCount:
+                    type: string
+                    description: Bet
+                betAmountUsd:
+                    type: string
+                betAmountReportingCurrency:
+                    type: string
+                averageBetUsd:
+                    type: string
+                averageBetReportingCurrency:
+                    type: string
+                pendingCommissionUsd:
+                    type: string
+                    description: Commission
+                pendingCommissionReportingCurrency:
+                    type: string
+                paidCommissionUsd:
+                    type: string
+                paidCommissionReportingCurrency:
+                    type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
             properties: {}
@@ -8212,6 +8316,17 @@ components:
             properties:
                 rate:
                     type: string
+        api.affiliate.service.v1.GetAffiliateDashboardResponse:
+            type: object
+            properties:
+                current:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.DashboardMetrics'
+                    description: Current period metrics
+                previous:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.DashboardMetrics'
+                    description: Previous period metrics (same duration, immediately before start_time)
         api.affiliate.service.v1.GetAffiliateDetailsResponse:
             type: object
             properties:
@@ -8281,6 +8396,53 @@ components:
                     type: string
                 twoFaEnabled:
                     type: boolean
+        api.affiliate.service.v1.GetAffiliateTrendResponse:
+            type: object
+            properties:
+                userConversionData:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateTrendResponse_UserConversionData'
+                financialBettingData:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateTrendResponse_FinancialBettingData'
+        api.affiliate.service.v1.GetAffiliateTrendResponse_FinancialBettingData:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                depositsUsd:
+                    type: string
+                depositsReportingCurrency:
+                    type: string
+                withdrawalsUsd:
+                    type: string
+                withdrawalsReportingCurrency:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrUsd:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                betCount:
+                    type: string
+        api.affiliate.service.v1.GetAffiliateTrendResponse_UserConversionData:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                registrations:
+                    type: string
+                ftdUsers:
+                    type: string
+                activeUsers:
+                    type: string
         api.affiliate.service.v1.GetCommissionPlanResponse:
             type: object
             properties:
@@ -10978,6 +11140,15 @@ components:
                 lastResetAt:
                     type: string
             description: Get2faStatusResponse - returns 2FA status
+        api.backoffice.service.v1.GetAffiliateDashboardRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
@@ -10988,6 +11159,17 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetAffiliateTrendRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                groupBy:
+                    type: string
         api.backoffice.service.v1.GetBalanceSummaryRequest:
             type: object
             properties:

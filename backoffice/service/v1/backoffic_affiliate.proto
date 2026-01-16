@@ -254,6 +254,22 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Dashboard --------------
+
+	rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (api.affiliate.service.v1.GetAffiliateDashboardResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/dashboard/get"
+			body: "*"
+		};
+	}
+
+	rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (api.affiliate.service.v1.GetAffiliateTrendResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/dashboard/trend/get"
+			body: "*"
+		};
+	}
 }
 
 // -------------- Commission Plan --------------
@@ -526,4 +542,17 @@ message SetReferralPlanRequest {
 message GetReferralPlanRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
+}
+
+// -------------- Dashboard --------------
+
+message GetAffiliateDashboardRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+}
+
+message GetAffiliateTrendRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+	string group_by = 3;  // "day", "week", "month"
 }
