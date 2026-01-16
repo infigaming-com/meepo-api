@@ -22938,6 +22938,409 @@ var _ interface {
 	ErrorName() string
 } = GetProviderStatsResponseValidationError{}
 
+// Validate checks the field values on GetUserNgrRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetUserNgrRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserNgrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserNgrRequestMultiError, or nil if none found.
+func (m *GetUserNgrRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserNgrRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserNgrRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserNgrRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserNgrRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserNgrRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserNgrRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserNgrRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetUserNgrRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserNgrRequestMultiError is an error wrapping multiple validation errors
+// returned by GetUserNgrRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetUserNgrRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserNgrRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserNgrRequestMultiError) AllErrors() []error { return m }
+
+// GetUserNgrRequestValidationError is the validation error returned by
+// GetUserNgrRequest.Validate if the designated constraints aren't met.
+type GetUserNgrRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserNgrRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserNgrRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserNgrRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserNgrRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserNgrRequestValidationError) ErrorName() string {
+	return "GetUserNgrRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserNgrRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserNgrRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserNgrRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserNgrRequestValidationError{}
+
+// Validate checks the field values on GetUserNgrResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserNgrResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserNgrResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserNgrResponseMultiError, or nil if none found.
+func (m *GetUserNgrResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserNgrResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserNgrResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserNgrResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserNgrResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetUserNgrResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserNgrResponseMultiError is an error wrapping multiple validation errors
+// returned by GetUserNgrResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetUserNgrResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserNgrResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserNgrResponseMultiError) AllErrors() []error { return m }
+
+// GetUserNgrResponseValidationError is the validation error returned by
+// GetUserNgrResponse.Validate if the designated constraints aren't met.
+type GetUserNgrResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserNgrResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserNgrResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserNgrResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserNgrResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserNgrResponseValidationError) ErrorName() string {
+	return "GetUserNgrResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserNgrResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserNgrResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserNgrResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserNgrResponseValidationError{}
+
+// Validate checks the field values on UserNgrItem with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *UserNgrItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserNgrItem with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in UserNgrItemMultiError, or
+// nil if none found.
+func (m *UserNgrItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserNgrItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Ngr
+
+	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
+
+	if len(errors) > 0 {
+		return UserNgrItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserNgrItemMultiError is an error wrapping multiple validation errors
+// returned by UserNgrItem.ValidateAll() if the designated constraints aren't met.
+type UserNgrItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserNgrItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserNgrItemMultiError) AllErrors() []error { return m }
+
+// UserNgrItemValidationError is the validation error returned by
+// UserNgrItem.Validate if the designated constraints aren't met.
+type UserNgrItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserNgrItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserNgrItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserNgrItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserNgrItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserNgrItemValidationError) ErrorName() string { return "UserNgrItemValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UserNgrItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserNgrItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserNgrItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserNgrItemValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

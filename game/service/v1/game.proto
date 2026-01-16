@@ -282,6 +282,10 @@ service Game {
 	rpc GetProviderStats(GetProviderStatsRequest) returns (GetProviderStatsResponse) {
 	}
 
+	// Get user NGR (Net Gaming Revenue) for a specific time range
+	rpc GetUserNgr(GetUserNgrRequest) returns (GetUserNgrResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -2184,4 +2188,25 @@ message GetProviderStatsResponse {
 	string ngr = 15;                                   // NGR (native currency)
 	string ngr_usd = 16;
 	string ngr_reporting_currency = 17;
+}
+
+// ============== User NGR Messages ==============
+
+message GetUserNgrRequest {
+	repeated int64 user_ids = 1;                       // User IDs (required, batch query)
+	google.protobuf.Timestamp start_time = 2;         // Start time (required)
+	google.protobuf.Timestamp end_time = 3;           // End time (required)
+}
+
+message GetUserNgrResponse {
+	repeated UserNgrItem items = 1;                    // NGR data for each user
+}
+
+message UserNgrItem {
+	int64 user_id = 1;                                 // User ID
+	// NGR (Net Gaming Revenue) calculated from cash amounts only
+	// NGR = (bet_cash + debit_cash) - (win_cash + credit_cash) + adjust_cash - bet_rollback_cash + win_rollback_cash
+	string ngr = 2;                                    // NGR (native currency)
+	string ngr_usd = 3;                                // NGR (USD)
+	string ngr_reporting_currency = 4;                 // NGR (reporting currency)
 }
