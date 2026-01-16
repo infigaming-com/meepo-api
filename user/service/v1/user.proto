@@ -984,6 +984,7 @@ message ListUsersResponse {
 		bool enabled = 24;
 		google.protobuf.Timestamp created_at = 25;
 		Role role = 26;
+		bool locked = 27;  // 用户是否被锁定
 	}
 	repeated User users = 1;
 	int32 page = 2;

@@ -410,6 +410,7 @@ message ListAccountsResponse {
         bool enabled = 5;
         Role role = 6;
         google.protobuf.Timestamp created_at = 7;
+        bool locked = 8;  // 用户是否被锁定
     }
     repeated Account accounts = 1;
     int32 total = 2;

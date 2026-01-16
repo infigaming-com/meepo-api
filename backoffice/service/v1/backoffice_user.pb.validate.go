@@ -3767,6 +3767,8 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for RegistrationIp
 
+	// no validation rules for Locked
+
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)
 	}

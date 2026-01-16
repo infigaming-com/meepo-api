@@ -12540,6 +12540,8 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                locked:
+                    type: boolean
         api.backoffice.service.v1.ListAdjustmentConfigsRequest:
             type: object
             properties:
@@ -15524,6 +15526,8 @@ components:
                     description: |-
                         string device = 23;
                          string source = 24;
+                locked:
+                    type: boolean
         api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
             type: object
             properties:

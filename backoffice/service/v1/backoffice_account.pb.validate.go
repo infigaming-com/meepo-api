@@ -6780,6 +6780,8 @@ func (m *ListAccountsResponse_Account) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Locked
+
 	if len(errors) > 0 {
 		return ListAccountsResponse_AccountMultiError(errors)
 	}

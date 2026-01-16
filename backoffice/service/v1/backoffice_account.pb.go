@@ -3110,6 +3110,7 @@ type ListAccountsResponse_Account struct {
 	Enabled       bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Role          *Role                  `protobuf:"bytes,6,opt,name=role,proto3" json:"role,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Locked        bool                   `protobuf:"varint,8,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3191,6 +3192,13 @@ func (x *ListAccountsResponse_Account) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *ListAccountsResponse_Account) GetLocked() bool {
+	if x != nil {
+		return x.Locked
+	}
+	return false
 }
 
 var File_backoffice_service_v1_backoffice_account_proto protoreflect.FileDescriptor
@@ -3335,14 +3343,14 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf7\x03\n" +
+	"_page_size\"\x8f\x04\n" +
 	"\x14ListAccountsResponse\x12S\n" +
 	"\baccounts\x18\x01 \x03(\v27.api.backoffice.service.v1.ListAccountsResponse.AccountR\baccounts\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12%\n" +
 	"\x0etotal_disabled\x18\x04 \x01(\x05R\rtotalDisabled\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x1a\xf6\x01\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x1a\x8e\x02\n" +
 	"\aAccount\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
@@ -3351,7 +3359,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\x123\n" +
 	"\x04role\x18\x06 \x01(\v2\x1f.api.backoffice.service.v1.RoleR\x04role\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"p\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n" +
+	"\x06locked\x18\b \x01(\bR\x06locked\"p\n" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12G\n" +
 	"\vpermissions\x18\x02 \x03(\v2%.api.backoffice.service.v1.PermissionR\vpermissions\"\x14\n" +

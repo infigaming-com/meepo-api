@@ -12844,6 +12844,7 @@ type ListUsersResponse_User struct {
 	Enabled        bool                   `protobuf:"varint,24,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,25,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Role           *Role                  `protobuf:"bytes,26,opt,name=role,proto3" json:"role,omitempty"`
+	Locked         bool                   `protobuf:"varint,27,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -13058,6 +13059,13 @@ func (x *ListUsersResponse_User) GetRole() *Role {
 		return x.Role
 	}
 	return nil
+}
+
+func (x *ListUsersResponse_User) GetLocked() bool {
+	if x != nil {
+		return x.Locked
+	}
+	return false
 }
 
 type GetCommentsByUserIdResponse_Comment struct {
@@ -14794,14 +14802,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\a_mobileB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe1\t\n" +
+	"_page_size\"\xf9\t\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xf5\a\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\x8d\b\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -14831,7 +14839,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aenabled\x18\x18 \x01(\bR\aenabled\x129\n" +
 	"\n" +
 	"created_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04role\x18\x1a \x01(\v2\x19.api.user.service.v1.RoleR\x04role\"\x95\x02\n" +
+	"\x04role\x18\x1a \x01(\v2\x19.api.user.service.v1.RoleR\x04role\x12\x16\n" +
+	"\x06locked\x18\x1b \x01(\bR\x06locked\"\x95\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1f\n" +
 	"\bpassword\x18\x02 \x01(\tH\x00R\bpassword\x88\x01\x01\x12\x14\n" +

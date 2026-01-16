@@ -200,6 +200,7 @@ message ListUsersResponse {
 		// string device = 23;
 		// string source = 24;
 		string registration_ip = 23;
+		bool locked = 24;  // 用户是否被锁定
 	}
 	repeated User users = 1;
 	int32 page = 2;
