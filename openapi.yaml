@@ -16880,6 +16880,8 @@ components:
                     type: string
                 filePath:
                     type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UploadOperatorStaticFileResponse:
             type: object
             properties: {}
