@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package api.jackpot.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/jackpot/service/v1;v1";
+
+import "google/api/annotations.proto";
+
+service TicketService {
+  rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/tickets/get"
+      body: "*"
+    };
+  }
+
+  rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/tickets/list"
+      body: "*"
+    };
+  }
+}
+
+message GetTicketRequest {
+  int64 ticket_id = 1;
+}
+
+message GetTicketResponse {
+  Ticket ticket = 1;
+}
+
+message ListTicketsRequest {
+  string user_id = 1;
+  optional string status = 2;
+  optional string pool_id = 3;
+  optional string bet_id = 4;
+  optional int32 page = 5;
+  optional int32 page_size = 6 [json_name = "pageSize"];
+}
+
+message ListTicketsResponse {
+  repeated Ticket items = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 page_size = 4 [json_name = "pageSize"];
+}
+
+message Ticket {
+  int64 ticket_id = 1 [json_name = "ticket_id"];
+  int64 batch_id = 2 [json_name = "batch_id"];
+  string user_id = 3 [json_name = "user_id"];
+  string pool_id = 4 [json_name = "pool_id"];
+  string bet_id = 5 [json_name = "bet_id"];
+  string numbers = 6;
+  int64 cutoff_time_utc = 7 [json_name = "cutoff_time_utc"];
+  string status = 8;
+  int64 created_at = 9 [json_name = "created_at"];
+  int64 updated_at = 10 [json_name = "updated_at"];
+}
