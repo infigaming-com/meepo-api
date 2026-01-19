@@ -44,6 +44,7 @@ message UploadOperatorStaticFileRequest {
 	string content_type = 2;
 	string domain = 3;
 	string file_path = 4;
+	api.common.OperatorContext target_operator_context = 5;
 }
 
 message UploadOperatorStaticFileResponse {}

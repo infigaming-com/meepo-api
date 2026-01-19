@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.report.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "backoffice/service/v1/backoffice_dashboard.proto";
 
@@ -71,4 +72,98 @@ service DashboardService {
       body: "*"
     };
   }
+
+  // ============================================================================
+  // Affiliate Dashboard RPCs
+  // All metrics are filtered by user registration date (not event date)
+  // ============================================================================
+
+  // Affiliate dashboard with aggregated metrics, balance, and product stats
+  rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (GetAffiliateDashboardResponse) {}
+
+  // Affiliate trend data (time series)
+  rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (GetAffiliateTrendResponse) {}
+}
+
+// ============================================================================
+// Affiliate Dashboard Messages
+// ============================================================================
+
+message GetAffiliateDashboardRequest {
+  int64 affiliate_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+  api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message GetAffiliateDashboardResponse {
+  // Nested types
+  message CurrencyBalance {
+    string currency = 1;
+    int64 accounts_count = 2;
+    string total_balance = 3;
+  }
+
+  // User Conversion metrics
+  int64 registrations = 1;
+  int64 ftd_users = 2;
+  int64 repeat_depositors = 3;
+  int64 active_users = 4;
+
+  // Financial metrics
+  string deposits_usd = 5;
+  string deposits_reporting_currency = 6;
+  string withdrawals_usd = 7;
+  string withdrawals_reporting_currency = 8;
+  string pending_withdrawals_usd = 9;
+  string pending_withdrawals_reporting_currency = 10;
+
+  // Gaming metrics
+  string ggr_usd = 11;
+  string ggr_reporting_currency = 12;
+  string ngr_usd = 13;
+  string ngr_reporting_currency = 14;
+  int64 bet_count = 15;
+  string bet_amount_usd = 16;
+  string bet_amount_reporting_currency = 17;
+
+  // Calculated metrics
+  string average_bet_usd = 18;
+  string average_bet_reporting_currency = 19;
+  string reg_to_ftd_rate = 20;
+  string ftd_to_active_rate = 21;
+
+  // Balance by currency
+  repeated CurrencyBalance balances = 22;
+  int64 total_accounts_with_balance = 23;
+}
+
+message GetAffiliateTrendRequest {
+  int64 affiliate_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+  string group_by = 4;  // "day", "week", "month"
+  api.common.OperatorContext initiator_operator_context = 5;
+}
+
+message GetAffiliateTrendResponse {
+  message TrendData {
+    google.protobuf.Timestamp date = 1;
+    int64 registrations = 2;
+    int64 ftd_users = 3;
+    int64 repeat_depositors = 4;
+    int64 active_users = 5;
+    string deposits_usd = 6;
+    string deposits_reporting_currency = 7;
+    string withdrawals_usd = 8;
+    string withdrawals_reporting_currency = 9;
+    string ggr_usd = 10;
+    string ggr_reporting_currency = 11;
+    string ngr_usd = 12;
+    string ngr_reporting_currency = 13;
+    int64 bet_count = 14;
+    string bet_amount_usd = 15;
+    string bet_amount_reporting_currency = 16;
+  }
+  repeated TrendData data = 1;
 }

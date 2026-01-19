@@ -53,6 +53,8 @@ const (
 	BackofficeAffiliate_UpdateAffiliateOperatorSettings_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliateOperatorSettings"
 	BackofficeAffiliate_SetReferralPlan_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
 	BackofficeAffiliate_GetReferralPlan_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
+	BackofficeAffiliate_GetAffiliateDashboard_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDashboard"
+	BackofficeAffiliate_GetAffiliateTrend_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateTrend"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -92,6 +94,8 @@ type BackofficeAffiliateClient interface {
 	UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*v1.GetReferralPlanResponse, error)
+	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error)
+	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -432,6 +436,26 @@ func (c *backofficeAffiliateClient) GetReferralPlan(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetAffiliateDashboardResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetAffiliateTrendResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateTrend_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAffiliateServer is the server API for BackofficeAffiliate service.
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
@@ -469,6 +493,8 @@ type BackofficeAffiliateServer interface {
 	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
+	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error)
+	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -577,6 +603,12 @@ func (UnimplementedBackofficeAffiliateServer) SetReferralPlan(context.Context, *
 }
 func (UnimplementedBackofficeAffiliateServer) GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetReferralPlan not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -1193,6 +1225,42 @@ func _BackofficeAffiliate_GetReferralPlan_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetAffiliateDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetAffiliateDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetAffiliateDashboard(ctx, req.(*GetAffiliateDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetAffiliateTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetAffiliateTrend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAffiliate_ServiceDesc is the grpc.ServiceDesc for BackofficeAffiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1331,6 +1399,14 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReferralPlan",
 			Handler:    _BackofficeAffiliate_GetReferralPlan_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDashboard",
+			Handler:    _BackofficeAffiliate_GetAffiliateDashboard_Handler,
+		},
+		{
+			MethodName: "GetAffiliateTrend",
+			Handler:    _BackofficeAffiliate_GetAffiliateTrend_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
