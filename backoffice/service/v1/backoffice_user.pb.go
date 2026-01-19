@@ -2092,6 +2092,7 @@ type ListUsersResponse_User struct {
 	// string device = 23;
 	// string source = 24;
 	RegistrationIp string `protobuf:"bytes,23,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	Locked         bool   `protobuf:"varint,24,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -2285,6 +2286,13 @@ func (x *ListUsersResponse_User) GetRegistrationIp() string {
 		return x.RegistrationIp
 	}
 	return ""
+}
+
+func (x *ListUsersResponse_User) GetLocked() bool {
+	if x != nil {
+		return x.Locked
+	}
+	return false
 }
 
 type GetUserOverviewResponse_GameData struct {
@@ -2487,12 +2495,12 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\a_mobileB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x97\b\n" +
+	"_page_size\"\xaf\b\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xf1\x06\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x89\a\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -2518,7 +2526,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\rlast_login_at\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
 	"\rregistered_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
 	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x17 \x01(\tR\x0eregistrationIp\"Y\n" +
+	"\x0fregistration_ip\x18\x17 \x01(\tR\x0eregistrationIp\x12\x16\n" +
+	"\x06locked\x18\x18 \x01(\bR\x06locked\"Y\n" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +

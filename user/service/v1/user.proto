@@ -450,6 +450,14 @@ service User {
 	rpc Bind2FaWithTempToken(Bind2FaWithTempTokenRequest) returns (LoginWithInfoAnd2faResponse) {}
 	// Verify 2FA using temp token and return full login response (internal gRPC only)
 	rpc Verify2FaWithTempToken(Verify2FaWithTempTokenRequest) returns (LoginWithInfoAnd2faResponse) {}
+
+	// ============ Backoffice Account Management APIs ============
+	// Get backoffice account details (internal gRPC only)
+	rpc GetBackofficeAccountDetail(GetBackofficeAccountDetailRequest) returns (GetBackofficeAccountDetailResponse) {}
+	// Update backoffice account (internal gRPC only)
+	rpc UpdateBackofficeAccount(UpdateBackofficeAccountRequest) returns (UpdateBackofficeAccountResponse) {}
+	// Admin reset password for backoffice account (internal gRPC only)
+	rpc AdminResetPassword(AdminResetPasswordRequest) returns (AdminResetPasswordResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -892,6 +900,7 @@ message UpdateUserRequest {
 	optional int64 campaign_id = 21;
 	optional int64 affiliate_id = 22;
 	int64 operator_user_id = 23; // 操作者的用户ID，用于验证角色分配权限
+	optional string username = 24; // 用户名
 }
 
 message UpdateUserResponse {
@@ -975,6 +984,7 @@ message ListUsersResponse {
 		bool enabled = 24;
 		google.protobuf.Timestamp created_at = 25;
 		Role role = 26;
+		bool locked = 27;  // 用户是否被锁定
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -2015,3 +2025,56 @@ message Verify2FaWithTempTokenRequest {
 	string temp_token = 1;  // Temporary token from login response
 	string totp_code = 2;   // 6-digit TOTP code to verify
 }
+
+// ============ Backoffice Account Management Messages ============
+
+// GetBackofficeAccountDetailRequest - request to get backoffice account details
+message GetBackofficeAccountDetailRequest {
+	int64 user_id = 1;  // Target backoffice user ID
+	api.common.OperatorContext operator_context = 2;  // Operator context for permission check
+	int64 operator_user_id = 3;  // Operator's user ID for permission check
+}
+
+// GetBackofficeAccountDetailResponse - returns backoffice account details
+message GetBackofficeAccountDetailResponse {
+	int64 user_id = 1;
+	string username = 2;
+	string email = 3;
+	string mobile = 4;
+	int64 role_id = 5;
+	string role_name = 6;
+	bool locked = 7;
+	bool enabled = 8;
+	bool mfa_enabled = 9;
+	int64 mfa_reset_at = 10;
+	int64 created_at = 11;
+	int64 updated_at = 12;
+	int64 operator_id = 13;
+	int64 company_operator_id = 14;
+	int64 retailer_operator_id = 15;
+	int64 system_operator_id = 16;
+}
+
+// UpdateBackofficeAccountRequest - request to update backoffice account
+message UpdateBackofficeAccountRequest {
+	int64 user_id = 1;                  // Target backoffice user ID
+	optional string username = 2;       // New username
+	optional int64 role_id = 3;         // New role ID
+	optional string email = 4;          // New email
+	optional string mobile = 5;         // New mobile
+	optional bool locked = 6;           // Lock/unlock status
+}
+
+// UpdateBackofficeAccountResponse - empty on success
+message UpdateBackofficeAccountResponse {}
+
+// AdminResetPasswordRequest - admin reset password for backoffice account
+message AdminResetPasswordRequest {
+	int64 user_id = 1;       // Target backoffice user ID
+	string new_password = 2; // New password to set
+	api.common.OperatorContext operator_context = 3;  // Operator context for permission check
+	int64 operator_user_id = 4;  // Operator's user ID for permission check
+}
+
+// AdminResetPasswordResponse - empty on success
+message AdminResetPasswordResponse {}

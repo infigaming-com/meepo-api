@@ -46,6 +46,8 @@ const (
 	BackofficeAccount_CheckEmailExists_FullMethodName             = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
 	BackofficeAccount_CheckSubdomainExists_FullMethodName         = "/api.backoffice.service.v1.BackofficeAccount/CheckSubdomainExists"
 	BackofficeAccount_CheckOperatorKeyExists_FullMethodName       = "/api.backoffice.service.v1.BackofficeAccount/CheckOperatorKeyExists"
+	BackofficeAccount_GetAccountDetail_FullMethodName             = "/api.backoffice.service.v1.BackofficeAccount/GetAccountDetail"
+	BackofficeAccount_AdminResetPassword_FullMethodName           = "/api.backoffice.service.v1.BackofficeAccount/AdminResetPassword"
 )
 
 // BackofficeAccountClient is the client API for BackofficeAccount service.
@@ -87,6 +89,10 @@ type BackofficeAccountClient interface {
 	CheckSubdomainExists(ctx context.Context, in *CheckSubdomainExistsRequest, opts ...grpc.CallOption) (*CheckSubdomainExistsResponse, error)
 	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
 	CheckOperatorKeyExists(ctx context.Context, in *CheckOperatorKeyExistsRequest, opts ...grpc.CallOption) (*CheckOperatorKeyExistsResponse, error)
+	// GetAccountDetail retrieves detailed information about a backoffice account
+	GetAccountDetail(ctx context.Context, in *GetAccountDetailRequest, opts ...grpc.CallOption) (*GetAccountDetailResponse, error)
+	// AdminResetPassword allows admin to reset another user's password without verification code
+	AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error)
 }
 
 type backofficeAccountClient struct {
@@ -367,6 +373,26 @@ func (c *backofficeAccountClient) CheckOperatorKeyExists(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeAccountClient) GetAccountDetail(ctx context.Context, in *GetAccountDetailRequest, opts ...grpc.CallOption) (*GetAccountDetailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountDetailResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_GetAccountDetail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAccountClient) AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdminResetPasswordResponse)
+	err := c.cc.Invoke(ctx, BackofficeAccount_AdminResetPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAccountServer is the server API for BackofficeAccount service.
 // All implementations must embed UnimplementedBackofficeAccountServer
 // for forward compatibility.
@@ -406,6 +432,10 @@ type BackofficeAccountServer interface {
 	CheckSubdomainExists(context.Context, *CheckSubdomainExistsRequest) (*CheckSubdomainExistsResponse, error)
 	// CheckOperatorKeyExists checks if the operator key exists in the operator table.
 	CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error)
+	// GetAccountDetail retrieves detailed information about a backoffice account
+	GetAccountDetail(context.Context, *GetAccountDetailRequest) (*GetAccountDetailResponse, error)
+	// AdminResetPassword allows admin to reset another user's password without verification code
+	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
 	mustEmbedUnimplementedBackofficeAccountServer()
 }
 
@@ -496,6 +526,12 @@ func (UnimplementedBackofficeAccountServer) CheckSubdomainExists(context.Context
 }
 func (UnimplementedBackofficeAccountServer) CheckOperatorKeyExists(context.Context, *CheckOperatorKeyExistsRequest) (*CheckOperatorKeyExistsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckOperatorKeyExists not implemented")
+}
+func (UnimplementedBackofficeAccountServer) GetAccountDetail(context.Context, *GetAccountDetailRequest) (*GetAccountDetailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccountDetail not implemented")
+}
+func (UnimplementedBackofficeAccountServer) AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdminResetPassword not implemented")
 }
 func (UnimplementedBackofficeAccountServer) mustEmbedUnimplementedBackofficeAccountServer() {}
 func (UnimplementedBackofficeAccountServer) testEmbeddedByValue()                           {}
@@ -1004,6 +1040,42 @@ func _BackofficeAccount_CheckOperatorKeyExists_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAccount_GetAccountDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).GetAccountDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_GetAccountDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).GetAccountDetail(ctx, req.(*GetAccountDetailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAccount_AdminResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminResetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAccountServer).AdminResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAccount_AdminResetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAccountServer).AdminResetPassword(ctx, req.(*AdminResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAccount_ServiceDesc is the grpc.ServiceDesc for BackofficeAccount service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1118,6 +1190,14 @@ var BackofficeAccount_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckOperatorKeyExists",
 			Handler:    _BackofficeAccount_CheckOperatorKeyExists_Handler,
+		},
+		{
+			MethodName: "GetAccountDetail",
+			Handler:    _BackofficeAccount_GetAccountDetail_Handler,
+		},
+		{
+			MethodName: "AdminResetPassword",
+			Handler:    _BackofficeAccount_AdminResetPassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

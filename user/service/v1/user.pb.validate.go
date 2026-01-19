@@ -5749,6 +5749,10 @@ func (m *UpdateUserRequest) validate(all bool) error {
 		// no validation rules for AffiliateId
 	}
 
+	if m.Username != nil {
+		// no validation rules for Username
+	}
+
 	if len(errors) > 0 {
 		return UpdateUserRequestMultiError(errors)
 	}
@@ -26311,6 +26315,748 @@ var _ interface {
 	ErrorName() string
 } = Verify2FaWithTempTokenRequestValidationError{}
 
+// Validate checks the field values on GetBackofficeAccountDetailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetBackofficeAccountDetailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBackofficeAccountDetailRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetBackofficeAccountDetailRequestMultiError, or nil if none found.
+func (m *GetBackofficeAccountDetailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeAccountDetailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBackofficeAccountDetailRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBackofficeAccountDetailRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBackofficeAccountDetailRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for OperatorUserId
+
+	if len(errors) > 0 {
+		return GetBackofficeAccountDetailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeAccountDetailRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetBackofficeAccountDetailRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetBackofficeAccountDetailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeAccountDetailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeAccountDetailRequestMultiError) AllErrors() []error { return m }
+
+// GetBackofficeAccountDetailRequestValidationError is the validation error
+// returned by GetBackofficeAccountDetailRequest.Validate if the designated
+// constraints aren't met.
+type GetBackofficeAccountDetailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeAccountDetailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBackofficeAccountDetailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBackofficeAccountDetailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBackofficeAccountDetailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeAccountDetailRequestValidationError) ErrorName() string {
+	return "GetBackofficeAccountDetailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeAccountDetailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeAccountDetailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeAccountDetailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeAccountDetailRequestValidationError{}
+
+// Validate checks the field values on GetBackofficeAccountDetailResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetBackofficeAccountDetailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBackofficeAccountDetailResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetBackofficeAccountDetailResponseMultiError, or nil if none found.
+func (m *GetBackofficeAccountDetailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBackofficeAccountDetailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Username
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
+
+	// no validation rules for RoleId
+
+	// no validation rules for RoleName
+
+	// no validation rules for Locked
+
+	// no validation rules for Enabled
+
+	// no validation rules for MfaEnabled
+
+	// no validation rules for MfaResetAt
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	if len(errors) > 0 {
+		return GetBackofficeAccountDetailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBackofficeAccountDetailResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetBackofficeAccountDetailResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetBackofficeAccountDetailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBackofficeAccountDetailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBackofficeAccountDetailResponseMultiError) AllErrors() []error { return m }
+
+// GetBackofficeAccountDetailResponseValidationError is the validation error
+// returned by GetBackofficeAccountDetailResponse.Validate if the designated
+// constraints aren't met.
+type GetBackofficeAccountDetailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBackofficeAccountDetailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBackofficeAccountDetailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBackofficeAccountDetailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBackofficeAccountDetailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBackofficeAccountDetailResponseValidationError) ErrorName() string {
+	return "GetBackofficeAccountDetailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBackofficeAccountDetailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBackofficeAccountDetailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBackofficeAccountDetailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBackofficeAccountDetailResponseValidationError{}
+
+// Validate checks the field values on UpdateBackofficeAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateBackofficeAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBackofficeAccountRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateBackofficeAccountRequestMultiError, or nil if none found.
+func (m *UpdateBackofficeAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBackofficeAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if m.Username != nil {
+		// no validation rules for Username
+	}
+
+	if m.RoleId != nil {
+		// no validation rules for RoleId
+	}
+
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
+	if m.Mobile != nil {
+		// no validation rules for Mobile
+	}
+
+	if m.Locked != nil {
+		// no validation rules for Locked
+	}
+
+	if len(errors) > 0 {
+		return UpdateBackofficeAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBackofficeAccountRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateBackofficeAccountRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateBackofficeAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBackofficeAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBackofficeAccountRequestMultiError) AllErrors() []error { return m }
+
+// UpdateBackofficeAccountRequestValidationError is the validation error
+// returned by UpdateBackofficeAccountRequest.Validate if the designated
+// constraints aren't met.
+type UpdateBackofficeAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBackofficeAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBackofficeAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBackofficeAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBackofficeAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBackofficeAccountRequestValidationError) ErrorName() string {
+	return "UpdateBackofficeAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBackofficeAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBackofficeAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBackofficeAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBackofficeAccountRequestValidationError{}
+
+// Validate checks the field values on UpdateBackofficeAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateBackofficeAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBackofficeAccountResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateBackofficeAccountResponseMultiError, or nil if none found.
+func (m *UpdateBackofficeAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBackofficeAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateBackofficeAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBackofficeAccountResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateBackofficeAccountResponse.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateBackofficeAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBackofficeAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBackofficeAccountResponseMultiError) AllErrors() []error { return m }
+
+// UpdateBackofficeAccountResponseValidationError is the validation error
+// returned by UpdateBackofficeAccountResponse.Validate if the designated
+// constraints aren't met.
+type UpdateBackofficeAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBackofficeAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBackofficeAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBackofficeAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBackofficeAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBackofficeAccountResponseValidationError) ErrorName() string {
+	return "UpdateBackofficeAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBackofficeAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBackofficeAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBackofficeAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBackofficeAccountResponseValidationError{}
+
+// Validate checks the field values on AdminResetPasswordRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminResetPasswordRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminResetPasswordRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminResetPasswordRequestMultiError, or nil if none found.
+func (m *AdminResetPasswordRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminResetPasswordRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for NewPassword
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AdminResetPasswordRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AdminResetPasswordRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AdminResetPasswordRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for OperatorUserId
+
+	if len(errors) > 0 {
+		return AdminResetPasswordRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminResetPasswordRequestMultiError is an error wrapping multiple validation
+// errors returned by AdminResetPasswordRequest.ValidateAll() if the
+// designated constraints aren't met.
+type AdminResetPasswordRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminResetPasswordRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminResetPasswordRequestMultiError) AllErrors() []error { return m }
+
+// AdminResetPasswordRequestValidationError is the validation error returned by
+// AdminResetPasswordRequest.Validate if the designated constraints aren't met.
+type AdminResetPasswordRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminResetPasswordRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminResetPasswordRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminResetPasswordRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminResetPasswordRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminResetPasswordRequestValidationError) ErrorName() string {
+	return "AdminResetPasswordRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminResetPasswordRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminResetPasswordRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminResetPasswordRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminResetPasswordRequestValidationError{}
+
+// Validate checks the field values on AdminResetPasswordResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdminResetPasswordResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdminResetPasswordResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdminResetPasswordResponseMultiError, or nil if none found.
+func (m *AdminResetPasswordResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdminResetPasswordResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AdminResetPasswordResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdminResetPasswordResponseMultiError is an error wrapping multiple
+// validation errors returned by AdminResetPasswordResponse.ValidateAll() if
+// the designated constraints aren't met.
+type AdminResetPasswordResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdminResetPasswordResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdminResetPasswordResponseMultiError) AllErrors() []error { return m }
+
+// AdminResetPasswordResponseValidationError is the validation error returned
+// by AdminResetPasswordResponse.Validate if the designated constraints aren't met.
+type AdminResetPasswordResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdminResetPasswordResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdminResetPasswordResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdminResetPasswordResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdminResetPasswordResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdminResetPasswordResponseValidationError) ErrorName() string {
+	return "AdminResetPasswordResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdminResetPasswordResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdminResetPasswordResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdminResetPasswordResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdminResetPasswordResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -26490,6 +27236,8 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for Locked
 
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)
