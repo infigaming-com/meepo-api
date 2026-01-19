@@ -178,8 +178,10 @@ type PaymentTransactionEvent struct {
 	SettledAt         int64                   `protobuf:"varint,11,opt,name=settled_at,json=settledAt,proto3" json:"settled_at,omitempty"`
 	Extra             *structpb.Struct        `protobuf:"bytes,12,opt,name=extra,proto3" json:"extra,omitempty"`
 	ChannelInfo       *ChannelInfo            `protobuf:"bytes,13,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
-	OperatorAmount    string                  `protobuf:"bytes,14,opt,name=operator_amount,json=operatorAmount,proto3" json:"operator_amount,omitempty"` // operator's amount for this payment transaction
-	SkipBonus         bool                    `protobuf:"varint,15,opt,name=skip_bonus,json=skipBonus,proto3" json:"skip_bonus,omitempty"`               // whether to skip bonus for this deposit (true = skip, false = receive bonus)
+	OperatorAmount    string                  `protobuf:"bytes,14,opt,name=operator_amount,json=operatorAmount,proto3" json:"operator_amount,omitempty"`         // operator's amount for this payment transaction
+	SkipBonus         bool                    `protobuf:"varint,15,opt,name=skip_bonus,json=skipBonus,proto3" json:"skip_bonus,omitempty"`                       // whether to skip bonus for this deposit (true = skip, false = receive bonus)
+	UserTotalFee      string                  `protobuf:"bytes,16,opt,name=user_total_fee,json=userTotalFee,proto3" json:"user_total_fee,omitempty"`             // total fee charged to user
+	OperatorTotalFee  string                  `protobuf:"bytes,17,opt,name=operator_total_fee,json=operatorTotalFee,proto3" json:"operator_total_fee,omitempty"` // total fee charged to operator
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -319,6 +321,20 @@ func (x *PaymentTransactionEvent) GetSkipBonus() bool {
 	return false
 }
 
+func (x *PaymentTransactionEvent) GetUserTotalFee() string {
+	if x != nil {
+		return x.UserTotalFee
+	}
+	return ""
+}
+
+func (x *PaymentTransactionEvent) GetOperatorTotalFee() string {
+	if x != nil {
+		return x.OperatorTotalFee
+	}
+	return ""
+}
+
 type OperatorPaymentTransactionEvent struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TransactionId         int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"` // payment transaction id
@@ -336,6 +352,8 @@ type OperatorPaymentTransactionEvent struct {
 	SettledAt             int64                   `protobuf:"varint,13,opt,name=settled_at,json=settledAt,proto3" json:"settled_at,omitempty"`
 	Extra                 *structpb.Struct        `protobuf:"bytes,14,opt,name=extra,proto3" json:"extra,omitempty"`
 	ChannelInfo           *ChannelInfo            `protobuf:"bytes,15,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	UserTotalFee          string                  `protobuf:"bytes,16,opt,name=user_total_fee,json=userTotalFee,proto3" json:"user_total_fee,omitempty"`             // total fee charged to user
+	OperatorTotalFee      string                  `protobuf:"bytes,17,opt,name=operator_total_fee,json=operatorTotalFee,proto3" json:"operator_total_fee,omitempty"` // total fee charged to operator
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -475,6 +493,20 @@ func (x *OperatorPaymentTransactionEvent) GetChannelInfo() *ChannelInfo {
 	return nil
 }
 
+func (x *OperatorPaymentTransactionEvent) GetUserTotalFee() string {
+	if x != nil {
+		return x.UserTotalFee
+	}
+	return ""
+}
+
+func (x *OperatorPaymentTransactionEvent) GetOperatorTotalFee() string {
+	if x != nil {
+		return x.OperatorTotalFee
+	}
+	return ""
+}
+
 var File_payment_service_v1_payment_event_proto protoreflect.FileDescriptor
 
 const file_payment_service_v1_payment_event_proto_rawDesc = "" +
@@ -488,7 +520,7 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse\"U\n" +
 	"\vChannelInfo\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf0\x04\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc4\x05\n" +
 	"\x17PaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
@@ -508,7 +540,9 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\fchannel_info\x18\r \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\x12'\n" +
 	"\x0foperator_amount\x18\x0e \x01(\tR\x0eoperatorAmount\x12\x1d\n" +
 	"\n" +
-	"skip_bonus\x18\x0f \x01(\bR\tskipBonus\"\xcf\x05\n" +
+	"skip_bonus\x18\x0f \x01(\bR\tskipBonus\x12$\n" +
+	"\x0euser_total_fee\x18\x10 \x01(\tR\fuserTotalFee\x12,\n" +
+	"\x12operator_total_fee\x18\x11 \x01(\tR\x10operatorTotalFee\"\xa3\x06\n" +
 	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
@@ -527,7 +561,9 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\n" +
 	"settled_at\x18\r \x01(\x03R\tsettledAt\x12-\n" +
 	"\x05extra\x18\x0e \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
-	"\fchannel_info\x18\x0f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo2f\n" +
+	"\fchannel_info\x18\x0f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\x12$\n" +
+	"\x0euser_total_fee\x18\x10 \x01(\tR\fuserTotalFee\x12,\n" +
+	"\x12operator_total_fee\x18\x11 \x01(\tR\x10operatorTotalFee2f\n" +
 	"\fPaymentEvent\x12V\n" +
 	"\x05Event\x12$.api.payment.service.v1.EventRequest\x1a%.api.payment.service.v1.EventResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"

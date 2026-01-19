@@ -41,6 +41,8 @@ message PaymentTransactionEvent {
 	ChannelInfo channel_info = 13;
 	string operator_amount = 14; // operator's amount for this payment transaction
 	bool skip_bonus = 15; // whether to skip bonus for this deposit (true = skip, false = receive bonus)
+	string user_total_fee = 16; // total fee charged to user
+	string operator_total_fee = 17; // total fee charged to operator
 }
 
 message OperatorPaymentTransactionEvent {
@@ -59,4 +61,6 @@ message OperatorPaymentTransactionEvent {
 	int64 settled_at = 13;
 	google.protobuf.Struct extra = 14;
 	ChannelInfo channel_info = 15;
+	string user_total_fee = 16; // total fee charged to user
+	string operator_total_fee = 17; // total fee charged to operator
 }

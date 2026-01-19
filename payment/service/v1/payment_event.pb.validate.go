@@ -501,6 +501,10 @@ func (m *PaymentTransactionEvent) validate(all bool) error {
 
 	// no validation rules for SkipBonus
 
+	// no validation rules for UserTotalFee
+
+	// no validation rules for OperatorTotalFee
+
 	if len(errors) > 0 {
 		return PaymentTransactionEventMultiError(errors)
 	}
@@ -740,6 +744,10 @@ func (m *OperatorPaymentTransactionEvent) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for UserTotalFee
+
+	// no validation rules for OperatorTotalFee
 
 	if len(errors) > 0 {
 		return OperatorPaymentTransactionEventMultiError(errors)
