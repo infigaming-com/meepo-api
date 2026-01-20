@@ -19,17 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CRM_CreateSegment_FullMethodName         = "/api.crm.service.v1.CRM/CreateSegment"
-	CRM_UpdateSegment_FullMethodName         = "/api.crm.service.v1.CRM/UpdateSegment"
-	CRM_GetSegment_FullMethodName            = "/api.crm.service.v1.CRM/GetSegment"
-	CRM_ListSegments_FullMethodName          = "/api.crm.service.v1.CRM/ListSegments"
-	CRM_DeleteSegment_FullMethodName         = "/api.crm.service.v1.CRM/DeleteSegment"
-	CRM_CalculateSegment_FullMethodName      = "/api.crm.service.v1.CRM/CalculateSegment"
-	CRM_GetSegmentUsers_FullMethodName       = "/api.crm.service.v1.CRM/GetSegmentUsers"
-	CRM_GetUserSegments_FullMethodName       = "/api.crm.service.v1.CRM/GetUserSegments"
-	CRM_SetSegmentOverride_FullMethodName    = "/api.crm.service.v1.CRM/SetSegmentOverride"
-	CRM_GetSegmentOverride_FullMethodName    = "/api.crm.service.v1.CRM/GetSegmentOverride"
-	CRM_GetSegmentFieldSchema_FullMethodName = "/api.crm.service.v1.CRM/GetSegmentFieldSchema"
+	CRM_CreateSegment_FullMethodName                = "/api.crm.service.v1.CRM/CreateSegment"
+	CRM_UpdateSegment_FullMethodName                = "/api.crm.service.v1.CRM/UpdateSegment"
+	CRM_GetSegment_FullMethodName                   = "/api.crm.service.v1.CRM/GetSegment"
+	CRM_ListSegments_FullMethodName                 = "/api.crm.service.v1.CRM/ListSegments"
+	CRM_DeleteSegment_FullMethodName                = "/api.crm.service.v1.CRM/DeleteSegment"
+	CRM_CalculateSegment_FullMethodName             = "/api.crm.service.v1.CRM/CalculateSegment"
+	CRM_GetSegmentUsers_FullMethodName              = "/api.crm.service.v1.CRM/GetSegmentUsers"
+	CRM_GetUserSegments_FullMethodName              = "/api.crm.service.v1.CRM/GetUserSegments"
+	CRM_SetSegmentOverride_FullMethodName           = "/api.crm.service.v1.CRM/SetSegmentOverride"
+	CRM_GetSegmentOverride_FullMethodName           = "/api.crm.service.v1.CRM/GetSegmentOverride"
+	CRM_GetSegmentFieldSchema_FullMethodName        = "/api.crm.service.v1.CRM/GetSegmentFieldSchema"
+	CRM_RepairSegment_FullMethodName                = "/api.crm.service.v1.CRM/RepairSegment"
+	CRM_RepairAllSegments_FullMethodName            = "/api.crm.service.v1.CRM/RepairAllSegments"
+	CRM_GetSegmentsWithMissingFields_FullMethodName = "/api.crm.service.v1.CRM/GetSegmentsWithMissingFields"
 )
 
 // CRMClient is the client API for CRM service.
@@ -53,6 +56,10 @@ type CRMClient interface {
 	GetSegmentOverride(ctx context.Context, in *GetSegmentOverrideRequest, opts ...grpc.CallOption) (*GetSegmentOverrideResponse, error)
 	// Schema API for frontend
 	GetSegmentFieldSchema(ctx context.Context, in *GetSegmentFieldSchemaRequest, opts ...grpc.CallOption) (*GetSegmentFieldSchemaResponse, error)
+	// Segment repair operations - for fixing segments that were directly inserted into the database
+	RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...grpc.CallOption) (*RepairSegmentResponse, error)
+	RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...grpc.CallOption) (*RepairAllSegmentsResponse, error)
+	GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...grpc.CallOption) (*GetSegmentsWithMissingFieldsResponse, error)
 }
 
 type cRMClient struct {
@@ -173,6 +180,36 @@ func (c *cRMClient) GetSegmentFieldSchema(ctx context.Context, in *GetSegmentFie
 	return out, nil
 }
 
+func (c *cRMClient) RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...grpc.CallOption) (*RepairSegmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RepairSegmentResponse)
+	err := c.cc.Invoke(ctx, CRM_RepairSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cRMClient) RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...grpc.CallOption) (*RepairAllSegmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RepairAllSegmentsResponse)
+	err := c.cc.Invoke(ctx, CRM_RepairAllSegments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cRMClient) GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...grpc.CallOption) (*GetSegmentsWithMissingFieldsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSegmentsWithMissingFieldsResponse)
+	err := c.cc.Invoke(ctx, CRM_GetSegmentsWithMissingFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CRMServer is the server API for CRM service.
 // All implementations must embed UnimplementedCRMServer
 // for forward compatibility.
@@ -194,6 +231,10 @@ type CRMServer interface {
 	GetSegmentOverride(context.Context, *GetSegmentOverrideRequest) (*GetSegmentOverrideResponse, error)
 	// Schema API for frontend
 	GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*GetSegmentFieldSchemaResponse, error)
+	// Segment repair operations - for fixing segments that were directly inserted into the database
+	RepairSegment(context.Context, *RepairSegmentRequest) (*RepairSegmentResponse, error)
+	RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*RepairAllSegmentsResponse, error)
+	GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*GetSegmentsWithMissingFieldsResponse, error)
 	mustEmbedUnimplementedCRMServer()
 }
 
@@ -236,6 +277,15 @@ func (UnimplementedCRMServer) GetSegmentOverride(context.Context, *GetSegmentOve
 }
 func (UnimplementedCRMServer) GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*GetSegmentFieldSchemaResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSegmentFieldSchema not implemented")
+}
+func (UnimplementedCRMServer) RepairSegment(context.Context, *RepairSegmentRequest) (*RepairSegmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RepairSegment not implemented")
+}
+func (UnimplementedCRMServer) RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*RepairAllSegmentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RepairAllSegments not implemented")
+}
+func (UnimplementedCRMServer) GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*GetSegmentsWithMissingFieldsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSegmentsWithMissingFields not implemented")
 }
 func (UnimplementedCRMServer) mustEmbedUnimplementedCRMServer() {}
 func (UnimplementedCRMServer) testEmbeddedByValue()             {}
@@ -456,6 +506,60 @@ func _CRM_GetSegmentFieldSchema_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CRM_RepairSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RepairSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CRMServer).RepairSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CRM_RepairSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CRMServer).RepairSegment(ctx, req.(*RepairSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CRM_RepairAllSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RepairAllSegmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CRMServer).RepairAllSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CRM_RepairAllSegments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CRMServer).RepairAllSegments(ctx, req.(*RepairAllSegmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CRM_GetSegmentsWithMissingFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSegmentsWithMissingFieldsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CRMServer).GetSegmentsWithMissingFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CRM_GetSegmentsWithMissingFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CRMServer).GetSegmentsWithMissingFields(ctx, req.(*GetSegmentsWithMissingFieldsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CRM_ServiceDesc is the grpc.ServiceDesc for CRM service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -506,6 +610,18 @@ var CRM_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSegmentFieldSchema",
 			Handler:    _CRM_GetSegmentFieldSchema_Handler,
+		},
+		{
+			MethodName: "RepairSegment",
+			Handler:    _CRM_RepairSegment_Handler,
+		},
+		{
+			MethodName: "RepairAllSegments",
+			Handler:    _CRM_RepairAllSegments_Handler,
+		},
+		{
+			MethodName: "GetSegmentsWithMissingFields",
+			Handler:    _CRM_GetSegmentsWithMissingFields_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
