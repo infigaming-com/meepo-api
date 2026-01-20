@@ -21,10 +21,12 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationUserAddResponsibleGamblingConfig = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+const OperationUserBindOAuthAccount = "/api.user.service.v1.User/BindOAuthAccount"
 const OperationUserClaimVipReward = "/api.user.service.v1.User/ClaimVipReward"
 const OperationUserCloseAccount = "/api.user.service.v1.User/CloseAccount"
 const OperationUserConfirmClaimVipReward = "/api.user.service.v1.User/ConfirmClaimVipReward"
 const OperationUserDeleteResponsibleGamblingConfig = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
+const OperationUserGetAvailableOAuthProviders = "/api.user.service.v1.User/GetAvailableOAuthProviders"
 const OperationUserGetClaimableVipRewards = "/api.user.service.v1.User/GetClaimableVipRewards"
 const OperationUserGetDailyLossbackStatus = "/api.user.service.v1.User/GetDailyLossbackStatus"
 const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOperatorAccountSettings"
@@ -36,6 +38,7 @@ const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/Get
 const OperationUserGetUserPrivacySettings = "/api.user.service.v1.User/GetUserPrivacySettings"
 const OperationUserGetUserTags = "/api.user.service.v1.User/GetUserTags"
 const OperationUserGetUserVipLevel = "/api.user.service.v1.User/GetUserVipLevel"
+const OperationUserListBoundOAuthAccounts = "/api.user.service.v1.User/ListBoundOAuthAccounts"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
 const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
@@ -46,6 +49,7 @@ const OperationUserRequestDailyLossback = "/api.user.service.v1.User/RequestDail
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
+const OperationUserUnbindOAuthAccount = "/api.user.service.v1.User/UnbindOAuthAccount"
 const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
 const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIdentity"
 const OperationUserUpdateUserPrivacySettings = "/api.user.service.v1.User/UpdateUserPrivacySettings"
@@ -54,10 +58,15 @@ const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
 type UserHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
+	BindOAuthAccount(context.Context, *BindOAuthAccountRequest) (*BindOAuthAccountResponse, error)
 	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error)
 	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
 	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	// GetAvailableOAuthProviders ============ Player OAuth APIs ============
+	// Get available OAuth providers for the current operator (public)
+	GetAvailableOAuthProviders(context.Context, *GetAvailableOAuthProvidersRequest) (*GetAvailableOAuthProvidersResponse, error)
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
 	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
@@ -74,6 +83,8 @@ type UserHTTPServer interface {
 	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error)
+	// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
+	ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
@@ -98,6 +109,8 @@ type UserHTTPServer interface {
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
+	UnbindOAuthAccount(context.Context, *UnbindOAuthAccountRequest) (*UnbindOAuthAccountResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error)
@@ -138,6 +151,10 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/vip/daily-lossback/status/get", _User_GetDailyLossbackStatus0_HTTP_Handler(srv))
 	r.GET("/v1/user/privacy-settings", _User_GetUserPrivacySettings0_HTTP_Handler(srv))
 	r.PUT("/v1/user/privacy-settings", _User_UpdateUserPrivacySettings0_HTTP_Handler(srv))
+	r.GET("/v1/user/oauth/providers", _User_GetAvailableOAuthProviders0_HTTP_Handler(srv))
+	r.POST("/v1/user/oauth/bind", _User_BindOAuthAccount0_HTTP_Handler(srv))
+	r.POST("/v1/user/oauth/unbind", _User_UnbindOAuthAccount0_HTTP_Handler(srv))
+	r.GET("/v1/user/oauth/accounts", _User_ListBoundOAuthAccounts0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -819,12 +836,99 @@ func _User_UpdateUserPrivacySettings0_HTTP_Handler(srv UserHTTPServer) func(ctx 
 	}
 }
 
+func _User_GetAvailableOAuthProviders0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAvailableOAuthProvidersRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetAvailableOAuthProviders)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAvailableOAuthProviders(ctx, req.(*GetAvailableOAuthProvidersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetAvailableOAuthProvidersResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_BindOAuthAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BindOAuthAccountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserBindOAuthAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.BindOAuthAccount(ctx, req.(*BindOAuthAccountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*BindOAuthAccountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_UnbindOAuthAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UnbindOAuthAccountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUnbindOAuthAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UnbindOAuthAccount(ctx, req.(*UnbindOAuthAccountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UnbindOAuthAccountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_ListBoundOAuthAccounts0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListBoundOAuthAccountsRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserListBoundOAuthAccounts)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListBoundOAuthAccounts(ctx, req.(*ListBoundOAuthAccountsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListBoundOAuthAccountsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
+	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
+	BindOAuthAccount(ctx context.Context, req *BindOAuthAccountRequest, opts ...http.CallOption) (rsp *BindOAuthAccountResponse, err error)
 	ClaimVipReward(ctx context.Context, req *ClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ClaimVipRewardResponse, err error)
 	CloseAccount(ctx context.Context, req *CloseAccountRequest, opts ...http.CallOption) (rsp *CloseAccountResponse, err error)
 	ConfirmClaimVipReward(ctx context.Context, req *ConfirmClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ConfirmClaimVipRewardResponse, err error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
+	// GetAvailableOAuthProviders ============ Player OAuth APIs ============
+	// Get available OAuth providers for the current operator (public)
+	GetAvailableOAuthProviders(ctx context.Context, req *GetAvailableOAuthProvidersRequest, opts ...http.CallOption) (rsp *GetAvailableOAuthProvidersResponse, err error)
 	GetClaimableVipRewards(ctx context.Context, req *GetClaimableVipRewardsRequest, opts ...http.CallOption) (rsp *v1.GetClaimableVipRewardsResponse, err error)
 	GetDailyLossbackStatus(ctx context.Context, req *GetDailyLossbackStatusRequest, opts ...http.CallOption) (rsp *v1.GetDailyLossbackStatusResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorAccountSettingsResponse, err error)
@@ -841,6 +945,8 @@ type UserHTTPClient interface {
 	// and also exists in the related operator's tag list.
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	GetUserVipLevel(ctx context.Context, req *GetUserVipLevelRequest, opts ...http.CallOption) (rsp *v1.GetUserVipLevelResponse, err error)
+	// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
+	ListBoundOAuthAccounts(ctx context.Context, req *ListBoundOAuthAccountsRequest, opts ...http.CallOption) (rsp *ListBoundOAuthAccountsResponse, err error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
@@ -865,6 +971,8 @@ type UserHTTPClient interface {
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
+	// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
+	UnbindOAuthAccount(ctx context.Context, req *UnbindOAuthAccountRequest, opts ...http.CallOption) (rsp *UnbindOAuthAccountResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 	UpdateUserIdentity(ctx context.Context, req *UpdateUserIdentityRequest, opts ...http.CallOption) (rsp *UpdateUserIdentityResponse, err error)
 	UpdateUserPrivacySettings(ctx context.Context, req *UpdateUserPrivacySettingsRequest, opts ...http.CallOption) (rsp *UpdateUserPrivacySettingsResponse, err error)
@@ -885,6 +993,20 @@ func (c *UserHTTPClientImpl) AddResponsibleGamblingConfig(ctx context.Context, i
 	pattern := "/v1/user/responsible-gambling/config/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserAddResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// BindOAuthAccount Bind OAuth account to current user (requires authentication)
+func (c *UserHTTPClientImpl) BindOAuthAccount(ctx context.Context, in *BindOAuthAccountRequest, opts ...http.CallOption) (*BindOAuthAccountResponse, error) {
+	var out BindOAuthAccountResponse
+	pattern := "/v1/user/oauth/bind"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserBindOAuthAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -939,6 +1061,21 @@ func (c *UserHTTPClientImpl) DeleteResponsibleGamblingConfig(ctx context.Context
 	opts = append(opts, http.Operation(OperationUserDeleteResponsibleGamblingConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetAvailableOAuthProviders ============ Player OAuth APIs ============
+// Get available OAuth providers for the current operator (public)
+func (c *UserHTTPClientImpl) GetAvailableOAuthProviders(ctx context.Context, in *GetAvailableOAuthProvidersRequest, opts ...http.CallOption) (*GetAvailableOAuthProvidersResponse, error) {
+	var out GetAvailableOAuthProvidersResponse
+	pattern := "/v1/user/oauth/providers"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationUserGetAvailableOAuthProviders))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1093,6 +1230,20 @@ func (c *UserHTTPClientImpl) GetUserVipLevel(ctx context.Context, in *GetUserVip
 	return &out, nil
 }
 
+// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
+func (c *UserHTTPClientImpl) ListBoundOAuthAccounts(ctx context.Context, in *ListBoundOAuthAccountsRequest, opts ...http.CallOption) (*ListBoundOAuthAccountsResponse, error) {
+	var out ListBoundOAuthAccountsResponse
+	pattern := "/v1/user/oauth/accounts"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationUserListBoundOAuthAccounts))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // Login Login an existing user with password-based authentication.
 // Users can login using their registered credentials.
 func (c *UserHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*AuthResponse, error) {
@@ -1229,6 +1380,20 @@ func (c *UserHTTPClientImpl) SendPasswordResetCode(ctx context.Context, in *Send
 	pattern := "/v1/user/auth/password/reset-code/send"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserSendPasswordResetCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
+func (c *UserHTTPClientImpl) UnbindOAuthAccount(ctx context.Context, in *UnbindOAuthAccountRequest, opts ...http.CallOption) (*UnbindOAuthAccountResponse, error) {
+	var out UnbindOAuthAccountResponse
+	pattern := "/v1/user/oauth/unbind"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUnbindOAuthAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

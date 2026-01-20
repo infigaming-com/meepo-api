@@ -27057,6 +27057,3170 @@ var _ interface {
 	ErrorName() string
 } = AdminResetPasswordResponseValidationError{}
 
+// Validate checks the field values on OAuthProviderConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OAuthProviderConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OAuthProviderConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OAuthProviderConfigMultiError, or nil if none found.
+func (m *OAuthProviderConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OAuthProviderConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Provider
+
+	// no validation rules for Enabled
+
+	// no validation rules for ClientId
+
+	// no validation rules for ClientSecretMasked
+
+	// no validation rules for Config
+
+	// no validation rules for AllowRegistration
+
+	// no validation rules for AllowLinking
+
+	// no validation rules for RateLimitPerMinute
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return OAuthProviderConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// OAuthProviderConfigMultiError is an error wrapping multiple validation
+// errors returned by OAuthProviderConfig.ValidateAll() if the designated
+// constraints aren't met.
+type OAuthProviderConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OAuthProviderConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OAuthProviderConfigMultiError) AllErrors() []error { return m }
+
+// OAuthProviderConfigValidationError is the validation error returned by
+// OAuthProviderConfig.Validate if the designated constraints aren't met.
+type OAuthProviderConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OAuthProviderConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OAuthProviderConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OAuthProviderConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OAuthProviderConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OAuthProviderConfigValidationError) ErrorName() string {
+	return "OAuthProviderConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OAuthProviderConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOAuthProviderConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OAuthProviderConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OAuthProviderConfigValidationError{}
+
+// Validate checks the field values on CreateOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CreateOAuthProviderConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateOAuthProviderConfigRequestMultiError, or nil if none found.
+func (m *CreateOAuthProviderConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOAuthProviderConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateOAuthProviderConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateOAuthProviderConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Provider
+
+	// no validation rules for ClientId
+
+	// no validation rules for ClientSecret
+
+	// no validation rules for Config
+
+	// no validation rules for Enabled
+
+	// no validation rules for AllowRegistration
+
+	// no validation rules for AllowLinking
+
+	// no validation rules for RateLimitPerMinute
+
+	if len(errors) > 0 {
+		return CreateOAuthProviderConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOAuthProviderConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// CreateOAuthProviderConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateOAuthProviderConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOAuthProviderConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOAuthProviderConfigRequestMultiError) AllErrors() []error { return m }
+
+// CreateOAuthProviderConfigRequestValidationError is the validation error
+// returned by CreateOAuthProviderConfigRequest.Validate if the designated
+// constraints aren't met.
+type CreateOAuthProviderConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOAuthProviderConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOAuthProviderConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOAuthProviderConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOAuthProviderConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOAuthProviderConfigRequestValidationError) ErrorName() string {
+	return "CreateOAuthProviderConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOAuthProviderConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOAuthProviderConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOAuthProviderConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOAuthProviderConfigRequestValidationError{}
+
+// Validate checks the field values on CreateOAuthProviderConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CreateOAuthProviderConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOAuthProviderConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CreateOAuthProviderConfigResponseMultiError, or nil if none found.
+func (m *CreateOAuthProviderConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOAuthProviderConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ConfigId
+
+	if len(errors) > 0 {
+		return CreateOAuthProviderConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOAuthProviderConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// CreateOAuthProviderConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateOAuthProviderConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOAuthProviderConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOAuthProviderConfigResponseMultiError) AllErrors() []error { return m }
+
+// CreateOAuthProviderConfigResponseValidationError is the validation error
+// returned by CreateOAuthProviderConfigResponse.Validate if the designated
+// constraints aren't met.
+type CreateOAuthProviderConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOAuthProviderConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOAuthProviderConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOAuthProviderConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOAuthProviderConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOAuthProviderConfigResponseValidationError) ErrorName() string {
+	return "CreateOAuthProviderConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOAuthProviderConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOAuthProviderConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOAuthProviderConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOAuthProviderConfigResponseValidationError{}
+
+// Validate checks the field values on UpdateOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateOAuthProviderConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateOAuthProviderConfigRequestMultiError, or nil if none found.
+func (m *UpdateOAuthProviderConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOAuthProviderConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOAuthProviderConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOAuthProviderConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ConfigId
+
+	// no validation rules for Config
+
+	if m.ClientId != nil {
+		// no validation rules for ClientId
+	}
+
+	if m.ClientSecret != nil {
+		// no validation rules for ClientSecret
+	}
+
+	if m.AllowRegistration != nil {
+		// no validation rules for AllowRegistration
+	}
+
+	if m.AllowLinking != nil {
+		// no validation rules for AllowLinking
+	}
+
+	if m.RateLimitPerMinute != nil {
+		// no validation rules for RateLimitPerMinute
+	}
+
+	if len(errors) > 0 {
+		return UpdateOAuthProviderConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOAuthProviderConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateOAuthProviderConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateOAuthProviderConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOAuthProviderConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOAuthProviderConfigRequestMultiError) AllErrors() []error { return m }
+
+// UpdateOAuthProviderConfigRequestValidationError is the validation error
+// returned by UpdateOAuthProviderConfigRequest.Validate if the designated
+// constraints aren't met.
+type UpdateOAuthProviderConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOAuthProviderConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOAuthProviderConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOAuthProviderConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOAuthProviderConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOAuthProviderConfigRequestValidationError) ErrorName() string {
+	return "UpdateOAuthProviderConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOAuthProviderConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOAuthProviderConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOAuthProviderConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOAuthProviderConfigRequestValidationError{}
+
+// Validate checks the field values on UpdateOAuthProviderConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateOAuthProviderConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOAuthProviderConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateOAuthProviderConfigResponseMultiError, or nil if none found.
+func (m *UpdateOAuthProviderConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOAuthProviderConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateOAuthProviderConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOAuthProviderConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateOAuthProviderConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateOAuthProviderConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOAuthProviderConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOAuthProviderConfigResponseMultiError) AllErrors() []error { return m }
+
+// UpdateOAuthProviderConfigResponseValidationError is the validation error
+// returned by UpdateOAuthProviderConfigResponse.Validate if the designated
+// constraints aren't met.
+type UpdateOAuthProviderConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOAuthProviderConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOAuthProviderConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOAuthProviderConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOAuthProviderConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOAuthProviderConfigResponseValidationError) ErrorName() string {
+	return "UpdateOAuthProviderConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOAuthProviderConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOAuthProviderConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOAuthProviderConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOAuthProviderConfigResponseValidationError{}
+
+// Validate checks the field values on DeleteOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *DeleteOAuthProviderConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteOAuthProviderConfigRequestMultiError, or nil if none found.
+func (m *DeleteOAuthProviderConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOAuthProviderConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteOAuthProviderConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteOAuthProviderConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ConfigId
+
+	if len(errors) > 0 {
+		return DeleteOAuthProviderConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOAuthProviderConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// DeleteOAuthProviderConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOAuthProviderConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOAuthProviderConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOAuthProviderConfigRequestMultiError) AllErrors() []error { return m }
+
+// DeleteOAuthProviderConfigRequestValidationError is the validation error
+// returned by DeleteOAuthProviderConfigRequest.Validate if the designated
+// constraints aren't met.
+type DeleteOAuthProviderConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOAuthProviderConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOAuthProviderConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOAuthProviderConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOAuthProviderConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOAuthProviderConfigRequestValidationError) ErrorName() string {
+	return "DeleteOAuthProviderConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOAuthProviderConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOAuthProviderConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOAuthProviderConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOAuthProviderConfigRequestValidationError{}
+
+// Validate checks the field values on DeleteOAuthProviderConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *DeleteOAuthProviderConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteOAuthProviderConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// DeleteOAuthProviderConfigResponseMultiError, or nil if none found.
+func (m *DeleteOAuthProviderConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOAuthProviderConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteOAuthProviderConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOAuthProviderConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// DeleteOAuthProviderConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOAuthProviderConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOAuthProviderConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOAuthProviderConfigResponseMultiError) AllErrors() []error { return m }
+
+// DeleteOAuthProviderConfigResponseValidationError is the validation error
+// returned by DeleteOAuthProviderConfigResponse.Validate if the designated
+// constraints aren't met.
+type DeleteOAuthProviderConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOAuthProviderConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOAuthProviderConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOAuthProviderConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOAuthProviderConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOAuthProviderConfigResponseValidationError) ErrorName() string {
+	return "DeleteOAuthProviderConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOAuthProviderConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOAuthProviderConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOAuthProviderConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOAuthProviderConfigResponseValidationError{}
+
+// Validate checks the field values on SetOAuthProviderEnabledRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetOAuthProviderEnabledRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetOAuthProviderEnabledRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetOAuthProviderEnabledRequestMultiError, or nil if none found.
+func (m *SetOAuthProviderEnabledRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOAuthProviderEnabledRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOAuthProviderEnabledRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOAuthProviderEnabledRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOAuthProviderEnabledRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOAuthProviderEnabledRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOAuthProviderEnabledRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOAuthProviderEnabledRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ConfigId
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return SetOAuthProviderEnabledRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOAuthProviderEnabledRequestMultiError is an error wrapping multiple
+// validation errors returned by SetOAuthProviderEnabledRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SetOAuthProviderEnabledRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOAuthProviderEnabledRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOAuthProviderEnabledRequestMultiError) AllErrors() []error { return m }
+
+// SetOAuthProviderEnabledRequestValidationError is the validation error
+// returned by SetOAuthProviderEnabledRequest.Validate if the designated
+// constraints aren't met.
+type SetOAuthProviderEnabledRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOAuthProviderEnabledRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOAuthProviderEnabledRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOAuthProviderEnabledRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOAuthProviderEnabledRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOAuthProviderEnabledRequestValidationError) ErrorName() string {
+	return "SetOAuthProviderEnabledRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOAuthProviderEnabledRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOAuthProviderEnabledRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOAuthProviderEnabledRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOAuthProviderEnabledRequestValidationError{}
+
+// Validate checks the field values on SetOAuthProviderEnabledResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetOAuthProviderEnabledResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetOAuthProviderEnabledResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetOAuthProviderEnabledResponseMultiError, or nil if none found.
+func (m *SetOAuthProviderEnabledResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOAuthProviderEnabledResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetOAuthProviderEnabledResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOAuthProviderEnabledResponseMultiError is an error wrapping multiple
+// validation errors returned by SetOAuthProviderEnabledResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SetOAuthProviderEnabledResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOAuthProviderEnabledResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOAuthProviderEnabledResponseMultiError) AllErrors() []error { return m }
+
+// SetOAuthProviderEnabledResponseValidationError is the validation error
+// returned by SetOAuthProviderEnabledResponse.Validate if the designated
+// constraints aren't met.
+type SetOAuthProviderEnabledResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOAuthProviderEnabledResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOAuthProviderEnabledResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOAuthProviderEnabledResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOAuthProviderEnabledResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOAuthProviderEnabledResponseValidationError) ErrorName() string {
+	return "SetOAuthProviderEnabledResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOAuthProviderEnabledResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOAuthProviderEnabledResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOAuthProviderEnabledResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOAuthProviderEnabledResponseValidationError{}
+
+// Validate checks the field values on ListOAuthProviderConfigsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListOAuthProviderConfigsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOAuthProviderConfigsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOAuthProviderConfigsRequestMultiError, or nil if none found.
+func (m *ListOAuthProviderConfigsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOAuthProviderConfigsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOAuthProviderConfigsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOAuthProviderConfigsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOAuthProviderConfigsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOAuthProviderConfigsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOAuthProviderConfigsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOAuthProviderConfigsRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Provider != nil {
+		// no validation rules for Provider
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return ListOAuthProviderConfigsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOAuthProviderConfigsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListOAuthProviderConfigsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListOAuthProviderConfigsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOAuthProviderConfigsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOAuthProviderConfigsRequestMultiError) AllErrors() []error { return m }
+
+// ListOAuthProviderConfigsRequestValidationError is the validation error
+// returned by ListOAuthProviderConfigsRequest.Validate if the designated
+// constraints aren't met.
+type ListOAuthProviderConfigsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOAuthProviderConfigsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOAuthProviderConfigsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOAuthProviderConfigsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOAuthProviderConfigsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOAuthProviderConfigsRequestValidationError) ErrorName() string {
+	return "ListOAuthProviderConfigsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOAuthProviderConfigsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOAuthProviderConfigsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOAuthProviderConfigsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOAuthProviderConfigsRequestValidationError{}
+
+// Validate checks the field values on ListOAuthProviderConfigsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListOAuthProviderConfigsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOAuthProviderConfigsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOAuthProviderConfigsResponseMultiError, or nil if none found.
+func (m *ListOAuthProviderConfigsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOAuthProviderConfigsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListOAuthProviderConfigsResponseValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListOAuthProviderConfigsResponseValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListOAuthProviderConfigsResponseValidationError{
+					field:  fmt.Sprintf("Configs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListOAuthProviderConfigsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOAuthProviderConfigsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListOAuthProviderConfigsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListOAuthProviderConfigsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOAuthProviderConfigsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOAuthProviderConfigsResponseMultiError) AllErrors() []error { return m }
+
+// ListOAuthProviderConfigsResponseValidationError is the validation error
+// returned by ListOAuthProviderConfigsResponse.Validate if the designated
+// constraints aren't met.
+type ListOAuthProviderConfigsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOAuthProviderConfigsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOAuthProviderConfigsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOAuthProviderConfigsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOAuthProviderConfigsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOAuthProviderConfigsResponseValidationError) ErrorName() string {
+	return "ListOAuthProviderConfigsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOAuthProviderConfigsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOAuthProviderConfigsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOAuthProviderConfigsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOAuthProviderConfigsResponseValidationError{}
+
+// Validate checks the field values on GetOAuthProviderConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOAuthProviderConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOAuthProviderConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetOAuthProviderConfigRequestMultiError, or nil if none found.
+func (m *GetOAuthProviderConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOAuthProviderConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOAuthProviderConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOAuthProviderConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOAuthProviderConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOAuthProviderConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ConfigId
+
+	if len(errors) > 0 {
+		return GetOAuthProviderConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOAuthProviderConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by GetOAuthProviderConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetOAuthProviderConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOAuthProviderConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOAuthProviderConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetOAuthProviderConfigRequestValidationError is the validation error
+// returned by GetOAuthProviderConfigRequest.Validate if the designated
+// constraints aren't met.
+type GetOAuthProviderConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOAuthProviderConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOAuthProviderConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOAuthProviderConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOAuthProviderConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOAuthProviderConfigRequestValidationError) ErrorName() string {
+	return "GetOAuthProviderConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOAuthProviderConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOAuthProviderConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOAuthProviderConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOAuthProviderConfigRequestValidationError{}
+
+// Validate checks the field values on GetOAuthProviderConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOAuthProviderConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOAuthProviderConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetOAuthProviderConfigResponseMultiError, or nil if none found.
+func (m *GetOAuthProviderConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOAuthProviderConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOAuthProviderConfigResponseValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOAuthProviderConfigResponseValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOAuthProviderConfigResponseValidationError{
+				field:  "Config",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOAuthProviderConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOAuthProviderConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by GetOAuthProviderConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetOAuthProviderConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOAuthProviderConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOAuthProviderConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetOAuthProviderConfigResponseValidationError is the validation error
+// returned by GetOAuthProviderConfigResponse.Validate if the designated
+// constraints aren't met.
+type GetOAuthProviderConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOAuthProviderConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOAuthProviderConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOAuthProviderConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOAuthProviderConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOAuthProviderConfigResponseValidationError) ErrorName() string {
+	return "GetOAuthProviderConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOAuthProviderConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOAuthProviderConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOAuthProviderConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOAuthProviderConfigResponseValidationError{}
+
+// Validate checks the field values on AvailableOAuthProvider with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AvailableOAuthProvider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AvailableOAuthProvider with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AvailableOAuthProviderMultiError, or nil if none found.
+func (m *AvailableOAuthProvider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AvailableOAuthProvider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for Name
+
+	// no validation rules for AuthorizationUrl
+
+	// no validation rules for AllowRegistration
+
+	// no validation rules for AllowLinking
+
+	if len(errors) > 0 {
+		return AvailableOAuthProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// AvailableOAuthProviderMultiError is an error wrapping multiple validation
+// errors returned by AvailableOAuthProvider.ValidateAll() if the designated
+// constraints aren't met.
+type AvailableOAuthProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AvailableOAuthProviderMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AvailableOAuthProviderMultiError) AllErrors() []error { return m }
+
+// AvailableOAuthProviderValidationError is the validation error returned by
+// AvailableOAuthProvider.Validate if the designated constraints aren't met.
+type AvailableOAuthProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AvailableOAuthProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AvailableOAuthProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AvailableOAuthProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AvailableOAuthProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AvailableOAuthProviderValidationError) ErrorName() string {
+	return "AvailableOAuthProviderValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AvailableOAuthProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAvailableOAuthProvider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AvailableOAuthProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AvailableOAuthProviderValidationError{}
+
+// Validate checks the field values on GetAvailableOAuthProvidersRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAvailableOAuthProvidersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAvailableOAuthProvidersRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAvailableOAuthProvidersRequestMultiError, or nil if none found.
+func (m *GetAvailableOAuthProvidersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAvailableOAuthProvidersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetAvailableOAuthProvidersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAvailableOAuthProvidersRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAvailableOAuthProvidersRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAvailableOAuthProvidersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAvailableOAuthProvidersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAvailableOAuthProvidersRequestMultiError) AllErrors() []error { return m }
+
+// GetAvailableOAuthProvidersRequestValidationError is the validation error
+// returned by GetAvailableOAuthProvidersRequest.Validate if the designated
+// constraints aren't met.
+type GetAvailableOAuthProvidersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAvailableOAuthProvidersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAvailableOAuthProvidersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAvailableOAuthProvidersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAvailableOAuthProvidersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAvailableOAuthProvidersRequestValidationError) ErrorName() string {
+	return "GetAvailableOAuthProvidersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAvailableOAuthProvidersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAvailableOAuthProvidersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAvailableOAuthProvidersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAvailableOAuthProvidersRequestValidationError{}
+
+// Validate checks the field values on GetAvailableOAuthProvidersResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAvailableOAuthProvidersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAvailableOAuthProvidersResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAvailableOAuthProvidersResponseMultiError, or nil if none found.
+func (m *GetAvailableOAuthProvidersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAvailableOAuthProvidersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetAvailableOAuthProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetAvailableOAuthProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetAvailableOAuthProvidersResponseValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetAvailableOAuthProvidersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAvailableOAuthProvidersResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAvailableOAuthProvidersResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetAvailableOAuthProvidersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAvailableOAuthProvidersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAvailableOAuthProvidersResponseMultiError) AllErrors() []error { return m }
+
+// GetAvailableOAuthProvidersResponseValidationError is the validation error
+// returned by GetAvailableOAuthProvidersResponse.Validate if the designated
+// constraints aren't met.
+type GetAvailableOAuthProvidersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAvailableOAuthProvidersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAvailableOAuthProvidersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAvailableOAuthProvidersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAvailableOAuthProvidersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAvailableOAuthProvidersResponseValidationError) ErrorName() string {
+	return "GetAvailableOAuthProvidersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAvailableOAuthProvidersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAvailableOAuthProvidersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAvailableOAuthProvidersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAvailableOAuthProvidersResponseValidationError{}
+
+// Validate checks the field values on OAuthLoginV2Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OAuthLoginV2Request) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OAuthLoginV2Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OAuthLoginV2RequestMultiError, or nil if none found.
+func (m *OAuthLoginV2Request) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OAuthLoginV2Request) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for OauthToken
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OAuthLoginV2RequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OAuthLoginV2RequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OAuthLoginV2RequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHttpRequestInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OAuthLoginV2RequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OAuthLoginV2RequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHttpRequestInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OAuthLoginV2RequestValidationError{
+				field:  "HttpRequestInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return OAuthLoginV2RequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// OAuthLoginV2RequestMultiError is an error wrapping multiple validation
+// errors returned by OAuthLoginV2Request.ValidateAll() if the designated
+// constraints aren't met.
+type OAuthLoginV2RequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OAuthLoginV2RequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OAuthLoginV2RequestMultiError) AllErrors() []error { return m }
+
+// OAuthLoginV2RequestValidationError is the validation error returned by
+// OAuthLoginV2Request.Validate if the designated constraints aren't met.
+type OAuthLoginV2RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OAuthLoginV2RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OAuthLoginV2RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OAuthLoginV2RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OAuthLoginV2RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OAuthLoginV2RequestValidationError) ErrorName() string {
+	return "OAuthLoginV2RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OAuthLoginV2RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOAuthLoginV2Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OAuthLoginV2RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OAuthLoginV2RequestValidationError{}
+
+// Validate checks the field values on OAuthAccountInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *OAuthAccountInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OAuthAccountInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OAuthAccountInfoMultiError, or nil if none found.
+func (m *OAuthAccountInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OAuthAccountInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for ProviderUserId
+
+	// no validation rules for Email
+
+	// no validation rules for DisplayName
+
+	// no validation rules for AvatarUrl
+
+	// no validation rules for BoundAt
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return OAuthAccountInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// OAuthAccountInfoMultiError is an error wrapping multiple validation errors
+// returned by OAuthAccountInfo.ValidateAll() if the designated constraints
+// aren't met.
+type OAuthAccountInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OAuthAccountInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OAuthAccountInfoMultiError) AllErrors() []error { return m }
+
+// OAuthAccountInfoValidationError is the validation error returned by
+// OAuthAccountInfo.Validate if the designated constraints aren't met.
+type OAuthAccountInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OAuthAccountInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OAuthAccountInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OAuthAccountInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OAuthAccountInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OAuthAccountInfoValidationError) ErrorName() string { return "OAuthAccountInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OAuthAccountInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOAuthAccountInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OAuthAccountInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OAuthAccountInfoValidationError{}
+
+// Validate checks the field values on BindOAuthAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BindOAuthAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BindOAuthAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BindOAuthAccountRequestMultiError, or nil if none found.
+func (m *BindOAuthAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BindOAuthAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for OauthToken
+
+	if len(errors) > 0 {
+		return BindOAuthAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BindOAuthAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by BindOAuthAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BindOAuthAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BindOAuthAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BindOAuthAccountRequestMultiError) AllErrors() []error { return m }
+
+// BindOAuthAccountRequestValidationError is the validation error returned by
+// BindOAuthAccountRequest.Validate if the designated constraints aren't met.
+type BindOAuthAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BindOAuthAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BindOAuthAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BindOAuthAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BindOAuthAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BindOAuthAccountRequestValidationError) ErrorName() string {
+	return "BindOAuthAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BindOAuthAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBindOAuthAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BindOAuthAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BindOAuthAccountRequestValidationError{}
+
+// Validate checks the field values on BindOAuthAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BindOAuthAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BindOAuthAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BindOAuthAccountResponseMultiError, or nil if none found.
+func (m *BindOAuthAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BindOAuthAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetAccountInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BindOAuthAccountResponseValidationError{
+					field:  "AccountInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BindOAuthAccountResponseValidationError{
+					field:  "AccountInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAccountInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BindOAuthAccountResponseValidationError{
+				field:  "AccountInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return BindOAuthAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BindOAuthAccountResponseMultiError is an error wrapping multiple validation
+// errors returned by BindOAuthAccountResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BindOAuthAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BindOAuthAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BindOAuthAccountResponseMultiError) AllErrors() []error { return m }
+
+// BindOAuthAccountResponseValidationError is the validation error returned by
+// BindOAuthAccountResponse.Validate if the designated constraints aren't met.
+type BindOAuthAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BindOAuthAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BindOAuthAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BindOAuthAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BindOAuthAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BindOAuthAccountResponseValidationError) ErrorName() string {
+	return "BindOAuthAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BindOAuthAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBindOAuthAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BindOAuthAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BindOAuthAccountResponseValidationError{}
+
+// Validate checks the field values on UnbindOAuthAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UnbindOAuthAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UnbindOAuthAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UnbindOAuthAccountRequestMultiError, or nil if none found.
+func (m *UnbindOAuthAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UnbindOAuthAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	if len(errors) > 0 {
+		return UnbindOAuthAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UnbindOAuthAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by UnbindOAuthAccountRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UnbindOAuthAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnbindOAuthAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnbindOAuthAccountRequestMultiError) AllErrors() []error { return m }
+
+// UnbindOAuthAccountRequestValidationError is the validation error returned by
+// UnbindOAuthAccountRequest.Validate if the designated constraints aren't met.
+type UnbindOAuthAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UnbindOAuthAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UnbindOAuthAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UnbindOAuthAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UnbindOAuthAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UnbindOAuthAccountRequestValidationError) ErrorName() string {
+	return "UnbindOAuthAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UnbindOAuthAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUnbindOAuthAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UnbindOAuthAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UnbindOAuthAccountRequestValidationError{}
+
+// Validate checks the field values on UnbindOAuthAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UnbindOAuthAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UnbindOAuthAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UnbindOAuthAccountResponseMultiError, or nil if none found.
+func (m *UnbindOAuthAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UnbindOAuthAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UnbindOAuthAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UnbindOAuthAccountResponseMultiError is an error wrapping multiple
+// validation errors returned by UnbindOAuthAccountResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UnbindOAuthAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnbindOAuthAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnbindOAuthAccountResponseMultiError) AllErrors() []error { return m }
+
+// UnbindOAuthAccountResponseValidationError is the validation error returned
+// by UnbindOAuthAccountResponse.Validate if the designated constraints aren't met.
+type UnbindOAuthAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UnbindOAuthAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UnbindOAuthAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UnbindOAuthAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UnbindOAuthAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UnbindOAuthAccountResponseValidationError) ErrorName() string {
+	return "UnbindOAuthAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UnbindOAuthAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUnbindOAuthAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UnbindOAuthAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UnbindOAuthAccountResponseValidationError{}
+
+// Validate checks the field values on ListBoundOAuthAccountsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBoundOAuthAccountsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBoundOAuthAccountsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListBoundOAuthAccountsRequestMultiError, or nil if none found.
+func (m *ListBoundOAuthAccountsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBoundOAuthAccountsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListBoundOAuthAccountsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBoundOAuthAccountsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListBoundOAuthAccountsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListBoundOAuthAccountsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBoundOAuthAccountsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBoundOAuthAccountsRequestMultiError) AllErrors() []error { return m }
+
+// ListBoundOAuthAccountsRequestValidationError is the validation error
+// returned by ListBoundOAuthAccountsRequest.Validate if the designated
+// constraints aren't met.
+type ListBoundOAuthAccountsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBoundOAuthAccountsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBoundOAuthAccountsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBoundOAuthAccountsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBoundOAuthAccountsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBoundOAuthAccountsRequestValidationError) ErrorName() string {
+	return "ListBoundOAuthAccountsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBoundOAuthAccountsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBoundOAuthAccountsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBoundOAuthAccountsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBoundOAuthAccountsRequestValidationError{}
+
+// Validate checks the field values on ListBoundOAuthAccountsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBoundOAuthAccountsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBoundOAuthAccountsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListBoundOAuthAccountsResponseMultiError, or nil if none found.
+func (m *ListBoundOAuthAccountsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBoundOAuthAccountsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAccounts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListBoundOAuthAccountsResponseValidationError{
+						field:  fmt.Sprintf("Accounts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListBoundOAuthAccountsResponseValidationError{
+						field:  fmt.Sprintf("Accounts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListBoundOAuthAccountsResponseValidationError{
+					field:  fmt.Sprintf("Accounts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for HasPassword
+
+	if len(errors) > 0 {
+		return ListBoundOAuthAccountsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBoundOAuthAccountsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListBoundOAuthAccountsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListBoundOAuthAccountsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBoundOAuthAccountsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBoundOAuthAccountsResponseMultiError) AllErrors() []error { return m }
+
+// ListBoundOAuthAccountsResponseValidationError is the validation error
+// returned by ListBoundOAuthAccountsResponse.Validate if the designated
+// constraints aren't met.
+type ListBoundOAuthAccountsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBoundOAuthAccountsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBoundOAuthAccountsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBoundOAuthAccountsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBoundOAuthAccountsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBoundOAuthAccountsResponseValidationError) ErrorName() string {
+	return "ListBoundOAuthAccountsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBoundOAuthAccountsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBoundOAuthAccountsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBoundOAuthAccountsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBoundOAuthAccountsResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

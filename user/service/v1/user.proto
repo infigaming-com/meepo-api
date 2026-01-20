@@ -458,6 +458,50 @@ service User {
 	rpc UpdateBackofficeAccount(UpdateBackofficeAccountRequest) returns (UpdateBackofficeAccountResponse) {}
 	// Admin reset password for backoffice account (internal gRPC only)
 	rpc AdminResetPassword(AdminResetPasswordRequest) returns (AdminResetPasswordResponse) {}
+
+	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
+	// Create OAuth provider configuration for an operator
+	rpc CreateOAuthProviderConfig(CreateOAuthProviderConfigRequest) returns (CreateOAuthProviderConfigResponse) {}
+	// Update OAuth provider configuration
+	rpc UpdateOAuthProviderConfig(UpdateOAuthProviderConfigRequest) returns (UpdateOAuthProviderConfigResponse) {}
+	// Delete OAuth provider configuration
+	rpc DeleteOAuthProviderConfig(DeleteOAuthProviderConfigRequest) returns (DeleteOAuthProviderConfigResponse) {}
+	// Set OAuth provider enabled/disabled status
+	rpc SetOAuthProviderEnabled(SetOAuthProviderEnabledRequest) returns (SetOAuthProviderEnabledResponse) {}
+	// List OAuth provider configurations for an operator
+	rpc ListOAuthProviderConfigs(ListOAuthProviderConfigsRequest) returns (ListOAuthProviderConfigsResponse) {}
+	// Get a specific OAuth provider configuration
+	rpc GetOAuthProviderConfig(GetOAuthProviderConfigRequest) returns (GetOAuthProviderConfigResponse) {}
+
+	// ============ Player OAuth APIs ============
+	// Get available OAuth providers for the current operator (public)
+	rpc GetAvailableOAuthProviders(GetAvailableOAuthProvidersRequest) returns (GetAvailableOAuthProvidersResponse) {
+		option (google.api.http) = {
+			get: "/v1/user/oauth/providers"
+		};
+	}
+	// Login or register with OAuth provider (uses new credential system)
+	rpc OAuthLoginV2(OAuthLoginV2Request) returns (AuthResponse) {}
+	// Bind OAuth account to current user (requires authentication)
+	rpc BindOAuthAccount(BindOAuthAccountRequest) returns (BindOAuthAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/oauth/bind"
+			body: "*"
+		};
+	}
+	// Unbind OAuth account from current user (requires authentication)
+	rpc UnbindOAuthAccount(UnbindOAuthAccountRequest) returns (UnbindOAuthAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/oauth/unbind"
+			body: "*"
+		};
+	}
+	// List OAuth accounts bound to current user (requires authentication)
+	rpc ListBoundOAuthAccounts(ListBoundOAuthAccountsRequest) returns (ListBoundOAuthAccountsResponse) {
+		option (google.api.http) = {
+			get: "/v1/user/oauth/accounts"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -552,6 +596,8 @@ enum OAuthProvider {
 	OAUTH_PROVIDER_FACEBOOK = 2;
 	// Twitter OAuth provider.
 	OAUTH_PROVIDER_TWITTER = 3;
+	// Apple OAuth provider (future).
+	OAUTH_PROVIDER_APPLE = 4;
 }
 
 // RegisterRequest contains the information needed to register a new user.
@@ -2078,3 +2124,169 @@ message AdminResetPasswordRequest {
 
 // AdminResetPasswordResponse - empty on success
 message AdminResetPasswordResponse {}
+
+// ============================================================================
+// OAuth Provider Configuration Messages
+// ============================================================================
+
+// OAuthProviderConfig represents operator's OAuth provider configuration
+message OAuthProviderConfig {
+	int64 id = 1;
+	int64 operator_id = 2;
+	OAuthProvider provider = 3;
+	bool enabled = 4;
+	string client_id = 5;
+	string client_secret_masked = 6;  // Masked for display (e.g., "****")
+	map<string, string> config = 7;   // Provider-specific config (scopes, API versions, etc.)
+	bool allow_registration = 8;
+	bool allow_linking = 9;
+	repeated int64 allowed_role_ids = 10;
+	int32 rate_limit_per_minute = 11;
+	int64 created_at = 12;
+	int64 updated_at = 13;
+}
+
+// CreateOAuthProviderConfigRequest - create OAuth provider config for operator
+message CreateOAuthProviderConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	OAuthProvider provider = 3;
+	string client_id = 4;
+	string client_secret = 5;  // Plain text, will be encrypted
+	map<string, string> config = 6;
+	bool enabled = 7;
+	bool allow_registration = 8;
+	bool allow_linking = 9;
+	repeated int64 allowed_role_ids = 10;
+	int32 rate_limit_per_minute = 11;
+}
+
+message CreateOAuthProviderConfigResponse {
+	int64 config_id = 1;
+}
+
+// UpdateOAuthProviderConfigRequest - update existing OAuth provider config
+message UpdateOAuthProviderConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 config_id = 3;
+	optional string client_id = 4;
+	optional string client_secret = 5;  // If provided, will be encrypted
+	map<string, string> config = 6;
+	optional bool allow_registration = 7;
+	optional bool allow_linking = 8;
+	repeated int64 allowed_role_ids = 9;
+	optional int32 rate_limit_per_minute = 10;
+}
+
+message UpdateOAuthProviderConfigResponse {}
+
+// DeleteOAuthProviderConfigRequest - delete OAuth provider config
+message DeleteOAuthProviderConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 config_id = 3;
+}
+
+message DeleteOAuthProviderConfigResponse {}
+
+// SetOAuthProviderEnabledRequest - enable/disable OAuth provider
+message SetOAuthProviderEnabledRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 config_id = 3;
+	bool enabled = 4;
+}
+
+message SetOAuthProviderEnabledResponse {}
+
+// ListOAuthProviderConfigsRequest - list OAuth configs for operator
+message ListOAuthProviderConfigsRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	optional OAuthProvider provider = 3;  // Filter by provider
+	optional bool enabled = 4;            // Filter by enabled status
+}
+
+message ListOAuthProviderConfigsResponse {
+	repeated OAuthProviderConfig configs = 1;
+}
+
+// GetOAuthProviderConfigRequest - get specific OAuth config
+message GetOAuthProviderConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 config_id = 3;
+}
+
+message GetOAuthProviderConfigResponse {
+	OAuthProviderConfig config = 1;
+}
+
+// ============================================================================
+// Player OAuth Messages
+// ============================================================================
+
+// AvailableOAuthProvider - provider info for frontend
+message AvailableOAuthProvider {
+	OAuthProvider provider = 1;
+	string name = 2;                 // Display name (e.g., "Google", "Facebook")
+	string authorization_url = 3;   // OAuth authorization URL
+	bool allow_registration = 4;
+	bool allow_linking = 5;
+}
+
+// GetAvailableOAuthProvidersRequest - get available OAuth providers for operator
+message GetAvailableOAuthProvidersRequest {
+	// Operator context extracted from middleware
+}
+
+message GetAvailableOAuthProvidersResponse {
+	repeated AvailableOAuthProvider providers = 1;
+}
+
+// OAuthLoginV2Request - login/register with OAuth (with operator validation)
+message OAuthLoginV2Request {
+	OAuthProvider provider = 1;
+	string oauth_token = 2;          // ID token from provider
+	api.common.OperatorContext operator_context = 3;
+	HttpRequestInfo http_request_info = 4;
+}
+
+// OAuthAccountInfo - bound OAuth account info
+message OAuthAccountInfo {
+	OAuthProvider provider = 1;
+	string provider_user_id = 2;
+	string email = 3;
+	string display_name = 4;
+	string avatar_url = 5;
+	int64 bound_at = 6;
+	string status = 7;  // active, revoked
+}
+
+// BindOAuthAccountRequest - bind OAuth account to current user
+message BindOAuthAccountRequest {
+	OAuthProvider provider = 1;
+	string oauth_token = 2;  // ID token from provider
+}
+
+message BindOAuthAccountResponse {
+	OAuthAccountInfo account_info = 1;
+}
+
+// UnbindOAuthAccountRequest - unbind OAuth account from current user
+message UnbindOAuthAccountRequest {
+	OAuthProvider provider = 1;
+}
+
+message UnbindOAuthAccountResponse {}
+
+// ListBoundOAuthAccountsRequest - list bound OAuth accounts
+message ListBoundOAuthAccountsRequest {
+	// User extracted from JWT
+}
+
+message ListBoundOAuthAccountsResponse {
+	repeated OAuthAccountInfo accounts = 1;
+	bool has_password = 2;  // Whether user has password login method
+}
