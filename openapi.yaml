@@ -3320,6 +3320,120 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/oauth/provider/create:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Create a new OAuth provider configuration for an operator
+            operationId: BackofficeOAuth_CreateOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateOAuthProviderConfigResponse'
+    /v1/backoffice/oauth/provider/delete:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Delete an OAuth provider configuration
+            operationId: BackofficeOAuth_DeleteOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOAuthProviderConfigResponse'
+    /v1/backoffice/oauth/provider/enabled/set:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Enable or disable an OAuth provider
+            operationId: BackofficeOAuth_SetOAuthProviderEnabled
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOAuthProviderEnabledRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOAuthProviderEnabledResponse'
+    /v1/backoffice/oauth/provider/get:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Get a specific OAuth provider configuration
+            operationId: BackofficeOAuth_GetOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOAuthProviderConfigResponse'
+    /v1/backoffice/oauth/provider/list:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: List all OAuth provider configurations for an operator
+            operationId: BackofficeOAuth_ListOAuthProviderConfigs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOAuthProviderConfigsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOAuthProviderConfigsResponse'
+    /v1/backoffice/oauth/provider/update:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Update an existing OAuth provider configuration
+            operationId: BackofficeOAuth_UpdateOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOAuthProviderConfigResponse'
     /v1/backoffice/operator/account-settings/get:
         post:
             tags:
@@ -7229,6 +7343,72 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.UploadKycResponse'
+    /v1/user/oauth/accounts:
+        get:
+            tags:
+                - User
+            description: List OAuth accounts bound to current user (requires authentication)
+            operationId: User_ListBoundOAuthAccounts
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListBoundOAuthAccountsResponse'
+    /v1/user/oauth/bind:
+        post:
+            tags:
+                - User
+            description: Bind OAuth account to current user (requires authentication)
+            operationId: User_BindOAuthAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.BindOAuthAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.BindOAuthAccountResponse'
+    /v1/user/oauth/providers:
+        get:
+            tags:
+                - User
+            description: |-
+                ============ Player OAuth APIs ============
+                 Get available OAuth providers for the current operator (public)
+            operationId: User_GetAvailableOAuthProviders
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetAvailableOAuthProvidersResponse'
+    /v1/user/oauth/unbind:
+        post:
+            tags:
+                - User
+            description: Unbind OAuth account from current user (requires authentication)
+            operationId: User_UnbindOAuthAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UnbindOAuthAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UnbindOAuthAccountResponse'
     /v1/user/operator/account-settings/get:
         post:
             tags:
@@ -10381,6 +10561,47 @@ components:
             properties:
                 name:
                     type: string
+        api.backoffice.service.v1.CreateOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                clientId:
+                    type: string
+                clientSecret:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                enabled:
+                    type: boolean
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+            description: CreateOAuthProviderConfigRequest - request to create OAuth provider config
+        api.backoffice.service.v1.CreateOAuthProviderConfigResponse:
+            type: object
+            properties:
+                configId:
+                    type: string
         api.backoffice.service.v1.CreateOperatorRequest:
             type: object
             properties:
@@ -10728,6 +10949,17 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.DeleteOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+            description: DeleteOAuthProviderConfigRequest - request to delete OAuth provider config
+        api.backoffice.service.v1.DeleteOAuthProviderConfigResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteOperatorApexDomainRequest:
             type: object
             properties:
@@ -11564,6 +11796,19 @@ components:
         api.backoffice.service.v1.GetMerchantRequest:
             type: object
             properties: {}
+        api.backoffice.service.v1.GetOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+            description: GetOAuthProviderConfigRequest - request to get specific OAuth provider config
+        api.backoffice.service.v1.GetOAuthProviderConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.OAuthProviderConfig'
         api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
             type: object
             properties:
@@ -14207,6 +14452,30 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListOAuthProviderConfigsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+            description: ListOAuthProviderConfigsRequest - request to list OAuth provider configs
+        api.backoffice.service.v1.ListOAuthProviderConfigsResponse:
+            type: object
+            properties:
+                configs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.OAuthProviderConfig'
         api.backoffice.service.v1.ListOperatorApexDomainsRequest:
             type: object
             properties:
@@ -16577,6 +16846,19 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/system.service.v1.FileInfo'
+        api.backoffice.service.v1.SetOAuthProviderEnabledRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                enabled:
+                    type: boolean
+            description: SetOAuthProviderEnabledRequest - request to enable/disable OAuth provider
+        api.backoffice.service.v1.SetOAuthProviderEnabledResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -16849,6 +17131,36 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateGameResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UpdateOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                clientId:
+                    type: string
+                clientSecret:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+            description: UpdateOAuthProviderConfigRequest - request to update OAuth provider config
+        api.backoffice.service.v1.UpdateOAuthProviderConfigResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
@@ -20210,6 +20522,47 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.AvailableOAuthProvider:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                name:
+                    type: string
+                authorizationUrl:
+                    type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+            description: AvailableOAuthProvider - provider info for frontend
+        api.user.service.v1.BindOAuthAccountRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                oauthToken:
+                    type: string
+            description: BindOAuthAccountRequest - bind OAuth account to current user
+        api.user.service.v1.BindOAuthAccountResponse:
+            type: object
+            properties:
+                accountInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.OAuthAccountInfo'
         api.user.service.v1.BindOperatorEmailDomainResponse:
             type: object
             properties:
@@ -20427,6 +20780,13 @@ components:
                     type: boolean
                 description:
                     type: string
+        api.user.service.v1.GetAvailableOAuthProvidersResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.AvailableOAuthProvider'
         api.user.service.v1.GetClaimableVipRewardsRequest:
             type: object
             properties: {}
@@ -20746,6 +21106,15 @@ components:
                 reportingCurrency:
                     type: string
             description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+        api.user.service.v1.ListBoundOAuthAccountsResponse:
+            type: object
+            properties:
+                accounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.OAuthAccountInfo'
+                hasPassword:
+                    type: boolean
         api.user.service.v1.ListCompanyOperatorsResponse:
             type: object
             properties:
@@ -20949,6 +21318,73 @@ components:
                     type: string
                 chatId:
                     type: string
+        api.user.service.v1.OAuthAccountInfo:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                providerUserId:
+                    type: string
+                email:
+                    type: string
+                displayName:
+                    type: string
+                avatarUrl:
+                    type: string
+                boundAt:
+                    type: string
+                status:
+                    type: string
+            description: OAuthAccountInfo - bound OAuth account info
+        api.user.service.v1.OAuthProviderConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                clientId:
+                    type: string
+                clientSecretMasked:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: OAuthProviderConfig represents operator's OAuth provider configuration
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
@@ -20958,6 +21394,7 @@ components:
                         - OAUTH_PROVIDER_GOOGLE
                         - OAUTH_PROVIDER_FACEBOOK
                         - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
                     type: string
                     description: The OAuth provider to use for authentication.
                     format: enum
@@ -21407,6 +21844,22 @@ components:
                     type: string
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
+        api.user.service.v1.UnbindOAuthAccountRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+            description: UnbindOAuthAccountRequest - unbind OAuth account from current user
+        api.user.service.v1.UnbindOAuthAccountResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
@@ -24792,6 +25245,8 @@ tags:
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
+    - name: BackofficeOAuth
+      description: BackofficeOAuth service provides OAuth provider configuration management for operators
     - name: BackofficeOperator
     - name: BackofficePayment
       description: |-

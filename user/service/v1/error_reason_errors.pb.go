@@ -1672,3 +1672,269 @@ func IsInvalidUserRoleFor2Fa(err error) bool {
 func ErrorInvalidUserRoleFor2Fa(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_INVALID_USER_ROLE_FOR_2FA.String(), fmt.Sprintf(format, args...))
 }
+
+// OAuth/Third-Party Auth Errors
+func IsInvalidOauthProvider(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OAUTH_PROVIDER.String() && e.Code == 400
+}
+
+// OAuth/Third-Party Auth Errors
+func ErrorInvalidOauthProvider(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_OAUTH_PROVIDER.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthProviderDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_PROVIDER_DISABLED.String() && e.Code == 403
+}
+
+func ErrorOauthProviderDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_OAUTH_PROVIDER_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthLinkingDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_LINKING_DISABLED.String() && e.Code == 403
+}
+
+func ErrorOauthLinkingDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_OAUTH_LINKING_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthTokenInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_TOKEN_INVALID.String() && e.Code == 401
+}
+
+func ErrorOauthTokenInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_OAUTH_TOKEN_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthAccountAlreadyBound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_ACCOUNT_ALREADY_BOUND.String() && e.Code == 409
+}
+
+func ErrorOauthAccountAlreadyBound(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_OAUTH_ACCOUNT_ALREADY_BOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthAccountNotBound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_ACCOUNT_NOT_BOUND.String() && e.Code == 404
+}
+
+func ErrorOauthAccountNotBound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_OAUTH_ACCOUNT_NOT_BOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCannotUnbindLastLoginMethod(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CANNOT_UNBIND_LAST_LOGIN_METHOD.String() && e.Code == 400
+}
+
+func ErrorCannotUnbindLastLoginMethod(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_CANNOT_UNBIND_LAST_LOGIN_METHOD.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthRegistrationDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_REGISTRATION_DISABLED.String() && e.Code == 403
+}
+
+func ErrorOauthRegistrationDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_OAUTH_REGISTRATION_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthLoginNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_LOGIN_NOT_ALLOWED.String() && e.Code == 403
+}
+
+func ErrorOauthLoginNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_OAUTH_LOGIN_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserBannedOrDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_BANNED_OR_DISABLED.String() && e.Code == 403
+}
+
+func ErrorUserBannedOrDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_USER_BANNED_OR_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_CONFIG_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorOauthConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_OAUTH_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthConfigAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_CONFIG_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorOauthConfigAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_OAUTH_CONFIG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOauthConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OAUTH_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOauthConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OAUTH_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateOauthConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_OAUTH_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateOauthConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_OAUTH_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOauthConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OAUTH_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOauthConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OAUTH_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteOauthConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_OAUTH_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteOauthConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_OAUTH_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEncryptionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ENCRYPTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorEncryptionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ENCRYPTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CONFIG.String() && e.Code == 400
+}
+
+func ErrorInvalidConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUnauthorized(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UNAUTHORIZED.String() && e.Code == 401
+}
+
+func ErrorUnauthorized(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_UNAUTHORIZED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserCredentialFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_CREDENTIAL_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserCredentialFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_CREDENTIAL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddUserCredentialFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_USER_CREDENTIAL_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddUserCredentialFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_CREDENTIAL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteUserCredentialFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_USER_CREDENTIAL_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteUserCredentialFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_USER_CREDENTIAL_FAILED.String(), fmt.Sprintf(format, args...))
+}

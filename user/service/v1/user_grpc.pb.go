@@ -120,6 +120,17 @@ const (
 	User_GetBackofficeAccountDetail_FullMethodName         = "/api.user.service.v1.User/GetBackofficeAccountDetail"
 	User_UpdateBackofficeAccount_FullMethodName            = "/api.user.service.v1.User/UpdateBackofficeAccount"
 	User_AdminResetPassword_FullMethodName                 = "/api.user.service.v1.User/AdminResetPassword"
+	User_CreateOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/CreateOAuthProviderConfig"
+	User_UpdateOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/UpdateOAuthProviderConfig"
+	User_DeleteOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/DeleteOAuthProviderConfig"
+	User_SetOAuthProviderEnabled_FullMethodName            = "/api.user.service.v1.User/SetOAuthProviderEnabled"
+	User_ListOAuthProviderConfigs_FullMethodName           = "/api.user.service.v1.User/ListOAuthProviderConfigs"
+	User_GetOAuthProviderConfig_FullMethodName             = "/api.user.service.v1.User/GetOAuthProviderConfig"
+	User_GetAvailableOAuthProviders_FullMethodName         = "/api.user.service.v1.User/GetAvailableOAuthProviders"
+	User_OAuthLoginV2_FullMethodName                       = "/api.user.service.v1.User/OAuthLoginV2"
+	User_BindOAuthAccount_FullMethodName                   = "/api.user.service.v1.User/BindOAuthAccount"
+	User_UnbindOAuthAccount_FullMethodName                 = "/api.user.service.v1.User/UnbindOAuthAccount"
+	User_ListBoundOAuthAccounts_FullMethodName             = "/api.user.service.v1.User/ListBoundOAuthAccounts"
 )
 
 // UserClient is the client API for User service.
@@ -293,6 +304,30 @@ type UserClient interface {
 	UpdateBackofficeAccount(ctx context.Context, in *UpdateBackofficeAccountRequest, opts ...grpc.CallOption) (*UpdateBackofficeAccountResponse, error)
 	// Admin reset password for backoffice account (internal gRPC only)
 	AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error)
+	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
+	// Create OAuth provider configuration for an operator
+	CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOAuthProviderConfigResponse, error)
+	// Update OAuth provider configuration
+	UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*UpdateOAuthProviderConfigResponse, error)
+	// Delete OAuth provider configuration
+	DeleteOAuthProviderConfig(ctx context.Context, in *DeleteOAuthProviderConfigRequest, opts ...grpc.CallOption) (*DeleteOAuthProviderConfigResponse, error)
+	// Set OAuth provider enabled/disabled status
+	SetOAuthProviderEnabled(ctx context.Context, in *SetOAuthProviderEnabledRequest, opts ...grpc.CallOption) (*SetOAuthProviderEnabledResponse, error)
+	// List OAuth provider configurations for an operator
+	ListOAuthProviderConfigs(ctx context.Context, in *ListOAuthProviderConfigsRequest, opts ...grpc.CallOption) (*ListOAuthProviderConfigsResponse, error)
+	// Get a specific OAuth provider configuration
+	GetOAuthProviderConfig(ctx context.Context, in *GetOAuthProviderConfigRequest, opts ...grpc.CallOption) (*GetOAuthProviderConfigResponse, error)
+	// ============ Player OAuth APIs ============
+	// Get available OAuth providers for the current operator (public)
+	GetAvailableOAuthProviders(ctx context.Context, in *GetAvailableOAuthProvidersRequest, opts ...grpc.CallOption) (*GetAvailableOAuthProvidersResponse, error)
+	// Login or register with OAuth provider (uses new credential system)
+	OAuthLoginV2(ctx context.Context, in *OAuthLoginV2Request, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Bind OAuth account to current user (requires authentication)
+	BindOAuthAccount(ctx context.Context, in *BindOAuthAccountRequest, opts ...grpc.CallOption) (*BindOAuthAccountResponse, error)
+	// Unbind OAuth account from current user (requires authentication)
+	UnbindOAuthAccount(ctx context.Context, in *UnbindOAuthAccountRequest, opts ...grpc.CallOption) (*UnbindOAuthAccountResponse, error)
+	// List OAuth accounts bound to current user (requires authentication)
+	ListBoundOAuthAccounts(ctx context.Context, in *ListBoundOAuthAccountsRequest, opts ...grpc.CallOption) (*ListBoundOAuthAccountsResponse, error)
 }
 
 type userClient struct {
@@ -1303,6 +1338,116 @@ func (c *userClient) AdminResetPassword(ctx context.Context, in *AdminResetPassw
 	return out, nil
 }
 
+func (c *userClient) CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOAuthProviderConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOAuthProviderConfigResponse)
+	err := c.cc.Invoke(ctx, User_CreateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*UpdateOAuthProviderConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOAuthProviderConfigResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteOAuthProviderConfig(ctx context.Context, in *DeleteOAuthProviderConfigRequest, opts ...grpc.CallOption) (*DeleteOAuthProviderConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOAuthProviderConfigResponse)
+	err := c.cc.Invoke(ctx, User_DeleteOAuthProviderConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetOAuthProviderEnabled(ctx context.Context, in *SetOAuthProviderEnabledRequest, opts ...grpc.CallOption) (*SetOAuthProviderEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOAuthProviderEnabledResponse)
+	err := c.cc.Invoke(ctx, User_SetOAuthProviderEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListOAuthProviderConfigs(ctx context.Context, in *ListOAuthProviderConfigsRequest, opts ...grpc.CallOption) (*ListOAuthProviderConfigsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOAuthProviderConfigsResponse)
+	err := c.cc.Invoke(ctx, User_ListOAuthProviderConfigs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOAuthProviderConfig(ctx context.Context, in *GetOAuthProviderConfigRequest, opts ...grpc.CallOption) (*GetOAuthProviderConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOAuthProviderConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOAuthProviderConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetAvailableOAuthProviders(ctx context.Context, in *GetAvailableOAuthProvidersRequest, opts ...grpc.CallOption) (*GetAvailableOAuthProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAvailableOAuthProvidersResponse)
+	err := c.cc.Invoke(ctx, User_GetAvailableOAuthProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) OAuthLoginV2(ctx context.Context, in *OAuthLoginV2Request, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, User_OAuthLoginV2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) BindOAuthAccount(ctx context.Context, in *BindOAuthAccountRequest, opts ...grpc.CallOption) (*BindOAuthAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BindOAuthAccountResponse)
+	err := c.cc.Invoke(ctx, User_BindOAuthAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UnbindOAuthAccount(ctx context.Context, in *UnbindOAuthAccountRequest, opts ...grpc.CallOption) (*UnbindOAuthAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnbindOAuthAccountResponse)
+	err := c.cc.Invoke(ctx, User_UnbindOAuthAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListBoundOAuthAccounts(ctx context.Context, in *ListBoundOAuthAccountsRequest, opts ...grpc.CallOption) (*ListBoundOAuthAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBoundOAuthAccountsResponse)
+	err := c.cc.Invoke(ctx, User_ListBoundOAuthAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1474,6 +1619,30 @@ type UserServer interface {
 	UpdateBackofficeAccount(context.Context, *UpdateBackofficeAccountRequest) (*UpdateBackofficeAccountResponse, error)
 	// Admin reset password for backoffice account (internal gRPC only)
 	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
+	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
+	// Create OAuth provider configuration for an operator
+	CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error)
+	// Update OAuth provider configuration
+	UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error)
+	// Delete OAuth provider configuration
+	DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error)
+	// Set OAuth provider enabled/disabled status
+	SetOAuthProviderEnabled(context.Context, *SetOAuthProviderEnabledRequest) (*SetOAuthProviderEnabledResponse, error)
+	// List OAuth provider configurations for an operator
+	ListOAuthProviderConfigs(context.Context, *ListOAuthProviderConfigsRequest) (*ListOAuthProviderConfigsResponse, error)
+	// Get a specific OAuth provider configuration
+	GetOAuthProviderConfig(context.Context, *GetOAuthProviderConfigRequest) (*GetOAuthProviderConfigResponse, error)
+	// ============ Player OAuth APIs ============
+	// Get available OAuth providers for the current operator (public)
+	GetAvailableOAuthProviders(context.Context, *GetAvailableOAuthProvidersRequest) (*GetAvailableOAuthProvidersResponse, error)
+	// Login or register with OAuth provider (uses new credential system)
+	OAuthLoginV2(context.Context, *OAuthLoginV2Request) (*AuthResponse, error)
+	// Bind OAuth account to current user (requires authentication)
+	BindOAuthAccount(context.Context, *BindOAuthAccountRequest) (*BindOAuthAccountResponse, error)
+	// Unbind OAuth account from current user (requires authentication)
+	UnbindOAuthAccount(context.Context, *UnbindOAuthAccountRequest) (*UnbindOAuthAccountResponse, error)
+	// List OAuth accounts bound to current user (requires authentication)
+	ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1783,6 +1952,39 @@ func (UnimplementedUserServer) UpdateBackofficeAccount(context.Context, *UpdateB
 }
 func (UnimplementedUserServer) AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AdminResetPassword not implemented")
+}
+func (UnimplementedUserServer) CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOAuthProviderConfig not implemented")
+}
+func (UnimplementedUserServer) UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOAuthProviderConfig not implemented")
+}
+func (UnimplementedUserServer) DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteOAuthProviderConfig not implemented")
+}
+func (UnimplementedUserServer) SetOAuthProviderEnabled(context.Context, *SetOAuthProviderEnabledRequest) (*SetOAuthProviderEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOAuthProviderEnabled not implemented")
+}
+func (UnimplementedUserServer) ListOAuthProviderConfigs(context.Context, *ListOAuthProviderConfigsRequest) (*ListOAuthProviderConfigsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOAuthProviderConfigs not implemented")
+}
+func (UnimplementedUserServer) GetOAuthProviderConfig(context.Context, *GetOAuthProviderConfigRequest) (*GetOAuthProviderConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOAuthProviderConfig not implemented")
+}
+func (UnimplementedUserServer) GetAvailableOAuthProviders(context.Context, *GetAvailableOAuthProvidersRequest) (*GetAvailableOAuthProvidersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAvailableOAuthProviders not implemented")
+}
+func (UnimplementedUserServer) OAuthLoginV2(context.Context, *OAuthLoginV2Request) (*AuthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method OAuthLoginV2 not implemented")
+}
+func (UnimplementedUserServer) BindOAuthAccount(context.Context, *BindOAuthAccountRequest) (*BindOAuthAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BindOAuthAccount not implemented")
+}
+func (UnimplementedUserServer) UnbindOAuthAccount(context.Context, *UnbindOAuthAccountRequest) (*UnbindOAuthAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnbindOAuthAccount not implemented")
+}
+func (UnimplementedUserServer) ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListBoundOAuthAccounts not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -3605,6 +3807,204 @@ func _User_AdminResetPassword_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CreateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOAuthProviderConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CreateOAuthProviderConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CreateOAuthProviderConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CreateOAuthProviderConfig(ctx, req.(*CreateOAuthProviderConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOAuthProviderConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOAuthProviderConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOAuthProviderConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOAuthProviderConfig(ctx, req.(*UpdateOAuthProviderConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOAuthProviderConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteOAuthProviderConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteOAuthProviderConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteOAuthProviderConfig(ctx, req.(*DeleteOAuthProviderConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetOAuthProviderEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOAuthProviderEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOAuthProviderEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOAuthProviderEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOAuthProviderEnabled(ctx, req.(*SetOAuthProviderEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListOAuthProviderConfigs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOAuthProviderConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListOAuthProviderConfigs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListOAuthProviderConfigs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListOAuthProviderConfigs(ctx, req.(*ListOAuthProviderConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOAuthProviderConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOAuthProviderConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOAuthProviderConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOAuthProviderConfig(ctx, req.(*GetOAuthProviderConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetAvailableOAuthProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAvailableOAuthProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetAvailableOAuthProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetAvailableOAuthProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetAvailableOAuthProviders(ctx, req.(*GetAvailableOAuthProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_OAuthLoginV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OAuthLoginV2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).OAuthLoginV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_OAuthLoginV2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).OAuthLoginV2(ctx, req.(*OAuthLoginV2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_BindOAuthAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BindOAuthAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).BindOAuthAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_BindOAuthAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).BindOAuthAccount(ctx, req.(*BindOAuthAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UnbindOAuthAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnbindOAuthAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UnbindOAuthAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UnbindOAuthAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UnbindOAuthAccount(ctx, req.(*UnbindOAuthAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListBoundOAuthAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBoundOAuthAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListBoundOAuthAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListBoundOAuthAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListBoundOAuthAccounts(ctx, req.(*ListBoundOAuthAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4011,6 +4411,50 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AdminResetPassword",
 			Handler:    _User_AdminResetPassword_Handler,
+		},
+		{
+			MethodName: "CreateOAuthProviderConfig",
+			Handler:    _User_CreateOAuthProviderConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOAuthProviderConfig",
+			Handler:    _User_UpdateOAuthProviderConfig_Handler,
+		},
+		{
+			MethodName: "DeleteOAuthProviderConfig",
+			Handler:    _User_DeleteOAuthProviderConfig_Handler,
+		},
+		{
+			MethodName: "SetOAuthProviderEnabled",
+			Handler:    _User_SetOAuthProviderEnabled_Handler,
+		},
+		{
+			MethodName: "ListOAuthProviderConfigs",
+			Handler:    _User_ListOAuthProviderConfigs_Handler,
+		},
+		{
+			MethodName: "GetOAuthProviderConfig",
+			Handler:    _User_GetOAuthProviderConfig_Handler,
+		},
+		{
+			MethodName: "GetAvailableOAuthProviders",
+			Handler:    _User_GetAvailableOAuthProviders_Handler,
+		},
+		{
+			MethodName: "OAuthLoginV2",
+			Handler:    _User_OAuthLoginV2_Handler,
+		},
+		{
+			MethodName: "BindOAuthAccount",
+			Handler:    _User_BindOAuthAccount_Handler,
+		},
+		{
+			MethodName: "UnbindOAuthAccount",
+			Handler:    _User_UnbindOAuthAccount_Handler,
+		},
+		{
+			MethodName: "ListBoundOAuthAccounts",
+			Handler:    _User_ListBoundOAuthAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

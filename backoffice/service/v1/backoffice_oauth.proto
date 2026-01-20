@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "common/common.proto";
+import "user/service/v1/user.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// BackofficeOAuth service provides OAuth provider configuration management for operators
+service BackofficeOAuth {
+	// Create a new OAuth provider configuration for an operator
+	rpc CreateOAuthProviderConfig(CreateOAuthProviderConfigRequest) returns (CreateOAuthProviderConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/oauth/provider/create"
+			body: "*"
+		};
+	}
+
+	// Update an existing OAuth provider configuration
+	rpc UpdateOAuthProviderConfig(UpdateOAuthProviderConfigRequest) returns (UpdateOAuthProviderConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/oauth/provider/update"
+			body: "*"
+		};
+	}
+
+	// Delete an OAuth provider configuration
+	rpc DeleteOAuthProviderConfig(DeleteOAuthProviderConfigRequest) returns (DeleteOAuthProviderConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/oauth/provider/delete"
+			body: "*"
+		};
+	}
+
+	// Enable or disable an OAuth provider
+	rpc SetOAuthProviderEnabled(SetOAuthProviderEnabledRequest) returns (SetOAuthProviderEnabledResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/oauth/provider/enabled/set"
+			body: "*"
+		};
+	}
+
+	// List all OAuth provider configurations for an operator
+	rpc ListOAuthProviderConfigs(ListOAuthProviderConfigsRequest) returns (ListOAuthProviderConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/oauth/provider/list"
+			body: "*"
+		};
+	}
+
+	// Get a specific OAuth provider configuration
+	rpc GetOAuthProviderConfig(GetOAuthProviderConfigRequest) returns (GetOAuthProviderConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/oauth/provider/get"
+			body: "*"
+		};
+	}
+}
+
+// CreateOAuthProviderConfigRequest - request to create OAuth provider config
+message CreateOAuthProviderConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	user.service.v1.OAuthProvider provider = 2;
+	string client_id = 3;
+	string client_secret = 4;
+	map<string, string> config = 5;  // Provider-specific config (scopes, redirect_uri, etc.)
+	bool enabled = 6;
+	bool allow_registration = 7;
+	bool allow_linking = 8;
+	repeated int64 allowed_role_ids = 9;
+	int32 rate_limit_per_minute = 10;
+}
+
+message CreateOAuthProviderConfigResponse {
+	int64 config_id = 1;
+}
+
+// UpdateOAuthProviderConfigRequest - request to update OAuth provider config
+message UpdateOAuthProviderConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	int64 config_id = 2;
+	optional string client_id = 3;
+	optional string client_secret = 4;
+	map<string, string> config = 5;
+	optional bool allow_registration = 6;
+	optional bool allow_linking = 7;
+	repeated int64 allowed_role_ids = 8;
+	optional int32 rate_limit_per_minute = 9;
+}
+
+message UpdateOAuthProviderConfigResponse {}
+
+// DeleteOAuthProviderConfigRequest - request to delete OAuth provider config
+message DeleteOAuthProviderConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	int64 config_id = 2;
+}
+
+message DeleteOAuthProviderConfigResponse {}
+
+// SetOAuthProviderEnabledRequest - request to enable/disable OAuth provider
+message SetOAuthProviderEnabledRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	int64 config_id = 2;
+	bool enabled = 3;
+}
+
+message SetOAuthProviderEnabledResponse {}
+
+// ListOAuthProviderConfigsRequest - request to list OAuth provider configs
+message ListOAuthProviderConfigsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	optional user.service.v1.OAuthProvider provider = 2;  // Filter by provider
+	optional bool enabled = 3;  // Filter by enabled status
+}
+
+message ListOAuthProviderConfigsResponse {
+	repeated user.service.v1.OAuthProviderConfig configs = 1;
+}
+
+// GetOAuthProviderConfigRequest - request to get specific OAuth provider config
+message GetOAuthProviderConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	int64 config_id = 2;
+}
+
+message GetOAuthProviderConfigResponse {
+	user.service.v1.OAuthProviderConfig config = 1;
+}

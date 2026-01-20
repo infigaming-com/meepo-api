@@ -165,6 +165,29 @@ const (
 	ErrorReason_GENERATE_2FA_SECRET_FAILED  ErrorReason = 10208
 	ErrorReason_BIND_2FA_FAILED             ErrorReason = 10209
 	ErrorReason_INVALID_USER_ROLE_FOR_2FA   ErrorReason = 10210
+	// OAuth/Third-Party Auth Errors
+	ErrorReason_INVALID_OAUTH_PROVIDER          ErrorReason = 10300
+	ErrorReason_OAUTH_PROVIDER_DISABLED         ErrorReason = 10301
+	ErrorReason_OAUTH_LINKING_DISABLED          ErrorReason = 10302
+	ErrorReason_OAUTH_TOKEN_INVALID             ErrorReason = 10303
+	ErrorReason_OAUTH_ACCOUNT_ALREADY_BOUND     ErrorReason = 10304
+	ErrorReason_OAUTH_ACCOUNT_NOT_BOUND         ErrorReason = 10305
+	ErrorReason_CANNOT_UNBIND_LAST_LOGIN_METHOD ErrorReason = 10306
+	ErrorReason_OAUTH_REGISTRATION_DISABLED     ErrorReason = 10307
+	ErrorReason_OAUTH_LOGIN_NOT_ALLOWED         ErrorReason = 10308
+	ErrorReason_USER_BANNED_OR_DISABLED         ErrorReason = 10309
+	ErrorReason_OAUTH_CONFIG_NOT_FOUND          ErrorReason = 10310
+	ErrorReason_OAUTH_CONFIG_ALREADY_EXISTS     ErrorReason = 10311
+	ErrorReason_GET_OAUTH_CONFIG_FAILED         ErrorReason = 10312
+	ErrorReason_CREATE_OAUTH_CONFIG_FAILED      ErrorReason = 10313
+	ErrorReason_UPDATE_OAUTH_CONFIG_FAILED      ErrorReason = 10314
+	ErrorReason_DELETE_OAUTH_CONFIG_FAILED      ErrorReason = 10315
+	ErrorReason_ENCRYPTION_FAILED               ErrorReason = 10316
+	ErrorReason_INVALID_CONFIG                  ErrorReason = 10317
+	ErrorReason_UNAUTHORIZED                    ErrorReason = 10318
+	ErrorReason_GET_USER_CREDENTIAL_FAILED      ErrorReason = 10319
+	ErrorReason_ADD_USER_CREDENTIAL_FAILED      ErrorReason = 10320
+	ErrorReason_DELETE_USER_CREDENTIAL_FAILED   ErrorReason = 10321
 )
 
 // Enum value maps for ErrorReason.
@@ -308,6 +331,28 @@ var (
 		10208: "GENERATE_2FA_SECRET_FAILED",
 		10209: "BIND_2FA_FAILED",
 		10210: "INVALID_USER_ROLE_FOR_2FA",
+		10300: "INVALID_OAUTH_PROVIDER",
+		10301: "OAUTH_PROVIDER_DISABLED",
+		10302: "OAUTH_LINKING_DISABLED",
+		10303: "OAUTH_TOKEN_INVALID",
+		10304: "OAUTH_ACCOUNT_ALREADY_BOUND",
+		10305: "OAUTH_ACCOUNT_NOT_BOUND",
+		10306: "CANNOT_UNBIND_LAST_LOGIN_METHOD",
+		10307: "OAUTH_REGISTRATION_DISABLED",
+		10308: "OAUTH_LOGIN_NOT_ALLOWED",
+		10309: "USER_BANNED_OR_DISABLED",
+		10310: "OAUTH_CONFIG_NOT_FOUND",
+		10311: "OAUTH_CONFIG_ALREADY_EXISTS",
+		10312: "GET_OAUTH_CONFIG_FAILED",
+		10313: "CREATE_OAUTH_CONFIG_FAILED",
+		10314: "UPDATE_OAUTH_CONFIG_FAILED",
+		10315: "DELETE_OAUTH_CONFIG_FAILED",
+		10316: "ENCRYPTION_FAILED",
+		10317: "INVALID_CONFIG",
+		10318: "UNAUTHORIZED",
+		10319: "GET_USER_CREDENTIAL_FAILED",
+		10320: "ADD_USER_CREDENTIAL_FAILED",
+		10321: "DELETE_USER_CREDENTIAL_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -448,6 +493,28 @@ var (
 		"GENERATE_2FA_SECRET_FAILED":                     10208,
 		"BIND_2FA_FAILED":                                10209,
 		"INVALID_USER_ROLE_FOR_2FA":                      10210,
+		"INVALID_OAUTH_PROVIDER":                         10300,
+		"OAUTH_PROVIDER_DISABLED":                        10301,
+		"OAUTH_LINKING_DISABLED":                         10302,
+		"OAUTH_TOKEN_INVALID":                            10303,
+		"OAUTH_ACCOUNT_ALREADY_BOUND":                    10304,
+		"OAUTH_ACCOUNT_NOT_BOUND":                        10305,
+		"CANNOT_UNBIND_LAST_LOGIN_METHOD":                10306,
+		"OAUTH_REGISTRATION_DISABLED":                    10307,
+		"OAUTH_LOGIN_NOT_ALLOWED":                        10308,
+		"USER_BANNED_OR_DISABLED":                        10309,
+		"OAUTH_CONFIG_NOT_FOUND":                         10310,
+		"OAUTH_CONFIG_ALREADY_EXISTS":                    10311,
+		"GET_OAUTH_CONFIG_FAILED":                        10312,
+		"CREATE_OAUTH_CONFIG_FAILED":                     10313,
+		"UPDATE_OAUTH_CONFIG_FAILED":                     10314,
+		"DELETE_OAUTH_CONFIG_FAILED":                     10315,
+		"ENCRYPTION_FAILED":                              10316,
+		"INVALID_CONFIG":                                 10317,
+		"UNAUTHORIZED":                                   10318,
+		"GET_USER_CREDENTIAL_FAILED":                     10319,
+		"ADD_USER_CREDENTIAL_FAILED":                     10320,
+		"DELETE_USER_CREDENTIAL_FAILED":                  10321,
 	}
 )
 
@@ -482,7 +549,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x9f$\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x8f*\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -621,7 +688,29 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10MFA_RATE_LIMITED\x10\xdfO\x1a\x04\xa8E\xad\x03\x12\x1f\n" +
 	"\x1aGENERATE_2FA_SECRET_FAILED\x10\xe0O\x12\x14\n" +
 	"\x0fBIND_2FA_FAILED\x10\xe1O\x12$\n" +
-	"\x19INVALID_USER_ROLE_FOR_2FA\x10\xe2O\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x19INVALID_USER_ROLE_FOR_2FA\x10\xe2O\x1a\x04\xa8E\x90\x03\x12!\n" +
+	"\x16INVALID_OAUTH_PROVIDER\x10\xbcP\x1a\x04\xa8E\x90\x03\x12\"\n" +
+	"\x17OAUTH_PROVIDER_DISABLED\x10\xbdP\x1a\x04\xa8E\x93\x03\x12!\n" +
+	"\x16OAUTH_LINKING_DISABLED\x10\xbeP\x1a\x04\xa8E\x93\x03\x12\x1e\n" +
+	"\x13OAUTH_TOKEN_INVALID\x10\xbfP\x1a\x04\xa8E\x91\x03\x12&\n" +
+	"\x1bOAUTH_ACCOUNT_ALREADY_BOUND\x10\xc0P\x1a\x04\xa8E\x99\x03\x12\"\n" +
+	"\x17OAUTH_ACCOUNT_NOT_BOUND\x10\xc1P\x1a\x04\xa8E\x94\x03\x12*\n" +
+	"\x1fCANNOT_UNBIND_LAST_LOGIN_METHOD\x10\xc2P\x1a\x04\xa8E\x90\x03\x12&\n" +
+	"\x1bOAUTH_REGISTRATION_DISABLED\x10\xc3P\x1a\x04\xa8E\x93\x03\x12\"\n" +
+	"\x17OAUTH_LOGIN_NOT_ALLOWED\x10\xc4P\x1a\x04\xa8E\x93\x03\x12\"\n" +
+	"\x17USER_BANNED_OR_DISABLED\x10\xc5P\x1a\x04\xa8E\x93\x03\x12!\n" +
+	"\x16OAUTH_CONFIG_NOT_FOUND\x10\xc6P\x1a\x04\xa8E\x94\x03\x12&\n" +
+	"\x1bOAUTH_CONFIG_ALREADY_EXISTS\x10\xc7P\x1a\x04\xa8E\x99\x03\x12\x1c\n" +
+	"\x17GET_OAUTH_CONFIG_FAILED\x10\xc8P\x12\x1f\n" +
+	"\x1aCREATE_OAUTH_CONFIG_FAILED\x10\xc9P\x12\x1f\n" +
+	"\x1aUPDATE_OAUTH_CONFIG_FAILED\x10\xcaP\x12\x1f\n" +
+	"\x1aDELETE_OAUTH_CONFIG_FAILED\x10\xcbP\x12\x16\n" +
+	"\x11ENCRYPTION_FAILED\x10\xccP\x12\x19\n" +
+	"\x0eINVALID_CONFIG\x10\xcdP\x1a\x04\xa8E\x90\x03\x12\x17\n" +
+	"\fUNAUTHORIZED\x10\xceP\x1a\x04\xa8E\x91\x03\x12\x1f\n" +
+	"\x1aGET_USER_CREDENTIAL_FAILED\x10\xcfP\x12\x1f\n" +
+	"\x1aADD_USER_CREDENTIAL_FAILED\x10\xd0P\x12\"\n" +
+	"\x1dDELETE_USER_CREDENTIAL_FAILED\x10\xd1P\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
