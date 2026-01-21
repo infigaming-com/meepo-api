@@ -94,6 +94,7 @@ const (
 	Wallet_CreditFreespinWin_FullMethodName                   = "/api.wallet.service.v1.Wallet/CreditFreespinWin"
 	Wallet_CreditFreeBetWin_FullMethodName                    = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
 	Wallet_GetOperatorUserFinancialSummary_FullMethodName     = "/api.wallet.service.v1.Wallet/GetOperatorUserFinancialSummary"
+	Wallet_GetWalletConfig_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -230,6 +231,8 @@ type WalletClient interface {
 	CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWinRequest, opts ...grpc.CallOption) (*CreditFreeBetWinResponse, error)
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
+	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error)
 }
 
 type walletClient struct {
@@ -990,6 +993,16 @@ func (c *walletClient) GetOperatorUserFinancialSummary(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *walletClient) GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWalletConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetWalletConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1124,6 +1137,8 @@ type WalletServer interface {
 	CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error)
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
+	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1358,6 +1373,9 @@ func (UnimplementedWalletServer) CreditFreeBetWin(context.Context, *CreditFreeBe
 }
 func (UnimplementedWalletServer) GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorUserFinancialSummary not implemented")
+}
+func (UnimplementedWalletServer) GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWalletConfig not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2730,6 +2748,24 @@ func _Wallet_GetOperatorUserFinancialSummary_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetWalletConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWalletConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetWalletConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetWalletConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetWalletConfig(ctx, req.(*GetWalletConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3036,6 +3072,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorUserFinancialSummary",
 			Handler:    _Wallet_GetOperatorUserFinancialSummary_Handler,
+		},
+		{
+			MethodName: "GetWalletConfig",
+			Handler:    _Wallet_GetWalletConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

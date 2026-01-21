@@ -29,6 +29,7 @@ const OperationWalletGetPromoCodeInfo = "/api.wallet.service.v1.Wallet/GetPromoC
 const OperationWalletGetUserBalanceDetails = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
 const OperationWalletGetUserDepositRewardSequence = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
+const OperationWalletGetWalletConfig = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 const OperationWalletListResponsibleGamblingConfigs = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
 
 type WalletHTTPServer interface {
@@ -50,6 +51,8 @@ type WalletHTTPServer interface {
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
 	// GetUserDepositRewardSequence GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(context.Context, *GetUserDepositRewardSequenceRequest) (*GetUserDepositRewardSequenceResponse, error)
+	// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
 }
@@ -67,6 +70,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/responsible-gambling/config/add", _Wallet_AddResponsibleGamblingConfig1_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/config/delete", _Wallet_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/configs/list", _Wallet_ListResponsibleGamblingConfigs0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/config/get", _Wallet_GetWalletConfig0_HTTP_Handler(srv))
 }
 
 func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
@@ -311,6 +315,28 @@ func _Wallet_ListResponsibleGamblingConfigs0_HTTP_Handler(srv WalletHTTPServer) 
 	}
 }
 
+func _Wallet_GetWalletConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetWalletConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetWalletConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetWalletConfig(ctx, req.(*GetWalletConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetWalletConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type WalletHTTPClient interface {
 	// AddResponsibleGamblingConfig AddResponsibleGamblingConfig adds gambling config for a user's currency
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
@@ -330,6 +356,8 @@ type WalletHTTPClient interface {
 	GetUserBalances(ctx context.Context, req *GetUserBalancesRequest, opts ...http.CallOption) (rsp *GetUserBalancesResponse, err error)
 	// GetUserDepositRewardSequence GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
 	GetUserDepositRewardSequence(ctx context.Context, req *GetUserDepositRewardSequenceRequest, opts ...http.CallOption) (rsp *GetUserDepositRewardSequenceResponse, err error)
+	// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	GetWalletConfig(ctx context.Context, req *GetWalletConfigRequest, opts ...http.CallOption) (rsp *GetWalletConfigResponse, err error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
 }
@@ -472,6 +500,20 @@ func (c *WalletHTTPClientImpl) GetUserDepositRewardSequence(ctx context.Context,
 	pattern := "/v1/wallet/deposit-reward/user-sequence"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetUserDepositRewardSequence))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetWalletConfig GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+func (c *WalletHTTPClientImpl) GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...http.CallOption) (*GetWalletConfigResponse, error) {
+	var out GetWalletConfigResponse
+	pattern := "/v1/wallet/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetWalletConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

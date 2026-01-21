@@ -273,6 +273,14 @@ service Wallet {
 
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	rpc GetOperatorUserFinancialSummary(GetOperatorUserFinancialSummaryRequest) returns (GetOperatorUserFinancialSummaryResponse) {}
+
+	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+	rpc GetWalletConfig(GetWalletConfigRequest) returns (GetWalletConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/config/get"
+			body: "*"
+		};
+	}
 }
 
 message GetUserBalancesRequest {
@@ -1335,6 +1343,13 @@ message WalletConfig {
 	optional string cash_ratio = 2;
 	optional string bonus_ratio = 3;
 	optional bool clear_bonus_on_withdrawal = 4;
+}
+
+message GetWalletConfigRequest {}
+
+message GetWalletConfigResponse {
+	bool clear_bonus_on_withdrawal = 1;
+	// Future fields can be added here
 }
 
 message OperatorCurrencyConfig {

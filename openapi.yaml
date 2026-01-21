@@ -7774,6 +7774,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.BonusTransferResponse'
+    /v1/wallet/config/get:
+        post:
+            tags:
+                - Wallet
+            description: GetWalletConfig returns the wallet configuration for the current operator (user-facing)
+            operationId: Wallet_GetWalletConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetWalletConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetWalletConfigResponse'
     /v1/wallet/currencies/get:
         post:
             tags:
@@ -23130,6 +23149,14 @@ components:
                     format: int32
                 currentRewardSequence:
                     $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.wallet.service.v1.GetWalletConfigRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.GetWalletConfigResponse:
+            type: object
+            properties:
+                clearBonusOnWithdrawal:
+                    type: boolean
         api.wallet.service.v1.GetWalletsResponse:
             type: object
             properties:
