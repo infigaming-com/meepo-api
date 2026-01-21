@@ -1,0 +1,241 @@
+syntax = "proto3";
+
+package api.push.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/push/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.push.service.v1";
+
+// PushNotification service for channel/rule management and notification delivery
+service PushNotification {
+  // ============ Channel Management ============
+  rpc CreateNotificationChannel(CreateNotificationChannelRequest) returns (CreateNotificationChannelResponse) {}
+  rpc ListNotificationChannels(ListNotificationChannelsRequest) returns (ListNotificationChannelsResponse) {}
+  rpc GetNotificationChannel(GetNotificationChannelRequest) returns (GetNotificationChannelResponse) {}
+  rpc UpdateNotificationChannel(UpdateNotificationChannelRequest) returns (UpdateNotificationChannelResponse) {}
+  rpc DeleteNotificationChannel(DeleteNotificationChannelRequest) returns (DeleteNotificationChannelResponse) {}
+  rpc TestNotificationChannel(TestNotificationChannelRequest) returns (TestNotificationChannelResponse) {}
+
+  // ============ Rule Management ============
+  rpc CreateNotificationRule(CreateNotificationRuleRequest) returns (CreateNotificationRuleResponse) {}
+  rpc ListNotificationRules(ListNotificationRulesRequest) returns (ListNotificationRulesResponse) {}
+  rpc GetNotificationRule(GetNotificationRuleRequest) returns (GetNotificationRuleResponse) {}
+  rpc UpdateNotificationRule(UpdateNotificationRuleRequest) returns (UpdateNotificationRuleResponse) {}
+  rpc DeleteNotificationRule(DeleteNotificationRuleRequest) returns (DeleteNotificationRuleResponse) {}
+
+  // ============ Notification Delivery ============
+  rpc SendToChannels(SendToChannelsRequest) returns (SendToChannelsResponse) {}
+}
+
+// ============ Enums ============
+
+enum ChannelType {
+  CHANNEL_TYPE_UNSPECIFIED = 0;
+  CHANNEL_TYPE_TELEGRAM = 1;
+  CHANNEL_TYPE_SLACK = 2;
+}
+
+enum RuleType {
+  RULE_TYPE_UNSPECIFIED = 0;
+  RULE_TYPE_GENERIC = 1;
+  RULE_TYPE_CURRENCY_THRESHOLD = 2;
+}
+
+// ============ Channel Messages ============
+
+message TelegramChannelConfig {
+  string bot_token = 1;
+  string bot_token_masked = 2;  // For response only
+  string chat_id = 3;
+}
+
+message SlackChannelConfig {
+  string webhook_url = 1;
+  string webhook_url_masked = 2;  // For response only
+}
+
+message ChannelConfig {
+  TelegramChannelConfig telegram = 1;
+  SlackChannelConfig slack = 2;
+}
+
+message NotificationChannel {
+  int64 id = 1;
+  string name = 2;
+  ChannelType channel_type = 3;
+  ChannelConfig config = 4;
+  bool enabled = 5;
+  int64 created_at = 6;
+  int64 updated_at = 7;
+  bool is_inherited = 8;  // True if from system/parent config
+}
+
+// ============ Rule Messages ============
+
+message CurrencyCondition {
+  string currency = 1;      // e.g., "USD", "BTC", "*" (wildcard)
+  string min_amount = 2;    // Decimal string
+  string min_odds = 3;      // For large_win only
+}
+
+message NotificationRule {
+  int64 id = 1;
+  string name = 2;
+  string message_type = 3;  // "withdraw_notification", "large_deposit", etc.
+  RuleType rule_type = 4;
+  repeated int64 channel_ids = 5;
+  repeated NotificationChannel channels = 6;  // Populated in list response
+  repeated CurrencyCondition currency_conditions = 7;
+  bool enabled = 8;
+  int64 created_at = 9;
+  int64 updated_at = 10;
+  bool is_inherited = 11;
+}
+
+// ============ Channel CRUD Requests ============
+
+message CreateNotificationChannelRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string name = 2;
+  ChannelType channel_type = 3;
+  ChannelConfig config = 4;
+  bool enabled = 5;
+}
+
+message CreateNotificationChannelResponse {
+  NotificationChannel channel = 1;
+}
+
+message ListNotificationChannelsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional ChannelType channel_type = 2;
+  optional bool enabled = 3;
+  bool include_inherited = 4;  // Include system/parent channels
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+message ListNotificationChannelsResponse {
+  repeated NotificationChannel channels = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetNotificationChannelRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 channel_id = 2;
+}
+
+message GetNotificationChannelResponse {
+  NotificationChannel channel = 1;
+}
+
+message UpdateNotificationChannelRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 channel_id = 2;
+  optional string name = 3;
+  optional ChannelConfig config = 4;
+  optional bool enabled = 5;
+}
+
+message UpdateNotificationChannelResponse {}
+
+message DeleteNotificationChannelRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 channel_id = 2;
+}
+
+message DeleteNotificationChannelResponse {}
+
+message TestNotificationChannelRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 channel_id = 2;
+  string test_message = 3;
+}
+
+message TestNotificationChannelResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+// ============ Rule CRUD Requests ============
+
+message CreateNotificationRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string name = 2;
+  string message_type = 3;
+  RuleType rule_type = 4;
+  repeated int64 channel_ids = 5;
+  repeated CurrencyCondition currency_conditions = 6;
+  bool enabled = 7;
+}
+
+message CreateNotificationRuleResponse {
+  NotificationRule rule = 1;
+}
+
+message ListNotificationRulesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional string message_type = 2;
+  optional bool enabled = 3;
+  bool include_inherited = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+message ListNotificationRulesResponse {
+  repeated NotificationRule rules = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetNotificationRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message GetNotificationRuleResponse {
+  NotificationRule rule = 1;
+}
+
+message UpdateNotificationRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+  optional string name = 3;
+  repeated int64 channel_ids = 4;
+  repeated CurrencyCondition currency_conditions = 5;
+  optional bool enabled = 6;
+}
+
+message UpdateNotificationRuleResponse {}
+
+message DeleteNotificationRuleRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 rule_id = 2;
+}
+
+message DeleteNotificationRuleResponse {}
+
+// ============ Notification Delivery ============
+
+message SendToChannelsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  repeated int64 channel_ids = 2;
+  string message = 3;
+}
+
+message ChannelDeliveryResult {
+  int64 channel_id = 1;
+  string channel_name = 2;
+  ChannelType channel_type = 3;
+  bool success = 4;
+  string error_message = 5;
+}
+
+message SendToChannelsResponse {
+  repeated ChannelDeliveryResult delivery_results = 1;
+}

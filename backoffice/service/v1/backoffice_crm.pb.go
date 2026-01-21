@@ -744,6 +744,165 @@ func (x *GetSegmentFieldSchemaRequest) GetType() v1.SegmentType {
 	return v1.SegmentType(0)
 }
 
+// RepairSegment
+type RepairSegmentRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	TriggerCalculation    bool                    `protobuf:"varint,3,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *RepairSegmentRequest) Reset() {
+	*x = RepairSegmentRequest{}
+	mi := &file_backoffice_service_v1_backoffice_crm_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepairSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepairSegmentRequest) ProtoMessage() {}
+
+func (x *RepairSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_crm_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepairSegmentRequest.ProtoReflect.Descriptor instead.
+func (*RepairSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_crm_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RepairSegmentRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *RepairSegmentRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RepairSegmentRequest) GetTriggerCalculation() bool {
+	if x != nil {
+		return x.TriggerCalculation
+	}
+	return false
+}
+
+// RepairAllSegments
+type RepairAllSegmentsRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	TriggerCalculation    bool                    `protobuf:"varint,2,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *RepairAllSegmentsRequest) Reset() {
+	*x = RepairAllSegmentsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_crm_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepairAllSegmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepairAllSegmentsRequest) ProtoMessage() {}
+
+func (x *RepairAllSegmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_crm_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepairAllSegmentsRequest.ProtoReflect.Descriptor instead.
+func (*RepairAllSegmentsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_crm_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *RepairAllSegmentsRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *RepairAllSegmentsRequest) GetTriggerCalculation() bool {
+	if x != nil {
+		return x.TriggerCalculation
+	}
+	return false
+}
+
+// GetSegmentsWithMissingFields
+type GetSegmentsWithMissingFieldsRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *GetSegmentsWithMissingFieldsRequest) Reset() {
+	*x = GetSegmentsWithMissingFieldsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_crm_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSegmentsWithMissingFieldsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSegmentsWithMissingFieldsRequest) ProtoMessage() {}
+
+func (x *GetSegmentsWithMissingFieldsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_crm_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSegmentsWithMissingFieldsRequest.ProtoReflect.Descriptor instead.
+func (*GetSegmentsWithMissingFieldsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_crm_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetSegmentsWithMissingFieldsRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
 var File_backoffice_service_v1_backoffice_crm_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_crm_proto_rawDesc = "" +
@@ -810,7 +969,16 @@ const file_backoffice_service_v1_backoffice_crm_proto_rawDesc = "" +
 	"\n" +
 	"segment_id\x18\x02 \x01(\x03R\tsegmentId\"S\n" +
 	"\x1cGetSegmentFieldSchemaRequest\x123\n" +
-	"\x04type\x18\x01 \x01(\x0e2\x1f.api.crm.service.v1.SegmentTypeR\x04type2\x8a\x0e\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x1f.api.crm.service.v1.SegmentTypeR\x04type\"\xac\x01\n" +
+	"\x14RepairSegmentRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\x12/\n" +
+	"\x13trigger_calculation\x18\x03 \x01(\bR\x12triggerCalculation\"\xa0\x01\n" +
+	"\x18RepairAllSegmentsRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12/\n" +
+	"\x13trigger_calculation\x18\x02 \x01(\bR\x12triggerCalculation\"z\n" +
+	"#GetSegmentsWithMissingFieldsRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xa3\x12\n" +
 	"\rBackofficeCrm\x12\x99\x01\n" +
 	"\rCreateSegment\x12/.api.backoffice.service.v1.CreateSegmentRequest\x1a).api.crm.service.v1.CreateSegmentResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/crm/segment/create\x12\x99\x01\n" +
 	"\rUpdateSegment\x12/.api.backoffice.service.v1.UpdateSegmentRequest\x1a).api.crm.service.v1.UpdateSegmentResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/crm/segment/update\x12\x8d\x01\n" +
@@ -823,7 +991,10 @@ const file_backoffice_service_v1_backoffice_crm_proto_rawDesc = "" +
 	"\x0fGetUserSegments\x121.api.backoffice.service.v1.GetUserSegmentsRequest\x1a+.api.crm.service.v1.GetUserSegmentsResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/crm/user/segments\x12\xae\x01\n" +
 	"\x12SetSegmentOverride\x124.api.backoffice.service.v1.SetSegmentOverrideRequest\x1a..api.crm.service.v1.SetSegmentOverrideResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/crm/segment/override/set\x12\xae\x01\n" +
 	"\x12GetSegmentOverride\x124.api.backoffice.service.v1.GetSegmentOverrideRequest\x1a..api.crm.service.v1.GetSegmentOverrideResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/crm/segment/override/get\x12\xb1\x01\n" +
-	"\x15GetSegmentFieldSchema\x127.api.backoffice.service.v1.GetSegmentFieldSchemaRequest\x1a1.api.crm.service.v1.GetSegmentFieldSchemaResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/crm/segment/schemaB[\n" +
+	"\x15GetSegmentFieldSchema\x127.api.backoffice.service.v1.GetSegmentFieldSchemaRequest\x1a1.api.crm.service.v1.GetSegmentFieldSchemaResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/crm/segment/schema\x12\x99\x01\n" +
+	"\rRepairSegment\x12/.api.backoffice.service.v1.RepairSegmentRequest\x1a).api.crm.service.v1.RepairSegmentResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/crm/segment/repair\x12\xa9\x01\n" +
+	"\x11RepairAllSegments\x123.api.backoffice.service.v1.RepairAllSegmentsRequest\x1a-.api.crm.service.v1.RepairAllSegmentsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/crm/segment/repair-all\x12\xce\x01\n" +
+	"\x1cGetSegmentsWithMissingFields\x12>.api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest\x1a8.api.crm.service.v1.GetSegmentsWithMissingFieldsResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/crm/segment/missing-fieldsB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -838,77 +1009,92 @@ func file_backoffice_service_v1_backoffice_crm_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_crm_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_crm_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_backoffice_service_v1_backoffice_crm_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_backoffice_service_v1_backoffice_crm_proto_goTypes = []any{
-	(*CreateSegmentRequest)(nil),             // 0: api.backoffice.service.v1.CreateSegmentRequest
-	(*UpdateSegmentRequest)(nil),             // 1: api.backoffice.service.v1.UpdateSegmentRequest
-	(*GetSegmentRequest)(nil),                // 2: api.backoffice.service.v1.GetSegmentRequest
-	(*ListSegmentsRequest)(nil),              // 3: api.backoffice.service.v1.ListSegmentsRequest
-	(*DeleteSegmentRequest)(nil),             // 4: api.backoffice.service.v1.DeleteSegmentRequest
-	(*CalculateSegmentRequest)(nil),          // 5: api.backoffice.service.v1.CalculateSegmentRequest
-	(*GetSegmentUsersRequest)(nil),           // 6: api.backoffice.service.v1.GetSegmentUsersRequest
-	(*GetUserSegmentsRequest)(nil),           // 7: api.backoffice.service.v1.GetUserSegmentsRequest
-	(*SetSegmentOverrideRequest)(nil),        // 8: api.backoffice.service.v1.SetSegmentOverrideRequest
-	(*GetSegmentOverrideRequest)(nil),        // 9: api.backoffice.service.v1.GetSegmentOverrideRequest
-	(*GetSegmentFieldSchemaRequest)(nil),     // 10: api.backoffice.service.v1.GetSegmentFieldSchemaRequest
-	(*common.OperatorContext)(nil),           // 11: api.common.OperatorContext
-	(v1.SegmentType)(0),                      // 12: api.crm.service.v1.SegmentType
-	(*structpb.Struct)(nil),                  // 13: google.protobuf.Struct
-	(*v1.CreateSegmentResponse)(nil),         // 14: api.crm.service.v1.CreateSegmentResponse
-	(*v1.UpdateSegmentResponse)(nil),         // 15: api.crm.service.v1.UpdateSegmentResponse
-	(*v1.GetSegmentResponse)(nil),            // 16: api.crm.service.v1.GetSegmentResponse
-	(*v1.ListSegmentsResponse)(nil),          // 17: api.crm.service.v1.ListSegmentsResponse
-	(*v1.DeleteSegmentResponse)(nil),         // 18: api.crm.service.v1.DeleteSegmentResponse
-	(*v1.CalculateSegmentResponse)(nil),      // 19: api.crm.service.v1.CalculateSegmentResponse
-	(*v1.GetSegmentUsersResponse)(nil),       // 20: api.crm.service.v1.GetSegmentUsersResponse
-	(*v1.GetUserSegmentsResponse)(nil),       // 21: api.crm.service.v1.GetUserSegmentsResponse
-	(*v1.SetSegmentOverrideResponse)(nil),    // 22: api.crm.service.v1.SetSegmentOverrideResponse
-	(*v1.GetSegmentOverrideResponse)(nil),    // 23: api.crm.service.v1.GetSegmentOverrideResponse
-	(*v1.GetSegmentFieldSchemaResponse)(nil), // 24: api.crm.service.v1.GetSegmentFieldSchemaResponse
+	(*CreateSegmentRequest)(nil),                    // 0: api.backoffice.service.v1.CreateSegmentRequest
+	(*UpdateSegmentRequest)(nil),                    // 1: api.backoffice.service.v1.UpdateSegmentRequest
+	(*GetSegmentRequest)(nil),                       // 2: api.backoffice.service.v1.GetSegmentRequest
+	(*ListSegmentsRequest)(nil),                     // 3: api.backoffice.service.v1.ListSegmentsRequest
+	(*DeleteSegmentRequest)(nil),                    // 4: api.backoffice.service.v1.DeleteSegmentRequest
+	(*CalculateSegmentRequest)(nil),                 // 5: api.backoffice.service.v1.CalculateSegmentRequest
+	(*GetSegmentUsersRequest)(nil),                  // 6: api.backoffice.service.v1.GetSegmentUsersRequest
+	(*GetUserSegmentsRequest)(nil),                  // 7: api.backoffice.service.v1.GetUserSegmentsRequest
+	(*SetSegmentOverrideRequest)(nil),               // 8: api.backoffice.service.v1.SetSegmentOverrideRequest
+	(*GetSegmentOverrideRequest)(nil),               // 9: api.backoffice.service.v1.GetSegmentOverrideRequest
+	(*GetSegmentFieldSchemaRequest)(nil),            // 10: api.backoffice.service.v1.GetSegmentFieldSchemaRequest
+	(*RepairSegmentRequest)(nil),                    // 11: api.backoffice.service.v1.RepairSegmentRequest
+	(*RepairAllSegmentsRequest)(nil),                // 12: api.backoffice.service.v1.RepairAllSegmentsRequest
+	(*GetSegmentsWithMissingFieldsRequest)(nil),     // 13: api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest
+	(*common.OperatorContext)(nil),                  // 14: api.common.OperatorContext
+	(v1.SegmentType)(0),                             // 15: api.crm.service.v1.SegmentType
+	(*structpb.Struct)(nil),                         // 16: google.protobuf.Struct
+	(*v1.CreateSegmentResponse)(nil),                // 17: api.crm.service.v1.CreateSegmentResponse
+	(*v1.UpdateSegmentResponse)(nil),                // 18: api.crm.service.v1.UpdateSegmentResponse
+	(*v1.GetSegmentResponse)(nil),                   // 19: api.crm.service.v1.GetSegmentResponse
+	(*v1.ListSegmentsResponse)(nil),                 // 20: api.crm.service.v1.ListSegmentsResponse
+	(*v1.DeleteSegmentResponse)(nil),                // 21: api.crm.service.v1.DeleteSegmentResponse
+	(*v1.CalculateSegmentResponse)(nil),             // 22: api.crm.service.v1.CalculateSegmentResponse
+	(*v1.GetSegmentUsersResponse)(nil),              // 23: api.crm.service.v1.GetSegmentUsersResponse
+	(*v1.GetUserSegmentsResponse)(nil),              // 24: api.crm.service.v1.GetUserSegmentsResponse
+	(*v1.SetSegmentOverrideResponse)(nil),           // 25: api.crm.service.v1.SetSegmentOverrideResponse
+	(*v1.GetSegmentOverrideResponse)(nil),           // 26: api.crm.service.v1.GetSegmentOverrideResponse
+	(*v1.GetSegmentFieldSchemaResponse)(nil),        // 27: api.crm.service.v1.GetSegmentFieldSchemaResponse
+	(*v1.RepairSegmentResponse)(nil),                // 28: api.crm.service.v1.RepairSegmentResponse
+	(*v1.RepairAllSegmentsResponse)(nil),            // 29: api.crm.service.v1.RepairAllSegmentsResponse
+	(*v1.GetSegmentsWithMissingFieldsResponse)(nil), // 30: api.crm.service.v1.GetSegmentsWithMissingFieldsResponse
 }
 var file_backoffice_service_v1_backoffice_crm_proto_depIdxs = []int32{
-	11, // 0: api.backoffice.service.v1.CreateSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 1: api.backoffice.service.v1.CreateSegmentRequest.type:type_name -> api.crm.service.v1.SegmentType
-	13, // 2: api.backoffice.service.v1.CreateSegmentRequest.rules:type_name -> google.protobuf.Struct
-	11, // 3: api.backoffice.service.v1.UpdateSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
-	13, // 4: api.backoffice.service.v1.UpdateSegmentRequest.rules:type_name -> google.protobuf.Struct
-	11, // 5: api.backoffice.service.v1.GetSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 6: api.backoffice.service.v1.ListSegmentsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 7: api.backoffice.service.v1.ListSegmentsRequest.type:type_name -> api.crm.service.v1.SegmentType
-	11, // 8: api.backoffice.service.v1.DeleteSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 9: api.backoffice.service.v1.CalculateSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 10: api.backoffice.service.v1.GetSegmentUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 11: api.backoffice.service.v1.GetUserSegmentsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 12: api.backoffice.service.v1.SetSegmentOverrideRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 13: api.backoffice.service.v1.GetSegmentOverrideRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 14: api.backoffice.service.v1.GetSegmentFieldSchemaRequest.type:type_name -> api.crm.service.v1.SegmentType
-	0,  // 15: api.backoffice.service.v1.BackofficeCrm.CreateSegment:input_type -> api.backoffice.service.v1.CreateSegmentRequest
-	1,  // 16: api.backoffice.service.v1.BackofficeCrm.UpdateSegment:input_type -> api.backoffice.service.v1.UpdateSegmentRequest
-	2,  // 17: api.backoffice.service.v1.BackofficeCrm.GetSegment:input_type -> api.backoffice.service.v1.GetSegmentRequest
-	3,  // 18: api.backoffice.service.v1.BackofficeCrm.ListSegments:input_type -> api.backoffice.service.v1.ListSegmentsRequest
-	4,  // 19: api.backoffice.service.v1.BackofficeCrm.DeleteSegment:input_type -> api.backoffice.service.v1.DeleteSegmentRequest
-	5,  // 20: api.backoffice.service.v1.BackofficeCrm.CalculateSegment:input_type -> api.backoffice.service.v1.CalculateSegmentRequest
-	6,  // 21: api.backoffice.service.v1.BackofficeCrm.GetSegmentUsers:input_type -> api.backoffice.service.v1.GetSegmentUsersRequest
-	7,  // 22: api.backoffice.service.v1.BackofficeCrm.GetUserSegments:input_type -> api.backoffice.service.v1.GetUserSegmentsRequest
-	8,  // 23: api.backoffice.service.v1.BackofficeCrm.SetSegmentOverride:input_type -> api.backoffice.service.v1.SetSegmentOverrideRequest
-	9,  // 24: api.backoffice.service.v1.BackofficeCrm.GetSegmentOverride:input_type -> api.backoffice.service.v1.GetSegmentOverrideRequest
-	10, // 25: api.backoffice.service.v1.BackofficeCrm.GetSegmentFieldSchema:input_type -> api.backoffice.service.v1.GetSegmentFieldSchemaRequest
-	14, // 26: api.backoffice.service.v1.BackofficeCrm.CreateSegment:output_type -> api.crm.service.v1.CreateSegmentResponse
-	15, // 27: api.backoffice.service.v1.BackofficeCrm.UpdateSegment:output_type -> api.crm.service.v1.UpdateSegmentResponse
-	16, // 28: api.backoffice.service.v1.BackofficeCrm.GetSegment:output_type -> api.crm.service.v1.GetSegmentResponse
-	17, // 29: api.backoffice.service.v1.BackofficeCrm.ListSegments:output_type -> api.crm.service.v1.ListSegmentsResponse
-	18, // 30: api.backoffice.service.v1.BackofficeCrm.DeleteSegment:output_type -> api.crm.service.v1.DeleteSegmentResponse
-	19, // 31: api.backoffice.service.v1.BackofficeCrm.CalculateSegment:output_type -> api.crm.service.v1.CalculateSegmentResponse
-	20, // 32: api.backoffice.service.v1.BackofficeCrm.GetSegmentUsers:output_type -> api.crm.service.v1.GetSegmentUsersResponse
-	21, // 33: api.backoffice.service.v1.BackofficeCrm.GetUserSegments:output_type -> api.crm.service.v1.GetUserSegmentsResponse
-	22, // 34: api.backoffice.service.v1.BackofficeCrm.SetSegmentOverride:output_type -> api.crm.service.v1.SetSegmentOverrideResponse
-	23, // 35: api.backoffice.service.v1.BackofficeCrm.GetSegmentOverride:output_type -> api.crm.service.v1.GetSegmentOverrideResponse
-	24, // 36: api.backoffice.service.v1.BackofficeCrm.GetSegmentFieldSchema:output_type -> api.crm.service.v1.GetSegmentFieldSchemaResponse
-	26, // [26:37] is the sub-list for method output_type
-	15, // [15:26] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	14, // 0: api.backoffice.service.v1.CreateSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 1: api.backoffice.service.v1.CreateSegmentRequest.type:type_name -> api.crm.service.v1.SegmentType
+	16, // 2: api.backoffice.service.v1.CreateSegmentRequest.rules:type_name -> google.protobuf.Struct
+	14, // 3: api.backoffice.service.v1.UpdateSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 4: api.backoffice.service.v1.UpdateSegmentRequest.rules:type_name -> google.protobuf.Struct
+	14, // 5: api.backoffice.service.v1.GetSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 6: api.backoffice.service.v1.ListSegmentsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 7: api.backoffice.service.v1.ListSegmentsRequest.type:type_name -> api.crm.service.v1.SegmentType
+	14, // 8: api.backoffice.service.v1.DeleteSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 9: api.backoffice.service.v1.CalculateSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 10: api.backoffice.service.v1.GetSegmentUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 11: api.backoffice.service.v1.GetUserSegmentsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 12: api.backoffice.service.v1.SetSegmentOverrideRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 13: api.backoffice.service.v1.GetSegmentOverrideRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 14: api.backoffice.service.v1.GetSegmentFieldSchemaRequest.type:type_name -> api.crm.service.v1.SegmentType
+	14, // 15: api.backoffice.service.v1.RepairSegmentRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 16: api.backoffice.service.v1.RepairAllSegmentsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 17: api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 18: api.backoffice.service.v1.BackofficeCrm.CreateSegment:input_type -> api.backoffice.service.v1.CreateSegmentRequest
+	1,  // 19: api.backoffice.service.v1.BackofficeCrm.UpdateSegment:input_type -> api.backoffice.service.v1.UpdateSegmentRequest
+	2,  // 20: api.backoffice.service.v1.BackofficeCrm.GetSegment:input_type -> api.backoffice.service.v1.GetSegmentRequest
+	3,  // 21: api.backoffice.service.v1.BackofficeCrm.ListSegments:input_type -> api.backoffice.service.v1.ListSegmentsRequest
+	4,  // 22: api.backoffice.service.v1.BackofficeCrm.DeleteSegment:input_type -> api.backoffice.service.v1.DeleteSegmentRequest
+	5,  // 23: api.backoffice.service.v1.BackofficeCrm.CalculateSegment:input_type -> api.backoffice.service.v1.CalculateSegmentRequest
+	6,  // 24: api.backoffice.service.v1.BackofficeCrm.GetSegmentUsers:input_type -> api.backoffice.service.v1.GetSegmentUsersRequest
+	7,  // 25: api.backoffice.service.v1.BackofficeCrm.GetUserSegments:input_type -> api.backoffice.service.v1.GetUserSegmentsRequest
+	8,  // 26: api.backoffice.service.v1.BackofficeCrm.SetSegmentOverride:input_type -> api.backoffice.service.v1.SetSegmentOverrideRequest
+	9,  // 27: api.backoffice.service.v1.BackofficeCrm.GetSegmentOverride:input_type -> api.backoffice.service.v1.GetSegmentOverrideRequest
+	10, // 28: api.backoffice.service.v1.BackofficeCrm.GetSegmentFieldSchema:input_type -> api.backoffice.service.v1.GetSegmentFieldSchemaRequest
+	11, // 29: api.backoffice.service.v1.BackofficeCrm.RepairSegment:input_type -> api.backoffice.service.v1.RepairSegmentRequest
+	12, // 30: api.backoffice.service.v1.BackofficeCrm.RepairAllSegments:input_type -> api.backoffice.service.v1.RepairAllSegmentsRequest
+	13, // 31: api.backoffice.service.v1.BackofficeCrm.GetSegmentsWithMissingFields:input_type -> api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest
+	17, // 32: api.backoffice.service.v1.BackofficeCrm.CreateSegment:output_type -> api.crm.service.v1.CreateSegmentResponse
+	18, // 33: api.backoffice.service.v1.BackofficeCrm.UpdateSegment:output_type -> api.crm.service.v1.UpdateSegmentResponse
+	19, // 34: api.backoffice.service.v1.BackofficeCrm.GetSegment:output_type -> api.crm.service.v1.GetSegmentResponse
+	20, // 35: api.backoffice.service.v1.BackofficeCrm.ListSegments:output_type -> api.crm.service.v1.ListSegmentsResponse
+	21, // 36: api.backoffice.service.v1.BackofficeCrm.DeleteSegment:output_type -> api.crm.service.v1.DeleteSegmentResponse
+	22, // 37: api.backoffice.service.v1.BackofficeCrm.CalculateSegment:output_type -> api.crm.service.v1.CalculateSegmentResponse
+	23, // 38: api.backoffice.service.v1.BackofficeCrm.GetSegmentUsers:output_type -> api.crm.service.v1.GetSegmentUsersResponse
+	24, // 39: api.backoffice.service.v1.BackofficeCrm.GetUserSegments:output_type -> api.crm.service.v1.GetUserSegmentsResponse
+	25, // 40: api.backoffice.service.v1.BackofficeCrm.SetSegmentOverride:output_type -> api.crm.service.v1.SetSegmentOverrideResponse
+	26, // 41: api.backoffice.service.v1.BackofficeCrm.GetSegmentOverride:output_type -> api.crm.service.v1.GetSegmentOverrideResponse
+	27, // 42: api.backoffice.service.v1.BackofficeCrm.GetSegmentFieldSchema:output_type -> api.crm.service.v1.GetSegmentFieldSchemaResponse
+	28, // 43: api.backoffice.service.v1.BackofficeCrm.RepairSegment:output_type -> api.crm.service.v1.RepairSegmentResponse
+	29, // 44: api.backoffice.service.v1.BackofficeCrm.RepairAllSegments:output_type -> api.crm.service.v1.RepairAllSegmentsResponse
+	30, // 45: api.backoffice.service.v1.BackofficeCrm.GetSegmentsWithMissingFields:output_type -> api.crm.service.v1.GetSegmentsWithMissingFieldsResponse
+	32, // [32:46] is the sub-list for method output_type
+	18, // [18:32] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_crm_proto_init() }
@@ -924,7 +1110,7 @@ func file_backoffice_service_v1_backoffice_crm_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_crm_proto_rawDesc), len(file_backoffice_service_v1_backoffice_crm_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

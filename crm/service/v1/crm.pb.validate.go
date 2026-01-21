@@ -3484,3 +3484,794 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetSegmentFieldSchemaResponseValidationError{}
+
+// Validate checks the field values on RepairSegmentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RepairSegmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RepairSegmentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RepairSegmentRequestMultiError, or nil if none found.
+func (m *RepairSegmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RepairSegmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for TriggerCalculation
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RepairSegmentRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RepairSegmentRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RepairSegmentRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RepairSegmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RepairSegmentRequestMultiError is an error wrapping multiple validation
+// errors returned by RepairSegmentRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RepairSegmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RepairSegmentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RepairSegmentRequestMultiError) AllErrors() []error { return m }
+
+// RepairSegmentRequestValidationError is the validation error returned by
+// RepairSegmentRequest.Validate if the designated constraints aren't met.
+type RepairSegmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RepairSegmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RepairSegmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RepairSegmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RepairSegmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RepairSegmentRequestValidationError) ErrorName() string {
+	return "RepairSegmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RepairSegmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRepairSegmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RepairSegmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RepairSegmentRequestValidationError{}
+
+// Validate checks the field values on RepairSegmentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RepairSegmentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RepairSegmentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RepairSegmentResponseMultiError, or nil if none found.
+func (m *RepairSegmentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RepairSegmentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SegmentId
+
+	// no validation rules for Calculated
+
+	// no validation rules for UsersMatched
+
+	// no validation rules for UsersAdded
+
+	// no validation rules for UsersRemoved
+
+	if len(errors) > 0 {
+		return RepairSegmentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RepairSegmentResponseMultiError is an error wrapping multiple validation
+// errors returned by RepairSegmentResponse.ValidateAll() if the designated
+// constraints aren't met.
+type RepairSegmentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RepairSegmentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RepairSegmentResponseMultiError) AllErrors() []error { return m }
+
+// RepairSegmentResponseValidationError is the validation error returned by
+// RepairSegmentResponse.Validate if the designated constraints aren't met.
+type RepairSegmentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RepairSegmentResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RepairSegmentResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RepairSegmentResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RepairSegmentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RepairSegmentResponseValidationError) ErrorName() string {
+	return "RepairSegmentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RepairSegmentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRepairSegmentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RepairSegmentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RepairSegmentResponseValidationError{}
+
+// Validate checks the field values on RepairAllSegmentsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RepairAllSegmentsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RepairAllSegmentsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RepairAllSegmentsRequestMultiError, or nil if none found.
+func (m *RepairAllSegmentsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RepairAllSegmentsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TriggerCalculation
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RepairAllSegmentsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RepairAllSegmentsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RepairAllSegmentsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RepairAllSegmentsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RepairAllSegmentsRequestMultiError is an error wrapping multiple validation
+// errors returned by RepairAllSegmentsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RepairAllSegmentsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RepairAllSegmentsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RepairAllSegmentsRequestMultiError) AllErrors() []error { return m }
+
+// RepairAllSegmentsRequestValidationError is the validation error returned by
+// RepairAllSegmentsRequest.Validate if the designated constraints aren't met.
+type RepairAllSegmentsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RepairAllSegmentsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RepairAllSegmentsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RepairAllSegmentsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RepairAllSegmentsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RepairAllSegmentsRequestValidationError) ErrorName() string {
+	return "RepairAllSegmentsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RepairAllSegmentsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRepairAllSegmentsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RepairAllSegmentsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RepairAllSegmentsRequestValidationError{}
+
+// Validate checks the field values on RepairAllSegmentsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RepairAllSegmentsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RepairAllSegmentsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RepairAllSegmentsResponseMultiError, or nil if none found.
+func (m *RepairAllSegmentsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RepairAllSegmentsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RepairedCount
+
+	for idx, item := range m.GetSegments() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RepairAllSegmentsResponseValidationError{
+						field:  fmt.Sprintf("Segments[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RepairAllSegmentsResponseValidationError{
+						field:  fmt.Sprintf("Segments[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RepairAllSegmentsResponseValidationError{
+					field:  fmt.Sprintf("Segments[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return RepairAllSegmentsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RepairAllSegmentsResponseMultiError is an error wrapping multiple validation
+// errors returned by RepairAllSegmentsResponse.ValidateAll() if the
+// designated constraints aren't met.
+type RepairAllSegmentsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RepairAllSegmentsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RepairAllSegmentsResponseMultiError) AllErrors() []error { return m }
+
+// RepairAllSegmentsResponseValidationError is the validation error returned by
+// RepairAllSegmentsResponse.Validate if the designated constraints aren't met.
+type RepairAllSegmentsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RepairAllSegmentsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RepairAllSegmentsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RepairAllSegmentsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RepairAllSegmentsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RepairAllSegmentsResponseValidationError) ErrorName() string {
+	return "RepairAllSegmentsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RepairAllSegmentsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRepairAllSegmentsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RepairAllSegmentsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RepairAllSegmentsResponseValidationError{}
+
+// Validate checks the field values on GetSegmentsWithMissingFieldsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetSegmentsWithMissingFieldsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSegmentsWithMissingFieldsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetSegmentsWithMissingFieldsRequestMultiError, or nil if none found.
+func (m *GetSegmentsWithMissingFieldsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSegmentsWithMissingFieldsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetSegmentsWithMissingFieldsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetSegmentsWithMissingFieldsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetSegmentsWithMissingFieldsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetSegmentsWithMissingFieldsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSegmentsWithMissingFieldsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetSegmentsWithMissingFieldsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetSegmentsWithMissingFieldsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSegmentsWithMissingFieldsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSegmentsWithMissingFieldsRequestMultiError) AllErrors() []error { return m }
+
+// GetSegmentsWithMissingFieldsRequestValidationError is the validation error
+// returned by GetSegmentsWithMissingFieldsRequest.Validate if the designated
+// constraints aren't met.
+type GetSegmentsWithMissingFieldsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSegmentsWithMissingFieldsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSegmentsWithMissingFieldsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSegmentsWithMissingFieldsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSegmentsWithMissingFieldsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSegmentsWithMissingFieldsRequestValidationError) ErrorName() string {
+	return "GetSegmentsWithMissingFieldsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSegmentsWithMissingFieldsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSegmentsWithMissingFieldsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSegmentsWithMissingFieldsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSegmentsWithMissingFieldsRequestValidationError{}
+
+// Validate checks the field values on GetSegmentsWithMissingFieldsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetSegmentsWithMissingFieldsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSegmentsWithMissingFieldsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetSegmentsWithMissingFieldsResponseMultiError, or nil if none found.
+func (m *GetSegmentsWithMissingFieldsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSegmentsWithMissingFieldsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetSegments() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetSegmentsWithMissingFieldsResponseValidationError{
+						field:  fmt.Sprintf("Segments[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetSegmentsWithMissingFieldsResponseValidationError{
+						field:  fmt.Sprintf("Segments[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetSegmentsWithMissingFieldsResponseValidationError{
+					field:  fmt.Sprintf("Segments[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetSegmentsWithMissingFieldsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSegmentsWithMissingFieldsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetSegmentsWithMissingFieldsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetSegmentsWithMissingFieldsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSegmentsWithMissingFieldsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSegmentsWithMissingFieldsResponseMultiError) AllErrors() []error { return m }
+
+// GetSegmentsWithMissingFieldsResponseValidationError is the validation error
+// returned by GetSegmentsWithMissingFieldsResponse.Validate if the designated
+// constraints aren't met.
+type GetSegmentsWithMissingFieldsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSegmentsWithMissingFieldsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSegmentsWithMissingFieldsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSegmentsWithMissingFieldsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSegmentsWithMissingFieldsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSegmentsWithMissingFieldsResponseValidationError) ErrorName() string {
+	return "GetSegmentsWithMissingFieldsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSegmentsWithMissingFieldsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSegmentsWithMissingFieldsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSegmentsWithMissingFieldsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSegmentsWithMissingFieldsResponseValidationError{}

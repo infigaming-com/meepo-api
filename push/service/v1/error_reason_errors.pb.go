@@ -46,3 +46,225 @@ func IsGetNotificationsFailed(err error) bool {
 func ErrorGetNotificationsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_NOTIFICATIONS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Notification Channel errors (90100-90199)
+func IsCreateNotificationChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_NOTIFICATION_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+// Notification Channel errors (90100-90199)
+func ErrorCreateNotificationChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_NOTIFICATION_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListNotificationChannelsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_NOTIFICATION_CHANNELS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListNotificationChannelsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_NOTIFICATION_CHANNELS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetNotificationChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_NOTIFICATION_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetNotificationChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_NOTIFICATION_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateNotificationChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_NOTIFICATION_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateNotificationChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_NOTIFICATION_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteNotificationChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_NOTIFICATION_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteNotificationChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_NOTIFICATION_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTestNotificationChannelFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TEST_NOTIFICATION_CHANNEL_FAILED.String() && e.Code == 500
+}
+
+func ErrorTestNotificationChannelFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_TEST_NOTIFICATION_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNotificationChannelNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NOTIFICATION_CHANNEL_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorNotificationChannelNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NOTIFICATION_CHANNEL_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNotificationChannelAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NOTIFICATION_CHANNEL_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorNotificationChannelAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NOTIFICATION_CHANNEL_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidChannelConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CHANNEL_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidChannelConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_CHANNEL_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+// Notification Rule errors (90200-90299)
+func IsCreateNotificationRuleFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_NOTIFICATION_RULE_FAILED.String() && e.Code == 500
+}
+
+// Notification Rule errors (90200-90299)
+func ErrorCreateNotificationRuleFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_NOTIFICATION_RULE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListNotificationRulesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_NOTIFICATION_RULES_FAILED.String() && e.Code == 500
+}
+
+func ErrorListNotificationRulesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_NOTIFICATION_RULES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetNotificationRuleFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_NOTIFICATION_RULE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetNotificationRuleFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_NOTIFICATION_RULE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateNotificationRuleFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_NOTIFICATION_RULE_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateNotificationRuleFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_NOTIFICATION_RULE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteNotificationRuleFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_NOTIFICATION_RULE_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteNotificationRuleFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_NOTIFICATION_RULE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNotificationRuleNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NOTIFICATION_RULE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorNotificationRuleNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NOTIFICATION_RULE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNotificationRuleAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NOTIFICATION_RULE_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorNotificationRuleAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NOTIFICATION_RULE_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidRuleConditions(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_RULE_CONDITIONS.String() && e.Code == 500
+}
+
+func ErrorInvalidRuleConditions(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_RULE_CONDITIONS.String(), fmt.Sprintf(format, args...))
+}
+
+// Notification Delivery errors (90300-90399)
+func IsSendToChannelsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_TO_CHANNELS_FAILED.String() && e.Code == 500
+}
+
+// Notification Delivery errors (90300-90399)
+func ErrorSendToChannelsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_TO_CHANNELS_FAILED.String(), fmt.Sprintf(format, args...))
+}
