@@ -1641,14 +1641,15 @@ func (x *GetSegmentOverrideResponse) GetHasOverride() bool {
 
 // Field schema for frontend query builder
 type FieldSchema struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Field         string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	Label         string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
-	Type          FieldType              `protobuf:"varint,3,opt,name=type,proto3,enum=api.crm.service.v1.FieldType" json:"type,omitempty"`
-	Operators     []string               `protobuf:"bytes,4,rep,name=operators,proto3" json:"operators,omitempty"`
-	ValueSchema   *structpb.Struct       `protobuf:"bytes,5,opt,name=value_schema,json=valueSchema,proto3" json:"value_schema,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Field            string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	Label            string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	Type             FieldType              `protobuf:"varint,3,opt,name=type,proto3,enum=api.crm.service.v1.FieldType" json:"type,omitempty"`
+	Operators        []string               `protobuf:"bytes,4,rep,name=operators,proto3" json:"operators,omitempty"`
+	ValueSchema      *structpb.Struct       `protobuf:"bytes,5,opt,name=value_schema,json=valueSchema,proto3" json:"value_schema,omitempty"`
+	SupportsCurrency bool                   `protobuf:"varint,6,opt,name=supports_currency,json=supportsCurrency,proto3" json:"supports_currency,omitempty"` // Whether this field supports currency filtering
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *FieldSchema) Reset() {
@@ -1714,6 +1715,13 @@ func (x *FieldSchema) GetValueSchema() *structpb.Struct {
 		return x.ValueSchema
 	}
 	return nil
+}
+
+func (x *FieldSchema) GetSupportsCurrency() bool {
+	if x != nil {
+		return x.SupportsCurrency
+	}
+	return false
 }
 
 // GetSegmentFieldSchema
@@ -2272,13 +2280,14 @@ const file_crm_service_v1_crm_proto_rawDesc = "" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"[\n" +
 	"\x1aGetSegmentOverrideResponse\x12\x1a\n" +
 	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12!\n" +
-	"\fhas_override\x18\x02 \x01(\bR\vhasOverride\"\xc6\x01\n" +
+	"\fhas_override\x18\x02 \x01(\bR\vhasOverride\"\xf3\x01\n" +
 	"\vFieldSchema\x12\x14\n" +
 	"\x05field\x18\x01 \x01(\tR\x05field\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x121\n" +
 	"\x04type\x18\x03 \x01(\x0e2\x1d.api.crm.service.v1.FieldTypeR\x04type\x12\x1c\n" +
 	"\toperators\x18\x04 \x03(\tR\toperators\x12:\n" +
-	"\fvalue_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\vvalueSchema\"S\n" +
+	"\fvalue_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\vvalueSchema\x12+\n" +
+	"\x11supports_currency\x18\x06 \x01(\bR\x10supportsCurrency\"S\n" +
 	"\x1cGetSegmentFieldSchemaRequest\x123\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1f.api.crm.service.v1.SegmentTypeR\x04type\"X\n" +
 	"\x1dGetSegmentFieldSchemaResponse\x127\n" +

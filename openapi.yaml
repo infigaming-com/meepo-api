@@ -18263,6 +18263,8 @@ components:
                         type: string
                 valueSchema:
                     type: object
+                supportsCurrency:
+                    type: boolean
             description: Field schema for frontend query builder
         api.crm.service.v1.GetSegmentFieldSchemaResponse:
             type: object
