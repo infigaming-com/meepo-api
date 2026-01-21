@@ -261,6 +261,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddAccountResponse'
+    /v1/backoffice/accounts/detail:
+        post:
+            tags:
+                - BackofficeAccount
+            description: GetAccountDetail retrieves detailed information about a backoffice account
+            operationId: BackofficeAccount_GetAccountDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAccountDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetAccountDetailResponse'
     /v1/backoffice/accounts/email/check_exists:
         post:
             tags:
@@ -406,6 +425,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.VerifyMobileResponse'
+    /v1/backoffice/accounts/password/admin-reset:
+        post:
+            tags:
+                - BackofficeAccount
+            description: AdminResetPassword allows admin to reset another user's password without verification code
+            operationId: BackofficeAccount_AdminResetPassword
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AdminResetPasswordRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AdminResetPasswordResponse'
     /v1/backoffice/accounts/password/reset:
         post:
             tags:
@@ -877,6 +915,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.CreateAffiliateResponse'
+    /v1/backoffice/affiliate/dashboard/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliateDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateDashboardResponse'
+    /v1/backoffice/affiliate/dashboard/trend/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliateTrend
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateTrendRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateTrendResponse'
     /v1/backoffice/affiliate/delete:
         post:
             tags:
@@ -985,6 +1059,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliatesResponse'
+    /v1/backoffice/affiliate/operator/settings/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliateOperatorSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateOperatorSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetOperatorSettingsResponse'
+    /v1/backoffice/affiliate/operator/settings/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateAffiliateOperatorSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdateOperatorSettingsResponse'
     /v1/backoffice/affiliate/postback/create:
         post:
             tags:
@@ -1093,6 +1203,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdateAffiliateResponse'
+    /v1/backoffice/affiliate/user/export:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ExportAffiliateUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportAffiliateUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ExportUsersResponse'
     /v1/backoffice/affiliate/user/list:
         post:
             tags:
@@ -1400,6 +1528,263 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CreateCompanyResponse'
+    /v1/backoffice/crm/segment/calculate:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment calculation
+            operationId: BackofficeCrm_CalculateSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CalculateSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.CalculateSegmentResponse'
+    /v1/backoffice/crm/segment/create:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment CRUD operations
+            operationId: BackofficeCrm_CreateSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.CreateSegmentResponse'
+    /v1/backoffice/crm/segment/delete:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_DeleteSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.DeleteSegmentResponse'
+    /v1/backoffice/crm/segment/get:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentResponse'
+    /v1/backoffice/crm/segment/list:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_ListSegments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSegmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.ListSegmentsResponse'
+    /v1/backoffice/crm/segment/missing-fields:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegmentsWithMissingFields
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentsWithMissingFieldsResponse'
+    /v1/backoffice/crm/segment/override/get:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegmentOverride
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentOverrideRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentOverrideResponse'
+    /v1/backoffice/crm/segment/override/set:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment override (for inheritance control)
+            operationId: BackofficeCrm_SetSegmentOverride
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetSegmentOverrideRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.SetSegmentOverrideResponse'
+    /v1/backoffice/crm/segment/repair:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment repair operations
+            operationId: BackofficeCrm_RepairSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RepairSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.RepairSegmentResponse'
+    /v1/backoffice/crm/segment/repair-all:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_RepairAllSegments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RepairAllSegmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.RepairAllSegmentsResponse'
+    /v1/backoffice/crm/segment/schema:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Schema API for frontend query builder
+            operationId: BackofficeCrm_GetSegmentFieldSchema
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentFieldSchemaRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentFieldSchemaResponse'
+    /v1/backoffice/crm/segment/update:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_UpdateSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateSegmentResponse'
+    /v1/backoffice/crm/segment/users:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegmentUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentUsersResponse'
+    /v1/backoffice/crm/user/segments:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetUserSegments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserSegmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetUserSegmentsResponse'
     /v1/backoffice/dashboard/get:
         post:
             tags:
@@ -2990,6 +3375,329 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/notification/channel/create:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Create a new notification channel
+            operationId: BackofficeNotification_CreateNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.CreateNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateNotificationChannelResponse'
+    /v1/backoffice/notification/channel/delete:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Delete a notification channel
+            operationId: BackofficeNotification_DeleteNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationChannelResponse'
+    /v1/backoffice/notification/channel/get:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Get a specific notification channel
+            operationId: BackofficeNotification_GetNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetNotificationChannelResponse'
+    /v1/backoffice/notification/channel/list:
+        post:
+            tags:
+                - BackofficeNotification
+            description: List notification channels with pagination
+            operationId: BackofficeNotification_ListNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListNotificationChannelsResponse'
+    /v1/backoffice/notification/channel/test:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Test a notification channel by sending a test message
+            operationId: BackofficeNotification_TestNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.TestNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.TestNotificationChannelResponse'
+    /v1/backoffice/notification/channel/update:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Update a notification channel
+            operationId: BackofficeNotification_UpdateNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationChannelResponse'
+    /v1/backoffice/notification/rule/create:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Create a new notification rule
+            operationId: BackofficeNotification_CreateNotificationRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.CreateNotificationRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateNotificationRuleResponse'
+    /v1/backoffice/notification/rule/delete:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Delete a notification rule
+            operationId: BackofficeNotification_DeleteNotificationRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationRuleResponse'
+    /v1/backoffice/notification/rule/get:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Get a specific notification rule
+            operationId: BackofficeNotification_GetNotificationRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetNotificationRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetNotificationRuleResponse'
+    /v1/backoffice/notification/rule/list:
+        post:
+            tags:
+                - BackofficeNotification
+            description: List notification rules with pagination
+            operationId: BackofficeNotification_ListNotificationRules
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListNotificationRulesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListNotificationRulesResponse'
+    /v1/backoffice/notification/rule/update:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Update a notification rule
+            operationId: BackofficeNotification_UpdateNotificationRule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationRuleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationRuleResponse'
+    /v1/backoffice/oauth/provider/create:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Create a new OAuth provider configuration for an operator
+            operationId: BackofficeOAuth_CreateOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateOAuthProviderConfigResponse'
+    /v1/backoffice/oauth/provider/delete:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Delete an OAuth provider configuration
+            operationId: BackofficeOAuth_DeleteOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOAuthProviderConfigResponse'
+    /v1/backoffice/oauth/provider/enabled/set:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Enable or disable an OAuth provider
+            operationId: BackofficeOAuth_SetOAuthProviderEnabled
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOAuthProviderEnabledRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetOAuthProviderEnabledResponse'
+    /v1/backoffice/oauth/provider/get:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Get a specific OAuth provider configuration
+            operationId: BackofficeOAuth_GetOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOAuthProviderConfigResponse'
+    /v1/backoffice/oauth/provider/list:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: List all OAuth provider configurations for an operator
+            operationId: BackofficeOAuth_ListOAuthProviderConfigs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOAuthProviderConfigsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOAuthProviderConfigsResponse'
+    /v1/backoffice/oauth/provider/update:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Update an existing OAuth provider configuration
+            operationId: BackofficeOAuth_UpdateOAuthProviderConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOAuthProviderConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOAuthProviderConfigResponse'
     /v1/backoffice/operator/account-settings/get:
         post:
             tags:
@@ -6145,6 +6853,360 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/report/customer-record/get:
+        post:
+            tags:
+                - ReportService
+            description: Customer record detail
+            operationId: ReportService_CustomerRecordReportDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse'
+    /v1/report/dashboard/overview/get:
+        post:
+            tags:
+                - DashboardService
+            description: Overview dashboard with today/yesterday comparison
+            operationId: DashboardService_GetOverviewDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetOverviewDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetOverviewDashboardResponse'
+    /v1/report/dashboard/time-ranged/get:
+        post:
+            tags:
+                - DashboardService
+            description: Time-ranged dashboard (this month/week/custom days)
+            operationId: DashboardService_GetTimeRangedDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetTimeRangedDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTimeRangedDashboardResponse'
+    /v1/report/dashboard/top-operators/get:
+        post:
+            tags:
+                - DashboardService
+            description: Top operators dashboard (GGR/NGR/deposits-withdrawals)
+            operationId: DashboardService_GetTopOperatorsDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetTopOperatorsDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopOperatorsDashboardResponse'
+    /v1/report/dashboard/top-users/get:
+        post:
+            tags:
+                - DashboardService
+            description: Top users dashboard (deposits/withdrawals)
+            operationId: DashboardService_GetTopUsersDashboard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetTopUsersDashboardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/report/deposit-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListDepositDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListDepositDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositDetailsResponse'
+    /v1/report/deposit-summaries/get:
+        post:
+            tags:
+                - ReportService
+            description: Deposit reports
+            operationId: ReportService_GetDepositSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetDepositSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositSummariesResponse'
+    /v1/report/deposit-vtg-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListDepositVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListDepositVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
+    /v1/report/game-data/get:
+        post:
+            tags:
+                - ReportService
+            description: Game data reports
+            operationId: ReportService_GetGameDataSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetGameSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameSummaryResponse'
+    /v1/report/game-data/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataResponse'
+    /v1/report/player-game-data/get:
+        post:
+            tags:
+                - ReportService
+            description: Player game data reports
+            operationId: ReportService_GetPlayerGameDataSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetPlayerGameSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameSummaryResponse'
+    /v1/report/player-game-data/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListPlayerGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListPlayerGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse'
+    /v1/report/register-retention/list:
+        post:
+            tags:
+                - ReportService
+            description: Retention reports
+            operationId: ReportService_ListRegisterRetention
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListRegisterRetentionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
+    /v1/report/sport-events/list:
+        post:
+            tags:
+                - ReportService
+            description: Sport events (may need different implementation)
+            operationId: ReportService_ListSportEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsResponse'
+    /v1/report/summary/get:
+        post:
+            tags:
+                - ReportService
+            description: Summary reports
+            operationId: ReportService_GetSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetSummaryResponse'
+    /v1/report/summary/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
+    /v1/report/withdraw-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListWithdrawDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListWithdrawDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawDetailsResponse'
+    /v1/report/withdraw-summaries/get:
+        post:
+            tags:
+                - ReportService
+            description: Withdrawal reports
+            operationId: ReportService_GetWithdrawSummaries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.GetWithdrawSummariesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWithdrawSummariesResponse'
+    /v1/report/withdraw-vtg-details/list:
+        post:
+            tags:
+                - ReportService
+            operationId: ReportService_ListWithdrawVtgDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.report.service.v1.ListWithdrawVtgDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListWithdrawVtgDetailsResponse'
     /v1/review/withdraw:
         post:
             tags:
@@ -6456,6 +7518,72 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.UploadKycResponse'
+    /v1/user/oauth/accounts:
+        get:
+            tags:
+                - User
+            description: List OAuth accounts bound to current user (requires authentication)
+            operationId: User_ListBoundOAuthAccounts
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListBoundOAuthAccountsResponse'
+    /v1/user/oauth/bind:
+        post:
+            tags:
+                - User
+            description: Bind OAuth account to current user (requires authentication)
+            operationId: User_BindOAuthAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.BindOAuthAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.BindOAuthAccountResponse'
+    /v1/user/oauth/providers:
+        get:
+            tags:
+                - User
+            description: |-
+                ============ Player OAuth APIs ============
+                 Get available OAuth providers for the current operator (public)
+            operationId: User_GetAvailableOAuthProviders
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetAvailableOAuthProvidersResponse'
+    /v1/user/oauth/unbind:
+        post:
+            tags:
+                - User
+            description: Unbind OAuth account from current user (requires authentication)
+            operationId: User_UnbindOAuthAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UnbindOAuthAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UnbindOAuthAccountResponse'
     /v1/user/operator/account-settings/get:
         post:
             tags:
@@ -7397,6 +8525,74 @@ components:
             properties:
                 referralCode:
                     type: string
+        api.affiliate.service.v1.DashboardMetrics:
+            type: object
+            properties:
+                registrations:
+                    type: string
+                    description: User Conversion
+                ftdUsers:
+                    type: string
+                repeatDepositors:
+                    type: string
+                activeUsers:
+                    type: string
+                regToFtdRate:
+                    type: string
+                ftdToActiveRate:
+                    type: string
+                depositsUsd:
+                    type: string
+                    description: Deposits
+                depositsReportingCurrency:
+                    type: string
+                withdrawalsUsd:
+                    type: string
+                    description: Withdrawals
+                withdrawalsReportingCurrency:
+                    type: string
+                pendingWithdrawalsUsd:
+                    type: string
+                    description: Pending Withdrawals
+                pendingWithdrawalsReportingCurrency:
+                    type: string
+                accountsWithBalance:
+                    type: string
+                    description: Balance
+                totalBalanceUsd:
+                    type: string
+                totalBalanceReportingCurrency:
+                    type: string
+                ggrUsd:
+                    type: string
+                    description: GGR
+                ggrReportingCurrency:
+                    type: string
+                ngrUsd:
+                    type: string
+                    description: NGR
+                ngrReportingCurrency:
+                    type: string
+                betCount:
+                    type: string
+                    description: Bet
+                betAmountUsd:
+                    type: string
+                betAmountReportingCurrency:
+                    type: string
+                averageBetUsd:
+                    type: string
+                averageBetReportingCurrency:
+                    type: string
+                pendingCommissionUsd:
+                    type: string
+                    description: Commission
+                pendingCommissionReportingCurrency:
+                    type: string
+                paidCommissionUsd:
+                    type: string
+                paidCommissionReportingCurrency:
+                    type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
             properties: {}
@@ -7468,6 +8664,11 @@ components:
                     type: string
                 commissionPlanName:
                     type: string
+        api.affiliate.service.v1.ExportUsersResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.affiliate.service.v1.FlatByCountriesCommission:
             type: object
             properties:
@@ -7508,6 +8709,17 @@ components:
             properties:
                 rate:
                     type: string
+        api.affiliate.service.v1.GetAffiliateDashboardResponse:
+            type: object
+            properties:
+                current:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.DashboardMetrics'
+                    description: Current period metrics
+                previous:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.DashboardMetrics'
+                    description: Previous period metrics (same duration, immediately before start_time)
         api.affiliate.service.v1.GetAffiliateDetailsResponse:
             type: object
             properties:
@@ -7577,6 +8789,53 @@ components:
                     type: string
                 twoFaEnabled:
                     type: boolean
+        api.affiliate.service.v1.GetAffiliateTrendResponse:
+            type: object
+            properties:
+                userConversionData:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateTrendResponse_UserConversionData'
+                financialBettingData:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateTrendResponse_FinancialBettingData'
+        api.affiliate.service.v1.GetAffiliateTrendResponse_FinancialBettingData:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                depositsUsd:
+                    type: string
+                depositsReportingCurrency:
+                    type: string
+                withdrawalsUsd:
+                    type: string
+                withdrawalsReportingCurrency:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrUsd:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                betCount:
+                    type: string
+        api.affiliate.service.v1.GetAffiliateTrendResponse_UserConversionData:
+            type: object
+            properties:
+                date:
+                    type: string
+                    format: date-time
+                registrations:
+                    type: string
+                ftdUsers:
+                    type: string
+                activeUsers:
+                    type: string
         api.affiliate.service.v1.GetCommissionPlanResponse:
             type: object
             properties:
@@ -7592,6 +8851,11 @@ components:
                     type: string
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.GetOperatorSettingsResponse:
+            type: object
+            properties:
+                operatorSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.OperatorSettings'
         api.affiliate.service.v1.GetReferralPlanResponse:
             type: object
             properties:
@@ -7658,10 +8922,17 @@ components:
                     type: object
                     additionalProperties:
                         type: string
+                bonus2cashAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
                 referredStats:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat'
+                teamSize:
+                    type: integer
+                    format: int32
                 total:
                     type: integer
                     format: int32
@@ -8398,6 +9669,10 @@ components:
                     type: string
                 campaignUrl:
                     type: string
+                campaignId:
+                    type: string
+                campaignName:
+                    type: string
                 registeredAt:
                     type: string
                     format: date-time
@@ -8483,6 +9758,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.LossRevenueShareTierReward'
+        api.affiliate.service.v1.OperatorSettings:
+            type: object
+            properties:
+                paymentChannelRate:
+                    type: string
+                thirdPartyGameRate:
+                    type: string
         api.affiliate.service.v1.Params:
             type: object
             properties:
@@ -8620,6 +9902,10 @@ components:
                     format: int32
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlanConfig'
+                paymentChannelRate:
+                    type: string
+                thirdPartyGameRate:
+                    type: string
             description: Complete referral plan configuration
         api.affiliate.service.v1.ReferralPlanConfig:
             type: object
@@ -8671,6 +9957,9 @@ components:
             type: object
             properties: {}
         api.affiliate.service.v1.UpdateCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.UpdateOperatorSettingsResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.UpdatePostbackResponse:
@@ -8821,6 +10110,8 @@ components:
         api.backoffice.service.v1.AddOperatorApexDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 apexDomain:
                     type: string
                 domain:
@@ -8911,6 +10202,18 @@ components:
             type: object
             properties: {}
             description: AdminReset2faResponse - empty response on success
+        api.backoffice.service.v1.AdminResetPasswordRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                newPassword:
+                    type: string
+            description: AdminResetPasswordRequest - admin resets another user's password
+        api.backoffice.service.v1.AdminResetPasswordResponse:
+            type: object
+            properties: {}
+            description: AdminResetPasswordResponse - empty response on success
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -9050,6 +10353,8 @@ components:
                     type: string
                 rtpMax:
                     type: string
+                gameIdExactMatch:
+                    type: boolean
         api.backoffice.service.v1.BackofficeListGamesUnderTagResponse:
             type: object
             properties:
@@ -9159,11 +10464,14 @@ components:
                     type: string
                 gameId:
                     type: string
-                orderIndex:
+                originOrderIndex:
                     type: integer
                     format: int32
                 sticky:
                     type: boolean
+                currentOrderIndex:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.BackofficeUpdateGameOrderInTagResponse:
             type: object
             properties: {}
@@ -9194,9 +10502,7 @@ components:
                     type: string
                 bankAccount:
                     type: string
-                bankAccountFirstname:
-                    type: string
-                bankAccountLastname:
+                beneficiaryName:
                     type: string
                 cardId:
                     type: string
@@ -9293,11 +10599,21 @@ components:
         api.backoffice.service.v1.BindOperatorEmailDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 domain:
                     type: string
                 emailLocalPart:
                     type: string
             description: Email Domain Binding Messages
+        api.backoffice.service.v1.CalculateSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: CalculateSegment
         api.backoffice.service.v1.CancelTicketRequest:
             type: object
             properties:
@@ -9419,6 +10735,47 @@ components:
             type: object
             properties:
                 name:
+                    type: string
+        api.backoffice.service.v1.CreateOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                clientId:
+                    type: string
+                clientSecret:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                enabled:
+                    type: boolean
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+            description: CreateOAuthProviderConfigRequest - request to create OAuth provider config
+        api.backoffice.service.v1.CreateOAuthProviderConfigResponse:
+            type: object
+            properties:
+                configId:
                     type: string
         api.backoffice.service.v1.CreateOperatorRequest:
             type: object
@@ -9584,6 +10941,31 @@ components:
         api.backoffice.service.v1.CreateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+                rules:
+                    type: object
+                enabled:
+                    type: boolean
+            description: CreateSegment
         api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -9742,6 +11124,17 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.DeleteOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+            description: DeleteOAuthProviderConfigRequest - request to delete OAuth provider config
+        api.backoffice.service.v1.DeleteOAuthProviderConfigResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteOperatorApexDomainRequest:
             type: object
             properties:
@@ -9801,6 +11194,14 @@ components:
         api.backoffice.service.v1.DeleteRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: DeleteSegment
         api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -9847,6 +11248,33 @@ components:
                 venueTournament:
                     type: string
                 settlementDetails:
+                    type: string
+        api.backoffice.service.v1.ExportAffiliateUsersRequest:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                ftdStartTime:
+                    type: string
+                    format: date-time
+                ftdEndTime:
+                    type: string
+                    format: date-time
+                affiliateId:
+                    type: string
+                registrationStartTime:
+                    type: string
+                    format: date-time
+                registrationEndTime:
+                    type: string
+                    format: date-time
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                format:
+                    type: string
+                timeZone:
                     type: string
         api.backoffice.service.v1.ExportBetsRequest:
             type: object
@@ -10169,10 +11597,71 @@ components:
                 lastResetAt:
                     type: string
             description: Get2faStatusResponse - returns 2FA status
+        api.backoffice.service.v1.GetAccountDetailRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+            description: GetAccountDetailRequest - request to get detailed account information
+        api.backoffice.service.v1.GetAccountDetailResponse:
+            type: object
+            properties:
+                userId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                roleId:
+                    type: string
+                roleName:
+                    type: string
+                locked:
+                    type: boolean
+                enabled:
+                    type: boolean
+                mfaEnabled:
+                    type: boolean
+                mfaResetAt:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetAccountDetailResponse - detailed account information
+        api.backoffice.service.v1.GetAffiliateDashboardRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
             type: object
             properties:
                 affiliateId:
+                    type: string
+        api.backoffice.service.v1.GetAffiliateOperatorSettingsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetAffiliateTrendRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                groupBy:
                     type: string
         api.backoffice.service.v1.GetBalanceSummaryRequest:
             type: object
@@ -10256,6 +11745,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
         api.backoffice.service.v1.GetDepositSummariesResponse:
             type: object
             properties:
@@ -10466,7 +11956,9 @@ components:
                     type: string
         api.backoffice.service.v1.GetInvoiceSummaryRequest:
             type: object
-            properties: {}
+            properties:
+                periodKey:
+                    type: string
         api.backoffice.service.v1.GetInvoiceSummaryResponse:
             type: object
             properties:
@@ -10479,6 +11971,19 @@ components:
         api.backoffice.service.v1.GetMerchantRequest:
             type: object
             properties: {}
+        api.backoffice.service.v1.GetOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+            description: GetOAuthProviderConfigRequest - request to get specific OAuth provider config
+        api.backoffice.service.v1.GetOAuthProviderConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.OAuthProviderConfig'
         api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
             type: object
             properties:
@@ -10564,7 +12069,7 @@ components:
                     type: string
                     description: Optional sort direction
                     format: enum
-                enabled:
+                enable:
                     type: boolean
                     description: Status ture or false
                 targetOperatorContext:
@@ -10814,6 +12319,57 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
+        api.backoffice.service.v1.GetSegmentFieldSchemaRequest:
+            type: object
+            properties:
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+            description: GetSegmentFieldSchema
+        api.backoffice.service.v1.GetSegmentOverrideRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentId:
+                    type: string
+            description: GetSegmentOverride
+        api.backoffice.service.v1.GetSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: GetSegment
+        api.backoffice.service.v1.GetSegmentUsersRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                onlyCurrentMembers:
+                    type: boolean
+            description: GetSegmentUsers
+        api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetSegmentsWithMissingFields
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
@@ -10825,6 +12381,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 referralCodes:
                     type: array
                     items:
@@ -11022,11 +12579,16 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 amountUsd:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 amountReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.GetTopUsersDashboardRequest:
             type: object
@@ -11077,7 +12639,12 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
+                operatorId:
+                    type: string
+                    description: system_operator_name removed - field 11 deprecated
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.GetTransactionPageRequest:
             type: object
@@ -11343,6 +12910,16 @@ components:
             properties:
                 userId:
                     type: string
+        api.backoffice.service.v1.GetUserSegmentsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                userId:
+                    type: string
+                onlyCurrentMemberships:
+                    type: boolean
+            description: GetUserSegments
         api.backoffice.service.v1.GetUserTagsRequest:
             type: object
             properties:
@@ -11493,6 +13070,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
         api.backoffice.service.v1.GetWithdrawSummariesResponse:
             type: object
             properties:
@@ -11570,6 +13148,8 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                locked:
+                    type: boolean
         api.backoffice.service.v1.ListAdjustmentConfigsRequest:
             type: object
             properties:
@@ -11658,6 +13238,8 @@ components:
                     type: string
                     description: Amount information
                 description:
+                    type: string
+                id:
                     type: string
         api.backoffice.service.v1.ListAffiliateBillsRequest:
             type: object
@@ -12303,6 +13885,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 page:
                     type: integer
                     format: int32
@@ -12336,10 +13919,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 depositAmount:
                     type: string
                 depositAmountUsd:
@@ -12398,6 +13980,12 @@ components:
                     type: string
                 amountProportion:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
         api.backoffice.service.v1.ListDepositVtgDetailsRequest:
             type: object
             properties:
@@ -12442,10 +14030,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 depositAmount:
                     type: string
                 depositAmountUsd:
@@ -12496,6 +14083,12 @@ components:
                 averageFtdAmountUsdForNonSameDayRegistredUsers:
                     type: string
                 averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListEventsRequest:
             type: object
@@ -12651,10 +14244,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 provider:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 gameType:
                     type: string
                 gameName:
@@ -12694,6 +14286,12 @@ components:
                 winAmountReportingCurrency:
                     type: string
                 ggrReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListGamesRequest:
             type: object
@@ -12744,6 +14342,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                gameIdExactMatch:
+                    type: boolean
         api.backoffice.service.v1.ListGamesResponse:
             type: object
             properties:
@@ -12994,6 +14594,8 @@ components:
                     type: string
                 estCosts:
                     type: string
+                id:
+                    type: string
         api.backoffice.service.v1.ListMonthlyRevenueShareResponse_Summary:
             type: object
             properties:
@@ -13031,6 +14633,30 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListOAuthProviderConfigsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+            description: ListOAuthProviderConfigsRequest - request to list OAuth provider configs
+        api.backoffice.service.v1.ListOAuthProviderConfigsResponse:
+            type: object
+            properties:
+                configs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.OAuthProviderConfig'
         api.backoffice.service.v1.ListOperatorApexDomainsRequest:
             type: object
             properties:
@@ -13121,6 +14747,8 @@ components:
         api.backoffice.service.v1.ListOperatorEmailDomainBindingsRequest:
             type: object
             properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 page:
                     type: integer
                     format: int32
@@ -13204,6 +14832,8 @@ components:
                 fxRate:
                     type: string
                 amountUsd:
+                    type: string
+                id:
                     type: string
         api.backoffice.service.v1.ListOperatorTicketsRequest:
             type: object
@@ -13345,10 +14975,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 provider:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 gameType:
                     type: string
                 gameId:
@@ -13383,6 +15012,12 @@ components:
                 winAmountReportingCurrency:
                     type: string
                 ggrReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListPostbackLogsRequest:
             type: object
@@ -13627,10 +15262,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 regUsers:
                     type: integer
+                    description: system_operator_name removed - field 5 deprecated
                     format: int32
                 paidUsers:
                     type: integer
@@ -13766,6 +15400,12 @@ components:
                     type: string
                 d120PaidAmtReportingCurrency:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
         api.backoffice.service.v1.ListReportExportRequest:
             type: object
             properties:
@@ -13821,6 +15461,31 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListSegmentsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                includeInherited:
+                    type: boolean
+            description: ListSegments
         api.backoffice.service.v1.ListSevRequest:
             type: object
             properties:
@@ -13948,6 +15613,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 referralCodes:
                     type: array
                     items:
@@ -13989,10 +15655,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 country:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 visits:
                     type: integer
                     format: int32
@@ -14127,6 +15792,12 @@ components:
                 ggrReportingCurrency:
                     type: string
                 ngrReportingCurrency:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
                     type: string
         api.backoffice.service.v1.ListTagsRequest:
             type: object
@@ -14277,6 +15948,8 @@ components:
                 amount:
                     type: string
                 description:
+                    type: string
+                id:
                     type: string
         api.backoffice.service.v1.ListTicketsRequest:
             type: object
@@ -14485,6 +16158,8 @@ components:
                     description: |-
                         string device = 23;
                          string source = 24;
+                locked:
+                    type: boolean
         api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
             type: object
             properties:
@@ -14573,11 +16248,17 @@ components:
                 vipLevel:
                     type: integer
                     format: int32
-                changeBalance:
+                beforeCashBalance:
                     type: string
-                beforeBalance:
+                afterCashBalance:
                     type: string
-                afterBalance:
+                cashAmountChanged:
+                    type: string
+                beforeOperatorBonusBalance:
+                    type: string
+                afterOperatorBonusBalance:
+                    type: string
+                operatorBonusAmountChanged:
                     type: string
                 currency:
                     type: string
@@ -14622,6 +16303,7 @@ components:
                     type: array
                     items:
                         type: string
+                    description: 'operator_context removed - field 3 deprecated (security: must not be exposed to frontend)'
                 page:
                     type: integer
                     format: int32
@@ -14655,10 +16337,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 reportingCurrency:
                     type: string
                 withdrawAmount:
@@ -14725,6 +16406,12 @@ components:
                     type: string
                 amountProportion:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
         api.backoffice.service.v1.ListWithdrawVtgDetailsRequest:
             type: object
             properties:
@@ -14769,10 +16456,9 @@ components:
                     type: string
                 retailerOperatorName:
                     type: string
-                systemOperatorName:
-                    type: string
                 currency:
                     type: string
+                    description: system_operator_name removed - field 5 deprecated
                 withdrawAmount:
                     type: string
                 withdrawAmountUsd:
@@ -14830,6 +16516,12 @@ components:
                     type: string
                 depositMinusWithdrawAmountReportingCurrency:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
         api.backoffice.service.v1.LoginRequest:
             type: object
             properties:
@@ -14879,8 +16571,6 @@ components:
                 currency:
                     type: string
                 transactionType:
-                    type: string
-                transactionId:
                     type: string
                 amount:
                     type: string
@@ -15146,6 +16836,8 @@ components:
         api.backoffice.service.v1.PrecheckOperatorApexDomainRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 apexDomain:
                     type: string
                 domain:
@@ -15191,6 +16883,24 @@ components:
             properties:
                 token:
                     type: string
+        api.backoffice.service.v1.RepairAllSegmentsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                triggerCalculation:
+                    type: boolean
+            description: RepairAllSegments
+        api.backoffice.service.v1.RepairSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                triggerCalculation:
+                    type: boolean
+            description: RepairSegment
         api.backoffice.service.v1.ResetPasswordRequest:
             type: object
             properties:
@@ -15335,6 +17045,19 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/system.service.v1.FileInfo'
+        api.backoffice.service.v1.SetOAuthProviderEnabledRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                enabled:
+                    type: boolean
+            description: SetOAuthProviderEnabledRequest - request to enable/disable OAuth provider
+        api.backoffice.service.v1.SetOAuthProviderEnabledResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -15412,6 +17135,20 @@ components:
                     format: int32
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlanConfig'
+                paymentChannelRate:
+                    type: string
+                thirdPartyGameRate:
+                    type: string
+        api.backoffice.service.v1.SetSegmentOverrideRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                segmentId:
+                    type: string
+                disabled:
+                    type: boolean
+            description: SetSegmentOverride
         api.backoffice.service.v1.SetUserTagsRequest:
             type: object
             properties:
@@ -15452,17 +17189,13 @@ components:
                     description: status "pending" "approved" "declined"
                 transactionId:
                     type: string
-                depositBankAccountFirstname:
-                    type: string
-                depositBankAccountLastname:
+                depositBeneficiaryName:
                     type: string
                 userId:
                     type: string
                 userName:
                     type: string
-                userBankAccountFirstname:
-                    type: string
-                userBankAccountLastname:
+                userBeneficiaryName:
                     type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
@@ -15483,6 +17216,14 @@ components:
                     type: boolean
                 roleId:
                     type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                locked:
+                    type: boolean
         api.backoffice.service.v1.UpdateAccountResponse:
             type: object
             properties: {}
@@ -15500,6 +17241,13 @@ components:
         api.backoffice.service.v1.UpdateAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.OperatorSettings'
         api.backoffice.service.v1.UpdateAffiliateRequest:
             type: object
             properties:
@@ -15582,6 +17330,36 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateGameResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UpdateOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                clientId:
+                    type: string
+                clientSecret:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+            description: UpdateOAuthProviderConfigRequest - request to update OAuth provider config
+        api.backoffice.service.v1.UpdateOAuthProviderConfigResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
@@ -15749,6 +17527,22 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                rules:
+                    type: object
+                enabled:
+                    type: boolean
+            description: UpdateSegment
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -15936,6 +17730,8 @@ components:
                     type: string
                 filePath:
                     type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UploadOperatorStaticFileResponse:
             type: object
             properties: {}
@@ -16337,6 +18133,223 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
+        api.crm.service.v1.CalculateSegmentResponse:
+            type: object
+            properties:
+                usersMatched:
+                    type: string
+                usersAdded:
+                    type: string
+                usersRemoved:
+                    type: string
+        api.crm.service.v1.CreateSegmentResponse:
+            type: object
+            properties:
+                segment:
+                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.DeleteSegmentResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.FieldSchema:
+            type: object
+            properties:
+                field:
+                    type: string
+                label:
+                    type: string
+                type:
+                    enum:
+                        - FIELD_TYPE_UNSPECIFIED
+                        - FIELD_TYPE_BOOLEAN
+                        - FIELD_TYPE_NUMERIC
+                        - FIELD_TYPE_DATE
+                        - FIELD_TYPE_STRING
+                    type: string
+                    format: enum
+                operators:
+                    type: array
+                    items:
+                        type: string
+                valueSchema:
+                    type: object
+            description: Field schema for frontend query builder
+        api.crm.service.v1.GetSegmentFieldSchemaResponse:
+            type: object
+            properties:
+                fields:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.FieldSchema'
+        api.crm.service.v1.GetSegmentOverrideResponse:
+            type: object
+            properties:
+                disabled:
+                    type: boolean
+                hasOverride:
+                    type: boolean
+        api.crm.service.v1.GetSegmentResponse:
+            type: object
+            properties:
+                segment:
+                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.GetSegmentUsersResponse:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.SegmentUser'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.crm.service.v1.GetSegmentsWithMissingFieldsResponse:
+            type: object
+            properties:
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.GetUserSegmentsResponse:
+            type: object
+            properties:
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.ListSegmentsResponse:
+            type: object
+            properties:
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.crm.service.v1.RepairAllSegmentsResponse:
+            type: object
+            properties:
+                repairedCount:
+                    type: string
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.RepairSegmentResponse'
+        api.crm.service.v1.RepairSegmentResponse:
+            type: object
+            properties:
+                segmentId:
+                    type: string
+                fields:
+                    type: array
+                    items:
+                        type: string
+                calculated:
+                    type: boolean
+                usersMatched:
+                    type: string
+                usersAdded:
+                    type: string
+                usersRemoved:
+                    type: string
+        api.crm.service.v1.Segment:
+            type: object
+            properties:
+                id:
+                    type: string
+                segmentKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - SEGMENT_TYPE_UNSPECIFIED
+                        - SEGMENT_TYPE_USER_STATE
+                        - SEGMENT_TYPE_BEHAVIORAL
+                        - SEGMENT_TYPE_IMPORTED
+                        - SEGMENT_TYPE_RFM
+                    type: string
+                    format: enum
+                ownerOperatorId:
+                    type: string
+                    description: Ownership hierarchy
+                ownerCompanyOperatorId:
+                    type: string
+                ownerRetailerOperatorId:
+                    type: string
+                ownerSystemOperatorId:
+                    type: string
+                ownerLevel:
+                    enum:
+                        - OWNER_LEVEL_UNSPECIFIED
+                        - OWNER_LEVEL_SYSTEM
+                        - OWNER_LEVEL_RETAILER
+                        - OWNER_LEVEL_COMPANY
+                        - OWNER_LEVEL_OPERATOR
+                    type: string
+                    format: enum
+                rules:
+                    type: object
+                    description: Rules as JSON structure
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                lastCalculatedAt:
+                    type: string
+                    format: date-time
+                userCount:
+                    type: string
+                    description: Computed fields
+            description: Segment definition
+        api.crm.service.v1.SegmentUser:
+            type: object
+            properties:
+                segmentId:
+                    type: string
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                enteredAt:
+                    type: string
+                    format: date-time
+                leftAt:
+                    type: string
+                    format: date-time
+                isMember:
+                    type: boolean
+            description: Segment user membership
+        api.crm.service.v1.SetSegmentOverrideResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.UpdateSegmentResponse:
+            type: object
+            properties:
+                segment:
+                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
         api.game.service.v1.Action:
             type: object
             properties:
@@ -17824,6 +19837,120 @@ components:
                     type: boolean
                 maskingRule:
                     type: string
+        api.push.service.v1.ChannelConfig:
+            type: object
+            properties:
+                telegram:
+                    $ref: '#/components/schemas/api.push.service.v1.TelegramChannelConfig'
+                slack:
+                    $ref: '#/components/schemas/api.push.service.v1.SlackChannelConfig'
+        api.push.service.v1.CreateNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                name:
+                    type: string
+                channelType:
+                    enum:
+                        - CHANNEL_TYPE_UNSPECIFIED
+                        - CHANNEL_TYPE_TELEGRAM
+                        - CHANNEL_TYPE_SLACK
+                    type: string
+                    format: enum
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                enabled:
+                    type: boolean
+        api.push.service.v1.CreateNotificationChannelResponse:
+            type: object
+            properties:
+                channel:
+                    $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+        api.push.service.v1.CreateNotificationRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                name:
+                    type: string
+                messageType:
+                    type: string
+                ruleType:
+                    enum:
+                        - RULE_TYPE_UNSPECIFIED
+                        - RULE_TYPE_GENERIC
+                        - RULE_TYPE_CURRENCY_THRESHOLD
+                    type: string
+                    format: enum
+                channelIds:
+                    type: array
+                    items:
+                        type: string
+                currencyConditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                enabled:
+                    type: boolean
+        api.push.service.v1.CreateNotificationRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+        api.push.service.v1.CurrencyCondition:
+            type: object
+            properties:
+                currency:
+                    type: string
+                minAmount:
+                    type: string
+                minOdds:
+                    type: string
+        api.push.service.v1.DeleteNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+        api.push.service.v1.DeleteNotificationChannelResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.DeleteNotificationRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+        api.push.service.v1.DeleteNotificationRuleResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.GetNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+        api.push.service.v1.GetNotificationChannelResponse:
+            type: object
+            properties:
+                channel:
+                    $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+        api.push.service.v1.GetNotificationRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+        api.push.service.v1.GetNotificationRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
         api.push.service.v1.ListBetTickerConfigResponse:
             type: object
             properties:
@@ -17842,9 +19969,574 @@ components:
                     $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
                 highWins:
                     $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+        api.push.service.v1.ListNotificationChannelsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelType:
+                    enum:
+                        - CHANNEL_TYPE_UNSPECIFIED
+                        - CHANNEL_TYPE_TELEGRAM
+                        - CHANNEL_TYPE_SLACK
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                includeInherited:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListNotificationChannelsResponse:
+            type: object
+            properties:
+                channels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListNotificationRulesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                messageType:
+                    type: string
+                enabled:
+                    type: boolean
+                includeInherited:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListNotificationRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.NotificationChannel:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                channelType:
+                    enum:
+                        - CHANNEL_TYPE_UNSPECIFIED
+                        - CHANNEL_TYPE_TELEGRAM
+                        - CHANNEL_TYPE_SLACK
+                    type: string
+                    format: enum
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                isInherited:
+                    type: boolean
+        api.push.service.v1.NotificationRule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                messageType:
+                    type: string
+                ruleType:
+                    enum:
+                        - RULE_TYPE_UNSPECIFIED
+                        - RULE_TYPE_GENERIC
+                        - RULE_TYPE_CURRENCY_THRESHOLD
+                    type: string
+                    format: enum
+                channelIds:
+                    type: array
+                    items:
+                        type: string
+                channels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                currencyConditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                isInherited:
+                    type: boolean
+        api.push.service.v1.SlackChannelConfig:
+            type: object
+            properties:
+                webhookUrl:
+                    type: string
+                webhookUrlMasked:
+                    type: string
+        api.push.service.v1.TelegramChannelConfig:
+            type: object
+            properties:
+                botToken:
+                    type: string
+                botTokenMasked:
+                    type: string
+                chatId:
+                    type: string
+        api.push.service.v1.TestNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+                testMessage:
+                    type: string
+        api.push.service.v1.TestNotificationChannelResponse:
+            type: object
+            properties:
+                success:
+                    type: boolean
+                errorMessage:
+                    type: string
         api.push.service.v1.UpdateBetTickerConfigResponse:
             type: object
             properties: {}
+        api.push.service.v1.UpdateNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+                name:
+                    type: string
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                enabled:
+                    type: boolean
+        api.push.service.v1.UpdateNotificationChannelResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.UpdateNotificationRuleRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                ruleId:
+                    type: string
+                name:
+                    type: string
+                channelIds:
+                    type: array
+                    items:
+                        type: string
+                currencyConditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                enabled:
+                    type: boolean
+        api.push.service.v1.UpdateNotificationRuleResponse:
+            type: object
+            properties: {}
+        api.report.service.v1.GetDepositSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.report.service.v1.GetGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetOverviewDashboardRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetPlayerGameSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetSummaryRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                affiliateCodes:
+                    type: array
+                    items:
+                        type: string
+                referralCodes:
+                    type: array
+                    items:
+                        type: string
+                registrationCountries:
+                    type: array
+                    items:
+                        type: string
+        api.report.service.v1.GetTimeRangedDashboardRequest:
+            type: object
+            properties:
+                timeRangeType:
+                    enum:
+                        - TIME_RANGE_TYPE_UNSPECIFIED
+                        - TIME_RANGE_TYPE_THIS_MONTH
+                        - TIME_RANGE_TYPE_THIS_WEEK
+                        - TIME_RANGE_TYPE_CUSTOM_DAYS
+                    type: string
+                    format: enum
+                customDays:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetTopOperatorsDashboardRequest:
+            type: object
+            properties:
+                timeRangeType:
+                    enum:
+                        - TIME_RANGE_TYPE_UNSPECIFIED
+                        - TIME_RANGE_TYPE_TODAY
+                        - TIME_RANGE_TYPE_THIS_WEEK
+                        - TIME_RANGE_TYPE_THIS_MONTH
+                    type: string
+                    format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetTopUsersDashboardRequest:
+            type: object
+            properties:
+                timeRangeType:
+                    enum:
+                        - TIME_RANGE_TYPE_UNSPECIFIED
+                        - TIME_RANGE_TYPE_TODAY
+                        - TIME_RANGE_TYPE_THIS_WEEK
+                        - TIME_RANGE_TYPE_THIS_MONTH
+                    type: string
+                    format: enum
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.GetWithdrawSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.report.service.v1.ListDepositDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.report.service.v1.ListDepositVtgDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListPlayerGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListRegisterRetentionRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.report.service.v1.ListSummariesRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                affiliateCodes:
+                    type: array
+                    items:
+                        type: string
+                referralCodes:
+                    type: array
+                    items:
+                        type: string
+                registrationCountries:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.report.service.v1.ListWithdrawDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.report.service.v1.ListWithdrawVtgDetailsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.review.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -18022,6 +20714,8 @@ components:
                     $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionInfo'
                 walletTransactionSummary:
                     $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionSummary'
+                operatorWalletTransactionInfo:
+                    $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse_WalletTransactionInfo'
         api.review.service.v1.GetTicketResponse_Comment:
             type: object
             properties:
@@ -18064,6 +20758,10 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                channelId:
+                    type: string
+                rawRequest:
+                    type: string
         api.review.service.v1.GetTicketResponse_Ticket:
             type: object
             properties:
@@ -18369,6 +21067,47 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.AvailableOAuthProvider:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                name:
+                    type: string
+                authorizationUrl:
+                    type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+            description: AvailableOAuthProvider - provider info for frontend
+        api.user.service.v1.BindOAuthAccountRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                oauthToken:
+                    type: string
+            description: BindOAuthAccountRequest - bind OAuth account to current user
+        api.user.service.v1.BindOAuthAccountResponse:
+            type: object
+            properties:
+                accountInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.OAuthAccountInfo'
         api.user.service.v1.BindOperatorEmailDomainResponse:
             type: object
             properties:
@@ -18586,6 +21325,13 @@ components:
                     type: boolean
                 description:
                     type: string
+        api.user.service.v1.GetAvailableOAuthProvidersResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.AvailableOAuthProvider'
         api.user.service.v1.GetClaimableVipRewardsRequest:
             type: object
             properties: {}
@@ -18905,6 +21651,15 @@ components:
                 reportingCurrency:
                     type: string
             description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+        api.user.service.v1.ListBoundOAuthAccountsResponse:
+            type: object
+            properties:
+                accounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.OAuthAccountInfo'
+                hasPassword:
+                    type: boolean
         api.user.service.v1.ListCompanyOperatorsResponse:
             type: object
             properties:
@@ -19108,6 +21863,73 @@ components:
                     type: string
                 chatId:
                     type: string
+        api.user.service.v1.OAuthAccountInfo:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                providerUserId:
+                    type: string
+                email:
+                    type: string
+                displayName:
+                    type: string
+                avatarUrl:
+                    type: string
+                boundAt:
+                    type: string
+                status:
+                    type: string
+            description: OAuthAccountInfo - bound OAuth account info
+        api.user.service.v1.OAuthProviderConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                clientId:
+                    type: string
+                clientSecretMasked:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: OAuthProviderConfig represents operator's OAuth provider configuration
         api.user.service.v1.OAuthRequest:
             type: object
             properties:
@@ -19117,6 +21939,7 @@ components:
                         - OAUTH_PROVIDER_GOOGLE
                         - OAUTH_PROVIDER_FACEBOOK
                         - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
                     type: string
                     description: The OAuth provider to use for authentication.
                     format: enum
@@ -19132,6 +21955,8 @@ components:
                 minGameKycLevel:
                     type: integer
                     format: int32
+                noGameWithZeroBalance:
+                    type: boolean
         api.user.service.v1.OperatorAccountPasswordSettings:
             type: object
             properties:
@@ -19387,6 +22212,9 @@ components:
                 phoneVerificationCode:
                     type: string
                     description: Phone verification code for verification-required operators
+                nickname:
+                    type: string
+                    description: Nickname
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.RegistrationFieldPolicy:
             type: object
@@ -19413,6 +22241,8 @@ components:
                 birthday:
                     type: boolean
                 idType:
+                    type: boolean
+                nickname:
                     type: boolean
         api.user.service.v1.RequestDailyLossbackRequest:
             type: object
@@ -19559,6 +22389,22 @@ components:
                     type: string
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
+        api.user.service.v1.UnbindOAuthAccountRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+            description: UnbindOAuthAccountRequest - unbind OAuth account from current user
+        api.user.service.v1.UnbindOAuthAccountResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
@@ -19652,6 +22498,8 @@ components:
                 affiliateId:
                     type: string
                 operatorUserId:
+                    type: string
+                username:
                     type: string
         api.user.service.v1.UpdateUserResponse:
             type: object
@@ -22865,11 +25713,19 @@ tags:
          Provides methods for backoffice bcpay management
     - name: BackofficeCloudflare
     - name: BackofficeCompany
+    - name: BackofficeCrm
+      description: CRM segment management service for backoffice
     - name: BackofficeDashboard
     - name: BackofficeDns
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
+    - name: BackofficeNotification
+      description: |-
+        BackofficeNotification service
+         Provides HTTP APIs for notification channel and rule management
+    - name: BackofficeOAuth
+      description: BackofficeOAuth service provides OAuth provider configuration management for operators
     - name: BackofficeOperator
     - name: BackofficePayment
       description: |-
@@ -22884,11 +25740,19 @@ tags:
     - name: BackofficeWallet
     - name: Bcpay
       description: User service provides authentication and user management functionality.
+    - name: DashboardService
+      description: |-
+        DashboardService provides dashboard analytics via ClickHouse.
+         This service is the ONLY service allowed to query ClickHouse directly for dashboard data.
     - name: Game
     - name: Payment
       description: |-
         Payment Service
          Provides methods for managing payment methods, channels, and transactions
+    - name: ReportService
+      description: |-
+        ReportService provides analytics and reporting functionality via ClickHouse.
+         This service is the ONLY service allowed to query ClickHouse directly.
     - name: Review
       description: Review service provides review functionality.
     - name: User

@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "common/common.proto";
+import "push/service/v1/push_notification.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// BackofficeNotification service
+// Provides HTTP APIs for notification channel and rule management
+service BackofficeNotification {
+  // ============ Channel Management ============
+
+  // Create a new notification channel
+  rpc CreateNotificationChannel(api.push.service.v1.CreateNotificationChannelRequest) returns (api.push.service.v1.CreateNotificationChannelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/channel/create"
+      body: "*"
+    };
+  }
+
+  // List notification channels with pagination
+  rpc ListNotificationChannels(api.push.service.v1.ListNotificationChannelsRequest) returns (api.push.service.v1.ListNotificationChannelsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/channel/list"
+      body: "*"
+    };
+  }
+
+  // Get a specific notification channel
+  rpc GetNotificationChannel(api.push.service.v1.GetNotificationChannelRequest) returns (api.push.service.v1.GetNotificationChannelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/channel/get"
+      body: "*"
+    };
+  }
+
+  // Update a notification channel
+  rpc UpdateNotificationChannel(api.push.service.v1.UpdateNotificationChannelRequest) returns (api.push.service.v1.UpdateNotificationChannelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/channel/update"
+      body: "*"
+    };
+  }
+
+  // Delete a notification channel
+  rpc DeleteNotificationChannel(api.push.service.v1.DeleteNotificationChannelRequest) returns (api.push.service.v1.DeleteNotificationChannelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/channel/delete"
+      body: "*"
+    };
+  }
+
+  // Test a notification channel by sending a test message
+  rpc TestNotificationChannel(api.push.service.v1.TestNotificationChannelRequest) returns (api.push.service.v1.TestNotificationChannelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/channel/test"
+      body: "*"
+    };
+  }
+
+  // ============ Rule Management ============
+
+  // Create a new notification rule
+  rpc CreateNotificationRule(api.push.service.v1.CreateNotificationRuleRequest) returns (api.push.service.v1.CreateNotificationRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/rule/create"
+      body: "*"
+    };
+  }
+
+  // List notification rules with pagination
+  rpc ListNotificationRules(api.push.service.v1.ListNotificationRulesRequest) returns (api.push.service.v1.ListNotificationRulesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/rule/list"
+      body: "*"
+    };
+  }
+
+  // Get a specific notification rule
+  rpc GetNotificationRule(api.push.service.v1.GetNotificationRuleRequest) returns (api.push.service.v1.GetNotificationRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/rule/get"
+      body: "*"
+    };
+  }
+
+  // Update a notification rule
+  rpc UpdateNotificationRule(api.push.service.v1.UpdateNotificationRuleRequest) returns (api.push.service.v1.UpdateNotificationRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/rule/update"
+      body: "*"
+    };
+  }
+
+  // Delete a notification rule
+  rpc DeleteNotificationRule(api.push.service.v1.DeleteNotificationRuleRequest) returns (api.push.service.v1.DeleteNotificationRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/notification/rule/delete"
+      body: "*"
+    };
+  }
+}

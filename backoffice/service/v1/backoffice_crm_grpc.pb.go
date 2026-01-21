@@ -20,17 +20,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeCrm_CreateSegment_FullMethodName         = "/api.backoffice.service.v1.BackofficeCrm/CreateSegment"
-	BackofficeCrm_UpdateSegment_FullMethodName         = "/api.backoffice.service.v1.BackofficeCrm/UpdateSegment"
-	BackofficeCrm_GetSegment_FullMethodName            = "/api.backoffice.service.v1.BackofficeCrm/GetSegment"
-	BackofficeCrm_ListSegments_FullMethodName          = "/api.backoffice.service.v1.BackofficeCrm/ListSegments"
-	BackofficeCrm_DeleteSegment_FullMethodName         = "/api.backoffice.service.v1.BackofficeCrm/DeleteSegment"
-	BackofficeCrm_CalculateSegment_FullMethodName      = "/api.backoffice.service.v1.BackofficeCrm/CalculateSegment"
-	BackofficeCrm_GetSegmentUsers_FullMethodName       = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentUsers"
-	BackofficeCrm_GetUserSegments_FullMethodName       = "/api.backoffice.service.v1.BackofficeCrm/GetUserSegments"
-	BackofficeCrm_SetSegmentOverride_FullMethodName    = "/api.backoffice.service.v1.BackofficeCrm/SetSegmentOverride"
-	BackofficeCrm_GetSegmentOverride_FullMethodName    = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentOverride"
-	BackofficeCrm_GetSegmentFieldSchema_FullMethodName = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentFieldSchema"
+	BackofficeCrm_CreateSegment_FullMethodName                = "/api.backoffice.service.v1.BackofficeCrm/CreateSegment"
+	BackofficeCrm_UpdateSegment_FullMethodName                = "/api.backoffice.service.v1.BackofficeCrm/UpdateSegment"
+	BackofficeCrm_GetSegment_FullMethodName                   = "/api.backoffice.service.v1.BackofficeCrm/GetSegment"
+	BackofficeCrm_ListSegments_FullMethodName                 = "/api.backoffice.service.v1.BackofficeCrm/ListSegments"
+	BackofficeCrm_DeleteSegment_FullMethodName                = "/api.backoffice.service.v1.BackofficeCrm/DeleteSegment"
+	BackofficeCrm_CalculateSegment_FullMethodName             = "/api.backoffice.service.v1.BackofficeCrm/CalculateSegment"
+	BackofficeCrm_GetSegmentUsers_FullMethodName              = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentUsers"
+	BackofficeCrm_GetUserSegments_FullMethodName              = "/api.backoffice.service.v1.BackofficeCrm/GetUserSegments"
+	BackofficeCrm_SetSegmentOverride_FullMethodName           = "/api.backoffice.service.v1.BackofficeCrm/SetSegmentOverride"
+	BackofficeCrm_GetSegmentOverride_FullMethodName           = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentOverride"
+	BackofficeCrm_GetSegmentFieldSchema_FullMethodName        = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentFieldSchema"
+	BackofficeCrm_RepairSegment_FullMethodName                = "/api.backoffice.service.v1.BackofficeCrm/RepairSegment"
+	BackofficeCrm_RepairAllSegments_FullMethodName            = "/api.backoffice.service.v1.BackofficeCrm/RepairAllSegments"
+	BackofficeCrm_GetSegmentsWithMissingFields_FullMethodName = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentsWithMissingFields"
 )
 
 // BackofficeCrmClient is the client API for BackofficeCrm service.
@@ -54,6 +57,10 @@ type BackofficeCrmClient interface {
 	GetSegmentOverride(ctx context.Context, in *GetSegmentOverrideRequest, opts ...grpc.CallOption) (*v1.GetSegmentOverrideResponse, error)
 	// Schema API for frontend query builder
 	GetSegmentFieldSchema(ctx context.Context, in *GetSegmentFieldSchemaRequest, opts ...grpc.CallOption) (*v1.GetSegmentFieldSchemaResponse, error)
+	// Segment repair operations
+	RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...grpc.CallOption) (*v1.RepairSegmentResponse, error)
+	RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...grpc.CallOption) (*v1.RepairAllSegmentsResponse, error)
+	GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...grpc.CallOption) (*v1.GetSegmentsWithMissingFieldsResponse, error)
 }
 
 type backofficeCrmClient struct {
@@ -174,6 +181,36 @@ func (c *backofficeCrmClient) GetSegmentFieldSchema(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *backofficeCrmClient) RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...grpc.CallOption) (*v1.RepairSegmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.RepairSegmentResponse)
+	err := c.cc.Invoke(ctx, BackofficeCrm_RepairSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeCrmClient) RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...grpc.CallOption) (*v1.RepairAllSegmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.RepairAllSegmentsResponse)
+	err := c.cc.Invoke(ctx, BackofficeCrm_RepairAllSegments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeCrmClient) GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...grpc.CallOption) (*v1.GetSegmentsWithMissingFieldsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetSegmentsWithMissingFieldsResponse)
+	err := c.cc.Invoke(ctx, BackofficeCrm_GetSegmentsWithMissingFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeCrmServer is the server API for BackofficeCrm service.
 // All implementations must embed UnimplementedBackofficeCrmServer
 // for forward compatibility.
@@ -195,6 +232,10 @@ type BackofficeCrmServer interface {
 	GetSegmentOverride(context.Context, *GetSegmentOverrideRequest) (*v1.GetSegmentOverrideResponse, error)
 	// Schema API for frontend query builder
 	GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*v1.GetSegmentFieldSchemaResponse, error)
+	// Segment repair operations
+	RepairSegment(context.Context, *RepairSegmentRequest) (*v1.RepairSegmentResponse, error)
+	RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*v1.RepairAllSegmentsResponse, error)
+	GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*v1.GetSegmentsWithMissingFieldsResponse, error)
 	mustEmbedUnimplementedBackofficeCrmServer()
 }
 
@@ -237,6 +278,15 @@ func (UnimplementedBackofficeCrmServer) GetSegmentOverride(context.Context, *Get
 }
 func (UnimplementedBackofficeCrmServer) GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*v1.GetSegmentFieldSchemaResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSegmentFieldSchema not implemented")
+}
+func (UnimplementedBackofficeCrmServer) RepairSegment(context.Context, *RepairSegmentRequest) (*v1.RepairSegmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RepairSegment not implemented")
+}
+func (UnimplementedBackofficeCrmServer) RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*v1.RepairAllSegmentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RepairAllSegments not implemented")
+}
+func (UnimplementedBackofficeCrmServer) GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*v1.GetSegmentsWithMissingFieldsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSegmentsWithMissingFields not implemented")
 }
 func (UnimplementedBackofficeCrmServer) mustEmbedUnimplementedBackofficeCrmServer() {}
 func (UnimplementedBackofficeCrmServer) testEmbeddedByValue()                       {}
@@ -457,6 +507,60 @@ func _BackofficeCrm_GetSegmentFieldSchema_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeCrm_RepairSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RepairSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeCrmServer).RepairSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeCrm_RepairSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeCrmServer).RepairSegment(ctx, req.(*RepairSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeCrm_RepairAllSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RepairAllSegmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeCrmServer).RepairAllSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeCrm_RepairAllSegments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeCrmServer).RepairAllSegments(ctx, req.(*RepairAllSegmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeCrm_GetSegmentsWithMissingFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSegmentsWithMissingFieldsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeCrmServer).GetSegmentsWithMissingFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeCrm_GetSegmentsWithMissingFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeCrmServer).GetSegmentsWithMissingFields(ctx, req.(*GetSegmentsWithMissingFieldsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeCrm_ServiceDesc is the grpc.ServiceDesc for BackofficeCrm service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -507,6 +611,18 @@ var BackofficeCrm_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSegmentFieldSchema",
 			Handler:    _BackofficeCrm_GetSegmentFieldSchema_Handler,
+		},
+		{
+			MethodName: "RepairSegment",
+			Handler:    _BackofficeCrm_RepairSegment_Handler,
+		},
+		{
+			MethodName: "RepairAllSegments",
+			Handler:    _BackofficeCrm_RepairAllSegments_Handler,
+		},
+		{
+			MethodName: "GetSegmentsWithMissingFields",
+			Handler:    _BackofficeCrm_GetSegmentsWithMissingFields_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
