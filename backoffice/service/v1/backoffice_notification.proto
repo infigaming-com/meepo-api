@@ -65,10 +65,10 @@ service BackofficeNotification {
 
   // ============ Rule Management ============
 
-  // Create a new notification rule
-  rpc CreateNotificationRule(api.push.service.v1.CreateNotificationRuleRequest) returns (api.push.service.v1.CreateNotificationRuleResponse) {
+  // Save all rules for a channel (batch create/update/delete)
+  rpc SaveChannelRules(api.push.service.v1.SaveChannelRulesRequest) returns (api.push.service.v1.SaveChannelRulesResponse) {
     option (google.api.http) = {
-      post: "/v1/backoffice/notification/rule/create"
+      post: "/v1/backoffice/notification/rule/save"
       body: "*"
     };
   }
@@ -81,26 +81,10 @@ service BackofficeNotification {
     };
   }
 
-  // Get a specific notification rule
-  rpc GetNotificationRule(api.push.service.v1.GetNotificationRuleRequest) returns (api.push.service.v1.GetNotificationRuleResponse) {
+  // Get supported message types for frontend dropdown
+  rpc GetSupportedMessageTypes(api.push.service.v1.GetSupportedMessageTypesRequest) returns (api.push.service.v1.GetSupportedMessageTypesResponse) {
     option (google.api.http) = {
-      post: "/v1/backoffice/notification/rule/get"
-      body: "*"
-    };
-  }
-
-  // Update a notification rule
-  rpc UpdateNotificationRule(api.push.service.v1.UpdateNotificationRuleRequest) returns (api.push.service.v1.UpdateNotificationRuleResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/notification/rule/update"
-      body: "*"
-    };
-  }
-
-  // Delete a notification rule
-  rpc DeleteNotificationRule(api.push.service.v1.DeleteNotificationRuleRequest) returns (api.push.service.v1.DeleteNotificationRuleResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/notification/rule/delete"
+      post: "/v1/backoffice/notification/message-types"
       body: "*"
     };
   }

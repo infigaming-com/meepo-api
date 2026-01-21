@@ -94,11 +94,8 @@ const (
 	Wallet_CreditFreespinWin_FullMethodName                   = "/api.wallet.service.v1.Wallet/CreditFreespinWin"
 	Wallet_CreditFreeBetWin_FullMethodName                    = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
 	Wallet_GetOperatorUserFinancialSummary_FullMethodName     = "/api.wallet.service.v1.Wallet/GetOperatorUserFinancialSummary"
-<<<<<<< Updated upstream
-=======
 	Wallet_GetWalletConfig_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 	Wallet_BatchGetUserFinancialMetrics_FullMethodName        = "/api.wallet.service.v1.Wallet/BatchGetUserFinancialMetrics"
->>>>>>> Stashed changes
 )
 
 // WalletClient is the client API for Wallet service.
@@ -235,14 +232,11 @@ type WalletClient interface {
 	CreditFreeBetWin(ctx context.Context, in *CreditFreeBetWinRequest, opts ...grpc.CallOption) (*CreditFreeBetWinResponse, error)
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
-<<<<<<< Updated upstream
-=======
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error)
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error)
->>>>>>> Stashed changes
 }
 
 type walletClient struct {
@@ -1003,8 +997,6 @@ func (c *walletClient) GetOperatorUserFinancialSummary(ctx context.Context, in *
 	return out, nil
 }
 
-<<<<<<< Updated upstream
-=======
 func (c *walletClient) GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWalletConfigResponse)
@@ -1025,7 +1017,6 @@ func (c *walletClient) BatchGetUserFinancialMetrics(ctx context.Context, in *Bat
 	return out, nil
 }
 
->>>>>>> Stashed changes
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1160,14 +1151,11 @@ type WalletServer interface {
 	CreditFreeBetWin(context.Context, *CreditFreeBetWinRequest) (*CreditFreeBetWinResponse, error)
 	// GetOperatorUserFinancialSummary returns the financial summary of all users by an operator
 	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
-<<<<<<< Updated upstream
-=======
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error)
->>>>>>> Stashed changes
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1403,15 +1391,12 @@ func (UnimplementedWalletServer) CreditFreeBetWin(context.Context, *CreditFreeBe
 func (UnimplementedWalletServer) GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorUserFinancialSummary not implemented")
 }
-<<<<<<< Updated upstream
-=======
 func (UnimplementedWalletServer) GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetWalletConfig not implemented")
 }
 func (UnimplementedWalletServer) BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BatchGetUserFinancialMetrics not implemented")
 }
->>>>>>> Stashed changes
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
 
@@ -2783,8 +2768,6 @@ func _Wallet_GetOperatorUserFinancialSummary_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-<<<<<<< Updated upstream
-=======
 func _Wallet_GetWalletConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetWalletConfigRequest)
 	if err := dec(in); err != nil {
@@ -2821,7 +2804,6 @@ func _Wallet_BatchGetUserFinancialMetrics_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
->>>>>>> Stashed changes
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3129,8 +3111,6 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetOperatorUserFinancialSummary",
 			Handler:    _Wallet_GetOperatorUserFinancialSummary_Handler,
 		},
-<<<<<<< Updated upstream
-=======
 		{
 			MethodName: "GetWalletConfig",
 			Handler:    _Wallet_GetWalletConfig_Handler,
@@ -3139,7 +3119,6 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "BatchGetUserFinancialMetrics",
 			Handler:    _Wallet_BatchGetUserFinancialMetrics_Handler,
 		},
->>>>>>> Stashed changes
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "wallet/service/v1/wallet.proto",

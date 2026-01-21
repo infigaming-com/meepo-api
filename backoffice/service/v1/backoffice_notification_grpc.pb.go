@@ -26,11 +26,9 @@ const (
 	BackofficeNotification_UpdateNotificationChannel_FullMethodName = "/api.backoffice.service.v1.BackofficeNotification/UpdateNotificationChannel"
 	BackofficeNotification_DeleteNotificationChannel_FullMethodName = "/api.backoffice.service.v1.BackofficeNotification/DeleteNotificationChannel"
 	BackofficeNotification_TestNotificationChannel_FullMethodName   = "/api.backoffice.service.v1.BackofficeNotification/TestNotificationChannel"
-	BackofficeNotification_CreateNotificationRule_FullMethodName    = "/api.backoffice.service.v1.BackofficeNotification/CreateNotificationRule"
+	BackofficeNotification_SaveChannelRules_FullMethodName          = "/api.backoffice.service.v1.BackofficeNotification/SaveChannelRules"
 	BackofficeNotification_ListNotificationRules_FullMethodName     = "/api.backoffice.service.v1.BackofficeNotification/ListNotificationRules"
-	BackofficeNotification_GetNotificationRule_FullMethodName       = "/api.backoffice.service.v1.BackofficeNotification/GetNotificationRule"
-	BackofficeNotification_UpdateNotificationRule_FullMethodName    = "/api.backoffice.service.v1.BackofficeNotification/UpdateNotificationRule"
-	BackofficeNotification_DeleteNotificationRule_FullMethodName    = "/api.backoffice.service.v1.BackofficeNotification/DeleteNotificationRule"
+	BackofficeNotification_GetSupportedMessageTypes_FullMethodName  = "/api.backoffice.service.v1.BackofficeNotification/GetSupportedMessageTypes"
 )
 
 // BackofficeNotificationClient is the client API for BackofficeNotification service.
@@ -52,16 +50,12 @@ type BackofficeNotificationClient interface {
 	DeleteNotificationChannel(ctx context.Context, in *v1.DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*v1.DeleteNotificationChannelResponse, error)
 	// Test a notification channel by sending a test message
 	TestNotificationChannel(ctx context.Context, in *v1.TestNotificationChannelRequest, opts ...grpc.CallOption) (*v1.TestNotificationChannelResponse, error)
-	// Create a new notification rule
-	CreateNotificationRule(ctx context.Context, in *v1.CreateNotificationRuleRequest, opts ...grpc.CallOption) (*v1.CreateNotificationRuleResponse, error)
+	// Save all rules for a channel (batch create/update/delete)
+	SaveChannelRules(ctx context.Context, in *v1.SaveChannelRulesRequest, opts ...grpc.CallOption) (*v1.SaveChannelRulesResponse, error)
 	// List notification rules with pagination
 	ListNotificationRules(ctx context.Context, in *v1.ListNotificationRulesRequest, opts ...grpc.CallOption) (*v1.ListNotificationRulesResponse, error)
-	// Get a specific notification rule
-	GetNotificationRule(ctx context.Context, in *v1.GetNotificationRuleRequest, opts ...grpc.CallOption) (*v1.GetNotificationRuleResponse, error)
-	// Update a notification rule
-	UpdateNotificationRule(ctx context.Context, in *v1.UpdateNotificationRuleRequest, opts ...grpc.CallOption) (*v1.UpdateNotificationRuleResponse, error)
-	// Delete a notification rule
-	DeleteNotificationRule(ctx context.Context, in *v1.DeleteNotificationRuleRequest, opts ...grpc.CallOption) (*v1.DeleteNotificationRuleResponse, error)
+	// Get supported message types for frontend dropdown
+	GetSupportedMessageTypes(ctx context.Context, in *v1.GetSupportedMessageTypesRequest, opts ...grpc.CallOption) (*v1.GetSupportedMessageTypesResponse, error)
 }
 
 type backofficeNotificationClient struct {
@@ -132,10 +126,10 @@ func (c *backofficeNotificationClient) TestNotificationChannel(ctx context.Conte
 	return out, nil
 }
 
-func (c *backofficeNotificationClient) CreateNotificationRule(ctx context.Context, in *v1.CreateNotificationRuleRequest, opts ...grpc.CallOption) (*v1.CreateNotificationRuleResponse, error) {
+func (c *backofficeNotificationClient) SaveChannelRules(ctx context.Context, in *v1.SaveChannelRulesRequest, opts ...grpc.CallOption) (*v1.SaveChannelRulesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.CreateNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, BackofficeNotification_CreateNotificationRule_FullMethodName, in, out, cOpts...)
+	out := new(v1.SaveChannelRulesResponse)
+	err := c.cc.Invoke(ctx, BackofficeNotification_SaveChannelRules_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,30 +146,10 @@ func (c *backofficeNotificationClient) ListNotificationRules(ctx context.Context
 	return out, nil
 }
 
-func (c *backofficeNotificationClient) GetNotificationRule(ctx context.Context, in *v1.GetNotificationRuleRequest, opts ...grpc.CallOption) (*v1.GetNotificationRuleResponse, error) {
+func (c *backofficeNotificationClient) GetSupportedMessageTypes(ctx context.Context, in *v1.GetSupportedMessageTypesRequest, opts ...grpc.CallOption) (*v1.GetSupportedMessageTypesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.GetNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, BackofficeNotification_GetNotificationRule_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeNotificationClient) UpdateNotificationRule(ctx context.Context, in *v1.UpdateNotificationRuleRequest, opts ...grpc.CallOption) (*v1.UpdateNotificationRuleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, BackofficeNotification_UpdateNotificationRule_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeNotificationClient) DeleteNotificationRule(ctx context.Context, in *v1.DeleteNotificationRuleRequest, opts ...grpc.CallOption) (*v1.DeleteNotificationRuleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.DeleteNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, BackofficeNotification_DeleteNotificationRule_FullMethodName, in, out, cOpts...)
+	out := new(v1.GetSupportedMessageTypesResponse)
+	err := c.cc.Invoke(ctx, BackofficeNotification_GetSupportedMessageTypes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -201,16 +175,12 @@ type BackofficeNotificationServer interface {
 	DeleteNotificationChannel(context.Context, *v1.DeleteNotificationChannelRequest) (*v1.DeleteNotificationChannelResponse, error)
 	// Test a notification channel by sending a test message
 	TestNotificationChannel(context.Context, *v1.TestNotificationChannelRequest) (*v1.TestNotificationChannelResponse, error)
-	// Create a new notification rule
-	CreateNotificationRule(context.Context, *v1.CreateNotificationRuleRequest) (*v1.CreateNotificationRuleResponse, error)
+	// Save all rules for a channel (batch create/update/delete)
+	SaveChannelRules(context.Context, *v1.SaveChannelRulesRequest) (*v1.SaveChannelRulesResponse, error)
 	// List notification rules with pagination
 	ListNotificationRules(context.Context, *v1.ListNotificationRulesRequest) (*v1.ListNotificationRulesResponse, error)
-	// Get a specific notification rule
-	GetNotificationRule(context.Context, *v1.GetNotificationRuleRequest) (*v1.GetNotificationRuleResponse, error)
-	// Update a notification rule
-	UpdateNotificationRule(context.Context, *v1.UpdateNotificationRuleRequest) (*v1.UpdateNotificationRuleResponse, error)
-	// Delete a notification rule
-	DeleteNotificationRule(context.Context, *v1.DeleteNotificationRuleRequest) (*v1.DeleteNotificationRuleResponse, error)
+	// Get supported message types for frontend dropdown
+	GetSupportedMessageTypes(context.Context, *v1.GetSupportedMessageTypesRequest) (*v1.GetSupportedMessageTypesResponse, error)
 	mustEmbedUnimplementedBackofficeNotificationServer()
 }
 
@@ -239,20 +209,14 @@ func (UnimplementedBackofficeNotificationServer) DeleteNotificationChannel(conte
 func (UnimplementedBackofficeNotificationServer) TestNotificationChannel(context.Context, *v1.TestNotificationChannelRequest) (*v1.TestNotificationChannelResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method TestNotificationChannel not implemented")
 }
-func (UnimplementedBackofficeNotificationServer) CreateNotificationRule(context.Context, *v1.CreateNotificationRuleRequest) (*v1.CreateNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateNotificationRule not implemented")
+func (UnimplementedBackofficeNotificationServer) SaveChannelRules(context.Context, *v1.SaveChannelRulesRequest) (*v1.SaveChannelRulesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SaveChannelRules not implemented")
 }
 func (UnimplementedBackofficeNotificationServer) ListNotificationRules(context.Context, *v1.ListNotificationRulesRequest) (*v1.ListNotificationRulesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListNotificationRules not implemented")
 }
-func (UnimplementedBackofficeNotificationServer) GetNotificationRule(context.Context, *v1.GetNotificationRuleRequest) (*v1.GetNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetNotificationRule not implemented")
-}
-func (UnimplementedBackofficeNotificationServer) UpdateNotificationRule(context.Context, *v1.UpdateNotificationRuleRequest) (*v1.UpdateNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateNotificationRule not implemented")
-}
-func (UnimplementedBackofficeNotificationServer) DeleteNotificationRule(context.Context, *v1.DeleteNotificationRuleRequest) (*v1.DeleteNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteNotificationRule not implemented")
+func (UnimplementedBackofficeNotificationServer) GetSupportedMessageTypes(context.Context, *v1.GetSupportedMessageTypesRequest) (*v1.GetSupportedMessageTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSupportedMessageTypes not implemented")
 }
 func (UnimplementedBackofficeNotificationServer) mustEmbedUnimplementedBackofficeNotificationServer() {
 }
@@ -384,20 +348,20 @@ func _BackofficeNotification_TestNotificationChannel_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeNotification_CreateNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.CreateNotificationRuleRequest)
+func _BackofficeNotification_SaveChannelRules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.SaveChannelRulesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeNotificationServer).CreateNotificationRule(ctx, in)
+		return srv.(BackofficeNotificationServer).SaveChannelRules(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeNotification_CreateNotificationRule_FullMethodName,
+		FullMethod: BackofficeNotification_SaveChannelRules_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeNotificationServer).CreateNotificationRule(ctx, req.(*v1.CreateNotificationRuleRequest))
+		return srv.(BackofficeNotificationServer).SaveChannelRules(ctx, req.(*v1.SaveChannelRulesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -420,56 +384,20 @@ func _BackofficeNotification_ListNotificationRules_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeNotification_GetNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetNotificationRuleRequest)
+func _BackofficeNotification_GetSupportedMessageTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.GetSupportedMessageTypesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeNotificationServer).GetNotificationRule(ctx, in)
+		return srv.(BackofficeNotificationServer).GetSupportedMessageTypes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeNotification_GetNotificationRule_FullMethodName,
+		FullMethod: BackofficeNotification_GetSupportedMessageTypes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeNotificationServer).GetNotificationRule(ctx, req.(*v1.GetNotificationRuleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeNotification_UpdateNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdateNotificationRuleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeNotificationServer).UpdateNotificationRule(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeNotification_UpdateNotificationRule_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeNotificationServer).UpdateNotificationRule(ctx, req.(*v1.UpdateNotificationRuleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeNotification_DeleteNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.DeleteNotificationRuleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeNotificationServer).DeleteNotificationRule(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeNotification_DeleteNotificationRule_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeNotificationServer).DeleteNotificationRule(ctx, req.(*v1.DeleteNotificationRuleRequest))
+		return srv.(BackofficeNotificationServer).GetSupportedMessageTypes(ctx, req.(*v1.GetSupportedMessageTypesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -506,24 +434,16 @@ var BackofficeNotification_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeNotification_TestNotificationChannel_Handler,
 		},
 		{
-			MethodName: "CreateNotificationRule",
-			Handler:    _BackofficeNotification_CreateNotificationRule_Handler,
+			MethodName: "SaveChannelRules",
+			Handler:    _BackofficeNotification_SaveChannelRules_Handler,
 		},
 		{
 			MethodName: "ListNotificationRules",
 			Handler:    _BackofficeNotification_ListNotificationRules_Handler,
 		},
 		{
-			MethodName: "GetNotificationRule",
-			Handler:    _BackofficeNotification_GetNotificationRule_Handler,
-		},
-		{
-			MethodName: "UpdateNotificationRule",
-			Handler:    _BackofficeNotification_UpdateNotificationRule_Handler,
-		},
-		{
-			MethodName: "DeleteNotificationRule",
-			Handler:    _BackofficeNotification_DeleteNotificationRule_Handler,
+			MethodName: "GetSupportedMessageTypes",
+			Handler:    _BackofficeNotification_GetSupportedMessageTypes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

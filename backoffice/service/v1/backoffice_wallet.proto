@@ -399,6 +399,11 @@ message ListWalletBalanceTransactionsRequest {
 	optional google.protobuf.Timestamp end_time = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	// source_credit_id: filter to get balance transactions that created this credit
+	// Only returns source transaction types: payment_deposit, deposit_reward, promo_code_reward, free_spin_win, free_bet_win
+	optional int64 source_credit_id = 8;
+	// balance_transaction_ids: filter by specific balance transaction IDs
+	repeated int64 balance_transaction_ids = 9;
 }
 
 message ListWalletBalanceTransactionsResponse {
