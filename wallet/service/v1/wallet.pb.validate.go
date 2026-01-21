@@ -22272,12 +22272,43 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 
 	// no validation rules for CashWithdrawn
 
+	// no validation rules for OperatorBonusTransferred
+
 	if m.FreeSpinCount != nil {
 		// no validation rules for FreeSpinCount
 	}
 
 	if m.FreeSpinExpiredAt != nil {
-		// no validation rules for FreeSpinExpiredAt
+
+		if all {
+			switch v := interface{}(m.GetFreeSpinExpiredAt()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWalletsResponse_CreditValidationError{
+						field:  "FreeSpinExpiredAt",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWalletsResponse_CreditValidationError{
+						field:  "FreeSpinExpiredAt",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFreeSpinExpiredAt()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWalletsResponse_CreditValidationError{
+					field:  "FreeSpinExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.FreeBetAmount != nil {
@@ -22285,7 +22316,36 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 	}
 
 	if m.FreeBetExpiredAt != nil {
-		// no validation rules for FreeBetExpiredAt
+
+		if all {
+			switch v := interface{}(m.GetFreeBetExpiredAt()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWalletsResponse_CreditValidationError{
+						field:  "FreeBetExpiredAt",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWalletsResponse_CreditValidationError{
+						field:  "FreeBetExpiredAt",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFreeBetExpiredAt()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWalletsResponse_CreditValidationError{
+					field:  "FreeBetExpiredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
