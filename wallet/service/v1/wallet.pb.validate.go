@@ -3173,6 +3173,10 @@ func (m *ListWalletBalanceTransactionsRequest) validate(all bool) error {
 		// no validation rules for Pagination
 	}
 
+	if m.SourceCreditId != nil {
+		// no validation rules for SourceCreditId
+	}
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsRequestMultiError(errors)
 	}
@@ -13494,6 +13498,212 @@ var _ interface {
 	ErrorName() string
 } = WalletConfigValidationError{}
 
+// Validate checks the field values on GetWalletConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWalletConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWalletConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWalletConfigRequestMultiError, or nil if none found.
+func (m *GetWalletConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWalletConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetWalletConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWalletConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by GetWalletConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetWalletConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWalletConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWalletConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetWalletConfigRequestValidationError is the validation error returned by
+// GetWalletConfigRequest.Validate if the designated constraints aren't met.
+type GetWalletConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWalletConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWalletConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWalletConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWalletConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWalletConfigRequestValidationError) ErrorName() string {
+	return "GetWalletConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWalletConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWalletConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWalletConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWalletConfigRequestValidationError{}
+
+// Validate checks the field values on GetWalletConfigResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWalletConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWalletConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWalletConfigResponseMultiError, or nil if none found.
+func (m *GetWalletConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWalletConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClearBonusOnWithdrawal
+
+	if len(errors) > 0 {
+		return GetWalletConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWalletConfigResponseMultiError is an error wrapping multiple validation
+// errors returned by GetWalletConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetWalletConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWalletConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWalletConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetWalletConfigResponseValidationError is the validation error returned by
+// GetWalletConfigResponse.Validate if the designated constraints aren't met.
+type GetWalletConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWalletConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWalletConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWalletConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWalletConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWalletConfigResponseValidationError) ErrorName() string {
+	return "GetWalletConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWalletConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWalletConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWalletConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWalletConfigResponseValidationError{}
+
 // Validate checks the field values on OperatorCurrencyConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -22049,6 +22259,34 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 	// no validation rules for CashTurnoverThreshold
 
 	// no validation rules for BonusTurnoverThreshold
+
+	// no validation rules for OriginalOperatorBonus
+
+	// no validation rules for OriginalProviderBonus
+
+	// no validation rules for CashWithdrawLimit
+
+	// no validation rules for OperatorBonusWithdrawLimit
+
+	// no validation rules for ProviderBonusWithdrawLimit
+
+	// no validation rules for CashWithdrawn
+
+	if m.FreeSpinCount != nil {
+		// no validation rules for FreeSpinCount
+	}
+
+	if m.FreeSpinExpiredAt != nil {
+		// no validation rules for FreeSpinExpiredAt
+	}
+
+	if m.FreeBetAmount != nil {
+		// no validation rules for FreeBetAmount
+	}
+
+	if m.FreeBetExpiredAt != nil {
+		// no validation rules for FreeBetExpiredAt
+	}
 
 	if len(errors) > 0 {
 		return GetWalletsResponse_CreditMultiError(errors)
