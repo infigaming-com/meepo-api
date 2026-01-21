@@ -47,6 +47,7 @@ const (
 	ErrorReason_NOTIFICATION_RULE_NOT_FOUND      ErrorReason = 90205
 	ErrorReason_NOTIFICATION_RULE_ALREADY_EXISTS ErrorReason = 90206
 	ErrorReason_INVALID_RULE_CONDITIONS          ErrorReason = 90207
+	ErrorReason_SAVE_CHANNEL_RULES_FAILED        ErrorReason = 90208
 	// Notification Delivery errors (90300-90399)
 	ErrorReason_SEND_TO_CHANNELS_FAILED ErrorReason = 90300
 )
@@ -74,6 +75,7 @@ var (
 		90205: "NOTIFICATION_RULE_NOT_FOUND",
 		90206: "NOTIFICATION_RULE_ALREADY_EXISTS",
 		90207: "INVALID_RULE_CONDITIONS",
+		90208: "SAVE_CHANNEL_RULES_FAILED",
 		90300: "SEND_TO_CHANNELS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
@@ -97,6 +99,7 @@ var (
 		"NOTIFICATION_RULE_NOT_FOUND":         90205,
 		"NOTIFICATION_RULE_ALREADY_EXISTS":    90206,
 		"INVALID_RULE_CONDITIONS":             90207,
+		"SAVE_CHANNEL_RULES_FAILED":           90208,
 		"SEND_TO_CHANNELS_FAILED":             90300,
 	}
 )
@@ -132,7 +135,7 @@ var File_push_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\x8b\x06\n" +
+	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xac\x06\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12INVALID_TIME_RANGE\x10\x91\xbf\x05\x12\x1e\n" +
@@ -153,7 +156,8 @@ const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1fDELETE_NOTIFICATION_RULE_FAILED\x10\xdc\xc0\x05\x12!\n" +
 	"\x1bNOTIFICATION_RULE_NOT_FOUND\x10\xdd\xc0\x05\x12&\n" +
 	" NOTIFICATION_RULE_ALREADY_EXISTS\x10\xde\xc0\x05\x12\x1d\n" +
-	"\x17INVALID_RULE_CONDITIONS\x10\xdf\xc0\x05\x12\x1d\n" +
+	"\x17INVALID_RULE_CONDITIONS\x10\xdf\xc0\x05\x12\x1f\n" +
+	"\x19SAVE_CHANNEL_RULES_FAILED\x10\xe0\xc0\x05\x12\x1d\n" +
 	"\x17SEND_TO_CHANNELS_FAILED\x10\xbc\xc1\x05\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 

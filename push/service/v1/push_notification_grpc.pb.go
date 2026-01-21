@@ -25,11 +25,9 @@ const (
 	PushNotification_UpdateNotificationChannel_FullMethodName = "/api.push.service.v1.PushNotification/UpdateNotificationChannel"
 	PushNotification_DeleteNotificationChannel_FullMethodName = "/api.push.service.v1.PushNotification/DeleteNotificationChannel"
 	PushNotification_TestNotificationChannel_FullMethodName   = "/api.push.service.v1.PushNotification/TestNotificationChannel"
-	PushNotification_CreateNotificationRule_FullMethodName    = "/api.push.service.v1.PushNotification/CreateNotificationRule"
+	PushNotification_SaveChannelRules_FullMethodName          = "/api.push.service.v1.PushNotification/SaveChannelRules"
 	PushNotification_ListNotificationRules_FullMethodName     = "/api.push.service.v1.PushNotification/ListNotificationRules"
-	PushNotification_GetNotificationRule_FullMethodName       = "/api.push.service.v1.PushNotification/GetNotificationRule"
-	PushNotification_UpdateNotificationRule_FullMethodName    = "/api.push.service.v1.PushNotification/UpdateNotificationRule"
-	PushNotification_DeleteNotificationRule_FullMethodName    = "/api.push.service.v1.PushNotification/DeleteNotificationRule"
+	PushNotification_GetSupportedMessageTypes_FullMethodName  = "/api.push.service.v1.PushNotification/GetSupportedMessageTypes"
 	PushNotification_SendToChannels_FullMethodName            = "/api.push.service.v1.PushNotification/SendToChannels"
 )
 
@@ -47,11 +45,12 @@ type PushNotificationClient interface {
 	DeleteNotificationChannel(ctx context.Context, in *DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*DeleteNotificationChannelResponse, error)
 	TestNotificationChannel(ctx context.Context, in *TestNotificationChannelRequest, opts ...grpc.CallOption) (*TestNotificationChannelResponse, error)
 	// ============ Rule Management ============
-	CreateNotificationRule(ctx context.Context, in *CreateNotificationRuleRequest, opts ...grpc.CallOption) (*CreateNotificationRuleResponse, error)
+	// Save all rules for a channel (batch create/update/delete)
+	SaveChannelRules(ctx context.Context, in *SaveChannelRulesRequest, opts ...grpc.CallOption) (*SaveChannelRulesResponse, error)
+	// List notification rules with pagination
 	ListNotificationRules(ctx context.Context, in *ListNotificationRulesRequest, opts ...grpc.CallOption) (*ListNotificationRulesResponse, error)
-	GetNotificationRule(ctx context.Context, in *GetNotificationRuleRequest, opts ...grpc.CallOption) (*GetNotificationRuleResponse, error)
-	UpdateNotificationRule(ctx context.Context, in *UpdateNotificationRuleRequest, opts ...grpc.CallOption) (*UpdateNotificationRuleResponse, error)
-	DeleteNotificationRule(ctx context.Context, in *DeleteNotificationRuleRequest, opts ...grpc.CallOption) (*DeleteNotificationRuleResponse, error)
+	// Get supported message types for frontend dropdown
+	GetSupportedMessageTypes(ctx context.Context, in *GetSupportedMessageTypesRequest, opts ...grpc.CallOption) (*GetSupportedMessageTypesResponse, error)
 	// ============ Notification Delivery ============
 	SendToChannels(ctx context.Context, in *SendToChannelsRequest, opts ...grpc.CallOption) (*SendToChannelsResponse, error)
 }
@@ -124,10 +123,10 @@ func (c *pushNotificationClient) TestNotificationChannel(ctx context.Context, in
 	return out, nil
 }
 
-func (c *pushNotificationClient) CreateNotificationRule(ctx context.Context, in *CreateNotificationRuleRequest, opts ...grpc.CallOption) (*CreateNotificationRuleResponse, error) {
+func (c *pushNotificationClient) SaveChannelRules(ctx context.Context, in *SaveChannelRulesRequest, opts ...grpc.CallOption) (*SaveChannelRulesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, PushNotification_CreateNotificationRule_FullMethodName, in, out, cOpts...)
+	out := new(SaveChannelRulesResponse)
+	err := c.cc.Invoke(ctx, PushNotification_SaveChannelRules_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -144,30 +143,10 @@ func (c *pushNotificationClient) ListNotificationRules(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *pushNotificationClient) GetNotificationRule(ctx context.Context, in *GetNotificationRuleRequest, opts ...grpc.CallOption) (*GetNotificationRuleResponse, error) {
+func (c *pushNotificationClient) GetSupportedMessageTypes(ctx context.Context, in *GetSupportedMessageTypesRequest, opts ...grpc.CallOption) (*GetSupportedMessageTypesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, PushNotification_GetNotificationRule_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pushNotificationClient) UpdateNotificationRule(ctx context.Context, in *UpdateNotificationRuleRequest, opts ...grpc.CallOption) (*UpdateNotificationRuleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, PushNotification_UpdateNotificationRule_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pushNotificationClient) DeleteNotificationRule(ctx context.Context, in *DeleteNotificationRuleRequest, opts ...grpc.CallOption) (*DeleteNotificationRuleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteNotificationRuleResponse)
-	err := c.cc.Invoke(ctx, PushNotification_DeleteNotificationRule_FullMethodName, in, out, cOpts...)
+	out := new(GetSupportedMessageTypesResponse)
+	err := c.cc.Invoke(ctx, PushNotification_GetSupportedMessageTypes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -198,11 +177,12 @@ type PushNotificationServer interface {
 	DeleteNotificationChannel(context.Context, *DeleteNotificationChannelRequest) (*DeleteNotificationChannelResponse, error)
 	TestNotificationChannel(context.Context, *TestNotificationChannelRequest) (*TestNotificationChannelResponse, error)
 	// ============ Rule Management ============
-	CreateNotificationRule(context.Context, *CreateNotificationRuleRequest) (*CreateNotificationRuleResponse, error)
+	// Save all rules for a channel (batch create/update/delete)
+	SaveChannelRules(context.Context, *SaveChannelRulesRequest) (*SaveChannelRulesResponse, error)
+	// List notification rules with pagination
 	ListNotificationRules(context.Context, *ListNotificationRulesRequest) (*ListNotificationRulesResponse, error)
-	GetNotificationRule(context.Context, *GetNotificationRuleRequest) (*GetNotificationRuleResponse, error)
-	UpdateNotificationRule(context.Context, *UpdateNotificationRuleRequest) (*UpdateNotificationRuleResponse, error)
-	DeleteNotificationRule(context.Context, *DeleteNotificationRuleRequest) (*DeleteNotificationRuleResponse, error)
+	// Get supported message types for frontend dropdown
+	GetSupportedMessageTypes(context.Context, *GetSupportedMessageTypesRequest) (*GetSupportedMessageTypesResponse, error)
 	// ============ Notification Delivery ============
 	SendToChannels(context.Context, *SendToChannelsRequest) (*SendToChannelsResponse, error)
 	mustEmbedUnimplementedPushNotificationServer()
@@ -233,20 +213,14 @@ func (UnimplementedPushNotificationServer) DeleteNotificationChannel(context.Con
 func (UnimplementedPushNotificationServer) TestNotificationChannel(context.Context, *TestNotificationChannelRequest) (*TestNotificationChannelResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method TestNotificationChannel not implemented")
 }
-func (UnimplementedPushNotificationServer) CreateNotificationRule(context.Context, *CreateNotificationRuleRequest) (*CreateNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateNotificationRule not implemented")
+func (UnimplementedPushNotificationServer) SaveChannelRules(context.Context, *SaveChannelRulesRequest) (*SaveChannelRulesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SaveChannelRules not implemented")
 }
 func (UnimplementedPushNotificationServer) ListNotificationRules(context.Context, *ListNotificationRulesRequest) (*ListNotificationRulesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListNotificationRules not implemented")
 }
-func (UnimplementedPushNotificationServer) GetNotificationRule(context.Context, *GetNotificationRuleRequest) (*GetNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetNotificationRule not implemented")
-}
-func (UnimplementedPushNotificationServer) UpdateNotificationRule(context.Context, *UpdateNotificationRuleRequest) (*UpdateNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateNotificationRule not implemented")
-}
-func (UnimplementedPushNotificationServer) DeleteNotificationRule(context.Context, *DeleteNotificationRuleRequest) (*DeleteNotificationRuleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteNotificationRule not implemented")
+func (UnimplementedPushNotificationServer) GetSupportedMessageTypes(context.Context, *GetSupportedMessageTypesRequest) (*GetSupportedMessageTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSupportedMessageTypes not implemented")
 }
 func (UnimplementedPushNotificationServer) SendToChannels(context.Context, *SendToChannelsRequest) (*SendToChannelsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendToChannels not implemented")
@@ -380,20 +354,20 @@ func _PushNotification_TestNotificationChannel_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PushNotification_CreateNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateNotificationRuleRequest)
+func _PushNotification_SaveChannelRules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveChannelRulesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PushNotificationServer).CreateNotificationRule(ctx, in)
+		return srv.(PushNotificationServer).SaveChannelRules(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PushNotification_CreateNotificationRule_FullMethodName,
+		FullMethod: PushNotification_SaveChannelRules_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PushNotificationServer).CreateNotificationRule(ctx, req.(*CreateNotificationRuleRequest))
+		return srv.(PushNotificationServer).SaveChannelRules(ctx, req.(*SaveChannelRulesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -416,56 +390,20 @@ func _PushNotification_ListNotificationRules_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PushNotification_GetNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNotificationRuleRequest)
+func _PushNotification_GetSupportedMessageTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSupportedMessageTypesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PushNotificationServer).GetNotificationRule(ctx, in)
+		return srv.(PushNotificationServer).GetSupportedMessageTypes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PushNotification_GetNotificationRule_FullMethodName,
+		FullMethod: PushNotification_GetSupportedMessageTypes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PushNotificationServer).GetNotificationRule(ctx, req.(*GetNotificationRuleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PushNotification_UpdateNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateNotificationRuleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PushNotificationServer).UpdateNotificationRule(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PushNotification_UpdateNotificationRule_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PushNotificationServer).UpdateNotificationRule(ctx, req.(*UpdateNotificationRuleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PushNotification_DeleteNotificationRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteNotificationRuleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PushNotificationServer).DeleteNotificationRule(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PushNotification_DeleteNotificationRule_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PushNotificationServer).DeleteNotificationRule(ctx, req.(*DeleteNotificationRuleRequest))
+		return srv.(PushNotificationServer).GetSupportedMessageTypes(ctx, req.(*GetSupportedMessageTypesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -520,24 +458,16 @@ var PushNotification_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PushNotification_TestNotificationChannel_Handler,
 		},
 		{
-			MethodName: "CreateNotificationRule",
-			Handler:    _PushNotification_CreateNotificationRule_Handler,
+			MethodName: "SaveChannelRules",
+			Handler:    _PushNotification_SaveChannelRules_Handler,
 		},
 		{
 			MethodName: "ListNotificationRules",
 			Handler:    _PushNotification_ListNotificationRules_Handler,
 		},
 		{
-			MethodName: "GetNotificationRule",
-			Handler:    _PushNotification_GetNotificationRule_Handler,
-		},
-		{
-			MethodName: "UpdateNotificationRule",
-			Handler:    _PushNotification_UpdateNotificationRule_Handler,
-		},
-		{
-			MethodName: "DeleteNotificationRule",
-			Handler:    _PushNotification_DeleteNotificationRule_Handler,
+			MethodName: "GetSupportedMessageTypes",
+			Handler:    _PushNotification_GetSupportedMessageTypes_Handler,
 		},
 		{
 			MethodName: "SendToChannels",
