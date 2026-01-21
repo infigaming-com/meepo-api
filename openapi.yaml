@@ -6717,6 +6717,50 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
+    /v1/payment/crypto-bonus-preference:
+        post:
+            tags:
+                - Payment
+            description: |-
+                Set crypto bonus preference
+                 Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+                 This preference is applied when async crypto deposits arrive via blockchain callback
+            operationId: Payment_SetCryptoBonusPreference
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.SetCryptoBonusPreferenceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.SetCryptoBonusPreferenceResponse'
+    /v1/payment/crypto-bonus-preference/{currency}:
+        get:
+            tags:
+                - Payment
+            description: |-
+                Get crypto bonus preference
+                 Retrieves the user's skip bonus preference for a specific crypto currency
+            operationId: Payment_GetCryptoBonusPreference
+            parameters:
+                - name: currency
+                  in: path
+                  description: Crypto currency code (e.g., BTC, ETH, USDT)
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetCryptoBonusPreferenceResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -6808,6 +6852,51 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
+    /v1/payment/saved-info:
+        get:
+            tags:
+                - Payment
+            description: |-
+                List saved payment info
+                 Retrieves saved payment information for the current user
+            operationId: Payment_ListSavedPaymentInfo
+            parameters:
+                - name: channelId
+                  in: query
+                  schema:
+                    type: string
+                - name: type
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.ListSavedPaymentInfoResponse'
+    /v1/payment/saved-info/{id}:
+        delete:
+            tags:
+                - Payment
+            description: |-
+                Delete saved payment info
+                 Removes a saved payment information record
+            operationId: Payment_DeleteSavedPaymentInfo
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DeleteSavedPaymentInfoResponse'
     /v1/payment/transaction/page:
         post:
             tags:
@@ -17895,9 +17984,7 @@ components:
                     type: string
                 bankAccount:
                     type: string
-                bankAccountFirstname:
-                    type: string
-                bankAccountLastname:
+                beneficiaryName:
                     type: string
                 bankIban:
                     type: string
@@ -17911,9 +17998,11 @@ components:
                     type: string
                 bankAccount:
                     type: string
-                bankAccountName:
-                    type: string
                 bankIban:
+                    type: string
+                beneficiaryName:
+                    type: string
+                bankName:
                     type: string
         api.bcpay.service.v1.CreateMerchantResponse:
             type: object
@@ -17943,9 +18032,9 @@ components:
                     type: string
                 bankAccount:
                     type: string
-                bankAccountFirstname:
+                beneficiaryName:
                     type: string
-                bankAccountLastname:
+                bankName:
                     type: string
                 bankIban:
                     type: string
@@ -17971,9 +18060,7 @@ components:
                     type: string
                 bankAccount:
                     type: string
-                bankFirstName:
-                    type: string
-                bankLastName:
+                beneficiaryName:
                     type: string
                 iban:
                     type: string
@@ -17997,6 +18084,8 @@ components:
                 enable:
                     type: boolean
                 currentAmount:
+                    type: string
+                bankName:
                     type: string
         api.bcpay.service.v1.GetBankSchemaRequest:
             type: object
@@ -18030,15 +18119,13 @@ components:
                     type: string
                 depositBankAccount:
                     type: string
-                depositBankAccountFirstName:
+                depositBeneficiaryName:
                     type: string
-                depositBankAccountLastName:
+                depositBankName:
                     type: string
                 userBankAccount:
                     type: string
-                userBankAccountFirstName:
-                    type: string
-                userBankAccountLastName:
+                userBeneficiaryName:
                     type: string
                 type:
                     type: string
@@ -18066,6 +18153,10 @@ components:
                 updateTime:
                     type: string
                     format: date-time
+                depositReference:
+                    type: string
+                userBankName:
+                    type: string
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:
@@ -24627,6 +24718,10 @@ components:
         payment.service.v1.DeleteBankCardResponse:
             type: object
             properties: {}
+        payment.service.v1.DeleteSavedPaymentInfoResponse:
+            type: object
+            properties: {}
+            description: Response for deleting saved payment info
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
@@ -24741,6 +24836,13 @@ components:
             properties:
                 schema:
                     $ref: '#/components/schemas/google.protobuf.ListValue'
+        payment.service.v1.GetCryptoBonusPreferenceResponse:
+            type: object
+            properties:
+                skipBonus:
+                    type: boolean
+                    description: Whether bonus is skipped for deposits of this currency (true = skip, false = receive bonus)
+            description: Response for getting crypto bonus preference
         payment.service.v1.GetOperatorAddressResponse:
             type: object
             properties:
@@ -25064,6 +25166,15 @@ components:
                     description: |-
                         Additional information needed for the deposit
                          May include clientOrderId, productId, userInfo, etc.
+                saveForLaterUse:
+                    type: boolean
+                    description: Save this deposit info for later reuse
+                skipBonus:
+                    type: boolean
+                    description: Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
+                savedInfoName:
+                    type: string
+                    description: Name for saved payment info (required when save_for_later_use is true)
             description: |-
                 Request to initiate a deposit
                  Used to start a deposit transaction
@@ -25098,6 +25209,14 @@ components:
             description: |-
                 Response for deposit initiation
                  Contains details about the initiated deposit transaction
+        payment.service.v1.ListSavedPaymentInfoResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.SavedPaymentInfoItem'
+            description: Response for listing saved payment info
         payment.service.v1.PaymentChannelInfo:
             type: object
             properties:
@@ -25321,6 +25440,48 @@ components:
             description: |-
                 Details of a single payment method
                  Contains information about a specific payment method including its ID, currency, and required fields schema
+        payment.service.v1.SavedPaymentInfoItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                channelId:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+                schemaData:
+                    type: object
+                lastUsedAmount:
+                    type: string
+                lastUsedCurrency:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: |-
+                Saved payment info item
+                 Represents a saved payment information record
+        payment.service.v1.SetCryptoBonusPreferenceRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                    description: Crypto currency code (e.g., BTC, ETH, USDT)
+                skipBonus:
+                    type: boolean
+                    description: Whether to skip bonus for deposits of this currency (true = skip, false = receive bonus)
+            description: |-
+                Request to set crypto bonus preference
+                 Used to set whether user wants to skip bonus for future crypto deposits of a specific currency
+        payment.service.v1.SetCryptoBonusPreferenceResponse:
+            type: object
+            properties: {}
+            description: Response for setting crypto bonus preference
         payment.service.v1.TransactionDetail:
             type: object
             properties:

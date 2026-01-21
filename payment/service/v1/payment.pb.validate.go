@@ -1940,6 +1940,12 @@ func (m *InitiateDepositRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SaveForLaterUse
+
+	// no validation rules for SkipBonus
+
+	// no validation rules for SavedInfoName
+
 	if len(errors) > 0 {
 		return InitiateDepositRequestMultiError(errors)
 	}
@@ -2867,6 +2873,10 @@ func (m *InitiateWithdrawRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for SaveForLaterUse
+
+	// no validation rules for SavedInfoName
 
 	if len(errors) > 0 {
 		return InitiateWithdrawRequestMultiError(errors)
@@ -4938,8 +4948,8 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 		}
 	}
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
+	if m.Enable != nil {
+		// no validation rules for Enable
 	}
 
 	if len(errors) > 0 {
@@ -8671,6 +8681,1087 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetResponsibleGamblingStatusResponseValidationError{}
+
+// Validate checks the field values on SavedPaymentInfoItem with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SavedPaymentInfoItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SavedPaymentInfoItem with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SavedPaymentInfoItemMultiError, or nil if none found.
+func (m *SavedPaymentInfoItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SavedPaymentInfoItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for ChannelId
+
+	// no validation rules for Name
+
+	// no validation rules for Type
+
+	if all {
+		switch v := interface{}(m.GetSchemaData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SavedPaymentInfoItemValidationError{
+					field:  "SchemaData",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SavedPaymentInfoItemValidationError{
+					field:  "SchemaData",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSchemaData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SavedPaymentInfoItemValidationError{
+				field:  "SchemaData",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for LastUsedAmount
+
+	// no validation rules for LastUsedCurrency
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SavedPaymentInfoItemValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SavedPaymentInfoItemValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SavedPaymentInfoItemValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SavedPaymentInfoItemValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SavedPaymentInfoItemValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SavedPaymentInfoItemValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SavedPaymentInfoItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// SavedPaymentInfoItemMultiError is an error wrapping multiple validation
+// errors returned by SavedPaymentInfoItem.ValidateAll() if the designated
+// constraints aren't met.
+type SavedPaymentInfoItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SavedPaymentInfoItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SavedPaymentInfoItemMultiError) AllErrors() []error { return m }
+
+// SavedPaymentInfoItemValidationError is the validation error returned by
+// SavedPaymentInfoItem.Validate if the designated constraints aren't met.
+type SavedPaymentInfoItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SavedPaymentInfoItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SavedPaymentInfoItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SavedPaymentInfoItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SavedPaymentInfoItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SavedPaymentInfoItemValidationError) ErrorName() string {
+	return "SavedPaymentInfoItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SavedPaymentInfoItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSavedPaymentInfoItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SavedPaymentInfoItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SavedPaymentInfoItemValidationError{}
+
+// Validate checks the field values on ListSavedPaymentInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSavedPaymentInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSavedPaymentInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSavedPaymentInfoRequestMultiError, or nil if none found.
+func (m *ListSavedPaymentInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSavedPaymentInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.ChannelId != nil {
+		// no validation rules for ChannelId
+	}
+
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
+	if len(errors) > 0 {
+		return ListSavedPaymentInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSavedPaymentInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by ListSavedPaymentInfoRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListSavedPaymentInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSavedPaymentInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSavedPaymentInfoRequestMultiError) AllErrors() []error { return m }
+
+// ListSavedPaymentInfoRequestValidationError is the validation error returned
+// by ListSavedPaymentInfoRequest.Validate if the designated constraints
+// aren't met.
+type ListSavedPaymentInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSavedPaymentInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSavedPaymentInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSavedPaymentInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSavedPaymentInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSavedPaymentInfoRequestValidationError) ErrorName() string {
+	return "ListSavedPaymentInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSavedPaymentInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSavedPaymentInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSavedPaymentInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSavedPaymentInfoRequestValidationError{}
+
+// Validate checks the field values on ListSavedPaymentInfoResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSavedPaymentInfoResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSavedPaymentInfoResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSavedPaymentInfoResponseMultiError, or nil if none found.
+func (m *ListSavedPaymentInfoResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSavedPaymentInfoResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSavedPaymentInfoResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSavedPaymentInfoResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSavedPaymentInfoResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListSavedPaymentInfoResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSavedPaymentInfoResponseMultiError is an error wrapping multiple
+// validation errors returned by ListSavedPaymentInfoResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListSavedPaymentInfoResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSavedPaymentInfoResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSavedPaymentInfoResponseMultiError) AllErrors() []error { return m }
+
+// ListSavedPaymentInfoResponseValidationError is the validation error returned
+// by ListSavedPaymentInfoResponse.Validate if the designated constraints
+// aren't met.
+type ListSavedPaymentInfoResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSavedPaymentInfoResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSavedPaymentInfoResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSavedPaymentInfoResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSavedPaymentInfoResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSavedPaymentInfoResponseValidationError) ErrorName() string {
+	return "ListSavedPaymentInfoResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSavedPaymentInfoResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSavedPaymentInfoResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSavedPaymentInfoResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSavedPaymentInfoResponseValidationError{}
+
+// Validate checks the field values on DeleteSavedPaymentInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteSavedPaymentInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteSavedPaymentInfoRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteSavedPaymentInfoRequestMultiError, or nil if none found.
+func (m *DeleteSavedPaymentInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteSavedPaymentInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteSavedPaymentInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteSavedPaymentInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteSavedPaymentInfoRequest.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteSavedPaymentInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteSavedPaymentInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteSavedPaymentInfoRequestMultiError) AllErrors() []error { return m }
+
+// DeleteSavedPaymentInfoRequestValidationError is the validation error
+// returned by DeleteSavedPaymentInfoRequest.Validate if the designated
+// constraints aren't met.
+type DeleteSavedPaymentInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteSavedPaymentInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteSavedPaymentInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteSavedPaymentInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteSavedPaymentInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteSavedPaymentInfoRequestValidationError) ErrorName() string {
+	return "DeleteSavedPaymentInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteSavedPaymentInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteSavedPaymentInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteSavedPaymentInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteSavedPaymentInfoRequestValidationError{}
+
+// Validate checks the field values on DeleteSavedPaymentInfoResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteSavedPaymentInfoResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteSavedPaymentInfoResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteSavedPaymentInfoResponseMultiError, or nil if none found.
+func (m *DeleteSavedPaymentInfoResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteSavedPaymentInfoResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteSavedPaymentInfoResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteSavedPaymentInfoResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteSavedPaymentInfoResponse.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteSavedPaymentInfoResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteSavedPaymentInfoResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteSavedPaymentInfoResponseMultiError) AllErrors() []error { return m }
+
+// DeleteSavedPaymentInfoResponseValidationError is the validation error
+// returned by DeleteSavedPaymentInfoResponse.Validate if the designated
+// constraints aren't met.
+type DeleteSavedPaymentInfoResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteSavedPaymentInfoResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteSavedPaymentInfoResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteSavedPaymentInfoResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteSavedPaymentInfoResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteSavedPaymentInfoResponseValidationError) ErrorName() string {
+	return "DeleteSavedPaymentInfoResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteSavedPaymentInfoResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteSavedPaymentInfoResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteSavedPaymentInfoResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteSavedPaymentInfoResponseValidationError{}
+
+// Validate checks the field values on SetCryptoBonusPreferenceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetCryptoBonusPreferenceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetCryptoBonusPreferenceRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetCryptoBonusPreferenceRequestMultiError, or nil if none found.
+func (m *SetCryptoBonusPreferenceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetCryptoBonusPreferenceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for SkipBonus
+
+	if len(errors) > 0 {
+		return SetCryptoBonusPreferenceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetCryptoBonusPreferenceRequestMultiError is an error wrapping multiple
+// validation errors returned by SetCryptoBonusPreferenceRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SetCryptoBonusPreferenceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetCryptoBonusPreferenceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetCryptoBonusPreferenceRequestMultiError) AllErrors() []error { return m }
+
+// SetCryptoBonusPreferenceRequestValidationError is the validation error
+// returned by SetCryptoBonusPreferenceRequest.Validate if the designated
+// constraints aren't met.
+type SetCryptoBonusPreferenceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetCryptoBonusPreferenceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetCryptoBonusPreferenceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetCryptoBonusPreferenceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetCryptoBonusPreferenceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetCryptoBonusPreferenceRequestValidationError) ErrorName() string {
+	return "SetCryptoBonusPreferenceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetCryptoBonusPreferenceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetCryptoBonusPreferenceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetCryptoBonusPreferenceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetCryptoBonusPreferenceRequestValidationError{}
+
+// Validate checks the field values on SetCryptoBonusPreferenceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SetCryptoBonusPreferenceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetCryptoBonusPreferenceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetCryptoBonusPreferenceResponseMultiError, or nil if none found.
+func (m *SetCryptoBonusPreferenceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetCryptoBonusPreferenceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetCryptoBonusPreferenceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetCryptoBonusPreferenceResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// SetCryptoBonusPreferenceResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetCryptoBonusPreferenceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetCryptoBonusPreferenceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetCryptoBonusPreferenceResponseMultiError) AllErrors() []error { return m }
+
+// SetCryptoBonusPreferenceResponseValidationError is the validation error
+// returned by SetCryptoBonusPreferenceResponse.Validate if the designated
+// constraints aren't met.
+type SetCryptoBonusPreferenceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetCryptoBonusPreferenceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetCryptoBonusPreferenceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetCryptoBonusPreferenceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetCryptoBonusPreferenceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetCryptoBonusPreferenceResponseValidationError) ErrorName() string {
+	return "SetCryptoBonusPreferenceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetCryptoBonusPreferenceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetCryptoBonusPreferenceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetCryptoBonusPreferenceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetCryptoBonusPreferenceResponseValidationError{}
+
+// Validate checks the field values on GetCryptoBonusPreferenceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCryptoBonusPreferenceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCryptoBonusPreferenceRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetCryptoBonusPreferenceRequestMultiError, or nil if none found.
+func (m *GetCryptoBonusPreferenceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCryptoBonusPreferenceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return GetCryptoBonusPreferenceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCryptoBonusPreferenceRequestMultiError is an error wrapping multiple
+// validation errors returned by GetCryptoBonusPreferenceRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetCryptoBonusPreferenceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCryptoBonusPreferenceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCryptoBonusPreferenceRequestMultiError) AllErrors() []error { return m }
+
+// GetCryptoBonusPreferenceRequestValidationError is the validation error
+// returned by GetCryptoBonusPreferenceRequest.Validate if the designated
+// constraints aren't met.
+type GetCryptoBonusPreferenceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCryptoBonusPreferenceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCryptoBonusPreferenceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCryptoBonusPreferenceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCryptoBonusPreferenceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCryptoBonusPreferenceRequestValidationError) ErrorName() string {
+	return "GetCryptoBonusPreferenceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCryptoBonusPreferenceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCryptoBonusPreferenceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCryptoBonusPreferenceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCryptoBonusPreferenceRequestValidationError{}
+
+// Validate checks the field values on GetCryptoBonusPreferenceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetCryptoBonusPreferenceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCryptoBonusPreferenceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetCryptoBonusPreferenceResponseMultiError, or nil if none found.
+func (m *GetCryptoBonusPreferenceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCryptoBonusPreferenceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SkipBonus
+
+	if len(errors) > 0 {
+		return GetCryptoBonusPreferenceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCryptoBonusPreferenceResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetCryptoBonusPreferenceResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetCryptoBonusPreferenceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCryptoBonusPreferenceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCryptoBonusPreferenceResponseMultiError) AllErrors() []error { return m }
+
+// GetCryptoBonusPreferenceResponseValidationError is the validation error
+// returned by GetCryptoBonusPreferenceResponse.Validate if the designated
+// constraints aren't met.
+type GetCryptoBonusPreferenceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCryptoBonusPreferenceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCryptoBonusPreferenceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCryptoBonusPreferenceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCryptoBonusPreferenceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCryptoBonusPreferenceResponseValidationError) ErrorName() string {
+	return "GetCryptoBonusPreferenceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCryptoBonusPreferenceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCryptoBonusPreferenceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCryptoBonusPreferenceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCryptoBonusPreferenceResponseValidationError{}
 
 // Validate checks the field values on GetAddressResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are

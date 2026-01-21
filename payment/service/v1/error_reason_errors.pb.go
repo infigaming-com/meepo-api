@@ -190,3 +190,77 @@ func IsUpdatePaymentChannelFailed(err error) bool {
 func ErrorUpdatePaymentChannelFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_PAYMENT_CHANNEL_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Saved payment info related errors
+func IsListSavedPaymentInfoFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_SAVED_PAYMENT_INFO_FAILED.String() && e.Code == 500
+}
+
+// Saved payment info related errors
+func ErrorListSavedPaymentInfoFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_SAVED_PAYMENT_INFO_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteSavedPaymentInfoFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_SAVED_PAYMENT_INFO_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteSavedPaymentInfoFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_SAVED_PAYMENT_INFO_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSavedPaymentInfoNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SAVED_PAYMENT_INFO_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorSavedPaymentInfoNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SAVED_PAYMENT_INFO_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserInfoNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_INFO_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorUserInfoNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_INFO_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSavedInfoNameRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SAVED_INFO_NAME_REQUIRED.String() && e.Code == 500
+}
+
+func ErrorSavedInfoNameRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SAVED_INFO_NAME_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSavedInfoNameTooLong(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SAVED_INFO_NAME_TOO_LONG.String() && e.Code == 500
+}
+
+func ErrorSavedInfoNameTooLong(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SAVED_INFO_NAME_TOO_LONG.String(), fmt.Sprintf(format, args...))
+}

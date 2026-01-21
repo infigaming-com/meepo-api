@@ -13,11 +13,11 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: "/ws"
+        value: "/connection"
     backendRefs:
-    - name: invoker-server-svc
+    - name: centrifugo-svc
       namespace: invoker-dev
-      port: 8001
+      port: 8000
       weight: 1
   - matches:
     - path:

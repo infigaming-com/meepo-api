@@ -310,6 +310,12 @@ message InitiateDepositRequest {
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
   google.protobuf.Struct extra = 4;
+  // Save this deposit info for later reuse
+  bool save_for_later_use = 5 [json_name="saveForLaterUse"];
+  // Skip bonus for this deposit (true = do not apply bonus, false = apply bonus)
+  bool skip_bonus = 6 [json_name="skipBonus"];
+  // Name for saved payment info (required when save_for_later_use is true)
+  string saved_info_name = 7 [json_name="savedInfoName"];
 }
 
 // Response for deposit initiation
@@ -406,6 +412,10 @@ message InitiateWithdrawRequest {
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
   google.protobuf.Struct extra = 7;
+  // Save this withdrawal info for later reuse
+  bool save_for_later_use = 8 [json_name="saveForLaterUse"];
+  // Name for saved payment info (required when save_for_later_use is true)
+  string saved_info_name = 9 [json_name="savedInfoName"];
 }
 
 // Response for withdrawal initiation
@@ -776,7 +786,7 @@ message GetOperatorPaymentChannelPageRequest {
   // Optional sort direction
   Sort sort = 11;
   // Status ture or false
-  optional bool enabled = 12;
+  optional bool enable = 12;
   // ID of the Operator connect with this channel
   api.common.OperatorContextFilters operator_context_filters = 13;
   // ID of the Operator connect with this channel
@@ -986,6 +996,63 @@ message GetResponsibleGamblingStatusResponse {
 	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
 }
 
+// Saved payment info item
+// Represents a saved payment information record
+message SavedPaymentInfoItem {
+	int64 id = 1;
+	string channel_id = 2 [json_name="channelId"];
+	string name = 3;  // User-defined name for identification
+	string type = 4;  // 'payin' or 'payout'
+	google.protobuf.Struct schema_data = 5 [json_name="schemaData"];
+	string last_used_amount = 6 [json_name="lastUsedAmount"];
+	string last_used_currency = 7 [json_name="lastUsedCurrency"];
+	google.protobuf.Timestamp created_at = 8 [json_name="createdAt"];
+	google.protobuf.Timestamp updated_at = 9 [json_name="updatedAt"];
+}
+
+// Request to list saved payment info
+message ListSavedPaymentInfoRequest {
+	optional string channel_id = 1 [json_name="channelId"];
+	optional string type = 2;  // 'payin', 'payout', or empty for all
+}
+
+// Response for listing saved payment info
+message ListSavedPaymentInfoResponse {
+	repeated SavedPaymentInfoItem items = 1;
+}
+
+// Request to delete saved payment info
+message DeleteSavedPaymentInfoRequest {
+	int64 id = 1;
+}
+
+// Response for deleting saved payment info
+message DeleteSavedPaymentInfoResponse {}
+
+// Request to set crypto bonus preference
+// Used to set whether user wants to skip bonus for future crypto deposits of a specific currency
+message SetCryptoBonusPreferenceRequest {
+  // Crypto currency code (e.g., BTC, ETH, USDT)
+  string currency = 1;
+  // Whether to skip bonus for deposits of this currency (true = skip, false = receive bonus)
+  bool skip_bonus = 2 [json_name="skipBonus"];
+}
+
+// Response for setting crypto bonus preference
+message SetCryptoBonusPreferenceResponse {}
+
+// Request to get crypto bonus preference
+message GetCryptoBonusPreferenceRequest {
+  // Crypto currency code (e.g., BTC, ETH, USDT)
+  string currency = 1;
+}
+
+// Response for getting crypto bonus preference
+message GetCryptoBonusPreferenceResponse {
+  // Whether bonus is skipped for deposits of this currency (true = skip, false = receive bonus)
+  bool skip_bonus = 1 [json_name="skipBonus"];
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -1188,4 +1255,38 @@ service Payment {
 
   
 	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {}
+
+	// List saved payment info
+	// Retrieves saved payment information for the current user
+	rpc ListSavedPaymentInfo(ListSavedPaymentInfoRequest) returns (ListSavedPaymentInfoResponse) {
+		option (google.api.http) = {
+			get: "/v1/payment/saved-info"
+		};
+	}
+
+	// Delete saved payment info
+	// Removes a saved payment information record
+	rpc DeleteSavedPaymentInfo(DeleteSavedPaymentInfoRequest) returns (DeleteSavedPaymentInfoResponse) {
+		option (google.api.http) = {
+			delete: "/v1/payment/saved-info/{id}"
+		};
+	}
+
+	// Set crypto bonus preference
+	// Sets whether the user wants to skip bonus for future crypto deposits of a specific currency
+	// This preference is applied when async crypto deposits arrive via blockchain callback
+	rpc SetCryptoBonusPreference(SetCryptoBonusPreferenceRequest) returns (SetCryptoBonusPreferenceResponse) {
+		option (google.api.http) = {
+			post: "/v1/payment/crypto-bonus-preference"
+			body: "*"
+		};
+	}
+
+	// Get crypto bonus preference
+	// Retrieves the user's skip bonus preference for a specific crypto currency
+	rpc GetCryptoBonusPreference(GetCryptoBonusPreferenceRequest) returns (GetCryptoBonusPreferenceResponse) {
+		option (google.api.http) = {
+			get: "/v1/payment/crypto-bonus-preference/{currency}"
+		};
+	}
 }
