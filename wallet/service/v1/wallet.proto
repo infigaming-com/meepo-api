@@ -547,7 +547,7 @@ message GetWalletsResponse {
 	}
 	message Credit {
 		google.protobuf.Timestamp created_at = 1;
-		int64 transaction_id = 2;
+		int64 credit_id = 2;
 		string cash = 3;
 		string original_cash = 4;
 		string bonus = 5;
