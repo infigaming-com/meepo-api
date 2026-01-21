@@ -568,12 +568,14 @@ message GetWalletsResponse {
 		string provider_bonus_withdraw_limit = 18;
 		// Withdrawn amount (sum of settled payment_withdraw_freeze transactions)
 		string cash_withdrawn = 19;
+		// Transferred amount (sum of bonus_to_cash_transfer transactions)
+		string operator_bonus_transferred = 20;
 		// Free Spin info (only present when credit is from free spin)
-		optional int32 free_spin_count = 20;
-		optional int64 free_spin_expired_at = 21;
+		optional int32 free_spin_count = 21;
+		optional google.protobuf.Timestamp free_spin_expired_at = 22;
 		// Free Bet info (only present when credit is from free bet)
-		optional string free_bet_amount = 22;
-		optional int64 free_bet_expired_at = 23;
+		optional string free_bet_amount = 23;
+		optional google.protobuf.Timestamp free_bet_expired_at = 24;
 	}
 	message Wallet {
 		string currency = 1;

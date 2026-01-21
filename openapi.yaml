@@ -23211,17 +23211,22 @@ components:
                 cashWithdrawn:
                     type: string
                     description: Withdrawn amount (sum of settled payment_withdraw_freeze transactions)
+                operatorBonusTransferred:
+                    type: string
+                    description: Transferred amount (sum of bonus_to_cash_transfer transactions)
                 freeSpinCount:
                     type: integer
                     description: Free Spin info (only present when credit is from free spin)
                     format: int32
                 freeSpinExpiredAt:
                     type: string
+                    format: date-time
                 freeBetAmount:
                     type: string
                     description: Free Bet info (only present when credit is from free bet)
                 freeBetExpiredAt:
                     type: string
+                    format: date-time
         api.wallet.service.v1.GetWalletsResponse_TotalAssets:
             type: object
             properties:
