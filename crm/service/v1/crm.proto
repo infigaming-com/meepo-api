@@ -235,6 +235,7 @@ message FieldSchema {
   FieldType type = 3;
   repeated string operators = 4;
   google.protobuf.Struct value_schema = 5;
+  bool supports_currency = 6;  // Whether this field supports currency filtering
 }
 
 // GetSegmentFieldSchema

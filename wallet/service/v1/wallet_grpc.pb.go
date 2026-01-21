@@ -95,6 +95,7 @@ const (
 	Wallet_CreditFreeBetWin_FullMethodName                    = "/api.wallet.service.v1.Wallet/CreditFreeBetWin"
 	Wallet_GetOperatorUserFinancialSummary_FullMethodName     = "/api.wallet.service.v1.Wallet/GetOperatorUserFinancialSummary"
 	Wallet_GetWalletConfig_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetWalletConfig"
+	Wallet_BatchGetUserFinancialMetrics_FullMethodName        = "/api.wallet.service.v1.Wallet/BatchGetUserFinancialMetrics"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -233,6 +234,9 @@ type WalletClient interface {
 	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error)
+	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
+	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
+	BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error)
 }
 
 type walletClient struct {
@@ -1003,6 +1007,16 @@ func (c *walletClient) GetWalletConfig(ctx context.Context, in *GetWalletConfigR
 	return out, nil
 }
 
+func (c *walletClient) BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetUserFinancialMetricsResponse)
+	err := c.cc.Invoke(ctx, Wallet_BatchGetUserFinancialMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1139,6 +1153,9 @@ type WalletServer interface {
 	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
+	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
+	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
+	BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1376,6 +1393,9 @@ func (UnimplementedWalletServer) GetOperatorUserFinancialSummary(context.Context
 }
 func (UnimplementedWalletServer) GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetWalletConfig not implemented")
+}
+func (UnimplementedWalletServer) BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGetUserFinancialMetrics not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2766,6 +2786,24 @@ func _Wallet_GetWalletConfig_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_BatchGetUserFinancialMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetUserFinancialMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).BatchGetUserFinancialMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_BatchGetUserFinancialMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).BatchGetUserFinancialMetrics(ctx, req.(*BatchGetUserFinancialMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3076,6 +3114,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetWalletConfig",
 			Handler:    _Wallet_GetWalletConfig_Handler,
+		},
+		{
+			MethodName: "BatchGetUserFinancialMetrics",
+			Handler:    _Wallet_BatchGetUserFinancialMetrics_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

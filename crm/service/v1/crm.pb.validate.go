@@ -3166,6 +3166,8 @@ func (m *FieldSchema) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SupportsCurrency
+
 	if len(errors) > 0 {
 		return FieldSchemaMultiError(errors)
 	}

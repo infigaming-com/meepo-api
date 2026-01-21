@@ -281,6 +281,10 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
+	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
+	rpc BatchGetUserFinancialMetrics(BatchGetUserFinancialMetricsRequest) returns (BatchGetUserFinancialMetricsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1895,4 +1899,22 @@ message GetOperatorUserFinancialSummaryResponse {
 	string provider_bonus_usd = 5;
 	string provider_bonus_reporting_currency = 6;
 	TransactionStats transaction_stats = 7;
+}
+
+// BatchGetUserFinancialMetrics - CRM segment evaluation
+message BatchGetUserFinancialMetricsRequest {
+	repeated int64 user_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+	optional string currency = 3;  // Empty means all currencies aggregated (returns USD)
+}
+
+message BatchGetUserFinancialMetricsResponse {
+	message UserMetrics {
+		string deposit_amount = 1;
+		int32 deposit_count = 2;
+		string withdrawal_amount = 3;
+		int32 withdrawal_count = 4;
+		string currency = 5;  // "USD" if aggregated, otherwise the requested currency
+	}
+	map<int64, UserMetrics> user_metrics = 1;  // user_id -> metrics
 }
