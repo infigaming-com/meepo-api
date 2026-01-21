@@ -2028,8 +2028,13 @@ type ListWalletBalanceTransactionsRequest struct {
 	PageSize        *int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Pagination      *bool                   `protobuf:"varint,9,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if not provided, default is true
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// source_credit_id: filter to get balance transactions that created this credit
+	// Only returns source transaction types: payment_deposit, deposit_reward, promo_code_reward, free_spin_win, free_bet_win
+	SourceCreditId *int64 `protobuf:"varint,10,opt,name=source_credit_id,json=sourceCreditId,proto3,oneof" json:"source_credit_id,omitempty"`
+	// balance_transaction_ids: filter by specific balance transaction IDs
+	BalanceTransactionIds []int64 `protobuf:"varint,11,rep,packed,name=balance_transaction_ids,json=balanceTransactionIds,proto3" json:"balance_transaction_ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListWalletBalanceTransactionsRequest) Reset() {
@@ -2123,6 +2128,20 @@ func (x *ListWalletBalanceTransactionsRequest) GetPagination() bool {
 		return *x.Pagination
 	}
 	return false
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetSourceCreditId() int64 {
+	if x != nil && x.SourceCreditId != nil {
+		return *x.SourceCreditId
+	}
+	return 0
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetBalanceTransactionIds() []int64 {
+	if x != nil {
+		return x.BalanceTransactionIds
+	}
+	return nil
 }
 
 type ListWalletBalanceTransactionsResponse struct {
@@ -11661,8 +11680,23 @@ type GetWalletsResponse_Credit struct {
 	TurnoverMultiplier     string                 `protobuf:"bytes,11,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`
 	CashTurnoverThreshold  string                 `protobuf:"bytes,12,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
 	BonusTurnoverThreshold string                 `protobuf:"bytes,13,opt,name=bonus_turnover_threshold,json=bonusTurnoverThreshold,proto3" json:"bonus_turnover_threshold,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// New fields for original amounts
+	OriginalOperatorBonus string `protobuf:"bytes,14,opt,name=original_operator_bonus,json=originalOperatorBonus,proto3" json:"original_operator_bonus,omitempty"`
+	OriginalProviderBonus string `protobuf:"bytes,15,opt,name=original_provider_bonus,json=originalProviderBonus,proto3" json:"original_provider_bonus,omitempty"`
+	// Withdraw limits
+	CashWithdrawLimit          string `protobuf:"bytes,16,opt,name=cash_withdraw_limit,json=cashWithdrawLimit,proto3" json:"cash_withdraw_limit,omitempty"`
+	OperatorBonusWithdrawLimit string `protobuf:"bytes,17,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
+	ProviderBonusWithdrawLimit string `protobuf:"bytes,18,opt,name=provider_bonus_withdraw_limit,json=providerBonusWithdrawLimit,proto3" json:"provider_bonus_withdraw_limit,omitempty"`
+	// Withdrawn amount (sum of settled payment_withdraw_freeze transactions)
+	CashWithdrawn string `protobuf:"bytes,19,opt,name=cash_withdrawn,json=cashWithdrawn,proto3" json:"cash_withdrawn,omitempty"`
+	// Free Spin info (only present when credit is from free spin)
+	FreeSpinCount     *int32 `protobuf:"varint,20,opt,name=free_spin_count,json=freeSpinCount,proto3,oneof" json:"free_spin_count,omitempty"`
+	FreeSpinExpiredAt *int64 `protobuf:"varint,21,opt,name=free_spin_expired_at,json=freeSpinExpiredAt,proto3,oneof" json:"free_spin_expired_at,omitempty"`
+	// Free Bet info (only present when credit is from free bet)
+	FreeBetAmount    *string `protobuf:"bytes,22,opt,name=free_bet_amount,json=freeBetAmount,proto3,oneof" json:"free_bet_amount,omitempty"`
+	FreeBetExpiredAt *int64  `protobuf:"varint,23,opt,name=free_bet_expired_at,json=freeBetExpiredAt,proto3,oneof" json:"free_bet_expired_at,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GetWalletsResponse_Credit) Reset() {
@@ -11784,6 +11818,76 @@ func (x *GetWalletsResponse_Credit) GetBonusTurnoverThreshold() string {
 		return x.BonusTurnoverThreshold
 	}
 	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetOriginalOperatorBonus() string {
+	if x != nil {
+		return x.OriginalOperatorBonus
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetOriginalProviderBonus() string {
+	if x != nil {
+		return x.OriginalProviderBonus
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetCashWithdrawLimit() string {
+	if x != nil {
+		return x.CashWithdrawLimit
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetOperatorBonusWithdrawLimit() string {
+	if x != nil {
+		return x.OperatorBonusWithdrawLimit
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetProviderBonusWithdrawLimit() string {
+	if x != nil {
+		return x.ProviderBonusWithdrawLimit
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetCashWithdrawn() string {
+	if x != nil {
+		return x.CashWithdrawn
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetFreeSpinCount() int32 {
+	if x != nil && x.FreeSpinCount != nil {
+		return *x.FreeSpinCount
+	}
+	return 0
+}
+
+func (x *GetWalletsResponse_Credit) GetFreeSpinExpiredAt() int64 {
+	if x != nil && x.FreeSpinExpiredAt != nil {
+		return *x.FreeSpinExpiredAt
+	}
+	return 0
+}
+
+func (x *GetWalletsResponse_Credit) GetFreeBetAmount() string {
+	if x != nil && x.FreeBetAmount != nil {
+		return *x.FreeBetAmount
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_Credit) GetFreeBetExpiredAt() int64 {
+	if x != nil && x.FreeBetExpiredAt != nil {
+		return *x.FreeBetExpiredAt
+	}
+	return 0
 }
 
 type GetWalletsResponse_Wallet struct {
@@ -14599,7 +14703,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
 	"currencies\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x97\x0f\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x81\x14\n" +
 	"\x12GetWalletsResponse\x12X\n" +
 	"\ftotal_assets\x18\x01 \x01(\v25.api.wallet.service.v1.GetWalletsResponse.TotalAssetsR\vtotalAssets\x12J\n" +
 	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xbe\x04\n" +
@@ -14616,7 +14720,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1bwithdraw_reporting_currency\x18\b \x01(\tR\x19withdrawReportingCurrency\x12X\n" +
 	")deposit_minus_withdraw_reporting_currency\x18\t \x01(\tR%depositMinusWithdrawReportingCurrency\x12I\n" +
 	"!valid_turnover_reporting_currency\x18\n" +
-	" \x01(\tR\x1evalidTurnoverReportingCurrency\x1a\x9a\x04\n" +
+	" \x01(\tR\x1evalidTurnoverReportingCurrency\x1a\x84\t\n" +
 	"\x06Credit\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -14632,7 +14736,21 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	" \x01(\tR\rbonusTurnover\x12/\n" +
 	"\x13turnover_multiplier\x18\v \x01(\tR\x12turnoverMultiplier\x126\n" +
 	"\x17cash_turnover_threshold\x18\f \x01(\tR\x15cashTurnoverThreshold\x128\n" +
-	"\x18bonus_turnover_threshold\x18\r \x01(\tR\x16bonusTurnoverThreshold\x1a\xfc\x04\n" +
+	"\x18bonus_turnover_threshold\x18\r \x01(\tR\x16bonusTurnoverThreshold\x126\n" +
+	"\x17original_operator_bonus\x18\x0e \x01(\tR\x15originalOperatorBonus\x126\n" +
+	"\x17original_provider_bonus\x18\x0f \x01(\tR\x15originalProviderBonus\x12.\n" +
+	"\x13cash_withdraw_limit\x18\x10 \x01(\tR\x11cashWithdrawLimit\x12A\n" +
+	"\x1doperator_bonus_withdraw_limit\x18\x11 \x01(\tR\x1aoperatorBonusWithdrawLimit\x12A\n" +
+	"\x1dprovider_bonus_withdraw_limit\x18\x12 \x01(\tR\x1aproviderBonusWithdrawLimit\x12%\n" +
+	"\x0ecash_withdrawn\x18\x13 \x01(\tR\rcashWithdrawn\x12+\n" +
+	"\x0ffree_spin_count\x18\x14 \x01(\x05H\x00R\rfreeSpinCount\x88\x01\x01\x124\n" +
+	"\x14free_spin_expired_at\x18\x15 \x01(\x03H\x01R\x11freeSpinExpiredAt\x88\x01\x01\x12+\n" +
+	"\x0ffree_bet_amount\x18\x16 \x01(\tH\x02R\rfreeBetAmount\x88\x01\x01\x122\n" +
+	"\x13free_bet_expired_at\x18\x17 \x01(\x03H\x03R\x10freeBetExpiredAt\x88\x01\x01B\x12\n" +
+	"\x10_free_spin_countB\x17\n" +
+	"\x15_free_spin_expired_atB\x12\n" +
+	"\x10_free_bet_amountB\x16\n" +
+	"\x14_free_bet_expired_at\x1a\xfc\x04\n" +
 	"\x06Wallet\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12#\n" +
@@ -14649,7 +14767,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17cash_turnover_threshold\x18\f \x01(\tR\x15cashTurnoverThreshold\x128\n" +
 	"\x18bonus_turnover_threshold\x18\r \x01(\tR\x16bonusTurnoverThreshold\x12+\n" +
 	"\x11withdrawable_cash\x18\x0e \x01(\tR\x10withdrawableCash\x12-\n" +
-	"\x12transferable_bonus\x18\x0f \x01(\tR\x11transferableBonus\"\x98\x04\n" +
+	"\x12transferable_bonus\x18\x0f \x01(\tR\x11transferableBonus\"\x94\x05\n" +
 	"$ListWalletBalanceTransactionsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12.\n" +
 	"\x10transaction_type\x18\x02 \x01(\tH\x00R\x0ftransactionType\x88\x01\x01\x12\x1f\n" +
@@ -14662,7 +14780,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
 	"\n" +
 	"pagination\x18\t \x01(\bH\x06R\n" +
-	"pagination\x88\x01\x01B\x13\n" +
+	"pagination\x88\x01\x01\x12-\n" +
+	"\x10source_credit_id\x18\n" +
+	" \x01(\x03H\aR\x0esourceCreditId\x88\x01\x01\x126\n" +
+	"\x17balance_transaction_ids\x18\v \x03(\x03R\x15balanceTransactionIdsB\x13\n" +
 	"\x11_transaction_typeB\v\n" +
 	"\t_currencyB\r\n" +
 	"\v_start_timeB\v\n" +
@@ -14670,7 +14791,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_pagination\"\xb3\f\n" +
+	"\v_paginationB\x13\n" +
+	"\x11_source_credit_id\"\xb3\f\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x82\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2O.api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -16562,6 +16684,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	file_wallet_service_v1_wallet_proto_msgTypes[129].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[131].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[133].OneofWrappers = []any{}
+	file_wallet_service_v1_wallet_proto_msgTypes[146].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[159].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

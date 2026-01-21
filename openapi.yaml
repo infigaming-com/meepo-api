@@ -16019,6 +16019,16 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                sourceCreditId:
+                    type: string
+                    description: |-
+                        source_credit_id: filter to get balance transactions that created this credit
+                         Only returns source transaction types: payment_deposit, deposit_reward, promo_code_reward, free_spin_win, free_bet_win
+                balanceTransactionIds:
+                    type: array
+                    items:
+                        type: string
+                    description: 'balance_transaction_ids: filter by specific balance transaction IDs'
         api.backoffice.service.v1.ListWalletBalanceTransactionsResponse:
             type: object
             properties:
@@ -23158,6 +23168,32 @@ components:
                 cashTurnoverThreshold:
                     type: string
                 bonusTurnoverThreshold:
+                    type: string
+                originalOperatorBonus:
+                    type: string
+                    description: New fields for original amounts
+                originalProviderBonus:
+                    type: string
+                cashWithdrawLimit:
+                    type: string
+                    description: Withdraw limits
+                operatorBonusWithdrawLimit:
+                    type: string
+                providerBonusWithdrawLimit:
+                    type: string
+                cashWithdrawn:
+                    type: string
+                    description: Withdrawn amount (sum of settled payment_withdraw_freeze transactions)
+                freeSpinCount:
+                    type: integer
+                    description: Free Spin info (only present when credit is from free spin)
+                    format: int32
+                freeSpinExpiredAt:
+                    type: string
+                freeBetAmount:
+                    type: string
+                    description: Free Bet info (only present when credit is from free bet)
+                freeBetExpiredAt:
                     type: string
         api.wallet.service.v1.GetWalletsResponse_TotalAssets:
             type: object

@@ -3173,6 +3173,10 @@ func (m *ListWalletBalanceTransactionsRequest) validate(all bool) error {
 		// no validation rules for Pagination
 	}
 
+	if m.SourceCreditId != nil {
+		// no validation rules for SourceCreditId
+	}
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsRequestMultiError(errors)
 	}
@@ -22049,6 +22053,34 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 	// no validation rules for CashTurnoverThreshold
 
 	// no validation rules for BonusTurnoverThreshold
+
+	// no validation rules for OriginalOperatorBonus
+
+	// no validation rules for OriginalProviderBonus
+
+	// no validation rules for CashWithdrawLimit
+
+	// no validation rules for OperatorBonusWithdrawLimit
+
+	// no validation rules for ProviderBonusWithdrawLimit
+
+	// no validation rules for CashWithdrawn
+
+	if m.FreeSpinCount != nil {
+		// no validation rules for FreeSpinCount
+	}
+
+	if m.FreeSpinExpiredAt != nil {
+		// no validation rules for FreeSpinExpiredAt
+	}
+
+	if m.FreeBetAmount != nil {
+		// no validation rules for FreeBetAmount
+	}
+
+	if m.FreeBetExpiredAt != nil {
+		// no validation rules for FreeBetExpiredAt
+	}
 
 	if len(errors) > 0 {
 		return GetWalletsResponse_CreditMultiError(errors)

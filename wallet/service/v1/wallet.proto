@@ -551,6 +551,21 @@ message GetWalletsResponse {
 		string turnover_multiplier = 11;
 		string cash_turnover_threshold = 12;
 		string bonus_turnover_threshold = 13;
+		// New fields for original amounts
+		string original_operator_bonus = 14;
+		string original_provider_bonus = 15;
+		// Withdraw limits
+		string cash_withdraw_limit = 16;
+		string operator_bonus_withdraw_limit = 17;
+		string provider_bonus_withdraw_limit = 18;
+		// Withdrawn amount (sum of settled payment_withdraw_freeze transactions)
+		string cash_withdrawn = 19;
+		// Free Spin info (only present when credit is from free spin)
+		optional int32 free_spin_count = 20;
+		optional int64 free_spin_expired_at = 21;
+		// Free Bet info (only present when credit is from free bet)
+		optional string free_bet_amount = 22;
+		optional int64 free_bet_expired_at = 23;
 	}
 	message Wallet {
 		string currency = 1;
@@ -601,6 +616,11 @@ message ListWalletBalanceTransactionsRequest {
 	optional int32 page_size = 7;
 	api.common.OperatorContext operator_context = 8;
 	optional bool pagination = 9; // if not provided, default is true
+	// source_credit_id: filter to get balance transactions that created this credit
+	// Only returns source transaction types: payment_deposit, deposit_reward, promo_code_reward, free_spin_win, free_bet_win
+	optional int64 source_credit_id = 10;
+	// balance_transaction_ids: filter by specific balance transaction IDs
+	repeated int64 balance_transaction_ids = 11;
 }
 
 message ListWalletBalanceTransactionsResponse {

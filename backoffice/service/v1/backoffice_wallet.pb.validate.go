@@ -574,6 +574,10 @@ func (m *ListWalletBalanceTransactionsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.SourceCreditId != nil {
+		// no validation rules for SourceCreditId
+	}
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsRequestMultiError(errors)
 	}
