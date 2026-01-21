@@ -22236,7 +22236,7 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for TransactionId
+	// no validation rules for CreditId
 
 	// no validation rules for Cash
 

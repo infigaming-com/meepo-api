@@ -23172,7 +23172,7 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-                transactionId:
+                creditId:
                     type: string
                 cash:
                     type: string

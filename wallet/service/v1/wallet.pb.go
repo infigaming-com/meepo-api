@@ -11748,7 +11748,7 @@ func (x *GetWalletsResponse_TotalAssets) GetValidTurnoverReportingCurrency() str
 type GetWalletsResponse_Credit struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt              *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	TransactionId          int64                  `protobuf:"varint,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	CreditId               int64                  `protobuf:"varint,2,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	Cash                   string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
 	OriginalCash           string                 `protobuf:"bytes,4,opt,name=original_cash,json=originalCash,proto3" json:"original_cash,omitempty"`
 	Bonus                  string                 `protobuf:"bytes,5,opt,name=bonus,proto3" json:"bonus,omitempty"`
@@ -11816,9 +11816,9 @@ func (x *GetWalletsResponse_Credit) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *GetWalletsResponse_Credit) GetTransactionId() int64 {
+func (x *GetWalletsResponse_Credit) GetCreditId() int64 {
 	if x != nil {
-		return x.TransactionId
+		return x.CreditId
 	}
 	return 0
 }
@@ -14783,7 +14783,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
 	"currencies\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x81\x14\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf7\x13\n" +
 	"\x12GetWalletsResponse\x12X\n" +
 	"\ftotal_assets\x18\x01 \x01(\v25.api.wallet.service.v1.GetWalletsResponse.TotalAssetsR\vtotalAssets\x12J\n" +
 	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xbe\x04\n" +
@@ -14800,11 +14800,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1bwithdraw_reporting_currency\x18\b \x01(\tR\x19withdrawReportingCurrency\x12X\n" +
 	")deposit_minus_withdraw_reporting_currency\x18\t \x01(\tR%depositMinusWithdrawReportingCurrency\x12I\n" +
 	"!valid_turnover_reporting_currency\x18\n" +
-	" \x01(\tR\x1evalidTurnoverReportingCurrency\x1a\x84\t\n" +
+	" \x01(\tR\x1evalidTurnoverReportingCurrency\x1a\xfa\b\n" +
 	"\x06Credit\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x12\x12\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1b\n" +
+	"\tcredit_id\x18\x02 \x01(\x03R\bcreditId\x12\x12\n" +
 	"\x04cash\x18\x03 \x01(\tR\x04cash\x12#\n" +
 	"\roriginal_cash\x18\x04 \x01(\tR\foriginalCash\x12\x14\n" +
 	"\x05bonus\x18\x05 \x01(\tR\x05bonus\x12%\n" +
