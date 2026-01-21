@@ -255,6 +255,18 @@ func ErrorInvalidRuleConditions(format string, args ...interface{}) *errors.Erro
 	return errors.New(500, ErrorReason_INVALID_RULE_CONDITIONS.String(), fmt.Sprintf(format, args...))
 }
 
+func IsSaveChannelRulesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SAVE_CHANNEL_RULES_FAILED.String() && e.Code == 500
+}
+
+func ErrorSaveChannelRulesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SAVE_CHANNEL_RULES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
 // Notification Delivery errors (90300-90399)
 func IsSendToChannelsFailed(err error) bool {
 	if err == nil {

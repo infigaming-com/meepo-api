@@ -19,11 +19,12 @@ service PushNotification {
   rpc TestNotificationChannel(TestNotificationChannelRequest) returns (TestNotificationChannelResponse) {}
 
   // ============ Rule Management ============
-  rpc CreateNotificationRule(CreateNotificationRuleRequest) returns (CreateNotificationRuleResponse) {}
+  // Save all rules for a channel (batch create/update/delete)
+  rpc SaveChannelRules(SaveChannelRulesRequest) returns (SaveChannelRulesResponse) {}
+  // List notification rules with pagination
   rpc ListNotificationRules(ListNotificationRulesRequest) returns (ListNotificationRulesResponse) {}
-  rpc GetNotificationRule(GetNotificationRuleRequest) returns (GetNotificationRuleResponse) {}
-  rpc UpdateNotificationRule(UpdateNotificationRuleRequest) returns (UpdateNotificationRuleResponse) {}
-  rpc DeleteNotificationRule(DeleteNotificationRuleRequest) returns (DeleteNotificationRuleResponse) {}
+  // Get supported message types for frontend dropdown
+  rpc GetSupportedMessageTypes(GetSupportedMessageTypesRequest) returns (GetSupportedMessageTypesResponse) {}
 
   // ============ Notification Delivery ============
   rpc SendToChannels(SendToChannelsRequest) returns (SendToChannelsResponse) {}
@@ -41,6 +42,15 @@ enum RuleType {
   RULE_TYPE_UNSPECIFIED = 0;
   RULE_TYPE_GENERIC = 1;
   RULE_TYPE_CURRENCY_THRESHOLD = 2;
+}
+
+enum MessageType {
+  MESSAGE_TYPE_UNSPECIFIED = 0;
+  MESSAGE_TYPE_WITHDRAW_NOTIFICATION = 1;
+  MESSAGE_TYPE_DEPOSIT_NOTIFICATION = 2;
+  MESSAGE_TYPE_LARGE_DEPOSIT = 3;
+  MESSAGE_TYPE_LARGE_BET = 4;
+  MESSAGE_TYPE_LARGE_WIN = 5;
 }
 
 // ============ Channel Messages ============
@@ -83,15 +93,31 @@ message CurrencyCondition {
 message NotificationRule {
   int64 id = 1;
   string name = 2;
-  string message_type = 3;  // "withdraw_notification", "large_deposit", etc.
+  MessageType message_type = 3;  // Changed from string to enum
   RuleType rule_type = 4;
-  repeated int64 channel_ids = 5;
-  repeated NotificationChannel channels = 6;  // Populated in list response
-  repeated CurrencyCondition currency_conditions = 7;
-  bool enabled = 8;
-  int64 created_at = 9;
-  int64 updated_at = 10;
-  bool is_inherited = 11;
+  int64 channel_id = 5;          // Single channel (was channel_ids array)
+  repeated CurrencyCondition currency_conditions = 6;
+  bool enabled = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
+  bool is_inherited = 10;
+}
+
+// Input for creating/updating rules in batch
+message NotificationRuleInput {
+  int64 id = 1;  // 0 = new rule, >0 = update existing
+  string name = 2;
+  MessageType message_type = 3;
+  RuleType rule_type = 4;
+  repeated CurrencyCondition currency_conditions = 5;
+  bool enabled = 6;
+}
+
+// Message type info for frontend dropdown
+message MessageTypeInfo {
+  MessageType value = 1;
+  string name = 2;
+  string display_name = 3;
 }
 
 // ============ Channel CRUD Requests ============
@@ -161,29 +187,26 @@ message TestNotificationChannelResponse {
   string error_message = 2;
 }
 
-// ============ Rule CRUD Requests ============
+// ============ Rule Management Requests ============
 
-message CreateNotificationRuleRequest {
+message SaveChannelRulesRequest {
   api.common.OperatorContext target_operator_context = 1;
-  string name = 2;
-  string message_type = 3;
-  RuleType rule_type = 4;
-  repeated int64 channel_ids = 5;
-  repeated CurrencyCondition currency_conditions = 6;
-  bool enabled = 7;
+  int64 channel_id = 2;
+  repeated NotificationRuleInput rules = 3;
 }
 
-message CreateNotificationRuleResponse {
-  NotificationRule rule = 1;
+message SaveChannelRulesResponse {
+  repeated NotificationRule rules = 1;
 }
 
 message ListNotificationRulesRequest {
   api.common.OperatorContext target_operator_context = 1;
-  optional string message_type = 2;
+  optional MessageType message_type = 2;
   optional bool enabled = 3;
   bool include_inherited = 4;
-  int32 page = 5;
-  int32 page_size = 6;
+  int64 channel_id = 5;  // Filter by channel
+  int32 page = 6;
+  int32 page_size = 7;
 }
 
 message ListNotificationRulesResponse {
@@ -193,32 +216,11 @@ message ListNotificationRulesResponse {
   int32 page_size = 4;
 }
 
-message GetNotificationRuleRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  int64 rule_id = 2;
+message GetSupportedMessageTypesRequest {}
+
+message GetSupportedMessageTypesResponse {
+  repeated MessageTypeInfo message_types = 1;
 }
-
-message GetNotificationRuleResponse {
-  NotificationRule rule = 1;
-}
-
-message UpdateNotificationRuleRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  int64 rule_id = 2;
-  optional string name = 3;
-  repeated int64 channel_ids = 4;
-  repeated CurrencyCondition currency_conditions = 5;
-  optional bool enabled = 6;
-}
-
-message UpdateNotificationRuleResponse {}
-
-message DeleteNotificationRuleRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  int64 rule_id = 2;
-}
-
-message DeleteNotificationRuleResponse {}
 
 // ============ Notification Delivery ============
 

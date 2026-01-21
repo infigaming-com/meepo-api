@@ -3489,17 +3489,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationChannelResponse'
-    /v1/backoffice/notification/rule/create:
+    /v1/backoffice/notification/message-types:
         post:
             tags:
                 - BackofficeNotification
-            description: Create a new notification rule
-            operationId: BackofficeNotification_CreateNotificationRule
+            description: Get supported message types for frontend dropdown
+            operationId: BackofficeNotification_GetSupportedMessageTypes
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.push.service.v1.CreateNotificationRuleRequest'
+                            $ref: '#/components/schemas/api.push.service.v1.GetSupportedMessageTypesRequest'
                 required: true
             responses:
                 "200":
@@ -3507,45 +3507,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.push.service.v1.CreateNotificationRuleResponse'
-    /v1/backoffice/notification/rule/delete:
-        post:
-            tags:
-                - BackofficeNotification
-            description: Delete a notification rule
-            operationId: BackofficeNotification_DeleteNotificationRule
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationRuleRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationRuleResponse'
-    /v1/backoffice/notification/rule/get:
-        post:
-            tags:
-                - BackofficeNotification
-            description: Get a specific notification rule
-            operationId: BackofficeNotification_GetNotificationRule
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.push.service.v1.GetNotificationRuleRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.push.service.v1.GetNotificationRuleResponse'
+                                $ref: '#/components/schemas/api.push.service.v1.GetSupportedMessageTypesResponse'
     /v1/backoffice/notification/rule/list:
         post:
             tags:
@@ -3565,17 +3527,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.push.service.v1.ListNotificationRulesResponse'
-    /v1/backoffice/notification/rule/update:
+    /v1/backoffice/notification/rule/save:
         post:
             tags:
                 - BackofficeNotification
-            description: Update a notification rule
-            operationId: BackofficeNotification_UpdateNotificationRule
+            description: Save all rules for a channel (batch create/update/delete)
+            operationId: BackofficeNotification_SaveChannelRules
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationRuleRequest'
+                            $ref: '#/components/schemas/api.push.service.v1.SaveChannelRulesRequest'
                 required: true
             responses:
                 "200":
@@ -3583,7 +3545,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationRuleResponse'
+                                $ref: '#/components/schemas/api.push.service.v1.SaveChannelRulesResponse'
     /v1/backoffice/oauth/provider/create:
         post:
             tags:
@@ -19987,37 +19949,6 @@ components:
             properties:
                 channel:
                     $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
-        api.push.service.v1.CreateNotificationRuleRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                name:
-                    type: string
-                messageType:
-                    type: string
-                ruleType:
-                    enum:
-                        - RULE_TYPE_UNSPECIFIED
-                        - RULE_TYPE_GENERIC
-                        - RULE_TYPE_CURRENCY_THRESHOLD
-                    type: string
-                    format: enum
-                channelIds:
-                    type: array
-                    items:
-                        type: string
-                currencyConditions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
-                enabled:
-                    type: boolean
-        api.push.service.v1.CreateNotificationRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
         api.push.service.v1.CurrencyCondition:
             type: object
             properties:
@@ -20037,16 +19968,6 @@ components:
         api.push.service.v1.DeleteNotificationChannelResponse:
             type: object
             properties: {}
-        api.push.service.v1.DeleteNotificationRuleRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                ruleId:
-                    type: string
-        api.push.service.v1.DeleteNotificationRuleResponse:
-            type: object
-            properties: {}
         api.push.service.v1.GetNotificationChannelRequest:
             type: object
             properties:
@@ -20059,18 +19980,16 @@ components:
             properties:
                 channel:
                     $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
-        api.push.service.v1.GetNotificationRuleRequest:
+        api.push.service.v1.GetSupportedMessageTypesRequest:
+            type: object
+            properties: {}
+        api.push.service.v1.GetSupportedMessageTypesResponse:
             type: object
             properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                ruleId:
-                    type: string
-        api.push.service.v1.GetNotificationRuleResponse:
-            type: object
-            properties:
-                rule:
-                    $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+                messageTypes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.MessageTypeInfo'
         api.push.service.v1.ListBetTickerConfigResponse:
             type: object
             properties:
@@ -20133,11 +20052,21 @@ components:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 messageType:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
                     type: string
+                    format: enum
                 enabled:
                     type: boolean
                 includeInherited:
                     type: boolean
+                channelId:
+                    type: string
                 page:
                     type: integer
                     format: int32
@@ -20160,6 +20089,24 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.push.service.v1.MessageTypeInfo:
+            type: object
+            properties:
+                value:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
+                    type: string
+                    format: enum
+                name:
+                    type: string
+                displayName:
+                    type: string
+            description: Message type info for frontend dropdown
         api.push.service.v1.NotificationChannel:
             type: object
             properties:
@@ -20192,7 +20139,15 @@ components:
                 name:
                     type: string
                 messageType:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
                     type: string
+                    format: enum
                 ruleType:
                     enum:
                         - RULE_TYPE_UNSPECIFIED
@@ -20200,14 +20155,8 @@ components:
                         - RULE_TYPE_CURRENCY_THRESHOLD
                     type: string
                     format: enum
-                channelIds:
-                    type: array
-                    items:
-                        type: string
-                channels:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                channelId:
+                    type: string
                 currencyConditions:
                     type: array
                     items:
@@ -20220,6 +20169,55 @@ components:
                     type: string
                 isInherited:
                     type: boolean
+        api.push.service.v1.NotificationRuleInput:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                messageType:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
+                    type: string
+                    format: enum
+                ruleType:
+                    enum:
+                        - RULE_TYPE_UNSPECIFIED
+                        - RULE_TYPE_GENERIC
+                        - RULE_TYPE_CURRENCY_THRESHOLD
+                    type: string
+                    format: enum
+                currencyConditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                enabled:
+                    type: boolean
+            description: Input for creating/updating rules in batch
+        api.push.service.v1.SaveChannelRulesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationRuleInput'
+        api.push.service.v1.SaveChannelRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
         api.push.service.v1.SlackChannelConfig:
             type: object
             properties:
@@ -20269,28 +20267,6 @@ components:
                 enabled:
                     type: boolean
         api.push.service.v1.UpdateNotificationChannelResponse:
-            type: object
-            properties: {}
-        api.push.service.v1.UpdateNotificationRuleRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                ruleId:
-                    type: string
-                name:
-                    type: string
-                channelIds:
-                    type: array
-                    items:
-                        type: string
-                currencyConditions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
-                enabled:
-                    type: boolean
-        api.push.service.v1.UpdateNotificationRuleResponse:
             type: object
             properties: {}
         api.report.service.v1.GetDepositSummariesRequest:

@@ -120,6 +120,64 @@ func (RuleType) EnumDescriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{1}
 }
 
+type MessageType int32
+
+const (
+	MessageType_MESSAGE_TYPE_UNSPECIFIED           MessageType = 0
+	MessageType_MESSAGE_TYPE_WITHDRAW_NOTIFICATION MessageType = 1
+	MessageType_MESSAGE_TYPE_DEPOSIT_NOTIFICATION  MessageType = 2
+	MessageType_MESSAGE_TYPE_LARGE_DEPOSIT         MessageType = 3
+	MessageType_MESSAGE_TYPE_LARGE_BET             MessageType = 4
+	MessageType_MESSAGE_TYPE_LARGE_WIN             MessageType = 5
+)
+
+// Enum value maps for MessageType.
+var (
+	MessageType_name = map[int32]string{
+		0: "MESSAGE_TYPE_UNSPECIFIED",
+		1: "MESSAGE_TYPE_WITHDRAW_NOTIFICATION",
+		2: "MESSAGE_TYPE_DEPOSIT_NOTIFICATION",
+		3: "MESSAGE_TYPE_LARGE_DEPOSIT",
+		4: "MESSAGE_TYPE_LARGE_BET",
+		5: "MESSAGE_TYPE_LARGE_WIN",
+	}
+	MessageType_value = map[string]int32{
+		"MESSAGE_TYPE_UNSPECIFIED":           0,
+		"MESSAGE_TYPE_WITHDRAW_NOTIFICATION": 1,
+		"MESSAGE_TYPE_DEPOSIT_NOTIFICATION":  2,
+		"MESSAGE_TYPE_LARGE_DEPOSIT":         3,
+		"MESSAGE_TYPE_LARGE_BET":             4,
+		"MESSAGE_TYPE_LARGE_WIN":             5,
+	}
+)
+
+func (x MessageType) Enum() *MessageType {
+	p := new(MessageType)
+	*p = x
+	return p
+}
+
+func (x MessageType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MessageType) Descriptor() protoreflect.EnumDescriptor {
+	return file_push_service_v1_push_notification_proto_enumTypes[2].Descriptor()
+}
+
+func (MessageType) Type() protoreflect.EnumType {
+	return &file_push_service_v1_push_notification_proto_enumTypes[2]
+}
+
+func (x MessageType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MessageType.Descriptor instead.
+func (MessageType) EnumDescriptor() ([]byte, []int) {
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{2}
+}
+
 type TelegramChannelConfig struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	BotToken       string                 `protobuf:"bytes,1,opt,name=bot_token,json=botToken,proto3" json:"bot_token,omitempty"`
@@ -448,15 +506,14 @@ type NotificationRule struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Id                 int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	MessageType        string                 `protobuf:"bytes,3,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"` // "withdraw_notification", "large_deposit", etc.
+	MessageType        MessageType            `protobuf:"varint,3,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType" json:"message_type,omitempty"` // Changed from string to enum
 	RuleType           RuleType               `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
-	ChannelIds         []int64                `protobuf:"varint,5,rep,packed,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
-	Channels           []*NotificationChannel `protobuf:"bytes,6,rep,name=channels,proto3" json:"channels,omitempty"` // Populated in list response
-	CurrencyConditions []*CurrencyCondition   `protobuf:"bytes,7,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
-	Enabled            bool                   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt          int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          int64                  `protobuf:"varint,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	IsInherited        bool                   `protobuf:"varint,11,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
+	ChannelId          int64                  `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"` // Single channel (was channel_ids array)
+	CurrencyConditions []*CurrencyCondition   `protobuf:"bytes,6,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
+	Enabled            bool                   `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CreatedAt          int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt          int64                  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	IsInherited        bool                   `protobuf:"varint,10,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -505,11 +562,11 @@ func (x *NotificationRule) GetName() string {
 	return ""
 }
 
-func (x *NotificationRule) GetMessageType() string {
+func (x *NotificationRule) GetMessageType() MessageType {
 	if x != nil {
 		return x.MessageType
 	}
-	return ""
+	return MessageType_MESSAGE_TYPE_UNSPECIFIED
 }
 
 func (x *NotificationRule) GetRuleType() RuleType {
@@ -519,18 +576,11 @@ func (x *NotificationRule) GetRuleType() RuleType {
 	return RuleType_RULE_TYPE_UNSPECIFIED
 }
 
-func (x *NotificationRule) GetChannelIds() []int64 {
+func (x *NotificationRule) GetChannelId() int64 {
 	if x != nil {
-		return x.ChannelIds
+		return x.ChannelId
 	}
-	return nil
-}
-
-func (x *NotificationRule) GetChannels() []*NotificationChannel {
-	if x != nil {
-		return x.Channels
-	}
-	return nil
+	return 0
 }
 
 func (x *NotificationRule) GetCurrencyConditions() []*CurrencyCondition {
@@ -568,6 +618,152 @@ func (x *NotificationRule) GetIsInherited() bool {
 	return false
 }
 
+// Input for creating/updating rules in batch
+type NotificationRuleInput struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Id                 int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // 0 = new rule, >0 = update existing
+	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MessageType        MessageType            `protobuf:"varint,3,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType" json:"message_type,omitempty"`
+	RuleType           RuleType               `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
+	CurrencyConditions []*CurrencyCondition   `protobuf:"bytes,5,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
+	Enabled            bool                   `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *NotificationRuleInput) Reset() {
+	*x = NotificationRuleInput{}
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NotificationRuleInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotificationRuleInput) ProtoMessage() {}
+
+func (x *NotificationRuleInput) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotificationRuleInput.ProtoReflect.Descriptor instead.
+func (*NotificationRuleInput) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *NotificationRuleInput) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *NotificationRuleInput) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *NotificationRuleInput) GetMessageType() MessageType {
+	if x != nil {
+		return x.MessageType
+	}
+	return MessageType_MESSAGE_TYPE_UNSPECIFIED
+}
+
+func (x *NotificationRuleInput) GetRuleType() RuleType {
+	if x != nil {
+		return x.RuleType
+	}
+	return RuleType_RULE_TYPE_UNSPECIFIED
+}
+
+func (x *NotificationRuleInput) GetCurrencyConditions() []*CurrencyCondition {
+	if x != nil {
+		return x.CurrencyConditions
+	}
+	return nil
+}
+
+func (x *NotificationRuleInput) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Message type info for frontend dropdown
+type MessageTypeInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Value         MessageType            `protobuf:"varint,1,opt,name=value,proto3,enum=api.push.service.v1.MessageType" json:"value,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MessageTypeInfo) Reset() {
+	*x = MessageTypeInfo{}
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MessageTypeInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MessageTypeInfo) ProtoMessage() {}
+
+func (x *MessageTypeInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MessageTypeInfo.ProtoReflect.Descriptor instead.
+func (*MessageTypeInfo) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *MessageTypeInfo) GetValue() MessageType {
+	if x != nil {
+		return x.Value
+	}
+	return MessageType_MESSAGE_TYPE_UNSPECIFIED
+}
+
+func (x *MessageTypeInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *MessageTypeInfo) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
 type CreateNotificationChannelRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
@@ -581,7 +777,7 @@ type CreateNotificationChannelRequest struct {
 
 func (x *CreateNotificationChannelRequest) Reset() {
 	*x = CreateNotificationChannelRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[6]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -593,7 +789,7 @@ func (x *CreateNotificationChannelRequest) String() string {
 func (*CreateNotificationChannelRequest) ProtoMessage() {}
 
 func (x *CreateNotificationChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[6]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -606,7 +802,7 @@ func (x *CreateNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateNotificationChannelRequest.ProtoReflect.Descriptor instead.
 func (*CreateNotificationChannelRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{6}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateNotificationChannelRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -653,7 +849,7 @@ type CreateNotificationChannelResponse struct {
 
 func (x *CreateNotificationChannelResponse) Reset() {
 	*x = CreateNotificationChannelResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[7]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -665,7 +861,7 @@ func (x *CreateNotificationChannelResponse) String() string {
 func (*CreateNotificationChannelResponse) ProtoMessage() {}
 
 func (x *CreateNotificationChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[7]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -678,7 +874,7 @@ func (x *CreateNotificationChannelResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use CreateNotificationChannelResponse.ProtoReflect.Descriptor instead.
 func (*CreateNotificationChannelResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{7}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateNotificationChannelResponse) GetChannel() *NotificationChannel {
@@ -702,7 +898,7 @@ type ListNotificationChannelsRequest struct {
 
 func (x *ListNotificationChannelsRequest) Reset() {
 	*x = ListNotificationChannelsRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[8]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -714,7 +910,7 @@ func (x *ListNotificationChannelsRequest) String() string {
 func (*ListNotificationChannelsRequest) ProtoMessage() {}
 
 func (x *ListNotificationChannelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[8]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -727,7 +923,7 @@ func (x *ListNotificationChannelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNotificationChannelsRequest.ProtoReflect.Descriptor instead.
 func (*ListNotificationChannelsRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{8}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListNotificationChannelsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -784,7 +980,7 @@ type ListNotificationChannelsResponse struct {
 
 func (x *ListNotificationChannelsResponse) Reset() {
 	*x = ListNotificationChannelsResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[9]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -796,7 +992,7 @@ func (x *ListNotificationChannelsResponse) String() string {
 func (*ListNotificationChannelsResponse) ProtoMessage() {}
 
 func (x *ListNotificationChannelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[9]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -809,7 +1005,7 @@ func (x *ListNotificationChannelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNotificationChannelsResponse.ProtoReflect.Descriptor instead.
 func (*ListNotificationChannelsResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{9}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListNotificationChannelsResponse) GetChannels() []*NotificationChannel {
@@ -850,7 +1046,7 @@ type GetNotificationChannelRequest struct {
 
 func (x *GetNotificationChannelRequest) Reset() {
 	*x = GetNotificationChannelRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[10]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -862,7 +1058,7 @@ func (x *GetNotificationChannelRequest) String() string {
 func (*GetNotificationChannelRequest) ProtoMessage() {}
 
 func (x *GetNotificationChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[10]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -875,7 +1071,7 @@ func (x *GetNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNotificationChannelRequest.ProtoReflect.Descriptor instead.
 func (*GetNotificationChannelRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{10}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetNotificationChannelRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -901,7 +1097,7 @@ type GetNotificationChannelResponse struct {
 
 func (x *GetNotificationChannelResponse) Reset() {
 	*x = GetNotificationChannelResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[11]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -913,7 +1109,7 @@ func (x *GetNotificationChannelResponse) String() string {
 func (*GetNotificationChannelResponse) ProtoMessage() {}
 
 func (x *GetNotificationChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[11]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -926,7 +1122,7 @@ func (x *GetNotificationChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNotificationChannelResponse.ProtoReflect.Descriptor instead.
 func (*GetNotificationChannelResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{11}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetNotificationChannelResponse) GetChannel() *NotificationChannel {
@@ -949,7 +1145,7 @@ type UpdateNotificationChannelRequest struct {
 
 func (x *UpdateNotificationChannelRequest) Reset() {
 	*x = UpdateNotificationChannelRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[12]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -961,7 +1157,7 @@ func (x *UpdateNotificationChannelRequest) String() string {
 func (*UpdateNotificationChannelRequest) ProtoMessage() {}
 
 func (x *UpdateNotificationChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[12]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -974,7 +1170,7 @@ func (x *UpdateNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNotificationChannelRequest.ProtoReflect.Descriptor instead.
 func (*UpdateNotificationChannelRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{12}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateNotificationChannelRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1020,7 +1216,7 @@ type UpdateNotificationChannelResponse struct {
 
 func (x *UpdateNotificationChannelResponse) Reset() {
 	*x = UpdateNotificationChannelResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[13]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1032,7 +1228,7 @@ func (x *UpdateNotificationChannelResponse) String() string {
 func (*UpdateNotificationChannelResponse) ProtoMessage() {}
 
 func (x *UpdateNotificationChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[13]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1045,7 +1241,7 @@ func (x *UpdateNotificationChannelResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use UpdateNotificationChannelResponse.ProtoReflect.Descriptor instead.
 func (*UpdateNotificationChannelResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{13}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{15}
 }
 
 type DeleteNotificationChannelRequest struct {
@@ -1058,7 +1254,7 @@ type DeleteNotificationChannelRequest struct {
 
 func (x *DeleteNotificationChannelRequest) Reset() {
 	*x = DeleteNotificationChannelRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[14]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1070,7 +1266,7 @@ func (x *DeleteNotificationChannelRequest) String() string {
 func (*DeleteNotificationChannelRequest) ProtoMessage() {}
 
 func (x *DeleteNotificationChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[14]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1083,7 +1279,7 @@ func (x *DeleteNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteNotificationChannelRequest.ProtoReflect.Descriptor instead.
 func (*DeleteNotificationChannelRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{14}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteNotificationChannelRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1108,7 +1304,7 @@ type DeleteNotificationChannelResponse struct {
 
 func (x *DeleteNotificationChannelResponse) Reset() {
 	*x = DeleteNotificationChannelResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[15]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1120,7 +1316,7 @@ func (x *DeleteNotificationChannelResponse) String() string {
 func (*DeleteNotificationChannelResponse) ProtoMessage() {}
 
 func (x *DeleteNotificationChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[15]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1133,7 +1329,7 @@ func (x *DeleteNotificationChannelResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use DeleteNotificationChannelResponse.ProtoReflect.Descriptor instead.
 func (*DeleteNotificationChannelResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{15}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{17}
 }
 
 type TestNotificationChannelRequest struct {
@@ -1147,7 +1343,7 @@ type TestNotificationChannelRequest struct {
 
 func (x *TestNotificationChannelRequest) Reset() {
 	*x = TestNotificationChannelRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[16]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1159,7 +1355,7 @@ func (x *TestNotificationChannelRequest) String() string {
 func (*TestNotificationChannelRequest) ProtoMessage() {}
 
 func (x *TestNotificationChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[16]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1172,7 +1368,7 @@ func (x *TestNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestNotificationChannelRequest.ProtoReflect.Descriptor instead.
 func (*TestNotificationChannelRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{16}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *TestNotificationChannelRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1206,7 +1402,7 @@ type TestNotificationChannelResponse struct {
 
 func (x *TestNotificationChannelResponse) Reset() {
 	*x = TestNotificationChannelResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[17]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1218,7 +1414,7 @@ func (x *TestNotificationChannelResponse) String() string {
 func (*TestNotificationChannelResponse) ProtoMessage() {}
 
 func (x *TestNotificationChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[17]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1231,7 +1427,7 @@ func (x *TestNotificationChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestNotificationChannelResponse.ProtoReflect.Descriptor instead.
 func (*TestNotificationChannelResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{17}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *TestNotificationChannelResponse) GetSuccess() bool {
@@ -1248,34 +1444,30 @@ func (x *TestNotificationChannelResponse) GetErrorMessage() string {
 	return ""
 }
 
-type CreateNotificationRuleRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Name                  string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	MessageType           string                  `protobuf:"bytes,3,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-	RuleType              RuleType                `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
-	ChannelIds            []int64                 `protobuf:"varint,5,rep,packed,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
-	CurrencyConditions    []*CurrencyCondition    `protobuf:"bytes,6,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
-	Enabled               bool                    `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+type SaveChannelRulesRequest struct {
+	state                 protoimpl.MessageState   `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext  `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	ChannelId             int64                    `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	Rules                 []*NotificationRuleInput `protobuf:"bytes,3,rep,name=rules,proto3" json:"rules,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *CreateNotificationRuleRequest) Reset() {
-	*x = CreateNotificationRuleRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[18]
+func (x *SaveChannelRulesRequest) Reset() {
+	*x = SaveChannelRulesRequest{}
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateNotificationRuleRequest) String() string {
+func (x *SaveChannelRulesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateNotificationRuleRequest) ProtoMessage() {}
+func (*SaveChannelRulesRequest) ProtoMessage() {}
 
-func (x *CreateNotificationRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[18]
+func (x *SaveChannelRulesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1286,82 +1478,54 @@ func (x *CreateNotificationRuleRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateNotificationRuleRequest.ProtoReflect.Descriptor instead.
-func (*CreateNotificationRuleRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{18}
+// Deprecated: Use SaveChannelRulesRequest.ProtoReflect.Descriptor instead.
+func (*SaveChannelRulesRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *CreateNotificationRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *SaveChannelRulesRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *CreateNotificationRuleRequest) GetName() string {
+func (x *SaveChannelRulesRequest) GetChannelId() int64 {
 	if x != nil {
-		return x.Name
+		return x.ChannelId
 	}
-	return ""
+	return 0
 }
 
-func (x *CreateNotificationRuleRequest) GetMessageType() string {
+func (x *SaveChannelRulesRequest) GetRules() []*NotificationRuleInput {
 	if x != nil {
-		return x.MessageType
-	}
-	return ""
-}
-
-func (x *CreateNotificationRuleRequest) GetRuleType() RuleType {
-	if x != nil {
-		return x.RuleType
-	}
-	return RuleType_RULE_TYPE_UNSPECIFIED
-}
-
-func (x *CreateNotificationRuleRequest) GetChannelIds() []int64 {
-	if x != nil {
-		return x.ChannelIds
+		return x.Rules
 	}
 	return nil
 }
 
-func (x *CreateNotificationRuleRequest) GetCurrencyConditions() []*CurrencyCondition {
-	if x != nil {
-		return x.CurrencyConditions
-	}
-	return nil
-}
-
-func (x *CreateNotificationRuleRequest) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-type CreateNotificationRuleResponse struct {
+type SaveChannelRulesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rule          *NotificationRule      `protobuf:"bytes,1,opt,name=rule,proto3" json:"rule,omitempty"`
+	Rules         []*NotificationRule    `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateNotificationRuleResponse) Reset() {
-	*x = CreateNotificationRuleResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[19]
+func (x *SaveChannelRulesResponse) Reset() {
+	*x = SaveChannelRulesResponse{}
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateNotificationRuleResponse) String() string {
+func (x *SaveChannelRulesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateNotificationRuleResponse) ProtoMessage() {}
+func (*SaveChannelRulesResponse) ProtoMessage() {}
 
-func (x *CreateNotificationRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[19]
+func (x *SaveChannelRulesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1372,14 +1536,14 @@ func (x *CreateNotificationRuleResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateNotificationRuleResponse.ProtoReflect.Descriptor instead.
-func (*CreateNotificationRuleResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{19}
+// Deprecated: Use SaveChannelRulesResponse.ProtoReflect.Descriptor instead.
+func (*SaveChannelRulesResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *CreateNotificationRuleResponse) GetRule() *NotificationRule {
+func (x *SaveChannelRulesResponse) GetRules() []*NotificationRule {
 	if x != nil {
-		return x.Rule
+		return x.Rules
 	}
 	return nil
 }
@@ -1387,18 +1551,19 @@ func (x *CreateNotificationRuleResponse) GetRule() *NotificationRule {
 type ListNotificationRulesRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	MessageType           *string                 `protobuf:"bytes,2,opt,name=message_type,json=messageType,proto3,oneof" json:"message_type,omitempty"`
+	MessageType           *MessageType            `protobuf:"varint,2,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType,oneof" json:"message_type,omitempty"`
 	Enabled               *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	IncludeInherited      bool                    `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
-	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	ChannelId             int64                   `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"` // Filter by channel
+	Page                  int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListNotificationRulesRequest) Reset() {
 	*x = ListNotificationRulesRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[20]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1410,7 +1575,7 @@ func (x *ListNotificationRulesRequest) String() string {
 func (*ListNotificationRulesRequest) ProtoMessage() {}
 
 func (x *ListNotificationRulesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[20]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1423,7 +1588,7 @@ func (x *ListNotificationRulesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNotificationRulesRequest.ProtoReflect.Descriptor instead.
 func (*ListNotificationRulesRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{20}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListNotificationRulesRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1433,11 +1598,11 @@ func (x *ListNotificationRulesRequest) GetTargetOperatorContext() *common.Operat
 	return nil
 }
 
-func (x *ListNotificationRulesRequest) GetMessageType() string {
+func (x *ListNotificationRulesRequest) GetMessageType() MessageType {
 	if x != nil && x.MessageType != nil {
 		return *x.MessageType
 	}
-	return ""
+	return MessageType_MESSAGE_TYPE_UNSPECIFIED
 }
 
 func (x *ListNotificationRulesRequest) GetEnabled() bool {
@@ -1452,6 +1617,13 @@ func (x *ListNotificationRulesRequest) GetIncludeInherited() bool {
 		return x.IncludeInherited
 	}
 	return false
+}
+
+func (x *ListNotificationRulesRequest) GetChannelId() int64 {
+	if x != nil {
+		return x.ChannelId
+	}
+	return 0
 }
 
 func (x *ListNotificationRulesRequest) GetPage() int32 {
@@ -1480,7 +1652,7 @@ type ListNotificationRulesResponse struct {
 
 func (x *ListNotificationRulesResponse) Reset() {
 	*x = ListNotificationRulesResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[21]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1492,7 +1664,7 @@ func (x *ListNotificationRulesResponse) String() string {
 func (*ListNotificationRulesResponse) ProtoMessage() {}
 
 func (x *ListNotificationRulesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[21]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1505,7 +1677,7 @@ func (x *ListNotificationRulesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNotificationRulesResponse.ProtoReflect.Descriptor instead.
 func (*ListNotificationRulesResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{21}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListNotificationRulesResponse) GetRules() []*NotificationRule {
@@ -1536,128 +1708,26 @@ func (x *ListNotificationRulesResponse) GetPageSize() int32 {
 	return 0
 }
 
-type GetNotificationRuleRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *GetNotificationRuleRequest) Reset() {
-	*x = GetNotificationRuleRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNotificationRuleRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNotificationRuleRequest) ProtoMessage() {}
-
-func (x *GetNotificationRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNotificationRuleRequest.ProtoReflect.Descriptor instead.
-func (*GetNotificationRuleRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *GetNotificationRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
-	}
-	return nil
-}
-
-func (x *GetNotificationRuleRequest) GetRuleId() int64 {
-	if x != nil {
-		return x.RuleId
-	}
-	return 0
-}
-
-type GetNotificationRuleResponse struct {
+type GetSupportedMessageTypesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rule          *NotificationRule      `protobuf:"bytes,1,opt,name=rule,proto3" json:"rule,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetNotificationRuleResponse) Reset() {
-	*x = GetNotificationRuleResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNotificationRuleResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNotificationRuleResponse) ProtoMessage() {}
-
-func (x *GetNotificationRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNotificationRuleResponse.ProtoReflect.Descriptor instead.
-func (*GetNotificationRuleResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *GetNotificationRuleResponse) GetRule() *NotificationRule {
-	if x != nil {
-		return x.Rule
-	}
-	return nil
-}
-
-type UpdateNotificationRuleRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	ChannelIds            []int64                 `protobuf:"varint,4,rep,packed,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
-	CurrencyConditions    []*CurrencyCondition    `protobuf:"bytes,5,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *UpdateNotificationRuleRequest) Reset() {
-	*x = UpdateNotificationRuleRequest{}
+func (x *GetSupportedMessageTypesRequest) Reset() {
+	*x = GetSupportedMessageTypesRequest{}
 	mi := &file_push_service_v1_push_notification_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateNotificationRuleRequest) String() string {
+func (x *GetSupportedMessageTypesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateNotificationRuleRequest) ProtoMessage() {}
+func (*GetSupportedMessageTypesRequest) ProtoMessage() {}
 
-func (x *UpdateNotificationRuleRequest) ProtoReflect() protoreflect.Message {
+func (x *GetSupportedMessageTypesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_push_service_v1_push_notification_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1669,73 +1739,32 @@ func (x *UpdateNotificationRuleRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateNotificationRuleRequest.ProtoReflect.Descriptor instead.
-func (*UpdateNotificationRuleRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetSupportedMessageTypesRequest.ProtoReflect.Descriptor instead.
+func (*GetSupportedMessageTypesRequest) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *UpdateNotificationRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
-	}
-	return nil
-}
-
-func (x *UpdateNotificationRuleRequest) GetRuleId() int64 {
-	if x != nil {
-		return x.RuleId
-	}
-	return 0
-}
-
-func (x *UpdateNotificationRuleRequest) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
-	}
-	return ""
-}
-
-func (x *UpdateNotificationRuleRequest) GetChannelIds() []int64 {
-	if x != nil {
-		return x.ChannelIds
-	}
-	return nil
-}
-
-func (x *UpdateNotificationRuleRequest) GetCurrencyConditions() []*CurrencyCondition {
-	if x != nil {
-		return x.CurrencyConditions
-	}
-	return nil
-}
-
-func (x *UpdateNotificationRuleRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
-	}
-	return false
-}
-
-type UpdateNotificationRuleResponse struct {
+type GetSupportedMessageTypesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	MessageTypes  []*MessageTypeInfo     `protobuf:"bytes,1,rep,name=message_types,json=messageTypes,proto3" json:"message_types,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateNotificationRuleResponse) Reset() {
-	*x = UpdateNotificationRuleResponse{}
+func (x *GetSupportedMessageTypesResponse) Reset() {
+	*x = GetSupportedMessageTypesResponse{}
 	mi := &file_push_service_v1_push_notification_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateNotificationRuleResponse) String() string {
+func (x *GetSupportedMessageTypesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateNotificationRuleResponse) ProtoMessage() {}
+func (*GetSupportedMessageTypesResponse) ProtoMessage() {}
 
-func (x *UpdateNotificationRuleResponse) ProtoReflect() protoreflect.Message {
+func (x *GetSupportedMessageTypesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_push_service_v1_push_notification_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1747,97 +1776,16 @@ func (x *UpdateNotificationRuleResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateNotificationRuleResponse.ProtoReflect.Descriptor instead.
-func (*UpdateNotificationRuleResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetSupportedMessageTypesResponse.ProtoReflect.Descriptor instead.
+func (*GetSupportedMessageTypesResponse) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{25}
 }
 
-type DeleteNotificationRuleRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	RuleId                int64                   `protobuf:"varint,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *DeleteNotificationRuleRequest) Reset() {
-	*x = DeleteNotificationRuleRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[26]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteNotificationRuleRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteNotificationRuleRequest) ProtoMessage() {}
-
-func (x *DeleteNotificationRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[26]
+func (x *GetSupportedMessageTypesResponse) GetMessageTypes() []*MessageTypeInfo {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteNotificationRuleRequest.ProtoReflect.Descriptor instead.
-func (*DeleteNotificationRuleRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{26}
-}
-
-func (x *DeleteNotificationRuleRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
+		return x.MessageTypes
 	}
 	return nil
-}
-
-func (x *DeleteNotificationRuleRequest) GetRuleId() int64 {
-	if x != nil {
-		return x.RuleId
-	}
-	return 0
-}
-
-type DeleteNotificationRuleResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteNotificationRuleResponse) Reset() {
-	*x = DeleteNotificationRuleResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[27]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteNotificationRuleResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteNotificationRuleResponse) ProtoMessage() {}
-
-func (x *DeleteNotificationRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[27]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteNotificationRuleResponse.ProtoReflect.Descriptor instead.
-func (*DeleteNotificationRuleResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{27}
 }
 
 type SendToChannelsRequest struct {
@@ -1851,7 +1799,7 @@ type SendToChannelsRequest struct {
 
 func (x *SendToChannelsRequest) Reset() {
 	*x = SendToChannelsRequest{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[28]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1863,7 +1811,7 @@ func (x *SendToChannelsRequest) String() string {
 func (*SendToChannelsRequest) ProtoMessage() {}
 
 func (x *SendToChannelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[28]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1876,7 +1824,7 @@ func (x *SendToChannelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendToChannelsRequest.ProtoReflect.Descriptor instead.
 func (*SendToChannelsRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{28}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *SendToChannelsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1913,7 +1861,7 @@ type ChannelDeliveryResult struct {
 
 func (x *ChannelDeliveryResult) Reset() {
 	*x = ChannelDeliveryResult{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[29]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1925,7 +1873,7 @@ func (x *ChannelDeliveryResult) String() string {
 func (*ChannelDeliveryResult) ProtoMessage() {}
 
 func (x *ChannelDeliveryResult) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[29]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1938,7 +1886,7 @@ func (x *ChannelDeliveryResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelDeliveryResult.ProtoReflect.Descriptor instead.
 func (*ChannelDeliveryResult) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{29}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ChannelDeliveryResult) GetChannelId() int64 {
@@ -1985,7 +1933,7 @@ type SendToChannelsResponse struct {
 
 func (x *SendToChannelsResponse) Reset() {
 	*x = SendToChannelsResponse{}
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[30]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1997,7 +1945,7 @@ func (x *SendToChannelsResponse) String() string {
 func (*SendToChannelsResponse) ProtoMessage() {}
 
 func (x *SendToChannelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_notification_proto_msgTypes[30]
+	mi := &file_push_service_v1_push_notification_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2010,7 +1958,7 @@ func (x *SendToChannelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendToChannelsResponse.ProtoReflect.Descriptor instead.
 func (*SendToChannelsResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{30}
+	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *SendToChannelsResponse) GetDeliveryResults() []*ChannelDeliveryResult {
@@ -2051,23 +1999,33 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
 	"min_amount\x18\x02 \x01(\tR\tminAmount\x12\x19\n" +
-	"\bmin_odds\x18\x03 \x01(\tR\aminOdds\"\xd0\x03\n" +
+	"\bmin_odds\x18\x03 \x01(\tR\aminOdds\"\xaa\x03\n" +
 	"\x10NotificationRule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12C\n" +
+	"\fmessage_type\x18\x03 \x01(\x0e2 .api.push.service.v1.MessageTypeR\vmessageType\x12:\n" +
+	"\trule_type\x18\x04 \x01(\x0e2\x1d.api.push.service.v1.RuleTypeR\bruleType\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x05 \x01(\x03R\tchannelId\x12W\n" +
+	"\x13currency_conditions\x18\x06 \x03(\v2&.api.push.service.v1.CurrencyConditionR\x12currencyConditions\x12\x18\n" +
+	"\aenabled\x18\a \x01(\bR\aenabled\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\x03R\tupdatedAt\x12!\n" +
+	"\fis_inherited\x18\n" +
+	" \x01(\bR\visInherited\"\xaf\x02\n" +
+	"\x15NotificationRuleInput\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12C\n" +
+	"\fmessage_type\x18\x03 \x01(\x0e2 .api.push.service.v1.MessageTypeR\vmessageType\x12:\n" +
+	"\trule_type\x18\x04 \x01(\x0e2\x1d.api.push.service.v1.RuleTypeR\bruleType\x12W\n" +
+	"\x13currency_conditions\x18\x05 \x03(\v2&.api.push.service.v1.CurrencyConditionR\x12currencyConditions\x12\x18\n" +
+	"\aenabled\x18\x06 \x01(\bR\aenabled\"\x80\x01\n" +
+	"\x0fMessageTypeInfo\x126\n" +
+	"\x05value\x18\x01 \x01(\x0e2 .api.push.service.v1.MessageTypeR\x05value\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
-	"\fmessage_type\x18\x03 \x01(\tR\vmessageType\x12:\n" +
-	"\trule_type\x18\x04 \x01(\x0e2\x1d.api.push.service.v1.RuleTypeR\bruleType\x12\x1f\n" +
-	"\vchannel_ids\x18\x05 \x03(\x03R\n" +
-	"channelIds\x12D\n" +
-	"\bchannels\x18\x06 \x03(\v2(.api.push.service.v1.NotificationChannelR\bchannels\x12W\n" +
-	"\x13currency_conditions\x18\a \x03(\v2&.api.push.service.v1.CurrencyConditionR\x12currencyConditions\x12\x18\n" +
-	"\aenabled\x18\b \x01(\bR\aenabled\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_at\x18\n" +
-	" \x01(\x03R\tupdatedAt\x12!\n" +
-	"\fis_inherited\x18\v \x01(\bR\visInherited\"\xa6\x02\n" +
+	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\"\xa6\x02\n" +
 	" CreateNotificationChannelRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12C\n" +
@@ -2121,25 +2079,23 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"\ftest_message\x18\x03 \x01(\tR\vtestMessage\"`\n" +
 	"\x1fTestNotificationChannelResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12#\n" +
-	"\rerror_message\x18\x02 \x01(\tR\ferrorMessage\"\xfb\x02\n" +
-	"\x1dCreateNotificationRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
-	"\fmessage_type\x18\x03 \x01(\tR\vmessageType\x12:\n" +
-	"\trule_type\x18\x04 \x01(\x0e2\x1d.api.push.service.v1.RuleTypeR\bruleType\x12\x1f\n" +
-	"\vchannel_ids\x18\x05 \x03(\x03R\n" +
-	"channelIds\x12W\n" +
-	"\x13currency_conditions\x18\x06 \x03(\v2&.api.push.service.v1.CurrencyConditionR\x12currencyConditions\x12\x18\n" +
-	"\aenabled\x18\a \x01(\bR\aenabled\"[\n" +
-	"\x1eCreateNotificationRuleResponse\x129\n" +
-	"\x04rule\x18\x01 \x01(\v2%.api.push.service.v1.NotificationRuleR\x04rule\"\xb5\x02\n" +
+	"\rerror_message\x18\x02 \x01(\tR\ferrorMessage\"\xcf\x01\n" +
+	"\x17SaveChannelRulesRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x02 \x01(\x03R\tchannelId\x12@\n" +
+	"\x05rules\x18\x03 \x03(\v2*.api.push.service.v1.NotificationRuleInputR\x05rules\"W\n" +
+	"\x18SaveChannelRulesResponse\x12;\n" +
+	"\x05rules\x18\x01 \x03(\v2%.api.push.service.v1.NotificationRuleR\x05rules\"\xf6\x02\n" +
 	"\x1cListNotificationRulesRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12&\n" +
-	"\fmessage_type\x18\x02 \x01(\tH\x00R\vmessageType\x88\x01\x01\x12\x1d\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12H\n" +
+	"\fmessage_type\x18\x02 \x01(\x0e2 .api.push.service.v1.MessageTypeH\x00R\vmessageType\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x12+\n" +
-	"\x11include_inherited\x18\x04 \x01(\bR\x10includeInherited\x12\x12\n" +
-	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSizeB\x0f\n" +
+	"\x11include_inherited\x18\x04 \x01(\bR\x10includeInherited\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x05 \x01(\x03R\tchannelId\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\x0f\n" +
 	"\r_message_typeB\n" +
 	"\n" +
 	"\b_enabled\"\xa3\x01\n" +
@@ -2147,28 +2103,10 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"\x05rules\x18\x01 \x03(\v2%.api.push.service.v1.NotificationRuleR\x05rules\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x8a\x01\n" +
-	"\x1aGetNotificationRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\"X\n" +
-	"\x1bGetNotificationRuleResponse\x129\n" +
-	"\x04rule\x18\x01 \x01(\v2%.api.push.service.v1.NotificationRuleR\x04rule\"\xd4\x02\n" +
-	"\x1dUpdateNotificationRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1f\n" +
-	"\vchannel_ids\x18\x04 \x03(\x03R\n" +
-	"channelIds\x12W\n" +
-	"\x13currency_conditions\x18\x05 \x03(\v2&.api.push.service.v1.CurrencyConditionR\x12currencyConditions\x12\x1d\n" +
-	"\aenabled\x18\x06 \x01(\bH\x01R\aenabled\x88\x01\x01B\a\n" +
-	"\x05_nameB\n" +
-	"\n" +
-	"\b_enabled\" \n" +
-	"\x1eUpdateNotificationRuleResponse\"\x8d\x01\n" +
-	"\x1dDeleteNotificationRuleRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\x03R\x06ruleId\" \n" +
-	"\x1eDeleteNotificationRuleResponse\"\xa7\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"!\n" +
+	"\x1fGetSupportedMessageTypesRequest\"m\n" +
+	" GetSupportedMessageTypesResponse\x12I\n" +
+	"\rmessage_types\x18\x01 \x03(\v2$.api.push.service.v1.MessageTypeInfoR\fmessageTypes\"\xa7\x01\n" +
 	"\x15SendToChannelsRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vchannel_ids\x18\x02 \x03(\x03R\n" +
@@ -2190,19 +2128,25 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"\bRuleType\x12\x19\n" +
 	"\x15RULE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11RULE_TYPE_GENERIC\x10\x01\x12 \n" +
-	"\x1cRULE_TYPE_CURRENCY_THRESHOLD\x10\x022\xd8\f\n" +
+	"\x1cRULE_TYPE_CURRENCY_THRESHOLD\x10\x02*\xd2\x01\n" +
+	"\vMessageType\x12\x1c\n" +
+	"\x18MESSAGE_TYPE_UNSPECIFIED\x10\x00\x12&\n" +
+	"\"MESSAGE_TYPE_WITHDRAW_NOTIFICATION\x10\x01\x12%\n" +
+	"!MESSAGE_TYPE_DEPOSIT_NOTIFICATION\x10\x02\x12\x1e\n" +
+	"\x1aMESSAGE_TYPE_LARGE_DEPOSIT\x10\x03\x12\x1a\n" +
+	"\x16MESSAGE_TYPE_LARGE_BET\x10\x04\x12\x1a\n" +
+	"\x16MESSAGE_TYPE_LARGE_WIN\x10\x052\xc9\n" +
+	"\n" +
 	"\x10PushNotification\x12\x8c\x01\n" +
 	"\x19CreateNotificationChannel\x125.api.push.service.v1.CreateNotificationChannelRequest\x1a6.api.push.service.v1.CreateNotificationChannelResponse\"\x00\x12\x89\x01\n" +
 	"\x18ListNotificationChannels\x124.api.push.service.v1.ListNotificationChannelsRequest\x1a5.api.push.service.v1.ListNotificationChannelsResponse\"\x00\x12\x83\x01\n" +
 	"\x16GetNotificationChannel\x122.api.push.service.v1.GetNotificationChannelRequest\x1a3.api.push.service.v1.GetNotificationChannelResponse\"\x00\x12\x8c\x01\n" +
 	"\x19UpdateNotificationChannel\x125.api.push.service.v1.UpdateNotificationChannelRequest\x1a6.api.push.service.v1.UpdateNotificationChannelResponse\"\x00\x12\x8c\x01\n" +
 	"\x19DeleteNotificationChannel\x125.api.push.service.v1.DeleteNotificationChannelRequest\x1a6.api.push.service.v1.DeleteNotificationChannelResponse\"\x00\x12\x86\x01\n" +
-	"\x17TestNotificationChannel\x123.api.push.service.v1.TestNotificationChannelRequest\x1a4.api.push.service.v1.TestNotificationChannelResponse\"\x00\x12\x83\x01\n" +
-	"\x16CreateNotificationRule\x122.api.push.service.v1.CreateNotificationRuleRequest\x1a3.api.push.service.v1.CreateNotificationRuleResponse\"\x00\x12\x80\x01\n" +
-	"\x15ListNotificationRules\x121.api.push.service.v1.ListNotificationRulesRequest\x1a2.api.push.service.v1.ListNotificationRulesResponse\"\x00\x12z\n" +
-	"\x13GetNotificationRule\x12/.api.push.service.v1.GetNotificationRuleRequest\x1a0.api.push.service.v1.GetNotificationRuleResponse\"\x00\x12\x83\x01\n" +
-	"\x16UpdateNotificationRule\x122.api.push.service.v1.UpdateNotificationRuleRequest\x1a3.api.push.service.v1.UpdateNotificationRuleResponse\"\x00\x12\x83\x01\n" +
-	"\x16DeleteNotificationRule\x122.api.push.service.v1.DeleteNotificationRuleRequest\x1a3.api.push.service.v1.DeleteNotificationRuleResponse\"\x00\x12k\n" +
+	"\x17TestNotificationChannel\x123.api.push.service.v1.TestNotificationChannelRequest\x1a4.api.push.service.v1.TestNotificationChannelResponse\"\x00\x12q\n" +
+	"\x10SaveChannelRules\x12,.api.push.service.v1.SaveChannelRulesRequest\x1a-.api.push.service.v1.SaveChannelRulesResponse\"\x00\x12\x80\x01\n" +
+	"\x15ListNotificationRules\x121.api.push.service.v1.ListNotificationRulesRequest\x1a2.api.push.service.v1.ListNotificationRulesResponse\"\x00\x12\x89\x01\n" +
+	"\x18GetSupportedMessageTypes\x124.api.push.service.v1.GetSupportedMessageTypesRequest\x1a5.api.push.service.v1.GetSupportedMessageTypesResponse\"\x00\x12k\n" +
 	"\x0eSendToChannels\x12*.api.push.service.v1.SendToChannelsRequest\x1a+.api.push.service.v1.SendToChannelsResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
@@ -2218,105 +2162,100 @@ func file_push_service_v1_push_notification_proto_rawDescGZIP() []byte {
 	return file_push_service_v1_push_notification_proto_rawDescData
 }
 
-var file_push_service_v1_push_notification_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_push_service_v1_push_notification_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_push_service_v1_push_notification_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_push_service_v1_push_notification_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_push_service_v1_push_notification_proto_goTypes = []any{
 	(ChannelType)(0),                          // 0: api.push.service.v1.ChannelType
 	(RuleType)(0),                             // 1: api.push.service.v1.RuleType
-	(*TelegramChannelConfig)(nil),             // 2: api.push.service.v1.TelegramChannelConfig
-	(*SlackChannelConfig)(nil),                // 3: api.push.service.v1.SlackChannelConfig
-	(*ChannelConfig)(nil),                     // 4: api.push.service.v1.ChannelConfig
-	(*NotificationChannel)(nil),               // 5: api.push.service.v1.NotificationChannel
-	(*CurrencyCondition)(nil),                 // 6: api.push.service.v1.CurrencyCondition
-	(*NotificationRule)(nil),                  // 7: api.push.service.v1.NotificationRule
-	(*CreateNotificationChannelRequest)(nil),  // 8: api.push.service.v1.CreateNotificationChannelRequest
-	(*CreateNotificationChannelResponse)(nil), // 9: api.push.service.v1.CreateNotificationChannelResponse
-	(*ListNotificationChannelsRequest)(nil),   // 10: api.push.service.v1.ListNotificationChannelsRequest
-	(*ListNotificationChannelsResponse)(nil),  // 11: api.push.service.v1.ListNotificationChannelsResponse
-	(*GetNotificationChannelRequest)(nil),     // 12: api.push.service.v1.GetNotificationChannelRequest
-	(*GetNotificationChannelResponse)(nil),    // 13: api.push.service.v1.GetNotificationChannelResponse
-	(*UpdateNotificationChannelRequest)(nil),  // 14: api.push.service.v1.UpdateNotificationChannelRequest
-	(*UpdateNotificationChannelResponse)(nil), // 15: api.push.service.v1.UpdateNotificationChannelResponse
-	(*DeleteNotificationChannelRequest)(nil),  // 16: api.push.service.v1.DeleteNotificationChannelRequest
-	(*DeleteNotificationChannelResponse)(nil), // 17: api.push.service.v1.DeleteNotificationChannelResponse
-	(*TestNotificationChannelRequest)(nil),    // 18: api.push.service.v1.TestNotificationChannelRequest
-	(*TestNotificationChannelResponse)(nil),   // 19: api.push.service.v1.TestNotificationChannelResponse
-	(*CreateNotificationRuleRequest)(nil),     // 20: api.push.service.v1.CreateNotificationRuleRequest
-	(*CreateNotificationRuleResponse)(nil),    // 21: api.push.service.v1.CreateNotificationRuleResponse
-	(*ListNotificationRulesRequest)(nil),      // 22: api.push.service.v1.ListNotificationRulesRequest
-	(*ListNotificationRulesResponse)(nil),     // 23: api.push.service.v1.ListNotificationRulesResponse
-	(*GetNotificationRuleRequest)(nil),        // 24: api.push.service.v1.GetNotificationRuleRequest
-	(*GetNotificationRuleResponse)(nil),       // 25: api.push.service.v1.GetNotificationRuleResponse
-	(*UpdateNotificationRuleRequest)(nil),     // 26: api.push.service.v1.UpdateNotificationRuleRequest
-	(*UpdateNotificationRuleResponse)(nil),    // 27: api.push.service.v1.UpdateNotificationRuleResponse
-	(*DeleteNotificationRuleRequest)(nil),     // 28: api.push.service.v1.DeleteNotificationRuleRequest
-	(*DeleteNotificationRuleResponse)(nil),    // 29: api.push.service.v1.DeleteNotificationRuleResponse
-	(*SendToChannelsRequest)(nil),             // 30: api.push.service.v1.SendToChannelsRequest
-	(*ChannelDeliveryResult)(nil),             // 31: api.push.service.v1.ChannelDeliveryResult
-	(*SendToChannelsResponse)(nil),            // 32: api.push.service.v1.SendToChannelsResponse
-	(*common.OperatorContext)(nil),            // 33: api.common.OperatorContext
+	(MessageType)(0),                          // 2: api.push.service.v1.MessageType
+	(*TelegramChannelConfig)(nil),             // 3: api.push.service.v1.TelegramChannelConfig
+	(*SlackChannelConfig)(nil),                // 4: api.push.service.v1.SlackChannelConfig
+	(*ChannelConfig)(nil),                     // 5: api.push.service.v1.ChannelConfig
+	(*NotificationChannel)(nil),               // 6: api.push.service.v1.NotificationChannel
+	(*CurrencyCondition)(nil),                 // 7: api.push.service.v1.CurrencyCondition
+	(*NotificationRule)(nil),                  // 8: api.push.service.v1.NotificationRule
+	(*NotificationRuleInput)(nil),             // 9: api.push.service.v1.NotificationRuleInput
+	(*MessageTypeInfo)(nil),                   // 10: api.push.service.v1.MessageTypeInfo
+	(*CreateNotificationChannelRequest)(nil),  // 11: api.push.service.v1.CreateNotificationChannelRequest
+	(*CreateNotificationChannelResponse)(nil), // 12: api.push.service.v1.CreateNotificationChannelResponse
+	(*ListNotificationChannelsRequest)(nil),   // 13: api.push.service.v1.ListNotificationChannelsRequest
+	(*ListNotificationChannelsResponse)(nil),  // 14: api.push.service.v1.ListNotificationChannelsResponse
+	(*GetNotificationChannelRequest)(nil),     // 15: api.push.service.v1.GetNotificationChannelRequest
+	(*GetNotificationChannelResponse)(nil),    // 16: api.push.service.v1.GetNotificationChannelResponse
+	(*UpdateNotificationChannelRequest)(nil),  // 17: api.push.service.v1.UpdateNotificationChannelRequest
+	(*UpdateNotificationChannelResponse)(nil), // 18: api.push.service.v1.UpdateNotificationChannelResponse
+	(*DeleteNotificationChannelRequest)(nil),  // 19: api.push.service.v1.DeleteNotificationChannelRequest
+	(*DeleteNotificationChannelResponse)(nil), // 20: api.push.service.v1.DeleteNotificationChannelResponse
+	(*TestNotificationChannelRequest)(nil),    // 21: api.push.service.v1.TestNotificationChannelRequest
+	(*TestNotificationChannelResponse)(nil),   // 22: api.push.service.v1.TestNotificationChannelResponse
+	(*SaveChannelRulesRequest)(nil),           // 23: api.push.service.v1.SaveChannelRulesRequest
+	(*SaveChannelRulesResponse)(nil),          // 24: api.push.service.v1.SaveChannelRulesResponse
+	(*ListNotificationRulesRequest)(nil),      // 25: api.push.service.v1.ListNotificationRulesRequest
+	(*ListNotificationRulesResponse)(nil),     // 26: api.push.service.v1.ListNotificationRulesResponse
+	(*GetSupportedMessageTypesRequest)(nil),   // 27: api.push.service.v1.GetSupportedMessageTypesRequest
+	(*GetSupportedMessageTypesResponse)(nil),  // 28: api.push.service.v1.GetSupportedMessageTypesResponse
+	(*SendToChannelsRequest)(nil),             // 29: api.push.service.v1.SendToChannelsRequest
+	(*ChannelDeliveryResult)(nil),             // 30: api.push.service.v1.ChannelDeliveryResult
+	(*SendToChannelsResponse)(nil),            // 31: api.push.service.v1.SendToChannelsResponse
+	(*common.OperatorContext)(nil),            // 32: api.common.OperatorContext
 }
 var file_push_service_v1_push_notification_proto_depIdxs = []int32{
-	2,  // 0: api.push.service.v1.ChannelConfig.telegram:type_name -> api.push.service.v1.TelegramChannelConfig
-	3,  // 1: api.push.service.v1.ChannelConfig.slack:type_name -> api.push.service.v1.SlackChannelConfig
+	3,  // 0: api.push.service.v1.ChannelConfig.telegram:type_name -> api.push.service.v1.TelegramChannelConfig
+	4,  // 1: api.push.service.v1.ChannelConfig.slack:type_name -> api.push.service.v1.SlackChannelConfig
 	0,  // 2: api.push.service.v1.NotificationChannel.channel_type:type_name -> api.push.service.v1.ChannelType
-	4,  // 3: api.push.service.v1.NotificationChannel.config:type_name -> api.push.service.v1.ChannelConfig
-	1,  // 4: api.push.service.v1.NotificationRule.rule_type:type_name -> api.push.service.v1.RuleType
-	5,  // 5: api.push.service.v1.NotificationRule.channels:type_name -> api.push.service.v1.NotificationChannel
-	6,  // 6: api.push.service.v1.NotificationRule.currency_conditions:type_name -> api.push.service.v1.CurrencyCondition
-	33, // 7: api.push.service.v1.CreateNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0,  // 8: api.push.service.v1.CreateNotificationChannelRequest.channel_type:type_name -> api.push.service.v1.ChannelType
-	4,  // 9: api.push.service.v1.CreateNotificationChannelRequest.config:type_name -> api.push.service.v1.ChannelConfig
-	5,  // 10: api.push.service.v1.CreateNotificationChannelResponse.channel:type_name -> api.push.service.v1.NotificationChannel
-	33, // 11: api.push.service.v1.ListNotificationChannelsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0,  // 12: api.push.service.v1.ListNotificationChannelsRequest.channel_type:type_name -> api.push.service.v1.ChannelType
-	5,  // 13: api.push.service.v1.ListNotificationChannelsResponse.channels:type_name -> api.push.service.v1.NotificationChannel
-	33, // 14: api.push.service.v1.GetNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
-	5,  // 15: api.push.service.v1.GetNotificationChannelResponse.channel:type_name -> api.push.service.v1.NotificationChannel
-	33, // 16: api.push.service.v1.UpdateNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
-	4,  // 17: api.push.service.v1.UpdateNotificationChannelRequest.config:type_name -> api.push.service.v1.ChannelConfig
-	33, // 18: api.push.service.v1.DeleteNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
-	33, // 19: api.push.service.v1.TestNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
-	33, // 20: api.push.service.v1.CreateNotificationRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	1,  // 21: api.push.service.v1.CreateNotificationRuleRequest.rule_type:type_name -> api.push.service.v1.RuleType
-	6,  // 22: api.push.service.v1.CreateNotificationRuleRequest.currency_conditions:type_name -> api.push.service.v1.CurrencyCondition
-	7,  // 23: api.push.service.v1.CreateNotificationRuleResponse.rule:type_name -> api.push.service.v1.NotificationRule
-	33, // 24: api.push.service.v1.ListNotificationRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	7,  // 25: api.push.service.v1.ListNotificationRulesResponse.rules:type_name -> api.push.service.v1.NotificationRule
-	33, // 26: api.push.service.v1.GetNotificationRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	7,  // 27: api.push.service.v1.GetNotificationRuleResponse.rule:type_name -> api.push.service.v1.NotificationRule
-	33, // 28: api.push.service.v1.UpdateNotificationRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	6,  // 29: api.push.service.v1.UpdateNotificationRuleRequest.currency_conditions:type_name -> api.push.service.v1.CurrencyCondition
-	33, // 30: api.push.service.v1.DeleteNotificationRuleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	33, // 31: api.push.service.v1.SendToChannelsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	5,  // 3: api.push.service.v1.NotificationChannel.config:type_name -> api.push.service.v1.ChannelConfig
+	2,  // 4: api.push.service.v1.NotificationRule.message_type:type_name -> api.push.service.v1.MessageType
+	1,  // 5: api.push.service.v1.NotificationRule.rule_type:type_name -> api.push.service.v1.RuleType
+	7,  // 6: api.push.service.v1.NotificationRule.currency_conditions:type_name -> api.push.service.v1.CurrencyCondition
+	2,  // 7: api.push.service.v1.NotificationRuleInput.message_type:type_name -> api.push.service.v1.MessageType
+	1,  // 8: api.push.service.v1.NotificationRuleInput.rule_type:type_name -> api.push.service.v1.RuleType
+	7,  // 9: api.push.service.v1.NotificationRuleInput.currency_conditions:type_name -> api.push.service.v1.CurrencyCondition
+	2,  // 10: api.push.service.v1.MessageTypeInfo.value:type_name -> api.push.service.v1.MessageType
+	32, // 11: api.push.service.v1.CreateNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 12: api.push.service.v1.CreateNotificationChannelRequest.channel_type:type_name -> api.push.service.v1.ChannelType
+	5,  // 13: api.push.service.v1.CreateNotificationChannelRequest.config:type_name -> api.push.service.v1.ChannelConfig
+	6,  // 14: api.push.service.v1.CreateNotificationChannelResponse.channel:type_name -> api.push.service.v1.NotificationChannel
+	32, // 15: api.push.service.v1.ListNotificationChannelsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 16: api.push.service.v1.ListNotificationChannelsRequest.channel_type:type_name -> api.push.service.v1.ChannelType
+	6,  // 17: api.push.service.v1.ListNotificationChannelsResponse.channels:type_name -> api.push.service.v1.NotificationChannel
+	32, // 18: api.push.service.v1.GetNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	6,  // 19: api.push.service.v1.GetNotificationChannelResponse.channel:type_name -> api.push.service.v1.NotificationChannel
+	32, // 20: api.push.service.v1.UpdateNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	5,  // 21: api.push.service.v1.UpdateNotificationChannelRequest.config:type_name -> api.push.service.v1.ChannelConfig
+	32, // 22: api.push.service.v1.DeleteNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	32, // 23: api.push.service.v1.TestNotificationChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	32, // 24: api.push.service.v1.SaveChannelRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	9,  // 25: api.push.service.v1.SaveChannelRulesRequest.rules:type_name -> api.push.service.v1.NotificationRuleInput
+	8,  // 26: api.push.service.v1.SaveChannelRulesResponse.rules:type_name -> api.push.service.v1.NotificationRule
+	32, // 27: api.push.service.v1.ListNotificationRulesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	2,  // 28: api.push.service.v1.ListNotificationRulesRequest.message_type:type_name -> api.push.service.v1.MessageType
+	8,  // 29: api.push.service.v1.ListNotificationRulesResponse.rules:type_name -> api.push.service.v1.NotificationRule
+	10, // 30: api.push.service.v1.GetSupportedMessageTypesResponse.message_types:type_name -> api.push.service.v1.MessageTypeInfo
+	32, // 31: api.push.service.v1.SendToChannelsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	0,  // 32: api.push.service.v1.ChannelDeliveryResult.channel_type:type_name -> api.push.service.v1.ChannelType
-	31, // 33: api.push.service.v1.SendToChannelsResponse.delivery_results:type_name -> api.push.service.v1.ChannelDeliveryResult
-	8,  // 34: api.push.service.v1.PushNotification.CreateNotificationChannel:input_type -> api.push.service.v1.CreateNotificationChannelRequest
-	10, // 35: api.push.service.v1.PushNotification.ListNotificationChannels:input_type -> api.push.service.v1.ListNotificationChannelsRequest
-	12, // 36: api.push.service.v1.PushNotification.GetNotificationChannel:input_type -> api.push.service.v1.GetNotificationChannelRequest
-	14, // 37: api.push.service.v1.PushNotification.UpdateNotificationChannel:input_type -> api.push.service.v1.UpdateNotificationChannelRequest
-	16, // 38: api.push.service.v1.PushNotification.DeleteNotificationChannel:input_type -> api.push.service.v1.DeleteNotificationChannelRequest
-	18, // 39: api.push.service.v1.PushNotification.TestNotificationChannel:input_type -> api.push.service.v1.TestNotificationChannelRequest
-	20, // 40: api.push.service.v1.PushNotification.CreateNotificationRule:input_type -> api.push.service.v1.CreateNotificationRuleRequest
-	22, // 41: api.push.service.v1.PushNotification.ListNotificationRules:input_type -> api.push.service.v1.ListNotificationRulesRequest
-	24, // 42: api.push.service.v1.PushNotification.GetNotificationRule:input_type -> api.push.service.v1.GetNotificationRuleRequest
-	26, // 43: api.push.service.v1.PushNotification.UpdateNotificationRule:input_type -> api.push.service.v1.UpdateNotificationRuleRequest
-	28, // 44: api.push.service.v1.PushNotification.DeleteNotificationRule:input_type -> api.push.service.v1.DeleteNotificationRuleRequest
-	30, // 45: api.push.service.v1.PushNotification.SendToChannels:input_type -> api.push.service.v1.SendToChannelsRequest
-	9,  // 46: api.push.service.v1.PushNotification.CreateNotificationChannel:output_type -> api.push.service.v1.CreateNotificationChannelResponse
-	11, // 47: api.push.service.v1.PushNotification.ListNotificationChannels:output_type -> api.push.service.v1.ListNotificationChannelsResponse
-	13, // 48: api.push.service.v1.PushNotification.GetNotificationChannel:output_type -> api.push.service.v1.GetNotificationChannelResponse
-	15, // 49: api.push.service.v1.PushNotification.UpdateNotificationChannel:output_type -> api.push.service.v1.UpdateNotificationChannelResponse
-	17, // 50: api.push.service.v1.PushNotification.DeleteNotificationChannel:output_type -> api.push.service.v1.DeleteNotificationChannelResponse
-	19, // 51: api.push.service.v1.PushNotification.TestNotificationChannel:output_type -> api.push.service.v1.TestNotificationChannelResponse
-	21, // 52: api.push.service.v1.PushNotification.CreateNotificationRule:output_type -> api.push.service.v1.CreateNotificationRuleResponse
-	23, // 53: api.push.service.v1.PushNotification.ListNotificationRules:output_type -> api.push.service.v1.ListNotificationRulesResponse
-	25, // 54: api.push.service.v1.PushNotification.GetNotificationRule:output_type -> api.push.service.v1.GetNotificationRuleResponse
-	27, // 55: api.push.service.v1.PushNotification.UpdateNotificationRule:output_type -> api.push.service.v1.UpdateNotificationRuleResponse
-	29, // 56: api.push.service.v1.PushNotification.DeleteNotificationRule:output_type -> api.push.service.v1.DeleteNotificationRuleResponse
-	32, // 57: api.push.service.v1.PushNotification.SendToChannels:output_type -> api.push.service.v1.SendToChannelsResponse
-	46, // [46:58] is the sub-list for method output_type
-	34, // [34:46] is the sub-list for method input_type
+	30, // 33: api.push.service.v1.SendToChannelsResponse.delivery_results:type_name -> api.push.service.v1.ChannelDeliveryResult
+	11, // 34: api.push.service.v1.PushNotification.CreateNotificationChannel:input_type -> api.push.service.v1.CreateNotificationChannelRequest
+	13, // 35: api.push.service.v1.PushNotification.ListNotificationChannels:input_type -> api.push.service.v1.ListNotificationChannelsRequest
+	15, // 36: api.push.service.v1.PushNotification.GetNotificationChannel:input_type -> api.push.service.v1.GetNotificationChannelRequest
+	17, // 37: api.push.service.v1.PushNotification.UpdateNotificationChannel:input_type -> api.push.service.v1.UpdateNotificationChannelRequest
+	19, // 38: api.push.service.v1.PushNotification.DeleteNotificationChannel:input_type -> api.push.service.v1.DeleteNotificationChannelRequest
+	21, // 39: api.push.service.v1.PushNotification.TestNotificationChannel:input_type -> api.push.service.v1.TestNotificationChannelRequest
+	23, // 40: api.push.service.v1.PushNotification.SaveChannelRules:input_type -> api.push.service.v1.SaveChannelRulesRequest
+	25, // 41: api.push.service.v1.PushNotification.ListNotificationRules:input_type -> api.push.service.v1.ListNotificationRulesRequest
+	27, // 42: api.push.service.v1.PushNotification.GetSupportedMessageTypes:input_type -> api.push.service.v1.GetSupportedMessageTypesRequest
+	29, // 43: api.push.service.v1.PushNotification.SendToChannels:input_type -> api.push.service.v1.SendToChannelsRequest
+	12, // 44: api.push.service.v1.PushNotification.CreateNotificationChannel:output_type -> api.push.service.v1.CreateNotificationChannelResponse
+	14, // 45: api.push.service.v1.PushNotification.ListNotificationChannels:output_type -> api.push.service.v1.ListNotificationChannelsResponse
+	16, // 46: api.push.service.v1.PushNotification.GetNotificationChannel:output_type -> api.push.service.v1.GetNotificationChannelResponse
+	18, // 47: api.push.service.v1.PushNotification.UpdateNotificationChannel:output_type -> api.push.service.v1.UpdateNotificationChannelResponse
+	20, // 48: api.push.service.v1.PushNotification.DeleteNotificationChannel:output_type -> api.push.service.v1.DeleteNotificationChannelResponse
+	22, // 49: api.push.service.v1.PushNotification.TestNotificationChannel:output_type -> api.push.service.v1.TestNotificationChannelResponse
+	24, // 50: api.push.service.v1.PushNotification.SaveChannelRules:output_type -> api.push.service.v1.SaveChannelRulesResponse
+	26, // 51: api.push.service.v1.PushNotification.ListNotificationRules:output_type -> api.push.service.v1.ListNotificationRulesResponse
+	28, // 52: api.push.service.v1.PushNotification.GetSupportedMessageTypes:output_type -> api.push.service.v1.GetSupportedMessageTypesResponse
+	31, // 53: api.push.service.v1.PushNotification.SendToChannels:output_type -> api.push.service.v1.SendToChannelsResponse
+	44, // [44:54] is the sub-list for method output_type
+	34, // [34:44] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name
@@ -2327,17 +2266,16 @@ func file_push_service_v1_push_notification_proto_init() {
 	if File_push_service_v1_push_notification_proto != nil {
 		return
 	}
-	file_push_service_v1_push_notification_proto_msgTypes[8].OneofWrappers = []any{}
-	file_push_service_v1_push_notification_proto_msgTypes[12].OneofWrappers = []any{}
-	file_push_service_v1_push_notification_proto_msgTypes[20].OneofWrappers = []any{}
-	file_push_service_v1_push_notification_proto_msgTypes[24].OneofWrappers = []any{}
+	file_push_service_v1_push_notification_proto_msgTypes[10].OneofWrappers = []any{}
+	file_push_service_v1_push_notification_proto_msgTypes[14].OneofWrappers = []any{}
+	file_push_service_v1_push_notification_proto_msgTypes[22].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_notification_proto_rawDesc), len(file_push_service_v1_push_notification_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   31,
+			NumEnums:      3,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

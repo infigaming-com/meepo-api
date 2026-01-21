@@ -21,40 +21,34 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeNotificationCreateNotificationChannel = "/api.backoffice.service.v1.BackofficeNotification/CreateNotificationChannel"
-const OperationBackofficeNotificationCreateNotificationRule = "/api.backoffice.service.v1.BackofficeNotification/CreateNotificationRule"
 const OperationBackofficeNotificationDeleteNotificationChannel = "/api.backoffice.service.v1.BackofficeNotification/DeleteNotificationChannel"
-const OperationBackofficeNotificationDeleteNotificationRule = "/api.backoffice.service.v1.BackofficeNotification/DeleteNotificationRule"
 const OperationBackofficeNotificationGetNotificationChannel = "/api.backoffice.service.v1.BackofficeNotification/GetNotificationChannel"
-const OperationBackofficeNotificationGetNotificationRule = "/api.backoffice.service.v1.BackofficeNotification/GetNotificationRule"
+const OperationBackofficeNotificationGetSupportedMessageTypes = "/api.backoffice.service.v1.BackofficeNotification/GetSupportedMessageTypes"
 const OperationBackofficeNotificationListNotificationChannels = "/api.backoffice.service.v1.BackofficeNotification/ListNotificationChannels"
 const OperationBackofficeNotificationListNotificationRules = "/api.backoffice.service.v1.BackofficeNotification/ListNotificationRules"
+const OperationBackofficeNotificationSaveChannelRules = "/api.backoffice.service.v1.BackofficeNotification/SaveChannelRules"
 const OperationBackofficeNotificationTestNotificationChannel = "/api.backoffice.service.v1.BackofficeNotification/TestNotificationChannel"
 const OperationBackofficeNotificationUpdateNotificationChannel = "/api.backoffice.service.v1.BackofficeNotification/UpdateNotificationChannel"
-const OperationBackofficeNotificationUpdateNotificationRule = "/api.backoffice.service.v1.BackofficeNotification/UpdateNotificationRule"
 
 type BackofficeNotificationHTTPServer interface {
 	// CreateNotificationChannel Create a new notification channel
 	CreateNotificationChannel(context.Context, *v1.CreateNotificationChannelRequest) (*v1.CreateNotificationChannelResponse, error)
-	// CreateNotificationRule Create a new notification rule
-	CreateNotificationRule(context.Context, *v1.CreateNotificationRuleRequest) (*v1.CreateNotificationRuleResponse, error)
 	// DeleteNotificationChannel Delete a notification channel
 	DeleteNotificationChannel(context.Context, *v1.DeleteNotificationChannelRequest) (*v1.DeleteNotificationChannelResponse, error)
-	// DeleteNotificationRule Delete a notification rule
-	DeleteNotificationRule(context.Context, *v1.DeleteNotificationRuleRequest) (*v1.DeleteNotificationRuleResponse, error)
 	// GetNotificationChannel Get a specific notification channel
 	GetNotificationChannel(context.Context, *v1.GetNotificationChannelRequest) (*v1.GetNotificationChannelResponse, error)
-	// GetNotificationRule Get a specific notification rule
-	GetNotificationRule(context.Context, *v1.GetNotificationRuleRequest) (*v1.GetNotificationRuleResponse, error)
+	// GetSupportedMessageTypes Get supported message types for frontend dropdown
+	GetSupportedMessageTypes(context.Context, *v1.GetSupportedMessageTypesRequest) (*v1.GetSupportedMessageTypesResponse, error)
 	// ListNotificationChannels List notification channels with pagination
 	ListNotificationChannels(context.Context, *v1.ListNotificationChannelsRequest) (*v1.ListNotificationChannelsResponse, error)
 	// ListNotificationRules List notification rules with pagination
 	ListNotificationRules(context.Context, *v1.ListNotificationRulesRequest) (*v1.ListNotificationRulesResponse, error)
+	// SaveChannelRules Save all rules for a channel (batch create/update/delete)
+	SaveChannelRules(context.Context, *v1.SaveChannelRulesRequest) (*v1.SaveChannelRulesResponse, error)
 	// TestNotificationChannel Test a notification channel by sending a test message
 	TestNotificationChannel(context.Context, *v1.TestNotificationChannelRequest) (*v1.TestNotificationChannelResponse, error)
 	// UpdateNotificationChannel Update a notification channel
 	UpdateNotificationChannel(context.Context, *v1.UpdateNotificationChannelRequest) (*v1.UpdateNotificationChannelResponse, error)
-	// UpdateNotificationRule Update a notification rule
-	UpdateNotificationRule(context.Context, *v1.UpdateNotificationRuleRequest) (*v1.UpdateNotificationRuleResponse, error)
 }
 
 func RegisterBackofficeNotificationHTTPServer(s *http.Server, srv BackofficeNotificationHTTPServer) {
@@ -65,11 +59,9 @@ func RegisterBackofficeNotificationHTTPServer(s *http.Server, srv BackofficeNoti
 	r.POST("/v1/backoffice/notification/channel/update", _BackofficeNotification_UpdateNotificationChannel0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/notification/channel/delete", _BackofficeNotification_DeleteNotificationChannel0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/notification/channel/test", _BackofficeNotification_TestNotificationChannel0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/notification/rule/create", _BackofficeNotification_CreateNotificationRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/notification/rule/save", _BackofficeNotification_SaveChannelRules0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/notification/rule/list", _BackofficeNotification_ListNotificationRules0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/notification/rule/get", _BackofficeNotification_GetNotificationRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/notification/rule/update", _BackofficeNotification_UpdateNotificationRule0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/notification/rule/delete", _BackofficeNotification_DeleteNotificationRule0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/notification/message-types", _BackofficeNotification_GetSupportedMessageTypes0_HTTP_Handler(srv))
 }
 
 func _BackofficeNotification_CreateNotificationChannel0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
@@ -204,24 +196,24 @@ func _BackofficeNotification_TestNotificationChannel0_HTTP_Handler(srv Backoffic
 	}
 }
 
-func _BackofficeNotification_CreateNotificationRule0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeNotification_SaveChannelRules0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.CreateNotificationRuleRequest
+		var in v1.SaveChannelRulesRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeNotificationCreateNotificationRule)
+		http.SetOperation(ctx, OperationBackofficeNotificationSaveChannelRules)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateNotificationRule(ctx, req.(*v1.CreateNotificationRuleRequest))
+			return srv.SaveChannelRules(ctx, req.(*v1.SaveChannelRulesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.CreateNotificationRuleResponse)
+		reply := out.(*v1.SaveChannelRulesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -248,68 +240,24 @@ func _BackofficeNotification_ListNotificationRules0_HTTP_Handler(srv BackofficeN
 	}
 }
 
-func _BackofficeNotification_GetNotificationRule0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
+func _BackofficeNotification_GetSupportedMessageTypes0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetNotificationRuleRequest
+		var in v1.GetSupportedMessageTypesRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeNotificationGetNotificationRule)
+		http.SetOperation(ctx, OperationBackofficeNotificationGetSupportedMessageTypes)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetNotificationRule(ctx, req.(*v1.GetNotificationRuleRequest))
+			return srv.GetSupportedMessageTypes(ctx, req.(*v1.GetSupportedMessageTypesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GetNotificationRuleResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeNotification_UpdateNotificationRule0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in v1.UpdateNotificationRuleRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeNotificationUpdateNotificationRule)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateNotificationRule(ctx, req.(*v1.UpdateNotificationRuleRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.UpdateNotificationRuleResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeNotification_DeleteNotificationRule0_HTTP_Handler(srv BackofficeNotificationHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in v1.DeleteNotificationRuleRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeNotificationDeleteNotificationRule)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteNotificationRule(ctx, req.(*v1.DeleteNotificationRuleRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.DeleteNotificationRuleResponse)
+		reply := out.(*v1.GetSupportedMessageTypesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -317,26 +265,22 @@ func _BackofficeNotification_DeleteNotificationRule0_HTTP_Handler(srv Backoffice
 type BackofficeNotificationHTTPClient interface {
 	// CreateNotificationChannel Create a new notification channel
 	CreateNotificationChannel(ctx context.Context, req *v1.CreateNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.CreateNotificationChannelResponse, err error)
-	// CreateNotificationRule Create a new notification rule
-	CreateNotificationRule(ctx context.Context, req *v1.CreateNotificationRuleRequest, opts ...http.CallOption) (rsp *v1.CreateNotificationRuleResponse, err error)
 	// DeleteNotificationChannel Delete a notification channel
 	DeleteNotificationChannel(ctx context.Context, req *v1.DeleteNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.DeleteNotificationChannelResponse, err error)
-	// DeleteNotificationRule Delete a notification rule
-	DeleteNotificationRule(ctx context.Context, req *v1.DeleteNotificationRuleRequest, opts ...http.CallOption) (rsp *v1.DeleteNotificationRuleResponse, err error)
 	// GetNotificationChannel Get a specific notification channel
 	GetNotificationChannel(ctx context.Context, req *v1.GetNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.GetNotificationChannelResponse, err error)
-	// GetNotificationRule Get a specific notification rule
-	GetNotificationRule(ctx context.Context, req *v1.GetNotificationRuleRequest, opts ...http.CallOption) (rsp *v1.GetNotificationRuleResponse, err error)
+	// GetSupportedMessageTypes Get supported message types for frontend dropdown
+	GetSupportedMessageTypes(ctx context.Context, req *v1.GetSupportedMessageTypesRequest, opts ...http.CallOption) (rsp *v1.GetSupportedMessageTypesResponse, err error)
 	// ListNotificationChannels List notification channels with pagination
 	ListNotificationChannels(ctx context.Context, req *v1.ListNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.ListNotificationChannelsResponse, err error)
 	// ListNotificationRules List notification rules with pagination
 	ListNotificationRules(ctx context.Context, req *v1.ListNotificationRulesRequest, opts ...http.CallOption) (rsp *v1.ListNotificationRulesResponse, err error)
+	// SaveChannelRules Save all rules for a channel (batch create/update/delete)
+	SaveChannelRules(ctx context.Context, req *v1.SaveChannelRulesRequest, opts ...http.CallOption) (rsp *v1.SaveChannelRulesResponse, err error)
 	// TestNotificationChannel Test a notification channel by sending a test message
 	TestNotificationChannel(ctx context.Context, req *v1.TestNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.TestNotificationChannelResponse, err error)
 	// UpdateNotificationChannel Update a notification channel
 	UpdateNotificationChannel(ctx context.Context, req *v1.UpdateNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.UpdateNotificationChannelResponse, err error)
-	// UpdateNotificationRule Update a notification rule
-	UpdateNotificationRule(ctx context.Context, req *v1.UpdateNotificationRuleRequest, opts ...http.CallOption) (rsp *v1.UpdateNotificationRuleResponse, err error)
 }
 
 type BackofficeNotificationHTTPClientImpl struct {
@@ -361,40 +305,12 @@ func (c *BackofficeNotificationHTTPClientImpl) CreateNotificationChannel(ctx con
 	return &out, nil
 }
 
-// CreateNotificationRule Create a new notification rule
-func (c *BackofficeNotificationHTTPClientImpl) CreateNotificationRule(ctx context.Context, in *v1.CreateNotificationRuleRequest, opts ...http.CallOption) (*v1.CreateNotificationRuleResponse, error) {
-	var out v1.CreateNotificationRuleResponse
-	pattern := "/v1/backoffice/notification/rule/create"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeNotificationCreateNotificationRule))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 // DeleteNotificationChannel Delete a notification channel
 func (c *BackofficeNotificationHTTPClientImpl) DeleteNotificationChannel(ctx context.Context, in *v1.DeleteNotificationChannelRequest, opts ...http.CallOption) (*v1.DeleteNotificationChannelResponse, error) {
 	var out v1.DeleteNotificationChannelResponse
 	pattern := "/v1/backoffice/notification/channel/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeNotificationDeleteNotificationChannel))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// DeleteNotificationRule Delete a notification rule
-func (c *BackofficeNotificationHTTPClientImpl) DeleteNotificationRule(ctx context.Context, in *v1.DeleteNotificationRuleRequest, opts ...http.CallOption) (*v1.DeleteNotificationRuleResponse, error) {
-	var out v1.DeleteNotificationRuleResponse
-	pattern := "/v1/backoffice/notification/rule/delete"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeNotificationDeleteNotificationRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -417,12 +333,12 @@ func (c *BackofficeNotificationHTTPClientImpl) GetNotificationChannel(ctx contex
 	return &out, nil
 }
 
-// GetNotificationRule Get a specific notification rule
-func (c *BackofficeNotificationHTTPClientImpl) GetNotificationRule(ctx context.Context, in *v1.GetNotificationRuleRequest, opts ...http.CallOption) (*v1.GetNotificationRuleResponse, error) {
-	var out v1.GetNotificationRuleResponse
-	pattern := "/v1/backoffice/notification/rule/get"
+// GetSupportedMessageTypes Get supported message types for frontend dropdown
+func (c *BackofficeNotificationHTTPClientImpl) GetSupportedMessageTypes(ctx context.Context, in *v1.GetSupportedMessageTypesRequest, opts ...http.CallOption) (*v1.GetSupportedMessageTypesResponse, error) {
+	var out v1.GetSupportedMessageTypesResponse
+	pattern := "/v1/backoffice/notification/message-types"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeNotificationGetNotificationRule))
+	opts = append(opts, http.Operation(OperationBackofficeNotificationGetSupportedMessageTypes))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -459,6 +375,20 @@ func (c *BackofficeNotificationHTTPClientImpl) ListNotificationRules(ctx context
 	return &out, nil
 }
 
+// SaveChannelRules Save all rules for a channel (batch create/update/delete)
+func (c *BackofficeNotificationHTTPClientImpl) SaveChannelRules(ctx context.Context, in *v1.SaveChannelRulesRequest, opts ...http.CallOption) (*v1.SaveChannelRulesResponse, error) {
+	var out v1.SaveChannelRulesResponse
+	pattern := "/v1/backoffice/notification/rule/save"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeNotificationSaveChannelRules))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // TestNotificationChannel Test a notification channel by sending a test message
 func (c *BackofficeNotificationHTTPClientImpl) TestNotificationChannel(ctx context.Context, in *v1.TestNotificationChannelRequest, opts ...http.CallOption) (*v1.TestNotificationChannelResponse, error) {
 	var out v1.TestNotificationChannelResponse
@@ -479,20 +409,6 @@ func (c *BackofficeNotificationHTTPClientImpl) UpdateNotificationChannel(ctx con
 	pattern := "/v1/backoffice/notification/channel/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeNotificationUpdateNotificationChannel))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// UpdateNotificationRule Update a notification rule
-func (c *BackofficeNotificationHTTPClientImpl) UpdateNotificationRule(ctx context.Context, in *v1.UpdateNotificationRuleRequest, opts ...http.CallOption) (*v1.UpdateNotificationRuleResponse, error) {
-	var out v1.UpdateNotificationRuleResponse
-	pattern := "/v1/backoffice/notification/rule/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeNotificationUpdateNotificationRule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

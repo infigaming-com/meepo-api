@@ -27,19 +27,17 @@ var File_backoffice_service_v1_backoffice_notification_proto protoreflect.FileDe
 
 const file_backoffice_service_v1_backoffice_notification_proto_rawDesc = "" +
 	"\n" +
-	"3backoffice/service/v1/backoffice_notification.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a'push/service/v1/push_notification.proto2\x9e\x10\n" +
+	"3backoffice/service/v1/backoffice_notification.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a'push/service/v1/push_notification.proto2\xae\r\n" +
 	"\x16BackofficeNotification\x12\xc1\x01\n" +
 	"\x19CreateNotificationChannel\x125.api.push.service.v1.CreateNotificationChannelRequest\x1a6.api.push.service.v1.CreateNotificationChannelResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/notification/channel/create\x12\xbc\x01\n" +
 	"\x18ListNotificationChannels\x124.api.push.service.v1.ListNotificationChannelsRequest\x1a5.api.push.service.v1.ListNotificationChannelsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/notification/channel/list\x12\xb5\x01\n" +
 	"\x16GetNotificationChannel\x122.api.push.service.v1.GetNotificationChannelRequest\x1a3.api.push.service.v1.GetNotificationChannelResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/notification/channel/get\x12\xc1\x01\n" +
 	"\x19UpdateNotificationChannel\x125.api.push.service.v1.UpdateNotificationChannelRequest\x1a6.api.push.service.v1.UpdateNotificationChannelResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/notification/channel/update\x12\xc1\x01\n" +
 	"\x19DeleteNotificationChannel\x125.api.push.service.v1.DeleteNotificationChannelRequest\x1a6.api.push.service.v1.DeleteNotificationChannelResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/notification/channel/delete\x12\xb9\x01\n" +
-	"\x17TestNotificationChannel\x123.api.push.service.v1.TestNotificationChannelRequest\x1a4.api.push.service.v1.TestNotificationChannelResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/notification/channel/test\x12\xb5\x01\n" +
-	"\x16CreateNotificationRule\x122.api.push.service.v1.CreateNotificationRuleRequest\x1a3.api.push.service.v1.CreateNotificationRuleResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/notification/rule/create\x12\xb0\x01\n" +
-	"\x15ListNotificationRules\x121.api.push.service.v1.ListNotificationRulesRequest\x1a2.api.push.service.v1.ListNotificationRulesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/notification/rule/list\x12\xa9\x01\n" +
-	"\x13GetNotificationRule\x12/.api.push.service.v1.GetNotificationRuleRequest\x1a0.api.push.service.v1.GetNotificationRuleResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/notification/rule/get\x12\xb5\x01\n" +
-	"\x16UpdateNotificationRule\x122.api.push.service.v1.UpdateNotificationRuleRequest\x1a3.api.push.service.v1.UpdateNotificationRuleResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/notification/rule/update\x12\xb5\x01\n" +
-	"\x16DeleteNotificationRule\x122.api.push.service.v1.DeleteNotificationRuleRequest\x1a3.api.push.service.v1.DeleteNotificationRuleResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/notification/rule/deleteB[\n" +
+	"\x17TestNotificationChannel\x123.api.push.service.v1.TestNotificationChannelRequest\x1a4.api.push.service.v1.TestNotificationChannelResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/notification/channel/test\x12\xa1\x01\n" +
+	"\x10SaveChannelRules\x12,.api.push.service.v1.SaveChannelRulesRequest\x1a-.api.push.service.v1.SaveChannelRulesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/notification/rule/save\x12\xb0\x01\n" +
+	"\x15ListNotificationRules\x121.api.push.service.v1.ListNotificationRulesRequest\x1a2.api.push.service.v1.ListNotificationRulesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/notification/rule/list\x12\xbd\x01\n" +
+	"\x18GetSupportedMessageTypes\x124.api.push.service.v1.GetSupportedMessageTypesRequest\x1a5.api.push.service.v1.GetSupportedMessageTypesResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/notification/message-typesB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var file_backoffice_service_v1_backoffice_notification_proto_goTypes = []any{
@@ -49,22 +47,18 @@ var file_backoffice_service_v1_backoffice_notification_proto_goTypes = []any{
 	(*v1.UpdateNotificationChannelRequest)(nil),  // 3: api.push.service.v1.UpdateNotificationChannelRequest
 	(*v1.DeleteNotificationChannelRequest)(nil),  // 4: api.push.service.v1.DeleteNotificationChannelRequest
 	(*v1.TestNotificationChannelRequest)(nil),    // 5: api.push.service.v1.TestNotificationChannelRequest
-	(*v1.CreateNotificationRuleRequest)(nil),     // 6: api.push.service.v1.CreateNotificationRuleRequest
+	(*v1.SaveChannelRulesRequest)(nil),           // 6: api.push.service.v1.SaveChannelRulesRequest
 	(*v1.ListNotificationRulesRequest)(nil),      // 7: api.push.service.v1.ListNotificationRulesRequest
-	(*v1.GetNotificationRuleRequest)(nil),        // 8: api.push.service.v1.GetNotificationRuleRequest
-	(*v1.UpdateNotificationRuleRequest)(nil),     // 9: api.push.service.v1.UpdateNotificationRuleRequest
-	(*v1.DeleteNotificationRuleRequest)(nil),     // 10: api.push.service.v1.DeleteNotificationRuleRequest
-	(*v1.CreateNotificationChannelResponse)(nil), // 11: api.push.service.v1.CreateNotificationChannelResponse
-	(*v1.ListNotificationChannelsResponse)(nil),  // 12: api.push.service.v1.ListNotificationChannelsResponse
-	(*v1.GetNotificationChannelResponse)(nil),    // 13: api.push.service.v1.GetNotificationChannelResponse
-	(*v1.UpdateNotificationChannelResponse)(nil), // 14: api.push.service.v1.UpdateNotificationChannelResponse
-	(*v1.DeleteNotificationChannelResponse)(nil), // 15: api.push.service.v1.DeleteNotificationChannelResponse
-	(*v1.TestNotificationChannelResponse)(nil),   // 16: api.push.service.v1.TestNotificationChannelResponse
-	(*v1.CreateNotificationRuleResponse)(nil),    // 17: api.push.service.v1.CreateNotificationRuleResponse
-	(*v1.ListNotificationRulesResponse)(nil),     // 18: api.push.service.v1.ListNotificationRulesResponse
-	(*v1.GetNotificationRuleResponse)(nil),       // 19: api.push.service.v1.GetNotificationRuleResponse
-	(*v1.UpdateNotificationRuleResponse)(nil),    // 20: api.push.service.v1.UpdateNotificationRuleResponse
-	(*v1.DeleteNotificationRuleResponse)(nil),    // 21: api.push.service.v1.DeleteNotificationRuleResponse
+	(*v1.GetSupportedMessageTypesRequest)(nil),   // 8: api.push.service.v1.GetSupportedMessageTypesRequest
+	(*v1.CreateNotificationChannelResponse)(nil), // 9: api.push.service.v1.CreateNotificationChannelResponse
+	(*v1.ListNotificationChannelsResponse)(nil),  // 10: api.push.service.v1.ListNotificationChannelsResponse
+	(*v1.GetNotificationChannelResponse)(nil),    // 11: api.push.service.v1.GetNotificationChannelResponse
+	(*v1.UpdateNotificationChannelResponse)(nil), // 12: api.push.service.v1.UpdateNotificationChannelResponse
+	(*v1.DeleteNotificationChannelResponse)(nil), // 13: api.push.service.v1.DeleteNotificationChannelResponse
+	(*v1.TestNotificationChannelResponse)(nil),   // 14: api.push.service.v1.TestNotificationChannelResponse
+	(*v1.SaveChannelRulesResponse)(nil),          // 15: api.push.service.v1.SaveChannelRulesResponse
+	(*v1.ListNotificationRulesResponse)(nil),     // 16: api.push.service.v1.ListNotificationRulesResponse
+	(*v1.GetSupportedMessageTypesResponse)(nil),  // 17: api.push.service.v1.GetSupportedMessageTypesResponse
 }
 var file_backoffice_service_v1_backoffice_notification_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.BackofficeNotification.CreateNotificationChannel:input_type -> api.push.service.v1.CreateNotificationChannelRequest
@@ -73,24 +67,20 @@ var file_backoffice_service_v1_backoffice_notification_proto_depIdxs = []int32{
 	3,  // 3: api.backoffice.service.v1.BackofficeNotification.UpdateNotificationChannel:input_type -> api.push.service.v1.UpdateNotificationChannelRequest
 	4,  // 4: api.backoffice.service.v1.BackofficeNotification.DeleteNotificationChannel:input_type -> api.push.service.v1.DeleteNotificationChannelRequest
 	5,  // 5: api.backoffice.service.v1.BackofficeNotification.TestNotificationChannel:input_type -> api.push.service.v1.TestNotificationChannelRequest
-	6,  // 6: api.backoffice.service.v1.BackofficeNotification.CreateNotificationRule:input_type -> api.push.service.v1.CreateNotificationRuleRequest
+	6,  // 6: api.backoffice.service.v1.BackofficeNotification.SaveChannelRules:input_type -> api.push.service.v1.SaveChannelRulesRequest
 	7,  // 7: api.backoffice.service.v1.BackofficeNotification.ListNotificationRules:input_type -> api.push.service.v1.ListNotificationRulesRequest
-	8,  // 8: api.backoffice.service.v1.BackofficeNotification.GetNotificationRule:input_type -> api.push.service.v1.GetNotificationRuleRequest
-	9,  // 9: api.backoffice.service.v1.BackofficeNotification.UpdateNotificationRule:input_type -> api.push.service.v1.UpdateNotificationRuleRequest
-	10, // 10: api.backoffice.service.v1.BackofficeNotification.DeleteNotificationRule:input_type -> api.push.service.v1.DeleteNotificationRuleRequest
-	11, // 11: api.backoffice.service.v1.BackofficeNotification.CreateNotificationChannel:output_type -> api.push.service.v1.CreateNotificationChannelResponse
-	12, // 12: api.backoffice.service.v1.BackofficeNotification.ListNotificationChannels:output_type -> api.push.service.v1.ListNotificationChannelsResponse
-	13, // 13: api.backoffice.service.v1.BackofficeNotification.GetNotificationChannel:output_type -> api.push.service.v1.GetNotificationChannelResponse
-	14, // 14: api.backoffice.service.v1.BackofficeNotification.UpdateNotificationChannel:output_type -> api.push.service.v1.UpdateNotificationChannelResponse
-	15, // 15: api.backoffice.service.v1.BackofficeNotification.DeleteNotificationChannel:output_type -> api.push.service.v1.DeleteNotificationChannelResponse
-	16, // 16: api.backoffice.service.v1.BackofficeNotification.TestNotificationChannel:output_type -> api.push.service.v1.TestNotificationChannelResponse
-	17, // 17: api.backoffice.service.v1.BackofficeNotification.CreateNotificationRule:output_type -> api.push.service.v1.CreateNotificationRuleResponse
-	18, // 18: api.backoffice.service.v1.BackofficeNotification.ListNotificationRules:output_type -> api.push.service.v1.ListNotificationRulesResponse
-	19, // 19: api.backoffice.service.v1.BackofficeNotification.GetNotificationRule:output_type -> api.push.service.v1.GetNotificationRuleResponse
-	20, // 20: api.backoffice.service.v1.BackofficeNotification.UpdateNotificationRule:output_type -> api.push.service.v1.UpdateNotificationRuleResponse
-	21, // 21: api.backoffice.service.v1.BackofficeNotification.DeleteNotificationRule:output_type -> api.push.service.v1.DeleteNotificationRuleResponse
-	11, // [11:22] is the sub-list for method output_type
-	0,  // [0:11] is the sub-list for method input_type
+	8,  // 8: api.backoffice.service.v1.BackofficeNotification.GetSupportedMessageTypes:input_type -> api.push.service.v1.GetSupportedMessageTypesRequest
+	9,  // 9: api.backoffice.service.v1.BackofficeNotification.CreateNotificationChannel:output_type -> api.push.service.v1.CreateNotificationChannelResponse
+	10, // 10: api.backoffice.service.v1.BackofficeNotification.ListNotificationChannels:output_type -> api.push.service.v1.ListNotificationChannelsResponse
+	11, // 11: api.backoffice.service.v1.BackofficeNotification.GetNotificationChannel:output_type -> api.push.service.v1.GetNotificationChannelResponse
+	12, // 12: api.backoffice.service.v1.BackofficeNotification.UpdateNotificationChannel:output_type -> api.push.service.v1.UpdateNotificationChannelResponse
+	13, // 13: api.backoffice.service.v1.BackofficeNotification.DeleteNotificationChannel:output_type -> api.push.service.v1.DeleteNotificationChannelResponse
+	14, // 14: api.backoffice.service.v1.BackofficeNotification.TestNotificationChannel:output_type -> api.push.service.v1.TestNotificationChannelResponse
+	15, // 15: api.backoffice.service.v1.BackofficeNotification.SaveChannelRules:output_type -> api.push.service.v1.SaveChannelRulesResponse
+	16, // 16: api.backoffice.service.v1.BackofficeNotification.ListNotificationRules:output_type -> api.push.service.v1.ListNotificationRulesResponse
+	17, // 17: api.backoffice.service.v1.BackofficeNotification.GetSupportedMessageTypes:output_type -> api.push.service.v1.GetSupportedMessageTypesResponse
+	9,  // [9:18] is the sub-list for method output_type
+	0,  // [0:9] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
