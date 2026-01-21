@@ -7030,8 +7030,6 @@ func (m *ManualDebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
-	// no validation rules for TransactionId
-
 	// no validation rules for Amount
 
 	// no validation rules for Comment
@@ -9058,11 +9056,17 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for VipLevel
 
-	// no validation rules for ChangeBalance
+	// no validation rules for BeforeCashBalance
 
-	// no validation rules for BeforeBalance
+	// no validation rules for AfterCashBalance
 
-	// no validation rules for AfterBalance
+	// no validation rules for CashAmountChanged
+
+	// no validation rules for BeforeOperatorBonusBalance
+
+	// no validation rules for AfterOperatorBonusBalance
+
+	// no validation rules for OperatorBonusAmountChanged
 
 	// no validation rules for Currency
 

@@ -20,36 +20,41 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeAffiliate_CreateCommissionPlan_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
-	BackofficeAffiliate_UpdateCommissionPlan_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCommissionPlan"
-	BackofficeAffiliate_GetCommissionPlan_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/GetCommissionPlan"
-	BackofficeAffiliate_ListCommissionPlans_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissionPlans"
-	BackofficeAffiliate_DeleteCommissionPlan_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCommissionPlan"
-	BackofficeAffiliate_ListAllCommissionPlans_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/ListAllCommissionPlans"
-	BackofficeAffiliate_ListAffiliateCommissionPlans_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCommissionPlans"
-	BackofficeAffiliate_CreateAffiliate_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliate"
-	BackofficeAffiliate_UpdateAffiliate_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliate"
-	BackofficeAffiliate_ListAffiliates_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
-	BackofficeAffiliate_DeleteAffiliate_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
-	BackofficeAffiliate_GetAffiliateDetails_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
-	BackofficeAffiliate_CreateCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
-	BackofficeAffiliate_UpdateCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
-	BackofficeAffiliate_ListCampaigns_FullMethodName                = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
-	BackofficeAffiliate_ListAffiliateCampaigns_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
-	BackofficeAffiliate_DeleteCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCampaign"
-	BackofficeAffiliate_CreatePostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/CreatePostback"
-	BackofficeAffiliate_UpdatePostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/UpdatePostback"
-	BackofficeAffiliate_DeletePostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/DeletePostback"
-	BackofficeAffiliate_ListPostbacks_FullMethodName                = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbacks"
-	BackofficeAffiliate_ListPostbackLogs_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbackLogs"
-	BackofficeAffiliate_ListAffiliateDomains_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateDomains"
-	BackofficeAffiliate_SetAffiliateDomain_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/SetAffiliateDomain"
-	BackofficeAffiliate_ListEvents_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
-	BackofficeAffiliate_ListCommissions_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
-	BackofficeAffiliate_ListAffiliateUsers_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
-	BackofficeAffiliate_ListAffiliateBills_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
-	BackofficeAffiliate_SetReferralPlan_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
-	BackofficeAffiliate_GetReferralPlan_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
+	BackofficeAffiliate_CreateCommissionPlan_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
+	BackofficeAffiliate_UpdateCommissionPlan_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCommissionPlan"
+	BackofficeAffiliate_GetCommissionPlan_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/GetCommissionPlan"
+	BackofficeAffiliate_ListCommissionPlans_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissionPlans"
+	BackofficeAffiliate_DeleteCommissionPlan_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCommissionPlan"
+	BackofficeAffiliate_ListAllCommissionPlans_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListAllCommissionPlans"
+	BackofficeAffiliate_ListAffiliateCommissionPlans_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCommissionPlans"
+	BackofficeAffiliate_CreateAffiliate_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliate"
+	BackofficeAffiliate_UpdateAffiliate_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliate"
+	BackofficeAffiliate_ListAffiliates_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
+	BackofficeAffiliate_DeleteAffiliate_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
+	BackofficeAffiliate_GetAffiliateDetails_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
+	BackofficeAffiliate_CreateCampaign_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
+	BackofficeAffiliate_UpdateCampaign_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
+	BackofficeAffiliate_ListCampaigns_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
+	BackofficeAffiliate_ListAffiliateCampaigns_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
+	BackofficeAffiliate_DeleteCampaign_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCampaign"
+	BackofficeAffiliate_CreatePostback_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/CreatePostback"
+	BackofficeAffiliate_UpdatePostback_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/UpdatePostback"
+	BackofficeAffiliate_DeletePostback_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/DeletePostback"
+	BackofficeAffiliate_ListPostbacks_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbacks"
+	BackofficeAffiliate_ListPostbackLogs_FullMethodName                = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbackLogs"
+	BackofficeAffiliate_ListAffiliateDomains_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateDomains"
+	BackofficeAffiliate_SetAffiliateDomain_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/SetAffiliateDomain"
+	BackofficeAffiliate_ListEvents_FullMethodName                      = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
+	BackofficeAffiliate_ListCommissions_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
+	BackofficeAffiliate_ListAffiliateUsers_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
+	BackofficeAffiliate_ExportAffiliateUsers_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/ExportAffiliateUsers"
+	BackofficeAffiliate_ListAffiliateBills_FullMethodName              = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
+	BackofficeAffiliate_GetAffiliateOperatorSettings_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateOperatorSettings"
+	BackofficeAffiliate_UpdateAffiliateOperatorSettings_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliateOperatorSettings"
+	BackofficeAffiliate_SetReferralPlan_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
+	BackofficeAffiliate_GetReferralPlan_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
+	BackofficeAffiliate_GetAffiliateDashboard_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDashboard"
+	BackofficeAffiliate_GetAffiliateTrend_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateTrend"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -83,9 +88,14 @@ type BackofficeAffiliateClient interface {
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*v1.ListEventsResponse, error)
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(ctx context.Context, in *ListAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ListUsersResponse, error)
+	ExportAffiliateUsers(ctx context.Context, in *ExportAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ExportUsersResponse, error)
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error)
+	GetAffiliateOperatorSettings(ctx context.Context, in *GetAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorSettingsResponse, error)
+	UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*v1.GetReferralPlanResponse, error)
+	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error)
+	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -366,10 +376,40 @@ func (c *backofficeAffiliateClient) ListAffiliateUsers(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) ExportAffiliateUsers(ctx context.Context, in *ExportAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportUsersResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ExportAffiliateUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeAffiliateClient) ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListAffiliateBillsResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAffiliateBills_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) GetAffiliateOperatorSettings(ctx context.Context, in *GetAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_UpdateAffiliateOperatorSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -390,6 +430,26 @@ func (c *backofficeAffiliateClient) GetReferralPlan(ctx context.Context, in *Get
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetReferralPlanResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetReferralPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetAffiliateDashboardResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetAffiliateTrendResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateTrend_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -427,9 +487,14 @@ type BackofficeAffiliateServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
+	ExportAffiliateUsers(context.Context, *ExportAffiliateUsersRequest) (*v1.ExportUsersResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
+	GetAffiliateOperatorSettings(context.Context, *GetAffiliateOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error)
+	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
+	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error)
+	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -521,14 +586,29 @@ func (UnimplementedBackofficeAffiliateServer) ListCommissions(context.Context, *
 func (UnimplementedBackofficeAffiliateServer) ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateUsers not implemented")
 }
+func (UnimplementedBackofficeAffiliateServer) ExportAffiliateUsers(context.Context, *ExportAffiliateUsersRequest) (*v1.ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportAffiliateUsers not implemented")
+}
 func (UnimplementedBackofficeAffiliateServer) ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateBills not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetAffiliateOperatorSettings(context.Context, *GetAffiliateOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateOperatorSettings not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAffiliateOperatorSettings not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetReferralPlan not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetReferralPlan not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -1037,6 +1117,24 @@ func _BackofficeAffiliate_ListAffiliateUsers_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_ExportAffiliateUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportAffiliateUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ExportAffiliateUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ExportAffiliateUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ExportAffiliateUsers(ctx, req.(*ExportAffiliateUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeAffiliate_ListAffiliateBills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAffiliateBillsRequest)
 	if err := dec(in); err != nil {
@@ -1051,6 +1149,42 @@ func _BackofficeAffiliate_ListAffiliateBills_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAffiliateServer).ListAffiliateBills(ctx, req.(*ListAffiliateBillsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_GetAffiliateOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetAffiliateOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetAffiliateOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetAffiliateOperatorSettings(ctx, req.(*GetAffiliateOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_UpdateAffiliateOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAffiliateOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).UpdateAffiliateOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_UpdateAffiliateOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).UpdateAffiliateOperatorSettings(ctx, req.(*UpdateAffiliateOperatorSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1087,6 +1221,42 @@ func _BackofficeAffiliate_GetReferralPlan_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAffiliateServer).GetReferralPlan(ctx, req.(*GetReferralPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetAffiliateDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetAffiliateDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetAffiliateDashboard(ctx, req.(*GetAffiliateDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetAffiliateTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetAffiliateTrend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1207,8 +1377,20 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeAffiliate_ListAffiliateUsers_Handler,
 		},
 		{
+			MethodName: "ExportAffiliateUsers",
+			Handler:    _BackofficeAffiliate_ExportAffiliateUsers_Handler,
+		},
+		{
 			MethodName: "ListAffiliateBills",
 			Handler:    _BackofficeAffiliate_ListAffiliateBills_Handler,
+		},
+		{
+			MethodName: "GetAffiliateOperatorSettings",
+			Handler:    _BackofficeAffiliate_GetAffiliateOperatorSettings_Handler,
+		},
+		{
+			MethodName: "UpdateAffiliateOperatorSettings",
+			Handler:    _BackofficeAffiliate_UpdateAffiliateOperatorSettings_Handler,
 		},
 		{
 			MethodName: "SetReferralPlan",
@@ -1217,6 +1399,14 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReferralPlan",
 			Handler:    _BackofficeAffiliate_GetReferralPlan_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDashboard",
+			Handler:    _BackofficeAffiliate_GetAffiliateDashboard_Handler,
+		},
+		{
+			MethodName: "GetAffiliateTrend",
+			Handler:    _BackofficeAffiliate_GetAffiliateTrend_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

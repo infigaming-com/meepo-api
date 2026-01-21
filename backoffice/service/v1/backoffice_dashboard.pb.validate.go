@@ -3278,7 +3278,11 @@ func (m *GetTopUsersDashboardResponse_User) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return GetTopUsersDashboardResponse_UserMultiError(errors)
@@ -3394,11 +3398,15 @@ func (m *GetTopOperatorsDashboardResponse_OperatorData) validate(all bool) error
 
 	// no validation rules for RetailerOperatorName
 
-	// no validation rules for SystemOperatorName
-
 	// no validation rules for AmountUsd
 
 	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
 
 	if len(errors) > 0 {
 		return GetTopOperatorsDashboardResponse_OperatorDataMultiError(errors)

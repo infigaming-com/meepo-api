@@ -83,6 +83,8 @@ service Affiliate {
 
     rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
+    rpc ExportUsers(ExportUsersRequest) returns (ExportUsersResponse) {}
+
     // -------------- Affiliate Bill --------------
 
     rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (ListAffiliateBillsResponse) {}
@@ -147,6 +149,21 @@ service Affiliate {
     // GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
     // This is an internal API for wallet-service to validate promo code conditions
     rpc GetUserPromoConditionInfo(GetUserPromoConditionInfoRequest) returns (GetUserPromoConditionInfoResponse) {}
+
+
+    // -------------- Settings --------------
+
+    rpc GetOperatorSettings(GetOperatorSettingsRequest) returns (GetOperatorSettingsResponse) {}
+
+    rpc UpdateOperatorSettings(UpdateOperatorSettingsRequest) returns (UpdateOperatorSettingsResponse) {}
+
+    // -------------- Dashboard --------------
+
+    // GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
+    rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (GetAffiliateDashboardResponse) {}
+
+    // GetAffiliateTrend returns time series data for trend visualization
+    rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (GetAffiliateTrendResponse) {}
 
 }
 
@@ -750,35 +767,56 @@ message ListUsersResponse {
         string affiliate_company_name = 5;
         string reporting_currency = 6;
         string campaign_url = 7;
-        google.protobuf.Timestamp registered_at = 8;
-        google.protobuf.Timestamp ftd_at = 9;
-        string ftd_amount_usd = 10;
-        string ftd_amount_reporting_currency = 11;
-        int32 deposit_count = 12;
-        string deposit_amount_usd = 13;
-        string deposit_amount_reporting_currency = 14;
-        int32 withdrawal_count = 15;
-        string withdrawal_amount_usd = 16;
-        string withdrawal_amount_reporting_currency = 17;
-        string deposit_minus_withdrawal_amount_usd = 18; // deposit_amount - withdrawal_amount
-        string deposit_minus_withdrawal_amount_reporting_currency = 19; // deposit_amount - withdrawal_amount
-        int32 bet_count = 20;
-        string bet_amount_usd = 21;
-        string bet_amount_reporting_currency = 22;
-        string win_amount_usd = 23;
-        string win_amount_reporting_currency = 24;
-        string ggr_usd = 25;
-        string ggr_reporting_currency = 26;
-        string ngr_usd = 27;
-        string ngr_reporting_currency = 28;
-        string commission_usd = 29;
-        string commission_reporting_currency = 30;
-        string roi = 31; // percentage, ngr / commission
+        int64 campaign_id = 8;
+        string campaign_name = 9;
+        google.protobuf.Timestamp registered_at = 10;
+        google.protobuf.Timestamp ftd_at = 11;
+        string ftd_amount_usd = 12;
+        string ftd_amount_reporting_currency = 13;
+        int32 deposit_count = 14;
+        string deposit_amount_usd = 15;
+        string deposit_amount_reporting_currency = 16;
+        int32 withdrawal_count = 17;
+        string withdrawal_amount_usd = 18;
+        string withdrawal_amount_reporting_currency = 19;
+        string deposit_minus_withdrawal_amount_usd = 20; // deposit_amount - withdrawal_amount
+        string deposit_minus_withdrawal_amount_reporting_currency = 21; // deposit_amount - withdrawal_amount
+        int32 bet_count = 22;
+        string bet_amount_usd = 23;
+        string bet_amount_reporting_currency = 24;
+        string win_amount_usd = 25;
+        string win_amount_reporting_currency = 26;
+        string ggr_usd = 27;
+        string ggr_reporting_currency = 28;
+        string ngr_usd = 29;
+        string ngr_reporting_currency = 30;
+        string commission_usd = 31;
+        string commission_reporting_currency = 32;
+        string roi = 33; // percentage, ngr / commission
     }
     repeated User users = 1;
     int32 total = 2;
     int32 page = 3;
     int32 page_size = 4;
+}
+
+message ExportUsersRequest {
+    repeated string countries = 1;
+    google.protobuf.Timestamp ftd_start_time = 2;
+    google.protobuf.Timestamp ftd_end_time = 3;
+    optional int64 affiliate_id = 4;
+    google.protobuf.Timestamp registration_start_time = 5;
+    google.protobuf.Timestamp registration_end_time = 6;
+    int64 initiator_user_id = 7;
+    int64 initiator_role_id = 8;
+    api.common.OperatorContext initiator_operator_context = 9;
+    api.common.OperatorContextFilters operator_context_filters = 10;
+    string format = 11; // accepted values: csv, excel, pdf
+    string time_zone = 12; // e.g. UTC+0, UTC+8, etc.
+}
+
+message ExportUsersResponse {
+    int64 task_id = 1;
 }
 
 // -------------- Affiliate Bill --------------
@@ -859,3 +897,125 @@ message GetUserPromoConditionInfoResponse {
     bool has_met_conversion_conditions = 5; // true if user has met conversion conditions
 }
 
+
+// -------------- Settings --------------
+
+message GetOperatorSettingsRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+}
+
+message OperatorSettings {
+    string payment_channel_rate = 1; // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 2; // represent as a percentage, e.g. "35" for 35%
+}
+
+message GetOperatorSettingsResponse {
+    OperatorSettings operator_settings = 1;
+}
+
+message UpdateOperatorSettingsRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    OperatorSettings operator_settings = 3;
+}
+
+message UpdateOperatorSettingsResponse {
+}
+
+// -------------- Dashboard --------------
+
+message GetAffiliateDashboardRequest {
+  int64 affiliate_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+  api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message GetAffiliateDashboardResponse {
+  // Current period metrics
+  DashboardMetrics current = 1;
+  // Previous period metrics (same duration, immediately before start_time)
+  DashboardMetrics previous = 2;
+}
+
+message DashboardMetrics {
+  // User Conversion
+  int64 registrations = 1;
+  int64 ftd_users = 2;
+  int64 repeat_depositors = 3;
+  int64 active_users = 4;
+  string reg_to_ftd_rate = 5;
+  string ftd_to_active_rate = 6;
+
+  // Deposits
+  string deposits_usd = 7;
+  string deposits_reporting_currency = 8;
+
+  // Withdrawals
+  string withdrawals_usd = 9;
+  string withdrawals_reporting_currency = 10;
+
+  // Pending Withdrawals
+  string pending_withdrawals_usd = 11;
+  string pending_withdrawals_reporting_currency = 12;
+
+  // Balance
+  int64 accounts_with_balance = 13;
+  string total_balance_usd = 14;
+  string total_balance_reporting_currency = 15;
+
+  // GGR
+  string ggr_usd = 16;
+  string ggr_reporting_currency = 17;
+
+  // NGR
+  string ngr_usd = 18;
+  string ngr_reporting_currency = 19;
+
+  // Bet
+  int64 bet_count = 20;
+  string bet_amount_usd = 21;
+  string bet_amount_reporting_currency = 22;
+  string average_bet_usd = 23;
+  string average_bet_reporting_currency = 24;
+
+  // Commission
+  string pending_commission_usd = 25;
+  string pending_commission_reporting_currency = 26;
+  string paid_commission_usd = 27;
+  string paid_commission_reporting_currency = 28;
+}
+
+message GetAffiliateTrendRequest {
+  int64 affiliate_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+  string group_by = 4;  // "day", "week", "month"
+  api.common.OperatorContext initiator_operator_context = 5;
+}
+
+message GetAffiliateTrendResponse {
+  message UserConversionData {
+    google.protobuf.Timestamp date = 1;
+    int64 registrations = 2;
+    int64 ftd_users = 3;
+    int64 active_users = 4;
+  }
+
+  message FinancialBettingData {
+    google.protobuf.Timestamp date = 1;
+    string deposits_usd = 2;
+    string deposits_reporting_currency = 3;
+    string withdrawals_usd = 4;
+    string withdrawals_reporting_currency = 5;
+    string ggr_usd = 6;
+    string ggr_reporting_currency = 7;
+    string ngr_usd = 8;
+    string ngr_reporting_currency = 9;
+    int64 bet_count = 10;
+  }
+
+  repeated UserConversionData user_conversion_data = 1;
+  repeated FinancialBettingData financial_betting_data = 2;
+}

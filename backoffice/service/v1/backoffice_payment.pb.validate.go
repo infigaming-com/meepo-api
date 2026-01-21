@@ -879,8 +879,8 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 		}
 	}
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
+	if m.Enable != nil {
+		// no validation rules for Enable
 	}
 
 	if len(errors) > 0 {

@@ -351,9 +351,10 @@ message DebitRequest {
 	string currency = 2;
 	string reporting_currency = 3;
 	// Valid debit transaction types:
-	//   - "payment_withdraw"   - Payment withdraw transaction
+	//   - "manual_debit_cash"   - Manual debit cash transaction
+	//   - "manual_debit_bonus"  - Manual debit bonus transaction
 	string transaction_type = 4;
-	int64 transaction_id = 5;
+	optional int64 transaction_id = 5;
 	string amount = 6;
 	api.common.OperatorContext operator_context = 7;
 	int64 initiator_user_id = 8;
@@ -471,6 +472,9 @@ message FreezeRequest {
 
 message FreezeResponse {
 	int64 transaction_id = 1;
+	string operator_freeze_amount = 2; // amount of the operator's freeze
+	string operator_freeze_currency = 3;
+	int64 operator_freeze_transaction_id = 4;
 }
 
 message SettleRequest {
@@ -638,6 +642,12 @@ message ListWalletBalanceTransactionsResponse {
 		string provider_bonus_amount_usd = 17;
 		string provider_bonus_amount_reporting_currency = 18;
 		int64 external_transaction_id = 19;
+		string before_cash_balance = 20;
+		string after_cash_balance = 21;
+		string before_operator_bonus_balance = 22;
+		string after_operator_bonus_balance = 23;
+		string before_provider_bonus_balance = 24;
+		string after_provider_bonus_balance = 25;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
@@ -1733,6 +1743,8 @@ message ListUserOverviewResponse {
 		int64 user_id = 1;
 		string ngr_usd = 2; // cash bet - cash win
 		string ngr_reporting_currency = 3;
+		string bonus2cash_usd = 4;
+		string bonus2cash_reporting_currency = 5;
 	}
 	repeated UserOverview user_overviews = 1;
 }

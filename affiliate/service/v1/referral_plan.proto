@@ -20,6 +20,8 @@ message SetReferralPlanRequest {
     optional bool enabled = 6; // target operator's referral plan's enabled
     optional int32 max_tier = 7; // target operator's referral plan's max_tier
     optional ReferralPlanConfig plan_config = 8; // target operator's referral plan's plan_config
+    optional string payment_channel_rate = 9; // represent as a percentage, e.g. "35" for 35%
+    optional string third_party_game_rate = 10; // represent as a percentage, e.g. "35" for 35%
 }
 
 message SetReferralPlanResponse {}
@@ -172,10 +174,12 @@ message GetUserLossRevenueShareStatsResponse {
     string claimed_reward_amount = 3;
     map<int32, string> ggr_amount_in_period = 4; // map of tier number (1-10) to ggr amount in the period
     map<int32, string> ngr_amount_in_period = 5; // map of tier number (1-10) to ngr amount in the period
-    repeated ReferredStat referred_stats = 6;
-    int32 total = 7; // for referred stats
-    int32 page = 8; // for referred stats
-    int32 page_size = 9; // for referred stats
+    map<int32, string> bonus2cash_amount_in_period = 6; // map of tier number (1-10) to bonus2cash amount in the period
+    repeated ReferredStat referred_stats = 7;
+    int32 team_size = 8; // number of users in the team
+    int32 total = 9; // for referred stats
+    int32 page = 10; // for referred stats
+    int32 page_size = 11; // for referred stats
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -187,6 +191,8 @@ message ReferralPlan {
     bool enabled = 1;
     int32 max_tier = 2;
     ReferralPlanConfig plan_config = 3;
+    string payment_channel_rate = 4; // represent as a percentage, e.g. "35" for 35%
+    string third_party_game_rate = 5; // represent as a percentage, e.g. "35" for 35%
 }
 
 // Referral plan configuration

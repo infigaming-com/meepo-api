@@ -92,6 +92,14 @@ service Operator {
 
 	rpc ListBalancesSummary(ListBalancesSummaryRequest) returns (ListBalancesSummaryResponse) {
 	}
+
+	// RecalculateDailyRevenueShares recalculates operator_daily_revenue_shares records
+	// by fetching existing records from database and calling game service's GetProviderStats API
+	rpc RecalculateDailyRevenueShares(RecalculateDailyRevenueSharesRequest) returns (RecalculateDailyRevenueSharesResponse) {
+	}
+
+	rpc DeleteAdjustment(DeleteAdjustmentRequest) returns (DeleteAdjustmentResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -337,6 +345,7 @@ message ListOperatorRevenueShareResponse {
 		string amount = 13; // Revenue share amount in original currency
 		string fx_rate = 14; // Foreign exchange rate
 		string amount_usd = 15; // Revenue share amount in USD
+		int64 id = 16;
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -374,6 +383,7 @@ message ListThirdPartyFeesResponse {
 		string quantity = 4; // Quantity as string to preserve formatting
 		string amount = 5; // Amount as string to preserve precision
 		string description = 6; // Description of the fee
+		int64 id = 7;
 	}
 	
 	repeated ThirdPartyFeeItem items = 1;
@@ -428,6 +438,7 @@ message ListMonthlyRevenueShareResponse {
 		string revenue_share_system = 18; // Revenue Share System
 		string revenue_share_operator = 19; // Revenue Share Operator
 		string est_costs = 20; // Est. Costs
+		int64 id = 21;
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -526,6 +537,7 @@ message ListAdjustmentsResponse {
 		// Amount information
 		string amount = 5; // Amount as string to preserve precision
 		string description = 6; // Description of the adjustment
+		int64 id = 7;
 	}
 	
 	repeated AdjustmentItem items = 1;
@@ -547,6 +559,13 @@ message CreateAdjustmentConfigRequest {
 message CreateAdjustmentConfigResponse {
 }
 
+message DeleteAdjustmentRequest {
+	int64 id = 1; // Adjustment ID to delete
+}
+
+message DeleteAdjustmentResponse {
+}
+
 message SendInvoicesRequest {
 	string period_key = 1;
 }
@@ -555,6 +574,7 @@ message SendInvoicesResponse {
 }
 
 message GetInvoiceSummaryRequest {
+	string period_key = 1;
 }
 
 message GetInvoiceSummaryResponse {
@@ -695,4 +715,25 @@ message ListBalancesSummaryResponse {
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
-}	
+}
+
+// RecalculateDailyRevenueSharesRequest is the request for recalculating daily revenue shares
+message RecalculateDailyRevenueSharesRequest {
+	// Billing period key (required) - e.g. "2026-01"
+	string period_key = 1;
+	
+	// Operator context for filtering (optional) - if not provided, all operators in the period will be recalculated
+	api.common.OperatorContext operator_context = 2;
+	
+	// Optional filters
+	optional string provider_id = 3; // Filter by provider ID
+	optional string fee_group = 4;   // Filter by fee group
+	optional string currency = 5;    // Filter by currency
+}
+
+// RecalculateDailyRevenueSharesResponse is the response for recalculating daily revenue shares
+message RecalculateDailyRevenueSharesResponse {
+	int32 total_records = 1; // Total records found for recalculation
+	int32 records_updated = 2; // Number of records successfully updated
+	int32 records_failed = 3; // Number of records failed to update
+}

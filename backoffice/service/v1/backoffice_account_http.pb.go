@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeAccountAccountInfo = "/api.backoffice.service.v1.BackofficeAccount/AccountInfo"
 const OperationBackofficeAccountAddAccount = "/api.backoffice.service.v1.BackofficeAccount/AddAccount"
 const OperationBackofficeAccountAdminReset2fa = "/api.backoffice.service.v1.BackofficeAccount/AdminReset2fa"
+const OperationBackofficeAccountAdminResetPassword = "/api.backoffice.service.v1.BackofficeAccount/AdminResetPassword"
 const OperationBackofficeAccountBind2fa = "/api.backoffice.service.v1.BackofficeAccount/Bind2fa"
 const OperationBackofficeAccountCheckEmailExists = "/api.backoffice.service.v1.BackofficeAccount/CheckEmailExists"
 const OperationBackofficeAccountCheckOperatorKeyExists = "/api.backoffice.service.v1.BackofficeAccount/CheckOperatorKeyExists"
@@ -30,6 +31,7 @@ const OperationBackofficeAccountCreateRole = "/api.backoffice.service.v1.Backoff
 const OperationBackofficeAccountDeleteRole = "/api.backoffice.service.v1.BackofficeAccount/DeleteRole"
 const OperationBackofficeAccountGenerate2fa = "/api.backoffice.service.v1.BackofficeAccount/Generate2fa"
 const OperationBackofficeAccountGet2faStatus = "/api.backoffice.service.v1.BackofficeAccount/Get2faStatus"
+const OperationBackofficeAccountGetAccountDetail = "/api.backoffice.service.v1.BackofficeAccount/GetAccountDetail"
 const OperationBackofficeAccountListAccounts = "/api.backoffice.service.v1.BackofficeAccount/ListAccounts"
 const OperationBackofficeAccountListRoles = "/api.backoffice.service.v1.BackofficeAccount/ListRoles"
 const OperationBackofficeAccountLogin = "/api.backoffice.service.v1.BackofficeAccount/Login"
@@ -52,6 +54,8 @@ type BackofficeAccountHTTPServer interface {
 	AddAccount(context.Context, *AddAccountRequest) (*AddAccountResponse, error)
 	// AdminReset2Fa Admin reset another user's 2FA
 	AdminReset2Fa(context.Context, *AdminReset2FaRequest) (*AdminReset2FaResponse, error)
+	// AdminResetPassword AdminResetPassword allows admin to reset another user's password without verification code
+	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
 	Bind2Fa(context.Context, *Bind2FaRequest) (*Bind2FaResponse, error)
 	// CheckEmailExists CheckEmailExists checks if the email exists in the user table.
 	CheckEmailExists(context.Context, *CheckEmailExistsRequest) (*CheckEmailExistsResponse, error)
@@ -64,6 +68,8 @@ type BackofficeAccountHTTPServer interface {
 	Generate2Fa(context.Context, *Generate2FaRequest) (*Generate2FaResponse, error)
 	// Get2FaStatus Get 2FA status for current user
 	Get2FaStatus(context.Context, *Get2FaStatusRequest) (*Get2FaStatusResponse, error)
+	// GetAccountDetail GetAccountDetail retrieves detailed information about a backoffice account
+	GetAccountDetail(context.Context, *GetAccountDetailRequest) (*GetAccountDetailResponse, error)
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
@@ -114,6 +120,8 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r.POST("/v1/backoffice/accounts/email/check_exists", _BackofficeAccount_CheckEmailExists0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/subdomain/check_exists", _BackofficeAccount_CheckSubdomainExists0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/key/check_exists", _BackofficeAccount_CheckOperatorKeyExists0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/detail", _BackofficeAccount_GetAccountDetail0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/password/admin-reset", _BackofficeAccount_AdminResetPassword0_HTTP_Handler(srv))
 }
 
 func _BackofficeAccount_AddAccount0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
@@ -710,11 +718,57 @@ func _BackofficeAccount_CheckOperatorKeyExists0_HTTP_Handler(srv BackofficeAccou
 	}
 }
 
+func _BackofficeAccount_GetAccountDetail0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAccountDetailRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountGetAccountDetail)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAccountDetail(ctx, req.(*GetAccountDetailRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetAccountDetailResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAccount_AdminResetPassword0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AdminResetPasswordRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAccountAdminResetPassword)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AdminResetPassword(ctx, req.(*AdminResetPasswordRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AdminResetPasswordResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAccountHTTPClient interface {
 	AccountInfo(ctx context.Context, req *AccountInfoRequest, opts ...http.CallOption) (rsp *AccountInfoResponse, err error)
 	AddAccount(ctx context.Context, req *AddAccountRequest, opts ...http.CallOption) (rsp *AddAccountResponse, err error)
 	// AdminReset2Fa Admin reset another user's 2FA
 	AdminReset2Fa(ctx context.Context, req *AdminReset2FaRequest, opts ...http.CallOption) (rsp *AdminReset2FaResponse, err error)
+	// AdminResetPassword AdminResetPassword allows admin to reset another user's password without verification code
+	AdminResetPassword(ctx context.Context, req *AdminResetPasswordRequest, opts ...http.CallOption) (rsp *AdminResetPasswordResponse, err error)
 	Bind2Fa(ctx context.Context, req *Bind2FaRequest, opts ...http.CallOption) (rsp *Bind2FaResponse, err error)
 	// CheckEmailExists CheckEmailExists checks if the email exists in the user table.
 	CheckEmailExists(ctx context.Context, req *CheckEmailExistsRequest, opts ...http.CallOption) (rsp *CheckEmailExistsResponse, err error)
@@ -727,6 +781,8 @@ type BackofficeAccountHTTPClient interface {
 	Generate2Fa(ctx context.Context, req *Generate2FaRequest, opts ...http.CallOption) (rsp *Generate2FaResponse, err error)
 	// Get2FaStatus Get 2FA status for current user
 	Get2FaStatus(ctx context.Context, req *Get2FaStatusRequest, opts ...http.CallOption) (rsp *Get2FaStatusResponse, err error)
+	// GetAccountDetail GetAccountDetail retrieves detailed information about a backoffice account
+	GetAccountDetail(ctx context.Context, req *GetAccountDetailRequest, opts ...http.CallOption) (rsp *GetAccountDetailResponse, err error)
 	ListAccounts(ctx context.Context, req *ListAccountsRequest, opts ...http.CallOption) (rsp *ListAccountsResponse, err error)
 	ListRoles(ctx context.Context, req *ListRolesRequest, opts ...http.CallOption) (rsp *ListRolesResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
@@ -788,6 +844,20 @@ func (c *BackofficeAccountHTTPClientImpl) AdminReset2Fa(ctx context.Context, in 
 	pattern := "/v1/backoffice/accounts/2fa/admin-reset"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountAdminReset2fa))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// AdminResetPassword AdminResetPassword allows admin to reset another user's password without verification code
+func (c *BackofficeAccountHTTPClientImpl) AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...http.CallOption) (*AdminResetPasswordResponse, error) {
+	var out AdminResetPasswordResponse
+	pattern := "/v1/backoffice/accounts/password/admin-reset"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountAdminResetPassword))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -896,6 +966,20 @@ func (c *BackofficeAccountHTTPClientImpl) Get2FaStatus(ctx context.Context, in *
 	pattern := "/v1/backoffice/accounts/2fa/status"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAccountGet2faStatus))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetAccountDetail GetAccountDetail retrieves detailed information about a backoffice account
+func (c *BackofficeAccountHTTPClientImpl) GetAccountDetail(ctx context.Context, in *GetAccountDetailRequest, opts ...http.CallOption) (*GetAccountDetailResponse, error) {
+	var out GetAccountDetailResponse
+	pattern := "/v1/backoffice/accounts/detail"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAccountGetAccountDetail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

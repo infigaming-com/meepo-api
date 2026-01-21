@@ -809,8 +809,6 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
-	// no validation rules for TransactionId
-
 	// no validation rules for Amount
 
 	if all {
@@ -845,6 +843,10 @@ func (m *DebitRequest) validate(all bool) error {
 	// no validation rules for InitiatorUserId
 
 	// no validation rules for Comment
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
 
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)
@@ -2116,6 +2118,12 @@ func (m *FreezeResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for TransactionId
+
+	// no validation rules for OperatorFreezeAmount
+
+	// no validation rules for OperatorFreezeCurrency
+
+	// no validation rules for OperatorFreezeTransactionId
 
 	if len(errors) > 0 {
 		return FreezeResponseMultiError(errors)
@@ -22376,6 +22384,18 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for ExternalTransactionId
 
+	// no validation rules for BeforeCashBalance
+
+	// no validation rules for AfterCashBalance
+
+	// no validation rules for BeforeOperatorBonusBalance
+
+	// no validation rules for AfterOperatorBonusBalance
+
+	// no validation rules for BeforeProviderBonusBalance
+
+	// no validation rules for AfterProviderBonusBalance
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsResponse_BalanceTransactionMultiError(errors)
 	}
@@ -25003,6 +25023,10 @@ func (m *ListUserOverviewResponse_UserOverview) validate(all bool) error {
 	// no validation rules for NgrUsd
 
 	// no validation rules for NgrReportingCurrency
+
+	// no validation rules for Bonus2CashUsd
+
+	// no validation rules for Bonus2CashReportingCurrency
 
 	if len(errors) > 0 {
 		return ListUserOverviewResponse_UserOverviewMultiError(errors)

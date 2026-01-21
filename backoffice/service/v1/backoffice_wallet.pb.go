@@ -3483,9 +3483,8 @@ type ManualDebitRequest struct {
 	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	TransactionType string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // manual_debit_cash, manual_debit_bonus
-	TransactionId   int64                  `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount          string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	Comment         string                 `protobuf:"bytes,6,opt,name=comment,proto3" json:"comment,omitempty"`
+	Amount          string                 `protobuf:"bytes,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Comment         string                 `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3539,13 +3538,6 @@ func (x *ManualDebitRequest) GetTransactionType() string {
 		return x.TransactionType
 	}
 	return ""
-}
-
-func (x *ManualDebitRequest) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
-	}
-	return 0
 }
 
 func (x *ManualDebitRequest) GetAmount() string {
@@ -4468,16 +4460,19 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	TransactionType       string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	VipLevel              int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	ChangeBalance         string `protobuf:"bytes,5,opt,name=change_balance,json=changeBalance,proto3" json:"change_balance,omitempty"`
-	BeforeBalance         string `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance          string `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Currency              string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
-	RelatedTransactionId  int64  `protobuf:"varint,9,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
-	ExternalTransactionId int64  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	TransactionType            string `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	VipLevel                   int32  `protobuf:"varint,4,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	BeforeCashBalance          string `protobuf:"bytes,5,opt,name=before_cash_balance,json=beforeCashBalance,proto3" json:"before_cash_balance,omitempty"`
+	AfterCashBalance           string `protobuf:"bytes,6,opt,name=after_cash_balance,json=afterCashBalance,proto3" json:"after_cash_balance,omitempty"`
+	CashAmountChanged          string `protobuf:"bytes,7,opt,name=cash_amount_changed,json=cashAmountChanged,proto3" json:"cash_amount_changed,omitempty"`
+	BeforeOperatorBonusBalance string `protobuf:"bytes,8,opt,name=before_operator_bonus_balance,json=beforeOperatorBonusBalance,proto3" json:"before_operator_bonus_balance,omitempty"`
+	AfterOperatorBonusBalance  string `protobuf:"bytes,9,opt,name=after_operator_bonus_balance,json=afterOperatorBonusBalance,proto3" json:"after_operator_bonus_balance,omitempty"`
+	OperatorBonusAmountChanged string `protobuf:"bytes,10,opt,name=operator_bonus_amount_changed,json=operatorBonusAmountChanged,proto3" json:"operator_bonus_amount_changed,omitempty"`
+	Currency                   string `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
+	RelatedTransactionId       int64  `protobuf:"varint,12,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
+	ExternalTransactionId      int64  `protobuf:"varint,13,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) Reset() {
@@ -4538,23 +4533,44 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetVipLevel()
 	return 0
 }
 
-func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetChangeBalance() string {
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetBeforeCashBalance() string {
 	if x != nil {
-		return x.ChangeBalance
+		return x.BeforeCashBalance
 	}
 	return ""
 }
 
-func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetBeforeBalance() string {
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetAfterCashBalance() string {
 	if x != nil {
-		return x.BeforeBalance
+		return x.AfterCashBalance
 	}
 	return ""
 }
 
-func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetAfterBalance() string {
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetCashAmountChanged() string {
 	if x != nil {
-		return x.AfterBalance
+		return x.CashAmountChanged
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetBeforeOperatorBonusBalance() string {
+	if x != nil {
+		return x.BeforeOperatorBonusBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetAfterOperatorBonusBalance() string {
+	if x != nil {
+		return x.AfterOperatorBonusBalance
+	}
+	return ""
+}
+
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetOperatorBonusAmountChanged() string {
+	if x != nil {
+		return x.OperatorBonusAmountChanged
 	}
 	return ""
 }
@@ -4687,25 +4703,28 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb5\x05\n" +
+	"_page_size\"\x97\a\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x86\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2S.api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xbb\x03\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x9d\x05\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x1b\n" +
-	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12%\n" +
-	"\x0echange_balance\x18\x05 \x01(\tR\rchangeBalance\x12%\n" +
-	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x124\n" +
-	"\x16related_transaction_id\x18\t \x01(\x03R\x14relatedTransactionId\x126\n" +
-	"\x17external_transaction_id\x18\n" +
-	" \x01(\x03R\x15externalTransactionId\"F\n" +
+	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12.\n" +
+	"\x13before_cash_balance\x18\x05 \x01(\tR\x11beforeCashBalance\x12,\n" +
+	"\x12after_cash_balance\x18\x06 \x01(\tR\x10afterCashBalance\x12.\n" +
+	"\x13cash_amount_changed\x18\a \x01(\tR\x11cashAmountChanged\x12A\n" +
+	"\x1dbefore_operator_bonus_balance\x18\b \x01(\tR\x1abeforeOperatorBonusBalance\x12?\n" +
+	"\x1cafter_operator_bonus_balance\x18\t \x01(\tR\x19afterOperatorBonusBalance\x12A\n" +
+	"\x1doperator_bonus_amount_changed\x18\n" +
+	" \x01(\tR\x1aoperatorBonusAmountChanged\x12\x1a\n" +
+	"\bcurrency\x18\v \x01(\tR\bcurrency\x124\n" +
+	"\x16related_transaction_id\x18\f \x01(\x03R\x14relatedTransactionId\x126\n" +
+	"\x17external_transaction_id\x18\r \x01(\x03R\x15externalTransactionId\"F\n" +
 	"\"GetWalletCreditTransactionsRequest\x12 \n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\rtransactionId\"\xd4\x02\n" +
 	"#GetWalletCreditTransactionsResponse\x12\x81\x01\n" +
@@ -5029,14 +5048,13 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x15operator_bonus_amount\x18\x06 \x01(\tR\x13operatorBonusAmount\x12I\n" +
 	"!operator_bonus_turnover_threshold\x18\a \x01(\tR\x1eoperatorBonusTurnoverThreshold\x12A\n" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
-	"\acomment\x18\t \x01(\tR\acomment\"\xcd\x01\n" +
+	"\acomment\x18\t \x01(\tR\acomment\"\xa6\x01\n" +
 	"\x12ManualDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
-	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\tR\x06amount\x12\x18\n" +
-	"\acomment\x18\x06 \x01(\tR\acomment\"\xc1\x03\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\tR\x06amount\x12\x18\n" +
+	"\acomment\x18\x05 \x01(\tR\acomment\"\xc1\x03\n" +
 	"\x1fListManualJournalEntriesRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +

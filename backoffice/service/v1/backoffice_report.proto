@@ -115,6 +115,7 @@ message TimeRange{
 message GetSummaryRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
@@ -152,6 +153,7 @@ message GetSummaryResponse {
 message ListSummariesRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
@@ -165,7 +167,7 @@ message ListSummariesResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string country = 6;
 		int32 visits = 7;
 		int32 unique_visits = 8;
@@ -230,6 +232,9 @@ message ListSummariesResponse {
 		string locked_balance_reporting_currency = 67; // reporting currency
 		string ggr_reporting_currency = 68; // reporting currency
 		string ngr_reporting_currency = 69; // reporting currency
+		uint64 operator_id = 70;
+		uint64 company_operator_id = 71;
+		uint64 retailer_operator_id = 72;
 	}
 	repeated List list = 1;
 	int32 page = 2;
@@ -245,6 +250,7 @@ message GetGameSummaryRequest {
 	repeated string game_names = 5;
 	repeated string game_ids = 6;
 	repeated string currencies = 7;
+	// operator_context removed - field 8 deprecated (security: must not be exposed to frontend)
 }
 
 message GetGameSummaryResponse {
@@ -270,6 +276,7 @@ message ListGameDataRequest {
 	repeated string currencies = 7;
 	int32 page = 8;
 	int32 page_size = 9;
+	// operator_context removed - field 10 deprecated (security: must not be exposed to frontend)
 }
 
 message ListGameDataResponse {
@@ -278,7 +285,7 @@ message ListGameDataResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string provider = 6;
 		string game_type = 7;
 		string game_name = 8;
@@ -299,6 +306,9 @@ message ListGameDataResponse {
 		string turnover_reporting_currency = 23; // reporting currency
 		string win_amount_reporting_currency = 24; // reporting currency
 		string ggr_reporting_currency = 25; // reporting currency
+		uint64 operator_id = 26;
+		uint64 company_operator_id = 27;
+		uint64 retailer_operator_id = 28;
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -316,6 +326,7 @@ message GetPlayerGameSummaryRequest {
 	repeated string game_ids = 7;
 	repeated string currencies = 8;
 	repeated int64 user_ids = 9;
+	// operator_context removed - field 10 deprecated (security: must not be exposed to frontend)
 }
 
 message GetPlayerGameSummaryResponse {
@@ -343,6 +354,7 @@ message ListPlayerGameDataRequest {
 	repeated int64 user_ids = 9;
 	int32 page = 10;
 	int32 page_size = 11;
+	// operator_context removed - field 12 deprecated (security: must not be exposed to frontend)
 }
 
 message ListPlayerGameDataResponse {
@@ -351,7 +363,7 @@ message ListPlayerGameDataResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string provider = 6;
 		string game_type = 7;
 		string game_id = 8;
@@ -370,6 +382,9 @@ message ListPlayerGameDataResponse {
 		string turnover_reporting_currency = 21; // reporting currency
 		string win_amount_reporting_currency = 22; // reporting currency
 		string ggr_reporting_currency = 23; // reporting currency
+		uint64 operator_id = 24;
+		uint64 company_operator_id = 25;
+		uint64 retailer_operator_id = 26;
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -380,6 +395,7 @@ message ListPlayerGameDataResponse {
 message GetDepositSummariesRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	repeated string currencies = 5;
 }
 
@@ -397,6 +413,7 @@ message GetDepositSummariesResponse {
 message ListDepositDetailsRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	repeated string currencies = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
@@ -408,7 +425,7 @@ message ListDepositDetailsResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string currency = 6;
 		string deposit_amount = 7;
 		string deposit_amount_usd = 8;
@@ -436,6 +453,9 @@ message ListDepositDetailsResponse {
 		string average_ftd_amount_reporting_currency_for_non_same_day_registred_users = 30;
 		string success_rate = 31; // decimal number between 0-100, two decimal places
 		string amount_proportion = 32; // decimal number between 0-100, two decimal places
+		uint64 operator_id = 33;
+		uint64 company_operator_id = 34;
+		uint64 retailer_operator_id = 35;
 	}
 	repeated Detail details = 1;
 	int32 page = 2;
@@ -446,6 +466,7 @@ message ListDepositDetailsResponse {
 message GetWithdrawSummariesRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	repeated string currencies = 5;
 }
 
@@ -463,6 +484,7 @@ message GetWithdrawSummariesResponse {
 message ListWithdrawDetailsRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
+	// operator_context removed - field 3 deprecated (security: must not be exposed to frontend)
 	repeated string currencies = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
@@ -474,7 +496,7 @@ message ListWithdrawDetailsResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string currency = 6; 
 		string reporting_currency = 7;
 		string withdraw_amount = 8;
@@ -506,6 +528,9 @@ message ListWithdrawDetailsResponse {
 		string deposit_minus_withdraw_amount_usd = 34;
 		string deposit_minus_withdraw_amount_reporting_currency = 35;
 		string amount_proportion = 36; // decimal number between 0-100, two decimal places
+		uint64 operator_id = 37;
+		uint64 company_operator_id = 38;
+		uint64 retailer_operator_id = 39;
 	}
 	repeated Detail details = 1;
 	int32 page = 2;
@@ -518,6 +543,7 @@ message ListRegisterRetentionRequest {
 	api.common.OperatorContextFilters operator_context_filters = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+	// operator_context removed - field 5 deprecated (security: must not be exposed to frontend)
 }
 
 message ListRegisterRetentionResponse {
@@ -526,7 +552,7 @@ message ListRegisterRetentionResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		int32 reg_users = 6;
 		int32 paid_users = 7;
 		int32 active_users = 8;
@@ -581,7 +607,9 @@ message ListRegisterRetentionResponse {
 		string d60_paid_amt_reporting_currency = 57;
 		string d120_paid_amt_usd = 58;
 		string d120_paid_amt_reporting_currency = 59;
-
+		uint64 operator_id = 60;
+		uint64 company_operator_id = 61;
+		uint64 retailer_operator_id = 62;
 	}
 	repeated List details = 1;
 	int32 page = 2;
@@ -595,6 +623,7 @@ message ListDepositVtgDetailsRequest {
 	repeated string currencies = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+	// operator_context removed - field 6 deprecated (security: must not be exposed to frontend)
 }
 
 message ListDepositVtgDetailsResponse {
@@ -603,7 +632,7 @@ message ListDepositVtgDetailsResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string currency = 6;
 		string deposit_amount = 7;
 		string deposit_amount_usd = 8;
@@ -628,6 +657,9 @@ message ListDepositVtgDetailsResponse {
 		string average_ftd_amount_for_non_same_day_registred_users = 27;
 		string average_ftd_amount_usd_for_non_same_day_registred_users = 28;
 		string average_ftd_amount_reporting_currency_for_non_same_day_registred_users = 29;
+		uint64 operator_id = 30;
+		uint64 company_operator_id = 31;
+		uint64 retailer_operator_id = 32;
 	}
 	repeated Detail daily_details = 1;
 	int32 page = 2;
@@ -641,6 +673,7 @@ message ListWithdrawVtgDetailsRequest {
 	repeated string currencies = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+	// operator_context removed - field 6 deprecated (security: must not be exposed to frontend)
 }
 
 message ListWithdrawVtgDetailsResponse {
@@ -649,7 +682,7 @@ message ListWithdrawVtgDetailsResponse {
 		string operator_name = 2;
 		string company_operator_name = 3;
 		string retailer_operator_name = 4;
-		string system_operator_name = 5;
+		// system_operator_name removed - field 5 deprecated
 		string currency = 6;
 		string withdraw_amount = 7;
 		string withdraw_amount_usd = 8;
@@ -677,6 +710,9 @@ message ListWithdrawVtgDetailsResponse {
 		string deposit_minus_withdraw_amount = 30;
 		string deposit_minus_withdraw_amount_usd = 31;
 		string deposit_minus_withdraw_amount_reporting_currency = 32;
+		uint64 operator_id = 33;
+		uint64 company_operator_id = 34;
+		uint64 retailer_operator_id = 35;
 	}
 	repeated Detail daily_details = 1;
 	int32 page = 2;

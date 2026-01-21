@@ -164,6 +164,14 @@ func (m *SetReferralPlanRequest) validate(all bool) error {
 
 	}
 
+	if m.PaymentChannelRate != nil {
+		// no validation rules for PaymentChannelRate
+	}
+
+	if m.ThirdPartyGameRate != nil {
+		// no validation rules for ThirdPartyGameRate
+	}
+
 	if len(errors) > 0 {
 		return SetReferralPlanRequestMultiError(errors)
 	}
@@ -2618,6 +2626,8 @@ func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
 
 	// no validation rules for NgrAmountInPeriod
 
+	// no validation rules for Bonus2CashAmountInPeriod
+
 	for idx, item := range m.GetReferredStats() {
 		_, _ = idx, item
 
@@ -2651,6 +2661,8 @@ func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for TeamSize
 
 	// no validation rules for Total
 
@@ -2794,6 +2806,10 @@ func (m *ReferralPlan) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for PaymentChannelRate
+
+	// no validation rules for ThirdPartyGameRate
 
 	if len(errors) > 0 {
 		return ReferralPlanMultiError(errors)

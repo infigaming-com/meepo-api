@@ -89,6 +89,8 @@ const (
 	Game_BackofficeBatchUpdateTagGames_FullMethodName     = "/api.game.service.v1.Game/BackofficeBatchUpdateTagGames"
 	Game_BackofficeListProvidersUnderTag_FullMethodName   = "/api.game.service.v1.Game/BackofficeListProvidersUnderTag"
 	Game_BackofficeListGamesUnderTag_FullMethodName       = "/api.game.service.v1.Game/BackofficeListGamesUnderTag"
+	Game_GetProviderStats_FullMethodName                  = "/api.game.service.v1.Game/GetProviderStats"
+	Game_GetUserNgr_FullMethodName                        = "/api.game.service.v1.Game/GetUserNgr"
 )
 
 // GameClient is the client API for Game service.
@@ -184,6 +186,10 @@ type GameClient interface {
 	BackofficeListProvidersUnderTag(ctx context.Context, in *BackofficeListProvidersUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated)
 	BackofficeListGamesUnderTag(ctx context.Context, in *BackofficeListGamesUnderTagRequest, opts ...grpc.CallOption) (*BackofficeListGamesUnderTagResponse, error)
+	// Get provider statistics (aggregated bet/payout data)
+	GetProviderStats(ctx context.Context, in *GetProviderStatsRequest, opts ...grpc.CallOption) (*GetProviderStatsResponse, error)
+	// Get user NGR (Net Gaming Revenue) for a specific time range
+	GetUserNgr(ctx context.Context, in *GetUserNgrRequest, opts ...grpc.CallOption) (*GetUserNgrResponse, error)
 }
 
 type gameClient struct {
@@ -894,6 +900,26 @@ func (c *gameClient) BackofficeListGamesUnderTag(ctx context.Context, in *Backof
 	return out, nil
 }
 
+func (c *gameClient) GetProviderStats(ctx context.Context, in *GetProviderStatsRequest, opts ...grpc.CallOption) (*GetProviderStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProviderStatsResponse)
+	err := c.cc.Invoke(ctx, Game_GetProviderStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetUserNgr(ctx context.Context, in *GetUserNgrRequest, opts ...grpc.CallOption) (*GetUserNgrResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserNgrResponse)
+	err := c.cc.Invoke(ctx, Game_GetUserNgr_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -987,6 +1013,10 @@ type GameServer interface {
 	BackofficeListProvidersUnderTag(context.Context, *BackofficeListProvidersUnderTagRequest) (*BackofficeListProvidersUnderTagResponse, error)
 	// List games under a tag (paginated)
 	BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error)
+	// Get provider statistics (aggregated bet/payout data)
+	GetProviderStats(context.Context, *GetProviderStatsRequest) (*GetProviderStatsResponse, error)
+	// Get user NGR (Net Gaming Revenue) for a specific time range
+	GetUserNgr(context.Context, *GetUserNgrRequest) (*GetUserNgrResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -1206,6 +1236,12 @@ func (UnimplementedGameServer) BackofficeListProvidersUnderTag(context.Context, 
 }
 func (UnimplementedGameServer) BackofficeListGamesUnderTag(context.Context, *BackofficeListGamesUnderTagRequest) (*BackofficeListGamesUnderTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BackofficeListGamesUnderTag not implemented")
+}
+func (UnimplementedGameServer) GetProviderStats(context.Context, *GetProviderStatsRequest) (*GetProviderStatsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProviderStats not implemented")
+}
+func (UnimplementedGameServer) GetUserNgr(context.Context, *GetUserNgrRequest) (*GetUserNgrResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserNgr not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -2488,6 +2524,42 @@ func _Game_BackofficeListGamesUnderTag_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetProviderStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetProviderStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetProviderStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetProviderStats(ctx, req.(*GetProviderStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetUserNgr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserNgrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetUserNgr(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetUserNgr_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetUserNgr(ctx, req.(*GetUserNgrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2774,6 +2846,14 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BackofficeListGamesUnderTag",
 			Handler:    _Game_BackofficeListGamesUnderTag_Handler,
+		},
+		{
+			MethodName: "GetProviderStats",
+			Handler:    _Game_GetProviderStats_Handler,
+		},
+		{
+			MethodName: "GetUserNgr",
+			Handler:    _Game_GetUserNgr_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

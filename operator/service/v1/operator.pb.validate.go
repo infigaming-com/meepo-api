@@ -4989,6 +4989,212 @@ var _ interface {
 	ErrorName() string
 } = CreateAdjustmentConfigResponseValidationError{}
 
+// Validate checks the field values on DeleteAdjustmentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAdjustmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAdjustmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAdjustmentRequestMultiError, or nil if none found.
+func (m *DeleteAdjustmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAdjustmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteAdjustmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteAdjustmentRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteAdjustmentRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteAdjustmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAdjustmentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAdjustmentRequestMultiError) AllErrors() []error { return m }
+
+// DeleteAdjustmentRequestValidationError is the validation error returned by
+// DeleteAdjustmentRequest.Validate if the designated constraints aren't met.
+type DeleteAdjustmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAdjustmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAdjustmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAdjustmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAdjustmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAdjustmentRequestValidationError) ErrorName() string {
+	return "DeleteAdjustmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAdjustmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAdjustmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAdjustmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAdjustmentRequestValidationError{}
+
+// Validate checks the field values on DeleteAdjustmentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAdjustmentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAdjustmentResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAdjustmentResponseMultiError, or nil if none found.
+func (m *DeleteAdjustmentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAdjustmentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteAdjustmentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteAdjustmentResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteAdjustmentResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteAdjustmentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAdjustmentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAdjustmentResponseMultiError) AllErrors() []error { return m }
+
+// DeleteAdjustmentResponseValidationError is the validation error returned by
+// DeleteAdjustmentResponse.Validate if the designated constraints aren't met.
+type DeleteAdjustmentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAdjustmentResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAdjustmentResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAdjustmentResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAdjustmentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAdjustmentResponseValidationError) ErrorName() string {
+	return "DeleteAdjustmentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAdjustmentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAdjustmentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAdjustmentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAdjustmentResponseValidationError{}
+
 // Validate checks the field values on SendInvoicesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5216,6 +5422,8 @@ func (m *GetInvoiceSummaryRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for PeriodKey
 
 	if len(errors) > 0 {
 		return GetInvoiceSummaryRequestMultiError(errors)
@@ -6840,6 +7048,265 @@ var _ interface {
 	ErrorName() string
 } = ListBalancesSummaryResponseValidationError{}
 
+// Validate checks the field values on RecalculateDailyRevenueSharesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *RecalculateDailyRevenueSharesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecalculateDailyRevenueSharesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// RecalculateDailyRevenueSharesRequestMultiError, or nil if none found.
+func (m *RecalculateDailyRevenueSharesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecalculateDailyRevenueSharesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PeriodKey
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RecalculateDailyRevenueSharesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RecalculateDailyRevenueSharesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RecalculateDailyRevenueSharesRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
+	if m.FeeGroup != nil {
+		// no validation rules for FeeGroup
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if len(errors) > 0 {
+		return RecalculateDailyRevenueSharesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecalculateDailyRevenueSharesRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// RecalculateDailyRevenueSharesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RecalculateDailyRevenueSharesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecalculateDailyRevenueSharesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecalculateDailyRevenueSharesRequestMultiError) AllErrors() []error { return m }
+
+// RecalculateDailyRevenueSharesRequestValidationError is the validation error
+// returned by RecalculateDailyRevenueSharesRequest.Validate if the designated
+// constraints aren't met.
+type RecalculateDailyRevenueSharesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecalculateDailyRevenueSharesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecalculateDailyRevenueSharesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecalculateDailyRevenueSharesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecalculateDailyRevenueSharesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecalculateDailyRevenueSharesRequestValidationError) ErrorName() string {
+	return "RecalculateDailyRevenueSharesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RecalculateDailyRevenueSharesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecalculateDailyRevenueSharesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecalculateDailyRevenueSharesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecalculateDailyRevenueSharesRequestValidationError{}
+
+// Validate checks the field values on RecalculateDailyRevenueSharesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *RecalculateDailyRevenueSharesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RecalculateDailyRevenueSharesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// RecalculateDailyRevenueSharesResponseMultiError, or nil if none found.
+func (m *RecalculateDailyRevenueSharesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RecalculateDailyRevenueSharesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalRecords
+
+	// no validation rules for RecordsUpdated
+
+	// no validation rules for RecordsFailed
+
+	if len(errors) > 0 {
+		return RecalculateDailyRevenueSharesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RecalculateDailyRevenueSharesResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// RecalculateDailyRevenueSharesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type RecalculateDailyRevenueSharesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RecalculateDailyRevenueSharesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RecalculateDailyRevenueSharesResponseMultiError) AllErrors() []error { return m }
+
+// RecalculateDailyRevenueSharesResponseValidationError is the validation error
+// returned by RecalculateDailyRevenueSharesResponse.Validate if the
+// designated constraints aren't met.
+type RecalculateDailyRevenueSharesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RecalculateDailyRevenueSharesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RecalculateDailyRevenueSharesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RecalculateDailyRevenueSharesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RecalculateDailyRevenueSharesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RecalculateDailyRevenueSharesResponseValidationError) ErrorName() string {
+	return "RecalculateDailyRevenueSharesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RecalculateDailyRevenueSharesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRecalculateDailyRevenueSharesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RecalculateDailyRevenueSharesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RecalculateDailyRevenueSharesResponseValidationError{}
+
 // Validate checks the field values on GetOperatorResponse_Operator with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -7500,6 +7967,8 @@ func (m *ListOperatorRevenueShareResponse_RevenueShareItem) validate(all bool) e
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for Id
+
 	if len(errors) > 0 {
 		return ListOperatorRevenueShareResponse_RevenueShareItemMultiError(errors)
 	}
@@ -7624,6 +8093,8 @@ func (m *ListThirdPartyFeesResponse_ThirdPartyFeeItem) validate(all bool) error 
 	// no validation rules for Amount
 
 	// no validation rules for Description
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListThirdPartyFeesResponse_ThirdPartyFeeItemMultiError(errors)
@@ -7771,6 +8242,8 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 	// no validation rules for RevenueShareOperator
 
 	// no validation rules for EstCosts
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListMonthlyRevenueShareResponse_RevenueShareItemMultiError(errors)
@@ -8125,6 +8598,8 @@ func (m *ListAdjustmentsResponse_AdjustmentItem) validate(all bool) error {
 	// no validation rules for Amount
 
 	// no validation rules for Description
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListAdjustmentsResponse_AdjustmentItemMultiError(errors)

@@ -45,6 +45,7 @@ const (
 	Affiliate_ListEvents_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/ListEvents"
 	Affiliate_ListCommissions_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListCommissions"
 	Affiliate_ListUsers_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/ListUsers"
+	Affiliate_ExportUsers_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ExportUsers"
 	Affiliate_ListAffiliateBills_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
 	Affiliate_SetReferralPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
 	Affiliate_GetReferralPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
@@ -56,6 +57,10 @@ const (
 	Affiliate_ClaimUserReferralRewards_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
 	Affiliate_GetUserLossRevenueShareStats_FullMethodName = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
 	Affiliate_GetUserPromoConditionInfo_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
+	Affiliate_GetOperatorSettings_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
+	Affiliate_UpdateOperatorSettings_FullMethodName       = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
+	Affiliate_GetAffiliateDashboard_FullMethodName        = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
+	Affiliate_GetAffiliateTrend_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -88,6 +93,7 @@ type AffiliateClient interface {
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*ListCommissionsResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error)
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*GetReferralPlanResponse, error)
@@ -101,6 +107,12 @@ type AffiliateClient interface {
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
+	GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*GetOperatorSettingsResponse, error)
+	UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorSettingsResponse, error)
+	// GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
+	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error)
+	// GetAffiliateTrend returns time series data for trend visualization
+	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error)
 }
 
 type affiliateClient struct {
@@ -371,6 +383,16 @@ func (c *affiliateClient) ListUsers(ctx context.Context, in *ListUsersRequest, o
 	return out, nil
 }
 
+func (c *affiliateClient) ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUsersResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ExportUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*ListAffiliateBillsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAffiliateBillsResponse)
@@ -481,6 +503,46 @@ func (c *affiliateClient) GetUserPromoConditionInfo(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *affiliateClient) GetOperatorSettings(ctx context.Context, in *GetOperatorSettingsRequest, opts ...grpc.CallOption) (*GetOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) UpdateOperatorSettings(ctx context.Context, in *UpdateOperatorSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorSettingsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_UpdateOperatorSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateDashboardResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetAffiliateDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateTrendResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetAffiliateTrend_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -511,6 +573,7 @@ type AffiliateServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*ListCommissionsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*GetReferralPlanResponse, error)
@@ -524,6 +587,12 @@ type AffiliateServer interface {
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
+	GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*GetOperatorSettingsResponse, error)
+	UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error)
+	// GetAffiliateDashboard returns aggregated dashboard metrics with comparison to previous period
+	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error)
+	// GetAffiliateTrend returns time series data for trend visualization
+	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -612,6 +681,9 @@ func (UnimplementedAffiliateServer) ListCommissions(context.Context, *ListCommis
 func (UnimplementedAffiliateServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUsers not implemented")
 }
+func (UnimplementedAffiliateServer) ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportUsers not implemented")
+}
 func (UnimplementedAffiliateServer) ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*ListAffiliateBillsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateBills not implemented")
 }
@@ -644,6 +716,18 @@ func (UnimplementedAffiliateServer) GetUserLossRevenueShareStats(context.Context
 }
 func (UnimplementedAffiliateServer) GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserPromoConditionInfo not implemented")
+}
+func (UnimplementedAffiliateServer) GetOperatorSettings(context.Context, *GetOperatorSettingsRequest) (*GetOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorSettings not implemented")
+}
+func (UnimplementedAffiliateServer) UpdateOperatorSettings(context.Context, *UpdateOperatorSettingsRequest) (*UpdateOperatorSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorSettings not implemented")
+}
+func (UnimplementedAffiliateServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
+}
+func (UnimplementedAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1134,6 +1218,24 @@ func _Affiliate_ListUsers_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ExportUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ExportUsers(ctx, req.(*ExportUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_ListAffiliateBills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAffiliateBillsRequest)
 	if err := dec(in); err != nil {
@@ -1332,6 +1434,78 @@ func _Affiliate_GetUserPromoConditionInfo_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetOperatorSettings(ctx, req.(*GetOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_UpdateOperatorSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).UpdateOperatorSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_UpdateOperatorSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).UpdateOperatorSettings(ctx, req.(*UpdateOperatorSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetAffiliateDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetAffiliateDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetAffiliateDashboard(ctx, req.(*GetAffiliateDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetAffiliateTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetAffiliateTrend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1444,6 +1618,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Affiliate_ListUsers_Handler,
 		},
 		{
+			MethodName: "ExportUsers",
+			Handler:    _Affiliate_ExportUsers_Handler,
+		},
+		{
 			MethodName: "ListAffiliateBills",
 			Handler:    _Affiliate_ListAffiliateBills_Handler,
 		},
@@ -1486,6 +1664,22 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserPromoConditionInfo",
 			Handler:    _Affiliate_GetUserPromoConditionInfo_Handler,
+		},
+		{
+			MethodName: "GetOperatorSettings",
+			Handler:    _Affiliate_GetOperatorSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorSettings",
+			Handler:    _Affiliate_UpdateOperatorSettings_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDashboard",
+			Handler:    _Affiliate_GetAffiliateDashboard_Handler,
+		},
+		{
+			MethodName: "GetAffiliateTrend",
+			Handler:    _Affiliate_GetAffiliateTrend_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

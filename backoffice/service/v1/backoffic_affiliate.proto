@@ -207,11 +207,34 @@ service BackofficeAffiliate {
 		};
 	}
 
+	rpc ExportAffiliateUsers(ExportAffiliateUsersRequest) returns (api.affiliate.service.v1.ExportUsersResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/user/export"
+			body: "*"
+		};
+	}
+
 	// -------------- Affiliate Bill --------------
 
 	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/bill/list"
+			body: "*"
+		};
+	}
+
+	// -------------- Settings --------------
+
+	rpc GetAffiliateOperatorSettings(GetAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.GetOperatorSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/operator/settings/get"
+			body: "*"
+		};
+	}
+	
+	rpc UpdateAffiliateOperatorSettings(UpdateAffiliateOperatorSettingsRequest) returns (api.affiliate.service.v1.UpdateOperatorSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/operator/settings/update"
 			body: "*"
 		};
 	}
@@ -228,6 +251,22 @@ service BackofficeAffiliate {
 	rpc GetReferralPlan(GetReferralPlanRequest) returns (api.affiliate.service.v1.GetReferralPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/referral/plan/get"
+			body: "*"
+		};
+	}
+
+	// -------------- Dashboard --------------
+
+	rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (api.affiliate.service.v1.GetAffiliateDashboardResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/dashboard/get"
+			body: "*"
+		};
+	}
+
+	rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (api.affiliate.service.v1.GetAffiliateTrendResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/dashboard/trend/get"
 			body: "*"
 		};
 	}
@@ -452,6 +491,18 @@ message ListAffiliateUsersRequest {
 	api.common.OperatorContextFilters operator_context_filters = 9;
 }
 
+message ExportAffiliateUsersRequest {
+	repeated string countries = 1;
+	google.protobuf.Timestamp ftd_start_time = 2;
+	google.protobuf.Timestamp ftd_end_time = 3;
+	optional int64 affiliate_id = 4;
+	google.protobuf.Timestamp registration_start_time = 5;
+	google.protobuf.Timestamp registration_end_time = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+	string format = 8; // accepted values: csv, excel, pdf
+    string time_zone = 9; // e.g. UTC+0, UTC+8, etc.
+}
+
 // -------------- Affiliate Bill --------------
 
 message ListAffiliateBillsRequest {
@@ -464,6 +515,17 @@ message ListAffiliateBillsRequest {
     api.common.OperatorContextFilters operator_context_filters = 7;
 }
 
+// -------------- Settings --------------
+
+message GetAffiliateOperatorSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message UpdateAffiliateOperatorSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	api.affiliate.service.v1.OperatorSettings operator_settings = 2;
+}
+
 // -------------- Referral Plan --------------
 
 message SetReferralPlanRequest {
@@ -473,9 +535,24 @@ message SetReferralPlanRequest {
 	optional bool enabled = 4;
 	optional int32 max_tier = 5;
 	optional api.affiliate.service.v1.ReferralPlanConfig plan_config = 6;
+	optional string payment_channel_rate = 7; // represent as a percentage, e.g. "35" for 35%
+    optional string third_party_game_rate = 8; // represent as a percentage, e.g. "35" for 35%
 }
 
 message GetReferralPlanRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
+}
+
+// -------------- Dashboard --------------
+
+message GetAffiliateDashboardRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+}
+
+message GetAffiliateTrendRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+	string group_by = 3;  // "day", "week", "month"
 }
