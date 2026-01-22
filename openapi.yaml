@@ -5487,6 +5487,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse'
+    /v1/backoffice/wallet/credit/manual_adjust:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+            operationId: BackofficeWallet_ManualAdjustCreditTurnoverField
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse'
     /v1/backoffice/wallet/credits/get:
         post:
             tags:
@@ -16662,6 +16681,24 @@ components:
                     type: boolean
                 tempToken:
                     type: string
+        api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest:
+            type: object
+            properties:
+                targetUserId:
+                    type: string
+                currency:
+                    type: string
+                creditId:
+                    type: string
+                transactionType:
+                    type: string
+                    description: 'transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"'
+                direction:
+                    type: string
+                    description: 'direction: "add", "subtract"'
+                value:
+                    type: string
+            description: ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
         api.backoffice.service.v1.ManualCreditRequest:
             type: object
             properties:
@@ -23993,6 +24030,25 @@ components:
                     type: string
                 transferableBonus:
                     type: string
+                totalOriginalOperatorBonus:
+                    type: string
+                totalOriginalProviderBonus:
+                    type: string
+                totalCashWithdrawLimit:
+                    type: string
+                totalOperatorBonusWithdrawLimit:
+                    type: string
+                totalProviderBonusWithdrawLimit:
+                    type: string
+                totalCashWithdrawn:
+                    type: string
+                totalOperatorBonusTransferred:
+                    type: string
+                totalFreeSpinCount:
+                    type: integer
+                    format: int32
+                totalFreeBetAmount:
+                    type: string
         api.wallet.service.v1.InvitationCondition:
             type: object
             properties:
@@ -24313,6 +24369,14 @@ components:
                 totalCount:
                     type: integer
                     format: int32
+        api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse:
+            type: object
+            properties:
+                creditId:
+                    type: string
+                newValue:
+                    type: string
+                    description: Updated value
         api.wallet.service.v1.OperatorBalance:
             type: object
             properties:

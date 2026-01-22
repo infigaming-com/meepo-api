@@ -48,6 +48,7 @@ const OperationBackofficeWalletListUniversalCodeUsages = "/api.backoffice.servic
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
 const OperationBackofficeWalletListWalletCurrencies = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
 const OperationBackofficeWalletListWalletResponsibleGamblingConfigs = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
+const OperationBackofficeWalletManualAdjustCreditTurnoverField = "/api.backoffice.service.v1.BackofficeWallet/ManualAdjustCreditTurnoverField"
 const OperationBackofficeWalletManualCredit = "/api.backoffice.service.v1.BackofficeWallet/ManualCredit"
 const OperationBackofficeWalletManualDebit = "/api.backoffice.service.v1.BackofficeWallet/ManualDebit"
 const OperationBackofficeWalletOperatorBalanceFreeze = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
@@ -117,6 +118,8 @@ type BackofficeWalletHTTPServer interface {
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
 	// ListWalletResponsibleGamblingConfigs ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
+	// ManualAdjustCreditTurnoverField ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 	// ManualCredit ManualCredit
 	ManualCredit(context.Context, *ManualCreditRequest) (*v1.CreditResponse, error)
 	// ManualDebit ManualDebit
@@ -195,6 +198,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/manual/debit", _BackofficeWallet_ManualDebit0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/list", _BackofficeWallet_ListManualJournalEntries0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/export", _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/credit/manual_adjust", _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -1165,6 +1169,28 @@ func _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv BackofficeWa
 	}
 }
 
+func _BackofficeWallet_ManualAdjustCreditTurnoverField0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ManualAdjustCreditTurnoverFieldRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletManualAdjustCreditTurnoverField)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ManualAdjustCreditTurnoverField(ctx, req.(*ManualAdjustCreditTurnoverFieldRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ManualAdjustCreditTurnoverFieldResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
 	// CreatePromoCodeCampaign CreatePromoCodeCampaign creates a new promo code campaign
@@ -1217,6 +1243,8 @@ type BackofficeWalletHTTPClient interface {
 	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *v1.ListCurrenciesResponse, err error)
 	// ListWalletResponsibleGamblingConfigs ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(ctx context.Context, req *ListWalletResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *v1.ListResponsibleGamblingConfigsResponse, err error)
+	// ManualAdjustCreditTurnoverField ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	ManualAdjustCreditTurnoverField(ctx context.Context, req *ManualAdjustCreditTurnoverFieldRequest, opts ...http.CallOption) (rsp *v1.ManualAdjustCreditTurnoverFieldResponse, err error)
 	// ManualCredit ManualCredit
 	ManualCredit(ctx context.Context, req *ManualCreditRequest, opts ...http.CallOption) (rsp *v1.CreditResponse, err error)
 	// ManualDebit ManualDebit
@@ -1636,6 +1664,20 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletResponsibleGamblingConfigs(ct
 	pattern := "/v1/backoffice/wallet/responsible-gambling/configs/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListWalletResponsibleGamblingConfigs))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ManualAdjustCreditTurnoverField ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+func (c *BackofficeWalletHTTPClientImpl) ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...http.CallOption) (*v1.ManualAdjustCreditTurnoverFieldResponse, error) {
+	var out v1.ManualAdjustCreditTurnoverFieldResponse
+	pattern := "/v1/backoffice/wallet/credit/manual_adjust"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletManualAdjustCreditTurnoverField))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

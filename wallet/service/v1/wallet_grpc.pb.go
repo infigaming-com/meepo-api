@@ -96,6 +96,7 @@ const (
 	Wallet_GetOperatorUserFinancialSummary_FullMethodName     = "/api.wallet.service.v1.Wallet/GetOperatorUserFinancialSummary"
 	Wallet_GetWalletConfig_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetWalletConfig"
 	Wallet_BatchGetUserFinancialMetrics_FullMethodName        = "/api.wallet.service.v1.Wallet/BatchGetUserFinancialMetrics"
+	Wallet_ManualAdjustCreditTurnoverField_FullMethodName     = "/api.wallet.service.v1.Wallet/ManualAdjustCreditTurnoverField"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -237,6 +238,8 @@ type WalletClient interface {
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error)
+	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*ManualAdjustCreditTurnoverFieldResponse, error)
 }
 
 type walletClient struct {
@@ -1017,6 +1020,16 @@ func (c *walletClient) BatchGetUserFinancialMetrics(ctx context.Context, in *Bat
 	return out, nil
 }
 
+func (c *walletClient) ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*ManualAdjustCreditTurnoverFieldResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ManualAdjustCreditTurnoverFieldResponse)
+	err := c.cc.Invoke(ctx, Wallet_ManualAdjustCreditTurnoverField_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -1156,6 +1169,8 @@ type WalletServer interface {
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error)
+	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*ManualAdjustCreditTurnoverFieldResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1396,6 +1411,9 @@ func (UnimplementedWalletServer) GetWalletConfig(context.Context, *GetWalletConf
 }
 func (UnimplementedWalletServer) BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BatchGetUserFinancialMetrics not implemented")
+}
+func (UnimplementedWalletServer) ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*ManualAdjustCreditTurnoverFieldResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ManualAdjustCreditTurnoverField not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2804,6 +2822,24 @@ func _Wallet_BatchGetUserFinancialMetrics_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ManualAdjustCreditTurnoverField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManualAdjustCreditTurnoverFieldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ManualAdjustCreditTurnoverField(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ManualAdjustCreditTurnoverField_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ManualAdjustCreditTurnoverField(ctx, req.(*ManualAdjustCreditTurnoverFieldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3118,6 +3154,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchGetUserFinancialMetrics",
 			Handler:    _Wallet_BatchGetUserFinancialMetrics_Handler,
+		},
+		{
+			MethodName: "ManualAdjustCreditTurnoverField",
+			Handler:    _Wallet_ManualAdjustCreditTurnoverField_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

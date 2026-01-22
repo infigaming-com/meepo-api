@@ -22109,7 +22109,7 @@ func (m *BatchGetUserFinancialMetricsResponse) validate(all bool) error {
 	var errors []error
 
 	{
-		sorted_keys := make([]int64, len(m.GetUserMetrics()))
+		sorted_keys := make([]string, len(m.GetUserMetrics()))
 		i := 0
 		for key := range m.GetUserMetrics() {
 			sorted_keys[i] = key
@@ -22235,6 +22235,265 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BatchGetUserFinancialMetricsResponseValidationError{}
+
+// Validate checks the field values on ManualAdjustCreditTurnoverFieldRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ManualAdjustCreditTurnoverFieldRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ManualAdjustCreditTurnoverFieldRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ManualAdjustCreditTurnoverFieldRequestMultiError, or nil if none found.
+func (m *ManualAdjustCreditTurnoverFieldRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ManualAdjustCreditTurnoverFieldRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TargetUserId
+
+	// no validation rules for Currency
+
+	// no validation rules for CreditId
+
+	// no validation rules for TransactionType
+
+	// no validation rules for Direction
+
+	// no validation rules for Value
+
+	// no validation rules for InitiatorUserId
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ManualAdjustCreditTurnoverFieldRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ManualAdjustCreditTurnoverFieldRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ManualAdjustCreditTurnoverFieldRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ManualAdjustCreditTurnoverFieldRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ManualAdjustCreditTurnoverFieldRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ManualAdjustCreditTurnoverFieldRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ManualAdjustCreditTurnoverFieldRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ManualAdjustCreditTurnoverFieldRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ManualAdjustCreditTurnoverFieldRequestMultiError) AllErrors() []error { return m }
+
+// ManualAdjustCreditTurnoverFieldRequestValidationError is the validation
+// error returned by ManualAdjustCreditTurnoverFieldRequest.Validate if the
+// designated constraints aren't met.
+type ManualAdjustCreditTurnoverFieldRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) ErrorName() string {
+	return "ManualAdjustCreditTurnoverFieldRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sManualAdjustCreditTurnoverFieldRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ManualAdjustCreditTurnoverFieldRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ManualAdjustCreditTurnoverFieldRequestValidationError{}
+
+// Validate checks the field values on ManualAdjustCreditTurnoverFieldResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ManualAdjustCreditTurnoverFieldResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ManualAdjustCreditTurnoverFieldResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ManualAdjustCreditTurnoverFieldResponseMultiError, or nil if none found.
+func (m *ManualAdjustCreditTurnoverFieldResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ManualAdjustCreditTurnoverFieldResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CreditId
+
+	// no validation rules for NewValue
+
+	if len(errors) > 0 {
+		return ManualAdjustCreditTurnoverFieldResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ManualAdjustCreditTurnoverFieldResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ManualAdjustCreditTurnoverFieldResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ManualAdjustCreditTurnoverFieldResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ManualAdjustCreditTurnoverFieldResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ManualAdjustCreditTurnoverFieldResponseMultiError) AllErrors() []error { return m }
+
+// ManualAdjustCreditTurnoverFieldResponseValidationError is the validation
+// error returned by ManualAdjustCreditTurnoverFieldResponse.Validate if the
+// designated constraints aren't met.
+type ManualAdjustCreditTurnoverFieldResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) ErrorName() string {
+	return "ManualAdjustCreditTurnoverFieldResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sManualAdjustCreditTurnoverFieldResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ManualAdjustCreditTurnoverFieldResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ManualAdjustCreditTurnoverFieldResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
@@ -22800,6 +23059,24 @@ func (m *GetWalletsResponse_Wallet) validate(all bool) error {
 	// no validation rules for WithdrawableCash
 
 	// no validation rules for TransferableBonus
+
+	// no validation rules for TotalOriginalOperatorBonus
+
+	// no validation rules for TotalOriginalProviderBonus
+
+	// no validation rules for TotalCashWithdrawLimit
+
+	// no validation rules for TotalOperatorBonusWithdrawLimit
+
+	// no validation rules for TotalProviderBonusWithdrawLimit
+
+	// no validation rules for TotalCashWithdrawn
+
+	// no validation rules for TotalOperatorBonusTransferred
+
+	// no validation rules for TotalFreeSpinCount
+
+	// no validation rules for TotalFreeBetAmount
 
 	if len(errors) > 0 {
 		return GetWalletsResponse_WalletMultiError(errors)

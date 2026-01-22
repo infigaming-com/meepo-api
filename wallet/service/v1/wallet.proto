@@ -285,6 +285,9 @@ service Wallet {
 	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
 	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	rpc BatchGetUserFinancialMetrics(BatchGetUserFinancialMetricsRequest) returns (BatchGetUserFinancialMetricsResponse) {}
+
+	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	rpc ManualAdjustCreditTurnoverField(ManualAdjustCreditTurnoverFieldRequest) returns (ManualAdjustCreditTurnoverFieldResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -597,6 +600,15 @@ message GetWalletsResponse {
 		string bonus_turnover_threshold = 13;
 		string withdrawable_cash = 14;
 		string transferable_bonus = 15;
+		string total_original_operator_bonus = 16;
+		string total_original_provider_bonus = 17;
+		string total_cash_withdraw_limit = 18;
+		string total_operator_bonus_withdraw_limit = 19;
+		string total_provider_bonus_withdraw_limit = 20;
+		string total_cash_withdrawn = 21;
+		string total_operator_bonus_transferred = 22;
+		int32 total_free_spin_count = 23;
+		string total_free_bet_amount = 24;
 	}
 	TotalAssets total_assets = 1;
 	repeated Wallet wallets = 2;
@@ -1916,5 +1928,25 @@ message BatchGetUserFinancialMetricsResponse {
 		int32 withdrawal_count = 4;
 		string currency = 5;  // "USD" if aggregated, otherwise the requested currency
 	}
-	map<int64, UserMetrics> user_metrics = 1;  // user_id -> metrics
+	map<string, UserMetrics> user_metrics = 1;  // user_id -> metrics
+}
+
+message ManualAdjustCreditTurnoverFieldRequest {
+	int64 target_user_id = 1;
+	string currency = 2;
+	int64 credit_id = 3; // The credit to adjust
+	// transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"
+	string transaction_type = 4;
+	// direction: "add", "subtract"
+	string direction = 5;
+	string value = 6; // Adjustment value (positive number)
+	// Initiator info
+	int64 initiator_user_id = 7;
+	api.common.OperatorContext initiator_operator_context = 8;
+}
+
+message ManualAdjustCreditTurnoverFieldResponse {
+	int64 credit_id = 1;
+	// Updated value
+	string new_value = 2;
 }
