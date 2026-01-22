@@ -11607,8 +11607,8 @@ func (x *BatchGetUserFinancialMetricsRequest) GetCurrency() string {
 }
 
 type BatchGetUserFinancialMetricsResponse struct {
-	state         protoimpl.MessageState                                      `protogen:"open.v1"`
-	UserMetrics   map[int64]*BatchGetUserFinancialMetricsResponse_UserMetrics `protobuf:"bytes,1,rep,name=user_metrics,json=userMetrics,proto3" json:"user_metrics,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // user_id -> metrics
+	state         protoimpl.MessageState                                       `protogen:"open.v1"`
+	UserMetrics   map[string]*BatchGetUserFinancialMetricsResponse_UserMetrics `protobuf:"bytes,1,rep,name=user_metrics,json=userMetrics,proto3" json:"user_metrics,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // user_id -> metrics
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11643,7 +11643,7 @@ func (*BatchGetUserFinancialMetricsResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{147}
 }
 
-func (x *BatchGetUserFinancialMetricsResponse) GetUserMetrics() map[int64]*BatchGetUserFinancialMetricsResponse_UserMetrics {
+func (x *BatchGetUserFinancialMetricsResponse) GetUserMetrics() map[string]*BatchGetUserFinancialMetricsResponse_UserMetrics {
 	if x != nil {
 		return x.UserMetrics
 	}
@@ -16523,7 +16523,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10withdrawal_count\x18\x04 \x01(\x05R\x0fwithdrawalCount\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x1a\x87\x01\n" +
 	"\x10UserMetricsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x03R\x03key\x12]\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12]\n" +
 	"\x05value\x18\x02 \x01(\v2G.api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsR\x05value:\x028\x01\"\xed\x02\n" +
 	"&ManualAdjustCreditTurnoverFieldRequest\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12\x1a\n" +

@@ -22109,7 +22109,7 @@ func (m *BatchGetUserFinancialMetricsResponse) validate(all bool) error {
 	var errors []error
 
 	{
-		sorted_keys := make([]int64, len(m.GetUserMetrics()))
+		sorted_keys := make([]string, len(m.GetUserMetrics()))
 		i := 0
 		for key := range m.GetUserMetrics() {
 			sorted_keys[i] = key

@@ -1928,7 +1928,7 @@ message BatchGetUserFinancialMetricsResponse {
 		int32 withdrawal_count = 4;
 		string currency = 5;  // "USD" if aggregated, otherwise the requested currency
 	}
-	map<int64, UserMetrics> user_metrics = 1;  // user_id -> metrics
+	map<string, UserMetrics> user_metrics = 1;  // user_id -> metrics
 }
 
 message ManualAdjustCreditTurnoverFieldRequest {
