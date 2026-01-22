@@ -21999,6 +21999,10 @@ func (m *BatchGetUserFinancialMetricsRequest) validate(all bool) error {
 		}
 	}
 
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
 	if len(errors) > 0 {
 		return BatchGetUserFinancialMetricsRequestMultiError(errors)
 	}
@@ -25971,230 +25975,54 @@ var _ interface {
 } = ListUserOverviewResponse_UserOverviewValidationError{}
 
 // Validate checks the field values on
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *BatchGetUserFinancialMetricsResponse_UserFinancialMetrics) Validate() error {
+// BatchGetUserFinancialMetricsResponse_UserMetrics with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BatchGetUserFinancialMetricsResponse_UserMetrics) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetricsMultiError, or nil
-// if none found.
-func (m *BatchGetUserFinancialMetricsResponse_UserFinancialMetrics) ValidateAll() error {
+// BatchGetUserFinancialMetricsResponse_UserMetrics with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// BatchGetUserFinancialMetricsResponse_UserMetricsMultiError, or nil if none found.
+func (m *BatchGetUserFinancialMetricsResponse_UserMetrics) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *BatchGetUserFinancialMetricsResponse_UserFinancialMetrics) validate(all bool) error {
+func (m *BatchGetUserFinancialMetricsResponse_UserMetrics) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
-
-	// no validation rules for UserId
-
-	for idx, item := range m.GetCurrencyMetrics() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError{
-						field:  fmt.Sprintf("CurrencyMetrics[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError{
-						field:  fmt.Sprintf("CurrencyMetrics[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError{
-					field:  fmt.Sprintf("CurrencyMetrics[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for TotalDepositUsd
-
-	// no validation rules for TotalWithdrawUsd
-
-	// no validation rules for TotalDepositCount
-
-	// no validation rules for TotalWithdrawCount
-
-	// no validation rules for TotalDepositReportingCurrency
-
-	// no validation rules for TotalWithdrawReportingCurrency
-
-	if len(errors) > 0 {
-		return BatchGetUserFinancialMetricsResponse_UserFinancialMetricsMultiError(errors)
-	}
-
-	return nil
-}
-
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetricsMultiError is an
-// error wrapping multiple validation errors returned by
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics.ValidateAll() if
-// the designated constraints aren't met.
-type BatchGetUserFinancialMetricsResponse_UserFinancialMetricsMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m BatchGetUserFinancialMetricsResponse_UserFinancialMetricsMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m BatchGetUserFinancialMetricsResponse_UserFinancialMetricsMultiError) AllErrors() []error {
-	return m
-}
-
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError is
-// the validation error returned by
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics.Validate if the
-// designated constraints aren't met.
-type BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError) ErrorName() string {
-	return "BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sBatchGetUserFinancialMetricsResponse_UserFinancialMetrics.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = BatchGetUserFinancialMetricsResponse_UserFinancialMetricsValidationError{}
-
-// Validate checks the field values on
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsMultiError,
-// or nil if none found.
-func (m *BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
 
-	// no validation rules for WithdrawAmount
-
 	// no validation rules for DepositCount
 
-	// no validation rules for WithdrawCount
+	// no validation rules for WithdrawalAmount
 
-	// no validation rules for DepositAmountUsd
+	// no validation rules for WithdrawalCount
 
-	// no validation rules for WithdrawAmountUsd
-
-	// no validation rules for DepositAmountReportingCurrency
-
-	// no validation rules for WithdrawAmountReportingCurrency
+	// no validation rules for Currency
 
 	if len(errors) > 0 {
-		return BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsMultiError(errors)
+		return BatchGetUserFinancialMetricsResponse_UserMetricsMultiError(errors)
 	}
 
 	return nil
 }
 
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsMultiError
-// is an error wrapping multiple validation errors returned by
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics.ValidateAll()
-// if the designated constraints aren't met.
-type BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsMultiError []error
+// BatchGetUserFinancialMetricsResponse_UserMetricsMultiError is an error
+// wrapping multiple validation errors returned by
+// BatchGetUserFinancialMetricsResponse_UserMetrics.ValidateAll() if the
+// designated constraints aren't met.
+type BatchGetUserFinancialMetricsResponse_UserMetricsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsMultiError) Error() string {
+func (m BatchGetUserFinancialMetricsResponse_UserMetricsMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -26203,15 +26031,13 @@ func (m BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinanc
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsMultiError) AllErrors() []error {
-	return m
-}
+func (m BatchGetUserFinancialMetricsResponse_UserMetricsMultiError) AllErrors() []error { return m }
 
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError
-// is the validation error returned by
-// BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics.Validate
-// if the designated constraints aren't met.
-type BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError struct {
+// BatchGetUserFinancialMetricsResponse_UserMetricsValidationError is the
+// validation error returned by
+// BatchGetUserFinancialMetricsResponse_UserMetrics.Validate if the designated
+// constraints aren't met.
+type BatchGetUserFinancialMetricsResponse_UserMetricsValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -26219,32 +26045,30 @@ type BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancial
 }
 
 // Field function returns field value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError) Field() string {
+func (e BatchGetUserFinancialMetricsResponse_UserMetricsValidationError) Field() string {
 	return e.field
 }
 
 // Reason function returns reason value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError) Reason() string {
+func (e BatchGetUserFinancialMetricsResponse_UserMetricsValidationError) Reason() string {
 	return e.reason
 }
 
 // Cause function returns cause value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError) Cause() error {
+func (e BatchGetUserFinancialMetricsResponse_UserMetricsValidationError) Cause() error {
 	return e.cause
 }
 
 // Key function returns key value.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError) Key() bool {
-	return e.key
-}
+func (e BatchGetUserFinancialMetricsResponse_UserMetricsValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError) ErrorName() string {
-	return "BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError"
+func (e BatchGetUserFinancialMetricsResponse_UserMetricsValidationError) ErrorName() string {
+	return "BatchGetUserFinancialMetricsResponse_UserMetricsValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError) Error() string {
+func (e BatchGetUserFinancialMetricsResponse_UserMetricsValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -26256,14 +26080,14 @@ func (e BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinanc
 	}
 
 	return fmt.Sprintf(
-		"invalid %sBatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetrics.%s: %s%s",
+		"invalid %sBatchGetUserFinancialMetricsResponse_UserMetrics.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError{}
+var _ error = BatchGetUserFinancialMetricsResponse_UserMetricsValidationError{}
 
 var _ interface {
 	Field() string
@@ -26271,4 +26095,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = BatchGetUserFinancialMetricsResponse_UserFinancialMetrics_CurrencyFinancialMetricsValidationError{}
+} = BatchGetUserFinancialMetricsResponse_UserMetricsValidationError{}

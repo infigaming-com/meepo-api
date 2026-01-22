@@ -1938,3 +1938,77 @@ func IsDeleteUserCredentialFailed(err error) bool {
 func ErrorDeleteUserCredentialFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_DELETE_USER_CREDENTIAL_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// OAuth Callback Flow Errors (for Twitter/Apple redirect flow)
+func IsInvalidRedirectUri(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_REDIRECT_URI.String() && e.Code == 400
+}
+
+// OAuth Callback Flow Errors (for Twitter/Apple redirect flow)
+func ErrorInvalidRedirectUri(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_INVALID_REDIRECT_URI.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthStateExpired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_STATE_EXPIRED.String() && e.Code == 400
+}
+
+func ErrorOauthStateExpired(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_OAUTH_STATE_EXPIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthStateInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_STATE_INVALID.String() && e.Code == 400
+}
+
+func ErrorOauthStateInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_OAUTH_STATE_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthStateAlreadyUsed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_STATE_ALREADY_USED.String() && e.Code == 400
+}
+
+func ErrorOauthStateAlreadyUsed(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_OAUTH_STATE_ALREADY_USED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthCodeExchangeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_CODE_EXCHANGE_FAILED.String() && e.Code == 500
+}
+
+func ErrorOauthCodeExchangeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OAUTH_CODE_EXCHANGE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOauthStateCreateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OAUTH_STATE_CREATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorOauthStateCreateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OAUTH_STATE_CREATE_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -1620,6 +1620,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.crm.service.v1.ListSegmentsResponse'
+    /v1/backoffice/crm/segment/missing-fields:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_GetSegmentsWithMissingFields
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetSegmentsWithMissingFieldsResponse'
     /v1/backoffice/crm/segment/override/get:
         post:
             tags:
@@ -1657,6 +1675,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.crm.service.v1.SetSegmentOverrideResponse'
+    /v1/backoffice/crm/segment/repair:
+        post:
+            tags:
+                - BackofficeCrm
+            description: Segment repair operations
+            operationId: BackofficeCrm_RepairSegment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RepairSegmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.RepairSegmentResponse'
+    /v1/backoffice/crm/segment/repair-all:
+        post:
+            tags:
+                - BackofficeCrm
+            operationId: BackofficeCrm_RepairAllSegments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RepairAllSegmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.RepairAllSegmentsResponse'
     /v1/backoffice/crm/segment/schema:
         post:
             tags:
@@ -3320,6 +3375,177 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/notification/channel/create:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Create a new notification channel
+            operationId: BackofficeNotification_CreateNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.CreateNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateNotificationChannelResponse'
+    /v1/backoffice/notification/channel/delete:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Delete a notification channel
+            operationId: BackofficeNotification_DeleteNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteNotificationChannelResponse'
+    /v1/backoffice/notification/channel/get:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Get a specific notification channel
+            operationId: BackofficeNotification_GetNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetNotificationChannelResponse'
+    /v1/backoffice/notification/channel/list:
+        post:
+            tags:
+                - BackofficeNotification
+            description: List notification channels with pagination
+            operationId: BackofficeNotification_ListNotificationChannels
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListNotificationChannelsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListNotificationChannelsResponse'
+    /v1/backoffice/notification/channel/test:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Test a notification channel by sending a test message
+            operationId: BackofficeNotification_TestNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.TestNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.TestNotificationChannelResponse'
+    /v1/backoffice/notification/channel/update:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Update a notification channel
+            operationId: BackofficeNotification_UpdateNotificationChannel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationChannelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateNotificationChannelResponse'
+    /v1/backoffice/notification/message-types:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Get supported message types for frontend dropdown
+            operationId: BackofficeNotification_GetSupportedMessageTypes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetSupportedMessageTypesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetSupportedMessageTypesResponse'
+    /v1/backoffice/notification/rule/list:
+        post:
+            tags:
+                - BackofficeNotification
+            description: List notification rules with pagination
+            operationId: BackofficeNotification_ListNotificationRules
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListNotificationRulesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListNotificationRulesResponse'
+    /v1/backoffice/notification/rule/save:
+        post:
+            tags:
+                - BackofficeNotification
+            description: Save all rules for a channel (batch create/update/delete)
+            operationId: BackofficeNotification_SaveChannelRules
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.SaveChannelRulesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.SaveChannelRulesResponse'
     /v1/backoffice/oauth/provider/create:
         post:
             tags:
@@ -7168,6 +7394,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/oauth/initiate:
+        post:
+            tags:
+                - User
+            description: |-
+                ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+                 Initiate OAuth login flow - returns authorization URL for redirect
+            operationId: User_InitiateOAuthLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthLoginResponse'
     /v1/user/auth/password/reset:
         post:
             tags:
@@ -7394,6 +7641,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.BindOAuthAccountResponse'
+    /v1/user/oauth/bind/initiate:
+        post:
+            tags:
+                - User
+            description: Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+            operationId: User_InitiateOAuthBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthBindingResponse'
     /v1/user/oauth/providers:
         get:
             tags:
@@ -12227,6 +12493,12 @@ components:
                 onlyCurrentMembers:
                     type: boolean
             description: GetSegmentUsers
+        api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetSegmentsWithMissingFields
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
@@ -16768,6 +17040,24 @@ components:
             properties:
                 token:
                     type: string
+        api.backoffice.service.v1.RepairAllSegmentsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                triggerCalculation:
+                    type: boolean
+            description: RepairAllSegments
+        api.backoffice.service.v1.RepairSegmentRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                triggerCalculation:
+                    type: boolean
+            description: RepairSegment
         api.backoffice.service.v1.ResetPasswordRequest:
             type: object
             properties:
@@ -18041,6 +18331,8 @@ components:
                         type: string
                 valueSchema:
                     type: object
+                supportsCurrency:
+                    type: boolean
             description: Field schema for frontend query builder
         api.crm.service.v1.GetSegmentFieldSchemaResponse:
             type: object
@@ -18076,6 +18368,13 @@ components:
                     format: int32
                 total:
                     type: string
+        api.crm.service.v1.GetSegmentsWithMissingFieldsResponse:
+            type: object
+            properties:
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Segment'
         api.crm.service.v1.GetUserSegmentsResponse:
             type: object
             properties:
@@ -18097,6 +18396,32 @@ components:
                     type: integer
                     format: int32
                 total:
+                    type: string
+        api.crm.service.v1.RepairAllSegmentsResponse:
+            type: object
+            properties:
+                repairedCount:
+                    type: string
+                segments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.RepairSegmentResponse'
+        api.crm.service.v1.RepairSegmentResponse:
+            type: object
+            properties:
+                segmentId:
+                    type: string
+                fields:
+                    type: array
+                    items:
+                        type: string
+                calculated:
+                    type: boolean
+                usersMatched:
+                    type: string
+                usersAdded:
+                    type: string
+                usersRemoved:
                     type: string
         api.crm.service.v1.Segment:
             type: object
@@ -19673,6 +19998,77 @@ components:
                     type: boolean
                 maskingRule:
                     type: string
+        api.push.service.v1.ChannelConfig:
+            type: object
+            properties:
+                telegram:
+                    $ref: '#/components/schemas/api.push.service.v1.TelegramChannelConfig'
+                slack:
+                    $ref: '#/components/schemas/api.push.service.v1.SlackChannelConfig'
+        api.push.service.v1.CreateNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                name:
+                    type: string
+                channelType:
+                    enum:
+                        - CHANNEL_TYPE_UNSPECIFIED
+                        - CHANNEL_TYPE_TELEGRAM
+                        - CHANNEL_TYPE_SLACK
+                    type: string
+                    format: enum
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                enabled:
+                    type: boolean
+        api.push.service.v1.CreateNotificationChannelResponse:
+            type: object
+            properties:
+                channel:
+                    $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+        api.push.service.v1.CurrencyCondition:
+            type: object
+            properties:
+                currency:
+                    type: string
+                minAmount:
+                    type: string
+                minOdds:
+                    type: string
+        api.push.service.v1.DeleteNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+        api.push.service.v1.DeleteNotificationChannelResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.GetNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+        api.push.service.v1.GetNotificationChannelResponse:
+            type: object
+            properties:
+                channel:
+                    $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+        api.push.service.v1.GetSupportedMessageTypesRequest:
+            type: object
+            properties: {}
+        api.push.service.v1.GetSupportedMessageTypesResponse:
+            type: object
+            properties:
+                messageTypes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.MessageTypeInfo'
         api.push.service.v1.ListBetTickerConfigResponse:
             type: object
             properties:
@@ -19691,7 +20087,265 @@ components:
                     $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
                 highWins:
                     $ref: '#/components/schemas/api.push.service.v1.BettingFilterConfig'
+        api.push.service.v1.ListNotificationChannelsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelType:
+                    enum:
+                        - CHANNEL_TYPE_UNSPECIFIED
+                        - CHANNEL_TYPE_TELEGRAM
+                        - CHANNEL_TYPE_SLACK
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                includeInherited:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListNotificationChannelsResponse:
+            type: object
+            properties:
+                channels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListNotificationRulesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                messageType:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                includeInherited:
+                    type: boolean
+                channelId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListNotificationRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.MessageTypeInfo:
+            type: object
+            properties:
+                value:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
+                    type: string
+                    format: enum
+                name:
+                    type: string
+                displayName:
+                    type: string
+            description: Message type info for frontend dropdown
+        api.push.service.v1.NotificationChannel:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                channelType:
+                    enum:
+                        - CHANNEL_TYPE_UNSPECIFIED
+                        - CHANNEL_TYPE_TELEGRAM
+                        - CHANNEL_TYPE_SLACK
+                    type: string
+                    format: enum
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                isInherited:
+                    type: boolean
+        api.push.service.v1.NotificationRule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                messageType:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
+                    type: string
+                    format: enum
+                ruleType:
+                    enum:
+                        - RULE_TYPE_UNSPECIFIED
+                        - RULE_TYPE_GENERIC
+                        - RULE_TYPE_CURRENCY_THRESHOLD
+                    type: string
+                    format: enum
+                channelId:
+                    type: string
+                currencyConditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                isInherited:
+                    type: boolean
+        api.push.service.v1.NotificationRuleInput:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                messageType:
+                    enum:
+                        - MESSAGE_TYPE_UNSPECIFIED
+                        - MESSAGE_TYPE_WITHDRAW_NOTIFICATION
+                        - MESSAGE_TYPE_DEPOSIT_NOTIFICATION
+                        - MESSAGE_TYPE_LARGE_DEPOSIT
+                        - MESSAGE_TYPE_LARGE_BET
+                        - MESSAGE_TYPE_LARGE_WIN
+                    type: string
+                    format: enum
+                ruleType:
+                    enum:
+                        - RULE_TYPE_UNSPECIFIED
+                        - RULE_TYPE_GENERIC
+                        - RULE_TYPE_CURRENCY_THRESHOLD
+                    type: string
+                    format: enum
+                currencyConditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                enabled:
+                    type: boolean
+            description: Input for creating/updating rules in batch
+        api.push.service.v1.SaveChannelRulesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationRuleInput'
+        api.push.service.v1.SaveChannelRulesResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+        api.push.service.v1.SlackChannelConfig:
+            type: object
+            properties:
+                webhookUrl:
+                    type: string
+                webhookUrlMasked:
+                    type: string
+        api.push.service.v1.TelegramChannelConfig:
+            type: object
+            properties:
+                botToken:
+                    type: string
+                botTokenMasked:
+                    type: string
+                chatId:
+                    type: string
+        api.push.service.v1.TestNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+                testMessage:
+                    type: string
+        api.push.service.v1.TestNotificationChannelResponse:
+            type: object
+            properties:
+                success:
+                    type: boolean
+                errorMessage:
+                    type: string
         api.push.service.v1.UpdateBetTickerConfigResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.UpdateNotificationChannelRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                channelId:
+                    type: string
+                name:
+                    type: string
+                config:
+                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                enabled:
+                    type: boolean
+        api.push.service.v1.UpdateNotificationChannelResponse:
             type: object
             properties: {}
         api.report.service.v1.GetDepositSummariesRequest:
@@ -20608,6 +21262,10 @@ components:
                     type: boolean
                 allowLinking:
                     type: boolean
+                clientId:
+                    type: string
+                supportsJsSdk:
+                    type: boolean
             description: AvailableOAuthProvider - provider info for frontend
         api.user.service.v1.BindOAuthAccountRequest:
             type: object
@@ -21145,6 +21803,56 @@ components:
         api.user.service.v1.GetUserVipLevelRequest:
             type: object
             properties: {}
+        api.user.service.v1.InitiateOAuthBindingRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                frontendRedirectUri:
+                    type: string
+                clientState:
+                    type: string
+            description: InitiateOAuthBindingRequest - initiate OAuth binding via redirect flow (requires authentication)
+        api.user.service.v1.InitiateOAuthBindingResponse:
+            type: object
+            properties:
+                authorizationUrl:
+                    type: string
+                state:
+                    type: string
+            description: InitiateOAuthBindingResponse - returns authorization URL for redirect
+        api.user.service.v1.InitiateOAuthLoginRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                frontendRedirectUri:
+                    type: string
+                clientState:
+                    type: string
+            description: InitiateOAuthLoginRequest - initiate OAuth login via redirect flow
+        api.user.service.v1.InitiateOAuthLoginResponse:
+            type: object
+            properties:
+                authorizationUrl:
+                    type: string
+                state:
+                    type: string
+            description: InitiateOAuthLoginResponse - returns authorization URL for redirect
         api.user.service.v1.ListBottomOperatorsResponse:
             type: object
             properties:
@@ -25377,6 +26085,10 @@ tags:
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
+    - name: BackofficeNotification
+      description: |-
+        BackofficeNotification service
+         Provides HTTP APIs for notification channel and rule management
     - name: BackofficeOAuth
       description: BackofficeOAuth service provides OAuth provider configuration management for operators
     - name: BackofficeOperator

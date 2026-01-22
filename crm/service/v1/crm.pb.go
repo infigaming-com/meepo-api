@@ -1641,14 +1641,15 @@ func (x *GetSegmentOverrideResponse) GetHasOverride() bool {
 
 // Field schema for frontend query builder
 type FieldSchema struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Field         string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	Label         string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
-	Type          FieldType              `protobuf:"varint,3,opt,name=type,proto3,enum=api.crm.service.v1.FieldType" json:"type,omitempty"`
-	Operators     []string               `protobuf:"bytes,4,rep,name=operators,proto3" json:"operators,omitempty"`
-	ValueSchema   *structpb.Struct       `protobuf:"bytes,5,opt,name=value_schema,json=valueSchema,proto3" json:"value_schema,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Field            string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	Label            string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	Type             FieldType              `protobuf:"varint,3,opt,name=type,proto3,enum=api.crm.service.v1.FieldType" json:"type,omitempty"`
+	Operators        []string               `protobuf:"bytes,4,rep,name=operators,proto3" json:"operators,omitempty"`
+	ValueSchema      *structpb.Struct       `protobuf:"bytes,5,opt,name=value_schema,json=valueSchema,proto3" json:"value_schema,omitempty"`
+	SupportsCurrency bool                   `protobuf:"varint,6,opt,name=supports_currency,json=supportsCurrency,proto3" json:"supports_currency,omitempty"` // Whether this field supports currency filtering
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *FieldSchema) Reset() {
@@ -1714,6 +1715,13 @@ func (x *FieldSchema) GetValueSchema() *structpb.Struct {
 		return x.ValueSchema
 	}
 	return nil
+}
+
+func (x *FieldSchema) GetSupportsCurrency() bool {
+	if x != nil {
+		return x.SupportsCurrency
+	}
+	return false
 }
 
 // GetSegmentFieldSchema
@@ -1801,6 +1809,345 @@ func (*GetSegmentFieldSchemaResponse) Descriptor() ([]byte, []int) {
 func (x *GetSegmentFieldSchemaResponse) GetFields() []*FieldSchema {
 	if x != nil {
 		return x.Fields
+	}
+	return nil
+}
+
+// RepairSegment - repairs a segment by ensuring field mappings exist and optionally triggering calculation
+type RepairSegmentRequest struct {
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	Id                 int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TriggerCalculation bool                    `protobuf:"varint,2,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *RepairSegmentRequest) Reset() {
+	*x = RepairSegmentRequest{}
+	mi := &file_crm_service_v1_crm_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepairSegmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepairSegmentRequest) ProtoMessage() {}
+
+func (x *RepairSegmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_crm_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepairSegmentRequest.ProtoReflect.Descriptor instead.
+func (*RepairSegmentRequest) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *RepairSegmentRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RepairSegmentRequest) GetTriggerCalculation() bool {
+	if x != nil {
+		return x.TriggerCalculation
+	}
+	return false
+}
+
+func (x *RepairSegmentRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type RepairSegmentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SegmentId     int64                  `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	Fields        []string               `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
+	Calculated    bool                   `protobuf:"varint,3,opt,name=calculated,proto3" json:"calculated,omitempty"`
+	UsersMatched  int64                  `protobuf:"varint,4,opt,name=users_matched,json=usersMatched,proto3" json:"users_matched,omitempty"`
+	UsersAdded    int64                  `protobuf:"varint,5,opt,name=users_added,json=usersAdded,proto3" json:"users_added,omitempty"`
+	UsersRemoved  int64                  `protobuf:"varint,6,opt,name=users_removed,json=usersRemoved,proto3" json:"users_removed,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RepairSegmentResponse) Reset() {
+	*x = RepairSegmentResponse{}
+	mi := &file_crm_service_v1_crm_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepairSegmentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepairSegmentResponse) ProtoMessage() {}
+
+func (x *RepairSegmentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_crm_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepairSegmentResponse.ProtoReflect.Descriptor instead.
+func (*RepairSegmentResponse) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *RepairSegmentResponse) GetSegmentId() int64 {
+	if x != nil {
+		return x.SegmentId
+	}
+	return 0
+}
+
+func (x *RepairSegmentResponse) GetFields() []string {
+	if x != nil {
+		return x.Fields
+	}
+	return nil
+}
+
+func (x *RepairSegmentResponse) GetCalculated() bool {
+	if x != nil {
+		return x.Calculated
+	}
+	return false
+}
+
+func (x *RepairSegmentResponse) GetUsersMatched() int64 {
+	if x != nil {
+		return x.UsersMatched
+	}
+	return 0
+}
+
+func (x *RepairSegmentResponse) GetUsersAdded() int64 {
+	if x != nil {
+		return x.UsersAdded
+	}
+	return 0
+}
+
+func (x *RepairSegmentResponse) GetUsersRemoved() int64 {
+	if x != nil {
+		return x.UsersRemoved
+	}
+	return 0
+}
+
+// RepairAllSegments - repairs all segments that are missing field mappings
+type RepairAllSegmentsRequest struct {
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	TriggerCalculation bool                    `protobuf:"varint,1,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *RepairAllSegmentsRequest) Reset() {
+	*x = RepairAllSegmentsRequest{}
+	mi := &file_crm_service_v1_crm_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepairAllSegmentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepairAllSegmentsRequest) ProtoMessage() {}
+
+func (x *RepairAllSegmentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_crm_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepairAllSegmentsRequest.ProtoReflect.Descriptor instead.
+func (*RepairAllSegmentsRequest) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *RepairAllSegmentsRequest) GetTriggerCalculation() bool {
+	if x != nil {
+		return x.TriggerCalculation
+	}
+	return false
+}
+
+func (x *RepairAllSegmentsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type RepairAllSegmentsResponse struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	RepairedCount int64                    `protobuf:"varint,1,opt,name=repaired_count,json=repairedCount,proto3" json:"repaired_count,omitempty"`
+	Segments      []*RepairSegmentResponse `protobuf:"bytes,2,rep,name=segments,proto3" json:"segments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RepairAllSegmentsResponse) Reset() {
+	*x = RepairAllSegmentsResponse{}
+	mi := &file_crm_service_v1_crm_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepairAllSegmentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepairAllSegmentsResponse) ProtoMessage() {}
+
+func (x *RepairAllSegmentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_crm_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepairAllSegmentsResponse.ProtoReflect.Descriptor instead.
+func (*RepairAllSegmentsResponse) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *RepairAllSegmentsResponse) GetRepairedCount() int64 {
+	if x != nil {
+		return x.RepairedCount
+	}
+	return 0
+}
+
+func (x *RepairAllSegmentsResponse) GetSegments() []*RepairSegmentResponse {
+	if x != nil {
+		return x.Segments
+	}
+	return nil
+}
+
+// GetSegmentsWithMissingFields - returns segments that have no entries in crm_segment_fields
+type GetSegmentsWithMissingFieldsRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetSegmentsWithMissingFieldsRequest) Reset() {
+	*x = GetSegmentsWithMissingFieldsRequest{}
+	mi := &file_crm_service_v1_crm_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSegmentsWithMissingFieldsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSegmentsWithMissingFieldsRequest) ProtoMessage() {}
+
+func (x *GetSegmentsWithMissingFieldsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_crm_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSegmentsWithMissingFieldsRequest.ProtoReflect.Descriptor instead.
+func (*GetSegmentsWithMissingFieldsRequest) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetSegmentsWithMissingFieldsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetSegmentsWithMissingFieldsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Segments      []*Segment             `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSegmentsWithMissingFieldsResponse) Reset() {
+	*x = GetSegmentsWithMissingFieldsResponse{}
+	mi := &file_crm_service_v1_crm_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSegmentsWithMissingFieldsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSegmentsWithMissingFieldsResponse) ProtoMessage() {}
+
+func (x *GetSegmentsWithMissingFieldsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_crm_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSegmentsWithMissingFieldsResponse.ProtoReflect.Descriptor instead.
+func (*GetSegmentsWithMissingFieldsResponse) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *GetSegmentsWithMissingFieldsResponse) GetSegments() []*Segment {
+	if x != nil {
+		return x.Segments
 	}
 	return nil
 }
@@ -1933,17 +2280,43 @@ const file_crm_service_v1_crm_proto_rawDesc = "" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"[\n" +
 	"\x1aGetSegmentOverrideResponse\x12\x1a\n" +
 	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12!\n" +
-	"\fhas_override\x18\x02 \x01(\bR\vhasOverride\"\xc6\x01\n" +
+	"\fhas_override\x18\x02 \x01(\bR\vhasOverride\"\xf3\x01\n" +
 	"\vFieldSchema\x12\x14\n" +
 	"\x05field\x18\x01 \x01(\tR\x05field\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x121\n" +
 	"\x04type\x18\x03 \x01(\x0e2\x1d.api.crm.service.v1.FieldTypeR\x04type\x12\x1c\n" +
 	"\toperators\x18\x04 \x03(\tR\toperators\x12:\n" +
-	"\fvalue_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\vvalueSchema\"S\n" +
+	"\fvalue_schema\x18\x05 \x01(\v2\x17.google.protobuf.StructR\vvalueSchema\x12+\n" +
+	"\x11supports_currency\x18\x06 \x01(\bR\x10supportsCurrency\"S\n" +
 	"\x1cGetSegmentFieldSchemaRequest\x123\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1f.api.crm.service.v1.SegmentTypeR\x04type\"X\n" +
 	"\x1dGetSegmentFieldSchemaResponse\x127\n" +
-	"\x06fields\x18\x01 \x03(\v2\x1f.api.crm.service.v1.FieldSchemaR\x06fields*\x96\x01\n" +
+	"\x06fields\x18\x01 \x03(\v2\x1f.api.crm.service.v1.FieldSchemaR\x06fields\"\x9f\x01\n" +
+	"\x14RepairSegmentRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12/\n" +
+	"\x13trigger_calculation\x18\x02 \x01(\bR\x12triggerCalculation\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd9\x01\n" +
+	"\x15RepairSegmentResponse\x12\x1d\n" +
+	"\n" +
+	"segment_id\x18\x01 \x01(\x03R\tsegmentId\x12\x16\n" +
+	"\x06fields\x18\x02 \x03(\tR\x06fields\x12\x1e\n" +
+	"\n" +
+	"calculated\x18\x03 \x01(\bR\n" +
+	"calculated\x12#\n" +
+	"\rusers_matched\x18\x04 \x01(\x03R\fusersMatched\x12\x1f\n" +
+	"\vusers_added\x18\x05 \x01(\x03R\n" +
+	"usersAdded\x12#\n" +
+	"\rusers_removed\x18\x06 \x01(\x03R\fusersRemoved\"\x93\x01\n" +
+	"\x18RepairAllSegmentsRequest\x12/\n" +
+	"\x13trigger_calculation\x18\x01 \x01(\bR\x12triggerCalculation\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x89\x01\n" +
+	"\x19RepairAllSegmentsResponse\x12%\n" +
+	"\x0erepaired_count\x18\x01 \x01(\x03R\rrepairedCount\x12E\n" +
+	"\bsegments\x18\x02 \x03(\v2).api.crm.service.v1.RepairSegmentResponseR\bsegments\"m\n" +
+	"#GetSegmentsWithMissingFieldsRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"_\n" +
+	"$GetSegmentsWithMissingFieldsResponse\x127\n" +
+	"\bsegments\x18\x01 \x03(\v2\x1b.api.crm.service.v1.SegmentR\bsegments*\x96\x01\n" +
 	"\vSegmentType\x12\x1c\n" +
 	"\x18SEGMENT_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17SEGMENT_TYPE_USER_STATE\x10\x01\x12\x1b\n" +
@@ -1962,7 +2335,7 @@ const file_crm_service_v1_crm_proto_rawDesc = "" +
 	"\x12FIELD_TYPE_BOOLEAN\x10\x01\x12\x16\n" +
 	"\x12FIELD_TYPE_NUMERIC\x10\x02\x12\x13\n" +
 	"\x0fFIELD_TYPE_DATE\x10\x03\x12\x15\n" +
-	"\x11FIELD_TYPE_STRING\x10\x042\xa6\t\n" +
+	"\x11FIELD_TYPE_STRING\x10\x042\x92\f\n" +
 	"\x03CRM\x12d\n" +
 	"\rCreateSegment\x12(.api.crm.service.v1.CreateSegmentRequest\x1a).api.crm.service.v1.CreateSegmentResponse\x12d\n" +
 	"\rUpdateSegment\x12(.api.crm.service.v1.UpdateSegmentRequest\x1a).api.crm.service.v1.UpdateSegmentResponse\x12[\n" +
@@ -1975,7 +2348,10 @@ const file_crm_service_v1_crm_proto_rawDesc = "" +
 	"\x0fGetUserSegments\x12*.api.crm.service.v1.GetUserSegmentsRequest\x1a+.api.crm.service.v1.GetUserSegmentsResponse\x12s\n" +
 	"\x12SetSegmentOverride\x12-.api.crm.service.v1.SetSegmentOverrideRequest\x1a..api.crm.service.v1.SetSegmentOverrideResponse\x12s\n" +
 	"\x12GetSegmentOverride\x12-.api.crm.service.v1.GetSegmentOverrideRequest\x1a..api.crm.service.v1.GetSegmentOverrideResponse\x12|\n" +
-	"\x15GetSegmentFieldSchema\x120.api.crm.service.v1.GetSegmentFieldSchemaRequest\x1a1.api.crm.service.v1.GetSegmentFieldSchemaResponseBM\n" +
+	"\x15GetSegmentFieldSchema\x120.api.crm.service.v1.GetSegmentFieldSchemaRequest\x1a1.api.crm.service.v1.GetSegmentFieldSchemaResponse\x12d\n" +
+	"\rRepairSegment\x12(.api.crm.service.v1.RepairSegmentRequest\x1a).api.crm.service.v1.RepairSegmentResponse\x12p\n" +
+	"\x11RepairAllSegments\x12,.api.crm.service.v1.RepairAllSegmentsRequest\x1a-.api.crm.service.v1.RepairAllSegmentsResponse\x12\x91\x01\n" +
+	"\x1cGetSegmentsWithMissingFields\x127.api.crm.service.v1.GetSegmentsWithMissingFieldsRequest\x1a8.api.crm.service.v1.GetSegmentsWithMissingFieldsResponseBM\n" +
 	"\x12api.crm.service.v1P\x01Z5github.com/infigaming-com/meepo-api/crm/service/v1;v1b\x06proto3"
 
 var (
@@ -1991,100 +2367,117 @@ func file_crm_service_v1_crm_proto_rawDescGZIP() []byte {
 }
 
 var file_crm_service_v1_crm_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_crm_service_v1_crm_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_crm_service_v1_crm_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_crm_service_v1_crm_proto_goTypes = []any{
-	(SegmentType)(0),                      // 0: api.crm.service.v1.SegmentType
-	(OwnerLevel)(0),                       // 1: api.crm.service.v1.OwnerLevel
-	(FieldType)(0),                        // 2: api.crm.service.v1.FieldType
-	(*Segment)(nil),                       // 3: api.crm.service.v1.Segment
-	(*SegmentUser)(nil),                   // 4: api.crm.service.v1.SegmentUser
-	(*CreateSegmentRequest)(nil),          // 5: api.crm.service.v1.CreateSegmentRequest
-	(*CreateSegmentResponse)(nil),         // 6: api.crm.service.v1.CreateSegmentResponse
-	(*UpdateSegmentRequest)(nil),          // 7: api.crm.service.v1.UpdateSegmentRequest
-	(*UpdateSegmentResponse)(nil),         // 8: api.crm.service.v1.UpdateSegmentResponse
-	(*GetSegmentRequest)(nil),             // 9: api.crm.service.v1.GetSegmentRequest
-	(*GetSegmentResponse)(nil),            // 10: api.crm.service.v1.GetSegmentResponse
-	(*ListSegmentsRequest)(nil),           // 11: api.crm.service.v1.ListSegmentsRequest
-	(*ListSegmentsResponse)(nil),          // 12: api.crm.service.v1.ListSegmentsResponse
-	(*DeleteSegmentRequest)(nil),          // 13: api.crm.service.v1.DeleteSegmentRequest
-	(*DeleteSegmentResponse)(nil),         // 14: api.crm.service.v1.DeleteSegmentResponse
-	(*CalculateSegmentRequest)(nil),       // 15: api.crm.service.v1.CalculateSegmentRequest
-	(*CalculateSegmentResponse)(nil),      // 16: api.crm.service.v1.CalculateSegmentResponse
-	(*GetSegmentUsersRequest)(nil),        // 17: api.crm.service.v1.GetSegmentUsersRequest
-	(*GetSegmentUsersResponse)(nil),       // 18: api.crm.service.v1.GetSegmentUsersResponse
-	(*GetUserSegmentsRequest)(nil),        // 19: api.crm.service.v1.GetUserSegmentsRequest
-	(*GetUserSegmentsResponse)(nil),       // 20: api.crm.service.v1.GetUserSegmentsResponse
-	(*SetSegmentOverrideRequest)(nil),     // 21: api.crm.service.v1.SetSegmentOverrideRequest
-	(*SetSegmentOverrideResponse)(nil),    // 22: api.crm.service.v1.SetSegmentOverrideResponse
-	(*GetSegmentOverrideRequest)(nil),     // 23: api.crm.service.v1.GetSegmentOverrideRequest
-	(*GetSegmentOverrideResponse)(nil),    // 24: api.crm.service.v1.GetSegmentOverrideResponse
-	(*FieldSchema)(nil),                   // 25: api.crm.service.v1.FieldSchema
-	(*GetSegmentFieldSchemaRequest)(nil),  // 26: api.crm.service.v1.GetSegmentFieldSchemaRequest
-	(*GetSegmentFieldSchemaResponse)(nil), // 27: api.crm.service.v1.GetSegmentFieldSchemaResponse
-	(*structpb.Struct)(nil),               // 28: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),         // 29: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),        // 30: api.common.OperatorContext
+	(SegmentType)(0),                             // 0: api.crm.service.v1.SegmentType
+	(OwnerLevel)(0),                              // 1: api.crm.service.v1.OwnerLevel
+	(FieldType)(0),                               // 2: api.crm.service.v1.FieldType
+	(*Segment)(nil),                              // 3: api.crm.service.v1.Segment
+	(*SegmentUser)(nil),                          // 4: api.crm.service.v1.SegmentUser
+	(*CreateSegmentRequest)(nil),                 // 5: api.crm.service.v1.CreateSegmentRequest
+	(*CreateSegmentResponse)(nil),                // 6: api.crm.service.v1.CreateSegmentResponse
+	(*UpdateSegmentRequest)(nil),                 // 7: api.crm.service.v1.UpdateSegmentRequest
+	(*UpdateSegmentResponse)(nil),                // 8: api.crm.service.v1.UpdateSegmentResponse
+	(*GetSegmentRequest)(nil),                    // 9: api.crm.service.v1.GetSegmentRequest
+	(*GetSegmentResponse)(nil),                   // 10: api.crm.service.v1.GetSegmentResponse
+	(*ListSegmentsRequest)(nil),                  // 11: api.crm.service.v1.ListSegmentsRequest
+	(*ListSegmentsResponse)(nil),                 // 12: api.crm.service.v1.ListSegmentsResponse
+	(*DeleteSegmentRequest)(nil),                 // 13: api.crm.service.v1.DeleteSegmentRequest
+	(*DeleteSegmentResponse)(nil),                // 14: api.crm.service.v1.DeleteSegmentResponse
+	(*CalculateSegmentRequest)(nil),              // 15: api.crm.service.v1.CalculateSegmentRequest
+	(*CalculateSegmentResponse)(nil),             // 16: api.crm.service.v1.CalculateSegmentResponse
+	(*GetSegmentUsersRequest)(nil),               // 17: api.crm.service.v1.GetSegmentUsersRequest
+	(*GetSegmentUsersResponse)(nil),              // 18: api.crm.service.v1.GetSegmentUsersResponse
+	(*GetUserSegmentsRequest)(nil),               // 19: api.crm.service.v1.GetUserSegmentsRequest
+	(*GetUserSegmentsResponse)(nil),              // 20: api.crm.service.v1.GetUserSegmentsResponse
+	(*SetSegmentOverrideRequest)(nil),            // 21: api.crm.service.v1.SetSegmentOverrideRequest
+	(*SetSegmentOverrideResponse)(nil),           // 22: api.crm.service.v1.SetSegmentOverrideResponse
+	(*GetSegmentOverrideRequest)(nil),            // 23: api.crm.service.v1.GetSegmentOverrideRequest
+	(*GetSegmentOverrideResponse)(nil),           // 24: api.crm.service.v1.GetSegmentOverrideResponse
+	(*FieldSchema)(nil),                          // 25: api.crm.service.v1.FieldSchema
+	(*GetSegmentFieldSchemaRequest)(nil),         // 26: api.crm.service.v1.GetSegmentFieldSchemaRequest
+	(*GetSegmentFieldSchemaResponse)(nil),        // 27: api.crm.service.v1.GetSegmentFieldSchemaResponse
+	(*RepairSegmentRequest)(nil),                 // 28: api.crm.service.v1.RepairSegmentRequest
+	(*RepairSegmentResponse)(nil),                // 29: api.crm.service.v1.RepairSegmentResponse
+	(*RepairAllSegmentsRequest)(nil),             // 30: api.crm.service.v1.RepairAllSegmentsRequest
+	(*RepairAllSegmentsResponse)(nil),            // 31: api.crm.service.v1.RepairAllSegmentsResponse
+	(*GetSegmentsWithMissingFieldsRequest)(nil),  // 32: api.crm.service.v1.GetSegmentsWithMissingFieldsRequest
+	(*GetSegmentsWithMissingFieldsResponse)(nil), // 33: api.crm.service.v1.GetSegmentsWithMissingFieldsResponse
+	(*structpb.Struct)(nil),                      // 34: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                // 35: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),               // 36: api.common.OperatorContext
 }
 var file_crm_service_v1_crm_proto_depIdxs = []int32{
 	0,  // 0: api.crm.service.v1.Segment.type:type_name -> api.crm.service.v1.SegmentType
 	1,  // 1: api.crm.service.v1.Segment.owner_level:type_name -> api.crm.service.v1.OwnerLevel
-	28, // 2: api.crm.service.v1.Segment.rules:type_name -> google.protobuf.Struct
-	29, // 3: api.crm.service.v1.Segment.created_at:type_name -> google.protobuf.Timestamp
-	29, // 4: api.crm.service.v1.Segment.updated_at:type_name -> google.protobuf.Timestamp
-	29, // 5: api.crm.service.v1.Segment.last_calculated_at:type_name -> google.protobuf.Timestamp
-	29, // 6: api.crm.service.v1.SegmentUser.entered_at:type_name -> google.protobuf.Timestamp
-	29, // 7: api.crm.service.v1.SegmentUser.left_at:type_name -> google.protobuf.Timestamp
+	34, // 2: api.crm.service.v1.Segment.rules:type_name -> google.protobuf.Struct
+	35, // 3: api.crm.service.v1.Segment.created_at:type_name -> google.protobuf.Timestamp
+	35, // 4: api.crm.service.v1.Segment.updated_at:type_name -> google.protobuf.Timestamp
+	35, // 5: api.crm.service.v1.Segment.last_calculated_at:type_name -> google.protobuf.Timestamp
+	35, // 6: api.crm.service.v1.SegmentUser.entered_at:type_name -> google.protobuf.Timestamp
+	35, // 7: api.crm.service.v1.SegmentUser.left_at:type_name -> google.protobuf.Timestamp
 	0,  // 8: api.crm.service.v1.CreateSegmentRequest.type:type_name -> api.crm.service.v1.SegmentType
-	28, // 9: api.crm.service.v1.CreateSegmentRequest.rules:type_name -> google.protobuf.Struct
-	30, // 10: api.crm.service.v1.CreateSegmentRequest.operator_context:type_name -> api.common.OperatorContext
+	34, // 9: api.crm.service.v1.CreateSegmentRequest.rules:type_name -> google.protobuf.Struct
+	36, // 10: api.crm.service.v1.CreateSegmentRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 11: api.crm.service.v1.CreateSegmentResponse.segment:type_name -> api.crm.service.v1.Segment
-	28, // 12: api.crm.service.v1.UpdateSegmentRequest.rules:type_name -> google.protobuf.Struct
-	30, // 13: api.crm.service.v1.UpdateSegmentRequest.operator_context:type_name -> api.common.OperatorContext
+	34, // 12: api.crm.service.v1.UpdateSegmentRequest.rules:type_name -> google.protobuf.Struct
+	36, // 13: api.crm.service.v1.UpdateSegmentRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 14: api.crm.service.v1.UpdateSegmentResponse.segment:type_name -> api.crm.service.v1.Segment
-	30, // 15: api.crm.service.v1.GetSegmentRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 15: api.crm.service.v1.GetSegmentRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 16: api.crm.service.v1.GetSegmentResponse.segment:type_name -> api.crm.service.v1.Segment
-	30, // 17: api.crm.service.v1.ListSegmentsRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 17: api.crm.service.v1.ListSegmentsRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 18: api.crm.service.v1.ListSegmentsRequest.type:type_name -> api.crm.service.v1.SegmentType
 	3,  // 19: api.crm.service.v1.ListSegmentsResponse.segments:type_name -> api.crm.service.v1.Segment
-	30, // 20: api.crm.service.v1.DeleteSegmentRequest.operator_context:type_name -> api.common.OperatorContext
-	30, // 21: api.crm.service.v1.CalculateSegmentRequest.operator_context:type_name -> api.common.OperatorContext
-	30, // 22: api.crm.service.v1.GetSegmentUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 20: api.crm.service.v1.DeleteSegmentRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 21: api.crm.service.v1.CalculateSegmentRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 22: api.crm.service.v1.GetSegmentUsersRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 23: api.crm.service.v1.GetSegmentUsersResponse.users:type_name -> api.crm.service.v1.SegmentUser
-	30, // 24: api.crm.service.v1.GetUserSegmentsRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 24: api.crm.service.v1.GetUserSegmentsRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 25: api.crm.service.v1.GetUserSegmentsResponse.segments:type_name -> api.crm.service.v1.Segment
-	30, // 26: api.crm.service.v1.SetSegmentOverrideRequest.operator_context:type_name -> api.common.OperatorContext
-	30, // 27: api.crm.service.v1.GetSegmentOverrideRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 26: api.crm.service.v1.SetSegmentOverrideRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 27: api.crm.service.v1.GetSegmentOverrideRequest.operator_context:type_name -> api.common.OperatorContext
 	2,  // 28: api.crm.service.v1.FieldSchema.type:type_name -> api.crm.service.v1.FieldType
-	28, // 29: api.crm.service.v1.FieldSchema.value_schema:type_name -> google.protobuf.Struct
+	34, // 29: api.crm.service.v1.FieldSchema.value_schema:type_name -> google.protobuf.Struct
 	0,  // 30: api.crm.service.v1.GetSegmentFieldSchemaRequest.type:type_name -> api.crm.service.v1.SegmentType
 	25, // 31: api.crm.service.v1.GetSegmentFieldSchemaResponse.fields:type_name -> api.crm.service.v1.FieldSchema
-	5,  // 32: api.crm.service.v1.CRM.CreateSegment:input_type -> api.crm.service.v1.CreateSegmentRequest
-	7,  // 33: api.crm.service.v1.CRM.UpdateSegment:input_type -> api.crm.service.v1.UpdateSegmentRequest
-	9,  // 34: api.crm.service.v1.CRM.GetSegment:input_type -> api.crm.service.v1.GetSegmentRequest
-	11, // 35: api.crm.service.v1.CRM.ListSegments:input_type -> api.crm.service.v1.ListSegmentsRequest
-	13, // 36: api.crm.service.v1.CRM.DeleteSegment:input_type -> api.crm.service.v1.DeleteSegmentRequest
-	15, // 37: api.crm.service.v1.CRM.CalculateSegment:input_type -> api.crm.service.v1.CalculateSegmentRequest
-	17, // 38: api.crm.service.v1.CRM.GetSegmentUsers:input_type -> api.crm.service.v1.GetSegmentUsersRequest
-	19, // 39: api.crm.service.v1.CRM.GetUserSegments:input_type -> api.crm.service.v1.GetUserSegmentsRequest
-	21, // 40: api.crm.service.v1.CRM.SetSegmentOverride:input_type -> api.crm.service.v1.SetSegmentOverrideRequest
-	23, // 41: api.crm.service.v1.CRM.GetSegmentOverride:input_type -> api.crm.service.v1.GetSegmentOverrideRequest
-	26, // 42: api.crm.service.v1.CRM.GetSegmentFieldSchema:input_type -> api.crm.service.v1.GetSegmentFieldSchemaRequest
-	6,  // 43: api.crm.service.v1.CRM.CreateSegment:output_type -> api.crm.service.v1.CreateSegmentResponse
-	8,  // 44: api.crm.service.v1.CRM.UpdateSegment:output_type -> api.crm.service.v1.UpdateSegmentResponse
-	10, // 45: api.crm.service.v1.CRM.GetSegment:output_type -> api.crm.service.v1.GetSegmentResponse
-	12, // 46: api.crm.service.v1.CRM.ListSegments:output_type -> api.crm.service.v1.ListSegmentsResponse
-	14, // 47: api.crm.service.v1.CRM.DeleteSegment:output_type -> api.crm.service.v1.DeleteSegmentResponse
-	16, // 48: api.crm.service.v1.CRM.CalculateSegment:output_type -> api.crm.service.v1.CalculateSegmentResponse
-	18, // 49: api.crm.service.v1.CRM.GetSegmentUsers:output_type -> api.crm.service.v1.GetSegmentUsersResponse
-	20, // 50: api.crm.service.v1.CRM.GetUserSegments:output_type -> api.crm.service.v1.GetUserSegmentsResponse
-	22, // 51: api.crm.service.v1.CRM.SetSegmentOverride:output_type -> api.crm.service.v1.SetSegmentOverrideResponse
-	24, // 52: api.crm.service.v1.CRM.GetSegmentOverride:output_type -> api.crm.service.v1.GetSegmentOverrideResponse
-	27, // 53: api.crm.service.v1.CRM.GetSegmentFieldSchema:output_type -> api.crm.service.v1.GetSegmentFieldSchemaResponse
-	43, // [43:54] is the sub-list for method output_type
-	32, // [32:43] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	36, // 32: api.crm.service.v1.RepairSegmentRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 33: api.crm.service.v1.RepairAllSegmentsRequest.operator_context:type_name -> api.common.OperatorContext
+	29, // 34: api.crm.service.v1.RepairAllSegmentsResponse.segments:type_name -> api.crm.service.v1.RepairSegmentResponse
+	36, // 35: api.crm.service.v1.GetSegmentsWithMissingFieldsRequest.operator_context:type_name -> api.common.OperatorContext
+	3,  // 36: api.crm.service.v1.GetSegmentsWithMissingFieldsResponse.segments:type_name -> api.crm.service.v1.Segment
+	5,  // 37: api.crm.service.v1.CRM.CreateSegment:input_type -> api.crm.service.v1.CreateSegmentRequest
+	7,  // 38: api.crm.service.v1.CRM.UpdateSegment:input_type -> api.crm.service.v1.UpdateSegmentRequest
+	9,  // 39: api.crm.service.v1.CRM.GetSegment:input_type -> api.crm.service.v1.GetSegmentRequest
+	11, // 40: api.crm.service.v1.CRM.ListSegments:input_type -> api.crm.service.v1.ListSegmentsRequest
+	13, // 41: api.crm.service.v1.CRM.DeleteSegment:input_type -> api.crm.service.v1.DeleteSegmentRequest
+	15, // 42: api.crm.service.v1.CRM.CalculateSegment:input_type -> api.crm.service.v1.CalculateSegmentRequest
+	17, // 43: api.crm.service.v1.CRM.GetSegmentUsers:input_type -> api.crm.service.v1.GetSegmentUsersRequest
+	19, // 44: api.crm.service.v1.CRM.GetUserSegments:input_type -> api.crm.service.v1.GetUserSegmentsRequest
+	21, // 45: api.crm.service.v1.CRM.SetSegmentOverride:input_type -> api.crm.service.v1.SetSegmentOverrideRequest
+	23, // 46: api.crm.service.v1.CRM.GetSegmentOverride:input_type -> api.crm.service.v1.GetSegmentOverrideRequest
+	26, // 47: api.crm.service.v1.CRM.GetSegmentFieldSchema:input_type -> api.crm.service.v1.GetSegmentFieldSchemaRequest
+	28, // 48: api.crm.service.v1.CRM.RepairSegment:input_type -> api.crm.service.v1.RepairSegmentRequest
+	30, // 49: api.crm.service.v1.CRM.RepairAllSegments:input_type -> api.crm.service.v1.RepairAllSegmentsRequest
+	32, // 50: api.crm.service.v1.CRM.GetSegmentsWithMissingFields:input_type -> api.crm.service.v1.GetSegmentsWithMissingFieldsRequest
+	6,  // 51: api.crm.service.v1.CRM.CreateSegment:output_type -> api.crm.service.v1.CreateSegmentResponse
+	8,  // 52: api.crm.service.v1.CRM.UpdateSegment:output_type -> api.crm.service.v1.UpdateSegmentResponse
+	10, // 53: api.crm.service.v1.CRM.GetSegment:output_type -> api.crm.service.v1.GetSegmentResponse
+	12, // 54: api.crm.service.v1.CRM.ListSegments:output_type -> api.crm.service.v1.ListSegmentsResponse
+	14, // 55: api.crm.service.v1.CRM.DeleteSegment:output_type -> api.crm.service.v1.DeleteSegmentResponse
+	16, // 56: api.crm.service.v1.CRM.CalculateSegment:output_type -> api.crm.service.v1.CalculateSegmentResponse
+	18, // 57: api.crm.service.v1.CRM.GetSegmentUsers:output_type -> api.crm.service.v1.GetSegmentUsersResponse
+	20, // 58: api.crm.service.v1.CRM.GetUserSegments:output_type -> api.crm.service.v1.GetUserSegmentsResponse
+	22, // 59: api.crm.service.v1.CRM.SetSegmentOverride:output_type -> api.crm.service.v1.SetSegmentOverrideResponse
+	24, // 60: api.crm.service.v1.CRM.GetSegmentOverride:output_type -> api.crm.service.v1.GetSegmentOverrideResponse
+	27, // 61: api.crm.service.v1.CRM.GetSegmentFieldSchema:output_type -> api.crm.service.v1.GetSegmentFieldSchemaResponse
+	29, // 62: api.crm.service.v1.CRM.RepairSegment:output_type -> api.crm.service.v1.RepairSegmentResponse
+	31, // 63: api.crm.service.v1.CRM.RepairAllSegments:output_type -> api.crm.service.v1.RepairAllSegmentsResponse
+	33, // 64: api.crm.service.v1.CRM.GetSegmentsWithMissingFields:output_type -> api.crm.service.v1.GetSegmentsWithMissingFieldsResponse
+	51, // [51:65] is the sub-list for method output_type
+	37, // [37:51] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_crm_service_v1_crm_proto_init() }
@@ -2100,7 +2493,7 @@ func file_crm_service_v1_crm_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_crm_service_v1_crm_proto_rawDesc), len(file_crm_service_v1_crm_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   25,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

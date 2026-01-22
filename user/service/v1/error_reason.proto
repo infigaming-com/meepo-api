@@ -177,4 +177,12 @@ enum ErrorReason {
   GET_USER_CREDENTIAL_FAILED = 10319;
   ADD_USER_CREDENTIAL_FAILED = 10320;
   DELETE_USER_CREDENTIAL_FAILED = 10321;
+
+  // OAuth Callback Flow Errors (for Twitter/Apple redirect flow)
+  INVALID_REDIRECT_URI = 10330 [(errors.code) = 400];
+  OAUTH_STATE_EXPIRED = 10331 [(errors.code) = 400];
+  OAUTH_STATE_INVALID = 10332 [(errors.code) = 400];
+  OAUTH_STATE_ALREADY_USED = 10333 [(errors.code) = 400];
+  OAUTH_CODE_EXCHANGE_FAILED = 10334;
+  OAUTH_STATE_CREATE_FAILED = 10335;
 }

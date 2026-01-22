@@ -93,6 +93,28 @@ service BackofficeCrm {
       body: "*"
     };
   }
+
+  // Segment repair operations
+  rpc RepairSegment(RepairSegmentRequest) returns (api.crm.service.v1.RepairSegmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/repair"
+      body: "*"
+    };
+  }
+
+  rpc RepairAllSegments(RepairAllSegmentsRequest) returns (api.crm.service.v1.RepairAllSegmentsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/repair-all"
+      body: "*"
+    };
+  }
+
+  rpc GetSegmentsWithMissingFields(GetSegmentsWithMissingFieldsRequest) returns (api.crm.service.v1.GetSegmentsWithMissingFieldsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/segment/missing-fields"
+      body: "*"
+    };
+  }
 }
 
 // CreateSegment
@@ -176,4 +198,22 @@ message GetSegmentOverrideRequest {
 // GetSegmentFieldSchema
 message GetSegmentFieldSchemaRequest {
   api.crm.service.v1.SegmentType type = 1;
+}
+
+// RepairSegment
+message RepairSegmentRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  bool trigger_calculation = 3;
+}
+
+// RepairAllSegments
+message RepairAllSegmentsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  bool trigger_calculation = 2;
+}
+
+// GetSegmentsWithMissingFields
+message GetSegmentsWithMissingFieldsRequest {
+  api.common.OperatorContext target_operator_context = 1;
 }

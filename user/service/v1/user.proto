@@ -460,10 +460,9 @@ service User {
 	rpc AdminResetPassword(AdminResetPasswordRequest) returns (AdminResetPasswordResponse) {}
 
 	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
-	// Create OAuth provider configuration for an operator
-	rpc CreateOAuthProviderConfig(CreateOAuthProviderConfigRequest) returns (CreateOAuthProviderConfigResponse) {}
-	// Update OAuth provider configuration
-	rpc UpdateOAuthProviderConfig(UpdateOAuthProviderConfigRequest) returns (UpdateOAuthProviderConfigResponse) {}
+	// Create or update OAuth provider configuration for an operator
+	// If config_id is provided, updates existing config; otherwise creates new one
+	rpc CreateOrUpdateOAuthProviderConfig(CreateOrUpdateOAuthProviderConfigRequest) returns (CreateOrUpdateOAuthProviderConfigResponse) {}
 	// Delete OAuth provider configuration
 	rpc DeleteOAuthProviderConfig(DeleteOAuthProviderConfigRequest) returns (DeleteOAuthProviderConfigResponse) {}
 	// Set OAuth provider enabled/disabled status
@@ -500,6 +499,22 @@ service User {
 	rpc ListBoundOAuthAccounts(ListBoundOAuthAccountsRequest) returns (ListBoundOAuthAccountsResponse) {
 		option (google.api.http) = {
 			get: "/v1/user/oauth/accounts"
+		};
+	}
+
+	// ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+	// Initiate OAuth login flow - returns authorization URL for redirect
+	rpc InitiateOAuthLogin(InitiateOAuthLoginRequest) returns (InitiateOAuthLoginResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/oauth/initiate"
+			body: "*"
+		};
+	}
+	// Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+	rpc InitiateOAuthBinding(InitiateOAuthBindingRequest) returns (InitiateOAuthBindingResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/oauth/bind/initiate"
+			body: "*"
 		};
 	}
 }
@@ -2146,40 +2161,27 @@ message OAuthProviderConfig {
 	int64 updated_at = 13;
 }
 
-// CreateOAuthProviderConfigRequest - create OAuth provider config for operator
-message CreateOAuthProviderConfigRequest {
+// CreateOrUpdateOAuthProviderConfigRequest - create or update OAuth provider config
+// If config_id is provided (non-zero), updates existing config; otherwise creates new one
+message CreateOrUpdateOAuthProviderConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
-	OAuthProvider provider = 3;
-	string client_id = 4;
-	string client_secret = 5;  // Plain text, will be encrypted
-	map<string, string> config = 6;
-	bool enabled = 7;
-	bool allow_registration = 8;
-	bool allow_linking = 9;
-	repeated int64 allowed_role_ids = 10;
-	int32 rate_limit_per_minute = 11;
+	optional int64 config_id = 3;          // If provided, update existing config; otherwise create new
+	OAuthProvider provider = 4;            // Required for create, used for validation on update
+	string client_id = 5;
+	optional string client_secret = 6;     // Plain text, will be encrypted. Required for create, optional for update
+	map<string, string> config = 7;        // Provider-specific config (scopes, API versions, etc.)
+	bool enabled = 8;
+	bool allow_registration = 9;
+	bool allow_linking = 10;
+	repeated int64 allowed_role_ids = 11;
+	int32 rate_limit_per_minute = 12;
 }
 
-message CreateOAuthProviderConfigResponse {
-	int64 config_id = 1;
+message CreateOrUpdateOAuthProviderConfigResponse {
+	int64 config_id = 1;                   // The created or updated config ID
+	bool created = 2;                      // True if created, false if updated
 }
-
-// UpdateOAuthProviderConfigRequest - update existing OAuth provider config
-message UpdateOAuthProviderConfigRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
-	int64 config_id = 3;
-	optional string client_id = 4;
-	optional string client_secret = 5;  // If provided, will be encrypted
-	map<string, string> config = 6;
-	optional bool allow_registration = 7;
-	optional bool allow_linking = 8;
-	repeated int64 allowed_role_ids = 9;
-	optional int32 rate_limit_per_minute = 10;
-}
-
-message UpdateOAuthProviderConfigResponse {}
 
 // DeleteOAuthProviderConfigRequest - delete OAuth provider config
 message DeleteOAuthProviderConfigRequest {
@@ -2234,6 +2236,8 @@ message AvailableOAuthProvider {
 	string authorization_url = 3;   // OAuth authorization URL
 	bool allow_registration = 4;
 	bool allow_linking = 5;
+	string client_id = 6;            // Client ID for frontend JS SDK initialization (Google, Facebook)
+	bool supports_js_sdk = 7;        // Whether provider supports frontend JS SDK (true for Google/Facebook, false for Twitter/Apple)
 }
 
 // GetAvailableOAuthProvidersRequest - get available OAuth providers for operator
@@ -2289,4 +2293,34 @@ message ListBoundOAuthAccountsRequest {
 message ListBoundOAuthAccountsResponse {
 	repeated OAuthAccountInfo accounts = 1;
 	bool has_password = 2;  // Whether user has password login method
+}
+
+// ============================================================================
+// OAuth Callback Flow Messages (for Twitter/Apple without JS SDK)
+// ============================================================================
+
+// InitiateOAuthLoginRequest - initiate OAuth login via redirect flow
+message InitiateOAuthLoginRequest {
+	OAuthProvider provider = 1;            // OAuth provider (TWITTER, APPLE)
+	string frontend_redirect_uri = 2;      // URL to redirect user after OAuth callback
+	string client_state = 3;               // Optional: client state to preserve across redirect
+}
+
+// InitiateOAuthLoginResponse - returns authorization URL for redirect
+message InitiateOAuthLoginResponse {
+	string authorization_url = 1;          // Redirect user to this URL
+	string state = 2;                      // Server-generated state for CSRF protection
+}
+
+// InitiateOAuthBindingRequest - initiate OAuth binding via redirect flow (requires authentication)
+message InitiateOAuthBindingRequest {
+	OAuthProvider provider = 1;            // OAuth provider (TWITTER, APPLE)
+	string frontend_redirect_uri = 2;      // URL to redirect user after OAuth callback
+	string client_state = 3;               // Optional: client state to preserve across redirect
+}
+
+// InitiateOAuthBindingResponse - returns authorization URL for redirect
+message InitiateOAuthBindingResponse {
+	string authorization_url = 1;          // Redirect user to this URL
+	string state = 2;                      // Server-generated state for CSRF protection
 }

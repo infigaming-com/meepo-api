@@ -27,8 +27,11 @@ const OperationBackofficeCrmGetSegment = "/api.backoffice.service.v1.BackofficeC
 const OperationBackofficeCrmGetSegmentFieldSchema = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentFieldSchema"
 const OperationBackofficeCrmGetSegmentOverride = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentOverride"
 const OperationBackofficeCrmGetSegmentUsers = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentUsers"
+const OperationBackofficeCrmGetSegmentsWithMissingFields = "/api.backoffice.service.v1.BackofficeCrm/GetSegmentsWithMissingFields"
 const OperationBackofficeCrmGetUserSegments = "/api.backoffice.service.v1.BackofficeCrm/GetUserSegments"
 const OperationBackofficeCrmListSegments = "/api.backoffice.service.v1.BackofficeCrm/ListSegments"
+const OperationBackofficeCrmRepairAllSegments = "/api.backoffice.service.v1.BackofficeCrm/RepairAllSegments"
+const OperationBackofficeCrmRepairSegment = "/api.backoffice.service.v1.BackofficeCrm/RepairSegment"
 const OperationBackofficeCrmSetSegmentOverride = "/api.backoffice.service.v1.BackofficeCrm/SetSegmentOverride"
 const OperationBackofficeCrmUpdateSegment = "/api.backoffice.service.v1.BackofficeCrm/UpdateSegment"
 
@@ -43,8 +46,12 @@ type BackofficeCrmHTTPServer interface {
 	GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*v1.GetSegmentFieldSchemaResponse, error)
 	GetSegmentOverride(context.Context, *GetSegmentOverrideRequest) (*v1.GetSegmentOverrideResponse, error)
 	GetSegmentUsers(context.Context, *GetSegmentUsersRequest) (*v1.GetSegmentUsersResponse, error)
+	GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*v1.GetSegmentsWithMissingFieldsResponse, error)
 	GetUserSegments(context.Context, *GetUserSegmentsRequest) (*v1.GetUserSegmentsResponse, error)
 	ListSegments(context.Context, *ListSegmentsRequest) (*v1.ListSegmentsResponse, error)
+	RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*v1.RepairAllSegmentsResponse, error)
+	// RepairSegment Segment repair operations
+	RepairSegment(context.Context, *RepairSegmentRequest) (*v1.RepairSegmentResponse, error)
 	// SetSegmentOverride Segment override (for inheritance control)
 	SetSegmentOverride(context.Context, *SetSegmentOverrideRequest) (*v1.SetSegmentOverrideResponse, error)
 	UpdateSegment(context.Context, *UpdateSegmentRequest) (*v1.UpdateSegmentResponse, error)
@@ -63,6 +70,9 @@ func RegisterBackofficeCrmHTTPServer(s *http.Server, srv BackofficeCrmHTTPServer
 	r.POST("/v1/backoffice/crm/segment/override/set", _BackofficeCrm_SetSegmentOverride0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/segment/override/get", _BackofficeCrm_GetSegmentOverride0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/segment/schema", _BackofficeCrm_GetSegmentFieldSchema0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/crm/segment/repair", _BackofficeCrm_RepairSegment0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/crm/segment/repair-all", _BackofficeCrm_RepairAllSegments0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/crm/segment/missing-fields", _BackofficeCrm_GetSegmentsWithMissingFields0_HTTP_Handler(srv))
 }
 
 func _BackofficeCrm_CreateSegment0_HTTP_Handler(srv BackofficeCrmHTTPServer) func(ctx http.Context) error {
@@ -307,6 +317,72 @@ func _BackofficeCrm_GetSegmentFieldSchema0_HTTP_Handler(srv BackofficeCrmHTTPSer
 	}
 }
 
+func _BackofficeCrm_RepairSegment0_HTTP_Handler(srv BackofficeCrmHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RepairSegmentRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeCrmRepairSegment)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RepairSegment(ctx, req.(*RepairSegmentRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.RepairSegmentResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeCrm_RepairAllSegments0_HTTP_Handler(srv BackofficeCrmHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RepairAllSegmentsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeCrmRepairAllSegments)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RepairAllSegments(ctx, req.(*RepairAllSegmentsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.RepairAllSegmentsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeCrm_GetSegmentsWithMissingFields0_HTTP_Handler(srv BackofficeCrmHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetSegmentsWithMissingFieldsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeCrmGetSegmentsWithMissingFields)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetSegmentsWithMissingFields(ctx, req.(*GetSegmentsWithMissingFieldsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetSegmentsWithMissingFieldsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeCrmHTTPClient interface {
 	// CalculateSegment Segment calculation
 	CalculateSegment(ctx context.Context, req *CalculateSegmentRequest, opts ...http.CallOption) (rsp *v1.CalculateSegmentResponse, err error)
@@ -318,8 +394,12 @@ type BackofficeCrmHTTPClient interface {
 	GetSegmentFieldSchema(ctx context.Context, req *GetSegmentFieldSchemaRequest, opts ...http.CallOption) (rsp *v1.GetSegmentFieldSchemaResponse, err error)
 	GetSegmentOverride(ctx context.Context, req *GetSegmentOverrideRequest, opts ...http.CallOption) (rsp *v1.GetSegmentOverrideResponse, err error)
 	GetSegmentUsers(ctx context.Context, req *GetSegmentUsersRequest, opts ...http.CallOption) (rsp *v1.GetSegmentUsersResponse, err error)
+	GetSegmentsWithMissingFields(ctx context.Context, req *GetSegmentsWithMissingFieldsRequest, opts ...http.CallOption) (rsp *v1.GetSegmentsWithMissingFieldsResponse, err error)
 	GetUserSegments(ctx context.Context, req *GetUserSegmentsRequest, opts ...http.CallOption) (rsp *v1.GetUserSegmentsResponse, err error)
 	ListSegments(ctx context.Context, req *ListSegmentsRequest, opts ...http.CallOption) (rsp *v1.ListSegmentsResponse, err error)
+	RepairAllSegments(ctx context.Context, req *RepairAllSegmentsRequest, opts ...http.CallOption) (rsp *v1.RepairAllSegmentsResponse, err error)
+	// RepairSegment Segment repair operations
+	RepairSegment(ctx context.Context, req *RepairSegmentRequest, opts ...http.CallOption) (rsp *v1.RepairSegmentResponse, err error)
 	// SetSegmentOverride Segment override (for inheritance control)
 	SetSegmentOverride(ctx context.Context, req *SetSegmentOverrideRequest, opts ...http.CallOption) (rsp *v1.SetSegmentOverrideResponse, err error)
 	UpdateSegment(ctx context.Context, req *UpdateSegmentRequest, opts ...http.CallOption) (rsp *v1.UpdateSegmentResponse, err error)
@@ -427,6 +507,19 @@ func (c *BackofficeCrmHTTPClientImpl) GetSegmentUsers(ctx context.Context, in *G
 	return &out, nil
 }
 
+func (c *BackofficeCrmHTTPClientImpl) GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...http.CallOption) (*v1.GetSegmentsWithMissingFieldsResponse, error) {
+	var out v1.GetSegmentsWithMissingFieldsResponse
+	pattern := "/v1/backoffice/crm/segment/missing-fields"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeCrmGetSegmentsWithMissingFields))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeCrmHTTPClientImpl) GetUserSegments(ctx context.Context, in *GetUserSegmentsRequest, opts ...http.CallOption) (*v1.GetUserSegmentsResponse, error) {
 	var out v1.GetUserSegmentsResponse
 	pattern := "/v1/backoffice/crm/user/segments"
@@ -445,6 +538,33 @@ func (c *BackofficeCrmHTTPClientImpl) ListSegments(ctx context.Context, in *List
 	pattern := "/v1/backoffice/crm/segment/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeCrmListSegments))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeCrmHTTPClientImpl) RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...http.CallOption) (*v1.RepairAllSegmentsResponse, error) {
+	var out v1.RepairAllSegmentsResponse
+	pattern := "/v1/backoffice/crm/segment/repair-all"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeCrmRepairAllSegments))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// RepairSegment Segment repair operations
+func (c *BackofficeCrmHTTPClientImpl) RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...http.CallOption) (*v1.RepairSegmentResponse, error) {
+	var out v1.RepairSegmentResponse
+	pattern := "/v1/backoffice/crm/segment/repair"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeCrmRepairSegment))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

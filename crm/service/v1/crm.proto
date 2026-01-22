@@ -18,18 +18,23 @@ service CRM {
   rpc GetSegment(GetSegmentRequest) returns (GetSegmentResponse);
   rpc ListSegments(ListSegmentsRequest) returns (ListSegmentsResponse);
   rpc DeleteSegment(DeleteSegmentRequest) returns (DeleteSegmentResponse);
-  
+
   // Segment calculation
   rpc CalculateSegment(CalculateSegmentRequest) returns (CalculateSegmentResponse);
   rpc GetSegmentUsers(GetSegmentUsersRequest) returns (GetSegmentUsersResponse);
   rpc GetUserSegments(GetUserSegmentsRequest) returns (GetUserSegmentsResponse);
-  
+
   // Segment override (for inheritance control)
   rpc SetSegmentOverride(SetSegmentOverrideRequest) returns (SetSegmentOverrideResponse);
   rpc GetSegmentOverride(GetSegmentOverrideRequest) returns (GetSegmentOverrideResponse);
-  
+
   // Schema API for frontend
   rpc GetSegmentFieldSchema(GetSegmentFieldSchemaRequest) returns (GetSegmentFieldSchemaResponse);
+
+  // Segment repair operations - for fixing segments that were directly inserted into the database
+  rpc RepairSegment(RepairSegmentRequest) returns (RepairSegmentResponse);
+  rpc RepairAllSegments(RepairAllSegmentsRequest) returns (RepairAllSegmentsResponse);
+  rpc GetSegmentsWithMissingFields(GetSegmentsWithMissingFieldsRequest) returns (GetSegmentsWithMissingFieldsResponse);
 }
 
 // Segment types
@@ -230,6 +235,7 @@ message FieldSchema {
   FieldType type = 3;
   repeated string operators = 4;
   google.protobuf.Struct value_schema = 5;
+  bool supports_currency = 6;  // Whether this field supports currency filtering
 }
 
 // GetSegmentFieldSchema
@@ -239,4 +245,40 @@ message GetSegmentFieldSchemaRequest {
 
 message GetSegmentFieldSchemaResponse {
   repeated FieldSchema fields = 1;
+}
+
+// RepairSegment - repairs a segment by ensuring field mappings exist and optionally triggering calculation
+message RepairSegmentRequest {
+  int64 id = 1;
+  bool trigger_calculation = 2;
+  api.common.OperatorContext operator_context = 3;
+}
+
+message RepairSegmentResponse {
+  int64 segment_id = 1;
+  repeated string fields = 2;
+  bool calculated = 3;
+  int64 users_matched = 4;
+  int64 users_added = 5;
+  int64 users_removed = 6;
+}
+
+// RepairAllSegments - repairs all segments that are missing field mappings
+message RepairAllSegmentsRequest {
+  bool trigger_calculation = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message RepairAllSegmentsResponse {
+  int64 repaired_count = 1;
+  repeated RepairSegmentResponse segments = 2;
+}
+
+// GetSegmentsWithMissingFields - returns segments that have no entries in crm_segment_fields
+message GetSegmentsWithMissingFieldsRequest {
+  api.common.OperatorContext operator_context = 1;
+}
+
+message GetSegmentsWithMissingFieldsResponse {
+  repeated Segment segments = 1;
 }

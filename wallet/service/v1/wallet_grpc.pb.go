@@ -235,7 +235,8 @@ type WalletClient interface {
 	GetOperatorUserFinancialSummary(ctx context.Context, in *GetOperatorUserFinancialSummaryRequest, opts ...grpc.CallOption) (*GetOperatorUserFinancialSummaryResponse, error)
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(ctx context.Context, in *GetWalletConfigRequest, opts ...grpc.CallOption) (*GetWalletConfigResponse, error)
-	// BatchGetUserFinancialMetrics returns financial metrics (deposit/withdraw) for multiple users
+	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
+	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(ctx context.Context, in *BatchGetUserFinancialMetricsRequest, opts ...grpc.CallOption) (*BatchGetUserFinancialMetricsResponse, error)
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*ManualAdjustCreditTurnoverFieldResponse, error)
@@ -1165,7 +1166,8 @@ type WalletServer interface {
 	GetOperatorUserFinancialSummary(context.Context, *GetOperatorUserFinancialSummaryRequest) (*GetOperatorUserFinancialSummaryResponse, error)
 	// GetWalletConfig returns the wallet configuration for the current operator (user-facing)
 	GetWalletConfig(context.Context, *GetWalletConfigRequest) (*GetWalletConfigResponse, error)
-	// BatchGetUserFinancialMetrics returns financial metrics (deposit/withdraw) for multiple users
+	// BatchGetUserFinancialMetrics returns deposit/withdrawal metrics for CRM segment evaluation
+	// For balance, use GetWallets; for game metrics, use GetUserGameTransactionsSummary
 	BatchGetUserFinancialMetrics(context.Context, *BatchGetUserFinancialMetricsRequest) (*BatchGetUserFinancialMetricsResponse, error)
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*ManualAdjustCreditTurnoverFieldResponse, error)
