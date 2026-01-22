@@ -7199,13 +7199,16 @@ type BetInfo struct {
 	RollbackBetAmountReportingCurrency   string `protobuf:"bytes,43,opt,name=rollback_bet_amount_reporting_currency,json=rollbackBetAmountReportingCurrency,proto3" json:"rollback_bet_amount_reporting_currency,omitempty"`       // numeric(36,18)
 	RollbackWinAmountReportingCurrency   string `protobuf:"bytes,44,opt,name=rollback_win_amount_reporting_currency,json=rollbackWinAmountReportingCurrency,proto3" json:"rollback_win_amount_reporting_currency,omitempty"`       // numeric(36,18)
 	// Additional fields
-	Finished      bool   `protobuf:"varint,45,opt,name=finished,proto3" json:"finished,omitempty"`                               // bool, nullable
-	WagerType     string `protobuf:"bytes,46,opt,name=wager_type,json=wagerType,proto3" json:"wager_type,omitempty"`             // varchar(128)
-	SettleTime    int64  `protobuf:"varint,47,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`         // int8, nullable
-	Odds          string `protobuf:"bytes,48,opt,name=odds,proto3" json:"odds,omitempty"`                                        // varchar(128)
-	WinMultiplier string `protobuf:"bytes,49,opt,name=win_multiplier,json=winMultiplier,proto3" json:"win_multiplier,omitempty"` // varchar(128)
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Finished                      bool   `protobuf:"varint,45,opt,name=finished,proto3" json:"finished,omitempty"`                                                                                   // bool, nullable
+	WagerType                     string `protobuf:"bytes,46,opt,name=wager_type,json=wagerType,proto3" json:"wager_type,omitempty"`                                                                 // varchar(128)
+	SettleTime                    int64  `protobuf:"varint,47,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`                                                             // int8, nullable
+	Odds                          string `protobuf:"bytes,48,opt,name=odds,proto3" json:"odds,omitempty"`                                                                                            // varchar(128)
+	WinMultiplier                 string `protobuf:"bytes,49,opt,name=win_multiplier,json=winMultiplier,proto3" json:"win_multiplier,omitempty"`                                                     // varchar(128)
+	ProviderUserId                string `protobuf:"bytes,50,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"`                                                // varchar(64)
+	ProviderTransactionId         string `protobuf:"bytes,51,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"`                           // varchar(64)
+	ProviderExternalTransactionId string `protobuf:"bytes,52,opt,name=provider_external_transaction_id,json=providerExternalTransactionId,proto3" json:"provider_external_transaction_id,omitempty"` // varchar(64), nullable
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *BetInfo) Reset() {
@@ -7581,6 +7584,27 @@ func (x *BetInfo) GetWinMultiplier() string {
 	return ""
 }
 
+func (x *BetInfo) GetProviderUserId() string {
+	if x != nil {
+		return x.ProviderUserId
+	}
+	return ""
+}
+
+func (x *BetInfo) GetProviderTransactionId() string {
+	if x != nil {
+		return x.ProviderTransactionId
+	}
+	return ""
+}
+
+func (x *BetInfo) GetProviderExternalTransactionId() string {
+	if x != nil {
+		return x.ProviderExternalTransactionId
+	}
+	return ""
+}
+
 type GetBetAndEventInfoResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	BetInfo       *BetInfo               `protobuf:"bytes,1,opt,name=bet_info,json=betInfo,proto3" json:"bet_info,omitempty"`
@@ -7739,6 +7763,7 @@ type TransactionInfo struct {
 	BonusAmountReportingCurrency         string `protobuf:"bytes,47,opt,name=bonus_amount_reporting_currency,json=bonusAmountReportingCurrency,proto3" json:"bonus_amount_reporting_currency,omitempty"`                         // numeric(36,18)
 	JackpotContributionReportingCurrency string `protobuf:"bytes,48,opt,name=jackpot_contribution_reporting_currency,json=jackpotContributionReportingCurrency,proto3" json:"jackpot_contribution_reporting_currency,omitempty"` // numeric(36,18)
 	JackpotWinReportingCurrency          string `protobuf:"bytes,49,opt,name=jackpot_win_reporting_currency,json=jackpotWinReportingCurrency,proto3" json:"jackpot_win_reporting_currency,omitempty"`                            // numeric(36,18)
+	ProviderUserId                       string `protobuf:"bytes,50,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"`                                                                     // varchar(64)
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
 }
@@ -8112,6 +8137,13 @@ func (x *TransactionInfo) GetJackpotContributionReportingCurrency() string {
 func (x *TransactionInfo) GetJackpotWinReportingCurrency() string {
 	if x != nil {
 		return x.JackpotWinReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetProviderUserId() string {
+	if x != nil {
+		return x.ProviderUserId
 	}
 	return ""
 }
@@ -17828,7 +17860,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"selections\x18\x1a \x01(\tR\n" +
 	"selections\";\n" +
 	"\x19GetBetAndEventInfoRequest\x12\x1e\n" +
-	"\vgame_bet_id\x18\x01 \x01(\tR\tgameBetId\"\xed\x10\n" +
+	"\vgame_bet_id\x18\x01 \x01(\tR\tgameBetId\"\x98\x12\n" +
 	"\aBetInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
 	"\x0fprovider_bet_id\x18\x02 \x01(\tR\rproviderBetId\x12\x19\n" +
@@ -17887,13 +17919,16 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vsettle_time\x18/ \x01(\x03R\n" +
 	"settleTime\x12\x12\n" +
 	"\x04odds\x180 \x01(\tR\x04odds\x12%\n" +
-	"\x0ewin_multiplier\x181 \x01(\tR\rwinMultiplier\"\x96\x01\n" +
+	"\x0ewin_multiplier\x181 \x01(\tR\rwinMultiplier\x12(\n" +
+	"\x10provider_user_id\x182 \x01(\tR\x0eproviderUserId\x126\n" +
+	"\x17provider_transaction_id\x183 \x01(\tR\x15providerTransactionId\x12G\n" +
+	" provider_external_transaction_id\x184 \x01(\tR\x1dproviderExternalTransactionId\"\x96\x01\n" +
 	"\x1aGetBetAndEventInfoResponse\x127\n" +
 	"\bbet_info\x18\x01 \x01(\v2\x1c.api.game.service.v1.BetInfoR\abetInfo\x12?\n" +
 	"\vevent_infos\x18\x02 \x03(\v2\x1e.api.game.service.v1.EventInfoR\n" +
 	"eventInfos\"S\n" +
 	"!GetTransactionAndEventInfoRequest\x12.\n" +
-	"\x13game_transaction_id\x18\x01 \x01(\tR\x11gameTransactionId\"\x84\x10\n" +
+	"\x13game_transaction_id\x18\x01 \x01(\tR\x11gameTransactionId\"\xae\x10\n" +
 	"\x0fTransactionInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\x03R\aroundId\x12\x16\n" +
@@ -17951,7 +17986,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1bturnover_reporting_currency\x18. \x01(\tR\x19turnoverReportingCurrency\x12E\n" +
 	"\x1fbonus_amount_reporting_currency\x18/ \x01(\tR\x1cbonusAmountReportingCurrency\x12U\n" +
 	"'jackpot_contribution_reporting_currency\x180 \x01(\tR$jackpotContributionReportingCurrency\x12C\n" +
-	"\x1ejackpot_win_reporting_currency\x181 \x01(\tR\x1bjackpotWinReportingCurrency\"\xef\x01\n" +
+	"\x1ejackpot_win_reporting_currency\x181 \x01(\tR\x1bjackpotWinReportingCurrency\x12(\n" +
+	"\x10provider_user_id\x182 \x01(\tR\x0eproviderUserId\"\xef\x01\n" +
 	"\"GetTransactionAndEventInfoResponse\x12O\n" +
 	"\x10transaction_info\x18\x01 \x01(\v2$.api.game.service.v1.TransactionInfoR\x0ftransactionInfo\x127\n" +
 	"\bbet_info\x18\x02 \x01(\v2\x1c.api.game.service.v1.BetInfoR\abetInfo\x12?\n" +

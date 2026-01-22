@@ -5941,14 +5941,16 @@ type CustomerRecordReportDetailResponse_GameTransaction struct {
 	// string payout_currency = 8; //
 	PayoutAmount string `protobuf:"bytes,7,opt,name=payout_amount,json=payoutAmount,proto3" json:"payout_amount,omitempty"` //win_amount
 	// string payout_settlement_currency = 9;
-	BetSettlementCurrency  string `protobuf:"bytes,8,opt,name=bet_settlement_currency,json=betSettlementCurrency,proto3" json:"bet_settlement_currency,omitempty"` //settlement_currency
-	BetSettlementAmount    string `protobuf:"bytes,9,opt,name=bet_settlement_amount,json=betSettlementAmount,proto3" json:"bet_settlement_amount,omitempty"`       // settlement_bet_amount
-	ValidBetAmount         string `protobuf:"bytes,10,opt,name=valid_bet_amount,json=validBetAmount,proto3" json:"valid_bet_amount,omitempty"`                     //settlement_win_amount
-	Odds                   string `protobuf:"bytes,11,opt,name=odds,proto3" json:"odds,omitempty"`
-	WinMultiplier          string `protobuf:"bytes,12,opt,name=win_multiplier,json=winMultiplier,proto3" json:"win_multiplier,omitempty"`
-	PayoutSettlementAmount string `protobuf:"bytes,13,opt,name=payout_settlement_amount,json=payoutSettlementAmount,proto3" json:"payout_settlement_amount,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	BetSettlementCurrency         string `protobuf:"bytes,8,opt,name=bet_settlement_currency,json=betSettlementCurrency,proto3" json:"bet_settlement_currency,omitempty"` //settlement_currency
+	BetSettlementAmount           string `protobuf:"bytes,9,opt,name=bet_settlement_amount,json=betSettlementAmount,proto3" json:"bet_settlement_amount,omitempty"`       // settlement_bet_amount
+	ValidBetAmount                string `protobuf:"bytes,10,opt,name=valid_bet_amount,json=validBetAmount,proto3" json:"valid_bet_amount,omitempty"`                     //settlement_win_amount
+	Odds                          string `protobuf:"bytes,11,opt,name=odds,proto3" json:"odds,omitempty"`
+	WinMultiplier                 string `protobuf:"bytes,12,opt,name=win_multiplier,json=winMultiplier,proto3" json:"win_multiplier,omitempty"`
+	PayoutSettlementAmount        string `protobuf:"bytes,13,opt,name=payout_settlement_amount,json=payoutSettlementAmount,proto3" json:"payout_settlement_amount,omitempty"`
+	ProviderExternalTransactionId string `protobuf:"bytes,14,opt,name=provider_external_transaction_id,json=providerExternalTransactionId,proto3" json:"provider_external_transaction_id,omitempty"`
+	ProviderUserId                string `protobuf:"bytes,15,opt,name=provider_user_id,json=providerUserId,proto3" json:"provider_user_id,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *CustomerRecordReportDetailResponse_GameTransaction) Reset() {
@@ -6068,6 +6070,20 @@ func (x *CustomerRecordReportDetailResponse_GameTransaction) GetWinMultiplier() 
 func (x *CustomerRecordReportDetailResponse_GameTransaction) GetPayoutSettlementAmount() string {
 	if x != nil {
 		return x.PayoutSettlementAmount
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetProviderExternalTransactionId() string {
+	if x != nil {
+		return x.ProviderExternalTransactionId
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetProviderUserId() string {
+	if x != nil {
+		return x.ProviderUserId
 	}
 	return ""
 }
@@ -6878,7 +6894,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\b_user_idB\x19\n" +
 	"\x17_payment_transaction_idB\x16\n" +
 	"\x14_game_transaction_idB\x0e\n" +
-	"\f_game_bet_id\"\xf3\x11\n" +
+	"\f_game_bet_id\"\xe6\x12\n" +
 	"\"CustomerRecordReportDetailResponse\x12n\n" +
 	"\vuser_detail\x18\x01 \x01(\v2H.api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetailH\x00R\n" +
 	"userDetail\x88\x01\x01\x12\x86\x01\n" +
@@ -6902,7 +6918,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0fpayment_channel\x18\x06 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\b \x01(\tR\x06amount\x12%\n" +
-	"\x0eprocessing_fee\x18\t \x01(\tR\rprocessingFee\x1a\xcf\x04\n" +
+	"\x0eprocessing_fee\x18\t \x01(\tR\rprocessingFee\x1a\xc2\x05\n" +
 	"\x0fGameTransaction\x12.\n" +
 	"\x13game_transaction_id\x18\x01 \x01(\x03R\x11gameTransactionId\x126\n" +
 	"\x17provider_transaction_id\x18\x02 \x01(\tR\x15providerTransactionId\x12C\n" +
@@ -6919,7 +6935,9 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	" \x01(\tR\x0evalidBetAmount\x12\x12\n" +
 	"\x04odds\x18\v \x01(\tR\x04odds\x12%\n" +
 	"\x0ewin_multiplier\x18\f \x01(\tR\rwinMultiplier\x128\n" +
-	"\x18payout_settlement_amount\x18\r \x01(\tR\x16payoutSettlementAmount\x1a\xbc\x03\n" +
+	"\x18payout_settlement_amount\x18\r \x01(\tR\x16payoutSettlementAmount\x12G\n" +
+	" provider_external_transaction_id\x18\x0e \x01(\tR\x1dproviderExternalTransactionId\x12(\n" +
+	"\x10provider_user_id\x18\x0f \x01(\tR\x0eproviderUserId\x1a\xbc\x03\n" +
 	"\x1aEventSettlementInformation\x12\x8a\x01\n" +
 	"\rmatch_results\x18\x01 \x03(\v2e.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResultsR\fmatchResults\x1a\x90\x02\n" +
 	"\fMatchResults\x12\x12\n" +

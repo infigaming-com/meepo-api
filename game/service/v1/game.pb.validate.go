@@ -12746,6 +12746,12 @@ func (m *BetInfo) validate(all bool) error {
 
 	// no validation rules for WinMultiplier
 
+	// no validation rules for ProviderUserId
+
+	// no validation rules for ProviderTransactionId
+
+	// no validation rules for ProviderExternalTransactionId
+
 	if len(errors) > 0 {
 		return BetInfoMultiError(errors)
 	}
@@ -13214,6 +13220,8 @@ func (m *TransactionInfo) validate(all bool) error {
 	// no validation rules for JackpotContributionReportingCurrency
 
 	// no validation rules for JackpotWinReportingCurrency
+
+	// no validation rules for ProviderUserId
 
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)

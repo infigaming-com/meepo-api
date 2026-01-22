@@ -801,6 +801,8 @@ message CustomerRecordReportDetailResponse{
 		string odds = 11;
 		string win_multiplier = 12;
 		string payout_settlement_amount = 13;
+		string provider_external_transaction_id = 14;
+		string provider_user_id = 15;
 	}
 	message EventSettlementInformation {
 		message MatchResults {
