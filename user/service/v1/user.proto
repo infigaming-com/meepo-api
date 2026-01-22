@@ -502,6 +502,22 @@ service User {
 			get: "/v1/user/oauth/accounts"
 		};
 	}
+
+	// ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+	// Initiate OAuth login flow - returns authorization URL for redirect
+	rpc InitiateOAuthLogin(InitiateOAuthLoginRequest) returns (InitiateOAuthLoginResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/oauth/initiate"
+			body: "*"
+		};
+	}
+	// Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+	rpc InitiateOAuthBinding(InitiateOAuthBindingRequest) returns (InitiateOAuthBindingResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/oauth/bind/initiate"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -2289,4 +2305,34 @@ message ListBoundOAuthAccountsRequest {
 message ListBoundOAuthAccountsResponse {
 	repeated OAuthAccountInfo accounts = 1;
 	bool has_password = 2;  // Whether user has password login method
+}
+
+// ============================================================================
+// OAuth Callback Flow Messages (for Twitter/Apple without JS SDK)
+// ============================================================================
+
+// InitiateOAuthLoginRequest - initiate OAuth login via redirect flow
+message InitiateOAuthLoginRequest {
+	OAuthProvider provider = 1;            // OAuth provider (TWITTER, APPLE)
+	string frontend_redirect_uri = 2;      // URL to redirect user after OAuth callback
+	string client_state = 3;               // Optional: client state to preserve across redirect
+}
+
+// InitiateOAuthLoginResponse - returns authorization URL for redirect
+message InitiateOAuthLoginResponse {
+	string authorization_url = 1;          // Redirect user to this URL
+	string state = 2;                      // Server-generated state for CSRF protection
+}
+
+// InitiateOAuthBindingRequest - initiate OAuth binding via redirect flow (requires authentication)
+message InitiateOAuthBindingRequest {
+	OAuthProvider provider = 1;            // OAuth provider (TWITTER, APPLE)
+	string frontend_redirect_uri = 2;      // URL to redirect user after OAuth callback
+	string client_state = 3;               // Optional: client state to preserve across redirect
+}
+
+// InitiateOAuthBindingResponse - returns authorization URL for redirect
+message InitiateOAuthBindingResponse {
+	string authorization_url = 1;          // Redirect user to this URL
+	string state = 2;                      // Server-generated state for CSRF protection
 }

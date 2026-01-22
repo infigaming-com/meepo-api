@@ -30221,6 +30221,436 @@ var _ interface {
 	ErrorName() string
 } = ListBoundOAuthAccountsResponseValidationError{}
 
+// Validate checks the field values on InitiateOAuthLoginRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateOAuthLoginRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateOAuthLoginRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InitiateOAuthLoginRequestMultiError, or nil if none found.
+func (m *InitiateOAuthLoginRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateOAuthLoginRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for FrontendRedirectUri
+
+	// no validation rules for ClientState
+
+	if len(errors) > 0 {
+		return InitiateOAuthLoginRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateOAuthLoginRequestMultiError is an error wrapping multiple validation
+// errors returned by InitiateOAuthLoginRequest.ValidateAll() if the
+// designated constraints aren't met.
+type InitiateOAuthLoginRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateOAuthLoginRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateOAuthLoginRequestMultiError) AllErrors() []error { return m }
+
+// InitiateOAuthLoginRequestValidationError is the validation error returned by
+// InitiateOAuthLoginRequest.Validate if the designated constraints aren't met.
+type InitiateOAuthLoginRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateOAuthLoginRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateOAuthLoginRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateOAuthLoginRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateOAuthLoginRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateOAuthLoginRequestValidationError) ErrorName() string {
+	return "InitiateOAuthLoginRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateOAuthLoginRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateOAuthLoginRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateOAuthLoginRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateOAuthLoginRequestValidationError{}
+
+// Validate checks the field values on InitiateOAuthLoginResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateOAuthLoginResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateOAuthLoginResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InitiateOAuthLoginResponseMultiError, or nil if none found.
+func (m *InitiateOAuthLoginResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateOAuthLoginResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AuthorizationUrl
+
+	// no validation rules for State
+
+	if len(errors) > 0 {
+		return InitiateOAuthLoginResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateOAuthLoginResponseMultiError is an error wrapping multiple
+// validation errors returned by InitiateOAuthLoginResponse.ValidateAll() if
+// the designated constraints aren't met.
+type InitiateOAuthLoginResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateOAuthLoginResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateOAuthLoginResponseMultiError) AllErrors() []error { return m }
+
+// InitiateOAuthLoginResponseValidationError is the validation error returned
+// by InitiateOAuthLoginResponse.Validate if the designated constraints aren't met.
+type InitiateOAuthLoginResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateOAuthLoginResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateOAuthLoginResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateOAuthLoginResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateOAuthLoginResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateOAuthLoginResponseValidationError) ErrorName() string {
+	return "InitiateOAuthLoginResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateOAuthLoginResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateOAuthLoginResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateOAuthLoginResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateOAuthLoginResponseValidationError{}
+
+// Validate checks the field values on InitiateOAuthBindingRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateOAuthBindingRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateOAuthBindingRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InitiateOAuthBindingRequestMultiError, or nil if none found.
+func (m *InitiateOAuthBindingRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateOAuthBindingRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Provider
+
+	// no validation rules for FrontendRedirectUri
+
+	// no validation rules for ClientState
+
+	if len(errors) > 0 {
+		return InitiateOAuthBindingRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateOAuthBindingRequestMultiError is an error wrapping multiple
+// validation errors returned by InitiateOAuthBindingRequest.ValidateAll() if
+// the designated constraints aren't met.
+type InitiateOAuthBindingRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateOAuthBindingRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateOAuthBindingRequestMultiError) AllErrors() []error { return m }
+
+// InitiateOAuthBindingRequestValidationError is the validation error returned
+// by InitiateOAuthBindingRequest.Validate if the designated constraints
+// aren't met.
+type InitiateOAuthBindingRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateOAuthBindingRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateOAuthBindingRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateOAuthBindingRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateOAuthBindingRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateOAuthBindingRequestValidationError) ErrorName() string {
+	return "InitiateOAuthBindingRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateOAuthBindingRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateOAuthBindingRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateOAuthBindingRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateOAuthBindingRequestValidationError{}
+
+// Validate checks the field values on InitiateOAuthBindingResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InitiateOAuthBindingResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InitiateOAuthBindingResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InitiateOAuthBindingResponseMultiError, or nil if none found.
+func (m *InitiateOAuthBindingResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InitiateOAuthBindingResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AuthorizationUrl
+
+	// no validation rules for State
+
+	if len(errors) > 0 {
+		return InitiateOAuthBindingResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// InitiateOAuthBindingResponseMultiError is an error wrapping multiple
+// validation errors returned by InitiateOAuthBindingResponse.ValidateAll() if
+// the designated constraints aren't met.
+type InitiateOAuthBindingResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InitiateOAuthBindingResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InitiateOAuthBindingResponseMultiError) AllErrors() []error { return m }
+
+// InitiateOAuthBindingResponseValidationError is the validation error returned
+// by InitiateOAuthBindingResponse.Validate if the designated constraints
+// aren't met.
+type InitiateOAuthBindingResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InitiateOAuthBindingResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InitiateOAuthBindingResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InitiateOAuthBindingResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InitiateOAuthBindingResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InitiateOAuthBindingResponseValidationError) ErrorName() string {
+	return "InitiateOAuthBindingResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InitiateOAuthBindingResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInitiateOAuthBindingResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InitiateOAuthBindingResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InitiateOAuthBindingResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

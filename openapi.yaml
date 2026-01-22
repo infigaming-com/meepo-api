@@ -7375,6 +7375,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/oauth/initiate:
+        post:
+            tags:
+                - User
+            description: |-
+                ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+                 Initiate OAuth login flow - returns authorization URL for redirect
+            operationId: User_InitiateOAuthLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthLoginResponse'
     /v1/user/auth/password/reset:
         post:
             tags:
@@ -7601,6 +7622,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.BindOAuthAccountResponse'
+    /v1/user/oauth/bind/initiate:
+        post:
+            tags:
+                - User
+            description: Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+            operationId: User_InitiateOAuthBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthBindingResponse'
     /v1/user/oauth/providers:
         get:
             tags:
@@ -21722,6 +21762,56 @@ components:
         api.user.service.v1.GetUserVipLevelRequest:
             type: object
             properties: {}
+        api.user.service.v1.InitiateOAuthBindingRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                frontendRedirectUri:
+                    type: string
+                clientState:
+                    type: string
+            description: InitiateOAuthBindingRequest - initiate OAuth binding via redirect flow (requires authentication)
+        api.user.service.v1.InitiateOAuthBindingResponse:
+            type: object
+            properties:
+                authorizationUrl:
+                    type: string
+                state:
+                    type: string
+            description: InitiateOAuthBindingResponse - returns authorization URL for redirect
+        api.user.service.v1.InitiateOAuthLoginRequest:
+            type: object
+            properties:
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                frontendRedirectUri:
+                    type: string
+                clientState:
+                    type: string
+            description: InitiateOAuthLoginRequest - initiate OAuth login via redirect flow
+        api.user.service.v1.InitiateOAuthLoginResponse:
+            type: object
+            properties:
+                authorizationUrl:
+                    type: string
+                state:
+                    type: string
+            description: InitiateOAuthLoginResponse - returns authorization URL for redirect
         api.user.service.v1.ListBottomOperatorsResponse:
             type: object
             properties:
