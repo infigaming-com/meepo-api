@@ -8856,6 +8856,120 @@ var _ interface {
 	ErrorName() string
 } = ListUniversalCodeUsagesRequestValidationError{}
 
+// Validate checks the field values on AdjustCreditRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdjustCreditRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdjustCreditRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdjustCreditRequestMultiError, or nil if none found.
+func (m *AdjustCreditRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdjustCreditRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TargetUserId
+
+	// no validation rules for Currency
+
+	// no validation rules for CreditId
+
+	// no validation rules for Field
+
+	// no validation rules for Direction
+
+	// no validation rules for Value
+
+	if len(errors) > 0 {
+		return AdjustCreditRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdjustCreditRequestMultiError is an error wrapping multiple validation
+// errors returned by AdjustCreditRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AdjustCreditRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdjustCreditRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdjustCreditRequestMultiError) AllErrors() []error { return m }
+
+// AdjustCreditRequestValidationError is the validation error returned by
+// AdjustCreditRequest.Validate if the designated constraints aren't met.
+type AdjustCreditRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdjustCreditRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdjustCreditRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdjustCreditRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdjustCreditRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdjustCreditRequestValidationError) ErrorName() string {
+	return "AdjustCreditRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdjustCreditRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdjustCreditRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdjustCreditRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdjustCreditRequestValidationError{}
+
 // Validate checks the field values on GetWalletCreditsResponse_Credit with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

@@ -340,6 +340,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// AdjustCredit adjusts a credit's turnover or threshold value
+	rpc AdjustCredit(AdjustCreditRequest) returns (wallet.service.v1.AdjustCreditResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/credit/adjust"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -870,4 +878,17 @@ message GenerateUniversalPromoCodesRequest {
 // List Universal Code Usages
 message ListUniversalCodeUsagesRequest {
 	int64 campaign_id = 1;
+}
+
+// AdjustCredit adjusts a credit's turnover or threshold value
+message AdjustCreditRequest {
+	int64 target_user_id = 1;
+	string currency = 2;
+	int64 credit_id = 3;
+	// Adjustment parameters
+	// field: "cash_turnover", "cash_turnover_threshold", "operator_bonus_turnover", "operator_bonus_turnover_threshold"
+	string field = 4;
+	// direction: "add", "subtract"
+	string direction = 5;
+	string value = 6; // Adjustment value (positive number)
 }

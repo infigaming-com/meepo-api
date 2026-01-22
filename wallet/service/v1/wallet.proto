@@ -281,6 +281,12 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	// BatchGetUserFinancialMetrics returns financial metrics (deposit/withdraw) for multiple users
+	rpc BatchGetUserFinancialMetrics(BatchGetUserFinancialMetricsRequest) returns (BatchGetUserFinancialMetricsResponse) {}
+
+	// AdjustCredit adjusts a credit's turnover or threshold value
+	rpc AdjustCredit(AdjustCreditRequest) returns (AdjustCreditResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -593,6 +599,15 @@ message GetWalletsResponse {
 		string bonus_turnover_threshold = 13;
 		string withdrawable_cash = 14;
 		string transferable_bonus = 15;
+		string total_original_operator_bonus = 16;
+		string total_original_provider_bonus = 17;
+		string total_cash_withdraw_limit = 18;
+		string total_operator_bonus_withdraw_limit = 19;
+		string total_provider_bonus_withdraw_limit = 20;
+		string total_cash_withdrawn = 21;
+		string total_operator_bonus_transferred = 22;
+		int32 total_free_spin_count = 23;
+		string total_free_bet_amount = 24;
 	}
 	TotalAssets total_assets = 1;
 	repeated Wallet wallets = 2;
@@ -1895,4 +1910,62 @@ message GetOperatorUserFinancialSummaryResponse {
 	string provider_bonus_usd = 5;
 	string provider_bonus_reporting_currency = 6;
 	TransactionStats transaction_stats = 7;
+}
+
+message BatchGetUserFinancialMetricsRequest {
+	repeated int64 user_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+	repeated string currencies = 3; // If empty, return aggregated totals; if specified, return per-currency breakdown
+}
+
+message BatchGetUserFinancialMetricsResponse {
+	repeated UserFinancialMetrics user_metrics = 1;
+	message UserFinancialMetrics {
+		int64 user_id = 1;
+		// Per-currency breakdown (when currencies specified in request)
+		repeated CurrencyFinancialMetrics currency_metrics = 2;
+		// Aggregated totals (always returned)
+		string total_deposit_usd = 3;
+		string total_withdraw_usd = 4;
+		int32 total_deposit_count = 5;
+		int32 total_withdraw_count = 6;
+		string total_deposit_reporting_currency = 7;
+		string total_withdraw_reporting_currency = 8;
+		message CurrencyFinancialMetrics {
+			string currency = 1;
+			// Original currency amounts
+			string deposit_amount = 2;
+			string withdraw_amount = 3;
+			int32 deposit_count = 4;
+			int32 withdraw_count = 5; // settled payment_withdraw_freeze transactions
+			// USD amounts
+			string deposit_amount_usd = 6;
+			string withdraw_amount_usd = 7;
+			// Reporting currency amounts
+			string deposit_amount_reporting_currency = 8;
+			string withdraw_amount_reporting_currency = 9;
+		}
+	}
+}
+
+message AdjustCreditRequest {
+	int64 target_user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+	int64 credit_id = 4; // The credit to adjust
+	// Adjustment parameters (only one field per request)
+	// field: "cash_turnover", "cash_turnover_threshold", "operator_bonus_turnover", "operator_bonus_turnover_threshold"
+	string field = 5;
+	// direction: "add", "subtract"
+	string direction = 6;
+	string value = 7; // Adjustment value (positive number)
+	// Initiator info
+	int64 initiator_user_id = 8;
+	api.common.OperatorContext initiator_operator_context = 9;
+}
+
+message AdjustCreditResponse {
+	int64 credit_id = 1;
+	// Updated value
+	string new_value = 2;
 }

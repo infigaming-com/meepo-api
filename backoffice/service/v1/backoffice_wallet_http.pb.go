@@ -21,6 +21,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeWalletAddWalletCurrency = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
+const OperationBackofficeWalletAdjustCredit = "/api.backoffice.service.v1.BackofficeWallet/AdjustCredit"
 const OperationBackofficeWalletCreatePromoCodeCampaign = "/api.backoffice.service.v1.BackofficeWallet/CreatePromoCodeCampaign"
 const OperationBackofficeWalletDeleteDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
 const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
@@ -67,6 +68,8 @@ const OperationBackofficeWalletUpdateWalletCurrency = "/api.backoffice.service.v
 
 type BackofficeWalletHTTPServer interface {
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
+	// AdjustCredit AdjustCredit adjusts a credit's turnover or threshold value
+	AdjustCredit(context.Context, *AdjustCreditRequest) (*v1.AdjustCreditResponse, error)
 	// CreatePromoCodeCampaign CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error)
 	// DeleteDepositRewardSequences DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
@@ -195,6 +198,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/manual/debit", _BackofficeWallet_ManualDebit0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/list", _BackofficeWallet_ListManualJournalEntries0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/manual/journal-entries/export", _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/credit/adjust", _BackofficeWallet_AdjustCredit0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -1165,8 +1169,32 @@ func _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv BackofficeWa
 	}
 }
 
+func _BackofficeWallet_AdjustCredit0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AdjustCreditRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletAdjustCredit)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AdjustCredit(ctx, req.(*AdjustCreditRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.AdjustCreditResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
+	// AdjustCredit AdjustCredit adjusts a credit's turnover or threshold value
+	AdjustCredit(ctx context.Context, req *AdjustCreditRequest, opts ...http.CallOption) (rsp *v1.AdjustCreditResponse, err error)
 	// CreatePromoCodeCampaign CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, req *CreatePromoCodeCampaignRequest, opts ...http.CallOption) (rsp *v1.CreatePromoCodeCampaignResponse, err error)
 	// DeleteDepositRewardSequences DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
@@ -1262,6 +1290,20 @@ func (c *BackofficeWalletHTTPClientImpl) AddWalletCurrency(ctx context.Context, 
 	pattern := "/v1/backoffice/wallet/currencies/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletAddWalletCurrency))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// AdjustCredit AdjustCredit adjusts a credit's turnover or threshold value
+func (c *BackofficeWalletHTTPClientImpl) AdjustCredit(ctx context.Context, in *AdjustCreditRequest, opts ...http.CallOption) (*v1.AdjustCreditResponse, error) {
+	var out v1.AdjustCreditResponse
+	pattern := "/v1/backoffice/wallet/credit/adjust"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletAdjustCredit))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

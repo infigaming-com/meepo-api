@@ -64,6 +64,7 @@ const (
 	BackofficeWallet_ManualDebit_FullMethodName                           = "/api.backoffice.service.v1.BackofficeWallet/ManualDebit"
 	BackofficeWallet_ListManualJournalEntries_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
 	BackofficeWallet_ExportManualJournalEntries_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
+	BackofficeWallet_AdjustCredit_FullMethodName                          = "/api.backoffice.service.v1.BackofficeWallet/AdjustCredit"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -151,6 +152,8 @@ type BackofficeWalletClient interface {
 	ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ListManualJournalEntriesResponse, error)
 	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ExportManualJournalEntriesResponse, error)
+	// AdjustCredit adjusts a credit's turnover or threshold value
+	AdjustCredit(ctx context.Context, in *AdjustCreditRequest, opts ...grpc.CallOption) (*v1.AdjustCreditResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -601,6 +604,16 @@ func (c *backofficeWalletClient) ExportManualJournalEntries(ctx context.Context,
 	return out, nil
 }
 
+func (c *backofficeWalletClient) AdjustCredit(ctx context.Context, in *AdjustCreditRequest, opts ...grpc.CallOption) (*v1.AdjustCreditResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AdjustCreditResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_AdjustCredit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -686,6 +699,8 @@ type BackofficeWalletServer interface {
 	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error)
 	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
+	// AdjustCredit adjusts a credit's turnover or threshold value
+	AdjustCredit(context.Context, *AdjustCreditRequest) (*v1.AdjustCreditResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -827,6 +842,9 @@ func (UnimplementedBackofficeWalletServer) ListManualJournalEntries(context.Cont
 }
 func (UnimplementedBackofficeWalletServer) ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ExportManualJournalEntries not implemented")
+}
+func (UnimplementedBackofficeWalletServer) AdjustCredit(context.Context, *AdjustCreditRequest) (*v1.AdjustCreditResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdjustCredit not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1641,6 +1659,24 @@ func _BackofficeWallet_ExportManualJournalEntries_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_AdjustCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdjustCreditRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).AdjustCredit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_AdjustCredit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).AdjustCredit(ctx, req.(*AdjustCreditRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1823,6 +1859,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportManualJournalEntries",
 			Handler:    _BackofficeWallet_ExportManualJournalEntries_Handler,
+		},
+		{
+			MethodName: "AdjustCredit",
+			Handler:    _BackofficeWallet_AdjustCredit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
