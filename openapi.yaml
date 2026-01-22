@@ -21225,6 +21225,10 @@ components:
                     type: boolean
                 allowLinking:
                     type: boolean
+                clientId:
+                    type: string
+                supportsJsSdk:
+                    type: boolean
             description: AvailableOAuthProvider - provider info for frontend
         api.user.service.v1.BindOAuthAccountRequest:
             type: object

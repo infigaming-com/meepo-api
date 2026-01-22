@@ -13706,6 +13706,8 @@ type AvailableOAuthProvider struct {
 	AuthorizationUrl  string                 `protobuf:"bytes,3,opt,name=authorization_url,json=authorizationUrl,proto3" json:"authorization_url,omitempty"` // OAuth authorization URL
 	AllowRegistration bool                   `protobuf:"varint,4,opt,name=allow_registration,json=allowRegistration,proto3" json:"allow_registration,omitempty"`
 	AllowLinking      bool                   `protobuf:"varint,5,opt,name=allow_linking,json=allowLinking,proto3" json:"allow_linking,omitempty"`
+	ClientId          string                 `protobuf:"bytes,6,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`                   // Client ID for frontend JS SDK initialization (Google, Facebook)
+	SupportsJsSdk     bool                   `protobuf:"varint,7,opt,name=supports_js_sdk,json=supportsJsSdk,proto3" json:"supports_js_sdk,omitempty"` // Whether provider supports frontend JS SDK (true for Google/Facebook, false for Twitter/Apple)
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -13771,6 +13773,20 @@ func (x *AvailableOAuthProvider) GetAllowRegistration() bool {
 func (x *AvailableOAuthProvider) GetAllowLinking() bool {
 	if x != nil {
 		return x.AllowLinking
+	}
+	return false
+}
+
+func (x *AvailableOAuthProvider) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *AvailableOAuthProvider) GetSupportsJsSdk() bool {
+	if x != nil {
+		return x.SupportsJsSdk
 	}
 	return false
 }
@@ -17436,13 +17452,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
 	"\tconfig_id\x18\x03 \x01(\x03R\bconfigId\"b\n" +
 	"\x1eGetOAuthProviderConfigResponse\x12@\n" +
-	"\x06config\x18\x01 \x01(\v2(.api.user.service.v1.OAuthProviderConfigR\x06config\"\xed\x01\n" +
+	"\x06config\x18\x01 \x01(\v2(.api.user.service.v1.OAuthProviderConfigR\x06config\"\xb2\x02\n" +
 	"\x16AvailableOAuthProvider\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12+\n" +
 	"\x11authorization_url\x18\x03 \x01(\tR\x10authorizationUrl\x12-\n" +
 	"\x12allow_registration\x18\x04 \x01(\bR\x11allowRegistration\x12#\n" +
-	"\rallow_linking\x18\x05 \x01(\bR\fallowLinking\"#\n" +
+	"\rallow_linking\x18\x05 \x01(\bR\fallowLinking\x12\x1b\n" +
+	"\tclient_id\x18\x06 \x01(\tR\bclientId\x12&\n" +
+	"\x0fsupports_js_sdk\x18\a \x01(\bR\rsupportsJsSdk\"#\n" +
 	"!GetAvailableOAuthProvidersRequest\"o\n" +
 	"\"GetAvailableOAuthProvidersResponse\x12I\n" +
 	"\tproviders\x18\x01 \x03(\v2+.api.user.service.v1.AvailableOAuthProviderR\tproviders\"\x90\x02\n" +

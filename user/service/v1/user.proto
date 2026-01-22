@@ -2250,6 +2250,8 @@ message AvailableOAuthProvider {
 	string authorization_url = 3;   // OAuth authorization URL
 	bool allow_registration = 4;
 	bool allow_linking = 5;
+	string client_id = 6;            // Client ID for frontend JS SDK initialization (Google, Facebook)
+	bool supports_js_sdk = 7;        // Whether provider supports frontend JS SDK (true for Google/Facebook, false for Twitter/Apple)
 }
 
 // GetAvailableOAuthProvidersRequest - get available OAuth providers for operator

@@ -28934,6 +28934,10 @@ func (m *AvailableOAuthProvider) validate(all bool) error {
 
 	// no validation rules for AllowLinking
 
+	// no validation rules for ClientId
+
+	// no validation rules for SupportsJsSdk
+
 	if len(errors) > 0 {
 		return AvailableOAuthProviderMultiError(errors)
 	}
