@@ -38,6 +38,8 @@ const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/Get
 const OperationUserGetUserPrivacySettings = "/api.user.service.v1.User/GetUserPrivacySettings"
 const OperationUserGetUserTags = "/api.user.service.v1.User/GetUserTags"
 const OperationUserGetUserVipLevel = "/api.user.service.v1.User/GetUserVipLevel"
+const OperationUserInitiateOAuthBinding = "/api.user.service.v1.User/InitiateOAuthBinding"
+const OperationUserInitiateOAuthLogin = "/api.user.service.v1.User/InitiateOAuthLogin"
 const OperationUserListBoundOAuthAccounts = "/api.user.service.v1.User/ListBoundOAuthAccounts"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
@@ -83,6 +85,11 @@ type UserHTTPServer interface {
 	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error)
+	// InitiateOAuthBinding Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+	InitiateOAuthBinding(context.Context, *InitiateOAuthBindingRequest) (*InitiateOAuthBindingResponse, error)
+	// InitiateOAuthLogin ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+	// Initiate OAuth login flow - returns authorization URL for redirect
+	InitiateOAuthLogin(context.Context, *InitiateOAuthLoginRequest) (*InitiateOAuthLoginResponse, error)
 	// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
 	ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error)
 	// Login Login an existing user with password-based authentication.
@@ -155,6 +162,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/oauth/bind", _User_BindOAuthAccount0_HTTP_Handler(srv))
 	r.POST("/v1/user/oauth/unbind", _User_UnbindOAuthAccount0_HTTP_Handler(srv))
 	r.GET("/v1/user/oauth/accounts", _User_ListBoundOAuthAccounts0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/oauth/initiate", _User_InitiateOAuthLogin0_HTTP_Handler(srv))
+	r.POST("/v1/user/oauth/bind/initiate", _User_InitiateOAuthBinding0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -918,6 +927,50 @@ func _User_ListBoundOAuthAccounts0_HTTP_Handler(srv UserHTTPServer) func(ctx htt
 	}
 }
 
+func _User_InitiateOAuthLogin0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in InitiateOAuthLoginRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserInitiateOAuthLogin)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.InitiateOAuthLogin(ctx, req.(*InitiateOAuthLoginRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*InitiateOAuthLoginResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_InitiateOAuthBinding0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in InitiateOAuthBindingRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserInitiateOAuthBinding)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.InitiateOAuthBinding(ctx, req.(*InitiateOAuthBindingRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*InitiateOAuthBindingResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
@@ -945,6 +998,11 @@ type UserHTTPClient interface {
 	// and also exists in the related operator's tag list.
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	GetUserVipLevel(ctx context.Context, req *GetUserVipLevelRequest, opts ...http.CallOption) (rsp *v1.GetUserVipLevelResponse, err error)
+	// InitiateOAuthBinding Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+	InitiateOAuthBinding(ctx context.Context, req *InitiateOAuthBindingRequest, opts ...http.CallOption) (rsp *InitiateOAuthBindingResponse, err error)
+	// InitiateOAuthLogin ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+	// Initiate OAuth login flow - returns authorization URL for redirect
+	InitiateOAuthLogin(ctx context.Context, req *InitiateOAuthLoginRequest, opts ...http.CallOption) (rsp *InitiateOAuthLoginResponse, err error)
 	// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
 	ListBoundOAuthAccounts(ctx context.Context, req *ListBoundOAuthAccountsRequest, opts ...http.CallOption) (rsp *ListBoundOAuthAccountsResponse, err error)
 	// Login Login an existing user with password-based authentication.
@@ -1222,6 +1280,35 @@ func (c *UserHTTPClientImpl) GetUserVipLevel(ctx context.Context, in *GetUserVip
 	pattern := "/v1/user/vip/level/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetUserVipLevel))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// InitiateOAuthBinding Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+func (c *UserHTTPClientImpl) InitiateOAuthBinding(ctx context.Context, in *InitiateOAuthBindingRequest, opts ...http.CallOption) (*InitiateOAuthBindingResponse, error) {
+	var out InitiateOAuthBindingResponse
+	pattern := "/v1/user/oauth/bind/initiate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserInitiateOAuthBinding))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// InitiateOAuthLogin ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+// Initiate OAuth login flow - returns authorization URL for redirect
+func (c *UserHTTPClientImpl) InitiateOAuthLogin(ctx context.Context, in *InitiateOAuthLoginRequest, opts ...http.CallOption) (*InitiateOAuthLoginResponse, error) {
+	var out InitiateOAuthLoginResponse
+	pattern := "/v1/user/auth/oauth/initiate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserInitiateOAuthLogin))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

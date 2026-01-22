@@ -131,6 +131,8 @@ const (
 	User_BindOAuthAccount_FullMethodName                   = "/api.user.service.v1.User/BindOAuthAccount"
 	User_UnbindOAuthAccount_FullMethodName                 = "/api.user.service.v1.User/UnbindOAuthAccount"
 	User_ListBoundOAuthAccounts_FullMethodName             = "/api.user.service.v1.User/ListBoundOAuthAccounts"
+	User_InitiateOAuthLogin_FullMethodName                 = "/api.user.service.v1.User/InitiateOAuthLogin"
+	User_InitiateOAuthBinding_FullMethodName               = "/api.user.service.v1.User/InitiateOAuthBinding"
 )
 
 // UserClient is the client API for User service.
@@ -328,6 +330,11 @@ type UserClient interface {
 	UnbindOAuthAccount(ctx context.Context, in *UnbindOAuthAccountRequest, opts ...grpc.CallOption) (*UnbindOAuthAccountResponse, error)
 	// List OAuth accounts bound to current user (requires authentication)
 	ListBoundOAuthAccounts(ctx context.Context, in *ListBoundOAuthAccountsRequest, opts ...grpc.CallOption) (*ListBoundOAuthAccountsResponse, error)
+	// ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+	// Initiate OAuth login flow - returns authorization URL for redirect
+	InitiateOAuthLogin(ctx context.Context, in *InitiateOAuthLoginRequest, opts ...grpc.CallOption) (*InitiateOAuthLoginResponse, error)
+	// Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+	InitiateOAuthBinding(ctx context.Context, in *InitiateOAuthBindingRequest, opts ...grpc.CallOption) (*InitiateOAuthBindingResponse, error)
 }
 
 type userClient struct {
@@ -1448,6 +1455,26 @@ func (c *userClient) ListBoundOAuthAccounts(ctx context.Context, in *ListBoundOA
 	return out, nil
 }
 
+func (c *userClient) InitiateOAuthLogin(ctx context.Context, in *InitiateOAuthLoginRequest, opts ...grpc.CallOption) (*InitiateOAuthLoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateOAuthLoginResponse)
+	err := c.cc.Invoke(ctx, User_InitiateOAuthLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) InitiateOAuthBinding(ctx context.Context, in *InitiateOAuthBindingRequest, opts ...grpc.CallOption) (*InitiateOAuthBindingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateOAuthBindingResponse)
+	err := c.cc.Invoke(ctx, User_InitiateOAuthBinding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1643,6 +1670,11 @@ type UserServer interface {
 	UnbindOAuthAccount(context.Context, *UnbindOAuthAccountRequest) (*UnbindOAuthAccountResponse, error)
 	// List OAuth accounts bound to current user (requires authentication)
 	ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error)
+	// ============ OAuth Callback Flow APIs (for Twitter/Apple without JS SDK) ============
+	// Initiate OAuth login flow - returns authorization URL for redirect
+	InitiateOAuthLogin(context.Context, *InitiateOAuthLoginRequest) (*InitiateOAuthLoginResponse, error)
+	// Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
+	InitiateOAuthBinding(context.Context, *InitiateOAuthBindingRequest) (*InitiateOAuthBindingResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1985,6 +2017,12 @@ func (UnimplementedUserServer) UnbindOAuthAccount(context.Context, *UnbindOAuthA
 }
 func (UnimplementedUserServer) ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBoundOAuthAccounts not implemented")
+}
+func (UnimplementedUserServer) InitiateOAuthLogin(context.Context, *InitiateOAuthLoginRequest) (*InitiateOAuthLoginResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InitiateOAuthLogin not implemented")
+}
+func (UnimplementedUserServer) InitiateOAuthBinding(context.Context, *InitiateOAuthBindingRequest) (*InitiateOAuthBindingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InitiateOAuthBinding not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4005,6 +4043,42 @@ func _User_ListBoundOAuthAccounts_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_InitiateOAuthLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateOAuthLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).InitiateOAuthLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_InitiateOAuthLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).InitiateOAuthLogin(ctx, req.(*InitiateOAuthLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_InitiateOAuthBinding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateOAuthBindingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).InitiateOAuthBinding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_InitiateOAuthBinding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).InitiateOAuthBinding(ctx, req.(*InitiateOAuthBindingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4455,6 +4529,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBoundOAuthAccounts",
 			Handler:    _User_ListBoundOAuthAccounts_Handler,
+		},
+		{
+			MethodName: "InitiateOAuthLogin",
+			Handler:    _User_InitiateOAuthLogin_Handler,
+		},
+		{
+			MethodName: "InitiateOAuthBinding",
+			Handler:    _User_InitiateOAuthBinding_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

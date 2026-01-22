@@ -188,6 +188,13 @@ const (
 	ErrorReason_GET_USER_CREDENTIAL_FAILED      ErrorReason = 10319
 	ErrorReason_ADD_USER_CREDENTIAL_FAILED      ErrorReason = 10320
 	ErrorReason_DELETE_USER_CREDENTIAL_FAILED   ErrorReason = 10321
+	// OAuth Callback Flow Errors (for Twitter/Apple redirect flow)
+	ErrorReason_INVALID_REDIRECT_URI       ErrorReason = 10330
+	ErrorReason_OAUTH_STATE_EXPIRED        ErrorReason = 10331
+	ErrorReason_OAUTH_STATE_INVALID        ErrorReason = 10332
+	ErrorReason_OAUTH_STATE_ALREADY_USED   ErrorReason = 10333
+	ErrorReason_OAUTH_CODE_EXCHANGE_FAILED ErrorReason = 10334
+	ErrorReason_OAUTH_STATE_CREATE_FAILED  ErrorReason = 10335
 )
 
 // Enum value maps for ErrorReason.
@@ -353,6 +360,12 @@ var (
 		10319: "GET_USER_CREDENTIAL_FAILED",
 		10320: "ADD_USER_CREDENTIAL_FAILED",
 		10321: "DELETE_USER_CREDENTIAL_FAILED",
+		10330: "INVALID_REDIRECT_URI",
+		10331: "OAUTH_STATE_EXPIRED",
+		10332: "OAUTH_STATE_INVALID",
+		10333: "OAUTH_STATE_ALREADY_USED",
+		10334: "OAUTH_CODE_EXCHANGE_FAILED",
+		10335: "OAUTH_STATE_CREATE_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -515,6 +528,12 @@ var (
 		"GET_USER_CREDENTIAL_FAILED":                     10319,
 		"ADD_USER_CREDENTIAL_FAILED":                     10320,
 		"DELETE_USER_CREDENTIAL_FAILED":                  10321,
+		"INVALID_REDIRECT_URI":                           10330,
+		"OAUTH_STATE_EXPIRED":                            10331,
+		"OAUTH_STATE_INVALID":                            10332,
+		"OAUTH_STATE_ALREADY_USED":                       10333,
+		"OAUTH_CODE_EXCHANGE_FAILED":                     10334,
+		"OAUTH_STATE_CREATE_FAILED":                      10335,
 	}
 )
 
@@ -549,7 +568,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x8f*\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xd6+\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -710,7 +729,13 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\fUNAUTHORIZED\x10\xceP\x1a\x04\xa8E\x91\x03\x12\x1f\n" +
 	"\x1aGET_USER_CREDENTIAL_FAILED\x10\xcfP\x12\x1f\n" +
 	"\x1aADD_USER_CREDENTIAL_FAILED\x10\xd0P\x12\"\n" +
-	"\x1dDELETE_USER_CREDENTIAL_FAILED\x10\xd1P\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1dDELETE_USER_CREDENTIAL_FAILED\x10\xd1P\x12\x1f\n" +
+	"\x14INVALID_REDIRECT_URI\x10\xdaP\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
+	"\x13OAUTH_STATE_EXPIRED\x10\xdbP\x1a\x04\xa8E\x90\x03\x12\x1e\n" +
+	"\x13OAUTH_STATE_INVALID\x10\xdcP\x1a\x04\xa8E\x90\x03\x12#\n" +
+	"\x18OAUTH_STATE_ALREADY_USED\x10\xddP\x1a\x04\xa8E\x90\x03\x12\x1f\n" +
+	"\x1aOAUTH_CODE_EXCHANGE_FAILED\x10\xdeP\x12\x1e\n" +
+	"\x19OAUTH_STATE_CREATE_FAILED\x10\xdfP\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
