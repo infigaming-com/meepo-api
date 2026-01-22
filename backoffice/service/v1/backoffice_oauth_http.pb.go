@@ -19,16 +19,15 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeOAuthCreateOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/CreateOAuthProviderConfig"
+const OperationBackofficeOAuthCreateOrUpdateOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/CreateOrUpdateOAuthProviderConfig"
 const OperationBackofficeOAuthDeleteOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/DeleteOAuthProviderConfig"
 const OperationBackofficeOAuthGetOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/GetOAuthProviderConfig"
 const OperationBackofficeOAuthListOAuthProviderConfigs = "/api.backoffice.service.v1.BackofficeOAuth/ListOAuthProviderConfigs"
 const OperationBackofficeOAuthSetOAuthProviderEnabled = "/api.backoffice.service.v1.BackofficeOAuth/SetOAuthProviderEnabled"
-const OperationBackofficeOAuthUpdateOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/UpdateOAuthProviderConfig"
 
 type BackofficeOAuthHTTPServer interface {
-	// CreateOAuthProviderConfig Create a new OAuth provider configuration for an operator
-	CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error)
+	// CreateOrUpdateOAuthProviderConfig Create or update OAuth provider configuration
+	CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error)
 	// DeleteOAuthProviderConfig Delete an OAuth provider configuration
 	DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error)
 	// GetOAuthProviderConfig Get a specific OAuth provider configuration
@@ -37,60 +36,35 @@ type BackofficeOAuthHTTPServer interface {
 	ListOAuthProviderConfigs(context.Context, *ListOAuthProviderConfigsRequest) (*ListOAuthProviderConfigsResponse, error)
 	// SetOAuthProviderEnabled Enable or disable an OAuth provider
 	SetOAuthProviderEnabled(context.Context, *SetOAuthProviderEnabledRequest) (*SetOAuthProviderEnabledResponse, error)
-	// UpdateOAuthProviderConfig Update an existing OAuth provider configuration
-	UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error)
 }
 
 func RegisterBackofficeOAuthHTTPServer(s *http.Server, srv BackofficeOAuthHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/oauth/provider/create", _BackofficeOAuth_CreateOAuthProviderConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/oauth/provider/update", _BackofficeOAuth_UpdateOAuthProviderConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/oauth/provider/createorupdate", _BackofficeOAuth_CreateOrUpdateOAuthProviderConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/oauth/provider/delete", _BackofficeOAuth_DeleteOAuthProviderConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/oauth/provider/enabled/set", _BackofficeOAuth_SetOAuthProviderEnabled0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/oauth/provider/list", _BackofficeOAuth_ListOAuthProviderConfigs0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/oauth/provider/get", _BackofficeOAuth_GetOAuthProviderConfig0_HTTP_Handler(srv))
 }
 
-func _BackofficeOAuth_CreateOAuthProviderConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
+func _BackofficeOAuth_CreateOrUpdateOAuthProviderConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in CreateOAuthProviderConfigRequest
+		var in CreateOrUpdateOAuthProviderConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeOAuthCreateOAuthProviderConfig)
+		http.SetOperation(ctx, OperationBackofficeOAuthCreateOrUpdateOAuthProviderConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateOAuthProviderConfig(ctx, req.(*CreateOAuthProviderConfigRequest))
+			return srv.CreateOrUpdateOAuthProviderConfig(ctx, req.(*CreateOrUpdateOAuthProviderConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*CreateOAuthProviderConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeOAuth_UpdateOAuthProviderConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateOAuthProviderConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeOAuthUpdateOAuthProviderConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateOAuthProviderConfig(ctx, req.(*UpdateOAuthProviderConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateOAuthProviderConfigResponse)
+		reply := out.(*CreateOrUpdateOAuthProviderConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -184,8 +158,8 @@ func _BackofficeOAuth_GetOAuthProviderConfig0_HTTP_Handler(srv BackofficeOAuthHT
 }
 
 type BackofficeOAuthHTTPClient interface {
-	// CreateOAuthProviderConfig Create a new OAuth provider configuration for an operator
-	CreateOAuthProviderConfig(ctx context.Context, req *CreateOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *CreateOAuthProviderConfigResponse, err error)
+	// CreateOrUpdateOAuthProviderConfig Create or update OAuth provider configuration
+	CreateOrUpdateOAuthProviderConfig(ctx context.Context, req *CreateOrUpdateOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *CreateOrUpdateOAuthProviderConfigResponse, err error)
 	// DeleteOAuthProviderConfig Delete an OAuth provider configuration
 	DeleteOAuthProviderConfig(ctx context.Context, req *DeleteOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *DeleteOAuthProviderConfigResponse, err error)
 	// GetOAuthProviderConfig Get a specific OAuth provider configuration
@@ -194,8 +168,6 @@ type BackofficeOAuthHTTPClient interface {
 	ListOAuthProviderConfigs(ctx context.Context, req *ListOAuthProviderConfigsRequest, opts ...http.CallOption) (rsp *ListOAuthProviderConfigsResponse, err error)
 	// SetOAuthProviderEnabled Enable or disable an OAuth provider
 	SetOAuthProviderEnabled(ctx context.Context, req *SetOAuthProviderEnabledRequest, opts ...http.CallOption) (rsp *SetOAuthProviderEnabledResponse, err error)
-	// UpdateOAuthProviderConfig Update an existing OAuth provider configuration
-	UpdateOAuthProviderConfig(ctx context.Context, req *UpdateOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *UpdateOAuthProviderConfigResponse, err error)
 }
 
 type BackofficeOAuthHTTPClientImpl struct {
@@ -206,12 +178,12 @@ func NewBackofficeOAuthHTTPClient(client *http.Client) BackofficeOAuthHTTPClient
 	return &BackofficeOAuthHTTPClientImpl{client}
 }
 
-// CreateOAuthProviderConfig Create a new OAuth provider configuration for an operator
-func (c *BackofficeOAuthHTTPClientImpl) CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...http.CallOption) (*CreateOAuthProviderConfigResponse, error) {
-	var out CreateOAuthProviderConfigResponse
-	pattern := "/v1/backoffice/oauth/provider/create"
+// CreateOrUpdateOAuthProviderConfig Create or update OAuth provider configuration
+func (c *BackofficeOAuthHTTPClientImpl) CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...http.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
+	var out CreateOrUpdateOAuthProviderConfigResponse
+	pattern := "/v1/backoffice/oauth/provider/createorupdate"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeOAuthCreateOAuthProviderConfig))
+	opts = append(opts, http.Operation(OperationBackofficeOAuthCreateOrUpdateOAuthProviderConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -268,20 +240,6 @@ func (c *BackofficeOAuthHTTPClientImpl) SetOAuthProviderEnabled(ctx context.Cont
 	pattern := "/v1/backoffice/oauth/provider/enabled/set"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOAuthSetOAuthProviderEnabled))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// UpdateOAuthProviderConfig Update an existing OAuth provider configuration
-func (c *BackofficeOAuthHTTPClientImpl) UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...http.CallOption) (*UpdateOAuthProviderConfigResponse, error) {
-	var out UpdateOAuthProviderConfigResponse
-	pattern := "/v1/backoffice/oauth/provider/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeOAuthUpdateOAuthProviderConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

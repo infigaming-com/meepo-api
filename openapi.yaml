@@ -3546,17 +3546,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.push.service.v1.SaveChannelRulesResponse'
-    /v1/backoffice/oauth/provider/create:
+    /v1/backoffice/oauth/provider/createorupdate:
         post:
             tags:
                 - BackofficeOAuth
-            description: Create a new OAuth provider configuration for an operator
-            operationId: BackofficeOAuth_CreateOAuthProviderConfig
+            description: Create or update OAuth provider configuration
+            operationId: BackofficeOAuth_CreateOrUpdateOAuthProviderConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOAuthProviderConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest'
                 required: true
             responses:
                 "200":
@@ -3564,7 +3564,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateOAuthProviderConfigResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse'
     /v1/backoffice/oauth/provider/delete:
         post:
             tags:
@@ -3641,25 +3641,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOAuthProviderConfigsResponse'
-    /v1/backoffice/oauth/provider/update:
-        post:
-            tags:
-                - BackofficeOAuth
-            description: Update an existing OAuth provider configuration
-            operationId: BackofficeOAuth_UpdateOAuthProviderConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOAuthProviderConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOAuthProviderConfigResponse'
     /v1/backoffice/operator/account-settings/get:
         post:
             tags:
@@ -10865,47 +10846,6 @@ components:
             properties:
                 name:
                     type: string
-        api.backoffice.service.v1.CreateOAuthProviderConfigRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                provider:
-                    enum:
-                        - OAUTH_PROVIDER_UNSPECIFIED
-                        - OAUTH_PROVIDER_GOOGLE
-                        - OAUTH_PROVIDER_FACEBOOK
-                        - OAUTH_PROVIDER_TWITTER
-                        - OAUTH_PROVIDER_APPLE
-                    type: string
-                    format: enum
-                clientId:
-                    type: string
-                clientSecret:
-                    type: string
-                config:
-                    type: object
-                    additionalProperties:
-                        type: string
-                enabled:
-                    type: boolean
-                allowRegistration:
-                    type: boolean
-                allowLinking:
-                    type: boolean
-                allowedRoleIds:
-                    type: array
-                    items:
-                        type: string
-                rateLimitPerMinute:
-                    type: integer
-                    format: int32
-            description: CreateOAuthProviderConfigRequest - request to create OAuth provider config
-        api.backoffice.service.v1.CreateOAuthProviderConfigResponse:
-            type: object
-            properties:
-                configId:
-                    type: string
         api.backoffice.service.v1.CreateOperatorRequest:
             type: object
             properties:
@@ -10949,6 +10889,53 @@ components:
             properties:
                 request:
                     type: object
+        api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                provider:
+                    enum:
+                        - OAUTH_PROVIDER_UNSPECIFIED
+                        - OAUTH_PROVIDER_GOOGLE
+                        - OAUTH_PROVIDER_FACEBOOK
+                        - OAUTH_PROVIDER_TWITTER
+                        - OAUTH_PROVIDER_APPLE
+                    type: string
+                    format: enum
+                clientId:
+                    type: string
+                clientSecret:
+                    type: string
+                config:
+                    type: object
+                    additionalProperties:
+                        type: string
+                enabled:
+                    type: boolean
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                allowedRoleIds:
+                    type: array
+                    items:
+                        type: string
+                rateLimitPerMinute:
+                    type: integer
+                    format: int32
+            description: |-
+                CreateOrUpdateOAuthProviderConfigRequest - request to create or update OAuth provider config
+                 If config_id is provided (non-zero), updates existing config; otherwise creates new one
+        api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse:
+            type: object
+            properties:
+                configId:
+                    type: string
+                created:
+                    type: boolean
         api.backoffice.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -17487,36 +17474,6 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateGameResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.UpdateOAuthProviderConfigRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                configId:
-                    type: string
-                clientId:
-                    type: string
-                clientSecret:
-                    type: string
-                config:
-                    type: object
-                    additionalProperties:
-                        type: string
-                allowRegistration:
-                    type: boolean
-                allowLinking:
-                    type: boolean
-                allowedRoleIds:
-                    type: array
-                    items:
-                        type: string
-                rateLimitPerMinute:
-                    type: integer
-                    format: int32
-            description: UpdateOAuthProviderConfigRequest - request to update OAuth provider config
-        api.backoffice.service.v1.UpdateOAuthProviderConfigResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
