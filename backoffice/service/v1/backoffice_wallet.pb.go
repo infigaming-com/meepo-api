@@ -4365,8 +4365,8 @@ func (x *ListUniversalCodeUsagesRequest) GetCampaignId() int64 {
 	return 0
 }
 
-// AdjustCredit adjusts a credit's turnover or threshold value
-type AdjustCreditRequest struct {
+// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+type ManualAdjustCreditTurnoverFieldRequest struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	TargetUserId int64                  `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
 	Currency     string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -4380,20 +4380,20 @@ type AdjustCreditRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AdjustCreditRequest) Reset() {
-	*x = AdjustCreditRequest{}
+func (x *ManualAdjustCreditTurnoverFieldRequest) Reset() {
+	*x = ManualAdjustCreditTurnoverFieldRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AdjustCreditRequest) String() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AdjustCreditRequest) ProtoMessage() {}
+func (*ManualAdjustCreditTurnoverFieldRequest) ProtoMessage() {}
 
-func (x *AdjustCreditRequest) ProtoReflect() protoreflect.Message {
+func (x *ManualAdjustCreditTurnoverFieldRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4405,47 +4405,47 @@ func (x *AdjustCreditRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AdjustCreditRequest.ProtoReflect.Descriptor instead.
-func (*AdjustCreditRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ManualAdjustCreditTurnoverFieldRequest.ProtoReflect.Descriptor instead.
+func (*ManualAdjustCreditTurnoverFieldRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{59}
 }
 
-func (x *AdjustCreditRequest) GetTargetUserId() int64 {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetTargetUserId() int64 {
 	if x != nil {
 		return x.TargetUserId
 	}
 	return 0
 }
 
-func (x *AdjustCreditRequest) GetCurrency() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetCreditId() int64 {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetCreditId() int64 {
 	if x != nil {
 		return x.CreditId
 	}
 	return 0
 }
 
-func (x *AdjustCreditRequest) GetTransactionType() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetDirection() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetDirection() string {
 	if x != nil {
 		return x.Direction
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetValue() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
@@ -5267,14 +5267,14 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x05codes\x18\x02 \x03(\tR\x05codes\"A\n" +
 	"\x1eListUniversalCodeUsagesRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
-	"campaignId\"\xd3\x01\n" +
-	"\x13AdjustCreditRequest\x12$\n" +
+	"campaignId\"\xe6\x01\n" +
+	"&ManualAdjustCreditTurnoverFieldRequest\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1b\n" +
 	"\tcredit_id\x18\x03 \x01(\x03R\bcreditId\x12)\n" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x14\n" +
-	"\x05value\x18\x06 \x01(\tR\x05value2\xe9E\n" +
+	"\x05value\x18\x06 \x01(\tR\x05value2\xa9F\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -5320,8 +5320,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\fManualCredit\x12..api.backoffice.service.v1.ManualCreditRequest\x1a%.api.wallet.service.v1.CreditResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/manual/credit\x12\x91\x01\n" +
 	"\vManualDebit\x12-.api.backoffice.service.v1.ManualDebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/wallet/manual/debit\x12\xcd\x01\n" +
 	"\x18ListManualJournalEntries\x12:.api.backoffice.service.v1.ListManualJournalEntriesRequest\x1a7.api.wallet.service.v1.ListManualJournalEntriesResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/manual/journal-entries/list\x12\xd5\x01\n" +
-	"\x1aExportManualJournalEntries\x12<.api.backoffice.service.v1.ExportManualJournalEntriesRequest\x1a9.api.wallet.service.v1.ExportManualJournalEntriesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/wallet/manual/journal-entries/export\x12\x9b\x01\n" +
-	"\fAdjustCredit\x12..api.backoffice.service.v1.AdjustCreditRequest\x1a+.api.wallet.service.v1.AdjustCreditResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/credit/adjustB[\n" +
+	"\x1aExportManualJournalEntries\x12<.api.backoffice.service.v1.ExportManualJournalEntriesRequest\x1a9.api.wallet.service.v1.ExportManualJournalEntriesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/wallet/manual/journal-entries/export\x12\xdb\x01\n" +
+	"\x1fManualAdjustCreditTurnoverField\x12A.api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest\x1a>.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/wallet/credit/manual_adjustB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -5397,7 +5397,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GenerateOneTimePromoCodesRequest)(nil),                         // 56: api.backoffice.service.v1.GenerateOneTimePromoCodesRequest
 	(*GenerateUniversalPromoCodesRequest)(nil),                       // 57: api.backoffice.service.v1.GenerateUniversalPromoCodesRequest
 	(*ListUniversalCodeUsagesRequest)(nil),                           // 58: api.backoffice.service.v1.ListUniversalCodeUsagesRequest
-	(*AdjustCreditRequest)(nil),                                      // 59: api.backoffice.service.v1.AdjustCreditRequest
+	(*ManualAdjustCreditTurnoverFieldRequest)(nil),                   // 59: api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
 	(*GetWalletCreditsResponse_Credit)(nil),                          // 60: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
 	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 61: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
 	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 62: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
@@ -5442,7 +5442,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*v1.DebitResponse)(nil),                           // 101: api.wallet.service.v1.DebitResponse
 	(*v1.ListManualJournalEntriesResponse)(nil),        // 102: api.wallet.service.v1.ListManualJournalEntriesResponse
 	(*v1.ExportManualJournalEntriesResponse)(nil),      // 103: api.wallet.service.v1.ExportManualJournalEntriesResponse
-	(*v1.AdjustCreditResponse)(nil),                    // 104: api.wallet.service.v1.AdjustCreditResponse
+	(*v1.ManualAdjustCreditTurnoverFieldResponse)(nil), // 104: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
 }
 var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	64,  // 0: api.backoffice.service.v1.GetWalletCreditsRequest.start_time:type_name -> google.protobuf.Timestamp
@@ -5565,7 +5565,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	48,  // 117: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.ManualDebitRequest
 	49,  // 118: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:input_type -> api.backoffice.service.v1.ListManualJournalEntriesRequest
 	50,  // 119: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:input_type -> api.backoffice.service.v1.ExportManualJournalEntriesRequest
-	59,  // 120: api.backoffice.service.v1.BackofficeWallet.AdjustCredit:input_type -> api.backoffice.service.v1.AdjustCreditRequest
+	59,  // 120: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:input_type -> api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest
 	73,  // 121: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
 	2,   // 122: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
 	4,   // 123: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
@@ -5610,7 +5610,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	101, // 162: api.backoffice.service.v1.BackofficeWallet.ManualDebit:output_type -> api.wallet.service.v1.DebitResponse
 	102, // 163: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:output_type -> api.wallet.service.v1.ListManualJournalEntriesResponse
 	103, // 164: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:output_type -> api.wallet.service.v1.ExportManualJournalEntriesResponse
-	104, // 165: api.backoffice.service.v1.BackofficeWallet.AdjustCredit:output_type -> api.wallet.service.v1.AdjustCreditResponse
+	104, // 165: api.backoffice.service.v1.BackofficeWallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
 	121, // [121:166] is the sub-list for method output_type
 	76,  // [76:121] is the sub-list for method input_type
 	76,  // [76:76] is the sub-list for extension type_name

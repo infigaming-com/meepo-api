@@ -22232,22 +22232,24 @@ var _ interface {
 	ErrorName() string
 } = BatchGetUserFinancialMetricsResponseValidationError{}
 
-// Validate checks the field values on AdjustCreditRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AdjustCreditRequest) Validate() error {
+// Validate checks the field values on ManualAdjustCreditTurnoverFieldRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ManualAdjustCreditTurnoverFieldRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AdjustCreditRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AdjustCreditRequestMultiError, or nil if none found.
-func (m *AdjustCreditRequest) ValidateAll() error {
+// ValidateAll checks the field values on
+// ManualAdjustCreditTurnoverFieldRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ManualAdjustCreditTurnoverFieldRequestMultiError, or nil if none found.
+func (m *ManualAdjustCreditTurnoverFieldRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AdjustCreditRequest) validate(all bool) error {
+func (m *ManualAdjustCreditTurnoverFieldRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -22272,7 +22274,7 @@ func (m *AdjustCreditRequest) validate(all bool) error {
 		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AdjustCreditRequestValidationError{
+				errors = append(errors, ManualAdjustCreditTurnoverFieldRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -22280,7 +22282,7 @@ func (m *AdjustCreditRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AdjustCreditRequestValidationError{
+				errors = append(errors, ManualAdjustCreditTurnoverFieldRequestValidationError{
 					field:  "InitiatorOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -22289,7 +22291,7 @@ func (m *AdjustCreditRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AdjustCreditRequestValidationError{
+			return ManualAdjustCreditTurnoverFieldRequestValidationError{
 				field:  "InitiatorOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -22298,19 +22300,20 @@ func (m *AdjustCreditRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return AdjustCreditRequestMultiError(errors)
+		return ManualAdjustCreditTurnoverFieldRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// AdjustCreditRequestMultiError is an error wrapping multiple validation
-// errors returned by AdjustCreditRequest.ValidateAll() if the designated
+// ManualAdjustCreditTurnoverFieldRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ManualAdjustCreditTurnoverFieldRequest.ValidateAll() if the designated
 // constraints aren't met.
-type AdjustCreditRequestMultiError []error
+type ManualAdjustCreditTurnoverFieldRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AdjustCreditRequestMultiError) Error() string {
+func (m ManualAdjustCreditTurnoverFieldRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -22319,11 +22322,12 @@ func (m AdjustCreditRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AdjustCreditRequestMultiError) AllErrors() []error { return m }
+func (m ManualAdjustCreditTurnoverFieldRequestMultiError) AllErrors() []error { return m }
 
-// AdjustCreditRequestValidationError is the validation error returned by
-// AdjustCreditRequest.Validate if the designated constraints aren't met.
-type AdjustCreditRequestValidationError struct {
+// ManualAdjustCreditTurnoverFieldRequestValidationError is the validation
+// error returned by ManualAdjustCreditTurnoverFieldRequest.Validate if the
+// designated constraints aren't met.
+type ManualAdjustCreditTurnoverFieldRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -22331,24 +22335,24 @@ type AdjustCreditRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e AdjustCreditRequestValidationError) Field() string { return e.field }
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AdjustCreditRequestValidationError) Reason() string { return e.reason }
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AdjustCreditRequestValidationError) Cause() error { return e.cause }
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AdjustCreditRequestValidationError) Key() bool { return e.key }
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AdjustCreditRequestValidationError) ErrorName() string {
-	return "AdjustCreditRequestValidationError"
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) ErrorName() string {
+	return "ManualAdjustCreditTurnoverFieldRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AdjustCreditRequestValidationError) Error() string {
+func (e ManualAdjustCreditTurnoverFieldRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -22360,14 +22364,14 @@ func (e AdjustCreditRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAdjustCreditRequest.%s: %s%s",
+		"invalid %sManualAdjustCreditTurnoverFieldRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AdjustCreditRequestValidationError{}
+var _ error = ManualAdjustCreditTurnoverFieldRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -22375,24 +22379,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AdjustCreditRequestValidationError{}
+} = ManualAdjustCreditTurnoverFieldRequestValidationError{}
 
-// Validate checks the field values on AdjustCreditResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AdjustCreditResponse) Validate() error {
+// Validate checks the field values on ManualAdjustCreditTurnoverFieldResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ManualAdjustCreditTurnoverFieldResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AdjustCreditResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AdjustCreditResponseMultiError, or nil if none found.
-func (m *AdjustCreditResponse) ValidateAll() error {
+// ValidateAll checks the field values on
+// ManualAdjustCreditTurnoverFieldResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ManualAdjustCreditTurnoverFieldResponseMultiError, or nil if none found.
+func (m *ManualAdjustCreditTurnoverFieldResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AdjustCreditResponse) validate(all bool) error {
+func (m *ManualAdjustCreditTurnoverFieldResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -22404,19 +22410,20 @@ func (m *AdjustCreditResponse) validate(all bool) error {
 	// no validation rules for NewValue
 
 	if len(errors) > 0 {
-		return AdjustCreditResponseMultiError(errors)
+		return ManualAdjustCreditTurnoverFieldResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// AdjustCreditResponseMultiError is an error wrapping multiple validation
-// errors returned by AdjustCreditResponse.ValidateAll() if the designated
+// ManualAdjustCreditTurnoverFieldResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ManualAdjustCreditTurnoverFieldResponse.ValidateAll() if the designated
 // constraints aren't met.
-type AdjustCreditResponseMultiError []error
+type ManualAdjustCreditTurnoverFieldResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AdjustCreditResponseMultiError) Error() string {
+func (m ManualAdjustCreditTurnoverFieldResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -22425,11 +22432,12 @@ func (m AdjustCreditResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AdjustCreditResponseMultiError) AllErrors() []error { return m }
+func (m ManualAdjustCreditTurnoverFieldResponseMultiError) AllErrors() []error { return m }
 
-// AdjustCreditResponseValidationError is the validation error returned by
-// AdjustCreditResponse.Validate if the designated constraints aren't met.
-type AdjustCreditResponseValidationError struct {
+// ManualAdjustCreditTurnoverFieldResponseValidationError is the validation
+// error returned by ManualAdjustCreditTurnoverFieldResponse.Validate if the
+// designated constraints aren't met.
+type ManualAdjustCreditTurnoverFieldResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -22437,24 +22445,24 @@ type AdjustCreditResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e AdjustCreditResponseValidationError) Field() string { return e.field }
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AdjustCreditResponseValidationError) Reason() string { return e.reason }
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AdjustCreditResponseValidationError) Cause() error { return e.cause }
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AdjustCreditResponseValidationError) Key() bool { return e.key }
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AdjustCreditResponseValidationError) ErrorName() string {
-	return "AdjustCreditResponseValidationError"
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) ErrorName() string {
+	return "ManualAdjustCreditTurnoverFieldResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AdjustCreditResponseValidationError) Error() string {
+func (e ManualAdjustCreditTurnoverFieldResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -22466,14 +22474,14 @@ func (e AdjustCreditResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAdjustCreditResponse.%s: %s%s",
+		"invalid %sManualAdjustCreditTurnoverFieldResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AdjustCreditResponseValidationError{}
+var _ error = ManualAdjustCreditTurnoverFieldResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -22481,7 +22489,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AdjustCreditResponseValidationError{}
+} = ManualAdjustCreditTurnoverFieldResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are

@@ -341,10 +341,10 @@ service BackofficeWallet {
 		};
 	}
 
-	// AdjustCredit adjusts a credit's turnover or threshold value
-	rpc AdjustCredit(AdjustCreditRequest) returns (wallet.service.v1.AdjustCreditResponse) {
+	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	rpc ManualAdjustCreditTurnoverField(ManualAdjustCreditTurnoverFieldRequest) returns (wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/credit/adjust"
+			post: "/v1/backoffice/wallet/credit/manual_adjust"
 			body: "*"
 		};
 	}
@@ -880,8 +880,8 @@ message ListUniversalCodeUsagesRequest {
 	int64 campaign_id = 1;
 }
 
-// AdjustCredit adjusts a credit's turnover or threshold value
-message AdjustCreditRequest {
+// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+message ManualAdjustCreditTurnoverFieldRequest {
 	int64 target_user_id = 1;
 	string currency = 2;
 	int64 credit_id = 3;

@@ -5261,17 +5261,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletCreditTransactionsResponse'
-    /v1/backoffice/wallet/credit/adjust:
+    /v1/backoffice/wallet/credit/manual_adjust:
         post:
             tags:
                 - BackofficeWallet
-            description: AdjustCredit adjusts a credit's turnover or threshold value
-            operationId: BackofficeWallet_AdjustCredit
+            description: ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+            operationId: BackofficeWallet_ManualAdjustCreditTurnoverField
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AdjustCreditRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest'
                 required: true
             responses:
                 "200":
@@ -5279,7 +5279,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.AdjustCreditResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse'
     /v1/backoffice/wallet/credits/get:
         post:
             tags:
@@ -10055,24 +10055,6 @@ components:
         api.backoffice.service.v1.AddWalletCurrencyResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.AdjustCreditRequest:
-            type: object
-            properties:
-                targetUserId:
-                    type: string
-                currency:
-                    type: string
-                creditId:
-                    type: string
-                transactionType:
-                    type: string
-                    description: 'transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"'
-                direction:
-                    type: string
-                    description: 'direction: "add", "subtract"'
-                value:
-                    type: string
-            description: AdjustCredit adjusts a credit's turnover or threshold value
         api.backoffice.service.v1.AdminReset2faRequest:
             type: object
             properties:
@@ -16427,6 +16409,24 @@ components:
                     type: boolean
                 tempToken:
                     type: string
+        api.backoffice.service.v1.ManualAdjustCreditTurnoverFieldRequest:
+            type: object
+            properties:
+                targetUserId:
+                    type: string
+                currency:
+                    type: string
+                creditId:
+                    type: string
+                transactionType:
+                    type: string
+                    description: 'transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"'
+                direction:
+                    type: string
+                    description: 'direction: "add", "subtract"'
+                value:
+                    type: string
+            description: ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
         api.backoffice.service.v1.ManualCreditRequest:
             type: object
             properties:
@@ -22741,14 +22741,6 @@ components:
         api.wallet.service.v1.AddResponsibleGamblingConfigResponse:
             type: object
             properties: {}
-        api.wallet.service.v1.AdjustCreditResponse:
-            type: object
-            properties:
-                creditId:
-                    type: string
-                newValue:
-                    type: string
-                    description: Updated value
         api.wallet.service.v1.AffiliateCondition:
             type: object
             properties:
@@ -23669,6 +23661,14 @@ components:
                 totalCount:
                     type: integer
                     format: int32
+        api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse:
+            type: object
+            properties:
+                creditId:
+                    type: string
+                newValue:
+                    type: string
+                    description: Updated value
         api.wallet.service.v1.OperatorBalance:
             type: object
             properties:

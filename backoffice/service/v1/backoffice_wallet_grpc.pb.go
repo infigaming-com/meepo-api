@@ -64,7 +64,7 @@ const (
 	BackofficeWallet_ManualDebit_FullMethodName                           = "/api.backoffice.service.v1.BackofficeWallet/ManualDebit"
 	BackofficeWallet_ListManualJournalEntries_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
 	BackofficeWallet_ExportManualJournalEntries_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
-	BackofficeWallet_AdjustCredit_FullMethodName                          = "/api.backoffice.service.v1.BackofficeWallet/AdjustCredit"
+	BackofficeWallet_ManualAdjustCreditTurnoverField_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ManualAdjustCreditTurnoverField"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -152,8 +152,8 @@ type BackofficeWalletClient interface {
 	ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ListManualJournalEntriesResponse, error)
 	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ExportManualJournalEntriesResponse, error)
-	// AdjustCredit adjusts a credit's turnover or threshold value
-	AdjustCredit(ctx context.Context, in *AdjustCreditRequest, opts ...grpc.CallOption) (*v1.AdjustCreditResponse, error)
+	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -604,10 +604,10 @@ func (c *backofficeWalletClient) ExportManualJournalEntries(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficeWalletClient) AdjustCredit(ctx context.Context, in *AdjustCreditRequest, opts ...grpc.CallOption) (*v1.AdjustCreditResponse, error) {
+func (c *backofficeWalletClient) ManualAdjustCreditTurnoverField(ctx context.Context, in *ManualAdjustCreditTurnoverFieldRequest, opts ...grpc.CallOption) (*v1.ManualAdjustCreditTurnoverFieldResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.AdjustCreditResponse)
-	err := c.cc.Invoke(ctx, BackofficeWallet_AdjustCredit_FullMethodName, in, out, cOpts...)
+	out := new(v1.ManualAdjustCreditTurnoverFieldResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ManualAdjustCreditTurnoverField_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -699,8 +699,8 @@ type BackofficeWalletServer interface {
 	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error)
 	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
-	// AdjustCredit adjusts a credit's turnover or threshold value
-	AdjustCredit(context.Context, *AdjustCreditRequest) (*v1.AdjustCreditResponse, error)
+	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
+	ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -843,8 +843,8 @@ func (UnimplementedBackofficeWalletServer) ListManualJournalEntries(context.Cont
 func (UnimplementedBackofficeWalletServer) ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ExportManualJournalEntries not implemented")
 }
-func (UnimplementedBackofficeWalletServer) AdjustCredit(context.Context, *AdjustCreditRequest) (*v1.AdjustCreditResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AdjustCredit not implemented")
+func (UnimplementedBackofficeWalletServer) ManualAdjustCreditTurnoverField(context.Context, *ManualAdjustCreditTurnoverFieldRequest) (*v1.ManualAdjustCreditTurnoverFieldResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ManualAdjustCreditTurnoverField not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1659,20 +1659,20 @@ func _BackofficeWallet_ExportManualJournalEntries_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeWallet_AdjustCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AdjustCreditRequest)
+func _BackofficeWallet_ManualAdjustCreditTurnoverField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManualAdjustCreditTurnoverFieldRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeWalletServer).AdjustCredit(ctx, in)
+		return srv.(BackofficeWalletServer).ManualAdjustCreditTurnoverField(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeWallet_AdjustCredit_FullMethodName,
+		FullMethod: BackofficeWallet_ManualAdjustCreditTurnoverField_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).AdjustCredit(ctx, req.(*AdjustCreditRequest))
+		return srv.(BackofficeWalletServer).ManualAdjustCreditTurnoverField(ctx, req.(*ManualAdjustCreditTurnoverFieldRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1861,8 +1861,8 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeWallet_ExportManualJournalEntries_Handler,
 		},
 		{
-			MethodName: "AdjustCredit",
-			Handler:    _BackofficeWallet_AdjustCredit_Handler,
+			MethodName: "ManualAdjustCreditTurnoverField",
+			Handler:    _BackofficeWallet_ManualAdjustCreditTurnoverField_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

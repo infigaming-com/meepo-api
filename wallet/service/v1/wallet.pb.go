@@ -11649,7 +11649,7 @@ func (x *BatchGetUserFinancialMetricsResponse) GetUserMetrics() map[int64]*Batch
 	return nil
 }
 
-type AdjustCreditRequest struct {
+type ManualAdjustCreditTurnoverFieldRequest struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	TargetUserId int64                  `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
 	Currency     string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -11666,20 +11666,20 @@ type AdjustCreditRequest struct {
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *AdjustCreditRequest) Reset() {
-	*x = AdjustCreditRequest{}
+func (x *ManualAdjustCreditTurnoverFieldRequest) Reset() {
+	*x = ManualAdjustCreditTurnoverFieldRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[148]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AdjustCreditRequest) String() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AdjustCreditRequest) ProtoMessage() {}
+func (*ManualAdjustCreditTurnoverFieldRequest) ProtoMessage() {}
 
-func (x *AdjustCreditRequest) ProtoReflect() protoreflect.Message {
+func (x *ManualAdjustCreditTurnoverFieldRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[148]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11691,68 +11691,68 @@ func (x *AdjustCreditRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AdjustCreditRequest.ProtoReflect.Descriptor instead.
-func (*AdjustCreditRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ManualAdjustCreditTurnoverFieldRequest.ProtoReflect.Descriptor instead.
+func (*ManualAdjustCreditTurnoverFieldRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{148}
 }
 
-func (x *AdjustCreditRequest) GetTargetUserId() int64 {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetTargetUserId() int64 {
 	if x != nil {
 		return x.TargetUserId
 	}
 	return 0
 }
 
-func (x *AdjustCreditRequest) GetCurrency() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetCreditId() int64 {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetCreditId() int64 {
 	if x != nil {
 		return x.CreditId
 	}
 	return 0
 }
 
-func (x *AdjustCreditRequest) GetTransactionType() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetDirection() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetDirection() string {
 	if x != nil {
 		return x.Direction
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetValue() string {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
 	return ""
 }
 
-func (x *AdjustCreditRequest) GetInitiatorUserId() int64 {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetInitiatorUserId() int64 {
 	if x != nil {
 		return x.InitiatorUserId
 	}
 	return 0
 }
 
-func (x *AdjustCreditRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *ManualAdjustCreditTurnoverFieldRequest) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-type AdjustCreditResponse struct {
+type ManualAdjustCreditTurnoverFieldResponse struct {
 	state    protoimpl.MessageState `protogen:"open.v1"`
 	CreditId int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	// Updated value
@@ -11761,20 +11761,20 @@ type AdjustCreditResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AdjustCreditResponse) Reset() {
-	*x = AdjustCreditResponse{}
+func (x *ManualAdjustCreditTurnoverFieldResponse) Reset() {
+	*x = ManualAdjustCreditTurnoverFieldResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[149]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AdjustCreditResponse) String() string {
+func (x *ManualAdjustCreditTurnoverFieldResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AdjustCreditResponse) ProtoMessage() {}
+func (*ManualAdjustCreditTurnoverFieldResponse) ProtoMessage() {}
 
-func (x *AdjustCreditResponse) ProtoReflect() protoreflect.Message {
+func (x *ManualAdjustCreditTurnoverFieldResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[149]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11786,19 +11786,19 @@ func (x *AdjustCreditResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AdjustCreditResponse.ProtoReflect.Descriptor instead.
-func (*AdjustCreditResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ManualAdjustCreditTurnoverFieldResponse.ProtoReflect.Descriptor instead.
+func (*ManualAdjustCreditTurnoverFieldResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{149}
 }
 
-func (x *AdjustCreditResponse) GetCreditId() int64 {
+func (x *ManualAdjustCreditTurnoverFieldResponse) GetCreditId() int64 {
 	if x != nil {
 		return x.CreditId
 	}
 	return 0
 }
 
-func (x *AdjustCreditResponse) GetNewValue() string {
+func (x *ManualAdjustCreditTurnoverFieldResponse) GetNewValue() string {
 	if x != nil {
 		return x.NewValue
 	}
@@ -16676,8 +16676,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x12deposit_amount_usd\x18\x06 \x01(\tR\x10depositAmountUsd\x12.\n" +
 	"\x13withdraw_amount_usd\x18\a \x01(\tR\x11withdrawAmountUsd\x12I\n" +
 	"!deposit_amount_reporting_currency\x18\b \x01(\tR\x1edepositAmountReportingCurrency\x12K\n" +
-	"\"withdraw_amount_reporting_currency\x18\t \x01(\tR\x1fwithdrawAmountReportingCurrency\"\xda\x02\n" +
-	"\x13AdjustCreditRequest\x12$\n" +
+	"\"withdraw_amount_reporting_currency\x18\t \x01(\tR\x1fwithdrawAmountReportingCurrency\"\xed\x02\n" +
+	"&ManualAdjustCreditTurnoverFieldRequest\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1b\n" +
 	"\tcredit_id\x18\x03 \x01(\x03R\bcreditId\x12)\n" +
@@ -16685,10 +16685,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x14\n" +
 	"\x05value\x18\x06 \x01(\tR\x05value\x12*\n" +
 	"\x11initiator_user_id\x18\a \x01(\x03R\x0finitiatorUserId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"P\n" +
-	"\x14AdjustCreditResponse\x12\x1b\n" +
+	"\x1ainitiator_operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"c\n" +
+	"'ManualAdjustCreditTurnoverFieldResponse\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x1b\n" +
-	"\tnew_value\x18\x02 \x01(\tR\bnewValue2\xadV\n" +
+	"\tnew_value\x18\x02 \x01(\tR\bnewValue2\xe7V\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -16768,8 +16768,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10CreditFreeBetWin\x12..api.wallet.service.v1.CreditFreeBetWinRequest\x1a/.api.wallet.service.v1.CreditFreeBetWinResponse\"\x00\x12\xa2\x01\n" +
 	"\x1fGetOperatorUserFinancialSummary\x12=.api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest\x1a>.api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse\"\x00\x12\x92\x01\n" +
 	"\x0fGetWalletConfig\x12-.api.wallet.service.v1.GetWalletConfigRequest\x1a..api.wallet.service.v1.GetWalletConfigResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/wallet/config/get\x12\x99\x01\n" +
-	"\x1cBatchGetUserFinancialMetrics\x12:.api.wallet.service.v1.BatchGetUserFinancialMetricsRequest\x1a;.api.wallet.service.v1.BatchGetUserFinancialMetricsResponse\"\x00\x12i\n" +
-	"\fAdjustCredit\x12*.api.wallet.service.v1.AdjustCreditRequest\x1a+.api.wallet.service.v1.AdjustCreditResponse\"\x00BS\n" +
+	"\x1cBatchGetUserFinancialMetrics\x12:.api.wallet.service.v1.BatchGetUserFinancialMetricsRequest\x1a;.api.wallet.service.v1.BatchGetUserFinancialMetricsResponse\"\x00\x12\xa2\x01\n" +
+	"\x1fManualAdjustCreditTurnoverField\x12=.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest\x1a>.api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse\"\x00BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
@@ -16934,8 +16934,8 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GetOperatorUserFinancialSummaryResponse)(nil),                      // 145: api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse
 	(*BatchGetUserFinancialMetricsRequest)(nil),                          // 146: api.wallet.service.v1.BatchGetUserFinancialMetricsRequest
 	(*BatchGetUserFinancialMetricsResponse)(nil),                         // 147: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse
-	(*AdjustCreditRequest)(nil),                                          // 148: api.wallet.service.v1.AdjustCreditRequest
-	(*AdjustCreditResponse)(nil),                                         // 149: api.wallet.service.v1.AdjustCreditResponse
+	(*ManualAdjustCreditTurnoverFieldRequest)(nil),                       // 148: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest
+	(*ManualAdjustCreditTurnoverFieldResponse)(nil),                      // 149: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
 	(*GetUserBalancesResponse_Balance)(nil),                              // 150: api.wallet.service.v1.GetUserBalancesResponse.Balance
 	(*GetWalletsResponse_TotalAssets)(nil),                               // 151: api.wallet.service.v1.GetWalletsResponse.TotalAssets
 	(*GetWalletsResponse_Credit)(nil),                                    // 152: api.wallet.service.v1.GetWalletsResponse.Credit
@@ -17177,7 +17177,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	144, // 181: api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse.transaction_stats:type_name -> api.wallet.service.v1.TransactionStats
 	180, // 182: api.wallet.service.v1.BatchGetUserFinancialMetricsRequest.operator_context:type_name -> api.common.OperatorContext
 	177, // 183: api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.user_metrics:type_name -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse.UserMetricsEntry
-	180, // 184: api.wallet.service.v1.AdjustCreditRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	180, // 184: api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	181, // 185: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
 	181, // 186: api.wallet.service.v1.GetWalletsResponse.Credit.free_spin_expired_at:type_name -> google.protobuf.Timestamp
 	181, // 187: api.wallet.service.v1.GetWalletsResponse.Credit.free_bet_expired_at:type_name -> google.protobuf.Timestamp
@@ -17273,7 +17273,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	143, // 277: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:input_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryRequest
 	91,  // 278: api.wallet.service.v1.Wallet.GetWalletConfig:input_type -> api.wallet.service.v1.GetWalletConfigRequest
 	146, // 279: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:input_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsRequest
-	148, // 280: api.wallet.service.v1.Wallet.AdjustCredit:input_type -> api.wallet.service.v1.AdjustCreditRequest
+	148, // 280: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:input_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldRequest
 	1,   // 281: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
 	3,   // 282: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
 	103, // 283: api.wallet.service.v1.Wallet.GetUserBalanceDetails:output_type -> api.wallet.service.v1.GetUserBalanceDetailsResponse
@@ -17351,7 +17351,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	145, // 355: api.wallet.service.v1.Wallet.GetOperatorUserFinancialSummary:output_type -> api.wallet.service.v1.GetOperatorUserFinancialSummaryResponse
 	92,  // 356: api.wallet.service.v1.Wallet.GetWalletConfig:output_type -> api.wallet.service.v1.GetWalletConfigResponse
 	147, // 357: api.wallet.service.v1.Wallet.BatchGetUserFinancialMetrics:output_type -> api.wallet.service.v1.BatchGetUserFinancialMetricsResponse
-	149, // 358: api.wallet.service.v1.Wallet.AdjustCredit:output_type -> api.wallet.service.v1.AdjustCreditResponse
+	149, // 358: api.wallet.service.v1.Wallet.ManualAdjustCreditTurnoverField:output_type -> api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse
 	281, // [281:359] is the sub-list for method output_type
 	203, // [203:281] is the sub-list for method input_type
 	203, // [203:203] is the sub-list for extension type_name
