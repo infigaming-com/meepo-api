@@ -24,37 +24,39 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CreateOAuthProviderConfigRequest - request to create OAuth provider config
-type CreateOAuthProviderConfigRequest struct {
+// CreateOrUpdateOAuthProviderConfigRequest - request to create or update OAuth provider config
+// If config_id is provided (non-zero), updates existing config; otherwise creates new one
+type CreateOrUpdateOAuthProviderConfigRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Provider              v1.OAuthProvider        `protobuf:"varint,2,opt,name=provider,proto3,enum=api.user.service.v1.OAuthProvider" json:"provider,omitempty"`
-	ClientId              string                  `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	ClientSecret          string                  `protobuf:"bytes,4,opt,name=client_secret,json=clientSecret,proto3" json:"client_secret,omitempty"`
-	Config                map[string]string       `protobuf:"bytes,5,rep,name=config,proto3" json:"config,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Provider-specific config (scopes, redirect_uri, etc.)
-	Enabled               bool                    `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	AllowRegistration     bool                    `protobuf:"varint,7,opt,name=allow_registration,json=allowRegistration,proto3" json:"allow_registration,omitempty"`
-	AllowLinking          bool                    `protobuf:"varint,8,opt,name=allow_linking,json=allowLinking,proto3" json:"allow_linking,omitempty"`
-	AllowedRoleIds        []int64                 `protobuf:"varint,9,rep,packed,name=allowed_role_ids,json=allowedRoleIds,proto3" json:"allowed_role_ids,omitempty"`
-	RateLimitPerMinute    int32                   `protobuf:"varint,10,opt,name=rate_limit_per_minute,json=rateLimitPerMinute,proto3" json:"rate_limit_per_minute,omitempty"`
+	ConfigId              *int64                  `protobuf:"varint,2,opt,name=config_id,json=configId,proto3,oneof" json:"config_id,omitempty"` // If provided, update existing config; otherwise create new
+	Provider              v1.OAuthProvider        `protobuf:"varint,3,opt,name=provider,proto3,enum=api.user.service.v1.OAuthProvider" json:"provider,omitempty"`
+	ClientId              string                  `protobuf:"bytes,4,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	ClientSecret          *string                 `protobuf:"bytes,5,opt,name=client_secret,json=clientSecret,proto3,oneof" json:"client_secret,omitempty"`                                     // Required for create, optional for update
+	Config                map[string]string       `protobuf:"bytes,6,rep,name=config,proto3" json:"config,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Provider-specific config (scopes, redirect_uri, etc.)
+	Enabled               bool                    `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	AllowRegistration     bool                    `protobuf:"varint,8,opt,name=allow_registration,json=allowRegistration,proto3" json:"allow_registration,omitempty"`
+	AllowLinking          bool                    `protobuf:"varint,9,opt,name=allow_linking,json=allowLinking,proto3" json:"allow_linking,omitempty"`
+	AllowedRoleIds        []int64                 `protobuf:"varint,10,rep,packed,name=allowed_role_ids,json=allowedRoleIds,proto3" json:"allowed_role_ids,omitempty"`
+	RateLimitPerMinute    int32                   `protobuf:"varint,11,opt,name=rate_limit_per_minute,json=rateLimitPerMinute,proto3" json:"rate_limit_per_minute,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *CreateOAuthProviderConfigRequest) Reset() {
-	*x = CreateOAuthProviderConfigRequest{}
+func (x *CreateOrUpdateOAuthProviderConfigRequest) Reset() {
+	*x = CreateOrUpdateOAuthProviderConfigRequest{}
 	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateOAuthProviderConfigRequest) String() string {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateOAuthProviderConfigRequest) ProtoMessage() {}
+func (*CreateOrUpdateOAuthProviderConfigRequest) ProtoMessage() {}
 
-func (x *CreateOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -66,255 +68,111 @@ func (x *CreateOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
-func (*CreateOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateOrUpdateOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
+func (*CreateOrUpdateOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateOAuthProviderConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *CreateOAuthProviderConfigRequest) GetProvider() v1.OAuthProvider {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetConfigId() int64 {
+	if x != nil && x.ConfigId != nil {
+		return *x.ConfigId
+	}
+	return 0
+}
+
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetProvider() v1.OAuthProvider {
 	if x != nil {
 		return x.Provider
 	}
 	return v1.OAuthProvider(0)
 }
 
-func (x *CreateOAuthProviderConfigRequest) GetClientId() string {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetClientId() string {
 	if x != nil {
 		return x.ClientId
 	}
 	return ""
 }
 
-func (x *CreateOAuthProviderConfigRequest) GetClientSecret() string {
-	if x != nil {
-		return x.ClientSecret
-	}
-	return ""
-}
-
-func (x *CreateOAuthProviderConfigRequest) GetConfig() map[string]string {
-	if x != nil {
-		return x.Config
-	}
-	return nil
-}
-
-func (x *CreateOAuthProviderConfigRequest) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-func (x *CreateOAuthProviderConfigRequest) GetAllowRegistration() bool {
-	if x != nil {
-		return x.AllowRegistration
-	}
-	return false
-}
-
-func (x *CreateOAuthProviderConfigRequest) GetAllowLinking() bool {
-	if x != nil {
-		return x.AllowLinking
-	}
-	return false
-}
-
-func (x *CreateOAuthProviderConfigRequest) GetAllowedRoleIds() []int64 {
-	if x != nil {
-		return x.AllowedRoleIds
-	}
-	return nil
-}
-
-func (x *CreateOAuthProviderConfigRequest) GetRateLimitPerMinute() int32 {
-	if x != nil {
-		return x.RateLimitPerMinute
-	}
-	return 0
-}
-
-type CreateOAuthProviderConfigResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConfigId      int64                  `protobuf:"varint,1,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateOAuthProviderConfigResponse) Reset() {
-	*x = CreateOAuthProviderConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateOAuthProviderConfigResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateOAuthProviderConfigResponse) ProtoMessage() {}
-
-func (x *CreateOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
-func (*CreateOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CreateOAuthProviderConfigResponse) GetConfigId() int64 {
-	if x != nil {
-		return x.ConfigId
-	}
-	return 0
-}
-
-// UpdateOAuthProviderConfigRequest - request to update OAuth provider config
-type UpdateOAuthProviderConfigRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ConfigId              int64                   `protobuf:"varint,2,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
-	ClientId              *string                 `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
-	ClientSecret          *string                 `protobuf:"bytes,4,opt,name=client_secret,json=clientSecret,proto3,oneof" json:"client_secret,omitempty"`
-	Config                map[string]string       `protobuf:"bytes,5,rep,name=config,proto3" json:"config,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	AllowRegistration     *bool                   `protobuf:"varint,6,opt,name=allow_registration,json=allowRegistration,proto3,oneof" json:"allow_registration,omitempty"`
-	AllowLinking          *bool                   `protobuf:"varint,7,opt,name=allow_linking,json=allowLinking,proto3,oneof" json:"allow_linking,omitempty"`
-	AllowedRoleIds        []int64                 `protobuf:"varint,8,rep,packed,name=allowed_role_ids,json=allowedRoleIds,proto3" json:"allowed_role_ids,omitempty"`
-	RateLimitPerMinute    *int32                  `protobuf:"varint,9,opt,name=rate_limit_per_minute,json=rateLimitPerMinute,proto3,oneof" json:"rate_limit_per_minute,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *UpdateOAuthProviderConfigRequest) Reset() {
-	*x = UpdateOAuthProviderConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateOAuthProviderConfigRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateOAuthProviderConfigRequest) ProtoMessage() {}
-
-func (x *UpdateOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
-func (*UpdateOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *UpdateOAuthProviderConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
-	}
-	return nil
-}
-
-func (x *UpdateOAuthProviderConfigRequest) GetConfigId() int64 {
-	if x != nil {
-		return x.ConfigId
-	}
-	return 0
-}
-
-func (x *UpdateOAuthProviderConfigRequest) GetClientId() string {
-	if x != nil && x.ClientId != nil {
-		return *x.ClientId
-	}
-	return ""
-}
-
-func (x *UpdateOAuthProviderConfigRequest) GetClientSecret() string {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetClientSecret() string {
 	if x != nil && x.ClientSecret != nil {
 		return *x.ClientSecret
 	}
 	return ""
 }
 
-func (x *UpdateOAuthProviderConfigRequest) GetConfig() map[string]string {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetConfig() map[string]string {
 	if x != nil {
 		return x.Config
 	}
 	return nil
 }
 
-func (x *UpdateOAuthProviderConfigRequest) GetAllowRegistration() bool {
-	if x != nil && x.AllowRegistration != nil {
-		return *x.AllowRegistration
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
 	}
 	return false
 }
 
-func (x *UpdateOAuthProviderConfigRequest) GetAllowLinking() bool {
-	if x != nil && x.AllowLinking != nil {
-		return *x.AllowLinking
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetAllowRegistration() bool {
+	if x != nil {
+		return x.AllowRegistration
 	}
 	return false
 }
 
-func (x *UpdateOAuthProviderConfigRequest) GetAllowedRoleIds() []int64 {
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetAllowLinking() bool {
+	if x != nil {
+		return x.AllowLinking
+	}
+	return false
+}
+
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetAllowedRoleIds() []int64 {
 	if x != nil {
 		return x.AllowedRoleIds
 	}
 	return nil
 }
 
-func (x *UpdateOAuthProviderConfigRequest) GetRateLimitPerMinute() int32 {
-	if x != nil && x.RateLimitPerMinute != nil {
-		return *x.RateLimitPerMinute
+func (x *CreateOrUpdateOAuthProviderConfigRequest) GetRateLimitPerMinute() int32 {
+	if x != nil {
+		return x.RateLimitPerMinute
 	}
 	return 0
 }
 
-type UpdateOAuthProviderConfigResponse struct {
+type CreateOrUpdateOAuthProviderConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	ConfigId      int64                  `protobuf:"varint,1,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
+	Created       bool                   `protobuf:"varint,2,opt,name=created,proto3" json:"created,omitempty"` // True if created, false if updated
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateOAuthProviderConfigResponse) Reset() {
-	*x = UpdateOAuthProviderConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[3]
+func (x *CreateOrUpdateOAuthProviderConfigResponse) Reset() {
+	*x = CreateOrUpdateOAuthProviderConfigResponse{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateOAuthProviderConfigResponse) String() string {
+func (x *CreateOrUpdateOAuthProviderConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateOAuthProviderConfigResponse) ProtoMessage() {}
+func (*CreateOrUpdateOAuthProviderConfigResponse) ProtoMessage() {}
 
-func (x *UpdateOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[3]
+func (x *CreateOrUpdateOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -325,9 +183,23 @@ func (x *UpdateOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
-func (*UpdateOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use CreateOrUpdateOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
+func (*CreateOrUpdateOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateOrUpdateOAuthProviderConfigResponse) GetConfigId() int64 {
+	if x != nil {
+		return x.ConfigId
+	}
+	return 0
+}
+
+func (x *CreateOrUpdateOAuthProviderConfigResponse) GetCreated() bool {
+	if x != nil {
+		return x.Created
+	}
+	return false
 }
 
 // DeleteOAuthProviderConfigRequest - request to delete OAuth provider config
@@ -341,7 +213,7 @@ type DeleteOAuthProviderConfigRequest struct {
 
 func (x *DeleteOAuthProviderConfigRequest) Reset() {
 	*x = DeleteOAuthProviderConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[4]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -353,7 +225,7 @@ func (x *DeleteOAuthProviderConfigRequest) String() string {
 func (*DeleteOAuthProviderConfigRequest) ProtoMessage() {}
 
 func (x *DeleteOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[4]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -366,7 +238,7 @@ func (x *DeleteOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{4}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DeleteOAuthProviderConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -391,7 +263,7 @@ type DeleteOAuthProviderConfigResponse struct {
 
 func (x *DeleteOAuthProviderConfigResponse) Reset() {
 	*x = DeleteOAuthProviderConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -403,7 +275,7 @@ func (x *DeleteOAuthProviderConfigResponse) String() string {
 func (*DeleteOAuthProviderConfigResponse) ProtoMessage() {}
 
 func (x *DeleteOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[5]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +288,7 @@ func (x *DeleteOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use DeleteOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{5}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{3}
 }
 
 // SetOAuthProviderEnabledRequest - request to enable/disable OAuth provider
@@ -431,7 +303,7 @@ type SetOAuthProviderEnabledRequest struct {
 
 func (x *SetOAuthProviderEnabledRequest) Reset() {
 	*x = SetOAuthProviderEnabledRequest{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -443,7 +315,7 @@ func (x *SetOAuthProviderEnabledRequest) String() string {
 func (*SetOAuthProviderEnabledRequest) ProtoMessage() {}
 
 func (x *SetOAuthProviderEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -456,7 +328,7 @@ func (x *SetOAuthProviderEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOAuthProviderEnabledRequest.ProtoReflect.Descriptor instead.
 func (*SetOAuthProviderEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{6}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SetOAuthProviderEnabledRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -488,7 +360,7 @@ type SetOAuthProviderEnabledResponse struct {
 
 func (x *SetOAuthProviderEnabledResponse) Reset() {
 	*x = SetOAuthProviderEnabledResponse{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -500,7 +372,7 @@ func (x *SetOAuthProviderEnabledResponse) String() string {
 func (*SetOAuthProviderEnabledResponse) ProtoMessage() {}
 
 func (x *SetOAuthProviderEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -513,7 +385,7 @@ func (x *SetOAuthProviderEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOAuthProviderEnabledResponse.ProtoReflect.Descriptor instead.
 func (*SetOAuthProviderEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{7}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{5}
 }
 
 // ListOAuthProviderConfigsRequest - request to list OAuth provider configs
@@ -528,7 +400,7 @@ type ListOAuthProviderConfigsRequest struct {
 
 func (x *ListOAuthProviderConfigsRequest) Reset() {
 	*x = ListOAuthProviderConfigsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -540,7 +412,7 @@ func (x *ListOAuthProviderConfigsRequest) String() string {
 func (*ListOAuthProviderConfigsRequest) ProtoMessage() {}
 
 func (x *ListOAuthProviderConfigsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -553,7 +425,7 @@ func (x *ListOAuthProviderConfigsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOAuthProviderConfigsRequest.ProtoReflect.Descriptor instead.
 func (*ListOAuthProviderConfigsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{8}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListOAuthProviderConfigsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -586,7 +458,7 @@ type ListOAuthProviderConfigsResponse struct {
 
 func (x *ListOAuthProviderConfigsResponse) Reset() {
 	*x = ListOAuthProviderConfigsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -598,7 +470,7 @@ func (x *ListOAuthProviderConfigsResponse) String() string {
 func (*ListOAuthProviderConfigsResponse) ProtoMessage() {}
 
 func (x *ListOAuthProviderConfigsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -611,7 +483,7 @@ func (x *ListOAuthProviderConfigsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOAuthProviderConfigsResponse.ProtoReflect.Descriptor instead.
 func (*ListOAuthProviderConfigsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{9}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListOAuthProviderConfigsResponse) GetConfigs() []*v1.OAuthProviderConfig {
@@ -632,7 +504,7 @@ type GetOAuthProviderConfigRequest struct {
 
 func (x *GetOAuthProviderConfigRequest) Reset() {
 	*x = GetOAuthProviderConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -644,7 +516,7 @@ func (x *GetOAuthProviderConfigRequest) String() string {
 func (*GetOAuthProviderConfigRequest) ProtoMessage() {}
 
 func (x *GetOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -657,7 +529,7 @@ func (x *GetOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetOAuthProviderConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -683,7 +555,7 @@ type GetOAuthProviderConfigResponse struct {
 
 func (x *GetOAuthProviderConfigResponse) Reset() {
 	*x = GetOAuthProviderConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -695,7 +567,7 @@ func (x *GetOAuthProviderConfigResponse) String() string {
 func (*GetOAuthProviderConfigResponse) ProtoMessage() {}
 
 func (x *GetOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -708,7 +580,7 @@ func (x *GetOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
 func (*GetOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetOAuthProviderConfigResponse) GetConfig() *v1.OAuthProviderConfig {
@@ -722,44 +594,29 @@ var File_backoffice_service_v1_backoffice_oauth_proto protoreflect.FileDescripto
 
 const file_backoffice_service_v1_backoffice_oauth_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_oauth.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\"\xe0\x04\n" +
-	" CreateOAuthProviderConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12>\n" +
-	"\bprovider\x18\x02 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12\x1b\n" +
-	"\tclient_id\x18\x03 \x01(\tR\bclientId\x12#\n" +
-	"\rclient_secret\x18\x04 \x01(\tR\fclientSecret\x12_\n" +
-	"\x06config\x18\x05 \x03(\v2G.api.backoffice.service.v1.CreateOAuthProviderConfigRequest.ConfigEntryR\x06config\x12\x18\n" +
-	"\aenabled\x18\x06 \x01(\bR\aenabled\x12-\n" +
-	"\x12allow_registration\x18\a \x01(\bR\x11allowRegistration\x12#\n" +
-	"\rallow_linking\x18\b \x01(\bR\fallowLinking\x12(\n" +
-	"\x10allowed_role_ids\x18\t \x03(\x03R\x0eallowedRoleIds\x121\n" +
-	"\x15rate_limit_per_minute\x18\n" +
-	" \x01(\x05R\x12rateLimitPerMinute\x1a9\n" +
-	"\vConfigEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"@\n" +
-	"!CreateOAuthProviderConfigResponse\x12\x1b\n" +
-	"\tconfig_id\x18\x01 \x01(\x03R\bconfigId\"\x9f\x05\n" +
-	" UpdateOAuthProviderConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
-	"\tconfig_id\x18\x02 \x01(\x03R\bconfigId\x12 \n" +
-	"\tclient_id\x18\x03 \x01(\tH\x00R\bclientId\x88\x01\x01\x12(\n" +
-	"\rclient_secret\x18\x04 \x01(\tH\x01R\fclientSecret\x88\x01\x01\x12_\n" +
-	"\x06config\x18\x05 \x03(\v2G.api.backoffice.service.v1.UpdateOAuthProviderConfigRequest.ConfigEntryR\x06config\x122\n" +
-	"\x12allow_registration\x18\x06 \x01(\bH\x02R\x11allowRegistration\x88\x01\x01\x12(\n" +
-	"\rallow_linking\x18\a \x01(\bH\x03R\fallowLinking\x88\x01\x01\x12(\n" +
-	"\x10allowed_role_ids\x18\b \x03(\x03R\x0eallowedRoleIds\x126\n" +
-	"\x15rate_limit_per_minute\x18\t \x01(\x05H\x04R\x12rateLimitPerMinute\x88\x01\x01\x1a9\n" +
+	",backoffice/service/v1/backoffice_oauth.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\"\xb7\x05\n" +
+	"(CreateOrUpdateOAuthProviderConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12 \n" +
+	"\tconfig_id\x18\x02 \x01(\x03H\x00R\bconfigId\x88\x01\x01\x12>\n" +
+	"\bprovider\x18\x03 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12\x1b\n" +
+	"\tclient_id\x18\x04 \x01(\tR\bclientId\x12(\n" +
+	"\rclient_secret\x18\x05 \x01(\tH\x01R\fclientSecret\x88\x01\x01\x12g\n" +
+	"\x06config\x18\x06 \x03(\v2O.api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntryR\x06config\x12\x18\n" +
+	"\aenabled\x18\a \x01(\bR\aenabled\x12-\n" +
+	"\x12allow_registration\x18\b \x01(\bR\x11allowRegistration\x12#\n" +
+	"\rallow_linking\x18\t \x01(\bR\fallowLinking\x12(\n" +
+	"\x10allowed_role_ids\x18\n" +
+	" \x03(\x03R\x0eallowedRoleIds\x121\n" +
+	"\x15rate_limit_per_minute\x18\v \x01(\x05R\x12rateLimitPerMinute\x1a9\n" +
 	"\vConfigEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\n" +
-	"_client_idB\x10\n" +
-	"\x0e_client_secretB\x15\n" +
-	"\x13_allow_registrationB\x10\n" +
-	"\x0e_allow_linkingB\x18\n" +
-	"\x16_rate_limit_per_minute\"#\n" +
-	"!UpdateOAuthProviderConfigResponse\"\x94\x01\n" +
+	"_config_idB\x10\n" +
+	"\x0e_client_secret\"b\n" +
+	")CreateOrUpdateOAuthProviderConfigResponse\x12\x1b\n" +
+	"\tconfig_id\x18\x01 \x01(\x03R\bconfigId\x12\x18\n" +
+	"\acreated\x18\x02 \x01(\bR\acreated\"\x94\x01\n" +
 	" DeleteOAuthProviderConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
 	"\tconfig_id\x18\x02 \x01(\x03R\bconfigId\"#\n" +
@@ -782,10 +639,9 @@ const file_backoffice_service_v1_backoffice_oauth_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
 	"\tconfig_id\x18\x02 \x01(\x03R\bconfigId\"b\n" +
 	"\x1eGetOAuthProviderConfigResponse\x12@\n" +
-	"\x06config\x18\x01 \x01(\v2(.api.user.service.v1.OAuthProviderConfigR\x06config2\xbb\t\n" +
-	"\x0fBackofficeOAuth\x12\xc7\x01\n" +
-	"\x19CreateOAuthProviderConfig\x12;.api.backoffice.service.v1.CreateOAuthProviderConfigRequest\x1a<.api.backoffice.service.v1.CreateOAuthProviderConfigResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/oauth/provider/create\x12\xc7\x01\n" +
-	"\x19UpdateOAuthProviderConfig\x12;.api.backoffice.service.v1.UpdateOAuthProviderConfigRequest\x1a<.api.backoffice.service.v1.UpdateOAuthProviderConfigResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/oauth/provider/update\x12\xc7\x01\n" +
+	"\x06config\x18\x01 \x01(\v2(.api.user.service.v1.OAuthProviderConfigR\x06config2\x91\b\n" +
+	"\x0fBackofficeOAuth\x12\xe7\x01\n" +
+	"!CreateOrUpdateOAuthProviderConfig\x12C.api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest\x1aD.api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/oauth/provider/createorupdate\x12\xc7\x01\n" +
 	"\x19DeleteOAuthProviderConfig\x12;.api.backoffice.service.v1.DeleteOAuthProviderConfigRequest\x1a<.api.backoffice.service.v1.DeleteOAuthProviderConfigResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/oauth/provider/delete\x12\xc6\x01\n" +
 	"\x17SetOAuthProviderEnabled\x129.api.backoffice.service.v1.SetOAuthProviderEnabledRequest\x1a:.api.backoffice.service.v1.SetOAuthProviderEnabledResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/oauth/provider/enabled/set\x12\xc2\x01\n" +
 	"\x18ListOAuthProviderConfigs\x12:.api.backoffice.service.v1.ListOAuthProviderConfigsRequest\x1a;.api.backoffice.service.v1.ListOAuthProviderConfigsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/oauth/provider/list\x12\xbb\x01\n" +
@@ -804,56 +660,49 @@ func file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_backoffice_service_v1_backoffice_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_backoffice_service_v1_backoffice_oauth_proto_goTypes = []any{
-	(*CreateOAuthProviderConfigRequest)(nil),  // 0: api.backoffice.service.v1.CreateOAuthProviderConfigRequest
-	(*CreateOAuthProviderConfigResponse)(nil), // 1: api.backoffice.service.v1.CreateOAuthProviderConfigResponse
-	(*UpdateOAuthProviderConfigRequest)(nil),  // 2: api.backoffice.service.v1.UpdateOAuthProviderConfigRequest
-	(*UpdateOAuthProviderConfigResponse)(nil), // 3: api.backoffice.service.v1.UpdateOAuthProviderConfigResponse
-	(*DeleteOAuthProviderConfigRequest)(nil),  // 4: api.backoffice.service.v1.DeleteOAuthProviderConfigRequest
-	(*DeleteOAuthProviderConfigResponse)(nil), // 5: api.backoffice.service.v1.DeleteOAuthProviderConfigResponse
-	(*SetOAuthProviderEnabledRequest)(nil),    // 6: api.backoffice.service.v1.SetOAuthProviderEnabledRequest
-	(*SetOAuthProviderEnabledResponse)(nil),   // 7: api.backoffice.service.v1.SetOAuthProviderEnabledResponse
-	(*ListOAuthProviderConfigsRequest)(nil),   // 8: api.backoffice.service.v1.ListOAuthProviderConfigsRequest
-	(*ListOAuthProviderConfigsResponse)(nil),  // 9: api.backoffice.service.v1.ListOAuthProviderConfigsResponse
-	(*GetOAuthProviderConfigRequest)(nil),     // 10: api.backoffice.service.v1.GetOAuthProviderConfigRequest
-	(*GetOAuthProviderConfigResponse)(nil),    // 11: api.backoffice.service.v1.GetOAuthProviderConfigResponse
-	nil,                                       // 12: api.backoffice.service.v1.CreateOAuthProviderConfigRequest.ConfigEntry
-	nil,                                       // 13: api.backoffice.service.v1.UpdateOAuthProviderConfigRequest.ConfigEntry
-	(*common.OperatorContext)(nil),            // 14: api.common.OperatorContext
-	(v1.OAuthProvider)(0),                     // 15: api.user.service.v1.OAuthProvider
-	(*v1.OAuthProviderConfig)(nil),            // 16: api.user.service.v1.OAuthProviderConfig
+	(*CreateOrUpdateOAuthProviderConfigRequest)(nil),  // 0: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest
+	(*CreateOrUpdateOAuthProviderConfigResponse)(nil), // 1: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse
+	(*DeleteOAuthProviderConfigRequest)(nil),          // 2: api.backoffice.service.v1.DeleteOAuthProviderConfigRequest
+	(*DeleteOAuthProviderConfigResponse)(nil),         // 3: api.backoffice.service.v1.DeleteOAuthProviderConfigResponse
+	(*SetOAuthProviderEnabledRequest)(nil),            // 4: api.backoffice.service.v1.SetOAuthProviderEnabledRequest
+	(*SetOAuthProviderEnabledResponse)(nil),           // 5: api.backoffice.service.v1.SetOAuthProviderEnabledResponse
+	(*ListOAuthProviderConfigsRequest)(nil),           // 6: api.backoffice.service.v1.ListOAuthProviderConfigsRequest
+	(*ListOAuthProviderConfigsResponse)(nil),          // 7: api.backoffice.service.v1.ListOAuthProviderConfigsResponse
+	(*GetOAuthProviderConfigRequest)(nil),             // 8: api.backoffice.service.v1.GetOAuthProviderConfigRequest
+	(*GetOAuthProviderConfigResponse)(nil),            // 9: api.backoffice.service.v1.GetOAuthProviderConfigResponse
+	nil,                                               // 10: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	(*common.OperatorContext)(nil),                    // 11: api.common.OperatorContext
+	(v1.OAuthProvider)(0),                             // 12: api.user.service.v1.OAuthProvider
+	(*v1.OAuthProviderConfig)(nil),                    // 13: api.user.service.v1.OAuthProviderConfig
 }
 var file_backoffice_service_v1_backoffice_oauth_proto_depIdxs = []int32{
-	14, // 0: api.backoffice.service.v1.CreateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 1: api.backoffice.service.v1.CreateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	12, // 2: api.backoffice.service.v1.CreateOAuthProviderConfigRequest.config:type_name -> api.backoffice.service.v1.CreateOAuthProviderConfigRequest.ConfigEntry
-	14, // 3: api.backoffice.service.v1.UpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	13, // 4: api.backoffice.service.v1.UpdateOAuthProviderConfigRequest.config:type_name -> api.backoffice.service.v1.UpdateOAuthProviderConfigRequest.ConfigEntry
-	14, // 5: api.backoffice.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 6: api.backoffice.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 7: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 8: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	16, // 9: api.backoffice.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
-	14, // 10: api.backoffice.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 11: api.backoffice.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
-	0,  // 12: api.backoffice.service.v1.BackofficeOAuth.CreateOAuthProviderConfig:input_type -> api.backoffice.service.v1.CreateOAuthProviderConfigRequest
-	2,  // 13: api.backoffice.service.v1.BackofficeOAuth.UpdateOAuthProviderConfig:input_type -> api.backoffice.service.v1.UpdateOAuthProviderConfigRequest
-	4,  // 14: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:input_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigRequest
-	6,  // 15: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:input_type -> api.backoffice.service.v1.SetOAuthProviderEnabledRequest
-	8,  // 16: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:input_type -> api.backoffice.service.v1.ListOAuthProviderConfigsRequest
-	10, // 17: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:input_type -> api.backoffice.service.v1.GetOAuthProviderConfigRequest
-	1,  // 18: api.backoffice.service.v1.BackofficeOAuth.CreateOAuthProviderConfig:output_type -> api.backoffice.service.v1.CreateOAuthProviderConfigResponse
-	3,  // 19: api.backoffice.service.v1.BackofficeOAuth.UpdateOAuthProviderConfig:output_type -> api.backoffice.service.v1.UpdateOAuthProviderConfigResponse
-	5,  // 20: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:output_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigResponse
-	7,  // 21: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:output_type -> api.backoffice.service.v1.SetOAuthProviderEnabledResponse
-	9,  // 22: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:output_type -> api.backoffice.service.v1.ListOAuthProviderConfigsResponse
-	11, // 23: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:output_type -> api.backoffice.service.v1.GetOAuthProviderConfigResponse
-	18, // [18:24] is the sub-list for method output_type
-	12, // [12:18] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	11, // 0: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 1: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	10, // 2: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	11, // 3: api.backoffice.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	11, // 4: api.backoffice.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
+	11, // 5: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 6: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	13, // 7: api.backoffice.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
+	11, // 8: api.backoffice.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	13, // 9: api.backoffice.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
+	0,  // 10: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateOAuthProviderConfig:input_type -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest
+	2,  // 11: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:input_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigRequest
+	4,  // 12: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:input_type -> api.backoffice.service.v1.SetOAuthProviderEnabledRequest
+	6,  // 13: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:input_type -> api.backoffice.service.v1.ListOAuthProviderConfigsRequest
+	8,  // 14: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:input_type -> api.backoffice.service.v1.GetOAuthProviderConfigRequest
+	1,  // 15: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateOAuthProviderConfig:output_type -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse
+	3,  // 16: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:output_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigResponse
+	5,  // 17: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:output_type -> api.backoffice.service.v1.SetOAuthProviderEnabledResponse
+	7,  // 18: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:output_type -> api.backoffice.service.v1.ListOAuthProviderConfigsResponse
+	9,  // 19: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:output_type -> api.backoffice.service.v1.GetOAuthProviderConfigResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_oauth_proto_init() }
@@ -861,15 +710,15 @@ func file_backoffice_service_v1_backoffice_oauth_proto_init() {
 	if File_backoffice_service_v1_backoffice_oauth_proto != nil {
 		return
 	}
-	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[2].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[8].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[0].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_oauth_proto_rawDesc), len(file_backoffice_service_v1_backoffice_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

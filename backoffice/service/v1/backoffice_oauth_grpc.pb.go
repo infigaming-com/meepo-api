@@ -19,12 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeOAuth_CreateOAuthProviderConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeOAuth/CreateOAuthProviderConfig"
-	BackofficeOAuth_UpdateOAuthProviderConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeOAuth/UpdateOAuthProviderConfig"
-	BackofficeOAuth_DeleteOAuthProviderConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeOAuth/DeleteOAuthProviderConfig"
-	BackofficeOAuth_SetOAuthProviderEnabled_FullMethodName   = "/api.backoffice.service.v1.BackofficeOAuth/SetOAuthProviderEnabled"
-	BackofficeOAuth_ListOAuthProviderConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeOAuth/ListOAuthProviderConfigs"
-	BackofficeOAuth_GetOAuthProviderConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeOAuth/GetOAuthProviderConfig"
+	BackofficeOAuth_CreateOrUpdateOAuthProviderConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeOAuth/CreateOrUpdateOAuthProviderConfig"
+	BackofficeOAuth_DeleteOAuthProviderConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeOAuth/DeleteOAuthProviderConfig"
+	BackofficeOAuth_SetOAuthProviderEnabled_FullMethodName           = "/api.backoffice.service.v1.BackofficeOAuth/SetOAuthProviderEnabled"
+	BackofficeOAuth_ListOAuthProviderConfigs_FullMethodName          = "/api.backoffice.service.v1.BackofficeOAuth/ListOAuthProviderConfigs"
+	BackofficeOAuth_GetOAuthProviderConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeOAuth/GetOAuthProviderConfig"
 )
 
 // BackofficeOAuthClient is the client API for BackofficeOAuth service.
@@ -33,10 +32,8 @@ const (
 //
 // BackofficeOAuth service provides OAuth provider configuration management for operators
 type BackofficeOAuthClient interface {
-	// Create a new OAuth provider configuration for an operator
-	CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOAuthProviderConfigResponse, error)
-	// Update an existing OAuth provider configuration
-	UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*UpdateOAuthProviderConfigResponse, error)
+	// Create or update OAuth provider configuration
+	CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error)
 	// Delete an OAuth provider configuration
 	DeleteOAuthProviderConfig(ctx context.Context, in *DeleteOAuthProviderConfigRequest, opts ...grpc.CallOption) (*DeleteOAuthProviderConfigResponse, error)
 	// Enable or disable an OAuth provider
@@ -55,20 +52,10 @@ func NewBackofficeOAuthClient(cc grpc.ClientConnInterface) BackofficeOAuthClient
 	return &backofficeOAuthClient{cc}
 }
 
-func (c *backofficeOAuthClient) CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOAuthProviderConfigResponse, error) {
+func (c *backofficeOAuthClient) CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateOAuthProviderConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOAuth_CreateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeOAuthClient) UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*UpdateOAuthProviderConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateOAuthProviderConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOAuth_UpdateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
+	out := new(CreateOrUpdateOAuthProviderConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOAuth_CreateOrUpdateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -121,10 +108,8 @@ func (c *backofficeOAuthClient) GetOAuthProviderConfig(ctx context.Context, in *
 //
 // BackofficeOAuth service provides OAuth provider configuration management for operators
 type BackofficeOAuthServer interface {
-	// Create a new OAuth provider configuration for an operator
-	CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error)
-	// Update an existing OAuth provider configuration
-	UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error)
+	// Create or update OAuth provider configuration
+	CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error)
 	// Delete an OAuth provider configuration
 	DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error)
 	// Enable or disable an OAuth provider
@@ -143,11 +128,8 @@ type BackofficeOAuthServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeOAuthServer struct{}
 
-func (UnimplementedBackofficeOAuthServer) CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateOAuthProviderConfig not implemented")
-}
-func (UnimplementedBackofficeOAuthServer) UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateOAuthProviderConfig not implemented")
+func (UnimplementedBackofficeOAuthServer) CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOrUpdateOAuthProviderConfig not implemented")
 }
 func (UnimplementedBackofficeOAuthServer) DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteOAuthProviderConfig not implemented")
@@ -182,38 +164,20 @@ func RegisterBackofficeOAuthServer(s grpc.ServiceRegistrar, srv BackofficeOAuthS
 	s.RegisterService(&BackofficeOAuth_ServiceDesc, srv)
 }
 
-func _BackofficeOAuth_CreateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOAuthProviderConfigRequest)
+func _BackofficeOAuth_CreateOrUpdateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrUpdateOAuthProviderConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeOAuthServer).CreateOAuthProviderConfig(ctx, in)
+		return srv.(BackofficeOAuthServer).CreateOrUpdateOAuthProviderConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeOAuth_CreateOAuthProviderConfig_FullMethodName,
+		FullMethod: BackofficeOAuth_CreateOrUpdateOAuthProviderConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOAuthServer).CreateOAuthProviderConfig(ctx, req.(*CreateOAuthProviderConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeOAuth_UpdateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOAuthProviderConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOAuthServer).UpdateOAuthProviderConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOAuth_UpdateOAuthProviderConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOAuthServer).UpdateOAuthProviderConfig(ctx, req.(*UpdateOAuthProviderConfigRequest))
+		return srv.(BackofficeOAuthServer).CreateOrUpdateOAuthProviderConfig(ctx, req.(*CreateOrUpdateOAuthProviderConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -298,12 +262,8 @@ var BackofficeOAuth_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackofficeOAuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateOAuthProviderConfig",
-			Handler:    _BackofficeOAuth_CreateOAuthProviderConfig_Handler,
-		},
-		{
-			MethodName: "UpdateOAuthProviderConfig",
-			Handler:    _BackofficeOAuth_UpdateOAuthProviderConfig_Handler,
+			MethodName: "CreateOrUpdateOAuthProviderConfig",
+			Handler:    _BackofficeOAuth_CreateOrUpdateOAuthProviderConfig_Handler,
 		},
 		{
 			MethodName: "DeleteOAuthProviderConfig",

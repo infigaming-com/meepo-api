@@ -12,18 +12,10 @@ option java_package = "api.backoffice.service.v1";
 
 // BackofficeOAuth service provides OAuth provider configuration management for operators
 service BackofficeOAuth {
-	// Create a new OAuth provider configuration for an operator
-	rpc CreateOAuthProviderConfig(CreateOAuthProviderConfigRequest) returns (CreateOAuthProviderConfigResponse) {
+	// Create or update OAuth provider configuration
+	rpc CreateOrUpdateOAuthProviderConfig(CreateOrUpdateOAuthProviderConfigRequest) returns (CreateOrUpdateOAuthProviderConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/oauth/provider/create"
-			body: "*"
-		};
-	}
-
-	// Update an existing OAuth provider configuration
-	rpc UpdateOAuthProviderConfig(UpdateOAuthProviderConfigRequest) returns (UpdateOAuthProviderConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/oauth/provider/update"
+			post: "/v1/backoffice/oauth/provider/createorupdate"
 			body: "*"
 		};
 	}
@@ -61,38 +53,26 @@ service BackofficeOAuth {
 	}
 }
 
-// CreateOAuthProviderConfigRequest - request to create OAuth provider config
-message CreateOAuthProviderConfigRequest {
+// CreateOrUpdateOAuthProviderConfigRequest - request to create or update OAuth provider config
+// If config_id is provided (non-zero), updates existing config; otherwise creates new one
+message CreateOrUpdateOAuthProviderConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	user.service.v1.OAuthProvider provider = 2;
-	string client_id = 3;
-	string client_secret = 4;
-	map<string, string> config = 5;  // Provider-specific config (scopes, redirect_uri, etc.)
-	bool enabled = 6;
-	bool allow_registration = 7;
-	bool allow_linking = 8;
-	repeated int64 allowed_role_ids = 9;
-	int32 rate_limit_per_minute = 10;
+	optional int64 config_id = 2;          // If provided, update existing config; otherwise create new
+	user.service.v1.OAuthProvider provider = 3;
+	string client_id = 4;
+	optional string client_secret = 5;     // Required for create, optional for update
+	map<string, string> config = 6;        // Provider-specific config (scopes, redirect_uri, etc.)
+	bool enabled = 7;
+	bool allow_registration = 8;
+	bool allow_linking = 9;
+	repeated int64 allowed_role_ids = 10;
+	int32 rate_limit_per_minute = 11;
 }
 
-message CreateOAuthProviderConfigResponse {
+message CreateOrUpdateOAuthProviderConfigResponse {
 	int64 config_id = 1;
+	bool created = 2;                      // True if created, false if updated
 }
-
-// UpdateOAuthProviderConfigRequest - request to update OAuth provider config
-message UpdateOAuthProviderConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	int64 config_id = 2;
-	optional string client_id = 3;
-	optional string client_secret = 4;
-	map<string, string> config = 5;
-	optional bool allow_registration = 6;
-	optional bool allow_linking = 7;
-	repeated int64 allowed_role_ids = 8;
-	optional int32 rate_limit_per_minute = 9;
-}
-
-message UpdateOAuthProviderConfigResponse {}
 
 // DeleteOAuthProviderConfigRequest - request to delete OAuth provider config
 message DeleteOAuthProviderConfigRequest {
