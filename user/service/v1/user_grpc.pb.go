@@ -120,8 +120,7 @@ const (
 	User_GetBackofficeAccountDetail_FullMethodName         = "/api.user.service.v1.User/GetBackofficeAccountDetail"
 	User_UpdateBackofficeAccount_FullMethodName            = "/api.user.service.v1.User/UpdateBackofficeAccount"
 	User_AdminResetPassword_FullMethodName                 = "/api.user.service.v1.User/AdminResetPassword"
-	User_CreateOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/CreateOAuthProviderConfig"
-	User_UpdateOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/UpdateOAuthProviderConfig"
+	User_CreateOrUpdateOAuthProviderConfig_FullMethodName  = "/api.user.service.v1.User/CreateOrUpdateOAuthProviderConfig"
 	User_DeleteOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/DeleteOAuthProviderConfig"
 	User_SetOAuthProviderEnabled_FullMethodName            = "/api.user.service.v1.User/SetOAuthProviderEnabled"
 	User_ListOAuthProviderConfigs_FullMethodName           = "/api.user.service.v1.User/ListOAuthProviderConfigs"
@@ -307,10 +306,9 @@ type UserClient interface {
 	// Admin reset password for backoffice account (internal gRPC only)
 	AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error)
 	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
-	// Create OAuth provider configuration for an operator
-	CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOAuthProviderConfigResponse, error)
-	// Update OAuth provider configuration
-	UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*UpdateOAuthProviderConfigResponse, error)
+	// Create or update OAuth provider configuration for an operator
+	// If config_id is provided, updates existing config; otherwise creates new one
+	CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error)
 	// Delete OAuth provider configuration
 	DeleteOAuthProviderConfig(ctx context.Context, in *DeleteOAuthProviderConfigRequest, opts ...grpc.CallOption) (*DeleteOAuthProviderConfigResponse, error)
 	// Set OAuth provider enabled/disabled status
@@ -1345,20 +1343,10 @@ func (c *userClient) AdminResetPassword(ctx context.Context, in *AdminResetPassw
 	return out, nil
 }
 
-func (c *userClient) CreateOAuthProviderConfig(ctx context.Context, in *CreateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOAuthProviderConfigResponse, error) {
+func (c *userClient) CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateOAuthProviderConfigResponse)
-	err := c.cc.Invoke(ctx, User_CreateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userClient) UpdateOAuthProviderConfig(ctx context.Context, in *UpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*UpdateOAuthProviderConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateOAuthProviderConfigResponse)
-	err := c.cc.Invoke(ctx, User_UpdateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
+	out := new(CreateOrUpdateOAuthProviderConfigResponse)
+	err := c.cc.Invoke(ctx, User_CreateOrUpdateOAuthProviderConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1647,10 +1635,9 @@ type UserServer interface {
 	// Admin reset password for backoffice account (internal gRPC only)
 	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
 	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
-	// Create OAuth provider configuration for an operator
-	CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error)
-	// Update OAuth provider configuration
-	UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error)
+	// Create or update OAuth provider configuration for an operator
+	// If config_id is provided, updates existing config; otherwise creates new one
+	CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error)
 	// Delete OAuth provider configuration
 	DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error)
 	// Set OAuth provider enabled/disabled status
@@ -1985,11 +1972,8 @@ func (UnimplementedUserServer) UpdateBackofficeAccount(context.Context, *UpdateB
 func (UnimplementedUserServer) AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AdminResetPassword not implemented")
 }
-func (UnimplementedUserServer) CreateOAuthProviderConfig(context.Context, *CreateOAuthProviderConfigRequest) (*CreateOAuthProviderConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateOAuthProviderConfig not implemented")
-}
-func (UnimplementedUserServer) UpdateOAuthProviderConfig(context.Context, *UpdateOAuthProviderConfigRequest) (*UpdateOAuthProviderConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateOAuthProviderConfig not implemented")
+func (UnimplementedUserServer) CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOrUpdateOAuthProviderConfig not implemented")
 }
 func (UnimplementedUserServer) DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteOAuthProviderConfig not implemented")
@@ -3845,38 +3829,20 @@ func _User_AdminResetPassword_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_CreateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOAuthProviderConfigRequest)
+func _User_CreateOrUpdateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrUpdateOAuthProviderConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).CreateOAuthProviderConfig(ctx, in)
+		return srv.(UserServer).CreateOrUpdateOAuthProviderConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_CreateOAuthProviderConfig_FullMethodName,
+		FullMethod: User_CreateOrUpdateOAuthProviderConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).CreateOAuthProviderConfig(ctx, req.(*CreateOAuthProviderConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _User_UpdateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOAuthProviderConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServer).UpdateOAuthProviderConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: User_UpdateOAuthProviderConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).UpdateOAuthProviderConfig(ctx, req.(*UpdateOAuthProviderConfigRequest))
+		return srv.(UserServer).CreateOrUpdateOAuthProviderConfig(ctx, req.(*CreateOrUpdateOAuthProviderConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4487,12 +4453,8 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_AdminResetPassword_Handler,
 		},
 		{
-			MethodName: "CreateOAuthProviderConfig",
-			Handler:    _User_CreateOAuthProviderConfig_Handler,
-		},
-		{
-			MethodName: "UpdateOAuthProviderConfig",
-			Handler:    _User_UpdateOAuthProviderConfig_Handler,
+			MethodName: "CreateOrUpdateOAuthProviderConfig",
+			Handler:    _User_CreateOrUpdateOAuthProviderConfig_Handler,
 		},
 		{
 			MethodName: "DeleteOAuthProviderConfig",
