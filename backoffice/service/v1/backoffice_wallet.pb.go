@@ -4371,9 +4371,8 @@ type AdjustCreditRequest struct {
 	TargetUserId int64                  `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
 	Currency     string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	CreditId     int64                  `protobuf:"varint,3,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
-	// Adjustment parameters
-	// field: "cash_turnover", "cash_turnover_threshold", "operator_bonus_turnover", "operator_bonus_turnover_threshold"
-	Field string `protobuf:"bytes,4,opt,name=field,proto3" json:"field,omitempty"`
+	// transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"
+	TransactionType string `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	// direction: "add", "subtract"
 	Direction     string `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
 	Value         string `protobuf:"bytes,6,opt,name=value,proto3" json:"value,omitempty"` // Adjustment value (positive number)
@@ -4432,9 +4431,9 @@ func (x *AdjustCreditRequest) GetCreditId() int64 {
 	return 0
 }
 
-func (x *AdjustCreditRequest) GetField() string {
+func (x *AdjustCreditRequest) GetTransactionType() string {
 	if x != nil {
-		return x.Field
+		return x.TransactionType
 	}
 	return ""
 }
@@ -5268,12 +5267,12 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x05codes\x18\x02 \x03(\tR\x05codes\"A\n" +
 	"\x1eListUniversalCodeUsagesRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
-	"campaignId\"\xbe\x01\n" +
+	"campaignId\"\xd3\x01\n" +
 	"\x13AdjustCreditRequest\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1b\n" +
-	"\tcredit_id\x18\x03 \x01(\x03R\bcreditId\x12\x14\n" +
-	"\x05field\x18\x04 \x01(\tR\x05field\x12\x1c\n" +
+	"\tcredit_id\x18\x03 \x01(\x03R\bcreditId\x12)\n" +
+	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x14\n" +
 	"\x05value\x18\x06 \x01(\tR\x05value2\xe9E\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +

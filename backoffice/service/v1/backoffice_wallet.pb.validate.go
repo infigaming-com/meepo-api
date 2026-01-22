@@ -8884,7 +8884,7 @@ func (m *AdjustCreditRequest) validate(all bool) error {
 
 	// no validation rules for CreditId
 
-	// no validation rules for Field
+	// no validation rules for TransactionType
 
 	// no validation rules for Direction
 

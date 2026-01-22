@@ -10064,11 +10064,9 @@ components:
                     type: string
                 creditId:
                     type: string
-                field:
+                transactionType:
                     type: string
-                    description: |-
-                        Adjustment parameters
-                         field: "cash_turnover", "cash_turnover_threshold", "operator_bonus_turnover", "operator_bonus_turnover_threshold"
+                    description: 'transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"'
                 direction:
                     type: string
                     description: 'direction: "add", "subtract"'

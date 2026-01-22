@@ -1919,7 +1919,7 @@ message BatchGetUserFinancialMetricsRequest {
 }
 
 message BatchGetUserFinancialMetricsResponse {
-	repeated UserFinancialMetrics user_metrics = 1;
+	map<int64, UserFinancialMetrics> user_metrics = 1;
 	message UserFinancialMetrics {
 		int64 user_id = 1;
 		// Per-currency breakdown (when currencies specified in request)
@@ -1950,18 +1950,16 @@ message BatchGetUserFinancialMetricsResponse {
 
 message AdjustCreditRequest {
 	int64 target_user_id = 1;
-	api.common.OperatorContext operator_context = 2;
-	string currency = 3;
-	int64 credit_id = 4; // The credit to adjust
-	// Adjustment parameters (only one field per request)
-	// field: "cash_turnover", "cash_turnover_threshold", "operator_bonus_turnover", "operator_bonus_turnover_threshold"
-	string field = 5;
+	string currency = 2;
+	int64 credit_id = 3; // The credit to adjust
+	// transaction_type: "adjust_cash_turnover", "adjust_cash_turnover_threshold", "adjust_operator_bonus_turnover", "adjust_operator_bonus_turnover_threshold"
+	string transaction_type = 4;
 	// direction: "add", "subtract"
-	string direction = 6;
-	string value = 7; // Adjustment value (positive number)
+	string direction = 5;
+	string value = 6; // Adjustment value (positive number)
 	// Initiator info
-	int64 initiator_user_id = 8;
-	api.common.OperatorContext initiator_operator_context = 9;
+	int64 initiator_user_id = 7;
+	api.common.OperatorContext initiator_operator_context = 8;
 }
 
 message AdjustCreditResponse {
