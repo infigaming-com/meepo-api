@@ -25266,6 +25266,16 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                paTransactionIds:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional PA transaction IDs filter (supports multiple IDs)
+                gatewayTransactionIds:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional Gateway transaction IDs filter (supports multiple IDs)
             description: |-
                 Request to get transaction page
                  Used to retrieve a paginated list of transactions with optional filters
@@ -25759,6 +25769,9 @@ components:
                     type: string
                 processingFeeUsd:
                     type: string
+                pspName:
+                    type: string
+                    description: PSP name for the payment channel
             description: |-
                 Transaction information
                  Detailed information about a specific transaction

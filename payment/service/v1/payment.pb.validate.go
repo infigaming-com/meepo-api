@@ -4051,6 +4051,8 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for ProcessingFeeUsd
 
+	// no validation rules for PspName
+
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
 	}

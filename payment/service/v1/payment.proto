@@ -660,6 +660,8 @@ message TransactionInfo {
   string processing_fee_reporting_currency = 32;
   string amount_sent_usd = 33;
   string processing_fee_usd = 34;
+  // PSP name for the payment channel
+  string psp_name = 35;
 }
 
 message TransactionDetail {
@@ -707,6 +709,10 @@ message GetTransactionPageRequest {
   int64 user_id = 17;
   api.common.OperatorContextFilters operator_context_filters = 18;
   api.common.OperatorContext operator_context = 19;
+  // Optional PA transaction IDs filter (supports multiple IDs)
+  repeated string pa_transaction_ids = 20;
+  // Optional Gateway transaction IDs filter (supports multiple IDs)
+  repeated string gateway_transaction_ids = 21;
 }
 
 // Response for transaction page
