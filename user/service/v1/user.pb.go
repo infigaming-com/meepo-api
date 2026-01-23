@@ -3103,8 +3103,9 @@ type UpdateUserRequest struct {
 	CampaignUrl     *string                 `protobuf:"bytes,20,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
 	CampaignId      *int64                  `protobuf:"varint,21,opt,name=campaign_id,json=campaignId,proto3,oneof" json:"campaign_id,omitempty"`
 	AffiliateId     *int64                  `protobuf:"varint,22,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	OperatorUserId  int64                   `protobuf:"varint,23,opt,name=operator_user_id,json=operatorUserId,proto3" json:"operator_user_id,omitempty"` // 操作者的用户ID，用于验证角色分配权限
-	Username        *string                 `protobuf:"bytes,24,opt,name=username,proto3,oneof" json:"username,omitempty"`                                // 用户名
+	OperatorUserId  int64                   `protobuf:"varint,23,opt,name=operator_user_id,json=operatorUserId,proto3" json:"operator_user_id,omitempty"`       // 操作者的用户ID，用于验证角色分配权限
+	Username        *string                 `protobuf:"bytes,24,opt,name=username,proto3,oneof" json:"username,omitempty"`                                      // 用户名
+	ReferrerUserId  *int64                  `protobuf:"varint,25,opt,name=referrer_user_id,json=referrerUserId,proto3,oneof" json:"referrer_user_id,omitempty"` // 推荐人的user_id
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3307,6 +3308,13 @@ func (x *UpdateUserRequest) GetUsername() string {
 	return ""
 }
 
+func (x *UpdateUserRequest) GetReferrerUserId() int64 {
+	if x != nil && x.ReferrerUserId != nil {
+		return *x.ReferrerUserId
+	}
+	return 0
+}
+
 type UpdateUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -3481,8 +3489,10 @@ type ListUsersRequest struct {
 	// The initial operator context.
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,23,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,24,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Filter by registration IP
+	RegistrationIp *string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3,oneof" json:"registration_ip,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -3681,6 +3691,13 @@ func (x *ListUsersRequest) GetOperatorContextFilters() *common.OperatorContextFi
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListUsersRequest) GetRegistrationIp() string {
+	if x != nil && x.RegistrationIp != nil {
+		return *x.RegistrationIp
+	}
+	return ""
 }
 
 type ListUsersResponse struct {
@@ -4317,9 +4334,17 @@ type GetUserProfileResponse struct {
 	// Email.
 	LoginEmail string `protobuf:"bytes,28,opt,name=login_email,json=loginEmail,proto3" json:"login_email,omitempty"`
 	// Mobile.
-	LoginMobile   string `protobuf:"bytes,29,opt,name=login_mobile,json=loginMobile,proto3" json:"login_mobile,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LoginMobile string `protobuf:"bytes,29,opt,name=login_mobile,json=loginMobile,proto3" json:"login_mobile,omitempty"`
+	// Affiliate ID (affiliate's user_id)
+	AffiliateId int64 `protobuf:"varint,30,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	// Affiliate's username for display
+	AffiliateName string `protobuf:"bytes,31,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	// Direct referrer's user_id
+	ReferrerUserId int64 `protobuf:"varint,32,opt,name=referrer_user_id,json=referrerUserId,proto3" json:"referrer_user_id,omitempty"`
+	// Referrer's username for display
+	ReferrerUsername string `protobuf:"bytes,33,opt,name=referrer_username,json=referrerUsername,proto3" json:"referrer_username,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse) Reset() {
@@ -4551,6 +4576,34 @@ func (x *GetUserProfileResponse) GetLoginEmail() string {
 func (x *GetUserProfileResponse) GetLoginMobile() string {
 	if x != nil {
 		return x.LoginMobile
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse) GetAffiliateName() string {
+	if x != nil {
+		return x.AffiliateName
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetReferrerUserId() int64 {
+	if x != nil {
+		return x.ReferrerUserId
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse) GetReferrerUsername() string {
+	if x != nil {
+		return x.ReferrerUsername
 	}
 	return ""
 }
@@ -16263,7 +16316,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\breviewer\x18\n" +
 	" \x01(\tR\breviewer\x12\x1f\n" +
 	"\vreview_time\x18\v \x01(\x05R\n" +
-	"reviewTime\"\xd3\t\n" +
+	"reviewTime\"\x97\n" +
+	"\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -16291,7 +16345,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"campaignId\x88\x01\x01\x12&\n" +
 	"\faffiliate_id\x18\x16 \x01(\x03H\x13R\vaffiliateId\x88\x01\x01\x12(\n" +
 	"\x10operator_user_id\x18\x17 \x01(\x03R\x0eoperatorUserId\x12\x1f\n" +
-	"\busername\x18\x18 \x01(\tH\x14R\busername\x88\x01\x01B\v\n" +
+	"\busername\x18\x18 \x01(\tH\x14R\busername\x88\x01\x01\x12-\n" +
+	"\x10referrer_user_id\x18\x19 \x01(\x03H\x15R\x0ereferrerUserId\x88\x01\x01B\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
@@ -16317,14 +16372,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\r_campaign_urlB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\v\n" +
-	"\t_username\"\x14\n" +
+	"\t_usernameB\x13\n" +
+	"\x11_referrer_user_id\"\x14\n" +
 	"\x12UpdateUserResponse\"w\n" +
 	"\x19UpdateUserIdentityRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x03 \x01(\tR\bidNumber\x12\x14\n" +
 	"\x05image\x18\x04 \x01(\tR\x05image\"\x1c\n" +
-	"\x1aUpdateUserIdentityResponse\"\xb1\n" +
+	"\x1aUpdateUserIdentityResponse\"\xf3\n" +
 	"\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
@@ -16354,7 +16410,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x04page\x18\x15 \x01(\x05H\x13R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x16 \x01(\x05H\x14R\bpageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x17 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x18 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
+	"\x18operator_context_filters\x18\x18 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tH\x15R\x0eregistrationIp\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -16384,7 +16441,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\a_mobileB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf9\t\n" +
+	"_page_sizeB\x12\n" +
+	"\x10_registration_ip\"\xf9\t\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -16469,7 +16527,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\x8b\x13\n" +
+	"\x10_login_page_size\"\xac\x14\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -16503,7 +16561,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12phoneChangeHistory\x18\x1b \x03(\v28.api.user.service.v1.GetUserProfileResponse.ChangeRecordR\x12phoneChangeHistory\x12\x1f\n" +
 	"\vlogin_email\x18\x1c \x01(\tR\n" +
 	"loginEmail\x12!\n" +
-	"\flogin_mobile\x18\x1d \x01(\tR\vloginMobile\x1aH\n" +
+	"\flogin_mobile\x18\x1d \x01(\tR\vloginMobile\x12!\n" +
+	"\faffiliate_id\x18\x1e \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x1f \x01(\tR\raffiliateName\x12(\n" +
+	"\x10referrer_user_id\x18  \x01(\x03R\x0ereferrerUserId\x12+\n" +
+	"\x11referrer_username\x18! \x01(\tR\x10referrerUsername\x1aH\n" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +

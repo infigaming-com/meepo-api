@@ -5753,6 +5753,10 @@ func (m *UpdateUserRequest) validate(all bool) error {
 		// no validation rules for Username
 	}
 
+	if m.ReferrerUserId != nil {
+		// no validation rules for ReferrerUserId
+	}
+
 	if len(errors) > 0 {
 		return UpdateUserRequestMultiError(errors)
 	}
@@ -6367,6 +6371,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.RegistrationIp != nil {
+		// no validation rules for RegistrationIp
 	}
 
 	if len(errors) > 0 {
@@ -7999,6 +8007,14 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 	// no validation rules for LoginEmail
 
 	// no validation rules for LoginMobile
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for AffiliateName
+
+	// no validation rules for ReferrerUserId
+
+	// no validation rules for ReferrerUsername
 
 	if len(errors) > 0 {
 		return GetUserProfileResponseMultiError(errors)

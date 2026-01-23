@@ -21645,6 +21645,18 @@ components:
                 loginMobile:
                     type: string
                     description: Mobile.
+                affiliateId:
+                    type: string
+                    description: Affiliate ID (affiliate's user_id)
+                affiliateName:
+                    type: string
+                    description: Affiliate's username for display
+                referrerUserId:
+                    type: string
+                    description: Direct referrer's user_id
+                referrerUsername:
+                    type: string
+                    description: Referrer's username for display
         api.user.service.v1.GetUserProfileResponse_ChangeRecord:
             type: object
             properties:
@@ -22686,6 +22698,8 @@ components:
                 operatorUserId:
                     type: string
                 username:
+                    type: string
+                referrerUserId:
                     type: string
         api.user.service.v1.UpdateUserResponse:
             type: object
