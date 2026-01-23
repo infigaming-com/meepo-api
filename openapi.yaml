@@ -12836,6 +12836,16 @@ components:
                     type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                paTransactionIds:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional PA transaction IDs filter (supports multiple IDs)
+                gatewayTransactionIds:
+                    type: array
+                    items:
+                        type: string
+                    description: Optional Gateway transaction IDs filter (supports multiple IDs)
         api.backoffice.service.v1.GetUserBetsOverviewRequest:
             type: object
             properties:
