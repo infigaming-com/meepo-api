@@ -962,6 +962,7 @@ message UpdateUserRequest {
 	optional int64 affiliate_id = 22;
 	int64 operator_user_id = 23; // 操作者的用户ID，用于验证角色分配权限
 	optional string username = 24; // 用户名
+	optional int64 referrer_user_id = 25;
 }
 
 message UpdateUserResponse {
@@ -1010,6 +1011,8 @@ message ListUsersRequest {
 	// The initial operator context.
 	api.common.OperatorContext operator_context = 23;
 	api.common.OperatorContextFilters operator_context_filters = 24;
+	// Filter by registration IP
+	optional string registration_ip = 25;
 }
 
 message ListUsersResponse {
@@ -1187,6 +1190,14 @@ message GetUserProfileResponse {
 	string login_email = 28;
 	// Mobile.
 	string login_mobile = 29;
+	// Affiliate ID (affiliate's user_id)
+	int64 affiliate_id = 30;
+	// Affiliate's username for display
+	string affiliate_name = 31;
+	// Direct referrer's user_id
+	int64 referrer_user_id = 32;
+	// Referrer's username for display
+	string referrer_username = 33;
 }
 
 message CreateRoleRequest {
