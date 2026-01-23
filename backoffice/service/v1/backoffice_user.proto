@@ -168,6 +168,7 @@ message ListUsersRequest {
 	optional int32 page = 21;
 	optional int32 page_size = 22;
 	api.common.OperatorContextFilters operator_context_filters = 23;
+	optional string registration_ip = 24;
 }
 
 message ListUsersResponse {

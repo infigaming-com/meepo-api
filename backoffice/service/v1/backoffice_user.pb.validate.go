@@ -220,6 +220,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.RegistrationIp != nil {
+		// no validation rules for RegistrationIp
+	}
+
 	if len(errors) > 0 {
 		return ListUsersRequestMultiError(errors)
 	}
