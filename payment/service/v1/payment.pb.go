@@ -3089,8 +3089,10 @@ type TransactionInfo struct {
 	ProcessingFeeReportingCurrency string `protobuf:"bytes,32,opt,name=processing_fee_reporting_currency,json=processingFeeReportingCurrency,proto3" json:"processing_fee_reporting_currency,omitempty"`
 	AmountSentUsd                  string `protobuf:"bytes,33,opt,name=amount_sent_usd,json=amountSentUsd,proto3" json:"amount_sent_usd,omitempty"`
 	ProcessingFeeUsd               string `protobuf:"bytes,34,opt,name=processing_fee_usd,json=processingFeeUsd,proto3" json:"processing_fee_usd,omitempty"`
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	// PSP name for the payment channel
+	PspName       string `protobuf:"bytes,35,opt,name=psp_name,json=pspName,proto3" json:"psp_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TransactionInfo) Reset() {
@@ -3361,6 +3363,13 @@ func (x *TransactionInfo) GetProcessingFeeUsd() string {
 	return ""
 }
 
+func (x *TransactionInfo) GetPspName() string {
+	if x != nil {
+		return x.PspName
+	}
+	return ""
+}
+
 type TransactionDetail struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Transaction information
@@ -3454,8 +3463,12 @@ type GetTransactionPageRequest struct {
 	UserId                 int64                          `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,18,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,19,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Optional PA transaction IDs filter (supports multiple IDs)
+	PaTransactionIds []string `protobuf:"bytes,20,rep,name=pa_transaction_ids,json=paTransactionIds,proto3" json:"pa_transaction_ids,omitempty"`
+	// Optional Gateway transaction IDs filter (supports multiple IDs)
+	GatewayTransactionIds []string `protobuf:"bytes,21,rep,name=gateway_transaction_ids,json=gatewayTransactionIds,proto3" json:"gateway_transaction_ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetTransactionPageRequest) Reset() {
@@ -3617,6 +3630,20 @@ func (x *GetTransactionPageRequest) GetOperatorContextFilters() *common.Operator
 func (x *GetTransactionPageRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetPaTransactionIds() []string {
+	if x != nil {
+		return x.PaTransactionIds
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetGatewayTransactionIds() []string {
+	if x != nil {
+		return x.GatewayTransactionIds
 	}
 	return nil
 }
@@ -6737,7 +6764,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xc3\v\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xde\v\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -6778,10 +6805,11 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1eamount_sent_reporting_currency\x18\x1f \x01(\tR\x1bamountSentReportingCurrency\x12I\n" +
 	"!processing_fee_reporting_currency\x18  \x01(\tR\x1eprocessingFeeReportingCurrency\x12&\n" +
 	"\x0famount_sent_usd\x18! \x01(\tR\ramountSentUsd\x12,\n" +
-	"\x12processing_fee_usd\x18\" \x01(\tR\x10processingFeeUsd\"\x9c\x01\n" +
+	"\x12processing_fee_usd\x18\" \x01(\tR\x10processingFeeUsd\x12\x19\n" +
+	"\bpsp_name\x18# \x01(\tR\apspName\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
-	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xc0\x06\n" +
+	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xa6\a\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -6805,7 +6833,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\x17\n" +
 	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
 	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x02\n" +
+	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12,\n" +
+	"\x12pa_transaction_ids\x18\x14 \x03(\tR\x10paTransactionIds\x126\n" +
+	"\x17gateway_transaction_ids\x18\x15 \x03(\tR\x15gatewayTransactionIds\"\xd1\x02\n" +
 	"\x1aGetTransactionPageResponse\x12G\n" +
 	"\ftransactions\x18\x01 \x03(\v2#.payment.service.v1.TransactionInfoR\ftransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

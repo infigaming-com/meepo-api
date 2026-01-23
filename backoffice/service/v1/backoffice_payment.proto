@@ -233,6 +233,10 @@ message GetTransactionPageRequest {
   string max_amount = 16;
   int64 user_id = 17;
   api.common.OperatorContextFilters operator_context_filters = 18;
+  // Optional PA transaction IDs filter (supports multiple IDs)
+  repeated string pa_transaction_ids = 19;
+  // Optional Gateway transaction IDs filter (supports multiple IDs)
+  repeated string gateway_transaction_ids = 20;
 }
 
 // Used to retrieve a paginated list of payment channels with optional filters

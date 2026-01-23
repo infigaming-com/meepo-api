@@ -453,8 +453,12 @@ type GetTransactionPageRequest struct {
 	MaxAmount              string                         `protobuf:"bytes,16,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	UserId                 int64                          `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,18,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Optional PA transaction IDs filter (supports multiple IDs)
+	PaTransactionIds []string `protobuf:"bytes,19,rep,name=pa_transaction_ids,json=paTransactionIds,proto3" json:"pa_transaction_ids,omitempty"`
+	// Optional Gateway transaction IDs filter (supports multiple IDs)
+	GatewayTransactionIds []string `protobuf:"bytes,20,rep,name=gateway_transaction_ids,json=gatewayTransactionIds,proto3" json:"gateway_transaction_ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetTransactionPageRequest) Reset() {
@@ -609,6 +613,20 @@ func (x *GetTransactionPageRequest) GetUserId() int64 {
 func (x *GetTransactionPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetPaTransactionIds() []string {
+	if x != nil {
+		return x.PaTransactionIds
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetGatewayTransactionIds() []string {
+	if x != nil {
+		return x.GatewayTransactionIds
 	}
 	return nil
 }
@@ -919,7 +937,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\aenabled\x18\x05 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
-	"\b_enabled\"\xf8\x05\n" +
+	"\b_enabled\"\xde\x06\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -942,7 +960,9 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\x17\n" +
 	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
-	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xfe\x03\n" +
+	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
+	"\x12pa_transaction_ids\x18\x13 \x03(\tR\x10paTransactionIds\x126\n" +
+	"\x17gateway_transaction_ids\x18\x14 \x03(\tR\x15gatewayTransactionIds\"\xfe\x03\n" +
 	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
