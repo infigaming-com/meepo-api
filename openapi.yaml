@@ -25798,6 +25798,12 @@ components:
                 pspName:
                     type: string
                     description: PSP name for the payment channel
+                payer:
+                    type: object
+                    description: Payer information (JSONB data)
+                payee:
+                    type: object
+                    description: Payee information (JSONB data)
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
