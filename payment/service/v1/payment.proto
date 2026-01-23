@@ -662,6 +662,10 @@ message TransactionInfo {
   string processing_fee_usd = 34;
   // PSP name for the payment channel
   string psp_name = 35;
+  // Payer information (JSONB data)
+  google.protobuf.Struct payer = 36;
+  // Payee information (JSONB data)
+  google.protobuf.Struct payee = 37;
 }
 
 message TransactionDetail {
