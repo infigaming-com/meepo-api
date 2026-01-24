@@ -1,0 +1,234 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "common/common.proto";
+import "crm/service/v1/asset.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// Asset management service for backoffice
+service BackofficeAsset {
+  // Asset CRUD operations
+  rpc CreateAsset(CreateAssetRequest) returns (api.crm.service.v1.CreateAssetResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/create"
+      body: "*"
+    };
+  }
+
+  rpc GetAsset(GetAssetRequest) returns (api.crm.service.v1.GetAssetResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/get"
+      body: "*"
+    };
+  }
+
+  rpc UpdateAsset(UpdateAssetRequest) returns (api.crm.service.v1.UpdateAssetResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteAsset(DeleteAssetRequest) returns (api.crm.service.v1.DeleteAssetResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/delete"
+      body: "*"
+    };
+  }
+
+  rpc ListAssets(ListAssetsRequest) returns (api.crm.service.v1.ListAssetsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/list"
+      body: "*"
+    };
+  }
+
+  rpc UpdateAssetStatus(UpdateAssetStatusRequest) returns (api.crm.service.v1.UpdateAssetStatusResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/status"
+      body: "*"
+    };
+  }
+
+  // Asset Version Management
+  rpc CreateAssetVersion(CreateAssetVersionRequest) returns (api.crm.service.v1.CreateAssetVersionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/version/create"
+      body: "*"
+    };
+  }
+
+  rpc GetAssetVersion(GetAssetVersionRequest) returns (api.crm.service.v1.GetAssetVersionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/version/get"
+      body: "*"
+    };
+  }
+
+  rpc UpdateAssetVersion(UpdateAssetVersionRequest) returns (api.crm.service.v1.UpdateAssetVersionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/version/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteAssetVersion(DeleteAssetVersionRequest) returns (api.crm.service.v1.DeleteAssetVersionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/version/delete"
+      body: "*"
+    };
+  }
+
+  rpc ListAssetVersions(ListAssetVersionsRequest) returns (api.crm.service.v1.ListAssetVersionsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/version/list"
+      body: "*"
+    };
+  }
+
+  rpc UpdateAssetVersionStatus(UpdateAssetVersionStatusRequest) returns (api.crm.service.v1.UpdateAssetVersionStatusResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/version/status"
+      body: "*"
+    };
+  }
+
+  // Variables
+  rpc ListAssetVariables(ListAssetVariablesRequest) returns (api.crm.service.v1.ListAssetVariablesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/variables"
+      body: "*"
+    };
+  }
+
+  // Rendering
+  rpc RenderAsset(RenderAssetRequest) returns (api.crm.service.v1.RenderAssetResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/asset/render"
+      body: "*"
+    };
+  }
+}
+
+// CreateAsset
+message CreateAssetRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional string asset_key = 2;
+  string name = 3;
+  string description = 4;
+  api.crm.service.v1.AssetType type = 5;
+  string default_locale = 6;
+  google.protobuf.Struct metadata = 7;
+}
+
+// GetAsset
+message GetAssetRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// UpdateAsset
+message UpdateAssetRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string asset_key = 3;
+  optional string name = 4;
+  optional string description = 5;
+  optional string default_locale = 6;
+  google.protobuf.Struct metadata = 7;
+}
+
+// DeleteAsset
+message DeleteAssetRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ListAssets
+message ListAssetsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional api.crm.service.v1.AssetType type = 2;
+  optional api.crm.service.v1.AssetStatus status = 3;
+  bool include_inherited = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+// UpdateAssetStatus
+message UpdateAssetStatusRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  api.crm.service.v1.AssetStatus status = 3;
+}
+
+// CreateAssetVersion
+message CreateAssetVersionRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 asset_id = 2;
+  string locale = 3;
+  string subject = 4;
+  string content_url = 5;
+  string preview_text = 6;
+  string content_type = 7;
+  bool is_required = 8;
+}
+
+// GetAssetVersion
+message GetAssetVersionRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// UpdateAssetVersion
+message UpdateAssetVersionRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string subject = 3;
+  optional string content_url = 4;
+  optional string preview_text = 5;
+  optional string content_type = 6;
+  optional bool is_required = 7;
+}
+
+// DeleteAssetVersion
+message DeleteAssetVersionRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ListAssetVersions
+message ListAssetVersionsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 asset_id = 2;
+}
+
+// UpdateAssetVersionStatus
+message UpdateAssetVersionStatusRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  api.crm.service.v1.AssetStatus status = 3;
+}
+
+// ListAssetVariables
+message ListAssetVariablesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional api.crm.service.v1.AssetType asset_type = 2;
+  optional api.crm.service.v1.VariableSource source = 3;
+}
+
+// RenderAsset
+message RenderAssetRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 asset_id = 2;
+  string locale = 3;
+  google.protobuf.Struct player_data = 4;
+  google.protobuf.Struct wallet_data = 5;
+  google.protobuf.Struct campaign_data = 6;
+  google.protobuf.Struct custom_data = 7;
+}
