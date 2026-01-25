@@ -1516,6 +1516,9 @@ message BetInfo {
 	int64 settle_time = 47; // int8, nullable
 	string odds = 48; // varchar(128)
 	string win_multiplier = 49; // varchar(128)
+	string provider_user_id = 50; // varchar(64)
+	string provider_transaction_id = 51; // varchar(64)
+	string provider_external_transaction_id = 52; // varchar(64), nullable
 }
 
 message GetBetAndEventInfoResponse {
@@ -1603,6 +1606,7 @@ message TransactionInfo {
 	string bonus_amount_reporting_currency = 47; // numeric(36,18)
 	string jackpot_contribution_reporting_currency = 48; // numeric(36,18)
 	string jackpot_win_reporting_currency = 49; // numeric(36,18)
+	string provider_user_id = 50; // varchar(64)
 }
 
 message GetTransactionAndEventInfoResponse {

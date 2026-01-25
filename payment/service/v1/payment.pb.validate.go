@@ -4053,6 +4053,64 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for PspName
 
+	if all {
+		switch v := interface{}(m.GetPayer()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionInfoValidationError{
+					field:  "Payer",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionInfoValidationError{
+					field:  "Payer",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionInfoValidationError{
+				field:  "Payer",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetPayee()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionInfoValidationError{
+					field:  "Payee",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionInfoValidationError{
+					field:  "Payee",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPayee()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionInfoValidationError{
+				field:  "Payee",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
 	}

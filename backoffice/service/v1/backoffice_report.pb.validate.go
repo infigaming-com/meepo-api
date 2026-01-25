@@ -6914,6 +6914,10 @@ func (m *CustomerRecordReportDetailResponse_GameTransaction) validate(all bool) 
 
 	// no validation rules for PayoutSettlementAmount
 
+	// no validation rules for ProviderExternalTransactionId
+
+	// no validation rules for ProviderUserId
+
 	if len(errors) > 0 {
 		return CustomerRecordReportDetailResponse_GameTransactionMultiError(errors)
 	}
