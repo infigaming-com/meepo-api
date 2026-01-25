@@ -476,6 +476,7 @@ message ListEventsRequest {
     int64 initiator_role_id = 10;
     api.common.OperatorContext initiator_operator_context = 11;
     api.common.OperatorContextFilters operator_context_filters = 12;
+    optional int64 event_id = 13;
 }
 
 message ListEventsResponse {
@@ -731,6 +732,7 @@ message ListCommissionsResponse {
         string company_operator_name = 21;
         string operator_name = 22;
         int64 bill_id = 23;
+        int64 event_id = 24;
     }
     repeated Commission commissions = 1;
     int32 total = 2;

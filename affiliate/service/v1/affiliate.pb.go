@@ -1738,6 +1738,7 @@ type ListEventsRequest struct {
 	InitiatorRoleId          int64                          `protobuf:"varint,10,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,11,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,12,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	EventId                  *int64                         `protobuf:"varint,13,opt,name=event_id,json=eventId,proto3,oneof" json:"event_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1854,6 +1855,13 @@ func (x *ListEventsRequest) GetOperatorContextFilters() *common.OperatorContextF
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListEventsRequest) GetEventId() int64 {
+	if x != nil && x.EventId != nil {
+		return *x.EventId
+	}
+	return 0
 }
 
 type ListEventsResponse struct {
@@ -6763,6 +6771,7 @@ type ListCommissionsResponse_Commission struct {
 	CompanyOperatorName           string                 `protobuf:"bytes,21,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	OperatorName                  string                 `protobuf:"bytes,22,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	BillId                        int64                  `protobuf:"varint,23,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
+	EventId                       int64                  `protobuf:"varint,24,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
@@ -6954,6 +6963,13 @@ func (x *ListCommissionsResponse_Commission) GetOperatorName() string {
 func (x *ListCommissionsResponse_Commission) GetBillId() int64 {
 	if x != nil {
 		return x.BillId
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse_Commission) GetEventId() int64 {
+	if x != nil {
+		return x.EventId
 	}
 	return 0
 }
@@ -8045,7 +8061,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12*\n" +
 	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\"\x18\n" +
-	"\x16DeleteCampaignResponse\"\x80\x05\n" +
+	"\x16DeleteCampaignResponse\"\xad\x05\n" +
 	"\x11ListEventsRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1f\n" +
 	"\vevent_types\x18\x02 \x03(\tR\n" +
@@ -8063,11 +8079,13 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11initiator_role_id\x18\n" +
 	" \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\x18operator_context_filters\x18\f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
+	"\bevent_id\x18\r \x01(\x03H\x03R\aeventId\x88\x01\x01B\x0f\n" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe7\a\n" +
+	"_page_sizeB\v\n" +
+	"\t_event_id\"\xe7\a\n" +
 	"\x12ListEventsResponse\x12J\n" +
 	"\x06events\x18\x01 \x03(\v22.api.affiliate.service.v1.ListEventsResponse.EventR\x06events\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -8297,7 +8315,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x99\n" +
+	"_page_size\"\xb4\n" +
 	"\n" +
 	"\x17ListCommissionsResponse\x12^\n" +
 	"\vcommissions\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCommissionsResponse.CommissionR\vcommissions\x12\x14\n" +
@@ -8306,7 +8324,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x0etotal_approved\x18\x04 \x01(\x05R\rtotalApproved\x12%\n" +
 	"\x0etotal_rejected\x18\x05 \x01(\x05R\rtotalRejected\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xe3\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xfe\a\n" +
 	"\n" +
 	"Commission\x12#\n" +
 	"\rcommission_id\x18\x01 \x01(\x03R\fcommissionId\x12\x18\n" +
@@ -8334,7 +8352,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x16retailer_operator_name\x18\x14 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x15 \x01(\tR\x13companyOperatorName\x12#\n" +
 	"\roperator_name\x18\x16 \x01(\tR\foperatorName\x12\x17\n" +
-	"\abill_id\x18\x17 \x01(\x03R\x06billId\"\xf0\x05\n" +
+	"\abill_id\x18\x17 \x01(\x03R\x06billId\x12\x19\n" +
+	"\bevent_id\x18\x18 \x01(\x03R\aeventId\"\xf0\x05\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12@\n" +
 	"\x0eftd_start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fftdStartTime\x12<\n" +

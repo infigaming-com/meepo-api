@@ -457,6 +457,7 @@ message ListEventsRequest {
 	optional int32 page = 7;
 	optional int32 page_size = 8;
 	api.common.OperatorContextFilters operator_context_filters = 9;
+	optional int64 event_id = 10;
 }
 
 // -------------- Commission --------------

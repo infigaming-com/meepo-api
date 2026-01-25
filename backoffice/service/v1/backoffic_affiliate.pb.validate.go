@@ -3244,6 +3244,10 @@ func (m *ListEventsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.EventId != nil {
+		// no validation rules for EventId
+	}
+
 	if len(errors) > 0 {
 		return ListEventsRequestMultiError(errors)
 	}

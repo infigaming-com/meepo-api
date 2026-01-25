@@ -1580,6 +1580,7 @@ type ListEventsRequest struct {
 	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,9,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	EventId                *int64                         `protobuf:"varint,10,opt,name=event_id,json=eventId,proto3,oneof" json:"event_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1675,6 +1676,13 @@ func (x *ListEventsRequest) GetOperatorContextFilters() *common.OperatorContextF
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListEventsRequest) GetEventId() int64 {
+	if x != nil && x.EventId != nil {
+		return *x.EventId
+	}
+	return 0
 }
 
 type ListCommissionsRequest struct {
@@ -2730,7 +2738,7 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12-\n" +
 	"\x10available_to_all\x18\x02 \x01(\bH\x00R\x0eavailableToAll\x88\x01\x01\x12#\n" +
 	"\raffiliate_ids\x18\x03 \x03(\x03R\faffiliateIdsB\x13\n" +
-	"\x11_available_to_all\"\xcd\x03\n" +
+	"\x11_available_to_all\"\xfa\x03\n" +
 	"\x11ListEventsRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1f\n" +
 	"\vevent_types\x18\x02 \x03(\tR\n" +
@@ -2744,11 +2752,14 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x17\n" +
 	"\x04page\x18\a \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\t \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\x18operator_context_filters\x18\t \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
+	"\bevent_id\x18\n" +
+	" \x01(\x03H\x03R\aeventId\x88\x01\x01B\x0f\n" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xaa\x05\n" +
+	"_page_sizeB\v\n" +
+	"\t_event_id\"\xaa\x05\n" +
 	"\x16ListCommissionsRequest\x12.\n" +
 	"\x13commission_plan_ids\x18\x01 \x03(\x03R\x11commissionPlanIds\x12\x1c\n" +
 	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12&\n" +
