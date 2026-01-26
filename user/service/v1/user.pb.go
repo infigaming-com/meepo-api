@@ -974,9 +974,11 @@ type OAuthRequest struct {
 	// The OAuth provider to use for authentication.
 	OauthProvider OAuthProvider `protobuf:"varint,1,opt,name=oauth_provider,json=oauthProvider,proto3,enum=api.user.service.v1.OAuthProvider" json:"oauth_provider,omitempty"`
 	// The OAuth token received from the provider.
-	Token         string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Token string `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	// Optional: URL where user registered (for affiliate tracking)
+	RegistrationUrl *string `protobuf:"bytes,3,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OAuthRequest) Reset() {
@@ -1019,6 +1021,13 @@ func (x *OAuthRequest) GetOauthProvider() OAuthProvider {
 func (x *OAuthRequest) GetToken() string {
 	if x != nil {
 		return x.Token
+	}
+	return ""
+}
+
+func (x *OAuthRequest) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
 	}
 	return ""
 }
@@ -13796,6 +13805,7 @@ type OAuthLoginV2Request struct {
 	OauthToken      string                  `protobuf:"bytes,2,opt,name=oauth_token,json=oauthToken,proto3" json:"oauth_token,omitempty"` // ID token from provider
 	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	HttpRequestInfo *HttpRequestInfo        `protobuf:"bytes,4,opt,name=http_request_info,json=httpRequestInfo,proto3" json:"http_request_info,omitempty"`
+	RegistrationUrl *string                 `protobuf:"bytes,5,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"` // Optional: URL where user registered (for affiliate tracking)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -13856,6 +13866,13 @@ func (x *OAuthLoginV2Request) GetHttpRequestInfo() *HttpRequestInfo {
 		return x.HttpRequestInfo
 	}
 	return nil
+}
+
+func (x *OAuthLoginV2Request) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
+	}
+	return ""
 }
 
 // OAuthAccountInfo - bound OAuth account info
@@ -14224,6 +14241,7 @@ type InitiateOAuthLoginRequest struct {
 	Provider            OAuthProvider          `protobuf:"varint,1,opt,name=provider,proto3,enum=api.user.service.v1.OAuthProvider" json:"provider,omitempty"`            // OAuth provider (TWITTER, APPLE)
 	FrontendRedirectUri string                 `protobuf:"bytes,2,opt,name=frontend_redirect_uri,json=frontendRedirectUri,proto3" json:"frontend_redirect_uri,omitempty"` // URL to redirect user after OAuth callback
 	ClientState         string                 `protobuf:"bytes,3,opt,name=client_state,json=clientState,proto3" json:"client_state,omitempty"`                           // Optional: client state to preserve across redirect
+	RegistrationUrl     *string                `protobuf:"bytes,4,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`         // Optional: URL where user registered (for affiliate tracking)
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -14275,6 +14293,13 @@ func (x *InitiateOAuthLoginRequest) GetFrontendRedirectUri() string {
 func (x *InitiateOAuthLoginRequest) GetClientState() string {
 	if x != nil {
 		return x.ClientState
+	}
+	return ""
+}
+
+func (x *InitiateOAuthLoginRequest) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
 	}
 	return ""
 }
@@ -16186,10 +16211,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12P\n" +
-	"\x11http_request_info\x18\x05 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\"o\n" +
+	"\x11http_request_info\x18\x05 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\"\xb4\x01\n" +
 	"\fOAuthRequest\x12I\n" +
 	"\x0eoauth_provider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\roauthProvider\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\"\xcb\x01\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\x12.\n" +
+	"\x10registration_url\x18\x03 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01B\x13\n" +
+	"\x11_registration_url\"\xcb\x01\n" +
 	"\x13TelegramAuthRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
 	"\n" +
@@ -17372,13 +17399,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0fsupports_js_sdk\x18\a \x01(\bR\rsupportsJsSdk\"#\n" +
 	"!GetAvailableOAuthProvidersRequest\"o\n" +
 	"\"GetAvailableOAuthProvidersResponse\x12I\n" +
-	"\tproviders\x18\x01 \x03(\v2+.api.user.service.v1.AvailableOAuthProviderR\tproviders\"\x90\x02\n" +
+	"\tproviders\x18\x01 \x03(\v2+.api.user.service.v1.AvailableOAuthProviderR\tproviders\"\xd5\x02\n" +
 	"\x13OAuthLoginV2Request\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12\x1f\n" +
 	"\voauth_token\x18\x02 \x01(\tR\n" +
 	"oauthToken\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12P\n" +
-	"\x11http_request_info\x18\x04 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\"\x87\x02\n" +
+	"\x11http_request_info\x18\x04 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\x12.\n" +
+	"\x10registration_url\x18\x05 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01B\x13\n" +
+	"\x11_registration_url\"\x87\x02\n" +
 	"\x10OAuthAccountInfo\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x12(\n" +
 	"\x10provider_user_id\x18\x02 \x01(\tR\x0eproviderUserId\x12\x14\n" +
@@ -17400,11 +17429,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1dListBoundOAuthAccountsRequest\"\x86\x01\n" +
 	"\x1eListBoundOAuthAccountsResponse\x12A\n" +
 	"\baccounts\x18\x01 \x03(\v2%.api.user.service.v1.OAuthAccountInfoR\baccounts\x12!\n" +
-	"\fhas_password\x18\x02 \x01(\bR\vhasPassword\"\xb2\x01\n" +
+	"\fhas_password\x18\x02 \x01(\bR\vhasPassword\"\xf7\x01\n" +
 	"\x19InitiateOAuthLoginRequest\x12>\n" +
 	"\bprovider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\bprovider\x122\n" +
 	"\x15frontend_redirect_uri\x18\x02 \x01(\tR\x13frontendRedirectUri\x12!\n" +
-	"\fclient_state\x18\x03 \x01(\tR\vclientState\"_\n" +
+	"\fclient_state\x18\x03 \x01(\tR\vclientState\x12.\n" +
+	"\x10registration_url\x18\x04 \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01B\x13\n" +
+	"\x11_registration_url\"_\n" +
 	"\x1aInitiateOAuthLoginResponse\x12+\n" +
 	"\x11authorization_url\x18\x01 \x01(\tR\x10authorizationUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\"\xb4\x01\n" +
@@ -18298,6 +18329,7 @@ func file_user_service_v1_user_proto_init() {
 		return
 	}
 	file_user_service_v1_user_proto_msgTypes[1].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[5].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[38].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[40].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[42].OneofWrappers = []any{}
@@ -18321,6 +18353,8 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[204].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[209].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[215].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[222].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[230].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

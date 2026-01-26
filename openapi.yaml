@@ -21833,6 +21833,8 @@ components:
                     type: string
                 clientState:
                     type: string
+                registrationUrl:
+                    type: string
             description: InitiateOAuthLoginRequest - initiate OAuth login via redirect flow
         api.user.service.v1.InitiateOAuthLoginResponse:
             type: object
@@ -22164,6 +22166,9 @@ components:
                 token:
                     type: string
                     description: The OAuth token received from the provider.
+                registrationUrl:
+                    type: string
+                    description: 'Optional: URL where user registered (for affiliate tracking)'
             description: OAuthRequest contains the information needed for OAuth authentication.
         api.user.service.v1.OperatorAccountGameSettings:
             type: object

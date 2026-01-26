@@ -880,6 +880,10 @@ func (m *OAuthRequest) validate(all bool) error {
 
 	// no validation rules for Token
 
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
+
 	if len(errors) > 0 {
 		return OAuthRequestMultiError(errors)
 	}
@@ -29080,6 +29084,10 @@ func (m *OAuthLoginV2Request) validate(all bool) error {
 		}
 	}
 
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
+
 	if len(errors) > 0 {
 		return OAuthLoginV2RequestMultiError(errors)
 	}
@@ -29986,6 +29994,10 @@ func (m *InitiateOAuthLoginRequest) validate(all bool) error {
 	// no validation rules for FrontendRedirectUri
 
 	// no validation rules for ClientState
+
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
 
 	if len(errors) > 0 {
 		return InitiateOAuthLoginRequestMultiError(errors)
