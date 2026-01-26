@@ -14495,16 +14495,16 @@ type ListUsersResponse_User struct {
 	LastLoginAt               *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
 	RegisteredAt              *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
 	// int32 risk_level = 19;
-	// string referral_code = 20;
-	// string affiliate_code = 21;
-	Country string `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
+	ReferrerUserId int64  `protobuf:"varint,22,opt,name=referrer_user_id,json=referrerUserId,proto3" json:"referrer_user_id,omitempty"`
+	AffiliateId    int64  `protobuf:"varint,23,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	Country        string `protobuf:"bytes,24,opt,name=country,proto3" json:"country,omitempty"`
 	// string device = 23;
 	// string source = 24;
-	RegistrationIp string                 `protobuf:"bytes,23,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	Enabled        bool                   `protobuf:"varint,24,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,25,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Role           *Role                  `protobuf:"bytes,26,opt,name=role,proto3" json:"role,omitempty"`
-	Locked         bool                   `protobuf:"varint,27,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
+	RegistrationIp string                 `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	Enabled        bool                   `protobuf:"varint,26,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Role           *Role                  `protobuf:"bytes,28,opt,name=role,proto3" json:"role,omitempty"`
+	Locked         bool                   `protobuf:"varint,29,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -14684,6 +14684,20 @@ func (x *ListUsersResponse_User) GetRegisteredAt() *timestamppb.Timestamp {
 		return x.RegisteredAt
 	}
 	return nil
+}
+
+func (x *ListUsersResponse_User) GetReferrerUserId() int64 {
+	if x != nil {
+		return x.ReferrerUserId
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
 }
 
 func (x *ListUsersResponse_User) GetCountry() string {
@@ -16469,14 +16483,15 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x12\n" +
-	"\x10_registration_ip\"\xf9\t\n" +
+	"\x10_registration_ip\"\xc6\n" +
+	"\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\x8d\b\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xda\b\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -16500,14 +16515,16 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tban_login\x18\x12 \x01(\bR\bbanLogin\x12\x16\n" +
 	"\x06online\x18\x13 \x01(\bR\x06online\x12>\n" +
 	"\rlast_login_at\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
-	"\rregistered_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
-	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x17 \x01(\tR\x0eregistrationIp\x12\x18\n" +
-	"\aenabled\x18\x18 \x01(\bR\aenabled\x129\n" +
+	"\rregistered_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12(\n" +
+	"\x10referrer_user_id\x18\x16 \x01(\x03R\x0ereferrerUserId\x12!\n" +
+	"\faffiliate_id\x18\x17 \x01(\x03R\vaffiliateId\x12\x18\n" +
+	"\acountry\x18\x18 \x01(\tR\acountry\x12'\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tR\x0eregistrationIp\x12\x18\n" +
+	"\aenabled\x18\x1a \x01(\bR\aenabled\x129\n" +
 	"\n" +
-	"created_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04role\x18\x1a \x01(\v2\x19.api.user.service.v1.RoleR\x04role\x12\x16\n" +
-	"\x06locked\x18\x1b \x01(\bR\x06locked\"\x95\x02\n" +
+	"created_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
+	"\x04role\x18\x1c \x01(\v2\x19.api.user.service.v1.RoleR\x04role\x12\x16\n" +
+	"\x06locked\x18\x1d \x01(\bR\x06locked\"\x95\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1f\n" +
 	"\bpassword\x18\x02 \x01(\tH\x00R\bpassword\x88\x01\x01\x12\x14\n" +

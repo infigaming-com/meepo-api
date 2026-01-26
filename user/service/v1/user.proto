@@ -1041,16 +1041,16 @@ message ListUsersResponse {
 		google.protobuf.Timestamp last_login_at = 20;
 		google.protobuf.Timestamp registered_at = 21;
 		// int32 risk_level = 19;
-		// string referral_code = 20;
-		// string affiliate_code = 21;
-		string country = 22;
+		int64 referrer_user_id = 22;
+		int64 affiliate_id = 23;
+		string country = 24;
 		// string device = 23;
 		// string source = 24;
-		string registration_ip = 23;
-		bool enabled = 24;
-		google.protobuf.Timestamp created_at = 25;
-		Role role = 26;
-		bool locked = 27;  // 用户是否被锁定
+		string registration_ip = 25;
+		bool enabled = 26;
+		google.protobuf.Timestamp created_at = 27;
+		Role role = 28;
+		bool locked = 29;  // 用户是否被锁定
 	}
 	repeated User users = 1;
 	int32 page = 2;

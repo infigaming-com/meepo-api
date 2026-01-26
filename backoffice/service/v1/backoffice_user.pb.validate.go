@@ -3767,6 +3767,10 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for ReferrerUserId
+
+	// no validation rules for AffiliateId
+
 	// no validation rules for Country
 
 	// no validation rules for RegistrationIp
