@@ -2603,16 +2603,18 @@ func (x *ListUserReferralRewardsResponse_ReferralReward) GetConversionTime() *ti
 }
 
 type GetUserLossRevenueShareStatsResponse_ReferredStat struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	UserId            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName          string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	ReferralCode      string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	Tier              int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
-	NgrAmountInPeriod string                 `protobuf:"bytes,5,opt,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty"`
-	GgrAmountInPeriod string                 `protobuf:"bytes,6,opt,name=ggr_amount_in_period,json=ggrAmountInPeriod,proto3" json:"ggr_amount_in_period,omitempty"`
-	ConversionTime    *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=conversion_time,json=conversionTime,proto3" json:"conversion_time,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	UserId                   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName                 string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	ReferralCode             string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
+	Tier                     int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
+	NgrAmountInPeriod        string                 `protobuf:"bytes,5,opt,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty"`
+	GgrAmountInPeriod        string                 `protobuf:"bytes,6,opt,name=ggr_amount_in_period,json=ggrAmountInPeriod,proto3" json:"ggr_amount_in_period,omitempty"`
+	Bonus2CashAmountInPeriod string                 `protobuf:"bytes,7,opt,name=bonus2cash_amount_in_period,json=bonus2cashAmountInPeriod,proto3" json:"bonus2cash_amount_in_period,omitempty"`
+	AdminFeeAmountInPeriod   string                 `protobuf:"bytes,8,opt,name=admin_fee_amount_in_period,json=adminFeeAmountInPeriod,proto3" json:"admin_fee_amount_in_period,omitempty"`
+	ConversionTime           *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=conversion_time,json=conversionTime,proto3" json:"conversion_time,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *GetUserLossRevenueShareStatsResponse_ReferredStat) Reset() {
@@ -2683,6 +2685,20 @@ func (x *GetUserLossRevenueShareStatsResponse_ReferredStat) GetNgrAmountInPeriod
 func (x *GetUserLossRevenueShareStatsResponse_ReferredStat) GetGgrAmountInPeriod() string {
 	if x != nil {
 		return x.GgrAmountInPeriod
+	}
+	return ""
+}
+
+func (x *GetUserLossRevenueShareStatsResponse_ReferredStat) GetBonus2CashAmountInPeriod() string {
+	if x != nil {
+		return x.Bonus2CashAmountInPeriod
+	}
+	return ""
+}
+
+func (x *GetUserLossRevenueShareStatsResponse_ReferredStat) GetAdminFeeAmountInPeriod() string {
+	if x != nil {
+		return x.AdminFeeAmountInPeriod
 	}
 	return ""
 }
@@ -2847,7 +2863,7 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x14_conversion_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb0\f\n" +
+	"_page_size\"\xab\r\n" +
 	"$GetUserLossRevenueShareStatsResponse\x120\n" +
 	"\x14unpaid_reward_amount\x18\x01 \x01(\tR\x12unpaidRewardAmount\x126\n" +
 	"\x17unclaimed_reward_amount\x18\x02 \x01(\tR\x15unclaimedRewardAmount\x122\n" +
@@ -2861,15 +2877,17 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x04page\x18\n" +
 	" \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\v \x01(\x05R\bpageSize\x12\x96\x01\n" +
-	"\x1aadmin_fee_amount_in_period\x18\f \x03(\v2Z.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.AdminFeeAmountInPeriodEntryR\x16adminFeeAmountInPeriod\x1a\xa4\x02\n" +
+	"\x1aadmin_fee_amount_in_period\x18\f \x03(\v2Z.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.AdminFeeAmountInPeriodEntryR\x16adminFeeAmountInPeriod\x1a\x9f\x03\n" +
 	"\fReferredStat\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12#\n" +
 	"\rreferral_code\x18\x03 \x01(\tR\freferralCode\x12\x12\n" +
 	"\x04tier\x18\x04 \x01(\x05R\x04tier\x12/\n" +
 	"\x14ngr_amount_in_period\x18\x05 \x01(\tR\x11ngrAmountInPeriod\x12/\n" +
-	"\x14ggr_amount_in_period\x18\x06 \x01(\tR\x11ggrAmountInPeriod\x12C\n" +
-	"\x0fconversion_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x0econversionTime\x1aD\n" +
+	"\x14ggr_amount_in_period\x18\x06 \x01(\tR\x11ggrAmountInPeriod\x12=\n" +
+	"\x1bbonus2cash_amount_in_period\x18\a \x01(\tR\x18bonus2cashAmountInPeriod\x12:\n" +
+	"\x1aadmin_fee_amount_in_period\x18\b \x01(\tR\x16adminFeeAmountInPeriod\x12C\n" +
+	"\x0fconversion_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0econversionTime\x1aD\n" +
 	"\x16GgrAmountInPeriodEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aD\n" +
