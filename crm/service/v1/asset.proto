@@ -1,0 +1,307 @@
+syntax = "proto3";
+
+package api.crm.service.v1;
+
+import "common/common.proto";
+import "crm/service/v1/crm.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/crm/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.crm.service.v1";
+
+// AssetService provides operations for managing marketing campaign templates
+// (Email, SMS, Push, Inbox) with multi-language support and variable rendering.
+service AssetService {
+    // Asset CRUD operations
+    rpc CreateAsset(CreateAssetRequest) returns (CreateAssetResponse);
+    rpc GetAsset(GetAssetRequest) returns (GetAssetResponse);
+    rpc UpdateAsset(UpdateAssetRequest) returns (UpdateAssetResponse);
+    rpc DeleteAsset(DeleteAssetRequest) returns (DeleteAssetResponse);
+    rpc ListAssets(ListAssetsRequest) returns (ListAssetsResponse);
+    rpc UpdateAssetStatus(UpdateAssetStatusRequest) returns (UpdateAssetStatusResponse);
+
+    // Asset Version Management
+    rpc CreateAssetVersion(CreateAssetVersionRequest) returns (CreateAssetVersionResponse);
+    rpc GetAssetVersion(GetAssetVersionRequest) returns (GetAssetVersionResponse);
+    rpc UpdateAssetVersion(UpdateAssetVersionRequest) returns (UpdateAssetVersionResponse);
+    rpc DeleteAssetVersion(DeleteAssetVersionRequest) returns (DeleteAssetVersionResponse);
+    rpc ListAssetVersions(ListAssetVersionsRequest) returns (ListAssetVersionsResponse);
+    rpc UpdateAssetVersionStatus(UpdateAssetVersionStatusRequest) returns (UpdateAssetVersionStatusResponse);
+
+    // Variables
+    rpc ListAssetVariables(ListAssetVariablesRequest) returns (ListAssetVariablesResponse);
+
+    // Rendering (for preview and campaign execution)
+    rpc RenderAsset(RenderAssetRequest) returns (RenderAssetResponse);
+}
+
+// Asset types
+enum AssetType {
+    ASSET_TYPE_UNSPECIFIED = 0;
+    ASSET_TYPE_EMAIL = 1;
+    ASSET_TYPE_SMS = 2;
+    ASSET_TYPE_PUSH = 3;
+    ASSET_TYPE_INBOX = 4;
+}
+
+// Asset status lifecycle
+enum AssetStatus {
+    ASSET_STATUS_UNSPECIFIED = 0;
+    ASSET_STATUS_DRAFT = 1;
+    ASSET_STATUS_ACTIVE = 2;
+    ASSET_STATUS_ARCHIVED = 3;
+}
+
+// Variable types
+enum VariableType {
+    VARIABLE_TYPE_UNSPECIFIED = 0;
+    VARIABLE_TYPE_STRING = 1;
+    VARIABLE_TYPE_NUMBER = 2;
+    VARIABLE_TYPE_CURRENCY = 3;
+    VARIABLE_TYPE_DATE = 4;
+    VARIABLE_TYPE_URL = 5;
+}
+
+// Variable source
+enum VariableSource {
+    VARIABLE_SOURCE_UNSPECIFIED = 0;
+    VARIABLE_SOURCE_PLAYER = 1;
+    VARIABLE_SOURCE_WALLET = 2;
+    VARIABLE_SOURCE_CAMPAIGN = 3;
+    VARIABLE_SOURCE_CUSTOM = 4;
+}
+
+// Asset represents a marketing campaign template
+message Asset {
+    int64 id = 1;
+    optional string asset_key = 2;
+    string name = 3;
+    string description = 4;
+    AssetType type = 5;
+    AssetStatus status = 6;
+
+    // Ownership hierarchy
+    int64 owner_operator_id = 7;
+    int64 owner_company_operator_id = 8;
+    int64 owner_retailer_operator_id = 9;
+    int64 owner_system_operator_id = 10;
+    OwnerLevel owner_level = 11;
+
+    string default_locale = 12;
+    google.protobuf.Struct metadata = 13;
+
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+}
+
+// AssetVersion represents a language-specific version of an asset
+message AssetVersion {
+    int64 id = 1;
+    int64 asset_id = 2;
+    string locale = 3;
+    string subject = 4;
+    string content_url = 5;
+    string preview_text = 6;
+    string content_type = 7;
+    string content_hash = 8;
+    google.protobuf.Struct variables = 9;
+    bool is_required = 10;
+    AssetStatus status = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+}
+
+// AssetVariable represents a template variable definition
+message AssetVariable {
+    int64 id = 1;
+    string variable_name = 2;
+    string display_name = 3;
+    string description = 4;
+    VariableType type = 5;
+    VariableSource source = 6;
+    string default_value = 7;
+    string format_pattern = 8;
+    int64 owner_system_operator_id = 9;
+    repeated string supported_asset_types = 10;
+    google.protobuf.Timestamp created_at = 11;
+}
+
+// CreateAsset
+message CreateAssetRequest {
+    optional string asset_key = 1;
+    string name = 2;
+    string description = 3;
+    AssetType type = 4;
+    string default_locale = 5;
+    google.protobuf.Struct metadata = 6;
+    api.common.OperatorContext operator_context = 7;
+}
+
+message CreateAssetResponse {
+    Asset asset = 1;
+}
+
+// GetAsset
+message GetAssetRequest {
+    int64 id = 1;
+    api.common.OperatorContext operator_context = 2;
+}
+
+message GetAssetResponse {
+    Asset asset = 1;
+}
+
+// UpdateAsset
+message UpdateAssetRequest {
+    int64 id = 1;
+    optional string asset_key = 2;
+    optional string name = 3;
+    optional string description = 4;
+    optional string default_locale = 5;
+    google.protobuf.Struct metadata = 6;
+    api.common.OperatorContext operator_context = 7;
+}
+
+message UpdateAssetResponse {
+    Asset asset = 1;
+}
+
+// DeleteAsset
+message DeleteAssetRequest {
+    int64 id = 1;
+    api.common.OperatorContext operator_context = 2;
+}
+
+message DeleteAssetResponse {}
+
+// ListAssets
+message ListAssetsRequest {
+    api.common.OperatorContext operator_context = 1;
+    optional AssetType type = 2;
+    optional AssetStatus status = 3;
+    bool include_inherited = 4;
+    int32 page = 5;
+    int32 page_size = 6;
+}
+
+message ListAssetsResponse {
+    repeated Asset assets = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+    int64 total = 4;
+}
+
+// UpdateAssetStatus
+message UpdateAssetStatusRequest {
+    int64 id = 1;
+    AssetStatus status = 2;
+    api.common.OperatorContext operator_context = 3;
+}
+
+message UpdateAssetStatusResponse {
+    Asset asset = 1;
+}
+
+// CreateAssetVersion
+message CreateAssetVersionRequest {
+    int64 asset_id = 1;
+    string locale = 2;
+    string subject = 3;
+    string content_url = 4;
+    string preview_text = 5;
+    string content_type = 6;
+    bool is_required = 7;
+    api.common.OperatorContext operator_context = 8;
+}
+
+message CreateAssetVersionResponse {
+    AssetVersion version = 1;
+}
+
+// GetAssetVersion
+message GetAssetVersionRequest {
+    int64 id = 1;
+    api.common.OperatorContext operator_context = 2;
+}
+
+message GetAssetVersionResponse {
+    AssetVersion version = 1;
+}
+
+// UpdateAssetVersion
+message UpdateAssetVersionRequest {
+    int64 id = 1;
+    optional string subject = 2;
+    optional string content_url = 3;
+    optional string preview_text = 4;
+    optional string content_type = 5;
+    optional bool is_required = 6;
+    api.common.OperatorContext operator_context = 7;
+}
+
+message UpdateAssetVersionResponse {
+    AssetVersion version = 1;
+}
+
+// DeleteAssetVersion
+message DeleteAssetVersionRequest {
+    int64 id = 1;
+    api.common.OperatorContext operator_context = 2;
+}
+
+message DeleteAssetVersionResponse {}
+
+// ListAssetVersions
+message ListAssetVersionsRequest {
+    int64 asset_id = 1;
+    api.common.OperatorContext operator_context = 2;
+}
+
+message ListAssetVersionsResponse {
+    repeated AssetVersion versions = 1;
+}
+
+// UpdateAssetVersionStatus
+message UpdateAssetVersionStatusRequest {
+    int64 id = 1;
+    AssetStatus status = 2;
+    api.common.OperatorContext operator_context = 3;
+}
+
+message UpdateAssetVersionStatusResponse {
+    AssetVersion version = 1;
+}
+
+// ListAssetVariables
+message ListAssetVariablesRequest {
+    api.common.OperatorContext operator_context = 1;
+    optional AssetType asset_type = 2;
+    optional VariableSource source = 3;
+}
+
+message ListAssetVariablesResponse {
+    repeated AssetVariable variables = 1;
+}
+
+// RenderAsset - renders an asset with provided data
+message RenderAssetRequest {
+    int64 asset_id = 1;
+    string locale = 2;
+    google.protobuf.Struct player_data = 3;
+    google.protobuf.Struct wallet_data = 4;
+    google.protobuf.Struct campaign_data = 5;
+    google.protobuf.Struct custom_data = 6;
+    api.common.OperatorContext operator_context = 7;
+}
+
+message RenderAssetResponse {
+    string subject = 1;
+    string content = 2;
+    string preview_text = 3;
+    string content_type = 4;
+    string locale = 5;
+    map<string, string> resolved_variables = 6;
+    repeated string unresolved_variables = 7;
+}

@@ -1528,6 +1528,262 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.CreateCompanyResponse'
+    /v1/backoffice/crm/asset/create:
+        post:
+            tags:
+                - BackofficeAsset
+            description: Asset CRUD operations
+            operationId: BackofficeAsset_CreateAsset
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateAssetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.CreateAssetResponse'
+    /v1/backoffice/crm/asset/delete:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_DeleteAsset
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAssetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.DeleteAssetResponse'
+    /v1/backoffice/crm/asset/get:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_GetAsset
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAssetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetAssetResponse'
+    /v1/backoffice/crm/asset/list:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_ListAssets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAssetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.ListAssetsResponse'
+    /v1/backoffice/crm/asset/render:
+        post:
+            tags:
+                - BackofficeAsset
+            description: Rendering
+            operationId: BackofficeAsset_RenderAsset
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.RenderAssetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.RenderAssetResponse'
+    /v1/backoffice/crm/asset/status:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_UpdateAssetStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAssetStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateAssetStatusResponse'
+    /v1/backoffice/crm/asset/update:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_UpdateAsset
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAssetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateAssetResponse'
+    /v1/backoffice/crm/asset/variables:
+        post:
+            tags:
+                - BackofficeAsset
+            description: Variables
+            operationId: BackofficeAsset_ListAssetVariables
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAssetVariablesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.ListAssetVariablesResponse'
+    /v1/backoffice/crm/asset/version/create:
+        post:
+            tags:
+                - BackofficeAsset
+            description: Asset Version Management
+            operationId: BackofficeAsset_CreateAssetVersion
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateAssetVersionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.CreateAssetVersionResponse'
+    /v1/backoffice/crm/asset/version/delete:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_DeleteAssetVersion
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAssetVersionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.DeleteAssetVersionResponse'
+    /v1/backoffice/crm/asset/version/get:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_GetAssetVersion
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAssetVersionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.GetAssetVersionResponse'
+    /v1/backoffice/crm/asset/version/list:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_ListAssetVersions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAssetVersionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.ListAssetVersionsResponse'
+    /v1/backoffice/crm/asset/version/status:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_UpdateAssetVersionStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAssetVersionStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateAssetVersionStatusResponse'
+    /v1/backoffice/crm/asset/version/update:
+        post:
+            tags:
+                - BackofficeAsset
+            operationId: BackofficeAsset_UpdateAssetVersion
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAssetVersionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.crm.service.v1.UpdateAssetVersionResponse'
     /v1/backoffice/crm/segment/calculate:
         post:
             tags:
@@ -10813,6 +11069,51 @@ components:
                     type: string
                 request:
                     type: object
+        api.backoffice.service.v1.CreateAssetRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                assetKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - ASSET_TYPE_UNSPECIFIED
+                        - ASSET_TYPE_EMAIL
+                        - ASSET_TYPE_SMS
+                        - ASSET_TYPE_PUSH
+                        - ASSET_TYPE_INBOX
+                    type: string
+                    format: enum
+                defaultLocale:
+                    type: string
+                metadata:
+                    type: object
+            description: CreateAsset
+        api.backoffice.service.v1.CreateAssetVersionRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                assetId:
+                    type: string
+                locale:
+                    type: string
+                subject:
+                    type: string
+                contentUrl:
+                    type: string
+                previewText:
+                    type: string
+                contentType:
+                    type: string
+                isRequired:
+                    type: boolean
+            description: CreateAssetVersion
         api.backoffice.service.v1.CreateCampaignRequest:
             type: object
             properties:
@@ -11244,6 +11545,22 @@ components:
             properties:
                 affiliateId:
                     type: string
+        api.backoffice.service.v1.DeleteAssetRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: DeleteAsset
+        api.backoffice.service.v1.DeleteAssetVersionRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: DeleteAssetVersion
         api.backoffice.service.v1.DeleteCampaignRequest:
             type: object
             properties:
@@ -11810,6 +12127,22 @@ components:
                     format: date-time
                 groupBy:
                     type: string
+        api.backoffice.service.v1.GetAssetRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: GetAsset
+        api.backoffice.service.v1.GetAssetVersionRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: GetAssetVersion
         api.backoffice.service.v1.GetBalanceSummaryRequest:
             type: object
             properties:
@@ -13550,6 +13883,69 @@ components:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.ListAssetVariablesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                assetType:
+                    enum:
+                        - ASSET_TYPE_UNSPECIFIED
+                        - ASSET_TYPE_EMAIL
+                        - ASSET_TYPE_SMS
+                        - ASSET_TYPE_PUSH
+                        - ASSET_TYPE_INBOX
+                    type: string
+                    format: enum
+                source:
+                    enum:
+                        - VARIABLE_SOURCE_UNSPECIFIED
+                        - VARIABLE_SOURCE_PLAYER
+                        - VARIABLE_SOURCE_WALLET
+                        - VARIABLE_SOURCE_CAMPAIGN
+                        - VARIABLE_SOURCE_CUSTOM
+                    type: string
+                    format: enum
+            description: ListAssetVariables
+        api.backoffice.service.v1.ListAssetVersionsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                assetId:
+                    type: string
+            description: ListAssetVersions
+        api.backoffice.service.v1.ListAssetsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                type:
+                    enum:
+                        - ASSET_TYPE_UNSPECIFIED
+                        - ASSET_TYPE_EMAIL
+                        - ASSET_TYPE_SMS
+                        - ASSET_TYPE_PUSH
+                        - ASSET_TYPE_INBOX
+                    type: string
+                    format: enum
+                status:
+                    enum:
+                        - ASSET_STATUS_UNSPECIFIED
+                        - ASSET_STATUS_DRAFT
+                        - ASSET_STATUS_ACTIVE
+                        - ASSET_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+                includeInherited:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: ListAssets
         api.backoffice.service.v1.ListAuditActionsRequest:
             type: object
             properties: {}
@@ -17072,6 +17468,24 @@ components:
             properties:
                 token:
                     type: string
+        api.backoffice.service.v1.RenderAssetRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                assetId:
+                    type: string
+                locale:
+                    type: string
+                playerData:
+                    type: object
+                walletData:
+                    type: object
+                campaignData:
+                    type: object
+                customData:
+                    type: object
+            description: RenderAsset
         api.backoffice.service.v1.RepairAllSegmentsRequest:
             type: object
             properties:
@@ -17444,6 +17858,74 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 affiliateId:
                     type: string
+        api.backoffice.service.v1.UpdateAssetRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                assetKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                defaultLocale:
+                    type: string
+                metadata:
+                    type: object
+            description: UpdateAsset
+        api.backoffice.service.v1.UpdateAssetStatusRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                status:
+                    enum:
+                        - ASSET_STATUS_UNSPECIFIED
+                        - ASSET_STATUS_DRAFT
+                        - ASSET_STATUS_ACTIVE
+                        - ASSET_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+            description: UpdateAssetStatus
+        api.backoffice.service.v1.UpdateAssetVersionRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                subject:
+                    type: string
+                contentUrl:
+                    type: string
+                previewText:
+                    type: string
+                contentType:
+                    type: string
+                isRequired:
+                    type: boolean
+            description: UpdateAssetVersion
+        api.backoffice.service.v1.UpdateAssetVersionStatusRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                status:
+                    enum:
+                        - ASSET_STATUS_UNSPECIFIED
+                        - ASSET_STATUS_DRAFT
+                        - ASSET_STATUS_ACTIVE
+                        - ASSET_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+            description: UpdateAssetVersionStatus
         api.backoffice.service.v1.UpdateBankAccountRequest:
             type: object
             properties:
@@ -18294,6 +18776,145 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.common.OperatorContext'
+        api.crm.service.v1.Asset:
+            type: object
+            properties:
+                id:
+                    type: string
+                assetKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - ASSET_TYPE_UNSPECIFIED
+                        - ASSET_TYPE_EMAIL
+                        - ASSET_TYPE_SMS
+                        - ASSET_TYPE_PUSH
+                        - ASSET_TYPE_INBOX
+                    type: string
+                    format: enum
+                status:
+                    enum:
+                        - ASSET_STATUS_UNSPECIFIED
+                        - ASSET_STATUS_DRAFT
+                        - ASSET_STATUS_ACTIVE
+                        - ASSET_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+                ownerOperatorId:
+                    type: string
+                    description: Ownership hierarchy
+                ownerCompanyOperatorId:
+                    type: string
+                ownerRetailerOperatorId:
+                    type: string
+                ownerSystemOperatorId:
+                    type: string
+                ownerLevel:
+                    enum:
+                        - OWNER_LEVEL_UNSPECIFIED
+                        - OWNER_LEVEL_SYSTEM
+                        - OWNER_LEVEL_RETAILER
+                        - OWNER_LEVEL_COMPANY
+                        - OWNER_LEVEL_OPERATOR
+                    type: string
+                    format: enum
+                defaultLocale:
+                    type: string
+                metadata:
+                    type: object
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Asset represents a marketing campaign template
+        api.crm.service.v1.AssetVariable:
+            type: object
+            properties:
+                id:
+                    type: string
+                variableName:
+                    type: string
+                displayName:
+                    type: string
+                description:
+                    type: string
+                type:
+                    enum:
+                        - VARIABLE_TYPE_UNSPECIFIED
+                        - VARIABLE_TYPE_STRING
+                        - VARIABLE_TYPE_NUMBER
+                        - VARIABLE_TYPE_CURRENCY
+                        - VARIABLE_TYPE_DATE
+                        - VARIABLE_TYPE_URL
+                    type: string
+                    format: enum
+                source:
+                    enum:
+                        - VARIABLE_SOURCE_UNSPECIFIED
+                        - VARIABLE_SOURCE_PLAYER
+                        - VARIABLE_SOURCE_WALLET
+                        - VARIABLE_SOURCE_CAMPAIGN
+                        - VARIABLE_SOURCE_CUSTOM
+                    type: string
+                    format: enum
+                defaultValue:
+                    type: string
+                formatPattern:
+                    type: string
+                ownerSystemOperatorId:
+                    type: string
+                supportedAssetTypes:
+                    type: array
+                    items:
+                        type: string
+                createdAt:
+                    type: string
+                    format: date-time
+            description: AssetVariable represents a template variable definition
+        api.crm.service.v1.AssetVersion:
+            type: object
+            properties:
+                id:
+                    type: string
+                assetId:
+                    type: string
+                locale:
+                    type: string
+                subject:
+                    type: string
+                contentUrl:
+                    type: string
+                previewText:
+                    type: string
+                contentType:
+                    type: string
+                contentHash:
+                    type: string
+                variables:
+                    type: object
+                isRequired:
+                    type: boolean
+                status:
+                    enum:
+                        - ASSET_STATUS_UNSPECIFIED
+                        - ASSET_STATUS_DRAFT
+                        - ASSET_STATUS_ACTIVE
+                        - ASSET_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: AssetVersion represents a language-specific version of an asset
         api.crm.service.v1.CalculateSegmentResponse:
             type: object
             properties:
@@ -18303,11 +18924,27 @@ components:
                     type: string
                 usersRemoved:
                     type: string
+        api.crm.service.v1.CreateAssetResponse:
+            type: object
+            properties:
+                asset:
+                    $ref: '#/components/schemas/api.crm.service.v1.Asset'
+        api.crm.service.v1.CreateAssetVersionResponse:
+            type: object
+            properties:
+                version:
+                    $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
         api.crm.service.v1.CreateSegmentResponse:
             type: object
             properties:
                 segment:
                     $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.DeleteAssetResponse:
+            type: object
+            properties: {}
+        api.crm.service.v1.DeleteAssetVersionResponse:
+            type: object
+            properties: {}
         api.crm.service.v1.DeleteSegmentResponse:
             type: object
             properties: {}
@@ -18336,6 +18973,16 @@ components:
                 supportsCurrency:
                     type: boolean
             description: Field schema for frontend query builder
+        api.crm.service.v1.GetAssetResponse:
+            type: object
+            properties:
+                asset:
+                    $ref: '#/components/schemas/api.crm.service.v1.Asset'
+        api.crm.service.v1.GetAssetVersionResponse:
+            type: object
+            properties:
+                version:
+                    $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
         api.crm.service.v1.GetSegmentFieldSchemaResponse:
             type: object
             properties:
@@ -18384,6 +19031,35 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.Segment'
+        api.crm.service.v1.ListAssetVariablesResponse:
+            type: object
+            properties:
+                variables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.AssetVariable'
+        api.crm.service.v1.ListAssetVersionsResponse:
+            type: object
+            properties:
+                versions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
+        api.crm.service.v1.ListAssetsResponse:
+            type: object
+            properties:
+                assets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.Asset'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
         api.crm.service.v1.ListSegmentsResponse:
             type: object
             properties:
@@ -18399,6 +19075,27 @@ components:
                     format: int32
                 total:
                     type: string
+        api.crm.service.v1.RenderAssetResponse:
+            type: object
+            properties:
+                subject:
+                    type: string
+                content:
+                    type: string
+                previewText:
+                    type: string
+                contentType:
+                    type: string
+                locale:
+                    type: string
+                resolvedVariables:
+                    type: object
+                    additionalProperties:
+                        type: string
+                unresolvedVariables:
+                    type: array
+                    items:
+                        type: string
         api.crm.service.v1.RepairAllSegmentsResponse:
             type: object
             properties:
@@ -18508,6 +19205,26 @@ components:
         api.crm.service.v1.SetSegmentOverrideResponse:
             type: object
             properties: {}
+        api.crm.service.v1.UpdateAssetResponse:
+            type: object
+            properties:
+                asset:
+                    $ref: '#/components/schemas/api.crm.service.v1.Asset'
+        api.crm.service.v1.UpdateAssetStatusResponse:
+            type: object
+            properties:
+                asset:
+                    $ref: '#/components/schemas/api.crm.service.v1.Asset'
+        api.crm.service.v1.UpdateAssetVersionResponse:
+            type: object
+            properties:
+                version:
+                    $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
+        api.crm.service.v1.UpdateAssetVersionStatusResponse:
+            type: object
+            properties:
+                version:
+                    $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
         api.crm.service.v1.UpdateSegmentResponse:
             type: object
             properties:
@@ -26111,6 +26828,8 @@ tags:
     - name: Affiliate
     - name: BackofficeAccount
     - name: BackofficeAffiliate
+    - name: BackofficeAsset
+      description: Asset management service for backoffice
     - name: BackofficeAudit
     - name: BackofficeBcpay
       description: |-
