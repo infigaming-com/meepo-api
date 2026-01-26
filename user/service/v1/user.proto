@@ -694,6 +694,8 @@ message OAuthRequest {
 	OAuthProvider oauth_provider = 1;
 	// The OAuth token received from the provider.
 	string token = 2;
+	// Optional: URL where user registered (for affiliate tracking)
+	optional string registration_url = 3;
 }
 
 // TelegramAuthRequest contains the information from Telegram's login widget.
@@ -2266,6 +2268,7 @@ message OAuthLoginV2Request {
 	string oauth_token = 2;          // ID token from provider
 	api.common.OperatorContext operator_context = 3;
 	HttpRequestInfo http_request_info = 4;
+	optional string registration_url = 5;  // Optional: URL where user registered (for affiliate tracking)
 }
 
 // OAuthAccountInfo - bound OAuth account info
@@ -2315,6 +2318,7 @@ message InitiateOAuthLoginRequest {
 	OAuthProvider provider = 1;            // OAuth provider (TWITTER, APPLE)
 	string frontend_redirect_uri = 2;      // URL to redirect user after OAuth callback
 	string client_state = 3;               // Optional: client state to preserve across redirect
+	optional string registration_url = 4;  // Optional: URL where user registered (for affiliate tracking)
 }
 
 // InitiateOAuthLoginResponse - returns authorization URL for redirect
