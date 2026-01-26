@@ -1,0 +1,223 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+import "campaign/service/v1/campaign.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// Campaign management service for backoffice (CRM marketing campaigns)
+service BackofficeCampaign {
+  // Campaign CRUD operations
+  rpc CreateCrmCampaign(CreateCrmCampaignRequest) returns (api.campaign.service.v1.CreateCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateCrmCampaign(UpdateCrmCampaignRequest) returns (api.campaign.service.v1.UpdateCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/update"
+      body: "*"
+    };
+  }
+
+  rpc GetCrmCampaign(GetCrmCampaignRequest) returns (api.campaign.service.v1.GetCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/get"
+      body: "*"
+    };
+  }
+
+  rpc ListCrmCampaigns(ListCrmCampaignsRequest) returns (api.campaign.service.v1.ListCampaignsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/list"
+      body: "*"
+    };
+  }
+
+  rpc DeleteCrmCampaign(DeleteCrmCampaignRequest) returns (api.campaign.service.v1.DeleteCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/delete"
+      body: "*"
+    };
+  }
+
+  // Workflow management
+  rpc SetCrmCampaignWorkflow(SetCrmCampaignWorkflowRequest) returns (api.campaign.service.v1.SetWorkflowResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/workflow/set"
+      body: "*"
+    };
+  }
+
+  rpc GetCrmCampaignWorkflow(GetCrmCampaignWorkflowRequest) returns (api.campaign.service.v1.GetWorkflowResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/workflow/get"
+      body: "*"
+    };
+  }
+
+  rpc ValidateCrmCampaignWorkflow(ValidateCrmCampaignWorkflowRequest) returns (api.campaign.service.v1.ValidateWorkflowResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/workflow/validate"
+      body: "*"
+    };
+  }
+
+  // Campaign control
+  rpc ActivateCrmCampaign(ActivateCrmCampaignRequest) returns (api.campaign.service.v1.ActivateCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/activate"
+      body: "*"
+    };
+  }
+
+  rpc PauseCrmCampaign(PauseCrmCampaignRequest) returns (api.campaign.service.v1.PauseCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/pause"
+      body: "*"
+    };
+  }
+
+  // Manual trigger
+  rpc TriggerCrmCampaign(TriggerCrmCampaignRequest) returns (api.campaign.service.v1.TriggerCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/trigger"
+      body: "*"
+    };
+  }
+
+  // Execution tracking
+  rpc GetCrmCampaignExecution(GetCrmCampaignExecutionRequest) returns (api.campaign.service.v1.GetExecutionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/execution/get"
+      body: "*"
+    };
+  }
+
+  rpc ListCrmCampaignExecutions(ListCrmCampaignExecutionsRequest) returns (api.campaign.service.v1.ListExecutionsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/execution/list"
+      body: "*"
+    };
+  }
+
+  rpc GetCrmCampaignExecutionSteps(GetCrmCampaignExecutionStepsRequest) returns (api.campaign.service.v1.GetExecutionStepsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/execution/steps"
+      body: "*"
+    };
+  }
+}
+
+// CreateCrmCampaign
+message CreateCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional string campaign_key = 2;
+  string name = 3;
+  string description = 4;
+  optional google.protobuf.Timestamp start_at = 5;
+  optional google.protobuf.Timestamp end_at = 6;
+  google.protobuf.Struct metadata = 7;
+}
+
+// UpdateCrmCampaign
+message UpdateCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string name = 3;
+  optional string description = 4;
+  optional google.protobuf.Timestamp start_at = 5;
+  optional google.protobuf.Timestamp end_at = 6;
+  optional google.protobuf.Struct metadata = 7;
+}
+
+// GetCrmCampaign
+message GetCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  bool include_workflow = 3;
+}
+
+// ListCrmCampaigns
+message ListCrmCampaignsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional api.campaign.service.v1.CampaignStatus status = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  bool include_inherited = 5;
+}
+
+// DeleteCrmCampaign
+message DeleteCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// SetCrmCampaignWorkflow
+message SetCrmCampaignWorkflowRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 campaign_id = 2;
+  string workflow_yaml = 3;
+}
+
+// GetCrmCampaignWorkflow
+message GetCrmCampaignWorkflowRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 campaign_id = 2;
+}
+
+// ValidateCrmCampaignWorkflow
+message ValidateCrmCampaignWorkflowRequest {
+  string workflow_yaml = 1;
+}
+
+// ActivateCrmCampaign
+message ActivateCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// PauseCrmCampaign
+message PauseCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// TriggerCrmCampaign
+message TriggerCrmCampaignRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 campaign_id = 2;
+  repeated int64 user_ids = 3;
+  google.protobuf.Struct campaign_data = 4;
+}
+
+// GetCrmCampaignExecution
+message GetCrmCampaignExecutionRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ListCrmCampaignExecutions
+message ListCrmCampaignExecutionsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional int64 campaign_id = 2;
+  optional int64 user_id = 3;
+  optional api.campaign.service.v1.ExecutionStatus status = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+// GetCrmCampaignExecutionSteps
+message GetCrmCampaignExecutionStepsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 execution_id = 2;
+}

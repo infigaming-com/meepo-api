@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package api.campaign.service.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/campaign/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.campaign.service.v1";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  ERROR_REASON_UNSPECIFIED = 0;
+
+  // Campaign errors
+  CAMPAIGN_NOT_FOUND = 1 [(errors.code) = 404];
+  CAMPAIGN_KEY_ALREADY_EXISTS = 2 [(errors.code) = 409];
+  CAMPAIGN_INVALID = 3 [(errors.code) = 400];
+  CAMPAIGN_PERMISSION_DENIED = 4 [(errors.code) = 403];
+  CAMPAIGN_CANNOT_DELETE_ACTIVE = 5 [(errors.code) = 400];
+  CAMPAIGN_NOT_ACTIVE = 6 [(errors.code) = 400];
+  CAMPAIGN_ALREADY_ACTIVE = 7 [(errors.code) = 400];
+
+  // Workflow errors
+  WORKFLOW_NOT_FOUND = 10 [(errors.code) = 404];
+  WORKFLOW_INVALID_YAML = 11 [(errors.code) = 400];
+  WORKFLOW_VALIDATION_FAILED = 12 [(errors.code) = 400];
+  WORKFLOW_REQUIRED_FOR_ACTIVATION = 13 [(errors.code) = 400];
+
+  // Execution errors
+  EXECUTION_NOT_FOUND = 20 [(errors.code) = 404];
+  EXECUTION_FAILED = 21 [(errors.code) = 500];
+  EXECUTION_ALREADY_RUNNING = 22 [(errors.code) = 409];
+
+  // Trigger errors
+  TRIGGER_INVALID_USERS = 30 [(errors.code) = 400];
+  TRIGGER_NO_USERS_PROVIDED = 31 [(errors.code) = 400];
+
+  // Context errors
+  OPERATOR_CONTEXT_NOT_FOUND = 40 [(errors.code) = 400];
+  OPERATOR_CONTEXT_PERMISSION_DENIED = 41 [(errors.code) = 403];
+}
