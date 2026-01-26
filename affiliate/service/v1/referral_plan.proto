@@ -175,7 +175,9 @@ message GetUserLossRevenueShareStatsResponse {
         int32 tier = 4;
         string ngr_amount_in_period = 5;
         string ggr_amount_in_period = 6;
-        google.protobuf.Timestamp conversion_time = 7;
+        string bonus2cash_amount_in_period = 7;
+        string admin_fee_amount_in_period = 8;
+        google.protobuf.Timestamp conversion_time = 9;
     }
     string unpaid_reward_amount = 1; // now only calculate for user's tier 1
     string unclaimed_reward_amount = 2;

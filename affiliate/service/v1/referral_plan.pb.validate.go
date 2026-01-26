@@ -5456,6 +5456,10 @@ func (m *GetUserLossRevenueShareStatsResponse_ReferredStat) validate(all bool) e
 
 	// no validation rules for GgrAmountInPeriod
 
+	// no validation rules for Bonus2CashAmountInPeriod
+
+	// no validation rules for AdminFeeAmountInPeriod
+
 	if all {
 		switch v := interface{}(m.GetConversionTime()).(type) {
 		case interface{ ValidateAll() error }:

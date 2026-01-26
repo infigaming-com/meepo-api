@@ -9075,6 +9075,10 @@ components:
                     type: string
                 ggrAmountInPeriod:
                     type: string
+                bonus2cashAmountInPeriod:
+                    type: string
+                adminFeeAmountInPeriod:
+                    type: string
                 conversionTime:
                     type: string
                     format: date-time
