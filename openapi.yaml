@@ -16704,12 +16704,13 @@ components:
                 registeredAt:
                     type: string
                     format: date-time
+                referrerUserId:
+                    type: string
+                    description: int32 risk_level = 19;
+                affiliateId:
+                    type: string
                 country:
                     type: string
-                    description: |-
-                        int32 risk_level = 19;
-                         string referral_code = 20;
-                         string affiliate_code = 21;
                 registrationIp:
                     type: string
                     description: |-
