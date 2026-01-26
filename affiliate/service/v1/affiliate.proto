@@ -977,8 +977,8 @@ message DashboardMetrics {
 
   // Bet
   int64 bet_count = 20;
-  string bet_amount_usd = 21;
-  string bet_amount_reporting_currency = 22;
+  string turnover_usd = 21;
+  string turnover_reporting_currency = 22;
   string average_bet_usd = 23;
   string average_bet_reporting_currency = 24;
 
@@ -987,6 +987,10 @@ message DashboardMetrics {
   string pending_commission_reporting_currency = 26;
   string paid_commission_usd = 27;
   string paid_commission_reporting_currency = 28;
+
+  // Valid Turnover (from game_transactions.turnover_usd)
+  string valid_turnover_usd = 29;
+  string valid_turnover_reporting_currency = 30;
 }
 
 message GetAffiliateTrendRequest {
@@ -1015,7 +1019,6 @@ message GetAffiliateTrendResponse {
     string ggr_reporting_currency = 7;
     string ngr_usd = 8;
     string ngr_reporting_currency = 9;
-    int64 bet_count = 10;
   }
 
   repeated UserConversionData user_conversion_data = 1;

@@ -8686,9 +8686,9 @@ components:
                 betCount:
                     type: string
                     description: Bet
-                betAmountUsd:
+                turnoverUsd:
                     type: string
-                betAmountReportingCurrency:
+                turnoverReportingCurrency:
                     type: string
                 averageBetUsd:
                     type: string
@@ -8702,6 +8702,11 @@ components:
                 paidCommissionUsd:
                     type: string
                 paidCommissionReportingCurrency:
+                    type: string
+                validTurnoverUsd:
+                    type: string
+                    description: Valid Turnover (from game_transactions.turnover_usd)
+                validTurnoverReportingCurrency:
                     type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
@@ -8932,8 +8937,6 @@ components:
                     type: string
                 ngrReportingCurrency:
                     type: string
-                betCount:
-                    type: string
         api.affiliate.service.v1.GetAffiliateTrendResponse_UserConversionData:
             type: object
             properties:
@@ -9052,6 +9055,10 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                adminFeeAmountInPeriod:
+                    type: object
+                    additionalProperties:
+                        type: string
         api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse_ReferredStat:
             type: object
             properties:
@@ -9150,6 +9157,20 @@ components:
                 totalReceivedCommissionRewardAmount:
                     type: string
                 totalReceivedInviteeRewardAmount:
+                    type: string
+                availableDepositCashbackRewardAmount:
+                    type: string
+                    description: Breakdown of available rewards by commission type
+                availableWageringCommissionRewardAmount:
+                    type: string
+                availableLossRevenueShareRewardAmount:
+                    type: string
+                totalReceivedDepositCashbackRewardAmount:
+                    type: string
+                    description: Breakdown of total received rewards by commission type
+                totalReceivedWageringCommissionRewardAmount:
+                    type: string
+                totalReceivedLossRevenueShareRewardAmount:
                     type: string
         api.affiliate.service.v1.InviteeReward:
             type: object

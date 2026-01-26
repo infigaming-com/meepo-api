@@ -2670,6 +2670,8 @@ func (m *GetUserLossRevenueShareStatsResponse) validate(all bool) error {
 
 	// no validation rules for PageSize
 
+	// no validation rules for AdminFeeAmountInPeriod
+
 	if len(errors) > 0 {
 		return GetUserLossRevenueShareStatsResponseMultiError(errors)
 	}
@@ -5055,6 +5057,18 @@ func (m *GetUserReferralStatsResponse_ReferralRewards) validate(all bool) error 
 	// no validation rules for TotalReceivedCommissionRewardAmount
 
 	// no validation rules for TotalReceivedInviteeRewardAmount
+
+	// no validation rules for AvailableDepositCashbackRewardAmount
+
+	// no validation rules for AvailableWageringCommissionRewardAmount
+
+	// no validation rules for AvailableLossRevenueShareRewardAmount
+
+	// no validation rules for TotalReceivedDepositCashbackRewardAmount
+
+	// no validation rules for TotalReceivedWageringCommissionRewardAmount
+
+	// no validation rules for TotalReceivedLossRevenueShareRewardAmount
 
 	if len(errors) > 0 {
 		return GetUserReferralStatsResponse_ReferralRewardsMultiError(errors)

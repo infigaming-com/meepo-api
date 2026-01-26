@@ -9177,9 +9177,9 @@ func (m *DashboardMetrics) validate(all bool) error {
 
 	// no validation rules for BetCount
 
-	// no validation rules for BetAmountUsd
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for BetAmountReportingCurrency
+	// no validation rules for TurnoverReportingCurrency
 
 	// no validation rules for AverageBetUsd
 
@@ -9192,6 +9192,10 @@ func (m *DashboardMetrics) validate(all bool) error {
 	// no validation rules for PaidCommissionUsd
 
 	// no validation rules for PaidCommissionReportingCurrency
+
+	// no validation rules for ValidTurnoverUsd
+
+	// no validation rules for ValidTurnoverReportingCurrency
 
 	if len(errors) > 0 {
 		return DashboardMetricsMultiError(errors)
@@ -13850,8 +13854,6 @@ func (m *GetAffiliateTrendResponse_FinancialBettingData) validate(all bool) erro
 	// no validation rules for NgrUsd
 
 	// no validation rules for NgrReportingCurrency
-
-	// no validation rules for BetCount
 
 	if len(errors) > 0 {
 		return GetAffiliateTrendResponse_FinancialBettingDataMultiError(errors)
