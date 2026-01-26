@@ -71,6 +71,14 @@ message GetUserReferralStatsResponse {
         string total_received_referral_reward_amount = 3;
         string total_received_commission_reward_amount = 4;
         string total_received_invitee_reward_amount = 5;
+        // Breakdown of available rewards by commission type
+        string available_deposit_cashback_reward_amount = 6;
+        string available_wagering_commission_reward_amount = 7;
+        string available_loss_revenue_share_reward_amount = 8;
+        // Breakdown of total received rewards by commission type
+        string total_received_deposit_cashback_reward_amount = 9;
+        string total_received_wagering_commission_reward_amount = 10;
+        string total_received_loss_revenue_share_reward_amount = 11;
     }
     message ReferralProgress {
         map<int32, int32> conversion_count = 1; // map of tier number (1-10) to conversion count
@@ -180,6 +188,7 @@ message GetUserLossRevenueShareStatsResponse {
     int32 total = 9; // for referred stats
     int32 page = 10; // for referred stats
     int32 page_size = 11; // for referred stats
+    map<int32, string> admin_fee_amount_in_period = 12; // map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
 }
 
 // ------------------------------------------------------------------------------------------------

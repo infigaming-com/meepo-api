@@ -4303,8 +4303,8 @@ type DashboardMetrics struct {
 	NgrReportingCurrency string `protobuf:"bytes,19,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
 	// Bet
 	BetCount                    int64  `protobuf:"varint,20,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd                string `protobuf:"bytes,21,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	BetAmountReportingCurrency  string `protobuf:"bytes,22,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	TurnoverUsd                 string `protobuf:"bytes,21,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	TurnoverReportingCurrency   string `protobuf:"bytes,22,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
 	AverageBetUsd               string `protobuf:"bytes,23,opt,name=average_bet_usd,json=averageBetUsd,proto3" json:"average_bet_usd,omitempty"`
 	AverageBetReportingCurrency string `protobuf:"bytes,24,opt,name=average_bet_reporting_currency,json=averageBetReportingCurrency,proto3" json:"average_bet_reporting_currency,omitempty"`
 	// Commission
@@ -4312,8 +4312,11 @@ type DashboardMetrics struct {
 	PendingCommissionReportingCurrency string `protobuf:"bytes,26,opt,name=pending_commission_reporting_currency,json=pendingCommissionReportingCurrency,proto3" json:"pending_commission_reporting_currency,omitempty"`
 	PaidCommissionUsd                  string `protobuf:"bytes,27,opt,name=paid_commission_usd,json=paidCommissionUsd,proto3" json:"paid_commission_usd,omitempty"`
 	PaidCommissionReportingCurrency    string `protobuf:"bytes,28,opt,name=paid_commission_reporting_currency,json=paidCommissionReportingCurrency,proto3" json:"paid_commission_reporting_currency,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	// Valid Turnover (from game_transactions.turnover_usd)
+	ValidTurnoverUsd               string `protobuf:"bytes,29,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	ValidTurnoverReportingCurrency string `protobuf:"bytes,30,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *DashboardMetrics) Reset() {
@@ -4486,16 +4489,16 @@ func (x *DashboardMetrics) GetBetCount() int64 {
 	return 0
 }
 
-func (x *DashboardMetrics) GetBetAmountUsd() string {
+func (x *DashboardMetrics) GetTurnoverUsd() string {
 	if x != nil {
-		return x.BetAmountUsd
+		return x.TurnoverUsd
 	}
 	return ""
 }
 
-func (x *DashboardMetrics) GetBetAmountReportingCurrency() string {
+func (x *DashboardMetrics) GetTurnoverReportingCurrency() string {
 	if x != nil {
-		return x.BetAmountReportingCurrency
+		return x.TurnoverReportingCurrency
 	}
 	return ""
 }
@@ -4538,6 +4541,20 @@ func (x *DashboardMetrics) GetPaidCommissionUsd() string {
 func (x *DashboardMetrics) GetPaidCommissionReportingCurrency() string {
 	if x != nil {
 		return x.PaidCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *DashboardMetrics) GetValidTurnoverUsd() string {
+	if x != nil {
+		return x.ValidTurnoverUsd
+	}
+	return ""
+}
+
+func (x *DashboardMetrics) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
 	}
 	return ""
 }
@@ -7677,7 +7694,6 @@ type GetAffiliateTrendResponse_FinancialBettingData struct {
 	GgrReportingCurrency         string                 `protobuf:"bytes,7,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
 	NgrUsd                       string                 `protobuf:"bytes,8,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
 	NgrReportingCurrency         string                 `protobuf:"bytes,9,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	BetCount                     int64                  `protobuf:"varint,10,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -7773,13 +7789,6 @@ func (x *GetAffiliateTrendResponse_FinancialBettingData) GetNgrReportingCurrency
 		return x.NgrReportingCurrency
 	}
 	return ""
-}
-
-func (x *GetAffiliateTrendResponse_FinancialBettingData) GetBetCount() int64 {
-	if x != nil {
-		return x.BetCount
-	}
-	return 0
 }
 
 var File_affiliate_service_v1_affiliate_proto protoreflect.FileDescriptor
@@ -8522,7 +8531,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x1ainitiator_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\xad\x01\n" +
 	"\x1dGetAffiliateDashboardResponse\x12D\n" +
 	"\acurrent\x18\x01 \x01(\v2*.api.affiliate.service.v1.DashboardMetricsR\acurrent\x12F\n" +
-	"\bprevious\x18\x02 \x01(\v2*.api.affiliate.service.v1.DashboardMetricsR\bprevious\"\x98\v\n" +
+	"\bprevious\x18\x02 \x01(\v2*.api.affiliate.service.v1.DashboardMetricsR\bprevious\"\x8b\f\n" +
 	"\x10DashboardMetrics\x12$\n" +
 	"\rregistrations\x18\x01 \x01(\x03R\rregistrations\x12\x1b\n" +
 	"\tftd_users\x18\x02 \x01(\x03R\bftdUsers\x12+\n" +
@@ -8544,22 +8553,24 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x16ggr_reporting_currency\x18\x11 \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
 	"\angr_usd\x18\x12 \x01(\tR\x06ngrUsd\x124\n" +
 	"\x16ngr_reporting_currency\x18\x13 \x01(\tR\x14ngrReportingCurrency\x12\x1b\n" +
-	"\tbet_count\x18\x14 \x01(\x03R\bbetCount\x12$\n" +
-	"\x0ebet_amount_usd\x18\x15 \x01(\tR\fbetAmountUsd\x12A\n" +
-	"\x1dbet_amount_reporting_currency\x18\x16 \x01(\tR\x1abetAmountReportingCurrency\x12&\n" +
+	"\tbet_count\x18\x14 \x01(\x03R\bbetCount\x12!\n" +
+	"\fturnover_usd\x18\x15 \x01(\tR\vturnoverUsd\x12>\n" +
+	"\x1bturnover_reporting_currency\x18\x16 \x01(\tR\x19turnoverReportingCurrency\x12&\n" +
 	"\x0faverage_bet_usd\x18\x17 \x01(\tR\raverageBetUsd\x12C\n" +
 	"\x1eaverage_bet_reporting_currency\x18\x18 \x01(\tR\x1baverageBetReportingCurrency\x124\n" +
 	"\x16pending_commission_usd\x18\x19 \x01(\tR\x14pendingCommissionUsd\x12Q\n" +
 	"%pending_commission_reporting_currency\x18\x1a \x01(\tR\"pendingCommissionReportingCurrency\x12.\n" +
 	"\x13paid_commission_usd\x18\x1b \x01(\tR\x11paidCommissionUsd\x12K\n" +
-	"\"paid_commission_reporting_currency\x18\x1c \x01(\tR\x1fpaidCommissionReportingCurrency\"\xa5\x02\n" +
+	"\"paid_commission_reporting_currency\x18\x1c \x01(\tR\x1fpaidCommissionReportingCurrency\x12,\n" +
+	"\x12valid_turnover_usd\x18\x1d \x01(\tR\x10validTurnoverUsd\x12I\n" +
+	"!valid_turnover_reporting_currency\x18\x1e \x01(\tR\x1evalidTurnoverReportingCurrency\"\xa5\x02\n" +
 	"\x18GetAffiliateTrendRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x129\n" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x19\n" +
 	"\bgroup_by\x18\x04 \x01(\tR\agroupBy\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\x98\a\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\xfb\x06\n" +
 	"\x19GetAffiliateTrendResponse\x12x\n" +
 	"\x14user_conversion_data\x18\x01 \x03(\v2F.api.affiliate.service.v1.GetAffiliateTrendResponse.UserConversionDataR\x12userConversionData\x12~\n" +
 	"\x16financial_betting_data\x18\x02 \x03(\v2H.api.affiliate.service.v1.GetAffiliateTrendResponse.FinancialBettingDataR\x14financialBettingData\x1a\xaa\x01\n" +
@@ -8567,7 +8578,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12$\n" +
 	"\rregistrations\x18\x02 \x01(\x03R\rregistrations\x12\x1b\n" +
 	"\tftd_users\x18\x03 \x01(\x03R\bftdUsers\x12!\n" +
-	"\factive_users\x18\x04 \x01(\x03R\vactiveUsers\x1a\xd3\x03\n" +
+	"\factive_users\x18\x04 \x01(\x03R\vactiveUsers\x1a\xb6\x03\n" +
 	"\x14FinancialBettingData\x12.\n" +
 	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12!\n" +
 	"\fdeposits_usd\x18\x02 \x01(\tR\vdepositsUsd\x12>\n" +
@@ -8577,9 +8588,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\aggr_usd\x18\x06 \x01(\tR\x06ggrUsd\x124\n" +
 	"\x16ggr_reporting_currency\x18\a \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
 	"\angr_usd\x18\b \x01(\tR\x06ngrUsd\x124\n" +
-	"\x16ngr_reporting_currency\x18\t \x01(\tR\x14ngrReportingCurrency\x12\x1b\n" +
-	"\tbet_count\x18\n" +
-	" \x01(\x03R\bbetCount2\xdb-\n" +
+	"\x16ngr_reporting_currency\x18\t \x01(\tR\x14ngrReportingCurrency2\xdb-\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +

@@ -935,9 +935,9 @@ func (m *GetAffiliateDashboardResponse) validate(all bool) error {
 
 	// no validation rules for BetCount
 
-	// no validation rules for BetAmountUsd
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for BetAmountReportingCurrency
+	// no validation rules for TurnoverReportingCurrency
 
 	// no validation rules for AverageBetUsd
 
@@ -982,6 +982,10 @@ func (m *GetAffiliateDashboardResponse) validate(all bool) error {
 	}
 
 	// no validation rules for TotalAccountsWithBalance
+
+	// no validation rules for ValidTurnoverUsd
+
+	// no validation rules for ValidTurnoverReportingCurrency
 
 	if len(errors) > 0 {
 		return GetAffiliateDashboardResponseMultiError(errors)
@@ -1583,12 +1587,6 @@ func (m *GetAffiliateTrendResponse_TrendData) validate(all bool) error {
 	// no validation rules for NgrUsd
 
 	// no validation rules for NgrReportingCurrency
-
-	// no validation rules for BetCount
-
-	// no validation rules for BetAmountUsd
-
-	// no validation rules for BetAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetAffiliateTrendResponse_TrendDataMultiError(errors)

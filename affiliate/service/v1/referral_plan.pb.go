@@ -1195,10 +1195,11 @@ type GetUserLossRevenueShareStatsResponse struct {
 	NgrAmountInPeriod        map[int32]string                                     `protobuf:"bytes,5,rep,name=ngr_amount_in_period,json=ngrAmountInPeriod,proto3" json:"ngr_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`                      // map of tier number (1-10) to ngr amount in the period
 	Bonus2CashAmountInPeriod map[int32]string                                     `protobuf:"bytes,6,rep,name=bonus2cash_amount_in_period,json=bonus2cashAmountInPeriod,proto3" json:"bonus2cash_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to bonus2cash amount in the period
 	ReferredStats            []*GetUserLossRevenueShareStatsResponse_ReferredStat `protobuf:"bytes,7,rep,name=referred_stats,json=referredStats,proto3" json:"referred_stats,omitempty"`
-	TeamSize                 int32                                                `protobuf:"varint,8,opt,name=team_size,json=teamSize,proto3" json:"team_size,omitempty"`  // number of users in the team
-	Total                    int32                                                `protobuf:"varint,9,opt,name=total,proto3" json:"total,omitempty"`                        // for referred stats
-	Page                     int32                                                `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`                         // for referred stats
-	PageSize                 int32                                                `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // for referred stats
+	TeamSize                 int32                                                `protobuf:"varint,8,opt,name=team_size,json=teamSize,proto3" json:"team_size,omitempty"`                                                                                                                            // number of users in the team
+	Total                    int32                                                `protobuf:"varint,9,opt,name=total,proto3" json:"total,omitempty"`                                                                                                                                                  // for referred stats
+	Page                     int32                                                `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`                                                                                                                                                   // for referred stats
+	PageSize                 int32                                                `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`                                                                                                                           // for referred stats
+	AdminFeeAmountInPeriod   map[int32]string                                     `protobuf:"bytes,12,rep,name=admin_fee_amount_in_period,json=adminFeeAmountInPeriod,proto3" json:"admin_fee_amount_in_period,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // map of tier number (1-10) to admin fee amount = (NGR/GGR) * admin_rate / 100
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1308,6 +1309,13 @@ func (x *GetUserLossRevenueShareStatsResponse) GetPageSize() int32 {
 		return x.PageSize
 	}
 	return 0
+}
+
+func (x *GetUserLossRevenueShareStatsResponse) GetAdminFeeAmountInPeriod() map[int32]string {
+	if x != nil {
+		return x.AdminFeeAmountInPeriod
+	}
+	return nil
 }
 
 // Complete referral plan configuration
@@ -2315,8 +2323,16 @@ type GetUserReferralStatsResponse_ReferralRewards struct {
 	TotalReceivedReferralRewardAmount   string                 `protobuf:"bytes,3,opt,name=total_received_referral_reward_amount,json=totalReceivedReferralRewardAmount,proto3" json:"total_received_referral_reward_amount,omitempty"`
 	TotalReceivedCommissionRewardAmount string                 `protobuf:"bytes,4,opt,name=total_received_commission_reward_amount,json=totalReceivedCommissionRewardAmount,proto3" json:"total_received_commission_reward_amount,omitempty"`
 	TotalReceivedInviteeRewardAmount    string                 `protobuf:"bytes,5,opt,name=total_received_invitee_reward_amount,json=totalReceivedInviteeRewardAmount,proto3" json:"total_received_invitee_reward_amount,omitempty"`
-	unknownFields                       protoimpl.UnknownFields
-	sizeCache                           protoimpl.SizeCache
+	// Breakdown of available rewards by commission type
+	AvailableDepositCashbackRewardAmount    string `protobuf:"bytes,6,opt,name=available_deposit_cashback_reward_amount,json=availableDepositCashbackRewardAmount,proto3" json:"available_deposit_cashback_reward_amount,omitempty"`
+	AvailableWageringCommissionRewardAmount string `protobuf:"bytes,7,opt,name=available_wagering_commission_reward_amount,json=availableWageringCommissionRewardAmount,proto3" json:"available_wagering_commission_reward_amount,omitempty"`
+	AvailableLossRevenueShareRewardAmount   string `protobuf:"bytes,8,opt,name=available_loss_revenue_share_reward_amount,json=availableLossRevenueShareRewardAmount,proto3" json:"available_loss_revenue_share_reward_amount,omitempty"`
+	// Breakdown of total received rewards by commission type
+	TotalReceivedDepositCashbackRewardAmount    string `protobuf:"bytes,9,opt,name=total_received_deposit_cashback_reward_amount,json=totalReceivedDepositCashbackRewardAmount,proto3" json:"total_received_deposit_cashback_reward_amount,omitempty"`
+	TotalReceivedWageringCommissionRewardAmount string `protobuf:"bytes,10,opt,name=total_received_wagering_commission_reward_amount,json=totalReceivedWageringCommissionRewardAmount,proto3" json:"total_received_wagering_commission_reward_amount,omitempty"`
+	TotalReceivedLossRevenueShareRewardAmount   string `protobuf:"bytes,11,opt,name=total_received_loss_revenue_share_reward_amount,json=totalReceivedLossRevenueShareRewardAmount,proto3" json:"total_received_loss_revenue_share_reward_amount,omitempty"`
+	unknownFields                               protoimpl.UnknownFields
+	sizeCache                                   protoimpl.SizeCache
 }
 
 func (x *GetUserReferralStatsResponse_ReferralRewards) Reset() {
@@ -2380,6 +2396,48 @@ func (x *GetUserReferralStatsResponse_ReferralRewards) GetTotalReceivedCommissio
 func (x *GetUserReferralStatsResponse_ReferralRewards) GetTotalReceivedInviteeRewardAmount() string {
 	if x != nil {
 		return x.TotalReceivedInviteeRewardAmount
+	}
+	return ""
+}
+
+func (x *GetUserReferralStatsResponse_ReferralRewards) GetAvailableDepositCashbackRewardAmount() string {
+	if x != nil {
+		return x.AvailableDepositCashbackRewardAmount
+	}
+	return ""
+}
+
+func (x *GetUserReferralStatsResponse_ReferralRewards) GetAvailableWageringCommissionRewardAmount() string {
+	if x != nil {
+		return x.AvailableWageringCommissionRewardAmount
+	}
+	return ""
+}
+
+func (x *GetUserReferralStatsResponse_ReferralRewards) GetAvailableLossRevenueShareRewardAmount() string {
+	if x != nil {
+		return x.AvailableLossRevenueShareRewardAmount
+	}
+	return ""
+}
+
+func (x *GetUserReferralStatsResponse_ReferralRewards) GetTotalReceivedDepositCashbackRewardAmount() string {
+	if x != nil {
+		return x.TotalReceivedDepositCashbackRewardAmount
+	}
+	return ""
+}
+
+func (x *GetUserReferralStatsResponse_ReferralRewards) GetTotalReceivedWageringCommissionRewardAmount() string {
+	if x != nil {
+		return x.TotalReceivedWageringCommissionRewardAmount
+	}
+	return ""
+}
+
+func (x *GetUserReferralStatsResponse_ReferralRewards) GetTotalReceivedLossRevenueShareRewardAmount() string {
+	if x != nil {
+		return x.TotalReceivedLossRevenueShareRewardAmount
 	}
 	return ""
 }
@@ -2684,18 +2742,24 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x12user_referral_plan\x18\x03 \x01(\v2&.api.affiliate.service.v1.ReferralPlanH\x00R\x10userReferralPlan\x88\x01\x01B\x15\n" +
 	"\x13_user_referral_plan\"9\n" +
 	"\x1bGetUserReferralStatsRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xeb\n" +
-	"\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xa8\x0f\n" +
 	"\x1cGetUserReferralStatsResponse\x12M\n" +
 	"\x0ereferral_codes\x18\x01 \x03(\v2&.api.affiliate.service.v1.ReferralCodeR\rreferralCodes\x12q\n" +
 	"\x10referral_rewards\x18\x02 \x01(\v2F.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewardsR\x0freferralRewards\x12t\n" +
-	"\x11referral_progress\x18\x03 \x01(\v2G.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgressR\x10referralProgress\x1a\x9f\x03\n" +
+	"\x11referral_progress\x18\x03 \x01(\v2G.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgressR\x10referralProgress\x1a\xdc\a\n" +
 	"\x0fReferralRewards\x12G\n" +
 	" available_referral_reward_amount\x18\x01 \x01(\tR\x1davailableReferralRewardAmount\x12K\n" +
 	"\"available_commission_reward_amount\x18\x02 \x01(\tR\x1favailableCommissionRewardAmount\x12P\n" +
 	"%total_received_referral_reward_amount\x18\x03 \x01(\tR!totalReceivedReferralRewardAmount\x12T\n" +
 	"'total_received_commission_reward_amount\x18\x04 \x01(\tR#totalReceivedCommissionRewardAmount\x12N\n" +
-	"$total_received_invitee_reward_amount\x18\x05 \x01(\tR totalReceivedInviteeRewardAmount\x1a\xf0\x04\n" +
+	"$total_received_invitee_reward_amount\x18\x05 \x01(\tR totalReceivedInviteeRewardAmount\x12V\n" +
+	"(available_deposit_cashback_reward_amount\x18\x06 \x01(\tR$availableDepositCashbackRewardAmount\x12\\\n" +
+	"+available_wagering_commission_reward_amount\x18\a \x01(\tR'availableWageringCommissionRewardAmount\x12Y\n" +
+	"*available_loss_revenue_share_reward_amount\x18\b \x01(\tR%availableLossRevenueShareRewardAmount\x12_\n" +
+	"-total_received_deposit_cashback_reward_amount\x18\t \x01(\tR(totalReceivedDepositCashbackRewardAmount\x12e\n" +
+	"0total_received_wagering_commission_reward_amount\x18\n" +
+	" \x01(\tR+totalReceivedWageringCommissionRewardAmount\x12b\n" +
+	"/total_received_loss_revenue_share_reward_amount\x18\v \x01(\tR)totalReceivedLossRevenueShareRewardAmount\x1a\xf0\x04\n" +
 	"\x10ReferralProgress\x12\x87\x01\n" +
 	"\x10conversion_count\x18\x01 \x03(\v2\\.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntryR\x0fconversionCount\x12\x81\x01\n" +
 	"\x0edeposit_amount\x18\x02 \x03(\v2Z.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntryR\rdepositAmount\x12\x84\x01\n" +
@@ -2783,8 +2847,7 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x14_conversion_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xcc\n" +
-	"\n" +
+	"_page_size\"\xb0\f\n" +
 	"$GetUserLossRevenueShareStatsResponse\x120\n" +
 	"\x14unpaid_reward_amount\x18\x01 \x01(\tR\x12unpaidRewardAmount\x126\n" +
 	"\x17unclaimed_reward_amount\x18\x02 \x01(\tR\x15unclaimedRewardAmount\x122\n" +
@@ -2797,7 +2860,8 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x05total\x18\t \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\n" +
 	" \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\v \x01(\x05R\bpageSize\x1a\xa4\x02\n" +
+	"\tpage_size\x18\v \x01(\x05R\bpageSize\x12\x96\x01\n" +
+	"\x1aadmin_fee_amount_in_period\x18\f \x03(\v2Z.api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.AdminFeeAmountInPeriodEntryR\x16adminFeeAmountInPeriod\x1a\xa4\x02\n" +
 	"\fReferredStat\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12#\n" +
@@ -2813,6 +2877,9 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aK\n" +
 	"\x1dBonus2cashAmountInPeriodEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aI\n" +
+	"\x1bAdminFeeAmountInPeriodEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf7\x01\n" +
 	"\fReferralPlan\x12\x18\n" +
@@ -2928,7 +2995,7 @@ func file_affiliate_service_v1_referral_plan_proto_rawDescGZIP() []byte {
 	return file_affiliate_service_v1_referral_plan_proto_rawDescData
 }
 
-var file_affiliate_service_v1_referral_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
+var file_affiliate_service_v1_referral_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
 var file_affiliate_service_v1_referral_plan_proto_goTypes = []any{
 	(*SetReferralPlanRequest)(nil),                        // 0: api.affiliate.service.v1.SetReferralPlanRequest
 	(*SetReferralPlanResponse)(nil),                       // 1: api.affiliate.service.v1.SetReferralPlanResponse
@@ -2975,66 +3042,68 @@ var file_affiliate_service_v1_referral_plan_proto_goTypes = []any{
 	nil,                            // 42: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.GgrAmountInPeriodEntry
 	nil,                            // 43: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.NgrAmountInPeriodEntry
 	nil,                            // 44: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.Bonus2cashAmountInPeriodEntry
-	nil,                            // 45: api.affiliate.service.v1.ConversionReward.TierRewardsEntry
-	nil,                            // 46: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
-	nil,                            // 47: api.affiliate.service.v1.WageringCommission.TierRewardsEntry
-	nil,                            // 48: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
-	(*common.OperatorContext)(nil), // 49: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),  // 50: google.protobuf.Timestamp
+	nil,                            // 45: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.AdminFeeAmountInPeriodEntry
+	nil,                            // 46: api.affiliate.service.v1.ConversionReward.TierRewardsEntry
+	nil,                            // 47: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
+	nil,                            // 48: api.affiliate.service.v1.WageringCommission.TierRewardsEntry
+	nil,                            // 49: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
+	(*common.OperatorContext)(nil), // 50: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),  // 51: google.protobuf.Timestamp
 }
 var file_affiliate_service_v1_referral_plan_proto_depIdxs = []int32{
-	49, // 0: api.affiliate.service.v1.SetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	49, // 1: api.affiliate.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
+	50, // 0: api.affiliate.service.v1.SetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	50, // 1: api.affiliate.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
 	20, // 2: api.affiliate.service.v1.SetReferralPlanRequest.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
-	49, // 3: api.affiliate.service.v1.GetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	49, // 4: api.affiliate.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
-	49, // 5: api.affiliate.service.v1.GetReferralPlanResponse.custom_operator_context:type_name -> api.common.OperatorContext
-	49, // 6: api.affiliate.service.v1.GetReferralPlanResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	50, // 3: api.affiliate.service.v1.GetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	50, // 4: api.affiliate.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
+	50, // 5: api.affiliate.service.v1.GetReferralPlanResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	50, // 6: api.affiliate.service.v1.GetReferralPlanResponse.inherited_operator_context:type_name -> api.common.OperatorContext
 	19, // 7: api.affiliate.service.v1.GetReferralPlanResponse.default_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
 	19, // 8: api.affiliate.service.v1.GetReferralPlanResponse.custom_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
-	49, // 9: api.affiliate.service.v1.GetUserReferralPlanResponse.referral_plan_owner_operator_context:type_name -> api.common.OperatorContext
+	50, // 9: api.affiliate.service.v1.GetUserReferralPlanResponse.referral_plan_owner_operator_context:type_name -> api.common.OperatorContext
 	19, // 10: api.affiliate.service.v1.GetUserReferralPlanResponse.user_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
 	8,  // 11: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_codes:type_name -> api.affiliate.service.v1.ReferralCode
 	35, // 12: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_rewards:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewards
 	36, // 13: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_progress:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress
-	50, // 14: api.affiliate.service.v1.ListUserReferralRewardsRequest.conversion_start_time:type_name -> google.protobuf.Timestamp
-	50, // 15: api.affiliate.service.v1.ListUserReferralRewardsRequest.conversion_end_time:type_name -> google.protobuf.Timestamp
+	51, // 14: api.affiliate.service.v1.ListUserReferralRewardsRequest.conversion_start_time:type_name -> google.protobuf.Timestamp
+	51, // 15: api.affiliate.service.v1.ListUserReferralRewardsRequest.conversion_end_time:type_name -> google.protobuf.Timestamp
 	40, // 16: api.affiliate.service.v1.ListUserReferralRewardsResponse.referral_rewards:type_name -> api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward
-	50, // 17: api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest.conversion_start_time:type_name -> google.protobuf.Timestamp
-	50, // 18: api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest.conversion_end_time:type_name -> google.protobuf.Timestamp
+	51, // 17: api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest.conversion_start_time:type_name -> google.protobuf.Timestamp
+	51, // 18: api.affiliate.service.v1.GetUserLossRevenueShareStatsRequest.conversion_end_time:type_name -> google.protobuf.Timestamp
 	42, // 19: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ggr_amount_in_period:type_name -> api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.GgrAmountInPeriodEntry
 	43, // 20: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ngr_amount_in_period:type_name -> api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.NgrAmountInPeriodEntry
 	44, // 21: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.bonus2cash_amount_in_period:type_name -> api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.Bonus2cashAmountInPeriodEntry
 	41, // 22: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.referred_stats:type_name -> api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStat
-	20, // 23: api.affiliate.service.v1.ReferralPlan.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
-	21, // 24: api.affiliate.service.v1.ReferralPlanConfig.conversion_conditions:type_name -> api.affiliate.service.v1.ConversionConditions
-	22, // 25: api.affiliate.service.v1.ReferralPlanConfig.conversion_reward:type_name -> api.affiliate.service.v1.ConversionReward
-	25, // 26: api.affiliate.service.v1.ReferralPlanConfig.invitee_reward:type_name -> api.affiliate.service.v1.InviteeReward
-	26, // 27: api.affiliate.service.v1.ReferralPlanConfig.deposit_cashback:type_name -> api.affiliate.service.v1.DepositCashback
-	29, // 28: api.affiliate.service.v1.ReferralPlanConfig.wagering_commission:type_name -> api.affiliate.service.v1.WageringCommission
-	32, // 29: api.affiliate.service.v1.ReferralPlanConfig.loss_revenue_share:type_name -> api.affiliate.service.v1.LossRevenueShare
-	45, // 30: api.affiliate.service.v1.ConversionReward.tier_rewards:type_name -> api.affiliate.service.v1.ConversionReward.TierRewardsEntry
-	24, // 31: api.affiliate.service.v1.ConversionTierRewards.rewards:type_name -> api.affiliate.service.v1.ConversionTierReward
-	46, // 32: api.affiliate.service.v1.DepositCashback.tier_reward_configs:type_name -> api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
-	28, // 33: api.affiliate.service.v1.DepositCashbackTierRewardConfig.tier_rewards:type_name -> api.affiliate.service.v1.DepositCashbackTierReward
-	47, // 34: api.affiliate.service.v1.WageringCommission.tier_rewards:type_name -> api.affiliate.service.v1.WageringCommission.TierRewardsEntry
-	31, // 35: api.affiliate.service.v1.WageringCommissionTierRewards.rewards:type_name -> api.affiliate.service.v1.WageringCommissionTierReward
-	48, // 36: api.affiliate.service.v1.LossRevenueShare.tier_rewards:type_name -> api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
-	34, // 37: api.affiliate.service.v1.LossRevenueShareTierRewards.rewards:type_name -> api.affiliate.service.v1.LossRevenueShareTierReward
-	37, // 38: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.conversion_count:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntry
-	38, // 39: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.deposit_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntry
-	39, // 40: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.wagering_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
-	50, // 41: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.conversion_time:type_name -> google.protobuf.Timestamp
-	50, // 42: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStat.conversion_time:type_name -> google.protobuf.Timestamp
-	23, // 43: api.affiliate.service.v1.ConversionReward.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.ConversionTierRewards
-	27, // 44: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry.value:type_name -> api.affiliate.service.v1.DepositCashbackTierRewardConfig
-	30, // 45: api.affiliate.service.v1.WageringCommission.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.WageringCommissionTierRewards
-	33, // 46: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.LossRevenueShareTierRewards
-	47, // [47:47] is the sub-list for method output_type
-	47, // [47:47] is the sub-list for method input_type
-	47, // [47:47] is the sub-list for extension type_name
-	47, // [47:47] is the sub-list for extension extendee
-	0,  // [0:47] is the sub-list for field type_name
+	45, // 23: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.admin_fee_amount_in_period:type_name -> api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.AdminFeeAmountInPeriodEntry
+	20, // 24: api.affiliate.service.v1.ReferralPlan.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
+	21, // 25: api.affiliate.service.v1.ReferralPlanConfig.conversion_conditions:type_name -> api.affiliate.service.v1.ConversionConditions
+	22, // 26: api.affiliate.service.v1.ReferralPlanConfig.conversion_reward:type_name -> api.affiliate.service.v1.ConversionReward
+	25, // 27: api.affiliate.service.v1.ReferralPlanConfig.invitee_reward:type_name -> api.affiliate.service.v1.InviteeReward
+	26, // 28: api.affiliate.service.v1.ReferralPlanConfig.deposit_cashback:type_name -> api.affiliate.service.v1.DepositCashback
+	29, // 29: api.affiliate.service.v1.ReferralPlanConfig.wagering_commission:type_name -> api.affiliate.service.v1.WageringCommission
+	32, // 30: api.affiliate.service.v1.ReferralPlanConfig.loss_revenue_share:type_name -> api.affiliate.service.v1.LossRevenueShare
+	46, // 31: api.affiliate.service.v1.ConversionReward.tier_rewards:type_name -> api.affiliate.service.v1.ConversionReward.TierRewardsEntry
+	24, // 32: api.affiliate.service.v1.ConversionTierRewards.rewards:type_name -> api.affiliate.service.v1.ConversionTierReward
+	47, // 33: api.affiliate.service.v1.DepositCashback.tier_reward_configs:type_name -> api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
+	28, // 34: api.affiliate.service.v1.DepositCashbackTierRewardConfig.tier_rewards:type_name -> api.affiliate.service.v1.DepositCashbackTierReward
+	48, // 35: api.affiliate.service.v1.WageringCommission.tier_rewards:type_name -> api.affiliate.service.v1.WageringCommission.TierRewardsEntry
+	31, // 36: api.affiliate.service.v1.WageringCommissionTierRewards.rewards:type_name -> api.affiliate.service.v1.WageringCommissionTierReward
+	49, // 37: api.affiliate.service.v1.LossRevenueShare.tier_rewards:type_name -> api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
+	34, // 38: api.affiliate.service.v1.LossRevenueShareTierRewards.rewards:type_name -> api.affiliate.service.v1.LossRevenueShareTierReward
+	37, // 39: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.conversion_count:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntry
+	38, // 40: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.deposit_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntry
+	39, // 41: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.wagering_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
+	51, // 42: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.conversion_time:type_name -> google.protobuf.Timestamp
+	51, // 43: api.affiliate.service.v1.GetUserLossRevenueShareStatsResponse.ReferredStat.conversion_time:type_name -> google.protobuf.Timestamp
+	23, // 44: api.affiliate.service.v1.ConversionReward.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.ConversionTierRewards
+	27, // 45: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry.value:type_name -> api.affiliate.service.v1.DepositCashbackTierRewardConfig
+	30, // 46: api.affiliate.service.v1.WageringCommission.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.WageringCommissionTierRewards
+	33, // 47: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.LossRevenueShareTierRewards
+	48, // [48:48] is the sub-list for method output_type
+	48, // [48:48] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_referral_plan_proto_init() }
@@ -3060,7 +3129,7 @@ func file_affiliate_service_v1_referral_plan_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_referral_plan_proto_rawDesc), len(file_affiliate_service_v1_referral_plan_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   49,
+			NumMessages:   50,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
