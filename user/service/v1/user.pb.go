@@ -3501,9 +3501,12 @@ type ListUsersRequest struct {
 	// Filter by registration IP
 	RegistrationIp *string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3,oneof" json:"registration_ip,omitempty"`
 	// Filter by login IP (users who have logged in with this IP)
-	LoginIp       *string `protobuf:"bytes,26,opt,name=login_ip,json=loginIp,proto3,oneof" json:"login_ip,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LoginIp *string `protobuf:"bytes,26,opt,name=login_ip,json=loginIp,proto3,oneof" json:"login_ip,omitempty"`
+	// Target operator context for registration_ip and login_ip filtering.
+	// When provided with registration_ip or login_ip, frontend will filter user_events within this operator context.
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,27,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -3716,6 +3719,13 @@ func (x *ListUsersRequest) GetLoginIp() string {
 		return *x.LoginIp
 	}
 	return ""
+}
+
+func (x *ListUsersRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
 }
 
 type ListUsersResponse struct {
@@ -4361,8 +4371,10 @@ type GetUserProfileResponse struct {
 	ReferrerUserId int64 `protobuf:"varint,32,opt,name=referrer_user_id,json=referrerUserId,proto3" json:"referrer_user_id,omitempty"`
 	// Referrer's username for display
 	ReferrerUsername string `protobuf:"bytes,33,opt,name=referrer_username,json=referrerUsername,proto3" json:"referrer_username,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// The user's operator context information
+	UserOperatorContext *common.OperatorContext `protobuf:"bytes,34,opt,name=user_operator_context,json=userOperatorContext,proto3" json:"user_operator_context,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse) Reset() {
@@ -4624,6 +4636,13 @@ func (x *GetUserProfileResponse) GetReferrerUsername() string {
 		return x.ReferrerUsername
 	}
 	return ""
+}
+
+func (x *GetUserProfileResponse) GetUserOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.UserOperatorContext
+	}
+	return nil
 }
 
 type CreateRoleRequest struct {
@@ -16430,7 +16449,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x03 \x01(\tR\bidNumber\x12\x14\n" +
 	"\x05image\x18\x04 \x01(\tR\x05image\"\x1c\n" +
-	"\x1aUpdateUserIdentityResponse\"\xa0\v\n" +
+	"\x1aUpdateUserIdentityResponse\"\xf5\v\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -16461,7 +16480,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10operator_context\x18\x17 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x18 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
 	"\x0fregistration_ip\x18\x19 \x01(\tH\x15R\x0eregistrationIp\x88\x01\x01\x12\x1e\n" +
-	"\blogin_ip\x18\x1a \x01(\tH\x16R\aloginIp\x88\x01\x01B\n" +
+	"\blogin_ip\x18\x1a \x01(\tH\x16R\aloginIp\x88\x01\x01\x12S\n" +
+	"\x17target_operator_context\x18\x1b \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -16581,7 +16601,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xac\x14\n" +
+	"\x10_login_page_size\"\xfd\x14\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -16619,7 +16639,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\faffiliate_id\x18\x1e \x01(\x03R\vaffiliateId\x12%\n" +
 	"\x0eaffiliate_name\x18\x1f \x01(\tR\raffiliateName\x12(\n" +
 	"\x10referrer_user_id\x18  \x01(\x03R\x0ereferrerUserId\x12+\n" +
-	"\x11referrer_username\x18! \x01(\tR\x10referrerUsername\x1aH\n" +
+	"\x11referrer_username\x18! \x01(\tR\x10referrerUsername\x12O\n" +
+	"\x15user_operator_context\x18\" \x01(\v2\x1b.api.common.OperatorContextR\x13userOperatorContext\x1aH\n" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
@@ -17940,414 +17961,416 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	265, // 28: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
 	266, // 29: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
 	267, // 30: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	238, // 31: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	266, // 32: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 33: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 34: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
-	239, // 35: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	266, // 36: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
-	241, // 37: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	242, // 38: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
-	243, // 39: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
-	265, // 40: api.user.service.v1.GetUserProfileResponse.dob:type_name -> google.protobuf.Timestamp
-	49,  // 41: api.user.service.v1.GetUserProfileResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
-	244, // 42: api.user.service.v1.GetUserProfileResponse.emailChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	244, // 43: api.user.service.v1.GetUserProfileResponse.phoneChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	67,  // 44: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	266, // 45: api.user.service.v1.CreateRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 46: api.user.service.v1.ListRolesRequest.operator_context:type_name -> api.common.OperatorContext
-	67,  // 47: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
-	70,  // 48: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
-	67,  // 49: api.user.service.v1.UpdateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	266, // 50: api.user.service.v1.UpdateRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	70,  // 51: api.user.service.v1.GetRoleResponse.role:type_name -> api.user.service.v1.Role
-	266, // 52: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
-	267, // 53: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	245, // 54: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	246, // 55: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	247, // 56: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	266, // 57: api.user.service.v1.DeleteRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 58: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
-	266, // 59: api.user.service.v1.GetOperatorInfoByOriginResponse.operator_context:type_name -> api.common.OperatorContext
-	116, // 60: api.user.service.v1.GetOperatorInfoByOriginResponse.operatorDetail:type_name -> api.user.service.v1.OperatorDetails
-	116, // 61: api.user.service.v1.GetOperatorInfoByOriginResponse.systemOperatorDetail:type_name -> api.user.service.v1.OperatorDetails
-	248, // 62: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
-	249, // 63: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	266, // 64: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	250, // 65: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
-	266, // 66: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
-	106, // 67: api.user.service.v1.OperatorAccountSettings.password_settings:type_name -> api.user.service.v1.OperatorAccountPasswordSettings
-	107, // 68: api.user.service.v1.OperatorAccountSettings.security_settings:type_name -> api.user.service.v1.OperatorAccountSecuritySettings
-	108, // 69: api.user.service.v1.OperatorAccountSettings.game_settings:type_name -> api.user.service.v1.OperatorAccountGameSettings
-	109, // 70: api.user.service.v1.OperatorAccountSettings.payment_settings:type_name -> api.user.service.v1.OperatorAccountPaymentSettings
-	266, // 71: api.user.service.v1.GetUserAccountSettingsStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	112, // 72: api.user.service.v1.GetUserAccountSettingsStatusResponse.game_settings_status:type_name -> api.user.service.v1.UserAccountGameSettingsStatus
-	113, // 73: api.user.service.v1.GetUserAccountSettingsStatusResponse.payment_settings_status:type_name -> api.user.service.v1.UserAccountPaymentSettingsStatus
-	110, // 74: api.user.service.v1.OperatorConfig.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	115, // 75: api.user.service.v1.OperatorDetails.config:type_name -> api.user.service.v1.OperatorConfig
-	116, // 76: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	267, // 77: api.user.service.v1.ListOperatorsByParentOperatorIdRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	116, // 78: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	266, // 79: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	251, // 80: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	266, // 81: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	252, // 82: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	266, // 83: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	253, // 84: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	266, // 85: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	265, // 86: api.user.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
-	265, // 87: api.user.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
-	266, // 88: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 89: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
-	4,   // 90: api.user.service.v1.ListAllUsersResponse.users:type_name -> api.user.service.v1.UserInfo
-	266, // 91: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
-	116, // 92: api.user.service.v1.ListOperatorsByAdminEmailResponse.retailer_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	116, // 93: api.user.service.v1.ListOperatorsByAdminEmailResponse.company_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	116, // 94: api.user.service.v1.ListOperatorsByAdminEmailResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	116, // 95: api.user.service.v1.ListOperatorDetailsResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	116, // 96: api.user.service.v1.GetOperatorDetailsByUserIdResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	266, // 97: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 98: api.user.service.v1.GetOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	110, // 99: api.user.service.v1.GetOperatorAccountSettingsResponse.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	266, // 100: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 101: api.user.service.v1.UpdateOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	110, // 102: api.user.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	266, // 103: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 104: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
-	266, // 105: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 106: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
-	254, // 107: api.user.service.v1.ResponsibleGamblingConfig.self_exclusion:type_name -> api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
-	255, // 108: api.user.service.v1.ResponsibleGamblingConfig.break_in_play:type_name -> api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
-	256, // 109: api.user.service.v1.ResponsibleGamblingConfig.time_limits:type_name -> api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
-	145, // 110: api.user.service.v1.AddResponsibleGamblingConfigRequest.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
-	266, // 111: api.user.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 112: api.user.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	265, // 113: api.user.service.v1.ResponsibleGamblingStatus.time_limits_next_inactive_time:type_name -> google.protobuf.Timestamp
-	265, // 114: api.user.service.v1.ResponsibleGamblingDeleteSchedule.self_exclusion_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	265, // 115: api.user.service.v1.ResponsibleGamblingDeleteSchedule.break_in_play_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	265, // 116: api.user.service.v1.ResponsibleGamblingDeleteSchedule.time_limits_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	145, // 117: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
-	151, // 118: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_status:type_name -> api.user.service.v1.ResponsibleGamblingStatus
-	152, // 119: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_delete_schedule:type_name -> api.user.service.v1.ResponsibleGamblingDeleteSchedule
-	266, // 120: api.user.service.v1.UserIdentityAuditRequest.operator_context:type_name -> api.common.OperatorContext
-	265, // 121: api.user.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
-	265, // 122: api.user.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
-	267, // 123: api.user.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	266, // 124: api.user.service.v1.UserIdentityListRequest.operator_context:type_name -> api.common.OperatorContext
-	49,  // 125: api.user.service.v1.UserIdentityListResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
-	266, // 126: api.user.service.v1.AddRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 127: api.user.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	266, // 128: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 129: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	266, // 130: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 131: api.user.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	257, // 132: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
-	165, // 133: api.user.service.v1.RegistrationFieldPolicy.registration:type_name -> api.user.service.v1.RegistrationFieldSet
-	165, // 134: api.user.service.v1.RegistrationFieldPolicy.login:type_name -> api.user.service.v1.RegistrationFieldSet
-	266, // 135: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 136: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	258, // 137: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
-	266, // 138: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 139: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	259, // 140: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
-	266, // 141: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 142: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	260, // 143: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
-	266, // 144: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 145: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	261, // 146: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
-	268, // 147: api.user.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	268, // 148: api.user.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	185, // 149: api.user.service.v1.GetUserPrivacySettingsResponse.settings:type_name -> api.user.service.v1.UserPrivacySettings
-	262, // 150: api.user.service.v1.GetUsersPrivacySettingsResponse.settings:type_name -> api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
-	1,   // 151: api.user.service.v1.LoginWithInfoAnd2faRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	266, // 152: api.user.service.v1.LoginWithInfoAnd2faRequest.operator_context:type_name -> api.common.OperatorContext
-	7,   // 153: api.user.service.v1.LoginWithInfoAnd2faRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
-	4,   // 154: api.user.service.v1.LoginWithInfoAnd2faResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	266, // 155: api.user.service.v1.GetBackofficeAccountDetailRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 156: api.user.service.v1.AdminResetPasswordRequest.operator_context:type_name -> api.common.OperatorContext
-	2,   // 157: api.user.service.v1.OAuthProviderConfig.provider:type_name -> api.user.service.v1.OAuthProvider
-	263, // 158: api.user.service.v1.OAuthProviderConfig.config:type_name -> api.user.service.v1.OAuthProviderConfig.ConfigEntry
-	266, // 159: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 160: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	2,   // 161: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	264, // 162: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
-	266, // 163: api.user.service.v1.DeleteOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 164: api.user.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	266, // 165: api.user.service.v1.SetOAuthProviderEnabledRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 166: api.user.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
-	266, // 167: api.user.service.v1.ListOAuthProviderConfigsRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 168: api.user.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	2,   // 169: api.user.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	212, // 170: api.user.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
-	266, // 171: api.user.service.v1.GetOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	266, // 172: api.user.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	212, // 173: api.user.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
-	2,   // 174: api.user.service.v1.AvailableOAuthProvider.provider:type_name -> api.user.service.v1.OAuthProvider
-	223, // 175: api.user.service.v1.GetAvailableOAuthProvidersResponse.providers:type_name -> api.user.service.v1.AvailableOAuthProvider
-	2,   // 176: api.user.service.v1.OAuthLoginV2Request.provider:type_name -> api.user.service.v1.OAuthProvider
-	266, // 177: api.user.service.v1.OAuthLoginV2Request.operator_context:type_name -> api.common.OperatorContext
-	7,   // 178: api.user.service.v1.OAuthLoginV2Request.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
-	2,   // 179: api.user.service.v1.OAuthAccountInfo.provider:type_name -> api.user.service.v1.OAuthProvider
-	2,   // 180: api.user.service.v1.BindOAuthAccountRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	227, // 181: api.user.service.v1.BindOAuthAccountResponse.account_info:type_name -> api.user.service.v1.OAuthAccountInfo
-	2,   // 182: api.user.service.v1.UnbindOAuthAccountRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	227, // 183: api.user.service.v1.ListBoundOAuthAccountsResponse.accounts:type_name -> api.user.service.v1.OAuthAccountInfo
-	2,   // 184: api.user.service.v1.InitiateOAuthLoginRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	2,   // 185: api.user.service.v1.InitiateOAuthBindingRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	265, // 186: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	265, // 187: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	265, // 188: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
-	70,  // 189: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
-	265, // 190: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	240, // 191: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	265, // 192: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	240, // 193: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	265, // 194: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	265, // 195: api.user.service.v1.GetUserProfileResponse.ChangeRecord.changed_at:type_name -> google.protobuf.Timestamp
-	266, // 196: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	266, // 197: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	266, // 198: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	266, // 199: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	265, // 200: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.start_time:type_name -> google.protobuf.Timestamp
-	265, // 201: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.end_time:type_name -> google.protobuf.Timestamp
-	265, // 202: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.start_time:type_name -> google.protobuf.Timestamp
-	265, // 203: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.end_time:type_name -> google.protobuf.Timestamp
-	265, // 204: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist.created_at:type_name -> google.protobuf.Timestamp
-	164, // 205: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
-	164, // 206: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
-	166, // 207: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
-	166, // 208: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
-	185, // 209: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry.value:type_name -> api.user.service.v1.UserPrivacySettings
-	5,   // 210: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
-	6,   // 211: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
-	8,   // 212: api.user.service.v1.User.LoginWithInfo:input_type -> api.user.service.v1.LoginWithInfoRequest
-	9,   // 213: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
-	10,  // 214: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
-	11,  // 215: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
-	14,  // 216: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	16,  // 217: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
-	18,  // 218: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	20,  // 219: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	22,  // 220: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
-	24,  // 221: api.user.service.v1.User.SetOperatorTagsConfig:input_type -> api.user.service.v1.SetOperatorTagsConfigRequest
-	26,  // 222: api.user.service.v1.User.SetOperatorTags:input_type -> api.user.service.v1.SetOperatorTagsRequest
-	28,  // 223: api.user.service.v1.User.GetOperatorTagsConfig:input_type -> api.user.service.v1.GetOperatorTagsConfigRequest
-	30,  // 224: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
-	32,  // 225: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
-	34,  // 226: api.user.service.v1.User.GetUserTagsById:input_type -> api.user.service.v1.GetUserTagsByIdRequest
-	36,  // 227: api.user.service.v1.User.SetUserTagsById:input_type -> api.user.service.v1.SetUserTagsByIdRequest
-	38,  // 228: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
-	40,  // 229: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
-	42,  // 230: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
-	44,  // 231: api.user.service.v1.User.SendPasswordResetCode:input_type -> api.user.service.v1.SendPasswordResetCodeRequest
-	46,  // 232: api.user.service.v1.User.ResetPasswordWithCode:input_type -> api.user.service.v1.ResetPasswordWithCodeRequest
-	50,  // 233: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
-	52,  // 234: api.user.service.v1.User.UpdateUserIdentity:input_type -> api.user.service.v1.UpdateUserIdentityRequest
-	54,  // 235: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
-	56,  // 236: api.user.service.v1.User.CreateUser:input_type -> api.user.service.v1.CreateUserRequest
-	58,  // 237: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
-	60,  // 238: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
-	62,  // 239: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
-	64,  // 240: api.user.service.v1.User.GetUserProfile:input_type -> api.user.service.v1.GetUserProfileRequest
-	66,  // 241: api.user.service.v1.User.CreateRole:input_type -> api.user.service.v1.CreateRoleRequest
-	69,  // 242: api.user.service.v1.User.ListRoles:input_type -> api.user.service.v1.ListRolesRequest
-	72,  // 243: api.user.service.v1.User.CreateOperator:input_type -> api.user.service.v1.CreateOperatorRequest
-	74,  // 244: api.user.service.v1.User.UpdateRole:input_type -> api.user.service.v1.UpdateRoleRequest
-	76,  // 245: api.user.service.v1.User.GetRole:input_type -> api.user.service.v1.GetRoleRequest
-	80,  // 246: api.user.service.v1.User.DeleteRole:input_type -> api.user.service.v1.DeleteRoleRequest
-	78,  // 247: api.user.service.v1.User.GetOverviewDashboardFromUser:input_type -> api.user.service.v1.GetOverviewDashboardFromUserRequest
-	82,  // 248: api.user.service.v1.User.GetOperatorIdByOrigin:input_type -> api.user.service.v1.GetOperatorIdByOriginRequest
-	84,  // 249: api.user.service.v1.User.GetOperatorIdsByOrigin:input_type -> api.user.service.v1.GetOperatorIdsByOriginRequest
-	86,  // 250: api.user.service.v1.User.GetOperatorInfoByOrigin:input_type -> api.user.service.v1.GetOperatorInfoByOriginRequest
-	88,  // 251: api.user.service.v1.User.GetOperator:input_type -> api.user.service.v1.GetOperatorRequest
-	90,  // 252: api.user.service.v1.User.GetOperatorsByIds:input_type -> api.user.service.v1.GetOperatorsByIdsRequest
-	92,  // 253: api.user.service.v1.User.ListAllOperators:input_type -> api.user.service.v1.ListAllOperatorsRequest
-	94,  // 254: api.user.service.v1.User.GetParentOperatorIds:input_type -> api.user.service.v1.GetParentOperatorIdsRequest
-	96,  // 255: api.user.service.v1.User.GetChildOperatorIds:input_type -> api.user.service.v1.GetChildOperatorIdsRequest
-	98,  // 256: api.user.service.v1.User.CheckEmailExists:input_type -> api.user.service.v1.CheckEmailExistsRequest
-	100, // 257: api.user.service.v1.User.CheckSubdomainExists:input_type -> api.user.service.v1.CheckSubdomainExistsRequest
-	102, // 258: api.user.service.v1.User.CheckOperatorKeyExists:input_type -> api.user.service.v1.CheckOperatorKeyExistsRequest
-	104, // 259: api.user.service.v1.User.CreateBusiness:input_type -> api.user.service.v1.CreateBusinessRequest
-	117, // 260: api.user.service.v1.User.GetOperatorDetails:input_type -> api.user.service.v1.GetOperatorDetailsRequest
-	119, // 261: api.user.service.v1.User.ListOperatorsByParentOperatorId:input_type -> api.user.service.v1.ListOperatorsByParentOperatorIdRequest
-	121, // 262: api.user.service.v1.User.ListRetailerOperators:input_type -> api.user.service.v1.ListRetailerOperatorsRequest
-	123, // 263: api.user.service.v1.User.ListCompanyOperators:input_type -> api.user.service.v1.ListCompanyOperatorsRequest
-	125, // 264: api.user.service.v1.User.ListBottomOperators:input_type -> api.user.service.v1.ListBottomOperatorsRequest
-	127, // 265: api.user.service.v1.User.UpdateOperatorStatus:input_type -> api.user.service.v1.UpdateOperatorStatusRequest
-	129, // 266: api.user.service.v1.User.ListAllUsers:input_type -> api.user.service.v1.ListAllUsersRequest
-	131, // 267: api.user.service.v1.User.ListOperatorsByAdminEmail:input_type -> api.user.service.v1.ListOperatorsByAdminEmailRequest
-	133, // 268: api.user.service.v1.User.ListOperatorDetails:input_type -> api.user.service.v1.ListOperatorDetailsRequest
-	135, // 269: api.user.service.v1.User.GetOperatorDetailsByUserId:input_type -> api.user.service.v1.GetOperatorDetailsByUserIdRequest
-	137, // 270: api.user.service.v1.User.GetOperatorAccountSettings:input_type -> api.user.service.v1.GetOperatorAccountSettingsRequest
-	139, // 271: api.user.service.v1.User.UpdateOperatorAccountSettings:input_type -> api.user.service.v1.UpdateOperatorAccountSettingsRequest
-	141, // 272: api.user.service.v1.User.SetOperatorMaxHouseEdge:input_type -> api.user.service.v1.SetOperatorMaxHouseEdgeRequest
-	143, // 273: api.user.service.v1.User.GetOperatorMaxHouseEdge:input_type -> api.user.service.v1.GetOperatorMaxHouseEdgeRequest
-	111, // 274: api.user.service.v1.User.GetUserAccountSettingsStatus:input_type -> api.user.service.v1.GetUserAccountSettingsStatusRequest
-	146, // 275: api.user.service.v1.User.AddResponsibleGamblingConfig:input_type -> api.user.service.v1.AddResponsibleGamblingConfigRequest
-	148, // 276: api.user.service.v1.User.DeleteResponsibleGamblingConfig:input_type -> api.user.service.v1.DeleteResponsibleGamblingConfigRequest
-	150, // 277: api.user.service.v1.User.GetResponsibleGamblingConfig:input_type -> api.user.service.v1.GetResponsibleGamblingConfigRequest
-	154, // 278: api.user.service.v1.User.UserIdentityAudit:input_type -> api.user.service.v1.UserIdentityAuditRequest
-	156, // 279: api.user.service.v1.User.UserIdentityList:input_type -> api.user.service.v1.UserIdentityListRequest
-	158, // 280: api.user.service.v1.User.AddRegisterLoginBlacklist:input_type -> api.user.service.v1.AddRegisterLoginBlacklistRequest
-	160, // 281: api.user.service.v1.User.DeleteRegisterLoginBlacklist:input_type -> api.user.service.v1.DeleteRegisterLoginBlacklistRequest
-	162, // 282: api.user.service.v1.User.ListRegisterLoginBlacklist:input_type -> api.user.service.v1.ListRegisterLoginBlacklistRequest
-	167, // 283: api.user.service.v1.User.SetOperatorRegisterLimitConfig:input_type -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest
-	169, // 284: api.user.service.v1.User.GetOperatorRegisterLimitConfig:input_type -> api.user.service.v1.GetOperatorRegisterLimitConfigRequest
-	171, // 285: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:input_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest
-	173, // 286: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:input_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigRequest
-	175, // 287: api.user.service.v1.User.CloseAccount:input_type -> api.user.service.v1.CloseAccountRequest
-	177, // 288: api.user.service.v1.User.GetOperatorVipSettings:input_type -> api.user.service.v1.GetOperatorVipSettingsRequest
-	178, // 289: api.user.service.v1.User.GetUserVipLevel:input_type -> api.user.service.v1.GetUserVipLevelRequest
-	179, // 290: api.user.service.v1.User.UpdateVipRewardSlider:input_type -> api.user.service.v1.UpdateVipRewardSliderRequest
-	180, // 291: api.user.service.v1.User.GetClaimableVipRewards:input_type -> api.user.service.v1.GetClaimableVipRewardsRequest
-	181, // 292: api.user.service.v1.User.ClaimVipReward:input_type -> api.user.service.v1.ClaimVipRewardRequest
-	182, // 293: api.user.service.v1.User.ConfirmClaimVipReward:input_type -> api.user.service.v1.ConfirmClaimVipRewardRequest
-	183, // 294: api.user.service.v1.User.RequestDailyLossback:input_type -> api.user.service.v1.RequestDailyLossbackRequest
-	184, // 295: api.user.service.v1.User.GetDailyLossbackStatus:input_type -> api.user.service.v1.GetDailyLossbackStatusRequest
-	186, // 296: api.user.service.v1.User.GetUserPrivacySettings:input_type -> api.user.service.v1.GetUserPrivacySettingsRequest
-	188, // 297: api.user.service.v1.User.UpdateUserPrivacySettings:input_type -> api.user.service.v1.UpdateUserPrivacySettingsRequest
-	190, // 298: api.user.service.v1.User.GetUsersPrivacySettings:input_type -> api.user.service.v1.GetUsersPrivacySettingsRequest
-	192, // 299: api.user.service.v1.User.Generate2faSecret:input_type -> api.user.service.v1.Generate2faSecretRequest
-	194, // 300: api.user.service.v1.User.Bind2faSecret:input_type -> api.user.service.v1.Bind2faSecretRequest
-	196, // 301: api.user.service.v1.User.Verify2faCode:input_type -> api.user.service.v1.Verify2faCodeRequest
-	198, // 302: api.user.service.v1.User.Reset2fa:input_type -> api.user.service.v1.Reset2faRequest
-	200, // 303: api.user.service.v1.User.Get2faStatus:input_type -> api.user.service.v1.Get2faStatusRequest
-	202, // 304: api.user.service.v1.User.LoginWithInfoAnd2fa:input_type -> api.user.service.v1.LoginWithInfoAnd2faRequest
-	204, // 305: api.user.service.v1.User.Bind2FaWithTempToken:input_type -> api.user.service.v1.Bind2FaWithTempTokenRequest
-	205, // 306: api.user.service.v1.User.Verify2FaWithTempToken:input_type -> api.user.service.v1.Verify2FaWithTempTokenRequest
-	206, // 307: api.user.service.v1.User.GetBackofficeAccountDetail:input_type -> api.user.service.v1.GetBackofficeAccountDetailRequest
-	208, // 308: api.user.service.v1.User.UpdateBackofficeAccount:input_type -> api.user.service.v1.UpdateBackofficeAccountRequest
-	210, // 309: api.user.service.v1.User.AdminResetPassword:input_type -> api.user.service.v1.AdminResetPasswordRequest
-	213, // 310: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:input_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest
-	215, // 311: api.user.service.v1.User.DeleteOAuthProviderConfig:input_type -> api.user.service.v1.DeleteOAuthProviderConfigRequest
-	217, // 312: api.user.service.v1.User.SetOAuthProviderEnabled:input_type -> api.user.service.v1.SetOAuthProviderEnabledRequest
-	219, // 313: api.user.service.v1.User.ListOAuthProviderConfigs:input_type -> api.user.service.v1.ListOAuthProviderConfigsRequest
-	221, // 314: api.user.service.v1.User.GetOAuthProviderConfig:input_type -> api.user.service.v1.GetOAuthProviderConfigRequest
-	224, // 315: api.user.service.v1.User.GetAvailableOAuthProviders:input_type -> api.user.service.v1.GetAvailableOAuthProvidersRequest
-	226, // 316: api.user.service.v1.User.OAuthLoginV2:input_type -> api.user.service.v1.OAuthLoginV2Request
-	228, // 317: api.user.service.v1.User.BindOAuthAccount:input_type -> api.user.service.v1.BindOAuthAccountRequest
-	230, // 318: api.user.service.v1.User.UnbindOAuthAccount:input_type -> api.user.service.v1.UnbindOAuthAccountRequest
-	232, // 319: api.user.service.v1.User.ListBoundOAuthAccounts:input_type -> api.user.service.v1.ListBoundOAuthAccountsRequest
-	234, // 320: api.user.service.v1.User.InitiateOAuthLogin:input_type -> api.user.service.v1.InitiateOAuthLoginRequest
-	236, // 321: api.user.service.v1.User.InitiateOAuthBinding:input_type -> api.user.service.v1.InitiateOAuthBindingRequest
-	12,  // 322: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	12,  // 323: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	12,  // 324: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
-	12,  // 325: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	12,  // 326: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	13,  // 327: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	15,  // 328: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	17,  // 329: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	19,  // 330: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	21,  // 331: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	23,  // 332: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	25,  // 333: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
-	27,  // 334: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
-	29,  // 335: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
-	31,  // 336: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	33,  // 337: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	35,  // 338: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
-	37,  // 339: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
-	39,  // 340: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	41,  // 341: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	43,  // 342: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
-	45,  // 343: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
-	47,  // 344: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
-	51,  // 345: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	53,  // 346: api.user.service.v1.User.UpdateUserIdentity:output_type -> api.user.service.v1.UpdateUserIdentityResponse
-	55,  // 347: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
-	57,  // 348: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
-	59,  // 349: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
-	61,  // 350: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
-	63,  // 351: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
-	65,  // 352: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
-	68,  // 353: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
-	71,  // 354: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
-	73,  // 355: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
-	75,  // 356: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
-	77,  // 357: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
-	81,  // 358: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
-	79,  // 359: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
-	83,  // 360: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
-	85,  // 361: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
-	87,  // 362: api.user.service.v1.User.GetOperatorInfoByOrigin:output_type -> api.user.service.v1.GetOperatorInfoByOriginResponse
-	89,  // 363: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
-	91,  // 364: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
-	93,  // 365: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
-	95,  // 366: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
-	97,  // 367: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
-	99,  // 368: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
-	101, // 369: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
-	103, // 370: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
-	105, // 371: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
-	118, // 372: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
-	120, // 373: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
-	122, // 374: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
-	124, // 375: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
-	126, // 376: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
-	128, // 377: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
-	130, // 378: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
-	132, // 379: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	134, // 380: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
-	136, // 381: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
-	138, // 382: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
-	140, // 383: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	142, // 384: api.user.service.v1.User.SetOperatorMaxHouseEdge:output_type -> api.user.service.v1.SetOperatorMaxHouseEdgeResponse
-	144, // 385: api.user.service.v1.User.GetOperatorMaxHouseEdge:output_type -> api.user.service.v1.GetOperatorMaxHouseEdgeResponse
-	114, // 386: api.user.service.v1.User.GetUserAccountSettingsStatus:output_type -> api.user.service.v1.GetUserAccountSettingsStatusResponse
-	147, // 387: api.user.service.v1.User.AddResponsibleGamblingConfig:output_type -> api.user.service.v1.AddResponsibleGamblingConfigResponse
-	149, // 388: api.user.service.v1.User.DeleteResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	153, // 389: api.user.service.v1.User.GetResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
-	155, // 390: api.user.service.v1.User.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
-	157, // 391: api.user.service.v1.User.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
-	159, // 392: api.user.service.v1.User.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
-	161, // 393: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	163, // 394: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
-	168, // 395: api.user.service.v1.User.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
-	170, // 396: api.user.service.v1.User.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
-	172, // 397: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
-	174, // 398: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
-	176, // 399: api.user.service.v1.User.CloseAccount:output_type -> api.user.service.v1.CloseAccountResponse
-	269, // 400: api.user.service.v1.User.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
-	270, // 401: api.user.service.v1.User.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
-	271, // 402: api.user.service.v1.User.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
-	272, // 403: api.user.service.v1.User.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
-	273, // 404: api.user.service.v1.User.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
-	274, // 405: api.user.service.v1.User.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
-	275, // 406: api.user.service.v1.User.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
-	276, // 407: api.user.service.v1.User.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
-	187, // 408: api.user.service.v1.User.GetUserPrivacySettings:output_type -> api.user.service.v1.GetUserPrivacySettingsResponse
-	189, // 409: api.user.service.v1.User.UpdateUserPrivacySettings:output_type -> api.user.service.v1.UpdateUserPrivacySettingsResponse
-	191, // 410: api.user.service.v1.User.GetUsersPrivacySettings:output_type -> api.user.service.v1.GetUsersPrivacySettingsResponse
-	193, // 411: api.user.service.v1.User.Generate2faSecret:output_type -> api.user.service.v1.Generate2faSecretResponse
-	195, // 412: api.user.service.v1.User.Bind2faSecret:output_type -> api.user.service.v1.Bind2faSecretResponse
-	197, // 413: api.user.service.v1.User.Verify2faCode:output_type -> api.user.service.v1.Verify2faCodeResponse
-	199, // 414: api.user.service.v1.User.Reset2fa:output_type -> api.user.service.v1.Reset2faResponse
-	201, // 415: api.user.service.v1.User.Get2faStatus:output_type -> api.user.service.v1.Get2faStatusResponse
-	203, // 416: api.user.service.v1.User.LoginWithInfoAnd2fa:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	203, // 417: api.user.service.v1.User.Bind2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	203, // 418: api.user.service.v1.User.Verify2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	207, // 419: api.user.service.v1.User.GetBackofficeAccountDetail:output_type -> api.user.service.v1.GetBackofficeAccountDetailResponse
-	209, // 420: api.user.service.v1.User.UpdateBackofficeAccount:output_type -> api.user.service.v1.UpdateBackofficeAccountResponse
-	211, // 421: api.user.service.v1.User.AdminResetPassword:output_type -> api.user.service.v1.AdminResetPasswordResponse
-	214, // 422: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:output_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse
-	216, // 423: api.user.service.v1.User.DeleteOAuthProviderConfig:output_type -> api.user.service.v1.DeleteOAuthProviderConfigResponse
-	218, // 424: api.user.service.v1.User.SetOAuthProviderEnabled:output_type -> api.user.service.v1.SetOAuthProviderEnabledResponse
-	220, // 425: api.user.service.v1.User.ListOAuthProviderConfigs:output_type -> api.user.service.v1.ListOAuthProviderConfigsResponse
-	222, // 426: api.user.service.v1.User.GetOAuthProviderConfig:output_type -> api.user.service.v1.GetOAuthProviderConfigResponse
-	225, // 427: api.user.service.v1.User.GetAvailableOAuthProviders:output_type -> api.user.service.v1.GetAvailableOAuthProvidersResponse
-	12,  // 428: api.user.service.v1.User.OAuthLoginV2:output_type -> api.user.service.v1.AuthResponse
-	229, // 429: api.user.service.v1.User.BindOAuthAccount:output_type -> api.user.service.v1.BindOAuthAccountResponse
-	231, // 430: api.user.service.v1.User.UnbindOAuthAccount:output_type -> api.user.service.v1.UnbindOAuthAccountResponse
-	233, // 431: api.user.service.v1.User.ListBoundOAuthAccounts:output_type -> api.user.service.v1.ListBoundOAuthAccountsResponse
-	235, // 432: api.user.service.v1.User.InitiateOAuthLogin:output_type -> api.user.service.v1.InitiateOAuthLoginResponse
-	237, // 433: api.user.service.v1.User.InitiateOAuthBinding:output_type -> api.user.service.v1.InitiateOAuthBindingResponse
-	322, // [322:434] is the sub-list for method output_type
-	210, // [210:322] is the sub-list for method input_type
-	210, // [210:210] is the sub-list for extension type_name
-	210, // [210:210] is the sub-list for extension extendee
-	0,   // [0:210] is the sub-list for field type_name
+	266, // 31: api.user.service.v1.ListUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	238, // 32: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	266, // 33: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 34: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 35: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
+	239, // 36: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	266, // 37: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
+	241, // 38: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	242, // 39: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
+	243, // 40: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
+	265, // 41: api.user.service.v1.GetUserProfileResponse.dob:type_name -> google.protobuf.Timestamp
+	49,  // 42: api.user.service.v1.GetUserProfileResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
+	244, // 43: api.user.service.v1.GetUserProfileResponse.emailChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	244, // 44: api.user.service.v1.GetUserProfileResponse.phoneChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	266, // 45: api.user.service.v1.GetUserProfileResponse.user_operator_context:type_name -> api.common.OperatorContext
+	67,  // 46: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
+	266, // 47: api.user.service.v1.CreateRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 48: api.user.service.v1.ListRolesRequest.operator_context:type_name -> api.common.OperatorContext
+	67,  // 49: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
+	70,  // 50: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
+	67,  // 51: api.user.service.v1.UpdateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
+	266, // 52: api.user.service.v1.UpdateRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	70,  // 53: api.user.service.v1.GetRoleResponse.role:type_name -> api.user.service.v1.Role
+	266, // 54: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
+	267, // 55: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	245, // 56: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	246, // 57: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	247, // 58: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	266, // 59: api.user.service.v1.DeleteRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 60: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	266, // 61: api.user.service.v1.GetOperatorInfoByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	116, // 62: api.user.service.v1.GetOperatorInfoByOriginResponse.operatorDetail:type_name -> api.user.service.v1.OperatorDetails
+	116, // 63: api.user.service.v1.GetOperatorInfoByOriginResponse.systemOperatorDetail:type_name -> api.user.service.v1.OperatorDetails
+	248, // 64: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
+	249, // 65: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	266, // 66: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	250, // 67: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
+	266, // 68: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
+	106, // 69: api.user.service.v1.OperatorAccountSettings.password_settings:type_name -> api.user.service.v1.OperatorAccountPasswordSettings
+	107, // 70: api.user.service.v1.OperatorAccountSettings.security_settings:type_name -> api.user.service.v1.OperatorAccountSecuritySettings
+	108, // 71: api.user.service.v1.OperatorAccountSettings.game_settings:type_name -> api.user.service.v1.OperatorAccountGameSettings
+	109, // 72: api.user.service.v1.OperatorAccountSettings.payment_settings:type_name -> api.user.service.v1.OperatorAccountPaymentSettings
+	266, // 73: api.user.service.v1.GetUserAccountSettingsStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	112, // 74: api.user.service.v1.GetUserAccountSettingsStatusResponse.game_settings_status:type_name -> api.user.service.v1.UserAccountGameSettingsStatus
+	113, // 75: api.user.service.v1.GetUserAccountSettingsStatusResponse.payment_settings_status:type_name -> api.user.service.v1.UserAccountPaymentSettingsStatus
+	110, // 76: api.user.service.v1.OperatorConfig.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
+	115, // 77: api.user.service.v1.OperatorDetails.config:type_name -> api.user.service.v1.OperatorConfig
+	116, // 78: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
+	267, // 79: api.user.service.v1.ListOperatorsByParentOperatorIdRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	116, // 80: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	266, // 81: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	251, // 82: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	266, // 83: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	252, // 84: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	266, // 85: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	253, // 86: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	266, // 87: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	265, // 88: api.user.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
+	265, // 89: api.user.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
+	266, // 90: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 91: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	4,   // 92: api.user.service.v1.ListAllUsersResponse.users:type_name -> api.user.service.v1.UserInfo
+	266, // 93: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	116, // 94: api.user.service.v1.ListOperatorsByAdminEmailResponse.retailer_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	116, // 95: api.user.service.v1.ListOperatorsByAdminEmailResponse.company_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	116, // 96: api.user.service.v1.ListOperatorsByAdminEmailResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	116, // 97: api.user.service.v1.ListOperatorDetailsResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
+	116, // 98: api.user.service.v1.GetOperatorDetailsByUserIdResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
+	266, // 99: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 100: api.user.service.v1.GetOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	110, // 101: api.user.service.v1.GetOperatorAccountSettingsResponse.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
+	266, // 102: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 103: api.user.service.v1.UpdateOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	110, // 104: api.user.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
+	266, // 105: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 106: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
+	266, // 107: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 108: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
+	254, // 109: api.user.service.v1.ResponsibleGamblingConfig.self_exclusion:type_name -> api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
+	255, // 110: api.user.service.v1.ResponsibleGamblingConfig.break_in_play:type_name -> api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
+	256, // 111: api.user.service.v1.ResponsibleGamblingConfig.time_limits:type_name -> api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
+	145, // 112: api.user.service.v1.AddResponsibleGamblingConfigRequest.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
+	266, // 113: api.user.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 114: api.user.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	265, // 115: api.user.service.v1.ResponsibleGamblingStatus.time_limits_next_inactive_time:type_name -> google.protobuf.Timestamp
+	265, // 116: api.user.service.v1.ResponsibleGamblingDeleteSchedule.self_exclusion_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	265, // 117: api.user.service.v1.ResponsibleGamblingDeleteSchedule.break_in_play_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	265, // 118: api.user.service.v1.ResponsibleGamblingDeleteSchedule.time_limits_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	145, // 119: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
+	151, // 120: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_status:type_name -> api.user.service.v1.ResponsibleGamblingStatus
+	152, // 121: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_delete_schedule:type_name -> api.user.service.v1.ResponsibleGamblingDeleteSchedule
+	266, // 122: api.user.service.v1.UserIdentityAuditRequest.operator_context:type_name -> api.common.OperatorContext
+	265, // 123: api.user.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
+	265, // 124: api.user.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
+	267, // 125: api.user.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	266, // 126: api.user.service.v1.UserIdentityListRequest.operator_context:type_name -> api.common.OperatorContext
+	49,  // 127: api.user.service.v1.UserIdentityListResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
+	266, // 128: api.user.service.v1.AddRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 129: api.user.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	266, // 130: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 131: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	266, // 132: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 133: api.user.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	257, // 134: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
+	165, // 135: api.user.service.v1.RegistrationFieldPolicy.registration:type_name -> api.user.service.v1.RegistrationFieldSet
+	165, // 136: api.user.service.v1.RegistrationFieldPolicy.login:type_name -> api.user.service.v1.RegistrationFieldSet
+	266, // 137: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 138: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	258, // 139: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	266, // 140: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 141: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	259, // 142: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
+	266, // 143: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 144: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	260, // 145: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
+	266, // 146: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 147: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	261, // 148: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
+	268, // 149: api.user.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	268, // 150: api.user.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	185, // 151: api.user.service.v1.GetUserPrivacySettingsResponse.settings:type_name -> api.user.service.v1.UserPrivacySettings
+	262, // 152: api.user.service.v1.GetUsersPrivacySettingsResponse.settings:type_name -> api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
+	1,   // 153: api.user.service.v1.LoginWithInfoAnd2faRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
+	266, // 154: api.user.service.v1.LoginWithInfoAnd2faRequest.operator_context:type_name -> api.common.OperatorContext
+	7,   // 155: api.user.service.v1.LoginWithInfoAnd2faRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
+	4,   // 156: api.user.service.v1.LoginWithInfoAnd2faResponse.user_info:type_name -> api.user.service.v1.UserInfo
+	266, // 157: api.user.service.v1.GetBackofficeAccountDetailRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 158: api.user.service.v1.AdminResetPasswordRequest.operator_context:type_name -> api.common.OperatorContext
+	2,   // 159: api.user.service.v1.OAuthProviderConfig.provider:type_name -> api.user.service.v1.OAuthProvider
+	263, // 160: api.user.service.v1.OAuthProviderConfig.config:type_name -> api.user.service.v1.OAuthProviderConfig.ConfigEntry
+	266, // 161: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 162: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	2,   // 163: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	264, // 164: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	266, // 165: api.user.service.v1.DeleteOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 166: api.user.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	266, // 167: api.user.service.v1.SetOAuthProviderEnabledRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 168: api.user.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
+	266, // 169: api.user.service.v1.ListOAuthProviderConfigsRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 170: api.user.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	2,   // 171: api.user.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	212, // 172: api.user.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
+	266, // 173: api.user.service.v1.GetOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	266, // 174: api.user.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	212, // 175: api.user.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
+	2,   // 176: api.user.service.v1.AvailableOAuthProvider.provider:type_name -> api.user.service.v1.OAuthProvider
+	223, // 177: api.user.service.v1.GetAvailableOAuthProvidersResponse.providers:type_name -> api.user.service.v1.AvailableOAuthProvider
+	2,   // 178: api.user.service.v1.OAuthLoginV2Request.provider:type_name -> api.user.service.v1.OAuthProvider
+	266, // 179: api.user.service.v1.OAuthLoginV2Request.operator_context:type_name -> api.common.OperatorContext
+	7,   // 180: api.user.service.v1.OAuthLoginV2Request.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
+	2,   // 181: api.user.service.v1.OAuthAccountInfo.provider:type_name -> api.user.service.v1.OAuthProvider
+	2,   // 182: api.user.service.v1.BindOAuthAccountRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	227, // 183: api.user.service.v1.BindOAuthAccountResponse.account_info:type_name -> api.user.service.v1.OAuthAccountInfo
+	2,   // 184: api.user.service.v1.UnbindOAuthAccountRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	227, // 185: api.user.service.v1.ListBoundOAuthAccountsResponse.accounts:type_name -> api.user.service.v1.OAuthAccountInfo
+	2,   // 186: api.user.service.v1.InitiateOAuthLoginRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	2,   // 187: api.user.service.v1.InitiateOAuthBindingRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	265, // 188: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	265, // 189: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	265, // 190: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
+	70,  // 191: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
+	265, // 192: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	240, // 193: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	265, // 194: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	240, // 195: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	265, // 196: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	265, // 197: api.user.service.v1.GetUserProfileResponse.ChangeRecord.changed_at:type_name -> google.protobuf.Timestamp
+	266, // 198: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	266, // 199: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	266, // 200: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	266, // 201: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	265, // 202: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.start_time:type_name -> google.protobuf.Timestamp
+	265, // 203: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.end_time:type_name -> google.protobuf.Timestamp
+	265, // 204: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.start_time:type_name -> google.protobuf.Timestamp
+	265, // 205: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.end_time:type_name -> google.protobuf.Timestamp
+	265, // 206: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist.created_at:type_name -> google.protobuf.Timestamp
+	164, // 207: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
+	164, // 208: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
+	166, // 209: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
+	166, // 210: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
+	185, // 211: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry.value:type_name -> api.user.service.v1.UserPrivacySettings
+	5,   // 212: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
+	6,   // 213: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
+	8,   // 214: api.user.service.v1.User.LoginWithInfo:input_type -> api.user.service.v1.LoginWithInfoRequest
+	9,   // 215: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
+	10,  // 216: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
+	11,  // 217: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
+	14,  // 218: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
+	16,  // 219: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
+	18,  // 220: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	20,  // 221: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	22,  // 222: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
+	24,  // 223: api.user.service.v1.User.SetOperatorTagsConfig:input_type -> api.user.service.v1.SetOperatorTagsConfigRequest
+	26,  // 224: api.user.service.v1.User.SetOperatorTags:input_type -> api.user.service.v1.SetOperatorTagsRequest
+	28,  // 225: api.user.service.v1.User.GetOperatorTagsConfig:input_type -> api.user.service.v1.GetOperatorTagsConfigRequest
+	30,  // 226: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
+	32,  // 227: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
+	34,  // 228: api.user.service.v1.User.GetUserTagsById:input_type -> api.user.service.v1.GetUserTagsByIdRequest
+	36,  // 229: api.user.service.v1.User.SetUserTagsById:input_type -> api.user.service.v1.SetUserTagsByIdRequest
+	38,  // 230: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
+	40,  // 231: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
+	42,  // 232: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
+	44,  // 233: api.user.service.v1.User.SendPasswordResetCode:input_type -> api.user.service.v1.SendPasswordResetCodeRequest
+	46,  // 234: api.user.service.v1.User.ResetPasswordWithCode:input_type -> api.user.service.v1.ResetPasswordWithCodeRequest
+	50,  // 235: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
+	52,  // 236: api.user.service.v1.User.UpdateUserIdentity:input_type -> api.user.service.v1.UpdateUserIdentityRequest
+	54,  // 237: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
+	56,  // 238: api.user.service.v1.User.CreateUser:input_type -> api.user.service.v1.CreateUserRequest
+	58,  // 239: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
+	60,  // 240: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
+	62,  // 241: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
+	64,  // 242: api.user.service.v1.User.GetUserProfile:input_type -> api.user.service.v1.GetUserProfileRequest
+	66,  // 243: api.user.service.v1.User.CreateRole:input_type -> api.user.service.v1.CreateRoleRequest
+	69,  // 244: api.user.service.v1.User.ListRoles:input_type -> api.user.service.v1.ListRolesRequest
+	72,  // 245: api.user.service.v1.User.CreateOperator:input_type -> api.user.service.v1.CreateOperatorRequest
+	74,  // 246: api.user.service.v1.User.UpdateRole:input_type -> api.user.service.v1.UpdateRoleRequest
+	76,  // 247: api.user.service.v1.User.GetRole:input_type -> api.user.service.v1.GetRoleRequest
+	80,  // 248: api.user.service.v1.User.DeleteRole:input_type -> api.user.service.v1.DeleteRoleRequest
+	78,  // 249: api.user.service.v1.User.GetOverviewDashboardFromUser:input_type -> api.user.service.v1.GetOverviewDashboardFromUserRequest
+	82,  // 250: api.user.service.v1.User.GetOperatorIdByOrigin:input_type -> api.user.service.v1.GetOperatorIdByOriginRequest
+	84,  // 251: api.user.service.v1.User.GetOperatorIdsByOrigin:input_type -> api.user.service.v1.GetOperatorIdsByOriginRequest
+	86,  // 252: api.user.service.v1.User.GetOperatorInfoByOrigin:input_type -> api.user.service.v1.GetOperatorInfoByOriginRequest
+	88,  // 253: api.user.service.v1.User.GetOperator:input_type -> api.user.service.v1.GetOperatorRequest
+	90,  // 254: api.user.service.v1.User.GetOperatorsByIds:input_type -> api.user.service.v1.GetOperatorsByIdsRequest
+	92,  // 255: api.user.service.v1.User.ListAllOperators:input_type -> api.user.service.v1.ListAllOperatorsRequest
+	94,  // 256: api.user.service.v1.User.GetParentOperatorIds:input_type -> api.user.service.v1.GetParentOperatorIdsRequest
+	96,  // 257: api.user.service.v1.User.GetChildOperatorIds:input_type -> api.user.service.v1.GetChildOperatorIdsRequest
+	98,  // 258: api.user.service.v1.User.CheckEmailExists:input_type -> api.user.service.v1.CheckEmailExistsRequest
+	100, // 259: api.user.service.v1.User.CheckSubdomainExists:input_type -> api.user.service.v1.CheckSubdomainExistsRequest
+	102, // 260: api.user.service.v1.User.CheckOperatorKeyExists:input_type -> api.user.service.v1.CheckOperatorKeyExistsRequest
+	104, // 261: api.user.service.v1.User.CreateBusiness:input_type -> api.user.service.v1.CreateBusinessRequest
+	117, // 262: api.user.service.v1.User.GetOperatorDetails:input_type -> api.user.service.v1.GetOperatorDetailsRequest
+	119, // 263: api.user.service.v1.User.ListOperatorsByParentOperatorId:input_type -> api.user.service.v1.ListOperatorsByParentOperatorIdRequest
+	121, // 264: api.user.service.v1.User.ListRetailerOperators:input_type -> api.user.service.v1.ListRetailerOperatorsRequest
+	123, // 265: api.user.service.v1.User.ListCompanyOperators:input_type -> api.user.service.v1.ListCompanyOperatorsRequest
+	125, // 266: api.user.service.v1.User.ListBottomOperators:input_type -> api.user.service.v1.ListBottomOperatorsRequest
+	127, // 267: api.user.service.v1.User.UpdateOperatorStatus:input_type -> api.user.service.v1.UpdateOperatorStatusRequest
+	129, // 268: api.user.service.v1.User.ListAllUsers:input_type -> api.user.service.v1.ListAllUsersRequest
+	131, // 269: api.user.service.v1.User.ListOperatorsByAdminEmail:input_type -> api.user.service.v1.ListOperatorsByAdminEmailRequest
+	133, // 270: api.user.service.v1.User.ListOperatorDetails:input_type -> api.user.service.v1.ListOperatorDetailsRequest
+	135, // 271: api.user.service.v1.User.GetOperatorDetailsByUserId:input_type -> api.user.service.v1.GetOperatorDetailsByUserIdRequest
+	137, // 272: api.user.service.v1.User.GetOperatorAccountSettings:input_type -> api.user.service.v1.GetOperatorAccountSettingsRequest
+	139, // 273: api.user.service.v1.User.UpdateOperatorAccountSettings:input_type -> api.user.service.v1.UpdateOperatorAccountSettingsRequest
+	141, // 274: api.user.service.v1.User.SetOperatorMaxHouseEdge:input_type -> api.user.service.v1.SetOperatorMaxHouseEdgeRequest
+	143, // 275: api.user.service.v1.User.GetOperatorMaxHouseEdge:input_type -> api.user.service.v1.GetOperatorMaxHouseEdgeRequest
+	111, // 276: api.user.service.v1.User.GetUserAccountSettingsStatus:input_type -> api.user.service.v1.GetUserAccountSettingsStatusRequest
+	146, // 277: api.user.service.v1.User.AddResponsibleGamblingConfig:input_type -> api.user.service.v1.AddResponsibleGamblingConfigRequest
+	148, // 278: api.user.service.v1.User.DeleteResponsibleGamblingConfig:input_type -> api.user.service.v1.DeleteResponsibleGamblingConfigRequest
+	150, // 279: api.user.service.v1.User.GetResponsibleGamblingConfig:input_type -> api.user.service.v1.GetResponsibleGamblingConfigRequest
+	154, // 280: api.user.service.v1.User.UserIdentityAudit:input_type -> api.user.service.v1.UserIdentityAuditRequest
+	156, // 281: api.user.service.v1.User.UserIdentityList:input_type -> api.user.service.v1.UserIdentityListRequest
+	158, // 282: api.user.service.v1.User.AddRegisterLoginBlacklist:input_type -> api.user.service.v1.AddRegisterLoginBlacklistRequest
+	160, // 283: api.user.service.v1.User.DeleteRegisterLoginBlacklist:input_type -> api.user.service.v1.DeleteRegisterLoginBlacklistRequest
+	162, // 284: api.user.service.v1.User.ListRegisterLoginBlacklist:input_type -> api.user.service.v1.ListRegisterLoginBlacklistRequest
+	167, // 285: api.user.service.v1.User.SetOperatorRegisterLimitConfig:input_type -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest
+	169, // 286: api.user.service.v1.User.GetOperatorRegisterLimitConfig:input_type -> api.user.service.v1.GetOperatorRegisterLimitConfigRequest
+	171, // 287: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:input_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest
+	173, // 288: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:input_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigRequest
+	175, // 289: api.user.service.v1.User.CloseAccount:input_type -> api.user.service.v1.CloseAccountRequest
+	177, // 290: api.user.service.v1.User.GetOperatorVipSettings:input_type -> api.user.service.v1.GetOperatorVipSettingsRequest
+	178, // 291: api.user.service.v1.User.GetUserVipLevel:input_type -> api.user.service.v1.GetUserVipLevelRequest
+	179, // 292: api.user.service.v1.User.UpdateVipRewardSlider:input_type -> api.user.service.v1.UpdateVipRewardSliderRequest
+	180, // 293: api.user.service.v1.User.GetClaimableVipRewards:input_type -> api.user.service.v1.GetClaimableVipRewardsRequest
+	181, // 294: api.user.service.v1.User.ClaimVipReward:input_type -> api.user.service.v1.ClaimVipRewardRequest
+	182, // 295: api.user.service.v1.User.ConfirmClaimVipReward:input_type -> api.user.service.v1.ConfirmClaimVipRewardRequest
+	183, // 296: api.user.service.v1.User.RequestDailyLossback:input_type -> api.user.service.v1.RequestDailyLossbackRequest
+	184, // 297: api.user.service.v1.User.GetDailyLossbackStatus:input_type -> api.user.service.v1.GetDailyLossbackStatusRequest
+	186, // 298: api.user.service.v1.User.GetUserPrivacySettings:input_type -> api.user.service.v1.GetUserPrivacySettingsRequest
+	188, // 299: api.user.service.v1.User.UpdateUserPrivacySettings:input_type -> api.user.service.v1.UpdateUserPrivacySettingsRequest
+	190, // 300: api.user.service.v1.User.GetUsersPrivacySettings:input_type -> api.user.service.v1.GetUsersPrivacySettingsRequest
+	192, // 301: api.user.service.v1.User.Generate2faSecret:input_type -> api.user.service.v1.Generate2faSecretRequest
+	194, // 302: api.user.service.v1.User.Bind2faSecret:input_type -> api.user.service.v1.Bind2faSecretRequest
+	196, // 303: api.user.service.v1.User.Verify2faCode:input_type -> api.user.service.v1.Verify2faCodeRequest
+	198, // 304: api.user.service.v1.User.Reset2fa:input_type -> api.user.service.v1.Reset2faRequest
+	200, // 305: api.user.service.v1.User.Get2faStatus:input_type -> api.user.service.v1.Get2faStatusRequest
+	202, // 306: api.user.service.v1.User.LoginWithInfoAnd2fa:input_type -> api.user.service.v1.LoginWithInfoAnd2faRequest
+	204, // 307: api.user.service.v1.User.Bind2FaWithTempToken:input_type -> api.user.service.v1.Bind2FaWithTempTokenRequest
+	205, // 308: api.user.service.v1.User.Verify2FaWithTempToken:input_type -> api.user.service.v1.Verify2FaWithTempTokenRequest
+	206, // 309: api.user.service.v1.User.GetBackofficeAccountDetail:input_type -> api.user.service.v1.GetBackofficeAccountDetailRequest
+	208, // 310: api.user.service.v1.User.UpdateBackofficeAccount:input_type -> api.user.service.v1.UpdateBackofficeAccountRequest
+	210, // 311: api.user.service.v1.User.AdminResetPassword:input_type -> api.user.service.v1.AdminResetPasswordRequest
+	213, // 312: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:input_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest
+	215, // 313: api.user.service.v1.User.DeleteOAuthProviderConfig:input_type -> api.user.service.v1.DeleteOAuthProviderConfigRequest
+	217, // 314: api.user.service.v1.User.SetOAuthProviderEnabled:input_type -> api.user.service.v1.SetOAuthProviderEnabledRequest
+	219, // 315: api.user.service.v1.User.ListOAuthProviderConfigs:input_type -> api.user.service.v1.ListOAuthProviderConfigsRequest
+	221, // 316: api.user.service.v1.User.GetOAuthProviderConfig:input_type -> api.user.service.v1.GetOAuthProviderConfigRequest
+	224, // 317: api.user.service.v1.User.GetAvailableOAuthProviders:input_type -> api.user.service.v1.GetAvailableOAuthProvidersRequest
+	226, // 318: api.user.service.v1.User.OAuthLoginV2:input_type -> api.user.service.v1.OAuthLoginV2Request
+	228, // 319: api.user.service.v1.User.BindOAuthAccount:input_type -> api.user.service.v1.BindOAuthAccountRequest
+	230, // 320: api.user.service.v1.User.UnbindOAuthAccount:input_type -> api.user.service.v1.UnbindOAuthAccountRequest
+	232, // 321: api.user.service.v1.User.ListBoundOAuthAccounts:input_type -> api.user.service.v1.ListBoundOAuthAccountsRequest
+	234, // 322: api.user.service.v1.User.InitiateOAuthLogin:input_type -> api.user.service.v1.InitiateOAuthLoginRequest
+	236, // 323: api.user.service.v1.User.InitiateOAuthBinding:input_type -> api.user.service.v1.InitiateOAuthBindingRequest
+	12,  // 324: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	12,  // 325: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	12,  // 326: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
+	12,  // 327: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	12,  // 328: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	13,  // 329: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	15,  // 330: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	17,  // 331: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	19,  // 332: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	21,  // 333: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	23,  // 334: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	25,  // 335: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
+	27,  // 336: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
+	29,  // 337: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
+	31,  // 338: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	33,  // 339: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	35,  // 340: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
+	37,  // 341: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
+	39,  // 342: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	41,  // 343: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	43,  // 344: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
+	45,  // 345: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
+	47,  // 346: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
+	51,  // 347: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	53,  // 348: api.user.service.v1.User.UpdateUserIdentity:output_type -> api.user.service.v1.UpdateUserIdentityResponse
+	55,  // 349: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	57,  // 350: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
+	59,  // 351: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
+	61,  // 352: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
+	63,  // 353: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
+	65,  // 354: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	68,  // 355: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
+	71,  // 356: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
+	73,  // 357: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
+	75,  // 358: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
+	77,  // 359: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
+	81,  // 360: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
+	79,  // 361: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
+	83,  // 362: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
+	85,  // 363: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
+	87,  // 364: api.user.service.v1.User.GetOperatorInfoByOrigin:output_type -> api.user.service.v1.GetOperatorInfoByOriginResponse
+	89,  // 365: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
+	91,  // 366: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
+	93,  // 367: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
+	95,  // 368: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
+	97,  // 369: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
+	99,  // 370: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
+	101, // 371: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
+	103, // 372: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
+	105, // 373: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
+	118, // 374: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
+	120, // 375: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
+	122, // 376: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
+	124, // 377: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
+	126, // 378: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
+	128, // 379: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
+	130, // 380: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
+	132, // 381: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	134, // 382: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
+	136, // 383: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
+	138, // 384: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
+	140, // 385: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	142, // 386: api.user.service.v1.User.SetOperatorMaxHouseEdge:output_type -> api.user.service.v1.SetOperatorMaxHouseEdgeResponse
+	144, // 387: api.user.service.v1.User.GetOperatorMaxHouseEdge:output_type -> api.user.service.v1.GetOperatorMaxHouseEdgeResponse
+	114, // 388: api.user.service.v1.User.GetUserAccountSettingsStatus:output_type -> api.user.service.v1.GetUserAccountSettingsStatusResponse
+	147, // 389: api.user.service.v1.User.AddResponsibleGamblingConfig:output_type -> api.user.service.v1.AddResponsibleGamblingConfigResponse
+	149, // 390: api.user.service.v1.User.DeleteResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	153, // 391: api.user.service.v1.User.GetResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
+	155, // 392: api.user.service.v1.User.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
+	157, // 393: api.user.service.v1.User.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
+	159, // 394: api.user.service.v1.User.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
+	161, // 395: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	163, // 396: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
+	168, // 397: api.user.service.v1.User.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	170, // 398: api.user.service.v1.User.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
+	172, // 399: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
+	174, // 400: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
+	176, // 401: api.user.service.v1.User.CloseAccount:output_type -> api.user.service.v1.CloseAccountResponse
+	269, // 402: api.user.service.v1.User.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
+	270, // 403: api.user.service.v1.User.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
+	271, // 404: api.user.service.v1.User.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
+	272, // 405: api.user.service.v1.User.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
+	273, // 406: api.user.service.v1.User.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
+	274, // 407: api.user.service.v1.User.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
+	275, // 408: api.user.service.v1.User.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
+	276, // 409: api.user.service.v1.User.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
+	187, // 410: api.user.service.v1.User.GetUserPrivacySettings:output_type -> api.user.service.v1.GetUserPrivacySettingsResponse
+	189, // 411: api.user.service.v1.User.UpdateUserPrivacySettings:output_type -> api.user.service.v1.UpdateUserPrivacySettingsResponse
+	191, // 412: api.user.service.v1.User.GetUsersPrivacySettings:output_type -> api.user.service.v1.GetUsersPrivacySettingsResponse
+	193, // 413: api.user.service.v1.User.Generate2faSecret:output_type -> api.user.service.v1.Generate2faSecretResponse
+	195, // 414: api.user.service.v1.User.Bind2faSecret:output_type -> api.user.service.v1.Bind2faSecretResponse
+	197, // 415: api.user.service.v1.User.Verify2faCode:output_type -> api.user.service.v1.Verify2faCodeResponse
+	199, // 416: api.user.service.v1.User.Reset2fa:output_type -> api.user.service.v1.Reset2faResponse
+	201, // 417: api.user.service.v1.User.Get2faStatus:output_type -> api.user.service.v1.Get2faStatusResponse
+	203, // 418: api.user.service.v1.User.LoginWithInfoAnd2fa:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	203, // 419: api.user.service.v1.User.Bind2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	203, // 420: api.user.service.v1.User.Verify2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	207, // 421: api.user.service.v1.User.GetBackofficeAccountDetail:output_type -> api.user.service.v1.GetBackofficeAccountDetailResponse
+	209, // 422: api.user.service.v1.User.UpdateBackofficeAccount:output_type -> api.user.service.v1.UpdateBackofficeAccountResponse
+	211, // 423: api.user.service.v1.User.AdminResetPassword:output_type -> api.user.service.v1.AdminResetPasswordResponse
+	214, // 424: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:output_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse
+	216, // 425: api.user.service.v1.User.DeleteOAuthProviderConfig:output_type -> api.user.service.v1.DeleteOAuthProviderConfigResponse
+	218, // 426: api.user.service.v1.User.SetOAuthProviderEnabled:output_type -> api.user.service.v1.SetOAuthProviderEnabledResponse
+	220, // 427: api.user.service.v1.User.ListOAuthProviderConfigs:output_type -> api.user.service.v1.ListOAuthProviderConfigsResponse
+	222, // 428: api.user.service.v1.User.GetOAuthProviderConfig:output_type -> api.user.service.v1.GetOAuthProviderConfigResponse
+	225, // 429: api.user.service.v1.User.GetAvailableOAuthProviders:output_type -> api.user.service.v1.GetAvailableOAuthProvidersResponse
+	12,  // 430: api.user.service.v1.User.OAuthLoginV2:output_type -> api.user.service.v1.AuthResponse
+	229, // 431: api.user.service.v1.User.BindOAuthAccount:output_type -> api.user.service.v1.BindOAuthAccountResponse
+	231, // 432: api.user.service.v1.User.UnbindOAuthAccount:output_type -> api.user.service.v1.UnbindOAuthAccountResponse
+	233, // 433: api.user.service.v1.User.ListBoundOAuthAccounts:output_type -> api.user.service.v1.ListBoundOAuthAccountsResponse
+	235, // 434: api.user.service.v1.User.InitiateOAuthLogin:output_type -> api.user.service.v1.InitiateOAuthLoginResponse
+	237, // 435: api.user.service.v1.User.InitiateOAuthBinding:output_type -> api.user.service.v1.InitiateOAuthBindingResponse
+	324, // [324:436] is the sub-list for method output_type
+	212, // [212:324] is the sub-list for method input_type
+	212, // [212:212] is the sub-list for extension type_name
+	212, // [212:212] is the sub-list for extension extendee
+	0,   // [0:212] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_user_proto_init() }
