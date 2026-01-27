@@ -1017,6 +1017,9 @@ message ListUsersRequest {
 	optional string registration_ip = 25;
 	// Filter by login IP (users who have logged in with this IP)
 	optional string login_ip = 26;
+	// Target operator context for registration_ip and login_ip filtering.
+	// When provided with registration_ip or login_ip, frontend will filter user_events within this operator context.
+	api.common.OperatorContext target_operator_context = 27;
 }
 
 message ListUsersResponse {
@@ -1202,6 +1205,8 @@ message GetUserProfileResponse {
 	int64 referrer_user_id = 32;
 	// Referrer's username for display
 	string referrer_username = 33;
+	// The user's operator context information
+	api.common.OperatorContext user_operator_context = 34;
 }
 
 message CreateRoleRequest {
