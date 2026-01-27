@@ -1,0 +1,323 @@
+syntax = "proto3";
+
+package api.campaign.service.v1;
+
+import "common/common.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/campaign/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.campaign.service.v1";
+
+// CampaignService provides campaign workflow management and execution functionality.
+service CampaignService {
+  // Campaign CRUD operations
+  rpc CreateCampaign(CreateCampaignRequest) returns (CreateCampaignResponse);
+  rpc UpdateCampaign(UpdateCampaignRequest) returns (UpdateCampaignResponse);
+  rpc GetCampaign(GetCampaignRequest) returns (GetCampaignResponse);
+  rpc ListCampaigns(ListCampaignsRequest) returns (ListCampaignsResponse);
+  rpc DeleteCampaign(DeleteCampaignRequest) returns (DeleteCampaignResponse);
+
+  // Workflow management
+  rpc SetWorkflow(SetWorkflowRequest) returns (SetWorkflowResponse);
+  rpc GetWorkflow(GetWorkflowRequest) returns (GetWorkflowResponse);
+  rpc ValidateWorkflow(ValidateWorkflowRequest) returns (ValidateWorkflowResponse);
+
+  // Campaign control
+  rpc ActivateCampaign(ActivateCampaignRequest) returns (ActivateCampaignResponse);
+  rpc PauseCampaign(PauseCampaignRequest) returns (PauseCampaignResponse);
+
+  // Manual trigger
+  rpc TriggerCampaign(TriggerCampaignRequest) returns (TriggerCampaignResponse);
+
+  // Execution tracking
+  rpc GetExecution(GetExecutionRequest) returns (GetExecutionResponse);
+  rpc ListExecutions(ListExecutionsRequest) returns (ListExecutionsResponse);
+  rpc GetExecutionSteps(GetExecutionStepsRequest) returns (GetExecutionStepsResponse);
+}
+
+// Campaign status
+enum CampaignStatus {
+  CAMPAIGN_STATUS_UNSPECIFIED = 0;
+  CAMPAIGN_STATUS_DRAFT = 1;
+  CAMPAIGN_STATUS_ACTIVE = 2;
+  CAMPAIGN_STATUS_PAUSED = 3;
+  CAMPAIGN_STATUS_COMPLETED = 4;
+  CAMPAIGN_STATUS_ARCHIVED = 5;
+}
+
+// Execution status
+enum ExecutionStatus {
+  EXECUTION_STATUS_UNSPECIFIED = 0;
+  EXECUTION_STATUS_PENDING = 1;
+  EXECUTION_STATUS_RUNNING = 2;
+  EXECUTION_STATUS_COMPLETED = 3;
+  EXECUTION_STATUS_FAILED = 4;
+  EXECUTION_STATUS_CANCELLED = 5;
+}
+
+// Owner level in hierarchy (same as CRM)
+enum OwnerLevel {
+  OWNER_LEVEL_UNSPECIFIED = 0;
+  OWNER_LEVEL_SYSTEM = 1;
+  OWNER_LEVEL_RETAILER = 2;
+  OWNER_LEVEL_COMPANY = 3;
+  OWNER_LEVEL_OPERATOR = 4;
+}
+
+// Campaign definition
+message Campaign {
+  int64 id = 1;
+  optional string campaign_key = 2;
+  string name = 3;
+  string description = 4;
+  CampaignStatus status = 5;
+
+  // Ownership hierarchy
+  int64 owner_operator_id = 6;
+  int64 owner_company_operator_id = 7;
+  int64 owner_retailer_operator_id = 8;
+  int64 owner_system_operator_id = 9;
+  OwnerLevel owner_level = 10;
+
+  // Schedule
+  optional google.protobuf.Timestamp start_at = 11;
+  optional google.protobuf.Timestamp end_at = 12;
+
+  // Metadata as JSON
+  google.protobuf.Struct metadata = 13;
+
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+
+  // Workflow info (populated when fetched with workflow)
+  optional CampaignWorkflow workflow = 16;
+}
+
+// Campaign workflow definition
+message CampaignWorkflow {
+  int64 id = 1;
+  int64 campaign_id = 2;
+  int32 version = 3;
+  string workflow_yaml = 4;
+  string workflow_hash = 5;
+  bool is_valid = 6;
+  repeated string validation_errors = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+// Campaign execution record
+message CampaignExecution {
+  int64 id = 1;
+  int64 campaign_id = 2;
+  int64 workflow_id = 3;
+  int32 workflow_version = 4;
+  int64 user_id = 5;
+
+  // Operator context
+  int64 operator_id = 6;
+  int64 company_operator_id = 7;
+  int64 retailer_operator_id = 8;
+  int64 system_operator_id = 9;
+
+  // Execution details
+  string trigger_type = 10;
+  google.protobuf.Struct trigger_data = 11;
+  ExecutionStatus status = 12;
+  string current_node_id = 13;
+  google.protobuf.Struct execution_state = 14;
+  string idempotency_key = 15;
+
+  optional google.protobuf.Timestamp started_at = 16;
+  optional google.protobuf.Timestamp completed_at = 17;
+  string error_message = 18;
+  int32 retry_count = 19;
+  int32 max_retries = 20;
+
+  google.protobuf.Timestamp created_at = 21;
+  google.protobuf.Timestamp updated_at = 22;
+}
+
+// Execution step log
+message ExecutionStepLog {
+  int64 id = 1;
+  int64 execution_id = 2;
+  string node_id = 3;
+  string node_type = 4;
+  ExecutionStatus status = 5;
+  google.protobuf.Struct input_data = 6;
+  google.protobuf.Struct output_data = 7;
+  string error = 8;
+  google.protobuf.Timestamp started_at = 9;
+  optional google.protobuf.Timestamp completed_at = 10;
+  int64 duration_ms = 11;
+}
+
+// CreateCampaign
+message CreateCampaignRequest {
+  optional string campaign_key = 1;
+  string name = 2;
+  string description = 3;
+  optional google.protobuf.Timestamp start_at = 4;
+  optional google.protobuf.Timestamp end_at = 5;
+  google.protobuf.Struct metadata = 6;
+  api.common.OperatorContext operator_context = 7;
+}
+
+message CreateCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// UpdateCampaign
+message UpdateCampaignRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string description = 3;
+  optional google.protobuf.Timestamp start_at = 4;
+  optional google.protobuf.Timestamp end_at = 5;
+  optional google.protobuf.Struct metadata = 6;
+  api.common.OperatorContext operator_context = 7;
+}
+
+message UpdateCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// GetCampaign
+message GetCampaignRequest {
+  int64 id = 1;
+  bool include_workflow = 2;
+  api.common.OperatorContext operator_context = 3;
+}
+
+message GetCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// ListCampaigns
+message ListCampaignsRequest {
+  api.common.OperatorContext operator_context = 1;
+  optional CampaignStatus status = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  bool include_inherited = 5;
+}
+
+message ListCampaignsResponse {
+  repeated Campaign campaigns = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// DeleteCampaign
+message DeleteCampaignRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message DeleteCampaignResponse {}
+
+// SetWorkflow
+message SetWorkflowRequest {
+  int64 campaign_id = 1;
+  string workflow_yaml = 2;
+  api.common.OperatorContext operator_context = 3;
+}
+
+message SetWorkflowResponse {
+  CampaignWorkflow workflow = 1;
+}
+
+// GetWorkflow
+message GetWorkflowRequest {
+  int64 campaign_id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetWorkflowResponse {
+  CampaignWorkflow workflow = 1;
+}
+
+// ValidateWorkflow
+message ValidateWorkflowRequest {
+  string workflow_yaml = 1;
+}
+
+message ValidateWorkflowResponse {
+  bool is_valid = 1;
+  repeated string errors = 2;
+}
+
+// ActivateCampaign
+message ActivateCampaignRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message ActivateCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// PauseCampaign
+message PauseCampaignRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message PauseCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// TriggerCampaign - manual trigger
+message TriggerCampaignRequest {
+  int64 campaign_id = 1;
+  repeated int64 user_ids = 2;
+  google.protobuf.Struct campaign_data = 3;
+  api.common.OperatorContext operator_context = 4;
+}
+
+message TriggerCampaignResponse {
+  int64 triggered_count = 1;
+  int64 skipped_count = 2;
+  repeated int64 execution_ids = 3;
+}
+
+// GetExecution
+message GetExecutionRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetExecutionResponse {
+  CampaignExecution execution = 1;
+}
+
+// ListExecutions
+message ListExecutionsRequest {
+  api.common.OperatorContext operator_context = 1;
+  optional int64 campaign_id = 2;
+  optional int64 user_id = 3;
+  optional ExecutionStatus status = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+message ListExecutionsResponse {
+  repeated CampaignExecution executions = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// GetExecutionSteps
+message GetExecutionStepsRequest {
+  int64 execution_id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetExecutionStepsResponse {
+  repeated ExecutionStepLog steps = 1;
+}

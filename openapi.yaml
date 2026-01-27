@@ -1784,6 +1784,263 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.crm.service.v1.UpdateAssetVersionResponse'
+    /v1/backoffice/crm/campaign/activate:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Campaign control
+            operationId: BackofficeCampaign_ActivateCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ActivateCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.ActivateCampaignResponse'
+    /v1/backoffice/crm/campaign/create:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Campaign CRUD operations
+            operationId: BackofficeCampaign_CreateCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.CreateCampaignResponse'
+    /v1/backoffice/crm/campaign/delete:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_DeleteCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.DeleteCampaignResponse'
+    /v1/backoffice/crm/campaign/execution/get:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Execution tracking
+            operationId: BackofficeCampaign_GetCrmCampaignExecution
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCrmCampaignExecutionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.GetExecutionResponse'
+    /v1/backoffice/crm/campaign/execution/list:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_ListCrmCampaignExecutions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCrmCampaignExecutionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.ListExecutionsResponse'
+    /v1/backoffice/crm/campaign/execution/steps:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_GetCrmCampaignExecutionSteps
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.GetExecutionStepsResponse'
+    /v1/backoffice/crm/campaign/get:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_GetCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.GetCampaignResponse'
+    /v1/backoffice/crm/campaign/list:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_ListCrmCampaigns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCrmCampaignsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.ListCampaignsResponse'
+    /v1/backoffice/crm/campaign/pause:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_PauseCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PauseCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.PauseCampaignResponse'
+    /v1/backoffice/crm/campaign/trigger:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Manual trigger
+            operationId: BackofficeCampaign_TriggerCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.TriggerCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.TriggerCampaignResponse'
+    /v1/backoffice/crm/campaign/update:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_UpdateCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.UpdateCampaignResponse'
+    /v1/backoffice/crm/campaign/workflow/get:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_GetCrmCampaignWorkflow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCrmCampaignWorkflowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.GetWorkflowResponse'
+    /v1/backoffice/crm/campaign/workflow/set:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Workflow management
+            operationId: BackofficeCampaign_SetCrmCampaignWorkflow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetCrmCampaignWorkflowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.SetWorkflowResponse'
+    /v1/backoffice/crm/campaign/workflow/validate:
+        post:
+            tags:
+                - BackofficeCampaign
+            operationId: BackofficeCampaign_ValidateCrmCampaignWorkflow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ValidateCrmCampaignWorkflowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.ValidateWorkflowResponse'
     /v1/backoffice/crm/segment/calculate:
         post:
             tags:
@@ -10420,6 +10677,14 @@ components:
                     type: string
                 userId:
                     type: string
+        api.backoffice.service.v1.ActivateCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: ActivateCrmCampaign
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
@@ -11169,6 +11434,26 @@ components:
                     type: string
                 backofficeSubdomain:
                     type: string
+        api.backoffice.service.v1.CreateCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                startAt:
+                    type: string
+                    format: date-time
+                endAt:
+                    type: string
+                    format: date-time
+                metadata:
+                    type: object
+            description: CreateCrmCampaign
         api.backoffice.service.v1.CreateMerchantRequest:
             type: object
             properties:
@@ -11573,6 +11858,14 @@ components:
                     type: string
                 alternativeCommissionPlanId:
                     type: string
+        api.backoffice.service.v1.DeleteCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: DeleteCrmCampaign
         api.backoffice.service.v1.DeleteDepositRewardSequencesRequest:
             type: object
             properties:
@@ -12199,6 +12492,40 @@ components:
             properties:
                 commissionPlanId:
                     type: string
+        api.backoffice.service.v1.GetCrmCampaignExecutionRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: GetCrmCampaignExecution
+        api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                executionId:
+                    type: string
+            description: GetCrmCampaignExecutionSteps
+        api.backoffice.service.v1.GetCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                includeWorkflow:
+                    type: boolean
+            description: GetCrmCampaign
+        api.backoffice.service.v1.GetCrmCampaignWorkflowRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+            description: GetCrmCampaignWorkflow
         api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
             type: object
             properties: {}
@@ -14379,6 +14706,56 @@ components:
                         type: string
                 includeCount:
                     type: boolean
+        api.backoffice.service.v1.ListCrmCampaignExecutionsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                userId:
+                    type: string
+                status:
+                    enum:
+                        - EXECUTION_STATUS_UNSPECIFIED
+                        - EXECUTION_STATUS_PENDING
+                        - EXECUTION_STATUS_RUNNING
+                        - EXECUTION_STATUS_COMPLETED
+                        - EXECUTION_STATUS_FAILED
+                        - EXECUTION_STATUS_CANCELLED
+                    type: string
+                    format: enum
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: ListCrmCampaignExecutions
+        api.backoffice.service.v1.ListCrmCampaignsRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                status:
+                    enum:
+                        - CAMPAIGN_STATUS_UNSPECIFIED
+                        - CAMPAIGN_STATUS_DRAFT
+                        - CAMPAIGN_STATUS_ACTIVE
+                        - CAMPAIGN_STATUS_PAUSED
+                        - CAMPAIGN_STATUS_COMPLETED
+                        - CAMPAIGN_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                includeInherited:
+                    type: boolean
+            description: ListCrmCampaigns
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
             properties:
@@ -17406,6 +17783,14 @@ components:
                     type: string
                 targetOperatorBalanceCurrency:
                     type: string
+        api.backoffice.service.v1.PauseCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+            description: PauseCrmCampaign
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
@@ -17617,6 +18002,16 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.SetCrmCampaignWorkflowRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                workflowYaml:
+                    type: string
+            description: SetCrmCampaignWorkflow
         api.backoffice.service.v1.SetDepositRewardSequencesRequest:
             type: object
             properties:
@@ -17810,6 +18205,20 @@ components:
                     type: string
                 userBeneficiaryName:
                     type: string
+        api.backoffice.service.v1.TriggerCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                campaignId:
+                    type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                campaignData:
+                    type: object
+            description: TriggerCrmCampaign
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
@@ -18001,6 +18410,26 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
                 commissionPlanId:
                     type: string
+        api.backoffice.service.v1.UpdateCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                startAt:
+                    type: string
+                    format: date-time
+                endAt:
+                    type: string
+                    format: date-time
+                metadata:
+                    type: object
+            description: UpdateCrmCampaign
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -18450,6 +18879,12 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ValidateCrmCampaignWorkflowRequest:
+            type: object
+            properties:
+                workflowYaml:
+                    type: string
+            description: ValidateCrmCampaignWorkflow
         api.backoffice.service.v1.Verify2faRequest:
             type: object
             properties:
@@ -18756,6 +19191,294 @@ components:
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
             properties: {}
+        api.campaign.service.v1.ActivateCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.Campaign:
+            type: object
+            properties:
+                id:
+                    type: string
+                campaignKey:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                status:
+                    enum:
+                        - CAMPAIGN_STATUS_UNSPECIFIED
+                        - CAMPAIGN_STATUS_DRAFT
+                        - CAMPAIGN_STATUS_ACTIVE
+                        - CAMPAIGN_STATUS_PAUSED
+                        - CAMPAIGN_STATUS_COMPLETED
+                        - CAMPAIGN_STATUS_ARCHIVED
+                    type: string
+                    format: enum
+                ownerOperatorId:
+                    type: string
+                    description: Ownership hierarchy
+                ownerCompanyOperatorId:
+                    type: string
+                ownerRetailerOperatorId:
+                    type: string
+                ownerSystemOperatorId:
+                    type: string
+                ownerLevel:
+                    enum:
+                        - OWNER_LEVEL_UNSPECIFIED
+                        - OWNER_LEVEL_SYSTEM
+                        - OWNER_LEVEL_RETAILER
+                        - OWNER_LEVEL_COMPANY
+                        - OWNER_LEVEL_OPERATOR
+                    type: string
+                    format: enum
+                startAt:
+                    type: string
+                    description: Schedule
+                    format: date-time
+                endAt:
+                    type: string
+                    format: date-time
+                metadata:
+                    type: object
+                    description: Metadata as JSON
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                workflow:
+                    allOf:
+                        - $ref: '#/components/schemas/api.campaign.service.v1.CampaignWorkflow'
+                    description: Workflow info (populated when fetched with workflow)
+            description: Campaign definition
+        api.campaign.service.v1.CampaignExecution:
+            type: object
+            properties:
+                id:
+                    type: string
+                campaignId:
+                    type: string
+                workflowId:
+                    type: string
+                workflowVersion:
+                    type: integer
+                    format: int32
+                userId:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator context
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                triggerType:
+                    type: string
+                    description: Execution details
+                triggerData:
+                    type: object
+                status:
+                    enum:
+                        - EXECUTION_STATUS_UNSPECIFIED
+                        - EXECUTION_STATUS_PENDING
+                        - EXECUTION_STATUS_RUNNING
+                        - EXECUTION_STATUS_COMPLETED
+                        - EXECUTION_STATUS_FAILED
+                        - EXECUTION_STATUS_CANCELLED
+                    type: string
+                    format: enum
+                currentNodeId:
+                    type: string
+                executionState:
+                    type: object
+                idempotencyKey:
+                    type: string
+                startedAt:
+                    type: string
+                    format: date-time
+                completedAt:
+                    type: string
+                    format: date-time
+                errorMessage:
+                    type: string
+                retryCount:
+                    type: integer
+                    format: int32
+                maxRetries:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Campaign execution record
+        api.campaign.service.v1.CampaignWorkflow:
+            type: object
+            properties:
+                id:
+                    type: string
+                campaignId:
+                    type: string
+                version:
+                    type: integer
+                    format: int32
+                workflowYaml:
+                    type: string
+                workflowHash:
+                    type: string
+                isValid:
+                    type: boolean
+                validationErrors:
+                    type: array
+                    items:
+                        type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Campaign workflow definition
+        api.campaign.service.v1.CreateCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.DeleteCampaignResponse:
+            type: object
+            properties: {}
+        api.campaign.service.v1.ExecutionStepLog:
+            type: object
+            properties:
+                id:
+                    type: string
+                executionId:
+                    type: string
+                nodeId:
+                    type: string
+                nodeType:
+                    type: string
+                status:
+                    enum:
+                        - EXECUTION_STATUS_UNSPECIFIED
+                        - EXECUTION_STATUS_PENDING
+                        - EXECUTION_STATUS_RUNNING
+                        - EXECUTION_STATUS_COMPLETED
+                        - EXECUTION_STATUS_FAILED
+                        - EXECUTION_STATUS_CANCELLED
+                    type: string
+                    format: enum
+                inputData:
+                    type: object
+                outputData:
+                    type: object
+                error:
+                    type: string
+                startedAt:
+                    type: string
+                    format: date-time
+                completedAt:
+                    type: string
+                    format: date-time
+                durationMs:
+                    type: string
+            description: Execution step log
+        api.campaign.service.v1.GetCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.GetExecutionResponse:
+            type: object
+            properties:
+                execution:
+                    $ref: '#/components/schemas/api.campaign.service.v1.CampaignExecution'
+        api.campaign.service.v1.GetExecutionStepsResponse:
+            type: object
+            properties:
+                steps:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.ExecutionStepLog'
+        api.campaign.service.v1.GetWorkflowResponse:
+            type: object
+            properties:
+                workflow:
+                    $ref: '#/components/schemas/api.campaign.service.v1.CampaignWorkflow'
+        api.campaign.service.v1.ListCampaignsResponse:
+            type: object
+            properties:
+                campaigns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.campaign.service.v1.ListExecutionsResponse:
+            type: object
+            properties:
+                executions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.CampaignExecution'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.campaign.service.v1.PauseCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.SetWorkflowResponse:
+            type: object
+            properties:
+                workflow:
+                    $ref: '#/components/schemas/api.campaign.service.v1.CampaignWorkflow'
+        api.campaign.service.v1.TriggerCampaignResponse:
+            type: object
+            properties:
+                triggeredCount:
+                    type: string
+                skippedCount:
+                    type: string
+                executionIds:
+                    type: array
+                    items:
+                        type: string
+        api.campaign.service.v1.UpdateCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.ValidateWorkflowResponse:
+            type: object
+            properties:
+                isValid:
+                    type: boolean
+                errors:
+                    type: array
+                    items:
+                        type: string
         api.common.OperatorContext:
             type: object
             properties:
@@ -26849,6 +27572,8 @@ tags:
       description: |-
         BackofficeBcpay service
          Provides methods for backoffice bcpay management
+    - name: BackofficeCampaign
+      description: Campaign management service for backoffice (CRM marketing campaigns)
     - name: BackofficeCloudflare
     - name: BackofficeCompany
     - name: BackofficeCrm
