@@ -6381,6 +6381,10 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for RegistrationIp
 	}
 
+	if m.LoginIp != nil {
+		// no validation rules for LoginIp
+	}
+
 	if len(errors) > 0 {
 		return ListUsersRequestMultiError(errors)
 	}

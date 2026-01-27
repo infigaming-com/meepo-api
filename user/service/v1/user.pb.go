@@ -3500,8 +3500,10 @@ type ListUsersRequest struct {
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,24,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	// Filter by registration IP
 	RegistrationIp *string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3,oneof" json:"registration_ip,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Filter by login IP (users who have logged in with this IP)
+	LoginIp       *string `protobuf:"bytes,26,opt,name=login_ip,json=loginIp,proto3,oneof" json:"login_ip,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -3705,6 +3707,13 @@ func (x *ListUsersRequest) GetOperatorContextFilters() *common.OperatorContextFi
 func (x *ListUsersRequest) GetRegistrationIp() string {
 	if x != nil && x.RegistrationIp != nil {
 		return *x.RegistrationIp
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetLoginIp() string {
+	if x != nil && x.LoginIp != nil {
+		return *x.LoginIp
 	}
 	return ""
 }
@@ -16421,8 +16430,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x03 \x01(\tR\bidNumber\x12\x14\n" +
 	"\x05image\x18\x04 \x01(\tR\x05image\"\x1c\n" +
-	"\x1aUpdateUserIdentityResponse\"\xf3\n" +
-	"\n" +
+	"\x1aUpdateUserIdentityResponse\"\xa0\v\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -16452,7 +16460,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tpage_size\x18\x16 \x01(\x05H\x14R\bpageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x17 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x18 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
-	"\x0fregistration_ip\x18\x19 \x01(\tH\x15R\x0eregistrationIp\x88\x01\x01B\n" +
+	"\x0fregistration_ip\x18\x19 \x01(\tH\x15R\x0eregistrationIp\x88\x01\x01\x12\x1e\n" +
+	"\blogin_ip\x18\x1a \x01(\tH\x16R\aloginIp\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -16483,7 +16492,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x12\n" +
-	"\x10_registration_ip\"\xc6\n" +
+	"\x10_registration_ipB\v\n" +
+	"\t_login_ip\"\xc6\n" +
 	"\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
