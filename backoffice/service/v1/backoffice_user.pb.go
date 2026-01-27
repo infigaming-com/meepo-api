@@ -52,8 +52,10 @@ type ListUsersRequest struct {
 	PageSize               *int32                         `protobuf:"varint,22,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,23,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	RegistrationIp         *string                        `protobuf:"bytes,24,opt,name=registration_ip,json=registrationIp,proto3,oneof" json:"registration_ip,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Filter by login IP (users who have logged in with this IP)
+	LoginIp       *string `protobuf:"bytes,25,opt,name=login_ip,json=loginIp,proto3,oneof" json:"login_ip,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -236,6 +238,13 @@ func (x *ListUsersRequest) GetOperatorContextFilters() *common.OperatorContextFi
 func (x *ListUsersRequest) GetRegistrationIp() string {
 	if x != nil && x.RegistrationIp != nil {
 		return *x.RegistrationIp
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetLoginIp() string {
+	if x != nil && x.LoginIp != nil {
+		return *x.LoginIp
 	}
 	return ""
 }
@@ -2465,7 +2474,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\xd1\t\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\xfe\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2492,7 +2501,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x04page\x18\x15 \x01(\x05H\x11R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x16 \x01(\x05H\x12R\bpageSize\x88\x01\x01\x12\\\n" +
 	"\x18operator_context_filters\x18\x17 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
-	"\x0fregistration_ip\x18\x18 \x01(\tH\x13R\x0eregistrationIp\x88\x01\x01B\n" +
+	"\x0fregistration_ip\x18\x18 \x01(\tH\x13R\x0eregistrationIp\x88\x01\x01\x12\x1e\n" +
+	"\blogin_ip\x18\x19 \x01(\tH\x14R\aloginIp\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -2519,7 +2529,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x12\n" +
-	"\x10_registration_ip\"\xfc\b\n" +
+	"\x10_registration_ipB\v\n" +
+	"\t_login_ip\"\xfc\b\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
