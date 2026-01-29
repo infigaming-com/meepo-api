@@ -213,6 +213,10 @@ func (m *SendEmailRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.UseSystemDefault != nil {
+		// no validation rules for UseSystemDefault
+	}
+
 	if len(errors) > 0 {
 		return SendEmailRequestMultiError(errors)
 	}
