@@ -93,6 +93,7 @@ type SendEmailRequest struct {
 	CompanyOperatorId  int64                  `protobuf:"varint,8,opt,name=companyOperatorId,proto3" json:"companyOperatorId,omitempty"`
 	RetailerOperatorId int64                  `protobuf:"varint,9,opt,name=retailerOperatorId,proto3" json:"retailerOperatorId,omitempty"`
 	UserId             int64                  `protobuf:"varint,10,opt,name=userId,proto3" json:"userId,omitempty"`
+	UseSystemDefault   *bool                  `protobuf:"varint,11,opt,name=use_system_default,json=useSystemDefault,proto3,oneof" json:"use_system_default,omitempty"` // default true, if false use operator binding
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -195,6 +196,13 @@ func (x *SendEmailRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *SendEmailRequest) GetUseSystemDefault() bool {
+	if x != nil && x.UseSystemDefault != nil {
+		return *x.UseSystemDefault
+	}
+	return false
 }
 
 type SendEmailResponse struct {
@@ -884,7 +892,7 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x0fEmailAttachment\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vcontentType\x18\x02 \x01(\tR\vcontentType\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\tR\x04data\"\xd6\x02\n" +
+	"\x04data\x18\x03 \x01(\tR\x04data\"\xa0\x03\n" +
 	"\x10SendEmailRequest\x12\x12\n" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12\x0e\n" +
 	"\x02to\x18\x02 \x03(\tR\x02to\x12\x18\n" +
@@ -898,7 +906,9 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x11companyOperatorId\x18\b \x01(\x03R\x11companyOperatorId\x12.\n" +
 	"\x12retailerOperatorId\x18\t \x01(\x03R\x12retailerOperatorId\x12\x16\n" +
 	"\x06userId\x18\n" +
-	" \x01(\x03R\x06userId\"1\n" +
+	" \x01(\x03R\x06userId\x121\n" +
+	"\x12use_system_default\x18\v \x01(\bH\x00R\x10useSystemDefault\x88\x01\x01B\x15\n" +
+	"\x13_use_system_default\"1\n" +
 	"\x11SendEmailResponse\x12\x1c\n" +
 	"\tmessageId\x18\x01 \x01(\x03R\tmessageId\"C\n" +
 	"\tTimeRange\x12\x1c\n" +
@@ -1019,6 +1029,7 @@ func file_push_service_v1_push_proto_init() {
 	if File_push_service_v1_push_proto != nil {
 		return
 	}
+	file_push_service_v1_push_proto_msgTypes[1].OneofWrappers = []any{}
 	file_push_service_v1_push_proto_msgTypes[6].OneofWrappers = []any{}
 	file_push_service_v1_push_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
