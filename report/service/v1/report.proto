@@ -143,8 +143,418 @@ message ListWithdrawVtgDetailsRequest {
 	api.common.OperatorContext operator_context = 6;  // Internal only
 }
 
+// ============================================================================
+// Commission Report Data - Internal API for Affiliate Service
+// These endpoints provide aggregated data from ClickHouse for commission reports.
+// Affiliate Service calls these APIs, calculates estimated commissions using
+// Commission Plan config, then provides final reports to Backoffice Service.
+//
+// All reports support 10-layer aggregation (T1-T10).
+// Affiliate Service can trim layers based on Operator's MAX TIER configuration.
+// ============================================================================
+
+// VTGTierData - Tier data for VTG report (New Subordinates Performance)
+// All fields are for NEW subordinates (relation created_at in period)
+message VTGTierData {
+  int32 tier = 1;  // Tier level 1-10
+
+  // Count metrics (for new subordinates in period)
+  int64 new_count = 10;        // New subordinates count
+  int64 ftd_count = 11;        // New subs with FTD
+  int64 qualified_count = 12;  // New subs who met conversion conditions
+
+  // Financial metrics for new subordinates (all tiers) - USD
+  string ftd_amount_usd = 20;
+  string deposit_amount_usd = 21;
+  string withdrawal_amount_usd = 22;
+  string ggr_usd = 23;
+  string ngr_usd = 24;
+  string b2c_usd = 25;  // Bonus to Cash
+  int64 bet_count = 26;
+  string bet_amount_usd = 27;
+  string avg_bet_usd = 28;
+
+  // Financial metrics - Reporting Currency
+  string ftd_amount_reporting_currency = 40;
+  string deposit_amount_reporting_currency = 41;
+  string withdrawal_amount_reporting_currency = 42;
+  string ggr_reporting_currency = 43;
+  string ngr_reporting_currency = 44;
+  string b2c_reporting_currency = 45;
+  string bet_amount_reporting_currency = 47;
+  string avg_bet_reporting_currency = 48;
+
+  // Settled commissions for new subordinates - USD
+  string referral_reward_usd = 30;      // conversion_reward
+  string deposit_cashback_usd = 31;     // deposit_cashback_reward
+  string wagering_commission_usd = 32;  // wagering_commission_reward
+  string loss_revenue_share_usd = 33;   // loss_revenue_share_reward
+  string total_reward_usd = 34;         // Sum of above 4 types
+
+  // Settled commissions - Reporting Currency
+  string referral_reward_reporting_currency = 50;
+  string deposit_cashback_reporting_currency = 51;
+  string wagering_commission_reporting_currency = 52;
+  string loss_revenue_share_reporting_currency = 53;
+  string total_reward_reporting_currency = 54;
+}
+
+// SnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
+// total_count is cumulative, other metrics are for activity in period
+message SnapshotTierData {
+  int32 tier = 1;  // Tier level 1-10
+
+  // Count metrics
+  int64 total_count = 10;      // Cumulative subordinates (no time limit)
+  int64 qualified_count = 11;  // Became qualified in period (conversion_qualified_at in period)
+  int64 active_count = 12;     // Had at least 1 bet in period
+
+  // Settled commissions in period - USD
+  string referral_reward_usd = 20;      // conversion_reward
+  string deposit_cashback_usd = 21;     // deposit_cashback_reward
+  string wagering_commission_usd = 22;  // wagering_commission_reward
+  string loss_revenue_share_usd = 23;   // loss_revenue_share_reward
+  string total_reward_usd = 24;         // Sum of above 4 types
+
+  // Settled commissions - Reporting Currency
+  string referral_reward_reporting_currency = 30;
+  string deposit_cashback_reporting_currency = 31;
+  string wagering_commission_reporting_currency = 32;
+  string loss_revenue_share_reporting_currency = 33;
+  string total_reward_reporting_currency = 34;
+}
+
+// T1GamingData - Gaming data for T1 only (Snapshot report)
+// Only T1 has GGR/NGR/B2C in Snapshot
+message T1GamingData {
+  // USD
+  string ggr_usd = 1;
+  string ngr_usd = 2;
+  string b2c_usd = 3;  // Bonus to Cash
+  string payment_cost_usd = 4;       // max(0, GGR * payment_channel_rate)
+  string provider_royalties_usd = 5; // max(0, GGR * third_party_game_rate)
+
+  // Reporting Currency
+  string ggr_reporting_currency = 10;
+  string ngr_reporting_currency = 11;
+  string b2c_reporting_currency = 12;
+  string payment_cost_reporting_currency = 13;
+  string provider_royalties_reporting_currency = 14;
+}
+
+// TierCarryover - Negative carryover data per tier
+// Directly from user_referral_relations.loss_rev_share_carryover JSONB
+// Structure in DB: map[currency]map[periodType]*ReferralCarryoverData
+message TierCarryover {
+  int32 tier = 1;
+  string currency = 2;       // e.g., "USD"
+  string period_type = 3;    // "weekly" or "monthly"
+  string based_on = 4;       // "ngr" or "ggr" - what the carryover is based on
+  string ngr_carryover = 5;  // NGR carryover amount (can be negative)
+  string ggr_carryover = 6;  // GGR carryover amount
+  string b2c_carryover = 7;  // B2C carryover amount
+}
+
+// TierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
+message TierGamingData {
+  int32 tier = 1;
+  // USD
+  string ggr_usd = 2;
+  string ngr_usd = 3;
+  string b2c_usd = 4;
+  string bet_amount_usd = 5;
+  int64 bet_count = 6;
+  // Reporting Currency
+  string ggr_reporting_currency = 10;
+  string ngr_reporting_currency = 11;
+  string b2c_reporting_currency = 12;
+  string bet_amount_reporting_currency = 13;
+}
+
+// ========== VTG Report Data (Vintage - New Subordinates Performance) ==========
+
+message ListVTGReportDataRequest {
+  string period = 1;                 // "day", "week", or "month" - determines time range
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;  // Internal only
+  repeated int64 user_ids = 4;       // Optional: filter by specific UIDs
+  repeated int64 referral_ids = 5;   // Optional: filter by referral (tier1_user_id)
+  repeated int64 affiliate_ids = 6;  // Optional: filter by affiliate
+  optional int32 page = 7;           // defaults to 1
+  optional int32 page_size = 8;      // defaults to 25
+}
+
+// VTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
+message VTGReportDataItem {
+  // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
+  string date = 8;
+  int64 uid = 1;
+  int64 referral_id = 2;    // User's direct referrer (tier1_user_id)
+  int64 affiliate_id = 3;   // User's affiliate (from affiliate_users)
+
+  // Operator context
+  int64 operator_id = 4;
+  int64 system_operator_id = 5;
+  int64 company_operator_id = 6;
+  int64 retailer_operator_id = 7;
+
+  repeated VTGTierData tiers = 10;  // T1-T10 tier data for new subordinates
+
+  // Summary fields - USD
+  string total_reward_usd = 20;     // Sum of all tiers, all commission types
+  string t1_total_reward_usd = 21;  // T1: deposit_cashback + wagering + loss_rs
+  string t1_roi = 22;               // T1 Total Reward / (T1 NGR - T1 B2C)
+
+  // Summary fields - Reporting Currency
+  string total_reward_reporting_currency = 30;
+  string t1_total_reward_reporting_currency = 31;
+}
+
+message ListVTGReportDataResponse {
+  repeated VTGReportDataItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// ========== Snapshot Report Data (Cumulative + Period Activity) ==========
+
+message ListSnapshotReportDataRequest {
+  string period = 1;                        // "day", "week", or "month" - determines time range
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;  // Internal only
+  repeated int64 user_ids = 4;              // Optional: filter by specific UIDs
+  repeated int64 referral_ids = 5;          // Optional: filter by referral
+  repeated int64 affiliate_ids = 6;         // Optional: filter by affiliate
+  bool only_negative_carryover = 7;         // Optional: only show users with negative carryover
+  optional int32 page = 8;                  // defaults to 1
+  optional int32 page_size = 9;             // defaults to 25
+}
+
+// SnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
+message SnapshotReportDataItem {
+  // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
+  string date = 8;
+  int64 uid = 1;
+  int64 referral_id = 2;    // User's direct referrer
+  int64 affiliate_id = 3;   // User's affiliate
+
+  // Operator context
+  int64 operator_id = 4;
+  int64 system_operator_id = 5;
+  int64 company_operator_id = 6;
+  int64 retailer_operator_id = 7;
+
+  repeated SnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
+
+  // T1 gaming data (only T1 has GGR/NGR/B2C in Snapshot)
+  T1GamingData t1_gaming = 20;
+
+  // Summary fields - USD
+  string total_referral_reward_usd = 30;
+  string total_deposit_cashback_usd = 31;
+  string total_wagering_commission_usd = 32;
+  string total_loss_revenue_share_usd = 33;
+
+  // Summary fields - Reporting Currency
+  string total_referral_reward_reporting_currency = 35;
+  string total_deposit_cashback_reporting_currency = 36;
+  string total_wagering_commission_reporting_currency = 37;
+  string total_loss_revenue_share_reporting_currency = 38;
+
+  // Gaming data for Affiliate Service to calculate estimated commissions
+  // Affiliate Service uses this + Commission Plan config to compute unpaid commissions
+  repeated TierGamingData current_period_gaming = 40;
+
+  // From referral_user_rewards table - USD
+  string unclaimed_commission_usd = 50;  // current_* amounts sum (settled but not claimed)
+  string lifetime_claimed_usd = 51;      // (total_* - current_*) sum
+  string withdrawal_amount_usd = 52;     // Referral reward withdrawals in period
+
+  // From referral_user_rewards table - Reporting Currency
+  string unclaimed_commission_reporting_currency = 55;
+  string lifetime_claimed_reporting_currency = 56;
+  string withdrawal_amount_reporting_currency = 57;
+
+  // Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
+  repeated TierCarryover negative_carryover = 60;
+}
+
+message ListSnapshotReportDataResponse {
+  repeated SnapshotReportDataItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// ========== Contribution Report Data (Subordinate Detail View) ==========
+// Each row represents one Sub-UID (a subordinate of the ROOT user)
+
+message ListContributionReportDataRequest {
+  string period = 1;                 // "day", "week", or "month" - determines time range
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;  // Internal only
+  optional int64 root_user_id = 4;   // Optional: filter by ROOT user (T0 perspective)
+  repeated int32 tiers = 5;          // Optional: filter by tier levels (multi-select, e.g. [1, 2, 3])
+  optional bool is_qualified = 6;    // Optional: filter by qualification status
+  optional int32 page = 7;           // defaults to 1
+  optional int32 page_size = 8;      // defaults to 25
+}
+
+message ContributionReportDataItem {
+  // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
+  string date = 40;
+  int64 root_id = 1;      // ROOT user (T0 perspective)
+  int64 parent_id = 2;    // Sub-UID's direct referrer (tier1_user_id of sub_uid)
+  int64 sub_uid = 3;      // The subordinate user
+  int32 tier = 4;         // Sub-UID's tier relative to ROOT (1-10)
+
+  int64 reg_date = 5;     // Registration time (from user_referral_relations.user_stats.register_at)
+  int64 ftd_date = 6;     // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
+  bool is_qualified = 7;  // Has met conversion conditions (from user_stats.has_met_conversion_conditions)
+
+  // Operator context
+  int64 operator_id = 8;
+  int64 system_operator_id = 9;
+  int64 company_operator_id = 38;
+  int64 retailer_operator_id = 39;
+
+  // Financial metrics in period - USD
+  string deposit_usd = 10;
+  string withdrawal_usd = 11;
+  string turnover_usd = 12;  // Bet amount
+  string ggr_usd = 13;
+  string ngr_usd = 14;
+  string b2c_usd = 15;
+  string payment_cost_usd = 16;      // max(0, GGR * payment_channel_rate)
+  string provider_royalties_usd = 17; // max(0, GGR * third_party_game_rate)
+
+  // Financial metrics - Reporting Currency
+  string deposit_reporting_currency = 30;
+  string withdrawal_reporting_currency = 31;
+  string turnover_reporting_currency = 32;
+  string ggr_reporting_currency = 33;
+  string ngr_reporting_currency = 34;
+  string b2c_reporting_currency = 35;
+  string payment_cost_reporting_currency = 36;
+  string provider_royalties_reporting_currency = 37;
+
+  // TODO: Not implemented - requires User Service integration
+  int64 last_login_time = 20;
+  string device_id = 21;
+  string ip = 22;
+}
+
+message ListContributionReportDataResponse {
+  repeated ContributionReportDataItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// ========== Lifetime Report Data (All-time Commission Totals) ==========
+// No time_range - shows lifetime cumulative commission data
+
+message ListLifetimeReportDataRequest {
+  api.common.OperatorContextFilters operator_context_filters = 1;
+  api.common.OperatorContext operator_context = 2;  // Internal only
+  repeated int64 user_ids = 3;  // Optional: filter by specific UIDs
+  optional int32 page = 4;      // defaults to 1
+  optional int32 page_size = 5; // defaults to 25
+}
+
+message LifetimeReportDataItem {
+  int64 uid = 1;
+
+  // Operator context
+  int64 operator_id = 20;
+  int64 system_operator_id = 21;
+  int64 company_operator_id = 22;
+  int64 retailer_operator_id = 23;
+
+  // USD
+  string conversion_reward_usd = 2;    // from referral_user_rewards.total_referral_amount_usd
+  string deposit_cashback_usd = 3;     // aggregated from referral_commissions by commission_type
+  string wagering_commission_usd = 4;  // aggregated from referral_commissions by commission_type
+  string loss_revenue_share_usd = 5;   // from referral_user_rewards.total_loss_rev_share_amount_usd
+  string total_usd = 6;                // Sum of all commission types
+
+  // Reporting Currency
+  string conversion_reward_reporting_currency = 10;
+  string deposit_cashback_reporting_currency = 11;
+  string wagering_commission_reporting_currency = 12;
+  string loss_revenue_share_reporting_currency = 13;
+  string total_reporting_currency = 14;
+}
+
+message ListLifetimeReportDataResponse {
+  repeated LifetimeReportDataItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// ========== Affiliate Performance Report Data ==========
+
+message GetAffiliatePerformanceReportDataRequest {
+  int64 affiliate_id = 1;
+  api.backoffice.service.v1.TimeRange time_range = 2;
+  api.common.OperatorContextFilters operator_context_filters = 3;
+  api.common.OperatorContext operator_context = 4;
+  optional int64 campaign_id = 5;  // 0 or empty means all campaigns
+}
+
+message GetAffiliatePerformanceReportDataResponse {
+  int64 affiliate_id = 1;
+  int64 campaign_id = 2;
+  string campaign_name = 3;
+  string settlement_cycle = 4;  // from affiliates.invoices_period
+
+  // TODO: Not implemented - requires third-party tracking
+  int64 impressions = 10;
+  int64 clicks = 11;
+  string ctr = 12;
+
+  // Registration metrics (from affiliate_users)
+  int64 registrations_qty = 20;
+  int64 ftd_qty = 21;
+  string ftd_amount_usd = 22;
+  int64 qftd_qty = 23;  // qualified FTD
+
+  // Settled commissions by type (from affiliate_commissions)
+  string commission_cpa_usd = 30;
+  string commission_cpl_usd = 31;
+  string commission_rs_usd = 32;
+  string commission_flat_fee_usd = 33;
+  string commission_total_usd = 34;
+
+  // Commission status
+  string negative_carryover_usd = 40;  // from carryover_data
+  string unpaid_commission_usd = 41;   // status='approved' AND paid=false
+  string paid_commission_usd = 42;     // paid=true in period
+  string lifetime_paid_usd = 43;       // paid=true all time
+
+  // Financial metrics (users under this affiliate)
+  string total_deposits_usd = 50;
+  string total_withdrawals_usd = 51;
+  string ggr_usd = 52;
+  string ngr_usd = 53;
+  string bet_amount_usd = 54;
+  int64 bet_count = 55;
+  string win_amount_usd = 56;
+  string psp_fee_usd = 57;      // GGR * payment_channel_rate
+  string content_fee_usd = 58;  // GGR * third_party_game_rate
+  string roi = 59;
+
+  // TODO: Not implemented
+  string rake_usd = 60;
+  string tax_usd = 61;
+}
+
+// ============================================================================
 // ReportService provides analytics and reporting functionality via ClickHouse.
 // This service is the ONLY service allowed to query ClickHouse directly.
+// ============================================================================
 service ReportService {
   // Summary reports
   rpc GetSummary(GetSummaryRequest) returns (api.backoffice.service.v1.GetSummaryResponse) {
@@ -255,6 +665,58 @@ service ReportService {
   rpc CustomerRecordReportDetail(api.backoffice.service.v1.CustomerRecordReportDetailRequest) returns (api.backoffice.service.v1.CustomerRecordReportDetailResponse) {
     option (google.api.http) = {
       post: "/v1/report/customer-record/get"
+      body: "*"
+    };
+  }
+
+  // ============================================================================
+  // Commission Report Data APIs - Called by Affiliate Service
+  // These provide aggregated data for commission reports with 10-layer support.
+  // Affiliate Service uses this data + Commission Plan config to calculate
+  // estimated commissions, then provides final reports to Backoffice.
+  // ============================================================================
+
+  // ListVTGReportData returns VTG (Vintage) report data with T1-T10 aggregation
+  // VTG shows new subordinates' performance in the specified time period
+  rpc ListVTGReportData(ListVTGReportDataRequest) returns (ListVTGReportDataResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/commission/vtg-data/list"
+      body: "*"
+    };
+  }
+
+  // ListSnapshotReportData returns Snapshot report data with T1-T10 aggregation
+  // Snapshot shows cumulative subordinates + period activity
+  rpc ListSnapshotReportData(ListSnapshotReportDataRequest) returns (ListSnapshotReportDataResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/commission/snapshot-data/list"
+      body: "*"
+    };
+  }
+
+  // ListContributionReportData returns subordinate detail data
+  // Each row is one Sub-UID with their financial metrics
+  rpc ListContributionReportData(ListContributionReportDataRequest) returns (ListContributionReportDataResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/commission/contribution-data/list"
+      body: "*"
+    };
+  }
+
+  // ListLifetimeReportData returns all-time commission totals
+  // No time range - shows lifetime cumulative data
+  rpc ListLifetimeReportData(ListLifetimeReportDataRequest) returns (ListLifetimeReportDataResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/commission/lifetime-data/list"
+      body: "*"
+    };
+  }
+
+  // GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
+  // NOTE: This report is deferred and may not be implemented in this phase
+  rpc GetAffiliatePerformanceReportData(GetAffiliatePerformanceReportDataRequest) returns (GetAffiliatePerformanceReportDataResponse) {
+    option (google.api.http) = {
+      post: "/v1/report/commission/affiliate-performance-data"
       body: "*"
     };
   }

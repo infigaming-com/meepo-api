@@ -2595,6 +2595,2169 @@ func (x *CustomerRecordReportDetailResponse) GetEventSettlementInformation() *Cu
 	return nil
 }
 
+// VTG Report - New Subordinates Performance
+type ListReferralVTGReportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", or "month"
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,3,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`                // Optional: filter by specific UIDs
+	ReferralIds            []int64                        `protobuf:"varint,4,rep,packed,name=referral_ids,json=referralIds,proto3" json:"referral_ids,omitempty"`    // Optional: filter by referral (tier1_user_id)
+	AffiliateIds           []int64                        `protobuf:"varint,5,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"` // Optional: filter by affiliate
+	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`                                      // defaults to 1
+	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`              // defaults to 25
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListReferralVTGReportRequest) Reset() {
+	*x = ListReferralVTGReportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralVTGReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralVTGReportRequest) ProtoMessage() {}
+
+func (x *ListReferralVTGReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralVTGReportRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralVTGReportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListReferralVTGReportRequest) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *ListReferralVTGReportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListReferralVTGReportRequest) GetUserIds() []int64 {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
+func (x *ListReferralVTGReportRequest) GetReferralIds() []int64 {
+	if x != nil {
+		return x.ReferralIds
+	}
+	return nil
+}
+
+func (x *ListReferralVTGReportRequest) GetAffiliateIds() []int64 {
+	if x != nil {
+		return x.AffiliateIds
+	}
+	return nil
+}
+
+func (x *ListReferralVTGReportRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralVTGReportRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+// VTGTierData - Tier data for VTG report (New Subordinates Performance)
+type VTGTierData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Tier  int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"` // Tier level (1 to MaxTier)
+	// Count metrics (for new subordinates in period)
+	NewCount       int64 `protobuf:"varint,10,opt,name=new_count,json=newCount,proto3" json:"new_count,omitempty"`                   // New subordinates count
+	FtdCount       int64 `protobuf:"varint,11,opt,name=ftd_count,json=ftdCount,proto3" json:"ftd_count,omitempty"`                   // New subs with FTD
+	QualifiedCount int64 `protobuf:"varint,12,opt,name=qualified_count,json=qualifiedCount,proto3" json:"qualified_count,omitempty"` // New subs who met conversion conditions
+	// Financial metrics for new subordinates - USD
+	FtdAmountUsd        string `protobuf:"bytes,20,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	DepositAmountUsd    string `protobuf:"bytes,21,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	WithdrawalAmountUsd string `protobuf:"bytes,22,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
+	GgrUsd              string `protobuf:"bytes,23,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd              string `protobuf:"bytes,24,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	B2CUsd              string `protobuf:"bytes,25,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"` // Bonus to Cash
+	BetCount            int64  `protobuf:"varint,26,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd        string `protobuf:"bytes,27,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	AvgBetUsd           string `protobuf:"bytes,28,opt,name=avg_bet_usd,json=avgBetUsd,proto3" json:"avg_bet_usd,omitempty"`
+	// Financial metrics - Reporting Currency
+	FtdAmountReportingCurrency        string `protobuf:"bytes,40,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	DepositAmountReportingCurrency    string `protobuf:"bytes,41,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	WithdrawalAmountReportingCurrency string `protobuf:"bytes,42,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
+	GgrReportingCurrency              string `protobuf:"bytes,43,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrReportingCurrency              string `protobuf:"bytes,44,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	B2CReportingCurrency              string `protobuf:"bytes,45,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`
+	BetAmountReportingCurrency        string `protobuf:"bytes,47,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	AvgBetReportingCurrency           string `protobuf:"bytes,48,opt,name=avg_bet_reporting_currency,json=avgBetReportingCurrency,proto3" json:"avg_bet_reporting_currency,omitempty"`
+	// Settled commissions for new subordinates - USD
+	ReferralRewardUsd     string `protobuf:"bytes,30,opt,name=referral_reward_usd,json=referralRewardUsd,proto3" json:"referral_reward_usd,omitempty"`             // conversion_reward
+	DepositCashbackUsd    string `protobuf:"bytes,31,opt,name=deposit_cashback_usd,json=depositCashbackUsd,proto3" json:"deposit_cashback_usd,omitempty"`          // deposit_cashback_reward
+	WageringCommissionUsd string `protobuf:"bytes,32,opt,name=wagering_commission_usd,json=wageringCommissionUsd,proto3" json:"wagering_commission_usd,omitempty"` // wagering_commission_reward
+	LossRevenueShareUsd   string `protobuf:"bytes,33,opt,name=loss_revenue_share_usd,json=lossRevenueShareUsd,proto3" json:"loss_revenue_share_usd,omitempty"`     // loss_revenue_share_reward
+	TotalRewardUsd        string `protobuf:"bytes,34,opt,name=total_reward_usd,json=totalRewardUsd,proto3" json:"total_reward_usd,omitempty"`                      // Sum of above 4 types
+	// Settled commissions - Reporting Currency
+	ReferralRewardReportingCurrency     string `protobuf:"bytes,50,opt,name=referral_reward_reporting_currency,json=referralRewardReportingCurrency,proto3" json:"referral_reward_reporting_currency,omitempty"`
+	DepositCashbackReportingCurrency    string `protobuf:"bytes,51,opt,name=deposit_cashback_reporting_currency,json=depositCashbackReportingCurrency,proto3" json:"deposit_cashback_reporting_currency,omitempty"`
+	WageringCommissionReportingCurrency string `protobuf:"bytes,52,opt,name=wagering_commission_reporting_currency,json=wageringCommissionReportingCurrency,proto3" json:"wagering_commission_reporting_currency,omitempty"`
+	LossRevenueShareReportingCurrency   string `protobuf:"bytes,53,opt,name=loss_revenue_share_reporting_currency,json=lossRevenueShareReportingCurrency,proto3" json:"loss_revenue_share_reporting_currency,omitempty"`
+	TotalRewardReportingCurrency        string `protobuf:"bytes,54,opt,name=total_reward_reporting_currency,json=totalRewardReportingCurrency,proto3" json:"total_reward_reporting_currency,omitempty"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
+}
+
+func (x *VTGTierData) Reset() {
+	*x = VTGTierData{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VTGTierData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VTGTierData) ProtoMessage() {}
+
+func (x *VTGTierData) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VTGTierData.ProtoReflect.Descriptor instead.
+func (*VTGTierData) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *VTGTierData) GetTier() int32 {
+	if x != nil {
+		return x.Tier
+	}
+	return 0
+}
+
+func (x *VTGTierData) GetNewCount() int64 {
+	if x != nil {
+		return x.NewCount
+	}
+	return 0
+}
+
+func (x *VTGTierData) GetFtdCount() int64 {
+	if x != nil {
+		return x.FtdCount
+	}
+	return 0
+}
+
+func (x *VTGTierData) GetQualifiedCount() int64 {
+	if x != nil {
+		return x.QualifiedCount
+	}
+	return 0
+}
+
+func (x *VTGTierData) GetFtdAmountUsd() string {
+	if x != nil {
+		return x.FtdAmountUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetDepositAmountUsd() string {
+	if x != nil {
+		return x.DepositAmountUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetWithdrawalAmountUsd() string {
+	if x != nil {
+		return x.WithdrawalAmountUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetB2CUsd() string {
+	if x != nil {
+		return x.B2CUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetBetCount() int64 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *VTGTierData) GetBetAmountUsd() string {
+	if x != nil {
+		return x.BetAmountUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetAvgBetUsd() string {
+	if x != nil {
+		return x.AvgBetUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetFtdAmountReportingCurrency() string {
+	if x != nil {
+		return x.FtdAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetDepositAmountReportingCurrency() string {
+	if x != nil {
+		return x.DepositAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetWithdrawalAmountReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetB2CReportingCurrency() string {
+	if x != nil {
+		return x.B2CReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetBetAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetAvgBetReportingCurrency() string {
+	if x != nil {
+		return x.AvgBetReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetReferralRewardUsd() string {
+	if x != nil {
+		return x.ReferralRewardUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetDepositCashbackUsd() string {
+	if x != nil {
+		return x.DepositCashbackUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetWageringCommissionUsd() string {
+	if x != nil {
+		return x.WageringCommissionUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetLossRevenueShareUsd() string {
+	if x != nil {
+		return x.LossRevenueShareUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetTotalRewardUsd() string {
+	if x != nil {
+		return x.TotalRewardUsd
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetReferralRewardReportingCurrency() string {
+	if x != nil {
+		return x.ReferralRewardReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetDepositCashbackReportingCurrency() string {
+	if x != nil {
+		return x.DepositCashbackReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetWageringCommissionReportingCurrency() string {
+	if x != nil {
+		return x.WageringCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetLossRevenueShareReportingCurrency() string {
+	if x != nil {
+		return x.LossRevenueShareReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGTierData) GetTotalRewardReportingCurrency() string {
+	if x != nil {
+		return x.TotalRewardReportingCurrency
+	}
+	return ""
+}
+
+// VTGReportItem - Single row in VTG report
+type VTGReportItem struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Date        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"` // Grouped date: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
+	Uid         int64                  `protobuf:"varint,2,opt,name=uid,proto3" json:"uid,omitempty"`
+	ReferralId  int64                  `protobuf:"varint,3,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`    // User's direct referrer
+	AffiliateId int64                  `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate
+	// Operator context
+	OperatorId         int64 `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64 `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64 `protobuf:"varint,7,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64 `protobuf:"varint,8,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// Dynamic tier data (T1 to MaxTier, truncated based on operator's referral plan)
+	Tiers []*VTGTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"`
+	// Summary fields - USD
+	TotalRewardUsd   string `protobuf:"bytes,20,opt,name=total_reward_usd,json=totalRewardUsd,proto3" json:"total_reward_usd,omitempty"`         // Sum of all tiers, all commission types
+	T1TotalRewardUsd string `protobuf:"bytes,21,opt,name=t1_total_reward_usd,json=t1TotalRewardUsd,proto3" json:"t1_total_reward_usd,omitempty"` // T1: deposit_cashback + wagering + loss_rs
+	T1Roi            string `protobuf:"bytes,22,opt,name=t1_roi,json=t1Roi,proto3" json:"t1_roi,omitempty"`                                      // T1 Total Reward / (T1 NGR - T1 B2C)
+	// Summary fields - Reporting Currency
+	TotalRewardReportingCurrency   string `protobuf:"bytes,30,opt,name=total_reward_reporting_currency,json=totalRewardReportingCurrency,proto3" json:"total_reward_reporting_currency,omitempty"`
+	T1TotalRewardReportingCurrency string `protobuf:"bytes,31,opt,name=t1_total_reward_reporting_currency,json=t1TotalRewardReportingCurrency,proto3" json:"t1_total_reward_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
+}
+
+func (x *VTGReportItem) Reset() {
+	*x = VTGReportItem{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VTGReportItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VTGReportItem) ProtoMessage() {}
+
+func (x *VTGReportItem) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VTGReportItem.ProtoReflect.Descriptor instead.
+func (*VTGReportItem) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *VTGReportItem) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *VTGReportItem) GetUid() int64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetReferralId() int64 {
+	if x != nil {
+		return x.ReferralId
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *VTGReportItem) GetTiers() []*VTGTierData {
+	if x != nil {
+		return x.Tiers
+	}
+	return nil
+}
+
+func (x *VTGReportItem) GetTotalRewardUsd() string {
+	if x != nil {
+		return x.TotalRewardUsd
+	}
+	return ""
+}
+
+func (x *VTGReportItem) GetT1TotalRewardUsd() string {
+	if x != nil {
+		return x.T1TotalRewardUsd
+	}
+	return ""
+}
+
+func (x *VTGReportItem) GetT1Roi() string {
+	if x != nil {
+		return x.T1Roi
+	}
+	return ""
+}
+
+func (x *VTGReportItem) GetTotalRewardReportingCurrency() string {
+	if x != nil {
+		return x.TotalRewardReportingCurrency
+	}
+	return ""
+}
+
+func (x *VTGReportItem) GetT1TotalRewardReportingCurrency() string {
+	if x != nil {
+		return x.T1TotalRewardReportingCurrency
+	}
+	return ""
+}
+
+type ListReferralVTGReportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*VTGReportItem       `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReferralVTGReportResponse) Reset() {
+	*x = ListReferralVTGReportResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralVTGReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralVTGReportResponse) ProtoMessage() {}
+
+func (x *ListReferralVTGReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralVTGReportResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralVTGReportResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *ListReferralVTGReportResponse) GetItems() []*VTGReportItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListReferralVTGReportResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralVTGReportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListReferralVTGReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// Snapshot Report - Cumulative + Period Activity
+type ListReferralSnapshotReportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", or "month"
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,3,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`                                      // Optional: filter by specific UIDs
+	ReferralIds            []int64                        `protobuf:"varint,4,rep,packed,name=referral_ids,json=referralIds,proto3" json:"referral_ids,omitempty"`                          // Optional: filter by referral
+	AffiliateIds           []int64                        `protobuf:"varint,5,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`                       // Optional: filter by affiliate
+	OnlyNegativeCarryover  bool                           `protobuf:"varint,6,opt,name=only_negative_carryover,json=onlyNegativeCarryover,proto3" json:"only_negative_carryover,omitempty"` // Optional: only show users with negative carryover
+	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`                                                            // defaults to 1
+	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`                                    // defaults to 25
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListReferralSnapshotReportRequest) Reset() {
+	*x = ListReferralSnapshotReportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralSnapshotReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralSnapshotReportRequest) ProtoMessage() {}
+
+func (x *ListReferralSnapshotReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralSnapshotReportRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralSnapshotReportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *ListReferralSnapshotReportRequest) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *ListReferralSnapshotReportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListReferralSnapshotReportRequest) GetUserIds() []int64 {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
+func (x *ListReferralSnapshotReportRequest) GetReferralIds() []int64 {
+	if x != nil {
+		return x.ReferralIds
+	}
+	return nil
+}
+
+func (x *ListReferralSnapshotReportRequest) GetAffiliateIds() []int64 {
+	if x != nil {
+		return x.AffiliateIds
+	}
+	return nil
+}
+
+func (x *ListReferralSnapshotReportRequest) GetOnlyNegativeCarryover() bool {
+	if x != nil {
+		return x.OnlyNegativeCarryover
+	}
+	return false
+}
+
+func (x *ListReferralSnapshotReportRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralSnapshotReportRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+// SnapshotTierData - Tier data for Snapshot report
+type SnapshotTierData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Tier  int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"` // Tier level (1 to MaxTier)
+	// Count metrics
+	TotalCount     int64 `protobuf:"varint,10,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`             // Cumulative subordinates (no time limit)
+	QualifiedCount int64 `protobuf:"varint,11,opt,name=qualified_count,json=qualifiedCount,proto3" json:"qualified_count,omitempty"` // Became qualified in period
+	ActiveCount    int64 `protobuf:"varint,12,opt,name=active_count,json=activeCount,proto3" json:"active_count,omitempty"`          // Had at least 1 bet in period
+	// Settled commissions in period - USD
+	ReferralRewardUsd     string `protobuf:"bytes,20,opt,name=referral_reward_usd,json=referralRewardUsd,proto3" json:"referral_reward_usd,omitempty"`
+	DepositCashbackUsd    string `protobuf:"bytes,21,opt,name=deposit_cashback_usd,json=depositCashbackUsd,proto3" json:"deposit_cashback_usd,omitempty"`
+	WageringCommissionUsd string `protobuf:"bytes,22,opt,name=wagering_commission_usd,json=wageringCommissionUsd,proto3" json:"wagering_commission_usd,omitempty"`
+	LossRevenueShareUsd   string `protobuf:"bytes,23,opt,name=loss_revenue_share_usd,json=lossRevenueShareUsd,proto3" json:"loss_revenue_share_usd,omitempty"`
+	TotalRewardUsd        string `protobuf:"bytes,24,opt,name=total_reward_usd,json=totalRewardUsd,proto3" json:"total_reward_usd,omitempty"`
+	// Settled commissions - Reporting Currency
+	ReferralRewardReportingCurrency     string `protobuf:"bytes,30,opt,name=referral_reward_reporting_currency,json=referralRewardReportingCurrency,proto3" json:"referral_reward_reporting_currency,omitempty"`
+	DepositCashbackReportingCurrency    string `protobuf:"bytes,31,opt,name=deposit_cashback_reporting_currency,json=depositCashbackReportingCurrency,proto3" json:"deposit_cashback_reporting_currency,omitempty"`
+	WageringCommissionReportingCurrency string `protobuf:"bytes,32,opt,name=wagering_commission_reporting_currency,json=wageringCommissionReportingCurrency,proto3" json:"wagering_commission_reporting_currency,omitempty"`
+	LossRevenueShareReportingCurrency   string `protobuf:"bytes,33,opt,name=loss_revenue_share_reporting_currency,json=lossRevenueShareReportingCurrency,proto3" json:"loss_revenue_share_reporting_currency,omitempty"`
+	TotalRewardReportingCurrency        string `protobuf:"bytes,34,opt,name=total_reward_reporting_currency,json=totalRewardReportingCurrency,proto3" json:"total_reward_reporting_currency,omitempty"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
+}
+
+func (x *SnapshotTierData) Reset() {
+	*x = SnapshotTierData{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SnapshotTierData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SnapshotTierData) ProtoMessage() {}
+
+func (x *SnapshotTierData) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SnapshotTierData.ProtoReflect.Descriptor instead.
+func (*SnapshotTierData) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *SnapshotTierData) GetTier() int32 {
+	if x != nil {
+		return x.Tier
+	}
+	return 0
+}
+
+func (x *SnapshotTierData) GetTotalCount() int64 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *SnapshotTierData) GetQualifiedCount() int64 {
+	if x != nil {
+		return x.QualifiedCount
+	}
+	return 0
+}
+
+func (x *SnapshotTierData) GetActiveCount() int64 {
+	if x != nil {
+		return x.ActiveCount
+	}
+	return 0
+}
+
+func (x *SnapshotTierData) GetReferralRewardUsd() string {
+	if x != nil {
+		return x.ReferralRewardUsd
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetDepositCashbackUsd() string {
+	if x != nil {
+		return x.DepositCashbackUsd
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetWageringCommissionUsd() string {
+	if x != nil {
+		return x.WageringCommissionUsd
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetLossRevenueShareUsd() string {
+	if x != nil {
+		return x.LossRevenueShareUsd
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetTotalRewardUsd() string {
+	if x != nil {
+		return x.TotalRewardUsd
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetReferralRewardReportingCurrency() string {
+	if x != nil {
+		return x.ReferralRewardReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetDepositCashbackReportingCurrency() string {
+	if x != nil {
+		return x.DepositCashbackReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetWageringCommissionReportingCurrency() string {
+	if x != nil {
+		return x.WageringCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetLossRevenueShareReportingCurrency() string {
+	if x != nil {
+		return x.LossRevenueShareReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotTierData) GetTotalRewardReportingCurrency() string {
+	if x != nil {
+		return x.TotalRewardReportingCurrency
+	}
+	return ""
+}
+
+// T1GamingData - Gaming data for T1 only
+type T1GamingData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// USD
+	GgrUsd               string `protobuf:"bytes,1,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd               string `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	B2CUsd               string `protobuf:"bytes,3,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"`
+	PaymentCostUsd       string `protobuf:"bytes,4,opt,name=payment_cost_usd,json=paymentCostUsd,proto3" json:"payment_cost_usd,omitempty"`                   // Calculated using admin rates
+	ProviderRoyaltiesUsd string `protobuf:"bytes,5,opt,name=provider_royalties_usd,json=providerRoyaltiesUsd,proto3" json:"provider_royalties_usd,omitempty"` // Calculated using admin rates
+	// Reporting Currency
+	GgrReportingCurrency               string `protobuf:"bytes,10,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrReportingCurrency               string `protobuf:"bytes,11,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	B2CReportingCurrency               string `protobuf:"bytes,12,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`
+	PaymentCostReportingCurrency       string `protobuf:"bytes,13,opt,name=payment_cost_reporting_currency,json=paymentCostReportingCurrency,proto3" json:"payment_cost_reporting_currency,omitempty"`
+	ProviderRoyaltiesReportingCurrency string `protobuf:"bytes,14,opt,name=provider_royalties_reporting_currency,json=providerRoyaltiesReportingCurrency,proto3" json:"provider_royalties_reporting_currency,omitempty"`
+	unknownFields                      protoimpl.UnknownFields
+	sizeCache                          protoimpl.SizeCache
+}
+
+func (x *T1GamingData) Reset() {
+	*x = T1GamingData{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *T1GamingData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*T1GamingData) ProtoMessage() {}
+
+func (x *T1GamingData) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use T1GamingData.ProtoReflect.Descriptor instead.
+func (*T1GamingData) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *T1GamingData) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetB2CUsd() string {
+	if x != nil {
+		return x.B2CUsd
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetPaymentCostUsd() string {
+	if x != nil {
+		return x.PaymentCostUsd
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetProviderRoyaltiesUsd() string {
+	if x != nil {
+		return x.ProviderRoyaltiesUsd
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetB2CReportingCurrency() string {
+	if x != nil {
+		return x.B2CReportingCurrency
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetPaymentCostReportingCurrency() string {
+	if x != nil {
+		return x.PaymentCostReportingCurrency
+	}
+	return ""
+}
+
+func (x *T1GamingData) GetProviderRoyaltiesReportingCurrency() string {
+	if x != nil {
+		return x.ProviderRoyaltiesReportingCurrency
+	}
+	return ""
+}
+
+// TierCarryover - Negative carryover data per tier
+type TierCarryover struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Tier          int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	PeriodType    string                 `protobuf:"bytes,3,opt,name=period_type,json=periodType,proto3" json:"period_type,omitempty"` // "weekly" or "monthly"
+	BasedOn       string                 `protobuf:"bytes,4,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`          // "ngr" or "ggr"
+	NgrCarryover  string                 `protobuf:"bytes,5,opt,name=ngr_carryover,json=ngrCarryover,proto3" json:"ngr_carryover,omitempty"`
+	GgrCarryover  string                 `protobuf:"bytes,6,opt,name=ggr_carryover,json=ggrCarryover,proto3" json:"ggr_carryover,omitempty"`
+	B2CCarryover  string                 `protobuf:"bytes,7,opt,name=b2c_carryover,json=b2cCarryover,proto3" json:"b2c_carryover,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TierCarryover) Reset() {
+	*x = TierCarryover{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TierCarryover) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TierCarryover) ProtoMessage() {}
+
+func (x *TierCarryover) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TierCarryover.ProtoReflect.Descriptor instead.
+func (*TierCarryover) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *TierCarryover) GetTier() int32 {
+	if x != nil {
+		return x.Tier
+	}
+	return 0
+}
+
+func (x *TierCarryover) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *TierCarryover) GetPeriodType() string {
+	if x != nil {
+		return x.PeriodType
+	}
+	return ""
+}
+
+func (x *TierCarryover) GetBasedOn() string {
+	if x != nil {
+		return x.BasedOn
+	}
+	return ""
+}
+
+func (x *TierCarryover) GetNgrCarryover() string {
+	if x != nil {
+		return x.NgrCarryover
+	}
+	return ""
+}
+
+func (x *TierCarryover) GetGgrCarryover() string {
+	if x != nil {
+		return x.GgrCarryover
+	}
+	return ""
+}
+
+func (x *TierCarryover) GetB2CCarryover() string {
+	if x != nil {
+		return x.B2CCarryover
+	}
+	return ""
+}
+
+// SnapshotReportItem - Single row in Snapshot report
+type SnapshotReportItem struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Date        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Uid         int64                  `protobuf:"varint,2,opt,name=uid,proto3" json:"uid,omitempty"`
+	ReferralId  int64                  `protobuf:"varint,3,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
+	AffiliateId int64                  `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	// Operator context
+	OperatorId         int64 `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64 `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64 `protobuf:"varint,7,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64 `protobuf:"varint,8,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// Dynamic tier data (truncated based on MaxTier)
+	Tiers []*SnapshotTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"`
+	// T1 gaming data
+	T1Gaming *T1GamingData `protobuf:"bytes,20,opt,name=t1_gaming,json=t1Gaming,proto3" json:"t1_gaming,omitempty"`
+	// Summary totals - USD
+	TotalReferralRewardUsd     string `protobuf:"bytes,30,opt,name=total_referral_reward_usd,json=totalReferralRewardUsd,proto3" json:"total_referral_reward_usd,omitempty"`
+	TotalDepositCashbackUsd    string `protobuf:"bytes,31,opt,name=total_deposit_cashback_usd,json=totalDepositCashbackUsd,proto3" json:"total_deposit_cashback_usd,omitempty"`
+	TotalWageringCommissionUsd string `protobuf:"bytes,32,opt,name=total_wagering_commission_usd,json=totalWageringCommissionUsd,proto3" json:"total_wagering_commission_usd,omitempty"`
+	TotalLossRevenueShareUsd   string `protobuf:"bytes,33,opt,name=total_loss_revenue_share_usd,json=totalLossRevenueShareUsd,proto3" json:"total_loss_revenue_share_usd,omitempty"`
+	// Summary totals - Reporting Currency
+	TotalReferralRewardReportingCurrency     string `protobuf:"bytes,35,opt,name=total_referral_reward_reporting_currency,json=totalReferralRewardReportingCurrency,proto3" json:"total_referral_reward_reporting_currency,omitempty"`
+	TotalDepositCashbackReportingCurrency    string `protobuf:"bytes,36,opt,name=total_deposit_cashback_reporting_currency,json=totalDepositCashbackReportingCurrency,proto3" json:"total_deposit_cashback_reporting_currency,omitempty"`
+	TotalWageringCommissionReportingCurrency string `protobuf:"bytes,37,opt,name=total_wagering_commission_reporting_currency,json=totalWageringCommissionReportingCurrency,proto3" json:"total_wagering_commission_reporting_currency,omitempty"`
+	TotalLossRevenueShareReportingCurrency   string `protobuf:"bytes,38,opt,name=total_loss_revenue_share_reporting_currency,json=totalLossRevenueShareReportingCurrency,proto3" json:"total_loss_revenue_share_reporting_currency,omitempty"`
+	// Unpaid commissions (estimated) - USD
+	UnpaidWageringCommissionUsd string `protobuf:"bytes,40,opt,name=unpaid_wagering_commission_usd,json=unpaidWageringCommissionUsd,proto3" json:"unpaid_wagering_commission_usd,omitempty"`
+	UnpaidLossCommissionUsd     string `protobuf:"bytes,41,opt,name=unpaid_loss_commission_usd,json=unpaidLossCommissionUsd,proto3" json:"unpaid_loss_commission_usd,omitempty"`
+	// Unpaid commissions - Reporting Currency
+	UnpaidWageringCommissionReportingCurrency string `protobuf:"bytes,42,opt,name=unpaid_wagering_commission_reporting_currency,json=unpaidWageringCommissionReportingCurrency,proto3" json:"unpaid_wagering_commission_reporting_currency,omitempty"`
+	UnpaidLossCommissionReportingCurrency     string `protobuf:"bytes,43,opt,name=unpaid_loss_commission_reporting_currency,json=unpaidLossCommissionReportingCurrency,proto3" json:"unpaid_loss_commission_reporting_currency,omitempty"`
+	// Commission status - USD
+	UnclaimedCommissionUsd string `protobuf:"bytes,50,opt,name=unclaimed_commission_usd,json=unclaimedCommissionUsd,proto3" json:"unclaimed_commission_usd,omitempty"`
+	LifetimeClaimedUsd     string `protobuf:"bytes,51,opt,name=lifetime_claimed_usd,json=lifetimeClaimedUsd,proto3" json:"lifetime_claimed_usd,omitempty"`
+	WithdrawalAmountUsd    string `protobuf:"bytes,52,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
+	// Commission status - Reporting Currency
+	UnclaimedCommissionReportingCurrency string `protobuf:"bytes,55,opt,name=unclaimed_commission_reporting_currency,json=unclaimedCommissionReportingCurrency,proto3" json:"unclaimed_commission_reporting_currency,omitempty"`
+	LifetimeClaimedReportingCurrency     string `protobuf:"bytes,56,opt,name=lifetime_claimed_reporting_currency,json=lifetimeClaimedReportingCurrency,proto3" json:"lifetime_claimed_reporting_currency,omitempty"`
+	WithdrawalAmountReportingCurrency    string `protobuf:"bytes,57,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
+	// Negative carryover per tier
+	NegativeCarryover []*TierCarryover `protobuf:"bytes,60,rep,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SnapshotReportItem) Reset() {
+	*x = SnapshotReportItem{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SnapshotReportItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SnapshotReportItem) ProtoMessage() {}
+
+func (x *SnapshotReportItem) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SnapshotReportItem.ProtoReflect.Descriptor instead.
+func (*SnapshotReportItem) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *SnapshotReportItem) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUid() int64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetReferralId() int64 {
+	if x != nil {
+		return x.ReferralId
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *SnapshotReportItem) GetTiers() []*SnapshotTierData {
+	if x != nil {
+		return x.Tiers
+	}
+	return nil
+}
+
+func (x *SnapshotReportItem) GetT1Gaming() *T1GamingData {
+	if x != nil {
+		return x.T1Gaming
+	}
+	return nil
+}
+
+func (x *SnapshotReportItem) GetTotalReferralRewardUsd() string {
+	if x != nil {
+		return x.TotalReferralRewardUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalDepositCashbackUsd() string {
+	if x != nil {
+		return x.TotalDepositCashbackUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalWageringCommissionUsd() string {
+	if x != nil {
+		return x.TotalWageringCommissionUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalLossRevenueShareUsd() string {
+	if x != nil {
+		return x.TotalLossRevenueShareUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalReferralRewardReportingCurrency() string {
+	if x != nil {
+		return x.TotalReferralRewardReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalDepositCashbackReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositCashbackReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalWageringCommissionReportingCurrency() string {
+	if x != nil {
+		return x.TotalWageringCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetTotalLossRevenueShareReportingCurrency() string {
+	if x != nil {
+		return x.TotalLossRevenueShareReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUnpaidWageringCommissionUsd() string {
+	if x != nil {
+		return x.UnpaidWageringCommissionUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUnpaidLossCommissionUsd() string {
+	if x != nil {
+		return x.UnpaidLossCommissionUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUnpaidWageringCommissionReportingCurrency() string {
+	if x != nil {
+		return x.UnpaidWageringCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUnpaidLossCommissionReportingCurrency() string {
+	if x != nil {
+		return x.UnpaidLossCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUnclaimedCommissionUsd() string {
+	if x != nil {
+		return x.UnclaimedCommissionUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetLifetimeClaimedUsd() string {
+	if x != nil {
+		return x.LifetimeClaimedUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetWithdrawalAmountUsd() string {
+	if x != nil {
+		return x.WithdrawalAmountUsd
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetUnclaimedCommissionReportingCurrency() string {
+	if x != nil {
+		return x.UnclaimedCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetLifetimeClaimedReportingCurrency() string {
+	if x != nil {
+		return x.LifetimeClaimedReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetWithdrawalAmountReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *SnapshotReportItem) GetNegativeCarryover() []*TierCarryover {
+	if x != nil {
+		return x.NegativeCarryover
+	}
+	return nil
+}
+
+type ListReferralSnapshotReportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*SnapshotReportItem  `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReferralSnapshotReportResponse) Reset() {
+	*x = ListReferralSnapshotReportResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralSnapshotReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralSnapshotReportResponse) ProtoMessage() {}
+
+func (x *ListReferralSnapshotReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralSnapshotReportResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralSnapshotReportResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *ListReferralSnapshotReportResponse) GetItems() []*SnapshotReportItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListReferralSnapshotReportResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralSnapshotReportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListReferralSnapshotReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// Contribution Report - Subordinate Detail View
+type ListReferralContributionReportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", or "month"
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	RootUserId             *int64                         `protobuf:"varint,3,opt,name=root_user_id,json=rootUserId,proto3,oneof" json:"root_user_id,omitempty"`  // Optional: filter by ROOT user
+	Tiers                  []int32                        `protobuf:"varint,4,rep,packed,name=tiers,proto3" json:"tiers,omitempty"`                               // Optional: filter by tier levels (multi-select)
+	IsQualified            *bool                          `protobuf:"varint,5,opt,name=is_qualified,json=isQualified,proto3,oneof" json:"is_qualified,omitempty"` // Optional: filter by qualification status
+	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`                                  // defaults to 1
+	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`          // defaults to 25
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListReferralContributionReportRequest) Reset() {
+	*x = ListReferralContributionReportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralContributionReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralContributionReportRequest) ProtoMessage() {}
+
+func (x *ListReferralContributionReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralContributionReportRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralContributionReportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *ListReferralContributionReportRequest) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *ListReferralContributionReportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListReferralContributionReportRequest) GetRootUserId() int64 {
+	if x != nil && x.RootUserId != nil {
+		return *x.RootUserId
+	}
+	return 0
+}
+
+func (x *ListReferralContributionReportRequest) GetTiers() []int32 {
+	if x != nil {
+		return x.Tiers
+	}
+	return nil
+}
+
+func (x *ListReferralContributionReportRequest) GetIsQualified() bool {
+	if x != nil && x.IsQualified != nil {
+		return *x.IsQualified
+	}
+	return false
+}
+
+func (x *ListReferralContributionReportRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralContributionReportRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+// ContributionReportItem - Single subordinate detail
+type ContributionReportItem struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Date        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	RootId      int64                  `protobuf:"varint,2,opt,name=root_id,json=rootId,proto3" json:"root_id,omitempty"`                // ROOT user (T0 perspective)
+	ParentId    int64                  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`          // Sub-UID's direct referrer
+	SubUid      int64                  `protobuf:"varint,4,opt,name=sub_uid,json=subUid,proto3" json:"sub_uid,omitempty"`                // The subordinate user
+	Tier        int32                  `protobuf:"varint,5,opt,name=tier,proto3" json:"tier,omitempty"`                                  // Sub-UID's tier relative to ROOT (1 to MaxTier)
+	RegDate     int64                  `protobuf:"varint,6,opt,name=reg_date,json=regDate,proto3" json:"reg_date,omitempty"`             // Registration time (milliseconds)
+	FtdDate     int64                  `protobuf:"varint,7,opt,name=ftd_date,json=ftdDate,proto3" json:"ftd_date,omitempty"`             // First deposit time (milliseconds), 0 if no FTD
+	IsQualified bool                   `protobuf:"varint,8,opt,name=is_qualified,json=isQualified,proto3" json:"is_qualified,omitempty"` // Has met conversion conditions
+	// Operator context
+	OperatorId         int64 `protobuf:"varint,9,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64 `protobuf:"varint,10,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64 `protobuf:"varint,11,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64 `protobuf:"varint,12,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// Financial metrics in period - USD
+	DepositUsd           string `protobuf:"bytes,20,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
+	WithdrawalUsd        string `protobuf:"bytes,21,opt,name=withdrawal_usd,json=withdrawalUsd,proto3" json:"withdrawal_usd,omitempty"`
+	TurnoverUsd          string `protobuf:"bytes,22,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	GgrUsd               string `protobuf:"bytes,23,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd               string `protobuf:"bytes,24,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	B2CUsd               string `protobuf:"bytes,25,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"`
+	PaymentCostUsd       string `protobuf:"bytes,26,opt,name=payment_cost_usd,json=paymentCostUsd,proto3" json:"payment_cost_usd,omitempty"`                   // Calculated using admin rates
+	ProviderRoyaltiesUsd string `protobuf:"bytes,27,opt,name=provider_royalties_usd,json=providerRoyaltiesUsd,proto3" json:"provider_royalties_usd,omitempty"` // Calculated using admin rates
+	// Financial metrics - Reporting Currency
+	DepositReportingCurrency           string `protobuf:"bytes,30,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
+	WithdrawalReportingCurrency        string `protobuf:"bytes,31,opt,name=withdrawal_reporting_currency,json=withdrawalReportingCurrency,proto3" json:"withdrawal_reporting_currency,omitempty"`
+	TurnoverReportingCurrency          string `protobuf:"bytes,32,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	GgrReportingCurrency               string `protobuf:"bytes,33,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrReportingCurrency               string `protobuf:"bytes,34,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	B2CReportingCurrency               string `protobuf:"bytes,35,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`
+	PaymentCostReportingCurrency       string `protobuf:"bytes,36,opt,name=payment_cost_reporting_currency,json=paymentCostReportingCurrency,proto3" json:"payment_cost_reporting_currency,omitempty"`
+	ProviderRoyaltiesReportingCurrency string `protobuf:"bytes,37,opt,name=provider_royalties_reporting_currency,json=providerRoyaltiesReportingCurrency,proto3" json:"provider_royalties_reporting_currency,omitempty"`
+	// Not implemented (requires User Service integration)
+	LastLoginTime int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
+	DeviceId      string `protobuf:"bytes,41,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	Ip            string `protobuf:"bytes,42,opt,name=ip,proto3" json:"ip,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ContributionReportItem) Reset() {
+	*x = ContributionReportItem{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ContributionReportItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ContributionReportItem) ProtoMessage() {}
+
+func (x *ContributionReportItem) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ContributionReportItem.ProtoReflect.Descriptor instead.
+func (*ContributionReportItem) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ContributionReportItem) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetRootId() int64 {
+	if x != nil {
+		return x.RootId
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetSubUid() int64 {
+	if x != nil {
+		return x.SubUid
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetTier() int32 {
+	if x != nil {
+		return x.Tier
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetRegDate() int64 {
+	if x != nil {
+		return x.RegDate
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetFtdDate() int64 {
+	if x != nil {
+		return x.FtdDate
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetIsQualified() bool {
+	if x != nil {
+		return x.IsQualified
+	}
+	return false
+}
+
+func (x *ContributionReportItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetDepositUsd() string {
+	if x != nil {
+		return x.DepositUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetWithdrawalUsd() string {
+	if x != nil {
+		return x.WithdrawalUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetB2CUsd() string {
+	if x != nil {
+		return x.B2CUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetPaymentCostUsd() string {
+	if x != nil {
+		return x.PaymentCostUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetProviderRoyaltiesUsd() string {
+	if x != nil {
+		return x.ProviderRoyaltiesUsd
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetDepositReportingCurrency() string {
+	if x != nil {
+		return x.DepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetWithdrawalReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.TurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetB2CReportingCurrency() string {
+	if x != nil {
+		return x.B2CReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetPaymentCostReportingCurrency() string {
+	if x != nil {
+		return x.PaymentCostReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetProviderRoyaltiesReportingCurrency() string {
+	if x != nil {
+		return x.ProviderRoyaltiesReportingCurrency
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetLastLoginTime() int64 {
+	if x != nil {
+		return x.LastLoginTime
+	}
+	return 0
+}
+
+func (x *ContributionReportItem) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *ContributionReportItem) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+type ListReferralContributionReportResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Items         []*ContributionReportItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReferralContributionReportResponse) Reset() {
+	*x = ListReferralContributionReportResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralContributionReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralContributionReportResponse) ProtoMessage() {}
+
+func (x *ListReferralContributionReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralContributionReportResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralContributionReportResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *ListReferralContributionReportResponse) GetItems() []*ContributionReportItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListReferralContributionReportResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralContributionReportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListReferralContributionReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// Lifetime Report - All-time Commission Totals
+type ListReferralLifetimeReportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserIds                []int64                        `protobuf:"varint,2,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`   // Optional: filter by specific UIDs
+	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`                         // defaults to 1
+	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"` // defaults to 25
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListReferralLifetimeReportRequest) Reset() {
+	*x = ListReferralLifetimeReportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralLifetimeReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralLifetimeReportRequest) ProtoMessage() {}
+
+func (x *ListReferralLifetimeReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralLifetimeReportRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralLifetimeReportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *ListReferralLifetimeReportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListReferralLifetimeReportRequest) GetUserIds() []int64 {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
+func (x *ListReferralLifetimeReportRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralLifetimeReportRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+// LifetimeReportItem - All-time commission totals for a user
+type LifetimeReportItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Uid   int64                  `protobuf:"varint,1,opt,name=uid,proto3" json:"uid,omitempty"`
+	// Operator context
+	OperatorId         int64 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64 `protobuf:"varint,3,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64 `protobuf:"varint,4,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64 `protobuf:"varint,5,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// Commission totals - USD
+	ConversionRewardUsd   string `protobuf:"bytes,10,opt,name=conversion_reward_usd,json=conversionRewardUsd,proto3" json:"conversion_reward_usd,omitempty"`
+	DepositCashbackUsd    string `protobuf:"bytes,11,opt,name=deposit_cashback_usd,json=depositCashbackUsd,proto3" json:"deposit_cashback_usd,omitempty"`
+	WageringCommissionUsd string `protobuf:"bytes,12,opt,name=wagering_commission_usd,json=wageringCommissionUsd,proto3" json:"wagering_commission_usd,omitempty"`
+	LossRevenueShareUsd   string `protobuf:"bytes,13,opt,name=loss_revenue_share_usd,json=lossRevenueShareUsd,proto3" json:"loss_revenue_share_usd,omitempty"`
+	TotalUsd              string `protobuf:"bytes,14,opt,name=total_usd,json=totalUsd,proto3" json:"total_usd,omitempty"`
+	// Commission totals - Reporting Currency
+	ConversionRewardReportingCurrency   string `protobuf:"bytes,20,opt,name=conversion_reward_reporting_currency,json=conversionRewardReportingCurrency,proto3" json:"conversion_reward_reporting_currency,omitempty"`
+	DepositCashbackReportingCurrency    string `protobuf:"bytes,21,opt,name=deposit_cashback_reporting_currency,json=depositCashbackReportingCurrency,proto3" json:"deposit_cashback_reporting_currency,omitempty"`
+	WageringCommissionReportingCurrency string `protobuf:"bytes,22,opt,name=wagering_commission_reporting_currency,json=wageringCommissionReportingCurrency,proto3" json:"wagering_commission_reporting_currency,omitempty"`
+	LossRevenueShareReportingCurrency   string `protobuf:"bytes,23,opt,name=loss_revenue_share_reporting_currency,json=lossRevenueShareReportingCurrency,proto3" json:"loss_revenue_share_reporting_currency,omitempty"`
+	TotalReportingCurrency              string `protobuf:"bytes,24,opt,name=total_reporting_currency,json=totalReportingCurrency,proto3" json:"total_reporting_currency,omitempty"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
+}
+
+func (x *LifetimeReportItem) Reset() {
+	*x = LifetimeReportItem{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LifetimeReportItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LifetimeReportItem) ProtoMessage() {}
+
+func (x *LifetimeReportItem) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LifetimeReportItem.ProtoReflect.Descriptor instead.
+func (*LifetimeReportItem) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *LifetimeReportItem) GetUid() int64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *LifetimeReportItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *LifetimeReportItem) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *LifetimeReportItem) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *LifetimeReportItem) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *LifetimeReportItem) GetConversionRewardUsd() string {
+	if x != nil {
+		return x.ConversionRewardUsd
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetDepositCashbackUsd() string {
+	if x != nil {
+		return x.DepositCashbackUsd
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetWageringCommissionUsd() string {
+	if x != nil {
+		return x.WageringCommissionUsd
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetLossRevenueShareUsd() string {
+	if x != nil {
+		return x.LossRevenueShareUsd
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetTotalUsd() string {
+	if x != nil {
+		return x.TotalUsd
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetConversionRewardReportingCurrency() string {
+	if x != nil {
+		return x.ConversionRewardReportingCurrency
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetDepositCashbackReportingCurrency() string {
+	if x != nil {
+		return x.DepositCashbackReportingCurrency
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetWageringCommissionReportingCurrency() string {
+	if x != nil {
+		return x.WageringCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetLossRevenueShareReportingCurrency() string {
+	if x != nil {
+		return x.LossRevenueShareReportingCurrency
+	}
+	return ""
+}
+
+func (x *LifetimeReportItem) GetTotalReportingCurrency() string {
+	if x != nil {
+		return x.TotalReportingCurrency
+	}
+	return ""
+}
+
+type ListReferralLifetimeReportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*LifetimeReportItem  `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReferralLifetimeReportResponse) Reset() {
+	*x = ListReferralLifetimeReportResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReferralLifetimeReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReferralLifetimeReportResponse) ProtoMessage() {}
+
+func (x *ListReferralLifetimeReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReferralLifetimeReportResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralLifetimeReportResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *ListReferralLifetimeReportResponse) GetItems() []*LifetimeReportItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListReferralLifetimeReportResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReferralLifetimeReportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListReferralLifetimeReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 type ListSummariesResponse_List struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Date                 string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
@@ -2675,7 +4838,7 @@ type ListSummariesResponse_List struct {
 
 func (x *ListSummariesResponse_List) Reset() {
 	*x = ListSummariesResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2687,7 +4850,7 @@ func (x *ListSummariesResponse_List) String() string {
 func (*ListSummariesResponse_List) ProtoMessage() {}
 
 func (x *ListSummariesResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3236,7 +5399,7 @@ type ListGameDataResponse_List struct {
 
 func (x *ListGameDataResponse_List) Reset() {
 	*x = ListGameDataResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3248,7 +5411,7 @@ func (x *ListGameDataResponse_List) String() string {
 func (*ListGameDataResponse_List) ProtoMessage() {}
 
 func (x *ListGameDataResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3487,7 +5650,7 @@ type ListPlayerGameDataResponse_List struct {
 
 func (x *ListPlayerGameDataResponse_List) Reset() {
 	*x = ListPlayerGameDataResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3499,7 +5662,7 @@ func (x *ListPlayerGameDataResponse_List) String() string {
 func (*ListPlayerGameDataResponse_List) ProtoMessage() {}
 
 func (x *ListPlayerGameDataResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3703,7 +5866,7 @@ type GetDepositSummariesResponse_DepositSummary struct {
 
 func (x *GetDepositSummariesResponse_DepositSummary) Reset() {
 	*x = GetDepositSummariesResponse_DepositSummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3715,7 +5878,7 @@ func (x *GetDepositSummariesResponse_DepositSummary) String() string {
 func (*GetDepositSummariesResponse_DepositSummary) ProtoMessage() {}
 
 func (x *GetDepositSummariesResponse_DepositSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3809,7 +5972,7 @@ type ListDepositDetailsResponse_Detail struct {
 
 func (x *ListDepositDetailsResponse_Detail) Reset() {
 	*x = ListDepositDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3821,7 +5984,7 @@ func (x *ListDepositDetailsResponse_Detail) String() string {
 func (*ListDepositDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListDepositDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4088,7 +6251,7 @@ type GetWithdrawSummariesResponse_WithdrawSummary struct {
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) Reset() {
 	*x = GetWithdrawSummariesResponse_WithdrawSummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4100,7 +6263,7 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) String() string {
 func (*GetWithdrawSummariesResponse_WithdrawSummary) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4198,7 +6361,7 @@ type ListWithdrawDetailsResponse_Detail struct {
 
 func (x *ListWithdrawDetailsResponse_Detail) Reset() {
 	*x = ListWithdrawDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4210,7 +6373,7 @@ func (x *ListWithdrawDetailsResponse_Detail) String() string {
 func (*ListWithdrawDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4562,7 +6725,7 @@ type ListRegisterRetentionResponse_List struct {
 
 func (x *ListRegisterRetentionResponse_List) Reset() {
 	*x = ListRegisterRetentionResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4574,7 +6737,7 @@ func (x *ListRegisterRetentionResponse_List) String() string {
 func (*ListRegisterRetentionResponse_List) ProtoMessage() {}
 
 func (x *ListRegisterRetentionResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5057,7 +7220,7 @@ type ListDepositVtgDetailsResponse_Detail struct {
 
 func (x *ListDepositVtgDetailsResponse_Detail) Reset() {
 	*x = ListDepositVtgDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5069,7 +7232,7 @@ func (x *ListDepositVtgDetailsResponse_Detail) String() string {
 func (*ListDepositVtgDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5345,7 +7508,7 @@ type ListWithdrawVtgDetailsResponse_Detail struct {
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) Reset() {
 	*x = ListWithdrawVtgDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5357,7 +7520,7 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) String() string {
 func (*ListWithdrawVtgDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5632,7 +7795,7 @@ type ListSportEventsResponse_SportEvent struct {
 
 func (x *ListSportEventsResponse_SportEvent) Reset() {
 	*x = ListSportEventsResponse_SportEvent{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5644,7 +7807,7 @@ func (x *ListSportEventsResponse_SportEvent) String() string {
 func (*ListSportEventsResponse_SportEvent) ProtoMessage() {}
 
 func (x *ListSportEventsResponse_SportEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5751,7 +7914,7 @@ type CustomerRecordReportDetailResponse_UserDetail struct {
 
 func (x *CustomerRecordReportDetailResponse_UserDetail) Reset() {
 	*x = CustomerRecordReportDetailResponse_UserDetail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5763,7 +7926,7 @@ func (x *CustomerRecordReportDetailResponse_UserDetail) String() string {
 func (*CustomerRecordReportDetailResponse_UserDetail) ProtoMessage() {}
 
 func (x *CustomerRecordReportDetailResponse_UserDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5838,7 +8001,7 @@ type CustomerRecordReportDetailResponse_PaymentTransaction struct {
 
 func (x *CustomerRecordReportDetailResponse_PaymentTransaction) Reset() {
 	*x = CustomerRecordReportDetailResponse_PaymentTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5850,7 +8013,7 @@ func (x *CustomerRecordReportDetailResponse_PaymentTransaction) String() string 
 func (*CustomerRecordReportDetailResponse_PaymentTransaction) ProtoMessage() {}
 
 func (x *CustomerRecordReportDetailResponse_PaymentTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5955,7 +8118,7 @@ type CustomerRecordReportDetailResponse_GameTransaction struct {
 
 func (x *CustomerRecordReportDetailResponse_GameTransaction) Reset() {
 	*x = CustomerRecordReportDetailResponse_GameTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5967,7 +8130,7 @@ func (x *CustomerRecordReportDetailResponse_GameTransaction) String() string {
 func (*CustomerRecordReportDetailResponse_GameTransaction) ProtoMessage() {}
 
 func (x *CustomerRecordReportDetailResponse_GameTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6097,7 +8260,7 @@ type CustomerRecordReportDetailResponse_EventSettlementInformation struct {
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) Reset() {
 	*x = CustomerRecordReportDetailResponse_EventSettlementInformation{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6109,7 +8272,7 @@ func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) String()
 func (*CustomerRecordReportDetailResponse_EventSettlementInformation) ProtoMessage() {}
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6147,7 +8310,7 @@ type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults 
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) Reset() {
 	*x = CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6159,7 +8322,7 @@ func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResu
 func (*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) ProtoMessage() {}
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6951,7 +9114,248 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\f_user_detailB\x16\n" +
 	"\x14_payment_transactionB\x13\n" +
 	"\x11_game_transactionB\x1f\n" +
-	"\x1d_event_settlement_information2\xf8\x15\n" +
+	"\x1d_event_settlement_information\"\xc9\x02\n" +
+	"\x1cListReferralVTGReportRequest\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x19\n" +
+	"\buser_ids\x18\x03 \x03(\x03R\auserIds\x12!\n" +
+	"\freferral_ids\x18\x04 \x03(\x03R\vreferralIds\x12#\n" +
+	"\raffiliate_ids\x18\x05 \x03(\x03R\faffiliateIds\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xbe\f\n" +
+	"\vVTGTierData\x12\x12\n" +
+	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1b\n" +
+	"\tnew_count\x18\n" +
+	" \x01(\x03R\bnewCount\x12\x1b\n" +
+	"\tftd_count\x18\v \x01(\x03R\bftdCount\x12'\n" +
+	"\x0fqualified_count\x18\f \x01(\x03R\x0equalifiedCount\x12$\n" +
+	"\x0eftd_amount_usd\x18\x14 \x01(\tR\fftdAmountUsd\x12,\n" +
+	"\x12deposit_amount_usd\x18\x15 \x01(\tR\x10depositAmountUsd\x122\n" +
+	"\x15withdrawal_amount_usd\x18\x16 \x01(\tR\x13withdrawalAmountUsd\x12\x17\n" +
+	"\aggr_usd\x18\x17 \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\x18 \x01(\tR\x06ngrUsd\x12\x17\n" +
+	"\ab2c_usd\x18\x19 \x01(\tR\x06b2cUsd\x12\x1b\n" +
+	"\tbet_count\x18\x1a \x01(\x03R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\x1b \x01(\tR\fbetAmountUsd\x12\x1e\n" +
+	"\vavg_bet_usd\x18\x1c \x01(\tR\tavgBetUsd\x12A\n" +
+	"\x1dftd_amount_reporting_currency\x18( \x01(\tR\x1aftdAmountReportingCurrency\x12I\n" +
+	"!deposit_amount_reporting_currency\x18) \x01(\tR\x1edepositAmountReportingCurrency\x12O\n" +
+	"$withdrawal_amount_reporting_currency\x18* \x01(\tR!withdrawalAmountReportingCurrency\x124\n" +
+	"\x16ggr_reporting_currency\x18+ \x01(\tR\x14ggrReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18, \x01(\tR\x14ngrReportingCurrency\x124\n" +
+	"\x16b2c_reporting_currency\x18- \x01(\tR\x14b2cReportingCurrency\x12A\n" +
+	"\x1dbet_amount_reporting_currency\x18/ \x01(\tR\x1abetAmountReportingCurrency\x12;\n" +
+	"\x1aavg_bet_reporting_currency\x180 \x01(\tR\x17avgBetReportingCurrency\x12.\n" +
+	"\x13referral_reward_usd\x18\x1e \x01(\tR\x11referralRewardUsd\x120\n" +
+	"\x14deposit_cashback_usd\x18\x1f \x01(\tR\x12depositCashbackUsd\x126\n" +
+	"\x17wagering_commission_usd\x18  \x01(\tR\x15wageringCommissionUsd\x123\n" +
+	"\x16loss_revenue_share_usd\x18! \x01(\tR\x13lossRevenueShareUsd\x12(\n" +
+	"\x10total_reward_usd\x18\" \x01(\tR\x0etotalRewardUsd\x12K\n" +
+	"\"referral_reward_reporting_currency\x182 \x01(\tR\x1freferralRewardReportingCurrency\x12M\n" +
+	"#deposit_cashback_reporting_currency\x183 \x01(\tR depositCashbackReportingCurrency\x12S\n" +
+	"&wagering_commission_reporting_currency\x184 \x01(\tR#wageringCommissionReportingCurrency\x12P\n" +
+	"%loss_revenue_share_reporting_currency\x185 \x01(\tR!lossRevenueShareReportingCurrency\x12E\n" +
+	"\x1ftotal_reward_reporting_currency\x186 \x01(\tR\x1ctotalRewardReportingCurrency\"\xeb\x04\n" +
+	"\rVTGReportItem\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12\x10\n" +
+	"\x03uid\x18\x02 \x01(\x03R\x03uid\x12\x1f\n" +
+	"\vreferral_id\x18\x03 \x01(\x03R\n" +
+	"referralId\x12!\n" +
+	"\faffiliate_id\x18\x04 \x01(\x03R\vaffiliateId\x12\x1f\n" +
+	"\voperator_id\x18\x05 \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x12system_operator_id\x18\x06 \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\a \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\b \x01(\x03R\x12retailerOperatorId\x12<\n" +
+	"\x05tiers\x18\n" +
+	" \x03(\v2&.api.backoffice.service.v1.VTGTierDataR\x05tiers\x12(\n" +
+	"\x10total_reward_usd\x18\x14 \x01(\tR\x0etotalRewardUsd\x12-\n" +
+	"\x13t1_total_reward_usd\x18\x15 \x01(\tR\x10t1TotalRewardUsd\x12\x15\n" +
+	"\x06t1_roi\x18\x16 \x01(\tR\x05t1Roi\x12E\n" +
+	"\x1ftotal_reward_reporting_currency\x18\x1e \x01(\tR\x1ctotalRewardReportingCurrency\x12J\n" +
+	"\"t1_total_reward_reporting_currency\x18\x1f \x01(\tR\x1et1TotalRewardReportingCurrency\"\xa6\x01\n" +
+	"\x1dListReferralVTGReportResponse\x12>\n" +
+	"\x05items\x18\x01 \x03(\v2(.api.backoffice.service.v1.VTGReportItemR\x05items\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\x86\x03\n" +
+	"!ListReferralSnapshotReportRequest\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x19\n" +
+	"\buser_ids\x18\x03 \x03(\x03R\auserIds\x12!\n" +
+	"\freferral_ids\x18\x04 \x03(\x03R\vreferralIds\x12#\n" +
+	"\raffiliate_ids\x18\x05 \x03(\x03R\faffiliateIds\x126\n" +
+	"\x17only_negative_carryover\x18\x06 \x01(\bR\x15onlyNegativeCarryover\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x96\x06\n" +
+	"\x10SnapshotTierData\x12\x12\n" +
+	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1f\n" +
+	"\vtotal_count\x18\n" +
+	" \x01(\x03R\n" +
+	"totalCount\x12'\n" +
+	"\x0fqualified_count\x18\v \x01(\x03R\x0equalifiedCount\x12!\n" +
+	"\factive_count\x18\f \x01(\x03R\vactiveCount\x12.\n" +
+	"\x13referral_reward_usd\x18\x14 \x01(\tR\x11referralRewardUsd\x120\n" +
+	"\x14deposit_cashback_usd\x18\x15 \x01(\tR\x12depositCashbackUsd\x126\n" +
+	"\x17wagering_commission_usd\x18\x16 \x01(\tR\x15wageringCommissionUsd\x123\n" +
+	"\x16loss_revenue_share_usd\x18\x17 \x01(\tR\x13lossRevenueShareUsd\x12(\n" +
+	"\x10total_reward_usd\x18\x18 \x01(\tR\x0etotalRewardUsd\x12K\n" +
+	"\"referral_reward_reporting_currency\x18\x1e \x01(\tR\x1freferralRewardReportingCurrency\x12M\n" +
+	"#deposit_cashback_reporting_currency\x18\x1f \x01(\tR depositCashbackReportingCurrency\x12S\n" +
+	"&wagering_commission_reporting_currency\x18  \x01(\tR#wageringCommissionReportingCurrency\x12P\n" +
+	"%loss_revenue_share_reporting_currency\x18! \x01(\tR!lossRevenueShareReportingCurrency\x12E\n" +
+	"\x1ftotal_reward_reporting_currency\x18\" \x01(\tR\x1ctotalRewardReportingCurrency\"\xf5\x03\n" +
+	"\fT1GamingData\x12\x17\n" +
+	"\aggr_usd\x18\x01 \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\x02 \x01(\tR\x06ngrUsd\x12\x17\n" +
+	"\ab2c_usd\x18\x03 \x01(\tR\x06b2cUsd\x12(\n" +
+	"\x10payment_cost_usd\x18\x04 \x01(\tR\x0epaymentCostUsd\x124\n" +
+	"\x16provider_royalties_usd\x18\x05 \x01(\tR\x14providerRoyaltiesUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\n" +
+	" \x01(\tR\x14ggrReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
+	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\x12E\n" +
+	"\x1fpayment_cost_reporting_currency\x18\r \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
+	"%provider_royalties_reporting_currency\x18\x0e \x01(\tR\"providerRoyaltiesReportingCurrency\"\xea\x01\n" +
+	"\rTierCarryover\x12\x12\n" +
+	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
+	"\vperiod_type\x18\x03 \x01(\tR\n" +
+	"periodType\x12\x19\n" +
+	"\bbased_on\x18\x04 \x01(\tR\abasedOn\x12#\n" +
+	"\rngr_carryover\x18\x05 \x01(\tR\fngrCarryover\x12#\n" +
+	"\rggr_carryover\x18\x06 \x01(\tR\fggrCarryover\x12#\n" +
+	"\rb2c_carryover\x18\a \x01(\tR\fb2cCarryover\"\xd0\x0e\n" +
+	"\x12SnapshotReportItem\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12\x10\n" +
+	"\x03uid\x18\x02 \x01(\x03R\x03uid\x12\x1f\n" +
+	"\vreferral_id\x18\x03 \x01(\x03R\n" +
+	"referralId\x12!\n" +
+	"\faffiliate_id\x18\x04 \x01(\x03R\vaffiliateId\x12\x1f\n" +
+	"\voperator_id\x18\x05 \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x12system_operator_id\x18\x06 \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\a \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\b \x01(\x03R\x12retailerOperatorId\x12A\n" +
+	"\x05tiers\x18\n" +
+	" \x03(\v2+.api.backoffice.service.v1.SnapshotTierDataR\x05tiers\x12D\n" +
+	"\tt1_gaming\x18\x14 \x01(\v2'.api.backoffice.service.v1.T1GamingDataR\bt1Gaming\x129\n" +
+	"\x19total_referral_reward_usd\x18\x1e \x01(\tR\x16totalReferralRewardUsd\x12;\n" +
+	"\x1atotal_deposit_cashback_usd\x18\x1f \x01(\tR\x17totalDepositCashbackUsd\x12A\n" +
+	"\x1dtotal_wagering_commission_usd\x18  \x01(\tR\x1atotalWageringCommissionUsd\x12>\n" +
+	"\x1ctotal_loss_revenue_share_usd\x18! \x01(\tR\x18totalLossRevenueShareUsd\x12V\n" +
+	"(total_referral_reward_reporting_currency\x18# \x01(\tR$totalReferralRewardReportingCurrency\x12X\n" +
+	")total_deposit_cashback_reporting_currency\x18$ \x01(\tR%totalDepositCashbackReportingCurrency\x12^\n" +
+	",total_wagering_commission_reporting_currency\x18% \x01(\tR(totalWageringCommissionReportingCurrency\x12[\n" +
+	"+total_loss_revenue_share_reporting_currency\x18& \x01(\tR&totalLossRevenueShareReportingCurrency\x12C\n" +
+	"\x1eunpaid_wagering_commission_usd\x18( \x01(\tR\x1bunpaidWageringCommissionUsd\x12;\n" +
+	"\x1aunpaid_loss_commission_usd\x18) \x01(\tR\x17unpaidLossCommissionUsd\x12`\n" +
+	"-unpaid_wagering_commission_reporting_currency\x18* \x01(\tR)unpaidWageringCommissionReportingCurrency\x12X\n" +
+	")unpaid_loss_commission_reporting_currency\x18+ \x01(\tR%unpaidLossCommissionReportingCurrency\x128\n" +
+	"\x18unclaimed_commission_usd\x182 \x01(\tR\x16unclaimedCommissionUsd\x120\n" +
+	"\x14lifetime_claimed_usd\x183 \x01(\tR\x12lifetimeClaimedUsd\x122\n" +
+	"\x15withdrawal_amount_usd\x184 \x01(\tR\x13withdrawalAmountUsd\x12U\n" +
+	"'unclaimed_commission_reporting_currency\x187 \x01(\tR$unclaimedCommissionReportingCurrency\x12M\n" +
+	"#lifetime_claimed_reporting_currency\x188 \x01(\tR lifetimeClaimedReportingCurrency\x12O\n" +
+	"$withdrawal_amount_reporting_currency\x189 \x01(\tR!withdrawalAmountReportingCurrency\x12W\n" +
+	"\x12negative_carryover\x18< \x03(\v2(.api.backoffice.service.v1.TierCarryoverR\x11negativeCarryover\"\xb0\x01\n" +
+	"\"ListReferralSnapshotReportResponse\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2-.api.backoffice.service.v1.SnapshotReportItemR\x05items\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xf6\x02\n" +
+	"%ListReferralContributionReportRequest\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12%\n" +
+	"\froot_user_id\x18\x03 \x01(\x03H\x00R\n" +
+	"rootUserId\x88\x01\x01\x12\x14\n" +
+	"\x05tiers\x18\x04 \x03(\x05R\x05tiers\x12&\n" +
+	"\fis_qualified\x18\x05 \x01(\bH\x01R\visQualified\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x06 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\a \x01(\x05H\x03R\bpageSize\x88\x01\x01B\x0f\n" +
+	"\r_root_user_idB\x0f\n" +
+	"\r_is_qualifiedB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x82\n" +
+	"\n" +
+	"\x16ContributionReportItem\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12\x17\n" +
+	"\aroot_id\x18\x02 \x01(\x03R\x06rootId\x12\x1b\n" +
+	"\tparent_id\x18\x03 \x01(\x03R\bparentId\x12\x17\n" +
+	"\asub_uid\x18\x04 \x01(\x03R\x06subUid\x12\x12\n" +
+	"\x04tier\x18\x05 \x01(\x05R\x04tier\x12\x19\n" +
+	"\breg_date\x18\x06 \x01(\x03R\aregDate\x12\x19\n" +
+	"\bftd_date\x18\a \x01(\x03R\aftdDate\x12!\n" +
+	"\fis_qualified\x18\b \x01(\bR\visQualified\x12\x1f\n" +
+	"\voperator_id\x18\t \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x12system_operator_id\x18\n" +
+	" \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\v \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\f \x01(\x03R\x12retailerOperatorId\x12\x1f\n" +
+	"\vdeposit_usd\x18\x14 \x01(\tR\n" +
+	"depositUsd\x12%\n" +
+	"\x0ewithdrawal_usd\x18\x15 \x01(\tR\rwithdrawalUsd\x12!\n" +
+	"\fturnover_usd\x18\x16 \x01(\tR\vturnoverUsd\x12\x17\n" +
+	"\aggr_usd\x18\x17 \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\x18 \x01(\tR\x06ngrUsd\x12\x17\n" +
+	"\ab2c_usd\x18\x19 \x01(\tR\x06b2cUsd\x12(\n" +
+	"\x10payment_cost_usd\x18\x1a \x01(\tR\x0epaymentCostUsd\x124\n" +
+	"\x16provider_royalties_usd\x18\x1b \x01(\tR\x14providerRoyaltiesUsd\x12<\n" +
+	"\x1adeposit_reporting_currency\x18\x1e \x01(\tR\x18depositReportingCurrency\x12B\n" +
+	"\x1dwithdrawal_reporting_currency\x18\x1f \x01(\tR\x1bwithdrawalReportingCurrency\x12>\n" +
+	"\x1bturnover_reporting_currency\x18  \x01(\tR\x19turnoverReportingCurrency\x124\n" +
+	"\x16ggr_reporting_currency\x18! \x01(\tR\x14ggrReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18\" \x01(\tR\x14ngrReportingCurrency\x124\n" +
+	"\x16b2c_reporting_currency\x18# \x01(\tR\x14b2cReportingCurrency\x12E\n" +
+	"\x1fpayment_cost_reporting_currency\x18$ \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
+	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12&\n" +
+	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x12\x1b\n" +
+	"\tdevice_id\x18) \x01(\tR\bdeviceId\x12\x0e\n" +
+	"\x02ip\x18* \x01(\tR\x02ip\"\xb8\x01\n" +
+	"&ListReferralContributionReportResponse\x12G\n" +
+	"\x05items\x18\x01 \x03(\v21.api.backoffice.service.v1.ContributionReportItemR\x05items\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xee\x01\n" +
+	"!ListReferralLifetimeReportRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x19\n" +
+	"\buser_ids\x18\x02 \x03(\x03R\auserIds\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xc8\x06\n" +
+	"\x12LifetimeReportItem\x12\x10\n" +
+	"\x03uid\x18\x01 \x01(\x03R\x03uid\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x12system_operator_id\x18\x03 \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\x04 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x05 \x01(\x03R\x12retailerOperatorId\x122\n" +
+	"\x15conversion_reward_usd\x18\n" +
+	" \x01(\tR\x13conversionRewardUsd\x120\n" +
+	"\x14deposit_cashback_usd\x18\v \x01(\tR\x12depositCashbackUsd\x126\n" +
+	"\x17wagering_commission_usd\x18\f \x01(\tR\x15wageringCommissionUsd\x123\n" +
+	"\x16loss_revenue_share_usd\x18\r \x01(\tR\x13lossRevenueShareUsd\x12\x1b\n" +
+	"\ttotal_usd\x18\x0e \x01(\tR\btotalUsd\x12O\n" +
+	"$conversion_reward_reporting_currency\x18\x14 \x01(\tR!conversionRewardReportingCurrency\x12M\n" +
+	"#deposit_cashback_reporting_currency\x18\x15 \x01(\tR depositCashbackReportingCurrency\x12S\n" +
+	"&wagering_commission_reporting_currency\x18\x16 \x01(\tR#wageringCommissionReportingCurrency\x12P\n" +
+	"%loss_revenue_share_reporting_currency\x18\x17 \x01(\tR!lossRevenueShareReportingCurrency\x128\n" +
+	"\x18total_reporting_currency\x18\x18 \x01(\tR\x16totalReportingCurrency\"\xb0\x01\n" +
+	"\"ListReferralLifetimeReportResponse\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2-.api.backoffice.service.v1.LifetimeReportItemR\x05items\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total2\xd8\x1c\n" +
 	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
 	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xa1\x01\n" +
@@ -6968,7 +9372,11 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x15ListDepositVtgDetails\x127.api.backoffice.service.v1.ListDepositVtgDetailsRequest\x1a8.api.backoffice.service.v1.ListDepositVtgDetailsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/report/deposit-vtg-details/list\x12\xc9\x01\n" +
 	"\x16ListWithdrawVtgDetails\x128.api.backoffice.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/report/withdraw-vtg-details/list\x12\xac\x01\n" +
 	"\x0fListSportEvents\x121.api.backoffice.service.v1.ListSportEventsRequest\x1a2.api.backoffice.service.v1.ListSportEventsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/report/sport-events/list\x12\xcf\x01\n" +
-	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/report/customer-record/getB[\n" +
+	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/report/customer-record/get\x12\xc2\x01\n" +
+	"\x15ListReferralVTGReport\x127.api.backoffice.service.v1.ListReferralVTGReportRequest\x1a8.api.backoffice.service.v1.ListReferralVTGReportResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/commission/referral/vtg/list\x12\xd6\x01\n" +
+	"\x1aListReferralSnapshotReport\x12<.api.backoffice.service.v1.ListReferralSnapshotReportRequest\x1a=.api.backoffice.service.v1.ListReferralSnapshotReportResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/commission/referral/snapshot/list\x12\xe6\x01\n" +
+	"\x1eListReferralContributionReport\x12@.api.backoffice.service.v1.ListReferralContributionReportRequest\x1aA.api.backoffice.service.v1.ListReferralContributionReportResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/commission/referral/contribution/list\x12\xd6\x01\n" +
+	"\x1aListReferralLifetimeReport\x12<.api.backoffice.service.v1.ListReferralLifetimeReportRequest\x1a=.api.backoffice.service.v1.ListReferralLifetimeReportResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/commission/referral/lifetime/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -6983,7 +9391,7 @@ func file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
+var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
 var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
 	(*TimeRange)(nil),                                                                  // 0: api.backoffice.service.v1.TimeRange
 	(*GetSummaryRequest)(nil),                                                          // 1: api.backoffice.service.v1.GetSummaryRequest
@@ -7016,106 +9424,142 @@ var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
 	(*ListSportEventsResponse)(nil),                                                    // 28: api.backoffice.service.v1.ListSportEventsResponse
 	(*CustomerRecordReportDetailRequest)(nil),                                          // 29: api.backoffice.service.v1.CustomerRecordReportDetailRequest
 	(*CustomerRecordReportDetailResponse)(nil),                                         // 30: api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	(*ListSummariesResponse_List)(nil),                                                 // 31: api.backoffice.service.v1.ListSummariesResponse.List
-	(*ListGameDataResponse_List)(nil),                                                  // 32: api.backoffice.service.v1.ListGameDataResponse.List
-	(*ListPlayerGameDataResponse_List)(nil),                                            // 33: api.backoffice.service.v1.ListPlayerGameDataResponse.List
-	(*GetDepositSummariesResponse_DepositSummary)(nil),                                 // 34: api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	(*ListDepositDetailsResponse_Detail)(nil),                                          // 35: api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	(*GetWithdrawSummariesResponse_WithdrawSummary)(nil),                               // 36: api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	(*ListWithdrawDetailsResponse_Detail)(nil),                                         // 37: api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	(*ListRegisterRetentionResponse_List)(nil),                                         // 38: api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	(*ListDepositVtgDetailsResponse_Detail)(nil),                                       // 39: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	(*ListWithdrawVtgDetailsResponse_Detail)(nil),                                      // 40: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	(*ListSportEventsResponse_SportEvent)(nil),                                         // 41: api.backoffice.service.v1.ListSportEventsResponse.SportEvent
-	(*CustomerRecordReportDetailResponse_UserDetail)(nil),                              // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
-	(*CustomerRecordReportDetailResponse_PaymentTransaction)(nil),                      // 43: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
-	(*CustomerRecordReportDetailResponse_GameTransaction)(nil),                         // 44: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
-	(*CustomerRecordReportDetailResponse_EventSettlementInformation)(nil),              // 45: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
-	(*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults)(nil), // 46: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
-	(*common.OperatorContextFilters)(nil),                                              // 47: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),                                                      // 48: google.protobuf.Timestamp
+	(*ListReferralVTGReportRequest)(nil),                                               // 31: api.backoffice.service.v1.ListReferralVTGReportRequest
+	(*VTGTierData)(nil),                                                                // 32: api.backoffice.service.v1.VTGTierData
+	(*VTGReportItem)(nil),                                                              // 33: api.backoffice.service.v1.VTGReportItem
+	(*ListReferralVTGReportResponse)(nil),                                              // 34: api.backoffice.service.v1.ListReferralVTGReportResponse
+	(*ListReferralSnapshotReportRequest)(nil),                                          // 35: api.backoffice.service.v1.ListReferralSnapshotReportRequest
+	(*SnapshotTierData)(nil),                                                           // 36: api.backoffice.service.v1.SnapshotTierData
+	(*T1GamingData)(nil),                                                               // 37: api.backoffice.service.v1.T1GamingData
+	(*TierCarryover)(nil),                                                              // 38: api.backoffice.service.v1.TierCarryover
+	(*SnapshotReportItem)(nil),                                                         // 39: api.backoffice.service.v1.SnapshotReportItem
+	(*ListReferralSnapshotReportResponse)(nil),                                         // 40: api.backoffice.service.v1.ListReferralSnapshotReportResponse
+	(*ListReferralContributionReportRequest)(nil),                                      // 41: api.backoffice.service.v1.ListReferralContributionReportRequest
+	(*ContributionReportItem)(nil),                                                     // 42: api.backoffice.service.v1.ContributionReportItem
+	(*ListReferralContributionReportResponse)(nil),                                     // 43: api.backoffice.service.v1.ListReferralContributionReportResponse
+	(*ListReferralLifetimeReportRequest)(nil),                                          // 44: api.backoffice.service.v1.ListReferralLifetimeReportRequest
+	(*LifetimeReportItem)(nil),                                                         // 45: api.backoffice.service.v1.LifetimeReportItem
+	(*ListReferralLifetimeReportResponse)(nil),                                         // 46: api.backoffice.service.v1.ListReferralLifetimeReportResponse
+	(*ListSummariesResponse_List)(nil),                                                 // 47: api.backoffice.service.v1.ListSummariesResponse.List
+	(*ListGameDataResponse_List)(nil),                                                  // 48: api.backoffice.service.v1.ListGameDataResponse.List
+	(*ListPlayerGameDataResponse_List)(nil),                                            // 49: api.backoffice.service.v1.ListPlayerGameDataResponse.List
+	(*GetDepositSummariesResponse_DepositSummary)(nil),                                 // 50: api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	(*ListDepositDetailsResponse_Detail)(nil),                                          // 51: api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	(*GetWithdrawSummariesResponse_WithdrawSummary)(nil),                               // 52: api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	(*ListWithdrawDetailsResponse_Detail)(nil),                                         // 53: api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	(*ListRegisterRetentionResponse_List)(nil),                                         // 54: api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	(*ListDepositVtgDetailsResponse_Detail)(nil),                                       // 55: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	(*ListWithdrawVtgDetailsResponse_Detail)(nil),                                      // 56: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	(*ListSportEventsResponse_SportEvent)(nil),                                         // 57: api.backoffice.service.v1.ListSportEventsResponse.SportEvent
+	(*CustomerRecordReportDetailResponse_UserDetail)(nil),                              // 58: api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
+	(*CustomerRecordReportDetailResponse_PaymentTransaction)(nil),                      // 59: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
+	(*CustomerRecordReportDetailResponse_GameTransaction)(nil),                         // 60: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
+	(*CustomerRecordReportDetailResponse_EventSettlementInformation)(nil),              // 61: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
+	(*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults)(nil), // 62: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
+	(*common.OperatorContextFilters)(nil),                                              // 63: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                                                      // 64: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 1: api.backoffice.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	63, // 1: api.backoffice.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 2: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 3: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	31, // 4: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
+	63, // 3: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	47, // 4: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
 	0,  // 5: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 6: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	63, // 6: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 7: api.backoffice.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 8: api.backoffice.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 9: api.backoffice.service.v1.ListGameDataResponse.list:type_name -> api.backoffice.service.v1.ListGameDataResponse.List
+	63, // 8: api.backoffice.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	48, // 9: api.backoffice.service.v1.ListGameDataResponse.list:type_name -> api.backoffice.service.v1.ListGameDataResponse.List
 	0,  // 10: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 11: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	63, // 11: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 12: api.backoffice.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 13: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	33, // 14: api.backoffice.service.v1.ListPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.ListPlayerGameDataResponse.List
+	63, // 13: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	49, // 14: api.backoffice.service.v1.ListPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.ListPlayerGameDataResponse.List
 	0,  // 15: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 16: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 17: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	63, // 16: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	50, // 17: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
 	0,  // 18: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 19: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	35, // 20: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	63, // 19: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	51, // 20: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
 	0,  // 21: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 22: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	36, // 23: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	63, // 22: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 23: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
 	0,  // 24: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 25: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	37, // 26: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	63, // 25: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	53, // 26: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
 	0,  // 27: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 28: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	38, // 29: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	63, // 28: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	54, // 29: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
 	0,  // 30: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 31: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	63, // 31: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	55, // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
 	0,  // 33: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	47, // 34: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 35: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	41, // 36: api.backoffice.service.v1.ListSportEventsResponse.events:type_name -> api.backoffice.service.v1.ListSportEventsResponse.SportEvent
-	42, // 37: api.backoffice.service.v1.CustomerRecordReportDetailResponse.user_detail:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
-	43, // 38: api.backoffice.service.v1.CustomerRecordReportDetailResponse.payment_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
-	44, // 39: api.backoffice.service.v1.CustomerRecordReportDetailResponse.game_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
-	45, // 40: api.backoffice.service.v1.CustomerRecordReportDetailResponse.event_settlement_information:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
-	48, // 41: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
-	48, // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction.settlement_time:type_name -> google.protobuf.Timestamp
-	46, // 43: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
-	48, // 44: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults.event_start_time:type_name -> google.protobuf.Timestamp
-	1,  // 45: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 46: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 47: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 48: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
-	9,  // 49: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 50: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
-	13, // 51: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 52: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 53: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 54: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 55: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 56: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 57: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	27, // 58: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	29, // 59: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	2,  // 60: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 61: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 62: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 63: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	10, // 64: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 65: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	14, // 66: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 67: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 68: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 69: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 70: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 71: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 72: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	28, // 73: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	30, // 74: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	60, // [60:75] is the sub-list for method output_type
-	45, // [45:60] is the sub-list for method input_type
-	45, // [45:45] is the sub-list for extension type_name
-	45, // [45:45] is the sub-list for extension extendee
-	0,  // [0:45] is the sub-list for field type_name
+	63, // 34: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	56, // 35: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	57, // 36: api.backoffice.service.v1.ListSportEventsResponse.events:type_name -> api.backoffice.service.v1.ListSportEventsResponse.SportEvent
+	58, // 37: api.backoffice.service.v1.CustomerRecordReportDetailResponse.user_detail:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
+	59, // 38: api.backoffice.service.v1.CustomerRecordReportDetailResponse.payment_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
+	60, // 39: api.backoffice.service.v1.CustomerRecordReportDetailResponse.game_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
+	61, // 40: api.backoffice.service.v1.CustomerRecordReportDetailResponse.event_settlement_information:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
+	63, // 41: api.backoffice.service.v1.ListReferralVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 42: api.backoffice.service.v1.VTGReportItem.tiers:type_name -> api.backoffice.service.v1.VTGTierData
+	33, // 43: api.backoffice.service.v1.ListReferralVTGReportResponse.items:type_name -> api.backoffice.service.v1.VTGReportItem
+	63, // 44: api.backoffice.service.v1.ListReferralSnapshotReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	36, // 45: api.backoffice.service.v1.SnapshotReportItem.tiers:type_name -> api.backoffice.service.v1.SnapshotTierData
+	37, // 46: api.backoffice.service.v1.SnapshotReportItem.t1_gaming:type_name -> api.backoffice.service.v1.T1GamingData
+	38, // 47: api.backoffice.service.v1.SnapshotReportItem.negative_carryover:type_name -> api.backoffice.service.v1.TierCarryover
+	39, // 48: api.backoffice.service.v1.ListReferralSnapshotReportResponse.items:type_name -> api.backoffice.service.v1.SnapshotReportItem
+	63, // 49: api.backoffice.service.v1.ListReferralContributionReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 50: api.backoffice.service.v1.ListReferralContributionReportResponse.items:type_name -> api.backoffice.service.v1.ContributionReportItem
+	63, // 51: api.backoffice.service.v1.ListReferralLifetimeReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	45, // 52: api.backoffice.service.v1.ListReferralLifetimeReportResponse.items:type_name -> api.backoffice.service.v1.LifetimeReportItem
+	64, // 53: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
+	64, // 54: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction.settlement_time:type_name -> google.protobuf.Timestamp
+	62, // 55: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
+	64, // 56: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults.event_start_time:type_name -> google.protobuf.Timestamp
+	1,  // 57: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 58: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 59: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 60: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
+	9,  // 61: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 62: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
+	13, // 63: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 64: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 65: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 66: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 67: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 68: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 69: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	27, // 70: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	29, // 71: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	31, // 72: api.backoffice.service.v1.BackofficeReport.ListReferralVTGReport:input_type -> api.backoffice.service.v1.ListReferralVTGReportRequest
+	35, // 73: api.backoffice.service.v1.BackofficeReport.ListReferralSnapshotReport:input_type -> api.backoffice.service.v1.ListReferralSnapshotReportRequest
+	41, // 74: api.backoffice.service.v1.BackofficeReport.ListReferralContributionReport:input_type -> api.backoffice.service.v1.ListReferralContributionReportRequest
+	44, // 75: api.backoffice.service.v1.BackofficeReport.ListReferralLifetimeReport:input_type -> api.backoffice.service.v1.ListReferralLifetimeReportRequest
+	2,  // 76: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 77: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 78: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 79: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	10, // 80: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 81: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	14, // 82: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 83: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 84: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 85: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 86: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 87: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 88: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	28, // 89: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	30, // 90: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	34, // 91: api.backoffice.service.v1.BackofficeReport.ListReferralVTGReport:output_type -> api.backoffice.service.v1.ListReferralVTGReportResponse
+	40, // 92: api.backoffice.service.v1.BackofficeReport.ListReferralSnapshotReport:output_type -> api.backoffice.service.v1.ListReferralSnapshotReportResponse
+	43, // 93: api.backoffice.service.v1.BackofficeReport.ListReferralContributionReport:output_type -> api.backoffice.service.v1.ListReferralContributionReportResponse
+	46, // 94: api.backoffice.service.v1.BackofficeReport.ListReferralLifetimeReport:output_type -> api.backoffice.service.v1.ListReferralLifetimeReportResponse
+	76, // [76:95] is the sub-list for method output_type
+	57, // [57:76] is the sub-list for method input_type
+	57, // [57:57] is the sub-list for extension type_name
+	57, // [57:57] is the sub-list for extension extendee
+	0,  // [0:57] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
@@ -7130,13 +9574,17 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[27].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[29].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[30].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[31].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[35].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[41].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[44].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_report_proto_rawDesc), len(file_backoffice_service_v1_backoffice_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   47,
+			NumMessages:   63,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

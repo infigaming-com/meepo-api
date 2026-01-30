@@ -19,21 +19,25 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeReport_GetSummary_FullMethodName                 = "/api.backoffice.service.v1.BackofficeReport/GetSummary"
-	BackofficeReport_ListSummaries_FullMethodName              = "/api.backoffice.service.v1.BackofficeReport/ListSummaries"
-	BackofficeReport_GetGameDataSummary_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
-	BackofficeReport_ListGameData_FullMethodName               = "/api.backoffice.service.v1.BackofficeReport/ListGameData"
-	BackofficeReport_GetPlayerGameDataSummary_FullMethodName   = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
-	BackofficeReport_ListPlayerGameData_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListPlayerGameData"
-	BackofficeReport_GetDepositSummaries_FullMethodName        = "/api.backoffice.service.v1.BackofficeReport/GetDepositSummaries"
-	BackofficeReport_ListDepositDetails_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListDepositDetails"
-	BackofficeReport_GetWithdrawSummaries_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/GetWithdrawSummaries"
-	BackofficeReport_ListWithdrawDetails_FullMethodName        = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDetails"
-	BackofficeReport_ListRegisterRetention_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
-	BackofficeReport_ListDepositVtgDetails_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
-	BackofficeReport_ListWithdrawVtgDetails_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
-	BackofficeReport_ListSportEvents_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
-	BackofficeReport_CustomerRecordReportDetail_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/CustomerRecordReportDetail"
+	BackofficeReport_GetSummary_FullMethodName                     = "/api.backoffice.service.v1.BackofficeReport/GetSummary"
+	BackofficeReport_ListSummaries_FullMethodName                  = "/api.backoffice.service.v1.BackofficeReport/ListSummaries"
+	BackofficeReport_GetGameDataSummary_FullMethodName             = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
+	BackofficeReport_ListGameData_FullMethodName                   = "/api.backoffice.service.v1.BackofficeReport/ListGameData"
+	BackofficeReport_GetPlayerGameDataSummary_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
+	BackofficeReport_ListPlayerGameData_FullMethodName             = "/api.backoffice.service.v1.BackofficeReport/ListPlayerGameData"
+	BackofficeReport_GetDepositSummaries_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/GetDepositSummaries"
+	BackofficeReport_ListDepositDetails_FullMethodName             = "/api.backoffice.service.v1.BackofficeReport/ListDepositDetails"
+	BackofficeReport_GetWithdrawSummaries_FullMethodName           = "/api.backoffice.service.v1.BackofficeReport/GetWithdrawSummaries"
+	BackofficeReport_ListWithdrawDetails_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDetails"
+	BackofficeReport_ListRegisterRetention_FullMethodName          = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
+	BackofficeReport_ListDepositVtgDetails_FullMethodName          = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
+	BackofficeReport_ListWithdrawVtgDetails_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
+	BackofficeReport_ListSportEvents_FullMethodName                = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
+	BackofficeReport_CustomerRecordReportDetail_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/CustomerRecordReportDetail"
+	BackofficeReport_ListReferralVTGReport_FullMethodName          = "/api.backoffice.service.v1.BackofficeReport/ListReferralVTGReport"
+	BackofficeReport_ListReferralSnapshotReport_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListReferralSnapshotReport"
+	BackofficeReport_ListReferralContributionReport_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/ListReferralContributionReport"
+	BackofficeReport_ListReferralLifetimeReport_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListReferralLifetimeReport"
 )
 
 // BackofficeReportClient is the client API for BackofficeReport service.
@@ -55,6 +59,15 @@ type BackofficeReportClient interface {
 	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
 	CustomerRecordReportDetail(ctx context.Context, in *CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*CustomerRecordReportDetailResponse, error)
+	// Commission Report APIs (Referral tables - 全民)
+	// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+	ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*ListReferralVTGReportResponse, error)
+	// ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+	ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportResponse, error)
+	// ListReferralContributionReport returns Contribution report - Subordinate detail view
+	ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error)
+	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+	ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error)
 }
 
 type backofficeReportClient struct {
@@ -215,6 +228,46 @@ func (c *backofficeReportClient) CustomerRecordReportDetail(ctx context.Context,
 	return out, nil
 }
 
+func (c *backofficeReportClient) ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*ListReferralVTGReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralVTGReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralVTGReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReportClient) ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralSnapshotReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralSnapshotReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReportClient) ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralContributionReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralContributionReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReportClient) ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralLifetimeReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralLifetimeReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeReportServer is the server API for BackofficeReport service.
 // All implementations must embed UnimplementedBackofficeReportServer
 // for forward compatibility.
@@ -234,6 +287,15 @@ type BackofficeReportServer interface {
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error)
+	// Commission Report APIs (Referral tables - 全民)
+	// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+	ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error)
+	// ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+	ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error)
+	// ListReferralContributionReport returns Contribution report - Subordinate detail view
+	ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error)
+	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+	ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
 }
 
@@ -288,6 +350,18 @@ func (UnimplementedBackofficeReportServer) ListSportEvents(context.Context, *Lis
 }
 func (UnimplementedBackofficeReportServer) CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CustomerRecordReportDetail not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralVTGReport not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralSnapshotReport not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralContributionReport not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralLifetimeReport not implemented")
 }
 func (UnimplementedBackofficeReportServer) mustEmbedUnimplementedBackofficeReportServer() {}
 func (UnimplementedBackofficeReportServer) testEmbeddedByValue()                          {}
@@ -580,6 +654,78 @@ func _BackofficeReport_CustomerRecordReportDetail_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReport_ListReferralVTGReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralVTGReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListReferralVTGReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListReferralVTGReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListReferralVTGReport(ctx, req.(*ListReferralVTGReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeReport_ListReferralSnapshotReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralSnapshotReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListReferralSnapshotReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListReferralSnapshotReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListReferralSnapshotReport(ctx, req.(*ListReferralSnapshotReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeReport_ListReferralContributionReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralContributionReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListReferralContributionReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListReferralContributionReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListReferralContributionReport(ctx, req.(*ListReferralContributionReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeReport_ListReferralLifetimeReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralLifetimeReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListReferralLifetimeReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListReferralLifetimeReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListReferralLifetimeReport(ctx, req.(*ListReferralLifetimeReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeReport_ServiceDesc is the grpc.ServiceDesc for BackofficeReport service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -646,6 +792,22 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CustomerRecordReportDetail",
 			Handler:    _BackofficeReport_CustomerRecordReportDetail_Handler,
+		},
+		{
+			MethodName: "ListReferralVTGReport",
+			Handler:    _BackofficeReport_ListReferralVTGReport_Handler,
+		},
+		{
+			MethodName: "ListReferralSnapshotReport",
+			Handler:    _BackofficeReport_ListReferralSnapshotReport_Handler,
+		},
+		{
+			MethodName: "ListReferralContributionReport",
+			Handler:    _BackofficeReport_ListReferralContributionReport_Handler,
+		},
+		{
+			MethodName: "ListReferralLifetimeReport",
+			Handler:    _BackofficeReport_ListReferralLifetimeReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

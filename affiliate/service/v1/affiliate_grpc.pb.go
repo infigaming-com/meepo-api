@@ -19,48 +19,52 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Affiliate_CreateCommissionPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
-	Affiliate_UpdateCommissionPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
-	Affiliate_GetCommissionPlan_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
-	Affiliate_ListCommissionPlans_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
-	Affiliate_DeleteCommissionPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
-	Affiliate_ListAllCommissionPlans_FullMethodName       = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
-	Affiliate_ListAffiliateCommissionPlans_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListAffiliateCommissionPlans"
-	Affiliate_CreateAffiliate_FullMethodName              = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
-	Affiliate_UpdateAffiliate_FullMethodName              = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
-	Affiliate_ListAffiliates_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
-	Affiliate_DeleteAffiliate_FullMethodName              = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
-	Affiliate_GetAffiliateDetails_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
-	Affiliate_CreateCampaign_FullMethodName               = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
-	Affiliate_UpdateCampaign_FullMethodName               = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
-	Affiliate_ListCampaigns_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
-	Affiliate_DeleteCampaign_FullMethodName               = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
-	Affiliate_CreatePostback_FullMethodName               = "/api.affiliate.service.v1.Affiliate/CreatePostback"
-	Affiliate_UpdatePostback_FullMethodName               = "/api.affiliate.service.v1.Affiliate/UpdatePostback"
-	Affiliate_DeletePostback_FullMethodName               = "/api.affiliate.service.v1.Affiliate/DeletePostback"
-	Affiliate_ListPostbacks_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListPostbacks"
-	Affiliate_ListPostbackLogs_FullMethodName             = "/api.affiliate.service.v1.Affiliate/ListPostbackLogs"
-	Affiliate_ListAffiliateDomains_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAffiliateDomains"
-	Affiliate_SetAffiliateDomain_FullMethodName           = "/api.affiliate.service.v1.Affiliate/SetAffiliateDomain"
-	Affiliate_ListEvents_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/ListEvents"
-	Affiliate_ListCommissions_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListCommissions"
-	Affiliate_ListUsers_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/ListUsers"
-	Affiliate_ExportUsers_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ExportUsers"
-	Affiliate_ListAffiliateBills_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
-	Affiliate_SetReferralPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
-	Affiliate_GetReferralPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
-	Affiliate_GetUserReferralPlan_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
-	Affiliate_GetUserReferralStats_FullMethodName         = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
-	Affiliate_CreateUserReferralCode_FullMethodName       = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
-	Affiliate_ListUserReferralRewards_FullMethodName      = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
-	Affiliate_GetUserReferralRewards_FullMethodName       = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
-	Affiliate_ClaimUserReferralRewards_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
-	Affiliate_GetUserLossRevenueShareStats_FullMethodName = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
-	Affiliate_GetUserPromoConditionInfo_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
-	Affiliate_GetOperatorSettings_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
-	Affiliate_UpdateOperatorSettings_FullMethodName       = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
-	Affiliate_GetAffiliateDashboard_FullMethodName        = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
-	Affiliate_GetAffiliateTrend_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
+	Affiliate_CreateCommissionPlan_FullMethodName           = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
+	Affiliate_UpdateCommissionPlan_FullMethodName           = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
+	Affiliate_GetCommissionPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
+	Affiliate_ListCommissionPlans_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
+	Affiliate_DeleteCommissionPlan_FullMethodName           = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
+	Affiliate_ListAllCommissionPlans_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
+	Affiliate_ListAffiliateCommissionPlans_FullMethodName   = "/api.affiliate.service.v1.Affiliate/ListAffiliateCommissionPlans"
+	Affiliate_CreateAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
+	Affiliate_UpdateAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
+	Affiliate_ListAffiliates_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
+	Affiliate_DeleteAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
+	Affiliate_GetAffiliateDetails_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
+	Affiliate_CreateCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
+	Affiliate_UpdateCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
+	Affiliate_ListCampaigns_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
+	Affiliate_DeleteCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
+	Affiliate_CreatePostback_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreatePostback"
+	Affiliate_UpdatePostback_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdatePostback"
+	Affiliate_DeletePostback_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/DeletePostback"
+	Affiliate_ListPostbacks_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListPostbacks"
+	Affiliate_ListPostbackLogs_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListPostbackLogs"
+	Affiliate_ListAffiliateDomains_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateDomains"
+	Affiliate_SetAffiliateDomain_FullMethodName             = "/api.affiliate.service.v1.Affiliate/SetAffiliateDomain"
+	Affiliate_ListEvents_FullMethodName                     = "/api.affiliate.service.v1.Affiliate/ListEvents"
+	Affiliate_ListCommissions_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListCommissions"
+	Affiliate_ListUsers_FullMethodName                      = "/api.affiliate.service.v1.Affiliate/ListUsers"
+	Affiliate_ExportUsers_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/ExportUsers"
+	Affiliate_ListAffiliateBills_FullMethodName             = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
+	Affiliate_SetReferralPlan_FullMethodName                = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
+	Affiliate_GetReferralPlan_FullMethodName                = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
+	Affiliate_GetUserReferralPlan_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
+	Affiliate_GetUserReferralStats_FullMethodName           = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
+	Affiliate_CreateUserReferralCode_FullMethodName         = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
+	Affiliate_ListUserReferralRewards_FullMethodName        = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
+	Affiliate_GetUserReferralRewards_FullMethodName         = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
+	Affiliate_ClaimUserReferralRewards_FullMethodName       = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
+	Affiliate_GetUserLossRevenueShareStats_FullMethodName   = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
+	Affiliate_GetUserPromoConditionInfo_FullMethodName      = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
+	Affiliate_GetOperatorSettings_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
+	Affiliate_UpdateOperatorSettings_FullMethodName         = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
+	Affiliate_GetAffiliateDashboard_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
+	Affiliate_GetAffiliateTrend_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
+	Affiliate_ListReferralVTGReport_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListReferralVTGReport"
+	Affiliate_ListReferralSnapshotReport_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListReferralSnapshotReport"
+	Affiliate_ListReferralContributionReport_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListReferralContributionReport"
+	Affiliate_ListReferralLifetimeReport_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListReferralLifetimeReport"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -113,6 +117,14 @@ type AffiliateClient interface {
 	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*GetAffiliateDashboardResponse, error)
 	// GetAffiliateTrend returns time series data for trend visualization
 	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*GetAffiliateTrendResponse, error)
+	// ListReferralVTGReport returns VTG report - New subordinates performance
+	ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*ListReferralVTGReportResponse, error)
+	// ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+	ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportResponse, error)
+	// ListReferralContributionReport returns Contribution report - Subordinate detail view
+	ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error)
+	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+	ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error)
 }
 
 type affiliateClient struct {
@@ -543,6 +555,46 @@ func (c *affiliateClient) GetAffiliateTrend(ctx context.Context, in *GetAffiliat
 	return out, nil
 }
 
+func (c *affiliateClient) ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*ListReferralVTGReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralVTGReportResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListReferralVTGReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralSnapshotReportResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListReferralSnapshotReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralContributionReportResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListReferralContributionReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReferralLifetimeReportResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListReferralLifetimeReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -593,6 +645,14 @@ type AffiliateServer interface {
 	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*GetAffiliateDashboardResponse, error)
 	// GetAffiliateTrend returns time series data for trend visualization
 	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error)
+	// ListReferralVTGReport returns VTG report - New subordinates performance
+	ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error)
+	// ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+	ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error)
+	// ListReferralContributionReport returns Contribution report - Subordinate detail view
+	ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error)
+	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+	ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -728,6 +788,18 @@ func (UnimplementedAffiliateServer) GetAffiliateDashboard(context.Context, *GetA
 }
 func (UnimplementedAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*GetAffiliateTrendResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
+}
+func (UnimplementedAffiliateServer) ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralVTGReport not implemented")
+}
+func (UnimplementedAffiliateServer) ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralSnapshotReport not implemented")
+}
+func (UnimplementedAffiliateServer) ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralContributionReport not implemented")
+}
+func (UnimplementedAffiliateServer) ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralLifetimeReport not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1506,6 +1578,78 @@ func _Affiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ListReferralVTGReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralVTGReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListReferralVTGReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListReferralVTGReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListReferralVTGReport(ctx, req.(*ListReferralVTGReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListReferralSnapshotReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralSnapshotReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListReferralSnapshotReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListReferralSnapshotReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListReferralSnapshotReport(ctx, req.(*ListReferralSnapshotReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListReferralContributionReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralContributionReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListReferralContributionReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListReferralContributionReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListReferralContributionReport(ctx, req.(*ListReferralContributionReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListReferralLifetimeReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralLifetimeReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListReferralLifetimeReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListReferralLifetimeReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListReferralLifetimeReport(ctx, req.(*ListReferralLifetimeReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1680,6 +1824,22 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAffiliateTrend",
 			Handler:    _Affiliate_GetAffiliateTrend_Handler,
+		},
+		{
+			MethodName: "ListReferralVTGReport",
+			Handler:    _Affiliate_ListReferralVTGReport_Handler,
+		},
+		{
+			MethodName: "ListReferralSnapshotReport",
+			Handler:    _Affiliate_ListReferralSnapshotReport_Handler,
+		},
+		{
+			MethodName: "ListReferralContributionReport",
+			Handler:    _Affiliate_ListReferralContributionReport_Handler,
+		},
+		{
+			MethodName: "ListReferralLifetimeReport",
+			Handler:    _Affiliate_ListReferralLifetimeReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

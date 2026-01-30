@@ -29,6 +29,10 @@ const OperationBackofficeReportListDepositDetails = "/api.backoffice.service.v1.
 const OperationBackofficeReportListDepositVtgDetails = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
 const OperationBackofficeReportListGameData = "/api.backoffice.service.v1.BackofficeReport/ListGameData"
 const OperationBackofficeReportListPlayerGameData = "/api.backoffice.service.v1.BackofficeReport/ListPlayerGameData"
+const OperationBackofficeReportListReferralContributionReport = "/api.backoffice.service.v1.BackofficeReport/ListReferralContributionReport"
+const OperationBackofficeReportListReferralLifetimeReport = "/api.backoffice.service.v1.BackofficeReport/ListReferralLifetimeReport"
+const OperationBackofficeReportListReferralSnapshotReport = "/api.backoffice.service.v1.BackofficeReport/ListReferralSnapshotReport"
+const OperationBackofficeReportListReferralVTGReport = "/api.backoffice.service.v1.BackofficeReport/ListReferralVTGReport"
 const OperationBackofficeReportListRegisterRetention = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
 const OperationBackofficeReportListSportEvents = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
 const OperationBackofficeReportListSummaries = "/api.backoffice.service.v1.BackofficeReport/ListSummaries"
@@ -46,6 +50,15 @@ type BackofficeReportHTTPServer interface {
 	ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*ListDepositVtgDetailsResponse, error)
 	ListGameData(context.Context, *ListGameDataRequest) (*ListGameDataResponse, error)
 	ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*ListPlayerGameDataResponse, error)
+	// ListReferralContributionReport ListReferralContributionReport returns Contribution report - Subordinate detail view
+	ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error)
+	// ListReferralLifetimeReport ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+	ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error)
+	// ListReferralSnapshotReport ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+	ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error)
+	// ListReferralVTGReport Commission Report APIs (Referral tables - 全民)
+	// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+	ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error)
 	ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*ListRegisterRetentionResponse, error)
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	ListSummaries(context.Context, *ListSummariesRequest) (*ListSummariesResponse, error)
@@ -70,6 +83,10 @@ func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTP
 	r.POST("/v1/backoffice/report/withdraw-vtg-details/list", _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/sport-events/list", _BackofficeReport_ListSportEvents0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/customer-record/get", _BackofficeReport_CustomerRecordReportDetail0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/commission/referral/vtg/list", _BackofficeReport_ListReferralVTGReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/commission/referral/snapshot/list", _BackofficeReport_ListReferralSnapshotReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/commission/referral/contribution/list", _BackofficeReport_ListReferralContributionReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/commission/referral/lifetime/list", _BackofficeReport_ListReferralLifetimeReport0_HTTP_Handler(srv))
 }
 
 func _BackofficeReport_GetSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
@@ -402,6 +419,94 @@ func _BackofficeReport_CustomerRecordReportDetail0_HTTP_Handler(srv BackofficeRe
 	}
 }
 
+func _BackofficeReport_ListReferralVTGReport0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListReferralVTGReportRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReportListReferralVTGReport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListReferralVTGReport(ctx, req.(*ListReferralVTGReportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListReferralVTGReportResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeReport_ListReferralSnapshotReport0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListReferralSnapshotReportRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReportListReferralSnapshotReport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListReferralSnapshotReport(ctx, req.(*ListReferralSnapshotReportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListReferralSnapshotReportResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeReport_ListReferralContributionReport0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListReferralContributionReportRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReportListReferralContributionReport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListReferralContributionReport(ctx, req.(*ListReferralContributionReportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListReferralContributionReportResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeReport_ListReferralLifetimeReport0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListReferralLifetimeReportRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReportListReferralLifetimeReport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListReferralLifetimeReport(ctx, req.(*ListReferralLifetimeReportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListReferralLifetimeReportResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeReportHTTPClient interface {
 	CustomerRecordReportDetail(ctx context.Context, req *CustomerRecordReportDetailRequest, opts ...http.CallOption) (rsp *CustomerRecordReportDetailResponse, err error)
 	GetDepositSummaries(ctx context.Context, req *GetDepositSummariesRequest, opts ...http.CallOption) (rsp *GetDepositSummariesResponse, err error)
@@ -413,6 +518,15 @@ type BackofficeReportHTTPClient interface {
 	ListDepositVtgDetails(ctx context.Context, req *ListDepositVtgDetailsRequest, opts ...http.CallOption) (rsp *ListDepositVtgDetailsResponse, err error)
 	ListGameData(ctx context.Context, req *ListGameDataRequest, opts ...http.CallOption) (rsp *ListGameDataResponse, err error)
 	ListPlayerGameData(ctx context.Context, req *ListPlayerGameDataRequest, opts ...http.CallOption) (rsp *ListPlayerGameDataResponse, err error)
+	// ListReferralContributionReport ListReferralContributionReport returns Contribution report - Subordinate detail view
+	ListReferralContributionReport(ctx context.Context, req *ListReferralContributionReportRequest, opts ...http.CallOption) (rsp *ListReferralContributionReportResponse, err error)
+	// ListReferralLifetimeReport ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+	ListReferralLifetimeReport(ctx context.Context, req *ListReferralLifetimeReportRequest, opts ...http.CallOption) (rsp *ListReferralLifetimeReportResponse, err error)
+	// ListReferralSnapshotReport ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+	ListReferralSnapshotReport(ctx context.Context, req *ListReferralSnapshotReportRequest, opts ...http.CallOption) (rsp *ListReferralSnapshotReportResponse, err error)
+	// ListReferralVTGReport Commission Report APIs (Referral tables - 全民)
+	// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+	ListReferralVTGReport(ctx context.Context, req *ListReferralVTGReportRequest, opts ...http.CallOption) (rsp *ListReferralVTGReportResponse, err error)
 	ListRegisterRetention(ctx context.Context, req *ListRegisterRetentionRequest, opts ...http.CallOption) (rsp *ListRegisterRetentionResponse, err error)
 	ListSportEvents(ctx context.Context, req *ListSportEventsRequest, opts ...http.CallOption) (rsp *ListSportEventsResponse, err error)
 	ListSummaries(ctx context.Context, req *ListSummariesRequest, opts ...http.CallOption) (rsp *ListSummariesResponse, err error)
@@ -550,6 +664,63 @@ func (c *BackofficeReportHTTPClientImpl) ListPlayerGameData(ctx context.Context,
 	pattern := "/v1/backoffice/report/player-game-data/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListPlayerGameData))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListReferralContributionReport ListReferralContributionReport returns Contribution report - Subordinate detail view
+func (c *BackofficeReportHTTPClientImpl) ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...http.CallOption) (*ListReferralContributionReportResponse, error) {
+	var out ListReferralContributionReportResponse
+	pattern := "/v1/backoffice/commission/referral/contribution/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReportListReferralContributionReport))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListReferralLifetimeReport ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+func (c *BackofficeReportHTTPClientImpl) ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...http.CallOption) (*ListReferralLifetimeReportResponse, error) {
+	var out ListReferralLifetimeReportResponse
+	pattern := "/v1/backoffice/commission/referral/lifetime/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReportListReferralLifetimeReport))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListReferralSnapshotReport ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+func (c *BackofficeReportHTTPClientImpl) ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...http.CallOption) (*ListReferralSnapshotReportResponse, error) {
+	var out ListReferralSnapshotReportResponse
+	pattern := "/v1/backoffice/commission/referral/snapshot/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReportListReferralSnapshotReport))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListReferralVTGReport Commission Report APIs (Referral tables - 全民)
+// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+func (c *BackofficeReportHTTPClientImpl) ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...http.CallOption) (*ListReferralVTGReportResponse, error) {
+	var out ListReferralVTGReportResponse
+	pattern := "/v1/backoffice/commission/referral/vtg/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReportListReferralVTGReport))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
