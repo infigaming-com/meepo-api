@@ -21,32 +21,24 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationReportServiceCustomerRecordReportDetail = "/api.report.service.v1.ReportService/CustomerRecordReportDetail"
-const OperationReportServiceGetAffiliatePerformanceReportData = "/api.report.service.v1.ReportService/GetAffiliatePerformanceReportData"
 const OperationReportServiceGetDepositSummaries = "/api.report.service.v1.ReportService/GetDepositSummaries"
 const OperationReportServiceGetGameDataSummary = "/api.report.service.v1.ReportService/GetGameDataSummary"
 const OperationReportServiceGetPlayerGameDataSummary = "/api.report.service.v1.ReportService/GetPlayerGameDataSummary"
 const OperationReportServiceGetSummary = "/api.report.service.v1.ReportService/GetSummary"
 const OperationReportServiceGetWithdrawSummaries = "/api.report.service.v1.ReportService/GetWithdrawSummaries"
-const OperationReportServiceListContributionReportData = "/api.report.service.v1.ReportService/ListContributionReportData"
 const OperationReportServiceListDepositDetails = "/api.report.service.v1.ReportService/ListDepositDetails"
 const OperationReportServiceListDepositVtgDetails = "/api.report.service.v1.ReportService/ListDepositVtgDetails"
 const OperationReportServiceListGameData = "/api.report.service.v1.ReportService/ListGameData"
-const OperationReportServiceListLifetimeReportData = "/api.report.service.v1.ReportService/ListLifetimeReportData"
 const OperationReportServiceListPlayerGameData = "/api.report.service.v1.ReportService/ListPlayerGameData"
 const OperationReportServiceListRegisterRetention = "/api.report.service.v1.ReportService/ListRegisterRetention"
-const OperationReportServiceListSnapshotReportData = "/api.report.service.v1.ReportService/ListSnapshotReportData"
 const OperationReportServiceListSportEvents = "/api.report.service.v1.ReportService/ListSportEvents"
 const OperationReportServiceListSummaries = "/api.report.service.v1.ReportService/ListSummaries"
-const OperationReportServiceListVTGReportData = "/api.report.service.v1.ReportService/ListVTGReportData"
 const OperationReportServiceListWithdrawDetails = "/api.report.service.v1.ReportService/ListWithdrawDetails"
 const OperationReportServiceListWithdrawVtgDetails = "/api.report.service.v1.ReportService/ListWithdrawVtgDetails"
 
 type ReportServiceHTTPServer interface {
 	// CustomerRecordReportDetail Customer record detail
 	CustomerRecordReportDetail(context.Context, *v1.CustomerRecordReportDetailRequest) (*v1.CustomerRecordReportDetailResponse, error)
-	// GetAffiliatePerformanceReportData GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
-	// NOTE: This report is deferred and may not be implemented in this phase
-	GetAffiliatePerformanceReportData(context.Context, *GetAffiliatePerformanceReportDataRequest) (*GetAffiliatePerformanceReportDataResponse, error)
 	// GetDepositSummaries Deposit reports
 	GetDepositSummaries(context.Context, *GetDepositSummariesRequest) (*v1.GetDepositSummariesResponse, error)
 	// GetGameDataSummary Game data reports
@@ -57,27 +49,15 @@ type ReportServiceHTTPServer interface {
 	GetSummary(context.Context, *GetSummaryRequest) (*v1.GetSummaryResponse, error)
 	// GetWithdrawSummaries Withdrawal reports
 	GetWithdrawSummaries(context.Context, *GetWithdrawSummariesRequest) (*v1.GetWithdrawSummariesResponse, error)
-	// ListContributionReportData ListContributionReportData returns subordinate detail data
-	// Each row is one Sub-UID with their financial metrics
-	ListContributionReportData(context.Context, *ListContributionReportDataRequest) (*ListContributionReportDataResponse, error)
 	ListDepositDetails(context.Context, *ListDepositDetailsRequest) (*v1.ListDepositDetailsResponse, error)
 	ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*v1.ListDepositVtgDetailsResponse, error)
 	ListGameData(context.Context, *ListGameDataRequest) (*v1.ListGameDataResponse, error)
-	// ListLifetimeReportData ListLifetimeReportData returns all-time commission totals
-	// No time range - shows lifetime cumulative data
-	ListLifetimeReportData(context.Context, *ListLifetimeReportDataRequest) (*ListLifetimeReportDataResponse, error)
 	ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*v1.ListPlayerGameDataResponse, error)
 	// ListRegisterRetention Retention reports
 	ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*v1.ListRegisterRetentionResponse, error)
-	// ListSnapshotReportData ListSnapshotReportData returns Snapshot report data with T1-T10 aggregation
-	// Snapshot shows cumulative subordinates + period activity
-	ListSnapshotReportData(context.Context, *ListSnapshotReportDataRequest) (*ListSnapshotReportDataResponse, error)
 	// ListSportEvents Sport events (may need different implementation)
 	ListSportEvents(context.Context, *v1.ListSportEventsRequest) (*v1.ListSportEventsResponse, error)
 	ListSummaries(context.Context, *ListSummariesRequest) (*v1.ListSummariesResponse, error)
-	// ListVTGReportData ListVTGReportData returns VTG (Vintage) report data with T1-T10 aggregation
-	// VTG shows new subordinates' performance in the specified time period
-	ListVTGReportData(context.Context, *ListVTGReportDataRequest) (*ListVTGReportDataResponse, error)
 	ListWithdrawDetails(context.Context, *ListWithdrawDetailsRequest) (*v1.ListWithdrawDetailsResponse, error)
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*v1.ListWithdrawVtgDetailsResponse, error)
 }
@@ -99,11 +79,6 @@ func RegisterReportServiceHTTPServer(s *http.Server, srv ReportServiceHTTPServer
 	r.POST("/v1/report/withdraw-vtg-details/list", _ReportService_ListWithdrawVtgDetails1_HTTP_Handler(srv))
 	r.POST("/v1/report/sport-events/list", _ReportService_ListSportEvents1_HTTP_Handler(srv))
 	r.POST("/v1/report/customer-record/get", _ReportService_CustomerRecordReportDetail1_HTTP_Handler(srv))
-	r.POST("/v1/report/commission/vtg-data/list", _ReportService_ListVTGReportData0_HTTP_Handler(srv))
-	r.POST("/v1/report/commission/snapshot-data/list", _ReportService_ListSnapshotReportData0_HTTP_Handler(srv))
-	r.POST("/v1/report/commission/contribution-data/list", _ReportService_ListContributionReportData0_HTTP_Handler(srv))
-	r.POST("/v1/report/commission/lifetime-data/list", _ReportService_ListLifetimeReportData0_HTTP_Handler(srv))
-	r.POST("/v1/report/commission/affiliate-performance-data", _ReportService_GetAffiliatePerformanceReportData0_HTTP_Handler(srv))
 }
 
 func _ReportService_GetSummary1_HTTP_Handler(srv ReportServiceHTTPServer) func(ctx http.Context) error {
@@ -436,122 +411,9 @@ func _ReportService_CustomerRecordReportDetail1_HTTP_Handler(srv ReportServiceHT
 	}
 }
 
-func _ReportService_ListVTGReportData0_HTTP_Handler(srv ReportServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListVTGReportDataRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReportServiceListVTGReportData)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListVTGReportData(ctx, req.(*ListVTGReportDataRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListVTGReportDataResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _ReportService_ListSnapshotReportData0_HTTP_Handler(srv ReportServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListSnapshotReportDataRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReportServiceListSnapshotReportData)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListSnapshotReportData(ctx, req.(*ListSnapshotReportDataRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListSnapshotReportDataResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _ReportService_ListContributionReportData0_HTTP_Handler(srv ReportServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListContributionReportDataRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReportServiceListContributionReportData)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListContributionReportData(ctx, req.(*ListContributionReportDataRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListContributionReportDataResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _ReportService_ListLifetimeReportData0_HTTP_Handler(srv ReportServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListLifetimeReportDataRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReportServiceListLifetimeReportData)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListLifetimeReportData(ctx, req.(*ListLifetimeReportDataRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListLifetimeReportDataResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _ReportService_GetAffiliatePerformanceReportData0_HTTP_Handler(srv ReportServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetAffiliatePerformanceReportDataRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationReportServiceGetAffiliatePerformanceReportData)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAffiliatePerformanceReportData(ctx, req.(*GetAffiliatePerformanceReportDataRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetAffiliatePerformanceReportDataResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type ReportServiceHTTPClient interface {
 	// CustomerRecordReportDetail Customer record detail
 	CustomerRecordReportDetail(ctx context.Context, req *v1.CustomerRecordReportDetailRequest, opts ...http.CallOption) (rsp *v1.CustomerRecordReportDetailResponse, err error)
-	// GetAffiliatePerformanceReportData GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
-	// NOTE: This report is deferred and may not be implemented in this phase
-	GetAffiliatePerformanceReportData(ctx context.Context, req *GetAffiliatePerformanceReportDataRequest, opts ...http.CallOption) (rsp *GetAffiliatePerformanceReportDataResponse, err error)
 	// GetDepositSummaries Deposit reports
 	GetDepositSummaries(ctx context.Context, req *GetDepositSummariesRequest, opts ...http.CallOption) (rsp *v1.GetDepositSummariesResponse, err error)
 	// GetGameDataSummary Game data reports
@@ -562,27 +424,15 @@ type ReportServiceHTTPClient interface {
 	GetSummary(ctx context.Context, req *GetSummaryRequest, opts ...http.CallOption) (rsp *v1.GetSummaryResponse, err error)
 	// GetWithdrawSummaries Withdrawal reports
 	GetWithdrawSummaries(ctx context.Context, req *GetWithdrawSummariesRequest, opts ...http.CallOption) (rsp *v1.GetWithdrawSummariesResponse, err error)
-	// ListContributionReportData ListContributionReportData returns subordinate detail data
-	// Each row is one Sub-UID with their financial metrics
-	ListContributionReportData(ctx context.Context, req *ListContributionReportDataRequest, opts ...http.CallOption) (rsp *ListContributionReportDataResponse, err error)
 	ListDepositDetails(ctx context.Context, req *ListDepositDetailsRequest, opts ...http.CallOption) (rsp *v1.ListDepositDetailsResponse, err error)
 	ListDepositVtgDetails(ctx context.Context, req *ListDepositVtgDetailsRequest, opts ...http.CallOption) (rsp *v1.ListDepositVtgDetailsResponse, err error)
 	ListGameData(ctx context.Context, req *ListGameDataRequest, opts ...http.CallOption) (rsp *v1.ListGameDataResponse, err error)
-	// ListLifetimeReportData ListLifetimeReportData returns all-time commission totals
-	// No time range - shows lifetime cumulative data
-	ListLifetimeReportData(ctx context.Context, req *ListLifetimeReportDataRequest, opts ...http.CallOption) (rsp *ListLifetimeReportDataResponse, err error)
 	ListPlayerGameData(ctx context.Context, req *ListPlayerGameDataRequest, opts ...http.CallOption) (rsp *v1.ListPlayerGameDataResponse, err error)
 	// ListRegisterRetention Retention reports
 	ListRegisterRetention(ctx context.Context, req *ListRegisterRetentionRequest, opts ...http.CallOption) (rsp *v1.ListRegisterRetentionResponse, err error)
-	// ListSnapshotReportData ListSnapshotReportData returns Snapshot report data with T1-T10 aggregation
-	// Snapshot shows cumulative subordinates + period activity
-	ListSnapshotReportData(ctx context.Context, req *ListSnapshotReportDataRequest, opts ...http.CallOption) (rsp *ListSnapshotReportDataResponse, err error)
 	// ListSportEvents Sport events (may need different implementation)
 	ListSportEvents(ctx context.Context, req *v1.ListSportEventsRequest, opts ...http.CallOption) (rsp *v1.ListSportEventsResponse, err error)
 	ListSummaries(ctx context.Context, req *ListSummariesRequest, opts ...http.CallOption) (rsp *v1.ListSummariesResponse, err error)
-	// ListVTGReportData ListVTGReportData returns VTG (Vintage) report data with T1-T10 aggregation
-	// VTG shows new subordinates' performance in the specified time period
-	ListVTGReportData(ctx context.Context, req *ListVTGReportDataRequest, opts ...http.CallOption) (rsp *ListVTGReportDataResponse, err error)
 	ListWithdrawDetails(ctx context.Context, req *ListWithdrawDetailsRequest, opts ...http.CallOption) (rsp *v1.ListWithdrawDetailsResponse, err error)
 	ListWithdrawVtgDetails(ctx context.Context, req *ListWithdrawVtgDetailsRequest, opts ...http.CallOption) (rsp *v1.ListWithdrawVtgDetailsResponse, err error)
 }
@@ -601,21 +451,6 @@ func (c *ReportServiceHTTPClientImpl) CustomerRecordReportDetail(ctx context.Con
 	pattern := "/v1/report/customer-record/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationReportServiceCustomerRecordReportDetail))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// GetAffiliatePerformanceReportData GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
-// NOTE: This report is deferred and may not be implemented in this phase
-func (c *ReportServiceHTTPClientImpl) GetAffiliatePerformanceReportData(ctx context.Context, in *GetAffiliatePerformanceReportDataRequest, opts ...http.CallOption) (*GetAffiliatePerformanceReportDataResponse, error) {
-	var out GetAffiliatePerformanceReportDataResponse
-	pattern := "/v1/report/commission/affiliate-performance-data"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReportServiceGetAffiliatePerformanceReportData))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -694,21 +529,6 @@ func (c *ReportServiceHTTPClientImpl) GetWithdrawSummaries(ctx context.Context, 
 	return &out, nil
 }
 
-// ListContributionReportData ListContributionReportData returns subordinate detail data
-// Each row is one Sub-UID with their financial metrics
-func (c *ReportServiceHTTPClientImpl) ListContributionReportData(ctx context.Context, in *ListContributionReportDataRequest, opts ...http.CallOption) (*ListContributionReportDataResponse, error) {
-	var out ListContributionReportDataResponse
-	pattern := "/v1/report/commission/contribution-data/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReportServiceListContributionReportData))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *ReportServiceHTTPClientImpl) ListDepositDetails(ctx context.Context, in *ListDepositDetailsRequest, opts ...http.CallOption) (*v1.ListDepositDetailsResponse, error) {
 	var out v1.ListDepositDetailsResponse
 	pattern := "/v1/report/deposit-details/list"
@@ -748,21 +568,6 @@ func (c *ReportServiceHTTPClientImpl) ListGameData(ctx context.Context, in *List
 	return &out, nil
 }
 
-// ListLifetimeReportData ListLifetimeReportData returns all-time commission totals
-// No time range - shows lifetime cumulative data
-func (c *ReportServiceHTTPClientImpl) ListLifetimeReportData(ctx context.Context, in *ListLifetimeReportDataRequest, opts ...http.CallOption) (*ListLifetimeReportDataResponse, error) {
-	var out ListLifetimeReportDataResponse
-	pattern := "/v1/report/commission/lifetime-data/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReportServiceListLifetimeReportData))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *ReportServiceHTTPClientImpl) ListPlayerGameData(ctx context.Context, in *ListPlayerGameDataRequest, opts ...http.CallOption) (*v1.ListPlayerGameDataResponse, error) {
 	var out v1.ListPlayerGameDataResponse
 	pattern := "/v1/report/player-game-data/list"
@@ -790,21 +595,6 @@ func (c *ReportServiceHTTPClientImpl) ListRegisterRetention(ctx context.Context,
 	return &out, nil
 }
 
-// ListSnapshotReportData ListSnapshotReportData returns Snapshot report data with T1-T10 aggregation
-// Snapshot shows cumulative subordinates + period activity
-func (c *ReportServiceHTTPClientImpl) ListSnapshotReportData(ctx context.Context, in *ListSnapshotReportDataRequest, opts ...http.CallOption) (*ListSnapshotReportDataResponse, error) {
-	var out ListSnapshotReportDataResponse
-	pattern := "/v1/report/commission/snapshot-data/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReportServiceListSnapshotReportData))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 // ListSportEvents Sport events (may need different implementation)
 func (c *ReportServiceHTTPClientImpl) ListSportEvents(ctx context.Context, in *v1.ListSportEventsRequest, opts ...http.CallOption) (*v1.ListSportEventsResponse, error) {
 	var out v1.ListSportEventsResponse
@@ -824,21 +614,6 @@ func (c *ReportServiceHTTPClientImpl) ListSummaries(ctx context.Context, in *Lis
 	pattern := "/v1/report/summary/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationReportServiceListSummaries))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// ListVTGReportData ListVTGReportData returns VTG (Vintage) report data with T1-T10 aggregation
-// VTG shows new subordinates' performance in the specified time period
-func (c *ReportServiceHTTPClientImpl) ListVTGReportData(ctx context.Context, in *ListVTGReportDataRequest, opts ...http.CallOption) (*ListVTGReportDataResponse, error) {
-	var out ListVTGReportDataResponse
-	pattern := "/v1/report/commission/vtg-data/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationReportServiceListVTGReportData))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

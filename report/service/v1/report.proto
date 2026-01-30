@@ -144,18 +144,21 @@ message ListWithdrawVtgDetailsRequest {
 }
 
 // ============================================================================
-// Commission Report Data - Internal API for Affiliate Service
-// These endpoints provide aggregated data from ClickHouse for commission reports.
-// Affiliate Service calls these APIs, calculates estimated commissions using
-// Commission Plan config, then provides final reports to Backoffice Service.
+// Affiliate Referral Report Data - Internal API for Affiliate Service
 //
-// All reports support 10-layer aggregation (T1-T10).
-// Affiliate Service can trim layers based on Operator's MAX TIER configuration.
+// These endpoints provide aggregated referral data from ClickHouse.
+// Used by Affiliate Service to generate referral commission reports:
+// - VTG Report: New subordinates performance
+// - Snapshot Report: Cumulative + period activity
+// - Contribution Report: Subordinate detail view
+// - Lifetime Report: All-time commission totals
+//
+// Supports T1-T10 tier aggregation. Affiliate Service trims based on MaxTier.
 // ============================================================================
 
-// VTGTierData - Tier data for VTG report (New Subordinates Performance)
+// AffiliateVTGTierData - Tier data for VTG report (New Subordinates Performance)
 // All fields are for NEW subordinates (relation created_at in period)
-message VTGTierData {
+message AffiliateVTGTierData {
   int32 tier = 1;  // Tier level 1-10
 
   // Count metrics (for new subordinates in period)
@@ -199,9 +202,9 @@ message VTGTierData {
   string total_reward_reporting_currency = 54;
 }
 
-// SnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
+// AffiliateSnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
 // total_count is cumulative, other metrics are for activity in period
-message SnapshotTierData {
+message AffiliateSnapshotTierData {
   int32 tier = 1;  // Tier level 1-10
 
   // Count metrics
@@ -224,9 +227,9 @@ message SnapshotTierData {
   string total_reward_reporting_currency = 34;
 }
 
-// T1GamingData - Gaming data for T1 only (Snapshot report)
+// AffiliateT1GamingData - Gaming data for T1 only (Snapshot report)
 // Only T1 has GGR/NGR/B2C in Snapshot
-message T1GamingData {
+message AffiliateT1GamingData {
   // USD
   string ggr_usd = 1;
   string ngr_usd = 2;
@@ -242,10 +245,10 @@ message T1GamingData {
   string provider_royalties_reporting_currency = 14;
 }
 
-// TierCarryover - Negative carryover data per tier
+// AffiliateTierCarryover - Negative carryover data per tier
 // Directly from user_referral_relations.loss_rev_share_carryover JSONB
 // Structure in DB: map[currency]map[periodType]*ReferralCarryoverData
-message TierCarryover {
+message AffiliateTierCarryover {
   int32 tier = 1;
   string currency = 2;       // e.g., "USD"
   string period_type = 3;    // "weekly" or "monthly"
@@ -255,8 +258,8 @@ message TierCarryover {
   string b2c_carryover = 7;  // B2C carryover amount
 }
 
-// TierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
-message TierGamingData {
+// AffiliateTierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
+message AffiliateTierGamingData {
   int32 tier = 1;
   // USD
   string ggr_usd = 2;
@@ -273,7 +276,7 @@ message TierGamingData {
 
 // ========== VTG Report Data (Vintage - New Subordinates Performance) ==========
 
-message ListVTGReportDataRequest {
+message ListAffiliateVTGReportDataRequest {
   string period = 1;                 // "day", "week", or "month" - determines time range
   api.common.OperatorContextFilters operator_context_filters = 2;
   api.common.OperatorContext operator_context = 3;  // Internal only
@@ -284,8 +287,8 @@ message ListVTGReportDataRequest {
   optional int32 page_size = 8;      // defaults to 25
 }
 
-// VTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
-message VTGReportDataItem {
+// AffiliateVTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
+message AffiliateVTGReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
   string date = 8;
   int64 uid = 1;
@@ -298,7 +301,7 @@ message VTGReportDataItem {
   int64 company_operator_id = 6;
   int64 retailer_operator_id = 7;
 
-  repeated VTGTierData tiers = 10;  // T1-T10 tier data for new subordinates
+  repeated AffiliateVTGTierData tiers = 10;  // T1-T10 tier data for new subordinates
 
   // Summary fields - USD
   string total_reward_usd = 20;     // Sum of all tiers, all commission types
@@ -310,8 +313,8 @@ message VTGReportDataItem {
   string t1_total_reward_reporting_currency = 31;
 }
 
-message ListVTGReportDataResponse {
-  repeated VTGReportDataItem items = 1;
+message ListAffiliateVTGReportDataResponse {
+  repeated AffiliateVTGReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -319,7 +322,7 @@ message ListVTGReportDataResponse {
 
 // ========== Snapshot Report Data (Cumulative + Period Activity) ==========
 
-message ListSnapshotReportDataRequest {
+message ListAffiliateSnapshotReportDataRequest {
   string period = 1;                        // "day", "week", or "month" - determines time range
   api.common.OperatorContextFilters operator_context_filters = 2;
   api.common.OperatorContext operator_context = 3;  // Internal only
@@ -331,8 +334,8 @@ message ListSnapshotReportDataRequest {
   optional int32 page_size = 9;             // defaults to 25
 }
 
-// SnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
-message SnapshotReportDataItem {
+// AffiliateSnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
+message AffiliateSnapshotReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
   string date = 8;
   int64 uid = 1;
@@ -345,10 +348,10 @@ message SnapshotReportDataItem {
   int64 company_operator_id = 6;
   int64 retailer_operator_id = 7;
 
-  repeated SnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
+  repeated AffiliateSnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
 
   // T1 gaming data (only T1 has GGR/NGR/B2C in Snapshot)
-  T1GamingData t1_gaming = 20;
+  AffiliateT1GamingData t1_gaming = 20;
 
   // Summary fields - USD
   string total_referral_reward_usd = 30;
@@ -364,7 +367,7 @@ message SnapshotReportDataItem {
 
   // Gaming data for Affiliate Service to calculate estimated commissions
   // Affiliate Service uses this + Commission Plan config to compute unpaid commissions
-  repeated TierGamingData current_period_gaming = 40;
+  repeated AffiliateTierGamingData current_period_gaming = 40;
 
   // From referral_user_rewards table - USD
   string unclaimed_commission_usd = 50;  // current_* amounts sum (settled but not claimed)
@@ -377,11 +380,11 @@ message SnapshotReportDataItem {
   string withdrawal_amount_reporting_currency = 57;
 
   // Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
-  repeated TierCarryover negative_carryover = 60;
+  repeated AffiliateTierCarryover negative_carryover = 60;
 }
 
-message ListSnapshotReportDataResponse {
-  repeated SnapshotReportDataItem items = 1;
+message ListAffiliateSnapshotReportDataResponse {
+  repeated AffiliateSnapshotReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -390,7 +393,7 @@ message ListSnapshotReportDataResponse {
 // ========== Contribution Report Data (Subordinate Detail View) ==========
 // Each row represents one Sub-UID (a subordinate of the ROOT user)
 
-message ListContributionReportDataRequest {
+message ListAffiliateContributionReportDataRequest {
   string period = 1;                 // "day", "week", or "month" - determines time range
   api.common.OperatorContextFilters operator_context_filters = 2;
   api.common.OperatorContext operator_context = 3;  // Internal only
@@ -401,7 +404,7 @@ message ListContributionReportDataRequest {
   optional int32 page_size = 8;      // defaults to 25
 }
 
-message ContributionReportDataItem {
+message AffiliateContributionReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
   string date = 40;
   int64 root_id = 1;      // ROOT user (T0 perspective)
@@ -445,8 +448,8 @@ message ContributionReportDataItem {
   string ip = 22;
 }
 
-message ListContributionReportDataResponse {
-  repeated ContributionReportDataItem items = 1;
+message ListAffiliateContributionReportDataResponse {
+  repeated AffiliateContributionReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -455,7 +458,7 @@ message ListContributionReportDataResponse {
 // ========== Lifetime Report Data (All-time Commission Totals) ==========
 // No time_range - shows lifetime cumulative commission data
 
-message ListLifetimeReportDataRequest {
+message ListAffiliateLifetimeReportDataRequest {
   api.common.OperatorContextFilters operator_context_filters = 1;
   api.common.OperatorContext operator_context = 2;  // Internal only
   repeated int64 user_ids = 3;  // Optional: filter by specific UIDs
@@ -463,7 +466,7 @@ message ListLifetimeReportDataRequest {
   optional int32 page_size = 5; // defaults to 25
 }
 
-message LifetimeReportDataItem {
+message AffiliateLifetimeReportDataItem {
   int64 uid = 1;
 
   // Operator context
@@ -487,8 +490,8 @@ message LifetimeReportDataItem {
   string total_reporting_currency = 14;
 }
 
-message ListLifetimeReportDataResponse {
-  repeated LifetimeReportDataItem items = 1;
+message ListAffiliateLifetimeReportDataResponse {
+  repeated AffiliateLifetimeReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -670,54 +673,22 @@ service ReportService {
   }
 
   // ============================================================================
-  // Commission Report Data APIs - Called by Affiliate Service
-  // These provide aggregated data for commission reports with 10-layer support.
-  // Affiliate Service uses this data + Commission Plan config to calculate
-  // estimated commissions, then provides final reports to Backoffice.
+  // Affiliate Referral Report APIs (Internal gRPC only, no HTTP)
   // ============================================================================
 
-  // ListVTGReportData returns VTG (Vintage) report data with T1-T10 aggregation
-  // VTG shows new subordinates' performance in the specified time period
-  rpc ListVTGReportData(ListVTGReportDataRequest) returns (ListVTGReportDataResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/commission/vtg-data/list"
-      body: "*"
-    };
-  }
+  // VTG report: new subordinates performance in period
+  rpc ListAffiliateVTGReportData(ListAffiliateVTGReportDataRequest) returns (ListAffiliateVTGReportDataResponse) {}
 
-  // ListSnapshotReportData returns Snapshot report data with T1-T10 aggregation
-  // Snapshot shows cumulative subordinates + period activity
-  rpc ListSnapshotReportData(ListSnapshotReportDataRequest) returns (ListSnapshotReportDataResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/commission/snapshot-data/list"
-      body: "*"
-    };
-  }
+  // Snapshot report: cumulative subordinates + period activity
+  rpc ListAffiliateSnapshotReportData(ListAffiliateSnapshotReportDataRequest) returns (ListAffiliateSnapshotReportDataResponse) {}
 
-  // ListContributionReportData returns subordinate detail data
-  // Each row is one Sub-UID with their financial metrics
-  rpc ListContributionReportData(ListContributionReportDataRequest) returns (ListContributionReportDataResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/commission/contribution-data/list"
-      body: "*"
-    };
-  }
+  // Contribution report: subordinate detail view
+  rpc ListAffiliateContributionReportData(ListAffiliateContributionReportDataRequest) returns (ListAffiliateContributionReportDataResponse) {}
 
-  // ListLifetimeReportData returns all-time commission totals
-  // No time range - shows lifetime cumulative data
-  rpc ListLifetimeReportData(ListLifetimeReportDataRequest) returns (ListLifetimeReportDataResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/commission/lifetime-data/list"
-      body: "*"
-    };
-  }
+  // Lifetime report: all-time commission totals
+  rpc ListAffiliateLifetimeReportData(ListAffiliateLifetimeReportDataRequest) returns (ListAffiliateLifetimeReportDataResponse) {}
 
   // GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
   // NOTE: This report is deferred and may not be implemented in this phase
-  rpc GetAffiliatePerformanceReportData(GetAffiliatePerformanceReportDataRequest) returns (GetAffiliatePerformanceReportDataResponse) {
-    option (google.api.http) = {
-      post: "/v1/report/commission/affiliate-performance-data"
-      body: "*"
-    };
-  }
+  rpc GetAffiliatePerformanceReportData(GetAffiliatePerformanceReportDataRequest) returns (GetAffiliatePerformanceReportDataResponse) {}
 }
