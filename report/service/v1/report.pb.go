@@ -1220,9 +1220,9 @@ func (x *ListWithdrawVtgDetailsRequest) GetOperatorContext() *common.OperatorCon
 	return nil
 }
 
-// AffiliateVTGTierData - Tier data for VTG report (New Subordinates Performance)
+// ReferralVTGTierData - Tier data for VTG report (New Subordinates Performance)
 // All fields are for NEW subordinates (relation created_at in period)
-type AffiliateVTGTierData struct {
+type ReferralVTGTierData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Tier  int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"` // Tier level 1-10
 	// Count metrics (for new subordinates in period)
@@ -1264,20 +1264,20 @@ type AffiliateVTGTierData struct {
 	sizeCache                           protoimpl.SizeCache
 }
 
-func (x *AffiliateVTGTierData) Reset() {
-	*x = AffiliateVTGTierData{}
+func (x *ReferralVTGTierData) Reset() {
+	*x = ReferralVTGTierData{}
 	mi := &file_report_service_v1_report_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateVTGTierData) String() string {
+func (x *ReferralVTGTierData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateVTGTierData) ProtoMessage() {}
+func (*ReferralVTGTierData) ProtoMessage() {}
 
-func (x *AffiliateVTGTierData) ProtoReflect() protoreflect.Message {
+func (x *ReferralVTGTierData) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1289,231 +1289,231 @@ func (x *AffiliateVTGTierData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateVTGTierData.ProtoReflect.Descriptor instead.
-func (*AffiliateVTGTierData) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralVTGTierData.ProtoReflect.Descriptor instead.
+func (*ReferralVTGTierData) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *AffiliateVTGTierData) GetTier() int32 {
+func (x *ReferralVTGTierData) GetTier() int32 {
 	if x != nil {
 		return x.Tier
 	}
 	return 0
 }
 
-func (x *AffiliateVTGTierData) GetNewCount() int64 {
+func (x *ReferralVTGTierData) GetNewCount() int64 {
 	if x != nil {
 		return x.NewCount
 	}
 	return 0
 }
 
-func (x *AffiliateVTGTierData) GetFtdCount() int64 {
+func (x *ReferralVTGTierData) GetFtdCount() int64 {
 	if x != nil {
 		return x.FtdCount
 	}
 	return 0
 }
 
-func (x *AffiliateVTGTierData) GetQualifiedCount() int64 {
+func (x *ReferralVTGTierData) GetQualifiedCount() int64 {
 	if x != nil {
 		return x.QualifiedCount
 	}
 	return 0
 }
 
-func (x *AffiliateVTGTierData) GetFtdAmountUsd() string {
+func (x *ReferralVTGTierData) GetFtdAmountUsd() string {
 	if x != nil {
 		return x.FtdAmountUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetDepositAmountUsd() string {
+func (x *ReferralVTGTierData) GetDepositAmountUsd() string {
 	if x != nil {
 		return x.DepositAmountUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetWithdrawalAmountUsd() string {
+func (x *ReferralVTGTierData) GetWithdrawalAmountUsd() string {
 	if x != nil {
 		return x.WithdrawalAmountUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetGgrUsd() string {
+func (x *ReferralVTGTierData) GetGgrUsd() string {
 	if x != nil {
 		return x.GgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetNgrUsd() string {
+func (x *ReferralVTGTierData) GetNgrUsd() string {
 	if x != nil {
 		return x.NgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetB2CUsd() string {
+func (x *ReferralVTGTierData) GetB2CUsd() string {
 	if x != nil {
 		return x.B2CUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetBetCount() int64 {
+func (x *ReferralVTGTierData) GetBetCount() int64 {
 	if x != nil {
 		return x.BetCount
 	}
 	return 0
 }
 
-func (x *AffiliateVTGTierData) GetBetAmountUsd() string {
+func (x *ReferralVTGTierData) GetBetAmountUsd() string {
 	if x != nil {
 		return x.BetAmountUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetAvgBetUsd() string {
+func (x *ReferralVTGTierData) GetAvgBetUsd() string {
 	if x != nil {
 		return x.AvgBetUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetFtdAmountReportingCurrency() string {
+func (x *ReferralVTGTierData) GetFtdAmountReportingCurrency() string {
 	if x != nil {
 		return x.FtdAmountReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetDepositAmountReportingCurrency() string {
+func (x *ReferralVTGTierData) GetDepositAmountReportingCurrency() string {
 	if x != nil {
 		return x.DepositAmountReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetWithdrawalAmountReportingCurrency() string {
+func (x *ReferralVTGTierData) GetWithdrawalAmountReportingCurrency() string {
 	if x != nil {
 		return x.WithdrawalAmountReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetGgrReportingCurrency() string {
+func (x *ReferralVTGTierData) GetGgrReportingCurrency() string {
 	if x != nil {
 		return x.GgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetNgrReportingCurrency() string {
+func (x *ReferralVTGTierData) GetNgrReportingCurrency() string {
 	if x != nil {
 		return x.NgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetB2CReportingCurrency() string {
+func (x *ReferralVTGTierData) GetB2CReportingCurrency() string {
 	if x != nil {
 		return x.B2CReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetBetAmountReportingCurrency() string {
+func (x *ReferralVTGTierData) GetBetAmountReportingCurrency() string {
 	if x != nil {
 		return x.BetAmountReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetAvgBetReportingCurrency() string {
+func (x *ReferralVTGTierData) GetAvgBetReportingCurrency() string {
 	if x != nil {
 		return x.AvgBetReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetReferralRewardUsd() string {
+func (x *ReferralVTGTierData) GetReferralRewardUsd() string {
 	if x != nil {
 		return x.ReferralRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetDepositCashbackUsd() string {
+func (x *ReferralVTGTierData) GetDepositCashbackUsd() string {
 	if x != nil {
 		return x.DepositCashbackUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetWageringCommissionUsd() string {
+func (x *ReferralVTGTierData) GetWageringCommissionUsd() string {
 	if x != nil {
 		return x.WageringCommissionUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetLossRevenueShareUsd() string {
+func (x *ReferralVTGTierData) GetLossRevenueShareUsd() string {
 	if x != nil {
 		return x.LossRevenueShareUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetTotalRewardUsd() string {
+func (x *ReferralVTGTierData) GetTotalRewardUsd() string {
 	if x != nil {
 		return x.TotalRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetReferralRewardReportingCurrency() string {
+func (x *ReferralVTGTierData) GetReferralRewardReportingCurrency() string {
 	if x != nil {
 		return x.ReferralRewardReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetDepositCashbackReportingCurrency() string {
+func (x *ReferralVTGTierData) GetDepositCashbackReportingCurrency() string {
 	if x != nil {
 		return x.DepositCashbackReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetWageringCommissionReportingCurrency() string {
+func (x *ReferralVTGTierData) GetWageringCommissionReportingCurrency() string {
 	if x != nil {
 		return x.WageringCommissionReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetLossRevenueShareReportingCurrency() string {
+func (x *ReferralVTGTierData) GetLossRevenueShareReportingCurrency() string {
 	if x != nil {
 		return x.LossRevenueShareReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGTierData) GetTotalRewardReportingCurrency() string {
+func (x *ReferralVTGTierData) GetTotalRewardReportingCurrency() string {
 	if x != nil {
 		return x.TotalRewardReportingCurrency
 	}
 	return ""
 }
 
-// AffiliateSnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
+// ReferralSnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
 // total_count is cumulative, other metrics are for activity in period
-type AffiliateSnapshotTierData struct {
+type ReferralSnapshotTierData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Tier  int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"` // Tier level 1-10
 	// Count metrics
@@ -1536,20 +1536,20 @@ type AffiliateSnapshotTierData struct {
 	sizeCache                           protoimpl.SizeCache
 }
 
-func (x *AffiliateSnapshotTierData) Reset() {
-	*x = AffiliateSnapshotTierData{}
+func (x *ReferralSnapshotTierData) Reset() {
+	*x = ReferralSnapshotTierData{}
 	mi := &file_report_service_v1_report_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateSnapshotTierData) String() string {
+func (x *ReferralSnapshotTierData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateSnapshotTierData) ProtoMessage() {}
+func (*ReferralSnapshotTierData) ProtoMessage() {}
 
-func (x *AffiliateSnapshotTierData) ProtoReflect() protoreflect.Message {
+func (x *ReferralSnapshotTierData) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1561,112 +1561,112 @@ func (x *AffiliateSnapshotTierData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateSnapshotTierData.ProtoReflect.Descriptor instead.
-func (*AffiliateSnapshotTierData) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralSnapshotTierData.ProtoReflect.Descriptor instead.
+func (*ReferralSnapshotTierData) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *AffiliateSnapshotTierData) GetTier() int32 {
+func (x *ReferralSnapshotTierData) GetTier() int32 {
 	if x != nil {
 		return x.Tier
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotTierData) GetTotalCount() int64 {
+func (x *ReferralSnapshotTierData) GetTotalCount() int64 {
 	if x != nil {
 		return x.TotalCount
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotTierData) GetQualifiedCount() int64 {
+func (x *ReferralSnapshotTierData) GetQualifiedCount() int64 {
 	if x != nil {
 		return x.QualifiedCount
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotTierData) GetActiveCount() int64 {
+func (x *ReferralSnapshotTierData) GetActiveCount() int64 {
 	if x != nil {
 		return x.ActiveCount
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotTierData) GetReferralRewardUsd() string {
+func (x *ReferralSnapshotTierData) GetReferralRewardUsd() string {
 	if x != nil {
 		return x.ReferralRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetDepositCashbackUsd() string {
+func (x *ReferralSnapshotTierData) GetDepositCashbackUsd() string {
 	if x != nil {
 		return x.DepositCashbackUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetWageringCommissionUsd() string {
+func (x *ReferralSnapshotTierData) GetWageringCommissionUsd() string {
 	if x != nil {
 		return x.WageringCommissionUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetLossRevenueShareUsd() string {
+func (x *ReferralSnapshotTierData) GetLossRevenueShareUsd() string {
 	if x != nil {
 		return x.LossRevenueShareUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetTotalRewardUsd() string {
+func (x *ReferralSnapshotTierData) GetTotalRewardUsd() string {
 	if x != nil {
 		return x.TotalRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetReferralRewardReportingCurrency() string {
+func (x *ReferralSnapshotTierData) GetReferralRewardReportingCurrency() string {
 	if x != nil {
 		return x.ReferralRewardReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetDepositCashbackReportingCurrency() string {
+func (x *ReferralSnapshotTierData) GetDepositCashbackReportingCurrency() string {
 	if x != nil {
 		return x.DepositCashbackReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetWageringCommissionReportingCurrency() string {
+func (x *ReferralSnapshotTierData) GetWageringCommissionReportingCurrency() string {
 	if x != nil {
 		return x.WageringCommissionReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetLossRevenueShareReportingCurrency() string {
+func (x *ReferralSnapshotTierData) GetLossRevenueShareReportingCurrency() string {
 	if x != nil {
 		return x.LossRevenueShareReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotTierData) GetTotalRewardReportingCurrency() string {
+func (x *ReferralSnapshotTierData) GetTotalRewardReportingCurrency() string {
 	if x != nil {
 		return x.TotalRewardReportingCurrency
 	}
 	return ""
 }
 
-// AffiliateT1GamingData - Gaming data for T1 only (Snapshot report)
+// ReferralT1GamingData - Gaming data for T1 only (Snapshot report)
 // Only T1 has GGR/NGR/B2C in Snapshot
-type AffiliateT1GamingData struct {
+type ReferralT1GamingData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// USD
 	GgrUsd               string `protobuf:"bytes,1,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
@@ -1684,20 +1684,20 @@ type AffiliateT1GamingData struct {
 	sizeCache                          protoimpl.SizeCache
 }
 
-func (x *AffiliateT1GamingData) Reset() {
-	*x = AffiliateT1GamingData{}
+func (x *ReferralT1GamingData) Reset() {
+	*x = ReferralT1GamingData{}
 	mi := &file_report_service_v1_report_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateT1GamingData) String() string {
+func (x *ReferralT1GamingData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateT1GamingData) ProtoMessage() {}
+func (*ReferralT1GamingData) ProtoMessage() {}
 
-func (x *AffiliateT1GamingData) ProtoReflect() protoreflect.Message {
+func (x *ReferralT1GamingData) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1709,85 +1709,85 @@ func (x *AffiliateT1GamingData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateT1GamingData.ProtoReflect.Descriptor instead.
-func (*AffiliateT1GamingData) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralT1GamingData.ProtoReflect.Descriptor instead.
+func (*ReferralT1GamingData) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *AffiliateT1GamingData) GetGgrUsd() string {
+func (x *ReferralT1GamingData) GetGgrUsd() string {
 	if x != nil {
 		return x.GgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetNgrUsd() string {
+func (x *ReferralT1GamingData) GetNgrUsd() string {
 	if x != nil {
 		return x.NgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetB2CUsd() string {
+func (x *ReferralT1GamingData) GetB2CUsd() string {
 	if x != nil {
 		return x.B2CUsd
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetPaymentCostUsd() string {
+func (x *ReferralT1GamingData) GetPaymentCostUsd() string {
 	if x != nil {
 		return x.PaymentCostUsd
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetProviderRoyaltiesUsd() string {
+func (x *ReferralT1GamingData) GetProviderRoyaltiesUsd() string {
 	if x != nil {
 		return x.ProviderRoyaltiesUsd
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetGgrReportingCurrency() string {
+func (x *ReferralT1GamingData) GetGgrReportingCurrency() string {
 	if x != nil {
 		return x.GgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetNgrReportingCurrency() string {
+func (x *ReferralT1GamingData) GetNgrReportingCurrency() string {
 	if x != nil {
 		return x.NgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetB2CReportingCurrency() string {
+func (x *ReferralT1GamingData) GetB2CReportingCurrency() string {
 	if x != nil {
 		return x.B2CReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetPaymentCostReportingCurrency() string {
+func (x *ReferralT1GamingData) GetPaymentCostReportingCurrency() string {
 	if x != nil {
 		return x.PaymentCostReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateT1GamingData) GetProviderRoyaltiesReportingCurrency() string {
+func (x *ReferralT1GamingData) GetProviderRoyaltiesReportingCurrency() string {
 	if x != nil {
 		return x.ProviderRoyaltiesReportingCurrency
 	}
 	return ""
 }
 
-// AffiliateTierCarryover - Negative carryover data per tier
+// ReferralTierCarryover - Negative carryover data per tier
 // Directly from user_referral_relations.loss_rev_share_carryover JSONB
 // Structure in DB: map[currency]map[periodType]*ReferralCarryoverData
-type AffiliateTierCarryover struct {
+type ReferralTierCarryover struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Tier          int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                             // e.g., "USD"
@@ -1800,20 +1800,20 @@ type AffiliateTierCarryover struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AffiliateTierCarryover) Reset() {
-	*x = AffiliateTierCarryover{}
+func (x *ReferralTierCarryover) Reset() {
+	*x = ReferralTierCarryover{}
 	mi := &file_report_service_v1_report_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateTierCarryover) String() string {
+func (x *ReferralTierCarryover) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateTierCarryover) ProtoMessage() {}
+func (*ReferralTierCarryover) ProtoMessage() {}
 
-func (x *AffiliateTierCarryover) ProtoReflect() protoreflect.Message {
+func (x *ReferralTierCarryover) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1825,62 +1825,62 @@ func (x *AffiliateTierCarryover) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateTierCarryover.ProtoReflect.Descriptor instead.
-func (*AffiliateTierCarryover) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralTierCarryover.ProtoReflect.Descriptor instead.
+func (*ReferralTierCarryover) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *AffiliateTierCarryover) GetTier() int32 {
+func (x *ReferralTierCarryover) GetTier() int32 {
 	if x != nil {
 		return x.Tier
 	}
 	return 0
 }
 
-func (x *AffiliateTierCarryover) GetCurrency() string {
+func (x *ReferralTierCarryover) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *AffiliateTierCarryover) GetPeriodType() string {
+func (x *ReferralTierCarryover) GetPeriodType() string {
 	if x != nil {
 		return x.PeriodType
 	}
 	return ""
 }
 
-func (x *AffiliateTierCarryover) GetBasedOn() string {
+func (x *ReferralTierCarryover) GetBasedOn() string {
 	if x != nil {
 		return x.BasedOn
 	}
 	return ""
 }
 
-func (x *AffiliateTierCarryover) GetNgrCarryover() string {
+func (x *ReferralTierCarryover) GetNgrCarryover() string {
 	if x != nil {
 		return x.NgrCarryover
 	}
 	return ""
 }
 
-func (x *AffiliateTierCarryover) GetGgrCarryover() string {
+func (x *ReferralTierCarryover) GetGgrCarryover() string {
 	if x != nil {
 		return x.GgrCarryover
 	}
 	return ""
 }
 
-func (x *AffiliateTierCarryover) GetB2CCarryover() string {
+func (x *ReferralTierCarryover) GetB2CCarryover() string {
 	if x != nil {
 		return x.B2CCarryover
 	}
 	return ""
 }
 
-// AffiliateTierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
-type AffiliateTierGamingData struct {
+// ReferralTierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
+type ReferralTierGamingData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Tier  int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"`
 	// USD
@@ -1898,20 +1898,20 @@ type AffiliateTierGamingData struct {
 	sizeCache                  protoimpl.SizeCache
 }
 
-func (x *AffiliateTierGamingData) Reset() {
-	*x = AffiliateTierGamingData{}
+func (x *ReferralTierGamingData) Reset() {
+	*x = ReferralTierGamingData{}
 	mi := &file_report_service_v1_report_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateTierGamingData) String() string {
+func (x *ReferralTierGamingData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateTierGamingData) ProtoMessage() {}
+func (*ReferralTierGamingData) ProtoMessage() {}
 
-func (x *AffiliateTierGamingData) ProtoReflect() protoreflect.Message {
+func (x *ReferralTierGamingData) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1923,82 +1923,82 @@ func (x *AffiliateTierGamingData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateTierGamingData.ProtoReflect.Descriptor instead.
-func (*AffiliateTierGamingData) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralTierGamingData.ProtoReflect.Descriptor instead.
+func (*ReferralTierGamingData) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *AffiliateTierGamingData) GetTier() int32 {
+func (x *ReferralTierGamingData) GetTier() int32 {
 	if x != nil {
 		return x.Tier
 	}
 	return 0
 }
 
-func (x *AffiliateTierGamingData) GetGgrUsd() string {
+func (x *ReferralTierGamingData) GetGgrUsd() string {
 	if x != nil {
 		return x.GgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetNgrUsd() string {
+func (x *ReferralTierGamingData) GetNgrUsd() string {
 	if x != nil {
 		return x.NgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetB2CUsd() string {
+func (x *ReferralTierGamingData) GetB2CUsd() string {
 	if x != nil {
 		return x.B2CUsd
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetBetAmountUsd() string {
+func (x *ReferralTierGamingData) GetBetAmountUsd() string {
 	if x != nil {
 		return x.BetAmountUsd
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetBetCount() int64 {
+func (x *ReferralTierGamingData) GetBetCount() int64 {
 	if x != nil {
 		return x.BetCount
 	}
 	return 0
 }
 
-func (x *AffiliateTierGamingData) GetGgrReportingCurrency() string {
+func (x *ReferralTierGamingData) GetGgrReportingCurrency() string {
 	if x != nil {
 		return x.GgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetNgrReportingCurrency() string {
+func (x *ReferralTierGamingData) GetNgrReportingCurrency() string {
 	if x != nil {
 		return x.NgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetB2CReportingCurrency() string {
+func (x *ReferralTierGamingData) GetB2CReportingCurrency() string {
 	if x != nil {
 		return x.B2CReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateTierGamingData) GetBetAmountReportingCurrency() string {
+func (x *ReferralTierGamingData) GetBetAmountReportingCurrency() string {
 	if x != nil {
 		return x.BetAmountReportingCurrency
 	}
 	return ""
 }
 
-type ListAffiliateVTGReportDataRequest struct {
+type ListReferralVTGReportDataRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", or "month" - determines time range
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
@@ -2012,20 +2012,20 @@ type ListAffiliateVTGReportDataRequest struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListAffiliateVTGReportDataRequest) Reset() {
-	*x = ListAffiliateVTGReportDataRequest{}
+func (x *ListReferralVTGReportDataRequest) Reset() {
+	*x = ListReferralVTGReportDataRequest{}
 	mi := &file_report_service_v1_report_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateVTGReportDataRequest) String() string {
+func (x *ListReferralVTGReportDataRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateVTGReportDataRequest) ProtoMessage() {}
+func (*ListReferralVTGReportDataRequest) ProtoMessage() {}
 
-func (x *ListAffiliateVTGReportDataRequest) ProtoReflect() protoreflect.Message {
+func (x *ListReferralVTGReportDataRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2037,69 +2037,69 @@ func (x *ListAffiliateVTGReportDataRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateVTGReportDataRequest.ProtoReflect.Descriptor instead.
-func (*ListAffiliateVTGReportDataRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralVTGReportDataRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralVTGReportDataRequest) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetPeriod() string {
+func (x *ListReferralVTGReportDataRequest) GetPeriod() string {
 	if x != nil {
 		return x.Period
 	}
 	return ""
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListReferralVTGReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
 	}
 	return nil
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListReferralVTGReportDataRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetUserIds() []int64 {
+func (x *ListReferralVTGReportDataRequest) GetUserIds() []int64 {
 	if x != nil {
 		return x.UserIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetReferralIds() []int64 {
+func (x *ListReferralVTGReportDataRequest) GetReferralIds() []int64 {
 	if x != nil {
 		return x.ReferralIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetAffiliateIds() []int64 {
+func (x *ListReferralVTGReportDataRequest) GetAffiliateIds() []int64 {
 	if x != nil {
 		return x.AffiliateIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetPage() int32 {
+func (x *ListReferralVTGReportDataRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateVTGReportDataRequest) GetPageSize() int32 {
+func (x *ListReferralVTGReportDataRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-// AffiliateVTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
-type AffiliateVTGReportDataItem struct {
+// ReferralVTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
+type ReferralVTGReportDataItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
 	Date        string `protobuf:"bytes,8,opt,name=date,proto3" json:"date,omitempty"`
@@ -2107,11 +2107,11 @@ type AffiliateVTGReportDataItem struct {
 	ReferralId  int64  `protobuf:"varint,2,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`    // User's direct referrer (tier1_user_id)
 	AffiliateId int64  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate (from affiliate_users)
 	// Operator context
-	OperatorId         int64                   `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	SystemOperatorId   int64                   `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	CompanyOperatorId  int64                   `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                   `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	Tiers              []*AffiliateVTGTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"` // T1-T10 tier data for new subordinates
+	OperatorId         int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	Tiers              []*ReferralVTGTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"` // T1-T10 tier data for new subordinates
 	// Summary fields - USD
 	TotalRewardUsd   string `protobuf:"bytes,20,opt,name=total_reward_usd,json=totalRewardUsd,proto3" json:"total_reward_usd,omitempty"`         // Sum of all tiers, all commission types
 	T1TotalRewardUsd string `protobuf:"bytes,21,opt,name=t1_total_reward_usd,json=t1TotalRewardUsd,proto3" json:"t1_total_reward_usd,omitempty"` // T1: deposit_cashback + wagering + loss_rs
@@ -2123,20 +2123,20 @@ type AffiliateVTGReportDataItem struct {
 	sizeCache                      protoimpl.SizeCache
 }
 
-func (x *AffiliateVTGReportDataItem) Reset() {
-	*x = AffiliateVTGReportDataItem{}
+func (x *ReferralVTGReportDataItem) Reset() {
+	*x = ReferralVTGReportDataItem{}
 	mi := &file_report_service_v1_report_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateVTGReportDataItem) String() string {
+func (x *ReferralVTGReportDataItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateVTGReportDataItem) ProtoMessage() {}
+func (*ReferralVTGReportDataItem) ProtoMessage() {}
 
-func (x *AffiliateVTGReportDataItem) ProtoReflect() protoreflect.Message {
+func (x *ReferralVTGReportDataItem) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2148,133 +2148,133 @@ func (x *AffiliateVTGReportDataItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateVTGReportDataItem.ProtoReflect.Descriptor instead.
-func (*AffiliateVTGReportDataItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralVTGReportDataItem.ProtoReflect.Descriptor instead.
+func (*ReferralVTGReportDataItem) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *AffiliateVTGReportDataItem) GetDate() string {
+func (x *ReferralVTGReportDataItem) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetUid() int64 {
+func (x *ReferralVTGReportDataItem) GetUid() int64 {
 	if x != nil {
 		return x.Uid
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetReferralId() int64 {
+func (x *ReferralVTGReportDataItem) GetReferralId() int64 {
 	if x != nil {
 		return x.ReferralId
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetAffiliateId() int64 {
+func (x *ReferralVTGReportDataItem) GetAffiliateId() int64 {
 	if x != nil {
 		return x.AffiliateId
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetOperatorId() int64 {
+func (x *ReferralVTGReportDataItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetSystemOperatorId() int64 {
+func (x *ReferralVTGReportDataItem) GetSystemOperatorId() int64 {
 	if x != nil {
 		return x.SystemOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetCompanyOperatorId() int64 {
+func (x *ReferralVTGReportDataItem) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetRetailerOperatorId() int64 {
+func (x *ReferralVTGReportDataItem) GetRetailerOperatorId() int64 {
 	if x != nil {
 		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateVTGReportDataItem) GetTiers() []*AffiliateVTGTierData {
+func (x *ReferralVTGReportDataItem) GetTiers() []*ReferralVTGTierData {
 	if x != nil {
 		return x.Tiers
 	}
 	return nil
 }
 
-func (x *AffiliateVTGReportDataItem) GetTotalRewardUsd() string {
+func (x *ReferralVTGReportDataItem) GetTotalRewardUsd() string {
 	if x != nil {
 		return x.TotalRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetT1TotalRewardUsd() string {
+func (x *ReferralVTGReportDataItem) GetT1TotalRewardUsd() string {
 	if x != nil {
 		return x.T1TotalRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetT1Roi() string {
+func (x *ReferralVTGReportDataItem) GetT1Roi() string {
 	if x != nil {
 		return x.T1Roi
 	}
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetTotalRewardReportingCurrency() string {
+func (x *ReferralVTGReportDataItem) GetTotalRewardReportingCurrency() string {
 	if x != nil {
 		return x.TotalRewardReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetT1TotalRewardReportingCurrency() string {
+func (x *ReferralVTGReportDataItem) GetT1TotalRewardReportingCurrency() string {
 	if x != nil {
 		return x.T1TotalRewardReportingCurrency
 	}
 	return ""
 }
 
-type ListAffiliateVTGReportDataResponse struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Items         []*AffiliateVTGReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Page          int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                         `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+type ListReferralVTGReportDataResponse struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Items         []*ReferralVTGReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                        `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                        `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                        `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAffiliateVTGReportDataResponse) Reset() {
-	*x = ListAffiliateVTGReportDataResponse{}
+func (x *ListReferralVTGReportDataResponse) Reset() {
+	*x = ListReferralVTGReportDataResponse{}
 	mi := &file_report_service_v1_report_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateVTGReportDataResponse) String() string {
+func (x *ListReferralVTGReportDataResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateVTGReportDataResponse) ProtoMessage() {}
+func (*ListReferralVTGReportDataResponse) ProtoMessage() {}
 
-func (x *ListAffiliateVTGReportDataResponse) ProtoReflect() protoreflect.Message {
+func (x *ListReferralVTGReportDataResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2286,40 +2286,40 @@ func (x *ListAffiliateVTGReportDataResponse) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateVTGReportDataResponse.ProtoReflect.Descriptor instead.
-func (*ListAffiliateVTGReportDataResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralVTGReportDataResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralVTGReportDataResponse) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListAffiliateVTGReportDataResponse) GetItems() []*AffiliateVTGReportDataItem {
+func (x *ListReferralVTGReportDataResponse) GetItems() []*ReferralVTGReportDataItem {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *ListAffiliateVTGReportDataResponse) GetPage() int32 {
+func (x *ListReferralVTGReportDataResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateVTGReportDataResponse) GetPageSize() int32 {
+func (x *ListReferralVTGReportDataResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListAffiliateVTGReportDataResponse) GetTotal() int64 {
+func (x *ListReferralVTGReportDataResponse) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-type ListAffiliateSnapshotReportDataRequest struct {
+type ListReferralSnapshotReportDataRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", or "month" - determines time range
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
@@ -2334,20 +2334,20 @@ type ListAffiliateSnapshotReportDataRequest struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) Reset() {
-	*x = ListAffiliateSnapshotReportDataRequest{}
+func (x *ListReferralSnapshotReportDataRequest) Reset() {
+	*x = ListReferralSnapshotReportDataRequest{}
 	mi := &file_report_service_v1_report_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) String() string {
+func (x *ListReferralSnapshotReportDataRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateSnapshotReportDataRequest) ProtoMessage() {}
+func (*ListReferralSnapshotReportDataRequest) ProtoMessage() {}
 
-func (x *ListAffiliateSnapshotReportDataRequest) ProtoReflect() protoreflect.Message {
+func (x *ListReferralSnapshotReportDataRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2359,76 +2359,76 @@ func (x *ListAffiliateSnapshotReportDataRequest) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateSnapshotReportDataRequest.ProtoReflect.Descriptor instead.
-func (*ListAffiliateSnapshotReportDataRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralSnapshotReportDataRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralSnapshotReportDataRequest) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetPeriod() string {
+func (x *ListReferralSnapshotReportDataRequest) GetPeriod() string {
 	if x != nil {
 		return x.Period
 	}
 	return ""
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListReferralSnapshotReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
 	}
 	return nil
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListReferralSnapshotReportDataRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetUserIds() []int64 {
+func (x *ListReferralSnapshotReportDataRequest) GetUserIds() []int64 {
 	if x != nil {
 		return x.UserIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetReferralIds() []int64 {
+func (x *ListReferralSnapshotReportDataRequest) GetReferralIds() []int64 {
 	if x != nil {
 		return x.ReferralIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetAffiliateIds() []int64 {
+func (x *ListReferralSnapshotReportDataRequest) GetAffiliateIds() []int64 {
 	if x != nil {
 		return x.AffiliateIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetOnlyNegativeCarryover() bool {
+func (x *ListReferralSnapshotReportDataRequest) GetOnlyNegativeCarryover() bool {
 	if x != nil {
 		return x.OnlyNegativeCarryover
 	}
 	return false
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetPage() int32 {
+func (x *ListReferralSnapshotReportDataRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateSnapshotReportDataRequest) GetPageSize() int32 {
+func (x *ListReferralSnapshotReportDataRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-// AffiliateSnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
-type AffiliateSnapshotReportDataItem struct {
+// ReferralSnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
+type ReferralSnapshotReportDataItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
 	Date        string `protobuf:"bytes,8,opt,name=date,proto3" json:"date,omitempty"`
@@ -2436,13 +2436,13 @@ type AffiliateSnapshotReportDataItem struct {
 	ReferralId  int64  `protobuf:"varint,2,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`    // User's direct referrer
 	AffiliateId int64  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate
 	// Operator context
-	OperatorId         int64                        `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	SystemOperatorId   int64                        `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	CompanyOperatorId  int64                        `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                        `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	Tiers              []*AffiliateSnapshotTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"` // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
+	OperatorId         int64                       `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64                       `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64                       `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                       `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	Tiers              []*ReferralSnapshotTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"` // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
 	// T1 gaming data (only T1 has GGR/NGR/B2C in Snapshot)
-	T1Gaming *AffiliateT1GamingData `protobuf:"bytes,20,opt,name=t1_gaming,json=t1Gaming,proto3" json:"t1_gaming,omitempty"`
+	T1Gaming *ReferralT1GamingData `protobuf:"bytes,20,opt,name=t1_gaming,json=t1Gaming,proto3" json:"t1_gaming,omitempty"`
 	// Summary fields - USD
 	TotalReferralRewardUsd     string `protobuf:"bytes,30,opt,name=total_referral_reward_usd,json=totalReferralRewardUsd,proto3" json:"total_referral_reward_usd,omitempty"`
 	TotalDepositCashbackUsd    string `protobuf:"bytes,31,opt,name=total_deposit_cashback_usd,json=totalDepositCashbackUsd,proto3" json:"total_deposit_cashback_usd,omitempty"`
@@ -2455,7 +2455,7 @@ type AffiliateSnapshotReportDataItem struct {
 	TotalLossRevenueShareReportingCurrency   string `protobuf:"bytes,38,opt,name=total_loss_revenue_share_reporting_currency,json=totalLossRevenueShareReportingCurrency,proto3" json:"total_loss_revenue_share_reporting_currency,omitempty"`
 	// Gaming data for Affiliate Service to calculate estimated commissions
 	// Affiliate Service uses this + Commission Plan config to compute unpaid commissions
-	CurrentPeriodGaming []*AffiliateTierGamingData `protobuf:"bytes,40,rep,name=current_period_gaming,json=currentPeriodGaming,proto3" json:"current_period_gaming,omitempty"`
+	CurrentPeriodGaming []*ReferralTierGamingData `protobuf:"bytes,40,rep,name=current_period_gaming,json=currentPeriodGaming,proto3" json:"current_period_gaming,omitempty"`
 	// From referral_user_rewards table - USD
 	UnclaimedCommissionUsd string `protobuf:"bytes,50,opt,name=unclaimed_commission_usd,json=unclaimedCommissionUsd,proto3" json:"unclaimed_commission_usd,omitempty"` // current_* amounts sum (settled but not claimed)
 	LifetimeClaimedUsd     string `protobuf:"bytes,51,opt,name=lifetime_claimed_usd,json=lifetimeClaimedUsd,proto3" json:"lifetime_claimed_usd,omitempty"`             // (total_* - current_*) sum
@@ -2465,25 +2465,25 @@ type AffiliateSnapshotReportDataItem struct {
 	LifetimeClaimedReportingCurrency     string `protobuf:"bytes,56,opt,name=lifetime_claimed_reporting_currency,json=lifetimeClaimedReportingCurrency,proto3" json:"lifetime_claimed_reporting_currency,omitempty"`
 	WithdrawalAmountReportingCurrency    string `protobuf:"bytes,57,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
 	// Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
-	NegativeCarryover []*AffiliateTierCarryover `protobuf:"bytes,60,rep,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
+	NegativeCarryover []*ReferralTierCarryover `protobuf:"bytes,60,rep,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
 
-func (x *AffiliateSnapshotReportDataItem) Reset() {
-	*x = AffiliateSnapshotReportDataItem{}
+func (x *ReferralSnapshotReportDataItem) Reset() {
+	*x = ReferralSnapshotReportDataItem{}
 	mi := &file_report_service_v1_report_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateSnapshotReportDataItem) String() string {
+func (x *ReferralSnapshotReportDataItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateSnapshotReportDataItem) ProtoMessage() {}
+func (*ReferralSnapshotReportDataItem) ProtoMessage() {}
 
-func (x *AffiliateSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
+func (x *ReferralSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2495,217 +2495,217 @@ func (x *AffiliateSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateSnapshotReportDataItem.ProtoReflect.Descriptor instead.
-func (*AffiliateSnapshotReportDataItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralSnapshotReportDataItem.ProtoReflect.Descriptor instead.
+func (*ReferralSnapshotReportDataItem) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetDate() string {
+func (x *ReferralSnapshotReportDataItem) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetUid() int64 {
+func (x *ReferralSnapshotReportDataItem) GetUid() int64 {
 	if x != nil {
 		return x.Uid
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetReferralId() int64 {
+func (x *ReferralSnapshotReportDataItem) GetReferralId() int64 {
 	if x != nil {
 		return x.ReferralId
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetAffiliateId() int64 {
+func (x *ReferralSnapshotReportDataItem) GetAffiliateId() int64 {
 	if x != nil {
 		return x.AffiliateId
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetOperatorId() int64 {
+func (x *ReferralSnapshotReportDataItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetSystemOperatorId() int64 {
+func (x *ReferralSnapshotReportDataItem) GetSystemOperatorId() int64 {
 	if x != nil {
 		return x.SystemOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetCompanyOperatorId() int64 {
+func (x *ReferralSnapshotReportDataItem) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetRetailerOperatorId() int64 {
+func (x *ReferralSnapshotReportDataItem) GetRetailerOperatorId() int64 {
 	if x != nil {
 		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTiers() []*AffiliateSnapshotTierData {
+func (x *ReferralSnapshotReportDataItem) GetTiers() []*ReferralSnapshotTierData {
 	if x != nil {
 		return x.Tiers
 	}
 	return nil
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetT1Gaming() *AffiliateT1GamingData {
+func (x *ReferralSnapshotReportDataItem) GetT1Gaming() *ReferralT1GamingData {
 	if x != nil {
 		return x.T1Gaming
 	}
 	return nil
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalReferralRewardUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalReferralRewardUsd() string {
 	if x != nil {
 		return x.TotalReferralRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalDepositCashbackUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalDepositCashbackUsd() string {
 	if x != nil {
 		return x.TotalDepositCashbackUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalWageringCommissionUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalWageringCommissionUsd() string {
 	if x != nil {
 		return x.TotalWageringCommissionUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalLossRevenueShareUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalLossRevenueShareUsd() string {
 	if x != nil {
 		return x.TotalLossRevenueShareUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalReferralRewardReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalReferralRewardReportingCurrency() string {
 	if x != nil {
 		return x.TotalReferralRewardReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalDepositCashbackReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalDepositCashbackReportingCurrency() string {
 	if x != nil {
 		return x.TotalDepositCashbackReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalWageringCommissionReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalWageringCommissionReportingCurrency() string {
 	if x != nil {
 		return x.TotalWageringCommissionReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetTotalLossRevenueShareReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetTotalLossRevenueShareReportingCurrency() string {
 	if x != nil {
 		return x.TotalLossRevenueShareReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetCurrentPeriodGaming() []*AffiliateTierGamingData {
+func (x *ReferralSnapshotReportDataItem) GetCurrentPeriodGaming() []*ReferralTierGamingData {
 	if x != nil {
 		return x.CurrentPeriodGaming
 	}
 	return nil
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetUnclaimedCommissionUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetUnclaimedCommissionUsd() string {
 	if x != nil {
 		return x.UnclaimedCommissionUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetLifetimeClaimedUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetLifetimeClaimedUsd() string {
 	if x != nil {
 		return x.LifetimeClaimedUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetWithdrawalAmountUsd() string {
+func (x *ReferralSnapshotReportDataItem) GetWithdrawalAmountUsd() string {
 	if x != nil {
 		return x.WithdrawalAmountUsd
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetUnclaimedCommissionReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetUnclaimedCommissionReportingCurrency() string {
 	if x != nil {
 		return x.UnclaimedCommissionReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetLifetimeClaimedReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetLifetimeClaimedReportingCurrency() string {
 	if x != nil {
 		return x.LifetimeClaimedReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetWithdrawalAmountReportingCurrency() string {
+func (x *ReferralSnapshotReportDataItem) GetWithdrawalAmountReportingCurrency() string {
 	if x != nil {
 		return x.WithdrawalAmountReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetNegativeCarryover() []*AffiliateTierCarryover {
+func (x *ReferralSnapshotReportDataItem) GetNegativeCarryover() []*ReferralTierCarryover {
 	if x != nil {
 		return x.NegativeCarryover
 	}
 	return nil
 }
 
-type ListAffiliateSnapshotReportDataResponse struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
-	Items         []*AffiliateSnapshotReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Page          int32                              `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                              `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                              `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+type ListReferralSnapshotReportDataResponse struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Items         []*ReferralSnapshotReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                             `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                             `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                             `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAffiliateSnapshotReportDataResponse) Reset() {
-	*x = ListAffiliateSnapshotReportDataResponse{}
+func (x *ListReferralSnapshotReportDataResponse) Reset() {
+	*x = ListReferralSnapshotReportDataResponse{}
 	mi := &file_report_service_v1_report_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateSnapshotReportDataResponse) String() string {
+func (x *ListReferralSnapshotReportDataResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateSnapshotReportDataResponse) ProtoMessage() {}
+func (*ListReferralSnapshotReportDataResponse) ProtoMessage() {}
 
-func (x *ListAffiliateSnapshotReportDataResponse) ProtoReflect() protoreflect.Message {
+func (x *ListReferralSnapshotReportDataResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2717,40 +2717,40 @@ func (x *ListAffiliateSnapshotReportDataResponse) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateSnapshotReportDataResponse.ProtoReflect.Descriptor instead.
-func (*ListAffiliateSnapshotReportDataResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralSnapshotReportDataResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralSnapshotReportDataResponse) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *ListAffiliateSnapshotReportDataResponse) GetItems() []*AffiliateSnapshotReportDataItem {
+func (x *ListReferralSnapshotReportDataResponse) GetItems() []*ReferralSnapshotReportDataItem {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *ListAffiliateSnapshotReportDataResponse) GetPage() int32 {
+func (x *ListReferralSnapshotReportDataResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateSnapshotReportDataResponse) GetPageSize() int32 {
+func (x *ListReferralSnapshotReportDataResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListAffiliateSnapshotReportDataResponse) GetTotal() int64 {
+func (x *ListReferralSnapshotReportDataResponse) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-type ListAffiliateContributionReportDataRequest struct {
+type ListReferralContributionReportDataRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", or "month" - determines time range
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
@@ -2764,20 +2764,20 @@ type ListAffiliateContributionReportDataRequest struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListAffiliateContributionReportDataRequest) Reset() {
-	*x = ListAffiliateContributionReportDataRequest{}
+func (x *ListReferralContributionReportDataRequest) Reset() {
+	*x = ListReferralContributionReportDataRequest{}
 	mi := &file_report_service_v1_report_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateContributionReportDataRequest) String() string {
+func (x *ListReferralContributionReportDataRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateContributionReportDataRequest) ProtoMessage() {}
+func (*ListReferralContributionReportDataRequest) ProtoMessage() {}
 
-func (x *ListAffiliateContributionReportDataRequest) ProtoReflect() protoreflect.Message {
+func (x *ListReferralContributionReportDataRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2789,68 +2789,68 @@ func (x *ListAffiliateContributionReportDataRequest) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateContributionReportDataRequest.ProtoReflect.Descriptor instead.
-func (*ListAffiliateContributionReportDataRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralContributionReportDataRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralContributionReportDataRequest) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetPeriod() string {
+func (x *ListReferralContributionReportDataRequest) GetPeriod() string {
 	if x != nil {
 		return x.Period
 	}
 	return ""
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListReferralContributionReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
 	}
 	return nil
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListReferralContributionReportDataRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetRootUserId() int64 {
+func (x *ListReferralContributionReportDataRequest) GetRootUserId() int64 {
 	if x != nil && x.RootUserId != nil {
 		return *x.RootUserId
 	}
 	return 0
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetTiers() []int32 {
+func (x *ListReferralContributionReportDataRequest) GetTiers() []int32 {
 	if x != nil {
 		return x.Tiers
 	}
 	return nil
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetIsQualified() bool {
+func (x *ListReferralContributionReportDataRequest) GetIsQualified() bool {
 	if x != nil && x.IsQualified != nil {
 		return *x.IsQualified
 	}
 	return false
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetPage() int32 {
+func (x *ListReferralContributionReportDataRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateContributionReportDataRequest) GetPageSize() int32 {
+func (x *ListReferralContributionReportDataRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-type AffiliateContributionReportDataItem struct {
+type ReferralContributionReportDataItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
 	Date        string `protobuf:"bytes,40,opt,name=date,proto3" json:"date,omitempty"`
@@ -2892,20 +2892,20 @@ type AffiliateContributionReportDataItem struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AffiliateContributionReportDataItem) Reset() {
-	*x = AffiliateContributionReportDataItem{}
+func (x *ReferralContributionReportDataItem) Reset() {
+	*x = ReferralContributionReportDataItem{}
 	mi := &file_report_service_v1_report_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateContributionReportDataItem) String() string {
+func (x *ReferralContributionReportDataItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateContributionReportDataItem) ProtoMessage() {}
+func (*ReferralContributionReportDataItem) ProtoMessage() {}
 
-func (x *AffiliateContributionReportDataItem) ProtoReflect() protoreflect.Message {
+func (x *ReferralContributionReportDataItem) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2917,252 +2917,252 @@ func (x *AffiliateContributionReportDataItem) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateContributionReportDataItem.ProtoReflect.Descriptor instead.
-func (*AffiliateContributionReportDataItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralContributionReportDataItem.ProtoReflect.Descriptor instead.
+func (*ReferralContributionReportDataItem) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *AffiliateContributionReportDataItem) GetDate() string {
+func (x *ReferralContributionReportDataItem) GetDate() string {
 	if x != nil {
 		return x.Date
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetRootId() int64 {
+func (x *ReferralContributionReportDataItem) GetRootId() int64 {
 	if x != nil {
 		return x.RootId
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetParentId() int64 {
+func (x *ReferralContributionReportDataItem) GetParentId() int64 {
 	if x != nil {
 		return x.ParentId
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetSubUid() int64 {
+func (x *ReferralContributionReportDataItem) GetSubUid() int64 {
 	if x != nil {
 		return x.SubUid
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetTier() int32 {
+func (x *ReferralContributionReportDataItem) GetTier() int32 {
 	if x != nil {
 		return x.Tier
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetRegDate() int64 {
+func (x *ReferralContributionReportDataItem) GetRegDate() int64 {
 	if x != nil {
 		return x.RegDate
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetFtdDate() int64 {
+func (x *ReferralContributionReportDataItem) GetFtdDate() int64 {
 	if x != nil {
 		return x.FtdDate
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetIsQualified() bool {
+func (x *ReferralContributionReportDataItem) GetIsQualified() bool {
 	if x != nil {
 		return x.IsQualified
 	}
 	return false
 }
 
-func (x *AffiliateContributionReportDataItem) GetOperatorId() int64 {
+func (x *ReferralContributionReportDataItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetSystemOperatorId() int64 {
+func (x *ReferralContributionReportDataItem) GetSystemOperatorId() int64 {
 	if x != nil {
 		return x.SystemOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetCompanyOperatorId() int64 {
+func (x *ReferralContributionReportDataItem) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetRetailerOperatorId() int64 {
+func (x *ReferralContributionReportDataItem) GetRetailerOperatorId() int64 {
 	if x != nil {
 		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetDepositUsd() string {
+func (x *ReferralContributionReportDataItem) GetDepositUsd() string {
 	if x != nil {
 		return x.DepositUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetWithdrawalUsd() string {
+func (x *ReferralContributionReportDataItem) GetWithdrawalUsd() string {
 	if x != nil {
 		return x.WithdrawalUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetTurnoverUsd() string {
+func (x *ReferralContributionReportDataItem) GetTurnoverUsd() string {
 	if x != nil {
 		return x.TurnoverUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetGgrUsd() string {
+func (x *ReferralContributionReportDataItem) GetGgrUsd() string {
 	if x != nil {
 		return x.GgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetNgrUsd() string {
+func (x *ReferralContributionReportDataItem) GetNgrUsd() string {
 	if x != nil {
 		return x.NgrUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetB2CUsd() string {
+func (x *ReferralContributionReportDataItem) GetB2CUsd() string {
 	if x != nil {
 		return x.B2CUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetPaymentCostUsd() string {
+func (x *ReferralContributionReportDataItem) GetPaymentCostUsd() string {
 	if x != nil {
 		return x.PaymentCostUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetProviderRoyaltiesUsd() string {
+func (x *ReferralContributionReportDataItem) GetProviderRoyaltiesUsd() string {
 	if x != nil {
 		return x.ProviderRoyaltiesUsd
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetDepositReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetDepositReportingCurrency() string {
 	if x != nil {
 		return x.DepositReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetWithdrawalReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetWithdrawalReportingCurrency() string {
 	if x != nil {
 		return x.WithdrawalReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetTurnoverReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetTurnoverReportingCurrency() string {
 	if x != nil {
 		return x.TurnoverReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetGgrReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetGgrReportingCurrency() string {
 	if x != nil {
 		return x.GgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetNgrReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetNgrReportingCurrency() string {
 	if x != nil {
 		return x.NgrReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetB2CReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetB2CReportingCurrency() string {
 	if x != nil {
 		return x.B2CReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetPaymentCostReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetPaymentCostReportingCurrency() string {
 	if x != nil {
 		return x.PaymentCostReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetProviderRoyaltiesReportingCurrency() string {
+func (x *ReferralContributionReportDataItem) GetProviderRoyaltiesReportingCurrency() string {
 	if x != nil {
 		return x.ProviderRoyaltiesReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetLastLoginTime() int64 {
+func (x *ReferralContributionReportDataItem) GetLastLoginTime() int64 {
 	if x != nil {
 		return x.LastLoginTime
 	}
 	return 0
 }
 
-func (x *AffiliateContributionReportDataItem) GetDeviceId() string {
+func (x *ReferralContributionReportDataItem) GetDeviceId() string {
 	if x != nil {
 		return x.DeviceId
 	}
 	return ""
 }
 
-func (x *AffiliateContributionReportDataItem) GetIp() string {
+func (x *ReferralContributionReportDataItem) GetIp() string {
 	if x != nil {
 		return x.Ip
 	}
 	return ""
 }
 
-type ListAffiliateContributionReportDataResponse struct {
-	state         protoimpl.MessageState                 `protogen:"open.v1"`
-	Items         []*AffiliateContributionReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Page          int32                                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+type ListReferralContributionReportDataResponse struct {
+	state         protoimpl.MessageState                `protogen:"open.v1"`
+	Items         []*ReferralContributionReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                                 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                                 `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAffiliateContributionReportDataResponse) Reset() {
-	*x = ListAffiliateContributionReportDataResponse{}
+func (x *ListReferralContributionReportDataResponse) Reset() {
+	*x = ListReferralContributionReportDataResponse{}
 	mi := &file_report_service_v1_report_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateContributionReportDataResponse) String() string {
+func (x *ListReferralContributionReportDataResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateContributionReportDataResponse) ProtoMessage() {}
+func (*ListReferralContributionReportDataResponse) ProtoMessage() {}
 
-func (x *ListAffiliateContributionReportDataResponse) ProtoReflect() protoreflect.Message {
+func (x *ListReferralContributionReportDataResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3174,40 +3174,40 @@ func (x *ListAffiliateContributionReportDataResponse) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateContributionReportDataResponse.ProtoReflect.Descriptor instead.
-func (*ListAffiliateContributionReportDataResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralContributionReportDataResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralContributionReportDataResponse) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *ListAffiliateContributionReportDataResponse) GetItems() []*AffiliateContributionReportDataItem {
+func (x *ListReferralContributionReportDataResponse) GetItems() []*ReferralContributionReportDataItem {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *ListAffiliateContributionReportDataResponse) GetPage() int32 {
+func (x *ListReferralContributionReportDataResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateContributionReportDataResponse) GetPageSize() int32 {
+func (x *ListReferralContributionReportDataResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListAffiliateContributionReportDataResponse) GetTotal() int64 {
+func (x *ListReferralContributionReportDataResponse) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-type ListAffiliateLifetimeReportDataRequest struct {
+type ListReferralLifetimeReportDataRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Internal only
@@ -3218,20 +3218,20 @@ type ListAffiliateLifetimeReportDataRequest struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) Reset() {
-	*x = ListAffiliateLifetimeReportDataRequest{}
+func (x *ListReferralLifetimeReportDataRequest) Reset() {
+	*x = ListReferralLifetimeReportDataRequest{}
 	mi := &file_report_service_v1_report_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) String() string {
+func (x *ListReferralLifetimeReportDataRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateLifetimeReportDataRequest) ProtoMessage() {}
+func (*ListReferralLifetimeReportDataRequest) ProtoMessage() {}
 
-func (x *ListAffiliateLifetimeReportDataRequest) ProtoReflect() protoreflect.Message {
+func (x *ListReferralLifetimeReportDataRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3243,47 +3243,47 @@ func (x *ListAffiliateLifetimeReportDataRequest) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateLifetimeReportDataRequest.ProtoReflect.Descriptor instead.
-func (*ListAffiliateLifetimeReportDataRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralLifetimeReportDataRequest.ProtoReflect.Descriptor instead.
+func (*ListReferralLifetimeReportDataRequest) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListReferralLifetimeReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
 		return x.OperatorContextFilters
 	}
 	return nil
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListReferralLifetimeReportDataRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) GetUserIds() []int64 {
+func (x *ListReferralLifetimeReportDataRequest) GetUserIds() []int64 {
 	if x != nil {
 		return x.UserIds
 	}
 	return nil
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) GetPage() int32 {
+func (x *ListReferralLifetimeReportDataRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateLifetimeReportDataRequest) GetPageSize() int32 {
+func (x *ListReferralLifetimeReportDataRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-type AffiliateLifetimeReportDataItem struct {
+type ReferralLifetimeReportDataItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Uid   int64                  `protobuf:"varint,1,opt,name=uid,proto3" json:"uid,omitempty"`
 	// Operator context
@@ -3307,20 +3307,20 @@ type AffiliateLifetimeReportDataItem struct {
 	sizeCache                           protoimpl.SizeCache
 }
 
-func (x *AffiliateLifetimeReportDataItem) Reset() {
-	*x = AffiliateLifetimeReportDataItem{}
+func (x *ReferralLifetimeReportDataItem) Reset() {
+	*x = ReferralLifetimeReportDataItem{}
 	mi := &file_report_service_v1_report_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AffiliateLifetimeReportDataItem) String() string {
+func (x *ReferralLifetimeReportDataItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AffiliateLifetimeReportDataItem) ProtoMessage() {}
+func (*ReferralLifetimeReportDataItem) ProtoMessage() {}
 
-func (x *AffiliateLifetimeReportDataItem) ProtoReflect() protoreflect.Message {
+func (x *ReferralLifetimeReportDataItem) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3332,140 +3332,140 @@ func (x *AffiliateLifetimeReportDataItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AffiliateLifetimeReportDataItem.ProtoReflect.Descriptor instead.
-func (*AffiliateLifetimeReportDataItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralLifetimeReportDataItem.ProtoReflect.Descriptor instead.
+func (*ReferralLifetimeReportDataItem) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetUid() int64 {
+func (x *ReferralLifetimeReportDataItem) GetUid() int64 {
 	if x != nil {
 		return x.Uid
 	}
 	return 0
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetOperatorId() int64 {
+func (x *ReferralLifetimeReportDataItem) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetSystemOperatorId() int64 {
+func (x *ReferralLifetimeReportDataItem) GetSystemOperatorId() int64 {
 	if x != nil {
 		return x.SystemOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetCompanyOperatorId() int64 {
+func (x *ReferralLifetimeReportDataItem) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetRetailerOperatorId() int64 {
+func (x *ReferralLifetimeReportDataItem) GetRetailerOperatorId() int64 {
 	if x != nil {
 		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetConversionRewardUsd() string {
+func (x *ReferralLifetimeReportDataItem) GetConversionRewardUsd() string {
 	if x != nil {
 		return x.ConversionRewardUsd
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetDepositCashbackUsd() string {
+func (x *ReferralLifetimeReportDataItem) GetDepositCashbackUsd() string {
 	if x != nil {
 		return x.DepositCashbackUsd
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetWageringCommissionUsd() string {
+func (x *ReferralLifetimeReportDataItem) GetWageringCommissionUsd() string {
 	if x != nil {
 		return x.WageringCommissionUsd
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetLossRevenueShareUsd() string {
+func (x *ReferralLifetimeReportDataItem) GetLossRevenueShareUsd() string {
 	if x != nil {
 		return x.LossRevenueShareUsd
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetTotalUsd() string {
+func (x *ReferralLifetimeReportDataItem) GetTotalUsd() string {
 	if x != nil {
 		return x.TotalUsd
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetConversionRewardReportingCurrency() string {
+func (x *ReferralLifetimeReportDataItem) GetConversionRewardReportingCurrency() string {
 	if x != nil {
 		return x.ConversionRewardReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetDepositCashbackReportingCurrency() string {
+func (x *ReferralLifetimeReportDataItem) GetDepositCashbackReportingCurrency() string {
 	if x != nil {
 		return x.DepositCashbackReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetWageringCommissionReportingCurrency() string {
+func (x *ReferralLifetimeReportDataItem) GetWageringCommissionReportingCurrency() string {
 	if x != nil {
 		return x.WageringCommissionReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetLossRevenueShareReportingCurrency() string {
+func (x *ReferralLifetimeReportDataItem) GetLossRevenueShareReportingCurrency() string {
 	if x != nil {
 		return x.LossRevenueShareReportingCurrency
 	}
 	return ""
 }
 
-func (x *AffiliateLifetimeReportDataItem) GetTotalReportingCurrency() string {
+func (x *ReferralLifetimeReportDataItem) GetTotalReportingCurrency() string {
 	if x != nil {
 		return x.TotalReportingCurrency
 	}
 	return ""
 }
 
-type ListAffiliateLifetimeReportDataResponse struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
-	Items         []*AffiliateLifetimeReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Page          int32                              `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                              `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                              `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+type ListReferralLifetimeReportDataResponse struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Items         []*ReferralLifetimeReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                             `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                             `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                             `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAffiliateLifetimeReportDataResponse) Reset() {
-	*x = ListAffiliateLifetimeReportDataResponse{}
+func (x *ListReferralLifetimeReportDataResponse) Reset() {
+	*x = ListReferralLifetimeReportDataResponse{}
 	mi := &file_report_service_v1_report_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAffiliateLifetimeReportDataResponse) String() string {
+func (x *ListReferralLifetimeReportDataResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAffiliateLifetimeReportDataResponse) ProtoMessage() {}
+func (*ListReferralLifetimeReportDataResponse) ProtoMessage() {}
 
-func (x *ListAffiliateLifetimeReportDataResponse) ProtoReflect() protoreflect.Message {
+func (x *ListReferralLifetimeReportDataResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3477,33 +3477,33 @@ func (x *ListAffiliateLifetimeReportDataResponse) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAffiliateLifetimeReportDataResponse.ProtoReflect.Descriptor instead.
-func (*ListAffiliateLifetimeReportDataResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReferralLifetimeReportDataResponse.ProtoReflect.Descriptor instead.
+func (*ListReferralLifetimeReportDataResponse) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *ListAffiliateLifetimeReportDataResponse) GetItems() []*AffiliateLifetimeReportDataItem {
+func (x *ListReferralLifetimeReportDataResponse) GetItems() []*ReferralLifetimeReportDataItem {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-func (x *ListAffiliateLifetimeReportDataResponse) GetPage() int32 {
+func (x *ListReferralLifetimeReportDataResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListAffiliateLifetimeReportDataResponse) GetPageSize() int32 {
+func (x *ListReferralLifetimeReportDataResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListAffiliateLifetimeReportDataResponse) GetTotal() int64 {
+func (x *ListReferralLifetimeReportDataResponse) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
@@ -4041,8 +4041,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc7\f\n" +
-	"\x14AffiliateVTGTierData\x12\x12\n" +
+	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc6\f\n" +
+	"\x13ReferralVTGTierData\x12\x12\n" +
 	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1b\n" +
 	"\tnew_count\x18\n" +
 	" \x01(\x03R\bnewCount\x12\x1b\n" +
@@ -4074,8 +4074,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"#deposit_cashback_reporting_currency\x183 \x01(\tR depositCashbackReportingCurrency\x12S\n" +
 	"&wagering_commission_reporting_currency\x184 \x01(\tR#wageringCommissionReportingCurrency\x12P\n" +
 	"%loss_revenue_share_reporting_currency\x185 \x01(\tR!lossRevenueShareReportingCurrency\x12E\n" +
-	"\x1ftotal_reward_reporting_currency\x186 \x01(\tR\x1ctotalRewardReportingCurrency\"\x9f\x06\n" +
-	"\x19AffiliateSnapshotTierData\x12\x12\n" +
+	"\x1ftotal_reward_reporting_currency\x186 \x01(\tR\x1ctotalRewardReportingCurrency\"\x9e\x06\n" +
+	"\x18ReferralSnapshotTierData\x12\x12\n" +
 	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1f\n" +
 	"\vtotal_count\x18\n" +
 	" \x01(\x03R\n" +
@@ -4091,8 +4091,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"#deposit_cashback_reporting_currency\x18\x1f \x01(\tR depositCashbackReportingCurrency\x12S\n" +
 	"&wagering_commission_reporting_currency\x18  \x01(\tR#wageringCommissionReportingCurrency\x12P\n" +
 	"%loss_revenue_share_reporting_currency\x18! \x01(\tR!lossRevenueShareReportingCurrency\x12E\n" +
-	"\x1ftotal_reward_reporting_currency\x18\" \x01(\tR\x1ctotalRewardReportingCurrency\"\xfe\x03\n" +
-	"\x15AffiliateT1GamingData\x12\x17\n" +
+	"\x1ftotal_reward_reporting_currency\x18\" \x01(\tR\x1ctotalRewardReportingCurrency\"\xfd\x03\n" +
+	"\x14ReferralT1GamingData\x12\x17\n" +
 	"\aggr_usd\x18\x01 \x01(\tR\x06ggrUsd\x12\x17\n" +
 	"\angr_usd\x18\x02 \x01(\tR\x06ngrUsd\x12\x17\n" +
 	"\ab2c_usd\x18\x03 \x01(\tR\x06b2cUsd\x12(\n" +
@@ -4103,8 +4103,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\x12E\n" +
 	"\x1fpayment_cost_reporting_currency\x18\r \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
-	"%provider_royalties_reporting_currency\x18\x0e \x01(\tR\"providerRoyaltiesReportingCurrency\"\xf3\x01\n" +
-	"\x16AffiliateTierCarryover\x12\x12\n" +
+	"%provider_royalties_reporting_currency\x18\x0e \x01(\tR\"providerRoyaltiesReportingCurrency\"\xf2\x01\n" +
+	"\x15ReferralTierCarryover\x12\x12\n" +
 	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
 	"\vperiod_type\x18\x03 \x01(\tR\n" +
@@ -4112,8 +4112,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\bbased_on\x18\x04 \x01(\tR\abasedOn\x12#\n" +
 	"\rngr_carryover\x18\x05 \x01(\tR\fngrCarryover\x12#\n" +
 	"\rggr_carryover\x18\x06 \x01(\tR\fggrCarryover\x12#\n" +
-	"\rb2c_carryover\x18\a \x01(\tR\fb2cCarryover\"\xa0\x03\n" +
-	"\x17AffiliateTierGamingData\x12\x12\n" +
+	"\rb2c_carryover\x18\a \x01(\tR\fb2cCarryover\"\x9f\x03\n" +
+	"\x16ReferralTierGamingData\x12\x12\n" +
 	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x17\n" +
 	"\aggr_usd\x18\x02 \x01(\tR\x06ggrUsd\x12\x17\n" +
 	"\angr_usd\x18\x03 \x01(\tR\x06ngrUsd\x12\x17\n" +
@@ -4124,8 +4124,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	" \x01(\tR\x14ggrReportingCurrency\x124\n" +
 	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\x12A\n" +
-	"\x1dbet_amount_reporting_currency\x18\r \x01(\tR\x1abetAmountReportingCurrency\"\x96\x03\n" +
-	"!ListAffiliateVTGReportDataRequest\x12\x16\n" +
+	"\x1dbet_amount_reporting_currency\x18\r \x01(\tR\x1abetAmountReportingCurrency\"\x95\x03\n" +
+	" ListReferralVTGReportDataRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
@@ -4136,8 +4136,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xfd\x04\n" +
-	"\x1aAffiliateVTGReportDataItem\x12\x12\n" +
+	"_page_size\"\xfb\x04\n" +
+	"\x19ReferralVTGReportDataItem\x12\x12\n" +
 	"\x04date\x18\b \x01(\tR\x04date\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\x03R\x03uid\x12\x1f\n" +
 	"\vreferral_id\x18\x02 \x01(\x03R\n" +
@@ -4147,20 +4147,20 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"operatorId\x12,\n" +
 	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12.\n" +
 	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\a \x01(\x03R\x12retailerOperatorId\x12A\n" +
+	"\x14retailer_operator_id\x18\a \x01(\x03R\x12retailerOperatorId\x12@\n" +
 	"\x05tiers\x18\n" +
-	" \x03(\v2+.api.report.service.v1.AffiliateVTGTierDataR\x05tiers\x12(\n" +
+	" \x03(\v2*.api.report.service.v1.ReferralVTGTierDataR\x05tiers\x12(\n" +
 	"\x10total_reward_usd\x18\x14 \x01(\tR\x0etotalRewardUsd\x12-\n" +
 	"\x13t1_total_reward_usd\x18\x15 \x01(\tR\x10t1TotalRewardUsd\x12\x15\n" +
 	"\x06t1_roi\x18\x16 \x01(\tR\x05t1Roi\x12E\n" +
 	"\x1ftotal_reward_reporting_currency\x18\x1e \x01(\tR\x1ctotalRewardReportingCurrency\x12J\n" +
-	"\"t1_total_reward_reporting_currency\x18\x1f \x01(\tR\x1et1TotalRewardReportingCurrency\"\xb4\x01\n" +
-	"\"ListAffiliateVTGReportDataResponse\x12G\n" +
-	"\x05items\x18\x01 \x03(\v21.api.report.service.v1.AffiliateVTGReportDataItemR\x05items\x12\x12\n" +
+	"\"t1_total_reward_reporting_currency\x18\x1f \x01(\tR\x1et1TotalRewardReportingCurrency\"\xb2\x01\n" +
+	"!ListReferralVTGReportDataResponse\x12F\n" +
+	"\x05items\x18\x01 \x03(\v20.api.report.service.v1.ReferralVTGReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xd3\x03\n" +
-	"&ListAffiliateSnapshotReportDataRequest\x12\x16\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xd2\x03\n" +
+	"%ListReferralSnapshotReportDataRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
@@ -4172,8 +4172,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x92\r\n" +
-	"\x1fAffiliateSnapshotReportDataItem\x12\x12\n" +
+	"_page_size\"\x8d\r\n" +
+	"\x1eReferralSnapshotReportDataItem\x12\x12\n" +
 	"\x04date\x18\b \x01(\tR\x04date\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\x03R\x03uid\x12\x1f\n" +
 	"\vreferral_id\x18\x02 \x01(\x03R\n" +
@@ -4183,10 +4183,10 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"operatorId\x12,\n" +
 	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12.\n" +
 	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\a \x01(\x03R\x12retailerOperatorId\x12F\n" +
+	"\x14retailer_operator_id\x18\a \x01(\x03R\x12retailerOperatorId\x12E\n" +
 	"\x05tiers\x18\n" +
-	" \x03(\v20.api.report.service.v1.AffiliateSnapshotTierDataR\x05tiers\x12I\n" +
-	"\tt1_gaming\x18\x14 \x01(\v2,.api.report.service.v1.AffiliateT1GamingDataR\bt1Gaming\x129\n" +
+	" \x03(\v2/.api.report.service.v1.ReferralSnapshotTierDataR\x05tiers\x12H\n" +
+	"\tt1_gaming\x18\x14 \x01(\v2+.api.report.service.v1.ReferralT1GamingDataR\bt1Gaming\x129\n" +
 	"\x19total_referral_reward_usd\x18\x1e \x01(\tR\x16totalReferralRewardUsd\x12;\n" +
 	"\x1atotal_deposit_cashback_usd\x18\x1f \x01(\tR\x17totalDepositCashbackUsd\x12A\n" +
 	"\x1dtotal_wagering_commission_usd\x18  \x01(\tR\x1atotalWageringCommissionUsd\x12>\n" +
@@ -4194,21 +4194,21 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"(total_referral_reward_reporting_currency\x18# \x01(\tR$totalReferralRewardReportingCurrency\x12X\n" +
 	")total_deposit_cashback_reporting_currency\x18$ \x01(\tR%totalDepositCashbackReportingCurrency\x12^\n" +
 	",total_wagering_commission_reporting_currency\x18% \x01(\tR(totalWageringCommissionReportingCurrency\x12[\n" +
-	"+total_loss_revenue_share_reporting_currency\x18& \x01(\tR&totalLossRevenueShareReportingCurrency\x12b\n" +
-	"\x15current_period_gaming\x18( \x03(\v2..api.report.service.v1.AffiliateTierGamingDataR\x13currentPeriodGaming\x128\n" +
+	"+total_loss_revenue_share_reporting_currency\x18& \x01(\tR&totalLossRevenueShareReportingCurrency\x12a\n" +
+	"\x15current_period_gaming\x18( \x03(\v2-.api.report.service.v1.ReferralTierGamingDataR\x13currentPeriodGaming\x128\n" +
 	"\x18unclaimed_commission_usd\x182 \x01(\tR\x16unclaimedCommissionUsd\x120\n" +
 	"\x14lifetime_claimed_usd\x183 \x01(\tR\x12lifetimeClaimedUsd\x122\n" +
 	"\x15withdrawal_amount_usd\x184 \x01(\tR\x13withdrawalAmountUsd\x12U\n" +
 	"'unclaimed_commission_reporting_currency\x187 \x01(\tR$unclaimedCommissionReportingCurrency\x12M\n" +
 	"#lifetime_claimed_reporting_currency\x188 \x01(\tR lifetimeClaimedReportingCurrency\x12O\n" +
-	"$withdrawal_amount_reporting_currency\x189 \x01(\tR!withdrawalAmountReportingCurrency\x12\\\n" +
-	"\x12negative_carryover\x18< \x03(\v2-.api.report.service.v1.AffiliateTierCarryoverR\x11negativeCarryover\"\xbe\x01\n" +
-	"'ListAffiliateSnapshotReportDataResponse\x12L\n" +
-	"\x05items\x18\x01 \x03(\v26.api.report.service.v1.AffiliateSnapshotReportDataItemR\x05items\x12\x12\n" +
+	"$withdrawal_amount_reporting_currency\x189 \x01(\tR!withdrawalAmountReportingCurrency\x12[\n" +
+	"\x12negative_carryover\x18< \x03(\v2,.api.report.service.v1.ReferralTierCarryoverR\x11negativeCarryover\"\xbc\x01\n" +
+	"&ListReferralSnapshotReportDataResponse\x12K\n" +
+	"\x05items\x18\x01 \x03(\v25.api.report.service.v1.ReferralSnapshotReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xc3\x03\n" +
-	"*ListAffiliateContributionReportDataRequest\x12\x16\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xc2\x03\n" +
+	")ListReferralContributionReportDataRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12%\n" +
@@ -4222,9 +4222,9 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\r_is_qualifiedB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8f\n" +
+	"_page_size\"\x8e\n" +
 	"\n" +
-	"#AffiliateContributionReportDataItem\x12\x12\n" +
+	"\"ReferralContributionReportDataItem\x12\x12\n" +
 	"\x04date\x18( \x01(\tR\x04date\x12\x17\n" +
 	"\aroot_id\x18\x01 \x01(\x03R\x06rootId\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x17\n" +
@@ -4258,13 +4258,13 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12&\n" +
 	"\x0flast_login_time\x18\x14 \x01(\x03R\rlastLoginTime\x12\x1b\n" +
 	"\tdevice_id\x18\x15 \x01(\tR\bdeviceId\x12\x0e\n" +
-	"\x02ip\x18\x16 \x01(\tR\x02ip\"\xc6\x01\n" +
-	"+ListAffiliateContributionReportDataResponse\x12P\n" +
-	"\x05items\x18\x01 \x03(\v2:.api.report.service.v1.AffiliateContributionReportDataItemR\x05items\x12\x12\n" +
+	"\x02ip\x18\x16 \x01(\tR\x02ip\"\xc4\x01\n" +
+	"*ListReferralContributionReportDataResponse\x12O\n" +
+	"\x05items\x18\x01 \x03(\v29.api.report.service.v1.ReferralContributionReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xbb\x02\n" +
-	"&ListAffiliateLifetimeReportDataRequest\x12\\\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xba\x02\n" +
+	"%ListReferralLifetimeReportDataRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
 	"\buser_ids\x18\x03 \x03(\x03R\auserIds\x12\x17\n" +
@@ -4272,8 +4272,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\x05 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd5\x06\n" +
-	"\x1fAffiliateLifetimeReportDataItem\x12\x10\n" +
+	"_page_size\"\xd4\x06\n" +
+	"\x1eReferralLifetimeReportDataItem\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\x03R\x03uid\x12\x1f\n" +
 	"\voperator_id\x18\x14 \x01(\x03R\n" +
 	"operatorId\x12,\n" +
@@ -4290,9 +4290,9 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"#deposit_cashback_reporting_currency\x18\v \x01(\tR depositCashbackReportingCurrency\x12S\n" +
 	"&wagering_commission_reporting_currency\x18\f \x01(\tR#wageringCommissionReportingCurrency\x12P\n" +
 	"%loss_revenue_share_reporting_currency\x18\r \x01(\tR!lossRevenueShareReportingCurrency\x128\n" +
-	"\x18total_reporting_currency\x18\x0e \x01(\tR\x16totalReportingCurrency\"\xbe\x01\n" +
-	"'ListAffiliateLifetimeReportDataResponse\x12L\n" +
-	"\x05items\x18\x01 \x03(\v26.api.report.service.v1.AffiliateLifetimeReportDataItemR\x05items\x12\x12\n" +
+	"\x18total_reporting_currency\x18\x0e \x01(\tR\x16totalReportingCurrency\"\xbc\x01\n" +
+	"&ListReferralLifetimeReportDataResponse\x12K\n" +
+	"\x05items\x18\x01 \x03(\v25.api.report.service.v1.ReferralLifetimeReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x03R\x05total\"\xee\x02\n" +
@@ -4339,7 +4339,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x0fcontent_fee_usd\x18: \x01(\tR\rcontentFeeUsd\x12\x10\n" +
 	"\x03roi\x18; \x01(\tR\x03roi\x12\x19\n" +
 	"\brake_usd\x18< \x01(\tR\arakeUsd\x12\x17\n" +
-	"\atax_usd\x18= \x01(\tR\x06taxUsd2\xd8\x1a\n" +
+	"\atax_usd\x18= \x01(\tR\x06taxUsd2\xcc\x1a\n" +
 	"\rReportService\x12\x88\x01\n" +
 	"\n" +
 	"GetSummary\x12(.api.report.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/report/summary/get\x12\x92\x01\n" +
@@ -4356,11 +4356,11 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x13ListWithdrawDetails\x121.api.report.service.v1.ListWithdrawDetailsRequest\x1a6.api.backoffice.service.v1.ListWithdrawDetailsResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/report/withdraw-details/list\x12\xba\x01\n" +
 	"\x16ListWithdrawVtgDetails\x124.api.report.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/withdraw-vtg-details/list\x12\xa1\x01\n" +
 	"\x0fListSportEvents\x121.api.backoffice.service.v1.ListSportEventsRequest\x1a2.api.backoffice.service.v1.ListSportEventsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/report/sport-events/list\x12\xc4\x01\n" +
-	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/report/customer-record/get\x12\x93\x01\n" +
-	"\x1aListAffiliateVTGReportData\x128.api.report.service.v1.ListAffiliateVTGReportDataRequest\x1a9.api.report.service.v1.ListAffiliateVTGReportDataResponse\"\x00\x12\xa2\x01\n" +
-	"\x1fListAffiliateSnapshotReportData\x12=.api.report.service.v1.ListAffiliateSnapshotReportDataRequest\x1a>.api.report.service.v1.ListAffiliateSnapshotReportDataResponse\"\x00\x12\xae\x01\n" +
-	"#ListAffiliateContributionReportData\x12A.api.report.service.v1.ListAffiliateContributionReportDataRequest\x1aB.api.report.service.v1.ListAffiliateContributionReportDataResponse\"\x00\x12\xa2\x01\n" +
-	"\x1fListAffiliateLifetimeReportData\x12=.api.report.service.v1.ListAffiliateLifetimeReportDataRequest\x1a>.api.report.service.v1.ListAffiliateLifetimeReportDataResponse\"\x00\x12\xa8\x01\n" +
+	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/report/customer-record/get\x12\x90\x01\n" +
+	"\x19ListReferralVTGReportData\x127.api.report.service.v1.ListReferralVTGReportDataRequest\x1a8.api.report.service.v1.ListReferralVTGReportDataResponse\"\x00\x12\x9f\x01\n" +
+	"\x1eListReferralSnapshotReportData\x12<.api.report.service.v1.ListReferralSnapshotReportDataRequest\x1a=.api.report.service.v1.ListReferralSnapshotReportDataResponse\"\x00\x12\xab\x01\n" +
+	"\"ListReferralContributionReportData\x12@.api.report.service.v1.ListReferralContributionReportDataRequest\x1aA.api.report.service.v1.ListReferralContributionReportDataResponse\"\x00\x12\x9f\x01\n" +
+	"\x1eListReferralLifetimeReportData\x12<.api.report.service.v1.ListReferralLifetimeReportDataRequest\x1a=.api.report.service.v1.ListReferralLifetimeReportDataResponse\"\x00\x12\xa8\x01\n" +
 	"!GetAffiliatePerformanceReportData\x12?.api.report.service.v1.GetAffiliatePerformanceReportDataRequest\x1a@.api.report.service.v1.GetAffiliatePerformanceReportDataResponse\"\x00BS\n" +
 	"\x15api.report.service.v1P\x01Z8github.com/infigaming-com/meepo-api/report/service/v1;v1b\x06proto3"
 
@@ -4378,58 +4378,58 @@ func file_report_service_v1_report_proto_rawDescGZIP() []byte {
 
 var file_report_service_v1_report_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_report_service_v1_report_proto_goTypes = []any{
-	(*GetSummaryRequest)(nil),                           // 0: api.report.service.v1.GetSummaryRequest
-	(*ListSummariesRequest)(nil),                        // 1: api.report.service.v1.ListSummariesRequest
-	(*GetGameSummaryRequest)(nil),                       // 2: api.report.service.v1.GetGameSummaryRequest
-	(*ListGameDataRequest)(nil),                         // 3: api.report.service.v1.ListGameDataRequest
-	(*GetPlayerGameSummaryRequest)(nil),                 // 4: api.report.service.v1.GetPlayerGameSummaryRequest
-	(*ListPlayerGameDataRequest)(nil),                   // 5: api.report.service.v1.ListPlayerGameDataRequest
-	(*GetDepositSummariesRequest)(nil),                  // 6: api.report.service.v1.GetDepositSummariesRequest
-	(*GetWithdrawSummariesRequest)(nil),                 // 7: api.report.service.v1.GetWithdrawSummariesRequest
-	(*ListDepositDetailsRequest)(nil),                   // 8: api.report.service.v1.ListDepositDetailsRequest
-	(*ListWithdrawDetailsRequest)(nil),                  // 9: api.report.service.v1.ListWithdrawDetailsRequest
-	(*ListRegisterRetentionRequest)(nil),                // 10: api.report.service.v1.ListRegisterRetentionRequest
-	(*ListDepositVtgDetailsRequest)(nil),                // 11: api.report.service.v1.ListDepositVtgDetailsRequest
-	(*ListWithdrawVtgDetailsRequest)(nil),               // 12: api.report.service.v1.ListWithdrawVtgDetailsRequest
-	(*AffiliateVTGTierData)(nil),                        // 13: api.report.service.v1.AffiliateVTGTierData
-	(*AffiliateSnapshotTierData)(nil),                   // 14: api.report.service.v1.AffiliateSnapshotTierData
-	(*AffiliateT1GamingData)(nil),                       // 15: api.report.service.v1.AffiliateT1GamingData
-	(*AffiliateTierCarryover)(nil),                      // 16: api.report.service.v1.AffiliateTierCarryover
-	(*AffiliateTierGamingData)(nil),                     // 17: api.report.service.v1.AffiliateTierGamingData
-	(*ListAffiliateVTGReportDataRequest)(nil),           // 18: api.report.service.v1.ListAffiliateVTGReportDataRequest
-	(*AffiliateVTGReportDataItem)(nil),                  // 19: api.report.service.v1.AffiliateVTGReportDataItem
-	(*ListAffiliateVTGReportDataResponse)(nil),          // 20: api.report.service.v1.ListAffiliateVTGReportDataResponse
-	(*ListAffiliateSnapshotReportDataRequest)(nil),      // 21: api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	(*AffiliateSnapshotReportDataItem)(nil),             // 22: api.report.service.v1.AffiliateSnapshotReportDataItem
-	(*ListAffiliateSnapshotReportDataResponse)(nil),     // 23: api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	(*ListAffiliateContributionReportDataRequest)(nil),  // 24: api.report.service.v1.ListAffiliateContributionReportDataRequest
-	(*AffiliateContributionReportDataItem)(nil),         // 25: api.report.service.v1.AffiliateContributionReportDataItem
-	(*ListAffiliateContributionReportDataResponse)(nil), // 26: api.report.service.v1.ListAffiliateContributionReportDataResponse
-	(*ListAffiliateLifetimeReportDataRequest)(nil),      // 27: api.report.service.v1.ListAffiliateLifetimeReportDataRequest
-	(*AffiliateLifetimeReportDataItem)(nil),             // 28: api.report.service.v1.AffiliateLifetimeReportDataItem
-	(*ListAffiliateLifetimeReportDataResponse)(nil),     // 29: api.report.service.v1.ListAffiliateLifetimeReportDataResponse
-	(*GetAffiliatePerformanceReportDataRequest)(nil),    // 30: api.report.service.v1.GetAffiliatePerformanceReportDataRequest
-	(*GetAffiliatePerformanceReportDataResponse)(nil),   // 31: api.report.service.v1.GetAffiliatePerformanceReportDataResponse
-	(*v1.TimeRange)(nil),                                // 32: api.backoffice.service.v1.TimeRange
-	(*common.OperatorContextFilters)(nil),               // 33: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                      // 34: api.common.OperatorContext
-	(*v1.ListSportEventsRequest)(nil),                   // 35: api.backoffice.service.v1.ListSportEventsRequest
-	(*v1.CustomerRecordReportDetailRequest)(nil),        // 36: api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	(*v1.GetSummaryResponse)(nil),                       // 37: api.backoffice.service.v1.GetSummaryResponse
-	(*v1.ListSummariesResponse)(nil),                    // 38: api.backoffice.service.v1.ListSummariesResponse
-	(*v1.GetGameSummaryResponse)(nil),                   // 39: api.backoffice.service.v1.GetGameSummaryResponse
-	(*v1.ListGameDataResponse)(nil),                     // 40: api.backoffice.service.v1.ListGameDataResponse
-	(*v1.GetPlayerGameSummaryResponse)(nil),             // 41: api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	(*v1.ListPlayerGameDataResponse)(nil),               // 42: api.backoffice.service.v1.ListPlayerGameDataResponse
-	(*v1.ListRegisterRetentionResponse)(nil),            // 43: api.backoffice.service.v1.ListRegisterRetentionResponse
-	(*v1.GetDepositSummariesResponse)(nil),              // 44: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*v1.ListDepositDetailsResponse)(nil),               // 45: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*v1.ListDepositVtgDetailsResponse)(nil),            // 46: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*v1.GetWithdrawSummariesResponse)(nil),             // 47: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*v1.ListWithdrawDetailsResponse)(nil),              // 48: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*v1.ListWithdrawVtgDetailsResponse)(nil),           // 49: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*v1.ListSportEventsResponse)(nil),                  // 50: api.backoffice.service.v1.ListSportEventsResponse
-	(*v1.CustomerRecordReportDetailResponse)(nil),       // 51: api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	(*GetSummaryRequest)(nil),                          // 0: api.report.service.v1.GetSummaryRequest
+	(*ListSummariesRequest)(nil),                       // 1: api.report.service.v1.ListSummariesRequest
+	(*GetGameSummaryRequest)(nil),                      // 2: api.report.service.v1.GetGameSummaryRequest
+	(*ListGameDataRequest)(nil),                        // 3: api.report.service.v1.ListGameDataRequest
+	(*GetPlayerGameSummaryRequest)(nil),                // 4: api.report.service.v1.GetPlayerGameSummaryRequest
+	(*ListPlayerGameDataRequest)(nil),                  // 5: api.report.service.v1.ListPlayerGameDataRequest
+	(*GetDepositSummariesRequest)(nil),                 // 6: api.report.service.v1.GetDepositSummariesRequest
+	(*GetWithdrawSummariesRequest)(nil),                // 7: api.report.service.v1.GetWithdrawSummariesRequest
+	(*ListDepositDetailsRequest)(nil),                  // 8: api.report.service.v1.ListDepositDetailsRequest
+	(*ListWithdrawDetailsRequest)(nil),                 // 9: api.report.service.v1.ListWithdrawDetailsRequest
+	(*ListRegisterRetentionRequest)(nil),               // 10: api.report.service.v1.ListRegisterRetentionRequest
+	(*ListDepositVtgDetailsRequest)(nil),               // 11: api.report.service.v1.ListDepositVtgDetailsRequest
+	(*ListWithdrawVtgDetailsRequest)(nil),              // 12: api.report.service.v1.ListWithdrawVtgDetailsRequest
+	(*ReferralVTGTierData)(nil),                        // 13: api.report.service.v1.ReferralVTGTierData
+	(*ReferralSnapshotTierData)(nil),                   // 14: api.report.service.v1.ReferralSnapshotTierData
+	(*ReferralT1GamingData)(nil),                       // 15: api.report.service.v1.ReferralT1GamingData
+	(*ReferralTierCarryover)(nil),                      // 16: api.report.service.v1.ReferralTierCarryover
+	(*ReferralTierGamingData)(nil),                     // 17: api.report.service.v1.ReferralTierGamingData
+	(*ListReferralVTGReportDataRequest)(nil),           // 18: api.report.service.v1.ListReferralVTGReportDataRequest
+	(*ReferralVTGReportDataItem)(nil),                  // 19: api.report.service.v1.ReferralVTGReportDataItem
+	(*ListReferralVTGReportDataResponse)(nil),          // 20: api.report.service.v1.ListReferralVTGReportDataResponse
+	(*ListReferralSnapshotReportDataRequest)(nil),      // 21: api.report.service.v1.ListReferralSnapshotReportDataRequest
+	(*ReferralSnapshotReportDataItem)(nil),             // 22: api.report.service.v1.ReferralSnapshotReportDataItem
+	(*ListReferralSnapshotReportDataResponse)(nil),     // 23: api.report.service.v1.ListReferralSnapshotReportDataResponse
+	(*ListReferralContributionReportDataRequest)(nil),  // 24: api.report.service.v1.ListReferralContributionReportDataRequest
+	(*ReferralContributionReportDataItem)(nil),         // 25: api.report.service.v1.ReferralContributionReportDataItem
+	(*ListReferralContributionReportDataResponse)(nil), // 26: api.report.service.v1.ListReferralContributionReportDataResponse
+	(*ListReferralLifetimeReportDataRequest)(nil),      // 27: api.report.service.v1.ListReferralLifetimeReportDataRequest
+	(*ReferralLifetimeReportDataItem)(nil),             // 28: api.report.service.v1.ReferralLifetimeReportDataItem
+	(*ListReferralLifetimeReportDataResponse)(nil),     // 29: api.report.service.v1.ListReferralLifetimeReportDataResponse
+	(*GetAffiliatePerformanceReportDataRequest)(nil),   // 30: api.report.service.v1.GetAffiliatePerformanceReportDataRequest
+	(*GetAffiliatePerformanceReportDataResponse)(nil),  // 31: api.report.service.v1.GetAffiliatePerformanceReportDataResponse
+	(*v1.TimeRange)(nil),                               // 32: api.backoffice.service.v1.TimeRange
+	(*common.OperatorContextFilters)(nil),              // 33: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                     // 34: api.common.OperatorContext
+	(*v1.ListSportEventsRequest)(nil),                  // 35: api.backoffice.service.v1.ListSportEventsRequest
+	(*v1.CustomerRecordReportDetailRequest)(nil),       // 36: api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	(*v1.GetSummaryResponse)(nil),                      // 37: api.backoffice.service.v1.GetSummaryResponse
+	(*v1.ListSummariesResponse)(nil),                   // 38: api.backoffice.service.v1.ListSummariesResponse
+	(*v1.GetGameSummaryResponse)(nil),                  // 39: api.backoffice.service.v1.GetGameSummaryResponse
+	(*v1.ListGameDataResponse)(nil),                    // 40: api.backoffice.service.v1.ListGameDataResponse
+	(*v1.GetPlayerGameSummaryResponse)(nil),            // 41: api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	(*v1.ListPlayerGameDataResponse)(nil),              // 42: api.backoffice.service.v1.ListPlayerGameDataResponse
+	(*v1.ListRegisterRetentionResponse)(nil),           // 43: api.backoffice.service.v1.ListRegisterRetentionResponse
+	(*v1.GetDepositSummariesResponse)(nil),             // 44: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*v1.ListDepositDetailsResponse)(nil),              // 45: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*v1.ListDepositVtgDetailsResponse)(nil),           // 46: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*v1.GetWithdrawSummariesResponse)(nil),            // 47: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*v1.ListWithdrawDetailsResponse)(nil),             // 48: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 49: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*v1.ListSportEventsResponse)(nil),                 // 50: api.backoffice.service.v1.ListSportEventsResponse
+	(*v1.CustomerRecordReportDetailResponse)(nil),      // 51: api.backoffice.service.v1.CustomerRecordReportDetailResponse
 }
 var file_report_service_v1_report_proto_depIdxs = []int32{
 	32, // 0: api.report.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
@@ -4471,23 +4471,23 @@ var file_report_service_v1_report_proto_depIdxs = []int32{
 	32, // 36: api.report.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
 	33, // 37: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	34, // 38: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	33, // 39: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 40: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	13, // 41: api.report.service.v1.AffiliateVTGReportDataItem.tiers:type_name -> api.report.service.v1.AffiliateVTGTierData
-	19, // 42: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
-	33, // 43: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 44: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	14, // 45: api.report.service.v1.AffiliateSnapshotReportDataItem.tiers:type_name -> api.report.service.v1.AffiliateSnapshotTierData
-	15, // 46: api.report.service.v1.AffiliateSnapshotReportDataItem.t1_gaming:type_name -> api.report.service.v1.AffiliateT1GamingData
-	17, // 47: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateTierGamingData
-	16, // 48: api.report.service.v1.AffiliateSnapshotReportDataItem.negative_carryover:type_name -> api.report.service.v1.AffiliateTierCarryover
-	22, // 49: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
-	33, // 50: api.report.service.v1.ListAffiliateContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 51: api.report.service.v1.ListAffiliateContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	25, // 52: api.report.service.v1.ListAffiliateContributionReportDataResponse.items:type_name -> api.report.service.v1.AffiliateContributionReportDataItem
-	33, // 53: api.report.service.v1.ListAffiliateLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 54: api.report.service.v1.ListAffiliateLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	28, // 55: api.report.service.v1.ListAffiliateLifetimeReportDataResponse.items:type_name -> api.report.service.v1.AffiliateLifetimeReportDataItem
+	33, // 39: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 40: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	13, // 41: api.report.service.v1.ReferralVTGReportDataItem.tiers:type_name -> api.report.service.v1.ReferralVTGTierData
+	19, // 42: api.report.service.v1.ListReferralVTGReportDataResponse.items:type_name -> api.report.service.v1.ReferralVTGReportDataItem
+	33, // 43: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 44: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 45: api.report.service.v1.ReferralSnapshotReportDataItem.tiers:type_name -> api.report.service.v1.ReferralSnapshotTierData
+	15, // 46: api.report.service.v1.ReferralSnapshotReportDataItem.t1_gaming:type_name -> api.report.service.v1.ReferralT1GamingData
+	17, // 47: api.report.service.v1.ReferralSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.ReferralTierGamingData
+	16, // 48: api.report.service.v1.ReferralSnapshotReportDataItem.negative_carryover:type_name -> api.report.service.v1.ReferralTierCarryover
+	22, // 49: api.report.service.v1.ListReferralSnapshotReportDataResponse.items:type_name -> api.report.service.v1.ReferralSnapshotReportDataItem
+	33, // 50: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 51: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	25, // 52: api.report.service.v1.ListReferralContributionReportDataResponse.items:type_name -> api.report.service.v1.ReferralContributionReportDataItem
+	33, // 53: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 54: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	28, // 55: api.report.service.v1.ListReferralLifetimeReportDataResponse.items:type_name -> api.report.service.v1.ReferralLifetimeReportDataItem
 	32, // 56: api.report.service.v1.GetAffiliatePerformanceReportDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
 	33, // 57: api.report.service.v1.GetAffiliatePerformanceReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	34, // 58: api.report.service.v1.GetAffiliatePerformanceReportDataRequest.operator_context:type_name -> api.common.OperatorContext
@@ -4506,10 +4506,10 @@ var file_report_service_v1_report_proto_depIdxs = []int32{
 	12, // 71: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
 	35, // 72: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
 	36, // 73: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	18, // 74: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
-	21, // 75: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	24, // 76: api.report.service.v1.ReportService.ListAffiliateContributionReportData:input_type -> api.report.service.v1.ListAffiliateContributionReportDataRequest
-	27, // 77: api.report.service.v1.ReportService.ListAffiliateLifetimeReportData:input_type -> api.report.service.v1.ListAffiliateLifetimeReportDataRequest
+	18, // 74: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
+	21, // 75: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
+	24, // 76: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
+	27, // 77: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
 	30, // 78: api.report.service.v1.ReportService.GetAffiliatePerformanceReportData:input_type -> api.report.service.v1.GetAffiliatePerformanceReportDataRequest
 	37, // 79: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
 	38, // 80: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
@@ -4526,10 +4526,10 @@ var file_report_service_v1_report_proto_depIdxs = []int32{
 	49, // 91: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
 	50, // 92: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
 	51, // 93: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	20, // 94: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
-	23, // 95: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	26, // 96: api.report.service.v1.ReportService.ListAffiliateContributionReportData:output_type -> api.report.service.v1.ListAffiliateContributionReportDataResponse
-	29, // 97: api.report.service.v1.ReportService.ListAffiliateLifetimeReportData:output_type -> api.report.service.v1.ListAffiliateLifetimeReportDataResponse
+	20, // 94: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
+	23, // 95: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
+	26, // 96: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
+	29, // 97: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
 	31, // 98: api.report.service.v1.ReportService.GetAffiliatePerformanceReportData:output_type -> api.report.service.v1.GetAffiliatePerformanceReportDataResponse
 	79, // [79:99] is the sub-list for method output_type
 	59, // [59:79] is the sub-list for method input_type

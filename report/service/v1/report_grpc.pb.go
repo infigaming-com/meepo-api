@@ -20,26 +20,26 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ReportService_GetSummary_FullMethodName                          = "/api.report.service.v1.ReportService/GetSummary"
-	ReportService_ListSummaries_FullMethodName                       = "/api.report.service.v1.ReportService/ListSummaries"
-	ReportService_GetGameDataSummary_FullMethodName                  = "/api.report.service.v1.ReportService/GetGameDataSummary"
-	ReportService_ListGameData_FullMethodName                        = "/api.report.service.v1.ReportService/ListGameData"
-	ReportService_GetPlayerGameDataSummary_FullMethodName            = "/api.report.service.v1.ReportService/GetPlayerGameDataSummary"
-	ReportService_ListPlayerGameData_FullMethodName                  = "/api.report.service.v1.ReportService/ListPlayerGameData"
-	ReportService_ListRegisterRetention_FullMethodName               = "/api.report.service.v1.ReportService/ListRegisterRetention"
-	ReportService_GetDepositSummaries_FullMethodName                 = "/api.report.service.v1.ReportService/GetDepositSummaries"
-	ReportService_ListDepositDetails_FullMethodName                  = "/api.report.service.v1.ReportService/ListDepositDetails"
-	ReportService_ListDepositVtgDetails_FullMethodName               = "/api.report.service.v1.ReportService/ListDepositVtgDetails"
-	ReportService_GetWithdrawSummaries_FullMethodName                = "/api.report.service.v1.ReportService/GetWithdrawSummaries"
-	ReportService_ListWithdrawDetails_FullMethodName                 = "/api.report.service.v1.ReportService/ListWithdrawDetails"
-	ReportService_ListWithdrawVtgDetails_FullMethodName              = "/api.report.service.v1.ReportService/ListWithdrawVtgDetails"
-	ReportService_ListSportEvents_FullMethodName                     = "/api.report.service.v1.ReportService/ListSportEvents"
-	ReportService_CustomerRecordReportDetail_FullMethodName          = "/api.report.service.v1.ReportService/CustomerRecordReportDetail"
-	ReportService_ListAffiliateVTGReportData_FullMethodName          = "/api.report.service.v1.ReportService/ListAffiliateVTGReportData"
-	ReportService_ListAffiliateSnapshotReportData_FullMethodName     = "/api.report.service.v1.ReportService/ListAffiliateSnapshotReportData"
-	ReportService_ListAffiliateContributionReportData_FullMethodName = "/api.report.service.v1.ReportService/ListAffiliateContributionReportData"
-	ReportService_ListAffiliateLifetimeReportData_FullMethodName     = "/api.report.service.v1.ReportService/ListAffiliateLifetimeReportData"
-	ReportService_GetAffiliatePerformanceReportData_FullMethodName   = "/api.report.service.v1.ReportService/GetAffiliatePerformanceReportData"
+	ReportService_GetSummary_FullMethodName                         = "/api.report.service.v1.ReportService/GetSummary"
+	ReportService_ListSummaries_FullMethodName                      = "/api.report.service.v1.ReportService/ListSummaries"
+	ReportService_GetGameDataSummary_FullMethodName                 = "/api.report.service.v1.ReportService/GetGameDataSummary"
+	ReportService_ListGameData_FullMethodName                       = "/api.report.service.v1.ReportService/ListGameData"
+	ReportService_GetPlayerGameDataSummary_FullMethodName           = "/api.report.service.v1.ReportService/GetPlayerGameDataSummary"
+	ReportService_ListPlayerGameData_FullMethodName                 = "/api.report.service.v1.ReportService/ListPlayerGameData"
+	ReportService_ListRegisterRetention_FullMethodName              = "/api.report.service.v1.ReportService/ListRegisterRetention"
+	ReportService_GetDepositSummaries_FullMethodName                = "/api.report.service.v1.ReportService/GetDepositSummaries"
+	ReportService_ListDepositDetails_FullMethodName                 = "/api.report.service.v1.ReportService/ListDepositDetails"
+	ReportService_ListDepositVtgDetails_FullMethodName              = "/api.report.service.v1.ReportService/ListDepositVtgDetails"
+	ReportService_GetWithdrawSummaries_FullMethodName               = "/api.report.service.v1.ReportService/GetWithdrawSummaries"
+	ReportService_ListWithdrawDetails_FullMethodName                = "/api.report.service.v1.ReportService/ListWithdrawDetails"
+	ReportService_ListWithdrawVtgDetails_FullMethodName             = "/api.report.service.v1.ReportService/ListWithdrawVtgDetails"
+	ReportService_ListSportEvents_FullMethodName                    = "/api.report.service.v1.ReportService/ListSportEvents"
+	ReportService_CustomerRecordReportDetail_FullMethodName         = "/api.report.service.v1.ReportService/CustomerRecordReportDetail"
+	ReportService_ListReferralVTGReportData_FullMethodName          = "/api.report.service.v1.ReportService/ListReferralVTGReportData"
+	ReportService_ListReferralSnapshotReportData_FullMethodName     = "/api.report.service.v1.ReportService/ListReferralSnapshotReportData"
+	ReportService_ListReferralContributionReportData_FullMethodName = "/api.report.service.v1.ReportService/ListReferralContributionReportData"
+	ReportService_ListReferralLifetimeReportData_FullMethodName     = "/api.report.service.v1.ReportService/ListReferralLifetimeReportData"
+	ReportService_GetAffiliatePerformanceReportData_FullMethodName  = "/api.report.service.v1.ReportService/GetAffiliatePerformanceReportData"
 )
 
 // ReportServiceClient is the client API for ReportService service.
@@ -75,13 +75,13 @@ type ReportServiceClient interface {
 	// Customer record detail
 	CustomerRecordReportDetail(ctx context.Context, in *v1.CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*v1.CustomerRecordReportDetailResponse, error)
 	// VTG report: new subordinates performance in period
-	ListAffiliateVTGReportData(ctx context.Context, in *ListAffiliateVTGReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateVTGReportDataResponse, error)
+	ListReferralVTGReportData(ctx context.Context, in *ListReferralVTGReportDataRequest, opts ...grpc.CallOption) (*ListReferralVTGReportDataResponse, error)
 	// Snapshot report: cumulative subordinates + period activity
-	ListAffiliateSnapshotReportData(ctx context.Context, in *ListAffiliateSnapshotReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateSnapshotReportDataResponse, error)
+	ListReferralSnapshotReportData(ctx context.Context, in *ListReferralSnapshotReportDataRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportDataResponse, error)
 	// Contribution report: subordinate detail view
-	ListAffiliateContributionReportData(ctx context.Context, in *ListAffiliateContributionReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateContributionReportDataResponse, error)
+	ListReferralContributionReportData(ctx context.Context, in *ListReferralContributionReportDataRequest, opts ...grpc.CallOption) (*ListReferralContributionReportDataResponse, error)
 	// Lifetime report: all-time commission totals
-	ListAffiliateLifetimeReportData(ctx context.Context, in *ListAffiliateLifetimeReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateLifetimeReportDataResponse, error)
+	ListReferralLifetimeReportData(ctx context.Context, in *ListReferralLifetimeReportDataRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportDataResponse, error)
 	// GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
 	// NOTE: This report is deferred and may not be implemented in this phase
 	GetAffiliatePerformanceReportData(ctx context.Context, in *GetAffiliatePerformanceReportDataRequest, opts ...grpc.CallOption) (*GetAffiliatePerformanceReportDataResponse, error)
@@ -245,40 +245,40 @@ func (c *reportServiceClient) CustomerRecordReportDetail(ctx context.Context, in
 	return out, nil
 }
 
-func (c *reportServiceClient) ListAffiliateVTGReportData(ctx context.Context, in *ListAffiliateVTGReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateVTGReportDataResponse, error) {
+func (c *reportServiceClient) ListReferralVTGReportData(ctx context.Context, in *ListReferralVTGReportDataRequest, opts ...grpc.CallOption) (*ListReferralVTGReportDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAffiliateVTGReportDataResponse)
-	err := c.cc.Invoke(ctx, ReportService_ListAffiliateVTGReportData_FullMethodName, in, out, cOpts...)
+	out := new(ListReferralVTGReportDataResponse)
+	err := c.cc.Invoke(ctx, ReportService_ListReferralVTGReportData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *reportServiceClient) ListAffiliateSnapshotReportData(ctx context.Context, in *ListAffiliateSnapshotReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateSnapshotReportDataResponse, error) {
+func (c *reportServiceClient) ListReferralSnapshotReportData(ctx context.Context, in *ListReferralSnapshotReportDataRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAffiliateSnapshotReportDataResponse)
-	err := c.cc.Invoke(ctx, ReportService_ListAffiliateSnapshotReportData_FullMethodName, in, out, cOpts...)
+	out := new(ListReferralSnapshotReportDataResponse)
+	err := c.cc.Invoke(ctx, ReportService_ListReferralSnapshotReportData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *reportServiceClient) ListAffiliateContributionReportData(ctx context.Context, in *ListAffiliateContributionReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateContributionReportDataResponse, error) {
+func (c *reportServiceClient) ListReferralContributionReportData(ctx context.Context, in *ListReferralContributionReportDataRequest, opts ...grpc.CallOption) (*ListReferralContributionReportDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAffiliateContributionReportDataResponse)
-	err := c.cc.Invoke(ctx, ReportService_ListAffiliateContributionReportData_FullMethodName, in, out, cOpts...)
+	out := new(ListReferralContributionReportDataResponse)
+	err := c.cc.Invoke(ctx, ReportService_ListReferralContributionReportData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *reportServiceClient) ListAffiliateLifetimeReportData(ctx context.Context, in *ListAffiliateLifetimeReportDataRequest, opts ...grpc.CallOption) (*ListAffiliateLifetimeReportDataResponse, error) {
+func (c *reportServiceClient) ListReferralLifetimeReportData(ctx context.Context, in *ListReferralLifetimeReportDataRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAffiliateLifetimeReportDataResponse)
-	err := c.cc.Invoke(ctx, ReportService_ListAffiliateLifetimeReportData_FullMethodName, in, out, cOpts...)
+	out := new(ListReferralLifetimeReportDataResponse)
+	err := c.cc.Invoke(ctx, ReportService_ListReferralLifetimeReportData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -328,13 +328,13 @@ type ReportServiceServer interface {
 	// Customer record detail
 	CustomerRecordReportDetail(context.Context, *v1.CustomerRecordReportDetailRequest) (*v1.CustomerRecordReportDetailResponse, error)
 	// VTG report: new subordinates performance in period
-	ListAffiliateVTGReportData(context.Context, *ListAffiliateVTGReportDataRequest) (*ListAffiliateVTGReportDataResponse, error)
+	ListReferralVTGReportData(context.Context, *ListReferralVTGReportDataRequest) (*ListReferralVTGReportDataResponse, error)
 	// Snapshot report: cumulative subordinates + period activity
-	ListAffiliateSnapshotReportData(context.Context, *ListAffiliateSnapshotReportDataRequest) (*ListAffiliateSnapshotReportDataResponse, error)
+	ListReferralSnapshotReportData(context.Context, *ListReferralSnapshotReportDataRequest) (*ListReferralSnapshotReportDataResponse, error)
 	// Contribution report: subordinate detail view
-	ListAffiliateContributionReportData(context.Context, *ListAffiliateContributionReportDataRequest) (*ListAffiliateContributionReportDataResponse, error)
+	ListReferralContributionReportData(context.Context, *ListReferralContributionReportDataRequest) (*ListReferralContributionReportDataResponse, error)
 	// Lifetime report: all-time commission totals
-	ListAffiliateLifetimeReportData(context.Context, *ListAffiliateLifetimeReportDataRequest) (*ListAffiliateLifetimeReportDataResponse, error)
+	ListReferralLifetimeReportData(context.Context, *ListReferralLifetimeReportDataRequest) (*ListReferralLifetimeReportDataResponse, error)
 	// GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
 	// NOTE: This report is deferred and may not be implemented in this phase
 	GetAffiliatePerformanceReportData(context.Context, *GetAffiliatePerformanceReportDataRequest) (*GetAffiliatePerformanceReportDataResponse, error)
@@ -393,17 +393,17 @@ func (UnimplementedReportServiceServer) ListSportEvents(context.Context, *v1.Lis
 func (UnimplementedReportServiceServer) CustomerRecordReportDetail(context.Context, *v1.CustomerRecordReportDetailRequest) (*v1.CustomerRecordReportDetailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CustomerRecordReportDetail not implemented")
 }
-func (UnimplementedReportServiceServer) ListAffiliateVTGReportData(context.Context, *ListAffiliateVTGReportDataRequest) (*ListAffiliateVTGReportDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAffiliateVTGReportData not implemented")
+func (UnimplementedReportServiceServer) ListReferralVTGReportData(context.Context, *ListReferralVTGReportDataRequest) (*ListReferralVTGReportDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralVTGReportData not implemented")
 }
-func (UnimplementedReportServiceServer) ListAffiliateSnapshotReportData(context.Context, *ListAffiliateSnapshotReportDataRequest) (*ListAffiliateSnapshotReportDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSnapshotReportData not implemented")
+func (UnimplementedReportServiceServer) ListReferralSnapshotReportData(context.Context, *ListReferralSnapshotReportDataRequest) (*ListReferralSnapshotReportDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralSnapshotReportData not implemented")
 }
-func (UnimplementedReportServiceServer) ListAffiliateContributionReportData(context.Context, *ListAffiliateContributionReportDataRequest) (*ListAffiliateContributionReportDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAffiliateContributionReportData not implemented")
+func (UnimplementedReportServiceServer) ListReferralContributionReportData(context.Context, *ListReferralContributionReportDataRequest) (*ListReferralContributionReportDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralContributionReportData not implemented")
 }
-func (UnimplementedReportServiceServer) ListAffiliateLifetimeReportData(context.Context, *ListAffiliateLifetimeReportDataRequest) (*ListAffiliateLifetimeReportDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListAffiliateLifetimeReportData not implemented")
+func (UnimplementedReportServiceServer) ListReferralLifetimeReportData(context.Context, *ListReferralLifetimeReportDataRequest) (*ListReferralLifetimeReportDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListReferralLifetimeReportData not implemented")
 }
 func (UnimplementedReportServiceServer) GetAffiliatePerformanceReportData(context.Context, *GetAffiliatePerformanceReportDataRequest) (*GetAffiliatePerformanceReportDataResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliatePerformanceReportData not implemented")
@@ -699,74 +699,74 @@ func _ReportService_CustomerRecordReportDetail_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReportService_ListAffiliateVTGReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAffiliateVTGReportDataRequest)
+func _ReportService_ListReferralVTGReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralVTGReportDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReportServiceServer).ListAffiliateVTGReportData(ctx, in)
+		return srv.(ReportServiceServer).ListReferralVTGReportData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ReportService_ListAffiliateVTGReportData_FullMethodName,
+		FullMethod: ReportService_ListReferralVTGReportData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListAffiliateVTGReportData(ctx, req.(*ListAffiliateVTGReportDataRequest))
+		return srv.(ReportServiceServer).ListReferralVTGReportData(ctx, req.(*ListReferralVTGReportDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReportService_ListAffiliateSnapshotReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAffiliateSnapshotReportDataRequest)
+func _ReportService_ListReferralSnapshotReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralSnapshotReportDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReportServiceServer).ListAffiliateSnapshotReportData(ctx, in)
+		return srv.(ReportServiceServer).ListReferralSnapshotReportData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ReportService_ListAffiliateSnapshotReportData_FullMethodName,
+		FullMethod: ReportService_ListReferralSnapshotReportData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListAffiliateSnapshotReportData(ctx, req.(*ListAffiliateSnapshotReportDataRequest))
+		return srv.(ReportServiceServer).ListReferralSnapshotReportData(ctx, req.(*ListReferralSnapshotReportDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReportService_ListAffiliateContributionReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAffiliateContributionReportDataRequest)
+func _ReportService_ListReferralContributionReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralContributionReportDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReportServiceServer).ListAffiliateContributionReportData(ctx, in)
+		return srv.(ReportServiceServer).ListReferralContributionReportData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ReportService_ListAffiliateContributionReportData_FullMethodName,
+		FullMethod: ReportService_ListReferralContributionReportData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListAffiliateContributionReportData(ctx, req.(*ListAffiliateContributionReportDataRequest))
+		return srv.(ReportServiceServer).ListReferralContributionReportData(ctx, req.(*ListReferralContributionReportDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReportService_ListAffiliateLifetimeReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAffiliateLifetimeReportDataRequest)
+func _ReportService_ListReferralLifetimeReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralLifetimeReportDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReportServiceServer).ListAffiliateLifetimeReportData(ctx, in)
+		return srv.(ReportServiceServer).ListReferralLifetimeReportData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ReportService_ListAffiliateLifetimeReportData_FullMethodName,
+		FullMethod: ReportService_ListReferralLifetimeReportData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).ListAffiliateLifetimeReportData(ctx, req.(*ListAffiliateLifetimeReportDataRequest))
+		return srv.(ReportServiceServer).ListReferralLifetimeReportData(ctx, req.(*ListReferralLifetimeReportDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -857,20 +857,20 @@ var ReportService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ReportService_CustomerRecordReportDetail_Handler,
 		},
 		{
-			MethodName: "ListAffiliateVTGReportData",
-			Handler:    _ReportService_ListAffiliateVTGReportData_Handler,
+			MethodName: "ListReferralVTGReportData",
+			Handler:    _ReportService_ListReferralVTGReportData_Handler,
 		},
 		{
-			MethodName: "ListAffiliateSnapshotReportData",
-			Handler:    _ReportService_ListAffiliateSnapshotReportData_Handler,
+			MethodName: "ListReferralSnapshotReportData",
+			Handler:    _ReportService_ListReferralSnapshotReportData_Handler,
 		},
 		{
-			MethodName: "ListAffiliateContributionReportData",
-			Handler:    _ReportService_ListAffiliateContributionReportData_Handler,
+			MethodName: "ListReferralContributionReportData",
+			Handler:    _ReportService_ListReferralContributionReportData_Handler,
 		},
 		{
-			MethodName: "ListAffiliateLifetimeReportData",
-			Handler:    _ReportService_ListAffiliateLifetimeReportData_Handler,
+			MethodName: "ListReferralLifetimeReportData",
+			Handler:    _ReportService_ListReferralLifetimeReportData_Handler,
 		},
 		{
 			MethodName: "GetAffiliatePerformanceReportData",

@@ -2541,22 +2541,22 @@ var _ interface {
 	ErrorName() string
 } = ListWithdrawVtgDetailsRequestValidationError{}
 
-// Validate checks the field values on AffiliateVTGTierData with the rules
+// Validate checks the field values on ReferralVTGTierData with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateVTGTierData) Validate() error {
+func (m *ReferralVTGTierData) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateVTGTierData with the rules
+// ValidateAll checks the field values on ReferralVTGTierData with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AffiliateVTGTierDataMultiError, or nil if none found.
-func (m *AffiliateVTGTierData) ValidateAll() error {
+// ReferralVTGTierDataMultiError, or nil if none found.
+func (m *ReferralVTGTierData) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateVTGTierData) validate(all bool) error {
+func (m *ReferralVTGTierData) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2626,19 +2626,19 @@ func (m *AffiliateVTGTierData) validate(all bool) error {
 	// no validation rules for TotalRewardReportingCurrency
 
 	if len(errors) > 0 {
-		return AffiliateVTGTierDataMultiError(errors)
+		return ReferralVTGTierDataMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateVTGTierDataMultiError is an error wrapping multiple validation
-// errors returned by AffiliateVTGTierData.ValidateAll() if the designated
+// ReferralVTGTierDataMultiError is an error wrapping multiple validation
+// errors returned by ReferralVTGTierData.ValidateAll() if the designated
 // constraints aren't met.
-type AffiliateVTGTierDataMultiError []error
+type ReferralVTGTierDataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateVTGTierDataMultiError) Error() string {
+func (m ReferralVTGTierDataMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2647,11 +2647,11 @@ func (m AffiliateVTGTierDataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateVTGTierDataMultiError) AllErrors() []error { return m }
+func (m ReferralVTGTierDataMultiError) AllErrors() []error { return m }
 
-// AffiliateVTGTierDataValidationError is the validation error returned by
-// AffiliateVTGTierData.Validate if the designated constraints aren't met.
-type AffiliateVTGTierDataValidationError struct {
+// ReferralVTGTierDataValidationError is the validation error returned by
+// ReferralVTGTierData.Validate if the designated constraints aren't met.
+type ReferralVTGTierDataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2659,24 +2659,24 @@ type AffiliateVTGTierDataValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateVTGTierDataValidationError) Field() string { return e.field }
+func (e ReferralVTGTierDataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateVTGTierDataValidationError) Reason() string { return e.reason }
+func (e ReferralVTGTierDataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateVTGTierDataValidationError) Cause() error { return e.cause }
+func (e ReferralVTGTierDataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateVTGTierDataValidationError) Key() bool { return e.key }
+func (e ReferralVTGTierDataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateVTGTierDataValidationError) ErrorName() string {
-	return "AffiliateVTGTierDataValidationError"
+func (e ReferralVTGTierDataValidationError) ErrorName() string {
+	return "ReferralVTGTierDataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateVTGTierDataValidationError) Error() string {
+func (e ReferralVTGTierDataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2688,14 +2688,14 @@ func (e AffiliateVTGTierDataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateVTGTierData.%s: %s%s",
+		"invalid %sReferralVTGTierData.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateVTGTierDataValidationError{}
+var _ error = ReferralVTGTierDataValidationError{}
 
 var _ interface {
 	Field() string
@@ -2703,24 +2703,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateVTGTierDataValidationError{}
+} = ReferralVTGTierDataValidationError{}
 
-// Validate checks the field values on AffiliateSnapshotTierData with the rules
+// Validate checks the field values on ReferralSnapshotTierData with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateSnapshotTierData) Validate() error {
+func (m *ReferralSnapshotTierData) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateSnapshotTierData with the
+// ValidateAll checks the field values on ReferralSnapshotTierData with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AffiliateSnapshotTierDataMultiError, or nil if none found.
-func (m *AffiliateSnapshotTierData) ValidateAll() error {
+// ReferralSnapshotTierDataMultiError, or nil if none found.
+func (m *ReferralSnapshotTierData) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateSnapshotTierData) validate(all bool) error {
+func (m *ReferralSnapshotTierData) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2756,19 +2756,19 @@ func (m *AffiliateSnapshotTierData) validate(all bool) error {
 	// no validation rules for TotalRewardReportingCurrency
 
 	if len(errors) > 0 {
-		return AffiliateSnapshotTierDataMultiError(errors)
+		return ReferralSnapshotTierDataMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateSnapshotTierDataMultiError is an error wrapping multiple validation
-// errors returned by AffiliateSnapshotTierData.ValidateAll() if the
-// designated constraints aren't met.
-type AffiliateSnapshotTierDataMultiError []error
+// ReferralSnapshotTierDataMultiError is an error wrapping multiple validation
+// errors returned by ReferralSnapshotTierData.ValidateAll() if the designated
+// constraints aren't met.
+type ReferralSnapshotTierDataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateSnapshotTierDataMultiError) Error() string {
+func (m ReferralSnapshotTierDataMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2777,11 +2777,11 @@ func (m AffiliateSnapshotTierDataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateSnapshotTierDataMultiError) AllErrors() []error { return m }
+func (m ReferralSnapshotTierDataMultiError) AllErrors() []error { return m }
 
-// AffiliateSnapshotTierDataValidationError is the validation error returned by
-// AffiliateSnapshotTierData.Validate if the designated constraints aren't met.
-type AffiliateSnapshotTierDataValidationError struct {
+// ReferralSnapshotTierDataValidationError is the validation error returned by
+// ReferralSnapshotTierData.Validate if the designated constraints aren't met.
+type ReferralSnapshotTierDataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2789,24 +2789,24 @@ type AffiliateSnapshotTierDataValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateSnapshotTierDataValidationError) Field() string { return e.field }
+func (e ReferralSnapshotTierDataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateSnapshotTierDataValidationError) Reason() string { return e.reason }
+func (e ReferralSnapshotTierDataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateSnapshotTierDataValidationError) Cause() error { return e.cause }
+func (e ReferralSnapshotTierDataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateSnapshotTierDataValidationError) Key() bool { return e.key }
+func (e ReferralSnapshotTierDataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateSnapshotTierDataValidationError) ErrorName() string {
-	return "AffiliateSnapshotTierDataValidationError"
+func (e ReferralSnapshotTierDataValidationError) ErrorName() string {
+	return "ReferralSnapshotTierDataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateSnapshotTierDataValidationError) Error() string {
+func (e ReferralSnapshotTierDataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2818,14 +2818,14 @@ func (e AffiliateSnapshotTierDataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateSnapshotTierData.%s: %s%s",
+		"invalid %sReferralSnapshotTierData.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateSnapshotTierDataValidationError{}
+var _ error = ReferralSnapshotTierDataValidationError{}
 
 var _ interface {
 	Field() string
@@ -2833,24 +2833,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateSnapshotTierDataValidationError{}
+} = ReferralSnapshotTierDataValidationError{}
 
-// Validate checks the field values on AffiliateT1GamingData with the rules
+// Validate checks the field values on ReferralT1GamingData with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateT1GamingData) Validate() error {
+func (m *ReferralT1GamingData) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateT1GamingData with the rules
+// ValidateAll checks the field values on ReferralT1GamingData with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AffiliateT1GamingDataMultiError, or nil if none found.
-func (m *AffiliateT1GamingData) ValidateAll() error {
+// ReferralT1GamingDataMultiError, or nil if none found.
+func (m *ReferralT1GamingData) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateT1GamingData) validate(all bool) error {
+func (m *ReferralT1GamingData) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2878,19 +2878,19 @@ func (m *AffiliateT1GamingData) validate(all bool) error {
 	// no validation rules for ProviderRoyaltiesReportingCurrency
 
 	if len(errors) > 0 {
-		return AffiliateT1GamingDataMultiError(errors)
+		return ReferralT1GamingDataMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateT1GamingDataMultiError is an error wrapping multiple validation
-// errors returned by AffiliateT1GamingData.ValidateAll() if the designated
+// ReferralT1GamingDataMultiError is an error wrapping multiple validation
+// errors returned by ReferralT1GamingData.ValidateAll() if the designated
 // constraints aren't met.
-type AffiliateT1GamingDataMultiError []error
+type ReferralT1GamingDataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateT1GamingDataMultiError) Error() string {
+func (m ReferralT1GamingDataMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2899,11 +2899,11 @@ func (m AffiliateT1GamingDataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateT1GamingDataMultiError) AllErrors() []error { return m }
+func (m ReferralT1GamingDataMultiError) AllErrors() []error { return m }
 
-// AffiliateT1GamingDataValidationError is the validation error returned by
-// AffiliateT1GamingData.Validate if the designated constraints aren't met.
-type AffiliateT1GamingDataValidationError struct {
+// ReferralT1GamingDataValidationError is the validation error returned by
+// ReferralT1GamingData.Validate if the designated constraints aren't met.
+type ReferralT1GamingDataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2911,24 +2911,24 @@ type AffiliateT1GamingDataValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateT1GamingDataValidationError) Field() string { return e.field }
+func (e ReferralT1GamingDataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateT1GamingDataValidationError) Reason() string { return e.reason }
+func (e ReferralT1GamingDataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateT1GamingDataValidationError) Cause() error { return e.cause }
+func (e ReferralT1GamingDataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateT1GamingDataValidationError) Key() bool { return e.key }
+func (e ReferralT1GamingDataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateT1GamingDataValidationError) ErrorName() string {
-	return "AffiliateT1GamingDataValidationError"
+func (e ReferralT1GamingDataValidationError) ErrorName() string {
+	return "ReferralT1GamingDataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateT1GamingDataValidationError) Error() string {
+func (e ReferralT1GamingDataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2940,14 +2940,14 @@ func (e AffiliateT1GamingDataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateT1GamingData.%s: %s%s",
+		"invalid %sReferralT1GamingData.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateT1GamingDataValidationError{}
+var _ error = ReferralT1GamingDataValidationError{}
 
 var _ interface {
 	Field() string
@@ -2955,24 +2955,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateT1GamingDataValidationError{}
+} = ReferralT1GamingDataValidationError{}
 
-// Validate checks the field values on AffiliateTierCarryover with the rules
+// Validate checks the field values on ReferralTierCarryover with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateTierCarryover) Validate() error {
+func (m *ReferralTierCarryover) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateTierCarryover with the rules
+// ValidateAll checks the field values on ReferralTierCarryover with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AffiliateTierCarryoverMultiError, or nil if none found.
-func (m *AffiliateTierCarryover) ValidateAll() error {
+// ReferralTierCarryoverMultiError, or nil if none found.
+func (m *ReferralTierCarryover) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateTierCarryover) validate(all bool) error {
+func (m *ReferralTierCarryover) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2994,19 +2994,19 @@ func (m *AffiliateTierCarryover) validate(all bool) error {
 	// no validation rules for B2CCarryover
 
 	if len(errors) > 0 {
-		return AffiliateTierCarryoverMultiError(errors)
+		return ReferralTierCarryoverMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateTierCarryoverMultiError is an error wrapping multiple validation
-// errors returned by AffiliateTierCarryover.ValidateAll() if the designated
+// ReferralTierCarryoverMultiError is an error wrapping multiple validation
+// errors returned by ReferralTierCarryover.ValidateAll() if the designated
 // constraints aren't met.
-type AffiliateTierCarryoverMultiError []error
+type ReferralTierCarryoverMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateTierCarryoverMultiError) Error() string {
+func (m ReferralTierCarryoverMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3015,11 +3015,11 @@ func (m AffiliateTierCarryoverMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateTierCarryoverMultiError) AllErrors() []error { return m }
+func (m ReferralTierCarryoverMultiError) AllErrors() []error { return m }
 
-// AffiliateTierCarryoverValidationError is the validation error returned by
-// AffiliateTierCarryover.Validate if the designated constraints aren't met.
-type AffiliateTierCarryoverValidationError struct {
+// ReferralTierCarryoverValidationError is the validation error returned by
+// ReferralTierCarryover.Validate if the designated constraints aren't met.
+type ReferralTierCarryoverValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3027,24 +3027,24 @@ type AffiliateTierCarryoverValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateTierCarryoverValidationError) Field() string { return e.field }
+func (e ReferralTierCarryoverValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateTierCarryoverValidationError) Reason() string { return e.reason }
+func (e ReferralTierCarryoverValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateTierCarryoverValidationError) Cause() error { return e.cause }
+func (e ReferralTierCarryoverValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateTierCarryoverValidationError) Key() bool { return e.key }
+func (e ReferralTierCarryoverValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateTierCarryoverValidationError) ErrorName() string {
-	return "AffiliateTierCarryoverValidationError"
+func (e ReferralTierCarryoverValidationError) ErrorName() string {
+	return "ReferralTierCarryoverValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateTierCarryoverValidationError) Error() string {
+func (e ReferralTierCarryoverValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3056,14 +3056,14 @@ func (e AffiliateTierCarryoverValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateTierCarryover.%s: %s%s",
+		"invalid %sReferralTierCarryover.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateTierCarryoverValidationError{}
+var _ error = ReferralTierCarryoverValidationError{}
 
 var _ interface {
 	Field() string
@@ -3071,24 +3071,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateTierCarryoverValidationError{}
+} = ReferralTierCarryoverValidationError{}
 
-// Validate checks the field values on AffiliateTierGamingData with the rules
+// Validate checks the field values on ReferralTierGamingData with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateTierGamingData) Validate() error {
+func (m *ReferralTierGamingData) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateTierGamingData with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ReferralTierGamingData with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AffiliateTierGamingDataMultiError, or nil if none found.
-func (m *AffiliateTierGamingData) ValidateAll() error {
+// ReferralTierGamingDataMultiError, or nil if none found.
+func (m *ReferralTierGamingData) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateTierGamingData) validate(all bool) error {
+func (m *ReferralTierGamingData) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3116,19 +3116,19 @@ func (m *AffiliateTierGamingData) validate(all bool) error {
 	// no validation rules for BetAmountReportingCurrency
 
 	if len(errors) > 0 {
-		return AffiliateTierGamingDataMultiError(errors)
+		return ReferralTierGamingDataMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateTierGamingDataMultiError is an error wrapping multiple validation
-// errors returned by AffiliateTierGamingData.ValidateAll() if the designated
+// ReferralTierGamingDataMultiError is an error wrapping multiple validation
+// errors returned by ReferralTierGamingData.ValidateAll() if the designated
 // constraints aren't met.
-type AffiliateTierGamingDataMultiError []error
+type ReferralTierGamingDataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateTierGamingDataMultiError) Error() string {
+func (m ReferralTierGamingDataMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3137,11 +3137,11 @@ func (m AffiliateTierGamingDataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateTierGamingDataMultiError) AllErrors() []error { return m }
+func (m ReferralTierGamingDataMultiError) AllErrors() []error { return m }
 
-// AffiliateTierGamingDataValidationError is the validation error returned by
-// AffiliateTierGamingData.Validate if the designated constraints aren't met.
-type AffiliateTierGamingDataValidationError struct {
+// ReferralTierGamingDataValidationError is the validation error returned by
+// ReferralTierGamingData.Validate if the designated constraints aren't met.
+type ReferralTierGamingDataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3149,24 +3149,24 @@ type AffiliateTierGamingDataValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateTierGamingDataValidationError) Field() string { return e.field }
+func (e ReferralTierGamingDataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateTierGamingDataValidationError) Reason() string { return e.reason }
+func (e ReferralTierGamingDataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateTierGamingDataValidationError) Cause() error { return e.cause }
+func (e ReferralTierGamingDataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateTierGamingDataValidationError) Key() bool { return e.key }
+func (e ReferralTierGamingDataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateTierGamingDataValidationError) ErrorName() string {
-	return "AffiliateTierGamingDataValidationError"
+func (e ReferralTierGamingDataValidationError) ErrorName() string {
+	return "ReferralTierGamingDataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateTierGamingDataValidationError) Error() string {
+func (e ReferralTierGamingDataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3178,14 +3178,14 @@ func (e AffiliateTierGamingDataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateTierGamingData.%s: %s%s",
+		"invalid %sReferralTierGamingData.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateTierGamingDataValidationError{}
+var _ error = ReferralTierGamingDataValidationError{}
 
 var _ interface {
 	Field() string
@@ -3193,25 +3193,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateTierGamingDataValidationError{}
+} = ReferralTierGamingDataValidationError{}
 
-// Validate checks the field values on ListAffiliateVTGReportDataRequest with
+// Validate checks the field values on ListReferralVTGReportDataRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *ListAffiliateVTGReportDataRequest) Validate() error {
+func (m *ListReferralVTGReportDataRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListAffiliateVTGReportDataRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListAffiliateVTGReportDataRequestMultiError, or nil if none found.
-func (m *ListAffiliateVTGReportDataRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListReferralVTGReportDataRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListReferralVTGReportDataRequestMultiError, or nil if none found.
+func (m *ListReferralVTGReportDataRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
+func (m *ListReferralVTGReportDataRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3224,7 +3224,7 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateVTGReportDataRequestValidationError{
+				errors = append(errors, ListReferralVTGReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3232,7 +3232,7 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateVTGReportDataRequestValidationError{
+				errors = append(errors, ListReferralVTGReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3241,7 +3241,7 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateVTGReportDataRequestValidationError{
+			return ListReferralVTGReportDataRequestValidationError{
 				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3253,7 +3253,7 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateVTGReportDataRequestValidationError{
+				errors = append(errors, ListReferralVTGReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3261,7 +3261,7 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateVTGReportDataRequestValidationError{
+				errors = append(errors, ListReferralVTGReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3270,7 +3270,7 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateVTGReportDataRequestValidationError{
+			return ListReferralVTGReportDataRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3287,20 +3287,20 @@ func (m *ListAffiliateVTGReportDataRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListAffiliateVTGReportDataRequestMultiError(errors)
+		return ListReferralVTGReportDataRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateVTGReportDataRequestMultiError is an error wrapping multiple
+// ListReferralVTGReportDataRequestMultiError is an error wrapping multiple
 // validation errors returned by
-// ListAffiliateVTGReportDataRequest.ValidateAll() if the designated
+// ListReferralVTGReportDataRequest.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateVTGReportDataRequestMultiError []error
+type ListReferralVTGReportDataRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateVTGReportDataRequestMultiError) Error() string {
+func (m ListReferralVTGReportDataRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3309,12 +3309,12 @@ func (m ListAffiliateVTGReportDataRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateVTGReportDataRequestMultiError) AllErrors() []error { return m }
+func (m ListReferralVTGReportDataRequestMultiError) AllErrors() []error { return m }
 
-// ListAffiliateVTGReportDataRequestValidationError is the validation error
-// returned by ListAffiliateVTGReportDataRequest.Validate if the designated
+// ListReferralVTGReportDataRequestValidationError is the validation error
+// returned by ListReferralVTGReportDataRequest.Validate if the designated
 // constraints aren't met.
-type ListAffiliateVTGReportDataRequestValidationError struct {
+type ListReferralVTGReportDataRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3322,24 +3322,24 @@ type ListAffiliateVTGReportDataRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateVTGReportDataRequestValidationError) Field() string { return e.field }
+func (e ListReferralVTGReportDataRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateVTGReportDataRequestValidationError) Reason() string { return e.reason }
+func (e ListReferralVTGReportDataRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateVTGReportDataRequestValidationError) Cause() error { return e.cause }
+func (e ListReferralVTGReportDataRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateVTGReportDataRequestValidationError) Key() bool { return e.key }
+func (e ListReferralVTGReportDataRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateVTGReportDataRequestValidationError) ErrorName() string {
-	return "ListAffiliateVTGReportDataRequestValidationError"
+func (e ListReferralVTGReportDataRequestValidationError) ErrorName() string {
+	return "ListReferralVTGReportDataRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateVTGReportDataRequestValidationError) Error() string {
+func (e ListReferralVTGReportDataRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3351,14 +3351,14 @@ func (e ListAffiliateVTGReportDataRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateVTGReportDataRequest.%s: %s%s",
+		"invalid %sListReferralVTGReportDataRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateVTGReportDataRequestValidationError{}
+var _ error = ListReferralVTGReportDataRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -3366,24 +3366,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateVTGReportDataRequestValidationError{}
+} = ListReferralVTGReportDataRequestValidationError{}
 
-// Validate checks the field values on AffiliateVTGReportDataItem with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ReferralVTGReportDataItem with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateVTGReportDataItem) Validate() error {
+func (m *ReferralVTGReportDataItem) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateVTGReportDataItem with the
+// ValidateAll checks the field values on ReferralVTGReportDataItem with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AffiliateVTGReportDataItemMultiError, or nil if none found.
-func (m *AffiliateVTGReportDataItem) ValidateAll() error {
+// ReferralVTGReportDataItemMultiError, or nil if none found.
+func (m *ReferralVTGReportDataItem) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateVTGReportDataItem) validate(all bool) error {
+func (m *ReferralVTGReportDataItem) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3413,7 +3413,7 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AffiliateVTGReportDataItemValidationError{
+					errors = append(errors, ReferralVTGReportDataItemValidationError{
 						field:  fmt.Sprintf("Tiers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3421,7 +3421,7 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, AffiliateVTGReportDataItemValidationError{
+					errors = append(errors, ReferralVTGReportDataItemValidationError{
 						field:  fmt.Sprintf("Tiers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3430,7 +3430,7 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return AffiliateVTGReportDataItemValidationError{
+				return ReferralVTGReportDataItemValidationError{
 					field:  fmt.Sprintf("Tiers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3451,19 +3451,19 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 	// no validation rules for T1TotalRewardReportingCurrency
 
 	if len(errors) > 0 {
-		return AffiliateVTGReportDataItemMultiError(errors)
+		return ReferralVTGReportDataItemMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateVTGReportDataItemMultiError is an error wrapping multiple
-// validation errors returned by AffiliateVTGReportDataItem.ValidateAll() if
-// the designated constraints aren't met.
-type AffiliateVTGReportDataItemMultiError []error
+// ReferralVTGReportDataItemMultiError is an error wrapping multiple validation
+// errors returned by ReferralVTGReportDataItem.ValidateAll() if the
+// designated constraints aren't met.
+type ReferralVTGReportDataItemMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateVTGReportDataItemMultiError) Error() string {
+func (m ReferralVTGReportDataItemMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3472,11 +3472,11 @@ func (m AffiliateVTGReportDataItemMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateVTGReportDataItemMultiError) AllErrors() []error { return m }
+func (m ReferralVTGReportDataItemMultiError) AllErrors() []error { return m }
 
-// AffiliateVTGReportDataItemValidationError is the validation error returned
-// by AffiliateVTGReportDataItem.Validate if the designated constraints aren't met.
-type AffiliateVTGReportDataItemValidationError struct {
+// ReferralVTGReportDataItemValidationError is the validation error returned by
+// ReferralVTGReportDataItem.Validate if the designated constraints aren't met.
+type ReferralVTGReportDataItemValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3484,24 +3484,24 @@ type AffiliateVTGReportDataItemValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateVTGReportDataItemValidationError) Field() string { return e.field }
+func (e ReferralVTGReportDataItemValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateVTGReportDataItemValidationError) Reason() string { return e.reason }
+func (e ReferralVTGReportDataItemValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateVTGReportDataItemValidationError) Cause() error { return e.cause }
+func (e ReferralVTGReportDataItemValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateVTGReportDataItemValidationError) Key() bool { return e.key }
+func (e ReferralVTGReportDataItemValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateVTGReportDataItemValidationError) ErrorName() string {
-	return "AffiliateVTGReportDataItemValidationError"
+func (e ReferralVTGReportDataItemValidationError) ErrorName() string {
+	return "ReferralVTGReportDataItemValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateVTGReportDataItemValidationError) Error() string {
+func (e ReferralVTGReportDataItemValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3513,14 +3513,14 @@ func (e AffiliateVTGReportDataItemValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateVTGReportDataItem.%s: %s%s",
+		"invalid %sReferralVTGReportDataItem.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateVTGReportDataItemValidationError{}
+var _ error = ReferralVTGReportDataItemValidationError{}
 
 var _ interface {
 	Field() string
@@ -3528,25 +3528,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateVTGReportDataItemValidationError{}
+} = ReferralVTGReportDataItemValidationError{}
 
-// Validate checks the field values on ListAffiliateVTGReportDataResponse with
+// Validate checks the field values on ListReferralVTGReportDataResponse with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *ListAffiliateVTGReportDataResponse) Validate() error {
+func (m *ListReferralVTGReportDataResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListAffiliateVTGReportDataResponse
+// ValidateAll checks the field values on ListReferralVTGReportDataResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// ListAffiliateVTGReportDataResponseMultiError, or nil if none found.
-func (m *ListAffiliateVTGReportDataResponse) ValidateAll() error {
+// ListReferralVTGReportDataResponseMultiError, or nil if none found.
+func (m *ListReferralVTGReportDataResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateVTGReportDataResponse) validate(all bool) error {
+func (m *ListReferralVTGReportDataResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3560,7 +3560,7 @@ func (m *ListAffiliateVTGReportDataResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListAffiliateVTGReportDataResponseValidationError{
+					errors = append(errors, ListReferralVTGReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3568,7 +3568,7 @@ func (m *ListAffiliateVTGReportDataResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListAffiliateVTGReportDataResponseValidationError{
+					errors = append(errors, ListReferralVTGReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3577,7 +3577,7 @@ func (m *ListAffiliateVTGReportDataResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListAffiliateVTGReportDataResponseValidationError{
+				return ListReferralVTGReportDataResponseValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3594,20 +3594,20 @@ func (m *ListAffiliateVTGReportDataResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListAffiliateVTGReportDataResponseMultiError(errors)
+		return ListReferralVTGReportDataResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateVTGReportDataResponseMultiError is an error wrapping multiple
+// ListReferralVTGReportDataResponseMultiError is an error wrapping multiple
 // validation errors returned by
-// ListAffiliateVTGReportDataResponse.ValidateAll() if the designated
+// ListReferralVTGReportDataResponse.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateVTGReportDataResponseMultiError []error
+type ListReferralVTGReportDataResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateVTGReportDataResponseMultiError) Error() string {
+func (m ListReferralVTGReportDataResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3616,12 +3616,12 @@ func (m ListAffiliateVTGReportDataResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateVTGReportDataResponseMultiError) AllErrors() []error { return m }
+func (m ListReferralVTGReportDataResponseMultiError) AllErrors() []error { return m }
 
-// ListAffiliateVTGReportDataResponseValidationError is the validation error
-// returned by ListAffiliateVTGReportDataResponse.Validate if the designated
+// ListReferralVTGReportDataResponseValidationError is the validation error
+// returned by ListReferralVTGReportDataResponse.Validate if the designated
 // constraints aren't met.
-type ListAffiliateVTGReportDataResponseValidationError struct {
+type ListReferralVTGReportDataResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3629,24 +3629,24 @@ type ListAffiliateVTGReportDataResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateVTGReportDataResponseValidationError) Field() string { return e.field }
+func (e ListReferralVTGReportDataResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateVTGReportDataResponseValidationError) Reason() string { return e.reason }
+func (e ListReferralVTGReportDataResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateVTGReportDataResponseValidationError) Cause() error { return e.cause }
+func (e ListReferralVTGReportDataResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateVTGReportDataResponseValidationError) Key() bool { return e.key }
+func (e ListReferralVTGReportDataResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateVTGReportDataResponseValidationError) ErrorName() string {
-	return "ListAffiliateVTGReportDataResponseValidationError"
+func (e ListReferralVTGReportDataResponseValidationError) ErrorName() string {
+	return "ListReferralVTGReportDataResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateVTGReportDataResponseValidationError) Error() string {
+func (e ListReferralVTGReportDataResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3658,14 +3658,14 @@ func (e ListAffiliateVTGReportDataResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateVTGReportDataResponse.%s: %s%s",
+		"invalid %sListReferralVTGReportDataResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateVTGReportDataResponseValidationError{}
+var _ error = ListReferralVTGReportDataResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -3673,26 +3673,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateVTGReportDataResponseValidationError{}
+} = ListReferralVTGReportDataResponseValidationError{}
 
-// Validate checks the field values on ListAffiliateSnapshotReportDataRequest
+// Validate checks the field values on ListReferralSnapshotReportDataRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *ListAffiliateSnapshotReportDataRequest) Validate() error {
+func (m *ListReferralSnapshotReportDataRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListAffiliateSnapshotReportDataRequest with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListAffiliateSnapshotReportDataRequestMultiError, or nil if none found.
-func (m *ListAffiliateSnapshotReportDataRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListReferralSnapshotReportDataRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListReferralSnapshotReportDataRequestMultiError, or nil if none found.
+func (m *ListReferralSnapshotReportDataRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
+func (m *ListReferralSnapshotReportDataRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3705,7 +3704,7 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateSnapshotReportDataRequestValidationError{
+				errors = append(errors, ListReferralSnapshotReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3713,7 +3712,7 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateSnapshotReportDataRequestValidationError{
+				errors = append(errors, ListReferralSnapshotReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3722,7 +3721,7 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateSnapshotReportDataRequestValidationError{
+			return ListReferralSnapshotReportDataRequestValidationError{
 				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3734,7 +3733,7 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateSnapshotReportDataRequestValidationError{
+				errors = append(errors, ListReferralSnapshotReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3742,7 +3741,7 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateSnapshotReportDataRequestValidationError{
+				errors = append(errors, ListReferralSnapshotReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3751,7 +3750,7 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateSnapshotReportDataRequestValidationError{
+			return ListReferralSnapshotReportDataRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3770,20 +3769,20 @@ func (m *ListAffiliateSnapshotReportDataRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListAffiliateSnapshotReportDataRequestMultiError(errors)
+		return ListReferralSnapshotReportDataRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateSnapshotReportDataRequestMultiError is an error wrapping
+// ListReferralSnapshotReportDataRequestMultiError is an error wrapping
 // multiple validation errors returned by
-// ListAffiliateSnapshotReportDataRequest.ValidateAll() if the designated
+// ListReferralSnapshotReportDataRequest.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateSnapshotReportDataRequestMultiError []error
+type ListReferralSnapshotReportDataRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateSnapshotReportDataRequestMultiError) Error() string {
+func (m ListReferralSnapshotReportDataRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3792,12 +3791,12 @@ func (m ListAffiliateSnapshotReportDataRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateSnapshotReportDataRequestMultiError) AllErrors() []error { return m }
+func (m ListReferralSnapshotReportDataRequestMultiError) AllErrors() []error { return m }
 
-// ListAffiliateSnapshotReportDataRequestValidationError is the validation
-// error returned by ListAffiliateSnapshotReportDataRequest.Validate if the
+// ListReferralSnapshotReportDataRequestValidationError is the validation error
+// returned by ListReferralSnapshotReportDataRequest.Validate if the
 // designated constraints aren't met.
-type ListAffiliateSnapshotReportDataRequestValidationError struct {
+type ListReferralSnapshotReportDataRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3805,24 +3804,24 @@ type ListAffiliateSnapshotReportDataRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateSnapshotReportDataRequestValidationError) Field() string { return e.field }
+func (e ListReferralSnapshotReportDataRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateSnapshotReportDataRequestValidationError) Reason() string { return e.reason }
+func (e ListReferralSnapshotReportDataRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateSnapshotReportDataRequestValidationError) Cause() error { return e.cause }
+func (e ListReferralSnapshotReportDataRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateSnapshotReportDataRequestValidationError) Key() bool { return e.key }
+func (e ListReferralSnapshotReportDataRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateSnapshotReportDataRequestValidationError) ErrorName() string {
-	return "ListAffiliateSnapshotReportDataRequestValidationError"
+func (e ListReferralSnapshotReportDataRequestValidationError) ErrorName() string {
+	return "ListReferralSnapshotReportDataRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateSnapshotReportDataRequestValidationError) Error() string {
+func (e ListReferralSnapshotReportDataRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3834,14 +3833,14 @@ func (e ListAffiliateSnapshotReportDataRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateSnapshotReportDataRequest.%s: %s%s",
+		"invalid %sListReferralSnapshotReportDataRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateSnapshotReportDataRequestValidationError{}
+var _ error = ListReferralSnapshotReportDataRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -3849,24 +3848,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateSnapshotReportDataRequestValidationError{}
+} = ListReferralSnapshotReportDataRequestValidationError{}
 
-// Validate checks the field values on AffiliateSnapshotReportDataItem with the
+// Validate checks the field values on ReferralSnapshotReportDataItem with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateSnapshotReportDataItem) Validate() error {
+func (m *ReferralSnapshotReportDataItem) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateSnapshotReportDataItem with
+// ValidateAll checks the field values on ReferralSnapshotReportDataItem with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// AffiliateSnapshotReportDataItemMultiError, or nil if none found.
-func (m *AffiliateSnapshotReportDataItem) ValidateAll() error {
+// ReferralSnapshotReportDataItemMultiError, or nil if none found.
+func (m *ReferralSnapshotReportDataItem) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
+func (m *ReferralSnapshotReportDataItem) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3896,7 +3895,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 						field:  fmt.Sprintf("Tiers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3904,7 +3903,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 						field:  fmt.Sprintf("Tiers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3913,7 +3912,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return AffiliateSnapshotReportDataItemValidationError{
+				return ReferralSnapshotReportDataItemValidationError{
 					field:  fmt.Sprintf("Tiers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3927,7 +3926,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 		switch v := interface{}(m.GetT1Gaming()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+				errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 					field:  "T1Gaming",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3935,7 +3934,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+				errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 					field:  "T1Gaming",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -3944,7 +3943,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetT1Gaming()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AffiliateSnapshotReportDataItemValidationError{
+			return ReferralSnapshotReportDataItemValidationError{
 				field:  "T1Gaming",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -3975,7 +3974,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 						field:  fmt.Sprintf("CurrentPeriodGaming[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3983,7 +3982,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 						field:  fmt.Sprintf("CurrentPeriodGaming[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -3992,7 +3991,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return AffiliateSnapshotReportDataItemValidationError{
+				return ReferralSnapshotReportDataItemValidationError{
 					field:  fmt.Sprintf("CurrentPeriodGaming[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4021,7 +4020,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -4029,7 +4028,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, AffiliateSnapshotReportDataItemValidationError{
+					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
 						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -4038,7 +4037,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return AffiliateSnapshotReportDataItemValidationError{
+				return ReferralSnapshotReportDataItemValidationError{
 					field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4049,19 +4048,19 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return AffiliateSnapshotReportDataItemMultiError(errors)
+		return ReferralSnapshotReportDataItemMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateSnapshotReportDataItemMultiError is an error wrapping multiple
-// validation errors returned by AffiliateSnapshotReportDataItem.ValidateAll()
+// ReferralSnapshotReportDataItemMultiError is an error wrapping multiple
+// validation errors returned by ReferralSnapshotReportDataItem.ValidateAll()
 // if the designated constraints aren't met.
-type AffiliateSnapshotReportDataItemMultiError []error
+type ReferralSnapshotReportDataItemMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateSnapshotReportDataItemMultiError) Error() string {
+func (m ReferralSnapshotReportDataItemMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4070,12 +4069,12 @@ func (m AffiliateSnapshotReportDataItemMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateSnapshotReportDataItemMultiError) AllErrors() []error { return m }
+func (m ReferralSnapshotReportDataItemMultiError) AllErrors() []error { return m }
 
-// AffiliateSnapshotReportDataItemValidationError is the validation error
-// returned by AffiliateSnapshotReportDataItem.Validate if the designated
+// ReferralSnapshotReportDataItemValidationError is the validation error
+// returned by ReferralSnapshotReportDataItem.Validate if the designated
 // constraints aren't met.
-type AffiliateSnapshotReportDataItemValidationError struct {
+type ReferralSnapshotReportDataItemValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4083,24 +4082,24 @@ type AffiliateSnapshotReportDataItemValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateSnapshotReportDataItemValidationError) Field() string { return e.field }
+func (e ReferralSnapshotReportDataItemValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateSnapshotReportDataItemValidationError) Reason() string { return e.reason }
+func (e ReferralSnapshotReportDataItemValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateSnapshotReportDataItemValidationError) Cause() error { return e.cause }
+func (e ReferralSnapshotReportDataItemValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateSnapshotReportDataItemValidationError) Key() bool { return e.key }
+func (e ReferralSnapshotReportDataItemValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateSnapshotReportDataItemValidationError) ErrorName() string {
-	return "AffiliateSnapshotReportDataItemValidationError"
+func (e ReferralSnapshotReportDataItemValidationError) ErrorName() string {
+	return "ReferralSnapshotReportDataItemValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateSnapshotReportDataItemValidationError) Error() string {
+func (e ReferralSnapshotReportDataItemValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4112,14 +4111,14 @@ func (e AffiliateSnapshotReportDataItemValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateSnapshotReportDataItem.%s: %s%s",
+		"invalid %sReferralSnapshotReportDataItem.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateSnapshotReportDataItemValidationError{}
+var _ error = ReferralSnapshotReportDataItemValidationError{}
 
 var _ interface {
 	Field() string
@@ -4127,26 +4126,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateSnapshotReportDataItemValidationError{}
+} = ReferralSnapshotReportDataItemValidationError{}
 
-// Validate checks the field values on ListAffiliateSnapshotReportDataResponse
+// Validate checks the field values on ListReferralSnapshotReportDataResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *ListAffiliateSnapshotReportDataResponse) Validate() error {
+func (m *ListReferralSnapshotReportDataResponse) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListAffiliateSnapshotReportDataResponse with the rules defined in the proto
+// ListReferralSnapshotReportDataResponse with the rules defined in the proto
 // definition for this message. If any rules are violated, the result is a
 // list of violation errors wrapped in
-// ListAffiliateSnapshotReportDataResponseMultiError, or nil if none found.
-func (m *ListAffiliateSnapshotReportDataResponse) ValidateAll() error {
+// ListReferralSnapshotReportDataResponseMultiError, or nil if none found.
+func (m *ListReferralSnapshotReportDataResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateSnapshotReportDataResponse) validate(all bool) error {
+func (m *ListReferralSnapshotReportDataResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4160,7 +4159,7 @@ func (m *ListAffiliateSnapshotReportDataResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListAffiliateSnapshotReportDataResponseValidationError{
+					errors = append(errors, ListReferralSnapshotReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -4168,7 +4167,7 @@ func (m *ListAffiliateSnapshotReportDataResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListAffiliateSnapshotReportDataResponseValidationError{
+					errors = append(errors, ListReferralSnapshotReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -4177,7 +4176,7 @@ func (m *ListAffiliateSnapshotReportDataResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListAffiliateSnapshotReportDataResponseValidationError{
+				return ListReferralSnapshotReportDataResponseValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4194,20 +4193,20 @@ func (m *ListAffiliateSnapshotReportDataResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListAffiliateSnapshotReportDataResponseMultiError(errors)
+		return ListReferralSnapshotReportDataResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateSnapshotReportDataResponseMultiError is an error wrapping
+// ListReferralSnapshotReportDataResponseMultiError is an error wrapping
 // multiple validation errors returned by
-// ListAffiliateSnapshotReportDataResponse.ValidateAll() if the designated
+// ListReferralSnapshotReportDataResponse.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateSnapshotReportDataResponseMultiError []error
+type ListReferralSnapshotReportDataResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateSnapshotReportDataResponseMultiError) Error() string {
+func (m ListReferralSnapshotReportDataResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4216,12 +4215,12 @@ func (m ListAffiliateSnapshotReportDataResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateSnapshotReportDataResponseMultiError) AllErrors() []error { return m }
+func (m ListReferralSnapshotReportDataResponseMultiError) AllErrors() []error { return m }
 
-// ListAffiliateSnapshotReportDataResponseValidationError is the validation
-// error returned by ListAffiliateSnapshotReportDataResponse.Validate if the
+// ListReferralSnapshotReportDataResponseValidationError is the validation
+// error returned by ListReferralSnapshotReportDataResponse.Validate if the
 // designated constraints aren't met.
-type ListAffiliateSnapshotReportDataResponseValidationError struct {
+type ListReferralSnapshotReportDataResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4229,24 +4228,24 @@ type ListAffiliateSnapshotReportDataResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateSnapshotReportDataResponseValidationError) Field() string { return e.field }
+func (e ListReferralSnapshotReportDataResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateSnapshotReportDataResponseValidationError) Reason() string { return e.reason }
+func (e ListReferralSnapshotReportDataResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateSnapshotReportDataResponseValidationError) Cause() error { return e.cause }
+func (e ListReferralSnapshotReportDataResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateSnapshotReportDataResponseValidationError) Key() bool { return e.key }
+func (e ListReferralSnapshotReportDataResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateSnapshotReportDataResponseValidationError) ErrorName() string {
-	return "ListAffiliateSnapshotReportDataResponseValidationError"
+func (e ListReferralSnapshotReportDataResponseValidationError) ErrorName() string {
+	return "ListReferralSnapshotReportDataResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateSnapshotReportDataResponseValidationError) Error() string {
+func (e ListReferralSnapshotReportDataResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4258,14 +4257,14 @@ func (e ListAffiliateSnapshotReportDataResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateSnapshotReportDataResponse.%s: %s%s",
+		"invalid %sListReferralSnapshotReportDataResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateSnapshotReportDataResponseValidationError{}
+var _ error = ListReferralSnapshotReportDataResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -4273,26 +4272,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateSnapshotReportDataResponseValidationError{}
+} = ListReferralSnapshotReportDataResponseValidationError{}
 
 // Validate checks the field values on
-// ListAffiliateContributionReportDataRequest with the rules defined in the
+// ListReferralContributionReportDataRequest with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *ListAffiliateContributionReportDataRequest) Validate() error {
+func (m *ListReferralContributionReportDataRequest) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListAffiliateContributionReportDataRequest with the rules defined in the
+// ListReferralContributionReportDataRequest with the rules defined in the
 // proto definition for this message. If any rules are violated, the result is
 // a list of violation errors wrapped in
-// ListAffiliateContributionReportDataRequestMultiError, or nil if none found.
-func (m *ListAffiliateContributionReportDataRequest) ValidateAll() error {
+// ListReferralContributionReportDataRequestMultiError, or nil if none found.
+func (m *ListReferralContributionReportDataRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
+func (m *ListReferralContributionReportDataRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4305,7 +4304,7 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateContributionReportDataRequestValidationError{
+				errors = append(errors, ListReferralContributionReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4313,7 +4312,7 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateContributionReportDataRequestValidationError{
+				errors = append(errors, ListReferralContributionReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4322,7 +4321,7 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateContributionReportDataRequestValidationError{
+			return ListReferralContributionReportDataRequestValidationError{
 				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4334,7 +4333,7 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateContributionReportDataRequestValidationError{
+				errors = append(errors, ListReferralContributionReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4342,7 +4341,7 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateContributionReportDataRequestValidationError{
+				errors = append(errors, ListReferralContributionReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4351,7 +4350,7 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateContributionReportDataRequestValidationError{
+			return ListReferralContributionReportDataRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4376,20 +4375,20 @@ func (m *ListAffiliateContributionReportDataRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListAffiliateContributionReportDataRequestMultiError(errors)
+		return ListReferralContributionReportDataRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateContributionReportDataRequestMultiError is an error wrapping
+// ListReferralContributionReportDataRequestMultiError is an error wrapping
 // multiple validation errors returned by
-// ListAffiliateContributionReportDataRequest.ValidateAll() if the designated
+// ListReferralContributionReportDataRequest.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateContributionReportDataRequestMultiError []error
+type ListReferralContributionReportDataRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateContributionReportDataRequestMultiError) Error() string {
+func (m ListReferralContributionReportDataRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4398,12 +4397,12 @@ func (m ListAffiliateContributionReportDataRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateContributionReportDataRequestMultiError) AllErrors() []error { return m }
+func (m ListReferralContributionReportDataRequestMultiError) AllErrors() []error { return m }
 
-// ListAffiliateContributionReportDataRequestValidationError is the validation
-// error returned by ListAffiliateContributionReportDataRequest.Validate if
-// the designated constraints aren't met.
-type ListAffiliateContributionReportDataRequestValidationError struct {
+// ListReferralContributionReportDataRequestValidationError is the validation
+// error returned by ListReferralContributionReportDataRequest.Validate if the
+// designated constraints aren't met.
+type ListReferralContributionReportDataRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4411,24 +4410,24 @@ type ListAffiliateContributionReportDataRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateContributionReportDataRequestValidationError) Field() string { return e.field }
+func (e ListReferralContributionReportDataRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateContributionReportDataRequestValidationError) Reason() string { return e.reason }
+func (e ListReferralContributionReportDataRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateContributionReportDataRequestValidationError) Cause() error { return e.cause }
+func (e ListReferralContributionReportDataRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateContributionReportDataRequestValidationError) Key() bool { return e.key }
+func (e ListReferralContributionReportDataRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateContributionReportDataRequestValidationError) ErrorName() string {
-	return "ListAffiliateContributionReportDataRequestValidationError"
+func (e ListReferralContributionReportDataRequestValidationError) ErrorName() string {
+	return "ListReferralContributionReportDataRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateContributionReportDataRequestValidationError) Error() string {
+func (e ListReferralContributionReportDataRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4440,14 +4439,14 @@ func (e ListAffiliateContributionReportDataRequestValidationError) Error() strin
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateContributionReportDataRequest.%s: %s%s",
+		"invalid %sListReferralContributionReportDataRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateContributionReportDataRequestValidationError{}
+var _ error = ListReferralContributionReportDataRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4455,25 +4454,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateContributionReportDataRequestValidationError{}
+} = ListReferralContributionReportDataRequestValidationError{}
 
-// Validate checks the field values on AffiliateContributionReportDataItem with
+// Validate checks the field values on ReferralContributionReportDataItem with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *AffiliateContributionReportDataItem) Validate() error {
+func (m *ReferralContributionReportDataItem) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateContributionReportDataItem
+// ValidateAll checks the field values on ReferralContributionReportDataItem
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// AffiliateContributionReportDataItemMultiError, or nil if none found.
-func (m *AffiliateContributionReportDataItem) ValidateAll() error {
+// ReferralContributionReportDataItemMultiError, or nil if none found.
+func (m *ReferralContributionReportDataItem) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateContributionReportDataItem) validate(all bool) error {
+func (m *ReferralContributionReportDataItem) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4543,20 +4542,20 @@ func (m *AffiliateContributionReportDataItem) validate(all bool) error {
 	// no validation rules for Ip
 
 	if len(errors) > 0 {
-		return AffiliateContributionReportDataItemMultiError(errors)
+		return ReferralContributionReportDataItemMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateContributionReportDataItemMultiError is an error wrapping multiple
+// ReferralContributionReportDataItemMultiError is an error wrapping multiple
 // validation errors returned by
-// AffiliateContributionReportDataItem.ValidateAll() if the designated
+// ReferralContributionReportDataItem.ValidateAll() if the designated
 // constraints aren't met.
-type AffiliateContributionReportDataItemMultiError []error
+type ReferralContributionReportDataItemMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateContributionReportDataItemMultiError) Error() string {
+func (m ReferralContributionReportDataItemMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4565,12 +4564,12 @@ func (m AffiliateContributionReportDataItemMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateContributionReportDataItemMultiError) AllErrors() []error { return m }
+func (m ReferralContributionReportDataItemMultiError) AllErrors() []error { return m }
 
-// AffiliateContributionReportDataItemValidationError is the validation error
-// returned by AffiliateContributionReportDataItem.Validate if the designated
+// ReferralContributionReportDataItemValidationError is the validation error
+// returned by ReferralContributionReportDataItem.Validate if the designated
 // constraints aren't met.
-type AffiliateContributionReportDataItemValidationError struct {
+type ReferralContributionReportDataItemValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4578,24 +4577,24 @@ type AffiliateContributionReportDataItemValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateContributionReportDataItemValidationError) Field() string { return e.field }
+func (e ReferralContributionReportDataItemValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateContributionReportDataItemValidationError) Reason() string { return e.reason }
+func (e ReferralContributionReportDataItemValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateContributionReportDataItemValidationError) Cause() error { return e.cause }
+func (e ReferralContributionReportDataItemValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateContributionReportDataItemValidationError) Key() bool { return e.key }
+func (e ReferralContributionReportDataItemValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateContributionReportDataItemValidationError) ErrorName() string {
-	return "AffiliateContributionReportDataItemValidationError"
+func (e ReferralContributionReportDataItemValidationError) ErrorName() string {
+	return "ReferralContributionReportDataItemValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateContributionReportDataItemValidationError) Error() string {
+func (e ReferralContributionReportDataItemValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4607,14 +4606,14 @@ func (e AffiliateContributionReportDataItemValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateContributionReportDataItem.%s: %s%s",
+		"invalid %sReferralContributionReportDataItem.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateContributionReportDataItemValidationError{}
+var _ error = ReferralContributionReportDataItemValidationError{}
 
 var _ interface {
 	Field() string
@@ -4622,26 +4621,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateContributionReportDataItemValidationError{}
+} = ReferralContributionReportDataItemValidationError{}
 
 // Validate checks the field values on
-// ListAffiliateContributionReportDataResponse with the rules defined in the
+// ListReferralContributionReportDataResponse with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *ListAffiliateContributionReportDataResponse) Validate() error {
+func (m *ListReferralContributionReportDataResponse) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListAffiliateContributionReportDataResponse with the rules defined in the
+// ListReferralContributionReportDataResponse with the rules defined in the
 // proto definition for this message. If any rules are violated, the result is
 // a list of violation errors wrapped in
-// ListAffiliateContributionReportDataResponseMultiError, or nil if none found.
-func (m *ListAffiliateContributionReportDataResponse) ValidateAll() error {
+// ListReferralContributionReportDataResponseMultiError, or nil if none found.
+func (m *ListReferralContributionReportDataResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateContributionReportDataResponse) validate(all bool) error {
+func (m *ListReferralContributionReportDataResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4655,7 +4654,7 @@ func (m *ListAffiliateContributionReportDataResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListAffiliateContributionReportDataResponseValidationError{
+					errors = append(errors, ListReferralContributionReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -4663,7 +4662,7 @@ func (m *ListAffiliateContributionReportDataResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListAffiliateContributionReportDataResponseValidationError{
+					errors = append(errors, ListReferralContributionReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -4672,7 +4671,7 @@ func (m *ListAffiliateContributionReportDataResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListAffiliateContributionReportDataResponseValidationError{
+				return ListReferralContributionReportDataResponseValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4689,20 +4688,20 @@ func (m *ListAffiliateContributionReportDataResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListAffiliateContributionReportDataResponseMultiError(errors)
+		return ListReferralContributionReportDataResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateContributionReportDataResponseMultiError is an error wrapping
+// ListReferralContributionReportDataResponseMultiError is an error wrapping
 // multiple validation errors returned by
-// ListAffiliateContributionReportDataResponse.ValidateAll() if the designated
+// ListReferralContributionReportDataResponse.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateContributionReportDataResponseMultiError []error
+type ListReferralContributionReportDataResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateContributionReportDataResponseMultiError) Error() string {
+func (m ListReferralContributionReportDataResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4711,12 +4710,12 @@ func (m ListAffiliateContributionReportDataResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateContributionReportDataResponseMultiError) AllErrors() []error { return m }
+func (m ListReferralContributionReportDataResponseMultiError) AllErrors() []error { return m }
 
-// ListAffiliateContributionReportDataResponseValidationError is the validation
-// error returned by ListAffiliateContributionReportDataResponse.Validate if
+// ListReferralContributionReportDataResponseValidationError is the validation
+// error returned by ListReferralContributionReportDataResponse.Validate if
 // the designated constraints aren't met.
-type ListAffiliateContributionReportDataResponseValidationError struct {
+type ListReferralContributionReportDataResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4724,24 +4723,24 @@ type ListAffiliateContributionReportDataResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateContributionReportDataResponseValidationError) Field() string { return e.field }
+func (e ListReferralContributionReportDataResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateContributionReportDataResponseValidationError) Reason() string { return e.reason }
+func (e ListReferralContributionReportDataResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateContributionReportDataResponseValidationError) Cause() error { return e.cause }
+func (e ListReferralContributionReportDataResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateContributionReportDataResponseValidationError) Key() bool { return e.key }
+func (e ListReferralContributionReportDataResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateContributionReportDataResponseValidationError) ErrorName() string {
-	return "ListAffiliateContributionReportDataResponseValidationError"
+func (e ListReferralContributionReportDataResponseValidationError) ErrorName() string {
+	return "ListReferralContributionReportDataResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateContributionReportDataResponseValidationError) Error() string {
+func (e ListReferralContributionReportDataResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4753,14 +4752,14 @@ func (e ListAffiliateContributionReportDataResponseValidationError) Error() stri
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateContributionReportDataResponse.%s: %s%s",
+		"invalid %sListReferralContributionReportDataResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateContributionReportDataResponseValidationError{}
+var _ error = ListReferralContributionReportDataResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -4768,26 +4767,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateContributionReportDataResponseValidationError{}
+} = ListReferralContributionReportDataResponseValidationError{}
 
-// Validate checks the field values on ListAffiliateLifetimeReportDataRequest
+// Validate checks the field values on ListReferralLifetimeReportDataRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *ListAffiliateLifetimeReportDataRequest) Validate() error {
+func (m *ListReferralLifetimeReportDataRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// ListAffiliateLifetimeReportDataRequest with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListAffiliateLifetimeReportDataRequestMultiError, or nil if none found.
-func (m *ListAffiliateLifetimeReportDataRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListReferralLifetimeReportDataRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListReferralLifetimeReportDataRequestMultiError, or nil if none found.
+func (m *ListReferralLifetimeReportDataRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
+func (m *ListReferralLifetimeReportDataRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4798,7 +4796,7 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateLifetimeReportDataRequestValidationError{
+				errors = append(errors, ListReferralLifetimeReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4806,7 +4804,7 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateLifetimeReportDataRequestValidationError{
+				errors = append(errors, ListReferralLifetimeReportDataRequestValidationError{
 					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4815,7 +4813,7 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateLifetimeReportDataRequestValidationError{
+			return ListReferralLifetimeReportDataRequestValidationError{
 				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4827,7 +4825,7 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListAffiliateLifetimeReportDataRequestValidationError{
+				errors = append(errors, ListReferralLifetimeReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4835,7 +4833,7 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListAffiliateLifetimeReportDataRequestValidationError{
+				errors = append(errors, ListReferralLifetimeReportDataRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -4844,7 +4842,7 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListAffiliateLifetimeReportDataRequestValidationError{
+			return ListReferralLifetimeReportDataRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4861,20 +4859,20 @@ func (m *ListAffiliateLifetimeReportDataRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListAffiliateLifetimeReportDataRequestMultiError(errors)
+		return ListReferralLifetimeReportDataRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateLifetimeReportDataRequestMultiError is an error wrapping
+// ListReferralLifetimeReportDataRequestMultiError is an error wrapping
 // multiple validation errors returned by
-// ListAffiliateLifetimeReportDataRequest.ValidateAll() if the designated
+// ListReferralLifetimeReportDataRequest.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateLifetimeReportDataRequestMultiError []error
+type ListReferralLifetimeReportDataRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateLifetimeReportDataRequestMultiError) Error() string {
+func (m ListReferralLifetimeReportDataRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4883,12 +4881,12 @@ func (m ListAffiliateLifetimeReportDataRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateLifetimeReportDataRequestMultiError) AllErrors() []error { return m }
+func (m ListReferralLifetimeReportDataRequestMultiError) AllErrors() []error { return m }
 
-// ListAffiliateLifetimeReportDataRequestValidationError is the validation
-// error returned by ListAffiliateLifetimeReportDataRequest.Validate if the
+// ListReferralLifetimeReportDataRequestValidationError is the validation error
+// returned by ListReferralLifetimeReportDataRequest.Validate if the
 // designated constraints aren't met.
-type ListAffiliateLifetimeReportDataRequestValidationError struct {
+type ListReferralLifetimeReportDataRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4896,24 +4894,24 @@ type ListAffiliateLifetimeReportDataRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateLifetimeReportDataRequestValidationError) Field() string { return e.field }
+func (e ListReferralLifetimeReportDataRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateLifetimeReportDataRequestValidationError) Reason() string { return e.reason }
+func (e ListReferralLifetimeReportDataRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateLifetimeReportDataRequestValidationError) Cause() error { return e.cause }
+func (e ListReferralLifetimeReportDataRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateLifetimeReportDataRequestValidationError) Key() bool { return e.key }
+func (e ListReferralLifetimeReportDataRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateLifetimeReportDataRequestValidationError) ErrorName() string {
-	return "ListAffiliateLifetimeReportDataRequestValidationError"
+func (e ListReferralLifetimeReportDataRequestValidationError) ErrorName() string {
+	return "ListReferralLifetimeReportDataRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateLifetimeReportDataRequestValidationError) Error() string {
+func (e ListReferralLifetimeReportDataRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4925,14 +4923,14 @@ func (e ListAffiliateLifetimeReportDataRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateLifetimeReportDataRequest.%s: %s%s",
+		"invalid %sListReferralLifetimeReportDataRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateLifetimeReportDataRequestValidationError{}
+var _ error = ListReferralLifetimeReportDataRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4940,24 +4938,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateLifetimeReportDataRequestValidationError{}
+} = ListReferralLifetimeReportDataRequestValidationError{}
 
-// Validate checks the field values on AffiliateLifetimeReportDataItem with the
+// Validate checks the field values on ReferralLifetimeReportDataItem with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AffiliateLifetimeReportDataItem) Validate() error {
+func (m *ReferralLifetimeReportDataItem) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AffiliateLifetimeReportDataItem with
+// ValidateAll checks the field values on ReferralLifetimeReportDataItem with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// AffiliateLifetimeReportDataItemMultiError, or nil if none found.
-func (m *AffiliateLifetimeReportDataItem) ValidateAll() error {
+// ReferralLifetimeReportDataItemMultiError, or nil if none found.
+func (m *ReferralLifetimeReportDataItem) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AffiliateLifetimeReportDataItem) validate(all bool) error {
+func (m *ReferralLifetimeReportDataItem) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4995,19 +4993,19 @@ func (m *AffiliateLifetimeReportDataItem) validate(all bool) error {
 	// no validation rules for TotalReportingCurrency
 
 	if len(errors) > 0 {
-		return AffiliateLifetimeReportDataItemMultiError(errors)
+		return ReferralLifetimeReportDataItemMultiError(errors)
 	}
 
 	return nil
 }
 
-// AffiliateLifetimeReportDataItemMultiError is an error wrapping multiple
-// validation errors returned by AffiliateLifetimeReportDataItem.ValidateAll()
+// ReferralLifetimeReportDataItemMultiError is an error wrapping multiple
+// validation errors returned by ReferralLifetimeReportDataItem.ValidateAll()
 // if the designated constraints aren't met.
-type AffiliateLifetimeReportDataItemMultiError []error
+type ReferralLifetimeReportDataItemMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AffiliateLifetimeReportDataItemMultiError) Error() string {
+func (m ReferralLifetimeReportDataItemMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5016,12 +5014,12 @@ func (m AffiliateLifetimeReportDataItemMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AffiliateLifetimeReportDataItemMultiError) AllErrors() []error { return m }
+func (m ReferralLifetimeReportDataItemMultiError) AllErrors() []error { return m }
 
-// AffiliateLifetimeReportDataItemValidationError is the validation error
-// returned by AffiliateLifetimeReportDataItem.Validate if the designated
+// ReferralLifetimeReportDataItemValidationError is the validation error
+// returned by ReferralLifetimeReportDataItem.Validate if the designated
 // constraints aren't met.
-type AffiliateLifetimeReportDataItemValidationError struct {
+type ReferralLifetimeReportDataItemValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5029,24 +5027,24 @@ type AffiliateLifetimeReportDataItemValidationError struct {
 }
 
 // Field function returns field value.
-func (e AffiliateLifetimeReportDataItemValidationError) Field() string { return e.field }
+func (e ReferralLifetimeReportDataItemValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AffiliateLifetimeReportDataItemValidationError) Reason() string { return e.reason }
+func (e ReferralLifetimeReportDataItemValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AffiliateLifetimeReportDataItemValidationError) Cause() error { return e.cause }
+func (e ReferralLifetimeReportDataItemValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AffiliateLifetimeReportDataItemValidationError) Key() bool { return e.key }
+func (e ReferralLifetimeReportDataItemValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AffiliateLifetimeReportDataItemValidationError) ErrorName() string {
-	return "AffiliateLifetimeReportDataItemValidationError"
+func (e ReferralLifetimeReportDataItemValidationError) ErrorName() string {
+	return "ReferralLifetimeReportDataItemValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AffiliateLifetimeReportDataItemValidationError) Error() string {
+func (e ReferralLifetimeReportDataItemValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5058,14 +5056,14 @@ func (e AffiliateLifetimeReportDataItemValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAffiliateLifetimeReportDataItem.%s: %s%s",
+		"invalid %sReferralLifetimeReportDataItem.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AffiliateLifetimeReportDataItemValidationError{}
+var _ error = ReferralLifetimeReportDataItemValidationError{}
 
 var _ interface {
 	Field() string
@@ -5073,26 +5071,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AffiliateLifetimeReportDataItemValidationError{}
+} = ReferralLifetimeReportDataItemValidationError{}
 
-// Validate checks the field values on ListAffiliateLifetimeReportDataResponse
+// Validate checks the field values on ListReferralLifetimeReportDataResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *ListAffiliateLifetimeReportDataResponse) Validate() error {
+func (m *ListReferralLifetimeReportDataResponse) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// ListAffiliateLifetimeReportDataResponse with the rules defined in the proto
+// ListReferralLifetimeReportDataResponse with the rules defined in the proto
 // definition for this message. If any rules are violated, the result is a
 // list of violation errors wrapped in
-// ListAffiliateLifetimeReportDataResponseMultiError, or nil if none found.
-func (m *ListAffiliateLifetimeReportDataResponse) ValidateAll() error {
+// ListReferralLifetimeReportDataResponseMultiError, or nil if none found.
+func (m *ListReferralLifetimeReportDataResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListAffiliateLifetimeReportDataResponse) validate(all bool) error {
+func (m *ListReferralLifetimeReportDataResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -5106,7 +5104,7 @@ func (m *ListAffiliateLifetimeReportDataResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListAffiliateLifetimeReportDataResponseValidationError{
+					errors = append(errors, ListReferralLifetimeReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -5114,7 +5112,7 @@ func (m *ListAffiliateLifetimeReportDataResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListAffiliateLifetimeReportDataResponseValidationError{
+					errors = append(errors, ListReferralLifetimeReportDataResponseValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -5123,7 +5121,7 @@ func (m *ListAffiliateLifetimeReportDataResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListAffiliateLifetimeReportDataResponseValidationError{
+				return ListReferralLifetimeReportDataResponseValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5140,20 +5138,20 @@ func (m *ListAffiliateLifetimeReportDataResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return ListAffiliateLifetimeReportDataResponseMultiError(errors)
+		return ListReferralLifetimeReportDataResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListAffiliateLifetimeReportDataResponseMultiError is an error wrapping
+// ListReferralLifetimeReportDataResponseMultiError is an error wrapping
 // multiple validation errors returned by
-// ListAffiliateLifetimeReportDataResponse.ValidateAll() if the designated
+// ListReferralLifetimeReportDataResponse.ValidateAll() if the designated
 // constraints aren't met.
-type ListAffiliateLifetimeReportDataResponseMultiError []error
+type ListReferralLifetimeReportDataResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListAffiliateLifetimeReportDataResponseMultiError) Error() string {
+func (m ListReferralLifetimeReportDataResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5162,12 +5160,12 @@ func (m ListAffiliateLifetimeReportDataResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListAffiliateLifetimeReportDataResponseMultiError) AllErrors() []error { return m }
+func (m ListReferralLifetimeReportDataResponseMultiError) AllErrors() []error { return m }
 
-// ListAffiliateLifetimeReportDataResponseValidationError is the validation
-// error returned by ListAffiliateLifetimeReportDataResponse.Validate if the
+// ListReferralLifetimeReportDataResponseValidationError is the validation
+// error returned by ListReferralLifetimeReportDataResponse.Validate if the
 // designated constraints aren't met.
-type ListAffiliateLifetimeReportDataResponseValidationError struct {
+type ListReferralLifetimeReportDataResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5175,24 +5173,24 @@ type ListAffiliateLifetimeReportDataResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListAffiliateLifetimeReportDataResponseValidationError) Field() string { return e.field }
+func (e ListReferralLifetimeReportDataResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListAffiliateLifetimeReportDataResponseValidationError) Reason() string { return e.reason }
+func (e ListReferralLifetimeReportDataResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListAffiliateLifetimeReportDataResponseValidationError) Cause() error { return e.cause }
+func (e ListReferralLifetimeReportDataResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListAffiliateLifetimeReportDataResponseValidationError) Key() bool { return e.key }
+func (e ListReferralLifetimeReportDataResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListAffiliateLifetimeReportDataResponseValidationError) ErrorName() string {
-	return "ListAffiliateLifetimeReportDataResponseValidationError"
+func (e ListReferralLifetimeReportDataResponseValidationError) ErrorName() string {
+	return "ListReferralLifetimeReportDataResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListAffiliateLifetimeReportDataResponseValidationError) Error() string {
+func (e ListReferralLifetimeReportDataResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5204,14 +5202,14 @@ func (e ListAffiliateLifetimeReportDataResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListAffiliateLifetimeReportDataResponse.%s: %s%s",
+		"invalid %sListReferralLifetimeReportDataResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListAffiliateLifetimeReportDataResponseValidationError{}
+var _ error = ListReferralLifetimeReportDataResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -5219,7 +5217,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListAffiliateLifetimeReportDataResponseValidationError{}
+} = ListReferralLifetimeReportDataResponseValidationError{}
 
 // Validate checks the field values on GetAffiliatePerformanceReportDataRequest
 // with the rules defined in the proto definition for this message. If any

@@ -144,7 +144,7 @@ message ListWithdrawVtgDetailsRequest {
 }
 
 // ============================================================================
-// Affiliate Referral Report Data - Internal API for Affiliate Service
+// Referral Report Data - Internal API for Affiliate Service
 //
 // These endpoints provide aggregated referral data from ClickHouse.
 // Used by Affiliate Service to generate referral commission reports:
@@ -156,9 +156,9 @@ message ListWithdrawVtgDetailsRequest {
 // Supports T1-T10 tier aggregation. Affiliate Service trims based on MaxTier.
 // ============================================================================
 
-// AffiliateVTGTierData - Tier data for VTG report (New Subordinates Performance)
+// ReferralVTGTierData - Tier data for VTG report (New Subordinates Performance)
 // All fields are for NEW subordinates (relation created_at in period)
-message AffiliateVTGTierData {
+message ReferralVTGTierData {
   int32 tier = 1;  // Tier level 1-10
 
   // Count metrics (for new subordinates in period)
@@ -202,9 +202,9 @@ message AffiliateVTGTierData {
   string total_reward_reporting_currency = 54;
 }
 
-// AffiliateSnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
+// ReferralSnapshotTierData - Tier data for Snapshot report (Cumulative + Period Activity)
 // total_count is cumulative, other metrics are for activity in period
-message AffiliateSnapshotTierData {
+message ReferralSnapshotTierData {
   int32 tier = 1;  // Tier level 1-10
 
   // Count metrics
@@ -227,9 +227,9 @@ message AffiliateSnapshotTierData {
   string total_reward_reporting_currency = 34;
 }
 
-// AffiliateT1GamingData - Gaming data for T1 only (Snapshot report)
+// ReferralT1GamingData - Gaming data for T1 only (Snapshot report)
 // Only T1 has GGR/NGR/B2C in Snapshot
-message AffiliateT1GamingData {
+message ReferralT1GamingData {
   // USD
   string ggr_usd = 1;
   string ngr_usd = 2;
@@ -245,10 +245,10 @@ message AffiliateT1GamingData {
   string provider_royalties_reporting_currency = 14;
 }
 
-// AffiliateTierCarryover - Negative carryover data per tier
+// ReferralTierCarryover - Negative carryover data per tier
 // Directly from user_referral_relations.loss_rev_share_carryover JSONB
 // Structure in DB: map[currency]map[periodType]*ReferralCarryoverData
-message AffiliateTierCarryover {
+message ReferralTierCarryover {
   int32 tier = 1;
   string currency = 2;       // e.g., "USD"
   string period_type = 3;    // "weekly" or "monthly"
@@ -258,8 +258,8 @@ message AffiliateTierCarryover {
   string b2c_carryover = 7;  // B2C carryover amount
 }
 
-// AffiliateTierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
-message AffiliateTierGamingData {
+// ReferralTierGamingData - Gaming data per tier for Affiliate Service to calculate estimated commissions
+message ReferralTierGamingData {
   int32 tier = 1;
   // USD
   string ggr_usd = 2;
@@ -276,7 +276,7 @@ message AffiliateTierGamingData {
 
 // ========== VTG Report Data (Vintage - New Subordinates Performance) ==========
 
-message ListAffiliateVTGReportDataRequest {
+message ListReferralVTGReportDataRequest {
   string period = 1;                 // "day", "week", or "month" - determines time range
   api.common.OperatorContextFilters operator_context_filters = 2;
   api.common.OperatorContext operator_context = 3;  // Internal only
@@ -287,8 +287,8 @@ message ListAffiliateVTGReportDataRequest {
   optional int32 page_size = 8;      // defaults to 25
 }
 
-// AffiliateVTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
-message AffiliateVTGReportDataItem {
+// ReferralVTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
+message ReferralVTGReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
   string date = 8;
   int64 uid = 1;
@@ -301,7 +301,7 @@ message AffiliateVTGReportDataItem {
   int64 company_operator_id = 6;
   int64 retailer_operator_id = 7;
 
-  repeated AffiliateVTGTierData tiers = 10;  // T1-T10 tier data for new subordinates
+  repeated ReferralVTGTierData tiers = 10;  // T1-T10 tier data for new subordinates
 
   // Summary fields - USD
   string total_reward_usd = 20;     // Sum of all tiers, all commission types
@@ -313,8 +313,8 @@ message AffiliateVTGReportDataItem {
   string t1_total_reward_reporting_currency = 31;
 }
 
-message ListAffiliateVTGReportDataResponse {
-  repeated AffiliateVTGReportDataItem items = 1;
+message ListReferralVTGReportDataResponse {
+  repeated ReferralVTGReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -322,7 +322,7 @@ message ListAffiliateVTGReportDataResponse {
 
 // ========== Snapshot Report Data (Cumulative + Period Activity) ==========
 
-message ListAffiliateSnapshotReportDataRequest {
+message ListReferralSnapshotReportDataRequest {
   string period = 1;                        // "day", "week", or "month" - determines time range
   api.common.OperatorContextFilters operator_context_filters = 2;
   api.common.OperatorContext operator_context = 3;  // Internal only
@@ -334,8 +334,8 @@ message ListAffiliateSnapshotReportDataRequest {
   optional int32 page_size = 9;             // defaults to 25
 }
 
-// AffiliateSnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
-message AffiliateSnapshotReportDataItem {
+// ReferralSnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
+message ReferralSnapshotReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
   string date = 8;
   int64 uid = 1;
@@ -348,10 +348,10 @@ message AffiliateSnapshotReportDataItem {
   int64 company_operator_id = 6;
   int64 retailer_operator_id = 7;
 
-  repeated AffiliateSnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
+  repeated ReferralSnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
 
   // T1 gaming data (only T1 has GGR/NGR/B2C in Snapshot)
-  AffiliateT1GamingData t1_gaming = 20;
+  ReferralT1GamingData t1_gaming = 20;
 
   // Summary fields - USD
   string total_referral_reward_usd = 30;
@@ -367,7 +367,7 @@ message AffiliateSnapshotReportDataItem {
 
   // Gaming data for Affiliate Service to calculate estimated commissions
   // Affiliate Service uses this + Commission Plan config to compute unpaid commissions
-  repeated AffiliateTierGamingData current_period_gaming = 40;
+  repeated ReferralTierGamingData current_period_gaming = 40;
 
   // From referral_user_rewards table - USD
   string unclaimed_commission_usd = 50;  // current_* amounts sum (settled but not claimed)
@@ -380,11 +380,11 @@ message AffiliateSnapshotReportDataItem {
   string withdrawal_amount_reporting_currency = 57;
 
   // Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
-  repeated AffiliateTierCarryover negative_carryover = 60;
+  repeated ReferralTierCarryover negative_carryover = 60;
 }
 
-message ListAffiliateSnapshotReportDataResponse {
-  repeated AffiliateSnapshotReportDataItem items = 1;
+message ListReferralSnapshotReportDataResponse {
+  repeated ReferralSnapshotReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -393,7 +393,7 @@ message ListAffiliateSnapshotReportDataResponse {
 // ========== Contribution Report Data (Subordinate Detail View) ==========
 // Each row represents one Sub-UID (a subordinate of the ROOT user)
 
-message ListAffiliateContributionReportDataRequest {
+message ListReferralContributionReportDataRequest {
   string period = 1;                 // "day", "week", or "month" - determines time range
   api.common.OperatorContextFilters operator_context_filters = 2;
   api.common.OperatorContext operator_context = 3;  // Internal only
@@ -404,7 +404,7 @@ message ListAffiliateContributionReportDataRequest {
   optional int32 page_size = 8;      // defaults to 25
 }
 
-message AffiliateContributionReportDataItem {
+message ReferralContributionReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
   string date = 40;
   int64 root_id = 1;      // ROOT user (T0 perspective)
@@ -448,8 +448,8 @@ message AffiliateContributionReportDataItem {
   string ip = 22;
 }
 
-message ListAffiliateContributionReportDataResponse {
-  repeated AffiliateContributionReportDataItem items = 1;
+message ListReferralContributionReportDataResponse {
+  repeated ReferralContributionReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -458,7 +458,7 @@ message ListAffiliateContributionReportDataResponse {
 // ========== Lifetime Report Data (All-time Commission Totals) ==========
 // No time_range - shows lifetime cumulative commission data
 
-message ListAffiliateLifetimeReportDataRequest {
+message ListReferralLifetimeReportDataRequest {
   api.common.OperatorContextFilters operator_context_filters = 1;
   api.common.OperatorContext operator_context = 2;  // Internal only
   repeated int64 user_ids = 3;  // Optional: filter by specific UIDs
@@ -466,7 +466,7 @@ message ListAffiliateLifetimeReportDataRequest {
   optional int32 page_size = 5; // defaults to 25
 }
 
-message AffiliateLifetimeReportDataItem {
+message ReferralLifetimeReportDataItem {
   int64 uid = 1;
 
   // Operator context
@@ -490,8 +490,8 @@ message AffiliateLifetimeReportDataItem {
   string total_reporting_currency = 14;
 }
 
-message ListAffiliateLifetimeReportDataResponse {
-  repeated AffiliateLifetimeReportDataItem items = 1;
+message ListReferralLifetimeReportDataResponse {
+  repeated ReferralLifetimeReportDataItem items = 1;
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
@@ -673,20 +673,20 @@ service ReportService {
   }
 
   // ============================================================================
-  // Affiliate Referral Report APIs (Internal gRPC only, no HTTP)
+  // Referral Report APIs (Internal gRPC only, no HTTP)
   // ============================================================================
 
   // VTG report: new subordinates performance in period
-  rpc ListAffiliateVTGReportData(ListAffiliateVTGReportDataRequest) returns (ListAffiliateVTGReportDataResponse) {}
+  rpc ListReferralVTGReportData(ListReferralVTGReportDataRequest) returns (ListReferralVTGReportDataResponse) {}
 
   // Snapshot report: cumulative subordinates + period activity
-  rpc ListAffiliateSnapshotReportData(ListAffiliateSnapshotReportDataRequest) returns (ListAffiliateSnapshotReportDataResponse) {}
+  rpc ListReferralSnapshotReportData(ListReferralSnapshotReportDataRequest) returns (ListReferralSnapshotReportDataResponse) {}
 
   // Contribution report: subordinate detail view
-  rpc ListAffiliateContributionReportData(ListAffiliateContributionReportDataRequest) returns (ListAffiliateContributionReportDataResponse) {}
+  rpc ListReferralContributionReportData(ListReferralContributionReportDataRequest) returns (ListReferralContributionReportDataResponse) {}
 
   // Lifetime report: all-time commission totals
-  rpc ListAffiliateLifetimeReportData(ListAffiliateLifetimeReportDataRequest) returns (ListAffiliateLifetimeReportDataResponse) {}
+  rpc ListReferralLifetimeReportData(ListReferralLifetimeReportDataRequest) returns (ListReferralLifetimeReportDataResponse) {}
 
   // GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
   // NOTE: This report is deferred and may not be implemented in this phase
