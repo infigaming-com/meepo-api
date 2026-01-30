@@ -98,3 +98,11 @@ spec:
         - name: affiliate-svc
           port: 8000
           weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/jackpot"
+      backendRefs:
+        - name: jackpot-svc
+          port: 8000
+          weight: 1
