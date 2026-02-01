@@ -3394,6 +3394,8 @@ func (m *ReferralVTGReportDataItem) validate(all bool) error {
 
 	// no validation rules for Uid
 
+	// no validation rules for Currency
+
 	// no validation rules for ReferralId
 
 	// no validation rules for AffiliateId
@@ -3887,6 +3889,8 @@ func (m *ReferralSnapshotReportDataItem) validate(all bool) error {
 	// no validation rules for CompanyOperatorId
 
 	// no validation rules for RetailerOperatorId
+
+	// no validation rules for Currency
 
 	for idx, item := range m.GetTiers() {
 		_, _ = idx, item

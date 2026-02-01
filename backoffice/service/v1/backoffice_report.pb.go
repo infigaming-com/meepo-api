@@ -2604,6 +2604,7 @@ type ListReferralVTGReportRequest struct {
 	UserIds                []int64                        `protobuf:"varint,3,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`                // Optional: filter by specific UIDs
 	ReferralIds            []int64                        `protobuf:"varint,4,rep,packed,name=referral_ids,json=referralIds,proto3" json:"referral_ids,omitempty"`    // Optional: filter by referral (tier1_user_id)
 	AffiliateIds           []int64                        `protobuf:"varint,5,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"` // Optional: filter by affiliate
+	Currencies             []string                       `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`                                 // Filter by currencies (e.g., ["USD", "BRL"])
 	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`                                      // defaults to 1
 	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`              // defaults to 25
 	unknownFields          protoimpl.UnknownFields
@@ -2675,6 +2676,13 @@ func (x *ListReferralVTGReportRequest) GetAffiliateIds() []int64 {
 	return nil
 }
 
+func (x *ListReferralVTGReportRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
 func (x *ListReferralVTGReportRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
@@ -2697,6 +2705,7 @@ type ListReferralSnapshotReportRequest struct {
 	UserIds                []int64                        `protobuf:"varint,3,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`                                      // Optional: filter by specific UIDs
 	ReferralIds            []int64                        `protobuf:"varint,4,rep,packed,name=referral_ids,json=referralIds,proto3" json:"referral_ids,omitempty"`                          // Optional: filter by referral
 	AffiliateIds           []int64                        `protobuf:"varint,5,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`                       // Optional: filter by affiliate
+	Currencies             []string                       `protobuf:"bytes,9,rep,name=currencies,proto3" json:"currencies,omitempty"`                                                       // Filter by currencies
 	OnlyNegativeCarryover  bool                           `protobuf:"varint,6,opt,name=only_negative_carryover,json=onlyNegativeCarryover,proto3" json:"only_negative_carryover,omitempty"` // Optional: only show users with negative carryover
 	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`                                                            // defaults to 1
 	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`                                    // defaults to 25
@@ -2765,6 +2774,13 @@ func (x *ListReferralSnapshotReportRequest) GetReferralIds() []int64 {
 func (x *ListReferralSnapshotReportRequest) GetAffiliateIds() []int64 {
 	if x != nil {
 		return x.AffiliateIds
+	}
+	return nil
+}
+
+func (x *ListReferralSnapshotReportRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
 	}
 	return nil
 }
@@ -7500,24 +7516,30 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\f_user_detailB\x16\n" +
 	"\x14_payment_transactionB\x13\n" +
 	"\x11_game_transactionB\x1f\n" +
-	"\x1d_event_settlement_information\"\xc9\x02\n" +
+	"\x1d_event_settlement_information\"\xe9\x02\n" +
 	"\x1cListReferralVTGReportRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x19\n" +
 	"\buser_ids\x18\x03 \x03(\x03R\auserIds\x12!\n" +
 	"\freferral_ids\x18\x04 \x03(\x03R\vreferralIds\x12#\n" +
-	"\raffiliate_ids\x18\x05 \x03(\x03R\faffiliateIds\x12\x17\n" +
+	"\raffiliate_ids\x18\x05 \x03(\x03R\faffiliateIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\b \x03(\tR\n" +
+	"currencies\x12\x17\n" +
 	"\x04page\x18\x06 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\a \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x86\x03\n" +
+	"_page_size\"\xa6\x03\n" +
 	"!ListReferralSnapshotReportRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x19\n" +
 	"\buser_ids\x18\x03 \x03(\x03R\auserIds\x12!\n" +
 	"\freferral_ids\x18\x04 \x03(\x03R\vreferralIds\x12#\n" +
-	"\raffiliate_ids\x18\x05 \x03(\x03R\faffiliateIds\x126\n" +
+	"\raffiliate_ids\x18\x05 \x03(\x03R\faffiliateIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\t \x03(\tR\n" +
+	"currencies\x126\n" +
 	"\x17only_negative_carryover\x18\x06 \x01(\bR\x15onlyNegativeCarryover\x12\x17\n" +
 	"\x04page\x18\a \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +

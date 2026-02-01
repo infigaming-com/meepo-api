@@ -887,6 +887,7 @@ message ListReferralVTGReportRequest {
   repeated int64 user_ids = 3;                          // Optional: filter by specific UIDs
   repeated int64 referral_ids = 4;                      // Optional: filter by referral (tier1_user_id)
   repeated int64 affiliate_ids = 5;                     // Optional: filter by affiliate
+  repeated string currencies = 8;                       // Filter by currencies (e.g., ["USD", "BRL"])
   optional int32 page = 6;                              // defaults to 1
   optional int32 page_size = 7;                         // defaults to 25
 }
@@ -898,6 +899,7 @@ message ListReferralSnapshotReportRequest {
   repeated int64 user_ids = 3;                          // Optional: filter by specific UIDs
   repeated int64 referral_ids = 4;                      // Optional: filter by referral
   repeated int64 affiliate_ids = 5;                     // Optional: filter by affiliate
+  repeated string currencies = 9;                       // Filter by currencies
   bool only_negative_carryover = 6;                     // Optional: only show users with negative carryover
   optional int32 page = 7;                              // defaults to 1
   optional int32 page_size = 8;                         // defaults to 25

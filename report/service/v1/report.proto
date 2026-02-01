@@ -283,6 +283,7 @@ message ListReferralVTGReportDataRequest {
   repeated int64 user_ids = 4;       // Optional: filter by specific UIDs
   repeated int64 referral_ids = 5;   // Optional: filter by referral (tier1_user_id)
   repeated int64 affiliate_ids = 6;  // Optional: filter by affiliate
+  repeated string currencies = 9;    // Filter by currencies (e.g., ["USD", "BRL"])
   optional int32 page = 7;           // defaults to 1
   optional int32 page_size = 8;      // defaults to 25
 }
@@ -290,16 +291,18 @@ message ListReferralVTGReportDataRequest {
 // ReferralVTGReportDataItem - Single row in VTG report (one UID with T1-T10 data)
 message ReferralVTGReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
-  string date = 8;
-  int64 uid = 1;
-  int64 referral_id = 2;    // User's direct referrer (tier1_user_id)
-  int64 affiliate_id = 3;   // User's affiliate (from affiliate_users)
+  string date = 1;
+  int64 uid = 2;
+  string currency = 3;              // Currency for this row (grouped by currency)
+  int64 referral_id = 4;    // User's direct referrer (tier1_user_id)
+  int64 affiliate_id = 5;   // User's affiliate (from affiliate_users)
 
   // Operator context
-  int64 operator_id = 4;
-  int64 system_operator_id = 5;
-  int64 company_operator_id = 6;
-  int64 retailer_operator_id = 7;
+  int64 operator_id = 6;
+  int64 system_operator_id = 7;
+  int64 company_operator_id = 8;
+  int64 retailer_operator_id = 9;
+
 
   repeated ReferralVTGTierData tiers = 10;  // T1-T10 tier data for new subordinates
 
@@ -329,6 +332,7 @@ message ListReferralSnapshotReportDataRequest {
   repeated int64 user_ids = 4;              // Optional: filter by specific UIDs
   repeated int64 referral_ids = 5;          // Optional: filter by referral
   repeated int64 affiliate_ids = 6;         // Optional: filter by affiliate
+  repeated string currencies = 10;          // Filter by currencies
   bool only_negative_carryover = 7;         // Optional: only show users with negative carryover
   optional int32 page = 8;                  // defaults to 1
   optional int32 page_size = 9;             // defaults to 25
@@ -347,7 +351,7 @@ message ReferralSnapshotReportDataItem {
   int64 system_operator_id = 6;
   int64 company_operator_id = 7;
   int64 retailer_operator_id = 8;
-
+  string currency = 9;              // Currency for this row (grouped by currency)
   repeated ReferralSnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
 
   // T1 gaming data (only T1 has GGR/NGR/B2C in Snapshot)

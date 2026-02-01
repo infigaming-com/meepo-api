@@ -393,6 +393,8 @@ func (m *VTGReportItem) validate(all bool) error {
 
 	// no validation rules for Uid
 
+	// no validation rules for Currency
+
 	// no validation rules for ReferralId
 
 	// no validation rules for AffiliateId
@@ -404,6 +406,14 @@ func (m *VTGReportItem) validate(all bool) error {
 	// no validation rules for CompanyOperatorId
 
 	// no validation rules for RetailerOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
 
 	for idx, item := range m.GetTiers() {
 		_, _ = idx, item
@@ -1232,6 +1242,8 @@ func (m *SnapshotReportItem) validate(all bool) error {
 
 	// no validation rules for Uid
 
+	// no validation rules for Currency
+
 	// no validation rules for ReferralId
 
 	// no validation rules for AffiliateId
@@ -1243,6 +1255,14 @@ func (m *SnapshotReportItem) validate(all bool) error {
 	// no validation rules for CompanyOperatorId
 
 	// no validation rules for RetailerOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
 
 	for idx, item := range m.GetTiers() {
 		_, _ = idx, item
@@ -1829,6 +1849,14 @@ func (m *ContributionReportItem) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorId
 
+	// no validation rules for OperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
 	// no validation rules for DepositUsd
 
 	// no validation rules for WithdrawalUsd
@@ -2296,6 +2324,14 @@ func (m *LifetimeReportItem) validate(all bool) error {
 
 	// no validation rules for RetailerOperatorId
 
+	// no validation rules for OperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
 	// no validation rules for ConversionRewardUsd
 
 	// no validation rules for DepositCashbackUsd
@@ -2755,6 +2791,14 @@ func (m *AffiliateVTGReportItem) validate(all bool) error {
 	// no validation rules for CompanyOperatorId
 
 	// no validation rules for RetailerOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
 
 	// no validation rules for Registrations
 
@@ -3313,6 +3357,14 @@ func (m *AffiliateSnapshotReportItem) validate(all bool) error {
 	// no validation rules for CompanyOperatorId
 
 	// no validation rules for RetailerOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
 
 	// no validation rules for ImpressionQty
 

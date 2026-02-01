@@ -2006,6 +2006,7 @@ type ListReferralVTGReportDataRequest struct {
 	UserIds                []int64                        `protobuf:"varint,4,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`                 // Optional: filter by specific UIDs
 	ReferralIds            []int64                        `protobuf:"varint,5,rep,packed,name=referral_ids,json=referralIds,proto3" json:"referral_ids,omitempty"`     // Optional: filter by referral (tier1_user_id)
 	AffiliateIds           []int64                        `protobuf:"varint,6,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`  // Optional: filter by affiliate
+	Currencies             []string                       `protobuf:"bytes,9,rep,name=currencies,proto3" json:"currencies,omitempty"`                                  // Filter by currencies (e.g., ["USD", "BRL"])
 	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`                                       // defaults to 1
 	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`               // defaults to 25
 	unknownFields          protoimpl.UnknownFields
@@ -2084,6 +2085,13 @@ func (x *ListReferralVTGReportDataRequest) GetAffiliateIds() []int64 {
 	return nil
 }
 
+func (x *ListReferralVTGReportDataRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
 func (x *ListReferralVTGReportDataRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
@@ -2102,15 +2110,16 @@ func (x *ListReferralVTGReportDataRequest) GetPageSize() int32 {
 type ReferralVTGReportDataItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
-	Date        string `protobuf:"bytes,8,opt,name=date,proto3" json:"date,omitempty"`
-	Uid         int64  `protobuf:"varint,1,opt,name=uid,proto3" json:"uid,omitempty"`
-	ReferralId  int64  `protobuf:"varint,2,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`    // User's direct referrer (tier1_user_id)
-	AffiliateId int64  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate (from affiliate_users)
+	Date        string `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Uid         int64  `protobuf:"varint,2,opt,name=uid,proto3" json:"uid,omitempty"`
+	Currency    string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`                           // Currency for this row (grouped by currency)
+	ReferralId  int64  `protobuf:"varint,4,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`    // User's direct referrer (tier1_user_id)
+	AffiliateId int64  `protobuf:"varint,5,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"` // User's affiliate (from affiliate_users)
 	// Operator context
-	OperatorId         int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	SystemOperatorId   int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	CompanyOperatorId  int64                  `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                  `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	OperatorId         int64                  `protobuf:"varint,6,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64                  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,8,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,9,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
 	Tiers              []*ReferralVTGTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"` // T1-T10 tier data for new subordinates
 	// Summary fields - USD
 	TotalRewardUsd   string `protobuf:"bytes,20,opt,name=total_reward_usd,json=totalRewardUsd,proto3" json:"total_reward_usd,omitempty"`         // Sum of all tiers, all commission types
@@ -2165,6 +2174,13 @@ func (x *ReferralVTGReportDataItem) GetUid() int64 {
 		return x.Uid
 	}
 	return 0
+}
+
+func (x *ReferralVTGReportDataItem) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 func (x *ReferralVTGReportDataItem) GetReferralId() int64 {
@@ -2327,6 +2343,7 @@ type ListReferralSnapshotReportDataRequest struct {
 	UserIds                []int64                        `protobuf:"varint,4,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`                                      // Optional: filter by specific UIDs
 	ReferralIds            []int64                        `protobuf:"varint,5,rep,packed,name=referral_ids,json=referralIds,proto3" json:"referral_ids,omitempty"`                          // Optional: filter by referral
 	AffiliateIds           []int64                        `protobuf:"varint,6,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`                       // Optional: filter by affiliate
+	Currencies             []string                       `protobuf:"bytes,10,rep,name=currencies,proto3" json:"currencies,omitempty"`                                                      // Filter by currencies
 	OnlyNegativeCarryover  bool                           `protobuf:"varint,7,opt,name=only_negative_carryover,json=onlyNegativeCarryover,proto3" json:"only_negative_carryover,omitempty"` // Optional: only show users with negative carryover
 	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`                                                            // defaults to 1
 	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`                                    // defaults to 25
@@ -2406,6 +2423,13 @@ func (x *ListReferralSnapshotReportDataRequest) GetAffiliateIds() []int64 {
 	return nil
 }
 
+func (x *ListReferralSnapshotReportDataRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
 func (x *ListReferralSnapshotReportDataRequest) GetOnlyNegativeCarryover() bool {
 	if x != nil {
 		return x.OnlyNegativeCarryover
@@ -2440,7 +2464,8 @@ type ReferralSnapshotReportDataItem struct {
 	SystemOperatorId   int64                       `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
 	CompanyOperatorId  int64                       `protobuf:"varint,7,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
 	RetailerOperatorId int64                       `protobuf:"varint,8,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	Tiers              []*ReferralSnapshotTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"` // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
+	Currency           string                      `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"` // Currency for this row (grouped by currency)
+	Tiers              []*ReferralSnapshotTierData `protobuf:"bytes,10,rep,name=tiers,proto3" json:"tiers,omitempty"`      // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
 	// T1 gaming data (only T1 has GGR/NGR/B2C in Snapshot)
 	T1Gaming *ReferralT1GamingData `protobuf:"bytes,20,opt,name=t1_gaming,json=t1Gaming,proto3" json:"t1_gaming,omitempty"`
 	// Summary fields - USD
@@ -2554,6 +2579,13 @@ func (x *ReferralSnapshotReportDataItem) GetRetailerOperatorId() int64 {
 		return x.RetailerOperatorId
 	}
 	return 0
+}
+
+func (x *ReferralSnapshotReportDataItem) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 func (x *ReferralSnapshotReportDataItem) GetTiers() []*ReferralSnapshotTierData {
@@ -5481,30 +5513,34 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	" \x01(\tR\x14ggrReportingCurrency\x124\n" +
 	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\x12A\n" +
-	"\x1dbet_amount_reporting_currency\x18\r \x01(\tR\x1abetAmountReportingCurrency\"\x95\x03\n" +
+	"\x1dbet_amount_reporting_currency\x18\r \x01(\tR\x1abetAmountReportingCurrency\"\xb5\x03\n" +
 	" ListReferralVTGReportDataRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
 	"\buser_ids\x18\x04 \x03(\x03R\auserIds\x12!\n" +
 	"\freferral_ids\x18\x05 \x03(\x03R\vreferralIds\x12#\n" +
-	"\raffiliate_ids\x18\x06 \x03(\x03R\faffiliateIds\x12\x17\n" +
+	"\raffiliate_ids\x18\x06 \x03(\x03R\faffiliateIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\t \x03(\tR\n" +
+	"currencies\x12\x17\n" +
 	"\x04page\x18\a \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xfb\x04\n" +
+	"_page_size\"\x97\x05\n" +
 	"\x19ReferralVTGReportDataItem\x12\x12\n" +
-	"\x04date\x18\b \x01(\tR\x04date\x12\x10\n" +
-	"\x03uid\x18\x01 \x01(\x03R\x03uid\x12\x1f\n" +
-	"\vreferral_id\x18\x02 \x01(\x03R\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12\x10\n" +
+	"\x03uid\x18\x02 \x01(\x03R\x03uid\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1f\n" +
+	"\vreferral_id\x18\x04 \x01(\x03R\n" +
 	"referralId\x12!\n" +
-	"\faffiliate_id\x18\x03 \x01(\x03R\vaffiliateId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
+	"\faffiliate_id\x18\x05 \x01(\x03R\vaffiliateId\x12\x1f\n" +
+	"\voperator_id\x18\x06 \x01(\x03R\n" +
 	"operatorId\x12,\n" +
-	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12.\n" +
-	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\a \x01(\x03R\x12retailerOperatorId\x12@\n" +
+	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\b \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\t \x01(\x03R\x12retailerOperatorId\x12@\n" +
 	"\x05tiers\x18\n" +
 	" \x03(\v2*.api.report.service.v1.ReferralVTGTierDataR\x05tiers\x12(\n" +
 	"\x10total_reward_usd\x18\x14 \x01(\tR\x0etotalRewardUsd\x12-\n" +
@@ -5516,20 +5552,24 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v20.api.report.service.v1.ReferralVTGReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xd2\x03\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xf2\x03\n" +
 	"%ListReferralSnapshotReportDataRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x19\n" +
 	"\buser_ids\x18\x04 \x03(\x03R\auserIds\x12!\n" +
 	"\freferral_ids\x18\x05 \x03(\x03R\vreferralIds\x12#\n" +
-	"\raffiliate_ids\x18\x06 \x03(\x03R\faffiliateIds\x126\n" +
+	"\raffiliate_ids\x18\x06 \x03(\x03R\faffiliateIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\n" +
+	" \x03(\tR\n" +
+	"currencies\x126\n" +
 	"\x17only_negative_carryover\x18\a \x01(\bR\x15onlyNegativeCarryover\x12\x17\n" +
 	"\x04page\x18\b \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8d\r\n" +
+	"_page_size\"\xa9\r\n" +
 	"\x1eReferralSnapshotReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x10\n" +
 	"\x03uid\x18\x02 \x01(\x03R\x03uid\x12\x1f\n" +
@@ -5540,7 +5580,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"operatorId\x12,\n" +
 	"\x12system_operator_id\x18\x06 \x01(\x03R\x10systemOperatorId\x12.\n" +
 	"\x13company_operator_id\x18\a \x01(\x03R\x11companyOperatorId\x120\n" +
-	"\x14retailer_operator_id\x18\b \x01(\x03R\x12retailerOperatorId\x12E\n" +
+	"\x14retailer_operator_id\x18\b \x01(\x03R\x12retailerOperatorId\x12\x1a\n" +
+	"\bcurrency\x18\t \x01(\tR\bcurrency\x12E\n" +
 	"\x05tiers\x18\n" +
 	" \x03(\v2/.api.report.service.v1.ReferralSnapshotTierDataR\x05tiers\x12H\n" +
 	"\tt1_gaming\x18\x14 \x01(\v2+.api.report.service.v1.ReferralT1GamingDataR\bt1Gaming\x129\n" +

@@ -8967,6 +8967,14 @@ components:
                     type: string
                 retailerOperatorId:
                     type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
                 impressionQty:
                     type: string
                     description: Exposure and clicks (not implemented)
@@ -9139,6 +9147,14 @@ components:
                 companyOperatorId:
                     type: string
                 retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
                     type: string
                 registrations:
                     type: string
@@ -9498,6 +9514,14 @@ components:
                 companyOperatorId:
                     type: string
                 retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
                     type: string
                 depositUsd:
                     type: string
@@ -10219,6 +10243,14 @@ components:
                 companyOperatorId:
                     type: string
                 retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
                     type: string
                 conversionRewardUsd:
                     type: string
@@ -11245,6 +11277,8 @@ components:
                     description: Grouped date based on period
                 uid:
                     type: string
+                currency:
+                    type: string
                 referralId:
                     type: string
                 affiliateId:
@@ -11258,11 +11292,18 @@ components:
                     type: string
                 retailerOperatorId:
                     type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
                 tiers:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.SnapshotTierData'
-                    description: Dynamic tier data (truncated based on MaxTier)
                 t1Gaming:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.T1GamingData'
@@ -11419,6 +11460,8 @@ components:
                     description: 'Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)'
                 uid:
                     type: string
+                currency:
+                    type: string
                 referralId:
                     type: string
                 affiliateId:
@@ -11432,11 +11475,18 @@ components:
                     type: string
                 retailerOperatorId:
                     type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
                 tiers:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.VTGTierData'
-                    description: Dynamic tier data (T1 to MaxTier, truncated based on operator's referral plan)
                 totalRewardUsd:
                     type: string
                     description: Summary fields - USD
@@ -17156,6 +17206,10 @@ components:
                     type: array
                     items:
                         type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
                 onlyNegativeCarryover:
                     type: boolean
                 page:
@@ -17181,6 +17235,10 @@ components:
                     items:
                         type: string
                 affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
                     type: array
                     items:
                         type: string
