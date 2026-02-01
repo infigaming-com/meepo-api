@@ -10,6 +10,8 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
+import "affiliate/service/v1/commission_report.proto";
+
 service BackofficeReport {
   rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
       option (google.api.http) = {
@@ -104,9 +106,9 @@ service BackofficeReport {
       };
   }
 
-  // Commission Report APIs (Referral tables - 全民)
+  // Commission Report APIs (Referral tables)
   // ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
-  rpc ListReferralVTGReport(ListReferralVTGReportRequest) returns (ListReferralVTGReportResponse) {
+  rpc ListReferralVTGReport(ListReferralVTGReportRequest) returns (api.affiliate.service.v1.ListReferralVTGReportResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/commission/referral/vtg/list"
           body: "*"
@@ -114,7 +116,7 @@ service BackofficeReport {
   }
 
   // ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
-  rpc ListReferralSnapshotReport(ListReferralSnapshotReportRequest) returns (ListReferralSnapshotReportResponse) {
+  rpc ListReferralSnapshotReport(ListReferralSnapshotReportRequest) returns (api.affiliate.service.v1.ListReferralSnapshotReportResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/commission/referral/snapshot/list"
           body: "*"
@@ -122,7 +124,7 @@ service BackofficeReport {
   }
 
   // ListReferralContributionReport returns Contribution report - Subordinate detail view
-  rpc ListReferralContributionReport(ListReferralContributionReportRequest) returns (ListReferralContributionReportResponse) {
+  rpc ListReferralContributionReport(ListReferralContributionReportRequest) returns (api.affiliate.service.v1.ListReferralContributionReportResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/commission/referral/contribution/list"
           body: "*"
@@ -130,9 +132,26 @@ service BackofficeReport {
   }
 
   // ListReferralLifetimeReport returns Lifetime report - All-time commission totals
-  rpc ListReferralLifetimeReport(ListReferralLifetimeReportRequest) returns (ListReferralLifetimeReportResponse) {
+  rpc ListReferralLifetimeReport(ListReferralLifetimeReportRequest) returns (api.affiliate.service.v1.ListReferralLifetimeReportResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/commission/referral/lifetime/list"
+          body: "*"
+      };
+  }
+
+  // Commission Report APIs (Affiliate tables)
+  // ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+  rpc ListAffiliateVTGReport(ListAffiliateVTGReportRequest) returns (api.affiliate.service.v1.ListAffiliateVTGReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/affiliate/vtg/list"
+          body: "*"
+      };
+  }
+
+  // ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+  rpc ListAffiliateSnapshotReport(ListAffiliateSnapshotReportRequest) returns (api.affiliate.service.v1.ListAffiliateSnapshotReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/affiliate/snapshot/list"
           body: "*"
       };
   }
@@ -872,84 +891,6 @@ message ListReferralVTGReportRequest {
   optional int32 page_size = 7;                         // defaults to 25
 }
 
-// VTGTierData - Tier data for VTG report (New Subordinates Performance)
-message VTGTierData {
-  int32 tier = 1;  // Tier level (1 to MaxTier)
-
-  // Count metrics (for new subordinates in period)
-  int64 new_count = 10;        // New subordinates count
-  int64 ftd_count = 11;        // New subs with FTD
-  int64 qualified_count = 12;  // New subs who met conversion conditions
-
-  // Financial metrics for new subordinates - USD
-  string ftd_amount_usd = 20;
-  string deposit_amount_usd = 21;
-  string withdrawal_amount_usd = 22;
-  string ggr_usd = 23;
-  string ngr_usd = 24;
-  string b2c_usd = 25;  // Bonus to Cash
-  int64 bet_count = 26;
-  string bet_amount_usd = 27;
-  string avg_bet_usd = 28;
-
-  // Financial metrics - Reporting Currency
-  string ftd_amount_reporting_currency = 40;
-  string deposit_amount_reporting_currency = 41;
-  string withdrawal_amount_reporting_currency = 42;
-  string ggr_reporting_currency = 43;
-  string ngr_reporting_currency = 44;
-  string b2c_reporting_currency = 45;
-  string bet_amount_reporting_currency = 47;
-  string avg_bet_reporting_currency = 48;
-
-  // Settled commissions for new subordinates - USD
-  string referral_reward_usd = 30;      // conversion_reward
-  string deposit_cashback_usd = 31;     // deposit_cashback_reward
-  string wagering_commission_usd = 32;  // wagering_commission_reward
-  string loss_revenue_share_usd = 33;   // loss_revenue_share_reward
-  string total_reward_usd = 34;         // Sum of above 4 types
-
-  // Settled commissions - Reporting Currency
-  string referral_reward_reporting_currency = 50;
-  string deposit_cashback_reporting_currency = 51;
-  string wagering_commission_reporting_currency = 52;
-  string loss_revenue_share_reporting_currency = 53;
-  string total_reward_reporting_currency = 54;
-}
-
-// VTGReportItem - Single row in VTG report
-message VTGReportItem {
-  string date = 1;          // Grouped date: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
-  int64 uid = 2;
-  int64 referral_id = 3;    // User's direct referrer
-  int64 affiliate_id = 4;   // User's affiliate
-
-  // Operator context
-  int64 operator_id = 5;
-  int64 system_operator_id = 6;
-  int64 company_operator_id = 7;
-  int64 retailer_operator_id = 8;
-
-  // Dynamic tier data (T1 to MaxTier, truncated based on operator's referral plan)
-  repeated VTGTierData tiers = 10;
-
-  // Summary fields - USD
-  string total_reward_usd = 20;     // Sum of all tiers, all commission types
-  string t1_total_reward_usd = 21;  // T1: deposit_cashback + wagering + loss_rs
-  string t1_roi = 22;               // T1 Total Reward / (T1 NGR - T1 B2C)
-
-  // Summary fields - Reporting Currency
-  string total_reward_reporting_currency = 30;
-  string t1_total_reward_reporting_currency = 31;
-}
-
-message ListReferralVTGReportResponse {
-  repeated VTGReportItem items = 1;
-  int32 page = 2;
-  int32 page_size = 3;
-  int64 total = 4;
-}
-
 // Snapshot Report - Cumulative + Period Activity
 message ListReferralSnapshotReportRequest {
   string period = 1;                                    // "day", "week", or "month"
@@ -960,118 +901,6 @@ message ListReferralSnapshotReportRequest {
   bool only_negative_carryover = 6;                     // Optional: only show users with negative carryover
   optional int32 page = 7;                              // defaults to 1
   optional int32 page_size = 8;                         // defaults to 25
-}
-
-// SnapshotTierData - Tier data for Snapshot report
-message SnapshotTierData {
-  int32 tier = 1;  // Tier level (1 to MaxTier)
-
-  // Count metrics
-  int64 total_count = 10;      // Cumulative subordinates (no time limit)
-  int64 qualified_count = 11;  // Became qualified in period
-  int64 active_count = 12;     // Had at least 1 bet in period
-
-  // Settled commissions in period - USD
-  string referral_reward_usd = 20;
-  string deposit_cashback_usd = 21;
-  string wagering_commission_usd = 22;
-  string loss_revenue_share_usd = 23;
-  string total_reward_usd = 24;
-
-  // Settled commissions - Reporting Currency
-  string referral_reward_reporting_currency = 30;
-  string deposit_cashback_reporting_currency = 31;
-  string wagering_commission_reporting_currency = 32;
-  string loss_revenue_share_reporting_currency = 33;
-  string total_reward_reporting_currency = 34;
-}
-
-// T1GamingData - Gaming data for T1 only
-message T1GamingData {
-  // USD
-  string ggr_usd = 1;
-  string ngr_usd = 2;
-  string b2c_usd = 3;
-  string payment_cost_usd = 4;        // Calculated using admin rates
-  string provider_royalties_usd = 5;  // Calculated using admin rates
-
-  // Reporting Currency
-  string ggr_reporting_currency = 10;
-  string ngr_reporting_currency = 11;
-  string b2c_reporting_currency = 12;
-  string payment_cost_reporting_currency = 13;
-  string provider_royalties_reporting_currency = 14;
-}
-
-// TierCarryover - Negative carryover data per tier
-message TierCarryover {
-  int32 tier = 1;
-  string currency = 2;
-  string period_type = 3;    // "weekly" or "monthly"
-  string based_on = 4;       // "ngr" or "ggr"
-  string ngr_carryover = 5;
-  string ggr_carryover = 6;
-  string b2c_carryover = 7;
-}
-
-// SnapshotReportItem - Single row in Snapshot report
-message SnapshotReportItem {
-  string date = 1;
-  int64 uid = 2;
-  int64 referral_id = 3;
-  int64 affiliate_id = 4;
-
-  // Operator context
-  int64 operator_id = 5;
-  int64 system_operator_id = 6;
-  int64 company_operator_id = 7;
-  int64 retailer_operator_id = 8;
-
-  // Dynamic tier data (truncated based on MaxTier)
-  repeated SnapshotTierData tiers = 10;
-
-  // T1 gaming data
-  T1GamingData t1_gaming = 20;
-
-  // Summary totals - USD
-  string total_referral_reward_usd = 30;
-  string total_deposit_cashback_usd = 31;
-  string total_wagering_commission_usd = 32;
-  string total_loss_revenue_share_usd = 33;
-
-  // Summary totals - Reporting Currency
-  string total_referral_reward_reporting_currency = 35;
-  string total_deposit_cashback_reporting_currency = 36;
-  string total_wagering_commission_reporting_currency = 37;
-  string total_loss_revenue_share_reporting_currency = 38;
-
-  // Unpaid commissions (estimated) - USD
-  string unpaid_wagering_commission_usd = 40;
-  string unpaid_loss_commission_usd = 41;
-
-  // Unpaid commissions - Reporting Currency
-  string unpaid_wagering_commission_reporting_currency = 42;
-  string unpaid_loss_commission_reporting_currency = 43;
-
-  // Commission status - USD
-  string unclaimed_commission_usd = 50;
-  string lifetime_claimed_usd = 51;
-  string withdrawal_amount_usd = 52;
-
-  // Commission status - Reporting Currency
-  string unclaimed_commission_reporting_currency = 55;
-  string lifetime_claimed_reporting_currency = 56;
-  string withdrawal_amount_reporting_currency = 57;
-
-  // Negative carryover per tier
-  repeated TierCarryover negative_carryover = 60;
-}
-
-message ListReferralSnapshotReportResponse {
-  repeated SnapshotReportItem items = 1;
-  int32 page = 2;
-  int32 page_size = 3;
-  int64 total = 4;
 }
 
 // Contribution Report - Subordinate Detail View
@@ -1085,57 +914,6 @@ message ListReferralContributionReportRequest {
   optional int32 page_size = 7;                         // defaults to 25
 }
 
-// ContributionReportItem - Single subordinate detail
-message ContributionReportItem {
-  string date = 1;
-  int64 root_id = 2;      // ROOT user (T0 perspective)
-  int64 parent_id = 3;    // Sub-UID's direct referrer
-  int64 sub_uid = 4;      // The subordinate user
-  int32 tier = 5;         // Sub-UID's tier relative to ROOT (1 to MaxTier)
-
-  int64 reg_date = 6;     // Registration time (milliseconds)
-  int64 ftd_date = 7;     // First deposit time (milliseconds), 0 if no FTD
-  bool is_qualified = 8;  // Has met conversion conditions
-
-  // Operator context
-  int64 operator_id = 9;
-  int64 system_operator_id = 10;
-  int64 company_operator_id = 11;
-  int64 retailer_operator_id = 12;
-
-  // Financial metrics in period - USD
-  string deposit_usd = 20;
-  string withdrawal_usd = 21;
-  string turnover_usd = 22;
-  string ggr_usd = 23;
-  string ngr_usd = 24;
-  string b2c_usd = 25;
-  string payment_cost_usd = 26;       // Calculated using admin rates
-  string provider_royalties_usd = 27; // Calculated using admin rates
-
-  // Financial metrics - Reporting Currency
-  string deposit_reporting_currency = 30;
-  string withdrawal_reporting_currency = 31;
-  string turnover_reporting_currency = 32;
-  string ggr_reporting_currency = 33;
-  string ngr_reporting_currency = 34;
-  string b2c_reporting_currency = 35;
-  string payment_cost_reporting_currency = 36;
-  string provider_royalties_reporting_currency = 37;
-
-  // Not implemented (requires User Service integration)
-  int64 last_login_time = 40;
-  string device_id = 41;
-  string ip = 42;
-}
-
-message ListReferralContributionReportResponse {
-  repeated ContributionReportItem items = 1;
-  int32 page = 2;
-  int32 page_size = 3;
-  int64 total = 4;
-}
-
 // Lifetime Report - All-time Commission Totals
 message ListReferralLifetimeReportRequest {
   api.common.OperatorContextFilters operator_context_filters = 1;
@@ -1144,34 +922,33 @@ message ListReferralLifetimeReportRequest {
   optional int32 page_size = 4;                         // defaults to 25
 }
 
-// LifetimeReportItem - All-time commission totals for a user
-message LifetimeReportItem {
-  int64 uid = 1;
 
-  // Operator context
-  int64 operator_id = 2;
-  int64 system_operator_id = 3;
-  int64 company_operator_id = 4;
-  int64 retailer_operator_id = 5;
+// ============================================================================
+// Affiliate VTG Report - New Users (registered in period) Performance
+// ============================================================================
 
-  // Commission totals - USD
-  string conversion_reward_usd = 10;
-  string deposit_cashback_usd = 11;
-  string wagering_commission_usd = 12;
-  string loss_revenue_share_usd = 13;
-  string total_usd = 14;
-
-  // Commission totals - Reporting Currency
-  string conversion_reward_reporting_currency = 20;
-  string deposit_cashback_reporting_currency = 21;
-  string wagering_commission_reporting_currency = 22;
-  string loss_revenue_share_reporting_currency = 23;
-  string total_reporting_currency = 24;
+message ListAffiliateVTGReportRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 affiliate_ids = 3;
+  repeated int64 campaign_ids = 4;
+  string dimension = 5;                                 // "campaign" or "affiliate"
+  optional int32 page = 6;
+  optional int32 page_size = 7;
 }
 
-message ListReferralLifetimeReportResponse {
-  repeated LifetimeReportItem items = 1;
-  int32 page = 2;
-  int32 page_size = 3;
-  int64 total = 4;
+
+// ============================================================================
+// Affiliate Snapshot Report - All Users' Activity in Period
+// ============================================================================
+
+message ListAffiliateSnapshotReportRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 affiliate_ids = 3;
+  repeated int64 campaign_ids = 4;
+  string dimension = 5;                                 // "campaign" or "affiliate"
+  bool only_negative_carryover = 6;
+  optional int32 page = 7;
+  optional int32 page_size = 8;
 }

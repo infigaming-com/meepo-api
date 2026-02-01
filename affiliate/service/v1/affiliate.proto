@@ -180,6 +180,14 @@ service Affiliate {
     // ListReferralLifetimeReport returns Lifetime report - All-time commission totals
     rpc ListReferralLifetimeReport(ListReferralLifetimeReportRequest) returns (ListReferralLifetimeReportResponse) {}
 
+    // -------------- Affiliate Report --------------
+
+    // ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+    rpc ListAffiliateVTGReport(ListAffiliateVTGReportRequest) returns (ListAffiliateVTGReportResponse) {}
+
+    // ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+    rpc ListAffiliateSnapshotReport(ListAffiliateSnapshotReportRequest) returns (ListAffiliateSnapshotReportResponse) {}
+
 }
 
 message ContactType {

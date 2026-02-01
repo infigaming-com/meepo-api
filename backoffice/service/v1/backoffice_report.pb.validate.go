@@ -4860,470 +4860,6 @@ var _ interface {
 	ErrorName() string
 } = ListReferralVTGReportRequestValidationError{}
 
-// Validate checks the field values on VTGTierData with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *VTGTierData) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on VTGTierData with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in VTGTierDataMultiError, or
-// nil if none found.
-func (m *VTGTierData) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *VTGTierData) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Tier
-
-	// no validation rules for NewCount
-
-	// no validation rules for FtdCount
-
-	// no validation rules for QualifiedCount
-
-	// no validation rules for FtdAmountUsd
-
-	// no validation rules for DepositAmountUsd
-
-	// no validation rules for WithdrawalAmountUsd
-
-	// no validation rules for GgrUsd
-
-	// no validation rules for NgrUsd
-
-	// no validation rules for B2CUsd
-
-	// no validation rules for BetCount
-
-	// no validation rules for BetAmountUsd
-
-	// no validation rules for AvgBetUsd
-
-	// no validation rules for FtdAmountReportingCurrency
-
-	// no validation rules for DepositAmountReportingCurrency
-
-	// no validation rules for WithdrawalAmountReportingCurrency
-
-	// no validation rules for GgrReportingCurrency
-
-	// no validation rules for NgrReportingCurrency
-
-	// no validation rules for B2CReportingCurrency
-
-	// no validation rules for BetAmountReportingCurrency
-
-	// no validation rules for AvgBetReportingCurrency
-
-	// no validation rules for ReferralRewardUsd
-
-	// no validation rules for DepositCashbackUsd
-
-	// no validation rules for WageringCommissionUsd
-
-	// no validation rules for LossRevenueShareUsd
-
-	// no validation rules for TotalRewardUsd
-
-	// no validation rules for ReferralRewardReportingCurrency
-
-	// no validation rules for DepositCashbackReportingCurrency
-
-	// no validation rules for WageringCommissionReportingCurrency
-
-	// no validation rules for LossRevenueShareReportingCurrency
-
-	// no validation rules for TotalRewardReportingCurrency
-
-	if len(errors) > 0 {
-		return VTGTierDataMultiError(errors)
-	}
-
-	return nil
-}
-
-// VTGTierDataMultiError is an error wrapping multiple validation errors
-// returned by VTGTierData.ValidateAll() if the designated constraints aren't met.
-type VTGTierDataMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m VTGTierDataMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m VTGTierDataMultiError) AllErrors() []error { return m }
-
-// VTGTierDataValidationError is the validation error returned by
-// VTGTierData.Validate if the designated constraints aren't met.
-type VTGTierDataValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e VTGTierDataValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e VTGTierDataValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e VTGTierDataValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e VTGTierDataValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e VTGTierDataValidationError) ErrorName() string { return "VTGTierDataValidationError" }
-
-// Error satisfies the builtin error interface
-func (e VTGTierDataValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sVTGTierData.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = VTGTierDataValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = VTGTierDataValidationError{}
-
-// Validate checks the field values on VTGReportItem with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *VTGReportItem) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on VTGReportItem with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in VTGReportItemMultiError, or
-// nil if none found.
-func (m *VTGReportItem) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *VTGReportItem) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Date
-
-	// no validation rules for Uid
-
-	// no validation rules for ReferralId
-
-	// no validation rules for AffiliateId
-
-	// no validation rules for OperatorId
-
-	// no validation rules for SystemOperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for RetailerOperatorId
-
-	for idx, item := range m.GetTiers() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, VTGReportItemValidationError{
-						field:  fmt.Sprintf("Tiers[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, VTGReportItemValidationError{
-						field:  fmt.Sprintf("Tiers[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return VTGReportItemValidationError{
-					field:  fmt.Sprintf("Tiers[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for TotalRewardUsd
-
-	// no validation rules for T1TotalRewardUsd
-
-	// no validation rules for T1Roi
-
-	// no validation rules for TotalRewardReportingCurrency
-
-	// no validation rules for T1TotalRewardReportingCurrency
-
-	if len(errors) > 0 {
-		return VTGReportItemMultiError(errors)
-	}
-
-	return nil
-}
-
-// VTGReportItemMultiError is an error wrapping multiple validation errors
-// returned by VTGReportItem.ValidateAll() if the designated constraints
-// aren't met.
-type VTGReportItemMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m VTGReportItemMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m VTGReportItemMultiError) AllErrors() []error { return m }
-
-// VTGReportItemValidationError is the validation error returned by
-// VTGReportItem.Validate if the designated constraints aren't met.
-type VTGReportItemValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e VTGReportItemValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e VTGReportItemValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e VTGReportItemValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e VTGReportItemValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e VTGReportItemValidationError) ErrorName() string { return "VTGReportItemValidationError" }
-
-// Error satisfies the builtin error interface
-func (e VTGReportItemValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sVTGReportItem.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = VTGReportItemValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = VTGReportItemValidationError{}
-
-// Validate checks the field values on ListReferralVTGReportResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListReferralVTGReportResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListReferralVTGReportResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListReferralVTGReportResponseMultiError, or nil if none found.
-func (m *ListReferralVTGReportResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListReferralVTGReportResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	for idx, item := range m.GetItems() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListReferralVTGReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListReferralVTGReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListReferralVTGReportResponseValidationError{
-					field:  fmt.Sprintf("Items[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for Page
-
-	// no validation rules for PageSize
-
-	// no validation rules for Total
-
-	if len(errors) > 0 {
-		return ListReferralVTGReportResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListReferralVTGReportResponseMultiError is an error wrapping multiple
-// validation errors returned by ListReferralVTGReportResponse.ValidateAll()
-// if the designated constraints aren't met.
-type ListReferralVTGReportResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListReferralVTGReportResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListReferralVTGReportResponseMultiError) AllErrors() []error { return m }
-
-// ListReferralVTGReportResponseValidationError is the validation error
-// returned by ListReferralVTGReportResponse.Validate if the designated
-// constraints aren't met.
-type ListReferralVTGReportResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListReferralVTGReportResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListReferralVTGReportResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListReferralVTGReportResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListReferralVTGReportResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListReferralVTGReportResponseValidationError) ErrorName() string {
-	return "ListReferralVTGReportResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListReferralVTGReportResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListReferralVTGReportResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListReferralVTGReportResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListReferralVTGReportResponseValidationError{}
-
 // Validate checks the field values on ListReferralSnapshotReportRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -5469,763 +5005,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListReferralSnapshotReportRequestValidationError{}
-
-// Validate checks the field values on SnapshotTierData with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *SnapshotTierData) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SnapshotTierData with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SnapshotTierDataMultiError, or nil if none found.
-func (m *SnapshotTierData) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SnapshotTierData) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Tier
-
-	// no validation rules for TotalCount
-
-	// no validation rules for QualifiedCount
-
-	// no validation rules for ActiveCount
-
-	// no validation rules for ReferralRewardUsd
-
-	// no validation rules for DepositCashbackUsd
-
-	// no validation rules for WageringCommissionUsd
-
-	// no validation rules for LossRevenueShareUsd
-
-	// no validation rules for TotalRewardUsd
-
-	// no validation rules for ReferralRewardReportingCurrency
-
-	// no validation rules for DepositCashbackReportingCurrency
-
-	// no validation rules for WageringCommissionReportingCurrency
-
-	// no validation rules for LossRevenueShareReportingCurrency
-
-	// no validation rules for TotalRewardReportingCurrency
-
-	if len(errors) > 0 {
-		return SnapshotTierDataMultiError(errors)
-	}
-
-	return nil
-}
-
-// SnapshotTierDataMultiError is an error wrapping multiple validation errors
-// returned by SnapshotTierData.ValidateAll() if the designated constraints
-// aren't met.
-type SnapshotTierDataMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SnapshotTierDataMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SnapshotTierDataMultiError) AllErrors() []error { return m }
-
-// SnapshotTierDataValidationError is the validation error returned by
-// SnapshotTierData.Validate if the designated constraints aren't met.
-type SnapshotTierDataValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SnapshotTierDataValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SnapshotTierDataValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SnapshotTierDataValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SnapshotTierDataValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SnapshotTierDataValidationError) ErrorName() string { return "SnapshotTierDataValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SnapshotTierDataValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSnapshotTierData.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SnapshotTierDataValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SnapshotTierDataValidationError{}
-
-// Validate checks the field values on T1GamingData with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *T1GamingData) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on T1GamingData with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in T1GamingDataMultiError, or
-// nil if none found.
-func (m *T1GamingData) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *T1GamingData) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for GgrUsd
-
-	// no validation rules for NgrUsd
-
-	// no validation rules for B2CUsd
-
-	// no validation rules for PaymentCostUsd
-
-	// no validation rules for ProviderRoyaltiesUsd
-
-	// no validation rules for GgrReportingCurrency
-
-	// no validation rules for NgrReportingCurrency
-
-	// no validation rules for B2CReportingCurrency
-
-	// no validation rules for PaymentCostReportingCurrency
-
-	// no validation rules for ProviderRoyaltiesReportingCurrency
-
-	if len(errors) > 0 {
-		return T1GamingDataMultiError(errors)
-	}
-
-	return nil
-}
-
-// T1GamingDataMultiError is an error wrapping multiple validation errors
-// returned by T1GamingData.ValidateAll() if the designated constraints aren't met.
-type T1GamingDataMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m T1GamingDataMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m T1GamingDataMultiError) AllErrors() []error { return m }
-
-// T1GamingDataValidationError is the validation error returned by
-// T1GamingData.Validate if the designated constraints aren't met.
-type T1GamingDataValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e T1GamingDataValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e T1GamingDataValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e T1GamingDataValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e T1GamingDataValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e T1GamingDataValidationError) ErrorName() string { return "T1GamingDataValidationError" }
-
-// Error satisfies the builtin error interface
-func (e T1GamingDataValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sT1GamingData.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = T1GamingDataValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = T1GamingDataValidationError{}
-
-// Validate checks the field values on TierCarryover with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *TierCarryover) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on TierCarryover with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in TierCarryoverMultiError, or
-// nil if none found.
-func (m *TierCarryover) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *TierCarryover) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Tier
-
-	// no validation rules for Currency
-
-	// no validation rules for PeriodType
-
-	// no validation rules for BasedOn
-
-	// no validation rules for NgrCarryover
-
-	// no validation rules for GgrCarryover
-
-	// no validation rules for B2CCarryover
-
-	if len(errors) > 0 {
-		return TierCarryoverMultiError(errors)
-	}
-
-	return nil
-}
-
-// TierCarryoverMultiError is an error wrapping multiple validation errors
-// returned by TierCarryover.ValidateAll() if the designated constraints
-// aren't met.
-type TierCarryoverMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m TierCarryoverMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m TierCarryoverMultiError) AllErrors() []error { return m }
-
-// TierCarryoverValidationError is the validation error returned by
-// TierCarryover.Validate if the designated constraints aren't met.
-type TierCarryoverValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e TierCarryoverValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e TierCarryoverValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e TierCarryoverValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e TierCarryoverValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e TierCarryoverValidationError) ErrorName() string { return "TierCarryoverValidationError" }
-
-// Error satisfies the builtin error interface
-func (e TierCarryoverValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sTierCarryover.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = TierCarryoverValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = TierCarryoverValidationError{}
-
-// Validate checks the field values on SnapshotReportItem with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SnapshotReportItem) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SnapshotReportItem with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SnapshotReportItemMultiError, or nil if none found.
-func (m *SnapshotReportItem) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SnapshotReportItem) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Date
-
-	// no validation rules for Uid
-
-	// no validation rules for ReferralId
-
-	// no validation rules for AffiliateId
-
-	// no validation rules for OperatorId
-
-	// no validation rules for SystemOperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for RetailerOperatorId
-
-	for idx, item := range m.GetTiers() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SnapshotReportItemValidationError{
-						field:  fmt.Sprintf("Tiers[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, SnapshotReportItemValidationError{
-						field:  fmt.Sprintf("Tiers[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SnapshotReportItemValidationError{
-					field:  fmt.Sprintf("Tiers[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if all {
-		switch v := interface{}(m.GetT1Gaming()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SnapshotReportItemValidationError{
-					field:  "T1Gaming",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SnapshotReportItemValidationError{
-					field:  "T1Gaming",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetT1Gaming()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SnapshotReportItemValidationError{
-				field:  "T1Gaming",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for TotalReferralRewardUsd
-
-	// no validation rules for TotalDepositCashbackUsd
-
-	// no validation rules for TotalWageringCommissionUsd
-
-	// no validation rules for TotalLossRevenueShareUsd
-
-	// no validation rules for TotalReferralRewardReportingCurrency
-
-	// no validation rules for TotalDepositCashbackReportingCurrency
-
-	// no validation rules for TotalWageringCommissionReportingCurrency
-
-	// no validation rules for TotalLossRevenueShareReportingCurrency
-
-	// no validation rules for UnpaidWageringCommissionUsd
-
-	// no validation rules for UnpaidLossCommissionUsd
-
-	// no validation rules for UnpaidWageringCommissionReportingCurrency
-
-	// no validation rules for UnpaidLossCommissionReportingCurrency
-
-	// no validation rules for UnclaimedCommissionUsd
-
-	// no validation rules for LifetimeClaimedUsd
-
-	// no validation rules for WithdrawalAmountUsd
-
-	// no validation rules for UnclaimedCommissionReportingCurrency
-
-	// no validation rules for LifetimeClaimedReportingCurrency
-
-	// no validation rules for WithdrawalAmountReportingCurrency
-
-	for idx, item := range m.GetNegativeCarryover() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SnapshotReportItemValidationError{
-						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, SnapshotReportItemValidationError{
-						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SnapshotReportItemValidationError{
-					field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return SnapshotReportItemMultiError(errors)
-	}
-
-	return nil
-}
-
-// SnapshotReportItemMultiError is an error wrapping multiple validation errors
-// returned by SnapshotReportItem.ValidateAll() if the designated constraints
-// aren't met.
-type SnapshotReportItemMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SnapshotReportItemMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SnapshotReportItemMultiError) AllErrors() []error { return m }
-
-// SnapshotReportItemValidationError is the validation error returned by
-// SnapshotReportItem.Validate if the designated constraints aren't met.
-type SnapshotReportItemValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SnapshotReportItemValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SnapshotReportItemValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SnapshotReportItemValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SnapshotReportItemValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SnapshotReportItemValidationError) ErrorName() string {
-	return "SnapshotReportItemValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SnapshotReportItemValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSnapshotReportItem.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SnapshotReportItemValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SnapshotReportItemValidationError{}
-
-// Validate checks the field values on ListReferralSnapshotReportResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListReferralSnapshotReportResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListReferralSnapshotReportResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListReferralSnapshotReportResponseMultiError, or nil if none found.
-func (m *ListReferralSnapshotReportResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListReferralSnapshotReportResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	for idx, item := range m.GetItems() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListReferralSnapshotReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListReferralSnapshotReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListReferralSnapshotReportResponseValidationError{
-					field:  fmt.Sprintf("Items[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for Page
-
-	// no validation rules for PageSize
-
-	// no validation rules for Total
-
-	if len(errors) > 0 {
-		return ListReferralSnapshotReportResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListReferralSnapshotReportResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// ListReferralSnapshotReportResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListReferralSnapshotReportResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListReferralSnapshotReportResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListReferralSnapshotReportResponseMultiError) AllErrors() []error { return m }
-
-// ListReferralSnapshotReportResponseValidationError is the validation error
-// returned by ListReferralSnapshotReportResponse.Validate if the designated
-// constraints aren't met.
-type ListReferralSnapshotReportResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListReferralSnapshotReportResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListReferralSnapshotReportResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListReferralSnapshotReportResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListReferralSnapshotReportResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListReferralSnapshotReportResponseValidationError) ErrorName() string {
-	return "ListReferralSnapshotReportResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListReferralSnapshotReportResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListReferralSnapshotReportResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListReferralSnapshotReportResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListReferralSnapshotReportResponseValidationError{}
 
 // Validate checks the field values on ListReferralContributionReportRequest
 // with the rules defined in the proto definition for this message. If any
@@ -6379,316 +5158,6 @@ var _ interface {
 	ErrorName() string
 } = ListReferralContributionReportRequestValidationError{}
 
-// Validate checks the field values on ContributionReportItem with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ContributionReportItem) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ContributionReportItem with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ContributionReportItemMultiError, or nil if none found.
-func (m *ContributionReportItem) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ContributionReportItem) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Date
-
-	// no validation rules for RootId
-
-	// no validation rules for ParentId
-
-	// no validation rules for SubUid
-
-	// no validation rules for Tier
-
-	// no validation rules for RegDate
-
-	// no validation rules for FtdDate
-
-	// no validation rules for IsQualified
-
-	// no validation rules for OperatorId
-
-	// no validation rules for SystemOperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for RetailerOperatorId
-
-	// no validation rules for DepositUsd
-
-	// no validation rules for WithdrawalUsd
-
-	// no validation rules for TurnoverUsd
-
-	// no validation rules for GgrUsd
-
-	// no validation rules for NgrUsd
-
-	// no validation rules for B2CUsd
-
-	// no validation rules for PaymentCostUsd
-
-	// no validation rules for ProviderRoyaltiesUsd
-
-	// no validation rules for DepositReportingCurrency
-
-	// no validation rules for WithdrawalReportingCurrency
-
-	// no validation rules for TurnoverReportingCurrency
-
-	// no validation rules for GgrReportingCurrency
-
-	// no validation rules for NgrReportingCurrency
-
-	// no validation rules for B2CReportingCurrency
-
-	// no validation rules for PaymentCostReportingCurrency
-
-	// no validation rules for ProviderRoyaltiesReportingCurrency
-
-	// no validation rules for LastLoginTime
-
-	// no validation rules for DeviceId
-
-	// no validation rules for Ip
-
-	if len(errors) > 0 {
-		return ContributionReportItemMultiError(errors)
-	}
-
-	return nil
-}
-
-// ContributionReportItemMultiError is an error wrapping multiple validation
-// errors returned by ContributionReportItem.ValidateAll() if the designated
-// constraints aren't met.
-type ContributionReportItemMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ContributionReportItemMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ContributionReportItemMultiError) AllErrors() []error { return m }
-
-// ContributionReportItemValidationError is the validation error returned by
-// ContributionReportItem.Validate if the designated constraints aren't met.
-type ContributionReportItemValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ContributionReportItemValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ContributionReportItemValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ContributionReportItemValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ContributionReportItemValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ContributionReportItemValidationError) ErrorName() string {
-	return "ContributionReportItemValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ContributionReportItemValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sContributionReportItem.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ContributionReportItemValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ContributionReportItemValidationError{}
-
-// Validate checks the field values on ListReferralContributionReportResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *ListReferralContributionReportResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// ListReferralContributionReportResponse with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// ListReferralContributionReportResponseMultiError, or nil if none found.
-func (m *ListReferralContributionReportResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListReferralContributionReportResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	for idx, item := range m.GetItems() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListReferralContributionReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListReferralContributionReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListReferralContributionReportResponseValidationError{
-					field:  fmt.Sprintf("Items[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for Page
-
-	// no validation rules for PageSize
-
-	// no validation rules for Total
-
-	if len(errors) > 0 {
-		return ListReferralContributionReportResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListReferralContributionReportResponseMultiError is an error wrapping
-// multiple validation errors returned by
-// ListReferralContributionReportResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListReferralContributionReportResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListReferralContributionReportResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListReferralContributionReportResponseMultiError) AllErrors() []error { return m }
-
-// ListReferralContributionReportResponseValidationError is the validation
-// error returned by ListReferralContributionReportResponse.Validate if the
-// designated constraints aren't met.
-type ListReferralContributionReportResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListReferralContributionReportResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListReferralContributionReportResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListReferralContributionReportResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListReferralContributionReportResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListReferralContributionReportResponseValidationError) ErrorName() string {
-	return "ListReferralContributionReportResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListReferralContributionReportResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListReferralContributionReportResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListReferralContributionReportResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListReferralContributionReportResponseValidationError{}
-
 // Validate checks the field values on ListReferralLifetimeReportRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -6831,72 +5300,83 @@ var _ interface {
 	ErrorName() string
 } = ListReferralLifetimeReportRequestValidationError{}
 
-// Validate checks the field values on LifetimeReportItem with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ListAffiliateVTGReportRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *LifetimeReportItem) Validate() error {
+func (m *ListAffiliateVTGReportRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on LifetimeReportItem with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// LifetimeReportItemMultiError, or nil if none found.
-func (m *LifetimeReportItem) ValidateAll() error {
+// ValidateAll checks the field values on ListAffiliateVTGReportRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListAffiliateVTGReportRequestMultiError, or nil if none found.
+func (m *ListAffiliateVTGReportRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *LifetimeReportItem) validate(all bool) error {
+func (m *ListAffiliateVTGReportRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Uid
+	// no validation rules for Period
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAffiliateVTGReportRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAffiliateVTGReportRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAffiliateVTGReportRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for SystemOperatorId
+	// no validation rules for Dimension
 
-	// no validation rules for CompanyOperatorId
+	if m.Page != nil {
+		// no validation rules for Page
+	}
 
-	// no validation rules for RetailerOperatorId
-
-	// no validation rules for ConversionRewardUsd
-
-	// no validation rules for DepositCashbackUsd
-
-	// no validation rules for WageringCommissionUsd
-
-	// no validation rules for LossRevenueShareUsd
-
-	// no validation rules for TotalUsd
-
-	// no validation rules for ConversionRewardReportingCurrency
-
-	// no validation rules for DepositCashbackReportingCurrency
-
-	// no validation rules for WageringCommissionReportingCurrency
-
-	// no validation rules for LossRevenueShareReportingCurrency
-
-	// no validation rules for TotalReportingCurrency
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
-		return LifetimeReportItemMultiError(errors)
+		return ListAffiliateVTGReportRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// LifetimeReportItemMultiError is an error wrapping multiple validation errors
-// returned by LifetimeReportItem.ValidateAll() if the designated constraints
-// aren't met.
-type LifetimeReportItemMultiError []error
+// ListAffiliateVTGReportRequestMultiError is an error wrapping multiple
+// validation errors returned by ListAffiliateVTGReportRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListAffiliateVTGReportRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m LifetimeReportItemMultiError) Error() string {
+func (m ListAffiliateVTGReportRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6905,11 +5385,12 @@ func (m LifetimeReportItemMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m LifetimeReportItemMultiError) AllErrors() []error { return m }
+func (m ListAffiliateVTGReportRequestMultiError) AllErrors() []error { return m }
 
-// LifetimeReportItemValidationError is the validation error returned by
-// LifetimeReportItem.Validate if the designated constraints aren't met.
-type LifetimeReportItemValidationError struct {
+// ListAffiliateVTGReportRequestValidationError is the validation error
+// returned by ListAffiliateVTGReportRequest.Validate if the designated
+// constraints aren't met.
+type ListAffiliateVTGReportRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6917,24 +5398,24 @@ type LifetimeReportItemValidationError struct {
 }
 
 // Field function returns field value.
-func (e LifetimeReportItemValidationError) Field() string { return e.field }
+func (e ListAffiliateVTGReportRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e LifetimeReportItemValidationError) Reason() string { return e.reason }
+func (e ListAffiliateVTGReportRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e LifetimeReportItemValidationError) Cause() error { return e.cause }
+func (e ListAffiliateVTGReportRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e LifetimeReportItemValidationError) Key() bool { return e.key }
+func (e ListAffiliateVTGReportRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e LifetimeReportItemValidationError) ErrorName() string {
-	return "LifetimeReportItemValidationError"
+func (e ListAffiliateVTGReportRequestValidationError) ErrorName() string {
+	return "ListAffiliateVTGReportRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e LifetimeReportItemValidationError) Error() string {
+func (e ListAffiliateVTGReportRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6946,14 +5427,14 @@ func (e LifetimeReportItemValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sLifetimeReportItem.%s: %s%s",
+		"invalid %sListAffiliateVTGReportRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = LifetimeReportItemValidationError{}
+var _ error = ListAffiliateVTGReportRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -6961,86 +5442,89 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = LifetimeReportItemValidationError{}
+} = ListAffiliateVTGReportRequestValidationError{}
 
-// Validate checks the field values on ListReferralLifetimeReportResponse with
+// Validate checks the field values on ListAffiliateSnapshotReportRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *ListReferralLifetimeReportResponse) Validate() error {
+func (m *ListAffiliateSnapshotReportRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListReferralLifetimeReportResponse
+// ValidateAll checks the field values on ListAffiliateSnapshotReportRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// ListReferralLifetimeReportResponseMultiError, or nil if none found.
-func (m *ListReferralLifetimeReportResponse) ValidateAll() error {
+// ListAffiliateSnapshotReportRequestMultiError, or nil if none found.
+func (m *ListAffiliateSnapshotReportRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListReferralLifetimeReportResponse) validate(all bool) error {
+func (m *ListAffiliateSnapshotReportRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	for idx, item := range m.GetItems() {
-		_, _ = idx, item
+	// no validation rules for Period
 
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListReferralLifetimeReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListReferralLifetimeReportResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListReferralLifetimeReportResponseValidationError{
-					field:  fmt.Sprintf("Items[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAffiliateSnapshotReportRequestValidationError{
+					field:  "OperatorContextFilters",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAffiliateSnapshotReportRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAffiliateSnapshotReportRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	// no validation rules for Page
+	// no validation rules for Dimension
 
-	// no validation rules for PageSize
+	// no validation rules for OnlyNegativeCarryover
 
-	// no validation rules for Total
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
-		return ListReferralLifetimeReportResponseMultiError(errors)
+		return ListAffiliateSnapshotReportRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListReferralLifetimeReportResponseMultiError is an error wrapping multiple
+// ListAffiliateSnapshotReportRequestMultiError is an error wrapping multiple
 // validation errors returned by
-// ListReferralLifetimeReportResponse.ValidateAll() if the designated
+// ListAffiliateSnapshotReportRequest.ValidateAll() if the designated
 // constraints aren't met.
-type ListReferralLifetimeReportResponseMultiError []error
+type ListAffiliateSnapshotReportRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListReferralLifetimeReportResponseMultiError) Error() string {
+func (m ListAffiliateSnapshotReportRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -7049,12 +5533,12 @@ func (m ListReferralLifetimeReportResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListReferralLifetimeReportResponseMultiError) AllErrors() []error { return m }
+func (m ListAffiliateSnapshotReportRequestMultiError) AllErrors() []error { return m }
 
-// ListReferralLifetimeReportResponseValidationError is the validation error
-// returned by ListReferralLifetimeReportResponse.Validate if the designated
+// ListAffiliateSnapshotReportRequestValidationError is the validation error
+// returned by ListAffiliateSnapshotReportRequest.Validate if the designated
 // constraints aren't met.
-type ListReferralLifetimeReportResponseValidationError struct {
+type ListAffiliateSnapshotReportRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -7062,24 +5546,24 @@ type ListReferralLifetimeReportResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListReferralLifetimeReportResponseValidationError) Field() string { return e.field }
+func (e ListAffiliateSnapshotReportRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListReferralLifetimeReportResponseValidationError) Reason() string { return e.reason }
+func (e ListAffiliateSnapshotReportRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListReferralLifetimeReportResponseValidationError) Cause() error { return e.cause }
+func (e ListAffiliateSnapshotReportRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListReferralLifetimeReportResponseValidationError) Key() bool { return e.key }
+func (e ListAffiliateSnapshotReportRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListReferralLifetimeReportResponseValidationError) ErrorName() string {
-	return "ListReferralLifetimeReportResponseValidationError"
+func (e ListAffiliateSnapshotReportRequestValidationError) ErrorName() string {
+	return "ListAffiliateSnapshotReportRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListReferralLifetimeReportResponseValidationError) Error() string {
+func (e ListAffiliateSnapshotReportRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -7091,14 +5575,14 @@ func (e ListReferralLifetimeReportResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListReferralLifetimeReportResponse.%s: %s%s",
+		"invalid %sListAffiliateSnapshotReportRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListReferralLifetimeReportResponseValidationError{}
+var _ error = ListAffiliateSnapshotReportRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -7106,7 +5590,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListReferralLifetimeReportResponseValidationError{}
+} = ListAffiliateSnapshotReportRequestValidationError{}
 
 // Validate checks the field values on ListSummariesResponse_List with the
 // rules defined in the proto definition for this message. If any rules are

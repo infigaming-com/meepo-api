@@ -337,16 +337,16 @@ message ListReferralSnapshotReportDataRequest {
 // ReferralSnapshotReportDataItem - Single row in Snapshot report (one UID with T1-T10 data)
 message ReferralSnapshotReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
-  string date = 8;
-  int64 uid = 1;
-  int64 referral_id = 2;    // User's direct referrer
-  int64 affiliate_id = 3;   // User's affiliate
+  string date = 1;
+  int64 uid = 2;
+  int64 referral_id = 3;    // User's direct referrer
+  int64 affiliate_id = 4;   // User's affiliate
 
   // Operator context
-  int64 operator_id = 4;
-  int64 system_operator_id = 5;
-  int64 company_operator_id = 6;
-  int64 retailer_operator_id = 7;
+  int64 operator_id = 5;
+  int64 system_operator_id = 6;
+  int64 company_operator_id = 7;
+  int64 retailer_operator_id = 8;
 
   repeated ReferralSnapshotTierData tiers = 10;  // T1-T10 tier data (total_count, qualified_count, active_count, commissions)
 
@@ -406,31 +406,31 @@ message ListReferralContributionReportDataRequest {
 
 message ReferralContributionReportDataItem {
   // Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
-  string date = 40;
-  int64 root_id = 1;      // ROOT user (T0 perspective)
-  int64 parent_id = 2;    // Sub-UID's direct referrer (tier1_user_id of sub_uid)
-  int64 sub_uid = 3;      // The subordinate user
-  int32 tier = 4;         // Sub-UID's tier relative to ROOT (1-10)
+  string date = 1;
+  int64 root_id = 2;      // ROOT user (T0 perspective)
+  int64 parent_id = 3;    // Sub-UID's direct referrer (tier1_user_id of sub_uid)
+  int64 sub_uid = 4;      // The subordinate user
+  int32 tier = 5;         // Sub-UID's tier relative to ROOT (1-10)
 
-  int64 reg_date = 5;     // Registration time (from user_referral_relations.user_stats.register_at)
-  int64 ftd_date = 6;     // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
-  bool is_qualified = 7;  // Has met conversion conditions (from user_stats.has_met_conversion_conditions)
+  int64 reg_date = 6;     // Registration time (from user_referral_relations.user_stats.register_at)
+  int64 ftd_date = 7;     // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
+  bool is_qualified = 8;  // Has met conversion conditions (from user_stats.has_met_conversion_conditions)
 
   // Operator context
-  int64 operator_id = 8;
-  int64 system_operator_id = 9;
-  int64 company_operator_id = 38;
-  int64 retailer_operator_id = 39;
+  int64 operator_id = 9;
+  int64 system_operator_id = 10;
+  int64 company_operator_id = 11;
+  int64 retailer_operator_id = 12;
 
   // Financial metrics in period - USD
-  string deposit_usd = 10;
-  string withdrawal_usd = 11;
-  string turnover_usd = 12;  // Bet amount
-  string ggr_usd = 13;
-  string ngr_usd = 14;
-  string b2c_usd = 15;
-  string payment_cost_usd = 16;      // max(0, GGR * payment_channel_rate)
-  string provider_royalties_usd = 17; // max(0, GGR * third_party_game_rate)
+  string deposit_usd = 20;
+  string withdrawal_usd = 21;
+  string turnover_usd = 22;  // Bet amount
+  string ggr_usd = 23;
+  string ngr_usd = 24;
+  string b2c_usd = 25;
+  string payment_cost_usd = 26;      // max(0, GGR * payment_channel_rate)
+  string provider_royalties_usd = 27; // max(0, GGR * third_party_game_rate)
 
   // Financial metrics - Reporting Currency
   string deposit_reporting_currency = 30;
@@ -443,9 +443,9 @@ message ReferralContributionReportDataItem {
   string provider_royalties_reporting_currency = 37;
 
   // TODO: Not implemented - requires User Service integration
-  int64 last_login_time = 20;
-  string device_id = 21;
-  string ip = 22;
+  int64 last_login_time = 40;
+  string device_id = 41;
+  string ip = 42;
 }
 
 message ListReferralContributionReportDataResponse {
@@ -497,61 +497,262 @@ message ListReferralLifetimeReportDataResponse {
   int64 total = 4;
 }
 
-// ========== Affiliate Performance Report Data ==========
+// ============================================================================
+// Affiliate VTG Report Data (Vintage - New Users Performance)
+// Groups statistics by Campaign or Affiliate for users registered in period.
+// Financial data is cumulative from registration to query time.
+// ============================================================================
 
-message GetAffiliatePerformanceReportDataRequest {
-  int64 affiliate_id = 1;
-  api.backoffice.service.v1.TimeRange time_range = 2;
-  api.common.OperatorContextFilters operator_context_filters = 3;
-  api.common.OperatorContext operator_context = 4;
-  optional int64 campaign_id = 5;  // 0 or empty means all campaigns
+message ListAffiliateVTGReportDataRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;      // Internal only - injected by calling service
+  repeated int64 affiliate_ids = 4;                     // Optional: filter by Affiliate
+  repeated int64 campaign_ids = 5;                      // Optional: filter by Campaign
+  string dimension = 6;                                 // "campaign" or "affiliate"
+  optional int32 page = 7;
+  optional int32 page_size = 8;
 }
 
-message GetAffiliatePerformanceReportDataResponse {
-  int64 affiliate_id = 1;
-  int64 campaign_id = 2;
-  string campaign_name = 3;
-  string settlement_cycle = 4;  // from affiliates.invoices_period
+message AffiliateVTGReportDataItem {
+  string date = 1;                                      // Grouped date based on period
+  int64 affiliate_id = 2;
+  string affiliate_name = 3;
+  int64 campaign_id = 4;                                // Only set when dimension=campaign
+  string campaign_name = 5;
+  string settlement_cycle = 6;                          // "weekly" / "monthly"
 
-  // TODO: Not implemented - requires third-party tracking
-  int64 impressions = 10;
-  int64 clicks = 11;
-  string ctr = 12;
+  // Operator context
+  int64 operator_id = 7;
+  int64 system_operator_id = 8;
+  int64 company_operator_id = 9;
+  int64 retailer_operator_id = 10;
 
-  // Registration metrics (from affiliate_users)
-  int64 registrations_qty = 20;
-  int64 ftd_qty = 21;
-  string ftd_amount_usd = 22;
-  int64 qftd_qty = 23;  // qualified FTD
+  // User conversion (new registered users in period)
+  int64 registrations = 11;
+  int64 ftd_users = 12;
+  int64 repeat_depositors = 13;
+  string cr_reg_to_ftd = 14;                            // Conversion rate: FTD/Registrations
+  int64 qftd_users = 15;                                // Qualified FTD users
+  string cr_reg_to_qftd = 16;                           // Conversion rate: QFTD/Registrations
 
-  // Settled commissions by type (from affiliate_commissions)
-  string commission_cpa_usd = 30;
-  string commission_cpl_usd = 31;
-  string commission_rs_usd = 32;
-  string commission_flat_fee_usd = 33;
-  string commission_total_usd = 34;
+  // Financial metrics (USD) - cumulative from registration
+  string ftd_amount_usd = 17;
+  string qftd_amount_usd = 18;
+  string total_deposits_usd = 19;
+  string bonus_amount_usd = 20;
+  string total_withdrawals_usd = 21;
+  string net_deposit_usd = 22;                          // Deposits - Withdrawals
+  string pending_withdrawals_usd = 23;
 
-  // Commission status
-  string negative_carryover_usd = 40;  // from carryover_data
-  string unpaid_commission_usd = 41;   // status='approved' AND paid=false
-  string paid_commission_usd = 42;     // paid=true in period
-  string lifetime_paid_usd = 43;       // paid=true all time
+  // Account balance
+  int64 accounts_with_balance = 24;
+  string cash_balance_usd = 25;
+  string bonus_balance_usd = 26;
+  string total_balance_usd = 27;
 
-  // Financial metrics (users under this affiliate)
-  string total_deposits_usd = 50;
-  string total_withdrawals_usd = 51;
-  string ggr_usd = 52;
-  string ngr_usd = 53;
-  string bet_amount_usd = 54;
-  int64 bet_count = 55;
-  string win_amount_usd = 56;
-  string psp_fee_usd = 57;      // GGR * payment_channel_rate
-  string content_fee_usd = 58;  // GGR * third_party_game_rate
-  string roi = 59;
+  // Gaming metrics
+  string turnover_usd = 28;
+  string valid_turnover_usd = 29;
+  int64 bets = 30;
+  string bets_amount_usd = 31;
+  int64 wins = 32;
+  string wins_amount_usd = 33;
+  string avg_bet_usd = 34;
+  string ggr_usd = 35;
+  string ngr_usd = 36;
+  string net_profit_usd = 37;                           // NGR - B2C
 
-  // TODO: Not implemented
-  string rake_usd = 60;
-  string tax_usd = 61;
+  // Commission (from settled affiliate_commissions)
+  string commission_cpa_usd = 38;
+  string commission_cpl_usd = 39;
+  string commission_rs_usd = 40;
+  string commission_total_usd = 41;
+
+  // Other
+  string psp_fee_usd = 42;
+  string content_fee_usd = 43;
+  string roi = 44;                                      // NGR / Commission
+
+  // Financial metrics - Reporting Currency
+  string ftd_amount_reporting_currency = 45;
+  string qftd_amount_reporting_currency = 46;
+  string total_deposits_reporting_currency = 47;
+  string bonus_amount_reporting_currency = 48;
+  string total_withdrawals_reporting_currency = 49;
+  string net_deposit_reporting_currency = 50;
+  string pending_withdrawals_reporting_currency = 51;
+
+  // Account balance - Reporting Currency
+  string cash_balance_reporting_currency = 52;
+  string bonus_balance_reporting_currency = 53;
+  string total_balance_reporting_currency = 54;
+
+  // Gaming metrics - Reporting Currency
+  string turnover_reporting_currency = 55;
+  string valid_turnover_reporting_currency = 56;
+  string bets_amount_reporting_currency = 57;
+  string wins_amount_reporting_currency = 58;
+  string avg_bet_reporting_currency = 59;
+  string ggr_reporting_currency = 60;
+  string ngr_reporting_currency = 61;
+  string net_profit_reporting_currency = 62;
+
+  // Commission - Reporting Currency
+  string commission_cpa_reporting_currency = 63;
+  string commission_cpl_reporting_currency = 64;
+  string commission_rs_reporting_currency = 65;
+  string commission_total_reporting_currency = 66;
+
+  // Other - Reporting Currency
+  string psp_fee_reporting_currency = 67;
+  string content_fee_reporting_currency = 68;
+}
+
+message ListAffiliateVTGReportDataResponse {
+  repeated AffiliateVTGReportDataItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// ============================================================================
+// Affiliate Snapshot Report Data (Period Activity)
+// Groups statistics by Campaign or Affiliate for ALL users' activity in period.
+// Unlike VTG, this is not limited to new registrations.
+// ============================================================================
+
+message ListAffiliateSnapshotReportDataRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;      // Internal only
+  repeated int64 affiliate_ids = 4;
+  repeated int64 campaign_ids = 5;
+  string dimension = 6;                                 // "campaign" or "affiliate"
+  bool only_negative_carryover = 7;                     // Only show entries with negative carryover
+  optional int32 page = 8;
+  optional int32 page_size = 9;
+}
+
+// AffiliateCurrentPeriodGaming - Gaming data for current period
+// Used by Affiliate Service to calculate estimated commissions
+message AffiliateCurrentPeriodGaming {
+  string ggr_usd = 1;
+  string ngr_usd = 2;
+  string b2c_usd = 3;
+  string bet_amount_usd = 4;
+  int64 bet_count = 5;
+  // Reporting Currency
+  string ggr_reporting_currency = 10;
+  string ngr_reporting_currency = 11;
+  string b2c_reporting_currency = 12;
+  string bet_amount_reporting_currency = 13;
+}
+
+message AffiliateSnapshotReportDataItem {
+  string date = 1;
+  int64 affiliate_id = 2;
+  string affiliate_name = 3;
+  int64 campaign_id = 4;
+  string campaign_name = 5;
+  string settlement_cycle = 6;
+
+  // Operator context
+  int64 operator_id = 7;
+  int64 system_operator_id = 8;
+  int64 company_operator_id = 9;
+  int64 retailer_operator_id = 10;
+
+  // Exposure and clicks (not implemented - returns 0)
+  int64 impression_qty = 11;
+  int64 click = 12;
+  string ctr = 13;
+
+  // User conversion (in period)
+  int64 registrations = 14;
+  string cr_reg = 15;                                   // Registrations / Clicks
+  int64 ftd_users = 16;
+  string cr_click_to_ftd = 17;
+  string cr_reg_to_ftd = 18;
+  string ftd_amount_usd = 19;
+  int64 qftd_users = 20;
+  string cr_click_to_qftd = 21;
+  string cr_reg_to_qftd = 22;
+  string qftd_amount_usd = 23;
+
+  // Commission
+  string commission_cpa_usd = 24;
+  string commission_cpl_usd = 25;
+  string commission_rs_usd = 26;
+  string flat_fee_usd = 27;                             // Only for Affiliate dimension
+  string commission_total_usd = 28;
+  string negative_carryover_usd = 29;
+  string unpaid_commission_usd = 30;
+  string paid_commission_usd = 31;
+
+  // Financial metrics (all users' activity in period)
+  int64 total_depositors = 32;
+  string total_deposits_usd = 33;
+  string bonus_amount_usd = 34;
+  int64 total_withdrawal_users = 35;
+  string total_withdrawals_usd = 36;
+  string net_deposit_usd = 37;
+  int64 chargebacks_total = 38;
+  string chargebacks_amount_usd = 39;
+  string adjustments_amount_usd = 40;
+
+  // Gaming metrics
+  string turnover_usd = 41;
+  string valid_turnover_usd = 42;
+  int64 bets = 43;
+  string bets_amount_usd = 44;
+  int64 wins = 45;
+  string wins_amount_usd = 46;
+  string avg_bet_usd = 47;
+  string ggr_usd = 48;
+  string ngr_usd = 49;
+  string net_profit_usd = 50;
+  string roi = 51;
+  string psp_fee_usd = 52;
+  string content_fee_usd = 53;
+
+  // Current period gaming data (for Affiliate Service to calculate estimated commissions)
+  AffiliateCurrentPeriodGaming current_period_gaming = 54;
+
+  // Reporting Currency versions
+  string ftd_amount_reporting_currency = 55;
+  string qftd_amount_reporting_currency = 56;
+  string commission_cpa_reporting_currency = 57;
+  string commission_cpl_reporting_currency = 58;
+  string commission_rs_reporting_currency = 59;
+  string flat_fee_reporting_currency = 60;
+  string commission_total_reporting_currency = 61;
+  string negative_carryover_reporting_currency = 62;
+  string unpaid_commission_reporting_currency = 63;
+  string paid_commission_reporting_currency = 64;
+  string total_deposits_reporting_currency = 65;
+  string bonus_amount_reporting_currency = 66;
+  string total_withdrawals_reporting_currency = 67;
+  string net_deposit_reporting_currency = 68;
+  string chargebacks_amount_reporting_currency = 69;
+  string adjustments_amount_reporting_currency = 70;
+  string turnover_reporting_currency = 71;
+  string valid_turnover_reporting_currency = 72;
+  string bets_amount_reporting_currency = 73;
+  string wins_amount_reporting_currency = 74;
+  string avg_bet_reporting_currency = 75;
+  string ggr_reporting_currency = 76;
+  string ngr_reporting_currency = 77;
+  string net_profit_reporting_currency = 78;
+  string psp_fee_reporting_currency = 79;
+  string content_fee_reporting_currency = 80;
+}
+
+message ListAffiliateSnapshotReportDataResponse {
+  repeated AffiliateSnapshotReportDataItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
 }
 
 // ============================================================================
@@ -688,7 +889,14 @@ service ReportService {
   // Lifetime report: all-time commission totals
   rpc ListReferralLifetimeReportData(ListReferralLifetimeReportDataRequest) returns (ListReferralLifetimeReportDataResponse) {}
 
-  // GetAffiliatePerformanceReportData returns aggregated data for Affiliate Performance report
-  // NOTE: This report is deferred and may not be implemented in this phase
-  rpc GetAffiliatePerformanceReportData(GetAffiliatePerformanceReportDataRequest) returns (GetAffiliatePerformanceReportDataResponse) {}
+
+  // ============================================================================
+  // Affiliate Report APIs (Internal gRPC only, no HTTP)
+  // ============================================================================
+
+  // VTG report: new users (registered in period) performance
+  rpc ListAffiliateVTGReportData(ListAffiliateVTGReportDataRequest) returns (ListAffiliateVTGReportDataResponse) {}
+
+  // Snapshot report: all users' activity in period
+  rpc ListAffiliateSnapshotReportData(ListAffiliateSnapshotReportDataRequest) returns (ListAffiliateSnapshotReportDataResponse) {}
 }

@@ -65,6 +65,8 @@ const (
 	Affiliate_ListReferralSnapshotReport_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListReferralSnapshotReport"
 	Affiliate_ListReferralContributionReport_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListReferralContributionReport"
 	Affiliate_ListReferralLifetimeReport_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListReferralLifetimeReport"
+	Affiliate_ListAffiliateVTGReport_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAffiliateVTGReport"
+	Affiliate_ListAffiliateSnapshotReport_FullMethodName    = "/api.affiliate.service.v1.Affiliate/ListAffiliateSnapshotReport"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -125,6 +127,10 @@ type AffiliateClient interface {
 	ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error)
 	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
 	ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error)
+	// ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+	ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*ListAffiliateVTGReportResponse, error)
+	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+	ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*ListAffiliateSnapshotReportResponse, error)
 }
 
 type affiliateClient struct {
@@ -595,6 +601,26 @@ func (c *affiliateClient) ListReferralLifetimeReport(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *affiliateClient) ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*ListAffiliateVTGReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAffiliateVTGReportResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListAffiliateVTGReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*ListAffiliateSnapshotReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAffiliateSnapshotReportResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListAffiliateSnapshotReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -653,6 +679,10 @@ type AffiliateServer interface {
 	ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error)
 	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
 	ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error)
+	// ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+	ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*ListAffiliateVTGReportResponse, error)
+	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+	ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*ListAffiliateSnapshotReportResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -800,6 +830,12 @@ func (UnimplementedAffiliateServer) ListReferralContributionReport(context.Conte
 }
 func (UnimplementedAffiliateServer) ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListReferralLifetimeReport not implemented")
+}
+func (UnimplementedAffiliateServer) ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*ListAffiliateVTGReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateVTGReport not implemented")
+}
+func (UnimplementedAffiliateServer) ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*ListAffiliateSnapshotReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSnapshotReport not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1650,6 +1686,42 @@ func _Affiliate_ListReferralLifetimeReport_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ListAffiliateVTGReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateVTGReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListAffiliateVTGReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListAffiliateVTGReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListAffiliateVTGReport(ctx, req.(*ListAffiliateVTGReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListAffiliateSnapshotReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateSnapshotReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListAffiliateSnapshotReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListAffiliateSnapshotReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListAffiliateSnapshotReport(ctx, req.(*ListAffiliateSnapshotReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1840,6 +1912,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListReferralLifetimeReport",
 			Handler:    _Affiliate_ListReferralLifetimeReport_Handler,
+		},
+		{
+			MethodName: "ListAffiliateVTGReport",
+			Handler:    _Affiliate_ListAffiliateVTGReport_Handler,
+		},
+		{
+			MethodName: "ListAffiliateSnapshotReport",
+			Handler:    _Affiliate_ListAffiliateSnapshotReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

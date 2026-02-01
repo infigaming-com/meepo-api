@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/affiliate/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -38,6 +39,8 @@ const (
 	BackofficeReport_ListReferralSnapshotReport_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListReferralSnapshotReport"
 	BackofficeReport_ListReferralContributionReport_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/ListReferralContributionReport"
 	BackofficeReport_ListReferralLifetimeReport_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListReferralLifetimeReport"
+	BackofficeReport_ListAffiliateVTGReport_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListAffiliateVTGReport"
+	BackofficeReport_ListAffiliateSnapshotReport_FullMethodName    = "/api.backoffice.service.v1.BackofficeReport/ListAffiliateSnapshotReport"
 )
 
 // BackofficeReportClient is the client API for BackofficeReport service.
@@ -59,15 +62,20 @@ type BackofficeReportClient interface {
 	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
 	CustomerRecordReportDetail(ctx context.Context, in *CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*CustomerRecordReportDetailResponse, error)
-	// Commission Report APIs (Referral tables - 全民)
+	// Commission Report APIs (Referral tables)
 	// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
-	ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*ListReferralVTGReportResponse, error)
+	ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*v1.ListReferralVTGReportResponse, error)
 	// ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
-	ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportResponse, error)
+	ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*v1.ListReferralSnapshotReportResponse, error)
 	// ListReferralContributionReport returns Contribution report - Subordinate detail view
-	ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error)
+	ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*v1.ListReferralContributionReportResponse, error)
 	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
-	ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error)
+	ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*v1.ListReferralLifetimeReportResponse, error)
+	// Commission Report APIs (Affiliate tables)
+	// ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+	ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*v1.ListAffiliateVTGReportResponse, error)
+	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+	ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSnapshotReportResponse, error)
 }
 
 type backofficeReportClient struct {
@@ -228,9 +236,9 @@ func (c *backofficeReportClient) CustomerRecordReportDetail(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficeReportClient) ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*ListReferralVTGReportResponse, error) {
+func (c *backofficeReportClient) ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...grpc.CallOption) (*v1.ListReferralVTGReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReferralVTGReportResponse)
+	out := new(v1.ListReferralVTGReportResponse)
 	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralVTGReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -238,9 +246,9 @@ func (c *backofficeReportClient) ListReferralVTGReport(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeReportClient) ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*ListReferralSnapshotReportResponse, error) {
+func (c *backofficeReportClient) ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...grpc.CallOption) (*v1.ListReferralSnapshotReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReferralSnapshotReportResponse)
+	out := new(v1.ListReferralSnapshotReportResponse)
 	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralSnapshotReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -248,9 +256,9 @@ func (c *backofficeReportClient) ListReferralSnapshotReport(ctx context.Context,
 	return out, nil
 }
 
-func (c *backofficeReportClient) ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*ListReferralContributionReportResponse, error) {
+func (c *backofficeReportClient) ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...grpc.CallOption) (*v1.ListReferralContributionReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReferralContributionReportResponse)
+	out := new(v1.ListReferralContributionReportResponse)
 	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralContributionReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -258,10 +266,30 @@ func (c *backofficeReportClient) ListReferralContributionReport(ctx context.Cont
 	return out, nil
 }
 
-func (c *backofficeReportClient) ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*ListReferralLifetimeReportResponse, error) {
+func (c *backofficeReportClient) ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...grpc.CallOption) (*v1.ListReferralLifetimeReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListReferralLifetimeReportResponse)
+	out := new(v1.ListReferralLifetimeReportResponse)
 	err := c.cc.Invoke(ctx, BackofficeReport_ListReferralLifetimeReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReportClient) ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*v1.ListAffiliateVTGReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListAffiliateVTGReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListAffiliateVTGReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeReportClient) ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSnapshotReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListAffiliateSnapshotReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ListAffiliateSnapshotReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -287,15 +315,20 @@ type BackofficeReportServer interface {
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error)
-	// Commission Report APIs (Referral tables - 全民)
+	// Commission Report APIs (Referral tables)
 	// ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
-	ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error)
+	ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*v1.ListReferralVTGReportResponse, error)
 	// ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
-	ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error)
+	ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*v1.ListReferralSnapshotReportResponse, error)
 	// ListReferralContributionReport returns Contribution report - Subordinate detail view
-	ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error)
+	ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*v1.ListReferralContributionReportResponse, error)
 	// ListReferralLifetimeReport returns Lifetime report - All-time commission totals
-	ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error)
+	ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*v1.ListReferralLifetimeReportResponse, error)
+	// Commission Report APIs (Affiliate tables)
+	// ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+	ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*v1.ListAffiliateVTGReportResponse, error)
+	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+	ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*v1.ListAffiliateSnapshotReportResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
 }
 
@@ -351,17 +384,23 @@ func (UnimplementedBackofficeReportServer) ListSportEvents(context.Context, *Lis
 func (UnimplementedBackofficeReportServer) CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CustomerRecordReportDetail not implemented")
 }
-func (UnimplementedBackofficeReportServer) ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*ListReferralVTGReportResponse, error) {
+func (UnimplementedBackofficeReportServer) ListReferralVTGReport(context.Context, *ListReferralVTGReportRequest) (*v1.ListReferralVTGReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListReferralVTGReport not implemented")
 }
-func (UnimplementedBackofficeReportServer) ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*ListReferralSnapshotReportResponse, error) {
+func (UnimplementedBackofficeReportServer) ListReferralSnapshotReport(context.Context, *ListReferralSnapshotReportRequest) (*v1.ListReferralSnapshotReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListReferralSnapshotReport not implemented")
 }
-func (UnimplementedBackofficeReportServer) ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*ListReferralContributionReportResponse, error) {
+func (UnimplementedBackofficeReportServer) ListReferralContributionReport(context.Context, *ListReferralContributionReportRequest) (*v1.ListReferralContributionReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListReferralContributionReport not implemented")
 }
-func (UnimplementedBackofficeReportServer) ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*ListReferralLifetimeReportResponse, error) {
+func (UnimplementedBackofficeReportServer) ListReferralLifetimeReport(context.Context, *ListReferralLifetimeReportRequest) (*v1.ListReferralLifetimeReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListReferralLifetimeReport not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*v1.ListAffiliateVTGReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateVTGReport not implemented")
+}
+func (UnimplementedBackofficeReportServer) ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*v1.ListAffiliateSnapshotReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSnapshotReport not implemented")
 }
 func (UnimplementedBackofficeReportServer) mustEmbedUnimplementedBackofficeReportServer() {}
 func (UnimplementedBackofficeReportServer) testEmbeddedByValue()                          {}
@@ -726,6 +765,42 @@ func _BackofficeReport_ListReferralLifetimeReport_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReport_ListAffiliateVTGReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateVTGReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListAffiliateVTGReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListAffiliateVTGReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListAffiliateVTGReport(ctx, req.(*ListAffiliateVTGReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeReport_ListAffiliateSnapshotReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateSnapshotReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ListAffiliateSnapshotReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ListAffiliateSnapshotReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ListAffiliateSnapshotReport(ctx, req.(*ListAffiliateSnapshotReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeReport_ServiceDesc is the grpc.ServiceDesc for BackofficeReport service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -808,6 +883,14 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListReferralLifetimeReport",
 			Handler:    _BackofficeReport_ListReferralLifetimeReport_Handler,
+		},
+		{
+			MethodName: "ListAffiliateVTGReport",
+			Handler:    _BackofficeReport_ListAffiliateVTGReport_Handler,
+		},
+		{
+			MethodName: "ListAffiliateSnapshotReport",
+			Handler:    _BackofficeReport_ListAffiliateSnapshotReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

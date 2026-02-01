@@ -342,3 +342,235 @@ message ListReferralLifetimeReportResponse {
   int32 page_size = 3;
   int64 total = 4;
 }
+
+// ============================================================================
+// Affiliate VTG Report - New Users (registered in period) Performance
+// ============================================================================
+
+message ListAffiliateVTGReportRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;      // Injected by Backoffice Service
+  repeated int64 affiliate_ids = 4;
+  repeated int64 campaign_ids = 5;
+  string dimension = 6;                                 // "campaign" or "affiliate"
+  optional int32 page = 7;
+  optional int32 page_size = 8;
+}
+
+message AffiliateVTGReportItem {
+  string date = 1;
+  int64 affiliate_id = 2;
+  string affiliate_name = 3;
+  int64 campaign_id = 4;
+  string campaign_name = 5;
+  string settlement_cycle = 6;
+
+  // Operator context
+  int64 operator_id = 7;
+  int64 system_operator_id = 8;
+  int64 company_operator_id = 9;
+  int64 retailer_operator_id = 10;
+
+  // User conversion
+  int64 registrations = 11;
+  int64 ftd_users = 12;
+  int64 repeat_depositors = 13;
+  string cr_reg_to_ftd = 14;
+  int64 qftd_users = 15;
+  string cr_reg_to_qftd = 16;
+
+  // Financial metrics - USD
+  string ftd_amount_usd = 17;
+  string qftd_amount_usd = 18;
+  string total_deposits_usd = 19;
+  string bonus_amount_usd = 20;
+  string total_withdrawals_usd = 21;
+  string net_deposit_usd = 22;
+  string pending_withdrawals_usd = 23;
+
+  // Account balance
+  int64 accounts_with_balance = 24;
+  string cash_balance_usd = 25;
+  string bonus_balance_usd = 26;
+  string total_balance_usd = 27;
+
+  // Gaming metrics
+  string turnover_usd = 28;
+  string valid_turnover_usd = 29;
+  int64 bets = 30;
+  string bets_amount_usd = 31;
+  int64 wins = 32;
+  string wins_amount_usd = 33;
+  string avg_bet_usd = 34;
+  string ggr_usd = 35;
+  string ngr_usd = 36;
+  string net_profit_usd = 37;
+
+  // Commission
+  string commission_cpa_usd = 38;
+  string commission_cpl_usd = 39;
+  string commission_rs_usd = 40;
+  string commission_total_usd = 41;
+
+  // Other
+  string psp_fee_usd = 42;
+  string content_fee_usd = 43;
+  string roi = 44;
+
+  // Reporting Currency versions
+  string ftd_amount_reporting_currency = 45;
+  string qftd_amount_reporting_currency = 46;
+  string total_deposits_reporting_currency = 47;
+  string bonus_amount_reporting_currency = 48;
+  string total_withdrawals_reporting_currency = 49;
+  string net_deposit_reporting_currency = 50;
+  string pending_withdrawals_reporting_currency = 51;
+  string cash_balance_reporting_currency = 52;
+  string bonus_balance_reporting_currency = 53;
+  string total_balance_reporting_currency = 54;
+  string turnover_reporting_currency = 55;
+  string valid_turnover_reporting_currency = 56;
+  string bets_amount_reporting_currency = 57;
+  string wins_amount_reporting_currency = 58;
+  string avg_bet_reporting_currency = 59;
+  string ggr_reporting_currency = 60;
+  string ngr_reporting_currency = 61;
+  string net_profit_reporting_currency = 62;
+  string commission_cpa_reporting_currency = 63;
+  string commission_cpl_reporting_currency = 64;
+  string commission_rs_reporting_currency = 65;
+  string commission_total_reporting_currency = 66;
+  string psp_fee_reporting_currency = 67;
+  string content_fee_reporting_currency = 68;
+}
+
+message ListAffiliateVTGReportResponse {
+  repeated AffiliateVTGReportItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+// ============================================================================
+// Affiliate Snapshot Report - All Users' Activity in Period
+// ============================================================================
+
+message ListAffiliateSnapshotReportRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;      // Injected by Backoffice Service
+  repeated int64 affiliate_ids = 4;
+  repeated int64 campaign_ids = 5;
+  string dimension = 6;                                 // "campaign" or "affiliate"
+  bool only_negative_carryover = 7;
+  optional int32 page = 8;
+  optional int32 page_size = 9;
+}
+
+message AffiliateSnapshotReportItem {
+  string date = 1;
+  int64 affiliate_id = 2;
+  string affiliate_name = 3;
+  int64 campaign_id = 4;
+  string campaign_name = 5;
+  string settlement_cycle = 6;
+
+  // Operator context
+  int64 operator_id = 7;
+  int64 system_operator_id = 8;
+  int64 company_operator_id = 9;
+  int64 retailer_operator_id = 10;
+
+  // Exposure and clicks (not implemented)
+  int64 impression_qty = 11;
+  int64 click = 12;
+  string ctr = 13;
+
+  // User conversion
+  int64 registrations = 14;
+  string cr_reg = 15;
+  int64 ftd_users = 16;
+  string cr_click_to_ftd = 17;
+  string cr_reg_to_ftd = 18;
+  string ftd_amount_usd = 19;
+  int64 qftd_users = 20;
+  string cr_click_to_qftd = 21;
+  string cr_reg_to_qftd = 22;
+  string qftd_amount_usd = 23;
+
+  // Commission
+  string commission_cpa_usd = 24;
+  string commission_cpl_usd = 25;
+  string commission_rs_usd = 26;
+  string flat_fee_usd = 27;
+  string commission_total_usd = 28;
+  string negative_carryover_usd = 29;
+  string unpaid_commission_usd = 30;
+  string paid_commission_usd = 31;
+
+  // Estimated commission (calculated by Affiliate Service)
+  string estimated_rs_usd = 32;
+  string estimated_rs_reporting_currency = 33;
+
+  // Financial metrics
+  int64 total_depositors = 34;
+  string total_deposits_usd = 35;
+  string bonus_amount_usd = 36;
+  int64 total_withdrawal_users = 37;
+  string total_withdrawals_usd = 38;
+  string net_deposit_usd = 39;
+  int64 chargebacks_total = 40;
+  string chargebacks_amount_usd = 41;
+  string adjustments_amount_usd = 42;
+
+  // Gaming metrics
+  string turnover_usd = 43;
+  string valid_turnover_usd = 44;
+  int64 bets = 45;
+  string bets_amount_usd = 46;
+  int64 wins = 47;
+  string wins_amount_usd = 48;
+  string avg_bet_usd = 49;
+  string ggr_usd = 50;
+  string ngr_usd = 51;
+  string net_profit_usd = 52;
+  string roi = 53;
+  string psp_fee_usd = 54;
+  string content_fee_usd = 55;
+
+  // Reporting Currency versions
+  string ftd_amount_reporting_currency = 56;
+  string qftd_amount_reporting_currency = 57;
+  string commission_cpa_reporting_currency = 58;
+  string commission_cpl_reporting_currency = 59;
+  string commission_rs_reporting_currency = 60;
+  string flat_fee_reporting_currency = 61;
+  string commission_total_reporting_currency = 62;
+  string negative_carryover_reporting_currency = 63;
+  string unpaid_commission_reporting_currency = 64;
+  string paid_commission_reporting_currency = 65;
+  string total_deposits_reporting_currency = 66;
+  string bonus_amount_reporting_currency = 67;
+  string total_withdrawals_reporting_currency = 68;
+  string net_deposit_reporting_currency = 69;
+  string chargebacks_amount_reporting_currency = 70;
+  string adjustments_amount_reporting_currency = 71;
+  string turnover_reporting_currency = 72;
+  string valid_turnover_reporting_currency = 73;
+  string bets_amount_reporting_currency = 74;
+  string wins_amount_reporting_currency = 75;
+  string avg_bet_reporting_currency = 76;
+  string ggr_reporting_currency = 77;
+  string ngr_reporting_currency = 78;
+  string net_profit_reporting_currency = 79;
+  string psp_fee_reporting_currency = 80;
+  string content_fee_reporting_currency = 81;
+}
+
+message ListAffiliateSnapshotReportResponse {
+  repeated AffiliateSnapshotReportItem items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}

@@ -2217,6 +2217,1630 @@ func (x *ListReferralLifetimeReportResponse) GetTotal() int64 {
 	return 0
 }
 
+type ListAffiliateVTGReportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", "month"
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Injected by Backoffice Service
+	AffiliateIds           []int64                        `protobuf:"varint,4,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	CampaignIds            []int64                        `protobuf:"varint,5,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	Dimension              string                         `protobuf:"bytes,6,opt,name=dimension,proto3" json:"dimension,omitempty"` // "campaign" or "affiliate"
+	Page                   *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListAffiliateVTGReportRequest) Reset() {
+	*x = ListAffiliateVTGReportRequest{}
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAffiliateVTGReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAffiliateVTGReportRequest) ProtoMessage() {}
+
+func (x *ListAffiliateVTGReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAffiliateVTGReportRequest.ProtoReflect.Descriptor instead.
+func (*ListAffiliateVTGReportRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_report_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListAffiliateVTGReportRequest) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *ListAffiliateVTGReportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListAffiliateVTGReportRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListAffiliateVTGReportRequest) GetAffiliateIds() []int64 {
+	if x != nil {
+		return x.AffiliateIds
+	}
+	return nil
+}
+
+func (x *ListAffiliateVTGReportRequest) GetCampaignIds() []int64 {
+	if x != nil {
+		return x.CampaignIds
+	}
+	return nil
+}
+
+func (x *ListAffiliateVTGReportRequest) GetDimension() string {
+	if x != nil {
+		return x.Dimension
+	}
+	return ""
+}
+
+func (x *ListAffiliateVTGReportRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliateVTGReportRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type AffiliateVTGReportItem struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Date            string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	AffiliateId     int64                  `protobuf:"varint,2,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName   string                 `protobuf:"bytes,3,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	CampaignId      int64                  `protobuf:"varint,4,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	CampaignName    string                 `protobuf:"bytes,5,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	SettlementCycle string                 `protobuf:"bytes,6,opt,name=settlement_cycle,json=settlementCycle,proto3" json:"settlement_cycle,omitempty"`
+	// Operator context
+	OperatorId         int64 `protobuf:"varint,7,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64 `protobuf:"varint,8,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64 `protobuf:"varint,9,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64 `protobuf:"varint,10,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// User conversion
+	Registrations    int64  `protobuf:"varint,11,opt,name=registrations,proto3" json:"registrations,omitempty"`
+	FtdUsers         int64  `protobuf:"varint,12,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	RepeatDepositors int64  `protobuf:"varint,13,opt,name=repeat_depositors,json=repeatDepositors,proto3" json:"repeat_depositors,omitempty"`
+	CrRegToFtd       string `protobuf:"bytes,14,opt,name=cr_reg_to_ftd,json=crRegToFtd,proto3" json:"cr_reg_to_ftd,omitempty"`
+	QftdUsers        int64  `protobuf:"varint,15,opt,name=qftd_users,json=qftdUsers,proto3" json:"qftd_users,omitempty"`
+	CrRegToQftd      string `protobuf:"bytes,16,opt,name=cr_reg_to_qftd,json=crRegToQftd,proto3" json:"cr_reg_to_qftd,omitempty"`
+	// Financial metrics - USD
+	FtdAmountUsd          string `protobuf:"bytes,17,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	QftdAmountUsd         string `protobuf:"bytes,18,opt,name=qftd_amount_usd,json=qftdAmountUsd,proto3" json:"qftd_amount_usd,omitempty"`
+	TotalDepositsUsd      string `protobuf:"bytes,19,opt,name=total_deposits_usd,json=totalDepositsUsd,proto3" json:"total_deposits_usd,omitempty"`
+	BonusAmountUsd        string `protobuf:"bytes,20,opt,name=bonus_amount_usd,json=bonusAmountUsd,proto3" json:"bonus_amount_usd,omitempty"`
+	TotalWithdrawalsUsd   string `protobuf:"bytes,21,opt,name=total_withdrawals_usd,json=totalWithdrawalsUsd,proto3" json:"total_withdrawals_usd,omitempty"`
+	NetDepositUsd         string `protobuf:"bytes,22,opt,name=net_deposit_usd,json=netDepositUsd,proto3" json:"net_deposit_usd,omitempty"`
+	PendingWithdrawalsUsd string `protobuf:"bytes,23,opt,name=pending_withdrawals_usd,json=pendingWithdrawalsUsd,proto3" json:"pending_withdrawals_usd,omitempty"`
+	// Account balance
+	AccountsWithBalance int64  `protobuf:"varint,24,opt,name=accounts_with_balance,json=accountsWithBalance,proto3" json:"accounts_with_balance,omitempty"`
+	CashBalanceUsd      string `protobuf:"bytes,25,opt,name=cash_balance_usd,json=cashBalanceUsd,proto3" json:"cash_balance_usd,omitempty"`
+	BonusBalanceUsd     string `protobuf:"bytes,26,opt,name=bonus_balance_usd,json=bonusBalanceUsd,proto3" json:"bonus_balance_usd,omitempty"`
+	TotalBalanceUsd     string `protobuf:"bytes,27,opt,name=total_balance_usd,json=totalBalanceUsd,proto3" json:"total_balance_usd,omitempty"`
+	// Gaming metrics
+	TurnoverUsd      string `protobuf:"bytes,28,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	ValidTurnoverUsd string `protobuf:"bytes,29,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	Bets             int64  `protobuf:"varint,30,opt,name=bets,proto3" json:"bets,omitempty"`
+	BetsAmountUsd    string `protobuf:"bytes,31,opt,name=bets_amount_usd,json=betsAmountUsd,proto3" json:"bets_amount_usd,omitempty"`
+	Wins             int64  `protobuf:"varint,32,opt,name=wins,proto3" json:"wins,omitempty"`
+	WinsAmountUsd    string `protobuf:"bytes,33,opt,name=wins_amount_usd,json=winsAmountUsd,proto3" json:"wins_amount_usd,omitempty"`
+	AvgBetUsd        string `protobuf:"bytes,34,opt,name=avg_bet_usd,json=avgBetUsd,proto3" json:"avg_bet_usd,omitempty"`
+	GgrUsd           string `protobuf:"bytes,35,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd           string `protobuf:"bytes,36,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NetProfitUsd     string `protobuf:"bytes,37,opt,name=net_profit_usd,json=netProfitUsd,proto3" json:"net_profit_usd,omitempty"`
+	// Commission
+	CommissionCpaUsd   string `protobuf:"bytes,38,opt,name=commission_cpa_usd,json=commissionCpaUsd,proto3" json:"commission_cpa_usd,omitempty"`
+	CommissionCplUsd   string `protobuf:"bytes,39,opt,name=commission_cpl_usd,json=commissionCplUsd,proto3" json:"commission_cpl_usd,omitempty"`
+	CommissionRsUsd    string `protobuf:"bytes,40,opt,name=commission_rs_usd,json=commissionRsUsd,proto3" json:"commission_rs_usd,omitempty"`
+	CommissionTotalUsd string `protobuf:"bytes,41,opt,name=commission_total_usd,json=commissionTotalUsd,proto3" json:"commission_total_usd,omitempty"`
+	// Other
+	PspFeeUsd     string `protobuf:"bytes,42,opt,name=psp_fee_usd,json=pspFeeUsd,proto3" json:"psp_fee_usd,omitempty"`
+	ContentFeeUsd string `protobuf:"bytes,43,opt,name=content_fee_usd,json=contentFeeUsd,proto3" json:"content_fee_usd,omitempty"`
+	Roi           string `protobuf:"bytes,44,opt,name=roi,proto3" json:"roi,omitempty"`
+	// Reporting Currency versions
+	FtdAmountReportingCurrency          string `protobuf:"bytes,45,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	QftdAmountReportingCurrency         string `protobuf:"bytes,46,opt,name=qftd_amount_reporting_currency,json=qftdAmountReportingCurrency,proto3" json:"qftd_amount_reporting_currency,omitempty"`
+	TotalDepositsReportingCurrency      string `protobuf:"bytes,47,opt,name=total_deposits_reporting_currency,json=totalDepositsReportingCurrency,proto3" json:"total_deposits_reporting_currency,omitempty"`
+	BonusAmountReportingCurrency        string `protobuf:"bytes,48,opt,name=bonus_amount_reporting_currency,json=bonusAmountReportingCurrency,proto3" json:"bonus_amount_reporting_currency,omitempty"`
+	TotalWithdrawalsReportingCurrency   string `protobuf:"bytes,49,opt,name=total_withdrawals_reporting_currency,json=totalWithdrawalsReportingCurrency,proto3" json:"total_withdrawals_reporting_currency,omitempty"`
+	NetDepositReportingCurrency         string `protobuf:"bytes,50,opt,name=net_deposit_reporting_currency,json=netDepositReportingCurrency,proto3" json:"net_deposit_reporting_currency,omitempty"`
+	PendingWithdrawalsReportingCurrency string `protobuf:"bytes,51,opt,name=pending_withdrawals_reporting_currency,json=pendingWithdrawalsReportingCurrency,proto3" json:"pending_withdrawals_reporting_currency,omitempty"`
+	CashBalanceReportingCurrency        string `protobuf:"bytes,52,opt,name=cash_balance_reporting_currency,json=cashBalanceReportingCurrency,proto3" json:"cash_balance_reporting_currency,omitempty"`
+	BonusBalanceReportingCurrency       string `protobuf:"bytes,53,opt,name=bonus_balance_reporting_currency,json=bonusBalanceReportingCurrency,proto3" json:"bonus_balance_reporting_currency,omitempty"`
+	TotalBalanceReportingCurrency       string `protobuf:"bytes,54,opt,name=total_balance_reporting_currency,json=totalBalanceReportingCurrency,proto3" json:"total_balance_reporting_currency,omitempty"`
+	TurnoverReportingCurrency           string `protobuf:"bytes,55,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	ValidTurnoverReportingCurrency      string `protobuf:"bytes,56,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	BetsAmountReportingCurrency         string `protobuf:"bytes,57,opt,name=bets_amount_reporting_currency,json=betsAmountReportingCurrency,proto3" json:"bets_amount_reporting_currency,omitempty"`
+	WinsAmountReportingCurrency         string `protobuf:"bytes,58,opt,name=wins_amount_reporting_currency,json=winsAmountReportingCurrency,proto3" json:"wins_amount_reporting_currency,omitempty"`
+	AvgBetReportingCurrency             string `protobuf:"bytes,59,opt,name=avg_bet_reporting_currency,json=avgBetReportingCurrency,proto3" json:"avg_bet_reporting_currency,omitempty"`
+	GgrReportingCurrency                string `protobuf:"bytes,60,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrReportingCurrency                string `protobuf:"bytes,61,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	NetProfitReportingCurrency          string `protobuf:"bytes,62,opt,name=net_profit_reporting_currency,json=netProfitReportingCurrency,proto3" json:"net_profit_reporting_currency,omitempty"`
+	CommissionCpaReportingCurrency      string `protobuf:"bytes,63,opt,name=commission_cpa_reporting_currency,json=commissionCpaReportingCurrency,proto3" json:"commission_cpa_reporting_currency,omitempty"`
+	CommissionCplReportingCurrency      string `protobuf:"bytes,64,opt,name=commission_cpl_reporting_currency,json=commissionCplReportingCurrency,proto3" json:"commission_cpl_reporting_currency,omitempty"`
+	CommissionRsReportingCurrency       string `protobuf:"bytes,65,opt,name=commission_rs_reporting_currency,json=commissionRsReportingCurrency,proto3" json:"commission_rs_reporting_currency,omitempty"`
+	CommissionTotalReportingCurrency    string `protobuf:"bytes,66,opt,name=commission_total_reporting_currency,json=commissionTotalReportingCurrency,proto3" json:"commission_total_reporting_currency,omitempty"`
+	PspFeeReportingCurrency             string `protobuf:"bytes,67,opt,name=psp_fee_reporting_currency,json=pspFeeReportingCurrency,proto3" json:"psp_fee_reporting_currency,omitempty"`
+	ContentFeeReportingCurrency         string `protobuf:"bytes,68,opt,name=content_fee_reporting_currency,json=contentFeeReportingCurrency,proto3" json:"content_fee_reporting_currency,omitempty"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
+}
+
+func (x *AffiliateVTGReportItem) Reset() {
+	*x = AffiliateVTGReportItem{}
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AffiliateVTGReportItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AffiliateVTGReportItem) ProtoMessage() {}
+
+func (x *AffiliateVTGReportItem) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AffiliateVTGReportItem.ProtoReflect.Descriptor instead.
+func (*AffiliateVTGReportItem) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_report_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AffiliateVTGReportItem) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetAffiliateName() string {
+	if x != nil {
+		return x.AffiliateName
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCampaignId() int64 {
+	if x != nil {
+		return x.CampaignId
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetCampaignName() string {
+	if x != nil {
+		return x.CampaignName
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetSettlementCycle() string {
+	if x != nil {
+		return x.SettlementCycle
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetRegistrations() int64 {
+	if x != nil {
+		return x.Registrations
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetFtdUsers() int64 {
+	if x != nil {
+		return x.FtdUsers
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetRepeatDepositors() int64 {
+	if x != nil {
+		return x.RepeatDepositors
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetCrRegToFtd() string {
+	if x != nil {
+		return x.CrRegToFtd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetQftdUsers() int64 {
+	if x != nil {
+		return x.QftdUsers
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetCrRegToQftd() string {
+	if x != nil {
+		return x.CrRegToQftd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetFtdAmountUsd() string {
+	if x != nil {
+		return x.FtdAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetQftdAmountUsd() string {
+	if x != nil {
+		return x.QftdAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTotalDepositsUsd() string {
+	if x != nil {
+		return x.TotalDepositsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetBonusAmountUsd() string {
+	if x != nil {
+		return x.BonusAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTotalWithdrawalsUsd() string {
+	if x != nil {
+		return x.TotalWithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetNetDepositUsd() string {
+	if x != nil {
+		return x.NetDepositUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetPendingWithdrawalsUsd() string {
+	if x != nil {
+		return x.PendingWithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetAccountsWithBalance() int64 {
+	if x != nil {
+		return x.AccountsWithBalance
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetCashBalanceUsd() string {
+	if x != nil {
+		return x.CashBalanceUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetBonusBalanceUsd() string {
+	if x != nil {
+		return x.BonusBalanceUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTotalBalanceUsd() string {
+	if x != nil {
+		return x.TotalBalanceUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetValidTurnoverUsd() string {
+	if x != nil {
+		return x.ValidTurnoverUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetBets() int64 {
+	if x != nil {
+		return x.Bets
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetBetsAmountUsd() string {
+	if x != nil {
+		return x.BetsAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetWins() int64 {
+	if x != nil {
+		return x.Wins
+	}
+	return 0
+}
+
+func (x *AffiliateVTGReportItem) GetWinsAmountUsd() string {
+	if x != nil {
+		return x.WinsAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetAvgBetUsd() string {
+	if x != nil {
+		return x.AvgBetUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetNetProfitUsd() string {
+	if x != nil {
+		return x.NetProfitUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionCpaUsd() string {
+	if x != nil {
+		return x.CommissionCpaUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionCplUsd() string {
+	if x != nil {
+		return x.CommissionCplUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionRsUsd() string {
+	if x != nil {
+		return x.CommissionRsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionTotalUsd() string {
+	if x != nil {
+		return x.CommissionTotalUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetPspFeeUsd() string {
+	if x != nil {
+		return x.PspFeeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetContentFeeUsd() string {
+	if x != nil {
+		return x.ContentFeeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetRoi() string {
+	if x != nil {
+		return x.Roi
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetFtdAmountReportingCurrency() string {
+	if x != nil {
+		return x.FtdAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetQftdAmountReportingCurrency() string {
+	if x != nil {
+		return x.QftdAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTotalDepositsReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.BonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTotalWithdrawalsReportingCurrency() string {
+	if x != nil {
+		return x.TotalWithdrawalsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetNetDepositReportingCurrency() string {
+	if x != nil {
+		return x.NetDepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetPendingWithdrawalsReportingCurrency() string {
+	if x != nil {
+		return x.PendingWithdrawalsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCashBalanceReportingCurrency() string {
+	if x != nil {
+		return x.CashBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetBonusBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BonusBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTotalBalanceReportingCurrency() string {
+	if x != nil {
+		return x.TotalBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.TurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetBetsAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetsAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetWinsAmountReportingCurrency() string {
+	if x != nil {
+		return x.WinsAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetAvgBetReportingCurrency() string {
+	if x != nil {
+		return x.AvgBetReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetNetProfitReportingCurrency() string {
+	if x != nil {
+		return x.NetProfitReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionCpaReportingCurrency() string {
+	if x != nil {
+		return x.CommissionCpaReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionCplReportingCurrency() string {
+	if x != nil {
+		return x.CommissionCplReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionRsReportingCurrency() string {
+	if x != nil {
+		return x.CommissionRsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetCommissionTotalReportingCurrency() string {
+	if x != nil {
+		return x.CommissionTotalReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetPspFeeReportingCurrency() string {
+	if x != nil {
+		return x.PspFeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetContentFeeReportingCurrency() string {
+	if x != nil {
+		return x.ContentFeeReportingCurrency
+	}
+	return ""
+}
+
+type ListAffiliateVTGReportResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Items         []*AffiliateVTGReportItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                     `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                     `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAffiliateVTGReportResponse) Reset() {
+	*x = ListAffiliateVTGReportResponse{}
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAffiliateVTGReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAffiliateVTGReportResponse) ProtoMessage() {}
+
+func (x *ListAffiliateVTGReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAffiliateVTGReportResponse.ProtoReflect.Descriptor instead.
+func (*ListAffiliateVTGReportResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_report_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListAffiliateVTGReportResponse) GetItems() []*AffiliateVTGReportItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListAffiliateVTGReportResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliateVTGReportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAffiliateVTGReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type ListAffiliateSnapshotReportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", "month"
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Injected by Backoffice Service
+	AffiliateIds           []int64                        `protobuf:"varint,4,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
+	CampaignIds            []int64                        `protobuf:"varint,5,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	Dimension              string                         `protobuf:"bytes,6,opt,name=dimension,proto3" json:"dimension,omitempty"` // "campaign" or "affiliate"
+	OnlyNegativeCarryover  bool                           `protobuf:"varint,7,opt,name=only_negative_carryover,json=onlyNegativeCarryover,proto3" json:"only_negative_carryover,omitempty"`
+	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListAffiliateSnapshotReportRequest) Reset() {
+	*x = ListAffiliateSnapshotReportRequest{}
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAffiliateSnapshotReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAffiliateSnapshotReportRequest) ProtoMessage() {}
+
+func (x *ListAffiliateSnapshotReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAffiliateSnapshotReportRequest.ProtoReflect.Descriptor instead.
+func (*ListAffiliateSnapshotReportRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_report_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetPeriod() string {
+	if x != nil {
+		return x.Period
+	}
+	return ""
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetAffiliateIds() []int64 {
+	if x != nil {
+		return x.AffiliateIds
+	}
+	return nil
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetCampaignIds() []int64 {
+	if x != nil {
+		return x.CampaignIds
+	}
+	return nil
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetDimension() string {
+	if x != nil {
+		return x.Dimension
+	}
+	return ""
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetOnlyNegativeCarryover() bool {
+	if x != nil {
+		return x.OnlyNegativeCarryover
+	}
+	return false
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliateSnapshotReportRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type AffiliateSnapshotReportItem struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Date            string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	AffiliateId     int64                  `protobuf:"varint,2,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName   string                 `protobuf:"bytes,3,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	CampaignId      int64                  `protobuf:"varint,4,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	CampaignName    string                 `protobuf:"bytes,5,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	SettlementCycle string                 `protobuf:"bytes,6,opt,name=settlement_cycle,json=settlementCycle,proto3" json:"settlement_cycle,omitempty"`
+	// Operator context
+	OperatorId         int64 `protobuf:"varint,7,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	SystemOperatorId   int64 `protobuf:"varint,8,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	CompanyOperatorId  int64 `protobuf:"varint,9,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64 `protobuf:"varint,10,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// Exposure and clicks (not implemented)
+	ImpressionQty int64  `protobuf:"varint,11,opt,name=impression_qty,json=impressionQty,proto3" json:"impression_qty,omitempty"`
+	Click         int64  `protobuf:"varint,12,opt,name=click,proto3" json:"click,omitempty"`
+	Ctr           string `protobuf:"bytes,13,opt,name=ctr,proto3" json:"ctr,omitempty"`
+	// User conversion
+	Registrations int64  `protobuf:"varint,14,opt,name=registrations,proto3" json:"registrations,omitempty"`
+	CrReg         string `protobuf:"bytes,15,opt,name=cr_reg,json=crReg,proto3" json:"cr_reg,omitempty"`
+	FtdUsers      int64  `protobuf:"varint,16,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	CrClickToFtd  string `protobuf:"bytes,17,opt,name=cr_click_to_ftd,json=crClickToFtd,proto3" json:"cr_click_to_ftd,omitempty"`
+	CrRegToFtd    string `protobuf:"bytes,18,opt,name=cr_reg_to_ftd,json=crRegToFtd,proto3" json:"cr_reg_to_ftd,omitempty"`
+	FtdAmountUsd  string `protobuf:"bytes,19,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	QftdUsers     int64  `protobuf:"varint,20,opt,name=qftd_users,json=qftdUsers,proto3" json:"qftd_users,omitempty"`
+	CrClickToQftd string `protobuf:"bytes,21,opt,name=cr_click_to_qftd,json=crClickToQftd,proto3" json:"cr_click_to_qftd,omitempty"`
+	CrRegToQftd   string `protobuf:"bytes,22,opt,name=cr_reg_to_qftd,json=crRegToQftd,proto3" json:"cr_reg_to_qftd,omitempty"`
+	QftdAmountUsd string `protobuf:"bytes,23,opt,name=qftd_amount_usd,json=qftdAmountUsd,proto3" json:"qftd_amount_usd,omitempty"`
+	// Commission
+	CommissionCpaUsd     string `protobuf:"bytes,24,opt,name=commission_cpa_usd,json=commissionCpaUsd,proto3" json:"commission_cpa_usd,omitempty"`
+	CommissionCplUsd     string `protobuf:"bytes,25,opt,name=commission_cpl_usd,json=commissionCplUsd,proto3" json:"commission_cpl_usd,omitempty"`
+	CommissionRsUsd      string `protobuf:"bytes,26,opt,name=commission_rs_usd,json=commissionRsUsd,proto3" json:"commission_rs_usd,omitempty"`
+	FlatFeeUsd           string `protobuf:"bytes,27,opt,name=flat_fee_usd,json=flatFeeUsd,proto3" json:"flat_fee_usd,omitempty"`
+	CommissionTotalUsd   string `protobuf:"bytes,28,opt,name=commission_total_usd,json=commissionTotalUsd,proto3" json:"commission_total_usd,omitempty"`
+	NegativeCarryoverUsd string `protobuf:"bytes,29,opt,name=negative_carryover_usd,json=negativeCarryoverUsd,proto3" json:"negative_carryover_usd,omitempty"`
+	UnpaidCommissionUsd  string `protobuf:"bytes,30,opt,name=unpaid_commission_usd,json=unpaidCommissionUsd,proto3" json:"unpaid_commission_usd,omitempty"`
+	PaidCommissionUsd    string `protobuf:"bytes,31,opt,name=paid_commission_usd,json=paidCommissionUsd,proto3" json:"paid_commission_usd,omitempty"`
+	// Estimated commission (calculated by Affiliate Service)
+	EstimatedRsUsd               string `protobuf:"bytes,32,opt,name=estimated_rs_usd,json=estimatedRsUsd,proto3" json:"estimated_rs_usd,omitempty"`
+	EstimatedRsReportingCurrency string `protobuf:"bytes,33,opt,name=estimated_rs_reporting_currency,json=estimatedRsReportingCurrency,proto3" json:"estimated_rs_reporting_currency,omitempty"`
+	// Financial metrics
+	TotalDepositors      int64  `protobuf:"varint,34,opt,name=total_depositors,json=totalDepositors,proto3" json:"total_depositors,omitempty"`
+	TotalDepositsUsd     string `protobuf:"bytes,35,opt,name=total_deposits_usd,json=totalDepositsUsd,proto3" json:"total_deposits_usd,omitempty"`
+	BonusAmountUsd       string `protobuf:"bytes,36,opt,name=bonus_amount_usd,json=bonusAmountUsd,proto3" json:"bonus_amount_usd,omitempty"`
+	TotalWithdrawalUsers int64  `protobuf:"varint,37,opt,name=total_withdrawal_users,json=totalWithdrawalUsers,proto3" json:"total_withdrawal_users,omitempty"`
+	TotalWithdrawalsUsd  string `protobuf:"bytes,38,opt,name=total_withdrawals_usd,json=totalWithdrawalsUsd,proto3" json:"total_withdrawals_usd,omitempty"`
+	NetDepositUsd        string `protobuf:"bytes,39,opt,name=net_deposit_usd,json=netDepositUsd,proto3" json:"net_deposit_usd,omitempty"`
+	ChargebacksTotal     int64  `protobuf:"varint,40,opt,name=chargebacks_total,json=chargebacksTotal,proto3" json:"chargebacks_total,omitempty"`
+	ChargebacksAmountUsd string `protobuf:"bytes,41,opt,name=chargebacks_amount_usd,json=chargebacksAmountUsd,proto3" json:"chargebacks_amount_usd,omitempty"`
+	AdjustmentsAmountUsd string `protobuf:"bytes,42,opt,name=adjustments_amount_usd,json=adjustmentsAmountUsd,proto3" json:"adjustments_amount_usd,omitempty"`
+	// Gaming metrics
+	TurnoverUsd      string `protobuf:"bytes,43,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	ValidTurnoverUsd string `protobuf:"bytes,44,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	Bets             int64  `protobuf:"varint,45,opt,name=bets,proto3" json:"bets,omitempty"`
+	BetsAmountUsd    string `protobuf:"bytes,46,opt,name=bets_amount_usd,json=betsAmountUsd,proto3" json:"bets_amount_usd,omitempty"`
+	Wins             int64  `protobuf:"varint,47,opt,name=wins,proto3" json:"wins,omitempty"`
+	WinsAmountUsd    string `protobuf:"bytes,48,opt,name=wins_amount_usd,json=winsAmountUsd,proto3" json:"wins_amount_usd,omitempty"`
+	AvgBetUsd        string `protobuf:"bytes,49,opt,name=avg_bet_usd,json=avgBetUsd,proto3" json:"avg_bet_usd,omitempty"`
+	GgrUsd           string `protobuf:"bytes,50,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd           string `protobuf:"bytes,51,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NetProfitUsd     string `protobuf:"bytes,52,opt,name=net_profit_usd,json=netProfitUsd,proto3" json:"net_profit_usd,omitempty"`
+	Roi              string `protobuf:"bytes,53,opt,name=roi,proto3" json:"roi,omitempty"`
+	PspFeeUsd        string `protobuf:"bytes,54,opt,name=psp_fee_usd,json=pspFeeUsd,proto3" json:"psp_fee_usd,omitempty"`
+	ContentFeeUsd    string `protobuf:"bytes,55,opt,name=content_fee_usd,json=contentFeeUsd,proto3" json:"content_fee_usd,omitempty"`
+	// Reporting Currency versions
+	FtdAmountReportingCurrency         string `protobuf:"bytes,56,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	QftdAmountReportingCurrency        string `protobuf:"bytes,57,opt,name=qftd_amount_reporting_currency,json=qftdAmountReportingCurrency,proto3" json:"qftd_amount_reporting_currency,omitempty"`
+	CommissionCpaReportingCurrency     string `protobuf:"bytes,58,opt,name=commission_cpa_reporting_currency,json=commissionCpaReportingCurrency,proto3" json:"commission_cpa_reporting_currency,omitempty"`
+	CommissionCplReportingCurrency     string `protobuf:"bytes,59,opt,name=commission_cpl_reporting_currency,json=commissionCplReportingCurrency,proto3" json:"commission_cpl_reporting_currency,omitempty"`
+	CommissionRsReportingCurrency      string `protobuf:"bytes,60,opt,name=commission_rs_reporting_currency,json=commissionRsReportingCurrency,proto3" json:"commission_rs_reporting_currency,omitempty"`
+	FlatFeeReportingCurrency           string `protobuf:"bytes,61,opt,name=flat_fee_reporting_currency,json=flatFeeReportingCurrency,proto3" json:"flat_fee_reporting_currency,omitempty"`
+	CommissionTotalReportingCurrency   string `protobuf:"bytes,62,opt,name=commission_total_reporting_currency,json=commissionTotalReportingCurrency,proto3" json:"commission_total_reporting_currency,omitempty"`
+	NegativeCarryoverReportingCurrency string `protobuf:"bytes,63,opt,name=negative_carryover_reporting_currency,json=negativeCarryoverReportingCurrency,proto3" json:"negative_carryover_reporting_currency,omitempty"`
+	UnpaidCommissionReportingCurrency  string `protobuf:"bytes,64,opt,name=unpaid_commission_reporting_currency,json=unpaidCommissionReportingCurrency,proto3" json:"unpaid_commission_reporting_currency,omitempty"`
+	PaidCommissionReportingCurrency    string `protobuf:"bytes,65,opt,name=paid_commission_reporting_currency,json=paidCommissionReportingCurrency,proto3" json:"paid_commission_reporting_currency,omitempty"`
+	TotalDepositsReportingCurrency     string `protobuf:"bytes,66,opt,name=total_deposits_reporting_currency,json=totalDepositsReportingCurrency,proto3" json:"total_deposits_reporting_currency,omitempty"`
+	BonusAmountReportingCurrency       string `protobuf:"bytes,67,opt,name=bonus_amount_reporting_currency,json=bonusAmountReportingCurrency,proto3" json:"bonus_amount_reporting_currency,omitempty"`
+	TotalWithdrawalsReportingCurrency  string `protobuf:"bytes,68,opt,name=total_withdrawals_reporting_currency,json=totalWithdrawalsReportingCurrency,proto3" json:"total_withdrawals_reporting_currency,omitempty"`
+	NetDepositReportingCurrency        string `protobuf:"bytes,69,opt,name=net_deposit_reporting_currency,json=netDepositReportingCurrency,proto3" json:"net_deposit_reporting_currency,omitempty"`
+	ChargebacksAmountReportingCurrency string `protobuf:"bytes,70,opt,name=chargebacks_amount_reporting_currency,json=chargebacksAmountReportingCurrency,proto3" json:"chargebacks_amount_reporting_currency,omitempty"`
+	AdjustmentsAmountReportingCurrency string `protobuf:"bytes,71,opt,name=adjustments_amount_reporting_currency,json=adjustmentsAmountReportingCurrency,proto3" json:"adjustments_amount_reporting_currency,omitempty"`
+	TurnoverReportingCurrency          string `protobuf:"bytes,72,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	ValidTurnoverReportingCurrency     string `protobuf:"bytes,73,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	BetsAmountReportingCurrency        string `protobuf:"bytes,74,opt,name=bets_amount_reporting_currency,json=betsAmountReportingCurrency,proto3" json:"bets_amount_reporting_currency,omitempty"`
+	WinsAmountReportingCurrency        string `protobuf:"bytes,75,opt,name=wins_amount_reporting_currency,json=winsAmountReportingCurrency,proto3" json:"wins_amount_reporting_currency,omitempty"`
+	AvgBetReportingCurrency            string `protobuf:"bytes,76,opt,name=avg_bet_reporting_currency,json=avgBetReportingCurrency,proto3" json:"avg_bet_reporting_currency,omitempty"`
+	GgrReportingCurrency               string `protobuf:"bytes,77,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrReportingCurrency               string `protobuf:"bytes,78,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	NetProfitReportingCurrency         string `protobuf:"bytes,79,opt,name=net_profit_reporting_currency,json=netProfitReportingCurrency,proto3" json:"net_profit_reporting_currency,omitempty"`
+	PspFeeReportingCurrency            string `protobuf:"bytes,80,opt,name=psp_fee_reporting_currency,json=pspFeeReportingCurrency,proto3" json:"psp_fee_reporting_currency,omitempty"`
+	ContentFeeReportingCurrency        string `protobuf:"bytes,81,opt,name=content_fee_reporting_currency,json=contentFeeReportingCurrency,proto3" json:"content_fee_reporting_currency,omitempty"`
+	unknownFields                      protoimpl.UnknownFields
+	sizeCache                          protoimpl.SizeCache
+}
+
+func (x *AffiliateSnapshotReportItem) Reset() {
+	*x = AffiliateSnapshotReportItem{}
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AffiliateSnapshotReportItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AffiliateSnapshotReportItem) ProtoMessage() {}
+
+func (x *AffiliateSnapshotReportItem) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AffiliateSnapshotReportItem.ProtoReflect.Descriptor instead.
+func (*AffiliateSnapshotReportItem) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_report_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *AffiliateSnapshotReportItem) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetAffiliateName() string {
+	if x != nil {
+		return x.AffiliateName
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCampaignId() int64 {
+	if x != nil {
+		return x.CampaignId
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetCampaignName() string {
+	if x != nil {
+		return x.CampaignName
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetSettlementCycle() string {
+	if x != nil {
+		return x.SettlementCycle
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetImpressionQty() int64 {
+	if x != nil {
+		return x.ImpressionQty
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetClick() int64 {
+	if x != nil {
+		return x.Click
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetCtr() string {
+	if x != nil {
+		return x.Ctr
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetRegistrations() int64 {
+	if x != nil {
+		return x.Registrations
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetCrReg() string {
+	if x != nil {
+		return x.CrReg
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetFtdUsers() int64 {
+	if x != nil {
+		return x.FtdUsers
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetCrClickToFtd() string {
+	if x != nil {
+		return x.CrClickToFtd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCrRegToFtd() string {
+	if x != nil {
+		return x.CrRegToFtd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetFtdAmountUsd() string {
+	if x != nil {
+		return x.FtdAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetQftdUsers() int64 {
+	if x != nil {
+		return x.QftdUsers
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetCrClickToQftd() string {
+	if x != nil {
+		return x.CrClickToQftd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCrRegToQftd() string {
+	if x != nil {
+		return x.CrRegToQftd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetQftdAmountUsd() string {
+	if x != nil {
+		return x.QftdAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionCpaUsd() string {
+	if x != nil {
+		return x.CommissionCpaUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionCplUsd() string {
+	if x != nil {
+		return x.CommissionCplUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionRsUsd() string {
+	if x != nil {
+		return x.CommissionRsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetFlatFeeUsd() string {
+	if x != nil {
+		return x.FlatFeeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionTotalUsd() string {
+	if x != nil {
+		return x.CommissionTotalUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNegativeCarryoverUsd() string {
+	if x != nil {
+		return x.NegativeCarryoverUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetUnpaidCommissionUsd() string {
+	if x != nil {
+		return x.UnpaidCommissionUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetPaidCommissionUsd() string {
+	if x != nil {
+		return x.PaidCommissionUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetEstimatedRsUsd() string {
+	if x != nil {
+		return x.EstimatedRsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetEstimatedRsReportingCurrency() string {
+	if x != nil {
+		return x.EstimatedRsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTotalDepositors() int64 {
+	if x != nil {
+		return x.TotalDepositors
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetTotalDepositsUsd() string {
+	if x != nil {
+		return x.TotalDepositsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetBonusAmountUsd() string {
+	if x != nil {
+		return x.BonusAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTotalWithdrawalUsers() int64 {
+	if x != nil {
+		return x.TotalWithdrawalUsers
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetTotalWithdrawalsUsd() string {
+	if x != nil {
+		return x.TotalWithdrawalsUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNetDepositUsd() string {
+	if x != nil {
+		return x.NetDepositUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetChargebacksTotal() int64 {
+	if x != nil {
+		return x.ChargebacksTotal
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetChargebacksAmountUsd() string {
+	if x != nil {
+		return x.ChargebacksAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetAdjustmentsAmountUsd() string {
+	if x != nil {
+		return x.AdjustmentsAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetValidTurnoverUsd() string {
+	if x != nil {
+		return x.ValidTurnoverUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetBets() int64 {
+	if x != nil {
+		return x.Bets
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetBetsAmountUsd() string {
+	if x != nil {
+		return x.BetsAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetWins() int64 {
+	if x != nil {
+		return x.Wins
+	}
+	return 0
+}
+
+func (x *AffiliateSnapshotReportItem) GetWinsAmountUsd() string {
+	if x != nil {
+		return x.WinsAmountUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetAvgBetUsd() string {
+	if x != nil {
+		return x.AvgBetUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNetProfitUsd() string {
+	if x != nil {
+		return x.NetProfitUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetRoi() string {
+	if x != nil {
+		return x.Roi
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetPspFeeUsd() string {
+	if x != nil {
+		return x.PspFeeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetContentFeeUsd() string {
+	if x != nil {
+		return x.ContentFeeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetFtdAmountReportingCurrency() string {
+	if x != nil {
+		return x.FtdAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetQftdAmountReportingCurrency() string {
+	if x != nil {
+		return x.QftdAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionCpaReportingCurrency() string {
+	if x != nil {
+		return x.CommissionCpaReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionCplReportingCurrency() string {
+	if x != nil {
+		return x.CommissionCplReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionRsReportingCurrency() string {
+	if x != nil {
+		return x.CommissionRsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetFlatFeeReportingCurrency() string {
+	if x != nil {
+		return x.FlatFeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetCommissionTotalReportingCurrency() string {
+	if x != nil {
+		return x.CommissionTotalReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNegativeCarryoverReportingCurrency() string {
+	if x != nil {
+		return x.NegativeCarryoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetUnpaidCommissionReportingCurrency() string {
+	if x != nil {
+		return x.UnpaidCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetPaidCommissionReportingCurrency() string {
+	if x != nil {
+		return x.PaidCommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTotalDepositsReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.BonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTotalWithdrawalsReportingCurrency() string {
+	if x != nil {
+		return x.TotalWithdrawalsReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNetDepositReportingCurrency() string {
+	if x != nil {
+		return x.NetDepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetChargebacksAmountReportingCurrency() string {
+	if x != nil {
+		return x.ChargebacksAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetAdjustmentsAmountReportingCurrency() string {
+	if x != nil {
+		return x.AdjustmentsAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.TurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetBetsAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetsAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetWinsAmountReportingCurrency() string {
+	if x != nil {
+		return x.WinsAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetAvgBetReportingCurrency() string {
+	if x != nil {
+		return x.AvgBetReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetNetProfitReportingCurrency() string {
+	if x != nil {
+		return x.NetProfitReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetPspFeeReportingCurrency() string {
+	if x != nil {
+		return x.PspFeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetContentFeeReportingCurrency() string {
+	if x != nil {
+		return x.ContentFeeReportingCurrency
+	}
+	return ""
+}
+
+type ListAffiliateSnapshotReportResponse struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Items         []*AffiliateSnapshotReportItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Page          int32                          `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                          `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int64                          `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAffiliateSnapshotReportResponse) Reset() {
+	*x = ListAffiliateSnapshotReportResponse{}
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAffiliateSnapshotReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAffiliateSnapshotReportResponse) ProtoMessage() {}
+
+func (x *ListAffiliateSnapshotReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_report_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAffiliateSnapshotReportResponse.ProtoReflect.Descriptor instead.
+func (*ListAffiliateSnapshotReportResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_report_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ListAffiliateSnapshotReportResponse) GetItems() []*AffiliateSnapshotReportItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *ListAffiliateSnapshotReportResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliateSnapshotReportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAffiliateSnapshotReportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_affiliate_service_v1_commission_report_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
@@ -2466,6 +4090,203 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2,.api.affiliate.service.v1.LifetimeReportItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\x95\x03\n" +
+	"\x1dListAffiliateVTGReportRequest\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
+	"\raffiliate_ids\x18\x04 \x03(\x03R\faffiliateIds\x12!\n" +
+	"\fcampaign_ids\x18\x05 \x03(\x03R\vcampaignIds\x12\x1c\n" +
+	"\tdimension\x18\x06 \x01(\tR\tdimension\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xc3\x1a\n" +
+	"\x16AffiliateVTGReportItem\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
+	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x03 \x01(\tR\raffiliateName\x12\x1f\n" +
+	"\vcampaign_id\x18\x04 \x01(\x03R\n" +
+	"campaignId\x12#\n" +
+	"\rcampaign_name\x18\x05 \x01(\tR\fcampaignName\x12)\n" +
+	"\x10settlement_cycle\x18\x06 \x01(\tR\x0fsettlementCycle\x12\x1f\n" +
+	"\voperator_id\x18\a \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x12system_operator_id\x18\b \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\t \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\n" +
+	" \x01(\x03R\x12retailerOperatorId\x12$\n" +
+	"\rregistrations\x18\v \x01(\x03R\rregistrations\x12\x1b\n" +
+	"\tftd_users\x18\f \x01(\x03R\bftdUsers\x12+\n" +
+	"\x11repeat_depositors\x18\r \x01(\x03R\x10repeatDepositors\x12!\n" +
+	"\rcr_reg_to_ftd\x18\x0e \x01(\tR\n" +
+	"crRegToFtd\x12\x1d\n" +
+	"\n" +
+	"qftd_users\x18\x0f \x01(\x03R\tqftdUsers\x12#\n" +
+	"\x0ecr_reg_to_qftd\x18\x10 \x01(\tR\vcrRegToQftd\x12$\n" +
+	"\x0eftd_amount_usd\x18\x11 \x01(\tR\fftdAmountUsd\x12&\n" +
+	"\x0fqftd_amount_usd\x18\x12 \x01(\tR\rqftdAmountUsd\x12,\n" +
+	"\x12total_deposits_usd\x18\x13 \x01(\tR\x10totalDepositsUsd\x12(\n" +
+	"\x10bonus_amount_usd\x18\x14 \x01(\tR\x0ebonusAmountUsd\x122\n" +
+	"\x15total_withdrawals_usd\x18\x15 \x01(\tR\x13totalWithdrawalsUsd\x12&\n" +
+	"\x0fnet_deposit_usd\x18\x16 \x01(\tR\rnetDepositUsd\x126\n" +
+	"\x17pending_withdrawals_usd\x18\x17 \x01(\tR\x15pendingWithdrawalsUsd\x122\n" +
+	"\x15accounts_with_balance\x18\x18 \x01(\x03R\x13accountsWithBalance\x12(\n" +
+	"\x10cash_balance_usd\x18\x19 \x01(\tR\x0ecashBalanceUsd\x12*\n" +
+	"\x11bonus_balance_usd\x18\x1a \x01(\tR\x0fbonusBalanceUsd\x12*\n" +
+	"\x11total_balance_usd\x18\x1b \x01(\tR\x0ftotalBalanceUsd\x12!\n" +
+	"\fturnover_usd\x18\x1c \x01(\tR\vturnoverUsd\x12,\n" +
+	"\x12valid_turnover_usd\x18\x1d \x01(\tR\x10validTurnoverUsd\x12\x12\n" +
+	"\x04bets\x18\x1e \x01(\x03R\x04bets\x12&\n" +
+	"\x0fbets_amount_usd\x18\x1f \x01(\tR\rbetsAmountUsd\x12\x12\n" +
+	"\x04wins\x18  \x01(\x03R\x04wins\x12&\n" +
+	"\x0fwins_amount_usd\x18! \x01(\tR\rwinsAmountUsd\x12\x1e\n" +
+	"\vavg_bet_usd\x18\" \x01(\tR\tavgBetUsd\x12\x17\n" +
+	"\aggr_usd\x18# \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18$ \x01(\tR\x06ngrUsd\x12$\n" +
+	"\x0enet_profit_usd\x18% \x01(\tR\fnetProfitUsd\x12,\n" +
+	"\x12commission_cpa_usd\x18& \x01(\tR\x10commissionCpaUsd\x12,\n" +
+	"\x12commission_cpl_usd\x18' \x01(\tR\x10commissionCplUsd\x12*\n" +
+	"\x11commission_rs_usd\x18( \x01(\tR\x0fcommissionRsUsd\x120\n" +
+	"\x14commission_total_usd\x18) \x01(\tR\x12commissionTotalUsd\x12\x1e\n" +
+	"\vpsp_fee_usd\x18* \x01(\tR\tpspFeeUsd\x12&\n" +
+	"\x0fcontent_fee_usd\x18+ \x01(\tR\rcontentFeeUsd\x12\x10\n" +
+	"\x03roi\x18, \x01(\tR\x03roi\x12A\n" +
+	"\x1dftd_amount_reporting_currency\x18- \x01(\tR\x1aftdAmountReportingCurrency\x12C\n" +
+	"\x1eqftd_amount_reporting_currency\x18. \x01(\tR\x1bqftdAmountReportingCurrency\x12I\n" +
+	"!total_deposits_reporting_currency\x18/ \x01(\tR\x1etotalDepositsReportingCurrency\x12E\n" +
+	"\x1fbonus_amount_reporting_currency\x180 \x01(\tR\x1cbonusAmountReportingCurrency\x12O\n" +
+	"$total_withdrawals_reporting_currency\x181 \x01(\tR!totalWithdrawalsReportingCurrency\x12C\n" +
+	"\x1enet_deposit_reporting_currency\x182 \x01(\tR\x1bnetDepositReportingCurrency\x12S\n" +
+	"&pending_withdrawals_reporting_currency\x183 \x01(\tR#pendingWithdrawalsReportingCurrency\x12E\n" +
+	"\x1fcash_balance_reporting_currency\x184 \x01(\tR\x1ccashBalanceReportingCurrency\x12G\n" +
+	" bonus_balance_reporting_currency\x185 \x01(\tR\x1dbonusBalanceReportingCurrency\x12G\n" +
+	" total_balance_reporting_currency\x186 \x01(\tR\x1dtotalBalanceReportingCurrency\x12>\n" +
+	"\x1bturnover_reporting_currency\x187 \x01(\tR\x19turnoverReportingCurrency\x12I\n" +
+	"!valid_turnover_reporting_currency\x188 \x01(\tR\x1evalidTurnoverReportingCurrency\x12C\n" +
+	"\x1ebets_amount_reporting_currency\x189 \x01(\tR\x1bbetsAmountReportingCurrency\x12C\n" +
+	"\x1ewins_amount_reporting_currency\x18: \x01(\tR\x1bwinsAmountReportingCurrency\x12;\n" +
+	"\x1aavg_bet_reporting_currency\x18; \x01(\tR\x17avgBetReportingCurrency\x124\n" +
+	"\x16ggr_reporting_currency\x18< \x01(\tR\x14ggrReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18= \x01(\tR\x14ngrReportingCurrency\x12A\n" +
+	"\x1dnet_profit_reporting_currency\x18> \x01(\tR\x1anetProfitReportingCurrency\x12I\n" +
+	"!commission_cpa_reporting_currency\x18? \x01(\tR\x1ecommissionCpaReportingCurrency\x12I\n" +
+	"!commission_cpl_reporting_currency\x18@ \x01(\tR\x1ecommissionCplReportingCurrency\x12G\n" +
+	" commission_rs_reporting_currency\x18A \x01(\tR\x1dcommissionRsReportingCurrency\x12M\n" +
+	"#commission_total_reporting_currency\x18B \x01(\tR commissionTotalReportingCurrency\x12;\n" +
+	"\x1apsp_fee_reporting_currency\x18C \x01(\tR\x17pspFeeReportingCurrency\x12C\n" +
+	"\x1econtent_fee_reporting_currency\x18D \x01(\tR\x1bcontentFeeReportingCurrency\"\xaf\x01\n" +
+	"\x1eListAffiliateVTGReportResponse\x12F\n" +
+	"\x05items\x18\x01 \x03(\v20.api.affiliate.service.v1.AffiliateVTGReportItemR\x05items\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\xd2\x03\n" +
+	"\"ListAffiliateSnapshotReportRequest\x12\x16\n" +
+	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
+	"\raffiliate_ids\x18\x04 \x03(\x03R\faffiliateIds\x12!\n" +
+	"\fcampaign_ids\x18\x05 \x03(\x03R\vcampaignIds\x12\x1c\n" +
+	"\tdimension\x18\x06 \x01(\tR\tdimension\x126\n" +
+	"\x17only_negative_carryover\x18\a \x01(\bR\x15onlyNegativeCarryover\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xb2\x1f\n" +
+	"\x1bAffiliateSnapshotReportItem\x12\x12\n" +
+	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
+	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x03 \x01(\tR\raffiliateName\x12\x1f\n" +
+	"\vcampaign_id\x18\x04 \x01(\x03R\n" +
+	"campaignId\x12#\n" +
+	"\rcampaign_name\x18\x05 \x01(\tR\fcampaignName\x12)\n" +
+	"\x10settlement_cycle\x18\x06 \x01(\tR\x0fsettlementCycle\x12\x1f\n" +
+	"\voperator_id\x18\a \x01(\x03R\n" +
+	"operatorId\x12,\n" +
+	"\x12system_operator_id\x18\b \x01(\x03R\x10systemOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\t \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\n" +
+	" \x01(\x03R\x12retailerOperatorId\x12%\n" +
+	"\x0eimpression_qty\x18\v \x01(\x03R\rimpressionQty\x12\x14\n" +
+	"\x05click\x18\f \x01(\x03R\x05click\x12\x10\n" +
+	"\x03ctr\x18\r \x01(\tR\x03ctr\x12$\n" +
+	"\rregistrations\x18\x0e \x01(\x03R\rregistrations\x12\x15\n" +
+	"\x06cr_reg\x18\x0f \x01(\tR\x05crReg\x12\x1b\n" +
+	"\tftd_users\x18\x10 \x01(\x03R\bftdUsers\x12%\n" +
+	"\x0fcr_click_to_ftd\x18\x11 \x01(\tR\fcrClickToFtd\x12!\n" +
+	"\rcr_reg_to_ftd\x18\x12 \x01(\tR\n" +
+	"crRegToFtd\x12$\n" +
+	"\x0eftd_amount_usd\x18\x13 \x01(\tR\fftdAmountUsd\x12\x1d\n" +
+	"\n" +
+	"qftd_users\x18\x14 \x01(\x03R\tqftdUsers\x12'\n" +
+	"\x10cr_click_to_qftd\x18\x15 \x01(\tR\rcrClickToQftd\x12#\n" +
+	"\x0ecr_reg_to_qftd\x18\x16 \x01(\tR\vcrRegToQftd\x12&\n" +
+	"\x0fqftd_amount_usd\x18\x17 \x01(\tR\rqftdAmountUsd\x12,\n" +
+	"\x12commission_cpa_usd\x18\x18 \x01(\tR\x10commissionCpaUsd\x12,\n" +
+	"\x12commission_cpl_usd\x18\x19 \x01(\tR\x10commissionCplUsd\x12*\n" +
+	"\x11commission_rs_usd\x18\x1a \x01(\tR\x0fcommissionRsUsd\x12 \n" +
+	"\fflat_fee_usd\x18\x1b \x01(\tR\n" +
+	"flatFeeUsd\x120\n" +
+	"\x14commission_total_usd\x18\x1c \x01(\tR\x12commissionTotalUsd\x124\n" +
+	"\x16negative_carryover_usd\x18\x1d \x01(\tR\x14negativeCarryoverUsd\x122\n" +
+	"\x15unpaid_commission_usd\x18\x1e \x01(\tR\x13unpaidCommissionUsd\x12.\n" +
+	"\x13paid_commission_usd\x18\x1f \x01(\tR\x11paidCommissionUsd\x12(\n" +
+	"\x10estimated_rs_usd\x18  \x01(\tR\x0eestimatedRsUsd\x12E\n" +
+	"\x1festimated_rs_reporting_currency\x18! \x01(\tR\x1cestimatedRsReportingCurrency\x12)\n" +
+	"\x10total_depositors\x18\" \x01(\x03R\x0ftotalDepositors\x12,\n" +
+	"\x12total_deposits_usd\x18# \x01(\tR\x10totalDepositsUsd\x12(\n" +
+	"\x10bonus_amount_usd\x18$ \x01(\tR\x0ebonusAmountUsd\x124\n" +
+	"\x16total_withdrawal_users\x18% \x01(\x03R\x14totalWithdrawalUsers\x122\n" +
+	"\x15total_withdrawals_usd\x18& \x01(\tR\x13totalWithdrawalsUsd\x12&\n" +
+	"\x0fnet_deposit_usd\x18' \x01(\tR\rnetDepositUsd\x12+\n" +
+	"\x11chargebacks_total\x18( \x01(\x03R\x10chargebacksTotal\x124\n" +
+	"\x16chargebacks_amount_usd\x18) \x01(\tR\x14chargebacksAmountUsd\x124\n" +
+	"\x16adjustments_amount_usd\x18* \x01(\tR\x14adjustmentsAmountUsd\x12!\n" +
+	"\fturnover_usd\x18+ \x01(\tR\vturnoverUsd\x12,\n" +
+	"\x12valid_turnover_usd\x18, \x01(\tR\x10validTurnoverUsd\x12\x12\n" +
+	"\x04bets\x18- \x01(\x03R\x04bets\x12&\n" +
+	"\x0fbets_amount_usd\x18. \x01(\tR\rbetsAmountUsd\x12\x12\n" +
+	"\x04wins\x18/ \x01(\x03R\x04wins\x12&\n" +
+	"\x0fwins_amount_usd\x180 \x01(\tR\rwinsAmountUsd\x12\x1e\n" +
+	"\vavg_bet_usd\x181 \x01(\tR\tavgBetUsd\x12\x17\n" +
+	"\aggr_usd\x182 \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x183 \x01(\tR\x06ngrUsd\x12$\n" +
+	"\x0enet_profit_usd\x184 \x01(\tR\fnetProfitUsd\x12\x10\n" +
+	"\x03roi\x185 \x01(\tR\x03roi\x12\x1e\n" +
+	"\vpsp_fee_usd\x186 \x01(\tR\tpspFeeUsd\x12&\n" +
+	"\x0fcontent_fee_usd\x187 \x01(\tR\rcontentFeeUsd\x12A\n" +
+	"\x1dftd_amount_reporting_currency\x188 \x01(\tR\x1aftdAmountReportingCurrency\x12C\n" +
+	"\x1eqftd_amount_reporting_currency\x189 \x01(\tR\x1bqftdAmountReportingCurrency\x12I\n" +
+	"!commission_cpa_reporting_currency\x18: \x01(\tR\x1ecommissionCpaReportingCurrency\x12I\n" +
+	"!commission_cpl_reporting_currency\x18; \x01(\tR\x1ecommissionCplReportingCurrency\x12G\n" +
+	" commission_rs_reporting_currency\x18< \x01(\tR\x1dcommissionRsReportingCurrency\x12=\n" +
+	"\x1bflat_fee_reporting_currency\x18= \x01(\tR\x18flatFeeReportingCurrency\x12M\n" +
+	"#commission_total_reporting_currency\x18> \x01(\tR commissionTotalReportingCurrency\x12Q\n" +
+	"%negative_carryover_reporting_currency\x18? \x01(\tR\"negativeCarryoverReportingCurrency\x12O\n" +
+	"$unpaid_commission_reporting_currency\x18@ \x01(\tR!unpaidCommissionReportingCurrency\x12K\n" +
+	"\"paid_commission_reporting_currency\x18A \x01(\tR\x1fpaidCommissionReportingCurrency\x12I\n" +
+	"!total_deposits_reporting_currency\x18B \x01(\tR\x1etotalDepositsReportingCurrency\x12E\n" +
+	"\x1fbonus_amount_reporting_currency\x18C \x01(\tR\x1cbonusAmountReportingCurrency\x12O\n" +
+	"$total_withdrawals_reporting_currency\x18D \x01(\tR!totalWithdrawalsReportingCurrency\x12C\n" +
+	"\x1enet_deposit_reporting_currency\x18E \x01(\tR\x1bnetDepositReportingCurrency\x12Q\n" +
+	"%chargebacks_amount_reporting_currency\x18F \x01(\tR\"chargebacksAmountReportingCurrency\x12Q\n" +
+	"%adjustments_amount_reporting_currency\x18G \x01(\tR\"adjustmentsAmountReportingCurrency\x12>\n" +
+	"\x1bturnover_reporting_currency\x18H \x01(\tR\x19turnoverReportingCurrency\x12I\n" +
+	"!valid_turnover_reporting_currency\x18I \x01(\tR\x1evalidTurnoverReportingCurrency\x12C\n" +
+	"\x1ebets_amount_reporting_currency\x18J \x01(\tR\x1bbetsAmountReportingCurrency\x12C\n" +
+	"\x1ewins_amount_reporting_currency\x18K \x01(\tR\x1bwinsAmountReportingCurrency\x12;\n" +
+	"\x1aavg_bet_reporting_currency\x18L \x01(\tR\x17avgBetReportingCurrency\x124\n" +
+	"\x16ggr_reporting_currency\x18M \x01(\tR\x14ggrReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18N \x01(\tR\x14ngrReportingCurrency\x12A\n" +
+	"\x1dnet_profit_reporting_currency\x18O \x01(\tR\x1anetProfitReportingCurrency\x12;\n" +
+	"\x1apsp_fee_reporting_currency\x18P \x01(\tR\x17pspFeeReportingCurrency\x12C\n" +
+	"\x1econtent_fee_reporting_currency\x18Q \x01(\tR\x1bcontentFeeReportingCurrency\"\xb9\x01\n" +
+	"#ListAffiliateSnapshotReportResponse\x12K\n" +
+	"\x05items\x18\x01 \x03(\v25.api.affiliate.service.v1.AffiliateSnapshotReportItemR\x05items\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x03R\x05totalBY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
@@ -2481,7 +4302,7 @@ func file_affiliate_service_v1_commission_report_proto_rawDescGZIP() []byte {
 	return file_affiliate_service_v1_commission_report_proto_rawDescData
 }
 
-var file_affiliate_service_v1_commission_report_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_affiliate_service_v1_commission_report_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_affiliate_service_v1_commission_report_proto_goTypes = []any{
 	(*ListReferralVTGReportRequest)(nil),           // 0: api.affiliate.service.v1.ListReferralVTGReportRequest
 	(*VTGTierData)(nil),                            // 1: api.affiliate.service.v1.VTGTierData
@@ -2499,31 +4320,43 @@ var file_affiliate_service_v1_commission_report_proto_goTypes = []any{
 	(*ListReferralLifetimeReportRequest)(nil),      // 13: api.affiliate.service.v1.ListReferralLifetimeReportRequest
 	(*LifetimeReportItem)(nil),                     // 14: api.affiliate.service.v1.LifetimeReportItem
 	(*ListReferralLifetimeReportResponse)(nil),     // 15: api.affiliate.service.v1.ListReferralLifetimeReportResponse
-	(*common.OperatorContextFilters)(nil),          // 16: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                 // 17: api.common.OperatorContext
+	(*ListAffiliateVTGReportRequest)(nil),          // 16: api.affiliate.service.v1.ListAffiliateVTGReportRequest
+	(*AffiliateVTGReportItem)(nil),                 // 17: api.affiliate.service.v1.AffiliateVTGReportItem
+	(*ListAffiliateVTGReportResponse)(nil),         // 18: api.affiliate.service.v1.ListAffiliateVTGReportResponse
+	(*ListAffiliateSnapshotReportRequest)(nil),     // 19: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest
+	(*AffiliateSnapshotReportItem)(nil),            // 20: api.affiliate.service.v1.AffiliateSnapshotReportItem
+	(*ListAffiliateSnapshotReportResponse)(nil),    // 21: api.affiliate.service.v1.ListAffiliateSnapshotReportResponse
+	(*common.OperatorContextFilters)(nil),          // 22: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                 // 23: api.common.OperatorContext
 }
 var file_affiliate_service_v1_commission_report_proto_depIdxs = []int32{
-	16, // 0: api.affiliate.service.v1.ListReferralVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	17, // 1: api.affiliate.service.v1.ListReferralVTGReportRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 0: api.affiliate.service.v1.ListReferralVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 1: api.affiliate.service.v1.ListReferralVTGReportRequest.operator_context:type_name -> api.common.OperatorContext
 	1,  // 2: api.affiliate.service.v1.VTGReportItem.tiers:type_name -> api.affiliate.service.v1.VTGTierData
 	2,  // 3: api.affiliate.service.v1.ListReferralVTGReportResponse.items:type_name -> api.affiliate.service.v1.VTGReportItem
-	16, // 4: api.affiliate.service.v1.ListReferralSnapshotReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	17, // 5: api.affiliate.service.v1.ListReferralSnapshotReportRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 4: api.affiliate.service.v1.ListReferralSnapshotReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 5: api.affiliate.service.v1.ListReferralSnapshotReportRequest.operator_context:type_name -> api.common.OperatorContext
 	5,  // 6: api.affiliate.service.v1.SnapshotReportItem.tiers:type_name -> api.affiliate.service.v1.SnapshotTierData
 	6,  // 7: api.affiliate.service.v1.SnapshotReportItem.t1_gaming:type_name -> api.affiliate.service.v1.T1GamingData
 	7,  // 8: api.affiliate.service.v1.SnapshotReportItem.negative_carryover:type_name -> api.affiliate.service.v1.TierCarryover
 	8,  // 9: api.affiliate.service.v1.ListReferralSnapshotReportResponse.items:type_name -> api.affiliate.service.v1.SnapshotReportItem
-	16, // 10: api.affiliate.service.v1.ListReferralContributionReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	17, // 11: api.affiliate.service.v1.ListReferralContributionReportRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 10: api.affiliate.service.v1.ListReferralContributionReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 11: api.affiliate.service.v1.ListReferralContributionReportRequest.operator_context:type_name -> api.common.OperatorContext
 	11, // 12: api.affiliate.service.v1.ListReferralContributionReportResponse.items:type_name -> api.affiliate.service.v1.ContributionReportItem
-	16, // 13: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	17, // 14: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 13: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 14: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context:type_name -> api.common.OperatorContext
 	14, // 15: api.affiliate.service.v1.ListReferralLifetimeReportResponse.items:type_name -> api.affiliate.service.v1.LifetimeReportItem
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	22, // 16: api.affiliate.service.v1.ListAffiliateVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 17: api.affiliate.service.v1.ListAffiliateVTGReportRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 18: api.affiliate.service.v1.ListAffiliateVTGReportResponse.items:type_name -> api.affiliate.service.v1.AffiliateVTGReportItem
+	22, // 19: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 20: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 21: api.affiliate.service.v1.ListAffiliateSnapshotReportResponse.items:type_name -> api.affiliate.service.v1.AffiliateSnapshotReportItem
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_commission_report_proto_init() }
@@ -2535,13 +4368,15 @@ func file_affiliate_service_v1_commission_report_proto_init() {
 	file_affiliate_service_v1_commission_report_proto_msgTypes[4].OneofWrappers = []any{}
 	file_affiliate_service_v1_commission_report_proto_msgTypes[10].OneofWrappers = []any{}
 	file_affiliate_service_v1_commission_report_proto_msgTypes[13].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_report_proto_msgTypes[16].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_report_proto_msgTypes[19].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_commission_report_proto_rawDesc), len(file_affiliate_service_v1_commission_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
