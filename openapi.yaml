@@ -23709,6 +23709,8 @@ components:
                 reviewDuration:
                     type: integer
                     format: int32
+                operatorMode:
+                    type: string
         api.user.service.v1.AddOperatorApexDomainResponse:
             type: object
             properties:
