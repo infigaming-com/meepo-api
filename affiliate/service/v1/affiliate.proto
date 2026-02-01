@@ -4,6 +4,7 @@ package api.affiliate.service.v1;
 
 import "google/api/annotations.proto";
 import "affiliate/service/v1/commission_plan.proto";
+import "affiliate/service/v1/commission_report.proto";
 import "affiliate/service/v1/referral_plan.proto";
 import "common/common.proto";
 
@@ -164,6 +165,28 @@ service Affiliate {
 
     // GetAffiliateTrend returns time series data for trend visualization
     rpc GetAffiliateTrend(GetAffiliateTrendRequest) returns (GetAffiliateTrendResponse) {}
+
+    // -------------- Referral Report --------------
+
+    // ListReferralVTGReport returns VTG report - New subordinates performance
+    rpc ListReferralVTGReport(ListReferralVTGReportRequest) returns (ListReferralVTGReportResponse) {}
+
+    // ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+    rpc ListReferralSnapshotReport(ListReferralSnapshotReportRequest) returns (ListReferralSnapshotReportResponse) {}
+
+    // ListReferralContributionReport returns Contribution report - Subordinate detail view
+    rpc ListReferralContributionReport(ListReferralContributionReportRequest) returns (ListReferralContributionReportResponse) {}
+
+    // ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+    rpc ListReferralLifetimeReport(ListReferralLifetimeReportRequest) returns (ListReferralLifetimeReportResponse) {}
+
+    // -------------- Affiliate Report --------------
+
+    // ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+    rpc ListAffiliateVTGReport(ListAffiliateVTGReportRequest) returns (ListAffiliateVTGReportResponse) {}
+
+    // ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+    rpc ListAffiliateSnapshotReport(ListAffiliateSnapshotReportRequest) returns (ListAffiliateSnapshotReportResponse) {}
 
 }
 

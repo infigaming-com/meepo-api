@@ -1509,6 +1509,124 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.PurgeCloudflareCacheResponse'
+    /v1/backoffice/commission/affiliate/snapshot/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+            operationId: BackofficeReport_ListAffiliateSnapshotReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateSnapshotReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateSnapshotReportResponse'
+    /v1/backoffice/commission/affiliate/vtg/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: |-
+                Commission Report APIs (Affiliate tables)
+                 ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+            operationId: BackofficeReport_ListAffiliateVTGReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateVTGReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateVTGReportResponse'
+    /v1/backoffice/commission/referral/contribution/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListReferralContributionReport returns Contribution report - Subordinate detail view
+            operationId: BackofficeReport_ListReferralContributionReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralContributionReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralContributionReportResponse'
+    /v1/backoffice/commission/referral/lifetime/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+            operationId: BackofficeReport_ListReferralLifetimeReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralLifetimeReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralLifetimeReportResponse'
+    /v1/backoffice/commission/referral/snapshot/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+            operationId: BackofficeReport_ListReferralSnapshotReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralSnapshotReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralSnapshotReportResponse'
+    /v1/backoffice/commission/referral/vtg/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: |-
+                Commission Report APIs (Referral tables)
+                 ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+            operationId: BackofficeReport_ListReferralVTGReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralVTGReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralVTGReportResponse'
     /v1/backoffice/company/register:
         post:
             tags:
@@ -8825,6 +8943,342 @@ components:
                         type: string
                 internalInfo:
                     type: string
+        api.affiliate.service.v1.AffiliateSnapshotReportItem:
+            type: object
+            properties:
+                date:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                campaignId:
+                    type: string
+                campaignName:
+                    type: string
+                settlementCycle:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator context
+                systemOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                impressionQty:
+                    type: string
+                    description: Exposure and clicks (not implemented)
+                click:
+                    type: string
+                ctr:
+                    type: string
+                registrations:
+                    type: string
+                    description: User conversion
+                crReg:
+                    type: string
+                ftdUsers:
+                    type: string
+                crClickToFtd:
+                    type: string
+                crRegToFtd:
+                    type: string
+                ftdAmountUsd:
+                    type: string
+                qftdUsers:
+                    type: string
+                crClickToQftd:
+                    type: string
+                crRegToQftd:
+                    type: string
+                qftdAmountUsd:
+                    type: string
+                commissionCpaUsd:
+                    type: string
+                    description: Commission
+                commissionCplUsd:
+                    type: string
+                commissionRsUsd:
+                    type: string
+                flatFeeUsd:
+                    type: string
+                commissionTotalUsd:
+                    type: string
+                negativeCarryoverUsd:
+                    type: string
+                unpaidCommissionUsd:
+                    type: string
+                paidCommissionUsd:
+                    type: string
+                estimatedRsUsd:
+                    type: string
+                    description: Estimated commission (calculated by Affiliate Service)
+                estimatedRsReportingCurrency:
+                    type: string
+                totalDepositors:
+                    type: string
+                    description: Financial metrics
+                totalDepositsUsd:
+                    type: string
+                bonusAmountUsd:
+                    type: string
+                totalWithdrawalUsers:
+                    type: string
+                totalWithdrawalsUsd:
+                    type: string
+                netDepositUsd:
+                    type: string
+                chargebacksTotal:
+                    type: string
+                chargebacksAmountUsd:
+                    type: string
+                adjustmentsAmountUsd:
+                    type: string
+                turnoverUsd:
+                    type: string
+                    description: Gaming metrics
+                validTurnoverUsd:
+                    type: string
+                bets:
+                    type: string
+                betsAmountUsd:
+                    type: string
+                wins:
+                    type: string
+                winsAmountUsd:
+                    type: string
+                avgBetUsd:
+                    type: string
+                ggrUsd:
+                    type: string
+                ngrUsd:
+                    type: string
+                netProfitUsd:
+                    type: string
+                roi:
+                    type: string
+                pspFeeUsd:
+                    type: string
+                contentFeeUsd:
+                    type: string
+                ftdAmountReportingCurrency:
+                    type: string
+                    description: Reporting Currency versions
+                qftdAmountReportingCurrency:
+                    type: string
+                commissionCpaReportingCurrency:
+                    type: string
+                commissionCplReportingCurrency:
+                    type: string
+                commissionRsReportingCurrency:
+                    type: string
+                flatFeeReportingCurrency:
+                    type: string
+                commissionTotalReportingCurrency:
+                    type: string
+                negativeCarryoverReportingCurrency:
+                    type: string
+                unpaidCommissionReportingCurrency:
+                    type: string
+                paidCommissionReportingCurrency:
+                    type: string
+                totalDepositsReportingCurrency:
+                    type: string
+                bonusAmountReportingCurrency:
+                    type: string
+                totalWithdrawalsReportingCurrency:
+                    type: string
+                netDepositReportingCurrency:
+                    type: string
+                chargebacksAmountReportingCurrency:
+                    type: string
+                adjustmentsAmountReportingCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                validTurnoverReportingCurrency:
+                    type: string
+                betsAmountReportingCurrency:
+                    type: string
+                winsAmountReportingCurrency:
+                    type: string
+                avgBetReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                netProfitReportingCurrency:
+                    type: string
+                pspFeeReportingCurrency:
+                    type: string
+                contentFeeReportingCurrency:
+                    type: string
+        api.affiliate.service.v1.AffiliateVTGReportItem:
+            type: object
+            properties:
+                date:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                campaignId:
+                    type: string
+                campaignName:
+                    type: string
+                settlementCycle:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator context
+                systemOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                registrations:
+                    type: string
+                    description: User conversion
+                ftdUsers:
+                    type: string
+                repeatDepositors:
+                    type: string
+                crRegToFtd:
+                    type: string
+                qftdUsers:
+                    type: string
+                crRegToQftd:
+                    type: string
+                ftdAmountUsd:
+                    type: string
+                    description: Financial metrics - USD
+                qftdAmountUsd:
+                    type: string
+                totalDepositsUsd:
+                    type: string
+                bonusAmountUsd:
+                    type: string
+                totalWithdrawalsUsd:
+                    type: string
+                netDepositUsd:
+                    type: string
+                pendingWithdrawalsUsd:
+                    type: string
+                accountsWithBalance:
+                    type: string
+                    description: Account balance
+                cashBalanceUsd:
+                    type: string
+                bonusBalanceUsd:
+                    type: string
+                totalBalanceUsd:
+                    type: string
+                turnoverUsd:
+                    type: string
+                    description: Gaming metrics
+                validTurnoverUsd:
+                    type: string
+                bets:
+                    type: string
+                betsAmountUsd:
+                    type: string
+                wins:
+                    type: string
+                winsAmountUsd:
+                    type: string
+                avgBetUsd:
+                    type: string
+                ggrUsd:
+                    type: string
+                ngrUsd:
+                    type: string
+                netProfitUsd:
+                    type: string
+                commissionCpaUsd:
+                    type: string
+                    description: Commission
+                commissionCplUsd:
+                    type: string
+                commissionRsUsd:
+                    type: string
+                commissionTotalUsd:
+                    type: string
+                pspFeeUsd:
+                    type: string
+                    description: Other
+                contentFeeUsd:
+                    type: string
+                roi:
+                    type: string
+                ftdAmountReportingCurrency:
+                    type: string
+                    description: Reporting Currency versions
+                qftdAmountReportingCurrency:
+                    type: string
+                totalDepositsReportingCurrency:
+                    type: string
+                bonusAmountReportingCurrency:
+                    type: string
+                totalWithdrawalsReportingCurrency:
+                    type: string
+                netDepositReportingCurrency:
+                    type: string
+                pendingWithdrawalsReportingCurrency:
+                    type: string
+                cashBalanceReportingCurrency:
+                    type: string
+                bonusBalanceReportingCurrency:
+                    type: string
+                totalBalanceReportingCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                validTurnoverReportingCurrency:
+                    type: string
+                betsAmountReportingCurrency:
+                    type: string
+                winsAmountReportingCurrency:
+                    type: string
+                avgBetReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                netProfitReportingCurrency:
+                    type: string
+                commissionCpaReportingCurrency:
+                    type: string
+                commissionCplReportingCurrency:
+                    type: string
+                commissionRsReportingCurrency:
+                    type: string
+                commissionTotalReportingCurrency:
+                    type: string
+                pspFeeReportingCurrency:
+                    type: string
+                contentFeeReportingCurrency:
+                    type: string
         api.affiliate.service.v1.BillDetail_BillItem:
             type: object
             properties:
@@ -9031,6 +9485,86 @@ components:
                     type: string
                 contactValue:
                     type: string
+        api.affiliate.service.v1.ContributionReportItem:
+            type: object
+            properties:
+                date:
+                    type: string
+                    description: Grouped date based on period
+                rootId:
+                    type: string
+                parentId:
+                    type: string
+                subUid:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                regDate:
+                    type: string
+                ftdDate:
+                    type: string
+                isQualified:
+                    type: boolean
+                operatorId:
+                    type: string
+                    description: Operator context
+                systemOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                depositUsd:
+                    type: string
+                    description: Financial metrics in period - USD
+                withdrawalUsd:
+                    type: string
+                turnoverUsd:
+                    type: string
+                ggrUsd:
+                    type: string
+                ngrUsd:
+                    type: string
+                b2cUsd:
+                    type: string
+                paymentCostUsd:
+                    type: string
+                providerRoyaltiesUsd:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                    description: Financial metrics - Reporting Currency
+                withdrawalReportingCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                b2cReportingCurrency:
+                    type: string
+                paymentCostReportingCurrency:
+                    type: string
+                providerRoyaltiesReportingCurrency:
+                    type: string
+                lastLoginTime:
+                    type: string
+                    description: Not implemented (requires User Service integration)
+                deviceId:
+                    type: string
+                ip:
+                    type: string
+            description: ContributionReportItem - Single subordinate detail
         api.affiliate.service.v1.ConversionConditions:
             type: object
             properties:
@@ -9696,6 +10230,51 @@ components:
                     type: boolean
                 rewardAmount:
                     type: string
+        api.affiliate.service.v1.LifetimeReportItem:
+            type: object
+            properties:
+                uid:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator context
+                systemOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                conversionRewardUsd:
+                    type: string
+                    description: Commission totals - USD
+                depositCashbackUsd:
+                    type: string
+                wageringCommissionUsd:
+                    type: string
+                lossRevenueShareUsd:
+                    type: string
+                totalUsd:
+                    type: string
+                conversionRewardReportingCurrency:
+                    type: string
+                    description: Commission totals - Reporting Currency
+                depositCashbackReportingCurrency:
+                    type: string
+                wageringCommissionReportingCurrency:
+                    type: string
+                lossRevenueShareReportingCurrency:
+                    type: string
+                totalReportingCurrency:
+                    type: string
+            description: LifetimeReportItem - All-time commission totals for a user
         api.affiliate.service.v1.ListAffiliateBillsResponse:
             type: object
             properties:
@@ -9821,6 +10400,36 @@ components:
                 companyOperatorName:
                     type: string
                 retailerOperatorName:
+                    type: string
+        api.affiliate.service.v1.ListAffiliateSnapshotReportResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateSnapshotReportItem'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.affiliate.service.v1.ListAffiliateVTGReportResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateVTGReportItem'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
                     type: string
         api.affiliate.service.v1.ListAffiliatesResponse:
             type: object
@@ -10223,6 +10832,66 @@ components:
                     type: string
                 requestMethod:
                     type: string
+        api.affiliate.service.v1.ListReferralContributionReportResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ContributionReportItem'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.affiliate.service.v1.ListReferralLifetimeReportResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.LifetimeReportItem'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.affiliate.service.v1.ListReferralSnapshotReportResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.SnapshotReportItem'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
+        api.affiliate.service.v1.ListReferralVTGReportResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.VTGReportItem'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: string
         api.affiliate.service.v1.ListUserReferralRewardsRequest:
             type: object
             properties:
@@ -10600,6 +11269,174 @@ components:
         api.affiliate.service.v1.SetReferralPlanResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.SnapshotReportItem:
+            type: object
+            properties:
+                date:
+                    type: string
+                    description: Grouped date based on period
+                uid:
+                    type: string
+                currency:
+                    type: string
+                referralId:
+                    type: string
+                affiliateId:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator context
+                systemOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                tiers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.SnapshotTierData'
+                t1Gaming:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.T1GamingData'
+                    description: T1 gaming data
+                totalReferralRewardUsd:
+                    type: string
+                    description: Summary totals - USD
+                totalDepositCashbackUsd:
+                    type: string
+                totalWageringCommissionUsd:
+                    type: string
+                totalLossRevenueShareUsd:
+                    type: string
+                totalReferralRewardReportingCurrency:
+                    type: string
+                    description: Summary totals - Reporting Currency
+                totalDepositCashbackReportingCurrency:
+                    type: string
+                totalWageringCommissionReportingCurrency:
+                    type: string
+                totalLossRevenueShareReportingCurrency:
+                    type: string
+                unpaidWageringCommissionUsd:
+                    type: string
+                    description: Unpaid commissions (estimated) - USD
+                unpaidLossCommissionUsd:
+                    type: string
+                unpaidWageringCommissionReportingCurrency:
+                    type: string
+                    description: Unpaid commissions - Reporting Currency
+                unpaidLossCommissionReportingCurrency:
+                    type: string
+                unclaimedCommissionUsd:
+                    type: string
+                    description: Commission status - USD
+                lifetimeClaimedUsd:
+                    type: string
+                withdrawalAmountUsd:
+                    type: string
+                unclaimedCommissionReportingCurrency:
+                    type: string
+                    description: Commission status - Reporting Currency
+                lifetimeClaimedReportingCurrency:
+                    type: string
+                withdrawalAmountReportingCurrency:
+                    type: string
+                negativeCarryover:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.TierCarryover'
+                    description: Negative carryover per tier
+            description: SnapshotReportItem - Single row in Snapshot report
+        api.affiliate.service.v1.SnapshotTierData:
+            type: object
+            properties:
+                tier:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: string
+                    description: Count metrics
+                qualifiedCount:
+                    type: string
+                activeCount:
+                    type: string
+                referralRewardUsd:
+                    type: string
+                    description: Settled commissions in period - USD
+                depositCashbackUsd:
+                    type: string
+                wageringCommissionUsd:
+                    type: string
+                lossRevenueShareUsd:
+                    type: string
+                totalRewardUsd:
+                    type: string
+                referralRewardReportingCurrency:
+                    type: string
+                    description: Settled commissions - Reporting Currency
+                depositCashbackReportingCurrency:
+                    type: string
+                wageringCommissionReportingCurrency:
+                    type: string
+                lossRevenueShareReportingCurrency:
+                    type: string
+                totalRewardReportingCurrency:
+                    type: string
+            description: SnapshotTierData - Tier data for Snapshot report
+        api.affiliate.service.v1.T1GamingData:
+            type: object
+            properties:
+                ggrUsd:
+                    type: string
+                    description: USD
+                ngrUsd:
+                    type: string
+                b2cUsd:
+                    type: string
+                paymentCostUsd:
+                    type: string
+                providerRoyaltiesUsd:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                    description: Reporting Currency
+                ngrReportingCurrency:
+                    type: string
+                b2cReportingCurrency:
+                    type: string
+                paymentCostReportingCurrency:
+                    type: string
+                providerRoyaltiesReportingCurrency:
+                    type: string
+            description: T1GamingData - Gaming data for T1 only
+        api.affiliate.service.v1.TierCarryover:
+            type: object
+            properties:
+                tier:
+                    type: integer
+                    format: int32
+                currency:
+                    type: string
+                periodType:
+                    type: string
+                basedOn:
+                    type: string
+                ngrCarryover:
+                    type: string
+                ggrCarryover:
+                    type: string
+                b2cCarryover:
+                    type: string
+            description: TierCarryover - Negative carryover data per tier
         api.affiliate.service.v1.UpdateAffiliateResponse:
             type: object
             properties: {}
@@ -10615,6 +11452,128 @@ components:
         api.affiliate.service.v1.UpdatePostbackResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.VTGReportItem:
+            type: object
+            properties:
+                date:
+                    type: string
+                    description: 'Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)'
+                uid:
+                    type: string
+                currency:
+                    type: string
+                referralId:
+                    type: string
+                affiliateId:
+                    type: string
+                operatorId:
+                    type: string
+                    description: Operator context
+                systemOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                tiers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.VTGTierData'
+                totalRewardUsd:
+                    type: string
+                    description: Summary fields - USD
+                t1TotalRewardUsd:
+                    type: string
+                t1Roi:
+                    type: string
+                totalRewardReportingCurrency:
+                    type: string
+                    description: Summary fields - Reporting Currency
+                t1TotalRewardReportingCurrency:
+                    type: string
+            description: VTGReportItem - Single row in VTG report (one UID with T1-TN data)
+        api.affiliate.service.v1.VTGTierData:
+            type: object
+            properties:
+                tier:
+                    type: integer
+                    format: int32
+                newCount:
+                    type: string
+                    description: Count metrics (for new subordinates in period)
+                ftdCount:
+                    type: string
+                qualifiedCount:
+                    type: string
+                ftdAmountUsd:
+                    type: string
+                    description: Financial metrics for new subordinates - USD
+                depositAmountUsd:
+                    type: string
+                withdrawalAmountUsd:
+                    type: string
+                ggrUsd:
+                    type: string
+                ngrUsd:
+                    type: string
+                b2cUsd:
+                    type: string
+                betCount:
+                    type: string
+                betAmountUsd:
+                    type: string
+                avgBetUsd:
+                    type: string
+                ftdAmountReportingCurrency:
+                    type: string
+                    description: Financial metrics - Reporting Currency
+                depositAmountReportingCurrency:
+                    type: string
+                withdrawalAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                b2cReportingCurrency:
+                    type: string
+                betAmountReportingCurrency:
+                    type: string
+                avgBetReportingCurrency:
+                    type: string
+                referralRewardUsd:
+                    type: string
+                    description: Settled commissions for new subordinates - USD
+                depositCashbackUsd:
+                    type: string
+                wageringCommissionUsd:
+                    type: string
+                lossRevenueShareUsd:
+                    type: string
+                totalRewardUsd:
+                    type: string
+                referralRewardReportingCurrency:
+                    type: string
+                    description: Settled commissions - Reporting Currency
+                depositCashbackReportingCurrency:
+                    type: string
+                wageringCommissionReportingCurrency:
+                    type: string
+                lossRevenueShareReportingCurrency:
+                    type: string
+                totalRewardReportingCurrency:
+                    type: string
+            description: |-
+                VTGTierData - Tier data for VTG report (New Subordinates Performance)
+                 All fields are for NEW subordinates (relation created_at in period)
         api.affiliate.service.v1.WageringCommission:
             type: object
             properties:
@@ -14116,6 +15075,31 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListAffiliateSnapshotReportRequest:
+            type: object
+            properties:
+                period:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                campaignIds:
+                    type: array
+                    items:
+                        type: string
+                dimension:
+                    type: string
+                onlyNegativeCarryover:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliateUsersRequest:
             type: object
             properties:
@@ -14145,6 +15129,29 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ListAffiliateVTGReportRequest:
+            type: object
+            properties:
+                period:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                campaignIds:
+                    type: array
+                    items:
+                        type: string
+                dimension:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliatesRequest:
             type: object
             properties:
@@ -16141,6 +17148,107 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListReferralContributionReportRequest:
+            type: object
+            properties:
+                period:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                rootUserId:
+                    type: string
+                tiers:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                isQualified:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: Contribution Report - Subordinate Detail View
+        api.backoffice.service.v1.ListReferralLifetimeReportRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: Lifetime Report - All-time Commission Totals
+        api.backoffice.service.v1.ListReferralSnapshotReportRequest:
+            type: object
+            properties:
+                period:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                referralIds:
+                    type: array
+                    items:
+                        type: string
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                onlyNegativeCarryover:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: Snapshot Report - Cumulative + Period Activity
+        api.backoffice.service.v1.ListReferralVTGReportRequest:
+            type: object
+            properties:
+                period:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                referralIds:
+                    type: array
+                    items:
+                        type: string
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+            description: VTG Report - New Subordinates Performance
         api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
             type: object
             properties:
@@ -27614,8 +28722,10 @@ tags:
          Provides methods for managing payment methods, channels, and transactions
     - name: ReportService
       description: |-
-        ReportService provides analytics and reporting functionality via ClickHouse.
+        ============================================================================
+         ReportService provides analytics and reporting functionality via ClickHouse.
          This service is the ONLY service allowed to query ClickHouse directly.
+         ============================================================================
     - name: Review
       description: Review service provides review functionality.
     - name: User

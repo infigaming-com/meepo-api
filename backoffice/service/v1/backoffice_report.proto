@@ -10,6 +10,8 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
+import "affiliate/service/v1/commission_report.proto";
+
 service BackofficeReport {
   rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
       option (google.api.http) = {
@@ -100,6 +102,56 @@ service BackofficeReport {
 	rpc CustomerRecordReportDetail(CustomerRecordReportDetailRequest) returns (CustomerRecordReportDetailResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/customer-record/get"
+          body: "*"
+      };
+  }
+
+  // Commission Report APIs (Referral tables)
+  // ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+  rpc ListReferralVTGReport(ListReferralVTGReportRequest) returns (api.affiliate.service.v1.ListReferralVTGReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/referral/vtg/list"
+          body: "*"
+      };
+  }
+
+  // ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+  rpc ListReferralSnapshotReport(ListReferralSnapshotReportRequest) returns (api.affiliate.service.v1.ListReferralSnapshotReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/referral/snapshot/list"
+          body: "*"
+      };
+  }
+
+  // ListReferralContributionReport returns Contribution report - Subordinate detail view
+  rpc ListReferralContributionReport(ListReferralContributionReportRequest) returns (api.affiliate.service.v1.ListReferralContributionReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/referral/contribution/list"
+          body: "*"
+      };
+  }
+
+  // ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+  rpc ListReferralLifetimeReport(ListReferralLifetimeReportRequest) returns (api.affiliate.service.v1.ListReferralLifetimeReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/referral/lifetime/list"
+          body: "*"
+      };
+  }
+
+  // Commission Report APIs (Affiliate tables)
+  // ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+  rpc ListAffiliateVTGReport(ListAffiliateVTGReportRequest) returns (api.affiliate.service.v1.ListAffiliateVTGReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/affiliate/vtg/list"
+          body: "*"
+      };
+  }
+
+  // ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+  rpc ListAffiliateSnapshotReport(ListAffiliateSnapshotReportRequest) returns (api.affiliate.service.v1.ListAffiliateSnapshotReportResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/commission/affiliate/snapshot/list"
           body: "*"
       };
   }
@@ -821,5 +873,84 @@ message CustomerRecordReportDetailResponse{
 	optional PaymentTransaction payment_transaction = 2;
 	optional GameTransaction game_transaction = 3;
 	optional EventSettlementInformation event_settlement_information = 4;
-	
+
+}
+
+// ============================================================================
+// Commission Report APIs - Referral Tables (全民)
+// ============================================================================
+
+// VTG Report - New Subordinates Performance
+message ListReferralVTGReportRequest {
+  string period = 1;                                    // "day", "week", or "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 user_ids = 3;                          // Optional: filter by specific UIDs
+  repeated int64 referral_ids = 4;                      // Optional: filter by referral (tier1_user_id)
+  repeated int64 affiliate_ids = 5;                     // Optional: filter by affiliate
+  repeated string currencies = 8;                       // Filter by currencies (e.g., ["USD", "BRL"])
+  optional int32 page = 6;                              // defaults to 1
+  optional int32 page_size = 7;                         // defaults to 25
+}
+
+// Snapshot Report - Cumulative + Period Activity
+message ListReferralSnapshotReportRequest {
+  string period = 1;                                    // "day", "week", or "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 user_ids = 3;                          // Optional: filter by specific UIDs
+  repeated int64 referral_ids = 4;                      // Optional: filter by referral
+  repeated int64 affiliate_ids = 5;                     // Optional: filter by affiliate
+  repeated string currencies = 9;                       // Filter by currencies
+  bool only_negative_carryover = 6;                     // Optional: only show users with negative carryover
+  optional int32 page = 7;                              // defaults to 1
+  optional int32 page_size = 8;                         // defaults to 25
+}
+
+// Contribution Report - Subordinate Detail View
+message ListReferralContributionReportRequest {
+  string period = 1;                                    // "day", "week", or "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  optional int64 root_user_id = 3;                      // Optional: filter by ROOT user
+  repeated int32 tiers = 4;                             // Optional: filter by tier levels (multi-select)
+  optional bool is_qualified = 5;                       // Optional: filter by qualification status
+  optional int32 page = 6;                              // defaults to 1
+  optional int32 page_size = 7;                         // defaults to 25
+}
+
+// Lifetime Report - All-time Commission Totals
+message ListReferralLifetimeReportRequest {
+  api.common.OperatorContextFilters operator_context_filters = 1;
+  repeated int64 user_ids = 2;                          // Optional: filter by specific UIDs
+  optional int32 page = 3;                              // defaults to 1
+  optional int32 page_size = 4;                         // defaults to 25
+}
+
+
+// ============================================================================
+// Affiliate VTG Report - New Users (registered in period) Performance
+// ============================================================================
+
+message ListAffiliateVTGReportRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 affiliate_ids = 3;
+  repeated int64 campaign_ids = 4;
+  string dimension = 5;                                 // "campaign" or "affiliate"
+  optional int32 page = 6;
+  optional int32 page_size = 7;
+}
+
+
+// ============================================================================
+// Affiliate Snapshot Report - All Users' Activity in Period
+// ============================================================================
+
+message ListAffiliateSnapshotReportRequest {
+  string period = 1;                                    // "day", "week", "month"
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 affiliate_ids = 3;
+  repeated int64 campaign_ids = 4;
+  string dimension = 5;                                 // "campaign" or "affiliate"
+  bool only_negative_carryover = 6;
+  optional int32 page = 7;
+  optional int32 page_size = 8;
 }
