@@ -27972,6 +27972,11 @@ components:
                 savedInfoName:
                     type: string
                     description: Name for saved payment info (required when save_for_later_use is true)
+                returnUrl:
+                    type: string
+                    description: |-
+                        Optional: URL to redirect user after payment completion
+                         If not provided, default behavior is used
             description: |-
                 Request to initiate a deposit
                  Used to start a deposit transaction
