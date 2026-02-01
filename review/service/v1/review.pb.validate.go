@@ -2924,6 +2924,8 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for ReviewDuration
 
+	// no validation rules for OperatorMode
+
 	if len(errors) > 0 {
 		return ListTicketsResponse_TicketMultiError(errors)
 	}

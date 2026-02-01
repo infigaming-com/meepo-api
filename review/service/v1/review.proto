@@ -139,6 +139,7 @@ message ListTicketsResponse {
 		string status = 26;	// pending, approved, rejected, manual_payout, paying, paid, failed
 		string reviewer_username = 27;
 		int32 review_duration = 28;
+		string operator_mode = 29;	// "individual" or "co-operational"
 	}
 	repeated Ticket tickets = 1;
 	int32 page = 2;

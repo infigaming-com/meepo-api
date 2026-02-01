@@ -1305,6 +1305,7 @@ type ListTicketsResponse_Ticket struct {
 	Status                         string                 `protobuf:"bytes,26,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
 	ReviewerUsername               string                 `protobuf:"bytes,27,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
 	ReviewDuration                 int32                  `protobuf:"varint,28,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
+	OperatorMode                   string                 `protobuf:"bytes,29,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"` // "individual" or "co-operational"
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -1533,6 +1534,13 @@ func (x *ListTicketsResponse_Ticket) GetReviewDuration() int32 {
 		return x.ReviewDuration
 	}
 	return 0
+}
+
+func (x *ListTicketsResponse_Ticket) GetOperatorMode() string {
+	if x != nil {
+		return x.OperatorMode
+	}
+	return ""
 }
 
 type GetTicketResponse_Ticket struct {
@@ -2917,7 +2925,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xfa\x12\n" +
+	"_page_size\"\x9f\x13\n" +
 	"\x13ListTicketsResponse\x12K\n" +
 	"\atickets\x18\x01 \x03(\v21.api.review.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -2942,7 +2950,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x14total_rejected_count\x18\x13 \x01(\x05R\x12totalRejectedCount\x129\n" +
 	"\x19total_rejected_amount_usd\x18\x14 \x01(\tR\x16totalRejectedAmountUsd\x12V\n" +
 	"(total_rejected_amount_reporting_currency\x18\x15 \x01(\tR$totalRejectedAmountReportingCurrency\x12.\n" +
-	"\x13average_review_time\x18\x16 \x01(\x05R\x11averageReviewTime\x1a\xff\b\n" +
+	"\x13average_review_time\x18\x16 \x01(\x05R\x11averageReviewTime\x1a\xa4\t\n" +
 	"\x06Ticket\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1b\n" +
@@ -2974,7 +2982,8 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x16fee_reporting_currency\x18\x19 \x01(\tR\x14feeReportingCurrency\x12\x16\n" +
 	"\x06status\x18\x1a \x01(\tR\x06status\x12+\n" +
 	"\x11reviewer_username\x18\x1b \x01(\tR\x10reviewerUsername\x12'\n" +
-	"\x0freview_duration\x18\x1c \x01(\x05R\x0ereviewDuration\"\xbc\x01\n" +
+	"\x0freview_duration\x18\x1c \x01(\x05R\x0ereviewDuration\x12#\n" +
+	"\roperator_mode\x18\x1d \x01(\tR\foperatorMode\"\xbc\x01\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
