@@ -1946,6 +1946,8 @@ func (m *InitiateDepositRequest) validate(all bool) error {
 
 	// no validation rules for SavedInfoName
 
+	// no validation rules for ReturnUrl
+
 	if len(errors) > 0 {
 		return InitiateDepositRequestMultiError(errors)
 	}
