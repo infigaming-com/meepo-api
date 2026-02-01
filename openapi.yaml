@@ -2122,6 +2122,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.campaign.service.v1.GetWorkflowResponse'
+    /v1/backoffice/crm/campaign/workflow/schema:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Workflow schema
+            operationId: BackofficeCampaign_GetCrmCampaignWorkflowSchema
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.GetWorkflowSchemaResponse'
     /v1/backoffice/crm/campaign/workflow/set:
         post:
             tags:
@@ -13485,6 +13504,12 @@ components:
                 campaignId:
                     type: string
             description: GetCrmCampaignWorkflow
+        api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetCrmCampaignWorkflowSchema
         api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
             type: object
             properties: {}
@@ -20299,6 +20324,22 @@ components:
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
             properties: {}
+        api.campaign.service.v1.ActionSchema:
+            type: object
+            properties:
+                type:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                implemented:
+                    type: boolean
+                configFields:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.ConfigFieldSchema'
+            description: ActionSchema describes an action type
         api.campaign.service.v1.ActivateCampaignResponse:
             type: object
             properties:
@@ -20456,11 +20497,47 @@ components:
                     type: string
                     format: date-time
             description: Campaign workflow definition
+        api.campaign.service.v1.ConfigFieldSchema:
+            type: object
+            properties:
+                name:
+                    type: string
+                type:
+                    type: string
+                required:
+                    type: boolean
+                description:
+                    type: string
+                defaultValue:
+                    type: string
+            description: ConfigFieldSchema describes a configuration field
         api.campaign.service.v1.CreateCampaignResponse:
             type: object
             properties:
                 campaign:
                     $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.DataFieldSchema:
+            type: object
+            properties:
+                name:
+                    type: string
+                type:
+                    type: string
+                description:
+                    type: string
+            description: DataFieldSchema describes a data field
+        api.campaign.service.v1.DataSourceSchema:
+            type: object
+            properties:
+                prefix:
+                    type: string
+                description:
+                    type: string
+                fields:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.DataFieldSchema'
+            description: DataSourceSchema describes a data source prefix
         api.campaign.service.v1.DeleteCampaignResponse:
             type: object
             properties: {}
@@ -20522,6 +20599,27 @@ components:
             properties:
                 workflow:
                     $ref: '#/components/schemas/api.campaign.service.v1.CampaignWorkflow'
+        api.campaign.service.v1.GetWorkflowSchemaResponse:
+            type: object
+            properties:
+                version:
+                    type: string
+                triggers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.TriggerSchema'
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.OperatorSchema'
+                actions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.ActionSchema'
+                dataSources:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.DataSourceSchema'
         api.campaign.service.v1.ListCampaignsResponse:
             type: object
             properties:
@@ -20552,6 +20650,24 @@ components:
                     format: int32
                 total:
                     type: string
+        api.campaign.service.v1.OperatorSchema:
+            type: object
+            properties:
+                symbol:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                leftTypes:
+                    type: array
+                    items:
+                        type: string
+                rightTypes:
+                    type: array
+                    items:
+                        type: string
+            description: OperatorSchema describes a comparison operator
         api.campaign.service.v1.PauseCampaignResponse:
             type: object
             properties:
@@ -20573,6 +20689,24 @@ components:
                     type: array
                     items:
                         type: string
+        api.campaign.service.v1.TriggerSchema:
+            type: object
+            properties:
+                type:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                configFields:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.campaign.service.v1.ConfigFieldSchema'
+                availableEvents:
+                    type: array
+                    items:
+                        type: string
+            description: TriggerSchema describes a trigger type
         api.campaign.service.v1.UpdateCampaignResponse:
             type: object
             properties:

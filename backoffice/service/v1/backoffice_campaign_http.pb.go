@@ -27,6 +27,7 @@ const OperationBackofficeCampaignGetCrmCampaign = "/api.backoffice.service.v1.Ba
 const OperationBackofficeCampaignGetCrmCampaignExecution = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignExecution"
 const OperationBackofficeCampaignGetCrmCampaignExecutionSteps = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignExecutionSteps"
 const OperationBackofficeCampaignGetCrmCampaignWorkflow = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignWorkflow"
+const OperationBackofficeCampaignGetCrmCampaignWorkflowSchema = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignWorkflowSchema"
 const OperationBackofficeCampaignListCrmCampaignExecutions = "/api.backoffice.service.v1.BackofficeCampaign/ListCrmCampaignExecutions"
 const OperationBackofficeCampaignListCrmCampaigns = "/api.backoffice.service.v1.BackofficeCampaign/ListCrmCampaigns"
 const OperationBackofficeCampaignPauseCrmCampaign = "/api.backoffice.service.v1.BackofficeCampaign/PauseCrmCampaign"
@@ -46,6 +47,8 @@ type BackofficeCampaignHTTPServer interface {
 	GetCrmCampaignExecution(context.Context, *GetCrmCampaignExecutionRequest) (*v1.GetExecutionResponse, error)
 	GetCrmCampaignExecutionSteps(context.Context, *GetCrmCampaignExecutionStepsRequest) (*v1.GetExecutionStepsResponse, error)
 	GetCrmCampaignWorkflow(context.Context, *GetCrmCampaignWorkflowRequest) (*v1.GetWorkflowResponse, error)
+	// GetCrmCampaignWorkflowSchema Workflow schema
+	GetCrmCampaignWorkflowSchema(context.Context, *GetCrmCampaignWorkflowSchemaRequest) (*v1.GetWorkflowSchemaResponse, error)
 	ListCrmCampaignExecutions(context.Context, *ListCrmCampaignExecutionsRequest) (*v1.ListExecutionsResponse, error)
 	ListCrmCampaigns(context.Context, *ListCrmCampaignsRequest) (*v1.ListCampaignsResponse, error)
 	PauseCrmCampaign(context.Context, *PauseCrmCampaignRequest) (*v1.PauseCampaignResponse, error)
@@ -73,6 +76,7 @@ func RegisterBackofficeCampaignHTTPServer(s *http.Server, srv BackofficeCampaign
 	r.POST("/v1/backoffice/crm/campaign/execution/get", _BackofficeCampaign_GetCrmCampaignExecution0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/execution/list", _BackofficeCampaign_ListCrmCampaignExecutions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/execution/steps", _BackofficeCampaign_GetCrmCampaignExecutionSteps0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/crm/campaign/workflow/schema", _BackofficeCampaign_GetCrmCampaignWorkflowSchema0_HTTP_Handler(srv))
 }
 
 func _BackofficeCampaign_CreateCrmCampaign0_HTTP_Handler(srv BackofficeCampaignHTTPServer) func(ctx http.Context) error {
@@ -383,6 +387,28 @@ func _BackofficeCampaign_GetCrmCampaignExecutionSteps0_HTTP_Handler(srv Backoffi
 	}
 }
 
+func _BackofficeCampaign_GetCrmCampaignWorkflowSchema0_HTTP_Handler(srv BackofficeCampaignHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetCrmCampaignWorkflowSchemaRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeCampaignGetCrmCampaignWorkflowSchema)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetCrmCampaignWorkflowSchema(ctx, req.(*GetCrmCampaignWorkflowSchemaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetWorkflowSchemaResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeCampaignHTTPClient interface {
 	// ActivateCrmCampaign Campaign control
 	ActivateCrmCampaign(ctx context.Context, req *ActivateCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.ActivateCampaignResponse, err error)
@@ -394,6 +420,8 @@ type BackofficeCampaignHTTPClient interface {
 	GetCrmCampaignExecution(ctx context.Context, req *GetCrmCampaignExecutionRequest, opts ...http.CallOption) (rsp *v1.GetExecutionResponse, err error)
 	GetCrmCampaignExecutionSteps(ctx context.Context, req *GetCrmCampaignExecutionStepsRequest, opts ...http.CallOption) (rsp *v1.GetExecutionStepsResponse, err error)
 	GetCrmCampaignWorkflow(ctx context.Context, req *GetCrmCampaignWorkflowRequest, opts ...http.CallOption) (rsp *v1.GetWorkflowResponse, err error)
+	// GetCrmCampaignWorkflowSchema Workflow schema
+	GetCrmCampaignWorkflowSchema(ctx context.Context, req *GetCrmCampaignWorkflowSchemaRequest, opts ...http.CallOption) (rsp *v1.GetWorkflowSchemaResponse, err error)
 	ListCrmCampaignExecutions(ctx context.Context, req *ListCrmCampaignExecutionsRequest, opts ...http.CallOption) (rsp *v1.ListExecutionsResponse, err error)
 	ListCrmCampaigns(ctx context.Context, req *ListCrmCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListCampaignsResponse, err error)
 	PauseCrmCampaign(ctx context.Context, req *PauseCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.PauseCampaignResponse, err error)
@@ -499,6 +527,20 @@ func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignWorkflow(ctx context.Co
 	pattern := "/v1/backoffice/crm/campaign/workflow/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeCampaignGetCrmCampaignWorkflow))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetCrmCampaignWorkflowSchema Workflow schema
+func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignWorkflowSchema(ctx context.Context, in *GetCrmCampaignWorkflowSchemaRequest, opts ...http.CallOption) (*v1.GetWorkflowSchemaResponse, error) {
+	var out v1.GetWorkflowSchemaResponse
+	pattern := "/v1/backoffice/crm/campaign/workflow/schema"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeCampaignGetCrmCampaignWorkflowSchema))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
