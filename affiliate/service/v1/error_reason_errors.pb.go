@@ -1006,3 +1006,77 @@ func IsInvalidOperatorSettings(err error) bool {
 func ErrorInvalidOperatorSettings(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_SETTINGS.String(), fmt.Sprintf(format, args...))
 }
+
+// Report errors
+func IsListReferralVtgReportFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REFERRAL_VTG_REPORT_FAILED.String() && e.Code == 500
+}
+
+// Report errors
+func ErrorListReferralVtgReportFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REFERRAL_VTG_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListReferralSnapshotReportFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REFERRAL_SNAPSHOT_REPORT_FAILED.String() && e.Code == 500
+}
+
+func ErrorListReferralSnapshotReportFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REFERRAL_SNAPSHOT_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListReferralContributionReportFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REFERRAL_CONTRIBUTION_REPORT_FAILED.String() && e.Code == 500
+}
+
+func ErrorListReferralContributionReportFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REFERRAL_CONTRIBUTION_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListReferralLifetimeReportFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REFERRAL_LIFETIME_REPORT_FAILED.String() && e.Code == 500
+}
+
+func ErrorListReferralLifetimeReportFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REFERRAL_LIFETIME_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListAffiliateVtgReportFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATE_VTG_REPORT_FAILED.String() && e.Code == 500
+}
+
+func ErrorListAffiliateVtgReportFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_AFFILIATE_VTG_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListAffiliateSnapshotReportFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED.String() && e.Code == 500
+}
+
+func ErrorListAffiliateSnapshotReportFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
+}
