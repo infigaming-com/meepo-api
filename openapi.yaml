@@ -7018,6 +7018,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.GetPlayerFreebetsForFrontendResponse'
+    /v1/game/freebets/win:
+        post:
+            tags:
+                - Game
+            operationId: Game_FreebetWin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.FreebetWinRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.FreebetWinResponse'
+    /v1/game/freespins/win:
+        post:
+            tags:
+                - Game
+            operationId: Game_FreespinWin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.FreespinWinRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.FreespinWinResponse'
     /v1/game/get:
         post:
             tags:
@@ -21443,6 +21479,84 @@ components:
                 amount:
                     type: string
                 maxCap:
+                    type: string
+        api.game.service.v1.FreebetWinRequest:
+            type: object
+            properties:
+                sessionId:
+                    type: string
+                freebetId:
+                    type: string
+                txnId:
+                    type: string
+                userId:
+                    type: string
+                requestId:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                currency:
+                    type: string
+                amount:
+                    type: string
+                timestamp:
+                    type: string
+        api.game.service.v1.FreebetWinResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.game.service.v1.FreebetWinResponse_Data'
+        api.game.service.v1.FreebetWinResponse_Data:
+            type: object
+            properties:
+                txnId:
+                    type: string
+                balance:
+                    type: string
+                bonus:
+                    type: string
+                timestamp:
+                    type: string
+        api.game.service.v1.FreespinWinRequest:
+            type: object
+            properties:
+                sessionId:
+                    type: string
+                freespinId:
+                    type: string
+                txnId:
+                    type: string
+                userId:
+                    type: string
+                requestId:
+                    type: string
+                gameId:
+                    type: string
+                roundId:
+                    type: string
+                currency:
+                    type: string
+                amount:
+                    type: string
+                timestamp:
+                    type: string
+        api.game.service.v1.FreespinWinResponse:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.game.service.v1.FreespinWinResponse_Data'
+        api.game.service.v1.FreespinWinResponse_Data:
+            type: object
+            properties:
+                txnId:
+                    type: string
+                balance:
+                    type: string
+                bonus:
+                    type: string
+                timestamp:
                     type: string
         api.game.service.v1.GameFilter:
             type: object
