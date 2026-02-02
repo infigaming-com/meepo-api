@@ -4051,6 +4051,10 @@ func (m *ReferralSnapshotReportDataItem) validate(all bool) error {
 
 	}
 
+	// no validation rules for UnpaidWageringCommissionUsd
+
+	// no validation rules for UnpaidWageringCommissionReportingCurrency
+
 	if len(errors) > 0 {
 		return ReferralSnapshotReportDataItemMultiError(errors)
 	}

@@ -385,6 +385,11 @@ message ReferralSnapshotReportDataItem {
 
   // Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
   repeated ReferralTierCarryover negative_carryover = 60;
+
+  // Unpaid wagering commission (from referral_commissions where status='unpaid' AND type='wagering_commission_reward')
+  // This is read directly from the table, not calculated
+  string unpaid_wagering_commission_usd = 61;
+  string unpaid_wagering_commission_reporting_currency = 62;
 }
 
 message ListReferralSnapshotReportDataResponse {
@@ -640,16 +645,20 @@ message ListAffiliateSnapshotReportDataRequest {
 
 // AffiliateCurrentPeriodGaming - Gaming data for current period
 // Used by Affiliate Service to calculate estimated commissions
+// AffiliateCurrentPeriodGaming contains gaming data for the current billing period
+// Data source: affiliate_commissions.game_event_data (only game events that generated commissions)
+// Note: ngr_usd is Game Bet NGR (bet_amount != 0), b2c_usd is Bonus-to-Cash (bet_amount = 0)
+// For NGR-based RevShare: commission_base = ngr_usd - b2c_usd
 message AffiliateCurrentPeriodGaming {
   string ggr_usd = 1;
-  string ngr_usd = 2;
-  string b2c_usd = 3;
+  string ngr_usd = 2;  // Game Bet NGR only (excludes B2C)
+  string b2c_usd = 3;  // Bonus-to-Cash conversion amount
   string bet_amount_usd = 4;
   int64 bet_count = 5;
   // Reporting Currency
   string ggr_reporting_currency = 10;
-  string ngr_reporting_currency = 11;
-  string b2c_reporting_currency = 12;
+  string ngr_reporting_currency = 11;  // Game Bet NGR only
+  string b2c_reporting_currency = 12;  // Bonus-to-Cash
   string bet_amount_reporting_currency = 13;
 }
 

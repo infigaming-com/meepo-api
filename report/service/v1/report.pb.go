@@ -2491,8 +2491,12 @@ type ReferralSnapshotReportDataItem struct {
 	WithdrawalAmountReportingCurrency    string `protobuf:"bytes,57,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
 	// Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
 	NegativeCarryover []*ReferralTierCarryover `protobuf:"bytes,60,rep,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Unpaid wagering commission (from referral_commissions where status='unpaid' AND type='wagering_commission_reward')
+	// This is read directly from the table, not calculated
+	UnpaidWageringCommissionUsd               string `protobuf:"bytes,61,opt,name=unpaid_wagering_commission_usd,json=unpaidWageringCommissionUsd,proto3" json:"unpaid_wagering_commission_usd,omitempty"`
+	UnpaidWageringCommissionReportingCurrency string `protobuf:"bytes,62,opt,name=unpaid_wagering_commission_reporting_currency,json=unpaidWageringCommissionReportingCurrency,proto3" json:"unpaid_wagering_commission_reporting_currency,omitempty"`
+	unknownFields                             protoimpl.UnknownFields
+	sizeCache                                 protoimpl.SizeCache
 }
 
 func (x *ReferralSnapshotReportDataItem) Reset() {
@@ -2712,6 +2716,20 @@ func (x *ReferralSnapshotReportDataItem) GetNegativeCarryover() []*ReferralTierC
 		return x.NegativeCarryover
 	}
 	return nil
+}
+
+func (x *ReferralSnapshotReportDataItem) GetUnpaidWageringCommissionUsd() string {
+	if x != nil {
+		return x.UnpaidWageringCommissionUsd
+	}
+	return ""
+}
+
+func (x *ReferralSnapshotReportDataItem) GetUnpaidWageringCommissionReportingCurrency() string {
+	if x != nil {
+		return x.UnpaidWageringCommissionReportingCurrency
+	}
+	return ""
 }
 
 type ListReferralSnapshotReportDataResponse struct {
@@ -4412,17 +4430,21 @@ func (x *ListAffiliateSnapshotReportDataRequest) GetPageSize() int32 {
 
 // AffiliateCurrentPeriodGaming - Gaming data for current period
 // Used by Affiliate Service to calculate estimated commissions
+// AffiliateCurrentPeriodGaming contains gaming data for the current billing period
+// Data source: affiliate_commissions.game_event_data (only game events that generated commissions)
+// Note: ngr_usd is Game Bet NGR (bet_amount != 0), b2c_usd is Bonus-to-Cash (bet_amount = 0)
+// For NGR-based RevShare: commission_base = ngr_usd - b2c_usd
 type AffiliateCurrentPeriodGaming struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	GgrUsd       string                 `protobuf:"bytes,1,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	NgrUsd       string                 `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	B2CUsd       string                 `protobuf:"bytes,3,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"`
+	NgrUsd       string                 `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"` // Game Bet NGR only (excludes B2C)
+	B2CUsd       string                 `protobuf:"bytes,3,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"` // Bonus-to-Cash conversion amount
 	BetAmountUsd string                 `protobuf:"bytes,4,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
 	BetCount     int64                  `protobuf:"varint,5,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
 	// Reporting Currency
 	GgrReportingCurrency       string `protobuf:"bytes,10,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	NgrReportingCurrency       string `protobuf:"bytes,11,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	B2CReportingCurrency       string `protobuf:"bytes,12,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`
+	NgrReportingCurrency       string `protobuf:"bytes,11,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"` // Game Bet NGR only
+	B2CReportingCurrency       string `protobuf:"bytes,12,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"` // Bonus-to-Cash
 	BetAmountReportingCurrency string `protobuf:"bytes,13,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
@@ -5569,7 +5591,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xa9\r\n" +
+	"_page_size\"\xd0\x0e\n" +
 	"\x1eReferralSnapshotReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x10\n" +
 	"\x03uid\x18\x02 \x01(\x03R\x03uid\x12\x1f\n" +
@@ -5600,7 +5622,9 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"'unclaimed_commission_reporting_currency\x187 \x01(\tR$unclaimedCommissionReportingCurrency\x12M\n" +
 	"#lifetime_claimed_reporting_currency\x188 \x01(\tR lifetimeClaimedReportingCurrency\x12O\n" +
 	"$withdrawal_amount_reporting_currency\x189 \x01(\tR!withdrawalAmountReportingCurrency\x12[\n" +
-	"\x12negative_carryover\x18< \x03(\v2,.api.report.service.v1.ReferralTierCarryoverR\x11negativeCarryover\"\xbc\x01\n" +
+	"\x12negative_carryover\x18< \x03(\v2,.api.report.service.v1.ReferralTierCarryoverR\x11negativeCarryover\x12C\n" +
+	"\x1eunpaid_wagering_commission_usd\x18= \x01(\tR\x1bunpaidWageringCommissionUsd\x12`\n" +
+	"-unpaid_wagering_commission_reporting_currency\x18> \x01(\tR)unpaidWageringCommissionReportingCurrency\"\xbc\x01\n" +
 	"&ListReferralSnapshotReportDataResponse\x12K\n" +
 	"\x05items\x18\x01 \x03(\v25.api.report.service.v1.ReferralSnapshotReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
