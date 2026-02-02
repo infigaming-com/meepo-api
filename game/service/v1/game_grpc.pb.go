@@ -75,6 +75,8 @@ const (
 	Game_ListFreebetTemplates_FullMethodName              = "/api.game.service.v1.Game/ListFreebetTemplates"
 	Game_IssueFreebets_FullMethodName                     = "/api.game.service.v1.Game/IssueFreebets"
 	Game_GetPlayerFreebets_FullMethodName                 = "/api.game.service.v1.Game/GetPlayerFreebets"
+	Game_FreespinWin_FullMethodName                       = "/api.game.service.v1.Game/FreespinWin"
+	Game_FreebetWin_FullMethodName                        = "/api.game.service.v1.Game/FreebetWin"
 	Game_GetPlayerFreebetsForFrontend_FullMethodName      = "/api.game.service.v1.Game/GetPlayerFreebetsForFrontend"
 	Game_GetDepositCreditsGGR_FullMethodName              = "/api.game.service.v1.Game/GetDepositCreditsGGR"
 	Game_BackofficeListGameTags_FullMethodName            = "/api.game.service.v1.Game/BackofficeListGameTags"
@@ -158,6 +160,8 @@ type GameClient interface {
 	ListFreebetTemplates(ctx context.Context, in *ListFreebetTemplatesRequest, opts ...grpc.CallOption) (*ListFreebetTemplatesResponse, error)
 	IssueFreebets(ctx context.Context, in *IssueFreebetsRequest, opts ...grpc.CallOption) (*IssueFreebetsResponse, error)
 	GetPlayerFreebets(ctx context.Context, in *GetPlayerFreebetsRequest, opts ...grpc.CallOption) (*GetPlayerFreebetsResponse, error)
+	FreespinWin(ctx context.Context, in *FreespinWinRequest, opts ...grpc.CallOption) (*FreespinWinResponse, error)
+	FreebetWin(ctx context.Context, in *FreebetWinRequest, opts ...grpc.CallOption) (*FreebetWinResponse, error)
 	// Frontend HTTP endpoint for player freebets
 	GetPlayerFreebetsForFrontend(ctx context.Context, in *GetPlayerFreebetsForFrontendRequest, opts ...grpc.CallOption) (*GetPlayerFreebetsForFrontendResponse, error)
 	// 获取指定时间范围内用户存款金额所产生的GGR
@@ -760,6 +764,26 @@ func (c *gameClient) GetPlayerFreebets(ctx context.Context, in *GetPlayerFreebet
 	return out, nil
 }
 
+func (c *gameClient) FreespinWin(ctx context.Context, in *FreespinWinRequest, opts ...grpc.CallOption) (*FreespinWinResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FreespinWinResponse)
+	err := c.cc.Invoke(ctx, Game_FreespinWin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) FreebetWin(ctx context.Context, in *FreebetWinRequest, opts ...grpc.CallOption) (*FreebetWinResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FreebetWinResponse)
+	err := c.cc.Invoke(ctx, Game_FreebetWin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) GetPlayerFreebetsForFrontend(ctx context.Context, in *GetPlayerFreebetsForFrontendRequest, opts ...grpc.CallOption) (*GetPlayerFreebetsForFrontendResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPlayerFreebetsForFrontendResponse)
@@ -985,6 +1009,8 @@ type GameServer interface {
 	ListFreebetTemplates(context.Context, *ListFreebetTemplatesRequest) (*ListFreebetTemplatesResponse, error)
 	IssueFreebets(context.Context, *IssueFreebetsRequest) (*IssueFreebetsResponse, error)
 	GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*GetPlayerFreebetsResponse, error)
+	FreespinWin(context.Context, *FreespinWinRequest) (*FreespinWinResponse, error)
+	FreebetWin(context.Context, *FreebetWinRequest) (*FreebetWinResponse, error)
 	// Frontend HTTP endpoint for player freebets
 	GetPlayerFreebetsForFrontend(context.Context, *GetPlayerFreebetsForFrontendRequest) (*GetPlayerFreebetsForFrontendResponse, error)
 	// 获取指定时间范围内用户存款金额所产生的GGR
@@ -1194,6 +1220,12 @@ func (UnimplementedGameServer) IssueFreebets(context.Context, *IssueFreebetsRequ
 }
 func (UnimplementedGameServer) GetPlayerFreebets(context.Context, *GetPlayerFreebetsRequest) (*GetPlayerFreebetsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPlayerFreebets not implemented")
+}
+func (UnimplementedGameServer) FreespinWin(context.Context, *FreespinWinRequest) (*FreespinWinResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FreespinWin not implemented")
+}
+func (UnimplementedGameServer) FreebetWin(context.Context, *FreebetWinRequest) (*FreebetWinResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FreebetWin not implemented")
 }
 func (UnimplementedGameServer) GetPlayerFreebetsForFrontend(context.Context, *GetPlayerFreebetsForFrontendRequest) (*GetPlayerFreebetsForFrontendResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetPlayerFreebetsForFrontend not implemented")
@@ -2272,6 +2304,42 @@ func _Game_GetPlayerFreebets_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_FreespinWin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FreespinWinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).FreespinWin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_FreespinWin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).FreespinWin(ctx, req.(*FreespinWinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_FreebetWin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FreebetWinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).FreebetWin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_FreebetWin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).FreebetWin(ctx, req.(*FreebetWinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_GetPlayerFreebetsForFrontend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPlayerFreebetsForFrontendRequest)
 	if err := dec(in); err != nil {
@@ -2790,6 +2858,14 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayerFreebets",
 			Handler:    _Game_GetPlayerFreebets_Handler,
+		},
+		{
+			MethodName: "FreespinWin",
+			Handler:    _Game_FreespinWin_Handler,
+		},
+		{
+			MethodName: "FreebetWin",
+			Handler:    _Game_FreebetWin_Handler,
 		},
 		{
 			MethodName: "GetPlayerFreebetsForFrontend",

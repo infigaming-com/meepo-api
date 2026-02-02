@@ -217,6 +217,20 @@ service Game {
 	rpc GetPlayerFreebets(GetPlayerFreebetsRequest) returns (GetPlayerFreebetsResponse) {
 	}
 
+	rpc FreespinWin(FreespinWinRequest) returns (FreespinWinResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/freespins/win"
+			body: "*"
+		};
+	}
+
+	rpc FreebetWin(FreebetWinRequest) returns (FreebetWinResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/freebets/win"
+			body: "*"
+		};
+	}
+
 	// Frontend HTTP endpoint for player freebets
 	rpc GetPlayerFreebetsForFrontend(GetPlayerFreebetsForFrontendRequest) returns (GetPlayerFreebetsForFrontendResponse) {
 		option (google.api.http) = {
@@ -1823,6 +1837,31 @@ message CancelFreespinsRequest {
 message CancelFreespinsResponse {
 }
 
+// ========== Freespin Win Callback Messages ==========
+
+message FreespinWinRequest {
+	string session_id = 1;
+	string freespin_id = 2;
+	string txn_id = 3;
+	string user_id = 4;
+	string request_id = 5;
+	string game_id = 6;
+	string round_id = 7;
+	string currency = 8;
+	string amount = 9;
+	int64 timestamp = 10;
+}
+
+message FreespinWinResponse {
+	message Data {
+		string txn_id = 1;
+		string balance = 2;
+		string bonus = 3;
+		int64 timestamp = 4;
+	}
+	Data data = 1;
+}
+
 // ========== Freebets Messages ==========
 
 message ListFreebetTemplatesRequest {
@@ -1880,6 +1919,7 @@ message IssueFreebetsRequest {
 	int64 freebet_id = 4;
 	api.common.OperatorContext operator_context = 5;
 	string amount = 6;                   // free bet amount (decimal string)
+	string settlement_currency = 7;      // user's settlement currency for PlayerId format
 }
 
 message FreebetIssuedBonus {
@@ -1924,6 +1964,31 @@ message GetPlayerFreebetsForFrontendRequest {
 message GetPlayerFreebetsForFrontendResponse {
 	repeated FreebetIssuedBonus bonuses = 1;
 	int32 total = 2;
+}
+
+// ========== FreeBet Win Callback Messages ==========
+
+message FreebetWinRequest {
+	string session_id = 1;
+	string freebet_id = 2;
+	string txn_id = 3;
+	string user_id = 4;
+	string request_id = 5;
+	string game_id = 6;
+	string round_id = 7;
+	string currency = 8;
+	string amount = 9;
+	int64 timestamp = 10;
+}
+
+message FreebetWinResponse {
+	message Data {
+		string txn_id = 1;
+		string balance = 2;
+		string bonus = 3;
+		int64 timestamp = 4;
+	}
+	Data data = 1;
 }
 
 // 获取指定时间范围内用户存款金额所产生的GGR请求

@@ -21,6 +21,8 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationGameBalance = "/api.game.service.v1.Game/Balance"
 const OperationGameCreateSession = "/api.game.service.v1.Game/CreateSession"
+const OperationGameFreebetWin = "/api.game.service.v1.Game/FreebetWin"
+const OperationGameFreespinWin = "/api.game.service.v1.Game/FreespinWin"
 const OperationGameGetGame = "/api.game.service.v1.Game/GetGame"
 const OperationGameGetPlayerFreebetsForFrontend = "/api.game.service.v1.Game/GetPlayerFreebetsForFrontend"
 const OperationGameListBets = "/api.game.service.v1.Game/ListBets"
@@ -34,6 +36,8 @@ const OperationGameRollback = "/api.game.service.v1.Game/Rollback"
 type GameHTTPServer interface {
 	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
+	FreebetWin(context.Context, *FreebetWinRequest) (*FreebetWinResponse, error)
+	FreespinWin(context.Context, *FreespinWinRequest) (*FreespinWinResponse, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
 	// GetPlayerFreebetsForFrontend Frontend HTTP endpoint for player freebets
 	GetPlayerFreebetsForFrontend(context.Context, *GetPlayerFreebetsForFrontendRequest) (*GetPlayerFreebetsForFrontendResponse, error)
@@ -58,6 +62,8 @@ func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
 	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
 	r.POST("/v1/game/live-events/list", _Game_ListLiveEvents0_HTTP_Handler(srv))
+	r.POST("/v1/game/freespins/win", _Game_FreespinWin0_HTTP_Handler(srv))
+	r.POST("/v1/game/freebets/win", _Game_FreebetWin0_HTTP_Handler(srv))
 	r.POST("/v1/game/freebets/player", _Game_GetPlayerFreebetsForFrontend0_HTTP_Handler(srv))
 }
 
@@ -281,6 +287,50 @@ func _Game_ListLiveEvents0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Contex
 	}
 }
 
+func _Game_FreespinWin0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in FreespinWinRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationGameFreespinWin)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.FreespinWin(ctx, req.(*FreespinWinRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*FreespinWinResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Game_FreebetWin0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in FreebetWinRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationGameFreebetWin)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.FreebetWin(ctx, req.(*FreebetWinRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*FreebetWinResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Game_GetPlayerFreebetsForFrontend0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetPlayerFreebetsForFrontendRequest
@@ -306,6 +356,8 @@ func _Game_GetPlayerFreebetsForFrontend0_HTTP_Handler(srv GameHTTPServer) func(c
 type GameHTTPClient interface {
 	Balance(ctx context.Context, req *BalanceRequest, opts ...http.CallOption) (rsp *BalanceResponse, err error)
 	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
+	FreebetWin(ctx context.Context, req *FreebetWinRequest, opts ...http.CallOption) (rsp *FreebetWinResponse, err error)
+	FreespinWin(ctx context.Context, req *FreespinWinRequest, opts ...http.CallOption) (rsp *FreespinWinResponse, err error)
 	GetGame(ctx context.Context, req *GetGameRequest, opts ...http.CallOption) (rsp *GetGameResponse, err error)
 	// GetPlayerFreebetsForFrontend Frontend HTTP endpoint for player freebets
 	GetPlayerFreebetsForFrontend(ctx context.Context, req *GetPlayerFreebetsForFrontendRequest, opts ...http.CallOption) (rsp *GetPlayerFreebetsForFrontendResponse, err error)
@@ -344,6 +396,32 @@ func (c *GameHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessio
 	pattern := "/v1/game/create-session"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameCreateSession))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *GameHTTPClientImpl) FreebetWin(ctx context.Context, in *FreebetWinRequest, opts ...http.CallOption) (*FreebetWinResponse, error) {
+	var out FreebetWinResponse
+	pattern := "/v1/game/freebets/win"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameFreebetWin))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *GameHTTPClientImpl) FreespinWin(ctx context.Context, in *FreespinWinRequest, opts ...http.CallOption) (*FreespinWinResponse, error) {
+	var out FreespinWinResponse
+	pattern := "/v1/game/freespins/win"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameFreespinWin))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
