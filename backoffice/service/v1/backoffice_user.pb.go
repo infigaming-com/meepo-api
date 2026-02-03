@@ -57,8 +57,12 @@ type ListUsersRequest struct {
 	// Target operator context for registration_ip and login_ip filtering.
 	// When provided with registration_ip or login_ip, frontend will filter user_events within this operator context.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,26,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Registration source filter: "direct" (no parent) or "invited" (has parent)
+	RegistrationSource *string `protobuf:"bytes,27,opt,name=registration_source,json=registrationSource,proto3,oneof" json:"registration_source,omitempty"`
+	// Agent type filter: "referral" or "affiliate"
+	AgentType     *string `protobuf:"bytes,28,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListUsersRequest) Reset() {
@@ -257,6 +261,20 @@ func (x *ListUsersRequest) GetTargetOperatorContext() *common.OperatorContext {
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *ListUsersRequest) GetRegistrationSource() string {
+	if x != nil && x.RegistrationSource != nil {
+		return *x.RegistrationSource
+	}
+	return ""
+}
+
+func (x *ListUsersRequest) GetAgentType() string {
+	if x != nil && x.AgentType != nil {
+		return *x.AgentType
+	}
+	return ""
 }
 
 type ListUsersResponse struct {
@@ -2484,8 +2502,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\xd3\n" +
-	"\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\xd4\v\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2514,7 +2531,10 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x18operator_context_filters\x18\x17 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
 	"\x0fregistration_ip\x18\x18 \x01(\tH\x13R\x0eregistrationIp\x88\x01\x01\x12\x1e\n" +
 	"\blogin_ip\x18\x19 \x01(\tH\x14R\aloginIp\x88\x01\x01\x12S\n" +
-	"\x17target_operator_context\x18\x1a \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\n" +
+	"\x17target_operator_context\x18\x1a \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x124\n" +
+	"\x13registration_source\x18\x1b \x01(\tH\x15R\x12registrationSource\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"agent_type\x18\x1c \x01(\tH\x16R\tagentType\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x1a\n" +
 	"\x18_registration_start_timeB\x18\n" +
@@ -2542,7 +2562,9 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
 	"_page_sizeB\x12\n" +
 	"\x10_registration_ipB\v\n" +
-	"\t_login_ip\"\xfc\b\n" +
+	"\t_login_ipB\x16\n" +
+	"\x14_registration_sourceB\r\n" +
+	"\v_agent_type\"\xfc\b\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +

@@ -18168,6 +18168,12 @@ components:
                     description: |-
                         Target operator context for registration_ip and login_ip filtering.
                          When provided with registration_ip or login_ip, frontend will filter user_events within this operator context.
+                registrationSource:
+                    type: string
+                    description: 'Registration source filter: "direct" (no parent) or "invited" (has parent)'
+                agentType:
+                    type: string
+                    description: 'Agent type filter: "referral" or "affiliate"'
         api.backoffice.service.v1.ListUsersResponse:
             type: object
             properties:

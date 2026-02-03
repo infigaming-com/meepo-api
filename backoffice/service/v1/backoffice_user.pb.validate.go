@@ -257,6 +257,14 @@ func (m *ListUsersRequest) validate(all bool) error {
 		// no validation rules for LoginIp
 	}
 
+	if m.RegistrationSource != nil {
+		// no validation rules for RegistrationSource
+	}
+
+	if m.AgentType != nil {
+		// no validation rules for AgentType
+	}
+
 	if len(errors) > 0 {
 		return ListUsersRequestMultiError(errors)
 	}
