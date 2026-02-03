@@ -1020,6 +1020,10 @@ message ListUsersRequest {
 	// Target operator context for registration_ip and login_ip filtering.
 	// When provided with registration_ip or login_ip, frontend will filter user_events within this operator context.
 	api.common.OperatorContext target_operator_context = 27;
+	// Registration source filter: "direct" (no parent) or "invited" (has parent)
+	optional string registration_source = 28;
+	// Agent type filter: "referral" or "affiliate"
+	optional string agent_type = 29;
 }
 
 message ListUsersResponse {
