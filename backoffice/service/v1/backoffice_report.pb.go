@@ -7590,7 +7590,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\xb6\x1f\n" +
+	"_page_size2\xe0\x1f\n" +
 	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
 	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xa1\x01\n" +
@@ -7607,13 +7607,13 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x15ListDepositVtgDetails\x127.api.backoffice.service.v1.ListDepositVtgDetailsRequest\x1a8.api.backoffice.service.v1.ListDepositVtgDetailsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/report/deposit-vtg-details/list\x12\xc9\x01\n" +
 	"\x16ListWithdrawVtgDetails\x128.api.backoffice.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/report/withdraw-vtg-details/list\x12\xac\x01\n" +
 	"\x0fListSportEvents\x121.api.backoffice.service.v1.ListSportEventsRequest\x1a2.api.backoffice.service.v1.ListSportEventsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/report/sport-events/list\x12\xcf\x01\n" +
-	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/report/customer-record/get\x12\xb6\x01\n" +
-	"\x15ListReferralVTGReport\x127.api.backoffice.service.v1.ListReferralVTGReportRequest\x1a7.api.affiliate.service.v1.ListReferralVTGReportResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/referral/vtg/list\x12\xca\x01\n" +
-	"\x1aListReferralSnapshotReport\x12<.api.backoffice.service.v1.ListReferralSnapshotReportRequest\x1a<.api.affiliate.service.v1.ListReferralSnapshotReportResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/referral/snapshot/list\x12\xda\x01\n" +
-	"\x1eListReferralContributionReport\x12@.api.backoffice.service.v1.ListReferralContributionReportRequest\x1a@.api.affiliate.service.v1.ListReferralContributionReportResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/referral/contribution/list\x12\xca\x01\n" +
-	"\x1aListReferralLifetimeReport\x12<.api.backoffice.service.v1.ListReferralLifetimeReportRequest\x1a<.api.affiliate.service.v1.ListReferralLifetimeReportResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/referral/lifetime/list\x12\xba\x01\n" +
-	"\x16ListAffiliateVTGReport\x128.api.backoffice.service.v1.ListAffiliateVTGReportRequest\x1a8.api.affiliate.service.v1.ListAffiliateVTGReportResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/affiliate/vtg/list\x12\xce\x01\n" +
-	"\x1bListAffiliateSnapshotReport\x12=.api.backoffice.service.v1.ListAffiliateSnapshotReportRequest\x1a=.api.affiliate.service.v1.ListAffiliateSnapshotReportResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/affiliate/snapshot/listB[\n" +
+	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/report/customer-record/get\x12\xbd\x01\n" +
+	"\x15ListReferralVTGReport\x127.api.backoffice.service.v1.ListReferralVTGReportRequest\x1a7.api.affiliate.service.v1.ListReferralVTGReportResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/report/referral/vtg/list\x12\xd1\x01\n" +
+	"\x1aListReferralSnapshotReport\x12<.api.backoffice.service.v1.ListReferralSnapshotReportRequest\x1a<.api.affiliate.service.v1.ListReferralSnapshotReportResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/report/referral/snapshot/list\x12\xe1\x01\n" +
+	"\x1eListReferralContributionReport\x12@.api.backoffice.service.v1.ListReferralContributionReportRequest\x1a@.api.affiliate.service.v1.ListReferralContributionReportResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/report/referral/contribution/list\x12\xd1\x01\n" +
+	"\x1aListReferralLifetimeReport\x12<.api.backoffice.service.v1.ListReferralLifetimeReportRequest\x1a<.api.affiliate.service.v1.ListReferralLifetimeReportResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/report/referral/lifetime/list\x12\xc1\x01\n" +
+	"\x16ListAffiliateVTGReport\x128.api.backoffice.service.v1.ListAffiliateVTGReportRequest\x1a8.api.affiliate.service.v1.ListAffiliateVTGReportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/report/affiliate/vtg/list\x12\xd5\x01\n" +
+	"\x1bListAffiliateSnapshotReport\x12=.api.backoffice.service.v1.ListAffiliateSnapshotReportRequest\x1a=.api.affiliate.service.v1.ListAffiliateSnapshotReportResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/report/affiliate/snapshot/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

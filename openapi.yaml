@@ -1185,25 +1185,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdatePostbackResponse'
-    /v1/backoffice/affiliate/snapshot/list:
-        post:
-            tags:
-                - BackofficeReport
-            description: ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
-            operationId: BackofficeReport_ListAffiliateSnapshotReport
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateSnapshotReportRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateSnapshotReportResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -1258,27 +1239,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListUsersResponse'
-    /v1/backoffice/affiliate/vtg/list:
-        post:
-            tags:
-                - BackofficeReport
-            description: |-
-                Commission Report APIs (Affiliate tables)
-                 ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
-            operationId: BackofficeReport_ListAffiliateVTGReport
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateVTGReportRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateVTGReportResponse'
     /v1/backoffice/audit/actions/list:
         post:
             tags:
@@ -4948,44 +4908,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
-    /v1/backoffice/referral/contribution/list:
-        post:
-            tags:
-                - BackofficeReport
-            description: ListReferralContributionReport returns Contribution report - Subordinate detail view
-            operationId: BackofficeReport_ListReferralContributionReport
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralContributionReportRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralContributionReportResponse'
-    /v1/backoffice/referral/lifetime/list:
-        post:
-            tags:
-                - BackofficeReport
-            description: ListReferralLifetimeReport returns Lifetime report - All-time commission totals
-            operationId: BackofficeReport_ListReferralLifetimeReport
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralLifetimeReportRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralLifetimeReportResponse'
     /v1/backoffice/referral/plan/get:
         post:
             tags:
@@ -5022,17 +4944,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.SetReferralPlanResponse'
-    /v1/backoffice/referral/snapshot/list:
+    /v1/backoffice/report/affiliate/snapshot/list:
         post:
             tags:
                 - BackofficeReport
-            description: ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
-            operationId: BackofficeReport_ListReferralSnapshotReport
+            description: ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
+            operationId: BackofficeReport_ListAffiliateSnapshotReport
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralSnapshotReportRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateSnapshotReportRequest'
                 required: true
             responses:
                 "200":
@@ -5040,20 +4962,20 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralSnapshotReportResponse'
-    /v1/backoffice/referral/vtg/list:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateSnapshotReportResponse'
+    /v1/backoffice/report/affiliate/vtg/list:
         post:
             tags:
                 - BackofficeReport
             description: |-
-                Commission Report APIs (Referral tables)
-                 ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
-            operationId: BackofficeReport_ListReferralVTGReport
+                Commission Report APIs (Affiliate tables)
+                 ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
+            operationId: BackofficeReport_ListAffiliateVTGReport
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralVTGReportRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateVTGReportRequest'
                 required: true
             responses:
                 "200":
@@ -5061,7 +4983,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralVTGReportResponse'
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateVTGReportResponse'
     /v1/backoffice/report/customer-record/get:
         post:
             tags:
@@ -5206,6 +5128,84 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse'
+    /v1/backoffice/report/referral/contribution/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListReferralContributionReport returns Contribution report - Subordinate detail view
+            operationId: BackofficeReport_ListReferralContributionReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralContributionReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralContributionReportResponse'
+    /v1/backoffice/report/referral/lifetime/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListReferralLifetimeReport returns Lifetime report - All-time commission totals
+            operationId: BackofficeReport_ListReferralLifetimeReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralLifetimeReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralLifetimeReportResponse'
+    /v1/backoffice/report/referral/snapshot/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
+            operationId: BackofficeReport_ListReferralSnapshotReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralSnapshotReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralSnapshotReportResponse'
+    /v1/backoffice/report/referral/vtg/list:
+        post:
+            tags:
+                - BackofficeReport
+            description: |-
+                Commission Report APIs (Referral tables)
+                 ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
+            operationId: BackofficeReport_ListReferralVTGReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReferralVTGReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListReferralVTGReportResponse'
     /v1/backoffice/report/register-retention/list:
         post:
             tags:

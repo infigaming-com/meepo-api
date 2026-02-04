@@ -91,12 +91,12 @@ func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTP
 	r.POST("/v1/backoffice/report/withdraw-vtg-details/list", _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/sport-events/list", _BackofficeReport_ListSportEvents0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/customer-record/get", _BackofficeReport_CustomerRecordReportDetail0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/referral/vtg/list", _BackofficeReport_ListReferralVTGReport0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/referral/snapshot/list", _BackofficeReport_ListReferralSnapshotReport0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/referral/contribution/list", _BackofficeReport_ListReferralContributionReport0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/referral/lifetime/list", _BackofficeReport_ListReferralLifetimeReport0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/affiliate/vtg/list", _BackofficeReport_ListAffiliateVTGReport0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/affiliate/snapshot/list", _BackofficeReport_ListAffiliateSnapshotReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/referral/vtg/list", _BackofficeReport_ListReferralVTGReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/referral/snapshot/list", _BackofficeReport_ListReferralSnapshotReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/referral/contribution/list", _BackofficeReport_ListReferralContributionReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/referral/lifetime/list", _BackofficeReport_ListReferralLifetimeReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/affiliate/vtg/list", _BackofficeReport_ListAffiliateVTGReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/affiliate/snapshot/list", _BackofficeReport_ListAffiliateSnapshotReport0_HTTP_Handler(srv))
 }
 
 func _BackofficeReport_GetSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
@@ -682,7 +682,7 @@ func (c *BackofficeReportHTTPClientImpl) GetWithdrawSummaries(ctx context.Contex
 // ListAffiliateSnapshotReport ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 func (c *BackofficeReportHTTPClientImpl) ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...http.CallOption) (*v1.ListAffiliateSnapshotReportResponse, error) {
 	var out v1.ListAffiliateSnapshotReportResponse
-	pattern := "/v1/backoffice/affiliate/snapshot/list"
+	pattern := "/v1/backoffice/report/affiliate/snapshot/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListAffiliateSnapshotReport))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -697,7 +697,7 @@ func (c *BackofficeReportHTTPClientImpl) ListAffiliateSnapshotReport(ctx context
 // ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
 func (c *BackofficeReportHTTPClientImpl) ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...http.CallOption) (*v1.ListAffiliateVTGReportResponse, error) {
 	var out v1.ListAffiliateVTGReportResponse
-	pattern := "/v1/backoffice/affiliate/vtg/list"
+	pattern := "/v1/backoffice/report/affiliate/vtg/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListAffiliateVTGReport))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -763,7 +763,7 @@ func (c *BackofficeReportHTTPClientImpl) ListPlayerGameData(ctx context.Context,
 // ListReferralContributionReport ListReferralContributionReport returns Contribution report - Subordinate detail view
 func (c *BackofficeReportHTTPClientImpl) ListReferralContributionReport(ctx context.Context, in *ListReferralContributionReportRequest, opts ...http.CallOption) (*v1.ListReferralContributionReportResponse, error) {
 	var out v1.ListReferralContributionReportResponse
-	pattern := "/v1/backoffice/referral/contribution/list"
+	pattern := "/v1/backoffice/report/referral/contribution/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListReferralContributionReport))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -777,7 +777,7 @@ func (c *BackofficeReportHTTPClientImpl) ListReferralContributionReport(ctx cont
 // ListReferralLifetimeReport ListReferralLifetimeReport returns Lifetime report - All-time commission totals
 func (c *BackofficeReportHTTPClientImpl) ListReferralLifetimeReport(ctx context.Context, in *ListReferralLifetimeReportRequest, opts ...http.CallOption) (*v1.ListReferralLifetimeReportResponse, error) {
 	var out v1.ListReferralLifetimeReportResponse
-	pattern := "/v1/backoffice/referral/lifetime/list"
+	pattern := "/v1/backoffice/report/referral/lifetime/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListReferralLifetimeReport))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -791,7 +791,7 @@ func (c *BackofficeReportHTTPClientImpl) ListReferralLifetimeReport(ctx context.
 // ListReferralSnapshotReport ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
 func (c *BackofficeReportHTTPClientImpl) ListReferralSnapshotReport(ctx context.Context, in *ListReferralSnapshotReportRequest, opts ...http.CallOption) (*v1.ListReferralSnapshotReportResponse, error) {
 	var out v1.ListReferralSnapshotReportResponse
-	pattern := "/v1/backoffice/referral/snapshot/list"
+	pattern := "/v1/backoffice/report/referral/snapshot/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListReferralSnapshotReport))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -806,7 +806,7 @@ func (c *BackofficeReportHTTPClientImpl) ListReferralSnapshotReport(ctx context.
 // ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
 func (c *BackofficeReportHTTPClientImpl) ListReferralVTGReport(ctx context.Context, in *ListReferralVTGReportRequest, opts ...http.CallOption) (*v1.ListReferralVTGReportResponse, error) {
 	var out v1.ListReferralVTGReportResponse
-	pattern := "/v1/backoffice/referral/vtg/list"
+	pattern := "/v1/backoffice/report/referral/vtg/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListReferralVTGReport))
 	opts = append(opts, http.PathTemplate(pattern))

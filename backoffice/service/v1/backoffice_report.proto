@@ -110,7 +110,7 @@ service BackofficeReport {
   // ListReferralVTGReport returns VTG (Vintage) report - New subordinates performance
   rpc ListReferralVTGReport(ListReferralVTGReportRequest) returns (api.affiliate.service.v1.ListReferralVTGReportResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/referral/vtg/list"
+          post: "/v1/backoffice/report/referral/vtg/list"
           body: "*"
       };
   }
@@ -118,7 +118,7 @@ service BackofficeReport {
   // ListReferralSnapshotReport returns Snapshot report - Cumulative + Period activity
   rpc ListReferralSnapshotReport(ListReferralSnapshotReportRequest) returns (api.affiliate.service.v1.ListReferralSnapshotReportResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/referral/snapshot/list"
+          post: "/v1/backoffice/report/referral/snapshot/list"
           body: "*"
       };
   }
@@ -126,7 +126,7 @@ service BackofficeReport {
   // ListReferralContributionReport returns Contribution report - Subordinate detail view
   rpc ListReferralContributionReport(ListReferralContributionReportRequest) returns (api.affiliate.service.v1.ListReferralContributionReportResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/referral/contribution/list"
+          post: "/v1/backoffice/report/referral/contribution/list"
           body: "*"
       };
   }
@@ -134,7 +134,7 @@ service BackofficeReport {
   // ListReferralLifetimeReport returns Lifetime report - All-time commission totals
   rpc ListReferralLifetimeReport(ListReferralLifetimeReportRequest) returns (api.affiliate.service.v1.ListReferralLifetimeReportResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/referral/lifetime/list"
+          post: "/v1/backoffice/report/referral/lifetime/list"
           body: "*"
       };
   }
@@ -143,7 +143,7 @@ service BackofficeReport {
   // ListAffiliateVTGReport returns VTG report - New users (registered in period) performance
   rpc ListAffiliateVTGReport(ListAffiliateVTGReportRequest) returns (api.affiliate.service.v1.ListAffiliateVTGReportResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/affiliate/vtg/list"
+          post: "/v1/backoffice/report/affiliate/vtg/list"
           body: "*"
       };
   }
@@ -151,7 +151,7 @@ service BackofficeReport {
   // ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
   rpc ListAffiliateSnapshotReport(ListAffiliateSnapshotReportRequest) returns (api.affiliate.service.v1.ListAffiliateSnapshotReportResponse) {
       option (google.api.http) = {
-          post: "/v1/backoffice/affiliate/snapshot/list"
+          post: "/v1/backoffice/report/affiliate/snapshot/list"
           body: "*"
       };
   }
