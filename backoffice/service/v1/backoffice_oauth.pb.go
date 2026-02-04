@@ -590,6 +590,434 @@ func (x *GetOAuthProviderConfigResponse) GetConfig() *v1.OAuthProviderConfig {
 	return nil
 }
 
+// CreateOrUpdateTelegramConfigRequest - request to create or update Telegram config
+type CreateOrUpdateTelegramConfigRequest struct {
+	state                   protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext   *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	ConfigId                *int64                  `protobuf:"varint,2,opt,name=config_id,json=configId,proto3,oneof" json:"config_id,omitempty"` // If provided, update existing config; otherwise create new
+	BotToken                string                  `protobuf:"bytes,3,opt,name=bot_token,json=botToken,proto3" json:"bot_token,omitempty"`        // Required for create, optional for update
+	BotUsername             string                  `protobuf:"bytes,4,opt,name=bot_username,json=botUsername,proto3" json:"bot_username,omitempty"`
+	Enabled                 bool                    `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	AllowRegistration       bool                    `protobuf:"varint,6,opt,name=allow_registration,json=allowRegistration,proto3" json:"allow_registration,omitempty"`
+	AllowLinking            bool                    `protobuf:"varint,7,opt,name=allow_linking,json=allowLinking,proto3" json:"allow_linking,omitempty"`
+	AuthDateValiditySeconds int32                   `protobuf:"varint,8,opt,name=auth_date_validity_seconds,json=authDateValiditySeconds,proto3" json:"auth_date_validity_seconds,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) Reset() {
+	*x = CreateOrUpdateTelegramConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOrUpdateTelegramConfigRequest) ProtoMessage() {}
+
+func (x *CreateOrUpdateTelegramConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOrUpdateTelegramConfigRequest.ProtoReflect.Descriptor instead.
+func (*CreateOrUpdateTelegramConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetConfigId() int64 {
+	if x != nil && x.ConfigId != nil {
+		return *x.ConfigId
+	}
+	return 0
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetBotToken() string {
+	if x != nil {
+		return x.BotToken
+	}
+	return ""
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetBotUsername() string {
+	if x != nil {
+		return x.BotUsername
+	}
+	return ""
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetAllowRegistration() bool {
+	if x != nil {
+		return x.AllowRegistration
+	}
+	return false
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetAllowLinking() bool {
+	if x != nil {
+		return x.AllowLinking
+	}
+	return false
+}
+
+func (x *CreateOrUpdateTelegramConfigRequest) GetAuthDateValiditySeconds() int32 {
+	if x != nil {
+		return x.AuthDateValiditySeconds
+	}
+	return 0
+}
+
+type CreateOrUpdateTelegramConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ConfigId      int64                  `protobuf:"varint,1,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
+	Created       bool                   `protobuf:"varint,2,opt,name=created,proto3" json:"created,omitempty"` // True if created, false if updated
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateOrUpdateTelegramConfigResponse) Reset() {
+	*x = CreateOrUpdateTelegramConfigResponse{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOrUpdateTelegramConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOrUpdateTelegramConfigResponse) ProtoMessage() {}
+
+func (x *CreateOrUpdateTelegramConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOrUpdateTelegramConfigResponse.ProtoReflect.Descriptor instead.
+func (*CreateOrUpdateTelegramConfigResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CreateOrUpdateTelegramConfigResponse) GetConfigId() int64 {
+	if x != nil {
+		return x.ConfigId
+	}
+	return 0
+}
+
+func (x *CreateOrUpdateTelegramConfigResponse) GetCreated() bool {
+	if x != nil {
+		return x.Created
+	}
+	return false
+}
+
+// DeleteTelegramConfigRequest - request to delete Telegram config
+type DeleteTelegramConfigRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	ConfigId              int64                   `protobuf:"varint,2,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DeleteTelegramConfigRequest) Reset() {
+	*x = DeleteTelegramConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTelegramConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTelegramConfigRequest) ProtoMessage() {}
+
+func (x *DeleteTelegramConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTelegramConfigRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTelegramConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DeleteTelegramConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteTelegramConfigRequest) GetConfigId() int64 {
+	if x != nil {
+		return x.ConfigId
+	}
+	return 0
+}
+
+type DeleteTelegramConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTelegramConfigResponse) Reset() {
+	*x = DeleteTelegramConfigResponse{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTelegramConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTelegramConfigResponse) ProtoMessage() {}
+
+func (x *DeleteTelegramConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTelegramConfigResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTelegramConfigResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{13}
+}
+
+// SetTelegramEnabledRequest - request to enable/disable Telegram auth
+type SetTelegramEnabledRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	ConfigId              int64                   `protobuf:"varint,2,opt,name=config_id,json=configId,proto3" json:"config_id,omitempty"`
+	Enabled               bool                    `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *SetTelegramEnabledRequest) Reset() {
+	*x = SetTelegramEnabledRequest{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTelegramEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTelegramEnabledRequest) ProtoMessage() {}
+
+func (x *SetTelegramEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTelegramEnabledRequest.ProtoReflect.Descriptor instead.
+func (*SetTelegramEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SetTelegramEnabledRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *SetTelegramEnabledRequest) GetConfigId() int64 {
+	if x != nil {
+		return x.ConfigId
+	}
+	return 0
+}
+
+func (x *SetTelegramEnabledRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+type SetTelegramEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTelegramEnabledResponse) Reset() {
+	*x = SetTelegramEnabledResponse{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTelegramEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTelegramEnabledResponse) ProtoMessage() {}
+
+func (x *SetTelegramEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTelegramEnabledResponse.ProtoReflect.Descriptor instead.
+func (*SetTelegramEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{15}
+}
+
+// GetTelegramConfigRequest - request to get Telegram config
+type GetTelegramConfigRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *GetTelegramConfigRequest) Reset() {
+	*x = GetTelegramConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTelegramConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTelegramConfigRequest) ProtoMessage() {}
+
+func (x *GetTelegramConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTelegramConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetTelegramConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetTelegramConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+type GetTelegramConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Config        *v1.TelegramConfig     `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTelegramConfigResponse) Reset() {
+	*x = GetTelegramConfigResponse{}
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTelegramConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTelegramConfigResponse) ProtoMessage() {}
+
+func (x *GetTelegramConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTelegramConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetTelegramConfigResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetTelegramConfigResponse) GetConfig() *v1.TelegramConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
 var File_backoffice_service_v1_backoffice_oauth_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_oauth_proto_rawDesc = "" +
@@ -639,13 +1067,44 @@ const file_backoffice_service_v1_backoffice_oauth_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
 	"\tconfig_id\x18\x02 \x01(\x03R\bconfigId\"b\n" +
 	"\x1eGetOAuthProviderConfigResponse\x12@\n" +
-	"\x06config\x18\x01 \x01(\v2(.api.user.service.v1.OAuthProviderConfigR\x06config2\x91\b\n" +
+	"\x06config\x18\x01 \x01(\v2(.api.user.service.v1.OAuthProviderConfigR\x06config\"\x95\x03\n" +
+	"#CreateOrUpdateTelegramConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12 \n" +
+	"\tconfig_id\x18\x02 \x01(\x03H\x00R\bconfigId\x88\x01\x01\x12\x1b\n" +
+	"\tbot_token\x18\x03 \x01(\tR\bbotToken\x12!\n" +
+	"\fbot_username\x18\x04 \x01(\tR\vbotUsername\x12\x18\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\x12-\n" +
+	"\x12allow_registration\x18\x06 \x01(\bR\x11allowRegistration\x12#\n" +
+	"\rallow_linking\x18\a \x01(\bR\fallowLinking\x12;\n" +
+	"\x1aauth_date_validity_seconds\x18\b \x01(\x05R\x17authDateValiditySecondsB\f\n" +
+	"\n" +
+	"_config_id\"]\n" +
+	"$CreateOrUpdateTelegramConfigResponse\x12\x1b\n" +
+	"\tconfig_id\x18\x01 \x01(\x03R\bconfigId\x12\x18\n" +
+	"\acreated\x18\x02 \x01(\bR\acreated\"\x8f\x01\n" +
+	"\x1bDeleteTelegramConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
+	"\tconfig_id\x18\x02 \x01(\x03R\bconfigId\"\x1e\n" +
+	"\x1cDeleteTelegramConfigResponse\"\xa7\x01\n" +
+	"\x19SetTelegramEnabledRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
+	"\tconfig_id\x18\x02 \x01(\x03R\bconfigId\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x1c\n" +
+	"\x1aSetTelegramEnabledResponse\"o\n" +
+	"\x18GetTelegramConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"X\n" +
+	"\x19GetTelegramConfigResponse\x12;\n" +
+	"\x06config\x18\x01 \x01(\v2#.api.user.service.v1.TelegramConfigR\x06config2\x94\x0e\n" +
 	"\x0fBackofficeOAuth\x12\xe7\x01\n" +
 	"!CreateOrUpdateOAuthProviderConfig\x12C.api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest\x1aD.api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/oauth/provider/createorupdate\x12\xc7\x01\n" +
 	"\x19DeleteOAuthProviderConfig\x12;.api.backoffice.service.v1.DeleteOAuthProviderConfigRequest\x1a<.api.backoffice.service.v1.DeleteOAuthProviderConfigResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/oauth/provider/delete\x12\xc6\x01\n" +
 	"\x17SetOAuthProviderEnabled\x129.api.backoffice.service.v1.SetOAuthProviderEnabledRequest\x1a:.api.backoffice.service.v1.SetOAuthProviderEnabledResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/oauth/provider/enabled/set\x12\xc2\x01\n" +
 	"\x18ListOAuthProviderConfigs\x12:.api.backoffice.service.v1.ListOAuthProviderConfigsRequest\x1a;.api.backoffice.service.v1.ListOAuthProviderConfigsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/oauth/provider/list\x12\xbb\x01\n" +
-	"\x16GetOAuthProviderConfig\x128.api.backoffice.service.v1.GetOAuthProviderConfigRequest\x1a9.api.backoffice.service.v1.GetOAuthProviderConfigResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/oauth/provider/getB[\n" +
+	"\x16GetOAuthProviderConfig\x128.api.backoffice.service.v1.GetOAuthProviderConfigRequest\x1a9.api.backoffice.service.v1.GetOAuthProviderConfigResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/oauth/provider/get\x12\xd9\x01\n" +
+	"\x1cCreateOrUpdateTelegramConfig\x12>.api.backoffice.service.v1.CreateOrUpdateTelegramConfigRequest\x1a?.api.backoffice.service.v1.CreateOrUpdateTelegramConfigResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/telegram/config/createorupdate\x12\xad\x01\n" +
+	"\x11GetTelegramConfig\x123.api.backoffice.service.v1.GetTelegramConfigRequest\x1a4.api.backoffice.service.v1.GetTelegramConfigResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/telegram/config/get\x12\xb9\x01\n" +
+	"\x14DeleteTelegramConfig\x126.api.backoffice.service.v1.DeleteTelegramConfigRequest\x1a7.api.backoffice.service.v1.DeleteTelegramConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/telegram/config/delete\x12\xb8\x01\n" +
+	"\x12SetTelegramEnabled\x124.api.backoffice.service.v1.SetTelegramEnabledRequest\x1a5.api.backoffice.service.v1.SetTelegramEnabledResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/telegram/config/enabled/setB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -660,7 +1119,7 @@ func file_backoffice_service_v1_backoffice_oauth_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_oauth_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_backoffice_service_v1_backoffice_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_backoffice_service_v1_backoffice_oauth_proto_goTypes = []any{
 	(*CreateOrUpdateOAuthProviderConfigRequest)(nil),  // 0: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest
 	(*CreateOrUpdateOAuthProviderConfigResponse)(nil), // 1: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse
@@ -672,37 +1131,59 @@ var file_backoffice_service_v1_backoffice_oauth_proto_goTypes = []any{
 	(*ListOAuthProviderConfigsResponse)(nil),          // 7: api.backoffice.service.v1.ListOAuthProviderConfigsResponse
 	(*GetOAuthProviderConfigRequest)(nil),             // 8: api.backoffice.service.v1.GetOAuthProviderConfigRequest
 	(*GetOAuthProviderConfigResponse)(nil),            // 9: api.backoffice.service.v1.GetOAuthProviderConfigResponse
-	nil,                                               // 10: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
-	(*common.OperatorContext)(nil),                    // 11: api.common.OperatorContext
-	(v1.OAuthProvider)(0),                             // 12: api.user.service.v1.OAuthProvider
-	(*v1.OAuthProviderConfig)(nil),                    // 13: api.user.service.v1.OAuthProviderConfig
+	(*CreateOrUpdateTelegramConfigRequest)(nil),       // 10: api.backoffice.service.v1.CreateOrUpdateTelegramConfigRequest
+	(*CreateOrUpdateTelegramConfigResponse)(nil),      // 11: api.backoffice.service.v1.CreateOrUpdateTelegramConfigResponse
+	(*DeleteTelegramConfigRequest)(nil),               // 12: api.backoffice.service.v1.DeleteTelegramConfigRequest
+	(*DeleteTelegramConfigResponse)(nil),              // 13: api.backoffice.service.v1.DeleteTelegramConfigResponse
+	(*SetTelegramEnabledRequest)(nil),                 // 14: api.backoffice.service.v1.SetTelegramEnabledRequest
+	(*SetTelegramEnabledResponse)(nil),                // 15: api.backoffice.service.v1.SetTelegramEnabledResponse
+	(*GetTelegramConfigRequest)(nil),                  // 16: api.backoffice.service.v1.GetTelegramConfigRequest
+	(*GetTelegramConfigResponse)(nil),                 // 17: api.backoffice.service.v1.GetTelegramConfigResponse
+	nil,                                               // 18: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	(*common.OperatorContext)(nil),                    // 19: api.common.OperatorContext
+	(v1.OAuthProvider)(0),                             // 20: api.user.service.v1.OAuthProvider
+	(*v1.OAuthProviderConfig)(nil),                    // 21: api.user.service.v1.OAuthProviderConfig
+	(*v1.TelegramConfig)(nil),                         // 22: api.user.service.v1.TelegramConfig
 }
 var file_backoffice_service_v1_backoffice_oauth_proto_depIdxs = []int32{
-	11, // 0: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 1: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	10, // 2: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
-	11, // 3: api.backoffice.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 4: api.backoffice.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
-	11, // 5: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 6: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	13, // 7: api.backoffice.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
-	11, // 8: api.backoffice.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	13, // 9: api.backoffice.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
-	0,  // 10: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateOAuthProviderConfig:input_type -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest
-	2,  // 11: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:input_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigRequest
-	4,  // 12: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:input_type -> api.backoffice.service.v1.SetOAuthProviderEnabledRequest
-	6,  // 13: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:input_type -> api.backoffice.service.v1.ListOAuthProviderConfigsRequest
-	8,  // 14: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:input_type -> api.backoffice.service.v1.GetOAuthProviderConfigRequest
-	1,  // 15: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateOAuthProviderConfig:output_type -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse
-	3,  // 16: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:output_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigResponse
-	5,  // 17: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:output_type -> api.backoffice.service.v1.SetOAuthProviderEnabledResponse
-	7,  // 18: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:output_type -> api.backoffice.service.v1.ListOAuthProviderConfigsResponse
-	9,  // 19: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:output_type -> api.backoffice.service.v1.GetOAuthProviderConfigResponse
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	19, // 0: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	20, // 1: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	18, // 2: api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	19, // 3: api.backoffice.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 4: api.backoffice.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 5: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	20, // 6: api.backoffice.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
+	21, // 7: api.backoffice.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
+	19, // 8: api.backoffice.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	21, // 9: api.backoffice.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
+	19, // 10: api.backoffice.service.v1.CreateOrUpdateTelegramConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 11: api.backoffice.service.v1.DeleteTelegramConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 12: api.backoffice.service.v1.SetTelegramEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 13: api.backoffice.service.v1.GetTelegramConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	22, // 14: api.backoffice.service.v1.GetTelegramConfigResponse.config:type_name -> api.user.service.v1.TelegramConfig
+	0,  // 15: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateOAuthProviderConfig:input_type -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigRequest
+	2,  // 16: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:input_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigRequest
+	4,  // 17: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:input_type -> api.backoffice.service.v1.SetOAuthProviderEnabledRequest
+	6,  // 18: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:input_type -> api.backoffice.service.v1.ListOAuthProviderConfigsRequest
+	8,  // 19: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:input_type -> api.backoffice.service.v1.GetOAuthProviderConfigRequest
+	10, // 20: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateTelegramConfig:input_type -> api.backoffice.service.v1.CreateOrUpdateTelegramConfigRequest
+	16, // 21: api.backoffice.service.v1.BackofficeOAuth.GetTelegramConfig:input_type -> api.backoffice.service.v1.GetTelegramConfigRequest
+	12, // 22: api.backoffice.service.v1.BackofficeOAuth.DeleteTelegramConfig:input_type -> api.backoffice.service.v1.DeleteTelegramConfigRequest
+	14, // 23: api.backoffice.service.v1.BackofficeOAuth.SetTelegramEnabled:input_type -> api.backoffice.service.v1.SetTelegramEnabledRequest
+	1,  // 24: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateOAuthProviderConfig:output_type -> api.backoffice.service.v1.CreateOrUpdateOAuthProviderConfigResponse
+	3,  // 25: api.backoffice.service.v1.BackofficeOAuth.DeleteOAuthProviderConfig:output_type -> api.backoffice.service.v1.DeleteOAuthProviderConfigResponse
+	5,  // 26: api.backoffice.service.v1.BackofficeOAuth.SetOAuthProviderEnabled:output_type -> api.backoffice.service.v1.SetOAuthProviderEnabledResponse
+	7,  // 27: api.backoffice.service.v1.BackofficeOAuth.ListOAuthProviderConfigs:output_type -> api.backoffice.service.v1.ListOAuthProviderConfigsResponse
+	9,  // 28: api.backoffice.service.v1.BackofficeOAuth.GetOAuthProviderConfig:output_type -> api.backoffice.service.v1.GetOAuthProviderConfigResponse
+	11, // 29: api.backoffice.service.v1.BackofficeOAuth.CreateOrUpdateTelegramConfig:output_type -> api.backoffice.service.v1.CreateOrUpdateTelegramConfigResponse
+	17, // 30: api.backoffice.service.v1.BackofficeOAuth.GetTelegramConfig:output_type -> api.backoffice.service.v1.GetTelegramConfigResponse
+	13, // 31: api.backoffice.service.v1.BackofficeOAuth.DeleteTelegramConfig:output_type -> api.backoffice.service.v1.DeleteTelegramConfigResponse
+	15, // 32: api.backoffice.service.v1.BackofficeOAuth.SetTelegramEnabled:output_type -> api.backoffice.service.v1.SetTelegramEnabledResponse
+	24, // [24:33] is the sub-list for method output_type
+	15, // [15:24] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_oauth_proto_init() }
@@ -712,13 +1193,14 @@ func file_backoffice_service_v1_backoffice_oauth_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[6].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_oauth_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_oauth_proto_rawDesc), len(file_backoffice_service_v1_backoffice_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

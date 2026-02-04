@@ -20,22 +20,35 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeOAuthCreateOrUpdateOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/CreateOrUpdateOAuthProviderConfig"
+const OperationBackofficeOAuthCreateOrUpdateTelegramConfig = "/api.backoffice.service.v1.BackofficeOAuth/CreateOrUpdateTelegramConfig"
 const OperationBackofficeOAuthDeleteOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/DeleteOAuthProviderConfig"
+const OperationBackofficeOAuthDeleteTelegramConfig = "/api.backoffice.service.v1.BackofficeOAuth/DeleteTelegramConfig"
 const OperationBackofficeOAuthGetOAuthProviderConfig = "/api.backoffice.service.v1.BackofficeOAuth/GetOAuthProviderConfig"
+const OperationBackofficeOAuthGetTelegramConfig = "/api.backoffice.service.v1.BackofficeOAuth/GetTelegramConfig"
 const OperationBackofficeOAuthListOAuthProviderConfigs = "/api.backoffice.service.v1.BackofficeOAuth/ListOAuthProviderConfigs"
 const OperationBackofficeOAuthSetOAuthProviderEnabled = "/api.backoffice.service.v1.BackofficeOAuth/SetOAuthProviderEnabled"
+const OperationBackofficeOAuthSetTelegramEnabled = "/api.backoffice.service.v1.BackofficeOAuth/SetTelegramEnabled"
 
 type BackofficeOAuthHTTPServer interface {
 	// CreateOrUpdateOAuthProviderConfig Create or update OAuth provider configuration
 	CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error)
+	// CreateOrUpdateTelegramConfig ============ Telegram Configuration Management ============
+	// Create or update Telegram configuration
+	CreateOrUpdateTelegramConfig(context.Context, *CreateOrUpdateTelegramConfigRequest) (*CreateOrUpdateTelegramConfigResponse, error)
 	// DeleteOAuthProviderConfig Delete an OAuth provider configuration
 	DeleteOAuthProviderConfig(context.Context, *DeleteOAuthProviderConfigRequest) (*DeleteOAuthProviderConfigResponse, error)
+	// DeleteTelegramConfig Delete Telegram configuration
+	DeleteTelegramConfig(context.Context, *DeleteTelegramConfigRequest) (*DeleteTelegramConfigResponse, error)
 	// GetOAuthProviderConfig Get a specific OAuth provider configuration
 	GetOAuthProviderConfig(context.Context, *GetOAuthProviderConfigRequest) (*GetOAuthProviderConfigResponse, error)
+	// GetTelegramConfig Get Telegram configuration
+	GetTelegramConfig(context.Context, *GetTelegramConfigRequest) (*GetTelegramConfigResponse, error)
 	// ListOAuthProviderConfigs List all OAuth provider configurations for an operator
 	ListOAuthProviderConfigs(context.Context, *ListOAuthProviderConfigsRequest) (*ListOAuthProviderConfigsResponse, error)
 	// SetOAuthProviderEnabled Enable or disable an OAuth provider
 	SetOAuthProviderEnabled(context.Context, *SetOAuthProviderEnabledRequest) (*SetOAuthProviderEnabledResponse, error)
+	// SetTelegramEnabled Enable or disable Telegram auth
+	SetTelegramEnabled(context.Context, *SetTelegramEnabledRequest) (*SetTelegramEnabledResponse, error)
 }
 
 func RegisterBackofficeOAuthHTTPServer(s *http.Server, srv BackofficeOAuthHTTPServer) {
@@ -45,6 +58,10 @@ func RegisterBackofficeOAuthHTTPServer(s *http.Server, srv BackofficeOAuthHTTPSe
 	r.POST("/v1/backoffice/oauth/provider/enabled/set", _BackofficeOAuth_SetOAuthProviderEnabled0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/oauth/provider/list", _BackofficeOAuth_ListOAuthProviderConfigs0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/oauth/provider/get", _BackofficeOAuth_GetOAuthProviderConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/telegram/config/createorupdate", _BackofficeOAuth_CreateOrUpdateTelegramConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/telegram/config/get", _BackofficeOAuth_GetTelegramConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/telegram/config/delete", _BackofficeOAuth_DeleteTelegramConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/telegram/config/enabled/set", _BackofficeOAuth_SetTelegramEnabled0_HTTP_Handler(srv))
 }
 
 func _BackofficeOAuth_CreateOrUpdateOAuthProviderConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
@@ -157,17 +174,114 @@ func _BackofficeOAuth_GetOAuthProviderConfig0_HTTP_Handler(srv BackofficeOAuthHT
 	}
 }
 
+func _BackofficeOAuth_CreateOrUpdateTelegramConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateOrUpdateTelegramConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOAuthCreateOrUpdateTelegramConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateOrUpdateTelegramConfig(ctx, req.(*CreateOrUpdateTelegramConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateOrUpdateTelegramConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOAuth_GetTelegramConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetTelegramConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOAuthGetTelegramConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetTelegramConfig(ctx, req.(*GetTelegramConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetTelegramConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOAuth_DeleteTelegramConfig0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteTelegramConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOAuthDeleteTelegramConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteTelegramConfig(ctx, req.(*DeleteTelegramConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteTelegramConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOAuth_SetTelegramEnabled0_HTTP_Handler(srv BackofficeOAuthHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetTelegramEnabledRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOAuthSetTelegramEnabled)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetTelegramEnabled(ctx, req.(*SetTelegramEnabledRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetTelegramEnabledResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOAuthHTTPClient interface {
 	// CreateOrUpdateOAuthProviderConfig Create or update OAuth provider configuration
 	CreateOrUpdateOAuthProviderConfig(ctx context.Context, req *CreateOrUpdateOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *CreateOrUpdateOAuthProviderConfigResponse, err error)
+	// CreateOrUpdateTelegramConfig ============ Telegram Configuration Management ============
+	// Create or update Telegram configuration
+	CreateOrUpdateTelegramConfig(ctx context.Context, req *CreateOrUpdateTelegramConfigRequest, opts ...http.CallOption) (rsp *CreateOrUpdateTelegramConfigResponse, err error)
 	// DeleteOAuthProviderConfig Delete an OAuth provider configuration
 	DeleteOAuthProviderConfig(ctx context.Context, req *DeleteOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *DeleteOAuthProviderConfigResponse, err error)
+	// DeleteTelegramConfig Delete Telegram configuration
+	DeleteTelegramConfig(ctx context.Context, req *DeleteTelegramConfigRequest, opts ...http.CallOption) (rsp *DeleteTelegramConfigResponse, err error)
 	// GetOAuthProviderConfig Get a specific OAuth provider configuration
 	GetOAuthProviderConfig(ctx context.Context, req *GetOAuthProviderConfigRequest, opts ...http.CallOption) (rsp *GetOAuthProviderConfigResponse, err error)
+	// GetTelegramConfig Get Telegram configuration
+	GetTelegramConfig(ctx context.Context, req *GetTelegramConfigRequest, opts ...http.CallOption) (rsp *GetTelegramConfigResponse, err error)
 	// ListOAuthProviderConfigs List all OAuth provider configurations for an operator
 	ListOAuthProviderConfigs(ctx context.Context, req *ListOAuthProviderConfigsRequest, opts ...http.CallOption) (rsp *ListOAuthProviderConfigsResponse, err error)
 	// SetOAuthProviderEnabled Enable or disable an OAuth provider
 	SetOAuthProviderEnabled(ctx context.Context, req *SetOAuthProviderEnabledRequest, opts ...http.CallOption) (rsp *SetOAuthProviderEnabledResponse, err error)
+	// SetTelegramEnabled Enable or disable Telegram auth
+	SetTelegramEnabled(ctx context.Context, req *SetTelegramEnabledRequest, opts ...http.CallOption) (rsp *SetTelegramEnabledResponse, err error)
 }
 
 type BackofficeOAuthHTTPClientImpl struct {
@@ -192,6 +306,21 @@ func (c *BackofficeOAuthHTTPClientImpl) CreateOrUpdateOAuthProviderConfig(ctx co
 	return &out, nil
 }
 
+// CreateOrUpdateTelegramConfig ============ Telegram Configuration Management ============
+// Create or update Telegram configuration
+func (c *BackofficeOAuthHTTPClientImpl) CreateOrUpdateTelegramConfig(ctx context.Context, in *CreateOrUpdateTelegramConfigRequest, opts ...http.CallOption) (*CreateOrUpdateTelegramConfigResponse, error) {
+	var out CreateOrUpdateTelegramConfigResponse
+	pattern := "/v1/backoffice/telegram/config/createorupdate"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOAuthCreateOrUpdateTelegramConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // DeleteOAuthProviderConfig Delete an OAuth provider configuration
 func (c *BackofficeOAuthHTTPClientImpl) DeleteOAuthProviderConfig(ctx context.Context, in *DeleteOAuthProviderConfigRequest, opts ...http.CallOption) (*DeleteOAuthProviderConfigResponse, error) {
 	var out DeleteOAuthProviderConfigResponse
@@ -206,12 +335,40 @@ func (c *BackofficeOAuthHTTPClientImpl) DeleteOAuthProviderConfig(ctx context.Co
 	return &out, nil
 }
 
+// DeleteTelegramConfig Delete Telegram configuration
+func (c *BackofficeOAuthHTTPClientImpl) DeleteTelegramConfig(ctx context.Context, in *DeleteTelegramConfigRequest, opts ...http.CallOption) (*DeleteTelegramConfigResponse, error) {
+	var out DeleteTelegramConfigResponse
+	pattern := "/v1/backoffice/telegram/config/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOAuthDeleteTelegramConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // GetOAuthProviderConfig Get a specific OAuth provider configuration
 func (c *BackofficeOAuthHTTPClientImpl) GetOAuthProviderConfig(ctx context.Context, in *GetOAuthProviderConfigRequest, opts ...http.CallOption) (*GetOAuthProviderConfigResponse, error) {
 	var out GetOAuthProviderConfigResponse
 	pattern := "/v1/backoffice/oauth/provider/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOAuthGetOAuthProviderConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetTelegramConfig Get Telegram configuration
+func (c *BackofficeOAuthHTTPClientImpl) GetTelegramConfig(ctx context.Context, in *GetTelegramConfigRequest, opts ...http.CallOption) (*GetTelegramConfigResponse, error) {
+	var out GetTelegramConfigResponse
+	pattern := "/v1/backoffice/telegram/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOAuthGetTelegramConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -240,6 +397,20 @@ func (c *BackofficeOAuthHTTPClientImpl) SetOAuthProviderEnabled(ctx context.Cont
 	pattern := "/v1/backoffice/oauth/provider/enabled/set"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOAuthSetOAuthProviderEnabled))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SetTelegramEnabled Enable or disable Telegram auth
+func (c *BackofficeOAuthHTTPClientImpl) SetTelegramEnabled(ctx context.Context, in *SetTelegramEnabledRequest, opts ...http.CallOption) (*SetTelegramEnabledResponse, error) {
+	var out SetTelegramEnabledResponse
+	pattern := "/v1/backoffice/telegram/config/enabled/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOAuthSetTelegramEnabled))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

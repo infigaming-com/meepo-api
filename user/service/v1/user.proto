@@ -517,6 +517,25 @@ service User {
 			body: "*"
 		};
 	}
+
+	// ============ Telegram Configuration APIs (Internal gRPC) ============
+	// Create or update Telegram configuration for an operator
+	// If config_id is provided, updates existing config; otherwise creates new one
+	rpc CreateOrUpdateTelegramConfig(CreateOrUpdateTelegramConfigRequest) returns (CreateOrUpdateTelegramConfigResponse) {}
+	// Delete Telegram configuration
+	rpc DeleteTelegramConfig(DeleteTelegramConfigRequest) returns (DeleteTelegramConfigResponse) {}
+	// Set Telegram enabled/disabled status
+	rpc SetTelegramEnabled(SetTelegramEnabledRequest) returns (SetTelegramEnabledResponse) {}
+	// Get Telegram configuration for an operator
+	rpc GetTelegramConfig(GetTelegramConfigRequest) returns (GetTelegramConfigResponse) {}
+
+	// ============ Player Telegram APIs ============
+	// Get Telegram login info for the current operator (public)
+	rpc GetTelegramLoginInfo(GetTelegramLoginInfoRequest) returns (GetTelegramLoginInfoResponse) {
+		option (google.api.http) = {
+			get: "/v1/user/telegram/info"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -2345,4 +2364,82 @@ message InitiateOAuthBindingRequest {
 message InitiateOAuthBindingResponse {
 	string authorization_url = 1;          // Redirect user to this URL
 	string state = 2;                      // Server-generated state for CSRF protection
+}
+
+// ============================================================================
+// Telegram Configuration Messages
+// ============================================================================
+
+// TelegramConfig represents operator's Telegram bot configuration
+message TelegramConfig {
+	int64 id = 1;
+	int64 operator_id = 2;
+	bool enabled = 3;
+	string bot_token_masked = 4;           // Masked for display (e.g., "****:****")
+	string bot_username = 5;               // @botusername for widget
+	bool allow_registration = 6;
+	bool allow_linking = 7;
+	int32 auth_date_validity_seconds = 8;  // Auth date validity period (default: 86400 seconds)
+	int64 created_at = 9;
+	int64 updated_at = 10;
+}
+
+// CreateOrUpdateTelegramConfigRequest - create or update Telegram config
+// If config_id is provided (non-zero), updates existing config; otherwise creates new one
+message CreateOrUpdateTelegramConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	optional int64 config_id = 3;          // If provided, update existing config; otherwise create new
+	string bot_token = 4;                  // Required for create, optional for update
+	string bot_username = 5;
+	bool enabled = 6;
+	bool allow_registration = 7;
+	bool allow_linking = 8;
+	int32 auth_date_validity_seconds = 9;
+}
+
+message CreateOrUpdateTelegramConfigResponse {
+	int64 config_id = 1;
+	bool created = 2;                      // True if created, false if updated
+}
+
+// DeleteTelegramConfigRequest - delete Telegram config
+message DeleteTelegramConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 config_id = 3;
+}
+
+message DeleteTelegramConfigResponse {}
+
+// SetTelegramEnabledRequest - enable/disable Telegram auth
+message SetTelegramEnabledRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 config_id = 3;
+	bool enabled = 4;
+}
+
+message SetTelegramEnabledResponse {}
+
+// GetTelegramConfigRequest - get Telegram config
+message GetTelegramConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetTelegramConfigResponse {
+	TelegramConfig config = 1;
+}
+
+// GetTelegramLoginInfoRequest - get Telegram login info for frontend (public API)
+message GetTelegramLoginInfoRequest {
+	// Operator context extracted from middleware
+}
+
+// GetTelegramLoginInfoResponse - Telegram login info for frontend
+message GetTelegramLoginInfoResponse {
+	bool enabled = 1;
+	string bot_username = 2;
+	bool allow_registration = 3;
 }
