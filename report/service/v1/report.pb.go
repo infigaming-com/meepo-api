@@ -3742,8 +3742,11 @@ type AffiliateVTGReportDataItem struct {
 	// Other - Reporting Currency
 	PspFeeReportingCurrency     string `protobuf:"bytes,67,opt,name=psp_fee_reporting_currency,json=pspFeeReportingCurrency,proto3" json:"psp_fee_reporting_currency,omitempty"`
 	ContentFeeReportingCurrency string `protobuf:"bytes,68,opt,name=content_fee_reporting_currency,json=contentFeeReportingCurrency,proto3" json:"content_fee_reporting_currency,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	// Lifetime commission gaming data from affiliate_commissions.game_event_data
+	// Used by Affiliate Service to calculate Net Profit
+	LifetimeCommissionGaming *AffiliateLifetimeCommissionGaming `protobuf:"bytes,69,opt,name=lifetime_commission_gaming,json=lifetimeCommissionGaming,proto3" json:"lifetime_commission_gaming,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *AffiliateVTGReportDataItem) Reset() {
@@ -4252,6 +4255,13 @@ func (x *AffiliateVTGReportDataItem) GetContentFeeReportingCurrency() string {
 	return ""
 }
 
+func (x *AffiliateVTGReportDataItem) GetLifetimeCommissionGaming() *AffiliateLifetimeCommissionGaming {
+	if x != nil {
+		return x.LifetimeCommissionGaming
+	}
+	return nil
+}
+
 type ListAffiliateVTGReportDataResponse struct {
 	state         protoimpl.MessageState        `protogen:"open.v1"`
 	Items         []*AffiliateVTGReportDataItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
@@ -4320,6 +4330,95 @@ func (x *ListAffiliateVTGReportDataResponse) GetTotal() int64 {
 	return 0
 }
 
+// AffiliateLifetimeCommissionGaming - Lifetime gaming data from affiliate_commissions
+// Used by Affiliate Service to calculate Net Profit for VTG reports
+// Data source: affiliate_commissions.game_event_data (cumulative from user registration)
+// Note: ngr_usd is Game Bet NGR (bet_amount != 0), b2c_usd is Bonus-to-Cash (bet_amount = 0)
+type AffiliateLifetimeCommissionGaming struct {
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	GgrUsd string                 `protobuf:"bytes,1,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	NgrUsd string                 `protobuf:"bytes,2,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"` // Game Bet NGR only (excludes B2C)
+	B2CUsd string                 `protobuf:"bytes,3,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"` // Bonus-to-Cash conversion amount
+	// Reporting Currency
+	GgrReportingCurrency string `protobuf:"bytes,10,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrReportingCurrency string `protobuf:"bytes,11,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"` // Game Bet NGR only
+	B2CReportingCurrency string `protobuf:"bytes,12,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"` // Bonus-to-Cash
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *AffiliateLifetimeCommissionGaming) Reset() {
+	*x = AffiliateLifetimeCommissionGaming{}
+	mi := &file_report_service_v1_report_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AffiliateLifetimeCommissionGaming) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AffiliateLifetimeCommissionGaming) ProtoMessage() {}
+
+func (x *AffiliateLifetimeCommissionGaming) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_report_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AffiliateLifetimeCommissionGaming.ProtoReflect.Descriptor instead.
+func (*AffiliateLifetimeCommissionGaming) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *AffiliateLifetimeCommissionGaming) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *AffiliateLifetimeCommissionGaming) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *AffiliateLifetimeCommissionGaming) GetB2CUsd() string {
+	if x != nil {
+		return x.B2CUsd
+	}
+	return ""
+}
+
+func (x *AffiliateLifetimeCommissionGaming) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateLifetimeCommissionGaming) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateLifetimeCommissionGaming) GetB2CReportingCurrency() string {
+	if x != nil {
+		return x.B2CReportingCurrency
+	}
+	return ""
+}
+
 type ListAffiliateSnapshotReportDataRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	Period                 string                         `protobuf:"bytes,1,opt,name=period,proto3" json:"period,omitempty"` // "day", "week", "month"
@@ -4337,7 +4436,7 @@ type ListAffiliateSnapshotReportDataRequest struct {
 
 func (x *ListAffiliateSnapshotReportDataRequest) Reset() {
 	*x = ListAffiliateSnapshotReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[33]
+	mi := &file_report_service_v1_report_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4349,7 +4448,7 @@ func (x *ListAffiliateSnapshotReportDataRequest) String() string {
 func (*ListAffiliateSnapshotReportDataRequest) ProtoMessage() {}
 
 func (x *ListAffiliateSnapshotReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[33]
+	mi := &file_report_service_v1_report_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4362,7 +4461,7 @@ func (x *ListAffiliateSnapshotReportDataRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListAffiliateSnapshotReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListAffiliateSnapshotReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{33}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListAffiliateSnapshotReportDataRequest) GetPeriod() string {
@@ -4452,7 +4551,7 @@ type AffiliateCurrentPeriodGaming struct {
 
 func (x *AffiliateCurrentPeriodGaming) Reset() {
 	*x = AffiliateCurrentPeriodGaming{}
-	mi := &file_report_service_v1_report_proto_msgTypes[34]
+	mi := &file_report_service_v1_report_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4464,7 +4563,7 @@ func (x *AffiliateCurrentPeriodGaming) String() string {
 func (*AffiliateCurrentPeriodGaming) ProtoMessage() {}
 
 func (x *AffiliateCurrentPeriodGaming) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[34]
+	mi := &file_report_service_v1_report_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4477,7 +4576,7 @@ func (x *AffiliateCurrentPeriodGaming) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AffiliateCurrentPeriodGaming.ProtoReflect.Descriptor instead.
 func (*AffiliateCurrentPeriodGaming) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{34}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *AffiliateCurrentPeriodGaming) GetGgrUsd() string {
@@ -4639,7 +4738,7 @@ type AffiliateSnapshotReportDataItem struct {
 
 func (x *AffiliateSnapshotReportDataItem) Reset() {
 	*x = AffiliateSnapshotReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[35]
+	mi := &file_report_service_v1_report_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4651,7 +4750,7 @@ func (x *AffiliateSnapshotReportDataItem) String() string {
 func (*AffiliateSnapshotReportDataItem) ProtoMessage() {}
 
 func (x *AffiliateSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[35]
+	mi := &file_report_service_v1_report_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4664,7 +4763,7 @@ func (x *AffiliateSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AffiliateSnapshotReportDataItem.ProtoReflect.Descriptor instead.
 func (*AffiliateSnapshotReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{35}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *AffiliateSnapshotReportDataItem) GetDate() string {
@@ -5239,7 +5338,7 @@ type ListAffiliateSnapshotReportDataResponse struct {
 
 func (x *ListAffiliateSnapshotReportDataResponse) Reset() {
 	*x = ListAffiliateSnapshotReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[36]
+	mi := &file_report_service_v1_report_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5251,7 +5350,7 @@ func (x *ListAffiliateSnapshotReportDataResponse) String() string {
 func (*ListAffiliateSnapshotReportDataResponse) ProtoMessage() {}
 
 func (x *ListAffiliateSnapshotReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[36]
+	mi := &file_report_service_v1_report_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5264,7 +5363,7 @@ func (x *ListAffiliateSnapshotReportDataResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListAffiliateSnapshotReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListAffiliateSnapshotReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{36}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListAffiliateSnapshotReportDataResponse) GetItems() []*AffiliateSnapshotReportDataItem {
@@ -5729,7 +5828,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc7\x1a\n" +
+	"_page_size\"\xbf\x1b\n" +
 	"\x1aAffiliateVTGReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
@@ -5803,12 +5902,21 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	" commission_rs_reporting_currency\x18A \x01(\tR\x1dcommissionRsReportingCurrency\x12M\n" +
 	"#commission_total_reporting_currency\x18B \x01(\tR commissionTotalReportingCurrency\x12;\n" +
 	"\x1apsp_fee_reporting_currency\x18C \x01(\tR\x17pspFeeReportingCurrency\x12C\n" +
-	"\x1econtent_fee_reporting_currency\x18D \x01(\tR\x1bcontentFeeReportingCurrency\"\xb4\x01\n" +
+	"\x1econtent_fee_reporting_currency\x18D \x01(\tR\x1bcontentFeeReportingCurrency\x12v\n" +
+	"\x1alifetime_commission_gaming\x18E \x01(\v28.api.report.service.v1.AffiliateLifetimeCommissionGamingR\x18lifetimeCommissionGaming\"\xb4\x01\n" +
 	"\"ListAffiliateVTGReportDataResponse\x12G\n" +
 	"\x05items\x18\x01 \x03(\v21.api.report.service.v1.AffiliateVTGReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total\"\xd6\x03\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total\"\x90\x02\n" +
+	"!AffiliateLifetimeCommissionGaming\x12\x17\n" +
+	"\aggr_usd\x18\x01 \x01(\tR\x06ggrUsd\x12\x17\n" +
+	"\angr_usd\x18\x02 \x01(\tR\x06ngrUsd\x12\x17\n" +
+	"\ab2c_usd\x18\x03 \x01(\tR\x06b2cUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\n" +
+	" \x01(\tR\x14ggrReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
+	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\"\xd6\x03\n" +
 	"&ListAffiliateSnapshotReportDataRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
@@ -5962,7 +6070,7 @@ func file_report_service_v1_report_proto_rawDescGZIP() []byte {
 	return file_report_service_v1_report_proto_rawDescData
 }
 
-var file_report_service_v1_report_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
+var file_report_service_v1_report_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_report_service_v1_report_proto_goTypes = []any{
 	(*GetSummaryRequest)(nil),                          // 0: api.report.service.v1.GetSummaryRequest
 	(*ListSummariesRequest)(nil),                       // 1: api.report.service.v1.ListSummariesRequest
@@ -5997,142 +6105,144 @@ var file_report_service_v1_report_proto_goTypes = []any{
 	(*ListAffiliateVTGReportDataRequest)(nil),          // 30: api.report.service.v1.ListAffiliateVTGReportDataRequest
 	(*AffiliateVTGReportDataItem)(nil),                 // 31: api.report.service.v1.AffiliateVTGReportDataItem
 	(*ListAffiliateVTGReportDataResponse)(nil),         // 32: api.report.service.v1.ListAffiliateVTGReportDataResponse
-	(*ListAffiliateSnapshotReportDataRequest)(nil),     // 33: api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	(*AffiliateCurrentPeriodGaming)(nil),               // 34: api.report.service.v1.AffiliateCurrentPeriodGaming
-	(*AffiliateSnapshotReportDataItem)(nil),            // 35: api.report.service.v1.AffiliateSnapshotReportDataItem
-	(*ListAffiliateSnapshotReportDataResponse)(nil),    // 36: api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	(*v1.TimeRange)(nil),                               // 37: api.backoffice.service.v1.TimeRange
-	(*common.OperatorContextFilters)(nil),              // 38: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                     // 39: api.common.OperatorContext
-	(*v1.ListSportEventsRequest)(nil),                  // 40: api.backoffice.service.v1.ListSportEventsRequest
-	(*v1.CustomerRecordReportDetailRequest)(nil),       // 41: api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	(*v1.GetSummaryResponse)(nil),                      // 42: api.backoffice.service.v1.GetSummaryResponse
-	(*v1.ListSummariesResponse)(nil),                   // 43: api.backoffice.service.v1.ListSummariesResponse
-	(*v1.GetGameSummaryResponse)(nil),                  // 44: api.backoffice.service.v1.GetGameSummaryResponse
-	(*v1.ListGameDataResponse)(nil),                    // 45: api.backoffice.service.v1.ListGameDataResponse
-	(*v1.GetPlayerGameSummaryResponse)(nil),            // 46: api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	(*v1.ListPlayerGameDataResponse)(nil),              // 47: api.backoffice.service.v1.ListPlayerGameDataResponse
-	(*v1.ListRegisterRetentionResponse)(nil),           // 48: api.backoffice.service.v1.ListRegisterRetentionResponse
-	(*v1.GetDepositSummariesResponse)(nil),             // 49: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*v1.ListDepositDetailsResponse)(nil),              // 50: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*v1.ListDepositVtgDetailsResponse)(nil),           // 51: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*v1.GetWithdrawSummariesResponse)(nil),            // 52: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*v1.ListWithdrawDetailsResponse)(nil),             // 53: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 54: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*v1.ListSportEventsResponse)(nil),                 // 55: api.backoffice.service.v1.ListSportEventsResponse
-	(*v1.CustomerRecordReportDetailResponse)(nil),      // 56: api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	(*AffiliateLifetimeCommissionGaming)(nil),          // 33: api.report.service.v1.AffiliateLifetimeCommissionGaming
+	(*ListAffiliateSnapshotReportDataRequest)(nil),     // 34: api.report.service.v1.ListAffiliateSnapshotReportDataRequest
+	(*AffiliateCurrentPeriodGaming)(nil),               // 35: api.report.service.v1.AffiliateCurrentPeriodGaming
+	(*AffiliateSnapshotReportDataItem)(nil),            // 36: api.report.service.v1.AffiliateSnapshotReportDataItem
+	(*ListAffiliateSnapshotReportDataResponse)(nil),    // 37: api.report.service.v1.ListAffiliateSnapshotReportDataResponse
+	(*v1.TimeRange)(nil),                               // 38: api.backoffice.service.v1.TimeRange
+	(*common.OperatorContextFilters)(nil),              // 39: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                     // 40: api.common.OperatorContext
+	(*v1.ListSportEventsRequest)(nil),                  // 41: api.backoffice.service.v1.ListSportEventsRequest
+	(*v1.CustomerRecordReportDetailRequest)(nil),       // 42: api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	(*v1.GetSummaryResponse)(nil),                      // 43: api.backoffice.service.v1.GetSummaryResponse
+	(*v1.ListSummariesResponse)(nil),                   // 44: api.backoffice.service.v1.ListSummariesResponse
+	(*v1.GetGameSummaryResponse)(nil),                  // 45: api.backoffice.service.v1.GetGameSummaryResponse
+	(*v1.ListGameDataResponse)(nil),                    // 46: api.backoffice.service.v1.ListGameDataResponse
+	(*v1.GetPlayerGameSummaryResponse)(nil),            // 47: api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	(*v1.ListPlayerGameDataResponse)(nil),              // 48: api.backoffice.service.v1.ListPlayerGameDataResponse
+	(*v1.ListRegisterRetentionResponse)(nil),           // 49: api.backoffice.service.v1.ListRegisterRetentionResponse
+	(*v1.GetDepositSummariesResponse)(nil),             // 50: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*v1.ListDepositDetailsResponse)(nil),              // 51: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*v1.ListDepositVtgDetailsResponse)(nil),           // 52: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*v1.GetWithdrawSummariesResponse)(nil),            // 53: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*v1.ListWithdrawDetailsResponse)(nil),             // 54: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 55: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*v1.ListSportEventsResponse)(nil),                 // 56: api.backoffice.service.v1.ListSportEventsResponse
+	(*v1.CustomerRecordReportDetailResponse)(nil),      // 57: api.backoffice.service.v1.CustomerRecordReportDetailResponse
 }
 var file_report_service_v1_report_proto_depIdxs = []int32{
-	37, // 0: api.report.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 1: api.report.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 2: api.report.service.v1.GetSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 3: api.report.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 4: api.report.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 5: api.report.service.v1.ListSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 6: api.report.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 7: api.report.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 8: api.report.service.v1.GetGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 9: api.report.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 10: api.report.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 11: api.report.service.v1.ListGameDataRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 12: api.report.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 13: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 14: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 15: api.report.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 16: api.report.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 17: api.report.service.v1.ListPlayerGameDataRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 18: api.report.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 19: api.report.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 20: api.report.service.v1.GetDepositSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 21: api.report.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 22: api.report.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 23: api.report.service.v1.GetWithdrawSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 24: api.report.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 25: api.report.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 26: api.report.service.v1.ListDepositDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 27: api.report.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 28: api.report.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 29: api.report.service.v1.ListWithdrawDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 30: api.report.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 31: api.report.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 32: api.report.service.v1.ListRegisterRetentionRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 33: api.report.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 34: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 35: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 36: api.report.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	38, // 37: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 38: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 39: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 40: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 0: api.report.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 1: api.report.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 2: api.report.service.v1.GetSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 3: api.report.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 4: api.report.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 5: api.report.service.v1.ListSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 6: api.report.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 7: api.report.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 8: api.report.service.v1.GetGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 9: api.report.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 10: api.report.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 11: api.report.service.v1.ListGameDataRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 12: api.report.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 13: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 14: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 15: api.report.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 16: api.report.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 17: api.report.service.v1.ListPlayerGameDataRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 18: api.report.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 19: api.report.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 20: api.report.service.v1.GetDepositSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 21: api.report.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 22: api.report.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 23: api.report.service.v1.GetWithdrawSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 24: api.report.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 25: api.report.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 26: api.report.service.v1.ListDepositDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 27: api.report.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 28: api.report.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 29: api.report.service.v1.ListWithdrawDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 30: api.report.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 31: api.report.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 32: api.report.service.v1.ListRegisterRetentionRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 33: api.report.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 34: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 35: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 36: api.report.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	39, // 37: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 38: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	39, // 39: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 40: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
 	13, // 41: api.report.service.v1.ReferralVTGReportDataItem.tiers:type_name -> api.report.service.v1.ReferralVTGTierData
 	19, // 42: api.report.service.v1.ListReferralVTGReportDataResponse.items:type_name -> api.report.service.v1.ReferralVTGReportDataItem
-	38, // 43: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 44: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	39, // 43: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 44: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
 	14, // 45: api.report.service.v1.ReferralSnapshotReportDataItem.tiers:type_name -> api.report.service.v1.ReferralSnapshotTierData
 	15, // 46: api.report.service.v1.ReferralSnapshotReportDataItem.t1_gaming:type_name -> api.report.service.v1.ReferralT1GamingData
 	17, // 47: api.report.service.v1.ReferralSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.ReferralTierGamingData
 	16, // 48: api.report.service.v1.ReferralSnapshotReportDataItem.negative_carryover:type_name -> api.report.service.v1.ReferralTierCarryover
 	22, // 49: api.report.service.v1.ListReferralSnapshotReportDataResponse.items:type_name -> api.report.service.v1.ReferralSnapshotReportDataItem
-	38, // 50: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 51: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	39, // 50: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 51: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
 	25, // 52: api.report.service.v1.ListReferralContributionReportDataResponse.items:type_name -> api.report.service.v1.ReferralContributionReportDataItem
-	38, // 53: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 54: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	39, // 53: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 54: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
 	28, // 55: api.report.service.v1.ListReferralLifetimeReportDataResponse.items:type_name -> api.report.service.v1.ReferralLifetimeReportDataItem
-	38, // 56: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 57: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 58: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
-	38, // 59: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 60: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	34, // 61: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateCurrentPeriodGaming
-	35, // 62: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
-	0,  // 63: api.report.service.v1.ReportService.GetSummary:input_type -> api.report.service.v1.GetSummaryRequest
-	1,  // 64: api.report.service.v1.ReportService.ListSummaries:input_type -> api.report.service.v1.ListSummariesRequest
-	2,  // 65: api.report.service.v1.ReportService.GetGameDataSummary:input_type -> api.report.service.v1.GetGameSummaryRequest
-	3,  // 66: api.report.service.v1.ReportService.ListGameData:input_type -> api.report.service.v1.ListGameDataRequest
-	4,  // 67: api.report.service.v1.ReportService.GetPlayerGameDataSummary:input_type -> api.report.service.v1.GetPlayerGameSummaryRequest
-	5,  // 68: api.report.service.v1.ReportService.ListPlayerGameData:input_type -> api.report.service.v1.ListPlayerGameDataRequest
-	10, // 69: api.report.service.v1.ReportService.ListRegisterRetention:input_type -> api.report.service.v1.ListRegisterRetentionRequest
-	6,  // 70: api.report.service.v1.ReportService.GetDepositSummaries:input_type -> api.report.service.v1.GetDepositSummariesRequest
-	8,  // 71: api.report.service.v1.ReportService.ListDepositDetails:input_type -> api.report.service.v1.ListDepositDetailsRequest
-	11, // 72: api.report.service.v1.ReportService.ListDepositVtgDetails:input_type -> api.report.service.v1.ListDepositVtgDetailsRequest
-	7,  // 73: api.report.service.v1.ReportService.GetWithdrawSummaries:input_type -> api.report.service.v1.GetWithdrawSummariesRequest
-	9,  // 74: api.report.service.v1.ReportService.ListWithdrawDetails:input_type -> api.report.service.v1.ListWithdrawDetailsRequest
-	12, // 75: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
-	40, // 76: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	41, // 77: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	18, // 78: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
-	21, // 79: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
-	24, // 80: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
-	27, // 81: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
-	30, // 82: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
-	33, // 83: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	42, // 84: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	43, // 85: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	44, // 86: api.report.service.v1.ReportService.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	45, // 87: api.report.service.v1.ReportService.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	46, // 88: api.report.service.v1.ReportService.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	47, // 89: api.report.service.v1.ReportService.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	48, // 90: api.report.service.v1.ReportService.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	49, // 91: api.report.service.v1.ReportService.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	50, // 92: api.report.service.v1.ReportService.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	51, // 93: api.report.service.v1.ReportService.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	52, // 94: api.report.service.v1.ReportService.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	53, // 95: api.report.service.v1.ReportService.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	54, // 96: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	55, // 97: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	56, // 98: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	20, // 99: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
-	23, // 100: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
-	26, // 101: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
-	29, // 102: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
-	32, // 103: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
-	36, // 104: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	84, // [84:105] is the sub-list for method output_type
-	63, // [63:84] is the sub-list for method input_type
-	63, // [63:63] is the sub-list for extension type_name
-	63, // [63:63] is the sub-list for extension extendee
-	0,  // [0:63] is the sub-list for field type_name
+	39, // 56: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 57: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	33, // 58: api.report.service.v1.AffiliateVTGReportDataItem.lifetime_commission_gaming:type_name -> api.report.service.v1.AffiliateLifetimeCommissionGaming
+	31, // 59: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
+	39, // 60: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 61: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 62: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateCurrentPeriodGaming
+	36, // 63: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
+	0,  // 64: api.report.service.v1.ReportService.GetSummary:input_type -> api.report.service.v1.GetSummaryRequest
+	1,  // 65: api.report.service.v1.ReportService.ListSummaries:input_type -> api.report.service.v1.ListSummariesRequest
+	2,  // 66: api.report.service.v1.ReportService.GetGameDataSummary:input_type -> api.report.service.v1.GetGameSummaryRequest
+	3,  // 67: api.report.service.v1.ReportService.ListGameData:input_type -> api.report.service.v1.ListGameDataRequest
+	4,  // 68: api.report.service.v1.ReportService.GetPlayerGameDataSummary:input_type -> api.report.service.v1.GetPlayerGameSummaryRequest
+	5,  // 69: api.report.service.v1.ReportService.ListPlayerGameData:input_type -> api.report.service.v1.ListPlayerGameDataRequest
+	10, // 70: api.report.service.v1.ReportService.ListRegisterRetention:input_type -> api.report.service.v1.ListRegisterRetentionRequest
+	6,  // 71: api.report.service.v1.ReportService.GetDepositSummaries:input_type -> api.report.service.v1.GetDepositSummariesRequest
+	8,  // 72: api.report.service.v1.ReportService.ListDepositDetails:input_type -> api.report.service.v1.ListDepositDetailsRequest
+	11, // 73: api.report.service.v1.ReportService.ListDepositVtgDetails:input_type -> api.report.service.v1.ListDepositVtgDetailsRequest
+	7,  // 74: api.report.service.v1.ReportService.GetWithdrawSummaries:input_type -> api.report.service.v1.GetWithdrawSummariesRequest
+	9,  // 75: api.report.service.v1.ReportService.ListWithdrawDetails:input_type -> api.report.service.v1.ListWithdrawDetailsRequest
+	12, // 76: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
+	41, // 77: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	42, // 78: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	18, // 79: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
+	21, // 80: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
+	24, // 81: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
+	27, // 82: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
+	30, // 83: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
+	34, // 84: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
+	43, // 85: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	44, // 86: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	45, // 87: api.report.service.v1.ReportService.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	46, // 88: api.report.service.v1.ReportService.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	47, // 89: api.report.service.v1.ReportService.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	48, // 90: api.report.service.v1.ReportService.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	49, // 91: api.report.service.v1.ReportService.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	50, // 92: api.report.service.v1.ReportService.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	51, // 93: api.report.service.v1.ReportService.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	52, // 94: api.report.service.v1.ReportService.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	53, // 95: api.report.service.v1.ReportService.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	54, // 96: api.report.service.v1.ReportService.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	55, // 97: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	56, // 98: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	57, // 99: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	20, // 100: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
+	23, // 101: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
+	26, // 102: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
+	29, // 103: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
+	32, // 104: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
+	37, // 105: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
+	85, // [85:106] is the sub-list for method output_type
+	64, // [64:85] is the sub-list for method input_type
+	64, // [64:64] is the sub-list for extension type_name
+	64, // [64:64] is the sub-list for extension extendee
+	0,  // [0:64] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_report_proto_init() }
@@ -6148,14 +6258,14 @@ func file_report_service_v1_report_proto_init() {
 	file_report_service_v1_report_proto_msgTypes[24].OneofWrappers = []any{}
 	file_report_service_v1_report_proto_msgTypes[27].OneofWrappers = []any{}
 	file_report_service_v1_report_proto_msgTypes[30].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[33].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[34].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_service_v1_report_proto_rawDesc), len(file_report_service_v1_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   37,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

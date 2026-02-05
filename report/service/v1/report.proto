@@ -616,6 +616,10 @@ message AffiliateVTGReportDataItem {
   // Other - Reporting Currency
   string psp_fee_reporting_currency = 67;
   string content_fee_reporting_currency = 68;
+
+  // Lifetime commission gaming data from affiliate_commissions.game_event_data
+  // Used by Affiliate Service to calculate Net Profit
+  AffiliateLifetimeCommissionGaming lifetime_commission_gaming = 69;
 }
 
 message ListAffiliateVTGReportDataResponse {
@@ -623,6 +627,20 @@ message ListAffiliateVTGReportDataResponse {
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
+}
+
+// AffiliateLifetimeCommissionGaming - Lifetime gaming data from affiliate_commissions
+// Used by Affiliate Service to calculate Net Profit for VTG reports
+// Data source: affiliate_commissions.game_event_data (cumulative from user registration)
+// Note: ngr_usd is Game Bet NGR (bet_amount != 0), b2c_usd is Bonus-to-Cash (bet_amount = 0)
+message AffiliateLifetimeCommissionGaming {
+  string ggr_usd = 1;
+  string ngr_usd = 2;  // Game Bet NGR only (excludes B2C)
+  string b2c_usd = 3;  // Bonus-to-Cash conversion amount
+  // Reporting Currency
+  string ggr_reporting_currency = 10;
+  string ngr_reporting_currency = 11;  // Game Bet NGR only
+  string b2c_reporting_currency = 12;  // Bonus-to-Cash
 }
 
 // ============================================================================
