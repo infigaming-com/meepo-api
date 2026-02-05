@@ -464,6 +464,12 @@ message AffiliateVTGReportItem {
   string commission_total_reporting_currency = 76;
   string psp_fee_reporting_currency = 77;
   string content_fee_reporting_currency = 78;
+
+  // Rake and Tax (always 0, no PVP games or tax)
+  string rake_usd = 79;
+  string tax_usd = 80;
+  string rake_reporting_currency = 81;
+  string tax_reporting_currency = 82;
 }
 
 message ListAffiliateVTGReportResponse {
@@ -591,6 +597,12 @@ message AffiliateSnapshotReportItem {
   string net_profit_reporting_currency = 83;
   string psp_fee_reporting_currency = 84;
   string content_fee_reporting_currency = 85;
+
+  // Rake and Tax (always 0, no PVP games or tax)
+  string rake_usd = 86;
+  string tax_usd = 87;
+  string rake_reporting_currency = 88;
+  string tax_reporting_currency = 89;
 }
 
 message ListAffiliateSnapshotReportResponse {

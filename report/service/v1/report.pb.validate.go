@@ -5560,6 +5560,14 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 
 	// no validation rules for ContentFeeReportingCurrency
 
+	// no validation rules for RakeUsd
+
+	// no validation rules for TaxUsd
+
+	// no validation rules for RakeReportingCurrency
+
+	// no validation rules for TaxReportingCurrency
+
 	if all {
 		switch v := interface{}(m.GetLifetimeCommissionGaming()).(type) {
 		case interface{ ValidateAll() error }:
@@ -6438,6 +6446,14 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 	// no validation rules for PspFeeReportingCurrency
 
 	// no validation rules for ContentFeeReportingCurrency
+
+	// no validation rules for RakeUsd
+
+	// no validation rules for TaxUsd
+
+	// no validation rules for RakeReportingCurrency
+
+	// no validation rules for TaxReportingCurrency
 
 	if len(errors) > 0 {
 		return AffiliateSnapshotReportDataItemMultiError(errors)

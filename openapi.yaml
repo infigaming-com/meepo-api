@@ -9160,6 +9160,15 @@ components:
                     type: string
                 contentFeeReportingCurrency:
                     type: string
+                rakeUsd:
+                    type: string
+                    description: Rake and Tax (always 0, no PVP games or tax)
+                taxUsd:
+                    type: string
+                rakeReportingCurrency:
+                    type: string
+                taxReportingCurrency:
+                    type: string
         api.affiliate.service.v1.AffiliateVTGReportItem:
             type: object
             properties:
@@ -9314,6 +9323,15 @@ components:
                 pspFeeReportingCurrency:
                     type: string
                 contentFeeReportingCurrency:
+                    type: string
+                rakeUsd:
+                    type: string
+                    description: Rake and Tax (always 0, no PVP games or tax)
+                taxUsd:
+                    type: string
+                rakeReportingCurrency:
+                    type: string
+                taxReportingCurrency:
                     type: string
         api.affiliate.service.v1.BillDetail_BillItem:
             type: object

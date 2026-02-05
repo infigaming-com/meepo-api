@@ -617,6 +617,12 @@ message AffiliateVTGReportDataItem {
   string psp_fee_reporting_currency = 67;
   string content_fee_reporting_currency = 68;
 
+  // Rake and Tax (always 0, no PVP games or tax)
+  string rake_usd = 70;
+  string tax_usd = 71;
+  string rake_reporting_currency = 72;
+  string tax_reporting_currency = 73;
+
   // Lifetime commission gaming data from affiliate_commissions.game_event_data
   // Used by Affiliate Service to calculate Net Profit
   AffiliateLifetimeCommissionGaming lifetime_commission_gaming = 69;
@@ -777,6 +783,12 @@ message AffiliateSnapshotReportDataItem {
   string net_profit_reporting_currency = 78;
   string psp_fee_reporting_currency = 79;
   string content_fee_reporting_currency = 80;
+
+  // Rake and Tax (always 0, no PVP games or tax)
+  string rake_usd = 81;
+  string tax_usd = 82;
+  string rake_reporting_currency = 83;
+  string tax_reporting_currency = 84;
 }
 
 message ListAffiliateSnapshotReportDataResponse {
