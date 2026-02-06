@@ -33,6 +33,7 @@ const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOp
 const OperationUserGetOperatorRegistrationFieldConfig = "/api.user.service.v1.User/GetOperatorRegistrationFieldConfig"
 const OperationUserGetOperatorVipSettings = "/api.user.service.v1.User/GetOperatorVipSettings"
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
+const OperationUserGetTelegramLoginInfo = "/api.user.service.v1.User/GetTelegramLoginInfo"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
 const OperationUserGetUserPrivacySettings = "/api.user.service.v1.User/GetUserPrivacySettings"
@@ -75,6 +76,9 @@ type UserHTTPServer interface {
 	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*GetOperatorRegistrationFieldConfigResponse, error)
 	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	// GetTelegramLoginInfo ============ Player Telegram APIs ============
+	// Get Telegram login info for the current operator (public)
+	GetTelegramLoginInfo(context.Context, *GetTelegramLoginInfoRequest) (*GetTelegramLoginInfoResponse, error)
 	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
@@ -164,6 +168,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.GET("/v1/user/oauth/accounts", _User_ListBoundOAuthAccounts0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth/initiate", _User_InitiateOAuthLogin0_HTTP_Handler(srv))
 	r.POST("/v1/user/oauth/bind/initiate", _User_InitiateOAuthBinding0_HTTP_Handler(srv))
+	r.GET("/v1/user/telegram/info", _User_GetTelegramLoginInfo0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -971,6 +976,25 @@ func _User_InitiateOAuthBinding0_HTTP_Handler(srv UserHTTPServer) func(ctx http.
 	}
 }
 
+func _User_GetTelegramLoginInfo0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetTelegramLoginInfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetTelegramLoginInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetTelegramLoginInfo(ctx, req.(*GetTelegramLoginInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetTelegramLoginInfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
@@ -988,6 +1012,9 @@ type UserHTTPClient interface {
 	GetOperatorRegistrationFieldConfig(ctx context.Context, req *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *GetOperatorRegistrationFieldConfigResponse, err error)
 	GetOperatorVipSettings(ctx context.Context, req *GetOperatorVipSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorVipSettingsResponse, err error)
 	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
+	// GetTelegramLoginInfo ============ Player Telegram APIs ============
+	// Get Telegram login info for the current operator (public)
+	GetTelegramLoginInfo(ctx context.Context, req *GetTelegramLoginInfoRequest, opts ...http.CallOption) (rsp *GetTelegramLoginInfoResponse, err error)
 	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
@@ -1212,6 +1239,21 @@ func (c *UserHTTPClientImpl) GetResponsibleGamblingConfig(ctx context.Context, i
 	opts = append(opts, http.Operation(OperationUserGetResponsibleGamblingConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetTelegramLoginInfo ============ Player Telegram APIs ============
+// Get Telegram login info for the current operator (public)
+func (c *UserHTTPClientImpl) GetTelegramLoginInfo(ctx context.Context, in *GetTelegramLoginInfoRequest, opts ...http.CallOption) (*GetTelegramLoginInfoResponse, error) {
+	var out GetTelegramLoginInfoResponse
+	pattern := "/v1/user/telegram/info"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationUserGetTelegramLoginInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

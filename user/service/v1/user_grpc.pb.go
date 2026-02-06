@@ -132,6 +132,11 @@ const (
 	User_ListBoundOAuthAccounts_FullMethodName             = "/api.user.service.v1.User/ListBoundOAuthAccounts"
 	User_InitiateOAuthLogin_FullMethodName                 = "/api.user.service.v1.User/InitiateOAuthLogin"
 	User_InitiateOAuthBinding_FullMethodName               = "/api.user.service.v1.User/InitiateOAuthBinding"
+	User_CreateOrUpdateTelegramConfig_FullMethodName       = "/api.user.service.v1.User/CreateOrUpdateTelegramConfig"
+	User_DeleteTelegramConfig_FullMethodName               = "/api.user.service.v1.User/DeleteTelegramConfig"
+	User_SetTelegramEnabled_FullMethodName                 = "/api.user.service.v1.User/SetTelegramEnabled"
+	User_GetTelegramConfig_FullMethodName                  = "/api.user.service.v1.User/GetTelegramConfig"
+	User_GetTelegramLoginInfo_FullMethodName               = "/api.user.service.v1.User/GetTelegramLoginInfo"
 )
 
 // UserClient is the client API for User service.
@@ -333,6 +338,19 @@ type UserClient interface {
 	InitiateOAuthLogin(ctx context.Context, in *InitiateOAuthLoginRequest, opts ...grpc.CallOption) (*InitiateOAuthLoginResponse, error)
 	// Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
 	InitiateOAuthBinding(ctx context.Context, in *InitiateOAuthBindingRequest, opts ...grpc.CallOption) (*InitiateOAuthBindingResponse, error)
+	// ============ Telegram Configuration APIs (Internal gRPC) ============
+	// Create or update Telegram configuration for an operator
+	// If config_id is provided, updates existing config; otherwise creates new one
+	CreateOrUpdateTelegramConfig(ctx context.Context, in *CreateOrUpdateTelegramConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateTelegramConfigResponse, error)
+	// Delete Telegram configuration
+	DeleteTelegramConfig(ctx context.Context, in *DeleteTelegramConfigRequest, opts ...grpc.CallOption) (*DeleteTelegramConfigResponse, error)
+	// Set Telegram enabled/disabled status
+	SetTelegramEnabled(ctx context.Context, in *SetTelegramEnabledRequest, opts ...grpc.CallOption) (*SetTelegramEnabledResponse, error)
+	// Get Telegram configuration for an operator
+	GetTelegramConfig(ctx context.Context, in *GetTelegramConfigRequest, opts ...grpc.CallOption) (*GetTelegramConfigResponse, error)
+	// ============ Player Telegram APIs ============
+	// Get Telegram login info for the current operator (public)
+	GetTelegramLoginInfo(ctx context.Context, in *GetTelegramLoginInfoRequest, opts ...grpc.CallOption) (*GetTelegramLoginInfoResponse, error)
 }
 
 type userClient struct {
@@ -1463,6 +1481,56 @@ func (c *userClient) InitiateOAuthBinding(ctx context.Context, in *InitiateOAuth
 	return out, nil
 }
 
+func (c *userClient) CreateOrUpdateTelegramConfig(ctx context.Context, in *CreateOrUpdateTelegramConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateTelegramConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOrUpdateTelegramConfigResponse)
+	err := c.cc.Invoke(ctx, User_CreateOrUpdateTelegramConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteTelegramConfig(ctx context.Context, in *DeleteTelegramConfigRequest, opts ...grpc.CallOption) (*DeleteTelegramConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTelegramConfigResponse)
+	err := c.cc.Invoke(ctx, User_DeleteTelegramConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetTelegramEnabled(ctx context.Context, in *SetTelegramEnabledRequest, opts ...grpc.CallOption) (*SetTelegramEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTelegramEnabledResponse)
+	err := c.cc.Invoke(ctx, User_SetTelegramEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetTelegramConfig(ctx context.Context, in *GetTelegramConfigRequest, opts ...grpc.CallOption) (*GetTelegramConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTelegramConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetTelegramConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetTelegramLoginInfo(ctx context.Context, in *GetTelegramLoginInfoRequest, opts ...grpc.CallOption) (*GetTelegramLoginInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTelegramLoginInfoResponse)
+	err := c.cc.Invoke(ctx, User_GetTelegramLoginInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1662,6 +1730,19 @@ type UserServer interface {
 	InitiateOAuthLogin(context.Context, *InitiateOAuthLoginRequest) (*InitiateOAuthLoginResponse, error)
 	// Initiate OAuth binding flow - returns authorization URL for redirect (requires authentication)
 	InitiateOAuthBinding(context.Context, *InitiateOAuthBindingRequest) (*InitiateOAuthBindingResponse, error)
+	// ============ Telegram Configuration APIs (Internal gRPC) ============
+	// Create or update Telegram configuration for an operator
+	// If config_id is provided, updates existing config; otherwise creates new one
+	CreateOrUpdateTelegramConfig(context.Context, *CreateOrUpdateTelegramConfigRequest) (*CreateOrUpdateTelegramConfigResponse, error)
+	// Delete Telegram configuration
+	DeleteTelegramConfig(context.Context, *DeleteTelegramConfigRequest) (*DeleteTelegramConfigResponse, error)
+	// Set Telegram enabled/disabled status
+	SetTelegramEnabled(context.Context, *SetTelegramEnabledRequest) (*SetTelegramEnabledResponse, error)
+	// Get Telegram configuration for an operator
+	GetTelegramConfig(context.Context, *GetTelegramConfigRequest) (*GetTelegramConfigResponse, error)
+	// ============ Player Telegram APIs ============
+	// Get Telegram login info for the current operator (public)
+	GetTelegramLoginInfo(context.Context, *GetTelegramLoginInfoRequest) (*GetTelegramLoginInfoResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2007,6 +2088,21 @@ func (UnimplementedUserServer) InitiateOAuthLogin(context.Context, *InitiateOAut
 }
 func (UnimplementedUserServer) InitiateOAuthBinding(context.Context, *InitiateOAuthBindingRequest) (*InitiateOAuthBindingResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method InitiateOAuthBinding not implemented")
+}
+func (UnimplementedUserServer) CreateOrUpdateTelegramConfig(context.Context, *CreateOrUpdateTelegramConfigRequest) (*CreateOrUpdateTelegramConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOrUpdateTelegramConfig not implemented")
+}
+func (UnimplementedUserServer) DeleteTelegramConfig(context.Context, *DeleteTelegramConfigRequest) (*DeleteTelegramConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteTelegramConfig not implemented")
+}
+func (UnimplementedUserServer) SetTelegramEnabled(context.Context, *SetTelegramEnabledRequest) (*SetTelegramEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTelegramEnabled not implemented")
+}
+func (UnimplementedUserServer) GetTelegramConfig(context.Context, *GetTelegramConfigRequest) (*GetTelegramConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTelegramConfig not implemented")
+}
+func (UnimplementedUserServer) GetTelegramLoginInfo(context.Context, *GetTelegramLoginInfoRequest) (*GetTelegramLoginInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTelegramLoginInfo not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4045,6 +4141,96 @@ func _User_InitiateOAuthBinding_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_CreateOrUpdateTelegramConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrUpdateTelegramConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CreateOrUpdateTelegramConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CreateOrUpdateTelegramConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CreateOrUpdateTelegramConfig(ctx, req.(*CreateOrUpdateTelegramConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteTelegramConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTelegramConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteTelegramConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteTelegramConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteTelegramConfig(ctx, req.(*DeleteTelegramConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetTelegramEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTelegramEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetTelegramEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetTelegramEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetTelegramEnabled(ctx, req.(*SetTelegramEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetTelegramConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTelegramConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetTelegramConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetTelegramConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetTelegramConfig(ctx, req.(*GetTelegramConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetTelegramLoginInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTelegramLoginInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetTelegramLoginInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetTelegramLoginInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetTelegramLoginInfo(ctx, req.(*GetTelegramLoginInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4499,6 +4685,26 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InitiateOAuthBinding",
 			Handler:    _User_InitiateOAuthBinding_Handler,
+		},
+		{
+			MethodName: "CreateOrUpdateTelegramConfig",
+			Handler:    _User_CreateOrUpdateTelegramConfig_Handler,
+		},
+		{
+			MethodName: "DeleteTelegramConfig",
+			Handler:    _User_DeleteTelegramConfig_Handler,
+		},
+		{
+			MethodName: "SetTelegramEnabled",
+			Handler:    _User_SetTelegramEnabled_Handler,
+		},
+		{
+			MethodName: "GetTelegramConfig",
+			Handler:    _User_GetTelegramConfig_Handler,
+		},
+		{
+			MethodName: "GetTelegramLoginInfo",
+			Handler:    _User_GetTelegramLoginInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
