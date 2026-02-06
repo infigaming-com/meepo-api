@@ -1899,7 +1899,7 @@ message GetOperatorUserFinancialSummaryRequest {
 	google.protobuf.Timestamp end_time = 4; // affected if include_transaction_stats is true
 	// Optional: filter by user role ID. If not provided, returns all roles.
 	// Use util.PlayerRoleId (0) to filter only player wallets.
-	optional int32 role_id = 5;
+	optional int64 role_id = 5;
 }
 
 message TransactionStats {

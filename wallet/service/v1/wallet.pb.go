@@ -11325,7 +11325,7 @@ type GetOperatorUserFinancialSummaryRequest struct {
 	EndTime                 *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`       // affected if include_transaction_stats is true
 	// Optional: filter by user role ID. If not provided, returns all roles.
 	// Use util.PlayerRoleId (0) to filter only player wallets.
-	RoleId        *int32 `protobuf:"varint,5,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	RoleId        *int64 `protobuf:"varint,5,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -11388,7 +11388,7 @@ func (x *GetOperatorUserFinancialSummaryRequest) GetEndTime() *timestamppb.Times
 	return nil
 }
 
-func (x *GetOperatorUserFinancialSummaryRequest) GetRoleId() int32 {
+func (x *GetOperatorUserFinancialSummaryRequest) GetRoleId() int64 {
 	if x != nil && x.RoleId != nil {
 		return *x.RoleId
 	}
@@ -17190,7 +17190,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1c\n" +
-	"\arole_id\x18\x05 \x01(\x05H\x00R\x06roleId\x88\x01\x01B\n" +
+	"\arole_id\x18\x05 \x01(\x03H\x00R\x06roleId\x88\x01\x01B\n" +
 	"\n" +
 	"\b_role_id\"\x88\x02\n" +
 	"\x10TransactionStats\x12*\n" +
