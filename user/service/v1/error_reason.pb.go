@@ -195,6 +195,16 @@ const (
 	ErrorReason_OAUTH_STATE_ALREADY_USED   ErrorReason = 10333
 	ErrorReason_OAUTH_CODE_EXCHANGE_FAILED ErrorReason = 10334
 	ErrorReason_OAUTH_STATE_CREATE_FAILED  ErrorReason = 10335
+	// Telegram Auth Errors
+	ErrorReason_TELEGRAM_AUTH_FAILED           ErrorReason = 10400
+	ErrorReason_TELEGRAM_AUTH_EXPIRED          ErrorReason = 10401
+	ErrorReason_TELEGRAM_REGISTRATION_DISABLED ErrorReason = 10402
+	ErrorReason_TELEGRAM_CONFIG_NOT_FOUND      ErrorReason = 10403
+	ErrorReason_TELEGRAM_LINKING_DISABLED      ErrorReason = 10404
+	ErrorReason_TELEGRAM_CONFIG_ALREADY_EXISTS ErrorReason = 10405
+	ErrorReason_CREATE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10406
+	ErrorReason_UPDATE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10407
+	ErrorReason_DELETE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10408
 )
 
 // Enum value maps for ErrorReason.
@@ -366,6 +376,15 @@ var (
 		10333: "OAUTH_STATE_ALREADY_USED",
 		10334: "OAUTH_CODE_EXCHANGE_FAILED",
 		10335: "OAUTH_STATE_CREATE_FAILED",
+		10400: "TELEGRAM_AUTH_FAILED",
+		10401: "TELEGRAM_AUTH_EXPIRED",
+		10402: "TELEGRAM_REGISTRATION_DISABLED",
+		10403: "TELEGRAM_CONFIG_NOT_FOUND",
+		10404: "TELEGRAM_LINKING_DISABLED",
+		10405: "TELEGRAM_CONFIG_ALREADY_EXISTS",
+		10406: "CREATE_TELEGRAM_CONFIG_FAILED",
+		10407: "UPDATE_TELEGRAM_CONFIG_FAILED",
+		10408: "DELETE_TELEGRAM_CONFIG_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -534,6 +553,15 @@ var (
 		"OAUTH_STATE_ALREADY_USED":                       10333,
 		"OAUTH_CODE_EXCHANGE_FAILED":                     10334,
 		"OAUTH_STATE_CREATE_FAILED":                      10335,
+		"TELEGRAM_AUTH_FAILED":                           10400,
+		"TELEGRAM_AUTH_EXPIRED":                          10401,
+		"TELEGRAM_REGISTRATION_DISABLED":                 10402,
+		"TELEGRAM_CONFIG_NOT_FOUND":                      10403,
+		"TELEGRAM_LINKING_DISABLED":                      10404,
+		"TELEGRAM_CONFIG_ALREADY_EXISTS":                 10405,
+		"CREATE_TELEGRAM_CONFIG_FAILED":                  10406,
+		"UPDATE_TELEGRAM_CONFIG_FAILED":                  10407,
+		"DELETE_TELEGRAM_CONFIG_FAILED":                  10408,
 	}
 )
 
@@ -568,7 +596,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xd6+\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa7.\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -735,7 +763,16 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13OAUTH_STATE_INVALID\x10\xdcP\x1a\x04\xa8E\x90\x03\x12#\n" +
 	"\x18OAUTH_STATE_ALREADY_USED\x10\xddP\x1a\x04\xa8E\x90\x03\x12\x1f\n" +
 	"\x1aOAUTH_CODE_EXCHANGE_FAILED\x10\xdeP\x12\x1e\n" +
-	"\x19OAUTH_STATE_CREATE_FAILED\x10\xdfP\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x19OAUTH_STATE_CREATE_FAILED\x10\xdfP\x12\x1f\n" +
+	"\x14TELEGRAM_AUTH_FAILED\x10\xa0Q\x1a\x04\xa8E\x91\x03\x12 \n" +
+	"\x15TELEGRAM_AUTH_EXPIRED\x10\xa1Q\x1a\x04\xa8E\x91\x03\x12)\n" +
+	"\x1eTELEGRAM_REGISTRATION_DISABLED\x10\xa2Q\x1a\x04\xa8E\x93\x03\x12$\n" +
+	"\x19TELEGRAM_CONFIG_NOT_FOUND\x10\xa3Q\x1a\x04\xa8E\x94\x03\x12$\n" +
+	"\x19TELEGRAM_LINKING_DISABLED\x10\xa4Q\x1a\x04\xa8E\x93\x03\x12)\n" +
+	"\x1eTELEGRAM_CONFIG_ALREADY_EXISTS\x10\xa5Q\x1a\x04\xa8E\x99\x03\x12\"\n" +
+	"\x1dCREATE_TELEGRAM_CONFIG_FAILED\x10\xa6Q\x12\"\n" +
+	"\x1dUPDATE_TELEGRAM_CONFIG_FAILED\x10\xa7Q\x12\"\n" +
+	"\x1dDELETE_TELEGRAM_CONFIG_FAILED\x10\xa8Q\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

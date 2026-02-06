@@ -2012,3 +2012,113 @@ func IsOauthStateCreateFailed(err error) bool {
 func ErrorOauthStateCreateFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OAUTH_STATE_CREATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Telegram Auth Errors
+func IsTelegramAuthFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TELEGRAM_AUTH_FAILED.String() && e.Code == 401
+}
+
+// Telegram Auth Errors
+func ErrorTelegramAuthFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_TELEGRAM_AUTH_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTelegramAuthExpired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TELEGRAM_AUTH_EXPIRED.String() && e.Code == 401
+}
+
+func ErrorTelegramAuthExpired(format string, args ...interface{}) *errors.Error {
+	return errors.New(401, ErrorReason_TELEGRAM_AUTH_EXPIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTelegramRegistrationDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TELEGRAM_REGISTRATION_DISABLED.String() && e.Code == 403
+}
+
+func ErrorTelegramRegistrationDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_TELEGRAM_REGISTRATION_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTelegramConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TELEGRAM_CONFIG_NOT_FOUND.String() && e.Code == 404
+}
+
+func ErrorTelegramConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(404, ErrorReason_TELEGRAM_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTelegramLinkingDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TELEGRAM_LINKING_DISABLED.String() && e.Code == 403
+}
+
+func ErrorTelegramLinkingDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_TELEGRAM_LINKING_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTelegramConfigAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TELEGRAM_CONFIG_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorTelegramConfigAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_TELEGRAM_CONFIG_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateTelegramConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_TELEGRAM_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateTelegramConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_TELEGRAM_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateTelegramConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_TELEGRAM_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateTelegramConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_TELEGRAM_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteTelegramConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_TELEGRAM_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteTelegramConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_TELEGRAM_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}

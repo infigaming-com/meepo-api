@@ -5584,6 +5584,84 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.ListSevResponse'
+    /v1/backoffice/telegram/config/createorupdate:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: |-
+                ============ Telegram Configuration Management ============
+                 Create or update Telegram configuration
+            operationId: BackofficeOAuth_CreateOrUpdateTelegramConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOrUpdateTelegramConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CreateOrUpdateTelegramConfigResponse'
+    /v1/backoffice/telegram/config/delete:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Delete Telegram configuration
+            operationId: BackofficeOAuth_DeleteTelegramConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteTelegramConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteTelegramConfigResponse'
+    /v1/backoffice/telegram/config/enabled/set:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Enable or disable Telegram auth
+            operationId: BackofficeOAuth_SetTelegramEnabled
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetTelegramEnabledRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SetTelegramEnabledResponse'
+    /v1/backoffice/telegram/config/get:
+        post:
+            tags:
+                - BackofficeOAuth
+            description: Get Telegram configuration
+            operationId: BackofficeOAuth_GetTelegramConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTelegramConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTelegramConfigResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -8488,6 +8566,21 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
+    /v1/user/telegram/info:
+        get:
+            tags:
+                - User
+            description: |-
+                ============ Player Telegram APIs ============
+                 Get Telegram login info for the current operator (public)
+            operationId: User_GetTelegramLoginInfo
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetTelegramLoginInfoResponse'
     /v1/user/update:
         post:
             tags:
@@ -12558,6 +12651,34 @@ components:
                     type: string
                 created:
                     type: boolean
+        api.backoffice.service.v1.CreateOrUpdateTelegramConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                botToken:
+                    type: string
+                botUsername:
+                    type: string
+                enabled:
+                    type: boolean
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                authDateValiditySeconds:
+                    type: integer
+                    format: int32
+            description: CreateOrUpdateTelegramConfigRequest - request to create or update Telegram config
+        api.backoffice.service.v1.CreateOrUpdateTelegramConfigResponse:
+            type: object
+            properties:
+                configId:
+                    type: string
+                created:
+                    type: boolean
         api.backoffice.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -12968,6 +13089,17 @@ components:
                 id:
                     type: string
             description: DeleteSegment
+        api.backoffice.service.v1.DeleteTelegramConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+            description: DeleteTelegramConfigRequest - request to delete Telegram config
+        api.backoffice.service.v1.DeleteTelegramConfigResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -14274,6 +14406,17 @@ components:
                 config:
                     type: string
                     description: "config is a json string\n example:\n {\n\t\"report_type\": {\n\t\t\"horse_racing_tax_return\": true,\n\t\t\"sports_tax_return\": true,\n\t\t\"other_contingencies_tax_return\": false\n\t}\n\t\"timezone\": \"UTC+0\",\n\t\"report_generation_time\": {\n\t\t\"monthly\": \"2nd of each month\",\n\t\t\"quarterly\": \"2nd of each quarter\", \n\t\t\"yearly\": \"2nd of each year\"\n\t},\n\t\"tax_currency\": \"ZAR\",\n\t\"user_registration_countries\": [\"US\", \"ZA\", \"TR\", \"VN\"],\n\t\"user_currencies\": [\"USD\", \"EUR\", \"INR\", \"ZAR\", \"USDT\"],\n  \"vat_payable\": 6.5,\n  \"tax_for_sportsbook\": 6.5,\n  \"tax_for_other_contingencies\": 6.5,\n  \"tax_for_horse_racing\": 6.5,\n\t}"
+        api.backoffice.service.v1.GetTelegramConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+            description: GetTelegramConfigRequest - request to get Telegram config
+        api.backoffice.service.v1.GetTelegramConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.user.service.v1.TelegramConfig'
         api.backoffice.service.v1.GetTicketRequest:
             type: object
             properties:
@@ -19321,6 +19464,19 @@ components:
                 disabled:
                     type: boolean
             description: SetSegmentOverride
+        api.backoffice.service.v1.SetTelegramEnabledRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configId:
+                    type: string
+                enabled:
+                    type: boolean
+            description: SetTelegramEnabledRequest - request to enable/disable Telegram auth
+        api.backoffice.service.v1.SetTelegramEnabledResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SetUserTagsRequest:
             type: object
             properties:
@@ -24279,6 +24435,16 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingStatus'
                 responsibleGamblingDeleteSchedule:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingDeleteSchedule'
+        api.user.service.v1.GetTelegramLoginInfoResponse:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                botUsername:
+                    type: string
+                allowRegistration:
+                    type: boolean
+            description: GetTelegramLoginInfoResponse - Telegram login info for frontend
         api.user.service.v1.GetUserAccountSettingsStatusRequest:
             type: object
             properties:
@@ -25335,6 +25501,31 @@ components:
                     type: string
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
+        api.user.service.v1.TelegramConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                enabled:
+                    type: boolean
+                botTokenMasked:
+                    type: string
+                botUsername:
+                    type: string
+                allowRegistration:
+                    type: boolean
+                allowLinking:
+                    type: boolean
+                authDateValiditySeconds:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: TelegramConfig represents operator's Telegram bot configuration
         api.user.service.v1.UnbindOAuthAccountRequest:
             type: object
             properties:
