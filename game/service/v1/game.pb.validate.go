@@ -1029,8 +1029,8 @@ func (m *ListProvidersRequest) validate(all bool) error {
 		// no validation rules for Enabled
 	}
 
-	if m.Tag != nil {
-		// no validation rules for Tag
+	if m.TagId != nil {
+		// no validation rules for TagId
 	}
 
 	if m.IncludeGameCount != nil {
