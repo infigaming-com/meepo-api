@@ -365,9 +365,9 @@ message ListProvidersRequest {
 	// Optional filter for provider's enabled status.
 	// If not provided, all providers will be returned.
 	optional bool enabled = 2;
-	// Optional filter for game's tag.
+	// Optional filter for game's tag_id.
 	// If not provided, all providers will be returned.
-	optional string tag = 3;
+	optional int64 tag_id = 3;
 	// Include game count in response, false by default.
 	// Only enable it for ListProviders page which game_count is needed.
 	optional bool include_game_count = 4;
