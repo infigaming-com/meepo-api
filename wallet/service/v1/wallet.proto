@@ -288,6 +288,9 @@ service Wallet {
 
 	// ManualAdjustCreditTurnoverField adjusts a credit's turnover or threshold value
 	rpc ManualAdjustCreditTurnoverField(ManualAdjustCreditTurnoverFieldRequest) returns (ManualAdjustCreditTurnoverFieldResponse) {}
+
+	// ListUserFreeRewards returns free spin and free bet details for a user
+	rpc ListUserFreeRewards(ListUserFreeRewardsRequest) returns (ListUserFreeRewardsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1894,6 +1897,9 @@ message GetOperatorUserFinancialSummaryRequest {
 	bool include_transaction_stats = 2;
 	google.protobuf.Timestamp start_time = 3; // affected if include_transaction_stats is true
 	google.protobuf.Timestamp end_time = 4; // affected if include_transaction_stats is true
+	// Optional: filter by user role ID. If not provided, returns all roles.
+	// Use util.PlayerRoleId (0) to filter only player wallets.
+	optional int32 role_id = 5;
 }
 
 message TransactionStats {
@@ -1949,4 +1955,117 @@ message ManualAdjustCreditTurnoverFieldResponse {
 	int64 credit_id = 1;
 	// Updated value
 	string new_value = 2;
+}
+
+// ========== ListUserFreeRewards Messages ==========
+
+message ListUserFreeRewardsRequest {
+	int64 user_id = 1;
+	// Optional: filter to return only active (non-expired) records
+	optional bool active_only = 2;
+}
+
+message ListUserFreeRewardsResponse {
+	repeated FreeSpinDetail free_spins = 1;
+	repeated FreeBetDetail free_bets = 2;
+}
+
+// Free spin details - all fields from UserFreeSpin DO
+message FreeSpinDetail {
+	int64 id = 1;
+	string source_type = 2;                    // "deposit_reward" | "promo_code"
+	int64 source_id = 3;
+
+	// Currency info
+	string settlement_currency = 4;            // Deposit/settlement currency
+	string currency = 5;                       // Game currency (play currency)
+	string reporting_currency = 6;
+
+	// Reward config
+	string reward_type = 7;                    // "cash" | "bonus"
+	int32 wagering_requirement = 8;            // Turnover multiplier
+	string max_withdrawal_multiplier = 9;
+	int64 reward_validity = 10;                // Validity duration for winnings reward in milliseconds
+
+	// Total winnings aggregated across all reward items
+	string total_winnings = 11;                // In settlement currency
+	string total_winnings_usd = 12;
+	string total_winnings_reporting_currency = 13;
+
+	// Per-game reward details
+	repeated FreeSpinRewardDetail rewards = 14;
+
+	int64 created_at = 15;
+	int64 updated_at = 16;
+}
+
+// Single free spin reward item - from FreeSpinRewardItem in JSONB
+message FreeSpinRewardDetail {
+	string provider_id = 1;                    // Game provider ID
+	string game_id = 2;                        // Game ID
+	int32 level = 3;                           // Free spin level
+
+	// Spin counts
+	int32 spin_count = 4;                      // Total spin count
+	int32 used_count = 5;                      // Already used count
+	int32 remaining_count = 6;                 // Remaining count (spin_count - used_count)
+
+	// Expiration
+	int64 free_spin_validity = 7;              // Configured validity duration in milliseconds
+	int64 expired_at = 8;                      // Calculated expiration timestamp in milliseconds, 0 means never expires
+
+	// Winnings for this specific game
+	string winnings = 9;                       // In settlement currency
+	string winnings_usd = 10;
+	string winnings_reporting_currency = 11;
+}
+
+// Free bet details - all fields from UserFreeBet DO
+message FreeBetDetail {
+	int64 id = 1;
+	string source_type = 2;                    // "deposit_reward" | "promo_code"
+	int64 source_id = 3;
+
+	// Currency info
+	string currency = 4;                       // Betting currency (settlement currency)
+	string reporting_currency = 5;
+
+	// Reward config
+	string reward_type = 6;                    // "cash" | "bonus"
+	int32 wagering_requirement = 7;            // Turnover multiplier
+	string max_withdrawal_multiplier = 8;
+	int64 reward_validity = 9;                 // Validity duration for winnings reward in milliseconds
+
+	// Total winnings aggregated across all reward items
+	string total_winnings = 10;                // In settlement currency
+	string total_winnings_usd = 11;
+	string total_winnings_reporting_currency = 12;
+
+	// Per-template reward details
+	repeated FreeBetRewardDetail rewards = 13;
+
+	int64 created_at = 14;
+	int64 updated_at = 15;
+}
+
+// Single free bet reward item - from FreeBetRewardItem in JSONB
+message FreeBetRewardDetail {
+	string template_id = 1;                    // External template reference
+	string amount = 2;                         // Free bet amount (decimal string)
+
+	// Usage status
+	int32 used_count = 3;                      // Usage count (typically 0 or 1)
+	bool is_used = 4;                          // Whether the free bet has been used
+
+	// Expiration
+	int64 free_bet_validity = 5;               // Configured validity duration in milliseconds
+	int64 expired_at = 6;                      // Calculated expiration timestamp in milliseconds, 0 means never expires
+
+	// Winnings for this specific free bet
+	string winnings = 7;                       // In settlement currency
+	string winnings_usd = 8;
+	string winnings_reporting_currency = 9;
+
+	// Optional extra data
+	optional bytes extra = 10;
 }
