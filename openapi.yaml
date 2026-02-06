@@ -11404,11 +11404,10 @@ components:
                     type: string
                 withdrawalAmountReportingCurrency:
                     type: string
-                negativeCarryover:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.affiliate.service.v1.TierCarryover'
-                    description: Negative carryover per tier
+                t1Carryover:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.T1Carryover'
+                    description: T1 negative carryover (extracted for this row's currency)
             description: SnapshotReportItem - Single row in Snapshot report
         api.affiliate.service.v1.SnapshotTierData:
             type: object
@@ -11446,6 +11445,22 @@ components:
                 totalRewardReportingCurrency:
                     type: string
             description: SnapshotTierData - Tier data for Snapshot report
+        api.affiliate.service.v1.T1Carryover:
+            type: object
+            properties:
+                basedOn:
+                    type: string
+                revenueUsd:
+                    type: string
+                revenueReportingCurrency:
+                    type: string
+                b2cUsd:
+                    type: string
+                b2cReportingCurrency:
+                    type: string
+            description: |-
+                T1Carryover - T1 negative carryover data (from referrer's user_referral_relations.loss_rev_share_carryover)
+                 Each row has currency context, so carryover is extracted for that currency's T1 data
         api.affiliate.service.v1.T1GamingData:
             type: object
             properties:
@@ -11472,25 +11487,6 @@ components:
                 providerRoyaltiesReportingCurrency:
                     type: string
             description: T1GamingData - Gaming data for T1 only
-        api.affiliate.service.v1.TierCarryover:
-            type: object
-            properties:
-                tier:
-                    type: integer
-                    format: int32
-                currency:
-                    type: string
-                periodType:
-                    type: string
-                basedOn:
-                    type: string
-                ngrCarryover:
-                    type: string
-                ggrCarryover:
-                    type: string
-                b2cCarryover:
-                    type: string
-            description: TierCarryover - Negative carryover data per tier
         api.affiliate.service.v1.UpdateAffiliateResponse:
             type: object
             properties: {}

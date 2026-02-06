@@ -2957,56 +2957,52 @@ var _ interface {
 	ErrorName() string
 } = ReferralT1GamingDataValidationError{}
 
-// Validate checks the field values on ReferralTierCarryover with the rules
+// Validate checks the field values on ReferralT1Carryover with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ReferralTierCarryover) Validate() error {
+func (m *ReferralT1Carryover) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ReferralTierCarryover with the rules
+// ValidateAll checks the field values on ReferralT1Carryover with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ReferralTierCarryoverMultiError, or nil if none found.
-func (m *ReferralTierCarryover) ValidateAll() error {
+// ReferralT1CarryoverMultiError, or nil if none found.
+func (m *ReferralT1Carryover) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ReferralTierCarryover) validate(all bool) error {
+func (m *ReferralT1Carryover) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Tier
-
-	// no validation rules for Currency
-
-	// no validation rules for PeriodType
-
 	// no validation rules for BasedOn
 
-	// no validation rules for NgrCarryover
+	// no validation rules for RevenueUsd
 
-	// no validation rules for GgrCarryover
+	// no validation rules for RevenueReportingCurrency
 
-	// no validation rules for B2CCarryover
+	// no validation rules for B2CUsd
+
+	// no validation rules for B2CReportingCurrency
 
 	if len(errors) > 0 {
-		return ReferralTierCarryoverMultiError(errors)
+		return ReferralT1CarryoverMultiError(errors)
 	}
 
 	return nil
 }
 
-// ReferralTierCarryoverMultiError is an error wrapping multiple validation
-// errors returned by ReferralTierCarryover.ValidateAll() if the designated
+// ReferralT1CarryoverMultiError is an error wrapping multiple validation
+// errors returned by ReferralT1Carryover.ValidateAll() if the designated
 // constraints aren't met.
-type ReferralTierCarryoverMultiError []error
+type ReferralT1CarryoverMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ReferralTierCarryoverMultiError) Error() string {
+func (m ReferralT1CarryoverMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3015,11 +3011,11 @@ func (m ReferralTierCarryoverMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ReferralTierCarryoverMultiError) AllErrors() []error { return m }
+func (m ReferralT1CarryoverMultiError) AllErrors() []error { return m }
 
-// ReferralTierCarryoverValidationError is the validation error returned by
-// ReferralTierCarryover.Validate if the designated constraints aren't met.
-type ReferralTierCarryoverValidationError struct {
+// ReferralT1CarryoverValidationError is the validation error returned by
+// ReferralT1Carryover.Validate if the designated constraints aren't met.
+type ReferralT1CarryoverValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3027,24 +3023,24 @@ type ReferralTierCarryoverValidationError struct {
 }
 
 // Field function returns field value.
-func (e ReferralTierCarryoverValidationError) Field() string { return e.field }
+func (e ReferralT1CarryoverValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ReferralTierCarryoverValidationError) Reason() string { return e.reason }
+func (e ReferralT1CarryoverValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ReferralTierCarryoverValidationError) Cause() error { return e.cause }
+func (e ReferralT1CarryoverValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ReferralTierCarryoverValidationError) Key() bool { return e.key }
+func (e ReferralT1CarryoverValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ReferralTierCarryoverValidationError) ErrorName() string {
-	return "ReferralTierCarryoverValidationError"
+func (e ReferralT1CarryoverValidationError) ErrorName() string {
+	return "ReferralT1CarryoverValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ReferralTierCarryoverValidationError) Error() string {
+func (e ReferralT1CarryoverValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3056,14 +3052,14 @@ func (e ReferralTierCarryoverValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sReferralTierCarryover.%s: %s%s",
+		"invalid %sReferralT1Carryover.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ReferralTierCarryoverValidationError{}
+var _ error = ReferralT1CarryoverValidationError{}
 
 var _ interface {
 	Field() string
@@ -3071,7 +3067,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ReferralTierCarryoverValidationError{}
+} = ReferralT1CarryoverValidationError{}
 
 // Validate checks the field values on ReferralTierGamingData with the rules
 // defined in the proto definition for this message. If any rules are
@@ -4017,38 +4013,33 @@ func (m *ReferralSnapshotReportDataItem) validate(all bool) error {
 
 	// no validation rules for WithdrawalAmountReportingCurrency
 
-	for idx, item := range m.GetNegativeCarryover() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
-						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ReferralSnapshotReportDataItemValidationError{
-						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ReferralSnapshotReportDataItemValidationError{
-					field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetT1Carryover()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReferralSnapshotReportDataItemValidationError{
+					field:  "T1Carryover",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReferralSnapshotReportDataItemValidationError{
+					field:  "T1Carryover",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetT1Carryover()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReferralSnapshotReportDataItemValidationError{
+				field:  "T1Carryover",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	// no validation rules for UnpaidWageringCommissionUsd

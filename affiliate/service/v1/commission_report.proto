@@ -166,15 +166,14 @@ message T1GamingData {
   string provider_royalties_reporting_currency = 14;
 }
 
-// TierCarryover - Negative carryover data per tier
-message TierCarryover {
-  int32 tier = 1;
-  string currency = 2;
-  string period_type = 3;    // "weekly" or "monthly"
-  string based_on = 4;       // "ngr" or "ggr"
-  string ngr_carryover = 5;  // NGR carryover amount
-  string ggr_carryover = 6;  // GGR carryover amount
-  string b2c_carryover = 7;  // B2C carryover amount
+// T1Carryover - T1 negative carryover data (from referrer's user_referral_relations.loss_rev_share_carryover)
+// Each row has currency context, so carryover is extracted for that currency's T1 data
+message T1Carryover {
+  string based_on = 1;                      // "ngr" or "ggr" - what the carryover is based on
+  string revenue_usd = 2;                   // Revenue (NGR or GGR based on based_on) in USD
+  string revenue_reporting_currency = 3;    // Revenue in reporting currency
+  string b2c_usd = 4;                       // Bonus to Cash in USD
+  string b2c_reporting_currency = 5;        // Bonus to Cash in reporting currency
 }
 
 // SnapshotReportItem - Single row in Snapshot report
@@ -230,8 +229,8 @@ message SnapshotReportItem {
   string lifetime_claimed_reporting_currency = 56;
   string withdrawal_amount_reporting_currency = 57;
 
-  // Negative carryover per tier
-  repeated TierCarryover negative_carryover = 60;
+  // T1 negative carryover (extracted for this row's currency)
+  T1Carryover t1_carryover = 60;
 }
 
 message ListReferralSnapshotReportResponse {
