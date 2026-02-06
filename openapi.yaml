@@ -22342,10 +22342,10 @@ components:
                     description: |-
                         Optional filter for provider's enabled status.
                          If not provided, all providers will be returned.
-                tag:
+                tagId:
                     type: string
                     description: |-
-                        Optional filter for game's tag.
+                        Optional filter for game's tag_id.
                          If not provided, all providers will be returned.
                 includeGameCount:
                     type: boolean

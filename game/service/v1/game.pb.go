@@ -607,9 +607,9 @@ type ListProvidersRequest struct {
 	// Optional filter for provider's enabled status.
 	// If not provided, all providers will be returned.
 	Enabled *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	// Optional filter for game's tag.
+	// Optional filter for game's tag_id.
 	// If not provided, all providers will be returned.
-	Tag *string `protobuf:"bytes,3,opt,name=tag,proto3,oneof" json:"tag,omitempty"`
+	TagId *int64 `protobuf:"varint,3,opt,name=tag_id,json=tagId,proto3,oneof" json:"tag_id,omitempty"`
 	// Include game count in response, false by default.
 	// Only enable it for ListProviders page which game_count is needed.
 	IncludeGameCount *bool `protobuf:"varint,4,opt,name=include_game_count,json=includeGameCount,proto3,oneof" json:"include_game_count,omitempty"`
@@ -668,11 +668,11 @@ func (x *ListProvidersRequest) GetEnabled() bool {
 	return false
 }
 
-func (x *ListProvidersRequest) GetTag() string {
-	if x != nil && x.Tag != nil {
-		return *x.Tag
+func (x *ListProvidersRequest) GetTagId() int64 {
+	if x != nil && x.TagId != nil {
+		return *x.TagId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListProvidersRequest) GetIncludeGameCount() bool {
@@ -17231,12 +17231,12 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04DESC\x10\x01\x12\x0e\n" +
 	"\n" +
 	"POPULARITY\x10\x02\x12\r\n" +
-	"\tHIGHLIGHT\x10\x03\"\xc5\x03\n" +
+	"\tHIGHLIGHT\x10\x03\"\xcd\x03\n" +
 	"\x14ListProvidersRequest\x12$\n" +
 	"\vprovider_id\x18\x01 \x01(\tH\x00R\n" +
 	"providerId\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x15\n" +
-	"\x03tag\x18\x03 \x01(\tH\x02R\x03tag\x88\x01\x01\x121\n" +
+	"\aenabled\x18\x02 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1a\n" +
+	"\x06tag_id\x18\x03 \x01(\x03H\x02R\x05tagId\x88\x01\x01\x121\n" +
 	"\x12include_game_count\x18\x04 \x01(\bH\x03R\x10includeGameCount\x88\x01\x01\x122\n" +
 	"\x12pagination_enabled\x18\x05 \x01(\bH\x04R\x11paginationEnabled\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
@@ -17244,8 +17244,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x0e\n" +
 	"\f_provider_idB\n" +
 	"\n" +
-	"\b_enabledB\x06\n" +
-	"\x04_tagB\x15\n" +
+	"\b_enabledB\t\n" +
+	"\a_tag_idB\x15\n" +
 	"\x13_include_game_countB\x15\n" +
 	"\x13_pagination_enabledB\a\n" +
 	"\x05_pageB\f\n" +
