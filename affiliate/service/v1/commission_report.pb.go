@@ -2557,8 +2557,13 @@ type AffiliateVTGReportItem struct {
 	CommissionTotalReportingCurrency    string `protobuf:"bytes,76,opt,name=commission_total_reporting_currency,json=commissionTotalReportingCurrency,proto3" json:"commission_total_reporting_currency,omitempty"`
 	PspFeeReportingCurrency             string `protobuf:"bytes,77,opt,name=psp_fee_reporting_currency,json=pspFeeReportingCurrency,proto3" json:"psp_fee_reporting_currency,omitempty"`
 	ContentFeeReportingCurrency         string `protobuf:"bytes,78,opt,name=content_fee_reporting_currency,json=contentFeeReportingCurrency,proto3" json:"content_fee_reporting_currency,omitempty"`
-	unknownFields                       protoimpl.UnknownFields
-	sizeCache                           protoimpl.SizeCache
+	// Rake and Tax (always 0, no PVP games or tax)
+	RakeUsd               string `protobuf:"bytes,79,opt,name=rake_usd,json=rakeUsd,proto3" json:"rake_usd,omitempty"`
+	TaxUsd                string `protobuf:"bytes,80,opt,name=tax_usd,json=taxUsd,proto3" json:"tax_usd,omitempty"`
+	RakeReportingCurrency string `protobuf:"bytes,81,opt,name=rake_reporting_currency,json=rakeReportingCurrency,proto3" json:"rake_reporting_currency,omitempty"`
+	TaxReportingCurrency  string `protobuf:"bytes,82,opt,name=tax_reporting_currency,json=taxReportingCurrency,proto3" json:"tax_reporting_currency,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *AffiliateVTGReportItem) Reset() {
@@ -3095,6 +3100,34 @@ func (x *AffiliateVTGReportItem) GetContentFeeReportingCurrency() string {
 	return ""
 }
 
+func (x *AffiliateVTGReportItem) GetRakeUsd() string {
+	if x != nil {
+		return x.RakeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTaxUsd() string {
+	if x != nil {
+		return x.TaxUsd
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetRakeReportingCurrency() string {
+	if x != nil {
+		return x.RakeReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateVTGReportItem) GetTaxReportingCurrency() string {
+	if x != nil {
+		return x.TaxReportingCurrency
+	}
+	return ""
+}
+
 type ListAffiliateVTGReportResponse struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
 	Items         []*AffiliateVTGReportItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
@@ -3366,8 +3399,13 @@ type AffiliateSnapshotReportItem struct {
 	NetProfitReportingCurrency         string `protobuf:"bytes,83,opt,name=net_profit_reporting_currency,json=netProfitReportingCurrency,proto3" json:"net_profit_reporting_currency,omitempty"`
 	PspFeeReportingCurrency            string `protobuf:"bytes,84,opt,name=psp_fee_reporting_currency,json=pspFeeReportingCurrency,proto3" json:"psp_fee_reporting_currency,omitempty"`
 	ContentFeeReportingCurrency        string `protobuf:"bytes,85,opt,name=content_fee_reporting_currency,json=contentFeeReportingCurrency,proto3" json:"content_fee_reporting_currency,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	// Rake and Tax (always 0, no PVP games or tax)
+	RakeUsd               string `protobuf:"bytes,86,opt,name=rake_usd,json=rakeUsd,proto3" json:"rake_usd,omitempty"`
+	TaxUsd                string `protobuf:"bytes,87,opt,name=tax_usd,json=taxUsd,proto3" json:"tax_usd,omitempty"`
+	RakeReportingCurrency string `protobuf:"bytes,88,opt,name=rake_reporting_currency,json=rakeReportingCurrency,proto3" json:"rake_reporting_currency,omitempty"`
+	TaxReportingCurrency  string `protobuf:"bytes,89,opt,name=tax_reporting_currency,json=taxReportingCurrency,proto3" json:"tax_reporting_currency,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *AffiliateSnapshotReportItem) Reset() {
@@ -3995,6 +4033,34 @@ func (x *AffiliateSnapshotReportItem) GetContentFeeReportingCurrency() string {
 	return ""
 }
 
+func (x *AffiliateSnapshotReportItem) GetRakeUsd() string {
+	if x != nil {
+		return x.RakeUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTaxUsd() string {
+	if x != nil {
+		return x.TaxUsd
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetRakeReportingCurrency() string {
+	if x != nil {
+		return x.RakeReportingCurrency
+	}
+	return ""
+}
+
+func (x *AffiliateSnapshotReportItem) GetTaxReportingCurrency() string {
+	if x != nil {
+		return x.TaxReportingCurrency
+	}
+	return ""
+}
+
 type ListAffiliateSnapshotReportResponse struct {
 	state         protoimpl.MessageState         `protogen:"open.v1"`
 	Items         []*AffiliateSnapshotReportItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
@@ -4348,7 +4414,7 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x84\x1c\n" +
+	"_page_size\"\xa6\x1d\n" +
 	"\x16AffiliateVTGReportItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
@@ -4426,7 +4492,11 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	" commission_rs_reporting_currency\x18K \x01(\tR\x1dcommissionRsReportingCurrency\x12M\n" +
 	"#commission_total_reporting_currency\x18L \x01(\tR commissionTotalReportingCurrency\x12;\n" +
 	"\x1apsp_fee_reporting_currency\x18M \x01(\tR\x17pspFeeReportingCurrency\x12C\n" +
-	"\x1econtent_fee_reporting_currency\x18N \x01(\tR\x1bcontentFeeReportingCurrency\"\xaf\x01\n" +
+	"\x1econtent_fee_reporting_currency\x18N \x01(\tR\x1bcontentFeeReportingCurrency\x12\x19\n" +
+	"\brake_usd\x18O \x01(\tR\arakeUsd\x12\x17\n" +
+	"\atax_usd\x18P \x01(\tR\x06taxUsd\x126\n" +
+	"\x17rake_reporting_currency\x18Q \x01(\tR\x15rakeReportingCurrency\x124\n" +
+	"\x16tax_reporting_currency\x18R \x01(\tR\x14taxReportingCurrency\"\xaf\x01\n" +
 	"\x1eListAffiliateVTGReportResponse\x12F\n" +
 	"\x05items\x18\x01 \x03(\v20.api.affiliate.service.v1.AffiliateVTGReportItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -4444,7 +4514,7 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf3 \n" +
+	"_page_size\"\x95\"\n" +
 	"\x1bAffiliateSnapshotReportItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
@@ -4536,7 +4606,11 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18R \x01(\tR\x14ngrReportingCurrency\x12A\n" +
 	"\x1dnet_profit_reporting_currency\x18S \x01(\tR\x1anetProfitReportingCurrency\x12;\n" +
 	"\x1apsp_fee_reporting_currency\x18T \x01(\tR\x17pspFeeReportingCurrency\x12C\n" +
-	"\x1econtent_fee_reporting_currency\x18U \x01(\tR\x1bcontentFeeReportingCurrency\"\xb9\x01\n" +
+	"\x1econtent_fee_reporting_currency\x18U \x01(\tR\x1bcontentFeeReportingCurrency\x12\x19\n" +
+	"\brake_usd\x18V \x01(\tR\arakeUsd\x12\x17\n" +
+	"\atax_usd\x18W \x01(\tR\x06taxUsd\x126\n" +
+	"\x17rake_reporting_currency\x18X \x01(\tR\x15rakeReportingCurrency\x124\n" +
+	"\x16tax_reporting_currency\x18Y \x01(\tR\x14taxReportingCurrency\"\xb9\x01\n" +
 	"#ListAffiliateSnapshotReportResponse\x12K\n" +
 	"\x05items\x18\x01 \x03(\v25.api.affiliate.service.v1.AffiliateSnapshotReportItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +

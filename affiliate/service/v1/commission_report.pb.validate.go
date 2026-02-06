@@ -2916,6 +2916,14 @@ func (m *AffiliateVTGReportItem) validate(all bool) error {
 
 	// no validation rules for ContentFeeReportingCurrency
 
+	// no validation rules for RakeUsd
+
+	// no validation rules for TaxUsd
+
+	// no validation rules for RakeReportingCurrency
+
+	// no validation rules for TaxReportingCurrency
+
 	if len(errors) > 0 {
 		return AffiliateVTGReportItemMultiError(errors)
 	}
@@ -3507,6 +3515,14 @@ func (m *AffiliateSnapshotReportItem) validate(all bool) error {
 	// no validation rules for PspFeeReportingCurrency
 
 	// no validation rules for ContentFeeReportingCurrency
+
+	// no validation rules for RakeUsd
+
+	// no validation rules for TaxUsd
+
+	// no validation rules for RakeReportingCurrency
+
+	// no validation rules for TaxReportingCurrency
 
 	if len(errors) > 0 {
 		return AffiliateSnapshotReportItemMultiError(errors)
