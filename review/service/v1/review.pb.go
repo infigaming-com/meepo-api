@@ -2376,6 +2376,7 @@ type GetOperatorTicketResponse_PaymentTransactionInfo struct {
 	FeeUsd                      string                 `protobuf:"bytes,13,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
 	FeeReportingCurrency        string                 `protobuf:"bytes,14,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
 	CreatedAt                   *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	RawRequest                  string                 `protobuf:"bytes,16,opt,name=raw_request,json=rawRequest,proto3" json:"raw_request,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -2513,6 +2514,13 @@ func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetCreatedAt() *times
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetRawRequest() string {
+	if x != nil {
+		return x.RawRequest
+	}
+	return ""
 }
 
 type GetOperatorTicketResponse_WalletBalanceInfo struct {
@@ -3071,7 +3079,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
-	"\x11_include_comments\"\x91\x1a\n" +
+	"\x11_include_comments\"\xb2\x1a\n" +
 	"\x19GetOperatorTicketResponse\x12O\n" +
 	"\x06ticket\x18\x01 \x01(\v27.api.review.service.v1.GetOperatorTicketResponse.TicketR\x06ticket\x12T\n" +
 	"\bcomments\x18\x02 \x03(\v28.api.review.service.v1.GetOperatorTicketResponse.CommentR\bcomments\x12\x81\x01\n" +
@@ -3095,7 +3103,7 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xab\x04\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xcc\x04\n" +
 	"\x16PaymentTransactionInfo\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x02 \x01(\tR\bprotocol\x12\x18\n" +
@@ -3115,7 +3123,9 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\afee_usd\x18\r \x01(\tR\x06feeUsd\x124\n" +
 	"\x16fee_reporting_currency\x18\x0e \x01(\tR\x14feeReportingCurrency\x129\n" +
 	"\n" +
-	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\x8c\x01\n" +
+	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1f\n" +
+	"\vraw_request\x18\x10 \x01(\tR\n" +
+	"rawRequest\x1a\x8c\x01\n" +
 	"\x11WalletBalanceInfo\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x12\x1f\n" +
 	"\vbalance_usd\x18\x02 \x01(\tR\n" +
