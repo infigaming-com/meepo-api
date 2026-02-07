@@ -298,10 +298,12 @@ message ContributionReportItem {
   string payment_cost_reporting_currency = 36;
   string provider_royalties_reporting_currency = 37;
 
-  // Not implemented (requires User Service integration)
+  // User activity fields (from user_events table)
   int64 last_login_time = 40;
-  string device_id = 41;
-  string ip = 42;
+  string registration_device_type = 41;  // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
+  string registration_ip = 42;
+  string last_login_device_type = 43;    // Parsed from UserAgent
+  string last_login_ip = 44;
 }
 
 message ListReferralContributionReportResponse {

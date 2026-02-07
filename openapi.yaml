@@ -9706,10 +9706,14 @@ components:
                     type: string
                 lastLoginTime:
                     type: string
-                    description: Not implemented (requires User Service integration)
-                deviceId:
+                    description: User activity fields (from user_events table)
+                registrationDeviceType:
                     type: string
-                ip:
+                registrationIp:
+                    type: string
+                lastLoginDeviceType:
+                    type: string
+                lastLoginIp:
                     type: string
             description: ContributionReportItem - Single subordinate detail
         api.affiliate.service.v1.ConversionConditions:

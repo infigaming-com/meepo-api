@@ -1881,9 +1881,13 @@ func (m *ContributionReportItem) validate(all bool) error {
 
 	// no validation rules for LastLoginTime
 
-	// no validation rules for DeviceId
+	// no validation rules for RegistrationDeviceType
 
-	// no validation rules for Ip
+	// no validation rules for RegistrationIp
+
+	// no validation rules for LastLoginDeviceType
+
+	// no validation rules for LastLoginIp
 
 	if len(errors) > 0 {
 		return ContributionReportItemMultiError(errors)

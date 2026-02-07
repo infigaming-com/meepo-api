@@ -2918,12 +2918,14 @@ type ReferralContributionReportDataItem struct {
 	B2CReportingCurrency               string `protobuf:"bytes,35,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`
 	PaymentCostReportingCurrency       string `protobuf:"bytes,36,opt,name=payment_cost_reporting_currency,json=paymentCostReportingCurrency,proto3" json:"payment_cost_reporting_currency,omitempty"`
 	ProviderRoyaltiesReportingCurrency string `protobuf:"bytes,37,opt,name=provider_royalties_reporting_currency,json=providerRoyaltiesReportingCurrency,proto3" json:"provider_royalties_reporting_currency,omitempty"`
-	// TODO: Not implemented - requires User Service integration
-	LastLoginTime int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
-	DeviceId      string `protobuf:"bytes,41,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	Ip            string `protobuf:"bytes,42,opt,name=ip,proto3" json:"ip,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// User activity fields (from user_events table)
+	LastLoginTime          int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
+	RegistrationDeviceType string `protobuf:"bytes,41,opt,name=registration_device_type,json=registrationDeviceType,proto3" json:"registration_device_type,omitempty"` // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
+	RegistrationIp         string `protobuf:"bytes,42,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	LastLoginDeviceType    string `protobuf:"bytes,43,opt,name=last_login_device_type,json=lastLoginDeviceType,proto3" json:"last_login_device_type,omitempty"` // Parsed from UserAgent
+	LastLoginIp            string `protobuf:"bytes,44,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ReferralContributionReportDataItem) Reset() {
@@ -3159,16 +3161,30 @@ func (x *ReferralContributionReportDataItem) GetLastLoginTime() int64 {
 	return 0
 }
 
-func (x *ReferralContributionReportDataItem) GetDeviceId() string {
+func (x *ReferralContributionReportDataItem) GetRegistrationDeviceType() string {
 	if x != nil {
-		return x.DeviceId
+		return x.RegistrationDeviceType
 	}
 	return ""
 }
 
-func (x *ReferralContributionReportDataItem) GetIp() string {
+func (x *ReferralContributionReportDataItem) GetRegistrationIp() string {
 	if x != nil {
-		return x.Ip
+		return x.RegistrationIp
+	}
+	return ""
+}
+
+func (x *ReferralContributionReportDataItem) GetLastLoginDeviceType() string {
+	if x != nil {
+		return x.LastLoginDeviceType
+	}
+	return ""
+}
+
+func (x *ReferralContributionReportDataItem) GetLastLoginIp() string {
+	if x != nil {
+		return x.LastLoginIp
 	}
 	return ""
 }
@@ -5791,8 +5807,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\r_is_qualifiedB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8e\n" +
-	"\n" +
+	"_page_size\"\x9d\v\n" +
 	"\"ReferralContributionReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x17\n" +
 	"\aroot_id\x18\x02 \x01(\x03R\x06rootId\x12\x1b\n" +
@@ -5825,9 +5840,11 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x16b2c_reporting_currency\x18# \x01(\tR\x14b2cReportingCurrency\x12E\n" +
 	"\x1fpayment_cost_reporting_currency\x18$ \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
 	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12&\n" +
-	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x12\x1b\n" +
-	"\tdevice_id\x18) \x01(\tR\bdeviceId\x12\x0e\n" +
-	"\x02ip\x18* \x01(\tR\x02ip\"\xc4\x01\n" +
+	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x128\n" +
+	"\x18registration_device_type\x18) \x01(\tR\x16registrationDeviceType\x12'\n" +
+	"\x0fregistration_ip\x18* \x01(\tR\x0eregistrationIp\x123\n" +
+	"\x16last_login_device_type\x18+ \x01(\tR\x13lastLoginDeviceType\x12\"\n" +
+	"\rlast_login_ip\x18, \x01(\tR\vlastLoginIp\"\xc4\x01\n" +
 	"*ListReferralContributionReportDataResponse\x12O\n" +
 	"\x05items\x18\x01 \x03(\v29.api.report.service.v1.ReferralContributionReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
