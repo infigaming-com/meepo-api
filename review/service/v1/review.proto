@@ -290,6 +290,7 @@ message GetOperatorTicketResponse {
 		string fee_usd = 13;
 		string fee_reporting_currency = 14;
 		google.protobuf.Timestamp created_at = 15;
+		string raw_request = 16;
 	}
 	message WalletBalanceInfo {
 		string balance = 1;

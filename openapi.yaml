@@ -23641,6 +23641,8 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                rawRequest:
+                    type: string
         api.review.service.v1.GetOperatorTicketResponse_Ticket:
             type: object
             properties:
