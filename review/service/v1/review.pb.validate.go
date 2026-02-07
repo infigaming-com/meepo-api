@@ -4265,6 +4265,8 @@ func (m *GetOperatorTicketResponse_PaymentTransactionInfo) validate(all bool) er
 		}
 	}
 
+	// no validation rules for RawRequest
+
 	if len(errors) > 0 {
 		return GetOperatorTicketResponse_PaymentTransactionInfoMultiError(errors)
 	}
