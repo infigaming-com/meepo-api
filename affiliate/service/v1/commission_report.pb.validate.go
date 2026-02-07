@@ -1102,56 +1102,51 @@ var _ interface {
 	ErrorName() string
 } = T1GamingDataValidationError{}
 
-// Validate checks the field values on TierCarryover with the rules defined in
+// Validate checks the field values on T1Carryover with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *TierCarryover) Validate() error {
+func (m *T1Carryover) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on TierCarryover with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in TierCarryoverMultiError, or
+// ValidateAll checks the field values on T1Carryover with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in T1CarryoverMultiError, or
 // nil if none found.
-func (m *TierCarryover) ValidateAll() error {
+func (m *T1Carryover) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *TierCarryover) validate(all bool) error {
+func (m *T1Carryover) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Tier
-
-	// no validation rules for Currency
-
-	// no validation rules for PeriodType
-
 	// no validation rules for BasedOn
 
-	// no validation rules for NgrCarryover
+	// no validation rules for RevenueUsd
 
-	// no validation rules for GgrCarryover
+	// no validation rules for RevenueReportingCurrency
 
-	// no validation rules for B2CCarryover
+	// no validation rules for B2CUsd
+
+	// no validation rules for B2CReportingCurrency
 
 	if len(errors) > 0 {
-		return TierCarryoverMultiError(errors)
+		return T1CarryoverMultiError(errors)
 	}
 
 	return nil
 }
 
-// TierCarryoverMultiError is an error wrapping multiple validation errors
-// returned by TierCarryover.ValidateAll() if the designated constraints
-// aren't met.
-type TierCarryoverMultiError []error
+// T1CarryoverMultiError is an error wrapping multiple validation errors
+// returned by T1Carryover.ValidateAll() if the designated constraints aren't met.
+type T1CarryoverMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m TierCarryoverMultiError) Error() string {
+func (m T1CarryoverMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1160,11 +1155,11 @@ func (m TierCarryoverMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m TierCarryoverMultiError) AllErrors() []error { return m }
+func (m T1CarryoverMultiError) AllErrors() []error { return m }
 
-// TierCarryoverValidationError is the validation error returned by
-// TierCarryover.Validate if the designated constraints aren't met.
-type TierCarryoverValidationError struct {
+// T1CarryoverValidationError is the validation error returned by
+// T1Carryover.Validate if the designated constraints aren't met.
+type T1CarryoverValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1172,22 +1167,22 @@ type TierCarryoverValidationError struct {
 }
 
 // Field function returns field value.
-func (e TierCarryoverValidationError) Field() string { return e.field }
+func (e T1CarryoverValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e TierCarryoverValidationError) Reason() string { return e.reason }
+func (e T1CarryoverValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e TierCarryoverValidationError) Cause() error { return e.cause }
+func (e T1CarryoverValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e TierCarryoverValidationError) Key() bool { return e.key }
+func (e T1CarryoverValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e TierCarryoverValidationError) ErrorName() string { return "TierCarryoverValidationError" }
+func (e T1CarryoverValidationError) ErrorName() string { return "T1CarryoverValidationError" }
 
 // Error satisfies the builtin error interface
-func (e TierCarryoverValidationError) Error() string {
+func (e T1CarryoverValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1199,14 +1194,14 @@ func (e TierCarryoverValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sTierCarryover.%s: %s%s",
+		"invalid %sT1Carryover.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = TierCarryoverValidationError{}
+var _ error = T1CarryoverValidationError{}
 
 var _ interface {
 	Field() string
@@ -1214,7 +1209,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = TierCarryoverValidationError{}
+} = T1CarryoverValidationError{}
 
 // Validate checks the field values on SnapshotReportItem with the rules
 // defined in the proto definition for this message. If any rules are
@@ -1363,38 +1358,33 @@ func (m *SnapshotReportItem) validate(all bool) error {
 
 	// no validation rules for WithdrawalAmountReportingCurrency
 
-	for idx, item := range m.GetNegativeCarryover() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SnapshotReportItemValidationError{
-						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, SnapshotReportItemValidationError{
-						field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SnapshotReportItemValidationError{
-					field:  fmt.Sprintf("NegativeCarryover[%v]", idx),
+	if all {
+		switch v := interface{}(m.GetT1Carryover()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SnapshotReportItemValidationError{
+					field:  "T1Carryover",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SnapshotReportItemValidationError{
+					field:  "T1Carryover",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetT1Carryover()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SnapshotReportItemValidationError{
+				field:  "T1Carryover",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
@@ -1891,9 +1881,13 @@ func (m *ContributionReportItem) validate(all bool) error {
 
 	// no validation rules for LastLoginTime
 
-	// no validation rules for DeviceId
+	// no validation rules for RegistrationDeviceType
 
-	// no validation rules for Ip
+	// no validation rules for RegistrationIp
+
+	// no validation rules for LastLoginDeviceType
+
+	// no validation rules for LastLoginIp
 
 	if len(errors) > 0 {
 		return ContributionReportItemMultiError(errors)
