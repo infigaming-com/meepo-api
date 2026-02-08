@@ -116,6 +116,14 @@ service BackofficeCampaign {
       body: "*"
     };
   }
+
+  // Workflow schema
+  rpc GetCrmCampaignWorkflowSchema(GetCrmCampaignWorkflowSchemaRequest) returns (api.campaign.service.v1.GetWorkflowSchemaResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/workflow/schema"
+      body: "*"
+    };
+  }
 }
 
 // CreateCrmCampaign
@@ -220,4 +228,9 @@ message ListCrmCampaignExecutionsRequest {
 message GetCrmCampaignExecutionStepsRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 execution_id = 2;
+}
+
+// GetCrmCampaignWorkflowSchema
+message GetCrmCampaignWorkflowSchemaRequest {
+  api.common.OperatorContext target_operator_context = 1;
 }

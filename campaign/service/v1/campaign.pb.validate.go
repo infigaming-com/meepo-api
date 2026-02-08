@@ -4937,3 +4937,1117 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetExecutionStepsResponseValidationError{}
+
+// Validate checks the field values on GetWorkflowSchemaRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWorkflowSchemaRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWorkflowSchemaRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWorkflowSchemaRequestMultiError, or nil if none found.
+func (m *GetWorkflowSchemaRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWorkflowSchemaRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetWorkflowSchemaRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetWorkflowSchemaRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWorkflowSchemaRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetWorkflowSchemaRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWorkflowSchemaRequestMultiError is an error wrapping multiple validation
+// errors returned by GetWorkflowSchemaRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetWorkflowSchemaRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWorkflowSchemaRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWorkflowSchemaRequestMultiError) AllErrors() []error { return m }
+
+// GetWorkflowSchemaRequestValidationError is the validation error returned by
+// GetWorkflowSchemaRequest.Validate if the designated constraints aren't met.
+type GetWorkflowSchemaRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWorkflowSchemaRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWorkflowSchemaRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWorkflowSchemaRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWorkflowSchemaRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWorkflowSchemaRequestValidationError) ErrorName() string {
+	return "GetWorkflowSchemaRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWorkflowSchemaRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWorkflowSchemaRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWorkflowSchemaRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWorkflowSchemaRequestValidationError{}
+
+// Validate checks the field values on GetWorkflowSchemaResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWorkflowSchemaResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWorkflowSchemaResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWorkflowSchemaResponseMultiError, or nil if none found.
+func (m *GetWorkflowSchemaResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWorkflowSchemaResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Version
+
+	for idx, item := range m.GetTriggers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("Triggers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("Triggers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWorkflowSchemaResponseValidationError{
+					field:  fmt.Sprintf("Triggers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetOperators() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("Operators[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("Operators[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWorkflowSchemaResponseValidationError{
+					field:  fmt.Sprintf("Operators[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetActions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("Actions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("Actions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWorkflowSchemaResponseValidationError{
+					field:  fmt.Sprintf("Actions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetDataSources() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("DataSources[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetWorkflowSchemaResponseValidationError{
+						field:  fmt.Sprintf("DataSources[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWorkflowSchemaResponseValidationError{
+					field:  fmt.Sprintf("DataSources[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetWorkflowSchemaResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWorkflowSchemaResponseMultiError is an error wrapping multiple validation
+// errors returned by GetWorkflowSchemaResponse.ValidateAll() if the
+// designated constraints aren't met.
+type GetWorkflowSchemaResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWorkflowSchemaResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWorkflowSchemaResponseMultiError) AllErrors() []error { return m }
+
+// GetWorkflowSchemaResponseValidationError is the validation error returned by
+// GetWorkflowSchemaResponse.Validate if the designated constraints aren't met.
+type GetWorkflowSchemaResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWorkflowSchemaResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWorkflowSchemaResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWorkflowSchemaResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWorkflowSchemaResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWorkflowSchemaResponseValidationError) ErrorName() string {
+	return "GetWorkflowSchemaResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWorkflowSchemaResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWorkflowSchemaResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWorkflowSchemaResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWorkflowSchemaResponseValidationError{}
+
+// Validate checks the field values on TriggerSchema with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *TriggerSchema) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TriggerSchema with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in TriggerSchemaMultiError, or
+// nil if none found.
+func (m *TriggerSchema) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TriggerSchema) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Type
+
+	// no validation rules for Name
+
+	// no validation rules for Description
+
+	for idx, item := range m.GetConfigFields() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, TriggerSchemaValidationError{
+						field:  fmt.Sprintf("ConfigFields[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, TriggerSchemaValidationError{
+						field:  fmt.Sprintf("ConfigFields[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return TriggerSchemaValidationError{
+					field:  fmt.Sprintf("ConfigFields[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return TriggerSchemaMultiError(errors)
+	}
+
+	return nil
+}
+
+// TriggerSchemaMultiError is an error wrapping multiple validation errors
+// returned by TriggerSchema.ValidateAll() if the designated constraints
+// aren't met.
+type TriggerSchemaMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TriggerSchemaMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TriggerSchemaMultiError) AllErrors() []error { return m }
+
+// TriggerSchemaValidationError is the validation error returned by
+// TriggerSchema.Validate if the designated constraints aren't met.
+type TriggerSchemaValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TriggerSchemaValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TriggerSchemaValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TriggerSchemaValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TriggerSchemaValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TriggerSchemaValidationError) ErrorName() string { return "TriggerSchemaValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TriggerSchemaValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTriggerSchema.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TriggerSchemaValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TriggerSchemaValidationError{}
+
+// Validate checks the field values on OperatorSchema with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *OperatorSchema) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorSchema with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in OperatorSchemaMultiError,
+// or nil if none found.
+func (m *OperatorSchema) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorSchema) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Symbol
+
+	// no validation rules for Name
+
+	// no validation rules for Description
+
+	if len(errors) > 0 {
+		return OperatorSchemaMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorSchemaMultiError is an error wrapping multiple validation errors
+// returned by OperatorSchema.ValidateAll() if the designated constraints
+// aren't met.
+type OperatorSchemaMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorSchemaMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorSchemaMultiError) AllErrors() []error { return m }
+
+// OperatorSchemaValidationError is the validation error returned by
+// OperatorSchema.Validate if the designated constraints aren't met.
+type OperatorSchemaValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorSchemaValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorSchemaValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorSchemaValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorSchemaValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorSchemaValidationError) ErrorName() string { return "OperatorSchemaValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OperatorSchemaValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorSchema.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorSchemaValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorSchemaValidationError{}
+
+// Validate checks the field values on ActionSchema with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ActionSchema) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActionSchema with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ActionSchemaMultiError, or
+// nil if none found.
+func (m *ActionSchema) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActionSchema) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Type
+
+	// no validation rules for Name
+
+	// no validation rules for Description
+
+	// no validation rules for Implemented
+
+	for idx, item := range m.GetConfigFields() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ActionSchemaValidationError{
+						field:  fmt.Sprintf("ConfigFields[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ActionSchemaValidationError{
+						field:  fmt.Sprintf("ConfigFields[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ActionSchemaValidationError{
+					field:  fmt.Sprintf("ConfigFields[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ActionSchemaMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActionSchemaMultiError is an error wrapping multiple validation errors
+// returned by ActionSchema.ValidateAll() if the designated constraints aren't met.
+type ActionSchemaMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActionSchemaMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActionSchemaMultiError) AllErrors() []error { return m }
+
+// ActionSchemaValidationError is the validation error returned by
+// ActionSchema.Validate if the designated constraints aren't met.
+type ActionSchemaValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActionSchemaValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActionSchemaValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActionSchemaValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActionSchemaValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActionSchemaValidationError) ErrorName() string { return "ActionSchemaValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ActionSchemaValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActionSchema.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActionSchemaValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActionSchemaValidationError{}
+
+// Validate checks the field values on ConfigFieldSchema with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ConfigFieldSchema) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConfigFieldSchema with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ConfigFieldSchemaMultiError, or nil if none found.
+func (m *ConfigFieldSchema) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConfigFieldSchema) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Type
+
+	// no validation rules for Required
+
+	// no validation rules for Description
+
+	// no validation rules for DefaultValue
+
+	if len(errors) > 0 {
+		return ConfigFieldSchemaMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConfigFieldSchemaMultiError is an error wrapping multiple validation errors
+// returned by ConfigFieldSchema.ValidateAll() if the designated constraints
+// aren't met.
+type ConfigFieldSchemaMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConfigFieldSchemaMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConfigFieldSchemaMultiError) AllErrors() []error { return m }
+
+// ConfigFieldSchemaValidationError is the validation error returned by
+// ConfigFieldSchema.Validate if the designated constraints aren't met.
+type ConfigFieldSchemaValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConfigFieldSchemaValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConfigFieldSchemaValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConfigFieldSchemaValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConfigFieldSchemaValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConfigFieldSchemaValidationError) ErrorName() string {
+	return "ConfigFieldSchemaValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ConfigFieldSchemaValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConfigFieldSchema.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConfigFieldSchemaValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConfigFieldSchemaValidationError{}
+
+// Validate checks the field values on DataSourceSchema with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *DataSourceSchema) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DataSourceSchema with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DataSourceSchemaMultiError, or nil if none found.
+func (m *DataSourceSchema) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DataSourceSchema) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Prefix
+
+	// no validation rules for Description
+
+	for idx, item := range m.GetFields() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, DataSourceSchemaValidationError{
+						field:  fmt.Sprintf("Fields[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, DataSourceSchemaValidationError{
+						field:  fmt.Sprintf("Fields[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return DataSourceSchemaValidationError{
+					field:  fmt.Sprintf("Fields[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return DataSourceSchemaMultiError(errors)
+	}
+
+	return nil
+}
+
+// DataSourceSchemaMultiError is an error wrapping multiple validation errors
+// returned by DataSourceSchema.ValidateAll() if the designated constraints
+// aren't met.
+type DataSourceSchemaMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DataSourceSchemaMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DataSourceSchemaMultiError) AllErrors() []error { return m }
+
+// DataSourceSchemaValidationError is the validation error returned by
+// DataSourceSchema.Validate if the designated constraints aren't met.
+type DataSourceSchemaValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DataSourceSchemaValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DataSourceSchemaValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DataSourceSchemaValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DataSourceSchemaValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DataSourceSchemaValidationError) ErrorName() string { return "DataSourceSchemaValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DataSourceSchemaValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDataSourceSchema.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DataSourceSchemaValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DataSourceSchemaValidationError{}
+
+// Validate checks the field values on DataFieldSchema with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *DataFieldSchema) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DataFieldSchema with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DataFieldSchemaMultiError, or nil if none found.
+func (m *DataFieldSchema) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DataFieldSchema) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Type
+
+	// no validation rules for Description
+
+	if len(errors) > 0 {
+		return DataFieldSchemaMultiError(errors)
+	}
+
+	return nil
+}
+
+// DataFieldSchemaMultiError is an error wrapping multiple validation errors
+// returned by DataFieldSchema.ValidateAll() if the designated constraints
+// aren't met.
+type DataFieldSchemaMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DataFieldSchemaMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DataFieldSchemaMultiError) AllErrors() []error { return m }
+
+// DataFieldSchemaValidationError is the validation error returned by
+// DataFieldSchema.Validate if the designated constraints aren't met.
+type DataFieldSchemaValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DataFieldSchemaValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DataFieldSchemaValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DataFieldSchemaValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DataFieldSchemaValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DataFieldSchemaValidationError) ErrorName() string { return "DataFieldSchemaValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DataFieldSchemaValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDataFieldSchema.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DataFieldSchemaValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DataFieldSchemaValidationError{}

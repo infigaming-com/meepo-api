@@ -34,6 +34,7 @@ const (
 	BackofficeCampaign_GetCrmCampaignExecution_FullMethodName      = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignExecution"
 	BackofficeCampaign_ListCrmCampaignExecutions_FullMethodName    = "/api.backoffice.service.v1.BackofficeCampaign/ListCrmCampaignExecutions"
 	BackofficeCampaign_GetCrmCampaignExecutionSteps_FullMethodName = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignExecutionSteps"
+	BackofficeCampaign_GetCrmCampaignWorkflowSchema_FullMethodName = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignWorkflowSchema"
 )
 
 // BackofficeCampaignClient is the client API for BackofficeCampaign service.
@@ -61,6 +62,8 @@ type BackofficeCampaignClient interface {
 	GetCrmCampaignExecution(ctx context.Context, in *GetCrmCampaignExecutionRequest, opts ...grpc.CallOption) (*v1.GetExecutionResponse, error)
 	ListCrmCampaignExecutions(ctx context.Context, in *ListCrmCampaignExecutionsRequest, opts ...grpc.CallOption) (*v1.ListExecutionsResponse, error)
 	GetCrmCampaignExecutionSteps(ctx context.Context, in *GetCrmCampaignExecutionStepsRequest, opts ...grpc.CallOption) (*v1.GetExecutionStepsResponse, error)
+	// Workflow schema
+	GetCrmCampaignWorkflowSchema(ctx context.Context, in *GetCrmCampaignWorkflowSchemaRequest, opts ...grpc.CallOption) (*v1.GetWorkflowSchemaResponse, error)
 }
 
 type backofficeCampaignClient struct {
@@ -211,6 +214,16 @@ func (c *backofficeCampaignClient) GetCrmCampaignExecutionSteps(ctx context.Cont
 	return out, nil
 }
 
+func (c *backofficeCampaignClient) GetCrmCampaignWorkflowSchema(ctx context.Context, in *GetCrmCampaignWorkflowSchemaRequest, opts ...grpc.CallOption) (*v1.GetWorkflowSchemaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetWorkflowSchemaResponse)
+	err := c.cc.Invoke(ctx, BackofficeCampaign_GetCrmCampaignWorkflowSchema_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeCampaignServer is the server API for BackofficeCampaign service.
 // All implementations must embed UnimplementedBackofficeCampaignServer
 // for forward compatibility.
@@ -236,6 +249,8 @@ type BackofficeCampaignServer interface {
 	GetCrmCampaignExecution(context.Context, *GetCrmCampaignExecutionRequest) (*v1.GetExecutionResponse, error)
 	ListCrmCampaignExecutions(context.Context, *ListCrmCampaignExecutionsRequest) (*v1.ListExecutionsResponse, error)
 	GetCrmCampaignExecutionSteps(context.Context, *GetCrmCampaignExecutionStepsRequest) (*v1.GetExecutionStepsResponse, error)
+	// Workflow schema
+	GetCrmCampaignWorkflowSchema(context.Context, *GetCrmCampaignWorkflowSchemaRequest) (*v1.GetWorkflowSchemaResponse, error)
 	mustEmbedUnimplementedBackofficeCampaignServer()
 }
 
@@ -287,6 +302,9 @@ func (UnimplementedBackofficeCampaignServer) ListCrmCampaignExecutions(context.C
 }
 func (UnimplementedBackofficeCampaignServer) GetCrmCampaignExecutionSteps(context.Context, *GetCrmCampaignExecutionStepsRequest) (*v1.GetExecutionStepsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCrmCampaignExecutionSteps not implemented")
+}
+func (UnimplementedBackofficeCampaignServer) GetCrmCampaignWorkflowSchema(context.Context, *GetCrmCampaignWorkflowSchemaRequest) (*v1.GetWorkflowSchemaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCrmCampaignWorkflowSchema not implemented")
 }
 func (UnimplementedBackofficeCampaignServer) mustEmbedUnimplementedBackofficeCampaignServer() {}
 func (UnimplementedBackofficeCampaignServer) testEmbeddedByValue()                            {}
@@ -561,6 +579,24 @@ func _BackofficeCampaign_GetCrmCampaignExecutionSteps_Handler(srv interface{}, c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeCampaign_GetCrmCampaignWorkflowSchema_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCrmCampaignWorkflowSchemaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeCampaignServer).GetCrmCampaignWorkflowSchema(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeCampaign_GetCrmCampaignWorkflowSchema_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeCampaignServer).GetCrmCampaignWorkflowSchema(ctx, req.(*GetCrmCampaignWorkflowSchemaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeCampaign_ServiceDesc is the grpc.ServiceDesc for BackofficeCampaign service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -623,6 +659,10 @@ var BackofficeCampaign_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCrmCampaignExecutionSteps",
 			Handler:    _BackofficeCampaign_GetCrmCampaignExecutionSteps_Handler,
+		},
+		{
+			MethodName: "GetCrmCampaignWorkflowSchema",
+			Handler:    _BackofficeCampaign_GetCrmCampaignWorkflowSchema_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

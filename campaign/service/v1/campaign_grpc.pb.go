@@ -33,6 +33,7 @@ const (
 	CampaignService_GetExecution_FullMethodName      = "/api.campaign.service.v1.CampaignService/GetExecution"
 	CampaignService_ListExecutions_FullMethodName    = "/api.campaign.service.v1.CampaignService/ListExecutions"
 	CampaignService_GetExecutionSteps_FullMethodName = "/api.campaign.service.v1.CampaignService/GetExecutionSteps"
+	CampaignService_GetWorkflowSchema_FullMethodName = "/api.campaign.service.v1.CampaignService/GetWorkflowSchema"
 )
 
 // CampaignServiceClient is the client API for CampaignService service.
@@ -60,6 +61,8 @@ type CampaignServiceClient interface {
 	GetExecution(ctx context.Context, in *GetExecutionRequest, opts ...grpc.CallOption) (*GetExecutionResponse, error)
 	ListExecutions(ctx context.Context, in *ListExecutionsRequest, opts ...grpc.CallOption) (*ListExecutionsResponse, error)
 	GetExecutionSteps(ctx context.Context, in *GetExecutionStepsRequest, opts ...grpc.CallOption) (*GetExecutionStepsResponse, error)
+	// Workflow schema
+	GetWorkflowSchema(ctx context.Context, in *GetWorkflowSchemaRequest, opts ...grpc.CallOption) (*GetWorkflowSchemaResponse, error)
 }
 
 type campaignServiceClient struct {
@@ -210,6 +213,16 @@ func (c *campaignServiceClient) GetExecutionSteps(ctx context.Context, in *GetEx
 	return out, nil
 }
 
+func (c *campaignServiceClient) GetWorkflowSchema(ctx context.Context, in *GetWorkflowSchemaRequest, opts ...grpc.CallOption) (*GetWorkflowSchemaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkflowSchemaResponse)
+	err := c.cc.Invoke(ctx, CampaignService_GetWorkflowSchema_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CampaignServiceServer is the server API for CampaignService service.
 // All implementations must embed UnimplementedCampaignServiceServer
 // for forward compatibility.
@@ -235,6 +248,8 @@ type CampaignServiceServer interface {
 	GetExecution(context.Context, *GetExecutionRequest) (*GetExecutionResponse, error)
 	ListExecutions(context.Context, *ListExecutionsRequest) (*ListExecutionsResponse, error)
 	GetExecutionSteps(context.Context, *GetExecutionStepsRequest) (*GetExecutionStepsResponse, error)
+	// Workflow schema
+	GetWorkflowSchema(context.Context, *GetWorkflowSchemaRequest) (*GetWorkflowSchemaResponse, error)
 	mustEmbedUnimplementedCampaignServiceServer()
 }
 
@@ -286,6 +301,9 @@ func (UnimplementedCampaignServiceServer) ListExecutions(context.Context, *ListE
 }
 func (UnimplementedCampaignServiceServer) GetExecutionSteps(context.Context, *GetExecutionStepsRequest) (*GetExecutionStepsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetExecutionSteps not implemented")
+}
+func (UnimplementedCampaignServiceServer) GetWorkflowSchema(context.Context, *GetWorkflowSchemaRequest) (*GetWorkflowSchemaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWorkflowSchema not implemented")
 }
 func (UnimplementedCampaignServiceServer) mustEmbedUnimplementedCampaignServiceServer() {}
 func (UnimplementedCampaignServiceServer) testEmbeddedByValue()                         {}
@@ -560,6 +578,24 @@ func _CampaignService_GetExecutionSteps_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CampaignService_GetWorkflowSchema_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkflowSchemaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CampaignServiceServer).GetWorkflowSchema(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CampaignService_GetWorkflowSchema_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CampaignServiceServer).GetWorkflowSchema(ctx, req.(*GetWorkflowSchemaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CampaignService_ServiceDesc is the grpc.ServiceDesc for CampaignService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -622,6 +658,10 @@ var CampaignService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetExecutionSteps",
 			Handler:    _CampaignService_GetExecutionSteps_Handler,
+		},
+		{
+			MethodName: "GetWorkflowSchema",
+			Handler:    _CampaignService_GetWorkflowSchema_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
