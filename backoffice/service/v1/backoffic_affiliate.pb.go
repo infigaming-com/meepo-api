@@ -746,10 +746,11 @@ func (x *GetAffiliateDetailsRequest) GetAffiliateId() int64 {
 }
 
 type CreateCampaignRequest struct {
-	state         protoimpl.MessageState          `protogen:"open.v1"`
-	Campaign      *CreateCampaignRequest_Campaign `protobuf:"bytes,1,opt,name=campaign,proto3" json:"campaign,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState          `protogen:"open.v1"`
+	Campaign          *CreateCampaignRequest_Campaign `protobuf:"bytes,1,opt,name=campaign,proto3" json:"campaign,omitempty"`
+	TargetAffiliateId *int64                          `protobuf:"varint,2,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreateCampaignRequest) Reset() {
@@ -789,13 +790,21 @@ func (x *CreateCampaignRequest) GetCampaign() *CreateCampaignRequest_Campaign {
 	return nil
 }
 
+func (x *CreateCampaignRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type UpdateCampaignRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CampaignId    int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	Campaign      *v1.Campaign           `protobuf:"bytes,2,opt,name=campaign,proto3,oneof" json:"campaign,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CampaignId        int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	Campaign          *v1.Campaign           `protobuf:"bytes,2,opt,name=campaign,proto3,oneof" json:"campaign,omitempty"`
+	Enabled           *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	TargetAffiliateId *int64                 `protobuf:"varint,4,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *UpdateCampaignRequest) Reset() {
@@ -849,6 +858,13 @@ func (x *UpdateCampaignRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *UpdateCampaignRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type ListCampaignsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	CampaignName           *string                        `protobuf:"bytes,1,opt,name=campaign_name,json=campaignName,proto3,oneof" json:"campaign_name,omitempty"`
@@ -858,6 +874,7 @@ type ListCampaignsRequest struct {
 	Page                   *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize               *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,7,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TargetAffiliateId      *int64                         `protobuf:"varint,8,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -939,6 +956,13 @@ func (x *ListCampaignsRequest) GetOperatorContextFilters() *common.OperatorConte
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListCampaignsRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
 }
 
 type ListAffiliateCampaignsRequest struct {
@@ -1026,10 +1050,11 @@ func (x *ListAffiliateCampaignsRequest) GetPageSize() int32 {
 }
 
 type DeleteCampaignRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CampaignId    int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CampaignId        int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	TargetAffiliateId *int64                 `protobuf:"varint,2,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *DeleteCampaignRequest) Reset() {
@@ -1069,16 +1094,24 @@ func (x *DeleteCampaignRequest) GetCampaignId() int64 {
 	return 0
 }
 
+func (x *DeleteCampaignRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type CreatePostbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PostbackName  string                 `protobuf:"bytes,1,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
-	CampaignIds   []int64                `protobuf:"varint,3,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
-	ActionType    string                 `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl   string                 `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod string                 `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	PostbackName      string                 `protobuf:"bytes,1,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	Status            string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
+	CampaignIds       []int64                `protobuf:"varint,3,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	ActionType        string                 `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
+	PostbackUrl       string                 `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	RequestMethod     string                 `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
+	TargetAffiliateId *int64                 `protobuf:"varint,7,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreatePostbackRequest) Reset() {
@@ -1153,17 +1186,25 @@ func (x *CreatePostbackRequest) GetRequestMethod() string {
 	return ""
 }
 
+func (x *CreatePostbackRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type UpdatePostbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PostbackId    int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
-	PostbackName  string                 `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
-	CampaignIds   []int64                `protobuf:"varint,4,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
-	ActionType    string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
-	PostbackUrl   string                 `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
-	RequestMethod string                 `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	PostbackId        int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
+	PostbackName      string                 `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	Status            string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // active/inactive
+	CampaignIds       []int64                `protobuf:"varint,4,rep,packed,name=campaign_ids,json=campaignIds,proto3" json:"campaign_ids,omitempty"`
+	ActionType        string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"` // register, deposit, first_deposit, withdrawal, game_start, game_bet
+	PostbackUrl       string                 `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	RequestMethod     string                 `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"` // GET/POST
+	TargetAffiliateId *int64                 `protobuf:"varint,8,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *UpdatePostbackRequest) Reset() {
@@ -1245,11 +1286,19 @@ func (x *UpdatePostbackRequest) GetRequestMethod() string {
 	return ""
 }
 
+func (x *UpdatePostbackRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type DeletePostbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PostbackId    int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	PostbackId        int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
+	TargetAffiliateId *int64                 `protobuf:"varint,2,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *DeletePostbackRequest) Reset() {
@@ -1289,6 +1338,13 @@ func (x *DeletePostbackRequest) GetPostbackId() int64 {
 	return 0
 }
 
+func (x *DeletePostbackRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type ListPostbacksRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	AffiliateId            *int64                         `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
@@ -1296,6 +1352,7 @@ type ListPostbacksRequest struct {
 	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,5,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TargetAffiliateId      *int64                         `protobuf:"varint,6,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1363,6 +1420,13 @@ func (x *ListPostbacksRequest) GetOperatorContextFilters() *common.OperatorConte
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListPostbacksRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
 }
 
 type ListPostbackLogsRequest struct {
@@ -2631,22 +2695,26 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\x16DeleteAffiliateRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"?\n" +
 	"\x1aGetAffiliateDetailsRequest\x12!\n" +
-	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"\xab\x02\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"\xf8\x02\n" +
 	"\x15CreateCampaignRequest\x12U\n" +
-	"\bcampaign\x18\x01 \x01(\v29.api.backoffice.service.v1.CreateCampaignRequest.CampaignR\bcampaign\x1a\xba\x01\n" +
+	"\bcampaign\x18\x01 \x01(\v29.api.backoffice.service.v1.CreateCampaignRequest.CampaignR\bcampaign\x123\n" +
+	"\x13target_affiliate_id\x18\x02 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01\x1a\xba\x01\n" +
 	"\bCampaign\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12#\n" +
 	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\x12!\n" +
 	"\fchannel_type\x18\x03 \x01(\tR\vchannelType\x12N\n" +
-	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfig\"\xb5\x01\n" +
+	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfigB\x16\n" +
+	"\x14_target_affiliate_id\"\x82\x02\n" +
 	"\x15UpdateCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12C\n" +
 	"\bcampaign\x18\x02 \x01(\v2\".api.affiliate.service.v1.CampaignH\x00R\bcampaign\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01B\v\n" +
+	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x123\n" +
+	"\x13target_affiliate_id\x18\x04 \x01(\x03H\x02R\x11targetAffiliateId\x88\x01\x01B\v\n" +
 	"\t_campaignB\n" +
 	"\n" +
-	"\b_enabled\"\x9c\x03\n" +
+	"\b_enabledB\x16\n" +
+	"\x14_target_affiliate_id\"\xe9\x03\n" +
 	"\x14ListCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -2655,7 +2723,8 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\aenabled\x18\x04 \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\a \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x10\n" +
+	"\x18operator_context_filters\x18\a \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x123\n" +
+	"\x13target_affiliate_id\x18\b \x01(\x03H\x06R\x11targetAffiliateId\x88\x01\x01B\x10\n" +
 	"\x0e_campaign_nameB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\n" +
@@ -2663,7 +2732,8 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc7\x02\n" +
+	"_page_sizeB\x16\n" +
+	"\x14_target_affiliate_id\"\xc7\x02\n" +
 	"\x1dListAffiliateCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -2679,10 +2749,12 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"8\n" +
+	"_page_size\"\x85\x01\n" +
 	"\x15DeleteCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
-	"campaignId\"\xe2\x01\n" +
+	"campaignId\x123\n" +
+	"\x13target_affiliate_id\x18\x02 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\xaf\x02\n" +
 	"\x15CreatePostbackRequest\x12#\n" +
 	"\rpostback_name\x18\x01 \x01(\tR\fpostbackName\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12!\n" +
@@ -2690,7 +2762,9 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\vaction_type\x18\x04 \x01(\tR\n" +
 	"actionType\x12!\n" +
 	"\fpostback_url\x18\x05 \x01(\tR\vpostbackUrl\x12%\n" +
-	"\x0erequest_method\x18\x06 \x01(\tR\rrequestMethod\"\x83\x02\n" +
+	"\x0erequest_method\x18\x06 \x01(\tR\rrequestMethod\x123\n" +
+	"\x13target_affiliate_id\x18\a \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\xd0\x02\n" +
 	"\x15UpdatePostbackRequest\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
 	"postbackId\x12#\n" +
@@ -2700,21 +2774,27 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\vaction_type\x18\x05 \x01(\tR\n" +
 	"actionType\x12!\n" +
 	"\fpostback_url\x18\x06 \x01(\tR\vpostbackUrl\x12%\n" +
-	"\x0erequest_method\x18\a \x01(\tR\rrequestMethod\"8\n" +
+	"\x0erequest_method\x18\a \x01(\tR\rrequestMethod\x123\n" +
+	"\x13target_affiliate_id\x18\b \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\x85\x01\n" +
 	"\x15DeletePostbackRequest\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
-	"postbackId\"\xa7\x02\n" +
+	"postbackId\x123\n" +
+	"\x13target_affiliate_id\x18\x02 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\xf4\x02\n" +
 	"\x14ListPostbacksRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1b\n" +
 	"\x06status\x18\x02 \x01(\tH\x01R\x06status\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x03 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x04 \x01(\x05H\x03R\bpageSize\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\x05 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\x18operator_context_filters\x18\x05 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x123\n" +
+	"\x13target_affiliate_id\x18\x06 \x01(\x03H\x04R\x11targetAffiliateId\x88\x01\x01B\x0f\n" +
 	"\r_affiliate_idB\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf4\x02\n" +
+	"_page_sizeB\x16\n" +
+	"\x14_target_affiliate_id\"\xf4\x02\n" +
 	"\x17ListPostbackLogsRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x129\n" +
 	"\n" +
@@ -3127,9 +3207,14 @@ func file_backoffice_service_v1_backoffic_affiliate_proto_init() {
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[5].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[6].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[9].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[12].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[13].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[14].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[15].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[16].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[17].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[18].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[19].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[20].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[21].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[22].OneofWrappers = []any{}

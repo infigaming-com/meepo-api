@@ -12490,6 +12490,8 @@ components:
             properties:
                 campaign:
                     $ref: '#/components/schemas/api.backoffice.service.v1.CreateCampaignRequest_Campaign'
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.CreateCampaignRequest_Campaign:
             type: object
             properties:
@@ -12769,6 +12771,8 @@ components:
                     type: string
                 requestMethod:
                     type: string
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.CreatePromoCodeCampaignRequest:
             type: object
             properties:
@@ -12985,6 +12989,8 @@ components:
             properties:
                 campaignId:
                     type: string
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.DeleteCommissionPlanRequest:
             type: object
             properties:
@@ -13065,6 +13071,8 @@ components:
             type: object
             properties:
                 postbackId:
+                    type: string
+                targetAffiliateId:
                     type: string
         api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
             type: object
@@ -15833,6 +15841,8 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -17189,6 +17199,8 @@ components:
                     format: int32
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.ListPromoCodeCampaignDetailsRequest:
             type: object
             properties:
@@ -19721,6 +19733,8 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
                 enabled:
                     type: boolean
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.UpdateCommissionPlanRequest:
             type: object
             properties:
@@ -19871,6 +19885,8 @@ components:
                 postbackUrl:
                     type: string
                 requestMethod:
+                    type: string
+                targetAffiliateId:
                     type: string
         api.backoffice.service.v1.UpdatePromoCodeCampaignRequest:
             type: object

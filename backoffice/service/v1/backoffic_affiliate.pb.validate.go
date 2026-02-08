@@ -1590,6 +1590,10 @@ func (m *CreateCampaignRequest) validate(all bool) error {
 		}
 	}
 
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return CreateCampaignRequestMultiError(errors)
 	}
@@ -1729,6 +1733,10 @@ func (m *UpdateCampaignRequest) validate(all bool) error {
 
 	if m.Enabled != nil {
 		// no validation rules for Enabled
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {
@@ -1884,6 +1892,10 @@ func (m *ListCampaignsRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {
@@ -2117,6 +2129,10 @@ func (m *DeleteCampaignRequest) validate(all bool) error {
 
 	// no validation rules for CampaignId
 
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return DeleteCampaignRequestMultiError(errors)
 	}
@@ -2228,6 +2244,10 @@ func (m *CreatePostbackRequest) validate(all bool) error {
 	// no validation rules for PostbackUrl
 
 	// no validation rules for RequestMethod
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
 
 	if len(errors) > 0 {
 		return CreatePostbackRequestMultiError(errors)
@@ -2343,6 +2363,10 @@ func (m *UpdatePostbackRequest) validate(all bool) error {
 
 	// no validation rules for RequestMethod
 
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return UpdatePostbackRequestMultiError(errors)
 	}
@@ -2446,6 +2470,10 @@ func (m *DeletePostbackRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for PostbackId
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
 
 	if len(errors) > 0 {
 		return DeletePostbackRequestMultiError(errors)
@@ -2592,6 +2620,10 @@ func (m *ListPostbacksRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {
