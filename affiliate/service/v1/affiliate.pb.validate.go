@@ -2894,6 +2894,12 @@ func (m *CreateCampaignRequest) validate(all bool) error {
 
 	// no validation rules for InitiatorUserId
 
+	// no validation rules for InitiatorRoleId
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return CreateCampaignRequestMultiError(errors)
 	}
@@ -3104,6 +3110,8 @@ func (m *UpdateCampaignRequest) validate(all bool) error {
 
 	// no validation rules for InitiatorUserId
 
+	// no validation rules for InitiatorRoleId
+
 	if m.Campaign != nil {
 
 		if all {
@@ -3139,6 +3147,10 @@ func (m *UpdateCampaignRequest) validate(all bool) error {
 
 	if m.Enabled != nil {
 		// no validation rules for Enabled
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {
@@ -3403,6 +3415,8 @@ func (m *ListCampaignsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for InitiatorRoleId
+
 	if m.CampaignName != nil {
 		// no validation rules for CampaignName
 	}
@@ -3429,6 +3443,10 @@ func (m *ListCampaignsRequest) validate(all bool) error {
 
 	if m.InitiatorUserId != nil {
 		// no validation rules for InitiatorUserId
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {
@@ -3682,6 +3700,12 @@ func (m *DeleteCampaignRequest) validate(all bool) error {
 	// no validation rules for CampaignId
 
 	// no validation rules for InitiatorUserId
+
+	// no validation rules for InitiatorRoleId
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
 
 	if len(errors) > 0 {
 		return DeleteCampaignRequestMultiError(errors)
@@ -4310,6 +4334,10 @@ func (m *CreatePostbackRequest) validate(all bool) error {
 		}
 	}
 
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return CreatePostbackRequestMultiError(errors)
 	}
@@ -4561,6 +4589,10 @@ func (m *UpdatePostbackRequest) validate(all bool) error {
 		}
 	}
 
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return UpdatePostbackRequestMultiError(errors)
 	}
@@ -4798,6 +4830,10 @@ func (m *DeletePostbackRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {
@@ -5080,6 +5116,10 @@ func (m *ListPostbacksRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
 	}
 
 	if len(errors) > 0 {

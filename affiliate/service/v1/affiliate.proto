@@ -427,6 +427,8 @@ message CreateCampaignRequest {
     Campaign campaign = 1;
     api.common.OperatorContext initiator_operator_context = 2;
     int64 initiator_user_id = 3;
+    int64 initiator_role_id = 4;
+    optional int64 target_affiliate_id = 5;
 }
 
 message CreateCampaignResponse {
@@ -438,6 +440,8 @@ message UpdateCampaignRequest {
     optional Campaign campaign = 2;
     optional bool enabled = 3;
     int64 initiator_user_id = 4;
+    int64 initiator_role_id = 5;
+    optional int64 target_affiliate_id = 6;
 }
 
 message UpdateCampaignResponse {
@@ -453,6 +457,8 @@ message ListCampaignsRequest {
     optional int64 initiator_user_id = 7;
     api.common.OperatorContext initiator_operator_context = 8;
     api.common.OperatorContextFilters operator_context_filters = 9;
+    int64 initiator_role_id = 10;
+    optional int64 target_affiliate_id = 11;
 }
 
 message ListCampaignsResponse {
@@ -481,6 +487,8 @@ message ListCampaignsResponse {
 message DeleteCampaignRequest {
     int64 campaign_id = 1;
     int64 initiator_user_id = 2;
+    int64 initiator_role_id = 3;
+    optional int64 target_affiliate_id = 4;
 }
 
 message DeleteCampaignResponse {
@@ -544,6 +552,7 @@ message CreatePostbackRequest {
     int64 initiator_user_id = 7;
     int32 initiator_user_role_id = 8;
     api.common.OperatorContext initiator_operator_context = 9;
+    optional int64 target_affiliate_id = 10;
 }
 
 message CreatePostbackResponse {
@@ -561,6 +570,7 @@ message UpdatePostbackRequest {
     int64 initiator_user_id = 8;
     int32 initiator_user_role_id = 9;
     api.common.OperatorContext initiator_operator_context = 10;
+    optional int64 target_affiliate_id = 11;
 }
 
 message UpdatePostbackResponse {
@@ -571,6 +581,7 @@ message DeletePostbackRequest {
     int64 initiator_user_id = 2;
     int32 initiator_user_role_id = 3;
     api.common.OperatorContext initiator_operator_context = 4;
+    optional int64 target_affiliate_id = 5;
 }
 
 message DeletePostbackResponse {
@@ -585,6 +596,7 @@ message ListPostbacksRequest {
     int32 initiator_user_role_id = 6;
     api.common.OperatorContext initiator_operator_context = 7;
     api.common.OperatorContextFilters operator_context_filters = 8;
+    optional int64 target_affiliate_id = 9;
 }
 
 message ListPostbacksResponse {
