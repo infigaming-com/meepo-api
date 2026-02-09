@@ -11,6 +11,7 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 import "affiliate/service/v1/commission_report.proto";
+import "game/service/v1/game.proto";
 
 service BackofficeReport {
   rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
@@ -873,7 +874,8 @@ message CustomerRecordReportDetailResponse{
 	optional PaymentTransaction payment_transaction = 2;
 	optional GameTransaction game_transaction = 3;
 	optional EventSettlementInformation event_settlement_information = 4;
-
+	// Bet + Actions (same as GetBetById response), when detail was fetched via GetBetAndEventInfo or GetTransactionAndEventInfo
+	optional api.game.service.v1.GetBetByIdResponse bet_by_id = 5;
 }
 
 // ============================================================================

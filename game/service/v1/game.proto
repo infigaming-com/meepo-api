@@ -1538,6 +1538,7 @@ message BetInfo {
 message GetBetAndEventInfoResponse {
 	BetInfo bet_info = 1;
 	repeated EventInfo event_infos = 2;
+	GetBetByIdResponse bet_by_id = 3; // same shape as GetBetById response (Bet + Actions)
 }
 
 // Get bet and event info by game transaction id
@@ -1627,6 +1628,7 @@ message GetTransactionAndEventInfoResponse {
 	TransactionInfo transaction_info = 1;
 	BetInfo bet_info = 2;
 	repeated EventInfo event_infos = 3;
+	GetBetByIdResponse bet_by_id = 4; // same shape as GetBetById response (Bet + Actions)
 }
 
 // Customer Strike Report related messages

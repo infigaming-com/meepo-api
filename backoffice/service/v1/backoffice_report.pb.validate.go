@@ -4636,6 +4636,39 @@ func (m *CustomerRecordReportDetailResponse) validate(all bool) error {
 
 	}
 
+	if m.BetById != nil {
+
+		if all {
+			switch v := interface{}(m.GetBetById()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "BetById",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "BetById",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetBetById()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "BetById",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return CustomerRecordReportDetailResponseMultiError(errors)
 	}

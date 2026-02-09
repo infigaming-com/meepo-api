@@ -12874,6 +12874,10 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse_GameTransaction'
                 eventSettlementInformation:
                     $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse_EventSettlementInformation'
+                betById:
+                    allOf:
+                        - $ref: '#/components/schemas/api.game.service.v1.GetBetByIdResponse'
+                    description: Bet + Actions (same as GetBetById response), when detail was fetched via GetBetAndEventInfo or GetTransactionAndEventInfo
         api.backoffice.service.v1.CustomerRecordReportDetailResponse_EventSettlementInformation:
             type: object
             properties:
