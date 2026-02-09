@@ -129,6 +129,11 @@ service User {
 	rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionResponse) {
 	}
 
+	// GetAuthzPaths returns all API paths that require permission check (from api_mappings).
+	// Used by backoffice-service to configure AuthzMiddleware dynamically.
+	rpc GetAuthzPaths (GetAuthzPathsRequest) returns (GetAuthzPathsResponse) {
+	}
+
 	rpc AddOperator (AddOperatorRequest) returns (AddOperatorResponse) {
 	}
 
@@ -881,6 +886,12 @@ message CheckPermissionRequest {
 
 message CheckPermissionResponse {
 	bool allowed = 1;
+}
+
+message GetAuthzPathsRequest {}
+
+message GetAuthzPathsResponse {
+	repeated string paths = 1;
 }
 
 message AddOperatorRequest {

@@ -33,10 +33,14 @@ func AuthzMiddleware(paths []string, secret string, uc user.UserClient) middlewa
 			if !ok {
 				return nil, errors.New(401, "UNAUTHORIZED", "no user info")
 			}
+			operatorId := userInfo.OperatorId
+			if userInfo.RealOperatorId != 0 {
+				operatorId = userInfo.RealOperatorId
+			}
 			allowed, err := uc.CheckPermission(ctx, &user.CheckPermissionRequest{
 				Path:       path,
 				RoleId:     userInfo.RoleId,
-				OperatorId: userInfo.OperatorId,
+				OperatorId: operatorId,
 			})
 			if err != nil || !allowed.Allowed {
 				return nil, errors.New(401, "UNAUTHORIZED", "no permission")

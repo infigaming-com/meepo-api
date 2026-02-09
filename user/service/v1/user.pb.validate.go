@@ -4340,6 +4340,210 @@ var _ interface {
 	ErrorName() string
 } = CheckPermissionResponseValidationError{}
 
+// Validate checks the field values on GetAuthzPathsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAuthzPathsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAuthzPathsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAuthzPathsRequestMultiError, or nil if none found.
+func (m *GetAuthzPathsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAuthzPathsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetAuthzPathsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAuthzPathsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetAuthzPathsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAuthzPathsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAuthzPathsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAuthzPathsRequestMultiError) AllErrors() []error { return m }
+
+// GetAuthzPathsRequestValidationError is the validation error returned by
+// GetAuthzPathsRequest.Validate if the designated constraints aren't met.
+type GetAuthzPathsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAuthzPathsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAuthzPathsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAuthzPathsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAuthzPathsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAuthzPathsRequestValidationError) ErrorName() string {
+	return "GetAuthzPathsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAuthzPathsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAuthzPathsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAuthzPathsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAuthzPathsRequestValidationError{}
+
+// Validate checks the field values on GetAuthzPathsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAuthzPathsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAuthzPathsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAuthzPathsResponseMultiError, or nil if none found.
+func (m *GetAuthzPathsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAuthzPathsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetAuthzPathsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAuthzPathsResponseMultiError is an error wrapping multiple validation
+// errors returned by GetAuthzPathsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetAuthzPathsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAuthzPathsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAuthzPathsResponseMultiError) AllErrors() []error { return m }
+
+// GetAuthzPathsResponseValidationError is the validation error returned by
+// GetAuthzPathsResponse.Validate if the designated constraints aren't met.
+type GetAuthzPathsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAuthzPathsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAuthzPathsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAuthzPathsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAuthzPathsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAuthzPathsResponseValidationError) ErrorName() string {
+	return "GetAuthzPathsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAuthzPathsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAuthzPathsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAuthzPathsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAuthzPathsResponseValidationError{}
+
 // Validate checks the field values on AddOperatorRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

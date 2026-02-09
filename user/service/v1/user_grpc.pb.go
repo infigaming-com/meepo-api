@@ -39,6 +39,7 @@ const (
 	User_GetUserTagsById_FullMethodName                    = "/api.user.service.v1.User/GetUserTagsById"
 	User_SetUserTagsById_FullMethodName                    = "/api.user.service.v1.User/SetUserTagsById"
 	User_CheckPermission_FullMethodName                    = "/api.user.service.v1.User/CheckPermission"
+	User_GetAuthzPaths_FullMethodName                      = "/api.user.service.v1.User/GetAuthzPaths"
 	User_AddOperator_FullMethodName                        = "/api.user.service.v1.User/AddOperator"
 	User_SendEmailVerificationCode_FullMethodName          = "/api.user.service.v1.User/SendEmailVerificationCode"
 	User_SendPasswordResetCode_FullMethodName              = "/api.user.service.v1.User/SendPasswordResetCode"
@@ -189,6 +190,9 @@ type UserClient interface {
 	// It's used by SetUserTags() in backoffice-service for the given user.
 	SetUserTagsById(ctx context.Context, in *SetUserTagsByIdRequest, opts ...grpc.CallOption) (*SetUserTagsByIdResponse, error)
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
+	// GetAuthzPaths returns all API paths that require permission check (from api_mappings).
+	// Used by backoffice-service to configure AuthzMiddleware dynamically.
+	GetAuthzPaths(ctx context.Context, in *GetAuthzPathsRequest, opts ...grpc.CallOption) (*GetAuthzPathsResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
 	// Send password reset verification code to email
@@ -527,6 +531,16 @@ func (c *userClient) CheckPermission(ctx context.Context, in *CheckPermissionReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CheckPermissionResponse)
 	err := c.cc.Invoke(ctx, User_CheckPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetAuthzPaths(ctx context.Context, in *GetAuthzPathsRequest, opts ...grpc.CallOption) (*GetAuthzPathsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAuthzPathsResponse)
+	err := c.cc.Invoke(ctx, User_GetAuthzPaths_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1518,6 +1532,9 @@ type UserServer interface {
 	// It's used by SetUserTags() in backoffice-service for the given user.
 	SetUserTagsById(context.Context, *SetUserTagsByIdRequest) (*SetUserTagsByIdResponse, error)
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
+	// GetAuthzPaths returns all API paths that require permission check (from api_mappings).
+	// Used by backoffice-service to configure AuthzMiddleware dynamically.
+	GetAuthzPaths(context.Context, *GetAuthzPathsRequest) (*GetAuthzPathsResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// Send password reset verification code to email
@@ -1728,6 +1745,9 @@ func (UnimplementedUserServer) SetUserTagsById(context.Context, *SetUserTagsById
 }
 func (UnimplementedUserServer) CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckPermission not implemented")
+}
+func (UnimplementedUserServer) GetAuthzPaths(context.Context, *GetAuthzPathsRequest) (*GetAuthzPathsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAuthzPaths not implemented")
 }
 func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddOperator not implemented")
@@ -2367,6 +2387,24 @@ func _User_CheckPermission_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).CheckPermission(ctx, req.(*CheckPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetAuthzPaths_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAuthzPathsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetAuthzPaths(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetAuthzPaths_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetAuthzPaths(ctx, req.(*GetAuthzPathsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4127,6 +4165,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckPermission",
 			Handler:    _User_CheckPermission_Handler,
+		},
+		{
+			MethodName: "GetAuthzPaths",
+			Handler:    _User_GetAuthzPaths_Handler,
 		},
 		{
 			MethodName: "AddOperator",
