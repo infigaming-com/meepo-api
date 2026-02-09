@@ -358,12 +358,14 @@ message CreateCampaignRequest {
         api.affiliate.service.v1.ChannelConfig channel_config = 4;
     }
     Campaign campaign = 1;
+    optional int64 target_affiliate_id = 2;
 }
 
 message UpdateCampaignRequest {
 	int64 campaign_id = 1;
 	optional api.affiliate.service.v1.Campaign campaign = 2;
 	optional bool enabled = 3;
+	optional int64 target_affiliate_id = 4;
 }
 
 message ListCampaignsRequest {
@@ -374,6 +376,7 @@ message ListCampaignsRequest {
     optional int32 page = 5;
     optional int32 page_size = 6;
 	api.common.OperatorContextFilters operator_context_filters = 7;
+	optional int64 target_affiliate_id = 8;
 }
 
 message ListAffiliateCampaignsRequest {
@@ -387,6 +390,7 @@ message ListAffiliateCampaignsRequest {
 
 message DeleteCampaignRequest {
 	int64 campaign_id = 1;
+	optional int64 target_affiliate_id = 2;
 }
 
 // -------------- Postback --------------
@@ -398,6 +402,7 @@ message CreatePostbackRequest {
     string action_type = 4; // register, deposit, first_deposit, withdrawal, game_start, game_bet
     string postback_url = 5;
     string request_method = 6; // GET/POST
+    optional int64 target_affiliate_id = 7;
 }
 
 message UpdatePostbackRequest {
@@ -408,10 +413,12 @@ message UpdatePostbackRequest {
     string action_type = 5; // register, deposit, first_deposit, withdrawal, game_start, game_bet
     string postback_url = 6;
     string request_method = 7; // GET/POST
+    optional int64 target_affiliate_id = 8;
 }
 
 message DeletePostbackRequest {
     int64 postback_id = 1;
+    optional int64 target_affiliate_id = 2;
 }
 
 message ListPostbacksRequest {
@@ -420,6 +427,7 @@ message ListPostbacksRequest {
     optional int32 page = 3;
     optional int32 page_size = 4;
     api.common.OperatorContextFilters operator_context_filters = 5;
+    optional int64 target_affiliate_id = 6;
 }
 
 message ListPostbackLogsRequest {

@@ -1241,6 +1241,8 @@ type CreateCampaignRequest struct {
 	Campaign                 *CreateCampaignRequest_Campaign `protobuf:"bytes,1,opt,name=campaign,proto3" json:"campaign,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext         `protobuf:"bytes,2,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	InitiatorUserId          int64                           `protobuf:"varint,3,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                           `protobuf:"varint,4,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	TargetAffiliateId        *int64                          `protobuf:"varint,5,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1296,6 +1298,20 @@ func (x *CreateCampaignRequest) GetInitiatorUserId() int64 {
 	return 0
 }
 
+func (x *CreateCampaignRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
+	}
+	return 0
+}
+
+func (x *CreateCampaignRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type CreateCampaignResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CampaignId    int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
@@ -1341,13 +1357,15 @@ func (x *CreateCampaignResponse) GetCampaignId() int64 {
 }
 
 type UpdateCampaignRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	CampaignId      int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	Campaign        *Campaign              `protobuf:"bytes,2,opt,name=campaign,proto3,oneof" json:"campaign,omitempty"`
-	Enabled         *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	InitiatorUserId int64                  `protobuf:"varint,4,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CampaignId        int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	Campaign          *Campaign              `protobuf:"bytes,2,opt,name=campaign,proto3,oneof" json:"campaign,omitempty"`
+	Enabled           *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	InitiatorUserId   int64                  `protobuf:"varint,4,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId   int64                  `protobuf:"varint,5,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	TargetAffiliateId *int64                 `protobuf:"varint,6,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *UpdateCampaignRequest) Reset() {
@@ -1408,6 +1426,20 @@ func (x *UpdateCampaignRequest) GetInitiatorUserId() int64 {
 	return 0
 }
 
+func (x *UpdateCampaignRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
+	}
+	return 0
+}
+
+func (x *UpdateCampaignRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type UpdateCampaignResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1455,6 +1487,8 @@ type ListCampaignsRequest struct {
 	InitiatorUserId          *int64                         `protobuf:"varint,7,opt,name=initiator_user_id,json=initiatorUserId,proto3,oneof" json:"initiator_user_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,8,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,9,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	InitiatorRoleId          int64                          `protobuf:"varint,10,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	TargetAffiliateId        *int64                         `protobuf:"varint,11,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1552,6 +1586,20 @@ func (x *ListCampaignsRequest) GetOperatorContextFilters() *common.OperatorConte
 	return nil
 }
 
+func (x *ListCampaignsRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
+	}
+	return 0
+}
+
+func (x *ListCampaignsRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type ListCampaignsResponse struct {
 	state         protoimpl.MessageState                `protogen:"open.v1"`
 	Campaigns     []*ListCampaignsResponse_CampaignInfo `protobuf:"bytes,1,rep,name=campaigns,proto3" json:"campaigns,omitempty"`
@@ -1637,11 +1685,13 @@ func (x *ListCampaignsResponse) GetPageSize() int32 {
 }
 
 type DeleteCampaignRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	CampaignId      int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	InitiatorUserId int64                  `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CampaignId        int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	InitiatorUserId   int64                  `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId   int64                  `protobuf:"varint,3,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	TargetAffiliateId *int64                 `protobuf:"varint,4,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *DeleteCampaignRequest) Reset() {
@@ -1684,6 +1734,20 @@ func (x *DeleteCampaignRequest) GetCampaignId() int64 {
 func (x *DeleteCampaignRequest) GetInitiatorUserId() int64 {
 	if x != nil {
 		return x.InitiatorUserId
+	}
+	return 0
+}
+
+func (x *DeleteCampaignRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
+	}
+	return 0
+}
+
+func (x *DeleteCampaignRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
 	}
 	return 0
 }
@@ -1943,6 +2007,7 @@ type CreatePostbackRequest struct {
 	InitiatorUserId          int64                   `protobuf:"varint,7,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	InitiatorUserRoleId      int32                   `protobuf:"varint,8,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetAffiliateId        *int64                  `protobuf:"varint,10,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2040,6 +2105,13 @@ func (x *CreatePostbackRequest) GetInitiatorOperatorContext() *common.OperatorCo
 	return nil
 }
 
+func (x *CreatePostbackRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type CreatePostbackResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PostbackId    int64                  `protobuf:"varint,1,opt,name=postback_id,json=postbackId,proto3" json:"postback_id,omitempty"`
@@ -2096,6 +2168,7 @@ type UpdatePostbackRequest struct {
 	InitiatorUserId          int64                   `protobuf:"varint,8,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	InitiatorUserRoleId      int32                   `protobuf:"varint,9,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetAffiliateId        *int64                  `protobuf:"varint,11,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2200,6 +2273,13 @@ func (x *UpdatePostbackRequest) GetInitiatorOperatorContext() *common.OperatorCo
 	return nil
 }
 
+func (x *UpdatePostbackRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type UpdatePostbackResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -2242,6 +2322,7 @@ type DeletePostbackRequest struct {
 	InitiatorUserId          int64                   `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	InitiatorUserRoleId      int32                   `protobuf:"varint,3,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetAffiliateId        *int64                  `protobuf:"varint,5,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2304,6 +2385,13 @@ func (x *DeletePostbackRequest) GetInitiatorOperatorContext() *common.OperatorCo
 	return nil
 }
 
+func (x *DeletePostbackRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
+}
+
 type DeletePostbackResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -2350,6 +2438,7 @@ type ListPostbacksRequest struct {
 	InitiatorUserRoleId      int32                          `protobuf:"varint,6,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,7,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TargetAffiliateId        *int64                         `protobuf:"varint,9,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2438,6 +2527,13 @@ func (x *ListPostbacksRequest) GetOperatorContextFilters() *common.OperatorConte
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListPostbacksRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
+	}
+	return 0
 }
 
 type ListPostbacksResponse struct {
@@ -8001,29 +8097,35 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\vcustom_name\x18\x02 \x01(\tH\x01R\n" +
 	"customName\x88\x01\x01B\x10\n" +
 	"\x0e_channel_eventB\x0e\n" +
-	"\f_custom_name\"\xb1\x03\n" +
+	"\f_custom_name\"\xaa\x04\n" +
 	"\x15CreateCampaignRequest\x12T\n" +
 	"\bcampaign\x18\x01 \x01(\v28.api.affiliate.service.v1.CreateCampaignRequest.CampaignR\bcampaign\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
-	"\x11initiator_user_id\x18\x03 \x01(\x03R\x0finitiatorUserId\x1a\xba\x01\n" +
+	"\x11initiator_user_id\x18\x03 \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\x04 \x01(\x03R\x0finitiatorRoleId\x123\n" +
+	"\x13target_affiliate_id\x18\x05 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01\x1a\xba\x01\n" +
 	"\bCampaign\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12#\n" +
 	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\x12!\n" +
 	"\fchannel_type\x18\x03 \x01(\tR\vchannelType\x12N\n" +
-	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfig\"9\n" +
+	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfigB\x16\n" +
+	"\x14_target_affiliate_id\"9\n" +
 	"\x16CreateCampaignResponse\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
-	"campaignId\"\xe1\x01\n" +
+	"campaignId\"\xda\x02\n" +
 	"\x15UpdateCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12C\n" +
 	"\bcampaign\x18\x02 \x01(\v2\".api.affiliate.service.v1.CampaignH\x00R\bcampaign\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x12*\n" +
-	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserIdB\v\n" +
+	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\x05 \x01(\x03R\x0finitiatorRoleId\x123\n" +
+	"\x13target_affiliate_id\x18\x06 \x01(\x03H\x02R\x11targetAffiliateId\x88\x01\x01B\v\n" +
 	"\t_campaignB\n" +
 	"\n" +
-	"\b_enabled\"\x18\n" +
-	"\x16UpdateCampaignResponse\"\xbe\x04\n" +
+	"\b_enabledB\x16\n" +
+	"\x14_target_affiliate_id\"\x18\n" +
+	"\x16UpdateCampaignResponse\"\xb7\x05\n" +
 	"\x14ListCampaignsRequest\x12(\n" +
 	"\rcampaign_name\x18\x01 \x01(\tH\x00R\fcampaignName\x88\x01\x01\x12$\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03H\x01R\n" +
@@ -8034,7 +8136,10 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01\x12/\n" +
 	"\x11initiator_user_id\x18\a \x01(\x03H\x06R\x0finitiatorUserId\x88\x01\x01\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\t \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x10\n" +
+	"\x18operator_context_filters\x18\t \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12*\n" +
+	"\x11initiator_role_id\x18\n" +
+	" \x01(\x03R\x0finitiatorRoleId\x123\n" +
+	"\x13target_affiliate_id\x18\v \x01(\x03H\aR\x11targetAffiliateId\x88\x01\x01B\x10\n" +
 	"\x0e_campaign_nameB\x0e\n" +
 	"\f_campaign_idB\x0f\n" +
 	"\r_affiliate_idB\n" +
@@ -8043,7 +8148,8 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x14\n" +
-	"\x12_initiator_user_id\"\xb7\x06\n" +
+	"\x12_initiator_user_idB\x16\n" +
+	"\x14_target_affiliate_id\"\xb7\x06\n" +
 	"\x15ListCampaignsResponse\x12Z\n" +
 	"\tcampaigns\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCampaignsResponse.CampaignInfoR\tcampaigns\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
@@ -8065,11 +8171,14 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x14event_mappings_count\x18\n" +
 	" \x01(\x05R\x12eventMappingsCount\x12\x18\n" +
 	"\aenabled\x18\v \x01(\bR\aenabled\x12>\n" +
-	"\bcampaign\x18\f \x01(\v2\".api.affiliate.service.v1.CampaignR\bcampaign\"d\n" +
+	"\bcampaign\x18\f \x01(\v2\".api.affiliate.service.v1.CampaignR\bcampaign\"\xdd\x01\n" +
 	"\x15DeleteCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12*\n" +
-	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\"\x18\n" +
+	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\x03 \x01(\x03R\x0finitiatorRoleId\x123\n" +
+	"\x13target_affiliate_id\x18\x04 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\x18\n" +
 	"\x16DeleteCampaignResponse\"\xad\x05\n" +
 	"\x11ListEventsRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1f\n" +
@@ -8125,7 +8234,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\roperator_name\x18\x11 \x01(\tR\foperatorName\x1ap\n" +
 	"\x0eCommissionPlan\x12,\n" +
 	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\x120\n" +
-	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\"\x9e\x03\n" +
+	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\"\xeb\x03\n" +
 	"\x15CreatePostbackRequest\x12#\n" +
 	"\rpostback_name\x18\x01 \x01(\tR\fpostbackName\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12!\n" +
@@ -8136,10 +8245,13 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x0erequest_method\x18\x06 \x01(\tR\rrequestMethod\x12*\n" +
 	"\x11initiator_user_id\x18\a \x01(\x03R\x0finitiatorUserId\x123\n" +
 	"\x16initiator_user_role_id\x18\b \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"9\n" +
+	"\x1ainitiator_operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x123\n" +
+	"\x13target_affiliate_id\x18\n" +
+	" \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"9\n" +
 	"\x16CreatePostbackResponse\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
-	"postbackId\"\xbf\x03\n" +
+	"postbackId\"\x8c\x04\n" +
 	"\x15UpdatePostbackRequest\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
 	"postbackId\x12#\n" +
@@ -8153,15 +8265,19 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11initiator_user_id\x18\b \x01(\x03R\x0finitiatorUserId\x123\n" +
 	"\x16initiator_user_role_id\x18\t \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\x18\n" +
-	"\x16UpdatePostbackResponse\"\xf4\x01\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x123\n" +
+	"\x13target_affiliate_id\x18\v \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\x18\n" +
+	"\x16UpdatePostbackResponse\"\xc1\x02\n" +
 	"\x15DeletePostbackRequest\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
 	"postbackId\x12*\n" +
 	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x123\n" +
 	"\x16initiator_user_role_id\x18\x03 \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\x18\n" +
-	"\x16DeletePostbackResponse\"\xe3\x03\n" +
+	"\x1ainitiator_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x123\n" +
+	"\x13target_affiliate_id\x18\x05 \x01(\x03H\x00R\x11targetAffiliateId\x88\x01\x01B\x16\n" +
+	"\x14_target_affiliate_id\"\x18\n" +
+	"\x16DeletePostbackResponse\"\xb0\x04\n" +
 	"\x14ListPostbacksRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1b\n" +
 	"\x06status\x18\x02 \x01(\tH\x01R\x06status\x88\x01\x01\x12\x17\n" +
@@ -8170,12 +8286,14 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11initiator_user_id\x18\x05 \x01(\x03R\x0finitiatorUserId\x123\n" +
 	"\x16initiator_user_role_id\x18\x06 \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x123\n" +
+	"\x13target_affiliate_id\x18\t \x01(\x03H\x04R\x11targetAffiliateId\x88\x01\x01B\x0f\n" +
 	"\r_affiliate_idB\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe5\a\n" +
+	"_page_sizeB\x16\n" +
+	"\x14_target_affiliate_id\"\xe5\a\n" +
 	"\x15ListPostbacksResponse\x12V\n" +
 	"\tpostbacks\x18\x01 \x03(\v28.api.affiliate.service.v1.ListPostbacksResponse.PostbackR\tpostbacks\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12!\n" +
@@ -9026,9 +9144,14 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	file_affiliate_service_v1_referral_plan_proto_init()
 	file_affiliate_service_v1_affiliate_proto_msgTypes[6].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[14].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[17].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[19].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[21].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[23].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[25].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[27].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[29].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[31].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[33].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[35].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[37].OneofWrappers = []any{}
