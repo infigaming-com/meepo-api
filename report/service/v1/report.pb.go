@@ -1784,36 +1784,34 @@ func (x *ReferralT1GamingData) GetProviderRoyaltiesReportingCurrency() string {
 	return ""
 }
 
-// ReferralTierCarryover - Negative carryover data per tier
-// Directly from user_referral_relations.loss_rev_share_carryover JSONB
-// Structure in DB: map[currency]map[periodType]*ReferralCarryoverData
-type ReferralTierCarryover struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tier          int32                  `protobuf:"varint,1,opt,name=tier,proto3" json:"tier,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                             // e.g., "USD"
-	PeriodType    string                 `protobuf:"bytes,3,opt,name=period_type,json=periodType,proto3" json:"period_type,omitempty"`       // "weekly" or "monthly"
-	BasedOn       string                 `protobuf:"bytes,4,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`                // "ngr" or "ggr" - what the carryover is based on
-	NgrCarryover  string                 `protobuf:"bytes,5,opt,name=ngr_carryover,json=ngrCarryover,proto3" json:"ngr_carryover,omitempty"` // NGR carryover amount (can be negative)
-	GgrCarryover  string                 `protobuf:"bytes,6,opt,name=ggr_carryover,json=ggrCarryover,proto3" json:"ggr_carryover,omitempty"` // GGR carryover amount
-	B2CCarryover  string                 `protobuf:"bytes,7,opt,name=b2c_carryover,json=b2cCarryover,proto3" json:"b2c_carryover,omitempty"` // B2C carryover amount
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+// ReferralT1Carryover - T1 negative carryover data
+// Extracted from referrer's user_referral_relations.loss_rev_share_carryover JSONB
+// Each row has currency context, so carryover is extracted for that currency's T1 data
+type ReferralT1Carryover struct {
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	BasedOn                  string                 `protobuf:"bytes,1,opt,name=based_on,json=basedOn,proto3" json:"based_on,omitempty"`                                                      // "ngr" or "ggr" - what the carryover is based on
+	RevenueUsd               string                 `protobuf:"bytes,2,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`                                             // Revenue (NGR or GGR based on based_on) in USD
+	RevenueReportingCurrency string                 `protobuf:"bytes,3,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"` // Revenue in reporting currency
+	B2CUsd                   string                 `protobuf:"bytes,4,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"`                                                         // Bonus to Cash in USD
+	B2CReportingCurrency     string                 `protobuf:"bytes,5,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`             // Bonus to Cash in reporting currency
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
-func (x *ReferralTierCarryover) Reset() {
-	*x = ReferralTierCarryover{}
+func (x *ReferralT1Carryover) Reset() {
+	*x = ReferralT1Carryover{}
 	mi := &file_report_service_v1_report_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReferralTierCarryover) String() string {
+func (x *ReferralT1Carryover) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReferralTierCarryover) ProtoMessage() {}
+func (*ReferralT1Carryover) ProtoMessage() {}
 
-func (x *ReferralTierCarryover) ProtoReflect() protoreflect.Message {
+func (x *ReferralT1Carryover) ProtoReflect() protoreflect.Message {
 	mi := &file_report_service_v1_report_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1825,56 +1823,42 @@ func (x *ReferralTierCarryover) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReferralTierCarryover.ProtoReflect.Descriptor instead.
-func (*ReferralTierCarryover) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReferralT1Carryover.ProtoReflect.Descriptor instead.
+func (*ReferralT1Carryover) Descriptor() ([]byte, []int) {
 	return file_report_service_v1_report_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *ReferralTierCarryover) GetTier() int32 {
-	if x != nil {
-		return x.Tier
-	}
-	return 0
-}
-
-func (x *ReferralTierCarryover) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *ReferralTierCarryover) GetPeriodType() string {
-	if x != nil {
-		return x.PeriodType
-	}
-	return ""
-}
-
-func (x *ReferralTierCarryover) GetBasedOn() string {
+func (x *ReferralT1Carryover) GetBasedOn() string {
 	if x != nil {
 		return x.BasedOn
 	}
 	return ""
 }
 
-func (x *ReferralTierCarryover) GetNgrCarryover() string {
+func (x *ReferralT1Carryover) GetRevenueUsd() string {
 	if x != nil {
-		return x.NgrCarryover
+		return x.RevenueUsd
 	}
 	return ""
 }
 
-func (x *ReferralTierCarryover) GetGgrCarryover() string {
+func (x *ReferralT1Carryover) GetRevenueReportingCurrency() string {
 	if x != nil {
-		return x.GgrCarryover
+		return x.RevenueReportingCurrency
 	}
 	return ""
 }
 
-func (x *ReferralTierCarryover) GetB2CCarryover() string {
+func (x *ReferralT1Carryover) GetB2CUsd() string {
 	if x != nil {
-		return x.B2CCarryover
+		return x.B2CUsd
+	}
+	return ""
+}
+
+func (x *ReferralT1Carryover) GetB2CReportingCurrency() string {
+	if x != nil {
+		return x.B2CReportingCurrency
 	}
 	return ""
 }
@@ -2489,8 +2473,8 @@ type ReferralSnapshotReportDataItem struct {
 	UnclaimedCommissionReportingCurrency string `protobuf:"bytes,55,opt,name=unclaimed_commission_reporting_currency,json=unclaimedCommissionReportingCurrency,proto3" json:"unclaimed_commission_reporting_currency,omitempty"`
 	LifetimeClaimedReportingCurrency     string `protobuf:"bytes,56,opt,name=lifetime_claimed_reporting_currency,json=lifetimeClaimedReportingCurrency,proto3" json:"lifetime_claimed_reporting_currency,omitempty"`
 	WithdrawalAmountReportingCurrency    string `protobuf:"bytes,57,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
-	// Negative carryover per tier (from user_referral_relations.loss_rev_share_carryover)
-	NegativeCarryover []*ReferralTierCarryover `protobuf:"bytes,60,rep,name=negative_carryover,json=negativeCarryover,proto3" json:"negative_carryover,omitempty"`
+	// T1 negative carryover (extracted for this row's currency from user_referral_relations.loss_rev_share_carryover)
+	T1Carryover *ReferralT1Carryover `protobuf:"bytes,60,opt,name=t1_carryover,json=t1Carryover,proto3" json:"t1_carryover,omitempty"`
 	// Unpaid wagering commission (from referral_commissions where status='unpaid' AND type='wagering_commission_reward')
 	// This is read directly from the table, not calculated
 	UnpaidWageringCommissionUsd               string `protobuf:"bytes,61,opt,name=unpaid_wagering_commission_usd,json=unpaidWageringCommissionUsd,proto3" json:"unpaid_wagering_commission_usd,omitempty"`
@@ -2711,9 +2695,9 @@ func (x *ReferralSnapshotReportDataItem) GetWithdrawalAmountReportingCurrency() 
 	return ""
 }
 
-func (x *ReferralSnapshotReportDataItem) GetNegativeCarryover() []*ReferralTierCarryover {
+func (x *ReferralSnapshotReportDataItem) GetT1Carryover() *ReferralT1Carryover {
 	if x != nil {
-		return x.NegativeCarryover
+		return x.T1Carryover
 	}
 	return nil
 }
@@ -2934,12 +2918,14 @@ type ReferralContributionReportDataItem struct {
 	B2CReportingCurrency               string `protobuf:"bytes,35,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"`
 	PaymentCostReportingCurrency       string `protobuf:"bytes,36,opt,name=payment_cost_reporting_currency,json=paymentCostReportingCurrency,proto3" json:"payment_cost_reporting_currency,omitempty"`
 	ProviderRoyaltiesReportingCurrency string `protobuf:"bytes,37,opt,name=provider_royalties_reporting_currency,json=providerRoyaltiesReportingCurrency,proto3" json:"provider_royalties_reporting_currency,omitempty"`
-	// TODO: Not implemented - requires User Service integration
-	LastLoginTime int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
-	DeviceId      string `protobuf:"bytes,41,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	Ip            string `protobuf:"bytes,42,opt,name=ip,proto3" json:"ip,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// User activity fields (from user_events table)
+	LastLoginTime          int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
+	RegistrationDeviceType string `protobuf:"bytes,41,opt,name=registration_device_type,json=registrationDeviceType,proto3" json:"registration_device_type,omitempty"` // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
+	RegistrationIp         string `protobuf:"bytes,42,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	LastLoginDeviceType    string `protobuf:"bytes,43,opt,name=last_login_device_type,json=lastLoginDeviceType,proto3" json:"last_login_device_type,omitempty"` // Parsed from UserAgent
+	LastLoginIp            string `protobuf:"bytes,44,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ReferralContributionReportDataItem) Reset() {
@@ -3175,16 +3161,30 @@ func (x *ReferralContributionReportDataItem) GetLastLoginTime() int64 {
 	return 0
 }
 
-func (x *ReferralContributionReportDataItem) GetDeviceId() string {
+func (x *ReferralContributionReportDataItem) GetRegistrationDeviceType() string {
 	if x != nil {
-		return x.DeviceId
+		return x.RegistrationDeviceType
 	}
 	return ""
 }
 
-func (x *ReferralContributionReportDataItem) GetIp() string {
+func (x *ReferralContributionReportDataItem) GetRegistrationIp() string {
 	if x != nil {
-		return x.Ip
+		return x.RegistrationIp
+	}
+	return ""
+}
+
+func (x *ReferralContributionReportDataItem) GetLastLoginDeviceType() string {
+	if x != nil {
+		return x.LastLoginDeviceType
+	}
+	return ""
+}
+
+func (x *ReferralContributionReportDataItem) GetLastLoginIp() string {
+	if x != nil {
+		return x.LastLoginIp
 	}
 	return ""
 }
@@ -5679,16 +5679,14 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\x12E\n" +
 	"\x1fpayment_cost_reporting_currency\x18\r \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
-	"%provider_royalties_reporting_currency\x18\x0e \x01(\tR\"providerRoyaltiesReportingCurrency\"\xf2\x01\n" +
-	"\x15ReferralTierCarryover\x12\x12\n" +
-	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1f\n" +
-	"\vperiod_type\x18\x03 \x01(\tR\n" +
-	"periodType\x12\x19\n" +
-	"\bbased_on\x18\x04 \x01(\tR\abasedOn\x12#\n" +
-	"\rngr_carryover\x18\x05 \x01(\tR\fngrCarryover\x12#\n" +
-	"\rggr_carryover\x18\x06 \x01(\tR\fggrCarryover\x12#\n" +
-	"\rb2c_carryover\x18\a \x01(\tR\fb2cCarryover\"\x9f\x03\n" +
+	"%provider_royalties_reporting_currency\x18\x0e \x01(\tR\"providerRoyaltiesReportingCurrency\"\xde\x01\n" +
+	"\x13ReferralT1Carryover\x12\x19\n" +
+	"\bbased_on\x18\x01 \x01(\tR\abasedOn\x12\x1f\n" +
+	"\vrevenue_usd\x18\x02 \x01(\tR\n" +
+	"revenueUsd\x12<\n" +
+	"\x1arevenue_reporting_currency\x18\x03 \x01(\tR\x18revenueReportingCurrency\x12\x17\n" +
+	"\ab2c_usd\x18\x04 \x01(\tR\x06b2cUsd\x124\n" +
+	"\x16b2c_reporting_currency\x18\x05 \x01(\tR\x14b2cReportingCurrency\"\x9f\x03\n" +
 	"\x16ReferralTierGamingData\x12\x12\n" +
 	"\x04tier\x18\x01 \x01(\x05R\x04tier\x12\x17\n" +
 	"\aggr_usd\x18\x02 \x01(\tR\x06ggrUsd\x12\x17\n" +
@@ -5756,7 +5754,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd0\x0e\n" +
+	"_page_size\"\xc2\x0e\n" +
 	"\x1eReferralSnapshotReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x10\n" +
 	"\x03uid\x18\x02 \x01(\x03R\x03uid\x12\x1f\n" +
@@ -5786,8 +5784,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x15withdrawal_amount_usd\x184 \x01(\tR\x13withdrawalAmountUsd\x12U\n" +
 	"'unclaimed_commission_reporting_currency\x187 \x01(\tR$unclaimedCommissionReportingCurrency\x12M\n" +
 	"#lifetime_claimed_reporting_currency\x188 \x01(\tR lifetimeClaimedReportingCurrency\x12O\n" +
-	"$withdrawal_amount_reporting_currency\x189 \x01(\tR!withdrawalAmountReportingCurrency\x12[\n" +
-	"\x12negative_carryover\x18< \x03(\v2,.api.report.service.v1.ReferralTierCarryoverR\x11negativeCarryover\x12C\n" +
+	"$withdrawal_amount_reporting_currency\x189 \x01(\tR!withdrawalAmountReportingCurrency\x12M\n" +
+	"\ft1_carryover\x18< \x01(\v2*.api.report.service.v1.ReferralT1CarryoverR\vt1Carryover\x12C\n" +
 	"\x1eunpaid_wagering_commission_usd\x18= \x01(\tR\x1bunpaidWageringCommissionUsd\x12`\n" +
 	"-unpaid_wagering_commission_reporting_currency\x18> \x01(\tR)unpaidWageringCommissionReportingCurrency\"\xbc\x01\n" +
 	"&ListReferralSnapshotReportDataResponse\x12K\n" +
@@ -5809,8 +5807,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\r_is_qualifiedB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8e\n" +
-	"\n" +
+	"_page_size\"\x9d\v\n" +
 	"\"ReferralContributionReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x17\n" +
 	"\aroot_id\x18\x02 \x01(\x03R\x06rootId\x12\x1b\n" +
@@ -5843,9 +5840,11 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x16b2c_reporting_currency\x18# \x01(\tR\x14b2cReportingCurrency\x12E\n" +
 	"\x1fpayment_cost_reporting_currency\x18$ \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
 	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12&\n" +
-	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x12\x1b\n" +
-	"\tdevice_id\x18) \x01(\tR\bdeviceId\x12\x0e\n" +
-	"\x02ip\x18* \x01(\tR\x02ip\"\xc4\x01\n" +
+	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x128\n" +
+	"\x18registration_device_type\x18) \x01(\tR\x16registrationDeviceType\x12'\n" +
+	"\x0fregistration_ip\x18* \x01(\tR\x0eregistrationIp\x123\n" +
+	"\x16last_login_device_type\x18+ \x01(\tR\x13lastLoginDeviceType\x12\"\n" +
+	"\rlast_login_ip\x18, \x01(\tR\vlastLoginIp\"\xc4\x01\n" +
 	"*ListReferralContributionReportDataResponse\x12O\n" +
 	"\x05items\x18\x01 \x03(\v29.api.report.service.v1.ReferralContributionReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -6162,7 +6161,7 @@ var file_report_service_v1_report_proto_goTypes = []any{
 	(*ReferralVTGTierData)(nil),                        // 13: api.report.service.v1.ReferralVTGTierData
 	(*ReferralSnapshotTierData)(nil),                   // 14: api.report.service.v1.ReferralSnapshotTierData
 	(*ReferralT1GamingData)(nil),                       // 15: api.report.service.v1.ReferralT1GamingData
-	(*ReferralTierCarryover)(nil),                      // 16: api.report.service.v1.ReferralTierCarryover
+	(*ReferralT1Carryover)(nil),                        // 16: api.report.service.v1.ReferralT1Carryover
 	(*ReferralTierGamingData)(nil),                     // 17: api.report.service.v1.ReferralTierGamingData
 	(*ListReferralVTGReportDataRequest)(nil),           // 18: api.report.service.v1.ListReferralVTGReportDataRequest
 	(*ReferralVTGReportDataItem)(nil),                  // 19: api.report.service.v1.ReferralVTGReportDataItem
@@ -6254,7 +6253,7 @@ var file_report_service_v1_report_proto_depIdxs = []int32{
 	14, // 45: api.report.service.v1.ReferralSnapshotReportDataItem.tiers:type_name -> api.report.service.v1.ReferralSnapshotTierData
 	15, // 46: api.report.service.v1.ReferralSnapshotReportDataItem.t1_gaming:type_name -> api.report.service.v1.ReferralT1GamingData
 	17, // 47: api.report.service.v1.ReferralSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.ReferralTierGamingData
-	16, // 48: api.report.service.v1.ReferralSnapshotReportDataItem.negative_carryover:type_name -> api.report.service.v1.ReferralTierCarryover
+	16, // 48: api.report.service.v1.ReferralSnapshotReportDataItem.t1_carryover:type_name -> api.report.service.v1.ReferralT1Carryover
 	22, // 49: api.report.service.v1.ListReferralSnapshotReportDataResponse.items:type_name -> api.report.service.v1.ReferralSnapshotReportDataItem
 	39, // 50: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	40, // 51: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
