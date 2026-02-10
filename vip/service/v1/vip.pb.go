@@ -81,6 +81,7 @@ const (
 	VipRewardKind_VIP_REWARD_KIND_RAKEBACK_DAILY      VipRewardKind = 4 // rakeback_daily
 	VipRewardKind_VIP_REWARD_KIND_RAKEBACK_WEEKLY     VipRewardKind = 5 // rakeback_weekly
 	VipRewardKind_VIP_REWARD_KIND_RAKEBACK_MONTHLY    VipRewardKind = 6 // rakeback_monthly
+	VipRewardKind_VIP_REWARD_KIND_DAILY_LOSSBACK      VipRewardKind = 7 // daily_lossback
 )
 
 // Enum value maps for VipRewardKind.
@@ -93,6 +94,7 @@ var (
 		4: "VIP_REWARD_KIND_RAKEBACK_DAILY",
 		5: "VIP_REWARD_KIND_RAKEBACK_WEEKLY",
 		6: "VIP_REWARD_KIND_RAKEBACK_MONTHLY",
+		7: "VIP_REWARD_KIND_DAILY_LOSSBACK",
 	}
 	VipRewardKind_value = map[string]int32{
 		"VIP_REWARD_KIND_UNSPECIFIED":         0,
@@ -102,6 +104,7 @@ var (
 		"VIP_REWARD_KIND_RAKEBACK_DAILY":      4,
 		"VIP_REWARD_KIND_RAKEBACK_WEEKLY":     5,
 		"VIP_REWARD_KIND_RAKEBACK_MONTHLY":    6,
+		"VIP_REWARD_KIND_DAILY_LOSSBACK":      7,
 	}
 )
 
@@ -3966,7 +3969,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x0eVipDisplayRule\x12 \n" +
 	"\x1cVIP_DISPLAY_RULE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bVIP_DISPLAY_RULE_CUMULATIVE\x10\x01\x12\x1c\n" +
-	"\x18VIP_DISPLAY_RULE_CURRENT\x10\x02*\x90\x02\n" +
+	"\x18VIP_DISPLAY_RULE_CURRENT\x10\x02*\xb4\x02\n" +
 	"\rVipRewardKind\x12\x1f\n" +
 	"\x1bVIP_REWARD_KIND_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cVIP_REWARD_KIND_UPGRADE_BASE\x10\x01\x12'\n" +
@@ -3974,7 +3977,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	" VIP_REWARD_KIND_RAKEBACK_INSTANT\x10\x03\x12\"\n" +
 	"\x1eVIP_REWARD_KIND_RAKEBACK_DAILY\x10\x04\x12#\n" +
 	"\x1fVIP_REWARD_KIND_RAKEBACK_WEEKLY\x10\x05\x12$\n" +
-	" VIP_REWARD_KIND_RAKEBACK_MONTHLY\x10\x06*e\n" +
+	" VIP_REWARD_KIND_RAKEBACK_MONTHLY\x10\x06\x12\"\n" +
+	"\x1eVIP_REWARD_KIND_DAILY_LOSSBACK\x10\a*e\n" +
 	"\rVipPayoutType\x12\x1f\n" +
 	"\x1bVIP_PAYOUT_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14VIP_PAYOUT_TYPE_CASH\x10\x01\x12\x19\n" +

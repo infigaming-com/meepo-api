@@ -9,6 +9,7 @@ package v1
 import (
 	context "context"
 	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
+	v11 "github.com/infigaming-com/meepo-api/wallet/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -138,6 +139,7 @@ const (
 	User_GetTelegramConfig_FullMethodName                  = "/api.user.service.v1.User/GetTelegramConfig"
 	User_GetTelegramLoginInfo_FullMethodName               = "/api.user.service.v1.User/GetTelegramLoginInfo"
 	User_GetRewardHistory_FullMethodName                   = "/api.user.service.v1.User/GetRewardHistory"
+	User_ListUserFreeRewards_FullMethodName                = "/api.user.service.v1.User/ListUserFreeRewards"
 )
 
 // UserClient is the client API for User service.
@@ -355,6 +357,8 @@ type UserClient interface {
 	// ============ Bonus Center APIs ============
 	// Get reward history summary (aggregates wallet free spin + VIP reward history)
 	GetRewardHistory(ctx context.Context, in *GetRewardHistoryRequest, opts ...grpc.CallOption) (*GetRewardHistoryResponse, error)
+	// List user free rewards (free spins + free bets) from wallet service
+	ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v11.ListUserFreeRewardsResponse, error)
 }
 
 type userClient struct {
@@ -1545,6 +1549,16 @@ func (c *userClient) GetRewardHistory(ctx context.Context, in *GetRewardHistoryR
 	return out, nil
 }
 
+func (c *userClient) ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v11.ListUserFreeRewardsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v11.ListUserFreeRewardsResponse)
+	err := c.cc.Invoke(ctx, User_ListUserFreeRewards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1760,6 +1774,8 @@ type UserServer interface {
 	// ============ Bonus Center APIs ============
 	// Get reward history summary (aggregates wallet free spin + VIP reward history)
 	GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error)
+	// List user free rewards (free spins + free bets) from wallet service
+	ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2123,6 +2139,9 @@ func (UnimplementedUserServer) GetTelegramLoginInfo(context.Context, *GetTelegra
 }
 func (UnimplementedUserServer) GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetRewardHistory not implemented")
+}
+func (UnimplementedUserServer) ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserFreeRewards not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4269,6 +4288,24 @@ func _User_GetRewardHistory_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListUserFreeRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserFreeRewardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListUserFreeRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListUserFreeRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListUserFreeRewards(ctx, req.(*ListUserFreeRewardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4747,6 +4784,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRewardHistory",
 			Handler:    _User_GetRewardHistory_Handler,
+		},
+		{
+			MethodName: "ListUserFreeRewards",
+			Handler:    _User_ListUserFreeRewards_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -78,6 +78,7 @@ enum VipRewardKind {
   VIP_REWARD_KIND_RAKEBACK_DAILY = 4;      // rakeback_daily
   VIP_REWARD_KIND_RAKEBACK_WEEKLY = 5;     // rakeback_weekly
   VIP_REWARD_KIND_RAKEBACK_MONTHLY = 6;    // rakeback_monthly
+  VIP_REWARD_KIND_DAILY_LOSSBACK = 7;      // daily_lossback
 }
 
 enum VipPayoutType {

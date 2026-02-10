@@ -11,6 +11,7 @@ import (
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
 	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
+	v11 "github.com/infigaming-com/meepo-api/wallet/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -43,6 +44,7 @@ const OperationUserGetUserVipLevel = "/api.user.service.v1.User/GetUserVipLevel"
 const OperationUserInitiateOAuthBinding = "/api.user.service.v1.User/InitiateOAuthBinding"
 const OperationUserInitiateOAuthLogin = "/api.user.service.v1.User/InitiateOAuthLogin"
 const OperationUserListBoundOAuthAccounts = "/api.user.service.v1.User/ListBoundOAuthAccounts"
+const OperationUserListUserFreeRewards = "/api.user.service.v1.User/ListUserFreeRewards"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
 const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
@@ -100,6 +102,8 @@ type UserHTTPServer interface {
 	InitiateOAuthLogin(context.Context, *InitiateOAuthLoginRequest) (*InitiateOAuthLoginResponse, error)
 	// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
 	ListBoundOAuthAccounts(context.Context, *ListBoundOAuthAccountsRequest) (*ListBoundOAuthAccountsResponse, error)
+	// ListUserFreeRewards List user free rewards (free spins + free bets) from wallet service
+	ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
@@ -151,8 +155,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/email/verify/get", _User_VerifyEmail0_HTTP_Handler(srv))
 	r.POST("/v1/user/operator/account-settings/get", _User_GetOperatorAccountSettings0_HTTP_Handler(srv))
 	r.POST("/v1/user/account-settings/status/get", _User_GetUserAccountSettingsStatus0_HTTP_Handler(srv))
-	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
-	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig1_HTTP_Handler(srv))
+	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/get", _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/operator/registration-field-config/get", _User_GetOperatorRegistrationFieldConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/account/update", _User_CloseAccount0_HTTP_Handler(srv))
@@ -174,6 +178,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/oauth/bind/initiate", _User_InitiateOAuthBinding0_HTTP_Handler(srv))
 	r.GET("/v1/user/telegram/info", _User_GetTelegramLoginInfo0_HTTP_Handler(srv))
 	r.POST("/v1/user/bonus/reward-history/get", _User_GetRewardHistory0_HTTP_Handler(srv))
+	r.POST("/v1/user/bonus/free-rewards/list", _User_ListUserFreeRewards0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -528,7 +533,7 @@ func _User_GetUserAccountSettingsStatus0_HTTP_Handler(srv UserHTTPServer) func(c
 	}
 }
 
-func _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_AddResponsibleGamblingConfig1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddResponsibleGamblingConfigRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -550,7 +555,7 @@ func _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(c
 	}
 }
 
-func _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteResponsibleGamblingConfigRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -1022,6 +1027,28 @@ func _User_GetRewardHistory0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Cont
 	}
 }
 
+func _User_ListUserFreeRewards0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListUserFreeRewardsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserListUserFreeRewards)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListUserFreeRewards(ctx, req.(*ListUserFreeRewardsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v11.ListUserFreeRewardsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
@@ -1062,6 +1089,8 @@ type UserHTTPClient interface {
 	InitiateOAuthLogin(ctx context.Context, req *InitiateOAuthLoginRequest, opts ...http.CallOption) (rsp *InitiateOAuthLoginResponse, err error)
 	// ListBoundOAuthAccounts List OAuth accounts bound to current user (requires authentication)
 	ListBoundOAuthAccounts(ctx context.Context, req *ListBoundOAuthAccountsRequest, opts ...http.CallOption) (rsp *ListBoundOAuthAccountsResponse, err error)
+	// ListUserFreeRewards List user free rewards (free spins + free bets) from wallet service
+	ListUserFreeRewards(ctx context.Context, req *ListUserFreeRewardsRequest, opts ...http.CallOption) (rsp *v11.ListUserFreeRewardsResponse, err error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
@@ -1412,6 +1441,20 @@ func (c *UserHTTPClientImpl) ListBoundOAuthAccounts(ctx context.Context, in *Lis
 	opts = append(opts, http.Operation(OperationUserListBoundOAuthAccounts))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListUserFreeRewards List user free rewards (free spins + free bets) from wallet service
+func (c *UserHTTPClientImpl) ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...http.CallOption) (*v11.ListUserFreeRewardsResponse, error) {
+	var out v11.ListUserFreeRewardsResponse
+	pattern := "/v1/user/bonus/free-rewards/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserListUserFreeRewards))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

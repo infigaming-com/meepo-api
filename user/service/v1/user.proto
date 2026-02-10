@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "vip/service/v1/vip.proto";
+import "wallet/service/v1/wallet.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
@@ -542,6 +543,14 @@ service User {
 	rpc GetRewardHistory(GetRewardHistoryRequest) returns (GetRewardHistoryResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/bonus/reward-history/get"
+			body: "*"
+		};
+	}
+
+	// List user free rewards (free spins + free bets) from wallet service
+	rpc ListUserFreeRewards(ListUserFreeRewardsRequest) returns (api.wallet.service.v1.ListUserFreeRewardsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/bonus/free-rewards/list"
 			body: "*"
 		};
 	}
@@ -2461,6 +2470,8 @@ message GetTelegramLoginInfoResponse {
 
 message GetRewardHistoryRequest {}
 
+message ListUserFreeRewardsRequest {}
+
 message GetRewardHistoryResponse {
 	string total_rewards_usd = 1;
 	string free_spin_usd = 2;
@@ -2469,4 +2480,5 @@ message GetRewardHistoryResponse {
 	string rakeback_daily_usd = 5;
 	string weekly_rewards_usd = 6;
 	string monthly_rewards_usd = 7;
+	string daily_lossback_usd = 8;
 }
