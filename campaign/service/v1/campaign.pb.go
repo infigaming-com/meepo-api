@@ -2398,6 +2398,557 @@ func (x *GetExecutionStepsResponse) GetSteps() []*ExecutionStepLog {
 	return nil
 }
 
+// GetWorkflowSchema - returns all available workflow components for building workflows
+type GetWorkflowSchemaRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetWorkflowSchemaRequest) Reset() {
+	*x = GetWorkflowSchemaRequest{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWorkflowSchemaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWorkflowSchemaRequest) ProtoMessage() {}
+
+func (x *GetWorkflowSchemaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWorkflowSchemaRequest.ProtoReflect.Descriptor instead.
+func (*GetWorkflowSchemaRequest) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *GetWorkflowSchemaRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetWorkflowSchemaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"` // Schema version "1.0"
+	Triggers      []*TriggerSchema       `protobuf:"bytes,2,rep,name=triggers,proto3" json:"triggers,omitempty"`
+	Operators     []*OperatorSchema      `protobuf:"bytes,3,rep,name=operators,proto3" json:"operators,omitempty"`
+	Actions       []*ActionSchema        `protobuf:"bytes,4,rep,name=actions,proto3" json:"actions,omitempty"`
+	DataSources   []*DataSourceSchema    `protobuf:"bytes,5,rep,name=data_sources,json=dataSources,proto3" json:"data_sources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWorkflowSchemaResponse) Reset() {
+	*x = GetWorkflowSchemaResponse{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWorkflowSchemaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWorkflowSchemaResponse) ProtoMessage() {}
+
+func (x *GetWorkflowSchemaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWorkflowSchemaResponse.ProtoReflect.Descriptor instead.
+func (*GetWorkflowSchemaResponse) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetWorkflowSchemaResponse) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *GetWorkflowSchemaResponse) GetTriggers() []*TriggerSchema {
+	if x != nil {
+		return x.Triggers
+	}
+	return nil
+}
+
+func (x *GetWorkflowSchemaResponse) GetOperators() []*OperatorSchema {
+	if x != nil {
+		return x.Operators
+	}
+	return nil
+}
+
+func (x *GetWorkflowSchemaResponse) GetActions() []*ActionSchema {
+	if x != nil {
+		return x.Actions
+	}
+	return nil
+}
+
+func (x *GetWorkflowSchemaResponse) GetDataSources() []*DataSourceSchema {
+	if x != nil {
+		return x.DataSources
+	}
+	return nil
+}
+
+// TriggerSchema describes a trigger type
+type TriggerSchema struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Type            string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"` // "event", "manual", "segment", "schedule"
+	Name            string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // Display name
+	Description     string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	ConfigFields    []*ConfigFieldSchema   `protobuf:"bytes,4,rep,name=config_fields,json=configFields,proto3" json:"config_fields,omitempty"`
+	AvailableEvents []string               `protobuf:"bytes,5,rep,name=available_events,json=availableEvents,proto3" json:"available_events,omitempty"` // For event type
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TriggerSchema) Reset() {
+	*x = TriggerSchema{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TriggerSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TriggerSchema) ProtoMessage() {}
+
+func (x *TriggerSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TriggerSchema.ProtoReflect.Descriptor instead.
+func (*TriggerSchema) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *TriggerSchema) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *TriggerSchema) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *TriggerSchema) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *TriggerSchema) GetConfigFields() []*ConfigFieldSchema {
+	if x != nil {
+		return x.ConfigFields
+	}
+	return nil
+}
+
+func (x *TriggerSchema) GetAvailableEvents() []string {
+	if x != nil {
+		return x.AvailableEvents
+	}
+	return nil
+}
+
+// OperatorSchema describes a comparison operator
+type OperatorSchema struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Symbol        string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"` // ">=", "==", "contains", etc.
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`     // "Greater Than or Equal"
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	LeftTypes     []string               `protobuf:"bytes,4,rep,name=left_types,json=leftTypes,proto3" json:"left_types,omitempty"` // ["numeric", "string", "any"]
+	RightTypes    []string               `protobuf:"bytes,5,rep,name=right_types,json=rightTypes,proto3" json:"right_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OperatorSchema) Reset() {
+	*x = OperatorSchema{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OperatorSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OperatorSchema) ProtoMessage() {}
+
+func (x *OperatorSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OperatorSchema.ProtoReflect.Descriptor instead.
+func (*OperatorSchema) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *OperatorSchema) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *OperatorSchema) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *OperatorSchema) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *OperatorSchema) GetLeftTypes() []string {
+	if x != nil {
+		return x.LeftTypes
+	}
+	return nil
+}
+
+func (x *OperatorSchema) GetRightTypes() []string {
+	if x != nil {
+		return x.RightTypes
+	}
+	return nil
+}
+
+// ActionSchema describes an action type
+type ActionSchema struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"` // "send_email", "send_sms", etc.
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // "Send Email"
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Implemented   bool                   `protobuf:"varint,4,opt,name=implemented,proto3" json:"implemented,omitempty"` // Whether executor exists
+	ConfigFields  []*ConfigFieldSchema   `protobuf:"bytes,5,rep,name=config_fields,json=configFields,proto3" json:"config_fields,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ActionSchema) Reset() {
+	*x = ActionSchema{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActionSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActionSchema) ProtoMessage() {}
+
+func (x *ActionSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActionSchema.ProtoReflect.Descriptor instead.
+func (*ActionSchema) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *ActionSchema) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ActionSchema) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ActionSchema) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ActionSchema) GetImplemented() bool {
+	if x != nil {
+		return x.Implemented
+	}
+	return false
+}
+
+func (x *ActionSchema) GetConfigFields() []*ConfigFieldSchema {
+	if x != nil {
+		return x.ConfigFields
+	}
+	return nil
+}
+
+// ConfigFieldSchema describes a configuration field
+type ConfigFieldSchema struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"` // "asset_id", "event_name"
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // "int64", "string", "map"
+	Required      bool                   `protobuf:"varint,3,opt,name=required,proto3" json:"required,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	DefaultValue  string                 `protobuf:"bytes,5,opt,name=default_value,json=defaultValue,proto3" json:"default_value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigFieldSchema) Reset() {
+	*x = ConfigFieldSchema{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigFieldSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigFieldSchema) ProtoMessage() {}
+
+func (x *ConfigFieldSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigFieldSchema.ProtoReflect.Descriptor instead.
+func (*ConfigFieldSchema) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *ConfigFieldSchema) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ConfigFieldSchema) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ConfigFieldSchema) GetRequired() bool {
+	if x != nil {
+		return x.Required
+	}
+	return false
+}
+
+func (x *ConfigFieldSchema) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ConfigFieldSchema) GetDefaultValue() string {
+	if x != nil {
+		return x.DefaultValue
+	}
+	return ""
+}
+
+// DataSourceSchema describes a data source prefix
+type DataSourceSchema struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Prefix        string                 `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"` // "user", "trigger", "wallet"
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Fields        []*DataFieldSchema     `protobuf:"bytes,3,rep,name=fields,proto3" json:"fields,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DataSourceSchema) Reset() {
+	*x = DataSourceSchema{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DataSourceSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DataSourceSchema) ProtoMessage() {}
+
+func (x *DataSourceSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DataSourceSchema.ProtoReflect.Descriptor instead.
+func (*DataSourceSchema) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *DataSourceSchema) GetPrefix() string {
+	if x != nil {
+		return x.Prefix
+	}
+	return ""
+}
+
+func (x *DataSourceSchema) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *DataSourceSchema) GetFields() []*DataFieldSchema {
+	if x != nil {
+		return x.Fields
+	}
+	return nil
+}
+
+// DataFieldSchema describes a data field
+type DataFieldSchema struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"` // "vip_level", "email"
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // "int64", "string", "float64", "bool"
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DataFieldSchema) Reset() {
+	*x = DataFieldSchema{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DataFieldSchema) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DataFieldSchema) ProtoMessage() {}
+
+func (x *DataFieldSchema) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DataFieldSchema.ProtoReflect.Descriptor instead.
+func (*DataFieldSchema) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *DataFieldSchema) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DataFieldSchema) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *DataFieldSchema) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 var File_campaign_service_v1_campaign_proto protoreflect.FileDescriptor
 
 const file_campaign_service_v1_campaign_proto_rawDesc = "" +
@@ -2609,7 +3160,49 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\fexecution_id\x18\x01 \x01(\x03R\vexecutionId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\\\n" +
 	"\x19GetExecutionStepsResponse\x12?\n" +
-	"\x05steps\x18\x01 \x03(\v2).api.campaign.service.v1.ExecutionStepLogR\x05steps*\xc1\x01\n" +
+	"\x05steps\x18\x01 \x03(\v2).api.campaign.service.v1.ExecutionStepLogR\x05steps\"b\n" +
+	"\x18GetWorkflowSchemaRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xcf\x02\n" +
+	"\x19GetWorkflowSchemaResponse\x12\x18\n" +
+	"\aversion\x18\x01 \x01(\tR\aversion\x12B\n" +
+	"\btriggers\x18\x02 \x03(\v2&.api.campaign.service.v1.TriggerSchemaR\btriggers\x12E\n" +
+	"\toperators\x18\x03 \x03(\v2'.api.campaign.service.v1.OperatorSchemaR\toperators\x12?\n" +
+	"\aactions\x18\x04 \x03(\v2%.api.campaign.service.v1.ActionSchemaR\aactions\x12L\n" +
+	"\fdata_sources\x18\x05 \x03(\v2).api.campaign.service.v1.DataSourceSchemaR\vdataSources\"\xd5\x01\n" +
+	"\rTriggerSchema\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12O\n" +
+	"\rconfig_fields\x18\x04 \x03(\v2*.api.campaign.service.v1.ConfigFieldSchemaR\fconfigFields\x12)\n" +
+	"\x10available_events\x18\x05 \x03(\tR\x0favailableEvents\"\x9e\x01\n" +
+	"\x0eOperatorSchema\x12\x16\n" +
+	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1d\n" +
+	"\n" +
+	"left_types\x18\x04 \x03(\tR\tleftTypes\x12\x1f\n" +
+	"\vright_types\x18\x05 \x03(\tR\n" +
+	"rightTypes\"\xcb\x01\n" +
+	"\fActionSchema\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12 \n" +
+	"\vimplemented\x18\x04 \x01(\bR\vimplemented\x12O\n" +
+	"\rconfig_fields\x18\x05 \x03(\v2*.api.campaign.service.v1.ConfigFieldSchemaR\fconfigFields\"\x9e\x01\n" +
+	"\x11ConfigFieldSchema\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1a\n" +
+	"\brequired\x18\x03 \x01(\bR\brequired\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12#\n" +
+	"\rdefault_value\x18\x05 \x01(\tR\fdefaultValue\"\x8e\x01\n" +
+	"\x10DataSourceSchema\x12\x16\n" +
+	"\x06prefix\x18\x01 \x01(\tR\x06prefix\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12@\n" +
+	"\x06fields\x18\x03 \x03(\v2(.api.campaign.service.v1.DataFieldSchemaR\x06fields\"[\n" +
+	"\x0fDataFieldSchema\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription*\xc1\x01\n" +
 	"\x0eCampaignStatus\x12\x1f\n" +
 	"\x1bCAMPAIGN_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CAMPAIGN_STATUS_DRAFT\x10\x01\x12\x1a\n" +
@@ -2630,7 +3223,7 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\x12OWNER_LEVEL_SYSTEM\x10\x01\x12\x18\n" +
 	"\x14OWNER_LEVEL_RETAILER\x10\x02\x12\x17\n" +
 	"\x13OWNER_LEVEL_COMPANY\x10\x03\x12\x18\n" +
-	"\x14OWNER_LEVEL_OPERATOR\x10\x042\xcc\f\n" +
+	"\x14OWNER_LEVEL_OPERATOR\x10\x042\xc8\r\n" +
 	"\x0fCampaignService\x12q\n" +
 	"\x0eCreateCampaign\x12..api.campaign.service.v1.CreateCampaignRequest\x1a/.api.campaign.service.v1.CreateCampaignResponse\x12q\n" +
 	"\x0eUpdateCampaign\x12..api.campaign.service.v1.UpdateCampaignRequest\x1a/.api.campaign.service.v1.UpdateCampaignResponse\x12h\n" +
@@ -2645,7 +3238,8 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\x0fTriggerCampaign\x12/.api.campaign.service.v1.TriggerCampaignRequest\x1a0.api.campaign.service.v1.TriggerCampaignResponse\x12k\n" +
 	"\fGetExecution\x12,.api.campaign.service.v1.GetExecutionRequest\x1a-.api.campaign.service.v1.GetExecutionResponse\x12q\n" +
 	"\x0eListExecutions\x12..api.campaign.service.v1.ListExecutionsRequest\x1a/.api.campaign.service.v1.ListExecutionsResponse\x12z\n" +
-	"\x11GetExecutionSteps\x121.api.campaign.service.v1.GetExecutionStepsRequest\x1a2.api.campaign.service.v1.GetExecutionStepsResponseBW\n" +
+	"\x11GetExecutionSteps\x121.api.campaign.service.v1.GetExecutionStepsRequest\x1a2.api.campaign.service.v1.GetExecutionStepsResponse\x12z\n" +
+	"\x11GetWorkflowSchema\x121.api.campaign.service.v1.GetWorkflowSchemaRequest\x1a2.api.campaign.service.v1.GetWorkflowSchemaResponseBW\n" +
 	"\x17api.campaign.service.v1P\x01Z:github.com/infigaming-com/meepo-api/campaign/service/v1;v1b\x06proto3"
 
 var (
@@ -2661,7 +3255,7 @@ func file_campaign_service_v1_campaign_proto_rawDescGZIP() []byte {
 }
 
 var file_campaign_service_v1_campaign_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_campaign_service_v1_campaign_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_campaign_service_v1_campaign_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_campaign_service_v1_campaign_proto_goTypes = []any{
 	(CampaignStatus)(0),               // 0: api.campaign.service.v1.CampaignStatus
 	(ExecutionStatus)(0),              // 1: api.campaign.service.v1.ExecutionStatus
@@ -2698,99 +3292,117 @@ var file_campaign_service_v1_campaign_proto_goTypes = []any{
 	(*ListExecutionsResponse)(nil),    // 32: api.campaign.service.v1.ListExecutionsResponse
 	(*GetExecutionStepsRequest)(nil),  // 33: api.campaign.service.v1.GetExecutionStepsRequest
 	(*GetExecutionStepsResponse)(nil), // 34: api.campaign.service.v1.GetExecutionStepsResponse
-	(*timestamppb.Timestamp)(nil),     // 35: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),           // 36: google.protobuf.Struct
-	(*common.OperatorContext)(nil),    // 37: api.common.OperatorContext
+	(*GetWorkflowSchemaRequest)(nil),  // 35: api.campaign.service.v1.GetWorkflowSchemaRequest
+	(*GetWorkflowSchemaResponse)(nil), // 36: api.campaign.service.v1.GetWorkflowSchemaResponse
+	(*TriggerSchema)(nil),             // 37: api.campaign.service.v1.TriggerSchema
+	(*OperatorSchema)(nil),            // 38: api.campaign.service.v1.OperatorSchema
+	(*ActionSchema)(nil),              // 39: api.campaign.service.v1.ActionSchema
+	(*ConfigFieldSchema)(nil),         // 40: api.campaign.service.v1.ConfigFieldSchema
+	(*DataSourceSchema)(nil),          // 41: api.campaign.service.v1.DataSourceSchema
+	(*DataFieldSchema)(nil),           // 42: api.campaign.service.v1.DataFieldSchema
+	(*timestamppb.Timestamp)(nil),     // 43: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),           // 44: google.protobuf.Struct
+	(*common.OperatorContext)(nil),    // 45: api.common.OperatorContext
 }
 var file_campaign_service_v1_campaign_proto_depIdxs = []int32{
 	0,  // 0: api.campaign.service.v1.Campaign.status:type_name -> api.campaign.service.v1.CampaignStatus
 	2,  // 1: api.campaign.service.v1.Campaign.owner_level:type_name -> api.campaign.service.v1.OwnerLevel
-	35, // 2: api.campaign.service.v1.Campaign.start_at:type_name -> google.protobuf.Timestamp
-	35, // 3: api.campaign.service.v1.Campaign.end_at:type_name -> google.protobuf.Timestamp
-	36, // 4: api.campaign.service.v1.Campaign.metadata:type_name -> google.protobuf.Struct
-	35, // 5: api.campaign.service.v1.Campaign.created_at:type_name -> google.protobuf.Timestamp
-	35, // 6: api.campaign.service.v1.Campaign.updated_at:type_name -> google.protobuf.Timestamp
+	43, // 2: api.campaign.service.v1.Campaign.start_at:type_name -> google.protobuf.Timestamp
+	43, // 3: api.campaign.service.v1.Campaign.end_at:type_name -> google.protobuf.Timestamp
+	44, // 4: api.campaign.service.v1.Campaign.metadata:type_name -> google.protobuf.Struct
+	43, // 5: api.campaign.service.v1.Campaign.created_at:type_name -> google.protobuf.Timestamp
+	43, // 6: api.campaign.service.v1.Campaign.updated_at:type_name -> google.protobuf.Timestamp
 	4,  // 7: api.campaign.service.v1.Campaign.workflow:type_name -> api.campaign.service.v1.CampaignWorkflow
-	35, // 8: api.campaign.service.v1.CampaignWorkflow.created_at:type_name -> google.protobuf.Timestamp
-	35, // 9: api.campaign.service.v1.CampaignWorkflow.updated_at:type_name -> google.protobuf.Timestamp
-	36, // 10: api.campaign.service.v1.CampaignExecution.trigger_data:type_name -> google.protobuf.Struct
+	43, // 8: api.campaign.service.v1.CampaignWorkflow.created_at:type_name -> google.protobuf.Timestamp
+	43, // 9: api.campaign.service.v1.CampaignWorkflow.updated_at:type_name -> google.protobuf.Timestamp
+	44, // 10: api.campaign.service.v1.CampaignExecution.trigger_data:type_name -> google.protobuf.Struct
 	1,  // 11: api.campaign.service.v1.CampaignExecution.status:type_name -> api.campaign.service.v1.ExecutionStatus
-	36, // 12: api.campaign.service.v1.CampaignExecution.execution_state:type_name -> google.protobuf.Struct
-	35, // 13: api.campaign.service.v1.CampaignExecution.started_at:type_name -> google.protobuf.Timestamp
-	35, // 14: api.campaign.service.v1.CampaignExecution.completed_at:type_name -> google.protobuf.Timestamp
-	35, // 15: api.campaign.service.v1.CampaignExecution.created_at:type_name -> google.protobuf.Timestamp
-	35, // 16: api.campaign.service.v1.CampaignExecution.updated_at:type_name -> google.protobuf.Timestamp
+	44, // 12: api.campaign.service.v1.CampaignExecution.execution_state:type_name -> google.protobuf.Struct
+	43, // 13: api.campaign.service.v1.CampaignExecution.started_at:type_name -> google.protobuf.Timestamp
+	43, // 14: api.campaign.service.v1.CampaignExecution.completed_at:type_name -> google.protobuf.Timestamp
+	43, // 15: api.campaign.service.v1.CampaignExecution.created_at:type_name -> google.protobuf.Timestamp
+	43, // 16: api.campaign.service.v1.CampaignExecution.updated_at:type_name -> google.protobuf.Timestamp
 	1,  // 17: api.campaign.service.v1.ExecutionStepLog.status:type_name -> api.campaign.service.v1.ExecutionStatus
-	36, // 18: api.campaign.service.v1.ExecutionStepLog.input_data:type_name -> google.protobuf.Struct
-	36, // 19: api.campaign.service.v1.ExecutionStepLog.output_data:type_name -> google.protobuf.Struct
-	35, // 20: api.campaign.service.v1.ExecutionStepLog.started_at:type_name -> google.protobuf.Timestamp
-	35, // 21: api.campaign.service.v1.ExecutionStepLog.completed_at:type_name -> google.protobuf.Timestamp
-	35, // 22: api.campaign.service.v1.CreateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
-	35, // 23: api.campaign.service.v1.CreateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
-	36, // 24: api.campaign.service.v1.CreateCampaignRequest.metadata:type_name -> google.protobuf.Struct
-	37, // 25: api.campaign.service.v1.CreateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	44, // 18: api.campaign.service.v1.ExecutionStepLog.input_data:type_name -> google.protobuf.Struct
+	44, // 19: api.campaign.service.v1.ExecutionStepLog.output_data:type_name -> google.protobuf.Struct
+	43, // 20: api.campaign.service.v1.ExecutionStepLog.started_at:type_name -> google.protobuf.Timestamp
+	43, // 21: api.campaign.service.v1.ExecutionStepLog.completed_at:type_name -> google.protobuf.Timestamp
+	43, // 22: api.campaign.service.v1.CreateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
+	43, // 23: api.campaign.service.v1.CreateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
+	44, // 24: api.campaign.service.v1.CreateCampaignRequest.metadata:type_name -> google.protobuf.Struct
+	45, // 25: api.campaign.service.v1.CreateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 26: api.campaign.service.v1.CreateCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	35, // 27: api.campaign.service.v1.UpdateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
-	35, // 28: api.campaign.service.v1.UpdateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
-	36, // 29: api.campaign.service.v1.UpdateCampaignRequest.metadata:type_name -> google.protobuf.Struct
-	37, // 30: api.campaign.service.v1.UpdateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 27: api.campaign.service.v1.UpdateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
+	43, // 28: api.campaign.service.v1.UpdateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
+	44, // 29: api.campaign.service.v1.UpdateCampaignRequest.metadata:type_name -> google.protobuf.Struct
+	45, // 30: api.campaign.service.v1.UpdateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 31: api.campaign.service.v1.UpdateCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	37, // 32: api.campaign.service.v1.GetCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 32: api.campaign.service.v1.GetCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 33: api.campaign.service.v1.GetCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	37, // 34: api.campaign.service.v1.ListCampaignsRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 34: api.campaign.service.v1.ListCampaignsRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 35: api.campaign.service.v1.ListCampaignsRequest.status:type_name -> api.campaign.service.v1.CampaignStatus
 	3,  // 36: api.campaign.service.v1.ListCampaignsResponse.campaigns:type_name -> api.campaign.service.v1.Campaign
-	37, // 37: api.campaign.service.v1.DeleteCampaignRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 38: api.campaign.service.v1.SetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 37: api.campaign.service.v1.DeleteCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 38: api.campaign.service.v1.SetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 39: api.campaign.service.v1.SetWorkflowResponse.workflow:type_name -> api.campaign.service.v1.CampaignWorkflow
-	37, // 40: api.campaign.service.v1.GetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 40: api.campaign.service.v1.GetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 41: api.campaign.service.v1.GetWorkflowResponse.workflow:type_name -> api.campaign.service.v1.CampaignWorkflow
-	37, // 42: api.campaign.service.v1.ActivateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 42: api.campaign.service.v1.ActivateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 43: api.campaign.service.v1.ActivateCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	37, // 44: api.campaign.service.v1.PauseCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 44: api.campaign.service.v1.PauseCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 45: api.campaign.service.v1.PauseCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	36, // 46: api.campaign.service.v1.TriggerCampaignRequest.campaign_data:type_name -> google.protobuf.Struct
-	37, // 47: api.campaign.service.v1.TriggerCampaignRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 48: api.campaign.service.v1.GetExecutionRequest.operator_context:type_name -> api.common.OperatorContext
+	44, // 46: api.campaign.service.v1.TriggerCampaignRequest.campaign_data:type_name -> google.protobuf.Struct
+	45, // 47: api.campaign.service.v1.TriggerCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 48: api.campaign.service.v1.GetExecutionRequest.operator_context:type_name -> api.common.OperatorContext
 	5,  // 49: api.campaign.service.v1.GetExecutionResponse.execution:type_name -> api.campaign.service.v1.CampaignExecution
-	37, // 50: api.campaign.service.v1.ListExecutionsRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 50: api.campaign.service.v1.ListExecutionsRequest.operator_context:type_name -> api.common.OperatorContext
 	1,  // 51: api.campaign.service.v1.ListExecutionsRequest.status:type_name -> api.campaign.service.v1.ExecutionStatus
 	5,  // 52: api.campaign.service.v1.ListExecutionsResponse.executions:type_name -> api.campaign.service.v1.CampaignExecution
-	37, // 53: api.campaign.service.v1.GetExecutionStepsRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 53: api.campaign.service.v1.GetExecutionStepsRequest.operator_context:type_name -> api.common.OperatorContext
 	6,  // 54: api.campaign.service.v1.GetExecutionStepsResponse.steps:type_name -> api.campaign.service.v1.ExecutionStepLog
-	7,  // 55: api.campaign.service.v1.CampaignService.CreateCampaign:input_type -> api.campaign.service.v1.CreateCampaignRequest
-	9,  // 56: api.campaign.service.v1.CampaignService.UpdateCampaign:input_type -> api.campaign.service.v1.UpdateCampaignRequest
-	11, // 57: api.campaign.service.v1.CampaignService.GetCampaign:input_type -> api.campaign.service.v1.GetCampaignRequest
-	13, // 58: api.campaign.service.v1.CampaignService.ListCampaigns:input_type -> api.campaign.service.v1.ListCampaignsRequest
-	15, // 59: api.campaign.service.v1.CampaignService.DeleteCampaign:input_type -> api.campaign.service.v1.DeleteCampaignRequest
-	17, // 60: api.campaign.service.v1.CampaignService.SetWorkflow:input_type -> api.campaign.service.v1.SetWorkflowRequest
-	19, // 61: api.campaign.service.v1.CampaignService.GetWorkflow:input_type -> api.campaign.service.v1.GetWorkflowRequest
-	21, // 62: api.campaign.service.v1.CampaignService.ValidateWorkflow:input_type -> api.campaign.service.v1.ValidateWorkflowRequest
-	23, // 63: api.campaign.service.v1.CampaignService.ActivateCampaign:input_type -> api.campaign.service.v1.ActivateCampaignRequest
-	25, // 64: api.campaign.service.v1.CampaignService.PauseCampaign:input_type -> api.campaign.service.v1.PauseCampaignRequest
-	27, // 65: api.campaign.service.v1.CampaignService.TriggerCampaign:input_type -> api.campaign.service.v1.TriggerCampaignRequest
-	29, // 66: api.campaign.service.v1.CampaignService.GetExecution:input_type -> api.campaign.service.v1.GetExecutionRequest
-	31, // 67: api.campaign.service.v1.CampaignService.ListExecutions:input_type -> api.campaign.service.v1.ListExecutionsRequest
-	33, // 68: api.campaign.service.v1.CampaignService.GetExecutionSteps:input_type -> api.campaign.service.v1.GetExecutionStepsRequest
-	8,  // 69: api.campaign.service.v1.CampaignService.CreateCampaign:output_type -> api.campaign.service.v1.CreateCampaignResponse
-	10, // 70: api.campaign.service.v1.CampaignService.UpdateCampaign:output_type -> api.campaign.service.v1.UpdateCampaignResponse
-	12, // 71: api.campaign.service.v1.CampaignService.GetCampaign:output_type -> api.campaign.service.v1.GetCampaignResponse
-	14, // 72: api.campaign.service.v1.CampaignService.ListCampaigns:output_type -> api.campaign.service.v1.ListCampaignsResponse
-	16, // 73: api.campaign.service.v1.CampaignService.DeleteCampaign:output_type -> api.campaign.service.v1.DeleteCampaignResponse
-	18, // 74: api.campaign.service.v1.CampaignService.SetWorkflow:output_type -> api.campaign.service.v1.SetWorkflowResponse
-	20, // 75: api.campaign.service.v1.CampaignService.GetWorkflow:output_type -> api.campaign.service.v1.GetWorkflowResponse
-	22, // 76: api.campaign.service.v1.CampaignService.ValidateWorkflow:output_type -> api.campaign.service.v1.ValidateWorkflowResponse
-	24, // 77: api.campaign.service.v1.CampaignService.ActivateCampaign:output_type -> api.campaign.service.v1.ActivateCampaignResponse
-	26, // 78: api.campaign.service.v1.CampaignService.PauseCampaign:output_type -> api.campaign.service.v1.PauseCampaignResponse
-	28, // 79: api.campaign.service.v1.CampaignService.TriggerCampaign:output_type -> api.campaign.service.v1.TriggerCampaignResponse
-	30, // 80: api.campaign.service.v1.CampaignService.GetExecution:output_type -> api.campaign.service.v1.GetExecutionResponse
-	32, // 81: api.campaign.service.v1.CampaignService.ListExecutions:output_type -> api.campaign.service.v1.ListExecutionsResponse
-	34, // 82: api.campaign.service.v1.CampaignService.GetExecutionSteps:output_type -> api.campaign.service.v1.GetExecutionStepsResponse
-	69, // [69:83] is the sub-list for method output_type
-	55, // [55:69] is the sub-list for method input_type
-	55, // [55:55] is the sub-list for extension type_name
-	55, // [55:55] is the sub-list for extension extendee
-	0,  // [0:55] is the sub-list for field type_name
+	45, // 55: api.campaign.service.v1.GetWorkflowSchemaRequest.operator_context:type_name -> api.common.OperatorContext
+	37, // 56: api.campaign.service.v1.GetWorkflowSchemaResponse.triggers:type_name -> api.campaign.service.v1.TriggerSchema
+	38, // 57: api.campaign.service.v1.GetWorkflowSchemaResponse.operators:type_name -> api.campaign.service.v1.OperatorSchema
+	39, // 58: api.campaign.service.v1.GetWorkflowSchemaResponse.actions:type_name -> api.campaign.service.v1.ActionSchema
+	41, // 59: api.campaign.service.v1.GetWorkflowSchemaResponse.data_sources:type_name -> api.campaign.service.v1.DataSourceSchema
+	40, // 60: api.campaign.service.v1.TriggerSchema.config_fields:type_name -> api.campaign.service.v1.ConfigFieldSchema
+	40, // 61: api.campaign.service.v1.ActionSchema.config_fields:type_name -> api.campaign.service.v1.ConfigFieldSchema
+	42, // 62: api.campaign.service.v1.DataSourceSchema.fields:type_name -> api.campaign.service.v1.DataFieldSchema
+	7,  // 63: api.campaign.service.v1.CampaignService.CreateCampaign:input_type -> api.campaign.service.v1.CreateCampaignRequest
+	9,  // 64: api.campaign.service.v1.CampaignService.UpdateCampaign:input_type -> api.campaign.service.v1.UpdateCampaignRequest
+	11, // 65: api.campaign.service.v1.CampaignService.GetCampaign:input_type -> api.campaign.service.v1.GetCampaignRequest
+	13, // 66: api.campaign.service.v1.CampaignService.ListCampaigns:input_type -> api.campaign.service.v1.ListCampaignsRequest
+	15, // 67: api.campaign.service.v1.CampaignService.DeleteCampaign:input_type -> api.campaign.service.v1.DeleteCampaignRequest
+	17, // 68: api.campaign.service.v1.CampaignService.SetWorkflow:input_type -> api.campaign.service.v1.SetWorkflowRequest
+	19, // 69: api.campaign.service.v1.CampaignService.GetWorkflow:input_type -> api.campaign.service.v1.GetWorkflowRequest
+	21, // 70: api.campaign.service.v1.CampaignService.ValidateWorkflow:input_type -> api.campaign.service.v1.ValidateWorkflowRequest
+	23, // 71: api.campaign.service.v1.CampaignService.ActivateCampaign:input_type -> api.campaign.service.v1.ActivateCampaignRequest
+	25, // 72: api.campaign.service.v1.CampaignService.PauseCampaign:input_type -> api.campaign.service.v1.PauseCampaignRequest
+	27, // 73: api.campaign.service.v1.CampaignService.TriggerCampaign:input_type -> api.campaign.service.v1.TriggerCampaignRequest
+	29, // 74: api.campaign.service.v1.CampaignService.GetExecution:input_type -> api.campaign.service.v1.GetExecutionRequest
+	31, // 75: api.campaign.service.v1.CampaignService.ListExecutions:input_type -> api.campaign.service.v1.ListExecutionsRequest
+	33, // 76: api.campaign.service.v1.CampaignService.GetExecutionSteps:input_type -> api.campaign.service.v1.GetExecutionStepsRequest
+	35, // 77: api.campaign.service.v1.CampaignService.GetWorkflowSchema:input_type -> api.campaign.service.v1.GetWorkflowSchemaRequest
+	8,  // 78: api.campaign.service.v1.CampaignService.CreateCampaign:output_type -> api.campaign.service.v1.CreateCampaignResponse
+	10, // 79: api.campaign.service.v1.CampaignService.UpdateCampaign:output_type -> api.campaign.service.v1.UpdateCampaignResponse
+	12, // 80: api.campaign.service.v1.CampaignService.GetCampaign:output_type -> api.campaign.service.v1.GetCampaignResponse
+	14, // 81: api.campaign.service.v1.CampaignService.ListCampaigns:output_type -> api.campaign.service.v1.ListCampaignsResponse
+	16, // 82: api.campaign.service.v1.CampaignService.DeleteCampaign:output_type -> api.campaign.service.v1.DeleteCampaignResponse
+	18, // 83: api.campaign.service.v1.CampaignService.SetWorkflow:output_type -> api.campaign.service.v1.SetWorkflowResponse
+	20, // 84: api.campaign.service.v1.CampaignService.GetWorkflow:output_type -> api.campaign.service.v1.GetWorkflowResponse
+	22, // 85: api.campaign.service.v1.CampaignService.ValidateWorkflow:output_type -> api.campaign.service.v1.ValidateWorkflowResponse
+	24, // 86: api.campaign.service.v1.CampaignService.ActivateCampaign:output_type -> api.campaign.service.v1.ActivateCampaignResponse
+	26, // 87: api.campaign.service.v1.CampaignService.PauseCampaign:output_type -> api.campaign.service.v1.PauseCampaignResponse
+	28, // 88: api.campaign.service.v1.CampaignService.TriggerCampaign:output_type -> api.campaign.service.v1.TriggerCampaignResponse
+	30, // 89: api.campaign.service.v1.CampaignService.GetExecution:output_type -> api.campaign.service.v1.GetExecutionResponse
+	32, // 90: api.campaign.service.v1.CampaignService.ListExecutions:output_type -> api.campaign.service.v1.ListExecutionsResponse
+	34, // 91: api.campaign.service.v1.CampaignService.GetExecutionSteps:output_type -> api.campaign.service.v1.GetExecutionStepsResponse
+	36, // 92: api.campaign.service.v1.CampaignService.GetWorkflowSchema:output_type -> api.campaign.service.v1.GetWorkflowSchemaResponse
+	78, // [78:93] is the sub-list for method output_type
+	63, // [63:78] is the sub-list for method input_type
+	63, // [63:63] is the sub-list for extension type_name
+	63, // [63:63] is the sub-list for extension extendee
+	0,  // [0:63] is the sub-list for field type_name
 }
 
 func init() { file_campaign_service_v1_campaign_proto_init() }
@@ -2811,7 +3423,7 @@ func file_campaign_service_v1_campaign_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_campaign_service_v1_campaign_proto_rawDesc), len(file_campaign_service_v1_campaign_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   32,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

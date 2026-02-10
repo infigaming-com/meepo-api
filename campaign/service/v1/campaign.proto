@@ -35,6 +35,9 @@ service CampaignService {
   rpc GetExecution(GetExecutionRequest) returns (GetExecutionResponse);
   rpc ListExecutions(ListExecutionsRequest) returns (ListExecutionsResponse);
   rpc GetExecutionSteps(GetExecutionStepsRequest) returns (GetExecutionStepsResponse);
+
+  // Workflow schema
+  rpc GetWorkflowSchema(GetWorkflowSchemaRequest) returns (GetWorkflowSchemaResponse);
 }
 
 // Campaign status
@@ -320,4 +323,67 @@ message GetExecutionStepsRequest {
 
 message GetExecutionStepsResponse {
   repeated ExecutionStepLog steps = 1;
+}
+
+// GetWorkflowSchema - returns all available workflow components for building workflows
+message GetWorkflowSchemaRequest {
+  api.common.OperatorContext operator_context = 1;
+}
+
+message GetWorkflowSchemaResponse {
+  string version = 1;  // Schema version "1.0"
+  repeated TriggerSchema triggers = 2;
+  repeated OperatorSchema operators = 3;
+  repeated ActionSchema actions = 4;
+  repeated DataSourceSchema data_sources = 5;
+}
+
+// TriggerSchema describes a trigger type
+message TriggerSchema {
+  string type = 1;           // "event", "manual", "segment", "schedule"
+  string name = 2;           // Display name
+  string description = 3;
+  repeated ConfigFieldSchema config_fields = 4;
+  repeated string available_events = 5;  // For event type
+}
+
+// OperatorSchema describes a comparison operator
+message OperatorSchema {
+  string symbol = 1;         // ">=", "==", "contains", etc.
+  string name = 2;           // "Greater Than or Equal"
+  string description = 3;
+  repeated string left_types = 4;   // ["numeric", "string", "any"]
+  repeated string right_types = 5;
+}
+
+// ActionSchema describes an action type
+message ActionSchema {
+  string type = 1;           // "send_email", "send_sms", etc.
+  string name = 2;           // "Send Email"
+  string description = 3;
+  bool implemented = 4;      // Whether executor exists
+  repeated ConfigFieldSchema config_fields = 5;
+}
+
+// ConfigFieldSchema describes a configuration field
+message ConfigFieldSchema {
+  string name = 1;           // "asset_id", "event_name"
+  string type = 2;           // "int64", "string", "map"
+  bool required = 3;
+  string description = 4;
+  string default_value = 5;
+}
+
+// DataSourceSchema describes a data source prefix
+message DataSourceSchema {
+  string prefix = 1;         // "user", "trigger", "wallet"
+  string description = 2;
+  repeated DataFieldSchema fields = 3;
+}
+
+// DataFieldSchema describes a data field
+message DataFieldSchema {
+  string name = 1;           // "vip_level", "email"
+  string type = 2;           // "int64", "string", "float64", "bool"
+  string description = 3;
 }
