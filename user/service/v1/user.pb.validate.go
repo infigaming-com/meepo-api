@@ -32016,6 +32016,108 @@ var _ interface {
 	ErrorName() string
 } = GetRewardHistoryRequestValidationError{}
 
+// Validate checks the field values on ListUserFreeRewardsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserFreeRewardsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserFreeRewardsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUserFreeRewardsRequestMultiError, or nil if none found.
+func (m *ListUserFreeRewardsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserFreeRewardsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListUserFreeRewardsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserFreeRewardsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListUserFreeRewardsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListUserFreeRewardsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserFreeRewardsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserFreeRewardsRequestMultiError) AllErrors() []error { return m }
+
+// ListUserFreeRewardsRequestValidationError is the validation error returned
+// by ListUserFreeRewardsRequest.Validate if the designated constraints aren't met.
+type ListUserFreeRewardsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserFreeRewardsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserFreeRewardsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserFreeRewardsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserFreeRewardsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserFreeRewardsRequestValidationError) ErrorName() string {
+	return "ListUserFreeRewardsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserFreeRewardsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserFreeRewardsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserFreeRewardsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserFreeRewardsRequestValidationError{}
+
 // Validate checks the field values on GetRewardHistoryResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -32051,6 +32153,8 @@ func (m *GetRewardHistoryResponse) validate(all bool) error {
 	// no validation rules for WeeklyRewardsUsd
 
 	// no validation rules for MonthlyRewardsUsd
+
+	// no validation rules for DailyLossbackUsd
 
 	if len(errors) > 0 {
 		return GetRewardHistoryResponseMultiError(errors)
