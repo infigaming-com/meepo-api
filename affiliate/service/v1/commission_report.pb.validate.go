@@ -1825,9 +1825,63 @@ func (m *ContributionReportItem) validate(all bool) error {
 
 	// no validation rules for Tier
 
-	// no validation rules for RegDate
+	if all {
+		switch v := interface{}(m.GetRegDate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ContributionReportItemValidationError{
+					field:  "RegDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ContributionReportItemValidationError{
+					field:  "RegDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegDate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ContributionReportItemValidationError{
+				field:  "RegDate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for FtdDate
+	if all {
+		switch v := interface{}(m.GetFtdDate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ContributionReportItemValidationError{
+					field:  "FtdDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ContributionReportItemValidationError{
+					field:  "FtdDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdDate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ContributionReportItemValidationError{
+				field:  "FtdDate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for IsQualified
 
@@ -1879,7 +1933,34 @@ func (m *ContributionReportItem) validate(all bool) error {
 
 	// no validation rules for ProviderRoyaltiesReportingCurrency
 
-	// no validation rules for LastLoginTime
+	if all {
+		switch v := interface{}(m.GetLastLoginTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ContributionReportItemValidationError{
+					field:  "LastLoginTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ContributionReportItemValidationError{
+					field:  "LastLoginTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastLoginTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ContributionReportItemValidationError{
+				field:  "LastLoginTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for RegistrationDeviceType
 

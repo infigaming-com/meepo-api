@@ -10,6 +10,7 @@ import (
 	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -1638,14 +1639,14 @@ func (x *ListReferralContributionReportRequest) GetPageSize() int32 {
 type ContributionReportItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Grouped date based on period
-	Date        string `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	RootId      int64  `protobuf:"varint,2,opt,name=root_id,json=rootId,proto3" json:"root_id,omitempty"`                // ROOT user (T0 perspective)
-	ParentId    int64  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`          // Sub-UID's direct referrer
-	SubUid      int64  `protobuf:"varint,4,opt,name=sub_uid,json=subUid,proto3" json:"sub_uid,omitempty"`                // The subordinate user
-	Tier        int32  `protobuf:"varint,5,opt,name=tier,proto3" json:"tier,omitempty"`                                  // Sub-UID's tier relative to ROOT (1 to MaxTier)
-	RegDate     int64  `protobuf:"varint,6,opt,name=reg_date,json=regDate,proto3" json:"reg_date,omitempty"`             // Registration time (milliseconds)
-	FtdDate     int64  `protobuf:"varint,7,opt,name=ftd_date,json=ftdDate,proto3" json:"ftd_date,omitempty"`             // First deposit time (milliseconds), 0 if no FTD
-	IsQualified bool   `protobuf:"varint,8,opt,name=is_qualified,json=isQualified,proto3" json:"is_qualified,omitempty"` // Has met conversion conditions
+	Date        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	RootId      int64                  `protobuf:"varint,2,opt,name=root_id,json=rootId,proto3" json:"root_id,omitempty"`                // ROOT user (T0 perspective)
+	ParentId    int64                  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`          // Sub-UID's direct referrer
+	SubUid      int64                  `protobuf:"varint,4,opt,name=sub_uid,json=subUid,proto3" json:"sub_uid,omitempty"`                // The subordinate user
+	Tier        int32                  `protobuf:"varint,5,opt,name=tier,proto3" json:"tier,omitempty"`                                  // Sub-UID's tier relative to ROOT (1 to MaxTier)
+	RegDate     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=reg_date,json=regDate,proto3" json:"reg_date,omitempty"`              // Registration time (from users.created_at)
+	FtdDate     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=ftd_date,json=ftdDate,proto3" json:"ftd_date,omitempty"`              // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
+	IsQualified bool                   `protobuf:"varint,8,opt,name=is_qualified,json=isQualified,proto3" json:"is_qualified,omitempty"` // Has met conversion conditions
 	// Operator context
 	OperatorId           int64  `protobuf:"varint,9,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	SystemOperatorId     int64  `protobuf:"varint,10,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
@@ -1674,11 +1675,11 @@ type ContributionReportItem struct {
 	PaymentCostReportingCurrency       string `protobuf:"bytes,36,opt,name=payment_cost_reporting_currency,json=paymentCostReportingCurrency,proto3" json:"payment_cost_reporting_currency,omitempty"`
 	ProviderRoyaltiesReportingCurrency string `protobuf:"bytes,37,opt,name=provider_royalties_reporting_currency,json=providerRoyaltiesReportingCurrency,proto3" json:"provider_royalties_reporting_currency,omitempty"`
 	// User activity fields (from user_events table)
-	LastLoginTime          int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
-	RegistrationDeviceType string `protobuf:"bytes,41,opt,name=registration_device_type,json=registrationDeviceType,proto3" json:"registration_device_type,omitempty"` // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
-	RegistrationIp         string `protobuf:"bytes,42,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	LastLoginDeviceType    string `protobuf:"bytes,43,opt,name=last_login_device_type,json=lastLoginDeviceType,proto3" json:"last_login_device_type,omitempty"` // Parsed from UserAgent
-	LastLoginIp            string `protobuf:"bytes,44,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	LastLoginTime          *timestamppb.Timestamp `protobuf:"bytes,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
+	RegistrationDeviceType string                 `protobuf:"bytes,41,opt,name=registration_device_type,json=registrationDeviceType,proto3" json:"registration_device_type,omitempty"` // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
+	RegistrationIp         string                 `protobuf:"bytes,42,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	LastLoginDeviceType    string                 `protobuf:"bytes,43,opt,name=last_login_device_type,json=lastLoginDeviceType,proto3" json:"last_login_device_type,omitempty"` // Parsed from UserAgent
+	LastLoginIp            string                 `protobuf:"bytes,44,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1748,18 +1749,18 @@ func (x *ContributionReportItem) GetTier() int32 {
 	return 0
 }
 
-func (x *ContributionReportItem) GetRegDate() int64 {
+func (x *ContributionReportItem) GetRegDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RegDate
 	}
-	return 0
+	return nil
 }
 
-func (x *ContributionReportItem) GetFtdDate() int64 {
+func (x *ContributionReportItem) GetFtdDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.FtdDate
 	}
-	return 0
+	return nil
 }
 
 func (x *ContributionReportItem) GetIsQualified() bool {
@@ -1937,11 +1938,11 @@ func (x *ContributionReportItem) GetProviderRoyaltiesReportingCurrency() string 
 	return ""
 }
 
-func (x *ContributionReportItem) GetLastLoginTime() int64 {
+func (x *ContributionReportItem) GetLastLoginTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastLoginTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ContributionReportItem) GetRegistrationDeviceType() string {
@@ -4134,7 +4135,7 @@ var File_affiliate_service_v1_commission_report_proto protoreflect.FileDescripto
 
 const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\n" +
-	",affiliate/service/v1/commission_report.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\"\xb1\x03\n" +
+	",affiliate/service/v1/commission_report.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb1\x03\n" +
 	"\x1cListReferralVTGReportRequest\x12\x16\n" +
 	"\x06period\x18\x01 \x01(\tR\x06period\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
@@ -4321,15 +4322,15 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\r_is_qualifiedB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd2\f\n" +
+	"_page_size\"\xa6\r\n" +
 	"\x16ContributionReportItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x17\n" +
 	"\aroot_id\x18\x02 \x01(\x03R\x06rootId\x12\x1b\n" +
 	"\tparent_id\x18\x03 \x01(\x03R\bparentId\x12\x17\n" +
 	"\asub_uid\x18\x04 \x01(\x03R\x06subUid\x12\x12\n" +
-	"\x04tier\x18\x05 \x01(\x05R\x04tier\x12\x19\n" +
-	"\breg_date\x18\x06 \x01(\x03R\aregDate\x12\x19\n" +
-	"\bftd_date\x18\a \x01(\x03R\aftdDate\x12!\n" +
+	"\x04tier\x18\x05 \x01(\x05R\x04tier\x125\n" +
+	"\breg_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aregDate\x125\n" +
+	"\bftd_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\aftdDate\x12!\n" +
 	"\fis_qualified\x18\b \x01(\bR\visQualified\x12\x1f\n" +
 	"\voperator_id\x18\t \x01(\x03R\n" +
 	"operatorId\x12,\n" +
@@ -4357,8 +4358,8 @@ const file_affiliate_service_v1_commission_report_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18\" \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18# \x01(\tR\x14b2cReportingCurrency\x12E\n" +
 	"\x1fpayment_cost_reporting_currency\x18$ \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
-	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12&\n" +
-	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x128\n" +
+	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12B\n" +
+	"\x0flast_login_time\x18( \x01(\v2\x1a.google.protobuf.TimestampR\rlastLoginTime\x128\n" +
 	"\x18registration_device_type\x18) \x01(\tR\x16registrationDeviceType\x12'\n" +
 	"\x0fregistration_ip\x18* \x01(\tR\x0eregistrationIp\x123\n" +
 	"\x16last_login_device_type\x18+ \x01(\tR\x13lastLoginDeviceType\x12\"\n" +
@@ -4657,6 +4658,7 @@ var file_affiliate_service_v1_commission_report_proto_goTypes = []any{
 	(*ListAffiliateSnapshotReportResponse)(nil),    // 21: api.affiliate.service.v1.ListAffiliateSnapshotReportResponse
 	(*common.OperatorContextFilters)(nil),          // 22: api.common.OperatorContextFilters
 	(*common.OperatorContext)(nil),                 // 23: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                  // 24: google.protobuf.Timestamp
 }
 var file_affiliate_service_v1_commission_report_proto_depIdxs = []int32{
 	22, // 0: api.affiliate.service.v1.ListReferralVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
@@ -4671,21 +4673,24 @@ var file_affiliate_service_v1_commission_report_proto_depIdxs = []int32{
 	8,  // 9: api.affiliate.service.v1.ListReferralSnapshotReportResponse.items:type_name -> api.affiliate.service.v1.SnapshotReportItem
 	22, // 10: api.affiliate.service.v1.ListReferralContributionReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	23, // 11: api.affiliate.service.v1.ListReferralContributionReportRequest.operator_context:type_name -> api.common.OperatorContext
-	11, // 12: api.affiliate.service.v1.ListReferralContributionReportResponse.items:type_name -> api.affiliate.service.v1.ContributionReportItem
-	22, // 13: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	23, // 14: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context:type_name -> api.common.OperatorContext
-	14, // 15: api.affiliate.service.v1.ListReferralLifetimeReportResponse.items:type_name -> api.affiliate.service.v1.LifetimeReportItem
-	22, // 16: api.affiliate.service.v1.ListAffiliateVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	23, // 17: api.affiliate.service.v1.ListAffiliateVTGReportRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 18: api.affiliate.service.v1.ListAffiliateVTGReportResponse.items:type_name -> api.affiliate.service.v1.AffiliateVTGReportItem
-	22, // 19: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	23, // 20: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest.operator_context:type_name -> api.common.OperatorContext
-	20, // 21: api.affiliate.service.v1.ListAffiliateSnapshotReportResponse.items:type_name -> api.affiliate.service.v1.AffiliateSnapshotReportItem
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	24, // 12: api.affiliate.service.v1.ContributionReportItem.reg_date:type_name -> google.protobuf.Timestamp
+	24, // 13: api.affiliate.service.v1.ContributionReportItem.ftd_date:type_name -> google.protobuf.Timestamp
+	24, // 14: api.affiliate.service.v1.ContributionReportItem.last_login_time:type_name -> google.protobuf.Timestamp
+	11, // 15: api.affiliate.service.v1.ListReferralContributionReportResponse.items:type_name -> api.affiliate.service.v1.ContributionReportItem
+	22, // 16: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 17: api.affiliate.service.v1.ListReferralLifetimeReportRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 18: api.affiliate.service.v1.ListReferralLifetimeReportResponse.items:type_name -> api.affiliate.service.v1.LifetimeReportItem
+	22, // 19: api.affiliate.service.v1.ListAffiliateVTGReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 20: api.affiliate.service.v1.ListAffiliateVTGReportRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 21: api.affiliate.service.v1.ListAffiliateVTGReportResponse.items:type_name -> api.affiliate.service.v1.AffiliateVTGReportItem
+	22, // 22: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	23, // 23: api.affiliate.service.v1.ListAffiliateSnapshotReportRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 24: api.affiliate.service.v1.ListAffiliateSnapshotReportResponse.items:type_name -> api.affiliate.service.v1.AffiliateSnapshotReportItem
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_commission_report_proto_init() }

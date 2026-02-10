@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.report.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "backoffice/service/v1/backoffice_report.proto";
 
@@ -419,8 +420,8 @@ message ReferralContributionReportDataItem {
   int64 sub_uid = 4;      // The subordinate user
   int32 tier = 5;         // Sub-UID's tier relative to ROOT (1-10)
 
-  int64 reg_date = 6;     // Registration time (from user_referral_relations.user_stats.register_at)
-  int64 ftd_date = 7;     // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
+  google.protobuf.Timestamp reg_date = 6;     // Registration time (from users.created_at)
+  google.protobuf.Timestamp ftd_date = 7;     // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
   bool is_qualified = 8;  // Has met conversion conditions (from user_stats.has_met_conversion_conditions)
 
   // Operator context
@@ -450,7 +451,7 @@ message ReferralContributionReportDataItem {
   string provider_royalties_reporting_currency = 37;
 
   // User activity fields (from user_events table)
-  int64 last_login_time = 40;
+  google.protobuf.Timestamp last_login_time = 40;
   string registration_device_type = 41;  // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
   string registration_ip = 42;
   string last_login_device_type = 43;    // Parsed from UserAgent
