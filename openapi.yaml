@@ -8242,6 +8242,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/bonus/free-rewards/list:
+        post:
+            tags:
+                - User
+            description: List user free rewards (free spins + free bets) from wallet service
+            operationId: User_ListUserFreeRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.ListUserFreeRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListUserFreeRewardsResponse'
     /v1/user/bonus/reward-history/get:
         post:
             tags:
@@ -24245,6 +24264,7 @@ components:
                         - VIP_REWARD_KIND_RAKEBACK_DAILY
                         - VIP_REWARD_KIND_RAKEBACK_WEEKLY
                         - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                        - VIP_REWARD_KIND_DAILY_LOSSBACK
                     type: string
                     format: enum
         api.user.service.v1.CloseAccountRequest:
@@ -24269,6 +24289,7 @@ components:
                         - VIP_REWARD_KIND_RAKEBACK_DAILY
                         - VIP_REWARD_KIND_RAKEBACK_WEEKLY
                         - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                        - VIP_REWARD_KIND_DAILY_LOSSBACK
                     type: string
                     format: enum
         api.user.service.v1.DeleteOperatorApexDomainResponse:
@@ -24501,6 +24522,8 @@ components:
                 weeklyRewardsUsd:
                     type: string
                 monthlyRewardsUsd:
+                    type: string
+                dailyLossbackUsd:
                     type: string
         api.user.service.v1.GetTelegramLoginInfoResponse:
             type: object
@@ -24989,6 +25012,9 @@ components:
                 reportingCurrency:
                     type: string
             description: OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
+        api.user.service.v1.ListUserFreeRewardsRequest:
+            type: object
+            properties: {}
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -26010,6 +26036,7 @@ components:
                         - VIP_REWARD_KIND_RAKEBACK_DAILY
                         - VIP_REWARD_KIND_RAKEBACK_WEEKLY
                         - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                        - VIP_REWARD_KIND_DAILY_LOSSBACK
                     type: string
                     format: enum
                 claimable:
@@ -26635,6 +26662,77 @@ components:
                 extra:
                     type: string
                     format: bytes
+        api.wallet.service.v1.FreeBetDetail:
+            type: object
+            properties:
+                id:
+                    type: string
+                sourceType:
+                    type: string
+                sourceId:
+                    type: string
+                currency:
+                    type: string
+                    description: Currency info
+                reportingCurrency:
+                    type: string
+                rewardType:
+                    type: string
+                    description: Reward config
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+                totalWinnings:
+                    type: string
+                    description: Total winnings aggregated across all reward items
+                totalWinningsUsd:
+                    type: string
+                totalWinningsReportingCurrency:
+                    type: string
+                rewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetRewardDetail'
+                    description: Per-template reward details
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: Free bet details - all fields from UserFreeBet DO
+        api.wallet.service.v1.FreeBetRewardDetail:
+            type: object
+            properties:
+                templateId:
+                    type: string
+                amount:
+                    type: string
+                usedCount:
+                    type: integer
+                    description: Usage status
+                    format: int32
+                isUsed:
+                    type: boolean
+                freeBetValidity:
+                    type: string
+                    description: Expiration
+                expiredAt:
+                    type: string
+                winnings:
+                    type: string
+                    description: Winnings for this specific free bet
+                winningsUsd:
+                    type: string
+                winningsReportingCurrency:
+                    type: string
+                extra:
+                    type: string
+                    description: Optional extra data
+                    format: bytes
+            description: Single free bet reward item - from FreeBetRewardItem in JSONB
         api.wallet.service.v1.FreeSpinConfig:
             type: object
             properties:
@@ -26671,6 +26769,82 @@ components:
                     format: int32
                 freeSpinValidity:
                     type: string
+        api.wallet.service.v1.FreeSpinDetail:
+            type: object
+            properties:
+                id:
+                    type: string
+                sourceType:
+                    type: string
+                sourceId:
+                    type: string
+                settlementCurrency:
+                    type: string
+                    description: Currency info
+                currency:
+                    type: string
+                reportingCurrency:
+                    type: string
+                rewardType:
+                    type: string
+                    description: Reward config
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                rewardValidity:
+                    type: string
+                totalWinnings:
+                    type: string
+                    description: Total winnings aggregated across all reward items
+                totalWinningsUsd:
+                    type: string
+                totalWinningsReportingCurrency:
+                    type: string
+                rewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinRewardDetail'
+                    description: Per-game reward details
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: Free spin details - all fields from UserFreeSpin DO
+        api.wallet.service.v1.FreeSpinRewardDetail:
+            type: object
+            properties:
+                providerId:
+                    type: string
+                gameId:
+                    type: string
+                level:
+                    type: integer
+                    format: int32
+                spinCount:
+                    type: integer
+                    description: Spin counts
+                    format: int32
+                usedCount:
+                    type: integer
+                    format: int32
+                remainingCount:
+                    type: integer
+                    format: int32
+                freeSpinValidity:
+                    type: string
+                    description: Expiration
+                expiredAt:
+                    type: string
+                winnings:
+                    type: string
+                    description: Winnings for this specific game
+                winningsUsd:
+                    type: string
+                winningsReportingCurrency:
+                    type: string
+            description: Single free spin reward item - from FreeSpinRewardItem in JSONB
         api.wallet.service.v1.GenerateOneTimePromoCodesResponse:
             type: object
             properties:
@@ -27346,6 +27520,17 @@ components:
                 totalCount:
                     type: integer
                     format: int32
+        api.wallet.service.v1.ListUserFreeRewardsResponse:
+            type: object
+            properties:
+                freeSpins:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinDetail'
+                freeBets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FreeBetDetail'
         api.wallet.service.v1.ManualAdjustCreditTurnoverFieldResponse:
             type: object
             properties:
