@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.affiliate.service.v1;
 
 import "common/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
 option java_multiple_files = true;
@@ -264,8 +265,8 @@ message ContributionReportItem {
   int64 sub_uid = 4;      // The subordinate user
   int32 tier = 5;         // Sub-UID's tier relative to ROOT (1 to MaxTier)
 
-  int64 reg_date = 6;     // Registration time (milliseconds)
-  int64 ftd_date = 7;     // First deposit time (milliseconds), 0 if no FTD
+  google.protobuf.Timestamp reg_date = 6;     // Registration time (from users.created_at)
+  google.protobuf.Timestamp ftd_date = 7;     // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
   bool is_qualified = 8;  // Has met conversion conditions
 
   // Operator context
@@ -299,7 +300,7 @@ message ContributionReportItem {
   string provider_royalties_reporting_currency = 37;
 
   // User activity fields (from user_events table)
-  int64 last_login_time = 40;
+  google.protobuf.Timestamp last_login_time = 40;
   string registration_device_type = 41;  // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
   string registration_ip = 42;
   string last_login_device_type = 43;    // Parsed from UserAgent

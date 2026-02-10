@@ -4488,9 +4488,63 @@ func (m *ReferralContributionReportDataItem) validate(all bool) error {
 
 	// no validation rules for Tier
 
-	// no validation rules for RegDate
+	if all {
+		switch v := interface{}(m.GetRegDate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReferralContributionReportDataItemValidationError{
+					field:  "RegDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReferralContributionReportDataItemValidationError{
+					field:  "RegDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegDate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReferralContributionReportDataItemValidationError{
+				field:  "RegDate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for FtdDate
+	if all {
+		switch v := interface{}(m.GetFtdDate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReferralContributionReportDataItemValidationError{
+					field:  "FtdDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReferralContributionReportDataItemValidationError{
+					field:  "FtdDate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdDate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReferralContributionReportDataItemValidationError{
+				field:  "FtdDate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for IsQualified
 
@@ -4534,7 +4588,34 @@ func (m *ReferralContributionReportDataItem) validate(all bool) error {
 
 	// no validation rules for ProviderRoyaltiesReportingCurrency
 
-	// no validation rules for LastLoginTime
+	if all {
+		switch v := interface{}(m.GetLastLoginTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReferralContributionReportDataItemValidationError{
+					field:  "LastLoginTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReferralContributionReportDataItemValidationError{
+					field:  "LastLoginTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastLoginTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReferralContributionReportDataItemValidationError{
+				field:  "LastLoginTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for RegistrationDeviceType
 

@@ -12,6 +12,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -2887,14 +2888,14 @@ func (x *ListReferralContributionReportDataRequest) GetPageSize() int32 {
 type ReferralContributionReportDataItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Grouped date based on period: "2026-01-28" (day), "2026-W05" (week), "2026-01" (month)
-	Date        string `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	RootId      int64  `protobuf:"varint,2,opt,name=root_id,json=rootId,proto3" json:"root_id,omitempty"`                // ROOT user (T0 perspective)
-	ParentId    int64  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`          // Sub-UID's direct referrer (tier1_user_id of sub_uid)
-	SubUid      int64  `protobuf:"varint,4,opt,name=sub_uid,json=subUid,proto3" json:"sub_uid,omitempty"`                // The subordinate user
-	Tier        int32  `protobuf:"varint,5,opt,name=tier,proto3" json:"tier,omitempty"`                                  // Sub-UID's tier relative to ROOT (1-10)
-	RegDate     int64  `protobuf:"varint,6,opt,name=reg_date,json=regDate,proto3" json:"reg_date,omitempty"`             // Registration time (from user_referral_relations.user_stats.register_at)
-	FtdDate     int64  `protobuf:"varint,7,opt,name=ftd_date,json=ftdDate,proto3" json:"ftd_date,omitempty"`             // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
-	IsQualified bool   `protobuf:"varint,8,opt,name=is_qualified,json=isQualified,proto3" json:"is_qualified,omitempty"` // Has met conversion conditions (from user_stats.has_met_conversion_conditions)
+	Date        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	RootId      int64                  `protobuf:"varint,2,opt,name=root_id,json=rootId,proto3" json:"root_id,omitempty"`                // ROOT user (T0 perspective)
+	ParentId    int64                  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`          // Sub-UID's direct referrer (tier1_user_id of sub_uid)
+	SubUid      int64                  `protobuf:"varint,4,opt,name=sub_uid,json=subUid,proto3" json:"sub_uid,omitempty"`                // The subordinate user
+	Tier        int32                  `protobuf:"varint,5,opt,name=tier,proto3" json:"tier,omitempty"`                                  // Sub-UID's tier relative to ROOT (1-10)
+	RegDate     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=reg_date,json=regDate,proto3" json:"reg_date,omitempty"`              // Registration time (from users.created_at)
+	FtdDate     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=ftd_date,json=ftdDate,proto3" json:"ftd_date,omitempty"`              // First deposit time (from user_stats.stats_by_currency.*.ftd_at)
+	IsQualified bool                   `protobuf:"varint,8,opt,name=is_qualified,json=isQualified,proto3" json:"is_qualified,omitempty"` // Has met conversion conditions (from user_stats.has_met_conversion_conditions)
 	// Operator context
 	OperatorId         int64 `protobuf:"varint,9,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	SystemOperatorId   int64 `protobuf:"varint,10,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
@@ -2919,11 +2920,11 @@ type ReferralContributionReportDataItem struct {
 	PaymentCostReportingCurrency       string `protobuf:"bytes,36,opt,name=payment_cost_reporting_currency,json=paymentCostReportingCurrency,proto3" json:"payment_cost_reporting_currency,omitempty"`
 	ProviderRoyaltiesReportingCurrency string `protobuf:"bytes,37,opt,name=provider_royalties_reporting_currency,json=providerRoyaltiesReportingCurrency,proto3" json:"provider_royalties_reporting_currency,omitempty"`
 	// User activity fields (from user_events table)
-	LastLoginTime          int64  `protobuf:"varint,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
-	RegistrationDeviceType string `protobuf:"bytes,41,opt,name=registration_device_type,json=registrationDeviceType,proto3" json:"registration_device_type,omitempty"` // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
-	RegistrationIp         string `protobuf:"bytes,42,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	LastLoginDeviceType    string `protobuf:"bytes,43,opt,name=last_login_device_type,json=lastLoginDeviceType,proto3" json:"last_login_device_type,omitempty"` // Parsed from UserAgent
-	LastLoginIp            string `protobuf:"bytes,44,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	LastLoginTime          *timestamppb.Timestamp `protobuf:"bytes,40,opt,name=last_login_time,json=lastLoginTime,proto3" json:"last_login_time,omitempty"`
+	RegistrationDeviceType string                 `protobuf:"bytes,41,opt,name=registration_device_type,json=registrationDeviceType,proto3" json:"registration_device_type,omitempty"` // Parsed from UserAgent: iPhone, Android, Mac, Windows, etc.
+	RegistrationIp         string                 `protobuf:"bytes,42,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	LastLoginDeviceType    string                 `protobuf:"bytes,43,opt,name=last_login_device_type,json=lastLoginDeviceType,proto3" json:"last_login_device_type,omitempty"` // Parsed from UserAgent
+	LastLoginIp            string                 `protobuf:"bytes,44,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2993,18 +2994,18 @@ func (x *ReferralContributionReportDataItem) GetTier() int32 {
 	return 0
 }
 
-func (x *ReferralContributionReportDataItem) GetRegDate() int64 {
+func (x *ReferralContributionReportDataItem) GetRegDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RegDate
 	}
-	return 0
+	return nil
 }
 
-func (x *ReferralContributionReportDataItem) GetFtdDate() int64 {
+func (x *ReferralContributionReportDataItem) GetFtdDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.FtdDate
 	}
-	return 0
+	return nil
 }
 
 func (x *ReferralContributionReportDataItem) GetIsQualified() bool {
@@ -3154,11 +3155,11 @@ func (x *ReferralContributionReportDataItem) GetProviderRoyaltiesReportingCurren
 	return ""
 }
 
-func (x *ReferralContributionReportDataItem) GetLastLoginTime() int64 {
+func (x *ReferralContributionReportDataItem) GetLastLoginTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastLoginTime
 	}
-	return 0
+	return nil
 }
 
 func (x *ReferralContributionReportDataItem) GetRegistrationDeviceType() string {
@@ -5464,7 +5465,7 @@ var File_report_service_v1_report_proto protoreflect.FileDescriptor
 
 const file_report_service_v1_report_proto_rawDesc = "" +
 	"\n" +
-	"\x1ereport/service/v1/report.proto\x12\x15api.report.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a-backoffice/service/v1/backoffice_report.proto\"\x85\x03\n" +
+	"\x1ereport/service/v1/report.proto\x12\x15api.report.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a-backoffice/service/v1/backoffice_report.proto\"\x85\x03\n" +
 	"\x11GetSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -5807,15 +5808,15 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\r_is_qualifiedB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9d\v\n" +
+	"_page_size\"\xf1\v\n" +
 	"\"ReferralContributionReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x17\n" +
 	"\aroot_id\x18\x02 \x01(\x03R\x06rootId\x12\x1b\n" +
 	"\tparent_id\x18\x03 \x01(\x03R\bparentId\x12\x17\n" +
 	"\asub_uid\x18\x04 \x01(\x03R\x06subUid\x12\x12\n" +
-	"\x04tier\x18\x05 \x01(\x05R\x04tier\x12\x19\n" +
-	"\breg_date\x18\x06 \x01(\x03R\aregDate\x12\x19\n" +
-	"\bftd_date\x18\a \x01(\x03R\aftdDate\x12!\n" +
+	"\x04tier\x18\x05 \x01(\x05R\x04tier\x125\n" +
+	"\breg_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aregDate\x125\n" +
+	"\bftd_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\aftdDate\x12!\n" +
 	"\fis_qualified\x18\b \x01(\bR\visQualified\x12\x1f\n" +
 	"\voperator_id\x18\t \x01(\x03R\n" +
 	"operatorId\x12,\n" +
@@ -5839,8 +5840,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18\" \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18# \x01(\tR\x14b2cReportingCurrency\x12E\n" +
 	"\x1fpayment_cost_reporting_currency\x18$ \x01(\tR\x1cpaymentCostReportingCurrency\x12Q\n" +
-	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12&\n" +
-	"\x0flast_login_time\x18( \x01(\x03R\rlastLoginTime\x128\n" +
+	"%provider_royalties_reporting_currency\x18% \x01(\tR\"providerRoyaltiesReportingCurrency\x12B\n" +
+	"\x0flast_login_time\x18( \x01(\v2\x1a.google.protobuf.TimestampR\rlastLoginTime\x128\n" +
 	"\x18registration_device_type\x18) \x01(\tR\x16registrationDeviceType\x12'\n" +
 	"\x0fregistration_ip\x18* \x01(\tR\x0eregistrationIp\x123\n" +
 	"\x16last_login_device_type\x18+ \x01(\tR\x13lastLoginDeviceType\x12\"\n" +
@@ -6186,23 +6187,24 @@ var file_report_service_v1_report_proto_goTypes = []any{
 	(*v1.TimeRange)(nil),                               // 38: api.backoffice.service.v1.TimeRange
 	(*common.OperatorContextFilters)(nil),              // 39: api.common.OperatorContextFilters
 	(*common.OperatorContext)(nil),                     // 40: api.common.OperatorContext
-	(*v1.ListSportEventsRequest)(nil),                  // 41: api.backoffice.service.v1.ListSportEventsRequest
-	(*v1.CustomerRecordReportDetailRequest)(nil),       // 42: api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	(*v1.GetSummaryResponse)(nil),                      // 43: api.backoffice.service.v1.GetSummaryResponse
-	(*v1.ListSummariesResponse)(nil),                   // 44: api.backoffice.service.v1.ListSummariesResponse
-	(*v1.GetGameSummaryResponse)(nil),                  // 45: api.backoffice.service.v1.GetGameSummaryResponse
-	(*v1.ListGameDataResponse)(nil),                    // 46: api.backoffice.service.v1.ListGameDataResponse
-	(*v1.GetPlayerGameSummaryResponse)(nil),            // 47: api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	(*v1.ListPlayerGameDataResponse)(nil),              // 48: api.backoffice.service.v1.ListPlayerGameDataResponse
-	(*v1.ListRegisterRetentionResponse)(nil),           // 49: api.backoffice.service.v1.ListRegisterRetentionResponse
-	(*v1.GetDepositSummariesResponse)(nil),             // 50: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*v1.ListDepositDetailsResponse)(nil),              // 51: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*v1.ListDepositVtgDetailsResponse)(nil),           // 52: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*v1.GetWithdrawSummariesResponse)(nil),            // 53: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*v1.ListWithdrawDetailsResponse)(nil),             // 54: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 55: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*v1.ListSportEventsResponse)(nil),                 // 56: api.backoffice.service.v1.ListSportEventsResponse
-	(*v1.CustomerRecordReportDetailResponse)(nil),      // 57: api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	(*timestamppb.Timestamp)(nil),                      // 41: google.protobuf.Timestamp
+	(*v1.ListSportEventsRequest)(nil),                  // 42: api.backoffice.service.v1.ListSportEventsRequest
+	(*v1.CustomerRecordReportDetailRequest)(nil),       // 43: api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	(*v1.GetSummaryResponse)(nil),                      // 44: api.backoffice.service.v1.GetSummaryResponse
+	(*v1.ListSummariesResponse)(nil),                   // 45: api.backoffice.service.v1.ListSummariesResponse
+	(*v1.GetGameSummaryResponse)(nil),                  // 46: api.backoffice.service.v1.GetGameSummaryResponse
+	(*v1.ListGameDataResponse)(nil),                    // 47: api.backoffice.service.v1.ListGameDataResponse
+	(*v1.GetPlayerGameSummaryResponse)(nil),            // 48: api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	(*v1.ListPlayerGameDataResponse)(nil),              // 49: api.backoffice.service.v1.ListPlayerGameDataResponse
+	(*v1.ListRegisterRetentionResponse)(nil),           // 50: api.backoffice.service.v1.ListRegisterRetentionResponse
+	(*v1.GetDepositSummariesResponse)(nil),             // 51: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*v1.ListDepositDetailsResponse)(nil),              // 52: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*v1.ListDepositVtgDetailsResponse)(nil),           // 53: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*v1.GetWithdrawSummariesResponse)(nil),            // 54: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*v1.ListWithdrawDetailsResponse)(nil),             // 55: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 56: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*v1.ListSportEventsResponse)(nil),                 // 57: api.backoffice.service.v1.ListSportEventsResponse
+	(*v1.CustomerRecordReportDetailResponse)(nil),      // 58: api.backoffice.service.v1.CustomerRecordReportDetailResponse
 }
 var file_report_service_v1_report_proto_depIdxs = []int32{
 	38, // 0: api.report.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
@@ -6257,65 +6259,68 @@ var file_report_service_v1_report_proto_depIdxs = []int32{
 	22, // 49: api.report.service.v1.ListReferralSnapshotReportDataResponse.items:type_name -> api.report.service.v1.ReferralSnapshotReportDataItem
 	39, // 50: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	40, // 51: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	25, // 52: api.report.service.v1.ListReferralContributionReportDataResponse.items:type_name -> api.report.service.v1.ReferralContributionReportDataItem
-	39, // 53: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 54: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	28, // 55: api.report.service.v1.ListReferralLifetimeReportDataResponse.items:type_name -> api.report.service.v1.ReferralLifetimeReportDataItem
-	39, // 56: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 57: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	33, // 58: api.report.service.v1.AffiliateVTGReportDataItem.lifetime_commission_gaming:type_name -> api.report.service.v1.AffiliateLifetimeCommissionGaming
-	31, // 59: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
-	39, // 60: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 61: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	35, // 62: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateCurrentPeriodGaming
-	36, // 63: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
-	0,  // 64: api.report.service.v1.ReportService.GetSummary:input_type -> api.report.service.v1.GetSummaryRequest
-	1,  // 65: api.report.service.v1.ReportService.ListSummaries:input_type -> api.report.service.v1.ListSummariesRequest
-	2,  // 66: api.report.service.v1.ReportService.GetGameDataSummary:input_type -> api.report.service.v1.GetGameSummaryRequest
-	3,  // 67: api.report.service.v1.ReportService.ListGameData:input_type -> api.report.service.v1.ListGameDataRequest
-	4,  // 68: api.report.service.v1.ReportService.GetPlayerGameDataSummary:input_type -> api.report.service.v1.GetPlayerGameSummaryRequest
-	5,  // 69: api.report.service.v1.ReportService.ListPlayerGameData:input_type -> api.report.service.v1.ListPlayerGameDataRequest
-	10, // 70: api.report.service.v1.ReportService.ListRegisterRetention:input_type -> api.report.service.v1.ListRegisterRetentionRequest
-	6,  // 71: api.report.service.v1.ReportService.GetDepositSummaries:input_type -> api.report.service.v1.GetDepositSummariesRequest
-	8,  // 72: api.report.service.v1.ReportService.ListDepositDetails:input_type -> api.report.service.v1.ListDepositDetailsRequest
-	11, // 73: api.report.service.v1.ReportService.ListDepositVtgDetails:input_type -> api.report.service.v1.ListDepositVtgDetailsRequest
-	7,  // 74: api.report.service.v1.ReportService.GetWithdrawSummaries:input_type -> api.report.service.v1.GetWithdrawSummariesRequest
-	9,  // 75: api.report.service.v1.ReportService.ListWithdrawDetails:input_type -> api.report.service.v1.ListWithdrawDetailsRequest
-	12, // 76: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
-	41, // 77: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	42, // 78: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	18, // 79: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
-	21, // 80: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
-	24, // 81: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
-	27, // 82: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
-	30, // 83: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
-	34, // 84: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	43, // 85: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	44, // 86: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	45, // 87: api.report.service.v1.ReportService.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	46, // 88: api.report.service.v1.ReportService.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	47, // 89: api.report.service.v1.ReportService.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	48, // 90: api.report.service.v1.ReportService.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	49, // 91: api.report.service.v1.ReportService.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	50, // 92: api.report.service.v1.ReportService.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	51, // 93: api.report.service.v1.ReportService.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	52, // 94: api.report.service.v1.ReportService.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	53, // 95: api.report.service.v1.ReportService.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	54, // 96: api.report.service.v1.ReportService.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	55, // 97: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	56, // 98: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	57, // 99: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	20, // 100: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
-	23, // 101: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
-	26, // 102: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
-	29, // 103: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
-	32, // 104: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
-	37, // 105: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	85, // [85:106] is the sub-list for method output_type
-	64, // [64:85] is the sub-list for method input_type
-	64, // [64:64] is the sub-list for extension type_name
-	64, // [64:64] is the sub-list for extension extendee
-	0,  // [0:64] is the sub-list for field type_name
+	41, // 52: api.report.service.v1.ReferralContributionReportDataItem.reg_date:type_name -> google.protobuf.Timestamp
+	41, // 53: api.report.service.v1.ReferralContributionReportDataItem.ftd_date:type_name -> google.protobuf.Timestamp
+	41, // 54: api.report.service.v1.ReferralContributionReportDataItem.last_login_time:type_name -> google.protobuf.Timestamp
+	25, // 55: api.report.service.v1.ListReferralContributionReportDataResponse.items:type_name -> api.report.service.v1.ReferralContributionReportDataItem
+	39, // 56: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 57: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	28, // 58: api.report.service.v1.ListReferralLifetimeReportDataResponse.items:type_name -> api.report.service.v1.ReferralLifetimeReportDataItem
+	39, // 59: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 60: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	33, // 61: api.report.service.v1.AffiliateVTGReportDataItem.lifetime_commission_gaming:type_name -> api.report.service.v1.AffiliateLifetimeCommissionGaming
+	31, // 62: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
+	39, // 63: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 64: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 65: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateCurrentPeriodGaming
+	36, // 66: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
+	0,  // 67: api.report.service.v1.ReportService.GetSummary:input_type -> api.report.service.v1.GetSummaryRequest
+	1,  // 68: api.report.service.v1.ReportService.ListSummaries:input_type -> api.report.service.v1.ListSummariesRequest
+	2,  // 69: api.report.service.v1.ReportService.GetGameDataSummary:input_type -> api.report.service.v1.GetGameSummaryRequest
+	3,  // 70: api.report.service.v1.ReportService.ListGameData:input_type -> api.report.service.v1.ListGameDataRequest
+	4,  // 71: api.report.service.v1.ReportService.GetPlayerGameDataSummary:input_type -> api.report.service.v1.GetPlayerGameSummaryRequest
+	5,  // 72: api.report.service.v1.ReportService.ListPlayerGameData:input_type -> api.report.service.v1.ListPlayerGameDataRequest
+	10, // 73: api.report.service.v1.ReportService.ListRegisterRetention:input_type -> api.report.service.v1.ListRegisterRetentionRequest
+	6,  // 74: api.report.service.v1.ReportService.GetDepositSummaries:input_type -> api.report.service.v1.GetDepositSummariesRequest
+	8,  // 75: api.report.service.v1.ReportService.ListDepositDetails:input_type -> api.report.service.v1.ListDepositDetailsRequest
+	11, // 76: api.report.service.v1.ReportService.ListDepositVtgDetails:input_type -> api.report.service.v1.ListDepositVtgDetailsRequest
+	7,  // 77: api.report.service.v1.ReportService.GetWithdrawSummaries:input_type -> api.report.service.v1.GetWithdrawSummariesRequest
+	9,  // 78: api.report.service.v1.ReportService.ListWithdrawDetails:input_type -> api.report.service.v1.ListWithdrawDetailsRequest
+	12, // 79: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
+	42, // 80: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	43, // 81: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	18, // 82: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
+	21, // 83: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
+	24, // 84: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
+	27, // 85: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
+	30, // 86: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
+	34, // 87: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
+	44, // 88: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	45, // 89: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	46, // 90: api.report.service.v1.ReportService.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	47, // 91: api.report.service.v1.ReportService.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	48, // 92: api.report.service.v1.ReportService.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	49, // 93: api.report.service.v1.ReportService.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	50, // 94: api.report.service.v1.ReportService.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	51, // 95: api.report.service.v1.ReportService.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	52, // 96: api.report.service.v1.ReportService.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	53, // 97: api.report.service.v1.ReportService.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	54, // 98: api.report.service.v1.ReportService.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	55, // 99: api.report.service.v1.ReportService.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	56, // 100: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	57, // 101: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	58, // 102: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	20, // 103: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
+	23, // 104: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
+	26, // 105: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
+	29, // 106: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
+	32, // 107: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
+	37, // 108: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
+	88, // [88:109] is the sub-list for method output_type
+	67, // [67:88] is the sub-list for method input_type
+	67, // [67:67] is the sub-list for extension type_name
+	67, // [67:67] is the sub-list for extension extendee
+	0,  // [0:67] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_report_proto_init() }

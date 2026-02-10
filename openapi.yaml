@@ -9689,8 +9689,10 @@ components:
                     format: int32
                 regDate:
                     type: string
+                    format: date-time
                 ftdDate:
                     type: string
+                    format: date-time
                 isQualified:
                     type: boolean
                 operatorId:
@@ -9747,6 +9749,7 @@ components:
                 lastLoginTime:
                     type: string
                     description: User activity fields (from user_events table)
+                    format: date-time
                 registrationDeviceType:
                     type: string
                 registrationIp:
