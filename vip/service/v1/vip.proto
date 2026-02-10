@@ -58,6 +58,10 @@ service Vip {
   rpc BatchGetVipMembers(BatchGetVipMembersRequest) returns (BatchGetVipMembersResponse) {
   }
 
+  // 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
+  rpc GetVipRewardHistory(GetVipRewardHistoryRequest) returns (GetVipRewardHistoryResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -473,4 +477,21 @@ message VipMemberWithLevelName {
 // 批量获取用户VIP会员信息响应
 message BatchGetVipMembersResponse {
   repeated VipMemberWithLevelName vip_members = 1;
+}
+
+// 获取用户VIP奖励领取历史请求
+message GetVipRewardHistoryRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+// 获取用户VIP奖励领取历史响应
+message GetVipRewardHistoryResponse {
+  string total_claimed_usd = 1;
+  repeated RewardTypeHistory reward_histories = 2;
+
+  message RewardTypeHistory {
+    VipRewardKind reward_kind = 1;
+    string claimed_usd = 2;
+  }
 }

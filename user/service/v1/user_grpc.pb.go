@@ -137,6 +137,7 @@ const (
 	User_SetTelegramEnabled_FullMethodName                 = "/api.user.service.v1.User/SetTelegramEnabled"
 	User_GetTelegramConfig_FullMethodName                  = "/api.user.service.v1.User/GetTelegramConfig"
 	User_GetTelegramLoginInfo_FullMethodName               = "/api.user.service.v1.User/GetTelegramLoginInfo"
+	User_GetRewardHistory_FullMethodName                   = "/api.user.service.v1.User/GetRewardHistory"
 )
 
 // UserClient is the client API for User service.
@@ -351,6 +352,9 @@ type UserClient interface {
 	// ============ Player Telegram APIs ============
 	// Get Telegram login info for the current operator (public)
 	GetTelegramLoginInfo(ctx context.Context, in *GetTelegramLoginInfoRequest, opts ...grpc.CallOption) (*GetTelegramLoginInfoResponse, error)
+	// ============ Bonus Center APIs ============
+	// Get reward history summary (aggregates wallet free spin + VIP reward history)
+	GetRewardHistory(ctx context.Context, in *GetRewardHistoryRequest, opts ...grpc.CallOption) (*GetRewardHistoryResponse, error)
 }
 
 type userClient struct {
@@ -1531,6 +1535,16 @@ func (c *userClient) GetTelegramLoginInfo(ctx context.Context, in *GetTelegramLo
 	return out, nil
 }
 
+func (c *userClient) GetRewardHistory(ctx context.Context, in *GetRewardHistoryRequest, opts ...grpc.CallOption) (*GetRewardHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRewardHistoryResponse)
+	err := c.cc.Invoke(ctx, User_GetRewardHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1743,6 +1757,9 @@ type UserServer interface {
 	// ============ Player Telegram APIs ============
 	// Get Telegram login info for the current operator (public)
 	GetTelegramLoginInfo(context.Context, *GetTelegramLoginInfoRequest) (*GetTelegramLoginInfoResponse, error)
+	// ============ Bonus Center APIs ============
+	// Get reward history summary (aggregates wallet free spin + VIP reward history)
+	GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2103,6 +2120,9 @@ func (UnimplementedUserServer) GetTelegramConfig(context.Context, *GetTelegramCo
 }
 func (UnimplementedUserServer) GetTelegramLoginInfo(context.Context, *GetTelegramLoginInfoRequest) (*GetTelegramLoginInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTelegramLoginInfo not implemented")
+}
+func (UnimplementedUserServer) GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRewardHistory not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4231,6 +4251,24 @@ func _User_GetTelegramLoginInfo_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetRewardHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRewardHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetRewardHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetRewardHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetRewardHistory(ctx, req.(*GetRewardHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4705,6 +4743,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTelegramLoginInfo",
 			Handler:    _User_GetTelegramLoginInfo_Handler,
+		},
+		{
+			MethodName: "GetRewardHistory",
+			Handler:    _User_GetRewardHistory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

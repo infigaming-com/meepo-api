@@ -8242,6 +8242,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/bonus/reward-history/get:
+        post:
+            tags:
+                - User
+            description: |-
+                ============ Bonus Center APIs ============
+                 Get reward history summary (aggregates wallet free spin + VIP reward history)
+            operationId: User_GetRewardHistory
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetRewardHistoryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetRewardHistoryResponse'
     /v1/user/email/verification-code/send:
         post:
             tags:
@@ -24461,6 +24482,26 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingStatus'
                 responsibleGamblingDeleteSchedule:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingDeleteSchedule'
+        api.user.service.v1.GetRewardHistoryRequest:
+            type: object
+            properties: {}
+        api.user.service.v1.GetRewardHistoryResponse:
+            type: object
+            properties:
+                totalRewardsUsd:
+                    type: string
+                freeSpinUsd:
+                    type: string
+                upgradeRewardsUsd:
+                    type: string
+                rakebackInstantUsd:
+                    type: string
+                rakebackDailyUsd:
+                    type: string
+                weeklyRewardsUsd:
+                    type: string
+                monthlyRewardsUsd:
+                    type: string
         api.user.service.v1.GetTelegramLoginInfoResponse:
             type: object
             properties:

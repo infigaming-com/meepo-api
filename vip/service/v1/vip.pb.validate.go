@@ -5659,6 +5659,278 @@ var _ interface {
 	ErrorName() string
 } = BatchGetVipMembersResponseValidationError{}
 
+// Validate checks the field values on GetVipRewardHistoryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetVipRewardHistoryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetVipRewardHistoryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetVipRewardHistoryRequestMultiError, or nil if none found.
+func (m *GetVipRewardHistoryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetVipRewardHistoryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetVipRewardHistoryRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetVipRewardHistoryRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetVipRewardHistoryRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetVipRewardHistoryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetVipRewardHistoryRequestMultiError is an error wrapping multiple
+// validation errors returned by GetVipRewardHistoryRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetVipRewardHistoryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetVipRewardHistoryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetVipRewardHistoryRequestMultiError) AllErrors() []error { return m }
+
+// GetVipRewardHistoryRequestValidationError is the validation error returned
+// by GetVipRewardHistoryRequest.Validate if the designated constraints aren't met.
+type GetVipRewardHistoryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetVipRewardHistoryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetVipRewardHistoryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetVipRewardHistoryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetVipRewardHistoryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetVipRewardHistoryRequestValidationError) ErrorName() string {
+	return "GetVipRewardHistoryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetVipRewardHistoryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetVipRewardHistoryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetVipRewardHistoryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetVipRewardHistoryRequestValidationError{}
+
+// Validate checks the field values on GetVipRewardHistoryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetVipRewardHistoryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetVipRewardHistoryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetVipRewardHistoryResponseMultiError, or nil if none found.
+func (m *GetVipRewardHistoryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetVipRewardHistoryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalClaimedUsd
+
+	for idx, item := range m.GetRewardHistories() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetVipRewardHistoryResponseValidationError{
+						field:  fmt.Sprintf("RewardHistories[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetVipRewardHistoryResponseValidationError{
+						field:  fmt.Sprintf("RewardHistories[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetVipRewardHistoryResponseValidationError{
+					field:  fmt.Sprintf("RewardHistories[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetVipRewardHistoryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetVipRewardHistoryResponseMultiError is an error wrapping multiple
+// validation errors returned by GetVipRewardHistoryResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetVipRewardHistoryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetVipRewardHistoryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetVipRewardHistoryResponseMultiError) AllErrors() []error { return m }
+
+// GetVipRewardHistoryResponseValidationError is the validation error returned
+// by GetVipRewardHistoryResponse.Validate if the designated constraints
+// aren't met.
+type GetVipRewardHistoryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetVipRewardHistoryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetVipRewardHistoryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetVipRewardHistoryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetVipRewardHistoryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetVipRewardHistoryResponseValidationError) ErrorName() string {
+	return "GetVipRewardHistoryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetVipRewardHistoryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetVipRewardHistoryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetVipRewardHistoryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetVipRewardHistoryResponseValidationError{}
+
 // Validate checks the field values on
 // GetClaimableVipRewardsResponse_ClaimableVipReward with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -5777,3 +6049,116 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError{}
+
+// Validate checks the field values on
+// GetVipRewardHistoryResponse_RewardTypeHistory with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetVipRewardHistoryResponse_RewardTypeHistory) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetVipRewardHistoryResponse_RewardTypeHistory with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetVipRewardHistoryResponse_RewardTypeHistoryMultiError, or nil if none found.
+func (m *GetVipRewardHistoryResponse_RewardTypeHistory) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetVipRewardHistoryResponse_RewardTypeHistory) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RewardKind
+
+	// no validation rules for ClaimedUsd
+
+	if len(errors) > 0 {
+		return GetVipRewardHistoryResponse_RewardTypeHistoryMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetVipRewardHistoryResponse_RewardTypeHistoryMultiError is an error wrapping
+// multiple validation errors returned by
+// GetVipRewardHistoryResponse_RewardTypeHistory.ValidateAll() if the
+// designated constraints aren't met.
+type GetVipRewardHistoryResponse_RewardTypeHistoryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetVipRewardHistoryResponse_RewardTypeHistoryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetVipRewardHistoryResponse_RewardTypeHistoryMultiError) AllErrors() []error { return m }
+
+// GetVipRewardHistoryResponse_RewardTypeHistoryValidationError is the
+// validation error returned by
+// GetVipRewardHistoryResponse_RewardTypeHistory.Validate if the designated
+// constraints aren't met.
+type GetVipRewardHistoryResponse_RewardTypeHistoryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetVipRewardHistoryResponse_RewardTypeHistoryValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetVipRewardHistoryResponse_RewardTypeHistoryValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetVipRewardHistoryResponse_RewardTypeHistoryValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetVipRewardHistoryResponse_RewardTypeHistoryValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetVipRewardHistoryResponse_RewardTypeHistoryValidationError) ErrorName() string {
+	return "GetVipRewardHistoryResponse_RewardTypeHistoryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetVipRewardHistoryResponse_RewardTypeHistoryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetVipRewardHistoryResponse_RewardTypeHistory.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetVipRewardHistoryResponse_RewardTypeHistoryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetVipRewardHistoryResponse_RewardTypeHistoryValidationError{}

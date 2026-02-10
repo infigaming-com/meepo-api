@@ -33,6 +33,7 @@ const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOp
 const OperationUserGetOperatorRegistrationFieldConfig = "/api.user.service.v1.User/GetOperatorRegistrationFieldConfig"
 const OperationUserGetOperatorVipSettings = "/api.user.service.v1.User/GetOperatorVipSettings"
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
+const OperationUserGetRewardHistory = "/api.user.service.v1.User/GetRewardHistory"
 const OperationUserGetTelegramLoginInfo = "/api.user.service.v1.User/GetTelegramLoginInfo"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
@@ -76,6 +77,9 @@ type UserHTTPServer interface {
 	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*GetOperatorRegistrationFieldConfigResponse, error)
 	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	// GetRewardHistory ============ Bonus Center APIs ============
+	// Get reward history summary (aggregates wallet free spin + VIP reward history)
+	GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error)
 	// GetTelegramLoginInfo ============ Player Telegram APIs ============
 	// Get Telegram login info for the current operator (public)
 	GetTelegramLoginInfo(context.Context, *GetTelegramLoginInfoRequest) (*GetTelegramLoginInfoResponse, error)
@@ -169,6 +173,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/oauth/initiate", _User_InitiateOAuthLogin0_HTTP_Handler(srv))
 	r.POST("/v1/user/oauth/bind/initiate", _User_InitiateOAuthBinding0_HTTP_Handler(srv))
 	r.GET("/v1/user/telegram/info", _User_GetTelegramLoginInfo0_HTTP_Handler(srv))
+	r.POST("/v1/user/bonus/reward-history/get", _User_GetRewardHistory0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -995,6 +1000,28 @@ func _User_GetTelegramLoginInfo0_HTTP_Handler(srv UserHTTPServer) func(ctx http.
 	}
 }
 
+func _User_GetRewardHistory0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetRewardHistoryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetRewardHistory)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetRewardHistory(ctx, req.(*GetRewardHistoryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetRewardHistoryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
@@ -1012,6 +1039,9 @@ type UserHTTPClient interface {
 	GetOperatorRegistrationFieldConfig(ctx context.Context, req *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *GetOperatorRegistrationFieldConfigResponse, err error)
 	GetOperatorVipSettings(ctx context.Context, req *GetOperatorVipSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorVipSettingsResponse, err error)
 	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
+	// GetRewardHistory ============ Bonus Center APIs ============
+	// Get reward history summary (aggregates wallet free spin + VIP reward history)
+	GetRewardHistory(ctx context.Context, req *GetRewardHistoryRequest, opts ...http.CallOption) (rsp *GetRewardHistoryResponse, err error)
 	// GetTelegramLoginInfo ============ Player Telegram APIs ============
 	// Get Telegram login info for the current operator (public)
 	GetTelegramLoginInfo(ctx context.Context, req *GetTelegramLoginInfoRequest, opts ...http.CallOption) (rsp *GetTelegramLoginInfoResponse, err error)
@@ -1237,6 +1267,21 @@ func (c *UserHTTPClientImpl) GetResponsibleGamblingConfig(ctx context.Context, i
 	pattern := "/v1/user/responsible-gambling/config/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetRewardHistory ============ Bonus Center APIs ============
+// Get reward history summary (aggregates wallet free spin + VIP reward history)
+func (c *UserHTTPClientImpl) GetRewardHistory(ctx context.Context, in *GetRewardHistoryRequest, opts ...http.CallOption) (*GetRewardHistoryResponse, error) {
+	var out GetRewardHistoryResponse
+	pattern := "/v1/user/bonus/reward-history/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetRewardHistory))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

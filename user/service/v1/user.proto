@@ -536,6 +536,15 @@ service User {
 			get: "/v1/user/telegram/info"
 		};
 	}
+
+	// ============ Bonus Center APIs ============
+	// Get reward history summary (aggregates wallet free spin + VIP reward history)
+	rpc GetRewardHistory(GetRewardHistoryRequest) returns (GetRewardHistoryResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/bonus/reward-history/get"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -2446,4 +2455,18 @@ message GetTelegramLoginInfoResponse {
 	bool enabled = 1;
 	string bot_username = 2;
 	bool allow_registration = 3;
+}
+
+// ============ Bonus Center Messages ============
+
+message GetRewardHistoryRequest {}
+
+message GetRewardHistoryResponse {
+	string total_rewards_usd = 1;
+	string free_spin_usd = 2;
+	string upgrade_rewards_usd = 3;
+	string rakeback_instant_usd = 4;
+	string rakeback_daily_usd = 5;
+	string weekly_rewards_usd = 6;
+	string monthly_rewards_usd = 7;
 }
