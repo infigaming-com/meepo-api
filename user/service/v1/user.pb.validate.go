@@ -31914,6 +31914,224 @@ var _ interface {
 	ErrorName() string
 } = GetTelegramLoginInfoResponseValidationError{}
 
+// Validate checks the field values on GetRewardHistoryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetRewardHistoryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetRewardHistoryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetRewardHistoryRequestMultiError, or nil if none found.
+func (m *GetRewardHistoryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetRewardHistoryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetRewardHistoryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetRewardHistoryRequestMultiError is an error wrapping multiple validation
+// errors returned by GetRewardHistoryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetRewardHistoryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetRewardHistoryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetRewardHistoryRequestMultiError) AllErrors() []error { return m }
+
+// GetRewardHistoryRequestValidationError is the validation error returned by
+// GetRewardHistoryRequest.Validate if the designated constraints aren't met.
+type GetRewardHistoryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetRewardHistoryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetRewardHistoryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetRewardHistoryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetRewardHistoryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetRewardHistoryRequestValidationError) ErrorName() string {
+	return "GetRewardHistoryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetRewardHistoryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetRewardHistoryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetRewardHistoryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetRewardHistoryRequestValidationError{}
+
+// Validate checks the field values on GetRewardHistoryResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetRewardHistoryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetRewardHistoryResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetRewardHistoryResponseMultiError, or nil if none found.
+func (m *GetRewardHistoryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetRewardHistoryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalRewardsUsd
+
+	// no validation rules for FreeSpinUsd
+
+	// no validation rules for UpgradeRewardsUsd
+
+	// no validation rules for RakebackInstantUsd
+
+	// no validation rules for RakebackDailyUsd
+
+	// no validation rules for WeeklyRewardsUsd
+
+	// no validation rules for MonthlyRewardsUsd
+
+	if len(errors) > 0 {
+		return GetRewardHistoryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetRewardHistoryResponseMultiError is an error wrapping multiple validation
+// errors returned by GetRewardHistoryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetRewardHistoryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetRewardHistoryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetRewardHistoryResponseMultiError) AllErrors() []error { return m }
+
+// GetRewardHistoryResponseValidationError is the validation error returned by
+// GetRewardHistoryResponse.Validate if the designated constraints aren't met.
+type GetRewardHistoryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetRewardHistoryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetRewardHistoryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetRewardHistoryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetRewardHistoryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetRewardHistoryResponseValidationError) ErrorName() string {
+	return "GetRewardHistoryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetRewardHistoryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetRewardHistoryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetRewardHistoryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetRewardHistoryResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

@@ -36,6 +36,7 @@ const (
 	Vip_GetDailyLossbackStatus_FullMethodName       = "/api.vip.service.v1.Vip/GetDailyLossbackStatus"
 	Vip_ForceRunVipRewards_FullMethodName           = "/api.vip.service.v1.Vip/ForceRunVipRewards"
 	Vip_BatchGetVipMembers_FullMethodName           = "/api.vip.service.v1.Vip/BatchGetVipMembers"
+	Vip_GetVipRewardHistory_FullMethodName          = "/api.vip.service.v1.Vip/GetVipRewardHistory"
 )
 
 // VipClient is the client API for Vip service.
@@ -61,6 +62,8 @@ type VipClient interface {
 	ForceRunVipRewards(ctx context.Context, in *ForceRunVipRewardsRequest, opts ...grpc.CallOption) (*ForceRunVipRewardsResponse, error)
 	// 批量获取用户VIP会员信息
 	BatchGetVipMembers(ctx context.Context, in *BatchGetVipMembersRequest, opts ...grpc.CallOption) (*BatchGetVipMembersResponse, error)
+	// 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
+	GetVipRewardHistory(ctx context.Context, in *GetVipRewardHistoryRequest, opts ...grpc.CallOption) (*GetVipRewardHistoryResponse, error)
 }
 
 type vipClient struct {
@@ -241,6 +244,16 @@ func (c *vipClient) BatchGetVipMembers(ctx context.Context, in *BatchGetVipMembe
 	return out, nil
 }
 
+func (c *vipClient) GetVipRewardHistory(ctx context.Context, in *GetVipRewardHistoryRequest, opts ...grpc.CallOption) (*GetVipRewardHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVipRewardHistoryResponse)
+	err := c.cc.Invoke(ctx, Vip_GetVipRewardHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VipServer is the server API for Vip service.
 // All implementations must embed UnimplementedVipServer
 // for forward compatibility.
@@ -264,6 +277,8 @@ type VipServer interface {
 	ForceRunVipRewards(context.Context, *ForceRunVipRewardsRequest) (*ForceRunVipRewardsResponse, error)
 	// 批量获取用户VIP会员信息
 	BatchGetVipMembers(context.Context, *BatchGetVipMembersRequest) (*BatchGetVipMembersResponse, error)
+	// 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
+	GetVipRewardHistory(context.Context, *GetVipRewardHistoryRequest) (*GetVipRewardHistoryResponse, error)
 	mustEmbedUnimplementedVipServer()
 }
 
@@ -324,6 +339,9 @@ func (UnimplementedVipServer) ForceRunVipRewards(context.Context, *ForceRunVipRe
 }
 func (UnimplementedVipServer) BatchGetVipMembers(context.Context, *BatchGetVipMembersRequest) (*BatchGetVipMembersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method BatchGetVipMembers not implemented")
+}
+func (UnimplementedVipServer) GetVipRewardHistory(context.Context, *GetVipRewardHistoryRequest) (*GetVipRewardHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetVipRewardHistory not implemented")
 }
 func (UnimplementedVipServer) mustEmbedUnimplementedVipServer() {}
 func (UnimplementedVipServer) testEmbeddedByValue()             {}
@@ -652,6 +670,24 @@ func _Vip_BatchGetVipMembers_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vip_GetVipRewardHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVipRewardHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VipServer).GetVipRewardHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vip_GetVipRewardHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VipServer).GetVipRewardHistory(ctx, req.(*GetVipRewardHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vip_ServiceDesc is the grpc.ServiceDesc for Vip service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -726,6 +762,10 @@ var Vip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchGetVipMembers",
 			Handler:    _Vip_BatchGetVipMembers_Handler,
+		},
+		{
+			MethodName: "GetVipRewardHistory",
+			Handler:    _Vip_GetVipRewardHistory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
