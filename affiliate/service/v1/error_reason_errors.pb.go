@@ -1080,3 +1080,17 @@ func IsListAffiliateSnapshotReportFailed(err error) bool {
 func ErrorListAffiliateSnapshotReportFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Permission
+func IsRolePermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ROLE_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+// Permission
+func ErrorRolePermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ROLE_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
