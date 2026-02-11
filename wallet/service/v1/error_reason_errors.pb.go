@@ -2014,3 +2014,15 @@ func IsCreditFreeBetWinFailed(err error) bool {
 func ErrorCreditFreeBetWinFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CREDIT_FREE_BET_WIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidChannelInfo(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CHANNEL_INFO.String() && e.Code == 500
+}
+
+func ErrorInvalidChannelInfo(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_CHANNEL_INFO.String(), fmt.Sprintf(format, args...))
+}

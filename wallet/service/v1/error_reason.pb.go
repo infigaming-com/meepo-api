@@ -192,6 +192,7 @@ const (
 	ErrorReason_FREE_REWARD_OWNERSHIP_MISMATCH                                  ErrorReason = 30164
 	ErrorReason_CREDIT_FREE_SPIN_WIN_FAILED                                     ErrorReason = 30165
 	ErrorReason_CREDIT_FREE_BET_WIN_FAILED                                      ErrorReason = 30166
+	ErrorReason_INVALID_CHANNEL_INFO                                            ErrorReason = 30167
 )
 
 // Enum value maps for ErrorReason.
@@ -364,6 +365,7 @@ var (
 		30164: "FREE_REWARD_OWNERSHIP_MISMATCH",
 		30165: "CREDIT_FREE_SPIN_WIN_FAILED",
 		30166: "CREDIT_FREE_BET_WIN_FAILED",
+		30167: "INVALID_CHANNEL_INFO",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -533,6 +535,7 @@ var (
 		"FREE_REWARD_OWNERSHIP_MISMATCH":                                  30164,
 		"CREDIT_FREE_SPIN_WIN_FAILED":                                     30165,
 		"CREDIT_FREE_BET_WIN_FAILED":                                      30166,
+		"INVALID_CHANNEL_INFO":                                            30167,
 	}
 )
 
@@ -567,7 +570,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb22\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xce2\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -735,7 +738,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1bGET_CREDIT_BY_SOURCE_FAILED\x10\xd3\xeb\x01\x12$\n" +
 	"\x1eFREE_REWARD_OWNERSHIP_MISMATCH\x10\xd4\xeb\x01\x12!\n" +
 	"\x1bCREDIT_FREE_SPIN_WIN_FAILED\x10\xd5\xeb\x01\x12 \n" +
-	"\x1aCREDIT_FREE_BET_WIN_FAILED\x10\xd6\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1aCREDIT_FREE_BET_WIN_FAILED\x10\xd6\xeb\x01\x12\x1a\n" +
+	"\x14INVALID_CHANNEL_INFO\x10\xd7\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
