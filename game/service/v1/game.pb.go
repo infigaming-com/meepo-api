@@ -16434,7 +16434,7 @@ func (x *ListFreespinsGamesResponse_Game) GetHasFreespins() bool {
 
 type FreespinWinResponse_Data struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,proto3" json:"txn_id,omitempty"`
 	Balance       string                 `protobuf:"bytes,2,opt,name=balance,proto3" json:"balance,omitempty"`
 	Bonus         string                 `protobuf:"bytes,3,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	Timestamp     int64                  `protobuf:"varint,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
@@ -16502,7 +16502,7 @@ func (x *FreespinWinResponse_Data) GetTimestamp() int64 {
 
 type FreebetWinResponse_Data struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,proto3" json:"txn_id,omitempty"`
 	Balance       string                 `protobuf:"bytes,2,opt,name=balance,proto3" json:"balance,omitempty"`
 	Bonus         string                 `protobuf:"bytes,3,opt,name=bonus,proto3" json:"bonus,omitempty"`
 	Timestamp     int64                  `protobuf:"varint,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
@@ -18663,11 +18663,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\t \x01(\tR\x06amount\x12\x1c\n" +
 	"\ttimestamp\x18\n" +
-	" \x01(\x03R\ttimestamp\"\xc5\x01\n" +
+	" \x01(\x03R\ttimestamp\"\xc6\x01\n" +
 	"\x13FreespinWinResponse\x12A\n" +
-	"\x04data\x18\x01 \x01(\v2-.api.game.service.v1.FreespinWinResponse.DataR\x04data\x1ak\n" +
-	"\x04Data\x12\x15\n" +
-	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12\x18\n" +
+	"\x04data\x18\x01 \x01(\v2-.api.game.service.v1.FreespinWinResponse.DataR\x04data\x1al\n" +
+	"\x04Data\x12\x16\n" +
+	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12\x18\n" +
 	"\abalance\x18\x02 \x01(\tR\abalance\x12\x14\n" +
 	"\x05bonus\x18\x03 \x01(\tR\x05bonus\x12\x1c\n" +
 	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp\"\x96\x01\n" +
@@ -18791,11 +18791,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\t \x01(\tR\x06amount\x12\x1c\n" +
 	"\ttimestamp\x18\n" +
-	" \x01(\x03R\ttimestamp\"\xc3\x01\n" +
+	" \x01(\x03R\ttimestamp\"\xc4\x01\n" +
 	"\x12FreebetWinResponse\x12@\n" +
-	"\x04data\x18\x01 \x01(\v2,.api.game.service.v1.FreebetWinResponse.DataR\x04data\x1ak\n" +
-	"\x04Data\x12\x15\n" +
-	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12\x18\n" +
+	"\x04data\x18\x01 \x01(\v2,.api.game.service.v1.FreebetWinResponse.DataR\x04data\x1al\n" +
+	"\x04Data\x12\x16\n" +
+	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12\x18\n" +
 	"\abalance\x18\x02 \x01(\tR\abalance\x12\x14\n" +
 	"\x05bonus\x18\x03 \x01(\tR\x05bonus\x12\x1c\n" +
 	"\ttimestamp\x18\x04 \x01(\x03R\ttimestamp\"\xba\x02\n" +
