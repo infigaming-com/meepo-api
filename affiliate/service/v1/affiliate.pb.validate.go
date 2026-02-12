@@ -12387,6 +12387,12 @@ func (m *ListPostbackLogsResponse_PostbackLog) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for ResponseBody
+
+	// no validation rules for ResponseHeaders
+
+	// no validation rules for LatencyMs
+
 	if len(errors) > 0 {
 		return ListPostbackLogsResponse_PostbackLogMultiError(errors)
 	}

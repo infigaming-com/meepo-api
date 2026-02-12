@@ -6510,6 +6510,9 @@ type ListPostbackLogsResponse_PostbackLog struct {
 	OperatorId           int64                  `protobuf:"varint,19,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	OperatorName         string                 `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	ResponseBody         string                 `protobuf:"bytes,22,opt,name=response_body,json=responseBody,proto3" json:"response_body,omitempty"`          // Response body from third-party server (max 2KB)
+	ResponseHeaders      string                 `protobuf:"bytes,23,opt,name=response_headers,json=responseHeaders,proto3" json:"response_headers,omitempty"` // Response headers as JSON string
+	LatencyMs            int64                  `protobuf:"varint,24,opt,name=latency_ms,json=latencyMs,proto3" json:"latency_ms,omitempty"`                  // Request latency in milliseconds
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -6689,6 +6692,27 @@ func (x *ListPostbackLogsResponse_PostbackLog) GetCreatedAt() *timestamppb.Times
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *ListPostbackLogsResponse_PostbackLog) GetResponseBody() string {
+	if x != nil {
+		return x.ResponseBody
+	}
+	return ""
+}
+
+func (x *ListPostbackLogsResponse_PostbackLog) GetResponseHeaders() string {
+	if x != nil {
+		return x.ResponseHeaders
+	}
+	return ""
+}
+
+func (x *ListPostbackLogsResponse_PostbackLog) GetLatencyMs() int64 {
+	if x != nil {
+		return x.LatencyMs
+	}
+	return 0
 }
 
 type ListAffiliateDomainsResponse_AffiliateDomain struct {
@@ -8341,12 +8365,12 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xdb\a\n" +
+	"_page_size\"\xca\b\n" +
 	"\x18ListPostbackLogsResponse\x12R\n" +
 	"\x04logs\x18\x01 \x03(\v2>.api.affiliate.service.v1.ListPostbackLogsResponse.PostbackLogR\x04logs\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xa3\x06\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x92\a\n" +
 	"\vPostbackLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x1f\n" +
 	"\vpostback_id\x18\x02 \x01(\x03R\n" +
@@ -8373,7 +8397,11 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x14 \x01(\tR\foperatorName\x129\n" +
 	"\n" +
-	"created_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xf7\x02\n" +
+	"created_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12#\n" +
+	"\rresponse_body\x18\x16 \x01(\tR\fresponseBody\x12)\n" +
+	"\x10response_headers\x18\x17 \x01(\tR\x0fresponseHeaders\x12\x1d\n" +
+	"\n" +
+	"latency_ms\x18\x18 \x01(\x03R\tlatencyMs\"\xf7\x02\n" +
 	"\x1bListAffiliateDomainsRequest\x12*\n" +
 	"\x11initiator_user_id\x18\x01 \x01(\x03R\x0finitiatorUserId\x12*\n" +
 	"\x11initiator_role_id\x18\x02 \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
