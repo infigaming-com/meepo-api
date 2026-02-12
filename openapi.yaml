@@ -21888,7 +21888,7 @@ components:
         api.game.service.v1.FreebetWinResponse_Data:
             type: object
             properties:
-                txnId:
+                txn_id:
                     type: string
                 balance:
                     type: string
@@ -21927,7 +21927,7 @@ components:
         api.game.service.v1.FreespinWinResponse_Data:
             type: object
             properties:
-                txnId:
+                txn_id:
                     type: string
                 balance:
                     type: string
