@@ -1856,7 +1856,7 @@ message FreespinWinRequest {
 
 message FreespinWinResponse {
 	message Data {
-		string txn_id = 1;
+		string txn_id = 1 [json_name = "txn_id"];
 		string balance = 2;
 		string bonus = 3;
 		int64 timestamp = 4;
@@ -1985,7 +1985,7 @@ message FreebetWinRequest {
 
 message FreebetWinResponse {
 	message Data {
-		string txn_id = 1;
+		string txn_id = 1 [json_name = "txn_id"];
 		string balance = 2;
 		string bonus = 3;
 		int64 timestamp = 4;
