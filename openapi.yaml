@@ -10988,6 +10988,12 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                responseBody:
+                    type: string
+                responseHeaders:
+                    type: string
+                latencyMs:
+                    type: string
         api.affiliate.service.v1.ListPostbacksResponse:
             type: object
             properties:

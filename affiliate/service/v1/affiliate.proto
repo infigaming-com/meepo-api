@@ -666,6 +666,9 @@ message ListPostbackLogsResponse {
         int64 operator_id = 19;
         string operator_name = 20;
         google.protobuf.Timestamp created_at = 21;
+        string response_body = 22;     // Response body from third-party server (max 2KB)
+        string response_headers = 23;  // Response headers as JSON string
+        int64 latency_ms = 24;         // Request latency in milliseconds
     }
     repeated PostbackLog logs = 1;
     int32 total = 2;
