@@ -719,6 +719,7 @@ type ListBetsRequest struct {
 	Page                     *int32                                     `protobuf:"varint,14,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                                     `protobuf:"varint,15,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	OperatorContextFilters   *common.OperatorContextFilters             `protobuf:"bytes,16,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	RoundId                  *int64                                     `protobuf:"varint,17,opt,name=round_id,json=roundId,proto3,oneof" json:"round_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -874,6 +875,13 @@ func (x *ListBetsRequest) GetOperatorContextFilters() *common.OperatorContextFil
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListBetsRequest) GetRoundId() int64 {
+	if x != nil && x.RoundId != nil {
+		return *x.RoundId
+	}
+	return 0
 }
 
 type isListBetsRequest_SettlementCurrencyOption interface {
@@ -5894,7 +5902,7 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x16ListCurrenciesResponse\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xc4\v\n" +
+	"currencies\"\xf1\v\n" +
 	"\x0fListBetsRequest\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12 \n" +
 	"\tgame_name\x18\x02 \x01(\tH\x01R\bgameName\x88\x01\x01\x12\x1c\n" +
@@ -5916,7 +5924,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x04page\x18\x0e \x01(\x05H\n" +
 	"R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x0f \x01(\x05H\vR\bpageSize\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\x10 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x1a\xa7\x02\n" +
+	"\x18operator_context_filters\x18\x10 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
+	"\bround_id\x18\x11 \x01(\x03H\fR\aroundId\x88\x01\x01\x1a\xa7\x02\n" +
 	"\x11CurrencyWithRange\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
 	"\x0emin_bet_amount\x18\x02 \x01(\tH\x00R\fminBetAmount\x88\x01\x01\x12)\n" +
@@ -5947,7 +5956,8 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x93\n" +
+	"_page_sizeB\v\n" +
+	"\t_round_id\"\x93\n" +
 	"\n" +
 	"\x03Bet\x12\x19\n" +
 	"\x02id\x18\x01 \x01(\x03R\roperatorBetId\x12&\n" +

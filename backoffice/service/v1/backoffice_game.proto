@@ -427,6 +427,7 @@ message ListBetsRequest {
 	optional int32 page = 14;
 	optional int32 page_size = 15;
 	api.common.OperatorContextFilters operator_context_filters = 16;
+	optional int64 round_id = 17;
 }
 
 message Bet {
