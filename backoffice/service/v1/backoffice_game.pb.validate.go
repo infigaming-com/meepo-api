@@ -1844,6 +1844,10 @@ func (m *ListBetsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.RoundId != nil {
+		// no validation rules for RoundId
+	}
+
 	if len(errors) > 0 {
 		return ListBetsRequestMultiError(errors)
 	}
