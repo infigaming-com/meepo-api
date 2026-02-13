@@ -3704,7 +3704,7 @@ type AffiliateVTGReportDataItem struct {
 	AvgBetUsd        string `protobuf:"bytes,34,opt,name=avg_bet_usd,json=avgBetUsd,proto3" json:"avg_bet_usd,omitempty"`
 	GgrUsd           string `protobuf:"bytes,35,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
 	NgrUsd           string `protobuf:"bytes,36,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NetProfitUsd     string `protobuf:"bytes,37,opt,name=net_profit_usd,json=netProfitUsd,proto3" json:"net_profit_usd,omitempty"` // NGR - B2C
+	B2CUsd           string `protobuf:"bytes,37,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"` // Bonus to Cash
 	// Commission (from settled affiliate_commissions)
 	CommissionCpaUsd   string `protobuf:"bytes,38,opt,name=commission_cpa_usd,json=commissionCpaUsd,proto3" json:"commission_cpa_usd,omitempty"`
 	CommissionCplUsd   string `protobuf:"bytes,39,opt,name=commission_cpl_usd,json=commissionCplUsd,proto3" json:"commission_cpl_usd,omitempty"`
@@ -3734,7 +3734,7 @@ type AffiliateVTGReportDataItem struct {
 	AvgBetReportingCurrency        string `protobuf:"bytes,59,opt,name=avg_bet_reporting_currency,json=avgBetReportingCurrency,proto3" json:"avg_bet_reporting_currency,omitempty"`
 	GgrReportingCurrency           string `protobuf:"bytes,60,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
 	NgrReportingCurrency           string `protobuf:"bytes,61,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	NetProfitReportingCurrency     string `protobuf:"bytes,62,opt,name=net_profit_reporting_currency,json=netProfitReportingCurrency,proto3" json:"net_profit_reporting_currency,omitempty"`
+	B2CReportingCurrency           string `protobuf:"bytes,62,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"` // Bonus to Cash
 	// Commission - Reporting Currency
 	CommissionCpaReportingCurrency   string `protobuf:"bytes,63,opt,name=commission_cpa_reporting_currency,json=commissionCpaReportingCurrency,proto3" json:"commission_cpa_reporting_currency,omitempty"`
 	CommissionCplReportingCurrency   string `protobuf:"bytes,64,opt,name=commission_cpl_reporting_currency,json=commissionCplReportingCurrency,proto3" json:"commission_cpl_reporting_currency,omitempty"`
@@ -4037,9 +4037,9 @@ func (x *AffiliateVTGReportDataItem) GetNgrUsd() string {
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetNetProfitUsd() string {
+func (x *AffiliateVTGReportDataItem) GetB2CUsd() string {
 	if x != nil {
-		return x.NetProfitUsd
+		return x.B2CUsd
 	}
 	return ""
 }
@@ -4212,9 +4212,9 @@ func (x *AffiliateVTGReportDataItem) GetNgrReportingCurrency() string {
 	return ""
 }
 
-func (x *AffiliateVTGReportDataItem) GetNetProfitReportingCurrency() string {
+func (x *AffiliateVTGReportDataItem) GetB2CReportingCurrency() string {
 	if x != nil {
-		return x.NetProfitReportingCurrency
+		return x.B2CReportingCurrency
 	}
 	return ""
 }
@@ -4733,7 +4733,7 @@ type AffiliateSnapshotReportDataItem struct {
 	AvgBetUsd        string `protobuf:"bytes,47,opt,name=avg_bet_usd,json=avgBetUsd,proto3" json:"avg_bet_usd,omitempty"`
 	GgrUsd           string `protobuf:"bytes,48,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
 	NgrUsd           string `protobuf:"bytes,49,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NetProfitUsd     string `protobuf:"bytes,50,opt,name=net_profit_usd,json=netProfitUsd,proto3" json:"net_profit_usd,omitempty"`
+	B2CUsd           string `protobuf:"bytes,50,opt,name=b2c_usd,json=b2cUsd,proto3" json:"b2c_usd,omitempty"` // Bonus to Cash
 	Roi              string `protobuf:"bytes,51,opt,name=roi,proto3" json:"roi,omitempty"`
 	PspFeeUsd        string `protobuf:"bytes,52,opt,name=psp_fee_usd,json=pspFeeUsd,proto3" json:"psp_fee_usd,omitempty"`
 	ContentFeeUsd    string `protobuf:"bytes,53,opt,name=content_fee_usd,json=contentFeeUsd,proto3" json:"content_fee_usd,omitempty"`
@@ -4763,7 +4763,7 @@ type AffiliateSnapshotReportDataItem struct {
 	AvgBetReportingCurrency            string `protobuf:"bytes,75,opt,name=avg_bet_reporting_currency,json=avgBetReportingCurrency,proto3" json:"avg_bet_reporting_currency,omitempty"`
 	GgrReportingCurrency               string `protobuf:"bytes,76,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
 	NgrReportingCurrency               string `protobuf:"bytes,77,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	NetProfitReportingCurrency         string `protobuf:"bytes,78,opt,name=net_profit_reporting_currency,json=netProfitReportingCurrency,proto3" json:"net_profit_reporting_currency,omitempty"`
+	B2CReportingCurrency               string `protobuf:"bytes,78,opt,name=b2c_reporting_currency,json=b2cReportingCurrency,proto3" json:"b2c_reporting_currency,omitempty"` // Bonus to Cash
 	PspFeeReportingCurrency            string `protobuf:"bytes,79,opt,name=psp_fee_reporting_currency,json=pspFeeReportingCurrency,proto3" json:"psp_fee_reporting_currency,omitempty"`
 	ContentFeeReportingCurrency        string `protobuf:"bytes,80,opt,name=content_fee_reporting_currency,json=contentFeeReportingCurrency,proto3" json:"content_fee_reporting_currency,omitempty"`
 	// Rake and Tax (always 0, no PVP games or tax)
@@ -5148,9 +5148,9 @@ func (x *AffiliateSnapshotReportDataItem) GetNgrUsd() string {
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetNetProfitUsd() string {
+func (x *AffiliateSnapshotReportDataItem) GetB2CUsd() string {
 	if x != nil {
-		return x.NetProfitUsd
+		return x.B2CUsd
 	}
 	return ""
 }
@@ -5344,9 +5344,9 @@ func (x *AffiliateSnapshotReportDataItem) GetNgrReportingCurrency() string {
 	return ""
 }
 
-func (x *AffiliateSnapshotReportDataItem) GetNetProfitReportingCurrency() string {
+func (x *AffiliateSnapshotReportDataItem) GetB2CReportingCurrency() string {
 	if x != nil {
-		return x.NetProfitReportingCurrency
+		return x.B2CReportingCurrency
 	}
 	return ""
 }
@@ -5894,7 +5894,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\tpage_size\x18\b \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe1\x1c\n" +
+	"_page_size\"\xc7\x1c\n" +
 	"\x1aAffiliateVTGReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
@@ -5936,8 +5936,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x0fwins_amount_usd\x18! \x01(\tR\rwinsAmountUsd\x12\x1e\n" +
 	"\vavg_bet_usd\x18\" \x01(\tR\tavgBetUsd\x12\x17\n" +
 	"\aggr_usd\x18# \x01(\tR\x06ggrUsd\x12\x17\n" +
-	"\angr_usd\x18$ \x01(\tR\x06ngrUsd\x12$\n" +
-	"\x0enet_profit_usd\x18% \x01(\tR\fnetProfitUsd\x12,\n" +
+	"\angr_usd\x18$ \x01(\tR\x06ngrUsd\x12\x17\n" +
+	"\ab2c_usd\x18% \x01(\tR\x06b2cUsd\x12,\n" +
 	"\x12commission_cpa_usd\x18& \x01(\tR\x10commissionCpaUsd\x12,\n" +
 	"\x12commission_cpl_usd\x18' \x01(\tR\x10commissionCplUsd\x12*\n" +
 	"\x11commission_rs_usd\x18( \x01(\tR\x0fcommissionRsUsd\x120\n" +
@@ -5961,8 +5961,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x1ewins_amount_reporting_currency\x18: \x01(\tR\x1bwinsAmountReportingCurrency\x12;\n" +
 	"\x1aavg_bet_reporting_currency\x18; \x01(\tR\x17avgBetReportingCurrency\x124\n" +
 	"\x16ggr_reporting_currency\x18< \x01(\tR\x14ggrReportingCurrency\x124\n" +
-	"\x16ngr_reporting_currency\x18= \x01(\tR\x14ngrReportingCurrency\x12A\n" +
-	"\x1dnet_profit_reporting_currency\x18> \x01(\tR\x1anetProfitReportingCurrency\x12I\n" +
+	"\x16ngr_reporting_currency\x18= \x01(\tR\x14ngrReportingCurrency\x124\n" +
+	"\x16b2c_reporting_currency\x18> \x01(\tR\x14b2cReportingCurrency\x12I\n" +
 	"!commission_cpa_reporting_currency\x18? \x01(\tR\x1ecommissionCpaReportingCurrency\x12I\n" +
 	"!commission_cpl_reporting_currency\x18@ \x01(\tR\x1ecommissionCplReportingCurrency\x12G\n" +
 	" commission_rs_reporting_currency\x18A \x01(\tR\x1dcommissionRsReportingCurrency\x12M\n" +
@@ -6010,7 +6010,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	" \x01(\tR\x14ggrReportingCurrency\x124\n" +
 	"\x16ngr_reporting_currency\x18\v \x01(\tR\x14ngrReportingCurrency\x124\n" +
 	"\x16b2c_reporting_currency\x18\f \x01(\tR\x14b2cReportingCurrency\x12A\n" +
-	"\x1dbet_amount_reporting_currency\x18\r \x01(\tR\x1abetAmountReportingCurrency\"\xd0 \n" +
+	"\x1dbet_amount_reporting_currency\x18\r \x01(\tR\x1abetAmountReportingCurrency\"\xb6 \n" +
 	"\x1fAffiliateSnapshotReportDataItem\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12!\n" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12%\n" +
@@ -6066,8 +6066,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x0fwins_amount_usd\x18. \x01(\tR\rwinsAmountUsd\x12\x1e\n" +
 	"\vavg_bet_usd\x18/ \x01(\tR\tavgBetUsd\x12\x17\n" +
 	"\aggr_usd\x180 \x01(\tR\x06ggrUsd\x12\x17\n" +
-	"\angr_usd\x181 \x01(\tR\x06ngrUsd\x12$\n" +
-	"\x0enet_profit_usd\x182 \x01(\tR\fnetProfitUsd\x12\x10\n" +
+	"\angr_usd\x181 \x01(\tR\x06ngrUsd\x12\x17\n" +
+	"\ab2c_usd\x182 \x01(\tR\x06b2cUsd\x12\x10\n" +
 	"\x03roi\x183 \x01(\tR\x03roi\x12\x1e\n" +
 	"\vpsp_fee_usd\x184 \x01(\tR\tpspFeeUsd\x12&\n" +
 	"\x0fcontent_fee_usd\x185 \x01(\tR\rcontentFeeUsd\x12g\n" +
@@ -6094,8 +6094,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x1ewins_amount_reporting_currency\x18J \x01(\tR\x1bwinsAmountReportingCurrency\x12;\n" +
 	"\x1aavg_bet_reporting_currency\x18K \x01(\tR\x17avgBetReportingCurrency\x124\n" +
 	"\x16ggr_reporting_currency\x18L \x01(\tR\x14ggrReportingCurrency\x124\n" +
-	"\x16ngr_reporting_currency\x18M \x01(\tR\x14ngrReportingCurrency\x12A\n" +
-	"\x1dnet_profit_reporting_currency\x18N \x01(\tR\x1anetProfitReportingCurrency\x12;\n" +
+	"\x16ngr_reporting_currency\x18M \x01(\tR\x14ngrReportingCurrency\x124\n" +
+	"\x16b2c_reporting_currency\x18N \x01(\tR\x14b2cReportingCurrency\x12;\n" +
 	"\x1apsp_fee_reporting_currency\x18O \x01(\tR\x17pspFeeReportingCurrency\x12C\n" +
 	"\x1econtent_fee_reporting_currency\x18P \x01(\tR\x1bcontentFeeReportingCurrency\x12\x19\n" +
 	"\brake_usd\x18Q \x01(\tR\arakeUsd\x12\x17\n" +
