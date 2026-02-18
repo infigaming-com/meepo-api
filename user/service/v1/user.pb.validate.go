@@ -32236,6 +32236,241 @@ var _ interface {
 	ErrorName() string
 } = GetRewardHistoryResponseValidationError{}
 
+// Validate checks the field values on GetCompanyAdminEmailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCompanyAdminEmailsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCompanyAdminEmailsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCompanyAdminEmailsRequestMultiError, or nil if none found.
+func (m *GetCompanyAdminEmailsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCompanyAdminEmailsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetCompanyAdminEmailsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetCompanyAdminEmailsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetCompanyAdminEmailsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetCompanyAdminEmailsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCompanyAdminEmailsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetCompanyAdminEmailsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetCompanyAdminEmailsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCompanyAdminEmailsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCompanyAdminEmailsRequestMultiError) AllErrors() []error { return m }
+
+// GetCompanyAdminEmailsRequestValidationError is the validation error returned
+// by GetCompanyAdminEmailsRequest.Validate if the designated constraints
+// aren't met.
+type GetCompanyAdminEmailsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCompanyAdminEmailsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCompanyAdminEmailsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCompanyAdminEmailsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCompanyAdminEmailsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCompanyAdminEmailsRequestValidationError) ErrorName() string {
+	return "GetCompanyAdminEmailsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCompanyAdminEmailsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCompanyAdminEmailsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCompanyAdminEmailsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCompanyAdminEmailsRequestValidationError{}
+
+// Validate checks the field values on GetCompanyAdminEmailsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCompanyAdminEmailsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCompanyAdminEmailsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetCompanyAdminEmailsResponseMultiError, or nil if none found.
+func (m *GetCompanyAdminEmailsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCompanyAdminEmailsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetCompanyAdminEmailsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCompanyAdminEmailsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetCompanyAdminEmailsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetCompanyAdminEmailsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCompanyAdminEmailsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCompanyAdminEmailsResponseMultiError) AllErrors() []error { return m }
+
+// GetCompanyAdminEmailsResponseValidationError is the validation error
+// returned by GetCompanyAdminEmailsResponse.Validate if the designated
+// constraints aren't met.
+type GetCompanyAdminEmailsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCompanyAdminEmailsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCompanyAdminEmailsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCompanyAdminEmailsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCompanyAdminEmailsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCompanyAdminEmailsResponseValidationError) ErrorName() string {
+	return "GetCompanyAdminEmailsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCompanyAdminEmailsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCompanyAdminEmailsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCompanyAdminEmailsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCompanyAdminEmailsResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

@@ -274,6 +274,10 @@ service User {
 	rpc ListOperatorsByAdminEmail(ListOperatorsByAdminEmailRequest) returns (ListOperatorsByAdminEmailResponse) {
 	}
 
+	// GetCompanyAdminEmails returns admin emails for a company operator
+	rpc GetCompanyAdminEmails(GetCompanyAdminEmailsRequest) returns (GetCompanyAdminEmailsResponse) {
+	}
+
 	// ListOperatorDetails returns a list of operator details
 	rpc ListOperatorDetails(ListOperatorDetailsRequest) returns (ListOperatorDetailsResponse) {
 	}
@@ -2481,4 +2485,12 @@ message GetRewardHistoryResponse {
 	string weekly_rewards_usd = 6;
 	string monthly_rewards_usd = 7;
 	string daily_lossback_usd = 8;
+}
+
+message GetCompanyAdminEmailsRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetCompanyAdminEmailsResponse {
+	repeated string emails = 1;
 }
