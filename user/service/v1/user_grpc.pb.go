@@ -79,6 +79,7 @@ const (
 	User_UpdateOperatorStatus_FullMethodName               = "/api.user.service.v1.User/UpdateOperatorStatus"
 	User_ListAllUsers_FullMethodName                       = "/api.user.service.v1.User/ListAllUsers"
 	User_ListOperatorsByAdminEmail_FullMethodName          = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
+	User_GetCompanyAdminEmails_FullMethodName              = "/api.user.service.v1.User/GetCompanyAdminEmails"
 	User_ListOperatorDetails_FullMethodName                = "/api.user.service.v1.User/ListOperatorDetails"
 	User_GetOperatorDetailsByUserId_FullMethodName         = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
 	User_GetOperatorAccountSettings_FullMethodName         = "/api.user.service.v1.User/GetOperatorAccountSettings"
@@ -254,6 +255,8 @@ type UserClient interface {
 	ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error)
 	// ListOperatorsByAdminEmail returns a list of (retailer, company, bottom) operators by admin email based on the operator context
 	ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*ListOperatorsByAdminEmailResponse, error)
+	// GetCompanyAdminEmails returns admin emails for a company operator
+	GetCompanyAdminEmails(ctx context.Context, in *GetCompanyAdminEmailsRequest, opts ...grpc.CallOption) (*GetCompanyAdminEmailsResponse, error)
 	// ListOperatorDetails returns a list of operator details
 	ListOperatorDetails(ctx context.Context, in *ListOperatorDetailsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsResponse, error)
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
@@ -943,6 +946,16 @@ func (c *userClient) ListOperatorsByAdminEmail(ctx context.Context, in *ListOper
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOperatorsByAdminEmailResponse)
 	err := c.cc.Invoke(ctx, User_ListOperatorsByAdminEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetCompanyAdminEmails(ctx context.Context, in *GetCompanyAdminEmailsRequest, opts ...grpc.CallOption) (*GetCompanyAdminEmailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCompanyAdminEmailsResponse)
+	err := c.cc.Invoke(ctx, User_GetCompanyAdminEmails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1671,6 +1684,8 @@ type UserServer interface {
 	ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error)
 	// ListOperatorsByAdminEmail returns a list of (retailer, company, bottom) operators by admin email based on the operator context
 	ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*ListOperatorsByAdminEmailResponse, error)
+	// GetCompanyAdminEmails returns admin emails for a company operator
+	GetCompanyAdminEmails(context.Context, *GetCompanyAdminEmailsRequest) (*GetCompanyAdminEmailsResponse, error)
 	// ListOperatorDetails returns a list of operator details
 	ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error)
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
@@ -1959,6 +1974,9 @@ func (UnimplementedUserServer) ListAllUsers(context.Context, *ListAllUsersReques
 }
 func (UnimplementedUserServer) ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*ListOperatorsByAdminEmailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorsByAdminEmail not implemented")
+}
+func (UnimplementedUserServer) GetCompanyAdminEmails(context.Context, *GetCompanyAdminEmailsRequest) (*GetCompanyAdminEmailsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCompanyAdminEmails not implemented")
 }
 func (UnimplementedUserServer) ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperatorDetails not implemented")
@@ -3204,6 +3222,24 @@ func _User_ListOperatorsByAdminEmail_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListOperatorsByAdminEmail(ctx, req.(*ListOperatorsByAdminEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetCompanyAdminEmails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCompanyAdminEmailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetCompanyAdminEmails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetCompanyAdminEmails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetCompanyAdminEmails(ctx, req.(*GetCompanyAdminEmailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4544,6 +4580,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorsByAdminEmail",
 			Handler:    _User_ListOperatorsByAdminEmail_Handler,
+		},
+		{
+			MethodName: "GetCompanyAdminEmails",
+			Handler:    _User_GetCompanyAdminEmails_Handler,
 		},
 		{
 			MethodName: "ListOperatorDetails",
