@@ -4724,15 +4724,15 @@ paths:
             tags:
                 - BackofficePayment
             description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
+                Update payment channel
+                 Updates an existing payment channel with specified configuration
+                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to update payment channel
             operationId: BackofficePayment_UpdatePaymentChannel
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.UpdatePaymentChannelRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePaymentChannelRequest'
                 required: true
             responses:
                 "200":
@@ -12792,6 +12792,10 @@ components:
                 key:
                     type: object
                     description: Configuration fields for the payment channel in JSON format
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for hierarchy control
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -19920,6 +19924,47 @@ components:
                     items:
                         type: string
                     description: IP white list
+        api.backoffice.service.v1.UpdatePaymentChannelRequest:
+            type: object
+            properties:
+                paymentChannelId:
+                    type: string
+                    description: ID of the payment channel to update
+                fixedFee:
+                    type: string
+                    description: PSP Fixed Fee on the Amount
+                feeRate:
+                    type: string
+                    description: PSP Rate Fee
+                minFee:
+                    type: string
+                    description: PSP Min Fee
+                userFixedFee:
+                    type: string
+                    description: User Fixed Fee on the Amount
+                userFeeRate:
+                    type: string
+                    description: User Rate Fee
+                userMinFee:
+                    type: string
+                    description: User Min Fee
+                minAmount:
+                    type: string
+                    description: Min Amount
+                maxAmount:
+                    type: string
+                    description: Max Amount
+                enable:
+                    type: boolean
+                    description: enable status
+                key:
+                    type: object
+                    description: Configuration fields for the payment channel in JSON format
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for hierarchy control
+            description: Request to update a payment channel (backoffice-specific, no operator_context field)
         api.backoffice.service.v1.UpdatePaymentMethodRequest:
             type: object
             properties:
@@ -29154,56 +29199,6 @@ components:
         payment.service.v1.UpdateBankCardResponse:
             type: object
             properties: {}
-        payment.service.v1.UpdatePaymentChannelRequest:
-            type: object
-            properties:
-                paymentChannelId:
-                    type: string
-                    description: ID of the payment channel to be used
-                fixedFee:
-                    type: string
-                    description: |-
-                        Contact Info email
-                         string contact = 2;
-                         PSP Fixed Fee on the Amount
-                feeRate:
-                    type: string
-                    description: PSP Rate Fee
-                minFee:
-                    type: string
-                    description: PSP Min Fee
-                userFixedFee:
-                    type: string
-                    description: User Fixed Fee on the Amount
-                userFeeRate:
-                    type: string
-                    description: User Rate Fee
-                userMinFee:
-                    type: string
-                    description: User Min Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                enable:
-                    type: boolean
-                    description: enable status
-                key:
-                    type: object
-                    description: Configuration fields for the payment channel in JSON format
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: Who is performing the action
-                targetOperatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: For which operator this enable/disable applies (for hierarchy control)
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
         payment.service.v1.UpdatePaymentChannelResponse:
             type: object
             properties:

@@ -81,10 +81,10 @@ service BackofficePayment {
     };
   }
 
-  // Create payment channel
-  // Creates a new payment channel with specified configuration
-  // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc UpdatePaymentChannel(payment.service.v1.UpdatePaymentChannelRequest) returns (payment.service.v1.UpdatePaymentChannelResponse) {
+  // Update payment channel
+  // Updates an existing payment channel with specified configuration
+  // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to update payment channel
+  rpc UpdatePaymentChannel(UpdatePaymentChannelRequest) returns (payment.service.v1.UpdatePaymentChannelResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/channel/update"
       body: "*"
@@ -185,6 +185,36 @@ message CreatePaymentChannelRequest {
   string max_amount = 11;
   // Configuration fields for the payment channel in JSON format
   google.protobuf.Struct key = 12;
+  // Target operator context for hierarchy control
+  api.common.OperatorContext target_operator_context = 13;
+}
+
+// Request to update a payment channel (backoffice-specific, no operator_context field)
+message UpdatePaymentChannelRequest {
+  // ID of the payment channel to update
+  string payment_channel_id = 1;
+  // PSP Fixed Fee on the Amount
+  string fixed_fee = 2;
+  // PSP Rate Fee
+  string fee_rate = 3;
+  // PSP Min Fee
+  string min_fee = 4;
+  // User Fixed Fee on the Amount
+  string user_fixed_fee = 5;
+  // User Rate Fee
+  string user_fee_rate = 6;
+  // User Min Fee
+  string user_min_fee = 7;
+  // Min Amount
+  string min_amount = 8;
+  // Max Amount
+  string max_amount = 9;
+  // enable status
+  optional bool enable = 10;
+  // Configuration fields for the payment channel in JSON format
+  optional google.protobuf.Struct key = 11;
+  // Target operator context for hierarchy control
+  api.common.OperatorContext target_operator_context = 12;
 }
 
 message GetPaymentMethodListRequest {
