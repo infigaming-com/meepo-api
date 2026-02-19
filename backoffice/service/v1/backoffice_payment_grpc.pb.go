@@ -65,10 +65,10 @@ type BackofficePaymentClient interface {
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentMethod(ctx context.Context, in *CreatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error)
-	// Create payment channel
-	// Creates a new payment channel with specified configuration
-	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	UpdatePaymentChannel(ctx context.Context, in *v1.UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*v1.UpdatePaymentChannelResponse, error)
+	// Update payment channel
+	// Updates an existing payment channel with specified configuration
+	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to update payment channel
+	UpdatePaymentChannel(ctx context.Context, in *UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*v1.UpdatePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
@@ -160,7 +160,7 @@ func (c *backofficePaymentClient) CreatePaymentMethod(ctx context.Context, in *C
 	return out, nil
 }
 
-func (c *backofficePaymentClient) UpdatePaymentChannel(ctx context.Context, in *v1.UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*v1.UpdatePaymentChannelResponse, error) {
+func (c *backofficePaymentClient) UpdatePaymentChannel(ctx context.Context, in *UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*v1.UpdatePaymentChannelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.UpdatePaymentChannelResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_UpdatePaymentChannel_FullMethodName, in, out, cOpts...)
@@ -241,10 +241,10 @@ type BackofficePaymentServer interface {
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
 	CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
-	// Create payment channel
-	// Creates a new payment channel with specified configuration
-	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	UpdatePaymentChannel(context.Context, *v1.UpdatePaymentChannelRequest) (*v1.UpdatePaymentChannelResponse, error)
+	// Update payment channel
+	// Updates an existing payment channel with specified configuration
+	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to update payment channel
+	UpdatePaymentChannel(context.Context, *UpdatePaymentChannelRequest) (*v1.UpdatePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
@@ -287,7 +287,7 @@ func (UnimplementedBackofficePaymentServer) GetPaymentMethodList(context.Context
 func (UnimplementedBackofficePaymentServer) CreatePaymentMethod(context.Context, *CreatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePaymentMethod not implemented")
 }
-func (UnimplementedBackofficePaymentServer) UpdatePaymentChannel(context.Context, *v1.UpdatePaymentChannelRequest) (*v1.UpdatePaymentChannelResponse, error) {
+func (UnimplementedBackofficePaymentServer) UpdatePaymentChannel(context.Context, *UpdatePaymentChannelRequest) (*v1.UpdatePaymentChannelResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdatePaymentChannel not implemented")
 }
 func (UnimplementedBackofficePaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*v1.CreatePaymentChannelResponse, error) {
@@ -450,7 +450,7 @@ func _BackofficePayment_CreatePaymentMethod_Handler(srv interface{}, ctx context
 }
 
 func _BackofficePayment_UpdatePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdatePaymentChannelRequest)
+	in := new(UpdatePaymentChannelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -462,7 +462,7 @@ func _BackofficePayment_UpdatePaymentChannel_Handler(srv interface{}, ctx contex
 		FullMethod: BackofficePayment_UpdatePaymentChannel_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).UpdatePaymentChannel(ctx, req.(*v1.UpdatePaymentChannelRequest))
+		return srv.(BackofficePaymentServer).UpdatePaymentChannel(ctx, req.(*UpdatePaymentChannelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
