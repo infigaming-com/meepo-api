@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "push/service/v1/push_otp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// BackofficeOTP service
+// Provides HTTP APIs for OTP provider/template management and send logs
+service BackofficeOTP {
+  // ====== Provider Management ======
+
+  rpc CreateOTPProvider(api.push.service.v1.CreateOTPProviderRequest) returns (api.push.service.v1.CreateOTPProviderResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateOTPProvider(api.push.service.v1.UpdateOTPProviderRequest) returns (api.push.service.v1.UpdateOTPProviderResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteOTPProvider(api.push.service.v1.DeleteOTPProviderRequest) returns (api.push.service.v1.DeleteOTPProviderResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider/delete"
+      body: "*"
+    };
+  }
+
+  rpc GetOTPProvider(api.push.service.v1.GetOTPProviderRequest) returns (api.push.service.v1.GetOTPProviderResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider/get"
+      body: "*"
+    };
+  }
+
+  rpc ListOTPProviders(api.push.service.v1.ListOTPProvidersRequest) returns (api.push.service.v1.ListOTPProvidersResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider/list"
+      body: "*"
+    };
+  }
+
+  // ====== Template Management ======
+
+  rpc CreateOTPTemplate(api.push.service.v1.CreateOTPTemplateRequest) returns (api.push.service.v1.CreateOTPTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/template/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateOTPTemplate(api.push.service.v1.UpdateOTPTemplateRequest) returns (api.push.service.v1.UpdateOTPTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/template/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteOTPTemplate(api.push.service.v1.DeleteOTPTemplateRequest) returns (api.push.service.v1.DeleteOTPTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/template/delete"
+      body: "*"
+    };
+  }
+
+  rpc GetOTPTemplate(api.push.service.v1.GetOTPTemplateRequest) returns (api.push.service.v1.GetOTPTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/template/get"
+      body: "*"
+    };
+  }
+
+  rpc ListOTPTemplates(api.push.service.v1.ListOTPTemplatesRequest) returns (api.push.service.v1.ListOTPTemplatesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/template/list"
+      body: "*"
+    };
+  }
+
+  rpc SyncOTPTemplateStatus(api.push.service.v1.SyncOTPTemplateStatusRequest) returns (api.push.service.v1.SyncOTPTemplateStatusResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/template/sync-status"
+      body: "*"
+    };
+  }
+
+  // ====== Send Logs ======
+
+  rpc ListOTPSendLogs(api.push.service.v1.ListOTPSendLogsRequest) returns (api.push.service.v1.ListOTPSendLogsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/send-logs/list"
+      body: "*"
+    };
+  }
+}

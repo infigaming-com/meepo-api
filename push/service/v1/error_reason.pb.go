@@ -50,6 +50,16 @@ const (
 	ErrorReason_SAVE_CHANNEL_RULES_FAILED        ErrorReason = 90208
 	// Notification Delivery errors (90300-90399)
 	ErrorReason_SEND_TO_CHANNELS_FAILED ErrorReason = 90300
+	// OTP errors (90400-90499)
+	ErrorReason_OTP_PROVIDER_NOT_FOUND     ErrorReason = 90400
+	ErrorReason_OTP_PROVIDER_DISABLED      ErrorReason = 90401
+	ErrorReason_OTP_TEMPLATE_NOT_FOUND     ErrorReason = 90402
+	ErrorReason_OTP_TEMPLATE_NOT_APPROVED  ErrorReason = 90403
+	ErrorReason_SEND_OTP_FAILED            ErrorReason = 90404
+	ErrorReason_SEND_OTP_RATE_LIMITED      ErrorReason = 90405
+	ErrorReason_SEND_OTP_NO_PROVIDER       ErrorReason = 90406
+	ErrorReason_SEND_OTP_NO_TEMPLATE       ErrorReason = 90407
+	ErrorReason_SEND_OTP_INVALID_RECIPIENT ErrorReason = 90408
 )
 
 // Enum value maps for ErrorReason.
@@ -77,6 +87,15 @@ var (
 		90207: "INVALID_RULE_CONDITIONS",
 		90208: "SAVE_CHANNEL_RULES_FAILED",
 		90300: "SEND_TO_CHANNELS_FAILED",
+		90400: "OTP_PROVIDER_NOT_FOUND",
+		90401: "OTP_PROVIDER_DISABLED",
+		90402: "OTP_TEMPLATE_NOT_FOUND",
+		90403: "OTP_TEMPLATE_NOT_APPROVED",
+		90404: "SEND_OTP_FAILED",
+		90405: "SEND_OTP_RATE_LIMITED",
+		90406: "SEND_OTP_NO_PROVIDER",
+		90407: "SEND_OTP_NO_TEMPLATE",
+		90408: "SEND_OTP_INVALID_RECIPIENT",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
@@ -101,6 +120,15 @@ var (
 		"INVALID_RULE_CONDITIONS":             90207,
 		"SAVE_CHANNEL_RULES_FAILED":           90208,
 		"SEND_TO_CHANNELS_FAILED":             90300,
+		"OTP_PROVIDER_NOT_FOUND":              90400,
+		"OTP_PROVIDER_DISABLED":               90401,
+		"OTP_TEMPLATE_NOT_FOUND":              90402,
+		"OTP_TEMPLATE_NOT_APPROVED":           90403,
+		"SEND_OTP_FAILED":                     90404,
+		"SEND_OTP_RATE_LIMITED":               90405,
+		"SEND_OTP_NO_PROVIDER":                90406,
+		"SEND_OTP_NO_TEMPLATE":                90407,
+		"SEND_OTP_INVALID_RECIPIENT":          90408,
 	}
 )
 
@@ -135,7 +163,7 @@ var File_push_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xac\x06\n" +
+	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xc0\b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12INVALID_TIME_RANGE\x10\x91\xbf\x05\x12\x1e\n" +
@@ -158,7 +186,16 @@ const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	" NOTIFICATION_RULE_ALREADY_EXISTS\x10\xde\xc0\x05\x12\x1d\n" +
 	"\x17INVALID_RULE_CONDITIONS\x10\xdf\xc0\x05\x12\x1f\n" +
 	"\x19SAVE_CHANNEL_RULES_FAILED\x10\xe0\xc0\x05\x12\x1d\n" +
-	"\x17SEND_TO_CHANNELS_FAILED\x10\xbc\xc1\x05\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x17SEND_TO_CHANNELS_FAILED\x10\xbc\xc1\x05\x12\x1c\n" +
+	"\x16OTP_PROVIDER_NOT_FOUND\x10\xa0\xc2\x05\x12\x1b\n" +
+	"\x15OTP_PROVIDER_DISABLED\x10\xa1\xc2\x05\x12\x1c\n" +
+	"\x16OTP_TEMPLATE_NOT_FOUND\x10\xa2\xc2\x05\x12\x1f\n" +
+	"\x19OTP_TEMPLATE_NOT_APPROVED\x10\xa3\xc2\x05\x12\x15\n" +
+	"\x0fSEND_OTP_FAILED\x10\xa4\xc2\x05\x12!\n" +
+	"\x15SEND_OTP_RATE_LIMITED\x10\xa5\xc2\x05\x1a\x04\xa8E\xad\x03\x12\x1a\n" +
+	"\x14SEND_OTP_NO_PROVIDER\x10\xa6\xc2\x05\x12\x1a\n" +
+	"\x14SEND_OTP_NO_TEMPLATE\x10\xa7\xc2\x05\x12&\n" +
+	"\x1aSEND_OTP_INVALID_RECIPIENT\x10\xa8\xc2\x05\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (

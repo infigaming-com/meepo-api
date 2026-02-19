@@ -4675,6 +4675,222 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorStatusResponse'
+    /v1/backoffice/otp/provider/create:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_CreateOTPProvider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.CreateOTPProviderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateOTPProviderResponse'
+    /v1/backoffice/otp/provider/delete:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_DeleteOTPProvider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.DeleteOTPProviderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteOTPProviderResponse'
+    /v1/backoffice/otp/provider/get:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_GetOTPProvider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetOTPProviderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetOTPProviderResponse'
+    /v1/backoffice/otp/provider/list:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_ListOTPProviders
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListOTPProvidersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListOTPProvidersResponse'
+    /v1/backoffice/otp/provider/update:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_UpdateOTPProvider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.UpdateOTPProviderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateOTPProviderResponse'
+    /v1/backoffice/otp/send-logs/list:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_ListOTPSendLogs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListOTPSendLogsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListOTPSendLogsResponse'
+    /v1/backoffice/otp/template/create:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_CreateOTPTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.CreateOTPTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateOTPTemplateResponse'
+    /v1/backoffice/otp/template/delete:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_DeleteOTPTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.DeleteOTPTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteOTPTemplateResponse'
+    /v1/backoffice/otp/template/get:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_GetOTPTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.GetOTPTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.GetOTPTemplateResponse'
+    /v1/backoffice/otp/template/list:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_ListOTPTemplates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.ListOTPTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListOTPTemplatesResponse'
+    /v1/backoffice/otp/template/sync-status:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_SyncOTPTemplateStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.SyncOTPTemplateStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.SyncOTPTemplateStatusResponse'
+    /v1/backoffice/otp/template/update:
+        post:
+            tags:
+                - BackofficeOTP
+            operationId: BackofficeOTP_UpdateOTPTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.push.service.v1.UpdateOTPTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateOTPTemplateResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -23079,6 +23295,74 @@ components:
             properties:
                 channel:
                     $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+        api.push.service.v1.CreateOTPProviderRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                country:
+                    type: string
+                providerType:
+                    type: string
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                priority:
+                    type: integer
+                    format: int32
+                credentialsJson:
+                    type: string
+                config:
+                    type: string
+                sendChannelStrategy:
+                    type: string
+        api.push.service.v1.CreateOTPProviderResponse:
+            type: object
+            properties:
+                provider:
+                    $ref: '#/components/schemas/api.push.service.v1.OTPProviderInfo'
+        api.push.service.v1.CreateOTPTemplateRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                country:
+                    type: string
+                providerId:
+                    type: string
+                name:
+                    type: string
+                templateType:
+                    enum:
+                        - OTP_TEMPLATE_TYPE_UNSPECIFIED
+                        - OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION
+                        - OTP_TEMPLATE_TYPE_LOGIN_OTP
+                        - OTP_TEMPLATE_TYPE_PASSWORD_RESET
+                        - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
+                    type: string
+                    format: enum
+                externalTemplateId:
+                    type: string
+                language:
+                    type: string
+                brandName:
+                    type: string
+                codeLength:
+                    type: integer
+                    format: int32
+                codeTtlSeconds:
+                    type: integer
+                    format: int32
+                extraParams:
+                    type: string
+                enabled:
+                    type: boolean
+        api.push.service.v1.CreateOTPTemplateResponse:
+            type: object
+            properties:
+                template:
+                    $ref: '#/components/schemas/api.push.service.v1.OTPTemplateInfo'
         api.push.service.v1.CurrencyCondition:
             type: object
             properties:
@@ -23098,6 +23382,22 @@ components:
         api.push.service.v1.DeleteNotificationChannelResponse:
             type: object
             properties: {}
+        api.push.service.v1.DeleteOTPProviderRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.push.service.v1.DeleteOTPProviderResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.DeleteOTPTemplateRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.push.service.v1.DeleteOTPTemplateResponse:
+            type: object
+            properties: {}
         api.push.service.v1.GetNotificationChannelRequest:
             type: object
             properties:
@@ -23110,6 +23410,26 @@ components:
             properties:
                 channel:
                     $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+        api.push.service.v1.GetOTPProviderRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.push.service.v1.GetOTPProviderResponse:
+            type: object
+            properties:
+                provider:
+                    $ref: '#/components/schemas/api.push.service.v1.OTPProviderInfo'
+        api.push.service.v1.GetOTPTemplateRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.push.service.v1.GetOTPTemplateResponse:
+            type: object
+            properties:
+                template:
+                    $ref: '#/components/schemas/api.push.service.v1.OTPTemplateInfo'
         api.push.service.v1.GetSupportedMessageTypesRequest:
             type: object
             properties: {}
@@ -23210,6 +23530,118 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListOTPProvidersRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                country:
+                    type: string
+                providerType:
+                    type: string
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListOTPProvidersResponse:
+            type: object
+            properties:
+                providers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.OTPProviderInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListOTPSendLogsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                userId:
+                    type: string
+                channelUsed:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListOTPSendLogsResponse:
+            type: object
+            properties:
+                logs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.OTPSendLogInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListOTPTemplatesRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                country:
+                    type: string
+                providerId:
+                    type: string
+                templateType:
+                    enum:
+                        - OTP_TEMPLATE_TYPE_UNSPECIFIED
+                        - OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION
+                        - OTP_TEMPLATE_TYPE_LOGIN_OTP
+                        - OTP_TEMPLATE_TYPE_PASSWORD_RESET
+                        - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.push.service.v1.ListOTPTemplatesResponse:
+            type: object
+            properties:
+                templates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.OTPTemplateInfo'
                 total:
                     type: integer
                     format: int32
@@ -23330,6 +23762,116 @@ components:
                 enabled:
                     type: boolean
             description: Input for creating/updating rules in batch
+        api.push.service.v1.OTPProviderInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                country:
+                    type: string
+                providerType:
+                    type: string
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                priority:
+                    type: integer
+                    format: int32
+                hasCredentials:
+                    type: boolean
+                config:
+                    type: string
+                sendChannelStrategy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+        api.push.service.v1.OTPSendLogInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                providerId:
+                    type: string
+                templateId:
+                    type: string
+                recipientMasked:
+                    type: string
+                channelUsed:
+                    type: string
+                externalMessageId:
+                    type: string
+                status:
+                    type: string
+                errorMessage:
+                    type: string
+                userId:
+                    type: string
+                ipAddress:
+                    type: string
+                createdAt:
+                    type: string
+        api.push.service.v1.OTPTemplateInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorId:
+                    type: string
+                country:
+                    type: string
+                providerId:
+                    type: string
+                name:
+                    type: string
+                templateType:
+                    enum:
+                        - OTP_TEMPLATE_TYPE_UNSPECIFIED
+                        - OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION
+                        - OTP_TEMPLATE_TYPE_LOGIN_OTP
+                        - OTP_TEMPLATE_TYPE_PASSWORD_RESET
+                        - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
+                    type: string
+                    format: enum
+                externalTemplateId:
+                    type: string
+                language:
+                    type: string
+                brandName:
+                    type: string
+                codeLength:
+                    type: integer
+                    format: int32
+                codeTtlSeconds:
+                    type: integer
+                    format: int32
+                extraParams:
+                    type: string
+                reviewStatus:
+                    enum:
+                        - OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED
+                        - OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY
+                        - OTP_TEMPLATE_REVIEW_STATUS_PENDING
+                        - OTP_TEMPLATE_REVIEW_STATUS_APPROVED
+                        - OTP_TEMPLATE_REVIEW_STATUS_REJECTED
+                    type: string
+                    format: enum
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
         api.push.service.v1.SaveChannelRulesRequest:
             type: object
             properties:
@@ -23355,6 +23897,23 @@ components:
                     type: string
                 webhookUrlMasked:
                     type: string
+        api.push.service.v1.SyncOTPTemplateStatusRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.push.service.v1.SyncOTPTemplateStatusResponse:
+            type: object
+            properties:
+                reviewStatus:
+                    enum:
+                        - OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED
+                        - OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY
+                        - OTP_TEMPLATE_REVIEW_STATUS_PENDING
+                        - OTP_TEMPLATE_REVIEW_STATUS_APPROVED
+                        - OTP_TEMPLATE_REVIEW_STATUS_REJECTED
+                    type: string
+                    format: enum
         api.push.service.v1.TelegramChannelConfig:
             type: object
             properties:
@@ -23397,6 +23956,53 @@ components:
                 enabled:
                     type: boolean
         api.push.service.v1.UpdateNotificationChannelResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.UpdateOTPProviderRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                priority:
+                    type: integer
+                    format: int32
+                credentialsJson:
+                    type: string
+                config:
+                    type: string
+                sendChannelStrategy:
+                    type: string
+        api.push.service.v1.UpdateOTPProviderResponse:
+            type: object
+            properties: {}
+        api.push.service.v1.UpdateOTPTemplateRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                externalTemplateId:
+                    type: string
+                language:
+                    type: string
+                brandName:
+                    type: string
+                codeLength:
+                    type: integer
+                    format: int32
+                codeTtlSeconds:
+                    type: integer
+                    format: int32
+                extraParams:
+                    type: string
+                enabled:
+                    type: boolean
+        api.push.service.v1.UpdateOTPTemplateResponse:
             type: object
             properties: {}
         api.report.service.v1.GetDepositSummariesRequest:
@@ -29418,6 +30024,10 @@ tags:
          Provides HTTP APIs for notification channel and rule management
     - name: BackofficeOAuth
       description: BackofficeOAuth service provides OAuth provider configuration management for operators
+    - name: BackofficeOTP
+      description: |-
+        BackofficeOTP service
+         Provides HTTP APIs for OTP provider/template management and send logs
     - name: BackofficeOperator
     - name: BackofficePayment
       description: |-
