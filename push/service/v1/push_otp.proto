@@ -42,6 +42,22 @@ enum OTPChannel {
   OTP_CHANNEL_EMAIL = 4;
 }
 
+// OTPProviderType enumerates the supported third-party OTP delivery providers.
+// New providers should be added here as the platform integrates them.
+enum OTPProviderType {
+  OTP_PROVIDER_TYPE_UNSPECIFIED = 0;
+  OTP_PROVIDER_TYPE_ENGAGELAB = 1;   // EngageLab (SMS, WhatsApp, Voice)
+}
+
+// OTPSendChannelStrategy defines the channel delivery order for an OTP provider.
+// The system tries channels left-to-right; if the first channel fails, it falls back to the next.
+enum OTPSendChannelStrategy {
+  OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED = 0;
+  OTP_SEND_CHANNEL_STRATEGY_SMS = 1;                   // SMS only
+  OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS = 2;           // WhatsApp first, fallback to SMS
+  OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE = 3;     // WhatsApp → SMS → Voice
+}
+
 enum OTPTemplateType {
   OTP_TEMPLATE_TYPE_UNSPECIFIED = 0;
   OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION = 1;
@@ -84,31 +100,47 @@ message SendOTPResponse {
 
 // ============ Provider CRUD ============
 
+// OTPProviderInfo represents an OTP provider configuration.
+// Credentials are NEVER exposed in responses; only has_credentials indicates whether they are set.
 message OTPProviderInfo {
   int64 id = 1;
   int64 operator_id = 2;
   string country = 3;
-  string provider_type = 4;
+  OTPProviderType provider_type = 4;
   string name = 5;
   bool enabled = 6;
   int32 priority = 7;
   bool has_credentials = 8;   // Never expose credentials in response
   string config = 9;          // JSON string of non-sensitive config
-  string send_channel_strategy = 10;
+  OTPSendChannelStrategy send_channel_strategy = 10;
   int64 created_at = 11;
   int64 updated_at = 12;
 }
 
+// CreateOTPProviderRequest registers an OTP delivery provider for a specific operator + country.
+//
+// An OTP provider represents a third-party service (e.g., EngageLab) capable of delivering
+// OTP codes via SMS, WhatsApp, or Voice channels. Each operator can have multiple providers
+// for different countries, with priority-based fallback routing.
+//
+// Routing chain when SendOTP is called:
+//   1. (operator_id, country, enabled=true) ORDER BY priority ASC
+//   2. (operator_id, "global", enabled=true) ORDER BY priority ASC
+//   3. (system_operator_id, country, enabled=true) ORDER BY priority ASC
+//   4. (system_operator_id, "global", enabled=true) ORDER BY priority ASC
+//
+// Constraint: UNIQUE(operator_id, country, provider_type).
 message CreateOTPProviderRequest {
-  int64 operator_id = 1;
-  string country = 2;
-  string provider_type = 3;
-  string name = 4;
-  bool enabled = 5;
-  int32 priority = 6;
-  string credentials_json = 7;  // Plain JSON, encrypted before storage
-  string config = 8;            // JSON string of non-sensitive config
-  string send_channel_strategy = 9;
+  int64 operator_id = 1;                        // Operator this provider belongs to
+  string country = 2;                           // ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
+  OTPProviderType provider_type = 3;            // Third-party provider to use (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
+  string name = 4;                              // Human-readable display name
+  bool enabled = 5;                             // Whether this provider is active for routing
+  int32 priority = 6;                           // Routing priority within same (operator_id, country). Lower = higher priority
+  string credentials_json = 7;                  // Plain JSON with provider-specific credentials. Encrypted (AES-256-GCM) before storage.
+                                                // EngageLab example: {"dev_key":"xxx","dev_secret":"yyy"}
+  string config = 8;                            // JSON string of non-sensitive config (base_url, timeouts). Optional.
+  OTPSendChannelStrategy send_channel_strategy = 9; // Channel delivery order (e.g., OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS)
 }
 
 message CreateOTPProviderResponse {
@@ -122,7 +154,7 @@ message UpdateOTPProviderRequest {
   optional int32 priority = 4;
   optional string credentials_json = 5;
   optional string config = 6;
-  optional string send_channel_strategy = 7;
+  optional OTPSendChannelStrategy send_channel_strategy = 7;
 }
 
 message UpdateOTPProviderResponse {}
@@ -144,7 +176,7 @@ message GetOTPProviderResponse {
 message ListOTPProvidersRequest {
   int64 operator_id = 1;
   optional string country = 2;
-  optional string provider_type = 3;
+  optional OTPProviderType provider_type = 3;
   optional bool enabled = 4;
   int32 page = 5;
   int32 page_size = 6;

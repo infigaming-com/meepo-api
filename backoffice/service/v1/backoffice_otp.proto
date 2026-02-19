@@ -3,46 +3,130 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 import "push/service/v1/push_otp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-// BackofficeOTP service
-// Provides HTTP APIs for OTP provider/template management and send logs
+// BackofficeOTP service — OTP (One-Time Password) delivery configuration management.
+//
+// ## What is this service for?
+// Meepo is a multi-tenant SaaS gaming platform. When end-users perform sensitive operations
+// (registration, login, password reset, withdrawal), the platform sends OTP verification codes.
+// OTP can be delivered via SMS, WhatsApp, Voice, or Email.
+//
+// This service allows backoffice administrators to configure HOW OTPs are delivered
+// for each operator (tenant), per country. The configuration consists of two layers:
+//
+//   Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab, Twilio)
+//   Template  — "What message content is sent?" (bound to a provider, per business scenario)
+//
+// ## Complete setup workflow
+//
+// Step 1: CreateOTPProvider
+//   Register a third-party OTP delivery service for an operator + country.
+//   Example: EngageLab for operator 1001, country "BR" (Brazil).
+//
+// Step 2: CreateOTPTemplate
+//   Create message templates bound to the provider, one per business scenario.
+//   Example: "email_verification" template using EngageLab template ID "T001" in Portuguese.
+//
+// Step 3: SyncOTPTemplateStatus
+//   Some providers (EngageLab WhatsApp) require template approval. Call this to pull the
+//   latest review status from the provider. Only approved templates can be used for sending.
+//
+// Step 4: (Automatic) SendOTP is called by internal services (e.g., user-service)
+//   The push-service automatically routes to the correct provider + template based on
+//   the operator, country, and business scenario. No backoffice action needed at this step.
+//
+// Step 5: ListOTPSendLogs
+//   Query delivery history for auditing, debugging, or statistics.
+//
+// ## Multi-tenant permission model
+// All requests include target_operator_context. The backoffice validates that the
+// authenticated admin has permission to operate on the target operator (hierarchy check).
+// If target_operator_context is omitted, it defaults to the admin's own operator.
 service BackofficeOTP {
   // ====== Provider Management ======
 
-  rpc CreateOTPProvider(api.push.service.v1.CreateOTPProviderRequest) returns (api.push.service.v1.CreateOTPProviderResponse) {
+  // CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+  //
+  // ## What is an OTP Provider?
+  // A Provider is a connection to a third-party service (e.g., EngageLab) that can
+  // deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
+  //   - The provider's API credentials (encrypted at rest, never returned in responses)
+  //   - Which delivery channels to use and in what order (send_channel_strategy)
+  //   - A priority for fallback routing when multiple providers exist
+  //
+  // ## When to use this API?
+  // Call this when onboarding a new operator or expanding to a new country. For example:
+  //   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
+  //     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+  //     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
+  //   - Same operator wants a global SMS fallback → create another provider with
+  //     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+  //     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
+  //
+  // ## How does routing work?
+  // When user-service calls SendOTP for a phone number, push-service resolves the provider
+  // using this fallback chain (first match wins):
+  //   1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
+  //   2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
+  //   3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
+  //   4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
+  // This means: operator-specific config is preferred; "global" is the fallback;
+  // system-level config provides a safety net for operators that haven't configured anything.
+  //
+  // ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
+  //   {
+  //     "target_operator_context": { "operator_id": 1001 },
+  //     "country": "BR",
+  //     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+  //     "name": "EngageLab Brazil",
+  //     "enabled": true,
+  //     "priority": 0,
+  //     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+  //     "config": "{}",
+  //     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+  //   }
+  //
+  // ## Response
+  // Returns the created provider info (with has_credentials=true instead of actual credentials).
+  //
+  // ## Errors
+  // - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
+  // - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
+  rpc CreateOTPProvider(CreateOTPProviderRequest) returns (api.push.service.v1.CreateOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/create"
       body: "*"
     };
   }
 
-  rpc UpdateOTPProvider(api.push.service.v1.UpdateOTPProviderRequest) returns (api.push.service.v1.UpdateOTPProviderResponse) {
+  rpc UpdateOTPProvider(UpdateOTPProviderRequest) returns (api.push.service.v1.UpdateOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/update"
       body: "*"
     };
   }
 
-  rpc DeleteOTPProvider(api.push.service.v1.DeleteOTPProviderRequest) returns (api.push.service.v1.DeleteOTPProviderResponse) {
+  rpc DeleteOTPProvider(DeleteOTPProviderRequest) returns (api.push.service.v1.DeleteOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/delete"
       body: "*"
     };
   }
 
-  rpc GetOTPProvider(api.push.service.v1.GetOTPProviderRequest) returns (api.push.service.v1.GetOTPProviderResponse) {
+  rpc GetOTPProvider(GetOTPProviderRequest) returns (api.push.service.v1.GetOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/get"
       body: "*"
     };
   }
 
-  rpc ListOTPProviders(api.push.service.v1.ListOTPProvidersRequest) returns (api.push.service.v1.ListOTPProvidersResponse) {
+  rpc ListOTPProviders(ListOTPProvidersRequest) returns (api.push.service.v1.ListOTPProvidersResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/list"
       body: "*"
@@ -51,42 +135,42 @@ service BackofficeOTP {
 
   // ====== Template Management ======
 
-  rpc CreateOTPTemplate(api.push.service.v1.CreateOTPTemplateRequest) returns (api.push.service.v1.CreateOTPTemplateResponse) {
+  rpc CreateOTPTemplate(CreateOTPTemplateRequest) returns (api.push.service.v1.CreateOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/create"
       body: "*"
     };
   }
 
-  rpc UpdateOTPTemplate(api.push.service.v1.UpdateOTPTemplateRequest) returns (api.push.service.v1.UpdateOTPTemplateResponse) {
+  rpc UpdateOTPTemplate(UpdateOTPTemplateRequest) returns (api.push.service.v1.UpdateOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/update"
       body: "*"
     };
   }
 
-  rpc DeleteOTPTemplate(api.push.service.v1.DeleteOTPTemplateRequest) returns (api.push.service.v1.DeleteOTPTemplateResponse) {
+  rpc DeleteOTPTemplate(DeleteOTPTemplateRequest) returns (api.push.service.v1.DeleteOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/delete"
       body: "*"
     };
   }
 
-  rpc GetOTPTemplate(api.push.service.v1.GetOTPTemplateRequest) returns (api.push.service.v1.GetOTPTemplateResponse) {
+  rpc GetOTPTemplate(GetOTPTemplateRequest) returns (api.push.service.v1.GetOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/get"
       body: "*"
     };
   }
 
-  rpc ListOTPTemplates(api.push.service.v1.ListOTPTemplatesRequest) returns (api.push.service.v1.ListOTPTemplatesResponse) {
+  rpc ListOTPTemplates(ListOTPTemplatesRequest) returns (api.push.service.v1.ListOTPTemplatesResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/list"
       body: "*"
     };
   }
 
-  rpc SyncOTPTemplateStatus(api.push.service.v1.SyncOTPTemplateStatusRequest) returns (api.push.service.v1.SyncOTPTemplateStatusResponse) {
+  rpc SyncOTPTemplateStatus(SyncOTPTemplateStatusRequest) returns (api.push.service.v1.SyncOTPTemplateStatusResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/sync-status"
       body: "*"
@@ -95,10 +179,138 @@ service BackofficeOTP {
 
   // ====== Send Logs ======
 
-  rpc ListOTPSendLogs(api.push.service.v1.ListOTPSendLogsRequest) returns (api.push.service.v1.ListOTPSendLogsResponse) {
+  rpc ListOTPSendLogs(ListOTPSendLogsRequest) returns (api.push.service.v1.ListOTPSendLogsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/send-logs/list"
       body: "*"
     };
   }
+}
+
+// ============ Provider Management ============
+
+// CreateOTPProviderRequest — see CreateOTPProvider RPC comment above for full documentation.
+//
+// Constraints:
+// - UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
+// - credentials_json is required and must be valid JSON for the chosen provider_type.
+message CreateOTPProviderRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string country = 2;             // ISO 3166-1 alpha-2, or "global" for default fallback
+  api.push.service.v1.OTPProviderType provider_type = 3;             // Third-party provider (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
+  string name = 4;                // Human-readable display name
+  bool enabled = 5;               // Whether this provider is active for routing
+  int32 priority = 6;             // Routing priority (lower = higher priority, e.g., 0 > 1 > 2)
+  string credentials_json = 7;    // Plain JSON with provider-specific credentials (encrypted before storage)
+  string config = 8;              // JSON string of non-sensitive config (base_url, timeouts, etc.)
+  api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 9; // Channel delivery order (e.g., OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS)
+}
+
+// UpdateOTPProviderRequest updates an existing OTP provider. Only provided fields are updated.
+message UpdateOTPProviderRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string name = 3;
+  optional bool enabled = 4;
+  optional int32 priority = 5;
+  optional string credentials_json = 6;
+  optional string config = 7;
+  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 8;
+}
+
+// DeleteOTPProviderRequest deletes an OTP provider by ID.
+message DeleteOTPProviderRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// GetOTPProviderRequest retrieves a single OTP provider by ID.
+message GetOTPProviderRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ListOTPProvidersRequest lists OTP providers with optional filters.
+message ListOTPProvidersRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional string country = 2;
+  optional api.push.service.v1.OTPProviderType provider_type = 3;
+  optional bool enabled = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+// ============ Template Management ============
+
+// CreateOTPTemplateRequest creates an OTP template bound to a specific provider.
+message CreateOTPTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string country = 2;
+  int64 provider_id = 3;
+  string name = 4;
+  api.push.service.v1.OTPTemplateType template_type = 5;
+  string external_template_id = 6;  // Template ID on the provider side (e.g., EngageLab template ID)
+  string language = 7;              // Template language: "en", "pt", "zh", etc.
+  string brand_name = 8;            // Brand name shown in the OTP message
+  int32 code_length = 9;            // OTP code length (default: 6)
+  int32 code_ttl_seconds = 10;      // OTP code TTL in seconds (default: 900)
+  string extra_params = 11;         // JSON string of extra template parameters
+  bool enabled = 12;
+}
+
+// UpdateOTPTemplateRequest updates an existing OTP template. Only provided fields are updated.
+message UpdateOTPTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+  optional string name = 3;
+  optional string external_template_id = 4;
+  optional string language = 5;
+  optional string brand_name = 6;
+  optional int32 code_length = 7;
+  optional int32 code_ttl_seconds = 8;
+  optional string extra_params = 9;
+  optional bool enabled = 10;
+}
+
+// DeleteOTPTemplateRequest deletes an OTP template by ID.
+message DeleteOTPTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// GetOTPTemplateRequest retrieves a single OTP template by ID.
+message GetOTPTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ListOTPTemplatesRequest lists OTP templates with optional filters.
+message ListOTPTemplatesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional string country = 2;
+  optional int64 provider_id = 3;
+  optional api.push.service.v1.OTPTemplateType template_type = 4;
+  optional bool enabled = 5;
+  int32 page = 6;
+  int32 page_size = 7;
+}
+
+// SyncOTPTemplateStatusRequest syncs the review status from the external provider.
+message SyncOTPTemplateStatusRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 id = 2;
+}
+
+// ============ Send Logs ============
+
+// ListOTPSendLogsRequest queries OTP send logs with filters.
+message ListOTPSendLogsRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  optional int64 user_id = 2;
+  optional string channel_used = 3;
+  optional string status = 4;
+  int64 start_time = 5;
+  int64 end_time = 6;
+  int32 page = 7;
+  int32 page_size = 8;
 }

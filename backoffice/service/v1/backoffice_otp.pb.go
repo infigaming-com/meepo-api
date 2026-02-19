@@ -7,11 +7,13 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	v1 "github.com/infigaming-com/meepo-api/push/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,82 +24,1247 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// CreateOTPProviderRequest — see CreateOTPProvider RPC comment above for full documentation.
+//
+// Constraints:
+// - UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
+// - credentials_json is required and must be valid JSON for the chosen provider_type.
+type CreateOTPProviderRequest struct {
+	state                 protoimpl.MessageState    `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext   `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Country               string                    `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`                                                                                                       // ISO 3166-1 alpha-2, or "global" for default fallback
+	ProviderType          v1.OTPProviderType        `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType" json:"provider_type,omitempty"`                               // Third-party provider (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
+	Name                  string                    `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`                                                                                                             // Human-readable display name
+	Enabled               bool                      `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`                                                                                                      // Whether this provider is active for routing
+	Priority              int32                     `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`                                                                                                    // Routing priority (lower = higher priority, e.g., 0 > 1 > 2)
+	CredentialsJson       string                    `protobuf:"bytes,7,opt,name=credentials_json,json=credentialsJson,proto3" json:"credentials_json,omitempty"`                                                                // Plain JSON with provider-specific credentials (encrypted before storage)
+	Config                string                    `protobuf:"bytes,8,opt,name=config,proto3" json:"config,omitempty"`                                                                                                         // JSON string of non-sensitive config (base_url, timeouts, etc.)
+	SendChannelStrategy   v1.OTPSendChannelStrategy `protobuf:"varint,9,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy" json:"send_channel_strategy,omitempty"` // Channel delivery order (e.g., OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS)
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CreateOTPProviderRequest) Reset() {
+	*x = CreateOTPProviderRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOTPProviderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOTPProviderRequest) ProtoMessage() {}
+
+func (x *CreateOTPProviderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOTPProviderRequest.ProtoReflect.Descriptor instead.
+func (*CreateOTPProviderRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CreateOTPProviderRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *CreateOTPProviderRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *CreateOTPProviderRequest) GetProviderType() v1.OTPProviderType {
+	if x != nil {
+		return x.ProviderType
+	}
+	return v1.OTPProviderType(0)
+}
+
+func (x *CreateOTPProviderRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateOTPProviderRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *CreateOTPProviderRequest) GetPriority() int32 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *CreateOTPProviderRequest) GetCredentialsJson() string {
+	if x != nil {
+		return x.CredentialsJson
+	}
+	return ""
+}
+
+func (x *CreateOTPProviderRequest) GetConfig() string {
+	if x != nil {
+		return x.Config
+	}
+	return ""
+}
+
+func (x *CreateOTPProviderRequest) GetSendChannelStrategy() v1.OTPSendChannelStrategy {
+	if x != nil {
+		return x.SendChannelStrategy
+	}
+	return v1.OTPSendChannelStrategy(0)
+}
+
+// UpdateOTPProviderRequest updates an existing OTP provider. Only provided fields are updated.
+type UpdateOTPProviderRequest struct {
+	state                 protoimpl.MessageState     `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext    `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                      `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Name                  *string                    `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Enabled               *bool                      `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Priority              *int32                     `protobuf:"varint,5,opt,name=priority,proto3,oneof" json:"priority,omitempty"`
+	CredentialsJson       *string                    `protobuf:"bytes,6,opt,name=credentials_json,json=credentialsJson,proto3,oneof" json:"credentials_json,omitempty"`
+	Config                *string                    `protobuf:"bytes,7,opt,name=config,proto3,oneof" json:"config,omitempty"`
+	SendChannelStrategy   *v1.OTPSendChannelStrategy `protobuf:"varint,8,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy,oneof" json:"send_channel_strategy,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *UpdateOTPProviderRequest) Reset() {
+	*x = UpdateOTPProviderRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOTPProviderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOTPProviderRequest) ProtoMessage() {}
+
+func (x *UpdateOTPProviderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOTPProviderRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOTPProviderRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UpdateOTPProviderRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *UpdateOTPProviderRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateOTPProviderRequest) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *UpdateOTPProviderRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *UpdateOTPProviderRequest) GetPriority() int32 {
+	if x != nil && x.Priority != nil {
+		return *x.Priority
+	}
+	return 0
+}
+
+func (x *UpdateOTPProviderRequest) GetCredentialsJson() string {
+	if x != nil && x.CredentialsJson != nil {
+		return *x.CredentialsJson
+	}
+	return ""
+}
+
+func (x *UpdateOTPProviderRequest) GetConfig() string {
+	if x != nil && x.Config != nil {
+		return *x.Config
+	}
+	return ""
+}
+
+func (x *UpdateOTPProviderRequest) GetSendChannelStrategy() v1.OTPSendChannelStrategy {
+	if x != nil && x.SendChannelStrategy != nil {
+		return *x.SendChannelStrategy
+	}
+	return v1.OTPSendChannelStrategy(0)
+}
+
+// DeleteOTPProviderRequest deletes an OTP provider by ID.
+type DeleteOTPProviderRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DeleteOTPProviderRequest) Reset() {
+	*x = DeleteOTPProviderRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOTPProviderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOTPProviderRequest) ProtoMessage() {}
+
+func (x *DeleteOTPProviderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOTPProviderRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOTPProviderRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *DeleteOTPProviderRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteOTPProviderRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// GetOTPProviderRequest retrieves a single OTP provider by ID.
+type GetOTPProviderRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *GetOTPProviderRequest) Reset() {
+	*x = GetOTPProviderRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOTPProviderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOTPProviderRequest) ProtoMessage() {}
+
+func (x *GetOTPProviderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOTPProviderRequest.ProtoReflect.Descriptor instead.
+func (*GetOTPProviderRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetOTPProviderRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *GetOTPProviderRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// ListOTPProvidersRequest lists OTP providers with optional filters.
+type ListOTPProvidersRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Country               *string                 `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	ProviderType          *v1.OTPProviderType     `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType,oneof" json:"provider_type,omitempty"`
+	Enabled               *bool                   `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ListOTPProvidersRequest) Reset() {
+	*x = ListOTPProvidersRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOTPProvidersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOTPProvidersRequest) ProtoMessage() {}
+
+func (x *ListOTPProvidersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOTPProvidersRequest.ProtoReflect.Descriptor instead.
+func (*ListOTPProvidersRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListOTPProvidersRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListOTPProvidersRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *ListOTPProvidersRequest) GetProviderType() v1.OTPProviderType {
+	if x != nil && x.ProviderType != nil {
+		return *x.ProviderType
+	}
+	return v1.OTPProviderType(0)
+}
+
+func (x *ListOTPProvidersRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *ListOTPProvidersRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOTPProvidersRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+// CreateOTPTemplateRequest creates an OTP template bound to a specific provider.
+type CreateOTPTemplateRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Country               string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	ProviderId            int64                   `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	Name                  string                  `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	TemplateType          v1.OTPTemplateType      `protobuf:"varint,5,opt,name=template_type,json=templateType,proto3,enum=api.push.service.v1.OTPTemplateType" json:"template_type,omitempty"`
+	ExternalTemplateId    string                  `protobuf:"bytes,6,opt,name=external_template_id,json=externalTemplateId,proto3" json:"external_template_id,omitempty"` // Template ID on the provider side (e.g., EngageLab template ID)
+	Language              string                  `protobuf:"bytes,7,opt,name=language,proto3" json:"language,omitempty"`                                                 // Template language: "en", "pt", "zh", etc.
+	BrandName             string                  `protobuf:"bytes,8,opt,name=brand_name,json=brandName,proto3" json:"brand_name,omitempty"`                              // Brand name shown in the OTP message
+	CodeLength            int32                   `protobuf:"varint,9,opt,name=code_length,json=codeLength,proto3" json:"code_length,omitempty"`                          // OTP code length (default: 6)
+	CodeTtlSeconds        int32                   `protobuf:"varint,10,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3" json:"code_ttl_seconds,omitempty"`           // OTP code TTL in seconds (default: 900)
+	ExtraParams           string                  `protobuf:"bytes,11,opt,name=extra_params,json=extraParams,proto3" json:"extra_params,omitempty"`                       // JSON string of extra template parameters
+	Enabled               bool                    `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CreateOTPTemplateRequest) Reset() {
+	*x = CreateOTPTemplateRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOTPTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOTPTemplateRequest) ProtoMessage() {}
+
+func (x *CreateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOTPTemplateRequest.ProtoReflect.Descriptor instead.
+func (*CreateOTPTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *CreateOTPTemplateRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *CreateOTPTemplateRequest) GetProviderId() int64 {
+	if x != nil {
+		return x.ProviderId
+	}
+	return 0
+}
+
+func (x *CreateOTPTemplateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateOTPTemplateRequest) GetTemplateType() v1.OTPTemplateType {
+	if x != nil {
+		return x.TemplateType
+	}
+	return v1.OTPTemplateType(0)
+}
+
+func (x *CreateOTPTemplateRequest) GetExternalTemplateId() string {
+	if x != nil {
+		return x.ExternalTemplateId
+	}
+	return ""
+}
+
+func (x *CreateOTPTemplateRequest) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+func (x *CreateOTPTemplateRequest) GetBrandName() string {
+	if x != nil {
+		return x.BrandName
+	}
+	return ""
+}
+
+func (x *CreateOTPTemplateRequest) GetCodeLength() int32 {
+	if x != nil {
+		return x.CodeLength
+	}
+	return 0
+}
+
+func (x *CreateOTPTemplateRequest) GetCodeTtlSeconds() int32 {
+	if x != nil {
+		return x.CodeTtlSeconds
+	}
+	return 0
+}
+
+func (x *CreateOTPTemplateRequest) GetExtraParams() string {
+	if x != nil {
+		return x.ExtraParams
+	}
+	return ""
+}
+
+func (x *CreateOTPTemplateRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// UpdateOTPTemplateRequest updates an existing OTP template. Only provided fields are updated.
+type UpdateOTPTemplateRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	ExternalTemplateId    *string                 `protobuf:"bytes,4,opt,name=external_template_id,json=externalTemplateId,proto3,oneof" json:"external_template_id,omitempty"`
+	Language              *string                 `protobuf:"bytes,5,opt,name=language,proto3,oneof" json:"language,omitempty"`
+	BrandName             *string                 `protobuf:"bytes,6,opt,name=brand_name,json=brandName,proto3,oneof" json:"brand_name,omitempty"`
+	CodeLength            *int32                  `protobuf:"varint,7,opt,name=code_length,json=codeLength,proto3,oneof" json:"code_length,omitempty"`
+	CodeTtlSeconds        *int32                  `protobuf:"varint,8,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3,oneof" json:"code_ttl_seconds,omitempty"`
+	ExtraParams           *string                 `protobuf:"bytes,9,opt,name=extra_params,json=extraParams,proto3,oneof" json:"extra_params,omitempty"`
+	Enabled               *bool                   `protobuf:"varint,10,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *UpdateOTPTemplateRequest) Reset() {
+	*x = UpdateOTPTemplateRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateOTPTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOTPTemplateRequest) ProtoMessage() {}
+
+func (x *UpdateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOTPTemplateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOTPTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *UpdateOTPTemplateRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateOTPTemplateRequest) GetName() string {
+	if x != nil && x.Name != nil {
+		return *x.Name
+	}
+	return ""
+}
+
+func (x *UpdateOTPTemplateRequest) GetExternalTemplateId() string {
+	if x != nil && x.ExternalTemplateId != nil {
+		return *x.ExternalTemplateId
+	}
+	return ""
+}
+
+func (x *UpdateOTPTemplateRequest) GetLanguage() string {
+	if x != nil && x.Language != nil {
+		return *x.Language
+	}
+	return ""
+}
+
+func (x *UpdateOTPTemplateRequest) GetBrandName() string {
+	if x != nil && x.BrandName != nil {
+		return *x.BrandName
+	}
+	return ""
+}
+
+func (x *UpdateOTPTemplateRequest) GetCodeLength() int32 {
+	if x != nil && x.CodeLength != nil {
+		return *x.CodeLength
+	}
+	return 0
+}
+
+func (x *UpdateOTPTemplateRequest) GetCodeTtlSeconds() int32 {
+	if x != nil && x.CodeTtlSeconds != nil {
+		return *x.CodeTtlSeconds
+	}
+	return 0
+}
+
+func (x *UpdateOTPTemplateRequest) GetExtraParams() string {
+	if x != nil && x.ExtraParams != nil {
+		return *x.ExtraParams
+	}
+	return ""
+}
+
+func (x *UpdateOTPTemplateRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+// DeleteOTPTemplateRequest deletes an OTP template by ID.
+type DeleteOTPTemplateRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DeleteOTPTemplateRequest) Reset() {
+	*x = DeleteOTPTemplateRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOTPTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOTPTemplateRequest) ProtoMessage() {}
+
+func (x *DeleteOTPTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOTPTemplateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOTPTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteOTPTemplateRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// GetOTPTemplateRequest retrieves a single OTP template by ID.
+type GetOTPTemplateRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *GetOTPTemplateRequest) Reset() {
+	*x = GetOTPTemplateRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOTPTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOTPTemplateRequest) ProtoMessage() {}
+
+func (x *GetOTPTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOTPTemplateRequest.ProtoReflect.Descriptor instead.
+func (*GetOTPTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *GetOTPTemplateRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// ListOTPTemplatesRequest lists OTP templates with optional filters.
+type ListOTPTemplatesRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Country               *string                 `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	ProviderId            *int64                  `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
+	TemplateType          *v1.OTPTemplateType     `protobuf:"varint,4,opt,name=template_type,json=templateType,proto3,enum=api.push.service.v1.OTPTemplateType,oneof" json:"template_type,omitempty"`
+	Enabled               *bool                   `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page                  int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ListOTPTemplatesRequest) Reset() {
+	*x = ListOTPTemplatesRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOTPTemplatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOTPTemplatesRequest) ProtoMessage() {}
+
+func (x *ListOTPTemplatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOTPTemplatesRequest.ProtoReflect.Descriptor instead.
+func (*ListOTPTemplatesRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListOTPTemplatesRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListOTPTemplatesRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *ListOTPTemplatesRequest) GetProviderId() int64 {
+	if x != nil && x.ProviderId != nil {
+		return *x.ProviderId
+	}
+	return 0
+}
+
+func (x *ListOTPTemplatesRequest) GetTemplateType() v1.OTPTemplateType {
+	if x != nil && x.TemplateType != nil {
+		return *x.TemplateType
+	}
+	return v1.OTPTemplateType(0)
+}
+
+func (x *ListOTPTemplatesRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *ListOTPTemplatesRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOTPTemplatesRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+// SyncOTPTemplateStatusRequest syncs the review status from the external provider.
+type SyncOTPTemplateStatusRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *SyncOTPTemplateStatusRequest) Reset() {
+	*x = SyncOTPTemplateStatusRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SyncOTPTemplateStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncOTPTemplateStatusRequest) ProtoMessage() {}
+
+func (x *SyncOTPTemplateStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncOTPTemplateStatusRequest.ProtoReflect.Descriptor instead.
+func (*SyncOTPTemplateStatusRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SyncOTPTemplateStatusRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *SyncOTPTemplateStatusRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// ListOTPSendLogsRequest queries OTP send logs with filters.
+type ListOTPSendLogsRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	UserId                *int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	ChannelUsed           *string                 `protobuf:"bytes,3,opt,name=channel_used,json=channelUsed,proto3,oneof" json:"channel_used,omitempty"`
+	Status                *string                 `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime             int64                   `protobuf:"varint,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime               int64                   `protobuf:"varint,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	Page                  int32                   `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                   `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ListOTPSendLogsRequest) Reset() {
+	*x = ListOTPSendLogsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOTPSendLogsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOTPSendLogsRequest) ProtoMessage() {}
+
+func (x *ListOTPSendLogsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOTPSendLogsRequest.ProtoReflect.Descriptor instead.
+func (*ListOTPSendLogsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListOTPSendLogsRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListOTPSendLogsRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ListOTPSendLogsRequest) GetChannelUsed() string {
+	if x != nil && x.ChannelUsed != nil {
+		return *x.ChannelUsed
+	}
+	return ""
+}
+
+func (x *ListOTPSendLogsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListOTPSendLogsRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListOTPSendLogsRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+func (x *ListOTPSendLogsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOTPSendLogsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 var File_backoffice_service_v1_backoffice_otp_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_otp_proto_rawDesc = "" +
 	"\n" +
-	"*backoffice/service/v1/backoffice_otp.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1epush/service/v1/push_otp.proto2\xa7\x0f\n" +
-	"\rBackofficeOTP\x12\xa1\x01\n" +
-	"\x11CreateOTPProvider\x12-.api.push.service.v1.CreateOTPProviderRequest\x1a..api.push.service.v1.CreateOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/create\x12\xa1\x01\n" +
-	"\x11UpdateOTPProvider\x12-.api.push.service.v1.UpdateOTPProviderRequest\x1a..api.push.service.v1.UpdateOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/update\x12\xa1\x01\n" +
-	"\x11DeleteOTPProvider\x12-.api.push.service.v1.DeleteOTPProviderRequest\x1a..api.push.service.v1.DeleteOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/delete\x12\x95\x01\n" +
-	"\x0eGetOTPProvider\x12*.api.push.service.v1.GetOTPProviderRequest\x1a+.api.push.service.v1.GetOTPProviderResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/otp/provider/get\x12\x9c\x01\n" +
-	"\x10ListOTPProviders\x12,.api.push.service.v1.ListOTPProvidersRequest\x1a-.api.push.service.v1.ListOTPProvidersResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/otp/provider/list\x12\xa1\x01\n" +
-	"\x11CreateOTPTemplate\x12-.api.push.service.v1.CreateOTPTemplateRequest\x1a..api.push.service.v1.CreateOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/create\x12\xa1\x01\n" +
-	"\x11UpdateOTPTemplate\x12-.api.push.service.v1.UpdateOTPTemplateRequest\x1a..api.push.service.v1.UpdateOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/update\x12\xa1\x01\n" +
-	"\x11DeleteOTPTemplate\x12-.api.push.service.v1.DeleteOTPTemplateRequest\x1a..api.push.service.v1.DeleteOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/delete\x12\x95\x01\n" +
-	"\x0eGetOTPTemplate\x12*.api.push.service.v1.GetOTPTemplateRequest\x1a+.api.push.service.v1.GetOTPTemplateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/otp/template/get\x12\x9c\x01\n" +
-	"\x10ListOTPTemplates\x12,.api.push.service.v1.ListOTPTemplatesRequest\x1a-.api.push.service.v1.ListOTPTemplatesResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/otp/template/list\x12\xb2\x01\n" +
-	"\x15SyncOTPTemplateStatus\x121.api.push.service.v1.SyncOTPTemplateStatusRequest\x1a2.api.push.service.v1.SyncOTPTemplateStatusResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/otp/template/sync-status\x12\x9a\x01\n" +
-	"\x0fListOTPSendLogs\x12+.api.push.service.v1.ListOTPSendLogsRequest\x1a,.api.push.service.v1.ListOTPSendLogsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/otp/send-logs/listB[\n" +
+	"*backoffice/service/v1/backoffice_otp.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x1epush/service/v1/push_otp.proto\"\xc2\x03\n" +
+	"\x18CreateOTPProviderRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12I\n" +
+	"\rprovider_type\x18\x03 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeR\fproviderType\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12\x18\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled\x12\x1a\n" +
+	"\bpriority\x18\x06 \x01(\x05R\bpriority\x12)\n" +
+	"\x10credentials_json\x18\a \x01(\tR\x0fcredentialsJson\x12\x16\n" +
+	"\x06config\x18\b \x01(\tR\x06config\x12_\n" +
+	"\x15send_channel_strategy\x18\t \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyR\x13sendChannelStrategy\"\xe7\x03\n" +
+	"\x18UpdateOTPProviderRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1f\n" +
+	"\bpriority\x18\x05 \x01(\x05H\x02R\bpriority\x88\x01\x01\x12.\n" +
+	"\x10credentials_json\x18\x06 \x01(\tH\x03R\x0fcredentialsJson\x88\x01\x01\x12\x1b\n" +
+	"\x06config\x18\a \x01(\tH\x04R\x06config\x88\x01\x01\x12d\n" +
+	"\x15send_channel_strategy\x18\b \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyH\x05R\x13sendChannelStrategy\x88\x01\x01B\a\n" +
+	"\x05_nameB\n" +
+	"\n" +
+	"\b_enabledB\v\n" +
+	"\t_priorityB\x13\n" +
+	"\x11_credentials_jsonB\t\n" +
+	"\a_configB\x18\n" +
+	"\x16_send_channel_strategy\"\x7f\n" +
+	"\x18DeleteOTPProviderRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"|\n" +
+	"\x15GetOTPProviderRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"\xd7\x02\n" +
+	"\x17ListOTPProvidersRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\acountry\x18\x02 \x01(\tH\x00R\acountry\x88\x01\x01\x12N\n" +
+	"\rprovider_type\x18\x03 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeH\x01R\fproviderType\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSizeB\n" +
+	"\n" +
+	"\b_countryB\x10\n" +
+	"\x0e_provider_typeB\n" +
+	"\n" +
+	"\b_enabled\"\xfe\x03\n" +
+	"\x18CreateOTPTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1f\n" +
+	"\vprovider_id\x18\x03 \x01(\x03R\n" +
+	"providerId\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12I\n" +
+	"\rtemplate_type\x18\x05 \x01(\x0e2$.api.push.service.v1.OTPTemplateTypeR\ftemplateType\x120\n" +
+	"\x14external_template_id\x18\x06 \x01(\tR\x12externalTemplateId\x12\x1a\n" +
+	"\blanguage\x18\a \x01(\tR\blanguage\x12\x1d\n" +
+	"\n" +
+	"brand_name\x18\b \x01(\tR\tbrandName\x12\x1f\n" +
+	"\vcode_length\x18\t \x01(\x05R\n" +
+	"codeLength\x12(\n" +
+	"\x10code_ttl_seconds\x18\n" +
+	" \x01(\x05R\x0ecodeTtlSeconds\x12!\n" +
+	"\fextra_params\x18\v \x01(\tR\vextraParams\x12\x18\n" +
+	"\aenabled\x18\f \x01(\bR\aenabled\"\xb0\x04\n" +
+	"\x18UpdateOTPTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x125\n" +
+	"\x14external_template_id\x18\x04 \x01(\tH\x01R\x12externalTemplateId\x88\x01\x01\x12\x1f\n" +
+	"\blanguage\x18\x05 \x01(\tH\x02R\blanguage\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"brand_name\x18\x06 \x01(\tH\x03R\tbrandName\x88\x01\x01\x12$\n" +
+	"\vcode_length\x18\a \x01(\x05H\x04R\n" +
+	"codeLength\x88\x01\x01\x12-\n" +
+	"\x10code_ttl_seconds\x18\b \x01(\x05H\x05R\x0ecodeTtlSeconds\x88\x01\x01\x12&\n" +
+	"\fextra_params\x18\t \x01(\tH\x06R\vextraParams\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\n" +
+	" \x01(\bH\aR\aenabled\x88\x01\x01B\a\n" +
+	"\x05_nameB\x17\n" +
+	"\x15_external_template_idB\v\n" +
+	"\t_languageB\r\n" +
+	"\v_brand_nameB\x0e\n" +
+	"\f_code_lengthB\x13\n" +
+	"\x11_code_ttl_secondsB\x0f\n" +
+	"\r_extra_paramsB\n" +
+	"\n" +
+	"\b_enabled\"\x7f\n" +
+	"\x18DeleteOTPTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"|\n" +
+	"\x15GetOTPTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"\x8d\x03\n" +
+	"\x17ListOTPTemplatesRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\acountry\x18\x02 \x01(\tH\x00R\acountry\x88\x01\x01\x12$\n" +
+	"\vprovider_id\x18\x03 \x01(\x03H\x01R\n" +
+	"providerId\x88\x01\x01\x12N\n" +
+	"\rtemplate_type\x18\x04 \x01(\x0e2$.api.push.service.v1.OTPTemplateTypeH\x02R\ftemplateType\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x05 \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\n" +
+	"\n" +
+	"\b_countryB\x0e\n" +
+	"\f_provider_idB\x10\n" +
+	"\x0e_template_typeB\n" +
+	"\n" +
+	"\b_enabled\"\x83\x01\n" +
+	"\x1cSyncOTPTemplateStatusRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"\xe3\x02\n" +
+	"\x16ListOTPSendLogsRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1c\n" +
+	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12&\n" +
+	"\fchannel_used\x18\x03 \x01(\tH\x01R\vchannelUsed\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\tH\x02R\x06status\x88\x01\x01\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x05 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\x06 \x01(\x03R\aendTime\x12\x12\n" +
+	"\x04page\x18\a \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\b \x01(\x05R\bpageSizeB\n" +
+	"\n" +
+	"\b_user_idB\x0f\n" +
+	"\r_channel_usedB\t\n" +
+	"\a_status2\xef\x0f\n" +
+	"\rBackofficeOTP\x12\xa7\x01\n" +
+	"\x11CreateOTPProvider\x123.api.backoffice.service.v1.CreateOTPProviderRequest\x1a..api.push.service.v1.CreateOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/create\x12\xa7\x01\n" +
+	"\x11UpdateOTPProvider\x123.api.backoffice.service.v1.UpdateOTPProviderRequest\x1a..api.push.service.v1.UpdateOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/update\x12\xa7\x01\n" +
+	"\x11DeleteOTPProvider\x123.api.backoffice.service.v1.DeleteOTPProviderRequest\x1a..api.push.service.v1.DeleteOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/delete\x12\x9b\x01\n" +
+	"\x0eGetOTPProvider\x120.api.backoffice.service.v1.GetOTPProviderRequest\x1a+.api.push.service.v1.GetOTPProviderResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/otp/provider/get\x12\xa2\x01\n" +
+	"\x10ListOTPProviders\x122.api.backoffice.service.v1.ListOTPProvidersRequest\x1a-.api.push.service.v1.ListOTPProvidersResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/otp/provider/list\x12\xa7\x01\n" +
+	"\x11CreateOTPTemplate\x123.api.backoffice.service.v1.CreateOTPTemplateRequest\x1a..api.push.service.v1.CreateOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/create\x12\xa7\x01\n" +
+	"\x11UpdateOTPTemplate\x123.api.backoffice.service.v1.UpdateOTPTemplateRequest\x1a..api.push.service.v1.UpdateOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/update\x12\xa7\x01\n" +
+	"\x11DeleteOTPTemplate\x123.api.backoffice.service.v1.DeleteOTPTemplateRequest\x1a..api.push.service.v1.DeleteOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/delete\x12\x9b\x01\n" +
+	"\x0eGetOTPTemplate\x120.api.backoffice.service.v1.GetOTPTemplateRequest\x1a+.api.push.service.v1.GetOTPTemplateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/otp/template/get\x12\xa2\x01\n" +
+	"\x10ListOTPTemplates\x122.api.backoffice.service.v1.ListOTPTemplatesRequest\x1a-.api.push.service.v1.ListOTPTemplatesResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/otp/template/list\x12\xb8\x01\n" +
+	"\x15SyncOTPTemplateStatus\x127.api.backoffice.service.v1.SyncOTPTemplateStatusRequest\x1a2.api.push.service.v1.SyncOTPTemplateStatusResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/otp/template/sync-status\x12\xa0\x01\n" +
+	"\x0fListOTPSendLogs\x121.api.backoffice.service.v1.ListOTPSendLogsRequest\x1a,.api.push.service.v1.ListOTPSendLogsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/otp/send-logs/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
+var (
+	file_backoffice_service_v1_backoffice_otp_proto_rawDescOnce sync.Once
+	file_backoffice_service_v1_backoffice_otp_proto_rawDescData []byte
+)
+
+func file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP() []byte {
+	file_backoffice_service_v1_backoffice_otp_proto_rawDescOnce.Do(func() {
+		file_backoffice_service_v1_backoffice_otp_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_otp_proto_rawDesc), len(file_backoffice_service_v1_backoffice_otp_proto_rawDesc)))
+	})
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescData
+}
+
+var file_backoffice_service_v1_backoffice_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_backoffice_service_v1_backoffice_otp_proto_goTypes = []any{
-	(*v1.CreateOTPProviderRequest)(nil),      // 0: api.push.service.v1.CreateOTPProviderRequest
-	(*v1.UpdateOTPProviderRequest)(nil),      // 1: api.push.service.v1.UpdateOTPProviderRequest
-	(*v1.DeleteOTPProviderRequest)(nil),      // 2: api.push.service.v1.DeleteOTPProviderRequest
-	(*v1.GetOTPProviderRequest)(nil),         // 3: api.push.service.v1.GetOTPProviderRequest
-	(*v1.ListOTPProvidersRequest)(nil),       // 4: api.push.service.v1.ListOTPProvidersRequest
-	(*v1.CreateOTPTemplateRequest)(nil),      // 5: api.push.service.v1.CreateOTPTemplateRequest
-	(*v1.UpdateOTPTemplateRequest)(nil),      // 6: api.push.service.v1.UpdateOTPTemplateRequest
-	(*v1.DeleteOTPTemplateRequest)(nil),      // 7: api.push.service.v1.DeleteOTPTemplateRequest
-	(*v1.GetOTPTemplateRequest)(nil),         // 8: api.push.service.v1.GetOTPTemplateRequest
-	(*v1.ListOTPTemplatesRequest)(nil),       // 9: api.push.service.v1.ListOTPTemplatesRequest
-	(*v1.SyncOTPTemplateStatusRequest)(nil),  // 10: api.push.service.v1.SyncOTPTemplateStatusRequest
-	(*v1.ListOTPSendLogsRequest)(nil),        // 11: api.push.service.v1.ListOTPSendLogsRequest
-	(*v1.CreateOTPProviderResponse)(nil),     // 12: api.push.service.v1.CreateOTPProviderResponse
-	(*v1.UpdateOTPProviderResponse)(nil),     // 13: api.push.service.v1.UpdateOTPProviderResponse
-	(*v1.DeleteOTPProviderResponse)(nil),     // 14: api.push.service.v1.DeleteOTPProviderResponse
-	(*v1.GetOTPProviderResponse)(nil),        // 15: api.push.service.v1.GetOTPProviderResponse
-	(*v1.ListOTPProvidersResponse)(nil),      // 16: api.push.service.v1.ListOTPProvidersResponse
-	(*v1.CreateOTPTemplateResponse)(nil),     // 17: api.push.service.v1.CreateOTPTemplateResponse
-	(*v1.UpdateOTPTemplateResponse)(nil),     // 18: api.push.service.v1.UpdateOTPTemplateResponse
-	(*v1.DeleteOTPTemplateResponse)(nil),     // 19: api.push.service.v1.DeleteOTPTemplateResponse
-	(*v1.GetOTPTemplateResponse)(nil),        // 20: api.push.service.v1.GetOTPTemplateResponse
-	(*v1.ListOTPTemplatesResponse)(nil),      // 21: api.push.service.v1.ListOTPTemplatesResponse
-	(*v1.SyncOTPTemplateStatusResponse)(nil), // 22: api.push.service.v1.SyncOTPTemplateStatusResponse
-	(*v1.ListOTPSendLogsResponse)(nil),       // 23: api.push.service.v1.ListOTPSendLogsResponse
+	(*CreateOTPProviderRequest)(nil),         // 0: api.backoffice.service.v1.CreateOTPProviderRequest
+	(*UpdateOTPProviderRequest)(nil),         // 1: api.backoffice.service.v1.UpdateOTPProviderRequest
+	(*DeleteOTPProviderRequest)(nil),         // 2: api.backoffice.service.v1.DeleteOTPProviderRequest
+	(*GetOTPProviderRequest)(nil),            // 3: api.backoffice.service.v1.GetOTPProviderRequest
+	(*ListOTPProvidersRequest)(nil),          // 4: api.backoffice.service.v1.ListOTPProvidersRequest
+	(*CreateOTPTemplateRequest)(nil),         // 5: api.backoffice.service.v1.CreateOTPTemplateRequest
+	(*UpdateOTPTemplateRequest)(nil),         // 6: api.backoffice.service.v1.UpdateOTPTemplateRequest
+	(*DeleteOTPTemplateRequest)(nil),         // 7: api.backoffice.service.v1.DeleteOTPTemplateRequest
+	(*GetOTPTemplateRequest)(nil),            // 8: api.backoffice.service.v1.GetOTPTemplateRequest
+	(*ListOTPTemplatesRequest)(nil),          // 9: api.backoffice.service.v1.ListOTPTemplatesRequest
+	(*SyncOTPTemplateStatusRequest)(nil),     // 10: api.backoffice.service.v1.SyncOTPTemplateStatusRequest
+	(*ListOTPSendLogsRequest)(nil),           // 11: api.backoffice.service.v1.ListOTPSendLogsRequest
+	(*common.OperatorContext)(nil),           // 12: api.common.OperatorContext
+	(v1.OTPProviderType)(0),                  // 13: api.push.service.v1.OTPProviderType
+	(v1.OTPSendChannelStrategy)(0),           // 14: api.push.service.v1.OTPSendChannelStrategy
+	(v1.OTPTemplateType)(0),                  // 15: api.push.service.v1.OTPTemplateType
+	(*v1.CreateOTPProviderResponse)(nil),     // 16: api.push.service.v1.CreateOTPProviderResponse
+	(*v1.UpdateOTPProviderResponse)(nil),     // 17: api.push.service.v1.UpdateOTPProviderResponse
+	(*v1.DeleteOTPProviderResponse)(nil),     // 18: api.push.service.v1.DeleteOTPProviderResponse
+	(*v1.GetOTPProviderResponse)(nil),        // 19: api.push.service.v1.GetOTPProviderResponse
+	(*v1.ListOTPProvidersResponse)(nil),      // 20: api.push.service.v1.ListOTPProvidersResponse
+	(*v1.CreateOTPTemplateResponse)(nil),     // 21: api.push.service.v1.CreateOTPTemplateResponse
+	(*v1.UpdateOTPTemplateResponse)(nil),     // 22: api.push.service.v1.UpdateOTPTemplateResponse
+	(*v1.DeleteOTPTemplateResponse)(nil),     // 23: api.push.service.v1.DeleteOTPTemplateResponse
+	(*v1.GetOTPTemplateResponse)(nil),        // 24: api.push.service.v1.GetOTPTemplateResponse
+	(*v1.ListOTPTemplatesResponse)(nil),      // 25: api.push.service.v1.ListOTPTemplatesResponse
+	(*v1.SyncOTPTemplateStatusResponse)(nil), // 26: api.push.service.v1.SyncOTPTemplateStatusResponse
+	(*v1.ListOTPSendLogsResponse)(nil),       // 27: api.push.service.v1.ListOTPSendLogsResponse
 }
 var file_backoffice_service_v1_backoffice_otp_proto_depIdxs = []int32{
-	0,  // 0: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
-	1,  // 1: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
-	2,  // 2: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
-	3,  // 3: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
-	4,  // 4: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
-	5,  // 5: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
-	6,  // 6: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
-	7,  // 7: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
-	8,  // 8: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
-	9,  // 9: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
-	10, // 10: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
-	11, // 11: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
-	12, // 12: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
-	13, // 13: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
-	14, // 14: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
-	15, // 15: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
-	16, // 16: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
-	17, // 17: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
-	18, // 18: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
-	19, // 19: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
-	20, // 20: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
-	21, // 21: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
-	22, // 22: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
-	23, // 23: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
-	12, // [12:24] is the sub-list for method output_type
-	0,  // [0:12] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	12, // 0: api.backoffice.service.v1.CreateOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	13, // 1: api.backoffice.service.v1.CreateOTPProviderRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	14, // 2: api.backoffice.service.v1.CreateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	12, // 3: api.backoffice.service.v1.UpdateOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 4: api.backoffice.service.v1.UpdateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	12, // 5: api.backoffice.service.v1.DeleteOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 6: api.backoffice.service.v1.GetOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 7: api.backoffice.service.v1.ListOTPProvidersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	13, // 8: api.backoffice.service.v1.ListOTPProvidersRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	12, // 9: api.backoffice.service.v1.CreateOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 10: api.backoffice.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	12, // 11: api.backoffice.service.v1.UpdateOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 12: api.backoffice.service.v1.DeleteOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 13: api.backoffice.service.v1.GetOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 14: api.backoffice.service.v1.ListOTPTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 15: api.backoffice.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	12, // 16: api.backoffice.service.v1.SyncOTPTemplateStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 17: api.backoffice.service.v1.ListOTPSendLogsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 18: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:input_type -> api.backoffice.service.v1.CreateOTPProviderRequest
+	1,  // 19: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:input_type -> api.backoffice.service.v1.UpdateOTPProviderRequest
+	2,  // 20: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:input_type -> api.backoffice.service.v1.DeleteOTPProviderRequest
+	3,  // 21: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:input_type -> api.backoffice.service.v1.GetOTPProviderRequest
+	4,  // 22: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:input_type -> api.backoffice.service.v1.ListOTPProvidersRequest
+	5,  // 23: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:input_type -> api.backoffice.service.v1.CreateOTPTemplateRequest
+	6,  // 24: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:input_type -> api.backoffice.service.v1.UpdateOTPTemplateRequest
+	7,  // 25: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:input_type -> api.backoffice.service.v1.DeleteOTPTemplateRequest
+	8,  // 26: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:input_type -> api.backoffice.service.v1.GetOTPTemplateRequest
+	9,  // 27: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:input_type -> api.backoffice.service.v1.ListOTPTemplatesRequest
+	10, // 28: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:input_type -> api.backoffice.service.v1.SyncOTPTemplateStatusRequest
+	11, // 29: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:input_type -> api.backoffice.service.v1.ListOTPSendLogsRequest
+	16, // 30: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
+	17, // 31: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
+	18, // 32: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
+	19, // 33: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
+	20, // 34: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
+	21, // 35: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
+	22, // 36: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
+	23, // 37: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
+	24, // 38: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
+	25, // 39: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
+	26, // 40: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
+	27, // 41: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
+	30, // [30:42] is the sub-list for method output_type
+	18, // [18:30] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_otp_proto_init() }
@@ -105,18 +1272,24 @@ func file_backoffice_service_v1_backoffice_otp_proto_init() {
 	if File_backoffice_service_v1_backoffice_otp_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[1].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[4].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[6].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_otp_proto_rawDesc), len(file_backoffice_service_v1_backoffice_otp_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_otp_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_otp_proto_depIdxs,
+		MessageInfos:      file_backoffice_service_v1_backoffice_otp_proto_msgTypes,
 	}.Build()
 	File_backoffice_service_v1_backoffice_otp_proto = out.File
 	file_backoffice_service_v1_backoffice_otp_proto_goTypes = nil

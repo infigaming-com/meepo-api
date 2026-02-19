@@ -77,6 +77,108 @@ func (OTPChannel) EnumDescriptor() ([]byte, []int) {
 	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{0}
 }
 
+// OTPProviderType enumerates the supported third-party OTP delivery providers.
+// New providers should be added here as the platform integrates them.
+type OTPProviderType int32
+
+const (
+	OTPProviderType_OTP_PROVIDER_TYPE_UNSPECIFIED OTPProviderType = 0
+	OTPProviderType_OTP_PROVIDER_TYPE_ENGAGELAB   OTPProviderType = 1 // EngageLab (SMS, WhatsApp, Voice)
+)
+
+// Enum value maps for OTPProviderType.
+var (
+	OTPProviderType_name = map[int32]string{
+		0: "OTP_PROVIDER_TYPE_UNSPECIFIED",
+		1: "OTP_PROVIDER_TYPE_ENGAGELAB",
+	}
+	OTPProviderType_value = map[string]int32{
+		"OTP_PROVIDER_TYPE_UNSPECIFIED": 0,
+		"OTP_PROVIDER_TYPE_ENGAGELAB":   1,
+	}
+)
+
+func (x OTPProviderType) Enum() *OTPProviderType {
+	p := new(OTPProviderType)
+	*p = x
+	return p
+}
+
+func (x OTPProviderType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OTPProviderType) Descriptor() protoreflect.EnumDescriptor {
+	return file_push_service_v1_push_otp_proto_enumTypes[1].Descriptor()
+}
+
+func (OTPProviderType) Type() protoreflect.EnumType {
+	return &file_push_service_v1_push_otp_proto_enumTypes[1]
+}
+
+func (x OTPProviderType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OTPProviderType.Descriptor instead.
+func (OTPProviderType) EnumDescriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{1}
+}
+
+// OTPSendChannelStrategy defines the channel delivery order for an OTP provider.
+// The system tries channels left-to-right; if the first channel fails, it falls back to the next.
+type OTPSendChannelStrategy int32
+
+const (
+	OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED        OTPSendChannelStrategy = 0
+	OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_SMS                OTPSendChannelStrategy = 1 // SMS only
+	OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS       OTPSendChannelStrategy = 2 // WhatsApp first, fallback to SMS
+	OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE OTPSendChannelStrategy = 3 // WhatsApp → SMS → Voice
+)
+
+// Enum value maps for OTPSendChannelStrategy.
+var (
+	OTPSendChannelStrategy_name = map[int32]string{
+		0: "OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED",
+		1: "OTP_SEND_CHANNEL_STRATEGY_SMS",
+		2: "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS",
+		3: "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE",
+	}
+	OTPSendChannelStrategy_value = map[string]int32{
+		"OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED":        0,
+		"OTP_SEND_CHANNEL_STRATEGY_SMS":                1,
+		"OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS":       2,
+		"OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE": 3,
+	}
+)
+
+func (x OTPSendChannelStrategy) Enum() *OTPSendChannelStrategy {
+	p := new(OTPSendChannelStrategy)
+	*p = x
+	return p
+}
+
+func (x OTPSendChannelStrategy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OTPSendChannelStrategy) Descriptor() protoreflect.EnumDescriptor {
+	return file_push_service_v1_push_otp_proto_enumTypes[2].Descriptor()
+}
+
+func (OTPSendChannelStrategy) Type() protoreflect.EnumType {
+	return &file_push_service_v1_push_otp_proto_enumTypes[2]
+}
+
+func (x OTPSendChannelStrategy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OTPSendChannelStrategy.Descriptor instead.
+func (OTPSendChannelStrategy) EnumDescriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{2}
+}
+
 type OTPTemplateType int32
 
 const (
@@ -116,11 +218,11 @@ func (x OTPTemplateType) String() string {
 }
 
 func (OTPTemplateType) Descriptor() protoreflect.EnumDescriptor {
-	return file_push_service_v1_push_otp_proto_enumTypes[1].Descriptor()
+	return file_push_service_v1_push_otp_proto_enumTypes[3].Descriptor()
 }
 
 func (OTPTemplateType) Type() protoreflect.EnumType {
-	return &file_push_service_v1_push_otp_proto_enumTypes[1]
+	return &file_push_service_v1_push_otp_proto_enumTypes[3]
 }
 
 func (x OTPTemplateType) Number() protoreflect.EnumNumber {
@@ -129,7 +231,7 @@ func (x OTPTemplateType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OTPTemplateType.Descriptor instead.
 func (OTPTemplateType) EnumDescriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{1}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{3}
 }
 
 type OTPTemplateReviewStatus int32
@@ -171,11 +273,11 @@ func (x OTPTemplateReviewStatus) String() string {
 }
 
 func (OTPTemplateReviewStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_push_service_v1_push_otp_proto_enumTypes[2].Descriptor()
+	return file_push_service_v1_push_otp_proto_enumTypes[4].Descriptor()
 }
 
 func (OTPTemplateReviewStatus) Type() protoreflect.EnumType {
-	return &file_push_service_v1_push_otp_proto_enumTypes[2]
+	return &file_push_service_v1_push_otp_proto_enumTypes[4]
 }
 
 func (x OTPTemplateReviewStatus) Number() protoreflect.EnumNumber {
@@ -184,7 +286,7 @@ func (x OTPTemplateReviewStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OTPTemplateReviewStatus.Descriptor instead.
 func (OTPTemplateReviewStatus) EnumDescriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{2}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{4}
 }
 
 type SendOTPRequest struct {
@@ -387,18 +489,20 @@ func (x *SendOTPResponse) GetProviderName() string {
 	return ""
 }
 
+// OTPProviderInfo represents an OTP provider configuration.
+// Credentials are NEVER exposed in responses; only has_credentials indicates whether they are set.
 type OTPProviderInfo struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Id                  int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	OperatorId          int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	Country             string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	ProviderType        string                 `protobuf:"bytes,4,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
+	ProviderType        OTPProviderType        `protobuf:"varint,4,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType" json:"provider_type,omitempty"`
 	Name                string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
 	Enabled             bool                   `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Priority            int32                  `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
 	HasCredentials      bool                   `protobuf:"varint,8,opt,name=has_credentials,json=hasCredentials,proto3" json:"has_credentials,omitempty"` // Never expose credentials in response
 	Config              string                 `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`                                        // JSON string of non-sensitive config
-	SendChannelStrategy string                 `protobuf:"bytes,10,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3" json:"send_channel_strategy,omitempty"`
+	SendChannelStrategy OTPSendChannelStrategy `protobuf:"varint,10,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy" json:"send_channel_strategy,omitempty"`
 	CreatedAt           int64                  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt           int64                  `protobuf:"varint,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -456,11 +560,11 @@ func (x *OTPProviderInfo) GetCountry() string {
 	return ""
 }
 
-func (x *OTPProviderInfo) GetProviderType() string {
+func (x *OTPProviderInfo) GetProviderType() OTPProviderType {
 	if x != nil {
 		return x.ProviderType
 	}
-	return ""
+	return OTPProviderType_OTP_PROVIDER_TYPE_UNSPECIFIED
 }
 
 func (x *OTPProviderInfo) GetName() string {
@@ -498,11 +602,11 @@ func (x *OTPProviderInfo) GetConfig() string {
 	return ""
 }
 
-func (x *OTPProviderInfo) GetSendChannelStrategy() string {
+func (x *OTPProviderInfo) GetSendChannelStrategy() OTPSendChannelStrategy {
 	if x != nil {
 		return x.SendChannelStrategy
 	}
-	return ""
+	return OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
 }
 
 func (x *OTPProviderInfo) GetCreatedAt() int64 {
@@ -519,17 +623,31 @@ func (x *OTPProviderInfo) GetUpdatedAt() int64 {
 	return 0
 }
 
+// CreateOTPProviderRequest registers an OTP delivery provider for a specific operator + country.
+//
+// An OTP provider represents a third-party service (e.g., EngageLab) capable of delivering
+// OTP codes via SMS, WhatsApp, or Voice channels. Each operator can have multiple providers
+// for different countries, with priority-based fallback routing.
+//
+// Routing chain when SendOTP is called:
+//  1. (operator_id, country, enabled=true) ORDER BY priority ASC
+//  2. (operator_id, "global", enabled=true) ORDER BY priority ASC
+//  3. (system_operator_id, country, enabled=true) ORDER BY priority ASC
+//  4. (system_operator_id, "global", enabled=true) ORDER BY priority ASC
+//
+// Constraint: UNIQUE(operator_id, country, provider_type).
 type CreateOTPProviderRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	OperatorId          int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	Country             string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	ProviderType        string                 `protobuf:"bytes,3,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
-	Name                string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Enabled             bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Priority            int32                  `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
-	CredentialsJson     string                 `protobuf:"bytes,7,opt,name=credentials_json,json=credentialsJson,proto3" json:"credentials_json,omitempty"` // Plain JSON, encrypted before storage
-	Config              string                 `protobuf:"bytes,8,opt,name=config,proto3" json:"config,omitempty"`                                          // JSON string of non-sensitive config
-	SendChannelStrategy string                 `protobuf:"bytes,9,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3" json:"send_channel_strategy,omitempty"`
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId      int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                                // Operator this provider belongs to
+	Country         string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`                                                                         // ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
+	ProviderType    OTPProviderType        `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType" json:"provider_type,omitempty"` // Third-party provider to use (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
+	Name            string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`                                                                               // Human-readable display name
+	Enabled         bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`                                                                        // Whether this provider is active for routing
+	Priority        int32                  `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`                                                                      // Routing priority within same (operator_id, country). Lower = higher priority
+	CredentialsJson string                 `protobuf:"bytes,7,opt,name=credentials_json,json=credentialsJson,proto3" json:"credentials_json,omitempty"`                                  // Plain JSON with provider-specific credentials. Encrypted (AES-256-GCM) before storage.
+	// EngageLab example: {"dev_key":"xxx","dev_secret":"yyy"}
+	Config              string                 `protobuf:"bytes,8,opt,name=config,proto3" json:"config,omitempty"`                                                                                                         // JSON string of non-sensitive config (base_url, timeouts). Optional.
+	SendChannelStrategy OTPSendChannelStrategy `protobuf:"varint,9,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy" json:"send_channel_strategy,omitempty"` // Channel delivery order (e.g., OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS)
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -578,11 +696,11 @@ func (x *CreateOTPProviderRequest) GetCountry() string {
 	return ""
 }
 
-func (x *CreateOTPProviderRequest) GetProviderType() string {
+func (x *CreateOTPProviderRequest) GetProviderType() OTPProviderType {
 	if x != nil {
 		return x.ProviderType
 	}
-	return ""
+	return OTPProviderType_OTP_PROVIDER_TYPE_UNSPECIFIED
 }
 
 func (x *CreateOTPProviderRequest) GetName() string {
@@ -620,11 +738,11 @@ func (x *CreateOTPProviderRequest) GetConfig() string {
 	return ""
 }
 
-func (x *CreateOTPProviderRequest) GetSendChannelStrategy() string {
+func (x *CreateOTPProviderRequest) GetSendChannelStrategy() OTPSendChannelStrategy {
 	if x != nil {
 		return x.SendChannelStrategy
 	}
-	return ""
+	return OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
 }
 
 type CreateOTPProviderResponse struct {
@@ -672,14 +790,14 @@ func (x *CreateOTPProviderResponse) GetProvider() *OTPProviderInfo {
 }
 
 type UpdateOTPProviderRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Id                  int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Enabled             *bool                  `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Priority            *int32                 `protobuf:"varint,4,opt,name=priority,proto3,oneof" json:"priority,omitempty"`
-	CredentialsJson     *string                `protobuf:"bytes,5,opt,name=credentials_json,json=credentialsJson,proto3,oneof" json:"credentials_json,omitempty"`
-	Config              *string                `protobuf:"bytes,6,opt,name=config,proto3,oneof" json:"config,omitempty"`
-	SendChannelStrategy *string                `protobuf:"bytes,7,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,oneof" json:"send_channel_strategy,omitempty"`
+	state               protoimpl.MessageState  `protogen:"open.v1"`
+	Id                  int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                *string                 `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Enabled             *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Priority            *int32                  `protobuf:"varint,4,opt,name=priority,proto3,oneof" json:"priority,omitempty"`
+	CredentialsJson     *string                 `protobuf:"bytes,5,opt,name=credentials_json,json=credentialsJson,proto3,oneof" json:"credentials_json,omitempty"`
+	Config              *string                 `protobuf:"bytes,6,opt,name=config,proto3,oneof" json:"config,omitempty"`
+	SendChannelStrategy *OTPSendChannelStrategy `protobuf:"varint,7,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy,oneof" json:"send_channel_strategy,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -756,11 +874,11 @@ func (x *UpdateOTPProviderRequest) GetConfig() string {
 	return ""
 }
 
-func (x *UpdateOTPProviderRequest) GetSendChannelStrategy() string {
+func (x *UpdateOTPProviderRequest) GetSendChannelStrategy() OTPSendChannelStrategy {
 	if x != nil && x.SendChannelStrategy != nil {
 		return *x.SendChannelStrategy
 	}
-	return ""
+	return OTPSendChannelStrategy_OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
 }
 
 type UpdateOTPProviderResponse struct {
@@ -971,7 +1089,7 @@ type ListOTPProvidersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	Country       *string                `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
-	ProviderType  *string                `protobuf:"bytes,3,opt,name=provider_type,json=providerType,proto3,oneof" json:"provider_type,omitempty"`
+	ProviderType  *OTPProviderType       `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType,oneof" json:"provider_type,omitempty"`
 	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	Page          int32                  `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -1023,11 +1141,11 @@ func (x *ListOTPProvidersRequest) GetCountry() string {
 	return ""
 }
 
-func (x *ListOTPProvidersRequest) GetProviderType() string {
+func (x *ListOTPProvidersRequest) GetProviderType() OTPProviderType {
 	if x != nil && x.ProviderType != nil {
 		return *x.ProviderType
 	}
-	return ""
+	return OTPProviderType_OTP_PROVIDER_TYPE_UNSPECIFIED
 }
 
 func (x *ListOTPProvidersRequest) GetEnabled() bool {
@@ -2365,45 +2483,45 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12.\n" +
 	"\x13external_message_id\x18\x02 \x01(\tR\x11externalMessageId\x12!\n" +
 	"\fchannel_used\x18\x03 \x01(\tR\vchannelUsed\x12#\n" +
-	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\"\xfe\x02\n" +
+	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\"\xd1\x03\n" +
 	"\x0fOTPProviderInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x12#\n" +
-	"\rprovider_type\x18\x04 \x01(\tR\fproviderType\x12\x12\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x12I\n" +
+	"\rprovider_type\x18\x04 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeR\fproviderType\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12\x18\n" +
 	"\aenabled\x18\x06 \x01(\bR\aenabled\x12\x1a\n" +
 	"\bpriority\x18\a \x01(\x05R\bpriority\x12'\n" +
 	"\x0fhas_credentials\x18\b \x01(\bR\x0ehasCredentials\x12\x16\n" +
-	"\x06config\x18\t \x01(\tR\x06config\x122\n" +
+	"\x06config\x18\t \x01(\tR\x06config\x12_\n" +
 	"\x15send_channel_strategy\x18\n" +
-	" \x01(\tR\x13sendChannelStrategy\x12\x1d\n" +
+	" \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyR\x13sendChannelStrategy\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\v \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\f \x01(\x03R\tupdatedAt\"\xbb\x02\n" +
+	"updated_at\x18\f \x01(\x03R\tupdatedAt\"\x8e\x03\n" +
 	"\x18CreateOTPProviderRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
-	"\acountry\x18\x02 \x01(\tR\acountry\x12#\n" +
-	"\rprovider_type\x18\x03 \x01(\tR\fproviderType\x12\x12\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12I\n" +
+	"\rprovider_type\x18\x03 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeR\fproviderType\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x18\n" +
 	"\aenabled\x18\x05 \x01(\bR\aenabled\x12\x1a\n" +
 	"\bpriority\x18\x06 \x01(\x05R\bpriority\x12)\n" +
 	"\x10credentials_json\x18\a \x01(\tR\x0fcredentialsJson\x12\x16\n" +
-	"\x06config\x18\b \x01(\tR\x06config\x122\n" +
-	"\x15send_channel_strategy\x18\t \x01(\tR\x13sendChannelStrategy\"]\n" +
+	"\x06config\x18\b \x01(\tR\x06config\x12_\n" +
+	"\x15send_channel_strategy\x18\t \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyR\x13sendChannelStrategy\"]\n" +
 	"\x19CreateOTPProviderResponse\x12@\n" +
-	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\xe5\x02\n" +
+	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\x92\x03\n" +
 	"\x18UpdateOTPProviderRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x03 \x01(\bH\x01R\aenabled\x88\x01\x01\x12\x1f\n" +
 	"\bpriority\x18\x04 \x01(\x05H\x02R\bpriority\x88\x01\x01\x12.\n" +
 	"\x10credentials_json\x18\x05 \x01(\tH\x03R\x0fcredentialsJson\x88\x01\x01\x12\x1b\n" +
-	"\x06config\x18\x06 \x01(\tH\x04R\x06config\x88\x01\x01\x127\n" +
-	"\x15send_channel_strategy\x18\a \x01(\tH\x05R\x13sendChannelStrategy\x88\x01\x01B\a\n" +
+	"\x06config\x18\x06 \x01(\tH\x04R\x06config\x88\x01\x01\x12d\n" +
+	"\x15send_channel_strategy\x18\a \x01(\x0e2+.api.push.service.v1.OTPSendChannelStrategyH\x05R\x13sendChannelStrategy\x88\x01\x01B\a\n" +
 	"\x05_nameB\n" +
 	"\n" +
 	"\b_enabledB\v\n" +
@@ -2418,12 +2536,12 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x15GetOTPProviderRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"Z\n" +
 	"\x16GetOTPProviderResponse\x12@\n" +
-	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\xfd\x01\n" +
+	"\bprovider\x18\x01 \x01(\v2$.api.push.service.v1.OTPProviderInfoR\bprovider\"\xa3\x02\n" +
 	"\x17ListOTPProvidersRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1d\n" +
-	"\acountry\x18\x02 \x01(\tH\x00R\acountry\x88\x01\x01\x12(\n" +
-	"\rprovider_type\x18\x03 \x01(\tH\x01R\fproviderType\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x02 \x01(\tH\x00R\acountry\x88\x01\x01\x12N\n" +
+	"\rprovider_type\x18\x03 \x01(\x0e2$.api.push.service.v1.OTPProviderTypeH\x01R\fproviderType\x88\x01\x01\x12\x1d\n" +
 	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x06 \x01(\x05R\bpageSizeB\n" +
@@ -2582,7 +2700,15 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x0fOTP_CHANNEL_SMS\x10\x01\x12\x18\n" +
 	"\x14OTP_CHANNEL_WHATSAPP\x10\x02\x12\x15\n" +
 	"\x11OTP_CHANNEL_VOICE\x10\x03\x12\x15\n" +
-	"\x11OTP_CHANNEL_EMAIL\x10\x04*\xcf\x01\n" +
+	"\x11OTP_CHANNEL_EMAIL\x10\x04*U\n" +
+	"\x0fOTPProviderType\x12!\n" +
+	"\x1dOTP_PROVIDER_TYPE_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bOTP_PROVIDER_TYPE_ENGAGELAB\x10\x01*\xc4\x01\n" +
+	"\x16OTPSendChannelStrategy\x12)\n" +
+	"%OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED\x10\x00\x12!\n" +
+	"\x1dOTP_SEND_CHANNEL_STRATEGY_SMS\x10\x01\x12*\n" +
+	"&OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS\x10\x02\x120\n" +
+	",OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE\x10\x03*\xcf\x01\n" +
 	"\x0fOTPTemplateType\x12!\n" +
 	"\x1dOTP_TEMPLATE_TYPE_UNSPECIFIED\x10\x00\x12(\n" +
 	"$OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION\x10\x01\x12\x1f\n" +
@@ -2623,90 +2749,98 @@ func file_push_service_v1_push_otp_proto_rawDescGZIP() []byte {
 	return file_push_service_v1_push_otp_proto_rawDescData
 }
 
-var file_push_service_v1_push_otp_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_push_service_v1_push_otp_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_push_service_v1_push_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_push_service_v1_push_otp_proto_goTypes = []any{
 	(OTPChannel)(0),                       // 0: api.push.service.v1.OTPChannel
-	(OTPTemplateType)(0),                  // 1: api.push.service.v1.OTPTemplateType
-	(OTPTemplateReviewStatus)(0),          // 2: api.push.service.v1.OTPTemplateReviewStatus
-	(*SendOTPRequest)(nil),                // 3: api.push.service.v1.SendOTPRequest
-	(*SendOTPResponse)(nil),               // 4: api.push.service.v1.SendOTPResponse
-	(*OTPProviderInfo)(nil),               // 5: api.push.service.v1.OTPProviderInfo
-	(*CreateOTPProviderRequest)(nil),      // 6: api.push.service.v1.CreateOTPProviderRequest
-	(*CreateOTPProviderResponse)(nil),     // 7: api.push.service.v1.CreateOTPProviderResponse
-	(*UpdateOTPProviderRequest)(nil),      // 8: api.push.service.v1.UpdateOTPProviderRequest
-	(*UpdateOTPProviderResponse)(nil),     // 9: api.push.service.v1.UpdateOTPProviderResponse
-	(*DeleteOTPProviderRequest)(nil),      // 10: api.push.service.v1.DeleteOTPProviderRequest
-	(*DeleteOTPProviderResponse)(nil),     // 11: api.push.service.v1.DeleteOTPProviderResponse
-	(*GetOTPProviderRequest)(nil),         // 12: api.push.service.v1.GetOTPProviderRequest
-	(*GetOTPProviderResponse)(nil),        // 13: api.push.service.v1.GetOTPProviderResponse
-	(*ListOTPProvidersRequest)(nil),       // 14: api.push.service.v1.ListOTPProvidersRequest
-	(*ListOTPProvidersResponse)(nil),      // 15: api.push.service.v1.ListOTPProvidersResponse
-	(*OTPTemplateInfo)(nil),               // 16: api.push.service.v1.OTPTemplateInfo
-	(*CreateOTPTemplateRequest)(nil),      // 17: api.push.service.v1.CreateOTPTemplateRequest
-	(*CreateOTPTemplateResponse)(nil),     // 18: api.push.service.v1.CreateOTPTemplateResponse
-	(*UpdateOTPTemplateRequest)(nil),      // 19: api.push.service.v1.UpdateOTPTemplateRequest
-	(*UpdateOTPTemplateResponse)(nil),     // 20: api.push.service.v1.UpdateOTPTemplateResponse
-	(*DeleteOTPTemplateRequest)(nil),      // 21: api.push.service.v1.DeleteOTPTemplateRequest
-	(*DeleteOTPTemplateResponse)(nil),     // 22: api.push.service.v1.DeleteOTPTemplateResponse
-	(*GetOTPTemplateRequest)(nil),         // 23: api.push.service.v1.GetOTPTemplateRequest
-	(*GetOTPTemplateResponse)(nil),        // 24: api.push.service.v1.GetOTPTemplateResponse
-	(*ListOTPTemplatesRequest)(nil),       // 25: api.push.service.v1.ListOTPTemplatesRequest
-	(*ListOTPTemplatesResponse)(nil),      // 26: api.push.service.v1.ListOTPTemplatesResponse
-	(*SyncOTPTemplateStatusRequest)(nil),  // 27: api.push.service.v1.SyncOTPTemplateStatusRequest
-	(*SyncOTPTemplateStatusResponse)(nil), // 28: api.push.service.v1.SyncOTPTemplateStatusResponse
-	(*OTPSendLogInfo)(nil),                // 29: api.push.service.v1.OTPSendLogInfo
-	(*ListOTPSendLogsRequest)(nil),        // 30: api.push.service.v1.ListOTPSendLogsRequest
-	(*ListOTPSendLogsResponse)(nil),       // 31: api.push.service.v1.ListOTPSendLogsResponse
-	nil,                                   // 32: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	(OTPProviderType)(0),                  // 1: api.push.service.v1.OTPProviderType
+	(OTPSendChannelStrategy)(0),           // 2: api.push.service.v1.OTPSendChannelStrategy
+	(OTPTemplateType)(0),                  // 3: api.push.service.v1.OTPTemplateType
+	(OTPTemplateReviewStatus)(0),          // 4: api.push.service.v1.OTPTemplateReviewStatus
+	(*SendOTPRequest)(nil),                // 5: api.push.service.v1.SendOTPRequest
+	(*SendOTPResponse)(nil),               // 6: api.push.service.v1.SendOTPResponse
+	(*OTPProviderInfo)(nil),               // 7: api.push.service.v1.OTPProviderInfo
+	(*CreateOTPProviderRequest)(nil),      // 8: api.push.service.v1.CreateOTPProviderRequest
+	(*CreateOTPProviderResponse)(nil),     // 9: api.push.service.v1.CreateOTPProviderResponse
+	(*UpdateOTPProviderRequest)(nil),      // 10: api.push.service.v1.UpdateOTPProviderRequest
+	(*UpdateOTPProviderResponse)(nil),     // 11: api.push.service.v1.UpdateOTPProviderResponse
+	(*DeleteOTPProviderRequest)(nil),      // 12: api.push.service.v1.DeleteOTPProviderRequest
+	(*DeleteOTPProviderResponse)(nil),     // 13: api.push.service.v1.DeleteOTPProviderResponse
+	(*GetOTPProviderRequest)(nil),         // 14: api.push.service.v1.GetOTPProviderRequest
+	(*GetOTPProviderResponse)(nil),        // 15: api.push.service.v1.GetOTPProviderResponse
+	(*ListOTPProvidersRequest)(nil),       // 16: api.push.service.v1.ListOTPProvidersRequest
+	(*ListOTPProvidersResponse)(nil),      // 17: api.push.service.v1.ListOTPProvidersResponse
+	(*OTPTemplateInfo)(nil),               // 18: api.push.service.v1.OTPTemplateInfo
+	(*CreateOTPTemplateRequest)(nil),      // 19: api.push.service.v1.CreateOTPTemplateRequest
+	(*CreateOTPTemplateResponse)(nil),     // 20: api.push.service.v1.CreateOTPTemplateResponse
+	(*UpdateOTPTemplateRequest)(nil),      // 21: api.push.service.v1.UpdateOTPTemplateRequest
+	(*UpdateOTPTemplateResponse)(nil),     // 22: api.push.service.v1.UpdateOTPTemplateResponse
+	(*DeleteOTPTemplateRequest)(nil),      // 23: api.push.service.v1.DeleteOTPTemplateRequest
+	(*DeleteOTPTemplateResponse)(nil),     // 24: api.push.service.v1.DeleteOTPTemplateResponse
+	(*GetOTPTemplateRequest)(nil),         // 25: api.push.service.v1.GetOTPTemplateRequest
+	(*GetOTPTemplateResponse)(nil),        // 26: api.push.service.v1.GetOTPTemplateResponse
+	(*ListOTPTemplatesRequest)(nil),       // 27: api.push.service.v1.ListOTPTemplatesRequest
+	(*ListOTPTemplatesResponse)(nil),      // 28: api.push.service.v1.ListOTPTemplatesResponse
+	(*SyncOTPTemplateStatusRequest)(nil),  // 29: api.push.service.v1.SyncOTPTemplateStatusRequest
+	(*SyncOTPTemplateStatusResponse)(nil), // 30: api.push.service.v1.SyncOTPTemplateStatusResponse
+	(*OTPSendLogInfo)(nil),                // 31: api.push.service.v1.OTPSendLogInfo
+	(*ListOTPSendLogsRequest)(nil),        // 32: api.push.service.v1.ListOTPSendLogsRequest
+	(*ListOTPSendLogsResponse)(nil),       // 33: api.push.service.v1.ListOTPSendLogsResponse
+	nil,                                   // 34: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
 }
 var file_push_service_v1_push_otp_proto_depIdxs = []int32{
-	1,  // 0: api.push.service.v1.SendOTPRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	32, // 1: api.push.service.v1.SendOTPRequest.extra_params:type_name -> api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	3,  // 0: api.push.service.v1.SendOTPRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	34, // 1: api.push.service.v1.SendOTPRequest.extra_params:type_name -> api.push.service.v1.SendOTPRequest.ExtraParamsEntry
 	0,  // 2: api.push.service.v1.SendOTPRequest.preferred_channel:type_name -> api.push.service.v1.OTPChannel
-	5,  // 3: api.push.service.v1.CreateOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
-	5,  // 4: api.push.service.v1.GetOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
-	5,  // 5: api.push.service.v1.ListOTPProvidersResponse.providers:type_name -> api.push.service.v1.OTPProviderInfo
-	1,  // 6: api.push.service.v1.OTPTemplateInfo.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	2,  // 7: api.push.service.v1.OTPTemplateInfo.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
-	1,  // 8: api.push.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	16, // 9: api.push.service.v1.CreateOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
-	16, // 10: api.push.service.v1.GetOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
-	1,  // 11: api.push.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	16, // 12: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
-	2,  // 13: api.push.service.v1.SyncOTPTemplateStatusResponse.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
-	29, // 14: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
-	3,  // 15: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
-	6,  // 16: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
-	8,  // 17: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
-	10, // 18: api.push.service.v1.PushOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
-	12, // 19: api.push.service.v1.PushOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
-	14, // 20: api.push.service.v1.PushOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
-	17, // 21: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
-	19, // 22: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
-	21, // 23: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
-	23, // 24: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
-	25, // 25: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
-	27, // 26: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
-	30, // 27: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
-	4,  // 28: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
-	7,  // 29: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
-	9,  // 30: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
-	11, // 31: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
-	13, // 32: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
-	15, // 33: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
-	18, // 34: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
-	20, // 35: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
-	22, // 36: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
-	24, // 37: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
-	26, // 38: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
-	28, // 39: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
-	31, // 40: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
-	28, // [28:41] is the sub-list for method output_type
-	15, // [15:28] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	1,  // 3: api.push.service.v1.OTPProviderInfo.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	2,  // 4: api.push.service.v1.OTPProviderInfo.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	1,  // 5: api.push.service.v1.CreateOTPProviderRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	2,  // 6: api.push.service.v1.CreateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	7,  // 7: api.push.service.v1.CreateOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
+	2,  // 8: api.push.service.v1.UpdateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	7,  // 9: api.push.service.v1.GetOTPProviderResponse.provider:type_name -> api.push.service.v1.OTPProviderInfo
+	1,  // 10: api.push.service.v1.ListOTPProvidersRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	7,  // 11: api.push.service.v1.ListOTPProvidersResponse.providers:type_name -> api.push.service.v1.OTPProviderInfo
+	3,  // 12: api.push.service.v1.OTPTemplateInfo.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	4,  // 13: api.push.service.v1.OTPTemplateInfo.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
+	3,  // 14: api.push.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	18, // 15: api.push.service.v1.CreateOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
+	18, // 16: api.push.service.v1.GetOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
+	3,  // 17: api.push.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	18, // 18: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
+	4,  // 19: api.push.service.v1.SyncOTPTemplateStatusResponse.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
+	31, // 20: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
+	5,  // 21: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
+	8,  // 22: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
+	10, // 23: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
+	12, // 24: api.push.service.v1.PushOTP.DeleteOTPProvider:input_type -> api.push.service.v1.DeleteOTPProviderRequest
+	14, // 25: api.push.service.v1.PushOTP.GetOTPProvider:input_type -> api.push.service.v1.GetOTPProviderRequest
+	16, // 26: api.push.service.v1.PushOTP.ListOTPProviders:input_type -> api.push.service.v1.ListOTPProvidersRequest
+	19, // 27: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
+	21, // 28: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
+	23, // 29: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
+	25, // 30: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
+	27, // 31: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
+	29, // 32: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
+	32, // 33: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
+	6,  // 34: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
+	9,  // 35: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
+	11, // 36: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
+	13, // 37: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
+	15, // 38: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
+	17, // 39: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
+	20, // 40: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
+	22, // 41: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
+	24, // 42: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
+	26, // 43: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
+	28, // 44: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
+	30, // 45: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
+	33, // 46: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
+	34, // [34:47] is the sub-list for method output_type
+	21, // [21:34] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_otp_proto_init() }
@@ -2725,7 +2859,7 @@ func file_push_service_v1_push_otp_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_otp_proto_rawDesc), len(file_push_service_v1_push_otp_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      5,
 			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,

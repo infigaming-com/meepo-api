@@ -38,21 +38,111 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// BackofficeOTP service
-// Provides HTTP APIs for OTP provider/template management and send logs
+// BackofficeOTP service — OTP (One-Time Password) delivery configuration management.
+//
+// ## What is this service for?
+// Meepo is a multi-tenant SaaS gaming platform. When end-users perform sensitive operations
+// (registration, login, password reset, withdrawal), the platform sends OTP verification codes.
+// OTP can be delivered via SMS, WhatsApp, Voice, or Email.
+//
+// This service allows backoffice administrators to configure HOW OTPs are delivered
+// for each operator (tenant), per country. The configuration consists of two layers:
+//
+//	Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab, Twilio)
+//	Template  — "What message content is sent?" (bound to a provider, per business scenario)
+//
+// ## Complete setup workflow
+//
+// Step 1: CreateOTPProvider
+//
+//	Register a third-party OTP delivery service for an operator + country.
+//	Example: EngageLab for operator 1001, country "BR" (Brazil).
+//
+// Step 2: CreateOTPTemplate
+//
+//	Create message templates bound to the provider, one per business scenario.
+//	Example: "email_verification" template using EngageLab template ID "T001" in Portuguese.
+//
+// Step 3: SyncOTPTemplateStatus
+//
+//	Some providers (EngageLab WhatsApp) require template approval. Call this to pull the
+//	latest review status from the provider. Only approved templates can be used for sending.
+//
+// Step 4: (Automatic) SendOTP is called by internal services (e.g., user-service)
+//
+//	The push-service automatically routes to the correct provider + template based on
+//	the operator, country, and business scenario. No backoffice action needed at this step.
+//
+// Step 5: ListOTPSendLogs
+//
+//	Query delivery history for auditing, debugging, or statistics.
+//
+// ## Multi-tenant permission model
+// All requests include target_operator_context. The backoffice validates that the
+// authenticated admin has permission to operate on the target operator (hierarchy check).
+// If target_operator_context is omitted, it defaults to the admin's own operator.
 type BackofficeOTPClient interface {
-	CreateOTPProvider(ctx context.Context, in *v1.CreateOTPProviderRequest, opts ...grpc.CallOption) (*v1.CreateOTPProviderResponse, error)
-	UpdateOTPProvider(ctx context.Context, in *v1.UpdateOTPProviderRequest, opts ...grpc.CallOption) (*v1.UpdateOTPProviderResponse, error)
-	DeleteOTPProvider(ctx context.Context, in *v1.DeleteOTPProviderRequest, opts ...grpc.CallOption) (*v1.DeleteOTPProviderResponse, error)
-	GetOTPProvider(ctx context.Context, in *v1.GetOTPProviderRequest, opts ...grpc.CallOption) (*v1.GetOTPProviderResponse, error)
-	ListOTPProviders(ctx context.Context, in *v1.ListOTPProvidersRequest, opts ...grpc.CallOption) (*v1.ListOTPProvidersResponse, error)
-	CreateOTPTemplate(ctx context.Context, in *v1.CreateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.CreateOTPTemplateResponse, error)
-	UpdateOTPTemplate(ctx context.Context, in *v1.UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateOTPTemplateResponse, error)
-	DeleteOTPTemplate(ctx context.Context, in *v1.DeleteOTPTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteOTPTemplateResponse, error)
-	GetOTPTemplate(ctx context.Context, in *v1.GetOTPTemplateRequest, opts ...grpc.CallOption) (*v1.GetOTPTemplateResponse, error)
-	ListOTPTemplates(ctx context.Context, in *v1.ListOTPTemplatesRequest, opts ...grpc.CallOption) (*v1.ListOTPTemplatesResponse, error)
-	SyncOTPTemplateStatus(ctx context.Context, in *v1.SyncOTPTemplateStatusRequest, opts ...grpc.CallOption) (*v1.SyncOTPTemplateStatusResponse, error)
-	ListOTPSendLogs(ctx context.Context, in *v1.ListOTPSendLogsRequest, opts ...grpc.CallOption) (*v1.ListOTPSendLogsResponse, error)
+	// CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+	//
+	// ## What is an OTP Provider?
+	// A Provider is a connection to a third-party service (e.g., EngageLab) that can
+	// deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
+	//   - The provider's API credentials (encrypted at rest, never returned in responses)
+	//   - Which delivery channels to use and in what order (send_channel_strategy)
+	//   - A priority for fallback routing when multiple providers exist
+	//
+	// ## When to use this API?
+	// Call this when onboarding a new operator or expanding to a new country. For example:
+	//   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
+	//     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
+	//   - Same operator wants a global SMS fallback → create another provider with
+	//     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
+	//
+	// ## How does routing work?
+	// When user-service calls SendOTP for a phone number, push-service resolves the provider
+	// using this fallback chain (first match wins):
+	//  1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//  2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
+	//  3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//  4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
+	//
+	// This means: operator-specific config is preferred; "global" is the fallback;
+	// system-level config provides a safety net for operators that haven't configured anything.
+	//
+	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
+	//
+	//	{
+	//	  "target_operator_context": { "operator_id": 1001 },
+	//	  "country": "BR",
+	//	  "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+	//	  "name": "EngageLab Brazil",
+	//	  "enabled": true,
+	//	  "priority": 0,
+	//	  "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+	//	  "config": "{}",
+	//	  "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+	//	}
+	//
+	// ## Response
+	// Returns the created provider info (with has_credentials=true instead of actual credentials).
+	//
+	// ## Errors
+	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
+	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
+	CreateOTPProvider(ctx context.Context, in *CreateOTPProviderRequest, opts ...grpc.CallOption) (*v1.CreateOTPProviderResponse, error)
+	UpdateOTPProvider(ctx context.Context, in *UpdateOTPProviderRequest, opts ...grpc.CallOption) (*v1.UpdateOTPProviderResponse, error)
+	DeleteOTPProvider(ctx context.Context, in *DeleteOTPProviderRequest, opts ...grpc.CallOption) (*v1.DeleteOTPProviderResponse, error)
+	GetOTPProvider(ctx context.Context, in *GetOTPProviderRequest, opts ...grpc.CallOption) (*v1.GetOTPProviderResponse, error)
+	ListOTPProviders(ctx context.Context, in *ListOTPProvidersRequest, opts ...grpc.CallOption) (*v1.ListOTPProvidersResponse, error)
+	CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.CreateOTPTemplateResponse, error)
+	UpdateOTPTemplate(ctx context.Context, in *UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateOTPTemplateResponse, error)
+	DeleteOTPTemplate(ctx context.Context, in *DeleteOTPTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteOTPTemplateResponse, error)
+	GetOTPTemplate(ctx context.Context, in *GetOTPTemplateRequest, opts ...grpc.CallOption) (*v1.GetOTPTemplateResponse, error)
+	ListOTPTemplates(ctx context.Context, in *ListOTPTemplatesRequest, opts ...grpc.CallOption) (*v1.ListOTPTemplatesResponse, error)
+	SyncOTPTemplateStatus(ctx context.Context, in *SyncOTPTemplateStatusRequest, opts ...grpc.CallOption) (*v1.SyncOTPTemplateStatusResponse, error)
+	ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogsRequest, opts ...grpc.CallOption) (*v1.ListOTPSendLogsResponse, error)
 }
 
 type backofficeOTPClient struct {
@@ -63,7 +153,7 @@ func NewBackofficeOTPClient(cc grpc.ClientConnInterface) BackofficeOTPClient {
 	return &backofficeOTPClient{cc}
 }
 
-func (c *backofficeOTPClient) CreateOTPProvider(ctx context.Context, in *v1.CreateOTPProviderRequest, opts ...grpc.CallOption) (*v1.CreateOTPProviderResponse, error) {
+func (c *backofficeOTPClient) CreateOTPProvider(ctx context.Context, in *CreateOTPProviderRequest, opts ...grpc.CallOption) (*v1.CreateOTPProviderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreateOTPProviderResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_CreateOTPProvider_FullMethodName, in, out, cOpts...)
@@ -73,7 +163,7 @@ func (c *backofficeOTPClient) CreateOTPProvider(ctx context.Context, in *v1.Crea
 	return out, nil
 }
 
-func (c *backofficeOTPClient) UpdateOTPProvider(ctx context.Context, in *v1.UpdateOTPProviderRequest, opts ...grpc.CallOption) (*v1.UpdateOTPProviderResponse, error) {
+func (c *backofficeOTPClient) UpdateOTPProvider(ctx context.Context, in *UpdateOTPProviderRequest, opts ...grpc.CallOption) (*v1.UpdateOTPProviderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.UpdateOTPProviderResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_UpdateOTPProvider_FullMethodName, in, out, cOpts...)
@@ -83,7 +173,7 @@ func (c *backofficeOTPClient) UpdateOTPProvider(ctx context.Context, in *v1.Upda
 	return out, nil
 }
 
-func (c *backofficeOTPClient) DeleteOTPProvider(ctx context.Context, in *v1.DeleteOTPProviderRequest, opts ...grpc.CallOption) (*v1.DeleteOTPProviderResponse, error) {
+func (c *backofficeOTPClient) DeleteOTPProvider(ctx context.Context, in *DeleteOTPProviderRequest, opts ...grpc.CallOption) (*v1.DeleteOTPProviderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.DeleteOTPProviderResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_DeleteOTPProvider_FullMethodName, in, out, cOpts...)
@@ -93,7 +183,7 @@ func (c *backofficeOTPClient) DeleteOTPProvider(ctx context.Context, in *v1.Dele
 	return out, nil
 }
 
-func (c *backofficeOTPClient) GetOTPProvider(ctx context.Context, in *v1.GetOTPProviderRequest, opts ...grpc.CallOption) (*v1.GetOTPProviderResponse, error) {
+func (c *backofficeOTPClient) GetOTPProvider(ctx context.Context, in *GetOTPProviderRequest, opts ...grpc.CallOption) (*v1.GetOTPProviderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetOTPProviderResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_GetOTPProvider_FullMethodName, in, out, cOpts...)
@@ -103,7 +193,7 @@ func (c *backofficeOTPClient) GetOTPProvider(ctx context.Context, in *v1.GetOTPP
 	return out, nil
 }
 
-func (c *backofficeOTPClient) ListOTPProviders(ctx context.Context, in *v1.ListOTPProvidersRequest, opts ...grpc.CallOption) (*v1.ListOTPProvidersResponse, error) {
+func (c *backofficeOTPClient) ListOTPProviders(ctx context.Context, in *ListOTPProvidersRequest, opts ...grpc.CallOption) (*v1.ListOTPProvidersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListOTPProvidersResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_ListOTPProviders_FullMethodName, in, out, cOpts...)
@@ -113,7 +203,7 @@ func (c *backofficeOTPClient) ListOTPProviders(ctx context.Context, in *v1.ListO
 	return out, nil
 }
 
-func (c *backofficeOTPClient) CreateOTPTemplate(ctx context.Context, in *v1.CreateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.CreateOTPTemplateResponse, error) {
+func (c *backofficeOTPClient) CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.CreateOTPTemplateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreateOTPTemplateResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_CreateOTPTemplate_FullMethodName, in, out, cOpts...)
@@ -123,7 +213,7 @@ func (c *backofficeOTPClient) CreateOTPTemplate(ctx context.Context, in *v1.Crea
 	return out, nil
 }
 
-func (c *backofficeOTPClient) UpdateOTPTemplate(ctx context.Context, in *v1.UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateOTPTemplateResponse, error) {
+func (c *backofficeOTPClient) UpdateOTPTemplate(ctx context.Context, in *UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateOTPTemplateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.UpdateOTPTemplateResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_UpdateOTPTemplate_FullMethodName, in, out, cOpts...)
@@ -133,7 +223,7 @@ func (c *backofficeOTPClient) UpdateOTPTemplate(ctx context.Context, in *v1.Upda
 	return out, nil
 }
 
-func (c *backofficeOTPClient) DeleteOTPTemplate(ctx context.Context, in *v1.DeleteOTPTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteOTPTemplateResponse, error) {
+func (c *backofficeOTPClient) DeleteOTPTemplate(ctx context.Context, in *DeleteOTPTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteOTPTemplateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.DeleteOTPTemplateResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_DeleteOTPTemplate_FullMethodName, in, out, cOpts...)
@@ -143,7 +233,7 @@ func (c *backofficeOTPClient) DeleteOTPTemplate(ctx context.Context, in *v1.Dele
 	return out, nil
 }
 
-func (c *backofficeOTPClient) GetOTPTemplate(ctx context.Context, in *v1.GetOTPTemplateRequest, opts ...grpc.CallOption) (*v1.GetOTPTemplateResponse, error) {
+func (c *backofficeOTPClient) GetOTPTemplate(ctx context.Context, in *GetOTPTemplateRequest, opts ...grpc.CallOption) (*v1.GetOTPTemplateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetOTPTemplateResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_GetOTPTemplate_FullMethodName, in, out, cOpts...)
@@ -153,7 +243,7 @@ func (c *backofficeOTPClient) GetOTPTemplate(ctx context.Context, in *v1.GetOTPT
 	return out, nil
 }
 
-func (c *backofficeOTPClient) ListOTPTemplates(ctx context.Context, in *v1.ListOTPTemplatesRequest, opts ...grpc.CallOption) (*v1.ListOTPTemplatesResponse, error) {
+func (c *backofficeOTPClient) ListOTPTemplates(ctx context.Context, in *ListOTPTemplatesRequest, opts ...grpc.CallOption) (*v1.ListOTPTemplatesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListOTPTemplatesResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_ListOTPTemplates_FullMethodName, in, out, cOpts...)
@@ -163,7 +253,7 @@ func (c *backofficeOTPClient) ListOTPTemplates(ctx context.Context, in *v1.ListO
 	return out, nil
 }
 
-func (c *backofficeOTPClient) SyncOTPTemplateStatus(ctx context.Context, in *v1.SyncOTPTemplateStatusRequest, opts ...grpc.CallOption) (*v1.SyncOTPTemplateStatusResponse, error) {
+func (c *backofficeOTPClient) SyncOTPTemplateStatus(ctx context.Context, in *SyncOTPTemplateStatusRequest, opts ...grpc.CallOption) (*v1.SyncOTPTemplateStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.SyncOTPTemplateStatusResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_SyncOTPTemplateStatus_FullMethodName, in, out, cOpts...)
@@ -173,7 +263,7 @@ func (c *backofficeOTPClient) SyncOTPTemplateStatus(ctx context.Context, in *v1.
 	return out, nil
 }
 
-func (c *backofficeOTPClient) ListOTPSendLogs(ctx context.Context, in *v1.ListOTPSendLogsRequest, opts ...grpc.CallOption) (*v1.ListOTPSendLogsResponse, error) {
+func (c *backofficeOTPClient) ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogsRequest, opts ...grpc.CallOption) (*v1.ListOTPSendLogsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListOTPSendLogsResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_ListOTPSendLogs_FullMethodName, in, out, cOpts...)
@@ -187,21 +277,111 @@ func (c *backofficeOTPClient) ListOTPSendLogs(ctx context.Context, in *v1.ListOT
 // All implementations must embed UnimplementedBackofficeOTPServer
 // for forward compatibility.
 //
-// BackofficeOTP service
-// Provides HTTP APIs for OTP provider/template management and send logs
+// BackofficeOTP service — OTP (One-Time Password) delivery configuration management.
+//
+// ## What is this service for?
+// Meepo is a multi-tenant SaaS gaming platform. When end-users perform sensitive operations
+// (registration, login, password reset, withdrawal), the platform sends OTP verification codes.
+// OTP can be delivered via SMS, WhatsApp, Voice, or Email.
+//
+// This service allows backoffice administrators to configure HOW OTPs are delivered
+// for each operator (tenant), per country. The configuration consists of two layers:
+//
+//	Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab, Twilio)
+//	Template  — "What message content is sent?" (bound to a provider, per business scenario)
+//
+// ## Complete setup workflow
+//
+// Step 1: CreateOTPProvider
+//
+//	Register a third-party OTP delivery service for an operator + country.
+//	Example: EngageLab for operator 1001, country "BR" (Brazil).
+//
+// Step 2: CreateOTPTemplate
+//
+//	Create message templates bound to the provider, one per business scenario.
+//	Example: "email_verification" template using EngageLab template ID "T001" in Portuguese.
+//
+// Step 3: SyncOTPTemplateStatus
+//
+//	Some providers (EngageLab WhatsApp) require template approval. Call this to pull the
+//	latest review status from the provider. Only approved templates can be used for sending.
+//
+// Step 4: (Automatic) SendOTP is called by internal services (e.g., user-service)
+//
+//	The push-service automatically routes to the correct provider + template based on
+//	the operator, country, and business scenario. No backoffice action needed at this step.
+//
+// Step 5: ListOTPSendLogs
+//
+//	Query delivery history for auditing, debugging, or statistics.
+//
+// ## Multi-tenant permission model
+// All requests include target_operator_context. The backoffice validates that the
+// authenticated admin has permission to operate on the target operator (hierarchy check).
+// If target_operator_context is omitted, it defaults to the admin's own operator.
 type BackofficeOTPServer interface {
-	CreateOTPProvider(context.Context, *v1.CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error)
-	UpdateOTPProvider(context.Context, *v1.UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error)
-	DeleteOTPProvider(context.Context, *v1.DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error)
-	GetOTPProvider(context.Context, *v1.GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error)
-	ListOTPProviders(context.Context, *v1.ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error)
-	CreateOTPTemplate(context.Context, *v1.CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
-	UpdateOTPTemplate(context.Context, *v1.UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error)
-	DeleteOTPTemplate(context.Context, *v1.DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
-	GetOTPTemplate(context.Context, *v1.GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error)
-	ListOTPTemplates(context.Context, *v1.ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error)
-	SyncOTPTemplateStatus(context.Context, *v1.SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error)
-	ListOTPSendLogs(context.Context, *v1.ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error)
+	// CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+	//
+	// ## What is an OTP Provider?
+	// A Provider is a connection to a third-party service (e.g., EngageLab) that can
+	// deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
+	//   - The provider's API credentials (encrypted at rest, never returned in responses)
+	//   - Which delivery channels to use and in what order (send_channel_strategy)
+	//   - A priority for fallback routing when multiple providers exist
+	//
+	// ## When to use this API?
+	// Call this when onboarding a new operator or expanding to a new country. For example:
+	//   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
+	//     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
+	//   - Same operator wants a global SMS fallback → create another provider with
+	//     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
+	//
+	// ## How does routing work?
+	// When user-service calls SendOTP for a phone number, push-service resolves the provider
+	// using this fallback chain (first match wins):
+	//  1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//  2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
+	//  3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//  4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
+	//
+	// This means: operator-specific config is preferred; "global" is the fallback;
+	// system-level config provides a safety net for operators that haven't configured anything.
+	//
+	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
+	//
+	//	{
+	//	  "target_operator_context": { "operator_id": 1001 },
+	//	  "country": "BR",
+	//	  "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+	//	  "name": "EngageLab Brazil",
+	//	  "enabled": true,
+	//	  "priority": 0,
+	//	  "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+	//	  "config": "{}",
+	//	  "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+	//	}
+	//
+	// ## Response
+	// Returns the created provider info (with has_credentials=true instead of actual credentials).
+	//
+	// ## Errors
+	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
+	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
+	CreateOTPProvider(context.Context, *CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error)
+	UpdateOTPProvider(context.Context, *UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error)
+	DeleteOTPProvider(context.Context, *DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error)
+	GetOTPProvider(context.Context, *GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error)
+	ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error)
+	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
+	UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error)
+	DeleteOTPTemplate(context.Context, *DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
+	GetOTPTemplate(context.Context, *GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error)
+	ListOTPTemplates(context.Context, *ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error)
+	SyncOTPTemplateStatus(context.Context, *SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error)
+	ListOTPSendLogs(context.Context, *ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error)
 	mustEmbedUnimplementedBackofficeOTPServer()
 }
 
@@ -212,40 +392,40 @@ type BackofficeOTPServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeOTPServer struct{}
 
-func (UnimplementedBackofficeOTPServer) CreateOTPProvider(context.Context, *v1.CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error) {
+func (UnimplementedBackofficeOTPServer) CreateOTPProvider(context.Context, *CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOTPProvider not implemented")
 }
-func (UnimplementedBackofficeOTPServer) UpdateOTPProvider(context.Context, *v1.UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error) {
+func (UnimplementedBackofficeOTPServer) UpdateOTPProvider(context.Context, *UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOTPProvider not implemented")
 }
-func (UnimplementedBackofficeOTPServer) DeleteOTPProvider(context.Context, *v1.DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error) {
+func (UnimplementedBackofficeOTPServer) DeleteOTPProvider(context.Context, *DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteOTPProvider not implemented")
 }
-func (UnimplementedBackofficeOTPServer) GetOTPProvider(context.Context, *v1.GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error) {
+func (UnimplementedBackofficeOTPServer) GetOTPProvider(context.Context, *GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOTPProvider not implemented")
 }
-func (UnimplementedBackofficeOTPServer) ListOTPProviders(context.Context, *v1.ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error) {
+func (UnimplementedBackofficeOTPServer) ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPProviders not implemented")
 }
-func (UnimplementedBackofficeOTPServer) CreateOTPTemplate(context.Context, *v1.CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error) {
+func (UnimplementedBackofficeOTPServer) CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOTPTemplate not implemented")
 }
-func (UnimplementedBackofficeOTPServer) UpdateOTPTemplate(context.Context, *v1.UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error) {
+func (UnimplementedBackofficeOTPServer) UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateOTPTemplate not implemented")
 }
-func (UnimplementedBackofficeOTPServer) DeleteOTPTemplate(context.Context, *v1.DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error) {
+func (UnimplementedBackofficeOTPServer) DeleteOTPTemplate(context.Context, *DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteOTPTemplate not implemented")
 }
-func (UnimplementedBackofficeOTPServer) GetOTPTemplate(context.Context, *v1.GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error) {
+func (UnimplementedBackofficeOTPServer) GetOTPTemplate(context.Context, *GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOTPTemplate not implemented")
 }
-func (UnimplementedBackofficeOTPServer) ListOTPTemplates(context.Context, *v1.ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error) {
+func (UnimplementedBackofficeOTPServer) ListOTPTemplates(context.Context, *ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPTemplates not implemented")
 }
-func (UnimplementedBackofficeOTPServer) SyncOTPTemplateStatus(context.Context, *v1.SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error) {
+func (UnimplementedBackofficeOTPServer) SyncOTPTemplateStatus(context.Context, *SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SyncOTPTemplateStatus not implemented")
 }
-func (UnimplementedBackofficeOTPServer) ListOTPSendLogs(context.Context, *v1.ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error) {
+func (UnimplementedBackofficeOTPServer) ListOTPSendLogs(context.Context, *ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPSendLogs not implemented")
 }
 func (UnimplementedBackofficeOTPServer) mustEmbedUnimplementedBackofficeOTPServer() {}
@@ -270,7 +450,7 @@ func RegisterBackofficeOTPServer(s grpc.ServiceRegistrar, srv BackofficeOTPServe
 }
 
 func _BackofficeOTP_CreateOTPProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.CreateOTPProviderRequest)
+	in := new(CreateOTPProviderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -282,13 +462,13 @@ func _BackofficeOTP_CreateOTPProvider_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeOTP_CreateOTPProvider_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).CreateOTPProvider(ctx, req.(*v1.CreateOTPProviderRequest))
+		return srv.(BackofficeOTPServer).CreateOTPProvider(ctx, req.(*CreateOTPProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_UpdateOTPProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdateOTPProviderRequest)
+	in := new(UpdateOTPProviderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -300,13 +480,13 @@ func _BackofficeOTP_UpdateOTPProvider_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeOTP_UpdateOTPProvider_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).UpdateOTPProvider(ctx, req.(*v1.UpdateOTPProviderRequest))
+		return srv.(BackofficeOTPServer).UpdateOTPProvider(ctx, req.(*UpdateOTPProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_DeleteOTPProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.DeleteOTPProviderRequest)
+	in := new(DeleteOTPProviderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -318,13 +498,13 @@ func _BackofficeOTP_DeleteOTPProvider_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeOTP_DeleteOTPProvider_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).DeleteOTPProvider(ctx, req.(*v1.DeleteOTPProviderRequest))
+		return srv.(BackofficeOTPServer).DeleteOTPProvider(ctx, req.(*DeleteOTPProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_GetOTPProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetOTPProviderRequest)
+	in := new(GetOTPProviderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -336,13 +516,13 @@ func _BackofficeOTP_GetOTPProvider_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BackofficeOTP_GetOTPProvider_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).GetOTPProvider(ctx, req.(*v1.GetOTPProviderRequest))
+		return srv.(BackofficeOTPServer).GetOTPProvider(ctx, req.(*GetOTPProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_ListOTPProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListOTPProvidersRequest)
+	in := new(ListOTPProvidersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -354,13 +534,13 @@ func _BackofficeOTP_ListOTPProviders_Handler(srv interface{}, ctx context.Contex
 		FullMethod: BackofficeOTP_ListOTPProviders_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).ListOTPProviders(ctx, req.(*v1.ListOTPProvidersRequest))
+		return srv.(BackofficeOTPServer).ListOTPProviders(ctx, req.(*ListOTPProvidersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_CreateOTPTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.CreateOTPTemplateRequest)
+	in := new(CreateOTPTemplateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -372,13 +552,13 @@ func _BackofficeOTP_CreateOTPTemplate_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeOTP_CreateOTPTemplate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).CreateOTPTemplate(ctx, req.(*v1.CreateOTPTemplateRequest))
+		return srv.(BackofficeOTPServer).CreateOTPTemplate(ctx, req.(*CreateOTPTemplateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_UpdateOTPTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdateOTPTemplateRequest)
+	in := new(UpdateOTPTemplateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -390,13 +570,13 @@ func _BackofficeOTP_UpdateOTPTemplate_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeOTP_UpdateOTPTemplate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).UpdateOTPTemplate(ctx, req.(*v1.UpdateOTPTemplateRequest))
+		return srv.(BackofficeOTPServer).UpdateOTPTemplate(ctx, req.(*UpdateOTPTemplateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_DeleteOTPTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.DeleteOTPTemplateRequest)
+	in := new(DeleteOTPTemplateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -408,13 +588,13 @@ func _BackofficeOTP_DeleteOTPTemplate_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeOTP_DeleteOTPTemplate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).DeleteOTPTemplate(ctx, req.(*v1.DeleteOTPTemplateRequest))
+		return srv.(BackofficeOTPServer).DeleteOTPTemplate(ctx, req.(*DeleteOTPTemplateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_GetOTPTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetOTPTemplateRequest)
+	in := new(GetOTPTemplateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -426,13 +606,13 @@ func _BackofficeOTP_GetOTPTemplate_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BackofficeOTP_GetOTPTemplate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).GetOTPTemplate(ctx, req.(*v1.GetOTPTemplateRequest))
+		return srv.(BackofficeOTPServer).GetOTPTemplate(ctx, req.(*GetOTPTemplateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_ListOTPTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListOTPTemplatesRequest)
+	in := new(ListOTPTemplatesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -444,13 +624,13 @@ func _BackofficeOTP_ListOTPTemplates_Handler(srv interface{}, ctx context.Contex
 		FullMethod: BackofficeOTP_ListOTPTemplates_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).ListOTPTemplates(ctx, req.(*v1.ListOTPTemplatesRequest))
+		return srv.(BackofficeOTPServer).ListOTPTemplates(ctx, req.(*ListOTPTemplatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_SyncOTPTemplateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.SyncOTPTemplateStatusRequest)
+	in := new(SyncOTPTemplateStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -462,13 +642,13 @@ func _BackofficeOTP_SyncOTPTemplateStatus_Handler(srv interface{}, ctx context.C
 		FullMethod: BackofficeOTP_SyncOTPTemplateStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).SyncOTPTemplateStatus(ctx, req.(*v1.SyncOTPTemplateStatusRequest))
+		return srv.(BackofficeOTPServer).SyncOTPTemplateStatus(ctx, req.(*SyncOTPTemplateStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeOTP_ListOTPSendLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListOTPSendLogsRequest)
+	in := new(ListOTPSendLogsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -480,7 +660,7 @@ func _BackofficeOTP_ListOTPSendLogs_Handler(srv interface{}, ctx context.Context
 		FullMethod: BackofficeOTP_ListOTPSendLogs_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOTPServer).ListOTPSendLogs(ctx, req.(*v1.ListOTPSendLogsRequest))
+		return srv.(BackofficeOTPServer).ListOTPSendLogs(ctx, req.(*ListOTPSendLogsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

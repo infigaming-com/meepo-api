@@ -34,18 +34,65 @@ const OperationBackofficeOTPUpdateOTPProvider = "/api.backoffice.service.v1.Back
 const OperationBackofficeOTPUpdateOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPTemplate"
 
 type BackofficeOTPHTTPServer interface {
-	CreateOTPProvider(context.Context, *v1.CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error)
-	CreateOTPTemplate(context.Context, *v1.CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
-	DeleteOTPProvider(context.Context, *v1.DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error)
-	DeleteOTPTemplate(context.Context, *v1.DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
-	GetOTPProvider(context.Context, *v1.GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error)
-	GetOTPTemplate(context.Context, *v1.GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error)
-	ListOTPProviders(context.Context, *v1.ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error)
-	ListOTPSendLogs(context.Context, *v1.ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error)
-	ListOTPTemplates(context.Context, *v1.ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error)
-	SyncOTPTemplateStatus(context.Context, *v1.SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error)
-	UpdateOTPProvider(context.Context, *v1.UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error)
-	UpdateOTPTemplate(context.Context, *v1.UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error)
+	// CreateOTPProvider CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+	//
+	// ## What is an OTP Provider?
+	// A Provider is a connection to a third-party service (e.g., EngageLab) that can
+	// deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
+	//   - The provider's API credentials (encrypted at rest, never returned in responses)
+	//   - Which delivery channels to use and in what order (send_channel_strategy)
+	//   - A priority for fallback routing when multiple providers exist
+	//
+	// ## When to use this API?
+	// Call this when onboarding a new operator or expanding to a new country. For example:
+	//   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
+	//     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
+	//   - Same operator wants a global SMS fallback → create another provider with
+	//     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
+	//
+	// ## How does routing work?
+	// When user-service calls SendOTP for a phone number, push-service resolves the provider
+	// using this fallback chain (first match wins):
+	//   1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//   2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
+	//   3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//   4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
+	// This means: operator-specific config is preferred; "global" is the fallback;
+	// system-level config provides a safety net for operators that haven't configured anything.
+	//
+	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
+	//   {
+	//     "target_operator_context": { "operator_id": 1001 },
+	//     "country": "BR",
+	//     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+	//     "name": "EngageLab Brazil",
+	//     "enabled": true,
+	//     "priority": 0,
+	//     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+	//     "config": "{}",
+	//     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+	//   }
+	//
+	// ## Response
+	// Returns the created provider info (with has_credentials=true instead of actual credentials).
+	//
+	// ## Errors
+	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
+	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
+	CreateOTPProvider(context.Context, *CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error)
+	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
+	DeleteOTPProvider(context.Context, *DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error)
+	DeleteOTPTemplate(context.Context, *DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
+	GetOTPProvider(context.Context, *GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error)
+	GetOTPTemplate(context.Context, *GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error)
+	ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error)
+	ListOTPSendLogs(context.Context, *ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error)
+	ListOTPTemplates(context.Context, *ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error)
+	SyncOTPTemplateStatus(context.Context, *SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error)
+	UpdateOTPProvider(context.Context, *UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error)
+	UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error)
 }
 
 func RegisterBackofficeOTPHTTPServer(s *http.Server, srv BackofficeOTPHTTPServer) {
@@ -66,7 +113,7 @@ func RegisterBackofficeOTPHTTPServer(s *http.Server, srv BackofficeOTPHTTPServer
 
 func _BackofficeOTP_CreateOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.CreateOTPProviderRequest
+		var in CreateOTPProviderRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -75,7 +122,7 @@ func _BackofficeOTP_CreateOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPCreateOTPProvider)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateOTPProvider(ctx, req.(*v1.CreateOTPProviderRequest))
+			return srv.CreateOTPProvider(ctx, req.(*CreateOTPProviderRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -88,7 +135,7 @@ func _BackofficeOTP_CreateOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 
 func _BackofficeOTP_UpdateOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.UpdateOTPProviderRequest
+		var in UpdateOTPProviderRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -97,7 +144,7 @@ func _BackofficeOTP_UpdateOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPUpdateOTPProvider)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateOTPProvider(ctx, req.(*v1.UpdateOTPProviderRequest))
+			return srv.UpdateOTPProvider(ctx, req.(*UpdateOTPProviderRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -110,7 +157,7 @@ func _BackofficeOTP_UpdateOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 
 func _BackofficeOTP_DeleteOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.DeleteOTPProviderRequest
+		var in DeleteOTPProviderRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -119,7 +166,7 @@ func _BackofficeOTP_DeleteOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPDeleteOTPProvider)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteOTPProvider(ctx, req.(*v1.DeleteOTPProviderRequest))
+			return srv.DeleteOTPProvider(ctx, req.(*DeleteOTPProviderRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -132,7 +179,7 @@ func _BackofficeOTP_DeleteOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 
 func _BackofficeOTP_GetOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetOTPProviderRequest
+		var in GetOTPProviderRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -141,7 +188,7 @@ func _BackofficeOTP_GetOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer) fu
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPGetOTPProvider)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOTPProvider(ctx, req.(*v1.GetOTPProviderRequest))
+			return srv.GetOTPProvider(ctx, req.(*GetOTPProviderRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -154,7 +201,7 @@ func _BackofficeOTP_GetOTPProvider0_HTTP_Handler(srv BackofficeOTPHTTPServer) fu
 
 func _BackofficeOTP_ListOTPProviders0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.ListOTPProvidersRequest
+		var in ListOTPProvidersRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -163,7 +210,7 @@ func _BackofficeOTP_ListOTPProviders0_HTTP_Handler(srv BackofficeOTPHTTPServer) 
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPListOTPProviders)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListOTPProviders(ctx, req.(*v1.ListOTPProvidersRequest))
+			return srv.ListOTPProviders(ctx, req.(*ListOTPProvidersRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -176,7 +223,7 @@ func _BackofficeOTP_ListOTPProviders0_HTTP_Handler(srv BackofficeOTPHTTPServer) 
 
 func _BackofficeOTP_CreateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.CreateOTPTemplateRequest
+		var in CreateOTPTemplateRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -185,7 +232,7 @@ func _BackofficeOTP_CreateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPCreateOTPTemplate)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateOTPTemplate(ctx, req.(*v1.CreateOTPTemplateRequest))
+			return srv.CreateOTPTemplate(ctx, req.(*CreateOTPTemplateRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -198,7 +245,7 @@ func _BackofficeOTP_CreateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 
 func _BackofficeOTP_UpdateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.UpdateOTPTemplateRequest
+		var in UpdateOTPTemplateRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -207,7 +254,7 @@ func _BackofficeOTP_UpdateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPUpdateOTPTemplate)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateOTPTemplate(ctx, req.(*v1.UpdateOTPTemplateRequest))
+			return srv.UpdateOTPTemplate(ctx, req.(*UpdateOTPTemplateRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -220,7 +267,7 @@ func _BackofficeOTP_UpdateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 
 func _BackofficeOTP_DeleteOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.DeleteOTPTemplateRequest
+		var in DeleteOTPTemplateRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -229,7 +276,7 @@ func _BackofficeOTP_DeleteOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPDeleteOTPTemplate)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteOTPTemplate(ctx, req.(*v1.DeleteOTPTemplateRequest))
+			return srv.DeleteOTPTemplate(ctx, req.(*DeleteOTPTemplateRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -242,7 +289,7 @@ func _BackofficeOTP_DeleteOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer)
 
 func _BackofficeOTP_GetOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetOTPTemplateRequest
+		var in GetOTPTemplateRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -251,7 +298,7 @@ func _BackofficeOTP_GetOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) fu
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPGetOTPTemplate)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOTPTemplate(ctx, req.(*v1.GetOTPTemplateRequest))
+			return srv.GetOTPTemplate(ctx, req.(*GetOTPTemplateRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -264,7 +311,7 @@ func _BackofficeOTP_GetOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) fu
 
 func _BackofficeOTP_ListOTPTemplates0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.ListOTPTemplatesRequest
+		var in ListOTPTemplatesRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -273,7 +320,7 @@ func _BackofficeOTP_ListOTPTemplates0_HTTP_Handler(srv BackofficeOTPHTTPServer) 
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPListOTPTemplates)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListOTPTemplates(ctx, req.(*v1.ListOTPTemplatesRequest))
+			return srv.ListOTPTemplates(ctx, req.(*ListOTPTemplatesRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -286,7 +333,7 @@ func _BackofficeOTP_ListOTPTemplates0_HTTP_Handler(srv BackofficeOTPHTTPServer) 
 
 func _BackofficeOTP_SyncOTPTemplateStatus0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.SyncOTPTemplateStatusRequest
+		var in SyncOTPTemplateStatusRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -295,7 +342,7 @@ func _BackofficeOTP_SyncOTPTemplateStatus0_HTTP_Handler(srv BackofficeOTPHTTPSer
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPSyncOTPTemplateStatus)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SyncOTPTemplateStatus(ctx, req.(*v1.SyncOTPTemplateStatusRequest))
+			return srv.SyncOTPTemplateStatus(ctx, req.(*SyncOTPTemplateStatusRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -308,7 +355,7 @@ func _BackofficeOTP_SyncOTPTemplateStatus0_HTTP_Handler(srv BackofficeOTPHTTPSer
 
 func _BackofficeOTP_ListOTPSendLogs0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.ListOTPSendLogsRequest
+		var in ListOTPSendLogsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -317,7 +364,7 @@ func _BackofficeOTP_ListOTPSendLogs0_HTTP_Handler(srv BackofficeOTPHTTPServer) f
 		}
 		http.SetOperation(ctx, OperationBackofficeOTPListOTPSendLogs)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListOTPSendLogs(ctx, req.(*v1.ListOTPSendLogsRequest))
+			return srv.ListOTPSendLogs(ctx, req.(*ListOTPSendLogsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -329,18 +376,65 @@ func _BackofficeOTP_ListOTPSendLogs0_HTTP_Handler(srv BackofficeOTPHTTPServer) f
 }
 
 type BackofficeOTPHTTPClient interface {
-	CreateOTPProvider(ctx context.Context, req *v1.CreateOTPProviderRequest, opts ...http.CallOption) (rsp *v1.CreateOTPProviderResponse, err error)
-	CreateOTPTemplate(ctx context.Context, req *v1.CreateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateOTPTemplateResponse, err error)
-	DeleteOTPProvider(ctx context.Context, req *v1.DeleteOTPProviderRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPProviderResponse, err error)
-	DeleteOTPTemplate(ctx context.Context, req *v1.DeleteOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPTemplateResponse, err error)
-	GetOTPProvider(ctx context.Context, req *v1.GetOTPProviderRequest, opts ...http.CallOption) (rsp *v1.GetOTPProviderResponse, err error)
-	GetOTPTemplate(ctx context.Context, req *v1.GetOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.GetOTPTemplateResponse, err error)
-	ListOTPProviders(ctx context.Context, req *v1.ListOTPProvidersRequest, opts ...http.CallOption) (rsp *v1.ListOTPProvidersResponse, err error)
-	ListOTPSendLogs(ctx context.Context, req *v1.ListOTPSendLogsRequest, opts ...http.CallOption) (rsp *v1.ListOTPSendLogsResponse, err error)
-	ListOTPTemplates(ctx context.Context, req *v1.ListOTPTemplatesRequest, opts ...http.CallOption) (rsp *v1.ListOTPTemplatesResponse, err error)
-	SyncOTPTemplateStatus(ctx context.Context, req *v1.SyncOTPTemplateStatusRequest, opts ...http.CallOption) (rsp *v1.SyncOTPTemplateStatusResponse, err error)
-	UpdateOTPProvider(ctx context.Context, req *v1.UpdateOTPProviderRequest, opts ...http.CallOption) (rsp *v1.UpdateOTPProviderResponse, err error)
-	UpdateOTPTemplate(ctx context.Context, req *v1.UpdateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.UpdateOTPTemplateResponse, err error)
+	// CreateOTPProvider CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+	//
+	// ## What is an OTP Provider?
+	// A Provider is a connection to a third-party service (e.g., EngageLab) that can
+	// deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
+	//   - The provider's API credentials (encrypted at rest, never returned in responses)
+	//   - Which delivery channels to use and in what order (send_channel_strategy)
+	//   - A priority for fallback routing when multiple providers exist
+	//
+	// ## When to use this API?
+	// Call this when onboarding a new operator or expanding to a new country. For example:
+	//   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
+	//     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
+	//   - Same operator wants a global SMS fallback → create another provider with
+	//     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+	//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
+	//
+	// ## How does routing work?
+	// When user-service calls SendOTP for a phone number, push-service resolves the provider
+	// using this fallback chain (first match wins):
+	//   1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//   2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
+	//   3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
+	//   4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
+	// This means: operator-specific config is preferred; "global" is the fallback;
+	// system-level config provides a safety net for operators that haven't configured anything.
+	//
+	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
+	//   {
+	//     "target_operator_context": { "operator_id": 1001 },
+	//     "country": "BR",
+	//     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+	//     "name": "EngageLab Brazil",
+	//     "enabled": true,
+	//     "priority": 0,
+	//     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+	//     "config": "{}",
+	//     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+	//   }
+	//
+	// ## Response
+	// Returns the created provider info (with has_credentials=true instead of actual credentials).
+	//
+	// ## Errors
+	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
+	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
+	CreateOTPProvider(ctx context.Context, req *CreateOTPProviderRequest, opts ...http.CallOption) (rsp *v1.CreateOTPProviderResponse, err error)
+	CreateOTPTemplate(ctx context.Context, req *CreateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateOTPTemplateResponse, err error)
+	DeleteOTPProvider(ctx context.Context, req *DeleteOTPProviderRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPProviderResponse, err error)
+	DeleteOTPTemplate(ctx context.Context, req *DeleteOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPTemplateResponse, err error)
+	GetOTPProvider(ctx context.Context, req *GetOTPProviderRequest, opts ...http.CallOption) (rsp *v1.GetOTPProviderResponse, err error)
+	GetOTPTemplate(ctx context.Context, req *GetOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.GetOTPTemplateResponse, err error)
+	ListOTPProviders(ctx context.Context, req *ListOTPProvidersRequest, opts ...http.CallOption) (rsp *v1.ListOTPProvidersResponse, err error)
+	ListOTPSendLogs(ctx context.Context, req *ListOTPSendLogsRequest, opts ...http.CallOption) (rsp *v1.ListOTPSendLogsResponse, err error)
+	ListOTPTemplates(ctx context.Context, req *ListOTPTemplatesRequest, opts ...http.CallOption) (rsp *v1.ListOTPTemplatesResponse, err error)
+	SyncOTPTemplateStatus(ctx context.Context, req *SyncOTPTemplateStatusRequest, opts ...http.CallOption) (rsp *v1.SyncOTPTemplateStatusResponse, err error)
+	UpdateOTPProvider(ctx context.Context, req *UpdateOTPProviderRequest, opts ...http.CallOption) (rsp *v1.UpdateOTPProviderResponse, err error)
+	UpdateOTPTemplate(ctx context.Context, req *UpdateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.UpdateOTPTemplateResponse, err error)
 }
 
 type BackofficeOTPHTTPClientImpl struct {
@@ -351,7 +445,54 @@ func NewBackofficeOTPHTTPClient(client *http.Client) BackofficeOTPHTTPClient {
 	return &BackofficeOTPHTTPClientImpl{client}
 }
 
-func (c *BackofficeOTPHTTPClientImpl) CreateOTPProvider(ctx context.Context, in *v1.CreateOTPProviderRequest, opts ...http.CallOption) (*v1.CreateOTPProviderResponse, error) {
+// CreateOTPProvider CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+//
+// ## What is an OTP Provider?
+// A Provider is a connection to a third-party service (e.g., EngageLab) that can
+// deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
+//   - The provider's API credentials (encrypted at rest, never returned in responses)
+//   - Which delivery channels to use and in what order (send_channel_strategy)
+//   - A priority for fallback routing when multiple providers exist
+//
+// ## When to use this API?
+// Call this when onboarding a new operator or expanding to a new country. For example:
+//   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
+//     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
+//   - Same operator wants a global SMS fallback → create another provider with
+//     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
+//     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
+//
+// ## How does routing work?
+// When user-service calls SendOTP for a phone number, push-service resolves the provider
+// using this fallback chain (first match wins):
+//   1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
+//   2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
+//   3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
+//   4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
+// This means: operator-specific config is preferred; "global" is the fallback;
+// system-level config provides a safety net for operators that haven't configured anything.
+//
+// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
+//   {
+//     "target_operator_context": { "operator_id": 1001 },
+//     "country": "BR",
+//     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+//     "name": "EngageLab Brazil",
+//     "enabled": true,
+//     "priority": 0,
+//     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+//     "config": "{}",
+//     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+//   }
+//
+// ## Response
+// Returns the created provider info (with has_credentials=true instead of actual credentials).
+//
+// ## Errors
+// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
+// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
+func (c *BackofficeOTPHTTPClientImpl) CreateOTPProvider(ctx context.Context, in *CreateOTPProviderRequest, opts ...http.CallOption) (*v1.CreateOTPProviderResponse, error) {
 	var out v1.CreateOTPProviderResponse
 	pattern := "/v1/backoffice/otp/provider/create"
 	path := binding.EncodeURL(pattern, in, false)
@@ -364,7 +505,7 @@ func (c *BackofficeOTPHTTPClientImpl) CreateOTPProvider(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) CreateOTPTemplate(ctx context.Context, in *v1.CreateOTPTemplateRequest, opts ...http.CallOption) (*v1.CreateOTPTemplateResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...http.CallOption) (*v1.CreateOTPTemplateResponse, error) {
 	var out v1.CreateOTPTemplateResponse
 	pattern := "/v1/backoffice/otp/template/create"
 	path := binding.EncodeURL(pattern, in, false)
@@ -377,7 +518,7 @@ func (c *BackofficeOTPHTTPClientImpl) CreateOTPTemplate(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) DeleteOTPProvider(ctx context.Context, in *v1.DeleteOTPProviderRequest, opts ...http.CallOption) (*v1.DeleteOTPProviderResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) DeleteOTPProvider(ctx context.Context, in *DeleteOTPProviderRequest, opts ...http.CallOption) (*v1.DeleteOTPProviderResponse, error) {
 	var out v1.DeleteOTPProviderResponse
 	pattern := "/v1/backoffice/otp/provider/delete"
 	path := binding.EncodeURL(pattern, in, false)
@@ -390,7 +531,7 @@ func (c *BackofficeOTPHTTPClientImpl) DeleteOTPProvider(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) DeleteOTPTemplate(ctx context.Context, in *v1.DeleteOTPTemplateRequest, opts ...http.CallOption) (*v1.DeleteOTPTemplateResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) DeleteOTPTemplate(ctx context.Context, in *DeleteOTPTemplateRequest, opts ...http.CallOption) (*v1.DeleteOTPTemplateResponse, error) {
 	var out v1.DeleteOTPTemplateResponse
 	pattern := "/v1/backoffice/otp/template/delete"
 	path := binding.EncodeURL(pattern, in, false)
@@ -403,7 +544,7 @@ func (c *BackofficeOTPHTTPClientImpl) DeleteOTPTemplate(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) GetOTPProvider(ctx context.Context, in *v1.GetOTPProviderRequest, opts ...http.CallOption) (*v1.GetOTPProviderResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) GetOTPProvider(ctx context.Context, in *GetOTPProviderRequest, opts ...http.CallOption) (*v1.GetOTPProviderResponse, error) {
 	var out v1.GetOTPProviderResponse
 	pattern := "/v1/backoffice/otp/provider/get"
 	path := binding.EncodeURL(pattern, in, false)
@@ -416,7 +557,7 @@ func (c *BackofficeOTPHTTPClientImpl) GetOTPProvider(ctx context.Context, in *v1
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) GetOTPTemplate(ctx context.Context, in *v1.GetOTPTemplateRequest, opts ...http.CallOption) (*v1.GetOTPTemplateResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) GetOTPTemplate(ctx context.Context, in *GetOTPTemplateRequest, opts ...http.CallOption) (*v1.GetOTPTemplateResponse, error) {
 	var out v1.GetOTPTemplateResponse
 	pattern := "/v1/backoffice/otp/template/get"
 	path := binding.EncodeURL(pattern, in, false)
@@ -429,7 +570,7 @@ func (c *BackofficeOTPHTTPClientImpl) GetOTPTemplate(ctx context.Context, in *v1
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) ListOTPProviders(ctx context.Context, in *v1.ListOTPProvidersRequest, opts ...http.CallOption) (*v1.ListOTPProvidersResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) ListOTPProviders(ctx context.Context, in *ListOTPProvidersRequest, opts ...http.CallOption) (*v1.ListOTPProvidersResponse, error) {
 	var out v1.ListOTPProvidersResponse
 	pattern := "/v1/backoffice/otp/provider/list"
 	path := binding.EncodeURL(pattern, in, false)
@@ -442,7 +583,7 @@ func (c *BackofficeOTPHTTPClientImpl) ListOTPProviders(ctx context.Context, in *
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) ListOTPSendLogs(ctx context.Context, in *v1.ListOTPSendLogsRequest, opts ...http.CallOption) (*v1.ListOTPSendLogsResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogsRequest, opts ...http.CallOption) (*v1.ListOTPSendLogsResponse, error) {
 	var out v1.ListOTPSendLogsResponse
 	pattern := "/v1/backoffice/otp/send-logs/list"
 	path := binding.EncodeURL(pattern, in, false)
@@ -455,7 +596,7 @@ func (c *BackofficeOTPHTTPClientImpl) ListOTPSendLogs(ctx context.Context, in *v
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) ListOTPTemplates(ctx context.Context, in *v1.ListOTPTemplatesRequest, opts ...http.CallOption) (*v1.ListOTPTemplatesResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) ListOTPTemplates(ctx context.Context, in *ListOTPTemplatesRequest, opts ...http.CallOption) (*v1.ListOTPTemplatesResponse, error) {
 	var out v1.ListOTPTemplatesResponse
 	pattern := "/v1/backoffice/otp/template/list"
 	path := binding.EncodeURL(pattern, in, false)
@@ -468,7 +609,7 @@ func (c *BackofficeOTPHTTPClientImpl) ListOTPTemplates(ctx context.Context, in *
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) SyncOTPTemplateStatus(ctx context.Context, in *v1.SyncOTPTemplateStatusRequest, opts ...http.CallOption) (*v1.SyncOTPTemplateStatusResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) SyncOTPTemplateStatus(ctx context.Context, in *SyncOTPTemplateStatusRequest, opts ...http.CallOption) (*v1.SyncOTPTemplateStatusResponse, error) {
 	var out v1.SyncOTPTemplateStatusResponse
 	pattern := "/v1/backoffice/otp/template/sync-status"
 	path := binding.EncodeURL(pattern, in, false)
@@ -481,7 +622,7 @@ func (c *BackofficeOTPHTTPClientImpl) SyncOTPTemplateStatus(ctx context.Context,
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) UpdateOTPProvider(ctx context.Context, in *v1.UpdateOTPProviderRequest, opts ...http.CallOption) (*v1.UpdateOTPProviderResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) UpdateOTPProvider(ctx context.Context, in *UpdateOTPProviderRequest, opts ...http.CallOption) (*v1.UpdateOTPProviderResponse, error) {
 	var out v1.UpdateOTPProviderResponse
 	pattern := "/v1/backoffice/otp/provider/update"
 	path := binding.EncodeURL(pattern, in, false)
@@ -494,7 +635,7 @@ func (c *BackofficeOTPHTTPClientImpl) UpdateOTPProvider(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeOTPHTTPClientImpl) UpdateOTPTemplate(ctx context.Context, in *v1.UpdateOTPTemplateRequest, opts ...http.CallOption) (*v1.UpdateOTPTemplateResponse, error) {
+func (c *BackofficeOTPHTTPClientImpl) UpdateOTPTemplate(ctx context.Context, in *UpdateOTPTemplateRequest, opts ...http.CallOption) (*v1.UpdateOTPTemplateResponse, error) {
 	var out v1.UpdateOTPTemplateResponse
 	pattern := "/v1/backoffice/otp/template/update"
 	path := binding.EncodeURL(pattern, in, false)
