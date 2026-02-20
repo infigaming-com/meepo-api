@@ -66,12 +66,24 @@ enum OTPTemplateType {
   OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM = 4;
 }
 
+// OTPTemplateReviewStatus represents the approval state of a template on the external provider.
+//
+// Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed before use.
+// SMS templates typically do not require review and will return LOCAL_ONLY.
+//
+// Lifecycle:
+//   1. Template created locally → LOCAL_ONLY (can be used for SMS immediately)
+//   2. Template submitted to provider for review → PENDING
+//   3. Provider approves → APPROVED (can be used for WhatsApp)
+//   4. Provider rejects → REJECTED (cannot be used; fix and resubmit on provider platform)
+//
+// Use SyncOTPTemplateStatus to pull the latest status from the provider.
 enum OTPTemplateReviewStatus {
-  OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED = 0;
-  OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY = 1;
-  OTP_TEMPLATE_REVIEW_STATUS_PENDING = 2;
-  OTP_TEMPLATE_REVIEW_STATUS_APPROVED = 3;
-  OTP_TEMPLATE_REVIEW_STATUS_REJECTED = 4;
+  OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED = 0;  // Default zero value, should not appear in practice
+  OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY = 1;   // Template exists only locally, no external review needed (e.g., SMS)
+  OTP_TEMPLATE_REVIEW_STATUS_PENDING = 2;      // Submitted to provider, awaiting review (e.g., WhatsApp template)
+  OTP_TEMPLATE_REVIEW_STATUS_APPROVED = 3;     // Approved by provider, ready for use
+  OTP_TEMPLATE_REVIEW_STATUS_REJECTED = 4;     // Rejected by provider, cannot be used until fixed and resubmitted
 }
 
 // ============ SendOTP (inter-service) ============
@@ -274,12 +286,20 @@ message ListOTPTemplatesResponse {
   int32 page_size = 4;
 }
 
+// SyncOTPTemplateStatusRequest requests a review status sync from the external provider.
 message SyncOTPTemplateStatusRequest {
-  int64 id = 1;
+  int64 id = 1;  // Template ID to sync status for
 }
 
+// SyncOTPTemplateStatusResponse returns the updated review status after syncing with the provider.
+//
+// Possible values:
+//   - LOCAL_ONLY:   No external review needed (e.g., SMS templates). The template can be used immediately.
+//   - PENDING:      Template is under review by the provider (e.g., WhatsApp). Wait and sync again later.
+//   - APPROVED:     Provider approved the template. It is ready for use.
+//   - REJECTED:     Provider rejected the template. Fix the content on the provider's platform and resubmit.
 message SyncOTPTemplateStatusResponse {
-  OTPTemplateReviewStatus review_status = 1;
+  OTPTemplateReviewStatus review_status = 1;  // The current review status after syncing with the provider
 }
 
 // ============ Send Logs ============
