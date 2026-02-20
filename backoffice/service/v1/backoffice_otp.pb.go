@@ -429,23 +429,30 @@ func (x *ListOTPProvidersRequest) GetPageSize() int32 {
 	return 0
 }
 
-// CreateOTPTemplateRequest creates an OTP template bound to a specific provider.
+// CreateOTPTemplateRequest — see CreateOTPTemplate RPC comment above for full documentation.
+//
+// Constraints:
+// - UNIQUE(operator_id, country, template_type, language): one template per scenario per language.
+// - provider_id must reference an existing OTP provider (created via CreateOTPProvider).
+// - external_template_id is required for SMS/WhatsApp providers.
 type CreateOTPTemplateRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Country               string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	ProviderId            int64                   `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	Name                  string                  `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	TemplateType          v1.OTPTemplateType      `protobuf:"varint,5,opt,name=template_type,json=templateType,proto3,enum=api.push.service.v1.OTPTemplateType" json:"template_type,omitempty"`
-	ExternalTemplateId    string                  `protobuf:"bytes,6,opt,name=external_template_id,json=externalTemplateId,proto3" json:"external_template_id,omitempty"` // Template ID on the provider side (e.g., EngageLab template ID)
-	Language              string                  `protobuf:"bytes,7,opt,name=language,proto3" json:"language,omitempty"`                                                 // Template language: "en", "pt", "zh", etc.
-	BrandName             string                  `protobuf:"bytes,8,opt,name=brand_name,json=brandName,proto3" json:"brand_name,omitempty"`                              // Brand name shown in the OTP message
-	CodeLength            int32                   `protobuf:"varint,9,opt,name=code_length,json=codeLength,proto3" json:"code_length,omitempty"`                          // OTP code length (default: 6)
-	CodeTtlSeconds        int32                   `protobuf:"varint,10,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3" json:"code_ttl_seconds,omitempty"`           // OTP code TTL in seconds (default: 900)
-	ExtraParams           string                  `protobuf:"bytes,11,opt,name=extra_params,json=extraParams,proto3" json:"extra_params,omitempty"`                       // JSON string of extra template parameters
-	Enabled               bool                    `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	Country               string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`                                                                         // ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
+	ProviderId            int64                   `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`                                                // ID of the OTP provider this template belongs to (from CreateOTPProvider response)
+	Name                  string                  `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`                                                                               // Human-readable display name (e.g., "Brazil Login OTP - Portuguese")
+	TemplateType          v1.OTPTemplateType      `protobuf:"varint,5,opt,name=template_type,json=templateType,proto3,enum=api.push.service.v1.OTPTemplateType" json:"template_type,omitempty"` // Business scenario this template serves
+	ExternalTemplateId    string                  `protobuf:"bytes,6,opt,name=external_template_id,json=externalTemplateId,proto3" json:"external_template_id,omitempty"`                       // Template ID from the third-party provider's platform.
+	// For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
+	// This ID is passed to the provider's API at send time to select the correct message content.
+	Language       string `protobuf:"bytes,7,opt,name=language,proto3" json:"language,omitempty"`                                       // BCP-47 language code: "en", "pt", "zh", etc. Used for routing and passed to the provider.
+	BrandName      string `protobuf:"bytes,8,opt,name=brand_name,json=brandName,proto3" json:"brand_name,omitempty"`                    // Brand name injected into the OTP message (e.g., "BetBrazil"). Passed as template variable "brand_name".
+	CodeLength     int32  `protobuf:"varint,9,opt,name=code_length,json=codeLength,proto3" json:"code_length,omitempty"`                // OTP code length, informational only (default: 6). The actual code is generated by user-service.
+	CodeTtlSeconds int32  `protobuf:"varint,10,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3" json:"code_ttl_seconds,omitempty"` // OTP code TTL in seconds, informational only (default: 900). The actual TTL is enforced by user-service.
+	ExtraParams    string `protobuf:"bytes,11,opt,name=extra_params,json=extraParams,proto3" json:"extra_params,omitempty"`             // Optional. JSON string of additional template variables passed to the provider (e.g., '{"app_name":"Meepo"}').
+	Enabled        bool   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`                                       // Whether this template is active for routing. Disabled templates are skipped during resolution.
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateOTPTemplateRequest) Reset() {

@@ -105,6 +105,18 @@ service BackofficeOTP {
     };
   }
 
+  // UpdateOTPProvider partially updates an existing OTP provider.
+  //
+  // Only fields present in the request are updated; omitted fields remain unchanged.
+  // After update, the provider routing cache is invalidated so changes take effect immediately.
+  //
+  // Common use cases:
+  //   - Rotate credentials: set credentials_json with new keys
+  //   - Disable a provider temporarily: set enabled=false (routing will skip it)
+  //   - Change channel strategy: e.g., switch from WhatsApp-first to SMS-only
+  //
+  // ## Errors
+  // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
   rpc UpdateOTPProvider(UpdateOTPProviderRequest) returns (api.push.service.v1.UpdateOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/update"
@@ -112,6 +124,15 @@ service BackofficeOTP {
     };
   }
 
+  // DeleteOTPProvider permanently removes an OTP provider.
+  //
+  // WARNING: Deleting a provider that still has templates bound to it will cause
+  // those templates to become orphaned — they will still match during routing but
+  // fail at send time because the provider credentials are gone.
+  // Best practice: delete all associated templates first, or disable the provider instead.
+  //
+  // ## Errors
+  // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
   rpc DeleteOTPProvider(DeleteOTPProviderRequest) returns (api.push.service.v1.DeleteOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/delete"
@@ -119,6 +140,12 @@ service BackofficeOTP {
     };
   }
 
+  // GetOTPProvider retrieves a single OTP provider by ID.
+  //
+  // Returns all provider fields except credentials (has_credentials=true/false is returned instead).
+  //
+  // ## Errors
+  // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
   rpc GetOTPProvider(GetOTPProviderRequest) returns (api.push.service.v1.GetOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/get"
@@ -126,6 +153,11 @@ service BackofficeOTP {
     };
   }
 
+  // ListOTPProviders lists OTP providers with optional filters and pagination.
+  //
+  // Supports filtering by country, provider_type, and enabled status.
+  // Results are scoped to the operator specified in target_operator_context.
+  // Returns paginated results with total count.
   rpc ListOTPProviders(ListOTPProvidersRequest) returns (api.push.service.v1.ListOTPProvidersResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/list"
@@ -191,6 +223,18 @@ service BackofficeOTP {
     };
   }
 
+  // UpdateOTPTemplate partially updates an existing OTP template.
+  //
+  // Only fields present in the request are updated; omitted fields remain unchanged.
+  // After update, the template routing cache is invalidated so changes take effect immediately.
+  //
+  // Common use cases:
+  //   - Switch to a new external template: set external_template_id
+  //   - Update the brand name displayed in OTP messages: set brand_name
+  //   - Disable a template temporarily: set enabled=false
+  //
+  // ## Errors
+  // - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
   rpc UpdateOTPTemplate(UpdateOTPTemplateRequest) returns (api.push.service.v1.UpdateOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/update"
@@ -198,6 +242,14 @@ service BackofficeOTP {
     };
   }
 
+  // DeleteOTPTemplate permanently removes an OTP template.
+  //
+  // If the deleted template was the only match for a given operator+country+type+language,
+  // the system will fall back to the next level in the routing chain (e.g., company → retailer → system).
+  // If no template matches at all, SendOTP will return an OTP_TEMPLATE_NOT_FOUND error.
+  //
+  // ## Errors
+  // - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
   rpc DeleteOTPTemplate(DeleteOTPTemplateRequest) returns (api.push.service.v1.DeleteOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/delete"
@@ -205,6 +257,12 @@ service BackofficeOTP {
     };
   }
 
+  // GetOTPTemplate retrieves a single OTP template by ID.
+  //
+  // Returns all template fields including review_status (for providers that require approval).
+  //
+  // ## Errors
+  // - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
   rpc GetOTPTemplate(GetOTPTemplateRequest) returns (api.push.service.v1.GetOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/get"
@@ -212,6 +270,11 @@ service BackofficeOTP {
     };
   }
 
+  // ListOTPTemplates lists OTP templates with optional filters and pagination.
+  //
+  // Supports filtering by country, provider_id, template_type, and enabled status.
+  // Results are scoped to the operator specified in target_operator_context.
+  // Returns paginated results with total count.
   rpc ListOTPTemplates(ListOTPTemplatesRequest) returns (api.push.service.v1.ListOTPTemplatesResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/list"
@@ -219,6 +282,22 @@ service BackofficeOTP {
     };
   }
 
+  // SyncOTPTemplateStatus pulls the latest review status from the external provider.
+  //
+  // Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
+  // before they can be used. This RPC calls the provider's API to check the current status
+  // and updates the local record's review_status field.
+  //
+  // ## Review status values (provider-specific)
+  // EngageLab: 0=pending, 1=approved, 2=rejected
+  //
+  // ## When to call?
+  // After creating a new WhatsApp template on the provider's platform, call this periodically
+  // until the status changes to "approved". SMS templates typically don't require review.
+  //
+  // ## Errors
+  // - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
+  // - SEND_OTP_FAILED: failed to query the provider's API (credentials invalid, network error, etc.)
   rpc SyncOTPTemplateStatus(SyncOTPTemplateStatusRequest) returns (api.push.service.v1.SyncOTPTemplateStatusResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/sync-status"
@@ -228,6 +307,21 @@ service BackofficeOTP {
 
   // ====== Send Logs ======
 
+  // ListOTPSendLogs queries OTP delivery history for auditing, debugging, or statistics.
+  //
+  // Each log records: who sent what, to whom, via which provider/template/channel,
+  // and whether it succeeded or failed. Logs are immutable (append-only).
+  //
+  // ## Filters
+  //   - user_id: filter by the end-user who triggered the OTP
+  //   - channel_used: filter by delivery channel ("sms", "whatsapp", "voice", "email")
+  //   - status: filter by delivery status ("sent", "failed")
+  //   - start_time / end_time: time range filter (Unix milliseconds)
+  //
+  // ## Use cases
+  //   - Debug a user's OTP delivery failure: filter by user_id + status="failed"
+  //   - Audit all WhatsApp OTPs in the last 24h: filter by channel_used + time range
+  //   - Monitor delivery success rate: aggregate by status over a time range
   rpc ListOTPSendLogs(ListOTPSendLogsRequest) returns (api.push.service.v1.ListOTPSendLogsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/send-logs/list"
@@ -255,38 +349,42 @@ message CreateOTPProviderRequest {
   api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 9; // Channel delivery order (e.g., OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS)
 }
 
-// UpdateOTPProviderRequest updates an existing OTP provider. Only provided fields are updated.
+// UpdateOTPProviderRequest partially updates an existing OTP provider.
+// Only provided (non-nil) fields are updated; omitted fields remain unchanged.
 message UpdateOTPProviderRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
-  optional string name = 3;
-  optional bool enabled = 4;
-  optional int32 priority = 5;
-  optional string credentials_json = 6;
-  optional string config = 7;
-  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 8;
+  int64 id = 2;                                                                  // Provider ID to update (from CreateOTPProvider response or ListOTPProviders)
+  optional string name = 3;                                                      // New display name
+  optional bool enabled = 4;                                                     // Enable/disable for routing
+  optional int32 priority = 5;                                                   // New routing priority
+  optional string credentials_json = 6;                                          // New credentials (will be re-encrypted before storage)
+  optional string config = 7;                                                    // New non-sensitive config JSON. Invalid JSON is silently ignored.
+  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 8; // New channel delivery strategy
 }
 
-// DeleteOTPProviderRequest deletes an OTP provider by ID.
+// DeleteOTPProviderRequest permanently deletes an OTP provider by ID.
+// Associated templates are NOT automatically deleted — clean them up first.
 message DeleteOTPProviderRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
+  int64 id = 2;  // Provider ID to delete
 }
 
 // GetOTPProviderRequest retrieves a single OTP provider by ID.
+// Credentials are never returned; use has_credentials in the response to check if they are set.
 message GetOTPProviderRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
+  int64 id = 2;  // Provider ID to retrieve
 }
 
-// ListOTPProvidersRequest lists OTP providers with optional filters.
+// ListOTPProvidersRequest lists OTP providers with optional filters and pagination.
+// Results are scoped to the operator in target_operator_context.
 message ListOTPProvidersRequest {
   api.common.OperatorContext target_operator_context = 1;
-  optional string country = 2;
-  optional api.push.service.v1.OTPProviderType provider_type = 3;
-  optional bool enabled = 4;
-  int32 page = 5;
-  int32 page_size = 6;
+  optional string country = 2;                              // Filter by country code (e.g., "BR") or "global"
+  optional api.push.service.v1.OTPProviderType provider_type = 3; // Filter by provider type
+  optional bool enabled = 4;                                // Filter by enabled status
+  int32 page = 5;                                           // Page number (1-based)
+  int32 page_size = 6;                                      // Items per page (max 100)
 }
 
 // ============ Template Management ============
@@ -314,59 +412,63 @@ message CreateOTPTemplateRequest {
   bool enabled = 12;                                        // Whether this template is active for routing. Disabled templates are skipped during resolution.
 }
 
-// UpdateOTPTemplateRequest updates an existing OTP template. Only provided fields are updated.
+// UpdateOTPTemplateRequest partially updates an existing OTP template.
+// Only provided (non-nil) fields are updated; omitted fields remain unchanged.
 message UpdateOTPTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
-  optional string name = 3;
-  optional string external_template_id = 4;
-  optional string language = 5;
-  optional string brand_name = 6;
-  optional int32 code_length = 7;
-  optional int32 code_ttl_seconds = 8;
-  optional string extra_params = 9;
-  optional bool enabled = 10;
+  int64 id = 2;                            // Template ID to update (from CreateOTPTemplate response or ListOTPTemplates)
+  optional string name = 3;                // New display name
+  optional string external_template_id = 4; // New external template ID (see CreateOTPTemplate docs for how to obtain)
+  optional string language = 5;            // New language code (changes routing key — ensure no UNIQUE conflict)
+  optional string brand_name = 6;          // New brand name for message content
+  optional int32 code_length = 7;          // New code length (informational)
+  optional int32 code_ttl_seconds = 8;     // New code TTL (informational)
+  optional string extra_params = 9;        // New extra template variables (JSON string)
+  optional bool enabled = 10;              // Enable/disable for routing
 }
 
-// DeleteOTPTemplateRequest deletes an OTP template by ID.
+// DeleteOTPTemplateRequest permanently deletes an OTP template by ID.
 message DeleteOTPTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
+  int64 id = 2;  // Template ID to delete
 }
 
 // GetOTPTemplateRequest retrieves a single OTP template by ID.
 message GetOTPTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
+  int64 id = 2;  // Template ID to retrieve
 }
 
-// ListOTPTemplatesRequest lists OTP templates with optional filters.
+// ListOTPTemplatesRequest lists OTP templates with optional filters and pagination.
+// Results are scoped to the operator in target_operator_context.
 message ListOTPTemplatesRequest {
   api.common.OperatorContext target_operator_context = 1;
-  optional string country = 2;
-  optional int64 provider_id = 3;
-  optional api.push.service.v1.OTPTemplateType template_type = 4;
-  optional bool enabled = 5;
-  int32 page = 6;
-  int32 page_size = 7;
+  optional string country = 2;                                  // Filter by country code (e.g., "BR") or "global"
+  optional int64 provider_id = 3;                                // Filter by associated provider ID
+  optional api.push.service.v1.OTPTemplateType template_type = 4; // Filter by business scenario
+  optional bool enabled = 5;                                     // Filter by enabled status
+  int32 page = 6;                                                // Page number (1-based)
+  int32 page_size = 7;                                           // Items per page (max 100)
 }
 
-// SyncOTPTemplateStatusRequest syncs the review status from the external provider.
+// SyncOTPTemplateStatusRequest pulls the review status for a template from the external provider.
+// See SyncOTPTemplateStatus RPC comment for details on review workflow.
 message SyncOTPTemplateStatusRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;
+  int64 id = 2;  // Template ID to sync status for
 }
 
 // ============ Send Logs ============
 
-// ListOTPSendLogsRequest queries OTP send logs with filters.
+// ListOTPSendLogsRequest queries OTP delivery history with filters and pagination.
+// See ListOTPSendLogs RPC comment for supported use cases.
 message ListOTPSendLogsRequest {
   api.common.OperatorContext target_operator_context = 1;
-  optional int64 user_id = 2;
-  optional string channel_used = 3;
-  optional string status = 4;
-  int64 start_time = 5;
-  int64 end_time = 6;
-  int32 page = 7;
-  int32 page_size = 8;
+  optional int64 user_id = 2;          // Filter by end-user ID who triggered the OTP
+  optional string channel_used = 3;    // Filter by delivery channel: "sms", "whatsapp", "voice", "email"
+  optional string status = 4;          // Filter by delivery status: "sent", "failed"
+  int64 start_time = 5;               // Start of time range (Unix milliseconds, inclusive)
+  int64 end_time = 6;                  // End of time range (Unix milliseconds, inclusive)
+  int32 page = 7;                      // Page number (1-based)
+  int32 page_size = 8;                 // Items per page (max 100)
 }

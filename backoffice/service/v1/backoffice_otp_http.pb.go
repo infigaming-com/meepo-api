@@ -82,6 +82,55 @@ type BackofficeOTPHTTPServer interface {
 	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
 	CreateOTPProvider(context.Context, *CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error)
+	// CreateOTPTemplate CreateOTPTemplate creates a message template bound to a specific OTP provider.
+	//
+	// ## What is an OTP Template?
+	// A Template defines the message content sent to the end-user. It is bound to a
+	// specific OTP Provider (created via CreateOTPProvider). Each template is scoped
+	// to a business scenario (template_type) such as login, registration, or withdrawal.
+	//
+	// ## What is external_template_id?
+	// This is the template ID assigned by the third-party provider (e.g., EngageLab).
+	// You must first create the template on the provider's platform, then copy the ID here.
+	//
+	// ### How to get it (EngageLab):
+	//   1. Log in to EngageLab console → OTP → Template Management
+	//   2. Create a new template (choose SMS or WhatsApp channel)
+	//   3. After creation (and approval for WhatsApp), copy the template ID
+	//   4. Use that ID as external_template_id when calling this API
+	//
+	// When SendOTP is triggered, the system passes this ID to the provider's API
+	// so the provider knows which pre-approved message template to use.
+	//
+	// ## How does template routing work?
+	// When user-service calls SendOTP, push-service resolves the template using this
+	// fallback chain (first match wins, per operator level):
+	//   For each level: operator → company → retailer → system (skip if ID=0):
+	//     1. (operator_id, country, template_type, language)
+	//     2. (operator_id, country, template_type, "en")
+	//     3. (operator_id, "global", template_type, language)
+	//     4. (operator_id, "global", template_type, "en")
+	//
+	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
+	//   {
+	//     "target_operator_context": { "operator_id": 1001 },
+	//     "country": "BR",
+	//     "provider_id": 166153951194906625,
+	//     "name": "Brazil Login OTP",
+	//     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+	//     "external_template_id": "T001",
+	//     "language": "pt",
+	//     "brand_name": "BetBrazil",
+	//     "code_length": 6,
+	//     "code_ttl_seconds": 300,
+	//     "extra_params": "{}",
+	//     "enabled": true
+	//   }
+	//
+	// ## Constraints
+	// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
+	// - provider_id must reference an existing OTP provider
+	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
 	DeleteOTPProvider(context.Context, *DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error)
 	DeleteOTPTemplate(context.Context, *DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
@@ -424,6 +473,55 @@ type BackofficeOTPHTTPClient interface {
 	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
 	CreateOTPProvider(ctx context.Context, req *CreateOTPProviderRequest, opts ...http.CallOption) (rsp *v1.CreateOTPProviderResponse, err error)
+	// CreateOTPTemplate CreateOTPTemplate creates a message template bound to a specific OTP provider.
+	//
+	// ## What is an OTP Template?
+	// A Template defines the message content sent to the end-user. It is bound to a
+	// specific OTP Provider (created via CreateOTPProvider). Each template is scoped
+	// to a business scenario (template_type) such as login, registration, or withdrawal.
+	//
+	// ## What is external_template_id?
+	// This is the template ID assigned by the third-party provider (e.g., EngageLab).
+	// You must first create the template on the provider's platform, then copy the ID here.
+	//
+	// ### How to get it (EngageLab):
+	//   1. Log in to EngageLab console → OTP → Template Management
+	//   2. Create a new template (choose SMS or WhatsApp channel)
+	//   3. After creation (and approval for WhatsApp), copy the template ID
+	//   4. Use that ID as external_template_id when calling this API
+	//
+	// When SendOTP is triggered, the system passes this ID to the provider's API
+	// so the provider knows which pre-approved message template to use.
+	//
+	// ## How does template routing work?
+	// When user-service calls SendOTP, push-service resolves the template using this
+	// fallback chain (first match wins, per operator level):
+	//   For each level: operator → company → retailer → system (skip if ID=0):
+	//     1. (operator_id, country, template_type, language)
+	//     2. (operator_id, country, template_type, "en")
+	//     3. (operator_id, "global", template_type, language)
+	//     4. (operator_id, "global", template_type, "en")
+	//
+	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
+	//   {
+	//     "target_operator_context": { "operator_id": 1001 },
+	//     "country": "BR",
+	//     "provider_id": 166153951194906625,
+	//     "name": "Brazil Login OTP",
+	//     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+	//     "external_template_id": "T001",
+	//     "language": "pt",
+	//     "brand_name": "BetBrazil",
+	//     "code_length": 6,
+	//     "code_ttl_seconds": 300,
+	//     "extra_params": "{}",
+	//     "enabled": true
+	//   }
+	//
+	// ## Constraints
+	// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
+	// - provider_id must reference an existing OTP provider
+	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
 	CreateOTPTemplate(ctx context.Context, req *CreateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateOTPTemplateResponse, err error)
 	DeleteOTPProvider(ctx context.Context, req *DeleteOTPProviderRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPProviderResponse, err error)
 	DeleteOTPTemplate(ctx context.Context, req *DeleteOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.DeleteOTPTemplateResponse, err error)
@@ -505,6 +603,55 @@ func (c *BackofficeOTPHTTPClientImpl) CreateOTPProvider(ctx context.Context, in 
 	return &out, nil
 }
 
+// CreateOTPTemplate CreateOTPTemplate creates a message template bound to a specific OTP provider.
+//
+// ## What is an OTP Template?
+// A Template defines the message content sent to the end-user. It is bound to a
+// specific OTP Provider (created via CreateOTPProvider). Each template is scoped
+// to a business scenario (template_type) such as login, registration, or withdrawal.
+//
+// ## What is external_template_id?
+// This is the template ID assigned by the third-party provider (e.g., EngageLab).
+// You must first create the template on the provider's platform, then copy the ID here.
+//
+// ### How to get it (EngageLab):
+//   1. Log in to EngageLab console → OTP → Template Management
+//   2. Create a new template (choose SMS or WhatsApp channel)
+//   3. After creation (and approval for WhatsApp), copy the template ID
+//   4. Use that ID as external_template_id when calling this API
+//
+// When SendOTP is triggered, the system passes this ID to the provider's API
+// so the provider knows which pre-approved message template to use.
+//
+// ## How does template routing work?
+// When user-service calls SendOTP, push-service resolves the template using this
+// fallback chain (first match wins, per operator level):
+//   For each level: operator → company → retailer → system (skip if ID=0):
+//     1. (operator_id, country, template_type, language)
+//     2. (operator_id, country, template_type, "en")
+//     3. (operator_id, "global", template_type, language)
+//     4. (operator_id, "global", template_type, "en")
+//
+// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
+//   {
+//     "target_operator_context": { "operator_id": 1001 },
+//     "country": "BR",
+//     "provider_id": 166153951194906625,
+//     "name": "Brazil Login OTP",
+//     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+//     "external_template_id": "T001",
+//     "language": "pt",
+//     "brand_name": "BetBrazil",
+//     "code_length": 6,
+//     "code_ttl_seconds": 300,
+//     "extra_params": "{}",
+//     "enabled": true
+//   }
+//
+// ## Constraints
+// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
+// - provider_id must reference an existing OTP provider
+// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
 func (c *BackofficeOTPHTTPClientImpl) CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...http.CallOption) (*v1.CreateOTPTemplateResponse, error) {
 	var out v1.CreateOTPTemplateResponse
 	pattern := "/v1/backoffice/otp/template/create"
