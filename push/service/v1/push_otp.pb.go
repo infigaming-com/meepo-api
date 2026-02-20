@@ -234,14 +234,26 @@ func (OTPTemplateType) EnumDescriptor() ([]byte, []int) {
 	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{3}
 }
 
+// OTPTemplateReviewStatus represents the approval state of a template on the external provider.
+//
+// Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed before use.
+// SMS templates typically do not require review and will return LOCAL_ONLY.
+//
+// Lifecycle:
+//  1. Template created locally → LOCAL_ONLY (can be used for SMS immediately)
+//  2. Template submitted to provider for review → PENDING
+//  3. Provider approves → APPROVED (can be used for WhatsApp)
+//  4. Provider rejects → REJECTED (cannot be used; fix and resubmit on provider platform)
+//
+// Use SyncOTPTemplateStatus to pull the latest status from the provider.
 type OTPTemplateReviewStatus int32
 
 const (
-	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED OTPTemplateReviewStatus = 0
-	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY  OTPTemplateReviewStatus = 1
-	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_PENDING     OTPTemplateReviewStatus = 2
-	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_APPROVED    OTPTemplateReviewStatus = 3
-	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_REJECTED    OTPTemplateReviewStatus = 4
+	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED OTPTemplateReviewStatus = 0 // Default zero value, should not appear in practice
+	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY  OTPTemplateReviewStatus = 1 // Template exists only locally, no external review needed (e.g., SMS)
+	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_PENDING     OTPTemplateReviewStatus = 2 // Submitted to provider, awaiting review (e.g., WhatsApp template)
+	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_APPROVED    OTPTemplateReviewStatus = 3 // Approved by provider, ready for use
+	OTPTemplateReviewStatus_OTP_TEMPLATE_REVIEW_STATUS_REJECTED    OTPTemplateReviewStatus = 4 // Rejected by provider, cannot be used until fixed and resubmitted
 )
 
 // Enum value maps for OTPTemplateReviewStatus.
@@ -2049,9 +2061,10 @@ func (x *ListOTPTemplatesResponse) GetPageSize() int32 {
 	return 0
 }
 
+// SyncOTPTemplateStatusRequest requests a review status sync from the external provider.
 type SyncOTPTemplateStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // Template ID to sync status for
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2093,9 +2106,16 @@ func (x *SyncOTPTemplateStatusRequest) GetId() int64 {
 	return 0
 }
 
+// SyncOTPTemplateStatusResponse returns the updated review status after syncing with the provider.
+//
+// Possible values:
+//   - LOCAL_ONLY:   No external review needed (e.g., SMS templates). The template can be used immediately.
+//   - PENDING:      Template is under review by the provider (e.g., WhatsApp). Wait and sync again later.
+//   - APPROVED:     Provider approved the template. It is ready for use.
+//   - REJECTED:     Provider rejected the template. Fix the content on the provider's platform and resubmit.
 type SyncOTPTemplateStatusResponse struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	ReviewStatus  OTPTemplateReviewStatus `protobuf:"varint,1,opt,name=review_status,json=reviewStatus,proto3,enum=api.push.service.v1.OTPTemplateReviewStatus" json:"review_status,omitempty"`
+	ReviewStatus  OTPTemplateReviewStatus `protobuf:"varint,1,opt,name=review_status,json=reviewStatus,proto3,enum=api.push.service.v1.OTPTemplateReviewStatus" json:"review_status,omitempty"` // The current review status after syncing with the provider
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

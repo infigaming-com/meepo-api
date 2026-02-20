@@ -137,17 +137,18 @@ func (x *CreateOTPProviderRequest) GetSendChannelStrategy() v1.OTPSendChannelStr
 	return v1.OTPSendChannelStrategy(0)
 }
 
-// UpdateOTPProviderRequest updates an existing OTP provider. Only provided fields are updated.
+// UpdateOTPProviderRequest partially updates an existing OTP provider.
+// Only provided (non-nil) fields are updated; omitted fields remain unchanged.
 type UpdateOTPProviderRequest struct {
 	state                 protoimpl.MessageState     `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext    `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                      `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Name                  *string                    `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Enabled               *bool                      `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Priority              *int32                     `protobuf:"varint,5,opt,name=priority,proto3,oneof" json:"priority,omitempty"`
-	CredentialsJson       *string                    `protobuf:"bytes,6,opt,name=credentials_json,json=credentialsJson,proto3,oneof" json:"credentials_json,omitempty"`
-	Config                *string                    `protobuf:"bytes,7,opt,name=config,proto3,oneof" json:"config,omitempty"`
-	SendChannelStrategy   *v1.OTPSendChannelStrategy `protobuf:"varint,8,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy,oneof" json:"send_channel_strategy,omitempty"`
+	Id                    int64                      `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`                                                                                                                      // Provider ID to update (from CreateOTPProvider response or ListOTPProviders)
+	Name                  *string                    `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`                                                                                                             // New display name
+	Enabled               *bool                      `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                                                                                                      // Enable/disable for routing
+	Priority              *int32                     `protobuf:"varint,5,opt,name=priority,proto3,oneof" json:"priority,omitempty"`                                                                                                    // New routing priority
+	CredentialsJson       *string                    `protobuf:"bytes,6,opt,name=credentials_json,json=credentialsJson,proto3,oneof" json:"credentials_json,omitempty"`                                                                // New credentials (will be re-encrypted before storage)
+	Config                *string                    `protobuf:"bytes,7,opt,name=config,proto3,oneof" json:"config,omitempty"`                                                                                                         // New non-sensitive config JSON. Invalid JSON is silently ignored.
+	SendChannelStrategy   *v1.OTPSendChannelStrategy `protobuf:"varint,8,opt,name=send_channel_strategy,json=sendChannelStrategy,proto3,enum=api.push.service.v1.OTPSendChannelStrategy,oneof" json:"send_channel_strategy,omitempty"` // New channel delivery strategy
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -238,11 +239,12 @@ func (x *UpdateOTPProviderRequest) GetSendChannelStrategy() v1.OTPSendChannelStr
 	return v1.OTPSendChannelStrategy(0)
 }
 
-// DeleteOTPProviderRequest deletes an OTP provider by ID.
+// DeleteOTPProviderRequest permanently deletes an OTP provider by ID.
+// Associated templates are NOT automatically deleted — clean them up first.
 type DeleteOTPProviderRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"` // Provider ID to delete
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -292,10 +294,11 @@ func (x *DeleteOTPProviderRequest) GetId() int64 {
 }
 
 // GetOTPProviderRequest retrieves a single OTP provider by ID.
+// Credentials are never returned; use has_credentials in the response to check if they are set.
 type GetOTPProviderRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"` // Provider ID to retrieve
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -344,15 +347,16 @@ func (x *GetOTPProviderRequest) GetId() int64 {
 	return 0
 }
 
-// ListOTPProvidersRequest lists OTP providers with optional filters.
+// ListOTPProvidersRequest lists OTP providers with optional filters and pagination.
+// Results are scoped to the operator in target_operator_context.
 type ListOTPProvidersRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Country               *string                 `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
-	ProviderType          *v1.OTPProviderType     `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType,oneof" json:"provider_type,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Country               *string                 `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`                                                                         // Filter by country code (e.g., "BR") or "global"
+	ProviderType          *v1.OTPProviderType     `protobuf:"varint,3,opt,name=provider_type,json=providerType,proto3,enum=api.push.service.v1.OTPProviderType,oneof" json:"provider_type,omitempty"` // Filter by provider type
+	Enabled               *bool                   `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                                                                        // Filter by enabled status
+	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`                                                                                    // Page number (1-based)
+	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`                                                            // Items per page (max 100)
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -569,19 +573,20 @@ func (x *CreateOTPTemplateRequest) GetEnabled() bool {
 	return false
 }
 
-// UpdateOTPTemplateRequest updates an existing OTP template. Only provided fields are updated.
+// UpdateOTPTemplateRequest partially updates an existing OTP template.
+// Only provided (non-nil) fields are updated; omitted fields remain unchanged.
 type UpdateOTPTemplateRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	ExternalTemplateId    *string                 `protobuf:"bytes,4,opt,name=external_template_id,json=externalTemplateId,proto3,oneof" json:"external_template_id,omitempty"`
-	Language              *string                 `protobuf:"bytes,5,opt,name=language,proto3,oneof" json:"language,omitempty"`
-	BrandName             *string                 `protobuf:"bytes,6,opt,name=brand_name,json=brandName,proto3,oneof" json:"brand_name,omitempty"`
-	CodeLength            *int32                  `protobuf:"varint,7,opt,name=code_length,json=codeLength,proto3,oneof" json:"code_length,omitempty"`
-	CodeTtlSeconds        *int32                  `protobuf:"varint,8,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3,oneof" json:"code_ttl_seconds,omitempty"`
-	ExtraParams           *string                 `protobuf:"bytes,9,opt,name=extra_params,json=extraParams,proto3,oneof" json:"extra_params,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,10,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`                                                                  // Template ID to update (from CreateOTPTemplate response or ListOTPTemplates)
+	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`                                                         // New display name
+	ExternalTemplateId    *string                 `protobuf:"bytes,4,opt,name=external_template_id,json=externalTemplateId,proto3,oneof" json:"external_template_id,omitempty"` // New external template ID (see CreateOTPTemplate docs for how to obtain)
+	Language              *string                 `protobuf:"bytes,5,opt,name=language,proto3,oneof" json:"language,omitempty"`                                                 // New language code (changes routing key — ensure no UNIQUE conflict)
+	BrandName             *string                 `protobuf:"bytes,6,opt,name=brand_name,json=brandName,proto3,oneof" json:"brand_name,omitempty"`                              // New brand name for message content
+	CodeLength            *int32                  `protobuf:"varint,7,opt,name=code_length,json=codeLength,proto3,oneof" json:"code_length,omitempty"`                          // New code length (informational)
+	CodeTtlSeconds        *int32                  `protobuf:"varint,8,opt,name=code_ttl_seconds,json=codeTtlSeconds,proto3,oneof" json:"code_ttl_seconds,omitempty"`            // New code TTL (informational)
+	ExtraParams           *string                 `protobuf:"bytes,9,opt,name=extra_params,json=extraParams,proto3,oneof" json:"extra_params,omitempty"`                        // New extra template variables (JSON string)
+	Enabled               *bool                   `protobuf:"varint,10,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                                                 // Enable/disable for routing
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -686,11 +691,11 @@ func (x *UpdateOTPTemplateRequest) GetEnabled() bool {
 	return false
 }
 
-// DeleteOTPTemplateRequest deletes an OTP template by ID.
+// DeleteOTPTemplateRequest permanently deletes an OTP template by ID.
 type DeleteOTPTemplateRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"` // Template ID to delete
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -743,7 +748,7 @@ func (x *DeleteOTPTemplateRequest) GetId() int64 {
 type GetOTPTemplateRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"` // Template ID to retrieve
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -792,16 +797,17 @@ func (x *GetOTPTemplateRequest) GetId() int64 {
 	return 0
 }
 
-// ListOTPTemplatesRequest lists OTP templates with optional filters.
+// ListOTPTemplatesRequest lists OTP templates with optional filters and pagination.
+// Results are scoped to the operator in target_operator_context.
 type ListOTPTemplatesRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Country               *string                 `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`
-	ProviderId            *int64                  `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`
-	TemplateType          *v1.OTPTemplateType     `protobuf:"varint,4,opt,name=template_type,json=templateType,proto3,enum=api.push.service.v1.OTPTemplateType,oneof" json:"template_type,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page                  int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Country               *string                 `protobuf:"bytes,2,opt,name=country,proto3,oneof" json:"country,omitempty"`                                                                         // Filter by country code (e.g., "BR") or "global"
+	ProviderId            *int64                  `protobuf:"varint,3,opt,name=provider_id,json=providerId,proto3,oneof" json:"provider_id,omitempty"`                                                // Filter by associated provider ID
+	TemplateType          *v1.OTPTemplateType     `protobuf:"varint,4,opt,name=template_type,json=templateType,proto3,enum=api.push.service.v1.OTPTemplateType,oneof" json:"template_type,omitempty"` // Filter by business scenario
+	Enabled               *bool                   `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`                                                                        // Filter by enabled status
+	Page                  int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`                                                                                    // Page number (1-based)
+	PageSize              int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`                                                            // Items per page (max 100)
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -885,11 +891,12 @@ func (x *ListOTPTemplatesRequest) GetPageSize() int32 {
 	return 0
 }
 
-// SyncOTPTemplateStatusRequest syncs the review status from the external provider.
+// SyncOTPTemplateStatusRequest pulls the review status for a template from the external provider.
+// See SyncOTPTemplateStatus RPC comment for details on review workflow.
 type SyncOTPTemplateStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"` // Template ID to sync status for
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -938,17 +945,18 @@ func (x *SyncOTPTemplateStatusRequest) GetId() int64 {
 	return 0
 }
 
-// ListOTPSendLogsRequest queries OTP send logs with filters.
+// ListOTPSendLogsRequest queries OTP delivery history with filters and pagination.
+// See ListOTPSendLogs RPC comment for supported use cases.
 type ListOTPSendLogsRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	UserId                *int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	ChannelUsed           *string                 `protobuf:"bytes,3,opt,name=channel_used,json=channelUsed,proto3,oneof" json:"channel_used,omitempty"`
-	Status                *string                 `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime             int64                   `protobuf:"varint,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime               int64                   `protobuf:"varint,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Page                  int32                   `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId                *int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`               // Filter by end-user ID who triggered the OTP
+	ChannelUsed           *string                 `protobuf:"bytes,3,opt,name=channel_used,json=channelUsed,proto3,oneof" json:"channel_used,omitempty"` // Filter by delivery channel: "sms", "whatsapp", "voice", "email"
+	Status                *string                 `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`                              // Filter by delivery status: "sent", "failed"
+	StartTime             int64                   `protobuf:"varint,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`            // Start of time range (Unix milliseconds, inclusive)
+	EndTime               int64                   `protobuf:"varint,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`                  // End of time range (Unix milliseconds, inclusive)
+	Page                  int32                   `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`                                       // Page number (1-based)
+	PageSize              int32                   `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`               // Items per page (max 100)
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }

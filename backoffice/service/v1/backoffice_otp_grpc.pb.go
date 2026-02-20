@@ -132,9 +132,41 @@ type BackofficeOTPClient interface {
 	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
 	CreateOTPProvider(ctx context.Context, in *CreateOTPProviderRequest, opts ...grpc.CallOption) (*v1.CreateOTPProviderResponse, error)
+	// UpdateOTPProvider partially updates an existing OTP provider.
+	//
+	// Only fields present in the request are updated; omitted fields remain unchanged.
+	// After update, the provider routing cache is invalidated so changes take effect immediately.
+	//
+	// Common use cases:
+	//   - Rotate credentials: set credentials_json with new keys
+	//   - Disable a provider temporarily: set enabled=false (routing will skip it)
+	//   - Change channel strategy: e.g., switch from WhatsApp-first to SMS-only
+	//
+	// ## Errors
+	// - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 	UpdateOTPProvider(ctx context.Context, in *UpdateOTPProviderRequest, opts ...grpc.CallOption) (*v1.UpdateOTPProviderResponse, error)
+	// DeleteOTPProvider permanently removes an OTP provider.
+	//
+	// WARNING: Deleting a provider that still has templates bound to it will cause
+	// those templates to become orphaned — they will still match during routing but
+	// fail at send time because the provider credentials are gone.
+	// Best practice: delete all associated templates first, or disable the provider instead.
+	//
+	// ## Errors
+	// - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 	DeleteOTPProvider(ctx context.Context, in *DeleteOTPProviderRequest, opts ...grpc.CallOption) (*v1.DeleteOTPProviderResponse, error)
+	// GetOTPProvider retrieves a single OTP provider by ID.
+	//
+	// Returns all provider fields except credentials (has_credentials=true/false is returned instead).
+	//
+	// ## Errors
+	// - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 	GetOTPProvider(ctx context.Context, in *GetOTPProviderRequest, opts ...grpc.CallOption) (*v1.GetOTPProviderResponse, error)
+	// ListOTPProviders lists OTP providers with optional filters and pagination.
+	//
+	// Supports filtering by country, provider_type, and enabled status.
+	// Results are scoped to the operator specified in target_operator_context.
+	// Returns paginated results with total count.
 	ListOTPProviders(ctx context.Context, in *ListOTPProvidersRequest, opts ...grpc.CallOption) (*v1.ListOTPProvidersResponse, error)
 	// CreateOTPTemplate creates a message template bound to a specific OTP provider.
 	//
@@ -188,11 +220,73 @@ type BackofficeOTPClient interface {
 	// - provider_id must reference an existing OTP provider
 	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
 	CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.CreateOTPTemplateResponse, error)
+	// UpdateOTPTemplate partially updates an existing OTP template.
+	//
+	// Only fields present in the request are updated; omitted fields remain unchanged.
+	// After update, the template routing cache is invalidated so changes take effect immediately.
+	//
+	// Common use cases:
+	//   - Switch to a new external template: set external_template_id
+	//   - Update the brand name displayed in OTP messages: set brand_name
+	//   - Disable a template temporarily: set enabled=false
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	UpdateOTPTemplate(ctx context.Context, in *UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateOTPTemplateResponse, error)
+	// DeleteOTPTemplate permanently removes an OTP template.
+	//
+	// If the deleted template was the only match for a given operator+country+type+language,
+	// the system will fall back to the next level in the routing chain (e.g., company → retailer → system).
+	// If no template matches at all, SendOTP will return an OTP_TEMPLATE_NOT_FOUND error.
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	DeleteOTPTemplate(ctx context.Context, in *DeleteOTPTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteOTPTemplateResponse, error)
+	// GetOTPTemplate retrieves a single OTP template by ID.
+	//
+	// Returns all template fields including review_status (for providers that require approval).
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	GetOTPTemplate(ctx context.Context, in *GetOTPTemplateRequest, opts ...grpc.CallOption) (*v1.GetOTPTemplateResponse, error)
+	// ListOTPTemplates lists OTP templates with optional filters and pagination.
+	//
+	// Supports filtering by country, provider_id, template_type, and enabled status.
+	// Results are scoped to the operator specified in target_operator_context.
+	// Returns paginated results with total count.
 	ListOTPTemplates(ctx context.Context, in *ListOTPTemplatesRequest, opts ...grpc.CallOption) (*v1.ListOTPTemplatesResponse, error)
+	// SyncOTPTemplateStatus pulls the latest review status from the external provider.
+	//
+	// Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
+	// before they can be used. This RPC calls the provider's API to check the current status
+	// and updates the local record's review_status field.
+	//
+	// ## Review status values (provider-specific)
+	// EngageLab: 0=pending, 1=approved, 2=rejected
+	//
+	// ## When to call?
+	// After creating a new WhatsApp template on the provider's platform, call this periodically
+	// until the status changes to "approved". SMS templates typically don't require review.
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
+	// - SEND_OTP_FAILED: failed to query the provider's API (credentials invalid, network error, etc.)
 	SyncOTPTemplateStatus(ctx context.Context, in *SyncOTPTemplateStatusRequest, opts ...grpc.CallOption) (*v1.SyncOTPTemplateStatusResponse, error)
+	// ListOTPSendLogs queries OTP delivery history for auditing, debugging, or statistics.
+	//
+	// Each log records: who sent what, to whom, via which provider/template/channel,
+	// and whether it succeeded or failed. Logs are immutable (append-only).
+	//
+	// ## Filters
+	//   - user_id: filter by the end-user who triggered the OTP
+	//   - channel_used: filter by delivery channel ("sms", "whatsapp", "voice", "email")
+	//   - status: filter by delivery status ("sent", "failed")
+	//   - start_time / end_time: time range filter (Unix milliseconds)
+	//
+	// ## Use cases
+	//   - Debug a user's OTP delivery failure: filter by user_id + status="failed"
+	//   - Audit all WhatsApp OTPs in the last 24h: filter by channel_used + time range
+	//   - Monitor delivery success rate: aggregate by status over a time range
 	ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogsRequest, opts ...grpc.CallOption) (*v1.ListOTPSendLogsResponse, error)
 }
 
@@ -422,9 +516,41 @@ type BackofficeOTPServer interface {
 	// - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
 	// - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
 	CreateOTPProvider(context.Context, *CreateOTPProviderRequest) (*v1.CreateOTPProviderResponse, error)
+	// UpdateOTPProvider partially updates an existing OTP provider.
+	//
+	// Only fields present in the request are updated; omitted fields remain unchanged.
+	// After update, the provider routing cache is invalidated so changes take effect immediately.
+	//
+	// Common use cases:
+	//   - Rotate credentials: set credentials_json with new keys
+	//   - Disable a provider temporarily: set enabled=false (routing will skip it)
+	//   - Change channel strategy: e.g., switch from WhatsApp-first to SMS-only
+	//
+	// ## Errors
+	// - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 	UpdateOTPProvider(context.Context, *UpdateOTPProviderRequest) (*v1.UpdateOTPProviderResponse, error)
+	// DeleteOTPProvider permanently removes an OTP provider.
+	//
+	// WARNING: Deleting a provider that still has templates bound to it will cause
+	// those templates to become orphaned — they will still match during routing but
+	// fail at send time because the provider credentials are gone.
+	// Best practice: delete all associated templates first, or disable the provider instead.
+	//
+	// ## Errors
+	// - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 	DeleteOTPProvider(context.Context, *DeleteOTPProviderRequest) (*v1.DeleteOTPProviderResponse, error)
+	// GetOTPProvider retrieves a single OTP provider by ID.
+	//
+	// Returns all provider fields except credentials (has_credentials=true/false is returned instead).
+	//
+	// ## Errors
+	// - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
 	GetOTPProvider(context.Context, *GetOTPProviderRequest) (*v1.GetOTPProviderResponse, error)
+	// ListOTPProviders lists OTP providers with optional filters and pagination.
+	//
+	// Supports filtering by country, provider_type, and enabled status.
+	// Results are scoped to the operator specified in target_operator_context.
+	// Returns paginated results with total count.
 	ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*v1.ListOTPProvidersResponse, error)
 	// CreateOTPTemplate creates a message template bound to a specific OTP provider.
 	//
@@ -478,11 +604,73 @@ type BackofficeOTPServer interface {
 	// - provider_id must reference an existing OTP provider
 	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
+	// UpdateOTPTemplate partially updates an existing OTP template.
+	//
+	// Only fields present in the request are updated; omitted fields remain unchanged.
+	// After update, the template routing cache is invalidated so changes take effect immediately.
+	//
+	// Common use cases:
+	//   - Switch to a new external template: set external_template_id
+	//   - Update the brand name displayed in OTP messages: set brand_name
+	//   - Disable a template temporarily: set enabled=false
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*v1.UpdateOTPTemplateResponse, error)
+	// DeleteOTPTemplate permanently removes an OTP template.
+	//
+	// If the deleted template was the only match for a given operator+country+type+language,
+	// the system will fall back to the next level in the routing chain (e.g., company → retailer → system).
+	// If no template matches at all, SendOTP will return an OTP_TEMPLATE_NOT_FOUND error.
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	DeleteOTPTemplate(context.Context, *DeleteOTPTemplateRequest) (*v1.DeleteOTPTemplateResponse, error)
+	// GetOTPTemplate retrieves a single OTP template by ID.
+	//
+	// Returns all template fields including review_status (for providers that require approval).
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	GetOTPTemplate(context.Context, *GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error)
+	// ListOTPTemplates lists OTP templates with optional filters and pagination.
+	//
+	// Supports filtering by country, provider_id, template_type, and enabled status.
+	// Results are scoped to the operator specified in target_operator_context.
+	// Returns paginated results with total count.
 	ListOTPTemplates(context.Context, *ListOTPTemplatesRequest) (*v1.ListOTPTemplatesResponse, error)
+	// SyncOTPTemplateStatus pulls the latest review status from the external provider.
+	//
+	// Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
+	// before they can be used. This RPC calls the provider's API to check the current status
+	// and updates the local record's review_status field.
+	//
+	// ## Review status values (provider-specific)
+	// EngageLab: 0=pending, 1=approved, 2=rejected
+	//
+	// ## When to call?
+	// After creating a new WhatsApp template on the provider's platform, call this periodically
+	// until the status changes to "approved". SMS templates typically don't require review.
+	//
+	// ## Errors
+	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
+	// - SEND_OTP_FAILED: failed to query the provider's API (credentials invalid, network error, etc.)
 	SyncOTPTemplateStatus(context.Context, *SyncOTPTemplateStatusRequest) (*v1.SyncOTPTemplateStatusResponse, error)
+	// ListOTPSendLogs queries OTP delivery history for auditing, debugging, or statistics.
+	//
+	// Each log records: who sent what, to whom, via which provider/template/channel,
+	// and whether it succeeded or failed. Logs are immutable (append-only).
+	//
+	// ## Filters
+	//   - user_id: filter by the end-user who triggered the OTP
+	//   - channel_used: filter by delivery channel ("sms", "whatsapp", "voice", "email")
+	//   - status: filter by delivery status ("sent", "failed")
+	//   - start_time / end_time: time range filter (Unix milliseconds)
+	//
+	// ## Use cases
+	//   - Debug a user's OTP delivery failure: filter by user_id + status="failed"
+	//   - Audit all WhatsApp OTPs in the last 24h: filter by channel_used + time range
+	//   - Monitor delivery success rate: aggregate by status over a time range
 	ListOTPSendLogs(context.Context, *ListOTPSendLogsRequest) (*v1.ListOTPSendLogsResponse, error)
 	mustEmbedUnimplementedBackofficeOTPServer()
 }

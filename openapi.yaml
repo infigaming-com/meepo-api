@@ -4745,6 +4745,16 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                DeleteOTPProvider permanently removes an OTP provider.
+
+                 WARNING: Deleting a provider that still has templates bound to it will cause
+                 those templates to become orphaned — they will still match during routing but
+                 fail at send time because the provider credentials are gone.
+                 Best practice: delete all associated templates first, or disable the provider instead.
+
+                 ## Errors
+                 - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
             operationId: BackofficeOTP_DeleteOTPProvider
             requestBody:
                 content:
@@ -4763,6 +4773,13 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                GetOTPProvider retrieves a single OTP provider by ID.
+
+                 Returns all provider fields except credentials (has_credentials=true/false is returned instead).
+
+                 ## Errors
+                 - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
             operationId: BackofficeOTP_GetOTPProvider
             requestBody:
                 content:
@@ -4781,6 +4798,12 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                ListOTPProviders lists OTP providers with optional filters and pagination.
+
+                 Supports filtering by country, provider_type, and enabled status.
+                 Results are scoped to the operator specified in target_operator_context.
+                 Returns paginated results with total count.
             operationId: BackofficeOTP_ListOTPProviders
             requestBody:
                 content:
@@ -4799,6 +4822,19 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                UpdateOTPProvider partially updates an existing OTP provider.
+
+                 Only fields present in the request are updated; omitted fields remain unchanged.
+                 After update, the provider routing cache is invalidated so changes take effect immediately.
+
+                 Common use cases:
+                   - Rotate credentials: set credentials_json with new keys
+                   - Disable a provider temporarily: set enabled=false (routing will skip it)
+                   - Change channel strategy: e.g., switch from WhatsApp-first to SMS-only
+
+                 ## Errors
+                 - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
             operationId: BackofficeOTP_UpdateOTPProvider
             requestBody:
                 content:
@@ -4817,6 +4853,22 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                ListOTPSendLogs queries OTP delivery history for auditing, debugging, or statistics.
+
+                 Each log records: who sent what, to whom, via which provider/template/channel,
+                 and whether it succeeded or failed. Logs are immutable (append-only).
+
+                 ## Filters
+                   - user_id: filter by the end-user who triggered the OTP
+                   - channel_used: filter by delivery channel ("sms", "whatsapp", "voice", "email")
+                   - status: filter by delivery status ("sent", "failed")
+                   - start_time / end_time: time range filter (Unix milliseconds)
+
+                 ## Use cases
+                   - Debug a user's OTP delivery failure: filter by user_id + status="failed"
+                   - Audit all WhatsApp OTPs in the last 24h: filter by channel_used + time range
+                   - Monitor delivery success rate: aggregate by status over a time range
             operationId: BackofficeOTP_ListOTPSendLogs
             requestBody:
                 content:
@@ -4903,6 +4955,15 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                DeleteOTPTemplate permanently removes an OTP template.
+
+                 If the deleted template was the only match for a given operator+country+type+language,
+                 the system will fall back to the next level in the routing chain (e.g., company → retailer → system).
+                 If no template matches at all, SendOTP will return an OTP_TEMPLATE_NOT_FOUND error.
+
+                 ## Errors
+                 - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
             operationId: BackofficeOTP_DeleteOTPTemplate
             requestBody:
                 content:
@@ -4921,6 +4982,13 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                GetOTPTemplate retrieves a single OTP template by ID.
+
+                 Returns all template fields including review_status (for providers that require approval).
+
+                 ## Errors
+                 - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
             operationId: BackofficeOTP_GetOTPTemplate
             requestBody:
                 content:
@@ -4939,6 +5007,12 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                ListOTPTemplates lists OTP templates with optional filters and pagination.
+
+                 Supports filtering by country, provider_id, template_type, and enabled status.
+                 Results are scoped to the operator specified in target_operator_context.
+                 Returns paginated results with total count.
             operationId: BackofficeOTP_ListOTPTemplates
             requestBody:
                 content:
@@ -4957,6 +5031,23 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                SyncOTPTemplateStatus pulls the latest review status from the external provider.
+
+                 Some providers (e.g., EngageLab WhatsApp) require templates to be reviewed and approved
+                 before they can be used. This RPC calls the provider's API to check the current status
+                 and updates the local record's review_status field.
+
+                 ## Review status values (provider-specific)
+                 EngageLab: 0=pending, 1=approved, 2=rejected
+
+                 ## When to call?
+                 After creating a new WhatsApp template on the provider's platform, call this periodically
+                 until the status changes to "approved". SMS templates typically don't require review.
+
+                 ## Errors
+                 - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
+                 - SEND_OTP_FAILED: failed to query the provider's API (credentials invalid, network error, etc.)
             operationId: BackofficeOTP_SyncOTPTemplateStatus
             requestBody:
                 content:
@@ -4975,6 +5066,19 @@ paths:
         post:
             tags:
                 - BackofficeOTP
+            description: |-
+                UpdateOTPTemplate partially updates an existing OTP template.
+
+                 Only fields present in the request are updated; omitted fields remain unchanged.
+                 After update, the template routing cache is invalidated so changes take effect immediately.
+
+                 Common use cases:
+                   - Switch to a new external template: set external_template_id
+                   - Update the brand name displayed in OTP messages: set brand_name
+                   - Disable a template temporarily: set enabled=false
+
+                 ## Errors
+                 - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
             operationId: BackofficeOTP_UpdateOTPTemplate
             requestBody:
                 content:
@@ -13503,7 +13607,9 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 id:
                     type: string
-            description: DeleteOTPProviderRequest deletes an OTP provider by ID.
+            description: |-
+                DeleteOTPProviderRequest permanently deletes an OTP provider by ID.
+                 Associated templates are NOT automatically deleted — clean them up first.
         api.backoffice.service.v1.DeleteOTPTemplateRequest:
             type: object
             properties:
@@ -13511,7 +13617,7 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 id:
                     type: string
-            description: DeleteOTPTemplateRequest deletes an OTP template by ID.
+            description: DeleteOTPTemplateRequest permanently deletes an OTP template by ID.
         api.backoffice.service.v1.DeleteOperatorApexDomainRequest:
             type: object
             properties:
@@ -14437,7 +14543,9 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 id:
                     type: string
-            description: GetOTPProviderRequest retrieves a single OTP provider by ID.
+            description: |-
+                GetOTPProviderRequest retrieves a single OTP provider by ID.
+                 Credentials are never returned; use has_credentials in the response to check if they are set.
         api.backoffice.service.v1.GetOTPTemplateRequest:
             type: object
             properties:
@@ -17326,7 +17434,9 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-            description: ListOTPProvidersRequest lists OTP providers with optional filters.
+            description: |-
+                ListOTPProvidersRequest lists OTP providers with optional filters and pagination.
+                 Results are scoped to the operator in target_operator_context.
         api.backoffice.service.v1.ListOTPSendLogsRequest:
             type: object
             properties:
@@ -17348,7 +17458,9 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-            description: ListOTPSendLogsRequest queries OTP send logs with filters.
+            description: |-
+                ListOTPSendLogsRequest queries OTP delivery history with filters and pagination.
+                 See ListOTPSendLogs RPC comment for supported use cases.
         api.backoffice.service.v1.ListOTPTemplatesRequest:
             type: object
             properties:
@@ -17375,7 +17487,9 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-            description: ListOTPTemplatesRequest lists OTP templates with optional filters.
+            description: |-
+                ListOTPTemplatesRequest lists OTP templates with optional filters and pagination.
+                 Results are scoped to the operator in target_operator_context.
         api.backoffice.service.v1.ListOperatorApexDomainsRequest:
             type: object
             properties:
@@ -20085,7 +20199,9 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 id:
                     type: string
-            description: SyncOTPTemplateStatusRequest syncs the review status from the external provider.
+            description: |-
+                SyncOTPTemplateStatusRequest pulls the review status for a template from the external provider.
+                 See SyncOTPTemplateStatus RPC comment for details on review workflow.
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -20387,7 +20503,9 @@ components:
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE
                     type: string
                     format: enum
-            description: UpdateOTPProviderRequest updates an existing OTP provider. Only provided fields are updated.
+            description: |-
+                UpdateOTPProviderRequest partially updates an existing OTP provider.
+                 Only provided (non-nil) fields are updated; omitted fields remain unchanged.
         api.backoffice.service.v1.UpdateOTPTemplateRequest:
             type: object
             properties:
@@ -20413,7 +20531,9 @@ components:
                     type: string
                 enabled:
                     type: boolean
-            description: UpdateOTPTemplateRequest updates an existing OTP template. Only provided fields are updated.
+            description: |-
+                UpdateOTPTemplateRequest partially updates an existing OTP template.
+                 Only provided (non-nil) fields are updated; omitted fields remain unchanged.
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
             type: object
             properties:
@@ -24126,6 +24246,14 @@ components:
                         - OTP_TEMPLATE_REVIEW_STATUS_REJECTED
                     type: string
                     format: enum
+            description: |-
+                SyncOTPTemplateStatusResponse returns the updated review status after syncing with the provider.
+
+                 Possible values:
+                   - LOCAL_ONLY:   No external review needed (e.g., SMS templates). The template can be used immediately.
+                   - PENDING:      Template is under review by the provider (e.g., WhatsApp). Wait and sync again later.
+                   - APPROVED:     Provider approved the template. It is ready for use.
+                   - REJECTED:     Provider rejected the template. Fix the content on the provider's platform and resubmit.
         api.push.service.v1.TelegramChannelConfig:
             type: object
             properties:
