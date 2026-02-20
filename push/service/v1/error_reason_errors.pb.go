@@ -280,3 +280,113 @@ func IsSendToChannelsFailed(err error) bool {
 func ErrorSendToChannelsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SEND_TO_CHANNELS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// OTP errors (90400-90499)
+func IsOtpProviderNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_NOT_FOUND.String() && e.Code == 500
+}
+
+// OTP errors (90400-90499)
+func ErrorOtpProviderNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OTP_PROVIDER_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpProviderDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_DISABLED.String() && e.Code == 500
+}
+
+func ErrorOtpProviderDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OTP_PROVIDER_DISABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpTemplateNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_TEMPLATE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOtpTemplateNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OTP_TEMPLATE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpTemplateNotApproved(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_TEMPLATE_NOT_APPROVED.String() && e.Code == 500
+}
+
+func ErrorOtpTemplateNotApproved(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OTP_TEMPLATE_NOT_APPROVED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendOtpFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_OTP_FAILED.String() && e.Code == 500
+}
+
+func ErrorSendOtpFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_OTP_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendOtpRateLimited(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_OTP_RATE_LIMITED.String() && e.Code == 429
+}
+
+func ErrorSendOtpRateLimited(format string, args ...interface{}) *errors.Error {
+	return errors.New(429, ErrorReason_SEND_OTP_RATE_LIMITED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendOtpNoProvider(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_OTP_NO_PROVIDER.String() && e.Code == 500
+}
+
+func ErrorSendOtpNoProvider(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_OTP_NO_PROVIDER.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendOtpNoTemplate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_OTP_NO_TEMPLATE.String() && e.Code == 500
+}
+
+func ErrorSendOtpNoTemplate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SEND_OTP_NO_TEMPLATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSendOtpInvalidRecipient(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SEND_OTP_INVALID_RECIPIENT.String() && e.Code == 400
+}
+
+func ErrorSendOtpInvalidRecipient(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_SEND_OTP_INVALID_RECIPIENT.String(), fmt.Sprintf(format, args...))
+}
