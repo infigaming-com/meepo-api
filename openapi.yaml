@@ -23736,12 +23736,13 @@ components:
         api.game.service.v1.RollbackTransactions:
             type: object
             properties:
-                txnId:
+                txn_id:
                     type: string
-                operatorTxnId:
+                operator_txn_id:
                     type: string
-                processedAt:
-                    type: string
+                processed_at:
+                    type: number
+                    format: double
         api.game.service.v1.Transactions:
             type: object
             properties:
