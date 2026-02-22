@@ -38,7 +38,6 @@ const (
 	Wallet_GetUserTransactionSummary_FullMethodName           = "/api.wallet.service.v1.Wallet/GetUserTransactionSummary"
 	Wallet_ListUserTransactionSummaries_FullMethodName        = "/api.wallet.service.v1.Wallet/ListUserTransactionSummaries"
 	Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName = "/api.wallet.service.v1.Wallet/GetBackofficeUserOverviewFromWallet"
-	Wallet_GetOverviewDashboardFromWallet_FullMethodName      = "/api.wallet.service.v1.Wallet/GetOverviewDashboardFromWallet"
 	Wallet_AddCurrency_FullMethodName                         = "/api.wallet.service.v1.Wallet/AddCurrency"
 	Wallet_UpdateCurrency_FullMethodName                      = "/api.wallet.service.v1.Wallet/UpdateCurrency"
 	Wallet_GetCurrencies_FullMethodName                       = "/api.wallet.service.v1.Wallet/GetCurrencies"
@@ -135,7 +134,6 @@ type WalletClient interface {
 	ListUserTransactionSummaries(ctx context.Context, in *ListUserTransactionSummariesRequest, opts ...grpc.CallOption) (*ListUserTransactionSummariesResponse, error)
 	// GetUserOverview returns data for the overview of user's wallet
 	GetBackofficeUserOverviewFromWallet(ctx context.Context, in *GetBackofficeUserOverviewFromWalletRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromWalletResponse, error)
-	GetOverviewDashboardFromWallet(ctx context.Context, in *GetOverviewDashboardFromWalletRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromWalletResponse, error)
 	AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error)
 	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
@@ -437,16 +435,6 @@ func (c *walletClient) GetBackofficeUserOverviewFromWallet(ctx context.Context, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBackofficeUserOverviewFromWalletResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *walletClient) GetOverviewDashboardFromWallet(ctx context.Context, in *GetOverviewDashboardFromWalletRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromWalletResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOverviewDashboardFromWalletResponse)
-	err := c.cc.Invoke(ctx, Wallet_GetOverviewDashboardFromWallet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1078,7 +1066,6 @@ type WalletServer interface {
 	ListUserTransactionSummaries(context.Context, *ListUserTransactionSummariesRequest) (*ListUserTransactionSummariesResponse, error)
 	// GetUserOverview returns data for the overview of user's wallet
 	GetBackofficeUserOverviewFromWallet(context.Context, *GetBackofficeUserOverviewFromWalletRequest) (*GetBackofficeUserOverviewFromWalletResponse, error)
-	GetOverviewDashboardFromWallet(context.Context, *GetOverviewDashboardFromWalletRequest) (*GetOverviewDashboardFromWalletResponse, error)
 	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
 	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
@@ -1252,9 +1239,6 @@ func (UnimplementedWalletServer) ListUserTransactionSummaries(context.Context, *
 }
 func (UnimplementedWalletServer) GetBackofficeUserOverviewFromWallet(context.Context, *GetBackofficeUserOverviewFromWalletRequest) (*GetBackofficeUserOverviewFromWalletResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetBackofficeUserOverviewFromWallet not implemented")
-}
-func (UnimplementedWalletServer) GetOverviewDashboardFromWallet(context.Context, *GetOverviewDashboardFromWalletRequest) (*GetOverviewDashboardFromWalletResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetOverviewDashboardFromWallet not implemented")
 }
 func (UnimplementedWalletServer) AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddCurrency not implemented")
@@ -1792,24 +1776,6 @@ func _Wallet_GetBackofficeUserOverviewFromWallet_Handler(srv interface{}, ctx co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetBackofficeUserOverviewFromWallet(ctx, req.(*GetBackofficeUserOverviewFromWalletRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wallet_GetOverviewDashboardFromWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOverviewDashboardFromWalletRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WalletServer).GetOverviewDashboardFromWallet(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Wallet_GetOverviewDashboardFromWallet_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GetOverviewDashboardFromWallet(ctx, req.(*GetOverviewDashboardFromWalletRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2958,10 +2924,6 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBackofficeUserOverviewFromWallet",
 			Handler:    _Wallet_GetBackofficeUserOverviewFromWallet_Handler,
-		},
-		{
-			MethodName: "GetOverviewDashboardFromWallet",
-			Handler:    _Wallet_GetOverviewDashboardFromWallet_Handler,
 		},
 		{
 			MethodName: "AddCurrency",
