@@ -599,9 +599,9 @@ message RollbackResponse {
 }
 
 message RollbackTransactions {
-	string txn_id = 1;
-	string operator_txn_id = 2;
-	string processed_at = 3;
+	string txn_id = 1 [json_name="txn_id"];
+	string operator_txn_id = 2 [json_name="operator_txn_id"];
+	double processed_at = 3 [json_name="processed_at"];
 }
 
 message ListBetsRequest {

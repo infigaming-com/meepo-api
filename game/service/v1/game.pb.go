@@ -2583,9 +2583,9 @@ func (x *RollbackResponse) GetData() *RollbackResponse_Data {
 
 type RollbackTransactions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
-	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,json=operatorTxnId,proto3" json:"operator_txn_id,omitempty"`
-	ProcessedAt   string                 `protobuf:"bytes,3,opt,name=processed_at,json=processedAt,proto3" json:"processed_at,omitempty"`
+	TxnId         string                 `protobuf:"bytes,1,opt,name=txn_id,proto3" json:"txn_id,omitempty"`
+	OperatorTxnId string                 `protobuf:"bytes,2,opt,name=operator_txn_id,proto3" json:"operator_txn_id,omitempty"`
+	ProcessedAt   float64                `protobuf:"fixed64,3,opt,name=processed_at,proto3" json:"processed_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2634,11 +2634,11 @@ func (x *RollbackTransactions) GetOperatorTxnId() string {
 	return ""
 }
 
-func (x *RollbackTransactions) GetProcessedAt() string {
+func (x *RollbackTransactions) GetProcessedAt() float64 {
 	if x != nil {
 		return x.ProcessedAt
 	}
-	return ""
+	return 0
 }
 
 type ListBetsRequest struct {
@@ -17464,11 +17464,11 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12M\n" +
-	"\ftransactions\x18\x03 \x03(\v2).api.game.service.v1.RollbackTransactionsR\ftransactions\"x\n" +
-	"\x14RollbackTransactions\x12\x15\n" +
-	"\x06txn_id\x18\x01 \x01(\tR\x05txnId\x12&\n" +
-	"\x0foperator_txn_id\x18\x02 \x01(\tR\roperatorTxnId\x12!\n" +
-	"\fprocessed_at\x18\x03 \x01(\tR\vprocessedAt\"\xa6\f\n" +
+	"\ftransactions\x18\x03 \x03(\v2).api.game.service.v1.RollbackTransactionsR\ftransactions\"|\n" +
+	"\x14RollbackTransactions\x12\x16\n" +
+	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12(\n" +
+	"\x0foperator_txn_id\x18\x02 \x01(\tR\x0foperator_txn_id\x12\"\n" +
+	"\fprocessed_at\x18\x03 \x01(\x01R\fprocessed_at\"\xa6\f\n" +
 	"\x0fListBetsRequest\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12 \n" +
 	"\tgame_name\x18\x02 \x01(\tH\x01R\bgameName\x88\x01\x01\x12\x1c\n" +
