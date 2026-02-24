@@ -17781,8 +17781,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListOperatorDomainsRequest:
             type: object
             properties:

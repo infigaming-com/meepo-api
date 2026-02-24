@@ -77,12 +77,12 @@ func (x *ListOperatorDomainsRequest) GetType() string {
 }
 
 type ListOperatorByoDomainsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	Page                  *int32                  `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Page                   *int32                         `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOperatorByoDomainsRequest) Reset() {
@@ -129,9 +129,9 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListOperatorByoDomainsRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *ListOperatorByoDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.TargetOperatorContext
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -777,11 +777,11 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\x1aListOperatorDomainsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01B\a\n" +
-	"\x05_type\"\xc6\x01\n" +
+	"\x05_type\"\xcf\x01\n" +
 	"\x1dListOperatorByoDomainsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12S\n" +
-	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\a\n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x84\x01\n" +
@@ -904,7 +904,7 @@ var file_backoffice_service_v1_backoffice_dns_proto_goTypes = []any{
 }
 var file_backoffice_service_v1_backoffice_dns_proto_depIdxs = []int32{
 	14, // 0: api.backoffice.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	15, // 1: api.backoffice.service.v1.ListOperatorByoDomainsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 1: api.backoffice.service.v1.ListOperatorByoDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	15, // 2: api.backoffice.service.v1.AddOperatorApexDomainRequest.target_operator_context:type_name -> api.common.OperatorContext
 	15, // 3: api.backoffice.service.v1.PrecheckOperatorApexDomainRequest.target_operator_context:type_name -> api.common.OperatorContext
 	15, // 4: api.backoffice.service.v1.BindOperatorEmailDomainRequest.target_operator_context:type_name -> api.common.OperatorContext
