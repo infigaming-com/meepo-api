@@ -1525,6 +1525,8 @@ func (m *ListSegmentsResponse) validate(all bool) error {
 
 	// no validation rules for Total
 
+	// no validation rules for TypeCounts
+
 	if len(errors) > 0 {
 		return ListSegmentsResponseMultiError(errors)
 	}
