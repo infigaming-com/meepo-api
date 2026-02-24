@@ -159,6 +159,7 @@ message ListSegmentsResponse {
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
+  map<string, int64> type_counts = 5;
 }
 
 // DeleteSegment

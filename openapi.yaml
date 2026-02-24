@@ -22064,6 +22064,10 @@ components:
                     format: int32
                 total:
                     type: string
+                typeCounts:
+                    type: object
+                    additionalProperties:
+                        type: string
         api.crm.service.v1.RenderAssetResponse:
             type: object
             properties:
