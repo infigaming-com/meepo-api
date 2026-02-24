@@ -36,24 +36,42 @@ const OperationBackofficeCrmSetSegmentOverride = "/api.backoffice.service.v1.Bac
 const OperationBackofficeCrmUpdateSegment = "/api.backoffice.service.v1.BackofficeCrm/UpdateSegment"
 
 type BackofficeCrmHTTPServer interface {
-	// CalculateSegment Segment calculation
+	// CalculateSegment Manually trigger a batch calculation for a segment.
+	// Evaluates the segment rules against all users and updates membership.
 	CalculateSegment(context.Context, *CalculateSegmentRequest) (*v1.CalculateSegmentResponse, error)
-	// CreateSegment Segment CRUD operations
+	// CreateSegment Create a new segment with rules for automatic user membership calculation.
+	// If enabled is true, an async calculation is triggered immediately.
+	// See CreateSegmentRequest.rules for the full rules format documentation.
 	CreateSegment(context.Context, *CreateSegmentRequest) (*v1.CreateSegmentResponse, error)
+	// DeleteSegment Delete a segment and all its related data (members, fields, overrides).
 	DeleteSegment(context.Context, *DeleteSegmentRequest) (*v1.DeleteSegmentResponse, error)
+	// GetSegment Get a single segment by ID, including its current user count.
 	GetSegment(context.Context, *GetSegmentRequest) (*v1.GetSegmentResponse, error)
-	// GetSegmentFieldSchema Schema API for frontend query builder
+	// GetSegmentFieldSchema Get the field schema for the frontend query builder.
+	// Returns all available fields, their types, supported operators, and value constraints.
+	// Use this to dynamically build the rules editor UI.
 	GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*v1.GetSegmentFieldSchemaResponse, error)
+	// GetSegmentOverride Get the override status for a segment at the current operator level.
 	GetSegmentOverride(context.Context, *GetSegmentOverrideRequest) (*v1.GetSegmentOverrideResponse, error)
+	// GetSegmentUsers Get paginated list of users in a segment.
 	GetSegmentUsers(context.Context, *GetSegmentUsersRequest) (*v1.GetSegmentUsersResponse, error)
+	// GetSegmentsWithMissingFields Diagnostic endpoint - returns segments that have no field mappings.
 	GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*v1.GetSegmentsWithMissingFieldsResponse, error)
+	// GetUserSegments Get all segments a specific user belongs to.
 	GetUserSegments(context.Context, *GetUserSegmentsRequest) (*v1.GetUserSegmentsResponse, error)
+	// ListSegments List segments with pagination and optional filters.
+	// Returns per-type counts (type_counts) alongside the filtered list, useful for tab navigation.
 	ListSegments(context.Context, *ListSegmentsRequest) (*v1.ListSegmentsResponse, error)
+	// RepairAllSegments Repair all segments that are missing field mappings.
 	RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*v1.RepairAllSegmentsResponse, error)
-	// RepairSegment Segment repair operations
+	// RepairSegment Repair a segment by ensuring its field mappings exist.
+	// Useful for segments that were directly inserted into the database without going through the API.
 	RepairSegment(context.Context, *RepairSegmentRequest) (*v1.RepairSegmentResponse, error)
-	// SetSegmentOverride Segment override (for inheritance control)
+	// SetSegmentOverride Set an override to disable an inherited segment at the current operator level.
+	// Only works for segments owned by parent levels (cannot override own segments).
 	SetSegmentOverride(context.Context, *SetSegmentOverrideRequest) (*v1.SetSegmentOverrideResponse, error)
+	// UpdateSegment Partially update an existing segment. Only provided fields are updated.
+	// If rules change and the segment is enabled, an async recalculation is triggered.
 	UpdateSegment(context.Context, *UpdateSegmentRequest) (*v1.UpdateSegmentResponse, error)
 }
 
@@ -384,24 +402,42 @@ func _BackofficeCrm_GetSegmentsWithMissingFields0_HTTP_Handler(srv BackofficeCrm
 }
 
 type BackofficeCrmHTTPClient interface {
-	// CalculateSegment Segment calculation
+	// CalculateSegment Manually trigger a batch calculation for a segment.
+	// Evaluates the segment rules against all users and updates membership.
 	CalculateSegment(ctx context.Context, req *CalculateSegmentRequest, opts ...http.CallOption) (rsp *v1.CalculateSegmentResponse, err error)
-	// CreateSegment Segment CRUD operations
+	// CreateSegment Create a new segment with rules for automatic user membership calculation.
+	// If enabled is true, an async calculation is triggered immediately.
+	// See CreateSegmentRequest.rules for the full rules format documentation.
 	CreateSegment(ctx context.Context, req *CreateSegmentRequest, opts ...http.CallOption) (rsp *v1.CreateSegmentResponse, err error)
+	// DeleteSegment Delete a segment and all its related data (members, fields, overrides).
 	DeleteSegment(ctx context.Context, req *DeleteSegmentRequest, opts ...http.CallOption) (rsp *v1.DeleteSegmentResponse, err error)
+	// GetSegment Get a single segment by ID, including its current user count.
 	GetSegment(ctx context.Context, req *GetSegmentRequest, opts ...http.CallOption) (rsp *v1.GetSegmentResponse, err error)
-	// GetSegmentFieldSchema Schema API for frontend query builder
+	// GetSegmentFieldSchema Get the field schema for the frontend query builder.
+	// Returns all available fields, their types, supported operators, and value constraints.
+	// Use this to dynamically build the rules editor UI.
 	GetSegmentFieldSchema(ctx context.Context, req *GetSegmentFieldSchemaRequest, opts ...http.CallOption) (rsp *v1.GetSegmentFieldSchemaResponse, err error)
+	// GetSegmentOverride Get the override status for a segment at the current operator level.
 	GetSegmentOverride(ctx context.Context, req *GetSegmentOverrideRequest, opts ...http.CallOption) (rsp *v1.GetSegmentOverrideResponse, err error)
+	// GetSegmentUsers Get paginated list of users in a segment.
 	GetSegmentUsers(ctx context.Context, req *GetSegmentUsersRequest, opts ...http.CallOption) (rsp *v1.GetSegmentUsersResponse, err error)
+	// GetSegmentsWithMissingFields Diagnostic endpoint - returns segments that have no field mappings.
 	GetSegmentsWithMissingFields(ctx context.Context, req *GetSegmentsWithMissingFieldsRequest, opts ...http.CallOption) (rsp *v1.GetSegmentsWithMissingFieldsResponse, err error)
+	// GetUserSegments Get all segments a specific user belongs to.
 	GetUserSegments(ctx context.Context, req *GetUserSegmentsRequest, opts ...http.CallOption) (rsp *v1.GetUserSegmentsResponse, err error)
+	// ListSegments List segments with pagination and optional filters.
+	// Returns per-type counts (type_counts) alongside the filtered list, useful for tab navigation.
 	ListSegments(ctx context.Context, req *ListSegmentsRequest, opts ...http.CallOption) (rsp *v1.ListSegmentsResponse, err error)
+	// RepairAllSegments Repair all segments that are missing field mappings.
 	RepairAllSegments(ctx context.Context, req *RepairAllSegmentsRequest, opts ...http.CallOption) (rsp *v1.RepairAllSegmentsResponse, err error)
-	// RepairSegment Segment repair operations
+	// RepairSegment Repair a segment by ensuring its field mappings exist.
+	// Useful for segments that were directly inserted into the database without going through the API.
 	RepairSegment(ctx context.Context, req *RepairSegmentRequest, opts ...http.CallOption) (rsp *v1.RepairSegmentResponse, err error)
-	// SetSegmentOverride Segment override (for inheritance control)
+	// SetSegmentOverride Set an override to disable an inherited segment at the current operator level.
+	// Only works for segments owned by parent levels (cannot override own segments).
 	SetSegmentOverride(ctx context.Context, req *SetSegmentOverrideRequest, opts ...http.CallOption) (rsp *v1.SetSegmentOverrideResponse, err error)
+	// UpdateSegment Partially update an existing segment. Only provided fields are updated.
+	// If rules change and the segment is enabled, an async recalculation is triggered.
 	UpdateSegment(ctx context.Context, req *UpdateSegmentRequest, opts ...http.CallOption) (rsp *v1.UpdateSegmentResponse, err error)
 }
 
@@ -413,7 +449,8 @@ func NewBackofficeCrmHTTPClient(client *http.Client) BackofficeCrmHTTPClient {
 	return &BackofficeCrmHTTPClientImpl{client}
 }
 
-// CalculateSegment Segment calculation
+// CalculateSegment Manually trigger a batch calculation for a segment.
+// Evaluates the segment rules against all users and updates membership.
 func (c *BackofficeCrmHTTPClientImpl) CalculateSegment(ctx context.Context, in *CalculateSegmentRequest, opts ...http.CallOption) (*v1.CalculateSegmentResponse, error) {
 	var out v1.CalculateSegmentResponse
 	pattern := "/v1/backoffice/crm/segment/calculate"
@@ -427,7 +464,9 @@ func (c *BackofficeCrmHTTPClientImpl) CalculateSegment(ctx context.Context, in *
 	return &out, nil
 }
 
-// CreateSegment Segment CRUD operations
+// CreateSegment Create a new segment with rules for automatic user membership calculation.
+// If enabled is true, an async calculation is triggered immediately.
+// See CreateSegmentRequest.rules for the full rules format documentation.
 func (c *BackofficeCrmHTTPClientImpl) CreateSegment(ctx context.Context, in *CreateSegmentRequest, opts ...http.CallOption) (*v1.CreateSegmentResponse, error) {
 	var out v1.CreateSegmentResponse
 	pattern := "/v1/backoffice/crm/segment/create"
@@ -441,6 +480,7 @@ func (c *BackofficeCrmHTTPClientImpl) CreateSegment(ctx context.Context, in *Cre
 	return &out, nil
 }
 
+// DeleteSegment Delete a segment and all its related data (members, fields, overrides).
 func (c *BackofficeCrmHTTPClientImpl) DeleteSegment(ctx context.Context, in *DeleteSegmentRequest, opts ...http.CallOption) (*v1.DeleteSegmentResponse, error) {
 	var out v1.DeleteSegmentResponse
 	pattern := "/v1/backoffice/crm/segment/delete"
@@ -454,6 +494,7 @@ func (c *BackofficeCrmHTTPClientImpl) DeleteSegment(ctx context.Context, in *Del
 	return &out, nil
 }
 
+// GetSegment Get a single segment by ID, including its current user count.
 func (c *BackofficeCrmHTTPClientImpl) GetSegment(ctx context.Context, in *GetSegmentRequest, opts ...http.CallOption) (*v1.GetSegmentResponse, error) {
 	var out v1.GetSegmentResponse
 	pattern := "/v1/backoffice/crm/segment/get"
@@ -467,7 +508,9 @@ func (c *BackofficeCrmHTTPClientImpl) GetSegment(ctx context.Context, in *GetSeg
 	return &out, nil
 }
 
-// GetSegmentFieldSchema Schema API for frontend query builder
+// GetSegmentFieldSchema Get the field schema for the frontend query builder.
+// Returns all available fields, their types, supported operators, and value constraints.
+// Use this to dynamically build the rules editor UI.
 func (c *BackofficeCrmHTTPClientImpl) GetSegmentFieldSchema(ctx context.Context, in *GetSegmentFieldSchemaRequest, opts ...http.CallOption) (*v1.GetSegmentFieldSchemaResponse, error) {
 	var out v1.GetSegmentFieldSchemaResponse
 	pattern := "/v1/backoffice/crm/segment/schema"
@@ -481,6 +524,7 @@ func (c *BackofficeCrmHTTPClientImpl) GetSegmentFieldSchema(ctx context.Context,
 	return &out, nil
 }
 
+// GetSegmentOverride Get the override status for a segment at the current operator level.
 func (c *BackofficeCrmHTTPClientImpl) GetSegmentOverride(ctx context.Context, in *GetSegmentOverrideRequest, opts ...http.CallOption) (*v1.GetSegmentOverrideResponse, error) {
 	var out v1.GetSegmentOverrideResponse
 	pattern := "/v1/backoffice/crm/segment/override/get"
@@ -494,6 +538,7 @@ func (c *BackofficeCrmHTTPClientImpl) GetSegmentOverride(ctx context.Context, in
 	return &out, nil
 }
 
+// GetSegmentUsers Get paginated list of users in a segment.
 func (c *BackofficeCrmHTTPClientImpl) GetSegmentUsers(ctx context.Context, in *GetSegmentUsersRequest, opts ...http.CallOption) (*v1.GetSegmentUsersResponse, error) {
 	var out v1.GetSegmentUsersResponse
 	pattern := "/v1/backoffice/crm/segment/users"
@@ -507,6 +552,7 @@ func (c *BackofficeCrmHTTPClientImpl) GetSegmentUsers(ctx context.Context, in *G
 	return &out, nil
 }
 
+// GetSegmentsWithMissingFields Diagnostic endpoint - returns segments that have no field mappings.
 func (c *BackofficeCrmHTTPClientImpl) GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...http.CallOption) (*v1.GetSegmentsWithMissingFieldsResponse, error) {
 	var out v1.GetSegmentsWithMissingFieldsResponse
 	pattern := "/v1/backoffice/crm/segment/missing-fields"
@@ -520,6 +566,7 @@ func (c *BackofficeCrmHTTPClientImpl) GetSegmentsWithMissingFields(ctx context.C
 	return &out, nil
 }
 
+// GetUserSegments Get all segments a specific user belongs to.
 func (c *BackofficeCrmHTTPClientImpl) GetUserSegments(ctx context.Context, in *GetUserSegmentsRequest, opts ...http.CallOption) (*v1.GetUserSegmentsResponse, error) {
 	var out v1.GetUserSegmentsResponse
 	pattern := "/v1/backoffice/crm/user/segments"
@@ -533,6 +580,8 @@ func (c *BackofficeCrmHTTPClientImpl) GetUserSegments(ctx context.Context, in *G
 	return &out, nil
 }
 
+// ListSegments List segments with pagination and optional filters.
+// Returns per-type counts (type_counts) alongside the filtered list, useful for tab navigation.
 func (c *BackofficeCrmHTTPClientImpl) ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...http.CallOption) (*v1.ListSegmentsResponse, error) {
 	var out v1.ListSegmentsResponse
 	pattern := "/v1/backoffice/crm/segment/list"
@@ -546,6 +595,7 @@ func (c *BackofficeCrmHTTPClientImpl) ListSegments(ctx context.Context, in *List
 	return &out, nil
 }
 
+// RepairAllSegments Repair all segments that are missing field mappings.
 func (c *BackofficeCrmHTTPClientImpl) RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...http.CallOption) (*v1.RepairAllSegmentsResponse, error) {
 	var out v1.RepairAllSegmentsResponse
 	pattern := "/v1/backoffice/crm/segment/repair-all"
@@ -559,7 +609,8 @@ func (c *BackofficeCrmHTTPClientImpl) RepairAllSegments(ctx context.Context, in 
 	return &out, nil
 }
 
-// RepairSegment Segment repair operations
+// RepairSegment Repair a segment by ensuring its field mappings exist.
+// Useful for segments that were directly inserted into the database without going through the API.
 func (c *BackofficeCrmHTTPClientImpl) RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...http.CallOption) (*v1.RepairSegmentResponse, error) {
 	var out v1.RepairSegmentResponse
 	pattern := "/v1/backoffice/crm/segment/repair"
@@ -573,7 +624,8 @@ func (c *BackofficeCrmHTTPClientImpl) RepairSegment(ctx context.Context, in *Rep
 	return &out, nil
 }
 
-// SetSegmentOverride Segment override (for inheritance control)
+// SetSegmentOverride Set an override to disable an inherited segment at the current operator level.
+// Only works for segments owned by parent levels (cannot override own segments).
 func (c *BackofficeCrmHTTPClientImpl) SetSegmentOverride(ctx context.Context, in *SetSegmentOverrideRequest, opts ...http.CallOption) (*v1.SetSegmentOverrideResponse, error) {
 	var out v1.SetSegmentOverrideResponse
 	pattern := "/v1/backoffice/crm/segment/override/set"
@@ -587,6 +639,8 @@ func (c *BackofficeCrmHTTPClientImpl) SetSegmentOverride(ctx context.Context, in
 	return &out, nil
 }
 
+// UpdateSegment Partially update an existing segment. Only provided fields are updated.
+// If rules change and the segment is enabled, an async recalculation is triggered.
 func (c *BackofficeCrmHTTPClientImpl) UpdateSegment(ctx context.Context, in *UpdateSegmentRequest, opts ...http.CallOption) (*v1.UpdateSegmentResponse, error) {
 	var out v1.UpdateSegmentResponse
 	pattern := "/v1/backoffice/crm/segment/update"

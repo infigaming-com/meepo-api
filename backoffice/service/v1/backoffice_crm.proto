@@ -11,9 +11,12 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-// CRM segment management service for backoffice
+// CRM segment management service for backoffice.
+// Provides CRUD, calculation, override and schema APIs for managing user segments.
 service BackofficeCrm {
-  // Segment CRUD operations
+  // Create a new segment with rules for automatic user membership calculation.
+  // If enabled is true, an async calculation is triggered immediately.
+  // See CreateSegmentRequest.rules for the full rules format documentation.
   rpc CreateSegment(CreateSegmentRequest) returns (api.crm.service.v1.CreateSegmentResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/create"
@@ -21,6 +24,8 @@ service BackofficeCrm {
     };
   }
 
+  // Partially update an existing segment. Only provided fields are updated.
+  // If rules change and the segment is enabled, an async recalculation is triggered.
   rpc UpdateSegment(UpdateSegmentRequest) returns (api.crm.service.v1.UpdateSegmentResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/update"
@@ -28,6 +33,7 @@ service BackofficeCrm {
     };
   }
 
+  // Get a single segment by ID, including its current user count.
   rpc GetSegment(GetSegmentRequest) returns (api.crm.service.v1.GetSegmentResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/get"
@@ -35,6 +41,8 @@ service BackofficeCrm {
     };
   }
 
+  // List segments with pagination and optional filters.
+  // Returns per-type counts (type_counts) alongside the filtered list, useful for tab navigation.
   rpc ListSegments(ListSegmentsRequest) returns (api.crm.service.v1.ListSegmentsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/list"
@@ -42,6 +50,7 @@ service BackofficeCrm {
     };
   }
 
+  // Delete a segment and all its related data (members, fields, overrides).
   rpc DeleteSegment(DeleteSegmentRequest) returns (api.crm.service.v1.DeleteSegmentResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/delete"
@@ -49,7 +58,8 @@ service BackofficeCrm {
     };
   }
 
-  // Segment calculation
+  // Manually trigger a batch calculation for a segment.
+  // Evaluates the segment rules against all users and updates membership.
   rpc CalculateSegment(CalculateSegmentRequest) returns (api.crm.service.v1.CalculateSegmentResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/calculate"
@@ -57,6 +67,7 @@ service BackofficeCrm {
     };
   }
 
+  // Get paginated list of users in a segment.
   rpc GetSegmentUsers(GetSegmentUsersRequest) returns (api.crm.service.v1.GetSegmentUsersResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/users"
@@ -64,6 +75,7 @@ service BackofficeCrm {
     };
   }
 
+  // Get all segments a specific user belongs to.
   rpc GetUserSegments(GetUserSegmentsRequest) returns (api.crm.service.v1.GetUserSegmentsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/user/segments"
@@ -71,7 +83,8 @@ service BackofficeCrm {
     };
   }
 
-  // Segment override (for inheritance control)
+  // Set an override to disable an inherited segment at the current operator level.
+  // Only works for segments owned by parent levels (cannot override own segments).
   rpc SetSegmentOverride(SetSegmentOverrideRequest) returns (api.crm.service.v1.SetSegmentOverrideResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/override/set"
@@ -79,6 +92,7 @@ service BackofficeCrm {
     };
   }
 
+  // Get the override status for a segment at the current operator level.
   rpc GetSegmentOverride(GetSegmentOverrideRequest) returns (api.crm.service.v1.GetSegmentOverrideResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/override/get"
@@ -86,7 +100,9 @@ service BackofficeCrm {
     };
   }
 
-  // Schema API for frontend query builder
+  // Get the field schema for the frontend query builder.
+  // Returns all available fields, their types, supported operators, and value constraints.
+  // Use this to dynamically build the rules editor UI.
   rpc GetSegmentFieldSchema(GetSegmentFieldSchemaRequest) returns (api.crm.service.v1.GetSegmentFieldSchemaResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/schema"
@@ -94,7 +110,8 @@ service BackofficeCrm {
     };
   }
 
-  // Segment repair operations
+  // Repair a segment by ensuring its field mappings exist.
+  // Useful for segments that were directly inserted into the database without going through the API.
   rpc RepairSegment(RepairSegmentRequest) returns (api.crm.service.v1.RepairSegmentResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/repair"
@@ -102,6 +119,7 @@ service BackofficeCrm {
     };
   }
 
+  // Repair all segments that are missing field mappings.
   rpc RepairAllSegments(RepairAllSegmentsRequest) returns (api.crm.service.v1.RepairAllSegmentsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/repair-all"
@@ -109,6 +127,7 @@ service BackofficeCrm {
     };
   }
 
+  // Diagnostic endpoint - returns segments that have no field mappings.
   rpc GetSegmentsWithMissingFields(GetSegmentsWithMissingFieldsRequest) returns (api.crm.service.v1.GetSegmentsWithMissingFieldsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/crm/segment/missing-fields"
@@ -117,103 +136,286 @@ service BackofficeCrm {
   }
 }
 
-// CreateSegment
+// Create a new segment.
+// See api.crm.service.v1.CreateSegmentRequest.rules for the full rules JSON format documentation.
 message CreateSegmentRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Unique key for this segment within the same system operator (e.g., "high_vip_users"). Cannot be changed after creation.
   string segment_key = 2;
+  // Display name for the segment
   string name = 3;
+  // Optional description
   string description = 4;
+  // Segment type category
   api.crm.service.v1.SegmentType type = 5;
+  // Segment rules — a JSON tree of logic groups and conditions.
+  //
+  // ## Structure
+  //
+  // **Logic node** (group) — combines child nodes with AND/OR:
+  //
+  // `{ "logic": "AND"|"OR", "conditions": [ ...child nodes ] }`
+  //
+  // **Condition node** (leaf) — a single field comparison:
+  //
+  // `{ "field": "<name>", "operator": "<op>", "value": <val>, "currency": "<optional>" }`
+  //
+  // ## Available Fields
+  //
+  // **Boolean** (operator: `=`, value: `true`/`false`):
+  // - `login_banned` — Login Banned
+  // - `withdraw_banned` — Withdraw Banned
+  // - `game_banned` — Game Banned
+  // - `locked` — Locked
+  //
+  // **Date** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+  // - `registration_date` — Registration Date
+  // - `ftd_date` — First Time Deposit Date
+  // - `last_deposit_time` — Last Deposit Time
+  // - Format: `"YYYY-MM-DD"` or relative: `"now"`, `"now-1d"`, `"now-7d"`, `"now-30d"`, `"now-90d"`
+  // - Relative syntax: `"now[+-]<N>[d|h|m]"`, e.g. `"now-14d"`, `"now+2h"`
+  // - `between` value: `[min, max]`, e.g. `["2024-01-01", "2024-12-31"]`
+  //
+  // **Numeric — amounts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`; supports optional `"currency"`):
+  // - `deposit_amount` — Total Deposit Amount
+  // - `withdrawal_amount` — Total Withdrawal Amount
+  // - `bet_amount` — Total Bet Amount
+  // - `win_amount` — Total Win Amount
+  // - `ggr` — GGR
+  // - `ngr` — NGR
+  // - `balance` — Current Balance
+  // - Set `"currency"` to filter by currency (e.g. `"USD"`, `"EUR"`); omit for all currencies aggregated.
+  //
+  // **Numeric — counts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+  // - `deposit_count` — Deposit Count
+  // - `withdrawal_count` — Withdrawal Count
+  // - `bet_count` — Bet Count
+  // - `win_count` — Win Count
+  //
+  // **Numeric — other** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+  // - `kyc_level` — KYC Level
+  // - `vip_level` — VIP Level
+  // - `days_since_registration` — Days Since Registration
+  //
+  // **String** (operators: `=` `!=` `in` `not_in`):
+  // - `registration_country` — Country code, e.g. `"US"`, `"DE"`
+  // - `device_type` — Enum: `"desktop"`, `"mobile"`, `"tablet"`
+  // - `in`/`not_in` value is an array, e.g. `["US", "DE", "FR"]`
+  //
+  // ## Operators
+  //
+  // | Operator | Description | Value format |
+  // |----------|-------------|--------------|
+  // | `=` | Equal | Single value |
+  // | `!=` | Not equal | Single value |
+  // | `>` | Greater than | Single value |
+  // | `>=` | Greater than or equal | Single value |
+  // | `<` | Less than | Single value |
+  // | `<=` | Less than or equal | Single value |
+  // | `between` | Range (inclusive) | Array `[min, max]` |
+  // | `in` | Value in list | Array `["a","b"]` |
+  // | `not_in` | Value not in list | Array `["a","b"]` |
+  //
+  // ## Examples
+  //
+  // **Example 1 — Simple: VIP level >= 3**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "vip_level", "operator": ">=", "value": 3 }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 2 — Multi-condition: registered in last 30 days AND deposited**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "registration_date", "operator": ">=", "value": "now-30d" },
+  //     { "field": "deposit_count", "operator": ">=", "value": 1 }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 3 — Nested: (deposit >= 1000 USD AND VIP >= 3) OR bet_count >= 100**
+  //
+  // ```json
+  // {
+  //   "logic": "OR",
+  //   "conditions": [
+  //     {
+  //       "logic": "AND",
+  //       "conditions": [
+  //         { "field": "deposit_amount", "operator": ">=", "value": 1000, "currency": "USD" },
+  //         { "field": "vip_level", "operator": ">=", "value": 3 }
+  //       ]
+  //     },
+  //     { "field": "bet_count", "operator": ">=", "value": 100 }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 4 — Currency filter with between**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "balance", "operator": "between", "value": [100, 5000], "currency": "EUR" },
+  //     { "field": "registration_country", "operator": "in", "value": ["DE", "FR", "IT", "ES"] }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 5 — Boolean + String conditions**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "locked", "operator": "=", "value": false },
+  //     { "field": "login_banned", "operator": "=", "value": false },
+  //     { "field": "device_type", "operator": "=", "value": "mobile" }
+  //   ]
+  // }
+  // ```
+  //
+  // Use `GET /v1/backoffice/crm/segment/schema` to retrieve the full field schema dynamically.
   google.protobuf.Struct rules = 6;
+  // Whether to enable this segment. Enabled segments trigger async user calculation.
   bool enabled = 7;
 }
 
-// UpdateSegment
+// Partially update an existing segment. Only provided fields are updated.
 message UpdateSegmentRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID to update
   int64 id = 2;
+  // New display name (optional)
   optional string name = 3;
+  // New description (optional)
   optional string description = 4;
+  // New rules (optional). Same format as CreateSegmentRequest.rules.
   optional google.protobuf.Struct rules = 5;
+  // Enable or disable (optional)
   optional bool enabled = 6;
 }
 
-// GetSegment
+// Get a single segment by ID.
 message GetSegmentRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID
   int64 id = 2;
 }
 
-// ListSegments
+// List segments with pagination, optional type/enabled filters, and per-type counts.
 message ListSegmentsRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Filter by segment type (optional, omit to list all types)
   optional api.crm.service.v1.SegmentType type = 2;
+  // Filter by enabled status (optional)
   optional bool enabled = 3;
+  // Page number, starting from 1
   int32 page = 4;
+  // Number of items per page
   int32 page_size = 5;
+  // If true, include segments inherited from parent levels (system/retailer/company)
   bool include_inherited = 6;
 }
 
-// DeleteSegment
+// Delete a segment and all related data.
 message DeleteSegmentRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID to delete
   int64 id = 2;
 }
 
-// CalculateSegment
+// Manually trigger batch calculation for a segment.
 message CalculateSegmentRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID to calculate
   int64 id = 2;
 }
 
-// GetSegmentUsers
+// Get paginated list of users in a segment.
 message GetSegmentUsersRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID
   int64 segment_id = 2;
+  // Page number, starting from 1
   int32 page = 3;
+  // Number of items per page
   int32 page_size = 4;
+  // If true, only return users who are currently members (exclude those who have left)
   bool only_current_members = 5;
 }
 
-// GetUserSegments
+// Get all segments a specific user belongs to.
 message GetUserSegmentsRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // User ID to look up
   int64 user_id = 2;
+  // If true, only return segments where the user is currently a member
   bool only_current_memberships = 3;
 }
 
-// SetSegmentOverride
+// Set an override to disable an inherited segment at the current operator level.
 message SetSegmentOverrideRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID to override
   int64 segment_id = 2;
+  // Set to true to disable this inherited segment for the current operator
   bool disabled = 3;
 }
 
-// GetSegmentOverride
+// Get the override status for a segment at the current operator level.
 message GetSegmentOverrideRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID to check
   int64 segment_id = 2;
 }
 
-// GetSegmentFieldSchema
+// Get the field schema for the rules query builder.
+// Returns all available fields, their types, supported operators, and value constraints.
 message GetSegmentFieldSchemaRequest {
+  // Filter schema by segment type (currently returns all fields regardless of type)
   api.crm.service.v1.SegmentType type = 1;
 }
 
-// RepairSegment
+// Repair a segment by ensuring its field mappings exist in the database.
 message RepairSegmentRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // Segment ID to repair
   int64 id = 2;
+  // If true, also trigger a batch calculation after repairing field mappings
   bool trigger_calculation = 3;
 }
 
-// RepairAllSegments
+// Repair all segments that are missing field mappings.
 message RepairAllSegmentsRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
+  // If true, also trigger batch calculation for each repaired segment
   bool trigger_calculation = 2;
 }
 
-// GetSegmentsWithMissingFields
+// Diagnostic - find segments that have no field mappings.
 message GetSegmentsWithMissingFieldsRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator.
   api.common.OperatorContext target_operator_context = 1;
 }
