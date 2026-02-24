@@ -128,6 +128,7 @@ message ListOperatorByoDomainsRequest {
 	optional int32 page = 5;
 	optional int32 page_size = 6;
 	optional bool pagination = 7; // if nil, pagination is true
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message ListOperatorByoDomainsResponse {
