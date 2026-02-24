@@ -11,29 +11,39 @@ option java_multiple_files = true;
 option java_package = "api.crm.service.v1";
 
 // CRM service provides segment management and user segmentation functionality.
+// Segments define rules that automatically classify users into groups based on their attributes and behavior.
 service CRM {
-  // Segment CRUD operations
+  // Create a new segment. If enabled, triggers async user calculation immediately.
   rpc CreateSegment(CreateSegmentRequest) returns (CreateSegmentResponse);
+  // Partially update an existing segment. If rules change and segment is enabled, triggers recalculation.
   rpc UpdateSegment(UpdateSegmentRequest) returns (UpdateSegmentResponse);
+  // Get a single segment by ID, including its current user count.
   rpc GetSegment(GetSegmentRequest) returns (GetSegmentResponse);
+  // List segments with pagination, optional filters, and per-type counts.
   rpc ListSegments(ListSegmentsRequest) returns (ListSegmentsResponse);
+  // Delete a segment and all related data (members, field mappings, overrides).
   rpc DeleteSegment(DeleteSegmentRequest) returns (DeleteSegmentResponse);
 
-  // Segment calculation
+  // Manually trigger batch calculation — evaluates rules against all users and updates membership.
   rpc CalculateSegment(CalculateSegmentRequest) returns (CalculateSegmentResponse);
+  // Get paginated list of users in a segment.
   rpc GetSegmentUsers(GetSegmentUsersRequest) returns (GetSegmentUsersResponse);
+  // Get all segments a specific user belongs to.
   rpc GetUserSegments(GetUserSegmentsRequest) returns (GetUserSegmentsResponse);
 
-  // Segment override (for inheritance control)
+  // Set an override to disable an inherited segment at the current operator level.
   rpc SetSegmentOverride(SetSegmentOverrideRequest) returns (SetSegmentOverrideResponse);
+  // Get the override status for a segment at the current operator level.
   rpc GetSegmentOverride(GetSegmentOverrideRequest) returns (GetSegmentOverrideResponse);
 
-  // Schema API for frontend
+  // Get the field schema for the frontend query builder — returns available fields, operators, and constraints.
   rpc GetSegmentFieldSchema(GetSegmentFieldSchemaRequest) returns (GetSegmentFieldSchemaResponse);
 
-  // Segment repair operations - for fixing segments that were directly inserted into the database
+  // Repair a segment by re-extracting field mappings from its rules JSON.
   rpc RepairSegment(RepairSegmentRequest) returns (RepairSegmentResponse);
+  // Repair all segments that are missing field mappings.
   rpc RepairAllSegments(RepairAllSegmentsRequest) returns (RepairAllSegmentsResponse);
+  // Diagnostic — returns segments that have no field mappings in the database.
   rpc GetSegmentsWithMissingFields(GetSegmentsWithMissingFieldsRequest) returns (GetSegmentsWithMissingFieldsResponse);
 }
 
@@ -311,13 +321,15 @@ message UpdateSegmentResponse {
   Segment segment = 1;
 }
 
-// GetSegment
+// GetSegment - retrieves a single segment by ID, including its current user count.
 message GetSegmentRequest {
+  // Segment ID
   int64 id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message GetSegmentResponse {
+  // The segment with computed user_count
   Segment segment = 1;
 }
 
@@ -349,8 +361,9 @@ message ListSegmentsResponse {
   map<string, int64> type_counts = 5;
 }
 
-// DeleteSegment
+// DeleteSegment - deletes a segment and all its related data (members, field mappings, overrides).
 message DeleteSegmentRequest {
+  // Segment ID to delete
   int64 id = 1;
   api.common.OperatorContext operator_context = 2;
 }
@@ -366,58 +379,75 @@ message CalculateSegmentRequest {
 }
 
 message CalculateSegmentResponse {
-  // Total users matching the segment rules
+  // Total number of users whose data matches the segment rules after evaluation
   int64 users_matched = 1;
-  // Users newly added to the segment
+  // Number of users newly added as segment members in this calculation run
   int64 users_added = 2;
-  // Users removed from the segment
+  // Number of users who no longer match and were marked as left the segment
   int64 users_removed = 3;
 }
 
-// GetSegmentUsers
+// GetSegmentUsers - retrieves a paginated list of users in a segment.
 message GetSegmentUsersRequest {
+  // Segment ID
   int64 segment_id = 1;
   api.common.OperatorContext operator_context = 2;
+  // Page number, starting from 1
   int32 page = 3;
+  // Number of items per page
   int32 page_size = 4;
+  // If true, only return users who are currently members (exclude those who have left)
   bool only_current_members = 5;
 }
 
 message GetSegmentUsersResponse {
+  // List of users with their membership details (entered_at, left_at, is_member)
   repeated SegmentUser users = 1;
+  // Current page number
   int32 page = 2;
+  // Page size
   int32 page_size = 3;
+  // Total number of users matching the filter
   int64 total = 4;
 }
 
-// GetUserSegments
+// GetUserSegments - retrieves all segments a specific user belongs to.
 message GetUserSegmentsRequest {
+  // User ID to look up
   int64 user_id = 1;
   api.common.OperatorContext operator_context = 2;
+  // If true, only return segments where the user is currently a member
   bool only_current_memberships = 3;
 }
 
 message GetUserSegmentsResponse {
+  // List of segments the user belongs to (or belonged to, if only_current_memberships is false)
   repeated Segment segments = 1;
 }
 
-// SetSegmentOverride - allows lower levels to disable inherited segments
+// SetSegmentOverride - allows lower levels to disable inherited segments.
+// Only works for segments owned by parent levels (cannot override own segments).
 message SetSegmentOverrideRequest {
+  // Segment ID to override
   int64 segment_id = 1;
+  // Set to true to disable this inherited segment for the current operator
   bool disabled = 2;
   api.common.OperatorContext operator_context = 3;
 }
 
 message SetSegmentOverrideResponse {}
 
-// GetSegmentOverride
+// GetSegmentOverride - retrieves the override status for a segment at the current operator level.
 message GetSegmentOverrideRequest {
+  // Segment ID to check
   int64 segment_id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message GetSegmentOverrideResponse {
+  // Whether the inherited segment is disabled at this operator level
   bool disabled = 1;
+  // Whether an override record exists for this segment. false means no override has been set.
   bool has_override = 2;
 }
 
@@ -437,47 +467,64 @@ message FieldSchema {
   bool supports_currency = 6;
 }
 
-// GetSegmentFieldSchema
+// GetSegmentFieldSchema - returns the field schema for the frontend query builder.
+// Use this to dynamically build the rules editor UI.
 message GetSegmentFieldSchemaRequest {
+  // Filter schema by segment type (currently returns all fields regardless of type)
   SegmentType type = 1;
 }
 
 message GetSegmentFieldSchemaResponse {
+  // List of all available fields with their types, operators, and value constraints
   repeated FieldSchema fields = 1;
 }
 
-// RepairSegment - repairs a segment by ensuring field mappings exist and optionally triggering calculation
+// RepairSegment - repairs a segment by re-extracting field mappings from the rules JSON.
+// Useful for segments that were directly inserted into the database without going through the API.
 message RepairSegmentRequest {
+  // Segment ID to repair
   int64 id = 1;
+  // If true, also trigger a batch calculation after repairing field mappings
   bool trigger_calculation = 2;
   api.common.OperatorContext operator_context = 3;
 }
 
 message RepairSegmentResponse {
+  // The repaired segment ID
   int64 segment_id = 1;
+  // List of field names extracted from the segment rules (e.g., ["deposit_amount", "vip_level"])
   repeated string fields = 2;
+  // Whether calculation was performed after repair (true only if trigger_calculation was set)
   bool calculated = 3;
+  // Total users matching the segment rules (only populated if calculated is true)
   int64 users_matched = 4;
+  // Users newly added as segment members (only populated if calculated is true)
   int64 users_added = 5;
+  // Users removed from the segment (only populated if calculated is true)
   int64 users_removed = 6;
 }
 
-// RepairAllSegments - repairs all segments that are missing field mappings
+// RepairAllSegments - finds and repairs all segments that are missing field mappings in the database.
 message RepairAllSegmentsRequest {
+  // If true, also trigger batch calculation for each repaired segment
   bool trigger_calculation = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message RepairAllSegmentsResponse {
+  // Number of segments successfully repaired
   int64 repaired_count = 1;
+  // Detailed repair result for each segment
   repeated RepairSegmentResponse segments = 2;
 }
 
-// GetSegmentsWithMissingFields - returns segments that have no entries in crm_segment_fields
+// GetSegmentsWithMissingFields - diagnostic endpoint that returns segments missing field mappings.
+// These segments were likely directly inserted into the database without going through the API.
 message GetSegmentsWithMissingFieldsRequest {
   api.common.OperatorContext operator_context = 1;
 }
 
 message GetSegmentsWithMissingFieldsResponse {
+  // Segments that have no entries in the crm_segment_fields table
   repeated Segment segments = 1;
 }

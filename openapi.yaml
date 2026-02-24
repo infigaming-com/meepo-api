@@ -22133,13 +22133,13 @@ components:
             properties:
                 usersMatched:
                     type: string
-                    description: Total users matching the segment rules
+                    description: Total number of users whose data matches the segment rules after evaluation
                 usersAdded:
                     type: string
-                    description: Users newly added to the segment
+                    description: Number of users newly added as segment members in this calculation run
                 usersRemoved:
                     type: string
-                    description: Users removed from the segment
+                    description: Number of users who no longer match and were marked as left the segment
         api.crm.service.v1.CreateAssetResponse:
             type: object
             properties:
@@ -22215,18 +22215,23 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.FieldSchema'
+                    description: List of all available fields with their types, operators, and value constraints
         api.crm.service.v1.GetSegmentOverrideResponse:
             type: object
             properties:
                 disabled:
                     type: boolean
+                    description: Whether the inherited segment is disabled at this operator level
                 hasOverride:
                     type: boolean
+                    description: Whether an override record exists for this segment. false means no override has been set.
         api.crm.service.v1.GetSegmentResponse:
             type: object
             properties:
                 segment:
-                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    allOf:
+                        - $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: The segment with computed user_count
         api.crm.service.v1.GetSegmentUsersResponse:
             type: object
             properties:
@@ -22234,14 +22239,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.SegmentUser'
+                    description: List of users with their membership details (entered_at, left_at, is_member)
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Page size
                     format: int32
                 total:
                     type: string
+                    description: Total number of users matching the filter
         api.crm.service.v1.GetSegmentsWithMissingFieldsResponse:
             type: object
             properties:
@@ -22249,6 +22258,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: Segments that have no entries in the crm_segment_fields table
         api.crm.service.v1.GetUserSegmentsResponse:
             type: object
             properties:
@@ -22256,6 +22266,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: List of segments the user belongs to (or belonged to, if only_current_memberships is false)
         api.crm.service.v1.ListAssetVariablesResponse:
             type: object
             properties:
@@ -22335,27 +22346,35 @@ components:
             properties:
                 repairedCount:
                     type: string
+                    description: Number of segments successfully repaired
                 segments:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.RepairSegmentResponse'
+                    description: Detailed repair result for each segment
         api.crm.service.v1.RepairSegmentResponse:
             type: object
             properties:
                 segmentId:
                     type: string
+                    description: The repaired segment ID
                 fields:
                     type: array
                     items:
                         type: string
+                    description: List of field names extracted from the segment rules (e.g., ["deposit_amount", "vip_level"])
                 calculated:
                     type: boolean
+                    description: Whether calculation was performed after repair (true only if trigger_calculation was set)
                 usersMatched:
                     type: string
+                    description: Total users matching the segment rules (only populated if calculated is true)
                 usersAdded:
                     type: string
+                    description: Users newly added as segment members (only populated if calculated is true)
                 usersRemoved:
                     type: string
+                    description: Users removed from the segment (only populated if calculated is true)
         api.crm.service.v1.Segment:
             type: object
             properties:
