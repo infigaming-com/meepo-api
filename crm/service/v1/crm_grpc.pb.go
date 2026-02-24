@@ -40,25 +40,35 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // CRM service provides segment management and user segmentation functionality.
+// Segments define rules that automatically classify users into groups based on their attributes and behavior.
 type CRMClient interface {
-	// Segment CRUD operations
+	// Create a new segment. If enabled, triggers async user calculation immediately.
 	CreateSegment(ctx context.Context, in *CreateSegmentRequest, opts ...grpc.CallOption) (*CreateSegmentResponse, error)
+	// Partially update an existing segment. If rules change and segment is enabled, triggers recalculation.
 	UpdateSegment(ctx context.Context, in *UpdateSegmentRequest, opts ...grpc.CallOption) (*UpdateSegmentResponse, error)
+	// Get a single segment by ID, including its current user count.
 	GetSegment(ctx context.Context, in *GetSegmentRequest, opts ...grpc.CallOption) (*GetSegmentResponse, error)
+	// List segments with pagination, optional filters, and per-type counts.
 	ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error)
+	// Delete a segment and all related data (members, field mappings, overrides).
 	DeleteSegment(ctx context.Context, in *DeleteSegmentRequest, opts ...grpc.CallOption) (*DeleteSegmentResponse, error)
-	// Segment calculation
+	// Manually trigger batch calculation — evaluates rules against all users and updates membership.
 	CalculateSegment(ctx context.Context, in *CalculateSegmentRequest, opts ...grpc.CallOption) (*CalculateSegmentResponse, error)
+	// Get paginated list of users in a segment.
 	GetSegmentUsers(ctx context.Context, in *GetSegmentUsersRequest, opts ...grpc.CallOption) (*GetSegmentUsersResponse, error)
+	// Get all segments a specific user belongs to.
 	GetUserSegments(ctx context.Context, in *GetUserSegmentsRequest, opts ...grpc.CallOption) (*GetUserSegmentsResponse, error)
-	// Segment override (for inheritance control)
+	// Set an override to disable an inherited segment at the current operator level.
 	SetSegmentOverride(ctx context.Context, in *SetSegmentOverrideRequest, opts ...grpc.CallOption) (*SetSegmentOverrideResponse, error)
+	// Get the override status for a segment at the current operator level.
 	GetSegmentOverride(ctx context.Context, in *GetSegmentOverrideRequest, opts ...grpc.CallOption) (*GetSegmentOverrideResponse, error)
-	// Schema API for frontend
+	// Get the field schema for the frontend query builder — returns available fields, operators, and constraints.
 	GetSegmentFieldSchema(ctx context.Context, in *GetSegmentFieldSchemaRequest, opts ...grpc.CallOption) (*GetSegmentFieldSchemaResponse, error)
-	// Segment repair operations - for fixing segments that were directly inserted into the database
+	// Repair a segment by re-extracting field mappings from its rules JSON.
 	RepairSegment(ctx context.Context, in *RepairSegmentRequest, opts ...grpc.CallOption) (*RepairSegmentResponse, error)
+	// Repair all segments that are missing field mappings.
 	RepairAllSegments(ctx context.Context, in *RepairAllSegmentsRequest, opts ...grpc.CallOption) (*RepairAllSegmentsResponse, error)
+	// Diagnostic — returns segments that have no field mappings in the database.
 	GetSegmentsWithMissingFields(ctx context.Context, in *GetSegmentsWithMissingFieldsRequest, opts ...grpc.CallOption) (*GetSegmentsWithMissingFieldsResponse, error)
 }
 
@@ -215,25 +225,35 @@ func (c *cRMClient) GetSegmentsWithMissingFields(ctx context.Context, in *GetSeg
 // for forward compatibility.
 //
 // CRM service provides segment management and user segmentation functionality.
+// Segments define rules that automatically classify users into groups based on their attributes and behavior.
 type CRMServer interface {
-	// Segment CRUD operations
+	// Create a new segment. If enabled, triggers async user calculation immediately.
 	CreateSegment(context.Context, *CreateSegmentRequest) (*CreateSegmentResponse, error)
+	// Partially update an existing segment. If rules change and segment is enabled, triggers recalculation.
 	UpdateSegment(context.Context, *UpdateSegmentRequest) (*UpdateSegmentResponse, error)
+	// Get a single segment by ID, including its current user count.
 	GetSegment(context.Context, *GetSegmentRequest) (*GetSegmentResponse, error)
+	// List segments with pagination, optional filters, and per-type counts.
 	ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error)
+	// Delete a segment and all related data (members, field mappings, overrides).
 	DeleteSegment(context.Context, *DeleteSegmentRequest) (*DeleteSegmentResponse, error)
-	// Segment calculation
+	// Manually trigger batch calculation — evaluates rules against all users and updates membership.
 	CalculateSegment(context.Context, *CalculateSegmentRequest) (*CalculateSegmentResponse, error)
+	// Get paginated list of users in a segment.
 	GetSegmentUsers(context.Context, *GetSegmentUsersRequest) (*GetSegmentUsersResponse, error)
+	// Get all segments a specific user belongs to.
 	GetUserSegments(context.Context, *GetUserSegmentsRequest) (*GetUserSegmentsResponse, error)
-	// Segment override (for inheritance control)
+	// Set an override to disable an inherited segment at the current operator level.
 	SetSegmentOverride(context.Context, *SetSegmentOverrideRequest) (*SetSegmentOverrideResponse, error)
+	// Get the override status for a segment at the current operator level.
 	GetSegmentOverride(context.Context, *GetSegmentOverrideRequest) (*GetSegmentOverrideResponse, error)
-	// Schema API for frontend
+	// Get the field schema for the frontend query builder — returns available fields, operators, and constraints.
 	GetSegmentFieldSchema(context.Context, *GetSegmentFieldSchemaRequest) (*GetSegmentFieldSchemaResponse, error)
-	// Segment repair operations - for fixing segments that were directly inserted into the database
+	// Repair a segment by re-extracting field mappings from its rules JSON.
 	RepairSegment(context.Context, *RepairSegmentRequest) (*RepairSegmentResponse, error)
+	// Repair all segments that are missing field mappings.
 	RepairAllSegments(context.Context, *RepairAllSegmentsRequest) (*RepairAllSegmentsResponse, error)
+	// Diagnostic — returns segments that have no field mappings in the database.
 	GetSegmentsWithMissingFields(context.Context, *GetSegmentsWithMissingFieldsRequest) (*GetSegmentsWithMissingFieldsResponse, error)
 	mustEmbedUnimplementedCRMServer()
 }

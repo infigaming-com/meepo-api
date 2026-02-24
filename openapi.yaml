@@ -2064,7 +2064,9 @@ paths:
         post:
             tags:
                 - BackofficeCrm
-            description: Segment calculation
+            description: |-
+                Manually trigger a batch calculation for a segment.
+                 Evaluates the segment rules against all users and updates membership.
             operationId: BackofficeCrm_CalculateSegment
             requestBody:
                 content:
@@ -2083,7 +2085,10 @@ paths:
         post:
             tags:
                 - BackofficeCrm
-            description: Segment CRUD operations
+            description: |-
+                Create a new segment with rules for automatic user membership calculation.
+                 If enabled is true, an async calculation is triggered immediately.
+                 See CreateSegmentRequest.rules for the full rules format documentation.
             operationId: BackofficeCrm_CreateSegment
             requestBody:
                 content:
@@ -2102,6 +2107,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Delete a segment and all its related data (members, fields, overrides).
             operationId: BackofficeCrm_DeleteSegment
             requestBody:
                 content:
@@ -2120,6 +2126,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Get a single segment by ID, including its current user count.
             operationId: BackofficeCrm_GetSegment
             requestBody:
                 content:
@@ -2138,6 +2145,9 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: |-
+                List segments with pagination and optional filters.
+                 Returns per-type counts (type_counts) alongside the filtered list, useful for tab navigation.
             operationId: BackofficeCrm_ListSegments
             requestBody:
                 content:
@@ -2156,6 +2166,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Diagnostic endpoint - returns segments that have no field mappings.
             operationId: BackofficeCrm_GetSegmentsWithMissingFields
             requestBody:
                 content:
@@ -2174,6 +2185,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Get the override status for a segment at the current operator level.
             operationId: BackofficeCrm_GetSegmentOverride
             requestBody:
                 content:
@@ -2192,7 +2204,9 @@ paths:
         post:
             tags:
                 - BackofficeCrm
-            description: Segment override (for inheritance control)
+            description: |-
+                Set an override to disable an inherited segment at the current operator level.
+                 Only works for segments owned by parent levels (cannot override own segments).
             operationId: BackofficeCrm_SetSegmentOverride
             requestBody:
                 content:
@@ -2211,7 +2225,9 @@ paths:
         post:
             tags:
                 - BackofficeCrm
-            description: Segment repair operations
+            description: |-
+                Repair a segment by ensuring its field mappings exist.
+                 Useful for segments that were directly inserted into the database without going through the API.
             operationId: BackofficeCrm_RepairSegment
             requestBody:
                 content:
@@ -2230,6 +2246,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Repair all segments that are missing field mappings.
             operationId: BackofficeCrm_RepairAllSegments
             requestBody:
                 content:
@@ -2248,7 +2265,10 @@ paths:
         post:
             tags:
                 - BackofficeCrm
-            description: Schema API for frontend query builder
+            description: |-
+                Get the field schema for the frontend query builder.
+                 Returns all available fields, their types, supported operators, and value constraints.
+                 Use this to dynamically build the rules editor UI.
             operationId: BackofficeCrm_GetSegmentFieldSchema
             requestBody:
                 content:
@@ -2267,6 +2287,9 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: |-
+                Partially update an existing segment. Only provided fields are updated.
+                 If rules change and the segment is enabled, an async recalculation is triggered.
             operationId: BackofficeCrm_UpdateSegment
             requestBody:
                 content:
@@ -2285,6 +2308,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Get paginated list of users in a segment.
             operationId: BackofficeCrm_GetSegmentUsers
             requestBody:
                 content:
@@ -2303,6 +2327,7 @@ paths:
         post:
             tags:
                 - BackofficeCrm
+            description: Get all segments a specific user belongs to.
             operationId: BackofficeCrm_GetUserSegments
             requestBody:
                 content:
@@ -12860,10 +12885,13 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 id:
                     type: string
-            description: CalculateSegment
+                    description: Segment ID to calculate
+            description: Manually trigger batch calculation for a segment.
         api.backoffice.service.v1.CancelTicketRequest:
             type: object
             properties:
@@ -13386,13 +13414,18 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 segmentKey:
                     type: string
+                    description: Unique key for this segment within the same system operator (e.g., "high_vip_users"). Cannot be changed after creation.
                 name:
                     type: string
+                    description: Display name for the segment
                 description:
                     type: string
+                    description: Optional description
                 type:
                     enum:
                         - SEGMENT_TYPE_UNSPECIFIED
@@ -13401,12 +13434,154 @@ components:
                         - SEGMENT_TYPE_IMPORTED
                         - SEGMENT_TYPE_RFM
                     type: string
+                    description: Segment type category
                     format: enum
                 rules:
                     type: object
+                    description: |-
+                        Segment rules — a JSON tree of logic groups and conditions.
+
+                         ## Structure
+
+                         **Logic node** (group) — combines child nodes with AND/OR:
+
+                         `{ "logic": "AND"|"OR", "conditions": [ ...child nodes ] }`
+
+                         **Condition node** (leaf) — a single field comparison:
+
+                         `{ "field": "<name>", "operator": "<op>", "value": <val>, "currency": "<optional>" }`
+
+                         ## Available Fields
+
+                         **Boolean** (operator: `=`, value: `true`/`false`):
+                         - `login_banned` — Login Banned
+                         - `withdraw_banned` — Withdraw Banned
+                         - `game_banned` — Game Banned
+                         - `locked` — Locked
+
+                         **Date** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+                         - `registration_date` — Registration Date
+                         - `ftd_date` — First Time Deposit Date
+                         - `last_deposit_time` — Last Deposit Time
+                         - Format: `"YYYY-MM-DD"` or relative: `"now"`, `"now-1d"`, `"now-7d"`, `"now-30d"`, `"now-90d"`
+                         - Relative syntax: `"now[+-]<N>[d|h|m]"`, e.g. `"now-14d"`, `"now+2h"`
+                         - `between` value: `[min, max]`, e.g. `["2024-01-01", "2024-12-31"]`
+
+                         **Numeric — amounts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`; supports optional `"currency"`):
+                         - `deposit_amount` — Total Deposit Amount
+                         - `withdrawal_amount` — Total Withdrawal Amount
+                         - `bet_amount` — Total Bet Amount
+                         - `win_amount` — Total Win Amount
+                         - `ggr` — GGR
+                         - `ngr` — NGR
+                         - `balance` — Current Balance
+                         - Set `"currency"` to filter by currency (e.g. `"USD"`, `"EUR"`); omit for all currencies aggregated.
+
+                         **Numeric — counts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+                         - `deposit_count` — Deposit Count
+                         - `withdrawal_count` — Withdrawal Count
+                         - `bet_count` — Bet Count
+                         - `win_count` — Win Count
+
+                         **Numeric — other** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+                         - `kyc_level` — KYC Level
+                         - `vip_level` — VIP Level
+                         - `days_since_registration` — Days Since Registration
+
+                         **String** (operators: `=` `!=` `in` `not_in`):
+                         - `registration_country` — Country code, e.g. `"US"`, `"DE"`
+                         - `device_type` — Enum: `"desktop"`, `"mobile"`, `"tablet"`
+                         - `in`/`not_in` value is an array, e.g. `["US", "DE", "FR"]`
+
+                         ## Operators
+
+                         | Operator | Description | Value format |
+                         |----------|-------------|--------------|
+                         | `=` | Equal | Single value |
+                         | `!=` | Not equal | Single value |
+                         | `>` | Greater than | Single value |
+                         | `>=` | Greater than or equal | Single value |
+                         | `<` | Less than | Single value |
+                         | `<=` | Less than or equal | Single value |
+                         | `between` | Range (inclusive) | Array `[min, max]` |
+                         | `in` | Value in list | Array `["a","b"]` |
+                         | `not_in` | Value not in list | Array `["a","b"]` |
+
+                         ## Examples
+
+                         **Example 1 — Simple: VIP level >= 3**
+
+                         ```json
+                         {
+                           "logic": "AND",
+                           "conditions": [
+                             { "field": "vip_level", "operator": ">=", "value": 3 }
+                           ]
+                         }
+                         ```
+
+                         **Example 2 — Multi-condition: registered in last 30 days AND deposited**
+
+                         ```json
+                         {
+                           "logic": "AND",
+                           "conditions": [
+                             { "field": "registration_date", "operator": ">=", "value": "now-30d" },
+                             { "field": "deposit_count", "operator": ">=", "value": 1 }
+                           ]
+                         }
+                         ```
+
+                         **Example 3 — Nested: (deposit >= 1000 USD AND VIP >= 3) OR bet_count >= 100**
+
+                         ```json
+                         {
+                           "logic": "OR",
+                           "conditions": [
+                             {
+                               "logic": "AND",
+                               "conditions": [
+                                 { "field": "deposit_amount", "operator": ">=", "value": 1000, "currency": "USD" },
+                                 { "field": "vip_level", "operator": ">=", "value": 3 }
+                               ]
+                             },
+                             { "field": "bet_count", "operator": ">=", "value": 100 }
+                           ]
+                         }
+                         ```
+
+                         **Example 4 — Currency filter with between**
+
+                         ```json
+                         {
+                           "logic": "AND",
+                           "conditions": [
+                             { "field": "balance", "operator": "between", "value": [100, 5000], "currency": "EUR" },
+                             { "field": "registration_country", "operator": "in", "value": ["DE", "FR", "IT", "ES"] }
+                           ]
+                         }
+                         ```
+
+                         **Example 5 — Boolean + String conditions**
+
+                         ```json
+                         {
+                           "logic": "AND",
+                           "conditions": [
+                             { "field": "locked", "operator": "=", "value": false },
+                             { "field": "login_banned", "operator": "=", "value": false },
+                             { "field": "device_type", "operator": "=", "value": "mobile" }
+                           ]
+                         }
+                         ```
+
+                         Use `GET /v1/backoffice/crm/segment/schema` to retrieve the full field schema dynamically.
                 enabled:
                     type: boolean
-            description: CreateSegment
+                    description: Whether to enable this segment. Enabled segments trigger async user calculation.
+            description: |-
+                Create a new segment.
+                 See api.crm.service.v1.CreateSegmentRequest.rules for the full rules JSON format documentation.
         api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -13693,10 +13868,13 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 id:
                     type: string
-            description: DeleteSegment
+                    description: Segment ID to delete
+            description: Delete a segment and all related data.
         api.backoffice.service.v1.DeleteTelegramConfigRequest:
             type: object
             properties:
@@ -14910,46 +15088,63 @@ components:
                         - SEGMENT_TYPE_IMPORTED
                         - SEGMENT_TYPE_RFM
                     type: string
+                    description: Filter schema by segment type (currently returns all fields regardless of type)
                     format: enum
-            description: GetSegmentFieldSchema
+            description: |-
+                Get the field schema for the rules query builder.
+                 Returns all available fields, their types, supported operators, and value constraints.
         api.backoffice.service.v1.GetSegmentOverrideRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 segmentId:
                     type: string
-            description: GetSegmentOverride
+                    description: Segment ID to check
+            description: Get the override status for a segment at the current operator level.
         api.backoffice.service.v1.GetSegmentRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 id:
                     type: string
-            description: GetSegment
+                    description: Segment ID
+            description: Get a single segment by ID.
         api.backoffice.service.v1.GetSegmentUsersRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 segmentId:
                     type: string
+                    description: Segment ID
                 page:
                     type: integer
+                    description: Page number, starting from 1
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 onlyCurrentMembers:
                     type: boolean
-            description: GetSegmentUsers
+                    description: If true, only return users who are currently members (exclude those who have left)
+            description: Get paginated list of users in a segment.
         api.backoffice.service.v1.GetSegmentsWithMissingFieldsRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-            description: GetSegmentsWithMissingFields
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
+            description: Diagnostic - find segments that have no field mappings.
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
             properties:
@@ -15515,12 +15710,16 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 userId:
                     type: string
+                    description: User ID to look up
                 onlyCurrentMemberships:
                     type: boolean
-            description: GetUserSegments
+                    description: If true, only return segments where the user is currently a member
+            description: Get all segments a specific user belongs to.
         api.backoffice.service.v1.GetUserTagsRequest:
             type: object
             properties:
@@ -18413,7 +18612,9 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 type:
                     enum:
                         - SEGMENT_TYPE_UNSPECIFIED
@@ -18422,18 +18623,23 @@ components:
                         - SEGMENT_TYPE_IMPORTED
                         - SEGMENT_TYPE_RFM
                     type: string
+                    description: Filter by segment type (optional, omit to list all types)
                     format: enum
                 enabled:
                     type: boolean
+                    description: Filter by enabled status (optional)
                 page:
                     type: integer
+                    description: Page number, starting from 1
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
                 includeInherited:
                     type: boolean
-            description: ListSegments
+                    description: If true, include segments inherited from parent levels (system/retailer/company)
+            description: List segments with pagination, optional type/enabled filters, and per-type counts.
         api.backoffice.service.v1.ListSevRequest:
             type: object
             properties:
@@ -19907,20 +20113,27 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 triggerCalculation:
                     type: boolean
-            description: RepairAllSegments
+                    description: If true, also trigger batch calculation for each repaired segment
+            description: Repair all segments that are missing field mappings.
         api.backoffice.service.v1.RepairSegmentRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 id:
                     type: string
+                    description: Segment ID to repair
                 triggerCalculation:
                     type: boolean
-            description: RepairSegment
+                    description: If true, also trigger a batch calculation after repairing field mappings
+            description: Repair a segment by ensuring its field mappings exist in the database.
         api.backoffice.service.v1.ResetPasswordRequest:
             type: object
             properties:
@@ -20173,12 +20386,16 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 segmentId:
                     type: string
+                    description: Segment ID to override
                 disabled:
                     type: boolean
-            description: SetSegmentOverride
+                    description: Set to true to disable this inherited segment for the current operator
+            description: Set an override to disable an inherited segment at the current operator level.
         api.backoffice.service.v1.SetTelegramEnabledRequest:
             type: object
             properties:
@@ -20758,18 +20975,25 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator.
                 id:
                     type: string
+                    description: Segment ID to update
                 name:
                     type: string
+                    description: New display name (optional)
                 description:
                     type: string
+                    description: New description (optional)
                 rules:
                     type: object
+                    description: New rules (optional). Same format as CreateSegmentRequest.rules.
                 enabled:
                     type: boolean
-            description: UpdateSegment
+                    description: Enable or disable (optional)
+            description: Partially update an existing segment. Only provided fields are updated.
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -21909,10 +22133,13 @@ components:
             properties:
                 usersMatched:
                     type: string
+                    description: Total number of users whose data matches the segment rules after evaluation
                 usersAdded:
                     type: string
+                    description: Number of users newly added as segment members in this calculation run
                 usersRemoved:
                     type: string
+                    description: Number of users who no longer match and were marked as left the segment
         api.crm.service.v1.CreateAssetResponse:
             type: object
             properties:
@@ -21927,7 +22154,10 @@ components:
             type: object
             properties:
                 segment:
-                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    allOf:
+                        - $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: The created segment. user_count will be 0 initially; async calculation updates it.
+            description: CreateSegmentResponse - returns the created segment
         api.crm.service.v1.DeleteAssetResponse:
             type: object
             properties: {}
@@ -21942,8 +22172,10 @@ components:
             properties:
                 field:
                     type: string
+                    description: Field name used in rules (e.g., "vip_level", "deposit_amount")
                 label:
                     type: string
+                    description: Human-readable label (e.g., "VIP Level", "Total Deposit Amount")
                 type:
                     enum:
                         - FIELD_TYPE_UNSPECIFIED
@@ -21952,16 +22184,20 @@ components:
                         - FIELD_TYPE_DATE
                         - FIELD_TYPE_STRING
                     type: string
+                    description: Data type of the field
                     format: enum
                 operators:
                     type: array
                     items:
                         type: string
+                    description: Supported operators for this field (e.g., ["=", "!=", ">", ">=", "<", "<=", "between"])
                 valueSchema:
                     type: object
+                    description: Value constraints (type, min, max, format, enum options, relative date options)
                 supportsCurrency:
                     type: boolean
-            description: Field schema for frontend query builder
+                    description: Whether this field supports currency filtering (e.g., deposit_amount can be filtered by "USD", "EUR")
+            description: Field schema for the frontend query builder - describes a single queryable field
         api.crm.service.v1.GetAssetResponse:
             type: object
             properties:
@@ -21979,18 +22215,23 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.FieldSchema'
+                    description: List of all available fields with their types, operators, and value constraints
         api.crm.service.v1.GetSegmentOverrideResponse:
             type: object
             properties:
                 disabled:
                     type: boolean
+                    description: Whether the inherited segment is disabled at this operator level
                 hasOverride:
                     type: boolean
+                    description: Whether an override record exists for this segment. false means no override has been set.
         api.crm.service.v1.GetSegmentResponse:
             type: object
             properties:
                 segment:
-                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    allOf:
+                        - $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: The segment with computed user_count
         api.crm.service.v1.GetSegmentUsersResponse:
             type: object
             properties:
@@ -21998,14 +22239,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.SegmentUser'
+                    description: List of users with their membership details (entered_at, left_at, is_member)
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Page size
                     format: int32
                 total:
                     type: string
+                    description: Total number of users matching the filter
         api.crm.service.v1.GetSegmentsWithMissingFieldsResponse:
             type: object
             properties:
@@ -22013,6 +22258,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: Segments that have no entries in the crm_segment_fields table
         api.crm.service.v1.GetUserSegmentsResponse:
             type: object
             properties:
@@ -22020,6 +22266,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: List of segments the user belongs to (or belonged to, if only_current_memberships is false)
         api.crm.service.v1.ListAssetVariablesResponse:
             type: object
             properties:
@@ -22056,18 +22303,23 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: List of segments for the current page
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Page size
                     format: int32
                 total:
                     type: string
+                    description: Total number of segments matching the filters
                 typeCounts:
                     type: object
                     additionalProperties:
                         type: string
+                    description: 'Count of segments per type (ignoring the type filter), e.g., {"user_state": 15, "behavioral": 20, "imported": 5, "rfm": 3}'
         api.crm.service.v1.RenderAssetResponse:
             type: object
             properties:
@@ -22094,38 +22346,50 @@ components:
             properties:
                 repairedCount:
                     type: string
+                    description: Number of segments successfully repaired
                 segments:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.RepairSegmentResponse'
+                    description: Detailed repair result for each segment
         api.crm.service.v1.RepairSegmentResponse:
             type: object
             properties:
                 segmentId:
                     type: string
+                    description: The repaired segment ID
                 fields:
                     type: array
                     items:
                         type: string
+                    description: List of field names extracted from the segment rules (e.g., ["deposit_amount", "vip_level"])
                 calculated:
                     type: boolean
+                    description: Whether calculation was performed after repair (true only if trigger_calculation was set)
                 usersMatched:
                     type: string
+                    description: Total users matching the segment rules (only populated if calculated is true)
                 usersAdded:
                     type: string
+                    description: Users newly added as segment members (only populated if calculated is true)
                 usersRemoved:
                     type: string
+                    description: Users removed from the segment (only populated if calculated is true)
         api.crm.service.v1.Segment:
             type: object
             properties:
                 id:
                     type: string
+                    description: Unique identifier
                 segmentKey:
                     type: string
+                    description: Unique key within the same system operator (e.g., "high_vip_users")
                 name:
                     type: string
+                    description: Display name
                 description:
                     type: string
+                    description: Optional description
                 type:
                     enum:
                         - SEGMENT_TYPE_UNSPECIFIED
@@ -22134,10 +22398,11 @@ components:
                         - SEGMENT_TYPE_IMPORTED
                         - SEGMENT_TYPE_RFM
                     type: string
+                    description: Segment type category
                     format: enum
                 ownerOperatorId:
                     type: string
-                    description: Ownership hierarchy
+                    description: Ownership hierarchy - determines who created and can modify this segment
                 ownerCompanyOperatorId:
                     type: string
                 ownerRetailerOperatorId:
@@ -22152,12 +22417,14 @@ components:
                         - OWNER_LEVEL_COMPANY
                         - OWNER_LEVEL_OPERATOR
                     type: string
+                    description: The level at which this segment was created
                     format: enum
                 rules:
                     type: object
-                    description: Rules as JSON structure
+                    description: Segment rules as a JSON tree structure. See CreateSegmentRequest.rules for detailed format documentation.
                 enabled:
                     type: boolean
+                    description: Whether this segment is active. Only enabled segments are calculated.
                 createdAt:
                     type: string
                     format: date-time
@@ -22166,11 +22433,12 @@ components:
                     format: date-time
                 lastCalculatedAt:
                     type: string
+                    description: Timestamp of the last batch calculation. Null if never calculated.
                     format: date-time
                 userCount:
                     type: string
-                    description: Computed fields
-            description: Segment definition
+                    description: Number of users currently in this segment (computed field)
+            description: Segment definition - represents a user segment with rules for automatic membership calculation
         api.crm.service.v1.SegmentUser:
             type: object
             properties:
@@ -22188,13 +22456,16 @@ components:
                     type: string
                 enteredAt:
                     type: string
+                    description: When the user entered this segment
                     format: date-time
                 leftAt:
                     type: string
+                    description: When the user left this segment (null if still a member)
                     format: date-time
                 isMember:
                     type: boolean
-            description: Segment user membership
+                    description: Whether the user is currently a member
+            description: Segment user membership - tracks when a user enters/leaves a segment
         api.crm.service.v1.SetSegmentOverrideResponse:
             type: object
             properties: {}
@@ -22222,7 +22493,9 @@ components:
             type: object
             properties:
                 segment:
-                    $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    allOf:
+                        - $ref: '#/components/schemas/api.crm.service.v1.Segment'
+                    description: The updated segment
         api.game.service.v1.Action:
             type: object
             properties:
@@ -30321,7 +30594,9 @@ tags:
     - name: BackofficeCloudflare
     - name: BackofficeCompany
     - name: BackofficeCrm
-      description: CRM segment management service for backoffice
+      description: |-
+        CRM segment management service for backoffice.
+         Provides CRUD, calculation, override and schema APIs for managing user segments.
     - name: BackofficeDashboard
     - name: BackofficeDns
     - name: BackofficeFileStore

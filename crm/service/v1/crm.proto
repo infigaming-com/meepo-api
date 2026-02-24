@@ -11,88 +11,120 @@ option java_multiple_files = true;
 option java_package = "api.crm.service.v1";
 
 // CRM service provides segment management and user segmentation functionality.
+// Segments define rules that automatically classify users into groups based on their attributes and behavior.
 service CRM {
-  // Segment CRUD operations
+  // Create a new segment. If enabled, triggers async user calculation immediately.
   rpc CreateSegment(CreateSegmentRequest) returns (CreateSegmentResponse);
+  // Partially update an existing segment. If rules change and segment is enabled, triggers recalculation.
   rpc UpdateSegment(UpdateSegmentRequest) returns (UpdateSegmentResponse);
+  // Get a single segment by ID, including its current user count.
   rpc GetSegment(GetSegmentRequest) returns (GetSegmentResponse);
+  // List segments with pagination, optional filters, and per-type counts.
   rpc ListSegments(ListSegmentsRequest) returns (ListSegmentsResponse);
+  // Delete a segment and all related data (members, field mappings, overrides).
   rpc DeleteSegment(DeleteSegmentRequest) returns (DeleteSegmentResponse);
 
-  // Segment calculation
+  // Manually trigger batch calculation — evaluates rules against all users and updates membership.
   rpc CalculateSegment(CalculateSegmentRequest) returns (CalculateSegmentResponse);
+  // Get paginated list of users in a segment.
   rpc GetSegmentUsers(GetSegmentUsersRequest) returns (GetSegmentUsersResponse);
+  // Get all segments a specific user belongs to.
   rpc GetUserSegments(GetUserSegmentsRequest) returns (GetUserSegmentsResponse);
 
-  // Segment override (for inheritance control)
+  // Set an override to disable an inherited segment at the current operator level.
   rpc SetSegmentOverride(SetSegmentOverrideRequest) returns (SetSegmentOverrideResponse);
+  // Get the override status for a segment at the current operator level.
   rpc GetSegmentOverride(GetSegmentOverrideRequest) returns (GetSegmentOverrideResponse);
 
-  // Schema API for frontend
+  // Get the field schema for the frontend query builder — returns available fields, operators, and constraints.
   rpc GetSegmentFieldSchema(GetSegmentFieldSchemaRequest) returns (GetSegmentFieldSchemaResponse);
 
-  // Segment repair operations - for fixing segments that were directly inserted into the database
+  // Repair a segment by re-extracting field mappings from its rules JSON.
   rpc RepairSegment(RepairSegmentRequest) returns (RepairSegmentResponse);
+  // Repair all segments that are missing field mappings.
   rpc RepairAllSegments(RepairAllSegmentsRequest) returns (RepairAllSegmentsResponse);
+  // Diagnostic — returns segments that have no field mappings in the database.
   rpc GetSegmentsWithMissingFields(GetSegmentsWithMissingFieldsRequest) returns (GetSegmentsWithMissingFieldsResponse);
 }
 
-// Segment types
+// Segment types - defines the category of a segment
 enum SegmentType {
+  // Default unspecified value
   SEGMENT_TYPE_UNSPECIFIED = 0;
+  // User state segment - based on user profile attributes (e.g., KYC level, VIP level, banned status)
   SEGMENT_TYPE_USER_STATE = 1;
+  // Behavioral segment - based on user actions (e.g., deposit count, bet amount)
   SEGMENT_TYPE_BEHAVIORAL = 2;
+  // Imported segment - manually imported user lists
   SEGMENT_TYPE_IMPORTED = 3;
+  // RFM segment - Recency, Frequency, Monetary analysis based
   SEGMENT_TYPE_RFM = 4;
 }
 
-// Segment owner level in hierarchy
+// Segment owner level in the operator hierarchy.
+// Higher levels (system) can create segments inherited by lower levels (operator).
 enum OwnerLevel {
   OWNER_LEVEL_UNSPECIFIED = 0;
+  // System level - segments visible to all operators under this system
   OWNER_LEVEL_SYSTEM = 1;
+  // Retailer level - segments visible to all companies/operators under this retailer
   OWNER_LEVEL_RETAILER = 2;
+  // Company level - segments visible to all operators under this company
   OWNER_LEVEL_COMPANY = 3;
+  // Operator level - segments visible only to this operator
   OWNER_LEVEL_OPERATOR = 4;
 }
 
-// Field types for schema
+// Field types for the segment rule query builder schema
 enum FieldType {
   FIELD_TYPE_UNSPECIFIED = 0;
+  // Boolean field - supports operator: =. Values: true/false
   FIELD_TYPE_BOOLEAN = 1;
+  // Numeric field - supports operators: =, !=, >, >=, <, <=, between
   FIELD_TYPE_NUMERIC = 2;
+  // Date field - supports operators: =, !=, >, >=, <, <=, between. Format: "YYYY-MM-DD" or relative ("now", "now-7d")
   FIELD_TYPE_DATE = 3;
+  // String field - supports operators: =, !=, in, not_in
   FIELD_TYPE_STRING = 4;
 }
 
-// Segment definition
+// Segment definition - represents a user segment with rules for automatic membership calculation
 message Segment {
+  // Unique identifier
   int64 id = 1;
+  // Unique key within the same system operator (e.g., "high_vip_users")
   string segment_key = 2;
+  // Display name
   string name = 3;
+  // Optional description
   string description = 4;
+  // Segment type category
   SegmentType type = 5;
-  
-  // Ownership hierarchy
+
+  // Ownership hierarchy - determines who created and can modify this segment
   int64 owner_operator_id = 6;
   int64 owner_company_operator_id = 7;
   int64 owner_retailer_operator_id = 8;
   int64 owner_system_operator_id = 9;
+  // The level at which this segment was created
   OwnerLevel owner_level = 10;
-  
-  // Rules as JSON structure
+
+  // Segment rules as a JSON tree structure. See CreateSegmentRequest.rules for detailed format documentation.
   google.protobuf.Struct rules = 11;
-  
+
+  // Whether this segment is active. Only enabled segments are calculated.
   bool enabled = 12;
-  
+
   google.protobuf.Timestamp created_at = 13;
   google.protobuf.Timestamp updated_at = 14;
+  // Timestamp of the last batch calculation. Null if never calculated.
   google.protobuf.Timestamp last_calculated_at = 15;
-  
-  // Computed fields
+
+  // Number of users currently in this segment (computed field)
   int64 user_count = 16;
 }
 
-// Segment user membership
+// Segment user membership - tracks when a user enters/leaves a segment
 message SegmentUser {
   int64 segment_id = 1;
   int64 user_id = 2;
@@ -100,186 +132,399 @@ message SegmentUser {
   int64 company_operator_id = 4;
   int64 retailer_operator_id = 5;
   int64 system_operator_id = 6;
+  // When the user entered this segment
   google.protobuf.Timestamp entered_at = 7;
+  // When the user left this segment (null if still a member)
   google.protobuf.Timestamp left_at = 8;
+  // Whether the user is currently a member
   bool is_member = 9;
 }
 
-// CreateSegment
+// CreateSegment - creates a new segment with rules for automatic user membership calculation.
+// If enabled is true, an async calculation will be triggered immediately after creation.
 message CreateSegmentRequest {
+  // Unique key for this segment within the same system operator (e.g., "high_vip_users"). Cannot be changed after creation.
   string segment_key = 1;
+  // Display name for the segment
   string name = 2;
+  // Optional description
   string description = 3;
+  // Segment type category
   SegmentType type = 4;
+  // Segment rules — a JSON tree of logic groups and conditions.
+  //
+  // ## Structure
+  //
+  // **Logic node** (group) — combines child nodes with AND/OR:
+  //
+  // `{ "logic": "AND"|"OR", "conditions": [ ...child nodes ] }`
+  //
+  // **Condition node** (leaf) — a single field comparison:
+  //
+  // `{ "field": "<name>", "operator": "<op>", "value": <val>, "currency": "<optional>" }`
+  //
+  // ## Available Fields
+  //
+  // **Boolean** (operator: `=`, value: `true`/`false`):
+  // - `login_banned` — Login Banned
+  // - `withdraw_banned` — Withdraw Banned
+  // - `game_banned` — Game Banned
+  // - `locked` — Locked
+  //
+  // **Date** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+  // - `registration_date` — Registration Date
+  // - `ftd_date` — First Time Deposit Date
+  // - `last_deposit_time` — Last Deposit Time
+  // - Format: `"YYYY-MM-DD"` or relative: `"now"`, `"now-1d"`, `"now-7d"`, `"now-30d"`, `"now-90d"`
+  // - Relative syntax: `"now[+-]<N>[d|h|m]"`, e.g. `"now-14d"`, `"now+2h"`
+  // - `between` value: `[min, max]`, e.g. `["2024-01-01", "2024-12-31"]`
+  //
+  // **Numeric — amounts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`; supports optional `"currency"`):
+  // - `deposit_amount` — Total Deposit Amount
+  // - `withdrawal_amount` — Total Withdrawal Amount
+  // - `bet_amount` — Total Bet Amount
+  // - `win_amount` — Total Win Amount
+  // - `ggr` — GGR
+  // - `ngr` — NGR
+  // - `balance` — Current Balance
+  // - Set `"currency"` to filter by currency (e.g. `"USD"`, `"EUR"`); omit for all currencies aggregated.
+  //
+  // **Numeric — counts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+  // - `deposit_count` — Deposit Count
+  // - `withdrawal_count` — Withdrawal Count
+  // - `bet_count` — Bet Count
+  // - `win_count` — Win Count
+  //
+  // **Numeric — other** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+  // - `kyc_level` — KYC Level
+  // - `vip_level` — VIP Level
+  // - `days_since_registration` — Days Since Registration
+  //
+  // **String** (operators: `=` `!=` `in` `not_in`):
+  // - `registration_country` — Country code, e.g. `"US"`, `"DE"`
+  // - `device_type` — Enum: `"desktop"`, `"mobile"`, `"tablet"`
+  // - `in`/`not_in` value is an array, e.g. `["US", "DE", "FR"]`
+  //
+  // ## Operators
+  //
+  // | Operator | Description | Value format |
+  // |----------|-------------|--------------|
+  // | `=` | Equal | Single value |
+  // | `!=` | Not equal | Single value |
+  // | `>` | Greater than | Single value |
+  // | `>=` | Greater than or equal | Single value |
+  // | `<` | Less than | Single value |
+  // | `<=` | Less than or equal | Single value |
+  // | `between` | Range (inclusive) | Array `[min, max]` |
+  // | `in` | Value in list | Array `["a","b"]` |
+  // | `not_in` | Value not in list | Array `["a","b"]` |
+  //
+  // ## Examples
+  //
+  // **Example 1 — Simple: VIP level >= 3**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "vip_level", "operator": ">=", "value": 3 }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 2 — Multi-condition: registered in last 30 days AND deposited**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "registration_date", "operator": ">=", "value": "now-30d" },
+  //     { "field": "deposit_count", "operator": ">=", "value": 1 }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 3 — Nested: (deposit >= 1000 USD AND VIP >= 3) OR bet_count >= 100**
+  //
+  // ```json
+  // {
+  //   "logic": "OR",
+  //   "conditions": [
+  //     {
+  //       "logic": "AND",
+  //       "conditions": [
+  //         { "field": "deposit_amount", "operator": ">=", "value": 1000, "currency": "USD" },
+  //         { "field": "vip_level", "operator": ">=", "value": 3 }
+  //       ]
+  //     },
+  //     { "field": "bet_count", "operator": ">=", "value": 100 }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 4 — Currency filter with between**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "balance", "operator": "between", "value": [100, 5000], "currency": "EUR" },
+  //     { "field": "registration_country", "operator": "in", "value": ["DE", "FR", "IT", "ES"] }
+  //   ]
+  // }
+  // ```
+  //
+  // **Example 5 — Boolean + String conditions**
+  //
+  // ```json
+  // {
+  //   "logic": "AND",
+  //   "conditions": [
+  //     { "field": "locked", "operator": "=", "value": false },
+  //     { "field": "login_banned", "operator": "=", "value": false },
+  //     { "field": "device_type", "operator": "=", "value": "mobile" }
+  //   ]
+  // }
+  // ```
+  //
+  // Use `GET /v1/backoffice/crm/segment/schema` to retrieve the full field schema dynamically.
   google.protobuf.Struct rules = 5;
+  // Whether to enable this segment. Enabled segments will trigger async user calculation.
   bool enabled = 6;
   api.common.OperatorContext operator_context = 7;
 }
 
+// CreateSegmentResponse - returns the created segment
 message CreateSegmentResponse {
+  // The created segment. user_count will be 0 initially; async calculation updates it.
   Segment segment = 1;
 }
 
-// UpdateSegment
+// UpdateSegment - partially updates an existing segment. Only provided fields are updated.
+// If rules are changed and the segment is enabled, an async recalculation will be triggered.
 message UpdateSegmentRequest {
+  // Segment ID to update
   int64 id = 1;
+  // New display name (optional, omit to keep current)
   optional string name = 2;
+  // New description (optional, omit to keep current)
   optional string description = 3;
+  // New rules (optional, omit to keep current). Same format as CreateSegmentRequest.rules.
   optional google.protobuf.Struct rules = 4;
+  // Enable or disable (optional, omit to keep current)
   optional bool enabled = 5;
   api.common.OperatorContext operator_context = 6;
 }
 
 message UpdateSegmentResponse {
+  // The updated segment
   Segment segment = 1;
 }
 
-// GetSegment
+// GetSegment - retrieves a single segment by ID, including its current user count.
 message GetSegmentRequest {
+  // Segment ID
   int64 id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message GetSegmentResponse {
+  // The segment with computed user_count
   Segment segment = 1;
 }
 
-// ListSegments
+// ListSegments - retrieves a paginated list of segments with per-type counts.
 message ListSegmentsRequest {
   api.common.OperatorContext operator_context = 1;
+  // Filter by segment type (optional, omit to list all types)
   optional SegmentType type = 2;
+  // Filter by enabled status (optional, omit to list both enabled and disabled)
   optional bool enabled = 3;
+  // Page number, starting from 1
   int32 page = 4;
+  // Number of items per page
   int32 page_size = 5;
+  // If true, include segments inherited from parent levels (system/retailer/company)
   bool include_inherited = 6;
 }
 
 message ListSegmentsResponse {
+  // List of segments for the current page
   repeated Segment segments = 1;
+  // Current page number
   int32 page = 2;
+  // Page size
   int32 page_size = 3;
+  // Total number of segments matching the filters
   int64 total = 4;
+  // Count of segments per type (ignoring the type filter), e.g., {"user_state": 15, "behavioral": 20, "imported": 5, "rfm": 3}
   map<string, int64> type_counts = 5;
 }
 
-// DeleteSegment
+// DeleteSegment - deletes a segment and all its related data (members, field mappings, overrides).
 message DeleteSegmentRequest {
+  // Segment ID to delete
   int64 id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message DeleteSegmentResponse {}
 
-// CalculateSegment - triggers batch calculation
+// CalculateSegment - manually triggers a batch calculation for a segment.
+// Evaluates the segment rules against all users and updates membership.
 message CalculateSegmentRequest {
+  // Segment ID to calculate
   int64 id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message CalculateSegmentResponse {
+  // Total number of users whose data matches the segment rules after evaluation
   int64 users_matched = 1;
+  // Number of users newly added as segment members in this calculation run
   int64 users_added = 2;
+  // Number of users who no longer match and were marked as left the segment
   int64 users_removed = 3;
 }
 
-// GetSegmentUsers
+// GetSegmentUsers - retrieves a paginated list of users in a segment.
 message GetSegmentUsersRequest {
+  // Segment ID
   int64 segment_id = 1;
   api.common.OperatorContext operator_context = 2;
+  // Page number, starting from 1
   int32 page = 3;
+  // Number of items per page
   int32 page_size = 4;
+  // If true, only return users who are currently members (exclude those who have left)
   bool only_current_members = 5;
 }
 
 message GetSegmentUsersResponse {
+  // List of users with their membership details (entered_at, left_at, is_member)
   repeated SegmentUser users = 1;
+  // Current page number
   int32 page = 2;
+  // Page size
   int32 page_size = 3;
+  // Total number of users matching the filter
   int64 total = 4;
 }
 
-// GetUserSegments
+// GetUserSegments - retrieves all segments a specific user belongs to.
 message GetUserSegmentsRequest {
+  // User ID to look up
   int64 user_id = 1;
   api.common.OperatorContext operator_context = 2;
+  // If true, only return segments where the user is currently a member
   bool only_current_memberships = 3;
 }
 
 message GetUserSegmentsResponse {
+  // List of segments the user belongs to (or belonged to, if only_current_memberships is false)
   repeated Segment segments = 1;
 }
 
-// SetSegmentOverride - allows lower levels to disable inherited segments
+// SetSegmentOverride - allows lower levels to disable inherited segments.
+// Only works for segments owned by parent levels (cannot override own segments).
 message SetSegmentOverrideRequest {
+  // Segment ID to override
   int64 segment_id = 1;
+  // Set to true to disable this inherited segment for the current operator
   bool disabled = 2;
   api.common.OperatorContext operator_context = 3;
 }
 
 message SetSegmentOverrideResponse {}
 
-// GetSegmentOverride
+// GetSegmentOverride - retrieves the override status for a segment at the current operator level.
 message GetSegmentOverrideRequest {
+  // Segment ID to check
   int64 segment_id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message GetSegmentOverrideResponse {
+  // Whether the inherited segment is disabled at this operator level
   bool disabled = 1;
+  // Whether an override record exists for this segment. false means no override has been set.
   bool has_override = 2;
 }
 
-// Field schema for frontend query builder
+// Field schema for the frontend query builder - describes a single queryable field
 message FieldSchema {
+  // Field name used in rules (e.g., "vip_level", "deposit_amount")
   string field = 1;
+  // Human-readable label (e.g., "VIP Level", "Total Deposit Amount")
   string label = 2;
+  // Data type of the field
   FieldType type = 3;
+  // Supported operators for this field (e.g., ["=", "!=", ">", ">=", "<", "<=", "between"])
   repeated string operators = 4;
+  // Value constraints (type, min, max, format, enum options, relative date options)
   google.protobuf.Struct value_schema = 5;
-  bool supports_currency = 6;  // Whether this field supports currency filtering
+  // Whether this field supports currency filtering (e.g., deposit_amount can be filtered by "USD", "EUR")
+  bool supports_currency = 6;
 }
 
-// GetSegmentFieldSchema
+// GetSegmentFieldSchema - returns the field schema for the frontend query builder.
+// Use this to dynamically build the rules editor UI.
 message GetSegmentFieldSchemaRequest {
+  // Filter schema by segment type (currently returns all fields regardless of type)
   SegmentType type = 1;
 }
 
 message GetSegmentFieldSchemaResponse {
+  // List of all available fields with their types, operators, and value constraints
   repeated FieldSchema fields = 1;
 }
 
-// RepairSegment - repairs a segment by ensuring field mappings exist and optionally triggering calculation
+// RepairSegment - repairs a segment by re-extracting field mappings from the rules JSON.
+// Useful for segments that were directly inserted into the database without going through the API.
 message RepairSegmentRequest {
+  // Segment ID to repair
   int64 id = 1;
+  // If true, also trigger a batch calculation after repairing field mappings
   bool trigger_calculation = 2;
   api.common.OperatorContext operator_context = 3;
 }
 
 message RepairSegmentResponse {
+  // The repaired segment ID
   int64 segment_id = 1;
+  // List of field names extracted from the segment rules (e.g., ["deposit_amount", "vip_level"])
   repeated string fields = 2;
+  // Whether calculation was performed after repair (true only if trigger_calculation was set)
   bool calculated = 3;
+  // Total users matching the segment rules (only populated if calculated is true)
   int64 users_matched = 4;
+  // Users newly added as segment members (only populated if calculated is true)
   int64 users_added = 5;
+  // Users removed from the segment (only populated if calculated is true)
   int64 users_removed = 6;
 }
 
-// RepairAllSegments - repairs all segments that are missing field mappings
+// RepairAllSegments - finds and repairs all segments that are missing field mappings in the database.
 message RepairAllSegmentsRequest {
+  // If true, also trigger batch calculation for each repaired segment
   bool trigger_calculation = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
 message RepairAllSegmentsResponse {
+  // Number of segments successfully repaired
   int64 repaired_count = 1;
+  // Detailed repair result for each segment
   repeated RepairSegmentResponse segments = 2;
 }
 
-// GetSegmentsWithMissingFields - returns segments that have no entries in crm_segment_fields
+// GetSegmentsWithMissingFields - diagnostic endpoint that returns segments missing field mappings.
+// These segments were likely directly inserted into the database without going through the API.
 message GetSegmentsWithMissingFieldsRequest {
   api.common.OperatorContext operator_context = 1;
 }
 
 message GetSegmentsWithMissingFieldsResponse {
+  // Segments that have no entries in the crm_segment_fields table
   repeated Segment segments = 1;
 }

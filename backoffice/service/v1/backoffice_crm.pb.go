@@ -25,18 +25,172 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CreateSegment
+// Create a new segment.
+// See api.crm.service.v1.CreateSegmentRequest.rules for the full rules JSON format documentation.
 type CreateSegmentRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	SegmentKey            string                  `protobuf:"bytes,2,opt,name=segment_key,json=segmentKey,proto3" json:"segment_key,omitempty"`
-	Name                  string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description           string                  `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Type                  v1.SegmentType          `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
-	Rules                 *structpb.Struct        `protobuf:"bytes,6,opt,name=rules,proto3" json:"rules,omitempty"`
-	Enabled               bool                    `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Unique key for this segment within the same system operator (e.g., "high_vip_users"). Cannot be changed after creation.
+	SegmentKey string `protobuf:"bytes,2,opt,name=segment_key,json=segmentKey,proto3" json:"segment_key,omitempty"`
+	// Display name for the segment
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional description
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Segment type category
+	Type v1.SegmentType `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
+	// Segment rules — a JSON tree of logic groups and conditions.
+	//
+	// ## Structure
+	//
+	// **Logic node** (group) — combines child nodes with AND/OR:
+	//
+	// `{ "logic": "AND"|"OR", "conditions": [ ...child nodes ] }`
+	//
+	// **Condition node** (leaf) — a single field comparison:
+	//
+	// `{ "field": "<name>", "operator": "<op>", "value": <val>, "currency": "<optional>" }`
+	//
+	// ## Available Fields
+	//
+	// **Boolean** (operator: `=`, value: `true`/`false`):
+	// - `login_banned` — Login Banned
+	// - `withdraw_banned` — Withdraw Banned
+	// - `game_banned` — Game Banned
+	// - `locked` — Locked
+	//
+	// **Date** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+	// - `registration_date` — Registration Date
+	// - `ftd_date` — First Time Deposit Date
+	// - `last_deposit_time` — Last Deposit Time
+	// - Format: `"YYYY-MM-DD"` or relative: `"now"`, `"now-1d"`, `"now-7d"`, `"now-30d"`, `"now-90d"`
+	// - Relative syntax: `"now[+-]<N>[d|h|m]"`, e.g. `"now-14d"`, `"now+2h"`
+	// - `between` value: `[min, max]`, e.g. `["2024-01-01", "2024-12-31"]`
+	//
+	// **Numeric — amounts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`; supports optional `"currency"`):
+	// - `deposit_amount` — Total Deposit Amount
+	// - `withdrawal_amount` — Total Withdrawal Amount
+	// - `bet_amount` — Total Bet Amount
+	// - `win_amount` — Total Win Amount
+	// - `ggr` — GGR
+	// - `ngr` — NGR
+	// - `balance` — Current Balance
+	// - Set `"currency"` to filter by currency (e.g. `"USD"`, `"EUR"`); omit for all currencies aggregated.
+	//
+	// **Numeric — counts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+	// - `deposit_count` — Deposit Count
+	// - `withdrawal_count` — Withdrawal Count
+	// - `bet_count` — Bet Count
+	// - `win_count` — Win Count
+	//
+	// **Numeric — other** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+	// - `kyc_level` — KYC Level
+	// - `vip_level` — VIP Level
+	// - `days_since_registration` — Days Since Registration
+	//
+	// **String** (operators: `=` `!=` `in` `not_in`):
+	// - `registration_country` — Country code, e.g. `"US"`, `"DE"`
+	// - `device_type` — Enum: `"desktop"`, `"mobile"`, `"tablet"`
+	// - `in`/`not_in` value is an array, e.g. `["US", "DE", "FR"]`
+	//
+	// ## Operators
+	//
+	// | Operator | Description | Value format |
+	// |----------|-------------|--------------|
+	// | `=` | Equal | Single value |
+	// | `!=` | Not equal | Single value |
+	// | `>` | Greater than | Single value |
+	// | `>=` | Greater than or equal | Single value |
+	// | `<` | Less than | Single value |
+	// | `<=` | Less than or equal | Single value |
+	// | `between` | Range (inclusive) | Array `[min, max]` |
+	// | `in` | Value in list | Array `["a","b"]` |
+	// | `not_in` | Value not in list | Array `["a","b"]` |
+	//
+	// ## Examples
+	//
+	// **Example 1 — Simple: VIP level >= 3**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "vip_level", "operator": ">=", "value": 3 }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 2 — Multi-condition: registered in last 30 days AND deposited**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "registration_date", "operator": ">=", "value": "now-30d" },
+	//	    { "field": "deposit_count", "operator": ">=", "value": 1 }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 3 — Nested: (deposit >= 1000 USD AND VIP >= 3) OR bet_count >= 100**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "OR",
+	//	  "conditions": [
+	//	    {
+	//	      "logic": "AND",
+	//	      "conditions": [
+	//	        { "field": "deposit_amount", "operator": ">=", "value": 1000, "currency": "USD" },
+	//	        { "field": "vip_level", "operator": ">=", "value": 3 }
+	//	      ]
+	//	    },
+	//	    { "field": "bet_count", "operator": ">=", "value": 100 }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 4 — Currency filter with between**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "balance", "operator": "between", "value": [100, 5000], "currency": "EUR" },
+	//	    { "field": "registration_country", "operator": "in", "value": ["DE", "FR", "IT", "ES"] }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 5 — Boolean + String conditions**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "locked", "operator": "=", "value": false },
+	//	    { "field": "login_banned", "operator": "=", "value": false },
+	//	    { "field": "device_type", "operator": "=", "value": "mobile" }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// Use `GET /v1/backoffice/crm/segment/schema` to retrieve the full field schema dynamically.
+	Rules *structpb.Struct `protobuf:"bytes,6,opt,name=rules,proto3" json:"rules,omitempty"`
+	// Whether to enable this segment. Enabled segments trigger async user calculation.
+	Enabled       bool `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateSegmentRequest) Reset() {
@@ -118,17 +272,23 @@ func (x *CreateSegmentRequest) GetEnabled() bool {
 	return false
 }
 
-// UpdateSegment
+// Partially update an existing segment. Only provided fields are updated.
 type UpdateSegmentRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Description           *string                 `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Rules                 *structpb.Struct        `protobuf:"bytes,5,opt,name=rules,proto3,oneof" json:"rules,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID to update
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// New display name (optional)
+	Name *string `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// New description (optional)
+	Description *string `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// New rules (optional). Same format as CreateSegmentRequest.rules.
+	Rules *structpb.Struct `protobuf:"bytes,5,opt,name=rules,proto3,oneof" json:"rules,omitempty"`
+	// Enable or disable (optional)
+	Enabled       *bool `protobuf:"varint,6,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateSegmentRequest) Reset() {
@@ -203,13 +363,15 @@ func (x *UpdateSegmentRequest) GetEnabled() bool {
 	return false
 }
 
-// GetSegment
+// Get a single segment by ID.
 type GetSegmentRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetSegmentRequest) Reset() {
@@ -256,17 +418,23 @@ func (x *GetSegmentRequest) GetId() int64 {
 	return 0
 }
 
-// ListSegments
+// List segments with pagination, optional type/enabled filters, and per-type counts.
 type ListSegmentsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Type                  *v1.SegmentType         `protobuf:"varint,2,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType,oneof" json:"type,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page                  int32                   `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	IncludeInherited      bool                    `protobuf:"varint,6,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by segment type (optional, omit to list all types)
+	Type *v1.SegmentType `protobuf:"varint,2,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType,oneof" json:"type,omitempty"`
+	// Filter by enabled status (optional)
+	Enabled *bool `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// Page number, starting from 1
+	Page int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// If true, include segments inherited from parent levels (system/retailer/company)
+	IncludeInherited bool `protobuf:"varint,6,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListSegmentsRequest) Reset() {
@@ -341,13 +509,15 @@ func (x *ListSegmentsRequest) GetIncludeInherited() bool {
 	return false
 }
 
-// DeleteSegment
+// Delete a segment and all related data.
 type DeleteSegmentRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID to delete
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteSegmentRequest) Reset() {
@@ -394,13 +564,15 @@ func (x *DeleteSegmentRequest) GetId() int64 {
 	return 0
 }
 
-// CalculateSegment
+// Manually trigger batch calculation for a segment.
 type CalculateSegmentRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID to calculate
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CalculateSegmentRequest) Reset() {
@@ -447,16 +619,21 @@ func (x *CalculateSegmentRequest) GetId() int64 {
 	return 0
 }
 
-// GetSegmentUsers
+// Get paginated list of users in a segment.
 type GetSegmentUsersRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	SegmentId             int64                   `protobuf:"varint,2,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
-	Page                  int32                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OnlyCurrentMembers    bool                    `protobuf:"varint,5,opt,name=only_current_members,json=onlyCurrentMembers,proto3" json:"only_current_members,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID
+	SegmentId int64 `protobuf:"varint,2,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	// Page number, starting from 1
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// If true, only return users who are currently members (exclude those who have left)
+	OnlyCurrentMembers bool `protobuf:"varint,5,opt,name=only_current_members,json=onlyCurrentMembers,proto3" json:"only_current_members,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetSegmentUsersRequest) Reset() {
@@ -524,12 +701,15 @@ func (x *GetSegmentUsersRequest) GetOnlyCurrentMembers() bool {
 	return false
 }
 
-// GetUserSegments
+// Get all segments a specific user belongs to.
 type GetUserSegmentsRequest struct {
-	state                  protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext  *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	UserId                 int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OnlyCurrentMemberships bool                    `protobuf:"varint,3,opt,name=only_current_memberships,json=onlyCurrentMemberships,proto3" json:"only_current_memberships,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// User ID to look up
+	UserId int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// If true, only return segments where the user is currently a member
+	OnlyCurrentMemberships bool `protobuf:"varint,3,opt,name=only_current_memberships,json=onlyCurrentMemberships,proto3" json:"only_current_memberships,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -585,14 +765,17 @@ func (x *GetUserSegmentsRequest) GetOnlyCurrentMemberships() bool {
 	return false
 }
 
-// SetSegmentOverride
+// Set an override to disable an inherited segment at the current operator level.
 type SetSegmentOverrideRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	SegmentId             int64                   `protobuf:"varint,2,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
-	Disabled              bool                    `protobuf:"varint,3,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID to override
+	SegmentId int64 `protobuf:"varint,2,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	// Set to true to disable this inherited segment for the current operator
+	Disabled      bool `protobuf:"varint,3,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetSegmentOverrideRequest) Reset() {
@@ -646,13 +829,15 @@ func (x *SetSegmentOverrideRequest) GetDisabled() bool {
 	return false
 }
 
-// GetSegmentOverride
+// Get the override status for a segment at the current operator level.
 type GetSegmentOverrideRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	SegmentId             int64                   `protobuf:"varint,2,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID to check
+	SegmentId     int64 `protobuf:"varint,2,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetSegmentOverrideRequest) Reset() {
@@ -699,10 +884,12 @@ func (x *GetSegmentOverrideRequest) GetSegmentId() int64 {
 	return 0
 }
 
-// GetSegmentFieldSchema
+// Get the field schema for the rules query builder.
+// Returns all available fields, their types, supported operators, and value constraints.
 type GetSegmentFieldSchemaRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          v1.SegmentType         `protobuf:"varint,1,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter schema by segment type (currently returns all fields regardless of type)
+	Type          v1.SegmentType `protobuf:"varint,1,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -744,14 +931,17 @@ func (x *GetSegmentFieldSchemaRequest) GetType() v1.SegmentType {
 	return v1.SegmentType(0)
 }
 
-// RepairSegment
+// Repair a segment by ensuring its field mappings exist in the database.
 type RepairSegmentRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	TriggerCalculation    bool                    `protobuf:"varint,3,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Segment ID to repair
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// If true, also trigger a batch calculation after repairing field mappings
+	TriggerCalculation bool `protobuf:"varint,3,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *RepairSegmentRequest) Reset() {
@@ -805,13 +995,15 @@ func (x *RepairSegmentRequest) GetTriggerCalculation() bool {
 	return false
 }
 
-// RepairAllSegments
+// Repair all segments that are missing field mappings.
 type RepairAllSegmentsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	TriggerCalculation    bool                    `protobuf:"varint,2,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// If true, also trigger batch calculation for each repaired segment
+	TriggerCalculation bool `protobuf:"varint,2,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *RepairAllSegmentsRequest) Reset() {
@@ -858,9 +1050,10 @@ func (x *RepairAllSegmentsRequest) GetTriggerCalculation() bool {
 	return false
 }
 
-// GetSegmentsWithMissingFields
+// Diagnostic - find segments that have no field mappings.
 type GetSegmentsWithMissingFieldsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache

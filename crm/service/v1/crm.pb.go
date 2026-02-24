@@ -24,15 +24,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Segment types
+// Segment types - defines the category of a segment
 type SegmentType int32
 
 const (
+	// Default unspecified value
 	SegmentType_SEGMENT_TYPE_UNSPECIFIED SegmentType = 0
-	SegmentType_SEGMENT_TYPE_USER_STATE  SegmentType = 1
-	SegmentType_SEGMENT_TYPE_BEHAVIORAL  SegmentType = 2
-	SegmentType_SEGMENT_TYPE_IMPORTED    SegmentType = 3
-	SegmentType_SEGMENT_TYPE_RFM         SegmentType = 4
+	// User state segment - based on user profile attributes (e.g., KYC level, VIP level, banned status)
+	SegmentType_SEGMENT_TYPE_USER_STATE SegmentType = 1
+	// Behavioral segment - based on user actions (e.g., deposit count, bet amount)
+	SegmentType_SEGMENT_TYPE_BEHAVIORAL SegmentType = 2
+	// Imported segment - manually imported user lists
+	SegmentType_SEGMENT_TYPE_IMPORTED SegmentType = 3
+	// RFM segment - Recency, Frequency, Monetary analysis based
+	SegmentType_SEGMENT_TYPE_RFM SegmentType = 4
 )
 
 // Enum value maps for SegmentType.
@@ -80,15 +85,20 @@ func (SegmentType) EnumDescriptor() ([]byte, []int) {
 	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{0}
 }
 
-// Segment owner level in hierarchy
+// Segment owner level in the operator hierarchy.
+// Higher levels (system) can create segments inherited by lower levels (operator).
 type OwnerLevel int32
 
 const (
 	OwnerLevel_OWNER_LEVEL_UNSPECIFIED OwnerLevel = 0
-	OwnerLevel_OWNER_LEVEL_SYSTEM      OwnerLevel = 1
-	OwnerLevel_OWNER_LEVEL_RETAILER    OwnerLevel = 2
-	OwnerLevel_OWNER_LEVEL_COMPANY     OwnerLevel = 3
-	OwnerLevel_OWNER_LEVEL_OPERATOR    OwnerLevel = 4
+	// System level - segments visible to all operators under this system
+	OwnerLevel_OWNER_LEVEL_SYSTEM OwnerLevel = 1
+	// Retailer level - segments visible to all companies/operators under this retailer
+	OwnerLevel_OWNER_LEVEL_RETAILER OwnerLevel = 2
+	// Company level - segments visible to all operators under this company
+	OwnerLevel_OWNER_LEVEL_COMPANY OwnerLevel = 3
+	// Operator level - segments visible only to this operator
+	OwnerLevel_OWNER_LEVEL_OPERATOR OwnerLevel = 4
 )
 
 // Enum value maps for OwnerLevel.
@@ -136,15 +146,19 @@ func (OwnerLevel) EnumDescriptor() ([]byte, []int) {
 	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{1}
 }
 
-// Field types for schema
+// Field types for the segment rule query builder schema
 type FieldType int32
 
 const (
 	FieldType_FIELD_TYPE_UNSPECIFIED FieldType = 0
-	FieldType_FIELD_TYPE_BOOLEAN     FieldType = 1
-	FieldType_FIELD_TYPE_NUMERIC     FieldType = 2
-	FieldType_FIELD_TYPE_DATE        FieldType = 3
-	FieldType_FIELD_TYPE_STRING      FieldType = 4
+	// Boolean field - supports operator: =. Values: true/false
+	FieldType_FIELD_TYPE_BOOLEAN FieldType = 1
+	// Numeric field - supports operators: =, !=, >, >=, <, <=, between
+	FieldType_FIELD_TYPE_NUMERIC FieldType = 2
+	// Date field - supports operators: =, !=, >, >=, <, <=, between. Format: "YYYY-MM-DD" or relative ("now", "now-7d")
+	FieldType_FIELD_TYPE_DATE FieldType = 3
+	// String field - supports operators: =, !=, in, not_in
+	FieldType_FIELD_TYPE_STRING FieldType = 4
 )
 
 // Enum value maps for FieldType.
@@ -192,27 +206,35 @@ func (FieldType) EnumDescriptor() ([]byte, []int) {
 	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{2}
 }
 
-// Segment definition
+// Segment definition - represents a user segment with rules for automatic membership calculation
 type Segment struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	Id          int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SegmentKey  string                 `protobuf:"bytes,2,opt,name=segment_key,json=segmentKey,proto3" json:"segment_key,omitempty"`
-	Name        string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Type        SegmentType            `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
-	// Ownership hierarchy
-	OwnerOperatorId         int64      `protobuf:"varint,6,opt,name=owner_operator_id,json=ownerOperatorId,proto3" json:"owner_operator_id,omitempty"`
-	OwnerCompanyOperatorId  int64      `protobuf:"varint,7,opt,name=owner_company_operator_id,json=ownerCompanyOperatorId,proto3" json:"owner_company_operator_id,omitempty"`
-	OwnerRetailerOperatorId int64      `protobuf:"varint,8,opt,name=owner_retailer_operator_id,json=ownerRetailerOperatorId,proto3" json:"owner_retailer_operator_id,omitempty"`
-	OwnerSystemOperatorId   int64      `protobuf:"varint,9,opt,name=owner_system_operator_id,json=ownerSystemOperatorId,proto3" json:"owner_system_operator_id,omitempty"`
-	OwnerLevel              OwnerLevel `protobuf:"varint,10,opt,name=owner_level,json=ownerLevel,proto3,enum=api.crm.service.v1.OwnerLevel" json:"owner_level,omitempty"`
-	// Rules as JSON structure
-	Rules            *structpb.Struct       `protobuf:"bytes,11,opt,name=rules,proto3" json:"rules,omitempty"`
-	Enabled          bool                   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique identifier
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Unique key within the same system operator (e.g., "high_vip_users")
+	SegmentKey string `protobuf:"bytes,2,opt,name=segment_key,json=segmentKey,proto3" json:"segment_key,omitempty"`
+	// Display name
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional description
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Segment type category
+	Type SegmentType `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
+	// Ownership hierarchy - determines who created and can modify this segment
+	OwnerOperatorId         int64 `protobuf:"varint,6,opt,name=owner_operator_id,json=ownerOperatorId,proto3" json:"owner_operator_id,omitempty"`
+	OwnerCompanyOperatorId  int64 `protobuf:"varint,7,opt,name=owner_company_operator_id,json=ownerCompanyOperatorId,proto3" json:"owner_company_operator_id,omitempty"`
+	OwnerRetailerOperatorId int64 `protobuf:"varint,8,opt,name=owner_retailer_operator_id,json=ownerRetailerOperatorId,proto3" json:"owner_retailer_operator_id,omitempty"`
+	OwnerSystemOperatorId   int64 `protobuf:"varint,9,opt,name=owner_system_operator_id,json=ownerSystemOperatorId,proto3" json:"owner_system_operator_id,omitempty"`
+	// The level at which this segment was created
+	OwnerLevel OwnerLevel `protobuf:"varint,10,opt,name=owner_level,json=ownerLevel,proto3,enum=api.crm.service.v1.OwnerLevel" json:"owner_level,omitempty"`
+	// Segment rules as a JSON tree structure. See CreateSegmentRequest.rules for detailed format documentation.
+	Rules *structpb.Struct `protobuf:"bytes,11,opt,name=rules,proto3" json:"rules,omitempty"`
+	// Whether this segment is active. Only enabled segments are calculated.
+	Enabled   bool                   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Timestamp of the last batch calculation. Null if never calculated.
 	LastCalculatedAt *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=last_calculated_at,json=lastCalculatedAt,proto3" json:"last_calculated_at,omitempty"`
-	// Computed fields
+	// Number of users currently in this segment (computed field)
 	UserCount     int64 `protobuf:"varint,16,opt,name=user_count,json=userCount,proto3" json:"user_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -360,7 +382,7 @@ func (x *Segment) GetUserCount() int64 {
 	return 0
 }
 
-// Segment user membership
+// Segment user membership - tracks when a user enters/leaves a segment
 type SegmentUser struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	SegmentId          int64                  `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
@@ -369,11 +391,14 @@ type SegmentUser struct {
 	CompanyOperatorId  int64                  `protobuf:"varint,4,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
 	RetailerOperatorId int64                  `protobuf:"varint,5,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
 	SystemOperatorId   int64                  `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	EnteredAt          *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=entered_at,json=enteredAt,proto3" json:"entered_at,omitempty"`
-	LeftAt             *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=left_at,json=leftAt,proto3" json:"left_at,omitempty"`
-	IsMember           bool                   `protobuf:"varint,9,opt,name=is_member,json=isMember,proto3" json:"is_member,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// When the user entered this segment
+	EnteredAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=entered_at,json=enteredAt,proto3" json:"entered_at,omitempty"`
+	// When the user left this segment (null if still a member)
+	LeftAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=left_at,json=leftAt,proto3" json:"left_at,omitempty"`
+	// Whether the user is currently a member
+	IsMember      bool `protobuf:"varint,9,opt,name=is_member,json=isMember,proto3" json:"is_member,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SegmentUser) Reset() {
@@ -469,14 +494,167 @@ func (x *SegmentUser) GetIsMember() bool {
 	return false
 }
 
-// CreateSegment
+// CreateSegment - creates a new segment with rules for automatic user membership calculation.
+// If enabled is true, an async calculation will be triggered immediately after creation.
 type CreateSegmentRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	SegmentKey      string                  `protobuf:"bytes,1,opt,name=segment_key,json=segmentKey,proto3" json:"segment_key,omitempty"`
-	Name            string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description     string                  `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Type            SegmentType             `protobuf:"varint,4,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
-	Rules           *structpb.Struct        `protobuf:"bytes,5,opt,name=rules,proto3" json:"rules,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique key for this segment within the same system operator (e.g., "high_vip_users"). Cannot be changed after creation.
+	SegmentKey string `protobuf:"bytes,1,opt,name=segment_key,json=segmentKey,proto3" json:"segment_key,omitempty"`
+	// Display name for the segment
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional description
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Segment type category
+	Type SegmentType `protobuf:"varint,4,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
+	// Segment rules — a JSON tree of logic groups and conditions.
+	//
+	// ## Structure
+	//
+	// **Logic node** (group) — combines child nodes with AND/OR:
+	//
+	// `{ "logic": "AND"|"OR", "conditions": [ ...child nodes ] }`
+	//
+	// **Condition node** (leaf) — a single field comparison:
+	//
+	// `{ "field": "<name>", "operator": "<op>", "value": <val>, "currency": "<optional>" }`
+	//
+	// ## Available Fields
+	//
+	// **Boolean** (operator: `=`, value: `true`/`false`):
+	// - `login_banned` — Login Banned
+	// - `withdraw_banned` — Withdraw Banned
+	// - `game_banned` — Game Banned
+	// - `locked` — Locked
+	//
+	// **Date** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+	// - `registration_date` — Registration Date
+	// - `ftd_date` — First Time Deposit Date
+	// - `last_deposit_time` — Last Deposit Time
+	// - Format: `"YYYY-MM-DD"` or relative: `"now"`, `"now-1d"`, `"now-7d"`, `"now-30d"`, `"now-90d"`
+	// - Relative syntax: `"now[+-]<N>[d|h|m]"`, e.g. `"now-14d"`, `"now+2h"`
+	// - `between` value: `[min, max]`, e.g. `["2024-01-01", "2024-12-31"]`
+	//
+	// **Numeric — amounts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`; supports optional `"currency"`):
+	// - `deposit_amount` — Total Deposit Amount
+	// - `withdrawal_amount` — Total Withdrawal Amount
+	// - `bet_amount` — Total Bet Amount
+	// - `win_amount` — Total Win Amount
+	// - `ggr` — GGR
+	// - `ngr` — NGR
+	// - `balance` — Current Balance
+	// - Set `"currency"` to filter by currency (e.g. `"USD"`, `"EUR"`); omit for all currencies aggregated.
+	//
+	// **Numeric — counts** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+	// - `deposit_count` — Deposit Count
+	// - `withdrawal_count` — Withdrawal Count
+	// - `bet_count` — Bet Count
+	// - `win_count` — Win Count
+	//
+	// **Numeric — other** (operators: `=` `!=` `>` `>=` `<` `<=` `between`):
+	// - `kyc_level` — KYC Level
+	// - `vip_level` — VIP Level
+	// - `days_since_registration` — Days Since Registration
+	//
+	// **String** (operators: `=` `!=` `in` `not_in`):
+	// - `registration_country` — Country code, e.g. `"US"`, `"DE"`
+	// - `device_type` — Enum: `"desktop"`, `"mobile"`, `"tablet"`
+	// - `in`/`not_in` value is an array, e.g. `["US", "DE", "FR"]`
+	//
+	// ## Operators
+	//
+	// | Operator | Description | Value format |
+	// |----------|-------------|--------------|
+	// | `=` | Equal | Single value |
+	// | `!=` | Not equal | Single value |
+	// | `>` | Greater than | Single value |
+	// | `>=` | Greater than or equal | Single value |
+	// | `<` | Less than | Single value |
+	// | `<=` | Less than or equal | Single value |
+	// | `between` | Range (inclusive) | Array `[min, max]` |
+	// | `in` | Value in list | Array `["a","b"]` |
+	// | `not_in` | Value not in list | Array `["a","b"]` |
+	//
+	// ## Examples
+	//
+	// **Example 1 — Simple: VIP level >= 3**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "vip_level", "operator": ">=", "value": 3 }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 2 — Multi-condition: registered in last 30 days AND deposited**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "registration_date", "operator": ">=", "value": "now-30d" },
+	//	    { "field": "deposit_count", "operator": ">=", "value": 1 }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 3 — Nested: (deposit >= 1000 USD AND VIP >= 3) OR bet_count >= 100**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "OR",
+	//	  "conditions": [
+	//	    {
+	//	      "logic": "AND",
+	//	      "conditions": [
+	//	        { "field": "deposit_amount", "operator": ">=", "value": 1000, "currency": "USD" },
+	//	        { "field": "vip_level", "operator": ">=", "value": 3 }
+	//	      ]
+	//	    },
+	//	    { "field": "bet_count", "operator": ">=", "value": 100 }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 4 — Currency filter with between**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "balance", "operator": "between", "value": [100, 5000], "currency": "EUR" },
+	//	    { "field": "registration_country", "operator": "in", "value": ["DE", "FR", "IT", "ES"] }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// **Example 5 — Boolean + String conditions**
+	//
+	// ```json
+	//
+	//	{
+	//	  "logic": "AND",
+	//	  "conditions": [
+	//	    { "field": "locked", "operator": "=", "value": false },
+	//	    { "field": "login_banned", "operator": "=", "value": false },
+	//	    { "field": "device_type", "operator": "=", "value": "mobile" }
+	//	  ]
+	//	}
+	//
+	// ```
+	//
+	// Use `GET /v1/backoffice/crm/segment/schema` to retrieve the full field schema dynamically.
+	Rules *structpb.Struct `protobuf:"bytes,5,opt,name=rules,proto3" json:"rules,omitempty"`
+	// Whether to enable this segment. Enabled segments will trigger async user calculation.
 	Enabled         bool                    `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -562,9 +740,11 @@ func (x *CreateSegmentRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
+// CreateSegmentResponse - returns the created segment
 type CreateSegmentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Segment       *Segment               `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The created segment. user_count will be 0 initially; async calculation updates it.
+	Segment       *Segment `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -606,13 +786,19 @@ func (x *CreateSegmentResponse) GetSegment() *Segment {
 	return nil
 }
 
-// UpdateSegment
+// UpdateSegment - partially updates an existing segment. Only provided fields are updated.
+// If rules are changed and the segment is enabled, an async recalculation will be triggered.
 type UpdateSegmentRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	Id              int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name            *string                 `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Description     *string                 `protobuf:"bytes,3,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Rules           *structpb.Struct        `protobuf:"bytes,4,opt,name=rules,proto3,oneof" json:"rules,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID to update
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// New display name (optional, omit to keep current)
+	Name *string `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// New description (optional, omit to keep current)
+	Description *string `protobuf:"bytes,3,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// New rules (optional, omit to keep current). Same format as CreateSegmentRequest.rules.
+	Rules *structpb.Struct `protobuf:"bytes,4,opt,name=rules,proto3,oneof" json:"rules,omitempty"`
+	// Enable or disable (optional, omit to keep current)
 	Enabled         *bool                   `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -692,8 +878,9 @@ func (x *UpdateSegmentRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type UpdateSegmentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Segment       *Segment               `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The updated segment
+	Segment       *Segment `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -735,9 +922,10 @@ func (x *UpdateSegmentResponse) GetSegment() *Segment {
 	return nil
 }
 
-// GetSegment
+// GetSegment - retrieves a single segment by ID, including its current user count.
 type GetSegmentRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID
 	Id              int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -789,8 +977,9 @@ func (x *GetSegmentRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type GetSegmentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Segment       *Segment               `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The segment with computed user_count
+	Segment       *Segment `protobuf:"bytes,1,opt,name=segment,proto3" json:"segment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -832,15 +1021,20 @@ func (x *GetSegmentResponse) GetSegment() *Segment {
 	return nil
 }
 
-// ListSegments
+// ListSegments - retrieves a paginated list of segments with per-type counts.
 type ListSegmentsRequest struct {
-	state            protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext  *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Type             *SegmentType            `protobuf:"varint,2,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType,oneof" json:"type,omitempty"`
-	Enabled          *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page             int32                   `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize         int32                   `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	IncludeInherited bool                    `protobuf:"varint,6,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Filter by segment type (optional, omit to list all types)
+	Type *SegmentType `protobuf:"varint,2,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType,oneof" json:"type,omitempty"`
+	// Filter by enabled status (optional, omit to list both enabled and disabled)
+	Enabled *bool `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// Page number, starting from 1
+	Page int32 `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// If true, include segments inherited from parent levels (system/retailer/company)
+	IncludeInherited bool `protobuf:"varint,6,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -918,12 +1112,17 @@ func (x *ListSegmentsRequest) GetIncludeInherited() bool {
 }
 
 type ListSegmentsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Segments      []*Segment             `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
-	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
-	TypeCounts    map[string]int64       `protobuf:"bytes,5,rep,name=type_counts,json=typeCounts,proto3" json:"type_counts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of segments for the current page
+	Segments []*Segment `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Page size
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of segments matching the filters
+	Total int64 `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	// Count of segments per type (ignoring the type filter), e.g., {"user_state": 15, "behavioral": 20, "imported": 5, "rfm": 3}
+	TypeCounts    map[string]int64 `protobuf:"bytes,5,rep,name=type_counts,json=typeCounts,proto3" json:"type_counts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -993,9 +1192,10 @@ func (x *ListSegmentsResponse) GetTypeCounts() map[string]int64 {
 	return nil
 }
 
-// DeleteSegment
+// DeleteSegment - deletes a segment and all its related data (members, field mappings, overrides).
 type DeleteSegmentRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID to delete
 	Id              int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1082,9 +1282,11 @@ func (*DeleteSegmentResponse) Descriptor() ([]byte, []int) {
 	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{11}
 }
 
-// CalculateSegment - triggers batch calculation
+// CalculateSegment - manually triggers a batch calculation for a segment.
+// Evaluates the segment rules against all users and updates membership.
 type CalculateSegmentRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID to calculate
 	Id              int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1136,10 +1338,13 @@ func (x *CalculateSegmentRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type CalculateSegmentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UsersMatched  int64                  `protobuf:"varint,1,opt,name=users_matched,json=usersMatched,proto3" json:"users_matched,omitempty"`
-	UsersAdded    int64                  `protobuf:"varint,2,opt,name=users_added,json=usersAdded,proto3" json:"users_added,omitempty"`
-	UsersRemoved  int64                  `protobuf:"varint,3,opt,name=users_removed,json=usersRemoved,proto3" json:"users_removed,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Total number of users whose data matches the segment rules after evaluation
+	UsersMatched int64 `protobuf:"varint,1,opt,name=users_matched,json=usersMatched,proto3" json:"users_matched,omitempty"`
+	// Number of users newly added as segment members in this calculation run
+	UsersAdded int64 `protobuf:"varint,2,opt,name=users_added,json=usersAdded,proto3" json:"users_added,omitempty"`
+	// Number of users who no longer match and were marked as left the segment
+	UsersRemoved  int64 `protobuf:"varint,3,opt,name=users_removed,json=usersRemoved,proto3" json:"users_removed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1195,14 +1400,18 @@ func (x *CalculateSegmentResponse) GetUsersRemoved() int64 {
 	return 0
 }
 
-// GetSegmentUsers
+// GetSegmentUsers - retrieves a paginated list of users in a segment.
 type GetSegmentUsersRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	SegmentId          int64                   `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
-	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Page               int32                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize           int32                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OnlyCurrentMembers bool                    `protobuf:"varint,5,opt,name=only_current_members,json=onlyCurrentMembers,proto3" json:"only_current_members,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID
+	SegmentId       int64                   `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// Page number, starting from 1
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// If true, only return users who are currently members (exclude those who have left)
+	OnlyCurrentMembers bool `protobuf:"varint,5,opt,name=only_current_members,json=onlyCurrentMembers,proto3" json:"only_current_members,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1273,11 +1482,15 @@ func (x *GetSegmentUsersRequest) GetOnlyCurrentMembers() bool {
 }
 
 type GetSegmentUsersResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Users         []*SegmentUser         `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Total         int64                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of users with their membership details (entered_at, left_at, is_member)
+	Users []*SegmentUser `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Page size
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of users matching the filter
+	Total         int64 `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1340,12 +1553,14 @@ func (x *GetSegmentUsersResponse) GetTotal() int64 {
 	return 0
 }
 
-// GetUserSegments
+// GetUserSegments - retrieves all segments a specific user belongs to.
 type GetUserSegmentsRequest struct {
-	state                  protoimpl.MessageState  `protogen:"open.v1"`
-	UserId                 int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext        *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OnlyCurrentMemberships bool                    `protobuf:"varint,3,opt,name=only_current_memberships,json=onlyCurrentMemberships,proto3" json:"only_current_memberships,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// User ID to look up
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	// If true, only return segments where the user is currently a member
+	OnlyCurrentMemberships bool `protobuf:"varint,3,opt,name=only_current_memberships,json=onlyCurrentMemberships,proto3" json:"only_current_memberships,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1402,8 +1617,9 @@ func (x *GetUserSegmentsRequest) GetOnlyCurrentMemberships() bool {
 }
 
 type GetUserSegmentsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Segments      []*Segment             `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of segments the user belongs to (or belonged to, if only_current_memberships is false)
+	Segments      []*Segment `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1445,10 +1661,13 @@ func (x *GetUserSegmentsResponse) GetSegments() []*Segment {
 	return nil
 }
 
-// SetSegmentOverride - allows lower levels to disable inherited segments
+// SetSegmentOverride - allows lower levels to disable inherited segments.
+// Only works for segments owned by parent levels (cannot override own segments).
 type SetSegmentOverrideRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	SegmentId       int64                   `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID to override
+	SegmentId int64 `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	// Set to true to disable this inherited segment for the current operator
 	Disabled        bool                    `protobuf:"varint,2,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1542,9 +1761,10 @@ func (*SetSegmentOverrideResponse) Descriptor() ([]byte, []int) {
 	return file_crm_service_v1_crm_proto_rawDescGZIP(), []int{19}
 }
 
-// GetSegmentOverride
+// GetSegmentOverride - retrieves the override status for a segment at the current operator level.
 type GetSegmentOverrideRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID to check
 	SegmentId       int64                   `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1596,9 +1816,11 @@ func (x *GetSegmentOverrideRequest) GetOperatorContext() *common.OperatorContext
 }
 
 type GetSegmentOverrideResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Disabled      bool                   `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	HasOverride   bool                   `protobuf:"varint,2,opt,name=has_override,json=hasOverride,proto3" json:"has_override,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether the inherited segment is disabled at this operator level
+	Disabled bool `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	// Whether an override record exists for this segment. false means no override has been set.
+	HasOverride   bool `protobuf:"varint,2,opt,name=has_override,json=hasOverride,proto3" json:"has_override,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1647,15 +1869,21 @@ func (x *GetSegmentOverrideResponse) GetHasOverride() bool {
 	return false
 }
 
-// Field schema for frontend query builder
+// Field schema for the frontend query builder - describes a single queryable field
 type FieldSchema struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Field            string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	Label            string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
-	Type             FieldType              `protobuf:"varint,3,opt,name=type,proto3,enum=api.crm.service.v1.FieldType" json:"type,omitempty"`
-	Operators        []string               `protobuf:"bytes,4,rep,name=operators,proto3" json:"operators,omitempty"`
-	ValueSchema      *structpb.Struct       `protobuf:"bytes,5,opt,name=value_schema,json=valueSchema,proto3" json:"value_schema,omitempty"`
-	SupportsCurrency bool                   `protobuf:"varint,6,opt,name=supports_currency,json=supportsCurrency,proto3" json:"supports_currency,omitempty"` // Whether this field supports currency filtering
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Field name used in rules (e.g., "vip_level", "deposit_amount")
+	Field string `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	// Human-readable label (e.g., "VIP Level", "Total Deposit Amount")
+	Label string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	// Data type of the field
+	Type FieldType `protobuf:"varint,3,opt,name=type,proto3,enum=api.crm.service.v1.FieldType" json:"type,omitempty"`
+	// Supported operators for this field (e.g., ["=", "!=", ">", ">=", "<", "<=", "between"])
+	Operators []string `protobuf:"bytes,4,rep,name=operators,proto3" json:"operators,omitempty"`
+	// Value constraints (type, min, max, format, enum options, relative date options)
+	ValueSchema *structpb.Struct `protobuf:"bytes,5,opt,name=value_schema,json=valueSchema,proto3" json:"value_schema,omitempty"`
+	// Whether this field supports currency filtering (e.g., deposit_amount can be filtered by "USD", "EUR")
+	SupportsCurrency bool `protobuf:"varint,6,opt,name=supports_currency,json=supportsCurrency,proto3" json:"supports_currency,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1732,10 +1960,12 @@ func (x *FieldSchema) GetSupportsCurrency() bool {
 	return false
 }
 
-// GetSegmentFieldSchema
+// GetSegmentFieldSchema - returns the field schema for the frontend query builder.
+// Use this to dynamically build the rules editor UI.
 type GetSegmentFieldSchemaRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          SegmentType            `protobuf:"varint,1,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Filter schema by segment type (currently returns all fields regardless of type)
+	Type          SegmentType `protobuf:"varint,1,opt,name=type,proto3,enum=api.crm.service.v1.SegmentType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1778,8 +2008,9 @@ func (x *GetSegmentFieldSchemaRequest) GetType() SegmentType {
 }
 
 type GetSegmentFieldSchemaResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Fields        []*FieldSchema         `protobuf:"bytes,1,rep,name=fields,proto3" json:"fields,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of all available fields with their types, operators, and value constraints
+	Fields        []*FieldSchema `protobuf:"bytes,1,rep,name=fields,proto3" json:"fields,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1821,10 +2052,13 @@ func (x *GetSegmentFieldSchemaResponse) GetFields() []*FieldSchema {
 	return nil
 }
 
-// RepairSegment - repairs a segment by ensuring field mappings exist and optionally triggering calculation
+// RepairSegment - repairs a segment by re-extracting field mappings from the rules JSON.
+// Useful for segments that were directly inserted into the database without going through the API.
 type RepairSegmentRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	Id                 int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segment ID to repair
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// If true, also trigger a batch calculation after repairing field mappings
 	TriggerCalculation bool                    `protobuf:"varint,2,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
 	OperatorContext    *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -1883,13 +2117,19 @@ func (x *RepairSegmentRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type RepairSegmentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SegmentId     int64                  `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
-	Fields        []string               `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
-	Calculated    bool                   `protobuf:"varint,3,opt,name=calculated,proto3" json:"calculated,omitempty"`
-	UsersMatched  int64                  `protobuf:"varint,4,opt,name=users_matched,json=usersMatched,proto3" json:"users_matched,omitempty"`
-	UsersAdded    int64                  `protobuf:"varint,5,opt,name=users_added,json=usersAdded,proto3" json:"users_added,omitempty"`
-	UsersRemoved  int64                  `protobuf:"varint,6,opt,name=users_removed,json=usersRemoved,proto3" json:"users_removed,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The repaired segment ID
+	SegmentId int64 `protobuf:"varint,1,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
+	// List of field names extracted from the segment rules (e.g., ["deposit_amount", "vip_level"])
+	Fields []string `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
+	// Whether calculation was performed after repair (true only if trigger_calculation was set)
+	Calculated bool `protobuf:"varint,3,opt,name=calculated,proto3" json:"calculated,omitempty"`
+	// Total users matching the segment rules (only populated if calculated is true)
+	UsersMatched int64 `protobuf:"varint,4,opt,name=users_matched,json=usersMatched,proto3" json:"users_matched,omitempty"`
+	// Users newly added as segment members (only populated if calculated is true)
+	UsersAdded int64 `protobuf:"varint,5,opt,name=users_added,json=usersAdded,proto3" json:"users_added,omitempty"`
+	// Users removed from the segment (only populated if calculated is true)
+	UsersRemoved  int64 `protobuf:"varint,6,opt,name=users_removed,json=usersRemoved,proto3" json:"users_removed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1966,9 +2206,10 @@ func (x *RepairSegmentResponse) GetUsersRemoved() int64 {
 	return 0
 }
 
-// RepairAllSegments - repairs all segments that are missing field mappings
+// RepairAllSegments - finds and repairs all segments that are missing field mappings in the database.
 type RepairAllSegmentsRequest struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// If true, also trigger batch calculation for each repaired segment
 	TriggerCalculation bool                    `protobuf:"varint,1,opt,name=trigger_calculation,json=triggerCalculation,proto3" json:"trigger_calculation,omitempty"`
 	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -2020,8 +2261,10 @@ func (x *RepairAllSegmentsRequest) GetOperatorContext() *common.OperatorContext 
 }
 
 type RepairAllSegmentsResponse struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	RepairedCount int64                    `protobuf:"varint,1,opt,name=repaired_count,json=repairedCount,proto3" json:"repaired_count,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Number of segments successfully repaired
+	RepairedCount int64 `protobuf:"varint,1,opt,name=repaired_count,json=repairedCount,proto3" json:"repaired_count,omitempty"`
+	// Detailed repair result for each segment
 	Segments      []*RepairSegmentResponse `protobuf:"bytes,2,rep,name=segments,proto3" json:"segments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2071,7 +2314,8 @@ func (x *RepairAllSegmentsResponse) GetSegments() []*RepairSegmentResponse {
 	return nil
 }
 
-// GetSegmentsWithMissingFields - returns segments that have no entries in crm_segment_fields
+// GetSegmentsWithMissingFields - diagnostic endpoint that returns segments missing field mappings.
+// These segments were likely directly inserted into the database without going through the API.
 type GetSegmentsWithMissingFieldsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
@@ -2117,8 +2361,9 @@ func (x *GetSegmentsWithMissingFieldsRequest) GetOperatorContext() *common.Opera
 }
 
 type GetSegmentsWithMissingFieldsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Segments      []*Segment             `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Segments that have no entries in the crm_segment_fields table
+	Segments      []*Segment `protobuf:"bytes,1,rep,name=segments,proto3" json:"segments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
