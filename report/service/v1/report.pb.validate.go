@@ -5572,7 +5572,7 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 
 	// no validation rules for NgrUsd
 
-	// no validation rules for NetProfitUsd
+	// no validation rules for B2CUsd
 
 	// no validation rules for CommissionCpaUsd
 
@@ -5622,7 +5622,7 @@ func (m *AffiliateVTGReportDataItem) validate(all bool) error {
 
 	// no validation rules for NgrReportingCurrency
 
-	// no validation rules for NetProfitReportingCurrency
+	// no validation rules for B2CReportingCurrency
 
 	// no validation rules for CommissionCpaReportingCurrency
 
@@ -6434,7 +6434,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 
 	// no validation rules for NgrUsd
 
-	// no validation rules for NetProfitUsd
+	// no validation rules for B2CUsd
 
 	// no validation rules for Roi
 
@@ -6517,7 +6517,7 @@ func (m *AffiliateSnapshotReportDataItem) validate(all bool) error {
 
 	// no validation rules for NgrReportingCurrency
 
-	// no validation rules for NetProfitReportingCurrency
+	// no validation rules for B2CReportingCurrency
 
 	// no validation rules for PspFeeReportingCurrency
 

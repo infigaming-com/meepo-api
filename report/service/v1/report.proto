@@ -571,7 +571,7 @@ message AffiliateVTGReportDataItem {
   string avg_bet_usd = 34;
   string ggr_usd = 35;
   string ngr_usd = 36;
-  string net_profit_usd = 37;                           // NGR - B2C
+  string b2c_usd = 37;                                  // Bonus to Cash
 
   // Commission (from settled affiliate_commissions)
   string commission_cpa_usd = 38;
@@ -606,7 +606,7 @@ message AffiliateVTGReportDataItem {
   string avg_bet_reporting_currency = 59;
   string ggr_reporting_currency = 60;
   string ngr_reporting_currency = 61;
-  string net_profit_reporting_currency = 62;
+  string b2c_reporting_currency = 62;                    // Bonus to Cash
 
   // Commission - Reporting Currency
   string commission_cpa_reporting_currency = 63;
@@ -749,7 +749,7 @@ message AffiliateSnapshotReportDataItem {
   string avg_bet_usd = 47;
   string ggr_usd = 48;
   string ngr_usd = 49;
-  string net_profit_usd = 50;
+  string b2c_usd = 50;                                    // Bonus to Cash
   string roi = 51;
   string psp_fee_usd = 52;
   string content_fee_usd = 53;
@@ -781,7 +781,7 @@ message AffiliateSnapshotReportDataItem {
   string avg_bet_reporting_currency = 75;
   string ggr_reporting_currency = 76;
   string ngr_reporting_currency = 77;
-  string net_profit_reporting_currency = 78;
+  string b2c_reporting_currency = 78;                    // Bonus to Cash
   string psp_fee_reporting_currency = 79;
   string content_fee_reporting_currency = 80;
 
