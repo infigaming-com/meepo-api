@@ -1260,6 +1260,10 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Remark
+
+	// no validation rules for SortOrder
+
 	if len(errors) > 0 {
 		return CreatePaymentChannelRequestMultiError(errors)
 	}
@@ -1474,6 +1478,14 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.Remark != nil {
+		// no validation rules for Remark
+	}
+
+	if m.SortOrder != nil {
+		// no validation rules for SortOrder
 	}
 
 	if len(errors) > 0 {
@@ -1802,6 +1814,10 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for OperatorType
 
 	// no validation rules for PspId
+
+	// no validation rules for Remark
+
+	// no validation rules for SortOrder
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)

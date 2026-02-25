@@ -168,6 +168,10 @@ message CreatePaymentChannelRequest {
   string max_amount = 11;
   // Configuration fields for the payment channel in JSON format
   google.protobuf.Struct key = 12;
+  // Channel remark/notes displayed to players on frontend
+  string remark = 13;
+  // Channel sort order for frontend display ordering (lower value = higher priority)
+  int32 sort_order = 14;
 }
 
 // Request to create a payment channel
@@ -201,6 +205,10 @@ message UpdatePaymentChannelRequest {
   api.common.OperatorContext operator_context = 12;
   // For which operator this enable/disable applies (for hierarchy control)
   api.common.OperatorContext target_operator_context = 13;
+  // Channel remark/notes displayed to players on frontend
+  optional string remark = 14;
+  // Channel sort order for frontend display ordering (lower value = higher priority)
+  optional int32 sort_order = 15;
 }
 
 // Response for channel creation
@@ -296,6 +304,10 @@ message PaymentChannelInfo {
   string system_operator_name = 44;
   string operator_type = 45;
   string psp_id = 46;
+  // Channel remark/notes displayed to players on frontend
+  string remark = 47;
+  // Channel sort order for frontend display ordering (lower value = higher priority)
+  int32 sort_order = 48;
 }
 
 // Request to initiate a deposit
