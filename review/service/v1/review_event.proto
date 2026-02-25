@@ -30,4 +30,5 @@ message WithdrawRequestEvent {
 	string withdraw_amount = 9;
 	int64 user_id = 10;
 	int64 created_at = 11;
+	string withdraw_amount_usd = 12;
 }

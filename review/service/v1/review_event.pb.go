@@ -130,6 +130,7 @@ type WithdrawRequestEvent struct {
 	WithdrawAmount     string                 `protobuf:"bytes,9,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
 	UserId             int64                  `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	CreatedAt          int64                  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	WithdrawAmountUsd  string                 `protobuf:"bytes,12,opt,name=withdraw_amount_usd,json=withdrawAmountUsd,proto3" json:"withdraw_amount_usd,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -241,6 +242,13 @@ func (x *WithdrawRequestEvent) GetCreatedAt() int64 {
 	return 0
 }
 
+func (x *WithdrawRequestEvent) GetWithdrawAmountUsd() string {
+	if x != nil {
+		return x.WithdrawAmountUsd
+	}
+	return ""
+}
+
 var File_review_service_v1_review_event_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_review_event_proto_rawDesc = "" +
@@ -252,7 +260,7 @@ const file_review_service_v1_review_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse\"\xa7\x03\n" +
+	"\rEventResponse\"\xd7\x03\n" +
 	"\x14WithdrawRequestEvent\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -268,7 +276,8 @@ const file_review_service_v1_review_event_proto_rawDesc = "" +
 	"\auser_id\x18\n" +
 	" \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\v \x01(\x03R\tcreatedAt2c\n" +
+	"created_at\x18\v \x01(\x03R\tcreatedAt\x12.\n" +
+	"\x13withdraw_amount_usd\x18\f \x01(\tR\x11withdrawAmountUsd2c\n" +
 	"\vReviewEvent\x12T\n" +
 	"\x05Event\x12#.api.review.service.v1.EventRequest\x1a$.api.review.service.v1.EventResponse\"\x00BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"

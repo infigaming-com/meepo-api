@@ -284,6 +284,8 @@ func (m *WithdrawRequestEvent) validate(all bool) error {
 
 	// no validation rules for CreatedAt
 
+	// no validation rules for WithdrawAmountUsd
+
 	if len(errors) > 0 {
 		return WithdrawRequestEventMultiError(errors)
 	}
