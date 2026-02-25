@@ -40,25 +40,43 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Asset management service for backoffice
+// Asset management service for backoffice.
+// Provides CRUD, versioning, variable registry and rendering APIs for managing
+// marketing campaign templates (Email, SMS, Push, Inbox).
 type BackofficeAssetClient interface {
-	// Asset CRUD operations
+	// Create a new asset (template) with optional inline versions.
+	// See CreateAssetRequest.metadata for the full metadata format documentation.
 	CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*v1.CreateAssetResponse, error)
+	// Get a single asset by ID, including all its versions.
 	GetAsset(ctx context.Context, in *GetAssetRequest, opts ...grpc.CallOption) (*v1.GetAssetResponse, error)
+	// Partially update an existing asset. Only provided fields are updated.
 	UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*v1.UpdateAssetResponse, error)
+	// Delete an asset and all its versions. Only DRAFT or ARCHIVED assets can be deleted.
 	DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...grpc.CallOption) (*v1.DeleteAssetResponse, error)
+	// List assets with optional filtering by type, status, and inheritance.
 	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (*v1.ListAssetsResponse, error)
+	// Transition an asset's lifecycle status.
+	// Activating validates that all required country versions are also active.
 	UpdateAssetStatus(ctx context.Context, in *UpdateAssetStatusRequest, opts ...grpc.CallOption) (*v1.UpdateAssetStatusResponse, error)
-	// Asset Version Management
+	// Create a new country-specific version for an existing asset.
+	// See CreateAssetVersionRequest for the full variable documentation.
 	CreateAssetVersion(ctx context.Context, in *CreateAssetVersionRequest, opts ...grpc.CallOption) (*v1.CreateAssetVersionResponse, error)
+	// Get a single asset version by ID.
 	GetAssetVersion(ctx context.Context, in *GetAssetVersionRequest, opts ...grpc.CallOption) (*v1.GetAssetVersionResponse, error)
+	// Partially update an existing asset version. Only provided fields are updated.
+	// If content_url changes, variables are re-extracted from the new content.
 	UpdateAssetVersion(ctx context.Context, in *UpdateAssetVersionRequest, opts ...grpc.CallOption) (*v1.UpdateAssetVersionResponse, error)
+	// Delete an asset version. Only DRAFT or ARCHIVED versions can be deleted.
 	DeleteAssetVersion(ctx context.Context, in *DeleteAssetVersionRequest, opts ...grpc.CallOption) (*v1.DeleteAssetVersionResponse, error)
+	// List all versions belonging to a specific asset.
 	ListAssetVersions(ctx context.Context, in *ListAssetVersionsRequest, opts ...grpc.CallOption) (*v1.ListAssetVersionsResponse, error)
+	// Transition a version's lifecycle status.
 	UpdateAssetVersionStatus(ctx context.Context, in *UpdateAssetVersionStatusRequest, opts ...grpc.CallOption) (*v1.UpdateAssetVersionStatusResponse, error)
-	// Variables
+	// List all registered template variables, with optional filtering by asset type and source.
+	// Use this to populate the variable picker in the template editor UI.
 	ListAssetVariables(ctx context.Context, in *ListAssetVariablesRequest, opts ...grpc.CallOption) (*v1.ListAssetVariablesResponse, error)
-	// Rendering
+	// Render an asset version for a specific country with provided data.
+	// Resolves all `{{variable_name}}` placeholders and returns the final content.
 	RenderAsset(ctx context.Context, in *RenderAssetRequest, opts ...grpc.CallOption) (*v1.RenderAssetResponse, error)
 }
 
@@ -214,25 +232,43 @@ func (c *backofficeAssetClient) RenderAsset(ctx context.Context, in *RenderAsset
 // All implementations must embed UnimplementedBackofficeAssetServer
 // for forward compatibility.
 //
-// Asset management service for backoffice
+// Asset management service for backoffice.
+// Provides CRUD, versioning, variable registry and rendering APIs for managing
+// marketing campaign templates (Email, SMS, Push, Inbox).
 type BackofficeAssetServer interface {
-	// Asset CRUD operations
+	// Create a new asset (template) with optional inline versions.
+	// See CreateAssetRequest.metadata for the full metadata format documentation.
 	CreateAsset(context.Context, *CreateAssetRequest) (*v1.CreateAssetResponse, error)
+	// Get a single asset by ID, including all its versions.
 	GetAsset(context.Context, *GetAssetRequest) (*v1.GetAssetResponse, error)
+	// Partially update an existing asset. Only provided fields are updated.
 	UpdateAsset(context.Context, *UpdateAssetRequest) (*v1.UpdateAssetResponse, error)
+	// Delete an asset and all its versions. Only DRAFT or ARCHIVED assets can be deleted.
 	DeleteAsset(context.Context, *DeleteAssetRequest) (*v1.DeleteAssetResponse, error)
+	// List assets with optional filtering by type, status, and inheritance.
 	ListAssets(context.Context, *ListAssetsRequest) (*v1.ListAssetsResponse, error)
+	// Transition an asset's lifecycle status.
+	// Activating validates that all required country versions are also active.
 	UpdateAssetStatus(context.Context, *UpdateAssetStatusRequest) (*v1.UpdateAssetStatusResponse, error)
-	// Asset Version Management
+	// Create a new country-specific version for an existing asset.
+	// See CreateAssetVersionRequest for the full variable documentation.
 	CreateAssetVersion(context.Context, *CreateAssetVersionRequest) (*v1.CreateAssetVersionResponse, error)
+	// Get a single asset version by ID.
 	GetAssetVersion(context.Context, *GetAssetVersionRequest) (*v1.GetAssetVersionResponse, error)
+	// Partially update an existing asset version. Only provided fields are updated.
+	// If content_url changes, variables are re-extracted from the new content.
 	UpdateAssetVersion(context.Context, *UpdateAssetVersionRequest) (*v1.UpdateAssetVersionResponse, error)
+	// Delete an asset version. Only DRAFT or ARCHIVED versions can be deleted.
 	DeleteAssetVersion(context.Context, *DeleteAssetVersionRequest) (*v1.DeleteAssetVersionResponse, error)
+	// List all versions belonging to a specific asset.
 	ListAssetVersions(context.Context, *ListAssetVersionsRequest) (*v1.ListAssetVersionsResponse, error)
+	// Transition a version's lifecycle status.
 	UpdateAssetVersionStatus(context.Context, *UpdateAssetVersionStatusRequest) (*v1.UpdateAssetVersionStatusResponse, error)
-	// Variables
+	// List all registered template variables, with optional filtering by asset type and source.
+	// Use this to populate the variable picker in the template editor UI.
 	ListAssetVariables(context.Context, *ListAssetVariablesRequest) (*v1.ListAssetVariablesResponse, error)
-	// Rendering
+	// Render an asset version for a specific country with provided data.
+	// Resolves all `{{variable_name}}` placeholders and returns the final content.
 	RenderAsset(context.Context, *RenderAssetRequest) (*v1.RenderAssetResponse, error)
 	mustEmbedUnimplementedBackofficeAssetServer()
 }
