@@ -25,18 +25,100 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CreateAsset
+// Create a new asset.
+// See metadata field for the full metadata JSON format documentation.
 type CreateAssetRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for ownership and permission resolution.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	AssetKey              *string                 `protobuf:"bytes,2,opt,name=asset_key,json=assetKey,proto3,oneof" json:"asset_key,omitempty"`
-	Name                  string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description           string                  `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Type                  v1.AssetType            `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.AssetType" json:"type,omitempty"`
-	Metadata              *structpb.Struct        `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Versions              []*v1.AssetVersionInput `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Optional unique key for programmatic lookup (e.g. `"welcome_email"`). Must be unique within the operator scope.
+	AssetKey *string `protobuf:"bytes,2,opt,name=asset_key,json=assetKey,proto3,oneof" json:"asset_key,omitempty"`
+	// Display name for the asset
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the asset's purpose
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Delivery channel: `ASSET_TYPE_EMAIL`, `ASSET_TYPE_SMS`, `ASSET_TYPE_PUSH`, `ASSET_TYPE_INBOX`
+	Type v1.AssetType `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.AssetType" json:"type,omitempty"`
+	// Type-specific configuration. Structure varies by asset type.
+	//
+	// ## Email (`ASSET_TYPE_EMAIL`)
+	//
+	// ```json
+	//
+	//	{
+	//	  "from_name": "Speedix",
+	//	  "from_email": "noreply@speedix.io",
+	//	  "reply_to": "support@speedix.io",
+	//	  "track_opens": true,
+	//	  "track_clicks": true
+	//	}
+	//
+	// ```
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | `from_name` | string | Sender display name |
+	// | `from_email` | string | Sender email address |
+	// | `reply_to` | string | Reply-to address (optional) |
+	// | `track_opens` | bool | Enable open tracking pixel (optional, default `false`) |
+	// | `track_clicks` | bool | Enable click URL rewriting for tracking (optional, default `false`) |
+	//
+	// ## Push (`ASSET_TYPE_PUSH`)
+	//
+	// ```json
+	//
+	//	{
+	//	  "icon": "https://cdn.example.com/icon.png",
+	//	  "image": "https://cdn.example.com/hero.png",
+	//	  "action_url": "https://example.com/promo",
+	//	  "badge_count": 1,
+	//	  "sound": "default"
+	//	}
+	//
+	// ```
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | `icon` | string | Notification icon URL (optional) |
+	// | `image` | string | Hero image URL (optional) |
+	// | `action_url` | string | Deep link on notification tap (optional) |
+	// | `badge_count` | int | App badge counter value (optional) |
+	// | `sound` | string | Sound file name or `"default"` (optional) |
+	//
+	// ## SMS (`ASSET_TYPE_SMS`)
+	//
+	// ```json
+	//
+	//	{
+	//	  "sender_id": "SPEEDIX"
+	//	}
+	//
+	// ```
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | `sender_id` | string | SMS originating number or alphanumeric ID |
+	//
+	// ## Inbox (`ASSET_TYPE_INBOX`)
+	//
+	// ```json
+	//
+	//	{
+	//	  "category": "promotions",
+	//	  "priority": 50
+	//	}
+	//
+	// ```
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | `category` | string | Message category for inbox filtering (optional) |
+	// | `priority` | int | Display priority 0–100, higher = more prominent (optional) |
+	Metadata *structpb.Struct `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// Optional inline versions to create with the asset. Use `"global"` as the default fallback country.
+	Versions      []*v1.AssetVersionInput `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateAssetRequest) Reset() {
@@ -118,13 +200,15 @@ func (x *CreateAssetRequest) GetVersions() []*v1.AssetVersionInput {
 	return nil
 }
 
-// GetAsset
+// Get a single asset by ID.
 type GetAssetRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset ID
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetAssetRequest) Reset() {
@@ -171,18 +255,25 @@ func (x *GetAssetRequest) GetId() int64 {
 	return 0
 }
 
-// UpdateAsset
+// Partially update an existing asset. Only provided optional fields are modified.
 type UpdateAssetRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	AssetKey              *string                 `protobuf:"bytes,3,opt,name=asset_key,json=assetKey,proto3,oneof" json:"asset_key,omitempty"`
-	Name                  *string                 `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Description           *string                 `protobuf:"bytes,5,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Metadata              *structpb.Struct        `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	Versions              []*v1.AssetVersionInput `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset ID to update
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// New unique key (optional)
+	AssetKey *string `protobuf:"bytes,3,opt,name=asset_key,json=assetKey,proto3,oneof" json:"asset_key,omitempty"`
+	// New name (optional)
+	Name *string `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// New description (optional)
+	Description *string `protobuf:"bytes,5,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// Updated metadata — replaces the entire metadata object. Same format as CreateAssetRequest.metadata.
+	Metadata *structpb.Struct `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	// Inline versions to upsert, matched by country code.
+	Versions      []*v1.AssetVersionInput `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateAssetRequest) Reset() {
@@ -264,13 +355,15 @@ func (x *UpdateAssetRequest) GetVersions() []*v1.AssetVersionInput {
 	return nil
 }
 
-// DeleteAsset
+// Delete an asset and all its versions.
 type DeleteAssetRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset ID to delete. Must be in DRAFT or ARCHIVED status.
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteAssetRequest) Reset() {
@@ -317,17 +410,23 @@ func (x *DeleteAssetRequest) GetId() int64 {
 	return 0
 }
 
-// ListAssets
+// List assets with filtering and pagination.
 type ListAssetsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for ownership scoping.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Type                  *v1.AssetType           `protobuf:"varint,2,opt,name=type,proto3,enum=api.crm.service.v1.AssetType,oneof" json:"type,omitempty"`
-	Status                *v1.AssetStatus         `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.AssetStatus,oneof" json:"status,omitempty"`
-	IncludeInherited      bool                    `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
-	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by asset type (optional)
+	Type *v1.AssetType `protobuf:"varint,2,opt,name=type,proto3,enum=api.crm.service.v1.AssetType,oneof" json:"type,omitempty"`
+	// Filter by status (optional)
+	Status *v1.AssetStatus `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.AssetStatus,oneof" json:"status,omitempty"`
+	// Include assets inherited from parent operators (system/retailer/company)
+	IncludeInherited bool `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
+	// Page number (1-based, default 1)
+	Page int32 `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	// Items per page (default 20, max 100)
+	PageSize      int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAssetsRequest) Reset() {
@@ -402,14 +501,17 @@ func (x *ListAssetsRequest) GetPageSize() int32 {
 	return 0
 }
 
-// UpdateAssetStatus
+// Transition an asset's lifecycle status.
 type UpdateAssetStatusRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Status                v1.AssetStatus          `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.AssetStatus" json:"status,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset ID
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// New status. Valid transitions: `DRAFT→ACTIVE` (validates required versions), `DRAFT→ARCHIVED`, `ACTIVE→ARCHIVED`, `ARCHIVED→DRAFT`.
+	Status        v1.AssetStatus `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.AssetStatus" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateAssetStatusRequest) Reset() {
@@ -463,19 +565,100 @@ func (x *UpdateAssetStatusRequest) GetStatus() v1.AssetStatus {
 	return v1.AssetStatus(0)
 }
 
-// CreateAssetVersion
+// Create a new country-specific version for an existing asset.
+// Content is fetched from R2, validated for XSS, and parsed to extract `{{variable_name}}` placeholders.
 type CreateAssetVersionRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	AssetId               int64                   `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Country               string                  `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	Subject               string                  `protobuf:"bytes,4,opt,name=subject,proto3" json:"subject,omitempty"`
-	ContentUrl            string                  `protobuf:"bytes,5,opt,name=content_url,json=contentUrl,proto3" json:"content_url,omitempty"`
-	PreviewText           *string                 `protobuf:"bytes,6,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
-	ContentType           string                  `protobuf:"bytes,7,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	IsRequired            bool                    `protobuf:"varint,8,opt,name=is_required,json=isRequired,proto3" json:"is_required,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Parent asset ID
+	AssetId int64 `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	// ISO 3166-1 alpha-2 country code (e.g. `"US"`, `"GB"`, `"TH"`), or `"global"` for the default fallback version.
+	// When rendering, the system tries the specific country first, then falls back to `"global"`.
+	Country string `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	// Message subject line. For Email: email subject; for SMS/Push: message title.
+	// Supports `{{variable_name}}` syntax — see the variable documentation below.
+	Subject string `protobuf:"bytes,4,opt,name=subject,proto3" json:"subject,omitempty"`
+	// Path to the template content in R2 storage (e.g. `"/static/default/email/welcome.html"`).
+	// Content is fetched, validated, and cached for 15 minutes. Max size: 10 MB.
+	//
+	// The content body supports `{{variable_name}}` placeholders that are resolved at render time.
+	//
+	// ## Available Variables
+	//
+	// **Player** (`VARIABLE_SOURCE_PLAYER`) — from user profile:
+	//
+	// | Variable | Type | Description |
+	// |----------|------|-------------|
+	// | `user_id` | string | Unique user identifier |
+	// | `username` | string | User display name |
+	// | `email` | string | User email address |
+	// | `vip_level` | number | VIP tier (0–N) |
+	// | `kyc_level` | number | KYC verification level |
+	// | `registration_country` | string | ISO country code at registration |
+	// | `registration_date` | date | Account creation date |
+	// | `ftd_date` | date | First time deposit date |
+	// | `last_deposit_time` | date | Most recent deposit timestamp |
+	// | `device_type` | string | Device used for registration |
+	// | `login_banned` | string | Login restriction status (`true`/`false`) |
+	// | `withdraw_banned` | string | Withdrawal restriction status (`true`/`false`) |
+	// | `game_banned` | string | Game restriction status (`true`/`false`) |
+	// | `locked` | string | Account lock status (`true`/`false`) |
+	//
+	// **Wallet** (`VARIABLE_SOURCE_WALLET`) — real-time from wallet service, USD equivalent:
+	//
+	// | Variable | Type | Description |
+	// |----------|------|-------------|
+	// | `balance` | currency | Current account balance |
+	// | `deposit_amount` | currency | Total deposit amount |
+	// | `deposit_count` | number | Number of deposit transactions |
+	// | `withdrawal_amount` | currency | Total withdrawal amount |
+	// | `withdrawal_count` | number | Number of withdrawal transactions |
+	// | `bet_amount` | currency | Total bet amount |
+	// | `bet_count` | number | Total number of bets |
+	// | `win_amount` | currency | Total win amount |
+	// | `win_count` | number | Total number of winning bets |
+	// | `ggr` | currency | Gross Gaming Revenue |
+	// | `ngr` | currency | Net Gaming Revenue |
+	//
+	// **Campaign** (`VARIABLE_SOURCE_CAMPAIGN`) — arbitrary key-value pairs passed at render time:
+	// e.g. `bonus_amount`, `promo_code`, `offer_name`, `expiry_date`
+	//
+	// **Custom** (`VARIABLE_SOURCE_CUSTOM`) — system-level variables, highest priority at render time:
+	// e.g. `brand_name`, `site_url`, `unsubscribe_url`, `country`
+	//
+	// ## Type Formatting
+	//
+	// | Type | Formatting | Example |
+	// |------|-----------|---------|
+	// | `string` | Plain text, HTML-escaped | `"Hello"` |
+	// | `number` | Trailing zeros removed | `100.00` → `"100"` |
+	// | `currency` | Fixed 2 decimal places | `100` → `"100.00"` |
+	// | `date` | Locale-aware | `"Jan 2, 2006"` |
+	// | `url` | Raw value, NOT HTML-escaped | `"https://example.com"` |
+	//
+	// ## Resolution Priority (highest → lowest)
+	//
+	// 1. `custom_data` → 2. `campaign_data` → 3. `player_data` → 4. `wallet_data` → 5. registered `default_value`
+	//
+	// Unresolved variables remain as `{{variable_name}}` in the output.
+	//
+	// ## Example
+	//
+	// ```html
+	// <h1>Welcome to {{brand_name}}!</h1>
+	// <p>Hello {{username}}, your balance is {{balance}}.</p>
+	// <a href="{{site_url}}/promotions">Claim {{bonus_amount}} bonus</a>
+	// ```
+	ContentUrl string `protobuf:"bytes,5,opt,name=content_url,json=contentUrl,proto3" json:"content_url,omitempty"`
+	// Short preview text (optional). For Email: preheader; for Push: subtitle. Supports `{{variable_name}}` syntax.
+	PreviewText *string `protobuf:"bytes,6,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
+	// MIME type of the content: `"text/html"` (default) or `"text/plain"`
+	ContentType string `protobuf:"bytes,7,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	// If `true`, this version must be ACTIVE before the parent asset can be activated.
+	IsRequired    bool `protobuf:"varint,8,opt,name=is_required,json=isRequired,proto3" json:"is_required,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateAssetVersionRequest) Reset() {
@@ -564,13 +747,15 @@ func (x *CreateAssetVersionRequest) GetIsRequired() bool {
 	return false
 }
 
-// GetAssetVersion
+// Get a single asset version by ID.
 type GetAssetVersionRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset version ID
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetAssetVersionRequest) Reset() {
@@ -617,18 +802,25 @@ func (x *GetAssetVersionRequest) GetId() int64 {
 	return 0
 }
 
-// UpdateAssetVersion
+// Partially update an existing asset version. Only provided optional fields are modified.
 type UpdateAssetVersionRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Subject               *string                 `protobuf:"bytes,3,opt,name=subject,proto3,oneof" json:"subject,omitempty"`
-	ContentUrl            *string                 `protobuf:"bytes,4,opt,name=content_url,json=contentUrl,proto3,oneof" json:"content_url,omitempty"`
-	PreviewText           *string                 `protobuf:"bytes,5,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
-	ContentType           *string                 `protobuf:"bytes,6,opt,name=content_type,json=contentType,proto3,oneof" json:"content_type,omitempty"`
-	IsRequired            *bool                   `protobuf:"varint,7,opt,name=is_required,json=isRequired,proto3,oneof" json:"is_required,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset version ID to update
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// New subject line (optional). Supports `{{variable_name}}` syntax.
+	Subject *string `protobuf:"bytes,3,opt,name=subject,proto3,oneof" json:"subject,omitempty"`
+	// New content URL (optional). Variables are re-extracted from the new content.
+	ContentUrl *string `protobuf:"bytes,4,opt,name=content_url,json=contentUrl,proto3,oneof" json:"content_url,omitempty"`
+	// New preview text (optional). Supports `{{variable_name}}` syntax.
+	PreviewText *string `protobuf:"bytes,5,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
+	// New content type (optional): `"text/html"` or `"text/plain"`
+	ContentType *string `protobuf:"bytes,6,opt,name=content_type,json=contentType,proto3,oneof" json:"content_type,omitempty"`
+	// Updated is_required flag (optional)
+	IsRequired    *bool `protobuf:"varint,7,opt,name=is_required,json=isRequired,proto3,oneof" json:"is_required,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateAssetVersionRequest) Reset() {
@@ -710,13 +902,15 @@ func (x *UpdateAssetVersionRequest) GetIsRequired() bool {
 	return false
 }
 
-// DeleteAssetVersion
+// Delete an asset version.
 type DeleteAssetVersionRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset version ID to delete. Must be in DRAFT or ARCHIVED status.
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteAssetVersionRequest) Reset() {
@@ -763,13 +957,15 @@ func (x *DeleteAssetVersionRequest) GetId() int64 {
 	return 0
 }
 
-// ListAssetVersions
+// List all versions belonging to a specific asset.
 type ListAssetVersionsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	AssetId               int64                   `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Parent asset ID
+	AssetId       int64 `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAssetVersionsRequest) Reset() {
@@ -816,14 +1012,17 @@ func (x *ListAssetVersionsRequest) GetAssetId() int64 {
 	return 0
 }
 
-// UpdateAssetVersionStatus
+// Transition a version's lifecycle status.
 type UpdateAssetVersionStatusRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Status                v1.AssetStatus          `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.AssetStatus" json:"status,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset version ID
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// New status. Valid transitions: `DRAFT→ACTIVE`, `DRAFT→ARCHIVED`, `ACTIVE→ARCHIVED`, `ARCHIVED→DRAFT`.
+	Status        v1.AssetStatus `protobuf:"varint,3,opt,name=status,proto3,enum=api.crm.service.v1.AssetStatus" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateAssetVersionStatusRequest) Reset() {
@@ -877,14 +1076,17 @@ func (x *UpdateAssetVersionStatusRequest) GetStatus() v1.AssetStatus {
 	return v1.AssetStatus(0)
 }
 
-// ListAssetVariables
+// List registered template variables with optional filtering.
 type ListAssetVariablesRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for scoping (includes global + operator-specific variables).
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	AssetType             *v1.AssetType           `protobuf:"varint,2,opt,name=asset_type,json=assetType,proto3,enum=api.crm.service.v1.AssetType,oneof" json:"asset_type,omitempty"`
-	Source                *v1.VariableSource      `protobuf:"varint,3,opt,name=source,proto3,enum=api.crm.service.v1.VariableSource,oneof" json:"source,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by asset type (optional)
+	AssetType *v1.AssetType `protobuf:"varint,2,opt,name=asset_type,json=assetType,proto3,enum=api.crm.service.v1.AssetType,oneof" json:"asset_type,omitempty"`
+	// Filter by source (optional): `VARIABLE_SOURCE_PLAYER`, `VARIABLE_SOURCE_WALLET`, `VARIABLE_SOURCE_CAMPAIGN`, `VARIABLE_SOURCE_CUSTOM`
+	Source        *v1.VariableSource `protobuf:"varint,3,opt,name=source,proto3,enum=api.crm.service.v1.VariableSource,oneof" json:"source,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListAssetVariablesRequest) Reset() {
@@ -938,18 +1140,59 @@ func (x *ListAssetVariablesRequest) GetSource() v1.VariableSource {
 	return v1.VariableSource(0)
 }
 
-// RenderAsset
+// Render an asset version with provided data for preview or campaign execution.
+// Resolves all `{{variable_name}}` placeholders. Unresolved variables remain as-is
+// and are listed in `unresolved_variables`.
+//
+// ## Example
+//
+// **Request:**
+//
+// ```json
+//
+//	{
+//	  "asset_id": 42,
+//	  "country": "US",
+//	  "player_data": { "username": "john_doe", "email": "john@example.com" },
+//	  "wallet_data": { "balance": 150.50 },
+//	  "campaign_data": { "bonus_amount": "100" },
+//	  "custom_data": { "brand_name": "MySite", "site_url": "https://mysite.com" }
+//	}
+//
+// ```
+//
+// **Response:**
+//
+// ```json
+//
+//	{
+//	  "subject": "Hello john_doe, claim your 100 bonus!",
+//	  "content": "<h1>Welcome to MySite!</h1><p>Your balance: 150.50</p>",
+//	  "content_type": "text/html",
+//	  "country": "US",
+//	  "resolved_variables": { "username": "john_doe", "balance": "150.50", "bonus_amount": "100" },
+//	  "unresolved_variables": []
+//	}
+//
+// ```
 type RenderAssetRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check and variable scoping.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	AssetId               int64                   `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Country               string                  `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	PlayerData            *structpb.Struct        `protobuf:"bytes,4,opt,name=player_data,json=playerData,proto3" json:"player_data,omitempty"`
-	WalletData            *structpb.Struct        `protobuf:"bytes,5,opt,name=wallet_data,json=walletData,proto3" json:"wallet_data,omitempty"`
-	CampaignData          *structpb.Struct        `protobuf:"bytes,6,opt,name=campaign_data,json=campaignData,proto3" json:"campaign_data,omitempty"`
-	CustomData            *structpb.Struct        `protobuf:"bytes,7,opt,name=custom_data,json=customData,proto3" json:"custom_data,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Asset ID to render
+	AssetId int64 `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	// Country code to select the version. Falls back to `"global"` if not found.
+	Country string `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	// Player profile data (e.g. `username`, `email`, `vip_level`). Keys match variable_name in the registry.
+	PlayerData *structpb.Struct `protobuf:"bytes,4,opt,name=player_data,json=playerData,proto3" json:"player_data,omitempty"`
+	// Wallet data (e.g. `balance`, `deposit_amount`, `ggr`). Typically fetched real-time from wallet service.
+	WalletData *structpb.Struct `protobuf:"bytes,5,opt,name=wallet_data,json=walletData,proto3" json:"wallet_data,omitempty"`
+	// Campaign-specific data (e.g. `bonus_amount`, `promo_code`). Arbitrary key-value pairs.
+	CampaignData *structpb.Struct `protobuf:"bytes,6,opt,name=campaign_data,json=campaignData,proto3" json:"campaign_data,omitempty"`
+	// Custom runtime overrides — highest priority, overrides all other sources. Common: `brand_name`, `site_url`, `unsubscribe_url`.
+	CustomData    *structpb.Struct `protobuf:"bytes,7,opt,name=custom_data,json=customData,proto3" json:"custom_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RenderAssetRequest) Reset() {

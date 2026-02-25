@@ -36,23 +36,39 @@ const OperationBackofficeAssetUpdateAssetVersion = "/api.backoffice.service.v1.B
 const OperationBackofficeAssetUpdateAssetVersionStatus = "/api.backoffice.service.v1.BackofficeAsset/UpdateAssetVersionStatus"
 
 type BackofficeAssetHTTPServer interface {
-	// CreateAsset Asset CRUD operations
+	// CreateAsset Create a new asset (template) with optional inline versions.
+	// See CreateAssetRequest.metadata for the full metadata format documentation.
 	CreateAsset(context.Context, *CreateAssetRequest) (*v1.CreateAssetResponse, error)
-	// CreateAssetVersion Asset Version Management
+	// CreateAssetVersion Create a new country-specific version for an existing asset.
+	// See CreateAssetVersionRequest for the full variable documentation.
 	CreateAssetVersion(context.Context, *CreateAssetVersionRequest) (*v1.CreateAssetVersionResponse, error)
+	// DeleteAsset Delete an asset and all its versions. Only DRAFT or ARCHIVED assets can be deleted.
 	DeleteAsset(context.Context, *DeleteAssetRequest) (*v1.DeleteAssetResponse, error)
+	// DeleteAssetVersion Delete an asset version. Only DRAFT or ARCHIVED versions can be deleted.
 	DeleteAssetVersion(context.Context, *DeleteAssetVersionRequest) (*v1.DeleteAssetVersionResponse, error)
+	// GetAsset Get a single asset by ID, including all its versions.
 	GetAsset(context.Context, *GetAssetRequest) (*v1.GetAssetResponse, error)
+	// GetAssetVersion Get a single asset version by ID.
 	GetAssetVersion(context.Context, *GetAssetVersionRequest) (*v1.GetAssetVersionResponse, error)
-	// ListAssetVariables Variables
+	// ListAssetVariables List all registered template variables, with optional filtering by asset type and source.
+	// Use this to populate the variable picker in the template editor UI.
 	ListAssetVariables(context.Context, *ListAssetVariablesRequest) (*v1.ListAssetVariablesResponse, error)
+	// ListAssetVersions List all versions belonging to a specific asset.
 	ListAssetVersions(context.Context, *ListAssetVersionsRequest) (*v1.ListAssetVersionsResponse, error)
+	// ListAssets List assets with optional filtering by type, status, and inheritance.
 	ListAssets(context.Context, *ListAssetsRequest) (*v1.ListAssetsResponse, error)
-	// RenderAsset Rendering
+	// RenderAsset Render an asset version for a specific country with provided data.
+	// Resolves all `{{variable_name}}` placeholders and returns the final content.
 	RenderAsset(context.Context, *RenderAssetRequest) (*v1.RenderAssetResponse, error)
+	// UpdateAsset Partially update an existing asset. Only provided fields are updated.
 	UpdateAsset(context.Context, *UpdateAssetRequest) (*v1.UpdateAssetResponse, error)
+	// UpdateAssetStatus Transition an asset's lifecycle status.
+	// Activating validates that all required country versions are also active.
 	UpdateAssetStatus(context.Context, *UpdateAssetStatusRequest) (*v1.UpdateAssetStatusResponse, error)
+	// UpdateAssetVersion Partially update an existing asset version. Only provided fields are updated.
+	// If content_url changes, variables are re-extracted from the new content.
 	UpdateAssetVersion(context.Context, *UpdateAssetVersionRequest) (*v1.UpdateAssetVersionResponse, error)
+	// UpdateAssetVersionStatus Transition a version's lifecycle status.
 	UpdateAssetVersionStatus(context.Context, *UpdateAssetVersionStatusRequest) (*v1.UpdateAssetVersionStatusResponse, error)
 }
 
@@ -383,23 +399,39 @@ func _BackofficeAsset_RenderAsset0_HTTP_Handler(srv BackofficeAssetHTTPServer) f
 }
 
 type BackofficeAssetHTTPClient interface {
-	// CreateAsset Asset CRUD operations
+	// CreateAsset Create a new asset (template) with optional inline versions.
+	// See CreateAssetRequest.metadata for the full metadata format documentation.
 	CreateAsset(ctx context.Context, req *CreateAssetRequest, opts ...http.CallOption) (rsp *v1.CreateAssetResponse, err error)
-	// CreateAssetVersion Asset Version Management
+	// CreateAssetVersion Create a new country-specific version for an existing asset.
+	// See CreateAssetVersionRequest for the full variable documentation.
 	CreateAssetVersion(ctx context.Context, req *CreateAssetVersionRequest, opts ...http.CallOption) (rsp *v1.CreateAssetVersionResponse, err error)
+	// DeleteAsset Delete an asset and all its versions. Only DRAFT or ARCHIVED assets can be deleted.
 	DeleteAsset(ctx context.Context, req *DeleteAssetRequest, opts ...http.CallOption) (rsp *v1.DeleteAssetResponse, err error)
+	// DeleteAssetVersion Delete an asset version. Only DRAFT or ARCHIVED versions can be deleted.
 	DeleteAssetVersion(ctx context.Context, req *DeleteAssetVersionRequest, opts ...http.CallOption) (rsp *v1.DeleteAssetVersionResponse, err error)
+	// GetAsset Get a single asset by ID, including all its versions.
 	GetAsset(ctx context.Context, req *GetAssetRequest, opts ...http.CallOption) (rsp *v1.GetAssetResponse, err error)
+	// GetAssetVersion Get a single asset version by ID.
 	GetAssetVersion(ctx context.Context, req *GetAssetVersionRequest, opts ...http.CallOption) (rsp *v1.GetAssetVersionResponse, err error)
-	// ListAssetVariables Variables
+	// ListAssetVariables List all registered template variables, with optional filtering by asset type and source.
+	// Use this to populate the variable picker in the template editor UI.
 	ListAssetVariables(ctx context.Context, req *ListAssetVariablesRequest, opts ...http.CallOption) (rsp *v1.ListAssetVariablesResponse, err error)
+	// ListAssetVersions List all versions belonging to a specific asset.
 	ListAssetVersions(ctx context.Context, req *ListAssetVersionsRequest, opts ...http.CallOption) (rsp *v1.ListAssetVersionsResponse, err error)
+	// ListAssets List assets with optional filtering by type, status, and inheritance.
 	ListAssets(ctx context.Context, req *ListAssetsRequest, opts ...http.CallOption) (rsp *v1.ListAssetsResponse, err error)
-	// RenderAsset Rendering
+	// RenderAsset Render an asset version for a specific country with provided data.
+	// Resolves all `{{variable_name}}` placeholders and returns the final content.
 	RenderAsset(ctx context.Context, req *RenderAssetRequest, opts ...http.CallOption) (rsp *v1.RenderAssetResponse, err error)
+	// UpdateAsset Partially update an existing asset. Only provided fields are updated.
 	UpdateAsset(ctx context.Context, req *UpdateAssetRequest, opts ...http.CallOption) (rsp *v1.UpdateAssetResponse, err error)
+	// UpdateAssetStatus Transition an asset's lifecycle status.
+	// Activating validates that all required country versions are also active.
 	UpdateAssetStatus(ctx context.Context, req *UpdateAssetStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateAssetStatusResponse, err error)
+	// UpdateAssetVersion Partially update an existing asset version. Only provided fields are updated.
+	// If content_url changes, variables are re-extracted from the new content.
 	UpdateAssetVersion(ctx context.Context, req *UpdateAssetVersionRequest, opts ...http.CallOption) (rsp *v1.UpdateAssetVersionResponse, err error)
+	// UpdateAssetVersionStatus Transition a version's lifecycle status.
 	UpdateAssetVersionStatus(ctx context.Context, req *UpdateAssetVersionStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateAssetVersionStatusResponse, err error)
 }
 
@@ -411,7 +443,8 @@ func NewBackofficeAssetHTTPClient(client *http.Client) BackofficeAssetHTTPClient
 	return &BackofficeAssetHTTPClientImpl{client}
 }
 
-// CreateAsset Asset CRUD operations
+// CreateAsset Create a new asset (template) with optional inline versions.
+// See CreateAssetRequest.metadata for the full metadata format documentation.
 func (c *BackofficeAssetHTTPClientImpl) CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...http.CallOption) (*v1.CreateAssetResponse, error) {
 	var out v1.CreateAssetResponse
 	pattern := "/v1/backoffice/crm/asset/create"
@@ -425,7 +458,8 @@ func (c *BackofficeAssetHTTPClientImpl) CreateAsset(ctx context.Context, in *Cre
 	return &out, nil
 }
 
-// CreateAssetVersion Asset Version Management
+// CreateAssetVersion Create a new country-specific version for an existing asset.
+// See CreateAssetVersionRequest for the full variable documentation.
 func (c *BackofficeAssetHTTPClientImpl) CreateAssetVersion(ctx context.Context, in *CreateAssetVersionRequest, opts ...http.CallOption) (*v1.CreateAssetVersionResponse, error) {
 	var out v1.CreateAssetVersionResponse
 	pattern := "/v1/backoffice/crm/asset/version/create"
@@ -439,6 +473,7 @@ func (c *BackofficeAssetHTTPClientImpl) CreateAssetVersion(ctx context.Context, 
 	return &out, nil
 }
 
+// DeleteAsset Delete an asset and all its versions. Only DRAFT or ARCHIVED assets can be deleted.
 func (c *BackofficeAssetHTTPClientImpl) DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...http.CallOption) (*v1.DeleteAssetResponse, error) {
 	var out v1.DeleteAssetResponse
 	pattern := "/v1/backoffice/crm/asset/delete"
@@ -452,6 +487,7 @@ func (c *BackofficeAssetHTTPClientImpl) DeleteAsset(ctx context.Context, in *Del
 	return &out, nil
 }
 
+// DeleteAssetVersion Delete an asset version. Only DRAFT or ARCHIVED versions can be deleted.
 func (c *BackofficeAssetHTTPClientImpl) DeleteAssetVersion(ctx context.Context, in *DeleteAssetVersionRequest, opts ...http.CallOption) (*v1.DeleteAssetVersionResponse, error) {
 	var out v1.DeleteAssetVersionResponse
 	pattern := "/v1/backoffice/crm/asset/version/delete"
@@ -465,6 +501,7 @@ func (c *BackofficeAssetHTTPClientImpl) DeleteAssetVersion(ctx context.Context, 
 	return &out, nil
 }
 
+// GetAsset Get a single asset by ID, including all its versions.
 func (c *BackofficeAssetHTTPClientImpl) GetAsset(ctx context.Context, in *GetAssetRequest, opts ...http.CallOption) (*v1.GetAssetResponse, error) {
 	var out v1.GetAssetResponse
 	pattern := "/v1/backoffice/crm/asset/get"
@@ -478,6 +515,7 @@ func (c *BackofficeAssetHTTPClientImpl) GetAsset(ctx context.Context, in *GetAss
 	return &out, nil
 }
 
+// GetAssetVersion Get a single asset version by ID.
 func (c *BackofficeAssetHTTPClientImpl) GetAssetVersion(ctx context.Context, in *GetAssetVersionRequest, opts ...http.CallOption) (*v1.GetAssetVersionResponse, error) {
 	var out v1.GetAssetVersionResponse
 	pattern := "/v1/backoffice/crm/asset/version/get"
@@ -491,7 +529,8 @@ func (c *BackofficeAssetHTTPClientImpl) GetAssetVersion(ctx context.Context, in 
 	return &out, nil
 }
 
-// ListAssetVariables Variables
+// ListAssetVariables List all registered template variables, with optional filtering by asset type and source.
+// Use this to populate the variable picker in the template editor UI.
 func (c *BackofficeAssetHTTPClientImpl) ListAssetVariables(ctx context.Context, in *ListAssetVariablesRequest, opts ...http.CallOption) (*v1.ListAssetVariablesResponse, error) {
 	var out v1.ListAssetVariablesResponse
 	pattern := "/v1/backoffice/crm/asset/variables"
@@ -505,6 +544,7 @@ func (c *BackofficeAssetHTTPClientImpl) ListAssetVariables(ctx context.Context, 
 	return &out, nil
 }
 
+// ListAssetVersions List all versions belonging to a specific asset.
 func (c *BackofficeAssetHTTPClientImpl) ListAssetVersions(ctx context.Context, in *ListAssetVersionsRequest, opts ...http.CallOption) (*v1.ListAssetVersionsResponse, error) {
 	var out v1.ListAssetVersionsResponse
 	pattern := "/v1/backoffice/crm/asset/version/list"
@@ -518,6 +558,7 @@ func (c *BackofficeAssetHTTPClientImpl) ListAssetVersions(ctx context.Context, i
 	return &out, nil
 }
 
+// ListAssets List assets with optional filtering by type, status, and inheritance.
 func (c *BackofficeAssetHTTPClientImpl) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...http.CallOption) (*v1.ListAssetsResponse, error) {
 	var out v1.ListAssetsResponse
 	pattern := "/v1/backoffice/crm/asset/list"
@@ -531,7 +572,8 @@ func (c *BackofficeAssetHTTPClientImpl) ListAssets(ctx context.Context, in *List
 	return &out, nil
 }
 
-// RenderAsset Rendering
+// RenderAsset Render an asset version for a specific country with provided data.
+// Resolves all `{{variable_name}}` placeholders and returns the final content.
 func (c *BackofficeAssetHTTPClientImpl) RenderAsset(ctx context.Context, in *RenderAssetRequest, opts ...http.CallOption) (*v1.RenderAssetResponse, error) {
 	var out v1.RenderAssetResponse
 	pattern := "/v1/backoffice/crm/asset/render"
@@ -545,6 +587,7 @@ func (c *BackofficeAssetHTTPClientImpl) RenderAsset(ctx context.Context, in *Ren
 	return &out, nil
 }
 
+// UpdateAsset Partially update an existing asset. Only provided fields are updated.
 func (c *BackofficeAssetHTTPClientImpl) UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...http.CallOption) (*v1.UpdateAssetResponse, error) {
 	var out v1.UpdateAssetResponse
 	pattern := "/v1/backoffice/crm/asset/update"
@@ -558,6 +601,8 @@ func (c *BackofficeAssetHTTPClientImpl) UpdateAsset(ctx context.Context, in *Upd
 	return &out, nil
 }
 
+// UpdateAssetStatus Transition an asset's lifecycle status.
+// Activating validates that all required country versions are also active.
 func (c *BackofficeAssetHTTPClientImpl) UpdateAssetStatus(ctx context.Context, in *UpdateAssetStatusRequest, opts ...http.CallOption) (*v1.UpdateAssetStatusResponse, error) {
 	var out v1.UpdateAssetStatusResponse
 	pattern := "/v1/backoffice/crm/asset/status"
@@ -571,6 +616,8 @@ func (c *BackofficeAssetHTTPClientImpl) UpdateAssetStatus(ctx context.Context, i
 	return &out, nil
 }
 
+// UpdateAssetVersion Partially update an existing asset version. Only provided fields are updated.
+// If content_url changes, variables are re-extracted from the new content.
 func (c *BackofficeAssetHTTPClientImpl) UpdateAssetVersion(ctx context.Context, in *UpdateAssetVersionRequest, opts ...http.CallOption) (*v1.UpdateAssetVersionResponse, error) {
 	var out v1.UpdateAssetVersionResponse
 	pattern := "/v1/backoffice/crm/asset/version/update"
@@ -584,6 +631,7 @@ func (c *BackofficeAssetHTTPClientImpl) UpdateAssetVersion(ctx context.Context, 
 	return &out, nil
 }
 
+// UpdateAssetVersionStatus Transition a version's lifecycle status.
 func (c *BackofficeAssetHTTPClientImpl) UpdateAssetVersionStatus(ctx context.Context, in *UpdateAssetVersionStatusRequest, opts ...http.CallOption) (*v1.UpdateAssetVersionStatusResponse, error) {
 	var out v1.UpdateAssetVersionStatusResponse
 	pattern := "/v1/backoffice/crm/asset/version/status"

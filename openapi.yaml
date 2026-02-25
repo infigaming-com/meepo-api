@@ -1532,7 +1532,9 @@ paths:
         post:
             tags:
                 - BackofficeAsset
-            description: Asset CRUD operations
+            description: |-
+                Create a new asset (template) with optional inline versions.
+                 See CreateAssetRequest.metadata for the full metadata format documentation.
             operationId: BackofficeAsset_CreateAsset
             requestBody:
                 content:
@@ -1551,6 +1553,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: Delete an asset and all its versions. Only DRAFT or ARCHIVED assets can be deleted.
             operationId: BackofficeAsset_DeleteAsset
             requestBody:
                 content:
@@ -1569,6 +1572,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: Get a single asset by ID, including all its versions.
             operationId: BackofficeAsset_GetAsset
             requestBody:
                 content:
@@ -1587,6 +1591,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: List assets with optional filtering by type, status, and inheritance.
             operationId: BackofficeAsset_ListAssets
             requestBody:
                 content:
@@ -1605,7 +1610,9 @@ paths:
         post:
             tags:
                 - BackofficeAsset
-            description: Rendering
+            description: |-
+                Render an asset version for a specific country with provided data.
+                 Resolves all `{{variable_name}}` placeholders and returns the final content.
             operationId: BackofficeAsset_RenderAsset
             requestBody:
                 content:
@@ -1624,6 +1631,9 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: |-
+                Transition an asset's lifecycle status.
+                 Activating validates that all required country versions are also active.
             operationId: BackofficeAsset_UpdateAssetStatus
             requestBody:
                 content:
@@ -1642,6 +1652,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: Partially update an existing asset. Only provided fields are updated.
             operationId: BackofficeAsset_UpdateAsset
             requestBody:
                 content:
@@ -1660,7 +1671,9 @@ paths:
         post:
             tags:
                 - BackofficeAsset
-            description: Variables
+            description: |-
+                List all registered template variables, with optional filtering by asset type and source.
+                 Use this to populate the variable picker in the template editor UI.
             operationId: BackofficeAsset_ListAssetVariables
             requestBody:
                 content:
@@ -1679,7 +1692,9 @@ paths:
         post:
             tags:
                 - BackofficeAsset
-            description: Asset Version Management
+            description: |-
+                Create a new country-specific version for an existing asset.
+                 See CreateAssetVersionRequest for the full variable documentation.
             operationId: BackofficeAsset_CreateAssetVersion
             requestBody:
                 content:
@@ -1698,6 +1713,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: Delete an asset version. Only DRAFT or ARCHIVED versions can be deleted.
             operationId: BackofficeAsset_DeleteAssetVersion
             requestBody:
                 content:
@@ -1716,6 +1732,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: Get a single asset version by ID.
             operationId: BackofficeAsset_GetAssetVersion
             requestBody:
                 content:
@@ -1734,6 +1751,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: List all versions belonging to a specific asset.
             operationId: BackofficeAsset_ListAssetVersions
             requestBody:
                 content:
@@ -1752,6 +1770,7 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: Transition a version's lifecycle status.
             operationId: BackofficeAsset_UpdateAssetVersionStatus
             requestBody:
                 content:
@@ -1770,6 +1789,9 @@ paths:
         post:
             tags:
                 - BackofficeAsset
+            description: |-
+                Partially update an existing asset version. Only provided fields are updated.
+                 If content_url changes, variables are re-extracted from the new content.
             operationId: BackofficeAsset_UpdateAssetVersion
             requestBody:
                 content:
@@ -12958,13 +12980,18 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership and permission resolution.
                 assetKey:
                     type: string
+                    description: Optional unique key for programmatic lookup (e.g. `"welcome_email"`). Must be unique within the operator scope.
                 name:
                     type: string
+                    description: Display name for the asset
                 description:
                     type: string
+                    description: Description of the asset's purpose
                 type:
                     enum:
                         - ASSET_TYPE_UNSPECIFIED
@@ -12973,34 +13000,192 @@ components:
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
                     type: string
+                    description: 'Delivery channel: `ASSET_TYPE_EMAIL`, `ASSET_TYPE_SMS`, `ASSET_TYPE_PUSH`, `ASSET_TYPE_INBOX`'
                     format: enum
                 metadata:
                     type: object
+                    description: |-
+                        Type-specific configuration. Structure varies by asset type.
+
+                         ## Email (`ASSET_TYPE_EMAIL`)
+
+                         ```json
+                         {
+                           "from_name": "Speedix",
+                           "from_email": "noreply@speedix.io",
+                           "reply_to": "support@speedix.io",
+                           "track_opens": true,
+                           "track_clicks": true
+                         }
+                         ```
+
+                         | Field | Type | Description |
+                         |-------|------|-------------|
+                         | `from_name` | string | Sender display name |
+                         | `from_email` | string | Sender email address |
+                         | `reply_to` | string | Reply-to address (optional) |
+                         | `track_opens` | bool | Enable open tracking pixel (optional, default `false`) |
+                         | `track_clicks` | bool | Enable click URL rewriting for tracking (optional, default `false`) |
+
+                         ## Push (`ASSET_TYPE_PUSH`)
+
+                         ```json
+                         {
+                           "icon": "https://cdn.example.com/icon.png",
+                           "image": "https://cdn.example.com/hero.png",
+                           "action_url": "https://example.com/promo",
+                           "badge_count": 1,
+                           "sound": "default"
+                         }
+                         ```
+
+                         | Field | Type | Description |
+                         |-------|------|-------------|
+                         | `icon` | string | Notification icon URL (optional) |
+                         | `image` | string | Hero image URL (optional) |
+                         | `action_url` | string | Deep link on notification tap (optional) |
+                         | `badge_count` | int | App badge counter value (optional) |
+                         | `sound` | string | Sound file name or `"default"` (optional) |
+
+                         ## SMS (`ASSET_TYPE_SMS`)
+
+                         ```json
+                         {
+                           "sender_id": "SPEEDIX"
+                         }
+                         ```
+
+                         | Field | Type | Description |
+                         |-------|------|-------------|
+                         | `sender_id` | string | SMS originating number or alphanumeric ID |
+
+                         ## Inbox (`ASSET_TYPE_INBOX`)
+
+                         ```json
+                         {
+                           "category": "promotions",
+                           "priority": 50
+                         }
+                         ```
+
+                         | Field | Type | Description |
+                         |-------|------|-------------|
+                         | `category` | string | Message category for inbox filtering (optional) |
+                         | `priority` | int | Display priority 0–100, higher = more prominent (optional) |
                 versions:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.AssetVersionInput'
-            description: CreateAsset
+                    description: Optional inline versions to create with the asset. Use `"global"` as the default fallback country.
+            description: |-
+                Create a new asset.
+                 See metadata field for the full metadata JSON format documentation.
         api.backoffice.service.v1.CreateAssetVersionRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 assetId:
                     type: string
+                    description: Parent asset ID
                 country:
                     type: string
+                    description: |-
+                        ISO 3166-1 alpha-2 country code (e.g. `"US"`, `"GB"`, `"TH"`), or `"global"` for the default fallback version.
+                         When rendering, the system tries the specific country first, then falls back to `"global"`.
                 subject:
                     type: string
+                    description: |-
+                        Message subject line. For Email: email subject; for SMS/Push: message title.
+                         Supports `{{variable_name}}` syntax — see the variable documentation below.
                 contentUrl:
                     type: string
+                    description: |-
+                        Path to the template content in R2 storage (e.g. `"/static/default/email/welcome.html"`).
+                         Content is fetched, validated, and cached for 15 minutes. Max size: 10 MB.
+
+                         The content body supports `{{variable_name}}` placeholders that are resolved at render time.
+
+                         ## Available Variables
+
+                         **Player** (`VARIABLE_SOURCE_PLAYER`) — from user profile:
+
+                         | Variable | Type | Description |
+                         |----------|------|-------------|
+                         | `user_id` | string | Unique user identifier |
+                         | `username` | string | User display name |
+                         | `email` | string | User email address |
+                         | `vip_level` | number | VIP tier (0–N) |
+                         | `kyc_level` | number | KYC verification level |
+                         | `registration_country` | string | ISO country code at registration |
+                         | `registration_date` | date | Account creation date |
+                         | `ftd_date` | date | First time deposit date |
+                         | `last_deposit_time` | date | Most recent deposit timestamp |
+                         | `device_type` | string | Device used for registration |
+                         | `login_banned` | string | Login restriction status (`true`/`false`) |
+                         | `withdraw_banned` | string | Withdrawal restriction status (`true`/`false`) |
+                         | `game_banned` | string | Game restriction status (`true`/`false`) |
+                         | `locked` | string | Account lock status (`true`/`false`) |
+
+                         **Wallet** (`VARIABLE_SOURCE_WALLET`) — real-time from wallet service, USD equivalent:
+
+                         | Variable | Type | Description |
+                         |----------|------|-------------|
+                         | `balance` | currency | Current account balance |
+                         | `deposit_amount` | currency | Total deposit amount |
+                         | `deposit_count` | number | Number of deposit transactions |
+                         | `withdrawal_amount` | currency | Total withdrawal amount |
+                         | `withdrawal_count` | number | Number of withdrawal transactions |
+                         | `bet_amount` | currency | Total bet amount |
+                         | `bet_count` | number | Total number of bets |
+                         | `win_amount` | currency | Total win amount |
+                         | `win_count` | number | Total number of winning bets |
+                         | `ggr` | currency | Gross Gaming Revenue |
+                         | `ngr` | currency | Net Gaming Revenue |
+
+                         **Campaign** (`VARIABLE_SOURCE_CAMPAIGN`) — arbitrary key-value pairs passed at render time:
+                         e.g. `bonus_amount`, `promo_code`, `offer_name`, `expiry_date`
+
+                         **Custom** (`VARIABLE_SOURCE_CUSTOM`) — system-level variables, highest priority at render time:
+                         e.g. `brand_name`, `site_url`, `unsubscribe_url`, `country`
+
+                         ## Type Formatting
+
+                         | Type | Formatting | Example |
+                         |------|-----------|---------|
+                         | `string` | Plain text, HTML-escaped | `"Hello"` |
+                         | `number` | Trailing zeros removed | `100.00` → `"100"` |
+                         | `currency` | Fixed 2 decimal places | `100` → `"100.00"` |
+                         | `date` | Locale-aware | `"Jan 2, 2006"` |
+                         | `url` | Raw value, NOT HTML-escaped | `"https://example.com"` |
+
+                         ## Resolution Priority (highest → lowest)
+
+                         1. `custom_data` → 2. `campaign_data` → 3. `player_data` → 4. `wallet_data` → 5. registered `default_value`
+
+                         Unresolved variables remain as `{{variable_name}}` in the output.
+
+                         ## Example
+
+                         ```html
+                         <h1>Welcome to {{brand_name}}!</h1>
+                         <p>Hello {{username}}, your balance is {{balance}}.</p>
+                         <a href="{{site_url}}/promotions">Claim {{bonus_amount}} bonus</a>
+                         ```
                 previewText:
                     type: string
+                    description: 'Short preview text (optional). For Email: preheader; for Push: subtitle. Supports `{{variable_name}}` syntax.'
                 contentType:
                     type: string
+                    description: 'MIME type of the content: `"text/html"` (default) or `"text/plain"`'
                 isRequired:
                     type: boolean
-            description: CreateAssetVersion
+                    description: If `true`, this version must be ACTIVE before the parent asset can be activated.
+            description: |-
+                Create a new country-specific version for an existing asset.
+                 Content is fetched from R2, validated for XSS, and parsed to extract `{{variable_name}}` placeholders.
         api.backoffice.service.v1.CreateCampaignRequest:
             type: object
             properties:
@@ -13727,18 +13912,24 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: DeleteAsset
+                    description: Asset ID to delete. Must be in DRAFT or ARCHIVED status.
+            description: Delete an asset and all its versions.
         api.backoffice.service.v1.DeleteAssetVersionRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: DeleteAssetVersion
+                    description: Asset version ID to delete. Must be in DRAFT or ARCHIVED status.
+            description: Delete an asset version.
         api.backoffice.service.v1.DeleteCampaignRequest:
             type: object
             properties:
@@ -14353,18 +14544,24 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: GetAsset
+                    description: Asset ID
+            description: Get a single asset by ID.
         api.backoffice.service.v1.GetAssetVersionRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: GetAssetVersion
+                    description: Asset version ID
+            description: Get a single asset version by ID.
         api.backoffice.service.v1.GetBalanceSummaryRequest:
             type: object
             properties:
@@ -16247,7 +16444,9 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for scoping (includes global + operator-specific variables).
                 assetType:
                     enum:
                         - ASSET_TYPE_UNSPECIFIED
@@ -16256,6 +16455,7 @@ components:
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
                     type: string
+                    description: Filter by asset type (optional)
                     format: enum
                 source:
                     enum:
@@ -16265,21 +16465,27 @@ components:
                         - VARIABLE_SOURCE_CAMPAIGN
                         - VARIABLE_SOURCE_CUSTOM
                     type: string
+                    description: 'Filter by source (optional): `VARIABLE_SOURCE_PLAYER`, `VARIABLE_SOURCE_WALLET`, `VARIABLE_SOURCE_CAMPAIGN`, `VARIABLE_SOURCE_CUSTOM`'
                     format: enum
-            description: ListAssetVariables
+            description: List registered template variables with optional filtering.
         api.backoffice.service.v1.ListAssetVersionsRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 assetId:
                     type: string
-            description: ListAssetVersions
+                    description: Parent asset ID
+            description: List all versions belonging to a specific asset.
         api.backoffice.service.v1.ListAssetsRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
                 type:
                     enum:
                         - ASSET_TYPE_UNSPECIFIED
@@ -16288,6 +16494,7 @@ components:
                         - ASSET_TYPE_PUSH
                         - ASSET_TYPE_INBOX
                     type: string
+                    description: Filter by asset type (optional)
                     format: enum
                 status:
                     enum:
@@ -16296,16 +16503,20 @@ components:
                         - ASSET_STATUS_ACTIVE
                         - ASSET_STATUS_ARCHIVED
                     type: string
+                    description: Filter by status (optional)
                     format: enum
                 includeInherited:
                     type: boolean
+                    description: Include assets inherited from parent operators (system/retailer/company)
                 page:
                     type: integer
+                    description: Page number (1-based, default 1)
                     format: int32
                 pageSize:
                     type: integer
+                    description: Items per page (default 20, max 100)
                     format: int32
-            description: ListAssets
+            description: List assets with filtering and pagination.
         api.backoffice.service.v1.ListAuditActionsRequest:
             type: object
             properties: {}
@@ -20099,20 +20310,59 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check and variable scoping.
                 assetId:
                     type: string
+                    description: Asset ID to render
                 country:
                     type: string
+                    description: Country code to select the version. Falls back to `"global"` if not found.
                 playerData:
                     type: object
+                    description: Player profile data (e.g. `username`, `email`, `vip_level`). Keys match variable_name in the registry.
                 walletData:
                     type: object
+                    description: Wallet data (e.g. `balance`, `deposit_amount`, `ggr`). Typically fetched real-time from wallet service.
                 campaignData:
                     type: object
+                    description: Campaign-specific data (e.g. `bonus_amount`, `promo_code`). Arbitrary key-value pairs.
                 customData:
                     type: object
-            description: RenderAsset
+                    description: 'Custom runtime overrides — highest priority, overrides all other sources. Common: `brand_name`, `site_url`, `unsubscribe_url`.'
+            description: |-
+                Render an asset version with provided data for preview or campaign execution.
+                 Resolves all `{{variable_name}}` placeholders. Unresolved variables remain as-is
+                 and are listed in `unresolved_variables`.
+
+                 ## Example
+
+                 **Request:**
+
+                 ```json
+                 {
+                   "asset_id": 42,
+                   "country": "US",
+                   "player_data": { "username": "john_doe", "email": "john@example.com" },
+                   "wallet_data": { "balance": 150.50 },
+                   "campaign_data": { "bonus_amount": "100" },
+                   "custom_data": { "brand_name": "MySite", "site_url": "https://mysite.com" }
+                 }
+                 ```
+
+                 **Response:**
+
+                 ```json
+                 {
+                   "subject": "Hello john_doe, claim your 100 bonus!",
+                   "content": "<h1>Welcome to MySite!</h1><p>Your balance: 150.50</p>",
+                   "content_type": "text/html",
+                   "country": "US",
+                   "resolved_variables": { "username": "john_doe", "balance": "150.50", "bonus_amount": "100" },
+                   "unresolved_variables": []
+                 }
+                 ```
         api.backoffice.service.v1.RepairAllSegmentsRequest:
             type: object
             properties:
@@ -20547,29 +20797,40 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Asset ID to update
                 assetKey:
                     type: string
+                    description: New unique key (optional)
                 name:
                     type: string
+                    description: New name (optional)
                 description:
                     type: string
+                    description: New description (optional)
                 metadata:
                     type: object
+                    description: Updated metadata — replaces the entire metadata object. Same format as CreateAssetRequest.metadata.
                 versions:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.crm.service.v1.AssetVersionInput'
-            description: UpdateAsset
+                    description: Inline versions to upsert, matched by country code.
+            description: Partially update an existing asset. Only provided optional fields are modified.
         api.backoffice.service.v1.UpdateAssetStatusRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Asset ID
                 status:
                     enum:
                         - ASSET_STATUS_UNSPECIFIED
@@ -20577,33 +20838,45 @@ components:
                         - ASSET_STATUS_ACTIVE
                         - ASSET_STATUS_ARCHIVED
                     type: string
+                    description: 'New status. Valid transitions: `DRAFT→ACTIVE` (validates required versions), `DRAFT→ARCHIVED`, `ACTIVE→ARCHIVED`, `ARCHIVED→DRAFT`.'
                     format: enum
-            description: UpdateAssetStatus
+            description: Transition an asset's lifecycle status.
         api.backoffice.service.v1.UpdateAssetVersionRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Asset version ID to update
                 subject:
                     type: string
+                    description: New subject line (optional). Supports `{{variable_name}}` syntax.
                 contentUrl:
                     type: string
+                    description: New content URL (optional). Variables are re-extracted from the new content.
                 previewText:
                     type: string
+                    description: New preview text (optional). Supports `{{variable_name}}` syntax.
                 contentType:
                     type: string
+                    description: 'New content type (optional): `"text/html"` or `"text/plain"`'
                 isRequired:
                     type: boolean
-            description: UpdateAssetVersion
+                    description: Updated is_required flag (optional)
+            description: Partially update an existing asset version. Only provided optional fields are modified.
         api.backoffice.service.v1.UpdateAssetVersionStatusRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Asset version ID
                 status:
                     enum:
                         - ASSET_STATUS_UNSPECIFIED
@@ -20611,8 +20884,9 @@ components:
                         - ASSET_STATUS_ACTIVE
                         - ASSET_STATUS_ARCHIVED
                     type: string
+                    description: 'New status. Valid transitions: `DRAFT→ACTIVE`, `DRAFT→ARCHIVED`, `ACTIVE→ARCHIVED`, `ARCHIVED→DRAFT`.'
                     format: enum
-            description: UpdateAssetVersionStatus
+            description: Transition a version's lifecycle status.
         api.backoffice.service.v1.UpdateBankAccountRequest:
             type: object
             properties:
@@ -30607,7 +30881,10 @@ tags:
     - name: BackofficeAccount
     - name: BackofficeAffiliate
     - name: BackofficeAsset
-      description: Asset management service for backoffice
+      description: |-
+        Asset management service for backoffice.
+         Provides CRUD, versioning, variable registry and rendering APIs for managing
+         marketing campaign templates (Email, SMS, Push, Inbox).
     - name: BackofficeAudit
     - name: BackofficeBcpay
       description: |-
