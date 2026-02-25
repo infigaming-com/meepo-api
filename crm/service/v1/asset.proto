@@ -89,18 +89,19 @@ message Asset {
     int64 owner_system_operator_id = 10;
     OwnerLevel owner_level = 11;
 
-    string default_locale = 12;
+    reserved 12;
     google.protobuf.Struct metadata = 13;
 
     google.protobuf.Timestamp created_at = 14;
     google.protobuf.Timestamp updated_at = 15;
+    repeated AssetVersion versions = 16;
 }
 
-// AssetVersion represents a language-specific version of an asset
+// AssetVersion represents a country-specific version of an asset
 message AssetVersion {
     int64 id = 1;
     int64 asset_id = 2;
-    string locale = 3;
+    string country = 3;
     string subject = 4;
     string content_url = 5;
     string preview_text = 6;
@@ -111,6 +112,16 @@ message AssetVersion {
     AssetStatus status = 11;
     google.protobuf.Timestamp created_at = 12;
     google.protobuf.Timestamp updated_at = 13;
+}
+
+// AssetVersionInput represents input data for creating/updating asset versions inline
+message AssetVersionInput {
+    string country = 1;
+    string subject = 2;
+    string content_url = 3;
+    optional string preview_text = 4;
+    string content_type = 5;
+    bool is_required = 6;
 }
 
 // AssetVariable represents a template variable definition
@@ -134,9 +145,10 @@ message CreateAssetRequest {
     string name = 2;
     string description = 3;
     AssetType type = 4;
-    string default_locale = 5;
+    reserved 5;
     google.protobuf.Struct metadata = 6;
     api.common.OperatorContext operator_context = 7;
+    repeated AssetVersionInput versions = 8;
 }
 
 message CreateAssetResponse {
@@ -159,9 +171,10 @@ message UpdateAssetRequest {
     optional string asset_key = 2;
     optional string name = 3;
     optional string description = 4;
-    optional string default_locale = 5;
+    reserved 5;
     google.protobuf.Struct metadata = 6;
     api.common.OperatorContext operator_context = 7;
+    repeated AssetVersionInput versions = 8;
 }
 
 message UpdateAssetResponse {
@@ -207,10 +220,10 @@ message UpdateAssetStatusResponse {
 // CreateAssetVersion
 message CreateAssetVersionRequest {
     int64 asset_id = 1;
-    string locale = 2;
+    string country = 2;
     string subject = 3;
     string content_url = 4;
-    string preview_text = 5;
+    optional string preview_text = 5;
     string content_type = 6;
     bool is_required = 7;
     api.common.OperatorContext operator_context = 8;
@@ -288,7 +301,7 @@ message ListAssetVariablesResponse {
 // RenderAsset - renders an asset with provided data
 message RenderAssetRequest {
     int64 asset_id = 1;
-    string locale = 2;
+    string country = 2;
     google.protobuf.Struct player_data = 3;
     google.protobuf.Struct wallet_data = 4;
     google.protobuf.Struct campaign_data = 5;
@@ -301,7 +314,7 @@ message RenderAssetResponse {
     string content = 2;
     string preview_text = 3;
     string content_type = 4;
-    string locale = 5;
+    string country = 5;
     map<string, string> resolved_variables = 6;
     repeated string unresolved_variables = 7;
 }

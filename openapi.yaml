@@ -12974,10 +12974,12 @@ components:
                         - ASSET_TYPE_INBOX
                     type: string
                     format: enum
-                defaultLocale:
-                    type: string
                 metadata:
                     type: object
+                versions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.AssetVersionInput'
             description: CreateAsset
         api.backoffice.service.v1.CreateAssetVersionRequest:
             type: object
@@ -12986,7 +12988,7 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 assetId:
                     type: string
-                locale:
+                country:
                     type: string
                 subject:
                     type: string
@@ -20100,7 +20102,7 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 assetId:
                     type: string
-                locale:
+                country:
                     type: string
                 playerData:
                     type: object
@@ -20554,10 +20556,12 @@ components:
                     type: string
                 description:
                     type: string
-                defaultLocale:
-                    type: string
                 metadata:
                     type: object
+                versions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.AssetVersionInput'
             description: UpdateAsset
         api.backoffice.service.v1.UpdateAssetStatusRequest:
             type: object
@@ -22037,8 +22041,6 @@ components:
                         - OWNER_LEVEL_OPERATOR
                     type: string
                     format: enum
-                defaultLocale:
-                    type: string
                 metadata:
                     type: object
                 createdAt:
@@ -22047,6 +22049,10 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                versions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.crm.service.v1.AssetVersion'
             description: Asset represents a marketing campaign template
         api.crm.service.v1.AssetVariable:
             type: object
@@ -22099,7 +22105,7 @@ components:
                     type: string
                 assetId:
                     type: string
-                locale:
+                country:
                     type: string
                 subject:
                     type: string
@@ -22129,7 +22135,23 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
-            description: AssetVersion represents a language-specific version of an asset
+            description: AssetVersion represents a country-specific version of an asset
+        api.crm.service.v1.AssetVersionInput:
+            type: object
+            properties:
+                country:
+                    type: string
+                subject:
+                    type: string
+                contentUrl:
+                    type: string
+                previewText:
+                    type: string
+                contentType:
+                    type: string
+                isRequired:
+                    type: boolean
+            description: AssetVersionInput represents input data for creating/updating asset versions inline
         api.crm.service.v1.CalculateSegmentResponse:
             type: object
             properties:
@@ -22333,7 +22355,7 @@ components:
                     type: string
                 contentType:
                     type: string
-                locale:
+                country:
                     type: string
                 resolvedVariables:
                     type: object

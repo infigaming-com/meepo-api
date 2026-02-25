@@ -76,8 +76,6 @@ func (m *Asset) validate(all bool) error {
 
 	// no validation rules for OwnerLevel
 
-	// no validation rules for DefaultLocale
-
 	if all {
 		switch v := interface{}(m.GetMetadata()).(type) {
 		case interface{ ValidateAll() error }:
@@ -163,6 +161,40 @@ func (m *Asset) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	for idx, item := range m.GetVersions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AssetValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AssetValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AssetValidationError{
+					field:  fmt.Sprintf("Versions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.AssetKey != nil {
@@ -272,7 +304,7 @@ func (m *AssetVersion) validate(all bool) error {
 
 	// no validation rules for AssetId
 
-	// no validation rules for Locale
+	// no validation rules for Country
 
 	// no validation rules for Subject
 
@@ -452,6 +484,122 @@ var _ interface {
 	ErrorName() string
 } = AssetVersionValidationError{}
 
+// Validate checks the field values on AssetVersionInput with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AssetVersionInput) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AssetVersionInput with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AssetVersionInputMultiError, or nil if none found.
+func (m *AssetVersionInput) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AssetVersionInput) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	// no validation rules for Subject
+
+	// no validation rules for ContentUrl
+
+	// no validation rules for ContentType
+
+	// no validation rules for IsRequired
+
+	if m.PreviewText != nil {
+		// no validation rules for PreviewText
+	}
+
+	if len(errors) > 0 {
+		return AssetVersionInputMultiError(errors)
+	}
+
+	return nil
+}
+
+// AssetVersionInputMultiError is an error wrapping multiple validation errors
+// returned by AssetVersionInput.ValidateAll() if the designated constraints
+// aren't met.
+type AssetVersionInputMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AssetVersionInputMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AssetVersionInputMultiError) AllErrors() []error { return m }
+
+// AssetVersionInputValidationError is the validation error returned by
+// AssetVersionInput.Validate if the designated constraints aren't met.
+type AssetVersionInputValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AssetVersionInputValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AssetVersionInputValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AssetVersionInputValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AssetVersionInputValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AssetVersionInputValidationError) ErrorName() string {
+	return "AssetVersionInputValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AssetVersionInputValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAssetVersionInput.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AssetVersionInputValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AssetVersionInputValidationError{}
+
 // Validate checks the field values on AssetVariable with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -627,8 +775,6 @@ func (m *CreateAssetRequest) validate(all bool) error {
 
 	// no validation rules for Type
 
-	// no validation rules for DefaultLocale
-
 	if all {
 		switch v := interface{}(m.GetMetadata()).(type) {
 		case interface{ ValidateAll() error }:
@@ -685,6 +831,40 @@ func (m *CreateAssetRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	for idx, item := range m.GetVersions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateAssetRequestValidationError{
+					field:  fmt.Sprintf("Versions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.AssetKey != nil {
@@ -1244,6 +1424,40 @@ func (m *UpdateAssetRequest) validate(all bool) error {
 		}
 	}
 
+	for idx, item := range m.GetVersions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAssetRequestValidationError{
+					field:  fmt.Sprintf("Versions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.AssetKey != nil {
 		// no validation rules for AssetKey
 	}
@@ -1254,10 +1468,6 @@ func (m *UpdateAssetRequest) validate(all bool) error {
 
 	if m.Description != nil {
 		// no validation rules for Description
-	}
-
-	if m.DefaultLocale != nil {
-		// no validation rules for DefaultLocale
 	}
 
 	if len(errors) > 0 {
@@ -2283,13 +2493,11 @@ func (m *CreateAssetVersionRequest) validate(all bool) error {
 
 	// no validation rules for AssetId
 
-	// no validation rules for Locale
+	// no validation rules for Country
 
 	// no validation rules for Subject
 
 	// no validation rules for ContentUrl
-
-	// no validation rules for PreviewText
 
 	// no validation rules for ContentType
 
@@ -2322,6 +2530,10 @@ func (m *CreateAssetVersionRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.PreviewText != nil {
+		// no validation rules for PreviewText
 	}
 
 	if len(errors) > 0 {
@@ -4156,7 +4368,7 @@ func (m *RenderAssetRequest) validate(all bool) error {
 
 	// no validation rules for AssetId
 
-	// no validation rules for Locale
+	// no validation rules for Country
 
 	if all {
 		switch v := interface{}(m.GetPlayerData()).(type) {
@@ -4413,7 +4625,7 @@ func (m *RenderAssetResponse) validate(all bool) error {
 
 	// no validation rules for ContentType
 
-	// no validation rules for Locale
+	// no validation rules for Country
 
 	// no validation rules for ResolvedVariables
 
