@@ -96,8 +96,6 @@ func (m *CreateAssetRequest) validate(all bool) error {
 
 	// no validation rules for Type
 
-	// no validation rules for DefaultLocale
-
 	if all {
 		switch v := interface{}(m.GetMetadata()).(type) {
 		case interface{ ValidateAll() error }:
@@ -125,6 +123,40 @@ func (m *CreateAssetRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	for idx, item := range m.GetVersions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateAssetRequestValidationError{
+					field:  fmt.Sprintf("Versions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.AssetKey != nil {
@@ -424,6 +456,40 @@ func (m *UpdateAssetRequest) validate(all bool) error {
 		}
 	}
 
+	for idx, item := range m.GetVersions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAssetRequestValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAssetRequestValidationError{
+					field:  fmt.Sprintf("Versions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if m.AssetKey != nil {
 		// no validation rules for AssetKey
 	}
@@ -434,10 +500,6 @@ func (m *UpdateAssetRequest) validate(all bool) error {
 
 	if m.Description != nil {
 		// no validation rules for Description
-	}
-
-	if m.DefaultLocale != nil {
-		// no validation rules for DefaultLocale
 	}
 
 	if len(errors) > 0 {
@@ -986,17 +1048,19 @@ func (m *CreateAssetVersionRequest) validate(all bool) error {
 
 	// no validation rules for AssetId
 
-	// no validation rules for Locale
+	// no validation rules for Country
 
 	// no validation rules for Subject
 
 	// no validation rules for ContentUrl
 
-	// no validation rules for PreviewText
-
 	// no validation rules for ContentType
 
 	// no validation rules for IsRequired
+
+	if m.PreviewText != nil {
+		// no validation rules for PreviewText
+	}
 
 	if len(errors) > 0 {
 		return CreateAssetVersionRequestMultiError(errors)
@@ -1958,7 +2022,7 @@ func (m *RenderAssetRequest) validate(all bool) error {
 
 	// no validation rules for AssetId
 
-	// no validation rules for Locale
+	// no validation rules for Country
 
 	if all {
 		switch v := interface{}(m.GetPlayerData()).(type) {

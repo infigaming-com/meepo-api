@@ -33,8 +33,8 @@ type CreateAssetRequest struct {
 	Name                  string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Description           string                  `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Type                  v1.AssetType            `protobuf:"varint,5,opt,name=type,proto3,enum=api.crm.service.v1.AssetType" json:"type,omitempty"`
-	DefaultLocale         string                  `protobuf:"bytes,6,opt,name=default_locale,json=defaultLocale,proto3" json:"default_locale,omitempty"`
 	Metadata              *structpb.Struct        `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Versions              []*v1.AssetVersionInput `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -104,16 +104,16 @@ func (x *CreateAssetRequest) GetType() v1.AssetType {
 	return v1.AssetType(0)
 }
 
-func (x *CreateAssetRequest) GetDefaultLocale() string {
-	if x != nil {
-		return x.DefaultLocale
-	}
-	return ""
-}
-
 func (x *CreateAssetRequest) GetMetadata() *structpb.Struct {
 	if x != nil {
 		return x.Metadata
+	}
+	return nil
+}
+
+func (x *CreateAssetRequest) GetVersions() []*v1.AssetVersionInput {
+	if x != nil {
+		return x.Versions
 	}
 	return nil
 }
@@ -179,8 +179,8 @@ type UpdateAssetRequest struct {
 	AssetKey              *string                 `protobuf:"bytes,3,opt,name=asset_key,json=assetKey,proto3,oneof" json:"asset_key,omitempty"`
 	Name                  *string                 `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	Description           *string                 `protobuf:"bytes,5,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	DefaultLocale         *string                 `protobuf:"bytes,6,opt,name=default_locale,json=defaultLocale,proto3,oneof" json:"default_locale,omitempty"`
 	Metadata              *structpb.Struct        `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Versions              []*v1.AssetVersionInput `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -250,16 +250,16 @@ func (x *UpdateAssetRequest) GetDescription() string {
 	return ""
 }
 
-func (x *UpdateAssetRequest) GetDefaultLocale() string {
-	if x != nil && x.DefaultLocale != nil {
-		return *x.DefaultLocale
-	}
-	return ""
-}
-
 func (x *UpdateAssetRequest) GetMetadata() *structpb.Struct {
 	if x != nil {
 		return x.Metadata
+	}
+	return nil
+}
+
+func (x *UpdateAssetRequest) GetVersions() []*v1.AssetVersionInput {
+	if x != nil {
+		return x.Versions
 	}
 	return nil
 }
@@ -468,10 +468,10 @@ type CreateAssetVersionRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	AssetId               int64                   `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Locale                string                  `protobuf:"bytes,3,opt,name=locale,proto3" json:"locale,omitempty"`
+	Country               string                  `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	Subject               string                  `protobuf:"bytes,4,opt,name=subject,proto3" json:"subject,omitempty"`
 	ContentUrl            string                  `protobuf:"bytes,5,opt,name=content_url,json=contentUrl,proto3" json:"content_url,omitempty"`
-	PreviewText           string                  `protobuf:"bytes,6,opt,name=preview_text,json=previewText,proto3" json:"preview_text,omitempty"`
+	PreviewText           *string                 `protobuf:"bytes,6,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
 	ContentType           string                  `protobuf:"bytes,7,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
 	IsRequired            bool                    `protobuf:"varint,8,opt,name=is_required,json=isRequired,proto3" json:"is_required,omitempty"`
 	unknownFields         protoimpl.UnknownFields
@@ -522,9 +522,9 @@ func (x *CreateAssetVersionRequest) GetAssetId() int64 {
 	return 0
 }
 
-func (x *CreateAssetVersionRequest) GetLocale() string {
+func (x *CreateAssetVersionRequest) GetCountry() string {
 	if x != nil {
-		return x.Locale
+		return x.Country
 	}
 	return ""
 }
@@ -544,8 +544,8 @@ func (x *CreateAssetVersionRequest) GetContentUrl() string {
 }
 
 func (x *CreateAssetVersionRequest) GetPreviewText() string {
-	if x != nil {
-		return x.PreviewText
+	if x != nil && x.PreviewText != nil {
+		return *x.PreviewText
 	}
 	return ""
 }
@@ -943,7 +943,7 @@ type RenderAssetRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	AssetId               int64                   `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Locale                string                  `protobuf:"bytes,3,opt,name=locale,proto3" json:"locale,omitempty"`
+	Country               string                  `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	PlayerData            *structpb.Struct        `protobuf:"bytes,4,opt,name=player_data,json=playerData,proto3" json:"player_data,omitempty"`
 	WalletData            *structpb.Struct        `protobuf:"bytes,5,opt,name=wallet_data,json=walletData,proto3" json:"wallet_data,omitempty"`
 	CampaignData          *structpb.Struct        `protobuf:"bytes,6,opt,name=campaign_data,json=campaignData,proto3" json:"campaign_data,omitempty"`
@@ -996,9 +996,9 @@ func (x *RenderAssetRequest) GetAssetId() int64 {
 	return 0
 }
 
-func (x *RenderAssetRequest) GetLocale() string {
+func (x *RenderAssetRequest) GetCountry() string {
 	if x != nil {
-		return x.Locale
+		return x.Country
 	}
 	return ""
 }
@@ -1035,33 +1035,32 @@ var File_backoffice_service_v1_backoffice_asset_proto protoreflect.FileDescripto
 
 const file_backoffice_service_v1_backoffice_asset_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_asset.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\x1a\x1acrm/service/v1/asset.proto\"\xde\x02\n" +
+	",backoffice/service/v1/backoffice_asset.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\x1a\x1acrm/service/v1/asset.proto\"\x80\x03\n" +
 	"\x12CreateAssetRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12 \n" +
 	"\tasset_key\x18\x02 \x01(\tH\x00R\bassetKey\x88\x01\x01\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x121\n" +
-	"\x04type\x18\x05 \x01(\x0e2\x1d.api.crm.service.v1.AssetTypeR\x04type\x12%\n" +
-	"\x0edefault_locale\x18\x06 \x01(\tR\rdefaultLocale\x123\n" +
-	"\bmetadata\x18\a \x01(\v2\x17.google.protobuf.StructR\bmetadataB\f\n" +
+	"\x04type\x18\x05 \x01(\x0e2\x1d.api.crm.service.v1.AssetTypeR\x04type\x123\n" +
+	"\bmetadata\x18\a \x01(\v2\x17.google.protobuf.StructR\bmetadata\x12A\n" +
+	"\bversions\x18\b \x03(\v2%.api.crm.service.v1.AssetVersionInputR\bversionsB\f\n" +
 	"\n" +
-	"_asset_key\"v\n" +
+	"_asset_keyJ\x04\b\x06\x10\a\"v\n" +
 	"\x0fGetAssetRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\x03R\x02id\"\xf6\x02\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"\x80\x03\n" +
 	"\x12UpdateAssetRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\x12 \n" +
 	"\tasset_key\x18\x03 \x01(\tH\x00R\bassetKey\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x04 \x01(\tH\x01R\x04name\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x05 \x01(\tH\x02R\vdescription\x88\x01\x01\x12*\n" +
-	"\x0edefault_locale\x18\x06 \x01(\tH\x03R\rdefaultLocale\x88\x01\x01\x123\n" +
-	"\bmetadata\x18\a \x01(\v2\x17.google.protobuf.StructR\bmetadataB\f\n" +
+	"\vdescription\x18\x05 \x01(\tH\x02R\vdescription\x88\x01\x01\x123\n" +
+	"\bmetadata\x18\a \x01(\v2\x17.google.protobuf.StructR\bmetadata\x12A\n" +
+	"\bversions\x18\b \x03(\v2%.api.crm.service.v1.AssetVersionInputR\bversionsB\f\n" +
 	"\n" +
 	"_asset_keyB\a\n" +
 	"\x05_nameB\x0e\n" +
-	"\f_descriptionB\x11\n" +
-	"\x0f_default_locale\"y\n" +
+	"\f_descriptionJ\x04\b\x06\x10\a\"y\n" +
 	"\x12DeleteAssetRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\"\xd0\x02\n" +
@@ -1077,18 +1076,19 @@ const file_backoffice_service_v1_backoffice_asset_proto_rawDesc = "" +
 	"\x18UpdateAssetStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\x127\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x1f.api.crm.service.v1.AssetStatusR\x06status\"\xc5\x02\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1f.api.crm.service.v1.AssetStatusR\x06status\"\xdd\x02\n" +
 	"\x19CreateAssetVersionRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x19\n" +
-	"\basset_id\x18\x02 \x01(\x03R\aassetId\x12\x16\n" +
-	"\x06locale\x18\x03 \x01(\tR\x06locale\x12\x18\n" +
+	"\basset_id\x18\x02 \x01(\x03R\aassetId\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x12\x18\n" +
 	"\asubject\x18\x04 \x01(\tR\asubject\x12\x1f\n" +
 	"\vcontent_url\x18\x05 \x01(\tR\n" +
-	"contentUrl\x12!\n" +
-	"\fpreview_text\x18\x06 \x01(\tR\vpreviewText\x12!\n" +
+	"contentUrl\x12&\n" +
+	"\fpreview_text\x18\x06 \x01(\tH\x00R\vpreviewText\x88\x01\x01\x12!\n" +
 	"\fcontent_type\x18\a \x01(\tR\vcontentType\x12\x1f\n" +
 	"\vis_required\x18\b \x01(\bR\n" +
-	"isRequired\"}\n" +
+	"isRequiredB\x0f\n" +
+	"\r_preview_text\"}\n" +
 	"\x16GetAssetVersionRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\"\x89\x03\n" +
@@ -1124,11 +1124,11 @@ const file_backoffice_service_v1_backoffice_asset_proto_rawDesc = "" +
 	"asset_type\x18\x02 \x01(\x0e2\x1d.api.crm.service.v1.AssetTypeH\x00R\tassetType\x88\x01\x01\x12?\n" +
 	"\x06source\x18\x03 \x01(\x0e2\".api.crm.service.v1.VariableSourceH\x01R\x06source\x88\x01\x01B\r\n" +
 	"\v_asset_typeB\t\n" +
-	"\a_source\"\x88\x03\n" +
+	"\a_source\"\x8a\x03\n" +
 	"\x12RenderAssetRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x19\n" +
-	"\basset_id\x18\x02 \x01(\x03R\aassetId\x12\x16\n" +
-	"\x06locale\x18\x03 \x01(\tR\x06locale\x128\n" +
+	"\basset_id\x18\x02 \x01(\x03R\aassetId\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x128\n" +
 	"\vplayer_data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"playerData\x128\n" +
 	"\vwallet_data\x18\x05 \x01(\v2\x17.google.protobuf.StructR\n" +
@@ -1185,84 +1185,87 @@ var file_backoffice_service_v1_backoffice_asset_proto_goTypes = []any{
 	(*common.OperatorContext)(nil),              // 14: api.common.OperatorContext
 	(v1.AssetType)(0),                           // 15: api.crm.service.v1.AssetType
 	(*structpb.Struct)(nil),                     // 16: google.protobuf.Struct
-	(v1.AssetStatus)(0),                         // 17: api.crm.service.v1.AssetStatus
-	(v1.VariableSource)(0),                      // 18: api.crm.service.v1.VariableSource
-	(*v1.CreateAssetResponse)(nil),              // 19: api.crm.service.v1.CreateAssetResponse
-	(*v1.GetAssetResponse)(nil),                 // 20: api.crm.service.v1.GetAssetResponse
-	(*v1.UpdateAssetResponse)(nil),              // 21: api.crm.service.v1.UpdateAssetResponse
-	(*v1.DeleteAssetResponse)(nil),              // 22: api.crm.service.v1.DeleteAssetResponse
-	(*v1.ListAssetsResponse)(nil),               // 23: api.crm.service.v1.ListAssetsResponse
-	(*v1.UpdateAssetStatusResponse)(nil),        // 24: api.crm.service.v1.UpdateAssetStatusResponse
-	(*v1.CreateAssetVersionResponse)(nil),       // 25: api.crm.service.v1.CreateAssetVersionResponse
-	(*v1.GetAssetVersionResponse)(nil),          // 26: api.crm.service.v1.GetAssetVersionResponse
-	(*v1.UpdateAssetVersionResponse)(nil),       // 27: api.crm.service.v1.UpdateAssetVersionResponse
-	(*v1.DeleteAssetVersionResponse)(nil),       // 28: api.crm.service.v1.DeleteAssetVersionResponse
-	(*v1.ListAssetVersionsResponse)(nil),        // 29: api.crm.service.v1.ListAssetVersionsResponse
-	(*v1.UpdateAssetVersionStatusResponse)(nil), // 30: api.crm.service.v1.UpdateAssetVersionStatusResponse
-	(*v1.ListAssetVariablesResponse)(nil),       // 31: api.crm.service.v1.ListAssetVariablesResponse
-	(*v1.RenderAssetResponse)(nil),              // 32: api.crm.service.v1.RenderAssetResponse
+	(*v1.AssetVersionInput)(nil),                // 17: api.crm.service.v1.AssetVersionInput
+	(v1.AssetStatus)(0),                         // 18: api.crm.service.v1.AssetStatus
+	(v1.VariableSource)(0),                      // 19: api.crm.service.v1.VariableSource
+	(*v1.CreateAssetResponse)(nil),              // 20: api.crm.service.v1.CreateAssetResponse
+	(*v1.GetAssetResponse)(nil),                 // 21: api.crm.service.v1.GetAssetResponse
+	(*v1.UpdateAssetResponse)(nil),              // 22: api.crm.service.v1.UpdateAssetResponse
+	(*v1.DeleteAssetResponse)(nil),              // 23: api.crm.service.v1.DeleteAssetResponse
+	(*v1.ListAssetsResponse)(nil),               // 24: api.crm.service.v1.ListAssetsResponse
+	(*v1.UpdateAssetStatusResponse)(nil),        // 25: api.crm.service.v1.UpdateAssetStatusResponse
+	(*v1.CreateAssetVersionResponse)(nil),       // 26: api.crm.service.v1.CreateAssetVersionResponse
+	(*v1.GetAssetVersionResponse)(nil),          // 27: api.crm.service.v1.GetAssetVersionResponse
+	(*v1.UpdateAssetVersionResponse)(nil),       // 28: api.crm.service.v1.UpdateAssetVersionResponse
+	(*v1.DeleteAssetVersionResponse)(nil),       // 29: api.crm.service.v1.DeleteAssetVersionResponse
+	(*v1.ListAssetVersionsResponse)(nil),        // 30: api.crm.service.v1.ListAssetVersionsResponse
+	(*v1.UpdateAssetVersionStatusResponse)(nil), // 31: api.crm.service.v1.UpdateAssetVersionStatusResponse
+	(*v1.ListAssetVariablesResponse)(nil),       // 32: api.crm.service.v1.ListAssetVariablesResponse
+	(*v1.RenderAssetResponse)(nil),              // 33: api.crm.service.v1.RenderAssetResponse
 }
 var file_backoffice_service_v1_backoffice_asset_proto_depIdxs = []int32{
 	14, // 0: api.backoffice.service.v1.CreateAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
 	15, // 1: api.backoffice.service.v1.CreateAssetRequest.type:type_name -> api.crm.service.v1.AssetType
 	16, // 2: api.backoffice.service.v1.CreateAssetRequest.metadata:type_name -> google.protobuf.Struct
-	14, // 3: api.backoffice.service.v1.GetAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 4: api.backoffice.service.v1.UpdateAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 5: api.backoffice.service.v1.UpdateAssetRequest.metadata:type_name -> google.protobuf.Struct
-	14, // 6: api.backoffice.service.v1.DeleteAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 7: api.backoffice.service.v1.ListAssetsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 8: api.backoffice.service.v1.ListAssetsRequest.type:type_name -> api.crm.service.v1.AssetType
-	17, // 9: api.backoffice.service.v1.ListAssetsRequest.status:type_name -> api.crm.service.v1.AssetStatus
-	14, // 10: api.backoffice.service.v1.UpdateAssetStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 11: api.backoffice.service.v1.UpdateAssetStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
-	14, // 12: api.backoffice.service.v1.CreateAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 13: api.backoffice.service.v1.GetAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 14: api.backoffice.service.v1.UpdateAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 15: api.backoffice.service.v1.DeleteAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 16: api.backoffice.service.v1.ListAssetVersionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 17: api.backoffice.service.v1.UpdateAssetVersionStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 18: api.backoffice.service.v1.UpdateAssetVersionStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
-	14, // 19: api.backoffice.service.v1.ListAssetVariablesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 20: api.backoffice.service.v1.ListAssetVariablesRequest.asset_type:type_name -> api.crm.service.v1.AssetType
-	18, // 21: api.backoffice.service.v1.ListAssetVariablesRequest.source:type_name -> api.crm.service.v1.VariableSource
-	14, // 22: api.backoffice.service.v1.RenderAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 23: api.backoffice.service.v1.RenderAssetRequest.player_data:type_name -> google.protobuf.Struct
-	16, // 24: api.backoffice.service.v1.RenderAssetRequest.wallet_data:type_name -> google.protobuf.Struct
-	16, // 25: api.backoffice.service.v1.RenderAssetRequest.campaign_data:type_name -> google.protobuf.Struct
-	16, // 26: api.backoffice.service.v1.RenderAssetRequest.custom_data:type_name -> google.protobuf.Struct
-	0,  // 27: api.backoffice.service.v1.BackofficeAsset.CreateAsset:input_type -> api.backoffice.service.v1.CreateAssetRequest
-	1,  // 28: api.backoffice.service.v1.BackofficeAsset.GetAsset:input_type -> api.backoffice.service.v1.GetAssetRequest
-	2,  // 29: api.backoffice.service.v1.BackofficeAsset.UpdateAsset:input_type -> api.backoffice.service.v1.UpdateAssetRequest
-	3,  // 30: api.backoffice.service.v1.BackofficeAsset.DeleteAsset:input_type -> api.backoffice.service.v1.DeleteAssetRequest
-	4,  // 31: api.backoffice.service.v1.BackofficeAsset.ListAssets:input_type -> api.backoffice.service.v1.ListAssetsRequest
-	5,  // 32: api.backoffice.service.v1.BackofficeAsset.UpdateAssetStatus:input_type -> api.backoffice.service.v1.UpdateAssetStatusRequest
-	6,  // 33: api.backoffice.service.v1.BackofficeAsset.CreateAssetVersion:input_type -> api.backoffice.service.v1.CreateAssetVersionRequest
-	7,  // 34: api.backoffice.service.v1.BackofficeAsset.GetAssetVersion:input_type -> api.backoffice.service.v1.GetAssetVersionRequest
-	8,  // 35: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersion:input_type -> api.backoffice.service.v1.UpdateAssetVersionRequest
-	9,  // 36: api.backoffice.service.v1.BackofficeAsset.DeleteAssetVersion:input_type -> api.backoffice.service.v1.DeleteAssetVersionRequest
-	10, // 37: api.backoffice.service.v1.BackofficeAsset.ListAssetVersions:input_type -> api.backoffice.service.v1.ListAssetVersionsRequest
-	11, // 38: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersionStatus:input_type -> api.backoffice.service.v1.UpdateAssetVersionStatusRequest
-	12, // 39: api.backoffice.service.v1.BackofficeAsset.ListAssetVariables:input_type -> api.backoffice.service.v1.ListAssetVariablesRequest
-	13, // 40: api.backoffice.service.v1.BackofficeAsset.RenderAsset:input_type -> api.backoffice.service.v1.RenderAssetRequest
-	19, // 41: api.backoffice.service.v1.BackofficeAsset.CreateAsset:output_type -> api.crm.service.v1.CreateAssetResponse
-	20, // 42: api.backoffice.service.v1.BackofficeAsset.GetAsset:output_type -> api.crm.service.v1.GetAssetResponse
-	21, // 43: api.backoffice.service.v1.BackofficeAsset.UpdateAsset:output_type -> api.crm.service.v1.UpdateAssetResponse
-	22, // 44: api.backoffice.service.v1.BackofficeAsset.DeleteAsset:output_type -> api.crm.service.v1.DeleteAssetResponse
-	23, // 45: api.backoffice.service.v1.BackofficeAsset.ListAssets:output_type -> api.crm.service.v1.ListAssetsResponse
-	24, // 46: api.backoffice.service.v1.BackofficeAsset.UpdateAssetStatus:output_type -> api.crm.service.v1.UpdateAssetStatusResponse
-	25, // 47: api.backoffice.service.v1.BackofficeAsset.CreateAssetVersion:output_type -> api.crm.service.v1.CreateAssetVersionResponse
-	26, // 48: api.backoffice.service.v1.BackofficeAsset.GetAssetVersion:output_type -> api.crm.service.v1.GetAssetVersionResponse
-	27, // 49: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersion:output_type -> api.crm.service.v1.UpdateAssetVersionResponse
-	28, // 50: api.backoffice.service.v1.BackofficeAsset.DeleteAssetVersion:output_type -> api.crm.service.v1.DeleteAssetVersionResponse
-	29, // 51: api.backoffice.service.v1.BackofficeAsset.ListAssetVersions:output_type -> api.crm.service.v1.ListAssetVersionsResponse
-	30, // 52: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersionStatus:output_type -> api.crm.service.v1.UpdateAssetVersionStatusResponse
-	31, // 53: api.backoffice.service.v1.BackofficeAsset.ListAssetVariables:output_type -> api.crm.service.v1.ListAssetVariablesResponse
-	32, // 54: api.backoffice.service.v1.BackofficeAsset.RenderAsset:output_type -> api.crm.service.v1.RenderAssetResponse
-	41, // [41:55] is the sub-list for method output_type
-	27, // [27:41] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	17, // 3: api.backoffice.service.v1.CreateAssetRequest.versions:type_name -> api.crm.service.v1.AssetVersionInput
+	14, // 4: api.backoffice.service.v1.GetAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 5: api.backoffice.service.v1.UpdateAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 6: api.backoffice.service.v1.UpdateAssetRequest.metadata:type_name -> google.protobuf.Struct
+	17, // 7: api.backoffice.service.v1.UpdateAssetRequest.versions:type_name -> api.crm.service.v1.AssetVersionInput
+	14, // 8: api.backoffice.service.v1.DeleteAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 9: api.backoffice.service.v1.ListAssetsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 10: api.backoffice.service.v1.ListAssetsRequest.type:type_name -> api.crm.service.v1.AssetType
+	18, // 11: api.backoffice.service.v1.ListAssetsRequest.status:type_name -> api.crm.service.v1.AssetStatus
+	14, // 12: api.backoffice.service.v1.UpdateAssetStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 13: api.backoffice.service.v1.UpdateAssetStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
+	14, // 14: api.backoffice.service.v1.CreateAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 15: api.backoffice.service.v1.GetAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 16: api.backoffice.service.v1.UpdateAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 17: api.backoffice.service.v1.DeleteAssetVersionRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 18: api.backoffice.service.v1.ListAssetVersionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	14, // 19: api.backoffice.service.v1.UpdateAssetVersionStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 20: api.backoffice.service.v1.UpdateAssetVersionStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
+	14, // 21: api.backoffice.service.v1.ListAssetVariablesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	15, // 22: api.backoffice.service.v1.ListAssetVariablesRequest.asset_type:type_name -> api.crm.service.v1.AssetType
+	19, // 23: api.backoffice.service.v1.ListAssetVariablesRequest.source:type_name -> api.crm.service.v1.VariableSource
+	14, // 24: api.backoffice.service.v1.RenderAssetRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 25: api.backoffice.service.v1.RenderAssetRequest.player_data:type_name -> google.protobuf.Struct
+	16, // 26: api.backoffice.service.v1.RenderAssetRequest.wallet_data:type_name -> google.protobuf.Struct
+	16, // 27: api.backoffice.service.v1.RenderAssetRequest.campaign_data:type_name -> google.protobuf.Struct
+	16, // 28: api.backoffice.service.v1.RenderAssetRequest.custom_data:type_name -> google.protobuf.Struct
+	0,  // 29: api.backoffice.service.v1.BackofficeAsset.CreateAsset:input_type -> api.backoffice.service.v1.CreateAssetRequest
+	1,  // 30: api.backoffice.service.v1.BackofficeAsset.GetAsset:input_type -> api.backoffice.service.v1.GetAssetRequest
+	2,  // 31: api.backoffice.service.v1.BackofficeAsset.UpdateAsset:input_type -> api.backoffice.service.v1.UpdateAssetRequest
+	3,  // 32: api.backoffice.service.v1.BackofficeAsset.DeleteAsset:input_type -> api.backoffice.service.v1.DeleteAssetRequest
+	4,  // 33: api.backoffice.service.v1.BackofficeAsset.ListAssets:input_type -> api.backoffice.service.v1.ListAssetsRequest
+	5,  // 34: api.backoffice.service.v1.BackofficeAsset.UpdateAssetStatus:input_type -> api.backoffice.service.v1.UpdateAssetStatusRequest
+	6,  // 35: api.backoffice.service.v1.BackofficeAsset.CreateAssetVersion:input_type -> api.backoffice.service.v1.CreateAssetVersionRequest
+	7,  // 36: api.backoffice.service.v1.BackofficeAsset.GetAssetVersion:input_type -> api.backoffice.service.v1.GetAssetVersionRequest
+	8,  // 37: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersion:input_type -> api.backoffice.service.v1.UpdateAssetVersionRequest
+	9,  // 38: api.backoffice.service.v1.BackofficeAsset.DeleteAssetVersion:input_type -> api.backoffice.service.v1.DeleteAssetVersionRequest
+	10, // 39: api.backoffice.service.v1.BackofficeAsset.ListAssetVersions:input_type -> api.backoffice.service.v1.ListAssetVersionsRequest
+	11, // 40: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersionStatus:input_type -> api.backoffice.service.v1.UpdateAssetVersionStatusRequest
+	12, // 41: api.backoffice.service.v1.BackofficeAsset.ListAssetVariables:input_type -> api.backoffice.service.v1.ListAssetVariablesRequest
+	13, // 42: api.backoffice.service.v1.BackofficeAsset.RenderAsset:input_type -> api.backoffice.service.v1.RenderAssetRequest
+	20, // 43: api.backoffice.service.v1.BackofficeAsset.CreateAsset:output_type -> api.crm.service.v1.CreateAssetResponse
+	21, // 44: api.backoffice.service.v1.BackofficeAsset.GetAsset:output_type -> api.crm.service.v1.GetAssetResponse
+	22, // 45: api.backoffice.service.v1.BackofficeAsset.UpdateAsset:output_type -> api.crm.service.v1.UpdateAssetResponse
+	23, // 46: api.backoffice.service.v1.BackofficeAsset.DeleteAsset:output_type -> api.crm.service.v1.DeleteAssetResponse
+	24, // 47: api.backoffice.service.v1.BackofficeAsset.ListAssets:output_type -> api.crm.service.v1.ListAssetsResponse
+	25, // 48: api.backoffice.service.v1.BackofficeAsset.UpdateAssetStatus:output_type -> api.crm.service.v1.UpdateAssetStatusResponse
+	26, // 49: api.backoffice.service.v1.BackofficeAsset.CreateAssetVersion:output_type -> api.crm.service.v1.CreateAssetVersionResponse
+	27, // 50: api.backoffice.service.v1.BackofficeAsset.GetAssetVersion:output_type -> api.crm.service.v1.GetAssetVersionResponse
+	28, // 51: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersion:output_type -> api.crm.service.v1.UpdateAssetVersionResponse
+	29, // 52: api.backoffice.service.v1.BackofficeAsset.DeleteAssetVersion:output_type -> api.crm.service.v1.DeleteAssetVersionResponse
+	30, // 53: api.backoffice.service.v1.BackofficeAsset.ListAssetVersions:output_type -> api.crm.service.v1.ListAssetVersionsResponse
+	31, // 54: api.backoffice.service.v1.BackofficeAsset.UpdateAssetVersionStatus:output_type -> api.crm.service.v1.UpdateAssetVersionStatusResponse
+	32, // 55: api.backoffice.service.v1.BackofficeAsset.ListAssetVariables:output_type -> api.crm.service.v1.ListAssetVariablesResponse
+	33, // 56: api.backoffice.service.v1.BackofficeAsset.RenderAsset:output_type -> api.crm.service.v1.RenderAssetResponse
+	43, // [43:57] is the sub-list for method output_type
+	29, // [29:43] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_asset_proto_init() }
@@ -1273,6 +1276,7 @@ func file_backoffice_service_v1_backoffice_asset_proto_init() {
 	file_backoffice_service_v1_backoffice_asset_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_asset_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_asset_proto_msgTypes[4].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_asset_proto_msgTypes[6].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_asset_proto_msgTypes[8].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_asset_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}

@@ -263,10 +263,10 @@ type Asset struct {
 	OwnerRetailerOperatorId int64                  `protobuf:"varint,9,opt,name=owner_retailer_operator_id,json=ownerRetailerOperatorId,proto3" json:"owner_retailer_operator_id,omitempty"`
 	OwnerSystemOperatorId   int64                  `protobuf:"varint,10,opt,name=owner_system_operator_id,json=ownerSystemOperatorId,proto3" json:"owner_system_operator_id,omitempty"`
 	OwnerLevel              OwnerLevel             `protobuf:"varint,11,opt,name=owner_level,json=ownerLevel,proto3,enum=api.crm.service.v1.OwnerLevel" json:"owner_level,omitempty"`
-	DefaultLocale           string                 `protobuf:"bytes,12,opt,name=default_locale,json=defaultLocale,proto3" json:"default_locale,omitempty"`
 	Metadata                *structpb.Struct       `protobuf:"bytes,13,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	CreatedAt               *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt               *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Versions                []*AssetVersion        `protobuf:"bytes,16,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -378,13 +378,6 @@ func (x *Asset) GetOwnerLevel() OwnerLevel {
 	return OwnerLevel_OWNER_LEVEL_UNSPECIFIED
 }
 
-func (x *Asset) GetDefaultLocale() string {
-	if x != nil {
-		return x.DefaultLocale
-	}
-	return ""
-}
-
 func (x *Asset) GetMetadata() *structpb.Struct {
 	if x != nil {
 		return x.Metadata
@@ -406,12 +399,19 @@ func (x *Asset) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-// AssetVersion represents a language-specific version of an asset
+func (x *Asset) GetVersions() []*AssetVersion {
+	if x != nil {
+		return x.Versions
+	}
+	return nil
+}
+
+// AssetVersion represents a country-specific version of an asset
 type AssetVersion struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	AssetId       int64                  `protobuf:"varint,2,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Locale        string                 `protobuf:"bytes,3,opt,name=locale,proto3" json:"locale,omitempty"`
+	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	Subject       string                 `protobuf:"bytes,4,opt,name=subject,proto3" json:"subject,omitempty"`
 	ContentUrl    string                 `protobuf:"bytes,5,opt,name=content_url,json=contentUrl,proto3" json:"content_url,omitempty"`
 	PreviewText   string                 `protobuf:"bytes,6,opt,name=preview_text,json=previewText,proto3" json:"preview_text,omitempty"`
@@ -470,9 +470,9 @@ func (x *AssetVersion) GetAssetId() int64 {
 	return 0
 }
 
-func (x *AssetVersion) GetLocale() string {
+func (x *AssetVersion) GetCountry() string {
 	if x != nil {
-		return x.Locale
+		return x.Country
 	}
 	return ""
 }
@@ -547,6 +547,91 @@ func (x *AssetVersion) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+// AssetVersionInput represents input data for creating/updating asset versions inline
+type AssetVersionInput struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	Subject       string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
+	ContentUrl    string                 `protobuf:"bytes,3,opt,name=content_url,json=contentUrl,proto3" json:"content_url,omitempty"`
+	PreviewText   *string                `protobuf:"bytes,4,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
+	ContentType   string                 `protobuf:"bytes,5,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	IsRequired    bool                   `protobuf:"varint,6,opt,name=is_required,json=isRequired,proto3" json:"is_required,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AssetVersionInput) Reset() {
+	*x = AssetVersionInput{}
+	mi := &file_crm_service_v1_asset_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssetVersionInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssetVersionInput) ProtoMessage() {}
+
+func (x *AssetVersionInput) ProtoReflect() protoreflect.Message {
+	mi := &file_crm_service_v1_asset_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssetVersionInput.ProtoReflect.Descriptor instead.
+func (*AssetVersionInput) Descriptor() ([]byte, []int) {
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AssetVersionInput) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AssetVersionInput) GetSubject() string {
+	if x != nil {
+		return x.Subject
+	}
+	return ""
+}
+
+func (x *AssetVersionInput) GetContentUrl() string {
+	if x != nil {
+		return x.ContentUrl
+	}
+	return ""
+}
+
+func (x *AssetVersionInput) GetPreviewText() string {
+	if x != nil && x.PreviewText != nil {
+		return *x.PreviewText
+	}
+	return ""
+}
+
+func (x *AssetVersionInput) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+func (x *AssetVersionInput) GetIsRequired() bool {
+	if x != nil {
+		return x.IsRequired
+	}
+	return false
+}
+
 // AssetVariable represents a template variable definition
 type AssetVariable struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
@@ -567,7 +652,7 @@ type AssetVariable struct {
 
 func (x *AssetVariable) Reset() {
 	*x = AssetVariable{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[2]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -579,7 +664,7 @@ func (x *AssetVariable) String() string {
 func (*AssetVariable) ProtoMessage() {}
 
 func (x *AssetVariable) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[2]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -592,7 +677,7 @@ func (x *AssetVariable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssetVariable.ProtoReflect.Descriptor instead.
 func (*AssetVariable) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{2}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AssetVariable) GetId() int64 {
@@ -679,16 +764,16 @@ type CreateAssetRequest struct {
 	Name            string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description     string                  `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Type            AssetType               `protobuf:"varint,4,opt,name=type,proto3,enum=api.crm.service.v1.AssetType" json:"type,omitempty"`
-	DefaultLocale   string                  `protobuf:"bytes,5,opt,name=default_locale,json=defaultLocale,proto3" json:"default_locale,omitempty"`
 	Metadata        *structpb.Struct        `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Versions        []*AssetVersionInput    `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateAssetRequest) Reset() {
 	*x = CreateAssetRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[3]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -700,7 +785,7 @@ func (x *CreateAssetRequest) String() string {
 func (*CreateAssetRequest) ProtoMessage() {}
 
 func (x *CreateAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[3]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -713,7 +798,7 @@ func (x *CreateAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAssetRequest.ProtoReflect.Descriptor instead.
 func (*CreateAssetRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{3}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateAssetRequest) GetAssetKey() string {
@@ -744,13 +829,6 @@ func (x *CreateAssetRequest) GetType() AssetType {
 	return AssetType_ASSET_TYPE_UNSPECIFIED
 }
 
-func (x *CreateAssetRequest) GetDefaultLocale() string {
-	if x != nil {
-		return x.DefaultLocale
-	}
-	return ""
-}
-
 func (x *CreateAssetRequest) GetMetadata() *structpb.Struct {
 	if x != nil {
 		return x.Metadata
@@ -765,6 +843,13 @@ func (x *CreateAssetRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
+func (x *CreateAssetRequest) GetVersions() []*AssetVersionInput {
+	if x != nil {
+		return x.Versions
+	}
+	return nil
+}
+
 type CreateAssetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Asset         *Asset                 `protobuf:"bytes,1,opt,name=asset,proto3" json:"asset,omitempty"`
@@ -774,7 +859,7 @@ type CreateAssetResponse struct {
 
 func (x *CreateAssetResponse) Reset() {
 	*x = CreateAssetResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[4]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +871,7 @@ func (x *CreateAssetResponse) String() string {
 func (*CreateAssetResponse) ProtoMessage() {}
 
 func (x *CreateAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[4]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +884,7 @@ func (x *CreateAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAssetResponse.ProtoReflect.Descriptor instead.
 func (*CreateAssetResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{4}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateAssetResponse) GetAsset() *Asset {
@@ -820,7 +905,7 @@ type GetAssetRequest struct {
 
 func (x *GetAssetRequest) Reset() {
 	*x = GetAssetRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[5]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -832,7 +917,7 @@ func (x *GetAssetRequest) String() string {
 func (*GetAssetRequest) ProtoMessage() {}
 
 func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[5]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -845,7 +930,7 @@ func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetRequest.ProtoReflect.Descriptor instead.
 func (*GetAssetRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{5}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetAssetRequest) GetId() int64 {
@@ -871,7 +956,7 @@ type GetAssetResponse struct {
 
 func (x *GetAssetResponse) Reset() {
 	*x = GetAssetResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[6]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -883,7 +968,7 @@ func (x *GetAssetResponse) String() string {
 func (*GetAssetResponse) ProtoMessage() {}
 
 func (x *GetAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[6]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -896,7 +981,7 @@ func (x *GetAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetResponse.ProtoReflect.Descriptor instead.
 func (*GetAssetResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{6}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetAssetResponse) GetAsset() *Asset {
@@ -913,16 +998,16 @@ type UpdateAssetRequest struct {
 	AssetKey        *string                 `protobuf:"bytes,2,opt,name=asset_key,json=assetKey,proto3,oneof" json:"asset_key,omitempty"`
 	Name            *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	Description     *string                 `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	DefaultLocale   *string                 `protobuf:"bytes,5,opt,name=default_locale,json=defaultLocale,proto3,oneof" json:"default_locale,omitempty"`
 	Metadata        *structpb.Struct        `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Versions        []*AssetVersionInput    `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *UpdateAssetRequest) Reset() {
 	*x = UpdateAssetRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[7]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -934,7 +1019,7 @@ func (x *UpdateAssetRequest) String() string {
 func (*UpdateAssetRequest) ProtoMessage() {}
 
 func (x *UpdateAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[7]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -947,7 +1032,7 @@ func (x *UpdateAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAssetRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{7}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateAssetRequest) GetId() int64 {
@@ -978,13 +1063,6 @@ func (x *UpdateAssetRequest) GetDescription() string {
 	return ""
 }
 
-func (x *UpdateAssetRequest) GetDefaultLocale() string {
-	if x != nil && x.DefaultLocale != nil {
-		return *x.DefaultLocale
-	}
-	return ""
-}
-
 func (x *UpdateAssetRequest) GetMetadata() *structpb.Struct {
 	if x != nil {
 		return x.Metadata
@@ -999,6 +1077,13 @@ func (x *UpdateAssetRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
+func (x *UpdateAssetRequest) GetVersions() []*AssetVersionInput {
+	if x != nil {
+		return x.Versions
+	}
+	return nil
+}
+
 type UpdateAssetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Asset         *Asset                 `protobuf:"bytes,1,opt,name=asset,proto3" json:"asset,omitempty"`
@@ -1008,7 +1093,7 @@ type UpdateAssetResponse struct {
 
 func (x *UpdateAssetResponse) Reset() {
 	*x = UpdateAssetResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[8]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1105,7 @@ func (x *UpdateAssetResponse) String() string {
 func (*UpdateAssetResponse) ProtoMessage() {}
 
 func (x *UpdateAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[8]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1118,7 @@ func (x *UpdateAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAssetResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{8}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateAssetResponse) GetAsset() *Asset {
@@ -1054,7 +1139,7 @@ type DeleteAssetRequest struct {
 
 func (x *DeleteAssetRequest) Reset() {
 	*x = DeleteAssetRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[9]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1066,7 +1151,7 @@ func (x *DeleteAssetRequest) String() string {
 func (*DeleteAssetRequest) ProtoMessage() {}
 
 func (x *DeleteAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[9]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1079,7 +1164,7 @@ func (x *DeleteAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAssetRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAssetRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{9}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteAssetRequest) GetId() int64 {
@@ -1104,7 +1189,7 @@ type DeleteAssetResponse struct {
 
 func (x *DeleteAssetResponse) Reset() {
 	*x = DeleteAssetResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[10]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1116,7 +1201,7 @@ func (x *DeleteAssetResponse) String() string {
 func (*DeleteAssetResponse) ProtoMessage() {}
 
 func (x *DeleteAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[10]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1129,7 +1214,7 @@ func (x *DeleteAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAssetResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAssetResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{10}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{11}
 }
 
 // ListAssets
@@ -1147,7 +1232,7 @@ type ListAssetsRequest struct {
 
 func (x *ListAssetsRequest) Reset() {
 	*x = ListAssetsRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[11]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1159,7 +1244,7 @@ func (x *ListAssetsRequest) String() string {
 func (*ListAssetsRequest) ProtoMessage() {}
 
 func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[11]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1172,7 +1257,7 @@ func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetsRequest.ProtoReflect.Descriptor instead.
 func (*ListAssetsRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{11}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListAssetsRequest) GetOperatorContext() *common.OperatorContext {
@@ -1229,7 +1314,7 @@ type ListAssetsResponse struct {
 
 func (x *ListAssetsResponse) Reset() {
 	*x = ListAssetsResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[12]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1241,7 +1326,7 @@ func (x *ListAssetsResponse) String() string {
 func (*ListAssetsResponse) ProtoMessage() {}
 
 func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[12]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1254,7 +1339,7 @@ func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetsResponse.ProtoReflect.Descriptor instead.
 func (*ListAssetsResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{12}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListAssetsResponse) GetAssets() []*Asset {
@@ -1297,7 +1382,7 @@ type UpdateAssetStatusRequest struct {
 
 func (x *UpdateAssetStatusRequest) Reset() {
 	*x = UpdateAssetStatusRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[13]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1309,7 +1394,7 @@ func (x *UpdateAssetStatusRequest) String() string {
 func (*UpdateAssetStatusRequest) ProtoMessage() {}
 
 func (x *UpdateAssetStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[13]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1322,7 +1407,7 @@ func (x *UpdateAssetStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetStatusRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAssetStatusRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{13}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateAssetStatusRequest) GetId() int64 {
@@ -1355,7 +1440,7 @@ type UpdateAssetStatusResponse struct {
 
 func (x *UpdateAssetStatusResponse) Reset() {
 	*x = UpdateAssetStatusResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[14]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1367,7 +1452,7 @@ func (x *UpdateAssetStatusResponse) String() string {
 func (*UpdateAssetStatusResponse) ProtoMessage() {}
 
 func (x *UpdateAssetStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[14]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1380,7 +1465,7 @@ func (x *UpdateAssetStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetStatusResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAssetStatusResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{14}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateAssetStatusResponse) GetAsset() *Asset {
@@ -1394,10 +1479,10 @@ func (x *UpdateAssetStatusResponse) GetAsset() *Asset {
 type CreateAssetVersionRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	AssetId         int64                   `protobuf:"varint,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Locale          string                  `protobuf:"bytes,2,opt,name=locale,proto3" json:"locale,omitempty"`
+	Country         string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	Subject         string                  `protobuf:"bytes,3,opt,name=subject,proto3" json:"subject,omitempty"`
 	ContentUrl      string                  `protobuf:"bytes,4,opt,name=content_url,json=contentUrl,proto3" json:"content_url,omitempty"`
-	PreviewText     string                  `protobuf:"bytes,5,opt,name=preview_text,json=previewText,proto3" json:"preview_text,omitempty"`
+	PreviewText     *string                 `protobuf:"bytes,5,opt,name=preview_text,json=previewText,proto3,oneof" json:"preview_text,omitempty"`
 	ContentType     string                  `protobuf:"bytes,6,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
 	IsRequired      bool                    `protobuf:"varint,7,opt,name=is_required,json=isRequired,proto3" json:"is_required,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
@@ -1407,7 +1492,7 @@ type CreateAssetVersionRequest struct {
 
 func (x *CreateAssetVersionRequest) Reset() {
 	*x = CreateAssetVersionRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[15]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1419,7 +1504,7 @@ func (x *CreateAssetVersionRequest) String() string {
 func (*CreateAssetVersionRequest) ProtoMessage() {}
 
 func (x *CreateAssetVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[15]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1432,7 +1517,7 @@ func (x *CreateAssetVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAssetVersionRequest.ProtoReflect.Descriptor instead.
 func (*CreateAssetVersionRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{15}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateAssetVersionRequest) GetAssetId() int64 {
@@ -1442,9 +1527,9 @@ func (x *CreateAssetVersionRequest) GetAssetId() int64 {
 	return 0
 }
 
-func (x *CreateAssetVersionRequest) GetLocale() string {
+func (x *CreateAssetVersionRequest) GetCountry() string {
 	if x != nil {
-		return x.Locale
+		return x.Country
 	}
 	return ""
 }
@@ -1464,8 +1549,8 @@ func (x *CreateAssetVersionRequest) GetContentUrl() string {
 }
 
 func (x *CreateAssetVersionRequest) GetPreviewText() string {
-	if x != nil {
-		return x.PreviewText
+	if x != nil && x.PreviewText != nil {
+		return *x.PreviewText
 	}
 	return ""
 }
@@ -1500,7 +1585,7 @@ type CreateAssetVersionResponse struct {
 
 func (x *CreateAssetVersionResponse) Reset() {
 	*x = CreateAssetVersionResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[16]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1512,7 +1597,7 @@ func (x *CreateAssetVersionResponse) String() string {
 func (*CreateAssetVersionResponse) ProtoMessage() {}
 
 func (x *CreateAssetVersionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[16]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1525,7 +1610,7 @@ func (x *CreateAssetVersionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAssetVersionResponse.ProtoReflect.Descriptor instead.
 func (*CreateAssetVersionResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{16}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreateAssetVersionResponse) GetVersion() *AssetVersion {
@@ -1546,7 +1631,7 @@ type GetAssetVersionRequest struct {
 
 func (x *GetAssetVersionRequest) Reset() {
 	*x = GetAssetVersionRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[17]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1558,7 +1643,7 @@ func (x *GetAssetVersionRequest) String() string {
 func (*GetAssetVersionRequest) ProtoMessage() {}
 
 func (x *GetAssetVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[17]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1571,7 +1656,7 @@ func (x *GetAssetVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetVersionRequest.ProtoReflect.Descriptor instead.
 func (*GetAssetVersionRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{17}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetAssetVersionRequest) GetId() int64 {
@@ -1597,7 +1682,7 @@ type GetAssetVersionResponse struct {
 
 func (x *GetAssetVersionResponse) Reset() {
 	*x = GetAssetVersionResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[18]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1609,7 +1694,7 @@ func (x *GetAssetVersionResponse) String() string {
 func (*GetAssetVersionResponse) ProtoMessage() {}
 
 func (x *GetAssetVersionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[18]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1622,7 +1707,7 @@ func (x *GetAssetVersionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetVersionResponse.ProtoReflect.Descriptor instead.
 func (*GetAssetVersionResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{18}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetAssetVersionResponse) GetVersion() *AssetVersion {
@@ -1648,7 +1733,7 @@ type UpdateAssetVersionRequest struct {
 
 func (x *UpdateAssetVersionRequest) Reset() {
 	*x = UpdateAssetVersionRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[19]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1660,7 +1745,7 @@ func (x *UpdateAssetVersionRequest) String() string {
 func (*UpdateAssetVersionRequest) ProtoMessage() {}
 
 func (x *UpdateAssetVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[19]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1673,7 +1758,7 @@ func (x *UpdateAssetVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetVersionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAssetVersionRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{19}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UpdateAssetVersionRequest) GetId() int64 {
@@ -1734,7 +1819,7 @@ type UpdateAssetVersionResponse struct {
 
 func (x *UpdateAssetVersionResponse) Reset() {
 	*x = UpdateAssetVersionResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[20]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1746,7 +1831,7 @@ func (x *UpdateAssetVersionResponse) String() string {
 func (*UpdateAssetVersionResponse) ProtoMessage() {}
 
 func (x *UpdateAssetVersionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[20]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1759,7 +1844,7 @@ func (x *UpdateAssetVersionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetVersionResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAssetVersionResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{20}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UpdateAssetVersionResponse) GetVersion() *AssetVersion {
@@ -1780,7 +1865,7 @@ type DeleteAssetVersionRequest struct {
 
 func (x *DeleteAssetVersionRequest) Reset() {
 	*x = DeleteAssetVersionRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[21]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1792,7 +1877,7 @@ func (x *DeleteAssetVersionRequest) String() string {
 func (*DeleteAssetVersionRequest) ProtoMessage() {}
 
 func (x *DeleteAssetVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[21]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1805,7 +1890,7 @@ func (x *DeleteAssetVersionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAssetVersionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAssetVersionRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{21}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DeleteAssetVersionRequest) GetId() int64 {
@@ -1830,7 +1915,7 @@ type DeleteAssetVersionResponse struct {
 
 func (x *DeleteAssetVersionResponse) Reset() {
 	*x = DeleteAssetVersionResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[22]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1842,7 +1927,7 @@ func (x *DeleteAssetVersionResponse) String() string {
 func (*DeleteAssetVersionResponse) ProtoMessage() {}
 
 func (x *DeleteAssetVersionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[22]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1855,7 +1940,7 @@ func (x *DeleteAssetVersionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAssetVersionResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAssetVersionResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{22}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{23}
 }
 
 // ListAssetVersions
@@ -1869,7 +1954,7 @@ type ListAssetVersionsRequest struct {
 
 func (x *ListAssetVersionsRequest) Reset() {
 	*x = ListAssetVersionsRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[23]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1881,7 +1966,7 @@ func (x *ListAssetVersionsRequest) String() string {
 func (*ListAssetVersionsRequest) ProtoMessage() {}
 
 func (x *ListAssetVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[23]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1894,7 +1979,7 @@ func (x *ListAssetVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListAssetVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{23}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListAssetVersionsRequest) GetAssetId() int64 {
@@ -1920,7 +2005,7 @@ type ListAssetVersionsResponse struct {
 
 func (x *ListAssetVersionsResponse) Reset() {
 	*x = ListAssetVersionsResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[24]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1932,7 +2017,7 @@ func (x *ListAssetVersionsResponse) String() string {
 func (*ListAssetVersionsResponse) ProtoMessage() {}
 
 func (x *ListAssetVersionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[24]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1945,7 +2030,7 @@ func (x *ListAssetVersionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetVersionsResponse.ProtoReflect.Descriptor instead.
 func (*ListAssetVersionsResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{24}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListAssetVersionsResponse) GetVersions() []*AssetVersion {
@@ -1967,7 +2052,7 @@ type UpdateAssetVersionStatusRequest struct {
 
 func (x *UpdateAssetVersionStatusRequest) Reset() {
 	*x = UpdateAssetVersionStatusRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[25]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1979,7 +2064,7 @@ func (x *UpdateAssetVersionStatusRequest) String() string {
 func (*UpdateAssetVersionStatusRequest) ProtoMessage() {}
 
 func (x *UpdateAssetVersionStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[25]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1992,7 +2077,7 @@ func (x *UpdateAssetVersionStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetVersionStatusRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAssetVersionStatusRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{25}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdateAssetVersionStatusRequest) GetId() int64 {
@@ -2025,7 +2110,7 @@ type UpdateAssetVersionStatusResponse struct {
 
 func (x *UpdateAssetVersionStatusResponse) Reset() {
 	*x = UpdateAssetVersionStatusResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[26]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2037,7 +2122,7 @@ func (x *UpdateAssetVersionStatusResponse) String() string {
 func (*UpdateAssetVersionStatusResponse) ProtoMessage() {}
 
 func (x *UpdateAssetVersionStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[26]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2050,7 +2135,7 @@ func (x *UpdateAssetVersionStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetVersionStatusResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAssetVersionStatusResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{26}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *UpdateAssetVersionStatusResponse) GetVersion() *AssetVersion {
@@ -2072,7 +2157,7 @@ type ListAssetVariablesRequest struct {
 
 func (x *ListAssetVariablesRequest) Reset() {
 	*x = ListAssetVariablesRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[27]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2084,7 +2169,7 @@ func (x *ListAssetVariablesRequest) String() string {
 func (*ListAssetVariablesRequest) ProtoMessage() {}
 
 func (x *ListAssetVariablesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[27]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2097,7 +2182,7 @@ func (x *ListAssetVariablesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetVariablesRequest.ProtoReflect.Descriptor instead.
 func (*ListAssetVariablesRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{27}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListAssetVariablesRequest) GetOperatorContext() *common.OperatorContext {
@@ -2130,7 +2215,7 @@ type ListAssetVariablesResponse struct {
 
 func (x *ListAssetVariablesResponse) Reset() {
 	*x = ListAssetVariablesResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[28]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2142,7 +2227,7 @@ func (x *ListAssetVariablesResponse) String() string {
 func (*ListAssetVariablesResponse) ProtoMessage() {}
 
 func (x *ListAssetVariablesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[28]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2155,7 +2240,7 @@ func (x *ListAssetVariablesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetVariablesResponse.ProtoReflect.Descriptor instead.
 func (*ListAssetVariablesResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{28}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListAssetVariablesResponse) GetVariables() []*AssetVariable {
@@ -2169,7 +2254,7 @@ func (x *ListAssetVariablesResponse) GetVariables() []*AssetVariable {
 type RenderAssetRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	AssetId         int64                   `protobuf:"varint,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
-	Locale          string                  `protobuf:"bytes,2,opt,name=locale,proto3" json:"locale,omitempty"`
+	Country         string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	PlayerData      *structpb.Struct        `protobuf:"bytes,3,opt,name=player_data,json=playerData,proto3" json:"player_data,omitempty"`
 	WalletData      *structpb.Struct        `protobuf:"bytes,4,opt,name=wallet_data,json=walletData,proto3" json:"wallet_data,omitempty"`
 	CampaignData    *structpb.Struct        `protobuf:"bytes,5,opt,name=campaign_data,json=campaignData,proto3" json:"campaign_data,omitempty"`
@@ -2181,7 +2266,7 @@ type RenderAssetRequest struct {
 
 func (x *RenderAssetRequest) Reset() {
 	*x = RenderAssetRequest{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[29]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2193,7 +2278,7 @@ func (x *RenderAssetRequest) String() string {
 func (*RenderAssetRequest) ProtoMessage() {}
 
 func (x *RenderAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[29]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2206,7 +2291,7 @@ func (x *RenderAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenderAssetRequest.ProtoReflect.Descriptor instead.
 func (*RenderAssetRequest) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{29}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RenderAssetRequest) GetAssetId() int64 {
@@ -2216,9 +2301,9 @@ func (x *RenderAssetRequest) GetAssetId() int64 {
 	return 0
 }
 
-func (x *RenderAssetRequest) GetLocale() string {
+func (x *RenderAssetRequest) GetCountry() string {
 	if x != nil {
-		return x.Locale
+		return x.Country
 	}
 	return ""
 }
@@ -2264,7 +2349,7 @@ type RenderAssetResponse struct {
 	Content             string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	PreviewText         string                 `protobuf:"bytes,3,opt,name=preview_text,json=previewText,proto3" json:"preview_text,omitempty"`
 	ContentType         string                 `protobuf:"bytes,4,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	Locale              string                 `protobuf:"bytes,5,opt,name=locale,proto3" json:"locale,omitempty"`
+	Country             string                 `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
 	ResolvedVariables   map[string]string      `protobuf:"bytes,6,rep,name=resolved_variables,json=resolvedVariables,proto3" json:"resolved_variables,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	UnresolvedVariables []string               `protobuf:"bytes,7,rep,name=unresolved_variables,json=unresolvedVariables,proto3" json:"unresolved_variables,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -2273,7 +2358,7 @@ type RenderAssetResponse struct {
 
 func (x *RenderAssetResponse) Reset() {
 	*x = RenderAssetResponse{}
-	mi := &file_crm_service_v1_asset_proto_msgTypes[30]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2285,7 +2370,7 @@ func (x *RenderAssetResponse) String() string {
 func (*RenderAssetResponse) ProtoMessage() {}
 
 func (x *RenderAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_service_v1_asset_proto_msgTypes[30]
+	mi := &file_crm_service_v1_asset_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2298,7 +2383,7 @@ func (x *RenderAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenderAssetResponse.ProtoReflect.Descriptor instead.
 func (*RenderAssetResponse) Descriptor() ([]byte, []int) {
-	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{30}
+	return file_crm_service_v1_asset_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *RenderAssetResponse) GetSubject() string {
@@ -2329,9 +2414,9 @@ func (x *RenderAssetResponse) GetContentType() string {
 	return ""
 }
 
-func (x *RenderAssetResponse) GetLocale() string {
+func (x *RenderAssetResponse) GetCountry() string {
 	if x != nil {
-		return x.Locale
+		return x.Country
 	}
 	return ""
 }
@@ -2354,7 +2439,7 @@ var File_crm_service_v1_asset_proto protoreflect.FileDescriptor
 
 const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\n" +
-	"\x1acrm/service/v1/asset.proto\x12\x12api.crm.service.v1\x1a\x13common/common.proto\x1a\x18crm/service/v1/crm.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xd9\x05\n" +
+	"\x1acrm/service/v1/asset.proto\x12\x12api.crm.service.v1\x1a\x13common/common.proto\x1a\x18crm/service/v1/crm.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xf6\x05\n" +
 	"\x05Asset\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
 	"\tasset_key\x18\x02 \x01(\tH\x00R\bassetKey\x88\x01\x01\x12\x12\n" +
@@ -2368,19 +2453,19 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\x18owner_system_operator_id\x18\n" +
 	" \x01(\x03R\x15ownerSystemOperatorId\x12?\n" +
 	"\vowner_level\x18\v \x01(\x0e2\x1e.api.crm.service.v1.OwnerLevelR\n" +
-	"ownerLevel\x12%\n" +
-	"\x0edefault_locale\x18\f \x01(\tR\rdefaultLocale\x123\n" +
+	"ownerLevel\x123\n" +
 	"\bmetadata\x18\r \x01(\v2\x17.google.protobuf.StructR\bmetadata\x129\n" +
 	"\n" +
 	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB\f\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12<\n" +
+	"\bversions\x18\x10 \x03(\v2 .api.crm.service.v1.AssetVersionR\bversionsB\f\n" +
 	"\n" +
-	"_asset_key\"\xfc\x03\n" +
+	"_asset_keyJ\x04\b\f\x10\r\"\xfe\x03\n" +
 	"\fAssetVersion\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
-	"\basset_id\x18\x02 \x01(\x03R\aassetId\x12\x16\n" +
-	"\x06locale\x18\x03 \x01(\tR\x06locale\x12\x18\n" +
+	"\basset_id\x18\x02 \x01(\x03R\aassetId\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x12\x18\n" +
 	"\asubject\x18\x04 \x01(\tR\asubject\x12\x1f\n" +
 	"\vcontent_url\x18\x05 \x01(\tR\n" +
 	"contentUrl\x12!\n" +
@@ -2395,7 +2480,17 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xef\x03\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xe5\x01\n" +
+	"\x11AssetVersionInput\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12\x18\n" +
+	"\asubject\x18\x02 \x01(\tR\asubject\x12\x1f\n" +
+	"\vcontent_url\x18\x03 \x01(\tR\n" +
+	"contentUrl\x12&\n" +
+	"\fpreview_text\x18\x04 \x01(\tH\x00R\vpreviewText\x88\x01\x01\x12!\n" +
+	"\fcontent_type\x18\x05 \x01(\tR\vcontentType\x12\x1f\n" +
+	"\vis_required\x18\x06 \x01(\bR\n" +
+	"isRequiredB\x0f\n" +
+	"\r_preview_text\"\xef\x03\n" +
 	"\rAssetVariable\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\rvariable_name\x18\x02 \x01(\tR\fvariableName\x12!\n" +
@@ -2409,37 +2504,36 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\x15supported_asset_types\x18\n" +
 	" \x03(\tR\x13supportedAssetTypes\x129\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xd1\x02\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xf3\x02\n" +
 	"\x12CreateAssetRequest\x12 \n" +
 	"\tasset_key\x18\x01 \x01(\tH\x00R\bassetKey\x88\x01\x01\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x121\n" +
-	"\x04type\x18\x04 \x01(\x0e2\x1d.api.crm.service.v1.AssetTypeR\x04type\x12%\n" +
-	"\x0edefault_locale\x18\x05 \x01(\tR\rdefaultLocale\x123\n" +
+	"\x04type\x18\x04 \x01(\x0e2\x1d.api.crm.service.v1.AssetTypeR\x04type\x123\n" +
 	"\bmetadata\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bmetadata\x12F\n" +
-	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\f\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12A\n" +
+	"\bversions\x18\b \x03(\v2%.api.crm.service.v1.AssetVersionInputR\bversionsB\f\n" +
 	"\n" +
-	"_asset_key\"F\n" +
+	"_asset_keyJ\x04\b\x05\x10\x06\"F\n" +
 	"\x13CreateAssetResponse\x12/\n" +
 	"\x05asset\x18\x01 \x01(\v2\x19.api.crm.service.v1.AssetR\x05asset\"i\n" +
 	"\x0fGetAssetRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"C\n" +
 	"\x10GetAssetResponse\x12/\n" +
-	"\x05asset\x18\x01 \x01(\v2\x19.api.crm.service.v1.AssetR\x05asset\"\xe9\x02\n" +
+	"\x05asset\x18\x01 \x01(\v2\x19.api.crm.service.v1.AssetR\x05asset\"\xf3\x02\n" +
 	"\x12UpdateAssetRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
 	"\tasset_key\x18\x02 \x01(\tH\x00R\bassetKey\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x03 \x01(\tH\x01R\x04name\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x04 \x01(\tH\x02R\vdescription\x88\x01\x01\x12*\n" +
-	"\x0edefault_locale\x18\x05 \x01(\tH\x03R\rdefaultLocale\x88\x01\x01\x123\n" +
+	"\vdescription\x18\x04 \x01(\tH\x02R\vdescription\x88\x01\x01\x123\n" +
 	"\bmetadata\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bmetadata\x12F\n" +
-	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\f\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12A\n" +
+	"\bversions\x18\b \x03(\v2%.api.crm.service.v1.AssetVersionInputR\bversionsB\f\n" +
 	"\n" +
 	"_asset_keyB\a\n" +
 	"\x05_nameB\x0e\n" +
-	"\f_descriptionB\x11\n" +
-	"\x0f_default_locale\"F\n" +
+	"\f_descriptionJ\x04\b\x05\x10\x06\"F\n" +
 	"\x13UpdateAssetResponse\x12/\n" +
 	"\x05asset\x18\x01 \x01(\v2\x19.api.crm.service.v1.AssetR\x05asset\"l\n" +
 	"\x12DeleteAssetRequest\x12\x0e\n" +
@@ -2465,18 +2559,19 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\x06status\x18\x02 \x01(\x0e2\x1f.api.crm.service.v1.AssetStatusR\x06status\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"L\n" +
 	"\x19UpdateAssetStatusResponse\x12/\n" +
-	"\x05asset\x18\x01 \x01(\v2\x19.api.crm.service.v1.AssetR\x05asset\"\xb8\x02\n" +
+	"\x05asset\x18\x01 \x01(\v2\x19.api.crm.service.v1.AssetR\x05asset\"\xd0\x02\n" +
 	"\x19CreateAssetVersionRequest\x12\x19\n" +
-	"\basset_id\x18\x01 \x01(\x03R\aassetId\x12\x16\n" +
-	"\x06locale\x18\x02 \x01(\tR\x06locale\x12\x18\n" +
+	"\basset_id\x18\x01 \x01(\x03R\aassetId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x18\n" +
 	"\asubject\x18\x03 \x01(\tR\asubject\x12\x1f\n" +
 	"\vcontent_url\x18\x04 \x01(\tR\n" +
-	"contentUrl\x12!\n" +
-	"\fpreview_text\x18\x05 \x01(\tR\vpreviewText\x12!\n" +
+	"contentUrl\x12&\n" +
+	"\fpreview_text\x18\x05 \x01(\tH\x00R\vpreviewText\x88\x01\x01\x12!\n" +
 	"\fcontent_type\x18\x06 \x01(\tR\vcontentType\x12\x1f\n" +
 	"\vis_required\x18\a \x01(\bR\n" +
 	"isRequired\x12F\n" +
-	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"X\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x0f\n" +
+	"\r_preview_text\"X\n" +
 	"\x1aCreateAssetVersionResponse\x12:\n" +
 	"\aversion\x18\x01 \x01(\v2 .api.crm.service.v1.AssetVersionR\aversion\"p\n" +
 	"\x16GetAssetVersionRequest\x12\x0e\n" +
@@ -2525,10 +2620,10 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\v_asset_typeB\t\n" +
 	"\a_source\"]\n" +
 	"\x1aListAssetVariablesResponse\x12?\n" +
-	"\tvariables\x18\x01 \x03(\v2!.api.crm.service.v1.AssetVariableR\tvariables\"\xfb\x02\n" +
+	"\tvariables\x18\x01 \x03(\v2!.api.crm.service.v1.AssetVariableR\tvariables\"\xfd\x02\n" +
 	"\x12RenderAssetRequest\x12\x19\n" +
-	"\basset_id\x18\x01 \x01(\x03R\aassetId\x12\x16\n" +
-	"\x06locale\x18\x02 \x01(\tR\x06locale\x128\n" +
+	"\basset_id\x18\x01 \x01(\x03R\aassetId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x128\n" +
 	"\vplayer_data\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"playerData\x128\n" +
 	"\vwallet_data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\n" +
@@ -2536,13 +2631,13 @@ const file_crm_service_v1_asset_proto_rawDesc = "" +
 	"\rcampaign_data\x18\x05 \x01(\v2\x17.google.protobuf.StructR\fcampaignData\x128\n" +
 	"\vcustom_data\x18\x06 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"customData\x12F\n" +
-	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x8f\x03\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x91\x03\n" +
 	"\x13RenderAssetResponse\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12!\n" +
 	"\fpreview_text\x18\x03 \x01(\tR\vpreviewText\x12!\n" +
-	"\fcontent_type\x18\x04 \x01(\tR\vcontentType\x12\x16\n" +
-	"\x06locale\x18\x05 \x01(\tR\x06locale\x12m\n" +
+	"\fcontent_type\x18\x04 \x01(\tR\vcontentType\x12\x18\n" +
+	"\acountry\x18\x05 \x01(\tR\acountry\x12m\n" +
 	"\x12resolved_variables\x18\x06 \x03(\v2>.api.crm.service.v1.RenderAssetResponse.ResolvedVariablesEntryR\x11resolvedVariables\x121\n" +
 	"\x14unresolved_variables\x18\a \x03(\tR\x13unresolvedVariables\x1aD\n" +
 	"\x16ResolvedVariablesEntry\x12\x10\n" +
@@ -2603,7 +2698,7 @@ func file_crm_service_v1_asset_proto_rawDescGZIP() []byte {
 }
 
 var file_crm_service_v1_asset_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_crm_service_v1_asset_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_crm_service_v1_asset_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_crm_service_v1_asset_proto_goTypes = []any{
 	(AssetType)(0),                           // 0: api.crm.service.v1.AssetType
 	(AssetStatus)(0),                         // 1: api.crm.service.v1.AssetStatus
@@ -2611,127 +2706,131 @@ var file_crm_service_v1_asset_proto_goTypes = []any{
 	(VariableSource)(0),                      // 3: api.crm.service.v1.VariableSource
 	(*Asset)(nil),                            // 4: api.crm.service.v1.Asset
 	(*AssetVersion)(nil),                     // 5: api.crm.service.v1.AssetVersion
-	(*AssetVariable)(nil),                    // 6: api.crm.service.v1.AssetVariable
-	(*CreateAssetRequest)(nil),               // 7: api.crm.service.v1.CreateAssetRequest
-	(*CreateAssetResponse)(nil),              // 8: api.crm.service.v1.CreateAssetResponse
-	(*GetAssetRequest)(nil),                  // 9: api.crm.service.v1.GetAssetRequest
-	(*GetAssetResponse)(nil),                 // 10: api.crm.service.v1.GetAssetResponse
-	(*UpdateAssetRequest)(nil),               // 11: api.crm.service.v1.UpdateAssetRequest
-	(*UpdateAssetResponse)(nil),              // 12: api.crm.service.v1.UpdateAssetResponse
-	(*DeleteAssetRequest)(nil),               // 13: api.crm.service.v1.DeleteAssetRequest
-	(*DeleteAssetResponse)(nil),              // 14: api.crm.service.v1.DeleteAssetResponse
-	(*ListAssetsRequest)(nil),                // 15: api.crm.service.v1.ListAssetsRequest
-	(*ListAssetsResponse)(nil),               // 16: api.crm.service.v1.ListAssetsResponse
-	(*UpdateAssetStatusRequest)(nil),         // 17: api.crm.service.v1.UpdateAssetStatusRequest
-	(*UpdateAssetStatusResponse)(nil),        // 18: api.crm.service.v1.UpdateAssetStatusResponse
-	(*CreateAssetVersionRequest)(nil),        // 19: api.crm.service.v1.CreateAssetVersionRequest
-	(*CreateAssetVersionResponse)(nil),       // 20: api.crm.service.v1.CreateAssetVersionResponse
-	(*GetAssetVersionRequest)(nil),           // 21: api.crm.service.v1.GetAssetVersionRequest
-	(*GetAssetVersionResponse)(nil),          // 22: api.crm.service.v1.GetAssetVersionResponse
-	(*UpdateAssetVersionRequest)(nil),        // 23: api.crm.service.v1.UpdateAssetVersionRequest
-	(*UpdateAssetVersionResponse)(nil),       // 24: api.crm.service.v1.UpdateAssetVersionResponse
-	(*DeleteAssetVersionRequest)(nil),        // 25: api.crm.service.v1.DeleteAssetVersionRequest
-	(*DeleteAssetVersionResponse)(nil),       // 26: api.crm.service.v1.DeleteAssetVersionResponse
-	(*ListAssetVersionsRequest)(nil),         // 27: api.crm.service.v1.ListAssetVersionsRequest
-	(*ListAssetVersionsResponse)(nil),        // 28: api.crm.service.v1.ListAssetVersionsResponse
-	(*UpdateAssetVersionStatusRequest)(nil),  // 29: api.crm.service.v1.UpdateAssetVersionStatusRequest
-	(*UpdateAssetVersionStatusResponse)(nil), // 30: api.crm.service.v1.UpdateAssetVersionStatusResponse
-	(*ListAssetVariablesRequest)(nil),        // 31: api.crm.service.v1.ListAssetVariablesRequest
-	(*ListAssetVariablesResponse)(nil),       // 32: api.crm.service.v1.ListAssetVariablesResponse
-	(*RenderAssetRequest)(nil),               // 33: api.crm.service.v1.RenderAssetRequest
-	(*RenderAssetResponse)(nil),              // 34: api.crm.service.v1.RenderAssetResponse
-	nil,                                      // 35: api.crm.service.v1.RenderAssetResponse.ResolvedVariablesEntry
-	(OwnerLevel)(0),                          // 36: api.crm.service.v1.OwnerLevel
-	(*structpb.Struct)(nil),                  // 37: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),            // 38: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),           // 39: api.common.OperatorContext
+	(*AssetVersionInput)(nil),                // 6: api.crm.service.v1.AssetVersionInput
+	(*AssetVariable)(nil),                    // 7: api.crm.service.v1.AssetVariable
+	(*CreateAssetRequest)(nil),               // 8: api.crm.service.v1.CreateAssetRequest
+	(*CreateAssetResponse)(nil),              // 9: api.crm.service.v1.CreateAssetResponse
+	(*GetAssetRequest)(nil),                  // 10: api.crm.service.v1.GetAssetRequest
+	(*GetAssetResponse)(nil),                 // 11: api.crm.service.v1.GetAssetResponse
+	(*UpdateAssetRequest)(nil),               // 12: api.crm.service.v1.UpdateAssetRequest
+	(*UpdateAssetResponse)(nil),              // 13: api.crm.service.v1.UpdateAssetResponse
+	(*DeleteAssetRequest)(nil),               // 14: api.crm.service.v1.DeleteAssetRequest
+	(*DeleteAssetResponse)(nil),              // 15: api.crm.service.v1.DeleteAssetResponse
+	(*ListAssetsRequest)(nil),                // 16: api.crm.service.v1.ListAssetsRequest
+	(*ListAssetsResponse)(nil),               // 17: api.crm.service.v1.ListAssetsResponse
+	(*UpdateAssetStatusRequest)(nil),         // 18: api.crm.service.v1.UpdateAssetStatusRequest
+	(*UpdateAssetStatusResponse)(nil),        // 19: api.crm.service.v1.UpdateAssetStatusResponse
+	(*CreateAssetVersionRequest)(nil),        // 20: api.crm.service.v1.CreateAssetVersionRequest
+	(*CreateAssetVersionResponse)(nil),       // 21: api.crm.service.v1.CreateAssetVersionResponse
+	(*GetAssetVersionRequest)(nil),           // 22: api.crm.service.v1.GetAssetVersionRequest
+	(*GetAssetVersionResponse)(nil),          // 23: api.crm.service.v1.GetAssetVersionResponse
+	(*UpdateAssetVersionRequest)(nil),        // 24: api.crm.service.v1.UpdateAssetVersionRequest
+	(*UpdateAssetVersionResponse)(nil),       // 25: api.crm.service.v1.UpdateAssetVersionResponse
+	(*DeleteAssetVersionRequest)(nil),        // 26: api.crm.service.v1.DeleteAssetVersionRequest
+	(*DeleteAssetVersionResponse)(nil),       // 27: api.crm.service.v1.DeleteAssetVersionResponse
+	(*ListAssetVersionsRequest)(nil),         // 28: api.crm.service.v1.ListAssetVersionsRequest
+	(*ListAssetVersionsResponse)(nil),        // 29: api.crm.service.v1.ListAssetVersionsResponse
+	(*UpdateAssetVersionStatusRequest)(nil),  // 30: api.crm.service.v1.UpdateAssetVersionStatusRequest
+	(*UpdateAssetVersionStatusResponse)(nil), // 31: api.crm.service.v1.UpdateAssetVersionStatusResponse
+	(*ListAssetVariablesRequest)(nil),        // 32: api.crm.service.v1.ListAssetVariablesRequest
+	(*ListAssetVariablesResponse)(nil),       // 33: api.crm.service.v1.ListAssetVariablesResponse
+	(*RenderAssetRequest)(nil),               // 34: api.crm.service.v1.RenderAssetRequest
+	(*RenderAssetResponse)(nil),              // 35: api.crm.service.v1.RenderAssetResponse
+	nil,                                      // 36: api.crm.service.v1.RenderAssetResponse.ResolvedVariablesEntry
+	(OwnerLevel)(0),                          // 37: api.crm.service.v1.OwnerLevel
+	(*structpb.Struct)(nil),                  // 38: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),            // 39: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),           // 40: api.common.OperatorContext
 }
 var file_crm_service_v1_asset_proto_depIdxs = []int32{
 	0,  // 0: api.crm.service.v1.Asset.type:type_name -> api.crm.service.v1.AssetType
 	1,  // 1: api.crm.service.v1.Asset.status:type_name -> api.crm.service.v1.AssetStatus
-	36, // 2: api.crm.service.v1.Asset.owner_level:type_name -> api.crm.service.v1.OwnerLevel
-	37, // 3: api.crm.service.v1.Asset.metadata:type_name -> google.protobuf.Struct
-	38, // 4: api.crm.service.v1.Asset.created_at:type_name -> google.protobuf.Timestamp
-	38, // 5: api.crm.service.v1.Asset.updated_at:type_name -> google.protobuf.Timestamp
-	37, // 6: api.crm.service.v1.AssetVersion.variables:type_name -> google.protobuf.Struct
-	1,  // 7: api.crm.service.v1.AssetVersion.status:type_name -> api.crm.service.v1.AssetStatus
-	38, // 8: api.crm.service.v1.AssetVersion.created_at:type_name -> google.protobuf.Timestamp
-	38, // 9: api.crm.service.v1.AssetVersion.updated_at:type_name -> google.protobuf.Timestamp
-	2,  // 10: api.crm.service.v1.AssetVariable.type:type_name -> api.crm.service.v1.VariableType
-	3,  // 11: api.crm.service.v1.AssetVariable.source:type_name -> api.crm.service.v1.VariableSource
-	38, // 12: api.crm.service.v1.AssetVariable.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 13: api.crm.service.v1.CreateAssetRequest.type:type_name -> api.crm.service.v1.AssetType
-	37, // 14: api.crm.service.v1.CreateAssetRequest.metadata:type_name -> google.protobuf.Struct
-	39, // 15: api.crm.service.v1.CreateAssetRequest.operator_context:type_name -> api.common.OperatorContext
-	4,  // 16: api.crm.service.v1.CreateAssetResponse.asset:type_name -> api.crm.service.v1.Asset
-	39, // 17: api.crm.service.v1.GetAssetRequest.operator_context:type_name -> api.common.OperatorContext
-	4,  // 18: api.crm.service.v1.GetAssetResponse.asset:type_name -> api.crm.service.v1.Asset
-	37, // 19: api.crm.service.v1.UpdateAssetRequest.metadata:type_name -> google.protobuf.Struct
-	39, // 20: api.crm.service.v1.UpdateAssetRequest.operator_context:type_name -> api.common.OperatorContext
-	4,  // 21: api.crm.service.v1.UpdateAssetResponse.asset:type_name -> api.crm.service.v1.Asset
-	39, // 22: api.crm.service.v1.DeleteAssetRequest.operator_context:type_name -> api.common.OperatorContext
-	39, // 23: api.crm.service.v1.ListAssetsRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 24: api.crm.service.v1.ListAssetsRequest.type:type_name -> api.crm.service.v1.AssetType
-	1,  // 25: api.crm.service.v1.ListAssetsRequest.status:type_name -> api.crm.service.v1.AssetStatus
-	4,  // 26: api.crm.service.v1.ListAssetsResponse.assets:type_name -> api.crm.service.v1.Asset
-	1,  // 27: api.crm.service.v1.UpdateAssetStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
-	39, // 28: api.crm.service.v1.UpdateAssetStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	4,  // 29: api.crm.service.v1.UpdateAssetStatusResponse.asset:type_name -> api.crm.service.v1.Asset
-	39, // 30: api.crm.service.v1.CreateAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 31: api.crm.service.v1.CreateAssetVersionResponse.version:type_name -> api.crm.service.v1.AssetVersion
-	39, // 32: api.crm.service.v1.GetAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 33: api.crm.service.v1.GetAssetVersionResponse.version:type_name -> api.crm.service.v1.AssetVersion
-	39, // 34: api.crm.service.v1.UpdateAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 35: api.crm.service.v1.UpdateAssetVersionResponse.version:type_name -> api.crm.service.v1.AssetVersion
-	39, // 36: api.crm.service.v1.DeleteAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
-	39, // 37: api.crm.service.v1.ListAssetVersionsRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 38: api.crm.service.v1.ListAssetVersionsResponse.versions:type_name -> api.crm.service.v1.AssetVersion
-	1,  // 39: api.crm.service.v1.UpdateAssetVersionStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
-	39, // 40: api.crm.service.v1.UpdateAssetVersionStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 41: api.crm.service.v1.UpdateAssetVersionStatusResponse.version:type_name -> api.crm.service.v1.AssetVersion
-	39, // 42: api.crm.service.v1.ListAssetVariablesRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 43: api.crm.service.v1.ListAssetVariablesRequest.asset_type:type_name -> api.crm.service.v1.AssetType
-	3,  // 44: api.crm.service.v1.ListAssetVariablesRequest.source:type_name -> api.crm.service.v1.VariableSource
-	6,  // 45: api.crm.service.v1.ListAssetVariablesResponse.variables:type_name -> api.crm.service.v1.AssetVariable
-	37, // 46: api.crm.service.v1.RenderAssetRequest.player_data:type_name -> google.protobuf.Struct
-	37, // 47: api.crm.service.v1.RenderAssetRequest.wallet_data:type_name -> google.protobuf.Struct
-	37, // 48: api.crm.service.v1.RenderAssetRequest.campaign_data:type_name -> google.protobuf.Struct
-	37, // 49: api.crm.service.v1.RenderAssetRequest.custom_data:type_name -> google.protobuf.Struct
-	39, // 50: api.crm.service.v1.RenderAssetRequest.operator_context:type_name -> api.common.OperatorContext
-	35, // 51: api.crm.service.v1.RenderAssetResponse.resolved_variables:type_name -> api.crm.service.v1.RenderAssetResponse.ResolvedVariablesEntry
-	7,  // 52: api.crm.service.v1.AssetService.CreateAsset:input_type -> api.crm.service.v1.CreateAssetRequest
-	9,  // 53: api.crm.service.v1.AssetService.GetAsset:input_type -> api.crm.service.v1.GetAssetRequest
-	11, // 54: api.crm.service.v1.AssetService.UpdateAsset:input_type -> api.crm.service.v1.UpdateAssetRequest
-	13, // 55: api.crm.service.v1.AssetService.DeleteAsset:input_type -> api.crm.service.v1.DeleteAssetRequest
-	15, // 56: api.crm.service.v1.AssetService.ListAssets:input_type -> api.crm.service.v1.ListAssetsRequest
-	17, // 57: api.crm.service.v1.AssetService.UpdateAssetStatus:input_type -> api.crm.service.v1.UpdateAssetStatusRequest
-	19, // 58: api.crm.service.v1.AssetService.CreateAssetVersion:input_type -> api.crm.service.v1.CreateAssetVersionRequest
-	21, // 59: api.crm.service.v1.AssetService.GetAssetVersion:input_type -> api.crm.service.v1.GetAssetVersionRequest
-	23, // 60: api.crm.service.v1.AssetService.UpdateAssetVersion:input_type -> api.crm.service.v1.UpdateAssetVersionRequest
-	25, // 61: api.crm.service.v1.AssetService.DeleteAssetVersion:input_type -> api.crm.service.v1.DeleteAssetVersionRequest
-	27, // 62: api.crm.service.v1.AssetService.ListAssetVersions:input_type -> api.crm.service.v1.ListAssetVersionsRequest
-	29, // 63: api.crm.service.v1.AssetService.UpdateAssetVersionStatus:input_type -> api.crm.service.v1.UpdateAssetVersionStatusRequest
-	31, // 64: api.crm.service.v1.AssetService.ListAssetVariables:input_type -> api.crm.service.v1.ListAssetVariablesRequest
-	33, // 65: api.crm.service.v1.AssetService.RenderAsset:input_type -> api.crm.service.v1.RenderAssetRequest
-	8,  // 66: api.crm.service.v1.AssetService.CreateAsset:output_type -> api.crm.service.v1.CreateAssetResponse
-	10, // 67: api.crm.service.v1.AssetService.GetAsset:output_type -> api.crm.service.v1.GetAssetResponse
-	12, // 68: api.crm.service.v1.AssetService.UpdateAsset:output_type -> api.crm.service.v1.UpdateAssetResponse
-	14, // 69: api.crm.service.v1.AssetService.DeleteAsset:output_type -> api.crm.service.v1.DeleteAssetResponse
-	16, // 70: api.crm.service.v1.AssetService.ListAssets:output_type -> api.crm.service.v1.ListAssetsResponse
-	18, // 71: api.crm.service.v1.AssetService.UpdateAssetStatus:output_type -> api.crm.service.v1.UpdateAssetStatusResponse
-	20, // 72: api.crm.service.v1.AssetService.CreateAssetVersion:output_type -> api.crm.service.v1.CreateAssetVersionResponse
-	22, // 73: api.crm.service.v1.AssetService.GetAssetVersion:output_type -> api.crm.service.v1.GetAssetVersionResponse
-	24, // 74: api.crm.service.v1.AssetService.UpdateAssetVersion:output_type -> api.crm.service.v1.UpdateAssetVersionResponse
-	26, // 75: api.crm.service.v1.AssetService.DeleteAssetVersion:output_type -> api.crm.service.v1.DeleteAssetVersionResponse
-	28, // 76: api.crm.service.v1.AssetService.ListAssetVersions:output_type -> api.crm.service.v1.ListAssetVersionsResponse
-	30, // 77: api.crm.service.v1.AssetService.UpdateAssetVersionStatus:output_type -> api.crm.service.v1.UpdateAssetVersionStatusResponse
-	32, // 78: api.crm.service.v1.AssetService.ListAssetVariables:output_type -> api.crm.service.v1.ListAssetVariablesResponse
-	34, // 79: api.crm.service.v1.AssetService.RenderAsset:output_type -> api.crm.service.v1.RenderAssetResponse
-	66, // [66:80] is the sub-list for method output_type
-	52, // [52:66] is the sub-list for method input_type
-	52, // [52:52] is the sub-list for extension type_name
-	52, // [52:52] is the sub-list for extension extendee
-	0,  // [0:52] is the sub-list for field type_name
+	37, // 2: api.crm.service.v1.Asset.owner_level:type_name -> api.crm.service.v1.OwnerLevel
+	38, // 3: api.crm.service.v1.Asset.metadata:type_name -> google.protobuf.Struct
+	39, // 4: api.crm.service.v1.Asset.created_at:type_name -> google.protobuf.Timestamp
+	39, // 5: api.crm.service.v1.Asset.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 6: api.crm.service.v1.Asset.versions:type_name -> api.crm.service.v1.AssetVersion
+	38, // 7: api.crm.service.v1.AssetVersion.variables:type_name -> google.protobuf.Struct
+	1,  // 8: api.crm.service.v1.AssetVersion.status:type_name -> api.crm.service.v1.AssetStatus
+	39, // 9: api.crm.service.v1.AssetVersion.created_at:type_name -> google.protobuf.Timestamp
+	39, // 10: api.crm.service.v1.AssetVersion.updated_at:type_name -> google.protobuf.Timestamp
+	2,  // 11: api.crm.service.v1.AssetVariable.type:type_name -> api.crm.service.v1.VariableType
+	3,  // 12: api.crm.service.v1.AssetVariable.source:type_name -> api.crm.service.v1.VariableSource
+	39, // 13: api.crm.service.v1.AssetVariable.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 14: api.crm.service.v1.CreateAssetRequest.type:type_name -> api.crm.service.v1.AssetType
+	38, // 15: api.crm.service.v1.CreateAssetRequest.metadata:type_name -> google.protobuf.Struct
+	40, // 16: api.crm.service.v1.CreateAssetRequest.operator_context:type_name -> api.common.OperatorContext
+	6,  // 17: api.crm.service.v1.CreateAssetRequest.versions:type_name -> api.crm.service.v1.AssetVersionInput
+	4,  // 18: api.crm.service.v1.CreateAssetResponse.asset:type_name -> api.crm.service.v1.Asset
+	40, // 19: api.crm.service.v1.GetAssetRequest.operator_context:type_name -> api.common.OperatorContext
+	4,  // 20: api.crm.service.v1.GetAssetResponse.asset:type_name -> api.crm.service.v1.Asset
+	38, // 21: api.crm.service.v1.UpdateAssetRequest.metadata:type_name -> google.protobuf.Struct
+	40, // 22: api.crm.service.v1.UpdateAssetRequest.operator_context:type_name -> api.common.OperatorContext
+	6,  // 23: api.crm.service.v1.UpdateAssetRequest.versions:type_name -> api.crm.service.v1.AssetVersionInput
+	4,  // 24: api.crm.service.v1.UpdateAssetResponse.asset:type_name -> api.crm.service.v1.Asset
+	40, // 25: api.crm.service.v1.DeleteAssetRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 26: api.crm.service.v1.ListAssetsRequest.operator_context:type_name -> api.common.OperatorContext
+	0,  // 27: api.crm.service.v1.ListAssetsRequest.type:type_name -> api.crm.service.v1.AssetType
+	1,  // 28: api.crm.service.v1.ListAssetsRequest.status:type_name -> api.crm.service.v1.AssetStatus
+	4,  // 29: api.crm.service.v1.ListAssetsResponse.assets:type_name -> api.crm.service.v1.Asset
+	1,  // 30: api.crm.service.v1.UpdateAssetStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
+	40, // 31: api.crm.service.v1.UpdateAssetStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	4,  // 32: api.crm.service.v1.UpdateAssetStatusResponse.asset:type_name -> api.crm.service.v1.Asset
+	40, // 33: api.crm.service.v1.CreateAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 34: api.crm.service.v1.CreateAssetVersionResponse.version:type_name -> api.crm.service.v1.AssetVersion
+	40, // 35: api.crm.service.v1.GetAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 36: api.crm.service.v1.GetAssetVersionResponse.version:type_name -> api.crm.service.v1.AssetVersion
+	40, // 37: api.crm.service.v1.UpdateAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 38: api.crm.service.v1.UpdateAssetVersionResponse.version:type_name -> api.crm.service.v1.AssetVersion
+	40, // 39: api.crm.service.v1.DeleteAssetVersionRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 40: api.crm.service.v1.ListAssetVersionsRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 41: api.crm.service.v1.ListAssetVersionsResponse.versions:type_name -> api.crm.service.v1.AssetVersion
+	1,  // 42: api.crm.service.v1.UpdateAssetVersionStatusRequest.status:type_name -> api.crm.service.v1.AssetStatus
+	40, // 43: api.crm.service.v1.UpdateAssetVersionStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 44: api.crm.service.v1.UpdateAssetVersionStatusResponse.version:type_name -> api.crm.service.v1.AssetVersion
+	40, // 45: api.crm.service.v1.ListAssetVariablesRequest.operator_context:type_name -> api.common.OperatorContext
+	0,  // 46: api.crm.service.v1.ListAssetVariablesRequest.asset_type:type_name -> api.crm.service.v1.AssetType
+	3,  // 47: api.crm.service.v1.ListAssetVariablesRequest.source:type_name -> api.crm.service.v1.VariableSource
+	7,  // 48: api.crm.service.v1.ListAssetVariablesResponse.variables:type_name -> api.crm.service.v1.AssetVariable
+	38, // 49: api.crm.service.v1.RenderAssetRequest.player_data:type_name -> google.protobuf.Struct
+	38, // 50: api.crm.service.v1.RenderAssetRequest.wallet_data:type_name -> google.protobuf.Struct
+	38, // 51: api.crm.service.v1.RenderAssetRequest.campaign_data:type_name -> google.protobuf.Struct
+	38, // 52: api.crm.service.v1.RenderAssetRequest.custom_data:type_name -> google.protobuf.Struct
+	40, // 53: api.crm.service.v1.RenderAssetRequest.operator_context:type_name -> api.common.OperatorContext
+	36, // 54: api.crm.service.v1.RenderAssetResponse.resolved_variables:type_name -> api.crm.service.v1.RenderAssetResponse.ResolvedVariablesEntry
+	8,  // 55: api.crm.service.v1.AssetService.CreateAsset:input_type -> api.crm.service.v1.CreateAssetRequest
+	10, // 56: api.crm.service.v1.AssetService.GetAsset:input_type -> api.crm.service.v1.GetAssetRequest
+	12, // 57: api.crm.service.v1.AssetService.UpdateAsset:input_type -> api.crm.service.v1.UpdateAssetRequest
+	14, // 58: api.crm.service.v1.AssetService.DeleteAsset:input_type -> api.crm.service.v1.DeleteAssetRequest
+	16, // 59: api.crm.service.v1.AssetService.ListAssets:input_type -> api.crm.service.v1.ListAssetsRequest
+	18, // 60: api.crm.service.v1.AssetService.UpdateAssetStatus:input_type -> api.crm.service.v1.UpdateAssetStatusRequest
+	20, // 61: api.crm.service.v1.AssetService.CreateAssetVersion:input_type -> api.crm.service.v1.CreateAssetVersionRequest
+	22, // 62: api.crm.service.v1.AssetService.GetAssetVersion:input_type -> api.crm.service.v1.GetAssetVersionRequest
+	24, // 63: api.crm.service.v1.AssetService.UpdateAssetVersion:input_type -> api.crm.service.v1.UpdateAssetVersionRequest
+	26, // 64: api.crm.service.v1.AssetService.DeleteAssetVersion:input_type -> api.crm.service.v1.DeleteAssetVersionRequest
+	28, // 65: api.crm.service.v1.AssetService.ListAssetVersions:input_type -> api.crm.service.v1.ListAssetVersionsRequest
+	30, // 66: api.crm.service.v1.AssetService.UpdateAssetVersionStatus:input_type -> api.crm.service.v1.UpdateAssetVersionStatusRequest
+	32, // 67: api.crm.service.v1.AssetService.ListAssetVariables:input_type -> api.crm.service.v1.ListAssetVariablesRequest
+	34, // 68: api.crm.service.v1.AssetService.RenderAsset:input_type -> api.crm.service.v1.RenderAssetRequest
+	9,  // 69: api.crm.service.v1.AssetService.CreateAsset:output_type -> api.crm.service.v1.CreateAssetResponse
+	11, // 70: api.crm.service.v1.AssetService.GetAsset:output_type -> api.crm.service.v1.GetAssetResponse
+	13, // 71: api.crm.service.v1.AssetService.UpdateAsset:output_type -> api.crm.service.v1.UpdateAssetResponse
+	15, // 72: api.crm.service.v1.AssetService.DeleteAsset:output_type -> api.crm.service.v1.DeleteAssetResponse
+	17, // 73: api.crm.service.v1.AssetService.ListAssets:output_type -> api.crm.service.v1.ListAssetsResponse
+	19, // 74: api.crm.service.v1.AssetService.UpdateAssetStatus:output_type -> api.crm.service.v1.UpdateAssetStatusResponse
+	21, // 75: api.crm.service.v1.AssetService.CreateAssetVersion:output_type -> api.crm.service.v1.CreateAssetVersionResponse
+	23, // 76: api.crm.service.v1.AssetService.GetAssetVersion:output_type -> api.crm.service.v1.GetAssetVersionResponse
+	25, // 77: api.crm.service.v1.AssetService.UpdateAssetVersion:output_type -> api.crm.service.v1.UpdateAssetVersionResponse
+	27, // 78: api.crm.service.v1.AssetService.DeleteAssetVersion:output_type -> api.crm.service.v1.DeleteAssetVersionResponse
+	29, // 79: api.crm.service.v1.AssetService.ListAssetVersions:output_type -> api.crm.service.v1.ListAssetVersionsResponse
+	31, // 80: api.crm.service.v1.AssetService.UpdateAssetVersionStatus:output_type -> api.crm.service.v1.UpdateAssetVersionStatusResponse
+	33, // 81: api.crm.service.v1.AssetService.ListAssetVariables:output_type -> api.crm.service.v1.ListAssetVariablesResponse
+	35, // 82: api.crm.service.v1.AssetService.RenderAsset:output_type -> api.crm.service.v1.RenderAssetResponse
+	69, // [69:83] is the sub-list for method output_type
+	55, // [55:69] is the sub-list for method input_type
+	55, // [55:55] is the sub-list for extension type_name
+	55, // [55:55] is the sub-list for extension extendee
+	0,  // [0:55] is the sub-list for field type_name
 }
 
 func init() { file_crm_service_v1_asset_proto_init() }
@@ -2741,18 +2840,20 @@ func file_crm_service_v1_asset_proto_init() {
 	}
 	file_crm_service_v1_crm_proto_init()
 	file_crm_service_v1_asset_proto_msgTypes[0].OneofWrappers = []any{}
-	file_crm_service_v1_asset_proto_msgTypes[3].OneofWrappers = []any{}
-	file_crm_service_v1_asset_proto_msgTypes[7].OneofWrappers = []any{}
-	file_crm_service_v1_asset_proto_msgTypes[11].OneofWrappers = []any{}
-	file_crm_service_v1_asset_proto_msgTypes[19].OneofWrappers = []any{}
-	file_crm_service_v1_asset_proto_msgTypes[27].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[2].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[4].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[8].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[12].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[16].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[20].OneofWrappers = []any{}
+	file_crm_service_v1_asset_proto_msgTypes[28].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_crm_service_v1_asset_proto_rawDesc), len(file_crm_service_v1_asset_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   32,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -123,8 +123,9 @@ message CreateAssetRequest {
   string name = 3;
   string description = 4;
   api.crm.service.v1.AssetType type = 5;
-  string default_locale = 6;
+  reserved 6;
   google.protobuf.Struct metadata = 7;
+  repeated api.crm.service.v1.AssetVersionInput versions = 8;
 }
 
 // GetAsset
@@ -140,8 +141,9 @@ message UpdateAssetRequest {
   optional string asset_key = 3;
   optional string name = 4;
   optional string description = 5;
-  optional string default_locale = 6;
+  reserved 6;
   google.protobuf.Struct metadata = 7;
+  repeated api.crm.service.v1.AssetVersionInput versions = 8;
 }
 
 // DeleteAsset
@@ -171,10 +173,10 @@ message UpdateAssetStatusRequest {
 message CreateAssetVersionRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 asset_id = 2;
-  string locale = 3;
+  string country = 3;
   string subject = 4;
   string content_url = 5;
-  string preview_text = 6;
+  optional string preview_text = 6;
   string content_type = 7;
   bool is_required = 8;
 }
@@ -226,7 +228,7 @@ message ListAssetVariablesRequest {
 message RenderAssetRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 asset_id = 2;
-  string locale = 3;
+  string country = 3;
   google.protobuf.Struct player_data = 4;
   google.protobuf.Struct wallet_data = 5;
   google.protobuf.Struct campaign_data = 6;
