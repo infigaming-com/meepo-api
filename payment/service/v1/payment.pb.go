@@ -1012,7 +1012,11 @@ type CreatePaymentChannelRequest struct {
 	// Max Amount
 	MaxAmount string `protobuf:"bytes,11,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// Configuration fields for the payment channel in JSON format
-	Key           *structpb.Struct `protobuf:"bytes,12,opt,name=key,proto3" json:"key,omitempty"`
+	Key *structpb.Struct `protobuf:"bytes,12,opt,name=key,proto3" json:"key,omitempty"`
+	// Channel remark/notes displayed to players on frontend
+	Remark string `protobuf:"bytes,13,opt,name=remark,proto3" json:"remark,omitempty"`
+	// Channel sort order for frontend display ordering (lower value = higher priority)
+	SortOrder     int32 `protobuf:"varint,14,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1131,6 +1135,20 @@ func (x *CreatePaymentChannelRequest) GetKey() *structpb.Struct {
 	return nil
 }
 
+func (x *CreatePaymentChannelRequest) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *CreatePaymentChannelRequest) GetSortOrder() int32 {
+	if x != nil {
+		return x.SortOrder
+	}
+	return 0
+}
+
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
 type UpdatePaymentChannelRequest struct {
@@ -1163,8 +1181,12 @@ type UpdatePaymentChannelRequest struct {
 	OperatorContext *common.OperatorContext `protobuf:"bytes,12,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// For which operator this enable/disable applies (for hierarchy control)
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,13,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Channel remark/notes displayed to players on frontend
+	Remark *string `protobuf:"bytes,14,opt,name=remark,proto3,oneof" json:"remark,omitempty"`
+	// Channel sort order for frontend display ordering (lower value = higher priority)
+	SortOrder     *int32 `protobuf:"varint,15,opt,name=sort_order,json=sortOrder,proto3,oneof" json:"sort_order,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdatePaymentChannelRequest) Reset() {
@@ -1286,6 +1308,20 @@ func (x *UpdatePaymentChannelRequest) GetTargetOperatorContext() *common.Operato
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *UpdatePaymentChannelRequest) GetRemark() string {
+	if x != nil && x.Remark != nil {
+		return *x.Remark
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetSortOrder() int32 {
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
+	}
+	return 0
 }
 
 // Response for channel creation
@@ -1422,8 +1458,12 @@ type PaymentChannelInfo struct {
 	SystemOperatorName   string `protobuf:"bytes,44,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
 	OperatorType         string `protobuf:"bytes,45,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	PspId                string `protobuf:"bytes,46,opt,name=psp_id,json=pspId,proto3" json:"psp_id,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Channel remark/notes displayed to players on frontend
+	Remark string `protobuf:"bytes,47,opt,name=remark,proto3" json:"remark,omitempty"`
+	// Channel sort order for frontend display ordering (lower value = higher priority)
+	SortOrder     int32 `protobuf:"varint,48,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PaymentChannelInfo) Reset() {
@@ -1776,6 +1816,20 @@ func (x *PaymentChannelInfo) GetPspId() string {
 		return x.PspId
 	}
 	return ""
+}
+
+func (x *PaymentChannelInfo) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSortOrder() int32 {
+	if x != nil {
+		return x.SortOrder
+	}
+	return 0
 }
 
 // Request to initiate a deposit
@@ -6578,7 +6632,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x1bCreatePaymentMethodResponse\x12L\n" +
 	"\x0epayment_method\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\rpaymentMethod\"o\n" +
 	"\x1cUpdatePaymentChannelResponse\x12O\n" +
-	"\x0fpayment_methods\x18\x01 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\x0epaymentMethods\"\xd8\x03\n" +
+	"\x0fpayment_methods\x18\x01 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\x0epaymentMethods\"\x8f\x04\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
 	"merchantId\x12F\n" +
@@ -6596,7 +6650,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\v \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"\xc3\x04\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\x12\x16\n" +
+	"\x06remark\x18\r \x01(\tR\x06remark\x12\x1d\n" +
+	"\n" +
+	"sort_order\x18\x0e \x01(\x05R\tsortOrder\"\x9e\x05\n" +
 	"\x1bUpdatePaymentChannelRequest\x12,\n" +
 	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x1b\n" +
 	"\tfixed_fee\x18\x02 \x01(\tR\bfixedFee\x12\x19\n" +
@@ -6614,12 +6671,17 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	" \x01(\bH\x00R\x06enable\x88\x01\x01\x12.\n" +
 	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructH\x01R\x03key\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\r \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\t\n" +
+	"\x17target_operator_context\x18\r \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1b\n" +
+	"\x06remark\x18\x0e \x01(\tH\x02R\x06remark\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"sort_order\x18\x0f \x01(\x05H\x03R\tsortOrder\x88\x01\x01B\t\n" +
 	"\a_enableB\x06\n" +
-	"\x04_key\"=\n" +
+	"\x04_keyB\t\n" +
+	"\a_remarkB\r\n" +
+	"\v_sort_order\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa5\f\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xdc\f\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
@@ -6674,7 +6736,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x16retailer_operator_name\x18+ \x01(\tR\x14retailerOperatorName\x120\n" +
 	"\x14system_operator_name\x18, \x01(\tR\x12systemOperatorName\x12#\n" +
 	"\roperator_type\x18- \x01(\tR\foperatorType\x12\x15\n" +
-	"\x06psp_id\x18. \x01(\tR\x05pspId\"\xad\x02\n" +
+	"\x06psp_id\x18. \x01(\tR\x05pspId\x12\x16\n" +
+	"\x06remark\x18/ \x01(\tR\x06remark\x12\x1d\n" +
+	"\n" +
+	"sort_order\x180 \x01(\x05R\tsortOrder\"\xad\x02\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +

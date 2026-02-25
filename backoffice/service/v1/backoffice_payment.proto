@@ -187,6 +187,10 @@ message CreatePaymentChannelRequest {
   google.protobuf.Struct key = 12;
   // Target operator context for hierarchy control
   api.common.OperatorContext target_operator_context = 13;
+  // Channel remark/notes displayed to players on frontend
+  string remark = 14;
+  // Channel sort order for frontend display ordering (lower value = higher priority)
+  int32 sort_order = 15;
 }
 
 // Request to update a payment channel (backoffice-specific, no operator_context field)
@@ -215,6 +219,10 @@ message UpdatePaymentChannelRequest {
   optional google.protobuf.Struct key = 11;
   // Target operator context for hierarchy control
   api.common.OperatorContext target_operator_context = 12;
+  // Channel remark/notes displayed to players on frontend
+  optional string remark = 13;
+  // Channel sort order for frontend display ordering (lower value = higher priority)
+  optional int32 sort_order = 14;
 }
 
 message GetPaymentMethodListRequest {

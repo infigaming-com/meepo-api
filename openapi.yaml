@@ -13513,6 +13513,13 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: Target operator context for hierarchy control
+                remark:
+                    type: string
+                    description: Channel remark/notes displayed to players on frontend
+                sortOrder:
+                    type: integer
+                    description: Channel sort order for frontend display ordering (lower value = higher priority)
+                    format: int32
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
@@ -21143,6 +21150,13 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: Target operator context for hierarchy control
+                remark:
+                    type: string
+                    description: Channel remark/notes displayed to players on frontend
+                sortOrder:
+                    type: integer
+                    description: Channel sort order for frontend display ordering (lower value = higher priority)
+                    format: int32
             description: Request to update a payment channel (backoffice-specific, no operator_context field)
         api.backoffice.service.v1.UpdatePaymentMethodRequest:
             type: object
@@ -30406,6 +30420,13 @@ components:
                     type: string
                 pspId:
                     type: string
+                remark:
+                    type: string
+                    description: Channel remark/notes displayed to players on frontend
+                sortOrder:
+                    type: integer
+                    description: Channel sort order for frontend display ordering (lower value = higher priority)
+                    format: int32
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
