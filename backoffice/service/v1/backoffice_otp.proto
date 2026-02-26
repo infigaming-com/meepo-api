@@ -80,17 +80,20 @@ service BackofficeOTP {
   // system-level config provides a safety net for operators that haven't configured anything.
   //
   // ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
-  //   {
-  //     "target_operator_context": { "operator_id": 1001 },
-  //     "country": "BR",
-  //     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-  //     "name": "EngageLab Brazil",
-  //     "enabled": true,
-  //     "priority": 0,
-  //     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
-  //     "config": "{}",
-  //     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
-  //   }
+  //
+  // ```json
+  // {
+  //   "target_operator_context": { "operator_id": 1001 },
+  //   "country": "BR",
+  //   "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+  //   "name": "EngageLab Brazil",
+  //   "enabled": true,
+  //   "priority": 0,
+  //   "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+  //   "config": "{}",
+  //   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+  // }
+  // ```
   //
   // ## Response
   // Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -197,25 +200,50 @@ service BackofficeOTP {
   //     4. (operator_id, "global", template_type, "en")
   //
   // ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
-  //   {
-  //     "target_operator_context": { "operator_id": 1001 },
-  //     "country": "BR",
-  //     "provider_id": 166153951194906625,
-  //     "name": "Brazil Login OTP",
-  //     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
-  //     "external_template_id": "T001",
-  //     "language": "pt",
-  //     "brand_name": "BetBrazil",
-  //     "code_length": 6,
-  //     "code_ttl_seconds": 300,
-  //     "extra_params": "{}",
-  //     "enabled": true
-  //   }
+  //
+  // ```json
+  // {
+  //   "target_operator_context": { "operator_id": 1001 },
+  //   "country": "BR",
+  //   "provider_id": 166153951194906625,
+  //   "name": "Brazil Login OTP",
+  //   "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+  //   "external_template_id": "T001",
+  //   "language": "pt",
+  //   "brand_name": "BetBrazil",
+  //   "code_length": 6,
+  //   "code_ttl_seconds": 300,
+  //   "extra_params": "{}",
+  //   "enabled": true
+  // }
+  // ```
   //
   // ## Constraints
   // - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
   // - provider_id must reference an existing OTP provider
   // - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+  //
+  // ## Template Variables by Provider
+  //
+  // When SendOTP is triggered, the system passes variables to the provider's template engine.
+  // Variables are used as `{{variable_name}}` placeholders in the template content
+  // configured on the provider's platform. Different providers support different variables.
+  //
+  // ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+  //
+  // Supported channels: SMS, WhatsApp, Voice.
+  // Templates are created on the EngageLab Console (OTP → Template Management).
+  // WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+  //
+  // | Variable | Source | Description |
+  // |----------|--------|-------------|
+  // | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+  // | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+  // | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+  //
+  // SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+  // WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+  // Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
   rpc CreateOTPTemplate(CreateOTPTemplateRequest) returns (api.push.service.v1.CreateOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/create"
@@ -332,143 +360,212 @@ service BackofficeOTP {
 
 // ============ Provider Management ============
 
-// CreateOTPProviderRequest — see CreateOTPProvider RPC comment above for full documentation.
-//
-// Constraints:
-// - UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
-// - credentials_json is required and must be valid JSON for the chosen provider_type.
+// Register a third-party OTP delivery provider.
+// UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
+// credentials_json is required and must be valid JSON for the chosen provider_type.
 message CreateOTPProviderRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  string country = 2;             // ISO 3166-1 alpha-2, or "global" for default fallback
-  api.push.service.v1.OTPProviderType provider_type = 3;             // Third-party provider (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
-  string name = 4;                // Human-readable display name
-  bool enabled = 5;               // Whether this provider is active for routing
-  int32 priority = 6;             // Routing priority (lower = higher priority, e.g., 0 > 1 > 2)
-  string credentials_json = 7;    // Plain JSON with provider-specific credentials (encrypted before storage)
-  string config = 8;              // JSON string of non-sensitive config (base_url, timeouts, etc.)
-  api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 9; // Channel delivery order (e.g., OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS)
+  // ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
+  string country = 2;
+  // Third-party provider type: `OTP_PROVIDER_TYPE_ENGAGELAB` (SMS, WhatsApp, Voice)
+  api.push.service.v1.OTPProviderType provider_type = 3;
+  // Human-readable display name
+  string name = 4;
+  // Whether this provider is active for routing
+  bool enabled = 5;
+  // Routing priority (lower = higher priority, e.g. 0 > 1 > 2)
+  int32 priority = 6;
+  // Plain JSON with provider-specific credentials (encrypted before storage)
+  string credentials_json = 7;
+  // JSON string of non-sensitive config (base_url, timeouts, etc.)
+  string config = 8;
+  // Channel delivery order:
+  // `OTP_SEND_CHANNEL_STRATEGY_SMS` (SMS only),
+  // `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS` (WhatsApp first, fallback to SMS),
+  // `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE` (WhatsApp → SMS → Voice)
+  api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 9;
 }
 
-// UpdateOTPProviderRequest partially updates an existing OTP provider.
+// Partially update an existing OTP provider.
 // Only provided (non-nil) fields are updated; omitted fields remain unchanged.
 message UpdateOTPProviderRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;                                                                  // Provider ID to update (from CreateOTPProvider response or ListOTPProviders)
-  optional string name = 3;                                                      // New display name
-  optional bool enabled = 4;                                                     // Enable/disable for routing
-  optional int32 priority = 5;                                                   // New routing priority
-  optional string credentials_json = 6;                                          // New credentials (will be re-encrypted before storage)
-  optional string config = 7;                                                    // New non-sensitive config JSON. Invalid JSON is silently ignored.
-  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 8; // New channel delivery strategy
+  // Provider ID to update
+  int64 id = 2;
+  // New display name (optional)
+  optional string name = 3;
+  // Enable/disable for routing (optional)
+  optional bool enabled = 4;
+  // New routing priority (optional)
+  optional int32 priority = 5;
+  // New credentials, will be re-encrypted before storage (optional)
+  optional string credentials_json = 6;
+  // New non-sensitive config JSON (optional)
+  optional string config = 7;
+  // New channel delivery strategy (optional)
+  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 8;
 }
 
-// DeleteOTPProviderRequest permanently deletes an OTP provider by ID.
+// Permanently delete an OTP provider by ID.
 // Associated templates are NOT automatically deleted — clean them up first.
 message DeleteOTPProviderRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;  // Provider ID to delete
+  // Provider ID to delete
+  int64 id = 2;
 }
 
-// GetOTPProviderRequest retrieves a single OTP provider by ID.
+// Get a single OTP provider by ID.
 // Credentials are never returned; use has_credentials in the response to check if they are set.
 message GetOTPProviderRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;  // Provider ID to retrieve
+  // Provider ID to retrieve
+  int64 id = 2;
 }
 
-// ListOTPProvidersRequest lists OTP providers with optional filters and pagination.
+// List OTP providers with optional filters and pagination.
 // Results are scoped to the operator in target_operator_context.
 message ListOTPProvidersRequest {
+  // Target operator context for ownership scoping.
   api.common.OperatorContext target_operator_context = 1;
-  optional string country = 2;                              // Filter by country code (e.g., "BR") or "global"
-  optional api.push.service.v1.OTPProviderType provider_type = 3; // Filter by provider type
-  optional bool enabled = 4;                                // Filter by enabled status
-  int32 page = 5;                                           // Page number (1-based)
-  int32 page_size = 6;                                      // Items per page (max 100)
+  // Filter by country code (e.g. `"BR"`) or `"global"` (optional)
+  optional string country = 2;
+  // Filter by provider type (optional)
+  optional api.push.service.v1.OTPProviderType provider_type = 3;
+  // Filter by enabled status (optional)
+  optional bool enabled = 4;
+  // Page number (1-based, default 1)
+  int32 page = 5;
+  // Items per page (default 20, max 100)
+  int32 page_size = 6;
 }
 
 // ============ Template Management ============
 
-// CreateOTPTemplateRequest — see CreateOTPTemplate RPC comment above for full documentation.
-//
-// Constraints:
-// - UNIQUE(operator_id, country, template_type, language): one template per scenario per language.
-// - provider_id must reference an existing OTP provider (created via CreateOTPProvider).
-// - external_template_id is required for SMS/WhatsApp providers.
+// Create a message template bound to a specific OTP provider.
+// UNIQUE(operator_id, country, template_type, language): one template per scenario per language.
+// provider_id must reference an existing OTP provider (created via CreateOTPProvider).
+// external_template_id is required for SMS/WhatsApp providers.
 message CreateOTPTemplateRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  string country = 2;                                      // ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
-  int64 provider_id = 3;                                    // ID of the OTP provider this template belongs to (from CreateOTPProvider response)
-  string name = 4;                                          // Human-readable display name (e.g., "Brazil Login OTP - Portuguese")
-  api.push.service.v1.OTPTemplateType template_type = 5;    // Business scenario this template serves
-  string external_template_id = 6;                          // Template ID from the third-party provider's platform.
-                                                            // For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
-                                                            // This ID is passed to the provider's API at send time to select the correct message content.
-  string language = 7;                                      // BCP-47 language code: "en", "pt", "zh", etc. Used for routing and passed to the provider.
-  string brand_name = 8;                                    // Brand name injected into the OTP message (e.g., "BetBrazil"). Passed as template variable "brand_name".
-  int32 code_length = 9;                                    // OTP code length, informational only (default: 6). The actual code is generated by user-service.
-  int32 code_ttl_seconds = 10;                              // OTP code TTL in seconds, informational only (default: 900). The actual TTL is enforced by user-service.
-  string extra_params = 11;                                 // Optional. JSON string of additional template variables passed to the provider (e.g., '{"app_name":"Meepo"}').
-  bool enabled = 12;                                        // Whether this template is active for routing. Disabled templates are skipped during resolution.
+  // ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
+  string country = 2;
+  // ID of the OTP provider this template belongs to
+  int64 provider_id = 3;
+  // Human-readable display name (e.g. `"Brazil Login OTP - Portuguese"`)
+  string name = 4;
+  // Business scenario this template serves:
+  // `OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION`, `OTP_TEMPLATE_TYPE_LOGIN_OTP`,
+  // `OTP_TEMPLATE_TYPE_PASSWORD_RESET`, `OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM`
+  api.push.service.v1.OTPTemplateType template_type = 5;
+  // Template ID from the third-party provider's platform.
+  // For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
+  // This ID is passed to the provider's API at send time to select the correct message content.
+  string external_template_id = 6;
+  // BCP-47 language code (e.g. `"en"`, `"pt"`, `"zh"`). Used for routing and passed to the provider.
+  string language = 7;
+  // Brand name injected into the OTP message (e.g. `"BetBrazil"`). Passed as template variable `brand_name`.
+  string brand_name = 8;
+  // OTP code length, informational only (default 6). The actual code is generated by user-service.
+  int32 code_length = 9;
+  // OTP code TTL in seconds, informational only (default 900). The actual TTL is enforced by user-service.
+  int32 code_ttl_seconds = 10;
+  // JSON string of additional template variables passed to the provider (e.g. `'{"app_name":"Meepo"}'`)
+  string extra_params = 11;
+  // Whether this template is active for routing. Disabled templates are skipped during resolution.
+  bool enabled = 12;
 }
 
-// UpdateOTPTemplateRequest partially updates an existing OTP template.
+// Partially update an existing OTP template.
 // Only provided (non-nil) fields are updated; omitted fields remain unchanged.
 message UpdateOTPTemplateRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;                            // Template ID to update (from CreateOTPTemplate response or ListOTPTemplates)
-  optional string name = 3;                // New display name
-  optional string external_template_id = 4; // New external template ID (see CreateOTPTemplate docs for how to obtain)
-  optional string language = 5;            // New language code (changes routing key — ensure no UNIQUE conflict)
-  optional string brand_name = 6;          // New brand name for message content
-  optional int32 code_length = 7;          // New code length (informational)
-  optional int32 code_ttl_seconds = 8;     // New code TTL (informational)
-  optional string extra_params = 9;        // New extra template variables (JSON string)
-  optional bool enabled = 10;              // Enable/disable for routing
+  // Template ID to update
+  int64 id = 2;
+  // New display name (optional)
+  optional string name = 3;
+  // New external template ID (optional)
+  optional string external_template_id = 4;
+  // New language code (optional). Changes routing key — ensure no UNIQUE conflict.
+  optional string language = 5;
+  // New brand name for message content (optional)
+  optional string brand_name = 6;
+  // New code length, informational (optional)
+  optional int32 code_length = 7;
+  // New code TTL in seconds, informational (optional)
+  optional int32 code_ttl_seconds = 8;
+  // New extra template variables JSON string (optional)
+  optional string extra_params = 9;
+  // Enable/disable for routing (optional)
+  optional bool enabled = 10;
 }
 
-// DeleteOTPTemplateRequest permanently deletes an OTP template by ID.
+// Permanently delete an OTP template by ID.
 message DeleteOTPTemplateRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;  // Template ID to delete
+  // Template ID to delete
+  int64 id = 2;
 }
 
-// GetOTPTemplateRequest retrieves a single OTP template by ID.
+// Get a single OTP template by ID.
 message GetOTPTemplateRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;  // Template ID to retrieve
+  // Template ID to retrieve
+  int64 id = 2;
 }
 
-// ListOTPTemplatesRequest lists OTP templates with optional filters and pagination.
+// List OTP templates with optional filters and pagination.
 // Results are scoped to the operator in target_operator_context.
 message ListOTPTemplatesRequest {
+  // Target operator context for ownership scoping.
   api.common.OperatorContext target_operator_context = 1;
-  optional string country = 2;                                  // Filter by country code (e.g., "BR") or "global"
-  optional int64 provider_id = 3;                                // Filter by associated provider ID
-  optional api.push.service.v1.OTPTemplateType template_type = 4; // Filter by business scenario
-  optional bool enabled = 5;                                     // Filter by enabled status
-  int32 page = 6;                                                // Page number (1-based)
-  int32 page_size = 7;                                           // Items per page (max 100)
+  // Filter by country code (e.g. `"BR"`) or `"global"` (optional)
+  optional string country = 2;
+  // Filter by associated provider ID (optional)
+  optional int64 provider_id = 3;
+  // Filter by business scenario (optional)
+  optional api.push.service.v1.OTPTemplateType template_type = 4;
+  // Filter by enabled status (optional)
+  optional bool enabled = 5;
+  // Page number (1-based, default 1)
+  int32 page = 6;
+  // Items per page (default 20, max 100)
+  int32 page_size = 7;
 }
 
-// SyncOTPTemplateStatusRequest pulls the review status for a template from the external provider.
-// See SyncOTPTemplateStatus RPC comment for details on review workflow.
+// Pull the review status for a template from the external provider.
 message SyncOTPTemplateStatusRequest {
+  // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  int64 id = 2;  // Template ID to sync status for
+  // Template ID to sync status for
+  int64 id = 2;
 }
 
 // ============ Send Logs ============
 
-// ListOTPSendLogsRequest queries OTP delivery history with filters and pagination.
-// See ListOTPSendLogs RPC comment for supported use cases.
+// Query OTP delivery history with filters and pagination.
 message ListOTPSendLogsRequest {
+  // Target operator context for ownership scoping.
   api.common.OperatorContext target_operator_context = 1;
-  optional int64 user_id = 2;          // Filter by end-user ID who triggered the OTP
-  optional string channel_used = 3;    // Filter by delivery channel: "sms", "whatsapp", "voice", "email"
-  optional string status = 4;          // Filter by delivery status: "sent", "failed"
-  int64 start_time = 5;               // Start of time range (Unix milliseconds, inclusive)
-  int64 end_time = 6;                  // End of time range (Unix milliseconds, inclusive)
-  int32 page = 7;                      // Page number (1-based)
-  int32 page_size = 8;                 // Items per page (max 100)
+  // Filter by end-user ID who triggered the OTP (optional)
+  optional int64 user_id = 2;
+  // Filter by delivery channel: `"sms"`, `"whatsapp"`, `"voice"`, `"email"` (optional)
+  optional string channel_used = 3;
+  // Filter by delivery status: `"sent"`, `"failed"` (optional)
+  optional string status = 4;
+  // Start of time range (Unix milliseconds, inclusive)
+  int64 start_time = 5;
+  // End of time range (Unix milliseconds, inclusive)
+  int64 end_time = 6;
+  // Page number (1-based, default 1)
+  int32 page = 7;
+  // Items per page (default 20, max 100)
+  int32 page_size = 8;
 }

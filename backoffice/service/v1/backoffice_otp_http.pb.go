@@ -63,17 +63,20 @@ type BackofficeOTPHTTPServer interface {
 	// system-level config provides a safety net for operators that haven't configured anything.
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
-	//   {
-	//     "target_operator_context": { "operator_id": 1001 },
-	//     "country": "BR",
-	//     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-	//     "name": "EngageLab Brazil",
-	//     "enabled": true,
-	//     "priority": 0,
-	//     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
-	//     "config": "{}",
-	//     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
-	//   }
+	//
+	// ```json
+	// {
+	//   "target_operator_context": { "operator_id": 1001 },
+	//   "country": "BR",
+	//   "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+	//   "name": "EngageLab Brazil",
+	//   "enabled": true,
+	//   "priority": 0,
+	//   "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+	//   "config": "{}",
+	//   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+	// }
+	// ```
 	//
 	// ## Response
 	// Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -112,25 +115,50 @@ type BackofficeOTPHTTPServer interface {
 	//     4. (operator_id, "global", template_type, "en")
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
-	//   {
-	//     "target_operator_context": { "operator_id": 1001 },
-	//     "country": "BR",
-	//     "provider_id": 166153951194906625,
-	//     "name": "Brazil Login OTP",
-	//     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
-	//     "external_template_id": "T001",
-	//     "language": "pt",
-	//     "brand_name": "BetBrazil",
-	//     "code_length": 6,
-	//     "code_ttl_seconds": 300,
-	//     "extra_params": "{}",
-	//     "enabled": true
-	//   }
+	//
+	// ```json
+	// {
+	//   "target_operator_context": { "operator_id": 1001 },
+	//   "country": "BR",
+	//   "provider_id": 166153951194906625,
+	//   "name": "Brazil Login OTP",
+	//   "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+	//   "external_template_id": "T001",
+	//   "language": "pt",
+	//   "brand_name": "BetBrazil",
+	//   "code_length": 6,
+	//   "code_ttl_seconds": 300,
+	//   "extra_params": "{}",
+	//   "enabled": true
+	// }
+	// ```
 	//
 	// ## Constraints
 	// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
 	// - provider_id must reference an existing OTP provider
 	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+	//
+	// ## Template Variables by Provider
+	//
+	// When SendOTP is triggered, the system passes variables to the provider's template engine.
+	// Variables are used as `{{variable_name}}` placeholders in the template content
+	// configured on the provider's platform. Different providers support different variables.
+	//
+	// ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+	//
+	// Supported channels: SMS, WhatsApp, Voice.
+	// Templates are created on the EngageLab Console (OTP → Template Management).
+	// WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+	//
+	// | Variable | Source | Description |
+	// |----------|--------|-------------|
+	// | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+	// | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+	// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+	//
+	// SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+	// WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+	// Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
 	// DeleteOTPProvider DeleteOTPProvider permanently removes an OTP provider.
 	//
@@ -548,17 +576,20 @@ type BackofficeOTPHTTPClient interface {
 	// system-level config provides a safety net for operators that haven't configured anything.
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
-	//   {
-	//     "target_operator_context": { "operator_id": 1001 },
-	//     "country": "BR",
-	//     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-	//     "name": "EngageLab Brazil",
-	//     "enabled": true,
-	//     "priority": 0,
-	//     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
-	//     "config": "{}",
-	//     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
-	//   }
+	//
+	// ```json
+	// {
+	//   "target_operator_context": { "operator_id": 1001 },
+	//   "country": "BR",
+	//   "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+	//   "name": "EngageLab Brazil",
+	//   "enabled": true,
+	//   "priority": 0,
+	//   "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+	//   "config": "{}",
+	//   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+	// }
+	// ```
 	//
 	// ## Response
 	// Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -597,25 +628,50 @@ type BackofficeOTPHTTPClient interface {
 	//     4. (operator_id, "global", template_type, "en")
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
-	//   {
-	//     "target_operator_context": { "operator_id": 1001 },
-	//     "country": "BR",
-	//     "provider_id": 166153951194906625,
-	//     "name": "Brazil Login OTP",
-	//     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
-	//     "external_template_id": "T001",
-	//     "language": "pt",
-	//     "brand_name": "BetBrazil",
-	//     "code_length": 6,
-	//     "code_ttl_seconds": 300,
-	//     "extra_params": "{}",
-	//     "enabled": true
-	//   }
+	//
+	// ```json
+	// {
+	//   "target_operator_context": { "operator_id": 1001 },
+	//   "country": "BR",
+	//   "provider_id": 166153951194906625,
+	//   "name": "Brazil Login OTP",
+	//   "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+	//   "external_template_id": "T001",
+	//   "language": "pt",
+	//   "brand_name": "BetBrazil",
+	//   "code_length": 6,
+	//   "code_ttl_seconds": 300,
+	//   "extra_params": "{}",
+	//   "enabled": true
+	// }
+	// ```
 	//
 	// ## Constraints
 	// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
 	// - provider_id must reference an existing OTP provider
 	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+	//
+	// ## Template Variables by Provider
+	//
+	// When SendOTP is triggered, the system passes variables to the provider's template engine.
+	// Variables are used as `{{variable_name}}` placeholders in the template content
+	// configured on the provider's platform. Different providers support different variables.
+	//
+	// ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+	//
+	// Supported channels: SMS, WhatsApp, Voice.
+	// Templates are created on the EngageLab Console (OTP → Template Management).
+	// WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+	//
+	// | Variable | Source | Description |
+	// |----------|--------|-------------|
+	// | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+	// | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+	// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+	//
+	// SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+	// WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+	// Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
 	CreateOTPTemplate(ctx context.Context, req *CreateOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateOTPTemplateResponse, err error)
 	// DeleteOTPProvider DeleteOTPProvider permanently removes an OTP provider.
 	//
@@ -760,17 +816,20 @@ func NewBackofficeOTPHTTPClient(client *http.Client) BackofficeOTPHTTPClient {
 // system-level config provides a safety net for operators that haven't configured anything.
 //
 // ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
-//   {
-//     "target_operator_context": { "operator_id": 1001 },
-//     "country": "BR",
-//     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-//     "name": "EngageLab Brazil",
-//     "enabled": true,
-//     "priority": 0,
-//     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
-//     "config": "{}",
-//     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
-//   }
+//
+// ```json
+// {
+//   "target_operator_context": { "operator_id": 1001 },
+//   "country": "BR",
+//   "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+//   "name": "EngageLab Brazil",
+//   "enabled": true,
+//   "priority": 0,
+//   "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+//   "config": "{}",
+//   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+// }
+// ```
 //
 // ## Response
 // Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -821,25 +880,50 @@ func (c *BackofficeOTPHTTPClientImpl) CreateOTPProvider(ctx context.Context, in 
 //     4. (operator_id, "global", template_type, "en")
 //
 // ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
-//   {
-//     "target_operator_context": { "operator_id": 1001 },
-//     "country": "BR",
-//     "provider_id": 166153951194906625,
-//     "name": "Brazil Login OTP",
-//     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
-//     "external_template_id": "T001",
-//     "language": "pt",
-//     "brand_name": "BetBrazil",
-//     "code_length": 6,
-//     "code_ttl_seconds": 300,
-//     "extra_params": "{}",
-//     "enabled": true
-//   }
+//
+// ```json
+// {
+//   "target_operator_context": { "operator_id": 1001 },
+//   "country": "BR",
+//   "provider_id": 166153951194906625,
+//   "name": "Brazil Login OTP",
+//   "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+//   "external_template_id": "T001",
+//   "language": "pt",
+//   "brand_name": "BetBrazil",
+//   "code_length": 6,
+//   "code_ttl_seconds": 300,
+//   "extra_params": "{}",
+//   "enabled": true
+// }
+// ```
 //
 // ## Constraints
 // - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
 // - provider_id must reference an existing OTP provider
 // - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+//
+// ## Template Variables by Provider
+//
+// When SendOTP is triggered, the system passes variables to the provider's template engine.
+// Variables are used as `{{variable_name}}` placeholders in the template content
+// configured on the provider's platform. Different providers support different variables.
+//
+// ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+//
+// Supported channels: SMS, WhatsApp, Voice.
+// Templates are created on the EngageLab Console (OTP → Template Management).
+// WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+//
+// | Variable | Source | Description |
+// |----------|--------|-------------|
+// | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+// | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+//
+// SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+// WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+// Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
 func (c *BackofficeOTPHTTPClientImpl) CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...http.CallOption) (*v1.CreateOTPTemplateResponse, error) {
 	var out v1.CreateOTPTemplateResponse
 	pattern := "/v1/backoffice/otp/template/create"
