@@ -554,6 +554,9 @@ service User {
 			body: "*"
 		};
 	}
+
+	// List user session activities (daily_visit, ip_change, device_change)
+	rpc ListUserSessionActivities(ListUserSessionActivitiesRequest) returns (ListUserSessionActivitiesResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -2481,4 +2484,31 @@ message GetRewardHistoryResponse {
 	string weekly_rewards_usd = 6;
 	string monthly_rewards_usd = 7;
 	string daily_lossback_usd = 8;
+}
+
+// ============ Session Activity Messages ============
+
+message ListUserSessionActivitiesRequest {
+	int64 user_id = 1;
+	optional string event_type = 2;           // filter: daily_visit, ip_change, device_change
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	optional int32 page = 5;                  // default 1
+	optional int32 page_size = 6;             // default 20
+}
+
+message ListUserSessionActivitiesResponse {
+	message SessionActivity {
+		string event_type = 1;                  // daily_visit, ip_change, device_change
+		string ip = 2;
+		string country = 3;
+		string user_agent = 4;
+		string prev_ip = 5;
+		string prev_country = 6;
+		google.protobuf.Timestamp created_at = 7;
+	}
+	repeated SessionActivity activities = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
