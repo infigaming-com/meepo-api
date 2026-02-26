@@ -58,6 +58,24 @@ message ListGameDataRequest {
 	api.common.OperatorContext operator_context = 10;  // Internal only
 }
 
+message ExportGameDataRequest {
+	api.backoffice.service.v1.TimeRange time_range = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_names = 5;
+	repeated string game_ids = 6;
+	repeated string currencies = 7;
+	api.common.OperatorContext operator_context = 8;  // Internal only
+	string format = 9;       // "csv", "excel", "pdf"
+	string time_zone = 10;
+	int64 initiator_user_id = 11;
+}
+
+message ExportGameDataResponse {
+	int64 task_id = 1;
+}
+
 message GetPlayerGameSummaryRequest {
 	api.backoffice.service.v1.TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
@@ -916,6 +934,9 @@ service ReportService {
       body: "*"
     };
   }
+
+  // Game data export (async, gRPC only)
+  rpc ExportGameData(ExportGameDataRequest) returns (ExportGameDataResponse) {}
 
   // ============================================================================
   // Referral Report APIs (Internal gRPC only, no HTTP)

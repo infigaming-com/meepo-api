@@ -41,6 +41,7 @@ const (
 	BackofficeReport_ListReferralLifetimeReport_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListReferralLifetimeReport"
 	BackofficeReport_ListAffiliateVTGReport_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListAffiliateVTGReport"
 	BackofficeReport_ListAffiliateSnapshotReport_FullMethodName    = "/api.backoffice.service.v1.BackofficeReport/ListAffiliateSnapshotReport"
+	BackofficeReport_ExportGameData_FullMethodName                 = "/api.backoffice.service.v1.BackofficeReport/ExportGameData"
 )
 
 // BackofficeReportClient is the client API for BackofficeReport service.
@@ -76,6 +77,8 @@ type BackofficeReportClient interface {
 	ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*v1.ListAffiliateVTGReportResponse, error)
 	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 	ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSnapshotReportResponse, error)
+	// ExportGameData creates an async game data export task
+	ExportGameData(ctx context.Context, in *ExportGameDataRequest, opts ...grpc.CallOption) (*ExportGameDataResponse, error)
 }
 
 type backofficeReportClient struct {
@@ -296,6 +299,16 @@ func (c *backofficeReportClient) ListAffiliateSnapshotReport(ctx context.Context
 	return out, nil
 }
 
+func (c *backofficeReportClient) ExportGameData(ctx context.Context, in *ExportGameDataRequest, opts ...grpc.CallOption) (*ExportGameDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportGameDataResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_ExportGameData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeReportServer is the server API for BackofficeReport service.
 // All implementations must embed UnimplementedBackofficeReportServer
 // for forward compatibility.
@@ -329,6 +342,8 @@ type BackofficeReportServer interface {
 	ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*v1.ListAffiliateVTGReportResponse, error)
 	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 	ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*v1.ListAffiliateSnapshotReportResponse, error)
+	// ExportGameData creates an async game data export task
+	ExportGameData(context.Context, *ExportGameDataRequest) (*ExportGameDataResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
 }
 
@@ -401,6 +416,9 @@ func (UnimplementedBackofficeReportServer) ListAffiliateVTGReport(context.Contex
 }
 func (UnimplementedBackofficeReportServer) ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*v1.ListAffiliateSnapshotReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSnapshotReport not implemented")
+}
+func (UnimplementedBackofficeReportServer) ExportGameData(context.Context, *ExportGameDataRequest) (*ExportGameDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportGameData not implemented")
 }
 func (UnimplementedBackofficeReportServer) mustEmbedUnimplementedBackofficeReportServer() {}
 func (UnimplementedBackofficeReportServer) testEmbeddedByValue()                          {}
@@ -801,6 +819,24 @@ func _BackofficeReport_ListAffiliateSnapshotReport_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReport_ExportGameData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportGameDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).ExportGameData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_ExportGameData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).ExportGameData(ctx, req.(*ExportGameDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeReport_ServiceDesc is the grpc.ServiceDesc for BackofficeReport service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -891,6 +927,10 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAffiliateSnapshotReport",
 			Handler:    _BackofficeReport_ListAffiliateSnapshotReport_Handler,
+		},
+		{
+			MethodName: "ExportGameData",
+			Handler:    _BackofficeReport_ExportGameData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

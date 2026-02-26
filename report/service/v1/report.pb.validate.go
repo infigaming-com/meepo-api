@@ -803,6 +803,305 @@ var _ interface {
 	ErrorName() string
 } = ListGameDataRequestValidationError{}
 
+// Validate checks the field values on ExportGameDataRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportGameDataRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportGameDataRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportGameDataRequestMultiError, or nil if none found.
+func (m *ExportGameDataRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportGameDataRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTimeRange()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportGameDataRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportGameDataRequestValidationError{
+					field:  "TimeRange",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportGameDataRequestValidationError{
+				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportGameDataRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportGameDataRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportGameDataRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportGameDataRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportGameDataRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportGameDataRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	// no validation rules for InitiatorUserId
+
+	if len(errors) > 0 {
+		return ExportGameDataRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportGameDataRequestMultiError is an error wrapping multiple validation
+// errors returned by ExportGameDataRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ExportGameDataRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportGameDataRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportGameDataRequestMultiError) AllErrors() []error { return m }
+
+// ExportGameDataRequestValidationError is the validation error returned by
+// ExportGameDataRequest.Validate if the designated constraints aren't met.
+type ExportGameDataRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportGameDataRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportGameDataRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportGameDataRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportGameDataRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportGameDataRequestValidationError) ErrorName() string {
+	return "ExportGameDataRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportGameDataRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportGameDataRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportGameDataRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportGameDataRequestValidationError{}
+
+// Validate checks the field values on ExportGameDataResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportGameDataResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportGameDataResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportGameDataResponseMultiError, or nil if none found.
+func (m *ExportGameDataResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportGameDataResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	if len(errors) > 0 {
+		return ExportGameDataResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportGameDataResponseMultiError is an error wrapping multiple validation
+// errors returned by ExportGameDataResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ExportGameDataResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportGameDataResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportGameDataResponseMultiError) AllErrors() []error { return m }
+
+// ExportGameDataResponseValidationError is the validation error returned by
+// ExportGameDataResponse.Validate if the designated constraints aren't met.
+type ExportGameDataResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportGameDataResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportGameDataResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportGameDataResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportGameDataResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportGameDataResponseValidationError) ErrorName() string {
+	return "ExportGameDataResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportGameDataResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportGameDataResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportGameDataResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportGameDataResponseValidationError{}
+
 // Validate checks the field values on GetPlayerGameSummaryRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
