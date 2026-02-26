@@ -4756,17 +4756,20 @@ paths:
                  system-level config provides a safety net for operators that haven't configured anything.
 
                  ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
-                   {
-                     "target_operator_context": { "operator_id": 1001 },
-                     "country": "BR",
-                     "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-                     "name": "EngageLab Brazil",
-                     "enabled": true,
-                     "priority": 0,
-                     "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
-                     "config": "{}",
-                     "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
-                   }
+
+                 ```json
+                 {
+                   "target_operator_context": { "operator_id": 1001 },
+                   "country": "BR",
+                   "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
+                   "name": "EngageLab Brazil",
+                   "enabled": true,
+                   "priority": 0,
+                   "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
+                   "config": "{}",
+                   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+                 }
+                 ```
 
                  ## Response
                  Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -4965,25 +4968,50 @@ paths:
                      4. (operator_id, "global", template_type, "en")
 
                  ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
-                   {
-                     "target_operator_context": { "operator_id": 1001 },
-                     "country": "BR",
-                     "provider_id": 166153951194906625,
-                     "name": "Brazil Login OTP",
-                     "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
-                     "external_template_id": "T001",
-                     "language": "pt",
-                     "brand_name": "BetBrazil",
-                     "code_length": 6,
-                     "code_ttl_seconds": 300,
-                     "extra_params": "{}",
-                     "enabled": true
-                   }
+
+                 ```json
+                 {
+                   "target_operator_context": { "operator_id": 1001 },
+                   "country": "BR",
+                   "provider_id": 166153951194906625,
+                   "name": "Brazil Login OTP",
+                   "template_type": "OTP_TEMPLATE_TYPE_LOGIN_OTP",
+                   "external_template_id": "T001",
+                   "language": "pt",
+                   "brand_name": "BetBrazil",
+                   "code_length": 6,
+                   "code_ttl_seconds": 300,
+                   "extra_params": "{}",
+                   "enabled": true
+                 }
+                 ```
 
                  ## Constraints
                  - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
                  - provider_id must reference an existing OTP provider
                  - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+
+                 ## Template Variables by Provider
+
+                 When SendOTP is triggered, the system passes variables to the provider's template engine.
+                 Variables are used as `{{variable_name}}` placeholders in the template content
+                 configured on the provider's platform. Different providers support different variables.
+
+                 ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+
+                 Supported channels: SMS, WhatsApp, Voice.
+                 Templates are created on the EngageLab Console (OTP → Template Management).
+                 WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+
+                 | Variable | Source | Description |
+                 |----------|--------|-------------|
+                 | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+                 | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+                 | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+
+                 SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+                 WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+                 Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
             operationId: BackofficeOTP_CreateOTPTemplate
             requestBody:
                 content:
@@ -13272,26 +13300,35 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 country:
                     type: string
+                    description: ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
                 providerType:
                     enum:
                         - OTP_PROVIDER_TYPE_UNSPECIFIED
                         - OTP_PROVIDER_TYPE_ENGAGELAB
                     type: string
+                    description: 'Third-party provider type: `OTP_PROVIDER_TYPE_ENGAGELAB` (SMS, WhatsApp, Voice)'
                     format: enum
                 name:
                     type: string
+                    description: Human-readable display name
                 enabled:
                     type: boolean
+                    description: Whether this provider is active for routing
                 priority:
                     type: integer
+                    description: Routing priority (lower = higher priority, e.g. 0 > 1 > 2)
                     format: int32
                 credentialsJson:
                     type: string
+                    description: Plain JSON with provider-specific credentials (encrypted before storage)
                 config:
                     type: string
+                    description: JSON string of non-sensitive config (base_url, timeouts, etc.)
                 sendChannelStrategy:
                     enum:
                         - OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
@@ -13299,24 +13336,32 @@ components:
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE
                     type: string
+                    description: |-
+                        Channel delivery order:
+                         `OTP_SEND_CHANNEL_STRATEGY_SMS` (SMS only),
+                         `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS` (WhatsApp first, fallback to SMS),
+                         `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE` (WhatsApp → SMS → Voice)
                     format: enum
             description: |-
-                CreateOTPProviderRequest — see CreateOTPProvider RPC comment above for full documentation.
-
-                 Constraints:
-                 - UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
-                 - credentials_json is required and must be valid JSON for the chosen provider_type.
+                Register a third-party OTP delivery provider.
+                 UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
+                 credentials_json is required and must be valid JSON for the chosen provider_type.
         api.backoffice.service.v1.CreateOTPTemplateRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 country:
                     type: string
+                    description: ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
                 providerId:
                     type: string
+                    description: ID of the OTP provider this template belongs to
                 name:
                     type: string
+                    description: Human-readable display name (e.g. `"Brazil Login OTP - Portuguese"`)
                 templateType:
                     enum:
                         - OTP_TEMPLATE_TYPE_UNSPECIFIED
@@ -13325,33 +13370,42 @@ components:
                         - OTP_TEMPLATE_TYPE_PASSWORD_RESET
                         - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
                     type: string
+                    description: |-
+                        Business scenario this template serves:
+                         `OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION`, `OTP_TEMPLATE_TYPE_LOGIN_OTP`,
+                         `OTP_TEMPLATE_TYPE_PASSWORD_RESET`, `OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM`
                     format: enum
                 externalTemplateId:
                     type: string
+                    description: |-
+                        Template ID from the third-party provider's platform.
+                         For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
+                         This ID is passed to the provider's API at send time to select the correct message content.
                 language:
                     type: string
-                    description: |-
-                        For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
-                         This ID is passed to the provider's API at send time to select the correct message content.
+                    description: BCP-47 language code (e.g. `"en"`, `"pt"`, `"zh"`). Used for routing and passed to the provider.
                 brandName:
                     type: string
+                    description: Brand name injected into the OTP message (e.g. `"BetBrazil"`). Passed as template variable `brand_name`.
                 codeLength:
                     type: integer
+                    description: OTP code length, informational only (default 6). The actual code is generated by user-service.
                     format: int32
                 codeTtlSeconds:
                     type: integer
+                    description: OTP code TTL in seconds, informational only (default 900). The actual TTL is enforced by user-service.
                     format: int32
                 extraParams:
                     type: string
+                    description: JSON string of additional template variables passed to the provider (e.g. `'{"app_name":"Meepo"}'`)
                 enabled:
                     type: boolean
+                    description: Whether this template is active for routing. Disabled templates are skipped during resolution.
             description: |-
-                CreateOTPTemplateRequest — see CreateOTPTemplate RPC comment above for full documentation.
-
-                 Constraints:
-                 - UNIQUE(operator_id, country, template_type, language): one template per scenario per language.
-                 - provider_id must reference an existing OTP provider (created via CreateOTPProvider).
-                 - external_template_id is required for SMS/WhatsApp providers.
+                Create a message template bound to a specific OTP provider.
+                 UNIQUE(operator_id, country, template_type, language): one template per scenario per language.
+                 provider_id must reference an existing OTP provider (created via CreateOTPProvider).
+                 external_template_id is required for SMS/WhatsApp providers.
         api.backoffice.service.v1.CreateOperatorRequest:
             type: object
             properties:
@@ -13989,20 +14043,26 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Provider ID to delete
             description: |-
-                DeleteOTPProviderRequest permanently deletes an OTP provider by ID.
+                Permanently delete an OTP provider by ID.
                  Associated templates are NOT automatically deleted — clean them up first.
         api.backoffice.service.v1.DeleteOTPTemplateRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: DeleteOTPTemplateRequest permanently deletes an OTP template by ID.
+                    description: Template ID to delete
+            description: Permanently delete an OTP template by ID.
         api.backoffice.service.v1.DeleteOperatorApexDomainRequest:
             type: object
             properties:
@@ -14934,20 +14994,26 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Provider ID to retrieve
             description: |-
-                GetOTPProviderRequest retrieves a single OTP provider by ID.
+                Get a single OTP provider by ID.
                  Credentials are never returned; use has_credentials in the response to check if they are set.
         api.backoffice.service.v1.GetOTPTemplateRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: GetOTPTemplateRequest retrieves a single OTP template by ID.
+                    description: Template ID to retrieve
+            description: Get a single OTP template by ID.
         api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
             type: object
             properties:
@@ -17848,59 +17914,77 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
                 country:
                     type: string
+                    description: Filter by country code (e.g. `"BR"`) or `"global"` (optional)
                 providerType:
                     enum:
                         - OTP_PROVIDER_TYPE_UNSPECIFIED
                         - OTP_PROVIDER_TYPE_ENGAGELAB
                     type: string
+                    description: Filter by provider type (optional)
                     format: enum
                 enabled:
                     type: boolean
+                    description: Filter by enabled status (optional)
                 page:
                     type: integer
+                    description: Page number (1-based, default 1)
                     format: int32
                 pageSize:
                     type: integer
+                    description: Items per page (default 20, max 100)
                     format: int32
             description: |-
-                ListOTPProvidersRequest lists OTP providers with optional filters and pagination.
+                List OTP providers with optional filters and pagination.
                  Results are scoped to the operator in target_operator_context.
         api.backoffice.service.v1.ListOTPSendLogsRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
                 userId:
                     type: string
+                    description: Filter by end-user ID who triggered the OTP (optional)
                 channelUsed:
                     type: string
+                    description: 'Filter by delivery channel: `"sms"`, `"whatsapp"`, `"voice"`, `"email"` (optional)'
                 status:
                     type: string
+                    description: 'Filter by delivery status: `"sent"`, `"failed"` (optional)'
                 startTime:
                     type: string
+                    description: Start of time range (Unix milliseconds, inclusive)
                 endTime:
                     type: string
+                    description: End of time range (Unix milliseconds, inclusive)
                 page:
                     type: integer
+                    description: Page number (1-based, default 1)
                     format: int32
                 pageSize:
                     type: integer
+                    description: Items per page (default 20, max 100)
                     format: int32
-            description: |-
-                ListOTPSendLogsRequest queries OTP delivery history with filters and pagination.
-                 See ListOTPSendLogs RPC comment for supported use cases.
+            description: Query OTP delivery history with filters and pagination.
         api.backoffice.service.v1.ListOTPTemplatesRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
                 country:
                     type: string
+                    description: Filter by country code (e.g. `"BR"`) or `"global"` (optional)
                 providerId:
                     type: string
+                    description: Filter by associated provider ID (optional)
                 templateType:
                     enum:
                         - OTP_TEMPLATE_TYPE_UNSPECIFIED
@@ -17909,17 +17993,21 @@ components:
                         - OTP_TEMPLATE_TYPE_PASSWORD_RESET
                         - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
                     type: string
+                    description: Filter by business scenario (optional)
                     format: enum
                 enabled:
                     type: boolean
+                    description: Filter by enabled status (optional)
                 page:
                     type: integer
+                    description: Page number (1-based, default 1)
                     format: int32
                 pageSize:
                     type: integer
+                    description: Items per page (default 20, max 100)
                     format: int32
             description: |-
-                ListOTPTemplatesRequest lists OTP templates with optional filters and pagination.
+                List OTP templates with optional filters and pagination.
                  Results are scoped to the operator in target_operator_context.
         api.backoffice.service.v1.ListOperatorApexDomainsRequest:
             type: object
@@ -20686,12 +20774,13 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
-            description: |-
-                SyncOTPTemplateStatusRequest pulls the review status for a template from the external provider.
-                 See SyncOTPTemplateStatus RPC comment for details on review workflow.
+                    description: Template ID to sync status for
+            description: Pull the review status for a template from the external provider.
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -20997,20 +21086,28 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Provider ID to update
                 name:
                     type: string
+                    description: New display name (optional)
                 enabled:
                     type: boolean
+                    description: Enable/disable for routing (optional)
                 priority:
                     type: integer
+                    description: New routing priority (optional)
                     format: int32
                 credentialsJson:
                     type: string
+                    description: New credentials, will be re-encrypted before storage (optional)
                 config:
                     type: string
+                    description: New non-sensitive config JSON (optional)
                 sendChannelStrategy:
                     enum:
                         - OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
@@ -21018,37 +21115,49 @@ components:
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE
                     type: string
+                    description: New channel delivery strategy (optional)
                     format: enum
             description: |-
-                UpdateOTPProviderRequest partially updates an existing OTP provider.
+                Partially update an existing OTP provider.
                  Only provided (non-nil) fields are updated; omitted fields remain unchanged.
         api.backoffice.service.v1.UpdateOTPTemplateRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
                 id:
                     type: string
+                    description: Template ID to update
                 name:
                     type: string
+                    description: New display name (optional)
                 externalTemplateId:
                     type: string
+                    description: New external template ID (optional)
                 language:
                     type: string
+                    description: New language code (optional). Changes routing key — ensure no UNIQUE conflict.
                 brandName:
                     type: string
+                    description: New brand name for message content (optional)
                 codeLength:
                     type: integer
+                    description: New code length, informational (optional)
                     format: int32
                 codeTtlSeconds:
                     type: integer
+                    description: New code TTL in seconds, informational (optional)
                     format: int32
                 extraParams:
                     type: string
+                    description: New extra template variables JSON string (optional)
                 enabled:
                     type: boolean
+                    description: Enable/disable for routing (optional)
             description: |-
-                UpdateOTPTemplateRequest partially updates an existing OTP template.
+                Partially update an existing OTP template.
                  Only provided (non-nil) fields are updated; omitted fields remain unchanged.
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
             type: object

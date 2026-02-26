@@ -113,6 +113,8 @@ type BackofficeOTPClient interface {
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
 	//
+	// ```json
+	//
 	//	{
 	//	  "target_operator_context": { "operator_id": 1001 },
 	//	  "country": "BR",
@@ -124,6 +126,8 @@ type BackofficeOTPClient interface {
 	//	  "config": "{}",
 	//	  "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
 	//	}
+	//
+	// ```
 	//
 	// ## Response
 	// Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -200,6 +204,8 @@ type BackofficeOTPClient interface {
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
 	//
+	// ```json
+	//
 	//	{
 	//	  "target_operator_context": { "operator_id": 1001 },
 	//	  "country": "BR",
@@ -215,10 +221,34 @@ type BackofficeOTPClient interface {
 	//	  "enabled": true
 	//	}
 	//
+	// ```
+	//
 	// ## Constraints
 	// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
 	// - provider_id must reference an existing OTP provider
 	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+	//
+	// ## Template Variables by Provider
+	//
+	// When SendOTP is triggered, the system passes variables to the provider's template engine.
+	// Variables are used as `{{variable_name}}` placeholders in the template content
+	// configured on the provider's platform. Different providers support different variables.
+	//
+	// ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+	//
+	// Supported channels: SMS, WhatsApp, Voice.
+	// Templates are created on the EngageLab Console (OTP → Template Management).
+	// WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+	//
+	// | Variable | Source | Description |
+	// |----------|--------|-------------|
+	// | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+	// | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+	// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+	//
+	// SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+	// WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+	// Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
 	CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*v1.CreateOTPTemplateResponse, error)
 	// UpdateOTPTemplate partially updates an existing OTP template.
 	//
@@ -497,6 +527,8 @@ type BackofficeOTPServer interface {
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
 	//
+	// ```json
+	//
 	//	{
 	//	  "target_operator_context": { "operator_id": 1001 },
 	//	  "country": "BR",
@@ -508,6 +540,8 @@ type BackofficeOTPServer interface {
 	//	  "config": "{}",
 	//	  "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
 	//	}
+	//
+	// ```
 	//
 	// ## Response
 	// Returns the created provider info (with has_credentials=true instead of actual credentials).
@@ -584,6 +618,8 @@ type BackofficeOTPServer interface {
 	//
 	// ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
 	//
+	// ```json
+	//
 	//	{
 	//	  "target_operator_context": { "operator_id": 1001 },
 	//	  "country": "BR",
@@ -599,10 +635,34 @@ type BackofficeOTPServer interface {
 	//	  "enabled": true
 	//	}
 	//
+	// ```
+	//
 	// ## Constraints
 	// - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
 	// - provider_id must reference an existing OTP provider
 	// - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
+	//
+	// ## Template Variables by Provider
+	//
+	// When SendOTP is triggered, the system passes variables to the provider's template engine.
+	// Variables are used as `{{variable_name}}` placeholders in the template content
+	// configured on the provider's platform. Different providers support different variables.
+	//
+	// ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
+	//
+	// Supported channels: SMS, WhatsApp, Voice.
+	// Templates are created on the EngageLab Console (OTP → Template Management).
+	// WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+	//
+	// | Variable | Source | Description |
+	// |----------|--------|-------------|
+	// | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
+	// | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
+	// | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
+	//
+	// SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
+	// WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
+	// Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error)
 	// UpdateOTPTemplate partially updates an existing OTP template.
 	//
