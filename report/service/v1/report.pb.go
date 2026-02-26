@@ -425,6 +425,174 @@ func (x *ListGameDataRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
+type ExportGameDataRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TimeRange              *v1.TimeRange                  `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	ProviderIds            []string                       `protobuf:"bytes,3,rep,name=provider_ids,json=providerIds,proto3" json:"provider_ids,omitempty"`
+	GameCategories         []string                       `protobuf:"bytes,4,rep,name=game_categories,json=gameCategories,proto3" json:"game_categories,omitempty"`
+	GameNames              []string                       `protobuf:"bytes,5,rep,name=game_names,json=gameNames,proto3" json:"game_names,omitempty"`
+	GameIds                []string                       `protobuf:"bytes,6,rep,name=game_ids,json=gameIds,proto3" json:"game_ids,omitempty"`
+	Currencies             []string                       `protobuf:"bytes,7,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Internal only
+	Format                 string                         `protobuf:"bytes,9,opt,name=format,proto3" json:"format,omitempty"`                                          // "csv", "excel", "pdf"
+	TimeZone               string                         `protobuf:"bytes,10,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	InitiatorUserId        int64                          `protobuf:"varint,11,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ExportGameDataRequest) Reset() {
+	*x = ExportGameDataRequest{}
+	mi := &file_report_service_v1_report_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportGameDataRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportGameDataRequest) ProtoMessage() {}
+
+func (x *ExportGameDataRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_report_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportGameDataRequest.ProtoReflect.Descriptor instead.
+func (*ExportGameDataRequest) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ExportGameDataRequest) GetTimeRange() *v1.TimeRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetProviderIds() []string {
+	if x != nil {
+		return x.ProviderIds
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetGameCategories() []string {
+	if x != nil {
+		return x.GameCategories
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetGameNames() []string {
+	if x != nil {
+		return x.GameNames
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetGameIds() []string {
+	if x != nil {
+		return x.GameIds
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetCurrencies() []string {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ExportGameDataRequest) GetFormat() string {
+	if x != nil {
+		return x.Format
+	}
+	return ""
+}
+
+func (x *ExportGameDataRequest) GetTimeZone() string {
+	if x != nil {
+		return x.TimeZone
+	}
+	return ""
+}
+
+func (x *ExportGameDataRequest) GetInitiatorUserId() int64 {
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
+}
+
+type ExportGameDataResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExportGameDataResponse) Reset() {
+	*x = ExportGameDataResponse{}
+	mi := &file_report_service_v1_report_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportGameDataResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportGameDataResponse) ProtoMessage() {}
+
+func (x *ExportGameDataResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_report_service_v1_report_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportGameDataResponse.ProtoReflect.Descriptor instead.
+func (*ExportGameDataResponse) Descriptor() ([]byte, []int) {
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ExportGameDataResponse) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
 type GetPlayerGameSummaryRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	TimeRange              *v1.TimeRange                  `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
@@ -443,7 +611,7 @@ type GetPlayerGameSummaryRequest struct {
 
 func (x *GetPlayerGameSummaryRequest) Reset() {
 	*x = GetPlayerGameSummaryRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[4]
+	mi := &file_report_service_v1_report_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -455,7 +623,7 @@ func (x *GetPlayerGameSummaryRequest) String() string {
 func (*GetPlayerGameSummaryRequest) ProtoMessage() {}
 
 func (x *GetPlayerGameSummaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[4]
+	mi := &file_report_service_v1_report_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -468,7 +636,7 @@ func (x *GetPlayerGameSummaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPlayerGameSummaryRequest.ProtoReflect.Descriptor instead.
 func (*GetPlayerGameSummaryRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{4}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetPlayerGameSummaryRequest) GetTimeRange() *v1.TimeRange {
@@ -561,7 +729,7 @@ type ListPlayerGameDataRequest struct {
 
 func (x *ListPlayerGameDataRequest) Reset() {
 	*x = ListPlayerGameDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[5]
+	mi := &file_report_service_v1_report_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -573,7 +741,7 @@ func (x *ListPlayerGameDataRequest) String() string {
 func (*ListPlayerGameDataRequest) ProtoMessage() {}
 
 func (x *ListPlayerGameDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[5]
+	mi := &file_report_service_v1_report_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -586,7 +754,7 @@ func (x *ListPlayerGameDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPlayerGameDataRequest.ProtoReflect.Descriptor instead.
 func (*ListPlayerGameDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{5}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListPlayerGameDataRequest) GetTimeRange() *v1.TimeRange {
@@ -685,7 +853,7 @@ type GetDepositSummariesRequest struct {
 
 func (x *GetDepositSummariesRequest) Reset() {
 	*x = GetDepositSummariesRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[6]
+	mi := &file_report_service_v1_report_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -697,7 +865,7 @@ func (x *GetDepositSummariesRequest) String() string {
 func (*GetDepositSummariesRequest) ProtoMessage() {}
 
 func (x *GetDepositSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[6]
+	mi := &file_report_service_v1_report_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -710,7 +878,7 @@ func (x *GetDepositSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDepositSummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetDepositSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{6}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetDepositSummariesRequest) GetTimeRange() *v1.TimeRange {
@@ -753,7 +921,7 @@ type GetWithdrawSummariesRequest struct {
 
 func (x *GetWithdrawSummariesRequest) Reset() {
 	*x = GetWithdrawSummariesRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[7]
+	mi := &file_report_service_v1_report_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -765,7 +933,7 @@ func (x *GetWithdrawSummariesRequest) String() string {
 func (*GetWithdrawSummariesRequest) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[7]
+	mi := &file_report_service_v1_report_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -778,7 +946,7 @@ func (x *GetWithdrawSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWithdrawSummariesRequest.ProtoReflect.Descriptor instead.
 func (*GetWithdrawSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{7}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetWithdrawSummariesRequest) GetTimeRange() *v1.TimeRange {
@@ -823,7 +991,7 @@ type ListDepositDetailsRequest struct {
 
 func (x *ListDepositDetailsRequest) Reset() {
 	*x = ListDepositDetailsRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[8]
+	mi := &file_report_service_v1_report_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -835,7 +1003,7 @@ func (x *ListDepositDetailsRequest) String() string {
 func (*ListDepositDetailsRequest) ProtoMessage() {}
 
 func (x *ListDepositDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[8]
+	mi := &file_report_service_v1_report_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -848,7 +1016,7 @@ func (x *ListDepositDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListDepositDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{8}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListDepositDetailsRequest) GetTimeRange() *v1.TimeRange {
@@ -907,7 +1075,7 @@ type ListWithdrawDetailsRequest struct {
 
 func (x *ListWithdrawDetailsRequest) Reset() {
 	*x = ListWithdrawDetailsRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[9]
+	mi := &file_report_service_v1_report_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -919,7 +1087,7 @@ func (x *ListWithdrawDetailsRequest) String() string {
 func (*ListWithdrawDetailsRequest) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[9]
+	mi := &file_report_service_v1_report_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -932,7 +1100,7 @@ func (x *ListWithdrawDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListWithdrawDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{9}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListWithdrawDetailsRequest) GetTimeRange() *v1.TimeRange {
@@ -990,7 +1158,7 @@ type ListRegisterRetentionRequest struct {
 
 func (x *ListRegisterRetentionRequest) Reset() {
 	*x = ListRegisterRetentionRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[10]
+	mi := &file_report_service_v1_report_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1002,7 +1170,7 @@ func (x *ListRegisterRetentionRequest) String() string {
 func (*ListRegisterRetentionRequest) ProtoMessage() {}
 
 func (x *ListRegisterRetentionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[10]
+	mi := &file_report_service_v1_report_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1015,7 +1183,7 @@ func (x *ListRegisterRetentionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRegisterRetentionRequest.ProtoReflect.Descriptor instead.
 func (*ListRegisterRetentionRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{10}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListRegisterRetentionRequest) GetTimeRange() *v1.TimeRange {
@@ -1067,7 +1235,7 @@ type ListDepositVtgDetailsRequest struct {
 
 func (x *ListDepositVtgDetailsRequest) Reset() {
 	*x = ListDepositVtgDetailsRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[11]
+	mi := &file_report_service_v1_report_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1079,7 +1247,7 @@ func (x *ListDepositVtgDetailsRequest) String() string {
 func (*ListDepositVtgDetailsRequest) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[11]
+	mi := &file_report_service_v1_report_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1092,7 +1260,7 @@ func (x *ListDepositVtgDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDepositVtgDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListDepositVtgDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{11}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListDepositVtgDetailsRequest) GetTimeRange() *v1.TimeRange {
@@ -1151,7 +1319,7 @@ type ListWithdrawVtgDetailsRequest struct {
 
 func (x *ListWithdrawVtgDetailsRequest) Reset() {
 	*x = ListWithdrawVtgDetailsRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[12]
+	mi := &file_report_service_v1_report_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1163,7 +1331,7 @@ func (x *ListWithdrawVtgDetailsRequest) String() string {
 func (*ListWithdrawVtgDetailsRequest) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[12]
+	mi := &file_report_service_v1_report_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1176,7 +1344,7 @@ func (x *ListWithdrawVtgDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListWithdrawVtgDetailsRequest.ProtoReflect.Descriptor instead.
 func (*ListWithdrawVtgDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{12}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListWithdrawVtgDetailsRequest) GetTimeRange() *v1.TimeRange {
@@ -1267,7 +1435,7 @@ type ReferralVTGTierData struct {
 
 func (x *ReferralVTGTierData) Reset() {
 	*x = ReferralVTGTierData{}
-	mi := &file_report_service_v1_report_proto_msgTypes[13]
+	mi := &file_report_service_v1_report_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1279,7 +1447,7 @@ func (x *ReferralVTGTierData) String() string {
 func (*ReferralVTGTierData) ProtoMessage() {}
 
 func (x *ReferralVTGTierData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[13]
+	mi := &file_report_service_v1_report_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1292,7 +1460,7 @@ func (x *ReferralVTGTierData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralVTGTierData.ProtoReflect.Descriptor instead.
 func (*ReferralVTGTierData) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{13}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ReferralVTGTierData) GetTier() int32 {
@@ -1539,7 +1707,7 @@ type ReferralSnapshotTierData struct {
 
 func (x *ReferralSnapshotTierData) Reset() {
 	*x = ReferralSnapshotTierData{}
-	mi := &file_report_service_v1_report_proto_msgTypes[14]
+	mi := &file_report_service_v1_report_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1551,7 +1719,7 @@ func (x *ReferralSnapshotTierData) String() string {
 func (*ReferralSnapshotTierData) ProtoMessage() {}
 
 func (x *ReferralSnapshotTierData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[14]
+	mi := &file_report_service_v1_report_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1564,7 +1732,7 @@ func (x *ReferralSnapshotTierData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralSnapshotTierData.ProtoReflect.Descriptor instead.
 func (*ReferralSnapshotTierData) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{14}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ReferralSnapshotTierData) GetTier() int32 {
@@ -1687,7 +1855,7 @@ type ReferralT1GamingData struct {
 
 func (x *ReferralT1GamingData) Reset() {
 	*x = ReferralT1GamingData{}
-	mi := &file_report_service_v1_report_proto_msgTypes[15]
+	mi := &file_report_service_v1_report_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1699,7 +1867,7 @@ func (x *ReferralT1GamingData) String() string {
 func (*ReferralT1GamingData) ProtoMessage() {}
 
 func (x *ReferralT1GamingData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[15]
+	mi := &file_report_service_v1_report_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1712,7 +1880,7 @@ func (x *ReferralT1GamingData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralT1GamingData.ProtoReflect.Descriptor instead.
 func (*ReferralT1GamingData) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{15}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ReferralT1GamingData) GetGgrUsd() string {
@@ -1801,7 +1969,7 @@ type ReferralT1Carryover struct {
 
 func (x *ReferralT1Carryover) Reset() {
 	*x = ReferralT1Carryover{}
-	mi := &file_report_service_v1_report_proto_msgTypes[16]
+	mi := &file_report_service_v1_report_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1813,7 +1981,7 @@ func (x *ReferralT1Carryover) String() string {
 func (*ReferralT1Carryover) ProtoMessage() {}
 
 func (x *ReferralT1Carryover) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[16]
+	mi := &file_report_service_v1_report_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1826,7 +1994,7 @@ func (x *ReferralT1Carryover) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralT1Carryover.ProtoReflect.Descriptor instead.
 func (*ReferralT1Carryover) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{16}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ReferralT1Carryover) GetBasedOn() string {
@@ -1885,7 +2053,7 @@ type ReferralTierGamingData struct {
 
 func (x *ReferralTierGamingData) Reset() {
 	*x = ReferralTierGamingData{}
-	mi := &file_report_service_v1_report_proto_msgTypes[17]
+	mi := &file_report_service_v1_report_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1897,7 +2065,7 @@ func (x *ReferralTierGamingData) String() string {
 func (*ReferralTierGamingData) ProtoMessage() {}
 
 func (x *ReferralTierGamingData) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[17]
+	mi := &file_report_service_v1_report_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1910,7 +2078,7 @@ func (x *ReferralTierGamingData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralTierGamingData.ProtoReflect.Descriptor instead.
 func (*ReferralTierGamingData) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{17}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ReferralTierGamingData) GetTier() int32 {
@@ -2000,7 +2168,7 @@ type ListReferralVTGReportDataRequest struct {
 
 func (x *ListReferralVTGReportDataRequest) Reset() {
 	*x = ListReferralVTGReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[18]
+	mi := &file_report_service_v1_report_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2012,7 +2180,7 @@ func (x *ListReferralVTGReportDataRequest) String() string {
 func (*ListReferralVTGReportDataRequest) ProtoMessage() {}
 
 func (x *ListReferralVTGReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[18]
+	mi := &file_report_service_v1_report_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2025,7 +2193,7 @@ func (x *ListReferralVTGReportDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReferralVTGReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListReferralVTGReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{18}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListReferralVTGReportDataRequest) GetPeriod() string {
@@ -2119,7 +2287,7 @@ type ReferralVTGReportDataItem struct {
 
 func (x *ReferralVTGReportDataItem) Reset() {
 	*x = ReferralVTGReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[19]
+	mi := &file_report_service_v1_report_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2131,7 +2299,7 @@ func (x *ReferralVTGReportDataItem) String() string {
 func (*ReferralVTGReportDataItem) ProtoMessage() {}
 
 func (x *ReferralVTGReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[19]
+	mi := &file_report_service_v1_report_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2144,7 +2312,7 @@ func (x *ReferralVTGReportDataItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralVTGReportDataItem.ProtoReflect.Descriptor instead.
 func (*ReferralVTGReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{19}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ReferralVTGReportDataItem) GetDate() string {
@@ -2264,7 +2432,7 @@ type ListReferralVTGReportDataResponse struct {
 
 func (x *ListReferralVTGReportDataResponse) Reset() {
 	*x = ListReferralVTGReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[20]
+	mi := &file_report_service_v1_report_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2276,7 +2444,7 @@ func (x *ListReferralVTGReportDataResponse) String() string {
 func (*ListReferralVTGReportDataResponse) ProtoMessage() {}
 
 func (x *ListReferralVTGReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[20]
+	mi := &file_report_service_v1_report_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2289,7 +2457,7 @@ func (x *ListReferralVTGReportDataResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListReferralVTGReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListReferralVTGReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{20}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListReferralVTGReportDataResponse) GetItems() []*ReferralVTGReportDataItem {
@@ -2338,7 +2506,7 @@ type ListReferralSnapshotReportDataRequest struct {
 
 func (x *ListReferralSnapshotReportDataRequest) Reset() {
 	*x = ListReferralSnapshotReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[21]
+	mi := &file_report_service_v1_report_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2350,7 +2518,7 @@ func (x *ListReferralSnapshotReportDataRequest) String() string {
 func (*ListReferralSnapshotReportDataRequest) ProtoMessage() {}
 
 func (x *ListReferralSnapshotReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[21]
+	mi := &file_report_service_v1_report_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2363,7 +2531,7 @@ func (x *ListReferralSnapshotReportDataRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListReferralSnapshotReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListReferralSnapshotReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{21}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListReferralSnapshotReportDataRequest) GetPeriod() string {
@@ -2486,7 +2654,7 @@ type ReferralSnapshotReportDataItem struct {
 
 func (x *ReferralSnapshotReportDataItem) Reset() {
 	*x = ReferralSnapshotReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[22]
+	mi := &file_report_service_v1_report_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2498,7 +2666,7 @@ func (x *ReferralSnapshotReportDataItem) String() string {
 func (*ReferralSnapshotReportDataItem) ProtoMessage() {}
 
 func (x *ReferralSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[22]
+	mi := &file_report_service_v1_report_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2511,7 +2679,7 @@ func (x *ReferralSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralSnapshotReportDataItem.ProtoReflect.Descriptor instead.
 func (*ReferralSnapshotReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{22}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ReferralSnapshotReportDataItem) GetDate() string {
@@ -2729,7 +2897,7 @@ type ListReferralSnapshotReportDataResponse struct {
 
 func (x *ListReferralSnapshotReportDataResponse) Reset() {
 	*x = ListReferralSnapshotReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[23]
+	mi := &file_report_service_v1_report_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2741,7 +2909,7 @@ func (x *ListReferralSnapshotReportDataResponse) String() string {
 func (*ListReferralSnapshotReportDataResponse) ProtoMessage() {}
 
 func (x *ListReferralSnapshotReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[23]
+	mi := &file_report_service_v1_report_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2754,7 +2922,7 @@ func (x *ListReferralSnapshotReportDataResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListReferralSnapshotReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListReferralSnapshotReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{23}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListReferralSnapshotReportDataResponse) GetItems() []*ReferralSnapshotReportDataItem {
@@ -2801,7 +2969,7 @@ type ListReferralContributionReportDataRequest struct {
 
 func (x *ListReferralContributionReportDataRequest) Reset() {
 	*x = ListReferralContributionReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[24]
+	mi := &file_report_service_v1_report_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2813,7 +2981,7 @@ func (x *ListReferralContributionReportDataRequest) String() string {
 func (*ListReferralContributionReportDataRequest) ProtoMessage() {}
 
 func (x *ListReferralContributionReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[24]
+	mi := &file_report_service_v1_report_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2826,7 +2994,7 @@ func (x *ListReferralContributionReportDataRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use ListReferralContributionReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListReferralContributionReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{24}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListReferralContributionReportDataRequest) GetPeriod() string {
@@ -2931,7 +3099,7 @@ type ReferralContributionReportDataItem struct {
 
 func (x *ReferralContributionReportDataItem) Reset() {
 	*x = ReferralContributionReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[25]
+	mi := &file_report_service_v1_report_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2943,7 +3111,7 @@ func (x *ReferralContributionReportDataItem) String() string {
 func (*ReferralContributionReportDataItem) ProtoMessage() {}
 
 func (x *ReferralContributionReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[25]
+	mi := &file_report_service_v1_report_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2956,7 +3124,7 @@ func (x *ReferralContributionReportDataItem) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ReferralContributionReportDataItem.ProtoReflect.Descriptor instead.
 func (*ReferralContributionReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{25}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ReferralContributionReportDataItem) GetDate() string {
@@ -3202,7 +3370,7 @@ type ListReferralContributionReportDataResponse struct {
 
 func (x *ListReferralContributionReportDataResponse) Reset() {
 	*x = ListReferralContributionReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[26]
+	mi := &file_report_service_v1_report_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3214,7 +3382,7 @@ func (x *ListReferralContributionReportDataResponse) String() string {
 func (*ListReferralContributionReportDataResponse) ProtoMessage() {}
 
 func (x *ListReferralContributionReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[26]
+	mi := &file_report_service_v1_report_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3227,7 +3395,7 @@ func (x *ListReferralContributionReportDataResponse) ProtoReflect() protoreflect
 
 // Deprecated: Use ListReferralContributionReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListReferralContributionReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{26}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListReferralContributionReportDataResponse) GetItems() []*ReferralContributionReportDataItem {
@@ -3271,7 +3439,7 @@ type ListReferralLifetimeReportDataRequest struct {
 
 func (x *ListReferralLifetimeReportDataRequest) Reset() {
 	*x = ListReferralLifetimeReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[27]
+	mi := &file_report_service_v1_report_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3283,7 +3451,7 @@ func (x *ListReferralLifetimeReportDataRequest) String() string {
 func (*ListReferralLifetimeReportDataRequest) ProtoMessage() {}
 
 func (x *ListReferralLifetimeReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[27]
+	mi := &file_report_service_v1_report_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3296,7 +3464,7 @@ func (x *ListReferralLifetimeReportDataRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListReferralLifetimeReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListReferralLifetimeReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{27}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListReferralLifetimeReportDataRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
@@ -3360,7 +3528,7 @@ type ReferralLifetimeReportDataItem struct {
 
 func (x *ReferralLifetimeReportDataItem) Reset() {
 	*x = ReferralLifetimeReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[28]
+	mi := &file_report_service_v1_report_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3372,7 +3540,7 @@ func (x *ReferralLifetimeReportDataItem) String() string {
 func (*ReferralLifetimeReportDataItem) ProtoMessage() {}
 
 func (x *ReferralLifetimeReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[28]
+	mi := &file_report_service_v1_report_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3385,7 +3553,7 @@ func (x *ReferralLifetimeReportDataItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralLifetimeReportDataItem.ProtoReflect.Descriptor instead.
 func (*ReferralLifetimeReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{28}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ReferralLifetimeReportDataItem) GetUid() int64 {
@@ -3505,7 +3673,7 @@ type ListReferralLifetimeReportDataResponse struct {
 
 func (x *ListReferralLifetimeReportDataResponse) Reset() {
 	*x = ListReferralLifetimeReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[29]
+	mi := &file_report_service_v1_report_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3517,7 +3685,7 @@ func (x *ListReferralLifetimeReportDataResponse) String() string {
 func (*ListReferralLifetimeReportDataResponse) ProtoMessage() {}
 
 func (x *ListReferralLifetimeReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[29]
+	mi := &file_report_service_v1_report_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3530,7 +3698,7 @@ func (x *ListReferralLifetimeReportDataResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListReferralLifetimeReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListReferralLifetimeReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{29}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListReferralLifetimeReportDataResponse) GetItems() []*ReferralLifetimeReportDataItem {
@@ -3577,7 +3745,7 @@ type ListAffiliateVTGReportDataRequest struct {
 
 func (x *ListAffiliateVTGReportDataRequest) Reset() {
 	*x = ListAffiliateVTGReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[30]
+	mi := &file_report_service_v1_report_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3589,7 +3757,7 @@ func (x *ListAffiliateVTGReportDataRequest) String() string {
 func (*ListAffiliateVTGReportDataRequest) ProtoMessage() {}
 
 func (x *ListAffiliateVTGReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[30]
+	mi := &file_report_service_v1_report_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3602,7 +3770,7 @@ func (x *ListAffiliateVTGReportDataRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListAffiliateVTGReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListAffiliateVTGReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{30}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListAffiliateVTGReportDataRequest) GetPeriod() string {
@@ -3757,7 +3925,7 @@ type AffiliateVTGReportDataItem struct {
 
 func (x *AffiliateVTGReportDataItem) Reset() {
 	*x = AffiliateVTGReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[31]
+	mi := &file_report_service_v1_report_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3769,7 +3937,7 @@ func (x *AffiliateVTGReportDataItem) String() string {
 func (*AffiliateVTGReportDataItem) ProtoMessage() {}
 
 func (x *AffiliateVTGReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[31]
+	mi := &file_report_service_v1_report_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3782,7 +3950,7 @@ func (x *AffiliateVTGReportDataItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AffiliateVTGReportDataItem.ProtoReflect.Descriptor instead.
 func (*AffiliateVTGReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{31}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *AffiliateVTGReportDataItem) GetDate() string {
@@ -4308,7 +4476,7 @@ type ListAffiliateVTGReportDataResponse struct {
 
 func (x *ListAffiliateVTGReportDataResponse) Reset() {
 	*x = ListAffiliateVTGReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[32]
+	mi := &file_report_service_v1_report_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4320,7 +4488,7 @@ func (x *ListAffiliateVTGReportDataResponse) String() string {
 func (*ListAffiliateVTGReportDataResponse) ProtoMessage() {}
 
 func (x *ListAffiliateVTGReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[32]
+	mi := &file_report_service_v1_report_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4333,7 +4501,7 @@ func (x *ListAffiliateVTGReportDataResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListAffiliateVTGReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListAffiliateVTGReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{32}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListAffiliateVTGReportDataResponse) GetItems() []*AffiliateVTGReportDataItem {
@@ -4383,7 +4551,7 @@ type AffiliateLifetimeCommissionGaming struct {
 
 func (x *AffiliateLifetimeCommissionGaming) Reset() {
 	*x = AffiliateLifetimeCommissionGaming{}
-	mi := &file_report_service_v1_report_proto_msgTypes[33]
+	mi := &file_report_service_v1_report_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4395,7 +4563,7 @@ func (x *AffiliateLifetimeCommissionGaming) String() string {
 func (*AffiliateLifetimeCommissionGaming) ProtoMessage() {}
 
 func (x *AffiliateLifetimeCommissionGaming) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[33]
+	mi := &file_report_service_v1_report_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4408,7 +4576,7 @@ func (x *AffiliateLifetimeCommissionGaming) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use AffiliateLifetimeCommissionGaming.ProtoReflect.Descriptor instead.
 func (*AffiliateLifetimeCommissionGaming) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{33}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *AffiliateLifetimeCommissionGaming) GetGgrUsd() string {
@@ -4470,7 +4638,7 @@ type ListAffiliateSnapshotReportDataRequest struct {
 
 func (x *ListAffiliateSnapshotReportDataRequest) Reset() {
 	*x = ListAffiliateSnapshotReportDataRequest{}
-	mi := &file_report_service_v1_report_proto_msgTypes[34]
+	mi := &file_report_service_v1_report_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4482,7 +4650,7 @@ func (x *ListAffiliateSnapshotReportDataRequest) String() string {
 func (*ListAffiliateSnapshotReportDataRequest) ProtoMessage() {}
 
 func (x *ListAffiliateSnapshotReportDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[34]
+	mi := &file_report_service_v1_report_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4495,7 +4663,7 @@ func (x *ListAffiliateSnapshotReportDataRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListAffiliateSnapshotReportDataRequest.ProtoReflect.Descriptor instead.
 func (*ListAffiliateSnapshotReportDataRequest) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{34}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListAffiliateSnapshotReportDataRequest) GetPeriod() string {
@@ -4585,7 +4753,7 @@ type AffiliateCurrentPeriodGaming struct {
 
 func (x *AffiliateCurrentPeriodGaming) Reset() {
 	*x = AffiliateCurrentPeriodGaming{}
-	mi := &file_report_service_v1_report_proto_msgTypes[35]
+	mi := &file_report_service_v1_report_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4597,7 +4765,7 @@ func (x *AffiliateCurrentPeriodGaming) String() string {
 func (*AffiliateCurrentPeriodGaming) ProtoMessage() {}
 
 func (x *AffiliateCurrentPeriodGaming) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[35]
+	mi := &file_report_service_v1_report_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4610,7 +4778,7 @@ func (x *AffiliateCurrentPeriodGaming) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AffiliateCurrentPeriodGaming.ProtoReflect.Descriptor instead.
 func (*AffiliateCurrentPeriodGaming) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{35}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *AffiliateCurrentPeriodGaming) GetGgrUsd() string {
@@ -4777,7 +4945,7 @@ type AffiliateSnapshotReportDataItem struct {
 
 func (x *AffiliateSnapshotReportDataItem) Reset() {
 	*x = AffiliateSnapshotReportDataItem{}
-	mi := &file_report_service_v1_report_proto_msgTypes[36]
+	mi := &file_report_service_v1_report_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4789,7 +4957,7 @@ func (x *AffiliateSnapshotReportDataItem) String() string {
 func (*AffiliateSnapshotReportDataItem) ProtoMessage() {}
 
 func (x *AffiliateSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[36]
+	mi := &file_report_service_v1_report_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4802,7 +4970,7 @@ func (x *AffiliateSnapshotReportDataItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AffiliateSnapshotReportDataItem.ProtoReflect.Descriptor instead.
 func (*AffiliateSnapshotReportDataItem) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{36}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *AffiliateSnapshotReportDataItem) GetDate() string {
@@ -5405,7 +5573,7 @@ type ListAffiliateSnapshotReportDataResponse struct {
 
 func (x *ListAffiliateSnapshotReportDataResponse) Reset() {
 	*x = ListAffiliateSnapshotReportDataResponse{}
-	mi := &file_report_service_v1_report_proto_msgTypes[37]
+	mi := &file_report_service_v1_report_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5417,7 +5585,7 @@ func (x *ListAffiliateSnapshotReportDataResponse) String() string {
 func (*ListAffiliateSnapshotReportDataResponse) ProtoMessage() {}
 
 func (x *ListAffiliateSnapshotReportDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_service_v1_report_proto_msgTypes[37]
+	mi := &file_report_service_v1_report_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5430,7 +5598,7 @@ func (x *ListAffiliateSnapshotReportDataResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListAffiliateSnapshotReportDataResponse.ProtoReflect.Descriptor instead.
 func (*ListAffiliateSnapshotReportDataResponse) Descriptor() ([]byte, []int) {
-	return file_report_service_v1_report_proto_rawDescGZIP(), []int{37}
+	return file_report_service_v1_report_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ListAffiliateSnapshotReportDataResponse) GetItems() []*AffiliateSnapshotReportDataItem {
@@ -5515,7 +5683,26 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\x12F\n" +
 	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe6\x03\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x89\x04\n" +
+	"\x15ExportGameDataRequest\x12C\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12!\n" +
+	"\fprovider_ids\x18\x03 \x03(\tR\vproviderIds\x12'\n" +
+	"\x0fgame_categories\x18\x04 \x03(\tR\x0egameCategories\x12\x1d\n" +
+	"\n" +
+	"game_names\x18\x05 \x03(\tR\tgameNames\x12\x19\n" +
+	"\bgame_ids\x18\x06 \x03(\tR\agameIds\x12\x1e\n" +
+	"\n" +
+	"currencies\x18\a \x03(\tR\n" +
+	"currencies\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x16\n" +
+	"\x06format\x18\t \x01(\tR\x06format\x12\x1b\n" +
+	"\ttime_zone\x18\n" +
+	" \x01(\tR\btimeZone\x12*\n" +
+	"\x11initiator_user_id\x18\v \x01(\x03R\x0finitiatorUserId\"1\n" +
+	"\x16ExportGameDataResponse\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\xe6\x03\n" +
 	"\x1bGetPlayerGameSummaryRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
@@ -6106,7 +6293,7 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v26.api.report.service.v1.AffiliateSnapshotReportDataItemR\x05items\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x03R\x05total2\xdc\x1b\n" +
+	"\x05total\x18\x04 \x01(\x03R\x05total2\xcd\x1c\n" +
 	"\rReportService\x12\x88\x01\n" +
 	"\n" +
 	"GetSummary\x12(.api.report.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/report/summary/get\x12\x92\x01\n" +
@@ -6123,7 +6310,8 @@ const file_report_service_v1_report_proto_rawDesc = "" +
 	"\x13ListWithdrawDetails\x121.api.report.service.v1.ListWithdrawDetailsRequest\x1a6.api.backoffice.service.v1.ListWithdrawDetailsResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/report/withdraw-details/list\x12\xba\x01\n" +
 	"\x16ListWithdrawVtgDetails\x124.api.report.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/report/withdraw-vtg-details/list\x12\xa1\x01\n" +
 	"\x0fListSportEvents\x121.api.backoffice.service.v1.ListSportEventsRequest\x1a2.api.backoffice.service.v1.ListSportEventsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/report/sport-events/list\x12\xc4\x01\n" +
-	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/report/customer-record/get\x12\x90\x01\n" +
+	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/report/customer-record/get\x12o\n" +
+	"\x0eExportGameData\x12,.api.report.service.v1.ExportGameDataRequest\x1a-.api.report.service.v1.ExportGameDataResponse\"\x00\x12\x90\x01\n" +
 	"\x19ListReferralVTGReportData\x127.api.report.service.v1.ListReferralVTGReportDataRequest\x1a8.api.report.service.v1.ListReferralVTGReportDataResponse\"\x00\x12\x9f\x01\n" +
 	"\x1eListReferralSnapshotReportData\x12<.api.report.service.v1.ListReferralSnapshotReportDataRequest\x1a=.api.report.service.v1.ListReferralSnapshotReportDataResponse\"\x00\x12\xab\x01\n" +
 	"\"ListReferralContributionReportData\x12@.api.report.service.v1.ListReferralContributionReportDataRequest\x1aA.api.report.service.v1.ListReferralContributionReportDataResponse\"\x00\x12\x9f\x01\n" +
@@ -6144,183 +6332,190 @@ func file_report_service_v1_report_proto_rawDescGZIP() []byte {
 	return file_report_service_v1_report_proto_rawDescData
 }
 
-var file_report_service_v1_report_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_report_service_v1_report_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_report_service_v1_report_proto_goTypes = []any{
 	(*GetSummaryRequest)(nil),                          // 0: api.report.service.v1.GetSummaryRequest
 	(*ListSummariesRequest)(nil),                       // 1: api.report.service.v1.ListSummariesRequest
 	(*GetGameSummaryRequest)(nil),                      // 2: api.report.service.v1.GetGameSummaryRequest
 	(*ListGameDataRequest)(nil),                        // 3: api.report.service.v1.ListGameDataRequest
-	(*GetPlayerGameSummaryRequest)(nil),                // 4: api.report.service.v1.GetPlayerGameSummaryRequest
-	(*ListPlayerGameDataRequest)(nil),                  // 5: api.report.service.v1.ListPlayerGameDataRequest
-	(*GetDepositSummariesRequest)(nil),                 // 6: api.report.service.v1.GetDepositSummariesRequest
-	(*GetWithdrawSummariesRequest)(nil),                // 7: api.report.service.v1.GetWithdrawSummariesRequest
-	(*ListDepositDetailsRequest)(nil),                  // 8: api.report.service.v1.ListDepositDetailsRequest
-	(*ListWithdrawDetailsRequest)(nil),                 // 9: api.report.service.v1.ListWithdrawDetailsRequest
-	(*ListRegisterRetentionRequest)(nil),               // 10: api.report.service.v1.ListRegisterRetentionRequest
-	(*ListDepositVtgDetailsRequest)(nil),               // 11: api.report.service.v1.ListDepositVtgDetailsRequest
-	(*ListWithdrawVtgDetailsRequest)(nil),              // 12: api.report.service.v1.ListWithdrawVtgDetailsRequest
-	(*ReferralVTGTierData)(nil),                        // 13: api.report.service.v1.ReferralVTGTierData
-	(*ReferralSnapshotTierData)(nil),                   // 14: api.report.service.v1.ReferralSnapshotTierData
-	(*ReferralT1GamingData)(nil),                       // 15: api.report.service.v1.ReferralT1GamingData
-	(*ReferralT1Carryover)(nil),                        // 16: api.report.service.v1.ReferralT1Carryover
-	(*ReferralTierGamingData)(nil),                     // 17: api.report.service.v1.ReferralTierGamingData
-	(*ListReferralVTGReportDataRequest)(nil),           // 18: api.report.service.v1.ListReferralVTGReportDataRequest
-	(*ReferralVTGReportDataItem)(nil),                  // 19: api.report.service.v1.ReferralVTGReportDataItem
-	(*ListReferralVTGReportDataResponse)(nil),          // 20: api.report.service.v1.ListReferralVTGReportDataResponse
-	(*ListReferralSnapshotReportDataRequest)(nil),      // 21: api.report.service.v1.ListReferralSnapshotReportDataRequest
-	(*ReferralSnapshotReportDataItem)(nil),             // 22: api.report.service.v1.ReferralSnapshotReportDataItem
-	(*ListReferralSnapshotReportDataResponse)(nil),     // 23: api.report.service.v1.ListReferralSnapshotReportDataResponse
-	(*ListReferralContributionReportDataRequest)(nil),  // 24: api.report.service.v1.ListReferralContributionReportDataRequest
-	(*ReferralContributionReportDataItem)(nil),         // 25: api.report.service.v1.ReferralContributionReportDataItem
-	(*ListReferralContributionReportDataResponse)(nil), // 26: api.report.service.v1.ListReferralContributionReportDataResponse
-	(*ListReferralLifetimeReportDataRequest)(nil),      // 27: api.report.service.v1.ListReferralLifetimeReportDataRequest
-	(*ReferralLifetimeReportDataItem)(nil),             // 28: api.report.service.v1.ReferralLifetimeReportDataItem
-	(*ListReferralLifetimeReportDataResponse)(nil),     // 29: api.report.service.v1.ListReferralLifetimeReportDataResponse
-	(*ListAffiliateVTGReportDataRequest)(nil),          // 30: api.report.service.v1.ListAffiliateVTGReportDataRequest
-	(*AffiliateVTGReportDataItem)(nil),                 // 31: api.report.service.v1.AffiliateVTGReportDataItem
-	(*ListAffiliateVTGReportDataResponse)(nil),         // 32: api.report.service.v1.ListAffiliateVTGReportDataResponse
-	(*AffiliateLifetimeCommissionGaming)(nil),          // 33: api.report.service.v1.AffiliateLifetimeCommissionGaming
-	(*ListAffiliateSnapshotReportDataRequest)(nil),     // 34: api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	(*AffiliateCurrentPeriodGaming)(nil),               // 35: api.report.service.v1.AffiliateCurrentPeriodGaming
-	(*AffiliateSnapshotReportDataItem)(nil),            // 36: api.report.service.v1.AffiliateSnapshotReportDataItem
-	(*ListAffiliateSnapshotReportDataResponse)(nil),    // 37: api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	(*v1.TimeRange)(nil),                               // 38: api.backoffice.service.v1.TimeRange
-	(*common.OperatorContextFilters)(nil),              // 39: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                     // 40: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                      // 41: google.protobuf.Timestamp
-	(*v1.ListSportEventsRequest)(nil),                  // 42: api.backoffice.service.v1.ListSportEventsRequest
-	(*v1.CustomerRecordReportDetailRequest)(nil),       // 43: api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	(*v1.GetSummaryResponse)(nil),                      // 44: api.backoffice.service.v1.GetSummaryResponse
-	(*v1.ListSummariesResponse)(nil),                   // 45: api.backoffice.service.v1.ListSummariesResponse
-	(*v1.GetGameSummaryResponse)(nil),                  // 46: api.backoffice.service.v1.GetGameSummaryResponse
-	(*v1.ListGameDataResponse)(nil),                    // 47: api.backoffice.service.v1.ListGameDataResponse
-	(*v1.GetPlayerGameSummaryResponse)(nil),            // 48: api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	(*v1.ListPlayerGameDataResponse)(nil),              // 49: api.backoffice.service.v1.ListPlayerGameDataResponse
-	(*v1.ListRegisterRetentionResponse)(nil),           // 50: api.backoffice.service.v1.ListRegisterRetentionResponse
-	(*v1.GetDepositSummariesResponse)(nil),             // 51: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*v1.ListDepositDetailsResponse)(nil),              // 52: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*v1.ListDepositVtgDetailsResponse)(nil),           // 53: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*v1.GetWithdrawSummariesResponse)(nil),            // 54: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*v1.ListWithdrawDetailsResponse)(nil),             // 55: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 56: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*v1.ListSportEventsResponse)(nil),                 // 57: api.backoffice.service.v1.ListSportEventsResponse
-	(*v1.CustomerRecordReportDetailResponse)(nil),      // 58: api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	(*ExportGameDataRequest)(nil),                      // 4: api.report.service.v1.ExportGameDataRequest
+	(*ExportGameDataResponse)(nil),                     // 5: api.report.service.v1.ExportGameDataResponse
+	(*GetPlayerGameSummaryRequest)(nil),                // 6: api.report.service.v1.GetPlayerGameSummaryRequest
+	(*ListPlayerGameDataRequest)(nil),                  // 7: api.report.service.v1.ListPlayerGameDataRequest
+	(*GetDepositSummariesRequest)(nil),                 // 8: api.report.service.v1.GetDepositSummariesRequest
+	(*GetWithdrawSummariesRequest)(nil),                // 9: api.report.service.v1.GetWithdrawSummariesRequest
+	(*ListDepositDetailsRequest)(nil),                  // 10: api.report.service.v1.ListDepositDetailsRequest
+	(*ListWithdrawDetailsRequest)(nil),                 // 11: api.report.service.v1.ListWithdrawDetailsRequest
+	(*ListRegisterRetentionRequest)(nil),               // 12: api.report.service.v1.ListRegisterRetentionRequest
+	(*ListDepositVtgDetailsRequest)(nil),               // 13: api.report.service.v1.ListDepositVtgDetailsRequest
+	(*ListWithdrawVtgDetailsRequest)(nil),              // 14: api.report.service.v1.ListWithdrawVtgDetailsRequest
+	(*ReferralVTGTierData)(nil),                        // 15: api.report.service.v1.ReferralVTGTierData
+	(*ReferralSnapshotTierData)(nil),                   // 16: api.report.service.v1.ReferralSnapshotTierData
+	(*ReferralT1GamingData)(nil),                       // 17: api.report.service.v1.ReferralT1GamingData
+	(*ReferralT1Carryover)(nil),                        // 18: api.report.service.v1.ReferralT1Carryover
+	(*ReferralTierGamingData)(nil),                     // 19: api.report.service.v1.ReferralTierGamingData
+	(*ListReferralVTGReportDataRequest)(nil),           // 20: api.report.service.v1.ListReferralVTGReportDataRequest
+	(*ReferralVTGReportDataItem)(nil),                  // 21: api.report.service.v1.ReferralVTGReportDataItem
+	(*ListReferralVTGReportDataResponse)(nil),          // 22: api.report.service.v1.ListReferralVTGReportDataResponse
+	(*ListReferralSnapshotReportDataRequest)(nil),      // 23: api.report.service.v1.ListReferralSnapshotReportDataRequest
+	(*ReferralSnapshotReportDataItem)(nil),             // 24: api.report.service.v1.ReferralSnapshotReportDataItem
+	(*ListReferralSnapshotReportDataResponse)(nil),     // 25: api.report.service.v1.ListReferralSnapshotReportDataResponse
+	(*ListReferralContributionReportDataRequest)(nil),  // 26: api.report.service.v1.ListReferralContributionReportDataRequest
+	(*ReferralContributionReportDataItem)(nil),         // 27: api.report.service.v1.ReferralContributionReportDataItem
+	(*ListReferralContributionReportDataResponse)(nil), // 28: api.report.service.v1.ListReferralContributionReportDataResponse
+	(*ListReferralLifetimeReportDataRequest)(nil),      // 29: api.report.service.v1.ListReferralLifetimeReportDataRequest
+	(*ReferralLifetimeReportDataItem)(nil),             // 30: api.report.service.v1.ReferralLifetimeReportDataItem
+	(*ListReferralLifetimeReportDataResponse)(nil),     // 31: api.report.service.v1.ListReferralLifetimeReportDataResponse
+	(*ListAffiliateVTGReportDataRequest)(nil),          // 32: api.report.service.v1.ListAffiliateVTGReportDataRequest
+	(*AffiliateVTGReportDataItem)(nil),                 // 33: api.report.service.v1.AffiliateVTGReportDataItem
+	(*ListAffiliateVTGReportDataResponse)(nil),         // 34: api.report.service.v1.ListAffiliateVTGReportDataResponse
+	(*AffiliateLifetimeCommissionGaming)(nil),          // 35: api.report.service.v1.AffiliateLifetimeCommissionGaming
+	(*ListAffiliateSnapshotReportDataRequest)(nil),     // 36: api.report.service.v1.ListAffiliateSnapshotReportDataRequest
+	(*AffiliateCurrentPeriodGaming)(nil),               // 37: api.report.service.v1.AffiliateCurrentPeriodGaming
+	(*AffiliateSnapshotReportDataItem)(nil),            // 38: api.report.service.v1.AffiliateSnapshotReportDataItem
+	(*ListAffiliateSnapshotReportDataResponse)(nil),    // 39: api.report.service.v1.ListAffiliateSnapshotReportDataResponse
+	(*v1.TimeRange)(nil),                               // 40: api.backoffice.service.v1.TimeRange
+	(*common.OperatorContextFilters)(nil),              // 41: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                     // 42: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                      // 43: google.protobuf.Timestamp
+	(*v1.ListSportEventsRequest)(nil),                  // 44: api.backoffice.service.v1.ListSportEventsRequest
+	(*v1.CustomerRecordReportDetailRequest)(nil),       // 45: api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	(*v1.GetSummaryResponse)(nil),                      // 46: api.backoffice.service.v1.GetSummaryResponse
+	(*v1.ListSummariesResponse)(nil),                   // 47: api.backoffice.service.v1.ListSummariesResponse
+	(*v1.GetGameSummaryResponse)(nil),                  // 48: api.backoffice.service.v1.GetGameSummaryResponse
+	(*v1.ListGameDataResponse)(nil),                    // 49: api.backoffice.service.v1.ListGameDataResponse
+	(*v1.GetPlayerGameSummaryResponse)(nil),            // 50: api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	(*v1.ListPlayerGameDataResponse)(nil),              // 51: api.backoffice.service.v1.ListPlayerGameDataResponse
+	(*v1.ListRegisterRetentionResponse)(nil),           // 52: api.backoffice.service.v1.ListRegisterRetentionResponse
+	(*v1.GetDepositSummariesResponse)(nil),             // 53: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*v1.ListDepositDetailsResponse)(nil),              // 54: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*v1.ListDepositVtgDetailsResponse)(nil),           // 55: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*v1.GetWithdrawSummariesResponse)(nil),            // 56: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*v1.ListWithdrawDetailsResponse)(nil),             // 57: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*v1.ListWithdrawVtgDetailsResponse)(nil),          // 58: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*v1.ListSportEventsResponse)(nil),                 // 59: api.backoffice.service.v1.ListSportEventsResponse
+	(*v1.CustomerRecordReportDetailResponse)(nil),      // 60: api.backoffice.service.v1.CustomerRecordReportDetailResponse
 }
 var file_report_service_v1_report_proto_depIdxs = []int32{
-	38, // 0: api.report.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 1: api.report.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 2: api.report.service.v1.GetSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 3: api.report.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 4: api.report.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 5: api.report.service.v1.ListSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 6: api.report.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 7: api.report.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 8: api.report.service.v1.GetGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 9: api.report.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 10: api.report.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 11: api.report.service.v1.ListGameDataRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 12: api.report.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 13: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 14: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 15: api.report.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 16: api.report.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 17: api.report.service.v1.ListPlayerGameDataRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 18: api.report.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 19: api.report.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 20: api.report.service.v1.GetDepositSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 21: api.report.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 22: api.report.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 23: api.report.service.v1.GetWithdrawSummariesRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 24: api.report.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 25: api.report.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 26: api.report.service.v1.ListDepositDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 27: api.report.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 28: api.report.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 29: api.report.service.v1.ListWithdrawDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 30: api.report.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 31: api.report.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 32: api.report.service.v1.ListRegisterRetentionRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 33: api.report.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 34: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 35: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	38, // 36: api.report.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	39, // 37: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 38: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
-	39, // 39: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 40: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	13, // 41: api.report.service.v1.ReferralVTGReportDataItem.tiers:type_name -> api.report.service.v1.ReferralVTGTierData
-	19, // 42: api.report.service.v1.ListReferralVTGReportDataResponse.items:type_name -> api.report.service.v1.ReferralVTGReportDataItem
-	39, // 43: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 44: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	14, // 45: api.report.service.v1.ReferralSnapshotReportDataItem.tiers:type_name -> api.report.service.v1.ReferralSnapshotTierData
-	15, // 46: api.report.service.v1.ReferralSnapshotReportDataItem.t1_gaming:type_name -> api.report.service.v1.ReferralT1GamingData
-	17, // 47: api.report.service.v1.ReferralSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.ReferralTierGamingData
-	16, // 48: api.report.service.v1.ReferralSnapshotReportDataItem.t1_carryover:type_name -> api.report.service.v1.ReferralT1Carryover
-	22, // 49: api.report.service.v1.ListReferralSnapshotReportDataResponse.items:type_name -> api.report.service.v1.ReferralSnapshotReportDataItem
-	39, // 50: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 51: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	41, // 52: api.report.service.v1.ReferralContributionReportDataItem.reg_date:type_name -> google.protobuf.Timestamp
-	41, // 53: api.report.service.v1.ReferralContributionReportDataItem.ftd_date:type_name -> google.protobuf.Timestamp
-	41, // 54: api.report.service.v1.ReferralContributionReportDataItem.last_login_time:type_name -> google.protobuf.Timestamp
-	25, // 55: api.report.service.v1.ListReferralContributionReportDataResponse.items:type_name -> api.report.service.v1.ReferralContributionReportDataItem
-	39, // 56: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 57: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	28, // 58: api.report.service.v1.ListReferralLifetimeReportDataResponse.items:type_name -> api.report.service.v1.ReferralLifetimeReportDataItem
-	39, // 59: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 60: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	33, // 61: api.report.service.v1.AffiliateVTGReportDataItem.lifetime_commission_gaming:type_name -> api.report.service.v1.AffiliateLifetimeCommissionGaming
-	31, // 62: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
-	39, // 63: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 64: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
-	35, // 65: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateCurrentPeriodGaming
-	36, // 66: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
-	0,  // 67: api.report.service.v1.ReportService.GetSummary:input_type -> api.report.service.v1.GetSummaryRequest
-	1,  // 68: api.report.service.v1.ReportService.ListSummaries:input_type -> api.report.service.v1.ListSummariesRequest
-	2,  // 69: api.report.service.v1.ReportService.GetGameDataSummary:input_type -> api.report.service.v1.GetGameSummaryRequest
-	3,  // 70: api.report.service.v1.ReportService.ListGameData:input_type -> api.report.service.v1.ListGameDataRequest
-	4,  // 71: api.report.service.v1.ReportService.GetPlayerGameDataSummary:input_type -> api.report.service.v1.GetPlayerGameSummaryRequest
-	5,  // 72: api.report.service.v1.ReportService.ListPlayerGameData:input_type -> api.report.service.v1.ListPlayerGameDataRequest
-	10, // 73: api.report.service.v1.ReportService.ListRegisterRetention:input_type -> api.report.service.v1.ListRegisterRetentionRequest
-	6,  // 74: api.report.service.v1.ReportService.GetDepositSummaries:input_type -> api.report.service.v1.GetDepositSummariesRequest
-	8,  // 75: api.report.service.v1.ReportService.ListDepositDetails:input_type -> api.report.service.v1.ListDepositDetailsRequest
-	11, // 76: api.report.service.v1.ReportService.ListDepositVtgDetails:input_type -> api.report.service.v1.ListDepositVtgDetailsRequest
-	7,  // 77: api.report.service.v1.ReportService.GetWithdrawSummaries:input_type -> api.report.service.v1.GetWithdrawSummariesRequest
-	9,  // 78: api.report.service.v1.ReportService.ListWithdrawDetails:input_type -> api.report.service.v1.ListWithdrawDetailsRequest
-	12, // 79: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
-	42, // 80: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	43, // 81: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	18, // 82: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
-	21, // 83: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
-	24, // 84: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
-	27, // 85: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
-	30, // 86: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
-	34, // 87: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
-	44, // 88: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	45, // 89: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	46, // 90: api.report.service.v1.ReportService.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	47, // 91: api.report.service.v1.ReportService.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	48, // 92: api.report.service.v1.ReportService.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	49, // 93: api.report.service.v1.ReportService.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	50, // 94: api.report.service.v1.ReportService.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	51, // 95: api.report.service.v1.ReportService.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	52, // 96: api.report.service.v1.ReportService.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	53, // 97: api.report.service.v1.ReportService.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	54, // 98: api.report.service.v1.ReportService.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	55, // 99: api.report.service.v1.ReportService.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	56, // 100: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	57, // 101: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	58, // 102: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	20, // 103: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
-	23, // 104: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
-	26, // 105: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
-	29, // 106: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
-	32, // 107: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
-	37, // 108: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
-	88, // [88:109] is the sub-list for method output_type
-	67, // [67:88] is the sub-list for method input_type
-	67, // [67:67] is the sub-list for extension type_name
-	67, // [67:67] is the sub-list for extension extendee
-	0,  // [0:67] is the sub-list for field type_name
+	40, // 0: api.report.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 1: api.report.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 2: api.report.service.v1.GetSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 3: api.report.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 4: api.report.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 5: api.report.service.v1.ListSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 6: api.report.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 7: api.report.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 8: api.report.service.v1.GetGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 9: api.report.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 10: api.report.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 11: api.report.service.v1.ListGameDataRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 12: api.report.service.v1.ExportGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 13: api.report.service.v1.ExportGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 14: api.report.service.v1.ExportGameDataRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 15: api.report.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 16: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 17: api.report.service.v1.GetPlayerGameSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 18: api.report.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 19: api.report.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 20: api.report.service.v1.ListPlayerGameDataRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 21: api.report.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 22: api.report.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 23: api.report.service.v1.GetDepositSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 24: api.report.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 25: api.report.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 26: api.report.service.v1.GetWithdrawSummariesRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 27: api.report.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 28: api.report.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 29: api.report.service.v1.ListDepositDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 30: api.report.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 31: api.report.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 32: api.report.service.v1.ListWithdrawDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 33: api.report.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 34: api.report.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 35: api.report.service.v1.ListRegisterRetentionRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 36: api.report.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 37: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 38: api.report.service.v1.ListDepositVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	40, // 39: api.report.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
+	41, // 40: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 41: api.report.service.v1.ListWithdrawVtgDetailsRequest.operator_context:type_name -> api.common.OperatorContext
+	41, // 42: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 43: api.report.service.v1.ListReferralVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 44: api.report.service.v1.ReferralVTGReportDataItem.tiers:type_name -> api.report.service.v1.ReferralVTGTierData
+	21, // 45: api.report.service.v1.ListReferralVTGReportDataResponse.items:type_name -> api.report.service.v1.ReferralVTGReportDataItem
+	41, // 46: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 47: api.report.service.v1.ListReferralSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	16, // 48: api.report.service.v1.ReferralSnapshotReportDataItem.tiers:type_name -> api.report.service.v1.ReferralSnapshotTierData
+	17, // 49: api.report.service.v1.ReferralSnapshotReportDataItem.t1_gaming:type_name -> api.report.service.v1.ReferralT1GamingData
+	19, // 50: api.report.service.v1.ReferralSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.ReferralTierGamingData
+	18, // 51: api.report.service.v1.ReferralSnapshotReportDataItem.t1_carryover:type_name -> api.report.service.v1.ReferralT1Carryover
+	24, // 52: api.report.service.v1.ListReferralSnapshotReportDataResponse.items:type_name -> api.report.service.v1.ReferralSnapshotReportDataItem
+	41, // 53: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 54: api.report.service.v1.ListReferralContributionReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	43, // 55: api.report.service.v1.ReferralContributionReportDataItem.reg_date:type_name -> google.protobuf.Timestamp
+	43, // 56: api.report.service.v1.ReferralContributionReportDataItem.ftd_date:type_name -> google.protobuf.Timestamp
+	43, // 57: api.report.service.v1.ReferralContributionReportDataItem.last_login_time:type_name -> google.protobuf.Timestamp
+	27, // 58: api.report.service.v1.ListReferralContributionReportDataResponse.items:type_name -> api.report.service.v1.ReferralContributionReportDataItem
+	41, // 59: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 60: api.report.service.v1.ListReferralLifetimeReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	30, // 61: api.report.service.v1.ListReferralLifetimeReportDataResponse.items:type_name -> api.report.service.v1.ReferralLifetimeReportDataItem
+	41, // 62: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 63: api.report.service.v1.ListAffiliateVTGReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	35, // 64: api.report.service.v1.AffiliateVTGReportDataItem.lifetime_commission_gaming:type_name -> api.report.service.v1.AffiliateLifetimeCommissionGaming
+	33, // 65: api.report.service.v1.ListAffiliateVTGReportDataResponse.items:type_name -> api.report.service.v1.AffiliateVTGReportDataItem
+	41, // 66: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 67: api.report.service.v1.ListAffiliateSnapshotReportDataRequest.operator_context:type_name -> api.common.OperatorContext
+	37, // 68: api.report.service.v1.AffiliateSnapshotReportDataItem.current_period_gaming:type_name -> api.report.service.v1.AffiliateCurrentPeriodGaming
+	38, // 69: api.report.service.v1.ListAffiliateSnapshotReportDataResponse.items:type_name -> api.report.service.v1.AffiliateSnapshotReportDataItem
+	0,  // 70: api.report.service.v1.ReportService.GetSummary:input_type -> api.report.service.v1.GetSummaryRequest
+	1,  // 71: api.report.service.v1.ReportService.ListSummaries:input_type -> api.report.service.v1.ListSummariesRequest
+	2,  // 72: api.report.service.v1.ReportService.GetGameDataSummary:input_type -> api.report.service.v1.GetGameSummaryRequest
+	3,  // 73: api.report.service.v1.ReportService.ListGameData:input_type -> api.report.service.v1.ListGameDataRequest
+	6,  // 74: api.report.service.v1.ReportService.GetPlayerGameDataSummary:input_type -> api.report.service.v1.GetPlayerGameSummaryRequest
+	7,  // 75: api.report.service.v1.ReportService.ListPlayerGameData:input_type -> api.report.service.v1.ListPlayerGameDataRequest
+	12, // 76: api.report.service.v1.ReportService.ListRegisterRetention:input_type -> api.report.service.v1.ListRegisterRetentionRequest
+	8,  // 77: api.report.service.v1.ReportService.GetDepositSummaries:input_type -> api.report.service.v1.GetDepositSummariesRequest
+	10, // 78: api.report.service.v1.ReportService.ListDepositDetails:input_type -> api.report.service.v1.ListDepositDetailsRequest
+	13, // 79: api.report.service.v1.ReportService.ListDepositVtgDetails:input_type -> api.report.service.v1.ListDepositVtgDetailsRequest
+	9,  // 80: api.report.service.v1.ReportService.GetWithdrawSummaries:input_type -> api.report.service.v1.GetWithdrawSummariesRequest
+	11, // 81: api.report.service.v1.ReportService.ListWithdrawDetails:input_type -> api.report.service.v1.ListWithdrawDetailsRequest
+	14, // 82: api.report.service.v1.ReportService.ListWithdrawVtgDetails:input_type -> api.report.service.v1.ListWithdrawVtgDetailsRequest
+	44, // 83: api.report.service.v1.ReportService.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	45, // 84: api.report.service.v1.ReportService.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	4,  // 85: api.report.service.v1.ReportService.ExportGameData:input_type -> api.report.service.v1.ExportGameDataRequest
+	20, // 86: api.report.service.v1.ReportService.ListReferralVTGReportData:input_type -> api.report.service.v1.ListReferralVTGReportDataRequest
+	23, // 87: api.report.service.v1.ReportService.ListReferralSnapshotReportData:input_type -> api.report.service.v1.ListReferralSnapshotReportDataRequest
+	26, // 88: api.report.service.v1.ReportService.ListReferralContributionReportData:input_type -> api.report.service.v1.ListReferralContributionReportDataRequest
+	29, // 89: api.report.service.v1.ReportService.ListReferralLifetimeReportData:input_type -> api.report.service.v1.ListReferralLifetimeReportDataRequest
+	32, // 90: api.report.service.v1.ReportService.ListAffiliateVTGReportData:input_type -> api.report.service.v1.ListAffiliateVTGReportDataRequest
+	36, // 91: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:input_type -> api.report.service.v1.ListAffiliateSnapshotReportDataRequest
+	46, // 92: api.report.service.v1.ReportService.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	47, // 93: api.report.service.v1.ReportService.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	48, // 94: api.report.service.v1.ReportService.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	49, // 95: api.report.service.v1.ReportService.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	50, // 96: api.report.service.v1.ReportService.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	51, // 97: api.report.service.v1.ReportService.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	52, // 98: api.report.service.v1.ReportService.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	53, // 99: api.report.service.v1.ReportService.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	54, // 100: api.report.service.v1.ReportService.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	55, // 101: api.report.service.v1.ReportService.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	56, // 102: api.report.service.v1.ReportService.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	57, // 103: api.report.service.v1.ReportService.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	58, // 104: api.report.service.v1.ReportService.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	59, // 105: api.report.service.v1.ReportService.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	60, // 106: api.report.service.v1.ReportService.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	5,  // 107: api.report.service.v1.ReportService.ExportGameData:output_type -> api.report.service.v1.ExportGameDataResponse
+	22, // 108: api.report.service.v1.ReportService.ListReferralVTGReportData:output_type -> api.report.service.v1.ListReferralVTGReportDataResponse
+	25, // 109: api.report.service.v1.ReportService.ListReferralSnapshotReportData:output_type -> api.report.service.v1.ListReferralSnapshotReportDataResponse
+	28, // 110: api.report.service.v1.ReportService.ListReferralContributionReportData:output_type -> api.report.service.v1.ListReferralContributionReportDataResponse
+	31, // 111: api.report.service.v1.ReportService.ListReferralLifetimeReportData:output_type -> api.report.service.v1.ListReferralLifetimeReportDataResponse
+	34, // 112: api.report.service.v1.ReportService.ListAffiliateVTGReportData:output_type -> api.report.service.v1.ListAffiliateVTGReportDataResponse
+	39, // 113: api.report.service.v1.ReportService.ListAffiliateSnapshotReportData:output_type -> api.report.service.v1.ListAffiliateSnapshotReportDataResponse
+	92, // [92:114] is the sub-list for method output_type
+	70, // [70:92] is the sub-list for method input_type
+	70, // [70:70] is the sub-list for extension type_name
+	70, // [70:70] is the sub-list for extension extendee
+	0,  // [0:70] is the sub-list for field type_name
 }
 
 func init() { file_report_service_v1_report_proto_init() }
@@ -6329,21 +6524,21 @@ func file_report_service_v1_report_proto_init() {
 		return
 	}
 	file_report_service_v1_report_proto_msgTypes[1].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[8].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[9].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[18].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[21].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[24].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[27].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[30].OneofWrappers = []any{}
-	file_report_service_v1_report_proto_msgTypes[34].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[10].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[11].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[20].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[23].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[26].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[29].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[32].OneofWrappers = []any{}
+	file_report_service_v1_report_proto_msgTypes[36].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_service_v1_report_proto_rawDesc), len(file_report_service_v1_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   38,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
