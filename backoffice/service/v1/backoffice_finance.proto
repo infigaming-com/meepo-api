@@ -170,6 +170,13 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc ListRevenueShareRateConfigs(ListRevenueShareRateConfigsRequest) returns (ListRevenueShareRateConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/revenue-share-rate-configs/list"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -808,4 +815,23 @@ message UpdateTaxReportRequest {
 }
 
 message UpdateTaxReportResponse {
+}
+
+message ListRevenueShareRateConfigsRequest {
+	string operator_type = 1; // Individual, Co-Operation, Retailer
+}
+
+message ListRevenueShareRateConfigsResponse {
+	message RevenueShareRateConfig {
+		int64 id = 1;
+		string operator_type = 2;
+		string min_profit = 3;
+		string max_profit = 4;
+		string base_rate = 5;
+		string promote = 6;
+		string final_rate = 7;
+		string description = 8;
+		bool enabled = 9;
+	}
+	repeated RevenueShareRateConfig configs = 1;
 }

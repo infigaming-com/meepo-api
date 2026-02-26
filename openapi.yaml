@@ -3050,6 +3050,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListMonthlyRevenueShareResponse'
+    /v1/backoffice/finance/revenue-share-rate-configs/list:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_ListRevenueShareRateConfigs
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRevenueShareRateConfigsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRevenueShareRateConfigsResponse'
     /v1/backoffice/finance/revenue-shares/list:
         post:
             tags:
@@ -18804,6 +18822,39 @@ components:
             type: object
             properties:
                 includeCount:
+                    type: boolean
+        api.backoffice.service.v1.ListRevenueShareRateConfigsRequest:
+            type: object
+            properties:
+                operatorType:
+                    type: string
+        api.backoffice.service.v1.ListRevenueShareRateConfigsResponse:
+            type: object
+            properties:
+                configs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListRevenueShareRateConfigsResponse_RevenueShareRateConfig'
+        api.backoffice.service.v1.ListRevenueShareRateConfigsResponse_RevenueShareRateConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                operatorType:
+                    type: string
+                minProfit:
+                    type: string
+                maxProfit:
+                    type: string
+                baseRate:
+                    type: string
+                promote:
+                    type: string
+                finalRate:
+                    type: string
+                description:
+                    type: string
+                enabled:
                     type: boolean
         api.backoffice.service.v1.ListRolesRequest:
             type: object

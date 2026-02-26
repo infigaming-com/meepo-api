@@ -43,6 +43,7 @@ const (
 	BackofficeFinance_ListTaxReports_FullMethodName                  = "/api.backoffice.service.v1.BackofficeFinance/ListTaxReports"
 	BackofficeFinance_ExportTaxReports_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/ExportTaxReports"
 	BackofficeFinance_UpdateTaxReport_FullMethodName                 = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReport"
+	BackofficeFinance_ListRevenueShareRateConfigs_FullMethodName     = "/api.backoffice.service.v1.BackofficeFinance/ListRevenueShareRateConfigs"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -72,6 +73,7 @@ type BackofficeFinanceClient interface {
 	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
 	ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*v1.ExportTaxReportsResponse, error)
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
+	ListRevenueShareRateConfigs(ctx context.Context, in *ListRevenueShareRateConfigsRequest, opts ...grpc.CallOption) (*ListRevenueShareRateConfigsResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -312,6 +314,16 @@ func (c *backofficeFinanceClient) UpdateTaxReport(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) ListRevenueShareRateConfigs(ctx context.Context, in *ListRevenueShareRateConfigsRequest, opts ...grpc.CallOption) (*ListRevenueShareRateConfigsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRevenueShareRateConfigsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListRevenueShareRateConfigs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -339,6 +351,7 @@ type BackofficeFinanceServer interface {
 	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
 	ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error)
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
+	ListRevenueShareRateConfigs(context.Context, *ListRevenueShareRateConfigsRequest) (*ListRevenueShareRateConfigsResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -417,6 +430,9 @@ func (UnimplementedBackofficeFinanceServer) ExportTaxReports(context.Context, *E
 }
 func (UnimplementedBackofficeFinanceServer) UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateTaxReport not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListRevenueShareRateConfigs(context.Context, *ListRevenueShareRateConfigsRequest) (*ListRevenueShareRateConfigsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListRevenueShareRateConfigs not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -853,6 +869,24 @@ func _BackofficeFinance_UpdateTaxReport_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_ListRevenueShareRateConfigs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRevenueShareRateConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListRevenueShareRateConfigs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListRevenueShareRateConfigs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListRevenueShareRateConfigs(ctx, req.(*ListRevenueShareRateConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -951,6 +985,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTaxReport",
 			Handler:    _BackofficeFinance_UpdateTaxReport_Handler,
+		},
+		{
+			MethodName: "ListRevenueShareRateConfigs",
+			Handler:    _BackofficeFinance_ListRevenueShareRateConfigs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
