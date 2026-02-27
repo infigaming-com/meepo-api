@@ -24127,6 +24127,457 @@ var _ interface {
 	ErrorName() string
 } = GetAppDownloadRewardConfigResponseValidationError{}
 
+// Validate checks the field values on ClaimAppDownloadRewardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ClaimAppDownloadRewardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClaimAppDownloadRewardRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ClaimAppDownloadRewardRequestMultiError, or nil if none found.
+func (m *ClaimAppDownloadRewardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClaimAppDownloadRewardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ClaimAppDownloadRewardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClaimAppDownloadRewardRequestMultiError is an error wrapping multiple
+// validation errors returned by ClaimAppDownloadRewardRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ClaimAppDownloadRewardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClaimAppDownloadRewardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClaimAppDownloadRewardRequestMultiError) AllErrors() []error { return m }
+
+// ClaimAppDownloadRewardRequestValidationError is the validation error
+// returned by ClaimAppDownloadRewardRequest.Validate if the designated
+// constraints aren't met.
+type ClaimAppDownloadRewardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClaimAppDownloadRewardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClaimAppDownloadRewardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClaimAppDownloadRewardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClaimAppDownloadRewardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClaimAppDownloadRewardRequestValidationError) ErrorName() string {
+	return "ClaimAppDownloadRewardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClaimAppDownloadRewardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClaimAppDownloadRewardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClaimAppDownloadRewardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClaimAppDownloadRewardRequestValidationError{}
+
+// Validate checks the field values on ClaimAppDownloadRewardResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ClaimAppDownloadRewardResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClaimAppDownloadRewardResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ClaimAppDownloadRewardResponseMultiError, or nil if none found.
+func (m *ClaimAppDownloadRewardResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClaimAppDownloadRewardResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ClaimAppDownloadRewardResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClaimAppDownloadRewardResponseMultiError is an error wrapping multiple
+// validation errors returned by ClaimAppDownloadRewardResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ClaimAppDownloadRewardResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClaimAppDownloadRewardResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClaimAppDownloadRewardResponseMultiError) AllErrors() []error { return m }
+
+// ClaimAppDownloadRewardResponseValidationError is the validation error
+// returned by ClaimAppDownloadRewardResponse.Validate if the designated
+// constraints aren't met.
+type ClaimAppDownloadRewardResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClaimAppDownloadRewardResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClaimAppDownloadRewardResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClaimAppDownloadRewardResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClaimAppDownloadRewardResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClaimAppDownloadRewardResponseValidationError) ErrorName() string {
+	return "ClaimAppDownloadRewardResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClaimAppDownloadRewardResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClaimAppDownloadRewardResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClaimAppDownloadRewardResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClaimAppDownloadRewardResponseValidationError{}
+
+// Validate checks the field values on GetAppDownloadRewardStatusRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAppDownloadRewardStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAppDownloadRewardStatusRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAppDownloadRewardStatusRequestMultiError, or nil if none found.
+func (m *GetAppDownloadRewardStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAppDownloadRewardStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetAppDownloadRewardStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAppDownloadRewardStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAppDownloadRewardStatusRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAppDownloadRewardStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAppDownloadRewardStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAppDownloadRewardStatusRequestMultiError) AllErrors() []error { return m }
+
+// GetAppDownloadRewardStatusRequestValidationError is the validation error
+// returned by GetAppDownloadRewardStatusRequest.Validate if the designated
+// constraints aren't met.
+type GetAppDownloadRewardStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAppDownloadRewardStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAppDownloadRewardStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAppDownloadRewardStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAppDownloadRewardStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAppDownloadRewardStatusRequestValidationError) ErrorName() string {
+	return "GetAppDownloadRewardStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAppDownloadRewardStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAppDownloadRewardStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAppDownloadRewardStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAppDownloadRewardStatusRequestValidationError{}
+
+// Validate checks the field values on GetAppDownloadRewardStatusResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAppDownloadRewardStatusResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAppDownloadRewardStatusResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAppDownloadRewardStatusResponseMultiError, or nil if none found.
+func (m *GetAppDownloadRewardStatusResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAppDownloadRewardStatusResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Eligible
+
+	// no validation rules for AlreadyClaimed
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetRewardConfigs()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAppDownloadRewardStatusResponseValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAppDownloadRewardStatusResponseValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRewardConfigs()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAppDownloadRewardStatusResponseValidationError{
+				field:  "RewardConfigs",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetAppDownloadRewardStatusResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAppDownloadRewardStatusResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAppDownloadRewardStatusResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetAppDownloadRewardStatusResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAppDownloadRewardStatusResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAppDownloadRewardStatusResponseMultiError) AllErrors() []error { return m }
+
+// GetAppDownloadRewardStatusResponseValidationError is the validation error
+// returned by GetAppDownloadRewardStatusResponse.Validate if the designated
+// constraints aren't met.
+type GetAppDownloadRewardStatusResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAppDownloadRewardStatusResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAppDownloadRewardStatusResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAppDownloadRewardStatusResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAppDownloadRewardStatusResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAppDownloadRewardStatusResponseValidationError) ErrorName() string {
+	return "GetAppDownloadRewardStatusResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAppDownloadRewardStatusResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAppDownloadRewardStatusResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAppDownloadRewardStatusResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAppDownloadRewardStatusResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

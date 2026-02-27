@@ -149,6 +149,25 @@ service Wallet {
 	// and the inherited default config list from the parent hierarchy.
 	rpc GetAppDownloadRewardConfig(GetAppDownloadRewardConfigRequest) returns (GetAppDownloadRewardConfigResponse) {}
 
+	// ClaimAppDownloadReward claims the app download reward for the current player.
+	// The reward is determined by the player's country (from CF-IPCountry header)
+	// and the operator's effective app download reward config.
+	rpc ClaimAppDownloadReward(ClaimAppDownloadRewardRequest) returns (ClaimAppDownloadRewardResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/app-download-reward/claim"
+			body: "*"
+		};
+	}
+
+	// GetAppDownloadRewardStatus returns whether the current user is eligible
+	// for the app download reward and the reward details for their country.
+	rpc GetAppDownloadRewardStatus(GetAppDownloadRewardStatusRequest) returns (GetAppDownloadRewardStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/app-download-reward/status"
+			body: "*"
+		};
+	}
+
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	rpc CreatePromoCodeCampaign(CreatePromoCodeCampaignRequest) returns (CreatePromoCodeCampaignResponse) {}
 
@@ -2107,4 +2126,19 @@ message GetAppDownloadRewardConfigResponse {
 	api.common.OperatorContext inherited_operator_context = 4;
 	// Display name of the ancestor operator.
 	string inherited_from_operator_name = 5;
+}
+
+message ClaimAppDownloadRewardRequest {}
+message ClaimAppDownloadRewardResponse {}
+
+message GetAppDownloadRewardStatusRequest {}
+message GetAppDownloadRewardStatusResponse {
+	// true if user can claim the reward
+	bool eligible = 1;
+	// true if user already claimed the reward
+	bool already_claimed = 2;
+	// resolved from CF-IPCountry header
+	string country = 3;
+	// reward available for the user's country (nil if not eligible)
+	AppDownloadRewardConfigs reward_configs = 4;
 }

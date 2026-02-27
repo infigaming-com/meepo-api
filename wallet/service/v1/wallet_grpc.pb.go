@@ -61,6 +61,8 @@ const (
 	Wallet_GetDepositRewardConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetDepositRewardConfig"
 	Wallet_SetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/SetAppDownloadRewardConfig"
 	Wallet_GetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardConfig"
+	Wallet_ClaimAppDownloadReward_FullMethodName              = "/api.wallet.service.v1.Wallet/ClaimAppDownloadReward"
+	Wallet_GetAppDownloadRewardStatus_FullMethodName          = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardStatus"
 	Wallet_CreatePromoCodeCampaign_FullMethodName             = "/api.wallet.service.v1.Wallet/CreatePromoCodeCampaign"
 	Wallet_UpdatePromoCodeCampaign_FullMethodName             = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaign"
 	Wallet_UpdatePromoCodeCampaignStatus_FullMethodName       = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaignStatus"
@@ -179,6 +181,13 @@ type WalletClient interface {
 	// GetAppDownloadRewardConfig returns both the operator's custom config list
 	// and the inherited default config list from the parent hierarchy.
 	GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*GetAppDownloadRewardConfigResponse, error)
+	// ClaimAppDownloadReward claims the app download reward for the current player.
+	// The reward is determined by the player's country (from CF-IPCountry header)
+	// and the operator's effective app download reward config.
+	ClaimAppDownloadReward(ctx context.Context, in *ClaimAppDownloadRewardRequest, opts ...grpc.CallOption) (*ClaimAppDownloadRewardResponse, error)
+	// GetAppDownloadRewardStatus returns whether the current user is eligible
+	// for the app download reward and the reward details for their country.
+	GetAppDownloadRewardStatus(ctx context.Context, in *GetAppDownloadRewardStatusRequest, opts ...grpc.CallOption) (*GetAppDownloadRewardStatusResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -680,6 +689,26 @@ func (c *walletClient) GetAppDownloadRewardConfig(ctx context.Context, in *GetAp
 	return out, nil
 }
 
+func (c *walletClient) ClaimAppDownloadReward(ctx context.Context, in *ClaimAppDownloadRewardRequest, opts ...grpc.CallOption) (*ClaimAppDownloadRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClaimAppDownloadRewardResponse)
+	err := c.cc.Invoke(ctx, Wallet_ClaimAppDownloadReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetAppDownloadRewardStatus(ctx context.Context, in *GetAppDownloadRewardStatusRequest, opts ...grpc.CallOption) (*GetAppDownloadRewardStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAppDownloadRewardStatusResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetAppDownloadRewardStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*CreatePromoCodeCampaignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreatePromoCodeCampaignResponse)
@@ -1138,6 +1167,13 @@ type WalletServer interface {
 	// GetAppDownloadRewardConfig returns both the operator's custom config list
 	// and the inherited default config list from the parent hierarchy.
 	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*GetAppDownloadRewardConfigResponse, error)
+	// ClaimAppDownloadReward claims the app download reward for the current player.
+	// The reward is determined by the player's country (from CF-IPCountry header)
+	// and the operator's effective app download reward config.
+	ClaimAppDownloadReward(context.Context, *ClaimAppDownloadRewardRequest) (*ClaimAppDownloadRewardResponse, error)
+	// GetAppDownloadRewardStatus returns whether the current user is eligible
+	// for the app download reward and the reward details for their country.
+	GetAppDownloadRewardStatus(context.Context, *GetAppDownloadRewardStatusRequest) (*GetAppDownloadRewardStatusResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -1344,6 +1380,12 @@ func (UnimplementedWalletServer) SetAppDownloadRewardConfig(context.Context, *Se
 }
 func (UnimplementedWalletServer) GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*GetAppDownloadRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAppDownloadRewardConfig not implemented")
+}
+func (UnimplementedWalletServer) ClaimAppDownloadReward(context.Context, *ClaimAppDownloadRewardRequest) (*ClaimAppDownloadRewardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClaimAppDownloadReward not implemented")
+}
+func (UnimplementedWalletServer) GetAppDownloadRewardStatus(context.Context, *GetAppDownloadRewardStatusRequest) (*GetAppDownloadRewardStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppDownloadRewardStatus not implemented")
 }
 func (UnimplementedWalletServer) CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*CreatePromoCodeCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePromoCodeCampaign not implemented")
@@ -2236,6 +2278,42 @@ func _Wallet_GetAppDownloadRewardConfig_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ClaimAppDownloadReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClaimAppDownloadRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ClaimAppDownloadReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ClaimAppDownloadReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ClaimAppDownloadReward(ctx, req.(*ClaimAppDownloadRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetAppDownloadRewardStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppDownloadRewardStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetAppDownloadRewardStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetAppDownloadRewardStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetAppDownloadRewardStatus(ctx, req.(*GetAppDownloadRewardStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_CreatePromoCodeCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatePromoCodeCampaignRequest)
 	if err := dec(in); err != nil {
@@ -3094,6 +3172,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAppDownloadRewardConfig",
 			Handler:    _Wallet_GetAppDownloadRewardConfig_Handler,
+		},
+		{
+			MethodName: "ClaimAppDownloadReward",
+			Handler:    _Wallet_ClaimAppDownloadReward_Handler,
+		},
+		{
+			MethodName: "GetAppDownloadRewardStatus",
+			Handler:    _Wallet_GetAppDownloadRewardStatus_Handler,
 		},
 		{
 			MethodName: "CreatePromoCodeCampaign",

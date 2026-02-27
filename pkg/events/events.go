@@ -327,6 +327,25 @@ const OperatorStatusUpdateTopic = "operator.status.update"
 
 const SessionActivityTopic = "session.activity"
 
+// ------------------------------------------------------------
+// App download reward notification events
+// ------------------------------------------------------------
+
+const AppDownloadRewardNotificationTopic = "app.download.reward.notification"
+
+type AppDownloadRewardNotificationEvent struct {
+	UserID     int64  `json:"userId"`
+	OperatorID int64  `json:"operatorId"`
+	Country    string `json:"country"`
+	// Reward summary for frontend display
+	HasBonusMoney bool   `json:"hasBonusMoney"`
+	BonusCurrency string `json:"bonusCurrency,omitempty"`
+	BonusAmount   string `json:"bonusAmount,omitempty"`
+	BonusType     string `json:"bonusType,omitempty"` // "cash" or "bonus"
+	HasFreeSpin   bool   `json:"hasFreeSpin"`
+	HasFreeBet    bool   `json:"hasFreeBet"`
+}
+
 type SessionActivityEvent struct {
 	UserID             int64    `json:"userId"`
 	OperatorID         int64    `json:"operatorId"`                    // = RealOperatorID for backward compat

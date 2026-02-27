@@ -9403,6 +9403,49 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.vip.service.v1.UpdateVipRewardSliderResponse'
+    /v1/wallet/app-download-reward/claim:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                ClaimAppDownloadReward claims the app download reward for the current player.
+                 The reward is determined by the player's country (from CF-IPCountry header)
+                 and the operator's effective app download reward config.
+            operationId: Wallet_ClaimAppDownloadReward
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.ClaimAppDownloadRewardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ClaimAppDownloadRewardResponse'
+    /v1/wallet/app-download-reward/status:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetAppDownloadRewardStatus returns whether the current user is eligible
+                 for the app download reward and the reward details for their country.
+            operationId: Wallet_GetAppDownloadRewardStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetAppDownloadRewardStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetAppDownloadRewardStatusResponse'
     /v1/wallet/balance/details:
         post:
             tags:
@@ -29171,6 +29214,12 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.ClaimAppDownloadRewardRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.ClaimAppDownloadRewardResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.ClaimPromoCodeRequest:
             type: object
             properties:
@@ -29570,6 +29619,25 @@ components:
                 inheritedFromOperatorName:
                     type: string
                     description: Display name of the ancestor operator.
+        api.wallet.service.v1.GetAppDownloadRewardStatusRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.GetAppDownloadRewardStatusResponse:
+            type: object
+            properties:
+                eligible:
+                    type: boolean
+                    description: true if user can claim the reward
+                alreadyClaimed:
+                    type: boolean
+                    description: true if user already claimed the reward
+                country:
+                    type: string
+                    description: resolved from CF-IPCountry header
+                rewardConfigs:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigs'
+                    description: reward available for the user's country (nil if not eligible)
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
