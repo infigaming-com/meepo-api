@@ -41,6 +41,8 @@ const (
 	BackofficeWallet_SetDepositRewardSequences_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 	BackofficeWallet_DeleteDepositRewardSequences_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
 	BackofficeWallet_GetDepositRewardConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
+	BackofficeWallet_SetAppDownloadRewardConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/SetAppDownloadRewardConfig"
+	BackofficeWallet_GetAppDownloadRewardConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/GetAppDownloadRewardConfig"
 	BackofficeWallet_CreatePromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/CreatePromoCodeCampaign"
 	BackofficeWallet_UpdatePromoCodeCampaign_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaign"
 	BackofficeWallet_UpdatePromoCodeCampaignStatus_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/UpdatePromoCodeCampaignStatus"
@@ -106,6 +108,8 @@ type BackofficeWalletClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetDepositRewardConfigResponse, error)
+	SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.SetAppDownloadRewardConfigResponse, error)
+	GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetAppDownloadRewardConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*v1.CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -368,6 +372,26 @@ func (c *backofficeWalletClient) GetDepositRewardConfig(ctx context.Context, in 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetDepositRewardConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_GetDepositRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.SetAppDownloadRewardConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetAppDownloadRewardConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetAppDownloadRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetAppDownloadRewardConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetAppDownloadRewardConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetAppDownloadRewardConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -653,6 +677,8 @@ type BackofficeWalletServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
+	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error)
+	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -773,6 +799,12 @@ func (UnimplementedBackofficeWalletServer) DeleteDepositRewardSequences(context.
 }
 func (UnimplementedBackofficeWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAppDownloadRewardConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppDownloadRewardConfig not implemented")
 }
 func (UnimplementedBackofficeWalletServer) CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*v1.CreatePromoCodeCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePromoCodeCampaign not implemented")
@@ -1241,6 +1273,42 @@ func _BackofficeWallet_GetDepositRewardConfig_Handler(srv interface{}, ctx conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeWalletServer).GetDepositRewardConfig(ctx, req.(*GetDepositRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_SetAppDownloadRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAppDownloadRewardConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SetAppDownloadRewardConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SetAppDownloadRewardConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SetAppDownloadRewardConfig(ctx, req.(*SetAppDownloadRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetAppDownloadRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppDownloadRewardConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetAppDownloadRewardConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetAppDownloadRewardConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetAppDownloadRewardConfig(ctx, req.(*GetAppDownloadRewardConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1767,6 +1835,14 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDepositRewardConfig",
 			Handler:    _BackofficeWallet_GetDepositRewardConfig_Handler,
+		},
+		{
+			MethodName: "SetAppDownloadRewardConfig",
+			Handler:    _BackofficeWallet_SetAppDownloadRewardConfig_Handler,
+		},
+		{
+			MethodName: "GetAppDownloadRewardConfig",
+			Handler:    _BackofficeWallet_GetAppDownloadRewardConfig_Handler,
 		},
 		{
 			MethodName: "CreatePromoCodeCampaign",

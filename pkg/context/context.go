@@ -11,15 +11,16 @@ import (
 type contextKey string
 
 type RequestInfo struct {
-	Method     string
-	Path       string
-	Host       string
-	RemoteAddr string
-	Country    string
-	Origin     string
-	Referer    string
-	UserAgent  string
-	ClientIP   string
+	Method      string
+	Path        string
+	Host        string
+	RemoteAddr  string
+	Country     string
+	Origin      string
+	Referer     string
+	UserAgent   string
+	ClientIP    string
+	LoginMethod string // from "Login-Method" header
 }
 
 type OperatorIds struct {

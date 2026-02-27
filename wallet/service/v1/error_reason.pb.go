@@ -193,6 +193,11 @@ const (
 	ErrorReason_CREDIT_FREE_SPIN_WIN_FAILED                                     ErrorReason = 30165
 	ErrorReason_CREDIT_FREE_BET_WIN_FAILED                                      ErrorReason = 30166
 	ErrorReason_INVALID_CHANNEL_INFO                                            ErrorReason = 30167
+	ErrorReason_INVALID_APP_DOWNLOAD_REWARD_CONFIG                              ErrorReason = 30168
+	ErrorReason_SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED                           ErrorReason = 30169
+	ErrorReason_GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED                           ErrorReason = 30170
+	ErrorReason_CLAIM_APP_DOWNLOAD_REWARD_FAILED                                ErrorReason = 30171
+	ErrorReason_GET_APP_DOWNLOAD_REWARD_STATUS_FAILED                           ErrorReason = 30172
 )
 
 // Enum value maps for ErrorReason.
@@ -366,6 +371,11 @@ var (
 		30165: "CREDIT_FREE_SPIN_WIN_FAILED",
 		30166: "CREDIT_FREE_BET_WIN_FAILED",
 		30167: "INVALID_CHANNEL_INFO",
+		30168: "INVALID_APP_DOWNLOAD_REWARD_CONFIG",
+		30169: "SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED",
+		30170: "GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED",
+		30171: "CLAIM_APP_DOWNLOAD_REWARD_FAILED",
+		30172: "GET_APP_DOWNLOAD_REWARD_STATUS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -536,6 +546,11 @@ var (
 		"CREDIT_FREE_SPIN_WIN_FAILED":                                     30165,
 		"CREDIT_FREE_BET_WIN_FAILED":                                      30166,
 		"INVALID_CHANNEL_INFO":                                            30167,
+		"INVALID_APP_DOWNLOAD_REWARD_CONFIG":                              30168,
+		"SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED":                           30169,
+		"GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED":                           30170,
+		"CLAIM_APP_DOWNLOAD_REWARD_FAILED":                                30171,
+		"GET_APP_DOWNLOAD_REWARD_STATUS_FAILED":                           30172,
 	}
 )
 
@@ -570,7 +585,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xce2\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa74\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -739,7 +754,12 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eFREE_REWARD_OWNERSHIP_MISMATCH\x10\xd4\xeb\x01\x12!\n" +
 	"\x1bCREDIT_FREE_SPIN_WIN_FAILED\x10\xd5\xeb\x01\x12 \n" +
 	"\x1aCREDIT_FREE_BET_WIN_FAILED\x10\xd6\xeb\x01\x12\x1a\n" +
-	"\x14INVALID_CHANNEL_INFO\x10\xd7\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x14INVALID_CHANNEL_INFO\x10\xd7\xeb\x01\x12(\n" +
+	"\"INVALID_APP_DOWNLOAD_REWARD_CONFIG\x10\xd8\xeb\x01\x12+\n" +
+	"%SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED\x10\xd9\xeb\x01\x12+\n" +
+	"%GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED\x10\xda\xeb\x01\x12&\n" +
+	" CLAIM_APP_DOWNLOAD_REWARD_FAILED\x10\xdb\xeb\x01\x12+\n" +
+	"%GET_APP_DOWNLOAD_REWARD_STATUS_FAILED\x10\xdc\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

@@ -6705,6 +6705,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipSettingResponse'
+    /v1/backoffice/wallet/app-download-reward/config/get:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_GetAppDownloadRewardConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAppDownloadRewardConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetAppDownloadRewardConfigResponse'
+    /v1/backoffice/wallet/app-download-reward/config/set:
+        post:
+            tags:
+                - BackofficeWallet
+            operationId: BackofficeWallet_SetAppDownloadRewardConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetAppDownloadRewardConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetAppDownloadRewardConfigResponse'
     /v1/backoffice/wallet/balance-transactions/list:
         post:
             tags:
@@ -9367,6 +9403,49 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.vip.service.v1.UpdateVipRewardSliderResponse'
+    /v1/wallet/app-download-reward/claim:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                ClaimAppDownloadReward claims the app download reward for the current player.
+                 The reward is determined by the player's country (from CF-IPCountry header)
+                 and the operator's effective app download reward config.
+            operationId: Wallet_ClaimAppDownloadReward
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.ClaimAppDownloadRewardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ClaimAppDownloadRewardResponse'
+    /v1/wallet/app-download-reward/status:
+        post:
+            tags:
+                - Wallet
+            description: |-
+                GetAppDownloadRewardStatus returns whether the current user is eligible
+                 for the app download reward and the reward details for their country.
+            operationId: Wallet_GetAppDownloadRewardStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetAppDownloadRewardStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetAppDownloadRewardStatusResponse'
     /v1/wallet/balance/details:
         post:
             tags:
@@ -14812,6 +14891,14 @@ components:
                     format: date-time
                 groupBy:
                     type: string
+        api.backoffice.service.v1.GetAppDownloadRewardConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: The target operator whose config is being queried.
+            description: Backoffice request to get the app download reward config for a target operator.
         api.backoffice.service.v1.GetAssetRequest:
             type: object
             properties:
@@ -20891,6 +20978,24 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.SetAppDownloadRewardConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: The target operator whose config is being set.
+                followParent:
+                    type: boolean
+                    description: Operator-level toggle. When true, the operator inherits the parent's config list.
+                configs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigItem'
+                    description: Full list of country entries. Replaces all existing entries for this operator.
+            description: |-
+                Backoffice request to set the app download reward config for a target operator.
+                 Initiator operator context is injected from the backoffice auth middleware.
         api.backoffice.service.v1.SetCrmCampaignWorkflowRequest:
             type: object
             properties:
@@ -29028,6 +29133,67 @@ components:
                     items:
                         type: string
             description: Affiliate condition for promo code campaign
+        api.wallet.service.v1.AppDownloadBonusMoneyConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                    description: Whether this bonus money reward is active.
+                currency:
+                    type: string
+                    description: Currency code for the reward. e.g. "USD", "BRL"
+                rewardType:
+                    type: string
+                    description: Credit type the reward is issued as. "cash" | "bonus"
+                amount:
+                    type: string
+                    description: Fixed reward amount (decimal string). e.g. "10.00"
+                wageringRequirement:
+                    type: integer
+                    description: Wagering multiplier the player must meet before withdrawal. 0-100.
+                    format: int32
+                maxWithdrawalMultiplier:
+                    type: string
+                    description: Max withdrawal = multiplier x bonus amount. e.g. "3" means 3x the bonus.
+                rewardValidity:
+                    type: string
+                    description: Reward validity in milliseconds. 0 = no expiration.
+            description: |-
+                Bonus money configuration for app download reward.
+                 Structurally identical to PromoCodeBonusMoneyConfig but kept separate
+                 to allow independent evolution.
+        api.wallet.service.v1.AppDownloadRewardConfigItem:
+            type: object
+            properties:
+                country:
+                    type: string
+                    description: ISO 3166-1 alpha-2 country code, or "Global" for the fallback entry.
+                forceDownloadPopup:
+                    type: boolean
+                    description: Whether to show a forced download popup to users in this country.
+                rewardConfigs:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigs'
+                    description: The reward configuration for this country.
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: A single country entry in the app download reward config list.
+        api.wallet.service.v1.AppDownloadRewardConfigs:
+            type: object
+            properties:
+                bonusMoneyConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadBonusMoneyConfig'
+                freeSpinConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
+                freeBetConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
+            description: |-
+                Composite reward configuration for an app download reward entry.
+                 All three sub-configs are optional; at least one should be enabled.
         api.wallet.service.v1.BonusTransferRequest:
             type: object
             properties:
@@ -29048,6 +29214,12 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.ClaimAppDownloadRewardRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.ClaimAppDownloadRewardResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.ClaimPromoCodeRequest:
             type: object
             properties:
@@ -29424,6 +29596,48 @@ components:
                 generatedCount:
                     type: integer
                     format: int32
+        api.wallet.service.v1.GetAppDownloadRewardConfigResponse:
+            type: object
+            properties:
+                followParent:
+                    type: boolean
+                    description: Operator-level follow_parent toggle. true = using parent's list.
+                customConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigItem'
+                    description: Operator's own config entries.
+                defaultConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigItem'
+                    description: Inherited config entries from the nearest ancestor with follow_parent=false.
+                inheritedOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: The ancestor operator context that default_configs come from.
+                inheritedFromOperatorName:
+                    type: string
+                    description: Display name of the ancestor operator.
+        api.wallet.service.v1.GetAppDownloadRewardStatusRequest:
+            type: object
+            properties: {}
+        api.wallet.service.v1.GetAppDownloadRewardStatusResponse:
+            type: object
+            properties:
+                eligible:
+                    type: boolean
+                    description: true if user can claim the reward
+                alreadyClaimed:
+                    type: boolean
+                    description: true if user already claimed the reward
+                country:
+                    type: string
+                    description: resolved from CF-IPCountry header
+                rewardConfigs:
+                    allOf:
+                        - $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigs'
+                    description: reward available for the user's country (nil if not eligible)
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
@@ -30410,6 +30624,9 @@ components:
                     $ref: '#/components/schemas/api.wallet.service.v1.FreeSpinConfig'
                 freeBetConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FreeBetConfig'
+        api.wallet.service.v1.SetAppDownloadRewardConfigResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
             type: object
             properties: {}
