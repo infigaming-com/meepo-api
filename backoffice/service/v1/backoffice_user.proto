@@ -141,6 +141,13 @@ service BackofficeUser {
 			body: "*"
 		};
 	}
+
+	rpc ListUserSessionActivities(ListUserSessionActivitiesRequest) returns (user.service.v1.ListUserSessionActivitiesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/session-activities/list"
+			body: "*"
+		};
+	}
 }
 
 message ListUsersRequest {
@@ -500,4 +507,13 @@ message UserIdentityListRequest {
 	int32 page = 6;
 	int32 page_size = 7;
 	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ListUserSessionActivitiesRequest {
+	int64 user_id = 1;
+	optional string event_type = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }

@@ -157,6 +157,14 @@ service BackofficeReport {
       };
   }
 
+  // ExportGameData creates an async game data export task
+  rpc ExportGameData(ExportGameDataRequest) returns (ExportGameDataResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/report/game-data/export"
+          body: "*"
+      };
+  }
+
 }
 
 message TimeRange{
@@ -955,4 +963,25 @@ message ListAffiliateSnapshotReportRequest {
   bool only_negative_carryover = 6;
   optional int32 page = 7;
   optional int32 page_size = 8;
+}
+
+// ============================================================================
+// Game Data Export
+// ============================================================================
+
+message ExportGameDataRequest {
+  TimeRange time_range = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated string provider_ids = 3;
+  repeated string game_categories = 4;
+  repeated string game_names = 5;
+  repeated string game_ids = 6;
+  repeated string currencies = 7;
+  // operator_context removed - field 8 reserved (security: must not be exposed to frontend)
+  string format = 9;       // "csv", "excel", "pdf"
+  string time_zone = 10;
+}
+
+message ExportGameDataResponse {
+  int64 task_id = 1;
 }

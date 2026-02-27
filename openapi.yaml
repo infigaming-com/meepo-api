@@ -5568,6 +5568,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListDepositVtgDetailsResponse'
+    /v1/backoffice/report/game-data/export:
+        post:
+            tags:
+                - BackofficeReport
+            description: ExportGameData creates an async game data export task
+            operationId: BackofficeReport_ExportGameData
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportGameDataRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ExportGameDataResponse'
     /v1/backoffice/report/game-data/get:
         post:
             tags:
@@ -6451,6 +6470,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendEmailVerificationCodeResponse'
+    /v1/backoffice/user/session-activities/list:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_ListUserSessionActivities
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUserSessionActivitiesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListUserSessionActivitiesResponse'
     /v1/backoffice/user/tags/get:
         post:
             tags:
@@ -14371,6 +14408,43 @@ components:
                     type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.ExportGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                format:
+                    type: string
+                    description: 'operator_context removed - field 8 reserved (security: must not be exposed to frontend)'
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportGameDataResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.backoffice.service.v1.ExportManualJournalEntriesRequest:
             type: object
             properties:
@@ -19533,6 +19607,25 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.backoffice.service.v1.ListUserSessionActivitiesRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                eventType:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUsersRequest:
             type: object
             properties:
@@ -26873,6 +26966,40 @@ components:
         api.user.service.v1.ListUserFreeRewardsRequest:
             type: object
             properties: {}
+        api.user.service.v1.ListUserSessionActivitiesResponse:
+            type: object
+            properties:
+                activities:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListUserSessionActivitiesResponse_SessionActivity'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.user.service.v1.ListUserSessionActivitiesResponse_SessionActivity:
+            type: object
+            properties:
+                eventType:
+                    type: string
+                ip:
+                    type: string
+                country:
+                    type: string
+                userAgent:
+                    type: string
+                prevIp:
+                    type: string
+                prevCountry:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.user.service.v1.LoginRequest:
             type: object
             properties:

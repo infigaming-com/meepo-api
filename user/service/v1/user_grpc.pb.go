@@ -140,6 +140,7 @@ const (
 	User_GetTelegramLoginInfo_FullMethodName               = "/api.user.service.v1.User/GetTelegramLoginInfo"
 	User_GetRewardHistory_FullMethodName                   = "/api.user.service.v1.User/GetRewardHistory"
 	User_ListUserFreeRewards_FullMethodName                = "/api.user.service.v1.User/ListUserFreeRewards"
+	User_ListUserSessionActivities_FullMethodName          = "/api.user.service.v1.User/ListUserSessionActivities"
 )
 
 // UserClient is the client API for User service.
@@ -359,6 +360,8 @@ type UserClient interface {
 	GetRewardHistory(ctx context.Context, in *GetRewardHistoryRequest, opts ...grpc.CallOption) (*GetRewardHistoryResponse, error)
 	// List user free rewards (free spins + free bets) from wallet service
 	ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v11.ListUserFreeRewardsResponse, error)
+	// List user session activities (daily_visit, ip_change, device_change)
+	ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*ListUserSessionActivitiesResponse, error)
 }
 
 type userClient struct {
@@ -1559,6 +1562,16 @@ func (c *userClient) ListUserFreeRewards(ctx context.Context, in *ListUserFreeRe
 	return out, nil
 }
 
+func (c *userClient) ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*ListUserSessionActivitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserSessionActivitiesResponse)
+	err := c.cc.Invoke(ctx, User_ListUserSessionActivities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1776,6 +1789,8 @@ type UserServer interface {
 	GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error)
 	// List user free rewards (free spins + free bets) from wallet service
 	ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error)
+	// List user session activities (daily_visit, ip_change, device_change)
+	ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2142,6 +2157,9 @@ func (UnimplementedUserServer) GetRewardHistory(context.Context, *GetRewardHisto
 }
 func (UnimplementedUserServer) ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserFreeRewards not implemented")
+}
+func (UnimplementedUserServer) ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserSessionActivities not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4306,6 +4324,24 @@ func _User_ListUserFreeRewards_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListUserSessionActivities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserSessionActivitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListUserSessionActivities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListUserSessionActivities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListUserSessionActivities(ctx, req.(*ListUserSessionActivitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4788,6 +4824,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserFreeRewards",
 			Handler:    _User_ListUserFreeRewards_Handler,
+		},
+		{
+			MethodName: "ListUserSessionActivities",
+			Handler:    _User_ListUserSessionActivities_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
