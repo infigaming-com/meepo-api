@@ -26,18 +26,36 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CreateCrmCampaign
+// Create a new campaign in DRAFT status.
 type CreateCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for ownership and permission resolution.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	CampaignKey           *string                 `protobuf:"bytes,2,opt,name=campaign_key,json=campaignKey,proto3,oneof" json:"campaign_key,omitempty"`
-	Name                  string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Description           string                  `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	StartAt               *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=start_at,json=startAt,proto3,oneof" json:"start_at,omitempty"`
-	EndAt                 *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=end_at,json=endAt,proto3,oneof" json:"end_at,omitempty"`
-	Metadata              *structpb.Struct        `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Optional unique key for programmatic lookup (e.g. `"deposit_bonus_2024"`). Must be unique within the operator scope.
+	CampaignKey *string `protobuf:"bytes,2,opt,name=campaign_key,json=campaignKey,proto3,oneof" json:"campaign_key,omitempty"`
+	// Display name for the campaign
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the campaign's purpose
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Campaign start time (optional). If set, triggers are only processed after this time.
+	StartAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_at,json=startAt,proto3,oneof" json:"start_at,omitempty"`
+	// Campaign end time (optional). If set, triggers are ignored after this time and the campaign transitions to COMPLETED.
+	EndAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_at,json=endAt,proto3,oneof" json:"end_at,omitempty"`
+	// Custom metadata as JSON. No strict schema — arbitrary key-value pairs available in workflow expressions via the `campaign.*` data source prefix.
+	//
+	// ```json
+	//
+	//	{
+	//	  "bonus_type": "deposit_match",
+	//	  "match_percentage": 100,
+	//	  "max_bonus_amount": 500.00,
+	//	  "target_region": "EU"
+	//	}
+	//
+	// ```
+	Metadata      *structpb.Struct `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateCrmCampaignRequest) Reset() {
@@ -119,18 +137,25 @@ func (x *CreateCrmCampaignRequest) GetMetadata() *structpb.Struct {
 	return nil
 }
 
-// UpdateCrmCampaign
+// Partially update an existing campaign. Only provided optional fields are modified.
 type UpdateCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Description           *string                 `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	StartAt               *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=start_at,json=startAt,proto3,oneof" json:"start_at,omitempty"`
-	EndAt                 *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=end_at,json=endAt,proto3,oneof" json:"end_at,omitempty"`
-	Metadata              *structpb.Struct        `protobuf:"bytes,7,opt,name=metadata,proto3,oneof" json:"metadata,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID to update
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// New name (optional)
+	Name *string `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// New description (optional)
+	Description *string `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// New start time (optional)
+	StartAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_at,json=startAt,proto3,oneof" json:"start_at,omitempty"`
+	// New end time (optional)
+	EndAt *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_at,json=endAt,proto3,oneof" json:"end_at,omitempty"`
+	// Updated metadata — replaces the entire metadata object (optional). Same format as CreateCrmCampaignRequest.metadata.
+	Metadata      *structpb.Struct `protobuf:"bytes,7,opt,name=metadata,proto3,oneof" json:"metadata,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateCrmCampaignRequest) Reset() {
@@ -212,14 +237,17 @@ func (x *UpdateCrmCampaignRequest) GetMetadata() *structpb.Struct {
 	return nil
 }
 
-// GetCrmCampaign
+// Get a single campaign by ID.
 type GetCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	IncludeWorkflow       bool                    `protobuf:"varint,3,opt,name=include_workflow,json=includeWorkflow,proto3" json:"include_workflow,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID
+	Id int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	// If `true`, includes the full workflow definition (YAML, validation status) in the response.
+	IncludeWorkflow bool `protobuf:"varint,3,opt,name=include_workflow,json=includeWorkflow,proto3" json:"include_workflow,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetCrmCampaignRequest) Reset() {
@@ -273,16 +301,21 @@ func (x *GetCrmCampaignRequest) GetIncludeWorkflow() bool {
 	return false
 }
 
-// ListCrmCampaigns
+// List campaigns with filtering and pagination.
 type ListCrmCampaignsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for ownership scoping.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Status                *v1.CampaignStatus      `protobuf:"varint,2,opt,name=status,proto3,enum=api.campaign.service.v1.CampaignStatus,oneof" json:"status,omitempty"`
-	Page                  int32                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	IncludeInherited      bool                    `protobuf:"varint,5,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by status (optional)
+	Status *v1.CampaignStatus `protobuf:"varint,2,opt,name=status,proto3,enum=api.campaign.service.v1.CampaignStatus,oneof" json:"status,omitempty"`
+	// Page number (1-based, default 1)
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Items per page (default 20, max 100)
+	PageSize int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Include campaigns inherited from parent operators (system/retailer/company)
+	IncludeInherited bool `protobuf:"varint,5,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListCrmCampaignsRequest) Reset() {
@@ -350,13 +383,15 @@ func (x *ListCrmCampaignsRequest) GetIncludeInherited() bool {
 	return false
 }
 
-// DeleteCrmCampaign
+// Delete a campaign.
 type DeleteCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID to delete. Must be in DRAFT or ARCHIVED status.
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteCrmCampaignRequest) Reset() {
@@ -403,14 +438,422 @@ func (x *DeleteCrmCampaignRequest) GetId() int64 {
 	return 0
 }
 
-// SetCrmCampaignWorkflow
+// Set or replace the workflow for a campaign.
+// The YAML is parsed, validated (graph connectivity, node configs, expressions), hashed, and versioned.
+// Each call creates a new workflow version; previous versions are kept for audit.
 type SetCrmCampaignWorkflowRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	CampaignId            int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	WorkflowYaml          string                  `protobuf:"bytes,3,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID to attach the workflow to
+	CampaignId int64 `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	// Workflow definition in YAML format.
+	//
+	// ## Structure
+	//
+	// ```yaml
+	// version: "1.0"
+	// name: "Campaign Name"
+	// triggers:
+	//   - type: <trigger_type>
+	//     config: { ... }
+	//
+	// nodes:
+	//
+	//	<node_id>:
+	//	  id: <node_id>
+	//	  type: action | condition
+	//	  action:    # for action nodes
+	//	    type: <action_type>
+	//	    config: { ... }
+	//	  condition: # for condition nodes
+	//	    expression: "<expression>"
+	//
+	// edges:
+	//   - from: <node_id>
+	//     to: <node_id>
+	//     condition: ""           # optional, required for condition branches
+	//
+	// ```
+	//
+	// ## Trigger Types
+	//
+	// **Event** — fires when a system event occurs:
+	//
+	// ```yaml
+	//   - type: event
+	//     config:
+	//     event_name: "payment.settled"
+	//
+	// ```
+	//
+	// | Event | Description |
+	// |-------|-------------|
+	// | `user.add` | New user registration |
+	// | `payment.settled` | Deposit/withdrawal settled |
+	// | `wallet.balance.update` | Wallet balance changed |
+	// | `game.bet` | User placed a bet |
+	// | `user.status.update` | User status changed |
+	// | `vip.update` | VIP level changed |
+	//
+	// **Manual** — triggered via `TriggerCrmCampaign` API with explicit user IDs:
+	//
+	// ```yaml
+	//   - type: manual
+	//     config: {}
+	//
+	// ```
+	//
+	// **Segment** — fires when a user enters the specified segment:
+	//
+	// ```yaml
+	//   - type: segment
+	//     config:
+	//     segment_id: 999999999
+	//
+	// ```
+	//
+	// **Schedule** — fires on a cron schedule for all matching users:
+	//
+	// ```yaml
+	//   - type: schedule
+	//     config:
+	//     cron: "0 10 * * 1"   # Every Monday at 10:00 AM
+	//
+	// ```
+	//
+	// ## Action Types
+	//
+	// | Type | Description | Status |
+	// |------|-------------|--------|
+	// | `send_email` | Send email via asset template | Implemented |
+	// | `send_sms` | Send SMS via asset template | Planned |
+	// | `send_push` | Send push notification via asset template | Planned |
+	// | `send_inbox` | Send in-app inbox message via asset template | Planned |
+	// | `show_popup` | Show popup via asset template | Planned |
+	//
+	// Action node config:
+	//
+	// ```yaml
+	// action:
+	//
+	//	type: send_email
+	//	config:
+	//	  asset_id: 444444444         # required — Asset ID (from BackofficeAsset)
+	//	  campaign_data:              # optional — extra variables for template rendering
+	//	    bonus_type: "deposit_match"
+	//	    match_percentage: 100
+	//
+	// ```
+	//
+	// The `campaign_data` values are merged with user/wallet data and passed to the asset rendering engine.
+	// See `BackofficeAsset.RenderAsset` for variable resolution details.
+	//
+	// ## Condition Expressions
+	//
+	// Condition nodes evaluate an expression against runtime data to branch the workflow.
+	//
+	// **Format:** `"<data_source>.<field> <operator> <value>"`
+	//
+	// ```yaml
+	// condition:
+	//
+	//	expression: "user.vip_level >= 5"
+	//
+	// ```
+	//
+	// **Operators:**
+	//
+	// | Operator | Description | Types |
+	// |----------|-------------|-------|
+	// | `==` | Equal | any |
+	// | `!=` | Not equal | any |
+	// | `>` | Greater than | numeric |
+	// | `>=` | Greater or equal | numeric |
+	// | `<` | Less than | numeric |
+	// | `<=` | Less or equal | numeric |
+	// | `contains` | Contains substring or array element | string, array |
+	// | `not_contains` | Does not contain | string, array |
+	// | `in` | Value in array | any |
+	// | `not_in` | Value not in array | any |
+	//
+	// **Value syntax:**
+	// - String: `"quoted"` or `'quoted'`
+	// - Number: `123`, `45.67`
+	// - Boolean: `true`, `false`
+	// - Null: `null`, `nil`
+	// - Array: `[1, 2, 3]`, `["a", "b"]`
+	//
+	// ## Data Sources
+	//
+	// Available prefixes for condition expressions:
+	//
+	// **`user.*`** — user aggregate data:
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | `user.user_id` | int64 | User ID |
+	// | `user.username` | string | Username |
+	// | `user.email` | string | Email address |
+	// | `user.vip_level` | int64 | VIP tier |
+	// | `user.kyc_level` | int64 | KYC verification level |
+	// | `user.registration_country` | string | ISO country code |
+	// | `user.device_type` | string | Registration device |
+	// | `user.deposit_count` | int64 | Total deposits |
+	// | `user.deposit_amount_usd` | float64 | Total deposit amount (USD) |
+	// | `user.withdrawal_count` | int64 | Total withdrawals |
+	// | `user.withdrawal_amount_usd` | float64 | Total withdrawal amount (USD) |
+	// | `user.bet_count` | int64 | Total bets |
+	// | `user.bet_amount_usd` | float64 | Total bet amount (USD) |
+	// | `user.win_count` | int64 | Total wins |
+	// | `user.win_amount_usd` | float64 | Total win amount (USD) |
+	// | `user.ggr_usd` | float64 | Gross Gaming Revenue (USD) |
+	// | `user.ngr_usd` | float64 | Net Gaming Revenue (USD) |
+	// | `user.balance_usd` | float64 | Current balance (USD) |
+	// | `user.login_banned` | bool | Login restricted |
+	// | `user.withdraw_banned` | bool | Withdrawal restricted |
+	// | `user.game_banned` | bool | Game restricted |
+	// | `user.locked` | bool | Account locked |
+	//
+	// **`trigger.*`** — event payload data (dynamic, depends on trigger type):
+	// - `user.add`: `user_id`, `username`, `email`, `country`, `default_currency`
+	// - `payment.settled`: `transaction_id`, `user_id`, `currency`, `amount`, `status`
+	//
+	// **`wallet.*`** — real-time wallet data:
+	// - `wallet.balance`, `wallet.currency`
+	//
+	// **`campaign.*`** — campaign metadata fields set in `CreateCrmCampaignRequest.metadata`
+	//
+	// ## Special Nodes
+	//
+	// | Node ID | Description |
+	// |---------|-------------|
+	// | `_start` | Workflow entry point (required, must have outgoing edge) |
+	// | `_end` | Workflow exit point (required, at least one incoming edge) |
+	//
+	// ## Edge Rules
+	//
+	// - Action node edges: `condition` field is empty or omitted
+	// - Condition node edges: must have exactly two outgoing edges with `condition: "true"` and `condition: "false"`
+	// - All nodes must be reachable from `_start`
+	// - All nodes must have a path to `_end`
+	//
+	// ## Validation Rules
+	//
+	// 1. `version` must be `"1.0"`
+	// 2. `name` must be non-empty
+	// 3. At least one trigger is required
+	// 4. Must have edge from `_start` and at least one edge to `_end`
+	// 5. All nodes must be reachable from `_start` (forward DFS)
+	// 6. All nodes must be able to reach `_end` (reverse DFS)
+	// 7. Node `id` must match its key in the `nodes` map
+	// 8. Action nodes require a valid `action.type`
+	// 9. Condition nodes require a non-empty `expression`
+	// 10. Condition nodes must have both `"true"` and `"false"` branch edges
+	//
+	// ## Examples
+	//
+	// **Example 1 — Welcome email on registration (event trigger, no conditions):**
+	//
+	// ```yaml
+	// version: "1.0"
+	// name: "Welcome Email Campaign"
+	// triggers:
+	//   - type: event
+	//     config:
+	//     event_name: "user.add"
+	//
+	// nodes:
+	//
+	//	send_welcome_email:
+	//	  id: send_welcome_email
+	//	  type: action
+	//	  action:
+	//	    type: send_email
+	//	    config:
+	//	      asset_id: 111111111
+	//	      campaign_data:
+	//	        bonus_amount: 100
+	//	        promo_code: "WELCOME100"
+	//
+	// edges:
+	//   - from: _start
+	//     to: send_welcome_email
+	//   - from: send_welcome_email
+	//     to: _end
+	//
+	// ```
+	//
+	// **Example 2 — Deposit bonus with condition (event trigger + condition branch):**
+	//
+	// ```yaml
+	// version: "1.0"
+	// name: "Deposit Bonus Notification"
+	// triggers:
+	//   - type: event
+	//     config:
+	//     event_name: "payment.settled"
+	//
+	// nodes:
+	//
+	//	check_deposit_amount:
+	//	  id: check_deposit_amount
+	//	  type: condition
+	//	  condition:
+	//	    expression: "trigger.amount >= 100"
+	//	send_bonus_email:
+	//	  id: send_bonus_email
+	//	  type: action
+	//	  action:
+	//	    type: send_email
+	//	    config:
+	//	      asset_id: 444444444
+	//	      campaign_data:
+	//	        bonus_type: "deposit_match"
+	//	        match_percentage: 100
+	//	send_bonus_push:
+	//	  id: send_bonus_push
+	//	  type: action
+	//	  action:
+	//	    type: send_push
+	//	    config:
+	//	      asset_id: 555555555
+	//
+	// edges:
+	//   - from: _start
+	//     to: check_deposit_amount
+	//   - from: check_deposit_amount
+	//     to: send_bonus_email
+	//     condition: "true"
+	//   - from: check_deposit_amount
+	//     to: _end
+	//     condition: "false"
+	//   - from: send_bonus_email
+	//     to: send_bonus_push
+	//   - from: send_bonus_push
+	//     to: _end
+	//
+	// ```
+	//
+	// **Example 3 — VIP tier promotion (manual trigger + nested conditions):**
+	//
+	// ```yaml
+	// version: "1.0"
+	// name: "VIP Tier Promotion Campaign"
+	// triggers:
+	//   - type: manual
+	//     config: {}
+	//
+	// nodes:
+	//
+	//	check_platinum:
+	//	  id: check_platinum
+	//	  type: condition
+	//	  condition:
+	//	    expression: "user.vip_level >= 5"
+	//	check_gold:
+	//	  id: check_gold
+	//	  type: condition
+	//	  condition:
+	//	    expression: "user.vip_level >= 3"
+	//	send_platinum_email:
+	//	  id: send_platinum_email
+	//	  type: action
+	//	  action:
+	//	    type: send_email
+	//	    config:
+	//	      asset_id: 111111111
+	//	      campaign_data:
+	//	        offer_type: "platinum"
+	//	        bonus_percentage: 50
+	//	send_gold_email:
+	//	  id: send_gold_email
+	//	  type: action
+	//	  action:
+	//	    type: send_email
+	//	    config:
+	//	      asset_id: 222222222
+	//	      campaign_data:
+	//	        offer_type: "gold"
+	//	        bonus_percentage: 30
+	//	send_standard_email:
+	//	  id: send_standard_email
+	//	  type: action
+	//	  action:
+	//	    type: send_email
+	//	    config:
+	//	      asset_id: 333333333
+	//	      campaign_data:
+	//	        offer_type: "standard"
+	//	        bonus_percentage: 10
+	//
+	// edges:
+	//   - from: _start
+	//     to: check_platinum
+	//   - from: check_platinum
+	//     to: send_platinum_email
+	//     condition: "true"
+	//   - from: check_platinum
+	//     to: check_gold
+	//     condition: "false"
+	//   - from: check_gold
+	//     to: send_gold_email
+	//     condition: "true"
+	//   - from: check_gold
+	//     to: send_standard_email
+	//     condition: "false"
+	//   - from: send_platinum_email
+	//     to: _end
+	//   - from: send_gold_email
+	//     to: _end
+	//   - from: send_standard_email
+	//     to: _end
+	//
+	// ```
+	//
+	// **Example 4 — Scheduled newsletter (cron trigger + opt-in check):**
+	//
+	// ```yaml
+	// version: "1.0"
+	// name: "Weekly Newsletter"
+	// triggers:
+	//   - type: schedule
+	//     config:
+	//     cron: "0 10 * * 1"
+	//
+	// nodes:
+	//
+	//	check_optin:
+	//	  id: check_optin
+	//	  type: condition
+	//	  condition:
+	//	    expression: "user.newsletter_optin == true"
+	//	send_newsletter:
+	//	  id: send_newsletter
+	//	  type: action
+	//	  action:
+	//	    type: send_email
+	//	    config:
+	//	      asset_id: 888888888
+	//	      campaign_data:
+	//	        newsletter_type: "weekly"
+	//
+	// edges:
+	//   - from: _start
+	//     to: check_optin
+	//   - from: check_optin
+	//     to: send_newsletter
+	//     condition: "true"
+	//   - from: check_optin
+	//     to: _end
+	//     condition: "false"
+	//   - from: send_newsletter
+	//     to: _end
+	//
+	// ```
+	WorkflowYaml  string `protobuf:"bytes,3,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetCrmCampaignWorkflowRequest) Reset() {
@@ -464,13 +907,15 @@ func (x *SetCrmCampaignWorkflowRequest) GetWorkflowYaml() string {
 	return ""
 }
 
-// GetCrmCampaignWorkflow
+// Get the current workflow definition for a campaign.
 type GetCrmCampaignWorkflowRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	CampaignId            int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID
+	CampaignId    int64 `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetCrmCampaignWorkflowRequest) Reset() {
@@ -517,10 +962,13 @@ func (x *GetCrmCampaignWorkflowRequest) GetCampaignId() int64 {
 	return 0
 }
 
-// ValidateCrmCampaignWorkflow
+// Validate a workflow YAML without saving it.
+// Returns `is_valid: true` if valid, or `is_valid: false` with a list of validation errors.
+// Useful for real-time validation in the workflow builder UI before saving.
 type ValidateCrmCampaignWorkflowRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	WorkflowYaml  string                 `protobuf:"bytes,1,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Workflow YAML to validate. Same format as SetCrmCampaignWorkflowRequest.workflow_yaml.
+	WorkflowYaml  string `protobuf:"bytes,1,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -562,13 +1010,25 @@ func (x *ValidateCrmCampaignWorkflowRequest) GetWorkflowYaml() string {
 	return ""
 }
 
-// ActivateCrmCampaign
+// Activate a campaign. Transitions status from DRAFT → ACTIVE.
+// Activation requires:
+// 1. Campaign must be in DRAFT status
+// 2. A workflow must be set via `SetCrmCampaignWorkflow`
+// 3. The workflow must be valid (`is_valid: true`)
+//
+// Once active, the campaign starts processing triggers:
+// - **Event triggers**: listened automatically via pub/sub
+// - **Schedule triggers**: registered with the cron scheduler
+// - **Segment triggers**: evaluated when segment membership changes
+// - **Manual triggers**: available via `TriggerCrmCampaign`
 type ActivateCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID to activate
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ActivateCrmCampaignRequest) Reset() {
@@ -615,13 +1075,17 @@ func (x *ActivateCrmCampaignRequest) GetId() int64 {
 	return 0
 }
 
-// PauseCrmCampaign
+// Pause an active campaign. Transitions status from ACTIVE → PAUSED.
+// New triggers are no longer processed. In-flight executions continue to completion.
+// A paused campaign can be re-activated via `ActivateCrmCampaign`.
 type PauseCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID to pause
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PauseCrmCampaignRequest) Reset() {
@@ -668,15 +1132,53 @@ func (x *PauseCrmCampaignRequest) GetId() int64 {
 	return 0
 }
 
-// TriggerCrmCampaign
+// Manually trigger a campaign for specific users.
+// The campaign must be ACTIVE and its workflow must include a `manual` trigger type.
+//
+// ## Idempotency
+//
+// Manual triggers use minute-precision deduplication: the same campaign + user combination
+// can only be triggered once per minute (prevents accidental double-triggers).
+// Idempotency key: `SHA-256(campaign_id:user_id:manual:minute_timestamp)`
+//
+// ## Response
+//
+// ```json
+//
+//	{
+//	  "triggered_count": 8,
+//	  "skipped_count": 2,
+//	  "execution_ids": [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008]
+//	}
+//
+// ```
+//
+// - `triggered_count`: users for whom executions were created
+// - `skipped_count`: users skipped due to idempotency deduplication
+// - `execution_ids`: IDs of the created execution records (use with `GetCrmCampaignExecution`)
 type TriggerCrmCampaignRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	CampaignId            int64                   `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	UserIds               []int64                 `protobuf:"varint,3,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
-	CampaignData          *structpb.Struct        `protobuf:"bytes,4,opt,name=campaign_data,json=campaignData,proto3" json:"campaign_data,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Campaign ID to trigger. Must be ACTIVE with a `manual` trigger type in workflow.
+	CampaignId int64 `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	// List of user IDs to trigger the campaign for. Each user gets a separate execution.
+	UserIds []int64 `protobuf:"varint,3,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	// Optional campaign-specific data passed to the workflow execution context.
+	// Available in condition expressions via `campaign.*` prefix and in action template rendering.
+	//
+	// ```json
+	//
+	//	{
+	//	  "bonus_amount": "100",
+	//	  "promo_code": "VIP50",
+	//	  "offer_expires_at": "2026-03-31"
+	//	}
+	//
+	// ```
+	CampaignData  *structpb.Struct `protobuf:"bytes,4,opt,name=campaign_data,json=campaignData,proto3" json:"campaign_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TriggerCrmCampaignRequest) Reset() {
@@ -737,13 +1239,15 @@ func (x *TriggerCrmCampaignRequest) GetCampaignData() *structpb.Struct {
 	return nil
 }
 
-// GetCrmCampaignExecution
+// Get a single execution record by ID.
 type GetCrmCampaignExecutionRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Id                    int64                   `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Execution ID
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetCrmCampaignExecutionRequest) Reset() {
@@ -790,17 +1294,34 @@ func (x *GetCrmCampaignExecutionRequest) GetId() int64 {
 	return 0
 }
 
-// ListCrmCampaignExecutions
+// List execution records with optional filtering.
+// Executions track individual campaign runs per user, including status, timing, and error details.
+//
+// ## Execution Status Lifecycle
+//
+// ```
+// PENDING → RUNNING → COMPLETED
+//
+//	   ↓
+//	FAILED / CANCELLED
+//
+// ```
 type ListCrmCampaignExecutionsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	CampaignId            *int64                  `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3,oneof" json:"campaign_id,omitempty"`
-	UserId                *int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	Status                *v1.ExecutionStatus     `protobuf:"varint,4,opt,name=status,proto3,enum=api.campaign.service.v1.ExecutionStatus,oneof" json:"status,omitempty"`
-	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by campaign ID (optional)
+	CampaignId *int64 `protobuf:"varint,2,opt,name=campaign_id,json=campaignId,proto3,oneof" json:"campaign_id,omitempty"`
+	// Filter by user ID (optional) — find all campaign executions for a specific user
+	UserId *int64 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	// Filter by execution status (optional)
+	Status *v1.ExecutionStatus `protobuf:"varint,4,opt,name=status,proto3,enum=api.campaign.service.v1.ExecutionStatus,oneof" json:"status,omitempty"`
+	// Page number (1-based, default 1)
+	Page int32 `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	// Items per page (default 20, max 100)
+	PageSize      int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListCrmCampaignExecutionsRequest) Reset() {
@@ -875,13 +1396,44 @@ func (x *ListCrmCampaignExecutionsRequest) GetPageSize() int32 {
 	return 0
 }
 
-// GetCrmCampaignExecutionSteps
+// Get the step-by-step execution log for a specific execution.
+// Each step corresponds to a workflow node that was executed, with its input/output data, status, and duration.
+// Useful for debugging failed executions or auditing campaign behavior.
+//
+// ## Example Response
+//
+// ```json
+//
+//	{
+//	  "steps": [
+//	    {
+//	      "node_id": "check_deposit_amount",
+//	      "node_type": "condition",
+//	      "status": "EXECUTION_STATUS_COMPLETED",
+//	      "input_data": { "expression": "trigger.amount >= 100", "trigger.amount": 250 },
+//	      "output_data": { "result": true },
+//	      "duration_ms": 1
+//	    },
+//	    {
+//	      "node_id": "send_bonus_email",
+//	      "node_type": "action",
+//	      "status": "EXECUTION_STATUS_COMPLETED",
+//	      "input_data": { "action_type": "send_email", "asset_id": 444444444 },
+//	      "output_data": { "email_sent": true, "recipient": "user@example.com" },
+//	      "duration_ms": 320
+//	    }
+//	  ]
+//	}
+//
+// ```
 type GetCrmCampaignExecutionStepsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ExecutionId           int64                   `protobuf:"varint,2,opt,name=execution_id,json=executionId,proto3" json:"execution_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Execution ID to get steps for
+	ExecutionId   int64 `protobuf:"varint,2,opt,name=execution_id,json=executionId,proto3" json:"execution_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetCrmCampaignExecutionStepsRequest) Reset() {
@@ -928,9 +1480,18 @@ func (x *GetCrmCampaignExecutionStepsRequest) GetExecutionId() int64 {
 	return 0
 }
 
-// GetCrmCampaignWorkflowSchema
+// Get the workflow schema — returns all available components for building workflows.
+// Use this to dynamically populate dropdowns, validators, and auto-complete in the workflow builder UI.
+//
+// ## Response Structure
+//
+// - `triggers`: Available trigger types with their required config fields and available events
+// - `operators`: Comparison operators with type constraints (e.g. `>=` only works with numeric types)
+// - `actions`: Available action types with config fields and implementation status
+// - `data_sources`: Available data source prefixes (`user`, `trigger`, `wallet`, `campaign`) with typed field lists
 type GetCrmCampaignWorkflowSchemaRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for scoping (includes global + operator-specific schema components).
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
