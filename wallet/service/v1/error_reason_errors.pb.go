@@ -2062,3 +2062,27 @@ func IsGetAppDownloadRewardConfigFailed(err error) bool {
 func ErrorGetAppDownloadRewardConfigFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsClaimAppDownloadRewardFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_APP_DOWNLOAD_REWARD_FAILED.String() && e.Code == 500
+}
+
+func ErrorClaimAppDownloadRewardFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLAIM_APP_DOWNLOAD_REWARD_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetAppDownloadRewardStatusFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_APP_DOWNLOAD_REWARD_STATUS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetAppDownloadRewardStatusFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_APP_DOWNLOAD_REWARD_STATUS_FAILED.String(), fmt.Sprintf(format, args...))
+}
