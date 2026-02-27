@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeUserAddUserComment = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
 const OperationBackofficeUserDeleteUserResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeUser/DeleteUserResponsibleGamblingConfig"
+const OperationBackofficeUserExportUsers = "/api.backoffice.service.v1.BackofficeUser/ExportUsers"
 const OperationBackofficeUserGetOperatorTags = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTags"
 const OperationBackofficeUserGetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTagsConfig"
 const OperationBackofficeUserGetUserOverview = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
@@ -43,6 +44,7 @@ const OperationBackofficeUserUserIdentityList = "/api.backoffice.service.v1.Back
 type BackofficeUserHTTPServer interface {
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
 	DeleteUserResponsibleGamblingConfig(context.Context, *DeleteUserResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	// GetOperatorTags GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
 	// GetOperatorTagsConfig GetOperatorTagConfig returns follow-parent flag for the given operator ID.
@@ -90,6 +92,7 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/identity/list/get", _BackofficeUser_UserIdentityList0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator/prelaunch/check", _BackofficeUser_PreLaunchCheck0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/session-activities/list", _BackofficeUser_ListUserSessionActivities0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/export", _BackofficeUser_ExportUsers0_HTTP_Handler(srv))
 }
 
 func _BackofficeUser_ListUsers0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
@@ -510,9 +513,32 @@ func _BackofficeUser_ListUserSessionActivities0_HTTP_Handler(srv BackofficeUserH
 	}
 }
 
+func _BackofficeUser_ExportUsers0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportUsersRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserExportUsers)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportUsers(ctx, req.(*ExportUsersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ExportUsersResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeUserHTTPClient interface {
 	AddUserComment(ctx context.Context, req *AddUserCommentRequest, opts ...http.CallOption) (rsp *AddUserCommentResponse, err error)
 	DeleteUserResponsibleGamblingConfig(ctx context.Context, req *DeleteUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
+	ExportUsers(ctx context.Context, req *ExportUsersRequest, opts ...http.CallOption) (rsp *ExportUsersResponse, err error)
 	// GetOperatorTags GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	GetOperatorTags(ctx context.Context, req *GetOperatorTagsRequest, opts ...http.CallOption) (rsp *GetOperatorTagsResponse, err error)
 	// GetOperatorTagsConfig GetOperatorTagConfig returns follow-parent flag for the given operator ID.
@@ -565,6 +591,19 @@ func (c *BackofficeUserHTTPClientImpl) DeleteUserResponsibleGamblingConfig(ctx c
 	pattern := "/v1/backoffice/user/responsible-gambling/config/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserDeleteUserResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...http.CallOption) (*ExportUsersResponse, error) {
+	var out ExportUsersResponse
+	pattern := "/v1/backoffice/user/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserExportUsers))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -47,6 +47,7 @@ const (
 	User_UpdateUser_FullMethodName                         = "/api.user.service.v1.User/UpdateUser"
 	User_UpdateUserIdentity_FullMethodName                 = "/api.user.service.v1.User/UpdateUserIdentity"
 	User_ListUsers_FullMethodName                          = "/api.user.service.v1.User/ListUsers"
+	User_ExportUsers_FullMethodName                        = "/api.user.service.v1.User/ExportUsers"
 	User_CreateUser_FullMethodName                         = "/api.user.service.v1.User/CreateUser"
 	User_VerifyEmail_FullMethodName                        = "/api.user.service.v1.User/VerifyEmail"
 	User_AddComment_FullMethodName                         = "/api.user.service.v1.User/AddComment"
@@ -207,6 +208,7 @@ type UserClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...grpc.CallOption) (*UpdateUserIdentityResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
@@ -626,6 +628,16 @@ func (c *userClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
 	err := c.cc.Invoke(ctx, User_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUsersResponse)
+	err := c.cc.Invoke(ctx, User_ExportUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1636,6 +1648,7 @@ type UserServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
@@ -1878,6 +1891,9 @@ func (UnimplementedUserServer) UpdateUserIdentity(context.Context, *UpdateUserId
 }
 func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedUserServer) ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportUsers not implemented")
 }
 func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateUser not implemented")
@@ -2646,6 +2662,24 @@ func _User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ExportUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ExportUsers(ctx, req.(*ExportUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4452,6 +4486,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUsers",
 			Handler:    _User_ListUsers_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _User_ExportUsers_Handler,
 		},
 		{
 			MethodName: "CreateUser",
