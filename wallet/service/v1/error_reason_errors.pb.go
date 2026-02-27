@@ -2026,3 +2026,39 @@ func IsInvalidChannelInfo(err error) bool {
 func ErrorInvalidChannelInfo(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_CHANNEL_INFO.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidAppDownloadRewardConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_APP_DOWNLOAD_REWARD_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidAppDownloadRewardConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_APP_DOWNLOAD_REWARD_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetAppDownloadRewardConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetAppDownloadRewardConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetAppDownloadRewardConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetAppDownloadRewardConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}

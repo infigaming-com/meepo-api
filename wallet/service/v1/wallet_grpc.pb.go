@@ -59,6 +59,8 @@ const (
 	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
 	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
 	Wallet_GetDepositRewardConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetDepositRewardConfig"
+	Wallet_SetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/SetAppDownloadRewardConfig"
+	Wallet_GetAppDownloadRewardConfig_FullMethodName          = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardConfig"
 	Wallet_CreatePromoCodeCampaign_FullMethodName             = "/api.wallet.service.v1.Wallet/CreatePromoCodeCampaign"
 	Wallet_UpdatePromoCodeCampaign_FullMethodName             = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaign"
 	Wallet_UpdatePromoCodeCampaignStatus_FullMethodName       = "/api.wallet.service.v1.Wallet/UpdatePromoCodeCampaignStatus"
@@ -170,6 +172,13 @@ type WalletClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*GetDepositRewardConfigResponse, error)
+	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
+	// All existing country entries are deleted and replaced with the provided list.
+	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
+	SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*SetAppDownloadRewardConfigResponse, error)
+	// GetAppDownloadRewardConfig returns both the operator's custom config list
+	// and the inherited default config list from the parent hierarchy.
+	GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*GetAppDownloadRewardConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -651,6 +660,26 @@ func (c *walletClient) GetDepositRewardConfig(ctx context.Context, in *GetDeposi
 	return out, nil
 }
 
+func (c *walletClient) SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*SetAppDownloadRewardConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAppDownloadRewardConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetAppDownloadRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...grpc.CallOption) (*GetAppDownloadRewardConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAppDownloadRewardConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetAppDownloadRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) CreatePromoCodeCampaign(ctx context.Context, in *CreatePromoCodeCampaignRequest, opts ...grpc.CallOption) (*CreatePromoCodeCampaignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreatePromoCodeCampaignResponse)
@@ -1102,6 +1131,13 @@ type WalletServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*GetDepositRewardConfigResponse, error)
+	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
+	// All existing country entries are deleted and replaced with the provided list.
+	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
+	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*SetAppDownloadRewardConfigResponse, error)
+	// GetAppDownloadRewardConfig returns both the operator's custom config list
+	// and the inherited default config list from the parent hierarchy.
+	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*GetAppDownloadRewardConfigResponse, error)
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*CreatePromoCodeCampaignResponse, error)
 	// UpdatePromoCodeCampaign updates an existing promo code campaign (cannot update status or code_type)
@@ -1302,6 +1338,12 @@ func (UnimplementedWalletServer) DeleteDepositRewardSequences(context.Context, *
 }
 func (UnimplementedWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*GetDepositRewardConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
+}
+func (UnimplementedWalletServer) SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*SetAppDownloadRewardConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAppDownloadRewardConfig not implemented")
+}
+func (UnimplementedWalletServer) GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*GetAppDownloadRewardConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppDownloadRewardConfig not implemented")
 }
 func (UnimplementedWalletServer) CreatePromoCodeCampaign(context.Context, *CreatePromoCodeCampaignRequest) (*CreatePromoCodeCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePromoCodeCampaign not implemented")
@@ -2158,6 +2200,42 @@ func _Wallet_GetDepositRewardConfig_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_SetAppDownloadRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAppDownloadRewardConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetAppDownloadRewardConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetAppDownloadRewardConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetAppDownloadRewardConfig(ctx, req.(*SetAppDownloadRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetAppDownloadRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppDownloadRewardConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetAppDownloadRewardConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetAppDownloadRewardConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetAppDownloadRewardConfig(ctx, req.(*GetAppDownloadRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_CreatePromoCodeCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatePromoCodeCampaignRequest)
 	if err := dec(in); err != nil {
@@ -3008,6 +3086,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDepositRewardConfig",
 			Handler:    _Wallet_GetDepositRewardConfig_Handler,
+		},
+		{
+			MethodName: "SetAppDownloadRewardConfig",
+			Handler:    _Wallet_SetAppDownloadRewardConfig_Handler,
+		},
+		{
+			MethodName: "GetAppDownloadRewardConfig",
+			Handler:    _Wallet_GetAppDownloadRewardConfig_Handler,
 		},
 		{
 			MethodName: "CreatePromoCodeCampaign",

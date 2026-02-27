@@ -140,6 +140,15 @@ service Wallet {
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
 
+	// SetAppDownloadRewardConfig full-replaces the app download reward config for an operator.
+	// All existing country entries are deleted and replaced with the provided list.
+	// follow_parent is operator-level: when true, the operator inherits the parent's entire list.
+	rpc SetAppDownloadRewardConfig(SetAppDownloadRewardConfigRequest) returns (SetAppDownloadRewardConfigResponse) {}
+
+	// GetAppDownloadRewardConfig returns both the operator's custom config list
+	// and the inherited default config list from the parent hierarchy.
+	rpc GetAppDownloadRewardConfig(GetAppDownloadRewardConfigRequest) returns (GetAppDownloadRewardConfigResponse) {}
+
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	rpc CreatePromoCodeCampaign(CreatePromoCodeCampaignRequest) returns (CreatePromoCodeCampaignResponse) {}
 
@@ -2023,4 +2032,79 @@ message FreeBetRewardDetail {
 
 	// Optional extra data
 	optional bytes extra = 10;
+}
+
+// ============================================
+// App Download Reward Config
+// ============================================
+
+// Bonus money configuration for app download reward.
+// Structurally identical to PromoCodeBonusMoneyConfig but kept separate
+// to allow independent evolution.
+message AppDownloadBonusMoneyConfig {
+	// Whether this bonus money reward is active.
+	bool enabled = 1;
+	// Currency code for the reward. e.g. "USD", "BRL"
+	string currency = 2;
+	// Credit type the reward is issued as. "cash" | "bonus"
+	string reward_type = 3;
+	// Fixed reward amount (decimal string). e.g. "10.00"
+	string amount = 4;
+	// Wagering multiplier the player must meet before withdrawal. 0-100.
+	int32 wagering_requirement = 5;
+	// Max withdrawal = multiplier x bonus amount. e.g. "3" means 3x the bonus.
+	string max_withdrawal_multiplier = 6;
+	// Reward validity in milliseconds. 0 = no expiration.
+	int64 reward_validity = 7;
+}
+
+// Composite reward configuration for an app download reward entry.
+// All three sub-configs are optional; at least one should be enabled.
+message AppDownloadRewardConfigs {
+	optional AppDownloadBonusMoneyConfig bonus_money_config = 1;
+	optional FreeSpinConfig free_spin_config = 2;
+	optional FreeBetConfig free_bet_config = 3;
+}
+
+// A single country entry in the app download reward config list.
+message AppDownloadRewardConfigItem {
+	// ISO 3166-1 alpha-2 country code, or "Global" for the fallback entry.
+	string country = 1;
+	// Whether to show a forced download popup to users in this country.
+	bool force_download_popup = 2;
+	// The reward configuration for this country.
+	AppDownloadRewardConfigs reward_configs = 3;
+	google.protobuf.Timestamp created_at = 4;
+	google.protobuf.Timestamp updated_at = 5;
+}
+
+// Full replacement of all app download reward config entries for an operator.
+// Existing entries are deleted and replaced with the provided list.
+message SetAppDownloadRewardConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 user_id = 3;
+	// Operator-level toggle. When true, the operator inherits the parent's config list.
+	optional bool follow_parent = 4;
+	// Full list of country entries. Replaces all existing entries for this operator.
+	repeated AppDownloadRewardConfigItem configs = 5;
+}
+message SetAppDownloadRewardConfigResponse {}
+
+// Returns both custom (operator's own) and default (inherited from parent) config lists.
+message GetAppDownloadRewardConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+message GetAppDownloadRewardConfigResponse {
+	// Operator-level follow_parent toggle. true = using parent's list.
+	bool follow_parent = 1;
+	// Operator's own config entries.
+	repeated AppDownloadRewardConfigItem custom_configs = 2;
+	// Inherited config entries from the nearest ancestor with follow_parent=false.
+	repeated AppDownloadRewardConfigItem default_configs = 3;
+	// The ancestor operator context that default_configs come from.
+	api.common.OperatorContext inherited_operator_context = 4;
+	// Display name of the ancestor operator.
+	string inherited_from_operator_name = 5;
 }

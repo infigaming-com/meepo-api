@@ -22938,6 +22938,1195 @@ var _ interface {
 	ErrorName() string
 } = FreeBetRewardDetailValidationError{}
 
+// Validate checks the field values on AppDownloadBonusMoneyConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AppDownloadBonusMoneyConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AppDownloadBonusMoneyConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AppDownloadBonusMoneyConfigMultiError, or nil if none found.
+func (m *AppDownloadBonusMoneyConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AppDownloadBonusMoneyConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Enabled
+
+	// no validation rules for Currency
+
+	// no validation rules for RewardType
+
+	// no validation rules for Amount
+
+	// no validation rules for WageringRequirement
+
+	// no validation rules for MaxWithdrawalMultiplier
+
+	// no validation rules for RewardValidity
+
+	if len(errors) > 0 {
+		return AppDownloadBonusMoneyConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// AppDownloadBonusMoneyConfigMultiError is an error wrapping multiple
+// validation errors returned by AppDownloadBonusMoneyConfig.ValidateAll() if
+// the designated constraints aren't met.
+type AppDownloadBonusMoneyConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AppDownloadBonusMoneyConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AppDownloadBonusMoneyConfigMultiError) AllErrors() []error { return m }
+
+// AppDownloadBonusMoneyConfigValidationError is the validation error returned
+// by AppDownloadBonusMoneyConfig.Validate if the designated constraints
+// aren't met.
+type AppDownloadBonusMoneyConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AppDownloadBonusMoneyConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AppDownloadBonusMoneyConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AppDownloadBonusMoneyConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AppDownloadBonusMoneyConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AppDownloadBonusMoneyConfigValidationError) ErrorName() string {
+	return "AppDownloadBonusMoneyConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AppDownloadBonusMoneyConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAppDownloadBonusMoneyConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AppDownloadBonusMoneyConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AppDownloadBonusMoneyConfigValidationError{}
+
+// Validate checks the field values on AppDownloadRewardConfigs with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AppDownloadRewardConfigs) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AppDownloadRewardConfigs with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AppDownloadRewardConfigsMultiError, or nil if none found.
+func (m *AppDownloadRewardConfigs) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AppDownloadRewardConfigs) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.BonusMoneyConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetBonusMoneyConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AppDownloadRewardConfigsValidationError{
+						field:  "BonusMoneyConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AppDownloadRewardConfigsValidationError{
+						field:  "BonusMoneyConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetBonusMoneyConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AppDownloadRewardConfigsValidationError{
+					field:  "BonusMoneyConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.FreeSpinConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetFreeSpinConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AppDownloadRewardConfigsValidationError{
+						field:  "FreeSpinConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AppDownloadRewardConfigsValidationError{
+						field:  "FreeSpinConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFreeSpinConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AppDownloadRewardConfigsValidationError{
+					field:  "FreeSpinConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.FreeBetConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetFreeBetConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AppDownloadRewardConfigsValidationError{
+						field:  "FreeBetConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AppDownloadRewardConfigsValidationError{
+						field:  "FreeBetConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFreeBetConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AppDownloadRewardConfigsValidationError{
+					field:  "FreeBetConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return AppDownloadRewardConfigsMultiError(errors)
+	}
+
+	return nil
+}
+
+// AppDownloadRewardConfigsMultiError is an error wrapping multiple validation
+// errors returned by AppDownloadRewardConfigs.ValidateAll() if the designated
+// constraints aren't met.
+type AppDownloadRewardConfigsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AppDownloadRewardConfigsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AppDownloadRewardConfigsMultiError) AllErrors() []error { return m }
+
+// AppDownloadRewardConfigsValidationError is the validation error returned by
+// AppDownloadRewardConfigs.Validate if the designated constraints aren't met.
+type AppDownloadRewardConfigsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AppDownloadRewardConfigsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AppDownloadRewardConfigsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AppDownloadRewardConfigsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AppDownloadRewardConfigsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AppDownloadRewardConfigsValidationError) ErrorName() string {
+	return "AppDownloadRewardConfigsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AppDownloadRewardConfigsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAppDownloadRewardConfigs.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AppDownloadRewardConfigsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AppDownloadRewardConfigsValidationError{}
+
+// Validate checks the field values on AppDownloadRewardConfigItem with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AppDownloadRewardConfigItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AppDownloadRewardConfigItem with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AppDownloadRewardConfigItemMultiError, or nil if none found.
+func (m *AppDownloadRewardConfigItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AppDownloadRewardConfigItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	// no validation rules for ForceDownloadPopup
+
+	if all {
+		switch v := interface{}(m.GetRewardConfigs()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AppDownloadRewardConfigItemValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AppDownloadRewardConfigItemValidationError{
+					field:  "RewardConfigs",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRewardConfigs()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AppDownloadRewardConfigItemValidationError{
+				field:  "RewardConfigs",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AppDownloadRewardConfigItemValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AppDownloadRewardConfigItemValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AppDownloadRewardConfigItemValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AppDownloadRewardConfigItemValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AppDownloadRewardConfigItemValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AppDownloadRewardConfigItemValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AppDownloadRewardConfigItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// AppDownloadRewardConfigItemMultiError is an error wrapping multiple
+// validation errors returned by AppDownloadRewardConfigItem.ValidateAll() if
+// the designated constraints aren't met.
+type AppDownloadRewardConfigItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AppDownloadRewardConfigItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AppDownloadRewardConfigItemMultiError) AllErrors() []error { return m }
+
+// AppDownloadRewardConfigItemValidationError is the validation error returned
+// by AppDownloadRewardConfigItem.Validate if the designated constraints
+// aren't met.
+type AppDownloadRewardConfigItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AppDownloadRewardConfigItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AppDownloadRewardConfigItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AppDownloadRewardConfigItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AppDownloadRewardConfigItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AppDownloadRewardConfigItemValidationError) ErrorName() string {
+	return "AppDownloadRewardConfigItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AppDownloadRewardConfigItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAppDownloadRewardConfigItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AppDownloadRewardConfigItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AppDownloadRewardConfigItemValidationError{}
+
+// Validate checks the field values on SetAppDownloadRewardConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SetAppDownloadRewardConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetAppDownloadRewardConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SetAppDownloadRewardConfigRequestMultiError, or nil if none found.
+func (m *SetAppDownloadRewardConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetAppDownloadRewardConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetAppDownloadRewardConfigRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetAppDownloadRewardConfigRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetAppDownloadRewardConfigRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetAppDownloadRewardConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetAppDownloadRewardConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetAppDownloadRewardConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UserId
+
+	for idx, item := range m.GetConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SetAppDownloadRewardConfigRequestValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SetAppDownloadRewardConfigRequestValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SetAppDownloadRewardConfigRequestValidationError{
+					field:  fmt.Sprintf("Configs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.FollowParent != nil {
+		// no validation rules for FollowParent
+	}
+
+	if len(errors) > 0 {
+		return SetAppDownloadRewardConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetAppDownloadRewardConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// SetAppDownloadRewardConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetAppDownloadRewardConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetAppDownloadRewardConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetAppDownloadRewardConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetAppDownloadRewardConfigRequestValidationError is the validation error
+// returned by SetAppDownloadRewardConfigRequest.Validate if the designated
+// constraints aren't met.
+type SetAppDownloadRewardConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetAppDownloadRewardConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetAppDownloadRewardConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetAppDownloadRewardConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetAppDownloadRewardConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetAppDownloadRewardConfigRequestValidationError) ErrorName() string {
+	return "SetAppDownloadRewardConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetAppDownloadRewardConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetAppDownloadRewardConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetAppDownloadRewardConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetAppDownloadRewardConfigRequestValidationError{}
+
+// Validate checks the field values on SetAppDownloadRewardConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SetAppDownloadRewardConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetAppDownloadRewardConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SetAppDownloadRewardConfigResponseMultiError, or nil if none found.
+func (m *SetAppDownloadRewardConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetAppDownloadRewardConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetAppDownloadRewardConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetAppDownloadRewardConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// SetAppDownloadRewardConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetAppDownloadRewardConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetAppDownloadRewardConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetAppDownloadRewardConfigResponseMultiError) AllErrors() []error { return m }
+
+// SetAppDownloadRewardConfigResponseValidationError is the validation error
+// returned by SetAppDownloadRewardConfigResponse.Validate if the designated
+// constraints aren't met.
+type SetAppDownloadRewardConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetAppDownloadRewardConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetAppDownloadRewardConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetAppDownloadRewardConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetAppDownloadRewardConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetAppDownloadRewardConfigResponseValidationError) ErrorName() string {
+	return "SetAppDownloadRewardConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetAppDownloadRewardConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetAppDownloadRewardConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetAppDownloadRewardConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetAppDownloadRewardConfigResponseValidationError{}
+
+// Validate checks the field values on GetAppDownloadRewardConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAppDownloadRewardConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAppDownloadRewardConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAppDownloadRewardConfigRequestMultiError, or nil if none found.
+func (m *GetAppDownloadRewardConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAppDownloadRewardConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAppDownloadRewardConfigRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAppDownloadRewardConfigRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAppDownloadRewardConfigRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAppDownloadRewardConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAppDownloadRewardConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAppDownloadRewardConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetAppDownloadRewardConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAppDownloadRewardConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAppDownloadRewardConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAppDownloadRewardConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAppDownloadRewardConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAppDownloadRewardConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetAppDownloadRewardConfigRequestValidationError is the validation error
+// returned by GetAppDownloadRewardConfigRequest.Validate if the designated
+// constraints aren't met.
+type GetAppDownloadRewardConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAppDownloadRewardConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAppDownloadRewardConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAppDownloadRewardConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAppDownloadRewardConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAppDownloadRewardConfigRequestValidationError) ErrorName() string {
+	return "GetAppDownloadRewardConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAppDownloadRewardConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAppDownloadRewardConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAppDownloadRewardConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAppDownloadRewardConfigRequestValidationError{}
+
+// Validate checks the field values on GetAppDownloadRewardConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetAppDownloadRewardConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAppDownloadRewardConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetAppDownloadRewardConfigResponseMultiError, or nil if none found.
+func (m *GetAppDownloadRewardConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAppDownloadRewardConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FollowParent
+
+	for idx, item := range m.GetCustomConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetAppDownloadRewardConfigResponseValidationError{
+						field:  fmt.Sprintf("CustomConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetAppDownloadRewardConfigResponseValidationError{
+						field:  fmt.Sprintf("CustomConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetAppDownloadRewardConfigResponseValidationError{
+					field:  fmt.Sprintf("CustomConfigs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetDefaultConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetAppDownloadRewardConfigResponseValidationError{
+						field:  fmt.Sprintf("DefaultConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetAppDownloadRewardConfigResponseValidationError{
+						field:  fmt.Sprintf("DefaultConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetAppDownloadRewardConfigResponseValidationError{
+					field:  fmt.Sprintf("DefaultConfigs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetInheritedOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAppDownloadRewardConfigResponseValidationError{
+					field:  "InheritedOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAppDownloadRewardConfigResponseValidationError{
+					field:  "InheritedOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInheritedOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAppDownloadRewardConfigResponseValidationError{
+				field:  "InheritedOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InheritedFromOperatorName
+
+	if len(errors) > 0 {
+		return GetAppDownloadRewardConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAppDownloadRewardConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetAppDownloadRewardConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetAppDownloadRewardConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAppDownloadRewardConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAppDownloadRewardConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetAppDownloadRewardConfigResponseValidationError is the validation error
+// returned by GetAppDownloadRewardConfigResponse.Validate if the designated
+// constraints aren't met.
+type GetAppDownloadRewardConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAppDownloadRewardConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAppDownloadRewardConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAppDownloadRewardConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAppDownloadRewardConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAppDownloadRewardConfigResponseValidationError) ErrorName() string {
+	return "GetAppDownloadRewardConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAppDownloadRewardConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAppDownloadRewardConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAppDownloadRewardConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAppDownloadRewardConfigResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
