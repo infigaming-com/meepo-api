@@ -172,6 +172,8 @@ service User {
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
+	rpc ExportUsers(ExportUsersRequest) returns (ExportUsersResponse) {}
+
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 
 	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
@@ -1110,6 +1112,40 @@ message ListUsersResponse {
 	int32 total = 4;
 	int32 total_enabled = 5;
 	int32 total_disabled = 6;
+}
+
+message ExportUsersRequest {
+	optional int64 user_id = 1;
+	optional google.protobuf.Timestamp registration_start_time = 3;
+	optional google.protobuf.Timestamp registration_end_time = 4;
+	optional int32 vip_level = 5;
+	optional string country = 6;
+	optional int32 kyc_level = 7;
+	optional string deposit_min = 8;
+	optional string deposit_max = 9;
+	optional string withdrawal_min = 10;
+	optional string withdrawal_max = 11;
+	optional bool ban_withdraw = 12;
+	optional bool ban_game = 13;
+	optional bool ban_login = 14;
+	optional bool online = 17;
+	optional bool enabled = 18;
+	optional string email = 19;
+	optional string mobile = 20;
+	api.common.OperatorContext operator_context = 23;
+	api.common.OperatorContextFilters operator_context_filters = 24;
+	optional string registration_ip = 25;
+	optional string login_ip = 26;
+	api.common.OperatorContext target_operator_context = 27;
+	optional string registration_source = 28;
+	optional string agent_type = 29;
+	string format = 30;       // "csv", "excel", "pdf"
+	string time_zone = 31;
+	int64 initiator_user_id = 32;
+}
+
+message ExportUsersResponse {
+	int64 task_id = 1;
 }
 
 message CreateUserRequest {

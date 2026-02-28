@@ -37,26 +37,39 @@ const OperationBackofficeCampaignUpdateCrmCampaign = "/api.backoffice.service.v1
 const OperationBackofficeCampaignValidateCrmCampaignWorkflow = "/api.backoffice.service.v1.BackofficeCampaign/ValidateCrmCampaignWorkflow"
 
 type BackofficeCampaignHTTPServer interface {
-	// ActivateCrmCampaign Campaign control
+	// ActivateCrmCampaign Activate a DRAFT campaign. Requires a valid workflow to be set.
+	// Once active, the campaign starts processing triggers automatically.
 	ActivateCrmCampaign(context.Context, *ActivateCrmCampaignRequest) (*v1.ActivateCampaignResponse, error)
-	// CreateCrmCampaign Campaign CRUD operations
+	// CreateCrmCampaign Create a new CRM campaign in DRAFT status.
 	CreateCrmCampaign(context.Context, *CreateCrmCampaignRequest) (*v1.CreateCampaignResponse, error)
+	// DeleteCrmCampaign Delete a campaign. Must be in DRAFT or ARCHIVED status.
 	DeleteCrmCampaign(context.Context, *DeleteCrmCampaignRequest) (*v1.DeleteCampaignResponse, error)
+	// GetCrmCampaign Get a single campaign by ID. Optionally includes the workflow definition.
 	GetCrmCampaign(context.Context, *GetCrmCampaignRequest) (*v1.GetCampaignResponse, error)
-	// GetCrmCampaignExecution Execution tracking
+	// GetCrmCampaignExecution Get a single execution record by ID.
 	GetCrmCampaignExecution(context.Context, *GetCrmCampaignExecutionRequest) (*v1.GetExecutionResponse, error)
+	// GetCrmCampaignExecutionSteps Get the step-by-step execution log for a specific execution. Each step corresponds to a workflow node.
 	GetCrmCampaignExecutionSteps(context.Context, *GetCrmCampaignExecutionStepsRequest) (*v1.GetExecutionStepsResponse, error)
+	// GetCrmCampaignWorkflow Get the current workflow definition for a campaign.
 	GetCrmCampaignWorkflow(context.Context, *GetCrmCampaignWorkflowRequest) (*v1.GetWorkflowResponse, error)
-	// GetCrmCampaignWorkflowSchema Workflow schema
+	// GetCrmCampaignWorkflowSchema Get the workflow schema — all available triggers, actions, operators, and data sources.
+	// Use this to populate the workflow builder UI dynamically.
 	GetCrmCampaignWorkflowSchema(context.Context, *GetCrmCampaignWorkflowSchemaRequest) (*v1.GetWorkflowSchemaResponse, error)
+	// ListCrmCampaignExecutions List execution records with optional filtering by campaign, user, and status.
 	ListCrmCampaignExecutions(context.Context, *ListCrmCampaignExecutionsRequest) (*v1.ListExecutionsResponse, error)
+	// ListCrmCampaigns List campaigns with optional filtering by status and inheritance.
 	ListCrmCampaigns(context.Context, *ListCrmCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	// PauseCrmCampaign Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 	PauseCrmCampaign(context.Context, *PauseCrmCampaignRequest) (*v1.PauseCampaignResponse, error)
-	// SetCrmCampaignWorkflow Workflow management
+	// SetCrmCampaignWorkflow Set or replace the workflow definition for a campaign.
+	// The YAML is parsed, validated, and versioned. See SetCrmCampaignWorkflowRequest.workflow_yaml for the full YAML format.
 	SetCrmCampaignWorkflow(context.Context, *SetCrmCampaignWorkflowRequest) (*v1.SetWorkflowResponse, error)
-	// TriggerCrmCampaign Manual trigger
+	// TriggerCrmCampaign Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
+	// See TriggerCrmCampaignRequest for details.
 	TriggerCrmCampaign(context.Context, *TriggerCrmCampaignRequest) (*v1.TriggerCampaignResponse, error)
+	// UpdateCrmCampaign Partially update an existing campaign. Only provided fields are modified. Campaign must be in DRAFT or PAUSED status.
 	UpdateCrmCampaign(context.Context, *UpdateCrmCampaignRequest) (*v1.UpdateCampaignResponse, error)
+	// ValidateCrmCampaignWorkflow Validate a workflow YAML without saving it. Returns validation errors if any.
 	ValidateCrmCampaignWorkflow(context.Context, *ValidateCrmCampaignWorkflowRequest) (*v1.ValidateWorkflowResponse, error)
 }
 
@@ -410,26 +423,39 @@ func _BackofficeCampaign_GetCrmCampaignWorkflowSchema0_HTTP_Handler(srv Backoffi
 }
 
 type BackofficeCampaignHTTPClient interface {
-	// ActivateCrmCampaign Campaign control
+	// ActivateCrmCampaign Activate a DRAFT campaign. Requires a valid workflow to be set.
+	// Once active, the campaign starts processing triggers automatically.
 	ActivateCrmCampaign(ctx context.Context, req *ActivateCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.ActivateCampaignResponse, err error)
-	// CreateCrmCampaign Campaign CRUD operations
+	// CreateCrmCampaign Create a new CRM campaign in DRAFT status.
 	CreateCrmCampaign(ctx context.Context, req *CreateCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.CreateCampaignResponse, err error)
+	// DeleteCrmCampaign Delete a campaign. Must be in DRAFT or ARCHIVED status.
 	DeleteCrmCampaign(ctx context.Context, req *DeleteCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.DeleteCampaignResponse, err error)
+	// GetCrmCampaign Get a single campaign by ID. Optionally includes the workflow definition.
 	GetCrmCampaign(ctx context.Context, req *GetCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.GetCampaignResponse, err error)
-	// GetCrmCampaignExecution Execution tracking
+	// GetCrmCampaignExecution Get a single execution record by ID.
 	GetCrmCampaignExecution(ctx context.Context, req *GetCrmCampaignExecutionRequest, opts ...http.CallOption) (rsp *v1.GetExecutionResponse, err error)
+	// GetCrmCampaignExecutionSteps Get the step-by-step execution log for a specific execution. Each step corresponds to a workflow node.
 	GetCrmCampaignExecutionSteps(ctx context.Context, req *GetCrmCampaignExecutionStepsRequest, opts ...http.CallOption) (rsp *v1.GetExecutionStepsResponse, err error)
+	// GetCrmCampaignWorkflow Get the current workflow definition for a campaign.
 	GetCrmCampaignWorkflow(ctx context.Context, req *GetCrmCampaignWorkflowRequest, opts ...http.CallOption) (rsp *v1.GetWorkflowResponse, err error)
-	// GetCrmCampaignWorkflowSchema Workflow schema
+	// GetCrmCampaignWorkflowSchema Get the workflow schema — all available triggers, actions, operators, and data sources.
+	// Use this to populate the workflow builder UI dynamically.
 	GetCrmCampaignWorkflowSchema(ctx context.Context, req *GetCrmCampaignWorkflowSchemaRequest, opts ...http.CallOption) (rsp *v1.GetWorkflowSchemaResponse, err error)
+	// ListCrmCampaignExecutions List execution records with optional filtering by campaign, user, and status.
 	ListCrmCampaignExecutions(ctx context.Context, req *ListCrmCampaignExecutionsRequest, opts ...http.CallOption) (rsp *v1.ListExecutionsResponse, err error)
+	// ListCrmCampaigns List campaigns with optional filtering by status and inheritance.
 	ListCrmCampaigns(ctx context.Context, req *ListCrmCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListCampaignsResponse, err error)
+	// PauseCrmCampaign Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 	PauseCrmCampaign(ctx context.Context, req *PauseCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.PauseCampaignResponse, err error)
-	// SetCrmCampaignWorkflow Workflow management
+	// SetCrmCampaignWorkflow Set or replace the workflow definition for a campaign.
+	// The YAML is parsed, validated, and versioned. See SetCrmCampaignWorkflowRequest.workflow_yaml for the full YAML format.
 	SetCrmCampaignWorkflow(ctx context.Context, req *SetCrmCampaignWorkflowRequest, opts ...http.CallOption) (rsp *v1.SetWorkflowResponse, err error)
-	// TriggerCrmCampaign Manual trigger
+	// TriggerCrmCampaign Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
+	// See TriggerCrmCampaignRequest for details.
 	TriggerCrmCampaign(ctx context.Context, req *TriggerCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.TriggerCampaignResponse, err error)
+	// UpdateCrmCampaign Partially update an existing campaign. Only provided fields are modified. Campaign must be in DRAFT or PAUSED status.
 	UpdateCrmCampaign(ctx context.Context, req *UpdateCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.UpdateCampaignResponse, err error)
+	// ValidateCrmCampaignWorkflow Validate a workflow YAML without saving it. Returns validation errors if any.
 	ValidateCrmCampaignWorkflow(ctx context.Context, req *ValidateCrmCampaignWorkflowRequest, opts ...http.CallOption) (rsp *v1.ValidateWorkflowResponse, err error)
 }
 
@@ -441,7 +467,8 @@ func NewBackofficeCampaignHTTPClient(client *http.Client) BackofficeCampaignHTTP
 	return &BackofficeCampaignHTTPClientImpl{client}
 }
 
-// ActivateCrmCampaign Campaign control
+// ActivateCrmCampaign Activate a DRAFT campaign. Requires a valid workflow to be set.
+// Once active, the campaign starts processing triggers automatically.
 func (c *BackofficeCampaignHTTPClientImpl) ActivateCrmCampaign(ctx context.Context, in *ActivateCrmCampaignRequest, opts ...http.CallOption) (*v1.ActivateCampaignResponse, error) {
 	var out v1.ActivateCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/activate"
@@ -455,7 +482,7 @@ func (c *BackofficeCampaignHTTPClientImpl) ActivateCrmCampaign(ctx context.Conte
 	return &out, nil
 }
 
-// CreateCrmCampaign Campaign CRUD operations
+// CreateCrmCampaign Create a new CRM campaign in DRAFT status.
 func (c *BackofficeCampaignHTTPClientImpl) CreateCrmCampaign(ctx context.Context, in *CreateCrmCampaignRequest, opts ...http.CallOption) (*v1.CreateCampaignResponse, error) {
 	var out v1.CreateCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/create"
@@ -469,6 +496,7 @@ func (c *BackofficeCampaignHTTPClientImpl) CreateCrmCampaign(ctx context.Context
 	return &out, nil
 }
 
+// DeleteCrmCampaign Delete a campaign. Must be in DRAFT or ARCHIVED status.
 func (c *BackofficeCampaignHTTPClientImpl) DeleteCrmCampaign(ctx context.Context, in *DeleteCrmCampaignRequest, opts ...http.CallOption) (*v1.DeleteCampaignResponse, error) {
 	var out v1.DeleteCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/delete"
@@ -482,6 +510,7 @@ func (c *BackofficeCampaignHTTPClientImpl) DeleteCrmCampaign(ctx context.Context
 	return &out, nil
 }
 
+// GetCrmCampaign Get a single campaign by ID. Optionally includes the workflow definition.
 func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaign(ctx context.Context, in *GetCrmCampaignRequest, opts ...http.CallOption) (*v1.GetCampaignResponse, error) {
 	var out v1.GetCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/get"
@@ -495,7 +524,7 @@ func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaign(ctx context.Context, i
 	return &out, nil
 }
 
-// GetCrmCampaignExecution Execution tracking
+// GetCrmCampaignExecution Get a single execution record by ID.
 func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignExecution(ctx context.Context, in *GetCrmCampaignExecutionRequest, opts ...http.CallOption) (*v1.GetExecutionResponse, error) {
 	var out v1.GetExecutionResponse
 	pattern := "/v1/backoffice/crm/campaign/execution/get"
@@ -509,6 +538,7 @@ func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignExecution(ctx context.C
 	return &out, nil
 }
 
+// GetCrmCampaignExecutionSteps Get the step-by-step execution log for a specific execution. Each step corresponds to a workflow node.
 func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignExecutionSteps(ctx context.Context, in *GetCrmCampaignExecutionStepsRequest, opts ...http.CallOption) (*v1.GetExecutionStepsResponse, error) {
 	var out v1.GetExecutionStepsResponse
 	pattern := "/v1/backoffice/crm/campaign/execution/steps"
@@ -522,6 +552,7 @@ func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignExecutionSteps(ctx cont
 	return &out, nil
 }
 
+// GetCrmCampaignWorkflow Get the current workflow definition for a campaign.
 func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignWorkflow(ctx context.Context, in *GetCrmCampaignWorkflowRequest, opts ...http.CallOption) (*v1.GetWorkflowResponse, error) {
 	var out v1.GetWorkflowResponse
 	pattern := "/v1/backoffice/crm/campaign/workflow/get"
@@ -535,7 +566,8 @@ func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignWorkflow(ctx context.Co
 	return &out, nil
 }
 
-// GetCrmCampaignWorkflowSchema Workflow schema
+// GetCrmCampaignWorkflowSchema Get the workflow schema — all available triggers, actions, operators, and data sources.
+// Use this to populate the workflow builder UI dynamically.
 func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignWorkflowSchema(ctx context.Context, in *GetCrmCampaignWorkflowSchemaRequest, opts ...http.CallOption) (*v1.GetWorkflowSchemaResponse, error) {
 	var out v1.GetWorkflowSchemaResponse
 	pattern := "/v1/backoffice/crm/campaign/workflow/schema"
@@ -549,6 +581,7 @@ func (c *BackofficeCampaignHTTPClientImpl) GetCrmCampaignWorkflowSchema(ctx cont
 	return &out, nil
 }
 
+// ListCrmCampaignExecutions List execution records with optional filtering by campaign, user, and status.
 func (c *BackofficeCampaignHTTPClientImpl) ListCrmCampaignExecutions(ctx context.Context, in *ListCrmCampaignExecutionsRequest, opts ...http.CallOption) (*v1.ListExecutionsResponse, error) {
 	var out v1.ListExecutionsResponse
 	pattern := "/v1/backoffice/crm/campaign/execution/list"
@@ -562,6 +595,7 @@ func (c *BackofficeCampaignHTTPClientImpl) ListCrmCampaignExecutions(ctx context
 	return &out, nil
 }
 
+// ListCrmCampaigns List campaigns with optional filtering by status and inheritance.
 func (c *BackofficeCampaignHTTPClientImpl) ListCrmCampaigns(ctx context.Context, in *ListCrmCampaignsRequest, opts ...http.CallOption) (*v1.ListCampaignsResponse, error) {
 	var out v1.ListCampaignsResponse
 	pattern := "/v1/backoffice/crm/campaign/list"
@@ -575,6 +609,7 @@ func (c *BackofficeCampaignHTTPClientImpl) ListCrmCampaigns(ctx context.Context,
 	return &out, nil
 }
 
+// PauseCrmCampaign Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 func (c *BackofficeCampaignHTTPClientImpl) PauseCrmCampaign(ctx context.Context, in *PauseCrmCampaignRequest, opts ...http.CallOption) (*v1.PauseCampaignResponse, error) {
 	var out v1.PauseCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/pause"
@@ -588,7 +623,8 @@ func (c *BackofficeCampaignHTTPClientImpl) PauseCrmCampaign(ctx context.Context,
 	return &out, nil
 }
 
-// SetCrmCampaignWorkflow Workflow management
+// SetCrmCampaignWorkflow Set or replace the workflow definition for a campaign.
+// The YAML is parsed, validated, and versioned. See SetCrmCampaignWorkflowRequest.workflow_yaml for the full YAML format.
 func (c *BackofficeCampaignHTTPClientImpl) SetCrmCampaignWorkflow(ctx context.Context, in *SetCrmCampaignWorkflowRequest, opts ...http.CallOption) (*v1.SetWorkflowResponse, error) {
 	var out v1.SetWorkflowResponse
 	pattern := "/v1/backoffice/crm/campaign/workflow/set"
@@ -602,7 +638,8 @@ func (c *BackofficeCampaignHTTPClientImpl) SetCrmCampaignWorkflow(ctx context.Co
 	return &out, nil
 }
 
-// TriggerCrmCampaign Manual trigger
+// TriggerCrmCampaign Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
+// See TriggerCrmCampaignRequest for details.
 func (c *BackofficeCampaignHTTPClientImpl) TriggerCrmCampaign(ctx context.Context, in *TriggerCrmCampaignRequest, opts ...http.CallOption) (*v1.TriggerCampaignResponse, error) {
 	var out v1.TriggerCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/trigger"
@@ -616,6 +653,7 @@ func (c *BackofficeCampaignHTTPClientImpl) TriggerCrmCampaign(ctx context.Contex
 	return &out, nil
 }
 
+// UpdateCrmCampaign Partially update an existing campaign. Only provided fields are modified. Campaign must be in DRAFT or PAUSED status.
 func (c *BackofficeCampaignHTTPClientImpl) UpdateCrmCampaign(ctx context.Context, in *UpdateCrmCampaignRequest, opts ...http.CallOption) (*v1.UpdateCampaignResponse, error) {
 	var out v1.UpdateCampaignResponse
 	pattern := "/v1/backoffice/crm/campaign/update"
@@ -629,6 +667,7 @@ func (c *BackofficeCampaignHTTPClientImpl) UpdateCrmCampaign(ctx context.Context
 	return &out, nil
 }
 
+// ValidateCrmCampaignWorkflow Validate a workflow YAML without saving it. Returns validation errors if any.
 func (c *BackofficeCampaignHTTPClientImpl) ValidateCrmCampaignWorkflow(ctx context.Context, in *ValidateCrmCampaignWorkflowRequest, opts ...http.CallOption) (*v1.ValidateWorkflowResponse, error) {
 	var out v1.ValidateWorkflowResponse
 	pattern := "/v1/backoffice/crm/campaign/workflow/validate"

@@ -39,6 +39,7 @@ const (
 	BackofficeUser_UserIdentityList_FullMethodName                    = "/api.backoffice.service.v1.BackofficeUser/UserIdentityList"
 	BackofficeUser_PreLaunchCheck_FullMethodName                      = "/api.backoffice.service.v1.BackofficeUser/PreLaunchCheck"
 	BackofficeUser_ListUserSessionActivities_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/ListUserSessionActivities"
+	BackofficeUser_ExportUsers_FullMethodName                         = "/api.backoffice.service.v1.BackofficeUser/ExportUsers"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -71,6 +72,7 @@ type BackofficeUserClient interface {
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error)
 	PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error)
 	ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*v1.ListUserSessionActivitiesResponse, error)
+	ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -271,6 +273,16 @@ func (c *backofficeUserClient) ListUserSessionActivities(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeUserClient) ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUsersResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_ExportUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeUserServer is the server API for BackofficeUser service.
 // All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
@@ -301,6 +313,7 @@ type BackofficeUserServer interface {
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
 	PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
 	ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*v1.ListUserSessionActivitiesResponse, error)
+	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -367,6 +380,9 @@ func (UnimplementedBackofficeUserServer) PreLaunchCheck(context.Context, *v1.Pre
 }
 func (UnimplementedBackofficeUserServer) ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*v1.ListUserSessionActivitiesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserSessionActivities not implemented")
+}
+func (UnimplementedBackofficeUserServer) ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportUsers not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
 func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
@@ -731,6 +747,24 @@ func _BackofficeUser_ListUserSessionActivities_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_ExportUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).ExportUsers(ctx, req.(*ExportUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -813,6 +847,10 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserSessionActivities",
 			Handler:    _BackofficeUser_ListUserSessionActivities_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _BackofficeUser_ExportUsers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
