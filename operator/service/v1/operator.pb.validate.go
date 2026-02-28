@@ -7307,6 +7307,252 @@ var _ interface {
 	ErrorName() string
 } = RecalculateDailyRevenueSharesResponseValidationError{}
 
+// Validate checks the field values on ListRevenueShareRateConfigsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListRevenueShareRateConfigsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRevenueShareRateConfigsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListRevenueShareRateConfigsRequestMultiError, or nil if none found.
+func (m *ListRevenueShareRateConfigsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRevenueShareRateConfigsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorType
+
+	if len(errors) > 0 {
+		return ListRevenueShareRateConfigsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRevenueShareRateConfigsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListRevenueShareRateConfigsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListRevenueShareRateConfigsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRevenueShareRateConfigsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRevenueShareRateConfigsRequestMultiError) AllErrors() []error { return m }
+
+// ListRevenueShareRateConfigsRequestValidationError is the validation error
+// returned by ListRevenueShareRateConfigsRequest.Validate if the designated
+// constraints aren't met.
+type ListRevenueShareRateConfigsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRevenueShareRateConfigsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRevenueShareRateConfigsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRevenueShareRateConfigsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRevenueShareRateConfigsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRevenueShareRateConfigsRequestValidationError) ErrorName() string {
+	return "ListRevenueShareRateConfigsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRevenueShareRateConfigsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRevenueShareRateConfigsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRevenueShareRateConfigsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRevenueShareRateConfigsRequestValidationError{}
+
+// Validate checks the field values on ListRevenueShareRateConfigsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListRevenueShareRateConfigsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRevenueShareRateConfigsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListRevenueShareRateConfigsResponseMultiError, or nil if none found.
+func (m *ListRevenueShareRateConfigsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRevenueShareRateConfigsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListRevenueShareRateConfigsResponseValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListRevenueShareRateConfigsResponseValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListRevenueShareRateConfigsResponseValidationError{
+					field:  fmt.Sprintf("Configs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListRevenueShareRateConfigsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRevenueShareRateConfigsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListRevenueShareRateConfigsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListRevenueShareRateConfigsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRevenueShareRateConfigsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRevenueShareRateConfigsResponseMultiError) AllErrors() []error { return m }
+
+// ListRevenueShareRateConfigsResponseValidationError is the validation error
+// returned by ListRevenueShareRateConfigsResponse.Validate if the designated
+// constraints aren't met.
+type ListRevenueShareRateConfigsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRevenueShareRateConfigsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRevenueShareRateConfigsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRevenueShareRateConfigsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRevenueShareRateConfigsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRevenueShareRateConfigsResponseValidationError) ErrorName() string {
+	return "ListRevenueShareRateConfigsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRevenueShareRateConfigsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRevenueShareRateConfigsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRevenueShareRateConfigsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRevenueShareRateConfigsResponseValidationError{}
+
 // Validate checks the field values on GetOperatorResponse_Operator with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -9096,3 +9342,139 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListBalancesSummaryResponse_BalanceSummaryValidationError{}
+
+// Validate checks the field values on
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListRevenueShareRateConfigsResponse_RevenueShareRateConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfigMultiError, or
+// nil if none found.
+func (m *ListRevenueShareRateConfigsResponse_RevenueShareRateConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRevenueShareRateConfigsResponse_RevenueShareRateConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for OperatorType
+
+	// no validation rules for MinProfit
+
+	// no validation rules for MaxProfit
+
+	// no validation rules for BaseRate
+
+	// no validation rules for Promote
+
+	// no validation rules for FinalRate
+
+	// no validation rules for Description
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return ListRevenueShareRateConfigsResponse_RevenueShareRateConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfigMultiError is an
+// error wrapping multiple validation errors returned by
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfig.ValidateAll() if
+// the designated constraints aren't met.
+type ListRevenueShareRateConfigsResponse_RevenueShareRateConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRevenueShareRateConfigsResponse_RevenueShareRateConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRevenueShareRateConfigsResponse_RevenueShareRateConfigMultiError) AllErrors() []error {
+	return m
+}
+
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError is
+// the validation error returned by
+// ListRevenueShareRateConfigsResponse_RevenueShareRateConfig.Validate if the
+// designated constraints aren't met.
+type ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError) ErrorName() string {
+	return "ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRevenueShareRateConfigsResponse_RevenueShareRateConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRevenueShareRateConfigsResponse_RevenueShareRateConfigValidationError{}
