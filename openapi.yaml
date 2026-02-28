@@ -12001,6 +12001,8 @@ components:
                     type: string
                 thirdPartyGameRate:
                     type: string
+                referralLossRevShareMode:
+                    type: string
         api.affiliate.service.v1.Params:
             type: object
             properties:

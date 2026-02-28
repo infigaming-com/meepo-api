@@ -4056,11 +4056,12 @@ func (x *GetOperatorSettingsRequest) GetTargetOperatorContext() *common.Operator
 }
 
 type OperatorSettings struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	PaymentChannelRate string                 `protobuf:"bytes,1,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`   // represent as a percentage, e.g. "35" for 35%
-	ThirdPartyGameRate string                 `protobuf:"bytes,2,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"` // represent as a percentage, e.g. "35" for 35%
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	PaymentChannelRate       string                 `protobuf:"bytes,1,opt,name=payment_channel_rate,json=paymentChannelRate,proto3" json:"payment_channel_rate,omitempty"`                       // represent as a percentage, e.g. "35" for 35%
+	ThirdPartyGameRate       string                 `protobuf:"bytes,2,opt,name=third_party_game_rate,json=thirdPartyGameRate,proto3" json:"third_party_game_rate,omitempty"`                     // represent as a percentage, e.g. "35" for 35%
+	ReferralLossRevShareMode string                 `protobuf:"bytes,3,opt,name=referral_loss_rev_share_mode,json=referralLossRevShareMode,proto3" json:"referral_loss_rev_share_mode,omitempty"` // "cross_currency_hedging" or "independent_by_currency"
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *OperatorSettings) Reset() {
@@ -4103,6 +4104,13 @@ func (x *OperatorSettings) GetPaymentChannelRate() string {
 func (x *OperatorSettings) GetThirdPartyGameRate() string {
 	if x != nil {
 		return x.ThirdPartyGameRate
+	}
+	return ""
+}
+
+func (x *OperatorSettings) GetReferralLossRevShareMode() string {
+	if x != nil {
+		return x.ReferralLossRevShareMode
 	}
 	return ""
 }
@@ -8658,10 +8666,11 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x1dhas_met_conversion_conditions\x18\x05 \x01(\bR\x1ahasMetConversionConditions\"\xcc\x01\n" +
 	"\x1aGetOperatorSettingsRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"w\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xb7\x01\n" +
 	"\x10OperatorSettings\x120\n" +
 	"\x14payment_channel_rate\x18\x01 \x01(\tR\x12paymentChannelRate\x121\n" +
-	"\x15third_party_game_rate\x18\x02 \x01(\tR\x12thirdPartyGameRate\"v\n" +
+	"\x15third_party_game_rate\x18\x02 \x01(\tR\x12thirdPartyGameRate\x12>\n" +
+	"\x1creferral_loss_rev_share_mode\x18\x03 \x01(\tR\x18referralLossRevShareMode\"v\n" +
 	"\x1bGetOperatorSettingsResponse\x12W\n" +
 	"\x11operator_settings\x18\x01 \x01(\v2*.api.affiliate.service.v1.OperatorSettingsR\x10operatorSettings\"\xa8\x02\n" +
 	"\x1dUpdateOperatorSettingsRequest\x12Y\n" +
