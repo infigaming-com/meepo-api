@@ -68,9 +68,9 @@ type ClientOnlineStatusEvent struct {
 type ClientConnectedEvent struct {
 	ClientId   int64 `json:"clientId"`
 	OperatorId int64 `json:"operatorId"`
-	UserId     int64 `json:"userId"`    // 0 for anonymous users
+	UserId     int64 `json:"userId"` // 0 for anonymous users
 	Anonymous  bool  `json:"anonymous"`
-	Online     bool  `json:"online"`    // true=online, false=offline
+	Online     bool  `json:"online"` // true=online, false=offline
 }
 
 type UserOnlineStatusEvent struct {
@@ -320,3 +320,40 @@ type OperatorStatusUpdateEvent struct {
 }
 
 const OperatorStatusUpdateTopic = "operator.status.update"
+
+// ------------------------------------------------------------
+// Session activity events
+// ------------------------------------------------------------
+
+const SessionActivityTopic = "session.activity"
+
+// ------------------------------------------------------------
+// App download reward notification events
+// ------------------------------------------------------------
+
+const AppDownloadRewardNotificationTopic = "app.download.reward.notification"
+
+type AppDownloadRewardNotificationEvent struct {
+	UserID         int64 `json:"userId"`
+	RealOperatorID int64 `json:"realOperatorId"`
+}
+
+type SessionActivityEvent struct {
+	UserID             int64    `json:"userId"`
+	OperatorID         int64    `json:"operatorId"`                    // = RealOperatorID for backward compat
+	RealOperatorID     int64    `json:"realOperatorId"`                // explicit real_operator_id
+	CompanyOperatorID  int64    `json:"companyOperatorId"`             // company level hierarchy ID
+	RetailerOperatorID int64    `json:"retailerOperatorId"`            // retailer level hierarchy ID
+	SystemOperatorID   int64    `json:"systemOperatorId"`              // system level hierarchy ID
+	OperatorType       string   `json:"operatorType"`                  // "operator"|"company"|"retailer"|"system"
+	LoginMethod        string   `json:"loginMethod"`                   // "PWA" etc.
+	Triggers           []string `json:"triggers"`
+	IP                 string   `json:"ip"`
+	PrevIP             string   `json:"prevIp,omitempty"`
+	UserAgent          string   `json:"userAgent"`
+	UAHash             string   `json:"uaHash"`
+	PrevUAHash         string   `json:"prevUaHash,omitempty"`
+	Country            string   `json:"country"`
+	PrevCountry        string   `json:"prevCountry,omitempty"`
+	Timestamp          int64    `json:"timestamp"`
+}

@@ -35,6 +35,7 @@ const (
 	ReportService_ListWithdrawVtgDetails_FullMethodName             = "/api.report.service.v1.ReportService/ListWithdrawVtgDetails"
 	ReportService_ListSportEvents_FullMethodName                    = "/api.report.service.v1.ReportService/ListSportEvents"
 	ReportService_CustomerRecordReportDetail_FullMethodName         = "/api.report.service.v1.ReportService/CustomerRecordReportDetail"
+	ReportService_ExportGameData_FullMethodName                     = "/api.report.service.v1.ReportService/ExportGameData"
 	ReportService_ListReferralVTGReportData_FullMethodName          = "/api.report.service.v1.ReportService/ListReferralVTGReportData"
 	ReportService_ListReferralSnapshotReportData_FullMethodName     = "/api.report.service.v1.ReportService/ListReferralSnapshotReportData"
 	ReportService_ListReferralContributionReportData_FullMethodName = "/api.report.service.v1.ReportService/ListReferralContributionReportData"
@@ -75,6 +76,8 @@ type ReportServiceClient interface {
 	ListSportEvents(ctx context.Context, in *v1.ListSportEventsRequest, opts ...grpc.CallOption) (*v1.ListSportEventsResponse, error)
 	// Customer record detail
 	CustomerRecordReportDetail(ctx context.Context, in *v1.CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*v1.CustomerRecordReportDetailResponse, error)
+	// Game data export (async, gRPC only)
+	ExportGameData(ctx context.Context, in *ExportGameDataRequest, opts ...grpc.CallOption) (*ExportGameDataResponse, error)
 	// VTG report: new subordinates performance in period
 	ListReferralVTGReportData(ctx context.Context, in *ListReferralVTGReportDataRequest, opts ...grpc.CallOption) (*ListReferralVTGReportDataResponse, error)
 	// Snapshot report: cumulative subordinates + period activity
@@ -247,6 +250,16 @@ func (c *reportServiceClient) CustomerRecordReportDetail(ctx context.Context, in
 	return out, nil
 }
 
+func (c *reportServiceClient) ExportGameData(ctx context.Context, in *ExportGameDataRequest, opts ...grpc.CallOption) (*ExportGameDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportGameDataResponse)
+	err := c.cc.Invoke(ctx, ReportService_ExportGameData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *reportServiceClient) ListReferralVTGReportData(ctx context.Context, in *ListReferralVTGReportDataRequest, opts ...grpc.CallOption) (*ListReferralVTGReportDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListReferralVTGReportDataResponse)
@@ -339,6 +352,8 @@ type ReportServiceServer interface {
 	ListSportEvents(context.Context, *v1.ListSportEventsRequest) (*v1.ListSportEventsResponse, error)
 	// Customer record detail
 	CustomerRecordReportDetail(context.Context, *v1.CustomerRecordReportDetailRequest) (*v1.CustomerRecordReportDetailResponse, error)
+	// Game data export (async, gRPC only)
+	ExportGameData(context.Context, *ExportGameDataRequest) (*ExportGameDataResponse, error)
 	// VTG report: new subordinates performance in period
 	ListReferralVTGReportData(context.Context, *ListReferralVTGReportDataRequest) (*ListReferralVTGReportDataResponse, error)
 	// Snapshot report: cumulative subordinates + period activity
@@ -405,6 +420,9 @@ func (UnimplementedReportServiceServer) ListSportEvents(context.Context, *v1.Lis
 }
 func (UnimplementedReportServiceServer) CustomerRecordReportDetail(context.Context, *v1.CustomerRecordReportDetailRequest) (*v1.CustomerRecordReportDetailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CustomerRecordReportDetail not implemented")
+}
+func (UnimplementedReportServiceServer) ExportGameData(context.Context, *ExportGameDataRequest) (*ExportGameDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportGameData not implemented")
 }
 func (UnimplementedReportServiceServer) ListReferralVTGReportData(context.Context, *ListReferralVTGReportDataRequest) (*ListReferralVTGReportDataResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListReferralVTGReportData not implemented")
@@ -715,6 +733,24 @@ func _ReportService_CustomerRecordReportDetail_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ReportService_ExportGameData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportGameDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReportServiceServer).ExportGameData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReportService_ExportGameData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReportServiceServer).ExportGameData(ctx, req.(*ExportGameDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ReportService_ListReferralVTGReportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListReferralVTGReportDataRequest)
 	if err := dec(in); err != nil {
@@ -889,6 +925,10 @@ var ReportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CustomerRecordReportDetail",
 			Handler:    _ReportService_CustomerRecordReportDetail_Handler,
+		},
+		{
+			MethodName: "ExportGameData",
+			Handler:    _ReportService_ExportGameData_Handler,
 		},
 		{
 			MethodName: "ListReferralVTGReportData",

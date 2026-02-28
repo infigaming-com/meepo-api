@@ -41,28 +41,64 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Campaign management service for backoffice (CRM marketing campaigns)
+// CRM marketing campaign management service for backoffice.
+// Provides campaign CRUD, workflow configuration, lifecycle control, manual triggering,
+// and execution tracking APIs.
+//
+// ## Campaign Lifecycle
+//
+// ```
+// DRAFT ──→ ACTIVE ──→ PAUSED ──→ ACTIVE (re-activate)
+//
+//	│          │          │
+//	│          ▼          ▼
+//	└──→ ARCHIVED ← COMPLETED
+//
+// ```
+//
+// ## Typical Usage Flow
+//
+// 1. **Create** a campaign via `CreateCrmCampaign`
+// 2. **Set workflow** via `SetCrmCampaignWorkflow` (YAML-based DAG definition)
+// 3. **Validate** workflow via `ValidateCrmCampaignWorkflow` (optional, also validated on set)
+// 4. **Activate** via `ActivateCrmCampaign` (requires valid workflow)
+// 5. Campaign runs automatically based on triggers (event, schedule, segment) or **manually** via `TriggerCrmCampaign`
+// 6. **Track** executions via `ListCrmCampaignExecutions` and `GetCrmCampaignExecutionSteps`
+// 7. **Pause** / **re-activate** / **archive** as needed
 type BackofficeCampaignClient interface {
-	// Campaign CRUD operations
+	// Create a new CRM campaign in DRAFT status.
 	CreateCrmCampaign(ctx context.Context, in *CreateCrmCampaignRequest, opts ...grpc.CallOption) (*v1.CreateCampaignResponse, error)
+	// Partially update an existing campaign. Only provided fields are modified. Campaign must be in DRAFT or PAUSED status.
 	UpdateCrmCampaign(ctx context.Context, in *UpdateCrmCampaignRequest, opts ...grpc.CallOption) (*v1.UpdateCampaignResponse, error)
+	// Get a single campaign by ID. Optionally includes the workflow definition.
 	GetCrmCampaign(ctx context.Context, in *GetCrmCampaignRequest, opts ...grpc.CallOption) (*v1.GetCampaignResponse, error)
+	// List campaigns with optional filtering by status and inheritance.
 	ListCrmCampaigns(ctx context.Context, in *ListCrmCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
+	// Delete a campaign. Must be in DRAFT or ARCHIVED status.
 	DeleteCrmCampaign(ctx context.Context, in *DeleteCrmCampaignRequest, opts ...grpc.CallOption) (*v1.DeleteCampaignResponse, error)
-	// Workflow management
+	// Set or replace the workflow definition for a campaign.
+	// The YAML is parsed, validated, and versioned. See SetCrmCampaignWorkflowRequest.workflow_yaml for the full YAML format.
 	SetCrmCampaignWorkflow(ctx context.Context, in *SetCrmCampaignWorkflowRequest, opts ...grpc.CallOption) (*v1.SetWorkflowResponse, error)
+	// Get the current workflow definition for a campaign.
 	GetCrmCampaignWorkflow(ctx context.Context, in *GetCrmCampaignWorkflowRequest, opts ...grpc.CallOption) (*v1.GetWorkflowResponse, error)
+	// Validate a workflow YAML without saving it. Returns validation errors if any.
 	ValidateCrmCampaignWorkflow(ctx context.Context, in *ValidateCrmCampaignWorkflowRequest, opts ...grpc.CallOption) (*v1.ValidateWorkflowResponse, error)
-	// Campaign control
+	// Activate a DRAFT campaign. Requires a valid workflow to be set.
+	// Once active, the campaign starts processing triggers automatically.
 	ActivateCrmCampaign(ctx context.Context, in *ActivateCrmCampaignRequest, opts ...grpc.CallOption) (*v1.ActivateCampaignResponse, error)
+	// Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 	PauseCrmCampaign(ctx context.Context, in *PauseCrmCampaignRequest, opts ...grpc.CallOption) (*v1.PauseCampaignResponse, error)
-	// Manual trigger
+	// Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
+	// See TriggerCrmCampaignRequest for details.
 	TriggerCrmCampaign(ctx context.Context, in *TriggerCrmCampaignRequest, opts ...grpc.CallOption) (*v1.TriggerCampaignResponse, error)
-	// Execution tracking
+	// Get a single execution record by ID.
 	GetCrmCampaignExecution(ctx context.Context, in *GetCrmCampaignExecutionRequest, opts ...grpc.CallOption) (*v1.GetExecutionResponse, error)
+	// List execution records with optional filtering by campaign, user, and status.
 	ListCrmCampaignExecutions(ctx context.Context, in *ListCrmCampaignExecutionsRequest, opts ...grpc.CallOption) (*v1.ListExecutionsResponse, error)
+	// Get the step-by-step execution log for a specific execution. Each step corresponds to a workflow node.
 	GetCrmCampaignExecutionSteps(ctx context.Context, in *GetCrmCampaignExecutionStepsRequest, opts ...grpc.CallOption) (*v1.GetExecutionStepsResponse, error)
-	// Workflow schema
+	// Get the workflow schema — all available triggers, actions, operators, and data sources.
+	// Use this to populate the workflow builder UI dynamically.
 	GetCrmCampaignWorkflowSchema(ctx context.Context, in *GetCrmCampaignWorkflowSchemaRequest, opts ...grpc.CallOption) (*v1.GetWorkflowSchemaResponse, error)
 }
 
@@ -228,28 +264,64 @@ func (c *backofficeCampaignClient) GetCrmCampaignWorkflowSchema(ctx context.Cont
 // All implementations must embed UnimplementedBackofficeCampaignServer
 // for forward compatibility.
 //
-// Campaign management service for backoffice (CRM marketing campaigns)
+// CRM marketing campaign management service for backoffice.
+// Provides campaign CRUD, workflow configuration, lifecycle control, manual triggering,
+// and execution tracking APIs.
+//
+// ## Campaign Lifecycle
+//
+// ```
+// DRAFT ──→ ACTIVE ──→ PAUSED ──→ ACTIVE (re-activate)
+//
+//	│          │          │
+//	│          ▼          ▼
+//	└──→ ARCHIVED ← COMPLETED
+//
+// ```
+//
+// ## Typical Usage Flow
+//
+// 1. **Create** a campaign via `CreateCrmCampaign`
+// 2. **Set workflow** via `SetCrmCampaignWorkflow` (YAML-based DAG definition)
+// 3. **Validate** workflow via `ValidateCrmCampaignWorkflow` (optional, also validated on set)
+// 4. **Activate** via `ActivateCrmCampaign` (requires valid workflow)
+// 5. Campaign runs automatically based on triggers (event, schedule, segment) or **manually** via `TriggerCrmCampaign`
+// 6. **Track** executions via `ListCrmCampaignExecutions` and `GetCrmCampaignExecutionSteps`
+// 7. **Pause** / **re-activate** / **archive** as needed
 type BackofficeCampaignServer interface {
-	// Campaign CRUD operations
+	// Create a new CRM campaign in DRAFT status.
 	CreateCrmCampaign(context.Context, *CreateCrmCampaignRequest) (*v1.CreateCampaignResponse, error)
+	// Partially update an existing campaign. Only provided fields are modified. Campaign must be in DRAFT or PAUSED status.
 	UpdateCrmCampaign(context.Context, *UpdateCrmCampaignRequest) (*v1.UpdateCampaignResponse, error)
+	// Get a single campaign by ID. Optionally includes the workflow definition.
 	GetCrmCampaign(context.Context, *GetCrmCampaignRequest) (*v1.GetCampaignResponse, error)
+	// List campaigns with optional filtering by status and inheritance.
 	ListCrmCampaigns(context.Context, *ListCrmCampaignsRequest) (*v1.ListCampaignsResponse, error)
+	// Delete a campaign. Must be in DRAFT or ARCHIVED status.
 	DeleteCrmCampaign(context.Context, *DeleteCrmCampaignRequest) (*v1.DeleteCampaignResponse, error)
-	// Workflow management
+	// Set or replace the workflow definition for a campaign.
+	// The YAML is parsed, validated, and versioned. See SetCrmCampaignWorkflowRequest.workflow_yaml for the full YAML format.
 	SetCrmCampaignWorkflow(context.Context, *SetCrmCampaignWorkflowRequest) (*v1.SetWorkflowResponse, error)
+	// Get the current workflow definition for a campaign.
 	GetCrmCampaignWorkflow(context.Context, *GetCrmCampaignWorkflowRequest) (*v1.GetWorkflowResponse, error)
+	// Validate a workflow YAML without saving it. Returns validation errors if any.
 	ValidateCrmCampaignWorkflow(context.Context, *ValidateCrmCampaignWorkflowRequest) (*v1.ValidateWorkflowResponse, error)
-	// Campaign control
+	// Activate a DRAFT campaign. Requires a valid workflow to be set.
+	// Once active, the campaign starts processing triggers automatically.
 	ActivateCrmCampaign(context.Context, *ActivateCrmCampaignRequest) (*v1.ActivateCampaignResponse, error)
+	// Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 	PauseCrmCampaign(context.Context, *PauseCrmCampaignRequest) (*v1.PauseCampaignResponse, error)
-	// Manual trigger
+	// Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
+	// See TriggerCrmCampaignRequest for details.
 	TriggerCrmCampaign(context.Context, *TriggerCrmCampaignRequest) (*v1.TriggerCampaignResponse, error)
-	// Execution tracking
+	// Get a single execution record by ID.
 	GetCrmCampaignExecution(context.Context, *GetCrmCampaignExecutionRequest) (*v1.GetExecutionResponse, error)
+	// List execution records with optional filtering by campaign, user, and status.
 	ListCrmCampaignExecutions(context.Context, *ListCrmCampaignExecutionsRequest) (*v1.ListExecutionsResponse, error)
+	// Get the step-by-step execution log for a specific execution. Each step corresponds to a workflow node.
 	GetCrmCampaignExecutionSteps(context.Context, *GetCrmCampaignExecutionStepsRequest) (*v1.GetExecutionStepsResponse, error)
-	// Workflow schema
+	// Get the workflow schema — all available triggers, actions, operators, and data sources.
+	// Use this to populate the workflow builder UI dynamically.
 	GetCrmCampaignWorkflowSchema(context.Context, *GetCrmCampaignWorkflowSchemaRequest) (*v1.GetWorkflowSchemaResponse, error)
 	mustEmbedUnimplementedBackofficeCampaignServer()
 }

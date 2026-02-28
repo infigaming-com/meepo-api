@@ -29,6 +29,7 @@ const OperationBackofficeWalletExportFICAThresholdTransactions = "/api.backoffic
 const OperationBackofficeWalletExportManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
 const OperationBackofficeWalletGenerateOneTimePromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GenerateOneTimePromoCodes"
 const OperationBackofficeWalletGenerateUniversalPromoCodes = "/api.backoffice.service.v1.BackofficeWallet/GenerateUniversalPromoCodes"
+const OperationBackofficeWalletGetAppDownloadRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetAppDownloadRewardConfig"
 const OperationBackofficeWalletGetDepositRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
@@ -56,6 +57,7 @@ const OperationBackofficeWalletOperatorBalanceRollback = "/api.backoffice.servic
 const OperationBackofficeWalletOperatorBalanceSettle = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
 const OperationBackofficeWalletOperatorSwap = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
 const OperationBackofficeWalletOperatorTransfer = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
+const OperationBackofficeWalletSetAppDownloadRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/SetAppDownloadRewardConfig"
 const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
 const OperationBackofficeWalletUpdateOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
@@ -84,6 +86,7 @@ type BackofficeWalletHTTPServer interface {
 	GenerateOneTimePromoCodes(context.Context, *GenerateOneTimePromoCodesRequest) (*v1.GenerateOneTimePromoCodesResponse, error)
 	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
 	GenerateUniversalPromoCodes(context.Context, *GenerateUniversalPromoCodesRequest) (*v1.GenerateUniversalPromoCodesResponse, error)
+	GetAppDownloadRewardConfig(context.Context, *GetAppDownloadRewardConfigRequest) (*v1.GetAppDownloadRewardConfigResponse, error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -134,6 +137,7 @@ type BackofficeWalletHTTPServer interface {
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
+	SetAppDownloadRewardConfig(context.Context, *SetAppDownloadRewardConfigRequest) (*v1.SetAppDownloadRewardConfigResponse, error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
@@ -175,6 +179,8 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/deposit-reward/sequences/set", _BackofficeWallet_SetDepositRewardSequences0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/deposit-reward/sequences/delete", _BackofficeWallet_DeleteDepositRewardSequences0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/deposit-reward/config/get", _BackofficeWallet_GetDepositRewardConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/app-download-reward/config/set", _BackofficeWallet_SetAppDownloadRewardConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/app-download-reward/config/get", _BackofficeWallet_GetAppDownloadRewardConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/create", _BackofficeWallet_CreatePromoCodeCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/update", _BackofficeWallet_UpdatePromoCodeCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/promo-code/campaign/status/update", _BackofficeWallet_UpdatePromoCodeCampaignStatus0_HTTP_Handler(srv))
@@ -659,6 +665,50 @@ func _BackofficeWallet_GetDepositRewardConfig0_HTTP_Handler(srv BackofficeWallet
 			return err
 		}
 		reply := out.(*v1.GetDepositRewardConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_SetAppDownloadRewardConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetAppDownloadRewardConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletSetAppDownloadRewardConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetAppDownloadRewardConfig(ctx, req.(*SetAppDownloadRewardConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetAppDownloadRewardConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_GetAppDownloadRewardConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAppDownloadRewardConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletGetAppDownloadRewardConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAppDownloadRewardConfig(ctx, req.(*GetAppDownloadRewardConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetAppDownloadRewardConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -1209,6 +1259,7 @@ type BackofficeWalletHTTPClient interface {
 	GenerateOneTimePromoCodes(ctx context.Context, req *GenerateOneTimePromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateOneTimePromoCodesResponse, err error)
 	// GenerateUniversalPromoCodes GenerateUniversalPromoCodes generates codes for a universal campaign
 	GenerateUniversalPromoCodes(ctx context.Context, req *GenerateUniversalPromoCodesRequest, opts ...http.CallOption) (rsp *v1.GenerateUniversalPromoCodesResponse, err error)
+	GetAppDownloadRewardConfig(ctx context.Context, req *GetAppDownloadRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetAppDownloadRewardConfigResponse, err error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
@@ -1259,6 +1310,7 @@ type BackofficeWalletHTTPClient interface {
 	OperatorSwap(ctx context.Context, req *OperatorSwapRequest, opts ...http.CallOption) (rsp *OperatorSwapResponse, err error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(ctx context.Context, req *OperatorTransferRequest, opts ...http.CallOption) (rsp *OperatorTransferResponse, err error)
+	SetAppDownloadRewardConfig(ctx context.Context, req *SetAppDownloadRewardConfigRequest, opts ...http.CallOption) (rsp *v1.SetAppDownloadRewardConfigResponse, err error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
 	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
@@ -1402,6 +1454,19 @@ func (c *BackofficeWalletHTTPClientImpl) GenerateUniversalPromoCodes(ctx context
 	pattern := "/v1/backoffice/wallet/promo-code/universal/codes/generate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGenerateUniversalPromoCodes))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) GetAppDownloadRewardConfig(ctx context.Context, in *GetAppDownloadRewardConfigRequest, opts ...http.CallOption) (*v1.GetAppDownloadRewardConfigResponse, error) {
+	var out v1.GetAppDownloadRewardConfigResponse
+	pattern := "/v1/backoffice/wallet/app-download-reward/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetAppDownloadRewardConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1776,6 +1841,19 @@ func (c *BackofficeWalletHTTPClientImpl) OperatorTransfer(ctx context.Context, i
 	pattern := "/v1/backoffice/wallet/operator/transfer"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorTransfer))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) SetAppDownloadRewardConfig(ctx context.Context, in *SetAppDownloadRewardConfigRequest, opts ...http.CallOption) (*v1.SetAppDownloadRewardConfigResponse, error) {
+	var out v1.SetAppDownloadRewardConfigResponse
+	pattern := "/v1/backoffice/wallet/app-download-reward/config/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletSetAppDownloadRewardConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

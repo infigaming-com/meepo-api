@@ -21,6 +21,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeReportCustomerRecordReportDetail = "/api.backoffice.service.v1.BackofficeReport/CustomerRecordReportDetail"
+const OperationBackofficeReportExportGameData = "/api.backoffice.service.v1.BackofficeReport/ExportGameData"
 const OperationBackofficeReportGetDepositSummaries = "/api.backoffice.service.v1.BackofficeReport/GetDepositSummaries"
 const OperationBackofficeReportGetGameDataSummary = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
 const OperationBackofficeReportGetPlayerGameDataSummary = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
@@ -44,6 +45,8 @@ const OperationBackofficeReportListWithdrawVtgDetails = "/api.backoffice.service
 
 type BackofficeReportHTTPServer interface {
 	CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error)
+	// ExportGameData ExportGameData creates an async game data export task
+	ExportGameData(context.Context, *ExportGameDataRequest) (*ExportGameDataResponse, error)
 	GetDepositSummaries(context.Context, *GetDepositSummariesRequest) (*GetDepositSummariesResponse, error)
 	GetGameDataSummary(context.Context, *GetGameSummaryRequest) (*GetGameSummaryResponse, error)
 	GetPlayerGameDataSummary(context.Context, *GetPlayerGameSummaryRequest) (*GetPlayerGameSummaryResponse, error)
@@ -97,6 +100,7 @@ func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTP
 	r.POST("/v1/backoffice/report/referral/lifetime/list", _BackofficeReport_ListReferralLifetimeReport0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/affiliate/vtg/list", _BackofficeReport_ListAffiliateVTGReport0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/affiliate/snapshot/list", _BackofficeReport_ListAffiliateSnapshotReport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/game-data/export", _BackofficeReport_ExportGameData0_HTTP_Handler(srv))
 }
 
 func _BackofficeReport_GetSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
@@ -561,8 +565,32 @@ func _BackofficeReport_ListAffiliateSnapshotReport0_HTTP_Handler(srv BackofficeR
 	}
 }
 
+func _BackofficeReport_ExportGameData0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportGameDataRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReportExportGameData)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportGameData(ctx, req.(*ExportGameDataRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ExportGameDataResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeReportHTTPClient interface {
 	CustomerRecordReportDetail(ctx context.Context, req *CustomerRecordReportDetailRequest, opts ...http.CallOption) (rsp *CustomerRecordReportDetailResponse, err error)
+	// ExportGameData ExportGameData creates an async game data export task
+	ExportGameData(ctx context.Context, req *ExportGameDataRequest, opts ...http.CallOption) (rsp *ExportGameDataResponse, err error)
 	GetDepositSummaries(ctx context.Context, req *GetDepositSummariesRequest, opts ...http.CallOption) (rsp *GetDepositSummariesResponse, err error)
 	GetGameDataSummary(ctx context.Context, req *GetGameSummaryRequest, opts ...http.CallOption) (rsp *GetGameSummaryResponse, err error)
 	GetPlayerGameDataSummary(ctx context.Context, req *GetPlayerGameSummaryRequest, opts ...http.CallOption) (rsp *GetPlayerGameSummaryResponse, err error)
@@ -606,6 +634,20 @@ func (c *BackofficeReportHTTPClientImpl) CustomerRecordReportDetail(ctx context.
 	pattern := "/v1/backoffice/report/customer-record/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportCustomerRecordReportDetail))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ExportGameData ExportGameData creates an async game data export task
+func (c *BackofficeReportHTTPClientImpl) ExportGameData(ctx context.Context, in *ExportGameDataRequest, opts ...http.CallOption) (*ExportGameDataResponse, error) {
+	var out ExportGameDataResponse
+	pattern := "/v1/backoffice/report/game-data/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReportExportGameData))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -47,6 +47,7 @@ const (
 	User_UpdateUser_FullMethodName                         = "/api.user.service.v1.User/UpdateUser"
 	User_UpdateUserIdentity_FullMethodName                 = "/api.user.service.v1.User/UpdateUserIdentity"
 	User_ListUsers_FullMethodName                          = "/api.user.service.v1.User/ListUsers"
+	User_ExportUsers_FullMethodName                        = "/api.user.service.v1.User/ExportUsers"
 	User_CreateUser_FullMethodName                         = "/api.user.service.v1.User/CreateUser"
 	User_VerifyEmail_FullMethodName                        = "/api.user.service.v1.User/VerifyEmail"
 	User_AddComment_FullMethodName                         = "/api.user.service.v1.User/AddComment"
@@ -141,6 +142,7 @@ const (
 	User_GetTelegramLoginInfo_FullMethodName               = "/api.user.service.v1.User/GetTelegramLoginInfo"
 	User_GetRewardHistory_FullMethodName                   = "/api.user.service.v1.User/GetRewardHistory"
 	User_ListUserFreeRewards_FullMethodName                = "/api.user.service.v1.User/ListUserFreeRewards"
+	User_ListUserSessionActivities_FullMethodName          = "/api.user.service.v1.User/ListUserSessionActivities"
 )
 
 // UserClient is the client API for User service.
@@ -207,6 +209,7 @@ type UserClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...grpc.CallOption) (*UpdateUserIdentityResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
@@ -362,6 +365,8 @@ type UserClient interface {
 	GetRewardHistory(ctx context.Context, in *GetRewardHistoryRequest, opts ...grpc.CallOption) (*GetRewardHistoryResponse, error)
 	// List user free rewards (free spins + free bets) from wallet service
 	ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v11.ListUserFreeRewardsResponse, error)
+	// List user session activities (daily_visit, ip_change, device_change)
+	ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*ListUserSessionActivitiesResponse, error)
 }
 
 type userClient struct {
@@ -626,6 +631,16 @@ func (c *userClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
 	err := c.cc.Invoke(ctx, User_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ExportUsers(ctx context.Context, in *ExportUsersRequest, opts ...grpc.CallOption) (*ExportUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUsersResponse)
+	err := c.cc.Invoke(ctx, User_ExportUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1572,6 +1587,16 @@ func (c *userClient) ListUserFreeRewards(ctx context.Context, in *ListUserFreeRe
 	return out, nil
 }
 
+func (c *userClient) ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*ListUserSessionActivitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserSessionActivitiesResponse)
+	err := c.cc.Invoke(ctx, User_ListUserSessionActivities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1636,6 +1661,7 @@ type UserServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
@@ -1791,6 +1817,8 @@ type UserServer interface {
 	GetRewardHistory(context.Context, *GetRewardHistoryRequest) (*GetRewardHistoryResponse, error)
 	// List user free rewards (free spins + free bets) from wallet service
 	ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error)
+	// List user session activities (daily_visit, ip_change, device_change)
+	ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1878,6 +1906,9 @@ func (UnimplementedUserServer) UpdateUserIdentity(context.Context, *UpdateUserId
 }
 func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedUserServer) ExportUsers(context.Context, *ExportUsersRequest) (*ExportUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportUsers not implemented")
 }
 func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateUser not implemented")
@@ -2160,6 +2191,9 @@ func (UnimplementedUserServer) GetRewardHistory(context.Context, *GetRewardHisto
 }
 func (UnimplementedUserServer) ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserFreeRewards not implemented")
+}
+func (UnimplementedUserServer) ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListUserSessionActivities not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2646,6 +2680,24 @@ func _User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ExportUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ExportUsers(ctx, req.(*ExportUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4342,6 +4394,24 @@ func _User_ListUserFreeRewards_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListUserSessionActivities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserSessionActivitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListUserSessionActivities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListUserSessionActivities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListUserSessionActivities(ctx, req.(*ListUserSessionActivitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4452,6 +4522,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUsers",
 			Handler:    _User_ListUsers_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _User_ExportUsers_Handler,
 		},
 		{
 			MethodName: "CreateUser",
@@ -4828,6 +4902,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserFreeRewards",
 			Handler:    _User_ListUserFreeRewards_Handler,
+		},
+		{
+			MethodName: "ListUserSessionActivities",
+			Handler:    _User_ListUserSessionActivities_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

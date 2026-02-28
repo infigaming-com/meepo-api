@@ -157,6 +157,19 @@ service BackofficeWallet {
 		};
 	}
 
+	rpc SetAppDownloadRewardConfig(SetAppDownloadRewardConfigRequest) returns (wallet.service.v1.SetAppDownloadRewardConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/app-download-reward/config/set"
+			body: "*"
+		};
+	}
+	rpc GetAppDownloadRewardConfig(GetAppDownloadRewardConfigRequest) returns (wallet.service.v1.GetAppDownloadRewardConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/app-download-reward/config/get"
+			body: "*"
+		};
+	}
+
 	// CreatePromoCodeCampaign creates a new promo code campaign
 	rpc CreatePromoCodeCampaign(CreatePromoCodeCampaignRequest) returns (wallet.service.v1.CreatePromoCodeCampaignResponse) {
 		option (google.api.http) = {
@@ -890,4 +903,25 @@ message ManualAdjustCreditTurnoverFieldRequest {
 	// direction: "add", "subtract"
 	string direction = 5;
 	string value = 6; // Adjustment value (positive number)
+}
+
+// ============================================
+// App Download Reward Config
+// ============================================
+
+// Backoffice request to set the app download reward config for a target operator.
+// Initiator operator context is injected from the backoffice auth middleware.
+message SetAppDownloadRewardConfigRequest {
+	// The target operator whose config is being set.
+	api.common.OperatorContext target_operator_context = 1;
+	// Operator-level toggle. When true, the operator inherits the parent's config list.
+	optional bool follow_parent = 2;
+	// Full list of country entries. Replaces all existing entries for this operator.
+	repeated wallet.service.v1.AppDownloadRewardConfigItem configs = 3;
+}
+
+// Backoffice request to get the app download reward config for a target operator.
+message GetAppDownloadRewardConfigRequest {
+	// The target operator whose config is being queried.
+	api.common.OperatorContext target_operator_context = 1;
 }

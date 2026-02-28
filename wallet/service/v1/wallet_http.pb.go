@@ -21,8 +21,10 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationWalletAddResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
 const OperationWalletBonusTransfer = "/api.wallet.service.v1.Wallet/BonusTransfer"
+const OperationWalletClaimAppDownloadReward = "/api.wallet.service.v1.Wallet/ClaimAppDownloadReward"
 const OperationWalletClaimPromoCode = "/api.wallet.service.v1.Wallet/ClaimPromoCode"
 const OperationWalletDeleteResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
+const OperationWalletGetAppDownloadRewardStatus = "/api.wallet.service.v1.Wallet/GetAppDownloadRewardStatus"
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
 const OperationWalletGetExchangeRatesWithBaseCurrency = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 const OperationWalletGetPromoCodeInfo = "/api.wallet.service.v1.Wallet/GetPromoCodeInfo"
@@ -37,10 +39,17 @@ type WalletHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
 	// BonusTransfer BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
+	// ClaimAppDownloadReward ClaimAppDownloadReward claims the app download reward for the current player.
+	// The reward is determined by the player's country (from CF-IPCountry header)
+	// and the operator's effective app download reward config.
+	ClaimAppDownloadReward(context.Context, *ClaimAppDownloadRewardRequest) (*ClaimAppDownloadRewardResponse, error)
 	// ClaimPromoCode ClaimPromoCode claims promo code reward for the current user
 	ClaimPromoCode(context.Context, *ClaimPromoCodeRequest) (*ClaimPromoCodeResponse, error)
 	// DeleteResponsibleGamblingConfig DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	// GetAppDownloadRewardStatus GetAppDownloadRewardStatus returns whether the current user is eligible
+	// for the app download reward and the reward details for their country.
+	GetAppDownloadRewardStatus(context.Context, *GetAppDownloadRewardStatusRequest) (*GetAppDownloadRewardStatusResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
@@ -63,6 +72,8 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/balance/details", _Wallet_GetUserBalanceDetails0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/exchange-rates/base-currency", _Wallet_GetExchangeRatesWithBaseCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/app-download-reward/claim", _Wallet_ClaimAppDownloadReward0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/app-download-reward/status", _Wallet_GetAppDownloadRewardStatus0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/promo-code/info", _Wallet_GetPromoCodeInfo0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/promo-code/claim", _Wallet_ClaimPromoCode0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/deposit-reward/user-sequence", _Wallet_GetUserDepositRewardSequence0_HTTP_Handler(srv))
@@ -157,6 +168,50 @@ func _Wallet_GetCurrencies0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Con
 			return err
 		}
 		reply := out.(*GetCurrenciesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_ClaimAppDownloadReward0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ClaimAppDownloadRewardRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletClaimAppDownloadReward)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ClaimAppDownloadReward(ctx, req.(*ClaimAppDownloadRewardRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ClaimAppDownloadRewardResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_GetAppDownloadRewardStatus0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetAppDownloadRewardStatusRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetAppDownloadRewardStatus)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetAppDownloadRewardStatus(ctx, req.(*GetAppDownloadRewardStatusRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetAppDownloadRewardStatusResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -342,10 +397,17 @@ type WalletHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BonusTransfer BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(ctx context.Context, req *BonusTransferRequest, opts ...http.CallOption) (rsp *BonusTransferResponse, err error)
+	// ClaimAppDownloadReward ClaimAppDownloadReward claims the app download reward for the current player.
+	// The reward is determined by the player's country (from CF-IPCountry header)
+	// and the operator's effective app download reward config.
+	ClaimAppDownloadReward(ctx context.Context, req *ClaimAppDownloadRewardRequest, opts ...http.CallOption) (rsp *ClaimAppDownloadRewardResponse, err error)
 	// ClaimPromoCode ClaimPromoCode claims promo code reward for the current user
 	ClaimPromoCode(ctx context.Context, req *ClaimPromoCodeRequest, opts ...http.CallOption) (rsp *ClaimPromoCodeResponse, err error)
 	// DeleteResponsibleGamblingConfig DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
+	// GetAppDownloadRewardStatus GetAppDownloadRewardStatus returns whether the current user is eligible
+	// for the app download reward and the reward details for their country.
+	GetAppDownloadRewardStatus(ctx context.Context, req *GetAppDownloadRewardStatusRequest, opts ...http.CallOption) (rsp *GetAppDownloadRewardStatusResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
 	GetExchangeRatesWithBaseCurrency(ctx context.Context, req *GetExchangeRatesWithBaseCurrencyRequest, opts ...http.CallOption) (rsp *GetExchangeRatesWithBaseCurrencyResponse, err error)
 	// GetPromoCodeInfo GetPromoCodeInfo returns promo code information and validates conditions for the current user
@@ -398,6 +460,22 @@ func (c *WalletHTTPClientImpl) BonusTransfer(ctx context.Context, in *BonusTrans
 	return &out, nil
 }
 
+// ClaimAppDownloadReward ClaimAppDownloadReward claims the app download reward for the current player.
+// The reward is determined by the player's country (from CF-IPCountry header)
+// and the operator's effective app download reward config.
+func (c *WalletHTTPClientImpl) ClaimAppDownloadReward(ctx context.Context, in *ClaimAppDownloadRewardRequest, opts ...http.CallOption) (*ClaimAppDownloadRewardResponse, error) {
+	var out ClaimAppDownloadRewardResponse
+	pattern := "/v1/wallet/app-download-reward/claim"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletClaimAppDownloadReward))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // ClaimPromoCode ClaimPromoCode claims promo code reward for the current user
 func (c *WalletHTTPClientImpl) ClaimPromoCode(ctx context.Context, in *ClaimPromoCodeRequest, opts ...http.CallOption) (*ClaimPromoCodeResponse, error) {
 	var out ClaimPromoCodeResponse
@@ -418,6 +496,21 @@ func (c *WalletHTTPClientImpl) DeleteResponsibleGamblingConfig(ctx context.Conte
 	pattern := "/v1/wallet/responsible-gambling/config/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletDeleteResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetAppDownloadRewardStatus GetAppDownloadRewardStatus returns whether the current user is eligible
+// for the app download reward and the reward details for their country.
+func (c *WalletHTTPClientImpl) GetAppDownloadRewardStatus(ctx context.Context, in *GetAppDownloadRewardStatusRequest, opts ...http.CallOption) (*GetAppDownloadRewardStatusResponse, error) {
+	var out GetAppDownloadRewardStatusResponse
+	pattern := "/v1/wallet/app-download-reward/status"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetAppDownloadRewardStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

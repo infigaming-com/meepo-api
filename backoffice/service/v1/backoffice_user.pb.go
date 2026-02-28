@@ -2107,6 +2107,370 @@ func (x *UserIdentityListRequest) GetOperatorContextFilters() *common.OperatorCo
 	return nil
 }
 
+type ListUserSessionActivitiesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	EventType     *string                `protobuf:"bytes,2,opt,name=event_type,json=eventType,proto3,oneof" json:"event_type,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserSessionActivitiesRequest) Reset() {
+	*x = ListUserSessionActivitiesRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserSessionActivitiesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserSessionActivitiesRequest) ProtoMessage() {}
+
+func (x *ListUserSessionActivitiesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserSessionActivitiesRequest.ProtoReflect.Descriptor instead.
+func (*ListUserSessionActivitiesRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListUserSessionActivitiesRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListUserSessionActivitiesRequest) GetEventType() string {
+	if x != nil && x.EventType != nil {
+		return *x.EventType
+	}
+	return ""
+}
+
+func (x *ListUserSessionActivitiesRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListUserSessionActivitiesRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListUserSessionActivitiesRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListUserSessionActivitiesRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ExportUsersRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	UserId                 *int64                         `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	RegistrationStartTime  *timestamppb.Timestamp         `protobuf:"bytes,3,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
+	RegistrationEndTime    *timestamppb.Timestamp         `protobuf:"bytes,4,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
+	VipLevel               *string                        `protobuf:"bytes,5,opt,name=vip_level,json=vipLevel,proto3,oneof" json:"vip_level,omitempty"`
+	Country                *string                        `protobuf:"bytes,6,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	KycLevel               *int32                         `protobuf:"varint,7,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	DepositMin             *string                        `protobuf:"bytes,8,opt,name=deposit_min,json=depositMin,proto3,oneof" json:"deposit_min,omitempty"`
+	DepositMax             *string                        `protobuf:"bytes,9,opt,name=deposit_max,json=depositMax,proto3,oneof" json:"deposit_max,omitempty"`
+	WithdrawalMin          *string                        `protobuf:"bytes,10,opt,name=withdrawal_min,json=withdrawalMin,proto3,oneof" json:"withdrawal_min,omitempty"`
+	WithdrawalMax          *string                        `protobuf:"bytes,11,opt,name=withdrawal_max,json=withdrawalMax,proto3,oneof" json:"withdrawal_max,omitempty"`
+	BanWithdraw            *bool                          `protobuf:"varint,12,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	BanGame                *bool                          `protobuf:"varint,13,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanLogin               *bool                          `protobuf:"varint,14,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	Online                 *bool                          `protobuf:"varint,17,opt,name=online,proto3,oneof" json:"online,omitempty"`
+	Enabled                *bool                          `protobuf:"varint,18,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Email                  *string                        `protobuf:"bytes,19,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	Mobile                 *string                        `protobuf:"bytes,20,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,23,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	RegistrationIp         *string                        `protobuf:"bytes,24,opt,name=registration_ip,json=registrationIp,proto3,oneof" json:"registration_ip,omitempty"`
+	LoginIp                *string                        `protobuf:"bytes,25,opt,name=login_ip,json=loginIp,proto3,oneof" json:"login_ip,omitempty"`
+	TargetOperatorContext  *common.OperatorContext        `protobuf:"bytes,26,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	RegistrationSource     *string                        `protobuf:"bytes,27,opt,name=registration_source,json=registrationSource,proto3,oneof" json:"registration_source,omitempty"`
+	AgentType              *string                        `protobuf:"bytes,28,opt,name=agent_type,json=agentType,proto3,oneof" json:"agent_type,omitempty"`
+	Format                 string                         `protobuf:"bytes,30,opt,name=format,proto3" json:"format,omitempty"` // "csv", "excel", "pdf"
+	TimeZone               string                         `protobuf:"bytes,31,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ExportUsersRequest) Reset() {
+	*x = ExportUsersRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportUsersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportUsersRequest) ProtoMessage() {}
+
+func (x *ExportUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportUsersRequest.ProtoReflect.Descriptor instead.
+func (*ExportUsersRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ExportUsersRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ExportUsersRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationStartTime
+	}
+	return nil
+}
+
+func (x *ExportUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationEndTime
+	}
+	return nil
+}
+
+func (x *ExportUsersRequest) GetVipLevel() string {
+	if x != nil && x.VipLevel != nil {
+		return *x.VipLevel
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetKycLevel() int32 {
+	if x != nil && x.KycLevel != nil {
+		return *x.KycLevel
+	}
+	return 0
+}
+
+func (x *ExportUsersRequest) GetDepositMin() string {
+	if x != nil && x.DepositMin != nil {
+		return *x.DepositMin
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetDepositMax() string {
+	if x != nil && x.DepositMax != nil {
+		return *x.DepositMax
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetWithdrawalMin() string {
+	if x != nil && x.WithdrawalMin != nil {
+		return *x.WithdrawalMin
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetWithdrawalMax() string {
+	if x != nil && x.WithdrawalMax != nil {
+		return *x.WithdrawalMax
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetBanWithdraw() bool {
+	if x != nil && x.BanWithdraw != nil {
+		return *x.BanWithdraw
+	}
+	return false
+}
+
+func (x *ExportUsersRequest) GetBanGame() bool {
+	if x != nil && x.BanGame != nil {
+		return *x.BanGame
+	}
+	return false
+}
+
+func (x *ExportUsersRequest) GetBanLogin() bool {
+	if x != nil && x.BanLogin != nil {
+		return *x.BanLogin
+	}
+	return false
+}
+
+func (x *ExportUsersRequest) GetOnline() bool {
+	if x != nil && x.Online != nil {
+		return *x.Online
+	}
+	return false
+}
+
+func (x *ExportUsersRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *ExportUsersRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetMobile() string {
+	if x != nil && x.Mobile != nil {
+		return *x.Mobile
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ExportUsersRequest) GetRegistrationIp() string {
+	if x != nil && x.RegistrationIp != nil {
+		return *x.RegistrationIp
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetLoginIp() string {
+	if x != nil && x.LoginIp != nil {
+		return *x.LoginIp
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ExportUsersRequest) GetRegistrationSource() string {
+	if x != nil && x.RegistrationSource != nil {
+		return *x.RegistrationSource
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetAgentType() string {
+	if x != nil && x.AgentType != nil {
+		return *x.AgentType
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetFormat() string {
+	if x != nil {
+		return x.Format
+	}
+	return ""
+}
+
+func (x *ExportUsersRequest) GetTimeZone() string {
+	if x != nil {
+		return x.TimeZone
+	}
+	return ""
+}
+
+type ExportUsersResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExportUsersResponse) Reset() {
+	*x = ExportUsersResponse{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportUsersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportUsersResponse) ProtoMessage() {}
+
+func (x *ExportUsersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportUsersResponse.ProtoReflect.Descriptor instead.
+func (*ExportUsersResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ExportUsersResponse) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
 type ListUsersResponse_User struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
 	OperatorName              string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
@@ -2144,7 +2508,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2156,7 +2520,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2368,7 +2732,7 @@ type GetUserOverviewResponse_GameData struct {
 
 func (x *GetUserOverviewResponse_GameData) Reset() {
 	*x = GetUserOverviewResponse_GameData{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2380,7 +2744,7 @@ func (x *GetUserOverviewResponse_GameData) String() string {
 func (*GetUserOverviewResponse_GameData) ProtoMessage() {}
 
 func (x *GetUserOverviewResponse_GameData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2449,7 +2813,7 @@ type ListUserCommentsResponse_Comment struct {
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
 	*x = ListUserCommentsResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2461,7 +2825,7 @@ func (x *ListUserCommentsResponse_Comment) String() string {
 func (*ListUserCommentsResponse_Comment) ProtoMessage() {}
 
 func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2773,7 +3137,82 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\b_user_idB\t\n" +
 	"\a_statusB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time2\xff\x18\n" +
+	"\t_end_time\"\xd8\x02\n" +
+	" ListUserSessionActivitiesRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\"\n" +
+	"\n" +
+	"event_type\x18\x02 \x01(\tH\x00R\teventType\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\r\n" +
+	"\v_event_typeB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xa5\v\n" +
+	"\x12ExportUsersRequest\x12\x1c\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12W\n" +
+	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
+	"\x15registration_end_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x13registrationEndTime\x88\x01\x01\x12 \n" +
+	"\tvip_level\x18\x05 \x01(\tH\x03R\bvipLevel\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x06 \x01(\tH\x04R\acountry\x88\x01\x01\x12 \n" +
+	"\tkyc_level\x18\a \x01(\x05H\x05R\bkycLevel\x88\x01\x01\x12$\n" +
+	"\vdeposit_min\x18\b \x01(\tH\x06R\n" +
+	"depositMin\x88\x01\x01\x12$\n" +
+	"\vdeposit_max\x18\t \x01(\tH\aR\n" +
+	"depositMax\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_min\x18\n" +
+	" \x01(\tH\bR\rwithdrawalMin\x88\x01\x01\x12*\n" +
+	"\x0ewithdrawal_max\x18\v \x01(\tH\tR\rwithdrawalMax\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\f \x01(\bH\n" +
+	"R\vbanWithdraw\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\r \x01(\bH\vR\abanGame\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x0e \x01(\bH\fR\bbanLogin\x88\x01\x01\x12\x1b\n" +
+	"\x06online\x18\x11 \x01(\bH\rR\x06online\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x12 \x01(\bH\x0eR\aenabled\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x13 \x01(\tH\x0fR\x05email\x88\x01\x01\x12\x1b\n" +
+	"\x06mobile\x18\x14 \x01(\tH\x10R\x06mobile\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x17 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12,\n" +
+	"\x0fregistration_ip\x18\x18 \x01(\tH\x11R\x0eregistrationIp\x88\x01\x01\x12\x1e\n" +
+	"\blogin_ip\x18\x19 \x01(\tH\x12R\aloginIp\x88\x01\x01\x12S\n" +
+	"\x17target_operator_context\x18\x1a \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x124\n" +
+	"\x13registration_source\x18\x1b \x01(\tH\x13R\x12registrationSource\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"agent_type\x18\x1c \x01(\tH\x14R\tagentType\x88\x01\x01\x12\x16\n" +
+	"\x06format\x18\x1e \x01(\tR\x06format\x12\x1b\n" +
+	"\ttime_zone\x18\x1f \x01(\tR\btimeZoneB\n" +
+	"\n" +
+	"\b_user_idB\x1a\n" +
+	"\x18_registration_start_timeB\x18\n" +
+	"\x16_registration_end_timeB\f\n" +
+	"\n" +
+	"_vip_levelB\n" +
+	"\n" +
+	"\b_countryB\f\n" +
+	"\n" +
+	"_kyc_levelB\x0e\n" +
+	"\f_deposit_minB\x0e\n" +
+	"\f_deposit_maxB\x11\n" +
+	"\x0f_withdrawal_minB\x11\n" +
+	"\x0f_withdrawal_maxB\x0f\n" +
+	"\r_ban_withdrawB\v\n" +
+	"\t_ban_gameB\f\n" +
+	"\n" +
+	"_ban_loginB\t\n" +
+	"\a_onlineB\n" +
+	"\n" +
+	"\b_enabledB\b\n" +
+	"\x06_emailB\t\n" +
+	"\a_mobileB\x12\n" +
+	"\x10_registration_ipB\v\n" +
+	"\t_login_ipB\x16\n" +
+	"\x14_registration_sourceB\r\n" +
+	"\v_agent_type\".\n" +
+	"\x13ExportUsersResponse\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId2\xe0\x1b\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\x9b\x01\n" +
@@ -2793,7 +3232,9 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	" GetUserResponsibleGamblingConfig\x12B.api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest\x1a9.api.user.service.v1.GetResponsibleGamblingConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/user/responsible-gambling/config/get\x12\xa5\x01\n" +
 	"\x11UserIdentityAudit\x123.api.backoffice.service.v1.UserIdentityAuditRequest\x1a..api.user.service.v1.UserIdentityAuditResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/identity/set\x12\xa7\x01\n" +
 	"\x10UserIdentityList\x122.api.backoffice.service.v1.UserIdentityListRequest\x1a-.api.user.service.v1.UserIdentityListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/user/identity/list/get\x12\xa2\x01\n" +
-	"\x0ePreLaunchCheck\x12*.api.user.service.v1.PreLaunchCheckRequest\x1a+.api.user.service.v1.PreLaunchCheckResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/user/operator/prelaunch/checkB[\n" +
+	"\x0ePreLaunchCheck\x12*.api.user.service.v1.PreLaunchCheckRequest\x1a+.api.user.service.v1.PreLaunchCheckResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/user/operator/prelaunch/check\x12\xc8\x01\n" +
+	"\x19ListUserSessionActivities\x12;.api.backoffice.service.v1.ListUserSessionActivitiesRequest\x1a6.api.user.service.v1.ListUserSessionActivitiesResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/user/session-activities/list\x12\x93\x01\n" +
+	"\vExportUsers\x12-.api.backoffice.service.v1.ExportUsersRequest\x1a..api.backoffice.service.v1.ExportUsersResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/backoffice/user/exportB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2808,7 +3249,7 @@ func file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*ListUsersRequest)(nil),                           // 0: api.backoffice.service.v1.ListUsersRequest
 	(*ListUsersResponse)(nil),                          // 1: api.backoffice.service.v1.ListUsersResponse
@@ -2839,78 +3280,92 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*GetUserResponsibleGamblingConfigRequest)(nil),    // 26: api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest
 	(*UserIdentityAuditRequest)(nil),                   // 27: api.backoffice.service.v1.UserIdentityAuditRequest
 	(*UserIdentityListRequest)(nil),                    // 28: api.backoffice.service.v1.UserIdentityListRequest
-	(*ListUsersResponse_User)(nil),                     // 29: api.backoffice.service.v1.ListUsersResponse.User
-	(*GetUserOverviewResponse_GameData)(nil),           // 30: api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	(*ListUserCommentsResponse_Comment)(nil),           // 31: api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	(*timestamppb.Timestamp)(nil),                      // 32: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),              // 33: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                     // 34: api.common.OperatorContext
-	(*v1.UserIdentityRequest)(nil),                     // 35: api.user.service.v1.UserIdentityRequest
-	(*v1.PreLaunchCheckRequest)(nil),                   // 36: api.user.service.v1.PreLaunchCheckRequest
-	(*v1.GetUserProfileResponse)(nil),                  // 37: api.user.service.v1.GetUserProfileResponse
-	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 38: api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	(*v1.GetResponsibleGamblingConfigResponse)(nil),    // 39: api.user.service.v1.GetResponsibleGamblingConfigResponse
-	(*v1.UserIdentityAuditResponse)(nil),               // 40: api.user.service.v1.UserIdentityAuditResponse
-	(*v1.UserIdentityListResponse)(nil),                // 41: api.user.service.v1.UserIdentityListResponse
-	(*v1.PreLaunchCheckResponse)(nil),                  // 42: api.user.service.v1.PreLaunchCheckResponse
+	(*ListUserSessionActivitiesRequest)(nil),           // 29: api.backoffice.service.v1.ListUserSessionActivitiesRequest
+	(*ExportUsersRequest)(nil),                         // 30: api.backoffice.service.v1.ExportUsersRequest
+	(*ExportUsersResponse)(nil),                        // 31: api.backoffice.service.v1.ExportUsersResponse
+	(*ListUsersResponse_User)(nil),                     // 32: api.backoffice.service.v1.ListUsersResponse.User
+	(*GetUserOverviewResponse_GameData)(nil),           // 33: api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	(*ListUserCommentsResponse_Comment)(nil),           // 34: api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	(*timestamppb.Timestamp)(nil),                      // 35: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),              // 36: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                     // 37: api.common.OperatorContext
+	(*v1.UserIdentityRequest)(nil),                     // 38: api.user.service.v1.UserIdentityRequest
+	(*v1.PreLaunchCheckRequest)(nil),                   // 39: api.user.service.v1.PreLaunchCheckRequest
+	(*v1.GetUserProfileResponse)(nil),                  // 40: api.user.service.v1.GetUserProfileResponse
+	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 41: api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	(*v1.GetResponsibleGamblingConfigResponse)(nil),    // 42: api.user.service.v1.GetResponsibleGamblingConfigResponse
+	(*v1.UserIdentityAuditResponse)(nil),               // 43: api.user.service.v1.UserIdentityAuditResponse
+	(*v1.UserIdentityListResponse)(nil),                // 44: api.user.service.v1.UserIdentityListResponse
+	(*v1.PreLaunchCheckResponse)(nil),                  // 45: api.user.service.v1.PreLaunchCheckResponse
+	(*v1.ListUserSessionActivitiesResponse)(nil),       // 46: api.user.service.v1.ListUserSessionActivitiesResponse
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	32, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	32, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	33, // 2: api.backoffice.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 3: api.backoffice.service.v1.ListUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
-	29, // 4: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	30, // 5: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	31, // 6: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	35, // 7: api.backoffice.service.v1.UpdateUserRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
-	32, // 8: api.backoffice.service.v1.UpdateUserRequest.bod:type_name -> google.protobuf.Timestamp
-	32, // 9: api.backoffice.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
-	32, // 10: api.backoffice.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
-	33, // 11: api.backoffice.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 12: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	32, // 13: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	32, // 14: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 15: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	2,  // 16: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	4,  // 17: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	5,  // 18: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	7,  // 19: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	9,  // 20: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	11, // 21: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	13, // 22: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	15, // 23: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
-	17, // 24: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	19, // 25: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
-	21, // 26: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
-	23, // 27: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
-	25, // 28: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest
-	26, // 29: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest
-	27, // 30: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:input_type -> api.backoffice.service.v1.UserIdentityAuditRequest
-	28, // 31: api.backoffice.service.v1.BackofficeUser.UserIdentityList:input_type -> api.backoffice.service.v1.UserIdentityListRequest
-	36, // 32: api.backoffice.service.v1.BackofficeUser.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
-	1,  // 33: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 34: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	37, // 35: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
-	6,  // 36: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	8,  // 37: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	10, // 38: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	12, // 39: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	14, // 40: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	16, // 41: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
-	18, // 42: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	20, // 43: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
-	22, // 44: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
-	24, // 45: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
-	38, // 46: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	39, // 47: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
-	40, // 48: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
-	41, // 49: api.backoffice.service.v1.BackofficeUser.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
-	42, // 50: api.backoffice.service.v1.BackofficeUser.PreLaunchCheck:output_type -> api.user.service.v1.PreLaunchCheckResponse
-	33, // [33:51] is the sub-list for method output_type
-	15, // [15:33] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	35, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	35, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	36, // 2: api.backoffice.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	37, // 3: api.backoffice.service.v1.ListUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	32, // 4: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	33, // 5: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	34, // 6: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	38, // 7: api.backoffice.service.v1.UpdateUserRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
+	35, // 8: api.backoffice.service.v1.UpdateUserRequest.bod:type_name -> google.protobuf.Timestamp
+	35, // 9: api.backoffice.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
+	35, // 10: api.backoffice.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
+	36, // 11: api.backoffice.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	35, // 12: api.backoffice.service.v1.ListUserSessionActivitiesRequest.start_time:type_name -> google.protobuf.Timestamp
+	35, // 13: api.backoffice.service.v1.ListUserSessionActivitiesRequest.end_time:type_name -> google.protobuf.Timestamp
+	35, // 14: api.backoffice.service.v1.ExportUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	35, // 15: api.backoffice.service.v1.ExportUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	36, // 16: api.backoffice.service.v1.ExportUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	37, // 17: api.backoffice.service.v1.ExportUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	35, // 18: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	35, // 19: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	35, // 20: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 21: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 22: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 23: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	5,  // 24: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	7,  // 25: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	9,  // 26: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	11, // 27: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	13, // 28: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	15, // 29: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
+	17, // 30: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	19, // 31: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
+	21, // 32: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
+	23, // 33: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
+	25, // 34: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest
+	26, // 35: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest
+	27, // 36: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:input_type -> api.backoffice.service.v1.UserIdentityAuditRequest
+	28, // 37: api.backoffice.service.v1.BackofficeUser.UserIdentityList:input_type -> api.backoffice.service.v1.UserIdentityListRequest
+	39, // 38: api.backoffice.service.v1.BackofficeUser.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
+	29, // 39: api.backoffice.service.v1.BackofficeUser.ListUserSessionActivities:input_type -> api.backoffice.service.v1.ListUserSessionActivitiesRequest
+	30, // 40: api.backoffice.service.v1.BackofficeUser.ExportUsers:input_type -> api.backoffice.service.v1.ExportUsersRequest
+	1,  // 41: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 42: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	40, // 43: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	6,  // 44: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	8,  // 45: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	10, // 46: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	12, // 47: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	14, // 48: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	16, // 49: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
+	18, // 50: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	20, // 51: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
+	22, // 52: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
+	24, // 53: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
+	41, // 54: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	42, // 55: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
+	43, // 56: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
+	44, // 57: api.backoffice.service.v1.BackofficeUser.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
+	45, // 58: api.backoffice.service.v1.BackofficeUser.PreLaunchCheck:output_type -> api.user.service.v1.PreLaunchCheckResponse
+	46, // 59: api.backoffice.service.v1.BackofficeUser.ListUserSessionActivities:output_type -> api.user.service.v1.ListUserSessionActivitiesResponse
+	31, // 60: api.backoffice.service.v1.BackofficeUser.ExportUsers:output_type -> api.backoffice.service.v1.ExportUsersResponse
+	41, // [41:61] is the sub-list for method output_type
+	21, // [21:41] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }
@@ -2923,13 +3378,15 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[4].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[11].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[28].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[29].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[30].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_user_proto_rawDesc), len(file_backoffice_service_v1_backoffice_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

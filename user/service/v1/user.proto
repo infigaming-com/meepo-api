@@ -172,6 +172,8 @@ service User {
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
+	rpc ExportUsers(ExportUsersRequest) returns (ExportUsersResponse) {}
+
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 
 	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
@@ -558,6 +560,9 @@ service User {
 			body: "*"
 		};
 	}
+
+	// List user session activities (daily_visit, ip_change, device_change)
+	rpc ListUserSessionActivities(ListUserSessionActivitiesRequest) returns (ListUserSessionActivitiesResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1108,6 +1113,40 @@ message ListUsersResponse {
 	int32 total = 4;
 	int32 total_enabled = 5;
 	int32 total_disabled = 6;
+}
+
+message ExportUsersRequest {
+	optional int64 user_id = 1;
+	optional google.protobuf.Timestamp registration_start_time = 3;
+	optional google.protobuf.Timestamp registration_end_time = 4;
+	optional int32 vip_level = 5;
+	optional string country = 6;
+	optional int32 kyc_level = 7;
+	optional string deposit_min = 8;
+	optional string deposit_max = 9;
+	optional string withdrawal_min = 10;
+	optional string withdrawal_max = 11;
+	optional bool ban_withdraw = 12;
+	optional bool ban_game = 13;
+	optional bool ban_login = 14;
+	optional bool online = 17;
+	optional bool enabled = 18;
+	optional string email = 19;
+	optional string mobile = 20;
+	api.common.OperatorContext operator_context = 23;
+	api.common.OperatorContextFilters operator_context_filters = 24;
+	optional string registration_ip = 25;
+	optional string login_ip = 26;
+	api.common.OperatorContext target_operator_context = 27;
+	optional string registration_source = 28;
+	optional string agent_type = 29;
+	string format = 30;       // "csv", "excel", "pdf"
+	string time_zone = 31;
+	int64 initiator_user_id = 32;
+}
+
+message ExportUsersResponse {
+	int64 task_id = 1;
 }
 
 message CreateUserRequest {
@@ -2493,4 +2532,30 @@ message GetCompanyAdminEmailsRequest {
 
 message GetCompanyAdminEmailsResponse {
 	repeated string emails = 1;
+}
+// ============ Session Activity Messages ============
+
+message ListUserSessionActivitiesRequest {
+	int64 user_id = 1;
+	optional string event_type = 2;           // filter: daily_visit, ip_change, device_change
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	optional int32 page = 5;                  // default 1
+	optional int32 page_size = 6;             // default 20
+}
+
+message ListUserSessionActivitiesResponse {
+	message SessionActivity {
+		string event_type = 1;                  // daily_visit, ip_change, device_change
+		string ip = 2;
+		string country = 3;
+		string user_agent = 4;
+		string prev_ip = 5;
+		string prev_country = 6;
+		google.protobuf.Timestamp created_at = 7;
+	}
+	repeated SessionActivity activities = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
