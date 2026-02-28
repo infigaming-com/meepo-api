@@ -1099,7 +1099,10 @@ message ListUsersResponse {
 		bool enabled = 26;
 		google.protobuf.Timestamp created_at = 27;
 		Role role = 28;
-		bool locked = 29;  // 用户是否被锁定
+		bool locked = 29;
+		bool mfa_enabled = 30;
+		string last_login_ip = 31;
+		string role_creator_name = 32;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -1277,6 +1280,7 @@ message Role {
 	int64 role_id = 1;
 	string name = 2;
 	repeated Permission permissions = 3;
+	string creator_name = 4;
 }
 
 message ListRolesResponse {
