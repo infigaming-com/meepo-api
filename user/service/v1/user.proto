@@ -563,6 +563,10 @@ service User {
 
 	// List user session activities (daily_visit, ip_change, device_change)
 	rpc ListUserSessionActivities(ListUserSessionActivitiesRequest) returns (ListUserSessionActivitiesResponse) {}
+
+	rpc GetSwapFeeSettings(GetSwapFeeSettingsRequest) returns (GetSwapFeeSettingsResponse) {}
+
+	rpc SetSwapFeeSettings(SetSwapFeeSettingsRequest) returns (SetSwapFeeSettingsResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -2562,4 +2566,28 @@ message ListUserSessionActivitiesResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message SwapFeeCurrencyOverride {
+	string currency = 1;
+	string percentage = 2;
+}
+
+message SwapFeeSettings {
+	string default_percentage = 1;
+	repeated SwapFeeCurrencyOverride overrides = 2;
+}
+
+message GetSwapFeeSettingsRequest {
+}
+
+message GetSwapFeeSettingsResponse {
+	SwapFeeSettings settings = 1;
+}
+
+message SetSwapFeeSettingsRequest {
+	SwapFeeSettings settings = 1;
+}
+
+message SetSwapFeeSettingsResponse {
 }

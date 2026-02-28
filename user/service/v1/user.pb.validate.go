@@ -33244,6 +33244,714 @@ var _ interface {
 	ErrorName() string
 } = ListUserSessionActivitiesResponseValidationError{}
 
+// Validate checks the field values on SwapFeeCurrencyOverride with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SwapFeeCurrencyOverride) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SwapFeeCurrencyOverride with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SwapFeeCurrencyOverrideMultiError, or nil if none found.
+func (m *SwapFeeCurrencyOverride) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SwapFeeCurrencyOverride) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for Percentage
+
+	if len(errors) > 0 {
+		return SwapFeeCurrencyOverrideMultiError(errors)
+	}
+
+	return nil
+}
+
+// SwapFeeCurrencyOverrideMultiError is an error wrapping multiple validation
+// errors returned by SwapFeeCurrencyOverride.ValidateAll() if the designated
+// constraints aren't met.
+type SwapFeeCurrencyOverrideMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SwapFeeCurrencyOverrideMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SwapFeeCurrencyOverrideMultiError) AllErrors() []error { return m }
+
+// SwapFeeCurrencyOverrideValidationError is the validation error returned by
+// SwapFeeCurrencyOverride.Validate if the designated constraints aren't met.
+type SwapFeeCurrencyOverrideValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SwapFeeCurrencyOverrideValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SwapFeeCurrencyOverrideValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SwapFeeCurrencyOverrideValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SwapFeeCurrencyOverrideValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SwapFeeCurrencyOverrideValidationError) ErrorName() string {
+	return "SwapFeeCurrencyOverrideValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SwapFeeCurrencyOverrideValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSwapFeeCurrencyOverride.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SwapFeeCurrencyOverrideValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SwapFeeCurrencyOverrideValidationError{}
+
+// Validate checks the field values on SwapFeeSettings with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *SwapFeeSettings) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SwapFeeSettings with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SwapFeeSettingsMultiError, or nil if none found.
+func (m *SwapFeeSettings) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SwapFeeSettings) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DefaultPercentage
+
+	for idx, item := range m.GetOverrides() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SwapFeeSettingsValidationError{
+						field:  fmt.Sprintf("Overrides[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SwapFeeSettingsValidationError{
+						field:  fmt.Sprintf("Overrides[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SwapFeeSettingsValidationError{
+					field:  fmt.Sprintf("Overrides[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return SwapFeeSettingsMultiError(errors)
+	}
+
+	return nil
+}
+
+// SwapFeeSettingsMultiError is an error wrapping multiple validation errors
+// returned by SwapFeeSettings.ValidateAll() if the designated constraints
+// aren't met.
+type SwapFeeSettingsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SwapFeeSettingsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SwapFeeSettingsMultiError) AllErrors() []error { return m }
+
+// SwapFeeSettingsValidationError is the validation error returned by
+// SwapFeeSettings.Validate if the designated constraints aren't met.
+type SwapFeeSettingsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SwapFeeSettingsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SwapFeeSettingsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SwapFeeSettingsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SwapFeeSettingsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SwapFeeSettingsValidationError) ErrorName() string { return "SwapFeeSettingsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SwapFeeSettingsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSwapFeeSettings.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SwapFeeSettingsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SwapFeeSettingsValidationError{}
+
+// Validate checks the field values on GetSwapFeeSettingsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSwapFeeSettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSwapFeeSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSwapFeeSettingsRequestMultiError, or nil if none found.
+func (m *GetSwapFeeSettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSwapFeeSettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetSwapFeeSettingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSwapFeeSettingsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetSwapFeeSettingsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetSwapFeeSettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSwapFeeSettingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSwapFeeSettingsRequestMultiError) AllErrors() []error { return m }
+
+// GetSwapFeeSettingsRequestValidationError is the validation error returned by
+// GetSwapFeeSettingsRequest.Validate if the designated constraints aren't met.
+type GetSwapFeeSettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSwapFeeSettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSwapFeeSettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSwapFeeSettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSwapFeeSettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSwapFeeSettingsRequestValidationError) ErrorName() string {
+	return "GetSwapFeeSettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSwapFeeSettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSwapFeeSettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSwapFeeSettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSwapFeeSettingsRequestValidationError{}
+
+// Validate checks the field values on GetSwapFeeSettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSwapFeeSettingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSwapFeeSettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSwapFeeSettingsResponseMultiError, or nil if none found.
+func (m *GetSwapFeeSettingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSwapFeeSettingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSettings()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetSwapFeeSettingsResponseValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetSwapFeeSettingsResponseValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettings()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetSwapFeeSettingsResponseValidationError{
+				field:  "Settings",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetSwapFeeSettingsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSwapFeeSettingsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetSwapFeeSettingsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetSwapFeeSettingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSwapFeeSettingsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSwapFeeSettingsResponseMultiError) AllErrors() []error { return m }
+
+// GetSwapFeeSettingsResponseValidationError is the validation error returned
+// by GetSwapFeeSettingsResponse.Validate if the designated constraints aren't met.
+type GetSwapFeeSettingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSwapFeeSettingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSwapFeeSettingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSwapFeeSettingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSwapFeeSettingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSwapFeeSettingsResponseValidationError) ErrorName() string {
+	return "GetSwapFeeSettingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSwapFeeSettingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSwapFeeSettingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSwapFeeSettingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSwapFeeSettingsResponseValidationError{}
+
+// Validate checks the field values on SetSwapFeeSettingsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetSwapFeeSettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetSwapFeeSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetSwapFeeSettingsRequestMultiError, or nil if none found.
+func (m *SetSwapFeeSettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetSwapFeeSettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetSettings()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetSwapFeeSettingsRequestValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetSwapFeeSettingsRequestValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettings()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetSwapFeeSettingsRequestValidationError{
+				field:  "Settings",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetSwapFeeSettingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetSwapFeeSettingsRequestMultiError is an error wrapping multiple validation
+// errors returned by SetSwapFeeSettingsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type SetSwapFeeSettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetSwapFeeSettingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetSwapFeeSettingsRequestMultiError) AllErrors() []error { return m }
+
+// SetSwapFeeSettingsRequestValidationError is the validation error returned by
+// SetSwapFeeSettingsRequest.Validate if the designated constraints aren't met.
+type SetSwapFeeSettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetSwapFeeSettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetSwapFeeSettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetSwapFeeSettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetSwapFeeSettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetSwapFeeSettingsRequestValidationError) ErrorName() string {
+	return "SetSwapFeeSettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetSwapFeeSettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetSwapFeeSettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetSwapFeeSettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetSwapFeeSettingsRequestValidationError{}
+
+// Validate checks the field values on SetSwapFeeSettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetSwapFeeSettingsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetSwapFeeSettingsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetSwapFeeSettingsResponseMultiError, or nil if none found.
+func (m *SetSwapFeeSettingsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetSwapFeeSettingsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetSwapFeeSettingsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetSwapFeeSettingsResponseMultiError is an error wrapping multiple
+// validation errors returned by SetSwapFeeSettingsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type SetSwapFeeSettingsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetSwapFeeSettingsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetSwapFeeSettingsResponseMultiError) AllErrors() []error { return m }
+
+// SetSwapFeeSettingsResponseValidationError is the validation error returned
+// by SetSwapFeeSettingsResponse.Validate if the designated constraints aren't met.
+type SetSwapFeeSettingsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetSwapFeeSettingsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetSwapFeeSettingsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetSwapFeeSettingsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetSwapFeeSettingsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetSwapFeeSettingsResponseValidationError) ErrorName() string {
+	return "SetSwapFeeSettingsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetSwapFeeSettingsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetSwapFeeSettingsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetSwapFeeSettingsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetSwapFeeSettingsResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
