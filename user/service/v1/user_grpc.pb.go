@@ -143,6 +143,8 @@ const (
 	User_GetRewardHistory_FullMethodName                   = "/api.user.service.v1.User/GetRewardHistory"
 	User_ListUserFreeRewards_FullMethodName                = "/api.user.service.v1.User/ListUserFreeRewards"
 	User_ListUserSessionActivities_FullMethodName          = "/api.user.service.v1.User/ListUserSessionActivities"
+	User_GetSwapFeeSettings_FullMethodName                 = "/api.user.service.v1.User/GetSwapFeeSettings"
+	User_SetSwapFeeSettings_FullMethodName                 = "/api.user.service.v1.User/SetSwapFeeSettings"
 )
 
 // UserClient is the client API for User service.
@@ -367,6 +369,8 @@ type UserClient interface {
 	ListUserFreeRewards(ctx context.Context, in *ListUserFreeRewardsRequest, opts ...grpc.CallOption) (*v11.ListUserFreeRewardsResponse, error)
 	// List user session activities (daily_visit, ip_change, device_change)
 	ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*ListUserSessionActivitiesResponse, error)
+	GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*GetSwapFeeSettingsResponse, error)
+	SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*SetSwapFeeSettingsResponse, error)
 }
 
 type userClient struct {
@@ -1597,6 +1601,26 @@ func (c *userClient) ListUserSessionActivities(ctx context.Context, in *ListUser
 	return out, nil
 }
 
+func (c *userClient) GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*GetSwapFeeSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSwapFeeSettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetSwapFeeSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*SetSwapFeeSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSwapFeeSettingsResponse)
+	err := c.cc.Invoke(ctx, User_SetSwapFeeSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1819,6 +1843,8 @@ type UserServer interface {
 	ListUserFreeRewards(context.Context, *ListUserFreeRewardsRequest) (*v11.ListUserFreeRewardsResponse, error)
 	// List user session activities (daily_visit, ip_change, device_change)
 	ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error)
+	GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*GetSwapFeeSettingsResponse, error)
+	SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*SetSwapFeeSettingsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2194,6 +2220,12 @@ func (UnimplementedUserServer) ListUserFreeRewards(context.Context, *ListUserFre
 }
 func (UnimplementedUserServer) ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUserSessionActivities not implemented")
+}
+func (UnimplementedUserServer) GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*GetSwapFeeSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSwapFeeSettings not implemented")
+}
+func (UnimplementedUserServer) SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*SetSwapFeeSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSwapFeeSettings not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4412,6 +4444,42 @@ func _User_ListUserSessionActivities_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetSwapFeeSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSwapFeeSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetSwapFeeSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetSwapFeeSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetSwapFeeSettings(ctx, req.(*GetSwapFeeSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetSwapFeeSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSwapFeeSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetSwapFeeSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetSwapFeeSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetSwapFeeSettings(ctx, req.(*SetSwapFeeSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4906,6 +4974,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserSessionActivities",
 			Handler:    _User_ListUserSessionActivities_Handler,
+		},
+		{
+			MethodName: "GetSwapFeeSettings",
+			Handler:    _User_GetSwapFeeSettings_Handler,
+		},
+		{
+			MethodName: "SetSwapFeeSettings",
+			Handler:    _User_SetSwapFeeSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

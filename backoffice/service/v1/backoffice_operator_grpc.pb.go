@@ -46,6 +46,8 @@ const (
 	BackofficeOperator_GetOperatorRegistrationConfig_FullMethodName        = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationConfig"
 	BackofficeOperator_UpdateOperatorNotificationChannels_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorNotificationChannels"
 	BackofficeOperator_GetOperatorNotificationChannels_FullMethodName      = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorNotificationChannels"
+	BackofficeOperator_GetSwapFeeSettings_FullMethodName                   = "/api.backoffice.service.v1.BackofficeOperator/GetSwapFeeSettings"
+	BackofficeOperator_SetSwapFeeSettings_FullMethodName                   = "/api.backoffice.service.v1.BackofficeOperator/SetSwapFeeSettings"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -93,6 +95,8 @@ type BackofficeOperatorClient interface {
 	UpdateOperatorNotificationChannels(ctx context.Context, in *UpdateOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorNotificationChannelsResponse, error)
 	// GetOperatorNotificationChannels retrieves notification channel configuration for an operator
 	GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.GetOperatorNotificationChannelsResponse, error)
+	GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*v1.GetSwapFeeSettingsResponse, error)
+	SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*v1.SetSwapFeeSettingsResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -363,6 +367,26 @@ func (c *backofficeOperatorClient) GetOperatorNotificationChannels(ctx context.C
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*v1.GetSwapFeeSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetSwapFeeSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetSwapFeeSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*v1.SetSwapFeeSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetSwapFeeSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_SetSwapFeeSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -408,6 +432,8 @@ type BackofficeOperatorServer interface {
 	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error)
 	// GetOperatorNotificationChannels retrieves notification channel configuration for an operator
 	GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*v1.GetOperatorNotificationChannelsResponse, error)
+	GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*v1.GetSwapFeeSettingsResponse, error)
+	SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*v1.SetSwapFeeSettingsResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -495,6 +521,12 @@ func (UnimplementedBackofficeOperatorServer) UpdateOperatorNotificationChannels(
 }
 func (UnimplementedBackofficeOperatorServer) GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*v1.GetOperatorNotificationChannelsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorNotificationChannels not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*v1.GetSwapFeeSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSwapFeeSettings not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*v1.SetSwapFeeSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSwapFeeSettings not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -985,6 +1017,42 @@ func _BackofficeOperator_GetOperatorNotificationChannels_Handler(srv interface{}
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_GetSwapFeeSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSwapFeeSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetSwapFeeSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetSwapFeeSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetSwapFeeSettings(ctx, req.(*GetSwapFeeSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_SetSwapFeeSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSwapFeeSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).SetSwapFeeSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_SetSwapFeeSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).SetSwapFeeSettings(ctx, req.(*SetSwapFeeSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1095,6 +1163,14 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorNotificationChannels",
 			Handler:    _BackofficeOperator_GetOperatorNotificationChannels_Handler,
+		},
+		{
+			MethodName: "GetSwapFeeSettings",
+			Handler:    _BackofficeOperator_GetSwapFeeSettings_Handler,
+		},
+		{
+			MethodName: "SetSwapFeeSettings",
+			Handler:    _BackofficeOperator_SetSwapFeeSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

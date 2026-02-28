@@ -33,6 +33,7 @@ const OperationBackofficeOperatorGetOperatorNotificationChannels = "/api.backoff
 const OperationBackofficeOperatorGetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
 const OperationBackofficeOperatorGetOperatorRegistrationConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationConfig"
 const OperationBackofficeOperatorGetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationFieldConfig"
+const OperationBackofficeOperatorGetSwapFeeSettings = "/api.backoffice.service.v1.BackofficeOperator/GetSwapFeeSettings"
 const OperationBackofficeOperatorListAllOperators = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
 const OperationBackofficeOperatorListBottomOperators = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
 const OperationBackofficeOperatorListCompanyOperators = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
@@ -43,6 +44,7 @@ const OperationBackofficeOperatorListRetailerOperators = "/api.backoffice.servic
 const OperationBackofficeOperatorSetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegisterLimitConfig"
 const OperationBackofficeOperatorSetOperatorRegistrationConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationConfig"
 const OperationBackofficeOperatorSetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationFieldConfig"
+const OperationBackofficeOperatorSetSwapFeeSettings = "/api.backoffice.service.v1.BackofficeOperator/SetSwapFeeSettings"
 const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
 const OperationBackofficeOperatorUpdateOperatorNotificationChannels = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorNotificationChannels"
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
@@ -68,6 +70,7 @@ type BackofficeOperatorHTTPServer interface {
 	// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
 	GetOperatorRegistrationConfig(context.Context, *GetOperatorRegistrationConfigRequest) (*GetOperatorRegistrationConfigResponse, error)
 	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*v1.GetOperatorRegistrationFieldConfigResponse, error)
+	GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*v1.GetSwapFeeSettingsResponse, error)
 	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*v1.ListBottomOperatorsResponse, error)
@@ -84,6 +87,7 @@ type BackofficeOperatorHTTPServer interface {
 	// SetOperatorRegistrationConfig SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
 	SetOperatorRegistrationConfig(context.Context, *SetOperatorRegistrationConfigRequest) (*SetOperatorRegistrationConfigResponse, error)
 	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
+	SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*v1.SetSwapFeeSettingsResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
 	// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
 	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error)
@@ -119,6 +123,8 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/registration-config/get", _BackofficeOperator_GetOperatorRegistrationConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/notification-channels/update", _BackofficeOperator_UpdateOperatorNotificationChannels0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/notification-channels/get", _BackofficeOperator_GetOperatorNotificationChannels0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/swap-fee-settings/get", _BackofficeOperator_GetSwapFeeSettings0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/swap-fee-settings/set", _BackofficeOperator_SetSwapFeeSettings0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -693,6 +699,50 @@ func _BackofficeOperator_GetOperatorNotificationChannels0_HTTP_Handler(srv Backo
 	}
 }
 
+func _BackofficeOperator_GetSwapFeeSettings0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetSwapFeeSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorGetSwapFeeSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetSwapFeeSettings(ctx, req.(*GetSwapFeeSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetSwapFeeSettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_SetSwapFeeSettings0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetSwapFeeSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorSetSwapFeeSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetSwapFeeSettings(ctx, req.(*SetSwapFeeSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetSwapFeeSettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
 	// AddOperatorBackofficeByoSubdomain AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
 	AddOperatorBackofficeByoSubdomain(ctx context.Context, req *AddOperatorBackofficeByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorBackofficeByoSubdomainResponse, err error)
@@ -714,6 +764,7 @@ type BackofficeOperatorHTTPClient interface {
 	// GetOperatorRegistrationConfig GetOperatorRegistrationConfig is a combined method for getting both register limit config and registration field config
 	GetOperatorRegistrationConfig(ctx context.Context, req *GetOperatorRegistrationConfigRequest, opts ...http.CallOption) (rsp *GetOperatorRegistrationConfigResponse, err error)
 	GetOperatorRegistrationFieldConfig(ctx context.Context, req *GetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorRegistrationFieldConfigResponse, err error)
+	GetSwapFeeSettings(ctx context.Context, req *GetSwapFeeSettingsRequest, opts ...http.CallOption) (rsp *v1.GetSwapFeeSettingsResponse, err error)
 	ListAllOperators(ctx context.Context, req *ListAllOperatorsRequest, opts ...http.CallOption) (rsp *ListAllOperatorsResponse, err error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
 	ListBottomOperators(ctx context.Context, req *ListBottomOperatorsRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorsResponse, err error)
@@ -730,6 +781,7 @@ type BackofficeOperatorHTTPClient interface {
 	// SetOperatorRegistrationConfig SetOperatorRegistrationConfig is a combined method for setting both register limit config and registration field config
 	SetOperatorRegistrationConfig(ctx context.Context, req *SetOperatorRegistrationConfigRequest, opts ...http.CallOption) (rsp *SetOperatorRegistrationConfigResponse, err error)
 	SetOperatorRegistrationFieldConfig(ctx context.Context, req *SetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegistrationFieldConfigResponse, err error)
+	SetSwapFeeSettings(ctx context.Context, req *SetSwapFeeSettingsRequest, opts ...http.CallOption) (rsp *v1.SetSwapFeeSettingsResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
 	// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
 	UpdateOperatorNotificationChannels(ctx context.Context, req *UpdateOperatorNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorNotificationChannelsResponse, err error)
@@ -921,6 +973,19 @@ func (c *BackofficeOperatorHTTPClientImpl) GetOperatorRegistrationFieldConfig(ct
 	return &out, nil
 }
 
+func (c *BackofficeOperatorHTTPClientImpl) GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...http.CallOption) (*v1.GetSwapFeeSettingsResponse, error) {
+	var out v1.GetSwapFeeSettingsResponse
+	pattern := "/v1/backoffice/operator/swap-fee-settings/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorGetSwapFeeSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeOperatorHTTPClientImpl) ListAllOperators(ctx context.Context, in *ListAllOperatorsRequest, opts ...http.CallOption) (*ListAllOperatorsResponse, error) {
 	var out ListAllOperatorsResponse
 	pattern := "/v1/backoffice/operator/list/all"
@@ -1049,6 +1114,19 @@ func (c *BackofficeOperatorHTTPClientImpl) SetOperatorRegistrationFieldConfig(ct
 	pattern := "/v1/backoffice/operator/registration-field-config/set"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorSetOperatorRegistrationFieldConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...http.CallOption) (*v1.SetSwapFeeSettingsResponse, error) {
+	var out v1.SetSwapFeeSettingsResponse
+	pattern := "/v1/backoffice/operator/swap-fee-settings/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorSetSwapFeeSettings))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

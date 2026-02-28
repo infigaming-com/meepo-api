@@ -209,6 +209,20 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	rpc GetSwapFeeSettings(GetSwapFeeSettingsRequest) returns (user.service.v1.GetSwapFeeSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/swap-fee-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc SetSwapFeeSettings(SetSwapFeeSettingsRequest) returns (user.service.v1.SetSwapFeeSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/swap-fee-settings/set"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -456,4 +470,11 @@ message UpdateOperatorNotificationChannelsRequest {
 message GetOperatorNotificationChannelsRequest {
 	int64 operator_id = 1;
 	string channel_type = 2;
+}
+
+message GetSwapFeeSettingsRequest {
+}
+
+message SetSwapFeeSettingsRequest {
+	user.service.v1.SwapFeeSettings settings = 1;
 }
