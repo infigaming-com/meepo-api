@@ -399,6 +399,8 @@ message ListAccountsRequest {
     optional bool enabled = 4;
     optional int32 page = 5;
     optional int32 page_size = 6;
+    optional string account_creator = 7;
+    optional string role_creator = 8;
 }
 
 message ListAccountsResponse {
@@ -410,7 +412,12 @@ message ListAccountsResponse {
         bool enabled = 5;
         Role role = 6;
         google.protobuf.Timestamp created_at = 7;
-        bool locked = 8;  // 用户是否被锁定
+        bool locked = 8;
+        string account_creator = 9;
+        string role_creator = 10;
+        bool mfa_enabled = 11;
+        string last_login_ip = 12;
+        google.protobuf.Timestamp last_login_at = 13;
     }
     repeated Account accounts = 1;
     int32 total = 2;

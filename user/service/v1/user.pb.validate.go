@@ -9179,6 +9179,8 @@ func (m *Role) validate(all bool) error {
 
 	}
 
+	// no validation rules for CreatorName
+
 	if len(errors) > 0 {
 		return RoleMultiError(errors)
 	}
@@ -33427,6 +33429,12 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	}
 
 	// no validation rules for Locked
+
+	// no validation rules for MfaEnabled
+
+	// no validation rules for LastLoginIp
+
+	// no validation rules for RoleCreatorName
 
 	if len(errors) > 0 {
 		return ListUsersResponse_UserMultiError(errors)

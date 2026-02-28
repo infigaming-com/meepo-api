@@ -5181,6 +5181,7 @@ type Role struct {
 	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Permissions   []*Permission          `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	CreatorName   string                 `protobuf:"bytes,4,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5234,6 +5235,13 @@ func (x *Role) GetPermissions() []*Permission {
 		return x.Permissions
 	}
 	return nil
+}
+
+func (x *Role) GetCreatorName() string {
+	if x != nil {
+		return x.CreatorName
+	}
+	return ""
 }
 
 type ListRolesResponse struct {
@@ -15931,13 +15939,16 @@ type ListUsersResponse_User struct {
 	Country        string `protobuf:"bytes,24,opt,name=country,proto3" json:"country,omitempty"`
 	// string device = 23;
 	// string source = 24;
-	RegistrationIp string                 `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	Enabled        bool                   `protobuf:"varint,26,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Role           *Role                  `protobuf:"bytes,28,opt,name=role,proto3" json:"role,omitempty"`
-	Locked         bool                   `protobuf:"varint,29,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	RegistrationIp  string                 `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	Enabled         bool                   `protobuf:"varint,26,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Role            *Role                  `protobuf:"bytes,28,opt,name=role,proto3" json:"role,omitempty"`
+	Locked          bool                   `protobuf:"varint,29,opt,name=locked,proto3" json:"locked,omitempty"`
+	MfaEnabled      bool                   `protobuf:"varint,30,opt,name=mfa_enabled,json=mfaEnabled,proto3" json:"mfa_enabled,omitempty"`
+	LastLoginIp     string                 `protobuf:"bytes,31,opt,name=last_login_ip,json=lastLoginIp,proto3" json:"last_login_ip,omitempty"`
+	RoleCreatorName string                 `protobuf:"bytes,32,opt,name=role_creator_name,json=roleCreatorName,proto3" json:"role_creator_name,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListUsersResponse_User) Reset() {
@@ -16171,6 +16182,27 @@ func (x *ListUsersResponse_User) GetLocked() bool {
 		return x.Locked
 	}
 	return false
+}
+
+func (x *ListUsersResponse_User) GetMfaEnabled() bool {
+	if x != nil {
+		return x.MfaEnabled
+	}
+	return false
+}
+
+func (x *ListUsersResponse_User) GetLastLoginIp() string {
+	if x != nil {
+		return x.LastLoginIp
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetRoleCreatorName() string {
+	if x != nil {
+		return x.RoleCreatorName
+	}
+	return ""
 }
 
 type GetCommentsByUserIdResponse_Comment struct {
@@ -18013,15 +18045,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10_registration_ipB\v\n" +
 	"\t_login_ipB\x16\n" +
 	"\x14_registration_sourceB\r\n" +
-	"\v_agent_type\"\xc6\n" +
-	"\n" +
+	"\v_agent_type\"\xb7\v\n" +
 	"\x11ListUsersResponse\x12A\n" +
 	"\x05users\x18\x01 \x03(\v2+.api.user.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xda\b\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x1a\xcb\t\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -18054,7 +18085,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
 	"\x04role\x18\x1c \x01(\v2\x19.api.user.service.v1.RoleR\x04role\x12\x16\n" +
-	"\x06locked\x18\x1d \x01(\bR\x06locked\"\x99\f\n" +
+	"\x06locked\x18\x1d \x01(\bR\x06locked\x12\x1f\n" +
+	"\vmfa_enabled\x18\x1e \x01(\bR\n" +
+	"mfaEnabled\x12\"\n" +
+	"\rlast_login_ip\x18\x1f \x01(\tR\vlastLoginIp\x12*\n" +
+	"\x11role_creator_name\x18  \x01(\tR\x0froleCreatorName\"\x99\f\n" +
 	"\x12ExportUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12W\n" +
 	"\x17registration_start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x15registrationStartTime\x88\x01\x01\x12S\n" +
@@ -18260,11 +18295,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"v\n" +
+	"_page_size\"\x99\x01\n" +
 	"\x04Role\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12A\n" +
-	"\vpermissions\x18\x03 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\"\x8b\x01\n" +
+	"\vpermissions\x18\x03 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\x12!\n" +
+	"\fcreator_name\x18\x04 \x01(\tR\vcreatorName\"\x8b\x01\n" +
 	"\x11ListRolesResponse\x12/\n" +
 	"\x05roles\x18\x01 \x03(\v2\x19.api.user.service.v1.RoleR\x05roles\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
