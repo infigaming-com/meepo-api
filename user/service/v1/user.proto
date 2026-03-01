@@ -1558,6 +1558,8 @@ message OperatorAccountGameSettings {
 message OperatorAccountPaymentSettings {
 	int32 min_deposit_kyc_level = 1;
 	int32 min_withdraw_kyc_level = 2;
+	// When enabled, users who have never made a deposit will not be allowed to withdraw.
+	bool no_withdraw_without_deposit = 3;
 }
 
 message OperatorAccountSettings {

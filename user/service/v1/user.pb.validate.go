@@ -13875,6 +13875,8 @@ func (m *OperatorAccountPaymentSettings) validate(all bool) error {
 
 	// no validation rules for MinWithdrawKycLevel
 
+	// no validation rules for NoWithdrawWithoutDeposit
+
 	if len(errors) > 0 {
 		return OperatorAccountPaymentSettingsMultiError(errors)
 	}
