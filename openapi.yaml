@@ -29242,6 +29242,8 @@ components:
                 monthlyRewardExpiryHours:
                     type: integer
                     format: int32
+                enableRebateForBonusBets:
+                    type: boolean
         api.wallet.service.v1.AddResponsibleGamblingConfigRequest:
             type: object
             properties:

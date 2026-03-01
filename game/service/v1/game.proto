@@ -1752,6 +1752,8 @@ message ListUserTurnoverByGameResponse {
 		string turnover = 2;
 		string rtp = 3;
 		string house_edge = 4;
+		string cash_turnover = 5;
+		string bonus_turnover = 6;
 	}
 
 	repeated Item items = 1;

@@ -16250,6 +16250,8 @@ type ListUserTurnoverByGameResponse_Item struct {
 	Turnover      string                 `protobuf:"bytes,2,opt,name=turnover,proto3" json:"turnover,omitempty"`
 	Rtp           string                 `protobuf:"bytes,3,opt,name=rtp,proto3" json:"rtp,omitempty"`
 	HouseEdge     string                 `protobuf:"bytes,4,opt,name=house_edge,json=houseEdge,proto3" json:"house_edge,omitempty"`
+	CashTurnover  string                 `protobuf:"bytes,5,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	BonusTurnover string                 `protobuf:"bytes,6,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -16308,6 +16310,20 @@ func (x *ListUserTurnoverByGameResponse_Item) GetRtp() string {
 func (x *ListUserTurnoverByGameResponse_Item) GetHouseEdge() string {
 	if x != nil {
 		return x.HouseEdge
+	}
+	return ""
+}
+
+func (x *ListUserTurnoverByGameResponse_Item) GetCashTurnover() string {
+	if x != nil {
+		return x.CashTurnover
+	}
+	return ""
+}
+
+func (x *ListUserTurnoverByGameResponse_Item) GetBonusTurnover() string {
+	if x != nil {
+		return x.BonusTurnover
 	}
 	return ""
 }
@@ -18589,15 +18605,17 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12-\n" +
-	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\"\xde\x01\n" +
+	"\x12reporting_currency\x18\x04 \x01(\tR\x11reportingCurrency\"\xab\x02\n" +
 	"\x1eListUserTurnoverByGameResponse\x12N\n" +
-	"\x05items\x18\x01 \x03(\v28.api.game.service.v1.ListUserTurnoverByGameResponse.ItemR\x05items\x1al\n" +
+	"\x05items\x18\x01 \x03(\v28.api.game.service.v1.ListUserTurnoverByGameResponse.ItemR\x05items\x1a\xb8\x01\n" +
 	"\x04Item\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1a\n" +
 	"\bturnover\x18\x02 \x01(\tR\bturnover\x12\x10\n" +
 	"\x03rtp\x18\x03 \x01(\tR\x03rtp\x12\x1d\n" +
 	"\n" +
-	"house_edge\x18\x04 \x01(\tR\thouseEdge\"g\n" +
+	"house_edge\x18\x04 \x01(\tR\thouseEdge\x12#\n" +
+	"\rcash_turnover\x18\x05 \x01(\tR\fcashTurnover\x12%\n" +
+	"\x0ebonus_turnover\x18\x06 \x01(\tR\rbonusTurnover\"g\n" +
 	"\x1dListFreespinsProvidersRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x80\x02\n" +
 	"\x1eListFreespinsProvidersResponse\x12Z\n" +
