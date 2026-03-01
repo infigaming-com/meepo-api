@@ -948,7 +948,7 @@ message GetOperatorSettingsRequest {
 message OperatorSettings {
     string payment_channel_rate = 1; // represent as a percentage, e.g. "35" for 35%
     string third_party_game_rate = 2; // represent as a percentage, e.g. "35" for 35%
-    string referral_loss_rev_share_mode = 3; // "cross_currency_hedging" or "independent_by_currency"
+    optional string referral_loss_rev_share_mode = 3; // "cross_currency_hedging" or "independent_by_currency"
 }
 
 message GetOperatorSettingsResponse {
