@@ -8299,6 +8299,10 @@ func (m *OperatorSettings) validate(all bool) error {
 
 	// no validation rules for ThirdPartyGameRate
 
+	if m.ReferralLossRevShareMode != nil {
+		// no validation rules for ReferralLossRevShareMode
+	}
+
 	if len(errors) > 0 {
 		return OperatorSettingsMultiError(errors)
 	}
