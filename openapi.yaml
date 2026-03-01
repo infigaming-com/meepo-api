@@ -27978,6 +27978,9 @@ components:
                 minWithdrawKycLevel:
                     type: integer
                     format: int32
+                noWithdrawWithoutDeposit:
+                    type: boolean
+                    description: When enabled, users who have never made a deposit will not be allowed to withdraw.
         api.user.service.v1.OperatorAccountSecuritySettings:
             type: object
             properties:

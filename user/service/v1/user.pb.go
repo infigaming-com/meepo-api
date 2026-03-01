@@ -7246,8 +7246,10 @@ type OperatorAccountPaymentSettings struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	MinDepositKycLevel  int32                  `protobuf:"varint,1,opt,name=min_deposit_kyc_level,json=minDepositKycLevel,proto3" json:"min_deposit_kyc_level,omitempty"`
 	MinWithdrawKycLevel int32                  `protobuf:"varint,2,opt,name=min_withdraw_kyc_level,json=minWithdrawKycLevel,proto3" json:"min_withdraw_kyc_level,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// When enabled, users who have never made a deposit will not be allowed to withdraw.
+	NoWithdrawWithoutDeposit bool `protobuf:"varint,3,opt,name=no_withdraw_without_deposit,json=noWithdrawWithoutDeposit,proto3" json:"no_withdraw_without_deposit,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *OperatorAccountPaymentSettings) Reset() {
@@ -7292,6 +7294,13 @@ func (x *OperatorAccountPaymentSettings) GetMinWithdrawKycLevel() int32 {
 		return x.MinWithdrawKycLevel
 	}
 	return 0
+}
+
+func (x *OperatorAccountPaymentSettings) GetNoWithdrawWithoutDeposit() bool {
+	if x != nil {
+		return x.NoWithdrawWithoutDeposit
+	}
+	return false
 }
 
 type OperatorAccountSettings struct {
@@ -18726,10 +18735,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1bOperatorAccountGameSettings\x125\n" +
 	"\x17no_game_without_deposit\x18\x01 \x01(\bR\x14noGameWithoutDeposit\x12+\n" +
 	"\x12min_game_kyc_level\x18\x02 \x01(\x05R\x0fminGameKycLevel\x128\n" +
-	"\x19no_game_with_zero_balance\x18\x03 \x01(\bR\x15noGameWithZeroBalance\"\x88\x01\n" +
+	"\x19no_game_with_zero_balance\x18\x03 \x01(\bR\x15noGameWithZeroBalance\"\xc7\x01\n" +
 	"\x1eOperatorAccountPaymentSettings\x121\n" +
 	"\x15min_deposit_kyc_level\x18\x01 \x01(\x05R\x12minDepositKycLevel\x123\n" +
-	"\x16min_withdraw_kyc_level\x18\x02 \x01(\x05R\x13minWithdrawKycLevel\"\x96\x03\n" +
+	"\x16min_withdraw_kyc_level\x18\x02 \x01(\x05R\x13minWithdrawKycLevel\x12=\n" +
+	"\x1bno_withdraw_without_deposit\x18\x03 \x01(\bR\x18noWithdrawWithoutDeposit\"\x96\x03\n" +
 	"\x17OperatorAccountSettings\x12a\n" +
 	"\x11password_settings\x18\x01 \x01(\v24.api.user.service.v1.OperatorAccountPasswordSettingsR\x10passwordSettings\x12a\n" +
 	"\x11security_settings\x18\x02 \x01(\v24.api.user.service.v1.OperatorAccountSecuritySettingsR\x10securitySettings\x12U\n" +
