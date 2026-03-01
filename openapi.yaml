@@ -25317,6 +25317,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.Action'
+                providerUserId:
+                    type: string
         api.game.service.v1.PlayResponse:
             type: object
             properties:
