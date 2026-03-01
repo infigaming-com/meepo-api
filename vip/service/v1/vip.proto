@@ -183,6 +183,8 @@ message VipSetting {
   VipRewardExpiryType monthly_reward_expiry_type = 43;
   int32 monthly_reward_expiry_days = 44;
   int32 monthly_reward_expiry_hours = 45;
+
+  bool enable_rebate_for_bonus_bets = 46;
 }
 
 message GetVipSettingRequest {

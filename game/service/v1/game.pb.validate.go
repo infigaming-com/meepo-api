@@ -27594,6 +27594,10 @@ func (m *ListUserTurnoverByGameResponse_Item) validate(all bool) error {
 
 	// no validation rules for HouseEdge
 
+	// no validation rules for CashTurnover
+
+	// no validation rules for BonusTurnover
+
 	if len(errors) > 0 {
 		return ListUserTurnoverByGameResponse_ItemMultiError(errors)
 	}
