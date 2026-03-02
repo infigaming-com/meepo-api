@@ -622,6 +622,8 @@ message SetCrmCampaignWorkflowRequest {
   //     to: _end
   // ```
   string workflow_yaml = 3;
+  // Frontend workflow editor UI state (node positions, viewport, etc.)
+  string ui_metadata = 4;
 }
 
 // Get the current workflow definition for a campaign.
