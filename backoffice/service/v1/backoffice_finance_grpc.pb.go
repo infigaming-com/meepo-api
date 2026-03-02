@@ -31,6 +31,7 @@ const (
 	BackofficeFinance_CreateAdjustmentConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
 	BackofficeFinance_UpdateAdjustmentConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
 	BackofficeFinance_DeleteAdjustmentConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
+	BackofficeFinance_DeleteAdjustment_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustment"
 	BackofficeFinance_SendInvoices_FullMethodName                    = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
 	BackofficeFinance_GetInvoiceSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
 	BackofficeFinance_GetBalanceSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
@@ -61,6 +62,7 @@ type BackofficeFinanceClient interface {
 	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
+	DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error)
 	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
@@ -188,6 +190,16 @@ func (c *backofficeFinanceClient) DeleteAdjustmentConfig(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAdjustmentConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeFinance_DeleteAdjustmentConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) DeleteAdjustment(ctx context.Context, in *DeleteAdjustmentRequest, opts ...grpc.CallOption) (*DeleteAdjustmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAdjustmentResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_DeleteAdjustment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -339,6 +351,7 @@ type BackofficeFinanceServer interface {
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
+	DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
@@ -394,6 +407,9 @@ func (UnimplementedBackofficeFinanceServer) UpdateAdjustmentConfig(context.Conte
 }
 func (UnimplementedBackofficeFinanceServer) DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAdjustmentConfig not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) DeleteAdjustment(context.Context, *DeleteAdjustmentRequest) (*DeleteAdjustmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAdjustment not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendInvoices not implemented")
@@ -649,6 +665,24 @@ func _BackofficeFinance_DeleteAdjustmentConfig_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeFinanceServer).DeleteAdjustmentConfig(ctx, req.(*DeleteAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_DeleteAdjustment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAdjustmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).DeleteAdjustment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_DeleteAdjustment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).DeleteAdjustment(ctx, req.(*DeleteAdjustmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -937,6 +971,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAdjustmentConfig",
 			Handler:    _BackofficeFinance_DeleteAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "DeleteAdjustment",
+			Handler:    _BackofficeFinance_DeleteAdjustment_Handler,
 		},
 		{
 			MethodName: "SendInvoices",

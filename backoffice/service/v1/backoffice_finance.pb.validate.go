@@ -4024,6 +4024,10 @@ func (m *ListBillingPeriodsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if len(errors) > 0 {
 		return ListBillingPeriodsRequestMultiError(errors)
 	}

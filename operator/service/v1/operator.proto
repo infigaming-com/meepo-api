@@ -619,6 +619,7 @@ message GetBalancesSummaryResponse {
 message ListBillingPeriodsRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
+	optional string status = 3;
 }
 
 message ListBillingPeriodsResponse {
