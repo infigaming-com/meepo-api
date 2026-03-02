@@ -2076,7 +2076,7 @@ func (m *InitiateDepositResponse) validate(all bool) error {
 
 	// no validation rules for PayUrl
 
-	// no validation rules for QrCode
+	// no validation rules for QrCodeImg
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -2106,6 +2106,8 @@ func (m *InitiateDepositResponse) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for QrCodeLink
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {

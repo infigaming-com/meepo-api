@@ -346,10 +346,12 @@ message InitiateDepositResponse {
   string status = 4;
   // URL to direct the user to for payment completion
   string pay_url = 5 [json_name="payUrl"];
-  // QR code image (typically base64 encoded) for mobile payment
-  string qr_code = 6 [json_name="qrCode"];
+  // QR code image data (typically base64 encoded)
+  string qr_code_img = 6 [json_name="qrCodeImg"];
   // Timestamp when the transaction was created
   google.protobuf.Timestamp created_at = 7 [json_name="createdAt"];
+  // QR code link (e.g., PIX copy-paste string)
+  string qr_code_link = 9 [json_name="qrCodeLink"];
   // Additional transaction information returned by payment provider
   google.protobuf.Struct extra = 8;
 }
