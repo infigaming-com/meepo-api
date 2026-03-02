@@ -401,6 +401,7 @@ message ListAccountsRequest {
     optional int32 page_size = 6;
     optional string account_creator = 7;
     optional string role_creator = 8;
+    optional string email = 9;
 }
 
 message ListAccountsResponse {

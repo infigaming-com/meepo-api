@@ -3034,6 +3034,7 @@ type ListBillingPeriodsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3080,6 +3081,13 @@ func (x *ListBillingPeriodsRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListBillingPeriodsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
 }
 
 type ListBillingPeriodsResponse struct {
@@ -5830,13 +5838,15 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x14revenue_share_system\x18\t \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\n" +
 	" \x01(\tR\x14revenueShareOperator\x12\"\n" +
-	"\rest_net_costs\x18\v \x01(\tR\vestNetCosts\"m\n" +
+	"\rest_net_costs\x18\v \x01(\tR\vestNetCosts\"\x95\x01\n" +
 	"\x19ListBillingPeriodsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9b\x03\n" +
+	"_page_sizeB\t\n" +
+	"\a_status\"\x9b\x03\n" +
 	"\x1aListBillingPeriodsResponse\x12j\n" +
 	"\x0fbilling_periods\x18\x01 \x03(\v2A.api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriodR\x0ebillingPeriods\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
