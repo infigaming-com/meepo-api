@@ -851,7 +851,9 @@ type SetCrmCampaignWorkflowRequest struct {
 	//     to: _end
 	//
 	// ```
-	WorkflowYaml  string `protobuf:"bytes,3,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
+	WorkflowYaml string `protobuf:"bytes,3,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
+	// Frontend workflow editor UI state (node positions, viewport, etc.)
+	UiMetadata    string `protobuf:"bytes,4,opt,name=ui_metadata,json=uiMetadata,proto3" json:"ui_metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -903,6 +905,13 @@ func (x *SetCrmCampaignWorkflowRequest) GetCampaignId() int64 {
 func (x *SetCrmCampaignWorkflowRequest) GetWorkflowYaml() string {
 	if x != nil {
 		return x.WorkflowYaml
+	}
+	return ""
+}
+
+func (x *SetCrmCampaignWorkflowRequest) GetUiMetadata() string {
+	if x != nil {
+		return x.UiMetadata
 	}
 	return ""
 }
@@ -1576,12 +1585,14 @@ const file_backoffice_service_v1_backoffice_campaign_proto_rawDesc = "" +
 	"\a_status\"\x7f\n" +
 	"\x18DeleteCrmCampaignRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\x03R\x02id\"\xba\x01\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"\xdb\x01\n" +
 	"\x1dSetCrmCampaignWorkflowRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
 	"campaignId\x12#\n" +
-	"\rworkflow_yaml\x18\x03 \x01(\tR\fworkflowYaml\"\x95\x01\n" +
+	"\rworkflow_yaml\x18\x03 \x01(\tR\fworkflowYaml\x12\x1f\n" +
+	"\vui_metadata\x18\x04 \x01(\tR\n" +
+	"uiMetadata\"\x95\x01\n" +
 	"\x1dGetCrmCampaignWorkflowRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +

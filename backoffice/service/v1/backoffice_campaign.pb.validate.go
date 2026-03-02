@@ -977,6 +977,8 @@ func (m *SetCrmCampaignWorkflowRequest) validate(all bool) error {
 
 	// no validation rules for WorkflowYaml
 
+	// no validation rules for UiMetadata
+
 	if len(errors) > 0 {
 		return SetCrmCampaignWorkflowRequestMultiError(errors)
 	}

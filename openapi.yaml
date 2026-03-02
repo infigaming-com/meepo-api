@@ -21522,6 +21522,9 @@ components:
                            - from: send_newsletter
                              to: _end
                          ```
+                uiMetadata:
+                    type: string
+                    description: Frontend workflow editor UI state (node positions, viewport, etc.)
             description: |-
                 Set or replace the workflow for a campaign.
                  The YAML is parsed, validated (graph connectivity, node configs, expressions), hashed, and versioned.
