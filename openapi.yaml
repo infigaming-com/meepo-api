@@ -23091,6 +23091,8 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                uiMetadata:
+                    type: string
             description: Campaign workflow definition
         api.campaign.service.v1.ConfigFieldSchema:
             type: object

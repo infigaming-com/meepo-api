@@ -109,6 +109,7 @@ message CampaignWorkflow {
   repeated string validation_errors = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
+  string ui_metadata = 10; // Frontend workflow editor UI state (node positions, viewport, etc.)
 }
 
 // Campaign execution record
@@ -228,6 +229,7 @@ message SetWorkflowRequest {
   int64 campaign_id = 1;
   string workflow_yaml = 2;
   api.common.OperatorContext operator_context = 3;
+  string ui_metadata = 4; // Frontend workflow editor UI state (node positions, viewport, etc.)
 }
 
 message SetWorkflowResponse {

@@ -434,6 +434,8 @@ func (m *CampaignWorkflow) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for UiMetadata
+
 	if len(errors) > 0 {
 		return CampaignWorkflowMultiError(errors)
 	}
@@ -2636,6 +2638,8 @@ func (m *SetWorkflowRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for UiMetadata
 
 	if len(errors) > 0 {
 		return SetWorkflowRequestMultiError(errors)
