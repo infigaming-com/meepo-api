@@ -720,6 +720,7 @@ message SetAffiliateDomainRequest {
     optional bool available_to_all = 2;
     repeated int64 affiliate_ids = 3;
     api.common.OperatorContext initiator_operator_context = 4;
+    api.common.OperatorContext target_operator_context = 5;
 }
 
 message SetAffiliateDomainResponse {}

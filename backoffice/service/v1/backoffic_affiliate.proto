@@ -451,6 +451,7 @@ message SetAffiliateDomainRequest {
 	string domain = 1;
 	optional bool available_to_all = 2;
 	repeated int64 affiliate_ids = 3;
+	api.common.OperatorContext target_operator_context = 4;
 }
 
 // -------------- Event --------------

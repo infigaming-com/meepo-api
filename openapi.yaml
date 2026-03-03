@@ -21085,6 +21085,8 @@ components:
                     type: array
                     items:
                         type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.SetAppDownloadRewardConfigRequest:
             type: object
             properties:
