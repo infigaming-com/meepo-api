@@ -2019,6 +2019,7 @@ type ListAccountsRequest struct {
 	PageSize               *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	AccountCreator         *string                        `protobuf:"bytes,7,opt,name=account_creator,json=accountCreator,proto3,oneof" json:"account_creator,omitempty"`
 	RoleCreator            *string                        `protobuf:"bytes,8,opt,name=role_creator,json=roleCreator,proto3,oneof" json:"role_creator,omitempty"`
+	Email                  *string                        `protobuf:"bytes,9,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2105,6 +2106,13 @@ func (x *ListAccountsRequest) GetAccountCreator() string {
 func (x *ListAccountsRequest) GetRoleCreator() string {
 	if x != nil && x.RoleCreator != nil {
 		return *x.RoleCreator
+	}
+	return ""
+}
+
+func (x *ListAccountsRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
@@ -3383,7 +3391,7 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"Permission\x12\x16\n" +
 	"\x06module\x18\x01 \x01(\tR\x06module\x12\x18\n" +
-	"\aactions\x18\x02 \x03(\tR\aactions\"\xbf\x03\n" +
+	"\aactions\x18\x02 \x03(\tR\aactions\"\xe4\x03\n" +
 	"\x13ListAccountsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1c\n" +
 	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
@@ -3392,7 +3400,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01\x12,\n" +
 	"\x0faccount_creator\x18\a \x01(\tH\x05R\x0eaccountCreator\x88\x01\x01\x12&\n" +
-	"\frole_creator\x18\b \x01(\tH\x06R\vroleCreator\x88\x01\x01B\n" +
+	"\frole_creator\x18\b \x01(\tH\x06R\vroleCreator\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\t \x01(\tH\aR\x05email\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\n" +
 	"\n" +
@@ -3403,7 +3412,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"_page_sizeB\x12\n" +
 	"\x10_account_creatorB\x0f\n" +
-	"\r_role_creator\"\xe0\x05\n" +
+	"\r_role_creatorB\b\n" +
+	"\x06_email\"\xe0\x05\n" +
 	"\x14ListAccountsResponse\x12S\n" +
 	"\baccounts\x18\x01 \x03(\v27.api.backoffice.service.v1.ListAccountsResponse.AccountR\baccounts\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +

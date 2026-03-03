@@ -87,6 +87,13 @@ service BackofficeFinance {
 		};
 	}
 
+	rpc DeleteAdjustment(DeleteAdjustmentRequest) returns (DeleteAdjustmentResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/adjustment/delete"
+			body: "*"
+		};
+	}
+
 	rpc SendInvoices(SendInvoicesRequest) returns (SendInvoicesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/finance/invoices/send"
@@ -587,6 +594,7 @@ message GetBalancesSummaryResponse {
 message ListBillingPeriodsRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
+	optional string status = 3;
 }
 
 message ListBillingPeriodsResponse {

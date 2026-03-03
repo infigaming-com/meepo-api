@@ -4439,6 +4439,10 @@ func (m *ListAccountsRequest) validate(all bool) error {
 		// no validation rules for RoleCreator
 	}
 
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
 	if len(errors) > 0 {
 		return ListAccountsRequestMultiError(errors)
 	}

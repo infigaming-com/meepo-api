@@ -2869,6 +2869,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.AddAdjustmentResponse'
+    /v1/backoffice/finance/adjustment/delete:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_DeleteAdjustment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAdjustmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAdjustmentResponse'
     /v1/backoffice/finance/adjustments/list:
         post:
             tags:
@@ -14203,6 +14221,14 @@ components:
         api.backoffice.service.v1.DeleteAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteAdjustmentRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.backoffice.service.v1.DeleteAdjustmentResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteAffiliateRequest:
             type: object
             properties:
@@ -16587,6 +16613,8 @@ components:
                     type: string
                 roleCreator:
                     type: string
+                email:
+                    type: string
         api.backoffice.service.v1.ListAccountsResponse:
             type: object
             properties:
@@ -17305,6 +17333,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                status:
+                    type: string
         api.backoffice.service.v1.ListBillingPeriodsResponse:
             type: object
             properties:
@@ -21494,6 +21524,9 @@ components:
                            - from: send_newsletter
                              to: _end
                          ```
+                uiMetadata:
+                    type: string
+                    description: Frontend workflow editor UI state (node positions, viewport, etc.)
             description: |-
                 Set or replace the workflow for a campaign.
                  The YAML is parsed, validated (graph connectivity, node configs, expressions), hashed, and versioned.
@@ -23093,6 +23126,8 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+                uiMetadata:
+                    type: string
             description: Campaign workflow definition
         api.campaign.service.v1.ConfigFieldSchema:
             type: object
@@ -31506,13 +31541,16 @@ components:
                 payUrl:
                     type: string
                     description: URL to direct the user to for payment completion
-                qrCode:
+                qrCodeImg:
                     type: string
-                    description: QR code image (typically base64 encoded) for mobile payment
+                    description: QR code image data (typically base64 encoded)
                 createdAt:
                     type: string
                     description: Timestamp when the transaction was created
                     format: date-time
+                qrCodeLink:
+                    type: string
+                    description: QR code link (e.g., PIX copy-paste string)
                 extra:
                     type: object
                     description: Additional transaction information returned by payment provider

@@ -379,6 +379,7 @@ type CampaignWorkflow struct {
 	ValidationErrors []string               `protobuf:"bytes,7,rep,name=validation_errors,json=validationErrors,proto3" json:"validation_errors,omitempty"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UiMetadata       string                 `protobuf:"bytes,10,opt,name=ui_metadata,json=uiMetadata,proto3" json:"ui_metadata,omitempty"` // Frontend workflow editor UI state (node positions, viewport, etc.)
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -474,6 +475,13 @@ func (x *CampaignWorkflow) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *CampaignWorkflow) GetUiMetadata() string {
+	if x != nil {
+		return x.UiMetadata
+	}
+	return ""
 }
 
 // Campaign execution record
@@ -1435,6 +1443,7 @@ type SetWorkflowRequest struct {
 	CampaignId      int64                   `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
 	WorkflowYaml    string                  `protobuf:"bytes,2,opt,name=workflow_yaml,json=workflowYaml,proto3" json:"workflow_yaml,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	UiMetadata      string                  `protobuf:"bytes,4,opt,name=ui_metadata,json=uiMetadata,proto3" json:"ui_metadata,omitempty"` // Frontend workflow editor UI state (node positions, viewport, etc.)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1488,6 +1497,13 @@ func (x *SetWorkflowRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *SetWorkflowRequest) GetUiMetadata() string {
+	if x != nil {
+		return x.UiMetadata
+	}
+	return ""
 }
 
 type SetWorkflowResponse struct {
@@ -2978,7 +2994,7 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\r_campaign_keyB\v\n" +
 	"\t_start_atB\t\n" +
 	"\a_end_atB\v\n" +
-	"\t_workflow\"\xe5\x02\n" +
+	"\t_workflow\"\x86\x03\n" +
 	"\x10CampaignWorkflow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
@@ -2991,7 +3007,10 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x8f\b\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1f\n" +
+	"\vui_metadata\x18\n" +
+	" \x01(\tR\n" +
+	"uiMetadata\"\x8f\b\n" +
 	"\x11CampaignExecution\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vcampaign_id\x18\x02 \x01(\x03R\n" +
@@ -3093,12 +3112,14 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\x15DeleteCampaignRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x18\n" +
-	"\x16DeleteCampaignResponse\"\xa2\x01\n" +
+	"\x16DeleteCampaignResponse\"\xc3\x01\n" +
 	"\x12SetWorkflowRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12#\n" +
 	"\rworkflow_yaml\x18\x02 \x01(\tR\fworkflowYaml\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\\\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\vui_metadata\x18\x04 \x01(\tR\n" +
+	"uiMetadata\"\\\n" +
 	"\x13SetWorkflowResponse\x12E\n" +
 	"\bworkflow\x18\x01 \x01(\v2).api.campaign.service.v1.CampaignWorkflowR\bworkflow\"}\n" +
 	"\x12GetWorkflowRequest\x12\x1f\n" +

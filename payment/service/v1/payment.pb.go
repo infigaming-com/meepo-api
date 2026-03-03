@@ -1958,10 +1958,12 @@ type InitiateDepositResponse struct {
 	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	// URL to direct the user to for payment completion
 	PayUrl string `protobuf:"bytes,5,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
-	// QR code image (typically base64 encoded) for mobile payment
-	QrCode string `protobuf:"bytes,6,opt,name=qr_code,json=qrCode,proto3" json:"qr_code,omitempty"`
+	// QR code image data (typically base64 encoded)
+	QrCodeImg string `protobuf:"bytes,6,opt,name=qr_code_img,json=qrCodeImg,proto3" json:"qr_code_img,omitempty"`
 	// Timestamp when the transaction was created
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// QR code link (e.g., PIX copy-paste string)
+	QrCodeLink string `protobuf:"bytes,9,opt,name=qr_code_link,json=qrCodeLink,proto3" json:"qr_code_link,omitempty"`
 	// Additional transaction information returned by payment provider
 	Extra         *structpb.Struct `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2033,9 +2035,9 @@ func (x *InitiateDepositResponse) GetPayUrl() string {
 	return ""
 }
 
-func (x *InitiateDepositResponse) GetQrCode() string {
+func (x *InitiateDepositResponse) GetQrCodeImg() string {
 	if x != nil {
-		return x.QrCode
+		return x.QrCodeImg
 	}
 	return ""
 }
@@ -2045,6 +2047,13 @@ func (x *InitiateDepositResponse) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *InitiateDepositResponse) GetQrCodeLink() string {
+	if x != nil {
+		return x.QrCodeLink
+	}
+	return ""
 }
 
 func (x *InitiateDepositResponse) GetExtra() *structpb.Struct {
@@ -6751,16 +6760,18 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"skip_bonus\x18\x06 \x01(\bR\tskipBonus\x12&\n" +
 	"\x0fsaved_info_name\x18\a \x01(\tR\rsavedInfoName\x12\x1d\n" +
 	"\n" +
-	"return_url\x18\b \x01(\tR\treturnUrl\"\xa8\x02\n" +
+	"return_url\x18\b \x01(\tR\treturnUrl\"\xd1\x02\n" +
 	"\x17InitiateDepositResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x17\n" +
-	"\apay_url\x18\x05 \x01(\tR\x06payUrl\x12\x17\n" +
-	"\aqr_code\x18\x06 \x01(\tR\x06qrCode\x129\n" +
+	"\apay_url\x18\x05 \x01(\tR\x06payUrl\x12\x1e\n" +
+	"\vqr_code_img\x18\x06 \x01(\tR\tqrCodeImg\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12 \n" +
+	"\fqr_code_link\x18\t \x01(\tR\n" +
+	"qrCodeLink\x12-\n" +
 	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"a\n" +
 	"\x11GetAddressRequest\x12\x1d\n" +
 	"\n" +
