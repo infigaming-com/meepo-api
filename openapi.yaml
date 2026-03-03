@@ -29818,6 +29818,9 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.wallet.service.v1.AppDownloadRewardConfigs'
                     description: reward available for the user's country (nil if not eligible)
+                forceDownloadPopup:
+                    type: boolean
+                    description: whether to force showing the download popup
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:

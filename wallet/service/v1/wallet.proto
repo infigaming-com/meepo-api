@@ -2141,4 +2141,6 @@ message GetAppDownloadRewardStatusResponse {
 	string country = 3;
 	// reward available for the user's country (nil if not eligible)
 	AppDownloadRewardConfigs reward_configs = 4;
+	// whether to force showing the download popup
+	bool force_download_popup = 5;
 }
