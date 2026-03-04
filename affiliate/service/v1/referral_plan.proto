@@ -112,7 +112,7 @@ message CreateUserReferralCodeResponse {
 
 message ListUserReferralRewardsRequest {
     string currency = 1;
-    string reward_type = 2; // conversion_reward/deposit_cashback/wagering_commission/loss_revenue_share
+    string reward_type = 2; // conversion_reward/deposit_cashback_reward/wagering_commission_reward/loss_revenue_share_reward
     optional string referral_code = 3;
     optional int64 user_id = 4;
     optional int32 tier = 5;
