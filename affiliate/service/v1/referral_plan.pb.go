@@ -729,7 +729,7 @@ func (x *CreateUserReferralCodeResponse) GetReferralCode() string {
 type ListUserReferralRewardsRequest struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Currency            string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	RewardType          string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // conversion_reward/deposit_cashback/wagering_commission/loss_revenue_share
+	RewardType          string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // conversion_reward/deposit_cashback_reward/wagering_commission_reward/loss_revenue_share_reward
 	ReferralCode        *string                `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
 	UserId              *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	Tier                *int32                 `protobuf:"varint,5,opt,name=tier,proto3,oneof" json:"tier,omitempty"`
