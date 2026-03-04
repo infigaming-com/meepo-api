@@ -28,6 +28,17 @@ func AuthMiddlewareWithPathIncluder(pathIncluder func(string) bool, secret strin
 			}
 
 			if !pathIncluder(httpTr.Request().URL.Path) {
+				// Optional auth: try to parse JWT if present, but don't require it.
+				// This allows excluded paths to still identify logged-in users.
+				if authorization := httpTr.Request().Header.Get("Authorization"); strings.HasPrefix(authorization, "Bearer ") {
+					if _, claims, err := jwt.ParseToken(authorization, secret); err == nil {
+						if operatorContext, ok := mctx.GetOperatorContext(ctx); ok {
+							claims.UserInfo.RealOperatorId = operatorContext.RealOperatorId
+							claims.UserInfo.OperatorType = operatorContext.OperatorType
+							ctx = mctx.WithUserInfo(ctx, claims.UserInfo)
+						}
+					}
+				}
 				return handler(ctx, req)
 			}
 
