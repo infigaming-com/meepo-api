@@ -17133,6 +17133,387 @@ var _ interface {
 	ErrorName() string
 } = CancelFreespinsResponseValidationError{}
 
+// Validate checks the field values on GetPlayerFreespinsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPlayerFreespinsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPlayerFreespinsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPlayerFreespinsRequestMultiError, or nil if none found.
+func (m *GetPlayerFreespinsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPlayerFreespinsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPlayerFreespinsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPlayerFreespinsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPlayerFreespinsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetPlayerFreespinsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPlayerFreespinsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetPlayerFreespinsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetPlayerFreespinsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPlayerFreespinsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPlayerFreespinsRequestMultiError) AllErrors() []error { return m }
+
+// GetPlayerFreespinsRequestValidationError is the validation error returned by
+// GetPlayerFreespinsRequest.Validate if the designated constraints aren't met.
+type GetPlayerFreespinsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPlayerFreespinsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPlayerFreespinsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPlayerFreespinsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPlayerFreespinsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPlayerFreespinsRequestValidationError) ErrorName() string {
+	return "GetPlayerFreespinsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPlayerFreespinsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPlayerFreespinsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPlayerFreespinsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPlayerFreespinsRequestValidationError{}
+
+// Validate checks the field values on PlayerFreespin with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *PlayerFreespin) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerFreespin with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PlayerFreespinMultiError,
+// or nil if none found.
+func (m *PlayerFreespin) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerFreespin) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for GameIdList
+
+	// no validation rules for Rounds
+
+	// no validation rules for RoundsPlayed
+
+	// no validation rules for BonusCode
+
+	// no validation rules for ExpirationDate
+
+	if len(errors) > 0 {
+		return PlayerFreespinMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerFreespinMultiError is an error wrapping multiple validation errors
+// returned by PlayerFreespin.ValidateAll() if the designated constraints
+// aren't met.
+type PlayerFreespinMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerFreespinMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerFreespinMultiError) AllErrors() []error { return m }
+
+// PlayerFreespinValidationError is the validation error returned by
+// PlayerFreespin.Validate if the designated constraints aren't met.
+type PlayerFreespinValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerFreespinValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerFreespinValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerFreespinValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerFreespinValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerFreespinValidationError) ErrorName() string { return "PlayerFreespinValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PlayerFreespinValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerFreespin.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerFreespinValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerFreespinValidationError{}
+
+// Validate checks the field values on GetPlayerFreespinsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPlayerFreespinsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPlayerFreespinsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPlayerFreespinsResponseMultiError, or nil if none found.
+func (m *GetPlayerFreespinsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPlayerFreespinsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetFreespins() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetPlayerFreespinsResponseValidationError{
+						field:  fmt.Sprintf("Freespins[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetPlayerFreespinsResponseValidationError{
+						field:  fmt.Sprintf("Freespins[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetPlayerFreespinsResponseValidationError{
+					field:  fmt.Sprintf("Freespins[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetPlayerFreespinsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPlayerFreespinsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetPlayerFreespinsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type GetPlayerFreespinsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPlayerFreespinsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPlayerFreespinsResponseMultiError) AllErrors() []error { return m }
+
+// GetPlayerFreespinsResponseValidationError is the validation error returned
+// by GetPlayerFreespinsResponse.Validate if the designated constraints aren't met.
+type GetPlayerFreespinsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPlayerFreespinsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPlayerFreespinsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPlayerFreespinsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPlayerFreespinsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPlayerFreespinsResponseValidationError) ErrorName() string {
+	return "GetPlayerFreespinsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPlayerFreespinsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPlayerFreespinsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPlayerFreespinsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPlayerFreespinsResponseValidationError{}
+
 // Validate checks the field values on FreespinWinRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
