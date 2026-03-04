@@ -29801,7 +29801,10 @@ components:
                     description: Display name of the ancestor operator.
         api.wallet.service.v1.GetAppDownloadRewardStatusRequest:
             type: object
-            properties: {}
+            properties:
+                loginMethod:
+                    type: string
+                    description: login method of the user
         api.wallet.service.v1.GetAppDownloadRewardStatusResponse:
             type: object
             properties:
@@ -29821,9 +29824,6 @@ components:
                 forceDownloadPopup:
                     type: boolean
                     description: whether to force showing the download popup
-                loginMethod:
-                    type: string
-                    description: login method of the user
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:

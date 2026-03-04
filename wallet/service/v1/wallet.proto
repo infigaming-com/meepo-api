@@ -2131,7 +2131,10 @@ message GetAppDownloadRewardConfigResponse {
 message ClaimAppDownloadRewardRequest {}
 message ClaimAppDownloadRewardResponse {}
 
-message GetAppDownloadRewardStatusRequest {}
+message GetAppDownloadRewardStatusRequest {
+	// login method of the user
+	string login_method = 1;
+}
 message GetAppDownloadRewardStatusResponse {
 	// true if user can claim the reward
 	bool eligible = 1;
@@ -2143,6 +2146,4 @@ message GetAppDownloadRewardStatusResponse {
 	AppDownloadRewardConfigs reward_configs = 4;
 	// whether to force showing the download popup
 	bool force_download_popup = 5;
-	// login method of the user
-	string login_method = 6;
 }

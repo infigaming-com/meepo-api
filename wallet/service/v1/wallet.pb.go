@@ -12939,7 +12939,9 @@ func (*ClaimAppDownloadRewardResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetAppDownloadRewardStatusRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// login method of the user
+	LoginMethod   string `protobuf:"bytes,1,opt,name=login_method,json=loginMethod,proto3" json:"login_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12974,6 +12976,13 @@ func (*GetAppDownloadRewardStatusRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{163}
 }
 
+func (x *GetAppDownloadRewardStatusRequest) GetLoginMethod() string {
+	if x != nil {
+		return x.LoginMethod
+	}
+	return ""
+}
+
 type GetAppDownloadRewardStatusResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// true if user can claim the reward
@@ -12986,10 +12995,8 @@ type GetAppDownloadRewardStatusResponse struct {
 	RewardConfigs *AppDownloadRewardConfigs `protobuf:"bytes,4,opt,name=reward_configs,json=rewardConfigs,proto3" json:"reward_configs,omitempty"`
 	// whether to force showing the download popup
 	ForceDownloadPopup bool `protobuf:"varint,5,opt,name=force_download_popup,json=forceDownloadPopup,proto3" json:"force_download_popup,omitempty"`
-	// login method of the user
-	LoginMethod   string `protobuf:"bytes,6,opt,name=login_method,json=loginMethod,proto3" json:"login_method,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetAppDownloadRewardStatusResponse) Reset() {
@@ -13055,13 +13062,6 @@ func (x *GetAppDownloadRewardStatusResponse) GetForceDownloadPopup() bool {
 		return x.ForceDownloadPopup
 	}
 	return false
-}
-
-func (x *GetAppDownloadRewardStatusResponse) GetLoginMethod() string {
-	if x != nil {
-		return x.LoginMethod
-	}
-	return ""
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -17551,15 +17551,15 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ainherited_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
 	"\x1cinherited_from_operator_name\x18\x05 \x01(\tR\x19inheritedFromOperatorName\"\x1f\n" +
 	"\x1dClaimAppDownloadRewardRequest\" \n" +
-	"\x1eClaimAppDownloadRewardResponse\"#\n" +
-	"!GetAppDownloadRewardStatusRequest\"\xb0\x02\n" +
+	"\x1eClaimAppDownloadRewardResponse\"F\n" +
+	"!GetAppDownloadRewardStatusRequest\x12!\n" +
+	"\flogin_method\x18\x01 \x01(\tR\vloginMethod\"\x8d\x02\n" +
 	"\"GetAppDownloadRewardStatusResponse\x12\x1a\n" +
 	"\beligible\x18\x01 \x01(\bR\beligible\x12'\n" +
 	"\x0falready_claimed\x18\x02 \x01(\bR\x0ealreadyClaimed\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12V\n" +
 	"\x0ereward_configs\x18\x04 \x01(\v2/.api.wallet.service.v1.AppDownloadRewardConfigsR\rrewardConfigs\x120\n" +
-	"\x14force_download_popup\x18\x05 \x01(\bR\x12forceDownloadPopup\x12!\n" +
-	"\flogin_method\x18\x06 \x01(\tR\vloginMethod2\xf0[\n" +
+	"\x14force_download_popup\x18\x05 \x01(\bR\x12forceDownloadPopup2\xf0[\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
