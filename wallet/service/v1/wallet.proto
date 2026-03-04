@@ -2143,4 +2143,6 @@ message GetAppDownloadRewardStatusResponse {
 	AppDownloadRewardConfigs reward_configs = 4;
 	// whether to force showing the download popup
 	bool force_download_popup = 5;
+	// login method of the user
+	string login_method = 6;
 }

@@ -29821,6 +29821,9 @@ components:
                 forceDownloadPopup:
                     type: boolean
                     description: whether to force showing the download popup
+                loginMethod:
+                    type: string
+                    description: login method of the user
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:

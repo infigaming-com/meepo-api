@@ -24498,6 +24498,8 @@ func (m *GetAppDownloadRewardStatusResponse) validate(all bool) error {
 
 	// no validation rules for ForceDownloadPopup
 
+	// no validation rules for LoginMethod
+
 	if len(errors) > 0 {
 		return GetAppDownloadRewardStatusResponseMultiError(errors)
 	}
