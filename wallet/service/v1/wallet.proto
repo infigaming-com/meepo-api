@@ -2131,7 +2131,10 @@ message GetAppDownloadRewardConfigResponse {
 message ClaimAppDownloadRewardRequest {}
 message ClaimAppDownloadRewardResponse {}
 
-message GetAppDownloadRewardStatusRequest {}
+message GetAppDownloadRewardStatusRequest {
+	// login method of the user
+	string login_method = 1;
+}
 message GetAppDownloadRewardStatusResponse {
 	// true if user can claim the reward
 	bool eligible = 1;

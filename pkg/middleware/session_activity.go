@@ -20,7 +20,6 @@ type SessionActivityRequest struct {
 	IP                 string
 	UserAgent          string
 	Country            string
-	LoginMethod        string
 }
 
 // SessionActivityMiddleware tracks session activity for players (RoleId == 0).
@@ -45,7 +44,6 @@ func SessionActivityMiddleware(
 						IP:                 reqInfo.ClientIP,
 						UserAgent:          reqInfo.UserAgent,
 						Country:            reqInfo.Country,
-						LoginMethod:        reqInfo.LoginMethod,
 					})
 				}
 			}

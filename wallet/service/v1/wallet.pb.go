@@ -12939,7 +12939,9 @@ func (*ClaimAppDownloadRewardResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetAppDownloadRewardStatusRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// login method of the user
+	LoginMethod   string `protobuf:"bytes,1,opt,name=login_method,json=loginMethod,proto3" json:"login_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12972,6 +12974,13 @@ func (x *GetAppDownloadRewardStatusRequest) ProtoReflect() protoreflect.Message 
 // Deprecated: Use GetAppDownloadRewardStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetAppDownloadRewardStatusRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{163}
+}
+
+func (x *GetAppDownloadRewardStatusRequest) GetLoginMethod() string {
+	if x != nil {
+		return x.LoginMethod
+	}
+	return ""
 }
 
 type GetAppDownloadRewardStatusResponse struct {
@@ -17542,8 +17551,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ainherited_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
 	"\x1cinherited_from_operator_name\x18\x05 \x01(\tR\x19inheritedFromOperatorName\"\x1f\n" +
 	"\x1dClaimAppDownloadRewardRequest\" \n" +
-	"\x1eClaimAppDownloadRewardResponse\"#\n" +
-	"!GetAppDownloadRewardStatusRequest\"\x8d\x02\n" +
+	"\x1eClaimAppDownloadRewardResponse\"F\n" +
+	"!GetAppDownloadRewardStatusRequest\x12!\n" +
+	"\flogin_method\x18\x01 \x01(\tR\vloginMethod\"\x8d\x02\n" +
 	"\"GetAppDownloadRewardStatusResponse\x12\x1a\n" +
 	"\beligible\x18\x01 \x01(\bR\beligible\x12'\n" +
 	"\x0falready_claimed\x18\x02 \x01(\bR\x0ealreadyClaimed\x12\x18\n" +
