@@ -329,12 +329,12 @@ const SessionActivityTopic = "session.activity"
 
 type SessionActivityEvent struct {
 	UserID             int64    `json:"userId"`
-	OperatorID         int64    `json:"operatorId"`
-	RealOperatorID     int64    `json:"realOperatorId"`
-	CompanyOperatorID  int64    `json:"companyOperatorId"`
-	RetailerOperatorID int64    `json:"retailerOperatorId"`
-	SystemOperatorID   int64    `json:"systemOperatorId"`
-	OperatorType       string   `json:"operatorType"`
+	OperatorID         int64    `json:"operatorId"`                    // = RealOperatorID for backward compat
+	RealOperatorID     int64    `json:"realOperatorId"`                // explicit real_operator_id
+	CompanyOperatorID  int64    `json:"companyOperatorId"`             // company level hierarchy ID
+	RetailerOperatorID int64    `json:"retailerOperatorId"`            // retailer level hierarchy ID
+	SystemOperatorID   int64    `json:"systemOperatorId"`              // system level hierarchy ID
+	OperatorType       string   `json:"operatorType"`                  // "operator"|"company"|"retailer"|"system"
 	Triggers           []string `json:"triggers"`
 	IP                 string   `json:"ip"`
 	PrevIP             string   `json:"prevIp,omitempty"`
