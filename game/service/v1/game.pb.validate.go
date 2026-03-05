@@ -17186,6 +17186,8 @@ func (m *GetPlayerFreespinsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Currency
+
 	if len(errors) > 0 {
 		return GetPlayerFreespinsRequestMultiError(errors)
 	}
