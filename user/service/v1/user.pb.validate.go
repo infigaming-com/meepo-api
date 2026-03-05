@@ -33954,6 +33954,426 @@ var _ interface {
 	ErrorName() string
 } = SetSwapFeeSettingsResponseValidationError{}
 
+// Validate checks the field values on RegisterWebPushDeviceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RegisterWebPushDeviceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RegisterWebPushDeviceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RegisterWebPushDeviceRequestMultiError, or nil if none found.
+func (m *RegisterWebPushDeviceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RegisterWebPushDeviceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FcmToken
+
+	// no validation rules for Platform
+
+	if len(errors) > 0 {
+		return RegisterWebPushDeviceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RegisterWebPushDeviceRequestMultiError is an error wrapping multiple
+// validation errors returned by RegisterWebPushDeviceRequest.ValidateAll() if
+// the designated constraints aren't met.
+type RegisterWebPushDeviceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RegisterWebPushDeviceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RegisterWebPushDeviceRequestMultiError) AllErrors() []error { return m }
+
+// RegisterWebPushDeviceRequestValidationError is the validation error returned
+// by RegisterWebPushDeviceRequest.Validate if the designated constraints
+// aren't met.
+type RegisterWebPushDeviceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RegisterWebPushDeviceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RegisterWebPushDeviceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RegisterWebPushDeviceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RegisterWebPushDeviceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RegisterWebPushDeviceRequestValidationError) ErrorName() string {
+	return "RegisterWebPushDeviceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RegisterWebPushDeviceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRegisterWebPushDeviceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RegisterWebPushDeviceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RegisterWebPushDeviceRequestValidationError{}
+
+// Validate checks the field values on RegisterWebPushDeviceResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RegisterWebPushDeviceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RegisterWebPushDeviceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// RegisterWebPushDeviceResponseMultiError, or nil if none found.
+func (m *RegisterWebPushDeviceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RegisterWebPushDeviceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DeviceId
+
+	if len(errors) > 0 {
+		return RegisterWebPushDeviceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RegisterWebPushDeviceResponseMultiError is an error wrapping multiple
+// validation errors returned by RegisterWebPushDeviceResponse.ValidateAll()
+// if the designated constraints aren't met.
+type RegisterWebPushDeviceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RegisterWebPushDeviceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RegisterWebPushDeviceResponseMultiError) AllErrors() []error { return m }
+
+// RegisterWebPushDeviceResponseValidationError is the validation error
+// returned by RegisterWebPushDeviceResponse.Validate if the designated
+// constraints aren't met.
+type RegisterWebPushDeviceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RegisterWebPushDeviceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RegisterWebPushDeviceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RegisterWebPushDeviceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RegisterWebPushDeviceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RegisterWebPushDeviceResponseValidationError) ErrorName() string {
+	return "RegisterWebPushDeviceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RegisterWebPushDeviceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRegisterWebPushDeviceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RegisterWebPushDeviceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RegisterWebPushDeviceResponseValidationError{}
+
+// Validate checks the field values on UnregisterWebPushDeviceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UnregisterWebPushDeviceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UnregisterWebPushDeviceRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UnregisterWebPushDeviceRequestMultiError, or nil if none found.
+func (m *UnregisterWebPushDeviceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UnregisterWebPushDeviceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FcmToken
+
+	if len(errors) > 0 {
+		return UnregisterWebPushDeviceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UnregisterWebPushDeviceRequestMultiError is an error wrapping multiple
+// validation errors returned by UnregisterWebPushDeviceRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UnregisterWebPushDeviceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnregisterWebPushDeviceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnregisterWebPushDeviceRequestMultiError) AllErrors() []error { return m }
+
+// UnregisterWebPushDeviceRequestValidationError is the validation error
+// returned by UnregisterWebPushDeviceRequest.Validate if the designated
+// constraints aren't met.
+type UnregisterWebPushDeviceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UnregisterWebPushDeviceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UnregisterWebPushDeviceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UnregisterWebPushDeviceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UnregisterWebPushDeviceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UnregisterWebPushDeviceRequestValidationError) ErrorName() string {
+	return "UnregisterWebPushDeviceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UnregisterWebPushDeviceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUnregisterWebPushDeviceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UnregisterWebPushDeviceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UnregisterWebPushDeviceRequestValidationError{}
+
+// Validate checks the field values on UnregisterWebPushDeviceResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UnregisterWebPushDeviceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UnregisterWebPushDeviceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UnregisterWebPushDeviceResponseMultiError, or nil if none found.
+func (m *UnregisterWebPushDeviceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UnregisterWebPushDeviceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UnregisterWebPushDeviceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UnregisterWebPushDeviceResponseMultiError is an error wrapping multiple
+// validation errors returned by UnregisterWebPushDeviceResponse.ValidateAll()
+// if the designated constraints aren't met.
+type UnregisterWebPushDeviceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnregisterWebPushDeviceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnregisterWebPushDeviceResponseMultiError) AllErrors() []error { return m }
+
+// UnregisterWebPushDeviceResponseValidationError is the validation error
+// returned by UnregisterWebPushDeviceResponse.Validate if the designated
+// constraints aren't met.
+type UnregisterWebPushDeviceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UnregisterWebPushDeviceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UnregisterWebPushDeviceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UnregisterWebPushDeviceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UnregisterWebPushDeviceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UnregisterWebPushDeviceResponseValidationError) ErrorName() string {
+	return "UnregisterWebPushDeviceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UnregisterWebPushDeviceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUnregisterWebPushDeviceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UnregisterWebPushDeviceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UnregisterWebPushDeviceResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

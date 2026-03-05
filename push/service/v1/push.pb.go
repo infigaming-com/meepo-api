@@ -695,6 +695,390 @@ func (x *ListBetTickerConfigResponse) GetEnable() bool {
 	return false
 }
 
+type SendWebPushRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Title              string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Body               string                 `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
+	Url                string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"` // click-through URL
+	Icon               string                 `protobuf:"bytes,4,opt,name=icon,proto3" json:"icon,omitempty"`
+	Image              string                 `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	Data               map[string]string      `protobuf:"bytes,6,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // custom key-value payload
+	UserId             int64                  `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                                        // target user
+	OperatorId         int64                  `protobuf:"varint,8,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId  int64                  `protobuf:"varint,9,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId int64                  `protobuf:"varint,10,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	FcmTokens          []string               `protobuf:"bytes,11,rep,name=fcm_tokens,json=fcmTokens,proto3" json:"fcm_tokens,omitempty"` // optional: direct token targeting (bypass user_id lookup)
+	Topic              string                 `protobuf:"bytes,12,opt,name=topic,proto3" json:"topic,omitempty"`                          // optional: FCM topic targeting
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *SendWebPushRequest) Reset() {
+	*x = SendWebPushRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendWebPushRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendWebPushRequest) ProtoMessage() {}
+
+func (x *SendWebPushRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendWebPushRequest.ProtoReflect.Descriptor instead.
+func (*SendWebPushRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SendWebPushRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *SendWebPushRequest) GetBody() string {
+	if x != nil {
+		return x.Body
+	}
+	return ""
+}
+
+func (x *SendWebPushRequest) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *SendWebPushRequest) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *SendWebPushRequest) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *SendWebPushRequest) GetData() map[string]string {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *SendWebPushRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *SendWebPushRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *SendWebPushRequest) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *SendWebPushRequest) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *SendWebPushRequest) GetFcmTokens() []string {
+	if x != nil {
+		return x.FcmTokens
+	}
+	return nil
+}
+
+func (x *SendWebPushRequest) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+type SendWebPushResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MessageId     int64                  `protobuf:"varint,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"` // internal notification ID
+	SuccessCount  int32                  `protobuf:"varint,2,opt,name=success_count,json=successCount,proto3" json:"success_count,omitempty"`
+	FailureCount  int32                  `protobuf:"varint,3,opt,name=failure_count,json=failureCount,proto3" json:"failure_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendWebPushResponse) Reset() {
+	*x = SendWebPushResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendWebPushResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendWebPushResponse) ProtoMessage() {}
+
+func (x *SendWebPushResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendWebPushResponse.ProtoReflect.Descriptor instead.
+func (*SendWebPushResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SendWebPushResponse) GetMessageId() int64 {
+	if x != nil {
+		return x.MessageId
+	}
+	return 0
+}
+
+func (x *SendWebPushResponse) GetSuccessCount() int32 {
+	if x != nil {
+		return x.SuccessCount
+	}
+	return 0
+}
+
+func (x *SendWebPushResponse) GetFailureCount() int32 {
+	if x != nil {
+		return x.FailureCount
+	}
+	return 0
+}
+
+type RegisterWebPushDeviceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	FcmToken      string                 `protobuf:"bytes,3,opt,name=fcm_token,json=fcmToken,proto3" json:"fcm_token,omitempty"`
+	Platform      string                 `protobuf:"bytes,4,opt,name=platform,proto3" json:"platform,omitempty"` // "chrome", "firefox", "safari", "edge"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterWebPushDeviceRequest) Reset() {
+	*x = RegisterWebPushDeviceRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterWebPushDeviceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterWebPushDeviceRequest) ProtoMessage() {}
+
+func (x *RegisterWebPushDeviceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterWebPushDeviceRequest.ProtoReflect.Descriptor instead.
+func (*RegisterWebPushDeviceRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *RegisterWebPushDeviceRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *RegisterWebPushDeviceRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *RegisterWebPushDeviceRequest) GetFcmToken() string {
+	if x != nil {
+		return x.FcmToken
+	}
+	return ""
+}
+
+func (x *RegisterWebPushDeviceRequest) GetPlatform() string {
+	if x != nil {
+		return x.Platform
+	}
+	return ""
+}
+
+type RegisterWebPushDeviceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      int64                  `protobuf:"varint,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterWebPushDeviceResponse) Reset() {
+	*x = RegisterWebPushDeviceResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterWebPushDeviceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterWebPushDeviceResponse) ProtoMessage() {}
+
+func (x *RegisterWebPushDeviceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterWebPushDeviceResponse.ProtoReflect.Descriptor instead.
+func (*RegisterWebPushDeviceResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *RegisterWebPushDeviceResponse) GetDeviceId() int64 {
+	if x != nil {
+		return x.DeviceId
+	}
+	return 0
+}
+
+type UnregisterWebPushDeviceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FcmToken      string                 `protobuf:"bytes,1,opt,name=fcm_token,json=fcmToken,proto3" json:"fcm_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterWebPushDeviceRequest) Reset() {
+	*x = UnregisterWebPushDeviceRequest{}
+	mi := &file_push_service_v1_push_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterWebPushDeviceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterWebPushDeviceRequest) ProtoMessage() {}
+
+func (x *UnregisterWebPushDeviceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterWebPushDeviceRequest.ProtoReflect.Descriptor instead.
+func (*UnregisterWebPushDeviceRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *UnregisterWebPushDeviceRequest) GetFcmToken() string {
+	if x != nil {
+		return x.FcmToken
+	}
+	return ""
+}
+
+type UnregisterWebPushDeviceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterWebPushDeviceResponse) Reset() {
+	*x = UnregisterWebPushDeviceResponse{}
+	mi := &file_push_service_v1_push_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterWebPushDeviceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterWebPushDeviceResponse) ProtoMessage() {}
+
+func (x *UnregisterWebPushDeviceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterWebPushDeviceResponse.ProtoReflect.Descriptor instead.
+func (*UnregisterWebPushDeviceResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_proto_rawDescGZIP(), []int{16}
+}
+
 // Statistics for a single operator
 type GetNotificationStatsResponse_OperatorNotificationStats struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -708,7 +1092,7 @@ type GetNotificationStatsResponse_OperatorNotificationStats struct {
 
 func (x *GetNotificationStatsResponse_OperatorNotificationStats) Reset() {
 	*x = GetNotificationStatsResponse_OperatorNotificationStats{}
-	mi := &file_push_service_v1_push_proto_msgTypes[11]
+	mi := &file_push_service_v1_push_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -720,7 +1104,7 @@ func (x *GetNotificationStatsResponse_OperatorNotificationStats) String() string
 func (*GetNotificationStatsResponse_OperatorNotificationStats) ProtoMessage() {}
 
 func (x *GetNotificationStatsResponse_OperatorNotificationStats) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_proto_msgTypes[11]
+	mi := &file_push_service_v1_push_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -775,7 +1159,7 @@ type UpdateBetTickerConfigRequest_Item struct {
 
 func (x *UpdateBetTickerConfigRequest_Item) Reset() {
 	*x = UpdateBetTickerConfigRequest_Item{}
-	mi := &file_push_service_v1_push_proto_msgTypes[12]
+	mi := &file_push_service_v1_push_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -787,7 +1171,7 @@ func (x *UpdateBetTickerConfigRequest_Item) String() string {
 func (*UpdateBetTickerConfigRequest_Item) ProtoMessage() {}
 
 func (x *UpdateBetTickerConfigRequest_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_proto_msgTypes[12]
+	mi := &file_push_service_v1_push_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -835,7 +1219,7 @@ type ListBetTickerConfigResponse_Item struct {
 
 func (x *ListBetTickerConfigResponse_Item) Reset() {
 	*x = ListBetTickerConfigResponse_Item{}
-	mi := &file_push_service_v1_push_proto_msgTypes[13]
+	mi := &file_push_service_v1_push_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +1231,7 @@ func (x *ListBetTickerConfigResponse_Item) String() string {
 func (*ListBetTickerConfigResponse_Item) ProtoMessage() {}
 
 func (x *ListBetTickerConfigResponse_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_proto_msgTypes[13]
+	mi := &file_push_service_v1_push_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -962,12 +1346,50 @@ const file_push_service_v1_push_proto_rawDesc = "" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12A\n" +
 	"\aall_bet\x18\x02 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\x06allBet\x12E\n" +
-	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\bhighWins2\xe2\x03\n" +
+	"\thigh_wins\x18\x03 \x01(\v2(.api.push.service.v1.BettingFilterConfigR\bhighWins\"\xcb\x03\n" +
+	"\x12SendWebPushRequest\x12\x14\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title\x12\x12\n" +
+	"\x04body\x18\x02 \x01(\tR\x04body\x12\x10\n" +
+	"\x03url\x18\x03 \x01(\tR\x03url\x12\x12\n" +
+	"\x04icon\x18\x04 \x01(\tR\x04icon\x12\x14\n" +
+	"\x05image\x18\x05 \x01(\tR\x05image\x12E\n" +
+	"\x04data\x18\x06 \x03(\v21.api.push.service.v1.SendWebPushRequest.DataEntryR\x04data\x12\x17\n" +
+	"\auser_id\x18\a \x01(\x03R\x06userId\x12\x1f\n" +
+	"\voperator_id\x18\b \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\t \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\n" +
+	" \x01(\x03R\x12retailerOperatorId\x12\x1d\n" +
+	"\n" +
+	"fcm_tokens\x18\v \x03(\tR\tfcmTokens\x12\x14\n" +
+	"\x05topic\x18\f \x01(\tR\x05topic\x1a7\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"~\n" +
+	"\x13SendWebPushResponse\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x01 \x01(\x03R\tmessageId\x12#\n" +
+	"\rsuccess_count\x18\x02 \x01(\x05R\fsuccessCount\x12#\n" +
+	"\rfailure_count\x18\x03 \x01(\x05R\ffailureCount\"\x91\x01\n" +
+	"\x1cRegisterWebPushDeviceRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12\x1b\n" +
+	"\tfcm_token\x18\x03 \x01(\tR\bfcmToken\x12\x1a\n" +
+	"\bplatform\x18\x04 \x01(\tR\bplatform\"<\n" +
+	"\x1dRegisterWebPushDeviceResponse\x12\x1b\n" +
+	"\tdevice_id\x18\x01 \x01(\x03R\bdeviceId\"=\n" +
+	"\x1eUnregisterWebPushDeviceRequest\x12\x1b\n" +
+	"\tfcm_token\x18\x01 \x01(\tR\bfcmToken\"!\n" +
+	"\x1fUnregisterWebPushDeviceResponse2\xd2\x06\n" +
 	"\x04Push\x12\\\n" +
 	"\tSendEmail\x12%.api.push.service.v1.SendEmailRequest\x1a&.api.push.service.v1.SendEmailResponse\"\x00\x12}\n" +
 	"\x14GetNotificationStats\x120.api.push.service.v1.GetNotificationStatsRequest\x1a1.api.push.service.v1.GetNotificationStatsResponse\"\x00\x12\x80\x01\n" +
 	"\x15UpdateBetTickerConfig\x121.api.push.service.v1.UpdateBetTickerConfigRequest\x1a2.api.push.service.v1.UpdateBetTickerConfigResponse\"\x00\x12z\n" +
-	"\x13ListBetTickerConfig\x12/.api.push.service.v1.ListBetTickerConfigRequest\x1a0.api.push.service.v1.ListBetTickerConfigResponse\"\x00BO\n" +
+	"\x13ListBetTickerConfig\x12/.api.push.service.v1.ListBetTickerConfigRequest\x1a0.api.push.service.v1.ListBetTickerConfigResponse\"\x00\x12b\n" +
+	"\vSendWebPush\x12'.api.push.service.v1.SendWebPushRequest\x1a(.api.push.service.v1.SendWebPushResponse\"\x00\x12\x80\x01\n" +
+	"\x15RegisterWebPushDevice\x121.api.push.service.v1.RegisterWebPushDeviceRequest\x1a2.api.push.service.v1.RegisterWebPushDeviceResponse\"\x00\x12\x86\x01\n" +
+	"\x17UnregisterWebPushDevice\x123.api.push.service.v1.UnregisterWebPushDeviceRequest\x1a4.api.push.service.v1.UnregisterWebPushDeviceResponse\"\x00BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (
@@ -982,7 +1404,7 @@ func file_push_service_v1_push_proto_rawDescGZIP() []byte {
 	return file_push_service_v1_push_proto_rawDescData
 }
 
-var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_push_service_v1_push_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_push_service_v1_push_proto_goTypes = []any{
 	(*EmailAttachment)(nil),                                        // 0: api.push.service.v1.EmailAttachment
 	(*SendEmailRequest)(nil),                                       // 1: api.push.service.v1.SendEmailRequest
@@ -995,33 +1417,47 @@ var file_push_service_v1_push_proto_goTypes = []any{
 	(*UpdateBetTickerConfigResponse)(nil),                          // 8: api.push.service.v1.UpdateBetTickerConfigResponse
 	(*ListBetTickerConfigRequest)(nil),                             // 9: api.push.service.v1.ListBetTickerConfigRequest
 	(*ListBetTickerConfigResponse)(nil),                            // 10: api.push.service.v1.ListBetTickerConfigResponse
-	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 11: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
-	(*UpdateBetTickerConfigRequest_Item)(nil),                      // 12: api.push.service.v1.UpdateBetTickerConfigRequest.Item
-	(*ListBetTickerConfigResponse_Item)(nil),                       // 13: api.push.service.v1.ListBetTickerConfigResponse.Item
+	(*SendWebPushRequest)(nil),                                     // 11: api.push.service.v1.SendWebPushRequest
+	(*SendWebPushResponse)(nil),                                    // 12: api.push.service.v1.SendWebPushResponse
+	(*RegisterWebPushDeviceRequest)(nil),                           // 13: api.push.service.v1.RegisterWebPushDeviceRequest
+	(*RegisterWebPushDeviceResponse)(nil),                          // 14: api.push.service.v1.RegisterWebPushDeviceResponse
+	(*UnregisterWebPushDeviceRequest)(nil),                         // 15: api.push.service.v1.UnregisterWebPushDeviceRequest
+	(*UnregisterWebPushDeviceResponse)(nil),                        // 16: api.push.service.v1.UnregisterWebPushDeviceResponse
+	(*GetNotificationStatsResponse_OperatorNotificationStats)(nil), // 17: api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	(*UpdateBetTickerConfigRequest_Item)(nil),                      // 18: api.push.service.v1.UpdateBetTickerConfigRequest.Item
+	(*ListBetTickerConfigResponse_Item)(nil),                       // 19: api.push.service.v1.ListBetTickerConfigResponse.Item
+	nil,                                                            // 20: api.push.service.v1.SendWebPushRequest.DataEntry
 }
 var file_push_service_v1_push_proto_depIdxs = []int32{
 	0,  // 0: api.push.service.v1.SendEmailRequest.attachments:type_name -> api.push.service.v1.EmailAttachment
 	3,  // 1: api.push.service.v1.GetNotificationStatsRequest.timeRange:type_name -> api.push.service.v1.TimeRange
-	11, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
-	12, // 3: api.push.service.v1.UpdateBetTickerConfigRequest.list:type_name -> api.push.service.v1.UpdateBetTickerConfigRequest.Item
-	13, // 4: api.push.service.v1.ListBetTickerConfigResponse.list:type_name -> api.push.service.v1.ListBetTickerConfigResponse.Item
-	6,  // 5: api.push.service.v1.UpdateBetTickerConfigRequest.Item.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
-	6,  // 6: api.push.service.v1.UpdateBetTickerConfigRequest.Item.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
-	6,  // 7: api.push.service.v1.ListBetTickerConfigResponse.Item.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
-	6,  // 8: api.push.service.v1.ListBetTickerConfigResponse.Item.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
-	1,  // 9: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
-	4,  // 10: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
-	7,  // 11: api.push.service.v1.Push.UpdateBetTickerConfig:input_type -> api.push.service.v1.UpdateBetTickerConfigRequest
-	9,  // 12: api.push.service.v1.Push.ListBetTickerConfig:input_type -> api.push.service.v1.ListBetTickerConfigRequest
-	2,  // 13: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
-	5,  // 14: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
-	8,  // 15: api.push.service.v1.Push.UpdateBetTickerConfig:output_type -> api.push.service.v1.UpdateBetTickerConfigResponse
-	10, // 16: api.push.service.v1.Push.ListBetTickerConfig:output_type -> api.push.service.v1.ListBetTickerConfigResponse
-	13, // [13:17] is the sub-list for method output_type
-	9,  // [9:13] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	17, // 2: api.push.service.v1.GetNotificationStatsResponse.operatorStats:type_name -> api.push.service.v1.GetNotificationStatsResponse.OperatorNotificationStats
+	18, // 3: api.push.service.v1.UpdateBetTickerConfigRequest.list:type_name -> api.push.service.v1.UpdateBetTickerConfigRequest.Item
+	19, // 4: api.push.service.v1.ListBetTickerConfigResponse.list:type_name -> api.push.service.v1.ListBetTickerConfigResponse.Item
+	20, // 5: api.push.service.v1.SendWebPushRequest.data:type_name -> api.push.service.v1.SendWebPushRequest.DataEntry
+	6,  // 6: api.push.service.v1.UpdateBetTickerConfigRequest.Item.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 7: api.push.service.v1.UpdateBetTickerConfigRequest.Item.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 8: api.push.service.v1.ListBetTickerConfigResponse.Item.all_bet:type_name -> api.push.service.v1.BettingFilterConfig
+	6,  // 9: api.push.service.v1.ListBetTickerConfigResponse.Item.high_wins:type_name -> api.push.service.v1.BettingFilterConfig
+	1,  // 10: api.push.service.v1.Push.SendEmail:input_type -> api.push.service.v1.SendEmailRequest
+	4,  // 11: api.push.service.v1.Push.GetNotificationStats:input_type -> api.push.service.v1.GetNotificationStatsRequest
+	7,  // 12: api.push.service.v1.Push.UpdateBetTickerConfig:input_type -> api.push.service.v1.UpdateBetTickerConfigRequest
+	9,  // 13: api.push.service.v1.Push.ListBetTickerConfig:input_type -> api.push.service.v1.ListBetTickerConfigRequest
+	11, // 14: api.push.service.v1.Push.SendWebPush:input_type -> api.push.service.v1.SendWebPushRequest
+	13, // 15: api.push.service.v1.Push.RegisterWebPushDevice:input_type -> api.push.service.v1.RegisterWebPushDeviceRequest
+	15, // 16: api.push.service.v1.Push.UnregisterWebPushDevice:input_type -> api.push.service.v1.UnregisterWebPushDeviceRequest
+	2,  // 17: api.push.service.v1.Push.SendEmail:output_type -> api.push.service.v1.SendEmailResponse
+	5,  // 18: api.push.service.v1.Push.GetNotificationStats:output_type -> api.push.service.v1.GetNotificationStatsResponse
+	8,  // 19: api.push.service.v1.Push.UpdateBetTickerConfig:output_type -> api.push.service.v1.UpdateBetTickerConfigResponse
+	10, // 20: api.push.service.v1.Push.ListBetTickerConfig:output_type -> api.push.service.v1.ListBetTickerConfigResponse
+	12, // 21: api.push.service.v1.Push.SendWebPush:output_type -> api.push.service.v1.SendWebPushResponse
+	14, // 22: api.push.service.v1.Push.RegisterWebPushDevice:output_type -> api.push.service.v1.RegisterWebPushDeviceResponse
+	16, // 23: api.push.service.v1.Push.UnregisterWebPushDevice:output_type -> api.push.service.v1.UnregisterWebPushDeviceResponse
+	17, // [17:24] is the sub-list for method output_type
+	10, // [10:17] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_push_service_v1_push_proto_init() }
@@ -1031,14 +1467,14 @@ func file_push_service_v1_push_proto_init() {
 	}
 	file_push_service_v1_push_proto_msgTypes[1].OneofWrappers = []any{}
 	file_push_service_v1_push_proto_msgTypes[6].OneofWrappers = []any{}
-	file_push_service_v1_push_proto_msgTypes[12].OneofWrappers = []any{}
+	file_push_service_v1_push_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_proto_rawDesc), len(file_push_service_v1_push_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
