@@ -9906,8 +9906,8 @@ type PlayerFreespin struct {
 	GameIdList     string                 `protobuf:"bytes,2,opt,name=game_id_list,json=gameIdList,proto3" json:"game_id_list,omitempty"`
 	Rounds         int64                  `protobuf:"varint,3,opt,name=rounds,proto3" json:"rounds,omitempty"`
 	RoundsPlayed   int64                  `protobuf:"varint,4,opt,name=rounds_played,json=roundsPlayed,proto3" json:"rounds_played,omitempty"`
-	BonusCode      string                 `protobuf:"bytes,5,opt,name=bonus_code,json=bonusCode,proto3" json:"bonus_code,omitempty"`
-	ExpirationDate string                 `protobuf:"bytes,6,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`
+	FreespinId     string                 `protobuf:"bytes,5,opt,name=freespin_id,json=freespinId,proto3" json:"freespin_id,omitempty"`
+	ExpirationDate int64                  `protobuf:"varint,6,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -9970,18 +9970,18 @@ func (x *PlayerFreespin) GetRoundsPlayed() int64 {
 	return 0
 }
 
-func (x *PlayerFreespin) GetBonusCode() string {
+func (x *PlayerFreespin) GetFreespinId() string {
 	if x != nil {
-		return x.BonusCode
+		return x.FreespinId
 	}
 	return ""
 }
 
-func (x *PlayerFreespin) GetExpirationDate() string {
+func (x *PlayerFreespin) GetExpirationDate() int64 {
 	if x != nil {
 		return x.ExpirationDate
 	}
-	return ""
+	return 0
 }
 
 type GetPlayerFreespinsResponse struct {
@@ -18886,16 +18886,16 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12/\n" +
-	"\x13settlement_currency\x18\x04 \x01(\tR\x12settlementCurrency\"\xd3\x01\n" +
+	"\x13settlement_currency\x18\x04 \x01(\tR\x12settlementCurrency\"\xd5\x01\n" +
 	"\x0ePlayerFreespin\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12 \n" +
 	"\fgame_id_list\x18\x02 \x01(\tR\n" +
 	"gameIdList\x12\x16\n" +
 	"\x06rounds\x18\x03 \x01(\x03R\x06rounds\x12#\n" +
-	"\rrounds_played\x18\x04 \x01(\x03R\froundsPlayed\x12\x1d\n" +
-	"\n" +
-	"bonus_code\x18\x05 \x01(\tR\tbonusCode\x12'\n" +
-	"\x0fexpiration_date\x18\x06 \x01(\tR\x0eexpirationDate\"_\n" +
+	"\rrounds_played\x18\x04 \x01(\x03R\froundsPlayed\x12\x1f\n" +
+	"\vfreespin_id\x18\x05 \x01(\tR\n" +
+	"freespinId\x12'\n" +
+	"\x0fexpiration_date\x18\x06 \x01(\x03R\x0eexpirationDate\"_\n" +
 	"\x1aGetPlayerFreespinsResponse\x12A\n" +
 	"\tfreespins\x18\x01 \x03(\v2#.api.game.service.v1.PlayerFreespinR\tfreespins\"\xa9\x02\n" +
 	"\x12FreespinWinRequest\x12\x1d\n" +

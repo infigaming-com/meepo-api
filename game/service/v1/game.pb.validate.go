@@ -17300,7 +17300,7 @@ func (m *PlayerFreespin) validate(all bool) error {
 
 	// no validation rules for RoundsPlayed
 
-	// no validation rules for BonusCode
+	// no validation rules for FreespinId
 
 	// no validation rules for ExpirationDate
 

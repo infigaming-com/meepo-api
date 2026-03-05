@@ -1860,8 +1860,8 @@ message PlayerFreespin {
 	string game_id_list = 2;
 	int64 rounds = 3;
 	int64 rounds_played = 4;
-	string bonus_code = 5;
-	string expiration_date = 6;
+	string freespin_id = 5;
+	int64 expiration_date = 6;
 }
 
 message GetPlayerFreespinsResponse {
