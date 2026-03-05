@@ -1852,6 +1852,7 @@ message GetPlayerFreespinsRequest {
 	int64 user_id = 1;
 	api.common.OperatorContext operator_context = 2;
 	string currency = 3;
+	string settlement_currency = 4;
 }
 
 message PlayerFreespin {

@@ -9833,12 +9833,13 @@ func (*CancelFreespinsResponse) Descriptor() ([]byte, []int) {
 }
 
 type GetPlayerFreespinsRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	UserId             int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency           string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency string                  `protobuf:"bytes,4,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *GetPlayerFreespinsRequest) Reset() {
@@ -9888,6 +9889,13 @@ func (x *GetPlayerFreespinsRequest) GetOperatorContext() *common.OperatorContext
 func (x *GetPlayerFreespinsRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetPlayerFreespinsRequest) GetSettlementCurrency() string {
+	if x != nil {
+		return x.SettlementCurrency
 	}
 	return ""
 }
@@ -18873,11 +18881,12 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vfreespin_id\x18\x01 \x01(\x03R\n" +
 	"freespinId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x19\n" +
-	"\x17CancelFreespinsResponse\"\x98\x01\n" +
+	"\x17CancelFreespinsResponse\"\xc9\x01\n" +
 	"\x19GetPlayerFreespinsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\xd3\x01\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\x04 \x01(\tR\x12settlementCurrency\"\xd3\x01\n" +
 	"\x0ePlayerFreespin\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12 \n" +
 	"\fgame_id_list\x18\x02 \x01(\tR\n" +
