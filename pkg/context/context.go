@@ -96,6 +96,11 @@ type OperatorInfo struct {
 	Config                *OperatorConfig
 	MinLaunchBalance      string
 	StatusLaunchWhitelist []string
+
+	// System-level maintenance info (populated when system operator is in maintenance)
+	SystemStatus                string
+	SystemStatusEndTime         int64
+	SystemStatusLaunchWhitelist []string
 }
 
 func WithValue[T any](ctx context.Context, key string, value T) context.Context {

@@ -43,6 +43,14 @@ func OperatorIdMiddlewareWithPathIncluder(pathIncluder func(string) bool, userCl
 
 				operatorInfo := mctx.OperatorInfo{}
 				copier.Copy(&operatorInfo, resp.OperatorDetail)
+
+				// Populate system-level maintenance info
+				if resp.SystemOperatorDetail != nil {
+					operatorInfo.SystemStatus = resp.SystemOperatorDetail.Status
+					operatorInfo.SystemStatusEndTime = resp.SystemOperatorDetail.StatusEndTime
+					operatorInfo.SystemStatusLaunchWhitelist = resp.SystemOperatorDetail.StatusLaunchWhitelist
+				}
+
 				ctx = mctx.WithOperatorInfo(ctx, operatorInfo)
 			}
 			return handler(ctx, req)
