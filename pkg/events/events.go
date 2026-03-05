@@ -322,6 +322,18 @@ type OperatorStatusUpdateEvent struct {
 const OperatorStatusUpdateTopic = "operator.status.update"
 
 // ------------------------------------------------------------
+// VIP reward events
+// ------------------------------------------------------------
+
+const VipRewardClaimableTopic = "vip.reward.claimable"
+
+type VipRewardClaimableEvent struct {
+	UserID     int64  `json:"user_id"`
+	OperatorID int64  `json:"operator_id"`
+	RewardType string `json:"reward_type"` // "upgrade_base", "upgrade_incremental", "upgrade", "rakeback_instant", "rakeback_daily", etc.
+}
+
+// ------------------------------------------------------------
 // Session activity events
 // ------------------------------------------------------------
 
