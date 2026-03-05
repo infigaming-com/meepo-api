@@ -16,6 +16,11 @@ service Push {
 	// BetTicker Config APIs
 	rpc UpdateBetTickerConfig(UpdateBetTickerConfigRequest) returns (UpdateBetTickerConfigResponse) {}
 	rpc ListBetTickerConfig(ListBetTickerConfigRequest) returns (ListBetTickerConfigResponse) {}
+
+	// Web Push APIs
+	rpc SendWebPush(SendWebPushRequest) returns (SendWebPushResponse) {}
+	rpc RegisterWebPushDevice(RegisterWebPushDeviceRequest) returns (RegisterWebPushDeviceResponse) {}
+	rpc UnregisterWebPushDevice(UnregisterWebPushDeviceRequest) returns (UnregisterWebPushDeviceResponse) {}
 }
 
 message EmailAttachment {
@@ -109,3 +114,43 @@ message ListBetTickerConfigResponse {
 	repeated Item list = 1;
 	bool enable = 2;
 }
+
+// ============== Web Push Messages ==============
+
+message SendWebPushRequest {
+	string title = 1;
+	string body = 2;
+	string url = 3;                         // click-through URL
+	string icon = 4;
+	string image = 5;
+	map<string, string> data = 6;           // custom key-value payload
+	int64 user_id = 7;                      // target user
+	int64 operator_id = 8;
+	int64 company_operator_id = 9;
+	int64 retailer_operator_id = 10;
+	repeated string fcm_tokens = 11;        // optional: direct token targeting (bypass user_id lookup)
+	string topic = 12;                      // optional: FCM topic targeting
+}
+
+message SendWebPushResponse {
+	int64 message_id = 1;                   // internal notification ID
+	int32 success_count = 2;
+	int32 failure_count = 3;
+}
+
+message RegisterWebPushDeviceRequest {
+	int64 user_id = 1;
+	int64 operator_id = 2;
+	string fcm_token = 3;
+	string platform = 4;                    // "chrome", "firefox", "safari", "edge"
+}
+
+message RegisterWebPushDeviceResponse {
+	int64 device_id = 1;
+}
+
+message UnregisterWebPushDeviceRequest {
+	string fcm_token = 1;
+}
+
+message UnregisterWebPushDeviceResponse {}

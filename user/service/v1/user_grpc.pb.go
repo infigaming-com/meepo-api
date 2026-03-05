@@ -145,6 +145,8 @@ const (
 	User_ListUserSessionActivities_FullMethodName          = "/api.user.service.v1.User/ListUserSessionActivities"
 	User_GetSwapFeeSettings_FullMethodName                 = "/api.user.service.v1.User/GetSwapFeeSettings"
 	User_SetSwapFeeSettings_FullMethodName                 = "/api.user.service.v1.User/SetSwapFeeSettings"
+	User_RegisterWebPushDevice_FullMethodName              = "/api.user.service.v1.User/RegisterWebPushDevice"
+	User_UnregisterWebPushDevice_FullMethodName            = "/api.user.service.v1.User/UnregisterWebPushDevice"
 )
 
 // UserClient is the client API for User service.
@@ -371,6 +373,9 @@ type UserClient interface {
 	ListUserSessionActivities(ctx context.Context, in *ListUserSessionActivitiesRequest, opts ...grpc.CallOption) (*ListUserSessionActivitiesResponse, error)
 	GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*GetSwapFeeSettingsResponse, error)
 	SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*SetSwapFeeSettingsResponse, error)
+	// Web Push device management (proxied to push-service)
+	RegisterWebPushDevice(ctx context.Context, in *RegisterWebPushDeviceRequest, opts ...grpc.CallOption) (*RegisterWebPushDeviceResponse, error)
+	UnregisterWebPushDevice(ctx context.Context, in *UnregisterWebPushDeviceRequest, opts ...grpc.CallOption) (*UnregisterWebPushDeviceResponse, error)
 }
 
 type userClient struct {
@@ -1621,6 +1626,26 @@ func (c *userClient) SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSetti
 	return out, nil
 }
 
+func (c *userClient) RegisterWebPushDevice(ctx context.Context, in *RegisterWebPushDeviceRequest, opts ...grpc.CallOption) (*RegisterWebPushDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterWebPushDeviceResponse)
+	err := c.cc.Invoke(ctx, User_RegisterWebPushDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UnregisterWebPushDevice(ctx context.Context, in *UnregisterWebPushDeviceRequest, opts ...grpc.CallOption) (*UnregisterWebPushDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterWebPushDeviceResponse)
+	err := c.cc.Invoke(ctx, User_UnregisterWebPushDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1845,6 +1870,9 @@ type UserServer interface {
 	ListUserSessionActivities(context.Context, *ListUserSessionActivitiesRequest) (*ListUserSessionActivitiesResponse, error)
 	GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*GetSwapFeeSettingsResponse, error)
 	SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*SetSwapFeeSettingsResponse, error)
+	// Web Push device management (proxied to push-service)
+	RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error)
+	UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2226,6 +2254,12 @@ func (UnimplementedUserServer) GetSwapFeeSettings(context.Context, *GetSwapFeeSe
 }
 func (UnimplementedUserServer) SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*SetSwapFeeSettingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetSwapFeeSettings not implemented")
+}
+func (UnimplementedUserServer) RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterWebPushDevice not implemented")
+}
+func (UnimplementedUserServer) UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterWebPushDevice not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4480,6 +4514,42 @@ func _User_SetSwapFeeSettings_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_RegisterWebPushDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterWebPushDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).RegisterWebPushDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_RegisterWebPushDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).RegisterWebPushDevice(ctx, req.(*RegisterWebPushDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UnregisterWebPushDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterWebPushDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UnregisterWebPushDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UnregisterWebPushDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UnregisterWebPushDevice(ctx, req.(*UnregisterWebPushDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4982,6 +5052,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetSwapFeeSettings",
 			Handler:    _User_SetSwapFeeSettings_Handler,
+		},
+		{
+			MethodName: "RegisterWebPushDevice",
+			Handler:    _User_RegisterWebPushDevice_Handler,
+		},
+		{
+			MethodName: "UnregisterWebPushDevice",
+			Handler:    _User_UnregisterWebPushDevice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

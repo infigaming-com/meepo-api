@@ -19,10 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Push_SendEmail_FullMethodName             = "/api.push.service.v1.Push/SendEmail"
-	Push_GetNotificationStats_FullMethodName  = "/api.push.service.v1.Push/GetNotificationStats"
-	Push_UpdateBetTickerConfig_FullMethodName = "/api.push.service.v1.Push/UpdateBetTickerConfig"
-	Push_ListBetTickerConfig_FullMethodName   = "/api.push.service.v1.Push/ListBetTickerConfig"
+	Push_SendEmail_FullMethodName               = "/api.push.service.v1.Push/SendEmail"
+	Push_GetNotificationStats_FullMethodName    = "/api.push.service.v1.Push/GetNotificationStats"
+	Push_UpdateBetTickerConfig_FullMethodName   = "/api.push.service.v1.Push/UpdateBetTickerConfig"
+	Push_ListBetTickerConfig_FullMethodName     = "/api.push.service.v1.Push/ListBetTickerConfig"
+	Push_SendWebPush_FullMethodName             = "/api.push.service.v1.Push/SendWebPush"
+	Push_RegisterWebPushDevice_FullMethodName   = "/api.push.service.v1.Push/RegisterWebPushDevice"
+	Push_UnregisterWebPushDevice_FullMethodName = "/api.push.service.v1.Push/UnregisterWebPushDevice"
 )
 
 // PushClient is the client API for Push service.
@@ -36,6 +39,10 @@ type PushClient interface {
 	// BetTicker Config APIs
 	UpdateBetTickerConfig(ctx context.Context, in *UpdateBetTickerConfigRequest, opts ...grpc.CallOption) (*UpdateBetTickerConfigResponse, error)
 	ListBetTickerConfig(ctx context.Context, in *ListBetTickerConfigRequest, opts ...grpc.CallOption) (*ListBetTickerConfigResponse, error)
+	// Web Push APIs
+	SendWebPush(ctx context.Context, in *SendWebPushRequest, opts ...grpc.CallOption) (*SendWebPushResponse, error)
+	RegisterWebPushDevice(ctx context.Context, in *RegisterWebPushDeviceRequest, opts ...grpc.CallOption) (*RegisterWebPushDeviceResponse, error)
+	UnregisterWebPushDevice(ctx context.Context, in *UnregisterWebPushDeviceRequest, opts ...grpc.CallOption) (*UnregisterWebPushDeviceResponse, error)
 }
 
 type pushClient struct {
@@ -86,6 +93,36 @@ func (c *pushClient) ListBetTickerConfig(ctx context.Context, in *ListBetTickerC
 	return out, nil
 }
 
+func (c *pushClient) SendWebPush(ctx context.Context, in *SendWebPushRequest, opts ...grpc.CallOption) (*SendWebPushResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendWebPushResponse)
+	err := c.cc.Invoke(ctx, Push_SendWebPush_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) RegisterWebPushDevice(ctx context.Context, in *RegisterWebPushDeviceRequest, opts ...grpc.CallOption) (*RegisterWebPushDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterWebPushDeviceResponse)
+	err := c.cc.Invoke(ctx, Push_RegisterWebPushDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushClient) UnregisterWebPushDevice(ctx context.Context, in *UnregisterWebPushDeviceRequest, opts ...grpc.CallOption) (*UnregisterWebPushDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterWebPushDeviceResponse)
+	err := c.cc.Invoke(ctx, Push_UnregisterWebPushDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServer is the server API for Push service.
 // All implementations must embed UnimplementedPushServer
 // for forward compatibility.
@@ -97,6 +134,10 @@ type PushServer interface {
 	// BetTicker Config APIs
 	UpdateBetTickerConfig(context.Context, *UpdateBetTickerConfigRequest) (*UpdateBetTickerConfigResponse, error)
 	ListBetTickerConfig(context.Context, *ListBetTickerConfigRequest) (*ListBetTickerConfigResponse, error)
+	// Web Push APIs
+	SendWebPush(context.Context, *SendWebPushRequest) (*SendWebPushResponse, error)
+	RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error)
+	UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error)
 	mustEmbedUnimplementedPushServer()
 }
 
@@ -118,6 +159,15 @@ func (UnimplementedPushServer) UpdateBetTickerConfig(context.Context, *UpdateBet
 }
 func (UnimplementedPushServer) ListBetTickerConfig(context.Context, *ListBetTickerConfigRequest) (*ListBetTickerConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBetTickerConfig not implemented")
+}
+func (UnimplementedPushServer) SendWebPush(context.Context, *SendWebPushRequest) (*SendWebPushResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendWebPush not implemented")
+}
+func (UnimplementedPushServer) RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterWebPushDevice not implemented")
+}
+func (UnimplementedPushServer) UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterWebPushDevice not implemented")
 }
 func (UnimplementedPushServer) mustEmbedUnimplementedPushServer() {}
 func (UnimplementedPushServer) testEmbeddedByValue()              {}
@@ -212,6 +262,60 @@ func _Push_ListBetTickerConfig_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Push_SendWebPush_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendWebPushRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).SendWebPush(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_SendWebPush_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).SendWebPush(ctx, req.(*SendWebPushRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_RegisterWebPushDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterWebPushDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).RegisterWebPushDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_RegisterWebPushDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).RegisterWebPushDevice(ctx, req.(*RegisterWebPushDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Push_UnregisterWebPushDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterWebPushDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).UnregisterWebPushDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_UnregisterWebPushDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).UnregisterWebPushDevice(ctx, req.(*UnregisterWebPushDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Push_ServiceDesc is the grpc.ServiceDesc for Push service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -234,6 +338,18 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBetTickerConfig",
 			Handler:    _Push_ListBetTickerConfig_Handler,
+		},
+		{
+			MethodName: "SendWebPush",
+			Handler:    _Push_SendWebPush_Handler,
+		},
+		{
+			MethodName: "RegisterWebPushDevice",
+			Handler:    _Push_RegisterWebPushDevice_Handler,
+		},
+		{
+			MethodName: "UnregisterWebPushDevice",
+			Handler:    _Push_UnregisterWebPushDevice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
