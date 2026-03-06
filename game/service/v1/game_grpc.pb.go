@@ -72,6 +72,7 @@ const (
 	Game_ListFreespinsGames_FullMethodName                = "/api.game.service.v1.Game/ListFreespinsGames"
 	Game_IssueFreespins_FullMethodName                    = "/api.game.service.v1.Game/IssueFreespins"
 	Game_CancelFreespins_FullMethodName                   = "/api.game.service.v1.Game/CancelFreespins"
+	Game_GetPlayerFreespins_FullMethodName                = "/api.game.service.v1.Game/GetPlayerFreespins"
 	Game_ListFreebetTemplates_FullMethodName              = "/api.game.service.v1.Game/ListFreebetTemplates"
 	Game_IssueFreebets_FullMethodName                     = "/api.game.service.v1.Game/IssueFreebets"
 	Game_GetPlayerFreebets_FullMethodName                 = "/api.game.service.v1.Game/GetPlayerFreebets"
@@ -156,6 +157,7 @@ type GameClient interface {
 	ListFreespinsGames(ctx context.Context, in *ListFreespinsGamesRequest, opts ...grpc.CallOption) (*ListFreespinsGamesResponse, error)
 	IssueFreespins(ctx context.Context, in *IssueFreespinsRequest, opts ...grpc.CallOption) (*IssueFreespinsResponse, error)
 	CancelFreespins(ctx context.Context, in *CancelFreespinsRequest, opts ...grpc.CallOption) (*CancelFreespinsResponse, error)
+	GetPlayerFreespins(ctx context.Context, in *GetPlayerFreespinsRequest, opts ...grpc.CallOption) (*GetPlayerFreespinsResponse, error)
 	// Freebets related APIs
 	ListFreebetTemplates(ctx context.Context, in *ListFreebetTemplatesRequest, opts ...grpc.CallOption) (*ListFreebetTemplatesResponse, error)
 	IssueFreebets(ctx context.Context, in *IssueFreebetsRequest, opts ...grpc.CallOption) (*IssueFreebetsResponse, error)
@@ -734,6 +736,16 @@ func (c *gameClient) CancelFreespins(ctx context.Context, in *CancelFreespinsReq
 	return out, nil
 }
 
+func (c *gameClient) GetPlayerFreespins(ctx context.Context, in *GetPlayerFreespinsRequest, opts ...grpc.CallOption) (*GetPlayerFreespinsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPlayerFreespinsResponse)
+	err := c.cc.Invoke(ctx, Game_GetPlayerFreespins_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) ListFreebetTemplates(ctx context.Context, in *ListFreebetTemplatesRequest, opts ...grpc.CallOption) (*ListFreebetTemplatesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListFreebetTemplatesResponse)
@@ -1005,6 +1017,7 @@ type GameServer interface {
 	ListFreespinsGames(context.Context, *ListFreespinsGamesRequest) (*ListFreespinsGamesResponse, error)
 	IssueFreespins(context.Context, *IssueFreespinsRequest) (*IssueFreespinsResponse, error)
 	CancelFreespins(context.Context, *CancelFreespinsRequest) (*CancelFreespinsResponse, error)
+	GetPlayerFreespins(context.Context, *GetPlayerFreespinsRequest) (*GetPlayerFreespinsResponse, error)
 	// Freebets related APIs
 	ListFreebetTemplates(context.Context, *ListFreebetTemplatesRequest) (*ListFreebetTemplatesResponse, error)
 	IssueFreebets(context.Context, *IssueFreebetsRequest) (*IssueFreebetsResponse, error)
@@ -1211,6 +1224,9 @@ func (UnimplementedGameServer) IssueFreespins(context.Context, *IssueFreespinsRe
 }
 func (UnimplementedGameServer) CancelFreespins(context.Context, *CancelFreespinsRequest) (*CancelFreespinsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CancelFreespins not implemented")
+}
+func (UnimplementedGameServer) GetPlayerFreespins(context.Context, *GetPlayerFreespinsRequest) (*GetPlayerFreespinsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPlayerFreespins not implemented")
 }
 func (UnimplementedGameServer) ListFreebetTemplates(context.Context, *ListFreebetTemplatesRequest) (*ListFreebetTemplatesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListFreebetTemplates not implemented")
@@ -2250,6 +2266,24 @@ func _Game_CancelFreespins_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetPlayerFreespins_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlayerFreespinsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetPlayerFreespins(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetPlayerFreespins_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetPlayerFreespins(ctx, req.(*GetPlayerFreespinsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_ListFreebetTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFreebetTemplatesRequest)
 	if err := dec(in); err != nil {
@@ -2846,6 +2880,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelFreespins",
 			Handler:    _Game_CancelFreespins_Handler,
+		},
+		{
+			MethodName: "GetPlayerFreespins",
+			Handler:    _Game_GetPlayerFreespins_Handler,
 		},
 		{
 			MethodName: "ListFreebetTemplates",

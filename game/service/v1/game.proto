@@ -207,6 +207,9 @@ service Game {
 	rpc CancelFreespins(CancelFreespinsRequest) returns (CancelFreespinsResponse) {
 	}
 
+	rpc GetPlayerFreespins(GetPlayerFreespinsRequest) returns (GetPlayerFreespinsResponse) {
+	}
+
 	// Freebets related APIs
 	rpc ListFreebetTemplates(ListFreebetTemplatesRequest) returns (ListFreebetTemplatesResponse) {
 	}
@@ -1841,6 +1844,28 @@ message CancelFreespinsRequest {
 }
 
 message CancelFreespinsResponse {
+}
+
+// ========== Get Player Freespins Messages ==========
+
+message GetPlayerFreespinsRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+	string settlement_currency = 4;
+}
+
+message PlayerFreespin {
+	string currency = 1;
+	string game_id_list = 2;
+	int64 rounds = 3;
+	int64 rounds_played = 4;
+	string freespin_id = 5;
+	int64 expiration_date = 6;
+}
+
+message GetPlayerFreespinsResponse {
+	repeated PlayerFreespin freespins = 1;
 }
 
 // ========== Freespin Win Callback Messages ==========
