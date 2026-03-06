@@ -333,6 +333,8 @@ message GetUserBalancesResponse {
 		string transferable_bonus = 6;
 	}
 	repeated Balance balances = 1;
+	bool allow_withdraw = 2;
+	bool allow_deposit = 3;
 }
 
 message GetUserBalanceRequest {

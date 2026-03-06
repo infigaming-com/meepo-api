@@ -2086,3 +2086,39 @@ func IsGetAppDownloadRewardStatusFailed(err error) bool {
 func ErrorGetAppDownloadRewardStatusFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_APP_DOWNLOAD_REWARD_STATUS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsDepositNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DEPOSIT_NOT_ALLOWED.String() && e.Code == 500
+}
+
+func ErrorDepositNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DEPOSIT_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWithdrawNotAllowed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAW_NOT_ALLOWED.String() && e.Code == 500
+}
+
+func ErrorWithdrawNotAllowed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAW_NOT_ALLOWED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorAccountSettingsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_ACCOUNT_SETTINGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorAccountSettingsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_ACCOUNT_SETTINGS_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -198,6 +198,9 @@ const (
 	ErrorReason_GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED                           ErrorReason = 30170
 	ErrorReason_CLAIM_APP_DOWNLOAD_REWARD_FAILED                                ErrorReason = 30171
 	ErrorReason_GET_APP_DOWNLOAD_REWARD_STATUS_FAILED                           ErrorReason = 30172
+	ErrorReason_DEPOSIT_NOT_ALLOWED                                             ErrorReason = 30173
+	ErrorReason_WITHDRAW_NOT_ALLOWED                                            ErrorReason = 30174
+	ErrorReason_GET_OPERATOR_ACCOUNT_SETTINGS_FAILED                            ErrorReason = 30175
 )
 
 // Enum value maps for ErrorReason.
@@ -376,6 +379,9 @@ var (
 		30170: "GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED",
 		30171: "CLAIM_APP_DOWNLOAD_REWARD_FAILED",
 		30172: "GET_APP_DOWNLOAD_REWARD_STATUS_FAILED",
+		30173: "DEPOSIT_NOT_ALLOWED",
+		30174: "WITHDRAW_NOT_ALLOWED",
+		30175: "GET_OPERATOR_ACCOUNT_SETTINGS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -551,6 +557,9 @@ var (
 		"GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED":                           30170,
 		"CLAIM_APP_DOWNLOAD_REWARD_FAILED":                                30171,
 		"GET_APP_DOWNLOAD_REWARD_STATUS_FAILED":                           30172,
+		"DEPOSIT_NOT_ALLOWED":                                             30173,
+		"WITHDRAW_NOT_ALLOWED":                                            30174,
+		"GET_OPERATOR_ACCOUNT_SETTINGS_FAILED":                            30175,
 	}
 )
 
@@ -585,7 +594,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa74\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8a5\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -759,7 +768,10 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"%SET_APP_DOWNLOAD_REWARD_CONFIG_FAILED\x10\xd9\xeb\x01\x12+\n" +
 	"%GET_APP_DOWNLOAD_REWARD_CONFIG_FAILED\x10\xda\xeb\x01\x12&\n" +
 	" CLAIM_APP_DOWNLOAD_REWARD_FAILED\x10\xdb\xeb\x01\x12+\n" +
-	"%GET_APP_DOWNLOAD_REWARD_STATUS_FAILED\x10\xdc\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"%GET_APP_DOWNLOAD_REWARD_STATUS_FAILED\x10\xdc\xeb\x01\x12\x19\n" +
+	"\x13DEPOSIT_NOT_ALLOWED\x10\xdd\xeb\x01\x12\x1a\n" +
+	"\x14WITHDRAW_NOT_ALLOWED\x10\xde\xeb\x01\x12*\n" +
+	"$GET_OPERATOR_ACCOUNT_SETTINGS_FAILED\x10\xdf\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

@@ -195,6 +195,10 @@ func (m *GetUserBalancesResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for AllowWithdraw
+
+	// no validation rules for AllowDeposit
+
 	if len(errors) > 0 {
 		return GetUserBalancesResponseMultiError(errors)
 	}
