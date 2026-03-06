@@ -223,9 +223,17 @@ type GameBetEvent struct {
 	SystemOperatorID                     int64          `json:"system_operator_id"`
 	RetailerOperatorID                   int64          `json:"retailer_operator_id"`
 	CompanyOperatorID                    int64          `json:"company_operator_id"`
-	GameTransactionIDs                   []int64        `json:"game_transaction_ids"`
-	RTP                                  string         `json:"rtp"`
-	UserName                             string         `json:"user_name"`
+	GameTransactionIDs                   []int64          `json:"game_transaction_ids"`
+	RTP                                  string           `json:"rtp"`
+	UserName                             string           `json:"user_name"`
+	CashBetAmount                        string           `json:"cash_bet_amount,omitempty"`
+	CashBetAmountUsd                     string           `json:"cash_bet_amount_usd,omitempty"`
+	CashBetAmountSettlementCurrency      string           `json:"cash_bet_amount_settlement_currency,omitempty"`
+	CashBetAmountReportingCurrency       string           `json:"cash_bet_amount_reporting_currency,omitempty"`
+	BonusBetAmount                       string           `json:"bonus_bet_amount,omitempty"`
+	BonusBetAmountUsd                    string           `json:"bonus_bet_amount_usd,omitempty"`
+	BonusBetAmountSettlementCurrency     string           `json:"bonus_bet_amount_settlement_currency,omitempty"`
+	BonusBetAmountReportingCurrency      string           `json:"bonus_bet_amount_reporting_currency,omitempty"`
 }
 
 type WebsocketOperatorBoardcastEvent struct {
@@ -320,6 +328,18 @@ type OperatorStatusUpdateEvent struct {
 }
 
 const OperatorStatusUpdateTopic = "operator.status.update"
+
+// ------------------------------------------------------------
+// VIP reward events
+// ------------------------------------------------------------
+
+const VipRewardClaimableTopic = "vip.reward.claimable"
+
+type VipRewardClaimableEvent struct {
+	UserID     int64  `json:"user_id"`
+	OperatorID int64  `json:"operator_id"`
+	RewardType string `json:"reward_type"` // "upgrade_base", "upgrade_incremental", "upgrade", "rakeback_instant", "rakeback_daily", etc.
+}
 
 // ------------------------------------------------------------
 // Session activity events
