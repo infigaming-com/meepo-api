@@ -226,7 +226,14 @@ type GameBetEvent struct {
 	GameTransactionIDs                   []int64          `json:"game_transaction_ids"`
 	RTP                                  string           `json:"rtp"`
 	UserName                             string           `json:"user_name"`
+	CashBetAmount                        string           `json:"cash_bet_amount,omitempty"`
+	CashBetAmountUsd                     string           `json:"cash_bet_amount_usd,omitempty"`
+	CashBetAmountSettlementCurrency      string           `json:"cash_bet_amount_settlement_currency,omitempty"`
 	CashBetAmountReportingCurrency       string           `json:"cash_bet_amount_reporting_currency,omitempty"`
+	BonusBetAmount                       string           `json:"bonus_bet_amount,omitempty"`
+	BonusBetAmountUsd                    string           `json:"bonus_bet_amount_usd,omitempty"`
+	BonusBetAmountSettlementCurrency     string           `json:"bonus_bet_amount_settlement_currency,omitempty"`
+	BonusBetAmountReportingCurrency      string           `json:"bonus_bet_amount_reporting_currency,omitempty"`
 }
 
 type WebsocketOperatorBoardcastEvent struct {
