@@ -69,10 +69,12 @@ func (x *GetUserBalancesRequest) GetUserId() int64 {
 }
 
 type GetUserBalancesResponse struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
-	Balances      []*GetUserBalancesResponse_Balance `protobuf:"bytes,1,rep,name=balances,proto3" json:"balances,omitempty"`
-	AllowWithdraw bool                               `protobuf:"varint,2,opt,name=allow_withdraw,json=allowWithdraw,proto3" json:"allow_withdraw,omitempty"`
-	AllowDeposit  bool                               `protobuf:"varint,3,opt,name=allow_deposit,json=allowDeposit,proto3" json:"allow_deposit,omitempty"`
+	state    protoimpl.MessageState             `protogen:"open.v1"`
+	Balances []*GetUserBalancesResponse_Balance `protobuf:"bytes,1,rep,name=balances,proto3" json:"balances,omitempty"`
+	// Whether the user is allowed to withdraw, based on operator payment settings (KYC level, no-withdraw-without-deposit)
+	AllowWithdraw bool `protobuf:"varint,2,opt,name=allow_withdraw,json=allowWithdraw,proto3" json:"allow_withdraw,omitempty"`
+	// Whether the user is allowed to deposit, based on operator payment settings (KYC level)
+	AllowDeposit  bool `protobuf:"varint,3,opt,name=allow_deposit,json=allowDeposit,proto3" json:"allow_deposit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

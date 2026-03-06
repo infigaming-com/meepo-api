@@ -30038,8 +30038,10 @@ components:
                         $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse_Balance'
                 allowWithdraw:
                     type: boolean
+                    description: Whether the user is allowed to withdraw, based on operator payment settings (KYC level, no-withdraw-without-deposit)
                 allowDeposit:
                     type: boolean
+                    description: Whether the user is allowed to deposit, based on operator payment settings (KYC level)
         api.wallet.service.v1.GetUserBalancesResponse_Balance:
             type: object
             properties:
