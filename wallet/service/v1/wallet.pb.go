@@ -71,6 +71,8 @@ func (x *GetUserBalancesRequest) GetUserId() int64 {
 type GetUserBalancesResponse struct {
 	state         protoimpl.MessageState             `protogen:"open.v1"`
 	Balances      []*GetUserBalancesResponse_Balance `protobuf:"bytes,1,rep,name=balances,proto3" json:"balances,omitempty"`
+	AllowWithdraw bool                               `protobuf:"varint,2,opt,name=allow_withdraw,json=allowWithdraw,proto3" json:"allow_withdraw,omitempty"`
+	AllowDeposit  bool                               `protobuf:"varint,3,opt,name=allow_deposit,json=allowDeposit,proto3" json:"allow_deposit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -110,6 +112,20 @@ func (x *GetUserBalancesResponse) GetBalances() []*GetUserBalancesResponse_Balan
 		return x.Balances
 	}
 	return nil
+}
+
+func (x *GetUserBalancesResponse) GetAllowWithdraw() bool {
+	if x != nil {
+		return x.AllowWithdraw
+	}
+	return false
+}
+
+func (x *GetUserBalancesResponse) GetAllowDeposit() bool {
+	if x != nil {
+		return x.AllowDeposit
+	}
+	return false
 }
 
 type GetUserBalanceRequest struct {
@@ -15930,9 +15946,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"\x1ewallet/service/v1/wallet.proto\x12\x15api.wallet.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a!wallet/service/v1/promocode.proto\"1\n" +
 	"\x16GetUserBalancesRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xd3\x02\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x9f\x03\n" +
 	"\x17GetUserBalancesResponse\x12R\n" +
-	"\bbalances\x18\x01 \x03(\v26.api.wallet.service.v1.GetUserBalancesResponse.BalanceR\bbalances\x1a\xe3\x01\n" +
+	"\bbalances\x18\x01 \x03(\v26.api.wallet.service.v1.GetUserBalancesResponse.BalanceR\bbalances\x12%\n" +
+	"\x0eallow_withdraw\x18\x02 \x01(\bR\rallowWithdraw\x12#\n" +
+	"\rallow_deposit\x18\x03 \x01(\bR\fallowDeposit\x1a\xe3\x01\n" +
 	"\aBalance\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +

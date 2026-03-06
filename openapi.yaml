@@ -30036,6 +30036,10 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse_Balance'
+                allowWithdraw:
+                    type: boolean
+                allowDeposit:
+                    type: boolean
         api.wallet.service.v1.GetUserBalancesResponse_Balance:
             type: object
             properties:
