@@ -223,9 +223,10 @@ type GameBetEvent struct {
 	SystemOperatorID                     int64          `json:"system_operator_id"`
 	RetailerOperatorID                   int64          `json:"retailer_operator_id"`
 	CompanyOperatorID                    int64          `json:"company_operator_id"`
-	GameTransactionIDs                   []int64        `json:"game_transaction_ids"`
-	RTP                                  string         `json:"rtp"`
-	UserName                             string         `json:"user_name"`
+	GameTransactionIDs                   []int64          `json:"game_transaction_ids"`
+	RTP                                  string           `json:"rtp"`
+	UserName                             string           `json:"user_name"`
+	CashBetAmountReportingCurrency       string           `json:"cash_bet_amount_reporting_currency,omitempty"`
 }
 
 type WebsocketOperatorBoardcastEvent struct {
