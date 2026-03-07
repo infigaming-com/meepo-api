@@ -29985,6 +29985,16 @@ components:
                 allowDeposit:
                     type: boolean
                     description: Whether the user is allowed to deposit, based on operator payment settings (KYC level)
+                withdrawNotAllowedReasons:
+                    type: array
+                    items:
+                        type: string
+                    description: Reasons why withdraw is not allowed, e.g. "kyc_level_insufficient", "no_deposit"
+                depositNotAllowedReasons:
+                    type: array
+                    items:
+                        type: string
+                    description: Reasons why deposit is not allowed, e.g. "kyc_level_insufficient"
         api.wallet.service.v1.GetUserBalancesResponse_Balance:
             type: object
             properties:
