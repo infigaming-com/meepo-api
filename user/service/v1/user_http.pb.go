@@ -51,11 +51,13 @@ const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
 const OperationUserRegister = "/api.user.service.v1.User/Register"
 const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+const OperationUserRegisterWebPushDevice = "/api.user.service.v1.User/RegisterWebPushDevice"
 const OperationUserRequestDailyLossback = "/api.user.service.v1.User/RequestDailyLossback"
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
 const OperationUserUnbindOAuthAccount = "/api.user.service.v1.User/UnbindOAuthAccount"
+const OperationUserUnregisterWebPushDevice = "/api.user.service.v1.User/UnregisterWebPushDevice"
 const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
 const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIdentity"
 const OperationUserUpdateUserPrivacySettings = "/api.user.service.v1.User/UpdateUserPrivacySettings"
@@ -122,6 +124,8 @@ type UserHTTPServer interface {
 	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
+	// RegisterWebPushDevice Web Push device management (proxied to push-service)
+	RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error)
 	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
 	// ResetPasswordWithCode Reset password using verification code
 	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
@@ -130,6 +134,7 @@ type UserHTTPServer interface {
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
 	// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
 	UnbindOAuthAccount(context.Context, *UnbindOAuthAccountRequest) (*UnbindOAuthAccountResponse, error)
+	UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	UpdateUserPrivacySettings(context.Context, *UpdateUserPrivacySettingsRequest) (*UpdateUserPrivacySettingsResponse, error)
@@ -179,6 +184,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.GET("/v1/user/telegram/info", _User_GetTelegramLoginInfo0_HTTP_Handler(srv))
 	r.POST("/v1/user/bonus/reward-history/get", _User_GetRewardHistory0_HTTP_Handler(srv))
 	r.POST("/v1/user/bonus/free-rewards/list", _User_ListUserFreeRewards0_HTTP_Handler(srv))
+	r.POST("/v1/user/push/device/register", _User_RegisterWebPushDevice0_HTTP_Handler(srv))
+	r.POST("/v1/user/push/device/unregister", _User_UnregisterWebPushDevice0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -1049,6 +1056,50 @@ func _User_ListUserFreeRewards0_HTTP_Handler(srv UserHTTPServer) func(ctx http.C
 	}
 }
 
+func _User_RegisterWebPushDevice0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RegisterWebPushDeviceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserRegisterWebPushDevice)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RegisterWebPushDevice(ctx, req.(*RegisterWebPushDeviceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*RegisterWebPushDeviceResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_UnregisterWebPushDevice0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UnregisterWebPushDeviceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUnregisterWebPushDevice)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UnregisterWebPushDevice(ctx, req.(*UnregisterWebPushDeviceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UnregisterWebPushDeviceResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	// BindOAuthAccount Bind OAuth account to current user (requires authentication)
@@ -1109,6 +1160,8 @@ type UserHTTPClient interface {
 	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	// RegisterWebPushDevice Web Push device management (proxied to push-service)
+	RegisterWebPushDevice(ctx context.Context, req *RegisterWebPushDeviceRequest, opts ...http.CallOption) (rsp *RegisterWebPushDeviceResponse, err error)
 	RequestDailyLossback(ctx context.Context, req *RequestDailyLossbackRequest, opts ...http.CallOption) (rsp *v1.RequestDailyLossbackResponse, err error)
 	// ResetPasswordWithCode Reset password using verification code
 	ResetPasswordWithCode(ctx context.Context, req *ResetPasswordWithCodeRequest, opts ...http.CallOption) (rsp *ResetPasswordWithCodeResponse, err error)
@@ -1117,6 +1170,7 @@ type UserHTTPClient interface {
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
 	// UnbindOAuthAccount Unbind OAuth account from current user (requires authentication)
 	UnbindOAuthAccount(ctx context.Context, req *UnbindOAuthAccountRequest, opts ...http.CallOption) (rsp *UnbindOAuthAccountResponse, err error)
+	UnregisterWebPushDevice(ctx context.Context, req *UnregisterWebPushDeviceRequest, opts ...http.CallOption) (rsp *UnregisterWebPushDeviceResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 	UpdateUserIdentity(ctx context.Context, req *UpdateUserIdentityRequest, opts ...http.CallOption) (rsp *UpdateUserIdentityResponse, err error)
 	UpdateUserPrivacySettings(ctx context.Context, req *UpdateUserPrivacySettingsRequest, opts ...http.CallOption) (rsp *UpdateUserPrivacySettingsResponse, err error)
@@ -1551,6 +1605,20 @@ func (c *UserHTTPClientImpl) RegisterOrLoginWithTelegram(ctx context.Context, in
 	return &out, nil
 }
 
+// RegisterWebPushDevice Web Push device management (proxied to push-service)
+func (c *UserHTTPClientImpl) RegisterWebPushDevice(ctx context.Context, in *RegisterWebPushDeviceRequest, opts ...http.CallOption) (*RegisterWebPushDeviceResponse, error) {
+	var out RegisterWebPushDeviceResponse
+	pattern := "/v1/user/push/device/register"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserRegisterWebPushDevice))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *UserHTTPClientImpl) RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...http.CallOption) (*v1.RequestDailyLossbackResponse, error) {
 	var out v1.RequestDailyLossbackResponse
 	pattern := "/v1/user/vip/daily-lossback/request"
@@ -1611,6 +1679,19 @@ func (c *UserHTTPClientImpl) UnbindOAuthAccount(ctx context.Context, in *UnbindO
 	pattern := "/v1/user/oauth/unbind"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUnbindOAuthAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UnregisterWebPushDevice(ctx context.Context, in *UnregisterWebPushDeviceRequest, opts ...http.CallOption) (*UnregisterWebPushDeviceResponse, error) {
+	var out UnregisterWebPushDeviceResponse
+	pattern := "/v1/user/push/device/unregister"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUnregisterWebPushDevice))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

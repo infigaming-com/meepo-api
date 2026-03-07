@@ -567,6 +567,20 @@ service User {
 	rpc GetSwapFeeSettings(GetSwapFeeSettingsRequest) returns (GetSwapFeeSettingsResponse) {}
 
 	rpc SetSwapFeeSettings(SetSwapFeeSettingsRequest) returns (SetSwapFeeSettingsResponse) {}
+
+	// Web Push device management (proxied to push-service)
+	rpc RegisterWebPushDevice(RegisterWebPushDeviceRequest) returns (RegisterWebPushDeviceResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/push/device/register"
+			body: "*"
+		};
+	}
+	rpc UnregisterWebPushDevice(UnregisterWebPushDeviceRequest) returns (UnregisterWebPushDeviceResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/push/device/unregister"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -2592,4 +2606,22 @@ message SetSwapFeeSettingsRequest {
 }
 
 message SetSwapFeeSettingsResponse {
+}
+
+// ============== Web Push Device Messages ==============
+
+message RegisterWebPushDeviceRequest {
+	string fcm_token = 1;
+	string platform = 2;   // "chrome", "firefox", "safari", "edge"
+}
+
+message RegisterWebPushDeviceResponse {
+	int64 device_id = 1;
+}
+
+message UnregisterWebPushDeviceRequest {
+	string fcm_token = 1;
+}
+
+message UnregisterWebPushDeviceResponse {
 }

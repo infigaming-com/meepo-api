@@ -9223,6 +9223,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.UpdateUserPrivacySettingsResponse'
+    /v1/user/push/device/register:
+        post:
+            tags:
+                - User
+            description: Web Push device management (proxied to push-service)
+            operationId: User_RegisterWebPushDevice
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RegisterWebPushDeviceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.RegisterWebPushDeviceResponse'
+    /v1/user/push/device/unregister:
+        post:
+            tags:
+                - User
+            operationId: User_UnregisterWebPushDevice
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UnregisterWebPushDeviceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UnregisterWebPushDeviceResponse'
     /v1/user/responsible-gambling/config/add:
         post:
             tags:
@@ -28252,6 +28289,18 @@ components:
                     type: string
                     description: Nickname
             description: RegisterRequest contains the information needed to register a new user.
+        api.user.service.v1.RegisterWebPushDeviceRequest:
+            type: object
+            properties:
+                fcmToken:
+                    type: string
+                platform:
+                    type: string
+        api.user.service.v1.RegisterWebPushDeviceResponse:
+            type: object
+            properties:
+                deviceId:
+                    type: string
         api.user.service.v1.RegistrationFieldPolicy:
             type: object
             properties:
@@ -28483,6 +28532,14 @@ components:
                     format: enum
             description: UnbindOAuthAccountRequest - unbind OAuth account from current user
         api.user.service.v1.UnbindOAuthAccountResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UnregisterWebPushDeviceRequest:
+            type: object
+            properties:
+                fcmToken:
+                    type: string
+        api.user.service.v1.UnregisterWebPushDeviceResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
