@@ -12,24 +12,25 @@ const (
 	OperatorTypeSystem   = "system"
 
 	//Operator mode: individual, co-opearation, internal-co-opearation
-	OperatorModeIndividual           = "individual"
-	OperatorModeCoOpearation         = "co-operation"
+	OperatorModeIndividual          = "individual"
+	OperatorModeCoOpearation        = "co-operation"
 	OperatorModeInternalCoOperation = "internal-co-operation"
 
-	// Operator status: pending, live, suspended, request_to_close, closed
+	// Operator status: pending, live, suspended, request_to_close, closed, archived
 	OperatorStatusPending        = "pending"
 	OperatorStatusLive           = "live"
 	OperatorStatusSuspended      = "suspended"
 	OperatorStatusRequestToClose = "request_to_close"
 	OperatorStatusClosed         = "closed"
 	OperatorStatusMaintain       = "maintain"
+	OperatorStatusArchived       = "archived"
 
 	// Operator Admin Role
 	CoOpearationOperatorAdminRoleId = 5
-	IndividualOperatorAdminRoleId = 4
-	CompanyOperatorAdminRoleId  = 3
-	RetailerOperatorAdminRoleId = 2
-	SystemOperatorAdminRoleId   = 1
+	IndividualOperatorAdminRoleId   = 4
+	CompanyOperatorAdminRoleId      = 3
+	RetailerOperatorAdminRoleId     = 2
+	SystemOperatorAdminRoleId       = 1
 
 	// Operator Player Role
 	PlayerRoleId = 0
