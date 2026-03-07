@@ -30,8 +30,8 @@ func OperatorStatusCheck(pathIncluder func(string) bool) middleware.Middleware {
 					return nil, errors.New(403, "FORBIDDEN", "GetOperatorInfo failed")
 				}
 
-				// 1. Check closed status
-				if operatorInfo.Status == util.OperatorStatusClosed {
+				// 1. Check closed/archived status
+				if operatorInfo.Status == util.OperatorStatusClosed || operatorInfo.Status == util.OperatorStatusArchived {
 					return nil, errors.New(403, "FORBIDDEN", "website close")
 				}
 
@@ -86,8 +86,8 @@ func BackofficeOperatorStatusCheck(pathExcluder func(string) bool) middleware.Mi
 					return nil, errors.New(403, "FORBIDDEN", "GetOperatorInfo failed")
 				}
 
-				// Closed → always block
-				if operatorInfo.Status == util.OperatorStatusClosed {
+				// Closed/Archived → always block
+				if operatorInfo.Status == util.OperatorStatusClosed || operatorInfo.Status == util.OperatorStatusArchived {
 					return nil, errors.New(403, "FORBIDDEN", "website close")
 				}
 

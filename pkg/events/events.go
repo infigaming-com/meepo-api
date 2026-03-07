@@ -321,6 +321,15 @@ type OperatorStatusUpdateEvent struct {
 
 const OperatorStatusUpdateTopic = "operator.status.update"
 
+// OperatorArchiveEvent is published when an operator is archived.
+// Downstream services should clean up their own operator-specific data.
+type OperatorArchiveEvent struct {
+	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
+	ArchivedAt      int64                   `json:"archived_at"`
+}
+
+const OperatorArchiveTopic = "operator.archive"
+
 // ------------------------------------------------------------
 // Session activity events
 // ------------------------------------------------------------
@@ -329,12 +338,12 @@ const SessionActivityTopic = "session.activity"
 
 type SessionActivityEvent struct {
 	UserID             int64    `json:"userId"`
-	OperatorID         int64    `json:"operatorId"`                    // = RealOperatorID for backward compat
-	RealOperatorID     int64    `json:"realOperatorId"`                // explicit real_operator_id
-	CompanyOperatorID  int64    `json:"companyOperatorId"`             // company level hierarchy ID
-	RetailerOperatorID int64    `json:"retailerOperatorId"`            // retailer level hierarchy ID
-	SystemOperatorID   int64    `json:"systemOperatorId"`              // system level hierarchy ID
-	OperatorType       string   `json:"operatorType"`                  // "operator"|"company"|"retailer"|"system"
+	OperatorID         int64    `json:"operatorId"`         // = RealOperatorID for backward compat
+	RealOperatorID     int64    `json:"realOperatorId"`     // explicit real_operator_id
+	CompanyOperatorID  int64    `json:"companyOperatorId"`  // company level hierarchy ID
+	RetailerOperatorID int64    `json:"retailerOperatorId"` // retailer level hierarchy ID
+	SystemOperatorID   int64    `json:"systemOperatorId"`   // system level hierarchy ID
+	OperatorType       string   `json:"operatorType"`       // "operator"|"company"|"retailer"|"system"
 	Triggers           []string `json:"triggers"`
 	IP                 string   `json:"ip"`
 	PrevIP             string   `json:"prevIp,omitempty"`
