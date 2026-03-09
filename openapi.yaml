@@ -12815,6 +12815,8 @@ components:
         api.backoffice.service.v1.AdjustUserVipLevelRequest:
             type: object
             properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 userId:

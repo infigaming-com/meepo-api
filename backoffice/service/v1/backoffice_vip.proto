@@ -147,12 +147,13 @@ message GetVipConfigResponse {
 
 // 手动调整用户VIP等级请求
 message AdjustUserVipLevelRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  int64 user_id = 2;
-  int64 target_level = 3;
-  bool issue_rewards = 4;
-  string currency = 5;
-  string reason = 6;
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContext target_operator_context = 2;
+  int64 user_id = 3;
+  int64 target_level = 4;
+  bool issue_rewards = 5;
+  string currency = 6;
+  string reason = 7;
 }
 
 // 手动调整用户VIP等级响应
