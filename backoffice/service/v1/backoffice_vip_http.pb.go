@@ -20,6 +20,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeVipAdjustUserVipLevel = "/api.backoffice.service.v1.BackofficeVip/AdjustUserVipLevel"
 const OperationBackofficeVipCreateVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/CreateVipLevelConfigTemplate"
 const OperationBackofficeVipDeleteVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/DeleteVipLevelConfigTemplate"
 const OperationBackofficeVipGetVipConfig = "/api.backoffice.service.v1.BackofficeVip/GetVipConfig"
@@ -29,6 +30,8 @@ const OperationBackofficeVipUpdateVipLevelConfigTemplate = "/api.backoffice.serv
 const OperationBackofficeVipUpdateVipSetting = "/api.backoffice.service.v1.BackofficeVip/UpdateVipSetting"
 
 type BackofficeVipHTTPServer interface {
+	// AdjustUserVipLevel 手动调整用户VIP等级
+	AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error)
 	CreateVipLevelConfigTemplate(context.Context, *CreateVipLevelConfigTemplateRequest) (*CreateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
 	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
@@ -48,6 +51,7 @@ func RegisterBackofficeVipHTTPServer(s *http.Server, srv BackofficeVipHTTPServer
 	r.POST("/v1/backoffice/vip/level-config-template/update", _BackofficeVip_UpdateVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/delete", _BackofficeVip_DeleteVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/config/get", _BackofficeVip_GetVipConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/adjust-user-level", _BackofficeVip_AdjustUserVipLevel0_HTTP_Handler(srv))
 }
 
 func _BackofficeVip_GetVipSetting0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
@@ -204,7 +208,31 @@ func _BackofficeVip_GetVipConfig0_HTTP_Handler(srv BackofficeVipHTTPServer) func
 	}
 }
 
+func _BackofficeVip_AdjustUserVipLevel0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AdjustUserVipLevelRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeVipAdjustUserVipLevel)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AdjustUserVipLevel(ctx, req.(*AdjustUserVipLevelRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AdjustUserVipLevelResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeVipHTTPClient interface {
+	// AdjustUserVipLevel 手动调整用户VIP等级
+	AdjustUserVipLevel(ctx context.Context, req *AdjustUserVipLevelRequest, opts ...http.CallOption) (rsp *AdjustUserVipLevelResponse, err error)
 	CreateVipLevelConfigTemplate(ctx context.Context, req *CreateVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *CreateVipLevelConfigTemplateResponse, err error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, req *DeleteVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *DeleteVipLevelConfigTemplateResponse, err error)
 	GetVipConfig(ctx context.Context, req *GetVipConfigRequest, opts ...http.CallOption) (rsp *GetVipConfigResponse, err error)
@@ -221,6 +249,20 @@ type BackofficeVipHTTPClientImpl struct {
 
 func NewBackofficeVipHTTPClient(client *http.Client) BackofficeVipHTTPClient {
 	return &BackofficeVipHTTPClientImpl{client}
+}
+
+// AdjustUserVipLevel 手动调整用户VIP等级
+func (c *BackofficeVipHTTPClientImpl) AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...http.CallOption) (*AdjustUserVipLevelResponse, error) {
+	var out AdjustUserVipLevelResponse
+	pattern := "/v1/backoffice/vip/adjust-user-level"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeVipAdjustUserVipLevel))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeVipHTTPClientImpl) CreateVipLevelConfigTemplate(ctx context.Context, in *CreateVipLevelConfigTemplateRequest, opts ...http.CallOption) (*CreateVipLevelConfigTemplateResponse, error) {

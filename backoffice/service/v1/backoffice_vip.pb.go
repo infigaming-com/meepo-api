@@ -728,6 +728,168 @@ func (x *GetVipConfigResponse) GetConfig() *v1.VipConfig {
 	return nil
 }
 
+// 手动调整用户VIP等级请求
+type AdjustUserVipLevelRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	UserId                int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TargetLevel           int64                   `protobuf:"varint,3,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`
+	IssueRewards          bool                    `protobuf:"varint,4,opt,name=issue_rewards,json=issueRewards,proto3" json:"issue_rewards,omitempty"`
+	Currency              string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	Reason                string                  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *AdjustUserVipLevelRequest) Reset() {
+	*x = AdjustUserVipLevelRequest{}
+	mi := &file_backoffice_service_v1_backoffice_vip_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdjustUserVipLevelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdjustUserVipLevelRequest) ProtoMessage() {}
+
+func (x *AdjustUserVipLevelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_vip_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdjustUserVipLevelRequest.ProtoReflect.Descriptor instead.
+func (*AdjustUserVipLevelRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *AdjustUserVipLevelRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *AdjustUserVipLevelRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *AdjustUserVipLevelRequest) GetTargetLevel() int64 {
+	if x != nil {
+		return x.TargetLevel
+	}
+	return 0
+}
+
+func (x *AdjustUserVipLevelRequest) GetIssueRewards() bool {
+	if x != nil {
+		return x.IssueRewards
+	}
+	return false
+}
+
+func (x *AdjustUserVipLevelRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AdjustUserVipLevelRequest) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+// 手动调整用户VIP等级响应
+type AdjustUserVipLevelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OldLevel      int64                  `protobuf:"varint,1,opt,name=old_level,json=oldLevel,proto3" json:"old_level,omitempty"`
+	NewLevel      int64                  `protobuf:"varint,2,opt,name=new_level,json=newLevel,proto3" json:"new_level,omitempty"`
+	OldTotalXp    string                 `protobuf:"bytes,3,opt,name=old_total_xp,json=oldTotalXp,proto3" json:"old_total_xp,omitempty"`
+	NewTotalXp    string                 `protobuf:"bytes,4,opt,name=new_total_xp,json=newTotalXp,proto3" json:"new_total_xp,omitempty"`
+	XpAdjustment  string                 `protobuf:"bytes,5,opt,name=xp_adjustment,json=xpAdjustment,proto3" json:"xp_adjustment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdjustUserVipLevelResponse) Reset() {
+	*x = AdjustUserVipLevelResponse{}
+	mi := &file_backoffice_service_v1_backoffice_vip_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdjustUserVipLevelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdjustUserVipLevelResponse) ProtoMessage() {}
+
+func (x *AdjustUserVipLevelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_vip_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdjustUserVipLevelResponse.ProtoReflect.Descriptor instead.
+func (*AdjustUserVipLevelResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AdjustUserVipLevelResponse) GetOldLevel() int64 {
+	if x != nil {
+		return x.OldLevel
+	}
+	return 0
+}
+
+func (x *AdjustUserVipLevelResponse) GetNewLevel() int64 {
+	if x != nil {
+		return x.NewLevel
+	}
+	return 0
+}
+
+func (x *AdjustUserVipLevelResponse) GetOldTotalXp() string {
+	if x != nil {
+		return x.OldTotalXp
+	}
+	return ""
+}
+
+func (x *AdjustUserVipLevelResponse) GetNewTotalXp() string {
+	if x != nil {
+		return x.NewTotalXp
+	}
+	return ""
+}
+
+func (x *AdjustUserVipLevelResponse) GetXpAdjustment() string {
+	if x != nil {
+		return x.XpAdjustment
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_vip_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
@@ -774,8 +936,22 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\x13GetVipConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"M\n" +
 	"\x14GetVipConfigResponse\x125\n" +
-	"\x06config\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipConfigR\x06config2\xdc\n" +
-	"\n" +
+	"\x06config\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipConfigR\x06config\"\x85\x02\n" +
+	"\x19AdjustUserVipLevelRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12!\n" +
+	"\ftarget_level\x18\x03 \x01(\x03R\vtargetLevel\x12#\n" +
+	"\rissue_rewards\x18\x04 \x01(\bR\fissueRewards\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06reason\x18\x06 \x01(\tR\x06reason\"\xbf\x01\n" +
+	"\x1aAdjustUserVipLevelResponse\x12\x1b\n" +
+	"\told_level\x18\x01 \x01(\x03R\boldLevel\x12\x1b\n" +
+	"\tnew_level\x18\x02 \x01(\x03R\bnewLevel\x12 \n" +
+	"\fold_total_xp\x18\x03 \x01(\tR\n" +
+	"oldTotalXp\x12 \n" +
+	"\fnew_total_xp\x18\x04 \x01(\tR\n" +
+	"newTotalXp\x12#\n" +
+	"\rxp_adjustment\x18\x05 \x01(\tR\fxpAdjustment2\x91\f\n" +
 	"\rBackofficeVip\x12\x96\x01\n" +
 	"\rGetVipSetting\x12/.api.backoffice.service.v1.GetVipSettingRequest\x1a).api.vip.service.v1.GetVipSettingResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/vip/setting/get\x12\xa9\x01\n" +
 	"\x10UpdateVipSetting\x122.api.backoffice.service.v1.UpdateVipSettingRequest\x1a3.api.backoffice.service.v1.UpdateVipSettingResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/vip/setting/update\x12\xcf\x01\n" +
@@ -783,7 +959,8 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\x1cCreateVipLevelConfigTemplate\x12>.api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest\x1a?.api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/vip/level-config-template/create\x12\xdb\x01\n" +
 	"\x1cUpdateVipLevelConfigTemplate\x12>.api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest\x1a?.api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/vip/level-config-template/update\x12\xdb\x01\n" +
 	"\x1cDeleteVipLevelConfigTemplate\x12>.api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest\x1a?.api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/vip/level-config-template/delete\x12\x99\x01\n" +
-	"\fGetVipConfig\x12..api.backoffice.service.v1.GetVipConfigRequest\x1a/.api.backoffice.service.v1.GetVipConfigResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/vip/config/getB[\n" +
+	"\fGetVipConfig\x12..api.backoffice.service.v1.GetVipConfigRequest\x1a/.api.backoffice.service.v1.GetVipConfigResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/vip/config/get\x12\xb2\x01\n" +
+	"\x12AdjustUserVipLevel\x124.api.backoffice.service.v1.AdjustUserVipLevelRequest\x1a5.api.backoffice.service.v1.AdjustUserVipLevelResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/vip/adjust-user-levelB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -798,7 +975,7 @@ func file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_vip_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_backoffice_service_v1_backoffice_vip_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_backoffice_service_v1_backoffice_vip_proto_goTypes = []any{
 	(*GetVipSettingRequest)(nil),                 // 0: api.backoffice.service.v1.GetVipSettingRequest
 	(*GetVipSettingResponse)(nil),                // 1: api.backoffice.service.v1.GetVipSettingResponse
@@ -814,51 +991,56 @@ var file_backoffice_service_v1_backoffice_vip_proto_goTypes = []any{
 	(*DeleteVipLevelConfigTemplateResponse)(nil), // 11: api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse
 	(*GetVipConfigRequest)(nil),                  // 12: api.backoffice.service.v1.GetVipConfigRequest
 	(*GetVipConfigResponse)(nil),                 // 13: api.backoffice.service.v1.GetVipConfigResponse
-	(*common.OperatorContext)(nil),               // 14: api.common.OperatorContext
-	(*v1.VipSetting)(nil),                        // 15: api.vip.service.v1.VipSetting
-	(*v1.VipLevelConfigTemplate)(nil),            // 16: api.vip.service.v1.VipLevelConfigTemplate
-	(*v1.VipConfig)(nil),                         // 17: api.vip.service.v1.VipConfig
-	(*v1.GetVipSettingResponse)(nil),             // 18: api.vip.service.v1.GetVipSettingResponse
+	(*AdjustUserVipLevelRequest)(nil),            // 14: api.backoffice.service.v1.AdjustUserVipLevelRequest
+	(*AdjustUserVipLevelResponse)(nil),           // 15: api.backoffice.service.v1.AdjustUserVipLevelResponse
+	(*common.OperatorContext)(nil),               // 16: api.common.OperatorContext
+	(*v1.VipSetting)(nil),                        // 17: api.vip.service.v1.VipSetting
+	(*v1.VipLevelConfigTemplate)(nil),            // 18: api.vip.service.v1.VipLevelConfigTemplate
+	(*v1.VipConfig)(nil),                         // 19: api.vip.service.v1.VipConfig
+	(*v1.GetVipSettingResponse)(nil),             // 20: api.vip.service.v1.GetVipSettingResponse
 }
 var file_backoffice_service_v1_backoffice_vip_proto_depIdxs = []int32{
-	14, // 0: api.backoffice.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 1: api.backoffice.service.v1.GetVipSettingResponse.default_setting:type_name -> api.vip.service.v1.VipSetting
-	15, // 2: api.backoffice.service.v1.GetVipSettingResponse.custom_setting:type_name -> api.vip.service.v1.VipSetting
-	14, // 3: api.backoffice.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
-	14, // 4: api.backoffice.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
-	16, // 5: api.backoffice.service.v1.GetVipSettingResponse.default_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	16, // 6: api.backoffice.service.v1.GetVipSettingResponse.custom_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	14, // 7: api.backoffice.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 8: api.backoffice.service.v1.UpdateVipSettingRequest.setting:type_name -> api.vip.service.v1.VipSetting
-	14, // 9: api.backoffice.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 10: api.backoffice.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	14, // 11: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 12: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	16, // 13: api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	14, // 14: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 15: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	14, // 16: api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 17: api.backoffice.service.v1.GetVipConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 18: api.backoffice.service.v1.GetVipConfigResponse.config:type_name -> api.vip.service.v1.VipConfig
-	0,  // 19: api.backoffice.service.v1.BackofficeVip.GetVipSetting:input_type -> api.backoffice.service.v1.GetVipSettingRequest
-	2,  // 20: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:input_type -> api.backoffice.service.v1.UpdateVipSettingRequest
-	4,  // 21: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateRequest
-	6,  // 22: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest
-	8,  // 23: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest
-	10, // 24: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest
-	12, // 25: api.backoffice.service.v1.BackofficeVip.GetVipConfig:input_type -> api.backoffice.service.v1.GetVipConfigRequest
-	18, // 26: api.backoffice.service.v1.BackofficeVip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
-	3,  // 27: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:output_type -> api.backoffice.service.v1.UpdateVipSettingResponse
-	5,  // 28: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateResponse
-	7,  // 29: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse
-	9,  // 30: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse
-	11, // 31: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse
-	13, // 32: api.backoffice.service.v1.BackofficeVip.GetVipConfig:output_type -> api.backoffice.service.v1.GetVipConfigResponse
-	26, // [26:33] is the sub-list for method output_type
-	19, // [19:26] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	16, // 0: api.backoffice.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	17, // 1: api.backoffice.service.v1.GetVipSettingResponse.default_setting:type_name -> api.vip.service.v1.VipSetting
+	17, // 2: api.backoffice.service.v1.GetVipSettingResponse.custom_setting:type_name -> api.vip.service.v1.VipSetting
+	16, // 3: api.backoffice.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	16, // 4: api.backoffice.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	18, // 5: api.backoffice.service.v1.GetVipSettingResponse.default_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	18, // 6: api.backoffice.service.v1.GetVipSettingResponse.custom_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	16, // 7: api.backoffice.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	17, // 8: api.backoffice.service.v1.UpdateVipSettingRequest.setting:type_name -> api.vip.service.v1.VipSetting
+	16, // 9: api.backoffice.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 10: api.backoffice.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	16, // 11: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 12: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	18, // 13: api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	16, // 14: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 15: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	16, // 16: api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 17: api.backoffice.service.v1.GetVipConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 18: api.backoffice.service.v1.GetVipConfigResponse.config:type_name -> api.vip.service.v1.VipConfig
+	16, // 19: api.backoffice.service.v1.AdjustUserVipLevelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 20: api.backoffice.service.v1.BackofficeVip.GetVipSetting:input_type -> api.backoffice.service.v1.GetVipSettingRequest
+	2,  // 21: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:input_type -> api.backoffice.service.v1.UpdateVipSettingRequest
+	4,  // 22: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateRequest
+	6,  // 23: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest
+	8,  // 24: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest
+	10, // 25: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest
+	12, // 26: api.backoffice.service.v1.BackofficeVip.GetVipConfig:input_type -> api.backoffice.service.v1.GetVipConfigRequest
+	14, // 27: api.backoffice.service.v1.BackofficeVip.AdjustUserVipLevel:input_type -> api.backoffice.service.v1.AdjustUserVipLevelRequest
+	20, // 28: api.backoffice.service.v1.BackofficeVip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
+	3,  // 29: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:output_type -> api.backoffice.service.v1.UpdateVipSettingResponse
+	5,  // 30: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateResponse
+	7,  // 31: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse
+	9,  // 32: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse
+	11, // 33: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse
+	13, // 34: api.backoffice.service.v1.BackofficeVip.GetVipConfig:output_type -> api.backoffice.service.v1.GetVipConfigResponse
+	15, // 35: api.backoffice.service.v1.BackofficeVip.AdjustUserVipLevel:output_type -> api.backoffice.service.v1.AdjustUserVipLevelResponse
+	28, // [28:36] is the sub-list for method output_type
+	20, // [20:28] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_vip_proto_init() }
@@ -872,7 +1054,7 @@ func file_backoffice_service_v1_backoffice_vip_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_vip_proto_rawDesc), len(file_backoffice_service_v1_backoffice_vip_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

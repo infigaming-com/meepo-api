@@ -62,6 +62,14 @@ service BackofficeVip {
     };
   }
 
+  // 手动调整用户VIP等级
+  rpc AdjustUserVipLevel(AdjustUserVipLevelRequest) returns (AdjustUserVipLevelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/adjust-user-level"
+      body: "*"
+    };
+  }
+
   // TODO： 获取follow parent
   // 修改 follow parent
   // TODO: VIP 等级配置是否跟随币种
@@ -135,4 +143,23 @@ message GetVipConfigRequest {
 
 message GetVipConfigResponse {
   api.vip.service.v1.VipConfig config = 1;
+}
+
+// 手动调整用户VIP等级请求
+message AdjustUserVipLevelRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 user_id = 2;
+  int64 target_level = 3;
+  bool issue_rewards = 4;
+  string currency = 5;
+  string reason = 6;
+}
+
+// 手动调整用户VIP等级响应
+message AdjustUserVipLevelResponse {
+  int64 old_level = 1;
+  int64 new_level = 2;
+  string old_total_xp = 3;
+  string new_total_xp = 4;
+  string xp_adjustment = 5;
 }
