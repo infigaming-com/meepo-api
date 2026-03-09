@@ -1077,6 +1077,110 @@ var _ interface {
 	ErrorName() string
 } = TelegramAuthRequestValidationError{}
 
+// Validate checks the field values on TelegramMiniAppAuthRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *TelegramMiniAppAuthRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TelegramMiniAppAuthRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// TelegramMiniAppAuthRequestMultiError, or nil if none found.
+func (m *TelegramMiniAppAuthRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TelegramMiniAppAuthRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for InitData
+
+	if len(errors) > 0 {
+		return TelegramMiniAppAuthRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// TelegramMiniAppAuthRequestMultiError is an error wrapping multiple
+// validation errors returned by TelegramMiniAppAuthRequest.ValidateAll() if
+// the designated constraints aren't met.
+type TelegramMiniAppAuthRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TelegramMiniAppAuthRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TelegramMiniAppAuthRequestMultiError) AllErrors() []error { return m }
+
+// TelegramMiniAppAuthRequestValidationError is the validation error returned
+// by TelegramMiniAppAuthRequest.Validate if the designated constraints aren't met.
+type TelegramMiniAppAuthRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TelegramMiniAppAuthRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TelegramMiniAppAuthRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TelegramMiniAppAuthRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TelegramMiniAppAuthRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TelegramMiniAppAuthRequestValidationError) ErrorName() string {
+	return "TelegramMiniAppAuthRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e TelegramMiniAppAuthRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTelegramMiniAppAuthRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TelegramMiniAppAuthRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TelegramMiniAppAuthRequestValidationError{}
+
 // Validate checks the field values on RefreshTokenRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -37328,6 +37432,8 @@ func (m *ListUserSessionActivitiesResponse_SessionActivity) validate(all bool) e
 			}
 		}
 	}
+
+	// no validation rules for IpLoginUserCount
 
 	if len(errors) > 0 {
 		return ListUserSessionActivitiesResponse_SessionActivityMultiError(errors)

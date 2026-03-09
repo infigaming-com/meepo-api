@@ -51,6 +51,7 @@ const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
 const OperationUserRegister = "/api.user.service.v1.User/Register"
 const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+const OperationUserRegisterOrLoginWithTelegramMiniApp = "/api.user.service.v1.User/RegisterOrLoginWithTelegramMiniApp"
 const OperationUserRegisterWebPushDevice = "/api.user.service.v1.User/RegisterWebPushDevice"
 const OperationUserRequestDailyLossback = "/api.user.service.v1.User/RequestDailyLossback"
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
@@ -124,6 +125,9 @@ type UserHTTPServer interface {
 	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
+	// RegisterOrLoginWithTelegramMiniApp Register or login using Telegram Mini App authentication.
+	// Verifies initData from Telegram Mini App (WebApp).
+	RegisterOrLoginWithTelegramMiniApp(context.Context, *TelegramMiniAppAuthRequest) (*AuthResponse, error)
 	// RegisterWebPushDevice Web Push device management (proxied to push-service)
 	RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error)
 	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
@@ -148,6 +152,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/login", _User_Login0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/telegram/miniapp", _User_RegisterOrLoginWithTelegramMiniApp0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/refresh", _User_RefreshToken0_HTTP_Handler(srv))
 	r.POST("/v1/user/get", _User_GetUser0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/logout", _User_Logout0_HTTP_Handler(srv))
@@ -266,6 +271,28 @@ func _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv UserHTTPServer) func(ct
 		http.SetOperation(ctx, OperationUserRegisterOrLoginWithTelegram)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.RegisterOrLoginWithTelegram(ctx, req.(*TelegramAuthRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AuthResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_RegisterOrLoginWithTelegramMiniApp0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in TelegramMiniAppAuthRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserRegisterOrLoginWithTelegramMiniApp)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RegisterOrLoginWithTelegramMiniApp(ctx, req.(*TelegramMiniAppAuthRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -1160,6 +1187,9 @@ type UserHTTPClient interface {
 	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	// RegisterOrLoginWithTelegramMiniApp Register or login using Telegram Mini App authentication.
+	// Verifies initData from Telegram Mini App (WebApp).
+	RegisterOrLoginWithTelegramMiniApp(ctx context.Context, req *TelegramMiniAppAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	// RegisterWebPushDevice Web Push device management (proxied to push-service)
 	RegisterWebPushDevice(ctx context.Context, req *RegisterWebPushDeviceRequest, opts ...http.CallOption) (rsp *RegisterWebPushDeviceResponse, err error)
 	RequestDailyLossback(ctx context.Context, req *RequestDailyLossbackRequest, opts ...http.CallOption) (rsp *v1.RequestDailyLossbackResponse, err error)
@@ -1597,6 +1627,21 @@ func (c *UserHTTPClientImpl) RegisterOrLoginWithTelegram(ctx context.Context, in
 	pattern := "/v1/user/auth/telegram"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserRegisterOrLoginWithTelegram))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// RegisterOrLoginWithTelegramMiniApp Register or login using Telegram Mini App authentication.
+// Verifies initData from Telegram Mini App (WebApp).
+func (c *UserHTTPClientImpl) RegisterOrLoginWithTelegramMiniApp(ctx context.Context, in *TelegramMiniAppAuthRequest, opts ...http.CallOption) (*AuthResponse, error) {
+	var out AuthResponse
+	pattern := "/v1/user/auth/telegram/miniapp"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserRegisterOrLoginWithTelegramMiniApp))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
