@@ -26,6 +26,7 @@ const (
 	User_LoginWithInfo_FullMethodName                      = "/api.user.service.v1.User/LoginWithInfo"
 	User_RegisterOrLoginWithOAuth_FullMethodName           = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 	User_RegisterOrLoginWithTelegram_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+	User_RegisterOrLoginWithTelegramMiniApp_FullMethodName = "/api.user.service.v1.User/RegisterOrLoginWithTelegramMiniApp"
 	User_RefreshToken_FullMethodName                       = "/api.user.service.v1.User/RefreshToken"
 	User_GetUser_FullMethodName                            = "/api.user.service.v1.User/GetUser"
 	User_GetUsersByIds_FullMethodName                      = "/api.user.service.v1.User/GetUsersByIds"
@@ -170,6 +171,9 @@ type UserClient interface {
 	// Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(ctx context.Context, in *TelegramAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Register or login using Telegram Mini App authentication.
+	// Verifies initData from Telegram Mini App (WebApp).
+	RegisterOrLoginWithTelegramMiniApp(ctx context.Context, in *TelegramMiniAppAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
@@ -430,6 +434,16 @@ func (c *userClient) RegisterOrLoginWithTelegram(ctx context.Context, in *Telegr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, User_RegisterOrLoginWithTelegram_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) RegisterOrLoginWithTelegramMiniApp(ctx context.Context, in *TelegramMiniAppAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, User_RegisterOrLoginWithTelegramMiniApp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1667,6 +1681,9 @@ type UserServer interface {
 	// Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
+	// Register or login using Telegram Mini App authentication.
+	// Verifies initData from Telegram Mini App (WebApp).
+	RegisterOrLoginWithTelegramMiniApp(context.Context, *TelegramMiniAppAuthRequest) (*AuthResponse, error)
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
@@ -1897,6 +1914,9 @@ func (UnimplementedUserServer) RegisterOrLoginWithOAuth(context.Context, *OAuthR
 }
 func (UnimplementedUserServer) RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RegisterOrLoginWithTelegram not implemented")
+}
+func (UnimplementedUserServer) RegisterOrLoginWithTelegramMiniApp(context.Context, *TelegramMiniAppAuthRequest) (*AuthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterOrLoginWithTelegramMiniApp not implemented")
 }
 func (UnimplementedUserServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RefreshToken not implemented")
@@ -2368,6 +2388,24 @@ func _User_RegisterOrLoginWithTelegram_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).RegisterOrLoginWithTelegram(ctx, req.(*TelegramAuthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_RegisterOrLoginWithTelegramMiniApp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TelegramMiniAppAuthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).RegisterOrLoginWithTelegramMiniApp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_RegisterOrLoginWithTelegramMiniApp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).RegisterOrLoginWithTelegramMiniApp(ctx, req.(*TelegramMiniAppAuthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4576,6 +4614,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterOrLoginWithTelegram",
 			Handler:    _User_RegisterOrLoginWithTelegram_Handler,
+		},
+		{
+			MethodName: "RegisterOrLoginWithTelegramMiniApp",
+			Handler:    _User_RegisterOrLoginWithTelegramMiniApp_Handler,
 		},
 		{
 			MethodName: "RefreshToken",

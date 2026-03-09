@@ -54,6 +54,15 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Register or login using Telegram Mini App authentication.
+	// Verifies initData from Telegram Mini App (WebApp).
+	rpc RegisterOrLoginWithTelegramMiniApp (TelegramMiniAppAuthRequest) returns (AuthResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/telegram/miniapp"
+			body: "*"
+		};
+	}
 	
 	// Refresh the access token using a refresh token.
 	// Used to obtain a new access token when the current one expires.
@@ -778,6 +787,12 @@ message TelegramAuthRequest {
 	int64 auth_date = 6;
 	// Hash for verifying the authentication data.
 	string hash = 7;
+}
+
+// TelegramMiniAppAuthRequest contains the initData from Telegram Mini App.
+message TelegramMiniAppAuthRequest {
+	// Telegram Mini App initData (URL-encoded query string from WebApp.initData).
+	string init_data = 1;
 }
 
 // RefreshTokenRequest contains the refresh token for obtaining a new access token.
@@ -2577,6 +2592,7 @@ message ListUserSessionActivitiesResponse {
 		string prev_ip = 5;
 		string prev_country = 6;
 		google.protobuf.Timestamp created_at = 7;
+		int32 ip_login_user_count = 8;          // distinct users who logged in from this IP
 	}
 	repeated SessionActivity activities = 1;
 	int32 total = 2;

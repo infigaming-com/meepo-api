@@ -8934,6 +8934,27 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/telegram/miniapp:
+        post:
+            tags:
+                - User
+            description: |-
+                Register or login using Telegram Mini App authentication.
+                 Verifies initData from Telegram Mini App (WebApp).
+            operationId: User_RegisterOrLoginWithTelegramMiniApp
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.TelegramMiniAppAuthRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
     /v1/user/bonus/free-rewards/list:
         post:
             tags:
@@ -27880,6 +27901,9 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                ipLoginUserCount:
+                    type: integer
+                    format: int32
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -28518,6 +28542,13 @@ components:
                 updatedAt:
                     type: string
             description: TelegramConfig represents operator's Telegram bot configuration
+        api.user.service.v1.TelegramMiniAppAuthRequest:
+            type: object
+            properties:
+                initData:
+                    type: string
+                    description: Telegram Mini App initData (URL-encoded query string from WebApp.initData).
+            description: TelegramMiniAppAuthRequest contains the initData from Telegram Mini App.
         api.user.service.v1.UnbindOAuthAccountRequest:
             type: object
             properties:
