@@ -10,7 +10,9 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-// BackofficeOAuth service provides OAuth provider configuration management for operators
+// BackofficeOAuth service provides OAuth provider configuration management for operators.
+// All auth providers (Google, Facebook, Twitter, Apple, Telegram) are managed through
+// this unified interface, distinguished by the provider field.
 service BackofficeOAuth {
 	// Create or update OAuth provider configuration
 	rpc CreateOrUpdateOAuthProviderConfig(CreateOrUpdateOAuthProviderConfigRequest) returns (CreateOrUpdateOAuthProviderConfigResponse) {
@@ -51,43 +53,12 @@ service BackofficeOAuth {
 			body: "*"
 		};
 	}
-
-	// ============ Telegram Configuration Management ============
-	// Create or update Telegram configuration
-	rpc CreateOrUpdateTelegramConfig(CreateOrUpdateTelegramConfigRequest) returns (CreateOrUpdateTelegramConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/telegram/config/createorupdate"
-			body: "*"
-		};
-	}
-
-	// Get Telegram configuration
-	rpc GetTelegramConfig(GetTelegramConfigRequest) returns (GetTelegramConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/telegram/config/get"
-			body: "*"
-		};
-	}
-
-	// Delete Telegram configuration
-	rpc DeleteTelegramConfig(DeleteTelegramConfigRequest) returns (DeleteTelegramConfigResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/telegram/config/delete"
-			body: "*"
-		};
-	}
-
-	// Enable or disable Telegram auth
-	rpc SetTelegramEnabled(SetTelegramEnabledRequest) returns (SetTelegramEnabledResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/telegram/config/enabled/set"
-			body: "*"
-		};
-	}
 }
 
 // CreateOrUpdateOAuthProviderConfigRequest - request to create or update OAuth provider config
-// If config_id is provided (non-zero), updates existing config; otherwise creates new one
+// If config_id is provided (non-zero), updates existing config; otherwise creates new one.
+// For Telegram provider: client_id = bot_username, client_secret = bot_token,
+// config = {"auth_date_validity_seconds": "86400"}
 message CreateOrUpdateOAuthProviderConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	optional int64 config_id = 2;          // If provided, update existing config; otherwise create new
@@ -143,51 +114,4 @@ message GetOAuthProviderConfigRequest {
 
 message GetOAuthProviderConfigResponse {
 	user.service.v1.OAuthProviderConfig config = 1;
-}
-
-// ============================================================================
-// Telegram Configuration Messages for Backoffice
-// ============================================================================
-
-// CreateOrUpdateTelegramConfigRequest - request to create or update Telegram config
-message CreateOrUpdateTelegramConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	optional int64 config_id = 2;          // If provided, update existing config; otherwise create new
-	string bot_token = 3;                  // Required for create, optional for update
-	string bot_username = 4;
-	bool enabled = 5;
-	bool allow_registration = 6;
-	bool allow_linking = 7;
-	int32 auth_date_validity_seconds = 8;
-}
-
-message CreateOrUpdateTelegramConfigResponse {
-	int64 config_id = 1;
-	bool created = 2;                      // True if created, false if updated
-}
-
-// DeleteTelegramConfigRequest - request to delete Telegram config
-message DeleteTelegramConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	int64 config_id = 2;
-}
-
-message DeleteTelegramConfigResponse {}
-
-// SetTelegramEnabledRequest - request to enable/disable Telegram auth
-message SetTelegramEnabledRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	int64 config_id = 2;
-	bool enabled = 3;
-}
-
-message SetTelegramEnabledResponse {}
-
-// GetTelegramConfigRequest - request to get Telegram config
-message GetTelegramConfigRequest {
-	api.common.OperatorContext target_operator_context = 1;
-}
-
-message GetTelegramConfigResponse {
-	user.service.v1.TelegramConfig config = 1;
 }
