@@ -27251,6 +27251,8 @@ components:
                     type: string
                 allowRegistration:
                     type: boolean
+                botId:
+                    type: string
             description: GetTelegramLoginInfoResponse - Telegram login info for frontend
         api.user.service.v1.GetUserAccountSettingsStatusRequest:
             type: object

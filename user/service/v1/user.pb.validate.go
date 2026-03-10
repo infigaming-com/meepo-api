@@ -31151,6 +31151,8 @@ func (m *GetTelegramLoginInfoResponse) validate(all bool) error {
 
 	// no validation rules for AllowRegistration
 
+	// no validation rules for BotId
+
 	if len(errors) > 0 {
 		return GetTelegramLoginInfoResponseMultiError(errors)
 	}
