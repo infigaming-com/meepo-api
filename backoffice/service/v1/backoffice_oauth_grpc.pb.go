@@ -24,17 +24,15 @@ const (
 	BackofficeOAuth_SetOAuthProviderEnabled_FullMethodName           = "/api.backoffice.service.v1.BackofficeOAuth/SetOAuthProviderEnabled"
 	BackofficeOAuth_ListOAuthProviderConfigs_FullMethodName          = "/api.backoffice.service.v1.BackofficeOAuth/ListOAuthProviderConfigs"
 	BackofficeOAuth_GetOAuthProviderConfig_FullMethodName            = "/api.backoffice.service.v1.BackofficeOAuth/GetOAuthProviderConfig"
-	BackofficeOAuth_CreateOrUpdateTelegramConfig_FullMethodName      = "/api.backoffice.service.v1.BackofficeOAuth/CreateOrUpdateTelegramConfig"
-	BackofficeOAuth_GetTelegramConfig_FullMethodName                 = "/api.backoffice.service.v1.BackofficeOAuth/GetTelegramConfig"
-	BackofficeOAuth_DeleteTelegramConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeOAuth/DeleteTelegramConfig"
-	BackofficeOAuth_SetTelegramEnabled_FullMethodName                = "/api.backoffice.service.v1.BackofficeOAuth/SetTelegramEnabled"
 )
 
 // BackofficeOAuthClient is the client API for BackofficeOAuth service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// BackofficeOAuth service provides OAuth provider configuration management for operators
+// BackofficeOAuth service provides OAuth provider configuration management for operators.
+// All auth providers (Google, Facebook, Twitter, Apple, Telegram) are managed through
+// this unified interface, distinguished by the provider field.
 type BackofficeOAuthClient interface {
 	// Create or update OAuth provider configuration
 	CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error)
@@ -46,15 +44,6 @@ type BackofficeOAuthClient interface {
 	ListOAuthProviderConfigs(ctx context.Context, in *ListOAuthProviderConfigsRequest, opts ...grpc.CallOption) (*ListOAuthProviderConfigsResponse, error)
 	// Get a specific OAuth provider configuration
 	GetOAuthProviderConfig(ctx context.Context, in *GetOAuthProviderConfigRequest, opts ...grpc.CallOption) (*GetOAuthProviderConfigResponse, error)
-	// ============ Telegram Configuration Management ============
-	// Create or update Telegram configuration
-	CreateOrUpdateTelegramConfig(ctx context.Context, in *CreateOrUpdateTelegramConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateTelegramConfigResponse, error)
-	// Get Telegram configuration
-	GetTelegramConfig(ctx context.Context, in *GetTelegramConfigRequest, opts ...grpc.CallOption) (*GetTelegramConfigResponse, error)
-	// Delete Telegram configuration
-	DeleteTelegramConfig(ctx context.Context, in *DeleteTelegramConfigRequest, opts ...grpc.CallOption) (*DeleteTelegramConfigResponse, error)
-	// Enable or disable Telegram auth
-	SetTelegramEnabled(ctx context.Context, in *SetTelegramEnabledRequest, opts ...grpc.CallOption) (*SetTelegramEnabledResponse, error)
 }
 
 type backofficeOAuthClient struct {
@@ -115,51 +104,13 @@ func (c *backofficeOAuthClient) GetOAuthProviderConfig(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeOAuthClient) CreateOrUpdateTelegramConfig(ctx context.Context, in *CreateOrUpdateTelegramConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateTelegramConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateOrUpdateTelegramConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOAuth_CreateOrUpdateTelegramConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeOAuthClient) GetTelegramConfig(ctx context.Context, in *GetTelegramConfigRequest, opts ...grpc.CallOption) (*GetTelegramConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTelegramConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOAuth_GetTelegramConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeOAuthClient) DeleteTelegramConfig(ctx context.Context, in *DeleteTelegramConfigRequest, opts ...grpc.CallOption) (*DeleteTelegramConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteTelegramConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOAuth_DeleteTelegramConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeOAuthClient) SetTelegramEnabled(ctx context.Context, in *SetTelegramEnabledRequest, opts ...grpc.CallOption) (*SetTelegramEnabledResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetTelegramEnabledResponse)
-	err := c.cc.Invoke(ctx, BackofficeOAuth_SetTelegramEnabled_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeOAuthServer is the server API for BackofficeOAuth service.
 // All implementations must embed UnimplementedBackofficeOAuthServer
 // for forward compatibility.
 //
-// BackofficeOAuth service provides OAuth provider configuration management for operators
+// BackofficeOAuth service provides OAuth provider configuration management for operators.
+// All auth providers (Google, Facebook, Twitter, Apple, Telegram) are managed through
+// this unified interface, distinguished by the provider field.
 type BackofficeOAuthServer interface {
 	// Create or update OAuth provider configuration
 	CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error)
@@ -171,15 +122,6 @@ type BackofficeOAuthServer interface {
 	ListOAuthProviderConfigs(context.Context, *ListOAuthProviderConfigsRequest) (*ListOAuthProviderConfigsResponse, error)
 	// Get a specific OAuth provider configuration
 	GetOAuthProviderConfig(context.Context, *GetOAuthProviderConfigRequest) (*GetOAuthProviderConfigResponse, error)
-	// ============ Telegram Configuration Management ============
-	// Create or update Telegram configuration
-	CreateOrUpdateTelegramConfig(context.Context, *CreateOrUpdateTelegramConfigRequest) (*CreateOrUpdateTelegramConfigResponse, error)
-	// Get Telegram configuration
-	GetTelegramConfig(context.Context, *GetTelegramConfigRequest) (*GetTelegramConfigResponse, error)
-	// Delete Telegram configuration
-	DeleteTelegramConfig(context.Context, *DeleteTelegramConfigRequest) (*DeleteTelegramConfigResponse, error)
-	// Enable or disable Telegram auth
-	SetTelegramEnabled(context.Context, *SetTelegramEnabledRequest) (*SetTelegramEnabledResponse, error)
 	mustEmbedUnimplementedBackofficeOAuthServer()
 }
 
@@ -204,18 +146,6 @@ func (UnimplementedBackofficeOAuthServer) ListOAuthProviderConfigs(context.Conte
 }
 func (UnimplementedBackofficeOAuthServer) GetOAuthProviderConfig(context.Context, *GetOAuthProviderConfigRequest) (*GetOAuthProviderConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOAuthProviderConfig not implemented")
-}
-func (UnimplementedBackofficeOAuthServer) CreateOrUpdateTelegramConfig(context.Context, *CreateOrUpdateTelegramConfigRequest) (*CreateOrUpdateTelegramConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateOrUpdateTelegramConfig not implemented")
-}
-func (UnimplementedBackofficeOAuthServer) GetTelegramConfig(context.Context, *GetTelegramConfigRequest) (*GetTelegramConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTelegramConfig not implemented")
-}
-func (UnimplementedBackofficeOAuthServer) DeleteTelegramConfig(context.Context, *DeleteTelegramConfigRequest) (*DeleteTelegramConfigResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteTelegramConfig not implemented")
-}
-func (UnimplementedBackofficeOAuthServer) SetTelegramEnabled(context.Context, *SetTelegramEnabledRequest) (*SetTelegramEnabledResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetTelegramEnabled not implemented")
 }
 func (UnimplementedBackofficeOAuthServer) mustEmbedUnimplementedBackofficeOAuthServer() {}
 func (UnimplementedBackofficeOAuthServer) testEmbeddedByValue()                         {}
@@ -328,78 +258,6 @@ func _BackofficeOAuth_GetOAuthProviderConfig_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeOAuth_CreateOrUpdateTelegramConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOrUpdateTelegramConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOAuthServer).CreateOrUpdateTelegramConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOAuth_CreateOrUpdateTelegramConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOAuthServer).CreateOrUpdateTelegramConfig(ctx, req.(*CreateOrUpdateTelegramConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeOAuth_GetTelegramConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTelegramConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOAuthServer).GetTelegramConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOAuth_GetTelegramConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOAuthServer).GetTelegramConfig(ctx, req.(*GetTelegramConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeOAuth_DeleteTelegramConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteTelegramConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOAuthServer).DeleteTelegramConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOAuth_DeleteTelegramConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOAuthServer).DeleteTelegramConfig(ctx, req.(*DeleteTelegramConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeOAuth_SetTelegramEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetTelegramEnabledRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOAuthServer).SetTelegramEnabled(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOAuth_SetTelegramEnabled_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOAuthServer).SetTelegramEnabled(ctx, req.(*SetTelegramEnabledRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeOAuth_ServiceDesc is the grpc.ServiceDesc for BackofficeOAuth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -426,22 +284,6 @@ var BackofficeOAuth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOAuthProviderConfig",
 			Handler:    _BackofficeOAuth_GetOAuthProviderConfig_Handler,
-		},
-		{
-			MethodName: "CreateOrUpdateTelegramConfig",
-			Handler:    _BackofficeOAuth_CreateOrUpdateTelegramConfig_Handler,
-		},
-		{
-			MethodName: "GetTelegramConfig",
-			Handler:    _BackofficeOAuth_GetTelegramConfig_Handler,
-		},
-		{
-			MethodName: "DeleteTelegramConfig",
-			Handler:    _BackofficeOAuth_DeleteTelegramConfig_Handler,
-		},
-		{
-			MethodName: "SetTelegramEnabled",
-			Handler:    _BackofficeOAuth_SetTelegramEnabled_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
