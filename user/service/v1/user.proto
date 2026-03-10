@@ -2471,6 +2471,7 @@ message GetTelegramLoginInfoResponse {
 	bool enabled = 1;
 	string bot_username = 2;
 	bool allow_registration = 3;
+	string bot_id = 4; // Numeric bot ID for window.Telegram.Login.auth()
 }
 
 // ============ Bonus Center Messages ============

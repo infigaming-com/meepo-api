@@ -14924,6 +14924,7 @@ type GetTelegramLoginInfoResponse struct {
 	Enabled           bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	BotUsername       string                 `protobuf:"bytes,2,opt,name=bot_username,json=botUsername,proto3" json:"bot_username,omitempty"`
 	AllowRegistration bool                   `protobuf:"varint,3,opt,name=allow_registration,json=allowRegistration,proto3" json:"allow_registration,omitempty"`
+	BotId             string                 `protobuf:"bytes,4,opt,name=bot_id,json=botId,proto3" json:"bot_id,omitempty"` // Numeric bot ID for window.Telegram.Login.auth()
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -14977,6 +14978,13 @@ func (x *GetTelegramLoginInfoResponse) GetAllowRegistration() bool {
 		return x.AllowRegistration
 	}
 	return false
+}
+
+func (x *GetTelegramLoginInfoResponse) GetBotId() string {
+	if x != nil {
+		return x.BotId
+	}
+	return ""
 }
 
 type GetRewardHistoryRequest struct {
@@ -19024,11 +19032,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1cInitiateOAuthBindingResponse\x12+\n" +
 	"\x11authorization_url\x18\x01 \x01(\tR\x10authorizationUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\"\x1d\n" +
-	"\x1bGetTelegramLoginInfoRequest\"\x8a\x01\n" +
+	"\x1bGetTelegramLoginInfoRequest\"\xa1\x01\n" +
 	"\x1cGetTelegramLoginInfoResponse\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12!\n" +
 	"\fbot_username\x18\x02 \x01(\tR\vbotUsername\x12-\n" +
-	"\x12allow_registration\x18\x03 \x01(\bR\x11allowRegistration\"\x19\n" +
+	"\x12allow_registration\x18\x03 \x01(\bR\x11allowRegistration\x12\x15\n" +
+	"\x06bot_id\x18\x04 \x01(\tR\x05botId\"\x19\n" +
 	"\x17GetRewardHistoryRequest\"\x1c\n" +
 	"\x1aListUserFreeRewardsRequest\"\x86\x03\n" +
 	"\x18GetRewardHistoryResponse\x12*\n" +
