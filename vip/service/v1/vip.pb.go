@@ -3578,9 +3578,9 @@ type AdjustUserVipLevelRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TargetLevel     int64                   `protobuf:"varint,3,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`    // 绝对等级号（如 5, 10, 15）
-	IssueRewards    bool                    `protobuf:"varint,4,opt,name=issue_rewards,json=issueRewards,proto3" json:"issue_rewards,omitempty"` // 是否发放跨越等级的升级奖励
-	Reason          string                  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`                                  // 调整原因（审计用）
+	TargetLevel     int64                   `protobuf:"varint,3,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`          // 绝对等级号（如 5, 10, 15）
+	IssueRewards    *bool                   `protobuf:"varint,4,opt,name=issue_rewards,json=issueRewards,proto3,oneof" json:"issue_rewards,omitempty"` // 是否发放跨越等级的升级奖励（默认 true）
+	Reason          string                  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`                                        // 调整原因（审计用）
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3637,8 +3637,8 @@ func (x *AdjustUserVipLevelRequest) GetTargetLevel() int64 {
 }
 
 func (x *AdjustUserVipLevelRequest) GetIssueRewards() bool {
-	if x != nil {
-		return x.IssueRewards
+	if x != nil && x.IssueRewards != nil {
+		return *x.IssueRewards
 	}
 	return false
 }
@@ -4311,13 +4311,14 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\vreward_kind\x18\x01 \x01(\x0e2!.api.vip.service.v1.VipRewardKindR\n" +
 	"rewardKind\x12\x1f\n" +
 	"\vclaimed_usd\x18\x02 \x01(\tR\n" +
-	"claimedUsd\"\xdc\x01\n" +
+	"claimedUsd\"\xf3\x01\n" +
 	"\x19AdjustUserVipLevelRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12!\n" +
-	"\ftarget_level\x18\x03 \x01(\x03R\vtargetLevel\x12#\n" +
-	"\rissue_rewards\x18\x04 \x01(\bR\fissueRewards\x12\x16\n" +
-	"\x06reason\x18\x06 \x01(\tR\x06reason\"\xbf\x01\n" +
+	"\ftarget_level\x18\x03 \x01(\x03R\vtargetLevel\x12(\n" +
+	"\rissue_rewards\x18\x04 \x01(\bH\x00R\fissueRewards\x88\x01\x01\x12\x16\n" +
+	"\x06reason\x18\x06 \x01(\tR\x06reasonB\x10\n" +
+	"\x0e_issue_rewards\"\xbf\x01\n" +
 	"\x1aAdjustUserVipLevelResponse\x12\x1b\n" +
 	"\told_level\x18\x01 \x01(\x03R\boldLevel\x12\x1b\n" +
 	"\tnew_level\x18\x02 \x01(\x03R\bnewLevel\x12 \n" +
@@ -4581,6 +4582,7 @@ func file_vip_service_v1_vip_proto_init() {
 	if File_vip_service_v1_vip_proto != nil {
 		return
 	}
+	file_vip_service_v1_vip_proto_msgTypes[43].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

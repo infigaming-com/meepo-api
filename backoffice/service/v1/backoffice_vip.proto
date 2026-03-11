@@ -157,7 +157,7 @@ message GetVipConfigResponse {
 message AdjustUserVipLevelRequest {
   int64 user_id = 3;
   int64 target_level = 4;
-  bool issue_rewards = 5;
+  optional bool issue_rewards = 5;   // 是否发放跨越等级的升级奖励（默认 true）
   string reason = 7;
 }
 
