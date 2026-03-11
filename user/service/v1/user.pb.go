@@ -17211,6 +17211,8 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 	Status               string                  `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	Subdomain            string                  `protobuf:"bytes,7,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	ReportingCurrency    string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeSubdomain  string                  `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	BackofficeByoDomains []string                `protobuf:"bytes,10,rep,name=backoffice_byo_domains,json=backofficeByoDomains,proto3" json:"backoffice_byo_domains,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -17299,6 +17301,20 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) GetReportingCurrency() string
 		return x.ReportingCurrency
 	}
 	return ""
+}
+
+func (x *ListBottomOperatorsResponse_OperatorInfo) GetBackofficeSubdomain() string {
+	if x != nil {
+		return x.BackofficeSubdomain
+	}
+	return ""
+}
+
+func (x *ListBottomOperatorsResponse_OperatorInfo) GetBackofficeByoDomains() []string {
+	if x != nil {
+		return x.BackofficeByoDomains
+	}
+	return nil
 }
 
 type ResponsibleGamblingConfig_SelfExclusion struct {
@@ -18532,9 +18548,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aListBottomOperatorsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf5\x03\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xde\x04\n" +
 	"\x1bListBottomOperatorsResponse\x12h\n" +
-	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\xeb\x02\n" +
+	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\xd4\x03\n" +
 	"\fOperatorInfo\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
 	"\x14bottom_operator_name\x18\x02 \x01(\tR\x12bottomOperatorName\x124\n" +
@@ -18543,7 +18559,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x04mode\x18\x05 \x01(\tR\x04mode\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1c\n" +
 	"\tsubdomain\x18\a \x01(\tR\tsubdomain\x12-\n" +
-	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\"\xec\x02\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x121\n" +
+	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x124\n" +
+	"\x16backoffice_byo_domains\x18\n" +
+	" \x03(\tR\x14backofficeByoDomains\"\xec\x02\n" +
 	"\x1bUpdateOperatorStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12<\n" +

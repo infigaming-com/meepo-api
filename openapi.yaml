@@ -27652,6 +27652,12 @@ components:
                     type: string
                 reportingCurrency:
                     type: string
+                backofficeSubdomain:
+                    type: string
+                backofficeByoDomains:
+                    type: array
+                    items:
+                        type: string
             description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
         api.user.service.v1.ListBoundOAuthAccountsResponse:
             type: object
