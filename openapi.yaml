@@ -12777,10 +12777,6 @@ components:
         api.backoffice.service.v1.AdjustUserVipLevelRequest:
             type: object
             properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 userId:
                     type: string
                 targetLevel:
@@ -16441,10 +16437,6 @@ components:
         api.backoffice.service.v1.GetUserVipLevelOptionsRequest:
             type: object
             properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 userId:
                     type: string
             description: 获取用户可选VIP等级列表请求
