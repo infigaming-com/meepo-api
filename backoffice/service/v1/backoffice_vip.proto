@@ -70,6 +70,14 @@ service BackofficeVip {
     };
   }
 
+  // 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+  rpc GetUserVipLevelOptions(GetUserVipLevelOptionsRequest) returns (GetUserVipLevelOptionsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/user-level-options"
+      body: "*"
+    };
+  }
+
   // TODO： 获取follow parent
   // 修改 follow parent
   // TODO: VIP 等级配置是否跟随币种
@@ -163,4 +171,18 @@ message AdjustUserVipLevelResponse {
   string old_total_xp = 3;
   string new_total_xp = 4;
   string xp_adjustment = 5;
+}
+
+// 获取用户可选VIP等级列表请求
+message GetUserVipLevelOptionsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContext target_operator_context = 2;
+  int64 user_id = 3;
+}
+
+// 获取用户可选VIP等级列表响应
+message GetUserVipLevelOptionsResponse {
+  int64 current_level = 1;
+  string current_total_xp = 2;
+  repeated api.vip.service.v1.VipLevelOption levels = 3;
 }

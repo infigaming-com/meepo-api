@@ -23,6 +23,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeVipAdjustUserVipLevel = "/api.backoffice.service.v1.BackofficeVip/AdjustUserVipLevel"
 const OperationBackofficeVipCreateVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/CreateVipLevelConfigTemplate"
 const OperationBackofficeVipDeleteVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/DeleteVipLevelConfigTemplate"
+const OperationBackofficeVipGetUserVipLevelOptions = "/api.backoffice.service.v1.BackofficeVip/GetUserVipLevelOptions"
 const OperationBackofficeVipGetVipConfig = "/api.backoffice.service.v1.BackofficeVip/GetVipConfig"
 const OperationBackofficeVipGetVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/GetVipLevelConfigTemplate"
 const OperationBackofficeVipGetVipSetting = "/api.backoffice.service.v1.BackofficeVip/GetVipSetting"
@@ -34,6 +35,8 @@ type BackofficeVipHTTPServer interface {
 	AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error)
 	CreateVipLevelConfigTemplate(context.Context, *CreateVipLevelConfigTemplateRequest) (*CreateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
+	// GetUserVipLevelOptions 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error)
 	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
 	// GetVipSetting VIP设置管理
@@ -52,6 +55,7 @@ func RegisterBackofficeVipHTTPServer(s *http.Server, srv BackofficeVipHTTPServer
 	r.POST("/v1/backoffice/vip/level-config-template/delete", _BackofficeVip_DeleteVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/config/get", _BackofficeVip_GetVipConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/adjust-user-level", _BackofficeVip_AdjustUserVipLevel0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/user-level-options", _BackofficeVip_GetUserVipLevelOptions0_HTTP_Handler(srv))
 }
 
 func _BackofficeVip_GetVipSetting0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
@@ -230,11 +234,35 @@ func _BackofficeVip_AdjustUserVipLevel0_HTTP_Handler(srv BackofficeVipHTTPServer
 	}
 }
 
+func _BackofficeVip_GetUserVipLevelOptions0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserVipLevelOptionsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeVipGetUserVipLevelOptions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserVipLevelOptions(ctx, req.(*GetUserVipLevelOptionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetUserVipLevelOptionsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeVipHTTPClient interface {
 	// AdjustUserVipLevel 手动调整用户VIP等级
 	AdjustUserVipLevel(ctx context.Context, req *AdjustUserVipLevelRequest, opts ...http.CallOption) (rsp *AdjustUserVipLevelResponse, err error)
 	CreateVipLevelConfigTemplate(ctx context.Context, req *CreateVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *CreateVipLevelConfigTemplateResponse, err error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, req *DeleteVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *DeleteVipLevelConfigTemplateResponse, err error)
+	// GetUserVipLevelOptions 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	GetUserVipLevelOptions(ctx context.Context, req *GetUserVipLevelOptionsRequest, opts ...http.CallOption) (rsp *GetUserVipLevelOptionsResponse, err error)
 	GetVipConfig(ctx context.Context, req *GetVipConfigRequest, opts ...http.CallOption) (rsp *GetVipConfigResponse, err error)
 	GetVipLevelConfigTemplate(ctx context.Context, req *GetVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *GetVipLevelConfigTemplateResponse, err error)
 	// GetVipSetting VIP设置管理
@@ -283,6 +311,20 @@ func (c *BackofficeVipHTTPClientImpl) DeleteVipLevelConfigTemplate(ctx context.C
 	pattern := "/v1/backoffice/vip/level-config-template/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeVipDeleteVipLevelConfigTemplate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetUserVipLevelOptions 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+func (c *BackofficeVipHTTPClientImpl) GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...http.CallOption) (*GetUserVipLevelOptionsResponse, error) {
+	var out GetUserVipLevelOptionsResponse
+	pattern := "/v1/backoffice/vip/user-level-options"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeVipGetUserVipLevelOptions))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -6796,6 +6796,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipSettingResponse'
+    /v1/backoffice/vip/user-level-options:
+        post:
+            tags:
+                - BackofficeVip
+            description: 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+            operationId: BackofficeVip_GetUserVipLevelOptions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserVipLevelOptionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetUserVipLevelOptionsResponse'
     /v1/backoffice/wallet/app-download-reward/config/get:
         post:
             tags:
@@ -16525,6 +16544,28 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
+        api.backoffice.service.v1.GetUserVipLevelOptionsRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                userId:
+                    type: string
+            description: 获取用户可选VIP等级列表请求
+        api.backoffice.service.v1.GetUserVipLevelOptionsResponse:
+            type: object
+            properties:
+                currentLevel:
+                    type: string
+                currentTotalXp:
+                    type: string
+                levels:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.vip.service.v1.VipLevelOption'
+            description: 获取用户可选VIP等级列表响应
         api.backoffice.service.v1.GetVipConfigRequest:
             type: object
             properties:
@@ -29169,6 +29210,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.vip.service.v1.DailyLossbackRate'
+        api.vip.service.v1.VipLevelOption:
+            type: object
+            properties:
+                level:
+                    type: string
+                name:
+                    type: string
+                requiredXp:
+                    type: string
+                templateId:
+                    type: string
+            description: VIP等级选项
         api.vip.service.v1.VipMember:
             type: object
             properties:

@@ -2341,3 +2341,307 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AdjustUserVipLevelResponseValidationError{}
+
+// Validate checks the field values on GetUserVipLevelOptionsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserVipLevelOptionsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserVipLevelOptionsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserVipLevelOptionsRequestMultiError, or nil if none found.
+func (m *GetUserVipLevelOptionsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserVipLevelOptionsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserVipLevelOptionsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserVipLevelOptionsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserVipLevelOptionsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserVipLevelOptionsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserVipLevelOptionsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserVipLevelOptionsRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return GetUserVipLevelOptionsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserVipLevelOptionsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetUserVipLevelOptionsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserVipLevelOptionsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserVipLevelOptionsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserVipLevelOptionsRequestMultiError) AllErrors() []error { return m }
+
+// GetUserVipLevelOptionsRequestValidationError is the validation error
+// returned by GetUserVipLevelOptionsRequest.Validate if the designated
+// constraints aren't met.
+type GetUserVipLevelOptionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserVipLevelOptionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserVipLevelOptionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserVipLevelOptionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserVipLevelOptionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserVipLevelOptionsRequestValidationError) ErrorName() string {
+	return "GetUserVipLevelOptionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserVipLevelOptionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserVipLevelOptionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserVipLevelOptionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserVipLevelOptionsRequestValidationError{}
+
+// Validate checks the field values on GetUserVipLevelOptionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserVipLevelOptionsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserVipLevelOptionsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetUserVipLevelOptionsResponseMultiError, or nil if none found.
+func (m *GetUserVipLevelOptionsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserVipLevelOptionsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CurrentLevel
+
+	// no validation rules for CurrentTotalXp
+
+	for idx, item := range m.GetLevels() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserVipLevelOptionsResponseValidationError{
+						field:  fmt.Sprintf("Levels[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserVipLevelOptionsResponseValidationError{
+						field:  fmt.Sprintf("Levels[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserVipLevelOptionsResponseValidationError{
+					field:  fmt.Sprintf("Levels[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetUserVipLevelOptionsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserVipLevelOptionsResponseMultiError is an error wrapping multiple
+// validation errors returned by GetUserVipLevelOptionsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetUserVipLevelOptionsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserVipLevelOptionsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserVipLevelOptionsResponseMultiError) AllErrors() []error { return m }
+
+// GetUserVipLevelOptionsResponseValidationError is the validation error
+// returned by GetUserVipLevelOptionsResponse.Validate if the designated
+// constraints aren't met.
+type GetUserVipLevelOptionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserVipLevelOptionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserVipLevelOptionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserVipLevelOptionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserVipLevelOptionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserVipLevelOptionsResponseValidationError) ErrorName() string {
+	return "GetUserVipLevelOptionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserVipLevelOptionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserVipLevelOptionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserVipLevelOptionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserVipLevelOptionsResponseValidationError{}

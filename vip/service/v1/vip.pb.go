@@ -3735,6 +3735,189 @@ func (x *AdjustUserVipLevelResponse) GetXpAdjustment() string {
 	return ""
 }
 
+// 获取用户可选VIP等级列表请求
+type GetUserVipLevelOptionsRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetUserVipLevelOptionsRequest) Reset() {
+	*x = GetUserVipLevelOptionsRequest{}
+	mi := &file_vip_service_v1_vip_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserVipLevelOptionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserVipLevelOptionsRequest) ProtoMessage() {}
+
+func (x *GetUserVipLevelOptionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_vip_service_v1_vip_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserVipLevelOptionsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserVipLevelOptionsRequest) Descriptor() ([]byte, []int) {
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *GetUserVipLevelOptionsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *GetUserVipLevelOptionsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+// VIP等级选项
+type VipLevelOption struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Level         int64                  `protobuf:"varint,1,opt,name=level,proto3" json:"level,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                               // template name
+	RequiredXp    string                 `protobuf:"bytes,3,opt,name=required_xp,json=requiredXp,proto3" json:"required_xp,omitempty"` // 达到该等级所需的最低 total XP
+	TemplateId    int64                  `protobuf:"varint,4,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VipLevelOption) Reset() {
+	*x = VipLevelOption{}
+	mi := &file_vip_service_v1_vip_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VipLevelOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VipLevelOption) ProtoMessage() {}
+
+func (x *VipLevelOption) ProtoReflect() protoreflect.Message {
+	mi := &file_vip_service_v1_vip_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VipLevelOption.ProtoReflect.Descriptor instead.
+func (*VipLevelOption) Descriptor() ([]byte, []int) {
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *VipLevelOption) GetLevel() int64 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *VipLevelOption) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *VipLevelOption) GetRequiredXp() string {
+	if x != nil {
+		return x.RequiredXp
+	}
+	return ""
+}
+
+func (x *VipLevelOption) GetTemplateId() int64 {
+	if x != nil {
+		return x.TemplateId
+	}
+	return 0
+}
+
+// 获取用户可选VIP等级列表响应
+type GetUserVipLevelOptionsResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	CurrentLevel   int64                  `protobuf:"varint,1,opt,name=current_level,json=currentLevel,proto3" json:"current_level,omitempty"`
+	CurrentTotalXp string                 `protobuf:"bytes,2,opt,name=current_total_xp,json=currentTotalXp,proto3" json:"current_total_xp,omitempty"`
+	Levels         []*VipLevelOption      `protobuf:"bytes,3,rep,name=levels,proto3" json:"levels,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetUserVipLevelOptionsResponse) Reset() {
+	*x = GetUserVipLevelOptionsResponse{}
+	mi := &file_vip_service_v1_vip_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserVipLevelOptionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserVipLevelOptionsResponse) ProtoMessage() {}
+
+func (x *GetUserVipLevelOptionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_vip_service_v1_vip_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserVipLevelOptionsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserVipLevelOptionsResponse) Descriptor() ([]byte, []int) {
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *GetUserVipLevelOptionsResponse) GetCurrentLevel() int64 {
+	if x != nil {
+		return x.CurrentLevel
+	}
+	return 0
+}
+
+func (x *GetUserVipLevelOptionsResponse) GetCurrentTotalXp() string {
+	if x != nil {
+		return x.CurrentTotalXp
+	}
+	return ""
+}
+
+func (x *GetUserVipLevelOptionsResponse) GetLevels() []*VipLevelOption {
+	if x != nil {
+		return x.Levels
+	}
+	return nil
+}
+
 type GetClaimableVipRewardsResponse_ClaimableVipReward struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RewardKind    VipRewardKind          `protobuf:"varint,1,opt,name=reward_kind,json=rewardKind,proto3,enum=api.vip.service.v1.VipRewardKind" json:"reward_kind,omitempty"`
@@ -3746,7 +3929,7 @@ type GetClaimableVipRewardsResponse_ClaimableVipReward struct {
 
 func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) Reset() {
 	*x = GetClaimableVipRewardsResponse_ClaimableVipReward{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[45]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3758,7 +3941,7 @@ func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) String() string {
 func (*GetClaimableVipRewardsResponse_ClaimableVipReward) ProtoMessage() {}
 
 func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[45]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3805,7 +3988,7 @@ type GetVipRewardHistoryResponse_RewardTypeHistory struct {
 
 func (x *GetVipRewardHistoryResponse_RewardTypeHistory) Reset() {
 	*x = GetVipRewardHistoryResponse_RewardTypeHistory{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[46]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3817,7 +4000,7 @@ func (x *GetVipRewardHistoryResponse_RewardTypeHistory) String() string {
 func (*GetVipRewardHistoryResponse_RewardTypeHistory) ProtoMessage() {}
 
 func (x *GetVipRewardHistoryResponse_RewardTypeHistory) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[46]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4151,7 +4334,21 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"oldTotalXp\x12 \n" +
 	"\fnew_total_xp\x18\x04 \x01(\tR\n" +
 	"newTotalXp\x12#\n" +
-	"\rxp_adjustment\x18\x05 \x01(\tR\fxpAdjustment*q\n" +
+	"\rxp_adjustment\x18\x05 \x01(\tR\fxpAdjustment\"\x80\x01\n" +
+	"\x1dGetUserVipLevelOptionsRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\"|\n" +
+	"\x0eVipLevelOption\x12\x14\n" +
+	"\x05level\x18\x01 \x01(\x03R\x05level\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vrequired_xp\x18\x03 \x01(\tR\n" +
+	"requiredXp\x12\x1f\n" +
+	"\vtemplate_id\x18\x04 \x01(\x03R\n" +
+	"templateId\"\xab\x01\n" +
+	"\x1eGetUserVipLevelOptionsResponse\x12#\n" +
+	"\rcurrent_level\x18\x01 \x01(\x03R\fcurrentLevel\x12(\n" +
+	"\x10current_total_xp\x18\x02 \x01(\tR\x0ecurrentTotalXp\x12:\n" +
+	"\x06levels\x18\x03 \x03(\v2\".api.vip.service.v1.VipLevelOptionR\x06levels*q\n" +
 	"\x0eVipDisplayRule\x12 \n" +
 	"\x1cVIP_DISPLAY_RULE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bVIP_DISPLAY_RULE_CUMULATIVE\x10\x01\x12\x1c\n" +
@@ -4186,7 +4383,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x1cVIP_REWARD_EXPIRY_TYPE_NEVER\x10\x01\x12/\n" +
 	"+VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING\x10\x02\x12/\n" +
 	"+VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK\x10\x03\x120\n" +
-	",VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH\x10\x042\xf9\x12\n" +
+	",VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH\x10\x042\xfd\x13\n" +
 	"\x03Vip\x12f\n" +
 	"\rGetVipSetting\x12(.api.vip.service.v1.GetVipSettingRequest\x1a).api.vip.service.v1.GetVipSettingResponse\"\x00\x12m\n" +
 	"\x10UpdateVipSetting\x12+.api.vip.service.v1.UpdateVipSettingRequest\x1a,.api.vip.service.v1.UpdateVipSettingResponse\x12\x90\x01\n" +
@@ -4206,7 +4403,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x12ForceRunVipRewards\x12-.api.vip.service.v1.ForceRunVipRewardsRequest\x1a..api.vip.service.v1.ForceRunVipRewardsResponse\"\x00\x12u\n" +
 	"\x12BatchGetVipMembers\x12-.api.vip.service.v1.BatchGetVipMembersRequest\x1a..api.vip.service.v1.BatchGetVipMembersResponse\"\x00\x12x\n" +
 	"\x13GetVipRewardHistory\x12..api.vip.service.v1.GetVipRewardHistoryRequest\x1a/.api.vip.service.v1.GetVipRewardHistoryResponse\"\x00\x12u\n" +
-	"\x12AdjustUserVipLevel\x12-.api.vip.service.v1.AdjustUserVipLevelRequest\x1a..api.vip.service.v1.AdjustUserVipLevelResponse\"\x00BM\n" +
+	"\x12AdjustUserVipLevel\x12-.api.vip.service.v1.AdjustUserVipLevelRequest\x1a..api.vip.service.v1.AdjustUserVipLevelResponse\"\x00\x12\x81\x01\n" +
+	"\x16GetUserVipLevelOptions\x121.api.vip.service.v1.GetUserVipLevelOptionsRequest\x1a2.api.vip.service.v1.GetUserVipLevelOptionsResponse\"\x00BM\n" +
 	"\x12api.vip.service.v1P\x01Z5github.com/infigaming-com/meepo-api/vip/service/v1;v1b\x06proto3"
 
 var (
@@ -4222,7 +4420,7 @@ func file_vip_service_v1_vip_proto_rawDescGZIP() []byte {
 }
 
 var file_vip_service_v1_vip_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_vip_service_v1_vip_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
+var file_vip_service_v1_vip_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
 var file_vip_service_v1_vip_proto_goTypes = []any{
 	(VipDisplayRule)(0),                                       // 0: api.vip.service.v1.VipDisplayRule
 	(VipRewardKind)(0),                                        // 1: api.vip.service.v1.VipRewardKind
@@ -4275,9 +4473,12 @@ var file_vip_service_v1_vip_proto_goTypes = []any{
 	(*GetVipRewardHistoryResponse)(nil),                       // 48: api.vip.service.v1.GetVipRewardHistoryResponse
 	(*AdjustUserVipLevelRequest)(nil),                         // 49: api.vip.service.v1.AdjustUserVipLevelRequest
 	(*AdjustUserVipLevelResponse)(nil),                        // 50: api.vip.service.v1.AdjustUserVipLevelResponse
-	(*GetClaimableVipRewardsResponse_ClaimableVipReward)(nil), // 51: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
-	(*GetVipRewardHistoryResponse_RewardTypeHistory)(nil),     // 52: api.vip.service.v1.GetVipRewardHistoryResponse.RewardTypeHistory
-	(*common.OperatorContext)(nil),                            // 53: api.common.OperatorContext
+	(*GetUserVipLevelOptionsRequest)(nil),                     // 51: api.vip.service.v1.GetUserVipLevelOptionsRequest
+	(*VipLevelOption)(nil),                                    // 52: api.vip.service.v1.VipLevelOption
+	(*GetUserVipLevelOptionsResponse)(nil),                    // 53: api.vip.service.v1.GetUserVipLevelOptionsResponse
+	(*GetClaimableVipRewardsResponse_ClaimableVipReward)(nil), // 54: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
+	(*GetVipRewardHistoryResponse_RewardTypeHistory)(nil),     // 55: api.vip.service.v1.GetVipRewardHistoryResponse.RewardTypeHistory
+	(*common.OperatorContext)(nil),                            // 56: api.common.OperatorContext
 }
 var file_vip_service_v1_vip_proto_depIdxs = []int32{
 	2,  // 0: api.vip.service.v1.VipSetting.upgrade_payout_type:type_name -> api.vip.service.v1.VipPayoutType
@@ -4292,92 +4493,96 @@ var file_vip_service_v1_vip_proto_depIdxs = []int32{
 	5,  // 9: api.vip.service.v1.VipSetting.rakeback_daily_expiry_type:type_name -> api.vip.service.v1.VipRewardExpiryType
 	5,  // 10: api.vip.service.v1.VipSetting.weekly_reward_expiry_type:type_name -> api.vip.service.v1.VipRewardExpiryType
 	5,  // 11: api.vip.service.v1.VipSetting.monthly_reward_expiry_type:type_name -> api.vip.service.v1.VipRewardExpiryType
-	53, // 12: api.vip.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 12: api.vip.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
 	7,  // 13: api.vip.service.v1.GetVipSettingResponse.default_setting:type_name -> api.vip.service.v1.VipSetting
 	7,  // 14: api.vip.service.v1.GetVipSettingResponse.custom_setting:type_name -> api.vip.service.v1.VipSetting
-	53, // 15: api.vip.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
-	53, // 16: api.vip.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	56, // 15: api.vip.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	56, // 16: api.vip.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
 	12, // 17: api.vip.service.v1.GetVipSettingResponse.default_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
 	12, // 18: api.vip.service.v1.GetVipSettingResponse.custom_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	53, // 19: api.vip.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 19: api.vip.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
 	7,  // 20: api.vip.service.v1.UpdateVipSettingRequest.setting:type_name -> api.vip.service.v1.VipSetting
 	13, // 21: api.vip.service.v1.VipLevelConfigTemplate.daily_lossback_rates:type_name -> api.vip.service.v1.DailyLossbackRate
-	53, // 22: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 22: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	12, // 23: api.vip.service.v1.ListVipLevelConfigTemplatesResponse.templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	53, // 24: api.vip.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 24: api.vip.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
 	12, // 25: api.vip.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	53, // 26: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 26: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
 	12, // 27: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
 	12, // 28: api.vip.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	53, // 29: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 29: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
 	12, // 30: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	53, // 31: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	53, // 32: api.vip.service.v1.GetUserVipLevelRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 31: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 32: api.vip.service.v1.GetUserVipLevelRequest.operator_context:type_name -> api.common.OperatorContext
 	24, // 33: api.vip.service.v1.GetUserVipLevelResponse.vip_member:type_name -> api.vip.service.v1.VipMember
-	53, // 34: api.vip.service.v1.UpdateVipRewardSliderRequest.operator_context:type_name -> api.common.OperatorContext
-	53, // 35: api.vip.service.v1.GetClaimableVipRewardsRequest.operator_context:type_name -> api.common.OperatorContext
-	51, // 36: api.vip.service.v1.GetClaimableVipRewardsResponse.claimable_rewards:type_name -> api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
+	56, // 34: api.vip.service.v1.UpdateVipRewardSliderRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 35: api.vip.service.v1.GetClaimableVipRewardsRequest.operator_context:type_name -> api.common.OperatorContext
+	54, // 36: api.vip.service.v1.GetClaimableVipRewardsResponse.claimable_rewards:type_name -> api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
 	1,  // 37: api.vip.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	53, // 38: api.vip.service.v1.ClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
-	53, // 39: api.vip.service.v1.GetOperatorVipSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 38: api.vip.service.v1.ClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 39: api.vip.service.v1.GetOperatorVipSettingsRequest.operator_context:type_name -> api.common.OperatorContext
 	7,  // 40: api.vip.service.v1.GetOperatorVipSettingsResponse.setting:type_name -> api.vip.service.v1.VipSetting
 	12, // 41: api.vip.service.v1.GetOperatorVipSettingsResponse.vip_level_config_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	53, // 42: api.vip.service.v1.ConfirmClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 42: api.vip.service.v1.ConfirmClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
 	1,  // 43: api.vip.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	53, // 44: api.vip.service.v1.RequestDailyLossbackRequest.operator_context:type_name -> api.common.OperatorContext
-	53, // 45: api.vip.service.v1.GetDailyLossbackStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 44: api.vip.service.v1.RequestDailyLossbackRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 45: api.vip.service.v1.GetDailyLossbackStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	39, // 46: api.vip.service.v1.GetDailyLossbackStatusResponse.status:type_name -> api.vip.service.v1.DailyLossbackStatus
-	53, // 47: api.vip.service.v1.ForceRunVipRewardsRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 47: api.vip.service.v1.ForceRunVipRewardsRequest.operator_context:type_name -> api.common.OperatorContext
 	24, // 48: api.vip.service.v1.VipMemberWithLevelName.vip_member:type_name -> api.vip.service.v1.VipMember
 	45, // 49: api.vip.service.v1.BatchGetVipMembersResponse.vip_members:type_name -> api.vip.service.v1.VipMemberWithLevelName
-	53, // 50: api.vip.service.v1.GetVipRewardHistoryRequest.operator_context:type_name -> api.common.OperatorContext
-	52, // 51: api.vip.service.v1.GetVipRewardHistoryResponse.reward_histories:type_name -> api.vip.service.v1.GetVipRewardHistoryResponse.RewardTypeHistory
-	53, // 52: api.vip.service.v1.AdjustUserVipLevelRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 53: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	1,  // 54: api.vip.service.v1.GetVipRewardHistoryResponse.RewardTypeHistory.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	8,  // 55: api.vip.service.v1.Vip.GetVipSetting:input_type -> api.vip.service.v1.GetVipSettingRequest
-	10, // 56: api.vip.service.v1.Vip.UpdateVipSetting:input_type -> api.vip.service.v1.UpdateVipSettingRequest
-	14, // 57: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:input_type -> api.vip.service.v1.ListVipLevelConfigTemplatesRequest
-	16, // 58: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:input_type -> api.vip.service.v1.GetVipLevelConfigTemplateRequest
-	18, // 59: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:input_type -> api.vip.service.v1.CreateVipLevelConfigTemplateRequest
-	20, // 60: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:input_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
-	22, // 61: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:input_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
-	33, // 62: api.vip.service.v1.Vip.GetOperatorVipSettings:input_type -> api.vip.service.v1.GetOperatorVipSettingsRequest
-	25, // 63: api.vip.service.v1.Vip.GetUserVipLevel:input_type -> api.vip.service.v1.GetUserVipLevelRequest
-	27, // 64: api.vip.service.v1.Vip.UpdateVipRewardSlider:input_type -> api.vip.service.v1.UpdateVipRewardSliderRequest
-	29, // 65: api.vip.service.v1.Vip.GetClaimableVipRewards:input_type -> api.vip.service.v1.GetClaimableVipRewardsRequest
-	31, // 66: api.vip.service.v1.Vip.ClaimVipReward:input_type -> api.vip.service.v1.ClaimVipRewardRequest
-	35, // 67: api.vip.service.v1.Vip.ConfirmClaimVipReward:input_type -> api.vip.service.v1.ConfirmClaimVipRewardRequest
-	37, // 68: api.vip.service.v1.Vip.RequestDailyLossback:input_type -> api.vip.service.v1.RequestDailyLossbackRequest
-	40, // 69: api.vip.service.v1.Vip.GetDailyLossbackStatus:input_type -> api.vip.service.v1.GetDailyLossbackStatusRequest
-	42, // 70: api.vip.service.v1.Vip.ForceRunVipRewards:input_type -> api.vip.service.v1.ForceRunVipRewardsRequest
-	44, // 71: api.vip.service.v1.Vip.BatchGetVipMembers:input_type -> api.vip.service.v1.BatchGetVipMembersRequest
-	47, // 72: api.vip.service.v1.Vip.GetVipRewardHistory:input_type -> api.vip.service.v1.GetVipRewardHistoryRequest
-	49, // 73: api.vip.service.v1.Vip.AdjustUserVipLevel:input_type -> api.vip.service.v1.AdjustUserVipLevelRequest
-	9,  // 74: api.vip.service.v1.Vip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
-	11, // 75: api.vip.service.v1.Vip.UpdateVipSetting:output_type -> api.vip.service.v1.UpdateVipSettingResponse
-	15, // 76: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:output_type -> api.vip.service.v1.ListVipLevelConfigTemplatesResponse
-	17, // 77: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:output_type -> api.vip.service.v1.GetVipLevelConfigTemplateResponse
-	19, // 78: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:output_type -> api.vip.service.v1.CreateVipLevelConfigTemplateResponse
-	21, // 79: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:output_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
-	23, // 80: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:output_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
-	34, // 81: api.vip.service.v1.Vip.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
-	26, // 82: api.vip.service.v1.Vip.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
-	28, // 83: api.vip.service.v1.Vip.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
-	30, // 84: api.vip.service.v1.Vip.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
-	32, // 85: api.vip.service.v1.Vip.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
-	36, // 86: api.vip.service.v1.Vip.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
-	38, // 87: api.vip.service.v1.Vip.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
-	41, // 88: api.vip.service.v1.Vip.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
-	43, // 89: api.vip.service.v1.Vip.ForceRunVipRewards:output_type -> api.vip.service.v1.ForceRunVipRewardsResponse
-	46, // 90: api.vip.service.v1.Vip.BatchGetVipMembers:output_type -> api.vip.service.v1.BatchGetVipMembersResponse
-	48, // 91: api.vip.service.v1.Vip.GetVipRewardHistory:output_type -> api.vip.service.v1.GetVipRewardHistoryResponse
-	50, // 92: api.vip.service.v1.Vip.AdjustUserVipLevel:output_type -> api.vip.service.v1.AdjustUserVipLevelResponse
-	74, // [74:93] is the sub-list for method output_type
-	55, // [55:74] is the sub-list for method input_type
-	55, // [55:55] is the sub-list for extension type_name
-	55, // [55:55] is the sub-list for extension extendee
-	0,  // [0:55] is the sub-list for field type_name
+	56, // 50: api.vip.service.v1.GetVipRewardHistoryRequest.operator_context:type_name -> api.common.OperatorContext
+	55, // 51: api.vip.service.v1.GetVipRewardHistoryResponse.reward_histories:type_name -> api.vip.service.v1.GetVipRewardHistoryResponse.RewardTypeHistory
+	56, // 52: api.vip.service.v1.AdjustUserVipLevelRequest.operator_context:type_name -> api.common.OperatorContext
+	56, // 53: api.vip.service.v1.GetUserVipLevelOptionsRequest.operator_context:type_name -> api.common.OperatorContext
+	52, // 54: api.vip.service.v1.GetUserVipLevelOptionsResponse.levels:type_name -> api.vip.service.v1.VipLevelOption
+	1,  // 55: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	1,  // 56: api.vip.service.v1.GetVipRewardHistoryResponse.RewardTypeHistory.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	8,  // 57: api.vip.service.v1.Vip.GetVipSetting:input_type -> api.vip.service.v1.GetVipSettingRequest
+	10, // 58: api.vip.service.v1.Vip.UpdateVipSetting:input_type -> api.vip.service.v1.UpdateVipSettingRequest
+	14, // 59: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:input_type -> api.vip.service.v1.ListVipLevelConfigTemplatesRequest
+	16, // 60: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:input_type -> api.vip.service.v1.GetVipLevelConfigTemplateRequest
+	18, // 61: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:input_type -> api.vip.service.v1.CreateVipLevelConfigTemplateRequest
+	20, // 62: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:input_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
+	22, // 63: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:input_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
+	33, // 64: api.vip.service.v1.Vip.GetOperatorVipSettings:input_type -> api.vip.service.v1.GetOperatorVipSettingsRequest
+	25, // 65: api.vip.service.v1.Vip.GetUserVipLevel:input_type -> api.vip.service.v1.GetUserVipLevelRequest
+	27, // 66: api.vip.service.v1.Vip.UpdateVipRewardSlider:input_type -> api.vip.service.v1.UpdateVipRewardSliderRequest
+	29, // 67: api.vip.service.v1.Vip.GetClaimableVipRewards:input_type -> api.vip.service.v1.GetClaimableVipRewardsRequest
+	31, // 68: api.vip.service.v1.Vip.ClaimVipReward:input_type -> api.vip.service.v1.ClaimVipRewardRequest
+	35, // 69: api.vip.service.v1.Vip.ConfirmClaimVipReward:input_type -> api.vip.service.v1.ConfirmClaimVipRewardRequest
+	37, // 70: api.vip.service.v1.Vip.RequestDailyLossback:input_type -> api.vip.service.v1.RequestDailyLossbackRequest
+	40, // 71: api.vip.service.v1.Vip.GetDailyLossbackStatus:input_type -> api.vip.service.v1.GetDailyLossbackStatusRequest
+	42, // 72: api.vip.service.v1.Vip.ForceRunVipRewards:input_type -> api.vip.service.v1.ForceRunVipRewardsRequest
+	44, // 73: api.vip.service.v1.Vip.BatchGetVipMembers:input_type -> api.vip.service.v1.BatchGetVipMembersRequest
+	47, // 74: api.vip.service.v1.Vip.GetVipRewardHistory:input_type -> api.vip.service.v1.GetVipRewardHistoryRequest
+	49, // 75: api.vip.service.v1.Vip.AdjustUserVipLevel:input_type -> api.vip.service.v1.AdjustUserVipLevelRequest
+	51, // 76: api.vip.service.v1.Vip.GetUserVipLevelOptions:input_type -> api.vip.service.v1.GetUserVipLevelOptionsRequest
+	9,  // 77: api.vip.service.v1.Vip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
+	11, // 78: api.vip.service.v1.Vip.UpdateVipSetting:output_type -> api.vip.service.v1.UpdateVipSettingResponse
+	15, // 79: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:output_type -> api.vip.service.v1.ListVipLevelConfigTemplatesResponse
+	17, // 80: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:output_type -> api.vip.service.v1.GetVipLevelConfigTemplateResponse
+	19, // 81: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:output_type -> api.vip.service.v1.CreateVipLevelConfigTemplateResponse
+	21, // 82: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:output_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
+	23, // 83: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:output_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
+	34, // 84: api.vip.service.v1.Vip.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
+	26, // 85: api.vip.service.v1.Vip.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
+	28, // 86: api.vip.service.v1.Vip.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
+	30, // 87: api.vip.service.v1.Vip.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
+	32, // 88: api.vip.service.v1.Vip.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
+	36, // 89: api.vip.service.v1.Vip.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
+	38, // 90: api.vip.service.v1.Vip.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
+	41, // 91: api.vip.service.v1.Vip.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
+	43, // 92: api.vip.service.v1.Vip.ForceRunVipRewards:output_type -> api.vip.service.v1.ForceRunVipRewardsResponse
+	46, // 93: api.vip.service.v1.Vip.BatchGetVipMembers:output_type -> api.vip.service.v1.BatchGetVipMembersResponse
+	48, // 94: api.vip.service.v1.Vip.GetVipRewardHistory:output_type -> api.vip.service.v1.GetVipRewardHistoryResponse
+	50, // 95: api.vip.service.v1.Vip.AdjustUserVipLevel:output_type -> api.vip.service.v1.AdjustUserVipLevelResponse
+	53, // 96: api.vip.service.v1.Vip.GetUserVipLevelOptions:output_type -> api.vip.service.v1.GetUserVipLevelOptionsResponse
+	77, // [77:97] is the sub-list for method output_type
+	57, // [57:77] is the sub-list for method input_type
+	57, // [57:57] is the sub-list for extension type_name
+	57, // [57:57] is the sub-list for extension extendee
+	0,  // [0:57] is the sub-list for field type_name
 }
 
 func init() { file_vip_service_v1_vip_proto_init() }
@@ -4391,7 +4596,7 @@ func file_vip_service_v1_vip_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vip_service_v1_vip_proto_rawDesc), len(file_vip_service_v1_vip_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   47,
+			NumMessages:   50,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
