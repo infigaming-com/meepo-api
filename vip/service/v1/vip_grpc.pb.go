@@ -37,6 +37,8 @@ const (
 	Vip_ForceRunVipRewards_FullMethodName           = "/api.vip.service.v1.Vip/ForceRunVipRewards"
 	Vip_BatchGetVipMembers_FullMethodName           = "/api.vip.service.v1.Vip/BatchGetVipMembers"
 	Vip_GetVipRewardHistory_FullMethodName          = "/api.vip.service.v1.Vip/GetVipRewardHistory"
+	Vip_AdjustUserVipLevel_FullMethodName           = "/api.vip.service.v1.Vip/AdjustUserVipLevel"
+	Vip_GetUserVipLevelOptions_FullMethodName       = "/api.vip.service.v1.Vip/GetUserVipLevelOptions"
 )
 
 // VipClient is the client API for Vip service.
@@ -64,6 +66,10 @@ type VipClient interface {
 	BatchGetVipMembers(ctx context.Context, in *BatchGetVipMembersRequest, opts ...grpc.CallOption) (*BatchGetVipMembersResponse, error)
 	// 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
 	GetVipRewardHistory(ctx context.Context, in *GetVipRewardHistoryRequest, opts ...grpc.CallOption) (*GetVipRewardHistoryResponse, error)
+	// 手动调整用户VIP等级
+	AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...grpc.CallOption) (*AdjustUserVipLevelResponse, error)
+	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...grpc.CallOption) (*GetUserVipLevelOptionsResponse, error)
 }
 
 type vipClient struct {
@@ -254,6 +260,26 @@ func (c *vipClient) GetVipRewardHistory(ctx context.Context, in *GetVipRewardHis
 	return out, nil
 }
 
+func (c *vipClient) AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...grpc.CallOption) (*AdjustUserVipLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdjustUserVipLevelResponse)
+	err := c.cc.Invoke(ctx, Vip_AdjustUserVipLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vipClient) GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...grpc.CallOption) (*GetUserVipLevelOptionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserVipLevelOptionsResponse)
+	err := c.cc.Invoke(ctx, Vip_GetUserVipLevelOptions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VipServer is the server API for Vip service.
 // All implementations must embed UnimplementedVipServer
 // for forward compatibility.
@@ -279,6 +305,10 @@ type VipServer interface {
 	BatchGetVipMembers(context.Context, *BatchGetVipMembersRequest) (*BatchGetVipMembersResponse, error)
 	// 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
 	GetVipRewardHistory(context.Context, *GetVipRewardHistoryRequest) (*GetVipRewardHistoryResponse, error)
+	// 手动调整用户VIP等级
+	AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error)
+	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error)
 	mustEmbedUnimplementedVipServer()
 }
 
@@ -342,6 +372,12 @@ func (UnimplementedVipServer) BatchGetVipMembers(context.Context, *BatchGetVipMe
 }
 func (UnimplementedVipServer) GetVipRewardHistory(context.Context, *GetVipRewardHistoryRequest) (*GetVipRewardHistoryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetVipRewardHistory not implemented")
+}
+func (UnimplementedVipServer) AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdjustUserVipLevel not implemented")
+}
+func (UnimplementedVipServer) GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserVipLevelOptions not implemented")
 }
 func (UnimplementedVipServer) mustEmbedUnimplementedVipServer() {}
 func (UnimplementedVipServer) testEmbeddedByValue()             {}
@@ -688,6 +724,42 @@ func _Vip_GetVipRewardHistory_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vip_AdjustUserVipLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdjustUserVipLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VipServer).AdjustUserVipLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vip_AdjustUserVipLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VipServer).AdjustUserVipLevel(ctx, req.(*AdjustUserVipLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Vip_GetUserVipLevelOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserVipLevelOptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VipServer).GetUserVipLevelOptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vip_GetUserVipLevelOptions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VipServer).GetUserVipLevelOptions(ctx, req.(*GetUserVipLevelOptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vip_ServiceDesc is the grpc.ServiceDesc for Vip service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -766,6 +838,14 @@ var Vip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetVipRewardHistory",
 			Handler:    _Vip_GetVipRewardHistory_Handler,
+		},
+		{
+			MethodName: "AdjustUserVipLevel",
+			Handler:    _Vip_AdjustUserVipLevel_Handler,
+		},
+		{
+			MethodName: "GetUserVipLevelOptions",
+			Handler:    _Vip_GetUserVipLevelOptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

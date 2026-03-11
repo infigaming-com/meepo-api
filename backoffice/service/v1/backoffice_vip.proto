@@ -62,6 +62,22 @@ service BackofficeVip {
     };
   }
 
+  // 手动调整用户VIP等级
+  rpc AdjustUserVipLevel(AdjustUserVipLevelRequest) returns (AdjustUserVipLevelResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/adjust-user-level"
+      body: "*"
+    };
+  }
+
+  // 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+  rpc GetUserVipLevelOptions(GetUserVipLevelOptionsRequest) returns (GetUserVipLevelOptionsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/user-level-options"
+      body: "*"
+    };
+  }
+
   // TODO： 获取follow parent
   // 修改 follow parent
   // TODO: VIP 等级配置是否跟随币种
@@ -135,4 +151,37 @@ message GetVipConfigRequest {
 
 message GetVipConfigResponse {
   api.vip.service.v1.VipConfig config = 1;
+}
+
+// 手动调整用户VIP等级请求
+message AdjustUserVipLevelRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContext target_operator_context = 2;
+  int64 user_id = 3;
+  int64 target_level = 4;
+  bool issue_rewards = 5;
+  string reason = 7;
+}
+
+// 手动调整用户VIP等级响应
+message AdjustUserVipLevelResponse {
+  int64 old_level = 1;
+  int64 new_level = 2;
+  string old_total_xp = 3;
+  string new_total_xp = 4;
+  string xp_adjustment = 5;
+}
+
+// 获取用户可选VIP等级列表请求
+message GetUserVipLevelOptionsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContext target_operator_context = 2;
+  int64 user_id = 3;
+}
+
+// 获取用户可选VIP等级列表响应
+message GetUserVipLevelOptionsResponse {
+  int64 current_level = 1;
+  string current_total_xp = 2;
+  repeated api.vip.service.v1.VipLevelOption levels = 3;
 }

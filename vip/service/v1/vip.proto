@@ -62,6 +62,14 @@ service Vip {
   rpc GetVipRewardHistory(GetVipRewardHistoryRequest) returns (GetVipRewardHistoryResponse) {
   }
 
+  // 手动调整用户VIP等级
+  rpc AdjustUserVipLevel(AdjustUserVipLevelRequest) returns (AdjustUserVipLevelResponse) {
+  }
+
+  // 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+  rpc GetUserVipLevelOptions(GetUserVipLevelOptionsRequest) returns (GetUserVipLevelOptionsResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -497,4 +505,43 @@ message GetVipRewardHistoryResponse {
     VipRewardKind reward_kind = 1;
     string claimed_usd = 2;
   }
+}
+
+// 手动调整用户VIP等级请求
+message AdjustUserVipLevelRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 user_id = 2;
+  int64 target_level = 3;   // 绝对等级号（如 5, 10, 15）
+  bool issue_rewards = 4;   // 是否发放跨越等级的升级奖励
+  string reason = 6;        // 调整原因（审计用）
+}
+
+// 手动调整用户VIP等级响应
+message AdjustUserVipLevelResponse {
+  int64 old_level = 1;
+  int64 new_level = 2;
+  string old_total_xp = 3;
+  string new_total_xp = 4;
+  string xp_adjustment = 5;
+}
+
+// 获取用户可选VIP等级列表请求
+message GetUserVipLevelOptionsRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 user_id = 2;
+}
+
+// VIP等级选项
+message VipLevelOption {
+  int64 level = 1;
+  string name = 2;           // template name
+  string required_xp = 3;    // 达到该等级所需的最低 total XP
+  int64 template_id = 4;
+}
+
+// 获取用户可选VIP等级列表响应
+message GetUserVipLevelOptionsResponse {
+  int64 current_level = 1;
+  string current_total_xp = 2;
+  repeated VipLevelOption levels = 3;
 }

@@ -27,6 +27,8 @@ const (
 	BackofficeVip_UpdateVipLevelConfigTemplate_FullMethodName = "/api.backoffice.service.v1.BackofficeVip/UpdateVipLevelConfigTemplate"
 	BackofficeVip_DeleteVipLevelConfigTemplate_FullMethodName = "/api.backoffice.service.v1.BackofficeVip/DeleteVipLevelConfigTemplate"
 	BackofficeVip_GetVipConfig_FullMethodName                 = "/api.backoffice.service.v1.BackofficeVip/GetVipConfig"
+	BackofficeVip_AdjustUserVipLevel_FullMethodName           = "/api.backoffice.service.v1.BackofficeVip/AdjustUserVipLevel"
+	BackofficeVip_GetUserVipLevelOptions_FullMethodName       = "/api.backoffice.service.v1.BackofficeVip/GetUserVipLevelOptions"
 )
 
 // BackofficeVipClient is the client API for BackofficeVip service.
@@ -43,6 +45,10 @@ type BackofficeVipClient interface {
 	UpdateVipLevelConfigTemplate(ctx context.Context, in *UpdateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, in *DeleteVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*DeleteVipLevelConfigTemplateResponse, error)
 	GetVipConfig(ctx context.Context, in *GetVipConfigRequest, opts ...grpc.CallOption) (*GetVipConfigResponse, error)
+	// 手动调整用户VIP等级
+	AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...grpc.CallOption) (*AdjustUserVipLevelResponse, error)
+	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...grpc.CallOption) (*GetUserVipLevelOptionsResponse, error)
 }
 
 type backofficeVipClient struct {
@@ -123,6 +129,26 @@ func (c *backofficeVipClient) GetVipConfig(ctx context.Context, in *GetVipConfig
 	return out, nil
 }
 
+func (c *backofficeVipClient) AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...grpc.CallOption) (*AdjustUserVipLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdjustUserVipLevelResponse)
+	err := c.cc.Invoke(ctx, BackofficeVip_AdjustUserVipLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeVipClient) GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...grpc.CallOption) (*GetUserVipLevelOptionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserVipLevelOptionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeVip_GetUserVipLevelOptions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeVipServer is the server API for BackofficeVip service.
 // All implementations must embed UnimplementedBackofficeVipServer
 // for forward compatibility.
@@ -137,6 +163,10 @@ type BackofficeVipServer interface {
 	UpdateVipLevelConfigTemplate(context.Context, *UpdateVipLevelConfigTemplateRequest) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
 	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
+	// 手动调整用户VIP等级
+	AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error)
+	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error)
 	mustEmbedUnimplementedBackofficeVipServer()
 }
 
@@ -167,6 +197,12 @@ func (UnimplementedBackofficeVipServer) DeleteVipLevelConfigTemplate(context.Con
 }
 func (UnimplementedBackofficeVipServer) GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetVipConfig not implemented")
+}
+func (UnimplementedBackofficeVipServer) AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdjustUserVipLevel not implemented")
+}
+func (UnimplementedBackofficeVipServer) GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserVipLevelOptions not implemented")
 }
 func (UnimplementedBackofficeVipServer) mustEmbedUnimplementedBackofficeVipServer() {}
 func (UnimplementedBackofficeVipServer) testEmbeddedByValue()                       {}
@@ -315,6 +351,42 @@ func _BackofficeVip_GetVipConfig_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeVip_AdjustUserVipLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdjustUserVipLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeVipServer).AdjustUserVipLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeVip_AdjustUserVipLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeVipServer).AdjustUserVipLevel(ctx, req.(*AdjustUserVipLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeVip_GetUserVipLevelOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserVipLevelOptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeVipServer).GetUserVipLevelOptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeVip_GetUserVipLevelOptions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeVipServer).GetUserVipLevelOptions(ctx, req.(*GetUserVipLevelOptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeVip_ServiceDesc is the grpc.ServiceDesc for BackofficeVip service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -349,6 +421,14 @@ var BackofficeVip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetVipConfig",
 			Handler:    _BackofficeVip_GetVipConfig_Handler,
+		},
+		{
+			MethodName: "AdjustUserVipLevel",
+			Handler:    _BackofficeVip_AdjustUserVipLevel_Handler,
+		},
+		{
+			MethodName: "GetUserVipLevelOptions",
+			Handler:    _BackofficeVip_GetUserVipLevelOptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
