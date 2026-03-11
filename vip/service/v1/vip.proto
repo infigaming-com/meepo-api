@@ -512,7 +512,7 @@ message AdjustUserVipLevelRequest {
   api.common.OperatorContext operator_context = 1;
   int64 user_id = 2;
   int64 target_level = 3;   // 绝对等级号（如 5, 10, 15）
-  bool issue_rewards = 4;   // 是否发放跨越等级的升级奖励
+  optional bool issue_rewards = 4;   // 是否发放跨越等级的升级奖励（默认 true）
   string reason = 6;        // 调整原因（审计用）
 }
 

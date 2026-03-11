@@ -5988,9 +5988,11 @@ func (m *AdjustUserVipLevelRequest) validate(all bool) error {
 
 	// no validation rules for TargetLevel
 
-	// no validation rules for IssueRewards
-
 	// no validation rules for Reason
+
+	if m.IssueRewards != nil {
+		// no validation rules for IssueRewards
+	}
 
 	if len(errors) > 0 {
 		return AdjustUserVipLevelRequestMultiError(errors)

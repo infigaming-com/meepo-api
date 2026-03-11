@@ -733,7 +733,7 @@ type AdjustUserVipLevelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	TargetLevel   int64                  `protobuf:"varint,4,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`
-	IssueRewards  bool                   `protobuf:"varint,5,opt,name=issue_rewards,json=issueRewards,proto3" json:"issue_rewards,omitempty"`
+	IssueRewards  *bool                  `protobuf:"varint,5,opt,name=issue_rewards,json=issueRewards,proto3,oneof" json:"issue_rewards,omitempty"` // 是否发放跨越等级的升级奖励（默认 true）
 	Reason        string                 `protobuf:"bytes,7,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -784,8 +784,8 @@ func (x *AdjustUserVipLevelRequest) GetTargetLevel() int64 {
 }
 
 func (x *AdjustUserVipLevelRequest) GetIssueRewards() bool {
-	if x != nil {
-		return x.IssueRewards
+	if x != nil && x.IssueRewards != nil {
+		return *x.IssueRewards
 	}
 	return false
 }
@@ -1026,12 +1026,13 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\x13GetVipConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"M\n" +
 	"\x14GetVipConfigResponse\x125\n" +
-	"\x06config\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipConfigR\x06config\"\x94\x01\n" +
+	"\x06config\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipConfigR\x06config\"\xab\x01\n" +
 	"\x19AdjustUserVipLevelRequest\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12!\n" +
-	"\ftarget_level\x18\x04 \x01(\x03R\vtargetLevel\x12#\n" +
-	"\rissue_rewards\x18\x05 \x01(\bR\fissueRewards\x12\x16\n" +
-	"\x06reason\x18\a \x01(\tR\x06reason\"\xbf\x01\n" +
+	"\ftarget_level\x18\x04 \x01(\x03R\vtargetLevel\x12(\n" +
+	"\rissue_rewards\x18\x05 \x01(\bH\x00R\fissueRewards\x88\x01\x01\x12\x16\n" +
+	"\x06reason\x18\a \x01(\tR\x06reasonB\x10\n" +
+	"\x0e_issue_rewards\"\xbf\x01\n" +
 	"\x1aAdjustUserVipLevelResponse\x12\x1b\n" +
 	"\told_level\x18\x01 \x01(\x03R\boldLevel\x12\x1b\n" +
 	"\tnew_level\x18\x02 \x01(\x03R\bnewLevel\x12 \n" +
@@ -1148,6 +1149,7 @@ func file_backoffice_service_v1_backoffice_vip_proto_init() {
 	if File_backoffice_service_v1_backoffice_vip_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_vip_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
