@@ -349,6 +349,8 @@ message GameFilter {
 	int64 tag_id = 2;
 	// name: game name
 	string name = 3;
+	// country: 用户所在国家（2字母ISO代码，如 "US"），用于 show_blocked 过滤
+	string country = 4;
 }
 
 message GameSort {
@@ -445,6 +447,8 @@ message ListGamesRequest {
 	GameFilter filter = 3;
 	// sort
 	GameSort sort = 4;
+	// show_blocked: 是否显示被地区限制的游戏（默认 true 显示全部；false 过滤掉被屏蔽的游戏）
+	optional bool show_blocked = 5;
 }
 
 message ListGamesResponse {
@@ -486,6 +490,7 @@ message GameInfo {
 	int64 released_at = 21;
 	bool bonus_buy = 22;
 	string restrictions = 23;
+	repeated string restricted_countries = 24;
 }
 
 message CreateSessionRequest {

@@ -499,7 +499,9 @@ type GameFilter struct {
 	// tag_id: tag ID for filtering games
 	TagId int64 `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
 	// name: game name
-	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// country: 用户所在国家（2字母ISO代码，如 "US"），用于 show_blocked 过滤
+	Country       string `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -551,6 +553,13 @@ func (x *GameFilter) GetTagId() int64 {
 func (x *GameFilter) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *GameFilter) GetCountry() string {
+	if x != nil {
+		return x.Country
 	}
 	return ""
 }
@@ -1235,7 +1244,9 @@ type ListGamesRequest struct {
 	// filter
 	Filter *GameFilter `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
 	// sort
-	Sort          *GameSort `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"`
+	Sort *GameSort `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"`
+	// show_blocked: 是否显示被地区限制的游戏（默认 true 显示全部；false 过滤掉被屏蔽的游戏）
+	ShowBlocked   *bool `protobuf:"varint,5,opt,name=show_blocked,json=showBlocked,proto3,oneof" json:"show_blocked,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1296,6 +1307,13 @@ func (x *ListGamesRequest) GetSort() *GameSort {
 		return x.Sort
 	}
 	return nil
+}
+
+func (x *ListGamesRequest) GetShowBlocked() bool {
+	if x != nil && x.ShowBlocked != nil {
+		return *x.ShowBlocked
+	}
+	return false
 }
 
 type ListGamesResponse struct {
@@ -1455,32 +1473,33 @@ func (x *GetGameResponse) GetGame() *GameInfo {
 }
 
 type GameInfo struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Enabled          bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	ProviderId       string                 `protobuf:"bytes,4,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
-	ProviderName     string                 `protobuf:"bytes,5,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	Category         string                 `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"`
-	Languages        []string               `protobuf:"bytes,7,rep,name=languages,proto3" json:"languages,omitempty"`
-	Currencies       []string               `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Theme            string                 `protobuf:"bytes,9,opt,name=theme,proto3" json:"theme,omitempty"`
-	HasJackpot       bool                   `protobuf:"varint,10,opt,name=has_jackpot,json=hasJackpot,proto3" json:"has_jackpot,omitempty"`
-	JackpotType      string                 `protobuf:"bytes,11,opt,name=jackpot_type,json=jackpotType,proto3" json:"jackpot_type,omitempty"`
-	ForbidBonusPlay  bool                   `protobuf:"varint,12,opt,name=forbid_bonus_play,json=forbidBonusPlay,proto3" json:"forbid_bonus_play,omitempty"`
-	HasFreespins     bool                   `protobuf:"varint,13,opt,name=has_freespins,json=hasFreespins,proto3" json:"has_freespins,omitempty"`
-	Payout           float64                `protobuf:"fixed64,14,opt,name=payout,proto3" json:"payout,omitempty"`
-	HitRate          float64                `protobuf:"fixed64,15,opt,name=hit_rate,json=hitRate,proto3" json:"hit_rate,omitempty"`
-	VolatilityRating string                 `protobuf:"bytes,16,opt,name=volatility_rating,json=volatilityRating,proto3" json:"volatility_rating,omitempty"`
-	Lines            int32                  `protobuf:"varint,17,opt,name=lines,proto3" json:"lines,omitempty"`
-	Ways             int32                  `protobuf:"varint,18,opt,name=ways,proto3" json:"ways,omitempty"`
-	Description      string                 `protobuf:"bytes,19,opt,name=description,proto3" json:"description,omitempty"`
-	Multiplier       float64                `protobuf:"fixed64,20,opt,name=multiplier,proto3" json:"multiplier,omitempty"`
-	ReleasedAt       int64                  `protobuf:"varint,21,opt,name=released_at,json=releasedAt,proto3" json:"released_at,omitempty"`
-	BonusBuy         bool                   `protobuf:"varint,22,opt,name=bonus_buy,json=bonusBuy,proto3" json:"bonus_buy,omitempty"`
-	Restrictions     string                 `protobuf:"bytes,23,opt,name=restrictions,proto3" json:"restrictions,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Id                  string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Enabled             bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Name                string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	ProviderId          string                 `protobuf:"bytes,4,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	ProviderName        string                 `protobuf:"bytes,5,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	Category            string                 `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"`
+	Languages           []string               `protobuf:"bytes,7,rep,name=languages,proto3" json:"languages,omitempty"`
+	Currencies          []string               `protobuf:"bytes,8,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Theme               string                 `protobuf:"bytes,9,opt,name=theme,proto3" json:"theme,omitempty"`
+	HasJackpot          bool                   `protobuf:"varint,10,opt,name=has_jackpot,json=hasJackpot,proto3" json:"has_jackpot,omitempty"`
+	JackpotType         string                 `protobuf:"bytes,11,opt,name=jackpot_type,json=jackpotType,proto3" json:"jackpot_type,omitempty"`
+	ForbidBonusPlay     bool                   `protobuf:"varint,12,opt,name=forbid_bonus_play,json=forbidBonusPlay,proto3" json:"forbid_bonus_play,omitempty"`
+	HasFreespins        bool                   `protobuf:"varint,13,opt,name=has_freespins,json=hasFreespins,proto3" json:"has_freespins,omitempty"`
+	Payout              float64                `protobuf:"fixed64,14,opt,name=payout,proto3" json:"payout,omitempty"`
+	HitRate             float64                `protobuf:"fixed64,15,opt,name=hit_rate,json=hitRate,proto3" json:"hit_rate,omitempty"`
+	VolatilityRating    string                 `protobuf:"bytes,16,opt,name=volatility_rating,json=volatilityRating,proto3" json:"volatility_rating,omitempty"`
+	Lines               int32                  `protobuf:"varint,17,opt,name=lines,proto3" json:"lines,omitempty"`
+	Ways                int32                  `protobuf:"varint,18,opt,name=ways,proto3" json:"ways,omitempty"`
+	Description         string                 `protobuf:"bytes,19,opt,name=description,proto3" json:"description,omitempty"`
+	Multiplier          float64                `protobuf:"fixed64,20,opt,name=multiplier,proto3" json:"multiplier,omitempty"`
+	ReleasedAt          int64                  `protobuf:"varint,21,opt,name=released_at,json=releasedAt,proto3" json:"released_at,omitempty"`
+	BonusBuy            bool                   `protobuf:"varint,22,opt,name=bonus_buy,json=bonusBuy,proto3" json:"bonus_buy,omitempty"`
+	Restrictions        string                 `protobuf:"bytes,23,opt,name=restrictions,proto3" json:"restrictions,omitempty"`
+	RestrictedCountries []string               `protobuf:"bytes,24,rep,name=restricted_countries,json=restrictedCountries,proto3" json:"restricted_countries,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GameInfo) Reset() {
@@ -1672,6 +1691,13 @@ func (x *GameInfo) GetRestrictions() string {
 		return x.Restrictions
 	}
 	return ""
+}
+
+func (x *GameInfo) GetRestrictedCountries() []string {
+	if x != nil {
+		return x.RestrictedCountries
+	}
+	return nil
 }
 
 type CreateSessionRequest struct {
@@ -17462,12 +17488,13 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x18\n" +
-	"\x16DeleteOperatorResponse\"Z\n" +
+	"\x16DeleteOperatorResponse\"t\n" +
 	"\n" +
 	"GameFilter\x12!\n" +
 	"\fprovider_ids\x18\x01 \x03(\tR\vproviderIds\x12\x15\n" +
 	"\x06tag_id\x18\x02 \x01(\x03R\x05tagId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\"\x80\x01\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
+	"\acountry\x18\x04 \x01(\tR\acountry\"\x80\x01\n" +
 	"\bGameSort\x129\n" +
 	"\x05field\x18\x01 \x01(\x0e2#.api.game.service.v1.GameSort.FieldR\x05field\"9\n" +
 	"\x05Field\x12\a\n" +
@@ -17546,12 +17573,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x16ListCurrenciesResponse\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\"\xaf\x01\n" +
+	"currencies\"\xe8\x01\n" +
 	"\x10ListGamesRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x127\n" +
 	"\x06filter\x18\x03 \x01(\v2\x1f.api.game.service.v1.GameFilterR\x06filter\x121\n" +
-	"\x04sort\x18\x04 \x01(\v2\x1d.api.game.service.v1.GameSortR\x04sort\"u\n" +
+	"\x04sort\x18\x04 \x01(\v2\x1d.api.game.service.v1.GameSortR\x04sort\x12&\n" +
+	"\fshow_blocked\x18\x05 \x01(\bH\x00R\vshowBlocked\x88\x01\x01B\x0f\n" +
+	"\r_show_blocked\"u\n" +
 	"\x11ListGamesResponse\x12\x19\n" +
 	"\bgame_ids\x18\x01 \x03(\tR\agameIds\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -17560,7 +17589,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0eGetGameRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\"D\n" +
 	"\x0fGetGameResponse\x121\n" +
-	"\x04game\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\x04game\"\xc1\x05\n" +
+	"\x04game\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\x04game\"\xf4\x05\n" +
 	"\bGameInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x12\n" +
@@ -17592,7 +17621,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vreleased_at\x18\x15 \x01(\x03R\n" +
 	"releasedAt\x12\x1b\n" +
 	"\tbonus_buy\x18\x16 \x01(\bR\bbonusBuy\x12\"\n" +
-	"\frestrictions\x18\x17 \x01(\tR\frestrictions\"\xc6\x01\n" +
+	"\frestrictions\x18\x17 \x01(\tR\frestrictions\x121\n" +
+	"\x14restricted_countries\x18\x18 \x03(\tR\x13restrictedCountries\"\xc6\x01\n" +
 	"\x14CreateSessionRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -19965,6 +19995,7 @@ func file_game_service_v1_game_proto_init() {
 	file_game_service_v1_game_proto_msgTypes[10].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[12].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[18].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[20].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[38].OneofWrappers = []any{
 		(*ListBetsRequest_SettlementCurrencyWithRanges)(nil),
 		(*ListBetsRequest_SettlementCurrencies)(nil),
