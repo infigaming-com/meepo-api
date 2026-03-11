@@ -2807,6 +2807,7 @@ type ListAffiliateDomainsRequest struct {
 	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Page                     *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TargetAffiliateId        *int64                  `protobuf:"varint,7,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2879,6 +2880,13 @@ func (x *ListAffiliateDomainsRequest) GetPage() int32 {
 func (x *ListAffiliateDomainsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAffiliateDomainsRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
 	}
 	return 0
 }
@@ -8417,17 +8425,19 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\rresponse_body\x18\x16 \x01(\tR\fresponseBody\x12)\n" +
 	"\x10response_headers\x18\x17 \x01(\tR\x0fresponseHeaders\x12\x1d\n" +
 	"\n" +
-	"latency_ms\x18\x18 \x01(\x03R\tlatencyMs\"\xf7\x02\n" +
+	"latency_ms\x18\x18 \x01(\x03R\tlatencyMs\"\xc4\x03\n" +
 	"\x1bListAffiliateDomainsRequest\x12*\n" +
 	"\x11initiator_user_id\x18\x01 \x01(\x03R\x0finitiatorUserId\x12*\n" +
 	"\x11initiator_role_id\x18\x02 \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x123\n" +
+	"\x13target_affiliate_id\x18\a \x01(\x03H\x02R\x11targetAffiliateId\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xaf\x06\n" +
+	"_page_sizeB\x16\n" +
+	"\x14_target_affiliate_id\"\xaf\x06\n" +
 	"\x1cListAffiliateDomainsResponse\x12`\n" +
 	"\adomains\x18\x01 \x03(\v2F.api.affiliate.service.v1.ListAffiliateDomainsResponse.AffiliateDomainR\adomains\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +

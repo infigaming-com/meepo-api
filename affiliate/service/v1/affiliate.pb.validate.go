@@ -5824,6 +5824,10 @@ func (m *ListAffiliateDomainsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.TargetAffiliateId != nil {
+		// no validation rules for TargetAffiliateId
+	}
+
 	if len(errors) > 0 {
 		return ListAffiliateDomainsRequestMultiError(errors)
 	}

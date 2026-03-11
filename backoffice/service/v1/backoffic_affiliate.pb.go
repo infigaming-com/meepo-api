@@ -1518,6 +1518,7 @@ type ListAffiliateDomainsRequest struct {
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Page                  *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize              *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TargetAffiliateId     *int64                  `protobuf:"varint,4,opt,name=target_affiliate_id,json=targetAffiliateId,proto3,oneof" json:"target_affiliate_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1569,6 +1570,13 @@ func (x *ListAffiliateDomainsRequest) GetPage() int32 {
 func (x *ListAffiliateDomainsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAffiliateDomainsRequest) GetTargetAffiliateId() int64 {
+	if x != nil && x.TargetAffiliateId != nil {
+		return *x.TargetAffiliateId
 	}
 	return 0
 }
@@ -2814,14 +2822,16 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc4\x01\n" +
+	"_page_size\"\x91\x02\n" +
 	"\x1bListAffiliateDomainsRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x123\n" +
+	"\x13target_affiliate_id\x18\x04 \x01(\x03H\x02R\x11targetAffiliateId\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf1\x01\n" +
+	"_page_sizeB\x16\n" +
+	"\x14_target_affiliate_id\"\xf1\x01\n" +
 	"\x19SetAffiliateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12-\n" +
 	"\x10available_to_all\x18\x02 \x01(\bH\x00R\x0eavailableToAll\x88\x01\x01\x12#\n" +

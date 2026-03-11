@@ -445,6 +445,7 @@ message ListAffiliateDomainsRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	optional int32 page = 2;
 	optional int32 page_size = 3;
+	optional int64 target_affiliate_id = 4;
 }
 
 message SetAffiliateDomainRequest {

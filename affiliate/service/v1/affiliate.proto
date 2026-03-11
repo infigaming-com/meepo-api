@@ -690,6 +690,7 @@ message ListAffiliateDomainsRequest {
     api.common.OperatorContext target_operator_context = 4;
     optional int32 page = 5;
     optional int32 page_size = 6;
+    optional int64 target_affiliate_id = 7;
 }
 
 message ListAffiliateDomainsResponse {
