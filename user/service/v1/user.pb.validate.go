@@ -35468,6 +35468,8 @@ func (m *ListBottomOperatorsResponse_OperatorInfo) validate(all bool) error {
 
 	// no validation rules for ReportingCurrency
 
+	// no validation rules for BackofficeSubdomain
+
 	if len(errors) > 0 {
 		return ListBottomOperatorsResponse_OperatorInfoMultiError(errors)
 	}

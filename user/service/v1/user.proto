@@ -1752,6 +1752,8 @@ message ListBottomOperatorsResponse {
 		string status = 6;
 		string subdomain = 7;
 		string reporting_currency = 8;
+		string backoffice_subdomain = 9;
+		repeated string backoffice_byo_domains = 10;
 	}
 	repeated OperatorInfo bottom_operators = 1;
 }
