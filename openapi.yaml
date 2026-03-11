@@ -12844,8 +12844,6 @@ components:
                     type: string
                 issueRewards:
                     type: boolean
-                currency:
-                    type: string
                 reason:
                     type: string
             description: 手动调整用户VIP等级请求

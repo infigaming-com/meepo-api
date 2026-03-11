@@ -2146,8 +2146,6 @@ func (m *AdjustUserVipLevelRequest) validate(all bool) error {
 
 	// no validation rules for IssueRewards
 
-	// no validation rules for Currency
-
 	// no validation rules for Reason
 
 	if len(errors) > 0 {

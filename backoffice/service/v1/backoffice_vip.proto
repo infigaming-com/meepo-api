@@ -160,7 +160,6 @@ message AdjustUserVipLevelRequest {
   int64 user_id = 3;
   int64 target_level = 4;
   bool issue_rewards = 5;
-  string currency = 6;
   string reason = 7;
 }
 

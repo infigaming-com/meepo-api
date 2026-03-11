@@ -736,7 +736,6 @@ type AdjustUserVipLevelRequest struct {
 	UserId                int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	TargetLevel           int64                   `protobuf:"varint,4,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`
 	IssueRewards          bool                    `protobuf:"varint,5,opt,name=issue_rewards,json=issueRewards,proto3" json:"issue_rewards,omitempty"`
-	Currency              string                  `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
 	Reason                string                  `protobuf:"bytes,7,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -805,13 +804,6 @@ func (x *AdjustUserVipLevelRequest) GetIssueRewards() bool {
 		return x.IssueRewards
 	}
 	return false
-}
-
-func (x *AdjustUserVipLevelRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
 }
 
 func (x *AdjustUserVipLevelRequest) GetReason() string {
@@ -1066,14 +1058,13 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\x13GetVipConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"M\n" +
 	"\x14GetVipConfigResponse\x125\n" +
-	"\x06config\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipConfigR\x06config\"\xcd\x02\n" +
+	"\x06config\x18\x01 \x01(\v2\x1d.api.vip.service.v1.VipConfigR\x06config\"\xb1\x02\n" +
 	"\x19AdjustUserVipLevelRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12!\n" +
 	"\ftarget_level\x18\x04 \x01(\x03R\vtargetLevel\x12#\n" +
-	"\rissue_rewards\x18\x05 \x01(\bR\fissueRewards\x12\x1a\n" +
-	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x16\n" +
+	"\rissue_rewards\x18\x05 \x01(\bR\fissueRewards\x12\x16\n" +
 	"\x06reason\x18\a \x01(\tR\x06reason\"\xbf\x01\n" +
 	"\x1aAdjustUserVipLevelResponse\x12\x1b\n" +
 	"\told_level\x18\x01 \x01(\x03R\boldLevel\x12\x1b\n" +
