@@ -4615,6 +4615,8 @@ type ListBalancesSummaryResponse_BalanceSummary struct {
 	RevenueShareSystem   string                 `protobuf:"bytes,16,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`
 	RevenueShareOperator string                 `protobuf:"bytes,17,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"`
 	EstNetCosts          string                 `protobuf:"bytes,18,opt,name=est_net_costs,json=estNetCosts,proto3" json:"est_net_costs,omitempty"`
+	CompanyBalance       string                 `protobuf:"bytes,19,opt,name=company_balance,json=companyBalance,proto3" json:"company_balance,omitempty"`
+	PlayerBalance        string                 `protobuf:"bytes,20,opt,name=player_balance,json=playerBalance,proto3" json:"player_balance,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -4750,6 +4752,20 @@ func (x *ListBalancesSummaryResponse_BalanceSummary) GetRevenueShareOperator() s
 func (x *ListBalancesSummaryResponse_BalanceSummary) GetEstNetCosts() string {
 	if x != nil {
 		return x.EstNetCosts
+	}
+	return ""
+}
+
+func (x *ListBalancesSummaryResponse_BalanceSummary) GetCompanyBalance() string {
+	if x != nil {
+		return x.CompanyBalance
+	}
+	return ""
+}
+
+func (x *ListBalancesSummaryResponse_BalanceSummary) GetPlayerBalance() string {
+	if x != nil {
+		return x.PlayerBalance
 	}
 	return ""
 }
@@ -5427,13 +5443,13 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc3\x06\n" +
+	"_page_size\"\x93\a\n" +
 	"\x1bListBalancesSummaryResponse\x12a\n" +
 	"\bbalances\x18\x01 \x03(\v2E.api.backoffice.service.v1.ListBalancesSummaryResponse.BalanceSummaryR\bbalances\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xee\x04\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xbe\x05\n" +
 	"\x0eBalanceSummary\x120\n" +
 	"\x14retailer_operator_id\x18\x04 \x01(\x03R\x12retailerOperatorId\x124\n" +
 	"\x16retailer_operator_name\x18\x05 \x01(\tR\x14retailerOperatorName\x12.\n" +
@@ -5450,7 +5466,9 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x0eest_net_profit\x18\x0f \x01(\tR\festNetProfit\x120\n" +
 	"\x14revenue_share_system\x18\x10 \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\x11 \x01(\tR\x14revenueShareOperator\x12\"\n" +
-	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts\"/\n" +
+	"\rest_net_costs\x18\x12 \x01(\tR\vestNetCosts\x12'\n" +
+	"\x0fcompany_balance\x18\x13 \x01(\tR\x0ecompanyBalance\x12%\n" +
+	"\x0eplayer_balance\x18\x14 \x01(\tR\rplayerBalance\"/\n" +
 	"\x19GetTaxReportConfigRequest\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\"4\n" +
 	"\x1aGetTaxReportConfigResponse\x12\x16\n" +

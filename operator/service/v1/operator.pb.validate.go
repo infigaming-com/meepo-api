@@ -9265,6 +9265,10 @@ func (m *ListBalancesSummaryResponse_BalanceSummary) validate(all bool) error {
 
 	// no validation rules for EstNetCosts
 
+	// no validation rules for CompanyBalance
+
+	// no validation rules for PlayerBalance
+
 	if len(errors) > 0 {
 		return ListBalancesSummaryResponse_BalanceSummaryMultiError(errors)
 	}
