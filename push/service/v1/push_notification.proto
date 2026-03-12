@@ -32,212 +32,346 @@ service PushNotification {
 
 // ============ Enums ============
 
+// Supported notification channel types.
 enum ChannelType {
   CHANNEL_TYPE_UNSPECIFIED = 0;
+  // Telegram Bot API
   CHANNEL_TYPE_TELEGRAM = 1;
+  // Slack Incoming Webhook
   CHANNEL_TYPE_SLACK = 2;
 }
 
+// Notification rule types that determine how matching is performed.
 enum RuleType {
   RULE_TYPE_UNSPECIFIED = 0;
+  // Simple on/off rule with no amount filtering
   RULE_TYPE_GENERIC = 1;
+  // Rule with per-currency amount thresholds
   RULE_TYPE_CURRENCY_THRESHOLD = 2;
 }
 
+// Event categories that can trigger notifications.
 enum MessageType {
   MESSAGE_TYPE_UNSPECIFIED = 0;
+  // Withdrawal event notification
   MESSAGE_TYPE_WITHDRAW_NOTIFICATION = 1;
+  // Deposit event notification
   MESSAGE_TYPE_DEPOSIT_NOTIFICATION = 2;
+  // Deposit exceeding a configured threshold
   MESSAGE_TYPE_LARGE_DEPOSIT = 3;
+  // Bet exceeding a configured threshold
   MESSAGE_TYPE_LARGE_BET = 4;
+  // Win exceeding a configured threshold
   MESSAGE_TYPE_LARGE_WIN = 5;
 }
 
 // ============ Channel Messages ============
 
+// Telegram channel configuration.
 message TelegramChannelConfig {
+  // Telegram Bot API token (e.g., "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11")
   string bot_token = 1;
-  string bot_token_masked = 2;  // For response only
+  // Masked bot token for display purposes (response only, read-only)
+  string bot_token_masked = 2;
+  // Target Telegram chat or group ID (e.g., "-1001234567890")
   string chat_id = 3;
 }
 
+// Slack channel configuration.
 message SlackChannelConfig {
+  // Slack incoming webhook URL (e.g., "https://hooks.slack.com/services/T.../B.../xxx")
   string webhook_url = 1;
-  string webhook_url_masked = 2;  // For response only
+  // Masked webhook URL for display purposes (response only, read-only)
+  string webhook_url_masked = 2;
 }
 
+// Channel-specific configuration. Provide one of the nested configs based on channel_type.
 message ChannelConfig {
+  // Telegram configuration. Required when channel_type = CHANNEL_TYPE_TELEGRAM
   TelegramChannelConfig telegram = 1;
+  // Slack configuration. Required when channel_type = CHANNEL_TYPE_SLACK
   SlackChannelConfig slack = 2;
 }
 
+// A configured notification delivery endpoint.
 message NotificationChannel {
+  // Unique channel ID
   int64 id = 1;
+  // Display name for the channel
   string name = 2;
+  // Channel type: CHANNEL_TYPE_TELEGRAM (1) or CHANNEL_TYPE_SLACK (2)
   ChannelType channel_type = 3;
+  // Channel-specific configuration. Sensitive fields (bot_token, webhook_url) are masked in responses
   ChannelConfig config = 4;
+  // Whether the channel is active and will deliver notifications
   bool enabled = 5;
+  // Unix timestamp of creation
   int64 created_at = 6;
+  // Unix timestamp of last update
   int64 updated_at = 7;
-  bool is_inherited = 8;  // True if from system/parent config
+  // True if this channel is inherited from a parent operator level (system/retailer/company)
+  bool is_inherited = 8;
 }
 
 // ============ Rule Messages ============
 
+// Per-currency threshold condition for currency-based notification rules.
 message CurrencyCondition {
-  string currency = 1;      // e.g., "USD", "BTC", "*" (wildcard)
-  string min_amount = 2;    // Decimal string
-  string min_odds = 3;      // For large_win only
+  // Currency code (e.g., "USD", "BTC") or "*" for wildcard matching all currencies
+  string currency = 1;
+  // Minimum amount threshold as a decimal string (e.g., "1000.00")
+  string min_amount = 2;
+  // Minimum odds threshold as a decimal string (applicable to MESSAGE_TYPE_LARGE_WIN only)
+  string min_odds = 3;
 }
 
+// A notification rule that defines when a channel should receive an alert.
 message NotificationRule {
+  // Unique rule ID
   int64 id = 1;
+  // Display name for the rule
   string name = 2;
-  MessageType message_type = 3;  // Changed from string to enum
+  // Event type that triggers this rule (e.g., MESSAGE_TYPE_LARGE_DEPOSIT)
+  MessageType message_type = 3;
+  // Rule type: RULE_TYPE_GENERIC (simple on/off) or RULE_TYPE_CURRENCY_THRESHOLD (with amount filters)
   RuleType rule_type = 4;
-  int64 channel_id = 5;          // Single channel (was channel_ids array)
+  // The channel this rule is attached to
+  int64 channel_id = 5;
+  // Per-currency threshold conditions. Only used when rule_type = RULE_TYPE_CURRENCY_THRESHOLD
   repeated CurrencyCondition currency_conditions = 6;
+  // Whether the rule is active
   bool enabled = 7;
+  // Unix timestamp of creation
   int64 created_at = 8;
+  // Unix timestamp of last update
   int64 updated_at = 9;
+  // True if this rule is inherited from a parent operator level
   bool is_inherited = 10;
 }
 
-// Input for creating/updating rules in batch
+// Input for creating or updating a notification rule in a batch save operation.
 message NotificationRuleInput {
-  int64 id = 1;  // 0 = new rule, >0 = update existing
+  // Rule ID: 0 = create new rule, >0 = update existing rule
+  int64 id = 1;
+  // Display name for the rule
   string name = 2;
+  // Event type that triggers this rule
   MessageType message_type = 3;
+  // Rule type: RULE_TYPE_GENERIC (1) or RULE_TYPE_CURRENCY_THRESHOLD (2)
   RuleType rule_type = 4;
+  // Per-currency threshold conditions. Required when rule_type = RULE_TYPE_CURRENCY_THRESHOLD
   repeated CurrencyCondition currency_conditions = 5;
+  // Whether the rule is active
   bool enabled = 6;
 }
 
-// Message type info for frontend dropdown
+// Metadata about a supported message type, used for building frontend dropdowns.
 message MessageTypeInfo {
+  // Enum value (e.g., MESSAGE_TYPE_LARGE_DEPOSIT = 3)
   MessageType value = 1;
+  // Enum name (e.g., "MESSAGE_TYPE_LARGE_DEPOSIT")
   string name = 2;
+  // Human-readable display name (e.g., "Large Deposit")
   string display_name = 3;
 }
 
 // ============ Channel CRUD Requests ============
 
+// Create a new notification channel.
 message CreateNotificationChannelRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Display name for the channel
   string name = 2;
+  // Channel type: CHANNEL_TYPE_TELEGRAM (1) or CHANNEL_TYPE_SLACK (2)
   ChannelType channel_type = 3;
+  // Channel-specific configuration. Provide telegram or slack config based on channel_type
   ChannelConfig config = 4;
+  // Whether the channel is active. Default: false
   bool enabled = 5;
 }
 
+// Response for CreateNotificationChannel.
 message CreateNotificationChannelResponse {
+  // The created channel with generated ID and timestamps
   NotificationChannel channel = 1;
 }
 
+// List notification channels with pagination and optional filters.
 message ListNotificationChannelsRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Filter by channel type (omit to list all types)
   optional ChannelType channel_type = 2;
+  // Filter by enabled status (omit to list all)
   optional bool enabled = 3;
-  bool include_inherited = 4;  // Include system/parent channels
+  // If true, include channels inherited from parent operator levels (system/retailer/company)
+  bool include_inherited = 4;
+  // Page number, starting from 1
   int32 page = 5;
+  // Number of items per page
   int32 page_size = 6;
 }
 
+// Response for ListNotificationChannels.
 message ListNotificationChannelsResponse {
+  // List of channels matching the filters
   repeated NotificationChannel channels = 1;
+  // Total count of channels matching the filters
   int32 total = 2;
+  // Current page number
   int32 page = 3;
+  // Number of items per page
   int32 page_size = 4;
 }
 
+// Get a specific notification channel by ID.
 message GetNotificationChannelRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Channel ID to retrieve
   int64 channel_id = 2;
 }
 
+// Response for GetNotificationChannel.
 message GetNotificationChannelResponse {
+  // The channel details. Sensitive fields (bot_token, webhook_url) are masked
   NotificationChannel channel = 1;
 }
 
+// Partially update a notification channel. Only provided fields are updated.
 message UpdateNotificationChannelRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Channel ID to update
   int64 channel_id = 2;
+  // New display name (optional)
   optional string name = 3;
+  // New channel configuration (optional, replaces existing config entirely)
   optional ChannelConfig config = 4;
+  // Enable or disable the channel (optional)
   optional bool enabled = 5;
 }
 
+// Response for UpdateNotificationChannel. Empty on success.
 message UpdateNotificationChannelResponse {}
 
+// Delete a notification channel and all its associated rules.
 message DeleteNotificationChannelRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Channel ID to delete
   int64 channel_id = 2;
 }
 
+// Response for DeleteNotificationChannel. Empty on success.
 message DeleteNotificationChannelResponse {}
 
+// Test a notification channel by sending a test message.
 message TestNotificationChannelRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Channel ID to test
   int64 channel_id = 2;
+  // Custom test message. If empty, a default test message is used
   string test_message = 3;
 }
 
+// Response for TestNotificationChannel.
 message TestNotificationChannelResponse {
+  // Whether the test message was delivered successfully
   bool success = 1;
+  // Error details if delivery failed (empty on success)
   string error_message = 2;
 }
 
 // ============ Rule Management Requests ============
 
+// Save all rules for a channel (batch create/update/delete).
+// This is a full replacement operation: rules with id=0 are created,
+// rules with id>0 are updated, and existing rules NOT in the request are deleted.
 message SaveChannelRulesRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Channel ID to save rules for
   int64 channel_id = 2;
+  // Full list of rules for this channel. Omitted existing rules will be deleted
   repeated NotificationRuleInput rules = 3;
 }
 
+// Response for SaveChannelRules.
 message SaveChannelRulesResponse {
+  // The saved rules with generated IDs and timestamps
   repeated NotificationRule rules = 1;
 }
 
+// List notification rules with pagination and optional filters.
 message ListNotificationRulesRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // Filter by message type (omit to list all types)
   optional MessageType message_type = 2;
+  // Filter by enabled status (omit to list all)
   optional bool enabled = 3;
+  // If true, include rules inherited from parent operator levels
   bool include_inherited = 4;
-  int64 channel_id = 5;  // Filter by channel
+  // Filter by channel ID (0 = all channels)
+  int64 channel_id = 5;
+  // Page number, starting from 1
   int32 page = 6;
+  // Number of items per page
   int32 page_size = 7;
 }
 
+// Response for ListNotificationRules.
 message ListNotificationRulesResponse {
+  // List of rules matching the filters
   repeated NotificationRule rules = 1;
+  // Total count of rules matching the filters
   int32 total = 2;
+  // Current page number
   int32 page = 3;
+  // Number of items per page
   int32 page_size = 4;
 }
 
+// Get supported message types. No parameters required.
 message GetSupportedMessageTypesRequest {}
 
+// Response for GetSupportedMessageTypes.
 message GetSupportedMessageTypesResponse {
+  // List of all supported message types with display names
   repeated MessageTypeInfo message_types = 1;
 }
 
 // ============ Notification Delivery ============
 
+// Send a message to one or more channels.
 message SendToChannelsRequest {
+  // Target operator context. If omitted, defaults to the current logged-in operator
   api.common.OperatorContext target_operator_context = 1;
+  // List of channel IDs to send the message to
   repeated int64 channel_ids = 2;
+  // Message content to send
   string message = 3;
 }
 
+// Per-channel delivery result.
 message ChannelDeliveryResult {
+  // Channel ID
   int64 channel_id = 1;
+  // Channel display name
   string channel_name = 2;
+  // Channel type
   ChannelType channel_type = 3;
+  // Whether delivery was successful
   bool success = 4;
+  // Error details if delivery failed (empty on success)
   string error_message = 5;
 }
 
+// Response for SendToChannels.
 message SendToChannelsResponse {
+  // Per-channel delivery results
   repeated ChannelDeliveryResult delivery_results = 1;
 }

@@ -31,23 +31,284 @@ const OperationBackofficeNotificationTestNotificationChannel = "/api.backoffice.
 const OperationBackofficeNotificationUpdateNotificationChannel = "/api.backoffice.service.v1.BackofficeNotification/UpdateNotificationChannel"
 
 type BackofficeNotificationHTTPServer interface {
-	// CreateNotificationChannel Create a new notification channel
+	// CreateNotificationChannel Create a new notification channel.
+	//
+	// Creates a Telegram or Slack channel that can receive notification messages.
+	// After creation, use SaveChannelRules to attach notification rules to this channel.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | name | string | Yes | Display name for the channel |
+	// | channel_type | ChannelType | Yes | `CHANNEL_TYPE_TELEGRAM` (1) or `CHANNEL_TYPE_SLACK` (2) |
+	// | config | ChannelConfig | Yes | Channel-specific configuration (see below) |
+	// | enabled | bool | No | Whether the channel is active. Default: false |
+	//
+	// ### ChannelConfig
+	//
+	// Provide **one of** the following based on `channel_type`:
+	//
+	// **Telegram** (`config.telegram`):
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | bot_token | string | Telegram Bot API token |
+	// | chat_id | string | Target chat/group ID |
+	//
+	// **Slack** (`config.slack`):
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | webhook_url | string | Slack incoming webhook URL |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | channel | NotificationChannel | The created channel with generated `id` and timestamps |
+	//
+	// ## Example
+	//
+	// ```json
+	// // Request
+	// {
+	//   "name": "Risk Alerts - Telegram",
+	//   "channel_type": 1,
+	//   "config": {
+	//     "telegram": {
+	//       "bot_token": "123456:ABC-DEF...",
+	//       "chat_id": "-1001234567890"
+	//     }
+	//   },
+	//   "enabled": true
+	// }
+	//
+	// // Response
+	// {
+	//   "channel": {
+	//     "id": 42,
+	//     "name": "Risk Alerts - Telegram",
+	//     "channel_type": 1,
+	//     "config": {
+	//       "telegram": {
+	//         "bot_token_masked": "123***DEF...",
+	//         "chat_id": "-1001234567890"
+	//       }
+	//     },
+	//     "enabled": true,
+	//     "created_at": 1710000000,
+	//     "updated_at": 1710000000,
+	//     "is_inherited": false
+	//   }
+	// }
+	// ```
 	CreateNotificationChannel(context.Context, *v1.CreateNotificationChannelRequest) (*v1.CreateNotificationChannelResponse, error)
-	// DeleteNotificationChannel Delete a notification channel
+	// DeleteNotificationChannel Delete a notification channel and all its associated rules.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to delete |
+	//
+	// ## Response
+	//
+	// Empty on success.
 	DeleteNotificationChannel(context.Context, *v1.DeleteNotificationChannelRequest) (*v1.DeleteNotificationChannelResponse, error)
-	// GetNotificationChannel Get a specific notification channel
+	// GetNotificationChannel Get a specific notification channel by ID.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to retrieve |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | channel | NotificationChannel | The channel details. Sensitive fields (bot_token, webhook_url) are masked |
 	GetNotificationChannel(context.Context, *v1.GetNotificationChannelRequest) (*v1.GetNotificationChannelResponse, error)
-	// GetSupportedMessageTypes Get supported message types for frontend dropdown
+	// GetSupportedMessageTypes Get supported message types for frontend dropdown.
+	//
+	// Returns the list of all available message types with display names,
+	// useful for building UI dropdowns/selectors.
+	//
+	// ## Request body
+	//
+	// Empty — no parameters required.
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | message_types | MessageTypeInfo[] | List of supported message types |
+	//
+	// ### MessageTypeInfo
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | value | MessageType | Enum value |
+	// | name | string | Enum name (e.g. `"MESSAGE_TYPE_LARGE_DEPOSIT"`) |
+	// | display_name | string | Human-readable name (e.g. `"Large Deposit"`) |
 	GetSupportedMessageTypes(context.Context, *v1.GetSupportedMessageTypesRequest) (*v1.GetSupportedMessageTypesResponse, error)
-	// ListNotificationChannels List notification channels with pagination
+	// ListNotificationChannels List notification channels with pagination.
+	//
+	// Returns channels owned by or inherited to the current operator.
+	// Supports filtering by channel type and enabled status.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_type | ChannelType | No | Filter by type (omit for all) |
+	// | enabled | bool | No | Filter by enabled status (omit for all) |
+	// | include_inherited | bool | No | If true, include channels from parent levels |
+	// | page | int32 | No | Page number, starting from 1 |
+	// | page_size | int32 | No | Items per page |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | channels | NotificationChannel[] | List of channels |
+	// | total | int32 | Total count matching filters |
+	// | page | int32 | Current page |
+	// | page_size | int32 | Items per page |
 	ListNotificationChannels(context.Context, *v1.ListNotificationChannelsRequest) (*v1.ListNotificationChannelsResponse, error)
-	// ListNotificationRules List notification rules with pagination
+	// ListNotificationRules List notification rules with pagination.
+	//
+	// Returns rules matching the given filters. Supports filtering by message type,
+	// enabled status, and channel.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | message_type | MessageType | No | Filter by message type (omit for all) |
+	// | enabled | bool | No | Filter by enabled status (omit for all) |
+	// | include_inherited | bool | No | If true, include rules from parent levels |
+	// | channel_id | int64 | No | Filter by channel (0 = all channels) |
+	// | page | int32 | No | Page number, starting from 1 |
+	// | page_size | int32 | No | Items per page |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | rules | NotificationRule[] | List of rules |
+	// | total | int32 | Total count matching filters |
+	// | page | int32 | Current page |
+	// | page_size | int32 | Items per page |
 	ListNotificationRules(context.Context, *v1.ListNotificationRulesRequest) (*v1.ListNotificationRulesResponse, error)
-	// SaveChannelRules Save all rules for a channel (batch create/update/delete)
+	// SaveChannelRules Save all rules for a channel (batch create/update/delete).
+	//
+	// This is a full replacement operation for a channel's rules:
+	// - Rules with `id = 0` are created as new rules
+	// - Rules with `id > 0` are updated
+	// - Existing rules NOT included in the request are deleted
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel to save rules for |
+	// | rules | NotificationRuleInput[] | Yes | Full list of rules for this channel |
+	//
+	// ### NotificationRuleInput
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | id | int64 | No | `0` = create new, `>0` = update existing |
+	// | name | string | Yes | Display name for the rule |
+	// | message_type | MessageType | Yes | Event type to match (see enum above) |
+	// | rule_type | RuleType | Yes | `RULE_TYPE_GENERIC` (1) or `RULE_TYPE_CURRENCY_THRESHOLD` (2) |
+	// | currency_conditions | CurrencyCondition[] | No | Required when `rule_type = RULE_TYPE_CURRENCY_THRESHOLD` |
+	// | enabled | bool | No | Whether the rule is active |
+	//
+	// ### CurrencyCondition
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | currency | string | Currency code, e.g. `"USD"`, `"BTC"`, or `"*"` (wildcard for all) |
+	// | min_amount | string | Minimum amount threshold (decimal string, e.g. `"1000.00"`) |
+	// | min_odds | string | Minimum odds threshold (for `MESSAGE_TYPE_LARGE_WIN` only) |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | rules | NotificationRule[] | The saved rules with generated IDs and timestamps |
+	//
+	// ## Example
+	//
+	// ```json
+	// // Request — set up large deposit + withdrawal alerts for a channel
+	// {
+	//   "channel_id": 42,
+	//   "rules": [
+	//     {
+	//       "id": 0,
+	//       "name": "Large USD Deposits",
+	//       "message_type": 3,
+	//       "rule_type": 2,
+	//       "currency_conditions": [
+	//         { "currency": "USD", "min_amount": "5000.00" },
+	//         { "currency": "EUR", "min_amount": "4500.00" }
+	//       ],
+	//       "enabled": true
+	//     },
+	//     {
+	//       "id": 0,
+	//       "name": "All Withdrawals",
+	//       "message_type": 1,
+	//       "rule_type": 1,
+	//       "enabled": true
+	//     }
+	//   ]
+	// }
+	// ```
 	SaveChannelRules(context.Context, *v1.SaveChannelRulesRequest) (*v1.SaveChannelRulesResponse, error)
-	// TestNotificationChannel Test a notification channel by sending a test message
+	// TestNotificationChannel Test a notification channel by sending a test message.
+	//
+	// Sends a test message through the channel to verify configuration is correct.
+	// Does not require the channel to be enabled.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to test |
+	// | test_message | string | No | Custom message to send. If empty, a default test message is used |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | success | bool | Whether the test message was delivered successfully |
+	// | error_message | string | Error details if delivery failed |
 	TestNotificationChannel(context.Context, *v1.TestNotificationChannelRequest) (*v1.TestNotificationChannelResponse, error)
-	// UpdateNotificationChannel Update a notification channel
+	// UpdateNotificationChannel Partially update a notification channel. Only provided fields are updated.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to update |
+	// | name | string | No | New display name |
+	// | config | ChannelConfig | No | New channel config (replaces existing) |
+	// | enabled | bool | No | Enable or disable |
+	//
+	// ## Response
+	//
+	// Empty on success.
 	UpdateNotificationChannel(context.Context, *v1.UpdateNotificationChannelRequest) (*v1.UpdateNotificationChannelResponse, error)
 }
 
@@ -263,23 +524,284 @@ func _BackofficeNotification_GetSupportedMessageTypes0_HTTP_Handler(srv Backoffi
 }
 
 type BackofficeNotificationHTTPClient interface {
-	// CreateNotificationChannel Create a new notification channel
+	// CreateNotificationChannel Create a new notification channel.
+	//
+	// Creates a Telegram or Slack channel that can receive notification messages.
+	// After creation, use SaveChannelRules to attach notification rules to this channel.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | name | string | Yes | Display name for the channel |
+	// | channel_type | ChannelType | Yes | `CHANNEL_TYPE_TELEGRAM` (1) or `CHANNEL_TYPE_SLACK` (2) |
+	// | config | ChannelConfig | Yes | Channel-specific configuration (see below) |
+	// | enabled | bool | No | Whether the channel is active. Default: false |
+	//
+	// ### ChannelConfig
+	//
+	// Provide **one of** the following based on `channel_type`:
+	//
+	// **Telegram** (`config.telegram`):
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | bot_token | string | Telegram Bot API token |
+	// | chat_id | string | Target chat/group ID |
+	//
+	// **Slack** (`config.slack`):
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | webhook_url | string | Slack incoming webhook URL |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | channel | NotificationChannel | The created channel with generated `id` and timestamps |
+	//
+	// ## Example
+	//
+	// ```json
+	// // Request
+	// {
+	//   "name": "Risk Alerts - Telegram",
+	//   "channel_type": 1,
+	//   "config": {
+	//     "telegram": {
+	//       "bot_token": "123456:ABC-DEF...",
+	//       "chat_id": "-1001234567890"
+	//     }
+	//   },
+	//   "enabled": true
+	// }
+	//
+	// // Response
+	// {
+	//   "channel": {
+	//     "id": 42,
+	//     "name": "Risk Alerts - Telegram",
+	//     "channel_type": 1,
+	//     "config": {
+	//       "telegram": {
+	//         "bot_token_masked": "123***DEF...",
+	//         "chat_id": "-1001234567890"
+	//       }
+	//     },
+	//     "enabled": true,
+	//     "created_at": 1710000000,
+	//     "updated_at": 1710000000,
+	//     "is_inherited": false
+	//   }
+	// }
+	// ```
 	CreateNotificationChannel(ctx context.Context, req *v1.CreateNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.CreateNotificationChannelResponse, err error)
-	// DeleteNotificationChannel Delete a notification channel
+	// DeleteNotificationChannel Delete a notification channel and all its associated rules.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to delete |
+	//
+	// ## Response
+	//
+	// Empty on success.
 	DeleteNotificationChannel(ctx context.Context, req *v1.DeleteNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.DeleteNotificationChannelResponse, err error)
-	// GetNotificationChannel Get a specific notification channel
+	// GetNotificationChannel Get a specific notification channel by ID.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to retrieve |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | channel | NotificationChannel | The channel details. Sensitive fields (bot_token, webhook_url) are masked |
 	GetNotificationChannel(ctx context.Context, req *v1.GetNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.GetNotificationChannelResponse, err error)
-	// GetSupportedMessageTypes Get supported message types for frontend dropdown
+	// GetSupportedMessageTypes Get supported message types for frontend dropdown.
+	//
+	// Returns the list of all available message types with display names,
+	// useful for building UI dropdowns/selectors.
+	//
+	// ## Request body
+	//
+	// Empty — no parameters required.
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | message_types | MessageTypeInfo[] | List of supported message types |
+	//
+	// ### MessageTypeInfo
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | value | MessageType | Enum value |
+	// | name | string | Enum name (e.g. `"MESSAGE_TYPE_LARGE_DEPOSIT"`) |
+	// | display_name | string | Human-readable name (e.g. `"Large Deposit"`) |
 	GetSupportedMessageTypes(ctx context.Context, req *v1.GetSupportedMessageTypesRequest, opts ...http.CallOption) (rsp *v1.GetSupportedMessageTypesResponse, err error)
-	// ListNotificationChannels List notification channels with pagination
+	// ListNotificationChannels List notification channels with pagination.
+	//
+	// Returns channels owned by or inherited to the current operator.
+	// Supports filtering by channel type and enabled status.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_type | ChannelType | No | Filter by type (omit for all) |
+	// | enabled | bool | No | Filter by enabled status (omit for all) |
+	// | include_inherited | bool | No | If true, include channels from parent levels |
+	// | page | int32 | No | Page number, starting from 1 |
+	// | page_size | int32 | No | Items per page |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | channels | NotificationChannel[] | List of channels |
+	// | total | int32 | Total count matching filters |
+	// | page | int32 | Current page |
+	// | page_size | int32 | Items per page |
 	ListNotificationChannels(ctx context.Context, req *v1.ListNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.ListNotificationChannelsResponse, err error)
-	// ListNotificationRules List notification rules with pagination
+	// ListNotificationRules List notification rules with pagination.
+	//
+	// Returns rules matching the given filters. Supports filtering by message type,
+	// enabled status, and channel.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | message_type | MessageType | No | Filter by message type (omit for all) |
+	// | enabled | bool | No | Filter by enabled status (omit for all) |
+	// | include_inherited | bool | No | If true, include rules from parent levels |
+	// | channel_id | int64 | No | Filter by channel (0 = all channels) |
+	// | page | int32 | No | Page number, starting from 1 |
+	// | page_size | int32 | No | Items per page |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | rules | NotificationRule[] | List of rules |
+	// | total | int32 | Total count matching filters |
+	// | page | int32 | Current page |
+	// | page_size | int32 | Items per page |
 	ListNotificationRules(ctx context.Context, req *v1.ListNotificationRulesRequest, opts ...http.CallOption) (rsp *v1.ListNotificationRulesResponse, err error)
-	// SaveChannelRules Save all rules for a channel (batch create/update/delete)
+	// SaveChannelRules Save all rules for a channel (batch create/update/delete).
+	//
+	// This is a full replacement operation for a channel's rules:
+	// - Rules with `id = 0` are created as new rules
+	// - Rules with `id > 0` are updated
+	// - Existing rules NOT included in the request are deleted
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel to save rules for |
+	// | rules | NotificationRuleInput[] | Yes | Full list of rules for this channel |
+	//
+	// ### NotificationRuleInput
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | id | int64 | No | `0` = create new, `>0` = update existing |
+	// | name | string | Yes | Display name for the rule |
+	// | message_type | MessageType | Yes | Event type to match (see enum above) |
+	// | rule_type | RuleType | Yes | `RULE_TYPE_GENERIC` (1) or `RULE_TYPE_CURRENCY_THRESHOLD` (2) |
+	// | currency_conditions | CurrencyCondition[] | No | Required when `rule_type = RULE_TYPE_CURRENCY_THRESHOLD` |
+	// | enabled | bool | No | Whether the rule is active |
+	//
+	// ### CurrencyCondition
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | currency | string | Currency code, e.g. `"USD"`, `"BTC"`, or `"*"` (wildcard for all) |
+	// | min_amount | string | Minimum amount threshold (decimal string, e.g. `"1000.00"`) |
+	// | min_odds | string | Minimum odds threshold (for `MESSAGE_TYPE_LARGE_WIN` only) |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | rules | NotificationRule[] | The saved rules with generated IDs and timestamps |
+	//
+	// ## Example
+	//
+	// ```json
+	// // Request — set up large deposit + withdrawal alerts for a channel
+	// {
+	//   "channel_id": 42,
+	//   "rules": [
+	//     {
+	//       "id": 0,
+	//       "name": "Large USD Deposits",
+	//       "message_type": 3,
+	//       "rule_type": 2,
+	//       "currency_conditions": [
+	//         { "currency": "USD", "min_amount": "5000.00" },
+	//         { "currency": "EUR", "min_amount": "4500.00" }
+	//       ],
+	//       "enabled": true
+	//     },
+	//     {
+	//       "id": 0,
+	//       "name": "All Withdrawals",
+	//       "message_type": 1,
+	//       "rule_type": 1,
+	//       "enabled": true
+	//     }
+	//   ]
+	// }
+	// ```
 	SaveChannelRules(ctx context.Context, req *v1.SaveChannelRulesRequest, opts ...http.CallOption) (rsp *v1.SaveChannelRulesResponse, err error)
-	// TestNotificationChannel Test a notification channel by sending a test message
+	// TestNotificationChannel Test a notification channel by sending a test message.
+	//
+	// Sends a test message through the channel to verify configuration is correct.
+	// Does not require the channel to be enabled.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to test |
+	// | test_message | string | No | Custom message to send. If empty, a default test message is used |
+	//
+	// ## Response
+	//
+	// | Field | Type | Description |
+	// |-------|------|-------------|
+	// | success | bool | Whether the test message was delivered successfully |
+	// | error_message | string | Error details if delivery failed |
 	TestNotificationChannel(ctx context.Context, req *v1.TestNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.TestNotificationChannelResponse, err error)
-	// UpdateNotificationChannel Update a notification channel
+	// UpdateNotificationChannel Partially update a notification channel. Only provided fields are updated.
+	//
+	// ## Request body
+	//
+	// | Field | Type | Required | Description |
+	// |-------|------|----------|-------------|
+	// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+	// | channel_id | int64 | Yes | Channel ID to update |
+	// | name | string | No | New display name |
+	// | config | ChannelConfig | No | New channel config (replaces existing) |
+	// | enabled | bool | No | Enable or disable |
+	//
+	// ## Response
+	//
+	// Empty on success.
 	UpdateNotificationChannel(ctx context.Context, req *v1.UpdateNotificationChannelRequest, opts ...http.CallOption) (rsp *v1.UpdateNotificationChannelResponse, err error)
 }
 
@@ -291,7 +813,77 @@ func NewBackofficeNotificationHTTPClient(client *http.Client) BackofficeNotifica
 	return &BackofficeNotificationHTTPClientImpl{client}
 }
 
-// CreateNotificationChannel Create a new notification channel
+// CreateNotificationChannel Create a new notification channel.
+//
+// Creates a Telegram or Slack channel that can receive notification messages.
+// After creation, use SaveChannelRules to attach notification rules to this channel.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | name | string | Yes | Display name for the channel |
+// | channel_type | ChannelType | Yes | `CHANNEL_TYPE_TELEGRAM` (1) or `CHANNEL_TYPE_SLACK` (2) |
+// | config | ChannelConfig | Yes | Channel-specific configuration (see below) |
+// | enabled | bool | No | Whether the channel is active. Default: false |
+//
+// ### ChannelConfig
+//
+// Provide **one of** the following based on `channel_type`:
+//
+// **Telegram** (`config.telegram`):
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | bot_token | string | Telegram Bot API token |
+// | chat_id | string | Target chat/group ID |
+//
+// **Slack** (`config.slack`):
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | webhook_url | string | Slack incoming webhook URL |
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | channel | NotificationChannel | The created channel with generated `id` and timestamps |
+//
+// ## Example
+//
+// ```json
+// // Request
+// {
+//   "name": "Risk Alerts - Telegram",
+//   "channel_type": 1,
+//   "config": {
+//     "telegram": {
+//       "bot_token": "123456:ABC-DEF...",
+//       "chat_id": "-1001234567890"
+//     }
+//   },
+//   "enabled": true
+// }
+//
+// // Response
+// {
+//   "channel": {
+//     "id": 42,
+//     "name": "Risk Alerts - Telegram",
+//     "channel_type": 1,
+//     "config": {
+//       "telegram": {
+//         "bot_token_masked": "123***DEF...",
+//         "chat_id": "-1001234567890"
+//       }
+//     },
+//     "enabled": true,
+//     "created_at": 1710000000,
+//     "updated_at": 1710000000,
+//     "is_inherited": false
+//   }
+// }
+// ```
 func (c *BackofficeNotificationHTTPClientImpl) CreateNotificationChannel(ctx context.Context, in *v1.CreateNotificationChannelRequest, opts ...http.CallOption) (*v1.CreateNotificationChannelResponse, error) {
 	var out v1.CreateNotificationChannelResponse
 	pattern := "/v1/backoffice/notification/channel/create"
@@ -305,7 +897,18 @@ func (c *BackofficeNotificationHTTPClientImpl) CreateNotificationChannel(ctx con
 	return &out, nil
 }
 
-// DeleteNotificationChannel Delete a notification channel
+// DeleteNotificationChannel Delete a notification channel and all its associated rules.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | channel_id | int64 | Yes | Channel ID to delete |
+//
+// ## Response
+//
+// Empty on success.
 func (c *BackofficeNotificationHTTPClientImpl) DeleteNotificationChannel(ctx context.Context, in *v1.DeleteNotificationChannelRequest, opts ...http.CallOption) (*v1.DeleteNotificationChannelResponse, error) {
 	var out v1.DeleteNotificationChannelResponse
 	pattern := "/v1/backoffice/notification/channel/delete"
@@ -319,7 +922,20 @@ func (c *BackofficeNotificationHTTPClientImpl) DeleteNotificationChannel(ctx con
 	return &out, nil
 }
 
-// GetNotificationChannel Get a specific notification channel
+// GetNotificationChannel Get a specific notification channel by ID.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | channel_id | int64 | Yes | Channel ID to retrieve |
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | channel | NotificationChannel | The channel details. Sensitive fields (bot_token, webhook_url) are masked |
 func (c *BackofficeNotificationHTTPClientImpl) GetNotificationChannel(ctx context.Context, in *v1.GetNotificationChannelRequest, opts ...http.CallOption) (*v1.GetNotificationChannelResponse, error) {
 	var out v1.GetNotificationChannelResponse
 	pattern := "/v1/backoffice/notification/channel/get"
@@ -333,7 +949,28 @@ func (c *BackofficeNotificationHTTPClientImpl) GetNotificationChannel(ctx contex
 	return &out, nil
 }
 
-// GetSupportedMessageTypes Get supported message types for frontend dropdown
+// GetSupportedMessageTypes Get supported message types for frontend dropdown.
+//
+// Returns the list of all available message types with display names,
+// useful for building UI dropdowns/selectors.
+//
+// ## Request body
+//
+// Empty — no parameters required.
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | message_types | MessageTypeInfo[] | List of supported message types |
+//
+// ### MessageTypeInfo
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | value | MessageType | Enum value |
+// | name | string | Enum name (e.g. `"MESSAGE_TYPE_LARGE_DEPOSIT"`) |
+// | display_name | string | Human-readable name (e.g. `"Large Deposit"`) |
 func (c *BackofficeNotificationHTTPClientImpl) GetSupportedMessageTypes(ctx context.Context, in *v1.GetSupportedMessageTypesRequest, opts ...http.CallOption) (*v1.GetSupportedMessageTypesResponse, error) {
 	var out v1.GetSupportedMessageTypesResponse
 	pattern := "/v1/backoffice/notification/message-types"
@@ -347,7 +984,30 @@ func (c *BackofficeNotificationHTTPClientImpl) GetSupportedMessageTypes(ctx cont
 	return &out, nil
 }
 
-// ListNotificationChannels List notification channels with pagination
+// ListNotificationChannels List notification channels with pagination.
+//
+// Returns channels owned by or inherited to the current operator.
+// Supports filtering by channel type and enabled status.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | channel_type | ChannelType | No | Filter by type (omit for all) |
+// | enabled | bool | No | Filter by enabled status (omit for all) |
+// | include_inherited | bool | No | If true, include channels from parent levels |
+// | page | int32 | No | Page number, starting from 1 |
+// | page_size | int32 | No | Items per page |
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | channels | NotificationChannel[] | List of channels |
+// | total | int32 | Total count matching filters |
+// | page | int32 | Current page |
+// | page_size | int32 | Items per page |
 func (c *BackofficeNotificationHTTPClientImpl) ListNotificationChannels(ctx context.Context, in *v1.ListNotificationChannelsRequest, opts ...http.CallOption) (*v1.ListNotificationChannelsResponse, error) {
 	var out v1.ListNotificationChannelsResponse
 	pattern := "/v1/backoffice/notification/channel/list"
@@ -361,7 +1021,31 @@ func (c *BackofficeNotificationHTTPClientImpl) ListNotificationChannels(ctx cont
 	return &out, nil
 }
 
-// ListNotificationRules List notification rules with pagination
+// ListNotificationRules List notification rules with pagination.
+//
+// Returns rules matching the given filters. Supports filtering by message type,
+// enabled status, and channel.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | message_type | MessageType | No | Filter by message type (omit for all) |
+// | enabled | bool | No | Filter by enabled status (omit for all) |
+// | include_inherited | bool | No | If true, include rules from parent levels |
+// | channel_id | int64 | No | Filter by channel (0 = all channels) |
+// | page | int32 | No | Page number, starting from 1 |
+// | page_size | int32 | No | Items per page |
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | rules | NotificationRule[] | List of rules |
+// | total | int32 | Total count matching filters |
+// | page | int32 | Current page |
+// | page_size | int32 | Items per page |
 func (c *BackofficeNotificationHTTPClientImpl) ListNotificationRules(ctx context.Context, in *v1.ListNotificationRulesRequest, opts ...http.CallOption) (*v1.ListNotificationRulesResponse, error) {
 	var out v1.ListNotificationRulesResponse
 	pattern := "/v1/backoffice/notification/rule/list"
@@ -375,7 +1059,74 @@ func (c *BackofficeNotificationHTTPClientImpl) ListNotificationRules(ctx context
 	return &out, nil
 }
 
-// SaveChannelRules Save all rules for a channel (batch create/update/delete)
+// SaveChannelRules Save all rules for a channel (batch create/update/delete).
+//
+// This is a full replacement operation for a channel's rules:
+// - Rules with `id = 0` are created as new rules
+// - Rules with `id > 0` are updated
+// - Existing rules NOT included in the request are deleted
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | channel_id | int64 | Yes | Channel to save rules for |
+// | rules | NotificationRuleInput[] | Yes | Full list of rules for this channel |
+//
+// ### NotificationRuleInput
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | id | int64 | No | `0` = create new, `>0` = update existing |
+// | name | string | Yes | Display name for the rule |
+// | message_type | MessageType | Yes | Event type to match (see enum above) |
+// | rule_type | RuleType | Yes | `RULE_TYPE_GENERIC` (1) or `RULE_TYPE_CURRENCY_THRESHOLD` (2) |
+// | currency_conditions | CurrencyCondition[] | No | Required when `rule_type = RULE_TYPE_CURRENCY_THRESHOLD` |
+// | enabled | bool | No | Whether the rule is active |
+//
+// ### CurrencyCondition
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | currency | string | Currency code, e.g. `"USD"`, `"BTC"`, or `"*"` (wildcard for all) |
+// | min_amount | string | Minimum amount threshold (decimal string, e.g. `"1000.00"`) |
+// | min_odds | string | Minimum odds threshold (for `MESSAGE_TYPE_LARGE_WIN` only) |
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | rules | NotificationRule[] | The saved rules with generated IDs and timestamps |
+//
+// ## Example
+//
+// ```json
+// // Request — set up large deposit + withdrawal alerts for a channel
+// {
+//   "channel_id": 42,
+//   "rules": [
+//     {
+//       "id": 0,
+//       "name": "Large USD Deposits",
+//       "message_type": 3,
+//       "rule_type": 2,
+//       "currency_conditions": [
+//         { "currency": "USD", "min_amount": "5000.00" },
+//         { "currency": "EUR", "min_amount": "4500.00" }
+//       ],
+//       "enabled": true
+//     },
+//     {
+//       "id": 0,
+//       "name": "All Withdrawals",
+//       "message_type": 1,
+//       "rule_type": 1,
+//       "enabled": true
+//     }
+//   ]
+// }
+// ```
 func (c *BackofficeNotificationHTTPClientImpl) SaveChannelRules(ctx context.Context, in *v1.SaveChannelRulesRequest, opts ...http.CallOption) (*v1.SaveChannelRulesResponse, error) {
 	var out v1.SaveChannelRulesResponse
 	pattern := "/v1/backoffice/notification/rule/save"
@@ -389,7 +1140,25 @@ func (c *BackofficeNotificationHTTPClientImpl) SaveChannelRules(ctx context.Cont
 	return &out, nil
 }
 
-// TestNotificationChannel Test a notification channel by sending a test message
+// TestNotificationChannel Test a notification channel by sending a test message.
+//
+// Sends a test message through the channel to verify configuration is correct.
+// Does not require the channel to be enabled.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | channel_id | int64 | Yes | Channel ID to test |
+// | test_message | string | No | Custom message to send. If empty, a default test message is used |
+//
+// ## Response
+//
+// | Field | Type | Description |
+// |-------|------|-------------|
+// | success | bool | Whether the test message was delivered successfully |
+// | error_message | string | Error details if delivery failed |
 func (c *BackofficeNotificationHTTPClientImpl) TestNotificationChannel(ctx context.Context, in *v1.TestNotificationChannelRequest, opts ...http.CallOption) (*v1.TestNotificationChannelResponse, error) {
 	var out v1.TestNotificationChannelResponse
 	pattern := "/v1/backoffice/notification/channel/test"
@@ -403,7 +1172,21 @@ func (c *BackofficeNotificationHTTPClientImpl) TestNotificationChannel(ctx conte
 	return &out, nil
 }
 
-// UpdateNotificationChannel Update a notification channel
+// UpdateNotificationChannel Partially update a notification channel. Only provided fields are updated.
+//
+// ## Request body
+//
+// | Field | Type | Required | Description |
+// |-------|------|----------|-------------|
+// | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+// | channel_id | int64 | Yes | Channel ID to update |
+// | name | string | No | New display name |
+// | config | ChannelConfig | No | New channel config (replaces existing) |
+// | enabled | bool | No | Enable or disable |
+//
+// ## Response
+//
+// Empty on success.
 func (c *BackofficeNotificationHTTPClientImpl) UpdateNotificationChannel(ctx context.Context, in *v1.UpdateNotificationChannelRequest, opts ...http.CallOption) (*v1.UpdateNotificationChannelResponse, error) {
 	var out v1.UpdateNotificationChannelResponse
 	pattern := "/v1/backoffice/notification/channel/update"

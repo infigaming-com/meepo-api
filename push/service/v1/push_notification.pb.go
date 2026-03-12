@@ -22,12 +22,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Supported notification channel types.
 type ChannelType int32
 
 const (
 	ChannelType_CHANNEL_TYPE_UNSPECIFIED ChannelType = 0
-	ChannelType_CHANNEL_TYPE_TELEGRAM    ChannelType = 1
-	ChannelType_CHANNEL_TYPE_SLACK       ChannelType = 2
+	// Telegram Bot API
+	ChannelType_CHANNEL_TYPE_TELEGRAM ChannelType = 1
+	// Slack Incoming Webhook
+	ChannelType_CHANNEL_TYPE_SLACK ChannelType = 2
 )
 
 // Enum value maps for ChannelType.
@@ -71,11 +74,14 @@ func (ChannelType) EnumDescriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{0}
 }
 
+// Notification rule types that determine how matching is performed.
 type RuleType int32
 
 const (
-	RuleType_RULE_TYPE_UNSPECIFIED        RuleType = 0
-	RuleType_RULE_TYPE_GENERIC            RuleType = 1
+	RuleType_RULE_TYPE_UNSPECIFIED RuleType = 0
+	// Simple on/off rule with no amount filtering
+	RuleType_RULE_TYPE_GENERIC RuleType = 1
+	// Rule with per-currency amount thresholds
 	RuleType_RULE_TYPE_CURRENCY_THRESHOLD RuleType = 2
 )
 
@@ -120,15 +126,21 @@ func (RuleType) EnumDescriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{1}
 }
 
+// Event categories that can trigger notifications.
 type MessageType int32
 
 const (
-	MessageType_MESSAGE_TYPE_UNSPECIFIED           MessageType = 0
+	MessageType_MESSAGE_TYPE_UNSPECIFIED MessageType = 0
+	// Withdrawal event notification
 	MessageType_MESSAGE_TYPE_WITHDRAW_NOTIFICATION MessageType = 1
-	MessageType_MESSAGE_TYPE_DEPOSIT_NOTIFICATION  MessageType = 2
-	MessageType_MESSAGE_TYPE_LARGE_DEPOSIT         MessageType = 3
-	MessageType_MESSAGE_TYPE_LARGE_BET             MessageType = 4
-	MessageType_MESSAGE_TYPE_LARGE_WIN             MessageType = 5
+	// Deposit event notification
+	MessageType_MESSAGE_TYPE_DEPOSIT_NOTIFICATION MessageType = 2
+	// Deposit exceeding a configured threshold
+	MessageType_MESSAGE_TYPE_LARGE_DEPOSIT MessageType = 3
+	// Bet exceeding a configured threshold
+	MessageType_MESSAGE_TYPE_LARGE_BET MessageType = 4
+	// Win exceeding a configured threshold
+	MessageType_MESSAGE_TYPE_LARGE_WIN MessageType = 5
 )
 
 // Enum value maps for MessageType.
@@ -178,13 +190,17 @@ func (MessageType) EnumDescriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{2}
 }
 
+// Telegram channel configuration.
 type TelegramChannelConfig struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	BotToken       string                 `protobuf:"bytes,1,opt,name=bot_token,json=botToken,proto3" json:"bot_token,omitempty"`
-	BotTokenMasked string                 `protobuf:"bytes,2,opt,name=bot_token_masked,json=botTokenMasked,proto3" json:"bot_token_masked,omitempty"` // For response only
-	ChatId         string                 `protobuf:"bytes,3,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Telegram Bot API token (e.g., "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11")
+	BotToken string `protobuf:"bytes,1,opt,name=bot_token,json=botToken,proto3" json:"bot_token,omitempty"`
+	// Masked bot token for display purposes (response only, read-only)
+	BotTokenMasked string `protobuf:"bytes,2,opt,name=bot_token_masked,json=botTokenMasked,proto3" json:"bot_token_masked,omitempty"`
+	// Target Telegram chat or group ID (e.g., "-1001234567890")
+	ChatId        string `protobuf:"bytes,3,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TelegramChannelConfig) Reset() {
@@ -238,10 +254,13 @@ func (x *TelegramChannelConfig) GetChatId() string {
 	return ""
 }
 
+// Slack channel configuration.
 type SlackChannelConfig struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	WebhookUrl       string                 `protobuf:"bytes,1,opt,name=webhook_url,json=webhookUrl,proto3" json:"webhook_url,omitempty"`
-	WebhookUrlMasked string                 `protobuf:"bytes,2,opt,name=webhook_url_masked,json=webhookUrlMasked,proto3" json:"webhook_url_masked,omitempty"` // For response only
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Slack incoming webhook URL (e.g., "https://hooks.slack.com/services/T.../B.../xxx")
+	WebhookUrl string `protobuf:"bytes,1,opt,name=webhook_url,json=webhookUrl,proto3" json:"webhook_url,omitempty"`
+	// Masked webhook URL for display purposes (response only, read-only)
+	WebhookUrlMasked string `protobuf:"bytes,2,opt,name=webhook_url_masked,json=webhookUrlMasked,proto3" json:"webhook_url_masked,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -290,10 +309,13 @@ func (x *SlackChannelConfig) GetWebhookUrlMasked() string {
 	return ""
 }
 
+// Channel-specific configuration. Provide one of the nested configs based on channel_type.
 type ChannelConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Telegram      *TelegramChannelConfig `protobuf:"bytes,1,opt,name=telegram,proto3" json:"telegram,omitempty"`
-	Slack         *SlackChannelConfig    `protobuf:"bytes,2,opt,name=slack,proto3" json:"slack,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Telegram configuration. Required when channel_type = CHANNEL_TYPE_TELEGRAM
+	Telegram *TelegramChannelConfig `protobuf:"bytes,1,opt,name=telegram,proto3" json:"telegram,omitempty"`
+	// Slack configuration. Required when channel_type = CHANNEL_TYPE_SLACK
+	Slack         *SlackChannelConfig `protobuf:"bytes,2,opt,name=slack,proto3" json:"slack,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -342,16 +364,25 @@ func (x *ChannelConfig) GetSlack() *SlackChannelConfig {
 	return nil
 }
 
+// A configured notification delivery endpoint.
 type NotificationChannel struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ChannelType   ChannelType            `protobuf:"varint,3,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType" json:"channel_type,omitempty"`
-	Config        *ChannelConfig         `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
-	Enabled       bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     int64                  `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	IsInherited   bool                   `protobuf:"varint,8,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"` // True if from system/parent config
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique channel ID
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Display name for the channel
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Channel type: CHANNEL_TYPE_TELEGRAM (1) or CHANNEL_TYPE_SLACK (2)
+	ChannelType ChannelType `protobuf:"varint,3,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType" json:"channel_type,omitempty"`
+	// Channel-specific configuration. Sensitive fields (bot_token, webhook_url) are masked in responses
+	Config *ChannelConfig `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
+	// Whether the channel is active and will deliver notifications
+	Enabled bool `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Unix timestamp of creation
+	CreatedAt int64 `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Unix timestamp of last update
+	UpdatedAt int64 `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// True if this channel is inherited from a parent operator level (system/retailer/company)
+	IsInherited   bool `protobuf:"varint,8,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -442,11 +473,15 @@ func (x *NotificationChannel) GetIsInherited() bool {
 	return false
 }
 
+// Per-currency threshold condition for currency-based notification rules.
 type CurrencyCondition struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`                    // e.g., "USD", "BTC", "*" (wildcard)
-	MinAmount     string                 `protobuf:"bytes,2,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"` // Decimal string
-	MinOdds       string                 `protobuf:"bytes,3,opt,name=min_odds,json=minOdds,proto3" json:"min_odds,omitempty"`       // For large_win only
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Currency code (e.g., "USD", "BTC") or "*" for wildcard matching all currencies
+	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Minimum amount threshold as a decimal string (e.g., "1000.00")
+	MinAmount string `protobuf:"bytes,2,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	// Minimum odds threshold as a decimal string (applicable to MESSAGE_TYPE_LARGE_WIN only)
+	MinOdds       string `protobuf:"bytes,3,opt,name=min_odds,json=minOdds,proto3" json:"min_odds,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -502,20 +537,31 @@ func (x *CurrencyCondition) GetMinOdds() string {
 	return ""
 }
 
+// A notification rule that defines when a channel should receive an alert.
 type NotificationRule struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Id                 int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	MessageType        MessageType            `protobuf:"varint,3,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType" json:"message_type,omitempty"` // Changed from string to enum
-	RuleType           RuleType               `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
-	ChannelId          int64                  `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"` // Single channel (was channel_ids array)
-	CurrencyConditions []*CurrencyCondition   `protobuf:"bytes,6,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
-	Enabled            bool                   `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	CreatedAt          int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          int64                  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	IsInherited        bool                   `protobuf:"varint,10,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique rule ID
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Display name for the rule
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Event type that triggers this rule (e.g., MESSAGE_TYPE_LARGE_DEPOSIT)
+	MessageType MessageType `protobuf:"varint,3,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType" json:"message_type,omitempty"`
+	// Rule type: RULE_TYPE_GENERIC (simple on/off) or RULE_TYPE_CURRENCY_THRESHOLD (with amount filters)
+	RuleType RuleType `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
+	// The channel this rule is attached to
+	ChannelId int64 `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Per-currency threshold conditions. Only used when rule_type = RULE_TYPE_CURRENCY_THRESHOLD
+	CurrencyConditions []*CurrencyCondition `protobuf:"bytes,6,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
+	// Whether the rule is active
+	Enabled bool `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Unix timestamp of creation
+	CreatedAt int64 `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Unix timestamp of last update
+	UpdatedAt int64 `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// True if this rule is inherited from a parent operator level
+	IsInherited   bool `protobuf:"varint,10,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NotificationRule) Reset() {
@@ -618,17 +664,23 @@ func (x *NotificationRule) GetIsInherited() bool {
 	return false
 }
 
-// Input for creating/updating rules in batch
+// Input for creating or updating a notification rule in a batch save operation.
 type NotificationRuleInput struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Id                 int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // 0 = new rule, >0 = update existing
-	Name               string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	MessageType        MessageType            `protobuf:"varint,3,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType" json:"message_type,omitempty"`
-	RuleType           RuleType               `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
-	CurrencyConditions []*CurrencyCondition   `protobuf:"bytes,5,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
-	Enabled            bool                   `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Rule ID: 0 = create new rule, >0 = update existing rule
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Display name for the rule
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Event type that triggers this rule
+	MessageType MessageType `protobuf:"varint,3,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType" json:"message_type,omitempty"`
+	// Rule type: RULE_TYPE_GENERIC (1) or RULE_TYPE_CURRENCY_THRESHOLD (2)
+	RuleType RuleType `protobuf:"varint,4,opt,name=rule_type,json=ruleType,proto3,enum=api.push.service.v1.RuleType" json:"rule_type,omitempty"`
+	// Per-currency threshold conditions. Required when rule_type = RULE_TYPE_CURRENCY_THRESHOLD
+	CurrencyConditions []*CurrencyCondition `protobuf:"bytes,5,rep,name=currency_conditions,json=currencyConditions,proto3" json:"currency_conditions,omitempty"`
+	// Whether the rule is active
+	Enabled       bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NotificationRuleInput) Reset() {
@@ -703,12 +755,15 @@ func (x *NotificationRuleInput) GetEnabled() bool {
 	return false
 }
 
-// Message type info for frontend dropdown
+// Metadata about a supported message type, used for building frontend dropdowns.
 type MessageTypeInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Value         MessageType            `protobuf:"varint,1,opt,name=value,proto3,enum=api.push.service.v1.MessageType" json:"value,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enum value (e.g., MESSAGE_TYPE_LARGE_DEPOSIT = 3)
+	Value MessageType `protobuf:"varint,1,opt,name=value,proto3,enum=api.push.service.v1.MessageType" json:"value,omitempty"`
+	// Enum name (e.g., "MESSAGE_TYPE_LARGE_DEPOSIT")
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Human-readable display name (e.g., "Large Deposit")
+	DisplayName   string `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -764,15 +819,21 @@ func (x *MessageTypeInfo) GetDisplayName() string {
 	return ""
 }
 
+// Create a new notification channel.
 type CreateNotificationChannelRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Name                  string                  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ChannelType           ChannelType             `protobuf:"varint,3,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType" json:"channel_type,omitempty"`
-	Config                *ChannelConfig          `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
-	Enabled               bool                    `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Display name for the channel
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Channel type: CHANNEL_TYPE_TELEGRAM (1) or CHANNEL_TYPE_SLACK (2)
+	ChannelType ChannelType `protobuf:"varint,3,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType" json:"channel_type,omitempty"`
+	// Channel-specific configuration. Provide telegram or slack config based on channel_type
+	Config *ChannelConfig `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
+	// Whether the channel is active. Default: false
+	Enabled       bool `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateNotificationChannelRequest) Reset() {
@@ -840,9 +901,11 @@ func (x *CreateNotificationChannelRequest) GetEnabled() bool {
 	return false
 }
 
+// Response for CreateNotificationChannel.
 type CreateNotificationChannelResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channel       *NotificationChannel   `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The created channel with generated ID and timestamps
+	Channel       *NotificationChannel `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -884,16 +947,23 @@ func (x *CreateNotificationChannelResponse) GetChannel() *NotificationChannel {
 	return nil
 }
 
+// List notification channels with pagination and optional filters.
 type ListNotificationChannelsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelType           *ChannelType            `protobuf:"varint,2,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType,oneof" json:"channel_type,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	IncludeInherited      bool                    `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"` // Include system/parent channels
-	Page                  int32                   `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by channel type (omit to list all types)
+	ChannelType *ChannelType `protobuf:"varint,2,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType,oneof" json:"channel_type,omitempty"`
+	// Filter by enabled status (omit to list all)
+	Enabled *bool `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// If true, include channels inherited from parent operator levels (system/retailer/company)
+	IncludeInherited bool `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
+	// Page number, starting from 1
+	Page int32 `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize      int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListNotificationChannelsRequest) Reset() {
@@ -968,12 +1038,17 @@ func (x *ListNotificationChannelsRequest) GetPageSize() int32 {
 	return 0
 }
 
+// Response for ListNotificationChannels.
 type ListNotificationChannelsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channels      []*NotificationChannel `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of channels matching the filters
+	Channels []*NotificationChannel `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
+	// Total count of channels matching the filters
+	Total int32 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize      int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1036,12 +1111,15 @@ func (x *ListNotificationChannelsResponse) GetPageSize() int32 {
 	return 0
 }
 
+// Get a specific notification channel by ID.
 type GetNotificationChannelRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelId             int64                   `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Channel ID to retrieve
+	ChannelId     int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetNotificationChannelRequest) Reset() {
@@ -1088,9 +1166,11 @@ func (x *GetNotificationChannelRequest) GetChannelId() int64 {
 	return 0
 }
 
+// Response for GetNotificationChannel.
 type GetNotificationChannelResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channel       *NotificationChannel   `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The channel details. Sensitive fields (bot_token, webhook_url) are masked
+	Channel       *NotificationChannel `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1132,15 +1212,21 @@ func (x *GetNotificationChannelResponse) GetChannel() *NotificationChannel {
 	return nil
 }
 
+// Partially update a notification channel. Only provided fields are updated.
 type UpdateNotificationChannelRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelId             int64                   `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Name                  *string                 `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Config                *ChannelConfig          `protobuf:"bytes,4,opt,name=config,proto3,oneof" json:"config,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Channel ID to update
+	ChannelId int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// New display name (optional)
+	Name *string `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// New channel configuration (optional, replaces existing config entirely)
+	Config *ChannelConfig `protobuf:"bytes,4,opt,name=config,proto3,oneof" json:"config,omitempty"`
+	// Enable or disable the channel (optional)
+	Enabled       *bool `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateNotificationChannelRequest) Reset() {
@@ -1208,6 +1294,7 @@ func (x *UpdateNotificationChannelRequest) GetEnabled() bool {
 	return false
 }
 
+// Response for UpdateNotificationChannel. Empty on success.
 type UpdateNotificationChannelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1244,12 +1331,15 @@ func (*UpdateNotificationChannelResponse) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{15}
 }
 
+// Delete a notification channel and all its associated rules.
 type DeleteNotificationChannelRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelId             int64                   `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Channel ID to delete
+	ChannelId     int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteNotificationChannelRequest) Reset() {
@@ -1296,6 +1386,7 @@ func (x *DeleteNotificationChannelRequest) GetChannelId() int64 {
 	return 0
 }
 
+// Response for DeleteNotificationChannel. Empty on success.
 type DeleteNotificationChannelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1332,13 +1423,17 @@ func (*DeleteNotificationChannelResponse) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{17}
 }
 
+// Test a notification channel by sending a test message.
 type TestNotificationChannelRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelId             int64                   `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	TestMessage           string                  `protobuf:"bytes,3,opt,name=test_message,json=testMessage,proto3" json:"test_message,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Channel ID to test
+	ChannelId int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Custom test message. If empty, a default test message is used
+	TestMessage   string `protobuf:"bytes,3,opt,name=test_message,json=testMessage,proto3" json:"test_message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TestNotificationChannelRequest) Reset() {
@@ -1392,10 +1487,13 @@ func (x *TestNotificationChannelRequest) GetTestMessage() string {
 	return ""
 }
 
+// Response for TestNotificationChannel.
 type TestNotificationChannelResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrorMessage  string                 `protobuf:"bytes,2,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether the test message was delivered successfully
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	// Error details if delivery failed (empty on success)
+	ErrorMessage  string `protobuf:"bytes,2,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1444,13 +1542,19 @@ func (x *TestNotificationChannelResponse) GetErrorMessage() string {
 	return ""
 }
 
+// Save all rules for a channel (batch create/update/delete).
+// This is a full replacement operation: rules with id=0 are created,
+// rules with id>0 are updated, and existing rules NOT in the request are deleted.
 type SaveChannelRulesRequest struct {
-	state                 protoimpl.MessageState   `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext  `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelId             int64                    `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Rules                 []*NotificationRuleInput `protobuf:"bytes,3,rep,name=rules,proto3" json:"rules,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Channel ID to save rules for
+	ChannelId int64 `protobuf:"varint,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Full list of rules for this channel. Omitted existing rules will be deleted
+	Rules         []*NotificationRuleInput `protobuf:"bytes,3,rep,name=rules,proto3" json:"rules,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SaveChannelRulesRequest) Reset() {
@@ -1504,9 +1608,11 @@ func (x *SaveChannelRulesRequest) GetRules() []*NotificationRuleInput {
 	return nil
 }
 
+// Response for SaveChannelRules.
 type SaveChannelRulesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rules         []*NotificationRule    `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The saved rules with generated IDs and timestamps
+	Rules         []*NotificationRule `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1548,17 +1654,25 @@ func (x *SaveChannelRulesResponse) GetRules() []*NotificationRule {
 	return nil
 }
 
+// List notification rules with pagination and optional filters.
 type ListNotificationRulesRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	MessageType           *MessageType            `protobuf:"varint,2,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType,oneof" json:"message_type,omitempty"`
-	Enabled               *bool                   `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	IncludeInherited      bool                    `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
-	ChannelId             int64                   `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"` // Filter by channel
-	Page                  int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize              int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Filter by message type (omit to list all types)
+	MessageType *MessageType `protobuf:"varint,2,opt,name=message_type,json=messageType,proto3,enum=api.push.service.v1.MessageType,oneof" json:"message_type,omitempty"`
+	// Filter by enabled status (omit to list all)
+	Enabled *bool `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// If true, include rules inherited from parent operator levels
+	IncludeInherited bool `protobuf:"varint,4,opt,name=include_inherited,json=includeInherited,proto3" json:"include_inherited,omitempty"`
+	// Filter by channel ID (0 = all channels)
+	ChannelId int64 `protobuf:"varint,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Page number, starting from 1
+	Page int32 `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize      int32 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListNotificationRulesRequest) Reset() {
@@ -1640,12 +1754,17 @@ func (x *ListNotificationRulesRequest) GetPageSize() int32 {
 	return 0
 }
 
+// Response for ListNotificationRules.
 type ListNotificationRulesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rules         []*NotificationRule    `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of rules matching the filters
+	Rules []*NotificationRule `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
+	// Total count of rules matching the filters
+	Total int32 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize      int32 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1708,6 +1827,7 @@ func (x *ListNotificationRulesResponse) GetPageSize() int32 {
 	return 0
 }
 
+// Get supported message types. No parameters required.
 type GetSupportedMessageTypesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1744,9 +1864,11 @@ func (*GetSupportedMessageTypesRequest) Descriptor() ([]byte, []int) {
 	return file_push_service_v1_push_notification_proto_rawDescGZIP(), []int{24}
 }
 
+// Response for GetSupportedMessageTypes.
 type GetSupportedMessageTypesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MessageTypes  []*MessageTypeInfo     `protobuf:"bytes,1,rep,name=message_types,json=messageTypes,proto3" json:"message_types,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of all supported message types with display names
+	MessageTypes  []*MessageTypeInfo `protobuf:"bytes,1,rep,name=message_types,json=messageTypes,proto3" json:"message_types,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1788,13 +1910,17 @@ func (x *GetSupportedMessageTypesResponse) GetMessageTypes() []*MessageTypeInfo 
 	return nil
 }
 
+// Send a message to one or more channels.
 type SendToChannelsRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context. If omitted, defaults to the current logged-in operator
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	ChannelIds            []int64                 `protobuf:"varint,2,rep,packed,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
-	Message               string                  `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// List of channel IDs to send the message to
+	ChannelIds []int64 `protobuf:"varint,2,rep,packed,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
+	// Message content to send
+	Message       string `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SendToChannelsRequest) Reset() {
@@ -1848,13 +1974,19 @@ func (x *SendToChannelsRequest) GetMessage() string {
 	return ""
 }
 
+// Per-channel delivery result.
 type ChannelDeliveryResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     int64                  `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	ChannelName   string                 `protobuf:"bytes,2,opt,name=channel_name,json=channelName,proto3" json:"channel_name,omitempty"`
-	ChannelType   ChannelType            `protobuf:"varint,3,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType" json:"channel_type,omitempty"`
-	Success       bool                   `protobuf:"varint,4,opt,name=success,proto3" json:"success,omitempty"`
-	ErrorMessage  string                 `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Channel ID
+	ChannelId int64 `protobuf:"varint,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Channel display name
+	ChannelName string `protobuf:"bytes,2,opt,name=channel_name,json=channelName,proto3" json:"channel_name,omitempty"`
+	// Channel type
+	ChannelType ChannelType `protobuf:"varint,3,opt,name=channel_type,json=channelType,proto3,enum=api.push.service.v1.ChannelType" json:"channel_type,omitempty"`
+	// Whether delivery was successful
+	Success bool `protobuf:"varint,4,opt,name=success,proto3" json:"success,omitempty"`
+	// Error details if delivery failed (empty on success)
+	ErrorMessage  string `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1924,8 +2056,10 @@ func (x *ChannelDeliveryResult) GetErrorMessage() string {
 	return ""
 }
 
+// Response for SendToChannels.
 type SendToChannelsResponse struct {
-	state           protoimpl.MessageState   `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Per-channel delivery results
 	DeliveryResults []*ChannelDeliveryResult `protobuf:"bytes,1,rep,name=delivery_results,json=deliveryResults,proto3" json:"delivery_results,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
