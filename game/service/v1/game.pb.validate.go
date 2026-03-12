@@ -792,6 +792,8 @@ func (m *GameFilter) validate(all bool) error {
 
 	// no validation rules for Name
 
+	// no validation rules for Country
+
 	if len(errors) > 0 {
 		return GameFilterMultiError(errors)
 	}
@@ -2399,6 +2401,10 @@ func (m *ListGamesRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.ShowBlocked != nil {
+		// no validation rules for ShowBlocked
 	}
 
 	if len(errors) > 0 {

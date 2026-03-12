@@ -24378,6 +24378,9 @@ components:
                 name:
                     type: string
                     description: 'name: game name'
+                country:
+                    type: string
+                    description: 'country: 用户所在国家（2字母ISO代码，如 "US"），用于 show_blocked 过滤'
         api.game.service.v1.GameInfo:
             type: object
             properties:
@@ -24436,6 +24439,10 @@ components:
                     type: boolean
                 restrictions:
                     type: string
+                restrictedCountries:
+                    type: array
+                    items:
+                        type: string
         api.game.service.v1.GameSort:
             type: object
             properties:
@@ -25020,6 +25027,9 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.game.service.v1.GameSort'
                     description: sort
+                showBlocked:
+                    type: boolean
+                    description: 'show_blocked: 是否显示被地区限制的游戏（默认 true 显示全部；false 过滤掉被屏蔽的游戏）'
         api.game.service.v1.ListGamesResponse:
             type: object
             properties:
