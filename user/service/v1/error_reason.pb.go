@@ -205,6 +205,7 @@ const (
 	ErrorReason_CREATE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10406
 	ErrorReason_UPDATE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10407
 	ErrorReason_DELETE_TELEGRAM_CONFIG_FAILED  ErrorReason = 10408
+	ErrorReason_INVALID_OPERATOR_NAME          ErrorReason = 10500
 )
 
 // Enum value maps for ErrorReason.
@@ -385,6 +386,7 @@ var (
 		10406: "CREATE_TELEGRAM_CONFIG_FAILED",
 		10407: "UPDATE_TELEGRAM_CONFIG_FAILED",
 		10408: "DELETE_TELEGRAM_CONFIG_FAILED",
+		10500: "INVALID_OPERATOR_NAME",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -562,6 +564,7 @@ var (
 		"CREATE_TELEGRAM_CONFIG_FAILED":                  10406,
 		"UPDATE_TELEGRAM_CONFIG_FAILED":                  10407,
 		"DELETE_TELEGRAM_CONFIG_FAILED":                  10408,
+		"INVALID_OPERATOR_NAME":                          10500,
 	}
 )
 
@@ -596,7 +599,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa7.\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc3.\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -772,7 +775,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eTELEGRAM_CONFIG_ALREADY_EXISTS\x10\xa5Q\x1a\x04\xa8E\x99\x03\x12\"\n" +
 	"\x1dCREATE_TELEGRAM_CONFIG_FAILED\x10\xa6Q\x12\"\n" +
 	"\x1dUPDATE_TELEGRAM_CONFIG_FAILED\x10\xa7Q\x12\"\n" +
-	"\x1dDELETE_TELEGRAM_CONFIG_FAILED\x10\xa8Q\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1dDELETE_TELEGRAM_CONFIG_FAILED\x10\xa8Q\x12\x1a\n" +
+	"\x15INVALID_OPERATOR_NAME\x10\x84R\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
