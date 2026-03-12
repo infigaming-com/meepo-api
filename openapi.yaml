@@ -4011,7 +4011,78 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Create a new notification channel
+            description: |-
+                Create a new notification channel.
+
+                 Creates a Telegram or Slack channel that can receive notification messages.
+                 After creation, use SaveChannelRules to attach notification rules to this channel.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | name | string | Yes | Display name for the channel |
+                 | channel_type | ChannelType | Yes | `CHANNEL_TYPE_TELEGRAM` (1) or `CHANNEL_TYPE_SLACK` (2) |
+                 | config | ChannelConfig | Yes | Channel-specific configuration (see below) |
+                 | enabled | bool | No | Whether the channel is active. Default: false |
+
+                 ### ChannelConfig
+
+                 Provide **one of** the following based on `channel_type`:
+
+                 **Telegram** (`config.telegram`):
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | bot_token | string | Telegram Bot API token |
+                 | chat_id | string | Target chat/group ID |
+
+                 **Slack** (`config.slack`):
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | webhook_url | string | Slack incoming webhook URL |
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | channel | NotificationChannel | The created channel with generated `id` and timestamps |
+
+                 ## Example
+
+                 ```json
+                 // Request
+                 {
+                   "name": "Risk Alerts - Telegram",
+                   "channel_type": 1,
+                   "config": {
+                     "telegram": {
+                       "bot_token": "123456:ABC-DEF...",
+                       "chat_id": "-1001234567890"
+                     }
+                   },
+                   "enabled": true
+                 }
+
+                 // Response
+                 {
+                   "channel": {
+                     "id": 42,
+                     "name": "Risk Alerts - Telegram",
+                     "channel_type": 1,
+                     "config": {
+                       "telegram": {
+                         "bot_token_masked": "123***DEF...",
+                         "chat_id": "-1001234567890"
+                       }
+                     },
+                     "enabled": true,
+                     "created_at": 1710000000,
+                     "updated_at": 1710000000,
+                     "is_inherited": false
+                   }
+                 }
+                 ```
             operationId: BackofficeNotification_CreateNotificationChannel
             requestBody:
                 content:
@@ -4030,7 +4101,19 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Delete a notification channel
+            description: |-
+                Delete a notification channel and all its associated rules.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | channel_id | int64 | Yes | Channel ID to delete |
+
+                 ## Response
+
+                 Empty on success.
             operationId: BackofficeNotification_DeleteNotificationChannel
             requestBody:
                 content:
@@ -4049,7 +4132,21 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Get a specific notification channel
+            description: |-
+                Get a specific notification channel by ID.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | channel_id | int64 | Yes | Channel ID to retrieve |
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | channel | NotificationChannel | The channel details. Sensitive fields (bot_token, webhook_url) are masked |
             operationId: BackofficeNotification_GetNotificationChannel
             requestBody:
                 content:
@@ -4068,7 +4165,31 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: List notification channels with pagination
+            description: |-
+                List notification channels with pagination.
+
+                 Returns channels owned by or inherited to the current operator.
+                 Supports filtering by channel type and enabled status.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | channel_type | ChannelType | No | Filter by type (omit for all) |
+                 | enabled | bool | No | Filter by enabled status (omit for all) |
+                 | include_inherited | bool | No | If true, include channels from parent levels |
+                 | page | int32 | No | Page number, starting from 1 |
+                 | page_size | int32 | No | Items per page |
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | channels | NotificationChannel[] | List of channels |
+                 | total | int32 | Total count matching filters |
+                 | page | int32 | Current page |
+                 | page_size | int32 | Items per page |
             operationId: BackofficeNotification_ListNotificationChannels
             requestBody:
                 content:
@@ -4087,7 +4208,26 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Test a notification channel by sending a test message
+            description: |-
+                Test a notification channel by sending a test message.
+
+                 Sends a test message through the channel to verify configuration is correct.
+                 Does not require the channel to be enabled.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | channel_id | int64 | Yes | Channel ID to test |
+                 | test_message | string | No | Custom message to send. If empty, a default test message is used |
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | success | bool | Whether the test message was delivered successfully |
+                 | error_message | string | Error details if delivery failed |
             operationId: BackofficeNotification_TestNotificationChannel
             requestBody:
                 content:
@@ -4106,7 +4246,22 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Update a notification channel
+            description: |-
+                Partially update a notification channel. Only provided fields are updated.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | channel_id | int64 | Yes | Channel ID to update |
+                 | name | string | No | New display name |
+                 | config | ChannelConfig | No | New channel config (replaces existing) |
+                 | enabled | bool | No | Enable or disable |
+
+                 ## Response
+
+                 Empty on success.
             operationId: BackofficeNotification_UpdateNotificationChannel
             requestBody:
                 content:
@@ -4125,7 +4280,29 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Get supported message types for frontend dropdown
+            description: |-
+                Get supported message types for frontend dropdown.
+
+                 Returns the list of all available message types with display names,
+                 useful for building UI dropdowns/selectors.
+
+                 ## Request body
+
+                 Empty — no parameters required.
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | message_types | MessageTypeInfo[] | List of supported message types |
+
+                 ### MessageTypeInfo
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | value | MessageType | Enum value |
+                 | name | string | Enum name (e.g. `"MESSAGE_TYPE_LARGE_DEPOSIT"`) |
+                 | display_name | string | Human-readable name (e.g. `"Large Deposit"`) |
             operationId: BackofficeNotification_GetSupportedMessageTypes
             requestBody:
                 content:
@@ -4144,7 +4321,32 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: List notification rules with pagination
+            description: |-
+                List notification rules with pagination.
+
+                 Returns rules matching the given filters. Supports filtering by message type,
+                 enabled status, and channel.
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | message_type | MessageType | No | Filter by message type (omit for all) |
+                 | enabled | bool | No | Filter by enabled status (omit for all) |
+                 | include_inherited | bool | No | If true, include rules from parent levels |
+                 | channel_id | int64 | No | Filter by channel (0 = all channels) |
+                 | page | int32 | No | Page number, starting from 1 |
+                 | page_size | int32 | No | Items per page |
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | rules | NotificationRule[] | List of rules |
+                 | total | int32 | Total count matching filters |
+                 | page | int32 | Current page |
+                 | page_size | int32 | Items per page |
             operationId: BackofficeNotification_ListNotificationRules
             requestBody:
                 content:
@@ -4163,7 +4365,75 @@ paths:
         post:
             tags:
                 - BackofficeNotification
-            description: Save all rules for a channel (batch create/update/delete)
+            description: |-
+                Save all rules for a channel (batch create/update/delete).
+
+                 This is a full replacement operation for a channel's rules:
+                 - Rules with `id = 0` are created as new rules
+                 - Rules with `id > 0` are updated
+                 - Existing rules NOT included in the request are deleted
+
+                 ## Request body
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | target_operator_context | OperatorContext | No | Target operator. Defaults to logged-in operator |
+                 | channel_id | int64 | Yes | Channel to save rules for |
+                 | rules | NotificationRuleInput[] | Yes | Full list of rules for this channel |
+
+                 ### NotificationRuleInput
+
+                 | Field | Type | Required | Description |
+                 |-------|------|----------|-------------|
+                 | id | int64 | No | `0` = create new, `>0` = update existing |
+                 | name | string | Yes | Display name for the rule |
+                 | message_type | MessageType | Yes | Event type to match (see enum above) |
+                 | rule_type | RuleType | Yes | `RULE_TYPE_GENERIC` (1) or `RULE_TYPE_CURRENCY_THRESHOLD` (2) |
+                 | currency_conditions | CurrencyCondition[] | No | Required when `rule_type = RULE_TYPE_CURRENCY_THRESHOLD` |
+                 | enabled | bool | No | Whether the rule is active |
+
+                 ### CurrencyCondition
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | currency | string | Currency code, e.g. `"USD"`, `"BTC"`, or `"*"` (wildcard for all) |
+                 | min_amount | string | Minimum amount threshold (decimal string, e.g. `"1000.00"`) |
+                 | min_odds | string | Minimum odds threshold (for `MESSAGE_TYPE_LARGE_WIN` only) |
+
+                 ## Response
+
+                 | Field | Type | Description |
+                 |-------|------|-------------|
+                 | rules | NotificationRule[] | The saved rules with generated IDs and timestamps |
+
+                 ## Example
+
+                 ```json
+                 // Request — set up large deposit + withdrawal alerts for a channel
+                 {
+                   "channel_id": 42,
+                   "rules": [
+                     {
+                       "id": 0,
+                       "name": "Large USD Deposits",
+                       "message_type": 3,
+                       "rule_type": 2,
+                       "currency_conditions": [
+                         { "currency": "USD", "min_amount": "5000.00" },
+                         { "currency": "EUR", "min_amount": "4500.00" }
+                       ],
+                       "enabled": true
+                     },
+                     {
+                       "id": 0,
+                       "name": "All Withdrawals",
+                       "message_type": 1,
+                       "rule_type": 1,
+                       "enabled": true
+                     }
+                   ]
+                 }
+                 ```
             operationId: BackofficeNotification_SaveChannelRules
             requestBody:
                 content:
@@ -25527,32 +25797,48 @@ components:
             type: object
             properties:
                 telegram:
-                    $ref: '#/components/schemas/api.push.service.v1.TelegramChannelConfig'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.TelegramChannelConfig'
+                    description: Telegram configuration. Required when channel_type = CHANNEL_TYPE_TELEGRAM
                 slack:
-                    $ref: '#/components/schemas/api.push.service.v1.SlackChannelConfig'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.SlackChannelConfig'
+                    description: Slack configuration. Required when channel_type = CHANNEL_TYPE_SLACK
+            description: Channel-specific configuration. Provide one of the nested configs based on channel_type.
         api.push.service.v1.CreateNotificationChannelRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 name:
                     type: string
+                    description: Display name for the channel
                 channelType:
                     enum:
                         - CHANNEL_TYPE_UNSPECIFIED
                         - CHANNEL_TYPE_TELEGRAM
                         - CHANNEL_TYPE_SLACK
                     type: string
+                    description: 'Channel type: CHANNEL_TYPE_TELEGRAM (1) or CHANNEL_TYPE_SLACK (2)'
                     format: enum
                 config:
-                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                    description: Channel-specific configuration. Provide telegram or slack config based on channel_type
                 enabled:
                     type: boolean
+                    description: 'Whether the channel is active. Default: false'
+            description: Create a new notification channel.
         api.push.service.v1.CreateNotificationChannelResponse:
             type: object
             properties:
                 channel:
-                    $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                    description: The created channel with generated ID and timestamps
+            description: Response for CreateNotificationChannel.
         api.push.service.v1.CreateOTPProviderResponse:
             type: object
             properties:
@@ -25568,20 +25854,29 @@ components:
             properties:
                 currency:
                     type: string
+                    description: Currency code (e.g., "USD", "BTC") or "*" for wildcard matching all currencies
                 minAmount:
                     type: string
+                    description: Minimum amount threshold as a decimal string (e.g., "1000.00")
                 minOdds:
                     type: string
+                    description: Minimum odds threshold as a decimal string (applicable to MESSAGE_TYPE_LARGE_WIN only)
+            description: Per-currency threshold condition for currency-based notification rules.
         api.push.service.v1.DeleteNotificationChannelRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 channelId:
                     type: string
+                    description: Channel ID to delete
+            description: Delete a notification channel and all its associated rules.
         api.push.service.v1.DeleteNotificationChannelResponse:
             type: object
             properties: {}
+            description: Response for DeleteNotificationChannel. Empty on success.
         api.push.service.v1.DeleteOTPProviderResponse:
             type: object
             properties: {}
@@ -25592,14 +25887,21 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 channelId:
                     type: string
+                    description: Channel ID to retrieve
+            description: Get a specific notification channel by ID.
         api.push.service.v1.GetNotificationChannelResponse:
             type: object
             properties:
                 channel:
-                    $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                    description: The channel details. Sensitive fields (bot_token, webhook_url) are masked
+            description: Response for GetNotificationChannel.
         api.push.service.v1.GetOTPProviderResponse:
             type: object
             properties:
@@ -25613,6 +25915,7 @@ components:
         api.push.service.v1.GetSupportedMessageTypesRequest:
             type: object
             properties: {}
+            description: Get supported message types. No parameters required.
         api.push.service.v1.GetSupportedMessageTypesResponse:
             type: object
             properties:
@@ -25620,6 +25923,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.MessageTypeInfo'
+                    description: List of all supported message types with display names
+            description: Response for GetSupportedMessageTypes.
         api.push.service.v1.ListBetTickerConfigResponse:
             type: object
             properties:
@@ -25642,24 +25947,32 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 channelType:
                     enum:
                         - CHANNEL_TYPE_UNSPECIFIED
                         - CHANNEL_TYPE_TELEGRAM
                         - CHANNEL_TYPE_SLACK
                     type: string
+                    description: Filter by channel type (omit to list all types)
                     format: enum
                 enabled:
                     type: boolean
+                    description: Filter by enabled status (omit to list all)
                 includeInherited:
                     type: boolean
+                    description: If true, include channels inherited from parent operator levels (system/retailer/company)
                 page:
                     type: integer
+                    description: Page number, starting from 1
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
+            description: List notification channels with pagination and optional filters.
         api.push.service.v1.ListNotificationChannelsResponse:
             type: object
             properties:
@@ -25667,20 +25980,27 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
+                    description: List of channels matching the filters
                 total:
                     type: integer
+                    description: Total count of channels matching the filters
                     format: int32
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
+            description: Response for ListNotificationChannels.
         api.push.service.v1.ListNotificationRulesRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 messageType:
                     enum:
                         - MESSAGE_TYPE_UNSPECIFIED
@@ -25690,19 +26010,26 @@ components:
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
                     type: string
+                    description: Filter by message type (omit to list all types)
                     format: enum
                 enabled:
                     type: boolean
+                    description: Filter by enabled status (omit to list all)
                 includeInherited:
                     type: boolean
+                    description: If true, include rules inherited from parent operator levels
                 channelId:
                     type: string
+                    description: Filter by channel ID (0 = all channels)
                 page:
                     type: integer
+                    description: Page number, starting from 1
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
+            description: List notification rules with pagination and optional filters.
         api.push.service.v1.ListNotificationRulesResponse:
             type: object
             properties:
@@ -25710,15 +26037,20 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+                    description: List of rules matching the filters
                 total:
                     type: integer
+                    description: Total count of rules matching the filters
                     format: int32
                 page:
                     type: integer
+                    description: Current page number
                     format: int32
                 pageSize:
                     type: integer
+                    description: Number of items per page
                     format: int32
+            description: Response for ListNotificationRules.
         api.push.service.v1.ListOTPProvidersResponse:
             type: object
             properties:
@@ -25779,43 +26111,58 @@ components:
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
                     type: string
+                    description: Enum value (e.g., MESSAGE_TYPE_LARGE_DEPOSIT = 3)
                     format: enum
                 name:
                     type: string
+                    description: Enum name (e.g., "MESSAGE_TYPE_LARGE_DEPOSIT")
                 displayName:
                     type: string
-            description: Message type info for frontend dropdown
+                    description: Human-readable display name (e.g., "Large Deposit")
+            description: Metadata about a supported message type, used for building frontend dropdowns.
         api.push.service.v1.NotificationChannel:
             type: object
             properties:
                 id:
                     type: string
+                    description: Unique channel ID
                 name:
                     type: string
+                    description: Display name for the channel
                 channelType:
                     enum:
                         - CHANNEL_TYPE_UNSPECIFIED
                         - CHANNEL_TYPE_TELEGRAM
                         - CHANNEL_TYPE_SLACK
                     type: string
+                    description: 'Channel type: CHANNEL_TYPE_TELEGRAM (1) or CHANNEL_TYPE_SLACK (2)'
                     format: enum
                 config:
-                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                    description: Channel-specific configuration. Sensitive fields (bot_token, webhook_url) are masked in responses
                 enabled:
                     type: boolean
+                    description: Whether the channel is active and will deliver notifications
                 createdAt:
                     type: string
+                    description: Unix timestamp of creation
                 updatedAt:
                     type: string
+                    description: Unix timestamp of last update
                 isInherited:
                     type: boolean
+                    description: True if this channel is inherited from a parent operator level (system/retailer/company)
+            description: A configured notification delivery endpoint.
         api.push.service.v1.NotificationRule:
             type: object
             properties:
                 id:
                     type: string
+                    description: Unique rule ID
                 name:
                     type: string
+                    description: Display name for the rule
                 messageType:
                     enum:
                         - MESSAGE_TYPE_UNSPECIFIED
@@ -25825,6 +26172,7 @@ components:
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
                     type: string
+                    description: Event type that triggers this rule (e.g., MESSAGE_TYPE_LARGE_DEPOSIT)
                     format: enum
                 ruleType:
                     enum:
@@ -25832,28 +26180,38 @@ components:
                         - RULE_TYPE_GENERIC
                         - RULE_TYPE_CURRENCY_THRESHOLD
                     type: string
+                    description: 'Rule type: RULE_TYPE_GENERIC (simple on/off) or RULE_TYPE_CURRENCY_THRESHOLD (with amount filters)'
                     format: enum
                 channelId:
                     type: string
+                    description: The channel this rule is attached to
                 currencyConditions:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                    description: Per-currency threshold conditions. Only used when rule_type = RULE_TYPE_CURRENCY_THRESHOLD
                 enabled:
                     type: boolean
+                    description: Whether the rule is active
                 createdAt:
                     type: string
+                    description: Unix timestamp of creation
                 updatedAt:
                     type: string
+                    description: Unix timestamp of last update
                 isInherited:
                     type: boolean
+                    description: True if this rule is inherited from a parent operator level
+            description: A notification rule that defines when a channel should receive an alert.
         api.push.service.v1.NotificationRuleInput:
             type: object
             properties:
                 id:
                     type: string
+                    description: 'Rule ID: 0 = create new rule, >0 = update existing rule'
                 name:
                     type: string
+                    description: Display name for the rule
                 messageType:
                     enum:
                         - MESSAGE_TYPE_UNSPECIFIED
@@ -25863,6 +26221,7 @@ components:
                         - MESSAGE_TYPE_LARGE_BET
                         - MESSAGE_TYPE_LARGE_WIN
                     type: string
+                    description: Event type that triggers this rule
                     format: enum
                 ruleType:
                     enum:
@@ -25870,14 +26229,17 @@ components:
                         - RULE_TYPE_GENERIC
                         - RULE_TYPE_CURRENCY_THRESHOLD
                     type: string
+                    description: 'Rule type: RULE_TYPE_GENERIC (1) or RULE_TYPE_CURRENCY_THRESHOLD (2)'
                     format: enum
                 currencyConditions:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.CurrencyCondition'
+                    description: Per-currency threshold conditions. Required when rule_type = RULE_TYPE_CURRENCY_THRESHOLD
                 enabled:
                     type: boolean
-            description: Input for creating/updating rules in batch
+                    description: Whether the rule is active
+            description: Input for creating or updating a notification rule in a batch save operation.
         api.push.service.v1.OTPProviderInfo:
             type: object
             properties:
@@ -26005,13 +26367,21 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 channelId:
                     type: string
+                    description: Channel ID to save rules for
                 rules:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.NotificationRuleInput'
+                    description: Full list of rules for this channel. Omitted existing rules will be deleted
+            description: |-
+                Save all rules for a channel (batch create/update/delete).
+                 This is a full replacement operation: rules with id=0 are created,
+                 rules with id>0 are updated, and existing rules NOT in the request are deleted.
         api.push.service.v1.SaveChannelRulesResponse:
             type: object
             properties:
@@ -26019,13 +26389,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.push.service.v1.NotificationRule'
+                    description: The saved rules with generated IDs and timestamps
+            description: Response for SaveChannelRules.
         api.push.service.v1.SlackChannelConfig:
             type: object
             properties:
                 webhookUrl:
                     type: string
+                    description: Slack incoming webhook URL (e.g., "https://hooks.slack.com/services/T.../B.../xxx")
                 webhookUrlMasked:
                     type: string
+                    description: Masked webhook URL for display purposes (response only, read-only)
+            description: Slack channel configuration.
         api.push.service.v1.SyncOTPTemplateStatusResponse:
             type: object
             properties:
@@ -26051,26 +26426,38 @@ components:
             properties:
                 botToken:
                     type: string
+                    description: Telegram Bot API token (e.g., "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11")
                 botTokenMasked:
                     type: string
+                    description: Masked bot token for display purposes (response only, read-only)
                 chatId:
                     type: string
+                    description: Target Telegram chat or group ID (e.g., "-1001234567890")
+            description: Telegram channel configuration.
         api.push.service.v1.TestNotificationChannelRequest:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 channelId:
                     type: string
+                    description: Channel ID to test
                 testMessage:
                     type: string
+                    description: Custom test message. If empty, a default test message is used
+            description: Test a notification channel by sending a test message.
         api.push.service.v1.TestNotificationChannelResponse:
             type: object
             properties:
                 success:
                     type: boolean
+                    description: Whether the test message was delivered successfully
                 errorMessage:
                     type: string
+                    description: Error details if delivery failed (empty on success)
+            description: Response for TestNotificationChannel.
         api.push.service.v1.UpdateBetTickerConfigResponse:
             type: object
             properties: {}
@@ -26078,18 +26465,27 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context. If omitted, defaults to the current logged-in operator
                 channelId:
                     type: string
+                    description: Channel ID to update
                 name:
                     type: string
+                    description: New display name (optional)
                 config:
-                    $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.ChannelConfig'
+                    description: New channel configuration (optional, replaces existing config entirely)
                 enabled:
                     type: boolean
+                    description: Enable or disable the channel (optional)
+            description: Partially update a notification channel. Only provided fields are updated.
         api.push.service.v1.UpdateNotificationChannelResponse:
             type: object
             properties: {}
+            description: Response for UpdateNotificationChannel. Empty on success.
         api.push.service.v1.UpdateOTPProviderResponse:
             type: object
             properties: {}
@@ -32331,8 +32727,43 @@ tags:
     - name: BackofficeGame
     - name: BackofficeNotification
       description: |-
-        BackofficeNotification service
-         Provides HTTP APIs for notification channel and rule management
+        Notification channel and rule management service for backoffice.
+         Provides CRUD APIs for managing notification channels (Telegram, Slack) and
+         configuring notification rules that determine when and how alerts are sent
+         (e.g., large deposits, withdrawals, bets, wins).
+
+         ## Concepts
+
+         - **Channel**: A configured delivery endpoint (Telegram bot or Slack webhook) that receives notifications.
+         - **Rule**: A condition attached to a channel that defines which message types trigger a notification
+           and optional currency/amount thresholds.
+         - **Message Type**: The event category (withdraw, deposit, large deposit, large bet, large win).
+
+         ## Enums
+
+         **ChannelType**:
+         | Value | Name |
+         |-------|------|
+         | 0 | CHANNEL_TYPE_UNSPECIFIED |
+         | 1 | CHANNEL_TYPE_TELEGRAM |
+         | 2 | CHANNEL_TYPE_SLACK |
+
+         **MessageType**:
+         | Value | Name | Description |
+         |-------|------|-------------|
+         | 0 | MESSAGE_TYPE_UNSPECIFIED | |
+         | 1 | MESSAGE_TYPE_WITHDRAW_NOTIFICATION | Withdrawal event |
+         | 2 | MESSAGE_TYPE_DEPOSIT_NOTIFICATION | Deposit event |
+         | 3 | MESSAGE_TYPE_LARGE_DEPOSIT | Deposit exceeding threshold |
+         | 4 | MESSAGE_TYPE_LARGE_BET | Bet exceeding threshold |
+         | 5 | MESSAGE_TYPE_LARGE_WIN | Win exceeding threshold |
+
+         **RuleType**:
+         | Value | Name | Description |
+         |-------|------|-------------|
+         | 0 | RULE_TYPE_UNSPECIFIED | |
+         | 1 | RULE_TYPE_GENERIC | Simple on/off rule, no amount filter |
+         | 2 | RULE_TYPE_CURRENCY_THRESHOLD | Rule with per-currency amount thresholds |
     - name: BackofficeOAuth
       description: |-
         BackofficeOAuth service provides OAuth provider configuration management for operators.
