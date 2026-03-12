@@ -16832,6 +16832,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                targetAffiliateId:
+                    type: string
         api.backoffice.service.v1.ListAffiliateSnapshotReportRequest:
             type: object
             properties:
