@@ -728,12 +728,12 @@ func (x *GetVipConfigResponse) GetConfig() *v1.VipConfig {
 	return nil
 }
 
-// 手动调整用户VIP等级请求
+// Manually adjust user VIP level request
 type AdjustUserVipLevelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	TargetLevel   int64                  `protobuf:"varint,4,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`
-	IssueRewards  *bool                  `protobuf:"varint,5,opt,name=issue_rewards,json=issueRewards,proto3,oneof" json:"issue_rewards,omitempty"` // 是否发放跨越等级的升级奖励（默认 true）
+	IssueRewards  *bool                  `protobuf:"varint,5,opt,name=issue_rewards,json=issueRewards,proto3,oneof" json:"issue_rewards,omitempty"` // whether to issue upgrade rewards for crossed levels (default true)
 	Reason        string                 `protobuf:"bytes,7,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -797,7 +797,7 @@ func (x *AdjustUserVipLevelRequest) GetReason() string {
 	return ""
 }
 
-// 手动调整用户VIP等级响应
+// Manually adjust user VIP level response
 type AdjustUserVipLevelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OldLevel      int64                  `protobuf:"varint,1,opt,name=old_level,json=oldLevel,proto3" json:"old_level,omitempty"`
@@ -874,7 +874,7 @@ func (x *AdjustUserVipLevelResponse) GetXpAdjustment() string {
 	return ""
 }
 
-// 获取用户可选VIP等级列表请求
+// Get available VIP level options request
 type GetUserVipLevelOptionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -919,7 +919,7 @@ func (x *GetUserVipLevelOptionsRequest) GetUserId() int64 {
 	return 0
 }
 
-// 获取用户可选VIP等级列表响应
+// Get available VIP level options response
 type GetUserVipLevelOptionsResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	CurrentLevel   int64                  `protobuf:"varint,1,opt,name=current_level,json=currentLevel,proto3" json:"current_level,omitempty"`

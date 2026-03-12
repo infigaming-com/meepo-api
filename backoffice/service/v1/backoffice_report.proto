@@ -887,7 +887,7 @@ message CustomerRecordReportDetailResponse{
 }
 
 // ============================================================================
-// Commission Report APIs - Referral Tables (全民)
+// Commission Report APIs - Referral Tables
 // ============================================================================
 
 // VTG Report - New Subordinates Performance

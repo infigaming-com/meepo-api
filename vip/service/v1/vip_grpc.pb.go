@@ -60,15 +60,15 @@ type VipClient interface {
 	ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*ConfirmClaimVipRewardResponse, error)
 	RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...grpc.CallOption) (*RequestDailyLossbackResponse, error)
 	GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*GetDailyLossbackStatusResponse, error)
-	// 强制执行 VIP 奖励发放（跳过时间检查）
+	// Force execute VIP reward distribution (skip time check)
 	ForceRunVipRewards(ctx context.Context, in *ForceRunVipRewardsRequest, opts ...grpc.CallOption) (*ForceRunVipRewardsResponse, error)
-	// 批量获取用户VIP会员信息
+	// Batch get user VIP membership info
 	BatchGetVipMembers(ctx context.Context, in *BatchGetVipMembersRequest, opts ...grpc.CallOption) (*BatchGetVipMembersResponse, error)
-	// 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
+	// Get user VIP reward claim history (aggregated by type, converted to USD)
 	GetVipRewardHistory(ctx context.Context, in *GetVipRewardHistoryRequest, opts ...grpc.CallOption) (*GetVipRewardHistoryResponse, error)
-	// 手动调整用户VIP等级
+	// Manually adjust user VIP level
 	AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...grpc.CallOption) (*AdjustUserVipLevelResponse, error)
-	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	// Get available VIP level options for a user (for admin manual adjustment)
 	GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...grpc.CallOption) (*GetUserVipLevelOptionsResponse, error)
 }
 
@@ -299,15 +299,15 @@ type VipServer interface {
 	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*ConfirmClaimVipRewardResponse, error)
 	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*RequestDailyLossbackResponse, error)
 	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*GetDailyLossbackStatusResponse, error)
-	// 强制执行 VIP 奖励发放（跳过时间检查）
+	// Force execute VIP reward distribution (skip time check)
 	ForceRunVipRewards(context.Context, *ForceRunVipRewardsRequest) (*ForceRunVipRewardsResponse, error)
-	// 批量获取用户VIP会员信息
+	// Batch get user VIP membership info
 	BatchGetVipMembers(context.Context, *BatchGetVipMembersRequest) (*BatchGetVipMembersResponse, error)
-	// 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
+	// Get user VIP reward claim history (aggregated by type, converted to USD)
 	GetVipRewardHistory(context.Context, *GetVipRewardHistoryRequest) (*GetVipRewardHistoryResponse, error)
-	// 手动调整用户VIP等级
+	// Manually adjust user VIP level
 	AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error)
-	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	// Get available VIP level options for a user (for admin manual adjustment)
 	GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error)
 	mustEmbedUnimplementedVipServer()
 }

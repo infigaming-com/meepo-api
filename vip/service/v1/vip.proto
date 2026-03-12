@@ -50,23 +50,23 @@ service Vip {
   rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (GetDailyLossbackStatusResponse) {
   }
 
-  // 强制执行 VIP 奖励发放（跳过时间检查）
+  // Force execute VIP reward distribution (skip time check)
   rpc ForceRunVipRewards(ForceRunVipRewardsRequest) returns (ForceRunVipRewardsResponse) {
   }
 
-  // 批量获取用户VIP会员信息
+  // Batch get user VIP membership info
   rpc BatchGetVipMembers(BatchGetVipMembersRequest) returns (BatchGetVipMembersResponse) {
   }
 
-  // 获取用户VIP奖励领取历史（按类型汇总，转换为USD）
+  // Get user VIP reward claim history (aggregated by type, converted to USD)
   rpc GetVipRewardHistory(GetVipRewardHistoryRequest) returns (GetVipRewardHistoryResponse) {
   }
 
-  // 手动调整用户VIP等级
+  // Manually adjust user VIP level
   rpc AdjustUserVipLevel(AdjustUserVipLevelRequest) returns (AdjustUserVipLevelResponse) {
   }
 
-  // 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+  // Get available VIP level options for a user (for admin manual adjustment)
   rpc GetUserVipLevelOptions(GetUserVipLevelOptionsRequest) returns (GetUserVipLevelOptionsResponse) {
   }
 
@@ -230,28 +230,28 @@ message VipLevelConfigTemplate {
   int64 start_level = 7;
   int64 end_level = 8;
   
-  // 升级设置
+  // Upgrade settings
   string base_level_upgrade_xp = 9;
   string incr_level_upgrade_xp = 10;
   string base_upgrade_reward_amt = 11;
   string incr_upgrade_reward_amt = 12;
   string upgrade_reward_wagering_x = 13;
   
-  // 等级维护要求
+  // Level maintenance requirements
   string weekly_xp_loss = 14;
   string monthly_xp_loss = 15;
   
-  // 即时返水
+  // Instant rakeback
   bool rakeback_instant_enabled = 16;
   string rakeback_instant_rate = 17;
   string rakeback_instant_req = 18;
   
-  // 每日返水
+  // Daily rakeback
   bool rakeback_daily_enabled = 19;
   string rakeback_daily_rate = 20;
   string rakeback_daily_req = 21;
   
-  // 每周奖励
+  // Weekly reward
   bool weekly_reward_enabled = 22;
   string weekly_fixed_reward_amt = 23;
   string weekly_turnover_rate = 24;
@@ -260,7 +260,7 @@ message VipLevelConfigTemplate {
   string weekly_active_days_reward = 27;
   string weekly_wagering_req = 28;
 
-  // 每月奖励
+  // Monthly reward
   bool monthly_reward_enabled = 29;
   string monthly_fixed_reward_amt = 30;
   string monthly_turnover_rate = 31;
@@ -460,7 +460,7 @@ message GetDailyLossbackStatusResponse {
   DailyLossbackStatus status = 1;
 }
 
-// 强制执行 VIP 奖励发放请求
+// Force execute VIP reward distribution request
 message ForceRunVipRewardsRequest {
   api.common.OperatorContext operator_context = 1;
   bool include_daily = 2;
@@ -468,35 +468,35 @@ message ForceRunVipRewardsRequest {
   bool include_monthly = 4;
 }
 
-// 强制执行 VIP 奖励发放响应
+// Force execute VIP reward distribution response
 message ForceRunVipRewardsResponse {
   bool success = 1;
   string message = 2;
 }
 
-// 批量获取用户VIP会员信息请求
+// Batch get user VIP membership info request
 message BatchGetVipMembersRequest {
   repeated int64 user_ids = 1;
 }
 
-// 带等级名称的VIP会员信息
+// VIP membership info with level name
 message VipMemberWithLevelName {
   VipMember vip_member = 1;
   string current_level_name = 2;
 }
 
-// 批量获取用户VIP会员信息响应
+// Batch get user VIP membership info response
 message BatchGetVipMembersResponse {
   repeated VipMemberWithLevelName vip_members = 1;
 }
 
-// 获取用户VIP奖励领取历史请求
+// Get user VIP reward claim history request
 message GetVipRewardHistoryRequest {
   int64 user_id = 1;
   api.common.OperatorContext operator_context = 2;
 }
 
-// 获取用户VIP奖励领取历史响应
+// Get user VIP reward claim history response
 message GetVipRewardHistoryResponse {
   string total_claimed_usd = 1;
   repeated RewardTypeHistory reward_histories = 2;
@@ -507,16 +507,16 @@ message GetVipRewardHistoryResponse {
   }
 }
 
-// 手动调整用户VIP等级请求
+// Manually adjust user VIP level request
 message AdjustUserVipLevelRequest {
   api.common.OperatorContext operator_context = 1;
   int64 user_id = 2;
-  int64 target_level = 3;   // 绝对等级号（如 5, 10, 15）
-  optional bool issue_rewards = 4;   // 是否发放跨越等级的升级奖励（默认 true）
-  string reason = 6;        // 调整原因（审计用）
+  int64 target_level = 3;   // absolute level number (e.g. 5, 10, 15)
+  optional bool issue_rewards = 4;   // whether to issue upgrade rewards for crossed levels (default true)
+  string reason = 6;        // adjustment reason (for audit)
 }
 
-// 手动调整用户VIP等级响应
+// Manually adjust user VIP level response
 message AdjustUserVipLevelResponse {
   int64 old_level = 1;
   int64 new_level = 2;
@@ -525,21 +525,21 @@ message AdjustUserVipLevelResponse {
   string xp_adjustment = 5;
 }
 
-// 获取用户可选VIP等级列表请求
+// Get available VIP level options request
 message GetUserVipLevelOptionsRequest {
   api.common.OperatorContext operator_context = 1;
   int64 user_id = 2;
 }
 
-// VIP等级选项
+// VIP level option
 message VipLevelOption {
   int64 level = 1;
   string name = 2;           // template name
-  string required_xp = 3;    // 达到该等级所需的最低 total XP
+  string required_xp = 3;    // minimum total XP required to reach this level
   int64 template_id = 4;
 }
 
-// 获取用户可选VIP等级列表响应
+// Get available VIP level options response
 message GetUserVipLevelOptionsResponse {
   int64 current_level = 1;
   string current_total_xp = 2;

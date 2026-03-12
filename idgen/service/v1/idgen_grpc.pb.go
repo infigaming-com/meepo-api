@@ -27,9 +27,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IdgenClient interface {
-	// 生成单个ID
+	// Generate a single ID
 	GenerateId(ctx context.Context, in *GenerateIdRequest, opts ...grpc.CallOption) (*GenerateIdReply, error)
-	// 批量生成ID
+	// Batch generate IDs
 	BatchGenerateId(ctx context.Context, in *BatchGenerateIdRequest, opts ...grpc.CallOption) (*BatchGenerateIdReply, error)
 }
 
@@ -65,9 +65,9 @@ func (c *idgenClient) BatchGenerateId(ctx context.Context, in *BatchGenerateIdRe
 // All implementations must embed UnimplementedIdgenServer
 // for forward compatibility.
 type IdgenServer interface {
-	// 生成单个ID
+	// Generate a single ID
 	GenerateId(context.Context, *GenerateIdRequest) (*GenerateIdReply, error)
-	// 批量生成ID
+	// Batch generate IDs
 	BatchGenerateId(context.Context, *BatchGenerateIdRequest) (*BatchGenerateIdReply, error)
 	mustEmbedUnimplementedIdgenServer()
 }

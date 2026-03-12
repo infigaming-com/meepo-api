@@ -23,7 +23,7 @@ const (
 
 type GenerateIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BizType       string                 `protobuf:"bytes,1,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"` // 业务类型，可选，用于区分不同业务场景的ID
+	BizType       string                 `protobuf:"bytes,1,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"` // business type, optional, used to distinguish IDs for different business scenarios
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,7 +67,7 @@ func (x *GenerateIdRequest) GetBizType() string {
 
 type GenerateIdReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // 生成的雪花ID
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // generated snowflake ID
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -111,8 +111,8 @@ func (x *GenerateIdReply) GetId() int64 {
 
 type BatchGenerateIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BizType       string                 `protobuf:"bytes,1,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"` // 业务类型，可选
-	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`                   // 要生成的ID数量
+	BizType       string                 `protobuf:"bytes,1,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"` // business type, optional
+	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`                   // number of IDs to generate
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -163,7 +163,7 @@ func (x *BatchGenerateIdRequest) GetCount() int32 {
 
 type BatchGenerateIdReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"` // 生成的雪花ID列表
+	Ids           []int64                `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"` // list of generated snowflake IDs
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

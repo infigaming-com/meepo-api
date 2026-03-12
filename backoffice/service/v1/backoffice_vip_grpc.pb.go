@@ -35,9 +35,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// VIP系统服务
+// VIP system service
 type BackofficeVipClient interface {
-	// VIP设置管理
+	// VIP settings management
 	GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...grpc.CallOption) (*v1.GetVipSettingResponse, error)
 	UpdateVipSetting(ctx context.Context, in *UpdateVipSettingRequest, opts ...grpc.CallOption) (*UpdateVipSettingResponse, error)
 	GetVipLevelConfigTemplate(ctx context.Context, in *GetVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*GetVipLevelConfigTemplateResponse, error)
@@ -45,9 +45,9 @@ type BackofficeVipClient interface {
 	UpdateVipLevelConfigTemplate(ctx context.Context, in *UpdateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, in *DeleteVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*DeleteVipLevelConfigTemplateResponse, error)
 	GetVipConfig(ctx context.Context, in *GetVipConfigRequest, opts ...grpc.CallOption) (*GetVipConfigResponse, error)
-	// 手动调整用户VIP等级
+	// Manually adjust user VIP level
 	AdjustUserVipLevel(ctx context.Context, in *AdjustUserVipLevelRequest, opts ...grpc.CallOption) (*AdjustUserVipLevelResponse, error)
-	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	// Get available VIP level options for a user (for admin manual adjustment)
 	GetUserVipLevelOptions(ctx context.Context, in *GetUserVipLevelOptionsRequest, opts ...grpc.CallOption) (*GetUserVipLevelOptionsResponse, error)
 }
 
@@ -153,9 +153,9 @@ func (c *backofficeVipClient) GetUserVipLevelOptions(ctx context.Context, in *Ge
 // All implementations must embed UnimplementedBackofficeVipServer
 // for forward compatibility.
 //
-// VIP系统服务
+// VIP system service
 type BackofficeVipServer interface {
-	// VIP设置管理
+	// VIP settings management
 	GetVipSetting(context.Context, *GetVipSettingRequest) (*v1.GetVipSettingResponse, error)
 	UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
@@ -163,9 +163,9 @@ type BackofficeVipServer interface {
 	UpdateVipLevelConfigTemplate(context.Context, *UpdateVipLevelConfigTemplateRequest) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
 	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
-	// 手动调整用户VIP等级
+	// Manually adjust user VIP level
 	AdjustUserVipLevel(context.Context, *AdjustUserVipLevelRequest) (*AdjustUserVipLevelResponse, error)
-	// 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+	// Get available VIP level options for a user (for admin manual adjustment)
 	GetUserVipLevelOptions(context.Context, *GetUserVipLevelOptionsRequest) (*GetUserVipLevelOptionsResponse, error)
 	mustEmbedUnimplementedBackofficeVipServer()
 }

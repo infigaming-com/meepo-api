@@ -2501,7 +2501,7 @@ type ListUsersResponse_User struct {
 	// string device = 23;
 	// string source = 24;
 	RegistrationIp string `protobuf:"bytes,25,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
-	Locked         bool   `protobuf:"varint,26,opt,name=locked,proto3" json:"locked,omitempty"` // 用户是否被锁定
+	Locked         bool   `protobuf:"varint,26,opt,name=locked,proto3" json:"locked,omitempty"` // whether the user is locked
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }

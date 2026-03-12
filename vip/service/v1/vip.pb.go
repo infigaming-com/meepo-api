@@ -1093,24 +1093,24 @@ type VipLevelConfigTemplate struct {
 	Name               string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	StartLevel         int64                  `protobuf:"varint,7,opt,name=start_level,json=startLevel,proto3" json:"start_level,omitempty"`
 	EndLevel           int64                  `protobuf:"varint,8,opt,name=end_level,json=endLevel,proto3" json:"end_level,omitempty"`
-	// 升级设置
+	// Upgrade settings
 	BaseLevelUpgradeXp     string `protobuf:"bytes,9,opt,name=base_level_upgrade_xp,json=baseLevelUpgradeXp,proto3" json:"base_level_upgrade_xp,omitempty"`
 	IncrLevelUpgradeXp     string `protobuf:"bytes,10,opt,name=incr_level_upgrade_xp,json=incrLevelUpgradeXp,proto3" json:"incr_level_upgrade_xp,omitempty"`
 	BaseUpgradeRewardAmt   string `protobuf:"bytes,11,opt,name=base_upgrade_reward_amt,json=baseUpgradeRewardAmt,proto3" json:"base_upgrade_reward_amt,omitempty"`
 	IncrUpgradeRewardAmt   string `protobuf:"bytes,12,opt,name=incr_upgrade_reward_amt,json=incrUpgradeRewardAmt,proto3" json:"incr_upgrade_reward_amt,omitempty"`
 	UpgradeRewardWageringX string `protobuf:"bytes,13,opt,name=upgrade_reward_wagering_x,json=upgradeRewardWageringX,proto3" json:"upgrade_reward_wagering_x,omitempty"`
-	// 等级维护要求
+	// Level maintenance requirements
 	WeeklyXpLoss  string `protobuf:"bytes,14,opt,name=weekly_xp_loss,json=weeklyXpLoss,proto3" json:"weekly_xp_loss,omitempty"`
 	MonthlyXpLoss string `protobuf:"bytes,15,opt,name=monthly_xp_loss,json=monthlyXpLoss,proto3" json:"monthly_xp_loss,omitempty"`
-	// 即时返水
+	// Instant rakeback
 	RakebackInstantEnabled bool   `protobuf:"varint,16,opt,name=rakeback_instant_enabled,json=rakebackInstantEnabled,proto3" json:"rakeback_instant_enabled,omitempty"`
 	RakebackInstantRate    string `protobuf:"bytes,17,opt,name=rakeback_instant_rate,json=rakebackInstantRate,proto3" json:"rakeback_instant_rate,omitempty"`
 	RakebackInstantReq     string `protobuf:"bytes,18,opt,name=rakeback_instant_req,json=rakebackInstantReq,proto3" json:"rakeback_instant_req,omitempty"`
-	// 每日返水
+	// Daily rakeback
 	RakebackDailyEnabled bool   `protobuf:"varint,19,opt,name=rakeback_daily_enabled,json=rakebackDailyEnabled,proto3" json:"rakeback_daily_enabled,omitempty"`
 	RakebackDailyRate    string `protobuf:"bytes,20,opt,name=rakeback_daily_rate,json=rakebackDailyRate,proto3" json:"rakeback_daily_rate,omitempty"`
 	RakebackDailyReq     string `protobuf:"bytes,21,opt,name=rakeback_daily_req,json=rakebackDailyReq,proto3" json:"rakeback_daily_req,omitempty"`
-	// 每周奖励
+	// Weekly reward
 	WeeklyRewardEnabled    bool   `protobuf:"varint,22,opt,name=weekly_reward_enabled,json=weeklyRewardEnabled,proto3" json:"weekly_reward_enabled,omitempty"`
 	WeeklyFixedRewardAmt   string `protobuf:"bytes,23,opt,name=weekly_fixed_reward_amt,json=weeklyFixedRewardAmt,proto3" json:"weekly_fixed_reward_amt,omitempty"`
 	WeeklyTurnoverRate     string `protobuf:"bytes,24,opt,name=weekly_turnover_rate,json=weeklyTurnoverRate,proto3" json:"weekly_turnover_rate,omitempty"`
@@ -1118,7 +1118,7 @@ type VipLevelConfigTemplate struct {
 	WeeklyAdjustRangePct   string `protobuf:"bytes,26,opt,name=weekly_adjust_range_pct,json=weeklyAdjustRangePct,proto3" json:"weekly_adjust_range_pct,omitempty"`
 	WeeklyActiveDaysReward string `protobuf:"bytes,27,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
 	WeeklyWageringReq      string `protobuf:"bytes,28,opt,name=weekly_wagering_req,json=weeklyWageringReq,proto3" json:"weekly_wagering_req,omitempty"`
-	// 每月奖励
+	// Monthly reward
 	MonthlyRewardEnabled    bool   `protobuf:"varint,29,opt,name=monthly_reward_enabled,json=monthlyRewardEnabled,proto3" json:"monthly_reward_enabled,omitempty"`
 	MonthlyFixedRewardAmt   string `protobuf:"bytes,30,opt,name=monthly_fixed_reward_amt,json=monthlyFixedRewardAmt,proto3" json:"monthly_fixed_reward_amt,omitempty"`
 	MonthlyTurnoverRate     string `protobuf:"bytes,31,opt,name=monthly_turnover_rate,json=monthlyTurnoverRate,proto3" json:"monthly_turnover_rate,omitempty"`
@@ -3202,7 +3202,7 @@ func (x *GetDailyLossbackStatusResponse) GetStatus() *DailyLossbackStatus {
 	return nil
 }
 
-// 强制执行 VIP 奖励发放请求
+// Force execute VIP reward distribution request
 type ForceRunVipRewardsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
@@ -3271,7 +3271,7 @@ func (x *ForceRunVipRewardsRequest) GetIncludeMonthly() bool {
 	return false
 }
 
-// 强制执行 VIP 奖励发放响应
+// Force execute VIP reward distribution response
 type ForceRunVipRewardsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
@@ -3324,7 +3324,7 @@ func (x *ForceRunVipRewardsResponse) GetMessage() string {
 	return ""
 }
 
-// 批量获取用户VIP会员信息请求
+// Batch get user VIP membership info request
 type BatchGetVipMembersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserIds       []int64                `protobuf:"varint,1,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
@@ -3369,7 +3369,7 @@ func (x *BatchGetVipMembersRequest) GetUserIds() []int64 {
 	return nil
 }
 
-// 带等级名称的VIP会员信息
+// VIP membership info with level name
 type VipMemberWithLevelName struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	VipMember        *VipMember             `protobuf:"bytes,1,opt,name=vip_member,json=vipMember,proto3" json:"vip_member,omitempty"`
@@ -3422,7 +3422,7 @@ func (x *VipMemberWithLevelName) GetCurrentLevelName() string {
 	return ""
 }
 
-// 批量获取用户VIP会员信息响应
+// Batch get user VIP membership info response
 type BatchGetVipMembersResponse struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
 	VipMembers    []*VipMemberWithLevelName `protobuf:"bytes,1,rep,name=vip_members,json=vipMembers,proto3" json:"vip_members,omitempty"`
@@ -3467,7 +3467,7 @@ func (x *BatchGetVipMembersResponse) GetVipMembers() []*VipMemberWithLevelName {
 	return nil
 }
 
-// 获取用户VIP奖励领取历史请求
+// Get user VIP reward claim history request
 type GetVipRewardHistoryRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -3520,7 +3520,7 @@ func (x *GetVipRewardHistoryRequest) GetOperatorContext() *common.OperatorContex
 	return nil
 }
 
-// 获取用户VIP奖励领取历史响应
+// Get user VIP reward claim history response
 type GetVipRewardHistoryResponse struct {
 	state           protoimpl.MessageState                           `protogen:"open.v1"`
 	TotalClaimedUsd string                                           `protobuf:"bytes,1,opt,name=total_claimed_usd,json=totalClaimedUsd,proto3" json:"total_claimed_usd,omitempty"`
@@ -3573,14 +3573,14 @@ func (x *GetVipRewardHistoryResponse) GetRewardHistories() []*GetVipRewardHistor
 	return nil
 }
 
-// 手动调整用户VIP等级请求
+// Manually adjust user VIP level request
 type AdjustUserVipLevelRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TargetLevel     int64                   `protobuf:"varint,3,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`          // 绝对等级号（如 5, 10, 15）
-	IssueRewards    *bool                   `protobuf:"varint,4,opt,name=issue_rewards,json=issueRewards,proto3,oneof" json:"issue_rewards,omitempty"` // 是否发放跨越等级的升级奖励（默认 true）
-	Reason          string                  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`                                        // 调整原因（审计用）
+	TargetLevel     int64                   `protobuf:"varint,3,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`          // absolute level number (e.g. 5, 10, 15)
+	IssueRewards    *bool                   `protobuf:"varint,4,opt,name=issue_rewards,json=issueRewards,proto3,oneof" json:"issue_rewards,omitempty"` // whether to issue upgrade rewards for crossed levels (default true)
+	Reason          string                  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`                                        // adjustment reason (for audit)
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3650,7 +3650,7 @@ func (x *AdjustUserVipLevelRequest) GetReason() string {
 	return ""
 }
 
-// 手动调整用户VIP等级响应
+// Manually adjust user VIP level response
 type AdjustUserVipLevelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OldLevel      int64                  `protobuf:"varint,1,opt,name=old_level,json=oldLevel,proto3" json:"old_level,omitempty"`
@@ -3727,7 +3727,7 @@ func (x *AdjustUserVipLevelResponse) GetXpAdjustment() string {
 	return ""
 }
 
-// 获取用户可选VIP等级列表请求
+// Get available VIP level options request
 type GetUserVipLevelOptionsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
@@ -3780,12 +3780,12 @@ func (x *GetUserVipLevelOptionsRequest) GetUserId() int64 {
 	return 0
 }
 
-// VIP等级选项
+// VIP level option
 type VipLevelOption struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Level         int64                  `protobuf:"varint,1,opt,name=level,proto3" json:"level,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                               // template name
-	RequiredXp    string                 `protobuf:"bytes,3,opt,name=required_xp,json=requiredXp,proto3" json:"required_xp,omitempty"` // 达到该等级所需的最低 total XP
+	RequiredXp    string                 `protobuf:"bytes,3,opt,name=required_xp,json=requiredXp,proto3" json:"required_xp,omitempty"` // minimum total XP required to reach this level
 	TemplateId    int64                  `protobuf:"varint,4,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3849,7 +3849,7 @@ func (x *VipLevelOption) GetTemplateId() int64 {
 	return 0
 }
 
-// 获取用户可选VIP等级列表响应
+// Get available VIP level options response
 type GetUserVipLevelOptionsResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	CurrentLevel   int64                  `protobuf:"varint,1,opt,name=current_level,json=currentLevel,proto3" json:"current_level,omitempty"`

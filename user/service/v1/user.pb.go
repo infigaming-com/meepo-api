@@ -3163,8 +3163,8 @@ type UpdateUserRequest struct {
 	CampaignUrl     *string                 `protobuf:"bytes,20,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
 	CampaignId      *int64                  `protobuf:"varint,21,opt,name=campaign_id,json=campaignId,proto3,oneof" json:"campaign_id,omitempty"`
 	AffiliateId     *int64                  `protobuf:"varint,22,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	OperatorUserId  int64                   `protobuf:"varint,23,opt,name=operator_user_id,json=operatorUserId,proto3" json:"operator_user_id,omitempty"` // 操作者的用户ID，用于验证角色分配权限
-	Username        *string                 `protobuf:"bytes,24,opt,name=username,proto3,oneof" json:"username,omitempty"`                                // 用户名
+	OperatorUserId  int64                   `protobuf:"varint,23,opt,name=operator_user_id,json=operatorUserId,proto3" json:"operator_user_id,omitempty"` // operator's user ID, used to verify role assignment permission
+	Username        *string                 `protobuf:"bytes,24,opt,name=username,proto3,oneof" json:"username,omitempty"`                                // username
 	ReferrerUserId  *int64                  `protobuf:"varint,25,opt,name=referrer_user_id,json=referrerUserId,proto3,oneof" json:"referrer_user_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -4185,7 +4185,7 @@ type CreateUserRequest struct {
 	Mobile          *string                 `protobuf:"bytes,4,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	RoleId          int64                   `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	UserId          int64                   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // 操作者的用户ID，用于验证角色分配权限
+	UserId          int64                   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // operator's user ID, used to verify role assignment permission
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
