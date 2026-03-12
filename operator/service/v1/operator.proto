@@ -713,6 +713,8 @@ message ListBalancesSummaryResponse {
 		string revenue_share_system = 16;
 		string revenue_share_operator = 17;
 		string est_net_costs = 18;
+		string company_balance = 19;
+		string player_balance = 20;
 	}
 
 	repeated BalanceSummary balances = 1;
