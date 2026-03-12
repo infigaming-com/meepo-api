@@ -6576,7 +6576,7 @@ paths:
         post:
             tags:
                 - BackofficeVip
-            description: 手动调整用户VIP等级
+            description: Manually adjust user VIP level
             operationId: BackofficeVip_AdjustUserVipLevel
             requestBody:
                 content:
@@ -6685,7 +6685,7 @@ paths:
         post:
             tags:
                 - BackofficeVip
-            description: VIP设置管理
+            description: VIP settings management
             operationId: BackofficeVip_GetVipSetting
             requestBody:
                 content:
@@ -6722,7 +6722,7 @@ paths:
         post:
             tags:
                 - BackofficeVip
-            description: 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+            description: Get available VIP level options for a user (for admin manual adjustment)
             operationId: BackofficeVip_GetUserVipLevelOptions
             requestBody:
                 content:
@@ -12785,7 +12785,7 @@ components:
                     type: boolean
                 reason:
                     type: string
-            description: 手动调整用户VIP等级请求
+            description: Manually adjust user VIP level request
         api.backoffice.service.v1.AdjustUserVipLevelResponse:
             type: object
             properties:
@@ -12799,7 +12799,7 @@ components:
                     type: string
                 xpAdjustment:
                     type: string
-            description: 手动调整用户VIP等级响应
+            description: Manually adjust user VIP level response
         api.backoffice.service.v1.AdminReset2faRequest:
             type: object
             properties:
@@ -16439,7 +16439,7 @@ components:
             properties:
                 userId:
                     type: string
-            description: 获取用户可选VIP等级列表请求
+            description: Get available VIP level options request
         api.backoffice.service.v1.GetUserVipLevelOptionsResponse:
             type: object
             properties:
@@ -16451,7 +16451,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.vip.service.v1.VipLevelOption'
-            description: 获取用户可选VIP等级列表响应
+            description: Get available VIP level options response
         api.backoffice.service.v1.GetVipConfigRequest:
             type: object
             properties:
@@ -24380,7 +24380,7 @@ components:
                     description: 'name: game name'
                 country:
                     type: string
-                    description: 'country: 用户所在国家（2字母ISO代码，如 "US"），用于 show_blocked 过滤'
+                    description: 'country: user''s country (2-letter ISO code, e.g. "US"), used for show_blocked filtering'
         api.game.service.v1.GameInfo:
             type: object
             properties:
@@ -25029,7 +25029,7 @@ components:
                     description: sort
                 showBlocked:
                     type: boolean
-                    description: 'show_blocked: 是否显示被地区限制的游戏（默认 true 显示全部；false 过滤掉被屏蔽的游戏）'
+                    description: 'show_blocked: whether to show region-restricted games (default false hides blocked games; true shows all)'
         api.game.service.v1.ListGamesResponse:
             type: object
             properties:
@@ -29013,7 +29013,7 @@ components:
                     type: string
                 baseLevelUpgradeXp:
                     type: string
-                    description: 升级设置
+                    description: Upgrade settings
                 incrLevelUpgradeXp:
                     type: string
                 baseUpgradeRewardAmt:
@@ -29024,26 +29024,26 @@ components:
                     type: string
                 weeklyXpLoss:
                     type: string
-                    description: 等级维护要求
+                    description: Level maintenance requirements
                 monthlyXpLoss:
                     type: string
                 rakebackInstantEnabled:
                     type: boolean
-                    description: 即时返水
+                    description: Instant rakeback
                 rakebackInstantRate:
                     type: string
                 rakebackInstantReq:
                     type: string
                 rakebackDailyEnabled:
                     type: boolean
-                    description: 每日返水
+                    description: Daily rakeback
                 rakebackDailyRate:
                     type: string
                 rakebackDailyReq:
                     type: string
                 weeklyRewardEnabled:
                     type: boolean
-                    description: 每周奖励
+                    description: Weekly reward
                 weeklyFixedRewardAmt:
                     type: string
                 weeklyTurnoverRate:
@@ -29058,7 +29058,7 @@ components:
                     type: string
                 monthlyRewardEnabled:
                     type: boolean
-                    description: 每月奖励
+                    description: Monthly reward
                 monthlyFixedRewardAmt:
                     type: string
                 monthlyTurnoverRate:
@@ -29108,7 +29108,7 @@ components:
                     type: string
                 templateId:
                     type: string
-            description: VIP等级选项
+            description: VIP level option
         api.vip.service.v1.VipMember:
             type: object
             properties:
@@ -32355,7 +32355,7 @@ tags:
     - name: BackofficeSystem
     - name: BackofficeUser
     - name: BackofficeVip
-      description: VIP系统服务
+      description: VIP system service
     - name: BackofficeWallet
     - name: Bcpay
       description: User service provides authentication and user management functionality.

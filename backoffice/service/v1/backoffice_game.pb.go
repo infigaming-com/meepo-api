@@ -4247,9 +4247,9 @@ type BackofficeUpdateGameOrderInTagRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	TagId             int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
 	GameId            string                 `protobuf:"bytes,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	OriginOrderIndex  int32                  `protobuf:"varint,3,opt,name=origin_order_index,json=originOrderIndex,proto3" json:"origin_order_index,omitempty"` // 原位置
+	OriginOrderIndex  int32                  `protobuf:"varint,3,opt,name=origin_order_index,json=originOrderIndex,proto3" json:"origin_order_index,omitempty"` // original position
 	Sticky            bool                   `protobuf:"varint,4,opt,name=sticky,proto3" json:"sticky,omitempty"`
-	CurrentOrderIndex int32                  `protobuf:"varint,5,opt,name=current_order_index,json=currentOrderIndex,proto3" json:"current_order_index,omitempty"` // 目标位置
+	CurrentOrderIndex int32                  `protobuf:"varint,5,opt,name=current_order_index,json=currentOrderIndex,proto3" json:"current_order_index,omitempty"` // target position
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }

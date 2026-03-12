@@ -7,25 +7,25 @@ option java_multiple_files = true;
 option java_package = "idgen.service.v1";
 
 service Idgen {
-  // 生成单个ID
+  // Generate a single ID
   rpc GenerateId (GenerateIdRequest) returns (GenerateIdReply);
-  // 批量生成ID
+  // Batch generate IDs
   rpc BatchGenerateId (BatchGenerateIdRequest) returns (BatchGenerateIdReply);
 }
 
 message GenerateIdRequest {
-  string biz_type = 1;     // 业务类型，可选，用于区分不同业务场景的ID
+  string biz_type = 1;     // business type, optional, used to distinguish IDs for different business scenarios
 }
 
 message GenerateIdReply {
-  int64 id = 1;           // 生成的雪花ID
+  int64 id = 1;           // generated snowflake ID
 }
 
 message BatchGenerateIdRequest {
-  string biz_type = 1;     // 业务类型，可选
-  int32 count = 2;         // 要生成的ID数量
+  string biz_type = 1;     // business type, optional
+  int32 count = 2;         // number of IDs to generate
 }
 
 message BatchGenerateIdReply {
-  repeated int64 ids = 1; // 生成的雪花ID列表
+  repeated int64 ids = 1; // list of generated snowflake IDs
 }

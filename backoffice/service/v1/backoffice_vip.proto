@@ -10,9 +10,9 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-// VIP系统服务
+// VIP system service
 service BackofficeVip {
-  // VIP设置管理
+  // VIP settings management
   rpc GetVipSetting(GetVipSettingRequest) returns (vip.service.v1.GetVipSettingResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/vip/setting/get"
@@ -62,7 +62,7 @@ service BackofficeVip {
     };
   }
 
-  // 手动调整用户VIP等级
+  // Manually adjust user VIP level
   rpc AdjustUserVipLevel(AdjustUserVipLevelRequest) returns (AdjustUserVipLevelResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/vip/adjust-user-level"
@@ -70,7 +70,7 @@ service BackofficeVip {
     };
   }
 
-  // 获取用户可选的VIP等级列表（供管理员手动调整时选择）
+  // Get available VIP level options for a user (for admin manual adjustment)
   rpc GetUserVipLevelOptions(GetUserVipLevelOptionsRequest) returns (GetUserVipLevelOptionsResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/vip/user-level-options"
@@ -78,10 +78,10 @@ service BackofficeVip {
     };
   }
 
-  // TODO： 获取follow parent
-  // 修改 follow parent
-  // TODO: VIP 等级配置是否跟随币种
-  // TODO: VIP 经验掉落 boolean 配置
+  // TODO: get follow parent
+  // update follow parent
+  // TODO: whether VIP level config follows currency
+  // TODO: VIP XP decay boolean config
 
 
 }
@@ -153,15 +153,15 @@ message GetVipConfigResponse {
   api.vip.service.v1.VipConfig config = 1;
 }
 
-// 手动调整用户VIP等级请求
+// Manually adjust user VIP level request
 message AdjustUserVipLevelRequest {
   int64 user_id = 3;
   int64 target_level = 4;
-  optional bool issue_rewards = 5;   // 是否发放跨越等级的升级奖励（默认 true）
+  optional bool issue_rewards = 5;   // whether to issue upgrade rewards for crossed levels (default true)
   string reason = 7;
 }
 
-// 手动调整用户VIP等级响应
+// Manually adjust user VIP level response
 message AdjustUserVipLevelResponse {
   int64 old_level = 1;
   int64 new_level = 2;
@@ -170,12 +170,12 @@ message AdjustUserVipLevelResponse {
   string xp_adjustment = 5;
 }
 
-// 获取用户可选VIP等级列表请求
+// Get available VIP level options request
 message GetUserVipLevelOptionsRequest {
   int64 user_id = 3;
 }
 
-// 获取用户可选VIP等级列表响应
+// Get available VIP level options response
 message GetUserVipLevelOptionsResponse {
   int64 current_level = 1;
   string current_total_xp = 2;
