@@ -4554,6 +4554,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/name/update:
+        post:
+            tags:
+                - BackofficeOperator
+            description: UpdateOperatorName updates the name of an operator
+            operationId: BackofficeOperator_UpdateOperatorName
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorNameRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorNameResponse'
     /v1/backoffice/operator/notification-channels/get:
         post:
             tags:
@@ -22177,6 +22196,13 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorCurrencyConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
+        api.backoffice.service.v1.UpdateOperatorNameRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorName:
+                    type: string
         api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest:
             type: object
             properties:
@@ -28522,6 +28548,9 @@ components:
             type: object
             properties: {}
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UpdateOperatorNameResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateOperatorNotificationChannelsResponse:

@@ -223,6 +223,14 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	// UpdateOperatorName updates the name of an operator
+	rpc UpdateOperatorName(UpdateOperatorNameRequest) returns (user.service.v1.UpdateOperatorNameResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/name/update"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -477,4 +485,9 @@ message GetSwapFeeSettingsRequest {
 
 message SetSwapFeeSettingsRequest {
 	user.service.v1.SwapFeeSettings settings = 1;
+}
+
+message UpdateOperatorNameRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string operator_name = 2;
 }
