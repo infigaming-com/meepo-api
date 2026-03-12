@@ -48,6 +48,7 @@ const (
 	BackofficeOperator_GetOperatorNotificationChannels_FullMethodName      = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorNotificationChannels"
 	BackofficeOperator_GetSwapFeeSettings_FullMethodName                   = "/api.backoffice.service.v1.BackofficeOperator/GetSwapFeeSettings"
 	BackofficeOperator_SetSwapFeeSettings_FullMethodName                   = "/api.backoffice.service.v1.BackofficeOperator/SetSwapFeeSettings"
+	BackofficeOperator_UpdateOperatorName_FullMethodName                   = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorName"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -97,6 +98,8 @@ type BackofficeOperatorClient interface {
 	GetOperatorNotificationChannels(ctx context.Context, in *GetOperatorNotificationChannelsRequest, opts ...grpc.CallOption) (*v1.GetOperatorNotificationChannelsResponse, error)
 	GetSwapFeeSettings(ctx context.Context, in *GetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*v1.GetSwapFeeSettingsResponse, error)
 	SetSwapFeeSettings(ctx context.Context, in *SetSwapFeeSettingsRequest, opts ...grpc.CallOption) (*v1.SetSwapFeeSettingsResponse, error)
+	// UpdateOperatorName updates the name of an operator
+	UpdateOperatorName(ctx context.Context, in *UpdateOperatorNameRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorNameResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -387,6 +390,16 @@ func (c *backofficeOperatorClient) SetSwapFeeSettings(ctx context.Context, in *S
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) UpdateOperatorName(ctx context.Context, in *UpdateOperatorNameRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorNameResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_UpdateOperatorName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -434,6 +447,8 @@ type BackofficeOperatorServer interface {
 	GetOperatorNotificationChannels(context.Context, *GetOperatorNotificationChannelsRequest) (*v1.GetOperatorNotificationChannelsResponse, error)
 	GetSwapFeeSettings(context.Context, *GetSwapFeeSettingsRequest) (*v1.GetSwapFeeSettingsResponse, error)
 	SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*v1.SetSwapFeeSettingsResponse, error)
+	// UpdateOperatorName updates the name of an operator
+	UpdateOperatorName(context.Context, *UpdateOperatorNameRequest) (*v1.UpdateOperatorNameResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -527,6 +542,9 @@ func (UnimplementedBackofficeOperatorServer) GetSwapFeeSettings(context.Context,
 }
 func (UnimplementedBackofficeOperatorServer) SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*v1.SetSwapFeeSettingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetSwapFeeSettings not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) UpdateOperatorName(context.Context, *UpdateOperatorNameRequest) (*v1.UpdateOperatorNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorName not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -1053,6 +1071,24 @@ func _BackofficeOperator_SetSwapFeeSettings_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_UpdateOperatorName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).UpdateOperatorName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_UpdateOperatorName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).UpdateOperatorName(ctx, req.(*UpdateOperatorNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1171,6 +1207,10 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetSwapFeeSettings",
 			Handler:    _BackofficeOperator_SetSwapFeeSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorName",
+			Handler:    _BackofficeOperator_UpdateOperatorName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

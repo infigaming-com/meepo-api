@@ -144,6 +144,7 @@ const (
 	User_SetSwapFeeSettings_FullMethodName                 = "/api.user.service.v1.User/SetSwapFeeSettings"
 	User_RegisterWebPushDevice_FullMethodName              = "/api.user.service.v1.User/RegisterWebPushDevice"
 	User_UnregisterWebPushDevice_FullMethodName            = "/api.user.service.v1.User/UnregisterWebPushDevice"
+	User_UpdateOperatorName_FullMethodName                 = "/api.user.service.v1.User/UpdateOperatorName"
 )
 
 // UserClient is the client API for User service.
@@ -366,6 +367,8 @@ type UserClient interface {
 	// Web Push device management (proxied to push-service)
 	RegisterWebPushDevice(ctx context.Context, in *RegisterWebPushDeviceRequest, opts ...grpc.CallOption) (*RegisterWebPushDeviceResponse, error)
 	UnregisterWebPushDevice(ctx context.Context, in *UnregisterWebPushDeviceRequest, opts ...grpc.CallOption) (*UnregisterWebPushDeviceResponse, error)
+	// UpdateOperatorName updates the name of an operator
+	UpdateOperatorName(ctx context.Context, in *UpdateOperatorNameRequest, opts ...grpc.CallOption) (*UpdateOperatorNameResponse, error)
 }
 
 type userClient struct {
@@ -1606,6 +1609,16 @@ func (c *userClient) UnregisterWebPushDevice(ctx context.Context, in *Unregister
 	return out, nil
 }
 
+func (c *userClient) UpdateOperatorName(ctx context.Context, in *UpdateOperatorNameRequest, opts ...grpc.CallOption) (*UpdateOperatorNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorNameResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1826,6 +1839,8 @@ type UserServer interface {
 	// Web Push device management (proxied to push-service)
 	RegisterWebPushDevice(context.Context, *RegisterWebPushDeviceRequest) (*RegisterWebPushDeviceResponse, error)
 	UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error)
+	// UpdateOperatorName updates the name of an operator
+	UpdateOperatorName(context.Context, *UpdateOperatorNameRequest) (*UpdateOperatorNameResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -2204,6 +2219,9 @@ func (UnimplementedUserServer) RegisterWebPushDevice(context.Context, *RegisterW
 }
 func (UnimplementedUserServer) UnregisterWebPushDevice(context.Context, *UnregisterWebPushDeviceRequest) (*UnregisterWebPushDeviceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnregisterWebPushDevice not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorName(context.Context, *UpdateOperatorNameRequest) (*UpdateOperatorNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOperatorName not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -4440,6 +4458,24 @@ func _User_UnregisterWebPushDevice_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UpdateOperatorName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorName(ctx, req.(*UpdateOperatorNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4938,6 +4974,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnregisterWebPushDevice",
 			Handler:    _User_UnregisterWebPushDevice_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorName",
+			Handler:    _User_UpdateOperatorName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

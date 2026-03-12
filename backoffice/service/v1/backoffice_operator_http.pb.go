@@ -46,6 +46,7 @@ const OperationBackofficeOperatorSetOperatorRegistrationConfig = "/api.backoffic
 const OperationBackofficeOperatorSetOperatorRegistrationFieldConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationFieldConfig"
 const OperationBackofficeOperatorSetSwapFeeSettings = "/api.backoffice.service.v1.BackofficeOperator/SetSwapFeeSettings"
 const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
+const OperationBackofficeOperatorUpdateOperatorName = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorName"
 const OperationBackofficeOperatorUpdateOperatorNotificationChannels = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorNotificationChannels"
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
 
@@ -89,6 +90,8 @@ type BackofficeOperatorHTTPServer interface {
 	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
 	SetSwapFeeSettings(context.Context, *SetSwapFeeSettingsRequest) (*v1.SetSwapFeeSettingsResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
+	// UpdateOperatorName UpdateOperatorName updates the name of an operator
+	UpdateOperatorName(context.Context, *UpdateOperatorNameRequest) (*v1.UpdateOperatorNameResponse, error)
 	// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
 	UpdateOperatorNotificationChannels(context.Context, *UpdateOperatorNotificationChannelsRequest) (*v1.UpdateOperatorNotificationChannelsResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
@@ -125,6 +128,7 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/notification-channels/get", _BackofficeOperator_GetOperatorNotificationChannels0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/swap-fee-settings/get", _BackofficeOperator_GetSwapFeeSettings0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/swap-fee-settings/set", _BackofficeOperator_SetSwapFeeSettings0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/name/update", _BackofficeOperator_UpdateOperatorName0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -743,6 +747,28 @@ func _BackofficeOperator_SetSwapFeeSettings0_HTTP_Handler(srv BackofficeOperator
 	}
 }
 
+func _BackofficeOperator_UpdateOperatorName0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateOperatorNameRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorUpdateOperatorName)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateOperatorName(ctx, req.(*UpdateOperatorNameRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdateOperatorNameResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
 	// AddOperatorBackofficeByoSubdomain AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
 	AddOperatorBackofficeByoSubdomain(ctx context.Context, req *AddOperatorBackofficeByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorBackofficeByoSubdomainResponse, err error)
@@ -783,6 +809,8 @@ type BackofficeOperatorHTTPClient interface {
 	SetOperatorRegistrationFieldConfig(ctx context.Context, req *SetOperatorRegistrationFieldConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegistrationFieldConfigResponse, err error)
 	SetSwapFeeSettings(ctx context.Context, req *SetSwapFeeSettingsRequest, opts ...http.CallOption) (rsp *v1.SetSwapFeeSettingsResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
+	// UpdateOperatorName UpdateOperatorName updates the name of an operator
+	UpdateOperatorName(ctx context.Context, req *UpdateOperatorNameRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorNameResponse, err error)
 	// UpdateOperatorNotificationChannels UpdateOperatorNotificationChannels updates notification channel configuration for an operator
 	UpdateOperatorNotificationChannels(ctx context.Context, req *UpdateOperatorNotificationChannelsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorNotificationChannelsResponse, err error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
@@ -1140,6 +1168,20 @@ func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorAccountSettings(ctx con
 	pattern := "/v1/backoffice/operator/account-settings/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// UpdateOperatorName UpdateOperatorName updates the name of an operator
+func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorName(ctx context.Context, in *UpdateOperatorNameRequest, opts ...http.CallOption) (*v1.UpdateOperatorNameResponse, error) {
+	var out v1.UpdateOperatorNameResponse
+	pattern := "/v1/backoffice/operator/name/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorName))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
