@@ -1094,3 +1094,15 @@ func IsRolePermissionDenied(err error) bool {
 func ErrorRolePermissionDenied(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ROLE_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsResetAffiliatePasswordFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_RESET_AFFILIATE_PASSWORD_FAILED.String() && e.Code == 500
+}
+
+func ErrorResetAffiliatePasswordFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_RESET_AFFILIATE_PASSWORD_FAILED.String(), fmt.Sprintf(format, args...))
+}
