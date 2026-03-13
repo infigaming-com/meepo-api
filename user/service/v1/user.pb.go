@@ -13385,6 +13385,96 @@ func (*AdminResetPasswordResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{212}
 }
 
+// ResetPasswordDirectlyRequest - reset password without forcing change on next login
+type ResetPasswordDirectlyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`               // Target user ID
+	NewPassword   string                 `protobuf:"bytes,2,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"` // New password to set
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetPasswordDirectlyRequest) Reset() {
+	*x = ResetPasswordDirectlyRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[213]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetPasswordDirectlyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetPasswordDirectlyRequest) ProtoMessage() {}
+
+func (x *ResetPasswordDirectlyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[213]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResetPasswordDirectlyRequest.ProtoReflect.Descriptor instead.
+func (*ResetPasswordDirectlyRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{213}
+}
+
+func (x *ResetPasswordDirectlyRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ResetPasswordDirectlyRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
+// ResetPasswordDirectlyResponse - empty on success
+type ResetPasswordDirectlyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetPasswordDirectlyResponse) Reset() {
+	*x = ResetPasswordDirectlyResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[214]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetPasswordDirectlyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetPasswordDirectlyResponse) ProtoMessage() {}
+
+func (x *ResetPasswordDirectlyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[214]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResetPasswordDirectlyResponse.ProtoReflect.Descriptor instead.
+func (*ResetPasswordDirectlyResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{214}
+}
+
 // OAuthProviderConfig represents operator's OAuth provider configuration
 type OAuthProviderConfig struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -13407,7 +13497,7 @@ type OAuthProviderConfig struct {
 
 func (x *OAuthProviderConfig) Reset() {
 	*x = OAuthProviderConfig{}
-	mi := &file_user_service_v1_user_proto_msgTypes[213]
+	mi := &file_user_service_v1_user_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13419,7 +13509,7 @@ func (x *OAuthProviderConfig) String() string {
 func (*OAuthProviderConfig) ProtoMessage() {}
 
 func (x *OAuthProviderConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[213]
+	mi := &file_user_service_v1_user_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13432,7 +13522,7 @@ func (x *OAuthProviderConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthProviderConfig.ProtoReflect.Descriptor instead.
 func (*OAuthProviderConfig) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{213}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{215}
 }
 
 func (x *OAuthProviderConfig) GetId() int64 {
@@ -13548,7 +13638,7 @@ type CreateOrUpdateOAuthProviderConfigRequest struct {
 
 func (x *CreateOrUpdateOAuthProviderConfigRequest) Reset() {
 	*x = CreateOrUpdateOAuthProviderConfigRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[214]
+	mi := &file_user_service_v1_user_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13560,7 +13650,7 @@ func (x *CreateOrUpdateOAuthProviderConfigRequest) String() string {
 func (*CreateOrUpdateOAuthProviderConfigRequest) ProtoMessage() {}
 
 func (x *CreateOrUpdateOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[214]
+	mi := &file_user_service_v1_user_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13573,7 +13663,7 @@ func (x *CreateOrUpdateOAuthProviderConfigRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use CreateOrUpdateOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
 func (*CreateOrUpdateOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{214}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{216}
 }
 
 func (x *CreateOrUpdateOAuthProviderConfigRequest) GetOperatorContext() *common.OperatorContext {
@@ -13670,7 +13760,7 @@ type CreateOrUpdateOAuthProviderConfigResponse struct {
 
 func (x *CreateOrUpdateOAuthProviderConfigResponse) Reset() {
 	*x = CreateOrUpdateOAuthProviderConfigResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[215]
+	mi := &file_user_service_v1_user_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13682,7 +13772,7 @@ func (x *CreateOrUpdateOAuthProviderConfigResponse) String() string {
 func (*CreateOrUpdateOAuthProviderConfigResponse) ProtoMessage() {}
 
 func (x *CreateOrUpdateOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[215]
+	mi := &file_user_service_v1_user_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13695,7 +13785,7 @@ func (x *CreateOrUpdateOAuthProviderConfigResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use CreateOrUpdateOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
 func (*CreateOrUpdateOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{215}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{217}
 }
 
 func (x *CreateOrUpdateOAuthProviderConfigResponse) GetConfigId() int64 {
@@ -13724,7 +13814,7 @@ type DeleteOAuthProviderConfigRequest struct {
 
 func (x *DeleteOAuthProviderConfigRequest) Reset() {
 	*x = DeleteOAuthProviderConfigRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[216]
+	mi := &file_user_service_v1_user_proto_msgTypes[218]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13736,7 +13826,7 @@ func (x *DeleteOAuthProviderConfigRequest) String() string {
 func (*DeleteOAuthProviderConfigRequest) ProtoMessage() {}
 
 func (x *DeleteOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[216]
+	mi := &file_user_service_v1_user_proto_msgTypes[218]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13749,7 +13839,7 @@ func (x *DeleteOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{216}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{218}
 }
 
 func (x *DeleteOAuthProviderConfigRequest) GetOperatorContext() *common.OperatorContext {
@@ -13781,7 +13871,7 @@ type DeleteOAuthProviderConfigResponse struct {
 
 func (x *DeleteOAuthProviderConfigResponse) Reset() {
 	*x = DeleteOAuthProviderConfigResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[217]
+	mi := &file_user_service_v1_user_proto_msgTypes[219]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13793,7 +13883,7 @@ func (x *DeleteOAuthProviderConfigResponse) String() string {
 func (*DeleteOAuthProviderConfigResponse) ProtoMessage() {}
 
 func (x *DeleteOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[217]
+	mi := &file_user_service_v1_user_proto_msgTypes[219]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13806,7 +13896,7 @@ func (x *DeleteOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use DeleteOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{217}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{219}
 }
 
 // SetOAuthProviderEnabledRequest - enable/disable OAuth provider
@@ -13822,7 +13912,7 @@ type SetOAuthProviderEnabledRequest struct {
 
 func (x *SetOAuthProviderEnabledRequest) Reset() {
 	*x = SetOAuthProviderEnabledRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[218]
+	mi := &file_user_service_v1_user_proto_msgTypes[220]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13834,7 +13924,7 @@ func (x *SetOAuthProviderEnabledRequest) String() string {
 func (*SetOAuthProviderEnabledRequest) ProtoMessage() {}
 
 func (x *SetOAuthProviderEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[218]
+	mi := &file_user_service_v1_user_proto_msgTypes[220]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13847,7 +13937,7 @@ func (x *SetOAuthProviderEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOAuthProviderEnabledRequest.ProtoReflect.Descriptor instead.
 func (*SetOAuthProviderEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{218}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{220}
 }
 
 func (x *SetOAuthProviderEnabledRequest) GetOperatorContext() *common.OperatorContext {
@@ -13886,7 +13976,7 @@ type SetOAuthProviderEnabledResponse struct {
 
 func (x *SetOAuthProviderEnabledResponse) Reset() {
 	*x = SetOAuthProviderEnabledResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[219]
+	mi := &file_user_service_v1_user_proto_msgTypes[221]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13898,7 +13988,7 @@ func (x *SetOAuthProviderEnabledResponse) String() string {
 func (*SetOAuthProviderEnabledResponse) ProtoMessage() {}
 
 func (x *SetOAuthProviderEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[219]
+	mi := &file_user_service_v1_user_proto_msgTypes[221]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13911,7 +14001,7 @@ func (x *SetOAuthProviderEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOAuthProviderEnabledResponse.ProtoReflect.Descriptor instead.
 func (*SetOAuthProviderEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{219}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{221}
 }
 
 // ListOAuthProviderConfigsRequest - list OAuth configs for operator
@@ -13927,7 +14017,7 @@ type ListOAuthProviderConfigsRequest struct {
 
 func (x *ListOAuthProviderConfigsRequest) Reset() {
 	*x = ListOAuthProviderConfigsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[220]
+	mi := &file_user_service_v1_user_proto_msgTypes[222]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13939,7 +14029,7 @@ func (x *ListOAuthProviderConfigsRequest) String() string {
 func (*ListOAuthProviderConfigsRequest) ProtoMessage() {}
 
 func (x *ListOAuthProviderConfigsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[220]
+	mi := &file_user_service_v1_user_proto_msgTypes[222]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13952,7 +14042,7 @@ func (x *ListOAuthProviderConfigsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOAuthProviderConfigsRequest.ProtoReflect.Descriptor instead.
 func (*ListOAuthProviderConfigsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{220}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{222}
 }
 
 func (x *ListOAuthProviderConfigsRequest) GetOperatorContext() *common.OperatorContext {
@@ -13992,7 +14082,7 @@ type ListOAuthProviderConfigsResponse struct {
 
 func (x *ListOAuthProviderConfigsResponse) Reset() {
 	*x = ListOAuthProviderConfigsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[221]
+	mi := &file_user_service_v1_user_proto_msgTypes[223]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14004,7 +14094,7 @@ func (x *ListOAuthProviderConfigsResponse) String() string {
 func (*ListOAuthProviderConfigsResponse) ProtoMessage() {}
 
 func (x *ListOAuthProviderConfigsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[221]
+	mi := &file_user_service_v1_user_proto_msgTypes[223]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14017,7 +14107,7 @@ func (x *ListOAuthProviderConfigsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOAuthProviderConfigsResponse.ProtoReflect.Descriptor instead.
 func (*ListOAuthProviderConfigsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{221}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{223}
 }
 
 func (x *ListOAuthProviderConfigsResponse) GetConfigs() []*OAuthProviderConfig {
@@ -14039,7 +14129,7 @@ type GetOAuthProviderConfigRequest struct {
 
 func (x *GetOAuthProviderConfigRequest) Reset() {
 	*x = GetOAuthProviderConfigRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[222]
+	mi := &file_user_service_v1_user_proto_msgTypes[224]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14051,7 +14141,7 @@ func (x *GetOAuthProviderConfigRequest) String() string {
 func (*GetOAuthProviderConfigRequest) ProtoMessage() {}
 
 func (x *GetOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[222]
+	mi := &file_user_service_v1_user_proto_msgTypes[224]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14064,7 +14154,7 @@ func (x *GetOAuthProviderConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOAuthProviderConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetOAuthProviderConfigRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{222}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{224}
 }
 
 func (x *GetOAuthProviderConfigRequest) GetOperatorContext() *common.OperatorContext {
@@ -14097,7 +14187,7 @@ type GetOAuthProviderConfigResponse struct {
 
 func (x *GetOAuthProviderConfigResponse) Reset() {
 	*x = GetOAuthProviderConfigResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[223]
+	mi := &file_user_service_v1_user_proto_msgTypes[225]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14109,7 +14199,7 @@ func (x *GetOAuthProviderConfigResponse) String() string {
 func (*GetOAuthProviderConfigResponse) ProtoMessage() {}
 
 func (x *GetOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[223]
+	mi := &file_user_service_v1_user_proto_msgTypes[225]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14122,7 +14212,7 @@ func (x *GetOAuthProviderConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOAuthProviderConfigResponse.ProtoReflect.Descriptor instead.
 func (*GetOAuthProviderConfigResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{223}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{225}
 }
 
 func (x *GetOAuthProviderConfigResponse) GetConfig() *OAuthProviderConfig {
@@ -14148,7 +14238,7 @@ type AvailableOAuthProvider struct {
 
 func (x *AvailableOAuthProvider) Reset() {
 	*x = AvailableOAuthProvider{}
-	mi := &file_user_service_v1_user_proto_msgTypes[224]
+	mi := &file_user_service_v1_user_proto_msgTypes[226]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14160,7 +14250,7 @@ func (x *AvailableOAuthProvider) String() string {
 func (*AvailableOAuthProvider) ProtoMessage() {}
 
 func (x *AvailableOAuthProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[224]
+	mi := &file_user_service_v1_user_proto_msgTypes[226]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14173,7 +14263,7 @@ func (x *AvailableOAuthProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvailableOAuthProvider.ProtoReflect.Descriptor instead.
 func (*AvailableOAuthProvider) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{224}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{226}
 }
 
 func (x *AvailableOAuthProvider) GetProvider() OAuthProvider {
@@ -14234,7 +14324,7 @@ type GetAvailableOAuthProvidersRequest struct {
 
 func (x *GetAvailableOAuthProvidersRequest) Reset() {
 	*x = GetAvailableOAuthProvidersRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[225]
+	mi := &file_user_service_v1_user_proto_msgTypes[227]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14246,7 +14336,7 @@ func (x *GetAvailableOAuthProvidersRequest) String() string {
 func (*GetAvailableOAuthProvidersRequest) ProtoMessage() {}
 
 func (x *GetAvailableOAuthProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[225]
+	mi := &file_user_service_v1_user_proto_msgTypes[227]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14259,7 +14349,7 @@ func (x *GetAvailableOAuthProvidersRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetAvailableOAuthProvidersRequest.ProtoReflect.Descriptor instead.
 func (*GetAvailableOAuthProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{225}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{227}
 }
 
 type GetAvailableOAuthProvidersResponse struct {
@@ -14271,7 +14361,7 @@ type GetAvailableOAuthProvidersResponse struct {
 
 func (x *GetAvailableOAuthProvidersResponse) Reset() {
 	*x = GetAvailableOAuthProvidersResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[226]
+	mi := &file_user_service_v1_user_proto_msgTypes[228]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14283,7 +14373,7 @@ func (x *GetAvailableOAuthProvidersResponse) String() string {
 func (*GetAvailableOAuthProvidersResponse) ProtoMessage() {}
 
 func (x *GetAvailableOAuthProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[226]
+	mi := &file_user_service_v1_user_proto_msgTypes[228]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14296,7 +14386,7 @@ func (x *GetAvailableOAuthProvidersResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetAvailableOAuthProvidersResponse.ProtoReflect.Descriptor instead.
 func (*GetAvailableOAuthProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{226}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{228}
 }
 
 func (x *GetAvailableOAuthProvidersResponse) GetProviders() []*AvailableOAuthProvider {
@@ -14320,7 +14410,7 @@ type OAuthLoginV2Request struct {
 
 func (x *OAuthLoginV2Request) Reset() {
 	*x = OAuthLoginV2Request{}
-	mi := &file_user_service_v1_user_proto_msgTypes[227]
+	mi := &file_user_service_v1_user_proto_msgTypes[229]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14332,7 +14422,7 @@ func (x *OAuthLoginV2Request) String() string {
 func (*OAuthLoginV2Request) ProtoMessage() {}
 
 func (x *OAuthLoginV2Request) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[227]
+	mi := &file_user_service_v1_user_proto_msgTypes[229]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14345,7 +14435,7 @@ func (x *OAuthLoginV2Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthLoginV2Request.ProtoReflect.Descriptor instead.
 func (*OAuthLoginV2Request) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{227}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{229}
 }
 
 func (x *OAuthLoginV2Request) GetProvider() OAuthProvider {
@@ -14399,7 +14489,7 @@ type OAuthAccountInfo struct {
 
 func (x *OAuthAccountInfo) Reset() {
 	*x = OAuthAccountInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[228]
+	mi := &file_user_service_v1_user_proto_msgTypes[230]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14411,7 +14501,7 @@ func (x *OAuthAccountInfo) String() string {
 func (*OAuthAccountInfo) ProtoMessage() {}
 
 func (x *OAuthAccountInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[228]
+	mi := &file_user_service_v1_user_proto_msgTypes[230]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14424,7 +14514,7 @@ func (x *OAuthAccountInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthAccountInfo.ProtoReflect.Descriptor instead.
 func (*OAuthAccountInfo) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{228}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{230}
 }
 
 func (x *OAuthAccountInfo) GetProvider() OAuthProvider {
@@ -14487,7 +14577,7 @@ type BindOAuthAccountRequest struct {
 
 func (x *BindOAuthAccountRequest) Reset() {
 	*x = BindOAuthAccountRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[229]
+	mi := &file_user_service_v1_user_proto_msgTypes[231]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14499,7 +14589,7 @@ func (x *BindOAuthAccountRequest) String() string {
 func (*BindOAuthAccountRequest) ProtoMessage() {}
 
 func (x *BindOAuthAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[229]
+	mi := &file_user_service_v1_user_proto_msgTypes[231]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14512,7 +14602,7 @@ func (x *BindOAuthAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BindOAuthAccountRequest.ProtoReflect.Descriptor instead.
 func (*BindOAuthAccountRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{229}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{231}
 }
 
 func (x *BindOAuthAccountRequest) GetProvider() OAuthProvider {
@@ -14538,7 +14628,7 @@ type BindOAuthAccountResponse struct {
 
 func (x *BindOAuthAccountResponse) Reset() {
 	*x = BindOAuthAccountResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[230]
+	mi := &file_user_service_v1_user_proto_msgTypes[232]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14550,7 +14640,7 @@ func (x *BindOAuthAccountResponse) String() string {
 func (*BindOAuthAccountResponse) ProtoMessage() {}
 
 func (x *BindOAuthAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[230]
+	mi := &file_user_service_v1_user_proto_msgTypes[232]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14563,7 +14653,7 @@ func (x *BindOAuthAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BindOAuthAccountResponse.ProtoReflect.Descriptor instead.
 func (*BindOAuthAccountResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{230}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{232}
 }
 
 func (x *BindOAuthAccountResponse) GetAccountInfo() *OAuthAccountInfo {
@@ -14583,7 +14673,7 @@ type UnbindOAuthAccountRequest struct {
 
 func (x *UnbindOAuthAccountRequest) Reset() {
 	*x = UnbindOAuthAccountRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[231]
+	mi := &file_user_service_v1_user_proto_msgTypes[233]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14595,7 +14685,7 @@ func (x *UnbindOAuthAccountRequest) String() string {
 func (*UnbindOAuthAccountRequest) ProtoMessage() {}
 
 func (x *UnbindOAuthAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[231]
+	mi := &file_user_service_v1_user_proto_msgTypes[233]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14608,7 +14698,7 @@ func (x *UnbindOAuthAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnbindOAuthAccountRequest.ProtoReflect.Descriptor instead.
 func (*UnbindOAuthAccountRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{231}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{233}
 }
 
 func (x *UnbindOAuthAccountRequest) GetProvider() OAuthProvider {
@@ -14626,7 +14716,7 @@ type UnbindOAuthAccountResponse struct {
 
 func (x *UnbindOAuthAccountResponse) Reset() {
 	*x = UnbindOAuthAccountResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[232]
+	mi := &file_user_service_v1_user_proto_msgTypes[234]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14638,7 +14728,7 @@ func (x *UnbindOAuthAccountResponse) String() string {
 func (*UnbindOAuthAccountResponse) ProtoMessage() {}
 
 func (x *UnbindOAuthAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[232]
+	mi := &file_user_service_v1_user_proto_msgTypes[234]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14651,7 +14741,7 @@ func (x *UnbindOAuthAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnbindOAuthAccountResponse.ProtoReflect.Descriptor instead.
 func (*UnbindOAuthAccountResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{232}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{234}
 }
 
 // ListBoundOAuthAccountsRequest - list bound OAuth accounts
@@ -14663,7 +14753,7 @@ type ListBoundOAuthAccountsRequest struct {
 
 func (x *ListBoundOAuthAccountsRequest) Reset() {
 	*x = ListBoundOAuthAccountsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[233]
+	mi := &file_user_service_v1_user_proto_msgTypes[235]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14675,7 +14765,7 @@ func (x *ListBoundOAuthAccountsRequest) String() string {
 func (*ListBoundOAuthAccountsRequest) ProtoMessage() {}
 
 func (x *ListBoundOAuthAccountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[233]
+	mi := &file_user_service_v1_user_proto_msgTypes[235]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14688,7 +14778,7 @@ func (x *ListBoundOAuthAccountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBoundOAuthAccountsRequest.ProtoReflect.Descriptor instead.
 func (*ListBoundOAuthAccountsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{233}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{235}
 }
 
 type ListBoundOAuthAccountsResponse struct {
@@ -14701,7 +14791,7 @@ type ListBoundOAuthAccountsResponse struct {
 
 func (x *ListBoundOAuthAccountsResponse) Reset() {
 	*x = ListBoundOAuthAccountsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[234]
+	mi := &file_user_service_v1_user_proto_msgTypes[236]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14713,7 +14803,7 @@ func (x *ListBoundOAuthAccountsResponse) String() string {
 func (*ListBoundOAuthAccountsResponse) ProtoMessage() {}
 
 func (x *ListBoundOAuthAccountsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[234]
+	mi := &file_user_service_v1_user_proto_msgTypes[236]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14726,7 +14816,7 @@ func (x *ListBoundOAuthAccountsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBoundOAuthAccountsResponse.ProtoReflect.Descriptor instead.
 func (*ListBoundOAuthAccountsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{234}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{236}
 }
 
 func (x *ListBoundOAuthAccountsResponse) GetAccounts() []*OAuthAccountInfo {
@@ -14756,7 +14846,7 @@ type InitiateOAuthLoginRequest struct {
 
 func (x *InitiateOAuthLoginRequest) Reset() {
 	*x = InitiateOAuthLoginRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[235]
+	mi := &file_user_service_v1_user_proto_msgTypes[237]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14768,7 +14858,7 @@ func (x *InitiateOAuthLoginRequest) String() string {
 func (*InitiateOAuthLoginRequest) ProtoMessage() {}
 
 func (x *InitiateOAuthLoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[235]
+	mi := &file_user_service_v1_user_proto_msgTypes[237]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14781,7 +14871,7 @@ func (x *InitiateOAuthLoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiateOAuthLoginRequest.ProtoReflect.Descriptor instead.
 func (*InitiateOAuthLoginRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{235}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{237}
 }
 
 func (x *InitiateOAuthLoginRequest) GetProvider() OAuthProvider {
@@ -14823,7 +14913,7 @@ type InitiateOAuthLoginResponse struct {
 
 func (x *InitiateOAuthLoginResponse) Reset() {
 	*x = InitiateOAuthLoginResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[236]
+	mi := &file_user_service_v1_user_proto_msgTypes[238]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14835,7 +14925,7 @@ func (x *InitiateOAuthLoginResponse) String() string {
 func (*InitiateOAuthLoginResponse) ProtoMessage() {}
 
 func (x *InitiateOAuthLoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[236]
+	mi := &file_user_service_v1_user_proto_msgTypes[238]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14848,7 +14938,7 @@ func (x *InitiateOAuthLoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiateOAuthLoginResponse.ProtoReflect.Descriptor instead.
 func (*InitiateOAuthLoginResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{236}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{238}
 }
 
 func (x *InitiateOAuthLoginResponse) GetAuthorizationUrl() string {
@@ -14877,7 +14967,7 @@ type InitiateOAuthBindingRequest struct {
 
 func (x *InitiateOAuthBindingRequest) Reset() {
 	*x = InitiateOAuthBindingRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[237]
+	mi := &file_user_service_v1_user_proto_msgTypes[239]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14889,7 +14979,7 @@ func (x *InitiateOAuthBindingRequest) String() string {
 func (*InitiateOAuthBindingRequest) ProtoMessage() {}
 
 func (x *InitiateOAuthBindingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[237]
+	mi := &file_user_service_v1_user_proto_msgTypes[239]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14902,7 +14992,7 @@ func (x *InitiateOAuthBindingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiateOAuthBindingRequest.ProtoReflect.Descriptor instead.
 func (*InitiateOAuthBindingRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{237}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{239}
 }
 
 func (x *InitiateOAuthBindingRequest) GetProvider() OAuthProvider {
@@ -14937,7 +15027,7 @@ type InitiateOAuthBindingResponse struct {
 
 func (x *InitiateOAuthBindingResponse) Reset() {
 	*x = InitiateOAuthBindingResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[238]
+	mi := &file_user_service_v1_user_proto_msgTypes[240]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14949,7 +15039,7 @@ func (x *InitiateOAuthBindingResponse) String() string {
 func (*InitiateOAuthBindingResponse) ProtoMessage() {}
 
 func (x *InitiateOAuthBindingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[238]
+	mi := &file_user_service_v1_user_proto_msgTypes[240]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14962,7 +15052,7 @@ func (x *InitiateOAuthBindingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitiateOAuthBindingResponse.ProtoReflect.Descriptor instead.
 func (*InitiateOAuthBindingResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{238}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{240}
 }
 
 func (x *InitiateOAuthBindingResponse) GetAuthorizationUrl() string {
@@ -14988,7 +15078,7 @@ type GetTelegramLoginInfoRequest struct {
 
 func (x *GetTelegramLoginInfoRequest) Reset() {
 	*x = GetTelegramLoginInfoRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[239]
+	mi := &file_user_service_v1_user_proto_msgTypes[241]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15000,7 +15090,7 @@ func (x *GetTelegramLoginInfoRequest) String() string {
 func (*GetTelegramLoginInfoRequest) ProtoMessage() {}
 
 func (x *GetTelegramLoginInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[239]
+	mi := &file_user_service_v1_user_proto_msgTypes[241]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15013,7 +15103,7 @@ func (x *GetTelegramLoginInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTelegramLoginInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetTelegramLoginInfoRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{239}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{241}
 }
 
 // GetTelegramLoginInfoResponse - Telegram login info for frontend
@@ -15029,7 +15119,7 @@ type GetTelegramLoginInfoResponse struct {
 
 func (x *GetTelegramLoginInfoResponse) Reset() {
 	*x = GetTelegramLoginInfoResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[240]
+	mi := &file_user_service_v1_user_proto_msgTypes[242]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15041,7 +15131,7 @@ func (x *GetTelegramLoginInfoResponse) String() string {
 func (*GetTelegramLoginInfoResponse) ProtoMessage() {}
 
 func (x *GetTelegramLoginInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[240]
+	mi := &file_user_service_v1_user_proto_msgTypes[242]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15054,7 +15144,7 @@ func (x *GetTelegramLoginInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTelegramLoginInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetTelegramLoginInfoResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{240}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{242}
 }
 
 func (x *GetTelegramLoginInfoResponse) GetEnabled() bool {
@@ -15093,7 +15183,7 @@ type GetRewardHistoryRequest struct {
 
 func (x *GetRewardHistoryRequest) Reset() {
 	*x = GetRewardHistoryRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[241]
+	mi := &file_user_service_v1_user_proto_msgTypes[243]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15105,7 +15195,7 @@ func (x *GetRewardHistoryRequest) String() string {
 func (*GetRewardHistoryRequest) ProtoMessage() {}
 
 func (x *GetRewardHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[241]
+	mi := &file_user_service_v1_user_proto_msgTypes[243]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15118,7 +15208,7 @@ func (x *GetRewardHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRewardHistoryRequest.ProtoReflect.Descriptor instead.
 func (*GetRewardHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{241}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{243}
 }
 
 type ListUserFreeRewardsRequest struct {
@@ -15129,7 +15219,7 @@ type ListUserFreeRewardsRequest struct {
 
 func (x *ListUserFreeRewardsRequest) Reset() {
 	*x = ListUserFreeRewardsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[242]
+	mi := &file_user_service_v1_user_proto_msgTypes[244]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15141,7 +15231,7 @@ func (x *ListUserFreeRewardsRequest) String() string {
 func (*ListUserFreeRewardsRequest) ProtoMessage() {}
 
 func (x *ListUserFreeRewardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[242]
+	mi := &file_user_service_v1_user_proto_msgTypes[244]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15154,7 +15244,7 @@ func (x *ListUserFreeRewardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserFreeRewardsRequest.ProtoReflect.Descriptor instead.
 func (*ListUserFreeRewardsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{242}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{244}
 }
 
 type GetRewardHistoryResponse struct {
@@ -15173,7 +15263,7 @@ type GetRewardHistoryResponse struct {
 
 func (x *GetRewardHistoryResponse) Reset() {
 	*x = GetRewardHistoryResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[243]
+	mi := &file_user_service_v1_user_proto_msgTypes[245]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15185,7 +15275,7 @@ func (x *GetRewardHistoryResponse) String() string {
 func (*GetRewardHistoryResponse) ProtoMessage() {}
 
 func (x *GetRewardHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[243]
+	mi := &file_user_service_v1_user_proto_msgTypes[245]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15198,7 +15288,7 @@ func (x *GetRewardHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRewardHistoryResponse.ProtoReflect.Descriptor instead.
 func (*GetRewardHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{243}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{245}
 }
 
 func (x *GetRewardHistoryResponse) GetTotalRewardsUsd() string {
@@ -15266,7 +15356,7 @@ type GetCompanyAdminEmailsRequest struct {
 
 func (x *GetCompanyAdminEmailsRequest) Reset() {
 	*x = GetCompanyAdminEmailsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[244]
+	mi := &file_user_service_v1_user_proto_msgTypes[246]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15278,7 +15368,7 @@ func (x *GetCompanyAdminEmailsRequest) String() string {
 func (*GetCompanyAdminEmailsRequest) ProtoMessage() {}
 
 func (x *GetCompanyAdminEmailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[244]
+	mi := &file_user_service_v1_user_proto_msgTypes[246]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15291,7 +15381,7 @@ func (x *GetCompanyAdminEmailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCompanyAdminEmailsRequest.ProtoReflect.Descriptor instead.
 func (*GetCompanyAdminEmailsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{244}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{246}
 }
 
 func (x *GetCompanyAdminEmailsRequest) GetOperatorContext() *common.OperatorContext {
@@ -15310,7 +15400,7 @@ type GetCompanyAdminEmailsResponse struct {
 
 func (x *GetCompanyAdminEmailsResponse) Reset() {
 	*x = GetCompanyAdminEmailsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[245]
+	mi := &file_user_service_v1_user_proto_msgTypes[247]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15322,7 +15412,7 @@ func (x *GetCompanyAdminEmailsResponse) String() string {
 func (*GetCompanyAdminEmailsResponse) ProtoMessage() {}
 
 func (x *GetCompanyAdminEmailsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[245]
+	mi := &file_user_service_v1_user_proto_msgTypes[247]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15335,7 +15425,7 @@ func (x *GetCompanyAdminEmailsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCompanyAdminEmailsResponse.ProtoReflect.Descriptor instead.
 func (*GetCompanyAdminEmailsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{245}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{247}
 }
 
 func (x *GetCompanyAdminEmailsResponse) GetEmails() []string {
@@ -15359,7 +15449,7 @@ type ListUserSessionActivitiesRequest struct {
 
 func (x *ListUserSessionActivitiesRequest) Reset() {
 	*x = ListUserSessionActivitiesRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[246]
+	mi := &file_user_service_v1_user_proto_msgTypes[248]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15371,7 +15461,7 @@ func (x *ListUserSessionActivitiesRequest) String() string {
 func (*ListUserSessionActivitiesRequest) ProtoMessage() {}
 
 func (x *ListUserSessionActivitiesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[246]
+	mi := &file_user_service_v1_user_proto_msgTypes[248]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15384,7 +15474,7 @@ func (x *ListUserSessionActivitiesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserSessionActivitiesRequest.ProtoReflect.Descriptor instead.
 func (*ListUserSessionActivitiesRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{246}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{248}
 }
 
 func (x *ListUserSessionActivitiesRequest) GetUserId() int64 {
@@ -15441,7 +15531,7 @@ type ListUserSessionActivitiesResponse struct {
 
 func (x *ListUserSessionActivitiesResponse) Reset() {
 	*x = ListUserSessionActivitiesResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[247]
+	mi := &file_user_service_v1_user_proto_msgTypes[249]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15453,7 +15543,7 @@ func (x *ListUserSessionActivitiesResponse) String() string {
 func (*ListUserSessionActivitiesResponse) ProtoMessage() {}
 
 func (x *ListUserSessionActivitiesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[247]
+	mi := &file_user_service_v1_user_proto_msgTypes[249]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15466,7 +15556,7 @@ func (x *ListUserSessionActivitiesResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListUserSessionActivitiesResponse.ProtoReflect.Descriptor instead.
 func (*ListUserSessionActivitiesResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{247}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{249}
 }
 
 func (x *ListUserSessionActivitiesResponse) GetActivities() []*ListUserSessionActivitiesResponse_SessionActivity {
@@ -15507,7 +15597,7 @@ type SwapFeeCurrencyOverride struct {
 
 func (x *SwapFeeCurrencyOverride) Reset() {
 	*x = SwapFeeCurrencyOverride{}
-	mi := &file_user_service_v1_user_proto_msgTypes[248]
+	mi := &file_user_service_v1_user_proto_msgTypes[250]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15519,7 +15609,7 @@ func (x *SwapFeeCurrencyOverride) String() string {
 func (*SwapFeeCurrencyOverride) ProtoMessage() {}
 
 func (x *SwapFeeCurrencyOverride) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[248]
+	mi := &file_user_service_v1_user_proto_msgTypes[250]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15532,7 +15622,7 @@ func (x *SwapFeeCurrencyOverride) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapFeeCurrencyOverride.ProtoReflect.Descriptor instead.
 func (*SwapFeeCurrencyOverride) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{248}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{250}
 }
 
 func (x *SwapFeeCurrencyOverride) GetCurrency() string {
@@ -15559,7 +15649,7 @@ type SwapFeeSettings struct {
 
 func (x *SwapFeeSettings) Reset() {
 	*x = SwapFeeSettings{}
-	mi := &file_user_service_v1_user_proto_msgTypes[249]
+	mi := &file_user_service_v1_user_proto_msgTypes[251]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15571,7 +15661,7 @@ func (x *SwapFeeSettings) String() string {
 func (*SwapFeeSettings) ProtoMessage() {}
 
 func (x *SwapFeeSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[249]
+	mi := &file_user_service_v1_user_proto_msgTypes[251]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15584,7 +15674,7 @@ func (x *SwapFeeSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapFeeSettings.ProtoReflect.Descriptor instead.
 func (*SwapFeeSettings) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{249}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{251}
 }
 
 func (x *SwapFeeSettings) GetDefaultPercentage() string {
@@ -15609,7 +15699,7 @@ type GetSwapFeeSettingsRequest struct {
 
 func (x *GetSwapFeeSettingsRequest) Reset() {
 	*x = GetSwapFeeSettingsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[250]
+	mi := &file_user_service_v1_user_proto_msgTypes[252]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15621,7 +15711,7 @@ func (x *GetSwapFeeSettingsRequest) String() string {
 func (*GetSwapFeeSettingsRequest) ProtoMessage() {}
 
 func (x *GetSwapFeeSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[250]
+	mi := &file_user_service_v1_user_proto_msgTypes[252]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15634,7 +15724,7 @@ func (x *GetSwapFeeSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSwapFeeSettingsRequest.ProtoReflect.Descriptor instead.
 func (*GetSwapFeeSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{250}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{252}
 }
 
 type GetSwapFeeSettingsResponse struct {
@@ -15646,7 +15736,7 @@ type GetSwapFeeSettingsResponse struct {
 
 func (x *GetSwapFeeSettingsResponse) Reset() {
 	*x = GetSwapFeeSettingsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[251]
+	mi := &file_user_service_v1_user_proto_msgTypes[253]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15658,7 +15748,7 @@ func (x *GetSwapFeeSettingsResponse) String() string {
 func (*GetSwapFeeSettingsResponse) ProtoMessage() {}
 
 func (x *GetSwapFeeSettingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[251]
+	mi := &file_user_service_v1_user_proto_msgTypes[253]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15671,7 +15761,7 @@ func (x *GetSwapFeeSettingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSwapFeeSettingsResponse.ProtoReflect.Descriptor instead.
 func (*GetSwapFeeSettingsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{251}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{253}
 }
 
 func (x *GetSwapFeeSettingsResponse) GetSettings() *SwapFeeSettings {
@@ -15690,7 +15780,7 @@ type SetSwapFeeSettingsRequest struct {
 
 func (x *SetSwapFeeSettingsRequest) Reset() {
 	*x = SetSwapFeeSettingsRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[252]
+	mi := &file_user_service_v1_user_proto_msgTypes[254]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15702,7 +15792,7 @@ func (x *SetSwapFeeSettingsRequest) String() string {
 func (*SetSwapFeeSettingsRequest) ProtoMessage() {}
 
 func (x *SetSwapFeeSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[252]
+	mi := &file_user_service_v1_user_proto_msgTypes[254]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15715,7 +15805,7 @@ func (x *SetSwapFeeSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetSwapFeeSettingsRequest.ProtoReflect.Descriptor instead.
 func (*SetSwapFeeSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{252}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{254}
 }
 
 func (x *SetSwapFeeSettingsRequest) GetSettings() *SwapFeeSettings {
@@ -15733,7 +15823,7 @@ type SetSwapFeeSettingsResponse struct {
 
 func (x *SetSwapFeeSettingsResponse) Reset() {
 	*x = SetSwapFeeSettingsResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[253]
+	mi := &file_user_service_v1_user_proto_msgTypes[255]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15745,7 +15835,7 @@ func (x *SetSwapFeeSettingsResponse) String() string {
 func (*SetSwapFeeSettingsResponse) ProtoMessage() {}
 
 func (x *SetSwapFeeSettingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[253]
+	mi := &file_user_service_v1_user_proto_msgTypes[255]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15758,7 +15848,7 @@ func (x *SetSwapFeeSettingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetSwapFeeSettingsResponse.ProtoReflect.Descriptor instead.
 func (*SetSwapFeeSettingsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{253}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{255}
 }
 
 type RegisterWebPushDeviceRequest struct {
@@ -15771,7 +15861,7 @@ type RegisterWebPushDeviceRequest struct {
 
 func (x *RegisterWebPushDeviceRequest) Reset() {
 	*x = RegisterWebPushDeviceRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[254]
+	mi := &file_user_service_v1_user_proto_msgTypes[256]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15783,7 +15873,7 @@ func (x *RegisterWebPushDeviceRequest) String() string {
 func (*RegisterWebPushDeviceRequest) ProtoMessage() {}
 
 func (x *RegisterWebPushDeviceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[254]
+	mi := &file_user_service_v1_user_proto_msgTypes[256]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15796,7 +15886,7 @@ func (x *RegisterWebPushDeviceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterWebPushDeviceRequest.ProtoReflect.Descriptor instead.
 func (*RegisterWebPushDeviceRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{254}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{256}
 }
 
 func (x *RegisterWebPushDeviceRequest) GetFcmToken() string {
@@ -15822,7 +15912,7 @@ type RegisterWebPushDeviceResponse struct {
 
 func (x *RegisterWebPushDeviceResponse) Reset() {
 	*x = RegisterWebPushDeviceResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[255]
+	mi := &file_user_service_v1_user_proto_msgTypes[257]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15834,7 +15924,7 @@ func (x *RegisterWebPushDeviceResponse) String() string {
 func (*RegisterWebPushDeviceResponse) ProtoMessage() {}
 
 func (x *RegisterWebPushDeviceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[255]
+	mi := &file_user_service_v1_user_proto_msgTypes[257]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15847,7 +15937,7 @@ func (x *RegisterWebPushDeviceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterWebPushDeviceResponse.ProtoReflect.Descriptor instead.
 func (*RegisterWebPushDeviceResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{255}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{257}
 }
 
 func (x *RegisterWebPushDeviceResponse) GetDeviceId() int64 {
@@ -15866,7 +15956,7 @@ type UnregisterWebPushDeviceRequest struct {
 
 func (x *UnregisterWebPushDeviceRequest) Reset() {
 	*x = UnregisterWebPushDeviceRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[256]
+	mi := &file_user_service_v1_user_proto_msgTypes[258]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15878,7 +15968,7 @@ func (x *UnregisterWebPushDeviceRequest) String() string {
 func (*UnregisterWebPushDeviceRequest) ProtoMessage() {}
 
 func (x *UnregisterWebPushDeviceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[256]
+	mi := &file_user_service_v1_user_proto_msgTypes[258]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15891,7 +15981,7 @@ func (x *UnregisterWebPushDeviceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnregisterWebPushDeviceRequest.ProtoReflect.Descriptor instead.
 func (*UnregisterWebPushDeviceRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{256}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{258}
 }
 
 func (x *UnregisterWebPushDeviceRequest) GetFcmToken() string {
@@ -15909,7 +15999,7 @@ type UnregisterWebPushDeviceResponse struct {
 
 func (x *UnregisterWebPushDeviceResponse) Reset() {
 	*x = UnregisterWebPushDeviceResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[257]
+	mi := &file_user_service_v1_user_proto_msgTypes[259]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15921,7 +16011,7 @@ func (x *UnregisterWebPushDeviceResponse) String() string {
 func (*UnregisterWebPushDeviceResponse) ProtoMessage() {}
 
 func (x *UnregisterWebPushDeviceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[257]
+	mi := &file_user_service_v1_user_proto_msgTypes[259]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15934,7 +16024,7 @@ func (x *UnregisterWebPushDeviceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnregisterWebPushDeviceResponse.ProtoReflect.Descriptor instead.
 func (*UnregisterWebPushDeviceResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{257}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{259}
 }
 
 type UpdateOperatorNameRequest struct {
@@ -15948,7 +16038,7 @@ type UpdateOperatorNameRequest struct {
 
 func (x *UpdateOperatorNameRequest) Reset() {
 	*x = UpdateOperatorNameRequest{}
-	mi := &file_user_service_v1_user_proto_msgTypes[258]
+	mi := &file_user_service_v1_user_proto_msgTypes[260]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15960,7 +16050,7 @@ func (x *UpdateOperatorNameRequest) String() string {
 func (*UpdateOperatorNameRequest) ProtoMessage() {}
 
 func (x *UpdateOperatorNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[258]
+	mi := &file_user_service_v1_user_proto_msgTypes[260]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15973,7 +16063,7 @@ func (x *UpdateOperatorNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperatorNameRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOperatorNameRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{258}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{260}
 }
 
 func (x *UpdateOperatorNameRequest) GetOperatorContext() *common.OperatorContext {
@@ -16005,7 +16095,7 @@ type UpdateOperatorNameResponse struct {
 
 func (x *UpdateOperatorNameResponse) Reset() {
 	*x = UpdateOperatorNameResponse{}
-	mi := &file_user_service_v1_user_proto_msgTypes[259]
+	mi := &file_user_service_v1_user_proto_msgTypes[261]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16017,7 +16107,7 @@ func (x *UpdateOperatorNameResponse) String() string {
 func (*UpdateOperatorNameResponse) ProtoMessage() {}
 
 func (x *UpdateOperatorNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[259]
+	mi := &file_user_service_v1_user_proto_msgTypes[261]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16030,7 +16120,7 @@ func (x *UpdateOperatorNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperatorNameResponse.ProtoReflect.Descriptor instead.
 func (*UpdateOperatorNameResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{259}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{261}
 }
 
 type ListUsersResponse_User struct {
@@ -16076,7 +16166,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_user_service_v1_user_proto_msgTypes[260]
+	mi := &file_user_service_v1_user_proto_msgTypes[262]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16088,7 +16178,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[260]
+	mi := &file_user_service_v1_user_proto_msgTypes[262]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16341,7 +16431,7 @@ type GetCommentsByUserIdResponse_Comment struct {
 
 func (x *GetCommentsByUserIdResponse_Comment) Reset() {
 	*x = GetCommentsByUserIdResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[261]
+	mi := &file_user_service_v1_user_proto_msgTypes[263]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16353,7 +16443,7 @@ func (x *GetCommentsByUserIdResponse_Comment) String() string {
 func (*GetCommentsByUserIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[261]
+	mi := &file_user_service_v1_user_proto_msgTypes[263]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16415,7 +16505,7 @@ type GetUserProfileResponse_IpInfo struct {
 
 func (x *GetUserProfileResponse_IpInfo) Reset() {
 	*x = GetUserProfileResponse_IpInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[262]
+	mi := &file_user_service_v1_user_proto_msgTypes[264]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16427,7 +16517,7 @@ func (x *GetUserProfileResponse_IpInfo) String() string {
 func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[262]
+	mi := &file_user_service_v1_user_proto_msgTypes[264]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16482,7 +16572,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[263]
+	mi := &file_user_service_v1_user_proto_msgTypes[265]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16494,7 +16584,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[263]
+	mi := &file_user_service_v1_user_proto_msgTypes[265]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16597,7 +16687,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[264]
+	mi := &file_user_service_v1_user_proto_msgTypes[266]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16609,7 +16699,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[264]
+	mi := &file_user_service_v1_user_proto_msgTypes[266]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16701,7 +16791,7 @@ type GetUserProfileResponse_Comment struct {
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[265]
+	mi := &file_user_service_v1_user_proto_msgTypes[267]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16713,7 +16803,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[265]
+	mi := &file_user_service_v1_user_proto_msgTypes[267]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16777,7 +16867,7 @@ type GetUserProfileResponse_ChangeRecord struct {
 
 func (x *GetUserProfileResponse_ChangeRecord) Reset() {
 	*x = GetUserProfileResponse_ChangeRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[266]
+	mi := &file_user_service_v1_user_proto_msgTypes[268]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16789,7 +16879,7 @@ func (x *GetUserProfileResponse_ChangeRecord) String() string {
 func (*GetUserProfileResponse_ChangeRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_ChangeRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[266]
+	mi := &file_user_service_v1_user_proto_msgTypes[268]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16850,7 +16940,7 @@ type GetOverviewDashboardFromUserResponse_RegisteredUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_RegisteredUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[267]
+	mi := &file_user_service_v1_user_proto_msgTypes[269]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16862,7 +16952,7 @@ func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[267]
+	mi := &file_user_service_v1_user_proto_msgTypes[269]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16902,7 +16992,7 @@ type GetOverviewDashboardFromUserResponse_FirstDepositUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_FirstDepositUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[268]
+	mi := &file_user_service_v1_user_proto_msgTypes[270]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16914,7 +17004,7 @@ func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) String() string
 func (*GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[268]
+	mi := &file_user_service_v1_user_proto_msgTypes[270]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -16954,7 +17044,7 @@ type GetOverviewDashboardFromUserResponse_ActiveUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_ActiveUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[269]
+	mi := &file_user_service_v1_user_proto_msgTypes[271]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -16966,7 +17056,7 @@ func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[269]
+	mi := &file_user_service_v1_user_proto_msgTypes[271]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17007,7 +17097,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[270]
+	mi := &file_user_service_v1_user_proto_msgTypes[272]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17019,7 +17109,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[270]
+	mi := &file_user_service_v1_user_proto_msgTypes[272]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17067,7 +17157,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[271]
+	mi := &file_user_service_v1_user_proto_msgTypes[273]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17079,7 +17169,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[271]
+	mi := &file_user_service_v1_user_proto_msgTypes[273]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17130,7 +17220,7 @@ type ListAllOperatorsResponse_Operator struct {
 
 func (x *ListAllOperatorsResponse_Operator) Reset() {
 	*x = ListAllOperatorsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[272]
+	mi := &file_user_service_v1_user_proto_msgTypes[274]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17142,7 +17232,7 @@ func (x *ListAllOperatorsResponse_Operator) String() string {
 func (*ListAllOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListAllOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[272]
+	mi := &file_user_service_v1_user_proto_msgTypes[274]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17217,7 +17307,7 @@ type ListRetailerOperatorsResponse_OperatorInfo struct {
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListRetailerOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[273]
+	mi := &file_user_service_v1_user_proto_msgTypes[275]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17229,7 +17319,7 @@ func (x *ListRetailerOperatorsResponse_OperatorInfo) String() string {
 func (*ListRetailerOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[273]
+	mi := &file_user_service_v1_user_proto_msgTypes[275]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17317,7 +17407,7 @@ type ListCompanyOperatorsResponse_OperatorInfo struct {
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListCompanyOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[274]
+	mi := &file_user_service_v1_user_proto_msgTypes[276]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17329,7 +17419,7 @@ func (x *ListCompanyOperatorsResponse_OperatorInfo) String() string {
 func (*ListCompanyOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[274]
+	mi := &file_user_service_v1_user_proto_msgTypes[276]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17413,7 +17503,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListBottomOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[275]
+	mi := &file_user_service_v1_user_proto_msgTypes[277]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17425,7 +17515,7 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) String() string {
 func (*ListBottomOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[275]
+	mi := &file_user_service_v1_user_proto_msgTypes[277]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17521,7 +17611,7 @@ type ResponsibleGamblingConfig_SelfExclusion struct {
 
 func (x *ResponsibleGamblingConfig_SelfExclusion) Reset() {
 	*x = ResponsibleGamblingConfig_SelfExclusion{}
-	mi := &file_user_service_v1_user_proto_msgTypes[276]
+	mi := &file_user_service_v1_user_proto_msgTypes[278]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17533,7 +17623,7 @@ func (x *ResponsibleGamblingConfig_SelfExclusion) String() string {
 func (*ResponsibleGamblingConfig_SelfExclusion) ProtoMessage() {}
 
 func (x *ResponsibleGamblingConfig_SelfExclusion) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[276]
+	mi := &file_user_service_v1_user_proto_msgTypes[278]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17573,7 +17663,7 @@ type ResponsibleGamblingConfig_BreakInPlay struct {
 
 func (x *ResponsibleGamblingConfig_BreakInPlay) Reset() {
 	*x = ResponsibleGamblingConfig_BreakInPlay{}
-	mi := &file_user_service_v1_user_proto_msgTypes[277]
+	mi := &file_user_service_v1_user_proto_msgTypes[279]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17585,7 +17675,7 @@ func (x *ResponsibleGamblingConfig_BreakInPlay) String() string {
 func (*ResponsibleGamblingConfig_BreakInPlay) ProtoMessage() {}
 
 func (x *ResponsibleGamblingConfig_BreakInPlay) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[277]
+	mi := &file_user_service_v1_user_proto_msgTypes[279]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17626,7 +17716,7 @@ type ResponsibleGamblingConfig_TimeLimits struct {
 
 func (x *ResponsibleGamblingConfig_TimeLimits) Reset() {
 	*x = ResponsibleGamblingConfig_TimeLimits{}
-	mi := &file_user_service_v1_user_proto_msgTypes[278]
+	mi := &file_user_service_v1_user_proto_msgTypes[280]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17638,7 +17728,7 @@ func (x *ResponsibleGamblingConfig_TimeLimits) String() string {
 func (*ResponsibleGamblingConfig_TimeLimits) ProtoMessage() {}
 
 func (x *ResponsibleGamblingConfig_TimeLimits) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[278]
+	mi := &file_user_service_v1_user_proto_msgTypes[280]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17686,7 +17776,7 @@ type ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist struct {
 
 func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) Reset() {
 	*x = ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist{}
-	mi := &file_user_service_v1_user_proto_msgTypes[279]
+	mi := &file_user_service_v1_user_proto_msgTypes[281]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17698,7 +17788,7 @@ func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) String() str
 func (*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) ProtoMessage() {}
 
 func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[279]
+	mi := &file_user_service_v1_user_proto_msgTypes[281]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17751,7 +17841,7 @@ type ListUserSessionActivitiesResponse_SessionActivity struct {
 
 func (x *ListUserSessionActivitiesResponse_SessionActivity) Reset() {
 	*x = ListUserSessionActivitiesResponse_SessionActivity{}
-	mi := &file_user_service_v1_user_proto_msgTypes[287]
+	mi := &file_user_service_v1_user_proto_msgTypes[289]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -17763,7 +17853,7 @@ func (x *ListUserSessionActivitiesResponse_SessionActivity) String() string {
 func (*ListUserSessionActivitiesResponse_SessionActivity) ProtoMessage() {}
 
 func (x *ListUserSessionActivitiesResponse_SessionActivity) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[287]
+	mi := &file_user_service_v1_user_proto_msgTypes[289]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -17776,7 +17866,7 @@ func (x *ListUserSessionActivitiesResponse_SessionActivity) ProtoReflect() proto
 
 // Deprecated: Use ListUserSessionActivitiesResponse_SessionActivity.ProtoReflect.Descriptor instead.
 func (*ListUserSessionActivitiesResponse_SessionActivity) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_user_proto_rawDescGZIP(), []int{247, 0}
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{249, 0}
 }
 
 func (x *ListUserSessionActivitiesResponse_SessionActivity) GetEventType() string {
@@ -19121,7 +19211,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12(\n" +
 	"\x10operator_user_id\x18\x04 \x01(\x03R\x0eoperatorUserId\"\x1c\n" +
-	"\x1aAdminResetPasswordResponse\"\xe7\x04\n" +
+	"\x1aAdminResetPasswordResponse\"Z\n" +
+	"\x1cResetPasswordDirectlyRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
+	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\"\x1f\n" +
+	"\x1dResetPasswordDirectlyResponse\"\xe7\x04\n" +
 	"\x13OAuthProviderConfig\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -19353,7 +19447,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032ۅ\x01\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032ކ\x01\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -19464,7 +19558,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0fUpdateMfaConfig\x12+.api.user.service.v1.UpdateMfaConfigRequest\x1a,.api.user.service.v1.UpdateMfaConfigResponse\"\x00\x12\x8f\x01\n" +
 	"\x1aGetBackofficeAccountDetail\x126.api.user.service.v1.GetBackofficeAccountDetailRequest\x1a7.api.user.service.v1.GetBackofficeAccountDetailResponse\"\x00\x12\x86\x01\n" +
 	"\x17UpdateBackofficeAccount\x123.api.user.service.v1.UpdateBackofficeAccountRequest\x1a4.api.user.service.v1.UpdateBackofficeAccountResponse\"\x00\x12w\n" +
-	"\x12AdminResetPassword\x12..api.user.service.v1.AdminResetPasswordRequest\x1a/.api.user.service.v1.AdminResetPasswordResponse\"\x00\x12\xa4\x01\n" +
+	"\x12AdminResetPassword\x12..api.user.service.v1.AdminResetPasswordRequest\x1a/.api.user.service.v1.AdminResetPasswordResponse\"\x00\x12\x80\x01\n" +
+	"\x15ResetPasswordDirectly\x121.api.user.service.v1.ResetPasswordDirectlyRequest\x1a2.api.user.service.v1.ResetPasswordDirectlyResponse\"\x00\x12\xa4\x01\n" +
 	"!CreateOrUpdateOAuthProviderConfig\x12=.api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest\x1a>.api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse\"\x00\x12\x8c\x01\n" +
 	"\x19DeleteOAuthProviderConfig\x125.api.user.service.v1.DeleteOAuthProviderConfigRequest\x1a6.api.user.service.v1.DeleteOAuthProviderConfigResponse\"\x00\x12\x86\x01\n" +
 	"\x17SetOAuthProviderEnabled\x123.api.user.service.v1.SetOAuthProviderEnabledRequest\x1a4.api.user.service.v1.SetOAuthProviderEnabledResponse\"\x00\x12\x89\x01\n" +
@@ -19501,7 +19596,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 288)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 290)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                                                     // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                                             // 1: api.user.service.v1.PasswordProvider
@@ -19720,323 +19815,325 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*UpdateBackofficeAccountResponse)(nil),                           // 214: api.user.service.v1.UpdateBackofficeAccountResponse
 	(*AdminResetPasswordRequest)(nil),                                 // 215: api.user.service.v1.AdminResetPasswordRequest
 	(*AdminResetPasswordResponse)(nil),                                // 216: api.user.service.v1.AdminResetPasswordResponse
-	(*OAuthProviderConfig)(nil),                                       // 217: api.user.service.v1.OAuthProviderConfig
-	(*CreateOrUpdateOAuthProviderConfigRequest)(nil),                  // 218: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest
-	(*CreateOrUpdateOAuthProviderConfigResponse)(nil),                 // 219: api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse
-	(*DeleteOAuthProviderConfigRequest)(nil),                          // 220: api.user.service.v1.DeleteOAuthProviderConfigRequest
-	(*DeleteOAuthProviderConfigResponse)(nil),                         // 221: api.user.service.v1.DeleteOAuthProviderConfigResponse
-	(*SetOAuthProviderEnabledRequest)(nil),                            // 222: api.user.service.v1.SetOAuthProviderEnabledRequest
-	(*SetOAuthProviderEnabledResponse)(nil),                           // 223: api.user.service.v1.SetOAuthProviderEnabledResponse
-	(*ListOAuthProviderConfigsRequest)(nil),                           // 224: api.user.service.v1.ListOAuthProviderConfigsRequest
-	(*ListOAuthProviderConfigsResponse)(nil),                          // 225: api.user.service.v1.ListOAuthProviderConfigsResponse
-	(*GetOAuthProviderConfigRequest)(nil),                             // 226: api.user.service.v1.GetOAuthProviderConfigRequest
-	(*GetOAuthProviderConfigResponse)(nil),                            // 227: api.user.service.v1.GetOAuthProviderConfigResponse
-	(*AvailableOAuthProvider)(nil),                                    // 228: api.user.service.v1.AvailableOAuthProvider
-	(*GetAvailableOAuthProvidersRequest)(nil),                         // 229: api.user.service.v1.GetAvailableOAuthProvidersRequest
-	(*GetAvailableOAuthProvidersResponse)(nil),                        // 230: api.user.service.v1.GetAvailableOAuthProvidersResponse
-	(*OAuthLoginV2Request)(nil),                                       // 231: api.user.service.v1.OAuthLoginV2Request
-	(*OAuthAccountInfo)(nil),                                          // 232: api.user.service.v1.OAuthAccountInfo
-	(*BindOAuthAccountRequest)(nil),                                   // 233: api.user.service.v1.BindOAuthAccountRequest
-	(*BindOAuthAccountResponse)(nil),                                  // 234: api.user.service.v1.BindOAuthAccountResponse
-	(*UnbindOAuthAccountRequest)(nil),                                 // 235: api.user.service.v1.UnbindOAuthAccountRequest
-	(*UnbindOAuthAccountResponse)(nil),                                // 236: api.user.service.v1.UnbindOAuthAccountResponse
-	(*ListBoundOAuthAccountsRequest)(nil),                             // 237: api.user.service.v1.ListBoundOAuthAccountsRequest
-	(*ListBoundOAuthAccountsResponse)(nil),                            // 238: api.user.service.v1.ListBoundOAuthAccountsResponse
-	(*InitiateOAuthLoginRequest)(nil),                                 // 239: api.user.service.v1.InitiateOAuthLoginRequest
-	(*InitiateOAuthLoginResponse)(nil),                                // 240: api.user.service.v1.InitiateOAuthLoginResponse
-	(*InitiateOAuthBindingRequest)(nil),                               // 241: api.user.service.v1.InitiateOAuthBindingRequest
-	(*InitiateOAuthBindingResponse)(nil),                              // 242: api.user.service.v1.InitiateOAuthBindingResponse
-	(*GetTelegramLoginInfoRequest)(nil),                               // 243: api.user.service.v1.GetTelegramLoginInfoRequest
-	(*GetTelegramLoginInfoResponse)(nil),                              // 244: api.user.service.v1.GetTelegramLoginInfoResponse
-	(*GetRewardHistoryRequest)(nil),                                   // 245: api.user.service.v1.GetRewardHistoryRequest
-	(*ListUserFreeRewardsRequest)(nil),                                // 246: api.user.service.v1.ListUserFreeRewardsRequest
-	(*GetRewardHistoryResponse)(nil),                                  // 247: api.user.service.v1.GetRewardHistoryResponse
-	(*GetCompanyAdminEmailsRequest)(nil),                              // 248: api.user.service.v1.GetCompanyAdminEmailsRequest
-	(*GetCompanyAdminEmailsResponse)(nil),                             // 249: api.user.service.v1.GetCompanyAdminEmailsResponse
-	(*ListUserSessionActivitiesRequest)(nil),                          // 250: api.user.service.v1.ListUserSessionActivitiesRequest
-	(*ListUserSessionActivitiesResponse)(nil),                         // 251: api.user.service.v1.ListUserSessionActivitiesResponse
-	(*SwapFeeCurrencyOverride)(nil),                                   // 252: api.user.service.v1.SwapFeeCurrencyOverride
-	(*SwapFeeSettings)(nil),                                           // 253: api.user.service.v1.SwapFeeSettings
-	(*GetSwapFeeSettingsRequest)(nil),                                 // 254: api.user.service.v1.GetSwapFeeSettingsRequest
-	(*GetSwapFeeSettingsResponse)(nil),                                // 255: api.user.service.v1.GetSwapFeeSettingsResponse
-	(*SetSwapFeeSettingsRequest)(nil),                                 // 256: api.user.service.v1.SetSwapFeeSettingsRequest
-	(*SetSwapFeeSettingsResponse)(nil),                                // 257: api.user.service.v1.SetSwapFeeSettingsResponse
-	(*RegisterWebPushDeviceRequest)(nil),                              // 258: api.user.service.v1.RegisterWebPushDeviceRequest
-	(*RegisterWebPushDeviceResponse)(nil),                             // 259: api.user.service.v1.RegisterWebPushDeviceResponse
-	(*UnregisterWebPushDeviceRequest)(nil),                            // 260: api.user.service.v1.UnregisterWebPushDeviceRequest
-	(*UnregisterWebPushDeviceResponse)(nil),                           // 261: api.user.service.v1.UnregisterWebPushDeviceResponse
-	(*UpdateOperatorNameRequest)(nil),                                 // 262: api.user.service.v1.UpdateOperatorNameRequest
-	(*UpdateOperatorNameResponse)(nil),                                // 263: api.user.service.v1.UpdateOperatorNameResponse
-	(*ListUsersResponse_User)(nil),                                    // 264: api.user.service.v1.ListUsersResponse.User
-	(*GetCommentsByUserIdResponse_Comment)(nil),                       // 265: api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	(*GetUserProfileResponse_IpInfo)(nil),                             // 266: api.user.service.v1.GetUserProfileResponse.IpInfo
-	(*GetUserProfileResponse_RegistrationRecord)(nil),                 // 267: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),                        // 268: api.user.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),                            // 269: api.user.service.v1.GetUserProfileResponse.Comment
-	(*GetUserProfileResponse_ChangeRecord)(nil),                       // 270: api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),      // 271: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil),    // 272: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),          // 273: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	(*GetOperatorResponse_Operator)(nil),                              // 274: api.user.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),                        // 275: api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	(*ListAllOperatorsResponse_Operator)(nil),                         // 276: api.user.service.v1.ListAllOperatorsResponse.Operator
-	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),                // 277: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),                 // 278: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	(*ListBottomOperatorsResponse_OperatorInfo)(nil),                  // 279: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	(*ResponsibleGamblingConfig_SelfExclusion)(nil),                   // 280: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
-	(*ResponsibleGamblingConfig_BreakInPlay)(nil),                     // 281: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
-	(*ResponsibleGamblingConfig_TimeLimits)(nil),                      // 282: api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
-	(*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist)(nil), // 283: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
-	nil, // 284: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
-	nil, // 285: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
-	nil, // 286: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
-	nil, // 287: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
-	nil, // 288: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
-	nil, // 289: api.user.service.v1.OAuthProviderConfig.ConfigEntry
-	nil, // 290: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
-	(*ListUserSessionActivitiesResponse_SessionActivity)(nil), // 291: api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivity
-	(*timestamppb.Timestamp)(nil),                             // 292: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),                            // 293: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),                     // 294: api.common.OperatorContextFilters
-	(v1.VipRewardKind)(0),                                     // 295: api.vip.service.v1.VipRewardKind
-	(*v1.GetOperatorVipSettingsResponse)(nil),                 // 296: api.vip.service.v1.GetOperatorVipSettingsResponse
-	(*v1.GetUserVipLevelResponse)(nil),                        // 297: api.vip.service.v1.GetUserVipLevelResponse
-	(*v1.UpdateVipRewardSliderResponse)(nil),                  // 298: api.vip.service.v1.UpdateVipRewardSliderResponse
-	(*v1.GetClaimableVipRewardsResponse)(nil),                 // 299: api.vip.service.v1.GetClaimableVipRewardsResponse
-	(*v1.ClaimVipRewardResponse)(nil),                         // 300: api.vip.service.v1.ClaimVipRewardResponse
-	(*v1.ConfirmClaimVipRewardResponse)(nil),                  // 301: api.vip.service.v1.ConfirmClaimVipRewardResponse
-	(*v1.RequestDailyLossbackResponse)(nil),                   // 302: api.vip.service.v1.RequestDailyLossbackResponse
-	(*v1.GetDailyLossbackStatusResponse)(nil),                 // 303: api.vip.service.v1.GetDailyLossbackStatusResponse
-	(*v11.ListUserFreeRewardsResponse)(nil),                   // 304: api.wallet.service.v1.ListUserFreeRewardsResponse
+	(*ResetPasswordDirectlyRequest)(nil),                              // 217: api.user.service.v1.ResetPasswordDirectlyRequest
+	(*ResetPasswordDirectlyResponse)(nil),                             // 218: api.user.service.v1.ResetPasswordDirectlyResponse
+	(*OAuthProviderConfig)(nil),                                       // 219: api.user.service.v1.OAuthProviderConfig
+	(*CreateOrUpdateOAuthProviderConfigRequest)(nil),                  // 220: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest
+	(*CreateOrUpdateOAuthProviderConfigResponse)(nil),                 // 221: api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse
+	(*DeleteOAuthProviderConfigRequest)(nil),                          // 222: api.user.service.v1.DeleteOAuthProviderConfigRequest
+	(*DeleteOAuthProviderConfigResponse)(nil),                         // 223: api.user.service.v1.DeleteOAuthProviderConfigResponse
+	(*SetOAuthProviderEnabledRequest)(nil),                            // 224: api.user.service.v1.SetOAuthProviderEnabledRequest
+	(*SetOAuthProviderEnabledResponse)(nil),                           // 225: api.user.service.v1.SetOAuthProviderEnabledResponse
+	(*ListOAuthProviderConfigsRequest)(nil),                           // 226: api.user.service.v1.ListOAuthProviderConfigsRequest
+	(*ListOAuthProviderConfigsResponse)(nil),                          // 227: api.user.service.v1.ListOAuthProviderConfigsResponse
+	(*GetOAuthProviderConfigRequest)(nil),                             // 228: api.user.service.v1.GetOAuthProviderConfigRequest
+	(*GetOAuthProviderConfigResponse)(nil),                            // 229: api.user.service.v1.GetOAuthProviderConfigResponse
+	(*AvailableOAuthProvider)(nil),                                    // 230: api.user.service.v1.AvailableOAuthProvider
+	(*GetAvailableOAuthProvidersRequest)(nil),                         // 231: api.user.service.v1.GetAvailableOAuthProvidersRequest
+	(*GetAvailableOAuthProvidersResponse)(nil),                        // 232: api.user.service.v1.GetAvailableOAuthProvidersResponse
+	(*OAuthLoginV2Request)(nil),                                       // 233: api.user.service.v1.OAuthLoginV2Request
+	(*OAuthAccountInfo)(nil),                                          // 234: api.user.service.v1.OAuthAccountInfo
+	(*BindOAuthAccountRequest)(nil),                                   // 235: api.user.service.v1.BindOAuthAccountRequest
+	(*BindOAuthAccountResponse)(nil),                                  // 236: api.user.service.v1.BindOAuthAccountResponse
+	(*UnbindOAuthAccountRequest)(nil),                                 // 237: api.user.service.v1.UnbindOAuthAccountRequest
+	(*UnbindOAuthAccountResponse)(nil),                                // 238: api.user.service.v1.UnbindOAuthAccountResponse
+	(*ListBoundOAuthAccountsRequest)(nil),                             // 239: api.user.service.v1.ListBoundOAuthAccountsRequest
+	(*ListBoundOAuthAccountsResponse)(nil),                            // 240: api.user.service.v1.ListBoundOAuthAccountsResponse
+	(*InitiateOAuthLoginRequest)(nil),                                 // 241: api.user.service.v1.InitiateOAuthLoginRequest
+	(*InitiateOAuthLoginResponse)(nil),                                // 242: api.user.service.v1.InitiateOAuthLoginResponse
+	(*InitiateOAuthBindingRequest)(nil),                               // 243: api.user.service.v1.InitiateOAuthBindingRequest
+	(*InitiateOAuthBindingResponse)(nil),                              // 244: api.user.service.v1.InitiateOAuthBindingResponse
+	(*GetTelegramLoginInfoRequest)(nil),                               // 245: api.user.service.v1.GetTelegramLoginInfoRequest
+	(*GetTelegramLoginInfoResponse)(nil),                              // 246: api.user.service.v1.GetTelegramLoginInfoResponse
+	(*GetRewardHistoryRequest)(nil),                                   // 247: api.user.service.v1.GetRewardHistoryRequest
+	(*ListUserFreeRewardsRequest)(nil),                                // 248: api.user.service.v1.ListUserFreeRewardsRequest
+	(*GetRewardHistoryResponse)(nil),                                  // 249: api.user.service.v1.GetRewardHistoryResponse
+	(*GetCompanyAdminEmailsRequest)(nil),                              // 250: api.user.service.v1.GetCompanyAdminEmailsRequest
+	(*GetCompanyAdminEmailsResponse)(nil),                             // 251: api.user.service.v1.GetCompanyAdminEmailsResponse
+	(*ListUserSessionActivitiesRequest)(nil),                          // 252: api.user.service.v1.ListUserSessionActivitiesRequest
+	(*ListUserSessionActivitiesResponse)(nil),                         // 253: api.user.service.v1.ListUserSessionActivitiesResponse
+	(*SwapFeeCurrencyOverride)(nil),                                   // 254: api.user.service.v1.SwapFeeCurrencyOverride
+	(*SwapFeeSettings)(nil),                                           // 255: api.user.service.v1.SwapFeeSettings
+	(*GetSwapFeeSettingsRequest)(nil),                                 // 256: api.user.service.v1.GetSwapFeeSettingsRequest
+	(*GetSwapFeeSettingsResponse)(nil),                                // 257: api.user.service.v1.GetSwapFeeSettingsResponse
+	(*SetSwapFeeSettingsRequest)(nil),                                 // 258: api.user.service.v1.SetSwapFeeSettingsRequest
+	(*SetSwapFeeSettingsResponse)(nil),                                // 259: api.user.service.v1.SetSwapFeeSettingsResponse
+	(*RegisterWebPushDeviceRequest)(nil),                              // 260: api.user.service.v1.RegisterWebPushDeviceRequest
+	(*RegisterWebPushDeviceResponse)(nil),                             // 261: api.user.service.v1.RegisterWebPushDeviceResponse
+	(*UnregisterWebPushDeviceRequest)(nil),                            // 262: api.user.service.v1.UnregisterWebPushDeviceRequest
+	(*UnregisterWebPushDeviceResponse)(nil),                           // 263: api.user.service.v1.UnregisterWebPushDeviceResponse
+	(*UpdateOperatorNameRequest)(nil),                                 // 264: api.user.service.v1.UpdateOperatorNameRequest
+	(*UpdateOperatorNameResponse)(nil),                                // 265: api.user.service.v1.UpdateOperatorNameResponse
+	(*ListUsersResponse_User)(nil),                                    // 266: api.user.service.v1.ListUsersResponse.User
+	(*GetCommentsByUserIdResponse_Comment)(nil),                       // 267: api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	(*GetUserProfileResponse_IpInfo)(nil),                             // 268: api.user.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil),                 // 269: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),                        // 270: api.user.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),                            // 271: api.user.service.v1.GetUserProfileResponse.Comment
+	(*GetUserProfileResponse_ChangeRecord)(nil),                       // 272: api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),      // 273: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil),    // 274: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),          // 275: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	(*GetOperatorResponse_Operator)(nil),                              // 276: api.user.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),                        // 277: api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	(*ListAllOperatorsResponse_Operator)(nil),                         // 278: api.user.service.v1.ListAllOperatorsResponse.Operator
+	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),                // 279: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),                 // 280: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	(*ListBottomOperatorsResponse_OperatorInfo)(nil),                  // 281: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	(*ResponsibleGamblingConfig_SelfExclusion)(nil),                   // 282: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
+	(*ResponsibleGamblingConfig_BreakInPlay)(nil),                     // 283: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
+	(*ResponsibleGamblingConfig_TimeLimits)(nil),                      // 284: api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
+	(*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist)(nil), // 285: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
+	nil, // 286: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	nil, // 287: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
+	nil, // 288: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
+	nil, // 289: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
+	nil, // 290: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
+	nil, // 291: api.user.service.v1.OAuthProviderConfig.ConfigEntry
+	nil, // 292: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	(*ListUserSessionActivitiesResponse_SessionActivity)(nil), // 293: api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivity
+	(*timestamppb.Timestamp)(nil),                             // 294: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),                            // 295: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),                     // 296: api.common.OperatorContextFilters
+	(v1.VipRewardKind)(0),                                     // 297: api.vip.service.v1.VipRewardKind
+	(*v1.GetOperatorVipSettingsResponse)(nil),                 // 298: api.vip.service.v1.GetOperatorVipSettingsResponse
+	(*v1.GetUserVipLevelResponse)(nil),                        // 299: api.vip.service.v1.GetUserVipLevelResponse
+	(*v1.UpdateVipRewardSliderResponse)(nil),                  // 300: api.vip.service.v1.UpdateVipRewardSliderResponse
+	(*v1.GetClaimableVipRewardsResponse)(nil),                 // 301: api.vip.service.v1.GetClaimableVipRewardsResponse
+	(*v1.ClaimVipRewardResponse)(nil),                         // 302: api.vip.service.v1.ClaimVipRewardResponse
+	(*v1.ConfirmClaimVipRewardResponse)(nil),                  // 303: api.vip.service.v1.ConfirmClaimVipRewardResponse
+	(*v1.RequestDailyLossbackResponse)(nil),                   // 304: api.vip.service.v1.RequestDailyLossbackResponse
+	(*v1.GetDailyLossbackStatusResponse)(nil),                 // 305: api.vip.service.v1.GetDailyLossbackStatusResponse
+	(*v11.ListUserFreeRewardsResponse)(nil),                   // 306: api.wallet.service.v1.ListUserFreeRewardsResponse
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	50,  // 0: api.user.service.v1.UserInfo.user_identity:type_name -> api.user.service.v1.UserIdentity
-	292, // 1: api.user.service.v1.UserInfo.dob:type_name -> google.protobuf.Timestamp
-	292, // 2: api.user.service.v1.UserInfo.registered_at:type_name -> google.protobuf.Timestamp
+	294, // 1: api.user.service.v1.UserInfo.dob:type_name -> google.protobuf.Timestamp
+	294, // 2: api.user.service.v1.UserInfo.registered_at:type_name -> google.protobuf.Timestamp
 	1,   // 3: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	292, // 4: api.user.service.v1.RegisterRequest.dob:type_name -> google.protobuf.Timestamp
+	294, // 4: api.user.service.v1.RegisterRequest.dob:type_name -> google.protobuf.Timestamp
 	1,   // 5: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	1,   // 6: api.user.service.v1.LoginWithInfoRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	293, // 7: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 7: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
 	7,   // 8: api.user.service.v1.LoginWithInfoRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
 	2,   // 9: api.user.service.v1.OAuthRequest.oauth_provider:type_name -> api.user.service.v1.OAuthProvider
 	4,   // 10: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 11: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 12: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	293, // 13: api.user.service.v1.SetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 14: api.user.service.v1.SetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 15: api.user.service.v1.GetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 16: api.user.service.v1.GetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 17: api.user.service.v1.GetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 18: api.user.service.v1.SetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 19: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 20: api.user.service.v1.SendPasswordResetCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 21: api.user.service.v1.ResetPasswordWithCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	292, // 22: api.user.service.v1.UserIdentity.created_at:type_name -> google.protobuf.Timestamp
-	292, // 23: api.user.service.v1.UserIdentity.audited_at:type_name -> google.protobuf.Timestamp
+	295, // 13: api.user.service.v1.SetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 14: api.user.service.v1.SetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 15: api.user.service.v1.GetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 16: api.user.service.v1.GetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 17: api.user.service.v1.GetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 18: api.user.service.v1.SetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 19: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 20: api.user.service.v1.SendPasswordResetCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 21: api.user.service.v1.ResetPasswordWithCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	294, // 22: api.user.service.v1.UserIdentity.created_at:type_name -> google.protobuf.Timestamp
+	294, // 23: api.user.service.v1.UserIdentity.audited_at:type_name -> google.protobuf.Timestamp
 	49,  // 24: api.user.service.v1.UpdateUserRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
-	292, // 25: api.user.service.v1.UpdateUserRequest.dob:type_name -> google.protobuf.Timestamp
-	293, // 26: api.user.service.v1.UpdateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	292, // 27: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	292, // 28: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	293, // 29: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
-	294, // 30: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	293, // 31: api.user.service.v1.ListUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
-	264, // 32: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	292, // 33: api.user.service.v1.ExportUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	292, // 34: api.user.service.v1.ExportUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	293, // 35: api.user.service.v1.ExportUsersRequest.operator_context:type_name -> api.common.OperatorContext
-	294, // 36: api.user.service.v1.ExportUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	293, // 37: api.user.service.v1.ExportUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
-	293, // 38: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 39: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 40: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
-	265, // 41: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	293, // 42: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
-	267, // 43: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	268, // 44: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
-	269, // 45: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
-	292, // 46: api.user.service.v1.GetUserProfileResponse.dob:type_name -> google.protobuf.Timestamp
+	294, // 25: api.user.service.v1.UpdateUserRequest.dob:type_name -> google.protobuf.Timestamp
+	295, // 26: api.user.service.v1.UpdateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	294, // 27: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	294, // 28: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	295, // 29: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	296, // 30: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	295, // 31: api.user.service.v1.ListUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	266, // 32: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	294, // 33: api.user.service.v1.ExportUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	294, // 34: api.user.service.v1.ExportUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	295, // 35: api.user.service.v1.ExportUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	296, // 36: api.user.service.v1.ExportUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	295, // 37: api.user.service.v1.ExportUsersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 38: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 39: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 40: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
+	267, // 41: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	295, // 42: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
+	269, // 43: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	270, // 44: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
+	271, // 45: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
+	294, // 46: api.user.service.v1.GetUserProfileResponse.dob:type_name -> google.protobuf.Timestamp
 	50,  // 47: api.user.service.v1.GetUserProfileResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
-	270, // 48: api.user.service.v1.GetUserProfileResponse.emailChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	270, // 49: api.user.service.v1.GetUserProfileResponse.phoneChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
-	293, // 50: api.user.service.v1.GetUserProfileResponse.user_operator_context:type_name -> api.common.OperatorContext
+	272, // 48: api.user.service.v1.GetUserProfileResponse.emailChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	272, // 49: api.user.service.v1.GetUserProfileResponse.phoneChangeHistory:type_name -> api.user.service.v1.GetUserProfileResponse.ChangeRecord
+	295, // 50: api.user.service.v1.GetUserProfileResponse.user_operator_context:type_name -> api.common.OperatorContext
 	70,  // 51: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	293, // 52: api.user.service.v1.CreateRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 53: api.user.service.v1.ListRolesRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 52: api.user.service.v1.CreateRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 53: api.user.service.v1.ListRolesRequest.operator_context:type_name -> api.common.OperatorContext
 	70,  // 54: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
 	73,  // 55: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
 	70,  // 56: api.user.service.v1.UpdateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
-	293, // 57: api.user.service.v1.UpdateRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 57: api.user.service.v1.UpdateRoleRequest.operator_context:type_name -> api.common.OperatorContext
 	73,  // 58: api.user.service.v1.GetRoleResponse.role:type_name -> api.user.service.v1.Role
-	293, // 59: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
-	294, // 60: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	271, // 61: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	272, // 62: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	273, // 63: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	293, // 64: api.user.service.v1.DeleteRoleRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 65: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
-	293, // 66: api.user.service.v1.GetOperatorInfoByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	295, // 59: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
+	296, // 60: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	273, // 61: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	274, // 62: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	275, // 63: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	295, // 64: api.user.service.v1.DeleteRoleRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 65: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	295, // 66: api.user.service.v1.GetOperatorInfoByOriginResponse.operator_context:type_name -> api.common.OperatorContext
 	119, // 67: api.user.service.v1.GetOperatorInfoByOriginResponse.operatorDetail:type_name -> api.user.service.v1.OperatorDetails
 	119, // 68: api.user.service.v1.GetOperatorInfoByOriginResponse.systemOperatorDetail:type_name -> api.user.service.v1.OperatorDetails
-	274, // 69: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
-	275, // 70: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	293, // 71: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	276, // 72: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
-	293, // 73: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
+	276, // 69: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
+	277, // 70: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	295, // 71: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	278, // 72: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
+	295, // 73: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
 	109, // 74: api.user.service.v1.OperatorAccountSettings.password_settings:type_name -> api.user.service.v1.OperatorAccountPasswordSettings
 	110, // 75: api.user.service.v1.OperatorAccountSettings.security_settings:type_name -> api.user.service.v1.OperatorAccountSecuritySettings
 	111, // 76: api.user.service.v1.OperatorAccountSettings.game_settings:type_name -> api.user.service.v1.OperatorAccountGameSettings
 	112, // 77: api.user.service.v1.OperatorAccountSettings.payment_settings:type_name -> api.user.service.v1.OperatorAccountPaymentSettings
-	293, // 78: api.user.service.v1.GetUserAccountSettingsStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 78: api.user.service.v1.GetUserAccountSettingsStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	115, // 79: api.user.service.v1.GetUserAccountSettingsStatusResponse.game_settings_status:type_name -> api.user.service.v1.UserAccountGameSettingsStatus
 	116, // 80: api.user.service.v1.GetUserAccountSettingsStatusResponse.payment_settings_status:type_name -> api.user.service.v1.UserAccountPaymentSettingsStatus
 	113, // 81: api.user.service.v1.OperatorConfig.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
 	118, // 82: api.user.service.v1.OperatorDetails.config:type_name -> api.user.service.v1.OperatorConfig
 	119, // 83: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	294, // 84: api.user.service.v1.ListOperatorsByParentOperatorIdRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	296, // 84: api.user.service.v1.ListOperatorsByParentOperatorIdRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	119, // 85: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	293, // 86: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	277, // 87: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	293, // 88: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	278, // 89: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	293, // 90: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	279, // 91: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	293, // 92: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	292, // 93: api.user.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
-	292, // 94: api.user.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
-	293, // 95: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 96: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 86: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	279, // 87: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	295, // 88: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	280, // 89: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	295, // 90: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	281, // 91: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	295, // 92: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	294, // 93: api.user.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
+	294, // 94: api.user.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
+	295, // 95: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 96: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
 	4,   // 97: api.user.service.v1.ListAllUsersResponse.users:type_name -> api.user.service.v1.UserInfo
-	293, // 98: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 98: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
 	119, // 99: api.user.service.v1.ListOperatorsByAdminEmailResponse.retailer_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	119, // 100: api.user.service.v1.ListOperatorsByAdminEmailResponse.company_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	119, // 101: api.user.service.v1.ListOperatorsByAdminEmailResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	119, // 102: api.user.service.v1.ListOperatorDetailsResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	119, // 103: api.user.service.v1.GetOperatorDetailsByUserIdResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	293, // 104: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 105: api.user.service.v1.GetOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 104: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 105: api.user.service.v1.GetOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	113, // 106: api.user.service.v1.GetOperatorAccountSettingsResponse.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	293, // 107: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 108: api.user.service.v1.UpdateOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 107: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 108: api.user.service.v1.UpdateOperatorAccountSettingsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	113, // 109: api.user.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	293, // 110: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 111: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
-	293, // 112: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 113: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
-	280, // 114: api.user.service.v1.ResponsibleGamblingConfig.self_exclusion:type_name -> api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
-	281, // 115: api.user.service.v1.ResponsibleGamblingConfig.break_in_play:type_name -> api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
-	282, // 116: api.user.service.v1.ResponsibleGamblingConfig.time_limits:type_name -> api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
+	295, // 110: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 111: api.user.service.v1.SetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 112: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 113: api.user.service.v1.GetOperatorMaxHouseEdgeRequest.target_operator_context:type_name -> api.common.OperatorContext
+	282, // 114: api.user.service.v1.ResponsibleGamblingConfig.self_exclusion:type_name -> api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion
+	283, // 115: api.user.service.v1.ResponsibleGamblingConfig.break_in_play:type_name -> api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
+	284, // 116: api.user.service.v1.ResponsibleGamblingConfig.time_limits:type_name -> api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
 	148, // 117: api.user.service.v1.AddResponsibleGamblingConfigRequest.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
-	293, // 118: api.user.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 119: api.user.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	292, // 120: api.user.service.v1.ResponsibleGamblingStatus.time_limits_next_inactive_time:type_name -> google.protobuf.Timestamp
-	292, // 121: api.user.service.v1.ResponsibleGamblingDeleteSchedule.self_exclusion_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	292, // 122: api.user.service.v1.ResponsibleGamblingDeleteSchedule.break_in_play_delete_schedule_time:type_name -> google.protobuf.Timestamp
-	292, // 123: api.user.service.v1.ResponsibleGamblingDeleteSchedule.time_limits_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	295, // 118: api.user.service.v1.DeleteResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 119: api.user.service.v1.GetResponsibleGamblingConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	294, // 120: api.user.service.v1.ResponsibleGamblingStatus.time_limits_next_inactive_time:type_name -> google.protobuf.Timestamp
+	294, // 121: api.user.service.v1.ResponsibleGamblingDeleteSchedule.self_exclusion_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	294, // 122: api.user.service.v1.ResponsibleGamblingDeleteSchedule.break_in_play_delete_schedule_time:type_name -> google.protobuf.Timestamp
+	294, // 123: api.user.service.v1.ResponsibleGamblingDeleteSchedule.time_limits_delete_schedule_time:type_name -> google.protobuf.Timestamp
 	148, // 124: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_config:type_name -> api.user.service.v1.ResponsibleGamblingConfig
 	154, // 125: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_status:type_name -> api.user.service.v1.ResponsibleGamblingStatus
 	155, // 126: api.user.service.v1.GetResponsibleGamblingConfigResponse.responsible_gambling_delete_schedule:type_name -> api.user.service.v1.ResponsibleGamblingDeleteSchedule
-	293, // 127: api.user.service.v1.UserIdentityAuditRequest.operator_context:type_name -> api.common.OperatorContext
-	292, // 128: api.user.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
-	292, // 129: api.user.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
-	294, // 130: api.user.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	293, // 131: api.user.service.v1.UserIdentityListRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 127: api.user.service.v1.UserIdentityAuditRequest.operator_context:type_name -> api.common.OperatorContext
+	294, // 128: api.user.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
+	294, // 129: api.user.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
+	296, // 130: api.user.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	295, // 131: api.user.service.v1.UserIdentityListRequest.operator_context:type_name -> api.common.OperatorContext
 	50,  // 132: api.user.service.v1.UserIdentityListResponse.user_identity:type_name -> api.user.service.v1.UserIdentity
-	293, // 133: api.user.service.v1.AddRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 134: api.user.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	293, // 135: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 136: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	293, // 137: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 138: api.user.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	283, // 139: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
+	295, // 133: api.user.service.v1.AddRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 134: api.user.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 135: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 136: api.user.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 137: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 138: api.user.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	285, // 139: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
 	168, // 140: api.user.service.v1.RegistrationFieldPolicy.registration:type_name -> api.user.service.v1.RegistrationFieldSet
 	168, // 141: api.user.service.v1.RegistrationFieldPolicy.login:type_name -> api.user.service.v1.RegistrationFieldSet
-	293, // 142: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 143: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	284, // 144: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
-	293, // 145: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 146: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	285, // 147: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
-	293, // 148: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 149: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	286, // 150: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
-	293, // 151: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 152: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	287, // 153: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
-	295, // 154: api.user.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	295, // 155: api.user.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	295, // 142: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 143: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	286, // 144: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	295, // 145: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 146: api.user.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	287, // 147: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry
+	295, // 148: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 149: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	288, // 150: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.config:type_name -> api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry
+	295, // 151: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 152: api.user.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	289, // 153: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.config:type_name -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry
+	297, // 154: api.user.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	297, // 155: api.user.service.v1.ConfirmClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
 	188, // 156: api.user.service.v1.GetUserPrivacySettingsResponse.settings:type_name -> api.user.service.v1.UserPrivacySettings
-	288, // 157: api.user.service.v1.GetUsersPrivacySettingsResponse.settings:type_name -> api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
+	290, // 157: api.user.service.v1.GetUsersPrivacySettingsResponse.settings:type_name -> api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry
 	1,   // 158: api.user.service.v1.LoginWithInfoAnd2faRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	293, // 159: api.user.service.v1.LoginWithInfoAnd2faRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 159: api.user.service.v1.LoginWithInfoAnd2faRequest.operator_context:type_name -> api.common.OperatorContext
 	7,   // 160: api.user.service.v1.LoginWithInfoAnd2faRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
 	4,   // 161: api.user.service.v1.LoginWithInfoAnd2faResponse.user_info:type_name -> api.user.service.v1.UserInfo
-	293, // 162: api.user.service.v1.GetBackofficeAccountDetailRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 163: api.user.service.v1.AdminResetPasswordRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 162: api.user.service.v1.GetBackofficeAccountDetailRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 163: api.user.service.v1.AdminResetPasswordRequest.operator_context:type_name -> api.common.OperatorContext
 	2,   // 164: api.user.service.v1.OAuthProviderConfig.provider:type_name -> api.user.service.v1.OAuthProvider
-	289, // 165: api.user.service.v1.OAuthProviderConfig.config:type_name -> api.user.service.v1.OAuthProviderConfig.ConfigEntry
-	293, // 166: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 167: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	291, // 165: api.user.service.v1.OAuthProviderConfig.config:type_name -> api.user.service.v1.OAuthProviderConfig.ConfigEntry
+	295, // 166: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 167: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	2,   // 168: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	290, // 169: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
-	293, // 170: api.user.service.v1.DeleteOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 171: api.user.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	293, // 172: api.user.service.v1.SetOAuthProviderEnabledRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 173: api.user.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
-	293, // 174: api.user.service.v1.ListOAuthProviderConfigsRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 175: api.user.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	292, // 169: api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.config:type_name -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest.ConfigEntry
+	295, // 170: api.user.service.v1.DeleteOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 171: api.user.service.v1.DeleteOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 172: api.user.service.v1.SetOAuthProviderEnabledRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 173: api.user.service.v1.SetOAuthProviderEnabledRequest.target_operator_context:type_name -> api.common.OperatorContext
+	295, // 174: api.user.service.v1.ListOAuthProviderConfigsRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 175: api.user.service.v1.ListOAuthProviderConfigsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	2,   // 176: api.user.service.v1.ListOAuthProviderConfigsRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	217, // 177: api.user.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
-	293, // 178: api.user.service.v1.GetOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 179: api.user.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	217, // 180: api.user.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
+	219, // 177: api.user.service.v1.ListOAuthProviderConfigsResponse.configs:type_name -> api.user.service.v1.OAuthProviderConfig
+	295, // 178: api.user.service.v1.GetOAuthProviderConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 179: api.user.service.v1.GetOAuthProviderConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	219, // 180: api.user.service.v1.GetOAuthProviderConfigResponse.config:type_name -> api.user.service.v1.OAuthProviderConfig
 	2,   // 181: api.user.service.v1.AvailableOAuthProvider.provider:type_name -> api.user.service.v1.OAuthProvider
-	228, // 182: api.user.service.v1.GetAvailableOAuthProvidersResponse.providers:type_name -> api.user.service.v1.AvailableOAuthProvider
+	230, // 182: api.user.service.v1.GetAvailableOAuthProvidersResponse.providers:type_name -> api.user.service.v1.AvailableOAuthProvider
 	2,   // 183: api.user.service.v1.OAuthLoginV2Request.provider:type_name -> api.user.service.v1.OAuthProvider
-	293, // 184: api.user.service.v1.OAuthLoginV2Request.operator_context:type_name -> api.common.OperatorContext
+	295, // 184: api.user.service.v1.OAuthLoginV2Request.operator_context:type_name -> api.common.OperatorContext
 	7,   // 185: api.user.service.v1.OAuthLoginV2Request.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
 	2,   // 186: api.user.service.v1.OAuthAccountInfo.provider:type_name -> api.user.service.v1.OAuthProvider
 	2,   // 187: api.user.service.v1.BindOAuthAccountRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	232, // 188: api.user.service.v1.BindOAuthAccountResponse.account_info:type_name -> api.user.service.v1.OAuthAccountInfo
+	234, // 188: api.user.service.v1.BindOAuthAccountResponse.account_info:type_name -> api.user.service.v1.OAuthAccountInfo
 	2,   // 189: api.user.service.v1.UnbindOAuthAccountRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	232, // 190: api.user.service.v1.ListBoundOAuthAccountsResponse.accounts:type_name -> api.user.service.v1.OAuthAccountInfo
+	234, // 190: api.user.service.v1.ListBoundOAuthAccountsResponse.accounts:type_name -> api.user.service.v1.OAuthAccountInfo
 	2,   // 191: api.user.service.v1.InitiateOAuthLoginRequest.provider:type_name -> api.user.service.v1.OAuthProvider
 	2,   // 192: api.user.service.v1.InitiateOAuthBindingRequest.provider:type_name -> api.user.service.v1.OAuthProvider
-	293, // 193: api.user.service.v1.GetCompanyAdminEmailsRequest.operator_context:type_name -> api.common.OperatorContext
-	292, // 194: api.user.service.v1.ListUserSessionActivitiesRequest.start_time:type_name -> google.protobuf.Timestamp
-	292, // 195: api.user.service.v1.ListUserSessionActivitiesRequest.end_time:type_name -> google.protobuf.Timestamp
-	291, // 196: api.user.service.v1.ListUserSessionActivitiesResponse.activities:type_name -> api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivity
-	252, // 197: api.user.service.v1.SwapFeeSettings.overrides:type_name -> api.user.service.v1.SwapFeeCurrencyOverride
-	253, // 198: api.user.service.v1.GetSwapFeeSettingsResponse.settings:type_name -> api.user.service.v1.SwapFeeSettings
-	253, // 199: api.user.service.v1.SetSwapFeeSettingsRequest.settings:type_name -> api.user.service.v1.SwapFeeSettings
-	293, // 200: api.user.service.v1.UpdateOperatorNameRequest.operator_context:type_name -> api.common.OperatorContext
-	293, // 201: api.user.service.v1.UpdateOperatorNameRequest.target_operator_context:type_name -> api.common.OperatorContext
-	292, // 202: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	292, // 203: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	292, // 204: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
+	295, // 193: api.user.service.v1.GetCompanyAdminEmailsRequest.operator_context:type_name -> api.common.OperatorContext
+	294, // 194: api.user.service.v1.ListUserSessionActivitiesRequest.start_time:type_name -> google.protobuf.Timestamp
+	294, // 195: api.user.service.v1.ListUserSessionActivitiesRequest.end_time:type_name -> google.protobuf.Timestamp
+	293, // 196: api.user.service.v1.ListUserSessionActivitiesResponse.activities:type_name -> api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivity
+	254, // 197: api.user.service.v1.SwapFeeSettings.overrides:type_name -> api.user.service.v1.SwapFeeCurrencyOverride
+	255, // 198: api.user.service.v1.GetSwapFeeSettingsResponse.settings:type_name -> api.user.service.v1.SwapFeeSettings
+	255, // 199: api.user.service.v1.SetSwapFeeSettingsRequest.settings:type_name -> api.user.service.v1.SwapFeeSettings
+	295, // 200: api.user.service.v1.UpdateOperatorNameRequest.operator_context:type_name -> api.common.OperatorContext
+	295, // 201: api.user.service.v1.UpdateOperatorNameRequest.target_operator_context:type_name -> api.common.OperatorContext
+	294, // 202: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	294, // 203: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	294, // 204: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
 	73,  // 205: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
-	292, // 206: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	266, // 207: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	292, // 208: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	266, // 209: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	292, // 210: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	292, // 211: api.user.service.v1.GetUserProfileResponse.ChangeRecord.changed_at:type_name -> google.protobuf.Timestamp
-	293, // 212: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	293, // 213: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	293, // 214: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	293, // 215: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	292, // 216: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.start_time:type_name -> google.protobuf.Timestamp
-	292, // 217: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.end_time:type_name -> google.protobuf.Timestamp
-	292, // 218: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.start_time:type_name -> google.protobuf.Timestamp
-	292, // 219: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.end_time:type_name -> google.protobuf.Timestamp
-	292, // 220: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist.created_at:type_name -> google.protobuf.Timestamp
+	294, // 206: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	268, // 207: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	294, // 208: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	268, // 209: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	294, // 210: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	294, // 211: api.user.service.v1.GetUserProfileResponse.ChangeRecord.changed_at:type_name -> google.protobuf.Timestamp
+	295, // 212: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	295, // 213: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	295, // 214: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	295, // 215: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	294, // 216: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.start_time:type_name -> google.protobuf.Timestamp
+	294, // 217: api.user.service.v1.ResponsibleGamblingConfig.SelfExclusion.end_time:type_name -> google.protobuf.Timestamp
+	294, // 218: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.start_time:type_name -> google.protobuf.Timestamp
+	294, // 219: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay.end_time:type_name -> google.protobuf.Timestamp
+	294, // 220: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist.created_at:type_name -> google.protobuf.Timestamp
 	167, // 221: api.user.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
 	167, // 222: api.user.service.v1.GetOperatorRegisterLimitConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
 	169, // 223: api.user.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
 	169, // 224: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
 	188, // 225: api.user.service.v1.GetUsersPrivacySettingsResponse.SettingsEntry.value:type_name -> api.user.service.v1.UserPrivacySettings
-	292, // 226: api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivity.created_at:type_name -> google.protobuf.Timestamp
+	294, // 226: api.user.service.v1.ListUserSessionActivitiesResponse.SessionActivity.created_at:type_name -> google.protobuf.Timestamp
 	5,   // 227: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
 	6,   // 228: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
 	8,   // 229: api.user.service.v1.User.LoginWithInfo:input_type -> api.user.service.v1.LoginWithInfoRequest
@@ -20097,7 +20194,7 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	130, // 284: api.user.service.v1.User.UpdateOperatorStatus:input_type -> api.user.service.v1.UpdateOperatorStatusRequest
 	132, // 285: api.user.service.v1.User.ListAllUsers:input_type -> api.user.service.v1.ListAllUsersRequest
 	134, // 286: api.user.service.v1.User.ListOperatorsByAdminEmail:input_type -> api.user.service.v1.ListOperatorsByAdminEmailRequest
-	248, // 287: api.user.service.v1.User.GetCompanyAdminEmails:input_type -> api.user.service.v1.GetCompanyAdminEmailsRequest
+	250, // 287: api.user.service.v1.User.GetCompanyAdminEmails:input_type -> api.user.service.v1.GetCompanyAdminEmailsRequest
 	136, // 288: api.user.service.v1.User.ListOperatorDetails:input_type -> api.user.service.v1.ListOperatorDetailsRequest
 	138, // 289: api.user.service.v1.User.GetOperatorDetailsByUserId:input_type -> api.user.service.v1.GetOperatorDetailsByUserIdRequest
 	140, // 290: api.user.service.v1.User.GetOperatorAccountSettings:input_type -> api.user.service.v1.GetOperatorAccountSettingsRequest
@@ -20141,154 +20238,156 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	211, // 328: api.user.service.v1.User.GetBackofficeAccountDetail:input_type -> api.user.service.v1.GetBackofficeAccountDetailRequest
 	213, // 329: api.user.service.v1.User.UpdateBackofficeAccount:input_type -> api.user.service.v1.UpdateBackofficeAccountRequest
 	215, // 330: api.user.service.v1.User.AdminResetPassword:input_type -> api.user.service.v1.AdminResetPasswordRequest
-	218, // 331: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:input_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest
-	220, // 332: api.user.service.v1.User.DeleteOAuthProviderConfig:input_type -> api.user.service.v1.DeleteOAuthProviderConfigRequest
-	222, // 333: api.user.service.v1.User.SetOAuthProviderEnabled:input_type -> api.user.service.v1.SetOAuthProviderEnabledRequest
-	224, // 334: api.user.service.v1.User.ListOAuthProviderConfigs:input_type -> api.user.service.v1.ListOAuthProviderConfigsRequest
-	226, // 335: api.user.service.v1.User.GetOAuthProviderConfig:input_type -> api.user.service.v1.GetOAuthProviderConfigRequest
-	229, // 336: api.user.service.v1.User.GetAvailableOAuthProviders:input_type -> api.user.service.v1.GetAvailableOAuthProvidersRequest
-	231, // 337: api.user.service.v1.User.OAuthLoginV2:input_type -> api.user.service.v1.OAuthLoginV2Request
-	233, // 338: api.user.service.v1.User.BindOAuthAccount:input_type -> api.user.service.v1.BindOAuthAccountRequest
-	235, // 339: api.user.service.v1.User.UnbindOAuthAccount:input_type -> api.user.service.v1.UnbindOAuthAccountRequest
-	237, // 340: api.user.service.v1.User.ListBoundOAuthAccounts:input_type -> api.user.service.v1.ListBoundOAuthAccountsRequest
-	239, // 341: api.user.service.v1.User.InitiateOAuthLogin:input_type -> api.user.service.v1.InitiateOAuthLoginRequest
-	241, // 342: api.user.service.v1.User.InitiateOAuthBinding:input_type -> api.user.service.v1.InitiateOAuthBindingRequest
-	243, // 343: api.user.service.v1.User.GetTelegramLoginInfo:input_type -> api.user.service.v1.GetTelegramLoginInfoRequest
-	245, // 344: api.user.service.v1.User.GetRewardHistory:input_type -> api.user.service.v1.GetRewardHistoryRequest
-	246, // 345: api.user.service.v1.User.ListUserFreeRewards:input_type -> api.user.service.v1.ListUserFreeRewardsRequest
-	250, // 346: api.user.service.v1.User.ListUserSessionActivities:input_type -> api.user.service.v1.ListUserSessionActivitiesRequest
-	254, // 347: api.user.service.v1.User.GetSwapFeeSettings:input_type -> api.user.service.v1.GetSwapFeeSettingsRequest
-	256, // 348: api.user.service.v1.User.SetSwapFeeSettings:input_type -> api.user.service.v1.SetSwapFeeSettingsRequest
-	258, // 349: api.user.service.v1.User.RegisterWebPushDevice:input_type -> api.user.service.v1.RegisterWebPushDeviceRequest
-	260, // 350: api.user.service.v1.User.UnregisterWebPushDevice:input_type -> api.user.service.v1.UnregisterWebPushDeviceRequest
-	262, // 351: api.user.service.v1.User.UpdateOperatorName:input_type -> api.user.service.v1.UpdateOperatorNameRequest
-	13,  // 352: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	13,  // 353: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	13,  // 354: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
-	13,  // 355: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	13,  // 356: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	13,  // 357: api.user.service.v1.User.RegisterOrLoginWithTelegramMiniApp:output_type -> api.user.service.v1.AuthResponse
-	14,  // 358: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	16,  // 359: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	18,  // 360: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	20,  // 361: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	22,  // 362: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	24,  // 363: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	26,  // 364: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
-	28,  // 365: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
-	30,  // 366: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
-	32,  // 367: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	34,  // 368: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	36,  // 369: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
-	38,  // 370: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
-	40,  // 371: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	42,  // 372: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	44,  // 373: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
-	46,  // 374: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
-	48,  // 375: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
-	52,  // 376: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	54,  // 377: api.user.service.v1.User.UpdateUserIdentity:output_type -> api.user.service.v1.UpdateUserIdentityResponse
-	56,  // 378: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
-	58,  // 379: api.user.service.v1.User.ExportUsers:output_type -> api.user.service.v1.ExportUsersResponse
-	60,  // 380: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
-	62,  // 381: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
-	64,  // 382: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
-	66,  // 383: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
-	68,  // 384: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
-	71,  // 385: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
-	74,  // 386: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
-	76,  // 387: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
-	78,  // 388: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
-	80,  // 389: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
-	84,  // 390: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
-	82,  // 391: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
-	86,  // 392: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
-	88,  // 393: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
-	90,  // 394: api.user.service.v1.User.GetOperatorInfoByOrigin:output_type -> api.user.service.v1.GetOperatorInfoByOriginResponse
-	92,  // 395: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
-	94,  // 396: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
-	96,  // 397: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
-	98,  // 398: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
-	100, // 399: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
-	102, // 400: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
-	104, // 401: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
-	106, // 402: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
-	108, // 403: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
-	121, // 404: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
-	123, // 405: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
-	125, // 406: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
-	127, // 407: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
-	129, // 408: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
-	131, // 409: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
-	133, // 410: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
-	135, // 411: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	249, // 412: api.user.service.v1.User.GetCompanyAdminEmails:output_type -> api.user.service.v1.GetCompanyAdminEmailsResponse
-	137, // 413: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
-	139, // 414: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
-	141, // 415: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
-	143, // 416: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	145, // 417: api.user.service.v1.User.SetOperatorMaxHouseEdge:output_type -> api.user.service.v1.SetOperatorMaxHouseEdgeResponse
-	147, // 418: api.user.service.v1.User.GetOperatorMaxHouseEdge:output_type -> api.user.service.v1.GetOperatorMaxHouseEdgeResponse
-	117, // 419: api.user.service.v1.User.GetUserAccountSettingsStatus:output_type -> api.user.service.v1.GetUserAccountSettingsStatusResponse
-	150, // 420: api.user.service.v1.User.AddResponsibleGamblingConfig:output_type -> api.user.service.v1.AddResponsibleGamblingConfigResponse
-	152, // 421: api.user.service.v1.User.DeleteResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	156, // 422: api.user.service.v1.User.GetResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
-	158, // 423: api.user.service.v1.User.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
-	160, // 424: api.user.service.v1.User.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
-	162, // 425: api.user.service.v1.User.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
-	164, // 426: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	166, // 427: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
-	171, // 428: api.user.service.v1.User.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
-	173, // 429: api.user.service.v1.User.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
-	175, // 430: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
-	177, // 431: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
-	179, // 432: api.user.service.v1.User.CloseAccount:output_type -> api.user.service.v1.CloseAccountResponse
-	296, // 433: api.user.service.v1.User.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
-	297, // 434: api.user.service.v1.User.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
-	298, // 435: api.user.service.v1.User.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
-	299, // 436: api.user.service.v1.User.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
-	300, // 437: api.user.service.v1.User.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
-	301, // 438: api.user.service.v1.User.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
-	302, // 439: api.user.service.v1.User.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
-	303, // 440: api.user.service.v1.User.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
-	190, // 441: api.user.service.v1.User.GetUserPrivacySettings:output_type -> api.user.service.v1.GetUserPrivacySettingsResponse
-	192, // 442: api.user.service.v1.User.UpdateUserPrivacySettings:output_type -> api.user.service.v1.UpdateUserPrivacySettingsResponse
-	194, // 443: api.user.service.v1.User.GetUsersPrivacySettings:output_type -> api.user.service.v1.GetUsersPrivacySettingsResponse
-	196, // 444: api.user.service.v1.User.Generate2faSecret:output_type -> api.user.service.v1.Generate2faSecretResponse
-	198, // 445: api.user.service.v1.User.Bind2faSecret:output_type -> api.user.service.v1.Bind2faSecretResponse
-	200, // 446: api.user.service.v1.User.Verify2faCode:output_type -> api.user.service.v1.Verify2faCodeResponse
-	202, // 447: api.user.service.v1.User.Reset2fa:output_type -> api.user.service.v1.Reset2faResponse
-	204, // 448: api.user.service.v1.User.Get2faStatus:output_type -> api.user.service.v1.Get2faStatusResponse
-	206, // 449: api.user.service.v1.User.LoginWithInfoAnd2fa:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	206, // 450: api.user.service.v1.User.Bind2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	206, // 451: api.user.service.v1.User.Verify2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
-	210, // 452: api.user.service.v1.User.UpdateMfaConfig:output_type -> api.user.service.v1.UpdateMfaConfigResponse
-	212, // 453: api.user.service.v1.User.GetBackofficeAccountDetail:output_type -> api.user.service.v1.GetBackofficeAccountDetailResponse
-	214, // 454: api.user.service.v1.User.UpdateBackofficeAccount:output_type -> api.user.service.v1.UpdateBackofficeAccountResponse
-	216, // 455: api.user.service.v1.User.AdminResetPassword:output_type -> api.user.service.v1.AdminResetPasswordResponse
-	219, // 456: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:output_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse
-	221, // 457: api.user.service.v1.User.DeleteOAuthProviderConfig:output_type -> api.user.service.v1.DeleteOAuthProviderConfigResponse
-	223, // 458: api.user.service.v1.User.SetOAuthProviderEnabled:output_type -> api.user.service.v1.SetOAuthProviderEnabledResponse
-	225, // 459: api.user.service.v1.User.ListOAuthProviderConfigs:output_type -> api.user.service.v1.ListOAuthProviderConfigsResponse
-	227, // 460: api.user.service.v1.User.GetOAuthProviderConfig:output_type -> api.user.service.v1.GetOAuthProviderConfigResponse
-	230, // 461: api.user.service.v1.User.GetAvailableOAuthProviders:output_type -> api.user.service.v1.GetAvailableOAuthProvidersResponse
-	13,  // 462: api.user.service.v1.User.OAuthLoginV2:output_type -> api.user.service.v1.AuthResponse
-	234, // 463: api.user.service.v1.User.BindOAuthAccount:output_type -> api.user.service.v1.BindOAuthAccountResponse
-	236, // 464: api.user.service.v1.User.UnbindOAuthAccount:output_type -> api.user.service.v1.UnbindOAuthAccountResponse
-	238, // 465: api.user.service.v1.User.ListBoundOAuthAccounts:output_type -> api.user.service.v1.ListBoundOAuthAccountsResponse
-	240, // 466: api.user.service.v1.User.InitiateOAuthLogin:output_type -> api.user.service.v1.InitiateOAuthLoginResponse
-	242, // 467: api.user.service.v1.User.InitiateOAuthBinding:output_type -> api.user.service.v1.InitiateOAuthBindingResponse
-	244, // 468: api.user.service.v1.User.GetTelegramLoginInfo:output_type -> api.user.service.v1.GetTelegramLoginInfoResponse
-	247, // 469: api.user.service.v1.User.GetRewardHistory:output_type -> api.user.service.v1.GetRewardHistoryResponse
-	304, // 470: api.user.service.v1.User.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsResponse
-	251, // 471: api.user.service.v1.User.ListUserSessionActivities:output_type -> api.user.service.v1.ListUserSessionActivitiesResponse
-	255, // 472: api.user.service.v1.User.GetSwapFeeSettings:output_type -> api.user.service.v1.GetSwapFeeSettingsResponse
-	257, // 473: api.user.service.v1.User.SetSwapFeeSettings:output_type -> api.user.service.v1.SetSwapFeeSettingsResponse
-	259, // 474: api.user.service.v1.User.RegisterWebPushDevice:output_type -> api.user.service.v1.RegisterWebPushDeviceResponse
-	261, // 475: api.user.service.v1.User.UnregisterWebPushDevice:output_type -> api.user.service.v1.UnregisterWebPushDeviceResponse
-	263, // 476: api.user.service.v1.User.UpdateOperatorName:output_type -> api.user.service.v1.UpdateOperatorNameResponse
-	352, // [352:477] is the sub-list for method output_type
-	227, // [227:352] is the sub-list for method input_type
+	217, // 331: api.user.service.v1.User.ResetPasswordDirectly:input_type -> api.user.service.v1.ResetPasswordDirectlyRequest
+	220, // 332: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:input_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigRequest
+	222, // 333: api.user.service.v1.User.DeleteOAuthProviderConfig:input_type -> api.user.service.v1.DeleteOAuthProviderConfigRequest
+	224, // 334: api.user.service.v1.User.SetOAuthProviderEnabled:input_type -> api.user.service.v1.SetOAuthProviderEnabledRequest
+	226, // 335: api.user.service.v1.User.ListOAuthProviderConfigs:input_type -> api.user.service.v1.ListOAuthProviderConfigsRequest
+	228, // 336: api.user.service.v1.User.GetOAuthProviderConfig:input_type -> api.user.service.v1.GetOAuthProviderConfigRequest
+	231, // 337: api.user.service.v1.User.GetAvailableOAuthProviders:input_type -> api.user.service.v1.GetAvailableOAuthProvidersRequest
+	233, // 338: api.user.service.v1.User.OAuthLoginV2:input_type -> api.user.service.v1.OAuthLoginV2Request
+	235, // 339: api.user.service.v1.User.BindOAuthAccount:input_type -> api.user.service.v1.BindOAuthAccountRequest
+	237, // 340: api.user.service.v1.User.UnbindOAuthAccount:input_type -> api.user.service.v1.UnbindOAuthAccountRequest
+	239, // 341: api.user.service.v1.User.ListBoundOAuthAccounts:input_type -> api.user.service.v1.ListBoundOAuthAccountsRequest
+	241, // 342: api.user.service.v1.User.InitiateOAuthLogin:input_type -> api.user.service.v1.InitiateOAuthLoginRequest
+	243, // 343: api.user.service.v1.User.InitiateOAuthBinding:input_type -> api.user.service.v1.InitiateOAuthBindingRequest
+	245, // 344: api.user.service.v1.User.GetTelegramLoginInfo:input_type -> api.user.service.v1.GetTelegramLoginInfoRequest
+	247, // 345: api.user.service.v1.User.GetRewardHistory:input_type -> api.user.service.v1.GetRewardHistoryRequest
+	248, // 346: api.user.service.v1.User.ListUserFreeRewards:input_type -> api.user.service.v1.ListUserFreeRewardsRequest
+	252, // 347: api.user.service.v1.User.ListUserSessionActivities:input_type -> api.user.service.v1.ListUserSessionActivitiesRequest
+	256, // 348: api.user.service.v1.User.GetSwapFeeSettings:input_type -> api.user.service.v1.GetSwapFeeSettingsRequest
+	258, // 349: api.user.service.v1.User.SetSwapFeeSettings:input_type -> api.user.service.v1.SetSwapFeeSettingsRequest
+	260, // 350: api.user.service.v1.User.RegisterWebPushDevice:input_type -> api.user.service.v1.RegisterWebPushDeviceRequest
+	262, // 351: api.user.service.v1.User.UnregisterWebPushDevice:input_type -> api.user.service.v1.UnregisterWebPushDeviceRequest
+	264, // 352: api.user.service.v1.User.UpdateOperatorName:input_type -> api.user.service.v1.UpdateOperatorNameRequest
+	13,  // 353: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	13,  // 354: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	13,  // 355: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
+	13,  // 356: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	13,  // 357: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	13,  // 358: api.user.service.v1.User.RegisterOrLoginWithTelegramMiniApp:output_type -> api.user.service.v1.AuthResponse
+	14,  // 359: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	16,  // 360: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	18,  // 361: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	20,  // 362: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	22,  // 363: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	24,  // 364: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	26,  // 365: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
+	28,  // 366: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
+	30,  // 367: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
+	32,  // 368: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	34,  // 369: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	36,  // 370: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
+	38,  // 371: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
+	40,  // 372: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	42,  // 373: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	44,  // 374: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
+	46,  // 375: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
+	48,  // 376: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
+	52,  // 377: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	54,  // 378: api.user.service.v1.User.UpdateUserIdentity:output_type -> api.user.service.v1.UpdateUserIdentityResponse
+	56,  // 379: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	58,  // 380: api.user.service.v1.User.ExportUsers:output_type -> api.user.service.v1.ExportUsersResponse
+	60,  // 381: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
+	62,  // 382: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
+	64,  // 383: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
+	66,  // 384: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
+	68,  // 385: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	71,  // 386: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
+	74,  // 387: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
+	76,  // 388: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
+	78,  // 389: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
+	80,  // 390: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
+	84,  // 391: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
+	82,  // 392: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
+	86,  // 393: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
+	88,  // 394: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
+	90,  // 395: api.user.service.v1.User.GetOperatorInfoByOrigin:output_type -> api.user.service.v1.GetOperatorInfoByOriginResponse
+	92,  // 396: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
+	94,  // 397: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
+	96,  // 398: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
+	98,  // 399: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
+	100, // 400: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
+	102, // 401: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
+	104, // 402: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
+	106, // 403: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
+	108, // 404: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
+	121, // 405: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
+	123, // 406: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
+	125, // 407: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
+	127, // 408: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
+	129, // 409: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
+	131, // 410: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
+	133, // 411: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
+	135, // 412: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	251, // 413: api.user.service.v1.User.GetCompanyAdminEmails:output_type -> api.user.service.v1.GetCompanyAdminEmailsResponse
+	137, // 414: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
+	139, // 415: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
+	141, // 416: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
+	143, // 417: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	145, // 418: api.user.service.v1.User.SetOperatorMaxHouseEdge:output_type -> api.user.service.v1.SetOperatorMaxHouseEdgeResponse
+	147, // 419: api.user.service.v1.User.GetOperatorMaxHouseEdge:output_type -> api.user.service.v1.GetOperatorMaxHouseEdgeResponse
+	117, // 420: api.user.service.v1.User.GetUserAccountSettingsStatus:output_type -> api.user.service.v1.GetUserAccountSettingsStatusResponse
+	150, // 421: api.user.service.v1.User.AddResponsibleGamblingConfig:output_type -> api.user.service.v1.AddResponsibleGamblingConfigResponse
+	152, // 422: api.user.service.v1.User.DeleteResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	156, // 423: api.user.service.v1.User.GetResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
+	158, // 424: api.user.service.v1.User.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
+	160, // 425: api.user.service.v1.User.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
+	162, // 426: api.user.service.v1.User.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
+	164, // 427: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	166, // 428: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
+	171, // 429: api.user.service.v1.User.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	173, // 430: api.user.service.v1.User.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
+	175, // 431: api.user.service.v1.User.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
+	177, // 432: api.user.service.v1.User.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
+	179, // 433: api.user.service.v1.User.CloseAccount:output_type -> api.user.service.v1.CloseAccountResponse
+	298, // 434: api.user.service.v1.User.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
+	299, // 435: api.user.service.v1.User.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
+	300, // 436: api.user.service.v1.User.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
+	301, // 437: api.user.service.v1.User.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
+	302, // 438: api.user.service.v1.User.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
+	303, // 439: api.user.service.v1.User.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
+	304, // 440: api.user.service.v1.User.RequestDailyLossback:output_type -> api.vip.service.v1.RequestDailyLossbackResponse
+	305, // 441: api.user.service.v1.User.GetDailyLossbackStatus:output_type -> api.vip.service.v1.GetDailyLossbackStatusResponse
+	190, // 442: api.user.service.v1.User.GetUserPrivacySettings:output_type -> api.user.service.v1.GetUserPrivacySettingsResponse
+	192, // 443: api.user.service.v1.User.UpdateUserPrivacySettings:output_type -> api.user.service.v1.UpdateUserPrivacySettingsResponse
+	194, // 444: api.user.service.v1.User.GetUsersPrivacySettings:output_type -> api.user.service.v1.GetUsersPrivacySettingsResponse
+	196, // 445: api.user.service.v1.User.Generate2faSecret:output_type -> api.user.service.v1.Generate2faSecretResponse
+	198, // 446: api.user.service.v1.User.Bind2faSecret:output_type -> api.user.service.v1.Bind2faSecretResponse
+	200, // 447: api.user.service.v1.User.Verify2faCode:output_type -> api.user.service.v1.Verify2faCodeResponse
+	202, // 448: api.user.service.v1.User.Reset2fa:output_type -> api.user.service.v1.Reset2faResponse
+	204, // 449: api.user.service.v1.User.Get2faStatus:output_type -> api.user.service.v1.Get2faStatusResponse
+	206, // 450: api.user.service.v1.User.LoginWithInfoAnd2fa:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	206, // 451: api.user.service.v1.User.Bind2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	206, // 452: api.user.service.v1.User.Verify2FaWithTempToken:output_type -> api.user.service.v1.LoginWithInfoAnd2faResponse
+	210, // 453: api.user.service.v1.User.UpdateMfaConfig:output_type -> api.user.service.v1.UpdateMfaConfigResponse
+	212, // 454: api.user.service.v1.User.GetBackofficeAccountDetail:output_type -> api.user.service.v1.GetBackofficeAccountDetailResponse
+	214, // 455: api.user.service.v1.User.UpdateBackofficeAccount:output_type -> api.user.service.v1.UpdateBackofficeAccountResponse
+	216, // 456: api.user.service.v1.User.AdminResetPassword:output_type -> api.user.service.v1.AdminResetPasswordResponse
+	218, // 457: api.user.service.v1.User.ResetPasswordDirectly:output_type -> api.user.service.v1.ResetPasswordDirectlyResponse
+	221, // 458: api.user.service.v1.User.CreateOrUpdateOAuthProviderConfig:output_type -> api.user.service.v1.CreateOrUpdateOAuthProviderConfigResponse
+	223, // 459: api.user.service.v1.User.DeleteOAuthProviderConfig:output_type -> api.user.service.v1.DeleteOAuthProviderConfigResponse
+	225, // 460: api.user.service.v1.User.SetOAuthProviderEnabled:output_type -> api.user.service.v1.SetOAuthProviderEnabledResponse
+	227, // 461: api.user.service.v1.User.ListOAuthProviderConfigs:output_type -> api.user.service.v1.ListOAuthProviderConfigsResponse
+	229, // 462: api.user.service.v1.User.GetOAuthProviderConfig:output_type -> api.user.service.v1.GetOAuthProviderConfigResponse
+	232, // 463: api.user.service.v1.User.GetAvailableOAuthProviders:output_type -> api.user.service.v1.GetAvailableOAuthProvidersResponse
+	13,  // 464: api.user.service.v1.User.OAuthLoginV2:output_type -> api.user.service.v1.AuthResponse
+	236, // 465: api.user.service.v1.User.BindOAuthAccount:output_type -> api.user.service.v1.BindOAuthAccountResponse
+	238, // 466: api.user.service.v1.User.UnbindOAuthAccount:output_type -> api.user.service.v1.UnbindOAuthAccountResponse
+	240, // 467: api.user.service.v1.User.ListBoundOAuthAccounts:output_type -> api.user.service.v1.ListBoundOAuthAccountsResponse
+	242, // 468: api.user.service.v1.User.InitiateOAuthLogin:output_type -> api.user.service.v1.InitiateOAuthLoginResponse
+	244, // 469: api.user.service.v1.User.InitiateOAuthBinding:output_type -> api.user.service.v1.InitiateOAuthBindingResponse
+	246, // 470: api.user.service.v1.User.GetTelegramLoginInfo:output_type -> api.user.service.v1.GetTelegramLoginInfoResponse
+	249, // 471: api.user.service.v1.User.GetRewardHistory:output_type -> api.user.service.v1.GetRewardHistoryResponse
+	306, // 472: api.user.service.v1.User.ListUserFreeRewards:output_type -> api.wallet.service.v1.ListUserFreeRewardsResponse
+	253, // 473: api.user.service.v1.User.ListUserSessionActivities:output_type -> api.user.service.v1.ListUserSessionActivitiesResponse
+	257, // 474: api.user.service.v1.User.GetSwapFeeSettings:output_type -> api.user.service.v1.GetSwapFeeSettingsResponse
+	259, // 475: api.user.service.v1.User.SetSwapFeeSettings:output_type -> api.user.service.v1.SetSwapFeeSettingsResponse
+	261, // 476: api.user.service.v1.User.RegisterWebPushDevice:output_type -> api.user.service.v1.RegisterWebPushDeviceResponse
+	263, // 477: api.user.service.v1.User.UnregisterWebPushDevice:output_type -> api.user.service.v1.UnregisterWebPushDeviceResponse
+	265, // 478: api.user.service.v1.User.UpdateOperatorName:output_type -> api.user.service.v1.UpdateOperatorNameResponse
+	353, // [353:479] is the sub-list for method output_type
+	227, // [227:353] is the sub-list for method input_type
 	227, // [227:227] is the sub-list for extension type_name
 	227, // [227:227] is the sub-list for extension extendee
 	0,   // [0:227] is the sub-list for field type_name
@@ -20323,18 +20422,18 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[161].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[187].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[209].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[214].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[220].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[227].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[235].OneofWrappers = []any{}
-	file_user_service_v1_user_proto_msgTypes[246].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[216].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[222].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[229].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[237].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[248].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   288,
+			NumMessages:   290,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

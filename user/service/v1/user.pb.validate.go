@@ -27906,6 +27906,216 @@ var _ interface {
 	ErrorName() string
 } = AdminResetPasswordResponseValidationError{}
 
+// Validate checks the field values on ResetPasswordDirectlyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ResetPasswordDirectlyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ResetPasswordDirectlyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ResetPasswordDirectlyRequestMultiError, or nil if none found.
+func (m *ResetPasswordDirectlyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ResetPasswordDirectlyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for NewPassword
+
+	if len(errors) > 0 {
+		return ResetPasswordDirectlyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ResetPasswordDirectlyRequestMultiError is an error wrapping multiple
+// validation errors returned by ResetPasswordDirectlyRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ResetPasswordDirectlyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ResetPasswordDirectlyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ResetPasswordDirectlyRequestMultiError) AllErrors() []error { return m }
+
+// ResetPasswordDirectlyRequestValidationError is the validation error returned
+// by ResetPasswordDirectlyRequest.Validate if the designated constraints
+// aren't met.
+type ResetPasswordDirectlyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ResetPasswordDirectlyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ResetPasswordDirectlyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ResetPasswordDirectlyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ResetPasswordDirectlyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ResetPasswordDirectlyRequestValidationError) ErrorName() string {
+	return "ResetPasswordDirectlyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ResetPasswordDirectlyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sResetPasswordDirectlyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ResetPasswordDirectlyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ResetPasswordDirectlyRequestValidationError{}
+
+// Validate checks the field values on ResetPasswordDirectlyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ResetPasswordDirectlyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ResetPasswordDirectlyResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ResetPasswordDirectlyResponseMultiError, or nil if none found.
+func (m *ResetPasswordDirectlyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ResetPasswordDirectlyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ResetPasswordDirectlyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ResetPasswordDirectlyResponseMultiError is an error wrapping multiple
+// validation errors returned by ResetPasswordDirectlyResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ResetPasswordDirectlyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ResetPasswordDirectlyResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ResetPasswordDirectlyResponseMultiError) AllErrors() []error { return m }
+
+// ResetPasswordDirectlyResponseValidationError is the validation error
+// returned by ResetPasswordDirectlyResponse.Validate if the designated
+// constraints aren't met.
+type ResetPasswordDirectlyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ResetPasswordDirectlyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ResetPasswordDirectlyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ResetPasswordDirectlyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ResetPasswordDirectlyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ResetPasswordDirectlyResponseValidationError) ErrorName() string {
+	return "ResetPasswordDirectlyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ResetPasswordDirectlyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sResetPasswordDirectlyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ResetPasswordDirectlyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ResetPasswordDirectlyResponseValidationError{}
+
 // Validate checks the field values on OAuthProviderConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

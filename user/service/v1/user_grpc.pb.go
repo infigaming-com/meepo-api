@@ -125,6 +125,7 @@ const (
 	User_GetBackofficeAccountDetail_FullMethodName         = "/api.user.service.v1.User/GetBackofficeAccountDetail"
 	User_UpdateBackofficeAccount_FullMethodName            = "/api.user.service.v1.User/UpdateBackofficeAccount"
 	User_AdminResetPassword_FullMethodName                 = "/api.user.service.v1.User/AdminResetPassword"
+	User_ResetPasswordDirectly_FullMethodName              = "/api.user.service.v1.User/ResetPasswordDirectly"
 	User_CreateOrUpdateOAuthProviderConfig_FullMethodName  = "/api.user.service.v1.User/CreateOrUpdateOAuthProviderConfig"
 	User_DeleteOAuthProviderConfig_FullMethodName          = "/api.user.service.v1.User/DeleteOAuthProviderConfig"
 	User_SetOAuthProviderEnabled_FullMethodName            = "/api.user.service.v1.User/SetOAuthProviderEnabled"
@@ -327,6 +328,9 @@ type UserClient interface {
 	UpdateBackofficeAccount(ctx context.Context, in *UpdateBackofficeAccountRequest, opts ...grpc.CallOption) (*UpdateBackofficeAccountResponse, error)
 	// Admin reset password for backoffice account (internal gRPC only)
 	AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error)
+	// Reset password directly without forcing password change on next login.
+	// Revokes all existing tokens to force re-login. (internal gRPC only)
+	ResetPasswordDirectly(ctx context.Context, in *ResetPasswordDirectlyRequest, opts ...grpc.CallOption) (*ResetPasswordDirectlyResponse, error)
 	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
 	// Create or update OAuth provider configuration for an operator
 	// If config_id is provided, updates existing config; otherwise creates new one
@@ -1422,6 +1426,16 @@ func (c *userClient) AdminResetPassword(ctx context.Context, in *AdminResetPassw
 	return out, nil
 }
 
+func (c *userClient) ResetPasswordDirectly(ctx context.Context, in *ResetPasswordDirectlyRequest, opts ...grpc.CallOption) (*ResetPasswordDirectlyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetPasswordDirectlyResponse)
+	err := c.cc.Invoke(ctx, User_ResetPasswordDirectly_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) CreateOrUpdateOAuthProviderConfig(ctx context.Context, in *CreateOrUpdateOAuthProviderConfigRequest, opts ...grpc.CallOption) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateOrUpdateOAuthProviderConfigResponse)
@@ -1811,6 +1825,9 @@ type UserServer interface {
 	UpdateBackofficeAccount(context.Context, *UpdateBackofficeAccountRequest) (*UpdateBackofficeAccountResponse, error)
 	// Admin reset password for backoffice account (internal gRPC only)
 	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
+	// Reset password directly without forcing password change on next login.
+	// Revokes all existing tokens to force re-login. (internal gRPC only)
+	ResetPasswordDirectly(context.Context, *ResetPasswordDirectlyRequest) (*ResetPasswordDirectlyResponse, error)
 	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
 	// Create or update OAuth provider configuration for an operator
 	// If config_id is provided, updates existing config; otherwise creates new one
@@ -2177,6 +2194,9 @@ func (UnimplementedUserServer) UpdateBackofficeAccount(context.Context, *UpdateB
 }
 func (UnimplementedUserServer) AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AdminResetPassword not implemented")
+}
+func (UnimplementedUserServer) ResetPasswordDirectly(context.Context, *ResetPasswordDirectlyRequest) (*ResetPasswordDirectlyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResetPasswordDirectly not implemented")
 }
 func (UnimplementedUserServer) CreateOrUpdateOAuthProviderConfig(context.Context, *CreateOrUpdateOAuthProviderConfigRequest) (*CreateOrUpdateOAuthProviderConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOrUpdateOAuthProviderConfig not implemented")
@@ -4134,6 +4154,24 @@ func _User_AdminResetPassword_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ResetPasswordDirectly_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPasswordDirectlyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ResetPasswordDirectly(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ResetPasswordDirectly_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ResetPasswordDirectly(ctx, req.(*ResetPasswordDirectlyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_CreateOrUpdateOAuthProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateOrUpdateOAuthProviderConfigRequest)
 	if err := dec(in); err != nil {
@@ -4934,6 +4972,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AdminResetPassword",
 			Handler:    _User_AdminResetPassword_Handler,
+		},
+		{
+			MethodName: "ResetPasswordDirectly",
+			Handler:    _User_ResetPasswordDirectly_Handler,
 		},
 		{
 			MethodName: "CreateOrUpdateOAuthProviderConfig",
