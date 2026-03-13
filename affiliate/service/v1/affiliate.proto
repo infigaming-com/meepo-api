@@ -44,8 +44,6 @@ service Affiliate {
 
     rpc GetAffiliateDetails(GetAffiliateDetailsRequest) returns (GetAffiliateDetailsResponse) {}
 
-    rpc ResetAffiliatePassword(ResetAffiliatePasswordRequest) returns (ResetAffiliatePasswordResponse) {}
-
     // -------------- Campaign --------------
 
     rpc CreateCampaign(CreateCampaignRequest) returns (CreateCampaignResponse) {}
@@ -337,15 +335,6 @@ message GetAffiliateDetailsResponse {
     }
     AffiliateDetails affiliate_details = 1;
 }
-
-message ResetAffiliatePasswordRequest {
-    int64 affiliate_id = 1;
-    string new_password = 2;
-    api.common.OperatorContext initiator_operator_context = 3;
-    int64 initiator_user_id = 4;
-}
-
-message ResetAffiliatePasswordResponse {}
 
 // -------------- Campaign --------------
 

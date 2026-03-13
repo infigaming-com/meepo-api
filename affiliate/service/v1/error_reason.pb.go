@@ -116,8 +116,7 @@ const (
 	ErrorReason_LIST_AFFILIATE_VTG_REPORT_FAILED         ErrorReason = 130087
 	ErrorReason_LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED    ErrorReason = 130088
 	// Permission
-	ErrorReason_ROLE_PERMISSION_DENIED          ErrorReason = 130089
-	ErrorReason_RESET_AFFILIATE_PASSWORD_FAILED ErrorReason = 130090
+	ErrorReason_ROLE_PERMISSION_DENIED ErrorReason = 130089
 )
 
 // Enum value maps for ErrorReason.
@@ -213,7 +212,6 @@ var (
 		130087: "LIST_AFFILIATE_VTG_REPORT_FAILED",
 		130088: "LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED",
 		130089: "ROLE_PERMISSION_DENIED",
-		130090: "RESET_AFFILIATE_PASSWORD_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -306,7 +304,6 @@ var (
 		"LIST_AFFILIATE_VTG_REPORT_FAILED":                    130087,
 		"LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED":               130088,
 		"ROLE_PERMISSION_DENIED":                              130089,
-		"RESET_AFFILIATE_PASSWORD_FAILED":                     130090,
 	}
 )
 
@@ -341,7 +338,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xa8\x19\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x81\x19\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -432,8 +429,7 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"$LIST_REFERRAL_LIFETIME_REPORT_FAILED\x10\xa6\xf8\a\x12&\n" +
 	" LIST_AFFILIATE_VTG_REPORT_FAILED\x10\xa7\xf8\a\x12+\n" +
 	"%LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED\x10\xa8\xf8\a\x12\x1c\n" +
-	"\x16ROLE_PERMISSION_DENIED\x10\xa9\xf8\a\x12%\n" +
-	"\x1fRESET_AFFILIATE_PASSWORD_FAILED\x10\xaa\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x16ROLE_PERMISSION_DENIED\x10\xa9\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
