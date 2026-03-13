@@ -1106,3 +1106,27 @@ func IsResetAffiliatePasswordFailed(err error) bool {
 func ErrorResetAffiliatePasswordFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_RESET_AFFILIATE_PASSWORD_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetUserReferralRewardsAllCurrenciesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserReferralRewardsAllCurrenciesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimUserReferralRewardsAllCurrenciesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED.String() && e.Code == 500
+}
+
+func ErrorClaimUserReferralRewardsAllCurrenciesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
+}

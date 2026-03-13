@@ -322,3 +322,46 @@ message LossRevenueShareTierReward {
     optional string to = 2; // nil indicates no upper limit
     string rate = 3; // represent as a percentage, e.g. "35" for 35%
 }
+
+// --- Multi-currency reward APIs ---
+
+message GetUserReferralRewardsAllCurrenciesRequest {
+    string target_currency = 1; // target currency for exchange rate conversion display
+}
+
+message GetUserReferralRewardsAllCurrenciesResponse {
+    message CurrencyReward {
+        string currency = 1;                  // source currency
+        string amount = 2;                    // total claimable amount in source currency
+        string converted_amount = 3;          // amount converted to target_currency
+        string exchange_rate = 4;             // exchange rate: 1 source = X target
+        int32 commission_count = 5;           // number of claimable commissions
+        // breakdown by reward type
+        string referral_amount = 6;           // conversion_reward subtotal
+        string commission_amount = 7;         // deposit_cashback + wagering_commission subtotal
+        string loss_rev_share_amount = 8;     // loss_rev_share subtotal (defensive: only included when >= 0)
+        bool loss_rev_share_excluded = 9;     // true if loss_rev_share sum < 0 and excluded
+    }
+    repeated CurrencyReward currency_rewards = 1;
+    string total_converted_amount = 2;        // total of all currencies converted to target
+    string target_currency = 3;
+    int64 snapshot_time = 4;                  // snapshot timestamp(ms), pass to Claim
+}
+
+message ClaimUserReferralRewardsAllCurrenciesRequest {
+    string target_currency = 1;               // currency to receive the converted total
+    int64 snapshot_time = 2;                  // snapshot timestamp from Get, ensures claim scope matches preview
+}
+
+message ClaimUserReferralRewardsAllCurrenciesResponse {
+    message ClaimedCurrencyDetail {
+        string source_currency = 1;
+        string source_amount = 2;             // amount in source currency
+        string converted_amount = 3;          // amount converted to target currency
+        string exchange_rate = 4;             // exchange rate used
+        int32 commission_count = 5;
+    }
+    repeated ClaimedCurrencyDetail claimed_details = 1;
+    string total_credited_amount = 2;         // total credited to wallet in target currency
+    string target_currency = 3;
+}
