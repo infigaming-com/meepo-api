@@ -1702,6 +1702,10 @@ func (m *SendAffiliateAccountEmailRequest) validate(all bool) error {
 		}
 	}
 
+	if m.BackofficeUrl != nil {
+		// no validation rules for BackofficeUrl
+	}
+
 	if len(errors) > 0 {
 		return SendAffiliateAccountEmailRequestMultiError(errors)
 	}

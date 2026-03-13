@@ -369,6 +369,9 @@ message SendAffiliateAccountEmailRequest {
 	int64 affiliate_id = 1;
 	string password = 2;
 	api.common.OperatorContext target_operator_context = 3;
+	// If provided, used as the backoffice login URL in the email.
+	// If empty, falls back to operator's backoffice_subdomain from operator details.
+	optional string backoffice_url = 4;
 }
 
 message SendAffiliateAccountEmailResponse {}

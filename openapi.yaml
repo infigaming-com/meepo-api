@@ -21426,6 +21426,11 @@ components:
                     type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                backofficeUrl:
+                    type: string
+                    description: |-
+                        If provided, used as the backoffice login URL in the email.
+                         If empty, falls back to operator's backoffice_subdomain from operator details.
         api.backoffice.service.v1.SendAffiliateAccountEmailResponse:
             type: object
             properties: {}
