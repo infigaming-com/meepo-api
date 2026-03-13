@@ -93,6 +93,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc ResetAffiliatePassword(ResetAffiliatePasswordRequest) returns (api.affiliate.service.v1.ResetAffiliatePasswordResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/reset-password"
+			body: "*"
+		};
+	}
 
 	// -------------- Campaign --------------
 
@@ -346,6 +352,11 @@ message DeleteAffiliateRequest {
 
 message GetAffiliateDetailsRequest {
 	int64 affiliate_id = 1;
+}
+
+message ResetAffiliatePasswordRequest {
+	int64 affiliate_id = 1;
+	string new_password = 2;
 }
 
 // -------------- Campaign --------------
