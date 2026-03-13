@@ -1220,7 +1220,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.SendAffiliateAccountEmailResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.SendAffiliateAccountEmailResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -12546,9 +12546,6 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesRateCommission'
                 qualification:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
-        api.affiliate.service.v1.SendAffiliateAccountEmailResponse:
-            type: object
-            properties: {}
         api.affiliate.service.v1.SetAffiliateDomainResponse:
             type: object
             properties: {}
@@ -21429,6 +21426,9 @@ components:
                     type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.SendAffiliateAccountEmailResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:

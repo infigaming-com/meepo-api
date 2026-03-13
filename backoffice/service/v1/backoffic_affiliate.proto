@@ -99,7 +99,7 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
-	rpc SendAffiliateAccountEmail(SendAffiliateAccountEmailRequest) returns (api.affiliate.service.v1.SendAffiliateAccountEmailResponse) {
+	rpc SendAffiliateAccountEmail(SendAffiliateAccountEmailRequest) returns (SendAffiliateAccountEmailResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/send-account-email"
 			body: "*"
@@ -370,6 +370,8 @@ message SendAffiliateAccountEmailRequest {
 	string password = 2;
 	api.common.OperatorContext target_operator_context = 3;
 }
+
+message SendAffiliateAccountEmailResponse {}
 
 // -------------- Campaign --------------
 
