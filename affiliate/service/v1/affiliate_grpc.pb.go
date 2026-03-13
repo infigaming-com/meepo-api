@@ -31,6 +31,7 @@ const (
 	Affiliate_ListAffiliates_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
 	Affiliate_DeleteAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
 	Affiliate_GetAffiliateDetails_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
+	Affiliate_ResetAffiliatePassword_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ResetAffiliatePassword"
 	Affiliate_CreateCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
 	Affiliate_UpdateCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
 	Affiliate_ListCampaigns_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
@@ -85,6 +86,7 @@ type AffiliateClient interface {
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*ListAffiliatesResponse, error)
 	DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...grpc.CallOption) (*DeleteAffiliateResponse, error)
 	GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*GetAffiliateDetailsResponse, error)
+	ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*ResetAffiliatePasswordResponse, error)
 	CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*CreateCampaignResponse, error)
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*ListCampaignsResponse, error)
@@ -255,6 +257,16 @@ func (c *affiliateClient) GetAffiliateDetails(ctx context.Context, in *GetAffili
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAffiliateDetailsResponse)
 	err := c.cc.Invoke(ctx, Affiliate_GetAffiliateDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*ResetAffiliatePasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetAffiliatePasswordResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ResetAffiliatePassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -637,6 +649,7 @@ type AffiliateServer interface {
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*ListAffiliatesResponse, error)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*DeleteAffiliateResponse, error)
 	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*GetAffiliateDetailsResponse, error)
+	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*ResetAffiliatePasswordResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*CreateCampaignResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*ListCampaignsResponse, error)
@@ -728,6 +741,9 @@ func (UnimplementedAffiliateServer) DeleteAffiliate(context.Context, *DeleteAffi
 }
 func (UnimplementedAffiliateServer) GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*GetAffiliateDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDetails not implemented")
+}
+func (UnimplementedAffiliateServer) ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*ResetAffiliatePasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResetAffiliatePassword not implemented")
 }
 func (UnimplementedAffiliateServer) CreateCampaign(context.Context, *CreateCampaignRequest) (*CreateCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateCampaign not implemented")
@@ -1070,6 +1086,24 @@ func _Affiliate_GetAffiliateDetails_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AffiliateServer).GetAffiliateDetails(ctx, req.(*GetAffiliateDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ResetAffiliatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetAffiliatePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ResetAffiliatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ResetAffiliatePassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ResetAffiliatePassword(ctx, req.(*ResetAffiliatePasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1776,6 +1810,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAffiliateDetails",
 			Handler:    _Affiliate_GetAffiliateDetails_Handler,
+		},
+		{
+			MethodName: "ResetAffiliatePassword",
+			Handler:    _Affiliate_ResetAffiliatePassword_Handler,
 		},
 		{
 			MethodName: "CreateCampaign",

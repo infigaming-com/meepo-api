@@ -26346,6 +26346,8 @@ func (m *Get2FaStatusResponse) validate(all bool) error {
 
 	// no validation rules for LastResetAt
 
+	// no validation rules for Required
+
 	if len(errors) > 0 {
 		return Get2FaStatusResponseMultiError(errors)
 	}
@@ -26953,6 +26955,214 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = Verify2FaWithTempTokenRequestValidationError{}
+
+// Validate checks the field values on UpdateMfaConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateMfaConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateMfaConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateMfaConfigRequestMultiError, or nil if none found.
+func (m *UpdateMfaConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateMfaConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Required
+
+	if len(errors) > 0 {
+		return UpdateMfaConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateMfaConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateMfaConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateMfaConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateMfaConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateMfaConfigRequestMultiError) AllErrors() []error { return m }
+
+// UpdateMfaConfigRequestValidationError is the validation error returned by
+// UpdateMfaConfigRequest.Validate if the designated constraints aren't met.
+type UpdateMfaConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMfaConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMfaConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateMfaConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMfaConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMfaConfigRequestValidationError) ErrorName() string {
+	return "UpdateMfaConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMfaConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMfaConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMfaConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMfaConfigRequestValidationError{}
+
+// Validate checks the field values on UpdateMfaConfigResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateMfaConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateMfaConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateMfaConfigResponseMultiError, or nil if none found.
+func (m *UpdateMfaConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateMfaConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateMfaConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateMfaConfigResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateMfaConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateMfaConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateMfaConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateMfaConfigResponseMultiError) AllErrors() []error { return m }
+
+// UpdateMfaConfigResponseValidationError is the validation error returned by
+// UpdateMfaConfigResponse.Validate if the designated constraints aren't met.
+type UpdateMfaConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMfaConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMfaConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateMfaConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMfaConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMfaConfigResponseValidationError) ErrorName() string {
+	return "UpdateMfaConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMfaConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMfaConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMfaConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMfaConfigResponseValidationError{}
 
 // Validate checks the field values on GetBackofficeAccountDetailRequest with
 // the rules defined in the proto definition for this message. If any rules

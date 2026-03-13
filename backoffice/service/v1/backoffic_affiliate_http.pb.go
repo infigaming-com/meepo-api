@@ -48,6 +48,7 @@ const OperationBackofficeAffiliateListCommissions = "/api.backoffice.service.v1.
 const OperationBackofficeAffiliateListEvents = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
 const OperationBackofficeAffiliateListPostbackLogs = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbackLogs"
 const OperationBackofficeAffiliateListPostbacks = "/api.backoffice.service.v1.BackofficeAffiliate/ListPostbacks"
+const OperationBackofficeAffiliateResetAffiliatePassword = "/api.backoffice.service.v1.BackofficeAffiliate/ResetAffiliatePassword"
 const OperationBackofficeAffiliateSetAffiliateDomain = "/api.backoffice.service.v1.BackofficeAffiliate/SetAffiliateDomain"
 const OperationBackofficeAffiliateSetReferralPlan = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
 const OperationBackofficeAffiliateUpdateAffiliate = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliate"
@@ -85,6 +86,7 @@ type BackofficeAffiliateHTTPServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
 	ListPostbackLogs(context.Context, *ListPostbackLogsRequest) (*v1.ListPostbackLogsResponse, error)
 	ListPostbacks(context.Context, *ListPostbacksRequest) (*v1.ListPostbacksResponse, error)
+	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error)
 	SetAffiliateDomain(context.Context, *SetAffiliateDomainRequest) (*v1.SetAffiliateDomainResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
@@ -108,6 +110,7 @@ func RegisterBackofficeAffiliateHTTPServer(s *http.Server, srv BackofficeAffilia
 	r.POST("/v1/backoffice/affiliate/list", _BackofficeAffiliate_ListAffiliates0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/delete", _BackofficeAffiliate_DeleteAffiliate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/get/details", _BackofficeAffiliate_GetAffiliateDetails0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/reset-password", _BackofficeAffiliate_ResetAffiliatePassword0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/campaign/create", _BackofficeAffiliate_CreateCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/campaign/update", _BackofficeAffiliate_UpdateCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/campaign/list", _BackofficeAffiliate_ListCampaigns0_HTTP_Handler(srv))
@@ -393,6 +396,28 @@ func _BackofficeAffiliate_GetAffiliateDetails0_HTTP_Handler(srv BackofficeAffili
 			return err
 		}
 		reply := out.(*v1.GetAffiliateDetailsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_ResetAffiliatePassword0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ResetAffiliatePasswordRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateResetAffiliatePassword)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ResetAffiliatePassword(ctx, req.(*ResetAffiliatePasswordRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ResetAffiliatePasswordResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -932,6 +957,7 @@ type BackofficeAffiliateHTTPClient interface {
 	ListEvents(ctx context.Context, req *ListEventsRequest, opts ...http.CallOption) (rsp *v1.ListEventsResponse, err error)
 	ListPostbackLogs(ctx context.Context, req *ListPostbackLogsRequest, opts ...http.CallOption) (rsp *v1.ListPostbackLogsResponse, err error)
 	ListPostbacks(ctx context.Context, req *ListPostbacksRequest, opts ...http.CallOption) (rsp *v1.ListPostbacksResponse, err error)
+	ResetAffiliatePassword(ctx context.Context, req *ResetAffiliatePasswordRequest, opts ...http.CallOption) (rsp *v1.ResetAffiliatePasswordResponse, err error)
 	SetAffiliateDomain(ctx context.Context, req *SetAffiliateDomainRequest, opts ...http.CallOption) (rsp *v1.SetAffiliateDomainResponse, err error)
 	SetReferralPlan(ctx context.Context, req *SetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.SetReferralPlanResponse, err error)
 	UpdateAffiliate(ctx context.Context, req *UpdateAffiliateRequest, opts ...http.CallOption) (rsp *v1.UpdateAffiliateResponse, err error)
@@ -1305,6 +1331,19 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListPostbacks(ctx context.Context, i
 	pattern := "/v1/backoffice/affiliate/postback/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAffiliateListPostbacks))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...http.CallOption) (*v1.ResetAffiliatePasswordResponse, error) {
+	var out v1.ResetAffiliatePasswordResponse
+	pattern := "/v1/backoffice/affiliate/reset-password"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateResetAffiliatePassword))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -467,6 +467,9 @@ service User {
 	// Verify 2FA using temp token and return full login response (internal gRPC only)
 	rpc Verify2FaWithTempToken(Verify2FaWithTempTokenRequest) returns (LoginWithInfoAnd2faResponse) {}
 
+	// Update MFA configuration for a user (internal gRPC only)
+	rpc UpdateMfaConfig(UpdateMfaConfigRequest) returns (UpdateMfaConfigResponse) {}
+
 	// ============ Backoffice Account Management APIs ============
 	// Get backoffice account details (internal gRPC only)
 	rpc GetBackofficeAccountDetail(GetBackofficeAccountDetailRequest) returns (GetBackofficeAccountDetailResponse) {}
@@ -2178,6 +2181,7 @@ message Get2faStatusRequest {
 message Get2faStatusResponse {
 	bool enabled = 1;           // Whether 2FA is enabled
 	int64 last_reset_at = 2;    // Timestamp of last 2FA reset (0 if never)
+	bool required = 3;          // Whether 2FA is required for login
 }
 
 // LoginWithInfoAnd2faRequest - backoffice login request with 2FA support
@@ -2226,6 +2230,15 @@ message Verify2FaWithTempTokenRequest {
 	string temp_token = 1;  // Temporary token from login response
 	string totp_code = 2;   // 6-digit TOTP code to verify
 }
+
+// UpdateMfaConfigRequest - update MFA configuration for a user
+message UpdateMfaConfigRequest {
+	int64 user_id = 1;     // Target user ID
+	bool required = 2;     // Whether 2FA is required for login
+}
+
+// UpdateMfaConfigResponse - empty on success
+message UpdateMfaConfigResponse {}
 
 // ============ Backoffice Account Management Messages ============
 

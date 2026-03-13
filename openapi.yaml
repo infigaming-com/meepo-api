@@ -1185,6 +1185,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdatePostbackResponse'
+    /v1/backoffice/affiliate/reset-password:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ResetAffiliatePassword
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ResetAffiliatePasswordRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ResetAffiliatePasswordResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -12486,6 +12504,9 @@ components:
                 lossRevenueShare:
                     $ref: '#/components/schemas/api.affiliate.service.v1.LossRevenueShare'
             description: Referral plan configuration
+        api.affiliate.service.v1.ResetAffiliatePasswordResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.RevShareConfig:
             type: object
             properties:
@@ -21323,6 +21344,13 @@ components:
                     type: boolean
                     description: If true, also trigger a batch calculation after repairing field mappings
             description: Repair a segment by ensuring its field mappings exist in the database.
+        api.backoffice.service.v1.ResetAffiliatePasswordRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                newPassword:
+                    type: string
         api.backoffice.service.v1.ResetPasswordRequest:
             type: object
             properties:

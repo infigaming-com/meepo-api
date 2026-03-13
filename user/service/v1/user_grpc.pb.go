@@ -121,6 +121,7 @@ const (
 	User_LoginWithInfoAnd2Fa_FullMethodName                = "/api.user.service.v1.User/LoginWithInfoAnd2fa"
 	User_Bind2FaWithTempToken_FullMethodName               = "/api.user.service.v1.User/Bind2FaWithTempToken"
 	User_Verify2FaWithTempToken_FullMethodName             = "/api.user.service.v1.User/Verify2FaWithTempToken"
+	User_UpdateMfaConfig_FullMethodName                    = "/api.user.service.v1.User/UpdateMfaConfig"
 	User_GetBackofficeAccountDetail_FullMethodName         = "/api.user.service.v1.User/GetBackofficeAccountDetail"
 	User_UpdateBackofficeAccount_FullMethodName            = "/api.user.service.v1.User/UpdateBackofficeAccount"
 	User_AdminResetPassword_FullMethodName                 = "/api.user.service.v1.User/AdminResetPassword"
@@ -317,6 +318,8 @@ type UserClient interface {
 	Bind2FaWithTempToken(ctx context.Context, in *Bind2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
 	// Verify 2FA using temp token and return full login response (internal gRPC only)
 	Verify2FaWithTempToken(ctx context.Context, in *Verify2FaWithTempTokenRequest, opts ...grpc.CallOption) (*LoginWithInfoAnd2FaResponse, error)
+	// Update MFA configuration for a user (internal gRPC only)
+	UpdateMfaConfig(ctx context.Context, in *UpdateMfaConfigRequest, opts ...grpc.CallOption) (*UpdateMfaConfigResponse, error)
 	// ============ Backoffice Account Management APIs ============
 	// Get backoffice account details (internal gRPC only)
 	GetBackofficeAccountDetail(ctx context.Context, in *GetBackofficeAccountDetailRequest, opts ...grpc.CallOption) (*GetBackofficeAccountDetailResponse, error)
@@ -1379,6 +1382,16 @@ func (c *userClient) Verify2FaWithTempToken(ctx context.Context, in *Verify2FaWi
 	return out, nil
 }
 
+func (c *userClient) UpdateMfaConfig(ctx context.Context, in *UpdateMfaConfigRequest, opts ...grpc.CallOption) (*UpdateMfaConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateMfaConfigResponse)
+	err := c.cc.Invoke(ctx, User_UpdateMfaConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetBackofficeAccountDetail(ctx context.Context, in *GetBackofficeAccountDetailRequest, opts ...grpc.CallOption) (*GetBackofficeAccountDetailResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBackofficeAccountDetailResponse)
@@ -1789,6 +1802,8 @@ type UserServer interface {
 	Bind2FaWithTempToken(context.Context, *Bind2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error)
 	// Verify 2FA using temp token and return full login response (internal gRPC only)
 	Verify2FaWithTempToken(context.Context, *Verify2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error)
+	// Update MFA configuration for a user (internal gRPC only)
+	UpdateMfaConfig(context.Context, *UpdateMfaConfigRequest) (*UpdateMfaConfigResponse, error)
 	// ============ Backoffice Account Management APIs ============
 	// Get backoffice account details (internal gRPC only)
 	GetBackofficeAccountDetail(context.Context, *GetBackofficeAccountDetailRequest) (*GetBackofficeAccountDetailResponse, error)
@@ -2150,6 +2165,9 @@ func (UnimplementedUserServer) Bind2FaWithTempToken(context.Context, *Bind2FaWit
 }
 func (UnimplementedUserServer) Verify2FaWithTempToken(context.Context, *Verify2FaWithTempTokenRequest) (*LoginWithInfoAnd2FaResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Verify2FaWithTempToken not implemented")
+}
+func (UnimplementedUserServer) UpdateMfaConfig(context.Context, *UpdateMfaConfigRequest) (*UpdateMfaConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateMfaConfig not implemented")
 }
 func (UnimplementedUserServer) GetBackofficeAccountDetail(context.Context, *GetBackofficeAccountDetailRequest) (*GetBackofficeAccountDetailResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetBackofficeAccountDetail not implemented")
@@ -4044,6 +4062,24 @@ func _User_Verify2FaWithTempToken_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UpdateMfaConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMfaConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateMfaConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateMfaConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateMfaConfig(ctx, req.(*UpdateMfaConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetBackofficeAccountDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBackofficeAccountDetailRequest)
 	if err := dec(in); err != nil {
@@ -4882,6 +4918,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Verify2FaWithTempToken",
 			Handler:    _User_Verify2FaWithTempToken_Handler,
+		},
+		{
+			MethodName: "UpdateMfaConfig",
+			Handler:    _User_UpdateMfaConfig_Handler,
 		},
 		{
 			MethodName: "GetBackofficeAccountDetail",
