@@ -802,8 +802,11 @@ type SendAffiliateAccountEmailRequest struct {
 	AffiliateId           int64                   `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	Password              string                  `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// If provided, used as the backoffice login URL in the email.
+	// If empty, falls back to operator's backoffice_subdomain from operator details.
+	BackofficeUrl *string `protobuf:"bytes,4,opt,name=backoffice_url,json=backofficeUrl,proto3,oneof" json:"backoffice_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SendAffiliateAccountEmailRequest) Reset() {
@@ -855,6 +858,13 @@ func (x *SendAffiliateAccountEmailRequest) GetTargetOperatorContext() *common.Op
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *SendAffiliateAccountEmailRequest) GetBackofficeUrl() string {
+	if x != nil && x.BackofficeUrl != nil {
+		return *x.BackofficeUrl
+	}
+	return ""
 }
 
 type SendAffiliateAccountEmailResponse struct {
@@ -2862,11 +2872,13 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"e\n" +
 	"\x1dResetAffiliatePasswordRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12!\n" +
-	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\"\xb6\x01\n" +
+	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\"\xf5\x01\n" +
 	" SendAffiliateAccountEmailRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12S\n" +
-	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"#\n" +
+	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12*\n" +
+	"\x0ebackoffice_url\x18\x04 \x01(\tH\x00R\rbackofficeUrl\x88\x01\x01B\x11\n" +
+	"\x0f_backoffice_url\"#\n" +
 	"!SendAffiliateAccountEmailResponse\"\xf8\x02\n" +
 	"\x15CreateCampaignRequest\x12U\n" +
 	"\bcampaign\x18\x01 \x01(\v29.api.backoffice.service.v1.CreateCampaignRequest.CampaignR\bcampaign\x123\n" +
@@ -3394,6 +3406,7 @@ func file_backoffice_service_v1_backoffic_affiliate_proto_init() {
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[5].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[6].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[9].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[13].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[15].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[16].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[17].OneofWrappers = []any{}
