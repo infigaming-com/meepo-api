@@ -1203,6 +1203,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ResetAffiliatePasswordResponse'
+    /v1/backoffice/affiliate/send-account-email:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_SendAffiliateAccountEmail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SendAffiliateAccountEmailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.SendAffiliateAccountEmailResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -12528,6 +12546,9 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesRateCommission'
                 qualification:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+        api.affiliate.service.v1.SendAffiliateAccountEmailResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.SetAffiliateDomainResponse:
             type: object
             properties: {}
@@ -21399,6 +21420,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.Permission'
+        api.backoffice.service.v1.SendAffiliateAccountEmailRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                password:
+                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:

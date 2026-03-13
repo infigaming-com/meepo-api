@@ -99,6 +99,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc SendAffiliateAccountEmail(SendAffiliateAccountEmailRequest) returns (api.affiliate.service.v1.SendAffiliateAccountEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/send-account-email"
+			body: "*"
+		};
+	}
 
 	// -------------- Campaign --------------
 
@@ -357,6 +363,12 @@ message GetAffiliateDetailsRequest {
 message ResetAffiliatePasswordRequest {
 	int64 affiliate_id = 1;
 	string new_password = 2;
+}
+
+message SendAffiliateAccountEmailRequest {
+	int64 affiliate_id = 1;
+	string password = 2;
+	api.common.OperatorContext target_operator_context = 3;
 }
 
 // -------------- Campaign --------------

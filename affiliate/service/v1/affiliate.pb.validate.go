@@ -1928,6 +1928,251 @@ var _ interface {
 	ErrorName() string
 } = ResetAffiliatePasswordResponseValidationError{}
 
+// Validate checks the field values on SendAffiliateAccountEmailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SendAffiliateAccountEmailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendAffiliateAccountEmailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SendAffiliateAccountEmailRequestMultiError, or nil if none found.
+func (m *SendAffiliateAccountEmailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendAffiliateAccountEmailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for Password
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendAffiliateAccountEmailRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendAffiliateAccountEmailRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendAffiliateAccountEmailRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InitiatorUserId
+
+	if len(errors) > 0 {
+		return SendAffiliateAccountEmailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendAffiliateAccountEmailRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// SendAffiliateAccountEmailRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SendAffiliateAccountEmailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendAffiliateAccountEmailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendAffiliateAccountEmailRequestMultiError) AllErrors() []error { return m }
+
+// SendAffiliateAccountEmailRequestValidationError is the validation error
+// returned by SendAffiliateAccountEmailRequest.Validate if the designated
+// constraints aren't met.
+type SendAffiliateAccountEmailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendAffiliateAccountEmailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendAffiliateAccountEmailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendAffiliateAccountEmailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendAffiliateAccountEmailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendAffiliateAccountEmailRequestValidationError) ErrorName() string {
+	return "SendAffiliateAccountEmailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendAffiliateAccountEmailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendAffiliateAccountEmailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendAffiliateAccountEmailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendAffiliateAccountEmailRequestValidationError{}
+
+// Validate checks the field values on SendAffiliateAccountEmailResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SendAffiliateAccountEmailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendAffiliateAccountEmailResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SendAffiliateAccountEmailResponseMultiError, or nil if none found.
+func (m *SendAffiliateAccountEmailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendAffiliateAccountEmailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SendAffiliateAccountEmailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendAffiliateAccountEmailResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// SendAffiliateAccountEmailResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SendAffiliateAccountEmailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendAffiliateAccountEmailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendAffiliateAccountEmailResponseMultiError) AllErrors() []error { return m }
+
+// SendAffiliateAccountEmailResponseValidationError is the validation error
+// returned by SendAffiliateAccountEmailResponse.Validate if the designated
+// constraints aren't met.
+type SendAffiliateAccountEmailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendAffiliateAccountEmailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendAffiliateAccountEmailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendAffiliateAccountEmailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendAffiliateAccountEmailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendAffiliateAccountEmailResponseValidationError) ErrorName() string {
+	return "SendAffiliateAccountEmailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendAffiliateAccountEmailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendAffiliateAccountEmailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendAffiliateAccountEmailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendAffiliateAccountEmailResponseValidationError{}
+
 // Validate checks the field values on Campaign with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

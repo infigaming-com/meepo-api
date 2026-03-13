@@ -33,6 +33,7 @@ const (
 	BackofficeAffiliate_DeleteAffiliate_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
 	BackofficeAffiliate_GetAffiliateDetails_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
 	BackofficeAffiliate_ResetAffiliatePassword_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ResetAffiliatePassword"
+	BackofficeAffiliate_SendAffiliateAccountEmail_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/SendAffiliateAccountEmail"
 	BackofficeAffiliate_CreateCampaign_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
 	BackofficeAffiliate_UpdateCampaign_FullMethodName                  = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
 	BackofficeAffiliate_ListCampaigns_FullMethodName                   = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
@@ -75,6 +76,7 @@ type BackofficeAffiliateClient interface {
 	DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...grpc.CallOption) (*v1.DeleteAffiliateResponse, error)
 	GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDetailsResponse, error)
 	ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*v1.ResetAffiliatePasswordResponse, error)
+	SendAffiliateAccountEmail(ctx context.Context, in *SendAffiliateAccountEmailRequest, opts ...grpc.CallOption) (*v1.SendAffiliateAccountEmailResponse, error)
 	CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*v1.CreateCampaignResponse, error)
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*v1.UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
@@ -232,6 +234,16 @@ func (c *backofficeAffiliateClient) ResetAffiliatePassword(ctx context.Context, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ResetAffiliatePasswordResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_ResetAffiliatePassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) SendAffiliateAccountEmail(ctx context.Context, in *SendAffiliateAccountEmailRequest, opts ...grpc.CallOption) (*v1.SendAffiliateAccountEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SendAffiliateAccountEmailResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_SendAffiliateAccountEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -485,6 +497,7 @@ type BackofficeAffiliateServer interface {
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
 	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error)
 	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error)
+	SendAffiliateAccountEmail(context.Context, *SendAffiliateAccountEmailRequest) (*v1.SendAffiliateAccountEmailResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*v1.ListCampaignsResponse, error)
@@ -556,6 +569,9 @@ func (UnimplementedBackofficeAffiliateServer) GetAffiliateDetails(context.Contex
 }
 func (UnimplementedBackofficeAffiliateServer) ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResetAffiliatePassword not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) SendAffiliateAccountEmail(context.Context, *SendAffiliateAccountEmailRequest) (*v1.SendAffiliateAccountEmailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendAffiliateAccountEmail not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateCampaign not implemented")
@@ -877,6 +893,24 @@ func _BackofficeAffiliate_ResetAffiliatePassword_Handler(srv interface{}, ctx co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAffiliateServer).ResetAffiliatePassword(ctx, req.(*ResetAffiliatePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_SendAffiliateAccountEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendAffiliateAccountEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).SendAffiliateAccountEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_SendAffiliateAccountEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).SendAffiliateAccountEmail(ctx, req.(*SendAffiliateAccountEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1353,6 +1387,10 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetAffiliatePassword",
 			Handler:    _BackofficeAffiliate_ResetAffiliatePassword_Handler,
+		},
+		{
+			MethodName: "SendAffiliateAccountEmail",
+			Handler:    _BackofficeAffiliate_SendAffiliateAccountEmail_Handler,
 		},
 		{
 			MethodName: "CreateCampaign",
