@@ -70,6 +70,9 @@ func buildEmailContent(template string, params EmailParams) (subject, textConten
 			return "", "", "", fmt.Errorf("failed to load email verification template: %w", err)
 		}
 
+	// Agent account email for affiliate/agent creation.
+	// "Agent" is the user-facing term for affiliates in the email template.
+	// Template params: agentName, email, password, backofficeUrl
 	case EmailTemplateAgentAccount:
 		agentName := params["agentName"]
 		if agentName == "" {
