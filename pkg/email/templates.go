@@ -12,6 +12,7 @@ const (
 	EmailTemplateCompanyAccount    string = "company_account"
 	EmailTemplateOperatorAccount   string = "operator_account"
 	EmailTemplateEmailVerification string = "email_verification"
+	EmailTemplateAgentAccount      string = "agent_account"
 
 	EmailTemplateBasePath string = "/email_templates"
 )
@@ -67,6 +68,20 @@ func buildEmailContent(template string, params EmailParams) (subject, textConten
 		textContent, htmlContent, err = loadTemplateFiles("email_verification_template", params)
 		if err != nil {
 			return "", "", "", fmt.Errorf("failed to load email verification template: %w", err)
+		}
+
+	// Agent account email for affiliate/agent creation.
+	// "Agent" is the user-facing term for affiliates in the email template.
+	// Template params: agentName, email, password, backofficeUrl
+	case EmailTemplateAgentAccount:
+		agentName := params["agentName"]
+		if agentName == "" {
+			agentName = "Agent"
+		}
+		subject = fmt.Sprintf("Your agent account %s has been successfully created", agentName)
+		textContent, htmlContent, err = loadTemplateFiles("agent_account_template", params)
+		if err != nil {
+			return "", "", "", fmt.Errorf("failed to load agent account template: %w", err)
 		}
 	// Can add more email templates
 	default:
