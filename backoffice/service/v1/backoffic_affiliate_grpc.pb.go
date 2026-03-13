@@ -74,7 +74,7 @@ type BackofficeAffiliateClient interface {
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*v1.ListAffiliatesResponse, error)
 	DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...grpc.CallOption) (*v1.DeleteAffiliateResponse, error)
 	GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDetailsResponse, error)
-	ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*ResetAffiliatePasswordResponse, error)
+	ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*v1.ResetAffiliatePasswordResponse, error)
 	CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*v1.CreateCampaignResponse, error)
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*v1.UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
@@ -228,9 +228,9 @@ func (c *backofficeAffiliateClient) GetAffiliateDetails(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *backofficeAffiliateClient) ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*ResetAffiliatePasswordResponse, error) {
+func (c *backofficeAffiliateClient) ResetAffiliatePassword(ctx context.Context, in *ResetAffiliatePasswordRequest, opts ...grpc.CallOption) (*v1.ResetAffiliatePasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ResetAffiliatePasswordResponse)
+	out := new(v1.ResetAffiliatePasswordResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_ResetAffiliatePassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -484,7 +484,7 @@ type BackofficeAffiliateServer interface {
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
 	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error)
-	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*ResetAffiliatePasswordResponse, error)
+	ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*v1.ListCampaignsResponse, error)
@@ -554,7 +554,7 @@ func (UnimplementedBackofficeAffiliateServer) DeleteAffiliate(context.Context, *
 func (UnimplementedBackofficeAffiliateServer) GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDetails not implemented")
 }
-func (UnimplementedBackofficeAffiliateServer) ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*ResetAffiliatePasswordResponse, error) {
+func (UnimplementedBackofficeAffiliateServer) ResetAffiliatePassword(context.Context, *ResetAffiliatePasswordRequest) (*v1.ResetAffiliatePasswordResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResetAffiliatePassword not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error) {

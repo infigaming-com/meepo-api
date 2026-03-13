@@ -477,6 +477,9 @@ service User {
 	rpc UpdateBackofficeAccount(UpdateBackofficeAccountRequest) returns (UpdateBackofficeAccountResponse) {}
 	// Admin reset password for backoffice account (internal gRPC only)
 	rpc AdminResetPassword(AdminResetPasswordRequest) returns (AdminResetPasswordResponse) {}
+	// Reset password directly without forcing password change on next login.
+	// Revokes all existing tokens to force re-login. (internal gRPC only)
+	rpc ResetPasswordDirectly(ResetPasswordDirectlyRequest) returns (ResetPasswordDirectlyResponse) {}
 
 	// ============ OAuth Provider Configuration APIs (Internal gRPC) ============
 	// Create or update OAuth provider configuration for an operator
@@ -2292,6 +2295,15 @@ message AdminResetPasswordRequest {
 
 // AdminResetPasswordResponse - empty on success
 message AdminResetPasswordResponse {}
+
+// ResetPasswordDirectlyRequest - reset password without forcing change on next login
+message ResetPasswordDirectlyRequest {
+	int64 user_id = 1;       // Target user ID
+	string new_password = 2; // New password to set
+}
+
+// ResetPasswordDirectlyResponse - empty on success
+message ResetPasswordDirectlyResponse {}
 
 // ============================================================================
 // OAuth Provider Configuration Messages

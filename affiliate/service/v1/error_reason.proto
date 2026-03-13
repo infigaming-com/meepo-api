@@ -105,4 +105,6 @@ enum ErrorReason {
 
   // Permission
   ROLE_PERMISSION_DENIED = 130089;
+
+  RESET_AFFILIATE_PASSWORD_FAILED = 130090;
 }
