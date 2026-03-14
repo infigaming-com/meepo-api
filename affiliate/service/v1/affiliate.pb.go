@@ -342,6 +342,7 @@ func (x *CreateAffiliateRequest) GetInitiatorUserId() int64 {
 
 type CreateAffiliateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId   int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -374,6 +375,13 @@ func (x *CreateAffiliateResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateAffiliateResponse.ProtoReflect.Descriptor instead.
 func (*CreateAffiliateResponse) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateAffiliateResponse) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
 }
 
 type UpdateAffiliateRequest struct {
@@ -8073,8 +8081,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
-	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\"\x19\n" +
-	"\x17CreateAffiliateResponse\"\x89\x02\n" +
+	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\"<\n" +
+	"\x17CreateAffiliateResponse\x12!\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"\x89\x02\n" +
 	"\x16UpdateAffiliateRequest\x12E\n" +
 	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12!\n" +
 	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\x12Y\n" +
