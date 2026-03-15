@@ -242,6 +242,7 @@ message CreateAffiliateRequest {
 }
 
 message CreateAffiliateResponse {
+    int64 affiliate_id = 1;
 }
 
 message UpdateAffiliateRequest {

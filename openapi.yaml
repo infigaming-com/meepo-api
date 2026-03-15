@@ -10998,7 +10998,9 @@ components:
                     type: string
         api.affiliate.service.v1.CreateAffiliateResponse:
             type: object
-            properties: {}
+            properties:
+                affiliateId:
+                    type: string
         api.affiliate.service.v1.CreateCampaignResponse:
             type: object
             properties:

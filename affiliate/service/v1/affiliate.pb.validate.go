@@ -517,6 +517,8 @@ func (m *CreateAffiliateResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for AffiliateId
+
 	if len(errors) > 0 {
 		return CreateAffiliateResponseMultiError(errors)
 	}
