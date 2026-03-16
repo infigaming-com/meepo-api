@@ -1141,6 +1141,62 @@ func (x *PauseCrmCampaignRequest) GetId() int64 {
 	return 0
 }
 
+// Archive a campaign. Transitions status from PAUSED/COMPLETED → ARCHIVED.
+// Archived campaigns stop all processing and can be deleted or re-drafted.
+type ArchiveCrmCampaignRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for permission check.
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Campaign ID to archive
+	Id            int64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveCrmCampaignRequest) Reset() {
+	*x = ArchiveCrmCampaignRequest{}
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveCrmCampaignRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveCrmCampaignRequest) ProtoMessage() {}
+
+func (x *ArchiveCrmCampaignRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveCrmCampaignRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveCrmCampaignRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ArchiveCrmCampaignRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ArchiveCrmCampaignRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 // Manually trigger a campaign for specific users.
 // The campaign must be ACTIVE and its workflow must include a `manual` trigger type.
 //
@@ -1192,7 +1248,7 @@ type TriggerCrmCampaignRequest struct {
 
 func (x *TriggerCrmCampaignRequest) Reset() {
 	*x = TriggerCrmCampaignRequest{}
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1204,7 +1260,7 @@ func (x *TriggerCrmCampaignRequest) String() string {
 func (*TriggerCrmCampaignRequest) ProtoMessage() {}
 
 func (x *TriggerCrmCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1217,7 +1273,7 @@ func (x *TriggerCrmCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriggerCrmCampaignRequest.ProtoReflect.Descriptor instead.
 func (*TriggerCrmCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TriggerCrmCampaignRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1261,7 +1317,7 @@ type GetCrmCampaignExecutionRequest struct {
 
 func (x *GetCrmCampaignExecutionRequest) Reset() {
 	*x = GetCrmCampaignExecutionRequest{}
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1273,7 +1329,7 @@ func (x *GetCrmCampaignExecutionRequest) String() string {
 func (*GetCrmCampaignExecutionRequest) ProtoMessage() {}
 
 func (x *GetCrmCampaignExecutionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1286,7 +1342,7 @@ func (x *GetCrmCampaignExecutionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCrmCampaignExecutionRequest.ProtoReflect.Descriptor instead.
 func (*GetCrmCampaignExecutionRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetCrmCampaignExecutionRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1335,7 +1391,7 @@ type ListCrmCampaignExecutionsRequest struct {
 
 func (x *ListCrmCampaignExecutionsRequest) Reset() {
 	*x = ListCrmCampaignExecutionsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1347,7 +1403,7 @@ func (x *ListCrmCampaignExecutionsRequest) String() string {
 func (*ListCrmCampaignExecutionsRequest) ProtoMessage() {}
 
 func (x *ListCrmCampaignExecutionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1360,7 +1416,7 @@ func (x *ListCrmCampaignExecutionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCrmCampaignExecutionsRequest.ProtoReflect.Descriptor instead.
 func (*ListCrmCampaignExecutionsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListCrmCampaignExecutionsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1447,7 +1503,7 @@ type GetCrmCampaignExecutionStepsRequest struct {
 
 func (x *GetCrmCampaignExecutionStepsRequest) Reset() {
 	*x = GetCrmCampaignExecutionStepsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1459,7 +1515,7 @@ func (x *GetCrmCampaignExecutionStepsRequest) String() string {
 func (*GetCrmCampaignExecutionStepsRequest) ProtoMessage() {}
 
 func (x *GetCrmCampaignExecutionStepsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1472,7 +1528,7 @@ func (x *GetCrmCampaignExecutionStepsRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetCrmCampaignExecutionStepsRequest.ProtoReflect.Descriptor instead.
 func (*GetCrmCampaignExecutionStepsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetCrmCampaignExecutionStepsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1508,7 +1564,7 @@ type GetCrmCampaignWorkflowSchemaRequest struct {
 
 func (x *GetCrmCampaignWorkflowSchemaRequest) Reset() {
 	*x = GetCrmCampaignWorkflowSchemaRequest{}
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1520,7 +1576,7 @@ func (x *GetCrmCampaignWorkflowSchemaRequest) String() string {
 func (*GetCrmCampaignWorkflowSchemaRequest) ProtoMessage() {}
 
 func (x *GetCrmCampaignWorkflowSchemaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1533,7 +1589,7 @@ func (x *GetCrmCampaignWorkflowSchemaRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetCrmCampaignWorkflowSchemaRequest.ProtoReflect.Descriptor instead.
 func (*GetCrmCampaignWorkflowSchemaRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetCrmCampaignWorkflowSchemaRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1604,6 +1660,9 @@ const file_backoffice_service_v1_backoffice_campaign_proto_rawDesc = "" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\"~\n" +
 	"\x17PauseCrmCampaignRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x03R\x02id\"\x80\x01\n" +
+	"\x19ArchiveCrmCampaignRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\"\xea\x01\n" +
 	"\x19TriggerCrmCampaignRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
@@ -1630,7 +1689,7 @@ const file_backoffice_service_v1_backoffice_campaign_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12!\n" +
 	"\fexecution_id\x18\x02 \x01(\x03R\vexecutionId\"z\n" +
 	"#GetCrmCampaignWorkflowSchemaRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xb8\x15\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xe7\x16\n" +
 	"\x12BackofficeCampaign\x12\xa8\x01\n" +
 	"\x11CreateCrmCampaign\x123.api.backoffice.service.v1.CreateCrmCampaignRequest\x1a/.api.campaign.service.v1.CreateCampaignResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/crm/campaign/create\x12\xa8\x01\n" +
 	"\x11UpdateCrmCampaign\x123.api.backoffice.service.v1.UpdateCrmCampaignRequest\x1a/.api.campaign.service.v1.UpdateCampaignResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/crm/campaign/update\x12\x9c\x01\n" +
@@ -1642,6 +1701,7 @@ const file_backoffice_service_v1_backoffice_campaign_proto_rawDesc = "" +
 	"\x1bValidateCrmCampaignWorkflow\x12=.api.backoffice.service.v1.ValidateCrmCampaignWorkflowRequest\x1a1.api.campaign.service.v1.ValidateWorkflowResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/crm/campaign/workflow/validate\x12\xb0\x01\n" +
 	"\x13ActivateCrmCampaign\x125.api.backoffice.service.v1.ActivateCrmCampaignRequest\x1a1.api.campaign.service.v1.ActivateCampaignResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/crm/campaign/activate\x12\xa4\x01\n" +
 	"\x10PauseCrmCampaign\x122.api.backoffice.service.v1.PauseCrmCampaignRequest\x1a..api.campaign.service.v1.PauseCampaignResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/crm/campaign/pause\x12\xac\x01\n" +
+	"\x12ArchiveCrmCampaign\x124.api.backoffice.service.v1.ArchiveCrmCampaignRequest\x1a0.api.campaign.service.v1.ArchiveCampaignResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/crm/campaign/archive\x12\xac\x01\n" +
 	"\x12TriggerCrmCampaign\x124.api.backoffice.service.v1.TriggerCrmCampaignRequest\x1a0.api.campaign.service.v1.TriggerCampaignResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/crm/campaign/trigger\x12\xb9\x01\n" +
 	"\x17GetCrmCampaignExecution\x129.api.backoffice.service.v1.GetCrmCampaignExecutionRequest\x1a-.api.campaign.service.v1.GetExecutionResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/crm/campaign/execution/get\x12\xc0\x01\n" +
 	"\x19ListCrmCampaignExecutions\x12;.api.backoffice.service.v1.ListCrmCampaignExecutionsRequest\x1a/.api.campaign.service.v1.ListExecutionsResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/crm/campaign/execution/list\x12\xca\x01\n" +
@@ -1661,7 +1721,7 @@ func file_backoffice_service_v1_backoffice_campaign_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_campaign_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_campaign_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_backoffice_service_v1_backoffice_campaign_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_backoffice_service_v1_backoffice_campaign_proto_goTypes = []any{
 	(*CreateCrmCampaignRequest)(nil),            // 0: api.backoffice.service.v1.CreateCrmCampaignRequest
 	(*UpdateCrmCampaignRequest)(nil),            // 1: api.backoffice.service.v1.UpdateCrmCampaignRequest
@@ -1673,91 +1733,96 @@ var file_backoffice_service_v1_backoffice_campaign_proto_goTypes = []any{
 	(*ValidateCrmCampaignWorkflowRequest)(nil),  // 7: api.backoffice.service.v1.ValidateCrmCampaignWorkflowRequest
 	(*ActivateCrmCampaignRequest)(nil),          // 8: api.backoffice.service.v1.ActivateCrmCampaignRequest
 	(*PauseCrmCampaignRequest)(nil),             // 9: api.backoffice.service.v1.PauseCrmCampaignRequest
-	(*TriggerCrmCampaignRequest)(nil),           // 10: api.backoffice.service.v1.TriggerCrmCampaignRequest
-	(*GetCrmCampaignExecutionRequest)(nil),      // 11: api.backoffice.service.v1.GetCrmCampaignExecutionRequest
-	(*ListCrmCampaignExecutionsRequest)(nil),    // 12: api.backoffice.service.v1.ListCrmCampaignExecutionsRequest
-	(*GetCrmCampaignExecutionStepsRequest)(nil), // 13: api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest
-	(*GetCrmCampaignWorkflowSchemaRequest)(nil), // 14: api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest
-	(*common.OperatorContext)(nil),              // 15: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),               // 16: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),                     // 17: google.protobuf.Struct
-	(v1.CampaignStatus)(0),                      // 18: api.campaign.service.v1.CampaignStatus
-	(v1.ExecutionStatus)(0),                     // 19: api.campaign.service.v1.ExecutionStatus
-	(*v1.CreateCampaignResponse)(nil),           // 20: api.campaign.service.v1.CreateCampaignResponse
-	(*v1.UpdateCampaignResponse)(nil),           // 21: api.campaign.service.v1.UpdateCampaignResponse
-	(*v1.GetCampaignResponse)(nil),              // 22: api.campaign.service.v1.GetCampaignResponse
-	(*v1.ListCampaignsResponse)(nil),            // 23: api.campaign.service.v1.ListCampaignsResponse
-	(*v1.DeleteCampaignResponse)(nil),           // 24: api.campaign.service.v1.DeleteCampaignResponse
-	(*v1.SetWorkflowResponse)(nil),              // 25: api.campaign.service.v1.SetWorkflowResponse
-	(*v1.GetWorkflowResponse)(nil),              // 26: api.campaign.service.v1.GetWorkflowResponse
-	(*v1.ValidateWorkflowResponse)(nil),         // 27: api.campaign.service.v1.ValidateWorkflowResponse
-	(*v1.ActivateCampaignResponse)(nil),         // 28: api.campaign.service.v1.ActivateCampaignResponse
-	(*v1.PauseCampaignResponse)(nil),            // 29: api.campaign.service.v1.PauseCampaignResponse
-	(*v1.TriggerCampaignResponse)(nil),          // 30: api.campaign.service.v1.TriggerCampaignResponse
-	(*v1.GetExecutionResponse)(nil),             // 31: api.campaign.service.v1.GetExecutionResponse
-	(*v1.ListExecutionsResponse)(nil),           // 32: api.campaign.service.v1.ListExecutionsResponse
-	(*v1.GetExecutionStepsResponse)(nil),        // 33: api.campaign.service.v1.GetExecutionStepsResponse
-	(*v1.GetWorkflowSchemaResponse)(nil),        // 34: api.campaign.service.v1.GetWorkflowSchemaResponse
+	(*ArchiveCrmCampaignRequest)(nil),           // 10: api.backoffice.service.v1.ArchiveCrmCampaignRequest
+	(*TriggerCrmCampaignRequest)(nil),           // 11: api.backoffice.service.v1.TriggerCrmCampaignRequest
+	(*GetCrmCampaignExecutionRequest)(nil),      // 12: api.backoffice.service.v1.GetCrmCampaignExecutionRequest
+	(*ListCrmCampaignExecutionsRequest)(nil),    // 13: api.backoffice.service.v1.ListCrmCampaignExecutionsRequest
+	(*GetCrmCampaignExecutionStepsRequest)(nil), // 14: api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest
+	(*GetCrmCampaignWorkflowSchemaRequest)(nil), // 15: api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest
+	(*common.OperatorContext)(nil),              // 16: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),               // 17: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),                     // 18: google.protobuf.Struct
+	(v1.CampaignStatus)(0),                      // 19: api.campaign.service.v1.CampaignStatus
+	(v1.ExecutionStatus)(0),                     // 20: api.campaign.service.v1.ExecutionStatus
+	(*v1.CreateCampaignResponse)(nil),           // 21: api.campaign.service.v1.CreateCampaignResponse
+	(*v1.UpdateCampaignResponse)(nil),           // 22: api.campaign.service.v1.UpdateCampaignResponse
+	(*v1.GetCampaignResponse)(nil),              // 23: api.campaign.service.v1.GetCampaignResponse
+	(*v1.ListCampaignsResponse)(nil),            // 24: api.campaign.service.v1.ListCampaignsResponse
+	(*v1.DeleteCampaignResponse)(nil),           // 25: api.campaign.service.v1.DeleteCampaignResponse
+	(*v1.SetWorkflowResponse)(nil),              // 26: api.campaign.service.v1.SetWorkflowResponse
+	(*v1.GetWorkflowResponse)(nil),              // 27: api.campaign.service.v1.GetWorkflowResponse
+	(*v1.ValidateWorkflowResponse)(nil),         // 28: api.campaign.service.v1.ValidateWorkflowResponse
+	(*v1.ActivateCampaignResponse)(nil),         // 29: api.campaign.service.v1.ActivateCampaignResponse
+	(*v1.PauseCampaignResponse)(nil),            // 30: api.campaign.service.v1.PauseCampaignResponse
+	(*v1.ArchiveCampaignResponse)(nil),          // 31: api.campaign.service.v1.ArchiveCampaignResponse
+	(*v1.TriggerCampaignResponse)(nil),          // 32: api.campaign.service.v1.TriggerCampaignResponse
+	(*v1.GetExecutionResponse)(nil),             // 33: api.campaign.service.v1.GetExecutionResponse
+	(*v1.ListExecutionsResponse)(nil),           // 34: api.campaign.service.v1.ListExecutionsResponse
+	(*v1.GetExecutionStepsResponse)(nil),        // 35: api.campaign.service.v1.GetExecutionStepsResponse
+	(*v1.GetWorkflowSchemaResponse)(nil),        // 36: api.campaign.service.v1.GetWorkflowSchemaResponse
 }
 var file_backoffice_service_v1_backoffice_campaign_proto_depIdxs = []int32{
-	15, // 0: api.backoffice.service.v1.CreateCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 1: api.backoffice.service.v1.CreateCrmCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
-	16, // 2: api.backoffice.service.v1.CreateCrmCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
-	17, // 3: api.backoffice.service.v1.CreateCrmCampaignRequest.metadata:type_name -> google.protobuf.Struct
-	15, // 4: api.backoffice.service.v1.UpdateCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 5: api.backoffice.service.v1.UpdateCrmCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
-	16, // 6: api.backoffice.service.v1.UpdateCrmCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
-	17, // 7: api.backoffice.service.v1.UpdateCrmCampaignRequest.metadata:type_name -> google.protobuf.Struct
-	15, // 8: api.backoffice.service.v1.GetCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 9: api.backoffice.service.v1.ListCrmCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 10: api.backoffice.service.v1.ListCrmCampaignsRequest.status:type_name -> api.campaign.service.v1.CampaignStatus
-	15, // 11: api.backoffice.service.v1.DeleteCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 12: api.backoffice.service.v1.SetCrmCampaignWorkflowRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 13: api.backoffice.service.v1.GetCrmCampaignWorkflowRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 14: api.backoffice.service.v1.ActivateCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 15: api.backoffice.service.v1.PauseCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 16: api.backoffice.service.v1.TriggerCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 17: api.backoffice.service.v1.TriggerCrmCampaignRequest.campaign_data:type_name -> google.protobuf.Struct
-	15, // 18: api.backoffice.service.v1.GetCrmCampaignExecutionRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 19: api.backoffice.service.v1.ListCrmCampaignExecutionsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 20: api.backoffice.service.v1.ListCrmCampaignExecutionsRequest.status:type_name -> api.campaign.service.v1.ExecutionStatus
-	15, // 21: api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	15, // 22: api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0,  // 23: api.backoffice.service.v1.BackofficeCampaign.CreateCrmCampaign:input_type -> api.backoffice.service.v1.CreateCrmCampaignRequest
-	1,  // 24: api.backoffice.service.v1.BackofficeCampaign.UpdateCrmCampaign:input_type -> api.backoffice.service.v1.UpdateCrmCampaignRequest
-	2,  // 25: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaign:input_type -> api.backoffice.service.v1.GetCrmCampaignRequest
-	3,  // 26: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaigns:input_type -> api.backoffice.service.v1.ListCrmCampaignsRequest
-	4,  // 27: api.backoffice.service.v1.BackofficeCampaign.DeleteCrmCampaign:input_type -> api.backoffice.service.v1.DeleteCrmCampaignRequest
-	5,  // 28: api.backoffice.service.v1.BackofficeCampaign.SetCrmCampaignWorkflow:input_type -> api.backoffice.service.v1.SetCrmCampaignWorkflowRequest
-	6,  // 29: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflow:input_type -> api.backoffice.service.v1.GetCrmCampaignWorkflowRequest
-	7,  // 30: api.backoffice.service.v1.BackofficeCampaign.ValidateCrmCampaignWorkflow:input_type -> api.backoffice.service.v1.ValidateCrmCampaignWorkflowRequest
-	8,  // 31: api.backoffice.service.v1.BackofficeCampaign.ActivateCrmCampaign:input_type -> api.backoffice.service.v1.ActivateCrmCampaignRequest
-	9,  // 32: api.backoffice.service.v1.BackofficeCampaign.PauseCrmCampaign:input_type -> api.backoffice.service.v1.PauseCrmCampaignRequest
-	10, // 33: api.backoffice.service.v1.BackofficeCampaign.TriggerCrmCampaign:input_type -> api.backoffice.service.v1.TriggerCrmCampaignRequest
-	11, // 34: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecution:input_type -> api.backoffice.service.v1.GetCrmCampaignExecutionRequest
-	12, // 35: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaignExecutions:input_type -> api.backoffice.service.v1.ListCrmCampaignExecutionsRequest
-	13, // 36: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecutionSteps:input_type -> api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest
-	14, // 37: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflowSchema:input_type -> api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest
-	20, // 38: api.backoffice.service.v1.BackofficeCampaign.CreateCrmCampaign:output_type -> api.campaign.service.v1.CreateCampaignResponse
-	21, // 39: api.backoffice.service.v1.BackofficeCampaign.UpdateCrmCampaign:output_type -> api.campaign.service.v1.UpdateCampaignResponse
-	22, // 40: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaign:output_type -> api.campaign.service.v1.GetCampaignResponse
-	23, // 41: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaigns:output_type -> api.campaign.service.v1.ListCampaignsResponse
-	24, // 42: api.backoffice.service.v1.BackofficeCampaign.DeleteCrmCampaign:output_type -> api.campaign.service.v1.DeleteCampaignResponse
-	25, // 43: api.backoffice.service.v1.BackofficeCampaign.SetCrmCampaignWorkflow:output_type -> api.campaign.service.v1.SetWorkflowResponse
-	26, // 44: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflow:output_type -> api.campaign.service.v1.GetWorkflowResponse
-	27, // 45: api.backoffice.service.v1.BackofficeCampaign.ValidateCrmCampaignWorkflow:output_type -> api.campaign.service.v1.ValidateWorkflowResponse
-	28, // 46: api.backoffice.service.v1.BackofficeCampaign.ActivateCrmCampaign:output_type -> api.campaign.service.v1.ActivateCampaignResponse
-	29, // 47: api.backoffice.service.v1.BackofficeCampaign.PauseCrmCampaign:output_type -> api.campaign.service.v1.PauseCampaignResponse
-	30, // 48: api.backoffice.service.v1.BackofficeCampaign.TriggerCrmCampaign:output_type -> api.campaign.service.v1.TriggerCampaignResponse
-	31, // 49: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecution:output_type -> api.campaign.service.v1.GetExecutionResponse
-	32, // 50: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaignExecutions:output_type -> api.campaign.service.v1.ListExecutionsResponse
-	33, // 51: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecutionSteps:output_type -> api.campaign.service.v1.GetExecutionStepsResponse
-	34, // 52: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflowSchema:output_type -> api.campaign.service.v1.GetWorkflowSchemaResponse
-	38, // [38:53] is the sub-list for method output_type
-	23, // [23:38] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	16, // 0: api.backoffice.service.v1.CreateCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	17, // 1: api.backoffice.service.v1.CreateCrmCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
+	17, // 2: api.backoffice.service.v1.CreateCrmCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
+	18, // 3: api.backoffice.service.v1.CreateCrmCampaignRequest.metadata:type_name -> google.protobuf.Struct
+	16, // 4: api.backoffice.service.v1.UpdateCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	17, // 5: api.backoffice.service.v1.UpdateCrmCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
+	17, // 6: api.backoffice.service.v1.UpdateCrmCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
+	18, // 7: api.backoffice.service.v1.UpdateCrmCampaignRequest.metadata:type_name -> google.protobuf.Struct
+	16, // 8: api.backoffice.service.v1.GetCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 9: api.backoffice.service.v1.ListCrmCampaignsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 10: api.backoffice.service.v1.ListCrmCampaignsRequest.status:type_name -> api.campaign.service.v1.CampaignStatus
+	16, // 11: api.backoffice.service.v1.DeleteCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 12: api.backoffice.service.v1.SetCrmCampaignWorkflowRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 13: api.backoffice.service.v1.GetCrmCampaignWorkflowRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 14: api.backoffice.service.v1.ActivateCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 15: api.backoffice.service.v1.PauseCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 16: api.backoffice.service.v1.ArchiveCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 17: api.backoffice.service.v1.TriggerCrmCampaignRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 18: api.backoffice.service.v1.TriggerCrmCampaignRequest.campaign_data:type_name -> google.protobuf.Struct
+	16, // 19: api.backoffice.service.v1.GetCrmCampaignExecutionRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 20: api.backoffice.service.v1.ListCrmCampaignExecutionsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	20, // 21: api.backoffice.service.v1.ListCrmCampaignExecutionsRequest.status:type_name -> api.campaign.service.v1.ExecutionStatus
+	16, // 22: api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	16, // 23: api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 24: api.backoffice.service.v1.BackofficeCampaign.CreateCrmCampaign:input_type -> api.backoffice.service.v1.CreateCrmCampaignRequest
+	1,  // 25: api.backoffice.service.v1.BackofficeCampaign.UpdateCrmCampaign:input_type -> api.backoffice.service.v1.UpdateCrmCampaignRequest
+	2,  // 26: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaign:input_type -> api.backoffice.service.v1.GetCrmCampaignRequest
+	3,  // 27: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaigns:input_type -> api.backoffice.service.v1.ListCrmCampaignsRequest
+	4,  // 28: api.backoffice.service.v1.BackofficeCampaign.DeleteCrmCampaign:input_type -> api.backoffice.service.v1.DeleteCrmCampaignRequest
+	5,  // 29: api.backoffice.service.v1.BackofficeCampaign.SetCrmCampaignWorkflow:input_type -> api.backoffice.service.v1.SetCrmCampaignWorkflowRequest
+	6,  // 30: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflow:input_type -> api.backoffice.service.v1.GetCrmCampaignWorkflowRequest
+	7,  // 31: api.backoffice.service.v1.BackofficeCampaign.ValidateCrmCampaignWorkflow:input_type -> api.backoffice.service.v1.ValidateCrmCampaignWorkflowRequest
+	8,  // 32: api.backoffice.service.v1.BackofficeCampaign.ActivateCrmCampaign:input_type -> api.backoffice.service.v1.ActivateCrmCampaignRequest
+	9,  // 33: api.backoffice.service.v1.BackofficeCampaign.PauseCrmCampaign:input_type -> api.backoffice.service.v1.PauseCrmCampaignRequest
+	10, // 34: api.backoffice.service.v1.BackofficeCampaign.ArchiveCrmCampaign:input_type -> api.backoffice.service.v1.ArchiveCrmCampaignRequest
+	11, // 35: api.backoffice.service.v1.BackofficeCampaign.TriggerCrmCampaign:input_type -> api.backoffice.service.v1.TriggerCrmCampaignRequest
+	12, // 36: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecution:input_type -> api.backoffice.service.v1.GetCrmCampaignExecutionRequest
+	13, // 37: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaignExecutions:input_type -> api.backoffice.service.v1.ListCrmCampaignExecutionsRequest
+	14, // 38: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecutionSteps:input_type -> api.backoffice.service.v1.GetCrmCampaignExecutionStepsRequest
+	15, // 39: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflowSchema:input_type -> api.backoffice.service.v1.GetCrmCampaignWorkflowSchemaRequest
+	21, // 40: api.backoffice.service.v1.BackofficeCampaign.CreateCrmCampaign:output_type -> api.campaign.service.v1.CreateCampaignResponse
+	22, // 41: api.backoffice.service.v1.BackofficeCampaign.UpdateCrmCampaign:output_type -> api.campaign.service.v1.UpdateCampaignResponse
+	23, // 42: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaign:output_type -> api.campaign.service.v1.GetCampaignResponse
+	24, // 43: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaigns:output_type -> api.campaign.service.v1.ListCampaignsResponse
+	25, // 44: api.backoffice.service.v1.BackofficeCampaign.DeleteCrmCampaign:output_type -> api.campaign.service.v1.DeleteCampaignResponse
+	26, // 45: api.backoffice.service.v1.BackofficeCampaign.SetCrmCampaignWorkflow:output_type -> api.campaign.service.v1.SetWorkflowResponse
+	27, // 46: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflow:output_type -> api.campaign.service.v1.GetWorkflowResponse
+	28, // 47: api.backoffice.service.v1.BackofficeCampaign.ValidateCrmCampaignWorkflow:output_type -> api.campaign.service.v1.ValidateWorkflowResponse
+	29, // 48: api.backoffice.service.v1.BackofficeCampaign.ActivateCrmCampaign:output_type -> api.campaign.service.v1.ActivateCampaignResponse
+	30, // 49: api.backoffice.service.v1.BackofficeCampaign.PauseCrmCampaign:output_type -> api.campaign.service.v1.PauseCampaignResponse
+	31, // 50: api.backoffice.service.v1.BackofficeCampaign.ArchiveCrmCampaign:output_type -> api.campaign.service.v1.ArchiveCampaignResponse
+	32, // 51: api.backoffice.service.v1.BackofficeCampaign.TriggerCrmCampaign:output_type -> api.campaign.service.v1.TriggerCampaignResponse
+	33, // 52: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecution:output_type -> api.campaign.service.v1.GetExecutionResponse
+	34, // 53: api.backoffice.service.v1.BackofficeCampaign.ListCrmCampaignExecutions:output_type -> api.campaign.service.v1.ListExecutionsResponse
+	35, // 54: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignExecutionSteps:output_type -> api.campaign.service.v1.GetExecutionStepsResponse
+	36, // 55: api.backoffice.service.v1.BackofficeCampaign.GetCrmCampaignWorkflowSchema:output_type -> api.campaign.service.v1.GetWorkflowSchemaResponse
+	40, // [40:56] is the sub-list for method output_type
+	24, // [24:40] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_campaign_proto_init() }
@@ -1768,14 +1833,14 @@ func file_backoffice_service_v1_backoffice_campaign_proto_init() {
 	file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[1].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[3].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[12].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_campaign_proto_msgTypes[13].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_campaign_proto_rawDesc), len(file_backoffice_service_v1_backoffice_campaign_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

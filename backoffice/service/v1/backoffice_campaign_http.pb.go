@@ -21,6 +21,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeCampaignActivateCrmCampaign = "/api.backoffice.service.v1.BackofficeCampaign/ActivateCrmCampaign"
+const OperationBackofficeCampaignArchiveCrmCampaign = "/api.backoffice.service.v1.BackofficeCampaign/ArchiveCrmCampaign"
 const OperationBackofficeCampaignCreateCrmCampaign = "/api.backoffice.service.v1.BackofficeCampaign/CreateCrmCampaign"
 const OperationBackofficeCampaignDeleteCrmCampaign = "/api.backoffice.service.v1.BackofficeCampaign/DeleteCrmCampaign"
 const OperationBackofficeCampaignGetCrmCampaign = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaign"
@@ -40,6 +41,8 @@ type BackofficeCampaignHTTPServer interface {
 	// ActivateCrmCampaign Activate a DRAFT campaign. Requires a valid workflow to be set.
 	// Once active, the campaign starts processing triggers automatically.
 	ActivateCrmCampaign(context.Context, *ActivateCrmCampaignRequest) (*v1.ActivateCampaignResponse, error)
+	// ArchiveCrmCampaign Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+	ArchiveCrmCampaign(context.Context, *ArchiveCrmCampaignRequest) (*v1.ArchiveCampaignResponse, error)
 	// CreateCrmCampaign Create a new CRM campaign in DRAFT status.
 	CreateCrmCampaign(context.Context, *CreateCrmCampaignRequest) (*v1.CreateCampaignResponse, error)
 	// DeleteCrmCampaign Delete a campaign. Must be in DRAFT or ARCHIVED status.
@@ -85,6 +88,7 @@ func RegisterBackofficeCampaignHTTPServer(s *http.Server, srv BackofficeCampaign
 	r.POST("/v1/backoffice/crm/campaign/workflow/validate", _BackofficeCampaign_ValidateCrmCampaignWorkflow0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/activate", _BackofficeCampaign_ActivateCrmCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/pause", _BackofficeCampaign_PauseCrmCampaign0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/crm/campaign/archive", _BackofficeCampaign_ArchiveCrmCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/trigger", _BackofficeCampaign_TriggerCrmCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/execution/get", _BackofficeCampaign_GetCrmCampaignExecution0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/crm/campaign/execution/list", _BackofficeCampaign_ListCrmCampaignExecutions0_HTTP_Handler(srv))
@@ -312,6 +316,28 @@ func _BackofficeCampaign_PauseCrmCampaign0_HTTP_Handler(srv BackofficeCampaignHT
 	}
 }
 
+func _BackofficeCampaign_ArchiveCrmCampaign0_HTTP_Handler(srv BackofficeCampaignHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ArchiveCrmCampaignRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeCampaignArchiveCrmCampaign)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ArchiveCrmCampaign(ctx, req.(*ArchiveCrmCampaignRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ArchiveCampaignResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeCampaign_TriggerCrmCampaign0_HTTP_Handler(srv BackofficeCampaignHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in TriggerCrmCampaignRequest
@@ -426,6 +452,8 @@ type BackofficeCampaignHTTPClient interface {
 	// ActivateCrmCampaign Activate a DRAFT campaign. Requires a valid workflow to be set.
 	// Once active, the campaign starts processing triggers automatically.
 	ActivateCrmCampaign(ctx context.Context, req *ActivateCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.ActivateCampaignResponse, err error)
+	// ArchiveCrmCampaign Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+	ArchiveCrmCampaign(ctx context.Context, req *ArchiveCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.ArchiveCampaignResponse, err error)
 	// CreateCrmCampaign Create a new CRM campaign in DRAFT status.
 	CreateCrmCampaign(ctx context.Context, req *CreateCrmCampaignRequest, opts ...http.CallOption) (rsp *v1.CreateCampaignResponse, err error)
 	// DeleteCrmCampaign Delete a campaign. Must be in DRAFT or ARCHIVED status.
@@ -474,6 +502,20 @@ func (c *BackofficeCampaignHTTPClientImpl) ActivateCrmCampaign(ctx context.Conte
 	pattern := "/v1/backoffice/crm/campaign/activate"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeCampaignActivateCrmCampaign))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ArchiveCrmCampaign Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+func (c *BackofficeCampaignHTTPClientImpl) ArchiveCrmCampaign(ctx context.Context, in *ArchiveCrmCampaignRequest, opts ...http.CallOption) (*v1.ArchiveCampaignResponse, error) {
+	var out v1.ArchiveCampaignResponse
+	pattern := "/v1/backoffice/crm/campaign/archive"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeCampaignArchiveCrmCampaign))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

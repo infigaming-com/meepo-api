@@ -1899,6 +1899,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.campaign.service.v1.ActivateCampaignResponse'
+    /v1/backoffice/crm/campaign/archive:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+            operationId: BackofficeCampaign_ArchiveCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ArchiveCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.ArchiveCampaignResponse'
     /v1/backoffice/crm/campaign/create:
         post:
             tags:
@@ -13261,6 +13280,19 @@ components:
             type: object
             properties: {}
             description: AdminResetPasswordResponse - empty response on success
+        api.backoffice.service.v1.ArchiveCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                id:
+                    type: string
+                    description: Campaign ID to archive
+            description: |-
+                Archive a campaign. Transitions status from PAUSED/COMPLETED → ARCHIVED.
+                 Archived campaigns stop all processing and can be deleted or re-drafted.
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -23450,6 +23482,11 @@ components:
                         $ref: '#/components/schemas/api.campaign.service.v1.ConfigFieldSchema'
             description: ActionSchema describes an action type
         api.campaign.service.v1.ActivateCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.ArchiveCampaignResponse:
             type: object
             properties:
                 campaign:
