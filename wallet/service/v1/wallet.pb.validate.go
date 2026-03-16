@@ -24751,17 +24751,17 @@ func (m *GetCompanyFinancialSummaryResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for CustodyBalance
+	// no validation rules for CustodyBalanceUsd
 
-	// no validation rules for InternalDeposits
+	// no validation rules for InternalDepositsUsd
 
-	// no validation rules for UserDeposits
+	// no validation rules for UserDepositsUsd
 
-	// no validation rules for PlayerWithdraw
+	// no validation rules for PlayerWithdrawUsd
 
-	// no validation rules for CompanyWithdraw
+	// no validation rules for CompanyWithdrawUsd
 
-	// no validation rules for Transfer
+	// no validation rules for TransferUsd
 
 	if len(errors) > 0 {
 		return GetCompanyFinancialSummaryResponseMultiError(errors)
