@@ -26364,6 +26364,9 @@ components:
                 isInherited:
                     type: boolean
                     description: True if this channel is inherited from a parent operator level (system/retailer/company)
+                isOverridden:
+                    type: boolean
+                    description: True if the current operator has an override for this inherited channel's enabled state
             description: A configured notification delivery endpoint.
         api.push.service.v1.NotificationRule:
             type: object

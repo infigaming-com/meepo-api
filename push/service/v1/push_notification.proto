@@ -111,6 +111,8 @@ message NotificationChannel {
   int64 updated_at = 7;
   // True if this channel is inherited from a parent operator level (system/retailer/company)
   bool is_inherited = 8;
+  // True if the current operator has an override for this inherited channel's enabled state
+  bool is_overridden = 9;
 }
 
 // ============ Rule Messages ============
