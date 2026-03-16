@@ -20,19 +20,23 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationAffiliateClaimUserReferralRewards = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
+const OperationAffiliateClaimUserReferralRewardsAllCurrencies = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewardsAllCurrencies"
 const OperationAffiliateCreateUserReferralCode = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
 const OperationAffiliateGetUserLossRevenueShareStats = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
 const OperationAffiliateGetUserReferralPlan = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
 const OperationAffiliateGetUserReferralRewards = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
+const OperationAffiliateGetUserReferralRewardsAllCurrencies = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewardsAllCurrencies"
 const OperationAffiliateGetUserReferralStats = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
 const OperationAffiliateListUserReferralRewards = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
 
 type AffiliateHTTPServer interface {
 	ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error)
+	ClaimUserReferralRewardsAllCurrencies(context.Context, *ClaimUserReferralRewardsAllCurrenciesRequest) (*ClaimUserReferralRewardsAllCurrenciesResponse, error)
 	CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error)
 	GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error)
 	GetUserReferralPlan(context.Context, *GetUserReferralPlanRequest) (*GetUserReferralPlanResponse, error)
 	GetUserReferralRewards(context.Context, *GetUserReferralRewardsRequest) (*GetUserReferralRewardsResponse, error)
+	GetUserReferralRewardsAllCurrencies(context.Context, *GetUserReferralRewardsAllCurrenciesRequest) (*GetUserReferralRewardsAllCurrenciesResponse, error)
 	GetUserReferralStats(context.Context, *GetUserReferralStatsRequest) (*GetUserReferralStatsResponse, error)
 	ListUserReferralRewards(context.Context, *ListUserReferralRewardsRequest) (*ListUserReferralRewardsResponse, error)
 }
@@ -45,6 +49,8 @@ func RegisterAffiliateHTTPServer(s *http.Server, srv AffiliateHTTPServer) {
 	r.POST("/v1/affiliate/user/referral/rewards/list", _Affiliate_ListUserReferralRewards0_HTTP_Handler(srv))
 	r.POST("/v1/affiliate/user/referral/rewards/get", _Affiliate_GetUserReferralRewards0_HTTP_Handler(srv))
 	r.POST("/v1/affiliate/user/referral/rewards/claim", _Affiliate_ClaimUserReferralRewards0_HTTP_Handler(srv))
+	r.POST("/v1/affiliate/user/referral/rewards/all-currencies/get", _Affiliate_GetUserReferralRewardsAllCurrencies0_HTTP_Handler(srv))
+	r.POST("/v1/affiliate/user/referral/rewards/all-currencies/claim", _Affiliate_ClaimUserReferralRewardsAllCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/affiliate/user/loss/revenue/share/stats/get", _Affiliate_GetUserLossRevenueShareStats0_HTTP_Handler(srv))
 }
 
@@ -180,6 +186,50 @@ func _Affiliate_ClaimUserReferralRewards0_HTTP_Handler(srv AffiliateHTTPServer) 
 	}
 }
 
+func _Affiliate_GetUserReferralRewardsAllCurrencies0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserReferralRewardsAllCurrenciesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAffiliateGetUserReferralRewardsAllCurrencies)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserReferralRewardsAllCurrencies(ctx, req.(*GetUserReferralRewardsAllCurrenciesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetUserReferralRewardsAllCurrenciesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Affiliate_ClaimUserReferralRewardsAllCurrencies0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ClaimUserReferralRewardsAllCurrenciesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAffiliateClaimUserReferralRewardsAllCurrencies)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ClaimUserReferralRewardsAllCurrencies(ctx, req.(*ClaimUserReferralRewardsAllCurrenciesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ClaimUserReferralRewardsAllCurrenciesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Affiliate_GetUserLossRevenueShareStats0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserLossRevenueShareStatsRequest
@@ -204,10 +254,12 @@ func _Affiliate_GetUserLossRevenueShareStats0_HTTP_Handler(srv AffiliateHTTPServ
 
 type AffiliateHTTPClient interface {
 	ClaimUserReferralRewards(ctx context.Context, req *ClaimUserReferralRewardsRequest, opts ...http.CallOption) (rsp *ClaimUserReferralRewardsResponse, err error)
+	ClaimUserReferralRewardsAllCurrencies(ctx context.Context, req *ClaimUserReferralRewardsAllCurrenciesRequest, opts ...http.CallOption) (rsp *ClaimUserReferralRewardsAllCurrenciesResponse, err error)
 	CreateUserReferralCode(ctx context.Context, req *CreateUserReferralCodeRequest, opts ...http.CallOption) (rsp *CreateUserReferralCodeResponse, err error)
 	GetUserLossRevenueShareStats(ctx context.Context, req *GetUserLossRevenueShareStatsRequest, opts ...http.CallOption) (rsp *GetUserLossRevenueShareStatsResponse, err error)
 	GetUserReferralPlan(ctx context.Context, req *GetUserReferralPlanRequest, opts ...http.CallOption) (rsp *GetUserReferralPlanResponse, err error)
 	GetUserReferralRewards(ctx context.Context, req *GetUserReferralRewardsRequest, opts ...http.CallOption) (rsp *GetUserReferralRewardsResponse, err error)
+	GetUserReferralRewardsAllCurrencies(ctx context.Context, req *GetUserReferralRewardsAllCurrenciesRequest, opts ...http.CallOption) (rsp *GetUserReferralRewardsAllCurrenciesResponse, err error)
 	GetUserReferralStats(ctx context.Context, req *GetUserReferralStatsRequest, opts ...http.CallOption) (rsp *GetUserReferralStatsResponse, err error)
 	ListUserReferralRewards(ctx context.Context, req *ListUserReferralRewardsRequest, opts ...http.CallOption) (rsp *ListUserReferralRewardsResponse, err error)
 }
@@ -225,6 +277,19 @@ func (c *AffiliateHTTPClientImpl) ClaimUserReferralRewards(ctx context.Context, 
 	pattern := "/v1/affiliate/user/referral/rewards/claim"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAffiliateClaimUserReferralRewards))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AffiliateHTTPClientImpl) ClaimUserReferralRewardsAllCurrencies(ctx context.Context, in *ClaimUserReferralRewardsAllCurrenciesRequest, opts ...http.CallOption) (*ClaimUserReferralRewardsAllCurrenciesResponse, error) {
+	var out ClaimUserReferralRewardsAllCurrenciesResponse
+	pattern := "/v1/affiliate/user/referral/rewards/all-currencies/claim"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAffiliateClaimUserReferralRewardsAllCurrencies))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -277,6 +342,19 @@ func (c *AffiliateHTTPClientImpl) GetUserReferralRewards(ctx context.Context, in
 	pattern := "/v1/affiliate/user/referral/rewards/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAffiliateGetUserReferralRewards))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AffiliateHTTPClientImpl) GetUserReferralRewardsAllCurrencies(ctx context.Context, in *GetUserReferralRewardsAllCurrenciesRequest, opts ...http.CallOption) (*GetUserReferralRewardsAllCurrenciesResponse, error) {
+	var out GetUserReferralRewardsAllCurrenciesResponse
+	pattern := "/v1/affiliate/user/referral/rewards/all-currencies/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAffiliateGetUserReferralRewardsAllCurrencies))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

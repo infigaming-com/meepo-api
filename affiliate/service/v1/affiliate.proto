@@ -140,6 +140,20 @@ service Affiliate {
         };
     }
 
+    rpc GetUserReferralRewardsAllCurrencies(GetUserReferralRewardsAllCurrenciesRequest) returns (GetUserReferralRewardsAllCurrenciesResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/all-currencies/get"
+            body: "*"
+        };
+    }
+
+    rpc ClaimUserReferralRewardsAllCurrencies(ClaimUserReferralRewardsAllCurrenciesRequest) returns (ClaimUserReferralRewardsAllCurrenciesResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/all-currencies/claim"
+            body: "*"
+        };
+    }
+
     rpc GetUserLossRevenueShareStats(GetUserLossRevenueShareStatsRequest) returns (GetUserLossRevenueShareStatsResponse) {
         option (google.api.http) = {
             post: "/v1/affiliate/user/loss/revenue/share/stats/get"
