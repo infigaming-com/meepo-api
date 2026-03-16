@@ -13161,15 +13161,21 @@ func (x *GetCompanyFinancialSummaryRequest) GetEndTime() int64 {
 }
 
 type GetCompanyFinancialSummaryResponse struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	CustodyBalance   string                 `protobuf:"bytes,1,opt,name=custody_balance,json=custodyBalance,proto3" json:"custody_balance,omitempty"`
-	InternalDeposits string                 `protobuf:"bytes,2,opt,name=internal_deposits,json=internalDeposits,proto3" json:"internal_deposits,omitempty"`
-	UserDeposits     string                 `protobuf:"bytes,3,opt,name=user_deposits,json=userDeposits,proto3" json:"user_deposits,omitempty"`
-	PlayerWithdraw   string                 `protobuf:"bytes,4,opt,name=player_withdraw,json=playerWithdraw,proto3" json:"player_withdraw,omitempty"`
-	CompanyWithdraw  string                 `protobuf:"bytes,5,opt,name=company_withdraw,json=companyWithdraw,proto3" json:"company_withdraw,omitempty"`
-	Transfer         string                 `protobuf:"bytes,6,opt,name=transfer,proto3" json:"transfer,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Total wallet balance of all sub-operators under this company, converted to USD using real-time exchange rates
+	CustodyBalanceUsd string `protobuf:"bytes,1,opt,name=custody_balance_usd,json=custodyBalanceUsd,proto3" json:"custody_balance_usd,omitempty"`
+	// Total amount deposited to sub-operators from backoffice (operator_payment_credit), absolute value in USD
+	InternalDepositsUsd string `protobuf:"bytes,2,opt,name=internal_deposits_usd,json=internalDepositsUsd,proto3" json:"internal_deposits_usd,omitempty"`
+	// Total amount credited to sub-operators when their players deposit (operator_user_credit), absolute value in USD
+	UserDepositsUsd string `protobuf:"bytes,3,opt,name=user_deposits_usd,json=userDepositsUsd,proto3" json:"user_deposits_usd,omitempty"`
+	// Total amount debited from sub-operators when their players withdraw (settled operator_user_withdraw_freeze), absolute value in USD
+	PlayerWithdrawUsd string `protobuf:"bytes,4,opt,name=player_withdraw_usd,json=playerWithdrawUsd,proto3" json:"player_withdraw_usd,omitempty"`
+	// Total amount withdrawn from sub-operators by backoffice (settled operator_payment_withdraw_freeze), absolute value in USD
+	CompanyWithdrawUsd string `protobuf:"bytes,5,opt,name=company_withdraw_usd,json=companyWithdrawUsd,proto3" json:"company_withdraw_usd,omitempty"`
+	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
+	TransferUsd   string `protobuf:"bytes,6,opt,name=transfer_usd,json=transferUsd,proto3" json:"transfer_usd,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetCompanyFinancialSummaryResponse) Reset() {
@@ -13202,44 +13208,44 @@ func (*GetCompanyFinancialSummaryResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{166}
 }
 
-func (x *GetCompanyFinancialSummaryResponse) GetCustodyBalance() string {
+func (x *GetCompanyFinancialSummaryResponse) GetCustodyBalanceUsd() string {
 	if x != nil {
-		return x.CustodyBalance
+		return x.CustodyBalanceUsd
 	}
 	return ""
 }
 
-func (x *GetCompanyFinancialSummaryResponse) GetInternalDeposits() string {
+func (x *GetCompanyFinancialSummaryResponse) GetInternalDepositsUsd() string {
 	if x != nil {
-		return x.InternalDeposits
+		return x.InternalDepositsUsd
 	}
 	return ""
 }
 
-func (x *GetCompanyFinancialSummaryResponse) GetUserDeposits() string {
+func (x *GetCompanyFinancialSummaryResponse) GetUserDepositsUsd() string {
 	if x != nil {
-		return x.UserDeposits
+		return x.UserDepositsUsd
 	}
 	return ""
 }
 
-func (x *GetCompanyFinancialSummaryResponse) GetPlayerWithdraw() string {
+func (x *GetCompanyFinancialSummaryResponse) GetPlayerWithdrawUsd() string {
 	if x != nil {
-		return x.PlayerWithdraw
+		return x.PlayerWithdrawUsd
 	}
 	return ""
 }
 
-func (x *GetCompanyFinancialSummaryResponse) GetCompanyWithdraw() string {
+func (x *GetCompanyFinancialSummaryResponse) GetCompanyWithdrawUsd() string {
 	if x != nil {
-		return x.CompanyWithdraw
+		return x.CompanyWithdrawUsd
 	}
 	return ""
 }
 
-func (x *GetCompanyFinancialSummaryResponse) GetTransfer() string {
+func (x *GetCompanyFinancialSummaryResponse) GetTransferUsd() string {
 	if x != nil {
-		return x.Transfer
+		return x.TransferUsd
 	}
 	return ""
 }
@@ -17750,14 +17756,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"start_time\x18\x02 \x01(\x03H\x00R\tstartTime\x88\x01\x01\x12\x1e\n" +
 	"\bend_time\x18\x03 \x01(\x03H\x01R\aendTime\x88\x01\x01B\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x8f\x02\n" +
-	"\"GetCompanyFinancialSummaryResponse\x12'\n" +
-	"\x0fcustody_balance\x18\x01 \x01(\tR\x0ecustodyBalance\x12+\n" +
-	"\x11internal_deposits\x18\x02 \x01(\tR\x10internalDeposits\x12#\n" +
-	"\ruser_deposits\x18\x03 \x01(\tR\fuserDeposits\x12'\n" +
-	"\x0fplayer_withdraw\x18\x04 \x01(\tR\x0eplayerWithdraw\x12)\n" +
-	"\x10company_withdraw\x18\x05 \x01(\tR\x0fcompanyWithdraw\x12\x1a\n" +
-	"\btransfer\x18\x06 \x01(\tR\btransfer2\x86]\n" +
+	"\t_end_time\"\xb9\x02\n" +
+	"\"GetCompanyFinancialSummaryResponse\x12.\n" +
+	"\x13custody_balance_usd\x18\x01 \x01(\tR\x11custodyBalanceUsd\x122\n" +
+	"\x15internal_deposits_usd\x18\x02 \x01(\tR\x13internalDepositsUsd\x12*\n" +
+	"\x11user_deposits_usd\x18\x03 \x01(\tR\x0fuserDepositsUsd\x12.\n" +
+	"\x13player_withdraw_usd\x18\x04 \x01(\tR\x11playerWithdrawUsd\x120\n" +
+	"\x14company_withdraw_usd\x18\x05 \x01(\tR\x12companyWithdrawUsd\x12!\n" +
+	"\ftransfer_usd\x18\x06 \x01(\tR\vtransferUsd2\x86]\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +

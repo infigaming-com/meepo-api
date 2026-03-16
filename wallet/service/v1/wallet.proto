@@ -2166,10 +2166,16 @@ message GetCompanyFinancialSummaryRequest {
 }
 
 message GetCompanyFinancialSummaryResponse {
-	string custody_balance = 1;
-	string internal_deposits = 2;
-	string user_deposits = 3;
-	string player_withdraw = 4;
-	string company_withdraw = 5;
-	string transfer = 6;
+	// Total wallet balance of all sub-operators under this company, converted to USD using real-time exchange rates
+	string custody_balance_usd = 1;
+	// Total amount deposited to sub-operators from backoffice (operator_payment_credit), absolute value in USD
+	string internal_deposits_usd = 2;
+	// Total amount credited to sub-operators when their players deposit (operator_user_credit), absolute value in USD
+	string user_deposits_usd = 3;
+	// Total amount debited from sub-operators when their players withdraw (settled operator_user_withdraw_freeze), absolute value in USD
+	string player_withdraw_usd = 4;
+	// Total amount withdrawn from sub-operators by backoffice (settled operator_payment_withdraw_freeze), absolute value in USD
+	string company_withdraw_usd = 5;
+	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
+	string transfer_usd = 6;
 }
