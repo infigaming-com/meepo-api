@@ -1938,6 +1938,103 @@ func (x *PauseCampaignResponse) GetCampaign() *Campaign {
 	return nil
 }
 
+// ArchiveCampaign
+type ArchiveCampaignRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Id              int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ArchiveCampaignRequest) Reset() {
+	*x = ArchiveCampaignRequest{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveCampaignRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveCampaignRequest) ProtoMessage() {}
+
+func (x *ArchiveCampaignRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveCampaignRequest.ProtoReflect.Descriptor instead.
+func (*ArchiveCampaignRequest) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ArchiveCampaignRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ArchiveCampaignRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type ArchiveCampaignResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Campaign      *Campaign              `protobuf:"bytes,1,opt,name=campaign,proto3" json:"campaign,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArchiveCampaignResponse) Reset() {
+	*x = ArchiveCampaignResponse{}
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArchiveCampaignResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArchiveCampaignResponse) ProtoMessage() {}
+
+func (x *ArchiveCampaignResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArchiveCampaignResponse.ProtoReflect.Descriptor instead.
+func (*ArchiveCampaignResponse) Descriptor() ([]byte, []int) {
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ArchiveCampaignResponse) GetCampaign() *Campaign {
+	if x != nil {
+		return x.Campaign
+	}
+	return nil
+}
+
 // TriggerCampaign - manual trigger
 type TriggerCampaignRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
@@ -1951,7 +2048,7 @@ type TriggerCampaignRequest struct {
 
 func (x *TriggerCampaignRequest) Reset() {
 	*x = TriggerCampaignRequest{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[24]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1963,7 +2060,7 @@ func (x *TriggerCampaignRequest) String() string {
 func (*TriggerCampaignRequest) ProtoMessage() {}
 
 func (x *TriggerCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[24]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1976,7 +2073,7 @@ func (x *TriggerCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriggerCampaignRequest.ProtoReflect.Descriptor instead.
 func (*TriggerCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{24}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *TriggerCampaignRequest) GetCampaignId() int64 {
@@ -2018,7 +2115,7 @@ type TriggerCampaignResponse struct {
 
 func (x *TriggerCampaignResponse) Reset() {
 	*x = TriggerCampaignResponse{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[25]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2030,7 +2127,7 @@ func (x *TriggerCampaignResponse) String() string {
 func (*TriggerCampaignResponse) ProtoMessage() {}
 
 func (x *TriggerCampaignResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[25]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2043,7 +2140,7 @@ func (x *TriggerCampaignResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriggerCampaignResponse.ProtoReflect.Descriptor instead.
 func (*TriggerCampaignResponse) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{25}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *TriggerCampaignResponse) GetTriggeredCount() int64 {
@@ -2078,7 +2175,7 @@ type GetExecutionRequest struct {
 
 func (x *GetExecutionRequest) Reset() {
 	*x = GetExecutionRequest{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[26]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2090,7 +2187,7 @@ func (x *GetExecutionRequest) String() string {
 func (*GetExecutionRequest) ProtoMessage() {}
 
 func (x *GetExecutionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[26]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2103,7 +2200,7 @@ func (x *GetExecutionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExecutionRequest.ProtoReflect.Descriptor instead.
 func (*GetExecutionRequest) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{26}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetExecutionRequest) GetId() int64 {
@@ -2129,7 +2226,7 @@ type GetExecutionResponse struct {
 
 func (x *GetExecutionResponse) Reset() {
 	*x = GetExecutionResponse{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[27]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2141,7 +2238,7 @@ func (x *GetExecutionResponse) String() string {
 func (*GetExecutionResponse) ProtoMessage() {}
 
 func (x *GetExecutionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[27]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2154,7 +2251,7 @@ func (x *GetExecutionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExecutionResponse.ProtoReflect.Descriptor instead.
 func (*GetExecutionResponse) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{27}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetExecutionResponse) GetExecution() *CampaignExecution {
@@ -2179,7 +2276,7 @@ type ListExecutionsRequest struct {
 
 func (x *ListExecutionsRequest) Reset() {
 	*x = ListExecutionsRequest{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[28]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2191,7 +2288,7 @@ func (x *ListExecutionsRequest) String() string {
 func (*ListExecutionsRequest) ProtoMessage() {}
 
 func (x *ListExecutionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[28]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2204,7 +2301,7 @@ func (x *ListExecutionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExecutionsRequest.ProtoReflect.Descriptor instead.
 func (*ListExecutionsRequest) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{28}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ListExecutionsRequest) GetOperatorContext() *common.OperatorContext {
@@ -2261,7 +2358,7 @@ type ListExecutionsResponse struct {
 
 func (x *ListExecutionsResponse) Reset() {
 	*x = ListExecutionsResponse{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[29]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2273,7 +2370,7 @@ func (x *ListExecutionsResponse) String() string {
 func (*ListExecutionsResponse) ProtoMessage() {}
 
 func (x *ListExecutionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[29]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2286,7 +2383,7 @@ func (x *ListExecutionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExecutionsResponse.ProtoReflect.Descriptor instead.
 func (*ListExecutionsResponse) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{29}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListExecutionsResponse) GetExecutions() []*CampaignExecution {
@@ -2328,7 +2425,7 @@ type GetExecutionStepsRequest struct {
 
 func (x *GetExecutionStepsRequest) Reset() {
 	*x = GetExecutionStepsRequest{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[30]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2340,7 +2437,7 @@ func (x *GetExecutionStepsRequest) String() string {
 func (*GetExecutionStepsRequest) ProtoMessage() {}
 
 func (x *GetExecutionStepsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[30]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2353,7 +2450,7 @@ func (x *GetExecutionStepsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExecutionStepsRequest.ProtoReflect.Descriptor instead.
 func (*GetExecutionStepsRequest) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{30}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetExecutionStepsRequest) GetExecutionId() int64 {
@@ -2379,7 +2476,7 @@ type GetExecutionStepsResponse struct {
 
 func (x *GetExecutionStepsResponse) Reset() {
 	*x = GetExecutionStepsResponse{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[31]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2391,7 +2488,7 @@ func (x *GetExecutionStepsResponse) String() string {
 func (*GetExecutionStepsResponse) ProtoMessage() {}
 
 func (x *GetExecutionStepsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[31]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2404,7 +2501,7 @@ func (x *GetExecutionStepsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExecutionStepsResponse.ProtoReflect.Descriptor instead.
 func (*GetExecutionStepsResponse) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{31}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetExecutionStepsResponse) GetSteps() []*ExecutionStepLog {
@@ -2424,7 +2521,7 @@ type GetWorkflowSchemaRequest struct {
 
 func (x *GetWorkflowSchemaRequest) Reset() {
 	*x = GetWorkflowSchemaRequest{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[32]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2436,7 +2533,7 @@ func (x *GetWorkflowSchemaRequest) String() string {
 func (*GetWorkflowSchemaRequest) ProtoMessage() {}
 
 func (x *GetWorkflowSchemaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[32]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2449,7 +2546,7 @@ func (x *GetWorkflowSchemaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWorkflowSchemaRequest.ProtoReflect.Descriptor instead.
 func (*GetWorkflowSchemaRequest) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{32}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GetWorkflowSchemaRequest) GetOperatorContext() *common.OperatorContext {
@@ -2472,7 +2569,7 @@ type GetWorkflowSchemaResponse struct {
 
 func (x *GetWorkflowSchemaResponse) Reset() {
 	*x = GetWorkflowSchemaResponse{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[33]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2484,7 +2581,7 @@ func (x *GetWorkflowSchemaResponse) String() string {
 func (*GetWorkflowSchemaResponse) ProtoMessage() {}
 
 func (x *GetWorkflowSchemaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[33]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2497,7 +2594,7 @@ func (x *GetWorkflowSchemaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWorkflowSchemaResponse.ProtoReflect.Descriptor instead.
 func (*GetWorkflowSchemaResponse) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{33}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *GetWorkflowSchemaResponse) GetVersion() string {
@@ -2549,7 +2646,7 @@ type TriggerSchema struct {
 
 func (x *TriggerSchema) Reset() {
 	*x = TriggerSchema{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[34]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2561,7 +2658,7 @@ func (x *TriggerSchema) String() string {
 func (*TriggerSchema) ProtoMessage() {}
 
 func (x *TriggerSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[34]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2574,7 +2671,7 @@ func (x *TriggerSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriggerSchema.ProtoReflect.Descriptor instead.
 func (*TriggerSchema) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{34}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *TriggerSchema) GetType() string {
@@ -2626,7 +2723,7 @@ type OperatorSchema struct {
 
 func (x *OperatorSchema) Reset() {
 	*x = OperatorSchema{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[35]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2638,7 +2735,7 @@ func (x *OperatorSchema) String() string {
 func (*OperatorSchema) ProtoMessage() {}
 
 func (x *OperatorSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[35]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2651,7 +2748,7 @@ func (x *OperatorSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperatorSchema.ProtoReflect.Descriptor instead.
 func (*OperatorSchema) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{35}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *OperatorSchema) GetSymbol() string {
@@ -2703,7 +2800,7 @@ type ActionSchema struct {
 
 func (x *ActionSchema) Reset() {
 	*x = ActionSchema{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[36]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2715,7 +2812,7 @@ func (x *ActionSchema) String() string {
 func (*ActionSchema) ProtoMessage() {}
 
 func (x *ActionSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[36]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2728,7 +2825,7 @@ func (x *ActionSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSchema.ProtoReflect.Descriptor instead.
 func (*ActionSchema) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{36}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ActionSchema) GetType() string {
@@ -2780,7 +2877,7 @@ type ConfigFieldSchema struct {
 
 func (x *ConfigFieldSchema) Reset() {
 	*x = ConfigFieldSchema{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[37]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2792,7 +2889,7 @@ func (x *ConfigFieldSchema) String() string {
 func (*ConfigFieldSchema) ProtoMessage() {}
 
 func (x *ConfigFieldSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[37]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2805,7 +2902,7 @@ func (x *ConfigFieldSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigFieldSchema.ProtoReflect.Descriptor instead.
 func (*ConfigFieldSchema) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{37}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ConfigFieldSchema) GetName() string {
@@ -2855,7 +2952,7 @@ type DataSourceSchema struct {
 
 func (x *DataSourceSchema) Reset() {
 	*x = DataSourceSchema{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[38]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2867,7 +2964,7 @@ func (x *DataSourceSchema) String() string {
 func (*DataSourceSchema) ProtoMessage() {}
 
 func (x *DataSourceSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[38]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2880,7 +2977,7 @@ func (x *DataSourceSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataSourceSchema.ProtoReflect.Descriptor instead.
 func (*DataSourceSchema) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{38}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *DataSourceSchema) GetPrefix() string {
@@ -2916,7 +3013,7 @@ type DataFieldSchema struct {
 
 func (x *DataFieldSchema) Reset() {
 	*x = DataFieldSchema{}
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[39]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2928,7 +3025,7 @@ func (x *DataFieldSchema) String() string {
 func (*DataFieldSchema) ProtoMessage() {}
 
 func (x *DataFieldSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_campaign_service_v1_campaign_proto_msgTypes[39]
+	mi := &file_campaign_service_v1_campaign_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2941,7 +3038,7 @@ func (x *DataFieldSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataFieldSchema.ProtoReflect.Descriptor instead.
 func (*DataFieldSchema) Descriptor() ([]byte, []int) {
-	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{39}
+	return file_campaign_service_v1_campaign_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *DataFieldSchema) GetName() string {
@@ -3142,6 +3239,11 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"V\n" +
 	"\x15PauseCampaignResponse\x12=\n" +
+	"\bcampaign\x18\x01 \x01(\v2!.api.campaign.service.v1.CampaignR\bcampaign\"p\n" +
+	"\x16ArchiveCampaignRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"X\n" +
+	"\x17ArchiveCampaignResponse\x12=\n" +
 	"\bcampaign\x18\x01 \x01(\v2!.api.campaign.service.v1.CampaignR\bcampaign\"\xda\x01\n" +
 	"\x16TriggerCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
@@ -3244,7 +3346,7 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\x12OWNER_LEVEL_SYSTEM\x10\x01\x12\x18\n" +
 	"\x14OWNER_LEVEL_RETAILER\x10\x02\x12\x17\n" +
 	"\x13OWNER_LEVEL_COMPANY\x10\x03\x12\x18\n" +
-	"\x14OWNER_LEVEL_OPERATOR\x10\x042\xc8\r\n" +
+	"\x14OWNER_LEVEL_OPERATOR\x10\x042\xbe\x0e\n" +
 	"\x0fCampaignService\x12q\n" +
 	"\x0eCreateCampaign\x12..api.campaign.service.v1.CreateCampaignRequest\x1a/.api.campaign.service.v1.CreateCampaignResponse\x12q\n" +
 	"\x0eUpdateCampaign\x12..api.campaign.service.v1.UpdateCampaignRequest\x1a/.api.campaign.service.v1.UpdateCampaignResponse\x12h\n" +
@@ -3256,6 +3358,7 @@ const file_campaign_service_v1_campaign_proto_rawDesc = "" +
 	"\x10ValidateWorkflow\x120.api.campaign.service.v1.ValidateWorkflowRequest\x1a1.api.campaign.service.v1.ValidateWorkflowResponse\x12w\n" +
 	"\x10ActivateCampaign\x120.api.campaign.service.v1.ActivateCampaignRequest\x1a1.api.campaign.service.v1.ActivateCampaignResponse\x12n\n" +
 	"\rPauseCampaign\x12-.api.campaign.service.v1.PauseCampaignRequest\x1a..api.campaign.service.v1.PauseCampaignResponse\x12t\n" +
+	"\x0fArchiveCampaign\x12/.api.campaign.service.v1.ArchiveCampaignRequest\x1a0.api.campaign.service.v1.ArchiveCampaignResponse\x12t\n" +
 	"\x0fTriggerCampaign\x12/.api.campaign.service.v1.TriggerCampaignRequest\x1a0.api.campaign.service.v1.TriggerCampaignResponse\x12k\n" +
 	"\fGetExecution\x12,.api.campaign.service.v1.GetExecutionRequest\x1a-.api.campaign.service.v1.GetExecutionResponse\x12q\n" +
 	"\x0eListExecutions\x12..api.campaign.service.v1.ListExecutionsRequest\x1a/.api.campaign.service.v1.ListExecutionsResponse\x12z\n" +
@@ -3276,7 +3379,7 @@ func file_campaign_service_v1_campaign_proto_rawDescGZIP() []byte {
 }
 
 var file_campaign_service_v1_campaign_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_campaign_service_v1_campaign_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
+var file_campaign_service_v1_campaign_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_campaign_service_v1_campaign_proto_goTypes = []any{
 	(CampaignStatus)(0),               // 0: api.campaign.service.v1.CampaignStatus
 	(ExecutionStatus)(0),              // 1: api.campaign.service.v1.ExecutionStatus
@@ -3305,125 +3408,131 @@ var file_campaign_service_v1_campaign_proto_goTypes = []any{
 	(*ActivateCampaignResponse)(nil),  // 24: api.campaign.service.v1.ActivateCampaignResponse
 	(*PauseCampaignRequest)(nil),      // 25: api.campaign.service.v1.PauseCampaignRequest
 	(*PauseCampaignResponse)(nil),     // 26: api.campaign.service.v1.PauseCampaignResponse
-	(*TriggerCampaignRequest)(nil),    // 27: api.campaign.service.v1.TriggerCampaignRequest
-	(*TriggerCampaignResponse)(nil),   // 28: api.campaign.service.v1.TriggerCampaignResponse
-	(*GetExecutionRequest)(nil),       // 29: api.campaign.service.v1.GetExecutionRequest
-	(*GetExecutionResponse)(nil),      // 30: api.campaign.service.v1.GetExecutionResponse
-	(*ListExecutionsRequest)(nil),     // 31: api.campaign.service.v1.ListExecutionsRequest
-	(*ListExecutionsResponse)(nil),    // 32: api.campaign.service.v1.ListExecutionsResponse
-	(*GetExecutionStepsRequest)(nil),  // 33: api.campaign.service.v1.GetExecutionStepsRequest
-	(*GetExecutionStepsResponse)(nil), // 34: api.campaign.service.v1.GetExecutionStepsResponse
-	(*GetWorkflowSchemaRequest)(nil),  // 35: api.campaign.service.v1.GetWorkflowSchemaRequest
-	(*GetWorkflowSchemaResponse)(nil), // 36: api.campaign.service.v1.GetWorkflowSchemaResponse
-	(*TriggerSchema)(nil),             // 37: api.campaign.service.v1.TriggerSchema
-	(*OperatorSchema)(nil),            // 38: api.campaign.service.v1.OperatorSchema
-	(*ActionSchema)(nil),              // 39: api.campaign.service.v1.ActionSchema
-	(*ConfigFieldSchema)(nil),         // 40: api.campaign.service.v1.ConfigFieldSchema
-	(*DataSourceSchema)(nil),          // 41: api.campaign.service.v1.DataSourceSchema
-	(*DataFieldSchema)(nil),           // 42: api.campaign.service.v1.DataFieldSchema
-	(*timestamppb.Timestamp)(nil),     // 43: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),           // 44: google.protobuf.Struct
-	(*common.OperatorContext)(nil),    // 45: api.common.OperatorContext
+	(*ArchiveCampaignRequest)(nil),    // 27: api.campaign.service.v1.ArchiveCampaignRequest
+	(*ArchiveCampaignResponse)(nil),   // 28: api.campaign.service.v1.ArchiveCampaignResponse
+	(*TriggerCampaignRequest)(nil),    // 29: api.campaign.service.v1.TriggerCampaignRequest
+	(*TriggerCampaignResponse)(nil),   // 30: api.campaign.service.v1.TriggerCampaignResponse
+	(*GetExecutionRequest)(nil),       // 31: api.campaign.service.v1.GetExecutionRequest
+	(*GetExecutionResponse)(nil),      // 32: api.campaign.service.v1.GetExecutionResponse
+	(*ListExecutionsRequest)(nil),     // 33: api.campaign.service.v1.ListExecutionsRequest
+	(*ListExecutionsResponse)(nil),    // 34: api.campaign.service.v1.ListExecutionsResponse
+	(*GetExecutionStepsRequest)(nil),  // 35: api.campaign.service.v1.GetExecutionStepsRequest
+	(*GetExecutionStepsResponse)(nil), // 36: api.campaign.service.v1.GetExecutionStepsResponse
+	(*GetWorkflowSchemaRequest)(nil),  // 37: api.campaign.service.v1.GetWorkflowSchemaRequest
+	(*GetWorkflowSchemaResponse)(nil), // 38: api.campaign.service.v1.GetWorkflowSchemaResponse
+	(*TriggerSchema)(nil),             // 39: api.campaign.service.v1.TriggerSchema
+	(*OperatorSchema)(nil),            // 40: api.campaign.service.v1.OperatorSchema
+	(*ActionSchema)(nil),              // 41: api.campaign.service.v1.ActionSchema
+	(*ConfigFieldSchema)(nil),         // 42: api.campaign.service.v1.ConfigFieldSchema
+	(*DataSourceSchema)(nil),          // 43: api.campaign.service.v1.DataSourceSchema
+	(*DataFieldSchema)(nil),           // 44: api.campaign.service.v1.DataFieldSchema
+	(*timestamppb.Timestamp)(nil),     // 45: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),           // 46: google.protobuf.Struct
+	(*common.OperatorContext)(nil),    // 47: api.common.OperatorContext
 }
 var file_campaign_service_v1_campaign_proto_depIdxs = []int32{
 	0,  // 0: api.campaign.service.v1.Campaign.status:type_name -> api.campaign.service.v1.CampaignStatus
 	2,  // 1: api.campaign.service.v1.Campaign.owner_level:type_name -> api.campaign.service.v1.OwnerLevel
-	43, // 2: api.campaign.service.v1.Campaign.start_at:type_name -> google.protobuf.Timestamp
-	43, // 3: api.campaign.service.v1.Campaign.end_at:type_name -> google.protobuf.Timestamp
-	44, // 4: api.campaign.service.v1.Campaign.metadata:type_name -> google.protobuf.Struct
-	43, // 5: api.campaign.service.v1.Campaign.created_at:type_name -> google.protobuf.Timestamp
-	43, // 6: api.campaign.service.v1.Campaign.updated_at:type_name -> google.protobuf.Timestamp
+	45, // 2: api.campaign.service.v1.Campaign.start_at:type_name -> google.protobuf.Timestamp
+	45, // 3: api.campaign.service.v1.Campaign.end_at:type_name -> google.protobuf.Timestamp
+	46, // 4: api.campaign.service.v1.Campaign.metadata:type_name -> google.protobuf.Struct
+	45, // 5: api.campaign.service.v1.Campaign.created_at:type_name -> google.protobuf.Timestamp
+	45, // 6: api.campaign.service.v1.Campaign.updated_at:type_name -> google.protobuf.Timestamp
 	4,  // 7: api.campaign.service.v1.Campaign.workflow:type_name -> api.campaign.service.v1.CampaignWorkflow
-	43, // 8: api.campaign.service.v1.CampaignWorkflow.created_at:type_name -> google.protobuf.Timestamp
-	43, // 9: api.campaign.service.v1.CampaignWorkflow.updated_at:type_name -> google.protobuf.Timestamp
-	44, // 10: api.campaign.service.v1.CampaignExecution.trigger_data:type_name -> google.protobuf.Struct
+	45, // 8: api.campaign.service.v1.CampaignWorkflow.created_at:type_name -> google.protobuf.Timestamp
+	45, // 9: api.campaign.service.v1.CampaignWorkflow.updated_at:type_name -> google.protobuf.Timestamp
+	46, // 10: api.campaign.service.v1.CampaignExecution.trigger_data:type_name -> google.protobuf.Struct
 	1,  // 11: api.campaign.service.v1.CampaignExecution.status:type_name -> api.campaign.service.v1.ExecutionStatus
-	44, // 12: api.campaign.service.v1.CampaignExecution.execution_state:type_name -> google.protobuf.Struct
-	43, // 13: api.campaign.service.v1.CampaignExecution.started_at:type_name -> google.protobuf.Timestamp
-	43, // 14: api.campaign.service.v1.CampaignExecution.completed_at:type_name -> google.protobuf.Timestamp
-	43, // 15: api.campaign.service.v1.CampaignExecution.created_at:type_name -> google.protobuf.Timestamp
-	43, // 16: api.campaign.service.v1.CampaignExecution.updated_at:type_name -> google.protobuf.Timestamp
+	46, // 12: api.campaign.service.v1.CampaignExecution.execution_state:type_name -> google.protobuf.Struct
+	45, // 13: api.campaign.service.v1.CampaignExecution.started_at:type_name -> google.protobuf.Timestamp
+	45, // 14: api.campaign.service.v1.CampaignExecution.completed_at:type_name -> google.protobuf.Timestamp
+	45, // 15: api.campaign.service.v1.CampaignExecution.created_at:type_name -> google.protobuf.Timestamp
+	45, // 16: api.campaign.service.v1.CampaignExecution.updated_at:type_name -> google.protobuf.Timestamp
 	1,  // 17: api.campaign.service.v1.ExecutionStepLog.status:type_name -> api.campaign.service.v1.ExecutionStatus
-	44, // 18: api.campaign.service.v1.ExecutionStepLog.input_data:type_name -> google.protobuf.Struct
-	44, // 19: api.campaign.service.v1.ExecutionStepLog.output_data:type_name -> google.protobuf.Struct
-	43, // 20: api.campaign.service.v1.ExecutionStepLog.started_at:type_name -> google.protobuf.Timestamp
-	43, // 21: api.campaign.service.v1.ExecutionStepLog.completed_at:type_name -> google.protobuf.Timestamp
-	43, // 22: api.campaign.service.v1.CreateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
-	43, // 23: api.campaign.service.v1.CreateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
-	44, // 24: api.campaign.service.v1.CreateCampaignRequest.metadata:type_name -> google.protobuf.Struct
-	45, // 25: api.campaign.service.v1.CreateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	46, // 18: api.campaign.service.v1.ExecutionStepLog.input_data:type_name -> google.protobuf.Struct
+	46, // 19: api.campaign.service.v1.ExecutionStepLog.output_data:type_name -> google.protobuf.Struct
+	45, // 20: api.campaign.service.v1.ExecutionStepLog.started_at:type_name -> google.protobuf.Timestamp
+	45, // 21: api.campaign.service.v1.ExecutionStepLog.completed_at:type_name -> google.protobuf.Timestamp
+	45, // 22: api.campaign.service.v1.CreateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
+	45, // 23: api.campaign.service.v1.CreateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
+	46, // 24: api.campaign.service.v1.CreateCampaignRequest.metadata:type_name -> google.protobuf.Struct
+	47, // 25: api.campaign.service.v1.CreateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 26: api.campaign.service.v1.CreateCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	43, // 27: api.campaign.service.v1.UpdateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
-	43, // 28: api.campaign.service.v1.UpdateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
-	44, // 29: api.campaign.service.v1.UpdateCampaignRequest.metadata:type_name -> google.protobuf.Struct
-	45, // 30: api.campaign.service.v1.UpdateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	45, // 27: api.campaign.service.v1.UpdateCampaignRequest.start_at:type_name -> google.protobuf.Timestamp
+	45, // 28: api.campaign.service.v1.UpdateCampaignRequest.end_at:type_name -> google.protobuf.Timestamp
+	46, // 29: api.campaign.service.v1.UpdateCampaignRequest.metadata:type_name -> google.protobuf.Struct
+	47, // 30: api.campaign.service.v1.UpdateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 31: api.campaign.service.v1.UpdateCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	45, // 32: api.campaign.service.v1.GetCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 32: api.campaign.service.v1.GetCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 33: api.campaign.service.v1.GetCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	45, // 34: api.campaign.service.v1.ListCampaignsRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 34: api.campaign.service.v1.ListCampaignsRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 35: api.campaign.service.v1.ListCampaignsRequest.status:type_name -> api.campaign.service.v1.CampaignStatus
 	3,  // 36: api.campaign.service.v1.ListCampaignsResponse.campaigns:type_name -> api.campaign.service.v1.Campaign
-	45, // 37: api.campaign.service.v1.DeleteCampaignRequest.operator_context:type_name -> api.common.OperatorContext
-	45, // 38: api.campaign.service.v1.SetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 37: api.campaign.service.v1.DeleteCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 38: api.campaign.service.v1.SetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 39: api.campaign.service.v1.SetWorkflowResponse.workflow:type_name -> api.campaign.service.v1.CampaignWorkflow
-	45, // 40: api.campaign.service.v1.GetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 40: api.campaign.service.v1.GetWorkflowRequest.operator_context:type_name -> api.common.OperatorContext
 	4,  // 41: api.campaign.service.v1.GetWorkflowResponse.workflow:type_name -> api.campaign.service.v1.CampaignWorkflow
-	45, // 42: api.campaign.service.v1.ActivateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 42: api.campaign.service.v1.ActivateCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 43: api.campaign.service.v1.ActivateCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	45, // 44: api.campaign.service.v1.PauseCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 44: api.campaign.service.v1.PauseCampaignRequest.operator_context:type_name -> api.common.OperatorContext
 	3,  // 45: api.campaign.service.v1.PauseCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
-	44, // 46: api.campaign.service.v1.TriggerCampaignRequest.campaign_data:type_name -> google.protobuf.Struct
-	45, // 47: api.campaign.service.v1.TriggerCampaignRequest.operator_context:type_name -> api.common.OperatorContext
-	45, // 48: api.campaign.service.v1.GetExecutionRequest.operator_context:type_name -> api.common.OperatorContext
-	5,  // 49: api.campaign.service.v1.GetExecutionResponse.execution:type_name -> api.campaign.service.v1.CampaignExecution
-	45, // 50: api.campaign.service.v1.ListExecutionsRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 51: api.campaign.service.v1.ListExecutionsRequest.status:type_name -> api.campaign.service.v1.ExecutionStatus
-	5,  // 52: api.campaign.service.v1.ListExecutionsResponse.executions:type_name -> api.campaign.service.v1.CampaignExecution
-	45, // 53: api.campaign.service.v1.GetExecutionStepsRequest.operator_context:type_name -> api.common.OperatorContext
-	6,  // 54: api.campaign.service.v1.GetExecutionStepsResponse.steps:type_name -> api.campaign.service.v1.ExecutionStepLog
-	45, // 55: api.campaign.service.v1.GetWorkflowSchemaRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 56: api.campaign.service.v1.GetWorkflowSchemaResponse.triggers:type_name -> api.campaign.service.v1.TriggerSchema
-	38, // 57: api.campaign.service.v1.GetWorkflowSchemaResponse.operators:type_name -> api.campaign.service.v1.OperatorSchema
-	39, // 58: api.campaign.service.v1.GetWorkflowSchemaResponse.actions:type_name -> api.campaign.service.v1.ActionSchema
-	41, // 59: api.campaign.service.v1.GetWorkflowSchemaResponse.data_sources:type_name -> api.campaign.service.v1.DataSourceSchema
-	40, // 60: api.campaign.service.v1.TriggerSchema.config_fields:type_name -> api.campaign.service.v1.ConfigFieldSchema
-	40, // 61: api.campaign.service.v1.ActionSchema.config_fields:type_name -> api.campaign.service.v1.ConfigFieldSchema
-	42, // 62: api.campaign.service.v1.DataSourceSchema.fields:type_name -> api.campaign.service.v1.DataFieldSchema
-	7,  // 63: api.campaign.service.v1.CampaignService.CreateCampaign:input_type -> api.campaign.service.v1.CreateCampaignRequest
-	9,  // 64: api.campaign.service.v1.CampaignService.UpdateCampaign:input_type -> api.campaign.service.v1.UpdateCampaignRequest
-	11, // 65: api.campaign.service.v1.CampaignService.GetCampaign:input_type -> api.campaign.service.v1.GetCampaignRequest
-	13, // 66: api.campaign.service.v1.CampaignService.ListCampaigns:input_type -> api.campaign.service.v1.ListCampaignsRequest
-	15, // 67: api.campaign.service.v1.CampaignService.DeleteCampaign:input_type -> api.campaign.service.v1.DeleteCampaignRequest
-	17, // 68: api.campaign.service.v1.CampaignService.SetWorkflow:input_type -> api.campaign.service.v1.SetWorkflowRequest
-	19, // 69: api.campaign.service.v1.CampaignService.GetWorkflow:input_type -> api.campaign.service.v1.GetWorkflowRequest
-	21, // 70: api.campaign.service.v1.CampaignService.ValidateWorkflow:input_type -> api.campaign.service.v1.ValidateWorkflowRequest
-	23, // 71: api.campaign.service.v1.CampaignService.ActivateCampaign:input_type -> api.campaign.service.v1.ActivateCampaignRequest
-	25, // 72: api.campaign.service.v1.CampaignService.PauseCampaign:input_type -> api.campaign.service.v1.PauseCampaignRequest
-	27, // 73: api.campaign.service.v1.CampaignService.TriggerCampaign:input_type -> api.campaign.service.v1.TriggerCampaignRequest
-	29, // 74: api.campaign.service.v1.CampaignService.GetExecution:input_type -> api.campaign.service.v1.GetExecutionRequest
-	31, // 75: api.campaign.service.v1.CampaignService.ListExecutions:input_type -> api.campaign.service.v1.ListExecutionsRequest
-	33, // 76: api.campaign.service.v1.CampaignService.GetExecutionSteps:input_type -> api.campaign.service.v1.GetExecutionStepsRequest
-	35, // 77: api.campaign.service.v1.CampaignService.GetWorkflowSchema:input_type -> api.campaign.service.v1.GetWorkflowSchemaRequest
-	8,  // 78: api.campaign.service.v1.CampaignService.CreateCampaign:output_type -> api.campaign.service.v1.CreateCampaignResponse
-	10, // 79: api.campaign.service.v1.CampaignService.UpdateCampaign:output_type -> api.campaign.service.v1.UpdateCampaignResponse
-	12, // 80: api.campaign.service.v1.CampaignService.GetCampaign:output_type -> api.campaign.service.v1.GetCampaignResponse
-	14, // 81: api.campaign.service.v1.CampaignService.ListCampaigns:output_type -> api.campaign.service.v1.ListCampaignsResponse
-	16, // 82: api.campaign.service.v1.CampaignService.DeleteCampaign:output_type -> api.campaign.service.v1.DeleteCampaignResponse
-	18, // 83: api.campaign.service.v1.CampaignService.SetWorkflow:output_type -> api.campaign.service.v1.SetWorkflowResponse
-	20, // 84: api.campaign.service.v1.CampaignService.GetWorkflow:output_type -> api.campaign.service.v1.GetWorkflowResponse
-	22, // 85: api.campaign.service.v1.CampaignService.ValidateWorkflow:output_type -> api.campaign.service.v1.ValidateWorkflowResponse
-	24, // 86: api.campaign.service.v1.CampaignService.ActivateCampaign:output_type -> api.campaign.service.v1.ActivateCampaignResponse
-	26, // 87: api.campaign.service.v1.CampaignService.PauseCampaign:output_type -> api.campaign.service.v1.PauseCampaignResponse
-	28, // 88: api.campaign.service.v1.CampaignService.TriggerCampaign:output_type -> api.campaign.service.v1.TriggerCampaignResponse
-	30, // 89: api.campaign.service.v1.CampaignService.GetExecution:output_type -> api.campaign.service.v1.GetExecutionResponse
-	32, // 90: api.campaign.service.v1.CampaignService.ListExecutions:output_type -> api.campaign.service.v1.ListExecutionsResponse
-	34, // 91: api.campaign.service.v1.CampaignService.GetExecutionSteps:output_type -> api.campaign.service.v1.GetExecutionStepsResponse
-	36, // 92: api.campaign.service.v1.CampaignService.GetWorkflowSchema:output_type -> api.campaign.service.v1.GetWorkflowSchemaResponse
-	78, // [78:93] is the sub-list for method output_type
-	63, // [63:78] is the sub-list for method input_type
-	63, // [63:63] is the sub-list for extension type_name
-	63, // [63:63] is the sub-list for extension extendee
-	0,  // [0:63] is the sub-list for field type_name
+	47, // 46: api.campaign.service.v1.ArchiveCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	3,  // 47: api.campaign.service.v1.ArchiveCampaignResponse.campaign:type_name -> api.campaign.service.v1.Campaign
+	46, // 48: api.campaign.service.v1.TriggerCampaignRequest.campaign_data:type_name -> google.protobuf.Struct
+	47, // 49: api.campaign.service.v1.TriggerCampaignRequest.operator_context:type_name -> api.common.OperatorContext
+	47, // 50: api.campaign.service.v1.GetExecutionRequest.operator_context:type_name -> api.common.OperatorContext
+	5,  // 51: api.campaign.service.v1.GetExecutionResponse.execution:type_name -> api.campaign.service.v1.CampaignExecution
+	47, // 52: api.campaign.service.v1.ListExecutionsRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 53: api.campaign.service.v1.ListExecutionsRequest.status:type_name -> api.campaign.service.v1.ExecutionStatus
+	5,  // 54: api.campaign.service.v1.ListExecutionsResponse.executions:type_name -> api.campaign.service.v1.CampaignExecution
+	47, // 55: api.campaign.service.v1.GetExecutionStepsRequest.operator_context:type_name -> api.common.OperatorContext
+	6,  // 56: api.campaign.service.v1.GetExecutionStepsResponse.steps:type_name -> api.campaign.service.v1.ExecutionStepLog
+	47, // 57: api.campaign.service.v1.GetWorkflowSchemaRequest.operator_context:type_name -> api.common.OperatorContext
+	39, // 58: api.campaign.service.v1.GetWorkflowSchemaResponse.triggers:type_name -> api.campaign.service.v1.TriggerSchema
+	40, // 59: api.campaign.service.v1.GetWorkflowSchemaResponse.operators:type_name -> api.campaign.service.v1.OperatorSchema
+	41, // 60: api.campaign.service.v1.GetWorkflowSchemaResponse.actions:type_name -> api.campaign.service.v1.ActionSchema
+	43, // 61: api.campaign.service.v1.GetWorkflowSchemaResponse.data_sources:type_name -> api.campaign.service.v1.DataSourceSchema
+	42, // 62: api.campaign.service.v1.TriggerSchema.config_fields:type_name -> api.campaign.service.v1.ConfigFieldSchema
+	42, // 63: api.campaign.service.v1.ActionSchema.config_fields:type_name -> api.campaign.service.v1.ConfigFieldSchema
+	44, // 64: api.campaign.service.v1.DataSourceSchema.fields:type_name -> api.campaign.service.v1.DataFieldSchema
+	7,  // 65: api.campaign.service.v1.CampaignService.CreateCampaign:input_type -> api.campaign.service.v1.CreateCampaignRequest
+	9,  // 66: api.campaign.service.v1.CampaignService.UpdateCampaign:input_type -> api.campaign.service.v1.UpdateCampaignRequest
+	11, // 67: api.campaign.service.v1.CampaignService.GetCampaign:input_type -> api.campaign.service.v1.GetCampaignRequest
+	13, // 68: api.campaign.service.v1.CampaignService.ListCampaigns:input_type -> api.campaign.service.v1.ListCampaignsRequest
+	15, // 69: api.campaign.service.v1.CampaignService.DeleteCampaign:input_type -> api.campaign.service.v1.DeleteCampaignRequest
+	17, // 70: api.campaign.service.v1.CampaignService.SetWorkflow:input_type -> api.campaign.service.v1.SetWorkflowRequest
+	19, // 71: api.campaign.service.v1.CampaignService.GetWorkflow:input_type -> api.campaign.service.v1.GetWorkflowRequest
+	21, // 72: api.campaign.service.v1.CampaignService.ValidateWorkflow:input_type -> api.campaign.service.v1.ValidateWorkflowRequest
+	23, // 73: api.campaign.service.v1.CampaignService.ActivateCampaign:input_type -> api.campaign.service.v1.ActivateCampaignRequest
+	25, // 74: api.campaign.service.v1.CampaignService.PauseCampaign:input_type -> api.campaign.service.v1.PauseCampaignRequest
+	27, // 75: api.campaign.service.v1.CampaignService.ArchiveCampaign:input_type -> api.campaign.service.v1.ArchiveCampaignRequest
+	29, // 76: api.campaign.service.v1.CampaignService.TriggerCampaign:input_type -> api.campaign.service.v1.TriggerCampaignRequest
+	31, // 77: api.campaign.service.v1.CampaignService.GetExecution:input_type -> api.campaign.service.v1.GetExecutionRequest
+	33, // 78: api.campaign.service.v1.CampaignService.ListExecutions:input_type -> api.campaign.service.v1.ListExecutionsRequest
+	35, // 79: api.campaign.service.v1.CampaignService.GetExecutionSteps:input_type -> api.campaign.service.v1.GetExecutionStepsRequest
+	37, // 80: api.campaign.service.v1.CampaignService.GetWorkflowSchema:input_type -> api.campaign.service.v1.GetWorkflowSchemaRequest
+	8,  // 81: api.campaign.service.v1.CampaignService.CreateCampaign:output_type -> api.campaign.service.v1.CreateCampaignResponse
+	10, // 82: api.campaign.service.v1.CampaignService.UpdateCampaign:output_type -> api.campaign.service.v1.UpdateCampaignResponse
+	12, // 83: api.campaign.service.v1.CampaignService.GetCampaign:output_type -> api.campaign.service.v1.GetCampaignResponse
+	14, // 84: api.campaign.service.v1.CampaignService.ListCampaigns:output_type -> api.campaign.service.v1.ListCampaignsResponse
+	16, // 85: api.campaign.service.v1.CampaignService.DeleteCampaign:output_type -> api.campaign.service.v1.DeleteCampaignResponse
+	18, // 86: api.campaign.service.v1.CampaignService.SetWorkflow:output_type -> api.campaign.service.v1.SetWorkflowResponse
+	20, // 87: api.campaign.service.v1.CampaignService.GetWorkflow:output_type -> api.campaign.service.v1.GetWorkflowResponse
+	22, // 88: api.campaign.service.v1.CampaignService.ValidateWorkflow:output_type -> api.campaign.service.v1.ValidateWorkflowResponse
+	24, // 89: api.campaign.service.v1.CampaignService.ActivateCampaign:output_type -> api.campaign.service.v1.ActivateCampaignResponse
+	26, // 90: api.campaign.service.v1.CampaignService.PauseCampaign:output_type -> api.campaign.service.v1.PauseCampaignResponse
+	28, // 91: api.campaign.service.v1.CampaignService.ArchiveCampaign:output_type -> api.campaign.service.v1.ArchiveCampaignResponse
+	30, // 92: api.campaign.service.v1.CampaignService.TriggerCampaign:output_type -> api.campaign.service.v1.TriggerCampaignResponse
+	32, // 93: api.campaign.service.v1.CampaignService.GetExecution:output_type -> api.campaign.service.v1.GetExecutionResponse
+	34, // 94: api.campaign.service.v1.CampaignService.ListExecutions:output_type -> api.campaign.service.v1.ListExecutionsResponse
+	36, // 95: api.campaign.service.v1.CampaignService.GetExecutionSteps:output_type -> api.campaign.service.v1.GetExecutionStepsResponse
+	38, // 96: api.campaign.service.v1.CampaignService.GetWorkflowSchema:output_type -> api.campaign.service.v1.GetWorkflowSchemaResponse
+	81, // [81:97] is the sub-list for method output_type
+	65, // [65:81] is the sub-list for method input_type
+	65, // [65:65] is the sub-list for extension type_name
+	65, // [65:65] is the sub-list for extension extendee
+	0,  // [0:65] is the sub-list for field type_name
 }
 
 func init() { file_campaign_service_v1_campaign_proto_init() }
@@ -3437,14 +3546,14 @@ func file_campaign_service_v1_campaign_proto_init() {
 	file_campaign_service_v1_campaign_proto_msgTypes[4].OneofWrappers = []any{}
 	file_campaign_service_v1_campaign_proto_msgTypes[6].OneofWrappers = []any{}
 	file_campaign_service_v1_campaign_proto_msgTypes[10].OneofWrappers = []any{}
-	file_campaign_service_v1_campaign_proto_msgTypes[28].OneofWrappers = []any{}
+	file_campaign_service_v1_campaign_proto_msgTypes[30].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_campaign_service_v1_campaign_proto_rawDesc), len(file_campaign_service_v1_campaign_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   40,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

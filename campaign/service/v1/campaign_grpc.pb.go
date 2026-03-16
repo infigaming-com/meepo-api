@@ -29,6 +29,7 @@ const (
 	CampaignService_ValidateWorkflow_FullMethodName  = "/api.campaign.service.v1.CampaignService/ValidateWorkflow"
 	CampaignService_ActivateCampaign_FullMethodName  = "/api.campaign.service.v1.CampaignService/ActivateCampaign"
 	CampaignService_PauseCampaign_FullMethodName     = "/api.campaign.service.v1.CampaignService/PauseCampaign"
+	CampaignService_ArchiveCampaign_FullMethodName   = "/api.campaign.service.v1.CampaignService/ArchiveCampaign"
 	CampaignService_TriggerCampaign_FullMethodName   = "/api.campaign.service.v1.CampaignService/TriggerCampaign"
 	CampaignService_GetExecution_FullMethodName      = "/api.campaign.service.v1.CampaignService/GetExecution"
 	CampaignService_ListExecutions_FullMethodName    = "/api.campaign.service.v1.CampaignService/ListExecutions"
@@ -55,6 +56,7 @@ type CampaignServiceClient interface {
 	// Campaign control
 	ActivateCampaign(ctx context.Context, in *ActivateCampaignRequest, opts ...grpc.CallOption) (*ActivateCampaignResponse, error)
 	PauseCampaign(ctx context.Context, in *PauseCampaignRequest, opts ...grpc.CallOption) (*PauseCampaignResponse, error)
+	ArchiveCampaign(ctx context.Context, in *ArchiveCampaignRequest, opts ...grpc.CallOption) (*ArchiveCampaignResponse, error)
 	// Manual trigger
 	TriggerCampaign(ctx context.Context, in *TriggerCampaignRequest, opts ...grpc.CallOption) (*TriggerCampaignResponse, error)
 	// Execution tracking
@@ -173,6 +175,16 @@ func (c *campaignServiceClient) PauseCampaign(ctx context.Context, in *PauseCamp
 	return out, nil
 }
 
+func (c *campaignServiceClient) ArchiveCampaign(ctx context.Context, in *ArchiveCampaignRequest, opts ...grpc.CallOption) (*ArchiveCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ArchiveCampaignResponse)
+	err := c.cc.Invoke(ctx, CampaignService_ArchiveCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *campaignServiceClient) TriggerCampaign(ctx context.Context, in *TriggerCampaignRequest, opts ...grpc.CallOption) (*TriggerCampaignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TriggerCampaignResponse)
@@ -242,6 +254,7 @@ type CampaignServiceServer interface {
 	// Campaign control
 	ActivateCampaign(context.Context, *ActivateCampaignRequest) (*ActivateCampaignResponse, error)
 	PauseCampaign(context.Context, *PauseCampaignRequest) (*PauseCampaignResponse, error)
+	ArchiveCampaign(context.Context, *ArchiveCampaignRequest) (*ArchiveCampaignResponse, error)
 	// Manual trigger
 	TriggerCampaign(context.Context, *TriggerCampaignRequest) (*TriggerCampaignResponse, error)
 	// Execution tracking
@@ -289,6 +302,9 @@ func (UnimplementedCampaignServiceServer) ActivateCampaign(context.Context, *Act
 }
 func (UnimplementedCampaignServiceServer) PauseCampaign(context.Context, *PauseCampaignRequest) (*PauseCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PauseCampaign not implemented")
+}
+func (UnimplementedCampaignServiceServer) ArchiveCampaign(context.Context, *ArchiveCampaignRequest) (*ArchiveCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ArchiveCampaign not implemented")
 }
 func (UnimplementedCampaignServiceServer) TriggerCampaign(context.Context, *TriggerCampaignRequest) (*TriggerCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method TriggerCampaign not implemented")
@@ -506,6 +522,24 @@ func _CampaignService_PauseCampaign_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CampaignService_ArchiveCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CampaignServiceServer).ArchiveCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CampaignService_ArchiveCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CampaignServiceServer).ArchiveCampaign(ctx, req.(*ArchiveCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _CampaignService_TriggerCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TriggerCampaignRequest)
 	if err := dec(in); err != nil {
@@ -642,6 +676,10 @@ var CampaignService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PauseCampaign",
 			Handler:    _CampaignService_PauseCampaign_Handler,
+		},
+		{
+			MethodName: "ArchiveCampaign",
+			Handler:    _CampaignService_ArchiveCampaign_Handler,
 		},
 		{
 			MethodName: "TriggerCampaign",
