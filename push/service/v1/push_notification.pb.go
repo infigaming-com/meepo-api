@@ -382,7 +382,9 @@ type NotificationChannel struct {
 	// Unix timestamp of last update
 	UpdatedAt int64 `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// True if this channel is inherited from a parent operator level (system/retailer/company)
-	IsInherited   bool `protobuf:"varint,8,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
+	IsInherited bool `protobuf:"varint,8,opt,name=is_inherited,json=isInherited,proto3" json:"is_inherited,omitempty"`
+	// True if the current operator has an override for this inherited channel's enabled state
+	IsOverridden  bool `protobuf:"varint,9,opt,name=is_overridden,json=isOverridden,proto3" json:"is_overridden,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -469,6 +471,13 @@ func (x *NotificationChannel) GetUpdatedAt() int64 {
 func (x *NotificationChannel) GetIsInherited() bool {
 	if x != nil {
 		return x.IsInherited
+	}
+	return false
+}
+
+func (x *NotificationChannel) GetIsOverridden() bool {
+	if x != nil {
+		return x.IsOverridden
 	}
 	return false
 }
@@ -2117,7 +2126,7 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"\x12webhook_url_masked\x18\x02 \x01(\tR\x10webhookUrlMasked\"\x96\x01\n" +
 	"\rChannelConfig\x12F\n" +
 	"\btelegram\x18\x01 \x01(\v2*.api.push.service.v1.TelegramChannelConfigR\btelegram\x12=\n" +
-	"\x05slack\x18\x02 \x01(\v2'.api.push.service.v1.SlackChannelConfigR\x05slack\"\xb5\x02\n" +
+	"\x05slack\x18\x02 \x01(\v2'.api.push.service.v1.SlackChannelConfigR\x05slack\"\xda\x02\n" +
 	"\x13NotificationChannel\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12C\n" +
@@ -2128,7 +2137,8 @@ const file_push_service_v1_push_notification_proto_rawDesc = "" +
 	"created_at\x18\x06 \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\a \x01(\x03R\tupdatedAt\x12!\n" +
-	"\fis_inherited\x18\b \x01(\bR\visInherited\"i\n" +
+	"\fis_inherited\x18\b \x01(\bR\visInherited\x12#\n" +
+	"\ris_overridden\x18\t \x01(\bR\fisOverridden\"i\n" +
 	"\x11CurrencyCondition\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
