@@ -10093,6 +10093,8 @@ func (m *OperatorDebitRequest) validate(all bool) error {
 
 	// no validation rules for CashAmount
 
+	// no validation rules for Memo
+
 	if m.ExternalTransactionId != nil {
 		// no validation rules for ExternalTransactionId
 	}

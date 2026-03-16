@@ -6022,6 +6022,7 @@ type OperatorDebitRequest struct {
 	TransactionType       string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	ExternalTransactionId *int64                  `protobuf:"varint,5,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	CashAmount            string                  `protobuf:"bytes,6,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	Memo                  string                  `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -6094,6 +6095,13 @@ func (x *OperatorDebitRequest) GetExternalTransactionId() int64 {
 func (x *OperatorDebitRequest) GetCashAmount() string {
 	if x != nil {
 		return x.CashAmount
+	}
+	return ""
+}
+
+func (x *OperatorDebitRequest) GetMemo() string {
+	if x != nil {
+		return x.Memo
 	}
 	return ""
 }
@@ -16913,7 +16921,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xce\x02\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xe2\x02\n" +
 	"\x14OperatorDebitRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
@@ -16921,7 +16929,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12;\n" +
 	"\x17external_transaction_id\x18\x05 \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01\x12\x1f\n" +
 	"\vcash_amount\x18\x06 \x01(\tR\n" +
-	"cashAmountB\x1a\n" +
+	"cashAmount\x12\x12\n" +
+	"\x04memo\x18\a \x01(\tR\x04memoB\x1a\n" +
 	"\x18_external_transaction_id\"R\n" +
 	"\x15OperatorDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
