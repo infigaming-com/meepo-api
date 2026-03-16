@@ -55,6 +55,7 @@ const (
 	Wallet_OperatorDebit_FullMethodName                       = "/api.wallet.service.v1.Wallet/OperatorDebit"
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
+	Wallet_GetCompanyFinancialSummary_FullMethodName          = "/api.wallet.service.v1.Wallet/GetCompanyFinancialSummary"
 	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
 	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
 	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
@@ -166,6 +167,8 @@ type WalletClient interface {
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
 	GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error)
+	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
+	GetCompanyFinancialSummary(ctx context.Context, in *GetCompanyFinancialSummaryRequest, opts ...grpc.CallOption) (*GetCompanyFinancialSummaryResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -623,6 +626,16 @@ func (c *walletClient) GetOperatorTransactionSummary(ctx context.Context, in *Ge
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorTransactionSummaryResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetOperatorTransactionSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetCompanyFinancialSummary(ctx context.Context, in *GetCompanyFinancialSummaryRequest, opts ...grpc.CallOption) (*GetCompanyFinancialSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCompanyFinancialSummaryResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetCompanyFinancialSummary_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1152,6 +1165,8 @@ type WalletServer interface {
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorTransactionSummary returns the summary of operator's transactions
 	GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error)
+	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
+	GetCompanyFinancialSummary(context.Context, *GetCompanyFinancialSummaryRequest) (*GetCompanyFinancialSummaryResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
@@ -1362,6 +1377,9 @@ func (UnimplementedWalletServer) UpdateOperatorBalance(context.Context, *UpdateO
 }
 func (UnimplementedWalletServer) GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorTransactionSummary not implemented")
+}
+func (UnimplementedWalletServer) GetCompanyFinancialSummary(context.Context, *GetCompanyFinancialSummaryRequest) (*GetCompanyFinancialSummaryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCompanyFinancialSummary not implemented")
 }
 func (UnimplementedWalletServer) GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorBalanceTransactionsByIds not implemented")
@@ -2166,6 +2184,24 @@ func _Wallet_GetOperatorTransactionSummary_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetOperatorTransactionSummary(ctx, req.(*GetOperatorTransactionSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetCompanyFinancialSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCompanyFinancialSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetCompanyFinancialSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetCompanyFinancialSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetCompanyFinancialSummary(ctx, req.(*GetCompanyFinancialSummaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3148,6 +3184,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorTransactionSummary",
 			Handler:    _Wallet_GetOperatorTransactionSummary_Handler,
+		},
+		{
+			MethodName: "GetCompanyFinancialSummary",
+			Handler:    _Wallet_GetCompanyFinancialSummary_Handler,
 		},
 		{
 			MethodName: "GetOperatorBalanceTransactionsByIds",

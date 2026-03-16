@@ -125,8 +125,11 @@ service Wallet {
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {}
 
-	// GetOperatorTransactionSummary returns the summary of operator's transactions 
+	// GetOperatorTransactionSummary returns the summary of operator's transactions
 	rpc GetOperatorTransactionSummary(GetOperatorTransactionSummaryRequest) returns (GetOperatorTransactionSummaryResponse) {}
+
+	// GetCompanyFinancialSummary returns the financial summary of all sub-operators under a company operator
+	rpc GetCompanyFinancialSummary(GetCompanyFinancialSummaryRequest) returns (GetCompanyFinancialSummaryResponse) {}
 
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
@@ -2154,4 +2157,19 @@ message GetAppDownloadRewardStatusResponse {
 	AppDownloadRewardConfigs reward_configs = 4;
 	// whether to force showing the download popup
 	bool force_download_popup = 5;
+}
+
+message GetCompanyFinancialSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional int64 start_time = 2;
+	optional int64 end_time = 3;
+}
+
+message GetCompanyFinancialSummaryResponse {
+	string custody_balance = 1;
+	string internal_deposits = 2;
+	string user_deposits = 3;
+	string player_withdraw = 4;
+	string company_withdraw = 5;
+	string transfer = 6;
 }
