@@ -1208,6 +1208,7 @@ message OperatorDebitRequest {
 	string transaction_type = 4;
 	optional int64 external_transaction_id = 5;
 	string cash_amount = 6;
+	string memo = 7;
 }
 
 message OperatorDebitResponse {
