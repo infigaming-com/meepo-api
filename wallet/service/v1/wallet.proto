@@ -40,6 +40,12 @@ service Wallet {
 
 	rpc GameCredit (GameCreditRequest) returns (GameCreditResponse) {}
 
+	// GameBatchBetAndSettle processes N bets + M wins in a single atomic operation.
+	// Reduces lock contention by acquiring one row-level lock instead of N+M separate locks.
+	// Designed for instant-settlement games (e.g., Plinko, Dice, Keno) where bet results
+	// are determined at bet time.
+	rpc GameBatchBetAndSettle (GameBatchBetAndSettleRequest) returns (GameBatchBetAndSettleResponse) {}
+
 	// Freeze is used to freeze the balance of the user
 	rpc Freeze (FreezeRequest) returns (FreezeResponse) {}
 
@@ -2179,4 +2185,71 @@ message GetCompanyFinancialSummaryResponse {
 	string company_withdraw_usd = 5;
 	// Total amount transferred from sub-operators to this company (operator_balance_transfer out), absolute value in USD
 	string transfer_usd = 6;
+}
+
+// ============================================================================
+// GameBatchBetAndSettle - batch bet and settle in a single atomic operation
+// ============================================================================
+
+message GameBatchBetAndSettleRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string settlement_currency = 3;
+	string reporting_currency = 4;
+	string exchange_rate = 5;
+	api.common.OperatorContext operator_context = 6;
+	optional bool allow_overdraft = 7;
+	repeated BatchBetItem bets = 8;
+	repeated BatchWinItem wins = 9;
+}
+
+message BatchBetItem {
+	// Unique transaction ID for this bet (used for idempotency)
+	int64 transaction_id = 1;
+	// Bet amount in player currency
+	string amount = 2;
+	// Turnover amount for wagering requirements
+	string turnover = 3;
+}
+
+message BatchWinItem {
+	// Unique transaction ID for this win (used for idempotency)
+	int64 transaction_id = 1;
+	// Win amount in player currency ("0" if player lost)
+	string amount = 2;
+	// References the bet's transaction_id that this win settles
+	int64 original_transaction_id = 3;
+	// Transaction type of the original bet (e.g., "game_bet")
+	optional string original_transaction_type = 4;
+	// Turnover amount from the original bet for credit turnover tracking
+	string original_transaction_turnover = 5;
+}
+
+message GameBatchBetAndSettleResponse {
+	string exchange_rate = 1;
+	// Final balance after all bets and wins applied (in player currency)
+	string cash = 2;
+	string operator_bonus = 3;
+	string provider_bonus = 4;
+	// Per-bet transaction results
+	repeated BatchTransactionResult bet_results = 5;
+	// Per-win transaction results
+	repeated BatchTransactionResult win_results = 6;
+	// Aggregated credit impact from all bets
+	repeated AffectedCredit bet_affected_credits = 7;
+	// Aggregated credit impact from all wins
+	repeated AffectedCredit win_affected_credits = 8;
+}
+
+message BatchTransactionResult {
+	int64 transaction_id = 1;
+	string cash_amount = 2;
+	string operator_bonus_amount = 3;
+	string provider_bonus_amount = 4;
+	string cash_amount_usd = 5;
+	string operator_bonus_amount_usd = 6;
+	string provider_bonus_amount_usd = 7;
+	string cash_amount_reporting_currency = 8;
+	string operator_bonus_amount_reporting_currency = 9;
+	string provider_bonus_amount_reporting_currency = 10;
 }
