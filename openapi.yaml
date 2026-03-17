@@ -30421,6 +30421,13 @@ components:
                     type: string
                 updatedAt:
                     type: string
+                roundsPlayed:
+                    type: integer
+                    description: Freespin usage counts (synced from game service, shared across all games)
+                    format: int32
+                totalRounds:
+                    type: integer
+                    format: int32
             description: Free spin details - all fields from UserFreeSpin DO
         api.wallet.service.v1.FreeSpinRewardDetail:
             type: object

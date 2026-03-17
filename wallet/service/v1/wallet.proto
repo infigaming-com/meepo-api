@@ -1992,6 +1992,10 @@ message FreeSpinDetail {
 
 	int64 created_at = 15;
 	int64 updated_at = 16;
+
+	// Freespin usage counts (synced from game service, shared across all games)
+	int32 rounds_played = 17;                  // Rounds already played (aggregated)
+	int32 total_rounds = 18;                   // Total rounds available (aggregated)
 }
 
 // Single free spin reward item - from FreeSpinRewardItem in JSONB

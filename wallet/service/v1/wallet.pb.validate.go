@@ -22456,6 +22456,10 @@ func (m *FreeSpinDetail) validate(all bool) error {
 
 	// no validation rules for UpdatedAt
 
+	// no validation rules for RoundsPlayed
+
+	// no validation rules for TotalRounds
+
 	if len(errors) > 0 {
 		return FreeSpinDetailMultiError(errors)
 	}
