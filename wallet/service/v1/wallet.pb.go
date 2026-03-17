@@ -11857,9 +11857,12 @@ type FreeSpinDetail struct {
 	TotalWinningsUsd               string `protobuf:"bytes,12,opt,name=total_winnings_usd,json=totalWinningsUsd,proto3" json:"total_winnings_usd,omitempty"`
 	TotalWinningsReportingCurrency string `protobuf:"bytes,13,opt,name=total_winnings_reporting_currency,json=totalWinningsReportingCurrency,proto3" json:"total_winnings_reporting_currency,omitempty"`
 	// Per-game reward details
-	Rewards       []*FreeSpinRewardDetail `protobuf:"bytes,14,rep,name=rewards,proto3" json:"rewards,omitempty"`
-	CreatedAt     int64                   `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     int64                   `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Rewards   []*FreeSpinRewardDetail `protobuf:"bytes,14,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	CreatedAt int64                   `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt int64                   `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Freespin usage counts (synced from game service, shared across all games)
+	RoundsPlayed  int32 `protobuf:"varint,17,opt,name=rounds_played,json=roundsPlayed,proto3" json:"rounds_played,omitempty"` // Rounds already played (aggregated)
+	TotalRounds   int32 `protobuf:"varint,18,opt,name=total_rounds,json=totalRounds,proto3" json:"total_rounds,omitempty"`    // Total rounds available (aggregated)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12002,6 +12005,20 @@ func (x *FreeSpinDetail) GetCreatedAt() int64 {
 func (x *FreeSpinDetail) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *FreeSpinDetail) GetRoundsPlayed() int32 {
+	if x != nil {
+		return x.RoundsPlayed
+	}
+	return 0
+}
+
+func (x *FreeSpinDetail) GetTotalRounds() int32 {
+	if x != nil {
+		return x.TotalRounds
 	}
 	return 0
 }
@@ -18104,7 +18121,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1bListUserFreeRewardsResponse\x12D\n" +
 	"\n" +
 	"free_spins\x18\x01 \x03(\v2%.api.wallet.service.v1.FreeSpinDetailR\tfreeSpins\x12A\n" +
-	"\tfree_bets\x18\x02 \x03(\v2$.api.wallet.service.v1.FreeBetDetailR\bfreeBets\"\xb8\x05\n" +
+	"\tfree_bets\x18\x02 \x03(\v2$.api.wallet.service.v1.FreeBetDetailR\bfreeBets\"\x80\x06\n" +
 	"\x0eFreeSpinDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vsource_type\x18\x02 \x01(\tR\n" +
@@ -18126,7 +18143,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x0f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\"\x99\x03\n" +
+	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\x12#\n" +
+	"\rrounds_played\x18\x11 \x01(\x05R\froundsPlayed\x12!\n" +
+	"\ftotal_rounds\x18\x12 \x01(\x05R\vtotalRounds\"\x99\x03\n" +
 	"\x14FreeSpinRewardDetail\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12\x17\n" +
