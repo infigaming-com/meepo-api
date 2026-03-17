@@ -26,6 +26,7 @@ const (
 	Wallet_Debit_FullMethodName                               = "/api.wallet.service.v1.Wallet/Debit"
 	Wallet_GameDebit_FullMethodName                           = "/api.wallet.service.v1.Wallet/GameDebit"
 	Wallet_GameCredit_FullMethodName                          = "/api.wallet.service.v1.Wallet/GameCredit"
+	Wallet_GameBatchBetAndSettle_FullMethodName               = "/api.wallet.service.v1.Wallet/GameBatchBetAndSettle"
 	Wallet_Freeze_FullMethodName                              = "/api.wallet.service.v1.Wallet/Freeze"
 	Wallet_Settle_FullMethodName                              = "/api.wallet.service.v1.Wallet/Settle"
 	Wallet_Rollback_FullMethodName                            = "/api.wallet.service.v1.Wallet/Rollback"
@@ -118,6 +119,11 @@ type WalletClient interface {
 	Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*DebitResponse, error)
 	GameDebit(ctx context.Context, in *GameDebitRequest, opts ...grpc.CallOption) (*GameDebitResponse, error)
 	GameCredit(ctx context.Context, in *GameCreditRequest, opts ...grpc.CallOption) (*GameCreditResponse, error)
+	// GameBatchBetAndSettle processes N bets + M wins in a single atomic operation.
+	// Reduces lock contention by acquiring one row-level lock instead of N+M separate locks.
+	// Designed for instant-settlement games (e.g., Plinko, Dice, Keno) where bet results
+	// are determined at bet time.
+	GameBatchBetAndSettle(ctx context.Context, in *GameBatchBetAndSettleRequest, opts ...grpc.CallOption) (*GameBatchBetAndSettleResponse, error)
 	// Freeze is used to freeze the balance of the user
 	Freeze(ctx context.Context, in *FreezeRequest, opts ...grpc.CallOption) (*FreezeResponse, error)
 	// Settle is used to settle the frozen balance of the user
@@ -336,6 +342,16 @@ func (c *walletClient) GameCredit(ctx context.Context, in *GameCreditRequest, op
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GameCreditResponse)
 	err := c.cc.Invoke(ctx, Wallet_GameCredit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GameBatchBetAndSettle(ctx context.Context, in *GameBatchBetAndSettleRequest, opts ...grpc.CallOption) (*GameBatchBetAndSettleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GameBatchBetAndSettleResponse)
+	err := c.cc.Invoke(ctx, Wallet_GameBatchBetAndSettle_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1116,6 +1132,11 @@ type WalletServer interface {
 	Debit(context.Context, *DebitRequest) (*DebitResponse, error)
 	GameDebit(context.Context, *GameDebitRequest) (*GameDebitResponse, error)
 	GameCredit(context.Context, *GameCreditRequest) (*GameCreditResponse, error)
+	// GameBatchBetAndSettle processes N bets + M wins in a single atomic operation.
+	// Reduces lock contention by acquiring one row-level lock instead of N+M separate locks.
+	// Designed for instant-settlement games (e.g., Plinko, Dice, Keno) where bet results
+	// are determined at bet time.
+	GameBatchBetAndSettle(context.Context, *GameBatchBetAndSettleRequest) (*GameBatchBetAndSettleResponse, error)
 	// Freeze is used to freeze the balance of the user
 	Freeze(context.Context, *FreezeRequest) (*FreezeResponse, error)
 	// Settle is used to settle the frozen balance of the user
@@ -1290,6 +1311,9 @@ func (UnimplementedWalletServer) GameDebit(context.Context, *GameDebitRequest) (
 }
 func (UnimplementedWalletServer) GameCredit(context.Context, *GameCreditRequest) (*GameCreditResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GameCredit not implemented")
+}
+func (UnimplementedWalletServer) GameBatchBetAndSettle(context.Context, *GameBatchBetAndSettleRequest) (*GameBatchBetAndSettleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GameBatchBetAndSettle not implemented")
 }
 func (UnimplementedWalletServer) Freeze(context.Context, *FreezeRequest) (*FreezeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Freeze not implemented")
@@ -1662,6 +1686,24 @@ func _Wallet_GameCredit_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GameCredit(ctx, req.(*GameCreditRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GameBatchBetAndSettle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameBatchBetAndSettleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GameBatchBetAndSettle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GameBatchBetAndSettle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GameBatchBetAndSettle(ctx, req.(*GameBatchBetAndSettleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3068,6 +3110,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GameCredit",
 			Handler:    _Wallet_GameCredit_Handler,
+		},
+		{
+			MethodName: "GameBatchBetAndSettle",
+			Handler:    _Wallet_GameBatchBetAndSettle_Handler,
 		},
 		{
 			MethodName: "Freeze",

@@ -24847,6 +24847,805 @@ var _ interface {
 	ErrorName() string
 } = GetCompanyFinancialSummaryResponseValidationError{}
 
+// Validate checks the field values on GameBatchBetAndSettleRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GameBatchBetAndSettleRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GameBatchBetAndSettleRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GameBatchBetAndSettleRequestMultiError, or nil if none found.
+func (m *GameBatchBetAndSettleRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GameBatchBetAndSettleRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for ExchangeRate
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GameBatchBetAndSettleRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GameBatchBetAndSettleRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GameBatchBetAndSettleRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetBets() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleRequestValidationError{
+						field:  fmt.Sprintf("Bets[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleRequestValidationError{
+						field:  fmt.Sprintf("Bets[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameBatchBetAndSettleRequestValidationError{
+					field:  fmt.Sprintf("Bets[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetWins() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleRequestValidationError{
+						field:  fmt.Sprintf("Wins[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleRequestValidationError{
+						field:  fmt.Sprintf("Wins[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameBatchBetAndSettleRequestValidationError{
+					field:  fmt.Sprintf("Wins[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.AllowOverdraft != nil {
+		// no validation rules for AllowOverdraft
+	}
+
+	if len(errors) > 0 {
+		return GameBatchBetAndSettleRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GameBatchBetAndSettleRequestMultiError is an error wrapping multiple
+// validation errors returned by GameBatchBetAndSettleRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GameBatchBetAndSettleRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GameBatchBetAndSettleRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GameBatchBetAndSettleRequestMultiError) AllErrors() []error { return m }
+
+// GameBatchBetAndSettleRequestValidationError is the validation error returned
+// by GameBatchBetAndSettleRequest.Validate if the designated constraints
+// aren't met.
+type GameBatchBetAndSettleRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GameBatchBetAndSettleRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GameBatchBetAndSettleRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GameBatchBetAndSettleRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GameBatchBetAndSettleRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GameBatchBetAndSettleRequestValidationError) ErrorName() string {
+	return "GameBatchBetAndSettleRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GameBatchBetAndSettleRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGameBatchBetAndSettleRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GameBatchBetAndSettleRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GameBatchBetAndSettleRequestValidationError{}
+
+// Validate checks the field values on BatchBetItem with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BatchBetItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BatchBetItem with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in BatchBetItemMultiError, or
+// nil if none found.
+func (m *BatchBetItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchBetItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Amount
+
+	// no validation rules for Turnover
+
+	if len(errors) > 0 {
+		return BatchBetItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchBetItemMultiError is an error wrapping multiple validation errors
+// returned by BatchBetItem.ValidateAll() if the designated constraints aren't met.
+type BatchBetItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchBetItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchBetItemMultiError) AllErrors() []error { return m }
+
+// BatchBetItemValidationError is the validation error returned by
+// BatchBetItem.Validate if the designated constraints aren't met.
+type BatchBetItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchBetItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchBetItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchBetItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchBetItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchBetItemValidationError) ErrorName() string { return "BatchBetItemValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BatchBetItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchBetItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchBetItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchBetItemValidationError{}
+
+// Validate checks the field values on BatchWinItem with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BatchWinItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BatchWinItem with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in BatchWinItemMultiError, or
+// nil if none found.
+func (m *BatchWinItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchWinItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Amount
+
+	// no validation rules for OriginalTransactionId
+
+	// no validation rules for OriginalTransactionTurnover
+
+	if m.OriginalTransactionType != nil {
+		// no validation rules for OriginalTransactionType
+	}
+
+	if len(errors) > 0 {
+		return BatchWinItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchWinItemMultiError is an error wrapping multiple validation errors
+// returned by BatchWinItem.ValidateAll() if the designated constraints aren't met.
+type BatchWinItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchWinItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchWinItemMultiError) AllErrors() []error { return m }
+
+// BatchWinItemValidationError is the validation error returned by
+// BatchWinItem.Validate if the designated constraints aren't met.
+type BatchWinItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchWinItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchWinItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchWinItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchWinItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchWinItemValidationError) ErrorName() string { return "BatchWinItemValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BatchWinItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchWinItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchWinItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchWinItemValidationError{}
+
+// Validate checks the field values on GameBatchBetAndSettleResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GameBatchBetAndSettleResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GameBatchBetAndSettleResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GameBatchBetAndSettleResponseMultiError, or nil if none found.
+func (m *GameBatchBetAndSettleResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GameBatchBetAndSettleResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ExchangeRate
+
+	// no validation rules for Cash
+
+	// no validation rules for OperatorBonus
+
+	// no validation rules for ProviderBonus
+
+	for idx, item := range m.GetBetResults() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("BetResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("BetResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameBatchBetAndSettleResponseValidationError{
+					field:  fmt.Sprintf("BetResults[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetWinResults() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("WinResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("WinResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameBatchBetAndSettleResponseValidationError{
+					field:  fmt.Sprintf("WinResults[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetBetAffectedCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("BetAffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("BetAffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameBatchBetAndSettleResponseValidationError{
+					field:  fmt.Sprintf("BetAffectedCredits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetWinAffectedCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("WinAffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameBatchBetAndSettleResponseValidationError{
+						field:  fmt.Sprintf("WinAffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameBatchBetAndSettleResponseValidationError{
+					field:  fmt.Sprintf("WinAffectedCredits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GameBatchBetAndSettleResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GameBatchBetAndSettleResponseMultiError is an error wrapping multiple
+// validation errors returned by GameBatchBetAndSettleResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GameBatchBetAndSettleResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GameBatchBetAndSettleResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GameBatchBetAndSettleResponseMultiError) AllErrors() []error { return m }
+
+// GameBatchBetAndSettleResponseValidationError is the validation error
+// returned by GameBatchBetAndSettleResponse.Validate if the designated
+// constraints aren't met.
+type GameBatchBetAndSettleResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GameBatchBetAndSettleResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GameBatchBetAndSettleResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GameBatchBetAndSettleResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GameBatchBetAndSettleResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GameBatchBetAndSettleResponseValidationError) ErrorName() string {
+	return "GameBatchBetAndSettleResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GameBatchBetAndSettleResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGameBatchBetAndSettleResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GameBatchBetAndSettleResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GameBatchBetAndSettleResponseValidationError{}
+
+// Validate checks the field values on BatchTransactionResult with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BatchTransactionResult) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BatchTransactionResult with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BatchTransactionResultMultiError, or nil if none found.
+func (m *BatchTransactionResult) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BatchTransactionResult) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for CashAmount
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountUsd
+
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
+
+	if len(errors) > 0 {
+		return BatchTransactionResultMultiError(errors)
+	}
+
+	return nil
+}
+
+// BatchTransactionResultMultiError is an error wrapping multiple validation
+// errors returned by BatchTransactionResult.ValidateAll() if the designated
+// constraints aren't met.
+type BatchTransactionResultMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BatchTransactionResultMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BatchTransactionResultMultiError) AllErrors() []error { return m }
+
+// BatchTransactionResultValidationError is the validation error returned by
+// BatchTransactionResult.Validate if the designated constraints aren't met.
+type BatchTransactionResultValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BatchTransactionResultValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BatchTransactionResultValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BatchTransactionResultValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BatchTransactionResultValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BatchTransactionResultValidationError) ErrorName() string {
+	return "BatchTransactionResultValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BatchTransactionResultValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBatchTransactionResult.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BatchTransactionResultValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BatchTransactionResultValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
