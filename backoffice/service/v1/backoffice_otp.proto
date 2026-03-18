@@ -18,80 +18,92 @@ option java_package = "api.backoffice.service.v1";
 // OTP can be delivered via SMS, WhatsApp, Voice, or Email.
 //
 // This service allows backoffice administrators to configure HOW OTPs are delivered
-// for each operator (tenant), per country. The configuration consists of two layers:
+// for each operator (tenant), per country. The configuration consists of three layers:
 //
-//   Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab, Twilio)
+//   Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab).
+//               Stores API credentials and channel strategy. Created once, reusable.
+//   Binding   — "Which operator+country uses which provider?"
+//               Maps a provider to routing. Supports priority ordering and phone prefix filtering.
 //   Template  — "What message content is sent?" (bound to a provider, per business scenario)
 //
 // ## Complete setup workflow
 //
 // Step 1: CreateOTPProvider
-//   Register a third-party OTP delivery service for an operator + country.
-//   Example: EngageLab for operator 1001, country "BR" (Brazil).
+//   Register a third-party OTP delivery service with its credentials.
+//   Example: EngageLab with dev_key/dev_secret, WhatsApp-first strategy.
+//   → Credentials are configured once and can be reused across countries.
 //
-// Step 2: CreateOTPTemplate
+// Step 2: CreateOTPProviderBinding
+//   Bind the provider to an operator+country for routing.
+//   Example: Bind EngageLab to operator 1001, country "BR" with priority 0.
+//   → Same provider can be bound to "JP", "global", etc. without re-entering credentials.
+//   → Multiple providers per country are supported via priority ordering.
+//
+// Step 3: CreateOTPTemplate
 //   Create message templates bound to the provider, one per business scenario.
-//   Example: "email_verification" template using EngageLab template ID "T001" in Portuguese.
+//   Example: "login_otp" template using EngageLab template ID "T001" in Portuguese.
 //
-// Step 3: SyncOTPTemplateStatus
+// Step 4: SyncOTPTemplateStatus
 //   Some providers (EngageLab WhatsApp) require template approval. Call this to pull the
 //   latest review status from the provider. Only approved templates can be used for sending.
 //
-// Step 4: (Automatic) SendOTP is called by internal services (e.g., user-service)
-//   The push-service automatically routes to the correct provider + template based on
-//   the operator, country, and business scenario. No backoffice action needed at this step.
+// Step 5: (Automatic) SendOTP is called by internal services (e.g., user-service)
+//   The push-service automatically routes to the correct provider (via binding) + template
+//   based on the operator hierarchy, country, and business scenario.
 //
-// Step 5: ListOTPSendLogs
+// Step 6: ListOTPSendLogs
 //   Query delivery history for auditing, debugging, or statistics.
 //
-// ## Multi-tenant permission model
+// ## Routing chain (when SendOTP is called for a phone number)
+//
+// Provider binding resolution (first match wins):
+//   For each level: operator → company → retailer → system (skip if ID=0):
+//     1. (level_id, user's country, enabled=true) ORDER BY priority ASC
+//     2. (level_id, "global",       enabled=true) ORDER BY priority ASC
+//   Within each binding, phone_prefixes are checked (empty = match all).
+//
+// Template resolution (first match wins):
+//   For each level: operator → company → retailer → system (skip if ID=0):
+//     1. (level_id, country, template_type, language)
+//     2. (level_id, country, template_type, "en")
+//     3. (level_id, "global", template_type, language)
+//     4. (level_id, "global", template_type, "en")
+//
+// ## Permission model
 // All requests include target_operator_context. The backoffice validates that the
 // authenticated admin has permission to operate on the target operator (hierarchy check).
 // If target_operator_context is omitted, it defaults to the admin's own operator.
+//
+// - Provider: owned by creator (owner_operator_id). Owner + ancestors can manage.
+// - Binding: scoped to target operator_id. Callers with authority over that operator can manage.
+// - Lower-level operators can override upper-level config by creating their own bindings
+//   with enabled=false to disable, or with their own provider to replace.
 service BackofficeOTP {
   // ====== Provider Management ======
 
-  // CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+  // CreateOTPProvider registers a third-party OTP delivery provider.
   //
   // ## What is an OTP Provider?
   // A Provider is a connection to a third-party service (e.g., EngageLab) that can
   // deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
   //   - The provider's API credentials (encrypted at rest, never returned in responses)
   //   - Which delivery channels to use and in what order (send_channel_strategy)
-  //   - A priority for fallback routing when multiple providers exist
+  //   - Which countries are supported (for binding validation)
   //
-  // ## When to use this API?
-  // Call this when onboarding a new operator or expanding to a new country. For example:
-  //   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
-  //     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
-  //     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
-  //   - Same operator wants a global SMS fallback → create another provider with
-  //     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
-  //     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
-  //
-  // ## How does routing work?
-  // When user-service calls SendOTP for a phone number, push-service resolves the provider
-  // using this fallback chain (first match wins):
-  //   1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
-  //   2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
-  //   3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
-  //   4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
-  // This means: operator-specific config is preferred; "global" is the fallback;
-  // system-level config provides a safety net for operators that haven't configured anything.
+  // Credentials are configured once. Use CreateOTPProviderBinding to assign the provider
+  // to specific operator+country combinations for routing.
   //
   // ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
   //
   // ```json
   // {
   //   "target_operator_context": { "operator_id": 1001 },
-  //   "country": "BR",
   //   "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-  //   "name": "EngageLab Brazil",
-  //   "enabled": true,
-  //   "priority": 0,
+  //   "name": "EngageLab Main Account",
   //   "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
   //   "config": "{}",
-  //   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+  //   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS",
+  //   "supported_countries": ["BR", "JP"]
   // }
   // ```
   //
@@ -99,8 +111,8 @@ service BackofficeOTP {
   // Returns the created provider info (with has_credentials=true instead of actual credentials).
   //
   // ## Errors
+  // - OTP_PROVIDER_ALREADY_EXISTS: duplicate provider
   // - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
-  // - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
   rpc CreateOTPProvider(CreateOTPProviderRequest) returns (api.push.service.v1.CreateOTPProviderResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/create"
@@ -115,8 +127,8 @@ service BackofficeOTP {
   //
   // Common use cases:
   //   - Rotate credentials: set credentials_json with new keys
-  //   - Disable a provider temporarily: set enabled=false (routing will skip it)
   //   - Change channel strategy: e.g., switch from WhatsApp-first to SMS-only
+  //   - Update supported countries: set supported_countries or clear_supported_countries
   //
   // ## Errors
   // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
@@ -129,10 +141,9 @@ service BackofficeOTP {
 
   // DeleteOTPProvider permanently removes an OTP provider.
   //
-  // WARNING: Deleting a provider that still has templates bound to it will cause
-  // those templates to become orphaned — they will still match during routing but
-  // fail at send time because the provider credentials are gone.
-  // Best practice: delete all associated templates first, or disable the provider instead.
+  // WARNING: Deleting a provider that still has bindings or templates bound to it will cause
+  // those records to become orphaned — routing will skip them because the provider
+  // credentials are gone. Best practice: delete bindings and templates first.
   //
   // ## Errors
   // - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
@@ -156,14 +167,102 @@ service BackofficeOTP {
     };
   }
 
-  // ListOTPProviders lists OTP providers with optional filters and pagination.
+  // ListOTPProviders lists OTP providers visible to the caller.
   //
-  // Supports filtering by country, provider_type, and enabled status.
+  // Supports filtering by provider_type and supported country.
   // Results are scoped to the operator specified in target_operator_context.
   // Returns paginated results with total count.
   rpc ListOTPProviders(ListOTPProvidersRequest) returns (api.push.service.v1.ListOTPProvidersResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/provider/list"
+      body: "*"
+    };
+  }
+
+  // ====== Provider Binding Management ======
+
+  // CreateOTPProviderBinding binds a provider to an operator+country for routing.
+  //
+  // ## What is a Provider Binding?
+  // A Binding maps a Provider to a specific (operator_id, country) combination.
+  // It controls whether the provider is used (enabled), its priority relative to
+  // other bindings for the same country, and optional phone number prefix filtering.
+  //
+  // ## Example: one provider, multiple countries
+  // ```
+  // 1. CreateOTPProvider → provider_id=100 (credentials entered once)
+  // 2. CreateOTPProviderBinding { provider_id: 100, country: "BR", priority: 0 }
+  // 3. CreateOTPProviderBinding { provider_id: 100, country: "JP", priority: 0 }
+  // ```
+  //
+  // ## Example: same country, multiple providers with phone prefix routing
+  // ```
+  // Binding 1: provider=100, country="BR", priority=0, phone_prefixes=["+5511","+5521"]
+  // Binding 2: provider=200, country="BR", priority=1, phone_prefixes=[]
+  // → +5511xxx → matches Binding 1
+  // → +5531xxx → skips Binding 1, matches Binding 2 (catch-all)
+  // ```
+  //
+  // ## Example: lower-level operator overrides upper-level
+  // ```
+  // System binding: operator_id=0, provider=100, country="BR"
+  // Operator 5001 creates: operator_id=5001, provider=200, country="BR"
+  // → Operator 5001's users use provider 200 (operator level checked first)
+  // ```
+  //
+  // ## Errors
+  // - OTP_PROVIDER_NOT_FOUND: provider_id does not exist
+  // - OTP_PROVIDER_BINDING_ALREADY_EXISTS: duplicate (operator_id, provider_id, country)
+  // - OTP_PROVIDER_BINDING_INVALID_COUNTRY: country not in provider's supported_countries
+  rpc CreateOTPProviderBinding(CreateOTPProviderBindingRequest) returns (api.push.service.v1.CreateOTPProviderBindingResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider-binding/create"
+      body: "*"
+    };
+  }
+
+  // UpdateOTPProviderBinding partially updates an existing binding.
+  //
+  // Only fields present in the request are updated; omitted fields remain unchanged.
+  // After update, the binding routing cache is invalidated so changes take effect immediately.
+  //
+  // Common use cases:
+  //   - Disable a binding temporarily: set enabled=false
+  //   - Change routing priority: set priority to new value
+  //   - Add/change phone prefix filter: set phone_prefixes
+  //   - Remove phone prefix filter: set clear_phone_prefixes=true
+  //
+  // ## Errors
+  // - OTP_PROVIDER_BINDING_NOT_FOUND: no binding with the given ID
+  rpc UpdateOTPProviderBinding(UpdateOTPProviderBindingRequest) returns (api.push.service.v1.UpdateOTPProviderBindingResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider-binding/update"
+      body: "*"
+    };
+  }
+
+  // DeleteOTPProviderBinding permanently removes a provider binding.
+  //
+  // After deletion, routing will fall back to the next matching binding or the next
+  // level in the operator hierarchy (company → retailer → system → "global").
+  //
+  // ## Errors
+  // - OTP_PROVIDER_BINDING_NOT_FOUND: no binding with the given ID
+  rpc DeleteOTPProviderBinding(DeleteOTPProviderBindingRequest) returns (api.push.service.v1.DeleteOTPProviderBindingResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider-binding/delete"
+      body: "*"
+    };
+  }
+
+  // ListOTPProviderBindings lists provider bindings for the target operator.
+  //
+  // Supports filtering by country, provider_id, and enabled status.
+  // Results are scoped to the operator specified in target_operator_context.
+  // Returns paginated results with inline provider info for each binding.
+  rpc ListOTPProviderBindings(ListOTPProviderBindingsRequest) returns (api.push.service.v1.ListOTPProviderBindingsResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider-binding/list"
       body: "*"
     };
   }
@@ -187,17 +286,19 @@ service BackofficeOTP {
   //   3. After creation (and approval for WhatsApp), copy the template ID
   //   4. Use that ID as external_template_id when calling this API
   //
-  // When SendOTP is triggered, the system passes this ID to the provider's API
-  // so the provider knows which pre-approved message template to use.
+  // ## Template Variables by Provider
   //
-  // ## How does template routing work?
-  // When user-service calls SendOTP, push-service resolves the template using this
-  // fallback chain (first match wins, per operator level):
-  //   For each level: operator → company → retailer → system (skip if ID=0):
-  //     1. (operator_id, country, template_type, language)
-  //     2. (operator_id, country, template_type, "en")
-  //     3. (operator_id, "global", template_type, language)
-  //     4. (operator_id, "global", template_type, "en")
+  // ### EngageLab (OTP_PROVIDER_TYPE_ENGAGELAB)
+  //
+  // Supported channels: SMS, WhatsApp, Voice.
+  // Templates are created on the EngageLab Console (OTP → Template Management).
+  // WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+  //
+  // | Variable | Source | Description |
+  // |----------|--------|-------------|
+  // | `code` | auto | OTP verification code, auto-injected by EngageLab. |
+  // | `brand_name` | `brand_name` field | Brand name displayed in the message. |
+  // | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
   //
   // ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
   //
@@ -221,29 +322,9 @@ service BackofficeOTP {
   // ## Constraints
   // - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
   // - provider_id must reference an existing OTP provider
-  // - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
   //
-  // ## Template Variables by Provider
-  //
-  // When SendOTP is triggered, the system passes variables to the provider's template engine.
-  // Variables are used as `{{variable_name}}` placeholders in the template content
-  // configured on the provider's platform. Different providers support different variables.
-  //
-  // ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
-  //
-  // Supported channels: SMS, WhatsApp, Voice.
-  // Templates are created on the EngageLab Console (OTP → Template Management).
-  // WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
-  //
-  // | Variable | Source | Description |
-  // |----------|--------|-------------|
-  // | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
-  // | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
-  // | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
-  //
-  // SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
-  // WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
-  // Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
+  // ## Errors
+  // - OTP_TEMPLATE_ALREADY_EXISTS: UNIQUE constraint violated
   rpc CreateOTPTemplate(CreateOTPTemplateRequest) returns (api.push.service.v1.CreateOTPTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/otp/template/create"
@@ -273,7 +354,7 @@ service BackofficeOTP {
   // DeleteOTPTemplate permanently removes an OTP template.
   //
   // If the deleted template was the only match for a given operator+country+type+language,
-  // the system will fall back to the next level in the routing chain (e.g., company → retailer → system).
+  // the system will fall back to the next level in the routing chain.
   // If no template matches at all, SendOTP will return an OTP_TEMPLATE_NOT_FOUND error.
   //
   // ## Errors
@@ -361,30 +442,29 @@ service BackofficeOTP {
 // ============ Provider Management ============
 
 // Register a third-party OTP delivery provider.
-// UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
+// Credentials are configured once; use CreateOTPProviderBinding to assign to operator+country.
 // credentials_json is required and must be valid JSON for the chosen provider_type.
 message CreateOTPProviderRequest {
   // Target operator context for permission check.
+  // The provider's owner_operator_id will be set to the target operator's ID.
   api.common.OperatorContext target_operator_context = 1;
-  // ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
-  string country = 2;
-  // Third-party provider type: `OTP_PROVIDER_TYPE_ENGAGELAB` (SMS, WhatsApp, Voice)
-  api.push.service.v1.OTPProviderType provider_type = 3;
-  // Human-readable display name
-  string name = 4;
-  // Whether this provider is active for routing
-  bool enabled = 5;
-  // Routing priority (lower = higher priority, e.g. 0 > 1 > 2)
-  int32 priority = 6;
-  // Plain JSON with provider-specific credentials (encrypted before storage)
-  string credentials_json = 7;
-  // JSON string of non-sensitive config (base_url, timeouts, etc.)
-  string config = 8;
+  // Third-party provider type: OTP_PROVIDER_TYPE_ENGAGELAB (SMS, WhatsApp, Voice)
+  api.push.service.v1.OTPProviderType provider_type = 2;
+  // Human-readable display name (e.g., "EngageLab Main Account")
+  string name = 3;
+  // Plain JSON with provider-specific credentials (encrypted before storage).
+  // EngageLab example: {"dev_key":"your_key","dev_secret":"your_secret"}
+  string credentials_json = 4;
+  // JSON string of non-sensitive config (base_url, timeouts, etc.). Optional.
+  string config = 5;
   // Channel delivery order:
-  // `OTP_SEND_CHANNEL_STRATEGY_SMS` (SMS only),
-  // `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS` (WhatsApp first, fallback to SMS),
-  // `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE` (WhatsApp → SMS → Voice)
-  api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 9;
+  // OTP_SEND_CHANNEL_STRATEGY_SMS (SMS only),
+  // OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS (WhatsApp first, fallback to SMS),
+  // OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE (WhatsApp → SMS → Voice)
+  api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 6;
+  // Countries this provider supports (e.g., ["BR", "JP"]). Empty = all countries.
+  // When creating a binding, the binding's country must be in this list (or list is empty).
+  repeated string supported_countries = 7;
 }
 
 // Partially update an existing OTP provider.
@@ -396,20 +476,21 @@ message UpdateOTPProviderRequest {
   int64 id = 2;
   // New display name (optional)
   optional string name = 3;
-  // Enable/disable for routing (optional)
-  optional bool enabled = 4;
-  // New routing priority (optional)
-  optional int32 priority = 5;
   // New credentials, will be re-encrypted before storage (optional)
-  optional string credentials_json = 6;
+  optional string credentials_json = 4;
   // New non-sensitive config JSON (optional)
-  optional string config = 7;
+  optional string config = 5;
   // New channel delivery strategy (optional)
-  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 8;
+  optional api.push.service.v1.OTPSendChannelStrategy send_channel_strategy = 6;
+  // New supported countries list. Ignored if empty and clear_supported_countries is false.
+  repeated string supported_countries = 7;
+  // Set to true to clear supported_countries (provider will support all countries).
+  // Takes precedence over supported_countries field.
+  optional bool clear_supported_countries = 8;
 }
 
 // Permanently delete an OTP provider by ID.
-// Associated templates are NOT automatically deleted — clean them up first.
+// Associated bindings and templates are NOT automatically deleted — clean them up first.
 message DeleteOTPProviderRequest {
   // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
@@ -431,10 +512,74 @@ message GetOTPProviderRequest {
 message ListOTPProvidersRequest {
   // Target operator context for ownership scoping.
   api.common.OperatorContext target_operator_context = 1;
-  // Filter by country code (e.g. `"BR"`) or `"global"` (optional)
-  optional string country = 2;
   // Filter by provider type (optional)
-  optional api.push.service.v1.OTPProviderType provider_type = 3;
+  optional api.push.service.v1.OTPProviderType provider_type = 2;
+  // Filter by supported country: returns providers whose supported_countries includes
+  // this country OR whose supported_countries is empty (supports all). Optional.
+  optional string country = 3;
+  // Page number (1-based, default 1)
+  int32 page = 4;
+  // Items per page (default 20, max 100)
+  int32 page_size = 5;
+}
+
+// ============ Provider Binding Management ============
+
+// Bind a provider to an operator+country for routing.
+// UNIQUE(operator_id, provider_id, country): one binding per provider per operator+country.
+message CreateOTPProviderBindingRequest {
+  // Target operator context for permission check.
+  // The binding's operator_id will be set to the target operator's ID.
+  api.common.OperatorContext target_operator_context = 1;
+  // Provider to bind (must exist)
+  int64 provider_id = 2;
+  // ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
+  string country = 3;
+  // Whether this binding is active for routing
+  bool enabled = 4;
+  // Routing priority within same (operator_id, country). Lower = higher priority (e.g., 0 > 1 > 2).
+  int32 priority = 5;
+  // Phone number prefix filter. e.g., ["+5511", "+5521"]. Empty = matches all numbers.
+  // Enables number-segment routing: different providers for different area codes.
+  repeated string phone_prefixes = 6;
+}
+
+// Partially update a provider binding.
+// Only provided (non-nil) fields are updated; omitted fields remain unchanged.
+message UpdateOTPProviderBindingRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  // Binding ID to update
+  int64 id = 2;
+  // Enable/disable for routing (optional)
+  optional bool enabled = 3;
+  // New routing priority (optional)
+  optional int32 priority = 4;
+  // New phone prefix filter. Ignored if empty and clear_phone_prefixes is false.
+  repeated string phone_prefixes = 5;
+  // Set to true to clear phone_prefixes (match all numbers).
+  // Takes precedence over phone_prefixes field.
+  optional bool clear_phone_prefixes = 6;
+}
+
+// Permanently delete a provider binding.
+message DeleteOTPProviderBindingRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  // Binding ID to delete
+  int64 id = 2;
+}
+
+// List provider bindings with optional filters and pagination.
+// Results are scoped to the operator in target_operator_context.
+// Each binding includes inline provider info for display convenience.
+message ListOTPProviderBindingsRequest {
+  // Target operator context for ownership scoping.
+  api.common.OperatorContext target_operator_context = 1;
+  // Filter by country code (e.g., "BR") or "global" (optional)
+  optional string country = 2;
+  // Filter by associated provider ID (optional)
+  optional int64 provider_id = 3;
   // Filter by enabled status (optional)
   optional bool enabled = 4;
   // Page number (1-based, default 1)
@@ -452,29 +597,28 @@ message ListOTPProvidersRequest {
 message CreateOTPTemplateRequest {
   // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
-  // ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
+  // ISO 3166-1 alpha-2 country code (e.g., "BR"), or "global" for default fallback
   string country = 2;
   // ID of the OTP provider this template belongs to
   int64 provider_id = 3;
-  // Human-readable display name (e.g. `"Brazil Login OTP - Portuguese"`)
+  // Human-readable display name (e.g., "Brazil Login OTP - Portuguese")
   string name = 4;
   // Business scenario this template serves:
-  // `OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION`, `OTP_TEMPLATE_TYPE_LOGIN_OTP`,
-  // `OTP_TEMPLATE_TYPE_PASSWORD_RESET`, `OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM`
+  // OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION, OTP_TEMPLATE_TYPE_LOGIN_OTP,
+  // OTP_TEMPLATE_TYPE_PASSWORD_RESET, OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
   api.push.service.v1.OTPTemplateType template_type = 5;
   // Template ID from the third-party provider's platform.
-  // For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
-  // This ID is passed to the provider's API at send time to select the correct message content.
+  // For EngageLab: find it in Console → OTP → Template Management.
   string external_template_id = 6;
-  // BCP-47 language code (e.g. `"en"`, `"pt"`, `"zh"`). Used for routing and passed to the provider.
+  // BCP-47 language code (e.g., "en", "pt", "zh")
   string language = 7;
-  // Brand name injected into the OTP message (e.g. `"BetBrazil"`). Passed as template variable `brand_name`.
+  // Brand name injected into OTP messages (e.g., "BetBrazil"). Passed as template variable.
   string brand_name = 8;
-  // OTP code length, informational only (default 6). The actual code is generated by user-service.
+  // OTP code length, informational only (default 6). Actual code is generated by user-service.
   int32 code_length = 9;
-  // OTP code TTL in seconds, informational only (default 900). The actual TTL is enforced by user-service.
+  // OTP code TTL in seconds, informational only (default 900). Actual TTL enforced by user-service.
   int32 code_ttl_seconds = 10;
-  // JSON string of additional template variables passed to the provider (e.g. `'{"app_name":"Meepo"}'`)
+  // JSON string of additional template variables (e.g., '{"app_name":"Meepo"}')
   string extra_params = 11;
   // Whether this template is active for routing. Disabled templates are skipped during resolution.
   bool enabled = 12;
@@ -526,7 +670,7 @@ message GetOTPTemplateRequest {
 message ListOTPTemplatesRequest {
   // Target operator context for ownership scoping.
   api.common.OperatorContext target_operator_context = 1;
-  // Filter by country code (e.g. `"BR"`) or `"global"` (optional)
+  // Filter by country code (e.g., "BR") or "global" (optional)
   optional string country = 2;
   // Filter by associated provider ID (optional)
   optional int64 provider_id = 3;
@@ -556,9 +700,9 @@ message ListOTPSendLogsRequest {
   api.common.OperatorContext target_operator_context = 1;
   // Filter by end-user ID who triggered the OTP (optional)
   optional int64 user_id = 2;
-  // Filter by delivery channel: `"sms"`, `"whatsapp"`, `"voice"`, `"email"` (optional)
+  // Filter by delivery channel: "sms", "whatsapp", "voice", "email" (optional)
   optional string channel_used = 3;
-  // Filter by delivery status: `"sent"`, `"failed"` (optional)
+  // Filter by delivery status: "sent", "failed" (optional)
   optional string status = 4;
   // Start of time range (Unix milliseconds, inclusive)
   int64 start_time = 5;
