@@ -90,15 +90,9 @@ func (m *CreateOTPProviderRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Country
-
 	// no validation rules for ProviderType
 
 	// no validation rules for Name
-
-	// no validation rules for Enabled
-
-	// no validation rules for Priority
 
 	// no validation rules for CredentialsJson
 
@@ -243,14 +237,6 @@ func (m *UpdateOTPProviderRequest) validate(all bool) error {
 		// no validation rules for Name
 	}
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
-	}
-
-	if m.Priority != nil {
-		// no validation rules for Priority
-	}
-
 	if m.CredentialsJson != nil {
 		// no validation rules for CredentialsJson
 	}
@@ -261,6 +247,10 @@ func (m *UpdateOTPProviderRequest) validate(all bool) error {
 
 	if m.SendChannelStrategy != nil {
 		// no validation rules for SendChannelStrategy
+	}
+
+	if m.ClearSupportedCountries != nil {
+		// no validation rules for ClearSupportedCountries
 	}
 
 	if len(errors) > 0 {
@@ -664,16 +654,12 @@ func (m *ListOTPProvidersRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	if m.Country != nil {
-		// no validation rules for Country
-	}
-
 	if m.ProviderType != nil {
 		// no validation rules for ProviderType
 	}
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
+	if m.Country != nil {
+		// no validation rules for Country
 	}
 
 	if len(errors) > 0 {
@@ -755,6 +741,574 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListOTPProvidersRequestValidationError{}
+
+// Validate checks the field values on CreateOTPProviderBindingRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateOTPProviderBindingRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateOTPProviderBindingRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateOTPProviderBindingRequestMultiError, or nil if none found.
+func (m *CreateOTPProviderBindingRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateOTPProviderBindingRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateOTPProviderBindingRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateOTPProviderBindingRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateOTPProviderBindingRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ProviderId
+
+	// no validation rules for Country
+
+	// no validation rules for Enabled
+
+	// no validation rules for Priority
+
+	if len(errors) > 0 {
+		return CreateOTPProviderBindingRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateOTPProviderBindingRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateOTPProviderBindingRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CreateOTPProviderBindingRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateOTPProviderBindingRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateOTPProviderBindingRequestMultiError) AllErrors() []error { return m }
+
+// CreateOTPProviderBindingRequestValidationError is the validation error
+// returned by CreateOTPProviderBindingRequest.Validate if the designated
+// constraints aren't met.
+type CreateOTPProviderBindingRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateOTPProviderBindingRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateOTPProviderBindingRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateOTPProviderBindingRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateOTPProviderBindingRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateOTPProviderBindingRequestValidationError) ErrorName() string {
+	return "CreateOTPProviderBindingRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateOTPProviderBindingRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateOTPProviderBindingRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateOTPProviderBindingRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateOTPProviderBindingRequestValidationError{}
+
+// Validate checks the field values on UpdateOTPProviderBindingRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateOTPProviderBindingRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOTPProviderBindingRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateOTPProviderBindingRequestMultiError, or nil if none found.
+func (m *UpdateOTPProviderBindingRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOTPProviderBindingRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOTPProviderBindingRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOTPProviderBindingRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOTPProviderBindingRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Id
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.ClearPhonePrefixes != nil {
+		// no validation rules for ClearPhonePrefixes
+	}
+
+	if len(errors) > 0 {
+		return UpdateOTPProviderBindingRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOTPProviderBindingRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateOTPProviderBindingRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateOTPProviderBindingRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOTPProviderBindingRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOTPProviderBindingRequestMultiError) AllErrors() []error { return m }
+
+// UpdateOTPProviderBindingRequestValidationError is the validation error
+// returned by UpdateOTPProviderBindingRequest.Validate if the designated
+// constraints aren't met.
+type UpdateOTPProviderBindingRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOTPProviderBindingRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOTPProviderBindingRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOTPProviderBindingRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOTPProviderBindingRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOTPProviderBindingRequestValidationError) ErrorName() string {
+	return "UpdateOTPProviderBindingRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOTPProviderBindingRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOTPProviderBindingRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOTPProviderBindingRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOTPProviderBindingRequestValidationError{}
+
+// Validate checks the field values on DeleteOTPProviderBindingRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteOTPProviderBindingRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteOTPProviderBindingRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteOTPProviderBindingRequestMultiError, or nil if none found.
+func (m *DeleteOTPProviderBindingRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOTPProviderBindingRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteOTPProviderBindingRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteOTPProviderBindingRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteOTPProviderBindingRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteOTPProviderBindingRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOTPProviderBindingRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteOTPProviderBindingRequest.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteOTPProviderBindingRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOTPProviderBindingRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOTPProviderBindingRequestMultiError) AllErrors() []error { return m }
+
+// DeleteOTPProviderBindingRequestValidationError is the validation error
+// returned by DeleteOTPProviderBindingRequest.Validate if the designated
+// constraints aren't met.
+type DeleteOTPProviderBindingRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOTPProviderBindingRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOTPProviderBindingRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOTPProviderBindingRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOTPProviderBindingRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOTPProviderBindingRequestValidationError) ErrorName() string {
+	return "DeleteOTPProviderBindingRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOTPProviderBindingRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOTPProviderBindingRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOTPProviderBindingRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOTPProviderBindingRequestValidationError{}
+
+// Validate checks the field values on ListOTPProviderBindingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListOTPProviderBindingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOTPProviderBindingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOTPProviderBindingsRequestMultiError, or nil if none found.
+func (m *ListOTPProviderBindingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOTPProviderBindingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOTPProviderBindingsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOTPProviderBindingsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOTPProviderBindingsRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.ProviderId != nil {
+		// no validation rules for ProviderId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return ListOTPProviderBindingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOTPProviderBindingsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListOTPProviderBindingsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListOTPProviderBindingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOTPProviderBindingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOTPProviderBindingsRequestMultiError) AllErrors() []error { return m }
+
+// ListOTPProviderBindingsRequestValidationError is the validation error
+// returned by ListOTPProviderBindingsRequest.Validate if the designated
+// constraints aren't met.
+type ListOTPProviderBindingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOTPProviderBindingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOTPProviderBindingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOTPProviderBindingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOTPProviderBindingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOTPProviderBindingsRequestValidationError) ErrorName() string {
+	return "ListOTPProviderBindingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOTPProviderBindingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOTPProviderBindingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOTPProviderBindingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOTPProviderBindingsRequestValidationError{}
 
 // Validate checks the field values on CreateOTPTemplateRequest with the rules
 // defined in the proto definition for this message. If any rules are

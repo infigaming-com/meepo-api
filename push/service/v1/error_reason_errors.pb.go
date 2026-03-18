@@ -390,3 +390,75 @@ func IsSendOtpInvalidRecipient(err error) bool {
 func ErrorSendOtpInvalidRecipient(format string, args ...interface{}) *errors.Error {
 	return errors.New(400, ErrorReason_SEND_OTP_INVALID_RECIPIENT.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOtpProviderAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorOtpProviderAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_OTP_PROVIDER_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpProviderBindingNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_BINDING_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOtpProviderBindingNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OTP_PROVIDER_BINDING_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpProviderBindingAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_BINDING_ALREADY_EXISTS.String() && e.Code == 409
+}
+
+func ErrorOtpProviderBindingAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(409, ErrorReason_OTP_PROVIDER_BINDING_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpProviderPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_PERMISSION_DENIED.String() && e.Code == 403
+}
+
+func ErrorOtpProviderPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_OTP_PROVIDER_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpProviderBindingPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_BINDING_PERMISSION_DENIED.String() && e.Code == 403
+}
+
+func ErrorOtpProviderBindingPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(403, ErrorReason_OTP_PROVIDER_BINDING_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOtpProviderBindingInvalidCountry(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY.String() && e.Code == 400
+}
+
+func ErrorOtpProviderBindingInvalidCountry(format string, args ...interface{}) *errors.Error {
+	return errors.New(400, ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY.String(), fmt.Sprintf(format, args...))
+}
