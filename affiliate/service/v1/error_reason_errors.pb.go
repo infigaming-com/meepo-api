@@ -1130,3 +1130,77 @@ func IsClaimUserReferralRewardsAllCurrenciesFailed(err error) bool {
 func ErrorClaimUserReferralRewardsAllCurrenciesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+// Landing Template
+func IsCreateLandingTemplateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_LANDING_TEMPLATE_FAILED.String() && e.Code == 500
+}
+
+// Landing Template
+func ErrorCreateLandingTemplateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_LANDING_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateLandingTemplateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_LANDING_TEMPLATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateLandingTemplateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_LANDING_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteLandingTemplateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_LANDING_TEMPLATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteLandingTemplateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_LANDING_TEMPLATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListLandingTemplatesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_LANDING_TEMPLATES_FAILED.String() && e.Code == 500
+}
+
+func ErrorListLandingTemplatesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_LANDING_TEMPLATES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLandingTemplateNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LANDING_TEMPLATE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorLandingTemplateNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LANDING_TEMPLATE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidClickAction(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_CLICK_ACTION.String() && e.Code == 500
+}
+
+func ErrorInvalidClickAction(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_CLICK_ACTION.String(), fmt.Sprintf(format, args...))
+}

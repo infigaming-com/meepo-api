@@ -37,6 +37,13 @@ service BackofficeFileStore {
             body: "*"
         };
 	}
+
+	rpc UploadLandingTemplateImage(UploadLandingTemplateImageRequest) returns (UploadLandingTemplateImageResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/affiliate/landing-template-image/upload"
+			body: "*"
+		};
+	}
 }
 
 message UploadOperatorStaticFileRequest {
@@ -77,4 +84,15 @@ message UploadAffiliateRegistrationPhotoRequest {
 
 message UploadAffiliateRegistrationPhotoResponse {
     string file_url = 1;
+}
+
+message UploadLandingTemplateImageRequest {
+	bytes data = 1;
+	string content_type = 2;
+	string file_path = 3;
+	string image_type = 4; // "mobile" or "pc"
+}
+
+message UploadLandingTemplateImageResponse {
+	string file_url = 1;
 }

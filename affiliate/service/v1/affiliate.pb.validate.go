@@ -3396,6 +3396,39 @@ func (m *UpdateCampaignRequest) validate(all bool) error {
 		// no validation rules for TargetAffiliateId
 	}
 
+	if m.LandingPageSettings != nil {
+
+		if all {
+			switch v := interface{}(m.GetLandingPageSettings()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateCampaignRequestValidationError{
+						field:  "LandingPageSettings",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateCampaignRequestValidationError{
+						field:  "LandingPageSettings",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLandingPageSettings()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateCampaignRequestValidationError{
+					field:  "LandingPageSettings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return UpdateCampaignRequestMultiError(errors)
 	}
@@ -4131,6 +4164,2108 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteCampaignResponseValidationError{}
+
+// Validate checks the field values on ClickAction with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ClickAction) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClickAction with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ClickActionMultiError, or
+// nil if none found.
+func (m *ClickAction) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClickAction) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ActionType
+
+	if m.CustomUrl != nil {
+		// no validation rules for CustomUrl
+	}
+
+	if len(errors) > 0 {
+		return ClickActionMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClickActionMultiError is an error wrapping multiple validation errors
+// returned by ClickAction.ValidateAll() if the designated constraints aren't met.
+type ClickActionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClickActionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClickActionMultiError) AllErrors() []error { return m }
+
+// ClickActionValidationError is the validation error returned by
+// ClickAction.Validate if the designated constraints aren't met.
+type ClickActionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClickActionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClickActionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClickActionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClickActionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClickActionValidationError) ErrorName() string { return "ClickActionValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ClickActionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClickAction.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClickActionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClickActionValidationError{}
+
+// Validate checks the field values on LandingPageSettings with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LandingPageSettings) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LandingPageSettings with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LandingPageSettingsMultiError, or nil if none found.
+func (m *LandingPageSettings) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LandingPageSettings) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Enabled
+
+	// no validation rules for LandingTemplateId
+
+	if len(errors) > 0 {
+		return LandingPageSettingsMultiError(errors)
+	}
+
+	return nil
+}
+
+// LandingPageSettingsMultiError is an error wrapping multiple validation
+// errors returned by LandingPageSettings.ValidateAll() if the designated
+// constraints aren't met.
+type LandingPageSettingsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LandingPageSettingsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LandingPageSettingsMultiError) AllErrors() []error { return m }
+
+// LandingPageSettingsValidationError is the validation error returned by
+// LandingPageSettings.Validate if the designated constraints aren't met.
+type LandingPageSettingsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LandingPageSettingsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LandingPageSettingsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LandingPageSettingsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LandingPageSettingsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LandingPageSettingsValidationError) ErrorName() string {
+	return "LandingPageSettingsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LandingPageSettingsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLandingPageSettings.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LandingPageSettingsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LandingPageSettingsValidationError{}
+
+// Validate checks the field values on LandingTemplate with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *LandingTemplate) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LandingTemplate with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LandingTemplateMultiError, or nil if none found.
+func (m *LandingTemplate) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LandingTemplate) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for TemplateName
+
+	// no validation rules for MobileImage
+
+	if all {
+		switch v := interface{}(m.GetMobileClickAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LandingTemplateValidationError{
+					field:  "MobileClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LandingTemplateValidationError{
+					field:  "MobileClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMobileClickAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LandingTemplateValidationError{
+				field:  "MobileClickAction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PcImage
+
+	if all {
+		switch v := interface{}(m.GetPcClickAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LandingTemplateValidationError{
+					field:  "PcClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LandingTemplateValidationError{
+					field:  "PcClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPcClickAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LandingTemplateValidationError{
+				field:  "PcClickAction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for RealOperatorId
+
+	// no validation rules for OperatorType
+
+	// no validation rules for CreatedBy
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return LandingTemplateMultiError(errors)
+	}
+
+	return nil
+}
+
+// LandingTemplateMultiError is an error wrapping multiple validation errors
+// returned by LandingTemplate.ValidateAll() if the designated constraints
+// aren't met.
+type LandingTemplateMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LandingTemplateMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LandingTemplateMultiError) AllErrors() []error { return m }
+
+// LandingTemplateValidationError is the validation error returned by
+// LandingTemplate.Validate if the designated constraints aren't met.
+type LandingTemplateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LandingTemplateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LandingTemplateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LandingTemplateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LandingTemplateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LandingTemplateValidationError) ErrorName() string { return "LandingTemplateValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LandingTemplateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLandingTemplate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LandingTemplateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LandingTemplateValidationError{}
+
+// Validate checks the field values on CreateLandingTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateLandingTemplateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateLandingTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateLandingTemplateRequestMultiError, or nil if none found.
+func (m *CreateLandingTemplateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateLandingTemplateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateLandingTemplateRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateLandingTemplateRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateLandingTemplateRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for TemplateName
+
+	// no validation rules for MobileImage
+
+	if all {
+		switch v := interface{}(m.GetMobileClickAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateLandingTemplateRequestValidationError{
+					field:  "MobileClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateLandingTemplateRequestValidationError{
+					field:  "MobileClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMobileClickAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateLandingTemplateRequestValidationError{
+				field:  "MobileClickAction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PcImage
+
+	if all {
+		switch v := interface{}(m.GetPcClickAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateLandingTemplateRequestValidationError{
+					field:  "PcClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateLandingTemplateRequestValidationError{
+					field:  "PcClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPcClickAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateLandingTemplateRequestValidationError{
+				field:  "PcClickAction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateLandingTemplateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateLandingTemplateRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateLandingTemplateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CreateLandingTemplateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateLandingTemplateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateLandingTemplateRequestMultiError) AllErrors() []error { return m }
+
+// CreateLandingTemplateRequestValidationError is the validation error returned
+// by CreateLandingTemplateRequest.Validate if the designated constraints
+// aren't met.
+type CreateLandingTemplateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateLandingTemplateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateLandingTemplateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateLandingTemplateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateLandingTemplateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateLandingTemplateRequestValidationError) ErrorName() string {
+	return "CreateLandingTemplateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateLandingTemplateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateLandingTemplateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateLandingTemplateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateLandingTemplateRequestValidationError{}
+
+// Validate checks the field values on CreateLandingTemplateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateLandingTemplateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateLandingTemplateResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateLandingTemplateResponseMultiError, or nil if none found.
+func (m *CreateLandingTemplateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateLandingTemplateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateLandingTemplateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateLandingTemplateResponseMultiError is an error wrapping multiple
+// validation errors returned by CreateLandingTemplateResponse.ValidateAll()
+// if the designated constraints aren't met.
+type CreateLandingTemplateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateLandingTemplateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateLandingTemplateResponseMultiError) AllErrors() []error { return m }
+
+// CreateLandingTemplateResponseValidationError is the validation error
+// returned by CreateLandingTemplateResponse.Validate if the designated
+// constraints aren't met.
+type CreateLandingTemplateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateLandingTemplateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateLandingTemplateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateLandingTemplateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateLandingTemplateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateLandingTemplateResponseValidationError) ErrorName() string {
+	return "CreateLandingTemplateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateLandingTemplateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateLandingTemplateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateLandingTemplateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateLandingTemplateResponseValidationError{}
+
+// Validate checks the field values on UpdateLandingTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateLandingTemplateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateLandingTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateLandingTemplateRequestMultiError, or nil if none found.
+func (m *UpdateLandingTemplateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateLandingTemplateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for LandingTemplateId
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateLandingTemplateRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateLandingTemplateRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateLandingTemplateRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for TemplateName
+
+	// no validation rules for MobileImage
+
+	if all {
+		switch v := interface{}(m.GetMobileClickAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateLandingTemplateRequestValidationError{
+					field:  "MobileClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateLandingTemplateRequestValidationError{
+					field:  "MobileClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMobileClickAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateLandingTemplateRequestValidationError{
+				field:  "MobileClickAction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PcImage
+
+	if all {
+		switch v := interface{}(m.GetPcClickAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateLandingTemplateRequestValidationError{
+					field:  "PcClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateLandingTemplateRequestValidationError{
+					field:  "PcClickAction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPcClickAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateLandingTemplateRequestValidationError{
+				field:  "PcClickAction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateLandingTemplateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateLandingTemplateRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateLandingTemplateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateLandingTemplateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateLandingTemplateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateLandingTemplateRequestMultiError) AllErrors() []error { return m }
+
+// UpdateLandingTemplateRequestValidationError is the validation error returned
+// by UpdateLandingTemplateRequest.Validate if the designated constraints
+// aren't met.
+type UpdateLandingTemplateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateLandingTemplateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateLandingTemplateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateLandingTemplateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateLandingTemplateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateLandingTemplateRequestValidationError) ErrorName() string {
+	return "UpdateLandingTemplateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateLandingTemplateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateLandingTemplateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateLandingTemplateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateLandingTemplateRequestValidationError{}
+
+// Validate checks the field values on UpdateLandingTemplateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateLandingTemplateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateLandingTemplateResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateLandingTemplateResponseMultiError, or nil if none found.
+func (m *UpdateLandingTemplateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateLandingTemplateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateLandingTemplateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateLandingTemplateResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateLandingTemplateResponse.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateLandingTemplateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateLandingTemplateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateLandingTemplateResponseMultiError) AllErrors() []error { return m }
+
+// UpdateLandingTemplateResponseValidationError is the validation error
+// returned by UpdateLandingTemplateResponse.Validate if the designated
+// constraints aren't met.
+type UpdateLandingTemplateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateLandingTemplateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateLandingTemplateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateLandingTemplateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateLandingTemplateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateLandingTemplateResponseValidationError) ErrorName() string {
+	return "UpdateLandingTemplateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateLandingTemplateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateLandingTemplateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateLandingTemplateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateLandingTemplateResponseValidationError{}
+
+// Validate checks the field values on DeleteLandingTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteLandingTemplateRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteLandingTemplateRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteLandingTemplateRequestMultiError, or nil if none found.
+func (m *DeleteLandingTemplateRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteLandingTemplateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for LandingTemplateId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteLandingTemplateRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteLandingTemplateRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteLandingTemplateRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return DeleteLandingTemplateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteLandingTemplateRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteLandingTemplateRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteLandingTemplateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteLandingTemplateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteLandingTemplateRequestMultiError) AllErrors() []error { return m }
+
+// DeleteLandingTemplateRequestValidationError is the validation error returned
+// by DeleteLandingTemplateRequest.Validate if the designated constraints
+// aren't met.
+type DeleteLandingTemplateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteLandingTemplateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteLandingTemplateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteLandingTemplateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteLandingTemplateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteLandingTemplateRequestValidationError) ErrorName() string {
+	return "DeleteLandingTemplateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteLandingTemplateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteLandingTemplateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteLandingTemplateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteLandingTemplateRequestValidationError{}
+
+// Validate checks the field values on DeleteLandingTemplateResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteLandingTemplateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteLandingTemplateResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteLandingTemplateResponseMultiError, or nil if none found.
+func (m *DeleteLandingTemplateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteLandingTemplateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteLandingTemplateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteLandingTemplateResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteLandingTemplateResponse.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteLandingTemplateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteLandingTemplateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteLandingTemplateResponseMultiError) AllErrors() []error { return m }
+
+// DeleteLandingTemplateResponseValidationError is the validation error
+// returned by DeleteLandingTemplateResponse.Validate if the designated
+// constraints aren't met.
+type DeleteLandingTemplateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteLandingTemplateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteLandingTemplateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteLandingTemplateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteLandingTemplateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteLandingTemplateResponseValidationError) ErrorName() string {
+	return "DeleteLandingTemplateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteLandingTemplateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteLandingTemplateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteLandingTemplateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteLandingTemplateResponseValidationError{}
+
+// Validate checks the field values on ListLandingTemplatesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListLandingTemplatesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLandingTemplatesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLandingTemplatesRequestMultiError, or nil if none found.
+func (m *ListLandingTemplatesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLandingTemplatesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListLandingTemplatesRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListLandingTemplatesRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListLandingTemplatesRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListLandingTemplatesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListLandingTemplatesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListLandingTemplatesRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListLandingTemplatesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLandingTemplatesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListLandingTemplatesRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListLandingTemplatesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLandingTemplatesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLandingTemplatesRequestMultiError) AllErrors() []error { return m }
+
+// ListLandingTemplatesRequestValidationError is the validation error returned
+// by ListLandingTemplatesRequest.Validate if the designated constraints
+// aren't met.
+type ListLandingTemplatesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLandingTemplatesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLandingTemplatesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLandingTemplatesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLandingTemplatesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLandingTemplatesRequestValidationError) ErrorName() string {
+	return "ListLandingTemplatesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLandingTemplatesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLandingTemplatesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLandingTemplatesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLandingTemplatesRequestValidationError{}
+
+// Validate checks the field values on ListLandingTemplatesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListLandingTemplatesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLandingTemplatesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLandingTemplatesResponseMultiError, or nil if none found.
+func (m *ListLandingTemplatesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLandingTemplatesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetLandingTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListLandingTemplatesResponseValidationError{
+						field:  fmt.Sprintf("LandingTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListLandingTemplatesResponseValidationError{
+						field:  fmt.Sprintf("LandingTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListLandingTemplatesResponseValidationError{
+					field:  fmt.Sprintf("LandingTemplates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListLandingTemplatesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLandingTemplatesResponseMultiError is an error wrapping multiple
+// validation errors returned by ListLandingTemplatesResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListLandingTemplatesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLandingTemplatesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLandingTemplatesResponseMultiError) AllErrors() []error { return m }
+
+// ListLandingTemplatesResponseValidationError is the validation error returned
+// by ListLandingTemplatesResponse.Validate if the designated constraints
+// aren't met.
+type ListLandingTemplatesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLandingTemplatesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLandingTemplatesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLandingTemplatesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLandingTemplatesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLandingTemplatesResponseValidationError) ErrorName() string {
+	return "ListLandingTemplatesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLandingTemplatesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLandingTemplatesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLandingTemplatesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLandingTemplatesResponseValidationError{}
+
+// Validate checks the field values on ListLandingTemplatesByCampaignRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListLandingTemplatesByCampaignRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLandingTemplatesByCampaignRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListLandingTemplatesByCampaignRequestMultiError, or nil if none found.
+func (m *ListLandingTemplatesByCampaignRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLandingTemplatesByCampaignRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListLandingTemplatesByCampaignRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListLandingTemplatesByCampaignRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListLandingTemplatesByCampaignRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListLandingTemplatesByCampaignRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLandingTemplatesByCampaignRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListLandingTemplatesByCampaignRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListLandingTemplatesByCampaignRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLandingTemplatesByCampaignRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLandingTemplatesByCampaignRequestMultiError) AllErrors() []error { return m }
+
+// ListLandingTemplatesByCampaignRequestValidationError is the validation error
+// returned by ListLandingTemplatesByCampaignRequest.Validate if the
+// designated constraints aren't met.
+type ListLandingTemplatesByCampaignRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLandingTemplatesByCampaignRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLandingTemplatesByCampaignRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLandingTemplatesByCampaignRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLandingTemplatesByCampaignRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLandingTemplatesByCampaignRequestValidationError) ErrorName() string {
+	return "ListLandingTemplatesByCampaignRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLandingTemplatesByCampaignRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLandingTemplatesByCampaignRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLandingTemplatesByCampaignRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLandingTemplatesByCampaignRequestValidationError{}
+
+// Validate checks the field values on ListLandingTemplatesByCampaignResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListLandingTemplatesByCampaignResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListLandingTemplatesByCampaignResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListLandingTemplatesByCampaignResponseMultiError, or nil if none found.
+func (m *ListLandingTemplatesByCampaignResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLandingTemplatesByCampaignResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetLandingTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListLandingTemplatesByCampaignResponseValidationError{
+						field:  fmt.Sprintf("LandingTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListLandingTemplatesByCampaignResponseValidationError{
+						field:  fmt.Sprintf("LandingTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListLandingTemplatesByCampaignResponseValidationError{
+					field:  fmt.Sprintf("LandingTemplates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListLandingTemplatesByCampaignResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLandingTemplatesByCampaignResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListLandingTemplatesByCampaignResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListLandingTemplatesByCampaignResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLandingTemplatesByCampaignResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLandingTemplatesByCampaignResponseMultiError) AllErrors() []error { return m }
+
+// ListLandingTemplatesByCampaignResponseValidationError is the validation
+// error returned by ListLandingTemplatesByCampaignResponse.Validate if the
+// designated constraints aren't met.
+type ListLandingTemplatesByCampaignResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLandingTemplatesByCampaignResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLandingTemplatesByCampaignResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLandingTemplatesByCampaignResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLandingTemplatesByCampaignResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLandingTemplatesByCampaignResponseValidationError) ErrorName() string {
+	return "ListLandingTemplatesByCampaignResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLandingTemplatesByCampaignResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLandingTemplatesByCampaignResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLandingTemplatesByCampaignResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLandingTemplatesByCampaignResponseValidationError{}
+
+// Validate checks the field values on GetLandingTemplateConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetLandingTemplateConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetLandingTemplateConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetLandingTemplateConfigRequestMultiError, or nil if none found.
+func (m *GetLandingTemplateConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetLandingTemplateConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.CampaignId != nil {
+		// no validation rules for CampaignId
+	}
+
+	if m.LandingTemplateId != nil {
+		// no validation rules for LandingTemplateId
+	}
+
+	if len(errors) > 0 {
+		return GetLandingTemplateConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetLandingTemplateConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by GetLandingTemplateConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetLandingTemplateConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetLandingTemplateConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetLandingTemplateConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetLandingTemplateConfigRequestValidationError is the validation error
+// returned by GetLandingTemplateConfigRequest.Validate if the designated
+// constraints aren't met.
+type GetLandingTemplateConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetLandingTemplateConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetLandingTemplateConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetLandingTemplateConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetLandingTemplateConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetLandingTemplateConfigRequestValidationError) ErrorName() string {
+	return "GetLandingTemplateConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetLandingTemplateConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetLandingTemplateConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetLandingTemplateConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetLandingTemplateConfigRequestValidationError{}
+
+// Validate checks the field values on GetLandingTemplateConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetLandingTemplateConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetLandingTemplateConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetLandingTemplateConfigResponseMultiError, or nil if none found.
+func (m *GetLandingTemplateConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetLandingTemplateConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetLandingTemplate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetLandingTemplateConfigResponseValidationError{
+					field:  "LandingTemplate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetLandingTemplateConfigResponseValidationError{
+					field:  "LandingTemplate",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLandingTemplate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetLandingTemplateConfigResponseValidationError{
+				field:  "LandingTemplate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.LandingPageSettings != nil {
+
+		if all {
+			switch v := interface{}(m.GetLandingPageSettings()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetLandingTemplateConfigResponseValidationError{
+						field:  "LandingPageSettings",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetLandingTemplateConfigResponseValidationError{
+						field:  "LandingPageSettings",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLandingPageSettings()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetLandingTemplateConfigResponseValidationError{
+					field:  "LandingPageSettings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetLandingTemplateConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetLandingTemplateConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetLandingTemplateConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetLandingTemplateConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetLandingTemplateConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetLandingTemplateConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetLandingTemplateConfigResponseValidationError is the validation error
+// returned by GetLandingTemplateConfigResponse.Validate if the designated
+// constraints aren't met.
+type GetLandingTemplateConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetLandingTemplateConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetLandingTemplateConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetLandingTemplateConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetLandingTemplateConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetLandingTemplateConfigResponseValidationError) ErrorName() string {
+	return "GetLandingTemplateConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetLandingTemplateConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetLandingTemplateConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetLandingTemplateConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetLandingTemplateConfigResponseValidationError{}
 
 // Validate checks the field values on ListEventsRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -11911,6 +14046,43 @@ func (m *ListCampaignsResponse_CampaignInfo) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.LandingPageSettings != nil {
+
+		if all {
+			switch v := interface{}(m.GetLandingPageSettings()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCampaignsResponse_CampaignInfoValidationError{
+						field:  "LandingPageSettings",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCampaignsResponse_CampaignInfoValidationError{
+						field:  "LandingPageSettings",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLandingPageSettings()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCampaignsResponse_CampaignInfoValidationError{
+					field:  "LandingPageSettings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.LandingTemplateName != nil {
+		// no validation rules for LandingTemplateName
 	}
 
 	if len(errors) > 0 {

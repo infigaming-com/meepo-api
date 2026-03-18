@@ -161,6 +161,26 @@ service Affiliate {
         };
     }
 
+    // -------------- Landing Template --------------
+
+    rpc CreateLandingTemplate(CreateLandingTemplateRequest) returns (CreateLandingTemplateResponse) {}
+
+    rpc UpdateLandingTemplate(UpdateLandingTemplateRequest) returns (UpdateLandingTemplateResponse) {}
+
+    rpc DeleteLandingTemplate(DeleteLandingTemplateRequest) returns (DeleteLandingTemplateResponse) {}
+
+    rpc ListLandingTemplates(ListLandingTemplatesRequest) returns (ListLandingTemplatesResponse) {}
+
+    rpc ListLandingTemplatesByCampaign(ListLandingTemplatesByCampaignRequest) returns (ListLandingTemplatesByCampaignResponse) {}
+
+    // GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+    rpc GetLandingTemplateConfig(GetLandingTemplateConfigRequest) returns (GetLandingTemplateConfigResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/landing-template/config/get"
+            body: "*"
+        };
+    }
+
     // -------------- Promo Code Condition --------------
 
     // GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
@@ -468,6 +488,7 @@ message UpdateCampaignRequest {
     int64 initiator_user_id = 4;
     int64 initiator_role_id = 5;
     optional int64 target_affiliate_id = 6;
+    optional LandingPageSettings landing_page_settings = 7;
 }
 
 message UpdateCampaignResponse {
@@ -501,6 +522,8 @@ message ListCampaignsResponse {
         int32 event_mappings_count = 10;
         bool enabled = 11;
         Campaign campaign = 12;
+        optional LandingPageSettings landing_page_settings = 13;
+        optional string landing_template_name = 14;
     }
     repeated CampaignInfo campaigns = 1;
     int32 total = 2;
@@ -519,6 +542,107 @@ message DeleteCampaignRequest {
 
 message DeleteCampaignResponse {
 }
+
+// -------------- Landing Template Types --------------
+
+message ClickAction {
+    string action_type = 1; // OPEN_REGISTRATION, GO_TO_MAIN_SITE, CUSTOM_URL
+    optional string custom_url = 2; // required when action_type is CUSTOM_URL
+}
+
+message LandingPageSettings {
+    bool enabled = 1;
+    int64 landing_template_id = 2;
+}
+
+message LandingTemplate {
+    int64 id = 1;
+    string template_name = 2;
+    string mobile_image = 3;
+    ClickAction mobile_click_action = 4;
+    string pc_image = 5;
+    ClickAction pc_click_action = 6;
+    int64 operator_id = 7;
+    int64 company_operator_id = 8;
+    int64 retailer_operator_id = 9;
+    int64 system_operator_id = 10;
+    int64 real_operator_id = 11;
+    string operator_type = 12;
+    int64 created_by = 13;
+    int64 created_at = 14;
+    int64 updated_at = 15;
+}
+
+// -------------- Landing Template CRUD Messages --------------
+
+message CreateLandingTemplateRequest {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    string template_name = 3;
+    string mobile_image = 4;
+    ClickAction mobile_click_action = 5;
+    string pc_image = 6;
+    ClickAction pc_click_action = 7;
+}
+
+message CreateLandingTemplateResponse {}
+
+message UpdateLandingTemplateRequest {
+    int64 landing_template_id = 1;
+    int64 user_id = 2;
+    api.common.OperatorContext operator_context = 3;
+    string template_name = 4;
+    string mobile_image = 5;
+    ClickAction mobile_click_action = 6;
+    string pc_image = 7;
+    ClickAction pc_click_action = 8;
+}
+
+message UpdateLandingTemplateResponse {}
+
+message DeleteLandingTemplateRequest {
+    int64 landing_template_id = 1;
+    api.common.OperatorContext operator_context = 2;
+}
+
+message DeleteLandingTemplateResponse {}
+
+message ListLandingTemplatesRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+}
+
+message ListLandingTemplatesResponse {
+    repeated LandingTemplate landing_templates = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message ListLandingTemplatesByCampaignRequest {
+    int64 campaign_id = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+}
+
+message ListLandingTemplatesByCampaignResponse {
+    repeated LandingTemplate landing_templates = 1;
+}
+
+// -------------- Landing Template Frontend (Public) Messages --------------
+
+message GetLandingTemplateConfigRequest {
+    optional int64 campaign_id = 1;
+    optional int64 landing_template_id = 2;
+}
+
+message GetLandingTemplateConfigResponse {
+    LandingTemplate landing_template = 1;
+    optional LandingPageSettings landing_page_settings = 2;
+}
+
+// -------------- Events --------------
 
 message ListEventsRequest {
     optional int64 affiliate_id = 1;

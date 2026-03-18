@@ -267,6 +267,43 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// -------------- Landing Template --------------
+
+	rpc CreateLandingTemplate(CreateLandingTemplateRequest) returns (api.affiliate.service.v1.CreateLandingTemplateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/landing-template/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdateLandingTemplate(UpdateLandingTemplateRequest) returns (api.affiliate.service.v1.UpdateLandingTemplateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/landing-template/update"
+			body: "*"
+		};
+	}
+
+	rpc DeleteLandingTemplate(DeleteLandingTemplateRequest) returns (api.affiliate.service.v1.DeleteLandingTemplateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/landing-template/delete"
+			body: "*"
+		};
+	}
+
+	rpc ListLandingTemplates(ListLandingTemplatesRequest) returns (api.affiliate.service.v1.ListLandingTemplatesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/landing-template/list"
+			body: "*"
+		};
+	}
+
+	rpc ListLandingTemplatesByCampaign(ListLandingTemplatesByCampaignRequest) returns (api.affiliate.service.v1.ListLandingTemplatesByCampaignResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/landing-template/list/by-campaign"
+			body: "*"
+		};
+	}
+
 	// -------------- Dashboard --------------
 
 	rpc GetAffiliateDashboard(GetAffiliateDashboardRequest) returns (api.affiliate.service.v1.GetAffiliateDashboardResponse) {
@@ -394,6 +431,7 @@ message UpdateCampaignRequest {
 	optional api.affiliate.service.v1.Campaign campaign = 2;
 	optional bool enabled = 3;
 	optional int64 target_affiliate_id = 4;
+	optional api.affiliate.service.v1.LandingPageSettings landing_page_settings = 5;
 }
 
 message ListCampaignsRequest {
@@ -594,4 +632,38 @@ message GetAffiliateTrendRequest {
 	google.protobuf.Timestamp start_time = 1;
 	google.protobuf.Timestamp end_time = 2;
 	string group_by = 3;  // "day", "week", "month"
+}
+
+// -------------- Landing Template --------------
+
+message CreateLandingTemplateRequest {
+	string template_name = 1;
+	string mobile_image = 2;
+	api.affiliate.service.v1.ClickAction mobile_click_action = 3;
+	string pc_image = 4;
+	api.affiliate.service.v1.ClickAction pc_click_action = 5;
+	api.common.OperatorContext target_operator_context = 6;
+}
+
+message UpdateLandingTemplateRequest {
+	int64 landing_template_id = 1;
+	string template_name = 2;
+	string mobile_image = 3;
+	api.affiliate.service.v1.ClickAction mobile_click_action = 4;
+	string pc_image = 5;
+	api.affiliate.service.v1.ClickAction pc_click_action = 6;
+}
+
+message DeleteLandingTemplateRequest {
+	int64 landing_template_id = 1;
+}
+
+message ListLandingTemplatesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message ListLandingTemplatesByCampaignRequest {
+	int64 campaign_id = 1;
 }

@@ -23,6 +23,7 @@ const (
 	BackofficeFileStore_UploadRegisterLoginBlacklist_FullMethodName     = "/api.backoffice.service.v1.BackofficeFileStore/UploadRegisterLoginBlacklist"
 	BackofficeFileStore_UploadVipLevelImage_FullMethodName              = "/api.backoffice.service.v1.BackofficeFileStore/UploadVipLevelImage"
 	BackofficeFileStore_UploadAffiliateRegistrationPhoto_FullMethodName = "/api.backoffice.service.v1.BackofficeFileStore/UploadAffiliateRegistrationPhoto"
+	BackofficeFileStore_UploadLandingTemplateImage_FullMethodName       = "/api.backoffice.service.v1.BackofficeFileStore/UploadLandingTemplateImage"
 )
 
 // BackofficeFileStoreClient is the client API for BackofficeFileStore service.
@@ -34,6 +35,7 @@ type BackofficeFileStoreClient interface {
 	UploadVipLevelImage(ctx context.Context, in *UploadVipLevelImageRequest, opts ...grpc.CallOption) (*UploadVipLevelImageResponse, error)
 	// Affiliate File Store
 	UploadAffiliateRegistrationPhoto(ctx context.Context, in *UploadAffiliateRegistrationPhotoRequest, opts ...grpc.CallOption) (*UploadAffiliateRegistrationPhotoResponse, error)
+	UploadLandingTemplateImage(ctx context.Context, in *UploadLandingTemplateImageRequest, opts ...grpc.CallOption) (*UploadLandingTemplateImageResponse, error)
 }
 
 type backofficeFileStoreClient struct {
@@ -84,6 +86,16 @@ func (c *backofficeFileStoreClient) UploadAffiliateRegistrationPhoto(ctx context
 	return out, nil
 }
 
+func (c *backofficeFileStoreClient) UploadLandingTemplateImage(ctx context.Context, in *UploadLandingTemplateImageRequest, opts ...grpc.CallOption) (*UploadLandingTemplateImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadLandingTemplateImageResponse)
+	err := c.cc.Invoke(ctx, BackofficeFileStore_UploadLandingTemplateImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFileStoreServer is the server API for BackofficeFileStore service.
 // All implementations must embed UnimplementedBackofficeFileStoreServer
 // for forward compatibility.
@@ -93,6 +105,7 @@ type BackofficeFileStoreServer interface {
 	UploadVipLevelImage(context.Context, *UploadVipLevelImageRequest) (*UploadVipLevelImageResponse, error)
 	// Affiliate File Store
 	UploadAffiliateRegistrationPhoto(context.Context, *UploadAffiliateRegistrationPhotoRequest) (*UploadAffiliateRegistrationPhotoResponse, error)
+	UploadLandingTemplateImage(context.Context, *UploadLandingTemplateImageRequest) (*UploadLandingTemplateImageResponse, error)
 	mustEmbedUnimplementedBackofficeFileStoreServer()
 }
 
@@ -114,6 +127,9 @@ func (UnimplementedBackofficeFileStoreServer) UploadVipLevelImage(context.Contex
 }
 func (UnimplementedBackofficeFileStoreServer) UploadAffiliateRegistrationPhoto(context.Context, *UploadAffiliateRegistrationPhotoRequest) (*UploadAffiliateRegistrationPhotoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UploadAffiliateRegistrationPhoto not implemented")
+}
+func (UnimplementedBackofficeFileStoreServer) UploadLandingTemplateImage(context.Context, *UploadLandingTemplateImageRequest) (*UploadLandingTemplateImageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UploadLandingTemplateImage not implemented")
 }
 func (UnimplementedBackofficeFileStoreServer) mustEmbedUnimplementedBackofficeFileStoreServer() {}
 func (UnimplementedBackofficeFileStoreServer) testEmbeddedByValue()                             {}
@@ -208,6 +224,24 @@ func _BackofficeFileStore_UploadAffiliateRegistrationPhoto_Handler(srv interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFileStore_UploadLandingTemplateImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadLandingTemplateImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFileStoreServer).UploadLandingTemplateImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFileStore_UploadLandingTemplateImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFileStoreServer).UploadLandingTemplateImage(ctx, req.(*UploadLandingTemplateImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFileStore_ServiceDesc is the grpc.ServiceDesc for BackofficeFileStore service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -230,6 +264,10 @@ var BackofficeFileStore_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UploadAffiliateRegistrationPhoto",
 			Handler:    _BackofficeFileStore_UploadAffiliateRegistrationPhoto_Handler,
+		},
+		{
+			MethodName: "UploadLandingTemplateImage",
+			Handler:    _BackofficeFileStore_UploadLandingTemplateImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

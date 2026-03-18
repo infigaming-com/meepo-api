@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationAffiliateClaimUserReferralRewards = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
 const OperationAffiliateClaimUserReferralRewardsAllCurrencies = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewardsAllCurrencies"
 const OperationAffiliateCreateUserReferralCode = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
+const OperationAffiliateGetLandingTemplateConfig = "/api.affiliate.service.v1.Affiliate/GetLandingTemplateConfig"
 const OperationAffiliateGetUserLossRevenueShareStats = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
 const OperationAffiliateGetUserReferralPlan = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
 const OperationAffiliateGetUserReferralRewards = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
@@ -33,6 +34,8 @@ type AffiliateHTTPServer interface {
 	ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error)
 	ClaimUserReferralRewardsAllCurrencies(context.Context, *ClaimUserReferralRewardsAllCurrenciesRequest) (*ClaimUserReferralRewardsAllCurrenciesResponse, error)
 	CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error)
+	// GetLandingTemplateConfig GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+	GetLandingTemplateConfig(context.Context, *GetLandingTemplateConfigRequest) (*GetLandingTemplateConfigResponse, error)
 	GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error)
 	GetUserReferralPlan(context.Context, *GetUserReferralPlanRequest) (*GetUserReferralPlanResponse, error)
 	GetUserReferralRewards(context.Context, *GetUserReferralRewardsRequest) (*GetUserReferralRewardsResponse, error)
@@ -52,6 +55,7 @@ func RegisterAffiliateHTTPServer(s *http.Server, srv AffiliateHTTPServer) {
 	r.POST("/v1/affiliate/user/referral/rewards/all-currencies/get", _Affiliate_GetUserReferralRewardsAllCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/affiliate/user/referral/rewards/all-currencies/claim", _Affiliate_ClaimUserReferralRewardsAllCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/affiliate/user/loss/revenue/share/stats/get", _Affiliate_GetUserLossRevenueShareStats0_HTTP_Handler(srv))
+	r.POST("/v1/affiliate/landing-template/config/get", _Affiliate_GetLandingTemplateConfig0_HTTP_Handler(srv))
 }
 
 func _Affiliate_GetUserReferralPlan0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
@@ -252,10 +256,34 @@ func _Affiliate_GetUserLossRevenueShareStats0_HTTP_Handler(srv AffiliateHTTPServ
 	}
 }
 
+func _Affiliate_GetLandingTemplateConfig0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetLandingTemplateConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAffiliateGetLandingTemplateConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetLandingTemplateConfig(ctx, req.(*GetLandingTemplateConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetLandingTemplateConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AffiliateHTTPClient interface {
 	ClaimUserReferralRewards(ctx context.Context, req *ClaimUserReferralRewardsRequest, opts ...http.CallOption) (rsp *ClaimUserReferralRewardsResponse, err error)
 	ClaimUserReferralRewardsAllCurrencies(ctx context.Context, req *ClaimUserReferralRewardsAllCurrenciesRequest, opts ...http.CallOption) (rsp *ClaimUserReferralRewardsAllCurrenciesResponse, err error)
 	CreateUserReferralCode(ctx context.Context, req *CreateUserReferralCodeRequest, opts ...http.CallOption) (rsp *CreateUserReferralCodeResponse, err error)
+	// GetLandingTemplateConfig GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+	GetLandingTemplateConfig(ctx context.Context, req *GetLandingTemplateConfigRequest, opts ...http.CallOption) (rsp *GetLandingTemplateConfigResponse, err error)
 	GetUserLossRevenueShareStats(ctx context.Context, req *GetUserLossRevenueShareStatsRequest, opts ...http.CallOption) (rsp *GetUserLossRevenueShareStatsResponse, err error)
 	GetUserReferralPlan(ctx context.Context, req *GetUserReferralPlanRequest, opts ...http.CallOption) (rsp *GetUserReferralPlanResponse, err error)
 	GetUserReferralRewards(ctx context.Context, req *GetUserReferralRewardsRequest, opts ...http.CallOption) (rsp *GetUserReferralRewardsResponse, err error)
@@ -303,6 +331,20 @@ func (c *AffiliateHTTPClientImpl) CreateUserReferralCode(ctx context.Context, in
 	pattern := "/v1/affiliate/user/referral/code/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAffiliateCreateUserReferralCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// GetLandingTemplateConfig GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+func (c *AffiliateHTTPClientImpl) GetLandingTemplateConfig(ctx context.Context, in *GetLandingTemplateConfigRequest, opts ...http.CallOption) (*GetLandingTemplateConfigResponse, error) {
+	var out GetLandingTemplateConfigResponse
+	pattern := "/v1/affiliate/landing-template/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAffiliateGetLandingTemplateConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
