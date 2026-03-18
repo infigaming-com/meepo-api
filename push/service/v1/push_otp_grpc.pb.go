@@ -19,26 +19,64 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PushOTP_SendOTP_FullMethodName               = "/api.push.service.v1.PushOTP/SendOTP"
-	PushOTP_CreateOTPProvider_FullMethodName     = "/api.push.service.v1.PushOTP/CreateOTPProvider"
-	PushOTP_UpdateOTPProvider_FullMethodName     = "/api.push.service.v1.PushOTP/UpdateOTPProvider"
-	PushOTP_DeleteOTPProvider_FullMethodName     = "/api.push.service.v1.PushOTP/DeleteOTPProvider"
-	PushOTP_GetOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/GetOTPProvider"
-	PushOTP_ListOTPProviders_FullMethodName      = "/api.push.service.v1.PushOTP/ListOTPProviders"
-	PushOTP_CreateOTPTemplate_FullMethodName     = "/api.push.service.v1.PushOTP/CreateOTPTemplate"
-	PushOTP_UpdateOTPTemplate_FullMethodName     = "/api.push.service.v1.PushOTP/UpdateOTPTemplate"
-	PushOTP_DeleteOTPTemplate_FullMethodName     = "/api.push.service.v1.PushOTP/DeleteOTPTemplate"
-	PushOTP_GetOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/GetOTPTemplate"
-	PushOTP_ListOTPTemplates_FullMethodName      = "/api.push.service.v1.PushOTP/ListOTPTemplates"
-	PushOTP_SyncOTPTemplateStatus_FullMethodName = "/api.push.service.v1.PushOTP/SyncOTPTemplateStatus"
-	PushOTP_ListOTPSendLogs_FullMethodName       = "/api.push.service.v1.PushOTP/ListOTPSendLogs"
+	PushOTP_SendOTP_FullMethodName                  = "/api.push.service.v1.PushOTP/SendOTP"
+	PushOTP_CreateOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/CreateOTPProvider"
+	PushOTP_UpdateOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/UpdateOTPProvider"
+	PushOTP_DeleteOTPProvider_FullMethodName        = "/api.push.service.v1.PushOTP/DeleteOTPProvider"
+	PushOTP_GetOTPProvider_FullMethodName           = "/api.push.service.v1.PushOTP/GetOTPProvider"
+	PushOTP_ListOTPProviders_FullMethodName         = "/api.push.service.v1.PushOTP/ListOTPProviders"
+	PushOTP_CreateOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/CreateOTPProviderBinding"
+	PushOTP_UpdateOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/UpdateOTPProviderBinding"
+	PushOTP_DeleteOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/DeleteOTPProviderBinding"
+	PushOTP_ListOTPProviderBindings_FullMethodName  = "/api.push.service.v1.PushOTP/ListOTPProviderBindings"
+	PushOTP_CreateOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/CreateOTPTemplate"
+	PushOTP_UpdateOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/UpdateOTPTemplate"
+	PushOTP_DeleteOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/DeleteOTPTemplate"
+	PushOTP_GetOTPTemplate_FullMethodName           = "/api.push.service.v1.PushOTP/GetOTPTemplate"
+	PushOTP_ListOTPTemplates_FullMethodName         = "/api.push.service.v1.PushOTP/ListOTPTemplates"
+	PushOTP_SyncOTPTemplateStatus_FullMethodName    = "/api.push.service.v1.PushOTP/SyncOTPTemplateStatus"
+	PushOTP_ListOTPSendLogs_FullMethodName          = "/api.push.service.v1.PushOTP/ListOTPSendLogs"
 )
 
 // PushOTPClient is the client API for PushOTP service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// PushOTP service for OTP delivery, provider/template management, and send logs
+// PushOTP service for OTP delivery, provider/template management, and send logs.
+//
+// ## Architecture (3-layer model)
+//
+// The OTP system uses a decoupled 3-layer model:
+//
+//	Provider  — Third-party service credentials & config (e.g., EngageLab account).
+//	            Created once, reusable across multiple countries and operators.
+//	            Identified by owner_operator_id (who created it).
+//
+//	Binding   — Maps a Provider to an operator+country for routing.
+//	            Controls enabled/disabled, priority, and phone prefix filtering.
+//	            One provider can have multiple bindings (different countries/operators).
+//	            Multiple bindings per (operator, country) are allowed, ordered by priority.
+//
+//	Template  — Message content bound to a Provider, per business scenario.
+//	            Scoped to (operator, country, template_type, language).
+//
+// ## Routing chain (when SendOTP is called for a phone number)
+//
+// The system resolves a provider binding using this fallback chain (first match wins):
+//
+//	For each level: operator → company_operator → retailer_operator → system_operator:
+//	  1. (level_id, user's country, enabled=true) ORDER BY priority ASC
+//	  2. (level_id, "global",       enabled=true) ORDER BY priority ASC
+//	Within each binding, phone_prefixes are checked (empty = match all).
+//	The first binding whose phone prefix matches (or is empty) wins.
+//
+// Template resolution follows a similar chain with additional language fallback:
+//
+//	For each level: operator → company_operator → retailer_operator → system_operator:
+//	  1. (level_id, country, template_type, language)
+//	  2. (level_id, country, template_type, "en")
+//	  3. (level_id, "global", template_type, language)
+//	  4. (level_id, "global", template_type, "en")
 type PushOTPClient interface {
 	// ====== Inter-service: OTP delivery ======
 	SendOTP(ctx context.Context, in *SendOTPRequest, opts ...grpc.CallOption) (*SendOTPResponse, error)
@@ -48,6 +86,11 @@ type PushOTPClient interface {
 	DeleteOTPProvider(ctx context.Context, in *DeleteOTPProviderRequest, opts ...grpc.CallOption) (*DeleteOTPProviderResponse, error)
 	GetOTPProvider(ctx context.Context, in *GetOTPProviderRequest, opts ...grpc.CallOption) (*GetOTPProviderResponse, error)
 	ListOTPProviders(ctx context.Context, in *ListOTPProvidersRequest, opts ...grpc.CallOption) (*ListOTPProvidersResponse, error)
+	// ====== Backoffice: Provider Binding CRUD ======
+	CreateOTPProviderBinding(ctx context.Context, in *CreateOTPProviderBindingRequest, opts ...grpc.CallOption) (*CreateOTPProviderBindingResponse, error)
+	UpdateOTPProviderBinding(ctx context.Context, in *UpdateOTPProviderBindingRequest, opts ...grpc.CallOption) (*UpdateOTPProviderBindingResponse, error)
+	DeleteOTPProviderBinding(ctx context.Context, in *DeleteOTPProviderBindingRequest, opts ...grpc.CallOption) (*DeleteOTPProviderBindingResponse, error)
+	ListOTPProviderBindings(ctx context.Context, in *ListOTPProviderBindingsRequest, opts ...grpc.CallOption) (*ListOTPProviderBindingsResponse, error)
 	// ====== Backoffice: Template CRUD ======
 	CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*CreateOTPTemplateResponse, error)
 	UpdateOTPTemplate(ctx context.Context, in *UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*UpdateOTPTemplateResponse, error)
@@ -121,6 +164,46 @@ func (c *pushOTPClient) ListOTPProviders(ctx context.Context, in *ListOTPProvide
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOTPProvidersResponse)
 	err := c.cc.Invoke(ctx, PushOTP_ListOTPProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) CreateOTPProviderBinding(ctx context.Context, in *CreateOTPProviderBindingRequest, opts ...grpc.CallOption) (*CreateOTPProviderBindingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOTPProviderBindingResponse)
+	err := c.cc.Invoke(ctx, PushOTP_CreateOTPProviderBinding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) UpdateOTPProviderBinding(ctx context.Context, in *UpdateOTPProviderBindingRequest, opts ...grpc.CallOption) (*UpdateOTPProviderBindingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOTPProviderBindingResponse)
+	err := c.cc.Invoke(ctx, PushOTP_UpdateOTPProviderBinding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) DeleteOTPProviderBinding(ctx context.Context, in *DeleteOTPProviderBindingRequest, opts ...grpc.CallOption) (*DeleteOTPProviderBindingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOTPProviderBindingResponse)
+	err := c.cc.Invoke(ctx, PushOTP_DeleteOTPProviderBinding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) ListOTPProviderBindings(ctx context.Context, in *ListOTPProviderBindingsRequest, opts ...grpc.CallOption) (*ListOTPProviderBindingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOTPProviderBindingsResponse)
+	err := c.cc.Invoke(ctx, PushOTP_ListOTPProviderBindings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -201,7 +284,41 @@ func (c *pushOTPClient) ListOTPSendLogs(ctx context.Context, in *ListOTPSendLogs
 // All implementations must embed UnimplementedPushOTPServer
 // for forward compatibility.
 //
-// PushOTP service for OTP delivery, provider/template management, and send logs
+// PushOTP service for OTP delivery, provider/template management, and send logs.
+//
+// ## Architecture (3-layer model)
+//
+// The OTP system uses a decoupled 3-layer model:
+//
+//	Provider  — Third-party service credentials & config (e.g., EngageLab account).
+//	            Created once, reusable across multiple countries and operators.
+//	            Identified by owner_operator_id (who created it).
+//
+//	Binding   — Maps a Provider to an operator+country for routing.
+//	            Controls enabled/disabled, priority, and phone prefix filtering.
+//	            One provider can have multiple bindings (different countries/operators).
+//	            Multiple bindings per (operator, country) are allowed, ordered by priority.
+//
+//	Template  — Message content bound to a Provider, per business scenario.
+//	            Scoped to (operator, country, template_type, language).
+//
+// ## Routing chain (when SendOTP is called for a phone number)
+//
+// The system resolves a provider binding using this fallback chain (first match wins):
+//
+//	For each level: operator → company_operator → retailer_operator → system_operator:
+//	  1. (level_id, user's country, enabled=true) ORDER BY priority ASC
+//	  2. (level_id, "global",       enabled=true) ORDER BY priority ASC
+//	Within each binding, phone_prefixes are checked (empty = match all).
+//	The first binding whose phone prefix matches (or is empty) wins.
+//
+// Template resolution follows a similar chain with additional language fallback:
+//
+//	For each level: operator → company_operator → retailer_operator → system_operator:
+//	  1. (level_id, country, template_type, language)
+//	  2. (level_id, country, template_type, "en")
+//	  3. (level_id, "global", template_type, language)
+//	  4. (level_id, "global", template_type, "en")
 type PushOTPServer interface {
 	// ====== Inter-service: OTP delivery ======
 	SendOTP(context.Context, *SendOTPRequest) (*SendOTPResponse, error)
@@ -211,6 +328,11 @@ type PushOTPServer interface {
 	DeleteOTPProvider(context.Context, *DeleteOTPProviderRequest) (*DeleteOTPProviderResponse, error)
 	GetOTPProvider(context.Context, *GetOTPProviderRequest) (*GetOTPProviderResponse, error)
 	ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*ListOTPProvidersResponse, error)
+	// ====== Backoffice: Provider Binding CRUD ======
+	CreateOTPProviderBinding(context.Context, *CreateOTPProviderBindingRequest) (*CreateOTPProviderBindingResponse, error)
+	UpdateOTPProviderBinding(context.Context, *UpdateOTPProviderBindingRequest) (*UpdateOTPProviderBindingResponse, error)
+	DeleteOTPProviderBinding(context.Context, *DeleteOTPProviderBindingRequest) (*DeleteOTPProviderBindingResponse, error)
+	ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*ListOTPProviderBindingsResponse, error)
 	// ====== Backoffice: Template CRUD ======
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*CreateOTPTemplateResponse, error)
 	UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*UpdateOTPTemplateResponse, error)
@@ -247,6 +369,18 @@ func (UnimplementedPushOTPServer) GetOTPProvider(context.Context, *GetOTPProvide
 }
 func (UnimplementedPushOTPServer) ListOTPProviders(context.Context, *ListOTPProvidersRequest) (*ListOTPProvidersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPProviders not implemented")
+}
+func (UnimplementedPushOTPServer) CreateOTPProviderBinding(context.Context, *CreateOTPProviderBindingRequest) (*CreateOTPProviderBindingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateOTPProviderBinding not implemented")
+}
+func (UnimplementedPushOTPServer) UpdateOTPProviderBinding(context.Context, *UpdateOTPProviderBindingRequest) (*UpdateOTPProviderBindingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateOTPProviderBinding not implemented")
+}
+func (UnimplementedPushOTPServer) DeleteOTPProviderBinding(context.Context, *DeleteOTPProviderBindingRequest) (*DeleteOTPProviderBindingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteOTPProviderBinding not implemented")
+}
+func (UnimplementedPushOTPServer) ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*ListOTPProviderBindingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOTPProviderBindings not implemented")
 }
 func (UnimplementedPushOTPServer) CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*CreateOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOTPTemplate not implemented")
@@ -394,6 +528,78 @@ func _PushOTP_ListOTPProviders_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PushOTPServer).ListOTPProviders(ctx, req.(*ListOTPProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_CreateOTPProviderBinding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOTPProviderBindingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).CreateOTPProviderBinding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_CreateOTPProviderBinding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).CreateOTPProviderBinding(ctx, req.(*CreateOTPProviderBindingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_UpdateOTPProviderBinding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOTPProviderBindingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).UpdateOTPProviderBinding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_UpdateOTPProviderBinding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).UpdateOTPProviderBinding(ctx, req.(*UpdateOTPProviderBindingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_DeleteOTPProviderBinding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOTPProviderBindingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).DeleteOTPProviderBinding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_DeleteOTPProviderBinding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).DeleteOTPProviderBinding(ctx, req.(*DeleteOTPProviderBindingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_ListOTPProviderBindings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOTPProviderBindingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).ListOTPProviderBindings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_ListOTPProviderBindings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).ListOTPProviderBindings(ctx, req.(*ListOTPProviderBindingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -554,6 +760,22 @@ var PushOTP_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOTPProviders",
 			Handler:    _PushOTP_ListOTPProviders_Handler,
+		},
+		{
+			MethodName: "CreateOTPProviderBinding",
+			Handler:    _PushOTP_CreateOTPProviderBinding_Handler,
+		},
+		{
+			MethodName: "UpdateOTPProviderBinding",
+			Handler:    _PushOTP_UpdateOTPProviderBinding_Handler,
+		},
+		{
+			MethodName: "DeleteOTPProviderBinding",
+			Handler:    _PushOTP_DeleteOTPProviderBinding_Handler,
+		},
+		{
+			MethodName: "ListOTPProviderBindings",
+			Handler:    _PushOTP_ListOTPProviderBindings_Handler,
 		},
 		{
 			MethodName: "CreateOTPTemplate",
