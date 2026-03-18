@@ -23355,6 +23355,8 @@ components:
                     type: string
                 filePath:
                     type: string
+                imageType:
+                    type: string
         api.backoffice.service.v1.UploadLandingTemplateImageResponse:
             type: object
             properties:

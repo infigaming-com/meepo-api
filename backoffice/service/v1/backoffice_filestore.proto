@@ -90,6 +90,7 @@ message UploadLandingTemplateImageRequest {
 	bytes data = 1;
 	string content_type = 2;
 	string file_path = 3;
+	string image_type = 4; // "mobile" or "pc"
 }
 
 message UploadLandingTemplateImageResponse {

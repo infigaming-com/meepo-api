@@ -460,6 +460,7 @@ type UploadLandingTemplateImageRequest struct {
 	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	ContentType   string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
 	FilePath      string                 `protobuf:"bytes,3,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	ImageType     string                 `protobuf:"bytes,4,opt,name=image_type,json=imageType,proto3" json:"image_type,omitempty"` // "mobile" or "pc"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -511,6 +512,13 @@ func (x *UploadLandingTemplateImageRequest) GetContentType() string {
 func (x *UploadLandingTemplateImageRequest) GetFilePath() string {
 	if x != nil {
 		return x.FilePath
+	}
+	return ""
+}
+
+func (x *UploadLandingTemplateImageRequest) GetImageType() string {
+	if x != nil {
+		return x.ImageType
 	}
 	return ""
 }
@@ -589,11 +597,13 @@ const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
 	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x1b\n" +
 	"\tfile_path\x18\x03 \x01(\tR\bfilePath\"E\n" +
 	"(UploadAffiliateRegistrationPhotoResponse\x12\x19\n" +
-	"\bfile_url\x18\x01 \x01(\tR\afileUrl\"w\n" +
+	"\bfile_url\x18\x01 \x01(\tR\afileUrl\"\x96\x01\n" +
 	"!UploadLandingTemplateImageRequest\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\x12!\n" +
 	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x1b\n" +
-	"\tfile_path\x18\x03 \x01(\tR\bfilePath\"?\n" +
+	"\tfile_path\x18\x03 \x01(\tR\bfilePath\x12\x1d\n" +
+	"\n" +
+	"image_type\x18\x04 \x01(\tR\timageType\"?\n" +
 	"\"UploadLandingTemplateImageResponse\x12\x19\n" +
 	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\xf8\b\n" +
 	"\x13BackofficeFileStore\x12\xd5\x01\n" +

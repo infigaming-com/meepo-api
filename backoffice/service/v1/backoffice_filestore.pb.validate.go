@@ -989,6 +989,8 @@ func (m *UploadLandingTemplateImageRequest) validate(all bool) error {
 
 	// no validation rules for FilePath
 
+	// no validation rules for ImageType
+
 	if len(errors) > 0 {
 		return UploadLandingTemplateImageRequestMultiError(errors)
 	}
