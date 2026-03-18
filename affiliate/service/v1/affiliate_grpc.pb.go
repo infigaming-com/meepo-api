@@ -59,6 +59,12 @@ const (
 	Affiliate_GetUserReferralRewardsAllCurrencies_FullMethodName   = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewardsAllCurrencies"
 	Affiliate_ClaimUserReferralRewardsAllCurrencies_FullMethodName = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewardsAllCurrencies"
 	Affiliate_GetUserLossRevenueShareStats_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
+	Affiliate_CreateLandingTemplate_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreateLandingTemplate"
+	Affiliate_UpdateLandingTemplate_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdateLandingTemplate"
+	Affiliate_DeleteLandingTemplate_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/DeleteLandingTemplate"
+	Affiliate_ListLandingTemplates_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListLandingTemplates"
+	Affiliate_ListLandingTemplatesByCampaign_FullMethodName        = "/api.affiliate.service.v1.Affiliate/ListLandingTemplatesByCampaign"
+	Affiliate_GetLandingTemplateConfig_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetLandingTemplateConfig"
 	Affiliate_GetUserPromoConditionInfo_FullMethodName             = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
 	Affiliate_GetOperatorSettings_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
 	Affiliate_UpdateOperatorSettings_FullMethodName                = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
@@ -116,6 +122,13 @@ type AffiliateClient interface {
 	GetUserReferralRewardsAllCurrencies(ctx context.Context, in *GetUserReferralRewardsAllCurrenciesRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsAllCurrenciesResponse, error)
 	ClaimUserReferralRewardsAllCurrencies(ctx context.Context, in *ClaimUserReferralRewardsAllCurrenciesRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsAllCurrenciesResponse, error)
 	GetUserLossRevenueShareStats(ctx context.Context, in *GetUserLossRevenueShareStatsRequest, opts ...grpc.CallOption) (*GetUserLossRevenueShareStatsResponse, error)
+	CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*CreateLandingTemplateResponse, error)
+	UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*UpdateLandingTemplateResponse, error)
+	DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*DeleteLandingTemplateResponse, error)
+	ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*ListLandingTemplatesResponse, error)
+	ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*ListLandingTemplatesByCampaignResponse, error)
+	// GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+	GetLandingTemplateConfig(ctx context.Context, in *GetLandingTemplateConfigRequest, opts ...grpc.CallOption) (*GetLandingTemplateConfigResponse, error)
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
@@ -547,6 +560,66 @@ func (c *affiliateClient) GetUserLossRevenueShareStats(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *affiliateClient) CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*CreateLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, Affiliate_CreateLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*UpdateLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, Affiliate_UpdateLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*DeleteLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, Affiliate_DeleteLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*ListLandingTemplatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLandingTemplatesResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListLandingTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*ListLandingTemplatesByCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLandingTemplatesByCampaignResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListLandingTemplatesByCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) GetLandingTemplateConfig(ctx context.Context, in *GetLandingTemplateConfigRequest, opts ...grpc.CallOption) (*GetLandingTemplateConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLandingTemplateConfigResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetLandingTemplateConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserPromoConditionInfoResponse)
@@ -701,6 +774,13 @@ type AffiliateServer interface {
 	GetUserReferralRewardsAllCurrencies(context.Context, *GetUserReferralRewardsAllCurrenciesRequest) (*GetUserReferralRewardsAllCurrenciesResponse, error)
 	ClaimUserReferralRewardsAllCurrencies(context.Context, *ClaimUserReferralRewardsAllCurrenciesRequest) (*ClaimUserReferralRewardsAllCurrenciesResponse, error)
 	GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error)
+	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*CreateLandingTemplateResponse, error)
+	UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*UpdateLandingTemplateResponse, error)
+	DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*DeleteLandingTemplateResponse, error)
+	ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*ListLandingTemplatesResponse, error)
+	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*ListLandingTemplatesByCampaignResponse, error)
+	// GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+	GetLandingTemplateConfig(context.Context, *GetLandingTemplateConfigRequest) (*GetLandingTemplateConfigResponse, error)
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
@@ -851,6 +931,24 @@ func (UnimplementedAffiliateServer) ClaimUserReferralRewardsAllCurrencies(contex
 }
 func (UnimplementedAffiliateServer) GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserLossRevenueShareStats not implemented")
+}
+func (UnimplementedAffiliateServer) CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*CreateLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateLandingTemplate not implemented")
+}
+func (UnimplementedAffiliateServer) UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*UpdateLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateLandingTemplate not implemented")
+}
+func (UnimplementedAffiliateServer) DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*DeleteLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteLandingTemplate not implemented")
+}
+func (UnimplementedAffiliateServer) ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*ListLandingTemplatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLandingTemplates not implemented")
+}
+func (UnimplementedAffiliateServer) ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*ListLandingTemplatesByCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLandingTemplatesByCampaign not implemented")
+}
+func (UnimplementedAffiliateServer) GetLandingTemplateConfig(context.Context, *GetLandingTemplateConfigRequest) (*GetLandingTemplateConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLandingTemplateConfig not implemented")
 }
 func (UnimplementedAffiliateServer) GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserPromoConditionInfo not implemented")
@@ -1626,6 +1724,114 @@ func _Affiliate_GetUserLossRevenueShareStats_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_CreateLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).CreateLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_CreateLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).CreateLandingTemplate(ctx, req.(*CreateLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_UpdateLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).UpdateLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_UpdateLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).UpdateLandingTemplate(ctx, req.(*UpdateLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_DeleteLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).DeleteLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_DeleteLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).DeleteLandingTemplate(ctx, req.(*DeleteLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListLandingTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLandingTemplatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListLandingTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListLandingTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListLandingTemplates(ctx, req.(*ListLandingTemplatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListLandingTemplatesByCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLandingTemplatesByCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListLandingTemplatesByCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListLandingTemplatesByCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListLandingTemplatesByCampaign(ctx, req.(*ListLandingTemplatesByCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_GetLandingTemplateConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLandingTemplateConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetLandingTemplateConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetLandingTemplateConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetLandingTemplateConfig(ctx, req.(*GetLandingTemplateConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_GetUserPromoConditionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserPromoConditionInfoRequest)
 	if err := dec(in); err != nil {
@@ -1990,6 +2196,30 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserLossRevenueShareStats",
 			Handler:    _Affiliate_GetUserLossRevenueShareStats_Handler,
+		},
+		{
+			MethodName: "CreateLandingTemplate",
+			Handler:    _Affiliate_CreateLandingTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateLandingTemplate",
+			Handler:    _Affiliate_UpdateLandingTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteLandingTemplate",
+			Handler:    _Affiliate_DeleteLandingTemplate_Handler,
+		},
+		{
+			MethodName: "ListLandingTemplates",
+			Handler:    _Affiliate_ListLandingTemplates_Handler,
+		},
+		{
+			MethodName: "ListLandingTemplatesByCampaign",
+			Handler:    _Affiliate_ListLandingTemplatesByCampaign_Handler,
+		},
+		{
+			MethodName: "GetLandingTemplateConfig",
+			Handler:    _Affiliate_GetLandingTemplateConfig_Handler,
 		},
 		{
 			MethodName: "GetUserPromoConditionInfo",

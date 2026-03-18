@@ -959,3 +959,221 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UploadAffiliateRegistrationPhotoResponseValidationError{}
+
+// Validate checks the field values on UploadLandingTemplateImageRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UploadLandingTemplateImageRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadLandingTemplateImageRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UploadLandingTemplateImageRequestMultiError, or nil if none found.
+func (m *UploadLandingTemplateImageRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadLandingTemplateImageRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Data
+
+	// no validation rules for ContentType
+
+	// no validation rules for FilePath
+
+	if len(errors) > 0 {
+		return UploadLandingTemplateImageRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadLandingTemplateImageRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UploadLandingTemplateImageRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UploadLandingTemplateImageRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadLandingTemplateImageRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadLandingTemplateImageRequestMultiError) AllErrors() []error { return m }
+
+// UploadLandingTemplateImageRequestValidationError is the validation error
+// returned by UploadLandingTemplateImageRequest.Validate if the designated
+// constraints aren't met.
+type UploadLandingTemplateImageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadLandingTemplateImageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadLandingTemplateImageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadLandingTemplateImageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadLandingTemplateImageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadLandingTemplateImageRequestValidationError) ErrorName() string {
+	return "UploadLandingTemplateImageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadLandingTemplateImageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadLandingTemplateImageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadLandingTemplateImageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadLandingTemplateImageRequestValidationError{}
+
+// Validate checks the field values on UploadLandingTemplateImageResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UploadLandingTemplateImageResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadLandingTemplateImageResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UploadLandingTemplateImageResponseMultiError, or nil if none found.
+func (m *UploadLandingTemplateImageResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadLandingTemplateImageResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FileUrl
+
+	if len(errors) > 0 {
+		return UploadLandingTemplateImageResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadLandingTemplateImageResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// UploadLandingTemplateImageResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UploadLandingTemplateImageResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadLandingTemplateImageResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadLandingTemplateImageResponseMultiError) AllErrors() []error { return m }
+
+// UploadLandingTemplateImageResponseValidationError is the validation error
+// returned by UploadLandingTemplateImageResponse.Validate if the designated
+// constraints aren't met.
+type UploadLandingTemplateImageResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadLandingTemplateImageResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadLandingTemplateImageResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadLandingTemplateImageResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadLandingTemplateImageResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadLandingTemplateImageResponseValidationError) ErrorName() string {
+	return "UploadLandingTemplateImageResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadLandingTemplateImageResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadLandingTemplateImageResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadLandingTemplateImageResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadLandingTemplateImageResponseValidationError{}
