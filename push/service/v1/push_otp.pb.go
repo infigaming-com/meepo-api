@@ -1953,6 +1953,214 @@ func (x *ListOTPProviderBindingsResponse) GetPageSize() int32 {
 	return 0
 }
 
+// ListOTPBindingCountriesRequest returns the distinct countries configured
+// for an operator via provider bindings.
+type ListOTPBindingCountriesRequest struct {
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// If set, only count bindings with this enabled status
+	Enabled       *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOTPBindingCountriesRequest) Reset() {
+	*x = ListOTPBindingCountriesRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOTPBindingCountriesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOTPBindingCountriesRequest) ProtoMessage() {}
+
+func (x *ListOTPBindingCountriesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOTPBindingCountriesRequest.ProtoReflect.Descriptor instead.
+func (*ListOTPBindingCountriesRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ListOTPBindingCountriesRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *ListOTPBindingCountriesRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+type ListOTPBindingCountriesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Distinct country codes (e.g., ["BR", "JP", "global"])
+	Countries []string `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
+	// Number of distinct countries
+	Total         int32 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOTPBindingCountriesResponse) Reset() {
+	*x = ListOTPBindingCountriesResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOTPBindingCountriesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOTPBindingCountriesResponse) ProtoMessage() {}
+
+func (x *ListOTPBindingCountriesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOTPBindingCountriesResponse.ProtoReflect.Descriptor instead.
+func (*ListOTPBindingCountriesResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListOTPBindingCountriesResponse) GetCountries() []string {
+	if x != nil {
+		return x.Countries
+	}
+	return nil
+}
+
+func (x *ListOTPBindingCountriesResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// CheckOTPBindingCountryRequest checks whether an operator has at least one
+// enabled provider binding for a specific country.
+type CheckOTPBindingCountryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOTPBindingCountryRequest) Reset() {
+	*x = CheckOTPBindingCountryRequest{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOTPBindingCountryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOTPBindingCountryRequest) ProtoMessage() {}
+
+func (x *CheckOTPBindingCountryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOTPBindingCountryRequest.ProtoReflect.Descriptor instead.
+func (*CheckOTPBindingCountryRequest) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *CheckOTPBindingCountryRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *CheckOTPBindingCountryRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+type CheckOTPBindingCountryResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// true if at least one enabled binding exists for this operator+country
+	Configured    bool `protobuf:"varint,1,opt,name=configured,proto3" json:"configured,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOTPBindingCountryResponse) Reset() {
+	*x = CheckOTPBindingCountryResponse{}
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOTPBindingCountryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOTPBindingCountryResponse) ProtoMessage() {}
+
+func (x *CheckOTPBindingCountryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOTPBindingCountryResponse.ProtoReflect.Descriptor instead.
+func (*CheckOTPBindingCountryResponse) Descriptor() ([]byte, []int) {
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *CheckOTPBindingCountryResponse) GetConfigured() bool {
+	if x != nil {
+		return x.Configured
+	}
+	return false
+}
+
 // OTPTemplateInfo represents an OTP message template configuration.
 //
 // A Template defines the message content sent to the end-user. It is bound to a
@@ -1995,7 +2203,7 @@ type OTPTemplateInfo struct {
 
 func (x *OTPTemplateInfo) Reset() {
 	*x = OTPTemplateInfo{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[22]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2007,7 +2215,7 @@ func (x *OTPTemplateInfo) String() string {
 func (*OTPTemplateInfo) ProtoMessage() {}
 
 func (x *OTPTemplateInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[22]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2020,7 +2228,7 @@ func (x *OTPTemplateInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OTPTemplateInfo.ProtoReflect.Descriptor instead.
 func (*OTPTemplateInfo) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{22}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *OTPTemplateInfo) GetId() int64 {
@@ -2195,7 +2403,7 @@ type CreateOTPTemplateRequest struct {
 
 func (x *CreateOTPTemplateRequest) Reset() {
 	*x = CreateOTPTemplateRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[23]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2207,7 +2415,7 @@ func (x *CreateOTPTemplateRequest) String() string {
 func (*CreateOTPTemplateRequest) ProtoMessage() {}
 
 func (x *CreateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[23]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2220,7 +2428,7 @@ func (x *CreateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*CreateOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{23}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreateOTPTemplateRequest) GetOperatorId() int64 {
@@ -2316,7 +2524,7 @@ type CreateOTPTemplateResponse struct {
 
 func (x *CreateOTPTemplateResponse) Reset() {
 	*x = CreateOTPTemplateResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[24]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2328,7 +2536,7 @@ func (x *CreateOTPTemplateResponse) String() string {
 func (*CreateOTPTemplateResponse) ProtoMessage() {}
 
 func (x *CreateOTPTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[24]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2341,7 +2549,7 @@ func (x *CreateOTPTemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOTPTemplateResponse.ProtoReflect.Descriptor instead.
 func (*CreateOTPTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{24}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CreateOTPTemplateResponse) GetTemplate() *OTPTemplateInfo {
@@ -2378,7 +2586,7 @@ type UpdateOTPTemplateRequest struct {
 
 func (x *UpdateOTPTemplateRequest) Reset() {
 	*x = UpdateOTPTemplateRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[25]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2390,7 +2598,7 @@ func (x *UpdateOTPTemplateRequest) String() string {
 func (*UpdateOTPTemplateRequest) ProtoMessage() {}
 
 func (x *UpdateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[25]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2403,7 +2611,7 @@ func (x *UpdateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{25}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *UpdateOTPTemplateRequest) GetId() int64 {
@@ -2477,7 +2685,7 @@ type UpdateOTPTemplateResponse struct {
 
 func (x *UpdateOTPTemplateResponse) Reset() {
 	*x = UpdateOTPTemplateResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[26]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2489,7 +2697,7 @@ func (x *UpdateOTPTemplateResponse) String() string {
 func (*UpdateOTPTemplateResponse) ProtoMessage() {}
 
 func (x *UpdateOTPTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[26]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2502,7 +2710,7 @@ func (x *UpdateOTPTemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOTPTemplateResponse.ProtoReflect.Descriptor instead.
 func (*UpdateOTPTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{26}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{30}
 }
 
 // DeleteOTPTemplateRequest permanently removes an OTP template.
@@ -2522,7 +2730,7 @@ type DeleteOTPTemplateRequest struct {
 
 func (x *DeleteOTPTemplateRequest) Reset() {
 	*x = DeleteOTPTemplateRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[27]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2534,7 +2742,7 @@ func (x *DeleteOTPTemplateRequest) String() string {
 func (*DeleteOTPTemplateRequest) ProtoMessage() {}
 
 func (x *DeleteOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[27]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2547,7 +2755,7 @@ func (x *DeleteOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{27}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *DeleteOTPTemplateRequest) GetId() int64 {
@@ -2565,7 +2773,7 @@ type DeleteOTPTemplateResponse struct {
 
 func (x *DeleteOTPTemplateResponse) Reset() {
 	*x = DeleteOTPTemplateResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[28]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2577,7 +2785,7 @@ func (x *DeleteOTPTemplateResponse) String() string {
 func (*DeleteOTPTemplateResponse) ProtoMessage() {}
 
 func (x *DeleteOTPTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[28]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2590,7 +2798,7 @@ func (x *DeleteOTPTemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOTPTemplateResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOTPTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{28}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{32}
 }
 
 // GetOTPTemplateRequest retrieves a single OTP template by ID.
@@ -2607,7 +2815,7 @@ type GetOTPTemplateRequest struct {
 
 func (x *GetOTPTemplateRequest) Reset() {
 	*x = GetOTPTemplateRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[29]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2619,7 +2827,7 @@ func (x *GetOTPTemplateRequest) String() string {
 func (*GetOTPTemplateRequest) ProtoMessage() {}
 
 func (x *GetOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[29]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2632,7 +2840,7 @@ func (x *GetOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*GetOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{29}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetOTPTemplateRequest) GetId() int64 {
@@ -2651,7 +2859,7 @@ type GetOTPTemplateResponse struct {
 
 func (x *GetOTPTemplateResponse) Reset() {
 	*x = GetOTPTemplateResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[30]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2663,7 +2871,7 @@ func (x *GetOTPTemplateResponse) String() string {
 func (*GetOTPTemplateResponse) ProtoMessage() {}
 
 func (x *GetOTPTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[30]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2676,7 +2884,7 @@ func (x *GetOTPTemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOTPTemplateResponse.ProtoReflect.Descriptor instead.
 func (*GetOTPTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{30}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GetOTPTemplateResponse) GetTemplate() *OTPTemplateInfo {
@@ -2708,7 +2916,7 @@ type ListOTPTemplatesRequest struct {
 
 func (x *ListOTPTemplatesRequest) Reset() {
 	*x = ListOTPTemplatesRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[31]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2720,7 +2928,7 @@ func (x *ListOTPTemplatesRequest) String() string {
 func (*ListOTPTemplatesRequest) ProtoMessage() {}
 
 func (x *ListOTPTemplatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[31]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2733,7 +2941,7 @@ func (x *ListOTPTemplatesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOTPTemplatesRequest.ProtoReflect.Descriptor instead.
 func (*ListOTPTemplatesRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{31}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListOTPTemplatesRequest) GetOperatorId() int64 {
@@ -2797,7 +3005,7 @@ type ListOTPTemplatesResponse struct {
 
 func (x *ListOTPTemplatesResponse) Reset() {
 	*x = ListOTPTemplatesResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[32]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2809,7 +3017,7 @@ func (x *ListOTPTemplatesResponse) String() string {
 func (*ListOTPTemplatesResponse) ProtoMessage() {}
 
 func (x *ListOTPTemplatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[32]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2822,7 +3030,7 @@ func (x *ListOTPTemplatesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOTPTemplatesResponse.ProtoReflect.Descriptor instead.
 func (*ListOTPTemplatesResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{32}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListOTPTemplatesResponse) GetTemplates() []*OTPTemplateInfo {
@@ -2875,7 +3083,7 @@ type SyncOTPTemplateStatusRequest struct {
 
 func (x *SyncOTPTemplateStatusRequest) Reset() {
 	*x = SyncOTPTemplateStatusRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[33]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2887,7 +3095,7 @@ func (x *SyncOTPTemplateStatusRequest) String() string {
 func (*SyncOTPTemplateStatusRequest) ProtoMessage() {}
 
 func (x *SyncOTPTemplateStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[33]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2900,7 +3108,7 @@ func (x *SyncOTPTemplateStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncOTPTemplateStatusRequest.ProtoReflect.Descriptor instead.
 func (*SyncOTPTemplateStatusRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{33}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *SyncOTPTemplateStatusRequest) GetId() int64 {
@@ -2920,7 +3128,7 @@ type SyncOTPTemplateStatusResponse struct {
 
 func (x *SyncOTPTemplateStatusResponse) Reset() {
 	*x = SyncOTPTemplateStatusResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[34]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2932,7 +3140,7 @@ func (x *SyncOTPTemplateStatusResponse) String() string {
 func (*SyncOTPTemplateStatusResponse) ProtoMessage() {}
 
 func (x *SyncOTPTemplateStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[34]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2945,7 +3153,7 @@ func (x *SyncOTPTemplateStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncOTPTemplateStatusResponse.ProtoReflect.Descriptor instead.
 func (*SyncOTPTemplateStatusResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{34}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *SyncOTPTemplateStatusResponse) GetReviewStatus() OTPTemplateReviewStatus {
@@ -2979,7 +3187,7 @@ type OTPSendLogInfo struct {
 
 func (x *OTPSendLogInfo) Reset() {
 	*x = OTPSendLogInfo{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[35]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2991,7 +3199,7 @@ func (x *OTPSendLogInfo) String() string {
 func (*OTPSendLogInfo) ProtoMessage() {}
 
 func (x *OTPSendLogInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[35]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3004,7 +3212,7 @@ func (x *OTPSendLogInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OTPSendLogInfo.ProtoReflect.Descriptor instead.
 func (*OTPSendLogInfo) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{35}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *OTPSendLogInfo) GetId() int64 {
@@ -3134,7 +3342,7 @@ type ListOTPSendLogsRequest struct {
 
 func (x *ListOTPSendLogsRequest) Reset() {
 	*x = ListOTPSendLogsRequest{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[36]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3146,7 +3354,7 @@ func (x *ListOTPSendLogsRequest) String() string {
 func (*ListOTPSendLogsRequest) ProtoMessage() {}
 
 func (x *ListOTPSendLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[36]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3159,7 +3367,7 @@ func (x *ListOTPSendLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOTPSendLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListOTPSendLogsRequest) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{36}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *ListOTPSendLogsRequest) GetOperatorId() int64 {
@@ -3230,7 +3438,7 @@ type ListOTPSendLogsResponse struct {
 
 func (x *ListOTPSendLogsResponse) Reset() {
 	*x = ListOTPSendLogsResponse{}
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[37]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3242,7 +3450,7 @@ func (x *ListOTPSendLogsResponse) String() string {
 func (*ListOTPSendLogsResponse) ProtoMessage() {}
 
 func (x *ListOTPSendLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_push_service_v1_push_otp_proto_msgTypes[37]
+	mi := &file_push_service_v1_push_otp_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3255,7 +3463,7 @@ func (x *ListOTPSendLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOTPSendLogsResponse.ProtoReflect.Descriptor instead.
 func (*ListOTPSendLogsResponse) Descriptor() ([]byte, []int) {
-	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{37}
+	return file_push_service_v1_push_otp_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *ListOTPSendLogsResponse) GetLogs() []*OTPSendLogInfo {
@@ -3435,7 +3643,24 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\bbindings\x18\x01 \x03(\v2+.api.push.service.v1.OTPProviderBindingInfoR\bbindings\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xe2\x04\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"l\n" +
+	"\x1eListOTPBindingCountriesRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x1d\n" +
+	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"U\n" +
+	"\x1fListOTPBindingCountriesResponse\x12\x1c\n" +
+	"\tcountries\x18\x01 \x03(\tR\tcountries\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"Z\n" +
+	"\x1dCheckOTPBindingCountryRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\"@\n" +
+	"\x1eCheckOTPBindingCountryResponse\x12\x1e\n" +
+	"\n" +
+	"configured\x18\x01 \x01(\bR\n" +
+	"configured\"\xe2\x04\n" +
 	"\x0fOTPTemplateInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -3601,7 +3826,7 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"%OTP_TEMPLATE_REVIEW_STATUS_LOCAL_ONLY\x10\x01\x12&\n" +
 	"\"OTP_TEMPLATE_REVIEW_STATUS_PENDING\x10\x02\x12'\n" +
 	"#OTP_TEMPLATE_REVIEW_STATUS_APPROVED\x10\x03\x12'\n" +
-	"#OTP_TEMPLATE_REVIEW_STATUS_REJECTED\x10\x042\x85\x10\n" +
+	"#OTP_TEMPLATE_REVIEW_STATUS_REJECTED\x10\x042\x94\x12\n" +
 	"\aPushOTP\x12V\n" +
 	"\aSendOTP\x12#.api.push.service.v1.SendOTPRequest\x1a$.api.push.service.v1.SendOTPResponse\"\x00\x12t\n" +
 	"\x11CreateOTPProvider\x12-.api.push.service.v1.CreateOTPProviderRequest\x1a..api.push.service.v1.CreateOTPProviderResponse\"\x00\x12t\n" +
@@ -3612,7 +3837,9 @@ const file_push_service_v1_push_otp_proto_rawDesc = "" +
 	"\x18CreateOTPProviderBinding\x124.api.push.service.v1.CreateOTPProviderBindingRequest\x1a5.api.push.service.v1.CreateOTPProviderBindingResponse\"\x00\x12\x89\x01\n" +
 	"\x18UpdateOTPProviderBinding\x124.api.push.service.v1.UpdateOTPProviderBindingRequest\x1a5.api.push.service.v1.UpdateOTPProviderBindingResponse\"\x00\x12\x89\x01\n" +
 	"\x18DeleteOTPProviderBinding\x124.api.push.service.v1.DeleteOTPProviderBindingRequest\x1a5.api.push.service.v1.DeleteOTPProviderBindingResponse\"\x00\x12\x86\x01\n" +
-	"\x17ListOTPProviderBindings\x123.api.push.service.v1.ListOTPProviderBindingsRequest\x1a4.api.push.service.v1.ListOTPProviderBindingsResponse\"\x00\x12t\n" +
+	"\x17ListOTPProviderBindings\x123.api.push.service.v1.ListOTPProviderBindingsRequest\x1a4.api.push.service.v1.ListOTPProviderBindingsResponse\"\x00\x12\x86\x01\n" +
+	"\x17ListOTPBindingCountries\x123.api.push.service.v1.ListOTPBindingCountriesRequest\x1a4.api.push.service.v1.ListOTPBindingCountriesResponse\"\x00\x12\x83\x01\n" +
+	"\x16CheckOTPBindingCountry\x122.api.push.service.v1.CheckOTPBindingCountryRequest\x1a3.api.push.service.v1.CheckOTPBindingCountryResponse\"\x00\x12t\n" +
 	"\x11CreateOTPTemplate\x12-.api.push.service.v1.CreateOTPTemplateRequest\x1a..api.push.service.v1.CreateOTPTemplateResponse\"\x00\x12t\n" +
 	"\x11UpdateOTPTemplate\x12-.api.push.service.v1.UpdateOTPTemplateRequest\x1a..api.push.service.v1.UpdateOTPTemplateResponse\"\x00\x12t\n" +
 	"\x11DeleteOTPTemplate\x12-.api.push.service.v1.DeleteOTPTemplateRequest\x1a..api.push.service.v1.DeleteOTPTemplateResponse\"\x00\x12k\n" +
@@ -3635,7 +3862,7 @@ func file_push_service_v1_push_otp_proto_rawDescGZIP() []byte {
 }
 
 var file_push_service_v1_push_otp_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_push_service_v1_push_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_push_service_v1_push_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
 var file_push_service_v1_push_otp_proto_goTypes = []any{
 	(OTPChannel)(0),                          // 0: api.push.service.v1.OTPChannel
 	(OTPProviderType)(0),                     // 1: api.push.service.v1.OTPProviderType
@@ -3664,27 +3891,31 @@ var file_push_service_v1_push_otp_proto_goTypes = []any{
 	(*DeleteOTPProviderBindingResponse)(nil), // 24: api.push.service.v1.DeleteOTPProviderBindingResponse
 	(*ListOTPProviderBindingsRequest)(nil),   // 25: api.push.service.v1.ListOTPProviderBindingsRequest
 	(*ListOTPProviderBindingsResponse)(nil),  // 26: api.push.service.v1.ListOTPProviderBindingsResponse
-	(*OTPTemplateInfo)(nil),                  // 27: api.push.service.v1.OTPTemplateInfo
-	(*CreateOTPTemplateRequest)(nil),         // 28: api.push.service.v1.CreateOTPTemplateRequest
-	(*CreateOTPTemplateResponse)(nil),        // 29: api.push.service.v1.CreateOTPTemplateResponse
-	(*UpdateOTPTemplateRequest)(nil),         // 30: api.push.service.v1.UpdateOTPTemplateRequest
-	(*UpdateOTPTemplateResponse)(nil),        // 31: api.push.service.v1.UpdateOTPTemplateResponse
-	(*DeleteOTPTemplateRequest)(nil),         // 32: api.push.service.v1.DeleteOTPTemplateRequest
-	(*DeleteOTPTemplateResponse)(nil),        // 33: api.push.service.v1.DeleteOTPTemplateResponse
-	(*GetOTPTemplateRequest)(nil),            // 34: api.push.service.v1.GetOTPTemplateRequest
-	(*GetOTPTemplateResponse)(nil),           // 35: api.push.service.v1.GetOTPTemplateResponse
-	(*ListOTPTemplatesRequest)(nil),          // 36: api.push.service.v1.ListOTPTemplatesRequest
-	(*ListOTPTemplatesResponse)(nil),         // 37: api.push.service.v1.ListOTPTemplatesResponse
-	(*SyncOTPTemplateStatusRequest)(nil),     // 38: api.push.service.v1.SyncOTPTemplateStatusRequest
-	(*SyncOTPTemplateStatusResponse)(nil),    // 39: api.push.service.v1.SyncOTPTemplateStatusResponse
-	(*OTPSendLogInfo)(nil),                   // 40: api.push.service.v1.OTPSendLogInfo
-	(*ListOTPSendLogsRequest)(nil),           // 41: api.push.service.v1.ListOTPSendLogsRequest
-	(*ListOTPSendLogsResponse)(nil),          // 42: api.push.service.v1.ListOTPSendLogsResponse
-	nil,                                      // 43: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	(*ListOTPBindingCountriesRequest)(nil),   // 27: api.push.service.v1.ListOTPBindingCountriesRequest
+	(*ListOTPBindingCountriesResponse)(nil),  // 28: api.push.service.v1.ListOTPBindingCountriesResponse
+	(*CheckOTPBindingCountryRequest)(nil),    // 29: api.push.service.v1.CheckOTPBindingCountryRequest
+	(*CheckOTPBindingCountryResponse)(nil),   // 30: api.push.service.v1.CheckOTPBindingCountryResponse
+	(*OTPTemplateInfo)(nil),                  // 31: api.push.service.v1.OTPTemplateInfo
+	(*CreateOTPTemplateRequest)(nil),         // 32: api.push.service.v1.CreateOTPTemplateRequest
+	(*CreateOTPTemplateResponse)(nil),        // 33: api.push.service.v1.CreateOTPTemplateResponse
+	(*UpdateOTPTemplateRequest)(nil),         // 34: api.push.service.v1.UpdateOTPTemplateRequest
+	(*UpdateOTPTemplateResponse)(nil),        // 35: api.push.service.v1.UpdateOTPTemplateResponse
+	(*DeleteOTPTemplateRequest)(nil),         // 36: api.push.service.v1.DeleteOTPTemplateRequest
+	(*DeleteOTPTemplateResponse)(nil),        // 37: api.push.service.v1.DeleteOTPTemplateResponse
+	(*GetOTPTemplateRequest)(nil),            // 38: api.push.service.v1.GetOTPTemplateRequest
+	(*GetOTPTemplateResponse)(nil),           // 39: api.push.service.v1.GetOTPTemplateResponse
+	(*ListOTPTemplatesRequest)(nil),          // 40: api.push.service.v1.ListOTPTemplatesRequest
+	(*ListOTPTemplatesResponse)(nil),         // 41: api.push.service.v1.ListOTPTemplatesResponse
+	(*SyncOTPTemplateStatusRequest)(nil),     // 42: api.push.service.v1.SyncOTPTemplateStatusRequest
+	(*SyncOTPTemplateStatusResponse)(nil),    // 43: api.push.service.v1.SyncOTPTemplateStatusResponse
+	(*OTPSendLogInfo)(nil),                   // 44: api.push.service.v1.OTPSendLogInfo
+	(*ListOTPSendLogsRequest)(nil),           // 45: api.push.service.v1.ListOTPSendLogsRequest
+	(*ListOTPSendLogsResponse)(nil),          // 46: api.push.service.v1.ListOTPSendLogsResponse
+	nil,                                      // 47: api.push.service.v1.SendOTPRequest.ExtraParamsEntry
 }
 var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	3,  // 0: api.push.service.v1.SendOTPRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	43, // 1: api.push.service.v1.SendOTPRequest.extra_params:type_name -> api.push.service.v1.SendOTPRequest.ExtraParamsEntry
+	47, // 1: api.push.service.v1.SendOTPRequest.extra_params:type_name -> api.push.service.v1.SendOTPRequest.ExtraParamsEntry
 	0,  // 2: api.push.service.v1.SendOTPRequest.preferred_channel:type_name -> api.push.service.v1.OTPChannel
 	1,  // 3: api.push.service.v1.OTPProviderInfo.provider_type:type_name -> api.push.service.v1.OTPProviderType
 	2,  // 4: api.push.service.v1.OTPProviderInfo.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
@@ -3701,12 +3932,12 @@ var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	3,  // 15: api.push.service.v1.OTPTemplateInfo.template_type:type_name -> api.push.service.v1.OTPTemplateType
 	4,  // 16: api.push.service.v1.OTPTemplateInfo.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
 	3,  // 17: api.push.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	27, // 18: api.push.service.v1.CreateOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
-	27, // 19: api.push.service.v1.GetOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
+	31, // 18: api.push.service.v1.CreateOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
+	31, // 19: api.push.service.v1.GetOTPTemplateResponse.template:type_name -> api.push.service.v1.OTPTemplateInfo
 	3,  // 20: api.push.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	27, // 21: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
+	31, // 21: api.push.service.v1.ListOTPTemplatesResponse.templates:type_name -> api.push.service.v1.OTPTemplateInfo
 	4,  // 22: api.push.service.v1.SyncOTPTemplateStatusResponse.review_status:type_name -> api.push.service.v1.OTPTemplateReviewStatus
-	40, // 23: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
+	44, // 23: api.push.service.v1.ListOTPSendLogsResponse.logs:type_name -> api.push.service.v1.OTPSendLogInfo
 	5,  // 24: api.push.service.v1.PushOTP.SendOTP:input_type -> api.push.service.v1.SendOTPRequest
 	8,  // 25: api.push.service.v1.PushOTP.CreateOTPProvider:input_type -> api.push.service.v1.CreateOTPProviderRequest
 	10, // 26: api.push.service.v1.PushOTP.UpdateOTPProvider:input_type -> api.push.service.v1.UpdateOTPProviderRequest
@@ -3717,32 +3948,36 @@ var file_push_service_v1_push_otp_proto_depIdxs = []int32{
 	21, // 31: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:input_type -> api.push.service.v1.UpdateOTPProviderBindingRequest
 	23, // 32: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:input_type -> api.push.service.v1.DeleteOTPProviderBindingRequest
 	25, // 33: api.push.service.v1.PushOTP.ListOTPProviderBindings:input_type -> api.push.service.v1.ListOTPProviderBindingsRequest
-	28, // 34: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
-	30, // 35: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
-	32, // 36: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
-	34, // 37: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
-	36, // 38: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
-	38, // 39: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
-	41, // 40: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
-	6,  // 41: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
-	9,  // 42: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
-	11, // 43: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
-	13, // 44: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
-	15, // 45: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
-	17, // 46: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
-	20, // 47: api.push.service.v1.PushOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
-	22, // 48: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
-	24, // 49: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
-	26, // 50: api.push.service.v1.PushOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
-	29, // 51: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
-	31, // 52: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
-	33, // 53: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
-	35, // 54: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
-	37, // 55: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
-	39, // 56: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
-	42, // 57: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
-	41, // [41:58] is the sub-list for method output_type
-	24, // [24:41] is the sub-list for method input_type
+	27, // 34: api.push.service.v1.PushOTP.ListOTPBindingCountries:input_type -> api.push.service.v1.ListOTPBindingCountriesRequest
+	29, // 35: api.push.service.v1.PushOTP.CheckOTPBindingCountry:input_type -> api.push.service.v1.CheckOTPBindingCountryRequest
+	32, // 36: api.push.service.v1.PushOTP.CreateOTPTemplate:input_type -> api.push.service.v1.CreateOTPTemplateRequest
+	34, // 37: api.push.service.v1.PushOTP.UpdateOTPTemplate:input_type -> api.push.service.v1.UpdateOTPTemplateRequest
+	36, // 38: api.push.service.v1.PushOTP.DeleteOTPTemplate:input_type -> api.push.service.v1.DeleteOTPTemplateRequest
+	38, // 39: api.push.service.v1.PushOTP.GetOTPTemplate:input_type -> api.push.service.v1.GetOTPTemplateRequest
+	40, // 40: api.push.service.v1.PushOTP.ListOTPTemplates:input_type -> api.push.service.v1.ListOTPTemplatesRequest
+	42, // 41: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:input_type -> api.push.service.v1.SyncOTPTemplateStatusRequest
+	45, // 42: api.push.service.v1.PushOTP.ListOTPSendLogs:input_type -> api.push.service.v1.ListOTPSendLogsRequest
+	6,  // 43: api.push.service.v1.PushOTP.SendOTP:output_type -> api.push.service.v1.SendOTPResponse
+	9,  // 44: api.push.service.v1.PushOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
+	11, // 45: api.push.service.v1.PushOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
+	13, // 46: api.push.service.v1.PushOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
+	15, // 47: api.push.service.v1.PushOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
+	17, // 48: api.push.service.v1.PushOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
+	20, // 49: api.push.service.v1.PushOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
+	22, // 50: api.push.service.v1.PushOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
+	24, // 51: api.push.service.v1.PushOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
+	26, // 52: api.push.service.v1.PushOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
+	28, // 53: api.push.service.v1.PushOTP.ListOTPBindingCountries:output_type -> api.push.service.v1.ListOTPBindingCountriesResponse
+	30, // 54: api.push.service.v1.PushOTP.CheckOTPBindingCountry:output_type -> api.push.service.v1.CheckOTPBindingCountryResponse
+	33, // 55: api.push.service.v1.PushOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
+	35, // 56: api.push.service.v1.PushOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
+	37, // 57: api.push.service.v1.PushOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
+	39, // 58: api.push.service.v1.PushOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
+	41, // 59: api.push.service.v1.PushOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
+	43, // 60: api.push.service.v1.PushOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
+	46, // 61: api.push.service.v1.PushOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
+	43, // [43:62] is the sub-list for method output_type
+	24, // [24:43] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
 	24, // [24:24] is the sub-list for extension extendee
 	0,  // [0:24] is the sub-list for field type_name
@@ -3758,16 +3993,17 @@ func file_push_service_v1_push_otp_proto_init() {
 	file_push_service_v1_push_otp_proto_msgTypes[11].OneofWrappers = []any{}
 	file_push_service_v1_push_otp_proto_msgTypes[16].OneofWrappers = []any{}
 	file_push_service_v1_push_otp_proto_msgTypes[20].OneofWrappers = []any{}
-	file_push_service_v1_push_otp_proto_msgTypes[25].OneofWrappers = []any{}
-	file_push_service_v1_push_otp_proto_msgTypes[31].OneofWrappers = []any{}
-	file_push_service_v1_push_otp_proto_msgTypes[36].OneofWrappers = []any{}
+	file_push_service_v1_push_otp_proto_msgTypes[22].OneofWrappers = []any{}
+	file_push_service_v1_push_otp_proto_msgTypes[29].OneofWrappers = []any{}
+	file_push_service_v1_push_otp_proto_msgTypes[35].OneofWrappers = []any{}
+	file_push_service_v1_push_otp_proto_msgTypes[40].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_push_service_v1_push_otp_proto_rawDesc), len(file_push_service_v1_push_otp_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   39,
+			NumMessages:   43,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -5318,6 +5318,48 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.SetSwapFeeSettingsResponse'
+    /v1/backoffice/otp/provider-binding/check-country:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                CheckOTPBindingCountry checks whether an operator has at least one enabled
+                 provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+            operationId: BackofficeOTP_CheckOTPBindingCountry
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CheckOTPBindingCountryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CheckOTPBindingCountryResponse'
+    /v1/backoffice/otp/provider-binding/countries:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                ListOTPBindingCountries returns the distinct countries configured for an operator.
+                 Use this to display which countries have OTP provider bindings.
+            operationId: BackofficeOTP_ListOTPBindingCountries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOTPBindingCountriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListOTPBindingCountriesResponse'
     /v1/backoffice/otp/provider-binding/create:
         post:
             tags:
@@ -14035,6 +14077,17 @@ components:
             properties:
                 exists:
                     type: boolean
+        api.backoffice.service.v1.CheckOTPBindingCountryRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
+                country:
+                    type: string
+                    description: ISO 3166-1 alpha-2 country code or "global"
+            description: Check whether an operator has at least one enabled binding for a specific country.
         api.backoffice.service.v1.CheckOperatorKeyExistsRequest:
             type: object
             properties:
@@ -19274,6 +19327,17 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.OAuthProviderConfig'
+        api.backoffice.service.v1.ListOTPBindingCountriesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
+                enabled:
+                    type: boolean
+                    description: If set, only count bindings with this enabled status
+            description: Get distinct countries configured for an operator via provider bindings.
         api.backoffice.service.v1.ListOTPProviderBindingsRequest:
             type: object
             properties:
@@ -26516,6 +26580,12 @@ components:
                         - $ref: '#/components/schemas/api.push.service.v1.SlackChannelConfig'
                     description: Slack configuration. Required when channel_type = CHANNEL_TYPE_SLACK
             description: Channel-specific configuration. Provide one of the nested configs based on channel_type.
+        api.push.service.v1.CheckOTPBindingCountryResponse:
+            type: object
+            properties:
+                configured:
+                    type: boolean
+                    description: true if at least one enabled binding exists for this operator+country
         api.push.service.v1.CreateNotificationChannelRequest:
             type: object
             properties:
@@ -26770,6 +26840,18 @@ components:
                     description: Number of items per page
                     format: int32
             description: Response for ListNotificationRules.
+        api.push.service.v1.ListOTPBindingCountriesResponse:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                    description: Distinct country codes (e.g., ["BR", "JP", "global"])
+                total:
+                    type: integer
+                    description: Number of distinct countries
+                    format: int32
         api.push.service.v1.ListOTPProviderBindingsResponse:
             type: object
             properties:

@@ -55,6 +55,8 @@ service PushOTP {
   rpc UpdateOTPProviderBinding(UpdateOTPProviderBindingRequest) returns (UpdateOTPProviderBindingResponse) {}
   rpc DeleteOTPProviderBinding(DeleteOTPProviderBindingRequest) returns (DeleteOTPProviderBindingResponse) {}
   rpc ListOTPProviderBindings(ListOTPProviderBindingsRequest) returns (ListOTPProviderBindingsResponse) {}
+  rpc ListOTPBindingCountries(ListOTPBindingCountriesRequest) returns (ListOTPBindingCountriesResponse) {}
+  rpc CheckOTPBindingCountry(CheckOTPBindingCountryRequest) returns (CheckOTPBindingCountryResponse) {}
 
   // ====== Backoffice: Template CRUD ======
   rpc CreateOTPTemplate(CreateOTPTemplateRequest) returns (CreateOTPTemplateResponse) {}
@@ -445,6 +447,33 @@ message ListOTPProviderBindingsResponse {
   int32 total = 2;
   int32 page = 3;
   int32 page_size = 4;
+}
+
+// ListOTPBindingCountriesRequest returns the distinct countries configured
+// for an operator via provider bindings.
+message ListOTPBindingCountriesRequest {
+  int64 operator_id = 1;
+  // If set, only count bindings with this enabled status
+  optional bool enabled = 2;
+}
+
+message ListOTPBindingCountriesResponse {
+  // Distinct country codes (e.g., ["BR", "JP", "global"])
+  repeated string countries = 1;
+  // Number of distinct countries
+  int32 total = 2;
+}
+
+// CheckOTPBindingCountryRequest checks whether an operator has at least one
+// enabled provider binding for a specific country.
+message CheckOTPBindingCountryRequest {
+  int64 operator_id = 1;
+  string country = 2;
+}
+
+message CheckOTPBindingCountryResponse {
+  // true if at least one enabled binding exists for this operator+country
+  bool configured = 1;
 }
 
 // ============ Template CRUD ============

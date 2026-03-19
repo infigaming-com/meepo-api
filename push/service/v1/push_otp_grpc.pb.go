@@ -29,6 +29,8 @@ const (
 	PushOTP_UpdateOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/UpdateOTPProviderBinding"
 	PushOTP_DeleteOTPProviderBinding_FullMethodName = "/api.push.service.v1.PushOTP/DeleteOTPProviderBinding"
 	PushOTP_ListOTPProviderBindings_FullMethodName  = "/api.push.service.v1.PushOTP/ListOTPProviderBindings"
+	PushOTP_ListOTPBindingCountries_FullMethodName  = "/api.push.service.v1.PushOTP/ListOTPBindingCountries"
+	PushOTP_CheckOTPBindingCountry_FullMethodName   = "/api.push.service.v1.PushOTP/CheckOTPBindingCountry"
 	PushOTP_CreateOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/CreateOTPTemplate"
 	PushOTP_UpdateOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/UpdateOTPTemplate"
 	PushOTP_DeleteOTPTemplate_FullMethodName        = "/api.push.service.v1.PushOTP/DeleteOTPTemplate"
@@ -91,6 +93,8 @@ type PushOTPClient interface {
 	UpdateOTPProviderBinding(ctx context.Context, in *UpdateOTPProviderBindingRequest, opts ...grpc.CallOption) (*UpdateOTPProviderBindingResponse, error)
 	DeleteOTPProviderBinding(ctx context.Context, in *DeleteOTPProviderBindingRequest, opts ...grpc.CallOption) (*DeleteOTPProviderBindingResponse, error)
 	ListOTPProviderBindings(ctx context.Context, in *ListOTPProviderBindingsRequest, opts ...grpc.CallOption) (*ListOTPProviderBindingsResponse, error)
+	ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...grpc.CallOption) (*ListOTPBindingCountriesResponse, error)
+	CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...grpc.CallOption) (*CheckOTPBindingCountryResponse, error)
 	// ====== Backoffice: Template CRUD ======
 	CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*CreateOTPTemplateResponse, error)
 	UpdateOTPTemplate(ctx context.Context, in *UpdateOTPTemplateRequest, opts ...grpc.CallOption) (*UpdateOTPTemplateResponse, error)
@@ -204,6 +208,26 @@ func (c *pushOTPClient) ListOTPProviderBindings(ctx context.Context, in *ListOTP
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOTPProviderBindingsResponse)
 	err := c.cc.Invoke(ctx, PushOTP_ListOTPProviderBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...grpc.CallOption) (*ListOTPBindingCountriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOTPBindingCountriesResponse)
+	err := c.cc.Invoke(ctx, PushOTP_ListOTPBindingCountries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pushOTPClient) CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...grpc.CallOption) (*CheckOTPBindingCountryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckOTPBindingCountryResponse)
+	err := c.cc.Invoke(ctx, PushOTP_CheckOTPBindingCountry_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -333,6 +357,8 @@ type PushOTPServer interface {
 	UpdateOTPProviderBinding(context.Context, *UpdateOTPProviderBindingRequest) (*UpdateOTPProviderBindingResponse, error)
 	DeleteOTPProviderBinding(context.Context, *DeleteOTPProviderBindingRequest) (*DeleteOTPProviderBindingResponse, error)
 	ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*ListOTPProviderBindingsResponse, error)
+	ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*ListOTPBindingCountriesResponse, error)
+	CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*CheckOTPBindingCountryResponse, error)
 	// ====== Backoffice: Template CRUD ======
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*CreateOTPTemplateResponse, error)
 	UpdateOTPTemplate(context.Context, *UpdateOTPTemplateRequest) (*UpdateOTPTemplateResponse, error)
@@ -381,6 +407,12 @@ func (UnimplementedPushOTPServer) DeleteOTPProviderBinding(context.Context, *Del
 }
 func (UnimplementedPushOTPServer) ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*ListOTPProviderBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPProviderBindings not implemented")
+}
+func (UnimplementedPushOTPServer) ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*ListOTPBindingCountriesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOTPBindingCountries not implemented")
+}
+func (UnimplementedPushOTPServer) CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*CheckOTPBindingCountryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckOTPBindingCountry not implemented")
 }
 func (UnimplementedPushOTPServer) CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*CreateOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOTPTemplate not implemented")
@@ -604,6 +636,42 @@ func _PushOTP_ListOTPProviderBindings_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PushOTP_ListOTPBindingCountries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOTPBindingCountriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).ListOTPBindingCountries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_ListOTPBindingCountries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).ListOTPBindingCountries(ctx, req.(*ListOTPBindingCountriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PushOTP_CheckOTPBindingCountry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckOTPBindingCountryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushOTPServer).CheckOTPBindingCountry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PushOTP_CheckOTPBindingCountry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushOTPServer).CheckOTPBindingCountry(ctx, req.(*CheckOTPBindingCountryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PushOTP_CreateOTPTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateOTPTemplateRequest)
 	if err := dec(in); err != nil {
@@ -776,6 +844,14 @@ var PushOTP_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOTPProviderBindings",
 			Handler:    _PushOTP_ListOTPProviderBindings_Handler,
+		},
+		{
+			MethodName: "ListOTPBindingCountries",
+			Handler:    _PushOTP_ListOTPBindingCountries_Handler,
+		},
+		{
+			MethodName: "CheckOTPBindingCountry",
+			Handler:    _PushOTP_CheckOTPBindingCountry_Handler,
 		},
 		{
 			MethodName: "CreateOTPTemplate",

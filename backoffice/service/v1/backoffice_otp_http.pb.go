@@ -20,6 +20,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeOTPCheckOTPBindingCountry = "/api.backoffice.service.v1.BackofficeOTP/CheckOTPBindingCountry"
 const OperationBackofficeOTPCreateOTPProvider = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProvider"
 const OperationBackofficeOTPCreateOTPProviderBinding = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPProviderBinding"
 const OperationBackofficeOTPCreateOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPTemplate"
@@ -28,6 +29,7 @@ const OperationBackofficeOTPDeleteOTPProviderBinding = "/api.backoffice.service.
 const OperationBackofficeOTPDeleteOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPTemplate"
 const OperationBackofficeOTPGetOTPProvider = "/api.backoffice.service.v1.BackofficeOTP/GetOTPProvider"
 const OperationBackofficeOTPGetOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/GetOTPTemplate"
+const OperationBackofficeOTPListOTPBindingCountries = "/api.backoffice.service.v1.BackofficeOTP/ListOTPBindingCountries"
 const OperationBackofficeOTPListOTPProviderBindings = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviderBindings"
 const OperationBackofficeOTPListOTPProviders = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviders"
 const OperationBackofficeOTPListOTPSendLogs = "/api.backoffice.service.v1.BackofficeOTP/ListOTPSendLogs"
@@ -38,6 +40,9 @@ const OperationBackofficeOTPUpdateOTPProviderBinding = "/api.backoffice.service.
 const OperationBackofficeOTPUpdateOTPTemplate = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPTemplate"
 
 type BackofficeOTPHTTPServer interface {
+	// CheckOTPBindingCountry CheckOTPBindingCountry checks whether an operator has at least one enabled
+	// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+	CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*v1.CheckOTPBindingCountryResponse, error)
 	// CreateOTPProvider CreateOTPProvider registers a third-party OTP delivery provider.
 	//
 	// ## What is an OTP Provider?
@@ -202,6 +207,9 @@ type BackofficeOTPHTTPServer interface {
 	// ## Errors
 	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	GetOTPTemplate(context.Context, *GetOTPTemplateRequest) (*v1.GetOTPTemplateResponse, error)
+	// ListOTPBindingCountries ListOTPBindingCountries returns the distinct countries configured for an operator.
+	// Use this to display which countries have OTP provider bindings.
+	ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*v1.ListOTPBindingCountriesResponse, error)
 	// ListOTPProviderBindings ListOTPProviderBindings lists provider bindings for the target operator.
 	//
 	// Supports filtering by country, provider_id, and enabled status.
@@ -306,6 +314,8 @@ func RegisterBackofficeOTPHTTPServer(s *http.Server, srv BackofficeOTPHTTPServer
 	r.POST("/v1/backoffice/otp/provider-binding/update", _BackofficeOTP_UpdateOTPProviderBinding0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider-binding/delete", _BackofficeOTP_DeleteOTPProviderBinding0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/provider-binding/list", _BackofficeOTP_ListOTPProviderBindings0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/provider-binding/countries", _BackofficeOTP_ListOTPBindingCountries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/otp/provider-binding/check-country", _BackofficeOTP_CheckOTPBindingCountry0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/template/create", _BackofficeOTP_CreateOTPTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/template/update", _BackofficeOTP_UpdateOTPTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/otp/template/delete", _BackofficeOTP_DeleteOTPTemplate0_HTTP_Handler(srv))
@@ -513,6 +523,50 @@ func _BackofficeOTP_ListOTPProviderBindings0_HTTP_Handler(srv BackofficeOTPHTTPS
 	}
 }
 
+func _BackofficeOTP_ListOTPBindingCountries0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOTPBindingCountriesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPListOTPBindingCountries)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOTPBindingCountries(ctx, req.(*ListOTPBindingCountriesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOTPBindingCountriesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOTP_CheckOTPBindingCountry0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CheckOTPBindingCountryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOTPCheckOTPBindingCountry)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CheckOTPBindingCountry(ctx, req.(*CheckOTPBindingCountryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.CheckOTPBindingCountryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeOTP_CreateOTPTemplate0_HTTP_Handler(srv BackofficeOTPHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateOTPTemplateRequest
@@ -668,6 +722,9 @@ func _BackofficeOTP_ListOTPSendLogs0_HTTP_Handler(srv BackofficeOTPHTTPServer) f
 }
 
 type BackofficeOTPHTTPClient interface {
+	// CheckOTPBindingCountry CheckOTPBindingCountry checks whether an operator has at least one enabled
+	// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+	CheckOTPBindingCountry(ctx context.Context, req *CheckOTPBindingCountryRequest, opts ...http.CallOption) (rsp *v1.CheckOTPBindingCountryResponse, err error)
 	// CreateOTPProvider CreateOTPProvider registers a third-party OTP delivery provider.
 	//
 	// ## What is an OTP Provider?
@@ -832,6 +889,9 @@ type BackofficeOTPHTTPClient interface {
 	// ## Errors
 	// - OTP_TEMPLATE_NOT_FOUND: no template with the given ID
 	GetOTPTemplate(ctx context.Context, req *GetOTPTemplateRequest, opts ...http.CallOption) (rsp *v1.GetOTPTemplateResponse, err error)
+	// ListOTPBindingCountries ListOTPBindingCountries returns the distinct countries configured for an operator.
+	// Use this to display which countries have OTP provider bindings.
+	ListOTPBindingCountries(ctx context.Context, req *ListOTPBindingCountriesRequest, opts ...http.CallOption) (rsp *v1.ListOTPBindingCountriesResponse, err error)
 	// ListOTPProviderBindings ListOTPProviderBindings lists provider bindings for the target operator.
 	//
 	// Supports filtering by country, provider_id, and enabled status.
@@ -931,6 +991,21 @@ type BackofficeOTPHTTPClientImpl struct {
 
 func NewBackofficeOTPHTTPClient(client *http.Client) BackofficeOTPHTTPClient {
 	return &BackofficeOTPHTTPClientImpl{client}
+}
+
+// CheckOTPBindingCountry CheckOTPBindingCountry checks whether an operator has at least one enabled
+// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+func (c *BackofficeOTPHTTPClientImpl) CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...http.CallOption) (*v1.CheckOTPBindingCountryResponse, error) {
+	var out v1.CheckOTPBindingCountryResponse
+	pattern := "/v1/backoffice/otp/provider-binding/check-country"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPCheckOTPBindingCountry))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 // CreateOTPProvider CreateOTPProvider registers a third-party OTP delivery provider.
@@ -1185,6 +1260,21 @@ func (c *BackofficeOTPHTTPClientImpl) GetOTPTemplate(ctx context.Context, in *Ge
 	pattern := "/v1/backoffice/otp/template/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOTPGetOTPTemplate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// ListOTPBindingCountries ListOTPBindingCountries returns the distinct countries configured for an operator.
+// Use this to display which countries have OTP provider bindings.
+func (c *BackofficeOTPHTTPClientImpl) ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...http.CallOption) (*v1.ListOTPBindingCountriesResponse, error) {
+	var out v1.ListOTPBindingCountriesResponse
+	pattern := "/v1/backoffice/otp/provider-binding/countries"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOTPListOTPBindingCountries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
