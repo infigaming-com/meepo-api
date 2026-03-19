@@ -26415,6 +26415,8 @@ func (m *ListWalletBalanceTransactionsResponse_BalanceTransaction) validate(all 
 
 	// no validation rules for AfterProviderBonusBalance
 
+	// no validation rules for Status
+
 	if len(errors) > 0 {
 		return ListWalletBalanceTransactionsResponse_BalanceTransactionMultiError(errors)
 	}
