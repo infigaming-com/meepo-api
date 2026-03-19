@@ -267,6 +267,24 @@ service BackofficeOTP {
     };
   }
 
+  // ListOTPBindingCountries returns the distinct countries configured for an operator.
+  // Use this to display which countries have OTP provider bindings.
+  rpc ListOTPBindingCountries(ListOTPBindingCountriesRequest) returns (api.push.service.v1.ListOTPBindingCountriesResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider-binding/countries"
+      body: "*"
+    };
+  }
+
+  // CheckOTPBindingCountry checks whether an operator has at least one enabled
+  // provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+  rpc CheckOTPBindingCountry(CheckOTPBindingCountryRequest) returns (api.push.service.v1.CheckOTPBindingCountryResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/otp/provider-binding/check-country"
+      body: "*"
+    };
+  }
+
   // ====== Template Management ======
 
   // CreateOTPTemplate creates a message template bound to a specific OTP provider.
@@ -586,6 +604,22 @@ message ListOTPProviderBindingsRequest {
   int32 page = 5;
   // Items per page (default 20, max 100)
   int32 page_size = 6;
+}
+
+// Get distinct countries configured for an operator via provider bindings.
+message ListOTPBindingCountriesRequest {
+  // Target operator context for ownership scoping.
+  api.common.OperatorContext target_operator_context = 1;
+  // If set, only count bindings with this enabled status
+  optional bool enabled = 2;
+}
+
+// Check whether an operator has at least one enabled binding for a specific country.
+message CheckOTPBindingCountryRequest {
+  // Target operator context for ownership scoping.
+  api.common.OperatorContext target_operator_context = 1;
+  // ISO 3166-1 alpha-2 country code or "global"
+  string country = 2;
 }
 
 // ============ Template Management ============

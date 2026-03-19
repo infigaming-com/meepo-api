@@ -1310,6 +1310,276 @@ var _ interface {
 	ErrorName() string
 } = ListOTPProviderBindingsRequestValidationError{}
 
+// Validate checks the field values on ListOTPBindingCountriesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListOTPBindingCountriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListOTPBindingCountriesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListOTPBindingCountriesRequestMultiError, or nil if none found.
+func (m *ListOTPBindingCountriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListOTPBindingCountriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOTPBindingCountriesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOTPBindingCountriesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOTPBindingCountriesRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return ListOTPBindingCountriesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListOTPBindingCountriesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListOTPBindingCountriesRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListOTPBindingCountriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListOTPBindingCountriesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListOTPBindingCountriesRequestMultiError) AllErrors() []error { return m }
+
+// ListOTPBindingCountriesRequestValidationError is the validation error
+// returned by ListOTPBindingCountriesRequest.Validate if the designated
+// constraints aren't met.
+type ListOTPBindingCountriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListOTPBindingCountriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListOTPBindingCountriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListOTPBindingCountriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListOTPBindingCountriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListOTPBindingCountriesRequestValidationError) ErrorName() string {
+	return "ListOTPBindingCountriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListOTPBindingCountriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListOTPBindingCountriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListOTPBindingCountriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListOTPBindingCountriesRequestValidationError{}
+
+// Validate checks the field values on CheckOTPBindingCountryRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckOTPBindingCountryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckOTPBindingCountryRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CheckOTPBindingCountryRequestMultiError, or nil if none found.
+func (m *CheckOTPBindingCountryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckOTPBindingCountryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CheckOTPBindingCountryRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CheckOTPBindingCountryRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CheckOTPBindingCountryRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Country
+
+	if len(errors) > 0 {
+		return CheckOTPBindingCountryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckOTPBindingCountryRequestMultiError is an error wrapping multiple
+// validation errors returned by CheckOTPBindingCountryRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CheckOTPBindingCountryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckOTPBindingCountryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckOTPBindingCountryRequestMultiError) AllErrors() []error { return m }
+
+// CheckOTPBindingCountryRequestValidationError is the validation error
+// returned by CheckOTPBindingCountryRequest.Validate if the designated
+// constraints aren't met.
+type CheckOTPBindingCountryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckOTPBindingCountryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckOTPBindingCountryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckOTPBindingCountryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckOTPBindingCountryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckOTPBindingCountryRequestValidationError) ErrorName() string {
+	return "CheckOTPBindingCountryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckOTPBindingCountryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckOTPBindingCountryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckOTPBindingCountryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckOTPBindingCountryRequestValidationError{}
+
 // Validate checks the field values on CreateOTPTemplateRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

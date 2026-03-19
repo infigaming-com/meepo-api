@@ -774,6 +774,116 @@ func (x *ListOTPProviderBindingsRequest) GetPageSize() int32 {
 	return 0
 }
 
+// Get distinct countries configured for an operator via provider bindings.
+type ListOTPBindingCountriesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for ownership scoping.
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// If set, only count bindings with this enabled status
+	Enabled       *bool `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOTPBindingCountriesRequest) Reset() {
+	*x = ListOTPBindingCountriesRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOTPBindingCountriesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOTPBindingCountriesRequest) ProtoMessage() {}
+
+func (x *ListOTPBindingCountriesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOTPBindingCountriesRequest.ProtoReflect.Descriptor instead.
+func (*ListOTPBindingCountriesRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListOTPBindingCountriesRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListOTPBindingCountriesRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+// Check whether an operator has at least one enabled binding for a specific country.
+type CheckOTPBindingCountryRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target operator context for ownership scoping.
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// ISO 3166-1 alpha-2 country code or "global"
+	Country       string `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOTPBindingCountryRequest) Reset() {
+	*x = CheckOTPBindingCountryRequest{}
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOTPBindingCountryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOTPBindingCountryRequest) ProtoMessage() {}
+
+func (x *CheckOTPBindingCountryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOTPBindingCountryRequest.ProtoReflect.Descriptor instead.
+func (*CheckOTPBindingCountryRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CheckOTPBindingCountryRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *CheckOTPBindingCountryRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
 // Create a message template bound to a specific OTP provider.
 // UNIQUE(operator_id, country, template_type, language): one template per scenario per language.
 // provider_id must reference an existing OTP provider (created via CreateOTPProvider).
@@ -813,7 +923,7 @@ type CreateOTPTemplateRequest struct {
 
 func (x *CreateOTPTemplateRequest) Reset() {
 	*x = CreateOTPTemplateRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -825,7 +935,7 @@ func (x *CreateOTPTemplateRequest) String() string {
 func (*CreateOTPTemplateRequest) ProtoMessage() {}
 
 func (x *CreateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -838,7 +948,7 @@ func (x *CreateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*CreateOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{9}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CreateOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -955,7 +1065,7 @@ type UpdateOTPTemplateRequest struct {
 
 func (x *UpdateOTPTemplateRequest) Reset() {
 	*x = UpdateOTPTemplateRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +1077,7 @@ func (x *UpdateOTPTemplateRequest) String() string {
 func (*UpdateOTPTemplateRequest) ProtoMessage() {}
 
 func (x *UpdateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +1090,7 @@ func (x *UpdateOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1066,7 +1176,7 @@ type DeleteOTPTemplateRequest struct {
 
 func (x *DeleteOTPTemplateRequest) Reset() {
 	*x = DeleteOTPTemplateRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1078,7 +1188,7 @@ func (x *DeleteOTPTemplateRequest) String() string {
 func (*DeleteOTPTemplateRequest) ProtoMessage() {}
 
 func (x *DeleteOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1091,7 +1201,7 @@ func (x *DeleteOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DeleteOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1121,7 +1231,7 @@ type GetOTPTemplateRequest struct {
 
 func (x *GetOTPTemplateRequest) Reset() {
 	*x = GetOTPTemplateRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1133,7 +1243,7 @@ func (x *GetOTPTemplateRequest) String() string {
 func (*GetOTPTemplateRequest) ProtoMessage() {}
 
 func (x *GetOTPTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1146,7 +1256,7 @@ func (x *GetOTPTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOTPTemplateRequest.ProtoReflect.Descriptor instead.
 func (*GetOTPTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetOTPTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1187,7 +1297,7 @@ type ListOTPTemplatesRequest struct {
 
 func (x *ListOTPTemplatesRequest) Reset() {
 	*x = ListOTPTemplatesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1199,7 +1309,7 @@ func (x *ListOTPTemplatesRequest) String() string {
 func (*ListOTPTemplatesRequest) ProtoMessage() {}
 
 func (x *ListOTPTemplatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1212,7 +1322,7 @@ func (x *ListOTPTemplatesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOTPTemplatesRequest.ProtoReflect.Descriptor instead.
 func (*ListOTPTemplatesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListOTPTemplatesRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1277,7 +1387,7 @@ type SyncOTPTemplateStatusRequest struct {
 
 func (x *SyncOTPTemplateStatusRequest) Reset() {
 	*x = SyncOTPTemplateStatusRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1289,7 +1399,7 @@ func (x *SyncOTPTemplateStatusRequest) String() string {
 func (*SyncOTPTemplateStatusRequest) ProtoMessage() {}
 
 func (x *SyncOTPTemplateStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1302,7 +1412,7 @@ func (x *SyncOTPTemplateStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncOTPTemplateStatusRequest.ProtoReflect.Descriptor instead.
 func (*SyncOTPTemplateStatusRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SyncOTPTemplateStatusRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1344,7 +1454,7 @@ type ListOTPSendLogsRequest struct {
 
 func (x *ListOTPSendLogsRequest) Reset() {
 	*x = ListOTPSendLogsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1356,7 +1466,7 @@ func (x *ListOTPSendLogsRequest) String() string {
 func (*ListOTPSendLogsRequest) ProtoMessage() {}
 
 func (x *ListOTPSendLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_otp_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1479,7 @@ func (x *ListOTPSendLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOTPSendLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListOTPSendLogsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListOTPSendLogsRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1504,7 +1614,15 @@ const file_backoffice_service_v1_backoffice_otp_proto_rawDesc = "" +
 	"\b_countryB\x0e\n" +
 	"\f_provider_idB\n" +
 	"\n" +
-	"\b_enabled\"\xfe\x03\n" +
+	"\b_enabled\"\xa0\x01\n" +
+	"\x1eListOTPBindingCountriesRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
+	"\n" +
+	"\b_enabled\"\x8e\x01\n" +
+	"\x1dCheckOTPBindingCountryRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\"\xfe\x03\n" +
 	"\x18CreateOTPTemplateRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1f\n" +
@@ -1582,7 +1700,7 @@ const file_backoffice_service_v1_backoffice_otp_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\x0f\n" +
 	"\r_channel_usedB\t\n" +
-	"\a_status2\x86\x16\n" +
+	"\a_status2\x95\x19\n" +
 	"\rBackofficeOTP\x12\xa7\x01\n" +
 	"\x11CreateOTPProvider\x123.api.backoffice.service.v1.CreateOTPProviderRequest\x1a..api.push.service.v1.CreateOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/create\x12\xa7\x01\n" +
 	"\x11UpdateOTPProvider\x123.api.backoffice.service.v1.UpdateOTPProviderRequest\x1a..api.push.service.v1.UpdateOTPProviderResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/provider/update\x12\xa7\x01\n" +
@@ -1592,7 +1710,9 @@ const file_backoffice_service_v1_backoffice_otp_proto_rawDesc = "" +
 	"\x18CreateOTPProviderBinding\x12:.api.backoffice.service.v1.CreateOTPProviderBindingRequest\x1a5.api.push.service.v1.CreateOTPProviderBindingResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/otp/provider-binding/create\x12\xc4\x01\n" +
 	"\x18UpdateOTPProviderBinding\x12:.api.backoffice.service.v1.UpdateOTPProviderBindingRequest\x1a5.api.push.service.v1.UpdateOTPProviderBindingResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/otp/provider-binding/update\x12\xc4\x01\n" +
 	"\x18DeleteOTPProviderBinding\x12:.api.backoffice.service.v1.DeleteOTPProviderBindingRequest\x1a5.api.push.service.v1.DeleteOTPProviderBindingResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/otp/provider-binding/delete\x12\xbf\x01\n" +
-	"\x17ListOTPProviderBindings\x129.api.backoffice.service.v1.ListOTPProviderBindingsRequest\x1a4.api.push.service.v1.ListOTPProviderBindingsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/otp/provider-binding/list\x12\xa7\x01\n" +
+	"\x17ListOTPProviderBindings\x129.api.backoffice.service.v1.ListOTPProviderBindingsRequest\x1a4.api.push.service.v1.ListOTPProviderBindingsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/otp/provider-binding/list\x12\xc4\x01\n" +
+	"\x17ListOTPBindingCountries\x129.api.backoffice.service.v1.ListOTPBindingCountriesRequest\x1a4.api.push.service.v1.ListOTPBindingCountriesResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/otp/provider-binding/countries\x12\xc5\x01\n" +
+	"\x16CheckOTPBindingCountry\x128.api.backoffice.service.v1.CheckOTPBindingCountryRequest\x1a3.api.push.service.v1.CheckOTPBindingCountryResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/otp/provider-binding/check-country\x12\xa7\x01\n" +
 	"\x11CreateOTPTemplate\x123.api.backoffice.service.v1.CreateOTPTemplateRequest\x1a..api.push.service.v1.CreateOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/create\x12\xa7\x01\n" +
 	"\x11UpdateOTPTemplate\x123.api.backoffice.service.v1.UpdateOTPTemplateRequest\x1a..api.push.service.v1.UpdateOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/update\x12\xa7\x01\n" +
 	"\x11DeleteOTPTemplate\x123.api.backoffice.service.v1.DeleteOTPTemplateRequest\x1a..api.push.service.v1.DeleteOTPTemplateResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/otp/template/delete\x12\x9b\x01\n" +
@@ -1614,7 +1734,7 @@ func file_backoffice_service_v1_backoffice_otp_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_otp_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_backoffice_service_v1_backoffice_otp_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_backoffice_service_v1_backoffice_otp_proto_goTypes = []any{
 	(*CreateOTPProviderRequest)(nil),            // 0: api.backoffice.service.v1.CreateOTPProviderRequest
 	(*UpdateOTPProviderRequest)(nil),            // 1: api.backoffice.service.v1.UpdateOTPProviderRequest
@@ -1625,94 +1745,104 @@ var file_backoffice_service_v1_backoffice_otp_proto_goTypes = []any{
 	(*UpdateOTPProviderBindingRequest)(nil),     // 6: api.backoffice.service.v1.UpdateOTPProviderBindingRequest
 	(*DeleteOTPProviderBindingRequest)(nil),     // 7: api.backoffice.service.v1.DeleteOTPProviderBindingRequest
 	(*ListOTPProviderBindingsRequest)(nil),      // 8: api.backoffice.service.v1.ListOTPProviderBindingsRequest
-	(*CreateOTPTemplateRequest)(nil),            // 9: api.backoffice.service.v1.CreateOTPTemplateRequest
-	(*UpdateOTPTemplateRequest)(nil),            // 10: api.backoffice.service.v1.UpdateOTPTemplateRequest
-	(*DeleteOTPTemplateRequest)(nil),            // 11: api.backoffice.service.v1.DeleteOTPTemplateRequest
-	(*GetOTPTemplateRequest)(nil),               // 12: api.backoffice.service.v1.GetOTPTemplateRequest
-	(*ListOTPTemplatesRequest)(nil),             // 13: api.backoffice.service.v1.ListOTPTemplatesRequest
-	(*SyncOTPTemplateStatusRequest)(nil),        // 14: api.backoffice.service.v1.SyncOTPTemplateStatusRequest
-	(*ListOTPSendLogsRequest)(nil),              // 15: api.backoffice.service.v1.ListOTPSendLogsRequest
-	(*common.OperatorContext)(nil),              // 16: api.common.OperatorContext
-	(v1.OTPProviderType)(0),                     // 17: api.push.service.v1.OTPProviderType
-	(v1.OTPSendChannelStrategy)(0),              // 18: api.push.service.v1.OTPSendChannelStrategy
-	(v1.OTPTemplateType)(0),                     // 19: api.push.service.v1.OTPTemplateType
-	(*v1.CreateOTPProviderResponse)(nil),        // 20: api.push.service.v1.CreateOTPProviderResponse
-	(*v1.UpdateOTPProviderResponse)(nil),        // 21: api.push.service.v1.UpdateOTPProviderResponse
-	(*v1.DeleteOTPProviderResponse)(nil),        // 22: api.push.service.v1.DeleteOTPProviderResponse
-	(*v1.GetOTPProviderResponse)(nil),           // 23: api.push.service.v1.GetOTPProviderResponse
-	(*v1.ListOTPProvidersResponse)(nil),         // 24: api.push.service.v1.ListOTPProvidersResponse
-	(*v1.CreateOTPProviderBindingResponse)(nil), // 25: api.push.service.v1.CreateOTPProviderBindingResponse
-	(*v1.UpdateOTPProviderBindingResponse)(nil), // 26: api.push.service.v1.UpdateOTPProviderBindingResponse
-	(*v1.DeleteOTPProviderBindingResponse)(nil), // 27: api.push.service.v1.DeleteOTPProviderBindingResponse
-	(*v1.ListOTPProviderBindingsResponse)(nil),  // 28: api.push.service.v1.ListOTPProviderBindingsResponse
-	(*v1.CreateOTPTemplateResponse)(nil),        // 29: api.push.service.v1.CreateOTPTemplateResponse
-	(*v1.UpdateOTPTemplateResponse)(nil),        // 30: api.push.service.v1.UpdateOTPTemplateResponse
-	(*v1.DeleteOTPTemplateResponse)(nil),        // 31: api.push.service.v1.DeleteOTPTemplateResponse
-	(*v1.GetOTPTemplateResponse)(nil),           // 32: api.push.service.v1.GetOTPTemplateResponse
-	(*v1.ListOTPTemplatesResponse)(nil),         // 33: api.push.service.v1.ListOTPTemplatesResponse
-	(*v1.SyncOTPTemplateStatusResponse)(nil),    // 34: api.push.service.v1.SyncOTPTemplateStatusResponse
-	(*v1.ListOTPSendLogsResponse)(nil),          // 35: api.push.service.v1.ListOTPSendLogsResponse
+	(*ListOTPBindingCountriesRequest)(nil),      // 9: api.backoffice.service.v1.ListOTPBindingCountriesRequest
+	(*CheckOTPBindingCountryRequest)(nil),       // 10: api.backoffice.service.v1.CheckOTPBindingCountryRequest
+	(*CreateOTPTemplateRequest)(nil),            // 11: api.backoffice.service.v1.CreateOTPTemplateRequest
+	(*UpdateOTPTemplateRequest)(nil),            // 12: api.backoffice.service.v1.UpdateOTPTemplateRequest
+	(*DeleteOTPTemplateRequest)(nil),            // 13: api.backoffice.service.v1.DeleteOTPTemplateRequest
+	(*GetOTPTemplateRequest)(nil),               // 14: api.backoffice.service.v1.GetOTPTemplateRequest
+	(*ListOTPTemplatesRequest)(nil),             // 15: api.backoffice.service.v1.ListOTPTemplatesRequest
+	(*SyncOTPTemplateStatusRequest)(nil),        // 16: api.backoffice.service.v1.SyncOTPTemplateStatusRequest
+	(*ListOTPSendLogsRequest)(nil),              // 17: api.backoffice.service.v1.ListOTPSendLogsRequest
+	(*common.OperatorContext)(nil),              // 18: api.common.OperatorContext
+	(v1.OTPProviderType)(0),                     // 19: api.push.service.v1.OTPProviderType
+	(v1.OTPSendChannelStrategy)(0),              // 20: api.push.service.v1.OTPSendChannelStrategy
+	(v1.OTPTemplateType)(0),                     // 21: api.push.service.v1.OTPTemplateType
+	(*v1.CreateOTPProviderResponse)(nil),        // 22: api.push.service.v1.CreateOTPProviderResponse
+	(*v1.UpdateOTPProviderResponse)(nil),        // 23: api.push.service.v1.UpdateOTPProviderResponse
+	(*v1.DeleteOTPProviderResponse)(nil),        // 24: api.push.service.v1.DeleteOTPProviderResponse
+	(*v1.GetOTPProviderResponse)(nil),           // 25: api.push.service.v1.GetOTPProviderResponse
+	(*v1.ListOTPProvidersResponse)(nil),         // 26: api.push.service.v1.ListOTPProvidersResponse
+	(*v1.CreateOTPProviderBindingResponse)(nil), // 27: api.push.service.v1.CreateOTPProviderBindingResponse
+	(*v1.UpdateOTPProviderBindingResponse)(nil), // 28: api.push.service.v1.UpdateOTPProviderBindingResponse
+	(*v1.DeleteOTPProviderBindingResponse)(nil), // 29: api.push.service.v1.DeleteOTPProviderBindingResponse
+	(*v1.ListOTPProviderBindingsResponse)(nil),  // 30: api.push.service.v1.ListOTPProviderBindingsResponse
+	(*v1.ListOTPBindingCountriesResponse)(nil),  // 31: api.push.service.v1.ListOTPBindingCountriesResponse
+	(*v1.CheckOTPBindingCountryResponse)(nil),   // 32: api.push.service.v1.CheckOTPBindingCountryResponse
+	(*v1.CreateOTPTemplateResponse)(nil),        // 33: api.push.service.v1.CreateOTPTemplateResponse
+	(*v1.UpdateOTPTemplateResponse)(nil),        // 34: api.push.service.v1.UpdateOTPTemplateResponse
+	(*v1.DeleteOTPTemplateResponse)(nil),        // 35: api.push.service.v1.DeleteOTPTemplateResponse
+	(*v1.GetOTPTemplateResponse)(nil),           // 36: api.push.service.v1.GetOTPTemplateResponse
+	(*v1.ListOTPTemplatesResponse)(nil),         // 37: api.push.service.v1.ListOTPTemplatesResponse
+	(*v1.SyncOTPTemplateStatusResponse)(nil),    // 38: api.push.service.v1.SyncOTPTemplateStatusResponse
+	(*v1.ListOTPSendLogsResponse)(nil),          // 39: api.push.service.v1.ListOTPSendLogsResponse
 }
 var file_backoffice_service_v1_backoffice_otp_proto_depIdxs = []int32{
-	16, // 0: api.backoffice.service.v1.CreateOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 1: api.backoffice.service.v1.CreateOTPProviderRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
-	18, // 2: api.backoffice.service.v1.CreateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
-	16, // 3: api.backoffice.service.v1.UpdateOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
-	18, // 4: api.backoffice.service.v1.UpdateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
-	16, // 5: api.backoffice.service.v1.DeleteOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 6: api.backoffice.service.v1.GetOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 7: api.backoffice.service.v1.ListOTPProvidersRequest.target_operator_context:type_name -> api.common.OperatorContext
-	17, // 8: api.backoffice.service.v1.ListOTPProvidersRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
-	16, // 9: api.backoffice.service.v1.CreateOTPProviderBindingRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 10: api.backoffice.service.v1.UpdateOTPProviderBindingRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 11: api.backoffice.service.v1.DeleteOTPProviderBindingRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 12: api.backoffice.service.v1.ListOTPProviderBindingsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 13: api.backoffice.service.v1.CreateOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 14: api.backoffice.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	16, // 15: api.backoffice.service.v1.UpdateOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 16: api.backoffice.service.v1.DeleteOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 17: api.backoffice.service.v1.GetOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 18: api.backoffice.service.v1.ListOTPTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	19, // 19: api.backoffice.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
-	16, // 20: api.backoffice.service.v1.SyncOTPTemplateStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	16, // 21: api.backoffice.service.v1.ListOTPSendLogsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0,  // 22: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:input_type -> api.backoffice.service.v1.CreateOTPProviderRequest
-	1,  // 23: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:input_type -> api.backoffice.service.v1.UpdateOTPProviderRequest
-	2,  // 24: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:input_type -> api.backoffice.service.v1.DeleteOTPProviderRequest
-	3,  // 25: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:input_type -> api.backoffice.service.v1.GetOTPProviderRequest
-	4,  // 26: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:input_type -> api.backoffice.service.v1.ListOTPProvidersRequest
-	5,  // 27: api.backoffice.service.v1.BackofficeOTP.CreateOTPProviderBinding:input_type -> api.backoffice.service.v1.CreateOTPProviderBindingRequest
-	6,  // 28: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProviderBinding:input_type -> api.backoffice.service.v1.UpdateOTPProviderBindingRequest
-	7,  // 29: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProviderBinding:input_type -> api.backoffice.service.v1.DeleteOTPProviderBindingRequest
-	8,  // 30: api.backoffice.service.v1.BackofficeOTP.ListOTPProviderBindings:input_type -> api.backoffice.service.v1.ListOTPProviderBindingsRequest
-	9,  // 31: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:input_type -> api.backoffice.service.v1.CreateOTPTemplateRequest
-	10, // 32: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:input_type -> api.backoffice.service.v1.UpdateOTPTemplateRequest
-	11, // 33: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:input_type -> api.backoffice.service.v1.DeleteOTPTemplateRequest
-	12, // 34: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:input_type -> api.backoffice.service.v1.GetOTPTemplateRequest
-	13, // 35: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:input_type -> api.backoffice.service.v1.ListOTPTemplatesRequest
-	14, // 36: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:input_type -> api.backoffice.service.v1.SyncOTPTemplateStatusRequest
-	15, // 37: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:input_type -> api.backoffice.service.v1.ListOTPSendLogsRequest
-	20, // 38: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
-	21, // 39: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
-	22, // 40: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
-	23, // 41: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
-	24, // 42: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
-	25, // 43: api.backoffice.service.v1.BackofficeOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
-	26, // 44: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
-	27, // 45: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
-	28, // 46: api.backoffice.service.v1.BackofficeOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
-	29, // 47: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
-	30, // 48: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
-	31, // 49: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
-	32, // 50: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
-	33, // 51: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
-	34, // 52: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
-	35, // 53: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
-	38, // [38:54] is the sub-list for method output_type
-	22, // [22:38] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	18, // 0: api.backoffice.service.v1.CreateOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 1: api.backoffice.service.v1.CreateOTPProviderRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	20, // 2: api.backoffice.service.v1.CreateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	18, // 3: api.backoffice.service.v1.UpdateOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	20, // 4: api.backoffice.service.v1.UpdateOTPProviderRequest.send_channel_strategy:type_name -> api.push.service.v1.OTPSendChannelStrategy
+	18, // 5: api.backoffice.service.v1.DeleteOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 6: api.backoffice.service.v1.GetOTPProviderRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 7: api.backoffice.service.v1.ListOTPProvidersRequest.target_operator_context:type_name -> api.common.OperatorContext
+	19, // 8: api.backoffice.service.v1.ListOTPProvidersRequest.provider_type:type_name -> api.push.service.v1.OTPProviderType
+	18, // 9: api.backoffice.service.v1.CreateOTPProviderBindingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 10: api.backoffice.service.v1.UpdateOTPProviderBindingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 11: api.backoffice.service.v1.DeleteOTPProviderBindingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 12: api.backoffice.service.v1.ListOTPProviderBindingsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 13: api.backoffice.service.v1.ListOTPBindingCountriesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 14: api.backoffice.service.v1.CheckOTPBindingCountryRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 15: api.backoffice.service.v1.CreateOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	21, // 16: api.backoffice.service.v1.CreateOTPTemplateRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	18, // 17: api.backoffice.service.v1.UpdateOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 18: api.backoffice.service.v1.DeleteOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 19: api.backoffice.service.v1.GetOTPTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 20: api.backoffice.service.v1.ListOTPTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	21, // 21: api.backoffice.service.v1.ListOTPTemplatesRequest.template_type:type_name -> api.push.service.v1.OTPTemplateType
+	18, // 22: api.backoffice.service.v1.SyncOTPTemplateStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 23: api.backoffice.service.v1.ListOTPSendLogsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 24: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:input_type -> api.backoffice.service.v1.CreateOTPProviderRequest
+	1,  // 25: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:input_type -> api.backoffice.service.v1.UpdateOTPProviderRequest
+	2,  // 26: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:input_type -> api.backoffice.service.v1.DeleteOTPProviderRequest
+	3,  // 27: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:input_type -> api.backoffice.service.v1.GetOTPProviderRequest
+	4,  // 28: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:input_type -> api.backoffice.service.v1.ListOTPProvidersRequest
+	5,  // 29: api.backoffice.service.v1.BackofficeOTP.CreateOTPProviderBinding:input_type -> api.backoffice.service.v1.CreateOTPProviderBindingRequest
+	6,  // 30: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProviderBinding:input_type -> api.backoffice.service.v1.UpdateOTPProviderBindingRequest
+	7,  // 31: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProviderBinding:input_type -> api.backoffice.service.v1.DeleteOTPProviderBindingRequest
+	8,  // 32: api.backoffice.service.v1.BackofficeOTP.ListOTPProviderBindings:input_type -> api.backoffice.service.v1.ListOTPProviderBindingsRequest
+	9,  // 33: api.backoffice.service.v1.BackofficeOTP.ListOTPBindingCountries:input_type -> api.backoffice.service.v1.ListOTPBindingCountriesRequest
+	10, // 34: api.backoffice.service.v1.BackofficeOTP.CheckOTPBindingCountry:input_type -> api.backoffice.service.v1.CheckOTPBindingCountryRequest
+	11, // 35: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:input_type -> api.backoffice.service.v1.CreateOTPTemplateRequest
+	12, // 36: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:input_type -> api.backoffice.service.v1.UpdateOTPTemplateRequest
+	13, // 37: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:input_type -> api.backoffice.service.v1.DeleteOTPTemplateRequest
+	14, // 38: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:input_type -> api.backoffice.service.v1.GetOTPTemplateRequest
+	15, // 39: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:input_type -> api.backoffice.service.v1.ListOTPTemplatesRequest
+	16, // 40: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:input_type -> api.backoffice.service.v1.SyncOTPTemplateStatusRequest
+	17, // 41: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:input_type -> api.backoffice.service.v1.ListOTPSendLogsRequest
+	22, // 42: api.backoffice.service.v1.BackofficeOTP.CreateOTPProvider:output_type -> api.push.service.v1.CreateOTPProviderResponse
+	23, // 43: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProvider:output_type -> api.push.service.v1.UpdateOTPProviderResponse
+	24, // 44: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProvider:output_type -> api.push.service.v1.DeleteOTPProviderResponse
+	25, // 45: api.backoffice.service.v1.BackofficeOTP.GetOTPProvider:output_type -> api.push.service.v1.GetOTPProviderResponse
+	26, // 46: api.backoffice.service.v1.BackofficeOTP.ListOTPProviders:output_type -> api.push.service.v1.ListOTPProvidersResponse
+	27, // 47: api.backoffice.service.v1.BackofficeOTP.CreateOTPProviderBinding:output_type -> api.push.service.v1.CreateOTPProviderBindingResponse
+	28, // 48: api.backoffice.service.v1.BackofficeOTP.UpdateOTPProviderBinding:output_type -> api.push.service.v1.UpdateOTPProviderBindingResponse
+	29, // 49: api.backoffice.service.v1.BackofficeOTP.DeleteOTPProviderBinding:output_type -> api.push.service.v1.DeleteOTPProviderBindingResponse
+	30, // 50: api.backoffice.service.v1.BackofficeOTP.ListOTPProviderBindings:output_type -> api.push.service.v1.ListOTPProviderBindingsResponse
+	31, // 51: api.backoffice.service.v1.BackofficeOTP.ListOTPBindingCountries:output_type -> api.push.service.v1.ListOTPBindingCountriesResponse
+	32, // 52: api.backoffice.service.v1.BackofficeOTP.CheckOTPBindingCountry:output_type -> api.push.service.v1.CheckOTPBindingCountryResponse
+	33, // 53: api.backoffice.service.v1.BackofficeOTP.CreateOTPTemplate:output_type -> api.push.service.v1.CreateOTPTemplateResponse
+	34, // 54: api.backoffice.service.v1.BackofficeOTP.UpdateOTPTemplate:output_type -> api.push.service.v1.UpdateOTPTemplateResponse
+	35, // 55: api.backoffice.service.v1.BackofficeOTP.DeleteOTPTemplate:output_type -> api.push.service.v1.DeleteOTPTemplateResponse
+	36, // 56: api.backoffice.service.v1.BackofficeOTP.GetOTPTemplate:output_type -> api.push.service.v1.GetOTPTemplateResponse
+	37, // 57: api.backoffice.service.v1.BackofficeOTP.ListOTPTemplates:output_type -> api.push.service.v1.ListOTPTemplatesResponse
+	38, // 58: api.backoffice.service.v1.BackofficeOTP.SyncOTPTemplateStatus:output_type -> api.push.service.v1.SyncOTPTemplateStatusResponse
+	39, // 59: api.backoffice.service.v1.BackofficeOTP.ListOTPSendLogs:output_type -> api.push.service.v1.ListOTPSendLogsResponse
+	42, // [42:60] is the sub-list for method output_type
+	24, // [24:42] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_otp_proto_init() }
@@ -1724,16 +1854,17 @@ func file_backoffice_service_v1_backoffice_otp_proto_init() {
 	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[4].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[6].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[8].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[10].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[13].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[9].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[12].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[15].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_otp_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_otp_proto_rawDesc), len(file_backoffice_service_v1_backoffice_otp_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

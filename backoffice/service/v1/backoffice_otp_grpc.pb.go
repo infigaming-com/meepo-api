@@ -29,6 +29,8 @@ const (
 	BackofficeOTP_UpdateOTPProviderBinding_FullMethodName = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPProviderBinding"
 	BackofficeOTP_DeleteOTPProviderBinding_FullMethodName = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPProviderBinding"
 	BackofficeOTP_ListOTPProviderBindings_FullMethodName  = "/api.backoffice.service.v1.BackofficeOTP/ListOTPProviderBindings"
+	BackofficeOTP_ListOTPBindingCountries_FullMethodName  = "/api.backoffice.service.v1.BackofficeOTP/ListOTPBindingCountries"
+	BackofficeOTP_CheckOTPBindingCountry_FullMethodName   = "/api.backoffice.service.v1.BackofficeOTP/CheckOTPBindingCountry"
 	BackofficeOTP_CreateOTPTemplate_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/CreateOTPTemplate"
 	BackofficeOTP_UpdateOTPTemplate_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/UpdateOTPTemplate"
 	BackofficeOTP_DeleteOTPTemplate_FullMethodName        = "/api.backoffice.service.v1.BackofficeOTP/DeleteOTPTemplate"
@@ -251,6 +253,12 @@ type BackofficeOTPClient interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with inline provider info for each binding.
 	ListOTPProviderBindings(ctx context.Context, in *ListOTPProviderBindingsRequest, opts ...grpc.CallOption) (*v1.ListOTPProviderBindingsResponse, error)
+	// ListOTPBindingCountries returns the distinct countries configured for an operator.
+	// Use this to display which countries have OTP provider bindings.
+	ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...grpc.CallOption) (*v1.ListOTPBindingCountriesResponse, error)
+	// CheckOTPBindingCountry checks whether an operator has at least one enabled
+	// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+	CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...grpc.CallOption) (*v1.CheckOTPBindingCountryResponse, error)
 	// CreateOTPTemplate creates a message template bound to a specific OTP provider.
 	//
 	// ## What is an OTP Template?
@@ -472,6 +480,26 @@ func (c *backofficeOTPClient) ListOTPProviderBindings(ctx context.Context, in *L
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListOTPProviderBindingsResponse)
 	err := c.cc.Invoke(ctx, BackofficeOTP_ListOTPProviderBindings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOTPClient) ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...grpc.CallOption) (*v1.ListOTPBindingCountriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListOTPBindingCountriesResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_ListOTPBindingCountries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOTPClient) CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...grpc.CallOption) (*v1.CheckOTPBindingCountryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CheckOTPBindingCountryResponse)
+	err := c.cc.Invoke(ctx, BackofficeOTP_CheckOTPBindingCountry_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -761,6 +789,12 @@ type BackofficeOTPServer interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with inline provider info for each binding.
 	ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*v1.ListOTPProviderBindingsResponse, error)
+	// ListOTPBindingCountries returns the distinct countries configured for an operator.
+	// Use this to display which countries have OTP provider bindings.
+	ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*v1.ListOTPBindingCountriesResponse, error)
+	// CheckOTPBindingCountry checks whether an operator has at least one enabled
+	// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+	CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*v1.CheckOTPBindingCountryResponse, error)
 	// CreateOTPTemplate creates a message template bound to a specific OTP provider.
 	//
 	// ## What is an OTP Template?
@@ -924,6 +958,12 @@ func (UnimplementedBackofficeOTPServer) DeleteOTPProviderBinding(context.Context
 }
 func (UnimplementedBackofficeOTPServer) ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*v1.ListOTPProviderBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOTPProviderBindings not implemented")
+}
+func (UnimplementedBackofficeOTPServer) ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*v1.ListOTPBindingCountriesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOTPBindingCountries not implemented")
+}
+func (UnimplementedBackofficeOTPServer) CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*v1.CheckOTPBindingCountryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckOTPBindingCountry not implemented")
 }
 func (UnimplementedBackofficeOTPServer) CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*v1.CreateOTPTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateOTPTemplate not implemented")
@@ -1129,6 +1169,42 @@ func _BackofficeOTP_ListOTPProviderBindings_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOTP_ListOTPBindingCountries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOTPBindingCountriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).ListOTPBindingCountries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_ListOTPBindingCountries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).ListOTPBindingCountries(ctx, req.(*ListOTPBindingCountriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOTP_CheckOTPBindingCountry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckOTPBindingCountryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOTPServer).CheckOTPBindingCountry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOTP_CheckOTPBindingCountry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOTPServer).CheckOTPBindingCountry(ctx, req.(*CheckOTPBindingCountryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeOTP_CreateOTPTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateOTPTemplateRequest)
 	if err := dec(in); err != nil {
@@ -1297,6 +1373,14 @@ var BackofficeOTP_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOTPProviderBindings",
 			Handler:    _BackofficeOTP_ListOTPProviderBindings_Handler,
+		},
+		{
+			MethodName: "ListOTPBindingCountries",
+			Handler:    _BackofficeOTP_ListOTPBindingCountries_Handler,
+		},
+		{
+			MethodName: "CheckOTPBindingCountry",
+			Handler:    _BackofficeOTP_CheckOTPBindingCountry_Handler,
 		},
 		{
 			MethodName: "CreateOTPTemplate",
