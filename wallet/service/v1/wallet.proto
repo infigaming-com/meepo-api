@@ -680,7 +680,8 @@ message ListWalletBalanceTransactionsRequest {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	optional string transaction_type = 2;
+	optional string transaction_type = 2 [deprecated = true];
+	repeated string transaction_types = 12;
 	optional string currency = 3;
 	optional google.protobuf.Timestamp start_time = 4;
 	optional google.protobuf.Timestamp end_time = 5;
@@ -740,6 +741,7 @@ message ListWalletBalanceTransactionsResponse {
 		string after_operator_bonus_balance = 23;
 		string before_provider_bonus_balance = 24;
 		string after_provider_bonus_balance = 25;
+		string status = 26;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
