@@ -55,7 +55,12 @@ service PushOTP {
   rpc UpdateOTPProviderBinding(UpdateOTPProviderBindingRequest) returns (UpdateOTPProviderBindingResponse) {}
   rpc DeleteOTPProviderBinding(DeleteOTPProviderBindingRequest) returns (DeleteOTPProviderBindingResponse) {}
   rpc ListOTPProviderBindings(ListOTPProviderBindingsRequest) returns (ListOTPProviderBindingsResponse) {}
+  // ListOTPBindingCountries returns the distinct countries that have provider bindings
+  // for a given operator. Useful for building country selector UIs or checking coverage.
   rpc ListOTPBindingCountries(ListOTPBindingCountriesRequest) returns (ListOTPBindingCountriesResponse) {}
+
+  // CheckOTPBindingCountry checks whether an operator has at least one enabled provider
+  // binding for a specific country. Useful for pre-flight validation before calling SendOTP.
   rpc CheckOTPBindingCountry(CheckOTPBindingCountryRequest) returns (CheckOTPBindingCountryResponse) {}
 
   // ====== Backoffice: Template CRUD ======
