@@ -6177,6 +6177,7 @@ type AffiliateSubAccountInfo struct {
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	TwoFaEnabled  bool                   `protobuf:"varint,4,opt,name=two_fa_enabled,json=twoFaEnabled,proto3" json:"two_fa_enabled,omitempty"`
+	Enabled       bool                   `protobuf:"varint,5,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6235,6 +6236,13 @@ func (x *AffiliateSubAccountInfo) GetEmail() string {
 func (x *AffiliateSubAccountInfo) GetTwoFaEnabled() bool {
 	if x != nil {
 		return x.TwoFaEnabled
+	}
+	return false
+}
+
+func (x *AffiliateSubAccountInfo) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
 	}
 	return false
 }
@@ -10332,12 +10340,13 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\fsub_accounts\x18\x01 \x03(\v21.api.affiliate.service.v1.AffiliateSubAccountInfoR\vsubAccounts\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x8a\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xa4\x01\n" +
 	"\x17AffiliateSubAccountInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12$\n" +
-	"\x0etwo_fa_enabled\x18\x04 \x01(\bR\ftwoFaEnabled2\xd1C\n" +
+	"\x0etwo_fa_enabled\x18\x04 \x01(\bR\ftwoFaEnabled\x12\x18\n" +
+	"\aenabled\x18\x05 \x01(\bR\aenabled2\xd1C\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +

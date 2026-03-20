@@ -336,6 +336,13 @@ service BackofficeAffiliate {
 		};
 	}
 
+	rpc UpdateAffiliateSubAccount(UpdateAffiliateSubAccountRequest) returns (UpdateAffiliateSubAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/sub-account/update"
+			body: "*"
+		};
+	}
+
 }
 
 // -------------- Commission Plan --------------
@@ -701,3 +708,17 @@ message ListAffiliateSubAccountsRequest {
 	optional int32 page = 3;
 	optional int32 page_size = 4;
 }
+
+message SubAccountResetPassword {
+	string new_password = 1;
+}
+
+message UpdateAffiliateSubAccountRequest {
+	int64 affiliate_id = 1;
+	int64 sub_account_user_id = 2;
+	optional bool enabled = 3;
+	optional SubAccountResetPassword reset_password = 4;
+	optional bool reset_2fa = 5;
+}
+
+message UpdateAffiliateSubAccountResponse {}

@@ -6606,6 +6606,365 @@ var _ interface {
 	ErrorName() string
 } = ListAffiliateSubAccountsRequestValidationError{}
 
+// Validate checks the field values on SubAccountResetPassword with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SubAccountResetPassword) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SubAccountResetPassword with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SubAccountResetPasswordMultiError, or nil if none found.
+func (m *SubAccountResetPassword) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SubAccountResetPassword) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for NewPassword
+
+	if len(errors) > 0 {
+		return SubAccountResetPasswordMultiError(errors)
+	}
+
+	return nil
+}
+
+// SubAccountResetPasswordMultiError is an error wrapping multiple validation
+// errors returned by SubAccountResetPassword.ValidateAll() if the designated
+// constraints aren't met.
+type SubAccountResetPasswordMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SubAccountResetPasswordMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SubAccountResetPasswordMultiError) AllErrors() []error { return m }
+
+// SubAccountResetPasswordValidationError is the validation error returned by
+// SubAccountResetPassword.Validate if the designated constraints aren't met.
+type SubAccountResetPasswordValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SubAccountResetPasswordValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SubAccountResetPasswordValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SubAccountResetPasswordValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SubAccountResetPasswordValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SubAccountResetPasswordValidationError) ErrorName() string {
+	return "SubAccountResetPasswordValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SubAccountResetPasswordValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSubAccountResetPassword.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SubAccountResetPasswordValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SubAccountResetPasswordValidationError{}
+
+// Validate checks the field values on UpdateAffiliateSubAccountRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateAffiliateSubAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAffiliateSubAccountRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateAffiliateSubAccountRequestMultiError, or nil if none found.
+func (m *UpdateAffiliateSubAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAffiliateSubAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for SubAccountUserId
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.ResetPassword != nil {
+
+		if all {
+			switch v := interface{}(m.GetResetPassword()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateAffiliateSubAccountRequestValidationError{
+						field:  "ResetPassword",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateAffiliateSubAccountRequestValidationError{
+						field:  "ResetPassword",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetResetPassword()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateAffiliateSubAccountRequestValidationError{
+					field:  "ResetPassword",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Reset_2Fa != nil {
+		// no validation rules for Reset_2Fa
+	}
+
+	if len(errors) > 0 {
+		return UpdateAffiliateSubAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAffiliateSubAccountRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateAffiliateSubAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAffiliateSubAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAffiliateSubAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAffiliateSubAccountRequestMultiError) AllErrors() []error { return m }
+
+// UpdateAffiliateSubAccountRequestValidationError is the validation error
+// returned by UpdateAffiliateSubAccountRequest.Validate if the designated
+// constraints aren't met.
+type UpdateAffiliateSubAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAffiliateSubAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAffiliateSubAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAffiliateSubAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAffiliateSubAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAffiliateSubAccountRequestValidationError) ErrorName() string {
+	return "UpdateAffiliateSubAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAffiliateSubAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAffiliateSubAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAffiliateSubAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAffiliateSubAccountRequestValidationError{}
+
+// Validate checks the field values on UpdateAffiliateSubAccountResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateAffiliateSubAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAffiliateSubAccountResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateAffiliateSubAccountResponseMultiError, or nil if none found.
+func (m *UpdateAffiliateSubAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAffiliateSubAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateAffiliateSubAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAffiliateSubAccountResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateAffiliateSubAccountResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAffiliateSubAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAffiliateSubAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAffiliateSubAccountResponseMultiError) AllErrors() []error { return m }
+
+// UpdateAffiliateSubAccountResponseValidationError is the validation error
+// returned by UpdateAffiliateSubAccountResponse.Validate if the designated
+// constraints aren't met.
+type UpdateAffiliateSubAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAffiliateSubAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAffiliateSubAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAffiliateSubAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAffiliateSubAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAffiliateSubAccountResponseValidationError) ErrorName() string {
+	return "UpdateAffiliateSubAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAffiliateSubAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAffiliateSubAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAffiliateSubAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAffiliateSubAccountResponseValidationError{}
+
 // Validate checks the field values on CreateCampaignRequest_Campaign with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
