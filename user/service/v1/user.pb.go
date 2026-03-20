@@ -313,7 +313,9 @@ type UserInfo struct {
 	// user phone verification status
 	PhoneVerified bool `protobuf:"varint,26,opt,name=phone_verified,json=phoneVerified,proto3" json:"phone_verified,omitempty"`
 	// user registered at
-	RegisteredAt  *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	RegisteredAt *timestamppb.Timestamp `protobuf:"bytes,27,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	// whether MFA is required for this user
+	MfaRequired   bool `protobuf:"varint,28,opt,name=mfa_required,json=mfaRequired,proto3" json:"mfa_required,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -535,6 +537,13 @@ func (x *UserInfo) GetRegisteredAt() *timestamppb.Timestamp {
 		return x.RegisteredAt
 	}
 	return nil
+}
+
+func (x *UserInfo) GetMfaRequired() bool {
+	if x != nil {
+		return x.MfaRequired
+	}
+	return false
 }
 
 // RegisterRequest contains the information needed to register a new user.
@@ -4178,16 +4187,17 @@ func (x *ExportUsersResponse) GetTaskId() int64 {
 }
 
 type CreateUserRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	Username        string                  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Password        *string                 `protobuf:"bytes,2,opt,name=password,proto3,oneof" json:"password,omitempty"`
-	Email           string                  `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile          *string                 `protobuf:"bytes,4,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	RoleId          int64                   `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	UserId          int64                   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // operator's user ID, used to verify role assignment permission
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state             protoimpl.MessageState  `protogen:"open.v1"`
+	Username          string                  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password          *string                 `protobuf:"bytes,2,opt,name=password,proto3,oneof" json:"password,omitempty"`
+	Email             string                  `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile            *string                 `protobuf:"bytes,4,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	RoleId            int64                   `protobuf:"varint,6,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	UserId            int64                   `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // operator's user ID, used to verify role assignment permission
+	ParentAffiliateId *int64                  `protobuf:"varint,8,opt,name=parent_affiliate_id,json=parentAffiliateId,proto3,oneof" json:"parent_affiliate_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreateUserRequest) Reset() {
@@ -4265,6 +4275,13 @@ func (x *CreateUserRequest) GetRoleId() int64 {
 func (x *CreateUserRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateUserRequest) GetParentAffiliateId() int64 {
+	if x != nil && x.ParentAffiliateId != nil {
+		return *x.ParentAffiliateId
 	}
 	return 0
 }
@@ -17929,7 +17946,7 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x18vip/service/v1/vip.proto\x1a\x1ewallet/service/v1/wallet.proto\"\xd6\a\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x18vip/service/v1/vip.proto\x1a\x1ewallet/service/v1/wallet.proto\"\xf9\a\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -17959,7 +17976,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10default_currency\x18\x18 \x01(\tR\x0fdefaultCurrency\x12%\n" +
 	"\x0eemail_verified\x18\x19 \x01(\bR\remailVerified\x12%\n" +
 	"\x0ephone_verified\x18\x1a \x01(\bR\rphoneVerified\x12?\n" +
-	"\rregistered_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\"\xed\x06\n" +
+	"\rregistered_at\x18\x1b \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12!\n" +
+	"\fmfa_required\x18\x1c \x01(\bR\vmfaRequired\"\xed\x06\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
@@ -18390,7 +18408,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x14_registration_sourceB\r\n" +
 	"\v_agent_type\".\n" +
 	"\x13ExportUsersResponse\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\x95\x02\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\xe2\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1f\n" +
 	"\bpassword\x18\x02 \x01(\tH\x00R\bpassword\x88\x01\x01\x12\x14\n" +
@@ -18398,9 +18416,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x06mobile\x18\x04 \x01(\tH\x01R\x06mobile\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\arole_id\x18\x06 \x01(\x03R\x06roleId\x12\x17\n" +
-	"\auser_id\x18\a \x01(\x03R\x06userIdB\v\n" +
+	"\auser_id\x18\a \x01(\x03R\x06userId\x123\n" +
+	"\x13parent_affiliate_id\x18\b \x01(\x03H\x02R\x11parentAffiliateId\x88\x01\x01B\v\n" +
 	"\t_passwordB\t\n" +
-	"\a_mobile\"_\n" +
+	"\a_mobileB\x16\n" +
+	"\x14_parent_affiliate_id\"_\n" +
 	"\x12CreateUserResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +

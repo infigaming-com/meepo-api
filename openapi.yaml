@@ -1366,6 +1366,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendAffiliateAccountEmailResponse'
+    /v1/backoffice/affiliate/sub-account/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreateAffiliateSubAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateAffiliateSubAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateAffiliateSubAccountResponse'
+    /v1/backoffice/affiliate/sub-account/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateSubAccounts
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateSubAccountsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateSubAccountsResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -5324,7 +5360,25 @@ paths:
                 - BackofficeOTP
             description: |-
                 CheckOTPBindingCountry checks whether an operator has at least one enabled
-                 provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+                 provider binding for a specific country.
+
+                 ## Use cases
+                   - Pre-flight check before sending OTP: verify the country is configured
+                   - UI indicator: show green/red status per country
+                   - Onboarding validation: ensure OTP is set up before going live
+
+                 ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/check-country)
+                 ```json
+                 {
+                   "target_operator_context": { "operator_id": 1001 },
+                   "country": "BR"
+                 }
+                 ```
+
+                 ## Example response
+                 ```json
+                 { "configured": true }
+                 ```
             operationId: BackofficeOTP_CheckOTPBindingCountry
             requestBody:
                 content:
@@ -5344,8 +5398,29 @@ paths:
             tags:
                 - BackofficeOTP
             description: |-
-                ListOTPBindingCountries returns the distinct countries configured for an operator.
-                 Use this to display which countries have OTP provider bindings.
+                ListOTPBindingCountries returns the distinct countries configured for an operator
+                 via provider bindings.
+
+                 ## Use cases
+                   - Build a country selector UI showing which countries have OTP configured
+                   - Check OTP coverage: which countries are ready vs. missing
+                   - Dashboard statistics: how many countries are configured
+
+                 ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/countries)
+                 ```json
+                 {
+                   "target_operator_context": { "operator_id": 1001 },
+                   "enabled": true
+                 }
+                 ```
+
+                 ## Example response
+                 ```json
+                 {
+                   "countries": ["BR", "JP", "global"],
+                   "total": 3
+                 }
+                 ```
             operationId: BackofficeOTP_ListOTPBindingCountries
             requestBody:
                 content:
@@ -10701,6 +10776,17 @@ components:
                     type: string
                 taxReportingCurrency:
                     type: string
+        api.affiliate.service.v1.AffiliateSubAccountInfo:
+            type: object
+            properties:
+                userId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                twoFaEnabled:
+                    type: boolean
         api.affiliate.service.v1.AffiliateVTGReportItem:
             type: object
             properties:
@@ -11292,6 +11378,11 @@ components:
             type: object
             properties:
                 affiliateId:
+                    type: string
+        api.affiliate.service.v1.CreateAffiliateSubAccountResponse:
+            type: object
+            properties:
+                userId:
                     type: string
         api.affiliate.service.v1.CreateCampaignResponse:
             type: object
@@ -12151,6 +12242,22 @@ components:
                     format: int32
                 total:
                     type: string
+        api.affiliate.service.v1.ListAffiliateSubAccountsResponse:
+            type: object
+            properties:
+                subAccounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateSubAccountInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.ListAffiliateVTGReportResponse:
             type: object
             properties:
@@ -14125,6 +14232,19 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.CreateAffiliateSubAccountRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                password:
+                    type: string
         api.backoffice.service.v1.CreateAffiliateWithdrawRequest:
             type: object
             properties:
@@ -17760,6 +17880,19 @@ components:
                 dimension:
                     type: string
                 onlyNegativeCarryover:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListAffiliateSubAccountsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                paginate:
                     type: boolean
                 page:
                     type: integer
@@ -30168,6 +30301,9 @@ components:
                     type: string
                     description: user registered at
                     format: date-time
+                mfaRequired:
+                    type: boolean
+                    description: whether MFA is required for this user
             description: UserInfo contains basic user information.
         api.user.service.v1.UserPrivacySettings:
             type: object

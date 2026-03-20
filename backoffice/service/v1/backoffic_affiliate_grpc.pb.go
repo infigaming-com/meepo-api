@@ -62,6 +62,8 @@ const (
 	BackofficeAffiliate_ListLandingTemplatesByCampaign_FullMethodName  = "/api.backoffice.service.v1.BackofficeAffiliate/ListLandingTemplatesByCampaign"
 	BackofficeAffiliate_GetAffiliateDashboard_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDashboard"
 	BackofficeAffiliate_GetAffiliateTrend_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateTrend"
+	BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliateSubAccount"
+	BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateSubAccounts"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -110,6 +112,8 @@ type BackofficeAffiliateClient interface {
 	ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesByCampaignResponse, error)
 	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error)
 	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error)
+	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -540,6 +544,26 @@ func (c *backofficeAffiliateClient) GetAffiliateTrend(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateAffiliateSubAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListAffiliateSubAccountsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAffiliateServer is the server API for BackofficeAffiliate service.
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
@@ -586,6 +610,8 @@ type BackofficeAffiliateServer interface {
 	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*v1.ListLandingTemplatesByCampaignResponse, error)
 	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error)
 	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
+	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -721,6 +747,12 @@ func (UnimplementedBackofficeAffiliateServer) GetAffiliateDashboard(context.Cont
 }
 func (UnimplementedBackofficeAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAffiliateSubAccount not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSubAccounts not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -1499,6 +1531,42 @@ func _BackofficeAffiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_CreateAffiliateSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAffiliateSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).CreateAffiliateSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).CreateAffiliateSubAccount(ctx, req.(*CreateAffiliateSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListAffiliateSubAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateSubAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListAffiliateSubAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListAffiliateSubAccounts(ctx, req.(*ListAffiliateSubAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAffiliate_ServiceDesc is the grpc.ServiceDesc for BackofficeAffiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1673,6 +1741,14 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAffiliateTrend",
 			Handler:    _BackofficeAffiliate_GetAffiliateTrend_Handler,
+		},
+		{
+			MethodName: "CreateAffiliateSubAccount",
+			Handler:    _BackofficeAffiliate_CreateAffiliateSubAccount_Handler,
+		},
+		{
+			MethodName: "ListAffiliateSubAccounts",
+			Handler:    _BackofficeAffiliate_ListAffiliateSubAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

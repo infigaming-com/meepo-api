@@ -253,11 +253,56 @@ type BackofficeOTPClient interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with inline provider info for each binding.
 	ListOTPProviderBindings(ctx context.Context, in *ListOTPProviderBindingsRequest, opts ...grpc.CallOption) (*v1.ListOTPProviderBindingsResponse, error)
-	// ListOTPBindingCountries returns the distinct countries configured for an operator.
-	// Use this to display which countries have OTP provider bindings.
+	// ListOTPBindingCountries returns the distinct countries configured for an operator
+	// via provider bindings.
+	//
+	// ## Use cases
+	//   - Build a country selector UI showing which countries have OTP configured
+	//   - Check OTP coverage: which countries are ready vs. missing
+	//   - Dashboard statistics: how many countries are configured
+	//
+	// ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/countries)
+	// ```json
+	//
+	//	{
+	//	  "target_operator_context": { "operator_id": 1001 },
+	//	  "enabled": true
+	//	}
+	//
+	// ```
+	//
+	// ## Example response
+	// ```json
+	//
+	//	{
+	//	  "countries": ["BR", "JP", "global"],
+	//	  "total": 3
+	//	}
+	//
+	// ```
 	ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...grpc.CallOption) (*v1.ListOTPBindingCountriesResponse, error)
 	// CheckOTPBindingCountry checks whether an operator has at least one enabled
-	// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+	// provider binding for a specific country.
+	//
+	// ## Use cases
+	//   - Pre-flight check before sending OTP: verify the country is configured
+	//   - UI indicator: show green/red status per country
+	//   - Onboarding validation: ensure OTP is set up before going live
+	//
+	// ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/check-country)
+	// ```json
+	//
+	//	{
+	//	  "target_operator_context": { "operator_id": 1001 },
+	//	  "country": "BR"
+	//	}
+	//
+	// ```
+	//
+	// ## Example response
+	// ```json
+	// { "configured": true }
+	// ```
 	CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...grpc.CallOption) (*v1.CheckOTPBindingCountryResponse, error)
 	// CreateOTPTemplate creates a message template bound to a specific OTP provider.
 	//
@@ -789,11 +834,56 @@ type BackofficeOTPServer interface {
 	// Results are scoped to the operator specified in target_operator_context.
 	// Returns paginated results with inline provider info for each binding.
 	ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*v1.ListOTPProviderBindingsResponse, error)
-	// ListOTPBindingCountries returns the distinct countries configured for an operator.
-	// Use this to display which countries have OTP provider bindings.
+	// ListOTPBindingCountries returns the distinct countries configured for an operator
+	// via provider bindings.
+	//
+	// ## Use cases
+	//   - Build a country selector UI showing which countries have OTP configured
+	//   - Check OTP coverage: which countries are ready vs. missing
+	//   - Dashboard statistics: how many countries are configured
+	//
+	// ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/countries)
+	// ```json
+	//
+	//	{
+	//	  "target_operator_context": { "operator_id": 1001 },
+	//	  "enabled": true
+	//	}
+	//
+	// ```
+	//
+	// ## Example response
+	// ```json
+	//
+	//	{
+	//	  "countries": ["BR", "JP", "global"],
+	//	  "total": 3
+	//	}
+	//
+	// ```
 	ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*v1.ListOTPBindingCountriesResponse, error)
 	// CheckOTPBindingCountry checks whether an operator has at least one enabled
-	// provider binding for a specific country. Useful for pre-flight checks before sending OTP.
+	// provider binding for a specific country.
+	//
+	// ## Use cases
+	//   - Pre-flight check before sending OTP: verify the country is configured
+	//   - UI indicator: show green/red status per country
+	//   - Onboarding validation: ensure OTP is set up before going live
+	//
+	// ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/check-country)
+	// ```json
+	//
+	//	{
+	//	  "target_operator_context": { "operator_id": 1001 },
+	//	  "country": "BR"
+	//	}
+	//
+	// ```
+	//
+	// ## Example response
+	// ```json
+	// { "configured": true }
+	// ```
 	CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*v1.CheckOTPBindingCountryResponse, error)
 	// CreateOTPTemplate creates a message template bound to a specific OTP provider.
 	//
