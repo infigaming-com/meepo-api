@@ -6374,6 +6374,238 @@ var _ interface {
 	ErrorName() string
 } = ListLandingTemplatesByCampaignRequestValidationError{}
 
+// Validate checks the field values on CreateAffiliateSubAccountRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CreateAffiliateSubAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateAffiliateSubAccountRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateAffiliateSubAccountRequestMultiError, or nil if none found.
+func (m *CreateAffiliateSubAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateAffiliateSubAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for Username
+
+	// no validation rules for Email
+
+	// no validation rules for Mobile
+
+	// no validation rules for Password
+
+	if len(errors) > 0 {
+		return CreateAffiliateSubAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateAffiliateSubAccountRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// CreateAffiliateSubAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateAffiliateSubAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateAffiliateSubAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateAffiliateSubAccountRequestMultiError) AllErrors() []error { return m }
+
+// CreateAffiliateSubAccountRequestValidationError is the validation error
+// returned by CreateAffiliateSubAccountRequest.Validate if the designated
+// constraints aren't met.
+type CreateAffiliateSubAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateAffiliateSubAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateAffiliateSubAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateAffiliateSubAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateAffiliateSubAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateAffiliateSubAccountRequestValidationError) ErrorName() string {
+	return "CreateAffiliateSubAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateAffiliateSubAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateAffiliateSubAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateAffiliateSubAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateAffiliateSubAccountRequestValidationError{}
+
+// Validate checks the field values on ListAffiliateSubAccountsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAffiliateSubAccountsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAffiliateSubAccountsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListAffiliateSubAccountsRequestMultiError, or nil if none found.
+func (m *ListAffiliateSubAccountsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAffiliateSubAccountsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AffiliateId
+
+	if m.Paginate != nil {
+		// no validation rules for Paginate
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListAffiliateSubAccountsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAffiliateSubAccountsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListAffiliateSubAccountsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListAffiliateSubAccountsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAffiliateSubAccountsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAffiliateSubAccountsRequestMultiError) AllErrors() []error { return m }
+
+// ListAffiliateSubAccountsRequestValidationError is the validation error
+// returned by ListAffiliateSubAccountsRequest.Validate if the designated
+// constraints aren't met.
+type ListAffiliateSubAccountsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAffiliateSubAccountsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAffiliateSubAccountsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAffiliateSubAccountsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAffiliateSubAccountsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAffiliateSubAccountsRequestValidationError) ErrorName() string {
+	return "ListAffiliateSubAccountsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAffiliateSubAccountsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAffiliateSubAccountsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAffiliateSubAccountsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAffiliateSubAccountsRequestValidationError{}
+
 // Validate checks the field values on CreateCampaignRequest_Campaign with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

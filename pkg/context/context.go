@@ -168,6 +168,21 @@ func GetRequestInfo(ctx context.Context) (RequestInfo, bool) {
 	return Value[RequestInfo](ctx, "requestInfo")
 }
 
+// GetLoginAsUserId returns the user ID that the current user is acting as.
+// For sub-accounts: returns LoginAsUserId (parent affiliate's userId).
+// For everyone else: returns UserId.
+func GetLoginAsUserId(userInfo jwt.UserInfo) int64 {
+	if userInfo.LoginAsUserId > 0 {
+		return userInfo.LoginAsUserId
+	}
+	return userInfo.UserId
+}
+
+// IsSubAccount returns true if the current user is a sub-account of an affiliate.
+func IsSubAccount(userInfo jwt.UserInfo) bool {
+	return userInfo.LoginAsUserId > 0 && userInfo.LoginAsUserId != userInfo.UserId
+}
+
 func (o *OperatorIds) GetRealOperatorIdAndType() (int64, string) {
 	if o.OperatorId != 0 {
 		// Operator level

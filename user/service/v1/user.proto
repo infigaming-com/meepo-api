@@ -647,6 +647,8 @@ message UserInfo {
 	bool phone_verified = 26;
 	// user registered at
 	google.protobuf.Timestamp registered_at = 27;
+	// whether MFA is required for this user
+	bool mfa_required = 28;
 }
 
 // AuthType defines the type of authentication method.
@@ -1194,6 +1196,7 @@ message CreateUserRequest {
 	api.common.OperatorContext operator_context = 5;
 	int64 role_id = 6;
 	int64 user_id = 7; // operator's user ID, used to verify role assignment permission
+	optional int64 parent_affiliate_id = 8;
 }
 
 message CreateUserResponse {

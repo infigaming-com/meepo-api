@@ -93,7 +93,11 @@ type PushOTPClient interface {
 	UpdateOTPProviderBinding(ctx context.Context, in *UpdateOTPProviderBindingRequest, opts ...grpc.CallOption) (*UpdateOTPProviderBindingResponse, error)
 	DeleteOTPProviderBinding(ctx context.Context, in *DeleteOTPProviderBindingRequest, opts ...grpc.CallOption) (*DeleteOTPProviderBindingResponse, error)
 	ListOTPProviderBindings(ctx context.Context, in *ListOTPProviderBindingsRequest, opts ...grpc.CallOption) (*ListOTPProviderBindingsResponse, error)
+	// ListOTPBindingCountries returns the distinct countries that have provider bindings
+	// for a given operator. Useful for building country selector UIs or checking coverage.
 	ListOTPBindingCountries(ctx context.Context, in *ListOTPBindingCountriesRequest, opts ...grpc.CallOption) (*ListOTPBindingCountriesResponse, error)
+	// CheckOTPBindingCountry checks whether an operator has at least one enabled provider
+	// binding for a specific country. Useful for pre-flight validation before calling SendOTP.
 	CheckOTPBindingCountry(ctx context.Context, in *CheckOTPBindingCountryRequest, opts ...grpc.CallOption) (*CheckOTPBindingCountryResponse, error)
 	// ====== Backoffice: Template CRUD ======
 	CreateOTPTemplate(ctx context.Context, in *CreateOTPTemplateRequest, opts ...grpc.CallOption) (*CreateOTPTemplateResponse, error)
@@ -357,7 +361,11 @@ type PushOTPServer interface {
 	UpdateOTPProviderBinding(context.Context, *UpdateOTPProviderBindingRequest) (*UpdateOTPProviderBindingResponse, error)
 	DeleteOTPProviderBinding(context.Context, *DeleteOTPProviderBindingRequest) (*DeleteOTPProviderBindingResponse, error)
 	ListOTPProviderBindings(context.Context, *ListOTPProviderBindingsRequest) (*ListOTPProviderBindingsResponse, error)
+	// ListOTPBindingCountries returns the distinct countries that have provider bindings
+	// for a given operator. Useful for building country selector UIs or checking coverage.
 	ListOTPBindingCountries(context.Context, *ListOTPBindingCountriesRequest) (*ListOTPBindingCountriesResponse, error)
+	// CheckOTPBindingCountry checks whether an operator has at least one enabled provider
+	// binding for a specific country. Useful for pre-flight validation before calling SendOTP.
 	CheckOTPBindingCountry(context.Context, *CheckOTPBindingCountryRequest) (*CheckOTPBindingCountryResponse, error)
 	// ====== Backoffice: Template CRUD ======
 	CreateOTPTemplate(context.Context, *CreateOTPTemplateRequest) (*CreateOTPTemplateResponse, error)

@@ -36,7 +36,8 @@ const (
 	PlayerRoleId = 0
 
 	// Affiliate Role
-	AffiliateRoleId = -1
+	AffiliateRoleId    = -1
+	SubAffiliateRoleId = -2 // Sub-account of an affiliate
 
 	// Operator Deduction Order
 	OperatorDeductionOrderCashFirst  = "cash_first"  // Cash first, then bonus
@@ -47,6 +48,11 @@ const (
 	OperatorTemplateNameMobileOnly    = "mobile-only"
 	OperatorTemplateNameMobileDesktop = "mobile-desktop"
 )
+
+// IsAffiliateRole checks if a role is any type of affiliate (main or sub-account)
+func IsAffiliateRole(roleId int64) bool {
+	return roleId == AffiliateRoleId || roleId == SubAffiliateRoleId
+}
 
 // BuildOperatorHierarchy builds a complete operator hierarchy path based on operatorId and parentIds
 // Returns a slice containing the complete path from the bottom-level operatorId to systemOperatorId

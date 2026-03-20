@@ -76,6 +76,8 @@ const (
 	Affiliate_ListReferralLifetimeReport_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListReferralLifetimeReport"
 	Affiliate_ListAffiliateVTGReport_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListAffiliateVTGReport"
 	Affiliate_ListAffiliateSnapshotReport_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateSnapshotReport"
+	Affiliate_CreateAffiliateSubAccount_FullMethodName             = "/api.affiliate.service.v1.Affiliate/CreateAffiliateSubAccount"
+	Affiliate_ListAffiliateSubAccounts_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListAffiliateSubAccounts"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -150,6 +152,8 @@ type AffiliateClient interface {
 	ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*ListAffiliateVTGReportResponse, error)
 	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 	ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*ListAffiliateSnapshotReportResponse, error)
+	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*ListAffiliateSubAccountsResponse, error)
 }
 
 type affiliateClient struct {
@@ -730,6 +734,26 @@ func (c *affiliateClient) ListAffiliateSnapshotReport(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *affiliateClient) CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*CreateAffiliateSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAffiliateSubAccountResponse)
+	err := c.cc.Invoke(ctx, Affiliate_CreateAffiliateSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*ListAffiliateSubAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAffiliateSubAccountsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListAffiliateSubAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -802,6 +826,8 @@ type AffiliateServer interface {
 	ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*ListAffiliateVTGReportResponse, error)
 	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 	ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*ListAffiliateSnapshotReportResponse, error)
+	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*ListAffiliateSubAccountsResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -982,6 +1008,12 @@ func (UnimplementedAffiliateServer) ListAffiliateVTGReport(context.Context, *Lis
 }
 func (UnimplementedAffiliateServer) ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*ListAffiliateSnapshotReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSnapshotReport not implemented")
+}
+func (UnimplementedAffiliateServer) CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*CreateAffiliateSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAffiliateSubAccount not implemented")
+}
+func (UnimplementedAffiliateServer) ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*ListAffiliateSubAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSubAccounts not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -2030,6 +2062,42 @@ func _Affiliate_ListAffiliateSnapshotReport_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_CreateAffiliateSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAffiliateSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).CreateAffiliateSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_CreateAffiliateSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).CreateAffiliateSubAccount(ctx, req.(*CreateAffiliateSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListAffiliateSubAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateSubAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListAffiliateSubAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListAffiliateSubAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListAffiliateSubAccounts(ctx, req.(*ListAffiliateSubAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2264,6 +2332,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAffiliateSnapshotReport",
 			Handler:    _Affiliate_ListAffiliateSnapshotReport_Handler,
+		},
+		{
+			MethodName: "CreateAffiliateSubAccount",
+			Handler:    _Affiliate_CreateAffiliateSubAccount_Handler,
+		},
+		{
+			MethodName: "ListAffiliateSubAccounts",
+			Handler:    _Affiliate_ListAffiliateSubAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

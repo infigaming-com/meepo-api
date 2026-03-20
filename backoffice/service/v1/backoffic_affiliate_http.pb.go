@@ -21,6 +21,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeAffiliateCreateAffiliate = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliate"
+const OperationBackofficeAffiliateCreateAffiliateSubAccount = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliateSubAccount"
 const OperationBackofficeAffiliateCreateCampaign = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
 const OperationBackofficeAffiliateCreateCommissionPlan = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
 const OperationBackofficeAffiliateCreateLandingTemplate = "/api.backoffice.service.v1.BackofficeAffiliate/CreateLandingTemplate"
@@ -41,6 +42,7 @@ const OperationBackofficeAffiliateListAffiliateBills = "/api.backoffice.service.
 const OperationBackofficeAffiliateListAffiliateCampaigns = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
 const OperationBackofficeAffiliateListAffiliateCommissionPlans = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCommissionPlans"
 const OperationBackofficeAffiliateListAffiliateDomains = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateDomains"
+const OperationBackofficeAffiliateListAffiliateSubAccounts = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateSubAccounts"
 const OperationBackofficeAffiliateListAffiliateUsers = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
 const OperationBackofficeAffiliateListAffiliates = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
 const OperationBackofficeAffiliateListAllCommissionPlans = "/api.backoffice.service.v1.BackofficeAffiliate/ListAllCommissionPlans"
@@ -65,6 +67,7 @@ const OperationBackofficeAffiliateUpdatePostback = "/api.backoffice.service.v1.B
 
 type BackofficeAffiliateHTTPServer interface {
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*v1.CreateAffiliateResponse, error)
+	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*v1.CreateCommissionPlanResponse, error)
 	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*v1.CreateLandingTemplateResponse, error)
@@ -85,6 +88,7 @@ type BackofficeAffiliateHTTPServer interface {
 	ListAffiliateCampaigns(context.Context, *ListAffiliateCampaignsRequest) (*v1.ListCampaignsResponse, error)
 	ListAffiliateCommissionPlans(context.Context, *ListAffiliateCommissionPlansRequest) (*v1.ListAffiliateCommissionPlansResponse, error)
 	ListAffiliateDomains(context.Context, *ListAffiliateDomainsRequest) (*v1.ListAffiliateDomainsResponse, error)
+	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
 	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*v1.ListAllCommissionPlansResponse, error)
@@ -152,6 +156,8 @@ func RegisterBackofficeAffiliateHTTPServer(s *http.Server, srv BackofficeAffilia
 	r.POST("/v1/backoffice/affiliate/landing-template/list/by-campaign", _BackofficeAffiliate_ListLandingTemplatesByCampaign0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/dashboard/get", _BackofficeAffiliate_GetAffiliateDashboard0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/affiliate/dashboard/trend/get", _BackofficeAffiliate_GetAffiliateTrend0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/sub-account/create", _BackofficeAffiliate_CreateAffiliateSubAccount0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/affiliate/sub-account/list", _BackofficeAffiliate_ListAffiliateSubAccounts0_HTTP_Handler(srv))
 }
 
 func _BackofficeAffiliate_CreateCommissionPlan0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
@@ -1078,8 +1084,53 @@ func _BackofficeAffiliate_GetAffiliateTrend0_HTTP_Handler(srv BackofficeAffiliat
 	}
 }
 
+func _BackofficeAffiliate_CreateAffiliateSubAccount0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateAffiliateSubAccountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateCreateAffiliateSubAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateAffiliateSubAccount(ctx, req.(*CreateAffiliateSubAccountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.CreateAffiliateSubAccountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeAffiliate_ListAffiliateSubAccounts0_HTTP_Handler(srv BackofficeAffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListAffiliateSubAccountsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeAffiliateListAffiliateSubAccounts)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListAffiliateSubAccounts(ctx, req.(*ListAffiliateSubAccountsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListAffiliateSubAccountsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeAffiliateHTTPClient interface {
 	CreateAffiliate(ctx context.Context, req *CreateAffiliateRequest, opts ...http.CallOption) (rsp *v1.CreateAffiliateResponse, err error)
+	CreateAffiliateSubAccount(ctx context.Context, req *CreateAffiliateSubAccountRequest, opts ...http.CallOption) (rsp *v1.CreateAffiliateSubAccountResponse, err error)
 	CreateCampaign(ctx context.Context, req *CreateCampaignRequest, opts ...http.CallOption) (rsp *v1.CreateCampaignResponse, err error)
 	CreateCommissionPlan(ctx context.Context, req *CreateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.CreateCommissionPlanResponse, err error)
 	CreateLandingTemplate(ctx context.Context, req *CreateLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateLandingTemplateResponse, err error)
@@ -1100,6 +1151,7 @@ type BackofficeAffiliateHTTPClient interface {
 	ListAffiliateCampaigns(ctx context.Context, req *ListAffiliateCampaignsRequest, opts ...http.CallOption) (rsp *v1.ListCampaignsResponse, err error)
 	ListAffiliateCommissionPlans(ctx context.Context, req *ListAffiliateCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateCommissionPlansResponse, err error)
 	ListAffiliateDomains(ctx context.Context, req *ListAffiliateDomainsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateDomainsResponse, err error)
+	ListAffiliateSubAccounts(ctx context.Context, req *ListAffiliateSubAccountsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateSubAccountsResponse, err error)
 	ListAffiliateUsers(ctx context.Context, req *ListAffiliateUsersRequest, opts ...http.CallOption) (rsp *v1.ListUsersResponse, err error)
 	ListAffiliates(ctx context.Context, req *ListAffiliatesRequest, opts ...http.CallOption) (rsp *v1.ListAffiliatesResponse, err error)
 	ListAllCommissionPlans(ctx context.Context, req *ListAllCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListAllCommissionPlansResponse, err error)
@@ -1136,6 +1188,19 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateAffiliate(ctx context.Context,
 	pattern := "/v1/backoffice/affiliate/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAffiliateCreateAffiliate))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...http.CallOption) (*v1.CreateAffiliateSubAccountResponse, error) {
+	var out v1.CreateAffiliateSubAccountResponse
+	pattern := "/v1/backoffice/affiliate/sub-account/create"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateCreateAffiliateSubAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1396,6 +1461,19 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateDomains(ctx context.Con
 	pattern := "/v1/backoffice/affiliate/domain/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeAffiliateListAffiliateDomains))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeAffiliateHTTPClientImpl) ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...http.CallOption) (*v1.ListAffiliateSubAccountsResponse, error) {
+	var out v1.ListAffiliateSubAccountsResponse
+	pattern := "/v1/backoffice/affiliate/sub-account/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeAffiliateListAffiliateSubAccounts))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

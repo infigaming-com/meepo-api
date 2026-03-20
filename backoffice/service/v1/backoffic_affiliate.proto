@@ -319,6 +319,23 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Sub-Account Management --------------
+
+	rpc CreateAffiliateSubAccount(CreateAffiliateSubAccountRequest) returns (api.affiliate.service.v1.CreateAffiliateSubAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/sub-account/create"
+			body: "*"
+		};
+	}
+
+	rpc ListAffiliateSubAccounts(ListAffiliateSubAccountsRequest) returns (api.affiliate.service.v1.ListAffiliateSubAccountsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/sub-account/list"
+			body: "*"
+		};
+	}
+
 }
 
 // -------------- Commission Plan --------------
@@ -666,4 +683,21 @@ message ListLandingTemplatesRequest {
 
 message ListLandingTemplatesByCampaignRequest {
 	int64 campaign_id = 1;
+}
+
+// -------------- Affiliate Sub-Account --------------
+
+message CreateAffiliateSubAccountRequest {
+	int64 affiliate_id = 1;
+	string username = 2;
+	string email = 3;
+	string mobile = 4;
+	string password = 5;
+}
+
+message ListAffiliateSubAccountsRequest {
+	int64 affiliate_id = 1;
+	optional bool paginate = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 }

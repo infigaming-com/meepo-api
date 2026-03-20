@@ -224,6 +224,12 @@ service Affiliate {
     // ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
     rpc ListAffiliateSnapshotReport(ListAffiliateSnapshotReportRequest) returns (ListAffiliateSnapshotReportResponse) {}
 
+    // -------------- Affiliate Sub-Account Management --------------
+
+    rpc CreateAffiliateSubAccount(CreateAffiliateSubAccountRequest) returns (CreateAffiliateSubAccountResponse) {}
+
+    rpc ListAffiliateSubAccounts(ListAffiliateSubAccountsRequest) returns (ListAffiliateSubAccountsResponse) {}
+
 }
 
 message ContactType {
@@ -1214,4 +1220,44 @@ message GetAffiliateTrendResponse {
 
   repeated UserConversionData user_conversion_data = 1;
   repeated FinancialBettingData financial_betting_data = 2;
+}
+
+// -------------- Affiliate Sub-Account --------------
+
+message CreateAffiliateSubAccountRequest {
+    int64 affiliate_id = 1;
+    string username = 2;
+    string email = 3;
+    string mobile = 4;
+    string password = 5;
+    api.common.OperatorContext operator_context = 6;
+    int64 initiator_user_id = 7;
+    int64 initiator_role_id = 8;
+}
+
+message CreateAffiliateSubAccountResponse {
+    int64 user_id = 1;
+}
+
+message ListAffiliateSubAccountsRequest {
+    int64 affiliate_id = 1;
+    int64 initiator_user_id = 2;
+    int64 initiator_role_id = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+}
+
+message ListAffiliateSubAccountsResponse {
+    repeated AffiliateSubAccountInfo sub_accounts = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message AffiliateSubAccountInfo {
+    int64 user_id = 1;
+    string username = 2;
+    string email = 3;
+    bool two_fa_enabled = 4;
 }
