@@ -23036,7 +23036,7 @@ components:
                     type: boolean
                 resetPassword:
                     $ref: '#/components/schemas/api.backoffice.service.v1.SubAccountResetPassword'
-                reset2fa:
+                twoFaEnabled:
                     type: boolean
         api.backoffice.service.v1.UpdateAffiliateSubAccountResponse:
             type: object
