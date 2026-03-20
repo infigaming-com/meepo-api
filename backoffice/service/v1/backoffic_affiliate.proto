@@ -718,7 +718,7 @@ message UpdateAffiliateSubAccountRequest {
 	int64 sub_account_user_id = 2;
 	optional bool enabled = 3;
 	optional SubAccountResetPassword reset_password = 4;
-	optional bool reset_2fa = 5;
+	optional bool two_fa_enabled = 5;
 }
 
 message UpdateAffiliateSubAccountResponse {}

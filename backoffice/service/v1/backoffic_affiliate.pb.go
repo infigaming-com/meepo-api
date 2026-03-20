@@ -3249,7 +3249,7 @@ type UpdateAffiliateSubAccountRequest struct {
 	SubAccountUserId int64                    `protobuf:"varint,2,opt,name=sub_account_user_id,json=subAccountUserId,proto3" json:"sub_account_user_id,omitempty"`
 	Enabled          *bool                    `protobuf:"varint,3,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	ResetPassword    *SubAccountResetPassword `protobuf:"bytes,4,opt,name=reset_password,json=resetPassword,proto3,oneof" json:"reset_password,omitempty"`
-	Reset_2Fa        *bool                    `protobuf:"varint,5,opt,name=reset_2fa,json=reset2fa,proto3,oneof" json:"reset_2fa,omitempty"`
+	TwoFaEnabled     *bool                    `protobuf:"varint,5,opt,name=two_fa_enabled,json=twoFaEnabled,proto3,oneof" json:"two_fa_enabled,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -3312,9 +3312,9 @@ func (x *UpdateAffiliateSubAccountRequest) GetResetPassword() *SubAccountResetPa
 	return nil
 }
 
-func (x *UpdateAffiliateSubAccountRequest) GetReset_2Fa() bool {
-	if x != nil && x.Reset_2Fa != nil {
-		return *x.Reset_2Fa
+func (x *UpdateAffiliateSubAccountRequest) GetTwoFaEnabled() bool {
+	if x != nil && x.TwoFaEnabled != nil {
+		return *x.TwoFaEnabled
 	}
 	return false
 }
@@ -3796,18 +3796,17 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\n" +
 	"_page_size\"<\n" +
 	"\x17SubAccountResetPassword\x12!\n" +
-	"\fnew_password\x18\x01 \x01(\tR\vnewPassword\"\xc2\x02\n" +
+	"\fnew_password\x18\x01 \x01(\tR\vnewPassword\"\xd0\x02\n" +
 	" UpdateAffiliateSubAccountRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12-\n" +
 	"\x13sub_account_user_id\x18\x02 \x01(\x03R\x10subAccountUserId\x12\x1d\n" +
 	"\aenabled\x18\x03 \x01(\bH\x00R\aenabled\x88\x01\x01\x12^\n" +
-	"\x0ereset_password\x18\x04 \x01(\v22.api.backoffice.service.v1.SubAccountResetPasswordH\x01R\rresetPassword\x88\x01\x01\x12 \n" +
-	"\treset_2fa\x18\x05 \x01(\bH\x02R\breset2fa\x88\x01\x01B\n" +
+	"\x0ereset_password\x18\x04 \x01(\v22.api.backoffice.service.v1.SubAccountResetPasswordH\x01R\rresetPassword\x88\x01\x01\x12)\n" +
+	"\x0etwo_fa_enabled\x18\x05 \x01(\bH\x02R\ftwoFaEnabled\x88\x01\x01B\n" +
 	"\n" +
 	"\b_enabledB\x11\n" +
-	"\x0f_reset_passwordB\f\n" +
-	"\n" +
-	"_reset_2fa\"#\n" +
+	"\x0f_reset_passwordB\x11\n" +
+	"\x0f_two_fa_enabled\"#\n" +
 	"!UpdateAffiliateSubAccountResponse2\xf1A\n" +
 	"\x13BackofficeAffiliate\x12\xc2\x01\n" +
 	"\x14CreateCommissionPlan\x126.api.backoffice.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/create\x12\xc2\x01\n" +

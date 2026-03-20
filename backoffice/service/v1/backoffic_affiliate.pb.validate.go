@@ -6774,8 +6774,8 @@ func (m *UpdateAffiliateSubAccountRequest) validate(all bool) error {
 
 	}
 
-	if m.Reset_2Fa != nil {
-		// no validation rules for Reset_2Fa
+	if m.TwoFaEnabled != nil {
+		// no validation rules for TwoFaEnabled
 	}
 
 	if len(errors) > 0 {
