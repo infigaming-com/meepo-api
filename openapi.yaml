@@ -1402,6 +1402,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateSubAccountsResponse'
+    /v1/backoffice/affiliate/sub-account/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateAffiliateSubAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAffiliateSubAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAffiliateSubAccountResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -10786,6 +10804,8 @@ components:
                 email:
                     type: string
                 twoFaEnabled:
+                    type: boolean
+                enabled:
                     type: boolean
         api.affiliate.service.v1.AffiliateVTGReportItem:
             type: object
@@ -22844,6 +22864,11 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SubAccountResetPassword:
+            type: object
+            properties:
+                newPassword:
+                    type: string
         api.backoffice.service.v1.SyncOTPTemplateStatusRequest:
             type: object
             properties:
@@ -23000,6 +23025,22 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 affiliateId:
                     type: string
+        api.backoffice.service.v1.UpdateAffiliateSubAccountRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                subAccountUserId:
+                    type: string
+                enabled:
+                    type: boolean
+                resetPassword:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.SubAccountResetPassword'
+                reset2fa:
+                    type: boolean
+        api.backoffice.service.v1.UpdateAffiliateSubAccountResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.UpdateAssetRequest:
             type: object
             properties:

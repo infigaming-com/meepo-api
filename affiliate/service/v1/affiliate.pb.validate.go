@@ -12669,6 +12669,8 @@ func (m *AffiliateSubAccountInfo) validate(all bool) error {
 
 	// no validation rules for TwoFaEnabled
 
+	// no validation rules for Enabled
+
 	if len(errors) > 0 {
 		return AffiliateSubAccountInfoMultiError(errors)
 	}
