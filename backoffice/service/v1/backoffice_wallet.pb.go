@@ -258,12 +258,15 @@ type ListWalletBalanceTransactionsRequest struct {
 	//   - "game_bet_rollback"            - Game bet transaction rollback
 	//   - "game_win_rollback"            - Game win transaction rollback
 	//   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
-	TransactionType *string                `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Currency        *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	StartTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page            *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize        *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	//
+	// Deprecated: Marked as deprecated in backoffice/service/v1/backoffice_wallet.proto.
+	TransactionType  *string                `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	TransactionTypes []string               `protobuf:"bytes,10,rep,name=transaction_types,json=transactionTypes,proto3" json:"transaction_types,omitempty"`
+	Currency         *string                `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	StartTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page             *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize         *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// source_credit_id: filter to get balance transactions that created this credit
 	// Only returns source transaction types: payment_deposit, deposit_reward, promo_code_reward, free_spin_win, free_bet_win
 	SourceCreditId *int64 `protobuf:"varint,8,opt,name=source_credit_id,json=sourceCreditId,proto3,oneof" json:"source_credit_id,omitempty"`
@@ -310,11 +313,19 @@ func (x *ListWalletBalanceTransactionsRequest) GetUserId() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in backoffice/service/v1/backoffice_wallet.proto.
 func (x *ListWalletBalanceTransactionsRequest) GetTransactionType() string {
 	if x != nil && x.TransactionType != nil {
 		return *x.TransactionType
 	}
 	return ""
+}
+
+func (x *ListWalletBalanceTransactionsRequest) GetTransactionTypes() []string {
+	if x != nil {
+		return x.TransactionTypes
+	}
+	return nil
 }
 
 func (x *ListWalletBalanceTransactionsRequest) GetCurrency() string {
@@ -4688,6 +4699,7 @@ type ListWalletBalanceTransactionsResponse_BalanceTransaction struct {
 	Currency                   string `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
 	RelatedTransactionId       int64  `protobuf:"varint,12,opt,name=related_transaction_id,json=relatedTransactionId,proto3" json:"related_transaction_id,omitempty"`
 	ExternalTransactionId      int64  `protobuf:"varint,13,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	Status                     string `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -4813,6 +4825,13 @@ func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetExternalTr
 	return 0
 }
 
+func (x *ListWalletBalanceTransactionsResponse_BalanceTransaction) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 type GetWalletCreditTransactionsResponse_CreditTransaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -4904,10 +4923,12 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\tvip_level\x18\x04 \x01(\x05R\bvipLevel\x12%\n" +
 	"\x0ebefore_blanace\x18\x05 \x01(\tR\rbeforeBlanace\x12#\n" +
 	"\rafter_balance\x18\x06 \x01(\tR\fafterBalance\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\"\x98\x04\n" +
+	"\bcurrency\x18\a \x01(\tR\bcurrency\"\xc9\x04\n" +
 	"$ListWalletBalanceTransactionsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12.\n" +
-	"\x10transaction_type\x18\x02 \x01(\tH\x00R\x0ftransactionType\x88\x01\x01\x12\x1f\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x122\n" +
+	"\x10transaction_type\x18\x02 \x01(\tB\x02\x18\x01H\x00R\x0ftransactionType\x88\x01\x01\x12+\n" +
+	"\x11transaction_types\x18\n" +
+	" \x03(\tR\x10transactionTypes\x12\x1f\n" +
 	"\bcurrency\x18\x03 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
@@ -4923,12 +4944,12 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x13\n" +
-	"\x11_source_credit_id\"\x97\a\n" +
+	"\x11_source_credit_id\"\xaf\a\n" +
 	"%ListWalletBalanceTransactionsResponse\x12\x86\x01\n" +
 	"\x14balance_transactions\x18\x01 \x03(\v2S.api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransactionR\x13balanceTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x9d\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xb5\x05\n" +
 	"\x12BalanceTransaction\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -4944,7 +4965,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	" \x01(\tR\x1aoperatorBonusAmountChanged\x12\x1a\n" +
 	"\bcurrency\x18\v \x01(\tR\bcurrency\x124\n" +
 	"\x16related_transaction_id\x18\f \x01(\x03R\x14relatedTransactionId\x126\n" +
-	"\x17external_transaction_id\x18\r \x01(\x03R\x15externalTransactionId\"F\n" +
+	"\x17external_transaction_id\x18\r \x01(\x03R\x15externalTransactionId\x12\x16\n" +
+	"\x06status\x18\x0e \x01(\tR\x06status\"F\n" +
 	"\"GetWalletCreditTransactionsRequest\x12 \n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\rtransactionId\"\xd4\x02\n" +
 	"#GetWalletCreditTransactionsResponse\x12\x81\x01\n" +

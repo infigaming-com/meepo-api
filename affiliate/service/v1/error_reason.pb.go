@@ -116,8 +116,17 @@ const (
 	ErrorReason_LIST_AFFILIATE_VTG_REPORT_FAILED         ErrorReason = 130087
 	ErrorReason_LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED    ErrorReason = 130088
 	// Permission
-	ErrorReason_ROLE_PERMISSION_DENIED          ErrorReason = 130089
-	ErrorReason_RESET_AFFILIATE_PASSWORD_FAILED ErrorReason = 130090
+	ErrorReason_ROLE_PERMISSION_DENIED                            ErrorReason = 130089
+	ErrorReason_RESET_AFFILIATE_PASSWORD_FAILED                   ErrorReason = 130090
+	ErrorReason_GET_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED   ErrorReason = 130091
+	ErrorReason_CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED ErrorReason = 130092
+	// Landing Template
+	ErrorReason_CREATE_LANDING_TEMPLATE_FAILED ErrorReason = 130093
+	ErrorReason_UPDATE_LANDING_TEMPLATE_FAILED ErrorReason = 130094
+	ErrorReason_DELETE_LANDING_TEMPLATE_FAILED ErrorReason = 130095
+	ErrorReason_LIST_LANDING_TEMPLATES_FAILED  ErrorReason = 130096
+	ErrorReason_LANDING_TEMPLATE_NOT_FOUND     ErrorReason = 130097
+	ErrorReason_INVALID_CLICK_ACTION           ErrorReason = 130098
 )
 
 // Enum value maps for ErrorReason.
@@ -214,6 +223,14 @@ var (
 		130088: "LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED",
 		130089: "ROLE_PERMISSION_DENIED",
 		130090: "RESET_AFFILIATE_PASSWORD_FAILED",
+		130091: "GET_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED",
+		130092: "CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED",
+		130093: "CREATE_LANDING_TEMPLATE_FAILED",
+		130094: "UPDATE_LANDING_TEMPLATE_FAILED",
+		130095: "DELETE_LANDING_TEMPLATE_FAILED",
+		130096: "LIST_LANDING_TEMPLATES_FAILED",
+		130097: "LANDING_TEMPLATE_NOT_FOUND",
+		130098: "INVALID_CLICK_ACTION",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -307,6 +324,14 @@ var (
 		"LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED":               130088,
 		"ROLE_PERMISSION_DENIED":                              130089,
 		"RESET_AFFILIATE_PASSWORD_FAILED":                     130090,
+		"GET_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED":     130091,
+		"CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED":   130092,
+		"CREATE_LANDING_TEMPLATE_FAILED":                      130093,
+		"UPDATE_LANDING_TEMPLATE_FAILED":                      130094,
+		"DELETE_LANDING_TEMPLATE_FAILED":                      130095,
+		"LIST_LANDING_TEMPLATES_FAILED":                       130096,
+		"LANDING_TEMPLATE_NOT_FOUND":                          130097,
+		"INVALID_CLICK_ACTION":                                130098,
 	}
 )
 
@@ -341,7 +366,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xa8\x19\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xed\x1b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -433,7 +458,15 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	" LIST_AFFILIATE_VTG_REPORT_FAILED\x10\xa7\xf8\a\x12+\n" +
 	"%LIST_AFFILIATE_SNAPSHOT_REPORT_FAILED\x10\xa8\xf8\a\x12\x1c\n" +
 	"\x16ROLE_PERMISSION_DENIED\x10\xa9\xf8\a\x12%\n" +
-	"\x1fRESET_AFFILIATE_PASSWORD_FAILED\x10\xaa\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x1fRESET_AFFILIATE_PASSWORD_FAILED\x10\xaa\xf8\a\x125\n" +
+	"/GET_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED\x10\xab\xf8\a\x127\n" +
+	"1CLAIM_USER_REFERRAL_REWARDS_ALL_CURRENCIES_FAILED\x10\xac\xf8\a\x12$\n" +
+	"\x1eCREATE_LANDING_TEMPLATE_FAILED\x10\xad\xf8\a\x12$\n" +
+	"\x1eUPDATE_LANDING_TEMPLATE_FAILED\x10\xae\xf8\a\x12$\n" +
+	"\x1eDELETE_LANDING_TEMPLATE_FAILED\x10\xaf\xf8\a\x12#\n" +
+	"\x1dLIST_LANDING_TEMPLATES_FAILED\x10\xb0\xf8\a\x12 \n" +
+	"\x1aLANDING_TEMPLATE_NOT_FOUND\x10\xb1\xf8\a\x12\x1a\n" +
+	"\x14INVALID_CLICK_ACTION\x10\xb2\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

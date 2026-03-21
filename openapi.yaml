@@ -6,6 +6,25 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/affiliate/landing-template/config/get:
+        post:
+            tags:
+                - Affiliate
+            description: GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+            operationId: Affiliate_GetLandingTemplateConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetLandingTemplateConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetLandingTemplateConfigResponse'
     /v1/affiliate/user/loss/revenue/share/stats/get:
         post:
             tags:
@@ -60,6 +79,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralPlanResponse'
+    /v1/affiliate/user/referral/rewards/all-currencies/claim:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_ClaimUserReferralRewardsAllCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse'
+    /v1/affiliate/user/referral/rewards/all-currencies/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserReferralRewardsAllCurrencies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse'
     /v1/affiliate/user/referral/rewards/claim:
         post:
             tags:
@@ -1041,6 +1096,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateDetailsResponse'
+    /v1/backoffice/affiliate/landing-template/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreateLandingTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateLandingTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateLandingTemplateResponse'
+    /v1/backoffice/affiliate/landing-template/delete:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_DeleteLandingTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteLandingTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.DeleteLandingTemplateResponse'
+    /v1/backoffice/affiliate/landing-template/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListLandingTemplates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListLandingTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListLandingTemplatesResponse'
+    /v1/backoffice/affiliate/landing-template/list/by-campaign:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListLandingTemplatesByCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListLandingTemplatesByCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListLandingTemplatesByCampaignResponse'
+    /v1/backoffice/affiliate/landing-template/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateLandingTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateLandingTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdateLandingTemplateResponse'
     /v1/backoffice/affiliate/list:
         post:
             tags:
@@ -1221,6 +1366,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SendAffiliateAccountEmailResponse'
+    /v1/backoffice/affiliate/sub-account/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreateAffiliateSubAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateAffiliateSubAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateAffiliateSubAccountResponse'
+    /v1/backoffice/affiliate/sub-account/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateSubAccounts
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateSubAccountsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateSubAccountsResponse'
+    /v1/backoffice/affiliate/sub-account/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateAffiliateSubAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAffiliateSubAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAffiliateSubAccountResponse'
     /v1/backoffice/affiliate/update:
         post:
             tags:
@@ -1863,6 +2062,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.campaign.service.v1.ActivateCampaignResponse'
+    /v1/backoffice/crm/campaign/archive:
+        post:
+            tags:
+                - BackofficeCampaign
+            description: Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+            operationId: BackofficeCampaign_ArchiveCrmCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ArchiveCrmCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.campaign.service.v1.ArchiveCampaignResponse'
     /v1/backoffice/crm/campaign/create:
         post:
             tags:
@@ -2742,6 +2960,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.RetryOperatorEmailDomainVerificationResponse'
+    /v1/backoffice/filestore/affiliate/landing-template-image/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            operationId: BackofficeFileStore_UploadLandingTemplateImage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadLandingTemplateImageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadLandingTemplateImageResponse'
     /v1/backoffice/filestore/affiliate/registration-photo/upload:
         post:
             tags:
@@ -5136,52 +5372,249 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.SetSwapFeeSettingsResponse'
+    /v1/backoffice/otp/provider-binding/check-country:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                CheckOTPBindingCountry checks whether an operator has at least one enabled
+                 provider binding for a specific country.
+
+                 ## Use cases
+                   - Pre-flight check before sending OTP: verify the country is configured
+                   - UI indicator: show green/red status per country
+                   - Onboarding validation: ensure OTP is set up before going live
+
+                 ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/check-country)
+                 ```json
+                 {
+                   "target_operator_context": { "operator_id": 1001 },
+                   "country": "BR"
+                 }
+                 ```
+
+                 ## Example response
+                 ```json
+                 { "configured": true }
+                 ```
+            operationId: BackofficeOTP_CheckOTPBindingCountry
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CheckOTPBindingCountryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CheckOTPBindingCountryResponse'
+    /v1/backoffice/otp/provider-binding/countries:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                ListOTPBindingCountries returns the distinct countries configured for an operator
+                 via provider bindings.
+
+                 ## Use cases
+                   - Build a country selector UI showing which countries have OTP configured
+                   - Check OTP coverage: which countries are ready vs. missing
+                   - Dashboard statistics: how many countries are configured
+
+                 ## Example request (HTTP POST /v1/backoffice/otp/provider-binding/countries)
+                 ```json
+                 {
+                   "target_operator_context": { "operator_id": 1001 },
+                   "enabled": true
+                 }
+                 ```
+
+                 ## Example response
+                 ```json
+                 {
+                   "countries": ["BR", "JP", "global"],
+                   "total": 3
+                 }
+                 ```
+            operationId: BackofficeOTP_ListOTPBindingCountries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOTPBindingCountriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListOTPBindingCountriesResponse'
+    /v1/backoffice/otp/provider-binding/create:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                CreateOTPProviderBinding binds a provider to an operator+country for routing.
+
+                 ## What is a Provider Binding?
+                 A Binding maps a Provider to a specific (operator_id, country) combination.
+                 It controls whether the provider is used (enabled), its priority relative to
+                 other bindings for the same country, and optional phone number prefix filtering.
+
+                 ## Example: one provider, multiple countries
+                 ```
+                 1. CreateOTPProvider → provider_id=100 (credentials entered once)
+                 2. CreateOTPProviderBinding { provider_id: 100, country: "BR", priority: 0 }
+                 3. CreateOTPProviderBinding { provider_id: 100, country: "JP", priority: 0 }
+                 ```
+
+                 ## Example: same country, multiple providers with phone prefix routing
+                 ```
+                 Binding 1: provider=100, country="BR", priority=0, phone_prefixes=["+5511","+5521"]
+                 Binding 2: provider=200, country="BR", priority=1, phone_prefixes=[]
+                 → +5511xxx → matches Binding 1
+                 → +5531xxx → skips Binding 1, matches Binding 2 (catch-all)
+                 ```
+
+                 ## Example: lower-level operator overrides upper-level
+                 ```
+                 System binding: operator_id=0, provider=100, country="BR"
+                 Operator 5001 creates: operator_id=5001, provider=200, country="BR"
+                 → Operator 5001's users use provider 200 (operator level checked first)
+                 ```
+
+                 ## Errors
+                 - OTP_PROVIDER_NOT_FOUND: provider_id does not exist
+                 - OTP_PROVIDER_BINDING_ALREADY_EXISTS: duplicate (operator_id, provider_id, country)
+                 - OTP_PROVIDER_BINDING_INVALID_COUNTRY: country not in provider's supported_countries
+            operationId: BackofficeOTP_CreateOTPProviderBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateOTPProviderBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.CreateOTPProviderBindingResponse'
+    /v1/backoffice/otp/provider-binding/delete:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                DeleteOTPProviderBinding permanently removes a provider binding.
+
+                 After deletion, routing will fall back to the next matching binding or the next
+                 level in the operator hierarchy (company → retailer → system → "global").
+
+                 ## Errors
+                 - OTP_PROVIDER_BINDING_NOT_FOUND: no binding with the given ID
+            operationId: BackofficeOTP_DeleteOTPProviderBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOTPProviderBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.DeleteOTPProviderBindingResponse'
+    /v1/backoffice/otp/provider-binding/list:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                ListOTPProviderBindings lists provider bindings for the target operator.
+
+                 Supports filtering by country, provider_id, and enabled status.
+                 Results are scoped to the operator specified in target_operator_context.
+                 Returns paginated results with inline provider info for each binding.
+            operationId: BackofficeOTP_ListOTPProviderBindings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOTPProviderBindingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.ListOTPProviderBindingsResponse'
+    /v1/backoffice/otp/provider-binding/update:
+        post:
+            tags:
+                - BackofficeOTP
+            description: |-
+                UpdateOTPProviderBinding partially updates an existing binding.
+
+                 Only fields present in the request are updated; omitted fields remain unchanged.
+                 After update, the binding routing cache is invalidated so changes take effect immediately.
+
+                 Common use cases:
+                   - Disable a binding temporarily: set enabled=false
+                   - Change routing priority: set priority to new value
+                   - Add/change phone prefix filter: set phone_prefixes
+                   - Remove phone prefix filter: set clear_phone_prefixes=true
+
+                 ## Errors
+                 - OTP_PROVIDER_BINDING_NOT_FOUND: no binding with the given ID
+            operationId: BackofficeOTP_UpdateOTPProviderBinding
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOTPProviderBindingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.push.service.v1.UpdateOTPProviderBindingResponse'
     /v1/backoffice/otp/provider/create:
         post:
             tags:
                 - BackofficeOTP
             description: |-
-                CreateOTPProvider registers a third-party OTP delivery provider for an operator + country.
+                CreateOTPProvider registers a third-party OTP delivery provider.
 
                  ## What is an OTP Provider?
                  A Provider is a connection to a third-party service (e.g., EngageLab) that can
                  deliver OTP codes via SMS, WhatsApp, or Voice. Each record stores:
                    - The provider's API credentials (encrypted at rest, never returned in responses)
                    - Which delivery channels to use and in what order (send_channel_strategy)
-                   - A priority for fallback routing when multiple providers exist
+                   - Which countries are supported (for binding validation)
 
-                 ## When to use this API?
-                 Call this when onboarding a new operator or expanding to a new country. For example:
-                   - Operator "BetBrazil" wants to send OTP via WhatsApp in Brazil → create a provider
-                     with country="BR", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
-                     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
-                   - Same operator wants a global SMS fallback → create another provider with
-                     country="global", provider_type=OTP_PROVIDER_TYPE_ENGAGELAB,
-                     send_channel_strategy=OTP_SEND_CHANNEL_STRATEGY_SMS
-
-                 ## How does routing work?
-                 When user-service calls SendOTP for a phone number, push-service resolves the provider
-                 using this fallback chain (first match wins):
-                   1. (operator_id, user's country, enabled=true) ORDER BY priority ASC
-                   2. (operator_id, "global",       enabled=true) ORDER BY priority ASC
-                   3. (system_operator_id, user's country, enabled=true) ORDER BY priority ASC
-                   4. (system_operator_id, "global",       enabled=true) ORDER BY priority ASC
-                 This means: operator-specific config is preferred; "global" is the fallback;
-                 system-level config provides a safety net for operators that haven't configured anything.
+                 Credentials are configured once. Use CreateOTPProviderBinding to assign the provider
+                 to specific operator+country combinations for routing.
 
                  ## Example request body (HTTP POST /v1/backoffice/otp/provider/create)
 
                  ```json
                  {
                    "target_operator_context": { "operator_id": 1001 },
-                   "country": "BR",
                    "provider_type": "OTP_PROVIDER_TYPE_ENGAGELAB",
-                   "name": "EngageLab Brazil",
-                   "enabled": true,
-                   "priority": 0,
+                   "name": "EngageLab Main Account",
                    "credentials_json": "{\"dev_key\":\"your_key\",\"dev_secret\":\"your_secret\"}",
                    "config": "{}",
-                   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS"
+                   "send_channel_strategy": "OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS",
+                   "supported_countries": ["BR", "JP"]
                  }
                  ```
 
@@ -5189,8 +5622,8 @@ paths:
                  Returns the created provider info (with has_credentials=true instead of actual credentials).
 
                  ## Errors
+                 - OTP_PROVIDER_ALREADY_EXISTS: duplicate provider
                  - SEND_OTP_NO_PROVIDER: credentials_json is missing or invalid
-                 - OTP_PROVIDER_ALREADY_EXISTS (if UNIQUE constraint violated): same operator+country+provider_type
             operationId: BackofficeOTP_CreateOTPProvider
             requestBody:
                 content:
@@ -5212,10 +5645,9 @@ paths:
             description: |-
                 DeleteOTPProvider permanently removes an OTP provider.
 
-                 WARNING: Deleting a provider that still has templates bound to it will cause
-                 those templates to become orphaned — they will still match during routing but
-                 fail at send time because the provider credentials are gone.
-                 Best practice: delete all associated templates first, or disable the provider instead.
+                 WARNING: Deleting a provider that still has bindings or templates bound to it will cause
+                 those records to become orphaned — routing will skip them because the provider
+                 credentials are gone. Best practice: delete bindings and templates first.
 
                  ## Errors
                  - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
@@ -5263,9 +5695,9 @@ paths:
             tags:
                 - BackofficeOTP
             description: |-
-                ListOTPProviders lists OTP providers with optional filters and pagination.
+                ListOTPProviders lists OTP providers visible to the caller.
 
-                 Supports filtering by country, provider_type, and enabled status.
+                 Supports filtering by provider_type and supported country.
                  Results are scoped to the operator specified in target_operator_context.
                  Returns paginated results with total count.
             operationId: BackofficeOTP_ListOTPProviders
@@ -5294,8 +5726,8 @@ paths:
 
                  Common use cases:
                    - Rotate credentials: set credentials_json with new keys
-                   - Disable a provider temporarily: set enabled=false (routing will skip it)
                    - Change channel strategy: e.g., switch from WhatsApp-first to SMS-only
+                   - Update supported countries: set supported_countries or clear_supported_countries
 
                  ## Errors
                  - OTP_PROVIDER_NOT_FOUND: no provider with the given ID
@@ -5369,17 +5801,19 @@ paths:
                    3. After creation (and approval for WhatsApp), copy the template ID
                    4. Use that ID as external_template_id when calling this API
 
-                 When SendOTP is triggered, the system passes this ID to the provider's API
-                 so the provider knows which pre-approved message template to use.
+                 ## Template Variables by Provider
 
-                 ## How does template routing work?
-                 When user-service calls SendOTP, push-service resolves the template using this
-                 fallback chain (first match wins, per operator level):
-                   For each level: operator → company → retailer → system (skip if ID=0):
-                     1. (operator_id, country, template_type, language)
-                     2. (operator_id, country, template_type, "en")
-                     3. (operator_id, "global", template_type, language)
-                     4. (operator_id, "global", template_type, "en")
+                 ### EngageLab (OTP_PROVIDER_TYPE_ENGAGELAB)
+
+                 Supported channels: SMS, WhatsApp, Voice.
+                 Templates are created on the EngageLab Console (OTP → Template Management).
+                 WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
+
+                 | Variable | Source | Description |
+                 |----------|--------|-------------|
+                 | `code` | auto | OTP verification code, auto-injected by EngageLab. |
+                 | `brand_name` | `brand_name` field | Brand name displayed in the message. |
+                 | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
 
                  ## Example request body (HTTP POST /v1/backoffice/otp/template/create)
 
@@ -5403,29 +5837,9 @@ paths:
                  ## Constraints
                  - UNIQUE(operator_id, country, template_type, language): one template per scenario+language
                  - provider_id must reference an existing OTP provider
-                 - external_template_id is required for SMS/WhatsApp providers (the provider needs it to send)
 
-                 ## Template Variables by Provider
-
-                 When SendOTP is triggered, the system passes variables to the provider's template engine.
-                 Variables are used as `{{variable_name}}` placeholders in the template content
-                 configured on the provider's platform. Different providers support different variables.
-
-                 ### EngageLab (`OTP_PROVIDER_TYPE_ENGAGELAB`)
-
-                 Supported channels: SMS, WhatsApp, Voice.
-                 Templates are created on the EngageLab Console (OTP → Template Management).
-                 WhatsApp templates require approval before use — call SyncOTPTemplateStatus to check.
-
-                 | Variable | Source | Description |
-                 |----------|--------|-------------|
-                 | `code` | auto | OTP verification code, auto-injected by EngageLab. Mandatory for authentication templates. |
-                 | `brand_name` | `brand_name` field | Brand name displayed in the message (e.g. `"BetBrazil"`). |
-                 | custom keys | `extra_params` JSON | Any additional key-value pairs (e.g. `{"app_name":"Meepo"}`). |
-
-                 SMS: supports `{{code}}` and `{{brand_name}}`; custom templates can include extra variables.
-                 WhatsApp: uses `{{code}}`, optional security warning and expiration notice; template must be approved.
-                 Voice: uses default TTS with `{{code}}` and `{{brand_name}}`.
+                 ## Errors
+                 - OTP_TEMPLATE_ALREADY_EXISTS: UNIQUE constraint violated
             operationId: BackofficeOTP_CreateOTPTemplate
             requestBody:
                 content:
@@ -5448,7 +5862,7 @@ paths:
                 DeleteOTPTemplate permanently removes an OTP template.
 
                  If the deleted template was the only match for a given operator+country+type+language,
-                 the system will fall back to the next level in the routing chain (e.g., company → retailer → system).
+                 the system will fall back to the next level in the routing chain.
                  If no template matches at all, SendOTP will return an OTP_TEMPLATE_NOT_FOUND error.
 
                  ## Errors
@@ -10380,6 +10794,19 @@ components:
                     type: string
                 taxReportingCurrency:
                     type: string
+        api.affiliate.service.v1.AffiliateSubAccountInfo:
+            type: object
+            properties:
+                userId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                twoFaEnabled:
+                    type: boolean
+                enabled:
+                    type: boolean
         api.affiliate.service.v1.AffiliateVTGReportItem:
             type: object
             properties:
@@ -10696,6 +11123,38 @@ components:
                     type: string
                 accessToken:
                     type: string
+        api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesRequest:
+            type: object
+            properties:
+                targetCurrency:
+                    type: string
+                snapshotTime:
+                    type: string
+        api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse:
+            type: object
+            properties:
+                claimedDetails:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail'
+                totalCreditedAmount:
+                    type: string
+                targetCurrency:
+                    type: string
+        api.affiliate.service.v1.ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail:
+            type: object
+            properties:
+                sourceCurrency:
+                    type: string
+                sourceAmount:
+                    type: string
+                convertedAmount:
+                    type: string
+                exchangeRate:
+                    type: string
+                commissionCount:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.ClaimUserReferralRewardsRequest:
             type: object
             properties:
@@ -10708,6 +11167,13 @@ components:
         api.affiliate.service.v1.ClaimUserReferralRewardsResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.ClickAction:
+            type: object
+            properties:
+                actionType:
+                    type: string
+                customUrl:
+                    type: string
         api.affiliate.service.v1.CommissionPlan:
             type: object
             properties:
@@ -10930,13 +11396,23 @@ components:
                     type: string
         api.affiliate.service.v1.CreateAffiliateResponse:
             type: object
-            properties: {}
+            properties:
+                affiliateId:
+                    type: string
+        api.affiliate.service.v1.CreateAffiliateSubAccountResponse:
+            type: object
+            properties:
+                userId:
+                    type: string
         api.affiliate.service.v1.CreateCampaignResponse:
             type: object
             properties:
                 campaignId:
                     type: string
         api.affiliate.service.v1.CreateCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.CreateLandingTemplateResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.CreatePostbackResponse:
@@ -11034,6 +11510,9 @@ components:
             type: object
             properties: {}
         api.affiliate.service.v1.DeleteCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.DeleteLandingTemplateResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.DeletePostbackResponse:
@@ -11283,6 +11762,20 @@ components:
                     type: string
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.GetLandingTemplateConfigRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                landingTemplateId:
+                    type: string
+        api.affiliate.service.v1.GetLandingTemplateConfigResponse:
+            type: object
+            properties:
+                landingTemplate:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.LandingTemplate'
+                landingPageSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.LandingPageSettings'
         api.affiliate.service.v1.GetOperatorSettingsResponse:
             type: object
             properties:
@@ -11419,6 +11912,47 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Referral plan used by the user, nil if no referral plan is set
+        api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesRequest:
+            type: object
+            properties:
+                targetCurrency:
+                    type: string
+        api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse:
+            type: object
+            properties:
+                currencyRewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward'
+                totalConvertedAmount:
+                    type: string
+                targetCurrency:
+                    type: string
+                snapshotTime:
+                    type: string
+        api.affiliate.service.v1.GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward:
+            type: object
+            properties:
+                currency:
+                    type: string
+                amount:
+                    type: string
+                convertedAmount:
+                    type: string
+                exchangeRate:
+                    type: string
+                commissionCount:
+                    type: integer
+                    format: int32
+                referralAmount:
+                    type: string
+                    description: breakdown by reward type
+                commissionAmount:
+                    type: string
+                lossRevShareAmount:
+                    type: string
+                lossRevShareExcluded:
+                    type: boolean
         api.affiliate.service.v1.GetUserReferralRewardsRequest:
             type: object
             properties:
@@ -11501,6 +12035,46 @@ components:
                 enabled:
                     type: boolean
                 rewardAmount:
+                    type: string
+        api.affiliate.service.v1.LandingPageSettings:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                landingTemplateId:
+                    type: string
+        api.affiliate.service.v1.LandingTemplate:
+            type: object
+            properties:
+                id:
+                    type: string
+                templateName:
+                    type: string
+                mobileImage:
+                    type: string
+                mobileClickAction:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ClickAction'
+                pcImage:
+                    type: string
+                pcClickAction:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ClickAction'
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                realOperatorId:
+                    type: string
+                operatorType:
+                    type: string
+                createdBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
                     type: string
         api.affiliate.service.v1.LifetimeReportItem:
             type: object
@@ -11688,6 +12262,22 @@ components:
                     format: int32
                 total:
                     type: string
+        api.affiliate.service.v1.ListAffiliateSubAccountsResponse:
+            type: object
+            properties:
+                subAccounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateSubAccountInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.ListAffiliateVTGReportResponse:
             type: object
             properties:
@@ -11828,6 +12418,10 @@ components:
                     type: boolean
                 campaign:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
+                landingPageSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.LandingPageSettings'
+                landingTemplateName:
+                    type: string
         api.affiliate.service.v1.ListCommissionPlansResponse:
             type: object
             properties:
@@ -11983,6 +12577,29 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.affiliate.service.v1.ListLandingTemplatesByCampaignResponse:
+            type: object
+            properties:
+                landingTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.LandingTemplate'
+        api.affiliate.service.v1.ListLandingTemplatesResponse:
+            type: object
+            properties:
+                landingTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.LandingTemplate'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.ListPostbackLogsResponse:
             type: object
             properties:
@@ -12725,6 +13342,9 @@ components:
         api.affiliate.service.v1.UpdateCommissionPlanResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.UpdateLandingTemplateResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.UpdateOperatorSettingsResponse:
             type: object
             properties: {}
@@ -13150,6 +13770,19 @@ components:
             type: object
             properties: {}
             description: AdminResetPasswordResponse - empty response on success
+        api.backoffice.service.v1.ArchiveCrmCampaignRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                id:
+                    type: string
+                    description: Campaign ID to archive
+            description: |-
+                Archive a campaign. Transitions status from PAUSED/COMPLETED → ARCHIVED.
+                 Archived campaigns stop all processing and can be deleted or re-drafted.
         api.backoffice.service.v1.AuditLog:
             type: object
             properties:
@@ -13571,6 +14204,17 @@ components:
             properties:
                 exists:
                     type: boolean
+        api.backoffice.service.v1.CheckOTPBindingCountryRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
+                country:
+                    type: string
+                    description: ISO 3166-1 alpha-2 country code or "global"
+            description: Check whether an operator has at least one enabled binding for a specific country.
         api.backoffice.service.v1.CheckOperatorKeyExistsRequest:
             type: object
             properties:
@@ -13608,6 +14252,19 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.CreateAffiliateSubAccountRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                password:
+                    type: string
         api.backoffice.service.v1.CreateAffiliateWithdrawRequest:
             type: object
             properties:
@@ -13920,44 +14577,85 @@ components:
                          }
                          ```
             description: Create a new campaign in DRAFT status.
+        api.backoffice.service.v1.CreateLandingTemplateRequest:
+            type: object
+            properties:
+                templateName:
+                    type: string
+                mobileImage:
+                    type: string
+                mobileClickAction:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ClickAction'
+                pcImage:
+                    type: string
+                pcClickAction:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ClickAction'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.CreateMerchantRequest:
             type: object
             properties:
                 name:
                     type: string
+        api.backoffice.service.v1.CreateOTPProviderBindingRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: |-
+                        Target operator context for permission check.
+                         The binding's operator_id will be set to the target operator's ID.
+                providerId:
+                    type: string
+                    description: Provider to bind (must exist)
+                country:
+                    type: string
+                    description: ISO 3166-1 alpha-2 (e.g., "BR"), or "global" for default fallback
+                enabled:
+                    type: boolean
+                    description: Whether this binding is active for routing
+                priority:
+                    type: integer
+                    description: Routing priority within same (operator_id, country). Lower = higher priority (e.g., 0 > 1 > 2).
+                    format: int32
+                phonePrefixes:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Phone number prefix filter. e.g., ["+5511", "+5521"]. Empty = matches all numbers.
+                         Enables number-segment routing: different providers for different area codes.
+            description: |-
+                Bind a provider to an operator+country for routing.
+                 UNIQUE(operator_id, provider_id, country): one binding per provider per operator+country.
         api.backoffice.service.v1.CreateOTPProviderRequest:
             type: object
             properties:
                 targetOperatorContext:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: Target operator context for permission check.
-                country:
-                    type: string
-                    description: ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
+                    description: |-
+                        Target operator context for permission check.
+                         The provider's owner_operator_id will be set to the target operator's ID.
                 providerType:
                     enum:
                         - OTP_PROVIDER_TYPE_UNSPECIFIED
                         - OTP_PROVIDER_TYPE_ENGAGELAB
                     type: string
-                    description: 'Third-party provider type: `OTP_PROVIDER_TYPE_ENGAGELAB` (SMS, WhatsApp, Voice)'
+                    description: 'Third-party provider type: OTP_PROVIDER_TYPE_ENGAGELAB (SMS, WhatsApp, Voice)'
                     format: enum
                 name:
                     type: string
-                    description: Human-readable display name
-                enabled:
-                    type: boolean
-                    description: Whether this provider is active for routing
-                priority:
-                    type: integer
-                    description: Routing priority (lower = higher priority, e.g. 0 > 1 > 2)
-                    format: int32
+                    description: Human-readable display name (e.g., "EngageLab Main Account")
                 credentialsJson:
                     type: string
-                    description: Plain JSON with provider-specific credentials (encrypted before storage)
+                    description: |-
+                        Plain JSON with provider-specific credentials (encrypted before storage).
+                         EngageLab example: {"dev_key":"your_key","dev_secret":"your_secret"}
                 config:
                     type: string
-                    description: JSON string of non-sensitive config (base_url, timeouts, etc.)
+                    description: JSON string of non-sensitive config (base_url, timeouts, etc.). Optional.
                 sendChannelStrategy:
                     enum:
                         - OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
@@ -13967,13 +14665,20 @@ components:
                     type: string
                     description: |-
                         Channel delivery order:
-                         `OTP_SEND_CHANNEL_STRATEGY_SMS` (SMS only),
-                         `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS` (WhatsApp first, fallback to SMS),
-                         `OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE` (WhatsApp → SMS → Voice)
+                         OTP_SEND_CHANNEL_STRATEGY_SMS (SMS only),
+                         OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS (WhatsApp first, fallback to SMS),
+                         OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE (WhatsApp → SMS → Voice)
                     format: enum
+                supportedCountries:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Countries this provider supports (e.g., ["BR", "JP"]). Empty = all countries.
+                         When creating a binding, the binding's country must be in this list (or list is empty).
             description: |-
                 Register a third-party OTP delivery provider.
-                 UNIQUE(operator_id, country, provider_type): one provider per type per operator+country.
+                 Credentials are configured once; use CreateOTPProviderBinding to assign to operator+country.
                  credentials_json is required and must be valid JSON for the chosen provider_type.
         api.backoffice.service.v1.CreateOTPTemplateRequest:
             type: object
@@ -13984,13 +14689,13 @@ components:
                     description: Target operator context for permission check.
                 country:
                     type: string
-                    description: ISO 3166-1 alpha-2 country code (e.g. `"BR"`), or `"global"` for default fallback.
+                    description: ISO 3166-1 alpha-2 country code (e.g., "BR"), or "global" for default fallback
                 providerId:
                     type: string
                     description: ID of the OTP provider this template belongs to
                 name:
                     type: string
-                    description: Human-readable display name (e.g. `"Brazil Login OTP - Portuguese"`)
+                    description: Human-readable display name (e.g., "Brazil Login OTP - Portuguese")
                 templateType:
                     enum:
                         - OTP_TEMPLATE_TYPE_UNSPECIFIED
@@ -14001,32 +14706,31 @@ components:
                     type: string
                     description: |-
                         Business scenario this template serves:
-                         `OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION`, `OTP_TEMPLATE_TYPE_LOGIN_OTP`,
-                         `OTP_TEMPLATE_TYPE_PASSWORD_RESET`, `OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM`
+                         OTP_TEMPLATE_TYPE_EMAIL_VERIFICATION, OTP_TEMPLATE_TYPE_LOGIN_OTP,
+                         OTP_TEMPLATE_TYPE_PASSWORD_RESET, OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
                     format: enum
                 externalTemplateId:
                     type: string
                     description: |-
                         Template ID from the third-party provider's platform.
-                         For EngageLab: find it in Console → OTP → Template Management after creating/approving the template.
-                         This ID is passed to the provider's API at send time to select the correct message content.
+                         For EngageLab: find it in Console → OTP → Template Management.
                 language:
                     type: string
-                    description: BCP-47 language code (e.g. `"en"`, `"pt"`, `"zh"`). Used for routing and passed to the provider.
+                    description: BCP-47 language code (e.g., "en", "pt", "zh")
                 brandName:
                     type: string
-                    description: Brand name injected into the OTP message (e.g. `"BetBrazil"`). Passed as template variable `brand_name`.
+                    description: Brand name injected into OTP messages (e.g., "BetBrazil"). Passed as template variable.
                 codeLength:
                     type: integer
-                    description: OTP code length, informational only (default 6). The actual code is generated by user-service.
+                    description: OTP code length, informational only (default 6). Actual code is generated by user-service.
                     format: int32
                 codeTtlSeconds:
                     type: integer
-                    description: OTP code TTL in seconds, informational only (default 900). The actual TTL is enforced by user-service.
+                    description: OTP code TTL in seconds, informational only (default 900). Actual TTL enforced by user-service.
                     format: int32
                 extraParams:
                     type: string
-                    description: JSON string of additional template variables passed to the provider (e.g. `'{"app_name":"Meepo"}'`)
+                    description: JSON string of additional template variables (e.g., '{"app_name":"Meepo"}')
                 enabled:
                     type: boolean
                     description: Whether this template is active for routing. Disabled templates are skipped during resolution.
@@ -14643,6 +15347,11 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.DeleteLandingTemplateRequest:
+            type: object
+            properties:
+                landingTemplateId:
+                    type: string
         api.backoffice.service.v1.DeleteOAuthProviderConfigRequest:
             type: object
             properties:
@@ -14654,6 +15363,17 @@ components:
         api.backoffice.service.v1.DeleteOAuthProviderConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteOTPProviderBindingRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                id:
+                    type: string
+                    description: Binding ID to delete
+            description: Permanently delete a provider binding.
         api.backoffice.service.v1.DeleteOTPProviderRequest:
             type: object
             properties:
@@ -14666,7 +15386,7 @@ components:
                     description: Provider ID to delete
             description: |-
                 Permanently delete an OTP provider by ID.
-                 Associated templates are NOT automatically deleted — clean them up first.
+                 Associated bindings and templates are NOT automatically deleted — clean them up first.
         api.backoffice.service.v1.DeleteOTPTemplateRequest:
             type: object
             properties:
@@ -17187,6 +17907,19 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListAffiliateSubAccountsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                paginate:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliateUsersRequest:
             type: object
             properties:
@@ -18564,6 +19297,22 @@ components:
                     description: Dates
                 dueDate:
                     type: string
+        api.backoffice.service.v1.ListLandingTemplatesByCampaignRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+        api.backoffice.service.v1.ListLandingTemplatesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListManualJournalEntriesRequest:
             type: object
             properties:
@@ -18731,7 +19480,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.OAuthProviderConfig'
-        api.backoffice.service.v1.ListOTPProvidersRequest:
+        api.backoffice.service.v1.ListOTPBindingCountriesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
+                enabled:
+                    type: boolean
+                    description: If set, only count bindings with this enabled status
+            description: Get distinct countries configured for an operator via provider bindings.
+        api.backoffice.service.v1.ListOTPProviderBindingsRequest:
             type: object
             properties:
                 targetOperatorContext:
@@ -18740,7 +19500,32 @@ components:
                     description: Target operator context for ownership scoping.
                 country:
                     type: string
-                    description: Filter by country code (e.g. `"BR"`) or `"global"` (optional)
+                    description: Filter by country code (e.g., "BR") or "global" (optional)
+                providerId:
+                    type: string
+                    description: Filter by associated provider ID (optional)
+                enabled:
+                    type: boolean
+                    description: Filter by enabled status (optional)
+                page:
+                    type: integer
+                    description: Page number (1-based, default 1)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Items per page (default 20, max 100)
+                    format: int32
+            description: |-
+                List provider bindings with optional filters and pagination.
+                 Results are scoped to the operator in target_operator_context.
+                 Each binding includes inline provider info for display convenience.
+        api.backoffice.service.v1.ListOTPProvidersRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for ownership scoping.
                 providerType:
                     enum:
                         - OTP_PROVIDER_TYPE_UNSPECIFIED
@@ -18748,9 +19533,11 @@ components:
                     type: string
                     description: Filter by provider type (optional)
                     format: enum
-                enabled:
-                    type: boolean
-                    description: Filter by enabled status (optional)
+                country:
+                    type: string
+                    description: |-
+                        Filter by supported country: returns providers whose supported_countries includes
+                         this country OR whose supported_countries is empty (supports all). Optional.
                 page:
                     type: integer
                     description: Page number (1-based, default 1)
@@ -18774,10 +19561,10 @@ components:
                     description: Filter by end-user ID who triggered the OTP (optional)
                 channelUsed:
                     type: string
-                    description: 'Filter by delivery channel: `"sms"`, `"whatsapp"`, `"voice"`, `"email"` (optional)'
+                    description: 'Filter by delivery channel: "sms", "whatsapp", "voice", "email" (optional)'
                 status:
                     type: string
-                    description: 'Filter by delivery status: `"sent"`, `"failed"` (optional)'
+                    description: 'Filter by delivery status: "sent", "failed" (optional)'
                 startTime:
                     type: string
                     description: Start of time range (Unix milliseconds, inclusive)
@@ -18802,7 +19589,7 @@ components:
                     description: Target operator context for ownership scoping.
                 country:
                     type: string
-                    description: Filter by country code (e.g. `"BR"`) or `"global"` (optional)
+                    description: Filter by country code (e.g., "BR") or "global" (optional)
                 providerId:
                     type: string
                     description: Filter by associated provider ID (optional)
@@ -20541,6 +21328,10 @@ components:
                            - "game_bet_rollback"            - Game bet transaction rollback
                            - "game_win_rollback"            - Game win transaction rollback
                            - "payment_withdraw_rollback" - Payment withdraw transaction rollback
+                transactionTypes:
+                    type: array
+                    items:
+                        type: string
                 currency:
                     type: string
                 startTime:
@@ -20630,6 +21421,8 @@ components:
                 relatedTransactionId:
                     type: string
                 externalTransactionId:
+                    type: string
+                status:
                     type: string
         api.backoffice.service.v1.ListWalletCurrenciesRequest:
             type: object
@@ -22071,6 +22864,11 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SubAccountResetPassword:
+            type: object
+            properties:
+                newPassword:
+                    type: string
         api.backoffice.service.v1.SyncOTPTemplateStatusRequest:
             type: object
             properties:
@@ -22227,6 +23025,22 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 affiliateId:
                     type: string
+        api.backoffice.service.v1.UpdateAffiliateSubAccountRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                subAccountUserId:
+                    type: string
+                enabled:
+                    type: boolean
+                resetPassword:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.SubAccountResetPassword'
+                twoFaEnabled:
+                    type: boolean
+        api.backoffice.service.v1.UpdateAffiliateSubAccountResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.UpdateAssetRequest:
             type: object
             properties:
@@ -22375,6 +23189,8 @@ components:
                     type: boolean
                 targetAffiliateId:
                     type: string
+                landingPageSettings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.LandingPageSettings'
         api.backoffice.service.v1.UpdateCommissionPlanRequest:
             type: object
             properties:
@@ -22428,6 +23244,51 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateLandingTemplateRequest:
+            type: object
+            properties:
+                landingTemplateId:
+                    type: string
+                templateName:
+                    type: string
+                mobileImage:
+                    type: string
+                mobileClickAction:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ClickAction'
+                pcImage:
+                    type: string
+                pcClickAction:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ClickAction'
+        api.backoffice.service.v1.UpdateOTPProviderBindingRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Target operator context for permission check.
+                id:
+                    type: string
+                    description: Binding ID to update
+                enabled:
+                    type: boolean
+                    description: Enable/disable for routing (optional)
+                priority:
+                    type: integer
+                    description: New routing priority (optional)
+                    format: int32
+                phonePrefixes:
+                    type: array
+                    items:
+                        type: string
+                    description: New phone prefix filter. Ignored if empty and clear_phone_prefixes is false.
+                clearPhonePrefixes:
+                    type: boolean
+                    description: |-
+                        Set to true to clear phone_prefixes (match all numbers).
+                         Takes precedence over phone_prefixes field.
+            description: |-
+                Partially update a provider binding.
+                 Only provided (non-nil) fields are updated; omitted fields remain unchanged.
         api.backoffice.service.v1.UpdateOTPProviderRequest:
             type: object
             properties:
@@ -22441,13 +23302,6 @@ components:
                 name:
                     type: string
                     description: New display name (optional)
-                enabled:
-                    type: boolean
-                    description: Enable/disable for routing (optional)
-                priority:
-                    type: integer
-                    description: New routing priority (optional)
-                    format: int32
                 credentialsJson:
                     type: string
                     description: New credentials, will be re-encrypted before storage (optional)
@@ -22463,6 +23317,16 @@ components:
                     type: string
                     description: New channel delivery strategy (optional)
                     format: enum
+                supportedCountries:
+                    type: array
+                    items:
+                        type: string
+                    description: New supported countries list. Ignored if empty and clear_supported_countries is false.
+                clearSupportedCountries:
+                    type: boolean
+                    description: |-
+                        Set to true to clear supported_countries (provider will support all countries).
+                         Takes precedence over supported_countries field.
             description: |-
                 Partially update an existing OTP provider.
                  Only provided (non-nil) fields are updated; omitted fields remain unchanged.
@@ -22925,6 +23789,23 @@ components:
             properties:
                 fileUrl:
                     type: string
+        api.backoffice.service.v1.UploadLandingTemplateImageRequest:
+            type: object
+            properties:
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                filePath:
+                    type: string
+                imageType:
+                    type: string
+        api.backoffice.service.v1.UploadLandingTemplateImageResponse:
+            type: object
+            properties:
+                fileUrl:
+                    type: string
         api.backoffice.service.v1.UploadOperatorStaticFileRequest:
             type: object
             properties:
@@ -23339,6 +24220,11 @@ components:
                         $ref: '#/components/schemas/api.campaign.service.v1.ConfigFieldSchema'
             description: ActionSchema describes an action type
         api.campaign.service.v1.ActivateCampaignResponse:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.campaign.service.v1.Campaign'
+        api.campaign.service.v1.ArchiveCampaignResponse:
             type: object
             properties:
                 campaign:
@@ -25868,6 +26754,12 @@ components:
                         - $ref: '#/components/schemas/api.push.service.v1.SlackChannelConfig'
                     description: Slack configuration. Required when channel_type = CHANNEL_TYPE_SLACK
             description: Channel-specific configuration. Provide one of the nested configs based on channel_type.
+        api.push.service.v1.CheckOTPBindingCountryResponse:
+            type: object
+            properties:
+                configured:
+                    type: boolean
+                    description: true if at least one enabled binding exists for this operator+country
         api.push.service.v1.CreateNotificationChannelRequest:
             type: object
             properties:
@@ -25902,6 +26794,11 @@ components:
                         - $ref: '#/components/schemas/api.push.service.v1.NotificationChannel'
                     description: The created channel with generated ID and timestamps
             description: Response for CreateNotificationChannel.
+        api.push.service.v1.CreateOTPProviderBindingResponse:
+            type: object
+            properties:
+                binding:
+                    $ref: '#/components/schemas/api.push.service.v1.OTPProviderBindingInfo'
         api.push.service.v1.CreateOTPProviderResponse:
             type: object
             properties:
@@ -25940,6 +26837,9 @@ components:
             type: object
             properties: {}
             description: Response for DeleteNotificationChannel. Empty on success.
+        api.push.service.v1.DeleteOTPProviderBindingResponse:
+            type: object
+            properties: {}
         api.push.service.v1.DeleteOTPProviderResponse:
             type: object
             properties: {}
@@ -26114,6 +27014,34 @@ components:
                     description: Number of items per page
                     format: int32
             description: Response for ListNotificationRules.
+        api.push.service.v1.ListOTPBindingCountriesResponse:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                    description: Distinct country codes (e.g., ["BR", "JP", "global"])
+                total:
+                    type: integer
+                    description: Number of distinct countries
+                    format: int32
+        api.push.service.v1.ListOTPProviderBindingsResponse:
+            type: object
+            properties:
+                bindings:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.push.service.v1.OTPProviderBindingInfo'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.push.service.v1.ListOTPProvidersResponse:
             type: object
             properties:
@@ -26216,6 +27144,9 @@ components:
                 isInherited:
                     type: boolean
                     description: True if this channel is inherited from a parent operator level (system/retailer/company)
+                isOverridden:
+                    type: boolean
+                    description: True if the current operator has an override for this inherited channel's enabled state
             description: A configured notification delivery endpoint.
         api.push.service.v1.NotificationRule:
             type: object
@@ -26303,32 +27234,90 @@ components:
                     type: boolean
                     description: Whether the rule is active
             description: Input for creating or updating a notification rule in a batch save operation.
-        api.push.service.v1.OTPProviderInfo:
+        api.push.service.v1.OTPProviderBindingInfo:
             type: object
             properties:
                 id:
                     type: string
                 operatorId:
                     type: string
+                    description: The operator level this binding applies to
+                providerId:
+                    type: string
+                    description: The provider this binding references
                 country:
                     type: string
+                    description: ISO 3166-1 alpha-2 country code, or "global" for default fallback
+                enabled:
+                    type: boolean
+                    description: Whether this binding is active for routing. Disabled bindings are skipped.
+                priority:
+                    type: integer
+                    description: Routing priority within same (operator_id, country). Lower value = higher priority.
+                    format: int32
+                phonePrefixes:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Phone number prefix filter. If set, this binding only matches phone numbers
+                         starting with one of these prefixes. Empty = matches all phone numbers.
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                provider:
+                    allOf:
+                        - $ref: '#/components/schemas/api.push.service.v1.OTPProviderInfo'
+                    description: Inline provider info for convenience (populated by the server on read operations)
+            description: |-
+                OTPProviderBindingInfo represents a binding between a provider and an operator+country.
+
+                 A Binding controls OTP routing: it maps a Provider to a specific (operator_id, country)
+                 combination with priority ordering and optional phone prefix filtering.
+
+                 Key concepts:
+                   - One provider can be bound to multiple countries/operators (reuse credentials)
+                   - Multiple bindings per (operator, country) are allowed — ordered by priority ASC
+                   - phone_prefixes enables number-segment routing (e.g., +5511 → Provider A, +5531 → Provider B)
+                   - Lower-level operators can override upper-level config by creating their own bindings
+                     (operator-level bindings take precedence over company/retailer/system-level ones)
+
+                 ## Routing example (same country, multiple providers + phone prefix)
+                   Binding 1: provider=100, country="BR", priority=0, phone_prefixes=["+5511","+5521"]
+                   Binding 2: provider=200, country="BR", priority=1, phone_prefixes=[]
+                   → +5511xxx → matches Binding 1 (prefix match, higher priority)
+                   → +5531xxx → skips Binding 1 (prefix mismatch), matches Binding 2 (no prefix = catch-all)
+
+                 ## Override example (lower-level operator overrides upper-level)
+                   System binding: operator_id=0, provider=100, country="BR"
+                   Operator 5001 creates: operator_id=5001, provider=200, country="BR"
+                   → Users of operator 5001 use provider 200 (operator-level checked first)
+                   → Other operators fall through to system binding with provider 100
+        api.push.service.v1.OTPProviderInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                ownerOperatorId:
+                    type: string
+                    description: The operator who owns this provider. Set automatically from the caller's context.
                 providerType:
                     enum:
                         - OTP_PROVIDER_TYPE_UNSPECIFIED
                         - OTP_PROVIDER_TYPE_ENGAGELAB
                     type: string
+                    description: Third-party provider type (e.g., OTP_PROVIDER_TYPE_ENGAGELAB)
                     format: enum
                 name:
                     type: string
-                enabled:
-                    type: boolean
-                priority:
-                    type: integer
-                    format: int32
+                    description: Human-readable display name
                 hasCredentials:
                     type: boolean
+                    description: Whether credentials are configured. Actual credentials are never returned.
                 config:
                     type: string
+                    description: JSON string of non-sensitive config (e.g., base_url, timeout_seconds)
                 sendChannelStrategy:
                     enum:
                         - OTP_SEND_CHANNEL_STRATEGY_UNSPECIFIED
@@ -26336,14 +27325,34 @@ components:
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS
                         - OTP_SEND_CHANNEL_STRATEGY_WHATSAPP_SMS_VOICE
                     type: string
+                    description: Channel delivery order (e.g., WhatsApp → SMS → Voice)
                     format: enum
+                supportedCountries:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Countries this provider supports. Empty = all countries.
+                         Used to validate when creating bindings — a binding's country must be in this list
+                         (or the list must be empty). Does NOT affect routing directly.
                 createdAt:
                     type: string
                 updatedAt:
                     type: string
             description: |-
-                OTPProviderInfo represents an OTP provider configuration.
-                 Credentials are NEVER exposed in responses; only has_credentials indicates whether they are set.
+                OTPProviderInfo represents a third-party OTP delivery provider configuration.
+
+                 A Provider holds the API credentials and channel strategy for a third-party service
+                 (e.g., EngageLab). It is decoupled from country routing — use OTPProviderBinding to
+                 assign a provider to specific operator+country combinations.
+
+                 Key fields:
+                   - owner_operator_id: The operator who created this provider. Only the owner and
+                     their ancestors can modify or delete it.
+                   - supported_countries: Restricts which countries this provider can be bound to.
+                     Empty array means the provider supports all countries.
+                   - has_credentials: Indicates whether credentials are configured. Actual credential
+                     values are NEVER exposed in responses.
         api.push.service.v1.OTPSendLogInfo:
             type: object
             properties:
@@ -26375,6 +27384,9 @@ components:
                     type: string
                 createdAt:
                     type: string
+            description: |-
+                OTPSendLogInfo represents a single OTP delivery attempt record.
+                 Logs are immutable (append-only) and used for auditing, debugging, and statistics.
         api.push.service.v1.OTPTemplateInfo:
             type: object
             properties:
@@ -26384,10 +27396,13 @@ components:
                     type: string
                 country:
                     type: string
+                    description: ISO 3166-1 alpha-2 country code, or "global"
                 providerId:
                     type: string
+                    description: Provider this template belongs to
                 name:
                     type: string
+                    description: Human-readable display name
                 templateType:
                     enum:
                         - OTP_TEMPLATE_TYPE_UNSPECIFIED
@@ -26396,21 +27411,28 @@ components:
                         - OTP_TEMPLATE_TYPE_PASSWORD_RESET
                         - OTP_TEMPLATE_TYPE_WITHDRAWAL_CONFIRM
                     type: string
+                    description: Business scenario this template serves
                     format: enum
                 externalTemplateId:
                     type: string
+                    description: Template ID from the third-party provider's platform (e.g., EngageLab template ID)
                 language:
                     type: string
+                    description: BCP-47 language code (e.g., "en", "pt")
                 brandName:
                     type: string
+                    description: Brand name injected into OTP messages as template variable
                 codeLength:
                     type: integer
+                    description: OTP code length, informational only (actual code generated by caller)
                     format: int32
                 codeTtlSeconds:
                     type: integer
+                    description: OTP code TTL in seconds, informational only (actual TTL enforced by caller)
                     format: int32
                 extraParams:
                     type: string
+                    description: JSON string of additional template variables passed to the provider
                 reviewStatus:
                     enum:
                         - OTP_TEMPLATE_REVIEW_STATUS_UNSPECIFIED
@@ -26419,13 +27441,22 @@ components:
                         - OTP_TEMPLATE_REVIEW_STATUS_APPROVED
                         - OTP_TEMPLATE_REVIEW_STATUS_REJECTED
                     type: string
+                    description: Review status from external provider (relevant for WhatsApp templates)
                     format: enum
                 enabled:
                     type: boolean
+                    description: Whether this template is active for routing
                 createdAt:
                     type: string
                 updatedAt:
                     type: string
+            description: |-
+                OTPTemplateInfo represents an OTP message template configuration.
+
+                 A Template defines the message content sent to the end-user. It is bound to a
+                 specific OTP Provider and scoped to a business scenario (template_type).
+                 Templates are resolved per (operator, country, template_type, language) with
+                 fallback to "global" country and "en" language.
         api.push.service.v1.SaveChannelRulesRequest:
             type: object
             properties:
@@ -26476,14 +27507,7 @@ components:
                         - OTP_TEMPLATE_REVIEW_STATUS_REJECTED
                     type: string
                     format: enum
-            description: |-
-                SyncOTPTemplateStatusResponse returns the updated review status after syncing with the provider.
-
-                 Possible values:
-                   - LOCAL_ONLY:   No external review needed (e.g., SMS templates). The template can be used immediately.
-                   - PENDING:      Template is under review by the provider (e.g., WhatsApp). Wait and sync again later.
-                   - APPROVED:     Provider approved the template. It is ready for use.
-                   - REJECTED:     Provider rejected the template. Fix the content on the provider's platform and resubmit.
+            description: SyncOTPTemplateStatusResponse returns the updated review status after syncing with the provider.
         api.push.service.v1.TelegramChannelConfig:
             type: object
             properties:
@@ -26549,6 +27573,9 @@ components:
             type: object
             properties: {}
             description: Response for UpdateNotificationChannel. Empty on success.
+        api.push.service.v1.UpdateOTPProviderBindingResponse:
+            type: object
+            properties: {}
         api.push.service.v1.UpdateOTPProviderResponse:
             type: object
             properties: {}
@@ -29315,6 +30342,9 @@ components:
                     type: string
                     description: user registered at
                     format: date-time
+                mfaRequired:
+                    type: boolean
+                    description: whether MFA is required for this user
             description: UserInfo contains basic user information.
         api.user.service.v1.UserPrivacySettings:
             type: object
@@ -30270,6 +31300,13 @@ components:
                     type: string
                 updatedAt:
                     type: string
+                roundsPlayed:
+                    type: integer
+                    description: Freespin usage counts (synced from game service, shared across all games)
+                    format: int32
+                totalRounds:
+                    type: integer
+                    format: int32
             description: Free spin details - all fields from UserFreeSpin DO
         api.wallet.service.v1.FreeSpinRewardDetail:
             type: object
@@ -32842,36 +33879,66 @@ tags:
          OTP can be delivered via SMS, WhatsApp, Voice, or Email.
 
          This service allows backoffice administrators to configure HOW OTPs are delivered
-         for each operator (tenant), per country. The configuration consists of two layers:
+         for each operator (tenant), per country. The configuration consists of three layers:
 
-           Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab, Twilio)
+           Provider  — "Which third-party service sends the OTP?" (e.g., EngageLab).
+                       Stores API credentials and channel strategy. Created once, reusable.
+           Binding   — "Which operator+country uses which provider?"
+                       Maps a provider to routing. Supports priority ordering and phone prefix filtering.
            Template  — "What message content is sent?" (bound to a provider, per business scenario)
 
          ## Complete setup workflow
 
          Step 1: CreateOTPProvider
-           Register a third-party OTP delivery service for an operator + country.
-           Example: EngageLab for operator 1001, country "BR" (Brazil).
+           Register a third-party OTP delivery service with its credentials.
+           Example: EngageLab with dev_key/dev_secret, WhatsApp-first strategy.
+           → Credentials are configured once and can be reused across countries.
 
-         Step 2: CreateOTPTemplate
+         Step 2: CreateOTPProviderBinding
+           Bind the provider to an operator+country for routing.
+           Example: Bind EngageLab to operator 1001, country "BR" with priority 0.
+           → Same provider can be bound to "JP", "global", etc. without re-entering credentials.
+           → Multiple providers per country are supported via priority ordering.
+
+         Step 3: CreateOTPTemplate
            Create message templates bound to the provider, one per business scenario.
-           Example: "email_verification" template using EngageLab template ID "T001" in Portuguese.
+           Example: "login_otp" template using EngageLab template ID "T001" in Portuguese.
 
-         Step 3: SyncOTPTemplateStatus
+         Step 4: SyncOTPTemplateStatus
            Some providers (EngageLab WhatsApp) require template approval. Call this to pull the
            latest review status from the provider. Only approved templates can be used for sending.
 
-         Step 4: (Automatic) SendOTP is called by internal services (e.g., user-service)
-           The push-service automatically routes to the correct provider + template based on
-           the operator, country, and business scenario. No backoffice action needed at this step.
+         Step 5: (Automatic) SendOTP is called by internal services (e.g., user-service)
+           The push-service automatically routes to the correct provider (via binding) + template
+           based on the operator hierarchy, country, and business scenario.
 
-         Step 5: ListOTPSendLogs
+         Step 6: ListOTPSendLogs
            Query delivery history for auditing, debugging, or statistics.
 
-         ## Multi-tenant permission model
+         ## Routing chain (when SendOTP is called for a phone number)
+
+         Provider binding resolution (first match wins):
+           For each level: operator → company → retailer → system (skip if ID=0):
+             1. (level_id, user's country, enabled=true) ORDER BY priority ASC
+             2. (level_id, "global",       enabled=true) ORDER BY priority ASC
+           Within each binding, phone_prefixes are checked (empty = match all).
+
+         Template resolution (first match wins):
+           For each level: operator → company → retailer → system (skip if ID=0):
+             1. (level_id, country, template_type, language)
+             2. (level_id, country, template_type, "en")
+             3. (level_id, "global", template_type, language)
+             4. (level_id, "global", template_type, "en")
+
+         ## Permission model
          All requests include target_operator_context. The backoffice validates that the
          authenticated admin has permission to operate on the target operator (hierarchy check).
          If target_operator_context is omitted, it defaults to the admin's own operator.
+
+         - Provider: owned by creator (owner_operator_id). Owner + ancestors can manage.
+         - Binding: scoped to target operator_id. Callers with authority over that operator can manage.
+         - Lower-level operators can override upper-level config by creating their own bindings
+           with enabled=false to disable, or with their own provider to replace.
     - name: BackofficeOperator
     - name: BackofficePayment
       description: |-

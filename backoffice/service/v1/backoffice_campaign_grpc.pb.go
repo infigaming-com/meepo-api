@@ -30,6 +30,7 @@ const (
 	BackofficeCampaign_ValidateCrmCampaignWorkflow_FullMethodName  = "/api.backoffice.service.v1.BackofficeCampaign/ValidateCrmCampaignWorkflow"
 	BackofficeCampaign_ActivateCrmCampaign_FullMethodName          = "/api.backoffice.service.v1.BackofficeCampaign/ActivateCrmCampaign"
 	BackofficeCampaign_PauseCrmCampaign_FullMethodName             = "/api.backoffice.service.v1.BackofficeCampaign/PauseCrmCampaign"
+	BackofficeCampaign_ArchiveCrmCampaign_FullMethodName           = "/api.backoffice.service.v1.BackofficeCampaign/ArchiveCrmCampaign"
 	BackofficeCampaign_TriggerCrmCampaign_FullMethodName           = "/api.backoffice.service.v1.BackofficeCampaign/TriggerCrmCampaign"
 	BackofficeCampaign_GetCrmCampaignExecution_FullMethodName      = "/api.backoffice.service.v1.BackofficeCampaign/GetCrmCampaignExecution"
 	BackofficeCampaign_ListCrmCampaignExecutions_FullMethodName    = "/api.backoffice.service.v1.BackofficeCampaign/ListCrmCampaignExecutions"
@@ -88,6 +89,8 @@ type BackofficeCampaignClient interface {
 	ActivateCrmCampaign(ctx context.Context, in *ActivateCrmCampaignRequest, opts ...grpc.CallOption) (*v1.ActivateCampaignResponse, error)
 	// Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 	PauseCrmCampaign(ctx context.Context, in *PauseCrmCampaignRequest, opts ...grpc.CallOption) (*v1.PauseCampaignResponse, error)
+	// Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+	ArchiveCrmCampaign(ctx context.Context, in *ArchiveCrmCampaignRequest, opts ...grpc.CallOption) (*v1.ArchiveCampaignResponse, error)
 	// Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
 	// See TriggerCrmCampaignRequest for details.
 	TriggerCrmCampaign(ctx context.Context, in *TriggerCrmCampaignRequest, opts ...grpc.CallOption) (*v1.TriggerCampaignResponse, error)
@@ -210,6 +213,16 @@ func (c *backofficeCampaignClient) PauseCrmCampaign(ctx context.Context, in *Pau
 	return out, nil
 }
 
+func (c *backofficeCampaignClient) ArchiveCrmCampaign(ctx context.Context, in *ArchiveCrmCampaignRequest, opts ...grpc.CallOption) (*v1.ArchiveCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ArchiveCampaignResponse)
+	err := c.cc.Invoke(ctx, BackofficeCampaign_ArchiveCrmCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeCampaignClient) TriggerCrmCampaign(ctx context.Context, in *TriggerCrmCampaignRequest, opts ...grpc.CallOption) (*v1.TriggerCampaignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.TriggerCampaignResponse)
@@ -311,6 +324,8 @@ type BackofficeCampaignServer interface {
 	ActivateCrmCampaign(context.Context, *ActivateCrmCampaignRequest) (*v1.ActivateCampaignResponse, error)
 	// Pause an ACTIVE campaign. Stops processing new triggers; in-flight executions continue to completion.
 	PauseCrmCampaign(context.Context, *PauseCrmCampaignRequest) (*v1.PauseCampaignResponse, error)
+	// Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+	ArchiveCrmCampaign(context.Context, *ArchiveCrmCampaignRequest) (*v1.ArchiveCampaignResponse, error)
 	// Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
 	// See TriggerCrmCampaignRequest for details.
 	TriggerCrmCampaign(context.Context, *TriggerCrmCampaignRequest) (*v1.TriggerCampaignResponse, error)
@@ -362,6 +377,9 @@ func (UnimplementedBackofficeCampaignServer) ActivateCrmCampaign(context.Context
 }
 func (UnimplementedBackofficeCampaignServer) PauseCrmCampaign(context.Context, *PauseCrmCampaignRequest) (*v1.PauseCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PauseCrmCampaign not implemented")
+}
+func (UnimplementedBackofficeCampaignServer) ArchiveCrmCampaign(context.Context, *ArchiveCrmCampaignRequest) (*v1.ArchiveCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ArchiveCrmCampaign not implemented")
 }
 func (UnimplementedBackofficeCampaignServer) TriggerCrmCampaign(context.Context, *TriggerCrmCampaignRequest) (*v1.TriggerCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method TriggerCrmCampaign not implemented")
@@ -579,6 +597,24 @@ func _BackofficeCampaign_PauseCrmCampaign_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeCampaign_ArchiveCrmCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveCrmCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeCampaignServer).ArchiveCrmCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeCampaign_ArchiveCrmCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeCampaignServer).ArchiveCrmCampaign(ctx, req.(*ArchiveCrmCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeCampaign_TriggerCrmCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TriggerCrmCampaignRequest)
 	if err := dec(in); err != nil {
@@ -715,6 +751,10 @@ var BackofficeCampaign_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PauseCrmCampaign",
 			Handler:    _BackofficeCampaign_PauseCrmCampaign_Handler,
+		},
+		{
+			MethodName: "ArchiveCrmCampaign",
+			Handler:    _BackofficeCampaign_ArchiveCrmCampaign_Handler,
 		},
 		{
 			MethodName: "TriggerCrmCampaign",

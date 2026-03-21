@@ -51,15 +51,21 @@ const (
 	// Notification Delivery errors (90300-90399)
 	ErrorReason_SEND_TO_CHANNELS_FAILED ErrorReason = 90300
 	// OTP errors (90400-90499)
-	ErrorReason_OTP_PROVIDER_NOT_FOUND     ErrorReason = 90400
-	ErrorReason_OTP_PROVIDER_DISABLED      ErrorReason = 90401
-	ErrorReason_OTP_TEMPLATE_NOT_FOUND     ErrorReason = 90402
-	ErrorReason_OTP_TEMPLATE_NOT_APPROVED  ErrorReason = 90403
-	ErrorReason_SEND_OTP_FAILED            ErrorReason = 90404
-	ErrorReason_SEND_OTP_RATE_LIMITED      ErrorReason = 90405
-	ErrorReason_SEND_OTP_NO_PROVIDER       ErrorReason = 90406
-	ErrorReason_SEND_OTP_NO_TEMPLATE       ErrorReason = 90407
-	ErrorReason_SEND_OTP_INVALID_RECIPIENT ErrorReason = 90408
+	ErrorReason_OTP_PROVIDER_NOT_FOUND                 ErrorReason = 90400
+	ErrorReason_OTP_PROVIDER_DISABLED                  ErrorReason = 90401
+	ErrorReason_OTP_TEMPLATE_NOT_FOUND                 ErrorReason = 90402
+	ErrorReason_OTP_TEMPLATE_NOT_APPROVED              ErrorReason = 90403
+	ErrorReason_SEND_OTP_FAILED                        ErrorReason = 90404
+	ErrorReason_SEND_OTP_RATE_LIMITED                  ErrorReason = 90405
+	ErrorReason_SEND_OTP_NO_PROVIDER                   ErrorReason = 90406
+	ErrorReason_SEND_OTP_NO_TEMPLATE                   ErrorReason = 90407
+	ErrorReason_SEND_OTP_INVALID_RECIPIENT             ErrorReason = 90408
+	ErrorReason_OTP_PROVIDER_ALREADY_EXISTS            ErrorReason = 90409
+	ErrorReason_OTP_PROVIDER_BINDING_NOT_FOUND         ErrorReason = 90410
+	ErrorReason_OTP_PROVIDER_BINDING_ALREADY_EXISTS    ErrorReason = 90411
+	ErrorReason_OTP_PROVIDER_PERMISSION_DENIED         ErrorReason = 90412
+	ErrorReason_OTP_PROVIDER_BINDING_PERMISSION_DENIED ErrorReason = 90413
+	ErrorReason_OTP_PROVIDER_BINDING_INVALID_COUNTRY   ErrorReason = 90414
 )
 
 // Enum value maps for ErrorReason.
@@ -96,39 +102,51 @@ var (
 		90406: "SEND_OTP_NO_PROVIDER",
 		90407: "SEND_OTP_NO_TEMPLATE",
 		90408: "SEND_OTP_INVALID_RECIPIENT",
+		90409: "OTP_PROVIDER_ALREADY_EXISTS",
+		90410: "OTP_PROVIDER_BINDING_NOT_FOUND",
+		90411: "OTP_PROVIDER_BINDING_ALREADY_EXISTS",
+		90412: "OTP_PROVIDER_PERMISSION_DENIED",
+		90413: "OTP_PROVIDER_BINDING_PERMISSION_DENIED",
+		90414: "OTP_PROVIDER_BINDING_INVALID_COUNTRY",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                         0,
-		"INVALID_TIME_RANGE":                  90001,
-		"GET_NOTIFICATIONS_FAILED":            90002,
-		"CREATE_NOTIFICATION_CHANNEL_FAILED":  90100,
-		"LIST_NOTIFICATION_CHANNELS_FAILED":   90101,
-		"GET_NOTIFICATION_CHANNEL_FAILED":     90102,
-		"UPDATE_NOTIFICATION_CHANNEL_FAILED":  90103,
-		"DELETE_NOTIFICATION_CHANNEL_FAILED":  90104,
-		"TEST_NOTIFICATION_CHANNEL_FAILED":    90105,
-		"NOTIFICATION_CHANNEL_NOT_FOUND":      90106,
-		"NOTIFICATION_CHANNEL_ALREADY_EXISTS": 90107,
-		"INVALID_CHANNEL_CONFIG":              90108,
-		"CREATE_NOTIFICATION_RULE_FAILED":     90200,
-		"LIST_NOTIFICATION_RULES_FAILED":      90201,
-		"GET_NOTIFICATION_RULE_FAILED":        90202,
-		"UPDATE_NOTIFICATION_RULE_FAILED":     90203,
-		"DELETE_NOTIFICATION_RULE_FAILED":     90204,
-		"NOTIFICATION_RULE_NOT_FOUND":         90205,
-		"NOTIFICATION_RULE_ALREADY_EXISTS":    90206,
-		"INVALID_RULE_CONDITIONS":             90207,
-		"SAVE_CHANNEL_RULES_FAILED":           90208,
-		"SEND_TO_CHANNELS_FAILED":             90300,
-		"OTP_PROVIDER_NOT_FOUND":              90400,
-		"OTP_PROVIDER_DISABLED":               90401,
-		"OTP_TEMPLATE_NOT_FOUND":              90402,
-		"OTP_TEMPLATE_NOT_APPROVED":           90403,
-		"SEND_OTP_FAILED":                     90404,
-		"SEND_OTP_RATE_LIMITED":               90405,
-		"SEND_OTP_NO_PROVIDER":                90406,
-		"SEND_OTP_NO_TEMPLATE":                90407,
-		"SEND_OTP_INVALID_RECIPIENT":          90408,
+		"UNSPECIFIED":                            0,
+		"INVALID_TIME_RANGE":                     90001,
+		"GET_NOTIFICATIONS_FAILED":               90002,
+		"CREATE_NOTIFICATION_CHANNEL_FAILED":     90100,
+		"LIST_NOTIFICATION_CHANNELS_FAILED":      90101,
+		"GET_NOTIFICATION_CHANNEL_FAILED":        90102,
+		"UPDATE_NOTIFICATION_CHANNEL_FAILED":     90103,
+		"DELETE_NOTIFICATION_CHANNEL_FAILED":     90104,
+		"TEST_NOTIFICATION_CHANNEL_FAILED":       90105,
+		"NOTIFICATION_CHANNEL_NOT_FOUND":         90106,
+		"NOTIFICATION_CHANNEL_ALREADY_EXISTS":    90107,
+		"INVALID_CHANNEL_CONFIG":                 90108,
+		"CREATE_NOTIFICATION_RULE_FAILED":        90200,
+		"LIST_NOTIFICATION_RULES_FAILED":         90201,
+		"GET_NOTIFICATION_RULE_FAILED":           90202,
+		"UPDATE_NOTIFICATION_RULE_FAILED":        90203,
+		"DELETE_NOTIFICATION_RULE_FAILED":        90204,
+		"NOTIFICATION_RULE_NOT_FOUND":            90205,
+		"NOTIFICATION_RULE_ALREADY_EXISTS":       90206,
+		"INVALID_RULE_CONDITIONS":                90207,
+		"SAVE_CHANNEL_RULES_FAILED":              90208,
+		"SEND_TO_CHANNELS_FAILED":                90300,
+		"OTP_PROVIDER_NOT_FOUND":                 90400,
+		"OTP_PROVIDER_DISABLED":                  90401,
+		"OTP_TEMPLATE_NOT_FOUND":                 90402,
+		"OTP_TEMPLATE_NOT_APPROVED":              90403,
+		"SEND_OTP_FAILED":                        90404,
+		"SEND_OTP_RATE_LIMITED":                  90405,
+		"SEND_OTP_NO_PROVIDER":                   90406,
+		"SEND_OTP_NO_TEMPLATE":                   90407,
+		"SEND_OTP_INVALID_RECIPIENT":             90408,
+		"OTP_PROVIDER_ALREADY_EXISTS":            90409,
+		"OTP_PROVIDER_BINDING_NOT_FOUND":         90410,
+		"OTP_PROVIDER_BINDING_ALREADY_EXISTS":    90411,
+		"OTP_PROVIDER_PERMISSION_DENIED":         90412,
+		"OTP_PROVIDER_BINDING_PERMISSION_DENIED": 90413,
+		"OTP_PROVIDER_BINDING_INVALID_COUNTRY":   90414,
 	}
 )
 
@@ -163,7 +181,8 @@ var File_push_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xc0\b\n" +
+	"\"push/service/v1/error_reason.proto\x12\x13api.push.service.v1\x1a\x13errors/errors.proto*\xd2\n" +
+	"\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12INVALID_TIME_RANGE\x10\x91\xbf\x05\x12\x1e\n" +
@@ -195,7 +214,13 @@ const file_push_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15SEND_OTP_RATE_LIMITED\x10\xa5\xc2\x05\x1a\x04\xa8E\xad\x03\x12\x1a\n" +
 	"\x14SEND_OTP_NO_PROVIDER\x10\xa6\xc2\x05\x12\x1a\n" +
 	"\x14SEND_OTP_NO_TEMPLATE\x10\xa7\xc2\x05\x12&\n" +
-	"\x1aSEND_OTP_INVALID_RECIPIENT\x10\xa8\xc2\x05\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1aSEND_OTP_INVALID_RECIPIENT\x10\xa8\xc2\x05\x1a\x04\xa8E\x90\x03\x12'\n" +
+	"\x1bOTP_PROVIDER_ALREADY_EXISTS\x10\xa9\xc2\x05\x1a\x04\xa8E\x99\x03\x12$\n" +
+	"\x1eOTP_PROVIDER_BINDING_NOT_FOUND\x10\xaa\xc2\x05\x12/\n" +
+	"#OTP_PROVIDER_BINDING_ALREADY_EXISTS\x10\xab\xc2\x05\x1a\x04\xa8E\x99\x03\x12*\n" +
+	"\x1eOTP_PROVIDER_PERMISSION_DENIED\x10\xac\xc2\x05\x1a\x04\xa8E\x93\x03\x122\n" +
+	"&OTP_PROVIDER_BINDING_PERMISSION_DENIED\x10\xad\xc2\x05\x1a\x04\xa8E\x93\x03\x120\n" +
+	"$OTP_PROVIDER_BINDING_INVALID_COUNTRY\x10\xae\xc2\x05\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.push.service.v1P\x01Z6github.com/infigaming-com/meepo-api/push/service/v1;v1b\x06proto3"
 
 var (

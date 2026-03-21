@@ -19,55 +19,65 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Affiliate_CreateCommissionPlan_FullMethodName           = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
-	Affiliate_UpdateCommissionPlan_FullMethodName           = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
-	Affiliate_GetCommissionPlan_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
-	Affiliate_ListCommissionPlans_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
-	Affiliate_DeleteCommissionPlan_FullMethodName           = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
-	Affiliate_ListAllCommissionPlans_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
-	Affiliate_ListAffiliateCommissionPlans_FullMethodName   = "/api.affiliate.service.v1.Affiliate/ListAffiliateCommissionPlans"
-	Affiliate_CreateAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
-	Affiliate_UpdateAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
-	Affiliate_ListAffiliates_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
-	Affiliate_DeleteAffiliate_FullMethodName                = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
-	Affiliate_GetAffiliateDetails_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
-	Affiliate_ResetAffiliatePassword_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ResetAffiliatePassword"
-	Affiliate_CreateCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
-	Affiliate_UpdateCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
-	Affiliate_ListCampaigns_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
-	Affiliate_DeleteCampaign_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
-	Affiliate_CreatePostback_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreatePostback"
-	Affiliate_UpdatePostback_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdatePostback"
-	Affiliate_DeletePostback_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/DeletePostback"
-	Affiliate_ListPostbacks_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListPostbacks"
-	Affiliate_ListPostbackLogs_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListPostbackLogs"
-	Affiliate_ListAffiliateDomains_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateDomains"
-	Affiliate_SetAffiliateDomain_FullMethodName             = "/api.affiliate.service.v1.Affiliate/SetAffiliateDomain"
-	Affiliate_ListEvents_FullMethodName                     = "/api.affiliate.service.v1.Affiliate/ListEvents"
-	Affiliate_ListCommissions_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListCommissions"
-	Affiliate_ListUsers_FullMethodName                      = "/api.affiliate.service.v1.Affiliate/ListUsers"
-	Affiliate_ExportUsers_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/ExportUsers"
-	Affiliate_ListAffiliateBills_FullMethodName             = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
-	Affiliate_SetReferralPlan_FullMethodName                = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
-	Affiliate_GetReferralPlan_FullMethodName                = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
-	Affiliate_GetUserReferralPlan_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
-	Affiliate_GetUserReferralStats_FullMethodName           = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
-	Affiliate_CreateUserReferralCode_FullMethodName         = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
-	Affiliate_ListUserReferralRewards_FullMethodName        = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
-	Affiliate_GetUserReferralRewards_FullMethodName         = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
-	Affiliate_ClaimUserReferralRewards_FullMethodName       = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
-	Affiliate_GetUserLossRevenueShareStats_FullMethodName   = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
-	Affiliate_GetUserPromoConditionInfo_FullMethodName      = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
-	Affiliate_GetOperatorSettings_FullMethodName            = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
-	Affiliate_UpdateOperatorSettings_FullMethodName         = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
-	Affiliate_GetAffiliateDashboard_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
-	Affiliate_GetAffiliateTrend_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
-	Affiliate_ListReferralVTGReport_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListReferralVTGReport"
-	Affiliate_ListReferralSnapshotReport_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListReferralSnapshotReport"
-	Affiliate_ListReferralContributionReport_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListReferralContributionReport"
-	Affiliate_ListReferralLifetimeReport_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListReferralLifetimeReport"
-	Affiliate_ListAffiliateVTGReport_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAffiliateVTGReport"
-	Affiliate_ListAffiliateSnapshotReport_FullMethodName    = "/api.affiliate.service.v1.Affiliate/ListAffiliateSnapshotReport"
+	Affiliate_CreateCommissionPlan_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
+	Affiliate_UpdateCommissionPlan_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
+	Affiliate_GetCommissionPlan_FullMethodName                     = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
+	Affiliate_ListCommissionPlans_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
+	Affiliate_DeleteCommissionPlan_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
+	Affiliate_ListAllCommissionPlans_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
+	Affiliate_ListAffiliateCommissionPlans_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListAffiliateCommissionPlans"
+	Affiliate_CreateAffiliate_FullMethodName                       = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
+	Affiliate_UpdateAffiliate_FullMethodName                       = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
+	Affiliate_ListAffiliates_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
+	Affiliate_DeleteAffiliate_FullMethodName                       = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
+	Affiliate_GetAffiliateDetails_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
+	Affiliate_ResetAffiliatePassword_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ResetAffiliatePassword"
+	Affiliate_CreateCampaign_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
+	Affiliate_UpdateCampaign_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
+	Affiliate_ListCampaigns_FullMethodName                         = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
+	Affiliate_DeleteCampaign_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
+	Affiliate_CreatePostback_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/CreatePostback"
+	Affiliate_UpdatePostback_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/UpdatePostback"
+	Affiliate_DeletePostback_FullMethodName                        = "/api.affiliate.service.v1.Affiliate/DeletePostback"
+	Affiliate_ListPostbacks_FullMethodName                         = "/api.affiliate.service.v1.Affiliate/ListPostbacks"
+	Affiliate_ListPostbackLogs_FullMethodName                      = "/api.affiliate.service.v1.Affiliate/ListPostbackLogs"
+	Affiliate_ListAffiliateDomains_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListAffiliateDomains"
+	Affiliate_SetAffiliateDomain_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/SetAffiliateDomain"
+	Affiliate_ListEvents_FullMethodName                            = "/api.affiliate.service.v1.Affiliate/ListEvents"
+	Affiliate_ListCommissions_FullMethodName                       = "/api.affiliate.service.v1.Affiliate/ListCommissions"
+	Affiliate_ListUsers_FullMethodName                             = "/api.affiliate.service.v1.Affiliate/ListUsers"
+	Affiliate_ExportUsers_FullMethodName                           = "/api.affiliate.service.v1.Affiliate/ExportUsers"
+	Affiliate_ListAffiliateBills_FullMethodName                    = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
+	Affiliate_SetReferralPlan_FullMethodName                       = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
+	Affiliate_GetReferralPlan_FullMethodName                       = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
+	Affiliate_GetUserReferralPlan_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
+	Affiliate_GetUserReferralStats_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
+	Affiliate_CreateUserReferralCode_FullMethodName                = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
+	Affiliate_ListUserReferralRewards_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
+	Affiliate_GetUserReferralRewards_FullMethodName                = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
+	Affiliate_ClaimUserReferralRewards_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
+	Affiliate_GetUserReferralRewardsAllCurrencies_FullMethodName   = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewardsAllCurrencies"
+	Affiliate_ClaimUserReferralRewardsAllCurrencies_FullMethodName = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewardsAllCurrencies"
+	Affiliate_GetUserLossRevenueShareStats_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetUserLossRevenueShareStats"
+	Affiliate_CreateLandingTemplate_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/CreateLandingTemplate"
+	Affiliate_UpdateLandingTemplate_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/UpdateLandingTemplate"
+	Affiliate_DeleteLandingTemplate_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/DeleteLandingTemplate"
+	Affiliate_ListLandingTemplates_FullMethodName                  = "/api.affiliate.service.v1.Affiliate/ListLandingTemplates"
+	Affiliate_ListLandingTemplatesByCampaign_FullMethodName        = "/api.affiliate.service.v1.Affiliate/ListLandingTemplatesByCampaign"
+	Affiliate_GetLandingTemplateConfig_FullMethodName              = "/api.affiliate.service.v1.Affiliate/GetLandingTemplateConfig"
+	Affiliate_GetUserPromoConditionInfo_FullMethodName             = "/api.affiliate.service.v1.Affiliate/GetUserPromoConditionInfo"
+	Affiliate_GetOperatorSettings_FullMethodName                   = "/api.affiliate.service.v1.Affiliate/GetOperatorSettings"
+	Affiliate_UpdateOperatorSettings_FullMethodName                = "/api.affiliate.service.v1.Affiliate/UpdateOperatorSettings"
+	Affiliate_GetAffiliateDashboard_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/GetAffiliateDashboard"
+	Affiliate_GetAffiliateTrend_FullMethodName                     = "/api.affiliate.service.v1.Affiliate/GetAffiliateTrend"
+	Affiliate_ListReferralVTGReport_FullMethodName                 = "/api.affiliate.service.v1.Affiliate/ListReferralVTGReport"
+	Affiliate_ListReferralSnapshotReport_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListReferralSnapshotReport"
+	Affiliate_ListReferralContributionReport_FullMethodName        = "/api.affiliate.service.v1.Affiliate/ListReferralContributionReport"
+	Affiliate_ListReferralLifetimeReport_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListReferralLifetimeReport"
+	Affiliate_ListAffiliateVTGReport_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListAffiliateVTGReport"
+	Affiliate_ListAffiliateSnapshotReport_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliateSnapshotReport"
+	Affiliate_CreateAffiliateSubAccount_FullMethodName             = "/api.affiliate.service.v1.Affiliate/CreateAffiliateSubAccount"
+	Affiliate_ListAffiliateSubAccounts_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListAffiliateSubAccounts"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -111,7 +121,16 @@ type AffiliateClient interface {
 	ListUserReferralRewards(ctx context.Context, in *ListUserReferralRewardsRequest, opts ...grpc.CallOption) (*ListUserReferralRewardsResponse, error)
 	GetUserReferralRewards(ctx context.Context, in *GetUserReferralRewardsRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsResponse, error)
 	ClaimUserReferralRewards(ctx context.Context, in *ClaimUserReferralRewardsRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsResponse, error)
+	GetUserReferralRewardsAllCurrencies(ctx context.Context, in *GetUserReferralRewardsAllCurrenciesRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsAllCurrenciesResponse, error)
+	ClaimUserReferralRewardsAllCurrencies(ctx context.Context, in *ClaimUserReferralRewardsAllCurrenciesRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsAllCurrenciesResponse, error)
 	GetUserLossRevenueShareStats(ctx context.Context, in *GetUserLossRevenueShareStatsRequest, opts ...grpc.CallOption) (*GetUserLossRevenueShareStatsResponse, error)
+	CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*CreateLandingTemplateResponse, error)
+	UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*UpdateLandingTemplateResponse, error)
+	DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*DeleteLandingTemplateResponse, error)
+	ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*ListLandingTemplatesResponse, error)
+	ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*ListLandingTemplatesByCampaignResponse, error)
+	// GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+	GetLandingTemplateConfig(ctx context.Context, in *GetLandingTemplateConfigRequest, opts ...grpc.CallOption) (*GetLandingTemplateConfigResponse, error)
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(ctx context.Context, in *GetUserPromoConditionInfoRequest, opts ...grpc.CallOption) (*GetUserPromoConditionInfoResponse, error)
@@ -133,6 +152,8 @@ type AffiliateClient interface {
 	ListAffiliateVTGReport(ctx context.Context, in *ListAffiliateVTGReportRequest, opts ...grpc.CallOption) (*ListAffiliateVTGReportResponse, error)
 	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 	ListAffiliateSnapshotReport(ctx context.Context, in *ListAffiliateSnapshotReportRequest, opts ...grpc.CallOption) (*ListAffiliateSnapshotReportResponse, error)
+	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*ListAffiliateSubAccountsResponse, error)
 }
 
 type affiliateClient struct {
@@ -513,10 +534,90 @@ func (c *affiliateClient) ClaimUserReferralRewards(ctx context.Context, in *Clai
 	return out, nil
 }
 
+func (c *affiliateClient) GetUserReferralRewardsAllCurrencies(ctx context.Context, in *GetUserReferralRewardsAllCurrenciesRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsAllCurrenciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserReferralRewardsAllCurrenciesResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetUserReferralRewardsAllCurrencies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ClaimUserReferralRewardsAllCurrencies(ctx context.Context, in *ClaimUserReferralRewardsAllCurrenciesRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsAllCurrenciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClaimUserReferralRewardsAllCurrenciesResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ClaimUserReferralRewardsAllCurrencies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) GetUserLossRevenueShareStats(ctx context.Context, in *GetUserLossRevenueShareStatsRequest, opts ...grpc.CallOption) (*GetUserLossRevenueShareStatsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserLossRevenueShareStatsResponse)
 	err := c.cc.Invoke(ctx, Affiliate_GetUserLossRevenueShareStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*CreateLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, Affiliate_CreateLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*UpdateLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, Affiliate_UpdateLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*DeleteLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, Affiliate_DeleteLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*ListLandingTemplatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLandingTemplatesResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListLandingTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*ListLandingTemplatesByCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLandingTemplatesByCampaignResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListLandingTemplatesByCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) GetLandingTemplateConfig(ctx context.Context, in *GetLandingTemplateConfigRequest, opts ...grpc.CallOption) (*GetLandingTemplateConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLandingTemplateConfigResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetLandingTemplateConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -633,6 +734,26 @@ func (c *affiliateClient) ListAffiliateSnapshotReport(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *affiliateClient) CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*CreateAffiliateSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAffiliateSubAccountResponse)
+	err := c.cc.Invoke(ctx, Affiliate_CreateAffiliateSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*ListAffiliateSubAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAffiliateSubAccountsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListAffiliateSubAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -674,7 +795,16 @@ type AffiliateServer interface {
 	ListUserReferralRewards(context.Context, *ListUserReferralRewardsRequest) (*ListUserReferralRewardsResponse, error)
 	GetUserReferralRewards(context.Context, *GetUserReferralRewardsRequest) (*GetUserReferralRewardsResponse, error)
 	ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error)
+	GetUserReferralRewardsAllCurrencies(context.Context, *GetUserReferralRewardsAllCurrenciesRequest) (*GetUserReferralRewardsAllCurrenciesResponse, error)
+	ClaimUserReferralRewardsAllCurrencies(context.Context, *ClaimUserReferralRewardsAllCurrenciesRequest) (*ClaimUserReferralRewardsAllCurrenciesResponse, error)
 	GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error)
+	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*CreateLandingTemplateResponse, error)
+	UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*UpdateLandingTemplateResponse, error)
+	DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*DeleteLandingTemplateResponse, error)
+	ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*ListLandingTemplatesResponse, error)
+	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*ListLandingTemplatesByCampaignResponse, error)
+	// GetLandingTemplateConfig is a public/frontend endpoint (no auth required)
+	GetLandingTemplateConfig(context.Context, *GetLandingTemplateConfigRequest) (*GetLandingTemplateConfigResponse, error)
 	// GetUserPromoConditionInfo returns user's referral/affiliate info for promo code condition validation
 	// This is an internal API for wallet-service to validate promo code conditions
 	GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error)
@@ -696,6 +826,8 @@ type AffiliateServer interface {
 	ListAffiliateVTGReport(context.Context, *ListAffiliateVTGReportRequest) (*ListAffiliateVTGReportResponse, error)
 	// ListAffiliateSnapshotReport returns Snapshot report - All users' activity in period
 	ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*ListAffiliateSnapshotReportResponse, error)
+	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*ListAffiliateSubAccountsResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -817,8 +949,32 @@ func (UnimplementedAffiliateServer) GetUserReferralRewards(context.Context, *Get
 func (UnimplementedAffiliateServer) ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ClaimUserReferralRewards not implemented")
 }
+func (UnimplementedAffiliateServer) GetUserReferralRewardsAllCurrencies(context.Context, *GetUserReferralRewardsAllCurrenciesRequest) (*GetUserReferralRewardsAllCurrenciesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserReferralRewardsAllCurrencies not implemented")
+}
+func (UnimplementedAffiliateServer) ClaimUserReferralRewardsAllCurrencies(context.Context, *ClaimUserReferralRewardsAllCurrenciesRequest) (*ClaimUserReferralRewardsAllCurrenciesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClaimUserReferralRewardsAllCurrencies not implemented")
+}
 func (UnimplementedAffiliateServer) GetUserLossRevenueShareStats(context.Context, *GetUserLossRevenueShareStatsRequest) (*GetUserLossRevenueShareStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserLossRevenueShareStats not implemented")
+}
+func (UnimplementedAffiliateServer) CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*CreateLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateLandingTemplate not implemented")
+}
+func (UnimplementedAffiliateServer) UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*UpdateLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateLandingTemplate not implemented")
+}
+func (UnimplementedAffiliateServer) DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*DeleteLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteLandingTemplate not implemented")
+}
+func (UnimplementedAffiliateServer) ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*ListLandingTemplatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLandingTemplates not implemented")
+}
+func (UnimplementedAffiliateServer) ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*ListLandingTemplatesByCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLandingTemplatesByCampaign not implemented")
+}
+func (UnimplementedAffiliateServer) GetLandingTemplateConfig(context.Context, *GetLandingTemplateConfigRequest) (*GetLandingTemplateConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLandingTemplateConfig not implemented")
 }
 func (UnimplementedAffiliateServer) GetUserPromoConditionInfo(context.Context, *GetUserPromoConditionInfoRequest) (*GetUserPromoConditionInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserPromoConditionInfo not implemented")
@@ -852,6 +1008,12 @@ func (UnimplementedAffiliateServer) ListAffiliateVTGReport(context.Context, *Lis
 }
 func (UnimplementedAffiliateServer) ListAffiliateSnapshotReport(context.Context, *ListAffiliateSnapshotReportRequest) (*ListAffiliateSnapshotReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSnapshotReport not implemented")
+}
+func (UnimplementedAffiliateServer) CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*CreateAffiliateSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAffiliateSubAccount not implemented")
+}
+func (UnimplementedAffiliateServer) ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*ListAffiliateSubAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSubAccounts not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -1540,6 +1702,42 @@ func _Affiliate_ClaimUserReferralRewards_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetUserReferralRewardsAllCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserReferralRewardsAllCurrenciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetUserReferralRewardsAllCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetUserReferralRewardsAllCurrencies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetUserReferralRewardsAllCurrencies(ctx, req.(*GetUserReferralRewardsAllCurrenciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ClaimUserReferralRewardsAllCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClaimUserReferralRewardsAllCurrenciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ClaimUserReferralRewardsAllCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ClaimUserReferralRewardsAllCurrencies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ClaimUserReferralRewardsAllCurrencies(ctx, req.(*ClaimUserReferralRewardsAllCurrenciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_GetUserLossRevenueShareStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserLossRevenueShareStatsRequest)
 	if err := dec(in); err != nil {
@@ -1554,6 +1752,114 @@ func _Affiliate_GetUserLossRevenueShareStats_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AffiliateServer).GetUserLossRevenueShareStats(ctx, req.(*GetUserLossRevenueShareStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_CreateLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).CreateLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_CreateLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).CreateLandingTemplate(ctx, req.(*CreateLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_UpdateLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).UpdateLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_UpdateLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).UpdateLandingTemplate(ctx, req.(*UpdateLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_DeleteLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).DeleteLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_DeleteLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).DeleteLandingTemplate(ctx, req.(*DeleteLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListLandingTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLandingTemplatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListLandingTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListLandingTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListLandingTemplates(ctx, req.(*ListLandingTemplatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListLandingTemplatesByCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLandingTemplatesByCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListLandingTemplatesByCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListLandingTemplatesByCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListLandingTemplatesByCampaign(ctx, req.(*ListLandingTemplatesByCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_GetLandingTemplateConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLandingTemplateConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetLandingTemplateConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetLandingTemplateConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetLandingTemplateConfig(ctx, req.(*GetLandingTemplateConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1756,6 +2062,42 @@ func _Affiliate_ListAffiliateSnapshotReport_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_CreateAffiliateSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAffiliateSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).CreateAffiliateSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_CreateAffiliateSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).CreateAffiliateSubAccount(ctx, req.(*CreateAffiliateSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListAffiliateSubAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateSubAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListAffiliateSubAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListAffiliateSubAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListAffiliateSubAccounts(ctx, req.(*ListAffiliateSubAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1912,8 +2254,40 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Affiliate_ClaimUserReferralRewards_Handler,
 		},
 		{
+			MethodName: "GetUserReferralRewardsAllCurrencies",
+			Handler:    _Affiliate_GetUserReferralRewardsAllCurrencies_Handler,
+		},
+		{
+			MethodName: "ClaimUserReferralRewardsAllCurrencies",
+			Handler:    _Affiliate_ClaimUserReferralRewardsAllCurrencies_Handler,
+		},
+		{
 			MethodName: "GetUserLossRevenueShareStats",
 			Handler:    _Affiliate_GetUserLossRevenueShareStats_Handler,
+		},
+		{
+			MethodName: "CreateLandingTemplate",
+			Handler:    _Affiliate_CreateLandingTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateLandingTemplate",
+			Handler:    _Affiliate_UpdateLandingTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteLandingTemplate",
+			Handler:    _Affiliate_DeleteLandingTemplate_Handler,
+		},
+		{
+			MethodName: "ListLandingTemplates",
+			Handler:    _Affiliate_ListLandingTemplates_Handler,
+		},
+		{
+			MethodName: "ListLandingTemplatesByCampaign",
+			Handler:    _Affiliate_ListLandingTemplatesByCampaign_Handler,
+		},
+		{
+			MethodName: "GetLandingTemplateConfig",
+			Handler:    _Affiliate_GetLandingTemplateConfig_Handler,
 		},
 		{
 			MethodName: "GetUserPromoConditionInfo",
@@ -1958,6 +2332,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAffiliateSnapshotReport",
 			Handler:    _Affiliate_ListAffiliateSnapshotReport_Handler,
+		},
+		{
+			MethodName: "CreateAffiliateSubAccount",
+			Handler:    _Affiliate_CreateAffiliateSubAccount_Handler,
+		},
+		{
+			MethodName: "ListAffiliateSubAccounts",
+			Handler:    _Affiliate_ListAffiliateSubAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

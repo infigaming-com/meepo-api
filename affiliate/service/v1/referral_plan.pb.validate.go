@@ -5025,6 +5025,518 @@ var _ interface {
 } = LossRevenueShareTierRewardValidationError{}
 
 // Validate checks the field values on
+// GetUserReferralRewardsAllCurrenciesRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetUserReferralRewardsAllCurrenciesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserReferralRewardsAllCurrenciesRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetUserReferralRewardsAllCurrenciesRequestMultiError, or nil if none found.
+func (m *GetUserReferralRewardsAllCurrenciesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserReferralRewardsAllCurrenciesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TargetCurrency
+
+	if len(errors) > 0 {
+		return GetUserReferralRewardsAllCurrenciesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserReferralRewardsAllCurrenciesRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetUserReferralRewardsAllCurrenciesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserReferralRewardsAllCurrenciesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserReferralRewardsAllCurrenciesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserReferralRewardsAllCurrenciesRequestMultiError) AllErrors() []error { return m }
+
+// GetUserReferralRewardsAllCurrenciesRequestValidationError is the validation
+// error returned by GetUserReferralRewardsAllCurrenciesRequest.Validate if
+// the designated constraints aren't met.
+type GetUserReferralRewardsAllCurrenciesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserReferralRewardsAllCurrenciesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserReferralRewardsAllCurrenciesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserReferralRewardsAllCurrenciesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserReferralRewardsAllCurrenciesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserReferralRewardsAllCurrenciesRequestValidationError) ErrorName() string {
+	return "GetUserReferralRewardsAllCurrenciesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserReferralRewardsAllCurrenciesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserReferralRewardsAllCurrenciesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserReferralRewardsAllCurrenciesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserReferralRewardsAllCurrenciesRequestValidationError{}
+
+// Validate checks the field values on
+// GetUserReferralRewardsAllCurrenciesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetUserReferralRewardsAllCurrenciesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserReferralRewardsAllCurrenciesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetUserReferralRewardsAllCurrenciesResponseMultiError, or nil if none found.
+func (m *GetUserReferralRewardsAllCurrenciesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserReferralRewardsAllCurrenciesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCurrencyRewards() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserReferralRewardsAllCurrenciesResponseValidationError{
+						field:  fmt.Sprintf("CurrencyRewards[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserReferralRewardsAllCurrenciesResponseValidationError{
+						field:  fmt.Sprintf("CurrencyRewards[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserReferralRewardsAllCurrenciesResponseValidationError{
+					field:  fmt.Sprintf("CurrencyRewards[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalConvertedAmount
+
+	// no validation rules for TargetCurrency
+
+	// no validation rules for SnapshotTime
+
+	if len(errors) > 0 {
+		return GetUserReferralRewardsAllCurrenciesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserReferralRewardsAllCurrenciesResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetUserReferralRewardsAllCurrenciesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserReferralRewardsAllCurrenciesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserReferralRewardsAllCurrenciesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserReferralRewardsAllCurrenciesResponseMultiError) AllErrors() []error { return m }
+
+// GetUserReferralRewardsAllCurrenciesResponseValidationError is the validation
+// error returned by GetUserReferralRewardsAllCurrenciesResponse.Validate if
+// the designated constraints aren't met.
+type GetUserReferralRewardsAllCurrenciesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserReferralRewardsAllCurrenciesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserReferralRewardsAllCurrenciesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserReferralRewardsAllCurrenciesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserReferralRewardsAllCurrenciesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserReferralRewardsAllCurrenciesResponseValidationError) ErrorName() string {
+	return "GetUserReferralRewardsAllCurrenciesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserReferralRewardsAllCurrenciesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserReferralRewardsAllCurrenciesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserReferralRewardsAllCurrenciesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserReferralRewardsAllCurrenciesResponseValidationError{}
+
+// Validate checks the field values on
+// ClaimUserReferralRewardsAllCurrenciesRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ClaimUserReferralRewardsAllCurrenciesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ClaimUserReferralRewardsAllCurrenciesRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ClaimUserReferralRewardsAllCurrenciesRequestMultiError, or nil if none found.
+func (m *ClaimUserReferralRewardsAllCurrenciesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClaimUserReferralRewardsAllCurrenciesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TargetCurrency
+
+	// no validation rules for SnapshotTime
+
+	if len(errors) > 0 {
+		return ClaimUserReferralRewardsAllCurrenciesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClaimUserReferralRewardsAllCurrenciesRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ClaimUserReferralRewardsAllCurrenciesRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ClaimUserReferralRewardsAllCurrenciesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClaimUserReferralRewardsAllCurrenciesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClaimUserReferralRewardsAllCurrenciesRequestMultiError) AllErrors() []error { return m }
+
+// ClaimUserReferralRewardsAllCurrenciesRequestValidationError is the
+// validation error returned by
+// ClaimUserReferralRewardsAllCurrenciesRequest.Validate if the designated
+// constraints aren't met.
+type ClaimUserReferralRewardsAllCurrenciesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClaimUserReferralRewardsAllCurrenciesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClaimUserReferralRewardsAllCurrenciesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClaimUserReferralRewardsAllCurrenciesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClaimUserReferralRewardsAllCurrenciesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClaimUserReferralRewardsAllCurrenciesRequestValidationError) ErrorName() string {
+	return "ClaimUserReferralRewardsAllCurrenciesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClaimUserReferralRewardsAllCurrenciesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClaimUserReferralRewardsAllCurrenciesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClaimUserReferralRewardsAllCurrenciesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClaimUserReferralRewardsAllCurrenciesRequestValidationError{}
+
+// Validate checks the field values on
+// ClaimUserReferralRewardsAllCurrenciesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ClaimUserReferralRewardsAllCurrenciesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ClaimUserReferralRewardsAllCurrenciesResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ClaimUserReferralRewardsAllCurrenciesResponseMultiError, or nil if none found.
+func (m *ClaimUserReferralRewardsAllCurrenciesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClaimUserReferralRewardsAllCurrenciesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetClaimedDetails() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ClaimUserReferralRewardsAllCurrenciesResponseValidationError{
+						field:  fmt.Sprintf("ClaimedDetails[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ClaimUserReferralRewardsAllCurrenciesResponseValidationError{
+						field:  fmt.Sprintf("ClaimedDetails[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ClaimUserReferralRewardsAllCurrenciesResponseValidationError{
+					field:  fmt.Sprintf("ClaimedDetails[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCreditedAmount
+
+	// no validation rules for TargetCurrency
+
+	if len(errors) > 0 {
+		return ClaimUserReferralRewardsAllCurrenciesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClaimUserReferralRewardsAllCurrenciesResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ClaimUserReferralRewardsAllCurrenciesResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ClaimUserReferralRewardsAllCurrenciesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClaimUserReferralRewardsAllCurrenciesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClaimUserReferralRewardsAllCurrenciesResponseMultiError) AllErrors() []error { return m }
+
+// ClaimUserReferralRewardsAllCurrenciesResponseValidationError is the
+// validation error returned by
+// ClaimUserReferralRewardsAllCurrenciesResponse.Validate if the designated
+// constraints aren't met.
+type ClaimUserReferralRewardsAllCurrenciesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponseValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClaimUserReferralRewardsAllCurrenciesResponseValidationError) ErrorName() string {
+	return "ClaimUserReferralRewardsAllCurrenciesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClaimUserReferralRewardsAllCurrenciesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClaimUserReferralRewardsAllCurrenciesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClaimUserReferralRewardsAllCurrenciesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClaimUserReferralRewardsAllCurrenciesResponseValidationError{}
+
+// Validate checks the field values on
 // GetUserReferralStatsResponse_ReferralRewards with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -5577,3 +6089,268 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserLossRevenueShareStatsResponse_ReferredStatValidationError{}
+
+// Validate checks the field values on
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardMultiError, or
+// nil if none found.
+func (m *GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for ConvertedAmount
+
+	// no validation rules for ExchangeRate
+
+	// no validation rules for CommissionCount
+
+	// no validation rules for ReferralAmount
+
+	// no validation rules for CommissionAmount
+
+	// no validation rules for LossRevShareAmount
+
+	// no validation rules for LossRevShareExcluded
+
+	if len(errors) > 0 {
+		return GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardMultiError is an
+// error wrapping multiple validation errors returned by
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward.ValidateAll() if
+// the designated constraints aren't met.
+type GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardMultiError) AllErrors() []error {
+	return m
+}
+
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError is
+// the validation error returned by
+// GetUserReferralRewardsAllCurrenciesResponse_CurrencyReward.Validate if the
+// designated constraints aren't met.
+type GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError) ErrorName() string {
+	return "GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserReferralRewardsAllCurrenciesResponse_CurrencyReward.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserReferralRewardsAllCurrenciesResponse_CurrencyRewardValidationError{}
+
+// Validate checks the field values on
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailMultiError,
+// or nil if none found.
+func (m *ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SourceCurrency
+
+	// no validation rules for SourceAmount
+
+	// no validation rules for ConvertedAmount
+
+	// no validation rules for ExchangeRate
+
+	// no validation rules for CommissionCount
+
+	if len(errors) > 0 {
+		return ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailMultiError
+// is an error wrapping multiple validation errors returned by
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail.ValidateAll()
+// if the designated constraints aren't met.
+type ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailMultiError) AllErrors() []error {
+	return m
+}
+
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError
+// is the validation error returned by
+// ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail.Validate
+// if the designated constraints aren't met.
+type ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError) ErrorName() string {
+	return "ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetail.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClaimUserReferralRewardsAllCurrenciesResponse_ClaimedCurrencyDetailValidationError{}

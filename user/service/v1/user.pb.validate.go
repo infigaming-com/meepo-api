@@ -201,6 +201,8 @@ func (m *UserInfo) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for MfaRequired
+
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
 	}
@@ -7256,6 +7258,10 @@ func (m *CreateUserRequest) validate(all bool) error {
 
 	if m.Mobile != nil {
 		// no validation rules for Mobile
+	}
+
+	if m.ParentAffiliateId != nil {
+		// no validation rules for ParentAffiliateId
 	}
 
 	if len(errors) > 0 {

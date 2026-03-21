@@ -55,8 +55,16 @@ const (
 	BackofficeAffiliate_UpdateAffiliateOperatorSettings_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliateOperatorSettings"
 	BackofficeAffiliate_SetReferralPlan_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/SetReferralPlan"
 	BackofficeAffiliate_GetReferralPlan_FullMethodName                 = "/api.backoffice.service.v1.BackofficeAffiliate/GetReferralPlan"
+	BackofficeAffiliate_CreateLandingTemplate_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/CreateLandingTemplate"
+	BackofficeAffiliate_UpdateLandingTemplate_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateLandingTemplate"
+	BackofficeAffiliate_DeleteLandingTemplate_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteLandingTemplate"
+	BackofficeAffiliate_ListLandingTemplates_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/ListLandingTemplates"
+	BackofficeAffiliate_ListLandingTemplatesByCampaign_FullMethodName  = "/api.backoffice.service.v1.BackofficeAffiliate/ListLandingTemplatesByCampaign"
 	BackofficeAffiliate_GetAffiliateDashboard_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDashboard"
 	BackofficeAffiliate_GetAffiliateTrend_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateTrend"
+	BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliateSubAccount"
+	BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateSubAccounts"
+	BackofficeAffiliate_UpdateAffiliateSubAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliateSubAccount"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -98,8 +106,16 @@ type BackofficeAffiliateClient interface {
 	UpdateAffiliateOperatorSettings(ctx context.Context, in *UpdateAffiliateOperatorSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*v1.GetReferralPlanResponse, error)
+	CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*v1.CreateLandingTemplateResponse, error)
+	UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateLandingTemplateResponse, error)
+	DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteLandingTemplateResponse, error)
+	ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesResponse, error)
+	ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesByCampaignResponse, error)
 	GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error)
 	GetAffiliateTrend(ctx context.Context, in *GetAffiliateTrendRequest, opts ...grpc.CallOption) (*v1.GetAffiliateTrendResponse, error)
+	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error)
+	UpdateAffiliateSubAccount(ctx context.Context, in *UpdateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*UpdateAffiliateSubAccountResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -460,6 +476,56 @@ func (c *backofficeAffiliateClient) GetReferralPlan(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) CreateLandingTemplate(ctx context.Context, in *CreateLandingTemplateRequest, opts ...grpc.CallOption) (*v1.CreateLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_CreateLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) UpdateLandingTemplate(ctx context.Context, in *UpdateLandingTemplateRequest, opts ...grpc.CallOption) (*v1.UpdateLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_UpdateLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) DeleteLandingTemplate(ctx context.Context, in *DeleteLandingTemplateRequest, opts ...grpc.CallOption) (*v1.DeleteLandingTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteLandingTemplateResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_DeleteLandingTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListLandingTemplates(ctx context.Context, in *ListLandingTemplatesRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListLandingTemplatesResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListLandingTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListLandingTemplatesByCampaign(ctx context.Context, in *ListLandingTemplatesByCampaignRequest, opts ...grpc.CallOption) (*v1.ListLandingTemplatesByCampaignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListLandingTemplatesByCampaignResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListLandingTemplatesByCampaign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeAffiliateClient) GetAffiliateDashboard(ctx context.Context, in *GetAffiliateDashboardRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDashboardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetAffiliateDashboardResponse)
@@ -474,6 +540,36 @@ func (c *backofficeAffiliateClient) GetAffiliateTrend(ctx context.Context, in *G
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetAffiliateTrendResponse)
 	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateTrend_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateAffiliateSubAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListAffiliateSubAccountsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) UpdateAffiliateSubAccount(ctx context.Context, in *UpdateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*UpdateAffiliateSubAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAffiliateSubAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_UpdateAffiliateSubAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -519,8 +615,16 @@ type BackofficeAffiliateServer interface {
 	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
+	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*v1.CreateLandingTemplateResponse, error)
+	UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*v1.UpdateLandingTemplateResponse, error)
+	DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*v1.DeleteLandingTemplateResponse, error)
+	ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*v1.ListLandingTemplatesResponse, error)
+	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*v1.ListLandingTemplatesByCampaignResponse, error)
 	GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error)
 	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
+	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
+	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
+	UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -636,11 +740,35 @@ func (UnimplementedBackofficeAffiliateServer) SetReferralPlan(context.Context, *
 func (UnimplementedBackofficeAffiliateServer) GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetReferralPlan not implemented")
 }
+func (UnimplementedBackofficeAffiliateServer) CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*v1.CreateLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateLandingTemplate not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*v1.UpdateLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateLandingTemplate not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*v1.DeleteLandingTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteLandingTemplate not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*v1.ListLandingTemplatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLandingTemplates not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*v1.ListLandingTemplatesByCampaignResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLandingTemplatesByCampaign not implemented")
+}
 func (UnimplementedBackofficeAffiliateServer) GetAffiliateDashboard(context.Context, *GetAffiliateDashboardRequest) (*v1.GetAffiliateDashboardResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateDashboard not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAffiliateTrend not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAffiliateSubAccount not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAffiliateSubAccounts not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAffiliateSubAccount not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -1293,6 +1421,96 @@ func _BackofficeAffiliate_GetReferralPlan_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_CreateLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).CreateLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_CreateLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).CreateLandingTemplate(ctx, req.(*CreateLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_UpdateLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).UpdateLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_UpdateLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).UpdateLandingTemplate(ctx, req.(*UpdateLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_DeleteLandingTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLandingTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).DeleteLandingTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_DeleteLandingTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).DeleteLandingTemplate(ctx, req.(*DeleteLandingTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListLandingTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLandingTemplatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListLandingTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListLandingTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListLandingTemplates(ctx, req.(*ListLandingTemplatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListLandingTemplatesByCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLandingTemplatesByCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListLandingTemplatesByCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListLandingTemplatesByCampaign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListLandingTemplatesByCampaign(ctx, req.(*ListLandingTemplatesByCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeAffiliate_GetAffiliateDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAffiliateDashboardRequest)
 	if err := dec(in); err != nil {
@@ -1325,6 +1543,60 @@ func _BackofficeAffiliate_GetAffiliateTrend_Handler(srv interface{}, ctx context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeAffiliateServer).GetAffiliateTrend(ctx, req.(*GetAffiliateTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_CreateAffiliateSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAffiliateSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).CreateAffiliateSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).CreateAffiliateSubAccount(ctx, req.(*CreateAffiliateSubAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListAffiliateSubAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateSubAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListAffiliateSubAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListAffiliateSubAccounts(ctx, req.(*ListAffiliateSubAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_UpdateAffiliateSubAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAffiliateSubAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).UpdateAffiliateSubAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_UpdateAffiliateSubAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).UpdateAffiliateSubAccount(ctx, req.(*UpdateAffiliateSubAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1477,12 +1749,44 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeAffiliate_GetReferralPlan_Handler,
 		},
 		{
+			MethodName: "CreateLandingTemplate",
+			Handler:    _BackofficeAffiliate_CreateLandingTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateLandingTemplate",
+			Handler:    _BackofficeAffiliate_UpdateLandingTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteLandingTemplate",
+			Handler:    _BackofficeAffiliate_DeleteLandingTemplate_Handler,
+		},
+		{
+			MethodName: "ListLandingTemplates",
+			Handler:    _BackofficeAffiliate_ListLandingTemplates_Handler,
+		},
+		{
+			MethodName: "ListLandingTemplatesByCampaign",
+			Handler:    _BackofficeAffiliate_ListLandingTemplatesByCampaign_Handler,
+		},
+		{
 			MethodName: "GetAffiliateDashboard",
 			Handler:    _BackofficeAffiliate_GetAffiliateDashboard_Handler,
 		},
 		{
 			MethodName: "GetAffiliateTrend",
 			Handler:    _BackofficeAffiliate_GetAffiliateTrend_Handler,
+		},
+		{
+			MethodName: "CreateAffiliateSubAccount",
+			Handler:    _BackofficeAffiliate_CreateAffiliateSubAccount_Handler,
+		},
+		{
+			MethodName: "ListAffiliateSubAccounts",
+			Handler:    _BackofficeAffiliate_ListAffiliateSubAccounts_Handler,
+		},
+		{
+			MethodName: "UpdateAffiliateSubAccount",
+			Handler:    _BackofficeAffiliate_UpdateAffiliateSubAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

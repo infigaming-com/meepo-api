@@ -27,6 +27,7 @@ service CampaignService {
   // Campaign control
   rpc ActivateCampaign(ActivateCampaignRequest) returns (ActivateCampaignResponse);
   rpc PauseCampaign(PauseCampaignRequest) returns (PauseCampaignResponse);
+  rpc ArchiveCampaign(ArchiveCampaignRequest) returns (ArchiveCampaignResponse);
 
   // Manual trigger
   rpc TriggerCampaign(TriggerCampaignRequest) returns (TriggerCampaignResponse);
@@ -273,6 +274,16 @@ message PauseCampaignRequest {
 }
 
 message PauseCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// ArchiveCampaign
+message ArchiveCampaignRequest {
+  int64 id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message ArchiveCampaignResponse {
   Campaign campaign = 1;
 }
 

@@ -117,6 +117,14 @@ service BackofficeCampaign {
     };
   }
 
+  // Archive a PAUSED or COMPLETED campaign. Archived campaigns can be deleted or re-drafted.
+  rpc ArchiveCrmCampaign(ArchiveCrmCampaignRequest) returns (api.campaign.service.v1.ArchiveCampaignResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/crm/campaign/archive"
+      body: "*"
+    };
+  }
+
   // Manually trigger a campaign for specific users. Campaign must be ACTIVE and workflow must include a `manual` trigger.
   // See TriggerCrmCampaignRequest for details.
   rpc TriggerCrmCampaign(TriggerCrmCampaignRequest) returns (api.campaign.service.v1.TriggerCampaignResponse) {
@@ -667,6 +675,15 @@ message PauseCrmCampaignRequest {
   // Target operator context for permission check.
   api.common.OperatorContext target_operator_context = 1;
   // Campaign ID to pause
+  int64 id = 2;
+}
+
+// Archive a campaign. Transitions status from PAUSED/COMPLETED → ARCHIVED.
+// Archived campaigns stop all processing and can be deleted or re-drafted.
+message ArchiveCrmCampaignRequest {
+  // Target operator context for permission check.
+  api.common.OperatorContext target_operator_context = 1;
+  // Campaign ID to archive
   int64 id = 2;
 }
 

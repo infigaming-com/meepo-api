@@ -29,6 +29,7 @@ type UserInfo struct {
 	NeedResetPassword  bool   `json:"needResetPassword,omitempty"`
 	PasswordResetAt    int64  `json:"passwordResetAt,omitempty"`
 	RoleId             int64  `json:"roleId"`
+	LoginAsUserId      int64  `json:"loginAsUserId,omitempty"`
 }
 
 type Claims struct {

@@ -472,6 +472,8 @@ func (m *NotificationChannel) validate(all bool) error {
 
 	// no validation rules for IsInherited
 
+	// no validation rules for IsOverridden
+
 	if len(errors) > 0 {
 		return NotificationChannelMultiError(errors)
 	}
