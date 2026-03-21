@@ -351,6 +351,72 @@ type VipRewardClaimableEvent struct {
 }
 
 // ------------------------------------------------------------
+// Reward granted events
+// ------------------------------------------------------------
+
+const RewardGrantedTopic = "reward.granted"
+
+// RewardGrantedEvent is published when a user receives special rewards.
+// Generic structure for any service to publish reward notifications.
+type RewardGrantedEvent struct {
+	UserID          int64                   `json:"user_id"`
+	OperatorContext *common.OperatorContext `json:"operator_context"`
+	Source          string                  `json:"source"`    // "promo_code", "app_download", "deposit_reward"
+	SourceID        int64                   `json:"source_id"` // e.g., promo code ID, deposit reward tier ID
+	FreeSpin        *FreeSpinGranted        `json:"free_spin,omitempty"`
+	FreeBet         *FreeBetGranted         `json:"free_bet,omitempty"`
+	BonusMoney      *BonusMoneyGranted      `json:"bonus_money,omitempty"`
+	CreatedAt       int64                   `json:"created_at"`
+}
+
+// FreeSpinGranted contains the granted free spin config and per-game reward details
+type FreeSpinGranted struct {
+	Currency                string                    `json:"currency"`                  // play currency
+	SettlementCurrency      string                    `json:"settlement_currency"`
+	RewardType              string                    `json:"reward_type"`               // "cash" or "bonus" (for winnings payout)
+	SpinCount               int32                     `json:"spin_count"`                // shared spin count for all games
+	WageringRequirement     int32                     `json:"wagering_requirement"`
+	MaxWithdrawalMultiplier string                    `json:"max_withdrawal_multiplier"`
+	RewardValidity          int64                     `json:"reward_validity"`           // winning reward validity (ms)
+	Rewards                 []FreeSpinGrantedReward   `json:"rewards"`
+}
+
+// FreeSpinGrantedReward contains per-game free spin reward details
+type FreeSpinGrantedReward struct {
+	ProviderId       string `json:"provider_id"`
+	GameId           string `json:"game_id"`
+	Level            int32  `json:"level"`
+	FreeSpinValidity int64  `json:"free_spin_validity"` // validity of the free spin itself (ms)
+	ExpiredAt        int64  `json:"expired_at"`         // absolute expiry time (ms)
+}
+
+// FreeBetGranted contains the granted free bet config and per-template reward details
+type FreeBetGranted struct {
+	Currency                string                   `json:"currency"`             // settlement currency
+	SettlementCurrency      string                   `json:"settlement_currency"`
+	RewardType              string                   `json:"reward_type"`          // "cash" or "bonus" (for winnings payout)
+	WageringRequirement     int32                    `json:"wagering_requirement"`
+	MaxWithdrawalMultiplier string                   `json:"max_withdrawal_multiplier"`
+	RewardValidity          int64                    `json:"reward_validity"`      // winning reward validity (ms)
+	Rewards                 []FreeBetGrantedReward   `json:"rewards"`
+}
+
+// FreeBetGrantedReward contains per-template free bet reward details
+type FreeBetGrantedReward struct {
+	TemplateId      string `json:"template_id"`
+	Amount          string `json:"amount"`            // free bet amount (decimal string)
+	FreeBetValidity int64  `json:"free_bet_validity"` // validity of the free bet itself (ms)
+	ExpiredAt       int64  `json:"expired_at"`        // absolute expiry time (ms)
+}
+
+// BonusMoneyGranted contains details of a granted bonus money reward
+type BonusMoneyGranted struct {
+	Currency   string `json:"currency"`
+	RewardType string `json:"reward_type"` // "cash" or "bonus"
+	Amount     string `json:"amount"`      // decimal string
+}
+
+// ------------------------------------------------------------
 // Session activity events
 // ------------------------------------------------------------
 
