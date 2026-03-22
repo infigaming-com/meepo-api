@@ -1324,10 +1324,9 @@ service Payment {
 
 // Request to get aggregated payment channel fee summary
 message GetPaymentChannelFeeSummaryRequest {
-  int64 operator_id = 1;
-  int64 company_operator_id = 2;
-  int64 start_time = 3;  // start time in milliseconds
-  int64 end_time = 4;    // end time in milliseconds
+  api.common.OperatorContext operator_context = 1;
+  int64 start_time = 2;  // start time in milliseconds
+  int64 end_time = 3;    // end time in milliseconds
 }
 
 // Response containing aggregated payment channel fee data
