@@ -14604,7 +14604,11 @@ func (m *SimulateGlobalPostbackRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for GlobalPostbackId
+	// no validation rules for PostbackUrl
+
+	// no validation rules for RequestMethod
+
+	// no validation rules for PostBody
 
 	// no validation rules for MacroValues
 

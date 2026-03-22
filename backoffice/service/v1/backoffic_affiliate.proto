@@ -831,6 +831,8 @@ message ListGlobalPostbackLogsRequest {
 }
 
 message SimulateGlobalPostbackRequest {
-	int64 global_postback_id = 1;
-	map<string, string> macro_values = 2;  // Custom macro values for simulation
+	string postback_url = 1;              // URL template with macro placeholders
+	string request_method = 2;            // GET or POST
+	string post_body = 3;                 // POST body template (POST only)
+	map<string, string> macro_values = 4; // Custom macro values for simulation
 }

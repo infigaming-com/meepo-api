@@ -7249,9 +7249,11 @@ func (x *ListGlobalPostbackLogsResponse) GetPageSize() int32 {
 
 type SimulateGlobalPostbackRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
-	GlobalPostbackId         int64                   `protobuf:"varint,1,opt,name=global_postback_id,json=globalPostbackId,proto3" json:"global_postback_id,omitempty"`
-	MacroValues              map[string]string       `protobuf:"bytes,2,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Custom macro values for simulation
-	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	PostbackUrl              string                  `protobuf:"bytes,1,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`                                                                           // URL template with macro placeholders
+	RequestMethod            string                  `protobuf:"bytes,2,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`                                                                     // GET or POST
+	PostBody                 string                  `protobuf:"bytes,3,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`                                                                                    // POST body template (POST only)
+	MacroValues              map[string]string       `protobuf:"bytes,4,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Custom macro values for simulation
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -7286,11 +7288,25 @@ func (*SimulateGlobalPostbackRequest) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{95}
 }
 
-func (x *SimulateGlobalPostbackRequest) GetGlobalPostbackId() int64 {
+func (x *SimulateGlobalPostbackRequest) GetPostbackUrl() string {
 	if x != nil {
-		return x.GlobalPostbackId
+		return x.PostbackUrl
 	}
-	return 0
+	return ""
+}
+
+func (x *SimulateGlobalPostbackRequest) GetRequestMethod() string {
+	if x != nil {
+		return x.RequestMethod
+	}
+	return ""
+}
+
+func (x *SimulateGlobalPostbackRequest) GetPostBody() string {
+	if x != nil {
+		return x.PostBody
+	}
+	return ""
 }
 
 func (x *SimulateGlobalPostbackRequest) GetMacroValues() map[string]string {
@@ -12085,11 +12101,13 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\n" +
 	"latency_ms\x18\x14 \x01(\x03R\tlatencyMs\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x15 \x01(\x03R\tcreatedAt\"\xd5\x02\n" +
-	"\x1dSimulateGlobalPostbackRequest\x12,\n" +
-	"\x12global_postback_id\x18\x01 \x01(\x03R\x10globalPostbackId\x12k\n" +
-	"\fmacro_values\x18\x02 \x03(\v2H.api.affiliate.service.v1.SimulateGlobalPostbackRequest.MacroValuesEntryR\vmacroValues\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x1a>\n" +
+	"created_at\x18\x15 \x01(\x03R\tcreatedAt\"\x8e\x03\n" +
+	"\x1dSimulateGlobalPostbackRequest\x12!\n" +
+	"\fpostback_url\x18\x01 \x01(\tR\vpostbackUrl\x12%\n" +
+	"\x0erequest_method\x18\x02 \x01(\tR\rrequestMethod\x12\x1b\n" +
+	"\tpost_body\x18\x03 \x01(\tR\bpostBody\x12k\n" +
+	"\fmacro_values\x18\x04 \x03(\v2H.api.affiliate.service.v1.SimulateGlobalPostbackRequest.MacroValuesEntryR\vmacroValues\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x1a>\n" +
 	"\x10MacroValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe4\x01\n" +

@@ -23260,7 +23260,11 @@ components:
         api.backoffice.service.v1.SimulateGlobalPostbackRequest:
             type: object
             properties:
-                globalPostbackId:
+                postbackUrl:
+                    type: string
+                requestMethod:
+                    type: string
+                postBody:
                     type: string
                 macroValues:
                     type: object

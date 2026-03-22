@@ -3860,11 +3860,13 @@ func (x *ListGlobalPostbackLogsRequest) GetSuccess() bool {
 }
 
 type SimulateGlobalPostbackRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	GlobalPostbackId int64                  `protobuf:"varint,1,opt,name=global_postback_id,json=globalPostbackId,proto3" json:"global_postback_id,omitempty"`
-	MacroValues      map[string]string      `protobuf:"bytes,2,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Custom macro values for simulation
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PostbackUrl   string                 `protobuf:"bytes,1,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`                                                                           // URL template with macro placeholders
+	RequestMethod string                 `protobuf:"bytes,2,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`                                                                     // GET or POST
+	PostBody      string                 `protobuf:"bytes,3,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`                                                                                    // POST body template (POST only)
+	MacroValues   map[string]string      `protobuf:"bytes,4,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Custom macro values for simulation
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SimulateGlobalPostbackRequest) Reset() {
@@ -3897,11 +3899,25 @@ func (*SimulateGlobalPostbackRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{54}
 }
 
-func (x *SimulateGlobalPostbackRequest) GetGlobalPostbackId() int64 {
+func (x *SimulateGlobalPostbackRequest) GetPostbackUrl() string {
 	if x != nil {
-		return x.GlobalPostbackId
+		return x.PostbackUrl
 	}
-	return 0
+	return ""
+}
+
+func (x *SimulateGlobalPostbackRequest) GetRequestMethod() string {
+	if x != nil {
+		return x.RequestMethod
+	}
+	return ""
+}
+
+func (x *SimulateGlobalPostbackRequest) GetPostBody() string {
+	if x != nil {
+		return x.PostBody
+	}
+	return ""
 }
 
 func (x *SimulateGlobalPostbackRequest) GetMacroValues() map[string]string {
@@ -4423,10 +4439,12 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"_page_sizeB\x0e\n" +
 	"\f_action_typeB\n" +
 	"\n" +
-	"\b_success\"\xfb\x01\n" +
-	"\x1dSimulateGlobalPostbackRequest\x12,\n" +
-	"\x12global_postback_id\x18\x01 \x01(\x03R\x10globalPostbackId\x12l\n" +
-	"\fmacro_values\x18\x02 \x03(\v2I.api.backoffice.service.v1.SimulateGlobalPostbackRequest.MacroValuesEntryR\vmacroValues\x1a>\n" +
+	"\b_success\"\xb4\x02\n" +
+	"\x1dSimulateGlobalPostbackRequest\x12!\n" +
+	"\fpostback_url\x18\x01 \x01(\tR\vpostbackUrl\x12%\n" +
+	"\x0erequest_method\x18\x02 \x01(\tR\rrequestMethod\x12\x1b\n" +
+	"\tpost_body\x18\x03 \x01(\tR\bpostBody\x12l\n" +
+	"\fmacro_values\x18\x04 \x03(\v2I.api.backoffice.service.v1.SimulateGlobalPostbackRequest.MacroValuesEntryR\vmacroValues\x1a>\n" +
 	"\x10MacroValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xd3L\n" +
