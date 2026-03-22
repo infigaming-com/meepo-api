@@ -6965,6 +6965,973 @@ var _ interface {
 	ErrorName() string
 } = UpdateAffiliateSubAccountResponseValidationError{}
 
+// Validate checks the field values on CreateGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGlobalPostbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateGlobalPostbackRequestMultiError, or nil if none found.
+func (m *CreateGlobalPostbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGlobalPostbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateGlobalPostbackRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PostbackName
+
+	// no validation rules for Status
+
+	// no validation rules for ActionType
+
+	// no validation rules for PostbackUrl
+
+	// no validation rules for RequestMethod
+
+	// no validation rules for PostBody
+
+	if len(errors) > 0 {
+		return CreateGlobalPostbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGlobalPostbackRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateGlobalPostbackRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CreateGlobalPostbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGlobalPostbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGlobalPostbackRequestMultiError) AllErrors() []error { return m }
+
+// CreateGlobalPostbackRequestValidationError is the validation error returned
+// by CreateGlobalPostbackRequest.Validate if the designated constraints
+// aren't met.
+type CreateGlobalPostbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGlobalPostbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGlobalPostbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGlobalPostbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGlobalPostbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGlobalPostbackRequestValidationError) ErrorName() string {
+	return "CreateGlobalPostbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGlobalPostbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGlobalPostbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGlobalPostbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGlobalPostbackRequestValidationError{}
+
+// Validate checks the field values on UpdateGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGlobalPostbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateGlobalPostbackRequestMultiError, or nil if none found.
+func (m *UpdateGlobalPostbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGlobalPostbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GlobalPostbackId
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateGlobalPostbackRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PostbackName
+
+	// no validation rules for Status
+
+	// no validation rules for ActionType
+
+	// no validation rules for PostbackUrl
+
+	// no validation rules for RequestMethod
+
+	// no validation rules for PostBody
+
+	if len(errors) > 0 {
+		return UpdateGlobalPostbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGlobalPostbackRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateGlobalPostbackRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateGlobalPostbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGlobalPostbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGlobalPostbackRequestMultiError) AllErrors() []error { return m }
+
+// UpdateGlobalPostbackRequestValidationError is the validation error returned
+// by UpdateGlobalPostbackRequest.Validate if the designated constraints
+// aren't met.
+type UpdateGlobalPostbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGlobalPostbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGlobalPostbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGlobalPostbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGlobalPostbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGlobalPostbackRequestValidationError) ErrorName() string {
+	return "UpdateGlobalPostbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGlobalPostbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGlobalPostbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGlobalPostbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGlobalPostbackRequestValidationError{}
+
+// Validate checks the field values on DeleteGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteGlobalPostbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteGlobalPostbackRequestMultiError, or nil if none found.
+func (m *DeleteGlobalPostbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteGlobalPostbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GlobalPostbackId
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteGlobalPostbackRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return DeleteGlobalPostbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteGlobalPostbackRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteGlobalPostbackRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteGlobalPostbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteGlobalPostbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteGlobalPostbackRequestMultiError) AllErrors() []error { return m }
+
+// DeleteGlobalPostbackRequestValidationError is the validation error returned
+// by DeleteGlobalPostbackRequest.Validate if the designated constraints
+// aren't met.
+type DeleteGlobalPostbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteGlobalPostbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteGlobalPostbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteGlobalPostbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteGlobalPostbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteGlobalPostbackRequestValidationError) ErrorName() string {
+	return "DeleteGlobalPostbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteGlobalPostbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteGlobalPostbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteGlobalPostbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteGlobalPostbackRequestValidationError{}
+
+// Validate checks the field values on GetGlobalPostbackRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetGlobalPostbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetGlobalPostbackRequestMultiError, or nil if none found.
+func (m *GetGlobalPostbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetGlobalPostbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GlobalPostbackId
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetGlobalPostbackRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetGlobalPostbackRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetGlobalPostbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetGlobalPostbackRequestMultiError is an error wrapping multiple validation
+// errors returned by GetGlobalPostbackRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetGlobalPostbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetGlobalPostbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetGlobalPostbackRequestMultiError) AllErrors() []error { return m }
+
+// GetGlobalPostbackRequestValidationError is the validation error returned by
+// GetGlobalPostbackRequest.Validate if the designated constraints aren't met.
+type GetGlobalPostbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetGlobalPostbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetGlobalPostbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetGlobalPostbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetGlobalPostbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetGlobalPostbackRequestValidationError) ErrorName() string {
+	return "GetGlobalPostbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetGlobalPostbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetGlobalPostbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetGlobalPostbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetGlobalPostbackRequestValidationError{}
+
+// Validate checks the field values on ListGlobalPostbacksRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGlobalPostbacksRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGlobalPostbacksRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListGlobalPostbacksRequestMultiError, or nil if none found.
+func (m *ListGlobalPostbacksRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGlobalPostbacksRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGlobalPostbacksRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGlobalPostbacksRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGlobalPostbacksRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListGlobalPostbacksRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGlobalPostbacksRequestMultiError is an error wrapping multiple
+// validation errors returned by ListGlobalPostbacksRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListGlobalPostbacksRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGlobalPostbacksRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGlobalPostbacksRequestMultiError) AllErrors() []error { return m }
+
+// ListGlobalPostbacksRequestValidationError is the validation error returned
+// by ListGlobalPostbacksRequest.Validate if the designated constraints aren't met.
+type ListGlobalPostbacksRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGlobalPostbacksRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGlobalPostbacksRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGlobalPostbacksRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGlobalPostbacksRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGlobalPostbacksRequestValidationError) ErrorName() string {
+	return "ListGlobalPostbacksRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGlobalPostbacksRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGlobalPostbacksRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGlobalPostbacksRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGlobalPostbacksRequestValidationError{}
+
+// Validate checks the field values on ListGlobalPostbackLogsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGlobalPostbackLogsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGlobalPostbackLogsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListGlobalPostbackLogsRequestMultiError, or nil if none found.
+func (m *ListGlobalPostbackLogsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGlobalPostbackLogsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGlobalPostbackLogsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGlobalPostbackLogsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGlobalPostbackLogsRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+		// no validation rules for StartTime
+	}
+
+	if m.EndTime != nil {
+		// no validation rules for EndTime
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.ActionType != nil {
+		// no validation rules for ActionType
+	}
+
+	if m.Success != nil {
+		// no validation rules for Success
+	}
+
+	if len(errors) > 0 {
+		return ListGlobalPostbackLogsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGlobalPostbackLogsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListGlobalPostbackLogsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListGlobalPostbackLogsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGlobalPostbackLogsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGlobalPostbackLogsRequestMultiError) AllErrors() []error { return m }
+
+// ListGlobalPostbackLogsRequestValidationError is the validation error
+// returned by ListGlobalPostbackLogsRequest.Validate if the designated
+// constraints aren't met.
+type ListGlobalPostbackLogsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGlobalPostbackLogsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGlobalPostbackLogsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGlobalPostbackLogsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGlobalPostbackLogsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGlobalPostbackLogsRequestValidationError) ErrorName() string {
+	return "ListGlobalPostbackLogsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGlobalPostbackLogsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGlobalPostbackLogsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGlobalPostbackLogsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGlobalPostbackLogsRequestValidationError{}
+
+// Validate checks the field values on SimulateGlobalPostbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SimulateGlobalPostbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SimulateGlobalPostbackRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SimulateGlobalPostbackRequestMultiError, or nil if none found.
+func (m *SimulateGlobalPostbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SimulateGlobalPostbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PostbackUrl
+
+	// no validation rules for RequestMethod
+
+	// no validation rules for PostBody
+
+	// no validation rules for MacroValues
+
+	if len(errors) > 0 {
+		return SimulateGlobalPostbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SimulateGlobalPostbackRequestMultiError is an error wrapping multiple
+// validation errors returned by SimulateGlobalPostbackRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SimulateGlobalPostbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SimulateGlobalPostbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SimulateGlobalPostbackRequestMultiError) AllErrors() []error { return m }
+
+// SimulateGlobalPostbackRequestValidationError is the validation error
+// returned by SimulateGlobalPostbackRequest.Validate if the designated
+// constraints aren't met.
+type SimulateGlobalPostbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SimulateGlobalPostbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SimulateGlobalPostbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SimulateGlobalPostbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SimulateGlobalPostbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SimulateGlobalPostbackRequestValidationError) ErrorName() string {
+	return "SimulateGlobalPostbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SimulateGlobalPostbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSimulateGlobalPostbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SimulateGlobalPostbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SimulateGlobalPostbackRequestValidationError{}
+
 // Validate checks the field values on CreateCampaignRequest_Campaign with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

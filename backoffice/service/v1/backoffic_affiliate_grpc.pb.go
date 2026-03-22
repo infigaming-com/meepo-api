@@ -65,6 +65,13 @@ const (
 	BackofficeAffiliate_CreateAffiliateSubAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/CreateAffiliateSubAccount"
 	BackofficeAffiliate_ListAffiliateSubAccounts_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateSubAccounts"
 	BackofficeAffiliate_UpdateAffiliateSubAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateAffiliateSubAccount"
+	BackofficeAffiliate_CreateGlobalPostback_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/CreateGlobalPostback"
+	BackofficeAffiliate_UpdateGlobalPostback_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateGlobalPostback"
+	BackofficeAffiliate_DeleteGlobalPostback_FullMethodName            = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteGlobalPostback"
+	BackofficeAffiliate_GetGlobalPostback_FullMethodName               = "/api.backoffice.service.v1.BackofficeAffiliate/GetGlobalPostback"
+	BackofficeAffiliate_ListGlobalPostbacks_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/ListGlobalPostbacks"
+	BackofficeAffiliate_ListGlobalPostbackLogs_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListGlobalPostbackLogs"
+	BackofficeAffiliate_SimulateGlobalPostback_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/SimulateGlobalPostback"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -116,6 +123,13 @@ type BackofficeAffiliateClient interface {
 	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error)
 	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error)
 	UpdateAffiliateSubAccount(ctx context.Context, in *UpdateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*UpdateAffiliateSubAccountResponse, error)
+	CreateGlobalPostback(ctx context.Context, in *CreateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.CreateGlobalPostbackResponse, error)
+	UpdateGlobalPostback(ctx context.Context, in *UpdateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.UpdateGlobalPostbackResponse, error)
+	DeleteGlobalPostback(ctx context.Context, in *DeleteGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.DeleteGlobalPostbackResponse, error)
+	GetGlobalPostback(ctx context.Context, in *GetGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.GetGlobalPostbackResponse, error)
+	ListGlobalPostbacks(ctx context.Context, in *ListGlobalPostbacksRequest, opts ...grpc.CallOption) (*v1.ListGlobalPostbacksResponse, error)
+	ListGlobalPostbackLogs(ctx context.Context, in *ListGlobalPostbackLogsRequest, opts ...grpc.CallOption) (*v1.ListGlobalPostbackLogsResponse, error)
+	SimulateGlobalPostback(ctx context.Context, in *SimulateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.SimulateGlobalPostbackResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -576,6 +590,76 @@ func (c *backofficeAffiliateClient) UpdateAffiliateSubAccount(ctx context.Contex
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) CreateGlobalPostback(ctx context.Context, in *CreateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.CreateGlobalPostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateGlobalPostbackResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_CreateGlobalPostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) UpdateGlobalPostback(ctx context.Context, in *UpdateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.UpdateGlobalPostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateGlobalPostbackResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_UpdateGlobalPostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) DeleteGlobalPostback(ctx context.Context, in *DeleteGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.DeleteGlobalPostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteGlobalPostbackResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_DeleteGlobalPostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) GetGlobalPostback(ctx context.Context, in *GetGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.GetGlobalPostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetGlobalPostbackResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetGlobalPostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListGlobalPostbacks(ctx context.Context, in *ListGlobalPostbacksRequest, opts ...grpc.CallOption) (*v1.ListGlobalPostbacksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListGlobalPostbacksResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListGlobalPostbacks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListGlobalPostbackLogs(ctx context.Context, in *ListGlobalPostbackLogsRequest, opts ...grpc.CallOption) (*v1.ListGlobalPostbackLogsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListGlobalPostbackLogsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListGlobalPostbackLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) SimulateGlobalPostback(ctx context.Context, in *SimulateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.SimulateGlobalPostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SimulateGlobalPostbackResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_SimulateGlobalPostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAffiliateServer is the server API for BackofficeAffiliate service.
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
@@ -625,6 +709,13 @@ type BackofficeAffiliateServer interface {
 	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
 	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
 	UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error)
+	CreateGlobalPostback(context.Context, *CreateGlobalPostbackRequest) (*v1.CreateGlobalPostbackResponse, error)
+	UpdateGlobalPostback(context.Context, *UpdateGlobalPostbackRequest) (*v1.UpdateGlobalPostbackResponse, error)
+	DeleteGlobalPostback(context.Context, *DeleteGlobalPostbackRequest) (*v1.DeleteGlobalPostbackResponse, error)
+	GetGlobalPostback(context.Context, *GetGlobalPostbackRequest) (*v1.GetGlobalPostbackResponse, error)
+	ListGlobalPostbacks(context.Context, *ListGlobalPostbacksRequest) (*v1.ListGlobalPostbacksResponse, error)
+	ListGlobalPostbackLogs(context.Context, *ListGlobalPostbackLogsRequest) (*v1.ListGlobalPostbackLogsResponse, error)
+	SimulateGlobalPostback(context.Context, *SimulateGlobalPostbackRequest) (*v1.SimulateGlobalPostbackResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -769,6 +860,27 @@ func (UnimplementedBackofficeAffiliateServer) ListAffiliateSubAccounts(context.C
 }
 func (UnimplementedBackofficeAffiliateServer) UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAffiliateSubAccount not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) CreateGlobalPostback(context.Context, *CreateGlobalPostbackRequest) (*v1.CreateGlobalPostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateGlobalPostback not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) UpdateGlobalPostback(context.Context, *UpdateGlobalPostbackRequest) (*v1.UpdateGlobalPostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateGlobalPostback not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) DeleteGlobalPostback(context.Context, *DeleteGlobalPostbackRequest) (*v1.DeleteGlobalPostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteGlobalPostback not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetGlobalPostback(context.Context, *GetGlobalPostbackRequest) (*v1.GetGlobalPostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGlobalPostback not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListGlobalPostbacks(context.Context, *ListGlobalPostbacksRequest) (*v1.ListGlobalPostbacksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListGlobalPostbacks not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListGlobalPostbackLogs(context.Context, *ListGlobalPostbackLogsRequest) (*v1.ListGlobalPostbackLogsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListGlobalPostbackLogs not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) SimulateGlobalPostback(context.Context, *SimulateGlobalPostbackRequest) (*v1.SimulateGlobalPostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SimulateGlobalPostback not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -1601,6 +1713,132 @@ func _BackofficeAffiliate_UpdateAffiliateSubAccount_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_CreateGlobalPostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGlobalPostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).CreateGlobalPostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_CreateGlobalPostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).CreateGlobalPostback(ctx, req.(*CreateGlobalPostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_UpdateGlobalPostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGlobalPostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).UpdateGlobalPostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_UpdateGlobalPostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).UpdateGlobalPostback(ctx, req.(*UpdateGlobalPostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_DeleteGlobalPostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteGlobalPostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).DeleteGlobalPostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_DeleteGlobalPostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).DeleteGlobalPostback(ctx, req.(*DeleteGlobalPostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_GetGlobalPostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGlobalPostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetGlobalPostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetGlobalPostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetGlobalPostback(ctx, req.(*GetGlobalPostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListGlobalPostbacks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalPostbacksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListGlobalPostbacks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListGlobalPostbacks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListGlobalPostbacks(ctx, req.(*ListGlobalPostbacksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListGlobalPostbackLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalPostbackLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListGlobalPostbackLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListGlobalPostbackLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListGlobalPostbackLogs(ctx, req.(*ListGlobalPostbackLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_SimulateGlobalPostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SimulateGlobalPostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).SimulateGlobalPostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_SimulateGlobalPostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).SimulateGlobalPostback(ctx, req.(*SimulateGlobalPostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAffiliate_ServiceDesc is the grpc.ServiceDesc for BackofficeAffiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1787,6 +2025,34 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAffiliateSubAccount",
 			Handler:    _BackofficeAffiliate_UpdateAffiliateSubAccount_Handler,
+		},
+		{
+			MethodName: "CreateGlobalPostback",
+			Handler:    _BackofficeAffiliate_CreateGlobalPostback_Handler,
+		},
+		{
+			MethodName: "UpdateGlobalPostback",
+			Handler:    _BackofficeAffiliate_UpdateGlobalPostback_Handler,
+		},
+		{
+			MethodName: "DeleteGlobalPostback",
+			Handler:    _BackofficeAffiliate_DeleteGlobalPostback_Handler,
+		},
+		{
+			MethodName: "GetGlobalPostback",
+			Handler:    _BackofficeAffiliate_GetGlobalPostback_Handler,
+		},
+		{
+			MethodName: "ListGlobalPostbacks",
+			Handler:    _BackofficeAffiliate_ListGlobalPostbacks_Handler,
+		},
+		{
+			MethodName: "ListGlobalPostbackLogs",
+			Handler:    _BackofficeAffiliate_ListGlobalPostbackLogs_Handler,
+		},
+		{
+			MethodName: "SimulateGlobalPostback",
+			Handler:    _BackofficeAffiliate_SimulateGlobalPostback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

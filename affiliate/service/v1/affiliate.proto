@@ -230,6 +230,22 @@ service Affiliate {
 
     rpc ListAffiliateSubAccounts(ListAffiliateSubAccountsRequest) returns (ListAffiliateSubAccountsResponse) {}
 
+    // -------------- Global Postback --------------
+
+    rpc CreateGlobalPostback(CreateGlobalPostbackRequest) returns (CreateGlobalPostbackResponse) {}
+
+    rpc UpdateGlobalPostback(UpdateGlobalPostbackRequest) returns (UpdateGlobalPostbackResponse) {}
+
+    rpc DeleteGlobalPostback(DeleteGlobalPostbackRequest) returns (DeleteGlobalPostbackResponse) {}
+
+    rpc GetGlobalPostback(GetGlobalPostbackRequest) returns (GetGlobalPostbackResponse) {}
+
+    rpc ListGlobalPostbacks(ListGlobalPostbacksRequest) returns (ListGlobalPostbacksResponse) {}
+
+    rpc ListGlobalPostbackLogs(ListGlobalPostbackLogsRequest) returns (ListGlobalPostbackLogsResponse) {}
+
+    rpc SimulateGlobalPostback(SimulateGlobalPostbackRequest) returns (SimulateGlobalPostbackResponse) {}
+
 }
 
 message ContactType {
@@ -1261,4 +1277,179 @@ message AffiliateSubAccountInfo {
     string email = 3;
     bool two_fa_enabled = 4;
     bool enabled = 5;
+}
+
+// -------------- Global Postback --------------
+
+message CreateGlobalPostbackRequest {
+    api.common.OperatorContext target_operator_context = 1;
+    string postback_name = 2;
+    string status = 3;                     // active / inactive
+    string action_type = 4;                // register / deposit / first_deposit / withdrawal / game_start / game_bet
+    string postback_url = 5;               // URL template with macro variables
+    string request_method = 6;             // GET / POST
+    string post_body = 7;                  // POST body template with macro variables (POST only)
+    repeated string traffic_sources = 8;   // aff / ref / direct_reg (empty = all)
+    repeated int64 affiliate_whitelist = 9;
+    repeated int64 referral_whitelist = 10;
+    int64 initiator_user_id = 11;
+    api.common.OperatorContext initiator_operator_context = 12;
+}
+
+message CreateGlobalPostbackResponse {
+    int64 global_postback_id = 1;
+}
+
+message UpdateGlobalPostbackRequest {
+    int64 global_postback_id = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    string postback_name = 3;
+    string status = 4;                     // active / inactive
+    string action_type = 5;                // register / deposit / first_deposit / withdrawal / game_start / game_bet
+    string postback_url = 6;               // URL template with macro variables
+    string request_method = 7;             // GET / POST
+    string post_body = 8;                  // POST body template with macro variables (POST only)
+    repeated string traffic_sources = 9;   // aff / ref / direct_reg (empty = all)
+    repeated int64 affiliate_whitelist = 10;
+    repeated int64 referral_whitelist = 11;
+    int64 initiator_user_id = 12;
+    api.common.OperatorContext initiator_operator_context = 13;
+}
+
+message UpdateGlobalPostbackResponse {
+}
+
+message DeleteGlobalPostbackRequest {
+    int64 global_postback_id = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    int64 initiator_user_id = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message DeleteGlobalPostbackResponse {
+}
+
+message GetGlobalPostbackRequest {
+    int64 global_postback_id = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    int64 initiator_user_id = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message GetGlobalPostbackResponse {
+    message WhitelistItem {
+        int64 id = 1;
+        string name = 2;
+    }
+    int64 id = 1;
+    string postback_name = 2;
+    string status = 3;
+    string action_type = 4;
+    string postback_url = 5;
+    string request_method = 6;
+    string post_body = 7;
+    repeated string traffic_sources = 8;
+    repeated WhitelistItem affiliate_whitelist = 9;
+    repeated WhitelistItem referral_whitelist = 10;
+    int64 created_at = 11;
+    int64 updated_at = 12;
+}
+
+message ListGlobalPostbacksRequest {
+    api.common.OperatorContext target_operator_context = 1;
+    optional string status = 2;            // active / inactive
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    int64 initiator_user_id = 5;
+    api.common.OperatorContext initiator_operator_context = 6;
+}
+
+message ListGlobalPostbacksResponse {
+    message WhitelistItem {
+        int64 id = 1;
+        string name = 2;
+    }
+    message GlobalPostback {
+        int64 id = 1;
+        string postback_name = 2;
+        string status = 3;
+        string action_type = 4;
+        string postback_url = 5;
+        string request_method = 6;
+        string post_body = 7;
+        repeated string traffic_sources = 8;
+        repeated WhitelistItem affiliate_whitelist = 9;
+        repeated WhitelistItem referral_whitelist = 10;
+        int64 created_at = 11;
+        int64 updated_at = 12;
+    }
+    repeated GlobalPostback items = 1;
+    int32 total = 2;
+    int32 total_active = 3;
+    int32 total_inactive = 4;
+    int32 page = 5;
+    int32 page_size = 6;
+}
+
+// -------------- Global Postback Logs --------------
+
+message ListGlobalPostbackLogsRequest {
+    api.common.OperatorContext target_operator_context = 1;
+    optional int64 start_time = 2;         // Unix milliseconds
+    optional int64 end_time = 3;           // Unix milliseconds
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+    int64 initiator_user_id = 6;
+    api.common.OperatorContext initiator_operator_context = 7;
+    optional string action_type = 8;
+    optional bool success = 9;
+}
+
+message ListGlobalPostbackLogsResponse {
+    message GlobalPostbackLog {
+        int64 log_id = 1;
+        int64 global_postback_id = 2;
+        string postback_name = 3;
+        string postback_url = 4;           // Final URL after macro replacement
+        string post_body = 5;              // Final POST body after macro replacement
+        string action_type = 6;
+        string request_method = 7;         // GET / POST
+        int32 http_status_code = 8;
+        string reason = 9;
+        bool success = 10;
+        int32 attempt_number = 11;         // 1, 2, or 3
+        int64 user_id = 12;               // User that triggered the event
+        string traffic_source = 13;        // aff / ref / direct_reg
+        int64 affiliate_id = 14;           // Affiliate user ID (> 0 when traffic=aff)
+        int64 referrer_user_id = 15;       // Referrer user ID (> 0 when traffic=ref)
+        string event_unique_key = 16;      // Idempotency key (e.g. game_bet:123456)
+        int64 operator_id = 17;
+        string response_body = 18;         // Response body from third-party server (max 2KB)
+        string response_headers = 19;      // Response headers as JSON string
+        int64 latency_ms = 20;            // Request latency in milliseconds
+        int64 created_at = 21;            // Unix milliseconds
+    }
+    repeated GlobalPostbackLog logs = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+// -------------- Global Postback Simulate --------------
+
+message SimulateGlobalPostbackRequest {
+    string postback_url = 1;              // URL template with macro placeholders
+    string request_method = 2;            // GET or POST
+    string post_body = 3;                 // POST body template (POST only)
+    map<string, string> macro_values = 4; // Custom macro values for simulation
+    api.common.OperatorContext initiator_operator_context = 5;
+}
+
+message SimulateGlobalPostbackResponse {
+    string final_url = 1;
+    string final_body = 2;
+    int32 http_status_code = 3;
+    bool success = 4;
+    string response_body = 5;
+    int64 latency_ms = 6;
 }
