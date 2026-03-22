@@ -127,6 +127,15 @@ const (
 	ErrorReason_LIST_LANDING_TEMPLATES_FAILED  ErrorReason = 130096
 	ErrorReason_LANDING_TEMPLATE_NOT_FOUND     ErrorReason = 130097
 	ErrorReason_INVALID_CLICK_ACTION           ErrorReason = 130098
+	// Global Postback
+	ErrorReason_CREATE_GLOBAL_POSTBACK_FAILED    ErrorReason = 130099
+	ErrorReason_UPDATE_GLOBAL_POSTBACK_FAILED    ErrorReason = 130100
+	ErrorReason_DELETE_GLOBAL_POSTBACK_FAILED    ErrorReason = 130101
+	ErrorReason_LIST_GLOBAL_POSTBACKS_FAILED     ErrorReason = 130102
+	ErrorReason_GET_GLOBAL_POSTBACK_FAILED       ErrorReason = 130103
+	ErrorReason_GLOBAL_POSTBACK_NOT_FOUND        ErrorReason = 130104
+	ErrorReason_SIMULATE_GLOBAL_POSTBACK_FAILED  ErrorReason = 130105
+	ErrorReason_LIST_GLOBAL_POSTBACK_LOGS_FAILED ErrorReason = 130106
 )
 
 // Enum value maps for ErrorReason.
@@ -231,6 +240,14 @@ var (
 		130096: "LIST_LANDING_TEMPLATES_FAILED",
 		130097: "LANDING_TEMPLATE_NOT_FOUND",
 		130098: "INVALID_CLICK_ACTION",
+		130099: "CREATE_GLOBAL_POSTBACK_FAILED",
+		130100: "UPDATE_GLOBAL_POSTBACK_FAILED",
+		130101: "DELETE_GLOBAL_POSTBACK_FAILED",
+		130102: "LIST_GLOBAL_POSTBACKS_FAILED",
+		130103: "GET_GLOBAL_POSTBACK_FAILED",
+		130104: "GLOBAL_POSTBACK_NOT_FOUND",
+		130105: "SIMULATE_GLOBAL_POSTBACK_FAILED",
+		130106: "LIST_GLOBAL_POSTBACK_LOGS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -332,6 +349,14 @@ var (
 		"LIST_LANDING_TEMPLATES_FAILED":                       130096,
 		"LANDING_TEMPLATE_NOT_FOUND":                          130097,
 		"INVALID_CLICK_ACTION":                                130098,
+		"CREATE_GLOBAL_POSTBACK_FAILED":                       130099,
+		"UPDATE_GLOBAL_POSTBACK_FAILED":                       130100,
+		"DELETE_GLOBAL_POSTBACK_FAILED":                       130101,
+		"LIST_GLOBAL_POSTBACKS_FAILED":                        130102,
+		"GET_GLOBAL_POSTBACK_FAILED":                          130103,
+		"GLOBAL_POSTBACK_NOT_FOUND":                           130104,
+		"SIMULATE_GLOBAL_POSTBACK_FAILED":                     130105,
+		"LIST_GLOBAL_POSTBACK_LOGS_FAILED":                    130106,
 	}
 )
 
@@ -366,7 +391,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xed\x1b\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x92\x1e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -466,7 +491,15 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eDELETE_LANDING_TEMPLATE_FAILED\x10\xaf\xf8\a\x12#\n" +
 	"\x1dLIST_LANDING_TEMPLATES_FAILED\x10\xb0\xf8\a\x12 \n" +
 	"\x1aLANDING_TEMPLATE_NOT_FOUND\x10\xb1\xf8\a\x12\x1a\n" +
-	"\x14INVALID_CLICK_ACTION\x10\xb2\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x14INVALID_CLICK_ACTION\x10\xb2\xf8\a\x12#\n" +
+	"\x1dCREATE_GLOBAL_POSTBACK_FAILED\x10\xb3\xf8\a\x12#\n" +
+	"\x1dUPDATE_GLOBAL_POSTBACK_FAILED\x10\xb4\xf8\a\x12#\n" +
+	"\x1dDELETE_GLOBAL_POSTBACK_FAILED\x10\xb5\xf8\a\x12\"\n" +
+	"\x1cLIST_GLOBAL_POSTBACKS_FAILED\x10\xb6\xf8\a\x12 \n" +
+	"\x1aGET_GLOBAL_POSTBACK_FAILED\x10\xb7\xf8\a\x12\x1f\n" +
+	"\x19GLOBAL_POSTBACK_NOT_FOUND\x10\xb8\xf8\a\x12%\n" +
+	"\x1fSIMULATE_GLOBAL_POSTBACK_FAILED\x10\xb9\xf8\a\x12&\n" +
+	" LIST_GLOBAL_POSTBACK_LOGS_FAILED\x10\xba\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

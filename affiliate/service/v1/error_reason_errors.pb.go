@@ -1204,3 +1204,101 @@ func IsInvalidClickAction(err error) bool {
 func ErrorInvalidClickAction(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_CLICK_ACTION.String(), fmt.Sprintf(format, args...))
 }
+
+// Global Postback
+func IsCreateGlobalPostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_GLOBAL_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+// Global Postback
+func ErrorCreateGlobalPostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_GLOBAL_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateGlobalPostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_GLOBAL_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateGlobalPostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_GLOBAL_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteGlobalPostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_GLOBAL_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteGlobalPostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_GLOBAL_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListGlobalPostbacksFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_GLOBAL_POSTBACKS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListGlobalPostbacksFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_GLOBAL_POSTBACKS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetGlobalPostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_GLOBAL_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetGlobalPostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_GLOBAL_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGlobalPostbackNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GLOBAL_POSTBACK_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorGlobalPostbackNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GLOBAL_POSTBACK_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSimulateGlobalPostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SIMULATE_GLOBAL_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorSimulateGlobalPostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SIMULATE_GLOBAL_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListGlobalPostbackLogsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_GLOBAL_POSTBACK_LOGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListGlobalPostbackLogsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_GLOBAL_POSTBACK_LOGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
