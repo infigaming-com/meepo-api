@@ -123,12 +123,19 @@ type BackofficeAffiliateClient interface {
 	CreateAffiliateSubAccount(ctx context.Context, in *CreateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*v1.CreateAffiliateSubAccountResponse, error)
 	ListAffiliateSubAccounts(ctx context.Context, in *ListAffiliateSubAccountsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateSubAccountsResponse, error)
 	UpdateAffiliateSubAccount(ctx context.Context, in *UpdateAffiliateSubAccountRequest, opts ...grpc.CallOption) (*UpdateAffiliateSubAccountResponse, error)
+	// Create a new operator-level global postback configuration
 	CreateGlobalPostback(ctx context.Context, in *CreateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.CreateGlobalPostbackResponse, error)
+	// Update an existing global postback configuration
 	UpdateGlobalPostback(ctx context.Context, in *UpdateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.UpdateGlobalPostbackResponse, error)
+	// Soft delete a global postback (sets hidden=true)
 	DeleteGlobalPostback(ctx context.Context, in *DeleteGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.DeleteGlobalPostbackResponse, error)
+	// Get a single global postback by ID, including resolved whitelist names
 	GetGlobalPostback(ctx context.Context, in *GetGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.GetGlobalPostbackResponse, error)
+	// List global postbacks for a target operator with pagination and status counts
 	ListGlobalPostbacks(ctx context.Context, in *ListGlobalPostbacksRequest, opts ...grpc.CallOption) (*v1.ListGlobalPostbacksResponse, error)
+	// List global postback execution logs with optional filters (time range, action_type, success)
 	ListGlobalPostbackLogs(ctx context.Context, in *ListGlobalPostbackLogsRequest, opts ...grpc.CallOption) (*v1.ListGlobalPostbackLogsResponse, error)
+	// Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	SimulateGlobalPostback(ctx context.Context, in *SimulateGlobalPostbackRequest, opts ...grpc.CallOption) (*v1.SimulateGlobalPostbackResponse, error)
 }
 
@@ -709,12 +716,19 @@ type BackofficeAffiliateServer interface {
 	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
 	ListAffiliateSubAccounts(context.Context, *ListAffiliateSubAccountsRequest) (*v1.ListAffiliateSubAccountsResponse, error)
 	UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error)
+	// Create a new operator-level global postback configuration
 	CreateGlobalPostback(context.Context, *CreateGlobalPostbackRequest) (*v1.CreateGlobalPostbackResponse, error)
+	// Update an existing global postback configuration
 	UpdateGlobalPostback(context.Context, *UpdateGlobalPostbackRequest) (*v1.UpdateGlobalPostbackResponse, error)
+	// Soft delete a global postback (sets hidden=true)
 	DeleteGlobalPostback(context.Context, *DeleteGlobalPostbackRequest) (*v1.DeleteGlobalPostbackResponse, error)
+	// Get a single global postback by ID, including resolved whitelist names
 	GetGlobalPostback(context.Context, *GetGlobalPostbackRequest) (*v1.GetGlobalPostbackResponse, error)
+	// List global postbacks for a target operator with pagination and status counts
 	ListGlobalPostbacks(context.Context, *ListGlobalPostbacksRequest) (*v1.ListGlobalPostbacksResponse, error)
+	// List global postback execution logs with optional filters (time range, action_type, success)
 	ListGlobalPostbackLogs(context.Context, *ListGlobalPostbackLogsRequest) (*v1.ListGlobalPostbackLogsResponse, error)
+	// Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	SimulateGlobalPostback(context.Context, *SimulateGlobalPostbackRequest) (*v1.SimulateGlobalPostbackResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }

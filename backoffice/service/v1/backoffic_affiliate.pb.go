@@ -3358,17 +3358,26 @@ func (*UpdateAffiliateSubAccountResponse) Descriptor() ([]byte, []int) {
 type CreateGlobalPostbackRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	PostbackName          string                  `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status                string                  `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`                                       // active / inactive
-	ActionType            string                  `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`             // register / deposit / first_deposit / withdrawal / game_start / game_bet
-	PostbackUrl           string                  `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`          // URL template with macro variables
-	RequestMethod         string                  `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`    // GET / POST
-	PostBody              string                  `protobuf:"bytes,7,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`                   // POST body template with macro variables (POST only)
-	TrafficSources        []string                `protobuf:"bytes,8,rep,name=traffic_sources,json=trafficSources,proto3" json:"traffic_sources,omitempty"` // aff / ref / direct_reg (empty = all)
-	AffiliateWhitelist    []int64                 `protobuf:"varint,9,rep,packed,name=affiliate_whitelist,json=affiliateWhitelist,proto3" json:"affiliate_whitelist,omitempty"`
-	ReferralWhitelist     []int64                 `protobuf:"varint,10,rep,packed,name=referral_whitelist,json=referralWhitelist,proto3" json:"referral_whitelist,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Max 60 characters
+	PostbackName string `protobuf:"bytes,2,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status string `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"
+	ActionType string `protobuf:"bytes,4,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	// URL template with macros, max 2000 chars, must start with http(s)://
+	PostbackUrl string `protobuf:"bytes,5,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod string `protobuf:"bytes,6,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	// POST body template with macros (only when method=POST, not URL-encoded)
+	PostBody string `protobuf:"bytes,7,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`
+	// "aff", "ref", "direct_reg" (empty = all)
+	TrafficSources []string `protobuf:"bytes,8,rep,name=traffic_sources,json=trafficSources,proto3" json:"traffic_sources,omitempty"`
+	// Affiliate IDs to filter (empty = all). Only when traffic_sources contains "aff"
+	AffiliateWhitelist []int64 `protobuf:"varint,9,rep,packed,name=affiliate_whitelist,json=affiliateWhitelist,proto3" json:"affiliate_whitelist,omitempty"`
+	// Referrer user IDs to filter (empty = all). Only when traffic_sources contains "ref"
+	ReferralWhitelist []int64 `protobuf:"varint,10,rep,packed,name=referral_whitelist,json=referralWhitelist,proto3" json:"referral_whitelist,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreateGlobalPostbackRequest) Reset() {
@@ -3475,17 +3484,26 @@ type UpdateGlobalPostbackRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	GlobalPostbackId      int64                   `protobuf:"varint,1,opt,name=global_postback_id,json=globalPostbackId,proto3" json:"global_postback_id,omitempty"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	PostbackName          string                  `protobuf:"bytes,3,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
-	Status                string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                                       // active / inactive
-	ActionType            string                  `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`             // register / deposit / first_deposit / withdrawal / game_start / game_bet
-	PostbackUrl           string                  `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`          // URL template with macro variables
-	RequestMethod         string                  `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`    // GET / POST
-	PostBody              string                  `protobuf:"bytes,8,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`                   // POST body template with macro variables (POST only)
-	TrafficSources        []string                `protobuf:"bytes,9,rep,name=traffic_sources,json=trafficSources,proto3" json:"traffic_sources,omitempty"` // aff / ref / direct_reg (empty = all)
-	AffiliateWhitelist    []int64                 `protobuf:"varint,10,rep,packed,name=affiliate_whitelist,json=affiliateWhitelist,proto3" json:"affiliate_whitelist,omitempty"`
-	ReferralWhitelist     []int64                 `protobuf:"varint,11,rep,packed,name=referral_whitelist,json=referralWhitelist,proto3" json:"referral_whitelist,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Max 60 characters
+	PostbackName string `protobuf:"bytes,3,opt,name=postback_name,json=postbackName,proto3" json:"postback_name,omitempty"`
+	// "active" or "inactive"
+	Status string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"
+	ActionType string `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	// URL template with macros, max 2000 chars
+	PostbackUrl string `protobuf:"bytes,6,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod string `protobuf:"bytes,7,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	// POST body template with macros (only when method=POST)
+	PostBody string `protobuf:"bytes,8,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`
+	// "aff", "ref", "direct_reg" (empty = all)
+	TrafficSources []string `protobuf:"bytes,9,rep,name=traffic_sources,json=trafficSources,proto3" json:"traffic_sources,omitempty"`
+	// Affiliate IDs to filter (empty = all)
+	AffiliateWhitelist []int64 `protobuf:"varint,10,rep,packed,name=affiliate_whitelist,json=affiliateWhitelist,proto3" json:"affiliate_whitelist,omitempty"`
+	// Referrer user IDs to filter (empty = all)
+	ReferralWhitelist []int64 `protobuf:"varint,11,rep,packed,name=referral_whitelist,json=referralWhitelist,proto3" json:"referral_whitelist,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *UpdateGlobalPostbackRequest) Reset() {
@@ -3702,11 +3720,12 @@ func (x *GetGlobalPostbackRequest) GetTargetOperatorContext() *common.OperatorCo
 type ListGlobalPostbacksRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Status                *string                 `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"` // active / inactive
-	Page                  *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// "active" or "inactive" (empty = all)
+	Status        *string `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Page          *int32  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListGlobalPostbacksRequest) Reset() {
@@ -3770,14 +3789,17 @@ func (x *ListGlobalPostbacksRequest) GetPageSize() int32 {
 type ListGlobalPostbackLogsRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	StartTime             *int64                  `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"` // Unix milliseconds
-	EndTime               *int64                  `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`       // Unix milliseconds
-	Page                  *int32                  `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize              *int32                  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	ActionType            *string                 `protobuf:"bytes,6,opt,name=action_type,json=actionType,proto3,oneof" json:"action_type,omitempty"`
-	Success               *bool                   `protobuf:"varint,7,opt,name=success,proto3,oneof" json:"success,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Unix milliseconds
+	StartTime *int64 `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	// Unix milliseconds
+	EndTime  *int64 `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page     *int32 `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize *int32 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"
+	ActionType    *string `protobuf:"bytes,6,opt,name=action_type,json=actionType,proto3,oneof" json:"action_type,omitempty"`
+	Success       *bool   `protobuf:"varint,7,opt,name=success,proto3,oneof" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListGlobalPostbackLogsRequest) Reset() {
@@ -3860,11 +3882,15 @@ func (x *ListGlobalPostbackLogsRequest) GetSuccess() bool {
 }
 
 type SimulateGlobalPostbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PostbackUrl   string                 `protobuf:"bytes,1,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`                                                                           // URL template with macro placeholders
-	RequestMethod string                 `protobuf:"bytes,2,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`                                                                     // GET or POST
-	PostBody      string                 `protobuf:"bytes,3,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`                                                                                    // POST body template (POST only)
-	MacroValues   map[string]string      `protobuf:"bytes,4,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Custom macro values for simulation
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// URL template (e.g. "https://example.com/cb?uid={user_id}")
+	PostbackUrl string `protobuf:"bytes,1,opt,name=postback_url,json=postbackUrl,proto3" json:"postback_url,omitempty"`
+	// "GET" or "POST"
+	RequestMethod string `protobuf:"bytes,2,opt,name=request_method,json=requestMethod,proto3" json:"request_method,omitempty"`
+	// POST body template (only when method=POST)
+	PostBody string `protobuf:"bytes,3,opt,name=post_body,json=postBody,proto3" json:"post_body,omitempty"`
+	// Macro values without braces (e.g. {"user_id": "123"})
+	MacroValues   map[string]string `protobuf:"bytes,4,rep,name=macro_values,json=macroValues,proto3" json:"macro_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
