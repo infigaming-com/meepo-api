@@ -345,6 +345,7 @@ service BackofficeAffiliate {
 
 	// -------------- Global Postback --------------
 
+	// Create a new operator-level global postback configuration
 	rpc CreateGlobalPostback(CreateGlobalPostbackRequest) returns (api.affiliate.service.v1.CreateGlobalPostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/create"
@@ -352,6 +353,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Update an existing global postback configuration
 	rpc UpdateGlobalPostback(UpdateGlobalPostbackRequest) returns (api.affiliate.service.v1.UpdateGlobalPostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/update"
@@ -359,6 +361,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Soft delete a global postback (sets hidden=true)
 	rpc DeleteGlobalPostback(DeleteGlobalPostbackRequest) returns (api.affiliate.service.v1.DeleteGlobalPostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/delete"
@@ -366,6 +369,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Get a single global postback by ID, including resolved whitelist names
 	rpc GetGlobalPostback(GetGlobalPostbackRequest) returns (api.affiliate.service.v1.GetGlobalPostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/get"
@@ -373,6 +377,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List global postbacks for a target operator with pagination and status counts
 	rpc ListGlobalPostbacks(ListGlobalPostbacksRequest) returns (api.affiliate.service.v1.ListGlobalPostbacksResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/list"
@@ -380,6 +385,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// List global postback execution logs with optional filters (time range, action_type, success)
 	rpc ListGlobalPostbackLogs(ListGlobalPostbackLogsRequest) returns (api.affiliate.service.v1.ListGlobalPostbackLogsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/log/list"
@@ -387,6 +393,7 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	rpc SimulateGlobalPostback(SimulateGlobalPostbackRequest) returns (api.affiliate.service.v1.SimulateGlobalPostbackResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/global-postback/simulate"
@@ -778,28 +785,46 @@ message UpdateAffiliateSubAccountResponse {}
 
 message CreateGlobalPostbackRequest {
 	api.common.OperatorContext target_operator_context = 1;
+	// Max 60 characters
 	string postback_name = 2;
-	string status = 3;                     // active / inactive
-	string action_type = 4;                // register / deposit / first_deposit / withdrawal / game_start / game_bet
-	string postback_url = 5;               // URL template with macro variables
-	string request_method = 6;             // GET / POST
-	string post_body = 7;                  // POST body template with macro variables (POST only)
-	repeated string traffic_sources = 8;   // aff / ref / direct_reg (empty = all)
+	// "active" or "inactive"
+	string status = 3;
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"
+	string action_type = 4;
+	// URL template with macros, max 2000 chars, must start with http(s)://
+	string postback_url = 5;
+	// "GET" or "POST"
+	string request_method = 6;
+	// POST body template with macros (only when method=POST, not URL-encoded)
+	string post_body = 7;
+	// "aff", "ref", "direct_reg" (empty = all)
+	repeated string traffic_sources = 8;
+	// Affiliate IDs to filter (empty = all). Only when traffic_sources contains "aff"
 	repeated int64 affiliate_whitelist = 9;
+	// Referrer user IDs to filter (empty = all). Only when traffic_sources contains "ref"
 	repeated int64 referral_whitelist = 10;
 }
 
 message UpdateGlobalPostbackRequest {
 	int64 global_postback_id = 1;
 	api.common.OperatorContext target_operator_context = 2;
+	// Max 60 characters
 	string postback_name = 3;
-	string status = 4;                     // active / inactive
-	string action_type = 5;                // register / deposit / first_deposit / withdrawal / game_start / game_bet
-	string postback_url = 6;               // URL template with macro variables
-	string request_method = 7;             // GET / POST
-	string post_body = 8;                  // POST body template with macro variables (POST only)
-	repeated string traffic_sources = 9;   // aff / ref / direct_reg (empty = all)
+	// "active" or "inactive"
+	string status = 4;
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"
+	string action_type = 5;
+	// URL template with macros, max 2000 chars
+	string postback_url = 6;
+	// "GET" or "POST"
+	string request_method = 7;
+	// POST body template with macros (only when method=POST)
+	string post_body = 8;
+	// "aff", "ref", "direct_reg" (empty = all)
+	repeated string traffic_sources = 9;
+	// Affiliate IDs to filter (empty = all)
 	repeated int64 affiliate_whitelist = 10;
+	// Referrer user IDs to filter (empty = all)
 	repeated int64 referral_whitelist = 11;
 }
 
@@ -815,24 +840,32 @@ message GetGlobalPostbackRequest {
 
 message ListGlobalPostbacksRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	optional string status = 2;            // active / inactive
+	// "active" or "inactive" (empty = all)
+	optional string status = 2;
 	optional int32 page = 3;
 	optional int32 page_size = 4;
 }
 
 message ListGlobalPostbackLogsRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	optional int64 start_time = 2;         // Unix milliseconds
-	optional int64 end_time = 3;           // Unix milliseconds
+	// Unix milliseconds
+	optional int64 start_time = 2;
+	// Unix milliseconds
+	optional int64 end_time = 3;
 	optional int32 page = 4;
 	optional int32 page_size = 5;
+	// "register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"
 	optional string action_type = 6;
 	optional bool success = 7;
 }
 
 message SimulateGlobalPostbackRequest {
-	string postback_url = 1;              // URL template with macro placeholders
-	string request_method = 2;            // GET or POST
-	string post_body = 3;                 // POST body template (POST only)
-	map<string, string> macro_values = 4; // Custom macro values for simulation
+	// URL template (e.g. "https://example.com/cb?uid={user_id}")
+	string postback_url = 1;
+	// "GET" or "POST"
+	string request_method = 2;
+	// POST body template (only when method=POST)
+	string post_body = 3;
+	// Macro values without braces (e.g. {"user_id": "123"})
+	map<string, string> macro_values = 4;
 }

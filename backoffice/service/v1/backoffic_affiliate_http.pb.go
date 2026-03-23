@@ -78,12 +78,14 @@ type BackofficeAffiliateHTTPServer interface {
 	CreateAffiliateSubAccount(context.Context, *CreateAffiliateSubAccountRequest) (*v1.CreateAffiliateSubAccountResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*v1.CreateCommissionPlanResponse, error)
+	// CreateGlobalPostback Create a new operator-level global postback configuration
 	CreateGlobalPostback(context.Context, *CreateGlobalPostbackRequest) (*v1.CreateGlobalPostbackResponse, error)
 	CreateLandingTemplate(context.Context, *CreateLandingTemplateRequest) (*v1.CreateLandingTemplateResponse, error)
 	CreatePostback(context.Context, *CreatePostbackRequest) (*v1.CreatePostbackResponse, error)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*v1.DeleteCampaignResponse, error)
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
+	// DeleteGlobalPostback Soft delete a global postback (sets hidden=true)
 	DeleteGlobalPostback(context.Context, *DeleteGlobalPostbackRequest) (*v1.DeleteGlobalPostbackResponse, error)
 	DeleteLandingTemplate(context.Context, *DeleteLandingTemplateRequest) (*v1.DeleteLandingTemplateResponse, error)
 	DeletePostback(context.Context, *DeletePostbackRequest) (*v1.DeletePostbackResponse, error)
@@ -93,6 +95,7 @@ type BackofficeAffiliateHTTPServer interface {
 	GetAffiliateOperatorSettings(context.Context, *GetAffiliateOperatorSettingsRequest) (*v1.GetOperatorSettingsResponse, error)
 	GetAffiliateTrend(context.Context, *GetAffiliateTrendRequest) (*v1.GetAffiliateTrendResponse, error)
 	GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*v1.GetCommissionPlanResponse, error)
+	// GetGlobalPostback Get a single global postback by ID, including resolved whitelist names
 	GetGlobalPostback(context.Context, *GetGlobalPostbackRequest) (*v1.GetGlobalPostbackResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*v1.GetReferralPlanResponse, error)
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
@@ -107,7 +110,9 @@ type BackofficeAffiliateHTTPServer interface {
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
+	// ListGlobalPostbackLogs List global postback execution logs with optional filters (time range, action_type, success)
 	ListGlobalPostbackLogs(context.Context, *ListGlobalPostbackLogsRequest) (*v1.ListGlobalPostbackLogsResponse, error)
+	// ListGlobalPostbacks List global postbacks for a target operator with pagination and status counts
 	ListGlobalPostbacks(context.Context, *ListGlobalPostbacksRequest) (*v1.ListGlobalPostbacksResponse, error)
 	ListLandingTemplates(context.Context, *ListLandingTemplatesRequest) (*v1.ListLandingTemplatesResponse, error)
 	ListLandingTemplatesByCampaign(context.Context, *ListLandingTemplatesByCampaignRequest) (*v1.ListLandingTemplatesByCampaignResponse, error)
@@ -117,12 +122,14 @@ type BackofficeAffiliateHTTPServer interface {
 	SendAffiliateAccountEmail(context.Context, *SendAffiliateAccountEmailRequest) (*SendAffiliateAccountEmailResponse, error)
 	SetAffiliateDomain(context.Context, *SetAffiliateDomainRequest) (*v1.SetAffiliateDomainResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*v1.SetReferralPlanResponse, error)
+	// SimulateGlobalPostback Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	SimulateGlobalPostback(context.Context, *SimulateGlobalPostbackRequest) (*v1.SimulateGlobalPostbackResponse, error)
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*v1.UpdateAffiliateResponse, error)
 	UpdateAffiliateOperatorSettings(context.Context, *UpdateAffiliateOperatorSettingsRequest) (*v1.UpdateOperatorSettingsResponse, error)
 	UpdateAffiliateSubAccount(context.Context, *UpdateAffiliateSubAccountRequest) (*UpdateAffiliateSubAccountResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
 	UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*v1.UpdateCommissionPlanResponse, error)
+	// UpdateGlobalPostback Update an existing global postback configuration
 	UpdateGlobalPostback(context.Context, *UpdateGlobalPostbackRequest) (*v1.UpdateGlobalPostbackResponse, error)
 	UpdateLandingTemplate(context.Context, *UpdateLandingTemplateRequest) (*v1.UpdateLandingTemplateResponse, error)
 	UpdatePostback(context.Context, *UpdatePostbackRequest) (*v1.UpdatePostbackResponse, error)
@@ -1333,12 +1340,14 @@ type BackofficeAffiliateHTTPClient interface {
 	CreateAffiliateSubAccount(ctx context.Context, req *CreateAffiliateSubAccountRequest, opts ...http.CallOption) (rsp *v1.CreateAffiliateSubAccountResponse, err error)
 	CreateCampaign(ctx context.Context, req *CreateCampaignRequest, opts ...http.CallOption) (rsp *v1.CreateCampaignResponse, err error)
 	CreateCommissionPlan(ctx context.Context, req *CreateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.CreateCommissionPlanResponse, err error)
+	// CreateGlobalPostback Create a new operator-level global postback configuration
 	CreateGlobalPostback(ctx context.Context, req *CreateGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.CreateGlobalPostbackResponse, err error)
 	CreateLandingTemplate(ctx context.Context, req *CreateLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.CreateLandingTemplateResponse, err error)
 	CreatePostback(ctx context.Context, req *CreatePostbackRequest, opts ...http.CallOption) (rsp *v1.CreatePostbackResponse, err error)
 	DeleteAffiliate(ctx context.Context, req *DeleteAffiliateRequest, opts ...http.CallOption) (rsp *v1.DeleteAffiliateResponse, err error)
 	DeleteCampaign(ctx context.Context, req *DeleteCampaignRequest, opts ...http.CallOption) (rsp *v1.DeleteCampaignResponse, err error)
 	DeleteCommissionPlan(ctx context.Context, req *DeleteCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.DeleteCommissionPlanResponse, err error)
+	// DeleteGlobalPostback Soft delete a global postback (sets hidden=true)
 	DeleteGlobalPostback(ctx context.Context, req *DeleteGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.DeleteGlobalPostbackResponse, err error)
 	DeleteLandingTemplate(ctx context.Context, req *DeleteLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.DeleteLandingTemplateResponse, err error)
 	DeletePostback(ctx context.Context, req *DeletePostbackRequest, opts ...http.CallOption) (rsp *v1.DeletePostbackResponse, err error)
@@ -1348,6 +1357,7 @@ type BackofficeAffiliateHTTPClient interface {
 	GetAffiliateOperatorSettings(ctx context.Context, req *GetAffiliateOperatorSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorSettingsResponse, err error)
 	GetAffiliateTrend(ctx context.Context, req *GetAffiliateTrendRequest, opts ...http.CallOption) (rsp *v1.GetAffiliateTrendResponse, err error)
 	GetCommissionPlan(ctx context.Context, req *GetCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.GetCommissionPlanResponse, err error)
+	// GetGlobalPostback Get a single global postback by ID, including resolved whitelist names
 	GetGlobalPostback(ctx context.Context, req *GetGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.GetGlobalPostbackResponse, err error)
 	GetReferralPlan(ctx context.Context, req *GetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.GetReferralPlanResponse, err error)
 	ListAffiliateBills(ctx context.Context, req *ListAffiliateBillsRequest, opts ...http.CallOption) (rsp *v1.ListAffiliateBillsResponse, err error)
@@ -1362,7 +1372,9 @@ type BackofficeAffiliateHTTPClient interface {
 	ListCommissionPlans(ctx context.Context, req *ListCommissionPlansRequest, opts ...http.CallOption) (rsp *v1.ListCommissionPlansResponse, err error)
 	ListCommissions(ctx context.Context, req *ListCommissionsRequest, opts ...http.CallOption) (rsp *v1.ListCommissionsResponse, err error)
 	ListEvents(ctx context.Context, req *ListEventsRequest, opts ...http.CallOption) (rsp *v1.ListEventsResponse, err error)
+	// ListGlobalPostbackLogs List global postback execution logs with optional filters (time range, action_type, success)
 	ListGlobalPostbackLogs(ctx context.Context, req *ListGlobalPostbackLogsRequest, opts ...http.CallOption) (rsp *v1.ListGlobalPostbackLogsResponse, err error)
+	// ListGlobalPostbacks List global postbacks for a target operator with pagination and status counts
 	ListGlobalPostbacks(ctx context.Context, req *ListGlobalPostbacksRequest, opts ...http.CallOption) (rsp *v1.ListGlobalPostbacksResponse, err error)
 	ListLandingTemplates(ctx context.Context, req *ListLandingTemplatesRequest, opts ...http.CallOption) (rsp *v1.ListLandingTemplatesResponse, err error)
 	ListLandingTemplatesByCampaign(ctx context.Context, req *ListLandingTemplatesByCampaignRequest, opts ...http.CallOption) (rsp *v1.ListLandingTemplatesByCampaignResponse, err error)
@@ -1372,12 +1384,14 @@ type BackofficeAffiliateHTTPClient interface {
 	SendAffiliateAccountEmail(ctx context.Context, req *SendAffiliateAccountEmailRequest, opts ...http.CallOption) (rsp *SendAffiliateAccountEmailResponse, err error)
 	SetAffiliateDomain(ctx context.Context, req *SetAffiliateDomainRequest, opts ...http.CallOption) (rsp *v1.SetAffiliateDomainResponse, err error)
 	SetReferralPlan(ctx context.Context, req *SetReferralPlanRequest, opts ...http.CallOption) (rsp *v1.SetReferralPlanResponse, err error)
+	// SimulateGlobalPostback Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 	SimulateGlobalPostback(ctx context.Context, req *SimulateGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.SimulateGlobalPostbackResponse, err error)
 	UpdateAffiliate(ctx context.Context, req *UpdateAffiliateRequest, opts ...http.CallOption) (rsp *v1.UpdateAffiliateResponse, err error)
 	UpdateAffiliateOperatorSettings(ctx context.Context, req *UpdateAffiliateOperatorSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorSettingsResponse, err error)
 	UpdateAffiliateSubAccount(ctx context.Context, req *UpdateAffiliateSubAccountRequest, opts ...http.CallOption) (rsp *UpdateAffiliateSubAccountResponse, err error)
 	UpdateCampaign(ctx context.Context, req *UpdateCampaignRequest, opts ...http.CallOption) (rsp *v1.UpdateCampaignResponse, err error)
 	UpdateCommissionPlan(ctx context.Context, req *UpdateCommissionPlanRequest, opts ...http.CallOption) (rsp *v1.UpdateCommissionPlanResponse, err error)
+	// UpdateGlobalPostback Update an existing global postback configuration
 	UpdateGlobalPostback(ctx context.Context, req *UpdateGlobalPostbackRequest, opts ...http.CallOption) (rsp *v1.UpdateGlobalPostbackResponse, err error)
 	UpdateLandingTemplate(ctx context.Context, req *UpdateLandingTemplateRequest, opts ...http.CallOption) (rsp *v1.UpdateLandingTemplateResponse, err error)
 	UpdatePostback(ctx context.Context, req *UpdatePostbackRequest, opts ...http.CallOption) (rsp *v1.UpdatePostbackResponse, err error)
@@ -1443,6 +1457,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) CreateCommissionPlan(ctx context.Con
 	return &out, nil
 }
 
+// CreateGlobalPostback Create a new operator-level global postback configuration
 func (c *BackofficeAffiliateHTTPClientImpl) CreateGlobalPostback(ctx context.Context, in *CreateGlobalPostbackRequest, opts ...http.CallOption) (*v1.CreateGlobalPostbackResponse, error) {
 	var out v1.CreateGlobalPostbackResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/create"
@@ -1521,6 +1536,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) DeleteCommissionPlan(ctx context.Con
 	return &out, nil
 }
 
+// DeleteGlobalPostback Soft delete a global postback (sets hidden=true)
 func (c *BackofficeAffiliateHTTPClientImpl) DeleteGlobalPostback(ctx context.Context, in *DeleteGlobalPostbackRequest, opts ...http.CallOption) (*v1.DeleteGlobalPostbackResponse, error) {
 	var out v1.DeleteGlobalPostbackResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/delete"
@@ -1638,6 +1654,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) GetCommissionPlan(ctx context.Contex
 	return &out, nil
 }
 
+// GetGlobalPostback Get a single global postback by ID, including resolved whitelist names
 func (c *BackofficeAffiliateHTTPClientImpl) GetGlobalPostback(ctx context.Context, in *GetGlobalPostbackRequest, opts ...http.CallOption) (*v1.GetGlobalPostbackResponse, error) {
 	var out v1.GetGlobalPostbackResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/get"
@@ -1820,6 +1837,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListEvents(ctx context.Context, in *
 	return &out, nil
 }
 
+// ListGlobalPostbackLogs List global postback execution logs with optional filters (time range, action_type, success)
 func (c *BackofficeAffiliateHTTPClientImpl) ListGlobalPostbackLogs(ctx context.Context, in *ListGlobalPostbackLogsRequest, opts ...http.CallOption) (*v1.ListGlobalPostbackLogsResponse, error) {
 	var out v1.ListGlobalPostbackLogsResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/log/list"
@@ -1833,6 +1851,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) ListGlobalPostbackLogs(ctx context.C
 	return &out, nil
 }
 
+// ListGlobalPostbacks List global postbacks for a target operator with pagination and status counts
 func (c *BackofficeAffiliateHTTPClientImpl) ListGlobalPostbacks(ctx context.Context, in *ListGlobalPostbacksRequest, opts ...http.CallOption) (*v1.ListGlobalPostbacksResponse, error) {
 	var out v1.ListGlobalPostbacksResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/list"
@@ -1950,6 +1969,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) SetReferralPlan(ctx context.Context,
 	return &out, nil
 }
 
+// SimulateGlobalPostback Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
 func (c *BackofficeAffiliateHTTPClientImpl) SimulateGlobalPostback(ctx context.Context, in *SimulateGlobalPostbackRequest, opts ...http.CallOption) (*v1.SimulateGlobalPostbackResponse, error) {
 	var out v1.SimulateGlobalPostbackResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/simulate"
@@ -2028,6 +2048,7 @@ func (c *BackofficeAffiliateHTTPClientImpl) UpdateCommissionPlan(ctx context.Con
 	return &out, nil
 }
 
+// UpdateGlobalPostback Update an existing global postback configuration
 func (c *BackofficeAffiliateHTTPClientImpl) UpdateGlobalPostback(ctx context.Context, in *UpdateGlobalPostbackRequest, opts ...http.CallOption) (*v1.UpdateGlobalPostbackResponse, error) {
 	var out v1.UpdateGlobalPostbackResponse
 	pattern := "/v1/backoffice/affiliate/global-postback/update"

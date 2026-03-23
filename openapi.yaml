@@ -1100,6 +1100,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Create a new operator-level global postback configuration
             operationId: BackofficeAffiliate_CreateGlobalPostback
             requestBody:
                 content:
@@ -1118,6 +1119,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Soft delete a global postback (sets hidden=true)
             operationId: BackofficeAffiliate_DeleteGlobalPostback
             requestBody:
                 content:
@@ -1136,6 +1138,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Get a single global postback by ID, including resolved whitelist names
             operationId: BackofficeAffiliate_GetGlobalPostback
             requestBody:
                 content:
@@ -1154,6 +1157,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List global postbacks for a target operator with pagination and status counts
             operationId: BackofficeAffiliate_ListGlobalPostbacks
             requestBody:
                 content:
@@ -1172,6 +1176,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: List global postback execution logs with optional filters (time range, action_type, success)
             operationId: BackofficeAffiliate_ListGlobalPostbackLogs
             requestBody:
                 content:
@@ -1190,6 +1195,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Simulate a global postback by sending a test HTTP request. Does not require a saved postback; URL and macros are passed directly.
             operationId: BackofficeAffiliate_SimulateGlobalPostback
             requestBody:
                 content:
@@ -1208,6 +1214,7 @@ paths:
         post:
             tags:
                 - BackofficeAffiliate
+            description: Update an existing global postback configuration
             operationId: BackofficeAffiliate_UpdateGlobalPostback
             requestBody:
                 content:
@@ -14902,28 +14909,37 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 postbackName:
                     type: string
+                    description: Max 60 characters
                 status:
                     type: string
+                    description: '"active" or "inactive"'
                 actionType:
                     type: string
+                    description: '"register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"'
                 postbackUrl:
                     type: string
+                    description: URL template with macros, max 2000 chars, must start with http(s)://
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
                 postBody:
                     type: string
+                    description: POST body template with macros (only when method=POST, not URL-encoded)
                 trafficSources:
                     type: array
                     items:
                         type: string
+                    description: '"aff", "ref", "direct_reg" (empty = all)'
                 affiliateWhitelist:
                     type: array
                     items:
                         type: string
+                    description: Affiliate IDs to filter (empty = all). Only when traffic_sources contains "aff"
                 referralWhitelist:
                     type: array
                     items:
                         type: string
+                    description: Referrer user IDs to filter (empty = all). Only when traffic_sources contains "ref"
         api.backoffice.service.v1.CreateLandingTemplateRequest:
             type: object
             properties:
@@ -19576,8 +19592,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 startTime:
                     type: string
+                    description: Unix milliseconds
                 endTime:
                     type: string
+                    description: Unix milliseconds
                 page:
                     type: integer
                     format: int32
@@ -19586,6 +19604,7 @@ components:
                     format: int32
                 actionType:
                     type: string
+                    description: '"register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"'
                 success:
                     type: boolean
         api.backoffice.service.v1.ListGlobalPostbacksRequest:
@@ -19595,6 +19614,7 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 status:
                     type: string
+                    description: '"active" or "inactive" (empty = all)'
                 page:
                     type: integer
                     format: int32
@@ -23262,14 +23282,18 @@ components:
             properties:
                 postbackUrl:
                     type: string
+                    description: URL template (e.g. "https://example.com/cb?uid={user_id}")
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
                 postBody:
                     type: string
+                    description: POST body template (only when method=POST)
                 macroValues:
                     type: object
                     additionalProperties:
                         type: string
+                    description: 'Macro values without braces (e.g. {"user_id": "123"})'
         api.backoffice.service.v1.SubAccountResetPassword:
             type: object
             properties:
@@ -23659,28 +23683,37 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 postbackName:
                     type: string
+                    description: Max 60 characters
                 status:
                     type: string
+                    description: '"active" or "inactive"'
                 actionType:
                     type: string
+                    description: '"register", "deposit", "first_deposit", "withdrawal", "game_start", "game_bet"'
                 postbackUrl:
                     type: string
+                    description: URL template with macros, max 2000 chars
                 requestMethod:
                     type: string
+                    description: '"GET" or "POST"'
                 postBody:
                     type: string
+                    description: POST body template with macros (only when method=POST)
                 trafficSources:
                     type: array
                     items:
                         type: string
+                    description: '"aff", "ref", "direct_reg" (empty = all)'
                 affiliateWhitelist:
                     type: array
                     items:
                         type: string
+                    description: Affiliate IDs to filter (empty = all)
                 referralWhitelist:
                     type: array
                     items:
                         type: string
+                    description: Referrer user IDs to filter (empty = all)
         api.backoffice.service.v1.UpdateLandingTemplateRequest:
             type: object
             properties:
