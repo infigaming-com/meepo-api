@@ -2795,12 +2795,26 @@ func (x *GetBalanceSummaryRequest) GetOperatorContextFilters() *common.OperatorC
 }
 
 type GetBalanceSummaryResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Balance       string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	EstNetShare   string                 `protobuf:"bytes,2,opt,name=est_net_share,json=estNetShare,proto3" json:"est_net_share,omitempty"`
-	EstNetCost    string                 `protobuf:"bytes,3,opt,name=est_net_cost,json=estNetCost,proto3" json:"est_net_cost,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Company Balance card
+	CompanyBalance    string `protobuf:"bytes,1,opt,name=company_balance,json=companyBalance,proto3" json:"company_balance,omitempty"`
+	EstSettlementCost string `protobuf:"bytes,2,opt,name=est_settlement_cost,json=estSettlementCost,proto3" json:"est_settlement_cost,omitempty"`
+	EstRevenueShare   string `protobuf:"bytes,3,opt,name=est_revenue_share,json=estRevenueShare,proto3" json:"est_revenue_share,omitempty"`
+	AvailableForBills string `protobuf:"bytes,4,opt,name=available_for_bills,json=availableForBills,proto3" json:"available_for_bills,omitempty"`
+	UsageRate         string `protobuf:"bytes,5,opt,name=usage_rate,json=usageRate,proto3" json:"usage_rate,omitempty"`
+	// Custody Balance card
+	CustodyBalance            string `protobuf:"bytes,6,opt,name=custody_balance,json=custodyBalance,proto3" json:"custody_balance,omitempty"`
+	InternalDeposits          string `protobuf:"bytes,7,opt,name=internal_deposits,json=internalDeposits,proto3" json:"internal_deposits,omitempty"`
+	UserDeposits              string `protobuf:"bytes,8,opt,name=user_deposits,json=userDeposits,proto3" json:"user_deposits,omitempty"`
+	TotalDeposits             string `protobuf:"bytes,9,opt,name=total_deposits,json=totalDeposits,proto3" json:"total_deposits,omitempty"`
+	PlayerWithdrawals         string `protobuf:"bytes,10,opt,name=player_withdrawals,json=playerWithdrawals,proto3" json:"player_withdrawals,omitempty"`
+	CompanyWithdrawals        string `protobuf:"bytes,11,opt,name=company_withdrawals,json=companyWithdrawals,proto3" json:"company_withdrawals,omitempty"`
+	TransferAmount            string `protobuf:"bytes,12,opt,name=transfer_amount,json=transferAmount,proto3" json:"transfer_amount,omitempty"`
+	LockedOutstandingInvoices string `protobuf:"bytes,13,opt,name=locked_outstanding_invoices,json=lockedOutstandingInvoices,proto3" json:"locked_outstanding_invoices,omitempty"`
+	LockedLatePaymentFee      string `protobuf:"bytes,14,opt,name=locked_late_payment_fee,json=lockedLatePaymentFee,proto3" json:"locked_late_payment_fee,omitempty"`
+	MaxWithdrawable           string `protobuf:"bytes,15,opt,name=max_withdrawable,json=maxWithdrawable,proto3" json:"max_withdrawable,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetBalanceSummaryResponse) Reset() {
@@ -2833,23 +2847,107 @@ func (*GetBalanceSummaryResponse) Descriptor() ([]byte, []int) {
 	return file_operator_service_v1_operator_proto_rawDescGZIP(), []int{47}
 }
 
-func (x *GetBalanceSummaryResponse) GetBalance() string {
+func (x *GetBalanceSummaryResponse) GetCompanyBalance() string {
 	if x != nil {
-		return x.Balance
+		return x.CompanyBalance
 	}
 	return ""
 }
 
-func (x *GetBalanceSummaryResponse) GetEstNetShare() string {
+func (x *GetBalanceSummaryResponse) GetEstSettlementCost() string {
 	if x != nil {
-		return x.EstNetShare
+		return x.EstSettlementCost
 	}
 	return ""
 }
 
-func (x *GetBalanceSummaryResponse) GetEstNetCost() string {
+func (x *GetBalanceSummaryResponse) GetEstRevenueShare() string {
 	if x != nil {
-		return x.EstNetCost
+		return x.EstRevenueShare
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetAvailableForBills() string {
+	if x != nil {
+		return x.AvailableForBills
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetUsageRate() string {
+	if x != nil {
+		return x.UsageRate
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCustodyBalance() string {
+	if x != nil {
+		return x.CustodyBalance
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetInternalDeposits() string {
+	if x != nil {
+		return x.InternalDeposits
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetUserDeposits() string {
+	if x != nil {
+		return x.UserDeposits
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetTotalDeposits() string {
+	if x != nil {
+		return x.TotalDeposits
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetPlayerWithdrawals() string {
+	if x != nil {
+		return x.PlayerWithdrawals
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetCompanyWithdrawals() string {
+	if x != nil {
+		return x.CompanyWithdrawals
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetTransferAmount() string {
+	if x != nil {
+		return x.TransferAmount
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetLockedOutstandingInvoices() string {
+	if x != nil {
+		return x.LockedOutstandingInvoices
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetLockedLatePaymentFee() string {
+	if x != nil {
+		return x.LockedLatePaymentFee
+	}
+	return ""
+}
+
+func (x *GetBalanceSummaryResponse) GetMaxWithdrawable() string {
+	if x != nil {
+		return x.MaxWithdrawable
 	}
 	return ""
 }
@@ -5833,12 +5931,25 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x0ebilling_period\x18\x03 \x01(\tR\rbillingPeriod\"\xc0\x01\n" +
 	"\x18GetBalanceSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"{\n" +
-	"\x19GetBalanceSummaryResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\tR\abalance\x12\"\n" +
-	"\rest_net_share\x18\x02 \x01(\tR\vestNetShare\x12 \n" +
-	"\fest_net_cost\x18\x03 \x01(\tR\n" +
-	"estNetCost\"\xc1\x01\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xbc\x05\n" +
+	"\x19GetBalanceSummaryResponse\x12'\n" +
+	"\x0fcompany_balance\x18\x01 \x01(\tR\x0ecompanyBalance\x12.\n" +
+	"\x13est_settlement_cost\x18\x02 \x01(\tR\x11estSettlementCost\x12*\n" +
+	"\x11est_revenue_share\x18\x03 \x01(\tR\x0festRevenueShare\x12.\n" +
+	"\x13available_for_bills\x18\x04 \x01(\tR\x11availableForBills\x12\x1d\n" +
+	"\n" +
+	"usage_rate\x18\x05 \x01(\tR\tusageRate\x12'\n" +
+	"\x0fcustody_balance\x18\x06 \x01(\tR\x0ecustodyBalance\x12+\n" +
+	"\x11internal_deposits\x18\a \x01(\tR\x10internalDeposits\x12#\n" +
+	"\ruser_deposits\x18\b \x01(\tR\fuserDeposits\x12%\n" +
+	"\x0etotal_deposits\x18\t \x01(\tR\rtotalDeposits\x12-\n" +
+	"\x12player_withdrawals\x18\n" +
+	" \x01(\tR\x11playerWithdrawals\x12/\n" +
+	"\x13company_withdrawals\x18\v \x01(\tR\x12companyWithdrawals\x12'\n" +
+	"\x0ftransfer_amount\x18\f \x01(\tR\x0etransferAmount\x12>\n" +
+	"\x1blocked_outstanding_invoices\x18\r \x01(\tR\x19lockedOutstandingInvoices\x125\n" +
+	"\x17locked_late_payment_fee\x18\x0e \x01(\tR\x14lockedLatePaymentFee\x12)\n" +
+	"\x10max_withdrawable\x18\x0f \x01(\tR\x0fmaxWithdrawable\"\xc1\x01\n" +
 	"\x19GetBalancesSummaryRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xae\x03\n" +

@@ -5795,11 +5795,35 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Balance
+	// no validation rules for CompanyBalance
 
-	// no validation rules for EstNetShare
+	// no validation rules for EstSettlementCost
 
-	// no validation rules for EstNetCost
+	// no validation rules for EstRevenueShare
+
+	// no validation rules for AvailableForBills
+
+	// no validation rules for UsageRate
+
+	// no validation rules for CustodyBalance
+
+	// no validation rules for InternalDeposits
+
+	// no validation rules for UserDeposits
+
+	// no validation rules for TotalDeposits
+
+	// no validation rules for PlayerWithdrawals
+
+	// no validation rules for CompanyWithdrawals
+
+	// no validation rules for TransferAmount
+
+	// no validation rules for LockedOutstandingInvoices
+
+	// no validation rules for LockedLatePaymentFee
+
+	// no validation rules for MaxWithdrawable
 
 	if len(errors) > 0 {
 		return GetBalanceSummaryResponseMultiError(errors)

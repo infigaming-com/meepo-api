@@ -592,9 +592,24 @@ message GetBalanceSummaryRequest {
 }
 
 message GetBalanceSummaryResponse {
-	string balance = 1;
-	string est_net_share = 2;
-	string est_net_cost = 3;
+	// Company Balance card
+	string company_balance = 1;
+	string est_settlement_cost = 2;
+	string est_revenue_share = 3;
+	string available_for_bills = 4;
+	string usage_rate = 5;
+
+	// Custody Balance card
+	string custody_balance = 6;
+	string internal_deposits = 7;
+	string user_deposits = 8;
+	string total_deposits = 9;
+	string player_withdrawals = 10;
+	string company_withdrawals = 11;
+	string transfer_amount = 12;
+	string locked_outstanding_invoices = 13;
+	string locked_late_payment_fee = 14;
+	string max_withdrawable = 15;
 }
 
 message GetBalancesSummaryRequest {
