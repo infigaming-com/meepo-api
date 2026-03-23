@@ -223,17 +223,17 @@ type GameBetEvent struct {
 	SystemOperatorID                     int64          `json:"system_operator_id"`
 	RetailerOperatorID                   int64          `json:"retailer_operator_id"`
 	CompanyOperatorID                    int64          `json:"company_operator_id"`
-	GameTransactionIDs                   []int64          `json:"game_transaction_ids"`
-	RTP                                  string           `json:"rtp"`
-	UserName                             string           `json:"user_name"`
-	CashBetAmount                        string           `json:"cash_bet_amount,omitempty"`
-	CashBetAmountUsd                     string           `json:"cash_bet_amount_usd,omitempty"`
-	CashBetAmountSettlementCurrency      string           `json:"cash_bet_amount_settlement_currency,omitempty"`
-	CashBetAmountReportingCurrency       string           `json:"cash_bet_amount_reporting_currency,omitempty"`
-	BonusBetAmount                       string           `json:"bonus_bet_amount,omitempty"`
-	BonusBetAmountUsd                    string           `json:"bonus_bet_amount_usd,omitempty"`
-	BonusBetAmountSettlementCurrency     string           `json:"bonus_bet_amount_settlement_currency,omitempty"`
-	BonusBetAmountReportingCurrency      string           `json:"bonus_bet_amount_reporting_currency,omitempty"`
+	GameTransactionIDs                   []int64        `json:"game_transaction_ids"`
+	RTP                                  string         `json:"rtp"`
+	UserName                             string         `json:"user_name"`
+	CashBetAmount                        string         `json:"cash_bet_amount,omitempty"`
+	CashBetAmountUsd                     string         `json:"cash_bet_amount_usd,omitempty"`
+	CashBetAmountSettlementCurrency      string         `json:"cash_bet_amount_settlement_currency,omitempty"`
+	CashBetAmountReportingCurrency       string         `json:"cash_bet_amount_reporting_currency,omitempty"`
+	BonusBetAmount                       string         `json:"bonus_bet_amount,omitempty"`
+	BonusBetAmountUsd                    string         `json:"bonus_bet_amount_usd,omitempty"`
+	BonusBetAmountSettlementCurrency     string         `json:"bonus_bet_amount_settlement_currency,omitempty"`
+	BonusBetAmountReportingCurrency      string         `json:"bonus_bet_amount_reporting_currency,omitempty"`
 }
 
 type WebsocketOperatorBoardcastEvent struct {
@@ -329,6 +329,18 @@ type OperatorStatusUpdateEvent struct {
 
 const OperatorStatusUpdateTopic = "operator.status.update"
 
+// UserStatusUpdateEvent is published when a user's status fields change
+// (ban_login, ban_withdraw, ban_game, locked, kyc_level, etc.)
+type UserStatusUpdateEvent struct {
+	UserID    int64  `json:"user_id"`
+	Field     string `json:"field"`
+	OldValue  string `json:"old_value"`
+	NewValue  string `json:"new_value"`
+	UpdatedAt int64  `json:"updated_at"`
+}
+
+const UserStatusUpdateTopic = "user.status.update"
+
 // OperatorArchiveEvent is published when an operator is archived.
 // Downstream services should clean up their own operator-specific data.
 type OperatorArchiveEvent struct {
@@ -371,14 +383,14 @@ type RewardGrantedEvent struct {
 
 // FreeSpinGranted contains the granted free spin config and per-game reward details
 type FreeSpinGranted struct {
-	Currency                string                    `json:"currency"`                  // play currency
-	SettlementCurrency      string                    `json:"settlement_currency"`
-	RewardType              string                    `json:"reward_type"`               // "cash" or "bonus" (for winnings payout)
-	SpinCount               int32                     `json:"spin_count"`                // shared spin count for all games
-	WageringRequirement     int32                     `json:"wagering_requirement"`
-	MaxWithdrawalMultiplier string                    `json:"max_withdrawal_multiplier"`
-	RewardValidity          int64                     `json:"reward_validity"`           // winning reward validity (ms)
-	Rewards                 []FreeSpinGrantedReward   `json:"rewards"`
+	Currency                string                  `json:"currency"` // play currency
+	SettlementCurrency      string                  `json:"settlement_currency"`
+	RewardType              string                  `json:"reward_type"` // "cash" or "bonus" (for winnings payout)
+	SpinCount               int32                   `json:"spin_count"`  // shared spin count for all games
+	WageringRequirement     int32                   `json:"wagering_requirement"`
+	MaxWithdrawalMultiplier string                  `json:"max_withdrawal_multiplier"`
+	RewardValidity          int64                   `json:"reward_validity"` // winning reward validity (ms)
+	Rewards                 []FreeSpinGrantedReward `json:"rewards"`
 }
 
 // FreeSpinGrantedReward contains per-game free spin reward details
@@ -392,13 +404,13 @@ type FreeSpinGrantedReward struct {
 
 // FreeBetGranted contains the granted free bet config and per-template reward details
 type FreeBetGranted struct {
-	Currency                string                   `json:"currency"`             // settlement currency
-	SettlementCurrency      string                   `json:"settlement_currency"`
-	RewardType              string                   `json:"reward_type"`          // "cash" or "bonus" (for winnings payout)
-	WageringRequirement     int32                    `json:"wagering_requirement"`
-	MaxWithdrawalMultiplier string                   `json:"max_withdrawal_multiplier"`
-	RewardValidity          int64                    `json:"reward_validity"`      // winning reward validity (ms)
-	Rewards                 []FreeBetGrantedReward   `json:"rewards"`
+	Currency                string                 `json:"currency"` // settlement currency
+	SettlementCurrency      string                 `json:"settlement_currency"`
+	RewardType              string                 `json:"reward_type"` // "cash" or "bonus" (for winnings payout)
+	WageringRequirement     int32                  `json:"wagering_requirement"`
+	MaxWithdrawalMultiplier string                 `json:"max_withdrawal_multiplier"`
+	RewardValidity          int64                  `json:"reward_validity"` // winning reward validity (ms)
+	Rewards                 []FreeBetGrantedReward `json:"rewards"`
 }
 
 // FreeBetGrantedReward contains per-template free bet reward details
