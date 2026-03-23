@@ -1280,18 +1280,56 @@ message AffiliateSubAccountInfo {
 }
 
 // -------------- Global Postback --------------
+//
+// Operator-level postback that fires for all users under a site,
+// filtered by traffic source and optional whitelists.
+//
+// Status values:
+//   - "active"   : postback is enabled and will fire on matching events
+//   - "inactive" : postback is disabled
+//
+// Action type values (same as affiliate postback):
+//   - "register"      : user registration
+//   - "deposit"       : user deposit (2nd and subsequent)
+//   - "first_deposit" : user first deposit
+//   - "withdrawal"    : user withdrawal
+//   - "game_start"    : user starts a game session
+//   - "game_bet"      : user game bet settled
+//
+// Request method values:
+//   - "GET"  : HTTP GET request (macros replaced in URL)
+//   - "POST" : HTTP POST request (macros replaced in URL and post_body)
+//
+// Traffic source values:
+//   - "aff"        : affiliate users (users who registered via a campaign link)
+//   - "ref"        : referral users (users referred by another user, tier-1 only)
+//   - "direct_reg" : direct registration users (no affiliate or referral relationship)
+//   - empty array  : matches all traffic sources
+//
+// Available macro variables for postback_url and post_body:
+//   - {event_id}     : event identifier (transaction_id / bet_id / session_id)
+//   - {event_time}   : event timestamp in Unix milliseconds
+//   - {event_name}   : action type string (e.g. "register", "deposit")
+//   - {payout}       : amount (decimal string, empty for register/game_start)
+//   - {currency}     : currency code (empty for register)
+//   - {user_id}      : user ID
+//   - {email}        : user email
+//   - {affiliate_id} : affiliate ID (0 if user is not from an affiliate)
+//   - {referral_id}  : referrer user ID (0 if user is not from a referral)
+//
+// Note: macros in URL are URL-encoded; macros in post_body are raw (not encoded).
 
 message CreateGlobalPostbackRequest {
     api.common.OperatorContext target_operator_context = 1;
-    string postback_name = 2;
-    string status = 3;                     // active / inactive
-    string action_type = 4;                // register / deposit / first_deposit / withdrawal / game_start / game_bet
-    string postback_url = 5;               // URL template with macro variables
-    string request_method = 6;             // GET / POST
-    string post_body = 7;                  // POST body template with macro variables (POST only)
-    repeated string traffic_sources = 8;   // aff / ref / direct_reg (empty = all)
-    repeated int64 affiliate_whitelist = 9;
-    repeated int64 referral_whitelist = 10;
+    string postback_name = 2;              // max 60 characters
+    string status = 3;                     // "active" / "inactive"
+    string action_type = 4;                // "register" / "deposit" / "first_deposit" / "withdrawal" / "game_start" / "game_bet"
+    string postback_url = 5;               // URL template with macro variables, max 2000 characters, must start with http:// or https://
+    string request_method = 6;             // "GET" / "POST"
+    string post_body = 7;                  // POST body template with macro variables (only when request_method = "POST")
+    repeated string traffic_sources = 8;   // "aff" / "ref" / "direct_reg" (empty = all traffic sources)
+    repeated int64 affiliate_whitelist = 9; // affiliate user IDs to filter (empty = all affiliates). Only effective when traffic_sources contains "aff"
+    repeated int64 referral_whitelist = 10; // referrer user IDs to filter (empty = all referrers). Only effective when traffic_sources contains "ref". Users whose tier-1 referrer is in this list will trigger the postback
     int64 initiator_user_id = 11;
     api.common.OperatorContext initiator_operator_context = 12;
 }
@@ -1303,15 +1341,15 @@ message CreateGlobalPostbackResponse {
 message UpdateGlobalPostbackRequest {
     int64 global_postback_id = 1;
     api.common.OperatorContext target_operator_context = 2;
-    string postback_name = 3;
-    string status = 4;                     // active / inactive
-    string action_type = 5;                // register / deposit / first_deposit / withdrawal / game_start / game_bet
-    string postback_url = 6;               // URL template with macro variables
-    string request_method = 7;             // GET / POST
-    string post_body = 8;                  // POST body template with macro variables (POST only)
-    repeated string traffic_sources = 9;   // aff / ref / direct_reg (empty = all)
-    repeated int64 affiliate_whitelist = 10;
-    repeated int64 referral_whitelist = 11;
+    string postback_name = 3;              // max 60 characters
+    string status = 4;                     // "active" / "inactive"
+    string action_type = 5;                // "register" / "deposit" / "first_deposit" / "withdrawal" / "game_start" / "game_bet"
+    string postback_url = 6;               // URL template with macro variables, max 2000 characters
+    string request_method = 7;             // "GET" / "POST"
+    string post_body = 8;                  // POST body template with macro variables (only when request_method = "POST")
+    repeated string traffic_sources = 9;   // "aff" / "ref" / "direct_reg" (empty = all traffic sources)
+    repeated int64 affiliate_whitelist = 10; // affiliate user IDs (empty = all). Only effective when traffic_sources contains "aff"
+    repeated int64 referral_whitelist = 11;  // referrer user IDs (empty = all). Only effective when traffic_sources contains "ref"
     int64 initiator_user_id = 12;
     api.common.OperatorContext initiator_operator_context = 13;
 }
@@ -1357,7 +1395,7 @@ message GetGlobalPostbackResponse {
 
 message ListGlobalPostbacksRequest {
     api.common.OperatorContext target_operator_context = 1;
-    optional string status = 2;            // active / inactive
+    optional string status = 2;            // "active" / "inactive" (empty = all)
     optional int32 page = 3;
     optional int32 page_size = 4;
     int64 initiator_user_id = 5;
@@ -1438,10 +1476,10 @@ message ListGlobalPostbackLogsResponse {
 // -------------- Global Postback Simulate --------------
 
 message SimulateGlobalPostbackRequest {
-    string postback_url = 1;              // URL template with macro placeholders
-    string request_method = 2;            // GET or POST
-    string post_body = 3;                 // POST body template (POST only)
-    map<string, string> macro_values = 4; // Custom macro values for simulation
+    string postback_url = 1;              // URL template with macro placeholders (e.g. "https://example.com/cb?uid={user_id}")
+    string request_method = 2;            // "GET" / "POST"
+    string post_body = 3;                 // POST body template (only when request_method = "POST")
+    map<string, string> macro_values = 4; // Custom macro values for simulation (e.g. {"user_id": "123", "email": "test@example.com"})
     api.common.OperatorContext initiator_operator_context = 5;
 }
 
