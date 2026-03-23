@@ -6039,6 +6039,10 @@ func (m *GetBalanceSummaryResponse) validate(all bool) error {
 
 	// no validation rules for MaxWithdrawable
 
+	// no validation rules for PendingInvoices
+
+	// no validation rules for WithdrawDisabled
+
 	if len(errors) > 0 {
 		return GetBalanceSummaryResponseMultiError(errors)
 	}

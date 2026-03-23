@@ -623,6 +623,8 @@ message GetBalanceSummaryResponse {
 	string locked_outstanding_invoices = 13;
 	string locked_late_payment_fee = 14;
 	string max_withdrawable = 15;
+	string pending_invoices = 16;
+	bool withdraw_disabled = 17;
 }
 
 message GetBalancesSummaryRequest {
