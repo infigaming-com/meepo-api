@@ -1316,4 +1316,37 @@ service Payment {
 			get: "/v1/payment/crypto-bonus-preference/{currency}"
 		};
 	}
+
+	// Get payment channel fee summary
+	// Returns aggregated payment channel fees grouped by operator, PSP, payment method, currency, network, and type
+	rpc GetPaymentChannelFeeSummary(GetPaymentChannelFeeSummaryRequest) returns (GetPaymentChannelFeeSummaryResponse) { }
+}
+
+// Request to get aggregated payment channel fee summary
+message GetPaymentChannelFeeSummaryRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 start_time = 2;  // start time in milliseconds
+  int64 end_time = 3;    // end time in milliseconds
+}
+
+// Response containing aggregated payment channel fee data
+message GetPaymentChannelFeeSummaryResponse {
+  repeated PaymentChannelFeeItem items = 1;
+  string subtotal_usd = 2;  // total service fee in USD
+}
+
+// Single aggregated payment channel fee row
+message PaymentChannelFeeItem {
+  int64 operator_id = 1;
+  string operator_name = 2;
+  string psp = 3;
+  string payment_method = 4;
+  string currency = 5;
+  string network = 6;
+  string type = 7;  // payin or payout
+  int64 transaction_count = 8;
+  string total_amount = 9;
+  string service_fee = 10;
+  string fx_rate = 11;
+  string amount_usd = 12;
 }

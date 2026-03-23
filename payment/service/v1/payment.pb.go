@@ -6367,6 +6367,253 @@ func (x *GetCryptoBonusPreferenceResponse) GetSkipBonus() bool {
 	return false
 }
 
+// Request to get aggregated payment channel fee summary
+type GetPaymentChannelFeeSummaryRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	StartTime       int64                   `protobuf:"varint,2,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"` // start time in milliseconds
+	EndTime         int64                   `protobuf:"varint,3,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`       // end time in milliseconds
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetPaymentChannelFeeSummaryRequest) Reset() {
+	*x = GetPaymentChannelFeeSummaryRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[71]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPaymentChannelFeeSummaryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPaymentChannelFeeSummaryRequest) ProtoMessage() {}
+
+func (x *GetPaymentChannelFeeSummaryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[71]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPaymentChannelFeeSummaryRequest.ProtoReflect.Descriptor instead.
+func (*GetPaymentChannelFeeSummaryRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{71}
+}
+
+func (x *GetPaymentChannelFeeSummaryRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *GetPaymentChannelFeeSummaryRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *GetPaymentChannelFeeSummaryRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// Response containing aggregated payment channel fee data
+type GetPaymentChannelFeeSummaryResponse struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Items         []*PaymentChannelFeeItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	SubtotalUsd   string                   `protobuf:"bytes,2,opt,name=subtotal_usd,json=subtotalUsd,proto3" json:"subtotal_usd,omitempty"` // total service fee in USD
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPaymentChannelFeeSummaryResponse) Reset() {
+	*x = GetPaymentChannelFeeSummaryResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[72]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPaymentChannelFeeSummaryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPaymentChannelFeeSummaryResponse) ProtoMessage() {}
+
+func (x *GetPaymentChannelFeeSummaryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[72]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPaymentChannelFeeSummaryResponse.ProtoReflect.Descriptor instead.
+func (*GetPaymentChannelFeeSummaryResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *GetPaymentChannelFeeSummaryResponse) GetItems() []*PaymentChannelFeeItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *GetPaymentChannelFeeSummaryResponse) GetSubtotalUsd() string {
+	if x != nil {
+		return x.SubtotalUsd
+	}
+	return ""
+}
+
+// Single aggregated payment channel fee row
+type PaymentChannelFeeItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId       int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName     string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	Psp              string                 `protobuf:"bytes,3,opt,name=psp,proto3" json:"psp,omitempty"`
+	PaymentMethod    string                 `protobuf:"bytes,4,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	Currency         string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	Network          string                 `protobuf:"bytes,6,opt,name=network,proto3" json:"network,omitempty"`
+	Type             string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"` // payin or payout
+	TransactionCount int64                  `protobuf:"varint,8,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      string                 `protobuf:"bytes,9,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	ServiceFee       string                 `protobuf:"bytes,10,opt,name=service_fee,json=serviceFee,proto3" json:"service_fee,omitempty"`
+	FxRate           string                 `protobuf:"bytes,11,opt,name=fx_rate,json=fxRate,proto3" json:"fx_rate,omitempty"`
+	AmountUsd        string                 `protobuf:"bytes,12,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *PaymentChannelFeeItem) Reset() {
+	*x = PaymentChannelFeeItem{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[73]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PaymentChannelFeeItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PaymentChannelFeeItem) ProtoMessage() {}
+
+func (x *PaymentChannelFeeItem) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[73]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PaymentChannelFeeItem.ProtoReflect.Descriptor instead.
+func (*PaymentChannelFeeItem) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{73}
+}
+
+func (x *PaymentChannelFeeItem) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelFeeItem) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetPsp() string {
+	if x != nil {
+		return x.Psp
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetPaymentMethod() string {
+	if x != nil {
+		return x.PaymentMethod
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *PaymentChannelFeeItem) GetTotalAmount() string {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetServiceFee() string {
+	if x != nil {
+		return x.ServiceFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetFxRate() string {
+	if x != nil {
+		return x.FxRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelFeeItem) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
 type GetAddressResponse_Data struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Crypto like btc, eth...
@@ -6383,7 +6630,7 @@ type GetAddressResponse_Data struct {
 
 func (x *GetAddressResponse_Data) Reset() {
 	*x = GetAddressResponse_Data{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[71]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6395,7 +6642,7 @@ func (x *GetAddressResponse_Data) String() string {
 func (*GetAddressResponse_Data) ProtoMessage() {}
 
 func (x *GetAddressResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[71]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6455,7 +6702,7 @@ type GetOperatorAddressResponse_Data struct {
 
 func (x *GetOperatorAddressResponse_Data) Reset() {
 	*x = GetOperatorAddressResponse_Data{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[72]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6467,7 +6714,7 @@ func (x *GetOperatorAddressResponse_Data) String() string {
 func (*GetOperatorAddressResponse_Data) ProtoMessage() {}
 
 func (x *GetOperatorAddressResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[72]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6522,7 +6769,7 @@ type GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus struct {
 
 func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) Reset() {
 	*x = GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[73]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6534,7 +6781,7 @@ func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) String(
 func (*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) ProtoMessage() {}
 
 func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[73]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7168,7 +7415,32 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"A\n" +
 	" GetCryptoBonusPreferenceResponse\x12\x1d\n" +
 	"\n" +
-	"skip_bonus\x18\x01 \x01(\bR\tskipBonus*p\n" +
+	"skip_bonus\x18\x01 \x01(\bR\tskipBonus\"\xa6\x01\n" +
+	"\"GetPaymentChannelFeeSummaryRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x02 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\x03 \x01(\x03R\aendTime\"\x89\x01\n" +
+	"#GetPaymentChannelFeeSummaryResponse\x12?\n" +
+	"\x05items\x18\x01 \x03(\v2).payment.service.v1.PaymentChannelFeeItemR\x05items\x12!\n" +
+	"\fsubtotal_usd\x18\x02 \x01(\tR\vsubtotalUsd\"\x89\x03\n" +
+	"\x15PaymentChannelFeeItem\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x10\n" +
+	"\x03psp\x18\x03 \x01(\tR\x03psp\x12%\n" +
+	"\x0epayment_method\x18\x04 \x01(\tR\rpaymentMethod\x12\x1a\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x18\n" +
+	"\anetwork\x18\x06 \x01(\tR\anetwork\x12\x12\n" +
+	"\x04type\x18\a \x01(\tR\x04type\x12+\n" +
+	"\x11transaction_count\x18\b \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\t \x01(\tR\vtotalAmount\x12\x1f\n" +
+	"\vservice_fee\x18\n" +
+	" \x01(\tR\n" +
+	"serviceFee\x12\x17\n" +
+	"\afx_rate\x18\v \x01(\tR\x06fxRate\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\f \x01(\tR\tamountUsd*p\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18TRANSACTION_TYPE_DEPOSIT\x10\x01\x12\x1d\n" +
@@ -7184,7 +7456,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vChannelType\x12\x14\n" +
 	"\x10CHANNEL_TYPE_ALL\x10\x00\x12\x18\n" +
 	"\x14CHANNEL_TYPE_DEPOSIT\x10\x01\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\xbb(\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\xce)\n" +
 	"\aPayment\x12\x96\x01\n" +
 	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"\x00\x12x\n" +
 	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"\x00\x12{\n" +
@@ -7221,7 +7493,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x14ListSavedPaymentInfo\x12/.payment.service.v1.ListSavedPaymentInfoRequest\x1a0.payment.service.v1.ListSavedPaymentInfoResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/payment/saved-info\x12\xa4\x01\n" +
 	"\x16DeleteSavedPaymentInfo\x121.payment.service.v1.DeleteSavedPaymentInfoRequest\x1a2.payment.service.v1.DeleteSavedPaymentInfoResponse\"#\x82\xd3\xe4\x93\x02\x1d*\x1b/v1/payment/saved-info/{id}\x12\xb5\x01\n" +
 	"\x18SetCryptoBonusPreference\x123.payment.service.v1.SetCryptoBonusPreferenceRequest\x1a4.payment.service.v1.SetCryptoBonusPreferenceResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/payment/crypto-bonus-preference\x12\xbd\x01\n" +
-	"\x18GetCryptoBonusPreference\x123.payment.service.v1.GetCryptoBonusPreferenceRequest\x1a4.payment.service.v1.GetCryptoBonusPreferenceResponse\"6\x82\xd3\xe4\x93\x020\x12./v1/payment/crypto-bonus-preference/{currency}BU\n" +
+	"\x18GetCryptoBonusPreference\x123.payment.service.v1.GetCryptoBonusPreferenceRequest\x1a4.payment.service.v1.GetCryptoBonusPreferenceResponse\"6\x82\xd3\xe4\x93\x020\x12./v1/payment/crypto-bonus-preference/{currency}\x12\x90\x01\n" +
+	"\x1bGetPaymentChannelFeeSummary\x126.payment.service.v1.GetPaymentChannelFeeSummaryRequest\x1a7.payment.service.v1.GetPaymentChannelFeeSummaryResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (
@@ -7237,7 +7510,7 @@ func file_payment_service_v1_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_payment_service_v1_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_payment_service_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 74)
+var file_payment_service_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 77)
 var file_payment_service_v1_payment_proto_goTypes = []any{
 	(TransactionType)(0),   // 0: payment.service.v1.TransactionType
 	(TransactionStatus)(0), // 1: payment.service.v1.TransactionStatus
@@ -7314,161 +7587,168 @@ var file_payment_service_v1_payment_proto_goTypes = []any{
 	(*SetCryptoBonusPreferenceResponse)(nil),                               // 72: payment.service.v1.SetCryptoBonusPreferenceResponse
 	(*GetCryptoBonusPreferenceRequest)(nil),                                // 73: payment.service.v1.GetCryptoBonusPreferenceRequest
 	(*GetCryptoBonusPreferenceResponse)(nil),                               // 74: payment.service.v1.GetCryptoBonusPreferenceResponse
-	(*GetAddressResponse_Data)(nil),                                        // 75: payment.service.v1.GetAddressResponse.Data
-	(*GetOperatorAddressResponse_Data)(nil),                                // 76: payment.service.v1.GetOperatorAddressResponse.Data
-	(*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus)(nil), // 77: payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatus
-	(*common.OperatorContext)(nil),                                         // 78: api.common.OperatorContext
-	(*structpb.ListValue)(nil),                                             // 79: google.protobuf.ListValue
-	(*structpb.Struct)(nil),                                                // 80: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),                                          // 81: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),                                  // 82: api.common.OperatorContextFilters
+	(*GetPaymentChannelFeeSummaryRequest)(nil),                             // 75: payment.service.v1.GetPaymentChannelFeeSummaryRequest
+	(*GetPaymentChannelFeeSummaryResponse)(nil),                            // 76: payment.service.v1.GetPaymentChannelFeeSummaryResponse
+	(*PaymentChannelFeeItem)(nil),                                          // 77: payment.service.v1.PaymentChannelFeeItem
+	(*GetAddressResponse_Data)(nil),                                        // 78: payment.service.v1.GetAddressResponse.Data
+	(*GetOperatorAddressResponse_Data)(nil),                                // 79: payment.service.v1.GetOperatorAddressResponse.Data
+	(*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus)(nil), // 80: payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatus
+	(*common.OperatorContext)(nil),                                         // 81: api.common.OperatorContext
+	(*structpb.ListValue)(nil),                                             // 82: google.protobuf.ListValue
+	(*structpb.Struct)(nil),                                                // 83: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                                          // 84: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                                  // 85: api.common.OperatorContextFilters
 }
 var file_payment_service_v1_payment_proto_depIdxs = []int32{
-	78,  // 0: payment.service.v1.GetPaymentMethodListRequest.operator_context:type_name -> api.common.OperatorContext
-	79,  // 1: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.ListValue
+	81,  // 0: payment.service.v1.GetPaymentMethodListRequest.operator_context:type_name -> api.common.OperatorContext
+	82,  // 1: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.ListValue
 	6,   // 2: payment.service.v1.GetSupportedPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
 	6,   // 3: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
-	78,  // 4: payment.service.v1.CreatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
+	81,  // 4: payment.service.v1.CreatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
 	6,   // 5: payment.service.v1.CreatePaymentMethodResponse.payment_method:type_name -> payment.service.v1.PaymentMethodInfo
 	15,  // 6: payment.service.v1.UpdatePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentChannelInfo
-	78,  // 7: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
-	80,  // 8: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	80,  // 9: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	78,  // 10: payment.service.v1.UpdatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
-	78,  // 11: payment.service.v1.UpdatePaymentChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
-	79,  // 12: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.ListValue
-	80,  // 13: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
-	81,  // 14: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
-	80,  // 15: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
-	80,  // 16: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
-	75,  // 17: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
-	78,  // 18: payment.service.v1.GetOperatorAddressRequest.target_operator_context:type_name -> api.common.OperatorContext
-	80,  // 19: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
-	78,  // 20: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
-	76,  // 21: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
-	78,  // 22: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	80,  // 23: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	81,  // 24: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	78,  // 25: payment.service.v1.InitiateOperatorWithdrawRequest.target_operator_context:type_name -> api.common.OperatorContext
-	78,  // 26: payment.service.v1.InitiateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	80,  // 27: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	81,  // 28: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	81,  // 7: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
+	83,  // 8: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	83,  // 9: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	81,  // 10: payment.service.v1.UpdatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
+	81,  // 11: payment.service.v1.UpdatePaymentChannelRequest.target_operator_context:type_name -> api.common.OperatorContext
+	82,  // 12: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.ListValue
+	83,  // 13: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
+	84,  // 14: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
+	83,  // 15: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
+	83,  // 16: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
+	78,  // 17: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
+	81,  // 18: payment.service.v1.GetOperatorAddressRequest.target_operator_context:type_name -> api.common.OperatorContext
+	83,  // 19: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	81,  // 20: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
+	79,  // 21: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
+	81,  // 22: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	83,  // 23: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	84,  // 24: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	81,  // 25: payment.service.v1.InitiateOperatorWithdrawRequest.target_operator_context:type_name -> api.common.OperatorContext
+	81,  // 26: payment.service.v1.InitiateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	83,  // 27: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	84,  // 28: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
 	0,   // 29: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
 	1,   // 30: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
-	81,  // 31: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	81,  // 32: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
-	80,  // 33: payment.service.v1.TransactionInfo.payer:type_name -> google.protobuf.Struct
-	80,  // 34: payment.service.v1.TransactionInfo.payee:type_name -> google.protobuf.Struct
+	84,  // 31: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	84,  // 32: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
+	83,  // 33: payment.service.v1.TransactionInfo.payer:type_name -> google.protobuf.Struct
+	83,  // 34: payment.service.v1.TransactionInfo.payee:type_name -> google.protobuf.Struct
 	30,  // 35: payment.service.v1.TransactionDetail.transaction:type_name -> payment.service.v1.TransactionInfo
 	15,  // 36: payment.service.v1.TransactionDetail.channel:type_name -> payment.service.v1.PaymentChannelInfo
 	0,   // 37: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
 	1,   // 38: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
-	81,  // 39: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	81,  // 40: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	84,  // 39: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	84,  // 40: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
 	2,   // 41: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
-	82,  // 42: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	78,  // 43: payment.service.v1.GetTransactionPageRequest.operator_context:type_name -> api.common.OperatorContext
+	85,  // 42: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	81,  // 43: payment.service.v1.GetTransactionPageRequest.operator_context:type_name -> api.common.OperatorContext
 	30,  // 44: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
 	3,   // 45: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
 	2,   // 46: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
 	3,   // 47: payment.service.v1.GetOperatorPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
 	2,   // 48: payment.service.v1.GetOperatorPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
-	82,  // 49: payment.service.v1.GetOperatorPaymentChannelPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	78,  // 50: payment.service.v1.GetOperatorPaymentChannelPageRequest.operator_context:type_name -> api.common.OperatorContext
-	78,  // 51: payment.service.v1.GetOperatorPaymentChannelPageRequest.target_operator_context:type_name -> api.common.OperatorContext
+	85,  // 49: payment.service.v1.GetOperatorPaymentChannelPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	81,  // 50: payment.service.v1.GetOperatorPaymentChannelPageRequest.operator_context:type_name -> api.common.OperatorContext
+	81,  // 51: payment.service.v1.GetOperatorPaymentChannelPageRequest.target_operator_context:type_name -> api.common.OperatorContext
 	15,  // 52: payment.service.v1.GetPaymentChannelPageResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
 	31,  // 53: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
 	15,  // 54: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.PaymentChannelInfo
-	78,  // 55: payment.service.v1.UpdatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
-	80,  // 56: payment.service.v1.BankCard.card_detail:type_name -> google.protobuf.Struct
+	81,  // 55: payment.service.v1.UpdatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
+	83,  // 56: payment.service.v1.BankCard.card_detail:type_name -> google.protobuf.Struct
 	43,  // 57: payment.service.v1.GetBankCardListResponse.bank_card_lsit:type_name -> payment.service.v1.BankCard
-	80,  // 58: payment.service.v1.AddBankCardRequest.bank_card:type_name -> google.protobuf.Struct
-	80,  // 59: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
-	80,  // 60: payment.service.v1.GetBankAccountRequest.extra:type_name -> google.protobuf.Struct
-	79,  // 61: payment.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
+	83,  // 58: payment.service.v1.AddBankCardRequest.bank_card:type_name -> google.protobuf.Struct
+	83,  // 59: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
+	83,  // 60: payment.service.v1.GetBankAccountRequest.extra:type_name -> google.protobuf.Struct
+	82,  // 61: payment.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
 	57,  // 62: payment.service.v1.BuyCryptoViaFiatCurrentListResponse.currencies:type_name -> payment.service.v1.Currency
 	15,  // 63: payment.service.v1.BuyCryptoViaFiatCurrentListResponse.crypto:type_name -> payment.service.v1.PaymentChannelInfo
-	78,  // 64: payment.service.v1.GetResponsibleGamblingStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	77,  // 65: payment.service.v1.GetResponsibleGamblingStatusResponse.responsible_gambling_statuses:type_name -> payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatus
-	80,  // 66: payment.service.v1.SavedPaymentInfoItem.schema_data:type_name -> google.protobuf.Struct
-	81,  // 67: payment.service.v1.SavedPaymentInfoItem.created_at:type_name -> google.protobuf.Timestamp
-	81,  // 68: payment.service.v1.SavedPaymentInfoItem.updated_at:type_name -> google.protobuf.Timestamp
+	81,  // 64: payment.service.v1.GetResponsibleGamblingStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	80,  // 65: payment.service.v1.GetResponsibleGamblingStatusResponse.responsible_gambling_statuses:type_name -> payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatus
+	83,  // 66: payment.service.v1.SavedPaymentInfoItem.schema_data:type_name -> google.protobuf.Struct
+	84,  // 67: payment.service.v1.SavedPaymentInfoItem.created_at:type_name -> google.protobuf.Timestamp
+	84,  // 68: payment.service.v1.SavedPaymentInfoItem.updated_at:type_name -> google.protobuf.Timestamp
 	66,  // 69: payment.service.v1.ListSavedPaymentInfoResponse.items:type_name -> payment.service.v1.SavedPaymentInfoItem
-	4,   // 70: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
-	9,   // 71: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
-	5,   // 72: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
-	13,  // 73: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
-	12,  // 74: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
-	18,  // 75: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
-	16,  // 76: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
-	22,  // 77: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
-	26,  // 78: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	28,  // 79: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	20,  // 80: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
-	24,  // 81: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
-	26,  // 82: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	28,  // 83: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	32,  // 84: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	34,  // 85: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
-	37,  // 86: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
-	32,  // 87: payment.service.v1.Payment.GetOperatorTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	37,  // 88: payment.service.v1.Payment.GetOperatorTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
-	39,  // 89: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
-	41,  // 90: payment.service.v1.Payment.UpdatePaymentMethod:input_type -> payment.service.v1.UpdatePaymentMethodRequest
-	35,  // 91: payment.service.v1.Payment.GetOperatorPaymentChannelPage:input_type -> payment.service.v1.GetOperatorPaymentChannelPageRequest
-	44,  // 92: payment.service.v1.Payment.GetUserBankCardList:input_type -> payment.service.v1.GetBankCardListRequest
-	46,  // 93: payment.service.v1.Payment.AddUserBankCard:input_type -> payment.service.v1.AddBankCardRequest
-	48,  // 94: payment.service.v1.Payment.UpdateUserBankCard:input_type -> payment.service.v1.UpdateBankCardRequest
-	50,  // 95: payment.service.v1.Payment.DeleteUsesrBankCard:input_type -> payment.service.v1.DeleteBankCardRequest
-	54,  // 96: payment.service.v1.Payment.GetBankSchema:input_type -> payment.service.v1.GetBankSchemaRequest
-	58,  // 97: payment.service.v1.Payment.BuyCryptoViaFiatCurrentList:input_type -> payment.service.v1.BuyCryptoViaFiatCurrentListRequest
-	60,  // 98: payment.service.v1.Payment.BuyCryptoViaFiatPriceQuery:input_type -> payment.service.v1.BuyCryptoViaFiatPriceQueryRequest
-	62,  // 99: payment.service.v1.Payment.BuyCryptoViaFiat:input_type -> payment.service.v1.BuyCryptoViaFiatRequest
-	64,  // 100: payment.service.v1.Payment.GetResponsibleGamblingStatus:input_type -> payment.service.v1.GetResponsibleGamblingStatusRequest
-	67,  // 101: payment.service.v1.Payment.ListSavedPaymentInfo:input_type -> payment.service.v1.ListSavedPaymentInfoRequest
-	69,  // 102: payment.service.v1.Payment.DeleteSavedPaymentInfo:input_type -> payment.service.v1.DeleteSavedPaymentInfoRequest
-	71,  // 103: payment.service.v1.Payment.SetCryptoBonusPreference:input_type -> payment.service.v1.SetCryptoBonusPreferenceRequest
-	73,  // 104: payment.service.v1.Payment.GetCryptoBonusPreference:input_type -> payment.service.v1.GetCryptoBonusPreferenceRequest
-	7,   // 105: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
-	10,  // 106: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	8,   // 107: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	11,  // 108: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
-	14,  // 109: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	19,  // 110: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
-	17,  // 111: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
-	23,  // 112: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
-	27,  // 113: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	29,  // 114: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	21,  // 115: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
-	25,  // 116: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
-	27,  // 117: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	29,  // 118: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	33,  // 119: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	36,  // 120: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	38,  // 121: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
-	33,  // 122: payment.service.v1.Payment.GetOperatorTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	38,  // 123: payment.service.v1.Payment.GetOperatorTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
-	40,  // 124: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
-	10,  // 125: payment.service.v1.Payment.UpdatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	36,  // 126: payment.service.v1.Payment.GetOperatorPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	45,  // 127: payment.service.v1.Payment.GetUserBankCardList:output_type -> payment.service.v1.GetBankCardListResponse
-	47,  // 128: payment.service.v1.Payment.AddUserBankCard:output_type -> payment.service.v1.AddBankCardResponse
-	49,  // 129: payment.service.v1.Payment.UpdateUserBankCard:output_type -> payment.service.v1.UpdateBankCardResponse
-	51,  // 130: payment.service.v1.Payment.DeleteUsesrBankCard:output_type -> payment.service.v1.DeleteBankCardResponse
-	55,  // 131: payment.service.v1.Payment.GetBankSchema:output_type -> payment.service.v1.GetBankSchemaResponse
-	59,  // 132: payment.service.v1.Payment.BuyCryptoViaFiatCurrentList:output_type -> payment.service.v1.BuyCryptoViaFiatCurrentListResponse
-	61,  // 133: payment.service.v1.Payment.BuyCryptoViaFiatPriceQuery:output_type -> payment.service.v1.BuyCryptoViaFiatPriceQueryResponse
-	63,  // 134: payment.service.v1.Payment.BuyCryptoViaFiat:output_type -> payment.service.v1.BuyCryptoViaFiatResponse
-	65,  // 135: payment.service.v1.Payment.GetResponsibleGamblingStatus:output_type -> payment.service.v1.GetResponsibleGamblingStatusResponse
-	68,  // 136: payment.service.v1.Payment.ListSavedPaymentInfo:output_type -> payment.service.v1.ListSavedPaymentInfoResponse
-	70,  // 137: payment.service.v1.Payment.DeleteSavedPaymentInfo:output_type -> payment.service.v1.DeleteSavedPaymentInfoResponse
-	72,  // 138: payment.service.v1.Payment.SetCryptoBonusPreference:output_type -> payment.service.v1.SetCryptoBonusPreferenceResponse
-	74,  // 139: payment.service.v1.Payment.GetCryptoBonusPreference:output_type -> payment.service.v1.GetCryptoBonusPreferenceResponse
-	105, // [105:140] is the sub-list for method output_type
-	70,  // [70:105] is the sub-list for method input_type
-	70,  // [70:70] is the sub-list for extension type_name
-	70,  // [70:70] is the sub-list for extension extendee
-	0,   // [0:70] is the sub-list for field type_name
+	81,  // 70: payment.service.v1.GetPaymentChannelFeeSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	77,  // 71: payment.service.v1.GetPaymentChannelFeeSummaryResponse.items:type_name -> payment.service.v1.PaymentChannelFeeItem
+	4,   // 72: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
+	9,   // 73: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
+	5,   // 74: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
+	13,  // 75: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
+	12,  // 76: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
+	18,  // 77: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
+	16,  // 78: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
+	22,  // 79: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
+	26,  // 80: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	28,  // 81: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	20,  // 82: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
+	24,  // 83: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
+	26,  // 84: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	28,  // 85: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	32,  // 86: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	34,  // 87: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
+	37,  // 88: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	32,  // 89: payment.service.v1.Payment.GetOperatorTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	37,  // 90: payment.service.v1.Payment.GetOperatorTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	39,  // 91: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
+	41,  // 92: payment.service.v1.Payment.UpdatePaymentMethod:input_type -> payment.service.v1.UpdatePaymentMethodRequest
+	35,  // 93: payment.service.v1.Payment.GetOperatorPaymentChannelPage:input_type -> payment.service.v1.GetOperatorPaymentChannelPageRequest
+	44,  // 94: payment.service.v1.Payment.GetUserBankCardList:input_type -> payment.service.v1.GetBankCardListRequest
+	46,  // 95: payment.service.v1.Payment.AddUserBankCard:input_type -> payment.service.v1.AddBankCardRequest
+	48,  // 96: payment.service.v1.Payment.UpdateUserBankCard:input_type -> payment.service.v1.UpdateBankCardRequest
+	50,  // 97: payment.service.v1.Payment.DeleteUsesrBankCard:input_type -> payment.service.v1.DeleteBankCardRequest
+	54,  // 98: payment.service.v1.Payment.GetBankSchema:input_type -> payment.service.v1.GetBankSchemaRequest
+	58,  // 99: payment.service.v1.Payment.BuyCryptoViaFiatCurrentList:input_type -> payment.service.v1.BuyCryptoViaFiatCurrentListRequest
+	60,  // 100: payment.service.v1.Payment.BuyCryptoViaFiatPriceQuery:input_type -> payment.service.v1.BuyCryptoViaFiatPriceQueryRequest
+	62,  // 101: payment.service.v1.Payment.BuyCryptoViaFiat:input_type -> payment.service.v1.BuyCryptoViaFiatRequest
+	64,  // 102: payment.service.v1.Payment.GetResponsibleGamblingStatus:input_type -> payment.service.v1.GetResponsibleGamblingStatusRequest
+	67,  // 103: payment.service.v1.Payment.ListSavedPaymentInfo:input_type -> payment.service.v1.ListSavedPaymentInfoRequest
+	69,  // 104: payment.service.v1.Payment.DeleteSavedPaymentInfo:input_type -> payment.service.v1.DeleteSavedPaymentInfoRequest
+	71,  // 105: payment.service.v1.Payment.SetCryptoBonusPreference:input_type -> payment.service.v1.SetCryptoBonusPreferenceRequest
+	73,  // 106: payment.service.v1.Payment.GetCryptoBonusPreference:input_type -> payment.service.v1.GetCryptoBonusPreferenceRequest
+	75,  // 107: payment.service.v1.Payment.GetPaymentChannelFeeSummary:input_type -> payment.service.v1.GetPaymentChannelFeeSummaryRequest
+	7,   // 108: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
+	10,  // 109: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	8,   // 110: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	11,  // 111: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
+	14,  // 112: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	19,  // 113: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
+	17,  // 114: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
+	23,  // 115: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
+	27,  // 116: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	29,  // 117: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	21,  // 118: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
+	25,  // 119: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
+	27,  // 120: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	29,  // 121: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	33,  // 122: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	36,  // 123: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	38,  // 124: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	33,  // 125: payment.service.v1.Payment.GetOperatorTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	38,  // 126: payment.service.v1.Payment.GetOperatorTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	40,  // 127: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
+	10,  // 128: payment.service.v1.Payment.UpdatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	36,  // 129: payment.service.v1.Payment.GetOperatorPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	45,  // 130: payment.service.v1.Payment.GetUserBankCardList:output_type -> payment.service.v1.GetBankCardListResponse
+	47,  // 131: payment.service.v1.Payment.AddUserBankCard:output_type -> payment.service.v1.AddBankCardResponse
+	49,  // 132: payment.service.v1.Payment.UpdateUserBankCard:output_type -> payment.service.v1.UpdateBankCardResponse
+	51,  // 133: payment.service.v1.Payment.DeleteUsesrBankCard:output_type -> payment.service.v1.DeleteBankCardResponse
+	55,  // 134: payment.service.v1.Payment.GetBankSchema:output_type -> payment.service.v1.GetBankSchemaResponse
+	59,  // 135: payment.service.v1.Payment.BuyCryptoViaFiatCurrentList:output_type -> payment.service.v1.BuyCryptoViaFiatCurrentListResponse
+	61,  // 136: payment.service.v1.Payment.BuyCryptoViaFiatPriceQuery:output_type -> payment.service.v1.BuyCryptoViaFiatPriceQueryResponse
+	63,  // 137: payment.service.v1.Payment.BuyCryptoViaFiat:output_type -> payment.service.v1.BuyCryptoViaFiatResponse
+	65,  // 138: payment.service.v1.Payment.GetResponsibleGamblingStatus:output_type -> payment.service.v1.GetResponsibleGamblingStatusResponse
+	68,  // 139: payment.service.v1.Payment.ListSavedPaymentInfo:output_type -> payment.service.v1.ListSavedPaymentInfoResponse
+	70,  // 140: payment.service.v1.Payment.DeleteSavedPaymentInfo:output_type -> payment.service.v1.DeleteSavedPaymentInfoResponse
+	72,  // 141: payment.service.v1.Payment.SetCryptoBonusPreference:output_type -> payment.service.v1.SetCryptoBonusPreferenceResponse
+	74,  // 142: payment.service.v1.Payment.GetCryptoBonusPreference:output_type -> payment.service.v1.GetCryptoBonusPreferenceResponse
+	76,  // 143: payment.service.v1.Payment.GetPaymentChannelFeeSummary:output_type -> payment.service.v1.GetPaymentChannelFeeSummaryResponse
+	108, // [108:144] is the sub-list for method output_type
+	72,  // [72:108] is the sub-list for method input_type
+	72,  // [72:72] is the sub-list for extension type_name
+	72,  // [72:72] is the sub-list for extension extendee
+	0,   // [0:72] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_proto_init() }
@@ -7488,7 +7768,7 @@ func file_payment_service_v1_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_service_v1_payment_proto_rawDesc), len(file_payment_service_v1_payment_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   74,
+			NumMessages:   77,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

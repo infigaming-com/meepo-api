@@ -39,6 +39,7 @@ const (
 	Operator_CreateAdjustmentConfig_FullMethodName          = "/api.operator.service.v1.Operator/CreateAdjustmentConfig"
 	Operator_UpdateAdjustmentConfig_FullMethodName          = "/api.operator.service.v1.Operator/UpdateAdjustmentConfig"
 	Operator_DeleteAdjustmentConfig_FullMethodName          = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
+	Operator_UpdateAdjustment_FullMethodName                = "/api.operator.service.v1.Operator/UpdateAdjustment"
 	Operator_SendInvoices_FullMethodName                    = "/api.operator.service.v1.Operator/SendInvoices"
 	Operator_GetInvoiceSummary_FullMethodName               = "/api.operator.service.v1.Operator/GetInvoiceSummary"
 	Operator_GetBalanceSummary_FullMethodName               = "/api.operator.service.v1.Operator/GetBalanceSummary"
@@ -80,6 +81,7 @@ type OperatorClient interface {
 	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
+	UpdateAdjustment(ctx context.Context, in *UpdateAdjustmentRequest, opts ...grpc.CallOption) (*UpdateAdjustmentResponse, error)
 	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
@@ -302,6 +304,16 @@ func (c *operatorClient) DeleteAdjustmentConfig(ctx context.Context, in *DeleteA
 	return out, nil
 }
 
+func (c *operatorClient) UpdateAdjustment(ctx context.Context, in *UpdateAdjustmentRequest, opts ...grpc.CallOption) (*UpdateAdjustmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAdjustmentResponse)
+	err := c.cc.Invoke(ctx, Operator_UpdateAdjustment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *operatorClient) SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendInvoicesResponse)
@@ -431,6 +443,7 @@ type OperatorServer interface {
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
+	UpdateAdjustment(context.Context, *UpdateAdjustmentRequest) (*UpdateAdjustmentResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
 	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
@@ -512,6 +525,9 @@ func (UnimplementedOperatorServer) UpdateAdjustmentConfig(context.Context, *Upda
 }
 func (UnimplementedOperatorServer) DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAdjustmentConfig not implemented")
+}
+func (UnimplementedOperatorServer) UpdateAdjustment(context.Context, *UpdateAdjustmentRequest) (*UpdateAdjustmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAdjustment not implemented")
 }
 func (UnimplementedOperatorServer) SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendInvoices not implemented")
@@ -924,6 +940,24 @@ func _Operator_DeleteAdjustmentConfig_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_UpdateAdjustment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAdjustmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).UpdateAdjustment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_UpdateAdjustment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).UpdateAdjustment(ctx, req.(*UpdateAdjustmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Operator_SendInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendInvoicesRequest)
 	if err := dec(in); err != nil {
@@ -1190,6 +1224,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAdjustmentConfig",
 			Handler:    _Operator_DeleteAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "UpdateAdjustment",
+			Handler:    _Operator_UpdateAdjustment_Handler,
 		},
 		{
 			MethodName: "SendInvoices",

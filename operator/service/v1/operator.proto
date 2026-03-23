@@ -72,6 +72,9 @@ service Operator {
 	rpc DeleteAdjustmentConfig(DeleteAdjustmentConfigRequest) returns (DeleteAdjustmentConfigResponse) {
 	}
 
+	rpc UpdateAdjustment(UpdateAdjustmentRequest) returns (UpdateAdjustmentResponse) {
+	}
+
 	rpc SendInvoices(SendInvoicesRequest) returns (SendInvoicesResponse) {
 	}
 
@@ -474,9 +477,20 @@ message AddAdjustmentRequest {
 	string amount = 7; // Adjustment amount as string to preserve precision
 	string description = 8; // Description of the adjustment
 	string period_key = 9; // Period key
+	int64 created_by = 10; // Backoffice user ID of the creator
 }
 
 message AddAdjustmentResponse {
+}
+
+message UpdateAdjustmentRequest {
+	int64 id = 1;
+	string amount = 2;
+	string description = 3;
+	string currency = 4;
+}
+
+message UpdateAdjustmentResponse {
 }
 
 message ListAdjustmentConfigsRequest {
@@ -531,16 +545,15 @@ message ListAdjustmentsRequest {
 
 message ListAdjustmentsResponse {
 	message AdjustmentItem {
-		// Basic information
-		string item = 1; // Item type (e.g., "JP Provisions", "Correction", "Custom Fee")
+		string item = 1;
 		int64 operator_id = 2;
 		string operator_name = 3;
 		string currency = 4;
-		
-		// Amount information
-		string amount = 5; // Amount as string to preserve precision
-		string description = 6; // Description of the adjustment
+		string amount = 5;
+		string description = 6;
 		int64 id = 7;
+		int64 created_at = 8;
+		string created_by = 9; // creator display name
 	}
 	
 	repeated AdjustmentItem items = 1;
@@ -592,9 +605,26 @@ message GetBalanceSummaryRequest {
 }
 
 message GetBalanceSummaryResponse {
-	string balance = 1;
-	string est_net_share = 2;
-	string est_net_cost = 3;
+	// Company Balance card
+	string company_balance = 1;
+	string est_settlement_cost = 2;
+	string est_revenue_share = 3;
+	string available_for_bills = 4;
+	string usage_rate = 5;
+
+	// Custody Balance card
+	string custody_balance = 6;
+	string internal_deposits = 7;
+	string user_deposits = 8;
+	string total_deposits = 9;
+	string player_withdrawals = 10;
+	string company_withdrawals = 11;
+	string transfer_amount = 12;
+	string locked_outstanding_invoices = 13;
+	string locked_late_payment_fee = 14;
+	string max_withdrawable = 15;
+	string pending_invoices = 16;
+	bool withdraw_disabled = 17;
 }
 
 message GetBalancesSummaryRequest {

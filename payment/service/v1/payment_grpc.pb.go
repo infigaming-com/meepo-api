@@ -54,6 +54,7 @@ const (
 	Payment_DeleteSavedPaymentInfo_FullMethodName           = "/payment.service.v1.Payment/DeleteSavedPaymentInfo"
 	Payment_SetCryptoBonusPreference_FullMethodName         = "/payment.service.v1.Payment/SetCryptoBonusPreference"
 	Payment_GetCryptoBonusPreference_FullMethodName         = "/payment.service.v1.Payment/GetCryptoBonusPreference"
+	Payment_GetPaymentChannelFeeSummary_FullMethodName      = "/payment.service.v1.Payment/GetPaymentChannelFeeSummary"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -156,6 +157,9 @@ type PaymentClient interface {
 	// Get crypto bonus preference
 	// Retrieves the user's skip bonus preference for a specific crypto currency
 	GetCryptoBonusPreference(ctx context.Context, in *GetCryptoBonusPreferenceRequest, opts ...grpc.CallOption) (*GetCryptoBonusPreferenceResponse, error)
+	// Get payment channel fee summary
+	// Returns aggregated payment channel fees grouped by operator, PSP, payment method, currency, network, and type
+	GetPaymentChannelFeeSummary(ctx context.Context, in *GetPaymentChannelFeeSummaryRequest, opts ...grpc.CallOption) (*GetPaymentChannelFeeSummaryResponse, error)
 }
 
 type paymentClient struct {
@@ -516,6 +520,16 @@ func (c *paymentClient) GetCryptoBonusPreference(ctx context.Context, in *GetCry
 	return out, nil
 }
 
+func (c *paymentClient) GetPaymentChannelFeeSummary(ctx context.Context, in *GetPaymentChannelFeeSummaryRequest, opts ...grpc.CallOption) (*GetPaymentChannelFeeSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentChannelFeeSummaryResponse)
+	err := c.cc.Invoke(ctx, Payment_GetPaymentChannelFeeSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServer is the server API for Payment service.
 // All implementations must embed UnimplementedPaymentServer
 // for forward compatibility.
@@ -616,6 +630,9 @@ type PaymentServer interface {
 	// Get crypto bonus preference
 	// Retrieves the user's skip bonus preference for a specific crypto currency
 	GetCryptoBonusPreference(context.Context, *GetCryptoBonusPreferenceRequest) (*GetCryptoBonusPreferenceResponse, error)
+	// Get payment channel fee summary
+	// Returns aggregated payment channel fees grouped by operator, PSP, payment method, currency, network, and type
+	GetPaymentChannelFeeSummary(context.Context, *GetPaymentChannelFeeSummaryRequest) (*GetPaymentChannelFeeSummaryResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -730,6 +747,9 @@ func (UnimplementedPaymentServer) SetCryptoBonusPreference(context.Context, *Set
 }
 func (UnimplementedPaymentServer) GetCryptoBonusPreference(context.Context, *GetCryptoBonusPreferenceRequest) (*GetCryptoBonusPreferenceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCryptoBonusPreference not implemented")
+}
+func (UnimplementedPaymentServer) GetPaymentChannelFeeSummary(context.Context, *GetPaymentChannelFeeSummaryRequest) (*GetPaymentChannelFeeSummaryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPaymentChannelFeeSummary not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -1382,6 +1402,24 @@ func _Payment_GetCryptoBonusPreference_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetPaymentChannelFeeSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentChannelFeeSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetPaymentChannelFeeSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetPaymentChannelFeeSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetPaymentChannelFeeSummary(ctx, req.(*GetPaymentChannelFeeSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Payment_ServiceDesc is the grpc.ServiceDesc for Payment service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1528,6 +1566,10 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCryptoBonusPreference",
 			Handler:    _Payment_GetCryptoBonusPreference_Handler,
+		},
+		{
+			MethodName: "GetPaymentChannelFeeSummary",
+			Handler:    _Payment_GetPaymentChannelFeeSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
