@@ -3599,6 +3599,8 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for PeriodKey
 
+	// no validation rules for CreatedBy
+
 	if len(errors) > 0 {
 		return AddAdjustmentRequestMultiError(errors)
 	}
@@ -3780,6 +3782,218 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AddAdjustmentResponseValidationError{}
+
+// Validate checks the field values on UpdateAdjustmentRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAdjustmentRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAdjustmentRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAdjustmentRequestMultiError, or nil if none found.
+func (m *UpdateAdjustmentRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAdjustmentRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Amount
+
+	// no validation rules for Description
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return UpdateAdjustmentRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAdjustmentRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateAdjustmentRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAdjustmentRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAdjustmentRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAdjustmentRequestMultiError) AllErrors() []error { return m }
+
+// UpdateAdjustmentRequestValidationError is the validation error returned by
+// UpdateAdjustmentRequest.Validate if the designated constraints aren't met.
+type UpdateAdjustmentRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAdjustmentRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAdjustmentRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAdjustmentRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAdjustmentRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAdjustmentRequestValidationError) ErrorName() string {
+	return "UpdateAdjustmentRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAdjustmentRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAdjustmentRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAdjustmentRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAdjustmentRequestValidationError{}
+
+// Validate checks the field values on UpdateAdjustmentResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAdjustmentResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAdjustmentResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAdjustmentResponseMultiError, or nil if none found.
+func (m *UpdateAdjustmentResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAdjustmentResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateAdjustmentResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAdjustmentResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateAdjustmentResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAdjustmentResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAdjustmentResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAdjustmentResponseMultiError) AllErrors() []error { return m }
+
+// UpdateAdjustmentResponseValidationError is the validation error returned by
+// UpdateAdjustmentResponse.Validate if the designated constraints aren't met.
+type UpdateAdjustmentResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAdjustmentResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAdjustmentResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAdjustmentResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAdjustmentResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAdjustmentResponseValidationError) ErrorName() string {
+	return "UpdateAdjustmentResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAdjustmentResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAdjustmentResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAdjustmentResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAdjustmentResponseValidationError{}
 
 // Validate checks the field values on ListAdjustmentConfigsRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -8874,6 +9088,10 @@ func (m *ListAdjustmentsResponse_AdjustmentItem) validate(all bool) error {
 	// no validation rules for Description
 
 	// no validation rules for Id
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for CreatedBy
 
 	if len(errors) > 0 {
 		return ListAdjustmentsResponse_AdjustmentItemMultiError(errors)
