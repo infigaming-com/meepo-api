@@ -3625,6 +3625,8 @@ func (m *PlayRequest) validate(all bool) error {
 
 	// no validation rules for ProviderUserId
 
+	// no validation rules for ProviderRoundId
+
 	if len(errors) > 0 {
 		return PlayRequestMultiError(errors)
 	}

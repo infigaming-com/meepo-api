@@ -542,6 +542,7 @@ message PlayRequest {
 	int64 session_id = 7;
 	repeated Action actions = 8;
 	string provider_user_id = 9;
+	string provider_round_id = 10;
 }
 
 message PlayResponse {
