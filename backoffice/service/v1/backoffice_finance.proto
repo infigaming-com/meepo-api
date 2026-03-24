@@ -191,6 +191,7 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
 }
 
 message ListInvoicesRequest {
@@ -642,6 +643,8 @@ message BalancesSummaryRow {
 	string est_costs = 11;
 	string est_rs_disburse = 12;
 	string locked_for_pending_invoices = 13;
+	int64 operator_id = 14;
+	string operator_name = 15;
 }
 
 message ListBillingPeriodsRequest {

@@ -6483,6 +6483,10 @@ func (m *BalancesSummaryRow) validate(all bool) error {
 
 	// no validation rules for LockedForPendingInvoices
 
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
 	if len(errors) > 0 {
 		return BalancesSummaryRowMultiError(errors)
 	}
@@ -6562,6 +6566,410 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BalancesSummaryRowValidationError{}
+
+// Validate checks the field values on ListCustodyOverviewRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCustodyOverviewRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCustodyOverviewRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCustodyOverviewRequestMultiError, or nil if none found.
+func (m *ListCustodyOverviewRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCustodyOverviewRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCustodyOverviewRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCustodyOverviewRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCustodyOverviewRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListCustodyOverviewRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCustodyOverviewRequestMultiError is an error wrapping multiple
+// validation errors returned by ListCustodyOverviewRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListCustodyOverviewRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCustodyOverviewRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCustodyOverviewRequestMultiError) AllErrors() []error { return m }
+
+// ListCustodyOverviewRequestValidationError is the validation error returned
+// by ListCustodyOverviewRequest.Validate if the designated constraints aren't met.
+type ListCustodyOverviewRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCustodyOverviewRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCustodyOverviewRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCustodyOverviewRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCustodyOverviewRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCustodyOverviewRequestValidationError) ErrorName() string {
+	return "ListCustodyOverviewRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCustodyOverviewRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCustodyOverviewRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCustodyOverviewRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCustodyOverviewRequestValidationError{}
+
+// Validate checks the field values on ListCustodyOverviewResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCustodyOverviewResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCustodyOverviewResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCustodyOverviewResponseMultiError, or nil if none found.
+func (m *ListCustodyOverviewResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCustodyOverviewResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRows() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCustodyOverviewResponseValidationError{
+						field:  fmt.Sprintf("Rows[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCustodyOverviewResponseValidationError{
+						field:  fmt.Sprintf("Rows[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCustodyOverviewResponseValidationError{
+					field:  fmt.Sprintf("Rows[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListCustodyOverviewResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCustodyOverviewResponseMultiError is an error wrapping multiple
+// validation errors returned by ListCustodyOverviewResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListCustodyOverviewResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCustodyOverviewResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCustodyOverviewResponseMultiError) AllErrors() []error { return m }
+
+// ListCustodyOverviewResponseValidationError is the validation error returned
+// by ListCustodyOverviewResponse.Validate if the designated constraints
+// aren't met.
+type ListCustodyOverviewResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCustodyOverviewResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCustodyOverviewResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCustodyOverviewResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCustodyOverviewResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCustodyOverviewResponseValidationError) ErrorName() string {
+	return "ListCustodyOverviewResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCustodyOverviewResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCustodyOverviewResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCustodyOverviewResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCustodyOverviewResponseValidationError{}
+
+// Validate checks the field values on CustodyOverviewRow with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustodyOverviewRow) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustodyOverviewRow with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustodyOverviewRowMultiError, or nil if none found.
+func (m *CustodyOverviewRow) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustodyOverviewRow) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RetailerName
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for CompanyName
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for OperatorType
+
+	// no validation rules for EstCost
+
+	// no validation rules for EstRsToSys
+
+	// no validation rules for LockedForPendingInvoice
+
+	if len(errors) > 0 {
+		return CustodyOverviewRowMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustodyOverviewRowMultiError is an error wrapping multiple validation errors
+// returned by CustodyOverviewRow.ValidateAll() if the designated constraints
+// aren't met.
+type CustodyOverviewRowMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustodyOverviewRowMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustodyOverviewRowMultiError) AllErrors() []error { return m }
+
+// CustodyOverviewRowValidationError is the validation error returned by
+// CustodyOverviewRow.Validate if the designated constraints aren't met.
+type CustodyOverviewRowValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustodyOverviewRowValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustodyOverviewRowValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustodyOverviewRowValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustodyOverviewRowValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustodyOverviewRowValidationError) ErrorName() string {
+	return "CustodyOverviewRowValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustodyOverviewRowValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustodyOverviewRow.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustodyOverviewRowValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustodyOverviewRowValidationError{}
 
 // Validate checks the field values on ListBillingPeriodsRequest with the rules
 // defined in the proto definition for this message. If any rules are
