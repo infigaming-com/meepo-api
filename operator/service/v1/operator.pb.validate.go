@@ -6483,6 +6483,10 @@ func (m *BalancesSummaryRow) validate(all bool) error {
 
 	// no validation rules for LockedForPendingInvoices
 
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
 	if len(errors) > 0 {
 		return BalancesSummaryRowMultiError(errors)
 	}

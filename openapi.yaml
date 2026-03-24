@@ -3353,6 +3353,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListAdjustmentsResponse'
+    /v1/backoffice/finance/adjustments/update:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_UpdateAdjustment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAdjustmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAdjustmentResponse'
     /v1/backoffice/finance/balance/monthly-revenue-shares/list:
         post:
             tags:
@@ -14564,6 +14582,39 @@ components:
         api.backoffice.service.v1.BackofficeUpdateGameTagResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.BalancesSummaryRow:
+            type: object
+            properties:
+                retailerOperatorId:
+                    type: string
+                retailerName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyName:
+                    type: string
+                operatorType:
+                    type: string
+                balance:
+                    type: string
+                deposits:
+                    type: string
+                transferIn:
+                    type: string
+                withdrawals:
+                    type: string
+                invoicePayment:
+                    type: string
+                estCosts:
+                    type: string
+                estRsDisburse:
+                    type: string
+                lockedForPendingInvoices:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
@@ -16636,12 +16687,42 @@ components:
         api.backoffice.service.v1.GetBalanceSummaryResponse:
             type: object
             properties:
-                balance:
+                companyBalance:
                     type: string
-                estNetShare:
+                    description: Company Balance card
+                estSettlementCost:
                     type: string
-                estNetCost:
+                estRevenueShare:
                     type: string
+                availableForBills:
+                    type: string
+                usageRate:
+                    type: string
+                custodyBalance:
+                    type: string
+                    description: Custody Balance card
+                internalDeposits:
+                    type: string
+                userDeposits:
+                    type: string
+                totalDeposits:
+                    type: string
+                playerWithdrawals:
+                    type: string
+                companyWithdrawals:
+                    type: string
+                transferAmount:
+                    type: string
+                lockedOutstandingInvoices:
+                    type: string
+                lockedLatePaymentFee:
+                    type: string
+                maxWithdrawable:
+                    type: string
+                pendingInvoices:
+                    type: string
+                withdrawDisabled:
+                    type: boolean
         api.backoffice.service.v1.GetBalancesSummaryRequest:
             type: object
             properties:
@@ -16650,28 +16731,31 @@ components:
         api.backoffice.service.v1.GetBalancesSummaryResponse:
             type: object
             properties:
-                deposits:
+                companyDeposits:
                     type: string
-                withdrawals:
+                    description: Summary cards
+                custodyTransferIn:
                     type: string
-                balance:
+                companyWithdrawals:
                     type: string
-                ngr:
+                invoicePayments:
                     type: string
-                gameProviderRs:
+                estCosts:
                     type: string
-                thirdPartyFees:
-                    type: string
-                adjustments:
-                    type: string
-                estNetProfit:
-                    type: string
-                revenueShareSystem:
-                    type: string
-                revenueShareOperator:
-                    type: string
-                estNetCosts:
-                    type: string
+                rows:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.BalancesSummaryRow'
+                    description: Per-company rows
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetBetByIdRequest:
             type: object
             properties:
@@ -18398,6 +18482,10 @@ components:
                 description:
                     type: string
                 id:
+                    type: string
+                createdAt:
+                    type: string
+                createdBy:
                     type: string
         api.backoffice.service.v1.ListAffiliateBillsRequest:
             type: object
@@ -23658,6 +23746,20 @@ components:
                 enabled:
                     type: boolean
         api.backoffice.service.v1.UpdateAdjustmentConfigResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UpdateAdjustmentRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                amount:
+                    type: string
+                description:
+                    type: string
+                currency:
+                    type: string
+        api.backoffice.service.v1.UpdateAdjustmentResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateAffiliateOperatorSettingsRequest:

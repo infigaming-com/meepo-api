@@ -3257,6 +3257,8 @@ type BalancesSummaryRow struct {
 	EstCosts                 string                 `protobuf:"bytes,11,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`
 	EstRsDisburse            string                 `protobuf:"bytes,12,opt,name=est_rs_disburse,json=estRsDisburse,proto3" json:"est_rs_disburse,omitempty"`
 	LockedForPendingInvoices string                 `protobuf:"bytes,13,opt,name=locked_for_pending_invoices,json=lockedForPendingInvoices,proto3" json:"locked_for_pending_invoices,omitempty"`
+	OperatorId               int64                  `protobuf:"varint,14,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName             string                 `protobuf:"bytes,15,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -3378,6 +3380,20 @@ func (x *BalancesSummaryRow) GetEstRsDisburse() string {
 func (x *BalancesSummaryRow) GetLockedForPendingInvoices() string {
 	if x != nil {
 		return x.LockedForPendingInvoices
+	}
+	return ""
+}
+
+func (x *BalancesSummaryRow) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *BalancesSummaryRow) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
 	}
 	return ""
 }
@@ -6246,7 +6262,7 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\vtotal_count\x18\a \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\b \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\x89\x04\n" +
+	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\xcf\x04\n" +
 	"\x12BalancesSummaryRow\x120\n" +
 	"\x14retailer_operator_id\x18\x01 \x01(\x03R\x12retailerOperatorId\x12#\n" +
 	"\rretailer_name\x18\x02 \x01(\tR\fretailerName\x12.\n" +
@@ -6262,7 +6278,10 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	" \x01(\tR\x0einvoicePayment\x12\x1b\n" +
 	"\test_costs\x18\v \x01(\tR\bestCosts\x12&\n" +
 	"\x0fest_rs_disburse\x18\f \x01(\tR\restRsDisburse\x12=\n" +
-	"\x1blocked_for_pending_invoices\x18\r \x01(\tR\x18lockedForPendingInvoices\"\x95\x01\n" +
+	"\x1blocked_for_pending_invoices\x18\r \x01(\tR\x18lockedForPendingInvoices\x12\x1f\n" +
+	"\voperator_id\x18\x0e \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x0f \x01(\tR\foperatorName\"\x95\x01\n" +
 	"\x19ListBillingPeriodsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
