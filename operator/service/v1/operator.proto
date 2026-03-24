@@ -633,17 +633,34 @@ message GetBalancesSummaryRequest {
 }
 
 message GetBalancesSummaryResponse {
-	string deposits = 1;
-	string withdrawals = 2;
-	string balance = 3;
-	string ngr = 4;
-	string game_provider_rs = 5;
-	string third_party_fees = 6;
-	string adjustments = 7;
-	string est_net_profit = 8;
-	string revenue_share_system = 9;
-	string revenue_share_operator = 10;
-	string est_net_costs = 11;
+	// Summary cards
+	string company_deposits = 1;
+	string custody_transfer_in = 2;
+	string company_withdrawals = 3;
+	string invoice_payments = 4;
+	string est_costs = 5;
+
+	// Per-company rows
+	repeated BalancesSummaryRow rows = 6;
+	int32 total_count = 7;
+	int32 page = 8;
+	int32 page_size = 9;
+}
+
+message BalancesSummaryRow {
+	int64 retailer_operator_id = 1;
+	string retailer_name = 2;
+	int64 company_operator_id = 3;
+	string company_name = 4;
+	string operator_type = 5;
+	string balance = 6;
+	string deposits = 7;
+	string transfer_in = 8;
+	string withdrawals = 9;
+	string invoice_payment = 10;
+	string est_costs = 11;
+	string est_rs_disburse = 12;
+	string locked_for_pending_invoices = 13;
 }
 
 message ListBillingPeriodsRequest {
