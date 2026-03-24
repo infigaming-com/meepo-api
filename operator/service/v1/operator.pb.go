@@ -3399,13 +3399,12 @@ func (x *BalancesSummaryRow) GetOperatorName() string {
 }
 
 type ListCustodyOverviewRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Page            *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListCustodyOverviewRequest) Reset() {
@@ -3441,13 +3440,6 @@ func (*ListCustodyOverviewRequest) Descriptor() ([]byte, []int) {
 func (x *ListCustodyOverviewRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
-	}
-	return nil
-}
-
-func (x *ListCustodyOverviewRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -6533,12 +6525,11 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x1blocked_for_pending_invoices\x18\r \x01(\tR\x18lockedForPendingInvoices\x12\x1f\n" +
 	"\voperator_id\x18\x0e \x01(\x03R\n" +
 	"operatorId\x12#\n" +
-	"\roperator_name\x18\x0f \x01(\tR\foperatorName\"\x94\x02\n" +
+	"\roperator_name\x18\x0f \x01(\tR\foperatorName\"\xb6\x01\n" +
 	"\x1aListCustodyOverviewRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
-	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
+	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xb0\x01\n" +
@@ -6863,89 +6854,88 @@ var file_operator_service_v1_operator_proto_depIdxs = []int32{
 	85, // 25: api.operator.service.v1.GetBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	56, // 26: api.operator.service.v1.GetBalancesSummaryResponse.rows:type_name -> api.operator.service.v1.BalancesSummaryRow
 	86, // 27: api.operator.service.v1.ListCustodyOverviewRequest.operator_context:type_name -> api.common.OperatorContext
-	85, // 28: api.operator.service.v1.ListCustodyOverviewRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	59, // 29: api.operator.service.v1.ListCustodyOverviewResponse.rows:type_name -> api.operator.service.v1.CustodyOverviewRow
-	81, // 30: api.operator.service.v1.ListBillingPeriodsResponse.billing_periods:type_name -> api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriod
-	85, // 31: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	86, // 32: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
-	3,  // 33: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.type:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.Type
-	82, // 34: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.items:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
-	85, // 35: api.operator.service.v1.ListBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	86, // 36: api.operator.service.v1.ListBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
-	83, // 37: api.operator.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
-	86, // 38: api.operator.service.v1.RecalculateDailyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
-	84, // 39: api.operator.service.v1.ListRevenueShareRateConfigsResponse.configs:type_name -> api.operator.service.v1.ListRevenueShareRateConfigsResponse.RevenueShareRateConfig
-	1,  // 40: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
-	2,  // 41: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
-	4,  // 42: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
-	6,  // 43: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
-	8,  // 44: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
-	10, // 45: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
-	12, // 46: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
-	14, // 47: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
-	16, // 48: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
-	18, // 49: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
-	20, // 50: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
-	22, // 51: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
-	24, // 52: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
-	26, // 53: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
-	28, // 54: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
-	42, // 55: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
-	30, // 56: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
-	32, // 57: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
-	36, // 58: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
-	44, // 59: api.operator.service.v1.Operator.CreateAdjustmentConfig:input_type -> api.operator.service.v1.CreateAdjustmentConfigRequest
-	38, // 60: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
-	40, // 61: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
-	34, // 62: api.operator.service.v1.Operator.UpdateAdjustment:input_type -> api.operator.service.v1.UpdateAdjustmentRequest
-	48, // 63: api.operator.service.v1.Operator.SendInvoices:input_type -> api.operator.service.v1.SendInvoicesRequest
-	50, // 64: api.operator.service.v1.Operator.GetInvoiceSummary:input_type -> api.operator.service.v1.GetInvoiceSummaryRequest
-	52, // 65: api.operator.service.v1.Operator.GetBalanceSummary:input_type -> api.operator.service.v1.GetBalanceSummaryRequest
-	54, // 66: api.operator.service.v1.Operator.GetBalancesSummary:input_type -> api.operator.service.v1.GetBalancesSummaryRequest
-	60, // 67: api.operator.service.v1.Operator.ListBillingPeriods:input_type -> api.operator.service.v1.ListBillingPeriodsRequest
-	62, // 68: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:input_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest
-	64, // 69: api.operator.service.v1.Operator.ListBalancesSummary:input_type -> api.operator.service.v1.ListBalancesSummaryRequest
-	66, // 70: api.operator.service.v1.Operator.RecalculateDailyRevenueShares:input_type -> api.operator.service.v1.RecalculateDailyRevenueSharesRequest
-	46, // 71: api.operator.service.v1.Operator.DeleteAdjustment:input_type -> api.operator.service.v1.DeleteAdjustmentRequest
-	68, // 72: api.operator.service.v1.Operator.ListRevenueShareRateConfigs:input_type -> api.operator.service.v1.ListRevenueShareRateConfigsRequest
-	57, // 73: api.operator.service.v1.Operator.ListCustodyOverview:input_type -> api.operator.service.v1.ListCustodyOverviewRequest
-	5,  // 74: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
-	7,  // 75: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
-	9,  // 76: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
-	11, // 77: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
-	13, // 78: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
-	15, // 79: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
-	17, // 80: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
-	19, // 81: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
-	21, // 82: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
-	23, // 83: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
-	25, // 84: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
-	27, // 85: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
-	29, // 86: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
-	43, // 87: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
-	31, // 88: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
-	33, // 89: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
-	37, // 90: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
-	45, // 91: api.operator.service.v1.Operator.CreateAdjustmentConfig:output_type -> api.operator.service.v1.CreateAdjustmentConfigResponse
-	39, // 92: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
-	41, // 93: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
-	35, // 94: api.operator.service.v1.Operator.UpdateAdjustment:output_type -> api.operator.service.v1.UpdateAdjustmentResponse
-	49, // 95: api.operator.service.v1.Operator.SendInvoices:output_type -> api.operator.service.v1.SendInvoicesResponse
-	51, // 96: api.operator.service.v1.Operator.GetInvoiceSummary:output_type -> api.operator.service.v1.GetInvoiceSummaryResponse
-	53, // 97: api.operator.service.v1.Operator.GetBalanceSummary:output_type -> api.operator.service.v1.GetBalanceSummaryResponse
-	55, // 98: api.operator.service.v1.Operator.GetBalancesSummary:output_type -> api.operator.service.v1.GetBalancesSummaryResponse
-	61, // 99: api.operator.service.v1.Operator.ListBillingPeriods:output_type -> api.operator.service.v1.ListBillingPeriodsResponse
-	63, // 100: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:output_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse
-	65, // 101: api.operator.service.v1.Operator.ListBalancesSummary:output_type -> api.operator.service.v1.ListBalancesSummaryResponse
-	67, // 102: api.operator.service.v1.Operator.RecalculateDailyRevenueShares:output_type -> api.operator.service.v1.RecalculateDailyRevenueSharesResponse
-	47, // 103: api.operator.service.v1.Operator.DeleteAdjustment:output_type -> api.operator.service.v1.DeleteAdjustmentResponse
-	69, // 104: api.operator.service.v1.Operator.ListRevenueShareRateConfigs:output_type -> api.operator.service.v1.ListRevenueShareRateConfigsResponse
-	58, // 105: api.operator.service.v1.Operator.ListCustodyOverview:output_type -> api.operator.service.v1.ListCustodyOverviewResponse
-	74, // [74:106] is the sub-list for method output_type
-	42, // [42:74] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	59, // 28: api.operator.service.v1.ListCustodyOverviewResponse.rows:type_name -> api.operator.service.v1.CustodyOverviewRow
+	81, // 29: api.operator.service.v1.ListBillingPeriodsResponse.billing_periods:type_name -> api.operator.service.v1.ListBillingPeriodsResponse.BillingPeriod
+	85, // 30: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	86, // 31: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
+	3,  // 32: api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.type:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest.Type
+	82, // 33: api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.items:type_name -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItem
+	85, // 34: api.operator.service.v1.ListBalancesSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	86, // 35: api.operator.service.v1.ListBalancesSummaryRequest.operator_context:type_name -> api.common.OperatorContext
+	83, // 36: api.operator.service.v1.ListBalancesSummaryResponse.balances:type_name -> api.operator.service.v1.ListBalancesSummaryResponse.BalanceSummary
+	86, // 37: api.operator.service.v1.RecalculateDailyRevenueSharesRequest.operator_context:type_name -> api.common.OperatorContext
+	84, // 38: api.operator.service.v1.ListRevenueShareRateConfigsResponse.configs:type_name -> api.operator.service.v1.ListRevenueShareRateConfigsResponse.RevenueShareRateConfig
+	1,  // 39: api.operator.service.v1.ListInvoicesResponse.Invoice.payment_status:type_name -> api.operator.service.v1.ListInvoicesResponse.Invoice.PaymentStatus
+	2,  // 40: api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.payment_status:type_name -> api.operator.service.v1.GetInvoiceDetailResponse.InvoiceDetail.PaymentStatus
+	4,  // 41: api.operator.service.v1.Operator.AddOperator:input_type -> api.operator.service.v1.AddOperatorRequest
+	6,  // 42: api.operator.service.v1.Operator.UpdateOperator:input_type -> api.operator.service.v1.UpdateOperatorRequest
+	8,  // 43: api.operator.service.v1.Operator.GetOperator:input_type -> api.operator.service.v1.GetOperatorRequest
+	10, // 44: api.operator.service.v1.Operator.GetOperatorsByIds:input_type -> api.operator.service.v1.GetOperatorsByIdsRequest
+	12, // 45: api.operator.service.v1.Operator.AddOriginOperatorId:input_type -> api.operator.service.v1.AddOriginOperatorIdRequest
+	14, // 46: api.operator.service.v1.Operator.GetOperatorIdByOrigin:input_type -> api.operator.service.v1.GetOperatorIdByOriginRequest
+	16, // 47: api.operator.service.v1.Operator.DeleteOriginOperatorId:input_type -> api.operator.service.v1.DeleteOriginOperatorIdRequest
+	18, // 48: api.operator.service.v1.Operator.GetParentOperatorIds:input_type -> api.operator.service.v1.GetParentOperatorIdsRequest
+	20, // 49: api.operator.service.v1.Operator.ListOperators:input_type -> api.operator.service.v1.ListOperatorsRequest
+	22, // 50: api.operator.service.v1.Operator.ListInvoices:input_type -> api.operator.service.v1.ListInvoicesRequest
+	24, // 51: api.operator.service.v1.Operator.GetInvoiceDetail:input_type -> api.operator.service.v1.GetInvoiceDetailRequest
+	26, // 52: api.operator.service.v1.Operator.ListOperatorRevenueShare:input_type -> api.operator.service.v1.ListOperatorRevenueShareRequest
+	28, // 53: api.operator.service.v1.Operator.ListThirdPartyFees:input_type -> api.operator.service.v1.ListThirdPartyFeesRequest
+	42, // 54: api.operator.service.v1.Operator.ListAdjustments:input_type -> api.operator.service.v1.ListAdjustmentsRequest
+	30, // 55: api.operator.service.v1.Operator.ListMonthlyRevenueShare:input_type -> api.operator.service.v1.ListMonthlyRevenueShareRequest
+	32, // 56: api.operator.service.v1.Operator.AddAdjustment:input_type -> api.operator.service.v1.AddAdjustmentRequest
+	36, // 57: api.operator.service.v1.Operator.ListAdjustmentConfigs:input_type -> api.operator.service.v1.ListAdjustmentConfigsRequest
+	44, // 58: api.operator.service.v1.Operator.CreateAdjustmentConfig:input_type -> api.operator.service.v1.CreateAdjustmentConfigRequest
+	38, // 59: api.operator.service.v1.Operator.UpdateAdjustmentConfig:input_type -> api.operator.service.v1.UpdateAdjustmentConfigRequest
+	40, // 60: api.operator.service.v1.Operator.DeleteAdjustmentConfig:input_type -> api.operator.service.v1.DeleteAdjustmentConfigRequest
+	34, // 61: api.operator.service.v1.Operator.UpdateAdjustment:input_type -> api.operator.service.v1.UpdateAdjustmentRequest
+	48, // 62: api.operator.service.v1.Operator.SendInvoices:input_type -> api.operator.service.v1.SendInvoicesRequest
+	50, // 63: api.operator.service.v1.Operator.GetInvoiceSummary:input_type -> api.operator.service.v1.GetInvoiceSummaryRequest
+	52, // 64: api.operator.service.v1.Operator.GetBalanceSummary:input_type -> api.operator.service.v1.GetBalanceSummaryRequest
+	54, // 65: api.operator.service.v1.Operator.GetBalancesSummary:input_type -> api.operator.service.v1.GetBalancesSummaryRequest
+	60, // 66: api.operator.service.v1.Operator.ListBillingPeriods:input_type -> api.operator.service.v1.ListBillingPeriodsRequest
+	62, // 67: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:input_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesRequest
+	64, // 68: api.operator.service.v1.Operator.ListBalancesSummary:input_type -> api.operator.service.v1.ListBalancesSummaryRequest
+	66, // 69: api.operator.service.v1.Operator.RecalculateDailyRevenueShares:input_type -> api.operator.service.v1.RecalculateDailyRevenueSharesRequest
+	46, // 70: api.operator.service.v1.Operator.DeleteAdjustment:input_type -> api.operator.service.v1.DeleteAdjustmentRequest
+	68, // 71: api.operator.service.v1.Operator.ListRevenueShareRateConfigs:input_type -> api.operator.service.v1.ListRevenueShareRateConfigsRequest
+	57, // 72: api.operator.service.v1.Operator.ListCustodyOverview:input_type -> api.operator.service.v1.ListCustodyOverviewRequest
+	5,  // 73: api.operator.service.v1.Operator.AddOperator:output_type -> api.operator.service.v1.AddOperatorResponse
+	7,  // 74: api.operator.service.v1.Operator.UpdateOperator:output_type -> api.operator.service.v1.UpdateOperatorResponse
+	9,  // 75: api.operator.service.v1.Operator.GetOperator:output_type -> api.operator.service.v1.GetOperatorResponse
+	11, // 76: api.operator.service.v1.Operator.GetOperatorsByIds:output_type -> api.operator.service.v1.GetOperatorsByIdsResponse
+	13, // 77: api.operator.service.v1.Operator.AddOriginOperatorId:output_type -> api.operator.service.v1.AddOriginOperatorIdResponse
+	15, // 78: api.operator.service.v1.Operator.GetOperatorIdByOrigin:output_type -> api.operator.service.v1.GetOperatorIdByOriginResponse
+	17, // 79: api.operator.service.v1.Operator.DeleteOriginOperatorId:output_type -> api.operator.service.v1.DeleteOriginOperatorIdResponse
+	19, // 80: api.operator.service.v1.Operator.GetParentOperatorIds:output_type -> api.operator.service.v1.GetParentOperatorIdsResponse
+	21, // 81: api.operator.service.v1.Operator.ListOperators:output_type -> api.operator.service.v1.ListOperatorsResponse
+	23, // 82: api.operator.service.v1.Operator.ListInvoices:output_type -> api.operator.service.v1.ListInvoicesResponse
+	25, // 83: api.operator.service.v1.Operator.GetInvoiceDetail:output_type -> api.operator.service.v1.GetInvoiceDetailResponse
+	27, // 84: api.operator.service.v1.Operator.ListOperatorRevenueShare:output_type -> api.operator.service.v1.ListOperatorRevenueShareResponse
+	29, // 85: api.operator.service.v1.Operator.ListThirdPartyFees:output_type -> api.operator.service.v1.ListThirdPartyFeesResponse
+	43, // 86: api.operator.service.v1.Operator.ListAdjustments:output_type -> api.operator.service.v1.ListAdjustmentsResponse
+	31, // 87: api.operator.service.v1.Operator.ListMonthlyRevenueShare:output_type -> api.operator.service.v1.ListMonthlyRevenueShareResponse
+	33, // 88: api.operator.service.v1.Operator.AddAdjustment:output_type -> api.operator.service.v1.AddAdjustmentResponse
+	37, // 89: api.operator.service.v1.Operator.ListAdjustmentConfigs:output_type -> api.operator.service.v1.ListAdjustmentConfigsResponse
+	45, // 90: api.operator.service.v1.Operator.CreateAdjustmentConfig:output_type -> api.operator.service.v1.CreateAdjustmentConfigResponse
+	39, // 91: api.operator.service.v1.Operator.UpdateAdjustmentConfig:output_type -> api.operator.service.v1.UpdateAdjustmentConfigResponse
+	41, // 92: api.operator.service.v1.Operator.DeleteAdjustmentConfig:output_type -> api.operator.service.v1.DeleteAdjustmentConfigResponse
+	35, // 93: api.operator.service.v1.Operator.UpdateAdjustment:output_type -> api.operator.service.v1.UpdateAdjustmentResponse
+	49, // 94: api.operator.service.v1.Operator.SendInvoices:output_type -> api.operator.service.v1.SendInvoicesResponse
+	51, // 95: api.operator.service.v1.Operator.GetInvoiceSummary:output_type -> api.operator.service.v1.GetInvoiceSummaryResponse
+	53, // 96: api.operator.service.v1.Operator.GetBalanceSummary:output_type -> api.operator.service.v1.GetBalanceSummaryResponse
+	55, // 97: api.operator.service.v1.Operator.GetBalancesSummary:output_type -> api.operator.service.v1.GetBalancesSummaryResponse
+	61, // 98: api.operator.service.v1.Operator.ListBillingPeriods:output_type -> api.operator.service.v1.ListBillingPeriodsResponse
+	63, // 99: api.operator.service.v1.Operator.ListBalanceMonthlyRevenueShares:output_type -> api.operator.service.v1.ListBalanceMonthlyRevenueSharesResponse
+	65, // 100: api.operator.service.v1.Operator.ListBalancesSummary:output_type -> api.operator.service.v1.ListBalancesSummaryResponse
+	67, // 101: api.operator.service.v1.Operator.RecalculateDailyRevenueShares:output_type -> api.operator.service.v1.RecalculateDailyRevenueSharesResponse
+	47, // 102: api.operator.service.v1.Operator.DeleteAdjustment:output_type -> api.operator.service.v1.DeleteAdjustmentResponse
+	69, // 103: api.operator.service.v1.Operator.ListRevenueShareRateConfigs:output_type -> api.operator.service.v1.ListRevenueShareRateConfigsResponse
+	58, // 104: api.operator.service.v1.Operator.ListCustodyOverview:output_type -> api.operator.service.v1.ListCustodyOverviewResponse
+	73, // [73:105] is the sub-list for method output_type
+	41, // [41:73] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_operator_service_v1_operator_proto_init() }

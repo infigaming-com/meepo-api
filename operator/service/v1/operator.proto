@@ -670,9 +670,8 @@ message BalancesSummaryRow {
 
 message ListCustodyOverviewRequest {
 	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContextFilters operator_context_filters = 2;
-	optional int32 page = 3;
-	optional int32 page_size = 4;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }
 
 message ListCustodyOverviewResponse {
