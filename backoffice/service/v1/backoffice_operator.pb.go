@@ -1952,8 +1952,10 @@ type OperatorRegistrationConfig struct {
 	RegistrationLimitPerIp int32                    `protobuf:"varint,1,opt,name=registration_limit_per_ip,json=registrationLimitPerIp,proto3" json:"registration_limit_per_ip,omitempty"`
 	Registration           *v1.RegistrationFieldSet `protobuf:"bytes,2,opt,name=registration,proto3" json:"registration,omitempty"`
 	Login                  *v1.RegistrationFieldSet `protobuf:"bytes,3,opt,name=login,proto3" json:"login,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Which login methods are enabled (password, email_otp, phone_otp)
+	LoginMethods  *v1.LoginMethodConfig `protobuf:"bytes,4,opt,name=login_methods,json=loginMethods,proto3" json:"login_methods,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OperatorRegistrationConfig) Reset() {
@@ -2003,6 +2005,13 @@ func (x *OperatorRegistrationConfig) GetRegistration() *v1.RegistrationFieldSet 
 func (x *OperatorRegistrationConfig) GetLogin() *v1.RegistrationFieldSet {
 	if x != nil {
 		return x.Login
+	}
+	return nil
+}
+
+func (x *OperatorRegistrationConfig) GetLoginMethods() *v1.LoginMethodConfig {
+	if x != nil {
+		return x.LoginMethods
 	}
 	return nil
 }
@@ -2678,11 +2687,12 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12B\n" +
 	"\x05value\x18\x02 \x01(\v2,.api.user.service.v1.RegistrationFieldPolicyR\x05value:\x028\x01\"\x80\x01\n" +
 	")GetOperatorRegistrationFieldConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xe7\x01\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xb4\x02\n" +
 	"\x1aOperatorRegistrationConfig\x129\n" +
 	"\x19registration_limit_per_ip\x18\x01 \x01(\x05R\x16registrationLimitPerIp\x12M\n" +
 	"\fregistration\x18\x02 \x01(\v2).api.user.service.v1.RegistrationFieldSetR\fregistration\x12?\n" +
-	"\x05login\x18\x03 \x01(\v2).api.user.service.v1.RegistrationFieldSetR\x05login\"\xd2\x02\n" +
+	"\x05login\x18\x03 \x01(\v2).api.user.service.v1.RegistrationFieldSetR\x05login\x12K\n" +
+	"\rlogin_methods\x18\x04 \x01(\v2&.api.user.service.v1.LoginMethodConfigR\floginMethods\"\xd2\x02\n" +
 	"$SetOperatorRegistrationConfigRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12c\n" +
 	"\x06config\x18\x02 \x03(\v2K.api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.ConfigEntryR\x06config\x1ap\n" +
@@ -2809,29 +2819,30 @@ var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                         // 48: google.protobuf.Timestamp
 	(*v1.OperatorAccountSettings)(nil),                    // 49: api.user.service.v1.OperatorAccountSettings
 	(*v1.RegistrationFieldSet)(nil),                       // 50: api.user.service.v1.RegistrationFieldSet
-	(*v1.NotificationChannelConfig)(nil),                  // 51: api.user.service.v1.NotificationChannelConfig
-	(*v1.SwapFeeSettings)(nil),                            // 52: api.user.service.v1.SwapFeeSettings
-	(*v1.OperatorRegisterLimitConfig)(nil),                // 53: api.user.service.v1.OperatorRegisterLimitConfig
-	(*v1.RegistrationFieldPolicy)(nil),                    // 54: api.user.service.v1.RegistrationFieldPolicy
-	(*v1.ListRetailerOperatorsResponse)(nil),              // 55: api.user.service.v1.ListRetailerOperatorsResponse
-	(*v1.ListCompanyOperatorsResponse)(nil),               // 56: api.user.service.v1.ListCompanyOperatorsResponse
-	(*v1.ListBottomOperatorsResponse)(nil),                // 57: api.user.service.v1.ListBottomOperatorsResponse
-	(*v1.UpdateOperatorStatusResponse)(nil),               // 58: api.user.service.v1.UpdateOperatorStatusResponse
-	(*v1.ListOperatorsByAdminEmailResponse)(nil),          // 59: api.user.service.v1.ListOperatorsByAdminEmailResponse
-	(*v1.GetOperatorAccountSettingsResponse)(nil),         // 60: api.user.service.v1.GetOperatorAccountSettingsResponse
-	(*v1.UpdateOperatorAccountSettingsResponse)(nil),      // 61: api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	(*v1.AddRegisterLoginBlacklistResponse)(nil),          // 62: api.user.service.v1.AddRegisterLoginBlacklistResponse
-	(*v1.DeleteRegisterLoginBlacklistResponse)(nil),       // 63: api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	(*v1.ListRegisterLoginBlacklistResponse)(nil),         // 64: api.user.service.v1.ListRegisterLoginBlacklistResponse
-	(*v1.SetOperatorRegisterLimitConfigResponse)(nil),     // 65: api.user.service.v1.SetOperatorRegisterLimitConfigResponse
-	(*v1.GetOperatorRegisterLimitConfigResponse)(nil),     // 66: api.user.service.v1.GetOperatorRegisterLimitConfigResponse
-	(*v1.SetOperatorRegistrationFieldConfigResponse)(nil), // 67: api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
-	(*v1.GetOperatorRegistrationFieldConfigResponse)(nil), // 68: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
-	(*v1.UpdateOperatorNotificationChannelsResponse)(nil), // 69: api.user.service.v1.UpdateOperatorNotificationChannelsResponse
-	(*v1.GetOperatorNotificationChannelsResponse)(nil),    // 70: api.user.service.v1.GetOperatorNotificationChannelsResponse
-	(*v1.GetSwapFeeSettingsResponse)(nil),                 // 71: api.user.service.v1.GetSwapFeeSettingsResponse
-	(*v1.SetSwapFeeSettingsResponse)(nil),                 // 72: api.user.service.v1.SetSwapFeeSettingsResponse
-	(*v1.UpdateOperatorNameResponse)(nil),                 // 73: api.user.service.v1.UpdateOperatorNameResponse
+	(*v1.LoginMethodConfig)(nil),                          // 51: api.user.service.v1.LoginMethodConfig
+	(*v1.NotificationChannelConfig)(nil),                  // 52: api.user.service.v1.NotificationChannelConfig
+	(*v1.SwapFeeSettings)(nil),                            // 53: api.user.service.v1.SwapFeeSettings
+	(*v1.OperatorRegisterLimitConfig)(nil),                // 54: api.user.service.v1.OperatorRegisterLimitConfig
+	(*v1.RegistrationFieldPolicy)(nil),                    // 55: api.user.service.v1.RegistrationFieldPolicy
+	(*v1.ListRetailerOperatorsResponse)(nil),              // 56: api.user.service.v1.ListRetailerOperatorsResponse
+	(*v1.ListCompanyOperatorsResponse)(nil),               // 57: api.user.service.v1.ListCompanyOperatorsResponse
+	(*v1.ListBottomOperatorsResponse)(nil),                // 58: api.user.service.v1.ListBottomOperatorsResponse
+	(*v1.UpdateOperatorStatusResponse)(nil),               // 59: api.user.service.v1.UpdateOperatorStatusResponse
+	(*v1.ListOperatorsByAdminEmailResponse)(nil),          // 60: api.user.service.v1.ListOperatorsByAdminEmailResponse
+	(*v1.GetOperatorAccountSettingsResponse)(nil),         // 61: api.user.service.v1.GetOperatorAccountSettingsResponse
+	(*v1.UpdateOperatorAccountSettingsResponse)(nil),      // 62: api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	(*v1.AddRegisterLoginBlacklistResponse)(nil),          // 63: api.user.service.v1.AddRegisterLoginBlacklistResponse
+	(*v1.DeleteRegisterLoginBlacklistResponse)(nil),       // 64: api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	(*v1.ListRegisterLoginBlacklistResponse)(nil),         // 65: api.user.service.v1.ListRegisterLoginBlacklistResponse
+	(*v1.SetOperatorRegisterLimitConfigResponse)(nil),     // 66: api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	(*v1.GetOperatorRegisterLimitConfigResponse)(nil),     // 67: api.user.service.v1.GetOperatorRegisterLimitConfigResponse
+	(*v1.SetOperatorRegistrationFieldConfigResponse)(nil), // 68: api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
+	(*v1.GetOperatorRegistrationFieldConfigResponse)(nil), // 69: api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
+	(*v1.UpdateOperatorNotificationChannelsResponse)(nil), // 70: api.user.service.v1.UpdateOperatorNotificationChannelsResponse
+	(*v1.GetOperatorNotificationChannelsResponse)(nil),    // 71: api.user.service.v1.GetOperatorNotificationChannelsResponse
+	(*v1.GetSwapFeeSettingsResponse)(nil),                 // 72: api.user.service.v1.GetSwapFeeSettingsResponse
+	(*v1.SetSwapFeeSettingsResponse)(nil),                 // 73: api.user.service.v1.SetSwapFeeSettingsResponse
+	(*v1.UpdateOperatorNameResponse)(nil),                 // 74: api.user.service.v1.UpdateOperatorNameResponse
 }
 var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
 	41, // 0: api.backoffice.service.v1.ListAllOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListAllOperatorsResponse.Operator
@@ -2859,81 +2870,82 @@ var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
 	47, // 22: api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	50, // 23: api.backoffice.service.v1.OperatorRegistrationConfig.registration:type_name -> api.user.service.v1.RegistrationFieldSet
 	50, // 24: api.backoffice.service.v1.OperatorRegistrationConfig.login:type_name -> api.user.service.v1.RegistrationFieldSet
-	47, // 25: api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	44, // 26: api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.config:type_name -> api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.ConfigEntry
-	47, // 27: api.backoffice.service.v1.GetOperatorRegistrationConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	45, // 28: api.backoffice.service.v1.GetOperatorRegistrationConfigResponse.config:type_name -> api.backoffice.service.v1.GetOperatorRegistrationConfigResponse.ConfigEntry
-	51, // 29: api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest.config:type_name -> api.user.service.v1.NotificationChannelConfig
-	52, // 30: api.backoffice.service.v1.SetSwapFeeSettingsRequest.settings:type_name -> api.user.service.v1.SwapFeeSettings
-	47, // 31: api.backoffice.service.v1.UpdateOperatorNameRequest.target_operator_context:type_name -> api.common.OperatorContext
-	47, // 32: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	53, // 33: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
-	54, // 34: api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
-	31, // 35: api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.ConfigEntry.value:type_name -> api.backoffice.service.v1.OperatorRegistrationConfig
-	31, // 36: api.backoffice.service.v1.GetOperatorRegistrationConfigResponse.ConfigEntry.value:type_name -> api.backoffice.service.v1.OperatorRegistrationConfig
-	0,  // 37: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:input_type -> api.backoffice.service.v1.ListAllOperatorsRequest
-	2,  // 38: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
-	5,  // 39: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:input_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsRequest
-	7,  // 40: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:input_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest
-	9,  // 41: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:input_type -> api.backoffice.service.v1.ListRetailerOperatorsRequest
-	10, // 42: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:input_type -> api.backoffice.service.v1.ListCompanyOperatorsRequest
-	11, // 43: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:input_type -> api.backoffice.service.v1.ListBottomOperatorsRequest
-	12, // 44: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:input_type -> api.backoffice.service.v1.UpdateOperatorStatusRequest
-	13, // 45: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:input_type -> api.backoffice.service.v1.ListOperatorsByAdminEmailRequest
-	14, // 46: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorByoSubdomainRequest
-	16, // 47: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest
-	18, // 48: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest
-	20, // 49: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest
-	22, // 50: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:input_type -> api.backoffice.service.v1.GetOperatorAccountSettingsRequest
-	23, // 51: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:input_type -> api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest
-	24, // 52: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.AddRegisterLoginBlacklistRequest
-	25, // 53: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest
-	26, // 54: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.ListRegisterLoginBlacklistRequest
-	27, // 55: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegisterLimitConfig:input_type -> api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest
-	28, // 56: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegisterLimitConfig:input_type -> api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest
-	29, // 57: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationFieldConfig:input_type -> api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest
-	30, // 58: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationFieldConfig:input_type -> api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest
-	32, // 59: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationConfig:input_type -> api.backoffice.service.v1.SetOperatorRegistrationConfigRequest
-	34, // 60: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationConfig:input_type -> api.backoffice.service.v1.GetOperatorRegistrationConfigRequest
-	36, // 61: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorNotificationChannels:input_type -> api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest
-	37, // 62: api.backoffice.service.v1.BackofficeOperator.GetOperatorNotificationChannels:input_type -> api.backoffice.service.v1.GetOperatorNotificationChannelsRequest
-	38, // 63: api.backoffice.service.v1.BackofficeOperator.GetSwapFeeSettings:input_type -> api.backoffice.service.v1.GetSwapFeeSettingsRequest
-	39, // 64: api.backoffice.service.v1.BackofficeOperator.SetSwapFeeSettings:input_type -> api.backoffice.service.v1.SetSwapFeeSettingsRequest
-	40, // 65: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorName:input_type -> api.backoffice.service.v1.UpdateOperatorNameRequest
-	1,  // 66: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:output_type -> api.backoffice.service.v1.ListAllOperatorsResponse
-	3,  // 67: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
-	6,  // 68: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:output_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsResponse
-	8,  // 69: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:output_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse
-	55, // 70: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
-	56, // 71: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
-	57, // 72: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
-	58, // 73: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
-	59, // 74: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	15, // 75: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorByoSubdomainResponse
-	17, // 76: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse
-	19, // 77: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse
-	21, // 78: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse
-	60, // 79: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
-	61, // 80: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	62, // 81: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
-	63, // 82: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	64, // 83: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
-	65, // 84: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
-	66, // 85: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
-	67, // 86: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
-	68, // 87: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
-	33, // 88: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationConfig:output_type -> api.backoffice.service.v1.SetOperatorRegistrationConfigResponse
-	35, // 89: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationConfig:output_type -> api.backoffice.service.v1.GetOperatorRegistrationConfigResponse
-	69, // 90: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorNotificationChannels:output_type -> api.user.service.v1.UpdateOperatorNotificationChannelsResponse
-	70, // 91: api.backoffice.service.v1.BackofficeOperator.GetOperatorNotificationChannels:output_type -> api.user.service.v1.GetOperatorNotificationChannelsResponse
-	71, // 92: api.backoffice.service.v1.BackofficeOperator.GetSwapFeeSettings:output_type -> api.user.service.v1.GetSwapFeeSettingsResponse
-	72, // 93: api.backoffice.service.v1.BackofficeOperator.SetSwapFeeSettings:output_type -> api.user.service.v1.SetSwapFeeSettingsResponse
-	73, // 94: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorName:output_type -> api.user.service.v1.UpdateOperatorNameResponse
-	66, // [66:95] is the sub-list for method output_type
-	37, // [37:66] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	51, // 25: api.backoffice.service.v1.OperatorRegistrationConfig.login_methods:type_name -> api.user.service.v1.LoginMethodConfig
+	47, // 26: api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	44, // 27: api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.config:type_name -> api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.ConfigEntry
+	47, // 28: api.backoffice.service.v1.GetOperatorRegistrationConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	45, // 29: api.backoffice.service.v1.GetOperatorRegistrationConfigResponse.config:type_name -> api.backoffice.service.v1.GetOperatorRegistrationConfigResponse.ConfigEntry
+	52, // 30: api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest.config:type_name -> api.user.service.v1.NotificationChannelConfig
+	53, // 31: api.backoffice.service.v1.SetSwapFeeSettingsRequest.settings:type_name -> api.user.service.v1.SwapFeeSettings
+	47, // 32: api.backoffice.service.v1.UpdateOperatorNameRequest.target_operator_context:type_name -> api.common.OperatorContext
+	47, // 33: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	54, // 34: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
+	55, // 35: api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.RegistrationFieldPolicy
+	31, // 36: api.backoffice.service.v1.SetOperatorRegistrationConfigRequest.ConfigEntry.value:type_name -> api.backoffice.service.v1.OperatorRegistrationConfig
+	31, // 37: api.backoffice.service.v1.GetOperatorRegistrationConfigResponse.ConfigEntry.value:type_name -> api.backoffice.service.v1.OperatorRegistrationConfig
+	0,  // 38: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:input_type -> api.backoffice.service.v1.ListAllOperatorsRequest
+	2,  // 39: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
+	5,  // 40: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:input_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsRequest
+	7,  // 41: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:input_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest
+	9,  // 42: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:input_type -> api.backoffice.service.v1.ListRetailerOperatorsRequest
+	10, // 43: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:input_type -> api.backoffice.service.v1.ListCompanyOperatorsRequest
+	11, // 44: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:input_type -> api.backoffice.service.v1.ListBottomOperatorsRequest
+	12, // 45: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:input_type -> api.backoffice.service.v1.UpdateOperatorStatusRequest
+	13, // 46: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:input_type -> api.backoffice.service.v1.ListOperatorsByAdminEmailRequest
+	14, // 47: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorByoSubdomainRequest
+	16, // 48: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest
+	18, // 49: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest
+	20, // 50: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest
+	22, // 51: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:input_type -> api.backoffice.service.v1.GetOperatorAccountSettingsRequest
+	23, // 52: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:input_type -> api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest
+	24, // 53: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.AddRegisterLoginBlacklistRequest
+	25, // 54: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest
+	26, // 55: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.ListRegisterLoginBlacklistRequest
+	27, // 56: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegisterLimitConfig:input_type -> api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest
+	28, // 57: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegisterLimitConfig:input_type -> api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest
+	29, // 58: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationFieldConfig:input_type -> api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest
+	30, // 59: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationFieldConfig:input_type -> api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest
+	32, // 60: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationConfig:input_type -> api.backoffice.service.v1.SetOperatorRegistrationConfigRequest
+	34, // 61: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationConfig:input_type -> api.backoffice.service.v1.GetOperatorRegistrationConfigRequest
+	36, // 62: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorNotificationChannels:input_type -> api.backoffice.service.v1.UpdateOperatorNotificationChannelsRequest
+	37, // 63: api.backoffice.service.v1.BackofficeOperator.GetOperatorNotificationChannels:input_type -> api.backoffice.service.v1.GetOperatorNotificationChannelsRequest
+	38, // 64: api.backoffice.service.v1.BackofficeOperator.GetSwapFeeSettings:input_type -> api.backoffice.service.v1.GetSwapFeeSettingsRequest
+	39, // 65: api.backoffice.service.v1.BackofficeOperator.SetSwapFeeSettings:input_type -> api.backoffice.service.v1.SetSwapFeeSettingsRequest
+	40, // 66: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorName:input_type -> api.backoffice.service.v1.UpdateOperatorNameRequest
+	1,  // 67: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:output_type -> api.backoffice.service.v1.ListAllOperatorsResponse
+	3,  // 68: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
+	6,  // 69: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:output_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsResponse
+	8,  // 70: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:output_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse
+	56, // 71: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
+	57, // 72: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
+	58, // 73: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
+	59, // 74: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
+	60, // 75: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	15, // 76: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorByoSubdomainResponse
+	17, // 77: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse
+	19, // 78: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse
+	21, // 79: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse
+	61, // 80: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
+	62, // 81: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	63, // 82: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
+	64, // 83: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	65, // 84: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
+	66, // 85: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	67, // 86: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
+	68, // 87: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.SetOperatorRegistrationFieldConfigResponse
+	69, // 88: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationFieldConfig:output_type -> api.user.service.v1.GetOperatorRegistrationFieldConfigResponse
+	33, // 89: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegistrationConfig:output_type -> api.backoffice.service.v1.SetOperatorRegistrationConfigResponse
+	35, // 90: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegistrationConfig:output_type -> api.backoffice.service.v1.GetOperatorRegistrationConfigResponse
+	70, // 91: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorNotificationChannels:output_type -> api.user.service.v1.UpdateOperatorNotificationChannelsResponse
+	71, // 92: api.backoffice.service.v1.BackofficeOperator.GetOperatorNotificationChannels:output_type -> api.user.service.v1.GetOperatorNotificationChannelsResponse
+	72, // 93: api.backoffice.service.v1.BackofficeOperator.GetSwapFeeSettings:output_type -> api.user.service.v1.GetSwapFeeSettingsResponse
+	73, // 94: api.backoffice.service.v1.BackofficeOperator.SetSwapFeeSettings:output_type -> api.user.service.v1.SetSwapFeeSettingsResponse
+	74, // 95: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorName:output_type -> api.user.service.v1.UpdateOperatorNameResponse
+	67, // [67:96] is the sub-list for method output_type
+	38, // [38:67] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_operator_proto_init() }

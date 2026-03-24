@@ -450,6 +450,8 @@ message OperatorRegistrationConfig {
 	int32 registration_limit_per_ip = 1;
 	user.service.v1.RegistrationFieldSet registration = 2;
 	user.service.v1.RegistrationFieldSet login = 3;
+	// Which login methods are enabled (password, email_otp, phone_otp)
+	user.service.v1.LoginMethodConfig login_methods = 4;
 }
 
 // SetOperatorRegistrationConfigRequest is a combined request for setting both register limit config and registration field config

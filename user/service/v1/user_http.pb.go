@@ -46,6 +46,7 @@ const OperationUserInitiateOAuthLogin = "/api.user.service.v1.User/InitiateOAuth
 const OperationUserListBoundOAuthAccounts = "/api.user.service.v1.User/ListBoundOAuthAccounts"
 const OperationUserListUserFreeRewards = "/api.user.service.v1.User/ListUserFreeRewards"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
+const OperationUserLoginWithOTP = "/api.user.service.v1.User/LoginWithOTP"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
 const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
 const OperationUserRegister = "/api.user.service.v1.User/Register"
@@ -55,6 +56,7 @@ const OperationUserRegisterOrLoginWithTelegramMiniApp = "/api.user.service.v1.Us
 const OperationUserRegisterWebPushDevice = "/api.user.service.v1.User/RegisterWebPushDevice"
 const OperationUserRequestDailyLossback = "/api.user.service.v1.User/RequestDailyLossback"
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
+const OperationUserSendAuthOTP = "/api.user.service.v1.User/SendAuthOTP"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
 const OperationUserUnbindOAuthAccount = "/api.user.service.v1.User/UnbindOAuthAccount"
@@ -110,6 +112,8 @@ type UserHTTPServer interface {
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
+	// LoginWithOTP Login using an OTP verification code (no password required).
+	LoginWithOTP(context.Context, *LoginWithOTPRequest) (*AuthResponse, error)
 	// Logout Logout the current user.
 	// Invalidates the current session and refresh token.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
@@ -133,6 +137,8 @@ type UserHTTPServer interface {
 	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
 	// ResetPasswordWithCode Reset password using verification code
 	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
+	// SendAuthOTP Send an OTP code for login or registration verification.
+	SendAuthOTP(context.Context, *SendAuthOTPRequest) (*SendAuthOTPResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
@@ -150,6 +156,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/user/auth/register", _User_Register0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/login", _User_Login0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/otp/send", _User_SendAuthOTP0_HTTP_Handler(srv))
+	r.POST("/v1/user/auth/otp/login", _User_LoginWithOTP0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/oauth", _User_RegisterOrLoginWithOAuth0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram", _User_RegisterOrLoginWithTelegram0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/telegram/miniapp", _User_RegisterOrLoginWithTelegramMiniApp0_HTTP_Handler(srv))
@@ -227,6 +235,50 @@ func _User_Login0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error 
 		http.SetOperation(ctx, OperationUserLogin)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.Login(ctx, req.(*LoginRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AuthResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_SendAuthOTP0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SendAuthOTPRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserSendAuthOTP)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SendAuthOTP(ctx, req.(*SendAuthOTPRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SendAuthOTPResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_LoginWithOTP0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in LoginWithOTPRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserLoginWithOTP)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.LoginWithOTP(ctx, req.(*LoginWithOTPRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -1172,6 +1224,8 @@ type UserHTTPClient interface {
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	// LoginWithOTP Login using an OTP verification code (no password required).
+	LoginWithOTP(ctx context.Context, req *LoginWithOTPRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	// Logout Logout the current user.
 	// Invalidates the current session and refresh token.
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
@@ -1195,6 +1249,8 @@ type UserHTTPClient interface {
 	RequestDailyLossback(ctx context.Context, req *RequestDailyLossbackRequest, opts ...http.CallOption) (rsp *v1.RequestDailyLossbackResponse, err error)
 	// ResetPasswordWithCode Reset password using verification code
 	ResetPasswordWithCode(ctx context.Context, req *ResetPasswordWithCodeRequest, opts ...http.CallOption) (rsp *ResetPasswordWithCodeResponse, err error)
+	// SendAuthOTP Send an OTP code for login or registration verification.
+	SendAuthOTP(ctx context.Context, req *SendAuthOTPRequest, opts ...http.CallOption) (rsp *SendAuthOTPResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
@@ -1560,6 +1616,20 @@ func (c *UserHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts .
 	return &out, nil
 }
 
+// LoginWithOTP Login using an OTP verification code (no password required).
+func (c *UserHTTPClientImpl) LoginWithOTP(ctx context.Context, in *LoginWithOTPRequest, opts ...http.CallOption) (*AuthResponse, error) {
+	var out AuthResponse
+	pattern := "/v1/user/auth/otp/login"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserLoginWithOTP))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // Logout Logout the current user.
 // Invalidates the current session and refresh token.
 func (c *UserHTTPClientImpl) Logout(ctx context.Context, in *LogoutRequest, opts ...http.CallOption) (*LogoutResponse, error) {
@@ -1683,6 +1753,20 @@ func (c *UserHTTPClientImpl) ResetPasswordWithCode(ctx context.Context, in *Rese
 	pattern := "/v1/user/auth/password/reset"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserResetPasswordWithCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SendAuthOTP Send an OTP code for login or registration verification.
+func (c *UserHTTPClientImpl) SendAuthOTP(ctx context.Context, in *SendAuthOTPRequest, opts ...http.CallOption) (*SendAuthOTPResponse, error) {
+	var out SendAuthOTPResponse
+	pattern := "/v1/user/auth/otp/send"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserSendAuthOTP))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

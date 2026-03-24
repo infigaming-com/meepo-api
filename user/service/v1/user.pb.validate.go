@@ -22179,6 +22179,35 @@ func (m *RegistrationFieldPolicy) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetLoginMethods()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RegistrationFieldPolicyValidationError{
+					field:  "LoginMethods",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RegistrationFieldPolicyValidationError{
+					field:  "LoginMethods",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLoginMethods()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RegistrationFieldPolicyValidationError{
+				field:  "LoginMethods",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return RegistrationFieldPolicyMultiError(errors)
 	}
@@ -22258,6 +22287,114 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RegistrationFieldPolicyValidationError{}
+
+// Validate checks the field values on LoginMethodConfig with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *LoginMethodConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LoginMethodConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LoginMethodConfigMultiError, or nil if none found.
+func (m *LoginMethodConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LoginMethodConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Password
+
+	// no validation rules for EmailOtp
+
+	// no validation rules for PhoneOtp
+
+	if len(errors) > 0 {
+		return LoginMethodConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// LoginMethodConfigMultiError is an error wrapping multiple validation errors
+// returned by LoginMethodConfig.ValidateAll() if the designated constraints
+// aren't met.
+type LoginMethodConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LoginMethodConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LoginMethodConfigMultiError) AllErrors() []error { return m }
+
+// LoginMethodConfigValidationError is the validation error returned by
+// LoginMethodConfig.Validate if the designated constraints aren't met.
+type LoginMethodConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LoginMethodConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LoginMethodConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LoginMethodConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LoginMethodConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LoginMethodConfigValidationError) ErrorName() string {
+	return "LoginMethodConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LoginMethodConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLoginMethodConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LoginMethodConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LoginMethodConfigValidationError{}
 
 // Validate checks the field values on SetOperatorRegisterLimitConfigRequest
 // with the rules defined in the proto definition for this message. If any
@@ -33938,6 +34075,661 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateOperatorNameResponseValidationError{}
+
+// Validate checks the field values on SendAuthOTPRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendAuthOTPRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendAuthOTPRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendAuthOTPRequestMultiError, or nil if none found.
+func (m *SendAuthOTPRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendAuthOTPRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Channel
+
+	// no validation rules for Destination
+
+	// no validation rules for Purpose
+
+	if len(errors) > 0 {
+		return SendAuthOTPRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendAuthOTPRequestMultiError is an error wrapping multiple validation errors
+// returned by SendAuthOTPRequest.ValidateAll() if the designated constraints
+// aren't met.
+type SendAuthOTPRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendAuthOTPRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendAuthOTPRequestMultiError) AllErrors() []error { return m }
+
+// SendAuthOTPRequestValidationError is the validation error returned by
+// SendAuthOTPRequest.Validate if the designated constraints aren't met.
+type SendAuthOTPRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendAuthOTPRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendAuthOTPRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendAuthOTPRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendAuthOTPRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendAuthOTPRequestValidationError) ErrorName() string {
+	return "SendAuthOTPRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendAuthOTPRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendAuthOTPRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendAuthOTPRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendAuthOTPRequestValidationError{}
+
+// Validate checks the field values on SendAuthOTPResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendAuthOTPResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendAuthOTPResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendAuthOTPResponseMultiError, or nil if none found.
+func (m *SendAuthOTPResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendAuthOTPResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ExpiresIn
+
+	// no validation rules for ResendInterval
+
+	if len(errors) > 0 {
+		return SendAuthOTPResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendAuthOTPResponseMultiError is an error wrapping multiple validation
+// errors returned by SendAuthOTPResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SendAuthOTPResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendAuthOTPResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendAuthOTPResponseMultiError) AllErrors() []error { return m }
+
+// SendAuthOTPResponseValidationError is the validation error returned by
+// SendAuthOTPResponse.Validate if the designated constraints aren't met.
+type SendAuthOTPResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendAuthOTPResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendAuthOTPResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendAuthOTPResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendAuthOTPResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendAuthOTPResponseValidationError) ErrorName() string {
+	return "SendAuthOTPResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendAuthOTPResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendAuthOTPResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendAuthOTPResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendAuthOTPResponseValidationError{}
+
+// Validate checks the field values on SendAuthOTPWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendAuthOTPWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendAuthOTPWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendAuthOTPWithInfoRequestMultiError, or nil if none found.
+func (m *SendAuthOTPWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendAuthOTPWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Channel
+
+	// no validation rules for Destination
+
+	// no validation rules for Purpose
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendAuthOTPWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendAuthOTPWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendAuthOTPWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHttpRequestInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendAuthOTPWithInfoRequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendAuthOTPWithInfoRequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHttpRequestInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendAuthOTPWithInfoRequestValidationError{
+				field:  "HttpRequestInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SendAuthOTPWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendAuthOTPWithInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by SendAuthOTPWithInfoRequest.ValidateAll() if
+// the designated constraints aren't met.
+type SendAuthOTPWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendAuthOTPWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendAuthOTPWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// SendAuthOTPWithInfoRequestValidationError is the validation error returned
+// by SendAuthOTPWithInfoRequest.Validate if the designated constraints aren't met.
+type SendAuthOTPWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendAuthOTPWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendAuthOTPWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendAuthOTPWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendAuthOTPWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendAuthOTPWithInfoRequestValidationError) ErrorName() string {
+	return "SendAuthOTPWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendAuthOTPWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendAuthOTPWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendAuthOTPWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendAuthOTPWithInfoRequestValidationError{}
+
+// Validate checks the field values on LoginWithOTPRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LoginWithOTPRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LoginWithOTPRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LoginWithOTPRequestMultiError, or nil if none found.
+func (m *LoginWithOTPRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LoginWithOTPRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Channel
+
+	// no validation rules for Destination
+
+	// no validation rules for Code
+
+	if len(errors) > 0 {
+		return LoginWithOTPRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// LoginWithOTPRequestMultiError is an error wrapping multiple validation
+// errors returned by LoginWithOTPRequest.ValidateAll() if the designated
+// constraints aren't met.
+type LoginWithOTPRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LoginWithOTPRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LoginWithOTPRequestMultiError) AllErrors() []error { return m }
+
+// LoginWithOTPRequestValidationError is the validation error returned by
+// LoginWithOTPRequest.Validate if the designated constraints aren't met.
+type LoginWithOTPRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LoginWithOTPRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LoginWithOTPRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LoginWithOTPRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LoginWithOTPRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LoginWithOTPRequestValidationError) ErrorName() string {
+	return "LoginWithOTPRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LoginWithOTPRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLoginWithOTPRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LoginWithOTPRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LoginWithOTPRequestValidationError{}
+
+// Validate checks the field values on LoginWithOTPWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LoginWithOTPWithInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LoginWithOTPWithInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LoginWithOTPWithInfoRequestMultiError, or nil if none found.
+func (m *LoginWithOTPWithInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LoginWithOTPWithInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Channel
+
+	// no validation rules for Destination
+
+	// no validation rules for Code
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LoginWithOTPWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LoginWithOTPWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LoginWithOTPWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHttpRequestInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LoginWithOTPWithInfoRequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LoginWithOTPWithInfoRequestValidationError{
+					field:  "HttpRequestInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHttpRequestInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LoginWithOTPWithInfoRequestValidationError{
+				field:  "HttpRequestInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return LoginWithOTPWithInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// LoginWithOTPWithInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by LoginWithOTPWithInfoRequest.ValidateAll() if
+// the designated constraints aren't met.
+type LoginWithOTPWithInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LoginWithOTPWithInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LoginWithOTPWithInfoRequestMultiError) AllErrors() []error { return m }
+
+// LoginWithOTPWithInfoRequestValidationError is the validation error returned
+// by LoginWithOTPWithInfoRequest.Validate if the designated constraints
+// aren't met.
+type LoginWithOTPWithInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LoginWithOTPWithInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LoginWithOTPWithInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LoginWithOTPWithInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LoginWithOTPWithInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LoginWithOTPWithInfoRequestValidationError) ErrorName() string {
+	return "LoginWithOTPWithInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LoginWithOTPWithInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLoginWithOTPWithInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LoginWithOTPWithInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LoginWithOTPWithInfoRequestValidationError{}
 
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
