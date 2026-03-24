@@ -3461,24 +3461,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListBillingPeriodsResponse'
-    /v1/backoffice/finance/custody/overview:
-        post:
-            tags:
-                - BackofficeFinance
-            operationId: BackofficeFinance_ListCustodyOverview
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCustodyOverviewRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCustodyOverviewResponse'
     /v1/backoffice/finance/invoice/detail:
         post:
             tags:
@@ -15776,29 +15758,6 @@ components:
             properties:
                 ticketId:
                     type: string
-        api.backoffice.service.v1.CustodyOverviewRow:
-            type: object
-            properties:
-                retailerOperatorId:
-                    type: string
-                retailerName:
-                    type: string
-                companyOperatorId:
-                    type: string
-                companyName:
-                    type: string
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
-                operatorType:
-                    type: string
-                estCost:
-                    type: string
-                estRsToSys:
-                    type: string
-                lockedForPendingInvoice:
-                    type: string
         api.backoffice.service.v1.CustomerRecordReportDetailRequest:
             type: object
             properties:
@@ -19356,33 +19315,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListCustodyOverviewRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListCustodyOverviewResponse:
-            type: object
-            properties:
-                rows:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.CustodyOverviewRow'
-                totalCount:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListCustomerRecordsRequest:
             type: object
             properties:

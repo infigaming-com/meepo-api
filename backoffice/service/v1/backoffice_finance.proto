@@ -192,12 +192,6 @@ service BackofficeFinance {
 		};
 	}
 
-	rpc ListCustodyOverview(ListCustodyOverviewRequest) returns (ListCustodyOverviewResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/finance/custody/overview"
-			body: "*"
-		};
-	}
 }
 
 message ListInvoicesRequest {
@@ -906,30 +900,4 @@ message ListRevenueShareRateConfigsResponse {
 		bool enabled = 9;
 	}
 	repeated RevenueShareRateConfig configs = 1;
-}
-
-message ListCustodyOverviewRequest {
-	api.common.OperatorContextFilters operator_context_filters = 1;
-	optional int32 page = 2;
-	optional int32 page_size = 3;
-}
-
-message ListCustodyOverviewResponse {
-	repeated CustodyOverviewRow rows = 1;
-	int32 total_count = 2;
-	int32 page = 3;
-	int32 page_size = 4;
-}
-
-message CustodyOverviewRow {
-	int64 retailer_operator_id = 1;
-	string retailer_name = 2;
-	int64 company_operator_id = 3;
-	string company_name = 4;
-	int64 operator_id = 5;
-	string operator_name = 6;
-	string operator_type = 7;
-	string est_cost = 8;
-	string est_rs_to_sys = 9;
-	string locked_for_pending_invoice = 10;
 }
