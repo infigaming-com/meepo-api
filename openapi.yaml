@@ -9737,6 +9737,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.InitiateOAuthLoginResponse'
+    /v1/user/auth/otp/login:
+        post:
+            tags:
+                - User
+            description: Login using an OTP verification code (no password required).
+            operationId: User_LoginWithOTP
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.LoginWithOTPRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/otp/send:
+        post:
+            tags:
+                - User
+            description: Send an OTP code for login or registration verification.
+            operationId: User_SendAuthOTP
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.SendAuthOTPRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SendAuthOTPResponse'
     /v1/user/auth/password/reset:
         post:
             tags:
@@ -22661,6 +22699,10 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
                 login:
                     $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+                loginMethods:
+                    allOf:
+                        - $ref: '#/components/schemas/api.user.service.v1.LoginMethodConfig'
+                    description: Which login methods are enabled (password, email_otp, phone_otp)
             description: OperatorRegistrationConfig is a combined config containing both limit and field settings
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
@@ -30203,6 +30245,19 @@ components:
                 ipLoginUserCount:
                     type: integer
                     format: int32
+        api.user.service.v1.LoginMethodConfig:
+            type: object
+            properties:
+                password:
+                    type: boolean
+                    description: Traditional password login (default true if not set)
+                emailOtp:
+                    type: boolean
+                    description: Email OTP login (user receives a verification code via email)
+                phoneOtp:
+                    type: boolean
+                    description: Phone OTP login (user receives a verification code via SMS)
+            description: Configures which login methods are available for an operator.
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -30222,6 +30277,19 @@ components:
                     type: string
                     description: The password for the account.
             description: LoginRequest contains the credentials for user login.
+        api.user.service.v1.LoginWithOTPRequest:
+            type: object
+            properties:
+                channel:
+                    type: string
+                    description: 'Delivery channel: "phone" or "email"'
+                destination:
+                    type: string
+                    description: The phone number or email used to receive the code
+                code:
+                    type: string
+                    description: The OTP verification code
+            description: LoginWithOTPRequest logs in using a verification code instead of a password.
         api.user.service.v1.LogoutRequest:
             type: object
             properties: {}
@@ -30634,6 +30702,12 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
                 login:
                     $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+                loginMethods:
+                    allOf:
+                        - $ref: '#/components/schemas/api.user.service.v1.LoginMethodConfig'
+                    description: |-
+                        Which login methods are enabled for this operator+country.
+                         If not set, defaults to password-only.
         api.user.service.v1.RegistrationFieldSet:
             type: object
             properties:
@@ -30747,6 +30821,30 @@ components:
             properties:
                 binding:
                     $ref: '#/components/schemas/api.user.service.v1.EmailDomainBindingInfo'
+        api.user.service.v1.SendAuthOTPRequest:
+            type: object
+            properties:
+                channel:
+                    type: string
+                    description: 'Delivery channel: "phone" or "email"'
+                destination:
+                    type: string
+                    description: 'Recipient: E.164 phone number or email address'
+                purpose:
+                    type: string
+                    description: 'Purpose: "login" or "register"'
+            description: SendAuthOTPRequest sends an OTP code for login or registration verification.
+        api.user.service.v1.SendAuthOTPResponse:
+            type: object
+            properties:
+                expiresIn:
+                    type: integer
+                    description: Seconds until the OTP code expires
+                    format: int32
+                resendInterval:
+                    type: integer
+                    description: Seconds before the user can request a new code
+                    format: int32
         api.user.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:

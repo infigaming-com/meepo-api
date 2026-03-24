@@ -37,6 +37,30 @@ service User {
 	rpc LoginWithInfo (LoginWithInfoRequest) returns (AuthResponse) {
 	}
 	
+	// Send an OTP code for login or registration verification.
+	rpc SendAuthOTP (SendAuthOTPRequest) returns (SendAuthOTPResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/otp/send"
+			body: "*"
+		};
+	}
+
+	// Internal gRPC variant of SendAuthOTP with operator context.
+	rpc SendAuthOTPWithInfo (SendAuthOTPWithInfoRequest) returns (SendAuthOTPResponse) {
+	}
+
+	// Login using an OTP verification code (no password required).
+	rpc LoginWithOTP (LoginWithOTPRequest) returns (AuthResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/otp/login"
+			body: "*"
+		};
+	}
+
+	// Internal gRPC variant of LoginWithOTP with operator context.
+	rpc LoginWithOTPWithInfo (LoginWithOTPWithInfoRequest) returns (AuthResponse) {
+	}
+
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	rpc RegisterOrLoginWithOAuth (OAuthRequest) returns (AuthResponse) {
@@ -2022,6 +2046,19 @@ message RegistrationFieldSet {
 message RegistrationFieldPolicy {
 	RegistrationFieldSet registration = 1;
 	RegistrationFieldSet login = 2;
+	// Which login methods are enabled for this operator+country.
+	// If not set, defaults to password-only.
+	LoginMethodConfig login_methods = 3;
+}
+
+// Configures which login methods are available for an operator.
+message LoginMethodConfig {
+	// Traditional password login (default true if not set)
+	bool password = 1;
+	// Email OTP login (user receives a verification code via email)
+	bool email_otp = 2;
+	// Phone OTP login (user receives a verification code via SMS)
+	bool phone_otp = 3;
 }
 
 message SetOperatorRegisterLimitConfigRequest {
@@ -2609,4 +2646,51 @@ message UpdateOperatorNameRequest {
 }
 
 message UpdateOperatorNameResponse {
+}
+
+// ============ OTP Login ============
+
+// SendAuthOTPRequest sends an OTP code for login or registration verification.
+message SendAuthOTPRequest {
+	// Delivery channel: "phone" or "email"
+	string channel = 1;
+	// Recipient: E.164 phone number or email address
+	string destination = 2;
+	// Purpose: "login" or "register"
+	string purpose = 3;
+}
+
+message SendAuthOTPResponse {
+	// Seconds until the OTP code expires
+	int32 expires_in = 1;
+	// Seconds before the user can request a new code
+	int32 resend_interval = 2;
+}
+
+// SendAuthOTPWithInfoRequest is the internal gRPC variant that includes operator context.
+message SendAuthOTPWithInfoRequest {
+	string channel = 1;
+	string destination = 2;
+	string purpose = 3;
+	api.common.OperatorContext operator_context = 4;
+	HttpRequestInfo http_request_info = 5;
+}
+
+// LoginWithOTPRequest logs in using a verification code instead of a password.
+message LoginWithOTPRequest {
+	// Delivery channel: "phone" or "email"
+	string channel = 1;
+	// The phone number or email used to receive the code
+	string destination = 2;
+	// The OTP verification code
+	string code = 3;
+}
+
+// LoginWithOTPWithInfoRequest is the internal gRPC variant that includes operator context.
+message LoginWithOTPWithInfoRequest {
+	string channel = 1;
+	string destination = 2;
+	string code = 3;
+	api.common.OperatorContext operator_context = 4;
+	HttpRequestInfo http_request_info = 5;
 }

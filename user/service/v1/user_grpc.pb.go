@@ -24,6 +24,10 @@ const (
 	User_Register_FullMethodName                           = "/api.user.service.v1.User/Register"
 	User_Login_FullMethodName                              = "/api.user.service.v1.User/Login"
 	User_LoginWithInfo_FullMethodName                      = "/api.user.service.v1.User/LoginWithInfo"
+	User_SendAuthOTP_FullMethodName                        = "/api.user.service.v1.User/SendAuthOTP"
+	User_SendAuthOTPWithInfo_FullMethodName                = "/api.user.service.v1.User/SendAuthOTPWithInfo"
+	User_LoginWithOTP_FullMethodName                       = "/api.user.service.v1.User/LoginWithOTP"
+	User_LoginWithOTPWithInfo_FullMethodName               = "/api.user.service.v1.User/LoginWithOTPWithInfo"
 	User_RegisterOrLoginWithOAuth_FullMethodName           = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 	User_RegisterOrLoginWithTelegram_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
 	User_RegisterOrLoginWithTelegramMiniApp_FullMethodName = "/api.user.service.v1.User/RegisterOrLoginWithTelegramMiniApp"
@@ -164,6 +168,14 @@ type UserClient interface {
 	// Login an existing user with password-based authentication and request info (now adds operator_id and http request info).
 	// Users can login using their registered credentials.
 	LoginWithInfo(ctx context.Context, in *LoginWithInfoRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Send an OTP code for login or registration verification.
+	SendAuthOTP(ctx context.Context, in *SendAuthOTPRequest, opts ...grpc.CallOption) (*SendAuthOTPResponse, error)
+	// Internal gRPC variant of SendAuthOTP with operator context.
+	SendAuthOTPWithInfo(ctx context.Context, in *SendAuthOTPWithInfoRequest, opts ...grpc.CallOption) (*SendAuthOTPResponse, error)
+	// Login using an OTP verification code (no password required).
+	LoginWithOTP(ctx context.Context, in *LoginWithOTPRequest, opts ...grpc.CallOption) (*AuthResponse, error)
+	// Internal gRPC variant of LoginWithOTP with operator context.
+	LoginWithOTPWithInfo(ctx context.Context, in *LoginWithOTPWithInfoRequest, opts ...grpc.CallOption) (*AuthResponse, error)
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(ctx context.Context, in *OAuthRequest, opts ...grpc.CallOption) (*AuthResponse, error)
@@ -410,6 +422,46 @@ func (c *userClient) LoginWithInfo(ctx context.Context, in *LoginWithInfoRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthResponse)
 	err := c.cc.Invoke(ctx, User_LoginWithInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SendAuthOTP(ctx context.Context, in *SendAuthOTPRequest, opts ...grpc.CallOption) (*SendAuthOTPResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendAuthOTPResponse)
+	err := c.cc.Invoke(ctx, User_SendAuthOTP_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SendAuthOTPWithInfo(ctx context.Context, in *SendAuthOTPWithInfoRequest, opts ...grpc.CallOption) (*SendAuthOTPResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendAuthOTPResponse)
+	err := c.cc.Invoke(ctx, User_SendAuthOTPWithInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) LoginWithOTP(ctx context.Context, in *LoginWithOTPRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, User_LoginWithOTP_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) LoginWithOTPWithInfo(ctx context.Context, in *LoginWithOTPWithInfoRequest, opts ...grpc.CallOption) (*AuthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthResponse)
+	err := c.cc.Invoke(ctx, User_LoginWithOTPWithInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1661,6 +1713,14 @@ type UserServer interface {
 	// Login an existing user with password-based authentication and request info (now adds operator_id and http request info).
 	// Users can login using their registered credentials.
 	LoginWithInfo(context.Context, *LoginWithInfoRequest) (*AuthResponse, error)
+	// Send an OTP code for login or registration verification.
+	SendAuthOTP(context.Context, *SendAuthOTPRequest) (*SendAuthOTPResponse, error)
+	// Internal gRPC variant of SendAuthOTP with operator context.
+	SendAuthOTPWithInfo(context.Context, *SendAuthOTPWithInfoRequest) (*SendAuthOTPResponse, error)
+	// Login using an OTP verification code (no password required).
+	LoginWithOTP(context.Context, *LoginWithOTPRequest) (*AuthResponse, error)
+	// Internal gRPC variant of LoginWithOTP with operator context.
+	LoginWithOTPWithInfo(context.Context, *LoginWithOTPWithInfoRequest) (*AuthResponse, error)
 	// Register or login using OAuth provider.
 	// Supports multiple OAuth providers like Google, Facebook, and Twitter.
 	RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error)
@@ -1891,6 +1951,18 @@ func (UnimplementedUserServer) Login(context.Context, *LoginRequest) (*AuthRespo
 }
 func (UnimplementedUserServer) LoginWithInfo(context.Context, *LoginWithInfoRequest) (*AuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LoginWithInfo not implemented")
+}
+func (UnimplementedUserServer) SendAuthOTP(context.Context, *SendAuthOTPRequest) (*SendAuthOTPResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendAuthOTP not implemented")
+}
+func (UnimplementedUserServer) SendAuthOTPWithInfo(context.Context, *SendAuthOTPWithInfoRequest) (*SendAuthOTPResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendAuthOTPWithInfo not implemented")
+}
+func (UnimplementedUserServer) LoginWithOTP(context.Context, *LoginWithOTPRequest) (*AuthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LoginWithOTP not implemented")
+}
+func (UnimplementedUserServer) LoginWithOTPWithInfo(context.Context, *LoginWithOTPWithInfoRequest) (*AuthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LoginWithOTPWithInfo not implemented")
 }
 func (UnimplementedUserServer) RegisterOrLoginWithOAuth(context.Context, *OAuthRequest) (*AuthResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RegisterOrLoginWithOAuth not implemented")
@@ -2332,6 +2404,78 @@ func _User_LoginWithInfo_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).LoginWithInfo(ctx, req.(*LoginWithInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SendAuthOTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendAuthOTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendAuthOTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendAuthOTP_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendAuthOTP(ctx, req.(*SendAuthOTPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SendAuthOTPWithInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendAuthOTPWithInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendAuthOTPWithInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendAuthOTPWithInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendAuthOTPWithInfo(ctx, req.(*SendAuthOTPWithInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_LoginWithOTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithOTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).LoginWithOTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_LoginWithOTP_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).LoginWithOTP(ctx, req.(*LoginWithOTPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_LoginWithOTPWithInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithOTPWithInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).LoginWithOTPWithInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_LoginWithOTPWithInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).LoginWithOTPWithInfo(ctx, req.(*LoginWithOTPWithInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4568,6 +4712,22 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LoginWithInfo",
 			Handler:    _User_LoginWithInfo_Handler,
+		},
+		{
+			MethodName: "SendAuthOTP",
+			Handler:    _User_SendAuthOTP_Handler,
+		},
+		{
+			MethodName: "SendAuthOTPWithInfo",
+			Handler:    _User_SendAuthOTPWithInfo_Handler,
+		},
+		{
+			MethodName: "LoginWithOTP",
+			Handler:    _User_LoginWithOTP_Handler,
+		},
+		{
+			MethodName: "LoginWithOTPWithInfo",
+			Handler:    _User_LoginWithOTPWithInfo_Handler,
 		},
 		{
 			MethodName: "RegisterOrLoginWithOAuth",
